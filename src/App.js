@@ -1,26 +1,19 @@
+import { DataProvider } from '@dhis2/app-runtime'
+import { HeaderBar } from '@dhis2/ui-widgets';
+import { CssReset } from '@dhis2/ui-core';
 import React from 'react';
-import logo from './logo.svg';
+
+import { Maintenance } from './Maintenance.app.js';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+    <DataProvider baseUrl={process.env.REACT_APP_DHIS2_BASE_URL} apiVersion="">
+        <div className="wrapper">
+            <HeaderBar appName="Maintenance app" />
+            <Maintenance />
+        </div>
+        <CssReset />
+    </DataProvider>
+)
 
 export default App;
