@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@dhis2/app-runtime": "^1.2.0",
-    "@dhis2/ui-core": "^3.3.0",
-    "@dhis2/ui-widgets": "^1.0.5",
+    "@dhis2/app-runtime": "1.2.0",
+    "@dhis2/ui-core": "3.3.0",
+    "@dhis2/ui-widgets": "1.0.5",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -16,12 +16,18 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "test": "react-scripts test",
     "lint:style": "d2-style js check --all"
   },
   "husky": {
-    "commit-msg": "d2-style commit check",
-    "pre-commit": "d2-style js apply"
+    "hooks": {
+      "commit-msg": "d2-style commit check",
+      "pre-commit": "d2-style js apply"
+    }
+  },
+  "devDependencies": {
+    "@dhis2/cli-style": "3.3.4",
+    "husky": "^2.4.1"
   }
 }
