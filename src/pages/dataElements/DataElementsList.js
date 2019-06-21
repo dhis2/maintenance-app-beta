@@ -1,11 +1,20 @@
-import React from 'react';
-import { GridContainer } from '../../components/Grid/GridContainer';
-import { GridContent } from '../../components/Grid/GridContent';
-import { Sidebar } from './Sidebar';
+import React from 'react'
 
-export const DataElementsList = (props) => console.log('props', props) || (
+import { GridContainer } from '../../components/Grid/GridContainer'
+import { GridContent } from '../../components/Grid/GridContent'
+import { Sidebar } from '../../components/Sidebar'
+import { sections } from './sections'
+
+export const DataElementsList = () => (
     <GridContainer>
-        <Sidebar />
+        <Sidebar
+            sections={[
+                sections.dataElements,
+                sections.dataElementGroup,
+                sections.dataElementGroupSet,
+            ]}
+        />
+
         <GridContent>
             <span>Data elements list...</span>
         </GridContent>

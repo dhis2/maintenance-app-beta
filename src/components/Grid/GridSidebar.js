@@ -1,12 +1,3 @@
-import React from 'react';
-import propTypes from 'prop-types';
+import React from 'react'
 
-export const GridSidebar = ({ children }) => (
-    <section>
-        {children}
-    </section>
-)
-
-GridSidebar.propTypes = {
-    children: propTypes.element.isRequired,
-}
+export const GridSidebar = ({ children }) => <section>{children}</section>
