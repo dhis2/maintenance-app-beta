@@ -9,23 +9,45 @@ import { NoAuthority } from '../../pages/NoAuthority'
 import { hasUserAuthorityForSection } from '../../utils/authority/hasUserAuthorityForSection'
 import { queries } from '../../constants/queries'
 
-export const ProtectedRoute = ({ permissions, component, ...rest }) => {
+const determineComponent = ({
+    loading,
+    error,
+    data,
+    permissions,
+    component,
+}) => {
+    if (loading) return Loading
+
+    if (error) return () => <Error error={error} />
+
+    if (
+        hasUserAuthorityForSection(
+            data.authorities,
+            data.systemSettings,
+            permissions
+        )
+    ) {
+        return component
+    }
+
+    return NoAuthority
+}
+
+export const ProtectedRoute = props => {
     const { loading, error, data } = useDataQuery({
         authorities: queries.authorities,
+        systemSettings: queries.systemSettings,
     })
 
     return (
         <Route
-            {...rest}
-            component={
-                loading
-                    ? Loading
-                    : error
-                    ? () => <Error error={error} />
-                    : hasUserAuthorityForSection(data.authorities, permissions)
-                    ? component
-                    : NoAuthority
-            }
+            {...props}
+            component={determineComponent({
+                ...props,
+                loading,
+                error,
+                data,
+            })}
         />
     )
 }

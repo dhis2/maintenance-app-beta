@@ -9,11 +9,16 @@ import { queries } from '../../constants/queries'
 export const ProtectedLink = ({ permissions, ...rest }) => {
     const { loading, error, data = {} } = useDataQuery({
         authorities: queries.authorities,
+        systemSettings: queries.systemSettings,
     })
 
     const hasAuthorityToViewSection =
         !loading && !error
-            ? hasUserAuthorityForSection(data.authorities, permissions)
+            ? hasUserAuthorityForSection(
+                  data.authorities,
+                  data.systemSettings,
+                  permissions
+              )
             : false
 
     return hasAuthorityToViewSection ? <Link {...rest} /> : null
