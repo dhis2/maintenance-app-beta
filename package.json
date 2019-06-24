@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@dhis2/app-runtime": "1.2.0",
-    "@dhis2/ui-core": "3.3.0",
+    "@dhis2/ui-core": "^3.4.0",
     "@dhis2/ui-widgets": "1.0.5",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
