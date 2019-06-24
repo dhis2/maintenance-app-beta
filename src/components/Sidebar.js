@@ -1,4 +1,5 @@
 import { MenuList, MenuItem } from '@dhis2/ui-core'
+import { withRouter } from 'react-router-dom'
 import React from 'react'
 import propTypes from 'prop-types'
 
@@ -7,12 +8,17 @@ import { GridSidebar } from './Grid/GridSidebar'
 import { ProtectedLink } from './authorization/ProtectedLink'
 import { sectionPropType } from './authorization/sectionPropType'
 
-export const Sidebar = ({ sections }) => (
+const Sidebar = ({ sections, location }) => (
     <GridSidebar>
         <MenuList>
             {sections.map(({ name, path, permissions }) => (
-                <ProtectedLink to={path} permissions={permissions}>
-                    <MenuItem key={name} icon={<FolderClosed />} label={name} />
+                <ProtectedLink key={path} to={path} permissions={permissions}>
+                    <MenuItem
+                        key={name}
+                        icon={<FolderClosed />}
+                        label={name}
+                        active={path === location.pathname}
+                    />
                 </ProtectedLink>
             ))}
         </MenuList>
@@ -22,3 +28,7 @@ export const Sidebar = ({ sections }) => (
 Sidebar.propTypes = {
     sections: propTypes.arrayOf(sectionPropType),
 }
+
+const SidebarWithRouter = withRouter(Sidebar)
+
+export { SidebarWithRouter as Sidebar }

@@ -5,6 +5,7 @@ import propTypes from 'prop-types'
 
 import { hasUserAuthorityForSection } from '../../utils/authority/hasUserAuthorityForSection'
 import { queries } from '../../constants/queries'
+import styles from './ProtectedLink.module.css'
 
 export const ProtectedLink = ({ permissions, ...rest }) => {
     const { loading, error, data = {} } = useDataQuery({
@@ -21,7 +22,9 @@ export const ProtectedLink = ({ permissions, ...rest }) => {
               )
             : false
 
-    return hasAuthorityToViewSection ? <Link {...rest} /> : null
+    return hasAuthorityToViewSection ? (
+        <Link className={styles.link} {...rest} />
+    ) : null
 }
 
 ProtectedLink.propTypes = {

@@ -12,13 +12,8 @@
   .container {
     grid-template-columns: 300px auto;
     grid-template-areas: "
-      sidebar    content
-    "
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .container {
-    grid-template-columns: 400px auto;
+      sidebar content
+    ";
+    column-gap: 25px;
   }
 }
