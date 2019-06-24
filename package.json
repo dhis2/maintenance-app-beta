@@ -28,6 +28,6 @@
   },
   "devDependencies": {
     "@dhis2/cli-style": "3.3.4",
-    "husky": "^2.4.1"
+    "husky": "^2.5.0"
   }
 }
