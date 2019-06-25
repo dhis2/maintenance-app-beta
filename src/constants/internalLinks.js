@@ -2,10 +2,14 @@ export const INTERNAL_LINKS = {
     'list/dataElementSection/dataElement': true,
 }
 
-// eslint-disable-next-line
-const EXTERNAL_URL = location.href
-    .replace(/#.*$/, '')
-    .replace('maintenance2', 'maintenance')
+const EXTERNAL_URL =
+    process.env.NODE_ENV === 'production'
+        ? // eslint-disable-next-line
+          location.href
+              .replace(/#.*$/, '')
+              .replace('maintenance2', 'maintenance')
+        : // eslint-disable-next-line
+          location.host
 
 const isInternal = href => INTERNAL_LINKS.hasOwnProperty(href)
 
