@@ -3,11 +3,12 @@ import { Route, Switch, Link } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import React from 'react'
 
-import { DataElementsList } from './pages/dataElements/DataElementsList'
-import { ProtectedRoute } from './components/authorization/ProtectedRoute'
 import { createUrl } from './constants/internalLinks'
-import { sections } from './pages/dataElements/sections'
 import { configureStore, history } from './redux/configureStore'
+import { ProtectedRoute } from './components/authorization/ProtectedRoute'
+import { Navigation } from './components/Navigation'
+import { DataElementsList } from './pages/dataElements/DataElementsList'
+import { sections } from './pages/dataElements/sections'
 
 const store = configureStore()
 
@@ -25,6 +26,8 @@ export const Maintenance = () => (
                 <br />
                 <br />
             </div>
+
+            <Navigation />
 
             <Switch>
                 <ProtectedRoute
