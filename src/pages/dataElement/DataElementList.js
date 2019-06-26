@@ -3,19 +3,17 @@ import React from 'react'
 import { GridContainer } from '../../components/Grid/GridContainer'
 import { GridContent } from '../../components/Grid/GridContent'
 import { Sidebar } from '../../components/Sidebar'
-import { sections } from './sections'
+import { sections } from '../../constants/sections'
+import { subSectionOrder } from '../../constants/sectionOrder'
 
-export const DataElementsList = () => (
+const { dataElement } = sections
+
+export const DataElementList = () => (
     <GridContainer>
-        <Sidebar
-            sections={[
-                sections.dataElements,
-                sections.dataElementGroup,
-                sections.dataElementGroupSet,
-            ]}
-        />
+        <Sidebar sections={subSectionOrder.dataElement} />
 
         <GridContent>
+            <h1>{dataElement.sections.dataElement.name}</h1>
             <span>Data elements list...</span>
         </GridContent>
     </GridContainer>

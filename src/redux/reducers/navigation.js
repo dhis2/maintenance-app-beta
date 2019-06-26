@@ -1,18 +1,19 @@
-import { LOCATION_CHANGE } from 'connected-react-router'
 import { isEqual } from 'lodash/fp'
 
-const defaultState = { disabled: false }
+import { NAVIGATION_DISABLE, NAVIGATION_ENABLE } from '../actions/navigation'
 
-export const navigation = (state = defaultState, action = {}) => {
-    const { type, payload } = action
+export const navigation = (
+    state = { disabled: false },
+    { type, payload } = {}
+) => {
     const isType = isEqual(type)
 
-    if (isType(LOCATION_CHANGE)) {
-        const { location } = payload
+    if (isType(NAVIGATION_DISABLE)) {
+        return { ...state, disabled: true }
+    }
 
-        if (location.pathname.match(/^\/edit/)) {
-            return { ...state, disabled: true }
-        }
+    if (isType(NAVIGATION_ENABLE)) {
+        return { ...state, disabled: false }
     }
 
     return state

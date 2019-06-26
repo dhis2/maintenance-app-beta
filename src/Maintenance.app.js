@@ -7,10 +7,11 @@ import { createUrl } from './constants/internalLinks'
 import { configureStore, history } from './redux/configureStore'
 import { ProtectedRoute } from './components/authorization/ProtectedRoute'
 import { Navigation } from './components/Navigation'
-import { DataElementsList } from './pages/dataElements/DataElementsList'
-import { sections } from './pages/dataElements/sections'
+import { DataElementList } from './pages/dataElement/DataElementList'
+import { sections } from './constants/sections'
 
 const store = configureStore()
+const { dataElement } = sections
 
 export const Maintenance = () => (
     <Provider store={store}>
@@ -32,9 +33,9 @@ export const Maintenance = () => (
             <Switch>
                 <ProtectedRoute
                     exact
-                    path={sections.dataElements.path}
-                    permissions={sections.dataElements.permissions}
-                    component={DataElementsList}
+                    path={dataElement.sections.dataElement.path}
+                    permissions={dataElement.sections.dataElement.permissions}
+                    component={DataElementList}
                 />
 
                 <Route
