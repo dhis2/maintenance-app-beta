@@ -1,39 +1,45 @@
 {
-  "name": "project-doom",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@dhis2/app-runtime": "1.2.0",
-    "@dhis2/ui-core": "^3.4.0",
-    "@dhis2/ui-widgets": "1.0.5",
-    "connected-react-router": "^6.4.0",
-    "history": "^4.9.0",
-    "lodash": "^4.17.11",
-    "moment": "^2.24.0",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-redux": "^7.1.0",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
-    "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject",
-    "test": "react-scripts test",
-    "lint:style": "d2-style js check --all"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "d2-style commit check",
-      "pre-commit": "d2-style js apply"
+    "name": "project-doom",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "yarn localize && react-scripts build",
+        "eject": "react-scripts eject",
+        "extract-pot": "d2-i18n-extract -p src/ -o i18n/",
+        "localize": "yarn extract-pot && d2-i18n-generate -n NAMESPACE -p ./i18n/ -o ./src/locales/",
+        "test": "react-scripts test",
+        "lint:style": "d2-style js check --all",
+        "prestart": "yarn localize && d2-manifest package.json ./public/manifest.webapp"
+    },
+    "dependencies": {
+        "@dhis2/app-runtime": "1.2.0",
+        "@dhis2/d2-i18n": "^1.0.5",
+        "@dhis2/d2-i18n-extract": "^1.0.8",
+        "@dhis2/d2-i18n-generate": "^1.1.1",
+        "@dhis2/ui-core": "^3.4.0",
+        "@dhis2/ui-widgets": "1.0.5",
+        "connected-react-router": "^6.4.0",
+        "history": "^4.9.0",
+        "lodash": "^4.17.11",
+        "moment": "^2.24.0",
+        "prop-types": "^15.7.2",
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "react-redux": "^7.1.0",
+        "react-router-dom": "^5.0.1",
+        "react-scripts": "3.0.1",
+        "redux": "^4.0.1",
+        "redux-thunk": "^2.3.0"
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "yarn extract-pot && d2-style commit check && git add ./i18n/",
+            "pre-commit": "d2-style js apply"
+        }
+    },
+    "devDependencies": {
+        "@dhis2/cli-style": "3.3.4",
+        "husky": "^2.6.0"
     }
-  },
-  "devDependencies": {
-    "@dhis2/cli-style": "3.3.4",
-    "husky": "^2.5.0"
-  }
 }
