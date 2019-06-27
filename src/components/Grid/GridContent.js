@@ -1,12 +1,11 @@
-import React from 'react';
-import propTypes from 'prop-types';
+import React from 'react'
+import propTypes from 'prop-types'
 
-export const GridContent = ({ children }) => (
-    <section>
-        {children}
-    </section>
-)
+export const GridContent = ({ children }) => <section>{children}</section>
 
 GridContent.propTypes = {
-    children: propTypes.element.isRequired,
+    children: propTypes.oneOfType([
+        propTypes.element,
+        propTypes.arrayOf(propTypes.element),
+    ]).isRequired,
 }

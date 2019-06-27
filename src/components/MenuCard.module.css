@@ -1,0 +1,41 @@
+.container {
+    margin: 0 8px 16px;
+    width: 230px;
+}
+
+.container .card {
+    display: flex;
+    flex-direction: column;
+}
+
+.headline {
+    border-bottom: 1px solid rgb(221, 221, 221);
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+    padding: 14px;
+}
+
+.headlineInnerWrapper {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.content {
+    flex: 1 0 auto;
+    font-size: 14px;
+    padding: 7px 14px;
+    margin: 0;
+}
+
+.actions {
+    display: flex;
+    padding: 7px 14px;
+    justify-content: flex-end;
+}
+
+.actionWrapper {
+    margin-left: 14px;
+    flex: 0 0 auto;
+}
