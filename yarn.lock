@@ -1102,10 +1102,10 @@
     i18next "^10.3"
     moment "^2.24.0"
 
-"@dhis2/ui-core@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/ui-core/-/ui-core-3.1.0.tgz#cd6b075b3df68e05148fbd635dc4721a67f5773c"
-  integrity sha512-/GVnsqpBdbVExDUSdGbTCC7vj527HyFeyVNz69BVNAYg26epdI1MDJ/GssDRQQ/AuiYAp9GAflVR0n4U7BSj/A==
+"@dhis2/ui-core@3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/ui-core/-/ui-core-3.3.0.tgz#cc83fdaea714851ee616643d260b14b84d25d738"
+  integrity sha512-zPq8PjRdsqPAfCLAo4PuuxONd9X5lXz614BQsFS1yIwNcYI+Rbju41Gym0lu4LMrvetetvxmTNbTcJTIsYTrKA==
   dependencies:
     classnames "^2.2.6"
     styled-jsx "^3.2.1"
@@ -1118,13 +1118,13 @@
     classnames "^2.2.6"
     styled-jsx "^3.2.1"
 
-"@dhis2/ui-widgets@1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@dhis2/ui-widgets/-/ui-widgets-1.0.5.tgz#c05ecbbd86a9d1b4306e9b98689f98959eade7ee"
-  integrity sha512-gPujfuz4N+MNvLUYYgSF4I05XfwCC32CZK0JzxP7N+ZWWyooDzHVTjLykQA2xzyUCsnGf6OxgXQCjp/KATEE1g==
+"@dhis2/ui-widgets@1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@dhis2/ui-widgets/-/ui-widgets-1.0.6.tgz#6e1f3f974bea528b3e608221d40053d3270d7728"
+  integrity sha512-hS2oQ4wS9qflhXPLeb9v5vZXzVeWJJPwN4ZOzr6XmJY1HOC5HSu5SDKkqdAwAhpbTCPzAuR6lKB3QluWnQD2/w==
   dependencies:
     "@dhis2/d2-i18n" "1.0.4"
-    "@dhis2/ui-core" "3.1.0"
+    "@dhis2/ui-core" "3.3.0"
     classnames "^2.2.6"
     styled-jsx "^3.2.1"
 
