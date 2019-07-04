@@ -37,7 +37,7 @@ export const Maintenance = () => (
                         component={() => <Redirect to="/list/all" />}
                     />
 
-                    <Route to="/list/all" component={All} />
+                    <Route exact path="/list/all" component={All} />
 
                     {
                         /**
