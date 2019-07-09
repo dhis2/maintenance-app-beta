@@ -1030,10 +1030,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-9.0.1.tgz#c27b391d8457d1e893f1eddeaf5e5412d12ffbb5"
   integrity sha512-6It2EVfGskxZCQhuykrfnALg7oVeiI6KclWSmGDqB0AiInVrTGB9Jp9i4/Ad21u9Jde/voVQz6eFX/eSg/UsPA==
 
-"@dhis2/app-runtime@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/app-runtime/-/app-runtime-1.2.0.tgz#87e22d817a13d45a7d89d854e6152cfd959ec55d"
-  integrity sha512-2JOKPYIdNVpb6vVwuqmO+1ERelUdOYqFgWJDD2xnMNWYhNOPxvqi8v5rPLaOfTsUWeQ0RgBukPfRRJbBSqkipw==
+"@dhis2/app-runtime@1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-runtime/-/app-runtime-1.3.0.tgz#7f2e37ceb8b4df8642b18128aaa153b852400ba1"
+  integrity sha512-QF/B4aJpPmDk/roNrRg/nETJ07BcuD1uV/lVGa4BnnvYwOz1P+PxSYA/qdTXzgpcUK1rc6nMsuORGTCVNvWrVQ==
 
 "@dhis2/cli-helpers-engine@1.3.0":
   version "1.3.0"
