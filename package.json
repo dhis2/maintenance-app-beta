@@ -29,7 +29,7 @@
         "react-redux": "^7.1.0",
         "react-router-dom": "^5.0.1",
         "react-scripts": "3.0.1",
-        "redux": "^4.0.2",
+        "redux": "^4.0.3",
         "redux-thunk": "^2.3.0",
         "reselect": "^4.0.0"
     },
