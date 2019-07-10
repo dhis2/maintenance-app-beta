@@ -1087,14 +1087,7 @@
     moment "^2.22.1"
     rimraf "^2.6.2"
 
-"@dhis2/d2-i18n@1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@dhis2/d2-i18n/-/d2-i18n-1.0.4.tgz#8fbd113f56699b9832a401e1cb8f54d75bc36b9a"
-  integrity sha512-xI2j69q3bwlb374JOAs3wpo47V4BqDAz4h1PfGLVhdORPLAuz0CkKuwesfpW2eunDSHiKpMbOg7goTip/5ROew==
-  dependencies:
-    i18next "^10.3"
-
-"@dhis2/d2-i18n@^1.0.5":
+"@dhis2/d2-i18n@1.0.5", "@dhis2/d2-i18n@^1.0.5":
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@dhis2/d2-i18n/-/d2-i18n-1.0.5.tgz#9148af1bc95e9442bcae66136b8f80146406a43f"
   integrity sha512-nz1JtDLNn6hOoSg84C1iYRBr11O/ljMdczEqq0/j/gQy9wRs80Z7lExwItclHgS7t6ESWCa6+OFkwgRCOKF2ew==
@@ -1102,15 +1095,7 @@
     i18next "^10.3"
     moment "^2.24.0"
 
-"@dhis2/ui-core@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/ui-core/-/ui-core-3.1.0.tgz#cd6b075b3df68e05148fbd635dc4721a67f5773c"
-  integrity sha512-/GVnsqpBdbVExDUSdGbTCC7vj527HyFeyVNz69BVNAYg26epdI1MDJ/GssDRQQ/AuiYAp9GAflVR0n4U7BSj/A==
-  dependencies:
-    classnames "^2.2.6"
-    styled-jsx "^3.2.1"
-
-"@dhis2/ui-core@^3.5.0":
+"@dhis2/ui-core@3.5.0", "@dhis2/ui-core@^3.5.0":
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/@dhis2/ui-core/-/ui-core-3.5.0.tgz#439a2e18faf540c3b80156d19cf4c236abccecd5"
   integrity sha512-dgQ1dd/rdWDgXnyTUefyMSZxGAasOC8nPNkZKNdMwQNyGIVAZgmPrpkyidNjJzGoZkaawKO1AzReWe4EgNetog==
@@ -1118,13 +1103,13 @@
     classnames "^2.2.6"
     styled-jsx "^3.2.1"
 
-"@dhis2/ui-widgets@1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@dhis2/ui-widgets/-/ui-widgets-1.0.5.tgz#c05ecbbd86a9d1b4306e9b98689f98959eade7ee"
-  integrity sha512-gPujfuz4N+MNvLUYYgSF4I05XfwCC32CZK0JzxP7N+ZWWyooDzHVTjLykQA2xzyUCsnGf6OxgXQCjp/KATEE1g==
+"@dhis2/ui-widgets@1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@dhis2/ui-widgets/-/ui-widgets-1.0.8.tgz#3237aa2c6b6ec6ccd3ea614b6dbb4d3031267916"
+  integrity sha512-HGde+XVwR9/EPP9DXplgVGXPIYgI8spd63q1yX+Vk0hzu9LcZsebLLmTQDYJLAa1tBcCPQzyoblpJXciH0/Icg==
   dependencies:
-    "@dhis2/d2-i18n" "1.0.4"
-    "@dhis2/ui-core" "3.1.0"
+    "@dhis2/d2-i18n" "1.0.5"
+    "@dhis2/ui-core" "3.5.0"
     classnames "^2.2.6"
     styled-jsx "^3.2.1"
 
