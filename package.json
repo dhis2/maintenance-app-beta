@@ -21,7 +21,7 @@
         "@dhis2/ui-widgets": "1.0.5",
         "connected-react-router": "^6.5.0",
         "history": "^4.9.0",
-        "lodash": "^4.17.11",
+        "lodash": "^4.17.13",
         "moment": "^2.24.0",
         "prop-types": "^15.7.2",
         "react": "^16.8.6",
