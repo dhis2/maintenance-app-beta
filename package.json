@@ -34,6 +34,6 @@
         "reselect": "^4.0.0"
     },
     "devDependencies": {
-        "@dhis2/cli-style": "4.0.0"
+        "@dhis2/cli-style": "4.1.0"
     }
 }
