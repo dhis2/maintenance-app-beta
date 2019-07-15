@@ -10,7 +10,7 @@
         "localize": "yarn extract-pot && d2-i18n-generate -n NAMESPACE -p ./i18n/ -o ./src/locales/",
         "test": "react-scripts test",
         "lint:style": "d2-style js check --all",
-        "prestart": "yarn localize && d2-manifest package.json ./public/manifest.webapp"
+        "_prestart": "yarn localize && d2-manifest package.json ./public/manifest.webapp"
     },
     "dependencies": {
         "@dhis2/app-runtime": "1.3.0",
