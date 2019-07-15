@@ -17,7 +17,7 @@
         "@dhis2/d2-i18n": "^1.0.5",
         "@dhis2/d2-i18n-extract": "^1.0.8",
         "@dhis2/d2-i18n-generate": "^1.1.1",
-        "@dhis2/ui-core": "^3.6.0",
+        "@dhis2/ui-core": "^3.6.2",
         "@dhis2/ui-widgets": "1.0.8",
         "connected-react-router": "^6.5.2",
         "history": "^4.9.0",
