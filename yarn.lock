@@ -1104,10 +1104,10 @@
     classnames "^2.2.6"
     styled-jsx "^3.2.1"
 
-"@dhis2/ui-core@^3.6.0":
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/ui-core/-/ui-core-3.6.0.tgz#5b315e54c4af87cee6d5b58fd6a565d4294e4252"
-  integrity sha512-Ro34VwDxHte8EprMmYS+N+C0ZYk1pou3+fait1cCnZxTTju1aFLCv+2BOqJfSZ3nr+anuqgIdgA3rO5/nbUEZA==
+"@dhis2/ui-core@^3.6.2":
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/@dhis2/ui-core/-/ui-core-3.6.2.tgz#88e5aee0a7d9604776043c4645ee2e5ef6b344ad"
+  integrity sha512-uYVNuV7dfPUrhlL+4wwT2sTfawZ5rT5omXnGP7DlJjJ07gMZn6DZSlyx9kB6L1cVR6aK59DVM5bo3aAZ/9ANjQ==
   dependencies:
     classnames "^2.2.6"
     styled-jsx "^3.2.1"
