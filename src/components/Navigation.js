@@ -51,7 +51,7 @@ const Navigation = ({ disabled }) => {
             })}
         >
             <ScrollBar>
-                <TabBar>
+                <TabBar fixed>
                     <NavigationLink
                         to="/list/all"
                         disabled={disabled}
