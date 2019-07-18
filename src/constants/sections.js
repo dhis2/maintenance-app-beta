@@ -91,7 +91,8 @@ export const sections = {
             dataSetNotification: {
                 name: 'Data set notifications',
                 path: '/list/dataSetSection/dataSetNotificationTemplate',
-                description: '', // @TODO
+                description:
+                    'Create, update, view, and delete data set notifications.',
                 schemaName: 'dataSetNotificationTemplate',
             },
         },
@@ -132,13 +133,14 @@ export const sections = {
             programIndicator: {
                 name: 'Program indicator',
                 path: '/list/indicatorSection/programIndicator',
-                description: '', // @TODO
+                description:
+                    'Expressions based on data elements and attributes of tracked entities. You use program indicators to calculate values based on a formula.',
                 schemaName: 'programIndicator',
             },
             programIndicatorGroup: {
                 name: 'Program indicator group',
                 path: '/list/indicatorSection/programIndicatorGroup',
-                description: '', // @TODO
+                description: 'Group program indicators, even across programs.',
                 schemaName: 'programIndicatorGroup',
             },
         },
@@ -224,13 +226,15 @@ export const sections = {
             programRule: {
                 name: 'Program rule',
                 path: '/list/programSection/programRule',
-                description: '', // @TODO
+                description:
+                    'Program rules allow you to create and control dynamic behavior of the user interface in the Tracker Capture and Event Capture apps.',
                 schemaName: 'programRule',
             },
             programRuleVariable: {
                 name: 'Program rule variable',
                 path: '/list/programSection/programRuleVariable',
-                description: '', // @TODO
+                description:
+                    'Variables you use to create program rule expressions.',
                 schemaName: 'programRuleVariable',
             },
         },
@@ -257,7 +261,8 @@ export const sections = {
             validationNotification: {
                 name: 'Validation notification',
                 path: '/list/validationSectin/validationNotification',
-                description: '', // @TODO
+                description:
+                    'Sends a notification when a validation rule failed',
                 schemaName: 'validationNotificationTemplate', // @TODO
                 permissions: [
                     'F_VALIDATION_NOTIFICATION_PRIVATE_ADD',
@@ -274,9 +279,9 @@ export const sections = {
         sections: {
             constant: {
                 name: 'Constant',
+                path: '/list/otherSection/constant',
                 description:
                     'Create constants which can be included in expressions of indicator and validation rules.',
-                path: '/list/otherSection/constant',
                 schemaName: 'constant',
             },
             attribute: {
@@ -295,13 +300,14 @@ export const sections = {
             optionGroup: {
                 name: 'Option group',
                 path: '/list/otherSection/optionGroup',
-                description: '', // @TODO
+                description:
+                    'Create a group of options from option sets that has a similar functional area or meaning.',
                 schemaName: 'optionGroup',
             },
             optionGroupSet: {
                 name: 'Option group set',
                 path: '/list/otherSection/optionGroupSet',
-                description: '', // @TODO
+                description: 'Create, modify and view sets of option groups.',
                 schemaName: 'optionGroupSet',
             },
             legend: {
@@ -321,7 +327,8 @@ export const sections = {
             predictorGroup: {
                 name: 'Predictor group',
                 path: '/list/otherSection/predictorGroup',
-                description: '', // @TODO
+                description:
+                    'Create predictors groups that contain serveral predictors related predictors.',
                 schemaName: 'predictorGroup',
             },
             pushAnalysis: {
@@ -340,7 +347,8 @@ export const sections = {
             dataApprovalLevel: {
                 name: 'Data approval level',
                 path: '/list/otherSection/dataApprovalLevel',
-                description: '', // @TODO
+                description:
+                    'Configure data approval levels for use in data approval workflows',
                 schemaName: 'dataApprovalLevel',
             },
             dataApprovalWorkflow: {
