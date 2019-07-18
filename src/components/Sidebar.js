@@ -11,8 +11,13 @@ import { sectionPropType } from './authorization/sectionPropType'
 const Sidebar = ({ sections, location }) => (
     <GridSidebar>
         <MenuList>
-            {sections.map(({ name, path, permissions }) => (
-                <ProtectedLink key={path} to={path} permissions={permissions}>
+            {sections.map(({ name, path, permissions, schemaName }) => (
+                <ProtectedLink
+                    key={path}
+                    to={path}
+                    permissions={permissions}
+                    schemaName={schemaName}
+                >
                     <MenuItem
                         key={name}
                         icon={<FolderClosed />}

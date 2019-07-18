@@ -7,19 +7,26 @@ import { hasUserAuthorityForSection } from '../../utils/authority/hasUserAuthori
 import { queries } from '../../constants/queries'
 import styles from './ProtectedLink.module.css'
 
-export const ProtectedLink = ({ permissions, ...rest }) => {
-    const { loading, error, data = {} } = useDataQuery({
+export const ProtectedLink = ({ permissions, schemaName, ...rest }) => {
+    const query = {
         authorities: queries.authorities,
         systemSettings: queries.systemSettings,
-    })
+    }
+
+    if (schemaName) {
+        query.schema = { resource: `schemas/${schemaName}.json` }
+    }
+
+    const { loading, error, data = {} } = useDataQuery(query)
 
     const hasAuthorityToViewSection =
         !loading && !error
-            ? hasUserAuthorityForSection(
-                  data.authorities,
-                  data.systemSettings,
-                  permissions
-              )
+            ? hasUserAuthorityForSection({
+                  authorities: data.authorities,
+                  systemSettings: data.systemSettings,
+                  schema: data.schema,
+                  permissions,
+              })
             : false
 
     return hasAuthorityToViewSection ? (
@@ -30,4 +37,9 @@ export const ProtectedLink = ({ permissions, ...rest }) => {
 ProtectedLink.propTypes = {
     ...Link.propTypes,
     permissions: propTypes.arrayOf(propTypes.string),
+    schemaName: propTypes.string,
+}
+
+ProtectedLink.defaultProps = {
+    schemaName: '',
 }

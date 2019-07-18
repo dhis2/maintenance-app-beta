@@ -21,11 +21,12 @@ const determineComponent = ({
     if (error) return () => <Error error={error} />
 
     if (
-        hasUserAuthorityForSection(
-            data.authorities,
-            data.systemSettings,
-            permissions
-        )
+        hasUserAuthorityForSection({
+            authorities: data.authorities,
+            systemSettings: data.systemSettings,
+            schema: data.schema,
+            permissions,
+        })
     ) {
         return component
     }
@@ -34,10 +35,16 @@ const determineComponent = ({
 }
 
 export const ProtectedRoute = props => {
-    const { loading, error, data } = useDataQuery({
+    const query = {
         authorities: queries.authorities,
         systemSettings: queries.systemSettings,
-    })
+    }
+
+    if (props.schemaName) {
+        query.schema = `schema/${props.schemaName}.json`
+    }
+
+    const { loading, error, data } = useDataQuery(query)
 
     return (
         <Route
@@ -55,4 +62,9 @@ export const ProtectedRoute = props => {
 ProtectedRoute.propTypes = {
     ...Route.propTypes,
     permissions: propTypes.arrayOf(propTypes.string),
+    schemaName: propTypes.string,
+}
+
+ProtectedRoute.defaultProps = {
+    schemaName: '',
 }
