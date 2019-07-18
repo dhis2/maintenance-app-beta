@@ -1,7 +1,23 @@
-export const hasUserAuthorityForSection = (
+const extractAuthoritiesFromSchema = schema =>
+    schema.authorities.reduce(
+        (authorities, authority) => [...authorities, ...authority.authorities],
+        []
+    )
+
+export const hasUserAuthorityForSection = ({
     authorities,
     systemSettings,
-    permissions
-) =>
-    !systemSettings.keyRequireAddToView ||
-    permissions.some(permission => authorities.indexOf(permission) !== -1)
+    schema,
+    permissions,
+}) => {
+    const requiredPrivileges = schema
+        ? extractAuthoritiesFromSchema(schema)
+        : permissions
+
+    return (
+        !systemSettings.keyRequireAddToView ||
+        requiredPrivileges.some(
+            privilege => authorities.indexOf(privilege) !== -1
+        )
+    )
+}

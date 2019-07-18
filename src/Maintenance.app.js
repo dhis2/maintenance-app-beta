@@ -60,6 +60,7 @@ export const Maintenance = () => (
                     <ProtectedRoute
                         exact
                         path={dataElement.sections.dataElement.path}
+                        schemaName={dataElement.sections.dataElement.schemaName}
                         permissions={
                             dataElement.sections.dataElement.permissions
                         }
