@@ -131,7 +131,8 @@ export const sections = {
             dataSetNotification: {
                 name: 'Data set notifications',
                 path: '/list/dataSetSection/dataSetNotificationTemplate',
-                description: '', // @TODO
+                description:
+                    'Create, update, view, and delete data set notifications.',
                 permissions: [
                     'F_DATA_SET_NOTIFICATIONS_PRIVATE_ADD',
                     'F_DATA_SET_NOTIFICATIONS_PUBLIC_ADD',
@@ -192,7 +193,8 @@ export const sections = {
             programIndicator: {
                 name: 'Program indicator',
                 path: '/list/indicatorSection/programIndicator',
-                description: '', // @TODO
+                description:
+                    'Expressions based on data elements and attributes of tracked entities. You use program indicators to calculate values based on a formula.',
                 permissions: [
                     'F_PROGRAM_INDICATOR_PRIVATE_ADD',
                     'F_PROGRAM_INDICATOR_PUBLIC_ADD',
@@ -202,7 +204,7 @@ export const sections = {
             programIndicatorGroup: {
                 name: 'Program indicator group',
                 path: '/list/indicatorSection/programIndicatorGroup',
-                description: '', // @TODO
+                description: 'Group program indicators, even across programs.',
                 permissions: [
                     'F_PROGAM_INDICATOR_GROUP_PRIVATE_ADD',
                     'F_PROGAM_INDICATOR_GROUP_PUBLIC_ADD',
@@ -324,7 +326,8 @@ export const sections = {
             programRule: {
                 name: 'Program rule',
                 path: '/list/programSection/programRule',
-                description: '', // @TODO
+                description:
+                    'Program rules allow you to create and control dynamic behavior of the user interface in the Tracker Capture and Event Capture apps.',
                 permissions: [
                     'F_PROGRAM_RULE_PRIVATE_ADD',
                     'F_PROGRAM_RULE_PUBLICE_ADD',
@@ -334,7 +337,8 @@ export const sections = {
             programRuleVariable: {
                 name: 'Program rule variable',
                 path: '/list/programSection/programRuleVariable',
-                description: '', // @TODO
+                description:
+                    'Variables you use to create program rule expressions.',
                 permissions: [
                     'F_PROGRAM_RULE_VARIABLE_PRIVATE_ADD',
                     'F_PROGRAM_RULE_VARIABLE_PUBLICE_ADD',
@@ -373,7 +377,8 @@ export const sections = {
             validationNotification: {
                 name: 'Validation notification',
                 path: '/list/validationSectin/validationNotification',
-                description: '', // @TODO
+                description:
+                    'Sends a notification when a validation rule failed',
                 permissions: [
                     'F_VALIDATION_NOTIFICATION_PRIVATE_ADD',
                     'F_VALIDATION_NOTIFICATION_PUBLICE_ADD',
@@ -422,7 +427,8 @@ export const sections = {
             optionGroup: {
                 name: 'Option group',
                 path: '/list/otherSection/optionGroup',
-                description: '', // @TODO
+                description:
+                    'Create a group of options from option sets that has a similar functional area or meaning.',
                 permissions: [
                     'F_OPTION_GROUP_PRIVATE_ADD',
                     'F_OPTION_GROUP_PUBLICE_ADD',
@@ -432,7 +438,7 @@ export const sections = {
             optionGroupSet: {
                 name: 'Option group set',
                 path: '/list/otherSection/optionGroupSet',
-                description: '', // @TODO
+                description: 'Create, modify and view sets of option groups.',
                 permissions: [
                     'F_OPTION_GROUP_SET_PRIVATE_ADD',
                     'F_OPTION_GROUP_SET_PUBLICE_ADD',
@@ -464,7 +470,8 @@ export const sections = {
             predictorGroup: {
                 name: 'Predictor group',
                 path: '/list/otherSection/predictorGroup',
-                description: '', // @TODO
+                description:
+                    'Create predictors groups that contain serveral predictors related predictors.',
                 permissions: [
                     'F_PREDICTOR_GROUP_PRIVATE_ADD',
                     'F_PREDICTOR_GROUP_PUBLICE_ADD',
@@ -495,7 +502,8 @@ export const sections = {
             dataApprovalLevel: {
                 name: 'Data approval level',
                 path: '/list/otherSection/dataApprovalLevel',
-                description: '', // @TODO
+                description:
+                    'Configure data approval levels for use in data approval workflows',
                 permissions: [
                     'F_DATA_APPROVAL_LEVEL_PRIVATE_ADD',
                     'F_DATA_APPROVAL_LEVEL_PUBLICE_ADD',
