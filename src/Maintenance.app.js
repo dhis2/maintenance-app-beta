@@ -46,15 +46,11 @@ export const Maintenance = () => (
                          * =============================
                          * */ ''
                     }
+
                     <Route
                         exact
-                        path={dataElement.path}
-                        render={() => (
-                            <Overview
-                                name={dataElement.name}
-                                sections={subSectionOrder.dataElement}
-                            />
-                        )}
+                        path="/list/:section(.*)Section"
+                        component={Overview}
                     />
 
                     <ProtectedRoute

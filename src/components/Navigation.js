@@ -14,13 +14,15 @@ const NavigationComponent = ({ disabled }) => {
                     <NavigationLink
                         to="/list/all"
                         disabled={disabled}
+                        section="all"
                         label={'All'}
                     />
 
-                    {mainSectionOrder.map(({ name, path }) => (
+                    {mainSectionOrder.map(({ name, path, key }) => (
                         <NavigationLink
-                            key={path}
-                            to={path}
+                            key={key}
+                            to={`/list/${key}Section`}
+                            section={key}
                             label={name}
                             disabled={disabled}
                         />
