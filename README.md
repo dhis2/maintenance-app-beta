@@ -9,13 +9,13 @@ redirecting to new sections if exists and to old ones if there's no new section 
 
 Here's a list of what needs to be done in order to start working on the sections:
 
-[x] Create app shell components
-  [x] Navigation
-  [x] Sidebar
-  [x] Content container
-[x] Redirect non-existing pages to the old app
-[x] Setup translation
-[ ] Add non-English translations
+- [x] Create app shell components
+  - [x] Navigation
+  - [x] Sidebar
+  - [x] Content container
+- [x] Redirect non-existing pages to the old app
+- [x] Setup translation
+- [ ] Add non-English translations
 
 ## Developing
 
