@@ -5,5 +5,200 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-06-27T14:21:59.712Z\n"
-"PO-Revision-Date: 2019-06-27T14:21:59.712Z\n"
+"POT-Creation-Date: 2019-07-19T13:29:57.192Z\n"
+"PO-Revision-Date: 2019-07-19T13:29:57.192Z\n"
+
+msgid ""
+"Create, modify, view and delete data element category options. Category "
+"options are options with in category."
+msgstr ""
+
+msgid ""
+"Create, modify, view and delete data element categories. Categories are "
+"used for disaggregation of data elements."
+msgstr ""
+
+msgid "msgid \"Create, modify, view and delete data element category combinations."
+msgstr ""
+
+msgid ""
+"View and edit data element category option combinations. Category option "
+"combinations are break-downs of category."
+msgstr ""
+
+msgid ""
+"Create, modify, view and delete category option groups, which can be used "
+"to classify category options."
+msgstr ""
+
+msgid ""
+"Create, modify, view and delete category option group sets, which can be "
+"used for improved data analysis."
+msgstr ""
+
+msgid ""
+"Create, modify, view and delete data elements. Data elements are phenomena "
+"for which will be captured and analyzed."
+msgstr ""
+
+msgid ""
+"Create, modify, view and delete data element groups. Groups are used for "
+"improved analysis."
+msgstr ""
+
+msgid ""
+"Create, modify, view and delete data element group sets. Group sets are "
+"used for improved analysis."
+msgstr ""
+
+msgid ""
+"Create, update, view and delete data sets and custom forms. A data set is a "
+"collection of data elements for which data is entered."
+msgstr ""
+
+msgid "Create, update, view, and delete data set notifications."
+msgstr ""
+
+msgid ""
+"Create, modify, view and delete indicators. An indicator is a formula "
+"consisting of data elements and numbers."
+msgstr ""
+
+msgid ""
+"Create, modify, view and delete indicator types. An indicator type is a "
+"factor for an indicator, like percentage."
+msgstr ""
+
+msgid ""
+"Create, modify, view and delete indicator groups. Groups are used for "
+"improved analysis."
+msgstr ""
+
+msgid ""
+"Create, modify, view and delete indicator group sets. Group sets are used "
+"for improved analysis."
+msgstr ""
+
+msgid ""
+"Expressions based on data elements and attributes of tracked entities. You "
+"use program indicators to calculate values based on a formula."
+msgstr ""
+
+msgid "Group program indicators, even across programs."
+msgstr ""
+
+msgid ""
+"Create, modify, view and delete organisation units, which can be "
+"departments, offices, hospitals and clinics."
+msgstr ""
+
+msgid ""
+"Create, modify, view and delete organisation unit groups. Groups are used "
+"for improved analysis."
+msgstr ""
+
+msgid ""
+"Create, modify, view and delete organisation unit group sets. Group sets "
+"are used for improved analysis."
+msgstr ""
+
+msgid ""
+"Create, modify, view and delete descriptive names for the organisation unit "
+"levels in the system."
+msgstr ""
+
+msgid ""
+"\"Create modify and view programs. A program has program stages and defines "
+"which actions should be taken at each stage."
+msgstr ""
+
+msgid ""
+"Create, modify and view program attributes. A program can have any number "
+"of attributes."
+msgstr ""
+
+msgid ""
+"Define types of entities which can be tracked through the system, which can "
+"be anything from persons to commodities."
+msgstr ""
+
+msgid ""
+"Create, modify and view relationship types. A relationship is typically "
+"wife and husband or mother and child."
+msgstr ""
+
+msgid ""
+"Program rules allow you to create and control dynamic behavior of the user "
+"interface in the Tracker Capture and Event Capture apps."
+msgstr ""
+
+msgid "Variables you use to create program rule expressions."
+msgstr ""
+
+msgid ""
+"Add, modify, view and delete validation rules. Anomalies can be discovered "
+"by running validation rules against the data."
+msgstr ""
+
+msgid ""
+"Add, modify, view and delete validation rule groups. Provides the ability "
+"to group and run validation rules together."
+msgstr ""
+
+msgid "Sends a notification when a validation rule failed"
+msgstr ""
+
+msgid ""
+"Create constants which can be included in expressions of indicator and "
+"validation rules."
+msgstr ""
+
+msgid "Create, modify and view attributes."
+msgstr ""
+
+msgid ""
+"Create option sets which can be included in data elements and produce "
+"drop-down lists in data entry forms."
+msgstr ""
+
+msgid ""
+"Create a group of options from option sets that has a similar functional "
+"area or meaning."
+msgstr ""
+
+msgid "Create, modify and view sets of option groups."
+msgstr ""
+
+msgid ""
+"Create, modify and view predefined legends for maps and other "
+"visualisations."
+msgstr ""
+
+msgid "Create predictors which can be used to predict future data values."
+msgstr ""
+
+msgid ""
+"Create predictors groups that contain serveral predictors related "
+"predictors."
+msgstr ""
+
+msgid ""
+"Manage analytics to be emailed to specific user groups on a daily, weekly "
+"or monthly basis."
+msgstr ""
+
+msgid "Configure external map layers for use in GIS."
+msgstr ""
+
+msgid "Configure data approval levels for use in data approval workflows"
+msgstr ""
+
+msgid ""
+"Create and manage locales for database content. A locale is a combination "
+"of language and country."
+msgstr ""
+
+msgid ""
+"Create SQL database views. These views will typically use the resource "
+"tables to provide convenient views for third-party tools."
+msgstr ""
