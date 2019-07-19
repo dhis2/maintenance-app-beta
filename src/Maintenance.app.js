@@ -8,8 +8,8 @@ import { DataElementList } from './pages/dataElement/DataElementList'
 import { Navigation } from './components/Navigation'
 import { Overview } from './pages/Overview'
 import { ProtectedRoute } from './components/authorization/ProtectedRoute'
+import { RedirectToOld } from './pages/RedirectToOld'
 import { configureStore, history } from './redux/configureStore'
-import { createUrl } from './constants/internalLinks'
 import { dataElementSections } from './constants/groups_and_sections'
 import styles from './Maintenance.module.css'
 
@@ -40,17 +40,23 @@ export const Maintenance = () => (
                     {
                         /**
                          * =============================
-                         * Data Element
+                         * All group overview pages
                          * =============================
                          * */ ''
                     }
-
                     <Route
                         exact
                         path="/list/:group(.*)Section"
                         component={Overview}
                     />
 
+                    {
+                        /**
+                         * =============================
+                         * Data Element
+                         * =============================
+                         * */ ''
+                    }
                     <ProtectedRoute
                         exact
                         path={dataElementSections.dataElement.path}
@@ -68,13 +74,7 @@ export const Maintenance = () => (
                          * =============================
                          * */ ''
                     }
-                    <Route
-                        component={({ location }) => {
-                            return `Should redirect to, ${createUrl(
-                                location.pathname
-                            )}`
-                        }}
-                    />
+                    <Route component={RedirectToOld} />
                 </Switch>
             </ConnectedRouter>
         </Provider>

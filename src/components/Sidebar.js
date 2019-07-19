@@ -14,6 +14,7 @@ const SidebarComponent = ({ sections, location, push }) => {
     const filteredSections = sections.filter(item => {
         if (!Array.isArray(item)) return true
 
+        // eslint-disable-next-line no-unused-vars
         const [section, config = {}] = item
         return config.hideInSideBar !== true
     })
@@ -32,9 +33,7 @@ const SidebarComponent = ({ sections, location, push }) => {
                             icon={<FolderClosed />}
                             label={name}
                             active={path === location.pathname}
-                            onClick={
-                                console.log('push path:', path) || push(path)
-                            }
+                            onClick={push(path)}
                         />
                     )
                 )}

@@ -10,7 +10,8 @@ export const CardMenu = ({ sections }) => {
     const filteredSections = sections.filter(item => {
         if (!Array.isArray(item)) return true
 
-        const [section, config = {}] = item
+        // eslint-disable-next-line no-unused-vars
+        const [section, config = {}] = item[1] || {}
         return config.hideInCardMenu !== true
     })
 
