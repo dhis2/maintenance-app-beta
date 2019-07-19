@@ -41,7 +41,7 @@ export const ProtectedRoute = props => {
     }
 
     if (props.schemaName) {
-        query.schema = `schema/${props.schemaName}.json`
+        query.schema = { resource: `schemas/${props.schemaName}.json` }
     }
 
     const { loading, error, data } = useDataQuery(query)

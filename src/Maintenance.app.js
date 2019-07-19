@@ -10,12 +10,10 @@ import { Overview } from './pages/Overview'
 import { ProtectedRoute } from './components/authorization/ProtectedRoute'
 import { configureStore, history } from './redux/configureStore'
 import { createUrl } from './constants/internalLinks'
-import { sections } from './constants/sections'
-import { subSectionOrder } from './constants/sectionOrder'
+import { dataElementSections } from './constants/groups_and_sections'
 import styles from './Maintenance.module.css'
 
 const store = configureStore()
-const { dataElement } = sections
 
 export const Maintenance = () => (
     <div className={styles.maintenanceApp}>
@@ -49,16 +47,16 @@ export const Maintenance = () => (
 
                     <Route
                         exact
-                        path="/list/:section(.*)Section"
+                        path="/list/:group(.*)Section"
                         component={Overview}
                     />
 
                     <ProtectedRoute
                         exact
-                        path={dataElement.sections.dataElement.path}
-                        schemaName={dataElement.sections.dataElement.schemaName}
+                        path={dataElementSections.dataElement.path}
+                        schemaName={dataElementSections.dataElement.schemaName}
                         permissions={
-                            dataElement.sections.dataElement.permissions
+                            dataElementSections.dataElement.permissions
                         }
                         component={DataElementList}
                     />

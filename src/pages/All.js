@@ -4,15 +4,18 @@ import React from 'react'
 
 import { CardMenu } from '../components/CardMenu'
 import { GridContainer } from '../components/Grid/GridContainer'
-import { mainSectionOrder, subSectionOrder } from '../constants/sectionOrder'
+import {
+    groupOrder,
+    sectionsOrder,
+} from '../constants/group_and_sections_order'
 
 export const All = () => (
     <GridContainer layout="contentOnly">
         <GridContent>
-            {mainSectionOrder.map(mainSection => (
-                <section key={mainSection.name}>
-                    <h2>{mainSection.name}</h2>
-                    <CardMenu sections={subSectionOrder[mainSection.key]} />
+            {groupOrder.map(group => (
+                <section key={group.name}>
+                    <h2>{group.name}</h2>
+                    <CardMenu sections={sectionsOrder[group.key]} />
                 </section>
             ))}
         </GridContent>

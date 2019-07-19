@@ -5,15 +5,14 @@
 }
 
 .contentWithSidebar {
-    grid-template-area: '
-        sidebar
-        content
-    ';
+    grid-template-areas:
+      'sidebar'
+      'content';
 }
 
 .contentOnly {
     padding: 0 5px;
-    grid-template-area: 'content';
+    grid-template-areas: 'content';
 }
 
 @media (min-width: 400px) {
@@ -26,7 +25,6 @@
     .contentWithSidebar {
         grid-template-columns: 300px auto;
         grid-template-areas: 'sidebar content';
-        column-gap: 25px;
     }
 
     .contentOnly {

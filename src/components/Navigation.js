@@ -3,7 +3,7 @@ import { ScrollBar, TabBar } from '@dhis2/ui-core'
 import React from 'react'
 import cx from 'classnames'
 
-import { mainSectionOrder } from '../constants/sectionOrder'
+import { groupOrder } from '../constants/group_and_sections_order'
 import { NavigationLink } from './Navigation/NavigationLink'
 
 const NavigationComponent = ({ disabled }) => {
@@ -18,7 +18,7 @@ const NavigationComponent = ({ disabled }) => {
                         label={'All'}
                     />
 
-                    {mainSectionOrder.map(({ name, path, key }) => (
+                    {groupOrder.map(({ name, path, key }) => (
                         <NavigationLink
                             key={key}
                             to={`/list/${key}Section`}
