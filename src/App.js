@@ -9,12 +9,8 @@ import './App.css'
 const App = () => (
     <DataProvider baseUrl={process.env.REACT_APP_DHIS2_BASE_URL} apiVersion="">
         <div className={styles.wrapper}>
-            <div className={styles.headerBar}>
-                <HeaderBar appName="Maintenance app" />
-            </div>
-            <div className={styles.appWrapper}>
-                <Maintenance />
-            </div>
+            <HeaderBar appName="Maintenance app" />
+            <Maintenance />
         </div>
         <CssReset />
     </DataProvider>
