@@ -2,20 +2,18 @@ import React from 'react'
 
 import { Content } from '../../components/Content'
 import { GridContainer } from '../../components/Grid/GridContainer'
-import { GridSidebar } from '../../components/Grid/GridSidebar'
 import { GridContent } from '../../components/Grid/GridContent'
-import { Sidebar } from '../../components/Sidebar'
+import { GridSidebar } from '../../components/Grid/GridSidebar'
 import { PageHeadline } from '../../components/PageHeadline'
-import {
-    dataElementSections,
-    groups,
-} from '../../constants/groups_and_sections'
-import { sectionsOrder } from '../../constants/group_and_sections_order'
+import { Sidebar } from '../../components/Sidebar'
+import { dataElementSections } from '../../constants/sections'
+import { groups } from '../../constants/groups'
+import { sectionOrder } from '../../constants/sectionOrder'
 
 export const DataElementList = () => (
     <GridContainer>
         <GridSidebar>
-            <Sidebar sections={sectionsOrder[groups.dataElement.key]} />
+            <Sidebar sections={sectionOrder[groups.dataElement.key]} />
         </GridSidebar>
 
         <GridContent>

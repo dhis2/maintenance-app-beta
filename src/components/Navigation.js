@@ -1,10 +1,11 @@
-import { connect } from 'react-redux'
 import { ScrollBar, TabBar } from '@dhis2/ui-core'
+import { connect } from 'react-redux'
 import React from 'react'
+
 import cx from 'classnames'
 
-import { groupOrder } from '../constants/group_and_sections_order'
 import { NavigationLink } from './Navigation/NavigationLink'
+import { groupOrder } from '../constants/groupOrder'
 
 const NavigationComponent = ({ disabled }) => {
     return (

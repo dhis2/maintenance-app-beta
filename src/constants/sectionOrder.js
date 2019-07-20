@@ -1,5 +1,4 @@
 import {
-    groups,
     categorySections,
     dataElementSections,
     dataSetSections,
@@ -8,20 +7,13 @@ import {
     programSections,
     validationSections,
     otherSections,
-} from './groups_and_sections'
+} from './sections'
 
-export const groupOrder = [
-    groups.category,
-    groups.dataElement,
-    groups.dataSet,
-    groups.indicator,
-    groups.organisationUnit,
-    groups.program,
-    groups.validation,
-    groups.other,
-]
-
-export const sectionsOrder = {
+/**
+ * A single section can be either just a section or:
+ * [ section, { hideInCardMenu: boolean; hideInSideBar: boolean; } ]
+ */
+export const sectionOrder = {
     category: [
         categorySections.categoryOption,
         categorySections.category,

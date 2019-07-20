@@ -10,7 +10,7 @@ import { Overview } from './pages/Overview'
 import { ProtectedRoute } from './components/authorization/ProtectedRoute'
 import { RedirectToOld } from './pages/RedirectToOld'
 import { configureStore, history } from './redux/configureStore'
-import { dataElementSections } from './constants/groups_and_sections'
+import { dataElementSections } from './constants/sections'
 import styles from './Maintenance.module.css'
 
 const store = configureStore()

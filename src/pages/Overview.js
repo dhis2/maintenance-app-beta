@@ -6,11 +6,11 @@ import { GridContainer } from '../components/Grid/GridContainer'
 import { GridContent } from '../components/Grid/GridContent'
 import { GridSidebar } from '../components/Grid/GridSidebar'
 import { Sidebar } from '../components/Sidebar'
-import { sectionsOrder } from '../constants/group_and_sections_order'
+import { sectionOrder } from '../constants/sectionOrder'
 
 export const Overview = ({ name, match }) => {
     const { group } = match.params
-    const sections = sectionsOrder[group] || []
+    const sections = sectionOrder[group] || []
 
     return (
         <GridContainer layout="contentWithSidebar">

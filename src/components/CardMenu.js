@@ -11,7 +11,7 @@ export const CardMenu = ({ sections }) => {
         if (!Array.isArray(item)) return true
 
         // eslint-disable-next-line no-unused-vars
-        const [section, config = {}] = item[1] || {}
+        const [section, config = {}] = item
         return config.hideInCardMenu !== true
     })
 
