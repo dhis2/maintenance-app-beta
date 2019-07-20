@@ -22,10 +22,10 @@ const NavigationLinkComponent = ({
     match,
 }) => {
     const onClick = useOnClick(disabled, push, to)
-    const activeSection = match.params.section
+    const activeGroup = match.params.group
 
     return (
-        <Tab selected={section === activeSection} onClick={onClick}>
+        <Tab selected={section === activeGroup} onClick={onClick}>
             {label}
         </Tab>
     )

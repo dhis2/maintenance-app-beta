@@ -7,8 +7,9 @@ import { GridContent } from '../components/Grid/GridContent'
 import { GridSidebar } from '../components/Grid/GridSidebar'
 import { Sidebar } from '../components/Sidebar'
 import { sectionOrder } from '../constants/sectionOrder'
+import { createPageComponent } from './createPageComponent'
 
-export const Overview = ({ name, match }) => {
+export const Overview = createPageComponent(({ name, match }) => {
     const { group } = match.params
     const sections = sectionOrder[group] || []
 
@@ -25,4 +26,4 @@ export const Overview = ({ name, match }) => {
             </GridContent>
         </GridContainer>
     )
-}
+})

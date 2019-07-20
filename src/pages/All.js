@@ -3,10 +3,11 @@ import React from 'react'
 import { CardMenu } from '../components/CardMenu'
 import { GridContainer } from '../components/Grid/GridContainer'
 import { GridContent } from '../components/Grid/GridContent'
+import { createPageComponent } from './createPageComponent'
 import { groupOrder } from '../constants/groupOrder'
 import { sectionOrder } from '../constants/sectionOrder'
 
-export const All = () => (
+export const All = createPageComponent(() => (
     <GridContainer layout="contentOnly">
         <GridContent>
             {groupOrder.map(group => (
@@ -17,4 +18,4 @@ export const All = () => (
             ))}
         </GridContent>
     </GridContainer>
-)
+))
