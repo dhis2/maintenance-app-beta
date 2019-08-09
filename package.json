@@ -13,7 +13,7 @@
         "prestart": "yarn localize"
     },
     "dependencies": {
-        "@dhis2/app-runtime": "1.3.0",
+        "@dhis2/app-runtime": "1.4.1",
         "@dhis2/d2-i18n": "^1.0.5",
         "@dhis2/d2-i18n-extract": "^1.0.8",
         "@dhis2/d2-i18n-generate": "^1.1.1",
