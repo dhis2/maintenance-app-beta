@@ -15,7 +15,7 @@ const NavigationComponent = ({ disabled }) => {
                     <NavigationLink
                         to="/list/all"
                         disabled={disabled}
-                        section="all"
+                        group="all"
                         label={'All'}
                     />
 
@@ -23,7 +23,7 @@ const NavigationComponent = ({ disabled }) => {
                         <NavigationLink
                             key={key}
                             to={`/list/${key}Section`}
-                            section={key}
+                            group={key}
                             label={name}
                             disabled={disabled}
                         />
