@@ -13,18 +13,20 @@ const NavigationComponent = ({ disabled }) => {
             <ScrollBar>
                 <TabBar fixed>
                     <NavigationLink
+                        noAuth
+                        id="all"
                         to="/list/all"
-                        disabled={disabled}
-                        group="all"
                         label={'All'}
+                        disabled={disabled}
                     />
 
-                    {groupOrder.map(({ name, path, key }) => (
+                    {groupOrder.map(group => (
                         <NavigationLink
-                            key={key}
-                            to={`/list/${key}Section`}
-                            group={key}
-                            label={name}
+                            key={group.key}
+                            id={group.key}
+                            to={`/list/${group.key}Section`}
+                            group={group}
+                            label={group.name}
                             disabled={disabled}
                         />
                     ))}

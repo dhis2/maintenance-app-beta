@@ -183,11 +183,6 @@ export const organisationUnitSections = {
         name: 'Hierarchy options',
         path: '/list/organisationUnitSection/hierarchy',
         description: i18n.t(''),
-        permissions: [
-            'F_HIERARCHY_OPTIONS_PRIVATE_ADD',
-            'F_HIERARCHY_OPTIONS_PUBLIC_ADD',
-            'F_HIERARCHY_OPTIONS_DELETE',
-        ],
     },
 }
 
@@ -265,12 +260,7 @@ export const validationSections = {
         description: i18n.t(
             'Sends a notification when a validation rule failed'
         ),
-        schemaName: 'validationNotificationTemplate', // @TODO
-        permissions: [
-            'F_VALIDATION_NOTIFICATION_PRIVATE_ADD',
-            'F_VALIDATION_NOTIFICATION_PUBLICE_ADD',
-            'F_VALIDATION_NOTIFICATION_DELETE',
-        ],
+        schemaName: 'validationNotificationTemplate',
     },
 }
 
@@ -369,7 +359,13 @@ export const otherSections = {
         description: i18n.t(
             'Create and manage locales for database content. A locale is a combination of language and country.'
         ),
-        schemaName: 'locale', // @TODO
+
+        /**
+         * These are static and are not retrievable from the api
+         * In the old maintenance app, they're defined statically
+         * on a custom model definition
+         */
+        permissions: [['F_SYSTEM_SETTING']],
     },
     sqlView: {
         name: 'SQL View',

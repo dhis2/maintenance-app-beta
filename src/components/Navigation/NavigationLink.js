@@ -1,15 +1,18 @@
 import { Tab } from '@dhis2/ui-core'
 import { connect } from 'react-redux'
-import { pipe, map, mapValues } from 'lodash/fp'
+import { concat, identity, map, pipe, reduce } from 'lodash/fp'
 import { push } from 'connected-react-router'
 import { useDataQuery } from '@dhis2/app-runtime'
 import React, { useCallback } from 'react'
+import i18n from '@dhis2/d2-i18n'
 
 import { withRouter } from 'react-router'
 
 import { queries } from '../../constants/queries'
 
-const uncappedMapValues = mapValues.convert({ cap: false })
+const AUTHORITY_NOT_DETERMINED = -1
+const HAS_NO_AUTHORITY = 0
+const HAS_AUTHORITY = 1
 
 const useOnClick = (disabled, push, to) =>
     useCallback(
@@ -19,35 +22,75 @@ const useOnClick = (disabled, push, to) =>
         [disabled, to, push]
     )
 
-const NavigationLinkComponent = ({
-    to,
-    push,
-    label,
-    group,
-    disabled,
-    match,
-}) => {
-    const onClick = useOnClick(disabled, push, to)
-    const systemSettingsQuery = {
-        systemSettings: queries.systemSettings,
-    }
+const extractStaticPermissions = reduce(
+    (staticPermissions, curSection) =>
+        curSection.permissions
+            ? [...staticPermissions, ...curSection.permissions]
+            : staticPermissions,
+    []
+)
 
-    const schemasQuery = map(
-        // lodash map will convert objects to arrays
-        section => ({ resource: `schemas/${section.schemaName}.json` }),
-        group.sections
-    ).reduce(
-        (schemas, resourceQuery, index) => ({
-            ...schemas,
-            [`schema${index}`]: resourceQuery,
-        }),
-        {}
+/**
+ * lodash map will convert objects to arrays
+ */
+const createSchemasQuery = sections =>
+    map(
+        section =>
+            section.schemaName
+                ? {
+                      resource: `schemas/${section.schemaName}.json?fields=authorities`,
+                  }
+                : undefined,
+        sections
     )
+        .filter(identity)
+        .reduce(
+            (schemas, resourceQuery, index) => ({
+                ...schemas,
+                [`schema${index}`]: resourceQuery,
+            }),
+            {}
+        )
+
+const schemasToAuthorities = staticPermissions =>
+    pipe(
+        reduce(
+            (authAcc, curSchema) => [...authAcc, ...curSchema.authorities],
+            []
+        ),
+        reduce((auths, curAuth) => [...auths, curAuth.authorities], []),
+        concat(staticPermissions)
+    )
+
+const hasAuthorityForGroup = (requiredAuthorities, userAuthorities) =>
+    requiredAuthorities.reduce(
+        (authorized, requiredAuthority) =>
+            authorized ||
+            requiredAuthority.some(
+                reqAuth => userAuthorities.indexOf(reqAuth) !== -1
+            ),
+        false
+    )
+
+const useHasAuthority = (noAuth, group) => {
+    const authoritiesQuery = noAuth
+        ? {}
+        : { userAuthorities: queries.authorities }
+    const systemSettingsQuery = noAuth
+        ? {}
+        : { systemSettings: queries.systemSettings }
+    const schemasQuery = noAuth ? {} : createSchemasQuery(group.sections)
+
+    const {
+        loading: authoritiesLoading,
+        error: authoritiesError,
+        data: { userAuthorities } = {},
+    } = useDataQuery(authoritiesQuery)
 
     const {
         loading: systemSettingsLoading,
         error: systemSettingsError,
-        data: systemSettings,
+        data: { systemSettings } = {},
     } = useDataQuery(systemSettingsQuery)
 
     const {
@@ -56,30 +99,102 @@ const NavigationLinkComponent = ({
         data: schemas,
     } = useDataQuery(schemasQuery)
 
-    //if (systemSettingsLoading) return console.log('loading systemSettings', systemSettingsLoading) || null
-    if (schemasLoading)
-        return console.log('loading schemas', schemasLoading) || null
-    //if (systemSettingsError) return console.log('error systemSettings', systemSettingsError) || null
-    if (schemasError) return console.log('error schemas', schemasError) || null
+    if (!noAuth) {
+        if (
+            authoritiesLoading ||
+            systemSettingsLoading ||
+            systemSettingsLoading
+        ) {
+            return {
+                loading: true,
+                error: '',
+                hasAuthority: AUTHORITY_NOT_DETERMINED,
+            }
+        }
 
-    console.log('data', systemSettings, schemas)
+        if (authoritiesError) {
+            return {
+                loading: false,
+                error: authoritiesError,
+                hasAuthority: AUTHORITY_NOT_DETERMINED,
+            }
+        }
 
-    const activeGroup = match.params.group
+        if (systemSettingsError) {
+            return {
+                loading: false,
+                error: systemSettingsError,
+                hasAuthority: AUTHORITY_NOT_DETERMINED,
+            }
+        }
+
+        if (schemasError) {
+            return {
+                loading: false,
+                error: schemasError,
+                hasAuthority: AUTHORITY_NOT_DETERMINED,
+            }
+        }
+    }
+
+    if (!noAuth && systemSettings.keyRequireAddToView) {
+        const staticPermissions = noAuth
+            ? []
+            : extractStaticPermissions(group.sections)
+        const requiredAuthorities = noAuth
+            ? []
+            : schemasToAuthorities(staticPermissions)(schemas)
+        const hasAuthority =
+            noAuth || hasAuthorityForGroup(requiredAuthorities, userAuthorities)
+
+        return {
+            loading: false,
+            error: '',
+            hasAuthority: !hasAuthority ? HAS_NO_AUTHORITY : HAS_AUTHORITY,
+        }
+    }
+
+    return { loading: false, error: '', hasAuthority: HAS_AUTHORITY }
+}
+
+const NavigationLinkComponent = ({
+    id,
+    to,
+    push,
+    label,
+    group,
+    match,
+    noAuth,
+    disabled,
+}) => {
+    const onClick = useOnClick(disabled, push, to)
+    const { loading, error, hasAuthority } = useHasAuthority(noAuth, group)
+
+    if (loading) {
+        return <Tab>{i18n.t('Checking %s', group.name)}</Tab>
+    }
+
+    if (error) {
+        console.error(error)
+        return null
+    }
+
+    if (!hasAuthority) {
+        return null
+    }
 
     return (
-        <Tab selected={group === activeGroup} onClick={onClick}>
+        <Tab selected={id === match.params.group} onClick={onClick}>
             {label}
         </Tab>
     )
 }
 
-const mapDispatchToProps = dispatch => ({ push: path => dispatch(push(path)) })
-
 const NavigationLink = pipe(
     withRouter,
     connect(
         undefined,
-        mapDispatchToProps
+        dispatch => ({ push: path => dispatch(push(path)) })
     )
 )(NavigationLinkComponent)
 
