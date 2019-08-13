@@ -1030,10 +1030,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-9.0.1.tgz#c27b391d8457d1e893f1eddeaf5e5412d12ffbb5"
   integrity sha512-6It2EVfGskxZCQhuykrfnALg7oVeiI6KclWSmGDqB0AiInVrTGB9Jp9i4/Ad21u9Jde/voVQz6eFX/eSg/UsPA==
 
-"@dhis2/app-runtime@1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@dhis2/app-runtime/-/app-runtime-1.4.1.tgz#8fdd9bfc5b340fb04a808cb825784d9bdcc7859c"
-  integrity sha512-SbwIVtH8HfkwcHfinlYydM5nNAHbEwN58dAAUii/68BAO/3U/7KZ50ERpyyLHh/gwopKQS3mIRDQWalFHdSFeg==
+"@dhis2/app-runtime@1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-runtime/-/app-runtime-1.4.2.tgz#69d8f848cb3429670de181f78ac0d474f77630e9"
+  integrity sha512-jeRz0z9p2IATJ8YqYnWu/ZjrP8+1fNrs0EKrh1uP1OXUB6NT3rfWLnAA8WMLu1DbADbK060Zll5SnE0s7e9G/w==
 
 "@dhis2/cli-helpers-engine@1.3.0":
   version "1.3.0"
@@ -10125,14 +10125,6 @@ saxes@^3.1.9:
   integrity sha512-FZeKhJglhJHk7eWG5YM0z46VHmI3KJpMBAQm3xa9meDvd+wevB5GuBB0wc0exPInZiBBHqi00DbS8AcvCGCFMw==
   dependencies:
     xmlchars "^1.3.1"
-
-scheduler@^0.13.6:
-  version "0.13.6"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.13.6.tgz#466a4ec332467b31a91b9bf74e5347072e4cd889"
-  integrity sha512-IWnObHt413ucAYKsD9J1QShUKkbKLQQHdxRyw73sw4FN26iWr3DY/H34xGPe4nmL1DwXyWmSWmMrA9TfQbE/XQ==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
 
 scheduler@^0.15.0:
   version "0.15.0"
