@@ -1,20 +1,20 @@
-import { pipe } from 'lodash/fp'
+import { MenuList } from '@dhis2/ui-core'
 import { connect } from 'react-redux'
-import { MenuList, MenuItem } from '@dhis2/ui-core'
-import { withRouter } from 'react-router-dom'
+import { pipe } from 'lodash/fp'
 import { push } from 'connected-react-router'
+import { withRouter } from 'react-router-dom'
 import React from 'react'
 import propTypes from 'prop-types'
 
 import { FolderClosed } from './icons/FolderClosed'
 import { sectionPropType } from './authorization/sectionPropType'
+import { SidebarMenuItem } from './Sidebar/SidebarMenuItem'
 import styles from './Sidebar.module.css'
 
 const SidebarComponent = ({ sections, location, push }) => {
     const filteredSections = sections.filter(item => {
         if (!Array.isArray(item)) return true
 
-        // eslint-disable-next-line no-unused-vars
         const [section, config = {}] = item
         return config.hideInSideBar !== true
     })
@@ -28,8 +28,10 @@ const SidebarComponent = ({ sections, location, push }) => {
             <MenuList>
                 {formattedSections.map(
                     ({ name, path, permissions, schemaName }) => (
-                        <MenuItem
+                        <SidebarMenuItem
                             key={name}
+                            permissions={permissions}
+                            schemaName={schemaName}
                             icon={<FolderClosed />}
                             label={name}
                             active={path === location.pathname}

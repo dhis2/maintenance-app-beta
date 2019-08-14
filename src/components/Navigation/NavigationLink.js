@@ -1,6 +1,6 @@
 import { Tab } from '@dhis2/ui-core'
+import { concat, flatten, identity, map, pipe, reduce } from 'lodash/fp'
 import { connect } from 'react-redux'
-import { concat, identity, map, pipe, reduce } from 'lodash/fp'
 import { push } from 'connected-react-router'
 import { useDataQuery } from '@dhis2/app-runtime'
 import React, { useCallback } from 'react'
@@ -8,6 +8,8 @@ import i18n from '@dhis2/d2-i18n'
 
 import { withRouter } from 'react-router'
 
+import { getAuthoritiesFromSchema } from '../../utils/authority/getAuthoritiesFromSchema'
+import { hasAuthority } from '../../utils/authority/hasAuthority'
 import { queries } from '../../constants/queries'
 
 const AUTHORITY_NOT_DETERMINED = -1
@@ -54,22 +56,9 @@ const createSchemasQuery = sections =>
 
 const schemasToAuthorities = staticPermissions =>
     pipe(
-        reduce(
-            (authAcc, curSchema) => [...authAcc, ...curSchema.authorities],
-            []
-        ),
-        reduce((auths, curAuth) => [...auths, curAuth.authorities], []),
+        map(getAuthoritiesFromSchema),
+        flatten,
         concat(staticPermissions)
-    )
-
-const hasAuthorityForGroup = (requiredAuthorities, userAuthorities) =>
-    requiredAuthorities.reduce(
-        (authorized, requiredAuthority) =>
-            authorized ||
-            requiredAuthority.some(
-                reqAuth => userAuthorities.indexOf(reqAuth) !== -1
-            ),
-        false
     )
 
 const useHasAuthority = (noAuth, group) => {
@@ -100,11 +89,7 @@ const useHasAuthority = (noAuth, group) => {
     } = useDataQuery(schemasQuery)
 
     if (!noAuth) {
-        if (
-            authoritiesLoading ||
-            systemSettingsLoading ||
-            systemSettingsLoading
-        ) {
+        if (authoritiesLoading || systemSettingsLoading || schemasLoading) {
             return {
                 loading: true,
                 error: '',
@@ -138,23 +123,25 @@ const useHasAuthority = (noAuth, group) => {
     }
 
     if (!noAuth && systemSettings.keyRequireAddToView) {
-        const staticPermissions = noAuth
-            ? []
-            : extractStaticPermissions(group.sections)
-        const requiredAuthorities = noAuth
-            ? []
-            : schemasToAuthorities(staticPermissions)(schemas)
-        const hasAuthority =
-            noAuth || hasAuthorityForGroup(requiredAuthorities, userAuthorities)
+        const staticPermissions = extractStaticPermissions(group.sections)
+        const requiredAuthorities = schemasToAuthorities(staticPermissions)(
+            schemas
+        )
 
-        return {
-            loading: false,
-            error: '',
-            hasAuthority: !hasAuthority ? HAS_NO_AUTHORITY : HAS_AUTHORITY,
+        if (!hasAuthority(requiredAuthorities, userAuthorities)) {
+            return {
+                loading: false,
+                error: '',
+                hasAuthority: HAS_NO_AUTHORITY,
+            }
         }
     }
 
-    return { loading: false, error: '', hasAuthority: HAS_AUTHORITY }
+    return {
+        loading: false,
+        error: '',
+        hasAuthority: HAS_AUTHORITY,
+    }
 }
 
 const NavigationLinkComponent = ({
