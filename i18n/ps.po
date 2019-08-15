@@ -1,0 +1,302 @@
+
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-15T13:45:50.411Z\n"
+"PO-Revision-Date: 2019-08-15T13:45:50.411Z\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ps\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Pootle-Path: /ps/maintenance-app/ps.po\n"
+"X-Pootle-Revision: 29879
+"
+
+
+msgid "Users at Organisation Unit"
+msgstr ""
+"\u062F \u0633\u0627\u0632\u0645\u0627\u0646 \u067E\u0647"
+"\u0648\u0627\u062D\u062F \u06A9\u06D0 \u067C\u0648\u0644"
+"\u06A9\u0627\u0631\u0648\u0648\u0646\u06A9\u064A"
+
+
+msgid "Program stage completion"
+msgstr ""
+"\u062F \u067E\u0631\u0648\u06AB\u0631\u0627\u0645 \u062F"
+"\u067E\u0693\u0627\u0648 \u0628\u0631\u062E\u0647"
+
+
+msgid "Days scheduled (due date)"
+msgstr ""
+"\u062F \u067C\u0627\u06A9\u0644\u06D0"
+"\u0646\u06D0\u067C\u06D0 \u0685\u062E\u0647"
+"\u0648\u0631\u0648\u0633\u062A\u0647"
+"\u0648\u0631\u0681\u06D0"
+
+
+msgid "Completed events expiry days"
+msgstr "\u067E\u06D0\u069A\u0647 \u0628\u0634\u067E\u0693\u0647 \u06A9\u0693\u0626"
+
+msgid "Days until due date"
+msgstr ""
+"\u062F \u067C\u0627\u06A9\u0644\u06D0"
+"\u0646\u06D0\u067C\u06D0 \u0685\u062E\u0647"
+"\u0648\u0631\u0648\u0633\u062A\u0647"
+"\u0648\u0631\u0681\u06D0"
+
+
+msgid "Search apps"
+msgstr "د پلټنې اپلیکېشنونه"
+
+msgid "Average"
+msgstr "منځنۍ"
+
+msgid "displayName"
+msgstr "displayName"
+
+msgid "This object will be private to yourself"
+msgstr "دا برخه به یوازې په تاسو پورې اړه ولري"
+
+msgid "Synchronization settings"
+msgstr "په هم مهال وخت کې د پېښو د همغږۍ تنظیمات"
+
+msgid "Sum"
+msgstr "جمع کول"
+
+msgid "Unit interval"
+msgstr "د واحد ترمنځ فاصله"
+
+msgid "lastUpdated"
+msgstr "lastUpdated"
+
+msgid "Access settings"
+msgstr "د لاسرسي تنظیمات"
+
+msgid "Percentage"
+msgstr "سلنه"
+
+msgid "Text"
+msgstr "متن"
+
+msgid "Enrollment status"
+msgstr "د نوم ثبتونې څرنګوالۍ یا وضعیت"
+
+msgid "System monitoring settings"
+msgstr "System monitoring settings"
+
+msgid "Manage my apps"
+msgstr "زما پروګرامونه یا اپلیکېشنونه ترتیب کړئ"
+
+msgid "Standard deviation"
+msgstr "معیاري انحراف"
+
+msgid "Interpretations"
+msgstr "شفاهي ژباړې یا تفسیرونه"
+
+msgid "This object will be created with public edit and view rights"
+msgstr "دا برخه به د عامه خلکو د تصحیح او کتنې له حقونو سره رامنځ ته کړای شي"
+
+msgid "displayDescription"
+msgstr "displayDescription"
+
+msgid "Settings"
+msgstr "ترتیبات [ ترتیبات ]"
+
+msgid "Tracked entity instance count"
+msgstr "د تعقیب شوي نهاد د نمونې شمېرل"
+
+msgid "Enrollment count"
+msgstr "د نوم ثبتونې شمېر"
+
+msgid "Edit"
+msgstr "درست یې کړئ"
+
+msgid "Program stage id"
+msgstr "د پروګرام د پړاو یا مرحلې آيي ډي"
+
+msgid "Profile"
+msgstr "مشخصات یاپروفایل"
+
+msgid "Count"
+msgstr "شمېرل"
+
+msgid "About DHIS 2"
+msgstr "د ولسوالۍ د روغتیايي مالوماتو د ۲ سافټوېر (DHIS 2) په هکله"
+
+msgid "Email settings"
+msgstr "د برېښنالیک تنظیمات."
+
+msgid "Appearance settings"
+msgstr "د ظاهرېدو تنظیمات."
+
+msgid "Version"
+msgstr "نسخه"
+
+msgid "Messaging settings"
+msgstr "د پېغامل لېږلو تنظیمات"
+
+msgid "Log out"
+msgstr "له سیسټم څخه ووځئ"
+
+msgid "Import settings"
+msgstr "د واردولو تنظیمات"
+
+msgid "Help"
+msgstr "مرسته"
+
+msgid "Long text"
+msgstr "اوږد متن"
+
+msgid "OAuth2 clients"
+msgstr "د OAuth2 مراجعین"
+
+msgid "Variance"
+msgstr "توپیر"
+
+msgid "Calendar settings"
+msgstr "د کلیز تنظیمات"
+
+msgid "Clone"
+msgstr "نقل یې جوړ کړئ"
+
+msgid "Messages"
+msgstr "پېغامونه"
+
+msgid "Short name"
+msgstr "لنډ نوم [ لنډ - نوم ]"
+
+msgid "General settings"
+msgstr "عمومي تنظیمات"
+
+msgid "Analytics settings"
+msgstr "Analytics settings"
+
+msgid "Server settings"
+msgstr "د سرور تنظیمات"
+
+msgid "Account"
+msgstr "حساب"
+
+msgid "Username"
+msgstr "د کاروونکي نوم [ کاروونکی ]"
+
+msgid "System Settings"
+msgstr "د سیسټم تنظیمات"
+
+msgid "Immunization analysis"
+msgstr "Immunization analysis"
+
+msgid "Browser Cache Cleaner"
+msgstr "د پلټنې پاڼې د ساتنځي پاکوونکی"
+
+msgid "Capture"
+msgstr "Capture"
+
+msgid "TUCANA USERS IMPORTER APP"
+msgstr "TUCANA USERS IMPORTER APP"
+
+msgid "Data Entry"
+msgstr "د مالوماتو (ډاټا) ثبت"
+
+msgid "Data Visualizer"
+msgstr "Data Visualizer"
+
+msgid "Mobile Configuration"
+msgstr "ګرځنده بڼه ورکول"
+
+msgid "Data Quality"
+msgstr "د مالوماتو (ډاټا) کیفیت"
+
+msgid "Tracker Capture"
+msgstr "د پیدا کوونکي ثبت"
+
+msgid "GIS"
+msgstr "جي آيي اېس"
+
+msgid "Function Maintenance"
+msgstr "Function Maintenance"
+
+msgid "Dashboard Classic"
+msgstr "Dashboard Classic"
+
+msgid "Event Visualizer"
+msgstr "د پېښې انځوروونکی"
+
+msgid "Event Reports"
+msgstr "د پېښې اړوند راپورونه"
+
+msgid "App Management"
+msgstr "د اپلیکېشن مدیریت"
+
+msgid "Datastore Management"
+msgstr "Datastore Manager"
+
+msgid "Scheduler"
+msgstr "Scheduler"
+
+msgid "Menu Management"
+msgstr "Menu Management"
+
+msgid "Reports"
+msgstr "د اېن. آر. اېچ. اېم راپورونه"
+
+msgid "BIF"
+msgstr "BIF"
+
+msgid "Interactive Dashboard 2"
+msgstr "Interactive Dashboard 2"
+
+msgid "Dashboard"
+msgstr "د مالوماتو (ډاټا) تحلیلوونکی"
+
+msgid "Pivot Table"
+msgstr "محوري جدول"
+
+msgid "Facility Reconciliation"
+msgstr "Facility Reconciliation"
+
+msgid "WHO Data Quality Tool"
+msgstr "WHO Data Quality Tool"
+
+msgid "Interpretations PSI"
+msgstr "Interpretations PSI"
+
+msgid "Dashboards app"
+msgstr "Dashboards app"
+
+msgid "dAtaZ"
+msgstr "dAtaZ"
+
+msgid "Usage Analytics"
+msgstr "د څېړنو کارول"
+
+msgid "Interpretations"
+msgstr "شفاهي ژباړې"
+
+msgid "Translations"
+msgstr "ژباړې"
+
+msgid "Maintenance"
+msgstr "څارنه"
+
+msgid "Data Administration"
+msgstr "د مالوماتو (ډاټا) تنظیم او اداره"
+
+msgid "interactiveMap"
+msgstr "interactiveMap"
+
+msgid "Maps"
+msgstr "Maps"
+
+msgid "Users"
+msgstr "Users"
+
+msgid "Classic Data Visualizer"
+msgstr "د مالوماتو (ډاټا) ښکاره کوونکی"
+
+msgid "WHO Metadata browser"
+msgstr "WHO Metadata browser"

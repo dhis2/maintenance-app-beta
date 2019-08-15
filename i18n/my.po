@@ -1,0 +1,1741 @@
+
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-15T13:45:50.398Z\n"
+"PO-Revision-Date: 2019-08-15T13:45:50.398Z\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: my\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Pootle-Path: /my/maintenance-app/my.po\n"
+"X-Pootle-Revision: 29879
+"
+
+
+msgid "Aggregate"
+msgstr ""
+"\u1005\u102f\u1015\u1031\u102b\u1004\u103a\u1038\u101b\u"
+"101b\u103e\u102d\u101e\u100a\u103a\u104b"
+
+
+msgid "Category"
+msgstr "category"
+
+msgid "Selected data elements"
+msgstr "Selected Data Elements"
+
+msgid "Selected indicators"
+msgstr ""
+"indicators"
+"\u1000\u102d\u102f\u101b\u103d\u1031\u1038\u1001\u103b\u"
+"101a\u103a\u1015\u102b\u104b"
+
+
+msgid "Available indicators"
+msgstr ""
+"\u101b\u101b\u103e\u102d\u1014\u102d\u102f\u1004\u103a\u"
+"101e\u1031\u102c indicators"
+
+
+msgid "Item deleted successfully"
+msgstr ""
+"Item \u1016\u103b\u1000\u103a\u1001\u103c\u1004\u103a\u1038"
+"\u1021\u1031\u102c\u1004\u103a\u1019\u103c\u1004\u103a\u"
+"1015\u102b\u101e\u100a\u103a\u104b"
+
+
+msgid "Value"
+msgstr "Value"
+
+msgid "Do you want to delete indicator?"
+msgstr "Do you want to delete indicator?"
+
+msgid "Adding indicator failed"
+msgstr "Adding indicator failed"
+
+msgid "Saving indicator failed"
+msgstr "Saving indicator failed"
+
+msgid "Translate"
+msgstr "\u1018\u102c\u101e\u102c\u1015\u103c\u1014\u103a\u101e\u100a\u103a\u104b"
+
+msgid "Please select indicator"
+msgstr ""
+"indicator"
+"\u1000\u102d\u102f\u101b\u103d\u1031\u1038\u1001\u103b\u"
+"101a\u103a\u1015\u102b\u104b"
+
+
+msgid "Category option"
+msgstr "category option"
+
+msgid "Object not deleted because it is associated by objects of type"
+msgstr ""
+"object \u1019\u1016\u103b\u1000\u103a\u1015\u102b\u104b"
+"\u1021\u1018\u101a\u103a\u1000\u103c\u1031\u102c\u1004\u"
+"1037\u103a\u1006\u102d\u102f\u101e\u1031\u102c\u103a"
+"\u104e\u1004\u103a\u1038\u101e\u100a\u103a objects"
+"\u1021\u1019\u103b\u102d\u102f\u1038\u1021\u1005\u102c\u"
+"1038\u1014\u103e\u1004\u1037\u103a"
+"\u1006\u1000\u103a\u1005\u1015\u103a\u1014\u1031\u101e\u"
+"1031\u102c\u1000\u103c\u1031\u102c\u1004\u1037\u103a\u1016"
+"\u103c\u1005\u103a\u101e\u100a\u103a\u104b"
+
+
+msgid "Hide warning"
+msgstr ""
+"\u101e\u1010\u102d\u1015\u1031\u1038\u1001\u103b\u1000\u"
+"103a\u1000\u102d\u102f"
+"\u1016\u103b\u1031\u102c\u1000\u103a\u1011\u102c\u1038\u"
+"101e\u100a\u103a\u104b"
+
+
+msgid "Update Data Element Group Member"
+msgstr ""
+"data element \u1021\u102f\u1015\u103a\u1005\u102f"
+"\u1021\u101e\u1004\u103a\u1038\u101d\u1004\u103a\u1000\u"
+"102d\u102f"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1019\u103d\u"
+"1019\u103a\u1038\u1019\u1036\u1015\u102b\u104b"
+
+
+msgid "Update was successful"
+msgstr ""
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1019\u103d\u"
+"1019\u103a\u1038\u1019\u1036\u1001\u103c\u1004\u103a\u1038"
+"\u1021\u1031\u102c\u1004\u103a\u1019\u103c\u1004\u103a\u"
+"1015\u102b\u101e\u100a\u103a\u104b"
+
+
+msgid "Member of"
+msgstr "\u104f\u1021\u101e\u1004\u103a\u1038\u101d\u1004\u103a"
+
+msgid "Data Element Group Editor"
+msgstr ""
+"data element"
+"\u1021\u102f\u1015\u103a\u1005\u102f\u1015\u103c\u1004\u"
+"103a\u1006\u1004\u103a\u101e\u1030"
+
+
+msgid "Move up"
+msgstr ""
+"\u1021\u1015\u1031\u102b\u103a\u101e\u102d\u102f\u1037"
+"\u101b\u103d\u1031\u1037\u101e\u100a\u103a\u104b"
+
+
+msgid "Move down"
+msgstr ""
+"\u1021\u1031\u102c\u1000\u103a\u101e\u102d\u102f\u1037"
+"\u101b\u103d\u1031\u1037\u101e\u100a\u103a\u104b"
+
+
+msgid "Move to top"
+msgstr ""
+"\u1011\u102d\u1015\u103a\u101e\u102d\u102f\u1037"
+"\u101b\u103d\u1031\u1037\u101e\u100a\u103a\u104b"
+
+
+msgid "Move to bottom"
+msgstr ""
+"\u1021\u1031\u102c\u1000\u103a\u1001\u103c\u1031\u101e\u"
+"102d\u102f\u1037"
+"\u101b\u103d\u1031\u1037\u1015\u102b\u104b"
+
+
+msgid "Category management"
+msgstr ""
+"data element category"
+"\u1005\u102e\u1019\u1036\u1001\u1014\u1037\u103a\u1001\u"
+"103d\u1032\u1001\u103c\u1004\u103a\u1038"
+
+
+msgid "Indicator Group Editor"
+msgstr ""
+"Indicator \u1021\u102f\u1015\u103a\u1005\u102f"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u101e\u1030"
+
+
+msgid "Update Indicator Member"
+msgstr ""
+"Indicator"
+"\u1021\u101e\u1004\u103a\u1038\u101d\u1004\u103a\u1000\u"
+"102d\u102f"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1019\u103d\u"
+"1019\u103a\u1038\u1019\u1036\u101e\u100a\u103a\u104b"
+
+
+msgid "Factor cannot be zero"
+msgstr ""
+"factor \u1019\u103e\u102c"
+"\u101e\u102f\u100a\u1019\u1016\u103c\u1005\u103a\u101b\u"
+"104b"
+
+
+msgid "Aggregation levels"
+msgstr "aggregation levels"
+
+msgid "Available aggregation levels"
+msgstr ""
+"\u101b\u101b\u103e\u102d\u1014\u102d\u102f\u1004\u103a\u"
+"101e\u1031\u102c aggregation levels"
+
+
+msgid "Selected aggregation levels"
+msgstr ""
+"aggregation levels \u1000\u102d\u102f"
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u"
+"102b\u104b"
+
+
+msgid "Remove selected"
+msgstr ""
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1019\u"
+"103e\u102f\u1000\u102d\u102f"
+"\u1016\u101a\u103a\u101b\u103e\u102c\u1038\u1015\u102b\u"
+"104b"
+
+
+msgid "Category combination management"
+msgstr ""
+"data element category"
+"\u1015\u1031\u102b\u1004\u103a\u1038\u1005\u100a\u103a\u"
+"1038\u1019\u103e\u102f"
+"\u1005\u102e\u1019\u1036\u1001\u1014\u1037\u103a\u1001\u"
+"103d\u1032\u1001\u103c\u1004\u103a\u1038"
+
+
+msgid "Category options"
+msgstr "category options"
+
+msgid "Add category option"
+msgstr ""
+"category options"
+"\u1015\u1031\u102b\u1004\u103a\u1038\u1011\u100a\u1037\u"
+"103a\u1015\u102b\u104b"
+
+
+msgid "Please include one or more category options"
+msgstr ""
+"category options \u1010\u1005\u103a\u1001\u102f"
+"(\u101e\u102d\u102f\u1037)"
+"\u1010\u1005\u103a\u1001\u102f\u1015\u102d\u102f\u104d"
+"\u1015\u102b\u101d\u1004\u103a\u1015\u102b\u104b"
+
+
+msgid "Please specify a category option name"
+msgstr ""
+"category option \u1021\u1019\u100a\u103a\u1000\u102d\u102f"
+"\u101e\u1010\u103a\u1019\u103e\u1010\u103a\u1015\u1031\u"
+"1038\u1015\u102b\u104b"
+
+
+msgid "The category option name already exists"
+msgstr ""
+"category option \u1021\u1019\u100a\u103a\u1019\u103e\u102c"
+"\u101b\u103e\u102d\u1015\u103c\u102e\u1038\u101e\u102c\u"
+"1038\u1016\u103c\u1005\u103a\u1014\u1031\u1015\u102b\u101e"
+"\u100a\u103a\u104b"
+
+
+msgid "Data element group set"
+msgstr "Data element \u1021\u102f\u1015\u103a\u1005\u102f \u1021\u1005\u102f"
+
+msgid "Indicator group set"
+msgstr "Indicator \u1021\u102f\u1015\u103a\u1005\u102f \u1021\u1005\u102f"
+
+msgid "Name already exists !"
+msgstr ""
+"\u1021\u1019\u100a\u103a\u101b\u103e\u102d\u1015\u103c\u"
+"102e\u1038\u101e\u102c\u1038\u1016\u103c\u1005\u103a\u1014"
+"\u1031\u1015\u102b\u101e\u100a\u103a\u104b"
+
+
+msgid "Available Data Element Groups"
+msgstr ""
+"\u101b\u101b\u103e\u102d\u1014\u102d\u102f\u1004\u103a\u"
+"101e\u1031\u102c data element"
+"\u1021\u102f\u1015\u103a\u1005\u102f\u1019\u103b\u102c\u"
+"1038"
+
+
+msgid "Selected Data Element Groups"
+msgstr ""
+"data element"
+"\u1021\u102f\u1015\u103a\u1005\u102f\u1019\u103b\u102c\u"
+"1038\u1000\u102d\u102f"
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u"
+"102b\u104b"
+
+
+msgid "Create new data element category combination"
+msgstr ""
+"data element category"
+"\u1015\u1031\u102b\u1004\u103a\u1038\u1005\u100a\u103a\u"
+"1038\u1019\u103e\u102f"
+"\u1021\u101e\u1005\u103a\u1016\u1014\u103a\u1010\u102e\u"
+"1038\u1001\u103c\u1004\u103a\u1038"
+
+
+msgid "Add Data Element Group Set"
+msgstr ""
+"data element \u1021\u102f\u1015\u103a\u1005\u102f"
+"\u1021\u1005\u102f\u1000\u102d\u102f"
+"\u1015\u1031\u102b\u1004\u103a\u1038\u1011\u100a\u1037\u"
+"103a\u1015\u102b\u104b"
+
+
+msgid "Update Data Element Group Set"
+msgstr ""
+"data element \u1021\u102f\u1015\u103a\u1005\u102f"
+"\u1021\u1005\u102f\u1000\u102d\u102f"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1019\u103d\u"
+"1019\u103a\u1038\u1019\u1036\u1015\u102b\u104b"
+
+
+msgid "Add Indicator group set"
+msgstr ""
+"indicator \u1021\u102f\u1015\u103a\u1005\u102f"
+"\u1021\u1005\u102f\u1000\u102d\u102f"
+"\u1015\u1031\u102b\u1004\u103a\u1038\u1011\u100a\u1037\u"
+"103a\u1015\u102b\u104b"
+
+
+msgid "Update Indicator group set"
+msgstr ""
+"indicator \u1021\u102f\u1015\u103a\u1005\u102f"
+"\u1021\u1005\u102f\u1000\u102d\u102f "
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1019\u103d\u"
+"1019\u103a\u1038\u1019\u1036\u1015\u102b\u104b"
+
+
+msgid "Available Indicator groups"
+msgstr ""
+"\u101b\u101b\u103e\u102d\u1014\u102d\u102f\u1004\u103a\u"
+"101e\u1031\u102c indicator"
+"\u1021\u102f\u1015\u103a\u1005\u102f\u1019\u103b\u102c\u"
+"1038"
+
+
+msgid "Selected Indicator groups"
+msgstr ""
+"indicator"
+"\u1021\u102f\u1015\u103a\u1005\u102f\u1019\u103b\u102c\u"
+"1038\u1000\u102d\u102f"
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u"
+"102b\u104b"
+
+
+msgid "Last updated"
+msgstr ""
+"\u1014\u1031\u102c\u1000\u103a\u1006\u102f\u1036\u1038"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1019\u103d\u"
+"1019\u103a\u1038\u1019\u1036\u1001\u103c\u1004\u103a\u1038"
+""
+
+
+msgid "Data element identifier must be a number"
+msgstr ""
+"data element identifier \u1019\u103e\u102c"
+"\u1000\u102d\u1014\u103a\u1038\u1002\u100f\u1014\u103a\u"
+"1038\u101e\u102c"
+"\u1016\u103c\u1005\u103a\u101b\u1019\u100a\u103a\u104b"
+
+
+msgid "Category option combo identifier must be a number"
+msgstr ""
+"category option combo identifier \u1019\u103e\u102c"
+"\u1000\u102d\u1014\u103a\u1038\u1002\u100f\u1014\u103a\u"
+"1038\u101e\u102c"
+"\u1016\u103c\u1005\u103a\u101b\u1019\u100a\u103a\u104b"
+
+
+msgid "Identifier does not reference a data element"
+msgstr "Identifier does not reference a data element"
+
+msgid "Identifier does not reference a category option combo"
+msgstr "Identifier does not reference a category option combo"
+
+msgid "Available data element group sets"
+msgstr ""
+"\u101b\u101b\u103e\u102d\u1014\u102d\u102f\u1004\u103a\u"
+"101e\u1031\u102c data element"
+"\u1021\u102f\u1015\u103a\u1005\u102f"
+"\u1021\u1005\u102f\u1019\u103b\u102c\u1038"
+
+
+msgid "Selected data element group sets"
+msgstr ""
+"data element \u1021\u102f\u1015\u103a\u1005\u102f"
+"\u1021\u1005\u102f\u1019\u103b\u102c\u1038\u1000\u102d\u"
+"102f"
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u"
+"102b\u104b"
+
+
+msgid "Concept name"
+msgstr "concept \u1021\u1019\u100a\u103a"
+
+msgid "Available Groups"
+msgstr ""
+"\u101b\u101b\u103e\u102d\u1014\u102d\u102f\u1004\u103a\u"
+"101e\u1031\u102c"
+"\u1021\u102f\u1015\u103a\u1005\u102f\u1019\u103b\u102c\u"
+"1038"
+
+
+msgid "Selected Groups"
+msgstr ""
+"\u1021\u102f\u1015\u103a\u1005\u102f\u1019\u103b\u102c\u"
+"1038\u1000\u102d\u102f"
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u"
+"102b\u104b"
+
+
+msgid "Assign Groups for Data Element"
+msgstr ""
+"\u1021\u102f\u1015\u103a\u1005\u102f\u1019\u103b\u102c\u"
+"1038\u1000\u102d\u102f data element"
+"\u1021\u1010\u103d\u1000\u103a"
+"\u101e\u1010\u103a\u1019\u103e\u1010\u103a\u1015\u1031\u"
+"1038\u1015\u102b\u104b"
+
+
+msgid "Please select data element"
+msgstr ""
+"data element \u1000\u102d\u102f"
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u"
+"102b\u104b"
+
+
+msgid "Category option renamed successfully"
+msgstr ""
+"category option"
+"\u1021\u1019\u100a\u103a\u1015\u103c\u1004\u103a\u1006\u"
+"1004\u103a\u1001\u103c\u1004\u103a\u1038"
+"\u1015\u103c\u102e\u1038\u1015\u102b\u1015\u103c\u102e\u"
+"104b"
+
+
+msgid "Create new concept"
+msgstr ""
+"concept"
+"\u1021\u101e\u1005\u103a\u1016\u1014\u103a\u1010\u102e\u"
+"1038\u1015\u102b\u104b"
+
+
+msgid "Edit concept"
+msgstr ""
+"concept \u1000\u102d\u102f"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1015\u102b\u"
+"104b"
+
+
+msgid "Edit data element category"
+msgstr ""
+"data element category \u1000\u102d\u102f"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1015\u102b\u"
+"104b"
+
+
+msgid "Adding concept failed"
+msgstr ""
+"concept \u1000\u102d\u102f"
+"\u1015\u1031\u102b\u1004\u103a\u1038\u1011\u100a\u1037\u"
+"103a\u1019\u101b\u1015\u102b\u104b"
+
+
+msgid "Saving concept failed"
+msgstr ""
+"concept \u1000\u102d\u102f"
+"\u101e\u102d\u1019\u103a\u1038\u104d\u1019\u101b\u1015\u"
+"102b\u104b"
+
+
+msgid "Enter alphabet (a-z A-Z), number (0-9) and underscore (_) characters only."
+msgstr ""
+"\u1021\u1000\u1039\u1001\u101b\u102c\u1005\u1009\u103a(%"
+"5Cu1000 \u1019\u103e \u1021)\u104a"
+"\u1000\u102d\u1014\u103a\u1038\u1002\u100f\u1014\u103a\u"
+"1038 (\u1040 \u1019\u103e \u1049)"
+"\u1014\u103e\u1004\u1037\u103a underscore (_)"
+"\u1005\u101e\u100a\u1037\u103a\u1010\u102d\u102f\u1037\u"
+"1000\u102d\u102f\u101e\u102c"
+"\u101b\u102d\u102f\u1000\u103a\u1011\u100a\u1037\u103a\u"
+"1015\u102b\u104b"
+
+
+msgid "Concept management"
+msgstr ""
+"concept"
+"\u1005\u102e\u1019\u1036\u1001\u1014\u1037\u103a\u1001\u"
+"103d\u1032\u1001\u103c\u1004\u103a\u1038"
+
+
+msgid "Concept"
+msgstr "concept"
+
+msgid "Selected name"
+msgstr ""
+"\u1021\u1019\u100a\u103a\u101b\u103d\u1031\u1038\u1001\u"
+"103b\u101a\u103a\u1015\u102b\u104b"
+
+
+msgid "Update category option"
+msgstr ""
+"category option \u1000\u102d\u102f"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1019\u103d\u"
+"1019\u103a\u1038\u1019\u1036\u1015\u102b\u104b"
+
+
+msgid "Move selected"
+msgstr ""
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1011\u"
+"102c\u1038\u101e\u1031\u102c"
+"\u1021\u101b\u102c\u1019\u103b\u102c\u1038\u1000\u102d\u"
+"102f \u101b\u103d\u103e\u1031\u1037\u1015\u102b\u104b"
+
+
+msgid "Number type"
+msgstr ""
+"\u1000\u102d\u1014\u103a\u1038\u1002\u100f\u1014\u103a\u"
+"1038\u1021\u101b\u1031\u1010\u103d\u1000\u103a"
+
+
+msgid "Integer"
+msgstr "\u1000\u102d\u1014\u103a\u1038\u1002\u100f\u1014\u103a\u1038"
+
+msgid "Edit data element category combination"
+msgstr ""
+"data element category"
+"\u1015\u1031\u102b\u1004\u103a\u1038\u1005\u100a\u103a\u"
+"1038\u1019\u103e\u102f\u1000\u102d\u102f"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1015\u102b\u"
+"104b"
+
+
+msgid "Positive Integer"
+msgstr ""
+"\u1021\u1015\u1031\u102b\u1004\u103a\u1038"
+"\u1000\u102d\u1014\u103a\u1038\u1002\u100f\u1014\u103a\u"
+"1038"
+
+
+msgid "Negative Integer"
+msgstr ""
+"\u1021\u1014\u102f\u1010\u103a"
+"\u1000\u102d\u1014\u103a\u1038\u1002\u100f\u1014\u103a\u"
+"1038"
+
+
+msgid "View 1"
+msgstr "\u1019\u103c\u1004\u103a\u1000\u103d\u1004\u103a\u1038 \u1041"
+
+msgid "View 2"
+msgstr "\u1019\u103c\u1004\u103a\u1000\u103d\u1004\u103a\u1038 \u1042"
+
+msgid "Store zero data values"
+msgstr ""
+"data"
+"\u1010\u1014\u103a\u1016\u102d\u102f\u1038\u1017\u101c\u"
+"102c\u1000\u102d\u102f"
+"\u101e\u102d\u1019\u103a\u1038\u101e\u100a\u103a\u104b"
+
+
+msgid "Form name"
+msgstr ""
+"\u1021\u1019\u100a\u103a\u1015\u102f\u1036\u1005\u1036\u"
+"1021\u1019\u100a\u103a\u1015\u102f\u1036\u1005\u1036"
+
+
+msgid "Compulsory"
+msgstr "compulsory"
+
+msgid "Select group"
+msgstr ""
+"\u1021\u102f\u1015\u103a\u1005\u102f\u1000\u102d\u102f"
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u"
+"102b\u104b"
+
+
+msgid "Category combination"
+msgstr ""
+"category"
+"\u1015\u1031\u102b\u1004\u103a\u1038\u1005\u100a\u103a\u"
+"1038\u1019\u103e\u102f"
+
+
+msgid "Option set"
+msgstr "option \u1021\u1005\u102f"
+
+msgid "Please select"
+msgstr "\u101b\u103d\u1031\u1038\u1015\u1031\u1038\u1015\u102b\u104b"
+
+msgid "Create new data element category option"
+msgstr ""
+"data element category"
+"\u1015\u1031\u102b\u1004\u103a\u1038\u1005\u100a\u103a\u"
+"1038\u1019\u103e\u102f"
+"\u1021\u101e\u1005\u103a\u1016\u1014\u103a\u1010\u102e\u"
+"1038\u1001\u103c\u1004\u103a\u1038"
+
+
+msgid "Data element category combo details"
+msgstr ""
+"data element category combo"
+"\u1021\u101e\u1031\u1038\u1005\u102d\u1010\u103a"
+
+
+msgid "Edit data element category option"
+msgstr ""
+"data element category"
+"\u1015\u1031\u102b\u1004\u103a\u1038\u1005\u100a\u103a\u"
+"1038\u1019\u103e\u102f\u1000\u102d\u102f"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1015\u102b\u"
+"104b"
+
+
+msgid "Category combination"
+msgstr ""
+"category \u1019\u103b\u102c\u1038"
+"\u1015\u1031\u102b\u1004\u103a\u1038\u1005\u100a\u103a\u"
+"1038\u1001\u103c\u1004\u103a\u1038"
+
+
+msgid "Data element category"
+msgstr "data element category"
+
+msgid "Data element category combination"
+msgstr ""
+"data element category"
+"\u1015\u1031\u102b\u1004\u103a\u1038\u1005\u100a\u103a\u"
+"1038\u1019\u103e\u102f"
+
+
+msgid "Select"
+msgstr "\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u102b\u104b"
+
+msgid "Data element"
+msgstr "Data element"
+
+msgid "Data element group"
+msgstr "data element \u1021\u102f\u1015\u103a\u1005\u102f"
+
+msgid "Data element groups"
+msgstr "data element \u1021\u102f\u1015\u103a\u1005\u102f\u1019\u103b\u102c\u1038"
+
+msgid "Use of category with an empty option is not allowed!"
+msgstr ""
+"option \u1019\u1015\u102b\u101e\u1031\u102c category"
+"\u1021\u101e\u102f\u1036\u1038\u1015\u103c\u102f\u1001\u"
+"103c\u1004\u103a\u1038\u1000\u102d\u102f"
+"\u1001\u103d\u1004\u1037\u103a\u1019\u1015\u103c\u102f\u"
+"1015\u102b\u104b"
+
+
+msgid "Indicator"
+msgstr "indicator"
+
+msgid "Indicator group"
+msgstr "indicator \u1021\u102f\u1015\u103a\u1005\u102f"
+
+msgid "Indicator groups"
+msgstr "indicator \u1021\u102f\u1015\u103a\u1005\u102f\u1019\u103b\u102c\u1038"
+
+msgid "Create new data element"
+msgstr ""
+"data element"
+"\u1021\u101e\u1005\u103a\u1016\u1014\u103a\u1010\u102e\u"
+"1038\u1015\u102b\u104b"
+
+
+msgid "Domain type"
+msgstr "domain \u1021\u1019\u103b\u102d\u102f\u1038\u1021\u1005\u102c\u1038"
+
+msgid "Date"
+msgstr "\u1014\u1031\u1037\u1005\u103d\u1032"
+
+msgid "Create new data element group"
+msgstr ""
+"data element group"
+"\u1021\u101e\u1005\u103a\u1016\u1014\u103a\u1010\u102e\u"
+"1038\u1015\u102b\u104b"
+
+
+msgid "Group members"
+msgstr "Group Members"
+
+msgid "Available data elements"
+msgstr "Available Data Elements"
+
+msgid "Number of category options"
+msgstr "category options \u1021\u101b\u1031\u1010\u103d\u1000\u103a"
+
+msgid "Create new indicator"
+msgstr ""
+"indicator"
+"\u1021\u101e\u1005\u103a\u1016\u1014\u103a\u1010\u102e\u"
+"1038\u1001\u103c\u1004\u103a\u1038"
+
+
+msgid "Create new indicator group"
+msgstr ""
+"indicator group"
+"\u1021\u101e\u1005\u103a\u1016\u1014\u103a\u1010\u102e\u"
+"1038\u1001\u103c\u1004\u103a\u1038"
+
+
+msgid "Create new indicator type"
+msgstr ""
+"indicator"
+"\u1021\u1019\u103b\u102d\u102f\u1038\u1021\u1005\u102c\u"
+"1038"
+"\u1021\u101e\u1005\u103a\u1016\u1014\u103a\u1010\u102e\u"
+"1038\u1001\u103c\u1004\u103a\u1038"
+
+
+msgid "Factor"
+msgstr "factor"
+
+msgid "Data element management"
+msgstr ""
+"data element"
+"\u1005\u102e\u1019\u1036\u1001\u1014\u1037\u103a\u1001\u"
+"103d\u1032\u1001\u103c\u1004\u103a\u1038"
+
+
+msgid "Data element group management"
+msgstr ""
+"data element group"
+"\u1005\u102e\u1019\u1036\u1001\u1014\u1037\u103a\u1001\u"
+"103d\u1032\u1001\u103c\u1004\u103a\u1038"
+
+
+msgid "Number of members"
+msgstr ""
+"\u1021\u101e\u1004\u103a\u1038\u101d\u1004\u103a"
+"\u1021\u101b\u1031\u1010\u103d\u1000\u103a\u1019\u103b\u"
+"102c\u1038"
+
+
+msgid "Number of categories"
+msgstr "categories \u1021\u101b\u1031\u1010\u103d\u1000\u103a"
+
+msgid "Indicator management"
+msgstr ""
+"Indicator"
+"\u1005\u102e\u1019\u1036\u1001\u1014\u1037\u103a\u1001\u"
+"103d\u1032\u1001\u103c\u1004\u103a\u1038"
+
+
+msgid "Indicator group management"
+msgstr ""
+"Indicator group"
+"\u1005\u102e\u1019\u1036\u1001\u1014\u1037\u103a\u1001\u"
+"103d\u1032\u1001\u103c\u1004\u103a\u1038"
+
+
+msgid "Indicator type management"
+msgstr ""
+"Indicator type"
+"\u1005\u102e\u1019\u1036\u1001\u1014\u1037\u103a\u1001\u"
+"103d\u1032\u1001\u103c\u1004\u103a\u1038"
+
+
+msgid "Edit data element"
+msgstr ""
+"data element \u1000\u102d\u102f"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1015\u102b\u"
+"104b"
+
+
+msgid "Edit data element group"
+msgstr ""
+"data element group \u1000\u102d\u102f"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1015\u102b\u"
+"104b"
+
+
+msgid "Edit indicator"
+msgstr ""
+"Indicator \u1000\u102d\u102f"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1015\u102b\u"
+"104b"
+
+
+msgid "Edit indicator group"
+msgstr ""
+"Indicator group\u1000\u102d\u102f"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1015\u102b\u"
+"104b"
+
+
+msgid "Edit indicator type"
+msgstr ""
+"Indicator type \u1000\u102d\u102f"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1015\u102b\u"
+"104b"
+
+
+msgid "Edit numerator"
+msgstr ""
+"numerator \u1000\u102d\u102f"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1015\u102b\u"
+"104b"
+
+
+msgid "Edit denominator"
+msgstr ""
+"denominator \u1000\u102d\u102f"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1015\u102b\u"
+"104b"
+
+
+msgid "Sort"
+msgstr ""
+"\u1019\u103b\u102d\u102f\u1038\u1010\u1030\u1001\u103c\u"
+"1004\u103a\u1038"
+"\u1005\u102f\u1015\u1031\u102b\u1004\u103a\u1038\u101e\u"
+"100a\u103a\u104b"
+
+
+msgid "Are you sure you want to delete this data element group?"
+msgstr ""
+"\u1024 data element group \u1000\u102d\u102f"
+"\u1016\u103b\u1000\u103a\u1001\u103b\u1004\u103a\u1010\u"
+"101a\u103a\u1006\u102d\u102f\u1010\u102c"
+"\u101e\u1031\u1001\u103b\u102c\u1015\u102b\u101e\u101c\u"
+"102c\u1038\u104b"
+
+
+msgid "The name is already in use. Please choose a different name."
+msgstr ""
+"\u1021\u101e\u102f\u1036\u1038\u1015\u103c\u102f\u1014\u"
+"1031\u1006\u1032 \u1021\u1019\u100a\u103a"
+
+
+msgid "The code is already in use. Please choose a different code."
+msgstr ""
+"data element"
+"\u1000\u102f\u1010\u103a\u1014\u1036\u1015\u102b\u1010\u"
+"103a\u1019\u103e\u102c"
+"\u1021\u101e\u102f\u1036\u1038\u1015\u103c\u102f\u1015\u"
+"103c\u102e\u1038\u101e\u102c\u1038\u1016\u103c\u1005\u103a"
+"\u1014\u1031\u1015\u102b\u101e\u100a\u103a\u104b"
+"\u1021\u1001\u103c\u102c\u1038data element"
+"\u1000\u102f\u1010\u103a\u1014\u1036\u1015\u102b\u1010\u"
+"103a\u1000\u102d\u102f"
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u"
+"102b\u104b"
+
+
+msgid "The short name is already in use. Please choose a different short name"
+msgstr ""
+"\u1021\u1019\u100a\u103a\u1021\u1010\u102d\u102f\u1019\u"
+"103e\u102c"
+"\u1021\u101e\u102f\u1036\u1038\u1015\u103c\u102f\u1015\u"
+"103c\u102e\u1038\u101e\u102c\u1038\u1016\u103c\u1005\u103a"
+"\u1014\u1031\u1015\u102b\u101e\u100a\u103a\u104b"
+"\u1021\u1001\u103c\u102c\u1038\u1021\u1019\u100a\u103a\u"
+"1021\u1010\u102d\u102f\u1000\u102d\u102f"
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u"
+"102b\u104b"
+
+
+msgid "Everything is OK"
+msgstr ""
+"\u1021\u1031\u102c\u1004\u103a\u1019\u103c\u1004\u103a\u"
+"1015\u102b\u101e\u100a\u103a\u104b"
+
+
+msgid "Create new data element category"
+msgstr ""
+"data element category"
+"\u1021\u101e\u1005\u103a\u1016\u1014\u103a\u1010\u102e\u"
+"1038\u1015\u102b\u104b"
+
+
+msgid "Selected categories"
+msgstr ""
+"categories"
+"\u1000\u102d\u102f\u101b\u103d\u1031\u1038\u1001\u103b\u"
+"101a\u103a\u1015\u102b\u104b"
+
+
+msgid "Multiply"
+msgstr "\u1019\u103c\u1031\u102c\u1000\u103a\u101e\u100a\u103a\u104b"
+
+msgid " Divide"
+msgstr "Divide"
+
+msgid " Plus"
+msgstr "Plus"
+
+msgid " Minus"
+msgstr "Minus"
+
+msgid "Number of days"
+msgstr ""
+"\u1014\u1031\u1037\u1005\u103d\u1032\u1021\u101b\u1031\u"
+"1010\u103d\u1000\u103a"
+
+
+msgid "Calculated"
+msgstr "\u1010\u103d\u1000\u103a\u1001\u103b\u1000\u103a\u101e\u100a\u103a\u104b"
+
+msgid "Available Data Elements"
+msgstr ""
+"\u101b\u101b\u103e\u102d\u1014\u102d\u102f\u1004\u103a\u"
+"101e\u1031\u102c data elements"
+
+
+msgid "Selected Data Elements"
+msgstr ""
+"data elements"
+"\u1000\u102d\u102f\u101b\u103d\u1031\u1038\u1001\u103b\u"
+"101a\u103a\u1015\u102b\u104b"
+
+
+msgid "Add selected"
+msgstr ""
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1011\u"
+"102c\u1038\u101e\u100a\u103a\u1019\u103b\u102c\u1038\u1000"
+"\u102d\u102f"
+"\u1015\u1031\u102b\u1004\u103a\u1038\u1011\u100a\u1037\u"
+"103a\u1015\u102b\u104b"
+
+
+msgid "Remove all"
+msgstr ""
+"lock"
+"\u1021\u102c\u1038\u101c\u102f\u1036\u1038\u1000\u102d\u"
+"102f"
+"\u1016\u101a\u103a\u101b\u103e\u102c\u1038\u1015\u102b\u"
+"104b"
+
+
+msgid "Available categories"
+msgstr ""
+"\u101b\u101b\u103e\u102d\u1014\u102d\u102f\u1004\u103a\u"
+"101e\u1031\u102c categories"
+
+
+msgid "Create new data dictionary"
+msgstr ""
+"data dictionary \u1021\u101e\u1005\u103a\u1000\u102d\u102f"
+"\u1016\u1014\u103a\u1010\u102e\u1038\u1015\u102b\u104b"
+
+
+msgid "Region"
+msgstr "\u1021\u101b\u1015\u103a\u1012\u1031\u101e"
+
+msgid "Current"
+msgstr "\u101c\u1000\u103a\u101b\u103e\u102d"
+
+msgid " The selected organisation unit will be moved to root"
+msgstr "The selected organisation unit will be moved to root"
+
+msgid "Expression is empty"
+msgstr ""
+"\u1016\u1031\u102c\u103a\u1015\u103c\u1001\u103b\u1000\u"
+"103a \u1019\u101b\u103e\u102d\u1015\u102b\u104b"
+
+
+msgid "All"
+msgstr ""
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u"
+"102b/ \u1021\u102c\u1038\u101c\u102f\u1036\u1038"
+
+
+msgid "Not selected"
+msgstr ""
+"\u1019\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u"
+"1011\u102c\u1038\u101e\u1031\u102c"
+
+
+msgid "Select the organisation unit to keep"
+msgstr ""
+"\u101e\u102d\u1019\u103a\u1038\u1006\u100a\u103a\u1038\u"
+"101b\u1014\u103a"
+"\u1021\u1016\u103d\u1032\u1037\u1021\u1005\u100a\u103a\u"
+"1038\u101a\u1030\u1014\u1005\u103a\u1000\u102d\u102f"
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u"
+"102b\u104b"
+
+
+msgid "Merge"
+msgstr "\u1015\u1031\u102b\u1004\u103a\u1038\u1005\u100a\u103a\u1038\u1015\u102b"
+
+msgid "Merging"
+msgstr "\u1015\u1031\u102b\u1004\u103a\u1038\u1005\u1015\u103a\u1019\u103e\u102f"
+
+msgid "Move all"
+msgstr ""
+"\u1021\u102c\u1038\u101c\u102f\u1036\u1038\u1000\u102d\u"
+"102f \u101b\u103d\u103e\u1031\u1037\u1015\u102b\u104b"
+
+
+msgid "Clear data set completeness"
+msgstr ""
+"dataset"
+"\u1015\u103c\u100a\u1037\u103a\u1005\u102f\u1036\u1019\u"
+"103e\u102f\u1000\u102d\u102f"
+"\u101b\u103e\u1004\u103a\u1038\u1015\u102b\u104b"
+
+
+msgid "Start date"
+msgstr ""
+"\u1005\u1010\u1004\u103a\u101e\u100a\u1037\u103a\u101b\u"
+"1000\u103a\u1005\u103d\u1032"
+
+
+msgid "End date"
+msgstr ""
+"\u1015\u103c\u102e\u1038\u1006\u102f\u1036\u1038\u101e\u"
+"100a\u1037\u103a\u101b\u1000\u103a\u1005\u103d\u1032"
+
+
+msgid "Data browser"
+msgstr "Data Browser"
+
+msgid "Please choose a period type"
+msgstr ""
+"\u1000\u102c\u101c\u1021\u1019\u103b\u102d\u102f\u1038\u"
+"1021\u1005\u102c\u1038\u1000\u102d\u102f"
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u"
+"102b\u104b"
+
+
+msgid "Organisation unit group set structure normalized"
+msgstr "Organisation unit groupset structure normalized"
+
+msgid "earliest"
+msgstr "\u1021\u1005\u1031\u102c\u1006\u102f\u1036\u1038"
+
+msgid "latest"
+msgstr "\u1014\u1031\u102c\u1000\u103a\u1006\u102f\u1036\u1038"
+
+msgid "Loading"
+msgstr "Loading"
+
+msgid "SQL View Management"
+msgstr "Sql View Management"
+
+msgid "SQL View"
+msgstr "Sql View"
+
+msgid "Add new SQL view"
+msgstr "Add new Sql view"
+
+msgid "Update SQL view"
+msgstr "Update Sql view"
+
+msgid "SQL view table with name"
+msgstr "Sql view table with name"
+
+msgid "Done"
+msgstr "Done"
+
+msgid "Person data archive"
+msgstr "Beneficiary Data Archive"
+
+msgid ""
+"Archive person data which is not currently relevant to your"
+"system in order to improve performance. Data can also be"
+"unarchived."
+msgstr ""
+"Archive beneficiary data which is not currently relevant to"
+"your system in order to improve performance. Data can also"
+"be unarchived."
+
+
+msgid "active"
+msgstr "running"
+
+msgid "not started"
+msgstr "Not started"
+
+msgid "Aggregated data set completeness"
+msgstr ""
+"dataset"
+"\u1015\u103c\u100a\u1037\u103a\u1005\u102f\u1036\u1019\u"
+"103e\u102f\u1000\u102d\u102f"
+"\u101b\u103e\u1004\u103a\u1038\u1015\u102b\u104b"
+
+
+msgid "Periods"
+msgstr ""
+"\u1021\u1001\u103b\u102d\u1014\u103a\u1000\u102c\u101c\u"
+"1019\u103b\u102c\u1038"
+
+
+msgid "Data values"
+msgstr "data \u1010\u1014\u103a\u1016\u102d\u102f\u1038\u1019\u103b\u102c\u1038"
+
+msgid "Number of objects"
+msgstr ""
+"\u1021\u101b\u102c\u101d\u1010\u1039\u1011\u102f\u1019\u"
+"103b\u102c\u1038"
+"\u1021\u101b\u1031\u1021\u1010\u103d\u1000\u103a"
+
+
+msgid "From date"
+msgstr "\u1014\u1031\u1037\u1005\u103d\u1032 \u1019\u103e"
+
+msgid "To date"
+msgstr "\u1014\u1031\u1037\u1005\u103d\u1032 \u101e\u102d\u102f\u1037"
+
+msgid "Select mode"
+msgstr ""
+"mode \u1000\u102d\u102f"
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u"
+"102b\u104b"
+
+
+msgid "Select parent organisation unit"
+msgstr ""
+"\u1015\u1004\u103a\u1019\u1021\u1016\u103d\u1032\u1037\u"
+"1021\u1005\u100a\u103a\u1038\u101a\u1030\u1014\u1005\u103a"
+"\u1000\u102d\u102f"
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u"
+"102b\u104b"
+
+
+msgid "No data found"
+msgstr "data \u1019\u1010\u103d\u1031\u1037\u1015\u102b\u104b"
+
+msgid "Select Period Type"
+msgstr ""
+"\u1000\u102c\u101c\u1021\u1019\u103b\u102d\u102f\u1038\u"
+"1021\u1005\u102c\u1038\u1000\u102d\u102f"
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u"
+"102b\u104b"
+
+
+msgid "Period type"
+msgstr ""
+"\u1000\u102c\u101c\u1021\u1019\u103b\u102d\u102f\u1038\u"
+"1021\u1005\u102c\u1038"
+
+
+msgid "Data Integrity"
+msgstr "data Integrity"
+
+msgid "Data elements without a data set"
+msgstr ""
+"data set \u1010\u1005\u103a\u1001\u102f\u1019\u103e"
+"\u1019\u1015\u102b\u1040\u1004\u103a\u101e\u1031\u102c data"
+"element \u1019\u103b\u102c\u1038"
+
+
+msgid "Data elements without groups"
+msgstr ""
+"group"
+"\u1019\u103b\u102c\u1038\u1019\u1015\u102b\u1040\u1004\u"
+"103a\u101e\u1031\u102c data element"
+"\u1019\u103b\u102c\u1038"
+
+
+msgid "Please select at least one option"
+msgstr ""
+"\u1021\u1014\u100a\u103a\u1038\u1006\u102f\u1036\u1038"
+"option \u1010\u1005\u103a\u1001\u102f\u1000\u102d\u102f"
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u"
+"102b\u104b"
+
+
+msgid " Period"
+msgstr "Period"
+
+msgid "Performing maintenance"
+msgstr ""
+"maintenance"
+"\u101c\u102f\u1015\u103a\u1006\u1031\u102c\u1004\u103a\u"
+"1014\u1031\u1001\u103c\u1004\u103a\u1038"
+
+
+msgid "Found"
+msgstr "\u101b\u103e\u102c\u1010\u103d\u1031\u1037\u101e\u100a\u103a\u104b"
+
+msgid "values"
+msgstr "\u1010\u1014\u103a\u1016\u102d\u102f\u1038\u1019\u103b\u102c\u1038"
+
+msgid ""
+"Archive person data which is not currently relevant to your"
+"system. Data can also be unarchived."
+msgstr ""
+"Archive beneficiary data which is not currently relevant to"
+"your system. Data can also be unarchived."
+
+
+msgid "Add data set"
+msgstr "Add dataset"
+
+msgid "Data set details"
+msgstr "Dataset Details"
+
+msgid "Multi-organisation unit entry details"
+msgstr "MultiOrg Data set details"
+
+msgid "Please select a data set"
+msgstr "Please select a dataset"
+
+msgid "Assign to organisation units"
+msgstr "Assign dataset to organisation units"
+
+msgid "Assign data set to organisation units"
+msgstr "Assign dataset to organisation units for registering"
+
+msgid "Edit data set"
+msgstr "Edit dataset"
+
+msgid "Are you sure you want to delete this data set?"
+msgstr "Are you sure you want to delete this dataset?"
+
+msgid "Data Set"
+msgstr "Dataset"
+
+msgid "Select data set"
+msgstr "Select dataset"
+
+msgid "Data Set Section"
+msgstr "Dataset Section"
+
+msgid "Data set management"
+msgstr "Dataset management"
+
+msgid "Data set section management"
+msgstr "Dataset Section management"
+
+msgid ""
+"Assign data sets to organisation units in a grid based"
+"layout for faster operations when working with a high number"
+"of items."
+msgstr ""
+"Assign data sets to organisation units in a grid based"
+"layot for faster operations when working with a high number"
+"of items."
+
+
+msgid "Data Set Assignment Editor"
+msgstr "Dataset Assignment Editor"
+
+msgid "Please select data set and category combination"
+msgstr "Please select a dataset/category combo"
+
+msgid "No"
+msgstr "Nr"
+
+msgid " Right brackets"
+msgstr "Right brackets"
+
+msgid "Follow-Up Analysis"
+msgstr "Follow-Up Analysis"
+
+msgid "More than 500 values found, please narrow the search to see all"
+msgstr ""
+"More than 500 values found, please fix the violations or"
+"narrow the search to see all"
+
+
+msgid "Please specify a name"
+msgstr "Please specify a name"
+
+msgid " Please specify a start date"
+msgstr "Please specify a start date"
+
+msgid " Please specify an ending date"
+msgstr "Please specify an ending date"
+
+msgid "End date cannot be before Start date"
+msgstr "End date can not be before start date"
+
+msgid " Are you sure you want to delete the validation rule?"
+msgstr "Are you sure you want to delete the validation rule?"
+
+msgid " Are you sure you want to delete the validation rule group?"
+msgstr "Are you sure you want to delete the validation rule group?"
+
+msgid " Edit left side"
+msgstr "Edit left side"
+
+msgid " Edit right side"
+msgstr "Edit right side"
+
+msgid " Select operator"
+msgstr "Select operator"
+
+msgid " Left"
+msgstr "Left"
+
+msgid " Right"
+msgstr "Right"
+
+msgid " Textual expression description"
+msgstr "Textual expression description"
+
+msgid " Edit validation rule"
+msgstr "Edit validation rule"
+
+msgid " Validation rule"
+msgstr "Validation Rule"
+
+msgid " Run validation"
+msgstr "Run validation"
+
+msgid "Organisation unit"
+msgstr "OrganisationUnit"
+
+msgid " Source"
+msgstr "Source"
+
+msgid " Validation rule group"
+msgstr "Validation Rule Group"
+
+msgid " All validation rules"
+msgstr "All validation rules"
+
+msgid " Validation passed successfully"
+msgstr "Validation passed successfully"
+
+msgid "Group by"
+msgstr "Group By"
+
+msgid "Hide details"
+msgstr ""
+"\u1021\u101e\u1031\u1038\u1005\u102d\u1010\u103a\u1000\u"
+"102d\u102f \u101d\u103e\u1000\u103a\u1015\u102b\u104b"
+
+
+msgid ""
+"Create, modify and view program attributes. A program can"
+"have any number of attributes."
+msgstr ""
+"Create, modify and view Program attributes. A program can"
+"have any number of attributes."
+
+
+msgid ""
+"Set the Excel XML template file used for automatically"
+"importing tracked entity instance data."
+msgstr ""
+"Set the Excel XML template file used for automatically"
+"importing beneficiary data."
+
+
+msgid "Available programs"
+msgstr "Available Program"
+
+msgid "Selected programs"
+msgstr "Selected Program"
+
+msgid "Are you sure you want to delete this validation criteria?"
+msgstr "Are you sure you want to delete validation criteria ?"
+
+msgid "Are you sure you want to delete relationship type?"
+msgstr ""
+"relationship"
+"\u1021\u1019\u103b\u102d\u102f\u1038\u1021\u1005\u102c\u"
+"1038\u1000\u102d\u102f"
+"\u1016\u103b\u1000\u103a\u1001\u103b\u1004\u103a\u1010\u"
+"101a\u103a\u1006\u102d\u102f\u1010\u102c"
+"\u101e\u1031\u1001\u103b\u102c\u1015\u102b\u101e\u101c\u"
+"102c\u1038\u104b"
+
+
+msgid "This data element is inserted in form"
+msgstr "This data element is inserted into form"
+
+msgid "Option combination"
+msgstr "Option combo"
+
+msgid "Select program"
+msgstr "Select Program"
+
+msgid "Deleted program attribute option successfully"
+msgstr "Delete program attribute option successfully."
+
+msgid "Are you sure you want to delete this program data entry form?"
+msgstr "Do you want to delete program data entry ?"
+
+msgid "DOB type"
+msgstr "DOB Type"
+
+msgid "Trans-gender"
+msgstr "Transgender"
+
+msgid "Edit relationship type"
+msgstr ""
+"relationship"
+"\u1021\u1019\u103b\u102d\u102f\u1038\u1021\u1005\u102c\u"
+"1038\u1000\u102d\u102f"
+"\u1015\u103c\u1004\u103a\u1006\u1004\u103a\u1015\u102b\u"
+"104b"
+
+
+msgid "Before or equal to current date"
+msgstr "Before or equals to current date"
+
+msgid "After or equal to current date"
+msgstr "After or equals to current date"
+
+msgid "Equal to"
+msgstr "\u100a\u102e\u1019\u103b\u103e\u101e\u100a\u103a\u104b"
+
+msgid "Create new relationship type"
+msgstr ""
+"relationship"
+"\u1021\u1019\u103b\u102d\u102f\u1038\u1021\u1005\u102c\u"
+"1038\u1021\u101e\u1005\u103a\u1000\u102d\u102f"
+"\u1016\u1014\u103a\u1010\u102e\u1038\u1015\u102b\u104b"
+
+
+msgid "Before or equal to due date"
+msgstr "Before or equals to due date"
+
+msgid "After or equal to due date"
+msgstr "After or equals to due date"
+
+msgid "In range due date"
+msgstr "In range Due date"
+
+msgid "No data elements of type date in the selected program stage"
+msgstr "No data elements with date-type in the selected program stage"
+
+msgid "Shown on reports"
+msgstr "Shown on reports"
+
+msgid "Relationship type management"
+msgstr ""
+"Relationship"
+"\u1021\u1019\u103b\u102d\u102f\u1038\u1021\u1005\u102c\u"
+"1038"
+"\u1005\u102e\u1019\u1036\u1001\u1014\u1037\u103a\u1001\u"
+"103d\u1032\u1001\u103c\u1004\u103a\u1038"
+
+
+msgid "Filter by data set"
+msgstr "Filter by dataset"
+
+msgid "or"
+msgstr "\u101e\u102d\u102f\u1037\u1019\u101f\u102f\u1010\u103a"
+
+msgid "Value must be an integer"
+msgstr ""
+"\u1010\u1014\u103a\u1016\u102d\u102f\u1038\u101e\u100a\u"
+"103a"
+"\u1000\u102d\u1014\u103a\u1038\u1002\u100f\u1014\u103a\u"
+"1038\u101e\u102c"
+"\u1016\u103c\u1005\u103a\u101b\u1019\u100a\u103a\u104b"
+
+
+msgid "Close"
+msgstr "\u1015\u102d\u1010\u103a\u1015\u102b\u104b"
+
+msgid "Value type"
+msgstr ""
+"\u1010\u1014\u103a\u1016\u102d\u102f\u1038\u1021\u1019\u"
+"103b\u102d\u102f\u1038\u1021\u1005\u102c\u1038"
+
+
+msgid "Greater than"
+msgstr "\u1011\u1000\u103a\u1000\u103c\u102e\u1038\u101e\u100a\u103a\u104b"
+
+msgid "Value must be a positive number"
+msgstr ""
+"\u1010\u1014\u103a\u1016\u102d\u102f\u1038\u101e\u100a\u"
+"103a"
+"\u1021\u1015\u1031\u102b\u1004\u103a\u1038\u1000\u102d\u"
+"1014\u103a\u1038\u101e\u102c"
+"\u1016\u103c\u1005\u103a\u101b\u1019\u100a\u103a\u104b"
+
+
+msgid "Greater than or equal to"
+msgstr "Greater Than or Equal"
+
+msgid "Please select a program"
+msgstr ""
+"program \u1010\u1005\u103a\u1001\u102f\u1000\u102d\u102f"
+"\u101b\u103d\u1031\u1038\u1001\u103b\u101a\u103a\u1015\u"
+"102b\u104b"
+
+
+msgid "Assign program to organisation units"
+msgstr "Assign program to organisation units\t"
+
+msgid "Number of data elements to be collected"
+msgstr "Number of DataElements to be collected"
+
+msgid "Adding program stage failed"
+msgstr "Adding Program Stage Failed"
+
+msgid " Define registration form"
+msgstr "Define registration form"
+
+msgid "Updating program stage failed"
+msgstr "Updating Program Stage Failed"
+
+msgid "Less than"
+msgstr "\u1021\u1031\u102c\u1000\u103a\u1004\u101a\u103a\u101e\u100a\u103a\u104b"
+
+msgid "Program stage details"
+msgstr "Details of Program Stage"
+
+msgid "Order in program"
+msgstr "Order in Program"
+
+msgid "Are you sure you want to delete this program?"
+msgstr "Are you sure you want to delete this program ?"
+
+msgid "Less than or equal to"
+msgstr "Less Than or Equal"
+
+msgid "Data entry form management for program stage"
+msgstr "Data entry form management for Program stage"
+
+msgid "Group"
+msgstr "\u1021\u102f\u1015\u103a\u1005\u102f"
+
+msgid "This name is already registered"
+msgstr ""
+"\u1021\u1019\u100a\u103a\u101e\u100a\u103a"
+"\u1021\u101e\u102f\u1036\u1038\u1015\u103c\u102f\u1015\u"
+"103c\u102e\u1038\u101e\u102c\u1038"
+"\u1016\u103c\u1005\u103a\u1014\u1031\u101e\u100a\u103a\u"
+"104b"
+
+
+msgid "Search apps"
+msgstr "Search apps"
+
+msgid "displayName"
+msgstr "displayName"
+
+msgid "This object will be private to yourself"
+msgstr "This object will be private to yourself"
+
+msgid "Synchronization settings"
+msgstr "Synchronization settings"
+
+msgid "Unit interval"
+msgstr "Unit interval"
+
+msgid "lastUpdated"
+msgstr "lastUpdated"
+
+msgid "Access settings"
+msgstr "Access settings"
+
+msgid "Percentage"
+msgstr "Percentage"
+
+msgid "Enrollment status"
+msgstr "Enrollment status"
+
+msgid "System monitoring settings"
+msgstr "System monitoring settings"
+
+msgid "Manage my apps"
+msgstr "Manage my apps"
+
+msgid "Standard deviation"
+msgstr "Standard deviation"
+
+msgid "Interpretations"
+msgstr "Interpretations"
+
+msgid "This object will be created with public edit and view rights"
+msgstr "This object will be created with public edit and view rights"
+
+msgid "displayDescription"
+msgstr "displayDescription"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Tracked entity instance count"
+msgstr "Tracked entity instance count"
+
+msgid "Enrollment count"
+msgstr "Enrollment count"
+
+msgid "Program stage id"
+msgstr "Program stage id"
+
+msgid "Profile"
+msgstr "Profile"
+
+msgid "Count"
+msgstr "计数"
+
+msgid "About DHIS 2"
+msgstr "关于综合卫生信息管理平台"
+
+msgid "Email settings"
+msgstr "Email settings"
+
+msgid "Appearance settings"
+msgstr "Appearance settings"
+
+msgid "Messaging settings"
+msgstr "Messaging settings"
+
+msgid "Log out"
+msgstr "登出"
+
+msgid "Import settings"
+msgstr "Import settings"
+
+msgid "Help"
+msgstr "帮助"
+
+msgid "OAuth2 clients"
+msgstr "OAuth2 clients"
+
+msgid "Variance"
+msgstr "Variance"
+
+msgid "Calendar settings"
+msgstr "Calendar settings"
+
+msgid "Clone"
+msgstr "Clone"
+
+msgid "Messages"
+msgstr "Messages"
+
+msgid "General settings"
+msgstr "General settings"
+
+msgid "Analytics settings"
+msgstr "Analytics settings"
+
+msgid "Server settings"
+msgstr "Server settings"
+
+msgid "Account"
+msgstr "Account"
+
+msgid "Username"
+msgstr "用户名"
+
+msgid "System Settings"
+msgstr "System Settings"
+
+msgid "Immunization analysis"
+msgstr "Immunization analysis"
+
+msgid "Browser Cache Cleaner"
+msgstr "Browser Cache Cleaner"
+
+msgid "Capture"
+msgstr "Capture"
+
+msgid "TUCANA USERS IMPORTER APP"
+msgstr "TUCANA USERS IMPORTER APP"
+
+msgid "Data Entry"
+msgstr "数据录入"
+
+msgid "Data Visualizer"
+msgstr "Data Visualizer"
+
+msgid "Mobile Configuration"
+msgstr "移动版配置"
+
+msgid "Data Quality"
+msgstr "数据质量管理"
+
+msgid "Tracker Capture"
+msgstr "Tracker Capture"
+
+msgid "GIS"
+msgstr "GIS专题图"
+
+msgid "Function Maintenance"
+msgstr "Function Maintenance"
+
+msgid "Dashboard Classic"
+msgstr "Dashboard Classic"
+
+msgid "Event Visualizer"
+msgstr "Event Visualizer"
+
+msgid "Event Reports"
+msgstr "Event Reports"
+
+msgid "App Management"
+msgstr "App Management"
+
+msgid "Datastore Management"
+msgstr "Datastore Management"
+
+msgid "Scheduler"
+msgstr "Scheduler"
+
+msgid "Menu Management"
+msgstr "Menu Management"
+
+msgid "Reports"
+msgstr "NRHM报表"
+
+msgid "BIF"
+msgstr "BIF"
+
+msgid "Interactive Dashboard 2"
+msgstr "Interactive Dashboard 2"
+
+msgid "Dashboard"
+msgstr "仪表板"
+
+msgid "Pivot Table"
+msgstr "Pivot Table"
+
+msgid "Facility Reconciliation"
+msgstr "Facility Reconciliation"
+
+msgid "WHO Data Quality Tool"
+msgstr "WHO Data Quality Tool"
+
+msgid "Interpretations PSI"
+msgstr "Interpretations PSI"
+
+msgid "Dashboards app"
+msgstr "Dashboards app"
+
+msgid "dAtaZ"
+msgstr "dAtaZ"
+
+msgid "Usage Analytics"
+msgstr "Usage Analytics"
+
+msgid "Interpretations"
+msgstr "Interpretations"
+
+msgid "Translations"
+msgstr "Translations"
+
+msgid "Maintenance"
+msgstr "Maintenance"
+
+msgid "Data Administration"
+msgstr "数据管理"
+
+msgid "interactiveMap"
+msgstr "interactiveMap"
+
+msgid "Maps"
+msgstr "Maps"
+
+msgid "Users"
+msgstr "Users"
+
+msgid "Classic Data Visualizer"
+msgstr "数据可视化图表工具"
+
+msgid "WHO Metadata browser"
+msgstr "WHO Metadata browser"

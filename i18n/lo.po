@@ -1,0 +1,3917 @@
+
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-15T13:45:50.391Z\n"
+"PO-Revision-Date: 2019-08-15T13:45:50.391Z\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Pootle-Path: /lo/maintenance-app/lo.po\n"
+"X-Pootle-Revision: 29879
+"
+
+
+msgid "Store zero data values"
+msgstr "Store Zero Data Value"
+
+msgid "Category combination"
+msgstr "Category combinations"
+
+msgid "Do you want to delete indicator?"
+msgstr "Do you want to delete indicator?"
+
+msgid "Adding indicator failed"
+msgstr "Adding indicator failed"
+
+msgid "Saving indicator failed"
+msgstr "Saving indicator failed"
+
+msgid "Tracker"
+msgstr "Tracker"
+
+msgid "Use of category with an empty option is not allowed!"
+msgstr "Use of category with an empty option is not allowed!"
+
+msgid "Number of category options"
+msgstr "Number of category options"
+
+msgid "Number of categories"
+msgstr "Number of categories"
+
+msgid "Sort"
+msgstr "Sort"
+
+msgid "Create new data element category"
+msgstr "Create new data element category"
+
+msgid "Selected categories"
+msgstr "Selected categories"
+
+msgid "Available categories"
+msgstr "Available categories"
+
+msgid "Category"
+msgstr "Category"
+
+msgid "Category option"
+msgstr "Category Option"
+
+msgid "Category management"
+msgstr "Data element category management"
+
+msgid "Category combination management"
+msgstr "Data element category combination management"
+
+msgid "Edit data element category"
+msgstr "Edit data element category"
+
+msgid "Edit data element category combination"
+msgstr "Edit data element category combination"
+
+msgid "Category combination"
+msgstr "Category Combination"
+
+msgid "Data element category combo details"
+msgstr "Data element category combo details"
+
+msgid "Data element category"
+msgstr "Data Element Category"
+
+msgid "Data element category combination"
+msgstr "Data Element Category Combination"
+
+msgid "Select"
+msgstr "Select"
+
+msgid "Data element"
+msgstr "Data element"
+
+msgid "Data element group"
+msgstr "Data element Group"
+
+msgid "Data element groups"
+msgstr "Data Element Groups"
+
+msgid "Data elements"
+msgstr "Data elements"
+
+msgid "Indicator"
+msgstr "Indicator"
+
+msgid "Indicator group"
+msgstr "Indicator Group"
+
+msgid "Indicator groups"
+msgstr "Indicator Groups"
+
+msgid "Create new data element"
+msgstr "Create new data element"
+
+msgid "Domain type"
+msgstr "Domain Type"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Create new data element group"
+msgstr "Create new data element group"
+
+msgid "Group members"
+msgstr " \u0EAA\u0EB0\u0EA1\u0EB2\u0E8A\u0EB4\u0E81\u0E81\u0EB8\u0EC8\u0EA1"
+
+msgid "Available data elements"
+msgstr "Available data elements"
+
+msgid "Create new indicator"
+msgstr "Create new indicator"
+
+msgid "Create new indicator group"
+msgstr "Create new indicator group"
+
+msgid "Create new indicator type"
+msgstr "Create new indicator type"
+
+msgid "Factor"
+msgstr "Factor"
+
+msgid "Data element management"
+msgstr "Data element management"
+
+msgid "Data element group management"
+msgstr "Data element group management"
+
+msgid "Number of members"
+msgstr ""
+"\u200B\u0E88\u0EB3\u200B\u0E99\u0EA7\u0E99\u200B\u0EAA\u"
+"0EB0\u200B\u0EA1\u0EB2\u200B\u0E8A\u0EB4\u0E81"
+
+
+msgid "Export"
+msgstr "Export"
+
+msgid "Import"
+msgstr "Import"
+
+msgid "Indicator management"
+msgstr "Indicator management"
+
+msgid "Indicator group management"
+msgstr "Indicator group management"
+
+msgid "Indicator type management"
+msgstr "Indicator type management"
+
+msgid "Edit data element"
+msgstr "Edit data element"
+
+msgid "Edit data element group"
+msgstr "Edit data element group"
+
+msgid "Edit indicator"
+msgstr "Edit indicator"
+
+msgid "Edit indicator group"
+msgstr "Edit indicator group"
+
+msgid "Edit indicator type"
+msgstr "Edit indicator type"
+
+msgid "Edit numerator"
+msgstr "Edit numerator"
+
+msgid "Are you sure you want to delete this data element group?"
+msgstr "Are you sure you want to delete this data element group?"
+
+msgid "Are you sure you want to delete this indicator group?"
+msgstr "Are you sure you want to delete this indicator group?"
+
+msgid "Are you sure you want to delete this data dictionary?"
+msgstr "Are you sure you want to delete this data dictionary?"
+
+msgid "The code is already in use. Please choose a different code."
+msgstr "Code in use"
+
+msgid "The short name is already in use. Please choose a different short name"
+msgstr "Short name in use"
+
+msgid "Everything is OK"
+msgstr "Everything is OK"
+
+msgid "Adding the data element group failed with the following message"
+msgstr "Adding the data element group failed with the following message"
+
+msgid "Saving the data element group failed with the following message"
+msgstr "Saving the data element group failed with the following message"
+
+msgid "Adding the indicator group failed with the following message"
+msgstr "Adding the indicator group failed with the following message"
+
+msgid "Saving the indicator group failed with the following message"
+msgstr "Saving the indicator group failed with the following message"
+
+msgid "Adding the indicator type failed with the following message"
+msgstr "Adding the indicator type failed with the following message"
+
+msgid "Saving the indicator type failed with the following message"
+msgstr "Saving the indicator type failed with the following message"
+
+msgid "Left brackets"
+msgstr "\u0EA7\u0EBB\u0E87\u0EC0\u0EA5\u0EB1\u0E9A\u0E8A\u0EC9\u0EB2\u0E8D"
+
+msgid " Right brackets"
+msgstr " \u0EA7\u0EBB\u0E87\u0EC0\u0EA5\u0EB1\u0E9A\u0E82\u0EA7\u0EB2"
+
+msgid "Multiply"
+msgstr "\u0E84\u0EB9\u0E99"
+
+msgid " Divide"
+msgstr " \u0EAB\u0EB2\u0E99"
+
+msgid " Plus"
+msgstr " \u0E9A\u0EA7\u0E81"
+
+msgid " Minus"
+msgstr " \u0EA5\u0EBB\u0E9A"
+
+msgid "Number of days"
+msgstr "\u0E88\u0EB3\u0E99\u0EA7\u0E99\u0EA7\u0EB1\u0E99"
+
+msgid "Available Data Elements"
+msgstr "Available Data Elements"
+
+msgid "Selected Data Elements"
+msgstr "Selected Data Elements"
+
+msgid "Add selected"
+msgstr "Add selected"
+
+msgid "Remove all"
+msgstr "Remove All Locks"
+
+msgid "Create new data dictionary"
+msgstr "Create new data dictionary"
+
+msgid "Region"
+msgstr "Region"
+
+msgid "Select domain type"
+msgstr "Select domain type"
+
+msgid "Current"
+msgstr "Current"
+
+msgid "Selected data elements"
+msgstr "Selected data elements"
+
+msgid "Selected indicators"
+msgstr "Selected indicators"
+
+msgid "Item deleted successfully"
+msgstr "Item deleted successfully"
+
+msgid "Translate"
+msgstr "Translate"
+
+msgid "Object not deleted because it is associated by objects of type"
+msgstr "Object not deleted because it is associated by objects of type"
+
+msgid "Hide warning"
+msgstr "Hide warning"
+
+msgid "Update Data Element Group Member"
+msgstr "Update Data Element Group Member"
+
+msgid "Member of"
+msgstr "Member of"
+
+msgid "Data Element Group Editor"
+msgstr "Data Element Group Editor"
+
+msgid "Move up"
+msgstr "Move up"
+
+msgid "Move down"
+msgstr "Move down"
+
+msgid "Move to top"
+msgstr "Move to top"
+
+msgid "Move to bottom"
+msgstr "Move to bottom"
+
+msgid "Indicator sort order"
+msgstr "Indicator sort order"
+
+msgid "Data element sort order"
+msgstr "Data element sort order"
+
+msgid "Indicator Group Editor"
+msgstr "Indicator Group Editor"
+
+msgid "Update Indicator Member"
+msgstr "Update Indicator Member"
+
+msgid "Factor cannot be zero"
+msgstr "Factor cannot be zero"
+
+msgid "Aggregation levels"
+msgstr "Aggregation levels"
+
+msgid "Available aggregation levels"
+msgstr "Available aggregation levels"
+
+msgid "Selected aggregation levels"
+msgstr "Selected aggregation levels"
+
+msgid "Remove selected"
+msgstr "Remove selected items"
+
+msgid "Category options"
+msgstr "Category options"
+
+msgid "Add category option"
+msgstr "Add category option"
+
+msgid "Please include one or more category options"
+msgstr "Please include one or more category options"
+
+msgid "Please specify a category option name"
+msgstr "Please specify a category option name"
+
+msgid "The category option name already exists"
+msgstr "The category option name already exists"
+
+msgid "Data element group set"
+msgstr "Data Element Group Set"
+
+msgid "Indicator group set"
+msgstr "Indicator Group Set"
+
+msgid "Name already exists !"
+msgstr "Name already exists !"
+
+msgid "Available Data Element Groups"
+msgstr "Available Data Element Groups"
+
+msgid "Selected Data Element Groups"
+msgstr "Selected Data Element Groups"
+
+msgid "Add Data Element Group Set"
+msgstr "Add Data Element Group Set"
+
+msgid "Update Data Element Group Set"
+msgstr "Update Data Element Group Set"
+
+msgid "Add Indicator group set"
+msgstr "Add Indicator Group Set"
+
+msgid "Update Indicator group set"
+msgstr "Update Indicator Group Set"
+
+msgid "Available Indicator groups"
+msgstr "Available Indicator Groups"
+
+msgid "Selected Indicator groups"
+msgstr "Selected Indicator Groups"
+
+msgid "Last updated"
+msgstr "Last updated"
+
+msgid "Data element identifier must be a number"
+msgstr ""
+"\u200B\u0EAD\u0EBB\u0E87\u200B\u0E9B\u0EB0\u200B\u0E81\u"
+"0EAD\u0E9A\u200B\u0E82\u0ECD\u0EC9\u200B\u0EA1\u0EB9\u0E99"
+"\u200B\u0E88\u0EB0\u200B\u0E95\u0EC9\u0EAD\u0E87\u200B\u"
+"0EC1\u0EA1\u0EC8\u0E99\u200B\u0E95\u0EBB\u0EA7\u200B\u0EC0"
+"\u0EA5\u0E81"
+
+
+msgid "Category option combo identifier must be a number"
+msgstr ""
+"\u200B\u0E97\u0EB2\u0E87\u200B\u0EC0\u0EA5\u0EB7\u0EAD\u"
+"0E81 \u0E9B\u0EB0\u200B\u0EC0\u0E9E\u0E94"
+"\u0E81\u0ECD\u200B\u0E95\u0EC9\u0EAD\u0E87\u200B\u0EC1\u"
+"0EA1\u0EC8\u0E99\u200B\u0EC2\u0E95\u200B\u0EC0\u0EA5\u0E81"
+
+
+msgid "Identifier does not reference a data element"
+msgstr ""
+"\u0E9C\u0EB9\u0EC9\u200B\u0E84\u0EBB\u0EC9\u0E99\u200B\u"
+"0EAB\u0EB2\u0E9A\u0ECD\u0EC8\u200B\u0EC4\u0E94\u0EC9\u200B"
+"\u0EAD\u0EB5\u0E87\u200B\u0EC3\u0EAA\u0EC8\u200B\u0EAD\u"
+"0EBB\u0E87\u200B\u0E9B\u0EB0\u200B\u0E81\u0EAD\u0E9A\u200B"
+"\u0E82\u0ECD\u0EC9\u200B\u0EA1\u0EB9\u0E99"
+
+
+msgid "Identifier does not reference a category option combo"
+msgstr ""
+"\u200B\u0E9C\u0EB9\u0EC9\u200B\u0E84\u0EBB\u0EC9\u0E99\u"
+"200B\u0EAB\u0EB2\u0E9A\u0ECD\u0EC8\u200B\u0EC4\u0E94\u0EC9"
+"\u200B\u0EAD\u0EB5\u0E87\u200B\u0EC3\u0EAA\u0EC8\u200B\u"
+"0E97\u0EB2\u0E87\u200B\u0EC0\u0EA5\u0EB7\u0EAD\u0E81\u200B"
+"\u0E9B\u0EB0\u200B\u0EAA\u0EBB\u0EA1"
+
+
+msgid ""
+"Create, modify, view and delete data elements. Data"
+"elements are phenomena for which will be captured and"
+"analyzed."
+msgstr ""
+"Create, modify, view and delete data elements. Data"
+"elements are phenomena for which will be captured and"
+"analysed."
+
+
+msgid ""
+"Create, modify, view and delete data element groups. Groups"
+"are used for improved analysis."
+msgstr ""
+"Create, modify, view and delete data element groups. Groups"
+"are used for improved analysis."
+
+
+msgid ""
+"Easily add or remove data elements to and from data element"
+"groups, as well as deleted data elements."
+msgstr ""
+"Easily add or remove data elements to and from data element"
+"groups, as well as deleted data elements."
+
+
+msgid ""
+"Create, modify, view and delete data element group sets."
+"Group sets are used for improved analysis."
+msgstr ""
+"Create, modify, view and delete data element group sets."
+"Group sets are used for improved analysis."
+
+
+msgid ""
+"Create, modify, view and delete category options. Category"
+"options are options with in category."
+msgstr ""
+"Create, modify, view and delete data element category"
+"options. Category Option are fine-grained break-downs of"
+"catagory."
+
+
+msgid "Create, modify, view and delete category combinations."
+msgstr "Create, modify, view and delete data element category combinations."
+
+msgid ""
+"Create, modify, view and delete category option groups,"
+"which can be used to classify category options."
+msgstr ""
+"Create, modify, view and delete category option groups,"
+"which can be used to classify category options."
+
+
+msgid ""
+"Create, modify, view and delete category option group"
+"sets, which can be used for improved data analysis."
+msgstr ""
+"Create, modify, view and delete category option group"
+"sets, which can be used for improved data analysis."
+
+
+msgid ""
+"Create, modify, view and delete indicators. An indicator is"
+"a formula consisting of data elements and numbers."
+msgstr ""
+"Create, modify, view and delete indicators. An indicator is"
+"a formula consisting of data elements and numbers."
+
+
+msgid ""
+"Create, modify, view and delete indicator types. An"
+"indicator type is a factor for an indicator, like"
+"percentage."
+msgstr ""
+"Create, modify, view and delete indicator types. An"
+"indicator type is a factor for an indicator, like"
+"percentage."
+
+
+msgid ""
+"Create, modify, view and delete indicator groups. Groups"
+"are used for improved analysis."
+msgstr ""
+"Create, modify, view and delete indicator groups. Groups"
+"are used for improved analysis."
+
+
+msgid ""
+"Easily add or remove indicators to and from indicator"
+"groups, as well as delete indicators."
+msgstr ""
+"Easily add or remove indicators to and from indicator"
+"groups, as well as delete indicators."
+
+
+msgid ""
+"Create, modify, view and delete indicator group sets. Group"
+"sets are used for improved analysis."
+msgstr ""
+"Create, modify, view and delete indicator group sets. Group"
+"sets are used for improved analysis."
+
+
+msgid ""
+"Create, modify, view and delete concepts. A concept can"
+"be used by a category."
+msgstr ""
+"Create, modify, view and delete concepts. A concept can"
+"be used by a category."
+
+
+msgid "Selected data element group sets"
+msgstr "Selected data element group sets"
+
+msgid "Concept name"
+msgstr "Concept name"
+
+msgid "Available Groups"
+msgstr "Available groups"
+
+msgid "Assign Groups for Data Element"
+msgstr "Assign Groups for Data Element"
+
+msgid "Please select data element"
+msgstr "Please select data element"
+
+msgid "Category option renamed successfully"
+msgstr "Category option renamed successfully"
+
+msgid "Create new concept"
+msgstr "Create new concept"
+
+msgid "Edit concept"
+msgstr "Edit concept"
+
+msgid "Adding concept failed"
+msgstr "Adding concept failed"
+
+msgid "Saving concept failed"
+msgstr "Saving concept failed"
+
+msgid "Enter alphabet (a-z A-Z), number (0-9) and underscore (_) characters only."
+msgstr "Enter alphabet (a-z A-Z), number (0-9) and underscore (_) characters only."
+
+msgid "Concept management"
+msgstr "Concept management"
+
+msgid "Concept"
+msgstr "Concept"
+
+msgid "Selected name"
+msgstr "Selected name"
+
+msgid "Update category option"
+msgstr "Update category option"
+
+msgid "Move selected"
+msgstr "Move selected items"
+
+msgid "Number type"
+msgstr "Number type"
+
+msgid "Integer"
+msgstr "Integer"
+
+msgid "Positive Integer"
+msgstr "Positive Integer"
+
+msgid "Coordinate"
+msgstr "Coordinate"
+
+msgid "Negative Integer"
+msgstr "Negative Integer"
+
+msgid "View 2"
+msgstr "View 2"
+
+msgid "Form name"
+msgstr "Form name"
+
+msgid "Data dimension"
+msgstr "Data Dimension"
+
+msgid "Select group"
+msgstr "Select group"
+
+msgid "Option set"
+msgstr "Option set"
+
+msgid "Please select"
+msgstr "Please select"
+
+msgid "Formula"
+msgstr "Formula"
+
+msgid "Skip category total in reports"
+msgstr "Skip category total in reports"
+
+msgid "Data Element Category Option"
+msgstr "Data Element Category Option"
+
+msgid "Category option management"
+msgstr "Data element category option management"
+
+msgid "Create new data element category option"
+msgstr "Create new data element category option"
+
+msgid "Edit data element category option"
+msgstr "Edit data element category option"
+
+msgid "Available category options"
+msgstr "Available category options"
+
+msgid "Selected category options"
+msgstr "Selected category options"
+
+msgid "Use as data dimension"
+msgstr "Use as data dimension"
+
+msgid "Tip"
+msgstr "Tip"
+
+msgid "use"
+msgstr "\u0EC3\u0E8A\u0EC9"
+
+msgid "Disaggregation"
+msgstr "Disaggregation"
+
+msgid "Attribute"
+msgstr "Attribute"
+
+msgid "Option set for data values"
+msgstr "Option set for data values"
+
+msgid "Option set for comments"
+msgstr "Option set for comments"
+
+msgid "Org unit counts"
+msgstr "Org unit counts"
+
+msgid "Category option group"
+msgstr "Category Option Group"
+
+msgid "Category option group management"
+msgstr "Category option group management"
+
+msgid "Create new category option group"
+msgstr "Create new category option group"
+
+msgid "Category option group set"
+msgstr "Category Option Group Set"
+
+msgid "Category option group set management"
+msgstr "Category option group set management"
+
+msgid "Available category option groups"
+msgstr "Available category option groups"
+
+msgid "Are you sure you want to delete this category option group set?"
+msgstr "Are you sure you want to delete this category option group set?"
+
+msgid "Show more options"
+msgstr "Show more options"
+
+msgid "Show fewer options"
+msgstr "Show fewer options"
+
+msgid "Id"
+msgstr "Id"
+
+msgid "Max"
+msgstr "\u0E84\u0EC8\u0EB2\u0EAA\u0EB9\u0E87\u0EAA\u0EB8\u0E94"
+
+msgid "Aggregate"
+msgstr "Aggregate"
+
+msgid "Create new data element category combination"
+msgstr "Create new data element category combination"
+
+msgid "Available indicators"
+msgstr "Available indicators"
+
+msgid "Edit denominator"
+msgstr "Edit denominator"
+
+msgid "Are you sure you want to delete this data element?"
+msgstr "Are you sure you want to delete this data element?"
+
+msgid "Are you sure you want to delete this indicator type?"
+msgstr "Are you sure you want to delete this indicator type?"
+
+msgid "The name is already in use. Please choose a different name."
+msgstr "Name in use"
+
+msgid "Calculated"
+msgstr "Calculated"
+
+msgid "Value"
+msgstr " \u0E84\u0EC8\u0EB2"
+
+msgid "Please select indicator"
+msgstr "Please select indicator"
+
+msgid "Update was successful"
+msgstr "Update Success"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Expression is not well formed"
+msgstr ""
+"\u200B\u0E81\u0EB2\u0E99\u200B\u0E99\u0EB3\u200B\u0EAA\u"
+"0EB0\u200B\u0EC0\u0EDC\u0EB5\u200B\u0E8D\u0EB1\u0E87\u200B"
+"\u0E9A\u0ECD\u0EC8\u200B\u0E97\u0EB1\u0E99\u200B\u200B\u"
+"0E88\u0EB0\u0EC1\u0E88\u0EC9\u0E87"
+
+
+msgid ""
+"Create, modify, view and delete data element categories."
+"Categories are used for disaggregation of data elements."
+msgstr ""
+"Create, modify, view and delete data element categories."
+"Categories are fine-grained break-downs of data elements."
+
+
+msgid ""
+"Create, modify, view and delete data dictionaries. A data"
+"dictionary is a set of meta-data."
+msgstr ""
+"Create, modify, view and delete data dictionaries. A data"
+"dictionary is a set of meta-data."
+
+
+msgid "Available data element group sets"
+msgstr "Available data element group sets"
+
+msgid "Selected Groups"
+msgstr "Selected groups"
+
+msgid "Are you sure you want to delete this concept?"
+msgstr "Are you sure you want to delete this concept?"
+
+msgid "View 1"
+msgstr "View 1"
+
+msgid "Compulsory"
+msgstr "Compulsory"
+
+msgid "Legend"
+msgstr "Legend set"
+
+msgid "Dimension type"
+msgstr "Dimension type"
+
+msgid "Edit category option group"
+msgstr "Edit category option group"
+
+msgid "Create new category option group set"
+msgstr "Create new category option group set"
+
+msgid "Edit category option group set"
+msgstr "Edit category option group set"
+
+msgid "Min"
+msgstr "\u0E84\u0EC8\u0EB2\u0E99\u0EC9\u0EAD\u0E8D\u0EAA\u0EB8\u0E94"
+
+msgid " The selected organisation unit will be moved to root"
+msgstr "The selected organisation unit will be moved to root"
+
+msgid "Are you sure you want to create a new root organisation unit?"
+msgstr "Are you sure you want to create a new root organisation unit?"
+
+msgid "Registers data"
+msgstr "Registers data"
+
+msgid "Hierarchy operations"
+msgstr "Hierarchy operations"
+
+msgid "Not selected"
+msgstr "Not selected"
+
+msgid "Confirm"
+msgstr "Confirm"
+
+msgid "Not selected, moved to root position"
+msgstr "Not selected, moved to root position"
+
+msgid "Reset"
+msgstr "Reset"
+
+msgid "Hierarchy operations"
+msgstr "Hierarchy Operations"
+
+msgid "Organisation unit level"
+msgstr "Organisation Unit Level"
+
+msgid "Number of group members"
+msgstr "Number of group members"
+
+msgid ""
+"The selected organisation unit is already a root. Please"
+"select a new parent organisation unit"
+msgstr ""
+"The selected organisation unit is already a root. Please"
+"select a new parent organisation unit"
+
+
+msgid ""
+"An organisation unit cannot be moved to itself. Please select"
+"a new parent organisation unit"
+msgstr ""
+"An organisation unit cannot be moved to itself. Please select"
+"a new parent organisation unit"
+
+
+msgid "Exclusive"
+msgstr "Exclusive"
+
+msgid "The group set can not be created because it is exclusive and"
+msgstr "The group set can not be created because it is exclusive and"
+
+msgid "is a member of more than one selected group"
+msgstr "is a member of more than one selected group"
+
+msgid "Move all"
+msgstr "Move All"
+
+msgid "Organisation unit level management"
+msgstr "Organisation unit level management"
+
+msgid "Level"
+msgstr "Level"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Registers date"
+msgstr "Registers date"
+
+msgid "Latitude"
+msgstr "Latitude"
+
+msgid "Longitude"
+msgstr "Longitude"
+
+msgid "Latitude (optional)"
+msgstr "Latitude (optional)"
+
+msgid "Longitude (optional)"
+msgstr "Longitude (optional)"
+
+msgid "Assign to compulsory organisation unit group set"
+msgstr "Assign to compulsory organisation unit group set"
+
+msgid "Organisation unit group set"
+msgstr "Organisation Unit Group Set"
+
+msgid ""
+"Move organisation units in the organisation unit tree. All"
+"children will be moved along with the unit."
+msgstr ""
+"Move organisation units in the organisation unit tree. All"
+"children will be moved along with the unit."
+
+
+msgid "Loading"
+msgstr "Loading"
+
+msgid "Coordinates"
+msgstr "Coordinates"
+
+msgid "Criteria"
+msgstr "Criteria"
+
+msgid "Options"
+msgstr "Options"
+
+msgid "All"
+msgstr "Select/ALL"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Organisation units"
+msgstr "organisation units"
+
+msgid "Found"
+msgstr "Found"
+
+msgid "Please select from tree (optional)"
+msgstr "Please select from tree (optional)"
+
+msgid "Polygon"
+msgstr "Polygon"
+
+msgid "Point"
+msgstr "Point"
+
+msgid "Available data sets"
+msgstr "Available data sets"
+
+msgid "Selected data sets"
+msgstr "Selected data sets"
+
+msgid "Limited"
+msgstr "Limited"
+
+msgid "Download as Excel"
+msgstr "\u0E94\u0EB2\u0EA7\u0EC2\u0EAB\u0EBC\u0E94\u0EC0\u0E9B\u0EB1\u0E99 excel"
+
+msgid "Download as CSV"
+msgstr "\u0E94\u0EB2\u0EA7\u0EC2\u0EAB\u0EBC\u0E94\u0EC0\u0E9B\u0EB1\u0E99 CSV"
+
+msgid "Download as PDF"
+msgstr "\u0E94\u0EB2\u0EA7\u0EC2\u0EAB\u0EBC\u0E94\u0EC0\u0E9B\u0EB1\u0E99 PDF"
+
+msgid "Please wait while downloading report"
+msgstr "Please wait while downloading report"
+
+msgid "Please wait while searching"
+msgstr "Please wait while searching"
+
+msgid "Hierarchy"
+msgstr "Hierarchy"
+
+msgid "Data sets"
+msgstr "Data sets"
+
+msgid "Organisation unit groups"
+msgstr "Organisation unit groups"
+
+msgid "Phone number"
+msgstr "Phone number"
+
+msgid "Select symbol"
+msgstr "Select symbol"
+
+msgid "Symbol"
+msgstr "Symbol"
+
+msgid "Name, code or identifier"
+msgstr "Name, code or identifier"
+
+msgid "Identifier"
+msgstr "Identifier"
+
+msgid "Show all sections"
+msgstr "Show all sections"
+
+msgid "Optional"
+msgstr "Optional"
+
+msgid "Data Administration"
+msgstr "Data Administration"
+
+msgid "Period type"
+msgstr "\u0EC1\u0E9A\u0E9A\u0E8A\u0EC8\u0EA7\u0E87\u0EC0\u0EA7\u0EA5\u0EB2"
+
+msgid "Please select at least one option"
+msgstr "Please select at least one option"
+
+msgid "Performing maintenance"
+msgstr "Performing maintenance"
+
+msgid "Maintenance performed"
+msgstr "Maintenance performed"
+
+msgid "Generating resource tables"
+msgstr "Generating resource tables"
+
+msgid "Resource tables generated"
+msgstr "Resource tables generated"
+
+msgid "Clear analytics tables"
+msgstr "Clear analytics tables"
+
+msgid "Maintenance"
+msgstr "Maintenance"
+
+msgid "Resource Table"
+msgstr "Resource Table"
+
+msgid "Clear data set completeness"
+msgstr "Clear data set completeness"
+
+msgid "Clear zero values"
+msgstr "Clear zero values"
+
+msgid "Organisation unit group set structure normalized"
+msgstr "Organisation unit group set structure normalized"
+
+msgid "Organisation unit structure"
+msgstr "Organisation unit structure"
+
+msgid "Data element category option combo name"
+msgstr "Data element category option combo name"
+
+msgid "Generate tables"
+msgstr "Generate tables"
+
+msgid "Perform maintenance"
+msgstr "Perform maintenance"
+
+msgid "Prune periods"
+msgstr "Prune periods"
+
+msgid "Cache Statistics"
+msgstr "Cache Statistics"
+
+msgid "Second Level Cache Statistics"
+msgstr "Second Level Cache Statistics"
+
+msgid "Region name"
+msgstr "Region name"
+
+msgid "Mem count"
+msgstr "Mem count"
+
+msgid "Disk count"
+msgstr "Disk count"
+
+msgid "Mem size"
+msgstr "Mem size"
+
+msgid "Total Second Level Cache"
+msgstr "Total Second Level Cache"
+
+msgid "Total Query Cache"
+msgstr "Total Query Cache"
+
+msgid "Query Cache Statistics"
+msgstr "Query Cache Statistics"
+
+msgid "Query name"
+msgstr "Query name"
+
+msgid "Put count"
+msgstr "Put count"
+
+msgid "Hit count"
+msgstr "Hit count"
+
+msgid "Miss count"
+msgstr "Miss count"
+
+msgid "Exec count"
+msgstr "Exec count"
+
+msgid "Exec avg time"
+msgstr "Exec avg time"
+
+msgid "Exec max time"
+msgstr "Exec max time"
+
+msgid "Exec min time"
+msgstr "Exec min time"
+
+msgid "Exec row count"
+msgstr "Exec row count"
+
+msgid "Clear cache"
+msgstr "Clear cache"
+
+msgid "Data Statistics"
+msgstr "Data Statistics"
+
+msgid "Indicator types"
+msgstr "Indicator types"
+
+msgid "Data dictionaries"
+msgstr "Data dictionaries"
+
+msgid "Periods"
+msgstr "Periods"
+
+msgid "Data values"
+msgstr "Data values"
+
+msgid "Number of objects"
+msgstr "Number of objects"
+
+msgid "Data Browser"
+msgstr "Data Browser"
+
+msgid "From date"
+msgstr "From date"
+
+msgid "To date"
+msgstr "\u0EC0\u0E96\u0EB5\u0E87\u0EA7\u0EB1\u0E99\u0E97\u0EB5\u0EC8"
+
+msgid "Browse by"
+msgstr "Browse by"
+
+msgid "Select mode"
+msgstr "Select mode"
+
+msgid "Select parent organisation unit"
+msgstr ""
+"\u200B\u0EC0\u0EA5\u0EB7\u0EAD\u0E81\u200B\u0EC0\u0EAD\u"
+"0EBB\u0EB2\u200B\u0EAB\u0EBB\u0EA7\u200B\u0EDC\u0EC8\u0EA7"
+"\u0E8D\u200B\u0E81\u0EB2\u0E99\u200B\u0E88\u0EB1\u0E94\u"
+"200B\u0E95\u0EB1\u0EC9\u0E87\u200B\u0E82\u0EB1\u0EC9\u0E99"
+"\u200B\u0EC1\u0E82\u0EA7\u0E87"
+
+
+msgid "No data found"
+msgstr "No data found"
+
+msgid "Browse"
+msgstr "Browse"
+
+msgid "Select Period Type"
+msgstr "Select Period Type"
+
+msgid "Data Integrity"
+msgstr "Data Integrity"
+
+msgid "Data elements without a data set"
+msgstr "Data elements without a data set"
+
+msgid "Data elements without groups"
+msgstr "Data elements without groups"
+
+msgid "Data sets not assigned to organisation units"
+msgstr "Data sets not assigned to organisation units"
+
+msgid "Indicators with identical formulas"
+msgstr "Indicators with identical formulas"
+
+msgid "Indicators without groups"
+msgstr "Indicators without groups"
+
+msgid "Organisation units with cyclic references"
+msgstr "Organisation units with cyclic references"
+
+msgid "Orphaned organisation units"
+msgstr "Orphaned organisation units"
+
+msgid "Organisation units without groups"
+msgstr "Organisation units without groups"
+
+msgid "Organisation unit groups without group sets"
+msgstr "Organisation unit groups without group sets"
+
+msgid "Data integrity checks performed"
+msgstr "Data integrity checks performed"
+
+msgid "Data elements assigned to data sets with different period types"
+msgstr "Data elements assigned to data sets with different period types"
+
+msgid "Category option group set structure"
+msgstr "Category option group set structure"
+
+msgid "Data element group set structure"
+msgstr "Data element group set structure"
+
+msgid "Indicator group set structure"
+msgstr "Indicator group set structure"
+
+msgid "Organisation unit group set structure"
+msgstr "Organisation unit group set structure"
+
+msgid " Period"
+msgstr " \u0E8A\u0EC8\u0EA7\u0E87\u0EC0\u0EA7\u0EA5\u0EB2"
+
+msgid "values"
+msgstr "values"
+
+msgid "Validation rules without groups"
+msgstr "Validation rules without groups"
+
+msgid "Aggregated data values"
+msgstr "Aggregated data values"
+
+msgid "Aggregated indicator values"
+msgstr "Aggregated indicator values"
+
+msgid "Organisation Unit Pruning"
+msgstr "Organisation Unit Pruning"
+
+msgid "Min-Max Value Generation"
+msgstr "Min-Max Value Generation"
+
+msgid ""
+"Add or remove exceptions to the the standard rules for"
+"locking of data entry forms."
+msgstr ""
+"Add or remove exceptions to the the standard rules for"
+"locking of data entry forms."
+
+
+msgid ""
+"Browse the database and get an overview of where data"
+"exists. View and export counts of data elements as well as"
+"raw data."
+msgstr ""
+"Browse the database and get an overview of where data"
+"exists. View and export counts of data elements as well as"
+"raw data."
+
+
+msgid ""
+"Run data integrity checks and unveil anomalies and problems"
+"in the meta data setup."
+msgstr ""
+"Run data integrity checks and unveil anomalies and problems"
+"in the meta data setup."
+
+
+msgid ""
+"Archive data which is not currently relevant to your system"
+"in order to improve performance. Data can also be unarchived."
+msgstr ""
+"Archive data which is not currently relevant to your system"
+"in order to improve performance. Data can also be unarchived."
+
+
+msgid ""
+"Archive person data which is not currently relevant to your"
+"system. Data can also be unarchived."
+msgstr ""
+"Archive person data which is not currently relevant to your"
+"system. Data can also be unarchived."
+
+
+msgid ""
+"Perform maintenance tasks such as pruning of data values and"
+"periods and clearing of database resource tables."
+msgstr ""
+"Perform maintenance tasks such as pruning of data values and"
+"periods and clearing of database resource tables."
+
+
+msgid ""
+"Generate resource database tables for the organisation unit"
+"hierarchy and group set structure among others."
+msgstr ""
+"Generate resource database tables for the organisation unit"
+"hierarchy and group set structure among others."
+
+
+msgid ""
+"Create and manage locales for database content. A locale is"
+"a combination of language and country."
+msgstr ""
+"Create and manage locales for database content. A locale is"
+"a combination of language and country."
+
+
+msgid ""
+"Merge two organisation units and their data values. Data is"
+"merged depending on existence and date of last modification."
+msgstr ""
+"Merge two organisation units and their data values. Data is"
+"merged depending on existence and date of last modification."
+
+
+msgid ""
+"Browse the number of objects in the database, like data"
+"elements, indicators, data sets and data values."
+msgstr ""
+"Browse the number of objects in the database, like data"
+"elements, indicators, data sets and data values."
+
+
+msgid ""
+"Monitor and clear the system database cache status. Provides"
+"information on object and query caches."
+msgstr ""
+"Monitor and clear the system database cache status. Provides"
+"information on object and query caches."
+
+
+msgid ""
+"Generate min-max values which can be used for data validation"
+"during data entry and validation processes."
+msgstr ""
+"Generate min-max values which can be used for data validation"
+"during data entry and validation processes."
+
+
+msgid ""
+"Remove sub-trees from the organisation unit tree. Useful when"
+"creating and deploying local databases."
+msgstr ""
+"Remove sub-trees from the organisation unit tree. Useful when"
+"creating and deploying local databases."
+
+
+msgid ""
+"Define which data elements for which zero values should be"
+"stored or ignored. Useful for reducing database size."
+msgstr ""
+"Define which data elements for which zero values should be"
+"stored or ignored. Useful for reducing database size."
+
+
+msgid ""
+"Eliminate data registered for duplicate data elements. Useful"
+"when data has been entered for identical data elements."
+msgstr ""
+"Eliminate data registered for duplicate data elements. Useful"
+"when data has been entered for identical data elements."
+
+
+msgid ""
+"Create SQL database views. These views will typically use the"
+"resource tables to provide convenient views for third-party"
+"tools."
+msgstr ""
+"Create SQL database views. These views will typically use the"
+"resource tables to provide convenient views for third-party"
+"tools."
+
+
+msgid ""
+"Create constants which can be included in expressions of"
+"indicator and validation rules."
+msgstr ""
+"Create constants which can be included in expressions of"
+"indicator and validation rules."
+
+
+msgid "Create, modify and view attributes."
+msgstr ""
+"Create, modify and view tracked entity attributes. An"
+"attribute can be used to register extra information for a"
+"tracked entity."
+
+
+msgid ""
+"Create option sets which can be included in data elements"
+"and produce drop-down lists in data entry forms."
+msgstr ""
+"Create option sets which can be included in data elements"
+"and produce drop-down lists in data entry forms."
+
+
+msgid ""
+"Manage scheduled tasks such as data mart exports, where you"
+"can set period types, aggregation level and frequency."
+msgstr ""
+"Manage scheduled tasks such as data mart exports, where you"
+"can set period types, aggregation level and frequency."
+
+
+msgid "Expression is empty"
+msgstr "Expression is empty"
+
+msgid "Invalid indicator denominators"
+msgstr "Invalid indicator denominators"
+
+msgid "Invalid indicator numerators"
+msgstr "Invalid indicator numerators"
+
+msgid "Invalid validation rule left side expressions"
+msgstr "Invalid validation rule left side expressions"
+
+msgid "Invalid validation rule right side expressions"
+msgstr "Invalid validation rule right side expressions"
+
+msgid "Category structure"
+msgstr "Category structure"
+
+msgid "Zero Value Storage"
+msgstr "Zero Value Storage"
+
+msgid "Ignore zero data values"
+msgstr "Ignore zero data values"
+
+msgid "Store zero data values"
+msgstr "Store zero data values"
+
+msgid "Organisation Unit Merge"
+msgstr "Organisation Unit Merge"
+
+msgid "Select the organisation unit to eliminate"
+msgstr "Select the organisation unit to eliminate"
+
+msgid "Select the organisation unit to keep"
+msgstr "Select the organisation unit to keep"
+
+msgid "Merge"
+msgstr "Merge"
+
+msgid "Merging"
+msgstr "Merging"
+
+msgid "Merging done"
+msgstr "Merging done"
+
+msgid "Eliminating"
+msgstr "Eliminating"
+
+msgid "Elimination done"
+msgstr "Elimination done"
+
+msgid "Select the data element to eliminate"
+msgstr "Select the data element to eliminate"
+
+msgid "Select the data element to keep"
+msgstr "Select the data element to keep"
+
+msgid "Eliminate"
+msgstr "Eliminate"
+
+msgid "Duplicate Data Elimination"
+msgstr "Duplicate Data Elimination"
+
+msgid "Please select two different organisation units"
+msgstr "Please select two different organisation units"
+
+msgid "Please select two different data elements"
+msgstr "Please select two different data elements"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Data Archive"
+msgstr "Data Archive"
+
+msgid "There are"
+msgstr "There are"
+
+msgid "overlapping data values in the archive."
+msgstr "overlapping data values in the archive."
+
+msgid "There are no overlapping data in the archive."
+msgstr "There are no overlapping data in the archive."
+
+msgid "Eliminate the oldest duplicates"
+msgstr "Eliminate the oldest duplicates"
+
+msgid "Eliminate duplicates from archive source"
+msgstr "Eliminate duplicates from archive source"
+
+msgid "Eliminate duplicates from regular source"
+msgstr "Eliminate duplicates from regular source"
+
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
+
+msgid "Archive"
+msgstr "Archive"
+
+msgid "Unarchive"
+msgstr "Unarchive"
+
+msgid "Archiving"
+msgstr "Archiving"
+
+msgid "Unarchiving"
+msgstr "Unarchiving"
+
+msgid "done. Number of archived values is now"
+msgstr "done. Number of archived values is now"
+
+msgid "Prune"
+msgstr "Prune"
+
+msgid "Pruning"
+msgstr "Pruning"
+
+msgid "Pruning done"
+msgstr "Pruning done"
+
+msgid "Data browser"
+msgstr "Data browser"
+
+msgid "Please choose a period type"
+msgstr "Please choose a period type"
+
+msgid "Please enter a valid End date"
+msgstr "Please enter a valid End date"
+
+msgid "Please select a browser mode"
+msgstr "Please select a browser mode"
+
+msgid "Please select an organization unit"
+msgstr "Please select an organization unit"
+
+msgid "Organisation unit"
+msgstr "Organisation unit"
+
+msgid "Organisation unit group"
+msgstr "Organisation unit group"
+
+msgid "Data element"
+msgstr "Data element"
+
+msgid "Data element group"
+msgstr "Data element group"
+
+msgid "Data set"
+msgstr "Data set"
+
+msgid "Number of recorded values"
+msgstr "Number of recorded values"
+
+msgid "Browse data at this level only"
+msgstr "Browse data at this level only"
+
+msgid "Summary drill down"
+msgstr "Summary drill down"
+
+msgid "View raw data at this level"
+msgstr "View raw data at this level"
+
+msgid "Click on this organisation unit"
+msgstr "Click on this organisation unit"
+
+msgid "earliest"
+msgstr "earliest"
+
+msgid "latest"
+msgstr "latest"
+
+msgid "Available data sets"
+msgstr "Available data sets"
+
+msgid "Level must be a number"
+msgstr "Level must be a number"
+
+msgid "Please select a data set"
+msgstr "Please select a data set"
+
+msgid "Please select an organisation unit"
+msgstr "Please select an organsisation unit"
+
+msgid "Generate"
+msgstr "Generate"
+
+msgid "SQL View Management"
+msgstr "SQL View Management"
+
+msgid "SQL View"
+msgstr "SQL View"
+
+msgid "SQL Statement"
+msgstr "SQL Statement"
+
+msgid "Execute query"
+msgstr "Execute query"
+
+msgid "Add new SQL view"
+msgstr "Add new SQL view"
+
+msgid "Update SQL view"
+msgstr "Update SQL view"
+
+msgid "Name is not allowed to be null"
+msgstr "Name is not allowed to be null"
+
+msgid "The language and country set is already in use"
+msgstr "The language and country set is already in use"
+
+msgid "SQL statement cannot be null"
+msgstr "SQL statement cannot be null"
+
+msgid "This SQL statement is invalid"
+msgstr "This SQL statement is invalid."
+
+msgid "This resource viewer is invalid or does not exist"
+msgstr "This resource viewer is invalid or does not exist."
+
+msgid "SQL view table with name"
+msgstr "SQL view table with name"
+
+msgid "is created"
+msgstr "is created"
+
+msgid "Please execute query to create View table before viewing"
+msgstr "Please execute query to create View table before viewing"
+
+msgid "Data elements violating exclusive group sets"
+msgstr "Data elements violating exclusive group sets"
+
+msgid "Indicators violating exclusive group sets"
+msgstr "Indicators violating exclusive group sets"
+
+msgid "View data for"
+msgstr "View data for"
+
+msgid "Failed to create view table for"
+msgstr "Failed to create view table for"
+
+msgid "Show"
+msgstr "Show"
+
+msgid "Lock"
+msgstr "Lock"
+
+msgid "Locked"
+msgstr "Locked"
+
+msgid "Unlock"
+msgstr "Unlock"
+
+msgid "Append"
+msgstr "Append"
+
+msgid "Users"
+msgstr "Users"
+
+msgid "Removed values successfully"
+msgstr "Removed values successfully"
+
+msgid "Recorded values"
+msgstr "Recorded values"
+
+msgid "Earliest date will be used if no date is selected"
+msgstr "Earliest date will be used if no date is selected"
+
+msgid "Latest date will be used if no date is selected"
+msgstr "Latest date will be used if no date is selected"
+
+msgid "Generated values successfully"
+msgstr "Generated values successfully"
+
+msgid "Start"
+msgstr "\u0EC0\u0EA5\u0EB5\u0EC8\u0EA1"
+
+msgid "Data Set list"
+msgstr "Data Set list"
+
+msgid "Data element group list"
+msgstr "Data Element Group list"
+
+msgid "Organisation unit group list"
+msgstr "Organisation Unit Group list"
+
+msgid "Person data archive"
+msgstr "Person Data Archive"
+
+msgid ""
+"Archive person data which is not currently relevant to your"
+"system in order to improve performance. Data can also be"
+"unarchived."
+msgstr ""
+"Archive person data which is not currently relevant to your"
+"system in order to improve performance. Data can also be"
+"unarchived."
+
+
+msgid "You must choose the organisation unit has parent to prune. Please try again!"
+msgstr "You must choose the organisation unit has parent to prune. Please try again!"
+
+msgid "Restricted user tables cannot be referenced in query"
+msgstr "Not allowance to query in the special tables!"
+
+msgid "Sections with invalid category combinations"
+msgstr "Sections with invalid category combinations"
+
+msgid "Do you want to delete this SQL view object ?"
+msgstr "Do you want to delete this sql view object ?"
+
+msgid "Clear data mart"
+msgstr "Clear data mart"
+
+msgid "Rebuild data mart index"
+msgstr "Rebuild data mart index"
+
+msgid "Display zeros"
+msgstr "Display zeros"
+
+msgid "Raw data"
+msgstr "Raw data"
+
+msgid "Download as HTML"
+msgstr "Download as HTML"
+
+msgid "Download as XML"
+msgstr "Download as XML"
+
+msgid "Download as JSON"
+msgstr "Download as JSON"
+
+msgid "Data element structure"
+msgstr "Data element structure"
+
+msgid "Constant"
+msgstr "Constant"
+
+msgid "Constant management"
+msgstr "Constant Management"
+
+msgid "Add Constant"
+msgstr "Add Constant"
+
+msgid "Edit Constant"
+msgstr "Edit Constant"
+
+msgid "Value must be an number"
+msgstr "Value must be an number"
+
+msgid "Do you want to delete this constant?"
+msgstr "Do you want to delete this constant?"
+
+msgid "Object type"
+msgstr "Object type"
+
+msgid "Users logged in"
+msgstr "Users logged in"
+
+msgid "Today"
+msgstr "Today"
+
+msgid "Yesterday"
+msgstr "Yesterday"
+
+msgid "Last 7 days"
+msgstr "Last 7 days"
+
+msgid "Last 30 days"
+msgstr "Last 30 days"
+
+msgid "Dynamic Attributes"
+msgstr "Dynamic Attributes"
+
+msgid "Attribute management"
+msgstr "Attribute Management"
+
+msgid "Value type"
+msgstr "Value Type"
+
+msgid "Mandatory"
+msgstr "Mandatory"
+
+msgid "Organisation unit"
+msgstr "Organisation unit"
+
+msgid "Organisation unit group"
+msgstr "Organisation Unit Group"
+
+msgid "User"
+msgstr "User"
+
+msgid "User Group"
+msgstr "User Group"
+
+msgid "Integer"
+msgstr "Integer"
+
+msgid "Add Attribute"
+msgstr "Add Attribute"
+
+msgid "Edit Attribute"
+msgstr "Edit Attribute"
+
+msgid "Assigned to"
+msgstr "Assigned to"
+
+msgid "Attribute sort order"
+msgstr "Attribute sort order"
+
+msgid "Scheduling is"
+msgstr "Scheduling is"
+
+msgid "Scheduling"
+msgstr "Scheduling"
+
+msgid "Scheduling management"
+msgstr "Scheduling management"
+
+msgid "Stop"
+msgstr "Stop"
+
+msgid "Refresh"
+msgstr "Refresh"
+
+msgid "Aggregation period types"
+msgstr "Aggregation period types"
+
+msgid "active"
+msgstr "active"
+
+msgid "Resource tables"
+msgstr "Resource tables"
+
+msgid "Data mart"
+msgstr "Data mart"
+
+msgid "Analytics tables"
+msgstr "Analytics tables"
+
+msgid "Analytics tables task strategy"
+msgstr "Analytics tables task strategy"
+
+msgid "Last 2 years daily"
+msgstr "Last 2 years daily"
+
+msgid "Last 3 years daily"
+msgstr "Last 3 years daily"
+
+msgid "All daily"
+msgstr "All daily"
+
+msgid "Resource tables task strategy"
+msgstr "Resource tables task strategy"
+
+msgid "Data mart task strategy"
+msgstr "Data mart task strategy"
+
+msgid "Never"
+msgstr "Never"
+
+msgid "Last 12 months daily"
+msgstr "Last 12 months daily"
+
+msgid "Last 6 months daily + 6 to 12 months weekly"
+msgstr "Last 6 months daily + 6 to 12 months weekly"
+
+msgid "Daily"
+msgstr "Daily"
+
+msgid "Organisation unit group set aggregation level"
+msgstr "Organisation unit group set aggregation level"
+
+msgid "Aggregated org unit data values"
+msgstr "Aggregated org unit data values"
+
+msgid "Aggregated org unit indicator values"
+msgstr "Aggregated org unit indicator values"
+
+msgid "Execute Now"
+msgstr "Execute now"
+
+msgid ""
+"Are you sure you want to execute all tasks now? Task"
+"processing might fully utilize your system resources and slow"
+"down other operations."
+msgstr ""
+"Are you sure you want to execute all tasks now? Task"
+"processing might fully utilize your system resources and slow"
+"down other operations."
+
+
+msgid "No aggregation"
+msgstr "No aggregation"
+
+msgid "Data elements in data set but not in form or sections"
+msgstr "Data elements in data set but not in form or sections"
+
+msgid "Option set management"
+msgstr "Option set management"
+
+msgid "Add option set"
+msgstr "Add option set"
+
+msgid "Option"
+msgstr "Option"
+
+msgid "Edit option set"
+msgstr "Edit option set"
+
+msgid "Lock Exception Management"
+msgstr "Lock Exception Management"
+
+msgid "Lock Exception"
+msgstr "Lock Exception"
+
+msgid "Do you want to delete this lock exception?"
+msgstr "Do you want to delete this lock exception?"
+
+msgid "Do you want to delete lock exceptions with this configuration?"
+msgstr "Do you want to delete lock exceptions with this configuration?"
+
+msgid "Create new lock exception"
+msgstr "Create new lock exception"
+
+msgid "Edit lock exception"
+msgstr "Edit lock exception"
+
+msgid "Lock exception batch removal"
+msgstr "Lock exception batch removal"
+
+msgid "Back to lock exception"
+msgstr "Back to lock exception"
+
+msgid "Batch deletion"
+msgstr "Batch deletion"
+
+msgid "Deleting lock exceptions"
+msgstr "Deleting lock exceptions"
+
+msgid "Error at"
+msgstr "Error at"
+
+msgid "not started"
+msgstr "not started"
+
+msgid "Aggregated data set completeness"
+msgstr "Aggregated data set completeness"
+
+msgid "Show SQL view"
+msgstr "Show SQL view"
+
+msgid "Financial Yearly"
+msgstr "Financial Yearly"
+
+msgid "Update option"
+msgstr "Update option"
+
+msgid "Removing min-max values"
+msgstr "Removing min-max values"
+
+msgid "Generating min-max values"
+msgstr "Generating min-max values"
+
+msgid "Period structure"
+msgstr "Period structure"
+
+msgid "Data element category option combinations"
+msgstr "Data element category option combinations"
+
+msgid "Update category option combinations"
+msgstr "Update category option combinations"
+
+msgid "Date period structure"
+msgstr "Date period structure"
+
+msgid "Locale"
+msgstr "Locale"
+
+msgid "Locale Management"
+msgstr "Locale Management"
+
+msgid "Create New Locale"
+msgstr "Create New Locale"
+
+msgid "Locale Details"
+msgstr "Locale Details"
+
+msgid "Edit Locale"
+msgstr "Edit Locale"
+
+msgid "Are you sure you want to delete this locale?"
+msgstr "Are you sure you want to delete this locale?"
+
+msgid "Language"
+msgstr "Language"
+
+msgid "Country"
+msgstr "Country"
+
+msgid "Please select a language"
+msgstr "Please select a language"
+
+msgid "Please select a country"
+msgstr "Please select a country"
+
+msgid "Data monitoring"
+msgstr "Data monitoring"
+
+msgid "Data monitoring strategy"
+msgstr "Data monitoring strategy"
+
+msgid "Last hour"
+msgstr "Last hour"
+
+msgid "Data set"
+msgstr "Data Set"
+
+msgid "Last year daily"
+msgstr "Last year daily"
+
+msgid "Disabled"
+msgstr "Disabled"
+
+msgid "Data synchronization"
+msgstr "Data synchronization"
+
+msgid "Data synchronization strategy"
+msgstr "Data synchronization strategy"
+
+msgid "Enabled"
+msgstr "Enabled"
+
+msgid "Available for mobile reporting"
+msgstr "Available for Mobile Reporting"
+
+msgid "Please select a data set"
+msgstr "Please select a data set"
+
+msgid "Greying area"
+msgstr "Greying area"
+
+msgid "Section grey field management"
+msgstr "Section grey field management"
+
+msgid "Disable"
+msgstr "Disable"
+
+msgid "Enable"
+msgstr "Enable"
+
+msgid "No"
+msgstr "No"
+
+msgid "Indicators"
+msgstr "Indicators"
+
+msgid "Select category combo"
+msgstr "Select Category Combo"
+
+msgid "Title"
+msgstr "Title"
+
+msgid "Add data set"
+msgstr "Add data set"
+
+msgid "Data set details"
+msgstr "Data set details"
+
+msgid "Multi-organisation unit entry details"
+msgstr "MultiOrg Data set details"
+
+msgid "Frequency"
+msgstr "Frequency"
+
+msgid "Assign to organisation units"
+msgstr "Assign data set to organisation units"
+
+msgid "Number of data elements"
+msgstr "Number of data elements"
+
+msgid "Assign data set to organisation units"
+msgstr "Assign data set to organisation units"
+
+msgid "Assign"
+msgstr "Assign"
+
+msgid "Edit data set"
+msgstr "Edit data set"
+
+msgid "Are you sure you want to delete this data set?"
+msgstr "Are you sure you want to delete this data set?"
+
+msgid "This name is already registered"
+msgstr "Name is already in use"
+
+msgid "This short name is already registered"
+msgstr "This short name is already registered"
+
+msgid "This code is already registered"
+msgstr "This code is already registered"
+
+msgid "Data entry form"
+msgstr "Data entry form"
+
+msgid "Data entry form management"
+msgstr "Data entry form management"
+
+msgid "Data entry form details"
+msgstr "Data entry form details"
+
+msgid "Design data entry form"
+msgstr "Design data entry form"
+
+msgid "Delete"
+msgstr "Delete this form"
+
+msgid "Data Set"
+msgstr "Data set"
+
+msgid "Are you sure you want to delete this data entry form?"
+msgstr "Are you sure you want to delete this data entry form?"
+
+msgid "Insert"
+msgstr "Insert"
+
+msgid "Select data set"
+msgstr "Select data set"
+
+msgid "Sort section"
+msgstr "Sort section"
+
+msgid "Data Set Section"
+msgstr "Data Set Section"
+
+msgid "Label"
+msgstr "Label"
+
+msgid "Group"
+msgstr "Group"
+
+msgid "Add section"
+msgstr "Add section"
+
+msgid "Section Details"
+msgstr "Section Details"
+
+msgid "Edit section"
+msgstr "Edit section"
+
+msgid "Data set sort order"
+msgstr "Data set sort order"
+
+msgid "Design data entry form"
+msgstr "Design data entry form"
+
+msgid "Data set management"
+msgstr "Data set management"
+
+msgid "Data set section management"
+msgstr "Data set section management"
+
+msgid ""
+"Create, update, view and delete data sets and custom"
+"forms. A data set is a collection of data elements for"
+"which data is entered."
+msgstr ""
+"Create, update, view and delete data sets and custom"
+"forms. A data set is a collection of data elements for"
+"which data is entered."
+
+
+msgid ""
+"Assign data sets to organisation units in a grid based"
+"layout for faster operations when working with a high number"
+"of items."
+msgstr ""
+"Assign data sets to organisation units in a grid based"
+"layout for faster operations when working with a high number"
+"of items."
+
+
+msgid "Edit compulsory data elements"
+msgstr "Edit compulsory data elements"
+
+msgid "Data Set Assignment Editor"
+msgstr "Data Set Assignment Editor"
+
+msgid "Add new"
+msgstr "Add new"
+
+msgid "Delete successfully"
+msgstr "Delete successfully"
+
+msgid "Saved successfully"
+msgstr "Saved successful"
+
+msgid "Save and close"
+msgstr "Save and close"
+
+msgid "DataSets"
+msgstr "DataSets"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Pivot"
+msgstr "Pivot"
+
+msgid "Please select data set and category combination"
+msgstr "Please select data set and category combination"
+
+msgid "Indicator already inserted"
+msgstr "Indicator already inserted"
+
+msgid "No indicator was selected"
+msgstr "No indicator was selected"
+
+msgid "Data element already inserted"
+msgstr "Data element already inserted"
+
+msgid "No data element was selected"
+msgstr "No data element was selected"
+
+msgid "Done"
+msgstr "Done"
+
+msgid "Section sort order"
+msgstr "Section sort order"
+
+msgid "Are you sure you want to delete this section?"
+msgstr "Are you sure you want to delete this section?"
+
+msgid "Please specify a name"
+msgstr ""
+""
+"\u0E81\u0EB0\u0EA5\u0EB8\u0E99\u0EB2\u0EA5\u0EB0\u0E9A\u"
+"0EB8\u0E8A\u0EB7\u0EC8"
+
+
+msgid "Select organisation unit"
+msgstr "Select organisation unit"
+
+msgid "Assigned"
+msgstr "Assigned"
+
+msgid "Unassigned"
+msgstr "Unassigned"
+
+msgid "Show selection box"
+msgstr "Show selection box"
+
+msgid "Grey field"
+msgstr "Grey field"
+
+msgid "Totals"
+msgstr "Totals"
+
+msgid "Expiry days"
+msgstr "Expiry Days"
+
+msgid "Days after period to qualify for timely submission"
+msgstr "Days after period end to qualify for timely data submission"
+
+msgid "Insert data elements, totals and indicators"
+msgstr "Insert data elements, totals and indicators"
+
+msgid "Style"
+msgstr "Style"
+
+msgid "Comfortable"
+msgstr "Comfortable"
+
+msgid "Regular"
+msgstr "Regular"
+
+msgid "Compact"
+msgstr "Compact"
+
+msgid "None"
+msgstr "None"
+
+msgid "Allow future periods"
+msgstr "Allow future periods"
+
+msgid "Skip data mart aggregation"
+msgstr "Skip data mart aggregation"
+
+msgid "Insert data elements"
+msgstr "Insert data elements"
+
+msgid "Insert input fields into the form"
+msgstr "Insert input fields into the form"
+
+msgid "Category option combo does not exist"
+msgstr "Category option combo does not exist"
+
+msgid "Data element does not exist"
+msgstr "Data element does not exist"
+
+msgid "Indicator does not exist"
+msgstr "Indicator does not exist"
+
+msgid "Category combo does not exist"
+msgstr "Category combo does not exist"
+
+msgid "All fields for data elements required"
+msgstr "All fields for data elements required"
+
+msgid "Form details"
+msgstr "Form details"
+
+msgid "Complete allowed only if validation passes"
+msgstr "Complete allowed only if validation passes"
+
+msgid "Complete notification recipients"
+msgstr "Complete notification recipients"
+
+msgid "Missing value requires comment on complete"
+msgstr "Missing value requires comment on complete"
+
+msgid "Skip offline"
+msgstr "Skip offline"
+
+msgid "Render sections as tabs"
+msgstr "Render sections as tabs"
+
+msgid "Render vertically"
+msgstr "Render Vertically"
+
+msgid "Auto-save data entry forms"
+msgstr "Auto-save data entry forms"
+
+msgid "Send notification to completing user"
+msgstr "Send notification to completing user"
+
+msgid "Insert images"
+msgstr "Insert images"
+
+msgid "Data element decoration"
+msgstr "Data element decoration"
+
+msgid "Get PDF for Data Entry"
+msgstr "Get PDF for Data Entry"
+
+msgid "Saving Validation Rule failed"
+msgstr ""
+"\u0E9A\u0ECD\u0EC8\u0EAA\u0EB2\u0EA1\u0EB2\u0E94\u0E9A\u"
+"0EB1\u0E99\u0E97\u0EB6\u0E81"
+
+
+msgid "Operator"
+msgstr "Operator"
+
+msgid "Adding validation rule failed"
+msgstr ""
+"\u0E9A\u0ECD\u0EC8\u0EAA\u0EB2\u0EA1\u0EB2\u0E94\u0EC0\u"
+"0E9E\u0EB5\u0EC8\u0EA1"
+
+
+msgid "Validation failed"
+msgstr ""
+"\u0E81\u0EB2\u0E99\u200B\u0EAE\u0EB1\u0E9A\u200B\u0EAE\u"
+"0EAD\u0E87\u0E9A\u0ECD\u0EC8\u200B\u0EAA\u0EB3\u200B\u0EC0"
+"\u0EA5\u0EB1\u0E94"
+
+
+msgid "Right side expr"
+msgstr "Right side"
+
+msgid "Left side expr"
+msgstr "Left side"
+
+msgid "Please specify the left side"
+msgstr ""
+"\u0E81\u0EB0\u0EA5\u0EB8\u0E99\u0EB2\u0E81\u0EB3\u0E99\u"
+"0EBB\u0E94\u0E9E\u0EB2\u0E81\u0EC0\u0E9A\u0EB7\u0EC9\u0EAD"
+"\u0E87\u0E8A\u0EC9\u0EB2\u0E8D"
+
+
+msgid "Please specify the right side"
+msgstr ""
+"\u0E81\u0EB0\u0EA5\u0EB8\u0E99\u0EB2\u0E81\u0EB3\u0E99\u"
+"0EBB\u0E94\u0E9E\u0EB2\u0E81\u0EC0\u0E9A\u0EB7\u0EC9\u0EAD"
+"\u0E87\u0E82\u0EA7\u0EB2"
+
+
+msgid "Please specify an operator"
+msgstr ""
+"\u0E81\u0EB0\u0EA5\u0EB8\u0E99\u0EB2\u0EC0\u0EA5\u0EB7\u"
+"0EAD\u0E81\u0EC0\u0E84\u0EB7\u0EC8\u0EAD\u0E87\u0EDD\u0EB2"
+"\u0E8D\u0EC0\u0EA5\u0E81"
+
+
+msgid " Please specify a start date"
+msgstr ""
+""
+"\u0E81\u0EB0\u0EA5\u0EB8\u0E99\u0EB2\u0EC0\u0EA5\u0EB7\u"
+"0EAD\u0E81\u0EA7\u0EB1\u0E99\u0E97\u0EB5\u0EC8\u0EC0\u0EA5"
+"\u0EB5\u0EC8\u0EA1\u0E95\u0EBB\u0EC9\u0E99"
+
+
+msgid " Please specify an ending date"
+msgstr ""
+""
+"\u0E81\u0EB0\u0EA5\u0EB8\u0E99\u0EB2\u0EC0\u0EA5\u0EB7\u"
+"0EAD\u0E81\u0EA7\u0EB1\u0E99\u0E97\u0EB5\u0EC8\u0E88\u0EBB"
+"\u0E9A"
+
+
+msgid "Please specify a description"
+msgstr ""
+"\u200B\u0E81\u0EB0\u200B\u0EA5\u0EB8\u200B\u0E99\u0EB2\u"
+"200B\u0E9E\u0EB1\u0E99\u200B\u0EA5\u0EB0\u200B\u0E99\u0EB2"
+
+
+msgid "Please specify an expression"
+msgstr ""
+"\u0E81\u0EB0\u0EA5\u0EB8\u0E99\u0EB2\u0EC0\u0EA5\u0EB7\u"
+"0EAD\u0E81\u0EC0\u0E84\u0EB7\u0EC8\u0EAD\u0E87\u0EDD\u0EB2"
+"\u0E8D\u0EC0\u0EA5\u0EB7\u0EAD\u0E81"
+
+
+msgid "Please enter a valid start date"
+msgstr ""
+"\u0E81\u0EB0\u0EA5\u0EB8\u0E99\u0EB2\u0EC0\u0EA5\u0EB7\u"
+"0EAD\u0E81\u0EA7\u0EB1\u0E99\u0E97\u0EB5\u0EC8\u0E97\u0EB5"
+"\u0EC8\u0EC0\u0EA5\u0EB5\u0EC8\u0EA1"
+
+
+msgid "Please enter a valid end date"
+msgstr ""
+"\u0E81\u0EB0\u0EA5\u0EB8\u0E99\u0EB2\u0EC0\u0EA5\u0EB7\u"
+"0EAD\u0E81\u0EA7\u0EB1\u0E99\u0E97\u0EB5\u0EC8\u0E97\u0EB5"
+"\u0EC8\u0E88\u0EBB\u0E9A"
+
+
+msgid "End date cannot be before Start date"
+msgstr ""
+""
+"\u0EA7\u0EB1\u0E99\u0E88\u0EBB\u0E9A\u0E9A\u0ECD\u0EC8\u"
+"0EAA\u0EB2\u0EA1\u0EB2\u0E94\u0EC0\u0EA5\u0EB5\u0EC8\u0EA1"
+"\u0E81\u0EC8\u0EAD\u0E99\u0EA7\u0EB1\u0E99\u0E97\u0EB5\u"
+"0EC8\u0EC0\u0EA5\u0EB5\u0EC8\u0EA1\u0E95\u0EBB\u0EC9\u0E99"
+
+
+msgid "The data elements on the left side must be of type numbers"
+msgstr ""
+"\u0EAD\u0EBB\u0E87\u0E9B\u0EB0\u0E81\u0EAD\u0E9A\u0E82\u"
+"0ECD\u0EC9\u0EA1\u0EB9\u0E99\u0E9E\u0EB2\u0E81\u0EC0\u0E9A"
+"\u0EB7\u0EC9\u0EAD\u0E87\u0E8A\u0EC9\u0EB2\u0E8D\u0EA1\u"
+"0EB7\u0E95\u0EC9\u0EAD\u0E87\u0EC0\u0E9B\u0EB1\u0E99\u0E95"
+"\u0EBB\u0EA7\u0EC0\u0EA5\u0E81"
+
+
+msgid "The data elements on the right side must be of type numbers"
+msgstr ""
+"\u0EAD\u0EBB\u0E87\u0E9B\u0EB0\u0E81\u0EAD\u0E9A\u0E82\u"
+"0ECD\u0EC9\u0EA1\u0EB9\u0E99\u0E9E\u0EB2\u0E81\u0EC0\u0E9A"
+"\u0EB7\u0EC9\u0EAD\u0E87\u0E82\u0EA7\u0EB2\u0EA1\u0EB7\u"
+"0E95\u0EC9\u0EAD\u0E87\u0EC0\u0E9B\u0EB1\u0E99\u0E95\u0EBB"
+"\u0EA7\u0EC0\u0EA5\u0E81"
+
+
+msgid "Create new validation rule"
+msgstr ""
+"\u0E81\u0EB3\u0E99\u0EBB\u0E94\u0EAB\u0EBC\u0EB1\u0E81\u"
+"0E81\u0EB2\u0E99\u0EC3\u0EDD\u0EC8"
+
+
+msgid "Validate"
+msgstr "\u0E81\u0EA7\u0E94\u0EAA\u0EAD\u0E9A"
+
+msgid " Are you sure you want to delete the validation rule?"
+msgstr ""
+""
+"\u0E97\u0EC8\u0EB2\u0E99\u0EC1\u0E99\u0EC8\u0EC3\u0E88\u"
+"0E97\u0EB5\u0EC8\u0E88\u0EB0\u0EA5\u0EBB\u0E9A\u0EAD\u0EAD"
+"\u0E81\u0E9A\u0ECD?"
+
+
+msgid " Are you sure you want to delete the validation rule group?"
+msgstr ""
+""
+"\u0E97\u0EC8\u0EB2\u0E99\u0EC1\u0E99\u0EC8\u0EC3\u0E88\u"
+"0E97\u0EB5\u0EC8\u0E88\u0EB0\u0EA5\u0EBB\u0E9A\u0E9A\u0ECD"
+"?"
+
+
+msgid " Edit left side"
+msgstr " \u0EC1\u0E81\u0EC9\u0EC4\u0E82\u0E9E\u0EB2\u0E81\u0E8A\u0EC9\u0EB2\u0E8D"
+
+msgid " Edit right side"
+msgstr " \u0EC1\u0E81\u0EC9\u0EC4\u0E82\u0E9E\u0EB2\u0E81\u0E82\u0EA7\u0EB2"
+
+msgid " Select operator"
+msgstr ""
+""
+"\u0EC0\u0EA5\u0EB7\u0EAD\u0E81\u0EC0\u0E84\u0EB7\u0EC8\u"
+"0EAD\u0E87\u0EDD\u0EB2\u0E8D\u0EC0\u0EA5\u0E81"
+
+
+msgid " Left"
+msgstr " \u0E8A\u0EC9\u0EB2\u0E8D"
+
+msgid " Right"
+msgstr " \u0E82\u0EA7\u0EB2"
+
+msgid " Textual expression description"
+msgstr ""
+""
+"\u200B\u0E9E\u0EB1\u0E99\u200B\u0EA5\u0EB0\u200B\u0E99\u"
+"0EB2\u200B\u0EC0\u0E9B\u0EB1\u0E99\u200B\u0E9A\u0EBB\u0E94"
+"\u200B\u0E82\u0EBD\u0E99\u200B\u0EAD\u0EAD\u0E81\u200B\u"
+"0EA1\u0EB2"
+
+
+msgid " Edit validation rule"
+msgstr ""
+""
+"\u200B\u0E94\u0EB1\u0E94\u200B\u0EC1\u0E81\u0EC9\u200B\u"
+"0EAB\u0EA5\u0EB1\u0E81\u200B\u0E81\u0EB2\u0E99\u200B\u0E81"
+"\u0EB2\u0E99\u200B\u0EAE\u0EB1\u0E9A\u200B\u0EAE\u0EAD\u"
+"0E87"
+
+
+msgid " Validation rule"
+msgstr ""
+""
+"\u200B\u0EAB\u0EA5\u0EB1\u0E81\u200B\u0E81\u0EB2\u0E99\u"
+"200B\u0E81\u0EB2\u0E99\u200B\u0EAE\u0EB1\u0E9A\u200B\u0EAE"
+"\u0EAD\u0E87"
+
+
+msgid " Run validation"
+msgstr " \u0E81\u0EA7\u0E94\u0EAA\u0EAD\u0E9A"
+
+msgid " Source"
+msgstr ""
+""
+"\u200B\u0EC1\u0EAB\u0EC8\u200B\u0EA5\u0E87\u200B\u0E97\u"
+"0EB5\u0EC8\u200B\u0EA1\u0EB2"
+
+
+msgid "Validation"
+msgstr "Validation"
+
+msgid "Data quality report"
+msgstr ""
+"\u0EA5\u0EB2\u0E8D\u0E84\u0EB8\u0E99\u0E99\u0EB0\u0E9E\u"
+"0EB2\u0E9A\u0E82\u0ECD\u0EC9\u0EA1\u0EB9\u0E99"
+
+
+msgid "Validation result details"
+msgstr ""
+"\u0EA5\u0EB2\u0E8D\u0EA5\u0EB0\u0EAD\u0EBD\u0E94\u0E82\u"
+"0EAD\u0E87\u0E9C\u0EBB\u0E99\u0E81\u0EB2\u0E99\u0E81\u0EA7"
+"\u0E94\u0EAA\u0EAD\u0E9A"
+
+
+msgid "Validation rule"
+msgstr ""
+"\u200B\u0EAB\u0EA5\u0EB1\u0E81\u200B\u0E81\u0EB2\u0E99\u"
+"0EA2\u0EB1\u0EC9\u0E87\u200B\u0EA2\u0EB6\u0E99"
+
+
+msgid "Validation rule group management"
+msgstr ""
+"\u0E81\u0EB2\u0E99\u0E88\u0EB1\u0E94\u0E81\u0EB2\u0E99\u"
+"0E81\u0EB8\u0EC8\u0EA1\u0E82\u0EAD\u0E87\u0EAB\u0EBC\u0EB1"
+"\u0E81\u0E81\u0EB2\u0E99\u0E81\u0EA7\u0E94\u0EAA\u0EAD\u"
+"0E9A"
+
+
+msgid "Validation rule management"
+msgstr ""
+"\u0E81\u0EB2\u0E99\u0E88\u0EB1\u0E94\u0E81\u0EB2\u0E99\u"
+"0EAB\u0EBC\u0EB1\u0E81\u0E81\u0EB2\u0E99\u0E81\u0EB2\u0E99"
+"\u0E81\u0EA7\u0E94\u0EAA\u0EAD\u0E9A"
+
+
+msgid " Validation rule group"
+msgstr ""
+""
+"\u0E81\u0EB9\u0EC8\u0EA1\u0E82\u0EAD\u0E87\u0EAB\u0EBC\u"
+"0EB1\u0E81\u0E81\u0EB2\u0E99\u0E81\u0EB2\u0E99\u0E81\u0EA7"
+"\u0E94\u0EAA\u0EAD\u0E9A"
+
+
+msgid "Create new validation rule group"
+msgstr ""
+"\u0EAA\u0EC9\u0EB2\u0E87\u0E81\u0EB8\u0EC8\u0EA1\u0E82\u"
+"0EAD\u0E87\u0EAB\u0EBC\u0EB1\u0E81\u0E81\u0EB2\u0E99\u0E81"
+"\u0EA7\u0E94\u0EAA\u0EAD\u0E9A"
+
+
+msgid "Available"
+msgstr "Available"
+
+msgid "selected"
+msgstr "\u0EC0\u0EA5\u0EB7\u0EAD\u0E81\u0EC1\u0EA5\u0EC9\u0EA7"
+
+msgid "Validation rules"
+msgstr ""
+"\u0EAB\u0EBC\u0EB1\u0E81\u0E81\u0EB2\u0E99\u0E81\u0EB2\u"
+"0E99\u0E81\u0EA7\u0E94\u0EAA\u0EAD\u0E9A"
+
+
+msgid "User groups to alert"
+msgstr "User groups to alert"
+
+msgid "Alert only organisation unit related users"
+msgstr "Only organisation unit related users are alerted"
+
+msgid "Yes"
+msgstr "\u0EC1\u0EA1\u0EC8\u0E99"
+
+msgid "No"
+msgstr "\u0E9A\u0ECD\u0EC8"
+
+msgid "Available validation rules"
+msgstr "Available validation rules"
+
+msgid "Edit validation rule group"
+msgstr "Edit validation rule group"
+
+msgid " All validation rules"
+msgstr " All validation rules"
+
+msgid " Validation passed successfully"
+msgstr " Validation passed successfully"
+
+msgid "Standard Deviation"
+msgstr "Standard Deviation"
+
+msgid "values found"
+msgstr "values found"
+
+msgid "Select number of standard deviations"
+msgstr "Select number of standard deviations"
+
+msgid "Outlier Analysis"
+msgstr "Outlier Analysis"
+
+msgid "No values found"
+msgstr "\u0E9A\u0ECD\u0EC8\u0EA1\u0EB5\u0E84\u0EC8\u0EB2"
+
+msgid ""
+"Add, modify, view and delete validation rules. Anomalies"
+"can be discovered by running validation rules against the"
+"data."
+msgstr ""
+"\u200B\u0E95\u0EB7\u0EC8\u0EA1,"
+"\u0E94\u0EB1\u0E94\u200B\u0EC1\u0E9B\u0E87,"
+"\u0EA7\u0EB5\u0EA7\u200B\u0EC0\u0E9A\u0EB5\u0EC8\u0E87"
+"\u0EC1\u0EA5\u0EB0"
+"\u0EA5\u0EB7\u0E9A\u200B\u0E96\u0EB5\u0EC9\u0EA1"
+"\u0EAB\u0EA5\u0EB1\u0E81\u200B\u0E81\u0EB2\u0E99\u0EA2\u"
+"0EB1\u0EC9\u0E87\u200B\u0EA2\u0EB7\u0E99."
+"\u0E84\u0EA7\u0EB2\u0EA1\u200B\u0E9C\u0EB4\u0E94\u200B\u"
+"0E9B\u0EBB\u0E81\u200B\u0E81\u0EB0\u200B\u0E95\u0EB4\u200B"
+"\u0EAD\u0EB2\u0E94\u200B\u0E88\u0EB0\u200B\u0EC0\u0EAB\u"
+"0EB1\u0E99"
+"\u0E94\u0EC9\u0EA7\u0E8D\u200B\u0E81\u0EB2\u0E99\u200B\u"
+"0EC0\u0E9B\u0EB5\u0E94\u200B\u0EC0\u0E9A\u0EB5\u0EC8\u0E87"
+"\u0EAB\u0EA5\u0EB1\u0E81\u200B\u0E81\u0EB2\u0E99\u0EA2\u"
+"0EB1\u0EC9\u0E87\u200B\u0EA2\u0EB7\u0E99\u200B\u0E95\u0ECD"
+"\u200B\u0E81\u0EB1\u0E9A\u200B\u0E82\u0ECD\u0EC9\u200B\u"
+"0EA1\u0EB9\u0E99"
+
+
+msgid ""
+"Add, modify, view and delete validation rule groups."
+"Provides the ability to group and run validation rules"
+"together."
+msgstr ""
+"\u200B\u0E95\u0EB7\u0EC8\u0EA1\u200B\u0EC3\u0EAA\u0EC8,"
+"\u0E94\u0EB1\u0E94\u200B\u0EC1\u0E9B\u0E87,"
+"\u0EA7\u0EB4\u0EA7\u200B\u0EC0\u0E9A\u0EB5\u0EC8\u0E87"
+"\u0EC1\u0EA5\u0EB0"
+"\u0EA5\u0EBB\u0E9A\u200B\u0E96\u0EB7\u0EC9\u0EA1\u200B\u"
+"0E81\u0EB8\u0EC8\u0EA1\u200B\u0E82\u0EAD\u0E87\u0EAB\u0EA5"
+"\u0EB1\u0E81\u200B\u0E81\u0EB2\u0E99\u0EA2\u0EB1\u0EC9\u"
+"0E87\u200B\u0EA2\u0EB7\u0E99."
+"\u0EAA\u0EB0\u200B\u0EDC\u0EAD\u0E87\u200B\u0EC3\u0EAB\u"
+"0EC9\u200B\u0EC0\u0EAB\u0EB1\u0E99\u200B\u0E84\u0EA7\u0EB2"
+"\u0EA1\u200B\u0EAA\u0EB2\u200B\u0EA1\u0EB2\u0E94\u200B\u"
+"0EC3\u0E99\u200B\u0E81\u0EB2\u0E99\u200B\u0EC0\u0E9B\u0EB5"
+"\u0E94\u200B\u0EC0\u0EAD\u0EBB\u0EB2\u200B\u0EAB\u0EA5\u"
+"0EB1\u0E81\u200B\u0E81\u0EB2\u0E99\u0EA2\u0EB1\u0EC9\u0E87"
+"\u200B\u0EA2\u0EB7\u0E99\u200B\u0E9E\u0EC9\u0EAD\u0EA1\u"
+"200B\u0E81\u0EB1\u0E99"
+
+
+msgid ""
+"Run validation rules in order to unveil anomalies and errors"
+"in the data in the database."
+msgstr ""
+"\u200B\u0EC0\u0E9B\u0EB5\u0E94\u200B\u0EC0\u0EAD\u0EBB\u"
+"0EB2\u200B\u0EAB\u0EA5\u0EB1\u0E81\u200B\u0E81\u0EB2\u0E99"
+"\u0EA2\u0EB1\u0EC9\u0E87\u200B\u0EA2\u0EB7\u0E99\u200B\u"
+"0EC0\u0E9E\u0EB7\u0EC8\u0EAD\u200B\u0EC0\u0E9A\u0EB5\u0EC8"
+"\u0E87\u0EA7\u0EC8\u0EB2\u200B\u0E88\u0EB0\u200B\u0EA1\u"
+"0EB5\u200B\u0EAB\u200B\u0E8D\u0EB1\u0E87\u200B\u0E97\u0EB5"
+"\u0EC8\u200B\u0E9C\u0EB4\u0E94\u200B\u0E9B\u0EBB\u0E81\u"
+"200B\u0E81\u0EB0\u200B\u0E95\u0EB4 \u0EC1\u0EA5\u0EB0"
+"\u0E9A\u0ECD\u0EC8\u200B\u0E96\u0EB7\u0E81\u200B\u0E95\u"
+"0EC9\u0EAD\u0E87\u200B\u0E82\u0EAD\u0E87\u200B\u0E82\u0ECD"
+"\u0EC9\u200B\u0EA1\u0EB9\u0E99\u200B\u0EA2\u0EB9\u0EC8\u"
+"200B\u0EC3\u0E99\u200B\u0E96\u0EB2\u0E99\u200B\u0E82\u0ECD"
+"\u0EC9\u200B\u0EA1\u0EB9\u0E99"
+
+
+msgid ""
+"Analyze potential outlier values based on standard deviations."
+"Outlier values can be examined and marked for follow-up."
+msgstr ""
+"\u200B\u0EA7\u0EB4\u200B\u0EC4\u0E88\u200B\u0EC0\u0E9A\u"
+"0EB5\u0EC8\u0E87\u200B\u0E97\u0EC8\u0EB2\u200B\u0EAD\u0EC8"
+"\u0EBD\u0E87\u200B\u0E82\u0EAD\u0E87\u200B\u0EA1\u0EB9\u"
+"0E99\u200B\u0E84\u0EC8\u0EB2\u200B\u0E95\u0EC8\u0EB2\u0E87"
+"\u0EC6\u200B\u0E97\u0EB5\u0EC8\u200B\u0EAD\u0EB2\u0E94\u"
+"200B\u0E88\u0EB0\u200B\u0EC0\u0E81\u0EB5\u0E99\u0E81\u0EA7"
+"\u0EC8\u0EB2\u200B\u0EA1\u0EB2\u0E94\u200B\u0E95\u0EB0\u"
+"200B\u0E96\u0EB2\u0E99."
+"\u0E84\u0EC8\u0EB2\u200B\u0E97\u0EB5\u0EC8\u200B\u0EC0\u"
+"0E81\u0EB5\u0E99\u0E81\u0EA7\u0EC8\u0EB2\u200B\u0EAA\u0EB2"
+"\u200B\u0EA1\u0EB2\u0E94\u0E81\u0EA7\u0E94\u200B\u0E81\u"
+"0EB2\u200B\u0EC0\u0E9A\u0EB5\u0EC8\u0E87 \u0EC1\u0EA5\u0EB0"
+"\u0EDD\u0EB2\u0E8D\u200B\u0EC3\u0EA7\u0EC9\u200B\u0EC0\u"
+"0E9E\u0EB7\u0EC8\u0EAD\u200B\u0E95\u0EB4\u0E94\u200B\u0E95"
+"\u0EB2\u0EA1"
+
+
+msgid ""
+"Analyze potential outlier values based on min and max values."
+"Outlier values can be examined and marked for follow-up."
+msgstr ""
+"\u200B\u0EA7\u0EB4\u200B\u0EC4\u0E88\u200B\u0EC0\u0E9A\u"
+"0EB5\u0EC8\u0E87\u200B\u0E97\u0EC8\u0EB2\u200B\u0EAD\u0EC8"
+"\u0EBD\u0E87\u200B\u0EA1\u0EB9\u0E99\u200B\u0E84\u0EC8\u"
+"0EB2\u200B\u0E97\u0EB5\u0EC8\u200B\u0EC0\u0E81\u0EB5\u0E99"
+"\u200B\u0EAD\u0EB5\u0E87\u200B\u0EC3\u0EAA\u0EC8\u200B\u"
+"0EAB\u0EA5\u0EB1\u0E81\u200B\u0E81\u0EB2\u0E99\u0E82\u0EAD"
+"\u0E87\u200B\u0E84\u0EC8\u0EB2\u200B\u0EAA\u0EB9\u0E87\u"
+"200B\u0EAA\u0EB8\u0E94 \u0EC1\u0EA5\u0EB0"
+"\u0E84\u0EC8\u0EB2\u200B\u0E95\u0EC8\u0EB3\u200B\u0EAA\u"
+"0EB8\u0E94."
+"\u0E84\u0EC8\u0EB2\u200B\u0E97\u0EB5\u0EC8\u200B\u0EC0\u"
+"0E81\u0EB5\u0E99\u200B\u0EAA\u0EB2\u200B\u0EA1\u0EB2\u0E94"
+"\u0E81\u0EA7\u0E94\u200B\u0E81\u0EB2\u200B\u0EC0\u0E9A\u"
+"0EB5\u0EC8\u0E87\u200B\u0EC1\u0EA5\u0EB0"
+"\u0EDD\u0EB2\u0E8D\u200B\u0EC3\u0EA7\u0EC9\u200B\u0EC0\u"
+"0E9E\u0EB7\u0EC8\u0EAD\u200B\u0E95\u0EB4\u0E94\u200B\u0E95"
+"\u0EB2\u0EA1"
+
+
+msgid ""
+"Perform analysis of potential missing values, referred to as"
+"gaps. Missing values can be entered or marked for follow-up."
+msgstr ""
+"\u200B\u0EC0\u0EAE\u0EB1\u0E94\u200B\u0E81\u0EB2\u0E99\u"
+"200B\u0EA7\u0EB4\u200B\u0EC4\u0E88\u200B\u0EC0\u0E9A\u0EB5"
+"\u0EC8\u0E87\u200B\u0E97\u0EC8\u0EB2\u200B\u0EAD\u0EC8\u"
+"0EBD\u0E87\u200B\u0E82\u0EAD\u0E87\u200B\u0EA1\u0EB9\u0E99"
+"\u200B\u0E84\u0EC8\u0EB2\u200B\u0E97\u0EB5\u0EC8\u200B\u"
+"0EC0\u0EAA\u0EB1\u0EBD\u200B\u0EC4\u0E9B,"
+"\u0EAD\u0EB5\u0E87\u200B\u0EC3\u0EAA\u0EC8\u200B\u0E8A\u"
+"0EC8\u0EAD\u0E87\u200B\u0EAB\u0EA7\u0EC8\u0EB2\u0E87\u200B"
+"\u0E94\u0EB1\u0EC8\u0E87\u200B\u0E81\u0EC8\u0EB2\u0EA7."
+"\u0EA1\u0EB9\u0E99\u200B\u0E84\u0EC8\u0EB2\u200B\u0E97\u"
+"0EB5\u0EC8\u200B\u200B\u0E82\u0EB2\u0E94\u200B\u0EAB\u0EB2"
+"\u0E8D\u200B\u0EC4\u0E9B\u200B\u0EC1\u0EA1\u0EC8\u0E99\u"
+"200B\u0EAA\u0EB2\u200B\u0EA1\u0EB2\u0E94\u200B\u0E95\u0EB7"
+"\u0EC8\u0EA1\u200B\u0EC3\u0EAA\u0EC8 \u0EC1\u0EA5\u0EB0"
+"\u0EDD\u0EB2\u0E8D\u200B\u0EC3\u0EA7\u0EC9\u200B\u0EC0\u"
+"0E9E\u0EB7\u0EC8\u0EAD\u200B\u0E95\u0EB4\u0E94\u200B\u0E95"
+"\u0EB2\u0EA1"
+
+
+msgid ""
+"View or edit data values marked for further follow-up during"
+"data entry or analysis."
+msgstr ""
+"\u200B\u0EA7\u0EB4\u0EA7\u200B\u0EC0\u0E9A\u0EB5\u0EC8\u"
+"0E87\u200B\u0EAB\u0EA5\u0EB7\u200B\u0EC1\u0E9B\u0E87\u200B"
+"\u0EA1\u0EB9\u0E99\u200B\u0E84\u0EC8\u0EB2\u200B\u0E82\u"
+"0ECD\u0EC9\u200B\u0EA1\u0EB9\u0E99\u200B\u0E97\u0EB5\u0EC8"
+"\u200B\u0EC4\u0E94\u0EC9\u200B\u0EDD\u0EB2\u0E8D\u200B\u"
+"0EC4\u0EA7\u0EC9\u200B\u0EC0\u0E9E\u0EB7\u0EC8\u0EAD\u200B"
+"\u0E95\u0EB4\u0E94\u200B\u0E95\u0EB2\u0EA1\u0E99\u0EB1\u"
+"0EC9\u0E99\u200B\u0EC0\u0EA7\u200B\u0EA5\u0EB2\u200B\u0E9B"
+"\u0EC9\u0EAD\u0E99\u200B\u0E82\u0ECD\u0EC9\u200B\u0EA1\u"
+"0EB9\u0E99\u200B\u0EAB\u0EA5\u0EB7\u200B\u0EA7\u0EB4\u200B"
+"\u0EC4\u0E88\u200B\u0E82\u0ECD\u0EC9\u200B\u0EA1\u0EB9\u"
+"0E99"
+
+
+msgid "Value must be a number"
+msgstr ""
+"\u0E95\u0EC9\u0EAD\u0E87\u0EC0\u0E9B\u0EB1\u0E99\u0E9E\u"
+"0EBD\u0E87\u0E95\u0EBB\u0EA7\u0EC0\u0EA5\u0E81\u0EC0\u0E97"
+"\u0EBB\u0EC8\u0EB2\u0E99\u0EB1\u0EC9\u0E99"
+
+
+msgid "Value is lower than minimum value"
+msgstr ""
+"\u0E84\u0EC8\u0EB2\u0E99\u0EB5\u0EC9\u0E99\u0EC9\u0EAD\u"
+"0E8D\u0E81\u0EA7\u0EC8\u0EB2\u0E84\u0EC8\u0EB2\u0E99\u0EC9"
+"\u0EAD\u0E8D\u0EAA\u0EB8\u0E94\u0E82\u0EAD\u0E87\u0EA5\u"
+"0EB0\u0E9A\u0EBB\u0E9A"
+
+
+msgid "Value is higher than maximum value"
+msgstr ""
+"\u0E84\u0EC8\u0EB2\u0E99\u0EB5\u0EC9\u0EAB\u0EBC\u0EB2\u"
+"0E8D\u0E81\u0EA7\u0EC8\u0EB2\u0E84\u0EC8\u0EB2\u0EC3\u0EAB"
+"\u0E8D\u0EC8\u0EAA\u0EB8\u0E94\u0E82\u0EAD\u0E87\u0EA5\u"
+"0EB0\u0E9A\u0EBB\u0E9A"
+
+
+msgid "Mark"
+msgstr "\u0EDD\u0EB2\u0E8D"
+
+msgid "Mark value for follow-up"
+msgstr ""
+"\u0EDD\u0EB2\u0E8D\u0E84\u0EC8\u0EB2\u0E99\u0EB5\u0EC9\u"
+"0EC0\u0E9E\u0EB7\u0EC8\u0EAD\u0E97\u0EB3\u0E81\u0EB2\u0E99"
+"\u0E95\u0EB4\u0E94\u0E95\u0EB2\u0EA1"
+
+
+msgid "Unmark value for follow-up"
+msgstr "\u0E9A\u0ECD\u0EC8\u0E95\u0EB4\u0E94\u0E95\u0EB2\u0EA1"
+
+msgid "Data Analysis"
+msgstr ""
+"\u0E81\u0EB2\u0E99\u0EA7\u0EB4\u0EC0\u0E84\u0EB2\u0EB0\u"
+"0E82\u0ECD\u0EC9\u0EA1\u0EB9\u0E99"
+
+
+msgid "Data Analysis Report"
+msgstr ""
+"\u200B\u0E9A\u0EBB\u0E94\u200B\u0EA5\u0EB2\u0E8D\u200B\u"
+"0E87\u0EB2\u0E99\u200B\u0E81\u0EB2\u0E99\u200B\u0EA7\u0EB4"
+"\u200B\u0EC4\u0E88\u200B\u0E82\u0ECD\u0EC9\u200B\u0EA1\u"
+"0EB9\u0E99"
+
+
+msgid "Std Dev Outlier Analysis"
+msgstr ""
+"\u200B\u200B\u0EAB\u0EBB\u0EA7\u200B\u0EDC\u0EC8\u0EA7\u"
+"0E8D\u0EA1\u0EB2\u0E94\u200B\u0E95\u0EB0\u200B\u0E96\u0EB2"
+"\u0E99\u200B\u0E81\u0EB2\u0E99\u200B\u0EA7\u0EB4\u200B\u"
+"0EC4\u0E88\u200B\u0E84\u0EA7\u0EB2\u0EA1\u200B\u0EAB\u0EA5"
+"\u0EB8\u0E94\u200B\u0EA5\u0EB7\u0EC8\u0E99"
+
+
+msgid "Min-Max Outlier Analysis"
+msgstr ""
+"\u200B\u0E81\u0EB2\u0E99\u200B\u0EA7\u0EB4\u200B\u0EC4\u"
+"0E88\u200B\u0E84\u0EC8\u0EB2\u200B\u0EAA\u0EB9\u0E87"
+"\u0EC1\u0EA5\u0EB0"
+"\u0E84\u0EC8\u0EB2\u200B\u0E95\u0ECD\u0EC8\u200B\u0EAA\u"
+"0EB8\u0E94"
+
+
+msgid "Gap Analysis"
+msgstr "Gap Analysis"
+
+msgid "Follow-Up Analysis"
+msgstr "Follow-Up Analysis"
+
+msgid "Validation Rule Analysis"
+msgstr "\u0E81\u0EA7\u0E94\u0EAA\u0EAD\u0E9A\u0E82\u0ECD\u0EC9\u0EA1\u0EB9\u0E99"
+
+msgid "result"
+msgstr "\u0E9C\u0EBB\u0E99"
+
+msgid "Clear expression"
+msgstr ""
+"\u0EA5\u0EB6\u0E9A\u0E82\u0EB1\u0EC9\u0E99\u0E95\u0EAD\u"
+"0E99\u0EAD\u0EAD\u0E81"
+
+
+msgid "Analysing data"
+msgstr "Analysing data"
+
+msgid "Data source"
+msgstr "Data source"
+
+msgid "Use captured data"
+msgstr "Use captured data"
+
+msgid "Use aggregated data"
+msgstr ""
+"\u200B\u0E99\u0EB3\u200B\u0EC3\u0E8A\u0EC9\u200B\u0E82\u"
+"0ECD\u0EC9\u200B\u0EA1\u0EB9\u0E99\u200B\u0E97\u0EB5\u0EC8"
+"\u200B\u0EC4\u0E94\u0EC9\u200B\u0EAA\u0EB1\u0E87\u200B\u"
+"0EA5\u0EA7\u0EA1\u200B\u0EA1\u0EB2\u200B\u0EC1\u0EA5\u0EC9"
+"\u0EA7"
+
+
+msgid "Immediate children of the selected organisation unit will be included"
+msgstr ""
+"\u200B\u0EAB\u0EBB\u0EA7\u200B\u0EDC\u0EC8\u0EA7\u0E8D\u"
+"200B\u0E81\u0EB2\u0E99\u200B\u0E88\u0EB1\u0E94\u200B\u0E95"
+"\u0EB1\u0EC9\u0E87\u200B\u0E82\u0EB1\u0EC9\u0E99\u200B\u"
+"0E95\u0EC8\u0EB2\u200B\u0E82"
+
+
+msgid "All children of the selected organisation unit will be included"
+msgstr ""
+"\u200B\u200B\u0E88\u0EB0\u200B\u0EA5\u0EA7\u0EA1\u200B\u"
+"0EC0\u0EAD\u0EBB\u0EB2\u0EAB\u0EBB\u0EA7\u200B\u0EDC\u0EC8"
+"\u0EA7\u0E8D\u200B\u0E81\u0EB2\u0E99\u200B\u0E88\u0EB1\u"
+"0E94\u200B\u0E95\u0EB1\u0EC9\u0E87\u200B\u200B\u200B\u0E82"
+"\u0EB1\u0EC9\u0E99\u200B\u0E95\u0EC8\u0EB3\u200B\u0E97\u"
+"0EB1\u0E87\u200B\u0EDD\u0EBB\u0E94\u200B\u0E82\u0EAD\u0E87"
+"\u200B\u0EAB\u0EBB\u0EA7\u200B\u0EDC\u0EC8\u0EA7\u0E8D\u"
+"200B\u0E81\u0EB2\u0E99\u200B\u0E88\u0EB1\u0E94\u200B\u0E95"
+"\u0EB1\u0EC9\u0E87\u0E97\u0EB5\u0EC8\u200B\u0EC4\u0E94\u"
+"0EC9\u200B\u0EC0\u0EA5\u0EB7\u0EAD\u0E81\u200B\u0EC4\u0EA7"
+"\u0EC9\u200B\u0E99\u0EB1\u0EC9\u0E99"
+
+
+msgid "Method"
+msgstr "\u0EA7\u0EB4\u0E97\u0EB4\u0E81\u0EB2\u0E99"
+
+msgid "See statistics"
+msgstr ""
+"\u200B\u0EC0\u0E9A\u0EB5\u0EC8\u0E87\u200B\u0EAA\u0EB0\u"
+"200B\u0E96\u0EB4\u200B\u0E95\u0EB4"
+
+
+msgid "Please specify a description"
+msgstr ""
+"\u200B\u0E81\u0EB0\u200B\u0EA5\u0EB8\u200B\u0E99\u0EB2\u"
+"200B\u200B\u0E81\u0EB3\u200B\u0E99\u0EBB\u0E94\u200B\u0E81"
+"\u0EB2\u0E99\u0E9E\u0EB1\u0E99\u200B\u0EA5\u0EB0\u200B\u"
+"0E99\u0EB2"
+
+
+msgid "Please specify an expression"
+msgstr ""
+"\u0E81\u0EB0\u0EA5\u0EB8\u0E99\u0EB2\u0EC0\u0EA5\u0EB7\u"
+"0EAD\u0E81\u0EC0\u0E84\u0EB7\u0EC8\u0EAD\u0E87\u0EDD\u0EB2"
+"\u0E8D\u0EC0\u0EA5\u0E81"
+
+
+msgid "Please specify an organisationunit which has children."
+msgstr ""
+"\u200B\u0E81\u0EB0\u200B\u0EA5\u0EB8\u200B\u0E99\u0EB2\u"
+"200B\u0E81\u0EB3\u200B\u0E99\u0EBB\u0E94\u200B\u0EC0\u0EAD"
+"\u0EBB\u0EB2\u200B\u0EAB\u0EBB\u0EA7\u200B\u0EDC\u0EC8\u"
+"0EA7\u0E8D\u200B\u0E81\u0EB2\u0E99\u200B\u0E88\u0EB1\u0E94"
+"\u200B\u0E95\u0EB1\u0EC9\u0E87\u200B\u0E97\u0EB5\u0EC8\u"
+"200B\u0EA1\u0EB5\u200B\u0EAB\u0EBB\u0EA7\u200B\u0EDC\u0EC8"
+"\u0EA7\u0E8D\u200B\u0E81\u0EB2\u0E99\u200B\u0E88\u0EB1\u"
+"0E94\u200B\u0E95\u0EB1\u0EC9\u0E87\u200B\u0E97\u0EB5\u0EC8"
+"\u200B\u0E95\u0EC8\u0EB3\u200B\u0EA5\u0EBB\u0E87\u200B\u"
+"0EC4\u0E9B"
+
+
+msgid "More than 500 values found, please narrow the search to see all"
+msgstr ""
+"\u200B\u0E9C\u0EBB\u0E99\u200B\u0EAD\u0EAD\u0E81\u200B\u"
+"0EA1\u0EB2\u200B\u0EC0\u0E81\u0EB5\u0E99\u0E81\u0EA7\u0EC8"
+"\u0EB2 \u0ED5\u0ED0\u0ED0"
+"\u200B\u0E81\u0EB0\u200B\u0EA5\u0EB8\u200B\u0E99\u0EB2\u"
+"200B\u0E84\u0EBB\u0EC9\u0E99\u200B\u0EAB\u0EB2\u200B\u0EC3"
+"\u0E99\u200B\u0E82\u0EAD\u0E9A\u200B\u0EC0\u0E82\u0E94\u"
+"200B\u0E97\u0EB5\u0EC8\u200B\u0E95\u0EC8\u0EB3\u200B\u0E81"
+"\u0EA7\u0EC8\u0EB2\u0E99\u0EB5\u0EC9\u200B\u0EC0\u0E9E\u"
+"0EB7\u0EC8\u0EAD\u200B\u0EC0\u0E9A\u0EB5\u0EC8\u0E87\u200B"
+"\u0E97\u0EB1\u0E87\u200B\u0EDD\u0EBB\u0E94"
+
+
+msgid "Please specify data sets"
+msgstr ""
+"\u200B\u0E81\u0EB0\u200B\u0EA5\u0EB8\u200B\u0E99\u0EB2\u"
+"200B\u0E81\u0EB3\u200B\u0E99\u0EBB\u0E94\u200B\u0E8A\u0EB8"
+"\u0E94\u200B\u0E82\u0ECD\u0EC9\u200B\u0EA1\u0EB9\u0E99"
+
+
+msgid "Analysing data, please wait"
+msgstr "Analysing data, please wait"
+
+msgid "Skip for missing values"
+msgstr "Skip for missing values"
+
+msgid "Select parameters"
+msgstr "Select parameters"
+
+msgid "Compulsory pair"
+msgstr "Compulsory pair"
+
+msgid "visible in validation alerts"
+msgstr "visible in validation alerts"
+
+msgid "Importance"
+msgstr "\u0EAA\u0EB3\u0E84\u0EB1\u0E99"
+
+msgid "High"
+msgstr "\u0EAA\u0EB9\u0E87"
+
+msgid "Medium"
+msgstr "\u0E81\u0EB2\u0E87"
+
+msgid "Low"
+msgstr "\u0E95\u0EC8\u0EB3"
+
+msgid "Rule type"
+msgstr "Rule type"
+
+msgid "Surveillance"
+msgstr "Surveillance"
+
+msgid "Attributes"
+msgstr "Attributes"
+
+msgid "Organisation unit level"
+msgstr ""
+"\u200B\u0E82\u0EB1\u0EC9\u0E99\u200B\u0E82\u0EAD\u0E87\u"
+"200B\u0EAB\u0EBB\u0EA7\u200B\u0EDC\u0EC8\u0EA7\u0E8D\u200B"
+"\u0E81\u0EB2\u0E99\u0E88\u0EB1\u0E94\u200B\u0E95\u0EB1\u"
+"0EC9\u0E87"
+
+
+msgid "Select level"
+msgstr "\u200B\u0EC0\u0EA5\u0EB7\u0EAD\u0E81\u200B\u0E82\u0EB1\u0EC9\u0E99"
+
+msgid "Sequential sample count"
+msgstr ""
+"\u200B\u0E99\u0EB1\u0E9A\u200B\u0E95\u0EBB\u0EA7\u200B\u"
+"0EA2\u0EC8\u0EB2\u0E87\u200B\u0E95\u0EB2\u0EA1\u200B\u0EA5"
+"\u0EB3\u200B\u0E94\u0EB1\u0E9A"
+
+
+msgid "Annual sample count"
+msgstr ""
+"\u200B\u0E99\u0EB1\u0E9A\u200B\u0E95\u0EBB\u0EA7\u200B\u"
+"0EA2\u0EC8\u0EB2\u0E87\u200B\u0E9B\u0EB0\u200B\u0E88\u0EB3"
+"\u200B\u0E9B\u0EB5"
+
+
+msgid "High outliers"
+msgstr ""
+"\u0E84\u0EC8\u0EB2\u200B\u0EAB\u0EA5\u0EB8\u0E94\u200B\u"
+"0EA5\u0EB7\u0EC8\u0E99\u200B\u0EAA\u0EB9\u0E87"
+
+
+msgid "Low outliers"
+msgstr ""
+"\u200B\u0E84\u0EC8\u0EB2\u200B\u0EAB\u0EA5\u0EB8\u0E94\u"
+"200B\u0EA5\u0EB7\u0EC8\u0E99\u200B\u0E95\u0EC8\u0EB3"
+
+
+msgid "Number of user groups to alert"
+msgstr ""
+"\u200B\u0E88\u0EB3\u200B\u0E99\u0EA7\u0E99\u200B\u0E81\u"
+"0EB8\u0EC8\u0EA1\u0E9C\u0EB9\u0EC9\u200B\u0EC3\u0E8A\u0EC9"
+"\u200B\u0E97\u0EB5\u0EC8\u200B\u0EA1\u0EB4\u200B\u0EAA\u"
+"0EB1\u0E99\u200B\u0E8D\u0EB2\u0E99\u200B\u0EC0\u0E95\u0EB7"
+"\u0EAD\u0E99"
+
+
+msgid "Send alerts"
+msgstr ""
+"\u200B\u0EAA\u0EBB\u0EC8\u0E87\u200B\u0E81\u0EB2\u0E99\u"
+"200B\u0EC0\u0E95\u0EB7\u0EC8\u0EAD\u0E99"
+
+
+msgid "visible when rule is violated"
+msgstr ""
+"\u0EAA\u0EB2\u200B\u0EA1\u0EB2\u0E94\u200B\u0EC0\u0EAB\u"
+"0EB1\u0E99\u200B\u0EC4\u0E94\u0EC9\u200B\u0E96\u0EC9\u0EB2"
+"\u200B\u0EAB\u0EB2\u0E81\u200B\u0EAB\u0EB1\u200B\u0EA5\u"
+"0E81\u200B\u0E81\u0EB2\u0E99\u200B\u0E96\u0EB7\u0E81\u200B"
+"\u0E94\u0EB1\u0E94\u200B\u0EC1\u0E9B\u0E87\u200B\u0EAB\u"
+"0EA5\u0EB7\u200B\u0EC1\u0E81\u0EC9\u200B\u0EC4\u0E82"
+
+
+msgid "Instruction"
+msgstr "\u0E84\u0EB3\u200B\u0EC1\u0E99\u0EB0\u200B\u0E99\u0EB3"
+
+msgid "Group by"
+msgstr "Group by"
+
+msgid "Equal to"
+msgstr " ="
+
+msgid "Greater than"
+msgstr ">"
+
+msgid "Greater than or equal to"
+msgstr " >="
+
+msgid "Less than"
+msgstr "<"
+
+msgid "Less than or equal to"
+msgstr "<="
+
+msgid "Is equal to tracked entity domain"
+msgstr "Is equal to tracked entity domain"
+
+msgid "Hide details"
+msgstr "Hide details"
+
+msgid "is"
+msgstr "is"
+
+msgid "Are you sure you want to delete relationship type?"
+msgstr "Are you sure you want to delete relationship type?"
+
+msgid "Relationship (e.g. Mother-Child)"
+msgstr "Relationship (e.g. Mother-Child)"
+
+msgid "Relationship type details"
+msgstr "Relationship type details"
+
+msgid "A is to B"
+msgstr "A is to B"
+
+msgid "B is to A"
+msgstr "B is to A"
+
+msgid "Edit relationship type"
+msgstr "Edit relationship type"
+
+msgid "Create new relationship type"
+msgstr "Create new relationship type"
+
+msgid "Relationship type management"
+msgstr "Relationship type management"
+
+msgid "or"
+msgstr "or"
+
+msgid "Age (days)"
+msgstr "Age (days)"
+
+msgid "Value must be an integer"
+msgstr "Value must be an integer"
+
+msgid "Program Stage"
+msgstr "Program Stage"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Edit tracked entity attribute"
+msgstr "Edit tracked entity attribute"
+
+msgid "Create new tracked entity attribute"
+msgstr "Create new tracked entity attribute"
+
+msgid "Are you sure you want to delete this tracked entity attribute?"
+msgstr "Are you sure you want to delete this tracked entity attribute?"
+
+msgid "Tracked entity attribute management"
+msgstr "Tracked entity attribute management"
+
+msgid "Value must be a positive number"
+msgstr "Value must be a positive number"
+
+msgid "Invalid min-max days combination"
+msgstr "Invalid min-max days combination"
+
+msgid "Please select a program"
+msgstr "Please select a program"
+
+msgid "Program stage management"
+msgstr "Program stage management"
+
+msgid "View program stages"
+msgstr "View program stages"
+
+msgid "Assign program to organisation units"
+msgstr "Assign program to organisation units"
+
+msgid "Programs"
+msgstr "Programs"
+
+msgid "Number of data elements to be collected"
+msgstr "Number of data elements to be collected"
+
+msgid "Adding program stage failed"
+msgstr "Adding program stage failed"
+
+msgid "Updating program stage failed"
+msgstr "Updating program stage failed"
+
+msgid "Are you sure you want to delete this program stage?"
+msgstr "Are you sure you want to delete this program stage?"
+
+msgid "Program stage details"
+msgstr "Program stage details"
+
+msgid "Edit program stage"
+msgstr "Edit program stage"
+
+msgid "Create new program stage"
+msgstr "Create new program stage"
+
+msgid "Order in program"
+msgstr "Order in program"
+
+msgid "Program details"
+msgstr "Program details"
+
+msgid "Edit program"
+msgstr "Edit program"
+
+msgid "Are you sure you want to delete this program?"
+msgstr "Are you sure you want to delete this program?"
+
+msgid "Create new program"
+msgstr "Create new program"
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Program management"
+msgstr "Program management"
+
+msgid "Tracked entity attribute"
+msgstr "Attribute"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "Aggregation Query Builder"
+msgstr "Aggregation Query Builder"
+
+msgid "Aggregation query builder management"
+msgstr "Aggregation query builder management"
+
+msgid "Data elements"
+msgstr "Data elements"
+
+msgid "Attributes"
+msgstr "Attributes"
+
+msgid "Data entry form management for program stage"
+msgstr "Data entry form management for program stage"
+
+msgid "Choose existing data entry form"
+msgstr "Choose existing data entry form"
+
+msgid "Blood group"
+msgstr "Blood group"
+
+msgid "Attribute options"
+msgstr "Attribute options"
+
+msgid "Add Option"
+msgstr "Add Option"
+
+msgid "Tracked entity attribute group management"
+msgstr "Tracked entity attribute group management"
+
+msgid "Available attributes"
+msgstr "Available attributes"
+
+msgid "Selected attributes"
+msgstr "Selected attributes"
+
+msgid "Tracked entity attribute group details"
+msgstr "Tracked entity attribute group details"
+
+msgid "Attribute group"
+msgstr "Attribute Group"
+
+msgid "Edit tracked entity attribute group"
+msgstr "Edit tracked entity attribute group"
+
+msgid "Create new tracked entity attribute group"
+msgstr "Create new tracked entity attribute group"
+
+msgid "Deleted successfully"
+msgstr "Deleted successfully"
+
+msgid "This option has relationship with tracked entity attribute values"
+msgstr "This option has relationship with tracked entity attribute values"
+
+msgid "Deleted tracked entity attribute option successfully"
+msgstr "Deleted tracked entity attribute option successfully"
+
+msgid "Can not find tracked entity attribute option to delete"
+msgstr "Can not find tracked entity attribute option to delete"
+
+msgid "Predefined value"
+msgstr "Predefined value"
+
+msgid "Related"
+msgstr "Related"
+
+msgid "Validation Criteria"
+msgstr "Validation Criteria"
+
+msgid "Edit validation criteria"
+msgstr "Edit validation criteria"
+
+msgid "Attribute Group"
+msgstr "Attribute Group"
+
+msgid "Attribute Visit Schedule"
+msgstr "Attribute Visit Schedule"
+
+msgid "Create validation criteria"
+msgstr "Create validation criteria"
+
+msgid ""
+"Create, modify and view tracked entity attribute groups."
+"Groups makes it more convenient to add attributes to a"
+"tracked entity."
+msgstr ""
+"Create, modify and view tracked entity attribute groups."
+"Groups makes it more convenient to add attributes to a"
+"tracked entity."
+
+
+msgid ""
+"Define which attributes to use in messages sent to clients"
+"regarding scheduled visits."
+msgstr ""
+"Define which attributes to use in messages sent to clients"
+"regarding scheduled visits."
+
+
+msgid ""
+"Create, modify and view relationship types. A relationship is"
+"typically wife and husband or mother and child."
+msgstr ""
+"Create, modify and view relationship types. A relationship is"
+"typically wife and husband or mother and child."
+
+
+msgid ""
+"Create, modify and view programs. A program has program"
+"stages and defines which actions should be taken at each"
+"stage."
+msgstr ""
+"Create, modify and view programs. A program has program"
+"stages and defines which actions should be taken at each"
+"stage."
+
+
+msgid ""
+"Set up aggregation rules for the process of aggregating"
+"tracked entity data to statistical data."
+msgstr ""
+"Set up aggregation rules for the process of aggregating"
+"tracked entity data to statistical data."
+
+
+msgid ""
+"Set reminders to be automatically sent to enrolled tracked"
+"entity instances before scheduled appointments and after missed"
+"visits."
+msgstr ""
+"Set reminders to be automatically sent to enrolled persons"
+"before scheduled appointments and after missed visits."
+
+
+msgid ""
+"Create, modify and view program attributes. A program can"
+"have any number of attributes."
+msgstr ""
+"Create, modify and view program attributes. A program can"
+"have any number of attributes."
+
+
+msgid ""
+"Set the Excel XML template file used for automatically"
+"importing tracked entity instance data."
+msgstr ""
+"Set the Excel XML template file used for automatically"
+"importing person data."
+
+
+msgid "Inheritable"
+msgstr "Inheritable"
+
+msgid "Tracked entity attribute details"
+msgstr "Tracked entity attribute details"
+
+msgid "Search result"
+msgstr "Search result"
+
+msgid "<"
+msgstr "<"
+
+msgid "="
+msgstr "="
+
+msgid ">"
+msgstr ">"
+
+msgid "This field is required"
+msgstr "This field is required"
+
+msgid "Number of attributes"
+msgstr "Number of attributes"
+
+msgid "Available programs"
+msgstr "Available programs"
+
+msgid "Selected programs"
+msgstr "Selected programs"
+
+msgid "Are you sure you want to delete this validation criteria?"
+msgstr "Are you sure you want to delete this validation criteria?"
+
+msgid "Please specify a data element"
+msgstr "Please specify a data element"
+
+msgid "Processing"
+msgstr "Processing"
+
+msgid "Other program stage data element"
+msgstr "Other program stage data element"
+
+msgid "Load existing form"
+msgstr "Load existing form"
+
+msgid "Design data entry form"
+msgstr "Design data entry form"
+
+msgid "This data element is inserted in form"
+msgstr "This data element is inserted in form"
+
+msgid "Number of characters"
+msgstr "Number of characters"
+
+msgid "Letter Only"
+msgstr "Letter Only"
+
+msgid "Program attribute"
+msgstr "Program Attribute"
+
+msgid "Program attribute management"
+msgstr "Program attribute management"
+
+msgid "Create new program attribute"
+msgstr "Create new program attribute"
+
+msgid "Edit program attribute"
+msgstr "Edit program attribute"
+
+msgid "Import Data"
+msgstr "Import Data"
+
+msgid "Configuration"
+msgstr "Configuration"
+
+msgid "Row"
+msgstr "Row"
+
+msgid "Duplicate"
+msgstr "Duplicate"
+
+msgid "Option combination"
+msgstr "Option combination"
+
+msgid "Aggregation query builder details"
+msgstr "Aggregation query builder details"
+
+msgid "Create new aggregation query builder"
+msgstr "Create new aggregation query builder"
+
+msgid "Condition details"
+msgstr "Condition details"
+
+msgid "Edit aggregation query builder"
+msgstr "Edit aggregation query builder"
+
+msgid "Program properties"
+msgstr "Program properties"
+
+msgid "Validation criteria details"
+msgstr "Validation criteria details"
+
+msgid "Program attribute details"
+msgstr "Program attribute details"
+
+msgid "Select program"
+msgstr "Select program"
+
+msgid "Create new program validation rule"
+msgstr "Create new program validation rule"
+
+msgid "Add multi-program validation rule"
+msgstr "Add multi program validation rule"
+
+msgid "Program validation rule details"
+msgstr "Program validation rule details"
+
+msgid "View validation rules"
+msgstr "View validation rules"
+
+msgid "Scheduled days from start"
+msgstr "Scheduled days from start"
+
+msgid "Deleted program attribute option successfully"
+msgstr "Deleted program attribute option successfully"
+
+msgid "Validation criteria management"
+msgstr "Validation criteria management"
+
+msgid "Aggregation data element"
+msgstr "Aggregation data element"
+
+msgid "Aggregation expression"
+msgstr "Aggregation expression"
+
+msgid "Aggregation data element is in use"
+msgstr "Aggregation data element is in use"
+
+msgid "Are you sure you want to delete this program data entry form?"
+msgstr "Are you sure you want to delete this program data entry form?"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Please select one data element"
+msgstr "Please select one data element"
+
+msgid "Single event"
+msgstr "Single event"
+
+msgid "Tracked entity instances"
+msgstr "Tracked entity instances"
+
+msgid "DOB type"
+msgstr "DOB type"
+
+msgid "Description of enrollment date"
+msgstr "Description of enrollment date"
+
+msgid "Description of incident date"
+msgstr "Description of incident date"
+
+msgid "Date of enrollment"
+msgstr "Date of enrollment"
+
+msgid "Date of incident"
+msgstr "Date of incident"
+
+msgid "Male"
+msgstr "Male"
+
+msgid "Female"
+msgstr "Female"
+
+msgid "Trans-gender"
+msgstr "Trans-gender"
+
+msgid "Verified"
+msgstr "Verified"
+
+msgid "Declared"
+msgstr "Declared"
+
+msgid "Approximated"
+msgstr "Approximated"
+
+msgid "Others"
+msgstr "Others"
+
+msgid "Test condition"
+msgstr "Test condition"
+
+msgid "Run successful"
+msgstr "Run successful"
+
+msgid "Run failed"
+msgstr "Run failed"
+
+msgid "Total of tracked entity instance registration"
+msgstr "Total of tracked entity instance registration"
+
+msgid "Repeatable"
+msgstr "Repeatable"
+
+msgid "Date of Birth"
+msgstr "Date of Birth"
+
+msgid "Anonymous"
+msgstr "Anonymous"
+
+msgid "Edit program validation rule"
+msgstr "Edit program validation rule"
+
+msgid "Assign validation for programs"
+msgstr "Assign validation for programs"
+
+msgid "Validation for date date elements"
+msgstr "Validation for date date elements"
+
+msgid "Before current date"
+msgstr "Before current date"
+
+msgid "Before or equal to current date"
+msgstr "Before or equal to current date"
+
+msgid "After current date"
+msgstr "After current date"
+
+msgid "After or equal to current date"
+msgstr "After or equal to current date"
+
+msgid "Before due date"
+msgstr "Before due date"
+
+msgid "Before or equal to due date"
+msgstr "Before or equal to due date"
+
+msgid "After due date"
+msgstr "After due date"
+
+msgid "After or equal to due date"
+msgstr "After or equal to due date"
+
+msgid "In range due date"
+msgstr "In range due date"
+
+msgid "Condition"
+msgstr "Condition"
+
+msgid "No data elements of type date in the selected program stage"
+msgstr "No data elements with date-type in the selected program stage"
+
+msgid "Shown on reports"
+msgstr "Shown on reports"
+
+msgid "Show provided elsewhere"
+msgstr "Show provided elsewhere"
+
+msgid "Available values"
+msgstr "Available values"
+
+msgid "Insert selected values"
+msgstr "Insert selected values"
+
+msgid "Display provided other facility column"
+msgstr "Display provided other facility column"
+
+msgid "Tracked entity org unit registration"
+msgstr "Tracked entity org unit registration"
+
+msgid "Filter by data set"
+msgstr "Filter by data set"
+
+msgid "Show all items"
+msgstr "Show All Items"
+
+msgid "for"
+msgstr "for"
+
+msgid "Standard interval days"
+msgstr "Standard interval days"
+
+msgid "Program enrollment"
+msgstr "Program enrollment"
+
+msgid "Due date"
+msgstr "Due date"
+
+msgid "not incident date"
+msgstr "not incident date"
+
+msgid "Are you sure you want to delete this program indicator?"
+msgstr "Are you sure you want to delete this program indicator?"
+
+msgid " scheduled date"
+msgstr " scheduled date"
+
+msgid "Ask user to create new event when stage is complete"
+msgstr "Ask user to create new event when stage is complete"
+
+msgid " Open data entry form after enrollment"
+msgstr " Open data entry form after enrollment"
+
+msgid " Report date to use"
+msgstr " Report Date to use"
+
+msgid "Select at least one scope for local id"
+msgstr "Select at least one scope for local id"
+
+msgid " Define registration form"
+msgstr " Define registration form"
+
+msgid "Are you sure you want to delete reminder message template?"
+msgstr "Are you sure you want to delete Reminder message template?"
+
+msgid "Data entry method for option sets"
+msgstr "Data entry method for option sets"
+
+msgid "Program validation rule management"
+msgstr "Program validation rule management"
+
+msgid "Search apps"
+msgstr "Search apps"
+
+msgid "Average"
+msgstr "ສະເລ່ຍ"
+
+msgid "displayName"
+msgstr "displayName"
+
+msgid "This object will be private to yourself"
+msgstr "This object will be private to yourself"
+
+msgid "Synchronization settings"
+msgstr "Synchronization settings"
+
+msgid "Sum"
+msgstr "ຜົນບວກ"
+
+msgid "lastUpdated"
+msgstr "lastUpdated"
+
+msgid "Access settings"
+msgstr "Access settings"
+
+msgid "Percentage"
+msgstr "Percentage"
+
+msgid "Text"
+msgstr "ຂໍ້ຄວາມ"
+
+msgid "Enrollment status"
+msgstr "Enrollment status"
+
+msgid "System monitoring settings"
+msgstr "System monitoring settings"
+
+msgid "Manage my apps"
+msgstr "Manage my apps"
+
+msgid "Standard deviation"
+msgstr "Standard deviation"
+
+msgid "Interpretations"
+msgstr "ການແປ"
+
+msgid "This object will be created with public edit and view rights"
+msgstr "This object will be created with public edit and view rights"
+
+msgid "displayDescription"
+msgstr "displayDescription"
+
+msgid "Settings"
+msgstr "ການຕັ້ງຄ່າ"
+
+msgid "Tracked entity instance count"
+msgstr "Tracked entity instance count"
+
+msgid "Enrollment count"
+msgstr "Enrollment count"
+
+msgid "Edit"
+msgstr "ແກ້ໄຂ"
+
+msgid "Program stage id"
+msgstr "Program stage id"
+
+msgid "Profile"
+msgstr "Profile"
+
+msgid "Count"
+msgstr "ນັບ"
+
+msgid "About DHIS 2"
+msgstr "ກ່ຽວກັບ DHIS 2"
+
+msgid "Email settings"
+msgstr "Email settings"
+
+msgid "Appearance settings"
+msgstr "Appearance settings"
+
+msgid "Version"
+msgstr "ລູ້ນ"
+
+msgid "Messaging settings"
+msgstr "Messaging settings"
+
+msgid "Log out"
+msgstr "ອອກຈາກລະບົບ"
+
+msgid "Import settings"
+msgstr "Import settings"
+
+msgid "Help"
+msgstr "ຊ່ວຍ"
+
+msgid "OAuth2 clients"
+msgstr "OAuth2 clients"
+
+msgid "Variance"
+msgstr "Variance"
+
+msgid "Calendar settings"
+msgstr "Calendar settings"
+
+msgid "Clone"
+msgstr "ກ່າຍແບບ"
+
+msgid "Messages"
+msgstr "ຂໍ້ຄວາມ"
+
+msgid "Short name"
+msgstr "Short name"
+
+msgid "General settings"
+msgstr "General settings"
+
+msgid "Analytics settings"
+msgstr "Analytics settings"
+
+msgid "Server settings"
+msgstr "Server settings"
+
+msgid "Account"
+msgstr "ບັນຊີ"
+
+msgid "Username"
+msgstr "ຊື່ຜູ້ໃຊ້ງານ"
+
+msgid "System Settings"
+msgstr "System Settings"
+
+msgid "Immunization analysis"
+msgstr "Immunization analysis"
+
+msgid "Browser Cache Cleaner"
+msgstr "ລ້າງຂໍ້ມູນໃນ Browser"
+
+msgid "Capture"
+msgstr "Capture"
+
+msgid "TUCANA USERS IMPORTER APP"
+msgstr "TUCANA USERS IMPORTER APP"
+
+msgid "Data Entry"
+msgstr "ປ້ອນຂໍ້ມູນ"
+
+msgid "Data Visualizer"
+msgstr "Data Visualizer"
+
+msgid "Mobile Configuration"
+msgstr "ການຕັ້ງຄ່າມືຖື"
+
+msgid "Data Quality"
+msgstr "ກວດກາຂໍ້ມູນ"
+
+msgid "Tracker Capture"
+msgstr "​ການປ້ອນຂໍ້ມູນ​ຕິດ​ຕາມ​"
+
+msgid "GIS"
+msgstr "ແຜນທີ່ຂໍ້ມູນ"
+
+msgid "Function Maintenance"
+msgstr "Function Maintenance"
+
+msgid "Dashboard Classic"
+msgstr "Dashboard Classic"
+
+msgid "Event Visualizer"
+msgstr "​ສະ​ພາບ​ກ່ຽວ​ກັບ​ການ​ສະ​ແດງ​ຮູບ​ພາບ"
+
+msgid "Event Reports"
+msgstr "​ບົດ​ລາຍ​ງານ​ເຫດ​ການ​ຕ່າງໆ"
+
+msgid "App Management"
+msgstr "ການຈັດການແອັບ"
+
+msgid "Datastore Management"
+msgstr "Datastore Manager"
+
+msgid "Scheduler"
+msgstr "Scheduler"
+
+msgid "Menu Management"
+msgstr "Menu Management"
+
+msgid "Reports"
+msgstr "ບົດລາຍງານຂໍ້ມູນ"
+
+msgid "BIF"
+msgstr "BIF"
+
+msgid "Interactive Dashboard 2"
+msgstr "Interactive Dashboard 2"
+
+msgid "Dashboard"
+msgstr "ຜູ້ວິໄຈຂໍ້ມູນ"
+
+msgid "Pivot Table"
+msgstr "ຕາຕະລາງຂໍ້ມູນ"
+
+msgid "Facility Reconciliation"
+msgstr "Facility Reconciliation"
+
+msgid "WHO Data Quality Tool"
+msgstr "WHO Data Quality Tool"
+
+msgid "Interpretations PSI"
+msgstr "Interpretations PSI"
+
+msgid "Dashboards app"
+msgstr "Dashboards app"
+
+msgid "dAtaZ"
+msgstr "dAtaZ"
+
+msgid "Usage Analytics"
+msgstr "ວິເຄາະການນຳໃຊ້"
+
+msgid "Interpretations"
+msgstr "ການແປຂໍ້ມູນ"
+
+msgid "Translations"
+msgstr "ການແປພາສາ"
+
+msgid "Maintenance"
+msgstr "ການ​ຮັກ​ສາ​ສ້ອມ​ແປງ"
+
+msgid "Data Administration"
+msgstr "ຜູ້ບໍລິຫານຈັດການຂໍ້ມູນ"
+
+msgid "interactiveMap"
+msgstr "interactiveMap"
+
+msgid "Maps"
+msgstr "Maps"
+
+msgid "Users"
+msgstr "Users"
+
+msgid "Classic Data Visualizer"
+msgstr "ການສ້າງຮູບພາບຈາກຂໍ້ມູນ"
+
+msgid "WHO Metadata browser"
+msgstr "WHO Metadata browser"

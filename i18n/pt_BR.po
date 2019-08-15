@@ -1,0 +1,3460 @@
+
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-15T13:45:50.414Z\n"
+"PO-Revision-Date: 2019-08-15T13:45:50.414Z\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Pootle-Path: /pt_BR/maintenance-app/pt_BR.po\n"
+"X-Pootle-Revision: 29879
+"
+
+
+msgid "Edit indicator group"
+msgstr "Editar grupo de indicador"
+
+msgid "Indicator groups"
+msgstr "Grupo de Indicador"
+
+msgid "Concept"
+msgstr "Conceito"
+
+msgid "Indicator management"
+msgstr "Gest\u00E3o do indicador"
+
+msgid ""
+"Create, modify, view and delete indicator groups. Groups"
+"are used for improved analysis."
+msgstr ""
+"Criar, modificar, visualizar e excluir grupos de indicadores."
+"Grupos s\u00E3o usados \u200B\u200Bpara melhor"
+"an\u00E1lise."
+
+
+msgid ""
+"Create, modify, view and delete indicator types. An"
+"indicator type is a factor for an indicator, like"
+"percentage."
+msgstr ""
+"Criar, modificar, exibir e excluir tipos de indicadores. Um"
+"tipo de indicador \u00E9 um fator de um indicador, como"
+"percentuais."
+
+
+msgid "The category option name already exists"
+msgstr "Nome da op\u00E7\u00E3o de categoria j\u00E1 existente"
+
+msgid "Data element group"
+msgstr "Grupo de elementos de dados"
+
+msgid "Value"
+msgstr "Valor"
+
+msgid "Category options"
+msgstr "Op\u00E7\u00F5es de categorias"
+
+msgid "Indicator Group Editor"
+msgstr "Editor de Grupo de Indicador"
+
+msgid "Factor"
+msgstr "Factor"
+
+msgid "Data element groups"
+msgstr "Grupo de Elemento de Dados"
+
+msgid "Selected Data Element Groups"
+msgstr "Grupos de elementos de dados seleccionados"
+
+msgid "Data element category combo details"
+msgstr "Detalhes de combina\u00E7\u00E3o de categoria de elemento de dado"
+
+msgid "Adding the indicator group failed with the following message"
+msgstr "Adi\u00E7\u00E3o de grupo de indicador falhou com a seguinte mensagem"
+
+msgid "Legend"
+msgstr "Legenda"
+
+msgid "Saving the indicator type failed with the following message"
+msgstr "Salvando o tipo de indicador falhou com a seguinte mensagem"
+
+msgid "Select group"
+msgstr "Seleccione grupo"
+
+msgid "Expression is not well formed"
+msgstr "Express\u00E3o n\u00E3o est\u00E1 bem formada"
+
+msgid "Data element category"
+msgstr "Categoria de Elemento de Dado"
+
+msgid ""
+"Create, modify, view and delete indicators. An indicator is"
+"a formula consisting of data elements and numbers."
+msgstr ""
+"Criar, modificar, exibir e excluir indicadores. Um indicador"
+"\u00E9 uma f\u00F3rmula composta de elementos de dados e"
+"n\u00FAmeros."
+
+
+msgid "Category combination"
+msgstr "Combina\u00E7\u00E3o de categorias"
+
+msgid "Identifier does not reference a data element"
+msgstr "Identificador n\u00E3o faz refer\u00EAncia a um elemento de dados"
+
+msgid "Adding the data element group failed with the following message"
+msgstr ""
+"Adi\u00E7\u00E3o do grupo de elemento de dados falhou com"
+"a seguinte mensagem"
+
+
+msgid "Edit numerator"
+msgstr "Editar numerador"
+
+msgid "Please specify a category option name"
+msgstr "Por favor, especifique um nome de op\u00E7\u00E3o da categoria"
+
+msgid "Edit indicator type"
+msgstr "Editar tipo de indicador"
+
+msgid "Data element identifier must be a number"
+msgstr "Identificador do elemento de dado deve ser um n\u00FAmero"
+
+msgid "Data element category combination"
+msgstr "Combina\u00E7\u00E3o de Categoria de Elemento de Dado"
+
+msgid "Category option combo identifier must be a number"
+msgstr ""
+"Identificador da op\u00E7\u00E3o de combina\u00E7\u00E3o de"
+"categoria deve ser um n\u00FAmero"
+
+
+msgid "Skip category total in reports"
+msgstr "Saltar categorias totais em relat\u00F3rios"
+
+msgid "Edit data element group"
+msgstr "Editar grupo de elementos de dados"
+
+msgid "Update Data Element Group Member"
+msgstr "Adicionar conjunto de grupo de elemento de dado"
+
+msgid "Name already exists !"
+msgstr "Nome j\u00E1 existe\!"
+
+msgid "Data Element Category Option"
+msgstr "Elemento de dados Op\u00E7\u00E3o da categoria de Elementos de Dados"
+
+msgid "Category combination management"
+msgstr "Gest\u00E3o de combina\u00E7\u00E3o de categoria de elemento de dado"
+
+msgid "Available Data Element Groups"
+msgstr "Grupos Elemento de dados dispon\u00EDveis"
+
+msgid "Option set"
+msgstr "Conjunto de op\u00E7\u00F5es"
+
+msgid "Selected category options"
+msgstr "Op\u00E7\u00F5es categoria selecionada"
+
+msgid "Translate"
+msgstr "Traduzir"
+
+msgid "Do you want to delete indicator?"
+msgstr "Do you want to delete indicator?"
+
+msgid "Hide warning"
+msgstr "Esconder avisos"
+
+msgid "Category option"
+msgstr "Opc\u00E7\u00F5es de categorias"
+
+msgid "Category"
+msgstr "Categoria"
+
+msgid "Adding indicator failed"
+msgstr "Adding indicator failed"
+
+msgid "Formula"
+msgstr "F\u00F3rmula"
+
+msgid "Use of category with an empty option is not allowed!"
+msgstr "Uso da categoria com uma op\u00E7\u00E3o vazia n\u00E3o \u00E9 permitido\!"
+
+msgid " Minus"
+msgstr "Menos"
+
+msgid "Are you sure you want to delete this data element group?"
+msgstr "Tem certeza de que deseja excluir este grupo de elemento de dados?"
+
+msgid "Edit denominator"
+msgstr "Editar denominador"
+
+msgid "Edit data element"
+msgstr "Editar elemento de dado"
+
+msgid "Available categories"
+msgstr "Categorias dispon\u00EDveis"
+
+msgid "Update category option"
+msgstr "Adicionar op\u00E7\u00E3o de categoria"
+
+msgid "View 2"
+msgstr "Vista 2"
+
+msgid "View 1"
+msgstr "Vista 1"
+
+msgid "Saving the indicator group failed with the following message"
+msgstr "Salvar o grupo indicador falhou com a seguinte mensagem"
+
+msgid "Are you sure you want to delete this indicator group?"
+msgstr "Tem certeza de que deseja excluir este grupo indicador?"
+
+msgid "Are you sure you want to delete this data dictionary?"
+msgstr "Tem certeza de que deseja excluir este dicion\u00E1rio de dados?"
+
+msgid "Aggregation levels"
+msgstr "Niveis de agrega\u00E7\u00E3o"
+
+msgid "Member of"
+msgstr "Membro de"
+
+msgid "Please select data element"
+msgstr "Por favor, seleccione elemento de dado"
+
+msgid "Edit data element category option"
+msgstr "Editar op\u00E7\u00E3o da categoria de elemento de dados"
+
+msgid "Selected data elements"
+msgstr "Elementos de dados seleccionados"
+
+msgid "The name is already in use. Please choose a different name."
+msgstr "O nome j\u00E1 est\u00E1 em uso. Por favor, escolha um nome diferente"
+
+msgid "Available category options"
+msgstr "Op\u00E7\u00F5es de categoria dispon\u00EDveis"
+
+msgid "Update Data Element Group Set"
+msgstr "Adicionar conjunto de grupo de elemento de dado"
+
+msgid "Integer"
+msgstr "N\u00FAmero"
+
+msgid "Add category option"
+msgstr "Adicionar op\u00E7\u00E3o de categoria"
+
+msgid "The short name is already in use. Please choose a different short name"
+msgstr "Nome j\u00E1 est\u00E1 a ser usado. Por favor escolha outro nome diferente."
+
+msgid "Create new data element group"
+msgstr "Criar novo grupo de elemento de dado"
+
+msgid "Left brackets"
+msgstr "Colchetes esquerdo"
+
+msgid "Concept name"
+msgstr "Nome do conceito"
+
+msgid "Number of category options"
+msgstr "N\u00FAmero de op\u00E7\u00F5es de categorias"
+
+msgid "Data element sort order"
+msgstr "Ordem de classifica\u00E7\u00E3o do elemento de dado"
+
+msgid ""
+"Create, modify, view and delete indicator group sets. Group"
+"sets are used for improved analysis."
+msgstr ""
+"Criar, modificar, exibir e excluir conjuntos grupo indicador."
+"Conjuntos de grupo s\u00E3o utilizadas para uma melhor"
+"an\u00E1lise."
+
+
+msgid "Selected data element group sets"
+msgstr "Conjuntos de grupo de elemento de dados selecionados"
+
+msgid "Enter alphabet (a-z A-Z), number (0-9) and underscore (_) characters only."
+msgstr "Enter Alphabet (a-z A-Z), Number (0-9) and Underscore (_) characters only."
+
+msgid "Aggregate"
+msgstr "Agregar"
+
+msgid "Export"
+msgstr "Exportar"
+
+msgid " Right brackets"
+msgstr "colchetes a direita"
+
+msgid "Create new data element category option"
+msgstr "Criar nova op\u00E7\u00E3o de categoria de elemento de dados"
+
+msgid "Update Indicator Member"
+msgstr "Actualize membro de indicador"
+
+msgid "Available indicators"
+msgstr "Indicadores dispon\u00EDveis"
+
+msgid "Indicator sort order"
+msgstr "Ordem de classifica\u00E7\u00E3o do indicador"
+
+msgid "Data element group management"
+msgstr "Gest\u00E3o de categoria de elemento de dado"
+
+msgid "Factor cannot be zero"
+msgstr "Factor n\u00E3o pode ser zero"
+
+msgid "Region"
+msgstr "Regi\u00E3o"
+
+msgid "Available Indicator groups"
+msgstr "Grupos Indicador Dispon\u00EDvel"
+
+msgid "Data Element Group Editor"
+msgstr "Conjunto de grupo elemento de dado"
+
+msgid "Indicator type management"
+msgstr "Gest\u00E3o de tipo de indicador"
+
+msgid "Move to bottom"
+msgstr "Mover para baixo"
+
+msgid " Plus"
+msgstr "Mais"
+
+msgid "Indicator group"
+msgstr "Indicador do Grupo"
+
+msgid "Saving concept failed"
+msgstr "Salvando conceito falhou"
+
+msgid "Everything is OK"
+msgstr "Tudo est\u00E1 OK"
+
+msgid "Create new indicator type"
+msgstr "criar novo tipo de indicador"
+
+msgid ""
+"Create, modify, view and delete data element group sets."
+"Group sets are used for improved analysis."
+msgstr ""
+"Criar, modificar, visualizar e excluir conjuntos de dados"
+"do grupo do elemento. Conjuntos de grupo s\u00E3o utilizadas"
+"para uma melhor an\u00E1lise."
+
+
+msgid "Saving the data element group failed with the following message"
+msgstr "Salvar o grupo de elemento de dados falhou com a seguinte mensagem"
+
+msgid "Create new indicator"
+msgstr "Criar novo indicador"
+
+msgid "Import"
+msgstr "Importar"
+
+msgid "Are you sure you want to delete this data element?"
+msgstr "Tem certeza de que deseja excluir este elemento de dados?"
+
+msgid "Edit data element category"
+msgstr "Editar categoria de elemento de dado"
+
+msgid "Edit data element category combination"
+msgstr "Criar nova combina\u00E7\u00E3o de categoria de elemento de dado"
+
+msgid "Category management"
+msgstr "Gest\u00E3o de categoria de elemento de dado"
+
+msgid "Adding the indicator type failed with the following message"
+msgstr "Adi\u00E7\u00E3o de tipo de indicador falhou com a seguinte mensagem"
+
+msgid "Number type"
+msgstr "Tipo de n\u00FAmero"
+
+msgid "Selected categories"
+msgstr "Categorias seleccionados"
+
+msgid "Location"
+msgstr "Localiza\u00E7\u00E3o"
+
+msgid "Remove all"
+msgstr "Remover todos trancados"
+
+msgid "Selected Groups"
+msgstr "Grupos selecionados"
+
+msgid "Please include one or more category options"
+msgstr "Por favor, inclua uma ou mais op\u00E7\u00F5es categoria"
+
+msgid "Selected aggregation levels"
+msgstr "Selecionados n\u00EDveis de agrega\u00E7\u00E3o"
+
+msgid "Available data elements"
+msgstr "Elementos de dados disponiveis"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Move up"
+msgstr "Mover para cima"
+
+msgid "Selected Indicator groups"
+msgstr "Grupos de indicadores seleccionados"
+
+msgid "Number of categories"
+msgstr "N\u00FAmero de categorias"
+
+msgid "Edit concept"
+msgstr "Editar conceito"
+
+msgid "Adding concept failed"
+msgstr "Falha na adi\u00E7\u00E3o de conceito"
+
+msgid "Data element group set"
+msgstr "Conjunto de grupo elemento de dado"
+
+msgid ""
+"Easily add or remove data elements to and from data element"
+"groups, as well as deleted data elements."
+msgstr ""
+"Facilmente adicionar ou remover elementos de dados de e para"
+"grupos de elementos de dados, bem como elementos de dados"
+"apagados."
+
+
+msgid "Category option renamed successfully"
+msgstr "Op\u00E7\u00E3o de categoria renomeado com sucesso"
+
+msgid "Concept management"
+msgstr "Gest\u00E3o de conceito"
+
+msgid "Update was successful"
+msgstr "Actualizado com sucesso"
+
+msgid "Last updated"
+msgstr "\u00DAltima actualiza\u00E7\u00E3o"
+
+msgid "Available data element group sets"
+msgstr "Conjuntos de grupo de elementos de dados dispon\u00EDveis"
+
+msgid ""
+"Create, modify, view and delete concepts. A concept can"
+"be used by a category."
+msgstr ""
+"Criar, modificar, exibir e excluir conceitos. Um conceito"
+"pode ser usado por uma categoria."
+
+
+msgid "Category option management"
+msgstr "Gest\u00E3o da Categoria de Elementos de Dados"
+
+msgid "Are you sure you want to delete this indicator type?"
+msgstr "Tem certeza de que deseja excluir este tipo de indicador?"
+
+msgid "Selected name"
+msgstr "Nome seleccionado"
+
+msgid "Available Data Elements"
+msgstr "Elementos de dados dispon\u00EDveis"
+
+msgid "Move down"
+msgstr "Mover para baixo"
+
+msgid "Selected Data Elements"
+msgstr "Elementos de dados selecionados"
+
+msgid "Identifier does not reference a category option combo"
+msgstr ""
+"Identificador n\u00E3o faz refer\u00EAncia a uma"
+"op\u00E7\u00E3o de combina\u00E7\u00E3o de categoria"
+
+
+msgid "Item deleted successfully"
+msgstr "Item exclu\u00EDdo com sucesso"
+
+msgid "Add selected"
+msgstr "Adicionar selecionado"
+
+msgid "Form name"
+msgstr "Nome do formul\u00E1rio"
+
+msgid "Remove selected"
+msgstr "Remover seleccione"
+
+msgid ""
+"Create, modify, view and delete data element groups. Groups"
+"are used for improved analysis."
+msgstr ""
+"Criar, modificar, exibir e excluir grupos de elementos de"
+"dados. Grupos s\u00E3o usados \u200B\u200Bpara melhor"
+"an\u00E1lise."
+
+
+msgid "Store zero data values"
+msgstr "Armazenar valor de dado com zero"
+
+msgid "Create new data element category"
+msgstr "Criar nova categoria de elemento de dado"
+
+msgid "Selected indicators"
+msgstr "Indicadores seleccionados"
+
+msgid "Negative Integer"
+msgstr "Negativo Inteiro"
+
+msgid "Domain type"
+msgstr "Tipo de dom\u00EDnio"
+
+msgid "Add Data Element Group Set"
+msgstr "Adicionar conjunto de grupo de elemento de dado"
+
+msgid "Indicator group management"
+msgstr "Gest\u00E3o de grupo de indicador"
+
+msgid "Select"
+msgstr "Seleccione"
+
+msgid "Object not deleted because it is associated by objects of type"
+msgstr ""
+"Objeto n\u00E3o exclu\u00EDdo porque ele est\u00E1 associado"
+"por objetos do tipo"
+
+
+msgid "Edit indicator"
+msgstr "Editar indicador"
+
+msgid "Category combination"
+msgstr "Combina\u00E7\u00F5es de categorias"
+
+msgid "Create new data element"
+msgstr "Criar novo elemento de dado"
+
+msgid "Compulsory"
+msgstr "Obrigat\u00F3rio"
+
+msgid "Create new concept"
+msgstr "Criar novo conceito"
+
+msgid "Current"
+msgstr "Corrente"
+
+msgid "Update Indicator group set"
+msgstr "Adiconar Conjunto de grupo de indicador"
+
+msgid "Sort"
+msgstr "Ordenar"
+
+msgid "Indicator"
+msgstr "Indicador"
+
+msgid "Number of days"
+msgstr "N\u00FAmero de dias"
+
+msgid "Number of members"
+msgstr "Quantidade de membros"
+
+msgid "Please select indicator"
+msgstr "Por favor, seleccione o indicador"
+
+msgid "Create new data dictionary"
+msgstr "Criar novo dicion\u00E1rio de dado"
+
+msgid "Calculated"
+msgstr "Calculado"
+
+msgid "Saving indicator failed"
+msgstr "Saving indicator failed"
+
+msgid " Divide"
+msgstr "Dividir"
+
+msgid "Assign Groups for Data Element"
+msgstr "Atribuir grupos a Elemento de Dados"
+
+msgid "Available Groups"
+msgstr "Grupos disponiveis"
+
+msgid ""
+"Easily add or remove indicators to and from indicator"
+"groups, as well as delete indicators."
+msgstr ""
+"Facilmente adicionar ou remover indicadores de e para os"
+"grupos de indicadores, bem como excluir indicadores."
+
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Add Indicator group set"
+msgstr "Adiconar Conjunto de grupo de indicador"
+
+msgid "Please select"
+msgstr "Por favor, Seleccione"
+
+msgid "Multiply"
+msgstr "Multiplicar"
+
+msgid "Move selected"
+msgstr "Mover seleccionado"
+
+msgid ""
+"Create, modify, view and delete data dictionaries. A data"
+"dictionary is a set of meta-data."
+msgstr ""
+"Criar, modificar, exibir e excluir dicion\u00E1rios de"
+"dados. Um dicion\u00E1rio de dados \u00E9 um conjunto de"
+"meta-dados."
+
+
+msgid "Move to top"
+msgstr "Mover para topo"
+
+msgid "Are you sure you want to delete this concept?"
+msgstr "Tem certeza de que deseja excluir este conceito?"
+
+msgid "Data element management"
+msgstr "Gest\u00E3o de categoria de elemento de dado"
+
+msgid "Create new data element category combination"
+msgstr "Criar nova combina\u00E7\u00E3o de categoria de elemento de dado"
+
+msgid "Group members"
+msgstr "Membros do Grupo"
+
+msgid "Create new indicator group"
+msgstr "Criar novo grupo de indicador"
+
+msgid "The code is already in use. Please choose a different code."
+msgstr ""
+"O c\u00F3digo j\u00E1 est\u00E1 em uso. Por favor,"
+"escolha um c\u00F3digo diferente."
+
+
+msgid ""
+"Create, modify, view and delete data elements. Data"
+"elements are phenomena for which will be captured and"
+"analyzed."
+msgstr ""
+"Criar, modificar, exibir e excluir elementos de dados."
+"Elementos de dados s\u00E3o fen\u00F4menos para os quais"
+"ser\u00E3o capturados e analisados."
+
+
+msgid "Data element"
+msgstr "Elemento de dado"
+
+msgid "Positive Integer"
+msgstr "Positivo Inteiro"
+
+msgid "Available aggregation levels"
+msgstr "N\u00EDveis de agrega\u00E7\u00E3o dispon\u00EDvel"
+
+msgid "Indicator group set"
+msgstr "Conjunto de grupo de indicador"
+
+msgid "Download as PDF"
+msgstr "Descarregar como ficheiro PDF"
+
+msgid "Point"
+msgstr "Ponto"
+
+msgid "is a member of more than one selected group"
+msgstr "\u00E9 membro de mais do que um grupo selecionado"
+
+msgid "Data sets"
+msgstr "Conjunto de Dados"
+
+msgid "Confirm"
+msgstr "Confirmar"
+
+msgid "Phone number"
+msgstr "N\u00FAmero telefone"
+
+msgid "Not selected, moved to root position"
+msgstr "N\u00E3o selecionado, movido para a posi\u00E7\u00E3o de raiz"
+
+msgid "Search"
+msgstr "Pesquisar"
+
+msgid "Number of group members"
+msgstr "N\u00FAmero de membros do grupo"
+
+msgid "Please select from tree (optional)"
+msgstr "Por favor escolha da \u00E1rvore (opcional)"
+
+msgid "Latitude (optional)"
+msgstr "Latitude (opcional)"
+
+msgid "Symbol"
+msgstr "Simbolo"
+
+msgid "Polygon"
+msgstr "Poligono"
+
+msgid "Code"
+msgstr "C\u00F3digo"
+
+msgid ""
+"Move organisation units in the organisation unit tree. All"
+"children will be moved along with the unit."
+msgstr ""
+"Mover unidades organizacionais na \u00E1rvore de unidade"
+"organizacional. Todas as crian\u00E7as ser\u00E3o movidos junto"
+"com a unidade."
+
+
+msgid "Download as Excel"
+msgstr "Descarregar como ficheiro Excel"
+
+msgid "Hierarchy operations"
+msgstr "Opera\u00E7\u00F5es de hierarquias"
+
+msgid "Please wait while searching"
+msgstr "Por favor, aguarde enquanto procura"
+
+msgid "Please wait while downloading report"
+msgstr "Por favor aguarde enquanto baixa relat\u00F3rio"
+
+msgid "Not selected"
+msgstr "N\u00E3o selecionado"
+
+msgid "Longitude (optional)"
+msgstr "Longitude (opcional)"
+
+msgid "Exclusive"
+msgstr "Exclusivo"
+
+msgid "Reset"
+msgstr "Refazer"
+
+msgid "Name, code or identifier"
+msgstr "Nome, c\u00F3digo ou identificador"
+
+msgid "Hierarchy operations"
+msgstr "Opera\u00E7\u00F5es de hierarquias"
+
+msgid "Identifier"
+msgstr "Identificador"
+
+msgid "Options"
+msgstr "Op\u00E7\u00F5es"
+
+msgid "Longitude"
+msgstr "Longitude"
+
+msgid "Level"
+msgstr "Nivel"
+
+msgid "Found"
+msgstr "Encontrado"
+
+msgid ""
+"An organisation unit cannot be moved to itself. Please select"
+"a new parent organisation unit"
+msgstr ""
+"Uma unidade organizacional nao pode ser movida para si mesmo."
+"Favor seleccionar unidade organizacional parente"
+
+
+msgid "Hierarchy"
+msgstr "Hier\u00E1rquia"
+
+msgid "Loading"
+msgstr "Carregando, por favor epere"
+
+msgid "Organisation unit group set"
+msgstr "Conjunto de Grupo Unidade Organizacional"
+
+msgid "Select symbol"
+msgstr "Selecionar simbolo"
+
+msgid "Limited"
+msgstr "Limitado"
+
+msgid "The group set can not be created because it is exclusive and"
+msgstr "O conjunto de grupo n\u00E3o pode ser criada porque \u00E9 exclusiva e"
+
+msgid "Assign to compulsory organisation unit group set"
+msgstr "Atribuir ao grupo a unidades organizacional obrigat\u00F3rio"
+
+msgid "Organisation unit level management"
+msgstr "Gest\u00E3o de N\u00EDvel de Unidade Organizacional"
+
+msgid ""
+"The selected organisation unit is already a root. Please"
+"select a new parent organisation unit"
+msgstr ""
+"A unidade de organizacional selecionada j\u00E1 \u00E9 uma"
+"raiz. Por favor, selecione uma nova unidade organizacional do"
+"pai"
+
+
+msgid "Coordinates"
+msgstr "Coordenadas"
+
+msgid "Organisation unit level"
+msgstr "N\u00EDvel de Unidade Organizacional"
+
+msgid "Move all"
+msgstr "Mover todos"
+
+msgid " The selected organisation unit will be moved to root"
+msgstr "Unidades organizacionais seleccionados ser\u00E3o movidos para raiz"
+
+msgid "Organisation unit groups"
+msgstr "Grupos de unidades organizacionais"
+
+msgid "All"
+msgstr "Selecionar/Todos"
+
+msgid "Selected data sets"
+msgstr "Conjuntos de dados seleccionados"
+
+msgid "Registers date"
+msgstr "Data de registo"
+
+msgid "Registers data"
+msgstr "Dados do registo"
+
+msgid "Download as CSV"
+msgstr "Descarregar como ficheiro CSV"
+
+msgid "Criteria"
+msgstr "Crit\u00E9rio"
+
+msgid "Available data sets"
+msgstr "Conjuntos de dados dispon\u00EDveis"
+
+msgid "Organisation units"
+msgstr "Unidades organizacionais"
+
+msgid "Latitude"
+msgstr "Latitude"
+
+msgid "Start date"
+msgstr "Data Inicio"
+
+msgid "Latest date will be used if no date is selected"
+msgstr "\u00DAltima data ser\u00E1 usada se nenhuma data for selecionada"
+
+msgid "Select the data element to keep"
+msgstr "Selecione o elemento de dados para manter"
+
+msgid "Periods"
+msgstr "Per\u00EDodos"
+
+msgid "Data element group"
+msgstr "Grupo de elementos de dados"
+
+msgid "Select the organisation unit to eliminate"
+msgstr "Selecionar a unidade organizacional para eliminar"
+
+msgid "Clear zero values"
+msgstr "Apagar valores com zero"
+
+msgid "Data sets not assigned to organisation units"
+msgstr "Conjuntos de dados n\u00E3o atribu\u00EDdos a unidades organizacionais"
+
+msgid "Total Query Cache"
+msgstr "Total de Cache de Consultas"
+
+msgid "Execute Now"
+msgstr "Execute agora"
+
+msgid "Update SQL view"
+msgstr "Actualiza\u00E7\u00E3o da vista SQL"
+
+msgid "Second Level Cache Statistics"
+msgstr "Estat\u00EDsticas cache de segundo n\u00EDvel"
+
+msgid "Merging done"
+msgstr "Feito"
+
+msgid "Unlock"
+msgstr "Desbloquear"
+
+msgid "Please choose a period type"
+msgstr "Por favor, escolha um tipo de per\u00EDodo"
+
+msgid "Eliminate the oldest duplicates"
+msgstr "Eliminar duplica\u00E7\u00F5es antigas"
+
+msgid "Browse by"
+msgstr "Pesquisado por"
+
+msgid "Organisation unit groups without group sets"
+msgstr "Grupos de unidades Organiza\u00E7\u00E3o sem sets grupo"
+
+msgid "Attribute sort order"
+msgstr "Ordem de classifica\u00E7\u00E3o do atributo"
+
+msgid "Option"
+msgstr "Op\u00E7\u00E3o"
+
+msgid "Yesterday"
+msgstr "Ont\u00E9m"
+
+msgid "Add Constant"
+msgstr "Adicionar Constante"
+
+msgid ""
+"Create SQL database views. These views will typically use the"
+"resource tables to provide convenient views for third-party"
+"tools."
+msgstr ""
+"Criar vistas de base de dados SQL. Estes pontos de vista"
+"normalmente usam as tabelas de recursos para fornecer vistas"
+"convenientes para ferramenta a terceiros."
+
+
+msgid "Prune periods"
+msgstr "Excluir per\u00EDodos"
+
+msgid "Select the data element to eliminate"
+msgstr "Seleccione elemento de dado para eliminar"
+
+msgid "Add option"
+msgstr "Adiccionar Op\u00E7\u00E3o"
+
+msgid "Eliminate duplicates from regular source"
+msgstr "Eliminar duplicatas de fonte regular"
+
+msgid "Generating resource tables"
+msgstr "Gerando tabelas de recursos ..."
+
+msgid "Constant"
+msgstr "Constante"
+
+msgid "Exec count"
+msgstr "Exec count"
+
+msgid "Resource tables task strategy"
+msgstr "Tabela de tarefas de recursos estrat\u00E9gicos"
+
+msgid "Deleting lock exceptions"
+msgstr "Excluindo as excep\u00E7\u00F5es de bloqueio"
+
+msgid "Option set management"
+msgstr "Gest\u00E3o de conjunto de op\u00E7\u00F5es"
+
+msgid "Organisation units without groups"
+msgstr "Unidades organizacionais sem grupos"
+
+msgid "Data Archive"
+msgstr "Arquivo de Dados"
+
+msgid "Number of objects"
+msgstr "N\u00FAmero de objectos"
+
+msgid "Organisation unit"
+msgstr "Unidade Organizacional"
+
+msgid "Resource tables generated"
+msgstr "Tabelas de recursos geradas"
+
+msgid "Archive"
+msgstr "Arquivo"
+
+msgid "Recorded values"
+msgstr "Valores Gravados"
+
+msgid "Raw data"
+msgstr "Dados em bruto"
+
+msgid "Exec max time"
+msgstr "Exec max time"
+
+msgid "Please select two different data elements"
+msgstr "Por favor selecione dois elementos de dados diferentes"
+
+msgid "Invalid indicator numerators"
+msgstr "Inv\u00E1lido numeradores de indicador"
+
+msgid ""
+"Monitor and clear the system database cache status. Provides"
+"information on object and query caches."
+msgstr ""
+"Monitorar e limpar o cache de status do sistema de base"
+"de dados. Fornece informa\u00E7\u00F5es sobre caches de"
+"objeto e de consulta."
+
+
+msgid "Eliminate duplicates from archive source"
+msgstr "Eliminar duplicatas de arquivo fonte"
+
+msgid "Clear data set completeness"
+msgstr "Apagar completacao de conjunto de dados"
+
+msgid "Data elements violating exclusive group sets"
+msgstr "Elementos de dados violaram conjuntos de grupo exclusivo"
+
+msgid "Filter"
+msgstr "Fitro"
+
+msgid "done. Number of archived values is now"
+msgstr "feito. N\u00FAmero de valores arquivados \u00E9 agora"
+
+msgid "Aggregated data set completeness"
+msgstr "Agrega\u00E7\u00E3o de conjunto de dados completo"
+
+msgid "Please select an organisation unit"
+msgstr "Por favor, selecione uma unidade de organizacional"
+
+msgid "Aggregated org unit data values"
+msgstr "Valores agregados da unidade organizacional"
+
+msgid "values"
+msgstr "valores"
+
+msgid "Financial Yearly"
+msgstr "Finan\u00E7as Anuais"
+
+msgid ""
+"Archive person data which is not currently relevant to your"
+"system. Data can also be unarchived."
+msgstr ""
+"Arquivar dados do benefici\u00E1rio que no momento s\u00E3o"
+"relevante para o seu sistema. Dados tamb\u00E9m podem ser"
+"desarquivados."
+
+
+msgid "Miss count"
+msgstr "Miss count"
+
+msgid "Query Cache Statistics"
+msgstr "Estat\u00EDsticas Cache de Consulta"
+
+msgid "Invalid validation rule left side expressions"
+msgstr ""
+"Regra de valida\u00E7\u00E3o inv\u00E1lida de express\u00F5es"
+"\u00E0 esquerda"
+
+
+msgid "Aggregated org unit indicator values"
+msgstr "Valores de indicadores agregado"
+
+msgid "Update option"
+msgstr "Actualizar op\u00E7\u00E3o"
+
+msgid "Exec min time"
+msgstr "Exec min time"
+
+msgid "Maintenance performed"
+msgstr "Manuten\u00E7\u00E3o realizada"
+
+msgid "Organisation unit structure"
+msgstr "Estrutura da Unidade Organizacional"
+
+msgid "Invalid indicator denominators"
+msgstr "Inv\u00E1lido denominadores indicador"
+
+msgid "Start"
+msgstr "Come\u00E7ar"
+
+msgid "Prune"
+msgstr "Suprimir"
+
+msgid "Data element category option combo name"
+msgstr "Opc\u00E7\u00E3o de nome combo da categoria do elemento de dados"
+
+msgid "All daily"
+msgstr "Diarimente todos"
+
+msgid "Done"
+msgstr "Feito"
+
+msgid "Organisation unit group"
+msgstr "Grupo da unidade organizacional"
+
+msgid "Organisation unit group"
+msgstr "Grupo de Unidade de Organiza\u00E7\u00E3o"
+
+msgid "Please select two different organisation units"
+msgstr "Por favor, selecione duas unidades organizacionais diferentes"
+
+msgid "Today"
+msgstr "Hoje"
+
+msgid "Browse"
+msgstr "Procurar"
+
+msgid "Analytics tables"
+msgstr "Tabelas Anal\u00EDticas"
+
+msgid "Do you want to delete this SQL view object ?"
+msgstr "Voc\u00EA deseja excluir este objeto de exibi\u00E7\u00E3o sql?"
+
+msgid "Generating min-max values"
+msgstr "Gerar valor min-max"
+
+msgid "Edit lock exception"
+msgstr "Editar excep\u00E7\u00E3o de bloqueio"
+
+msgid "User"
+msgstr "Utilizador"
+
+msgid "Analytics tables task strategy"
+msgstr "Estrat\u00E9gia de tarefas de tabelas anal\u00EDticas"
+
+msgid "Execute query"
+msgstr "Executar consulta"
+
+msgid "Total Second Level Cache"
+msgstr "Total de Cache de Segundo N\u00EDvel"
+
+msgid "Data values"
+msgstr "Valor de Dados"
+
+msgid "Ignore zero data values"
+msgstr "Ignorar valor zero"
+
+msgid "Create, modify and view attributes."
+msgstr "Criar e atualizar atributos din\u00E2micos."
+
+msgid "Removing min-max values"
+msgstr "Remover valores min-max"
+
+msgid "Error at"
+msgstr "Erro na"
+
+msgid "Stop"
+msgstr "Parar"
+
+msgid "Last 7 days"
+msgstr "\u00DAltimos 7 dias"
+
+msgid "Data elements in data set but not in form or sections"
+msgstr ""
+"Elementos de dados no conjunto de dados, mas n\u00E3o no"
+"formulario ou nas sec\u00E7\u00F5es"
+
+
+msgid "No data found"
+msgstr "Dado n\u00E3o encontrado"
+
+msgid "There are no overlapping data in the archive."
+msgstr "N\u00E3o existem dados sobrepostas no arquivo."
+
+msgid "Please execute query to create View table before viewing"
+msgstr ""
+"Por favor, executar a consulta para criar tabela de"
+"visualizac\u00E3o antes de ver"
+
+
+msgid ""
+"Archive data which is not currently relevant to your system"
+"in order to improve performance. Data can also be unarchived."
+msgstr ""
+"Arquivar dados que n\u00E3o \u00E9 actualmente relevantes"
+"para o seu sistema a fim de melhorar o desempenho. Dados"
+"tamb\u00E9m podem ser desarquivados."
+
+
+msgid "Data Set list"
+msgstr "Lista de conjunto de dado"
+
+msgid "Show"
+msgstr "Mostrar"
+
+msgid "Data element group list"
+msgstr "Lista de grupo de elemento de dado"
+
+msgid "latest"
+msgstr "\u00DAltimo"
+
+msgid ""
+"Create constants which can be included in expressions of"
+"indicator and validation rules."
+msgstr ""
+"Criar constante a ser inclu\u00EDda na express\u00E3o de"
+"regra indicador / valida\u00E7\u00E3o"
+
+
+msgid "Category structure"
+msgstr "Estrutura da categoria"
+
+msgid "Expression is empty"
+msgstr "Express\u00E3o est\u00E1 v\u00E1zia"
+
+msgid "Duplicate Data Elimination"
+msgstr "Eliminar dados duplicado"
+
+msgid " Period"
+msgstr "Per\u00EDodo"
+
+msgid "Add Attribute"
+msgstr "Adicionar Atributo"
+
+msgid "Removed values successfully"
+msgstr "Valores removido com \u00EAxito"
+
+msgid "not started"
+msgstr "N\u00E3o come\u00E7ou"
+
+msgid "Never"
+msgstr "Nunca"
+
+msgid "Data Browser"
+msgstr "Pesquisar de Dados"
+
+msgid "Maintenance"
+msgstr "Manuten\u00E7\u00E3o"
+
+msgid "Please select at least one option"
+msgstr "Nenhuma opc\u00E7\u00E3o seleccionada"
+
+msgid "Please enter a valid End date"
+msgstr "Por favor, insira uma data final v\u00E1lida"
+
+msgid "Invalid validation rule right side expressions"
+msgstr ""
+"Regra de valida\u00E7\u00E3o inv\u00E1lida de express\u00F5es"
+"\u00E0 direita"
+
+
+msgid "Select all"
+msgstr "Seleccione todos"
+
+msgid "Person data archive"
+msgstr "Arquivo Dados do Benefici\u00E1rio"
+
+msgid "Merge"
+msgstr "Associar"
+
+msgid "Organisation unit group list"
+msgstr "Lista de Grupo de Unidade Organizacional"
+
+msgid ""
+"Add or remove exceptions to the the standard rules for"
+"locking of data entry forms."
+msgstr ""
+"Adicionar ou remover excep\u00E7\u00F5es \u00E0s regras"
+"padr\u00E3o para o bloqueio dos formul\u00E1rios de entrada"
+"de dados."
+
+
+msgid "Validation rules without groups"
+msgstr "Regras de valida\u00E7\u00E3o sem grupos"
+
+msgid "active"
+msgstr "Activo"
+
+msgid "Lock Exception"
+msgstr "Excep\u00E7\u00E3o de bloqueio"
+
+msgid "Daily"
+msgstr "Diariamante"
+
+msgid "Indicator group set structure"
+msgstr "Estrutura de conjunto de grupo de indicador"
+
+msgid "View raw data at this level"
+msgstr "Ver dados brutos, a este n\u00EDvel"
+
+msgid "Please select a browser mode"
+msgstr "Por favor seleccione o modo de navega\u00E7\u00E3o"
+
+msgid ""
+"Generate resource database tables for the organisation unit"
+"hierarchy and group set structure among others."
+msgstr ""
+"Gerar tabelas de recursos da base de dados para a"
+"hierarquia de unidade organizacional e da estrutura definida"
+"grupo entre outros."
+
+
+msgid "Performing maintenance"
+msgstr "Realizando manuten\u00E7\u00E3o..."
+
+msgid "Object type"
+msgstr "Tipo de objecto"
+
+msgid ""
+"Eliminate data registered for duplicate data elements. Useful"
+"when data has been entered for identical data elements."
+msgstr ""
+"Eliminar os dados registrados para os elementos de dados"
+"duplicados. \u00DAtil quando os dados foram inseridos para"
+"elementos id\u00EAnticos de dados."
+
+
+msgid "From date"
+msgstr "a partir da data"
+
+msgid "Append"
+msgstr "Acrescentar"
+
+msgid "Resource Table"
+msgstr "Tabela de Recursos"
+
+msgid "Unarchiving"
+msgstr "Desarmazenando"
+
+msgid "Orphaned organisation units"
+msgstr "Unidades organizacionais \u00D3rf\u00E3s"
+
+msgid "Indicators with identical formulas"
+msgstr "Indicadores com f\u00F3rmulas id\u00EAnticas"
+
+msgid "Generate"
+msgstr "Gerar"
+
+msgid "Value must be an number"
+msgstr "O valor deve ser um n\u00FAmero"
+
+msgid "Please select a data set"
+msgstr "Por favor selecione um conjunto de dados"
+
+msgid "Edit Constant"
+msgstr "Editar Constante"
+
+msgid "SQL statement cannot be null"
+msgstr "Instru\u00E7\u00E3o SQL n\u00E3o pode ser nulo"
+
+msgid "Archiving"
+msgstr "Arquivando"
+
+msgid "Last 30 days"
+msgstr "\u00DAltimos 30 dias"
+
+msgid "Do you want to delete lock exceptions with this configuration?"
+msgstr ""
+"Deseja excluir as excep\u00E7\u00F5es de bloqueio com essa"
+"configura\u00E7\u00E3o?"
+
+
+msgid "Lock exception batch removal"
+msgstr "Remo\u00E7\u00E3o em lote de excep\u00E7\u00E3o de bloqueio"
+
+msgid "Aggregated data values"
+msgstr "Valor de Dados agregado"
+
+msgid "Organisation units with cyclic references"
+msgstr "Unidades organizacionais com refer\u00EAncias c\u00EDclicas"
+
+msgid "Do you want to delete this constant?"
+msgstr "Voc\u00EA deseja apagar esta constante?"
+
+msgid ""
+"Run data integrity checks and unveil anomalies and problems"
+"in the meta data setup."
+msgstr ""
+"Executar verifica\u00E7\u00F5es de integridade de dados e"
+"revelar anomalias e problemas na configura\u00E7\u00E3o de"
+"metadados."
+
+
+msgid "SQL View Management"
+msgstr "Ver Gest\u00E3o de SQL"
+
+msgid "Scheduling is"
+msgstr "O agendamento \u00E9"
+
+msgid "Indicators violating exclusive group sets"
+msgstr "Indicadores violaram conjuntos de grupos exclusivo"
+
+msgid "Sections with invalid category combinations"
+msgstr "Se\u00E7\u00F5es com combina\u00E7\u00F5es categoria inv\u00E1lido"
+
+msgid "Data set"
+msgstr "Conjunto de dados"
+
+msgid "Data Integrity"
+msgstr "Integridade de dado"
+
+msgid "SQL Statement"
+msgstr "Declara\u00E7\u00E3o SQL"
+
+msgid "Exec row count"
+msgstr "Exec row count"
+
+msgid "Elimination done"
+msgstr "Eliminado"
+
+msgid "Hit count"
+msgstr "Hit Put count"
+
+msgid "Data integrity checks performed"
+msgstr "Controlos realizados de integridade dos dados"
+
+msgid "Pruning done"
+msgstr "Limpeza efectuada"
+
+msgid "Period type"
+msgstr "Tipo de Per\u00EDods"
+
+msgid "Attribute"
+msgstr "Atributo"
+
+msgid "Dynamic Attributes"
+msgstr "Atributos Din\u00E2micos"
+
+msgid "Last 6 months daily + 6 to 12 months weekly"
+msgstr "\u00DAltimos 6 meses di\u00E1rio + 6 a 12 meses semanal"
+
+msgid "Restricted user tables cannot be referenced in query"
+msgstr "Not allowance to query in the special tables \!"
+
+msgid "Query name"
+msgstr "Query Name"
+
+msgid "Eliminate"
+msgstr "Eliminar"
+
+msgid "Edit Attribute"
+msgstr "Editar Atributo"
+
+msgid "Organisation Unit Merge"
+msgstr "Associar Unidade Organizacional"
+
+msgid "Level must be a number"
+msgstr "N\u00EDvel deve ser um n\u00FAmero"
+
+msgid "Name is not allowed to be null"
+msgstr "Nome n\u00E3o \u00E9 permitido ser nulo"
+
+msgid "Data element"
+msgstr "Elemento de dados"
+
+msgid "User Group"
+msgstr "Grupo de utilizadores"
+
+msgid "Last 12 months daily"
+msgstr "\u00DAltimos 12 meses di\u00E1rios"
+
+msgid "earliest"
+msgstr "mais antigo"
+
+msgid "No aggregation"
+msgstr "Nenhuma agrega\u00E7\u00E3o"
+
+msgid ""
+"Browse the database and get an overview of where data"
+"exists. View and export counts of data elements as well as"
+"raw data."
+msgstr ""
+"Navegar na base de dados e obter uma vis\u00E3o geral de"
+"onde os dados existem. Visualizar e exportar as contagens de"
+"elementos de dados, bem como dados brutos."
+
+
+msgid "Data elements without groups"
+msgstr "Elementos de dados sem grupos"
+
+msgid "Unarchive"
+msgstr "Desarquivar"
+
+msgid "Indicator types"
+msgstr "Tipos de indicador"
+
+msgid "Number of recorded values"
+msgstr "N\u00FAmero de valores registrados"
+
+msgid "Data Administration"
+msgstr "Administra\u00E7\u00E3o Dados"
+
+msgid "Perform maintenance"
+msgstr "Realizar manuten\u00E7\u00E3o"
+
+msgid "You must choose the organisation unit has parent to prune. Please try again!"
+msgstr ""
+"Voc\u00EA deve escolher a unidade de organiza\u00E7\u00E3o"
+"tem pai para podar. Por favor, tente novamente\!"
+
+
+msgid "Organisation Unit Pruning"
+msgstr "Grupo de Unidade Organizacional"
+
+msgid "Eliminating"
+msgstr "Eliminando"
+
+msgid "Exec avg time"
+msgstr "Exec avg time"
+
+msgid "Refresh"
+msgstr "Actualizar"
+
+msgid "Organisation unit group set structure"
+msgstr "Estrutura de Grupo na unidade organizacional"
+
+msgid "Data Statistics"
+msgstr "Dados Estat\u00EDsticos"
+
+msgid "Data browser"
+msgstr "Pesquisador de dados"
+
+msgid "Select the organisation unit to keep"
+msgstr "Selecionar a unidade de organiza\u00E7\u00E3o para manter"
+
+msgid "Data dictionaries"
+msgstr "Dicion\u00E1rios de Dados"
+
+msgid "Attribute management"
+msgstr "Gest\u00E3o de Atributos"
+
+msgid "Organisation unit group set structure normalized"
+msgstr "Estrutura exclusiva do set grupo das unidades organizacionais"
+
+msgid "Value type"
+msgstr "Tipo de Valor"
+
+msgid "Disk count"
+msgstr "Disk count"
+
+msgid "Resource tables"
+msgstr "Tabela de recursos"
+
+msgid "Zero Value Storage"
+msgstr "Gest\u00E3o do Valor Zero."
+
+msgid "Merging"
+msgstr "Unindo"
+
+msgid "SQL view table with name"
+msgstr "Tabela de exibi\u00E7\u00E3o SQL com o nome"
+
+msgid "This SQL statement is invalid"
+msgstr "Esta instru\u00E7\u00E3o de SQL \u00E9 inv\u00E1lido"
+
+msgid "Mem count"
+msgstr "Mem count"
+
+msgid "Please select an organization unit"
+msgstr "Por favor, selecione uma unidade organizacional"
+
+msgid "Period structure"
+msgstr "Estrutura peri\u00F3dica"
+
+msgid "overlapping data values in the archive."
+msgstr "sobreposi\u00E7\u00E3o de valores de dados no arquivo."
+
+msgid "Last 3 years daily"
+msgstr "\u00DAltimos 3 anos diariamente"
+
+msgid "Locked"
+msgstr "Bloqueado"
+
+msgid "Lock Exception Management"
+msgstr "Gest\u00E3o da excep\u00E7\u00E3o de bloqueio"
+
+msgid ""
+"Manage scheduled tasks such as data mart exports, where you"
+"can set period types, aggregation level and frequency."
+msgstr ""
+"Gerir tarefas agendadas, como as exporta\u00E7\u00F5es de"
+"data mart, onde voc\u00EA pode definir tipos de"
+"per\u00EDodo, o n\u00EDvel de agrega\u00E7\u00E3o e de"
+"frequ\u00EAncia."
+
+
+msgid "Store zero data values"
+msgstr "Armazenar valor zero"
+
+msgid "Mandatory"
+msgstr "Obrigat\u00F3rio"
+
+msgid "Browse data at this level only"
+msgstr "Procurar dados somente a este n\u00EDvel"
+
+msgid "Select Period Type"
+msgstr "Seleccione o tipo de per\u00EDodo"
+
+msgid "Data element structure"
+msgstr "Estrutura de elemento de dados"
+
+msgid "Organisation unit group set aggregation level"
+msgstr ""
+"N\u00EDvel de agrega\u00E7\u00E3o do conjunto de grupo de"
+"unidade organizacional"
+
+
+msgid ""
+"Browse the number of objects in the database, like data"
+"elements, indicators, data sets and data values."
+msgstr ""
+"Procurar o n\u00FAmero de objetos no base de dados, como"
+"elementos de dados, conjuntos de indicadores, dados e"
+"valores de dados."
+
+
+msgid "Failed to create view table for"
+msgstr "Falha na cria\u00E7\u00E3o da tabela de vis\u00E3o para"
+
+msgid "SQL View"
+msgstr "Ver SQL"
+
+msgid "Rebuild data mart index"
+msgstr "Reconstruir \u00EDndice de data mart"
+
+msgid "Aggregation period types"
+msgstr "Tipos de per\u00EDodo de agrega\u00E7\u00E3o"
+
+msgid ""
+"Perform maintenance tasks such as pruning of data values and"
+"periods and clearing of database resource tables."
+msgstr ""
+"Executar tarefas de manuten\u00E7\u00E3o, como poda de"
+"valores de dados e os per\u00EDodos e de limpeza de"
+"tabelas de recursos da base de dados."
+
+
+msgid "Organisation unit"
+msgstr "Unidade organizacional"
+
+msgid "Region name"
+msgstr "Region name"
+
+msgid "Data elements assigned to data sets with different period types"
+msgstr ""
+"Elementos de dados atribu\u00EDdos a conjuntos de dados com"
+"tipos diferentes per\u00EDodos"
+
+
+msgid "Mem size"
+msgstr "Mem size"
+
+msgid "Data mart"
+msgstr "Data mart"
+
+msgid "Edit option set"
+msgstr "Editar conjunto de op\u00E7\u00F5es"
+
+msgid ""
+"Are you sure you want to execute all tasks now? Task"
+"processing might fully utilize your system resources and slow"
+"down other operations."
+msgstr ""
+"Tem a certeza que deseja executar todas as tarefas agora?"
+"O processamento de tarefas pode utilizar plenamente os recursos"
+"do sistema e diminuir outras opera\u00E7\u00F5es."
+
+
+msgid ""
+"Archive person data which is not currently relevant to your"
+"system in order to improve performance. Data can also be"
+"unarchived."
+msgstr ""
+"Arquivar Dados do Benefici\u00E1rio que n\u00E3o \u00E9"
+"momento relevante para o seu sistema a fim de melhorar o"
+"desempenho. Dados tamb\u00E9m podem ser desarquivados."
+
+
+msgid "Available data sets"
+msgstr "Conjunto de Dados disponivel"
+
+msgid ""
+"Merge two organisation units and their data values. Data is"
+"merged depending on existence and date of last modification."
+msgstr ""
+"Fundir duas unidades de organiza\u00E7\u00E3o e os valores"
+"de seus dados. Dados s\u00E3o mesclados dependendo"
+"exist\u00EAncia e data da \u00FAltima"
+"modifica\u00E7\u00E3o."
+
+
+msgid "Show SQL view"
+msgstr "Ver Vista SQL"
+
+msgid "Batch deletion"
+msgstr "Excluir lote"
+
+msgid "Integer"
+msgstr "Inteiro"
+
+msgid "Scheduling"
+msgstr "Agendamento"
+
+msgid "Users logged in"
+msgstr "Utilizadores aut\u00EAnticados"
+
+msgid "Pruning"
+msgstr "Limpando"
+
+msgid "Do you want to delete this lock exception?"
+msgstr "Deseja apagar a excep\u00E7\u00E3o de bloqueio?"
+
+msgid "Data elements without a data set"
+msgstr "Elementos de dados sem conjunto"
+
+msgid "Aggregated indicator values"
+msgstr "Valores de indicadores agregado"
+
+msgid "Summary drill down"
+msgstr "Resumo em profundidade"
+
+msgid "Scheduling management"
+msgstr "Gest\u00E3o de planeamento"
+
+msgid "Clear cache"
+msgstr "Clear cache"
+
+msgid "Generate tables"
+msgstr "Gerar tabelas"
+
+msgid "Users"
+msgstr "Utilizadores"
+
+msgid "Clear data mart"
+msgstr "Limpar data mart"
+
+msgid "This resource viewer is invalid or does not exist"
+msgstr "Os recursos de esta vis\u00E3o \u00E9 inv\u00E1lido ou n\u00E3o existe"
+
+msgid "Select mode"
+msgstr "Modo de Selec\u00E7\u00E3o"
+
+msgid "Data element group set structure"
+msgstr "Estrutura de Dados de Elementos do Grupo"
+
+msgid "Earliest date will be used if no date is selected"
+msgstr "\u00DAltima data ser\u00E1 usada se nenhuma data for selecionada"
+
+msgid "Cache Statistics"
+msgstr "Estat\u00EDstica de dado"
+
+msgid "Select parent organisation unit"
+msgstr "Seleccionar unidade organizacional do parente"
+
+msgid "Data mart task strategy"
+msgstr "Estrat\u00E9gias de tarefas Data Mart"
+
+msgid "Back to lock exception"
+msgstr "Voltar excep\u00E7\u00E3o de bloqueio"
+
+msgid ""
+"Remove sub-trees from the organisation unit tree. Useful when"
+"creating and deploying local databases."
+msgstr ""
+"Remover sub-\u00E1rvores da \u00E1rvore unidade de"
+"organiza\u00E7\u00E3o. \u00DAtil na cria\u00E7\u00E3o e"
+"implanta\u00E7\u00E3o de bancos de dados locais."
+
+
+msgid "is created"
+msgstr "est\u00E1 criado"
+
+msgid "End date"
+msgstr "Data Final"
+
+msgid "There are"
+msgstr "H\u00E1"
+
+msgid "Lock"
+msgstr "Bloquear"
+
+msgid "View data for"
+msgstr "Ver dados para"
+
+msgid "Min-Max Value Generation"
+msgstr "Min-Max Gera\u00E7\u00E3o de Valor"
+
+msgid "Add new SQL view"
+msgstr "Adicionar nova Vista Sql"
+
+msgid ""
+"Create option sets which can be included in data elements"
+"and produce drop-down lists in data entry forms."
+msgstr ""
+"Criar conjunto de op\u00E7\u00F5es que podem ser"
+"inclu\u00EDdos em elementos de dados e produzir  listas"
+"drop-down em formul\u00E1rios de entrada de dados."
+
+
+msgid "Put count"
+msgstr "Put count"
+
+msgid "Assigned to"
+msgstr "Atribuido a"
+
+msgid "Click on this organisation unit"
+msgstr "Clique nesta unidade de organizacional"
+
+msgid "Add option set"
+msgstr "Adiccionar conjunto de op\u00E7\u00F5es"
+
+msgid "Generated values successfully"
+msgstr "Valores gerados com sucesso"
+
+msgid "Indicators without groups"
+msgstr "Indicadores sem grupos"
+
+msgid "Constant management"
+msgstr "Gest\u00E3o constante"
+
+msgid ""
+"Define which data elements for which zero values should be"
+"stored or ignored. Useful for reducing database size."
+msgstr ""
+"Definir quais elementos de dados para o qual os valores"
+"zero deve ser armazenado ou ignorado. \u00DAtil para reduzir"
+"o tamanho da base de dados."
+
+
+msgid "Display zeros"
+msgstr "Mostrar zeros"
+
+msgid ""
+"Generate min-max values which can be used for data validation"
+"during data entry and validation processes."
+msgstr ""
+"Gerar min-max valores que podem ser usadas para"
+"valida\u00E7\u00E3o de dados durante os processos de entrada"
+"de dados e valida\u00E7\u00E3o."
+
+
+msgid "To date"
+msgstr "Ate a data"
+
+msgid "Create new lock exception"
+msgstr "Criar nova excep\u00E7\u00E3o de bloqueio"
+
+msgid "Please select a data set"
+msgstr "Por favor, seleccione o conjunto de dados\!"
+
+msgid "None"
+msgstr "Nenhum"
+
+msgid "All fields for data elements required"
+msgstr "Todos campos de elementos de dados s\u00E3o obrigat\u00F3rios"
+
+msgid "Allow future periods"
+msgstr "Disponibilizar futuros periodos"
+
+msgid "Totals"
+msgstr "Totais"
+
+msgid "Data set sort order"
+msgstr "Ordem de classifica\u00E7\u00E3o de conjunto de dados"
+
+msgid "Saved successfully"
+msgstr "Guardado com sucesso"
+
+msgid "No data element was selected"
+msgstr "Nenhum elemento de dados foi selecionado"
+
+msgid "Section grey field management"
+msgstr "Sec\u00E7\u00E3o de gest\u00E3o de campos sombreados"
+
+msgid "Sort section"
+msgstr "Editar sec\u00E7\u00E3o"
+
+msgid "Frequency"
+msgstr "Frequ\u00EAncia"
+
+msgid "Data set section management"
+msgstr "Gest\u00E3o de sec\u00E7\u00E3o"
+
+msgid "Add section"
+msgstr "Adicionar sec\u00E7\u00E3o"
+
+msgid "This name is already registered"
+msgstr "Nome j\u00E1 existe"
+
+msgid ""
+"Assign data sets to organisation units in a grid based"
+"layout for faster operations when working with a high number"
+"of items."
+msgstr ""
+"Atribuir conjuntos de dados a unidades organizacionais em uma"
+"rede baseada em layout \u200B\u200Bpara opera\u00E7\u00F5es"
+"mais r\u00E1pidas quando se trabalha com um n\u00FAmero"
+"elevado de itens."
+
+
+msgid "Form details"
+msgstr "Detalhes do formul\u00E1rio"
+
+msgid "Complete notification recipients"
+msgstr "Envio de notifica\u00E7\u00E3o completo"
+
+msgid "Label"
+msgstr "R\u00F3tulo"
+
+msgid "Data Set Assignment Editor"
+msgstr "Sec\u00E7ao de atribui\u00E7\u00E3o de conjunto de dados"
+
+msgid "Skip offline"
+msgstr "Saltar OFF"
+
+msgid "Skip data mart aggregation"
+msgstr "Saltar agrega\u00E7\u00E3o"
+
+msgid "Title"
+msgstr "T\u00EDtulo"
+
+msgid "Select organisation unit"
+msgstr "Selecione unidade organizacional"
+
+msgid "Data"
+msgstr "Dado"
+
+msgid "Complete allowed only if validation passes"
+msgstr "Conclus\u00E3o permitida apenas se a valida\u00E7\u00E3o passar"
+
+msgid "Assigned"
+msgstr "atribuido"
+
+msgid "Edit data set"
+msgstr "Editar conjunto de dado"
+
+msgid "Disable"
+msgstr "Desactivar"
+
+msgid "Data Set Section"
+msgstr "Sec\u00E7\u00E3o de conjunto de dados"
+
+msgid "Compact"
+msgstr "Compacto"
+
+msgid "Pivot"
+msgstr "Pivo"
+
+msgid "Regular"
+msgstr "Regula"
+
+msgid "Insert images"
+msgstr "Inserir imagens"
+
+msgid "Data Set"
+msgstr "Conjunto"
+
+msgid "Insert"
+msgstr "Inserir"
+
+msgid "Data element already inserted"
+msgstr "Elemento de dados j\u00E1 foi inserido"
+
+msgid "Indicator already inserted"
+msgstr "Indicador j\u00E1 est\u00E1 inserido"
+
+msgid "Greying area"
+msgstr "Area sombreada"
+
+msgid "Assign data set to organisation units"
+msgstr "Atribuir conjunto de dados as unidades organizacionais para registo"
+
+msgid "Enable"
+msgstr "Habilitar"
+
+msgid "Id"
+msgstr "Id"
+
+msgid "Available for mobile reporting"
+msgstr "Dispon\u00EDvel para Relat\u00F3rios no telem\u00F3vel"
+
+msgid "Send notification to completing user"
+msgstr "Enviar notifica\u00E7\u00E3o para complementar uutilizador"
+
+msgid "Data set management"
+msgstr "Gest\u00E3o de conjunto de dados"
+
+msgid ""
+"Create, update, view and delete data sets and custom"
+"forms. A data set is a collection of data elements for"
+"which data is entered."
+msgstr ""
+"Criar, actualizar, visualizar e excluir conjuntos de dados"
+"e formul\u00E1rios personalizados. Um conjunto de dados"
+"\u00E9 uma colec\u00E7\u00E3o de elementos de dados para"
+"o qual os dados s\u00E3o inseridos."
+
+
+msgid "Select data set"
+msgstr "Seleccione o conjunto de dados"
+
+msgid "Style"
+msgstr "Est\u00EDlo"
+
+msgid "Group"
+msgstr "Grupo"
+
+msgid "Add new"
+msgstr "Novo"
+
+msgid "No"
+msgstr "N\u00BA"
+
+msgid "Edit section"
+msgstr "Editar sec\u00E7\u00E3o"
+
+msgid "DataSets"
+msgstr "Conjunto de Dados"
+
+msgid "Data entry form details"
+msgstr "Detalhes de formul\u00E1rio de entrada dados"
+
+msgid "Grey field"
+msgstr "Campo cor cinzento"
+
+msgid "Indicators"
+msgstr "Indicadores"
+
+msgid "Unassigned"
+msgstr "N\u00E3o atribuido"
+
+msgid "Data entry form"
+msgstr "Formulario de entrada de dados"
+
+msgid "Save and close"
+msgstr "Salvar e fechar"
+
+msgid "Are you sure you want to delete this section?"
+msgstr "Tem certeza de que deseja excluir esta se\u00E7\u00E3o?"
+
+msgid "Are you sure you want to delete this data set?"
+msgstr "Tem certeza de que deseja excluir este conjunto de dados?"
+
+msgid "Are you sure you want to delete this data entry form?"
+msgstr "Tem certeza de que deseja excluir este formul\u00E1rio de entrada de dados?"
+
+msgid "Design data entry form"
+msgstr "Desenho do formul\u00E1rio de entrada de dados"
+
+msgid "Data set details"
+msgstr "Detalhes de conjunto de dados"
+
+msgid "Add data set"
+msgstr "Adiccionar conjunto de dados"
+
+msgid "Show selection box"
+msgstr "Mostrar caixa de selec\u00E7\u00E3o"
+
+msgid "Data entry form management"
+msgstr "Gest\u00E3o de formul\u00E1rio de entrada de dados"
+
+msgid "Expiry days"
+msgstr "Dias de validade"
+
+msgid "Assign to organisation units"
+msgstr "Atribuir conjunto de dados a unidades organizacionais"
+
+msgid "Section Details"
+msgstr "Detalhes da sec\u00E7\u00E3o"
+
+msgid "Insert input fields into the form"
+msgstr "Inserir campos input no form\u00E1riro"
+
+msgid "Category option combo does not exist"
+msgstr "Op\u00E7\u00E3o da Categoria  da combo n\u00E3o existe"
+
+msgid "Section sort order"
+msgstr "Ordem de classifica\u00E7\u00E3o da sec\u00E7\u00E3o"
+
+msgid "Design data entry form"
+msgstr "Desenho de formul\u00E1rio de entrada de dados"
+
+msgid "Category combo does not exist"
+msgstr "Categoria n\u00E3o existe"
+
+msgid "This short name is already registered"
+msgstr "Este nome curto j\u00E1 est\u00E1 registado"
+
+msgid "Number of data elements"
+msgstr "N\u00FAmero de elementos de dados"
+
+msgid "Select category combo"
+msgstr "Seleccione Combina\u00E7\u00E3o de Categoria"
+
+msgid "Auto-save data entry forms"
+msgstr "Auto -Guardar formul\u00E1io de entradada de dados"
+
+msgid "Indicator does not exist"
+msgstr "Indicador n\u00E3o existe"
+
+msgid "This code is already registered"
+msgstr "Este c\u00F3digo j\u00E1 est\u00E1 registado"
+
+msgid "Insert data elements"
+msgstr "Inserir elementos de dados"
+
+msgid "Delete"
+msgstr "Apagar este formul\u00E1rio"
+
+msgid "Assign"
+msgstr "Atribuir"
+
+msgid "Edit compulsory data elements"
+msgstr "Editar elementos de dados obrigat\u00F3rios"
+
+msgid "No indicator was selected"
+msgstr "Nenhum indicador foi selecionado"
+
+msgid "Data element does not exist"
+msgstr "Elemento de dados n\u00E3o existe"
+
+msgid "Insert data elements, totals and indicators"
+msgstr "Inserir elementos de dados, total de indicadores"
+
+msgid "Please specify a name"
+msgstr "Por favor, indique um nome"
+
+msgid "Delete successfully"
+msgstr "Apagado com sucesso"
+
+msgid "Comfortable"
+msgstr "Confort\u00E1vel"
+
+msgid "Data elements"
+msgstr "Elementos de Dados"
+
+msgid "Standard Deviation"
+msgstr "Desvio Padr\u00E3o"
+
+msgid " Edit validation rule"
+msgstr "Editar regra de valida\u00E7\u00E3o"
+
+msgid "Validate"
+msgstr "Validado"
+
+msgid "Please specify an expression"
+msgstr "A express\u00E3o n\u00E3o \u00E9 nula"
+
+msgid " Select operator"
+msgstr "Seleccionar operador"
+
+msgid "The data elements on the left side must be of type numbers"
+msgstr "Os elementos de dados no lado esquerdo deve ser de tipo numerico"
+
+msgid "Select parameters"
+msgstr "Selecionar par\u00E2metros"
+
+msgid "Analysing data, please wait"
+msgstr "Analisando os dados, por favor aguarde"
+
+msgid "End date cannot be before Start date"
+msgstr "Data final n\u00E3o pode ser anterior a data in\u00EDcio"
+
+msgid "Validation"
+msgstr "Valida\u00E7\u00E3o"
+
+msgid "Saving Validation Rule failed"
+msgstr "Grava\u00E7\u00E3o de regra de valida\u00E7\u00E3o falhou"
+
+msgid " All validation rules"
+msgstr "Todas regras de valida\u00E7\u00E3o"
+
+msgid ""
+"Add, modify, view and delete validation rules. Anomalies"
+"can be discovered by running validation rules against the"
+"data."
+msgstr ""
+"Adiccionar, modificar, consultar e apagar regras de"
+"valida\u00E7\u00E3o. Anomalias podem ser encontradas nas regras"
+"de valida\u00E7\u00E3o em rela\u00E7\u00E3o aos dados."
+
+
+msgid "Please enter a valid start date"
+msgstr "Favor introduzir data final v\u00E1lida"
+
+msgid "Please enter a valid end date"
+msgstr "Favor introduzir data final v\u00E1lida"
+
+msgid "Please specify data sets"
+msgstr "Por favor, especifique o conjuntos de dados"
+
+msgid "Right side expr"
+msgstr "Lado direito"
+
+msgid ""
+"Analyze potential outlier values based on min and max values."
+"Outlier values can be examined and marked for follow-up."
+msgstr ""
+"Analisar potenciais valores discrepantes com base em valores"
+"m\u00EDnimo e m\u00E1ximo. Valores discrepantes podem ser"
+"examinados e marcados para acompanhamento."
+
+
+msgid "Validation rule group management"
+msgstr "Gest\u00E3o de regras de valida\u00E7\u00E3o"
+
+msgid ""
+"View or edit data values marked for further follow-up during"
+"data entry or analysis."
+msgstr ""
+"Ver ou editar valores de dados marcados para posterior"
+"acompanhamento durante a entrada de dados ou an\u00E1lise."
+
+
+msgid " Are you sure you want to delete the validation rule?"
+msgstr "Tens a certeza que quer apagar a regra de valida\u00E7\u00E3o?"
+
+msgid "Validation Rule Analysis"
+msgstr "Analise das regras de valida\u00E7\u00E3o"
+
+msgid "Method"
+msgstr "M\u00E9todo"
+
+msgid "Max"
+msgstr "M\u00E1x"
+
+msgid "Select number of standard deviations"
+msgstr "Seleccione o n\u00FAmero de desvios-padr\u00E3o"
+
+msgid "Validation result details"
+msgstr "Detalhes dos resultados da valida\u00E7\u00E3o"
+
+msgid "Follow-Up Analysis"
+msgstr "An\u00E1lise do Acompanhamento"
+
+msgid ""
+"Add, modify, view and delete validation rule groups."
+"Provides the ability to group and run validation rules"
+"together."
+msgstr ""
+"Adiccionar, modificar, visualizar e excluir grupos de regras"
+"de valida\u00E7\u00E3o. Fornece a capacidade de agrupar e"
+"executar regras de valida\u00E7\u00E3o em conjunto."
+
+
+msgid "Validation failed"
+msgstr "Regra de valida\u00E7\u00E3o"
+
+msgid "Validation rule"
+msgstr "Regra de valida\u00E7\u00E3o"
+
+msgid "Data source"
+msgstr "Fonte de dados"
+
+msgid "Mark value for follow-up"
+msgstr "Marcar valor para acompanhamento"
+
+msgid "No values found"
+msgstr "Nenhum valor encontrado"
+
+msgid " Edit left side"
+msgstr "Editar lado esquerdo"
+
+msgid "Please specify a description"
+msgstr "Descri\u00E7\u00E3o n\u00E3o \u00E9 nula"
+
+msgid " Validation passed successfully"
+msgstr "Validado com sucesso"
+
+msgid "Adding validation rule failed"
+msgstr "Adic\u00E7\u00E3o regra de valida\u00E7\u00E3o falhou"
+
+msgid " Are you sure you want to delete the validation rule group?"
+msgstr "Tem a certeza que quer apagar o grupo de regras de valida\u00E7\u00E3o?"
+
+msgid "Operator"
+msgstr "Operador"
+
+msgid "Std Dev Outlier Analysis"
+msgstr "An\u00E1lise de Descrepancias de Desvio Padr\u00E3o"
+
+msgid " Please specify an ending date"
+msgstr "Por favor, indique uma data de termino"
+
+msgid ""
+"Perform analysis of potential missing values, referred to as"
+"gaps. Missing values can be entered or marked for follow-up."
+msgstr ""
+"Realizar an\u00E1lise de potenciais valores em falta,"
+"referidos como lacunas. Os valores em falta podem ser"
+"inseridos ou marcados para acompanhamento."
+
+
+msgid "Value is lower than minimum value"
+msgstr "O valor e menor que o valor minimo"
+
+msgid "Please specify an operator"
+msgstr "Por favor, indique uma express\u00E3o"
+
+msgid " Left"
+msgstr "Esquerda"
+
+msgid "Available validation rules"
+msgstr "Regras de valida\u00E7\u00E3o dispon\u00EDveis"
+
+msgid "values found"
+msgstr "Valores encontrados"
+
+msgid "Clear expression"
+msgstr "Limpar express\u00E3o"
+
+msgid " Right"
+msgstr "Direita"
+
+msgid "Data Analysis"
+msgstr "An\u00E1lise de Dados"
+
+msgid "Outlier Analysis"
+msgstr "An\u00E1lise de descrepancias"
+
+msgid "Skip for missing values"
+msgstr "Ir para valores em falta"
+
+msgid "Please specify a description"
+msgstr "Por favor, especifique uma descri\u00E7\u00E3o"
+
+msgid "See statistics"
+msgstr "Ver estat\u00EDsticas"
+
+msgid " Please specify a start date"
+msgstr "Por favor, indique uma data de inicio"
+
+msgid "Edit validation rule group"
+msgstr "Editar grupo de regras de valida\u00E7\u00E3o"
+
+msgid ""
+"Analyze potential outlier values based on standard deviations."
+"Outlier values can be examined and marked for follow-up."
+msgstr ""
+"Analisar potenciais valores discrepantes com base em"
+"desvios-padr\u00E3o. Valores discrepantes podem ser examinados e"
+"marcados para acompanhamento."
+
+
+msgid "Compulsory pair"
+msgstr "Par obrigat\u00F3rio"
+
+msgid "Please specify an organisationunit which has children."
+msgstr "Por favor, especifique uma unidade organicional que tenha filhos."
+
+msgid "Validation rule management"
+msgstr "Gest\u00E3o de regras de valida\u00E7\u00E3o"
+
+msgid "All children of the selected organisation unit will be included"
+msgstr ""
+"Todas as filhos da unidade organizacional seleccionada"
+"ser\u00E3o inclu\u00EDdas"
+
+
+msgid "Please specify an expression"
+msgstr "Por favor, indique uma express\u00E3o"
+
+msgid "Left side expr"
+msgstr "Lado esquerdo"
+
+msgid "Mark"
+msgstr "Marcar"
+
+msgid ""
+"Run validation rules in order to unveil anomalies and errors"
+"in the data in the database."
+msgstr ""
+"Executar as regras de valida\u00E7\u00E3o, a fim de"
+"revelar anomalias e erros nos dados existentes na base de"
+"dados."
+
+
+msgid " Edit right side"
+msgstr "Editar lado direito"
+
+msgid "More than 500 values found, please narrow the search to see all"
+msgstr ""
+"Mais de 500 valores encontrados, corrija as"
+"viola\u00E7\u00F5es ou restrinja a pesquisa para ver todos"
+
+
+msgid " Validation rule"
+msgstr "Regra de valida\u00E7\u00E3o"
+
+msgid "Create new validation rule"
+msgstr "Criar nova regra de valida\u00E7\u00E3o"
+
+msgid "Immediate children of the selected organisation unit will be included"
+msgstr ""
+"Filhos imediatos da unidade organizacional seleccionada"
+"ser\u00E3o inclu\u00EDdas"
+
+
+msgid "Use aggregated data"
+msgstr "Usar dados agregados"
+
+msgid " Textual expression description"
+msgstr "Descri\u00E7\u00E3o de express\u00E3o textual"
+
+msgid "Analysing data"
+msgstr "Analisar dados"
+
+msgid "Value is higher than maximum value"
+msgstr "O valor e maior que o valor m\u00E1ximo"
+
+msgid "Min-Max Outlier Analysis"
+msgstr "An\u00E1lise de Descrepancias de Min-Max"
+
+msgid "Create new validation rule group"
+msgstr "Criar novo grupo de regras de valida\u00E7\u00E3o"
+
+msgid " Source"
+msgstr "Fonte"
+
+msgid "Data quality report"
+msgstr "Relat\u00F3rio de qualidade de dados"
+
+msgid "Unmark value for follow-up"
+msgstr "Desmarcar valor para acompanhamento"
+
+msgid "The data elements on the right side must be of type numbers"
+msgstr "Os elementos de dados no lado direito deve ser de tipo numerico"
+
+msgid "Please specify the left side"
+msgstr "Por favor, especifique o lado esquerdo"
+
+msgid "Value must be a number"
+msgstr "O valor deve ser um numero"
+
+msgid "result"
+msgstr "resultado"
+
+msgid "Use captured data"
+msgstr "Use os dados colectados"
+
+msgid "Min"
+msgstr "Min"
+
+msgid " Validation rule group"
+msgstr "Grupo de regras de valida\u00E7\u00E3o"
+
+msgid "Gap Analysis"
+msgstr "An\u00E1lise de lacunas"
+
+msgid "Please specify the right side"
+msgstr "Por favor, especifique o lado direito"
+
+msgid " Run validation"
+msgstr "Validar"
+
+msgid "Import Data"
+msgstr "Importar Dado"
+
+msgid "Option combination"
+msgstr "Op\u00E7\u00E3o de combina\u00E7\u00E3o"
+
+msgid "Relationship type management"
+msgstr "Gest\u00E3o de tipo de relacionamento"
+
+msgid "Trans-gender"
+msgstr "Transgenero"
+
+msgid "Add all"
+msgstr "Adicionar tudo"
+
+msgid "Add Option"
+msgstr "Adicionar Op\u00E7\u00E3o"
+
+msgid "Organisation unit name"
+msgstr "Nome da unidade organizacional"
+
+msgid "Registration date"
+msgstr "Data de inscri\u00E7\u00E3o"
+
+msgid "After or equal to current date"
+msgstr "Depois ou na data actual"
+
+msgid "Invalid min-max days combination"
+msgstr "Combina\u00E7\u00E3o inv\u00E1lida para dias min-max"
+
+msgid "Repeatable program stage details"
+msgstr "Detalhes do est\u00E1gio do programa repetiveis"
+
+msgid "Program stage management"
+msgstr "Gest\u00E3o de Atributos programa"
+
+msgid "Date of Birth"
+msgstr "Data de Nascimento"
+
+msgid "Properties"
+msgstr "Propriedades"
+
+msgid "Sum of data element values"
+msgstr "Soma dos valores de elementos de dados"
+
+msgid "Validation Criteria"
+msgstr "Crit\u00E9rios de Valida\u00E7\u00E3o"
+
+msgid "Adding program stage failed"
+msgstr "Adicionando Estagio do Programa Falhou"
+
+msgid "Create new relationship type"
+msgstr "Criar novo tipo de relacionamento"
+
+msgid "No data elements of type date in the selected program stage"
+msgstr ""
+"N\u00E3o h\u00E1 elementos de dados de tipo data no"
+"estagio do programa seleccionado"
+
+
+msgid "Not null"
+msgstr "N\u00E3o nulo"
+
+msgid "Program enrollment"
+msgstr "Inscri\u00E7\u00E3o no programa"
+
+msgid "Letter Only"
+msgstr "Apenas carta"
+
+msgid "Show provided elsewhere"
+msgstr "Mostrar fornecimento em outro lugar"
+
+msgid "Please insert all required fields"
+msgstr "Por favor insira todos os campos obrigat\u00F3rios"
+
+msgid "Auto-generate event"
+msgstr "Auto-gerar evento"
+
+msgid "Edit program"
+msgstr "Edite o programa"
+
+msgid "Less than or equal to"
+msgstr "Menor ou Igual"
+
+msgid "Please select one data element"
+msgstr "Por favor, especifique um elemento de dados"
+
+msgid ">"
+msgstr ">"
+
+msgid "Executing"
+msgstr "A executar"
+
+msgid "Last 12 months"
+msgstr "\u00DAltimos 1 meses"
+
+msgid "Group by"
+msgstr "Agrupar por"
+
+msgid "Report date"
+msgstr "Data do relat\u00F3rio"
+
+msgid "Assign program to organisation units"
+msgstr "Atribuir programa \u00E0s unidades organizacionais"
+
+msgid "Female"
+msgstr "Feminino"
+
+msgid "Is dead"
+msgstr "Est\u00E1 morto"
+
+msgid "Automated Message Reminder"
+msgstr "Lembrete de mensagem autom\u00E1tica"
+
+msgid "Predefined value"
+msgstr "Valor Pr\u00E9-defenido"
+
+msgid "Program management"
+msgstr "Gest\u00E3o de Atributos programa"
+
+msgid "Greater than"
+msgstr "Maior do que"
+
+msgid "Display in reports"
+msgstr "Mostrar em relat\u00F3rios"
+
+msgid "Relationship type details"
+msgstr "Detalhes do tipo da rela\u00E7\u00E3o"
+
+msgid "Attribute options"
+msgstr "Op\u00E7\u00F5es de atributo"
+
+msgid "Before or equal to current date"
+msgstr "Antes de ou igual a data actual"
+
+msgid "Verified"
+msgstr "Verificado"
+
+msgid "Number of attributes"
+msgstr "N\u00FAmero de atributos"
+
+msgid "Value must be an integer"
+msgstr "Valor deve ser um n\u00FAmero inteiro"
+
+msgid "Age"
+msgstr "Idade"
+
+msgid "Available values"
+msgstr "Valores disponiveis"
+
+msgid "Full name"
+msgstr "Nome completo"
+
+msgid "Program stage section"
+msgstr "Sec\u00E7\u00F5es do est\u00E1gio do programa"
+
+msgid "Program details"
+msgstr "Detalhes do Programa"
+
+msgid "Search result"
+msgstr "Resultado da pesquisa"
+
+msgid "Program attribute"
+msgstr "Atributo do Programa"
+
+msgid "Data elements"
+msgstr "Elementos de dados"
+
+msgid "Run successful"
+msgstr "Execu\u00E7\u00E3o bem sucedida"
+
+msgid "Program attribute management"
+msgstr "Gest\u00E3o de Atributos programa"
+
+msgid "Executed successfully"
+msgstr "Executado com sucesso"
+
+msgid ""
+"Schedule an automated tracked entity aggregation process, e.g."
+"to run all pre-defined aggregation queries every midnight."
+msgstr ""
+"Agendar um processo de agrega\u00E7\u00E3o autom\u00E1tico"
+"por pessoa, por exemplo, para executar todas as consultas"
+"pr\u00E9-definidas de agrega\u00E7\u00E3o de cada"
+"meia-noite."
+
+
+msgid "Are you sure you want to delete relationship type?"
+msgstr "Tem certeza de que deseja excluir tipo de identificador?"
+
+msgid "Processing"
+msgstr "Processando"
+
+msgid "Only enroll once (per tracked entity instance lifetime)"
+msgstr "Apenas uma inscri\u00E7ao"
+
+msgid "Create new program attribute"
+msgstr "Criar novo atributo para programa"
+
+msgid "Create new program"
+msgstr "Criar novo programa"
+
+msgid "Schedule automated message reminder"
+msgstr "Agende lembrete mensagem autom\u00E1tica"
+
+msgid "Days since due date"
+msgstr "Dias desde a data de vencimento"
+
+msgid "Required fields validation"
+msgstr "Valida\u00E7\u00E3o de campos obrigat\u00F3rios"
+
+msgid "Edit relationship type"
+msgstr "Editar tipo de relacionamento"
+
+msgid "Organisation unit"
+msgstr "Unidade Organizacional"
+
+msgid "After due date"
+msgstr "Depois da data prevista"
+
+msgid "Block entry form after completed"
+msgstr "Bloquear formul\u00E1rio de inscri\u00E7\u00E3o, ap\u00F3s conclu\u00EDdo"
+
+msgid "Data entry form management for program stage"
+msgstr ""
+"Gest\u00E3o de Formul\u00E1rio de Entrada de Dados para o"
+"Est\u00E1gio do Programa"
+
+
+msgid "Property already exists in form"
+msgstr "A propriedade est\u00E1 inserida em forma"
+
+msgid "Add"
+msgstr "Adicionar"
+
+msgid "Duplicate"
+msgstr "Duplicado"
+
+msgid "Male"
+msgstr "Masculino"
+
+msgid "Different from"
+msgstr "Diferente de"
+
+msgid "Incident Date"
+msgstr "Data do incidente"
+
+msgid "Program validation rule management"
+msgstr "Gest\u00E3o do detalhe das regras do programa de valida\u00E7\u00E3o"
+
+msgid "B is to A"
+msgstr "B esta para A"
+
+msgid "Description of enrollment date"
+msgstr "Descri\u00E7\u00E3o da data de inscri\u00E7\u00E3o"
+
+msgid "Repeatable"
+msgstr "Repetitivo"
+
+msgid "Are you sure you want to delete this program stage?"
+msgstr "Tem certeza de que quer apagar este estagio do Programa?"
+
+msgid "Related"
+msgstr "Relacionado"
+
+msgid "Execute"
+msgstr "Executar"
+
+msgid "Approximated"
+msgstr "Aproximado"
+
+msgid "Program stage section sort order"
+msgstr ""
+"Sec\u00E7\u00F5es do est\u00E1dio do programa por ordem de"
+"classifica\u00E7\u00E3o"
+
+
+msgid "Program attribute details"
+msgstr "Detalhes de atributo do programa"
+
+msgid "or"
+msgstr "ou"
+
+msgid "Program stage details"
+msgstr "Detalhes do est\u00E1gio do programa"
+
+msgid "Age (days)"
+msgstr "Idade (dias)"
+
+msgid "Are you sure you want to delete this program data entry form?"
+msgstr "Deseja excluir a entrada de dados do programa?"
+
+msgid "Update program stage section"
+msgstr "Actualize sec\u00E7\u00E3o do est\u00E1gio do programa"
+
+msgid "Filter by data set"
+msgstr "Filtrar por conjunto de dados"
+
+msgid "Edit program stage"
+msgstr "Editar est\u00E1gio do programa"
+
+msgid "Please specify a data element"
+msgstr "Por favor, especifique um elemento de dados"
+
+msgid "Declared"
+msgstr "Declarado"
+
+msgid "DOB type"
+msgstr "Tipo de Data de Nascimento"
+
+msgid "Edit program validation rule"
+msgstr "Editar regra de valida\u00E7\u00E3o de programa"
+
+msgid "="
+msgstr "\="
+
+msgid "Create new program stage"
+msgstr "Criar novo est\u00E1gio do programa"
+
+msgid "Program"
+msgstr "Programa"
+
+msgid "Are you sure you want to delete this validation criteria?"
+msgstr "Tem certeza de que deseja excluir crit\u00E9rios de valida\u00E7\u00E3o?"
+
+msgid "Automated Aggregation"
+msgstr "Agrega\u00E7\u00E3o automatizada"
+
+msgid "Program Stage"
+msgstr "Est\u00E1gio do Programa"
+
+msgid "Before current date"
+msgstr "Antes da data actual"
+
+msgid "Aggregation expression"
+msgstr "Express\u00E3o de agrega\u00E7\u00E3o"
+
+msgid "Program validation rule details"
+msgstr "Detalhe das regras do programa de valida\u00E7\u00E3o"
+
+msgid "Show incident date"
+msgstr "Mostrar data do incidente"
+
+msgid "Add multi-program validation rule"
+msgstr "Adicionar regra de valida\u00E7\u00E3o de multi programa"
+
+msgid "After or equal to due date"
+msgstr "Depois ou na data prevista"
+
+msgid "Run failed"
+msgstr "Execu\u00E7\u00E3o falhou"
+
+msgid "Before due date"
+msgstr "Antes da data prevista"
+
+msgid ""
+"Create, modify and view relationship types. A relationship is"
+"typically wife and husband or mother and child."
+msgstr ""
+"Criar, modificar e visualizar os tipos de relacionamento. Um"
+"relacionamento \u00E9 normalmente marido e mulher ou m\u00E3e"
+"e filho."
+
+
+msgid ""
+"Create, modify and view programs. A program has program"
+"stages and defines which actions should be taken at each"
+"stage."
+msgstr ""
+"Criar, modificar e ver os programas. Um programa tem etapas"
+"do programa e define quais a\u00E7\u00F5es devem ser"
+"tomadas em cada etapa."
+
+
+msgid "Edit program attribute"
+msgstr "Editar atributo do programa"
+
+msgid "Please select operator number of visit for this condition"
+msgstr ""
+"Por favor seleccione n\u00FAmero de operador de visita para"
+"esta condi\u00E7\u00E3o"
+
+
+msgid "Fixed attributes"
+msgstr "Atributos fixos"
+
+msgid "Insert selected values"
+msgstr "Insira os valores selecionados"
+
+msgid "This data element is inserted in form"
+msgstr "Este elemento de dados est\u00E1 inserido no formul\u00E1rio"
+
+msgid "Close"
+msgstr "fFechar"
+
+msgid "Choose existing data entry form"
+msgstr "Escolha formul\u00E1rio de entrada de dados existentes"
+
+msgid "Shown on reports"
+msgstr "Mostrado em relat\u00F3rios"
+
+msgid "Scheduled days from start"
+msgstr "N\u00FAmero m\u00EDnimo de dias desde o in\u00EDcio"
+
+msgid "Enrollment details"
+msgstr "Detalhes da inscri\u00E7\u00E3o"
+
+msgid "Left side expression"
+msgstr "Express\u00E3o do lado esquerdo"
+
+msgid "Code and Name"
+msgstr "C\u00F3digo e nome"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Display provided other facility column"
+msgstr "Mostrar coluna "proporcionada por outra US""
+
+msgid "Deleted successfully"
+msgstr "Eliminado com sucesso"
+
+msgid "Due date"
+msgstr "Data de vencimento"
+
+msgid "Condition details"
+msgstr "Condi\u00E7\u00E3o de Detalhes"
+
+msgid "Condition"
+msgstr "Condi\u00E7\u00E3o"
+
+msgid "Create new program stage section"
+msgstr "Cria\u00E7\u00E3o nova sec\u00E7\u00E3o do programa"
+
+msgid "Row"
+msgstr "Linha"
+
+msgid "Aggregation query builder details"
+msgstr "Detalhes na constru\u00E7\u00E3o da query de Agrega\u00E7\u00E3o"
+
+msgid ""
+"Set the Excel XML template file used for automatically"
+"importing tracked entity instance data."
+msgstr ""
+"Definir o Excel arquivo de modelo XML usado para"
+"automaticamente importar dados do paciente."
+
+
+msgid "Single event"
+msgstr "Evento \u00FAnico"
+
+msgid "Stage visited"
+msgstr "Est\u00E1gio visitado"
+
+msgid "Capture coordinates"
+msgstr "captura de coordenadas"
+
+msgid "Last 3 months"
+msgstr "\u00DAltimos 3 meses"
+
+msgid "Equal to"
+msgstr "Igual"
+
+msgid "Load existing form"
+msgstr "Carregar formul\u00E1rio existente"
+
+msgid ""
+"Set reminders to be automatically sent to enrolled tracked"
+"entity instances before scheduled appointments and after missed"
+"visits."
+msgstr ""
+"Definir lembretes para ser automaticamente enviado para as"
+"pessoas envolvidas antes de compromissos agendados e ap\u00F3s"
+"as visitas perdidas."
+
+
+msgid "Average of data element values"
+msgstr "M\u00E9dia dos valores de elementos de dados"
+
+msgid "Edit program validation rule"
+msgstr "Editar regra de valida\u00E7\u00E3o de programa"
+
+msgid "Maximum of data element values"
+msgstr "M\u00E1ximo de valores de elementos de dados"
+
+msgid "Enrollment Date"
+msgstr "Data de inscri\u00E7\u00E3o"
+
+msgid "View program stages"
+msgstr "Ver est\u00E1gios do programa"
+
+msgid "for"
+msgstr "Para"
+
+msgid "Create new aggregation query builder"
+msgstr "Criar nova query de  agrega\u00E7\u00E3o"
+
+msgid "Configuration"
+msgstr "Configura\u00E7\u00E3o"
+
+msgid "Inheritable"
+msgstr "Herd\u00E1vel"
+
+msgid "Before or equal to due date"
+msgstr "Antes ou na data prevista"
+
+msgid "Current date"
+msgstr "Data corrente"
+
+msgid "Minimum of data element values"
+msgstr "M\u00EDnimo de valores de elementos de dados"
+
+msgid "Updating program stage failed"
+msgstr "Adicionando Estagio do Programa Falhou"
+
+msgid "Age at visit (days since birth)"
+msgstr "Idade na visita (dias desde o nascimento)"
+
+msgid "is"
+msgstr "\u00E9"
+
+msgid "Date of incident"
+msgstr "Data do incidente"
+
+msgid "Add more"
+msgstr "Adicionar mais"
+
+msgid "Edit aggregation query builder"
+msgstr "Editar query de agrega\u00E7\u00E3o"
+
+msgid "Last 6 months"
+msgstr "\u00DAltimos 6 meses"
+
+msgid "This field is required"
+msgstr "Este campo \u00E9 obrigatorio"
+
+msgid "Test condition"
+msgstr "Condi\u00E7\u00E3o de teste"
+
+msgid "Greater than or equal to"
+msgstr "Maior ou Igual"
+
+msgid "Schedule"
+msgstr "Programar"
+
+msgid ""
+"Create, modify and view program attributes. A program can"
+"have any number of attributes."
+msgstr ""
+"Criar, modificar e exibir os atributos do programa. Um"
+"programa pode ter qualquer n\u00FAmero de atributos."
+
+
+msgid "Display in list"
+msgstr "Exibido na lista"
+
+msgid "Display generate event box after completed"
+msgstr "Mostrar gerar caixa do evento ap\u00F3s estar teminado"
+
+msgid "Program name"
+msgstr "Nome do Programa"
+
+msgid "Display date of incident"
+msgstr "Mostrar data do incidente"
+
+msgid "Design data entry form"
+msgstr "Desenhar formulario de entrada de dado"
+
+msgid "Program stage sort order"
+msgstr "Ordem do Est\u00E1gio de Programa"
+
+msgid "Insert properties"
+msgstr "Insira propriedades"
+
+msgid "Programs"
+msgstr "Programas"
+
+msgid "Aggregation data element is in use"
+msgstr "Agrega\u00E7\u00E3o de elemento de dados est\u00E1 em uso"
+
+msgid "Available attributes"
+msgstr "Atributos disponiveis"
+
+msgid "Sort by scheduled days"
+msgstr "Ordenar por dias programados"
+
+msgid "Last month"
+msgstr "\u00DAltimo mese"
+
+msgid "Relationship type"
+msgstr "Tipo de Rela\u00E7\u00E3o"
+
+msgid "Parameters"
+msgstr "Pa\u00E2metros"
+
+msgid "Description of incident date"
+msgstr "Descri\u00E7\u00E3o da data do incidente"
+
+msgid "Selected programs"
+msgstr "Programa selecionados"
+
+msgid "Schedule automated aggregation"
+msgstr "Programar agrega\u00E7\u00E3o automatizada"
+
+msgid "Program stage name"
+msgstr "Nome do est\u00E1gio do programa"
+
+msgid "Inherit"
+msgstr "Herdar"
+
+msgid "Others"
+msgstr "Outros"
+
+msgid "Number of characters"
+msgstr "N\u00FAmero de caracteres"
+
+msgid "Aggregation data element"
+msgstr "Agregar Elementos de Dados"
+
+msgid "Number of data elements to be collected"
+msgstr "N\u00FAmero de elementos de dados a recolher"
+
+msgid "Date of death"
+msgstr "Data da morte"
+
+msgid "Remove reminder"
+msgstr "Eliminar lembrete"
+
+msgid "Program stage properties"
+msgstr "Propriedades do est\u00E1gio do programa"
+
+msgid "Description of report date"
+msgstr "Descri\u00E7\u00E3o do relat\u00F3tio de data"
+
+msgid "Create validation criteria"
+msgstr "Criar crit\u00E9rios de valida\u00E7\u00E3o"
+
+msgid "Edit validation criteria"
+msgstr "Editar crit\u00E9rios de valida\u00E7\u00E3o"
+
+msgid "Selected attributes"
+msgstr "Atributos selecionados"
+
+msgid "Anonymous"
+msgstr "An\u00F4nimo"
+
+msgid "Select program"
+msgstr "Seleccione Programa"
+
+msgid "Visit selected program stage n(th) time"
+msgstr "Dura\u00E7\u00E3o do programa de visitas selcionado"
+
+msgid "Available programs"
+msgstr "Programa Disponivel"
+
+msgid "Right side expression"
+msgstr "Express\u00E3o do lado direito"
+
+msgid "Standard interval days"
+msgstr "Padr\u00E3o dias de intervalo"
+
+msgid "Validation criteria management"
+msgstr "Gest\u00E3o de crit\u00E9rios de valida\u00E7\u00E3o"
+
+msgid "Show all items"
+msgstr "Mostrar todos os items"
+
+msgid "Number of visits"
+msgstr "N\u00FAmero de visitas"
+
+msgid "Scheduled days from start"
+msgstr "Dias programados desde o in\u00EDcio"
+
+msgid "Are you sure you want to delete this program stage section ?"
+msgstr "Tem certza que pretende elimibar"
+
+msgid "Sort by"
+msgstr "Ordenar por"
+
+msgid "Deleted program attribute option successfully"
+msgstr ""
+"Exclus\u00E3o de op\u00E7\u00E3o de atributo do programa"
+"efectuada com sucesso."
+
+
+msgid "Time for sending message"
+msgstr "Tempo para o envio da mensagem"
+
+msgid "Less than"
+msgstr "Menor do que"
+
+msgid "<"
+msgstr "<"
+
+msgid "Letter"
+msgstr "Carta"
+
+msgid "Save"
+msgstr "Salvar"
+
+msgid "Program properties"
+msgstr "Propriedades do Programa"
+
+msgid "The number of attributes"
+msgstr "O n\u00FAmero de atributos"
+
+msgid "Name"
+msgstr "Mostrar nome"
+
+msgid "Date of birth"
+msgstr "Data de nascimento"
+
+msgid "Message"
+msgstr "Mensagem"
+
+msgid "Gateway type"
+msgstr "Tipo de porta de entrada"
+
+msgid "Assign validation for programs"
+msgstr "Atribuir valida\u00E7\u00E3o aos programas"
+
+msgid "Task strategy"
+msgstr "Estrat\u00E9gia da tarefa"
+
+msgid "Value must be a positive number"
+msgstr "Valor deve ser um inteiro posetivo"
+
+msgid "Visited selected program stage"
+msgstr "Est\u00E1gio do programa selecionado foi visitado"
+
+msgid "Are you sure you want to delete this program?"
+msgstr "Tem certeza de que deseja excluir este Programa"
+
+msgid "Visited program stage"
+msgstr "Est\u00E1gio do programa visitado"
+
+msgid "Health worker"
+msgstr "Trabalhador de sa\u00FAde"
+
+msgid "In range due date"
+msgstr "No intervalo de datas previstas"
+
+msgid "Date of enrollment"
+msgstr "Data de Inscri\u00E7\u00E3o"
+
+msgid "A is to B"
+msgstr "A esta para B"
+
+msgid "Blood group"
+msgstr "Grupo Sangu\u00EDneo"
+
+msgid "Attributes"
+msgstr "Atributos"
+
+msgid "Data element for sum/average/min/max"
+msgstr "Elemento de dados para soma / m\u00E9dia / min / max"
+
+msgid "Allow provided elsewhere"
+msgstr "Permitido fornecimento em outro lugar"
+
+msgid "Assign program to organisation units for registering"
+msgstr "Atribuir programa as unidades organizacionais para registro"
+
+msgid "Order in program"
+msgstr "Ordem no Programa"
+
+msgid "Validation criteria details"
+msgstr "Detalhes de crit\u00E9rios de valida\u00E7\u00E3o"
+
+msgid "Reminder"
+msgstr "Lembrete"
+
+msgid "After current date"
+msgstr "Ap\u00F3s a data actual"
+
+msgid "Create new program validation rule"
+msgstr "Criar nova regra de valida\u00E7\u00E3o do programa"
+
+msgid "Please select a program"
+msgstr "Por favor, seleccione um programa"
+
+msgid "Sort order"
+msgstr "Ordem de classifica\u00E7\u00E3o"
+
+msgid "Hide details"
+msgstr "Esconder detalhes"
+
+msgid "Please insert a due-date"
+msgstr "Por favor inserir a data de vencimento"
+
+msgid "Aggregation Query Builder"
+msgstr "Construtor de Formulas de Agrega\u00E7\u00E3o"
+
+msgid "Validation for date date elements"
+msgstr "Valida\u00E7\u00E3o de datas de elementos de dados"
+
+msgid "Search apps"
+msgstr "Search apps"
+
+msgid "Average"
+msgstr "Média"
+
+msgid "displayName"
+msgstr "displayName"
+
+msgid "This object will be private to yourself"
+msgstr "Este objeto será privado de si mesmo."
+
+msgid "Synchronization settings"
+msgstr "Synchronization settings"
+
+msgid "Sum"
+msgstr "Soma"
+
+msgid "Unit interval"
+msgstr "Unit interval"
+
+msgid "lastUpdated"
+msgstr "lastUpdated"
+
+msgid "Access settings"
+msgstr "Access settings"
+
+msgid "Percentage"
+msgstr "Percentage"
+
+msgid "Text"
+msgstr "Texto"
+
+msgid "Enrollment status"
+msgstr "Enrollment status"
+
+msgid "System monitoring settings"
+msgstr "System monitoring settings"
+
+msgid "Manage my apps"
+msgstr "Manage my apps"
+
+msgid "Standard deviation"
+msgstr "Standard deviation"
+
+msgid "Interpretations"
+msgstr "Interpretações"
+
+msgid "This object will be created with public edit and view rights"
+msgstr "Este objeto será criado com edição públicas e os direitos visualização"
+
+msgid "displayDescription"
+msgstr "displayDescription"
+
+msgid "Settings"
+msgstr "Definições"
+
+msgid "Tracked entity instance count"
+msgstr "Tracked entity instance count"
+
+msgid "Enrollment count"
+msgstr "Enrollment count"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Program stage id"
+msgstr "Program stage id"
+
+msgid "Profile"
+msgstr "Perfil"
+
+msgid "Count"
+msgstr "Contagem"
+
+msgid "About DHIS 2"
+msgstr "Acerca de DHIS2"
+
+msgid "Email settings"
+msgstr "Email settings"
+
+msgid "Appearance settings"
+msgstr "Appearance settings"
+
+msgid "Messaging settings"
+msgstr "Messaging settings"
+
+msgid "Log out"
+msgstr "Sair"
+
+msgid "Import settings"
+msgstr "Import settings"
+
+msgid "Help"
+msgstr "Ajuda"
+
+msgid "OAuth2 clients"
+msgstr "OAuth2 clients"
+
+msgid "Variance"
+msgstr "Variance"
+
+msgid "Calendar settings"
+msgstr "Calendar settings"
+
+msgid "Clone"
+msgstr "Duplicar"
+
+msgid "Messages"
+msgstr "Mensagens"
+
+msgid "Short name"
+msgstr "Nome curto"
+
+msgid "General settings"
+msgstr "General settings"
+
+msgid "Analytics settings"
+msgstr "Analytics settings"
+
+msgid "Server settings"
+msgstr "Server settings"
+
+msgid "Account"
+msgstr "Conta"
+
+msgid "System Settings"
+msgstr "Configurações"
+
+msgid "Immunization analysis"
+msgstr "Immunization analysis"
+
+msgid "Browser Cache Cleaner"
+msgstr "Browser Cache Cleaner"
+
+msgid "Capture"
+msgstr "Capture"
+
+msgid "TUCANA USERS IMPORTER APP"
+msgstr "TUCANA USERS IMPORTER APP"
+
+msgid "Data Entry"
+msgstr "Entrada de Dados"
+
+msgid "Data Visualizer"
+msgstr "Data Visualizer"
+
+msgid "Mobile Configuration"
+msgstr "Configuração do Telemóvel"
+
+msgid "Data Quality"
+msgstr "Qualidade de Dados"
+
+msgid "Tracker Capture"
+msgstr "Tracker Capture"
+
+msgid "GIS"
+msgstr "SIG"
+
+msgid "Function Maintenance"
+msgstr "Function Maintenance"
+
+msgid "Dashboard Classic"
+msgstr "Dashboard Classic"
+
+msgid "Event Visualizer"
+msgstr "Event Visualizer"
+
+msgid "Event Reports"
+msgstr "Event Reports"
+
+msgid "App Management"
+msgstr "App Management"
+
+msgid "Datastore Management"
+msgstr "Datastore Management"
+
+msgid "Scheduler"
+msgstr "Scheduler"
+
+msgid "Menu Management"
+msgstr "Menu Management"
+
+msgid "Reports"
+msgstr "NRHM Relatórios"
+
+msgid "BIF"
+msgstr "BIF"
+
+msgid "Interactive Dashboard 2"
+msgstr "Interactive Dashboard 2"
+
+msgid "Dashboard"
+msgstr "Gráficos"
+
+msgid "Pivot Table"
+msgstr "Pivot Table"
+
+msgid "Facility Reconciliation"
+msgstr "Facility Reconciliation"
+
+msgid "WHO Data Quality Tool"
+msgstr "WHO Data Quality Tool"
+
+msgid "Interpretations PSI"
+msgstr "Interpretations PSI"
+
+msgid "Dashboards app"
+msgstr "Dashboards app"
+
+msgid "dAtaZ"
+msgstr "dAtaZ"
+
+msgid "Usage Analytics"
+msgstr "Usage Analytics"
+
+msgid "Interpretations"
+msgstr "Interpretations"
+
+msgid "Translations"
+msgstr "Translations"
+
+msgid "Maintenance"
+msgstr "Maintenance"
+
+msgid "Data Administration"
+msgstr "Administração de dados"
+
+msgid "interactiveMap"
+msgstr "interactiveMap"
+
+msgid "Maps"
+msgstr "Maps"
+
+msgid "Users"
+msgstr "Users"
+
+msgid "Classic Data Visualizer"
+msgstr "Visualização de Dados"
+
+msgid "WHO Metadata browser"
+msgstr "WHO Metadata browser"

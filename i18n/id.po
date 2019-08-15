@@ -1,0 +1,2419 @@
+
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-15T13:45:50.389Z\n"
+"PO-Revision-Date: 2019-08-15T13:45:50.389Z\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Pootle-Path: /id/maintenance-app/id.po\n"
+"X-Pootle-Revision: 29879
+"
+
+
+msgid "Registers data"
+msgstr "Register data"
+
+msgid "Hierarchy operations"
+msgstr "Sistem hierarki"
+
+msgid "Not selected"
+msgstr "Tidak terpilih"
+
+msgid "Confirm"
+msgstr "Konfirmasi"
+
+msgid "Not selected, moved to root position"
+msgstr "Tidak terpilih, pindahkan ke posisi induk"
+
+msgid "Reset"
+msgstr "Reset"
+
+msgid "Hierarchy operations"
+msgstr "Sistem hierarki"
+
+msgid "Organisation unit level"
+msgstr "Level unit organisasi"
+
+msgid "Number of group members"
+msgstr "Jumlah anggota grup"
+
+msgid ""
+"The selected organisation unit is already a root. Please"
+"select a new parent organisation unit"
+msgstr ""
+"Unit organisasi yang dipilih sudah menjadi induk. Silakan pilih"
+"induk unit organisasi yang baru"
+
+
+msgid " The selected organisation unit will be moved to root"
+msgstr "Unit organisasi yang terpilih akan dipindahkan ke induk organisasi"
+
+msgid ""
+"An organisation unit cannot be moved to itself. Please select"
+"a new parent organisation unit"
+msgstr ""
+"Unit organisasi tidak dapat dipindahkan. Silakan pilih induk"
+"unit organisasi terbaru."
+
+
+msgid "The name is already in use. Please choose a different name."
+msgstr "Nama sedang digunakan"
+
+msgid "The code is already in use. Please choose a different code."
+msgstr "Kode tersebut sudah digunakan"
+
+msgid "Compulsory"
+msgstr "Wajib"
+
+msgid "Exclusive"
+msgstr "Eksklusif"
+
+msgid "Number of members"
+msgstr "Jumlah anggota"
+
+msgid "Available Groups"
+msgstr "Kelompok yang tersedia"
+
+msgid "Selected Groups"
+msgstr "Kelompok yang dipilih"
+
+msgid "The group set can not be created because it is exclusive and"
+msgstr "Set kelompok tidak dapat dibuat karena terlalu eksklusif dan"
+
+msgid "is a member of more than one selected group"
+msgstr "merupakan anggota lebih dari 1 grup terpilih"
+
+msgid "Move selected"
+msgstr "Pindahkan item terpilih"
+
+msgid "Move all"
+msgstr "Pindahkan semua"
+
+msgid "Remove selected"
+msgstr "Pindahkan item terpilih"
+
+msgid "Remove all"
+msgstr "Hapus semua kunci"
+
+msgid "Organisation unit level management"
+msgstr "Manajemen level unit organisasi"
+
+msgid "Level"
+msgstr "Level"
+
+msgid "Code"
+msgstr "Kode"
+
+msgid "Object not deleted because it is associated by objects of type"
+msgstr "Obyek tidak terhapus karena berhubungan dengan tipe obyek"
+
+msgid "Registers date"
+msgstr "Tanggal mendaftar"
+
+msgid "Hide warning"
+msgstr "Sembunyikan peringatan"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Latitude"
+msgstr "Latitude"
+
+msgid "Longitude"
+msgstr "Longitude"
+
+msgid "Latitude (optional)"
+msgstr "Latitude (opsi)"
+
+msgid "Longitude (optional)"
+msgstr "Longitude (opsi)"
+
+msgid "Assign to compulsory organisation unit group set"
+msgstr "Daftarkan ke set grup unit organisasi wajib"
+
+msgid "Organisation unit group set"
+msgstr "Set group unit organisasi"
+
+msgid "Group members"
+msgstr " Anggota Grup"
+
+msgid "Last updated"
+msgstr "Update terbaru"
+
+msgid ""
+"Move organisation units in the organisation unit tree. All"
+"children will be moved along with the unit."
+msgstr ""
+"Pindah unit organisasi ke dalam tingkatan unit organisasi."
+"Semua level dibawah unit tersebut akan dipindahkan bersama"
+"dengan unit tersebut."
+
+
+msgid "Loading"
+msgstr "Loading"
+
+msgid "Coordinates"
+msgstr "Koordinat"
+
+msgid "Criteria"
+msgstr "Kriteria"
+
+msgid "Options"
+msgstr "Opsi"
+
+msgid "All"
+msgstr "Semua"
+
+msgid "Search"
+msgstr "Cari"
+
+msgid "Organisation units"
+msgstr "Unit organisasi"
+
+msgid "Found"
+msgstr "Ditemukan"
+
+msgid "Please select from tree (optional)"
+msgstr "Silakan pilih tingkatan (opsi)"
+
+msgid "Polygon"
+msgstr "Poligon"
+
+msgid "Point"
+msgstr "Point"
+
+msgid "Available data sets"
+msgstr "Data set tersedia"
+
+msgid "Selected data sets"
+msgstr "Data set terpilih"
+
+msgid "Limited"
+msgstr "Terbatas"
+
+msgid "Download as Excel"
+msgstr "Download dalam bentuk Excel"
+
+msgid "Download as CSV"
+msgstr "Download dalam bentuk CSV"
+
+msgid "Download as PDF"
+msgstr "Download dalam bentuk PDF"
+
+msgid "Please wait while downloading report"
+msgstr "Silakan menunggu selama proses download laporan"
+
+msgid "Please wait while searching"
+msgstr "Silakan menunggu selama proses pencarian berlangsung"
+
+msgid "Hierarchy"
+msgstr "Hierarki"
+
+msgid "Data sets"
+msgstr "Data sets"
+
+msgid "Organisation unit groups"
+msgstr "Kelompok unit organisasi"
+
+msgid "Select group"
+msgstr "Pilih Kelompok"
+
+msgid "Phone number"
+msgstr "No. telp"
+
+msgid "Select symbol"
+msgstr "Pilih simbol"
+
+msgid "Symbol"
+msgstr "Simbol"
+
+msgid "Name, code or identifier"
+msgstr "Nama, kode atau pengenal"
+
+msgid "Identifier"
+msgstr "Pengenal"
+
+msgid "The short name is already in use. Please choose a different short name"
+msgstr "Nama singkat tersebut sudah digunakan"
+
+msgid "Show all sections"
+msgstr "Perlihatkan semua bagian"
+
+msgid "Clear analytics tables"
+msgstr "Hapus tabel analitik"
+
+msgid ""
+"Create SQL database views. These views will typically use the"
+"resource tables to provide convenient views for third-party"
+"tools."
+msgstr ""
+"Buat tampilan SQL database. Tampilan ini umumnya digunakan"
+"sumber tabel untuk menyediakan tampilan yang nyaman untuk tools"
+"pihak ketiga."
+
+
+msgid ""
+"Create constants which can be included in expressions of"
+"indicator and validation rules."
+msgstr ""
+"Buat konstanta yang dapat termasuk expressions dari indikator"
+"dan validation rules."
+
+
+msgid "Create, modify and view attributes."
+msgstr ""
+"Buat, modifikasi dan tampilkan atribut tracked entity. Atribut"
+"dapat digunakan untuk mendaftarkan ekstra informasi untuk tracked"
+"entity."
+
+
+msgid ""
+"Manage scheduled tasks such as data mart exports, where you"
+"can set period types, aggregation level and frequency."
+msgstr ""
+"Atur perintah yang dijadwalkan seperti ekspor, dimana anda"
+"dapat atur tipe periode, level agregasi dan frekuensi."
+
+
+msgid "Expression is empty"
+msgstr "Expression kosong"
+
+msgid "Resource Table"
+msgstr "Tabel sumber"
+
+msgid "Clear data set completeness"
+msgstr "Hapus kelengkapan dataset"
+
+msgid "Clear zero values"
+msgstr "Hapus nilai nol"
+
+msgid "Organisation unit group set structure normalized"
+msgstr "Normalisasi set grup struktur unit organisasi"
+
+msgid "Organisation unit structure"
+msgstr "Struktur unit organisasi"
+
+msgid "Data element category option combo name"
+msgstr "Nama elemen data category option combo"
+
+msgid "Please select an organisation unit"
+msgstr "Please select an organsisation unit"
+
+msgid "Generate tables"
+msgstr "Buat tabel"
+
+msgid "created in database"
+msgstr "Dibuat dalam database"
+
+msgid "The language and country set is already in use"
+msgstr "Bahasa dan negara sudah digunakan"
+
+msgid "This SQL statement is invalid"
+msgstr "This SQL statement is invalid."
+
+msgid "Prune periods"
+msgstr "Pangkas periode"
+
+msgid "Note: Only SELECT query is allowed (without INTO keyword)"
+msgstr "Catatan : Hanya SELECT yang digunakan (tanpa keyword INTO)"
+
+msgid "This resource viewer is invalid or does not exist"
+msgstr "This resource viewer is invalid or does not exist."
+
+msgid "Person data archive"
+msgstr "Arsip Data Personil"
+
+msgid ""
+"Archive person data which is not currently relevant to your"
+"system in order to improve performance. Data can also be"
+"unarchived."
+msgstr ""
+"Arsip data personil yang tidak relevan dengan sistem Anda"
+"untuk meningkatkan performance. Data tidak dapat diarsipkan."
+
+
+msgid "Restricted user tables cannot be referenced in query"
+msgstr "Not allowance to query in the special tables!"
+
+msgid "Region name"
+msgstr "Nama area"
+
+msgid "Do you want to delete this SQL view object ?"
+msgstr "Do you want to delete this sql view object ?"
+
+msgid "Raw data"
+msgstr "Data mentah"
+
+msgid "Download as HTML"
+msgstr "Download dalam bentuk HTML"
+
+msgid "Download as XML"
+msgstr "Download dalam bentuk XML"
+
+msgid "Download as JSON"
+msgstr "Download dalam bentuk JSON"
+
+msgid "Data element structure"
+msgstr "Struktur elemen data"
+
+msgid "Constant"
+msgstr "Konstan"
+
+msgid "Constant management"
+msgstr "Manajemen Konstan"
+
+msgid "Add Constant"
+msgstr "Tambahkan Konstan"
+
+msgid "Edit Constant"
+msgstr "Edit Konstan"
+
+msgid "Value must be an number"
+msgstr "Nilai harus berupa angka"
+
+msgid "Do you want to delete this constant?"
+msgstr "Apakah Anda ingin menghapus konstan ini?"
+
+msgid "Object type"
+msgstr "Tipe Obyek"
+
+msgid "Users logged in"
+msgstr "User sedang log in"
+
+msgid "Today"
+msgstr "Hari Ini"
+
+msgid "Yesterday"
+msgstr "Kemarin"
+
+msgid "Last 2 days"
+msgstr "2 hari yang lalu"
+
+msgid "Last 7 days"
+msgstr "7 hari terakhir"
+
+msgid "Last 30 days"
+msgstr "30 hari terakhir"
+
+msgid "Dynamic Attributes"
+msgstr "Atribut dinamis"
+
+msgid "Attribute"
+msgstr "Atribut"
+
+msgid "Attribute management"
+msgstr "Manajemen atribut"
+
+msgid "Value type"
+msgstr "Tipe nilai"
+
+msgid "Mandatory"
+msgstr "Wajib"
+
+msgid "Integer"
+msgstr "Bilangan bulat"
+
+msgid "Positive Integer"
+msgstr "Bilangan bulat positif"
+
+msgid "Negative Integer"
+msgstr "Bilangan bulat negatif"
+
+msgid "Add Attribute"
+msgstr "Tambah Atribut"
+
+msgid "Edit Attribute"
+msgstr "Edit Atribut"
+
+msgid "Assigned to"
+msgstr "Ditugaskan pada"
+
+msgid "Attribute sort order"
+msgstr "Urutkan susunan atribut"
+
+msgid "Identifier does not reference a data element"
+msgstr "Pengenal tidak mereferensikan data elemen"
+
+msgid "Identifier does not reference a category option combo"
+msgstr "Pengenal tidak mereferensikan category option combo"
+
+msgid "Scheduling is"
+msgstr "Penjadwalan adalah"
+
+msgid "Scheduling"
+msgstr "Penjadwalan"
+
+msgid "Scheduling management"
+msgstr "Manajemen penjadwalan"
+
+msgid "Aggregation period types"
+msgstr "Tipe periode agregasi"
+
+msgid "active"
+msgstr "aktif"
+
+msgid "Last 2 years daily"
+msgstr "2 tahun terakhir setiap hari"
+
+msgid "Last 3 years daily"
+msgstr "3 tahun terakhir setiap hari"
+
+msgid "All daily"
+msgstr "Semuanya setiap hari"
+
+msgid "Execute Now"
+msgstr "Jalankan sekarang"
+
+msgid "All every 15 minutes"
+msgstr "Semuanya setiap 15 menit"
+
+msgid "Data Administration"
+msgstr "Administrasi data"
+
+msgid "Never"
+msgstr "Tidak Pernah"
+
+msgid "Last 12 months daily"
+msgstr "harian dalam 12 bulanan terakhir"
+
+msgid "Last 6 months daily + 6 to 12 months weekly"
+msgstr "Harian dalam 6 bulan terakhir + mingguan dalam 6-12 bulan"
+
+msgid "Daily"
+msgstr "Harian"
+
+msgid "Organisation unit group set aggregation level"
+msgstr "Level agregasi organisation unit group set"
+
+msgid "Aggregated org unit data values"
+msgstr "Agregasikan nilai data pada org unit"
+
+msgid "Aggregated org unit indicator values"
+msgstr "Agregasikan nilai indikator pada org unit"
+
+msgid ""
+"Are you sure you want to execute all tasks now? Task"
+"processing might fully utilize your system resources and slow"
+"down other operations."
+msgstr ""
+"Apakah anda yakin ingin menjalankan semua perintah sekarang?"
+"Memproses perintah mungkin menggunakan semua sumber sistem anda"
+"dan menurunkan sistem operasi yang lain."
+
+
+msgid "No aggregation"
+msgstr "Tidak ada agregasi"
+
+msgid "Data elements in data set but not in form or sections"
+msgstr "Elemen data terdapat dalam data set tetapi bukan dalam form atau sections"
+
+msgid "Add option set"
+msgstr "Tambahkan option set"
+
+msgid "Lock Exception Management"
+msgstr "Manajemen Lock Exception"
+
+msgid "Do you want to delete this lock exception?"
+msgstr "Anda ingin menghapus lock exception?"
+
+msgid "Do you want to delete lock exceptions with this configuration?"
+msgstr "Anda ingin menghapus lock exceptions dengan konfigurasi ini?"
+
+msgid "Create new lock exception"
+msgstr "Buat lock exception baru"
+
+msgid "Batch deletion"
+msgstr "Penghapusan batch"
+
+msgid "Deleting lock exceptions"
+msgstr "Menghapus lock exceptions"
+
+msgid "Error at"
+msgstr "Error pada"
+
+msgid "not started"
+msgstr "Belum Dimulai"
+
+msgid "Aggregated data set completeness"
+msgstr "Agregasikan kelengkapan data set"
+
+msgid "Show SQL view"
+msgstr "Tampilkan SQL view"
+
+msgid "Removing min-max values"
+msgstr "Hapus nilai min-maks"
+
+msgid "Generating min-max values"
+msgstr "Buat nilai min-maks"
+
+msgid "Done"
+msgstr "Selesai"
+
+msgid "Period structure"
+msgstr "Struktur periode"
+
+msgid "Update organisation unit paths"
+msgstr "Update jalur unit organisasi"
+
+msgid "Date period structure"
+msgstr "Struktur tanggal periode"
+
+msgid "Locale Management"
+msgstr "Manajemen Locale"
+
+msgid "Create New Locale"
+msgstr "Buat Locale Baru"
+
+msgid "Locale Details"
+msgstr "Rincian Locale"
+
+msgid "Are you sure you want to delete this locale?"
+msgstr "Apakah anda ingin menghapus Locale ini?"
+
+msgid "Language"
+msgstr "Bahasa"
+
+msgid "Country"
+msgstr "Negara"
+
+msgid "Please select a language"
+msgstr "Silakan pilih salah satu bahasa"
+
+msgid "Please select a country"
+msgstr "Silakan pilih salah satu negara"
+
+msgid "Data monitoring"
+msgstr "Monitoring data"
+
+msgid "Data monitoring strategy"
+msgstr "Strategi monitoring data"
+
+msgid "Last hour"
+msgstr "1 jam terakhir"
+
+msgid "Data set"
+msgstr "Data set"
+
+msgid "Last year daily"
+msgstr "Setiap hari satu tahun terakhir"
+
+msgid "Show fewer options"
+msgstr "Tampilkan sedikit pilihan"
+
+msgid "Show more options"
+msgstr "Tampilkan banyak pilihan"
+
+msgid "Disabled"
+msgstr "Dinonaktifkan"
+
+msgid "Data synchronization"
+msgstr "Sinkronisasi data"
+
+msgid "Data synchronization strategy"
+msgstr "Strategi sinkronisasi data"
+
+msgid "Enabled"
+msgstr "Aktifkan"
+
+msgid "Org unit group does not exist"
+msgstr "Grup Unit organisasi tidak tersedia"
+
+msgid "Duplicate periods"
+msgstr "Duplikatkan periode"
+
+msgid "Remove expired invitations"
+msgstr "Hapus undangan yang sudah tidak berlaku"
+
+msgid "View name"
+msgstr "Tampilkan nama"
+
+msgid "User account invitations"
+msgstr "Undangan akun user"
+
+msgid "Pending invitations"
+msgstr "Undangan yang tertunda"
+
+msgid "Expired invitations"
+msgstr "Undangan sudah tidak berlaku"
+
+msgid "Period type"
+msgstr "Jenis periode"
+
+msgid "Data Statistics"
+msgstr "Statistik data"
+
+msgid "Indicator types"
+msgstr "Tipe indikator"
+
+msgid "Data dictionaries"
+msgstr "Kamus data"
+
+msgid "Data values"
+msgstr "Nilai data"
+
+msgid "Number of objects"
+msgstr "Jumlah obyek"
+
+msgid "From date"
+msgstr "Dari tanggal"
+
+msgid "To date"
+msgstr "Ke tanggal"
+
+msgid "Browse by"
+msgstr "Browse berdasarkan"
+
+msgid "Please select at least one option"
+msgstr "Pilih minimal 1 option"
+
+msgid "Select mode"
+msgstr "Pilih mode"
+
+msgid "Select parent organisation unit"
+msgstr "Pilih induk unit organisasi"
+
+msgid "No data found"
+msgstr "Data tidak ditemukan"
+
+msgid "Select Period Type"
+msgstr "Pilih Tipe Periode"
+
+msgid "Data Integrity"
+msgstr "Integritas data"
+
+msgid "Data elements without a data set"
+msgstr "Elemen data tanpa data set"
+
+msgid "Data elements without groups"
+msgstr "Elemen data tanpa grup"
+
+msgid "Data sets not assigned to organisation units"
+msgstr "Set data yang tidak tetapkan unit organisasi"
+
+msgid "Indicators with identical formulas"
+msgstr "Indikator dengan rumus yang identik"
+
+msgid "Indicators without groups"
+msgstr "Indikator tanpa grup"
+
+msgid "Organisation units with cyclic references"
+msgstr "Unit organisasi dengan cyclic references"
+
+msgid "Orphaned organisation units"
+msgstr "Unit organisasi tidak berinduk"
+
+msgid "Organisation units without groups"
+msgstr "Unit organisasi tanpa grup"
+
+msgid "Organisation unit groups without group sets"
+msgstr "Grup unit organisasi tanpa set grup"
+
+msgid "Category option combos not in data element category combo in data entry form"
+msgstr ""
+"Category option combo tidak terdapat pada elemen data category"
+"combo dalam formulir data entri"
+
+
+msgid "Data integrity checks performed"
+msgstr "Pengecekan integritas data dilakukan"
+
+msgid "Data elements assigned to data sets with different period types"
+msgstr "Elemen data ditetapkan set data dengan tipe periode yang berbeda"
+
+msgid "Category option group set structure"
+msgstr "Struktur grup set Category option"
+
+msgid "Data element group set structure"
+msgstr "Struktur set grup elemen data"
+
+msgid "Indicator group set structure"
+msgstr "Struktur set grup indikator"
+
+msgid "Organisation unit group set structure"
+msgstr "Struktur set grup unit organisasi"
+
+msgid " Period"
+msgstr " Periode"
+
+msgid "Value"
+msgstr " Nilai"
+
+msgid "values"
+msgstr "Nilai"
+
+msgid "Data element"
+msgstr "Elemen data"
+
+msgid "Data element group"
+msgstr "Grup elemen data"
+
+msgid "Generating resource tables"
+msgstr "Membuat tabel sumber"
+
+msgid "Validation rules without groups"
+msgstr "Validation rules tanpa grup"
+
+msgid "Aggregated data values"
+msgstr "Agregasi nilai data"
+
+msgid "Aggregated indicator values"
+msgstr "Agregasi nilai indikator"
+
+msgid "Organisation Unit Pruning"
+msgstr "Pemangkasan unit organisasi"
+
+msgid "Min-Max Value Generation"
+msgstr "Pembuatan Nilai Min-Maks"
+
+msgid ""
+"Add or remove exceptions to the the standard rules for"
+"locking of data entry forms."
+msgstr ""
+"Tambah atau hapus pengecualian aturan standar untuk mengunci"
+"formulir entri data"
+
+
+msgid ""
+"Browse the database and get an overview of where data"
+"exists. View and export counts of data elements as well as"
+"raw data."
+msgstr ""
+"Browse database dan dapatkan overview dimana data tersebut"
+"disimpan. Tampilkan dan ekspor perhitungan elemen data bersama"
+"dengan data mentahnya."
+
+
+msgid ""
+"Run data integrity checks and unveil anomalies and problems"
+"in the meta data setup."
+msgstr ""
+"Jalankan pengecekan integritas data dan menyingkap anomali dan"
+"masalah-masalah setup metadata"
+
+
+msgid ""
+"Archive data which is not currently relevant to your system"
+"in order to improve performance. Data can also be unarchived."
+msgstr ""
+"Data arsip yang tidak relevan sistem anda dengan tujuan untuk"
+"meningkatkan performance. Data dapat juga tidak diarsipkan."
+
+
+msgid ""
+"Archive person data which is not currently relevant to your"
+"system. Data can also be unarchived."
+msgstr ""
+"Arsip data person yang saat ini tidak relevan dengan sistem"
+"anda. Data dapat juga tidak diarsipkan."
+
+
+msgid "Resource tables generated"
+msgstr "Tabel sumber sudah dibuat"
+
+msgid ""
+"Perform maintenance tasks such as pruning of data values and"
+"periods and clearing of database resource tables."
+msgstr ""
+"Menunjukkan perintah maintanance seperti pemangkasan nilai data"
+"dan periode dan pembersihan tabel sumber database."
+
+
+msgid ""
+"Generate resource database tables for the organisation unit"
+"hierarchy and group set structure among others."
+msgstr ""
+"Buat sumber tabel database untuk hierarki unit organisasi dan"
+"struktur set grup diantara yang lain."
+
+
+msgid ""
+"Create and manage locales for database content. A locale is"
+"a combination of language and country."
+msgstr ""
+"Buat dan atur locale untuk konten database. Locale merupakan"
+"kombinasi bahasa dan negara."
+
+
+msgid ""
+"Merge two organisation units and their data values. Data is"
+"merged depending on existence and date of last modification."
+msgstr ""
+"Gabung 2 unit organisasi dan nilai datanya. Data digabung"
+"berdasarkan keberadaan dan tanggal modifikasi terakhir."
+
+
+msgid ""
+"Browse the number of objects in the database, like data"
+"elements, indicators, data sets and data values."
+msgstr ""
+"Browse jumlah obyek di database, seperti elemen data,"
+"indikator, data set dan nilai data."
+
+
+msgid ""
+"Monitor and clear the system database cache status. Provides"
+"information on object and query caches."
+msgstr ""
+"Monitor dan hapus status cache database . Sediakan informasi"
+"pada obyek dan query caches."
+
+
+msgid ""
+"Generate min-max values which can be used for data validation"
+"during data entry and validation processes."
+msgstr ""
+"Buat nilai min-maks yang dapat digunakan untuk validasi entri"
+"data dan validasi proses."
+
+
+msgid ""
+"Remove sub-trees from the organisation unit tree. Useful when"
+"creating and deploying local databases."
+msgstr ""
+"Hapus sub-bagan dari bagan unit organisasi. Berguna ketika"
+"membuat dan penempatan database lokal."
+
+
+msgid ""
+"Define which data elements for which zero values should be"
+"stored or ignored. Useful for reducing database size."
+msgstr ""
+"Menetapkan elemen data mana untuk nilai nol dapat disimpan"
+"atau diabaikan. Berguna untuk mengurangi ukuran database."
+
+
+msgid ""
+"Eliminate data registered for duplicate data elements. Useful"
+"when data has been entered for identical data elements."
+msgstr ""
+"Eliminasi data yang terdaftar untuk menduplikasi elemen data."
+"Berguna ketika data dapat dimasukkan untuk elemen data identik."
+
+
+msgid "Available for mobile reporting"
+msgstr "Tersedia untuk Pelaporan berbasis Mobile"
+
+msgid "Indicators"
+msgstr "Indikator-indikator"
+
+msgid "Skip offline"
+msgstr "Skip Offline"
+
+msgid "Auto-save data entry forms"
+msgstr "Autosave formulir entri data"
+
+msgid "Send notification to completing user"
+msgstr "Kirimkan notifikasi untuk user"
+
+msgid "Insert images"
+msgstr "Insert gambar"
+
+msgid "Select category combo"
+msgstr "Pilih kategori combo"
+
+msgid "Get PDF for Data Entry"
+msgstr "PDF untuk Data Entri"
+
+msgid "Open future periods for data entry"
+msgstr "Tampilkan periode selanjutnya untuk entri data"
+
+msgid "Title"
+msgstr "Judul"
+
+msgid "Category combination"
+msgstr "Kombinasi kategori"
+
+msgid "Add data set"
+msgstr "Tambahkan data set"
+
+msgid "Data set details"
+msgstr "Detail data set"
+
+msgid "Multi-organisation unit entry details"
+msgstr "Detail entri multi-unit organisasi"
+
+msgid "Frequency"
+msgstr "Frekuensi"
+
+msgid "Selected data elements"
+msgstr "Elemen data terpilih"
+
+msgid "Available data elements"
+msgstr "Elemen data tersedia"
+
+msgid "Please select a data set"
+msgstr "Silakan memilih data set"
+
+msgid "Selected indicators"
+msgstr "Indikator terpilih"
+
+msgid "Available indicators"
+msgstr "Indikator tersedia"
+
+msgid "Assign to organisation units"
+msgstr "Daftarkan data set ke unit organisasi yang dituju"
+
+msgid "Number of data elements"
+msgstr "Jumlah elemen data"
+
+msgid "Assign data set to organisation units"
+msgstr "Daftarkan data set ke unit organisasi yang dituju"
+
+msgid "Assign"
+msgstr "Daftarkan"
+
+msgid "Are you sure you want to delete this data set?"
+msgstr "Apakah Anda yakin akan menghapus data set ini?"
+
+msgid "This name is already registered"
+msgstr "Nama telah digunakan"
+
+msgid "This short name is already registered"
+msgstr "Nama singkat ini telah terdaftar"
+
+msgid "This code is already registered"
+msgstr "Kode ini telah terdaftar"
+
+msgid "Data entry form"
+msgstr "Formulir entri data"
+
+msgid "Data entry form management"
+msgstr "Manajemen formulir entri data"
+
+msgid "Data entry form details"
+msgstr "Detail formulir entri data"
+
+msgid "Design data entry form"
+msgstr "Desain formulir entri data"
+
+msgid "Delete"
+msgstr "Hapus formulir ini"
+
+msgid "Are you sure you want to delete this data entry form?"
+msgstr "Apakah Anda yakin akan menghapus formulir entri data tersebut?"
+
+msgid "Select data set"
+msgstr "Pilih data set"
+
+msgid "Sort section"
+msgstr "Urutkan section"
+
+msgid "Group"
+msgstr "Grup"
+
+msgid "Add section"
+msgstr "Tambahkan bagian"
+
+msgid "Section Details"
+msgstr "Detail Section"
+
+msgid "Sort"
+msgstr "Urutkan"
+
+msgid "Data set sort order"
+msgstr "Urutkan data set"
+
+msgid "Disable"
+msgstr "Nonaktif kan"
+
+msgid "Design data entry form"
+msgstr "Design entri data formulir"
+
+msgid "Data set management"
+msgstr "Manajemen data set"
+
+msgid "Data set section management"
+msgstr "Manajemen data set section"
+
+msgid ""
+"Create, update, view and delete data sets and custom"
+"forms. A data set is a collection of data elements for"
+"which data is entered."
+msgstr ""
+"Buat, update, lihat dan hapus data set dan custom"
+"formulir. Data set merupakan kumpulan elemen data yang"
+"digunakan untuk mengentri data"
+
+
+msgid ""
+"Assign data sets to organisation units in a grid based"
+"layout for faster operations when working with a high number"
+"of items."
+msgstr ""
+"Tempatkan data set ke dalam unit organisasi dalam basis lay"
+"out grid untuk mempercepat pemrosesan data dengan jumlah yang"
+"lebih besar"
+
+
+msgid "Edit compulsory data elements"
+msgstr "Edit elemen data wajib"
+
+msgid "Add new"
+msgstr "Tambah baru"
+
+msgid "Delete successfully"
+msgstr "Sukses terhapus"
+
+msgid "Select"
+msgstr "Pilih"
+
+msgid "Enable"
+msgstr "Aktifkan"
+
+msgid "Saved successfully"
+msgstr "Berhasil tersimpan"
+
+msgid "Save and close"
+msgstr "Simpan dan tutup"
+
+msgid "DataSets"
+msgstr "Data Set"
+
+msgid "Please select data set and category combination"
+msgstr "Silakan pilih data set dan kombinasi kategori"
+
+msgid "Indicator already inserted"
+msgstr "Indikator telah dimasukkan"
+
+msgid "No indicator was selected"
+msgstr "Tidak ada indikator yang dipilih"
+
+msgid "Data element already inserted"
+msgstr "Elemen data telah dimasukkan"
+
+msgid "No"
+msgstr "Tidak"
+
+msgid "No data element was selected"
+msgstr "Tidak ada elemen data yang dipilih"
+
+msgid "Section sort order"
+msgstr "Urutkan menurut section"
+
+msgid "Are you sure you want to delete this section?"
+msgstr "Apakah Anda yakin akan menghapus section ini?"
+
+msgid "Please specify a name"
+msgstr " Silakan menentukan nama"
+
+msgid "Select organisation unit"
+msgstr "Pilih unit organisasi"
+
+msgid "Assigned"
+msgstr "Daftarkan"
+
+msgid "Unassigned"
+msgstr "Batalkan pendaftaran"
+
+msgid "Show selection box"
+msgstr "Perlihatkan kotak pilihan"
+
+msgid "Totals"
+msgstr "Total"
+
+msgid "Expiry days"
+msgstr "Batas Kadaluarsa"
+
+msgid "Days after period to qualify for timely submission"
+msgstr ""
+"Jumlah hari setelah periode tertentu untuk mengukur ketepatan"
+"waktu pelaporan data"
+
+
+msgid "Insert data elements, totals and indicators"
+msgstr "Insert elemen data, total dan indikator"
+
+msgid "None"
+msgstr "Tidak ada"
+
+msgid "Allow future periods"
+msgstr "Aktifkan periode mendatang"
+
+msgid "Data elements"
+msgstr "Elemen - elemen data"
+
+msgid "Skip data mart aggregation"
+msgstr "Skip agregasi data mart"
+
+msgid "Insert data elements"
+msgstr "Insert elemen data"
+
+msgid "Insert input fields into the form"
+msgstr "Insert input ke dalam formulir"
+
+msgid "Category option combo does not exist"
+msgstr "Category option combo tidak ditemukan"
+
+msgid "Data element does not exist"
+msgstr "Elemen data tidak ditemukan"
+
+msgid "Indicator does not exist"
+msgstr "Indikator tidak ditemukan"
+
+msgid "Category combo does not exist"
+msgstr "Kategori combo tidak ditemukan"
+
+msgid "All fields for data elements required"
+msgstr "Semua isian untuk elemen data diperlukan"
+
+msgid "Form details"
+msgstr "Detail form"
+
+msgid "Complete allowed only if validation passes"
+msgstr "Silakan klik lengkap jika validasi berhasil dijalankan"
+
+msgid " Right brackets"
+msgstr " kurung siku kanan"
+
+msgid "Std Dev Outlier Analysis"
+msgstr "Analisis Outlier Standar Deviasi"
+
+msgid "Min-Max Outlier Analysis"
+msgstr "Analisis Outlier Min-Maks"
+
+msgid "Gap Analysis"
+msgstr "Analisis Gap"
+
+msgid "Follow-Up Analysis"
+msgstr "Analisis follow-up"
+
+msgid "Validation Rule Analysis"
+msgstr "Analisis Aturan Validasi"
+
+msgid "result"
+msgstr "Hasil"
+
+msgid "Start"
+msgstr "Mulai"
+
+msgid "Clear expression"
+msgstr "Hapus expression"
+
+msgid "Multiply"
+msgstr "Kali"
+
+msgid "Analysing data"
+msgstr "Analisis data"
+
+msgid "Data source"
+msgstr "Sumber Data"
+
+msgid "Use captured data"
+msgstr "Gunakan "captured data""
+
+msgid "Use aggregated data"
+msgstr "Gunakan data agregat"
+
+msgid "Immediate children of the selected organisation unit will be included"
+msgstr ""
+"Setiap level yang berada langsung di bawah unit organisasi"
+"terpilih akan dimasukkan"
+
+
+msgid "All children of the selected organisation unit will be included"
+msgstr ""
+"Semua level yang berada langsung di bawah unit organisasi"
+"terpilih akan dimasukkan"
+
+
+msgid "Method"
+msgstr "Metode"
+
+msgid "See statistics"
+msgstr "Lihat statistik"
+
+msgid "Please specify a description"
+msgstr "Silakan memberikan keterangan pad bagian deskripsi"
+
+msgid " Divide"
+msgstr " Bagi"
+
+msgid "Please specify an expression"
+msgstr "Silakan memberikan keterangan pad bagian expression"
+
+msgid "Please specify an organisationunit which has children."
+msgstr "Silakan memilih unit organisasi yang memiliki tautan level di bawahnya"
+
+msgid "More than 500 values found, please narrow the search to see all"
+msgstr "Lebih dari 500 nilai ditemukan, silakan perbaiki atau persempit pencarian"
+
+msgid "Please specify data sets"
+msgstr "Silakan tentukan data set"
+
+msgid "Analysing data, please wait"
+msgstr "Menganalisis data, silakan tunggu"
+
+msgid "Skip for missing values"
+msgstr "Skip nilai yang missing"
+
+msgid " Plus"
+msgstr " Tambah"
+
+msgid "Select parameters"
+msgstr "Pilih parameter"
+
+msgid "use"
+msgstr "Gunakan"
+
+msgid "High"
+msgstr "Tinggi"
+
+msgid "Low"
+msgstr "Rendah"
+
+msgid "High"
+msgstr "Tinggi"
+
+msgid " Minus"
+msgstr " Kurang"
+
+msgid "Low"
+msgstr "Rendah"
+
+msgid "Rule type"
+msgstr "Tipe aturan"
+
+msgid "Surveillance"
+msgstr "Surveilans"
+
+msgid "Surveillance"
+msgstr "Surveilans"
+
+msgid "Attributes"
+msgstr "Atribut"
+
+msgid "Organisation unit level"
+msgstr "Level unit organisasi"
+
+msgid "Select level"
+msgstr "Pilih level"
+
+msgid "Sequential sample count"
+msgstr "Jumlah sampel sekuensial"
+
+msgid "Annual sample count"
+msgstr "Jumlah sampel setiap tahun"
+
+msgid "Number of days"
+msgstr "Jumlah hari"
+
+msgid "High outliers"
+msgstr "Outliers tinggi"
+
+msgid "Low outliers"
+msgstr "Outliers rendah"
+
+msgid "Number of user groups to alert"
+msgstr "Jumlah grup user yang diberi peringatan"
+
+msgid "Send alerts"
+msgstr "Kirim peringatan"
+
+msgid "visible when rule is violated"
+msgstr "terlihat jika aturan dilanggar"
+
+msgid "Instruction"
+msgstr "Instruksi"
+
+msgid "Skip if any value is missing"
+msgstr "Skip jika terdapat nilai yang missing"
+
+msgid "Skip if all values are missing"
+msgstr "Skip jika semua nilai missing"
+
+msgid "Never skip"
+msgstr "Jangan pernah skip"
+
+msgid "No organisation unit selected"
+msgstr "Tidak ada unit organisasi yang dipilih"
+
+msgid "Please specify the left side"
+msgstr "Silakan menentukan sisi kiri"
+
+msgid "Please specify the right side"
+msgstr "Silakan menentukan sisi kanan"
+
+msgid "Please specify an operator"
+msgstr "Silakan menentukan operator"
+
+msgid " Please specify a start date"
+msgstr " Silakan menentukan tanggal mulai"
+
+msgid " Please specify an ending date"
+msgstr " Silakan menentukan tanggal berakhir"
+
+msgid "Please specify a description"
+msgstr "Silakan menentukan deskripsi"
+
+msgid "Please specify an expression"
+msgstr "Silakan menentukan expression"
+
+msgid "Please enter a valid start date"
+msgstr "Silakan memasukkan tanggal mulai yang valid"
+
+msgid "Please enter a valid end date"
+msgstr "Silakan memasukkan tanggal berakhir yang valid"
+
+msgid "End date cannot be before Start date"
+msgstr " Tanggal berakhir tidak bisa sebelum tanggal mulai"
+
+msgid "The data elements on the left side must be of type numbers"
+msgstr "Elemen data pada sisi kiri harus dalam bentuk angka"
+
+msgid "The data elements on the right side must be of type numbers"
+msgstr "Elemen data pada sisi kanan harus dalam bentuk angka"
+
+msgid "Saving Validation Rule failed"
+msgstr "Penyimpanan Aturan Validasi gagal dilakukan"
+
+msgid "Create new validation rule"
+msgstr "Buat aturan validasi baru"
+
+msgid "Validate"
+msgstr "Memvalidasi"
+
+msgid " Are you sure you want to delete the validation rule?"
+msgstr " Apakah Anda yakin akan menghapus aturan validasi ini?"
+
+msgid " Are you sure you want to delete the validation rule group?"
+msgstr " Apakah Anda yakin akan menghapus grup aturan validasi?"
+
+msgid " Edit left side"
+msgstr " Edit sisi kiri"
+
+msgid " Edit right side"
+msgstr " Edit sisi kanan"
+
+msgid " Select operator"
+msgstr " Pilih operator"
+
+msgid " Left"
+msgstr " Kiri"
+
+msgid " Right"
+msgstr " Kanan"
+
+msgid " Textual expression description"
+msgstr " Deskripsi expression tekstual"
+
+msgid " Edit validation rule"
+msgstr " Edit aturan validasi"
+
+msgid " Validation rule"
+msgstr " Aturan Validasi"
+
+msgid " Run validation"
+msgstr " Jalankan validasi"
+
+msgid "Organisation unit"
+msgstr "Unit organisasi"
+
+msgid " Source"
+msgstr " Sumber"
+
+msgid "Validation"
+msgstr "Validasi"
+
+msgid "Adding validation rule failed"
+msgstr "Penambahan aturan validasi gagal dilakukan"
+
+msgid "Validation"
+msgstr "Validasi"
+
+msgid "Data quality report"
+msgstr "Kualitas data laporan"
+
+msgid "Validation result details"
+msgstr "Detail hasil validasi"
+
+msgid "Validation rule"
+msgstr "Aturan validasi"
+
+msgid "Data element identifier must be a number"
+msgstr "Pengenal elemen data harus berupa angka"
+
+msgid "Category option combo identifier must be a number"
+msgstr "Pengenal category option combo harus berupa angka"
+
+msgid "Everything is OK"
+msgstr "Semua OK"
+
+msgid "Validation rule group management"
+msgstr "Manajemen grup aturan validasi"
+
+msgid "Validation failed"
+msgstr "Validasi gagal"
+
+msgid "Validation rule management"
+msgstr "Manajemen aturan validasi"
+
+msgid " Validation rule group"
+msgstr " Grup aturan validasi"
+
+msgid "Create new validation rule group"
+msgstr "Buat grup aturan validasi baru"
+
+msgid "Available"
+msgstr "Tersedia"
+
+msgid "selected"
+msgstr "Terpilih"
+
+msgid "Validation rules"
+msgstr "Aturan validasi"
+
+msgid "User groups to alert"
+msgstr "Peringatan kepada grup user"
+
+msgid "Alert only organisation unit related users"
+msgstr ""
+"Peringatan diberikan kepada user yang berhubungan dengan unit"
+"organisasi saja"
+
+
+msgid "Yes"
+msgstr "Ya"
+
+msgid "No"
+msgstr "Tidak"
+
+msgid "Right side expr"
+msgstr "Sisi sebelah kanan"
+
+msgid "Available validation rules"
+msgstr "Aturan validasi yang tersedia"
+
+msgid "Edit validation rule group"
+msgstr "Edit grup aturan validasi"
+
+msgid " All validation rules"
+msgstr " Semua aturan validasi"
+
+msgid " Validation alerts"
+msgstr " Peringatan validasi"
+
+msgid " Validation passed successfully"
+msgstr " Validasi berhasil dengan sukses"
+
+msgid "Standard Deviation"
+msgstr "Standar Deviasi"
+
+msgid "Max"
+msgstr "Maks"
+
+msgid "Left side expr"
+msgstr "Sisi sebelah kiri"
+
+msgid "values found"
+msgstr "Nilai ditemukan"
+
+msgid "Select number of standard deviations"
+msgstr "Pilih standar deviasi"
+
+msgid "Outlier Analysis"
+msgstr "Analisis Outlier"
+
+msgid "No values found"
+msgstr "Nilai tidak ditemukan"
+
+msgid ""
+"Add, modify, view and delete validation rules. Anomalies"
+"can be discovered by running validation rules against the"
+"data."
+msgstr ""
+"Tambahkan, modifikasi, tampilkan, dan hapus aturan validasi."
+"Kesalahan dapat ditemukan setelah menjalankan aturan validasi"
+"data"
+
+
+msgid ""
+"Add, modify, view and delete validation rule groups."
+"Provides the ability to group and run validation rules"
+"together."
+msgstr ""
+"Tambahkan, modifikasi, tampilkan, dan hapus grup aturan"
+"validasi. Sediakan kemampuan untuk mengelompokkan dan jalankan"
+"aturan validasi bersama."
+
+
+msgid ""
+"Run validation rules in order to unveil anomalies and errors"
+"in the data in the database."
+msgstr ""
+"Jalankan aturan validasi untuk melihat keanehan dan kesalahan"
+"data di dalam database"
+
+
+msgid ""
+"Analyze potential outlier values based on standard deviations."
+"Outlier values can be examined and marked for follow-up."
+msgstr ""
+"Analisis nilai yang berpotensi menjadi outlier dengan menggunakan"
+"standar deviasi. Nilai outlier dapat dicari dan ditandai agar"
+"dapat ditindaklanjuti."
+
+
+msgid ""
+"Analyze potential outlier values based on min and max values."
+"Outlier values can be examined and marked for follow-up."
+msgstr ""
+"Analisis nilai yang berpotensi menjadi outlier dengan menggunakan"
+"nilai min dan maks. Nilai outlier dapat dicari dan ditandai"
+"agar dapat ditindaklanjuti"
+
+
+msgid "Left brackets"
+msgstr "kurung siku kiri"
+
+msgid ""
+"Perform analysis of potential missing values, referred to as"
+"gaps. Missing values can be entered or marked for follow-up."
+msgstr ""
+"Lakukan analisis untuk mencari potensi nilai yang missing,"
+"anggap sebagai gap. Nilai missing dapat dimasukkan atau"
+"ditandai agar dapat ditindaklanjuti"
+
+
+msgid ""
+"View or edit data values marked for further follow-up during"
+"data entry or analysis."
+msgstr ""
+"Lihat atau edit nilai data yang ditandai untuk ditindaklanjuti"
+"selama entri data atau analisis"
+
+
+msgid "Value must be a number"
+msgstr "Nilai harus berupa angka"
+
+msgid "Value is lower than minimum value"
+msgstr "Nilai tersebut lebih kecil dari nilai minimum"
+
+msgid "Value is higher than maximum value"
+msgstr "Nilai tersebut lebih besar dari nilai maksimum"
+
+msgid "Mark"
+msgstr "Tandai"
+
+msgid "Mark value for follow-up"
+msgstr "Tandai nilai untuk ditindaklanjuti"
+
+msgid "Unmark value for follow-up"
+msgstr "Hapus penanda nilai untuk ditindaklanjuti"
+
+msgid "Data Analysis"
+msgstr "Analisis data"
+
+msgid "Data Analysis Report"
+msgstr "Laporan data analisis"
+
+msgid "Group by"
+msgstr "Dikelompokkan berdasarkan"
+
+msgid "Hide details"
+msgstr "Sembunyikan detail"
+
+msgid "Create validation criteria"
+msgstr "Buat kriteria validasi"
+
+msgid ""
+"Create, modify and view tracked entity attribute groups."
+"Groups makes it more convenient to add attributes to a"
+"tracked entity."
+msgstr ""
+"Buat, modifikasi dan tampilkan grup atribut tracked entity."
+"Grup membuatnya lebih nyaman untuk menambahkan atribut untuk"
+"tracked entity."
+
+
+msgid ""
+"Define which attributes to use in messages sent to clients"
+"regarding scheduled visits."
+msgstr ""
+"Definisikan atribut mana yang digunakan dalam pesan terkirim"
+"untuk klien dalam kunjungan yang terjadwalkan"
+
+
+msgid ""
+"Create, modify and view relationship types. A relationship is"
+"typically wife and husband or mother and child."
+msgstr ""
+"Buat, modifikasi dan tampilkan tipe hubungan. Hubungan seperti"
+"istri dan suami atau ibu dan anak"
+
+
+msgid ""
+"Create, modify and view programs. A program has program"
+"stages and defines which actions should be taken at each"
+"stage."
+msgstr ""
+"Buat, modifikasi dan tampilkan program. Sebuah program memiliki"
+"tahapan program dan mendefinisikan aktivitas mana yang seharusnya"
+"dilakukan di setiap tahap."
+
+
+msgid ""
+"Set up aggregation rules for the process of aggregating"
+"tracked entity data to statistical data."
+msgstr ""
+"Set up aggregation rules untuk proses aggregating tracked"
+"entity data untuk kepentingan data statistik"
+
+
+msgid ""
+"Set reminders to be automatically sent to enrolled tracked"
+"entity instances before scheduled appointments and after missed"
+"visits."
+msgstr ""
+"Set pengingat dalam kondisi otomatis terkirim untuk didaftarkan"
+"tracked entity instances sebelum jadwad yang disepakati dan"
+"setelah kunjungan yang terlewati"
+
+
+msgid ""
+"Create, modify and view program attributes. A program can"
+"have any number of attributes."
+msgstr ""
+"Buat, modifikasi dan tampilkan atribut program.Program dapat"
+"memiliki beberapa atribut."
+
+
+msgid ""
+"Set the Excel XML template file used for automatically"
+"importing tracked entity instance data."
+msgstr ""
+"Set file Excel XML template digunakan untuk mengimpor tracked"
+"entity instance data secara otomatis."
+
+
+msgid "Please select"
+msgstr "Silakan pilih"
+
+msgid "Search result"
+msgstr "Hasil pencarian"
+
+msgid "is"
+msgstr "adalah"
+
+msgid "This field is required"
+msgstr "Kolom ini sudah terisi"
+
+msgid "Number of attributes"
+msgstr "Jumlah atribut"
+
+msgid "Available programs"
+msgstr "Program yang tersedia"
+
+msgid "Selected programs"
+msgstr "Program terpilih"
+
+msgid "Are you sure you want to delete this validation criteria?"
+msgstr "Apakah anda yakin ingin menghapus kriteria validasi ini?"
+
+msgid "Please specify a data element"
+msgstr "Silahkan tentukan elemen data"
+
+msgid "Processing"
+msgstr "Sedang dalam proses"
+
+msgid "Are you sure you want to delete relationship type?"
+msgstr "Apakah anda ingin menghapus relationship type?"
+
+msgid "Decimals in data output"
+msgstr "Desimal pada output data"
+
+msgid "Other program stage data element"
+msgstr "Elemen data tahapan program lain"
+
+msgid "Load existing form"
+msgstr "Load formulir yang tersedia"
+
+msgid "Design data entry form"
+msgstr "Design formulir entri data"
+
+msgid "This data element is inserted in form"
+msgstr "Elemen data ini telah dimasukkan dalam formulir"
+
+msgid "Number of characters"
+msgstr "Jumlah karakter"
+
+msgid "Letter Only"
+msgstr "Huruf saja"
+
+msgid "Program attribute"
+msgstr "Atribut program"
+
+msgid "Relationship (e.g. Mother-Child)"
+msgstr "Hubungan (contoh Ibu-Anak)"
+
+msgid "Program attribute management"
+msgstr "Manajemen atribut program"
+
+msgid "Create new program attribute"
+msgstr "Buat atribut program baru"
+
+msgid "Edit program attribute"
+msgstr "Edit atribut program"
+
+msgid "Import"
+msgstr "Impor"
+
+msgid "Import Data"
+msgstr "Impor Data"
+
+msgid "Configuration"
+msgstr "Konfigurasi"
+
+msgid "Row"
+msgstr "Baris"
+
+msgid "Duplicate"
+msgstr "Duplikasikan"
+
+msgid "Validation criteria details"
+msgstr "Detail kriteria validasi"
+
+msgid "Program attribute details"
+msgstr "Detail atribut program"
+
+msgid "Select program"
+msgstr "Pilih program"
+
+msgid "Create new program validation rule"
+msgstr "Pilih program validation rule baru"
+
+msgid "Add multi-program validation rule"
+msgstr "Tambahkan multi-program validation rule"
+
+msgid "Program validation rule details"
+msgstr "Detail program validation rule"
+
+msgid "Relationship type details"
+msgstr "Detail tipe hubungan"
+
+msgid "View validation rules"
+msgstr "Tampilkan ketentuan validasi"
+
+msgid "Scheduled days from start"
+msgstr "Jadwalkan per hari dari awal"
+
+msgid "Deleted program attribute option successfully"
+msgstr "Program attribute option berhasil dihapus"
+
+msgid "Validation criteria management"
+msgstr "Manajemen kriteria validasi"
+
+msgid "Aggregation data element"
+msgstr "Elemen data agregasi"
+
+msgid "Aggregation data element is in use"
+msgstr "Elemen data agregasi sedang digunakan"
+
+msgid "Are you sure you want to delete this program data entry form?"
+msgstr "Apakah anda ingin menghapus formulir program entri data ini?"
+
+msgid "Save"
+msgstr "Simpan"
+
+msgid "Please select one data element"
+msgstr "Silahkan pilih satu elemen data"
+
+msgid "A is to B"
+msgstr "A untuk B"
+
+msgid "Description of enrollment date"
+msgstr "Deskripsi tanggal pendaftaran"
+
+msgid "Description of incident date"
+msgstr "Deskripsi tanggal insidensi"
+
+msgid "Date of enrollment"
+msgstr "Tanggal pendaftaran"
+
+msgid "Date of incident"
+msgstr "Tanggal insidensi"
+
+msgid "Male"
+msgstr "Pria"
+
+msgid "Female"
+msgstr "Wanita"
+
+msgid "B is to A"
+msgstr "B untuk A"
+
+msgid "Verified"
+msgstr "Terverifikasi"
+
+msgid "Declared"
+msgstr "Diumumkan"
+
+msgid "Approximated"
+msgstr "Kira-kira"
+
+msgid "Others"
+msgstr "Yang lain"
+
+msgid "Total of tracked entity instance registration"
+msgstr "Total dari pendaftaran tracked entity instance"
+
+msgid "Repeatable"
+msgstr "Dapat diulang"
+
+msgid "Date of Birth"
+msgstr "Tanggal lahir"
+
+msgid "Edit relationship type"
+msgstr "Edit tipe hubungan"
+
+msgid "Edit program validation rule"
+msgstr "Edit program validation rule"
+
+msgid "Assign validation for programs"
+msgstr "Tetapkan validasi untuk program"
+
+msgid "Validation for date date elements"
+msgstr "Validasi untuk elemen data tanggal"
+
+msgid "Before current date"
+msgstr "Sebelum tanggal yang ditentukan"
+
+msgid "Before or equal to current date"
+msgstr "Sebelum atau saat tanggal yang ditentukan"
+
+msgid "After current date"
+msgstr "Setelah tanggal saat ini"
+
+msgid "After or equal to current date"
+msgstr "Setelah atau sama dengan tanggal saat ini"
+
+msgid "Before due date"
+msgstr "Sebelum tanggal jatuh tempo"
+
+msgid "Create new relationship type"
+msgstr "Buat tipe hubungan yang baru"
+
+msgid "Before or equal to due date"
+msgstr "Sebelum atau saat hari H"
+
+msgid "After due date"
+msgstr "Setelah tanggal jatuh tempo"
+
+msgid "After or equal to due date"
+msgstr "Setelah atau saat tanggal jatuh tempo"
+
+msgid "In range due date"
+msgstr "Dalam kurun waktu tanggal jatuh tempo"
+
+msgid "Condition"
+msgstr "Kondisi"
+
+msgid "No data elements of type date in the selected program stage"
+msgstr "Tidak ada elemen data untuk tipe tanggal dalam tahapan program terpilih"
+
+msgid "Shown on reports"
+msgstr "Tunjukkan dalam laporan"
+
+msgid "Show provided elsewhere"
+msgstr "Tunjukkan hal yang disediakan"
+
+msgid "Relationship type management"
+msgstr "Manajemen tipe hubungan"
+
+msgid "Available values"
+msgstr "Nilai-nilai yang tersedia"
+
+msgid "Insert selected values"
+msgstr "Masukkan nilai-nilai terpilih"
+
+msgid "Display provided other facility column"
+msgstr "Tampilkan kolom fasilitas lain yang disediakan"
+
+msgid "Filter by data set"
+msgstr "Filter berdasarkan data set"
+
+msgid "Show all items"
+msgstr "Tampilkan semua item"
+
+msgid "With registration"
+msgstr "Dengan pendaftaran"
+
+msgid "Without registration"
+msgstr "Tanpa pendaftaran"
+
+msgid "or"
+msgstr "atau"
+
+msgid "Standard interval days"
+msgstr "Interval hari-hari yang standar"
+
+msgid "Program enrollment"
+msgstr "Pendaftaran progran"
+
+msgid "Due date"
+msgstr "Tanggal jatuh tempo"
+
+msgid "Age (days)"
+msgstr "Usia (hari)"
+
+msgid "Value must be an integer"
+msgstr "Nilai harus dalam bilangan bulat"
+
+msgid "Program Stage"
+msgstr "Tahapan program"
+
+msgid "Close"
+msgstr "Tutup"
+
+msgid "not incident date"
+msgstr "Bukan tanggal insidensi"
+
+msgid "Create new tracked entity attribute"
+msgstr "Buat tracked entity attribute baru"
+
+msgid "Are you sure you want to delete this tracked entity attribute?"
+msgstr "Apakah anda yakin ingin menghapus tracked entity attribute ini?"
+
+msgid "Are you sure you want to delete this program indicator?"
+msgstr "Apakah anda yakin ingin menghapus indikator program ini?"
+
+msgid "Value must be a positive number"
+msgstr "Nilai harus bilangan bulat positif"
+
+msgid "Invalid min-max days combination"
+msgstr "Min-max kombinasi hari yang invalid"
+
+msgid "Please select a program"
+msgstr "Silakan pilih program"
+
+msgid " scheduled date"
+msgstr " Tanggal yang dijadwalkan"
+
+msgid "Program stage management"
+msgstr "Manajemen tahapan program"
+
+msgid "Ask user to create new event when stage is complete"
+msgstr "Meminta user untuk membuat event baru ketika stage lengkap"
+
+msgid "View program stages"
+msgstr "Tampilkan tahapan program"
+
+msgid " Open data entry form after enrollment"
+msgstr " Buka formulir data entri setelah pendaftaran"
+
+msgid " Report date to use"
+msgstr " Laporkan tanggal yang akan digunakan"
+
+msgid "Assign program to organisation units"
+msgstr "Tetapkan program untuk unit-unit organisasi"
+
+msgid "Select at least one scope for local id"
+msgstr "Pilih paling tidak 1 cakupan untuk local id"
+
+msgid "Programs"
+msgstr "Program-program"
+
+msgid "Are you sure you want to delete reminder message template?"
+msgstr "Apakah anda yakin ingin menghapus template pesan pengingat?"
+
+msgid "Data entry method for option sets"
+msgstr "Metode entri data untuk option sets"
+
+msgid "Number of data elements to be collected"
+msgstr "Jumlah elemen data yang akan dikumpulkan"
+
+msgid "Adding program stage failed"
+msgstr "Penambahan tahapan program gagal"
+
+msgid "Updating program stage failed"
+msgstr "Update tahapan program gagal"
+
+msgid "Are you sure you want to delete this program stage?"
+msgstr "Apakah anda yakin ingin menghapus tahapan program ini?"
+
+msgid "Program stage details"
+msgstr "Detail tahapan program"
+
+msgid "Reminder message template management"
+msgstr "Manajemen template pesan pengingat"
+
+msgid "Expression description"
+msgstr "Deskripsi expression"
+
+msgid "Expression items"
+msgstr "Item Expression"
+
+msgid "Filter description"
+msgstr "Deskripsi filter"
+
+msgid "Edit program stage"
+msgstr "Edit tahapan program"
+
+msgid "Select program stage"
+msgstr "Pilih program stage"
+
+msgid "Program registration form"
+msgstr "Formulir registrasi program"
+
+msgid "Aggregation type"
+msgstr "Tipe aggregasi"
+
+msgid "Display in form"
+msgstr "Tampilkan dalam formulir"
+
+msgid "Enrollment"
+msgstr "Detail Pendaftaran"
+
+msgid "Event output type"
+msgstr "Tipe output event"
+
+msgid "Create new program stage"
+msgstr "Buat tahapan program baru"
+
+msgid "Missing value replacement"
+msgstr "Penggantian nilai missing"
+
+msgid "Order in program"
+msgstr "Susun dalam program"
+
+msgid "Program details"
+msgstr "Detail program"
+
+msgid "Are you sure you want to delete this program?"
+msgstr "Apakah anda ingin menghapus program ini?"
+
+msgid "Create new program"
+msgstr "Buat program baru"
+
+msgid "Add"
+msgstr "Tambah"
+
+msgid "Program management"
+msgstr "Manajemen program"
+
+msgid "Tracked entity attribute"
+msgstr "Atribut"
+
+msgid "Is equal to tracked entity domain"
+msgstr "Apakah setara dengan domain tracked entity?"
+
+msgid "Data elements"
+msgstr "Elemen data"
+
+msgid "Attributes"
+msgstr "Atribut"
+
+msgid "Data entry form management for program stage"
+msgstr "Manajemen formulir entri data untuk tahapan program"
+
+msgid "Choose existing data entry form"
+msgstr "Pilih formulir entri data yang ada"
+
+msgid "data entry form"
+msgstr "Formulir data entri"
+
+msgid "Blood group"
+msgstr "Golongan darah"
+
+msgid "Add Option"
+msgstr "Tambah Option"
+
+msgid "Available attributes"
+msgstr "Atribut yang tersedia"
+
+msgid "Selected attributes"
+msgstr "Atribut terpilih"
+
+msgid "Tracked entity attribute group details"
+msgstr "Detail tracked entity attribute group"
+
+msgid "Attribute group"
+msgstr "Grup Atribut"
+
+msgid "Create new tracked entity attribute group"
+msgstr "Buat tracked entity attribute group baru"
+
+msgid "Deleted successfully"
+msgstr "Option ini memiliki hubungan dengan tracked entity attribute values"
+
+msgid "This option has relationship with tracked entity attribute values"
+msgstr "Option ini memiliki hubungan dengan tracked entity attribute values"
+
+msgid "Deleted tracked entity attribute option successfully"
+msgstr "Tracked entity attribute option berhasil terhapus"
+
+msgid "Can not find tracked entity attribute option to delete"
+msgstr "Tidak dapat menemukan tracked entity attribute option untuk menghapus"
+
+msgid "Related"
+msgstr "Terhubung"
+
+msgid "Validation Criteria"
+msgstr "Kriteria validasi"
+
+msgid "Edit validation criteria"
+msgstr "Edit kriteria validasi"
+
+msgid "Attribute Group"
+msgstr "Grup Atribut"
+
+msgid "Attribute Visit Schedule"
+msgstr "Atribut jadwal kunjungan"
+
+msgid "Search apps"
+msgstr "Cari apps"
+
+msgid "Average"
+msgstr "Rata - rata"
+
+msgid "displayName"
+msgstr "displayName"
+
+msgid "This object will be private to yourself"
+msgstr "Obyek ini terbatas hanya untuk Anda"
+
+msgid "Synchronization settings"
+msgstr "Synchronization settings"
+
+msgid "Sum"
+msgstr "Jumlah"
+
+msgid "Unit interval"
+msgstr "Unit interval"
+
+msgid "lastUpdated"
+msgstr "lastUpdated"
+
+msgid "Access settings"
+msgstr "Access settings"
+
+msgid "Percentage"
+msgstr "Persentase"
+
+msgid "Text"
+msgstr "Teks"
+
+msgid "Enrollment status"
+msgstr "Enrollment status"
+
+msgid "System monitoring settings"
+msgstr "System monitoring settings"
+
+msgid "Manage my apps"
+msgstr "Manage my apps"
+
+msgid "Standard deviation"
+msgstr "Standar deviasi"
+
+msgid "Interpretations"
+msgstr "interpretasi"
+
+msgid "This object will be created with public edit and view rights"
+msgstr "Obyek ini akan dibuat agar publik dapat mengedit dengan hak terbatas"
+
+msgid "displayDescription"
+msgstr "displayDescription"
+
+msgid "Settings"
+msgstr "Pengaturan"
+
+msgid "Tracked entity instance count"
+msgstr "Penghitungan Tracked entity instance"
+
+msgid "Enrollment count"
+msgstr "Penghitungan pendaftaran"
+
+msgid "Edit"
+msgstr "merubah"
+
+msgid "Program stage id"
+msgstr "Program stage id"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "Count"
+msgstr "Hitung"
+
+msgid "About DHIS 2"
+msgstr "Tentang DHIS2"
+
+msgid "Email settings"
+msgstr "Email settings"
+
+msgid "Appearance settings"
+msgstr "Appearance settings"
+
+msgid "Version"
+msgstr "versi"
+
+msgid "Messaging settings"
+msgstr "Messaging settings"
+
+msgid "Log out"
+msgstr "Log out"
+
+msgid "Import settings"
+msgstr "Import settings"
+
+msgid "Help"
+msgstr "Bantuan"
+
+msgid "Long text"
+msgstr "Text panjang"
+
+msgid "OAuth2 clients"
+msgstr "OAuth2 clients"
+
+msgid "Variance"
+msgstr "Varian"
+
+msgid "Calendar settings"
+msgstr "Calendar settings"
+
+msgid "Clone"
+msgstr "Penggandaan"
+
+msgid "Messages"
+msgstr "Pesan-pesan"
+
+msgid "Short name"
+msgstr "Nama"
+
+msgid "General settings"
+msgstr "General settings"
+
+msgid "Analytics settings"
+msgstr "Analytics settings"
+
+msgid "Server settings"
+msgstr "Server settings"
+
+msgid "Account"
+msgstr "Akun"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "System Settings"
+msgstr "System Settings"
+
+msgid "Immunization analysis"
+msgstr "Immunization analysis"
+
+msgid "Browser Cache Cleaner"
+msgstr "Browser Cache Cleaner"
+
+msgid "Capture"
+msgstr "Capture"
+
+msgid "TUCANA USERS IMPORTER APP"
+msgstr "TUCANA USERS IMPORTER APP"
+
+msgid "Data Entry"
+msgstr "entri data"
+
+msgid "Data Visualizer"
+msgstr "Data Visualizer"
+
+msgid "Mobile Configuration"
+msgstr "Mobile Configuration"
+
+msgid "Data Quality"
+msgstr "Data Quality"
+
+msgid "Tracker Capture"
+msgstr "Tracker Capture"
+
+msgid "GIS"
+msgstr "GIS"
+
+msgid "Function Maintenance"
+msgstr "Function Maintenance"
+
+msgid "Dashboard Classic"
+msgstr "Dashboard Classic"
+
+msgid "Event Visualizer"
+msgstr "Event Visualizer"
+
+msgid "Event Reports"
+msgstr "Event Reports"
+
+msgid "App Management"
+msgstr "App Management"
+
+msgid "Datastore Management"
+msgstr "Datastore Management"
+
+msgid "Scheduler"
+msgstr "Scheduler"
+
+msgid "Menu Management"
+msgstr "Menu Management"
+
+msgid "Reports"
+msgstr "Laporan-laporan NRHM"
+
+msgid "BIF"
+msgstr "BIF"
+
+msgid "Interactive Dashboard 2"
+msgstr "Interactive Dashboard 2"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Pivot Table"
+msgstr "Pivot Table"
+
+msgid "Facility Reconciliation"
+msgstr "Facility Reconciliation"
+
+msgid "WHO Data Quality Tool"
+msgstr "WHO Data Quality Tool"
+
+msgid "Interpretations PSI"
+msgstr "Interpretations PSI"
+
+msgid "Dashboards app"
+msgstr "Dashboards app"
+
+msgid "dAtaZ"
+msgstr "dAtaZ"
+
+msgid "Usage Analytics"
+msgstr "Usage Analytics"
+
+msgid "Interpretations"
+msgstr "Interpretations"
+
+msgid "Translations"
+msgstr "Translations"
+
+msgid "Maintenance"
+msgstr "Maintenance"
+
+msgid "Data Administration"
+msgstr "Data Administration"
+
+msgid "interactiveMap"
+msgstr "interactiveMap"
+
+msgid "Maps"
+msgstr "Maps"
+
+msgid "Users"
+msgstr "Users"
+
+msgid "Classic Data Visualizer"
+msgstr "data visualizer"
+
+msgid "WHO Metadata browser"
+msgstr "WHO Metadata browser"
