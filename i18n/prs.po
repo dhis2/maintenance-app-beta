@@ -11020,3 +11020,255 @@ msgstr "\u0646\u0645\u0627\u06CC\u0634 \u0627\u062E\u0637\u0627\u0631\u06CC\u064
 
 msgid "Hide field"
 msgstr "\u0633\u0627\u062D\u0647 \u067E\u0646\u0647\u0627\u0646"
+
+msgid "Search apps"
+msgstr "جستجو برنامه"
+
+msgid "Average"
+msgstr "اوسط"
+
+msgid "displayName"
+msgstr "displayName"
+
+msgid "This object will be private to yourself"
+msgstr "این موضوع نزد شما به شکل خصوصی وجود خواهد داشت"
+
+msgid "Synchronization settings"
+msgstr "تنظیمات هم سازی"
+
+msgid "Sum"
+msgstr "مجموع"
+
+msgid "Unit interval"
+msgstr "فاصله واحد"
+
+msgid "lastUpdated"
+msgstr "lastUpdated"
+
+msgid "Access settings"
+msgstr "تنظیمات دسترسی"
+
+msgid "Percentage"
+msgstr "فیصدی"
+
+msgid "Text"
+msgstr "متن"
+
+msgid "Enrollment status"
+msgstr "تاریخ ثبت نام"
+
+msgid "System monitoring settings"
+msgstr "System monitoring settings"
+
+msgid "Manage my apps"
+msgstr "مدیریت برنامه ها"
+
+msgid "Standard deviation"
+msgstr "انحراف استندرد"
+
+msgid "Interpretations"
+msgstr "تفسیر ها"
+
+msgid "This object will be created with public edit and view rights"
+msgstr "موضوع با داشتن گزینه های تصحیح توسط افراد و نمایش ایجاد میگردد"
+
+msgid "displayDescription"
+msgstr "displayDescription"
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "Tracked entity instance count"
+msgstr "پیگیری بخش فوری ثبت نام"
+
+msgid "Enrollment count"
+msgstr "تعداد ثبت نام"
+
+msgid "Edit"
+msgstr "تصحیح"
+
+msgid "Program stage id"
+msgstr "آی دی مرحله برنامه"
+
+msgid "Profile"
+msgstr "پروفایل"
+
+msgid "Count"
+msgstr "شمارش"
+
+msgid "About DHIS 2"
+msgstr "در باره مرکز معلومات صحی محلی 2"
+
+msgid "Email settings"
+msgstr "تنظیمات ایمل"
+
+msgid "Appearance settings"
+msgstr "تنظیمات نمایش"
+
+msgid "Version"
+msgstr "نسخه"
+
+msgid "Messaging settings"
+msgstr "تنظیمات پیام"
+
+msgid "Log out"
+msgstr "از سیستم خارج شده اید"
+
+msgid "Import settings"
+msgstr "تنظیمات واردات"
+
+msgid "Help"
+msgstr "کمک"
+
+msgid "Long text"
+msgstr "متن طویل"
+
+msgid "OAuth2 clients"
+msgstr "OAuth2 clients"
+
+msgid "Variance"
+msgstr "متغیر"
+
+msgid "Calendar settings"
+msgstr "تنظیمات جنطری"
+
+msgid "Clone"
+msgstr "کلون"
+
+msgid "Messages"
+msgstr "پیام ها"
+
+msgid "Short name"
+msgstr "اسم کوتاه"
+
+msgid "General settings"
+msgstr "تنظیمات عمومی استفاده کننده"
+
+msgid "Analytics settings"
+msgstr "Analytics settings"
+
+msgid "Server settings"
+msgstr "تنظیمات سرور"
+
+msgid "Account"
+msgstr "حساب"
+
+msgid "Username"
+msgstr "نام استفاده کننده"
+
+msgid "System Settings"
+msgstr "تنظیمات سیستم"
+
+msgid "Immunization analysis"
+msgstr "Immunization analysis"
+
+msgid "Browser Cache Cleaner"
+msgstr "پاک کننده مغزن صفحه جستجو"
+
+msgid "Capture"
+msgstr "Capture"
+
+msgid "TUCANA USERS IMPORTER APP"
+msgstr "TUCANA USERS IMPORTER APP"
+
+msgid "Data Entry"
+msgstr "درج اطلاعات"
+
+msgid "Data Visualizer"
+msgstr "Data Visualizer"
+
+msgid "Mobile Configuration"
+msgstr "ترتیبات مشخص در مبائیل"
+
+msgid "Data Quality"
+msgstr "کیفیت اطلاعات"
+
+msgid "Tracker Capture"
+msgstr "ضبط ردیاب"
+
+msgid "GIS"
+msgstr "سیستم معلومات عمومی"
+
+msgid "Function Maintenance"
+msgstr "Function Maintenance"
+
+msgid "Dashboard Classic"
+msgstr "Dashboard Classic"
+
+msgid "Event Visualizer"
+msgstr "نمایش رویداد"
+
+msgid "Event Reports"
+msgstr "گزارشات رویداد"
+
+msgid "App Management"
+msgstr "مدیریت برنامه"
+
+msgid "Datastore Management"
+msgstr "Datastore Management"
+
+msgid "Scheduler"
+msgstr "Scheduler"
+
+msgid "Menu Management"
+msgstr "Menu Management"
+
+msgid "Reports"
+msgstr "گزارشات NRHM"
+
+msgid "BIF"
+msgstr "BIF"
+
+msgid "Interactive Dashboard 2"
+msgstr "Interactive Dashboard 2"
+
+msgid "Dashboard"
+msgstr "تحلیل کننده اطلاعات"
+
+msgid "Pivot Table"
+msgstr "جدول محوری"
+
+msgid "Facility Reconciliation"
+msgstr "Facility Reconciliation"
+
+msgid "WHO Data Quality Tool"
+msgstr "WHO Data Quality Tool"
+
+msgid "Interpretations PSI"
+msgstr "Interpretations PSI"
+
+msgid "Dashboards app"
+msgstr "Dashboards app"
+
+msgid "dAtaZ"
+msgstr "dAtaZ"
+
+msgid "Usage Analytics"
+msgstr "استفاده انالتیکس"
+
+msgid "Interpretations"
+msgstr "تفسیر"
+
+msgid "Translations"
+msgstr "ترجمه"
+
+msgid "Maintenance"
+msgstr "حفظ و مراقبت"
+
+msgid "Data Administration"
+msgstr "مدیریت اطلاعات"
+
+msgid "interactiveMap"
+msgstr "interactiveMap"
+
+msgid "Maps"
+msgstr "Maps"
+
+msgid "Users"
+msgstr "Users"
+
+msgid "Classic Data Visualizer"
+msgstr "نمایش معلومات"
+
+msgid "WHO Metadata browser"
+msgstr "WHO Metadata browser"
