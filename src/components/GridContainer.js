@@ -2,7 +2,7 @@ import React from 'react'
 import propTypes from 'prop-types'
 import cx from 'classnames'
 
-import styles from './GridContainer.module.css'
+import styles from './GridContainer/styles.module.css'
 
 export const GridContainer = ({ children, layout }) => (
     <div

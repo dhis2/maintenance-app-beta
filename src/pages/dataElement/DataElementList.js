@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { Content } from '../../components/Content'
-import { GridContainer } from '../../components/Grid/GridContainer'
-import { GridContent } from '../../components/Grid/GridContent'
-import { GridSidebar } from '../../components/Grid/GridSidebar'
+import { GridContainer } from '../../components/GridContainer'
+import { GridContent } from '../../components/GridContent'
+import { GridSidebar } from '../../components/GridSidebar'
 import { PageHeadline } from '../../components/PageHeadline'
 import { Sidebar } from '../../components/Sidebar'
 import { createPageComponent } from '../createPageComponent'

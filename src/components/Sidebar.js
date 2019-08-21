@@ -7,9 +7,9 @@ import React from 'react'
 import propTypes from 'prop-types'
 
 import { FolderClosed } from './icons/FolderClosed'
-import { sectionPropType } from './authorization/sectionPropType'
+import { sectionPropType } from './Sidebar/sectionPropType'
 import { SidebarMenuItem } from './Sidebar/SidebarMenuItem'
-import styles from './Sidebar.module.css'
+import styles from './Sidebar/styles.module.css'
 
 const SidebarComponent = ({ sections, location, push }) => {
     const filteredSections = sections.filter(item => {

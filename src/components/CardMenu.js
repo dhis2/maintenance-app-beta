@@ -4,13 +4,12 @@ import React from 'react'
 import { List } from './icons/List'
 import { MenuCard, ActionWrapper } from './MenuCard'
 import { Plus } from './icons/Plus'
-import styles from './CardMenu.module.css'
+import styles from './CardMenu/styles.module.css'
 
 export const CardMenu = ({ sections }) => {
     const filteredSections = sections.filter(item => {
         if (!Array.isArray(item)) return true
 
-        // eslint-disable-next-line no-unused-vars
         const [section, config = {}] = item
         return config.hideInCardMenu !== true
     })

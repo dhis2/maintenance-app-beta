@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { CardMenu } from '../components/CardMenu'
-import { GridContainer } from '../components/Grid/GridContainer'
-import { GridContent } from '../components/Grid/GridContent'
+import { GridContainer } from '../components/GridContainer'
+import { GridContent } from '../components/GridContent'
 import { createPageComponent } from './createPageComponent'
 import { groupOrder } from '../constants/groupOrder'
 import { sectionOrder } from '../constants/sectionOrder'

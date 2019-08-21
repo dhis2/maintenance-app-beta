@@ -3,11 +3,11 @@ import { useDataQuery } from '@dhis2/app-runtime'
 import React from 'react'
 import propTypes from 'prop-types'
 
-import { Error } from '../../pages/Error'
-import { Loading } from '../../pages/Loading'
-import { NoAuthority } from '../../pages/NoAuthority'
-import { hasUserAuthorityForSection } from '../../utils/authority/hasUserAuthorityForSection'
-import { queries } from '../../constants/queries'
+import { Error } from '../pages/Error'
+import { Loading } from '../pages/Loading'
+import { NoAuthority } from '../pages/NoAuthority'
+import { hasUserAuthorityForSection } from '../utils/authority/hasUserAuthorityForSection'
+import { queries } from '../constants/queries'
 
 const determineComponent = ({
     loading,

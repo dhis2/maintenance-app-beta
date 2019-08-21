@@ -1,7 +1,7 @@
 import React from 'react'
 import propTypes from 'prop-types'
 
-import styles from './GridContent.module.css'
+import styles from './GridContent/styles.module.css'
 
 export const GridContent = ({ children }) => (
     <section className={styles.content}>{children}</section>
