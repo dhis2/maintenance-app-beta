@@ -987,10 +987,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-9.0.1.tgz#c27b391d8457d1e893f1eddeaf5e5412d12ffbb5"
   integrity sha512-6It2EVfGskxZCQhuykrfnALg7oVeiI6KclWSmGDqB0AiInVrTGB9Jp9i4/Ad21u9Jde/voVQz6eFX/eSg/UsPA==
 
-"@dhis2/app-runtime@1.4.3":
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/@dhis2/app-runtime/-/app-runtime-1.4.3.tgz#2b67ef45a3f7735bdb61cc10dbeef7da5a98f3eb"
-  integrity sha512-8IhwKaM5LRXA8J/LO3teUUNjp9aksQW42cpl0QzdMs7QthSlVMjkc4k0fL34r0qn0yz3FMbIvTn9Tykjp7+ozg==
+"@dhis2/app-runtime@1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-runtime/-/app-runtime-1.5.0.tgz#1c1c0305295adaa4a727e70bca91781355d646ca"
+  integrity sha512-M44XFy3Px4xtAeJlqeiIayaS57ieNt5wFrj8dkbNpCXIk2hoQaicN9bDuGeTOAofU7OdAjEAc4UCKgOi5G7OPg==
 
 "@dhis2/cli-helpers-engine@1.3.0":
   version "1.3.0"
@@ -1066,10 +1066,10 @@
     classnames "^2.2.6"
     styled-jsx "^3.2.1"
 
-"@dhis2/ui-core@^3.7.1":
-  version "3.7.1"
-  resolved "https://registry.yarnpkg.com/@dhis2/ui-core/-/ui-core-3.7.1.tgz#fe01cb408eee73fe8167173cdc4ce825229f2d43"
-  integrity sha512-lO7ILCf33TC77G5xwpJAdDBtLzBVIu0D4crafVbGafQn5dXZKHoD3eLZYxfau9/jw8819NV0FmuNd5+13Zgabg==
+"@dhis2/ui-core@^3.7.2":
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/@dhis2/ui-core/-/ui-core-3.7.2.tgz#a1229930b1a7700883b7d903fa7c335471e2b153"
+  integrity sha512-xFI33fZvULc8mqjUkCDloVaTAUQyY3FbihHZZ3OoZ3st9dT+CkMQviTiE3pYjzb/WatR+WajxCq+7Ar3lsLRfA==
   dependencies:
     "@dhis2/prop-types" "^1.0.3"
     classnames "^2.2.6"

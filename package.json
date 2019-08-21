@@ -13,11 +13,11 @@
         "prestart": "yarn localize"
     },
     "dependencies": {
-        "@dhis2/app-runtime": "1.4.3",
+        "@dhis2/app-runtime": "1.5.0",
         "@dhis2/d2-i18n": "^1.0.5",
         "@dhis2/d2-i18n-extract": "^1.0.8",
         "@dhis2/d2-i18n-generate": "^1.1.1",
-        "@dhis2/ui-core": "^3.7.1",
+        "@dhis2/ui-core": "^3.7.2",
         "@dhis2/ui-widgets": "1.0.8",
         "connected-react-router": "^6.5.2",
         "d2-manifest": "^1.0.0",
