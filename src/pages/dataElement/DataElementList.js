@@ -1,9 +1,10 @@
 import React from 'react'
 
+import { Container } from '../../components/layout/Container'
+import { Content as ContentLayout } from '../../components/layout/Content'
+import { SideBar as SideBarLayout } from '../../components/layout/SideBar'
+
 import { Content } from '../../components/Content'
-import { GridContainer } from '../../components/GridContainer'
-import { GridContent } from '../../components/GridContent'
-import { GridSidebar } from '../../components/GridSidebar'
 import { PageHeadline } from '../../components/PageHeadline'
 import { Sidebar } from '../../components/Sidebar'
 import { createPageComponent } from '../createPageComponent'
@@ -12,18 +13,18 @@ import { groups } from '../../constants/groups'
 import { sectionOrder } from '../../constants/sectionOrder'
 
 export const DataElementList = createPageComponent(() => (
-    <GridContainer>
-        <GridSidebar>
+    <Container>
+        <SideBarLayout>
             <Sidebar sections={sectionOrder[groups.dataElement.key]} />
-        </GridSidebar>
+        </SideBarLayout>
 
-        <GridContent>
+        <ContentLayout>
             <Content>
                 <PageHeadline>
                     {dataElementSections.dataElement.name}
                 </PageHeadline>
                 <span>Data elements list...</span>
             </Content>
-        </GridContent>
-    </GridContainer>
+        </ContentLayout>
+    </Container>
 ))
