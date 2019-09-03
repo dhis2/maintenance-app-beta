@@ -24,6 +24,11 @@ const useOnClick = (disabled, push, to) =>
         [disabled, to, push]
     )
 
+/**
+ * lodash map will convert objects to arrays
+ * @param {Sections} sections
+ * @returns Permissions
+ */
 const extractStaticPermissions = reduce(
     (staticPermissions, curSection) =>
         curSection.permissions
@@ -34,6 +39,8 @@ const extractStaticPermissions = reduce(
 
 /**
  * lodash map will convert objects to arrays
+ * @param {Object[]} sections
+ * @returns Object
  */
 const createSchemasQuery = sections =>
     map(
@@ -54,6 +61,10 @@ const createSchemasQuery = sections =>
             {}
         )
 
+/**
+ * @param {string[][]}
+ * @returns {Function}
+ */
 const schemasToAuthorities = staticPermissions =>
     pipe(
         map(getAuthoritiesFromSchema),
