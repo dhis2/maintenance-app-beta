@@ -1,4 +1,5 @@
 export const hasAuthority = (requiredAuthorities, givenAuthorities) =>
+    !!givenAuthorities.find(authority => authority === 'ALL') ||
     requiredAuthorities.reduce(
         (authorized, requiredAuthority) =>
             authorized ||
