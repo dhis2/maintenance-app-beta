@@ -1,5 +1,25 @@
 import i18n from '@dhis2/d2-i18n'
 
+/**
+ * @typedef {string[][]} Permissions
+ */
+
+/**
+ * @typedef {Object} Section
+ * @property {string} name
+ * @property {string} path
+ * @property {string} description
+ * @property {string} [schemaName]
+ * @property {Permissions} [permissions]
+ */
+
+/**
+ * @typedef {Object.<string, Section>} Sections
+ */
+
+/**
+ * @type Sections
+ */
 export const categorySections = {
     categoryOption: {
         name: 'Category option',
