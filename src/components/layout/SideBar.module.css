@@ -1,3 +1,4 @@
 .sideBar {
+    padding: 0 8px;
     grid-area: sidebar;
 }
