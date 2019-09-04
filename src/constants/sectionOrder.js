@@ -10,8 +10,17 @@ import {
 } from './sections'
 
 /**
- * A single section can be either just a section or:
- * [ section, { hideInCardMenu: boolean; hideInSideBar: boolean; } ]
+ * @typedef {Object} SectionConfig
+ * @property {boolean} [hideInCardMenu]
+ * @property {boolean} [hideInSideBar]
+ */
+
+/**
+ * @typedef {[ Section, SectionConfig ]} SectionWithConfig
+ */
+
+/**
+ * @type {Object.<string, (Section|SectionWithConfig)[]>}
  */
 export const sectionOrder = {
     category: [

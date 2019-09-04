@@ -3,11 +3,10 @@ import React from 'react'
 import { CardMenu } from '../components/CardMenu'
 import { Container } from '../components/layout/Container'
 import { Content } from '../components/layout/Content'
-import { createPageComponent } from './createPageComponent'
 import { groupOrder } from '../constants/groupOrder'
 import { sectionOrder } from '../constants/sectionOrder'
 
-export const All = createPageComponent(() => (
+export const All = () => (
     <Container>
         <Content>
             {groupOrder.map(group => (
@@ -18,4 +17,4 @@ export const All = createPageComponent(() => (
             ))}
         </Content>
     </Container>
-))
+)

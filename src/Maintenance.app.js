@@ -5,6 +5,7 @@ import React from 'react'
 
 import { All } from './pages/All'
 import { DataElementList } from './pages/dataElement/DataElementList'
+import { Navigation } from './components/Navigation'
 import { Overview } from './pages/Overview'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { RedirectToOld } from './pages/RedirectToOld'
@@ -18,6 +19,8 @@ export const Maintenance = () => (
     <div className={styles.maintenanceApp}>
         <Provider store={store}>
             <ConnectedRouter history={history}>
+                <Route path="/" component={Navigation} />
+
                 <Switch>
                     {
                         /**

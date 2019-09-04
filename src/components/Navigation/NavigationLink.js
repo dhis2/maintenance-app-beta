@@ -47,7 +47,7 @@ const createSchemaResourceUrl = schemaName =>
 
 /**
  * lodash map will convert objects to arrays
- * @param {Object[]} sections
+ * @param {Sections} sections
  * @returns Object
  */
 const createSchemasQuery = pipe(
@@ -77,18 +77,35 @@ const schemasToAuthorities = staticPermissions =>
         concat(staticPermissions)
     )
 
+/**
+ * @typedef {Object} AuthorityConfig
+ * @property {bool} loading
+ * @property {string} error
+ * @property {number} hasAuthority
+ */
+
+/**
+ * @returns {AuthorityConfig}
+ */
 const getAuthorityNotDetermined = () => ({
     loading: true,
     error: '',
     hasAuthority: AUTHORITY_NOT_DETERMINED,
 })
 
+/**
+ * @param {string} error
+ * @returns {AuthorityConfig}
+ */
 const getHasNoAuthorityConfig = (error = '') => ({
     loading: false,
     error,
     hasAuthority: HAS_NO_AUTHORITY,
 })
 
+/**
+ * @returns {AuthorityConfig}
+ */
 const getHasAuthorityConfig = () => ({
     loading: false,
     error: '',
@@ -102,8 +119,8 @@ const defaultQuery = {
 
 /**
  * @param {bool} noAuth
- * @param {Object} group
- * @returns {Object}
+ * @param {Group} group
+ * @returns {AuthorityConfig}
  */
 const useHasAuthority = (noAuth, group) => {
     const query = {

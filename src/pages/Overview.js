@@ -7,9 +7,8 @@ import { Content } from '../components/Content'
 import { Sidebar } from '../components/Sidebar'
 import { CardMenu } from '../components/CardMenu'
 import { sectionOrder } from '../constants/sectionOrder'
-import { createPageComponent } from './createPageComponent'
 
-export const Overview = createPageComponent(({ name, match }) => {
+export const Overview = ({ name, match }) => {
     const { group } = match.params
     const sections = sectionOrder[group] || []
 
@@ -26,4 +25,4 @@ export const Overview = createPageComponent(({ name, match }) => {
             </ContentLayout>
         </Container>
     )
-})
+}

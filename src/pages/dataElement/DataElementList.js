@@ -7,12 +7,11 @@ import { SideBar as SideBarLayout } from '../../components/layout/SideBar'
 import { Content } from '../../components/Content'
 import { PageHeadline } from '../../components/PageHeadline'
 import { Sidebar } from '../../components/Sidebar'
-import { createPageComponent } from '../createPageComponent'
 import { dataElementSections } from '../../constants/sections'
 import { groups } from '../../constants/groups'
 import { sectionOrder } from '../../constants/sectionOrder'
 
-export const DataElementList = createPageComponent(() => (
+export const DataElementList = () => (
     <Container>
         <SideBarLayout>
             <Sidebar sections={sectionOrder[groups.dataElement.key]} />
@@ -27,4 +26,4 @@ export const DataElementList = createPageComponent(() => (
             </Content>
         </ContentLayout>
     </Container>
-))
+)
