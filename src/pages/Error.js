@@ -1,3 +1,12 @@
 import React from 'react'
 
-export const Error = ({ error }) => <div>{`Error: ${error.message}`}</div>
+import { Container } from '../components/layout/Container'
+import { Content } from '../components/layout/Content'
+
+export const Error = ({ error }) => (
+    <Container>
+        <Content>
+            <div>{`Error: ${error.message}`}</div>
+        </Content>
+    </Container>
+)
