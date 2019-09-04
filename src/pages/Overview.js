@@ -13,7 +13,7 @@ export const Overview = ({ name, match }) => {
     const sections = sectionOrder[group] || []
 
     return (
-        <Container layout="contentWithSidebar">
+        <Container>
             <SideBarLayout>
                 <Sidebar sections={sections} />
             </SideBarLayout>
