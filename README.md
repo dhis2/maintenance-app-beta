@@ -13,9 +13,14 @@ Here's a list of what needs to be done in order to start working on the sections
   - [x] Navigation
   - [x] Sidebar
   - [x] Content container
+  - [ ] Meaningful `Loading` page component
+  - [ ] Meaningful `Error` page component
+  - [ ] Meaningful `NoAuthority` page component
 - [x] Redirect non-existing pages to the old app
 - [x] Setup translation
 - [x] Add non-English translations
+- [x] Add dynamic overview pages
+- [x] Organize which sections are displayed in sidebars and overview pages
 
 ## Developing
 
