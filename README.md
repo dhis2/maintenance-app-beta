@@ -15,7 +15,7 @@ Here's a list of what needs to be done in order to start working on the sections
   - [x] Content container
 - [x] Redirect non-existing pages to the old app
 - [x] Setup translation
-- [ ] Add non-English translations
+- [x] Add non-English translations
 
 ## Developing
 
