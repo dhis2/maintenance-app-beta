@@ -22,24 +22,28 @@ export const ProtectedRoute = ({ permissions, schemaName, ...props }) => {
           }
         : defaultQuery
 
-    const { loading, error, data } = useDataQuery(query)
+    const { loading, error, data = {} } = useDataQuery(query)
+
+    if (loading) {
+        return <Route {...props} component={Loading} />
+    }
+
+    if (error) {
+        return <Route {...props} component={Error} />
+    }
 
     const userHasAuthorityForSection = hasUserAuthorityForSection({
         permissions,
-        authorities: data.authorities,
-        systemSettings: data.systemSettings,
-        schema: data.schema,
+        authorities: data.authorities || {},
+        systemSettings: data.systemSettings || {},
+        schema: data.schema || {},
     })
 
-    const component = loading
-        ? Loading
-        : error
-        ? Error
-        : userHasAuthorityForSection
-        ? props.component
-        : NoAuthority
+    if (userHasAuthorityForSection) {
+        return <Route {...props} component={props.component} />
+    }
 
-    return <Route {...props} component={component} />
+    return <Route {...props} component={NoAuthority} />
 }
 
 ProtectedRoute.propTypes = {

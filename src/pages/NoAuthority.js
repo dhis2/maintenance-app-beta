@@ -1,5 +1,8 @@
 import React from 'react'
 
+import { Container } from '../components/layout/Container'
+import { Content } from '../components/layout/Content'
+
 export const NoAuthority = () => (
     <Container>
         <Content>
