@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 
 import { List } from '../icons/List'
-import { MenuCard, ActionWrapper } from '../MenuCard'
+import { MenuCard, ActionWrapper } from '../MenuCard/MenuCard'
 import { Plus } from '../icons/Plus'
 import styles from './styles.module.css'
 

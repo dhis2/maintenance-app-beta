@@ -2,7 +2,7 @@ import { Card } from '@dhis2/ui-core'
 import React from 'react'
 import propTypes from 'prop-types'
 
-import styles from './MenuCard/styles.module.css'
+import styles from './styles.module.css'
 
 export const MenuCard = ({ headline, content, children }) => (
     <div className={styles.container}>
