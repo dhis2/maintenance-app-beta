@@ -6,7 +6,7 @@ import { SideBar as SideBarLayout } from '../../modules/layout/SideBar'
 
 import { MainContent } from '../../modules/ContentWrappers/MainContent'
 import { Sidebar } from '../../modules/ContentWrappers/Sidebar'
-import { PageHeadline } from '../../modules/PageHeadline'
+import { PageHeadline } from '../../modules/PageHeadline/PageHeadline'
 import { dataElementSections } from '../../constants/sections'
 import { groups } from '../../constants/groups'
 import { sectionOrder } from '../../constants/sectionOrder'
