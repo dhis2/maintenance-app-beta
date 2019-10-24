@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Container } from '../components/layout/Container'
-import { Content } from '../components/layout/Content'
+import { Container } from '../modules/layout/Container'
+import { Content } from '../modules/layout/Content'
 
 export const Error = ({ error }) => (
     <Container>

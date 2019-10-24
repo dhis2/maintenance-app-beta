@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { Container } from '../components/layout/Container'
-import { Content as ContentLayout } from '../components/layout/Content'
-import { SideBar as SideBarLayout } from '../components/layout/SideBar'
-import { Content } from '../components/Content'
-import { Sidebar } from '../components/Sidebar'
-import { CardMenu } from '../components/CardMenu'
+import { Container } from '../modules/layout/Container'
+import { Content as ContentLayout } from '../modules/layout/Content'
+import { SideBar as SideBarLayout } from '../modules/layout/SideBar'
+import { Content } from '../modules/Content'
+import { Sidebar } from '../modules/Sidebar'
+import { CardMenu } from '../modules/CardMenu'
 import { sectionOrder } from '../constants/sectionOrder'
 
 export const Overview = ({ name, match }) => {
