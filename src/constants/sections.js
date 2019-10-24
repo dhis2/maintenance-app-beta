@@ -11,6 +11,8 @@ import i18n from '@dhis2/d2-i18n'
  * @property {string} description
  * @property {string} [schemaName]
  * @property {Permissions} [permissions]
+ * @property {boolean} [hideInCardMenu]
+ * @property {boolean} [hideInSideBar]
  */
 
 /**
@@ -203,6 +205,7 @@ export const organisationUnitSections = {
         name: 'Hierarchy options',
         path: '/list/organisationUnitSection/hierarchy',
         description: i18n.t(''),
+        hideInCardMenu: true,
     },
 }
 

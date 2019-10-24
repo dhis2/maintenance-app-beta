@@ -12,21 +12,14 @@ import { SidebarMenuItem } from './Sidebar/SidebarMenuItem'
 import styles from './Sidebar/styles.module.css'
 
 const SidebarComponent = ({ sections, location, push }) => {
-    const filteredSections = sections.filter(item => {
-        if (!Array.isArray(item)) return true
-
-        const [section, config = {}] = item
-        return config.hideInSideBar !== true
-    })
-
-    const formattedSections = filteredSections.map(item =>
-        !Array.isArray(item) ? item : item[0]
+    const filteredSections = sections.filter(
+        section => section.hideInSideBar !== true
     )
 
     return (
         <div className={styles.container}>
             <MenuList>
-                {formattedSections.map(
+                {filteredSections.map(
                     ({ name, path, permissions, schemaName }) => (
                         <SidebarMenuItem
                             key={name}

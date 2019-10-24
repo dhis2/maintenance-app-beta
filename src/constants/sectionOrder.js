@@ -10,17 +10,7 @@ import {
 } from './sections'
 
 /**
- * @typedef {Object} SectionConfig
- * @property {boolean} [hideInCardMenu]
- * @property {boolean} [hideInSideBar]
- */
-
-/**
- * @typedef {[ Section, SectionConfig ]} SectionWithConfig
- */
-
-/**
- * @type {Object.<string, (Section|SectionWithConfig)[]>}
+ * @type {Object.<Section[]>}
  */
 export const sectionOrder = {
     category: [
@@ -50,7 +40,7 @@ export const sectionOrder = {
         organisationUnitSections.organisationUnitGroup,
         organisationUnitSections.organisationUnitGroupSet,
         organisationUnitSections.organisationUnitLevel,
-        [organisationUnitSections.hierarchyOption, { hideInCardMenu: true }],
+        organisationUnitSections.hierarchyOption,
     ],
     program: [
         programSections.program,
