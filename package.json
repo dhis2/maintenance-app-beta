@@ -14,7 +14,7 @@
     },
     "dependencies": {
         "@dhis2/app-runtime": "1.5.1",
-        "@dhis2/d2-i18n": "^1.0.5",
+        "@dhis2/d2-i18n": "^1.0.6",
         "@dhis2/d2-i18n-extract": "^1.0.8",
         "@dhis2/d2-i18n-generate": "^1.1.1",
         "@dhis2/ui-core": "^3.12.0",
