@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CardMenu } from '../modules/CardMenu'
+import { CardMenu } from '../modules/CardMenu/CardMenu'
 import { Container } from '../modules/layout/Container'
 import { Content } from '../modules/layout/Content'
 import { groupOrder } from '../constants/groupOrder'
