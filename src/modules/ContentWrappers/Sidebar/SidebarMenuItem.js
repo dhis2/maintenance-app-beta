@@ -3,9 +3,9 @@ import { useDataQuery } from '@dhis2/app-runtime'
 import React from 'react'
 import propTypes from 'prop-types'
 
-import { getAuthoritiesFromSchema } from '../../utils/authority/getAuthoritiesFromSchema'
-import { hasAuthority } from '../../utils/authority/hasAuthority'
-import { queries } from '../../constants/queries'
+import { getAuthoritiesFromSchema } from '../../../utils/authority/getAuthoritiesFromSchema'
+import { hasAuthority } from '../../../utils/authority/hasAuthority'
+import { queries } from '../../../constants/queries'
 
 export const SidebarMenuItem = ({ schemaName, permissions, ...props }) => {
     const hasStaticPermissions = !!permissions.length
