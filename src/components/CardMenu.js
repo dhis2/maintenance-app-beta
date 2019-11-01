@@ -7,21 +7,14 @@ import { Plus } from './icons/Plus'
 import styles from './CardMenu/styles.module.css'
 
 export const CardMenu = ({ sections }) => {
-    const filteredSections = sections.filter(item => {
-        if (!Array.isArray(item)) return true
-
-        const [section, config = {}] = item
-        return config.hideInCardMenu !== true
-    })
-
-    const formattedSections = filteredSections.map(item =>
-        !Array.isArray(item) ? item : item[0]
+    const filteredSections = sections.filter(
+        section => section.hideInCardMenu !== true
     )
 
     return (
         <div className={styles.container}>
             <div className={styles.sectionsWrapper}>
-                {formattedSections.map(section => (
+                {filteredSections.map(section => (
                     <MenuCard
                         key={section.name}
                         headline={section.name}
