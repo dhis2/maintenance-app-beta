@@ -5,7 +5,7 @@ import React from 'react'
 import cx from 'classnames'
 
 import { NavigationLink } from './NavigationLink'
-import { groupOrder } from '../../constants/groupOrder'
+import { groupOrder } from '../../config/groupOrder'
 
 const NavigationComponent = ({ disabled }) => {
     return (

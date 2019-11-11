@@ -7,9 +7,9 @@ import { SideBar as SideBarLayout } from '../../modules/layout/SideBar'
 import { MainContent } from '../../modules/ContentWrappers/MainContent'
 import { Sidebar } from '../../modules/ContentWrappers/Sidebar'
 import { PageHeadline } from '../../modules/PageHeadline/PageHeadline'
-import { dataElementSections } from '../../constants/sections'
-import { groups } from '../../constants/groups'
-import { sectionOrder } from '../../constants/sectionOrder'
+import { dataElementSections } from '../../config/sections'
+import { groups } from '../../config/groups'
+import { sectionOrder } from '../../config/sectionOrder'
 
 export const DataElementList = () => (
     <Container>

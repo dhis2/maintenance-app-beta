@@ -5,7 +5,7 @@ import propTypes from 'prop-types'
 
 import { getAuthoritiesFromSchema } from '../../../utils/authority/getAuthoritiesFromSchema'
 import { hasAuthority } from '../../../utils/authority/hasAuthority'
-import { queries } from '../../../constants/queries'
+import { queries } from '../../../config/queries'
 
 export const SidebarMenuItem = ({ schemaName, permissions, ...props }) => {
     const hasStaticPermissions = !!permissions.length

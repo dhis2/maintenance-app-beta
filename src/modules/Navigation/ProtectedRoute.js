@@ -7,7 +7,7 @@ import { Error } from '../../pages/Error'
 import { Loading } from '../../pages/Loading'
 import { NoAuthority } from '../../pages/NoAuthority'
 import { hasUserAuthorityForSection } from '../../utils/authority/hasUserAuthorityForSection'
-import { queries } from '../../constants/queries'
+import { queries } from '../../config/queries'
 
 const defaultQuery = {
     authorities: queries.authorities,
