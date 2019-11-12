@@ -5,12 +5,12 @@ import React from 'react'
 
 import { All } from './pages/All'
 import { DataElementList } from './pages/dataElement/DataElementList'
-import { Navigation } from './components/Navigation'
+import { Navigation } from './modules/Navigation/Navigation'
 import { Overview } from './pages/Overview'
-import { ProtectedRoute } from './components/ProtectedRoute'
+import { ProtectedRoute } from './modules/Navigation/ProtectedRoute'
 import { RedirectToOld } from './pages/RedirectToOld'
 import { configureStore, history } from './redux/configureStore'
-import { dataElementSections } from './constants/sections'
+import { dataElementSections } from './config/sections'
 import styles from './Maintenance.module.css'
 
 const store = configureStore()

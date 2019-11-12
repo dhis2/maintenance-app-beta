@@ -9,7 +9,7 @@ import i18n from '@dhis2/d2-i18n'
 
 import { getAuthoritiesFromSchema } from '../../utils/authority/getAuthoritiesFromSchema'
 import { hasAuthority } from '../../utils/authority/hasAuthority'
-import { queries } from '../../constants/queries'
+import { queries } from '../../config/queries'
 
 const AUTHORITY_NOT_DETERMINED = -1
 const HAS_NO_AUTHORITY = 0

@@ -4,8 +4,8 @@ import React from 'react'
 
 import cx from 'classnames'
 
-import { NavigationLink } from './Navigation/NavigationLink'
-import { groupOrder } from '../constants/groupOrder'
+import { NavigationLink } from './NavigationLink'
+import { groupOrder } from '../../config/groupOrder'
 
 const NavigationComponent = ({ disabled }) => {
     return (

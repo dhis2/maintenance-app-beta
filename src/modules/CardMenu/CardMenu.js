@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import React from 'react'
 
-import { List } from './icons/List'
-import { MenuCard, ActionWrapper } from './MenuCard'
-import { Plus } from './icons/Plus'
-import styles from './CardMenu/styles.module.css'
+import { List } from '../icons/List'
+import { MenuCard, ActionWrapper } from '../MenuCard/MenuCard'
+import { Plus } from '../icons/Plus'
+import styles from './CardMenu.module.css'
 
 export const CardMenu = ({ sections }) => {
     const filteredSections = sections.filter(
