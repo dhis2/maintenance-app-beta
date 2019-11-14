@@ -8,7 +8,7 @@ import { Sidebar } from '../modules/ContentWrappers/Sidebar'
 import { CardMenu } from '../modules/CardMenu/CardMenu'
 import { sectionOrder } from '../config/sectionOrder'
 
-export const Overview = ({ name, match }) => {
+export const Overview = ({ match }) => {
     const { group } = match.params
     const sections = sectionOrder[group] || []
 
