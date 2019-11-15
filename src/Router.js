@@ -25,18 +25,19 @@ export const Router = () => {
     const appError = useSelector(getAppDataError)
 
     useEffect(() => {
-        if (!appLoading && !appReady) {
+        if (!appLoading && !appReady && !appError) {
             dispatch(loadAppData())
         }
-    }, [appLoading, appReady, dispatch])
+    }, [appLoading, appReady, appError, dispatch])
 
     if (appError) {
-        return <Error />
+        return <Error error={appError} />
     }
 
     if (!appReady) {
         return <Loading />
     }
+
     return (
         <BrowserRouter>
             <Route path="/" component={Navigation} />
