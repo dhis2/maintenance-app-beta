@@ -47,7 +47,7 @@ export const loadSchemas = () => (dispatch, getState, { engine }) => {
                 return formatted
             }, {})
 
-            dispatch(setSchemas(formattedSchemas))
+            return dispatch(setSchemas(formattedSchemas))
         })
         .catch(error => dispatch(loadingSchemasError(error)))
 }
