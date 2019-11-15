@@ -6,7 +6,7 @@ import propTypes from 'prop-types'
 import { getAuthoritiesFromSchema } from '../../../utils/authority/getAuthoritiesFromSchema'
 import { getSchemasData } from '../../../redux/schemas'
 import { getUserAuthoritiesData } from '../../../redux/userAuthority'
-import { hasAuthority } from '../../../utils/authority/hasAuthority'
+import { checkAuthorities } from '../../../utils/authority/checkAuthorities'
 
 export const SidebarMenuItem = ({ schemaName, permissions, ...props }) => {
     const hasStaticPermissions = !!permissions.length
@@ -19,7 +19,7 @@ export const SidebarMenuItem = ({ schemaName, permissions, ...props }) => {
         ...(hasStaticPermissions ? [] : getAuthoritiesFromSchema(schema)),
     ]
 
-    if (!hasAuthority(authorities, userAuthorities)) return null
+    if (!checkAuthorities(authorities, userAuthorities)) return null
 
     return <MenuItem {...props} />
 }

@@ -1,18 +1,14 @@
 import { Tab } from '@dhis2/ui-core'
-import { concat, flatten, map, pipe, reduce } from 'lodash/fp'
+import { identity } from 'lodash/fp'
 import { useSelector } from 'react-redux'
-import React, { useCallback } from 'react'
-
 import { withRouter } from 'react-router'
+import React, { useCallback } from 'react'
 
 import { getAuthoritiesFromSchema } from '../../utils/authority/getAuthoritiesFromSchema'
 import { getSchemasData } from '../../redux/schemas'
 import { getSystemSettingsData } from '../../redux/systemSettings'
 import { getUserAuthoritiesData } from '../../redux/userAuthority'
-import { hasAuthority } from '../../utils/authority/hasAuthority'
-
-const HAS_NO_AUTHORITY = 0
-const HAS_AUTHORITY = 1
+import { checkAuthorities } from '../../utils/authority/checkAuthorities'
 
 const useOnClick = (disabled, goToPath, to) =>
     useCallback(
@@ -23,55 +19,37 @@ const useOnClick = (disabled, goToPath, to) =>
     )
 
 /**
- * lodash map will convert objects to arrays
- * @param {Sections} sections
- * @returns Permissions
- */
-const extractStaticPermissions = reduce(
-    (staticPermissions, curSection) =>
-        curSection.permissions
-            ? [...staticPermissions, ...curSection.permissions]
-            : staticPermissions,
-    []
-)
-
-/**
- * @param {string[][]}
- * @returns {Function}
- */
-const schemasToAuthorities = staticPermissions =>
-    pipe(
-        map(getAuthoritiesFromSchema),
-        flatten,
-        concat(staticPermissions)
-    )
-
-/**
  * @param {bool} noAuth
  * @param {Group} group
  * @returns {AuthorityConfig}
  */
-const useHasAuthority = ({
+const checkUserHasAuthorities = ({
     noAuth,
     group,
     schemas,
     systemSettings,
     userAuthorities,
 }) => {
-    if (noAuth) return HAS_AUTHORITY
+    if (noAuth || !systemSettings.keyRequireAddToView) return true
 
-    if (systemSettings.keyRequireAddToView) {
-        const staticPermissions = extractStaticPermissions(group.sections)
-        const requiredAuthorities = schemasToAuthorities(staticPermissions)(
-            schemas
-        )
+    const groupAuthorities = Object.entries(group.sections)
+        .map(([key, { permissions, schemaName }]) => {
+            // Static permissions in config files
+            if (permissions) return permissions
 
-        if (!hasAuthority(requiredAuthorities, userAuthorities)) {
-            return HAS_NO_AUTHORITY
-        }
-    }
+            // If there are no static permissions extract them from the schemas
+            if (schemas[schemaName])
+                return getAuthoritiesFromSchema(schemas[schemaName])
 
-    return HAS_AUTHORITY
+            // just in case there's no schema defined, should never happen theoretically
+            return null
+        })
+        .filter(identity)
+
+    // User has authority for group if he has authority for any section inside
+    return groupAuthorities.some(sectionAuthorities =>
+        checkAuthorities(sectionAuthorities, userAuthorities)
+    )
 }
 
 const NavigationLinkComponent = ({
@@ -89,7 +67,7 @@ const NavigationLinkComponent = ({
     const schemas = useSelector(getSchemasData)
     const userAuthorities = useSelector(getUserAuthoritiesData)
     const systemSettings = useSelector(getSystemSettingsData)
-    const hasAuthority = useHasAuthority({
+    const hasAuthority = checkUserHasAuthorities({
         noAuth,
         group,
         schemas,
