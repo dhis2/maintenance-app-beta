@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-10-24T05:08:59.117Z\n"
-"PO-Revision-Date: 2019-10-24T05:08:59.117Z\n"
+"POT-Creation-Date: 2019-11-15T11:26:02.521Z\n"
+"PO-Revision-Date: 2019-11-15T11:26:02.521Z\n"
 
 msgid ""
 "Create, modify, view and delete data element category options. Category "
@@ -203,5 +203,11 @@ msgid ""
 "tables to provide convenient views for third-party tools."
 msgstr ""
 
-msgid "Checking %s"
+msgid "You don't have permission to access this app"
+msgstr ""
+
+msgid "The group you're trying to access does not exist"
+msgstr ""
+
+msgid "You don't have the permissions to view this page"
 msgstr ""
