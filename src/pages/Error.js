@@ -6,7 +6,7 @@ import { Content } from '../modules/layout/Content'
 export const Error = ({ error }) => (
     <Container>
         <Content>
-            <div>{`Error: ${error.message}`}</div>
+            <div>{`Error: ${error}`}</div>
         </Content>
     </Container>
 )

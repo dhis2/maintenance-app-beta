@@ -1,37 +1,25 @@
 import { MenuItem } from '@dhis2/ui-core'
-import { useDataQuery } from '@dhis2/app-runtime'
+import { useSelector } from 'react-redux'
 import React from 'react'
 import propTypes from 'prop-types'
 
 import { getAuthoritiesFromSchema } from '../../../utils/authority/getAuthoritiesFromSchema'
-import { hasAuthority } from '../../../utils/authority/hasAuthority'
-import { queries } from '../../../config/queries'
+import { getSchemasData } from '../../../redux/schemas'
+import { getUserAuthoritiesData } from '../../../redux/userAuthority'
+import { checkAuthorities } from '../../../utils/authority/checkAuthorities'
 
 export const SidebarMenuItem = ({ schemaName, permissions, ...props }) => {
     const hasStaticPermissions = !!permissions.length
-    const { loading, error, data } = useDataQuery({
-        userAuthorities: queries.authorities,
-        ...(hasStaticPermissions
-            ? {}
-            : {
-                  schema: {
-                      resource: `schemas/${schemaName}.json?fields=authorities`,
-                  },
-              }),
-    })
-
-    if (loading) return null
-    if (error) {
-        console.error(error)
-        return null
-    }
+    const userAuthorities = useSelector(getUserAuthoritiesData)
+    const schemas = useSelector(getSchemasData)
+    const schema = schemas[schemaName]
 
     const authorities = [
         ...permissions,
-        ...(hasStaticPermissions ? [] : getAuthoritiesFromSchema(data.schema)),
+        ...(hasStaticPermissions ? [] : getAuthoritiesFromSchema(schema)),
     ]
 
-    if (!hasAuthority(authorities, data.userAuthorities)) return null
+    if (!checkAuthorities(authorities, userAuthorities)) return null
 
     return <MenuItem {...props} />
 }

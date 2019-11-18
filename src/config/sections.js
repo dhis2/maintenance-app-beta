@@ -29,7 +29,7 @@ export const categorySections = {
         description: i18n.t(
             'Create, modify, view and delete data element category options. Category options are options with in category.'
         ),
-        schemaName: 'categoryOption',
+        schemaName: 'categoryOptions',
     },
     category: {
         name: 'Category',
@@ -37,7 +37,7 @@ export const categorySections = {
         description: i18n.t(
             'Create, modify, view and delete data element categories. Categories are used for disaggregation of data elements.'
         ),
-        schemaName: 'category',
+        schemaName: 'categories',
     },
     categoryCombo: {
         name: 'Category combination',
@@ -45,7 +45,7 @@ export const categorySections = {
         description: i18n.t(
             'msgid "Create, modify, view and delete data element category combinations.'
         ),
-        schemaName: 'categoryCombo',
+        schemaName: 'categoryCombos',
     },
     categoryOptionCombo: {
         name: 'Category option combination',
@@ -53,7 +53,7 @@ export const categorySections = {
         description: i18n.t(
             'View and edit data element category option combinations. Category option combinations are break-downs of category.'
         ),
-        schemaName: 'categoryOptionCombo',
+        schemaName: 'categoryOptionCombos',
     },
     categoryOptionGroup: {
         name: 'Category option group',
@@ -61,7 +61,7 @@ export const categorySections = {
         description: i18n.t(
             'Create, modify, view and delete category option groups, which can be used to classify category options.'
         ),
-        schemaName: 'categoryOptionGroup',
+        schemaName: 'categoryOptionGroups',
     },
     categoryOptionGroupSet: {
         name: 'Category option group set',
@@ -69,7 +69,7 @@ export const categorySections = {
         description: i18n.t(
             'Create, modify, view and delete category option group sets, which can be used for improved data analysis.'
         ),
-        schemaName: 'categoryOptionGroupSet',
+        schemaName: 'categoryOptionGroupSets',
     },
 }
 
@@ -80,7 +80,7 @@ export const dataElementSections = {
         description: i18n.t(
             'Create, modify, view and delete data elements. Data elements are phenomena for which will be captured and analyzed.'
         ),
-        schemaName: 'dataElement',
+        schemaName: 'dataElements',
     },
     dataElementGroup: {
         name: 'Data element group',
@@ -88,7 +88,7 @@ export const dataElementSections = {
         description: i18n.t(
             'Create, modify, view and delete data element groups. Groups are used for improved analysis.'
         ),
-        schemaName: 'dataElementGroup',
+        schemaName: 'dataElementGroups',
     },
     dataElementGroupSet: {
         name: 'Data element group set',
@@ -96,7 +96,7 @@ export const dataElementSections = {
         description: i18n.t(
             'Create, modify, view and delete data element group sets. Group sets are used for improved analysis.'
         ),
-        schemaName: 'dataElementGroupSet',
+        schemaName: 'dataElementGroupSets',
     },
 }
 
@@ -107,7 +107,7 @@ export const dataSetSections = {
         description: i18n.t(
             'Create, update, view and delete data sets and custom forms. A data set is a collection of data elements for which data is entered.'
         ),
-        schemaName: 'dataSet',
+        schemaName: 'dataSets',
     },
     dataSetNotification: {
         name: 'Data set notifications',
@@ -115,7 +115,7 @@ export const dataSetSections = {
         description: i18n.t(
             'Create, update, view, and delete data set notifications.'
         ),
-        schemaName: 'dataSetNotificationTemplate',
+        schemaName: 'dataSetNotificationTemplates',
     },
 }
 
@@ -126,7 +126,7 @@ export const indicatorSections = {
         description: i18n.t(
             'Create, modify, view and delete indicators. An indicator is a formula consisting of data elements and numbers.'
         ),
-        schemaName: 'indicator',
+        schemaName: 'indicators',
     },
     indicatorType: {
         name: 'Indicator type',
@@ -134,7 +134,7 @@ export const indicatorSections = {
         description: i18n.t(
             'Create, modify, view and delete indicator types. An indicator type is a factor for an indicator, like percentage.'
         ),
-        schemaName: 'indicatorType',
+        schemaName: 'indicatorTypes',
     },
     indicatorGroup: {
         name: 'Indicator group',
@@ -142,7 +142,7 @@ export const indicatorSections = {
         description: i18n.t(
             'Create, modify, view and delete indicator groups. Groups are used for improved analysis.'
         ),
-        schemaName: 'indicatorGroup',
+        schemaName: 'indicatorGroups',
     },
     indicatorGroupSet: {
         name: 'Indicator group set',
@@ -150,7 +150,7 @@ export const indicatorSections = {
         description: i18n.t(
             'Create, modify, view and delete indicator group sets. Group sets are used for improved analysis.'
         ),
-        schemaName: 'indicatorGroupSet',
+        schemaName: 'indicatorGroupSets',
     },
     programIndicator: {
         name: 'Program indicator',
@@ -158,13 +158,13 @@ export const indicatorSections = {
         description: i18n.t(
             'Expressions based on data elements and attributes of tracked entities. You use program indicators to calculate values based on a formula.'
         ),
-        schemaName: 'programIndicator',
+        schemaName: 'programIndicators',
     },
     programIndicatorGroup: {
         name: 'Program indicator group',
         path: '/list/indicatorSection/programIndicatorGroup',
         description: i18n.t('Group program indicators, even across programs.'),
-        schemaName: 'programIndicatorGroup',
+        schemaName: 'programIndicatorGroups',
     },
 }
 
@@ -175,7 +175,7 @@ export const organisationUnitSections = {
         description: i18n.t(
             'Create, modify, view and delete organisation units, which can be departments, offices, hospitals and clinics.'
         ),
-        schemaName: 'organisationUnit',
+        schemaName: 'organisationUnits',
     },
     organisationUnitGroup: {
         name: 'Organisation unit group',
@@ -183,7 +183,7 @@ export const organisationUnitSections = {
         description: i18n.t(
             'Create, modify, view and delete organisation unit groups. Groups are used for improved analysis.'
         ),
-        schemaName: 'organisationUnitGroup',
+        schemaName: 'organisationUnitGroups',
     },
     organisationUnitGroupSet: {
         name: 'Organisation unit group set',
@@ -191,7 +191,7 @@ export const organisationUnitSections = {
         description: i18n.t(
             'Create, modify, view and delete organisation unit group sets. Group sets are used for improved analysis.'
         ),
-        schemaName: 'organisationUnitGroupSet',
+        schemaName: 'organisationUnitGroupSets',
     },
     organisationUnitLevel: {
         name: 'Organisation unit level',
@@ -199,7 +199,7 @@ export const organisationUnitSections = {
         description: i18n.t(
             'Create, modify, view and delete descriptive names for the organisation unit levels in the system.'
         ),
-        schemaName: 'organisationUnitLevel',
+        schemaName: 'organisationUnitLevels',
     },
     hierarchyOption: {
         name: 'Hierarchy options',
@@ -216,7 +216,7 @@ export const programSections = {
         description: i18n.t(
             '"Create modify and view programs. A program has program stages and defines which actions should be taken at each stage.'
         ),
-        schemaName: 'program',
+        schemaName: 'programs',
     },
     trackedEntityAttribute: {
         name: 'Tracked entity attribute',
@@ -224,7 +224,7 @@ export const programSections = {
         description: i18n.t(
             'Create, modify and view program attributes. A program can have any number of attributes.'
         ),
-        schemaName: 'trackedEntityAttribute',
+        schemaName: 'trackedEntityAttributes',
     },
     trackedEntityType: {
         name: 'Tracked entity type',
@@ -232,7 +232,7 @@ export const programSections = {
         description: i18n.t(
             'Define types of entities which can be tracked through the system, which can be anything from persons to commodities.'
         ),
-        schemaName: 'trackedEntityType',
+        schemaName: 'trackedEntityTypes',
     },
     relationshipType: {
         name: 'Relationship type',
@@ -240,7 +240,7 @@ export const programSections = {
         description: i18n.t(
             'Create, modify and view relationship types. A relationship is typically wife and husband or mother and child.'
         ),
-        schemaName: 'relationshipType',
+        schemaName: 'relationshipTypes',
     },
     programRule: {
         name: 'Program rule',
@@ -248,7 +248,7 @@ export const programSections = {
         description: i18n.t(
             'Program rules allow you to create and control dynamic behavior of the user interface in the Tracker Capture and Event Capture apps.'
         ),
-        schemaName: 'programRule',
+        schemaName: 'programRules',
     },
     programRuleVariable: {
         name: 'Program rule variable',
@@ -256,7 +256,7 @@ export const programSections = {
         description: i18n.t(
             'Variables you use to create program rule expressions.'
         ),
-        schemaName: 'programRuleVariable',
+        schemaName: 'programRuleVariables',
     },
 }
 
@@ -267,7 +267,7 @@ export const validationSections = {
         description: i18n.t(
             'Add, modify, view and delete validation rules. Anomalies can be discovered by running validation rules against the data.'
         ),
-        schemaName: 'validationRule',
+        schemaName: 'validationRules',
     },
     validationRuleGroup: {
         name: 'Validation rule group',
@@ -275,7 +275,7 @@ export const validationSections = {
         description: i18n.t(
             'Add, modify, view and delete validation rule groups. Provides the ability to group and run validation rules together.'
         ),
-        schemaName: 'validationRuleGroup',
+        schemaName: 'validationRuleGroups',
     },
     validationNotification: {
         name: 'Validation notification',
@@ -283,7 +283,7 @@ export const validationSections = {
         description: i18n.t(
             'Sends a notification when a validation rule failed'
         ),
-        schemaName: 'validationNotificationTemplate',
+        schemaName: 'validationNotificationTemplates',
     },
 }
 
@@ -294,13 +294,13 @@ export const otherSections = {
         description: i18n.t(
             'Create constants which can be included in expressions of indicator and validation rules.'
         ),
-        schemaName: 'constant',
+        schemaName: 'constants',
     },
     attribute: {
         name: 'Attribute',
         path: '/list/otherSection/attribute',
         description: i18n.t('Create, modify and view attributes.'),
-        schemaName: 'attribute',
+        schemaName: 'attributes',
     },
     optionSet: {
         name: 'Option set',
@@ -308,7 +308,7 @@ export const otherSections = {
         description: i18n.t(
             'Create option sets which can be included in data elements and produce drop-down lists in data entry forms.'
         ),
-        schemaName: 'optionSet',
+        schemaName: 'optionSets',
     },
     optionGroup: {
         name: 'Option group',
@@ -316,13 +316,13 @@ export const otherSections = {
         description: i18n.t(
             'Create a group of options from option sets that has a similar functional area or meaning.'
         ),
-        schemaName: 'optionGroup',
+        schemaName: 'optionGroups',
     },
     optionGroupSet: {
         name: 'Option group set',
         path: '/list/otherSection/optionGroupSet',
         description: i18n.t('Create, modify and view sets of option groups.'),
-        schemaName: 'optionGroupSet',
+        schemaName: 'optionGroupSets',
     },
     legend: {
         name: 'Legend',
@@ -330,7 +330,7 @@ export const otherSections = {
         description: i18n.t(
             'Create, modify and view predefined legends for maps and other visualisations.'
         ),
-        schemaName: 'legend',
+        schemaName: 'legends',
     },
     predictor: {
         name: 'Predictor',
@@ -338,7 +338,7 @@ export const otherSections = {
         description: i18n.t(
             'Create predictors which can be used to predict future data values.'
         ),
-        schemaName: 'predictor',
+        schemaName: 'predictors',
     },
     predictorGroup: {
         name: 'Predictor group',
@@ -346,7 +346,7 @@ export const otherSections = {
         description: i18n.t(
             'Create predictors groups that contain serveral predictors related predictors.'
         ),
-        schemaName: 'predictorGroup',
+        schemaName: 'predictorGroups',
     },
     pushAnalysis: {
         name: 'Push analysis',
@@ -360,7 +360,7 @@ export const otherSections = {
         name: 'External map layer',
         path: '/list/otherSection/externalMapLayer',
         description: i18n.t('Configure external map layers for use in GIS.'),
-        schemaName: 'externalMapLayer',
+        schemaName: 'externalMapLayers',
     },
     dataApprovalLevel: {
         name: 'Data approval level',
@@ -368,13 +368,13 @@ export const otherSections = {
         description: i18n.t(
             'Configure data approval levels for use in data approval workflows'
         ),
-        schemaName: 'dataApprovalLevel',
+        schemaName: 'dataApprovalLevels',
     },
     dataApprovalWorkflow: {
         name: 'Data approval workflow',
         path: '/list/otherSection/dataApprovalWorkflow',
         description: i18n.t(''),
-        schemaName: 'dataApprovalWorkflow',
+        schemaName: 'dataApprovalWorkflows',
     },
     locale: {
         name: 'Locale',
@@ -396,6 +396,6 @@ export const otherSections = {
         description: i18n.t(
             'Create SQL database views. These views will typically use the resource tables to provide convenient views for third-party tools.'
         ),
-        schemaName: 'sqlView',
+        schemaName: 'sqlViews',
     },
 }

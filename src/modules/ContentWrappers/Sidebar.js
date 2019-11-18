@@ -1,17 +1,14 @@
 import { MenuList } from '@dhis2/ui-core'
-import { connect } from 'react-redux'
-import { pipe } from 'lodash/fp'
-import { push } from 'connected-react-router'
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router'
 import React from 'react'
 import propTypes from 'prop-types'
 
 import { FolderClosed } from '../icons/FolderClosed'
-import { sectionPropType } from './Sidebar/sectionPropType'
 import { SidebarMenuItem } from './Sidebar/SidebarMenuItem'
+import { sectionPropType } from './Sidebar/sectionPropType'
 import styles from './Sidebar.module.css'
 
-const SidebarComponent = ({ sections, location, push }) => {
+const SidebarComponent = ({ sections, location, history }) => {
     const filteredSections = sections.filter(
         section => section.hideInSideBar !== true
     )
@@ -28,7 +25,7 @@ const SidebarComponent = ({ sections, location, push }) => {
                             icon={<FolderClosed />}
                             label={name}
                             active={path === location.pathname}
-                            onClick={push(path)}
+                            onClick={() => history.push(path)}
                         />
                     )
                 )}
@@ -41,16 +38,6 @@ SidebarComponent.propTypes = {
     sections: propTypes.arrayOf(sectionPropType),
 }
 
-const mapDispatchToProps = dispatch => ({
-    push: path => () => dispatch(push(path)),
-})
-
-const Sidebar = pipe(
-    withRouter,
-    connect(
-        undefined,
-        mapDispatchToProps
-    )
-)(SidebarComponent)
+const Sidebar = withRouter(SidebarComponent)
 
 export { Sidebar }

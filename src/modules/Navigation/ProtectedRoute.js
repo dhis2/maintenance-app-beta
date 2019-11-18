@@ -1,49 +1,31 @@
 import { Route } from 'react-router-dom'
-import { useDataQuery } from '@dhis2/app-runtime'
+import { useSelector } from 'react-redux'
 import React from 'react'
 import propTypes from 'prop-types'
 
-import { Error } from '../../pages/Error'
-import { Loading } from '../../pages/Loading'
 import { NoAuthority } from '../../pages/NoAuthority'
+import { getSchemasData } from '../../redux/schemas'
+import { getSystemSettingsData } from '../../redux/systemSettings'
+import { getUserAuthoritiesData } from '../../redux/userAuthority'
 import { hasUserAuthorityForSection } from '../../utils/authority/hasUserAuthorityForSection'
-import { queries } from '../../config/queries'
-
-const defaultQuery = {
-    authorities: queries.authorities,
-    systemSettings: queries.systemSettings,
-}
 
 export const ProtectedRoute = ({ permissions, schemaName, ...props }) => {
-    const query = schemaName
-        ? {
-              ...defaultQuery,
-              schema: { resource: `schemas/${schemaName}.json` },
-          }
-        : defaultQuery
-
-    const { loading, error, data = {} } = useDataQuery(query)
-
-    if (loading) {
-        return <Route {...props} component={Loading} />
-    }
-
-    if (error) {
-        return <Route {...props} component={Error} />
-    }
+    const schemas = useSelector(getSchemasData)
+    const userAuthorities = useSelector(getUserAuthoritiesData)
+    const systemSettings = useSelector(getSystemSettingsData)
 
     const userHasAuthorityForSection = hasUserAuthorityForSection({
         permissions,
-        authorities: data.authorities || {},
-        systemSettings: data.systemSettings || {},
-        schema: data.schema || {},
+        authorities: userAuthorities,
+        systemSettings: systemSettings,
+        schema: schemas[schemaName],
     })
 
-    if (userHasAuthorityForSection) {
-        return <Route {...props} component={props.component} />
+    if (!userHasAuthorityForSection) {
+        return <Route {...props} component={NoAuthority} />
     }
 
-    return <Route {...props} component={NoAuthority} />
+    return <Route {...props} />
 }
 
 ProtectedRoute.propTypes = {

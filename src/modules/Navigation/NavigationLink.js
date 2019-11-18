@@ -1,177 +1,45 @@
 import { Tab } from '@dhis2/ui-core'
-import { concat, filter, flatten, identity, map, pipe, reduce } from 'lodash/fp'
-import { connect } from 'react-redux'
-import { push } from 'connected-react-router'
-import { useDataQuery } from '@dhis2/app-runtime'
+import { useSelector } from 'react-redux'
 import { withRouter } from 'react-router'
 import React, { useCallback } from 'react'
-import i18n from '@dhis2/d2-i18n'
 
-import { getAuthoritiesFromSchema } from '../../utils/authority/getAuthoritiesFromSchema'
-import { hasAuthority } from '../../utils/authority/hasAuthority'
-import { queries } from '../../config/queries'
+import { getSchemasData } from '../../redux/schemas'
+import { getSystemSettingsData } from '../../redux/systemSettings'
+import { getUserAuthoritiesData } from '../../redux/userAuthority'
+import { hasUserAuthorityForGroup } from '../../utils/authority/hasUserAuthorityForGroup'
 
-const AUTHORITY_NOT_DETERMINED = -1
-const HAS_NO_AUTHORITY = 0
-const HAS_AUTHORITY = 1
-
-const uncappedReduce = reduce.convert({ cap: false })
-
-const useOnClick = (disabled, push, to) =>
+const useOnClick = (disabled, goToPath, to) =>
     useCallback(
         e => {
-            disabled ? e.preventDefault() : push(to)
+            disabled ? e.preventDefault() : goToPath(to)
         },
-        [disabled, to, push]
+        [disabled, to, goToPath]
     )
-
-/**
- * lodash map will convert objects to arrays
- * @param {Sections} sections
- * @returns Permissions
- */
-const extractStaticPermissions = reduce(
-    (staticPermissions, curSection) =>
-        curSection.permissions
-            ? [...staticPermissions, ...curSection.permissions]
-            : staticPermissions,
-    []
-)
-
-/**
- * @param {string} schemaName
- * @returns {string}
- */
-const createSchemaResourceUrl = schemaName =>
-    `schemas/${schemaName}.json?fields=authorities`
-
-/**
- * lodash map will convert objects to arrays
- * @param {Sections} sections
- * @returns Object
- */
-const createSchemasQuery = pipe(
-    map(section =>
-        section.schemaName
-            ? { resource: createSchemaResourceUrl(section.schemaName) }
-            : undefined
-    ),
-    filter(identity),
-    uncappedReduce(
-        (schemas, resourceQuery, index) => ({
-            ...schemas,
-            [`schema${index}`]: resourceQuery,
-        }),
-        {}
-    )
-)
-
-/**
- * @param {string[][]}
- * @returns {Function}
- */
-const schemasToAuthorities = staticPermissions =>
-    pipe(
-        map(getAuthoritiesFromSchema),
-        flatten,
-        concat(staticPermissions)
-    )
-
-/**
- * @typedef {Object} AuthorityConfig
- * @property {bool} loading
- * @property {string} error
- * @property {number} hasAuthority
- */
-
-/**
- * @returns {AuthorityConfig}
- */
-const getAuthorityNotDetermined = () => ({
-    loading: true,
-    error: '',
-    hasAuthority: AUTHORITY_NOT_DETERMINED,
-})
-
-/**
- * @param {string} error
- * @returns {AuthorityConfig}
- */
-const getHasNoAuthorityConfig = (error = '') => ({
-    loading: false,
-    error,
-    hasAuthority: HAS_NO_AUTHORITY,
-})
-
-/**
- * @returns {AuthorityConfig}
- */
-const getHasAuthorityConfig = () => ({
-    loading: false,
-    error: '',
-    hasAuthority: HAS_AUTHORITY,
-})
-
-const defaultQuery = {
-    userAuthorities: queries.authorities,
-    systemSettings: queries.systemSettings,
-}
-
-/**
- * @param {bool} noAuth
- * @param {Group} group
- * @returns {AuthorityConfig}
- */
-const useHasAuthority = (noAuth, group) => {
-    const query = {
-        ...(noAuth ? {} : defaultQuery),
-        ...(noAuth ? {} : createSchemasQuery(group.sections)),
-    }
-
-    const {
-        loading,
-        error,
-        data: { userAuthorities, systemSettings, ...schemas } = {},
-    } = useDataQuery(query)
-
-    if (noAuth) return getHasAuthorityConfig()
-    if (loading) return getAuthorityNotDetermined()
-    if (error) return getHasNoAuthorityConfig(error)
-
-    if (systemSettings.keyRequireAddToView) {
-        const staticPermissions = extractStaticPermissions(group.sections)
-        const requiredAuthorities = schemasToAuthorities(staticPermissions)(
-            schemas
-        )
-
-        if (!hasAuthority(requiredAuthorities, userAuthorities)) {
-            return getHasNoAuthorityConfig()
-        }
-    }
-
-    return getHasAuthorityConfig()
-}
 
 const NavigationLinkComponent = ({
     id,
     to,
-    push,
+    goToPath,
     label,
     group,
     match,
     noAuth,
     disabled,
+    history,
 }) => {
-    const onClick = useOnClick(disabled, push, to)
-    const { loading, error, hasAuthority } = useHasAuthority(noAuth, group)
+    const onClick = useOnClick(disabled, path => history.push(path), to)
+    const schemas = useSelector(getSchemasData)
+    const userAuthorities = useSelector(getUserAuthoritiesData)
+    const systemSettings = useSelector(getSystemSettingsData)
+    const hasAuthority = hasUserAuthorityForGroup({
+        noAuth,
+        group,
+        schemas,
+        userAuthorities,
+        systemSettings,
+    })
 
-    if (loading) {
-        return <Tab>{i18n.t('Checking %s', group.name)}</Tab>
-    }
-
-    if (error || !hasAuthority) {
-        return null
-    }
+    if (!hasAuthority) return null
 
     return (
         <Tab selected={id === match.params.group} onClick={onClick}>
@@ -180,12 +48,6 @@ const NavigationLinkComponent = ({
     )
 }
 
-const NavigationLink = pipe(
-    withRouter,
-    connect(
-        undefined,
-        dispatch => ({ push: path => dispatch(push(path)) })
-    )
-)(NavigationLinkComponent)
+const NavigationLink = withRouter(NavigationLinkComponent)
 
 export { NavigationLink }
