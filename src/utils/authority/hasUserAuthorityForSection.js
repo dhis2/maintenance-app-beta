@@ -1,8 +1,4 @@
-const extractAuthoritiesFromSchema = schema =>
-    schema.authorities.reduce(
-        (authorities, authority) => [...authorities, ...authority.authorities],
-        []
-    )
+import { getAuthoritiesFromSchema } from './getAuthoritiesFromSchema'
 
 export const hasUserAuthorityForSection = ({
     authorities,
@@ -11,13 +7,13 @@ export const hasUserAuthorityForSection = ({
     permissions,
 }) => {
     const requiredPrivileges = schema
-        ? extractAuthoritiesFromSchema(schema)
+        ? getAuthoritiesFromSchema(schema)
         : permissions
 
     return (
         !systemSettings.keyRequireAddToView ||
-        requiredPrivileges.some(
-            privilege => authorities.indexOf(privilege) !== -1
+        requiredPrivileges.some(privileges =>
+            privileges.every(privilege => authorities.indexOf(privilege) !== -1)
         )
     )
 }
