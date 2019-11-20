@@ -201,11 +201,12 @@ export const organisationUnitSections = {
         ),
         schemaName: 'organisationUnitLevels',
     },
-    hierarchyOption: {
-        name: 'Hierarchy options',
+    hierarchyOperations: {
+        name: 'Hierarchy operations',
         path: '/list/organisationUnitSection/hierarchy',
         description: i18n.t(''),
         hideInCardMenu: true,
+        permissions: [['F_ORGANISATIONUNIT_MOVE']],
     },
 }
 
