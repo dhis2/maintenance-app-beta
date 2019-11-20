@@ -39,14 +39,16 @@ export const All = () => {
         <Container>
             <Content>
                 {authorizedGroupOrder.map(group => {
-                    const sections = sectionOrder[group.key].filter(section =>
-                        hasUserAuthorityForSection({
-                            systemSettings,
-                            authorities: userAuthorities,
-                            schema: schemas[section.schemaName],
-                            permissions: section.permissions,
+                    const sections = sectionOrder[group.key]
+                        .filter(({ hideInCardMenu }) => !hideInCardMenu)
+                        .filter(section => {
+                            return hasUserAuthorityForSection({
+                                systemSettings,
+                                authorities: userAuthorities,
+                                schema: schemas[section.schemaName],
+                                permissions: section.permissions,
+                            })
                         })
-                    )
 
                     return (
                         <section key={group.name}>

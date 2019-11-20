@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import React from 'react'
 import propTypes from 'prop-types'
 
-import { NoAuthority } from '../../pages/NoAuthority'
+import { NoAuthority } from '../../views/NoAuthority'
 import { getSchemasData } from '../../redux/schemas'
 import { getSystemSettingsData } from '../../redux/systemSettings'
 import { getUserAuthoritiesData } from '../../redux/userAuthority'

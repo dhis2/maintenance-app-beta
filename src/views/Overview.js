@@ -22,7 +22,7 @@ export const Overview = ({ match }) => {
     const userAuthorities = useSelector(getUserAuthoritiesData)
     const systemSettings = useSelector(getSystemSettingsData)
 
-    if (!groups[group])
+    if (!groups[group]) {
         return (
             <Error
                 error={i18n.t(
@@ -30,17 +30,30 @@ export const Overview = ({ match }) => {
                 )}
             />
         )
+    }
 
-    const sections = sectionOrder[group].filter(section =>
-        hasUserAuthorityForSection({
-            systemSettings,
-            authorities: userAuthorities,
-            schema: schemas[section.schemaName],
-            permissions: section.permissions,
-        })
-    )
+    const sidebarSections = sectionOrder[group]
+        .filter(({ hideInSideBar }) => !hideInSideBar)
+        .filter(section =>
+            hasUserAuthorityForSection({
+                systemSettings,
+                authorities: userAuthorities,
+                schema: schemas[section.schemaName],
+                permissions: section.permissions,
+            })
+        )
+    const cardMenuSections = sectionOrder[group]
+        .filter(({ hideInCardMenu }) => !hideInCardMenu)
+        .filter(section =>
+            hasUserAuthorityForSection({
+                systemSettings,
+                authorities: userAuthorities,
+                schema: schemas[section.schemaName],
+                permissions: section.permissions,
+            })
+        )
 
-    if (!sections.length)
+    if (!sidebarSections.length && !cardMenuSections.length) {
         return (
             <Error
                 error={i18n.t(
@@ -48,16 +61,17 @@ export const Overview = ({ match }) => {
                 )}
             />
         )
+    }
 
     return (
         <Container>
             <SideBarLayout>
-                <Sidebar sections={sections} />
+                <Sidebar sections={sidebarSections} />
             </SideBarLayout>
 
             <ContentLayout>
                 <MainContent>
-                    <CardMenu sections={sections} />
+                    <CardMenu sections={cardMenuSections} />
                 </MainContent>
             </ContentLayout>
         </Container>

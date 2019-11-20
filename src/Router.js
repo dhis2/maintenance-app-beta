@@ -2,14 +2,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import React, { useEffect } from 'react'
 
-import { All } from './pages/All'
-import { DataElementList } from './pages/dataElement/DataElementList'
+import { All } from './views/All'
+import { DataElementList } from './views/dataElement/DataElementList'
 import { Navigation } from './modules/Navigation/Navigation'
-import { Overview } from './pages/Overview'
+import { Overview } from './views/Overview'
 import { ProtectedRoute } from './modules/Navigation/ProtectedRoute'
-import { RedirectToOld } from './pages/RedirectToOld'
-import { Error } from './pages/Error'
-import { Loading } from './pages/Loading'
+import { RedirectToOld } from './views/RedirectToOld'
+import { Error } from './views/Error'
+import { Loading } from './views/Loading'
 import {
     getAppDataError,
     getAppLoading,
@@ -61,7 +61,7 @@ export const Router = () => {
                 {
                     /**
                      * =============================
-                     * All group overview pages
+                     * All group overview views
                      * =============================
                      * */ ''
                 }
