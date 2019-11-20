@@ -3,11 +3,13 @@ import { useSelector } from 'react-redux'
 import React from 'react'
 import propTypes from 'prop-types'
 
-import { NoAuthority } from '../../views/NoAuthority'
-import { getSchemasData } from '../../redux/schemas'
-import { getSystemSettingsData } from '../../redux/systemSettings'
-import { getUserAuthoritiesData } from '../../redux/userAuthority'
-import { hasUserAuthorityForSection } from '../../utils/authority/hasUserAuthorityForSection'
+import {
+    getSchemasData,
+    getUserAuthoritiesData,
+    getSystemSettingsData,
+} from '../../redux'
+import { hasUserAuthorityForSection } from '../../utils'
+import { NoAuthority } from '../../views'
 
 export const ProtectedRoute = ({ permissions, schemaName, ...props }) => {
     const schemas = useSelector(getSchemasData)

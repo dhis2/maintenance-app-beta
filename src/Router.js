@@ -2,21 +2,22 @@ import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import React, { useEffect } from 'react'
 
-import { All } from './views/All'
-import { DataElementList } from './views/dataElement/DataElementList'
-import { Navigation } from './modules/Navigation/Navigation'
-import { Overview } from './views/Overview'
-import { ProtectedRoute } from './modules/Navigation/ProtectedRoute'
-import { RedirectToOld } from './views/RedirectToOld'
-import { Error } from './views/Error'
-import { Loading } from './views/Loading'
+import { dataElementSections } from './config'
+import { Navigation, ProtectedRoute } from './modules'
 import {
     getAppDataError,
     getAppLoading,
     getAppReady,
     loadAppData,
-} from './redux/app'
-import { dataElementSections } from './config/sections'
+} from './redux'
+import {
+    All,
+    DataElementList,
+    Overview,
+    RedirectToOld,
+    Error,
+    Loading,
+} from './views'
 
 export const Router = () => {
     const dispatch = useDispatch()

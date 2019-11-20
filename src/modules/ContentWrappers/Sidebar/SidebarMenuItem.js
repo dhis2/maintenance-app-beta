@@ -3,10 +3,8 @@ import { useSelector } from 'react-redux'
 import React from 'react'
 import propTypes from 'prop-types'
 
-import { getAuthoritiesFromSchema } from '../../../utils/authority/getAuthoritiesFromSchema'
-import { getSchemasData } from '../../../redux/schemas'
-import { getUserAuthoritiesData } from '../../../redux/userAuthority'
-import { checkAuthorities } from '../../../utils/authority/checkAuthorities'
+import { getAuthoritiesFromSchema, checkAuthorities } from '../../../utils'
+import { getSchemasData, getUserAuthoritiesData } from '../../../redux'
 
 export const SidebarMenuItem = ({ schemaName, permissions, ...props }) => {
     const hasStaticPermissions = !!permissions.length

@@ -3,10 +3,12 @@ import { useSelector } from 'react-redux'
 import { withRouter } from 'react-router'
 import React, { useCallback } from 'react'
 
-import { getSchemasData } from '../../redux/schemas'
-import { getSystemSettingsData } from '../../redux/systemSettings'
-import { getUserAuthoritiesData } from '../../redux/userAuthority'
-import { hasUserAuthorityForGroup } from '../../utils/authority/hasUserAuthorityForGroup'
+import {
+    getSchemasData,
+    getSystemSettingsData,
+    getUserAuthoritiesData,
+} from '../../redux'
+import { hasUserAuthorityForGroup } from '../../utils'
 
 const useOnClick = (disabled, goToPath, to) =>
     useCallback(

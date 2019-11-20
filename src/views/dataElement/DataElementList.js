@@ -1,15 +1,14 @@
 import React from 'react'
 
-import { Container } from '../../modules/layout/Container'
-import { Content as ContentLayout } from '../../modules/layout/Content'
-import { SideBar as SideBarLayout } from '../../modules/layout/SideBar'
-
-import { MainContent } from '../../modules/ContentWrappers/MainContent'
-import { Sidebar } from '../../modules/ContentWrappers/Sidebar'
-import { PageHeadline } from '../../modules/PageHeadline/PageHeadline'
-import { dataElementSections } from '../../config/sections'
-import { groups } from '../../config/groups'
-import { sectionOrder } from '../../config/sectionOrder'
+import {
+    Container,
+    Content as ContentLayout,
+    SideBar as SideBarLayout,
+    MainContent,
+    Sidebar,
+    PageHeadline,
+} from '../../modules'
+import { dataElementSections, groups, sectionOrder } from '../../config'
 
 export const DataElementList = () => (
     <Container>

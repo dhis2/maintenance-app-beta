@@ -2,19 +2,22 @@ import { useSelector } from 'react-redux'
 import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 
-import { CardMenu } from '../modules/CardMenu/CardMenu'
-import { Container } from '../modules/layout/Container'
-import { Content as ContentLayout } from '../modules/layout/Content'
+import {
+    CardMenu,
+    Container,
+    Content as ContentLayout,
+    MainContent,
+    SideBar as SideBarLayout,
+    Sidebar,
+} from '../modules'
 import { Error } from './Error'
-import { MainContent } from '../modules/ContentWrappers/MainContent'
-import { SideBar as SideBarLayout } from '../modules/layout/SideBar'
-import { Sidebar } from '../modules/ContentWrappers/Sidebar'
-import { getSchemasData } from '../redux/schemas'
-import { getSystemSettingsData } from '../redux/systemSettings'
-import { getUserAuthoritiesData } from '../redux/userAuthority'
-import { groups } from '../config/groups'
-import { hasUserAuthorityForSection } from '../utils/authority/hasUserAuthorityForSection'
-import { sectionOrder } from '../config/sectionOrder'
+import {
+    getSchemasData,
+    getSystemSettingsData,
+    getUserAuthoritiesData,
+} from '../redux'
+import { groups, sectionOrder } from '../config'
+import { hasUserAuthorityForSection } from '../utils'
 
 export const Overview = ({ match }) => {
     const { group } = match.params

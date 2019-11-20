@@ -2,17 +2,15 @@ import { useSelector } from 'react-redux'
 import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 
-import { CardMenu } from '../modules/CardMenu/CardMenu'
-import { Container } from '../modules/layout/Container'
-import { Content } from '../modules/layout/Content'
+import { CardMenu, Container, Content } from '../modules'
 import { Error } from './Error'
-import { getSchemasData } from '../redux/schemas'
-import { getSystemSettingsData } from '../redux/systemSettings'
-import { getUserAuthoritiesData } from '../redux/userAuthority'
-import { groupOrder } from '../config/groupOrder'
-import { hasUserAuthorityForGroup } from '../utils/authority/hasUserAuthorityForGroup'
-import { hasUserAuthorityForSection } from '../utils/authority/hasUserAuthorityForSection'
-import { sectionOrder } from '../config/sectionOrder'
+import {
+    getSchemasData,
+    getSystemSettingsData,
+    getUserAuthoritiesData,
+} from '../redux'
+import { groupOrder, sectionOrder } from '../config'
+import { hasUserAuthorityForGroup, hasUserAuthorityForSection } from '../utils'
 
 export const All = () => {
     const schemas = useSelector(getSchemasData)
