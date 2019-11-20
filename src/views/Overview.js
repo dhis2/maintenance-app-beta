@@ -35,26 +35,21 @@ export const Overview = ({ match }) => {
         )
     }
 
-    const sidebarSections = sectionOrder[group]
-        .filter(({ hideInSideBar }) => !hideInSideBar)
-        .filter(section =>
-            hasUserAuthorityForSection({
-                systemSettings,
-                authorities: userAuthorities,
-                schema: schemas[section.schemaName],
-                permissions: section.permissions,
-            })
-        )
-    const cardMenuSections = sectionOrder[group]
-        .filter(({ hideInCardMenu }) => !hideInCardMenu)
-        .filter(section =>
-            hasUserAuthorityForSection({
-                systemSettings,
-                authorities: userAuthorities,
-                schema: schemas[section.schemaName],
-                permissions: section.permissions,
-            })
-        )
+    const filteredSections = sectionOrder[group].filter(section =>
+        hasUserAuthorityForSection({
+            systemSettings,
+            authorities: userAuthorities,
+            schema: schemas[section.schemaName],
+            permissions: section.permissions,
+        })
+    )
+
+    const sidebarSections = filteredSections.filter(
+        ({ hideInSideBar }) => !hideInSideBar
+    )
+    const cardMenuSections = filteredSections.filter(
+        ({ hideInCardMenu }) => !hideInCardMenu
+    )
 
     if (!sidebarSections.length && !cardMenuSections.length) {
         return (
