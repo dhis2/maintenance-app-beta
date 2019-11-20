@@ -40,7 +40,7 @@ export const sectionOrder = {
         organisationUnitSections.organisationUnitGroup,
         organisationUnitSections.organisationUnitGroupSet,
         organisationUnitSections.organisationUnitLevel,
-        organisationUnitSections.hierarchyOption,
+        organisationUnitSections.hierarchyOperations,
     ],
     program: [
         programSections.program,
