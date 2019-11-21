@@ -2,6 +2,7 @@ import { Tab } from '@dhis2/ui-core'
 import { useSelector } from 'react-redux'
 import { withRouter } from 'react-router'
 import React, { useCallback } from 'react'
+import propTypes from '@dhis2/prop-types'
 
 import {
     getSchemasData,
@@ -21,7 +22,7 @@ const useOnClick = (disabled, goToPath, to) =>
 const NavigationLinkComponent = ({
     id,
     to,
-    goToPath,
+    icon,
     label,
     group,
     match,
@@ -45,7 +46,7 @@ const NavigationLinkComponent = ({
 
     return (
         <Tab selected={id === match.params.group} onClick={onClick}>
-            {label}
+            {label || icon}
         </Tab>
     )
 }
