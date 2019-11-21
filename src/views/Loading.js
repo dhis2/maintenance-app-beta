@@ -1,3 +1,4 @@
+import { CircularLoader, ScreenCover } from '@dhis2/ui-core'
 import React from 'react'
 
 import { Container, Content } from '../modules'
@@ -5,7 +6,9 @@ import { Container, Content } from '../modules'
 export const Loading = () => (
     <Container>
         <Content>
-            <div>Loading...</div>
+            <ScreenCover>
+                <CircularLoader />
+            </ScreenCover>
         </Content>
     </Container>
 )
