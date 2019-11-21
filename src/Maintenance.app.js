@@ -1,5 +1,6 @@
 import { Provider } from 'react-redux'
 import { useDataEngine } from '@dhis2/app-runtime'
+import { CssVariables } from '@dhis2/ui-core'
 import React, { useState } from 'react'
 
 import { Router } from './Router'
@@ -12,6 +13,7 @@ export const Maintenance = () => {
 
     return (
         <Provider store={store}>
+            <CssVariables colors />
             <div className={styles.maintenanceApp}>
                 <Router />
             </div>
