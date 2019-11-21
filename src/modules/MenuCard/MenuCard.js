@@ -1,15 +1,20 @@
+import { Link } from 'react-router-dom'
 import { Card } from '@dhis2/ui-core'
 import React from 'react'
 import propTypes from 'prop-types'
 
 import styles from './MenuCard.module.css'
 
-export const MenuCard = ({ headline, content, children }) => (
+export const MenuCard = ({ headline, content, children, to }) => (
     <div className={styles.container}>
         <Card className={styles.card}>
-            <h3 className={styles.headline}>
-                <span className={styles.headlineInnerWrapper}>{headline}</span>
-            </h3>
+            <Link to={to} className={styles.cardTitleLink}>
+                <h3 className={styles.headline}>
+                    <span className={styles.headlineInnerWrapper}>
+                        {headline}
+                    </span>
+                </h3>
+            </Link>
 
             <p className={styles.content}>{content}</p>
 

@@ -14,30 +14,32 @@ export const CardMenu = ({ sections }) => {
     return (
         <div className={styles.container}>
             <div className={styles.sectionsWrapper}>
-                {filteredSections.map(section => (
-                    <MenuCard
-                        key={section.name}
-                        headline={section.name}
-                        content={section.description || ''}
-                    >
-                        <ActionWrapper>
-                            <Link
-                                to={`${section.path.replace(
-                                    /^\/list/,
-                                    '/edit'
-                                )}/add`}
-                            >
-                                <Plus />
-                            </Link>
-                        </ActionWrapper>
+                {filteredSections.map(section => {
+                    const pageType = section.path.replace(/^\/list/, '/edit')
+                    const addPath = `${pageType}/add`
+                    const listPath = section.path
 
-                        <ActionWrapper>
-                            <Link to={section.path}>
-                                <List />
-                            </Link>
-                        </ActionWrapper>
-                    </MenuCard>
-                ))}
+                    return (
+                        <MenuCard
+                            key={section.name}
+                            headline={section.name}
+                            content={section.description || ''}
+                            to={listPath}
+                        >
+                            <ActionWrapper>
+                                <Link to={addPath}>
+                                    <Plus />
+                                </Link>
+                            </ActionWrapper>
+
+                            <ActionWrapper>
+                                <Link to={listPath}>
+                                    <List />
+                                </Link>
+                            </ActionWrapper>
+                        </MenuCard>
+                    )
+                })}
             </div>
         </div>
     )

@@ -8,6 +8,17 @@
     flex-direction: column;
 }
 
+.cardTitleLink {
+    text-decoration: none;
+    color: inherit;
+}
+
+.cardTitleLink:hover,
+.cardTitleLink:hover + .content,
+.cardTitleLink:hover + .content + .actions {
+    background: var(--colors-grey300);
+}
+
 .headline {
     border-bottom: 1px solid rgb(221, 221, 221);
     font-size: 15px;
