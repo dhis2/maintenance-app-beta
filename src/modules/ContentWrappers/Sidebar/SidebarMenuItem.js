@@ -1,7 +1,7 @@
 import { MenuItem } from '@dhis2/ui-core'
 import { useSelector } from 'react-redux'
 import React from 'react'
-import propTypes from 'prop-types'
+import propTypes from '@dhis2/prop-types'
 
 import { getAuthoritiesFromSchema, checkAuthorities } from '../../../utils'
 import { getSchemasData, getUserAuthoritiesData } from '../../../redux'

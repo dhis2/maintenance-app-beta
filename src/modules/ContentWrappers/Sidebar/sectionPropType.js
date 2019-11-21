@@ -1,4 +1,4 @@
-import propTypes from 'prop-types'
+import propTypes from '@dhis2/prop-types'
 
 export const permissionPropType = propTypes.arrayOf(
     propTypes.arrayOf(propTypes.string)

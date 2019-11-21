@@ -1,7 +1,7 @@
 import { MenuList } from '@dhis2/ui-core'
 import { withRouter } from 'react-router'
 import React from 'react'
-import propTypes from 'prop-types'
+import propTypes from '@dhis2/prop-types'
 
 import { FolderClosed } from '../icons/FolderClosed'
 import { SidebarMenuItem } from './Sidebar/SidebarMenuItem'
