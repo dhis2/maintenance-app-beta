@@ -51,6 +51,20 @@ const NavigationLinkComponent = ({
     )
 }
 
+NavigationLinkComponent.propTypes = {
+    id: propTypes.string.isRequired,
+    to: propTypes.string.isRequired,
+    icon: propTypes.requiredIf(props => !props.label, propTypes.element),
+    label: propTypes.requiredIf(props => !props.icon, propTypes.string),
+
+    group: propTypes.string,
+    match: propTypes.object.isRequired,
+    history: propTypes.object.isRequired,
+
+    noAuth: propTypes.bool,
+    disabled: propTypes.bool,
+}
+
 const NavigationLink = withRouter(NavigationLinkComponent)
 
 export { NavigationLink }
