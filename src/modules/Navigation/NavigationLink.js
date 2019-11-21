@@ -57,7 +57,7 @@ NavigationLinkComponent.propTypes = {
     icon: propTypes.requiredIf(props => !props.label, propTypes.element),
     label: propTypes.requiredIf(props => !props.icon, propTypes.string),
 
-    group: propTypes.string,
+    group: propTypes.object,
     match: propTypes.object.isRequired,
     history: propTypes.object.isRequired,
 
