@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 
-import { CardMenu, Container, Content } from '../modules'
+import { CardMenu, Container, Content, MainContent } from '../modules'
 import { Error } from './Error'
 import {
     getSchemasData,
@@ -36,25 +36,27 @@ export const All = () => {
     return (
         <Container>
             <Content>
-                {authorizedGroupOrder.map(group => {
-                    const sections = sectionOrder[group.key]
-                        .filter(({ hideInCardMenu }) => !hideInCardMenu)
-                        .filter(section => {
-                            return hasUserAuthorityForSection({
-                                systemSettings,
-                                authorities: userAuthorities,
-                                schema: schemas[section.schemaName],
-                                permissions: section.permissions,
+                <MainContent>
+                    {authorizedGroupOrder.map(group => {
+                        const sections = sectionOrder[group.key]
+                            .filter(({ hideInCardMenu }) => !hideInCardMenu)
+                            .filter(section => {
+                                return hasUserAuthorityForSection({
+                                    systemSettings,
+                                    authorities: userAuthorities,
+                                    schema: schemas[section.schemaName],
+                                    permissions: section.permissions,
+                                })
                             })
-                        })
 
-                    return (
-                        <section key={group.name}>
-                            <h2>{group.name}</h2>
-                            <CardMenu sections={sections} />
-                        </section>
-                    )
-                })}
+                        return (
+                            <section key={group.name}>
+                                <h2>{group.name}</h2>
+                                <CardMenu sections={sections} />
+                            </section>
+                        )
+                    })}
+                </MainContent>
             </Content>
         </Container>
     )
