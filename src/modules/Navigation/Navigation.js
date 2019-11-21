@@ -4,6 +4,7 @@ import React from 'react'
 
 import cx from 'classnames'
 
+import { GroupEditorLink } from './GroupEditorLink'
 import { NavigationLink } from './NavigationLink'
 import { groupOrder } from '../../config'
 
@@ -30,6 +31,8 @@ const NavigationComponent = ({ disabled }) => {
                             disabled={disabled}
                         />
                     ))}
+
+                    <GroupEditorLink disabled={disabled} />
                 </TabBar>
             </ScrollBar>
         </nav>
