@@ -6,11 +6,16 @@ import i18n from '@dhis2/d2-i18n'
 
 /**
  * @typedef {Object} Section
- * @property {string} name
  * @property {string} path
- * @property {string} description
+ * @property {string} [name]
+ * @property {string} [description]
  * @property {string} [schemaName]
+ *
  * @property {Permissions} [permissions]
+ * These are static and are not retrievable from the api
+ * In the old maintenance app, they're defined statically
+ * on a custom model definition
+ *
  * @property {boolean} [hideInCardMenu]
  * @property {boolean} [hideInSideBar]
  */
@@ -383,12 +388,6 @@ export const otherSections = {
         description: i18n.t(
             'Create and manage locales for database content. A locale is a combination of language and country.'
         ),
-
-        /**
-         * These are static and are not retrievable from the api
-         * In the old maintenance app, they're defined statically
-         * on a custom model definition
-         */
         permissions: [['F_SYSTEM_SETTING']],
     },
     sqlView: {
@@ -399,4 +398,14 @@ export const otherSections = {
         ),
         schemaName: 'sqlViews',
     },
+}
+
+export const groupEditorSection = {
+    path: '/group-editor',
+    permissions: [
+        ['F_DATAELEMENT_PUBLIC_ADD'],
+        ['F_DATAELEMENT_PRIVATE_ADD'],
+        ['F_INDICATORGROUP_PUBLIC_ADD'],
+        ['F_INDICATORGROUP_PRIVATE_ADD'],
+    ],
 }
