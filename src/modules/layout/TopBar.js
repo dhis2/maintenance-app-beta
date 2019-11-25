@@ -8,6 +8,7 @@ export const TopBar = ({ as: Element, children }) => (
 
 TopBar.propTypes = {
     as: propTypes.oneOf(['header', 'nav', 'section', 'aside', 'div']),
+    children: propTypes.node,
 }
 
 TopBar.defaultProps = {

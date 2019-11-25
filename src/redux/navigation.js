@@ -26,10 +26,7 @@ export const enableNavigation = () => ({
  * =======
  */
 
-export const navigation = (
-    state = { disabled: false },
-    { type, payload } = {}
-) => {
+export const navigation = (state = { disabled: false }, { type } = {}) => {
     const isType = isEqual(type)
 
     if (isType(NAVIGATION_DISABLE)) {
@@ -42,3 +39,12 @@ export const navigation = (
 
     return state
 }
+
+/**
+ * Selectors
+ * =========
+ */
+
+export const getNavigation = state => state.navigation
+
+export const getNavigationDisabled = state => getNavigation(state).disabled

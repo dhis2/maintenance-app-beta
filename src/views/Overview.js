@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import propTypes from '@dhis2/prop-types'
 import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 
@@ -74,4 +75,8 @@ export const Overview = ({ match }) => {
             </ContentLayout>
         </Container>
     )
+}
+
+Overview.propTypes = {
+    match: propTypes.object.isRequired,
 }

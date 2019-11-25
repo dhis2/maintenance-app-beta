@@ -1,6 +1,7 @@
 import { Button, Modal } from '@dhis2/ui-core'
 import { useDispatch, useSelector } from 'react-redux'
 import React from 'react'
+import propTypes from '@dhis2/prop-types'
 import i18n from '@dhis2/d2-i18n'
 
 import { Container, Content } from '../modules'
@@ -55,4 +56,8 @@ export const Error = ({ error }) => {
             </Content>
         </Container>
     )
+}
+
+Error.propTypes = {
+    error: propTypes.string.isRequired,
 }

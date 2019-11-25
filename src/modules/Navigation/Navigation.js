@@ -1,5 +1,5 @@
 import { ScrollBar, TabBar } from '@dhis2/ui-core'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import React from 'react'
 
 import cx from 'classnames'
@@ -7,8 +7,11 @@ import cx from 'classnames'
 import { GroupEditorLink } from './GroupEditorLink'
 import { NavigationLink } from './NavigationLink'
 import { groupOrder } from '../../config'
+import { getNavigationDisabled } from '../../redux'
 
-const NavigationComponent = ({ disabled }) => {
+export const Navigation = () => {
+    const disabled = useSelector(getNavigationDisabled)
+
     return (
         <nav className={cx({ disabled })}>
             <ScrollBar>
@@ -38,11 +41,3 @@ const NavigationComponent = ({ disabled }) => {
         </nav>
     )
 }
-
-const mapStateToProps = ({ navigation }) => ({
-    disabled: navigation.disabled,
-})
-
-const Navigation = connect(mapStateToProps)(NavigationComponent)
-
-export { Navigation }

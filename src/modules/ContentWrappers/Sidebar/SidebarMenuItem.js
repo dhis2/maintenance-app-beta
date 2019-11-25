@@ -23,8 +23,8 @@ export const SidebarMenuItem = ({ schemaName, permissions, ...props }) => {
 }
 
 SidebarMenuItem.propTypes = {
-    schemaName: propTypes.string,
     permissions: propTypes.arrayOf(propTypes.arrayOf(propTypes.string)),
+    schemaName: propTypes.string,
 }
 
 SidebarMenuItem.defaultProps = {

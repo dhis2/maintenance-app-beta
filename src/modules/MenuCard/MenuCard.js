@@ -24,14 +24,22 @@ export const MenuCard = ({ headline, content, children, to }) => (
 )
 
 MenuCard.propTypes = {
-    headline: propTypes.string.isRequired,
-    content: propTypes.string.isRequired,
     children: propTypes.oneOfType([
         propTypes.element,
         propTypes.arrayOf(propTypes.element),
     ]).isRequired,
+    content: propTypes.string.isRequired,
+    headline: propTypes.string.isRequired,
+    to: propTypes.string.isRequired,
 }
 
 export const ActionWrapper = ({ children }) => (
     <div className={styles.actionWrapper}>{children}</div>
 )
+
+ActionWrapper.propTypes = {
+    children: propTypes.oneOfType([
+        propTypes.element,
+        propTypes.arrayOf(propTypes.element),
+    ]).isRequired,
+}

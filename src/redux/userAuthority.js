@@ -42,7 +42,7 @@ export const loadUserAuthorities = () => (dispatch, getState, { engine }) => {
         .then(({ userAuthorities }) =>
             dispatch(setUserAuthorities(userAuthorities))
         )
-        .catch(error => dispatch(loadingUserAuthoritiesError(error)))
+        .catch(({ message }) => dispatch(loadingUserAuthoritiesError(message)))
 }
 
 /**

@@ -5,9 +5,11 @@ export const permissionPropType = propTypes.arrayOf(
 )
 
 export const sectionPropType = propTypes.shape({
+    description: propTypes.string.isRequired,
     name: propTypes.string.isRequired,
     path: propTypes.string.isRequired,
-    description: propTypes.string.isRequired,
-    schemaName: propTypes.string,
+    hideInCardMenu: propTypes.bool,
+    hideInSideBar: propTypes.bool,
     permissions: permissionPropType,
+    schemaName: propTypes.string,
 })

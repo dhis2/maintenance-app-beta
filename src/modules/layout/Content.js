@@ -8,6 +8,7 @@ export const Content = ({ as: Element, children }) => (
 
 Content.propTypes = {
     as: propTypes.oneOf(['main', 'div']),
+    children: propTypes.node,
 }
 
 Content.defaultProps = {

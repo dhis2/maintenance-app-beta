@@ -8,6 +8,7 @@ export const SideBar = ({ as: Element, children }) => (
 
 SideBar.propTypes = {
     as: propTypes.oneOf(['section', 'aside', 'div']),
+    children: propTypes.node,
 }
 
 SideBar.defaultProps = {
