@@ -42,7 +42,7 @@ export const loadSystemSettings = () => (dispatch, getState, { engine }) => {
         .then(({ systemSettings }) =>
             dispatch(setSystemSettings(systemSettings))
         )
-        .catch(error => dispatch(loadingSystemSettingsError(error)))
+        .catch(({ message }) => dispatch(loadingSystemSettingsError(message)))
 }
 
 /**

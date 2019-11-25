@@ -21,6 +21,7 @@ export const hasUserAuthorityForGroup = ({
     if (noAuth || !systemSettings.keyRequireAddToView) return true
 
     const groupAuthorities = Object.entries(group.sections)
+        // eslint-disable-next-line no-unused-vars
         .map(([key, { permissions, schemaName }]) => {
             // Static permissions in config files
             if (permissions) return permissions

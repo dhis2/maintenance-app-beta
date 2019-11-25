@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
 import React from 'react'
+import propTypes from '@dhis2/prop-types'
 
 import { List } from '../icons/List'
 import { MenuCard, ActionWrapper } from '../MenuCard/MenuCard'
 import { Plus } from '../icons/Plus'
+import { sectionPropType } from '../ContentWrappers/Sidebar/sectionPropType'
 import styles from './CardMenu.module.css'
 
 export const CardMenu = ({ sections }) => {
@@ -43,4 +45,8 @@ export const CardMenu = ({ sections }) => {
             </div>
         </div>
     )
+}
+
+CardMenu.propTypes = {
+    sections: propTypes.arrayOf(sectionPropType).isRequired,
 }

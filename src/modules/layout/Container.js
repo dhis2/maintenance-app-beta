@@ -1,3 +1,4 @@
+import propTypes from '@dhis2/prop-types'
 import React from 'react'
 import cx from 'classnames'
 
@@ -17,3 +18,10 @@ const determineClassName = children => {
 export const Container = ({ children }) => (
     <div className={determineClassName(children)}>{children}</div>
 )
+
+Container.propTypes = {
+    children: propTypes.oneOfType([
+        propTypes.element,
+        propTypes.arrayOf(propTypes.element),
+    ]).isRequired,
+}

@@ -1,6 +1,6 @@
 import { Tab } from '@dhis2/ui-core'
 import { useSelector } from 'react-redux'
-import { withRouter } from 'react-router'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import React, { useCallback } from 'react'
 import propTypes from '@dhis2/prop-types'
 
@@ -19,17 +19,17 @@ const useOnClick = (disabled, goToPath, to) =>
         [disabled, to, goToPath]
     )
 
-const NavigationLinkComponent = ({
+export const NavigationLink = ({
     id,
     to,
     icon,
     label,
     group,
-    match,
     noAuth,
     disabled,
-    history,
 }) => {
+    const match = useRouteMatch()
+    const history = useHistory()
     const onClick = useOnClick(disabled, path => history.push(path), to)
     const schemas = useSelector(getSchemasData)
     const userAuthorities = useSelector(getUserAuthoritiesData)
@@ -51,20 +51,12 @@ const NavigationLinkComponent = ({
     )
 }
 
-NavigationLinkComponent.propTypes = {
+NavigationLink.propTypes = {
     id: propTypes.string.isRequired,
     to: propTypes.string.isRequired,
+    disabled: propTypes.bool,
+    group: propTypes.object,
     icon: propTypes.requiredIf(props => !props.label, propTypes.element),
     label: propTypes.requiredIf(props => !props.icon, propTypes.string),
-
-    group: propTypes.object,
-    match: propTypes.object.isRequired,
-    history: propTypes.object.isRequired,
-
     noAuth: propTypes.bool,
-    disabled: propTypes.bool,
 }
-
-const NavigationLink = withRouter(NavigationLinkComponent)
-
-export { NavigationLink }

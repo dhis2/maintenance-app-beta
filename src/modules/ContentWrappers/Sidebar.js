@@ -1,5 +1,5 @@
 import { MenuList } from '@dhis2/ui-core'
-import { withRouter } from 'react-router'
+import { useHistory, useLocation } from 'react-router-dom'
 import React from 'react'
 import propTypes from '@dhis2/prop-types'
 
@@ -8,7 +8,10 @@ import { SidebarMenuItem } from './Sidebar/SidebarMenuItem'
 import { sectionPropType } from './Sidebar/sectionPropType'
 import styles from './Sidebar.module.css'
 
-const SidebarComponent = ({ sections, location, history }) => {
+export const Sidebar = ({ sections }) => {
+    const history = useHistory()
+    const location = useLocation()
+
     const filteredSections = sections.filter(
         section => section.hideInSideBar !== true
     )
@@ -34,10 +37,6 @@ const SidebarComponent = ({ sections, location, history }) => {
     )
 }
 
-SidebarComponent.propTypes = {
+Sidebar.propTypes = {
     sections: propTypes.arrayOf(sectionPropType),
 }
-
-const Sidebar = withRouter(SidebarComponent)
-
-export { Sidebar }
