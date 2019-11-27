@@ -1159,7 +1159,7 @@
     update-notifier "^3.0.0"
     yargs "^13.1.0"
 
-"@dhis2/cli-style@^5.0.2":
+"@dhis2/cli-style@5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@dhis2/cli-style/-/cli-style-5.0.2.tgz#31a07b972025e4032cd26cb236e7aa194deda28d"
   integrity sha512-s5diu50VCC1XH6meJR48eCzdIhSxEedIVpGXfyIxfHQJq3hyJBwZXjyl/NCVvOk7wNoPgbn3ZhVnb05yPBVRag==
@@ -1215,7 +1215,7 @@
   dependencies:
     prop-types "^15"
 
-"@dhis2/ui-core@3.12.0", "@dhis2/ui-core@^3.12.0":
+"@dhis2/ui-core@3.12.0":
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/@dhis2/ui-core/-/ui-core-3.12.0.tgz#6216868b1bd76b816df8c3272c2b9200972f0858"
   integrity sha512-9JYl0TP6Wkb2yD5OkiN4juHYxW37UYZF1egbCAxuUCx7Uox5HqUkzxaKw25bQKN+4684vDnIJgh0Z2qSTszg1g==
@@ -1223,6 +1223,15 @@
     "@dhis2/prop-types" "^1.1.1"
     classnames "^2.2.6"
     styled-jsx "^3.2.2"
+
+"@dhis2/ui-core@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@dhis2/ui-core/-/ui-core-4.0.2.tgz#b5313e8591b689f673c91055d0232b3c129edc76"
+  integrity sha512-+Hyw7T54+hcKoqnctFWAniVuy66TBI2u6N0xcuCXC214XDtOyeFy47YM0X8Wa3y6zKOISD9rbv3vf2kRQjp1Dg==
+  dependencies:
+    "@dhis2/prop-types" "^1.4.0"
+    classnames "^2.2.6"
+    styled-jsx "^3.2.4"
 
 "@dhis2/ui-widgets@2.0.2":
   version "2.0.2"
