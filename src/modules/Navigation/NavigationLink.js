@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import React, { useCallback } from 'react'
 import propTypes from '@dhis2/prop-types'
+import styles from './NavigationLink.module.css'
 
 import {
     getSchemasData,
@@ -45,7 +46,11 @@ export const NavigationLink = ({
     if (!hasAuthority) return null
 
     return (
-        <Tab selected={id === match.params.group} onClick={onClick}>
+        <Tab
+            selected={id === match.params.group}
+            onClick={onClick}
+            className={styles.link}
+        >
             {label || icon}
         </Tab>
     )
