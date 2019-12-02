@@ -1,4 +1,4 @@
-import { ScrollBar, TabBar } from '@dhis2/ui-core'
+import { TabBar } from '@dhis2/ui-core'
 import { useSelector } from 'react-redux'
 import React from 'react'
 
@@ -14,30 +14,28 @@ export const Navigation = () => {
 
     return (
         <nav className={cx({ disabled })}>
-            <ScrollBar>
-                <TabBar fixed>
+            <TabBar scrollable>
+                <NavigationLink
+                    noAuth
+                    id="all"
+                    to="/list/all"
+                    label={'All'}
+                    disabled={disabled}
+                />
+
+                {groupOrder.map(group => (
                     <NavigationLink
-                        noAuth
-                        id="all"
-                        to="/list/all"
-                        label={'All'}
+                        key={group.key}
+                        id={group.key}
+                        to={`/list/${group.key}Section`}
+                        group={group}
+                        label={group.name}
                         disabled={disabled}
                     />
+                ))}
 
-                    {groupOrder.map(group => (
-                        <NavigationLink
-                            key={group.key}
-                            id={group.key}
-                            to={`/list/${group.key}Section`}
-                            group={group}
-                            label={group.name}
-                            disabled={disabled}
-                        />
-                    ))}
-
-                    <GroupEditorLink disabled={disabled} />
-                </TabBar>
-            </ScrollBar>
+                <GroupEditorLink disabled={disabled} />
+            </TabBar>
         </nav>
     )
 }
