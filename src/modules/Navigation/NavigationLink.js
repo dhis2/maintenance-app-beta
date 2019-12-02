@@ -13,7 +13,7 @@ import { hasUserAuthorityForGroup } from '../../utils'
 
 const useOnClick = (disabled, goToPath, to) =>
     useCallback(
-        e => {
+        (_, e) => {
             disabled ? e.preventDefault() : goToPath(to)
         },
         [disabled, to, goToPath]
