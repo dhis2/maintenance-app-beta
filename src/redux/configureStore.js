@@ -1,6 +1,6 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import { createBrowserHistory } from 'history'
-import { withExtraArgument } from 'redux-thunk'
+import thunk from 'redux-thunk'
 
 import { rootReducer } from './rootReducer'
 
@@ -11,7 +11,7 @@ export const configureStore = (engine, initialState) => {
         ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
         : compose
 
-    const thunkMiddleware = withExtraArgument({ engine })
+    const thunkMiddleware = thunk.withExtraArgument({ engine })
     const middleware = composeEnhancer(applyMiddleware(thunkMiddleware))
     const store = createStore(rootReducer, initialState, middleware)
 
