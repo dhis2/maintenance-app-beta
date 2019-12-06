@@ -57,14 +57,16 @@ export const loadSchemas = () => (dispatch, getState, { engine }) => {
  * =======
  */
 
+export const schemasDefaultState = {
+    loading: false,
+    loaded: true,
+    error: null,
+    data: null,
+}
+
 export const schemas = (
-    state = {
-        loading: false,
-        loaded: true,
-        error: null,
-        data: null,
-    },
-    { type, payload }
+    state = schemasDefaultState,
+    { type, payload } = {}
 ) => {
     const isType = isEqual(type)
 

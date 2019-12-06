@@ -18,7 +18,7 @@ export const GroupEditorLink = ({ disabled }) => {
     const permissions = groupEditorSection.permissions
 
     const userHasAuthorityForGroupEditor = hasUserAuthorityForSection({
-        authorities: userAuthorities,
+        userAuthorities,
         systemSettings,
         permissions,
     })

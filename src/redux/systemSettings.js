@@ -49,15 +49,16 @@ export const loadSystemSettings = () => (dispatch, getState, { engine }) => {
  * Reducer
  * =======
  */
+export const systemSettingsDefaultState = {
+    loading: false,
+    loaded: false,
+    error: null,
+    data: null,
+}
 
 export const systemSettings = (
-    state = {
-        loading: false,
-        loaded: false,
-        error: null,
-        data: null,
-    },
-    { type, payload }
+    state = systemSettingsDefaultState,
+    { type, payload } = {}
 ) => {
     const isType = isEqual(type)
 

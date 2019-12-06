@@ -39,9 +39,9 @@ export const Overview = ({ match }) => {
     const filteredSections = sectionOrder[group].filter(section =>
         hasUserAuthorityForSection({
             systemSettings,
-            authorities: userAuthorities,
-            schema: schemas[section.schemaName],
-            permissions: section.permissions,
+            userAuthorities,
+            schemas,
+            section,
         })
     )
 

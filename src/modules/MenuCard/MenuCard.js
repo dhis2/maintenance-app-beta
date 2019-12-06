@@ -32,14 +32,3 @@ MenuCard.propTypes = {
     headline: propTypes.string.isRequired,
     to: propTypes.string.isRequired,
 }
-
-export const ActionWrapper = ({ children }) => (
-    <div className={styles.actionWrapper}>{children}</div>
-)
-
-ActionWrapper.propTypes = {
-    children: propTypes.oneOfType([
-        propTypes.element,
-        propTypes.arrayOf(propTypes.element),
-    ]).isRequired,
-}

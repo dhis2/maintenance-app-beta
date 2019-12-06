@@ -50,14 +50,16 @@ export const loadUserAuthorities = () => (dispatch, getState, { engine }) => {
  * =======
  */
 
+export const userAuthoritiesDefaultState = {
+    loading: false,
+    loaded: false,
+    error: null,
+    data: null,
+}
+
 export const userAuthorities = (
-    state = {
-        loading: false,
-        loaded: false,
-        error: null,
-        data: null,
-    },
-    { type, payload }
+    state = userAuthoritiesDefaultState,
+    { type, payload } = {}
 ) => {
     const isType = isEqual(type)
 
