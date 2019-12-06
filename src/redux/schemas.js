@@ -59,7 +59,7 @@ export const loadSchemas = () => (dispatch, getState, { engine }) => {
 
 export const schemasDefaultState = {
     loading: false,
-    loaded: true,
+    loaded: false,
     error: null,
     data: null,
 }
