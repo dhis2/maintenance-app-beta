@@ -1,26 +1,26 @@
 import { Route } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import React from 'react'
-import propTypes from '@dhis2/prop-types'
 
+import { NoAuthority } from '../../views'
 import {
     getSchemasData,
     getUserAuthoritiesData,
     getSystemSettingsData,
 } from '../../redux'
 import { hasUserAuthorityForSection } from '../../utils'
-import { NoAuthority } from '../../views'
+import { sectionPropType } from '../ContentWrappers/Sidebar/sectionPropType'
 
-export const ProtectedRoute = ({ permissions, schemaName, ...props }) => {
+export const ProtectedRoute = ({ section, ...props }) => {
     const schemas = useSelector(getSchemasData)
     const userAuthorities = useSelector(getUserAuthoritiesData)
     const systemSettings = useSelector(getSystemSettingsData)
 
     const userHasAuthorityForSection = hasUserAuthorityForSection({
-        permissions,
-        authorities: userAuthorities,
-        systemSettings: systemSettings,
-        schema: schemas[schemaName],
+        userAuthorities,
+        systemSettings,
+        schemas,
+        section,
     })
 
     if (!userHasAuthorityForSection) {
@@ -32,10 +32,5 @@ export const ProtectedRoute = ({ permissions, schemaName, ...props }) => {
 
 ProtectedRoute.propTypes = {
     ...Route.propTypes,
-    permissions: propTypes.arrayOf(propTypes.string),
-    schemaName: propTypes.string,
-}
-
-ProtectedRoute.defaultProps = {
-    schemaName: '',
+    section: sectionPropType.isRequired,
 }

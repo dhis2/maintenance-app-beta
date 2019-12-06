@@ -49,7 +49,7 @@ export const Router = () => {
                      * =============================
                      * Home
                      * =============================
-                     * */ ''
+                     */ ''
                 }
                 <Route
                     exact
@@ -64,7 +64,7 @@ export const Router = () => {
                      * =============================
                      * All group overview views
                      * =============================
-                     * */ ''
+                     */ ''
                 }
                 <Route
                     exact
@@ -77,14 +77,13 @@ export const Router = () => {
                      * =============================
                      * Data Element
                      * =============================
-                     * */ ''
+                     */ ''
                 }
                 <ProtectedRoute
                     exact
                     path={dataElementSections.dataElement.path}
-                    schemaName={dataElementSections.dataElement.schemaName}
-                    permissions={dataElementSections.dataElement.permissions}
                     component={DataElementList}
+                    section={dataElementSections.dataElement}
                 />
 
                 {
@@ -92,7 +91,7 @@ export const Router = () => {
                      * =============================
                      * 404 - Redirect to old app
                      * =============================
-                     * */ ''
+                     */ ''
                 }
                 <Route component={RedirectToOld} />
             </Switch>

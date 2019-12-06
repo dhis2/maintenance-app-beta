@@ -43,9 +43,9 @@ export const All = () => {
                             .filter(section => {
                                 return hasUserAuthorityForSection({
                                     systemSettings,
-                                    authorities: userAuthorities,
-                                    schema: schemas[section.schemaName],
-                                    permissions: section.permissions,
+                                    userAuthorities,
+                                    schemas,
+                                    section,
                                 })
                             })
 

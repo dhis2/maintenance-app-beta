@@ -1,19 +1,27 @@
+import { checkAuthorities } from './checkAuthorities'
 import { getAuthoritiesFromSchema } from './getAuthoritiesFromSchema'
 
+/**
+ * @param {Object} args
+ * @param {Section} args.section
+ * @param {string[]} args.userAuthorities
+ * @param {Object} args.systemSettings
+ * @param {Object} [args.schemas]
+ */
 export const hasUserAuthorityForSection = ({
-    authorities,
+    section,
+    userAuthorities,
     systemSettings,
-    schema,
-    permissions,
+    schemas,
 }) => {
+    const { permissions, schemaName } = section
+    const schema = schemas && schemas[schemaName]
     const requiredPrivileges = schema
         ? getAuthoritiesFromSchema(schema)
         : permissions
 
     return (
         !systemSettings.keyRequireAddToView ||
-        requiredPrivileges.some(privileges =>
-            privileges.every(privilege => authorities.indexOf(privilege) !== -1)
-        )
+        checkAuthorities(requiredPrivileges, userAuthorities)
     )
 }
