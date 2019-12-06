@@ -10,7 +10,10 @@
         "localize": "yarn extract-pot && d2-i18n-generate -n NAMESPACE -p ./i18n/ -o ./src/locales/",
         "test": "react-scripts test",
         "lint:style": "d2-style js check --all",
-        "prestart": "yarn localize"
+        "prestart": "yarn localize",
+        "format": "yarn format:js && yarn format:text",
+        "format:js": "d2-style js apply",
+        "format:text": "d2-style text apply"
     },
     "dependencies": {
         "@dhis2/app-runtime": "^2.0.4",
@@ -34,6 +37,9 @@
         "reselect": "^4.0.0"
     },
     "devDependencies": {
-        "@dhis2/cli-style": "5.1.0"
+        "@dhis2/cli-style": "5.1.0",
+        "enzyme": "^3.10.0",
+        "enzyme-adapter-react-16": "^1.15.1",
+        "redux-mock-store": "^1.5.3"
     }
 }

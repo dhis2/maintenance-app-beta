@@ -11,10 +11,11 @@ export const configureStore = (engine, initialState) => {
         ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
         : compose
 
+    const thunkMiddleware = thunk.withExtraArgument({ engine })
     const store = createStore(
         rootReducer,
         initialState,
-        composeEnhancer(applyMiddleware(thunk.withExtraArgument({ engine })))
+        composeEnhancer(applyMiddleware(thunkMiddleware))
     )
 
     return store
