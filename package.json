@@ -18,7 +18,7 @@
         "@dhis2/d2-i18n-extract": "^1.0.8",
         "@dhis2/d2-i18n-generate": "^1.1.1",
         "@dhis2/prop-types": "^1.5.0",
-        "@dhis2/ui-core": "^4.1.1",
+        "@dhis2/ui-core": "^4.1.2",
         "@dhis2/ui-widgets": "2.0.5",
         "d2-manifest": "^1.0.0",
         "history": "^4.10.1",
