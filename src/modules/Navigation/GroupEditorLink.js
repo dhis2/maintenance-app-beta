@@ -15,12 +15,11 @@ import { hasUserAuthorityForSection } from '../../utils'
 export const GroupEditorLink = ({ disabled }) => {
     const systemSettings = useSelector(getSystemSettingsData)
     const userAuthorities = useSelector(getUserAuthoritiesData)
-    const permissions = groupEditorSection.permissions
 
     const userHasAuthorityForGroupEditor = hasUserAuthorityForSection({
+        section: groupEditorSection,
         userAuthorities,
         systemSettings,
-        permissions,
     })
 
     if (!userHasAuthorityForGroupEditor) {
