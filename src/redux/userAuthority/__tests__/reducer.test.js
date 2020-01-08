@@ -1,73 +1,14 @@
-jest.mock('../configureStore')
-
 import {
-    getUserAuthorities,
-    getUserAuthoritiesLoading,
-    getUserAuthoritiesLoaded,
-    getUserAuthoritiesError,
-    getUserAuthoritiesData,
     loadingUserAuthoritiesError,
-    loadUserAuthorities,
     setUserAuthorities,
     startLoadingUserAuthorities,
+} from '../actions'
+import {
     userAuthorities as reducer,
     userAuthoritiesDefaultState as defaultState,
-} from '../userAuthority'
-import { configureStore } from '../configureStore'
+} from '../reducer'
 
 const userAuthorities = ['F_FOO_PUBLIC_CREATE']
-
-describe('Thunk - loadUserAuthorities', () => {
-    const engine = {
-        query: jest.fn(() => Promise.resolve({ userAuthorities })),
-    }
-    const store = configureStore(engine)
-
-    beforeEach(() => {
-        store.clearActions()
-    })
-
-    afterEach(() => {
-        engine.query.mockClear()
-    })
-
-    it('should dispatch a loading user authorities start action', done => {
-        const expectedActions = expect.arrayContaining([
-            startLoadingUserAuthorities(),
-        ])
-
-        store.dispatch(loadUserAuthorities()).then(() => {
-            expect(store.getActions()).toEqual(expectedActions)
-            done()
-        })
-    })
-
-    it('should dispatch a set userAuthorities action when done loading', done => {
-        const expectedActions = expect.arrayContaining([
-            setUserAuthorities(userAuthorities),
-        ])
-
-        store.dispatch(loadUserAuthorities()).then(() => {
-            expect(store.getActions()).toEqual(expectedActions)
-            done()
-        })
-    })
-
-    it('should dispatch a loading userAuthorities error action when an error occurred', done => {
-        const error = 'An error occurred'
-        engine.query.mockImplementationOnce(() =>
-            Promise.reject(new Error(error))
-        )
-        const expectedActions = expect.arrayContaining([
-            loadingUserAuthoritiesError(error),
-        ])
-
-        store.dispatch(loadUserAuthorities()).then(() => {
-            expect(store.getActions()).toEqual(expectedActions)
-            done()
-        })
-    })
-})
 
 describe('Reducer', () => {
     it('should return the state if an unknown action has been dispatched', () => {
@@ -132,29 +73,5 @@ describe('Reducer', () => {
         const actual = reducer(state, action)
 
         expect(actual).toEqual(expected)
-    })
-})
-
-describe('Selectors', () => {
-    const state = { userAuthorities: defaultState }
-
-    it('should get the userAuthorities', () => {
-        expect(getUserAuthorities(state)).toEqual(defaultState)
-    })
-
-    it('should get the loading state', () => {
-        expect(getUserAuthoritiesLoading(state)).toEqual(defaultState.loading)
-    })
-
-    it('should get the loaded state', () => {
-        expect(getUserAuthoritiesLoaded(state)).toEqual(defaultState.loaded)
-    })
-
-    it('should get the error state', () => {
-        expect(getUserAuthoritiesError(state)).toEqual(defaultState.error)
-    })
-
-    it('should get the data state', () => {
-        expect(getUserAuthoritiesData(state)).toEqual(defaultState.data)
     })
 })

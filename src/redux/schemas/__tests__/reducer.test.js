@@ -1,19 +1,12 @@
-jest.mock('../configureStore')
-
 import {
-    getSchemas,
-    getSchemasLoading,
-    getSchemasLoaded,
-    getSchemasError,
-    getSchemasData,
     loadingSchemasError,
-    loadSchemas,
-    schemas as reducer,
-    schemasDefaultState as defaultState,
     setSchemas,
     startLoadingSchemas,
-} from '../schemas'
-import { configureStore } from '../configureStore'
+} from '../actions'
+import {
+    schemas as reducer,
+    schemasDefaultState as defaultState,
+} from '../reducer'
 
 const schemas = [
     {
@@ -28,57 +21,7 @@ const schemas = [
 ]
 const formattedSchemas = { organisationUnits: schemas[0] }
 
-describe('Thunk - loadSchemas', () => {
-    const engine = {
-        query: jest.fn(() => Promise.resolve({ schemas: { schemas } })),
-    }
-    const store = configureStore(engine)
-
-    beforeEach(() => {
-        store.clearActions()
-    })
-
-    afterEach(() => {
-        engine.query.mockClear()
-    })
-
-    it('should dispatch a loading schemas start action', done => {
-        const expectedActions = expect.arrayContaining([startLoadingSchemas()])
-
-        store.dispatch(loadSchemas()).then(() => {
-            expect(store.getActions()).toEqual(expectedActions)
-            done()
-        })
-    })
-
-    it('should dispatch a set schemas action when done loading', done => {
-        const expectedActions = expect.arrayContaining([
-            setSchemas(formattedSchemas),
-        ])
-
-        store.dispatch(loadSchemas()).then(() => {
-            expect(store.getActions()).toEqual(expectedActions)
-            done()
-        })
-    })
-
-    it('should dispatch a loading schemas error action when an error occurred', done => {
-        const error = 'An error occurred'
-        engine.query.mockImplementationOnce(() =>
-            Promise.reject(new Error(error))
-        )
-        const expectedActions = expect.arrayContaining([
-            loadingSchemasError(error),
-        ])
-
-        store.dispatch(loadSchemas()).then(() => {
-            expect(store.getActions()).toEqual(expectedActions)
-            done()
-        })
-    })
-})
-
-describe('Reducer', () => {
+describe('Schemas reducer', () => {
     it('should return the state if an unknown action has been dispatched', () => {
         const state = { ...defaultState }
         const action = { type: 'UNKNOWN_ACTION' }
@@ -141,29 +84,5 @@ describe('Reducer', () => {
         const actual = reducer(state, action)
 
         expect(actual).toEqual(expected)
-    })
-})
-
-describe('Selector', () => {
-    const state = { schemas: defaultState }
-
-    it('should get the schemas', () => {
-        expect(getSchemas(state)).toEqual(defaultState)
-    })
-
-    it('should get the loading state', () => {
-        expect(getSchemasLoading(state)).toEqual(defaultState.loading)
-    })
-
-    it('should get the loaded state', () => {
-        expect(getSchemasLoaded(state)).toEqual(defaultState.loaded)
-    })
-
-    it('should get the error state', () => {
-        expect(getSchemasError(state)).toEqual(defaultState.error)
-    })
-
-    it('should get the data state', () => {
-        expect(getSchemasData(state)).toEqual(defaultState.data)
     })
 })

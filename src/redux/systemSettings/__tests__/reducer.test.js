@@ -1,71 +1,14 @@
-jest.mock('../configureStore')
-
 import {
-    getSystemSettings,
-    getSystemSettingsLoading,
-    getSystemSettingsLoaded,
-    getSystemSettingsError,
-    getSystemSettingsData,
     loadingSystemSettingsError,
-    loadSystemSettings,
     setSystemSettings,
     startLoadingSystemSettings,
+} from '../actions'
+import {
     systemSettings as reducer,
     systemSettingsDefaultState as defaultState,
-} from '../systemSettings'
-import { configureStore } from '../configureStore'
+} from '../reducer'
 
 const systemSettings = { keyRequireAddToView: true }
-
-describe('Thunk - loadSystemSettings', () => {
-    const engine = { query: jest.fn(() => Promise.resolve({ systemSettings })) }
-    const store = configureStore(engine)
-
-    beforeEach(() => {
-        store.clearActions()
-    })
-
-    afterEach(() => {
-        engine.query.mockClear()
-    })
-
-    it('should dispatch a loading system settings start action', done => {
-        const expectedActions = expect.arrayContaining([
-            startLoadingSystemSettings(),
-        ])
-
-        store.dispatch(loadSystemSettings()).then(() => {
-            expect(store.getActions()).toEqual(expectedActions)
-            done()
-        })
-    })
-
-    it('should dispatch a set systemSettings action when done loading', done => {
-        const expectedActions = expect.arrayContaining([
-            setSystemSettings(systemSettings),
-        ])
-
-        store.dispatch(loadSystemSettings()).then(() => {
-            expect(store.getActions()).toEqual(expectedActions)
-            done()
-        })
-    })
-
-    it('should dispatch a loading systemSettings error action when an error occurred', done => {
-        const error = 'An error occurred'
-        engine.query.mockImplementationOnce(() =>
-            Promise.reject(new Error(error))
-        )
-        const expectedActions = expect.arrayContaining([
-            loadingSystemSettingsError(error),
-        ])
-
-        store.dispatch(loadSystemSettings()).then(() => {
-            expect(store.getActions()).toEqual(expectedActions)
-            done()
-        })
-    })
-})
 
 describe('Reducer', () => {
     it('should return the state if an unknown action has been dispatched', () => {
@@ -130,29 +73,5 @@ describe('Reducer', () => {
         const actual = reducer(state, action)
 
         expect(actual).toEqual(expected)
-    })
-})
-
-describe('Selectors', () => {
-    const state = { systemSettings: defaultState }
-
-    it('should get the systemSettings', () => {
-        expect(getSystemSettings(state)).toEqual(defaultState)
-    })
-
-    it('should get the loading state', () => {
-        expect(getSystemSettingsLoading(state)).toEqual(defaultState.loading)
-    })
-
-    it('should get the loaded state', () => {
-        expect(getSystemSettingsLoaded(state)).toEqual(defaultState.loaded)
-    })
-
-    it('should get the error state', () => {
-        expect(getSystemSettingsError(state)).toEqual(defaultState.error)
-    })
-
-    it('should get the data state', () => {
-        expect(getSystemSettingsData(state)).toEqual(defaultState.data)
     })
 })

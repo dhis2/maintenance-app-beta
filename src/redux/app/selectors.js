@@ -2,37 +2,17 @@ import {
     getSchemasError,
     getSchemasLoaded,
     getSchemasLoading,
-    loadSchemas,
-} from './schemas'
+} from '../schemas/selectors'
 import {
     getSystemSettingsError,
     getSystemSettingsLoaded,
     getSystemSettingsLoading,
-    loadSystemSettings,
-} from './systemSettings'
+} from '../systemSettings/selectors'
 import {
     getUserAuthoritiesError,
     getUserAuthoritiesLoaded,
     getUserAuthoritiesLoading,
-    loadUserAuthorities,
-} from './userAuthority'
-
-/**
- * Thunks
- * ======
- */
-
-export const loadAppData = () => dispatch =>
-    Promise.all([
-        dispatch(loadSchemas()),
-        dispatch(loadSystemSettings()),
-        dispatch(loadUserAuthorities()),
-    ])
-
-/**
- * Selectors
- * =========
- */
+} from '../userAuthority/selectors'
 
 export const getAppReady = state =>
     !getSchemasLoading(state) &&
