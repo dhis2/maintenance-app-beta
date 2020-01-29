@@ -1,441 +1,0 @@
-
-msgid ""
-msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-15T13:45:50.391Z\n"
-"PO-Revision-Date: 2019-08-15T13:45:50.391Z\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: km\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
-"X-Pootle-Path: /km/maintenance-app/km.po\n"
-"X-Pootle-Revision: 29879
-"
-
-
-msgid ""
-"Create, modify, view and delete data elements. Data"
-"elements are phenomena for which will be captured and"
-"analyzed."
-msgstr ""
-"Create, modify, view and delete data elements. Data"
-"elements are phenomena for which will be captured and"
-"analysed."
-
-
-msgid ""
-"Create, modify, view and delete category options. Category"
-"options are options with in category."
-msgstr ""
-"Create, modify, view and delete data element category"
-"options. Category Option are fine-grained break-downs of"
-"catagory."
-
-
-msgid ""
-"Create, modify, view and delete data element categories."
-"Categories are used for disaggregation of data elements."
-msgstr ""
-"Create, modify, view and delete data element categories."
-"Categories are fine-grained break-downs of data elements."
-
-
-msgid "Category combination"
-msgstr "Category Combination"
-
-msgid "Do you want to delete indicator?"
-msgstr "Do you want to delete indicator?"
-
-msgid "Adding indicator failed"
-msgstr "Adding indicator failed"
-
-msgid "Saving indicator failed"
-msgstr "Saving indicator failed"
-
-msgid " The selected organisation unit will be moved to root"
-msgstr "The selected organisation unit will be moved to root"
-
-msgid "Identifier does not reference a data element"
-msgstr "Data element does not exist"
-
-msgid "Identifier does not reference a category option combo"
-msgstr "Category option combo does not exist"
-
-msgid "Org unit group does not exist"
-msgstr "Org unit group does not exist"
-
-msgid "Done"
-msgstr "Done"
-
-msgid "This SQL statement is invalid"
-msgstr "This SQL statement is invalid."
-
-msgid "This resource viewer is invalid or does not exist"
-msgstr "This resource viewer is invalid or does not exist."
-
-msgid "Restricted user tables cannot be referenced in query"
-msgstr "Not allowance to query in the special tables!"
-
-msgid "Loading"
-msgstr "Loading"
-
-msgid "Group members"
-msgstr "Group Members"
-
-msgid " Right brackets"
-msgstr "Right brackets"
-
-msgid " Divide"
-msgstr "Divide"
-
-msgid " Plus"
-msgstr "Plus"
-
-msgid " Minus"
-msgstr "Minus"
-
-msgid "Please specify a name"
-msgstr "Please specify a name"
-
-msgid " Please specify a start date"
-msgstr "Please specify a start date"
-
-msgid " Please specify an ending date"
-msgstr "Please specify an ending date"
-
-msgid "End date cannot be before Start date"
-msgstr "End date can not be before start date"
-
-msgid " Are you sure you want to delete the validation rule?"
-msgstr "Are you sure you want to delete the validation rule?"
-
-msgid " Are you sure you want to delete the validation rule group?"
-msgstr "Are you sure you want to delete the validation rule group?"
-
-msgid " Edit left side"
-msgstr "Edit left side"
-
-msgid " Edit right side"
-msgstr "Edit right side"
-
-msgid " Select operator"
-msgstr "Select operator"
-
-msgid " Left"
-msgstr "Left"
-
-msgid " Right"
-msgstr "Right"
-
-msgid " Textual expression description"
-msgstr "Textual expression description"
-
-msgid " Edit validation rule"
-msgstr "Edit validation rule"
-
-msgid " Validation rule"
-msgstr "Validation Rule"
-
-msgid " Run validation"
-msgstr "Run validation"
-
-msgid " Validation alerts"
-msgstr "Validation alerts"
-
-msgid "Value"
-msgstr "Value"
-
-msgid "Data element"
-msgstr "Data element"
-
-msgid "Organisation unit"
-msgstr "Organisation unit"
-
-msgid " Period"
-msgstr "Period"
-
-msgid " Source"
-msgstr "Source"
-
-msgid " Validation rule group"
-msgstr "Validation Rule Group"
-
-msgid "Alert only organisation unit related users"
-msgstr "Only organisation unit related users are alerted"
-
-msgid " All validation rules"
-msgstr "All validation rules"
-
-msgid " Validation passed successfully"
-msgstr "Validation passed successfully"
-
-msgid "Equal to"
-msgstr "="
-
-msgid "Value type"
-msgstr "Value Type"
-
-msgid "Program stage sort order"
-msgstr "Program stage sort order"
-
-msgid "Greater than or equal to"
-msgstr ">="
-
-msgid " Define registration form"
-msgstr "Define registration form"
-
-msgid "Search apps"
-msgstr "Search apps"
-
-msgid "Average"
-msgstr "ផលមធ្យម"
-
-msgid "displayName"
-msgstr "displayName"
-
-msgid "This object will be private to yourself"
-msgstr "This object will be private to yourself"
-
-msgid "Synchronization settings"
-msgstr "Synchronization settings"
-
-msgid "Sum"
-msgstr "ផល​បូក"
-
-msgid "Unit interval"
-msgstr "Unit interval"
-
-msgid "lastUpdated"
-msgstr "lastUpdated"
-
-msgid "Access settings"
-msgstr "Access settings"
-
-msgid "Percentage"
-msgstr "Percentage"
-
-msgid "Text"
-msgstr "អត្ថបទ​"
-
-msgid "Enrollment status"
-msgstr "Enrollment status"
-
-msgid "System monitoring settings"
-msgstr "System monitoring settings"
-
-msgid "Manage my apps"
-msgstr "Manage my apps"
-
-msgid "Standard deviation"
-msgstr "Standard deviation"
-
-msgid "Interpretations"
-msgstr "កន្លែងសន្ទនារ"
-
-msgid "This object will be created with public edit and view rights"
-msgstr "This object will be created with public edit and view rights"
-
-msgid "displayDescription"
-msgstr "displayDescription"
-
-msgid "Settings"
-msgstr "ការ​កំណត់"
-
-msgid "Tracked entity instance count"
-msgstr "Tracked entity instance count"
-
-msgid "Enrollment count"
-msgstr "Enrollment count"
-
-msgid "Edit"
-msgstr "កែសម្រួល​"
-
-msgid "Program stage id"
-msgstr "Program stage id"
-
-msgid "Profile"
-msgstr "ជីវប្រវត្តិ"
-
-msgid "Count"
-msgstr "ផលរាប់"
-
-msgid "About DHIS 2"
-msgstr "About DHIS 2"
-
-msgid "Email settings"
-msgstr "Email settings"
-
-msgid "Appearance settings"
-msgstr "Appearance settings"
-
-msgid "Version"
-msgstr "កំណែ"
-
-msgid "Messaging settings"
-msgstr "Messaging settings"
-
-msgid "Log out"
-msgstr "ចេញពីគណនី"
-
-msgid "Import settings"
-msgstr "Import settings"
-
-msgid "Help"
-msgstr "ជំនួយ​"
-
-msgid "Long text"
-msgstr "Long text"
-
-msgid "OAuth2 clients"
-msgstr "OAuth2 clients"
-
-msgid "Variance"
-msgstr "Variance"
-
-msgid "Calendar settings"
-msgstr "Calendar settings"
-
-msgid "Clone"
-msgstr "ចម្លងឡើងវិញ"
-
-msgid "Messages"
-msgstr "សារ"
-
-msgid "Short name"
-msgstr "Short name"
-
-msgid "General settings"
-msgstr "General settings"
-
-msgid "Analytics settings"
-msgstr "Analytics settings"
-
-msgid "Server settings"
-msgstr "Server settings"
-
-msgid "Account"
-msgstr "គណនី"
-
-msgid "Username"
-msgstr "ឈ្មោះគណនី"
-
-msgid "System Settings"
-msgstr "កំណត់"
-
-msgid "Immunization analysis"
-msgstr "Immunization analysis"
-
-msgid "Browser Cache Cleaner"
-msgstr "Browser Cache Cleaner"
-
-msgid "Capture"
-msgstr "Capture"
-
-msgid "TUCANA USERS IMPORTER APP"
-msgstr "TUCANA USERS IMPORTER APP"
-
-msgid "Data Entry"
-msgstr "កនែ្លងបញ្ជូលទិន្នន័យ"
-
-msgid "Data Visualizer"
-msgstr "Data Visualizer"
-
-msgid "Mobile Configuration"
-msgstr "ការ​កំណត់​រចនា​សម្ព័ន្ធ​ទូរស័ព្ទ"
-
-msgid "Data Quality"
-msgstr "សវនកម្ម"
-
-msgid "Tracker Capture"
-msgstr "កត់ត្រាការតាមដាន"
-
-msgid "GIS"
-msgstr "ប្រព័ន្ធព័ត៌មានភូមិសាស្ត្រ"
-
-msgid "Function Maintenance"
-msgstr "Function Maintenance"
-
-msgid "Dashboard Classic"
-msgstr "Dashboard Classic"
-
-msgid "Event Visualizer"
-msgstr "រូបភាពព្រឹត្តិការណ៍"
-
-msgid "Event Reports"
-msgstr "របាយការណ៍ព្រឹត្តិការណ៍"
-
-msgid "App Management"
-msgstr "App Management"
-
-msgid "Datastore Management"
-msgstr "Datastore Management"
-
-msgid "Scheduler"
-msgstr "Scheduler"
-
-msgid "Menu Management"
-msgstr "Menu Management"
-
-msgid "Reports"
-msgstr "របាយការណ៍ NRHM"
-
-msgid "BIF"
-msgstr "BIF"
-
-msgid "Interactive Dashboard 2"
-msgstr "Interactive Dashboard 2"
-
-msgid "Dashboard"
-msgstr "ការវិភាគទិន្នន័យ"
-
-msgid "Pivot Table"
-msgstr "តារាងភីវូត"
-
-msgid "Facility Reconciliation"
-msgstr "Facility Reconciliation"
-
-msgid "WHO Data Quality Tool"
-msgstr "WHO Data Quality Tool"
-
-msgid "Interpretations PSI"
-msgstr "Interpretations PSI"
-
-msgid "Dashboards app"
-msgstr "Dashboards app"
-
-msgid "dAtaZ"
-msgstr "dAtaZ"
-
-msgid "Usage Analytics"
-msgstr "Usage Analytics"
-
-msgid "Interpretations"
-msgstr "Interpretations"
-
-msgid "Translations"
-msgstr "Translations"
-
-msgid "Maintenance"
-msgstr "Maintenance"
-
-msgid "Data Administration"
-msgstr "ការ​គ្រប់គ្រង​ទិន្នន័យ"
-
-msgid "interactiveMap"
-msgstr "interactiveMap"
-
-msgid "Maps"
-msgstr "Maps"
-
-msgid "Users"
-msgstr "Users"
-
-msgid "Classic Data Visualizer"
-msgstr "រូបភាពទិន្នន័យ"
-
-msgid "WHO Metadata browser"
-msgstr "WHO Metadata browser"
