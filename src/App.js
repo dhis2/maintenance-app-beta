@@ -1,19 +1,26 @@
-import { CssReset } from '@dhis2/ui-core'
-import { DataProvider } from '@dhis2/app-runtime'
-import { HeaderBar } from '@dhis2/ui-widgets'
-import React from 'react'
-import { Maintenance } from './Maintenance.app.js'
-import styles from './App.module.css'
 import './App.css'
 
-const App = () => (
-    <DataProvider baseUrl={process.env.REACT_APP_DHIS2_BASE_URL} apiVersion="">
-        <div className={styles.wrapper}>
-            <HeaderBar appName="Maintenance app" />
-            <Maintenance />
-        </div>
-        <CssReset />
-    </DataProvider>
-)
+import { Provider } from 'react-redux'
+import { useDataEngine } from '@dhis2/app-runtime'
+import { CssVariables } from '@dhis2/ui-core'
+import React, { useState } from 'react'
+
+import { Router } from './Router'
+import { configureStore } from './redux'
+import styles from './App.module.css'
+
+const App = () => {
+    const engine = useDataEngine()
+    const [store] = useState(configureStore(engine))
+
+    return (
+        <Provider store={store}>
+            <CssVariables colors />
+            <div className={styles.wrapper}>
+                <Router />
+            </div>
+        </Provider>
+    )
+}
 
 export default App
