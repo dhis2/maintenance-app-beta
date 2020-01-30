@@ -1,7 +1,9 @@
 import { useSelector } from 'react-redux'
-import propTypes from '@dhis2/prop-types'
+
+import cx from 'classnames'
 import React from 'react'
 import i18n from '@dhis2/d2-i18n'
+import propTypes from '@dhis2/prop-types'
 
 import {
     CardMenu,
@@ -12,6 +14,8 @@ import {
     Sidebar,
 } from '../modules'
 import { Error } from './Error'
+import { createTestNames } from '../utils/dataTest/createTestNames'
+import { formatNameSegment } from '../utils/dataTest/formatNameSegment'
 import {
     getSchemasData,
     getSystemSettingsData,
@@ -63,7 +67,12 @@ export const Overview = ({ match }) => {
     }
 
     return (
-        <Container>
+        <Container
+            dataTest={cx(
+                createTestNames('page-overview'),
+                createTestNames(`page-overview-${formatNameSegment(group)}`)
+            )}
+        >
             <SideBarLayout>
                 <Sidebar sections={sidebarSections} />
             </SideBarLayout>

@@ -1,10 +1,13 @@
-import { MenuList } from '@dhis2/ui-core'
 import { useHistory, useLocation } from 'react-router-dom'
+
+import { MenuList } from '@dhis2/ui-core'
 import React from 'react'
 import propTypes from '@dhis2/prop-types'
+import cx from 'classnames'
 
 import { FolderClosed } from '../icons/FolderClosed'
 import { SidebarMenuItem } from './Sidebar/SidebarMenuItem'
+import { createTestNames } from '../../utils/dataTest/createTestNames'
 import { sectionPropType } from './Sidebar/sectionPropType'
 import styles from './Sidebar.module.css'
 
@@ -17,7 +20,7 @@ export const Sidebar = ({ sections }) => {
     )
 
     return (
-        <div className={styles.container}>
+        <div className={cx(styles.container, createTestNames('sidebar'))}>
             <MenuList>
                 {filteredSections.map(
                     ({ name, path, permissions, schemaName }) => (

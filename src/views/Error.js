@@ -1,10 +1,12 @@
-import { Button, Modal } from '@dhis2/ui-core'
 import { useDispatch, useSelector } from 'react-redux'
+
+import { Button, Modal } from '@dhis2/ui-core'
 import React from 'react'
-import propTypes from '@dhis2/prop-types'
 import i18n from '@dhis2/d2-i18n'
+import propTypes from '@dhis2/prop-types'
 
 import { Container, Content } from '../modules'
+import { createTestNames } from '../utils/dataTest/createTestNames'
 import { getAppDataError, loadAppData } from '../redux'
 
 export const Error = ({ error }) => {
@@ -12,7 +14,7 @@ export const Error = ({ error }) => {
     const appError = useSelector(getAppDataError)
 
     return (
-        <Container>
+        <Container dataTest={createTestNames('page-error')}>
             <Content>
                 <Modal open medium>
                     {/* Will be done properly once ModalTitle is available */}

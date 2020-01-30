@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux'
+
 import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 
 import { CardMenu, Container, Content, MainContent } from '../modules'
 import { Error } from './Error'
+import { createTestNames } from '../utils/dataTest/createTestNames'
 import {
     getSchemasData,
     getSystemSettingsData,
@@ -34,7 +36,7 @@ export const All = () => {
         )
 
     return (
-        <Container>
+        <Container dataTest={createTestNames('page-all')}>
             <Content>
                 <MainContent>
                     {authorizedGroupOrder.map(group => {

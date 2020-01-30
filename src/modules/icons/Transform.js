@@ -1,7 +1,10 @@
 import React from 'react'
 
+import { createTestNames } from '../../utils/dataTest/createTestNames'
+
 export const Transform = () => (
     <svg
+        className={createTestNames('icon-transform')}
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"

@@ -1,9 +1,12 @@
 import React from 'react'
+import cx from 'classnames'
+
+import { createTestNames } from '../../utils/dataTest/createTestNames'
 import styles from './Folder.module.css'
 
 export const FolderClosed = () => (
     <svg
-        className={styles.svg}
+        className={cx(styles.svg, createTestNames('icon-folderclosed'))}
         width="18px"
         height="18px"
         viewBox="0 0 18 18"

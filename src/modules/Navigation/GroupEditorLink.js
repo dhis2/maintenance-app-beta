@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux'
+
 import React from 'react'
 import propTypes from '@dhis2/prop-types'
 
 import { NavigationLink } from './NavigationLink'
 import { Transform } from '../icons/Transform'
+import { createTestNames } from '../../utils/dataTest/createTestNames'
 import { getSystemSettingsData, getUserAuthoritiesData } from '../../redux'
 import { groupEditorSection } from '../../config'
 import { hasUserAuthorityForSection } from '../../utils'
@@ -33,6 +35,7 @@ export const GroupEditorLink = ({ disabled }) => {
             to={groupEditorSection.path}
             icon={<Transform />}
             disabled={disabled}
+            dataTest={createTestNames('navigation-groupeditorlink')}
         />
     )
 }

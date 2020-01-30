@@ -8,10 +8,11 @@ import {
     Sidebar,
     PageHeadline,
 } from '../../modules'
+import { createTestNames } from '../../utils/dataTest/createTestNames'
 import { dataElementSections, groups, sectionOrder } from '../../config'
 
 export const DataElementList = () => (
-    <Container>
+    <Container dataTest={createTestNames('page-dataelementlist')}>
         <SideBarLayout>
             <Sidebar sections={sectionOrder[groups.dataElement.key]} />
         </SideBarLayout>

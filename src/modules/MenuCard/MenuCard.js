@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom'
+
 import { Card } from '@dhis2/ui-core'
 import React from 'react'
+import cx from 'classnames'
 import propTypes from '@dhis2/prop-types'
 
+import { createTestNames } from '../../utils/dataTest/createTestNames'
 import styles from './MenuCard.module.css'
 
 export const MenuCard = ({ headline, content, children, to }) => (
-    <div className={styles.container}>
+    <div className={cx(styles.container, createTestNames('menucard'))}>
         <Card className={styles.card}>
             <Link to={to} className={styles.cardTitleLink}>
                 <h3 className={styles.headline}>

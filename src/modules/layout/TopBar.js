@@ -1,9 +1,14 @@
 import React from 'react'
+import cx from 'classnames'
 import propTypes from '@dhis2/prop-types'
+
+import { createTestNames } from '../../utils/dataTest/createTestNames'
 import styles from './TopBar.module.css'
 
 export const TopBar = ({ as: Element, children }) => (
-    <Element className={styles.topBar}>{children}</Element>
+    <Element className={cx(styles.topBar, createTestNames('layout-topbar'))}>
+        {children}
+    </Element>
 )
 
 TopBar.propTypes = {

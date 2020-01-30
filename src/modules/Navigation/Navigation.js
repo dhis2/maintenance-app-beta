@@ -1,19 +1,20 @@
-import { TabBar } from '@dhis2/ui-core'
 import { useSelector } from 'react-redux'
-import React from 'react'
 
+import { TabBar } from '@dhis2/ui-core'
+import React from 'react'
 import cx from 'classnames'
 
 import { GroupEditorLink } from './GroupEditorLink'
 import { NavigationLink } from './NavigationLink'
-import { groupOrder } from '../../config'
+import { createTestNames } from '../../utils/dataTest/createTestNames'
 import { getNavigationDisabled } from '../../redux'
+import { groupOrder } from '../../config'
 
 export const Navigation = () => {
     const disabled = useSelector(getNavigationDisabled)
 
     return (
-        <nav className={cx({ disabled })}>
+        <nav className={cx({ disabled }, createTestNames('navigation'))}>
             <TabBar scrollable>
                 <NavigationLink
                     noAuth

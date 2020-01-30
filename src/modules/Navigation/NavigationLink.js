@@ -1,16 +1,19 @@
-import { Tab } from '@dhis2/ui-core'
-import { useSelector } from 'react-redux'
 import { useHistory, useRouteMatch } from 'react-router-dom'
-import React, { useCallback } from 'react'
-import propTypes from '@dhis2/prop-types'
-import styles from './NavigationLink.module.css'
+import { useSelector } from 'react-redux'
 
+import { Tab } from '@dhis2/ui-core'
+import React, { useCallback } from 'react'
+import cx from 'classnames'
+import propTypes from '@dhis2/prop-types'
+
+import { createTestNames } from '../../utils/dataTest/createTestNames'
 import {
     getSchemasData,
     getSystemSettingsData,
     getUserAuthoritiesData,
 } from '../../redux'
 import { hasUserAuthorityForGroup } from '../../utils'
+import styles from './NavigationLink.module.css'
 
 const useOnClick = (disabled, goToPath, to) =>
     useCallback(
@@ -28,6 +31,7 @@ export const NavigationLink = ({
     group,
     noAuth,
     disabled,
+    dataTest,
 }) => {
     const match = useRouteMatch()
     const history = useHistory()
@@ -49,7 +53,11 @@ export const NavigationLink = ({
         <Tab
             selected={id === match.params.group}
             onClick={onClick}
-            className={styles.link}
+            className={cx(
+                styles.link,
+                createTestNames('navigation-link'),
+                dataTest
+            )}
         >
             {label || icon}
         </Tab>
@@ -59,6 +67,7 @@ export const NavigationLink = ({
 NavigationLink.propTypes = {
     id: propTypes.string.isRequired,
     to: propTypes.string.isRequired,
+    dataTest: propTypes.string,
     disabled: propTypes.bool,
     group: propTypes.object,
     icon: propTypes.requiredIf(props => !props.label, propTypes.element),
