@@ -10,14 +10,7 @@ import {
     getAppReady,
     loadAppData,
 } from './redux'
-import {
-    All,
-    DataElementList,
-    Overview,
-    RedirectToOld,
-    Error,
-    Loading,
-} from './views'
+import { All, DataElementList, Overview, Error, Loading } from './views'
 
 export const Router = () => {
     const dispatch = useDispatch()
@@ -85,15 +78,6 @@ export const Router = () => {
                     component={DataElementList}
                     section={dataElementSections.dataElement}
                 />
-
-                {
-                    /**
-                     * =============================
-                     * 404 - Redirect to old app
-                     * =============================
-                     */ ''
-                }
-                <Route component={RedirectToOld} />
             </Switch>
         </BrowserRouter>
     )
