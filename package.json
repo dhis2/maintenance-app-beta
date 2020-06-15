@@ -19,7 +19,7 @@
         "@dhis2/d2-i18n-extract": "^1.0.8",
         "@dhis2/d2-i18n-generate": "^1.1.1",
         "d2-manifest": "^1.0.0",
-        "history": "^4.10.1",
+        "history": "^5.0.0",
         "lodash": "^4.17.15",
         "moment": "^2.24.0",
         "react-redux": "^7.1.3",
