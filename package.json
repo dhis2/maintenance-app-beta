@@ -30,7 +30,7 @@
         "reselect": "^4.0.0"
     },
     "devDependencies": {
-        "@dhis2/cli-app-scripts": "^3.2.3",
+        "@dhis2/cli-app-scripts": "^7.1.2",
         "@dhis2/cli-style": "6.0.0",
         "enzyme": "^3.11.0",
         "enzyme-adapter-react-16": "^1.15.2",
