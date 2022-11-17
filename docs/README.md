@@ -31,12 +31,6 @@ are complicated as well), we:
   section / piece of code is somehow different from the rest, we can co-locate
   that difference with that particular section without having to complicate
 
-## Open ToDos
-
-* Create a new repository
-  * What should the name be?
-* Copy this doc into the new repository
-
 ## Open discussions
 
 We'll use this document for now to document question that have to be answered
