@@ -1,4 +1,4 @@
-# Maintenance app
+# Maintenance app (beta)
 
 These docs are about the refactoring of the maintenance app. We're actually not
 refactoring any code, we'll rewrite the app section by section.
