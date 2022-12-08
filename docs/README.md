@@ -10,6 +10,11 @@ about having automatic interlinking from the new app to the old one when
 clicking on a link to a section that hasn't been implemented yet. This option
 has yet to be explored by the entire team).
 
+## Specific topics
+
+* [Folder structure](./folder-structure.md)
+* [Url path structure](./url-path-structure.md)
+
 ## General strategy
 
 There are several challenges when it comes to the maintenance app:
