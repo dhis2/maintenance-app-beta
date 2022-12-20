@@ -14,6 +14,17 @@ has yet to be explored by the entire team).
 
 * [Folder structure](./folder-structure.md)
 * [Url path structure](./url-path-structure.md)
+* [Client-side state](./client-side-state.md)
+* [Server-side state](./server-side-state.md)
+
+## Decisions
+
+Decisions will be recorded with [ADRs](https://adr.github.io/). A template for
+new decisions can be found [here](./templates/ADR.md), which has been copied
+from the ["Markdown Any Decision Records"](https://adr.github.io/madr/)'s
+repository.
+
+All decisions can be found in the [decisions folder](./decisions).
 
 ## General strategy
 
@@ -54,12 +65,6 @@ working on the project though but before it's relevant to make a decision:
   - redux
   - zustand
 
-#### How do we manage server-side state?
-
-- **stack options**
-  - tanstack-query + app-runtime
-  - app-runtime
-
 #### How do we manage form state?
 
 - **stack options**
@@ -87,41 +92,9 @@ working on the project though but before it's relevant to make a decision:
 - We declare routes **in JSX**
   - Much better overview, less config, easier to reason about
 
-### How do we set up folder structure?
-
-We've previously decided to have
-[this](https://github.com/dhis2/notes/discussions/248) folder structure.
-There's one point I (@Mohammer5) wouldd like to stress, which I think is quite
-important:
-
-> The src/components and src/pages distinction. I find this really helps
-> with organisation. You can start building in pages without caring about
-> abstractions, and then if reusable patterns emerge, they can be
-> abstracted to generic components. **This saves you from abstracting too
-> early.** You can just starting building out pages for the app, and then
-> only when a proper pattern has emerged do you abstract it. Code that is
-> page specific can just be left in pages.
-
-The last time we've talked about this is more than a year ago. Should we
-talk about this again? I suppose we've learned a couple of things from
-working on the sms-config- & data-entry-app.
-
-### Do we use TypeScript?
-
-This simply needs to be discussed properly. Regardless of whether we adopt TS
-at DHIS2, adopting it in the maintenance app has its own set of ad- and
-disadvantages. A far reaching decision like that should be exploren thoroughly.
-
 ### Do we want to copy anything from "mar-y"?
 
 A duplicate fo the old code has been put [here](https://github.com/Mohammer5/mar-y).
 
 * [`<RedirectToOld/>`](https://github.com/Mohammer5/mar-y/blob/780633baf1f575abda9adaae4cd8770dec9a772d/src/views/RedirectToOld.js)?
 * [`<ProtectedRoute/>`](https://github.com/Mohammer5/mar-y/blob/master/src/modules/Navigation/ProtectedRoute.js)?
-
-### How do we capture decisions?
-
-We thought about using ADRs. Should we proceed with that? Do we even need that?
-Or is it enough to have a proper folder structure and respective README.md
-files in the `/docs` folder? If we rely on our own docs structure, what should
-that structure look like?
