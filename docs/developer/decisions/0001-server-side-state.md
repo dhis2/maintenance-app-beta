@@ -19,14 +19,7 @@ in the aggregate data entry app was done as an experiment. We should use
 app-runtime and improve it if we find use cases to ensure consistency across
 apps.
 
-<!-- This is an optional element. Feel free to remove. -->
 ### Positive Consequences
 
 * We keep apps consistent
 * One way of upgrading across apps
-
-<!-- This is an optional element. Feel free to remove. -->
-### Negative Consequences
-
-* The way of working with tanstack-query directly feels a lot more mature than
-  with the app-runtime
