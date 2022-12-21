@@ -32,8 +32,8 @@ Example:
     index.js      # exports only the view, keeping everything else an internal
 
   # Just another page
-  /categorieOptions
-    categorie-options.js
+  /categoryOptions
+    category-options.js
     index.js
 
   # Exports everything from './categories/index.js' as well as all
