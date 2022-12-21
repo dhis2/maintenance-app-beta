@@ -73,20 +73,6 @@ working on the project though but before it's relevant to make a decision:
     [use-query-params](https://github.com/pbeshai/use-query-params)
   - [tanstack-router](https://tanstack.com/router/v1)
 
-### How do we set up **routes**?
-
-- We have a **config** with all routes
-  - Makes it easier to infer whether the user has authority to view a certain
-    section, as that can depend on whether the user has the auhority to view
-    child sections (e.g. is the user allowed to view the "Data Element"
-    overview page with links to the list view and the add-new form)
-    - Although that'd a be better UX, for now we could sacrifice that
-      completeness for simplicity. The user might end up on a page with no
-      links (and ideally a message that the user doesn't have the authority to
-      view any child sections)
-- We declare routes **in JSX**
-  - Much better overview, less config, easier to reason about
-
 ### Do we want to copy anything from "mar-y"?
 
 A duplicate fo the old code has been put [here](https://github.com/Mohammer5/mar-y).
