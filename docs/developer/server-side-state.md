@@ -5,4 +5,4 @@ the server-side state's shape or any normalization in the app.
 
 ## Decisions
 
-* [0001-server-side-state](./decisions/0001-server-side-state.md)
+* [How do we handle server side state? With app-runtime.](./decisions/0001-server-side-state.md)
