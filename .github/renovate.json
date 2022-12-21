@@ -1,0 +1,3 @@
+{
+    "extends": ["github>dhis2/renovate-config"]
+}
