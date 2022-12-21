@@ -4,8 +4,8 @@
 
 ### `app`
 
-This folder will contain everything that's related to the global part of the
-app, e.g. the app layout, the navigation or setting up providers
+This folder contains everything that's related to the global part of the app,
+e.g. the app layout, the navigation or setting up providers
 
 ### `components`
 
@@ -19,7 +19,7 @@ pages and/or the app
 
 ### `pages`
 
-Every page will have its own folder inside of here, so we can easily colocate
+Every page has its own folder inside of here, so we can easily colocate
 page-specific components and utilities without having to think about their
 interfaces as much as if they were in the `components` or `utils` folders.
 
