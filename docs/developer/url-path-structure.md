@@ -1,12 +1,13 @@
 # Url path structure
 
-We've agreed on the following structure:
+We've implemented the following structure:
 
-```
-/categories
-/categories?bulkEdit=true
-/categories/:id
-```
+| URL path | Description  |
+|-|-|
+| `/categories` | List view |
+| `/categories?mode=bulkEdit` | List view in bulk edit mode* |
+| `/categories/:id` | Edit item view |
+| `/categories/add` | Create new item form |
 
 * We agreed to omit the `/list` and `/edit` prefixes and go for a more standard
   approach
