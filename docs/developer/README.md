@@ -16,6 +16,7 @@ has yet to be explored by the entire team).
 * [Url path structure](./url-path-structure.md)
 * [Client-side state](./client-side-state.md)
 * [Server-side state](./server-side-state.md)
+* [Form state](./form-state.md)
 
 ## Decisions
 
@@ -64,12 +65,6 @@ working on the project though but before it's relevant to make a decision:
 - **stack options**
   - redux
   - zustand
-
-#### How do we manage form state?
-
-- **stack options**
-  - [react-final-form](https://final-form.org/react)
-  - [react-hook-form](https://react-hook-form.com/)
 
 #### How do we handle url state?
 
