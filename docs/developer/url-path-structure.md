@@ -11,12 +11,10 @@ We've implemented the following structure:
 | `/data-elements/:id` | Data element edit view |
 | `/data-elements/add` | Data element create view |
 | `/data-element-groups` | Data element groups list view |
-| `/data-element-groups/:id/details` | Data element group details view |
-| `/data-element-groups/:id/edit` | Data element group edit view |
+| `/data-element-groups/:id` | Data element group edit view |
 | `/data-element-groups/add` | Data element group create view |
 | `/data-element-group-sets` | Data element group sets list view |
-| `/data-element-group-sets/:id/details` | Data element group set details view |
-| `/data-element-group-sets/:id/edit` | Data element group set edit view |
+| `/data-element-group-sets/:id` | Data element group set edit view |
 | `/data-element-group-sets/add` | Data element group set create view |
 
 * We agreed to omit the `/list` and `/edit` prefixes and go for a more standard
