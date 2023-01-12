@@ -8,8 +8,7 @@ We've implemented the following structure:
 | `/overview` | Shows tiles for all available sections |
 | `/overview/data-elements` | Section view with tiles |
 | `/data-elements` | Data elements list view |
-| `/data-elements/:id/details` | Data element details view |
-| `/data-elements/:id/edit` | Data element edit view |
+| `/data-elements/:id` | Data element edit view |
 | `/data-elements/add` | Data element create view |
 | `/data-element-groups` | Data element groups list view |
 | `/data-element-groups/:id/details` | Data element group details view |
