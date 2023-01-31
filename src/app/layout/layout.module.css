@@ -1,0 +1,21 @@
+.wrapper {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 240px auto;
+    grid-template-areas:
+        'sidebar   main';
+    transition: grid-template-columns 200ms ease-out;
+}
+
+
+.main {
+    overflow: hidden;
+    grid-area: main;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    overflow-y: auto;
+    height: 100%;
+    background: var(--colors-grey900);
+}
