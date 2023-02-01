@@ -5,7 +5,7 @@ import { node, bool } from 'prop-types'
 import React from 'react'
 import css from './layout.module.css'
 
-export const Layout = ({ main, sidebar }) => {
+export const Layout = ({ children, sidebar }) => {
 
     return (
             <div className={css.wrapper}>
@@ -13,7 +13,7 @@ export const Layout = ({ main, sidebar }) => {
                 <div
                     className={css.main}
                 >
-                    {main}
+                    {children}
                 </div>
             </div>
     );

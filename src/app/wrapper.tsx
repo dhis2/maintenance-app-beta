@@ -1,6 +1,7 @@
 import { CssReset, CssVariables } from '@dhis2/ui'
 import React from 'react'
 
+
 interface AppWrapperProps {
     children: React.ReactNode
 }

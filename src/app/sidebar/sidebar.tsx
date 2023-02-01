@@ -5,7 +5,7 @@ import React from 'react'
 import css from './sidebar.module.css'
 
 interface SidebarProps {
-    children: React.ReactNode
+    children?: React.ReactNode
 }
 
 export const Sidebar = ({ children }: SidebarProps) => {

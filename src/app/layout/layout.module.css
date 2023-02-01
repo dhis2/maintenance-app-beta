@@ -1,19 +1,29 @@
+@value m-medium from './breakpoints.css';
+
 .wrapper {
-    height: 100%;
     display: grid;
-    grid-template-columns: 240px auto;
-    grid-template-areas:
-        'sidebar   main';
-    transition: grid-template-columns 200ms ease-out;
+    grid-template-areas: 'sidebar' 'main';
+}
+
+@media m-medium {
+    .wrapper {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 240px auto;
+        grid-template-areas:
+            'sidebar   main';
+    }
 }
 
 
 .main {
+    padding: 4px;
     overflow: hidden;
     grid-area: main;
 }
 
 .sidebar {
+    padding: 4px;
     grid-area: sidebar;
     overflow-y: auto;
     height: 100%;
