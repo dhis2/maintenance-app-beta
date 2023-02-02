@@ -1,0 +1,22 @@
+ls:
+    src:
+        .dir: PascalCase | camelCase
+        .js: PascalCase | camelCase
+        .ts: PascalCase | camelCase
+        .test.ts: PascalCase | camelCase
+        .tsx: PascalCase
+        .module.css: PascalCase
+
+    cypress:
+        .dir: camelCase
+        .js: camelCase
+        .ts: camelCase
+
+    docs:
+        .dir: kebab-case
+        .md: kebab-case | SCREAMING_SNAKE_CASE
+
+ignore:
+    - node_modules
+    - .d2
+    - build

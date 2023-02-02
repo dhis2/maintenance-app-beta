@@ -7,11 +7,14 @@
   "scripts": {
     "build": "d2-app-scripts build",
     "start": "d2-app-scripts start",
+    "lint": "d2-style check",
+    "format": "d2-style apply",
     "test": "d2-app-scripts test",
     "deploy": "d2-app-scripts deploy"
   },
   "devDependencies": {
-    "@dhis2/cli-app-scripts": "^10.2.0"
+    "@dhis2/cli-app-scripts": "^10.2.0",
+    "@dhis2/cli-style": "^10.5.1"
   },
   "dependencies": {
     "@dhis2/app-runtime": "^3.8.0",
