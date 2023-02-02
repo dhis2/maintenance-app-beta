@@ -5,7 +5,13 @@ import { node, bool } from 'prop-types'
 import React from 'react'
 import css from './layout.module.css'
 
-export const Layout = ({ children, sidebar }) => {
+interface LayoutProps {
+    children: React.ReactNode
+    sidebar: React.ReactNode
+}
+
+
+export const Layout = ({ children, sidebar }: LayoutProps) => {
 
     return (
             <div className={css.wrapper}>
@@ -17,12 +23,6 @@ export const Layout = ({ children, sidebar }) => {
                 </div>
             </div>
     );
-}
-
-Layout.propTypes = {
-    header: node,
-    main: node,
-    sidebar: node,
 }
 
 export default Layout
