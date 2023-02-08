@@ -1,9 +1,9 @@
-import { CssReset, CssVariables } from '@dhis2/ui'
-import React from 'react'
-
+import { CssReset, CssVariables } from "@dhis2/ui";
+import React from "react";
+import { LoadApp } from "./load-app";
 
 interface AppWrapperProps {
-    children: React.ReactNode
+    children: React.ReactNode;
 }
 
 export const AppWrapper = ({ children }: AppWrapperProps) => {
@@ -11,7 +11,7 @@ export const AppWrapper = ({ children }: AppWrapperProps) => {
         <>
             <CssReset />
             <CssVariables spacers colors />
-            {children}
+            <LoadApp>{children}</LoadApp>
         </>
     );
-}
+};
