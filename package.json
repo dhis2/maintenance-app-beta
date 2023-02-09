@@ -7,11 +7,26 @@
   "scripts": {
     "build": "d2-app-scripts build",
     "start": "d2-app-scripts start",
+    "start:nobrowser": "BROWSER=none yarn start",
     "test": "d2-app-scripts test",
-    "deploy": "d2-app-scripts deploy"
+    "deploy": "d2-app-scripts deploy",
+    "cy": "NODE_OPTIONS=--openssl-legacy-provider yarn cypress",
+    "cypress:start": "REACT_APP_NODE_ENV=test yarn start:nobrowser",
+    "cypress:open:live": "yarn cy open --env networkMode=live",
+    "cypress:prepare": "start-server-and-test 'yarn cypress:start' http://localhost:3000",
+    "cypress:run:live": "yarn cy run --env networkMode=live",
+    "cypress:live": "yarn cypress:prepare 'yarn cypress:open:live'",
+    "cypress:run:capture": "yarn cy run --env networkMode=capture",
+    "cypress:capture": "yarn cypress:prepare 'yarn cypress:run:capture'",
+    "cypress:run:stub": "yarn cy run --env networkMode=stub",
+    "cypress:stub": "yarn cypress:prepare 'yarn cypress:run:stub'"
   },
   "devDependencies": {
-    "@dhis2/cli-app-scripts": "^10.2.0"
+    "@dhis2/cli-app-scripts": "^10.2.0",
+    "@dhis2/cypress-commands": "^9.0.2",
+    "@dhis2/cypress-plugins": "^9.0.2",
+    "cypress": "^9",
+    "start-server-and-test": "^1.15.3"
   },
   "dependencies": {
     "@dhis2/app-runtime": "^3.8.0",

@@ -12,6 +12,7 @@ has yet to be explored by the entire team).
 
 ## Specific topics
 
+* [Setting up & running cypress tests](./cypress-tests.md)
 * [Folder structure](./folder-structure.md)
 * [Url path structure](./url-path-structure.md)
 * [Client-side state](./client-side-state.md)
