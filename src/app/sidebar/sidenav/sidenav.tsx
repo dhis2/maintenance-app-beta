@@ -1,7 +1,7 @@
 import { SidenavFilter } from "./sidenav-filter";
 import React from "react";
 import styles from "./sidenav.module.css";
-import type { Route } from "react-router-dom";
+import { Link, Route, NavLinkProps } from "react-router-dom";
 import { IconChevronDown16 } from "@dhis2/ui-icons";
 import cx from "classnames";
 
@@ -62,23 +62,58 @@ export const SidenavParent = ({
                     </span>
                 </button>
                 {showResults && (
-                    <ul className={styles["sidenavn-submenu"]}>{children}</ul>
+                    <ul className={styles["sidenav-submenu"]}>{children}</ul>
                 )}
             </li>
         </>
     );
 };
 
+export interface Path {
+    /**
+     * A URL pathname, beginning with a /.
+     */
+    pathname: string;
+
+    /**
+     * A URL search string, beginning with a ?.
+     */
+    search: string;
+
+    /**
+     * A URL fragment identifier, beginning with a #.
+     */
+    hash: string;
+}
+
+interface SidenavLinkComponentProps {
+    to: string | Partial<Path>;
+    // rest props
+    [key: string]: any;
+}
+
 interface SidenavLinkProps {
     icon?: React.ReactNode;
     active?: boolean;
     disabled?: boolean;
     children?: React.ReactNode;
+    to: string | Partial<Path>;
+    label?: React.ReactNode;
+    end?: boolean;
+    LinkComponent?: React.ComponentType<SidenavLinkComponentProps>;
 }
 
-
+export const SidenavLinkBase = ({ children, disabled }) => (
+    <li
+        className={cx(styles["sidenav-link"], {
+            [styles["sidenav-link-disabled"]]: disabled,
+        })}
+    >
+        {children}
+    </li>
+);
 /**
- * If children is a string, it will be rendered as a link
+ * If children is a string, it will be rendered as a link.
  * if not it's up to the rendered child to render an "a"-tag for proper styling
  * This is to provide flexibility to render a link using NavLink or Link from react-router
  */
@@ -87,27 +122,36 @@ export const SidenavLink = ({
     active,
     disabled,
     children,
+    to,
+    LinkComponent,
+    label,
+    end,
 }: SidenavLinkProps) => {
-    return (
-        <li
-            className={cx(styles["sidenav-link"],{
-                [styles["sidenav-link-disabled"]]: disabled,
+    const linkElement = LinkComponent ? (
+        <LinkComponent to={to} end={end} >
+            {icon && (
+                <span className={styles["sidenav-item-icon"]}>{icon}</span>
+            )}
+            {label}
+        </LinkComponent>
+    ) : (
+        <a
+            href=""
+            className={cx({
+                [styles["active"]]: active,
             })}
         >
-            {typeof children === "string" ? (
-                <a
-                    href=""
-                    className={cx({
-                        [styles["active"]]: active,
-                    })}
-                >
-                    {icon && <span className="sidenav-item-icon">{icon}</span>}
-                    {children}
-                </a>
-            ) : (
-                children
+            {icon && (
+                <span className={styles["sidenav-item-icon"]}>{icon}</span>
             )}
-        </li>
+            {label}
+        </a>
+    );
+
+    return (
+        <SidenavLinkBase disabled={disabled}>
+            {React.Children.count(children) > 0 ? children : linkElement}
+        </SidenavLinkBase>
     );
 };
 

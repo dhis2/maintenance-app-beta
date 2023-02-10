@@ -1,4 +1,10 @@
 {
-    "Data elements": "Data elements",
-    "Categories": "Categories"
+    "Metadata Overview": "Metadata Overview",
+    "Categories": "Categories",
+    "Overview": "Overview",
+    "Category option combination": "Category option combination",
+    "Data Elements": "Data Elements",
+    "Failed to load {{label}}": "Failed to load {{label}}",
+    "Failed to load": "Failed to load",
+    "Data elements": "Data elements"
 }

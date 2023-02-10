@@ -23,7 +23,6 @@
 }
 
 .sidebar {
-    padding: 4px;
     grid-area: sidebar;
     overflow-y: auto;
     height: 100%;

@@ -56,8 +56,10 @@ html {
     margin-left: auto;
     width: 16px;
     height: 16px;
+    transition: transform .1s linear;   
 }
 .parent-is-open .sidenav-parent-chevron {
+ 
     transform: rotate(180deg);
 }
 
@@ -65,7 +67,7 @@ html {
 .sidenav-link-wrapper {
     display: flex;
 }
-.sidenav-link * {
+.sidenav-link a {
     display: block;
     min-height: 36px;
     padding: 8px 8px 8px 12px;
@@ -76,19 +78,19 @@ html {
     display: flex;
     align-items: center;
 }
-.sidenav-link:hover,.sidenav-link *:hover {
+.sidenav-link:hover,.sidenav-link a:hover {
     background: var(--sidenav-dark-bg-hover);
 }
-.sidenav-link:focus,.sidenav-link *:focus {
+.sidenav-link:focus,.sidenav-link a:focus {
     outline: 2px solid white;
     background: var(--sidenav-dark-bg-hover);
     outline-offset: -2px;
 }
-.sidenav-link-disabled, .sidenav-link-disabled * {
+.sidenav-link-disabled, .sidenav-link-disabled a {
     cursor: not-allowed;
     color: var(--colors-grey500);
 }
-.sidenav-link-disabled:hover,.sidenav-link-disabled:hover > * {
+.sidenav-link-disabled:hover,.sidenav-link-disabled:hover > a {
     background: var(--colors-grey900);
 }
 .sidenav-link a.active, .sidenav-link :global(.active) {

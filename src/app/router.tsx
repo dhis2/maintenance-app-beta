@@ -9,7 +9,7 @@ import { Layout } from "./layout";
 import { Sidebar } from "./sidebar";
 import React, { Suspense, lazy } from "react";
 import { CircularLoader } from "@dhis2/ui";
-import { routes } from '../pages/'
+import { routes } from "../pages/";
 
 const DefaultLazyLoad = ({ element }) => (
     <Suspense fallback={<CircularLoader />}>{element}</Suspense>
@@ -27,19 +27,25 @@ const router = createHashRouter([
                 <Outlet />
             </Layout>
         ),
-
         // TODO: Should we list all routes here, or import children-routes from pages?
+        // PROS: All routes are in one place
         // children: [
         //     {
         //         path: "/",
         //         element: <DefaultLazyLoad element={<AllOverview />} />,
         //     },
         //     {
-        //         path: 'dataElements',
+        //         path: 'dataElements/',
         //         element: <div>Data Elements</div>,
         //     },
+        //     {
+
         // ],
         children: routes,
+    },
+    {
+        path: "/",
+        element: <Navigate to="/overview" />,
     },
 ]);
 

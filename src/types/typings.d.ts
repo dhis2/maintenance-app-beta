@@ -1,3 +1,4 @@
+import type { useDataQuery } from '@dhis2/app-runtime'
 
 declare namespace NodeJS {
     interface Process {
@@ -42,4 +43,4 @@ declare module "*.module.css" {
     export default classes;
 }
 
-
+type QueryResponse = ReturnType<typeof useDataQuery>
