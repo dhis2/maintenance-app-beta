@@ -107,7 +107,7 @@ html {
     height: 16px;
 }
 /* indent inside a parent */
-.sidenav-parent .sidenav-link {
+.sidenav-parent .sidenav-link a {
     padding-left: var(--spacers-dp32);
 }
 /* extra-indent if parent has an icon */

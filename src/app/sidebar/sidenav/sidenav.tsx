@@ -128,7 +128,7 @@ export const SidenavLink = ({
     end,
 }: SidenavLinkProps) => {
     const linkElement = LinkComponent ? (
-        <LinkComponent to={to} end={end} >
+        <LinkComponent to={to} end={end}>
             {icon && (
                 <span className={styles["sidenav-item-icon"]}>{icon}</span>
             )}
@@ -136,7 +136,7 @@ export const SidenavLink = ({
         </LinkComponent>
     ) : (
         <a
-            href=""
+            href={to as string}
             className={cx({
                 [styles["active"]]: active,
             })}
