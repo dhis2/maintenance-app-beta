@@ -1,8 +1,11 @@
 @value m-medium from './breakpoints.css';
 
+
 .wrapper {
     display: grid;
     grid-template-areas: 'sidebar' 'main';
+    line-height: 20px;
+    font-size: 14px;
 }
 
 @media m-medium {
@@ -17,9 +20,10 @@
 
 
 .main {
-    padding: 4px;
+    padding: 16px;
     overflow: hidden;
     grid-area: main;
+    background-color: var(--colors-grey100);
 }
 
 .sidebar {

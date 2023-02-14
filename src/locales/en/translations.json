@@ -4,7 +4,11 @@
     "Overview": "Overview",
     "Category option combination": "Category option combination",
     "Data Elements": "Data Elements",
+    "Add new": "Add new",
+    "Manage": "Manage",
     "Failed to load {{label}}": "Failed to load {{label}}",
     "Failed to load": "Failed to load",
-    "Data elements": "Data elements"
+    "Data elements": "Data elements",
+    "Data element are the core foundational item of DHIS2 and are used for data collection. Data elements can be organised by group and group set.": "Data element are the core foundational item of DHIS2 and are used for data collection. Data elements can be organised by group and group set.",
+    "Building block elements of your database. The foundation of data collection and analysis.": "Building block elements of your database. The foundation of data collection and analysis."
 }

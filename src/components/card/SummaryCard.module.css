@@ -1,0 +1,50 @@
+
+.cardGroup {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 320px);
+    grid-gap: var(--spacers-dp16);
+}
+
+.cardGroupHeader {
+    font-size: 22px;
+    padding: 12px 0;
+    color: var(--colors-grey900);
+    line-height: 40px;
+}
+
+.cardWrapper {
+    padding: 16px;
+    width: 320px;
+    display: grid;
+    height: 100%;
+    grid-template-rows: auto auto 1fr auto;
+}
+
+.cardIcon svg {
+    width: 32px;
+    height: 32px;
+}
+
+.cardHeader {
+    padding: 12px 0px;
+    color: var(--colors-grey900);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.cardContent {
+    font-size: 14px;
+    color: var(--colors-grey900);
+    padding: 0;
+    margin: 0;
+    line-height: 20px;
+}
+
+.cardActions {
+    padding-top: 12px;
+}
+
+.cardActions a {
+    text-decoration: none;
+}
