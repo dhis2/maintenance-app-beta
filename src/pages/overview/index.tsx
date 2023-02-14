@@ -4,8 +4,8 @@ import { CircularLoader } from "@dhis2/ui";
 import { DefaultLazyLoad } from "../../components";
 
 // React.lazy only works with default exports, so we import directly instead of from index.tsx
-const AllOverview = lazy(() => import("./all-overview"));
-const DataElements = lazy(() => import("./dataElements"));
+const AllOverview = lazy(() => import("./AllOverview"));
+const DataElements = lazy(() => import("./DataElements"));
 
 const OverviewWrapper = () => <Outlet />;
 

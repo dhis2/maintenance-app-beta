@@ -9,16 +9,8 @@ import {
 import { Layout } from "./layout";
 import { Sidebar } from "./sidebar";
 import React, { Suspense, lazy } from "react";
-import { CircularLoader, NoticeBox } from "@dhis2/ui";
-import { routes } from "../pages/";
-
-const DefaultLazyLoad = ({ element }) => (
-    <Suspense fallback={<CircularLoader />}>{element}</Suspense>
-);
-
-// React.lazy only works with default exports, so we import directly instead of from index.tsx
-const AllOverview = lazy(() => import("../pages/overview/all-overview"));
-//const DataElements = lazy(() => import("../pages/data-elements/data-elements"));
+import { NoticeBox } from "@dhis2/ui";
+import { routes } from "../pages";
 
 const LayoutElement = () => (
     <Layout sidebar={<Sidebar />}>

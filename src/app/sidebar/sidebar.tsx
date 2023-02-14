@@ -1,6 +1,6 @@
 import classnames from "classnames";
 import React from "react";
-import css from "./sidebar.module.css";
+import css from "./Sidebar.module.css";
 import {
     Sidenav,
     SidenavItems,

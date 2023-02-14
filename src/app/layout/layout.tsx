@@ -1,9 +1,6 @@
 
-// create layout component with sidebar and content
-import classnames from 'classnames'
-import { node, bool } from 'prop-types'
 import React from 'react'
-import css from './layout.module.css'
+import css from './Layout.module.css'
 
 interface LayoutProps {
     children: React.ReactNode
