@@ -1,17 +1,16 @@
 import classnames from "classnames";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import css from "./Sidebar.module.css";
 import {
     Sidenav,
     SidenavItems,
     SidenavParent,
     SidenavLink,
-} from "./sidenav/sidenav";
-import {
-    NavLink,
-    useLocation,
-    matchPath,
-} from "react-router-dom";
+    SidenavFilter,
+    OnChangeCallback,
+    OnChangeInput,
+} from "./sidenav";
+import { NavLink, useLocation, matchPath } from "react-router-dom";
 import i18n from "@dhis2/d2-i18n";
 
 interface SidebarProps {
@@ -37,37 +36,67 @@ const SidebarNavLink = ({ to, label, disabled, end }: SidebarNavLinkProps) => {
 };
 
 interface SidebarParentProps {
+    filter: string;
     label: string;
     children: React.ReactElement<SidebarNavLinkProps>[];
 }
 
-const SidebarParent = ({ label, children }: SidebarParentProps) => {
+const SidebarParent = ({ filter, label, children }: SidebarParentProps) => {
     const { pathname } = useLocation();
 
     // Check if any of the children match the current path
     // If they do, parent should be open by default
-    const anyMatch = children.some((child) => {
+    const routePathMatch = children.some((child) => {
         return matchPath(child.props.to, pathname);
     });
 
+    const isFiltered = filter !== "";
+    const filteredChildren = isFiltered
+        ? children.filter(({ props: { label } }) => {
+              return label.toLowerCase().includes(filter.toLowerCase());
+          })
+        : children;
+
+    const forceOpen = (isFiltered && filteredChildren.length > 0) || undefined;
+    const noMatch = isFiltered && filteredChildren.length === 0;
+
+    if (noMatch) {
+        return null;
+    }
+
     return (
-        <SidenavParent label={label} initialOpen={anyMatch}>
-            {children}
+        <SidenavParent
+            label={label}
+            initialOpen={routePathMatch}
+            forceOpen={forceOpen}
+        >
+            {filteredChildren}
         </SidenavParent>
     );
 };
 
+
 export const Sidebar = ({ children }: SidebarProps) => {
+    const [filterValue, setFilterValue] = useState("");
+
+    const handleFilterChange = (input: OnChangeInput) => {
+        setFilterValue(input.value);
+    };
+
     return (
         <aside className={css.sidebar}>
             <Sidenav>
                 <SidenavItems>
+                    <SidenavFilter onChange={handleFilterChange} />
                     <SidebarNavLink
                         to="/overview"
                         label={i18n.t("Metadata Overview")}
                         end={true}
                     />
-                    <SidebarParent label={i18n.t("Categories")}>
+                    <SidebarParent
+                        label={i18n.t("Categories")}
+                        filter={filterValue}
+                    >
                         <SidebarNavLink
                             label={i18n.t("Overview")}
                             to="overview/categories"
@@ -85,7 +114,7 @@ export const Sidebar = ({ children }: SidebarProps) => {
                             to={"categoryOptionCombinations"}
                         />
                     </SidebarParent>
-                    <SidebarParent label="Data elements">
+                    <SidebarParent label="Data elements" filter={filterValue}>
                         <SidebarNavLink
                             label={i18n.t("Overview")}
                             to="/overview/dataElements"

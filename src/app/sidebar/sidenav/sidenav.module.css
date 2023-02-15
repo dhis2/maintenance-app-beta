@@ -133,3 +133,22 @@ html {
 .sidenav-footer {
     margin-top: auto;
 }
+
+.sidenav-filter {
+    padding: var(--spacers-dp12) var(--spacers-dp8) var(--spacers-dp16);
+}
+.sidenav-filter input {
+    background: #131a22;
+    border: 1px solid #111111;
+    color: var(--colors-grey050);
+}
+
+.sidenav-filter input::placeholder {
+    color: var(--colors-grey400);
+}
+
+.sidenav-filter input:focus {
+    background: #131a22;
+    border-color: var(--colors-grey700);
+    box-shadow: var(--colors-grey400) 0px 0px 0px 2px inset;
+}

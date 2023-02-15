@@ -1,5 +1,5 @@
 import { SidenavFilter } from "./sidenav-filter";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./sidenav.module.css";
 import { Link, Route, NavLinkProps } from "react-router-dom";
 import { IconChevronDown16 } from "@dhis2/ui-icons";
@@ -24,6 +24,7 @@ export const SidenavFooter = ({ children }) => (
 interface SidenavParentProps {
     label: string;
     icon?: React.ReactNode;
+    forceOpen?: boolean;
     initialOpen?: boolean;
     disabled?: boolean;
     children: React.ReactNode;
@@ -35,11 +36,19 @@ export const SidenavParent = ({
     initialOpen,
     disabled,
     children,
+    forceOpen,
 }: SidenavParentProps) => {
     const [showResults, setShowResults] = React.useState(!!initialOpen);
     const toggleChildren = React.useCallback(() => {
         setShowResults((showResults) => !showResults);
     }, []);
+
+    useEffect(() => {
+        if(forceOpen != null) {
+            setShowResults(!!forceOpen);
+        }
+    }, [forceOpen]);
+
     return (
         <>
             <li
