@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import css from "./Sidebar.module.css";
 import {
     Sidenav,
@@ -11,11 +11,9 @@ import {
     OnChangeInput,
 } from "./sidenav";
 import { NavLink, useLocation, matchPath } from "react-router-dom";
+import styles from "./Sidebar.module.css";
 import i18n from "@dhis2/d2-i18n";
-
-interface SidebarProps {
-    children?: React.ReactNode;
-}
+import { HidePreventUnmount } from "../../components/utils";
 
 interface SidebarNavLinkProps {
     to: string;
@@ -36,130 +34,208 @@ const SidebarNavLink = ({ to, label, disabled, end }: SidebarNavLinkProps) => {
 };
 
 interface SidebarParentProps {
-    filter: string;
+    isFiltered: boolean;
     label: string;
-    children: React.ReactElement<SidebarNavLinkProps>[];
+    links: LinkItem[];
 }
 
-const SidebarParent = ({ filter, label, children }: SidebarParentProps) => {
+const SidebarParent = ({
+    label,
+    links = [],
+    isFiltered,
+}: SidebarParentProps) => {
     const { pathname } = useLocation();
 
     // Check if any of the children match the current path
     // If they do, parent should be open by default
-    const routePathMatch = children.some((child) => {
-        return matchPath(child.props.to, pathname);
+    const routePathMatch = links.some((link) => {
+        return matchPath(link.to, pathname);
     });
 
-    const isFiltered = filter !== "";
-    const filteredChildren = isFiltered
-        ? children.filter(({ props: { label } }) => {
-              return label.toLowerCase().includes(filter.toLowerCase());
-          })
-        : children;
-
-    const forceOpen = (isFiltered && filteredChildren.length > 0) || undefined;
-    const noMatch = isFiltered && filteredChildren.length === 0;
-
-    if (noMatch) {
-        return null;
-    }
-
+    const forceOpen = (isFiltered && links.length > 0) || undefined;
     return (
         <SidenavParent
             label={label}
             initialOpen={routePathMatch}
             forceOpen={forceOpen}
         >
-            {filteredChildren}
+            {links.map(({ to, label }) => (
+                <SidebarNavLink key={label} to={to} label={label} />
+            ))}
         </SidenavParent>
     );
 };
 
+interface LinkItem {
+    to: string;
+    label: string;
+}
 
-export const Sidebar = ({ children }: SidebarProps) => {
+interface ParentLink {
+    label: string;
+    links: LinkItem[];
+}
+
+type SidebarParentKey =
+    | "categories"
+    | "dataElements"
+    | "dataSets"
+    | "indicators"
+    | "organisationUnits"
+    | "programsAndTracker"
+    | "validation";
+
+type SidebarLinks = { [key in SidebarParentKey]: ParentLink };
+
+// Links are in an object instead of children, because Sidebar-component need to do
+// the filtering, to know if no matches are found
+const sidebarLinks: SidebarLinks = {
+    categories: {
+        label: i18n.t("Categories"),
+        links: [
+            {
+                label: i18n.t("Overview"),
+                to: "overview/categories",
+            },
+            {
+                label: i18n.t("Category Options"),
+                to: "categoryOptions",
+            },
+            {
+                label: i18n.t("Category combination"),
+                to: "categoryCombination",
+            },
+            {
+                label: i18n.t("Category Option Combination"),
+                to: "categoryOptionCombination",
+            },
+        ],
+    },
+    dataElements: {
+        label: i18n.t("Data elements"),
+        links: [
+            {
+                label: i18n.t("Overview"),
+                to: "overview/dataElements",
+            },
+            {
+                label: i18n.t("Data element groups"),
+                to: "dataElementGroups",
+            },
+            {
+                label: i18n.t("Data element group set"),
+                to: "dataElementGroupSets",
+            },
+        ],
+    },
+    dataSets: {
+        label: i18n.t("Data sets"),
+        links: [
+            {
+                label: i18n.t("Overview"),
+                to: "overview/dataSets",
+            },
+        ],
+    },
+    indicators: {
+        label: i18n.t("Indicators"),
+        links: [
+            {
+                label: i18n.t("Overview"),
+                to: "overview/indicators",
+            },
+        ],
+    },
+    organisationUnits: {
+        label: i18n.t("Organisation units"),
+        links: [
+            {
+                label: i18n.t("Overview"),
+                to: "overview/organisationUnits",
+            },
+        ],
+    },
+    programsAndTracker: {
+        label: i18n.t("Programs and tracker"),
+        links: [
+            {
+                label: i18n.t("Overview"),
+                to: "overview/programs",
+            },
+        ],
+    },
+    validation: {
+        label: i18n.t("Validation"),
+        links: [
+            {
+                label: i18n.t("Overview"),
+                to: "overview/validation",
+            },
+        ],
+    },
+};
+
+export const Sidebar = () => {
     const [filterValue, setFilterValue] = useState("");
 
     const handleFilterChange = (input: OnChangeInput) => {
         setFilterValue(input.value);
     };
 
+    const isFiltered = filterValue !== "";
+    const filteredSidebarLinks = isFiltered
+        ? Object.entries(sidebarLinks).reduce<SidebarLinks>(
+              (acc, [key, { label, links }]) => {
+                  const filteredLinkItems = links.filter(({ label }) =>
+                      label.toLowerCase().includes(filterValue.toLowerCase())
+                  );
+                  acc[key] = { label, links: filteredLinkItems };
+                  return acc;
+              },
+              {} as SidebarLinks
+          )
+        : sidebarLinks;
+
+    const numberOfFilteredLinks = Object.values(filteredSidebarLinks).reduce(
+        (acc, curr) => acc + curr.links.length,
+        0
+    );
+    const noMatch = isFiltered && numberOfFilteredLinks === 0;
+
     return (
         <aside className={css.sidebar}>
             <Sidenav>
+                <SidenavFilter onChange={handleFilterChange} />
                 <SidenavItems>
-                    <SidenavFilter onChange={handleFilterChange} />
                     <SidebarNavLink
                         to="/overview"
                         label={i18n.t("Metadata Overview")}
                         end={true}
                     />
-                    <SidebarParent
-                        label={i18n.t("Categories")}
-                        filter={filterValue}
-                    >
-                        <SidebarNavLink
-                            label={i18n.t("Overview")}
-                            to="overview/categories"
-                        />
-                        <SidebarNavLink
-                            label={"Category Option"}
-                            to={"categoryOptions"}
-                        />
-                        <SidebarNavLink
-                            label={"Category Combination"}
-                            to={"categoryCombinations"}
-                        />
-                        <SidebarNavLink
-                            label={i18n.t("Category option combination")}
-                            to={"categoryOptionCombinations"}
-                        />
-                    </SidebarParent>
-                    <SidebarParent label="Data elements" filter={filterValue}>
-                        <SidebarNavLink
-                            label={i18n.t("Overview")}
-                            to="/overview/dataElements"
-                        />
-                        <SidebarNavLink
-                            label={i18n.t("Data Elements")}
-                            to="dataElements"
-                        />
-                    </SidebarParent>
-                    <SidenavParent label="Data sets">
-                        <SidenavLink label="Data set" />
-                        <SidenavLink label="Data set notifications" />
-                    </SidenavParent>
-                    <SidenavParent label="Indicators">
-                        <SidenavLink label="Indicator" />
-                        <SidenavLink label="Indicator type" />
-                        <SidenavLink label="Indicator group" />
-                        <SidenavLink label="Indicator group set" />
-                        <SidenavLink label="Program indicator" />
-                        <SidenavLink label="Program indicator group" />
-                    </SidenavParent>
-                    <SidenavParent label="Organisation units">
-                        <SidenavLink label="Organisation unit" />
-                        <SidenavLink label="Organisation unit group" />
-                        <SidenavLink label="Organisation unit group set" />
-                        <SidenavLink label="Organisation unit level" />
-                    </SidenavParent>
-                    <SidenavParent label="Programs and Tracker">
-                        <SidenavLink label="Program" />
-                        <SidenavLink label="Tracked entity attribute" />
-                        <SidenavLink label="Relationship type" />
-                        <SidenavLink label="Tracked entity type" />
-                        <SidenavLink label="Program rule" />
-                        <SidenavLink label="Program rule variable" />
-                    </SidenavParent>
-                    <SidenavParent label="Validation">
-                        <SidenavLink label="Validation rule" />
-                        <SidenavLink label="Validation rule group" />
-                        <SidenavLink label="Validation notification" />
-                    </SidenavParent>
-                    <SidenavLink label="Metadata editor" />
+                    {noMatch && <NoMatchMessage filter={filterValue} />}
+                    <HidePreventUnmount hide={noMatch}>
+                        {Object.values(filteredSidebarLinks).map(
+                            ({ label, links }) => (
+                                <SidebarParent
+                                    key={label}
+                                    label={label}
+                                    isFiltered={isFiltered}
+                                    links={links}
+                                />
+                            )
+                        )}
+                    </HidePreventUnmount>
                 </SidenavItems>
             </Sidenav>
         </aside>
     );
 };
+
+const NoMatchMessage = ({ filter }) => (
+    <div className={styles.noMatchMessage}>
+        {i18n.t("No menu items found for")} <br />
+        {filter}
+    </div>
+);
 
 export default Sidebar;

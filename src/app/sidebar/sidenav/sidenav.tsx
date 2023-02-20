@@ -1,7 +1,5 @@
-import { SidenavFilter } from "./sidenav-filter";
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./sidenav.module.css";
-import { Link, Route, NavLinkProps } from "react-router-dom";
 import { IconChevronDown16 } from "@dhis2/ui-icons";
 import cx from "classnames";
 
@@ -39,22 +37,19 @@ export const SidenavParent = ({
     forceOpen,
 }: SidenavParentProps) => {
     const [showResults, setShowResults] = React.useState(!!initialOpen);
+
     const toggleChildren = React.useCallback(() => {
         setShowResults((showResults) => !showResults);
     }, []);
 
-    useEffect(() => {
-        if(forceOpen != null) {
-            setShowResults(!!forceOpen);
-        }
-    }, [forceOpen]);
+    const isOpen = forceOpen || showResults;
 
     return (
         <>
             <li
                 className={cx(styles["sidenav-parent"], {
                     [styles["sidenav-parent-has-icon"]]: icon,
-                    [styles["parent-is-open"]]: showResults,
+                    [styles["parent-is-open"]]: isOpen,
                 })}
             >
                 <button onClick={toggleChildren} disabled={disabled}>
@@ -70,7 +65,7 @@ export const SidenavParent = ({
                         <IconChevronDown16 />
                     </span>
                 </button>
-                {showResults && (
+                {isOpen && (
                     <ul className={styles["sidenav-submenu"]}>{children}</ul>
                 )}
             </li>
