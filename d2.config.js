@@ -1,9 +1,9 @@
 const config = {
-    type: 'app',
-
+    type: "app",
+    title: "Maintenance App - Beta",
     entryPoints: {
-        app: './src/App.tsx',
+        app: "./src/App.tsx",
     },
-}
+};
 
-module.exports = config
+module.exports = config;
