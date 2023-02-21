@@ -14,13 +14,13 @@ import { NavLink, useLocation, matchPath } from "react-router-dom";
 import styles from "./Sidebar.module.css";
 import i18n from "@dhis2/d2-i18n";
 import { HidePreventUnmount } from "../../components/utils";
+import { LinkItem, SidebarLinks, sidebarLinks } from "./sidebarLinks";
 
-interface SidebarNavLinkProps {
-    to: string;
-    label: string;
+interface SidebarNavLinkProps extends LinkItem {
     disabled?: boolean;
     end?: boolean;
 }
+
 const SidebarNavLink = ({ to, label, disabled, end }: SidebarNavLinkProps) => {
     return (
         <SidenavLink
@@ -66,116 +66,7 @@ const SidebarParent = ({
     );
 };
 
-interface LinkItem {
-    to: string;
-    label: string;
-}
-
-interface ParentLink {
-    label: string;
-    links: LinkItem[];
-}
-
-type SidebarParentKey =
-    | "categories"
-    | "dataElements"
-    | "dataSets"
-    | "indicators"
-    | "organisationUnits"
-    | "programsAndTracker"
-    | "validation";
-
-type SidebarLinks = { [key in SidebarParentKey]: ParentLink };
-
-// Links are in an object instead of children, because Sidebar-component need to do
-// the filtering, to know if no matches are found
-const sidebarLinks: SidebarLinks = {
-    categories: {
-        label: i18n.t("Categories"),
-        links: [
-            {
-                label: i18n.t("Overview"),
-                to: "overview/categories",
-            },
-            {
-                label: i18n.t("Category Options"),
-                to: "categoryOptions",
-            },
-            {
-                label: i18n.t("Category combination"),
-                to: "categoryCombination",
-            },
-            {
-                label: i18n.t("Category Option Combination"),
-                to: "categoryOptionCombination",
-            },
-        ],
-    },
-    dataElements: {
-        label: i18n.t("Data elements"),
-        links: [
-            {
-                label: i18n.t("Overview"),
-                to: "overview/dataElements",
-            },
-            {
-                label: i18n.t("Data element groups"),
-                to: "dataElementGroups",
-            },
-            {
-                label: i18n.t("Data element group set"),
-                to: "dataElementGroupSets",
-            },
-        ],
-    },
-    dataSets: {
-        label: i18n.t("Data sets"),
-        links: [
-            {
-                label: i18n.t("Overview"),
-                to: "overview/dataSets",
-            },
-        ],
-    },
-    indicators: {
-        label: i18n.t("Indicators"),
-        links: [
-            {
-                label: i18n.t("Overview"),
-                to: "overview/indicators",
-            },
-        ],
-    },
-    organisationUnits: {
-        label: i18n.t("Organisation units"),
-        links: [
-            {
-                label: i18n.t("Overview"),
-                to: "overview/organisationUnits",
-            },
-        ],
-    },
-    programsAndTracker: {
-        label: i18n.t("Programs and tracker"),
-        links: [
-            {
-                label: i18n.t("Overview"),
-                to: "overview/programs",
-            },
-        ],
-    },
-    validation: {
-        label: i18n.t("Validation"),
-        links: [
-            {
-                label: i18n.t("Overview"),
-                to: "overview/validation",
-            },
-        ],
-    },
-};
-
-export const Sidebar = () => {
+export const Sidebar = ({ links = sidebarLinks }: { links: SidebarLinks }) => {
     const [filterValue, setFilterValue] = useState("");
 
     const handleFilterChange = (input: OnChangeInput) => {
@@ -184,22 +75,20 @@ export const Sidebar = () => {
 
     const isFiltered = filterValue !== "";
     const filteredSidebarLinks = isFiltered
-        ? Object.entries(sidebarLinks).reduce<SidebarLinks>(
-              (acc, [key, { label, links }]) => {
-                  const filteredLinkItems = links.filter(({ label }) =>
-                      label.toLowerCase().includes(filterValue.toLowerCase())
-                  );
-                  acc[key] = { label, links: filteredLinkItems };
-                  return acc;
-              },
-              {} as SidebarLinks
-          )
-        : sidebarLinks;
+        ? Object.entries(links).reduce((acc, [key, { label, links }]) => {
+              const filteredLinkItems = links.filter(({ label }) =>
+                  label.toLowerCase().includes(filterValue.toLowerCase())
+              );
+              acc[key] = { label, links: filteredLinkItems };
+              return acc;
+          }, {} as typeof sidebarLinks)
+        : links;
 
     const numberOfFilteredLinks = Object.values(filteredSidebarLinks).reduce(
         (acc, curr) => acc + curr.links.length,
         0
     );
+
     const noMatch = isFiltered && numberOfFilteredLinks === 0;
 
     return (
