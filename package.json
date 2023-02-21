@@ -9,7 +9,6 @@
     "start": "d2-app-scripts start",
     "test": "d2-app-scripts test",
     "deploy": "d2-app-scripts deploy",
-
     "lint": "yarn d2-style check",
     "lint:staged": "yarn lint --staged",
     "format": "yarn d2-style apply",
@@ -17,7 +16,9 @@
   },
   "devDependencies": {
     "@dhis2/cli-app-scripts": "^10.2.0",
-    "@dhis2/cli-style": "^10.5.1"
+    "@dhis2/cli-style": "^10.5.1",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0"
   },
   "dependencies": {
     "@dhis2/app-runtime": "^3.8.0",
