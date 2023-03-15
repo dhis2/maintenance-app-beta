@@ -1,6 +1,5 @@
+import React, { lazy } from "react";
 import { RouteObject, Outlet } from "react-router-dom";
-import React, { lazy, Suspense } from "react";
-import { CircularLoader } from "@dhis2/ui";
 import { DefaultLazyLoad } from "../../components";
 
 // React.lazy only works with default exports, so we import directly instead of from index.tsx

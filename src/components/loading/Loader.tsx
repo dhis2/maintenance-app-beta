@@ -1,9 +1,8 @@
-import React, { Suspense } from "react";
-import { CircularLoader } from "@dhis2/ui";
-import styles from "./Loader.module.css";
-import { QueryResponse } from "../../types/query";
-import { NoticeBox } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
+import { CircularLoader , NoticeBox } from "@dhis2/ui";
+import React from "react";
+import { QueryResponse } from "../../types/query";
+import styles from "./Loader.module.css";
 
 interface LoaderProps {
     children: React.ReactNode;

@@ -1,9 +1,9 @@
-import React from "react";
+import i18n from "@dhis2/d2-i18n";
 import { Card, Button } from "@dhis2/ui";
 import { IconEdit24 } from "@dhis2/ui-icons";
-import styles from "./SummaryCard.module.css";
+import React from "react";
 import { Link } from "react-router-dom";
-import i18n from "@dhis2/d2-i18n";
+import styles from "./SummaryCard.module.css";
 
 const DEFAULT_ICON = <IconEdit24 />;
 

@@ -1,3 +1,5 @@
+import { NoticeBox } from "@dhis2/ui";
+import React from "react";
 import {
     createHashRouter,
     RouterProvider,
@@ -6,11 +8,9 @@ import {
     Navigate,
     isRouteErrorResponse,
 } from "react-router-dom";
-import { Layout } from "./layout";
-import { Sidebar } from "./sidebar";
-import React, { Suspense, lazy } from "react";
-import { NoticeBox } from "@dhis2/ui";
 import { routes } from "../pages";
+import { Layout } from "./layout";
+import { Sidebar } from "./sidebar"
 
 const LayoutElement = () => (
     <Layout sidebar={<Sidebar />}>
