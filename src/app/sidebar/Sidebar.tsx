@@ -1,9 +1,8 @@
 import i18n from "@dhis2/d2-i18n";
 import React, { useState } from "react";
 import { NavLink, useLocation, matchPath } from "react-router-dom";
-import { HidePreventUnmount } from "../../components/utils";
 import styles from "./Sidebar.module.css";
-import { LinkItem, SidebarLinks, sidebarLinks } from "./sidebarLinks";
+import { LinkItem, ParentLink, SidebarLinks, sidebarLinks } from "./sidebarLinks";
 import {
     Sidenav,
     SidenavItems,
@@ -63,6 +62,9 @@ const SidebarParent = ({
     );
 };
 
+const matchLabel = (label: string, filterValue: string) =>
+    label.toLowerCase().includes(filterValue.toLowerCase());
+
 export const Sidebar = ({ links = sidebarLinks }: { links?: SidebarLinks }) => {
     const [filterValue, setFilterValue] = useState("");
 
@@ -71,17 +73,16 @@ export const Sidebar = ({ links = sidebarLinks }: { links?: SidebarLinks }) => {
     };
 
     const isFiltered = filterValue !== "";
-    const filteredSidebarLinks = isFiltered
-        ? Object.entries(links).reduce((acc, [key, { label, links }]) => {
-              const filteredLinkItems = links.filter(({ label }) =>
-                  label.toLowerCase().includes(filterValue.toLowerCase())
-              );
-              acc[key] = { label, links: filteredLinkItems };
-              return acc;
-          }, {} as typeof sidebarLinks)
-        : links;
+    const filteredSidebarLinks: ParentLink[] = Object.values(
+        links
+    ).map(({ label, links }) => ({
+        label,
+        links: matchLabel(label, filterValue)
+            ? links // show all if parent label matches
+            : links.filter(({ label }) => matchLabel(label, filterValue))
+    })).filter(({ links }) => links.length > 0)
 
-    const numberOfFilteredLinks = Object.values(filteredSidebarLinks).reduce(
+    const numberOfFilteredLinks = filteredSidebarLinks.reduce(
         (acc, curr) => acc + curr.links.length,
         0
     );
@@ -99,18 +100,16 @@ export const Sidebar = ({ links = sidebarLinks }: { links?: SidebarLinks }) => {
                         end={true}
                     />
                     {noMatch && <NoMatchMessage filter={filterValue} />}
-                    <HidePreventUnmount hide={noMatch}>
-                        {Object.values(filteredSidebarLinks).map(
-                            ({ label, links }) => (
+                    {filteredSidebarLinks.map(
+                        ({ label, links }) => (
                                 <SidebarParent
                                     key={label}
                                     label={label}
                                     isFiltered={isFiltered}
                                     links={links}
                                 />
-                            )
-                        )}
-                    </HidePreventUnmount>
+                        )
+                    )}
                 </SidenavItems>
             </Sidenav>
         </aside>
