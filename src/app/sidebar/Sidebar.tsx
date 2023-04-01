@@ -2,7 +2,12 @@ import i18n from "@dhis2/d2-i18n";
 import React, { useState } from "react";
 import { NavLink, useLocation, matchPath } from "react-router-dom";
 import styles from "./Sidebar.module.css";
-import { LinkItem, ParentLink, SidebarLinks, sidebarLinks } from "./sidebarLinks";
+import {
+    LinkItem,
+    ParentLink,
+    SidebarLinks,
+    sidebarLinks,
+} from "./sidebarLinks";
 import {
     Sidenav,
     SidenavItems,
@@ -73,14 +78,14 @@ export const Sidebar = ({ links = sidebarLinks }: { links?: SidebarLinks }) => {
     };
 
     const isFiltered = filterValue !== "";
-    const filteredSidebarLinks: ParentLink[] = Object.values(
-        links
-    ).map(({ label, links }) => ({
-        label,
-        links: matchLabel(label, filterValue)
-            ? links // show all if parent label matches
-            : links.filter(({ label }) => matchLabel(label, filterValue))
-    })).filter(({ links }) => links.length > 0)
+    const filteredSidebarLinks: ParentLink[] = Object.values(links)
+        .map(({ label, links }) => ({
+            label,
+            links: matchLabel(label, filterValue)
+                ? links // show all if parent label matches
+                : links.filter(({ label }) => matchLabel(label, filterValue)),
+        }))
+        .filter(({ links }) => links.length > 0);
 
     const numberOfFilteredLinks = filteredSidebarLinks.reduce(
         (acc, curr) => acc + curr.links.length,
@@ -100,16 +105,14 @@ export const Sidebar = ({ links = sidebarLinks }: { links?: SidebarLinks }) => {
                         end={true}
                     />
                     {noMatch && <NoMatchMessage filter={filterValue} />}
-                    {filteredSidebarLinks.map(
-                        ({ label, links }) => (
-                                <SidebarParent
-                                    key={label}
-                                    label={label}
-                                    isFiltered={isFiltered}
-                                    links={links}
-                                />
-                        )
-                    )}
+                    {filteredSidebarLinks.map(({ label, links }) => (
+                        <SidebarParent
+                            key={label}
+                            label={label}
+                            isFiltered={isFiltered}
+                            links={links}
+                        />
+                    ))}
                 </SidenavItems>
             </Sidenav>
         </aside>
