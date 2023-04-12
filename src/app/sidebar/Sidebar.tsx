@@ -1,6 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import React, { useState } from "react";
 import { NavLink, useLocation, matchPath } from "react-router-dom";
+import { HidePreventUnmount } from "../../components/utils/HidePreventUnmount";
 import styles from "./Sidebar.module.css";
 import {
     LinkItem,
@@ -78,14 +79,14 @@ export const Sidebar = ({ links = sidebarLinks }: { links?: SidebarLinks }) => {
     };
 
     const isFiltered = filterValue !== "";
-    const filteredSidebarLinks: ParentLink[] = Object.values(links)
-        .map(({ label, links }) => ({
+    const filteredSidebarLinks: ParentLink[] = Object.values(links).map(
+        ({ label, links }) => ({
             label,
             links: matchLabel(label, filterValue)
                 ? links // show all if parent label matches
                 : links.filter(({ label }) => matchLabel(label, filterValue)),
-        }))
-        .filter(({ links }) => links.length > 0);
+        })
+    );
 
     const numberOfFilteredLinks = filteredSidebarLinks.reduce(
         (acc, curr) => acc + curr.links.length,
@@ -106,12 +107,13 @@ export const Sidebar = ({ links = sidebarLinks }: { links?: SidebarLinks }) => {
                     />
                     {noMatch && <NoMatchMessage filter={filterValue} />}
                     {filteredSidebarLinks.map(({ label, links }) => (
-                        <SidebarParent
-                            key={label}
-                            label={label}
-                            isFiltered={isFiltered}
-                            links={links}
-                        />
+                        <HidePreventUnmount key={label} hide={links.length < 1}>
+                            <SidebarParent
+                                label={label}
+                                isFiltered={isFiltered}
+                                links={links}
+                            />
+                        </HidePreventUnmount>
                     ))}
                 </SidenavItems>
             </Sidenav>

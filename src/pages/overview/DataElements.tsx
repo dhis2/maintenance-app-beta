@@ -1,7 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import React from "react";
-import { SummaryCard, SummaryCardGroup } from "../../components/card";
-import { GroupOverview, GroupOverviewSummary } from "../../components/overview";
+import { SummaryCard, SummaryCardGroup } from "./card";
+import { GroupOverview, GroupOverviewSummary } from "./overview";
 
 const TITLE = i18n.t("Data elements");
 
