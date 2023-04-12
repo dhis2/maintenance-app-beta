@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-import styles from "./sidenav.module.css";
 import { IconChevronDown16 } from "@dhis2/ui-icons";
 import cx from "classnames";
+import React from "react";
+import styles from "./sidenav.module.css";
 
-export const Sidenav = ({ children }: React.PropsWithChildren<{}>) => (
+export const Sidenav = ({ children }) => (
     <nav className={styles["sidenav-wrap"]}>{children}</nav>
 );
 
-export const SidenavItems = ({ children }: React.PropsWithChildren<{}>) => (
+export const SidenavItems = ({ children }) => (
     <ul className={styles["sidenav-items"]}>{children}</ul>
 );
 
@@ -36,25 +36,13 @@ export const SidenavParent = ({
     children,
     forceOpen,
 }: SidenavParentProps) => {
-    const [showResults, setShowResults] = React.useState(!!initialOpen);
-    // used to keep the state before forceOpen changed - so it can be reset back to previous
-    // state when forceOpen is not active anymore
-    const beforeForceOpenShowResults = React.useRef(showResults);
+    const [showChildren, setShowChildren] = React.useState(!!initialOpen);
 
     const toggleChildren = React.useCallback(() => {
-        setShowResults((showResults) => !showResults);
+        setShowChildren((showResults) => !showResults);
     }, []);
 
-    React.useEffect(() => {
-        if (forceOpen != undefined) {
-            beforeForceOpenShowResults.current = showResults;
-            setShowResults(forceOpen);
-        } else {
-            setShowResults(beforeForceOpenShowResults.current);
-        }
-    }, [forceOpen]);
-
-    const isOpen = showResults;
+    const isOpen = forceOpen || showChildren;
 
     return (
         <>
@@ -105,7 +93,7 @@ export interface Path {
 interface SidenavLinkComponentProps {
     to: string | Partial<Path>;
     // rest props
-    [key: string]: any;
+    [key: string]: unknown;
 }
 
 interface SidenavLinkProps {
