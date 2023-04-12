@@ -1,3 +1,3 @@
-export * from "./sidenav";
-export { SidenavFilter } from "./sidenav-filter";
-export type { OnChangeInput, OnChangeCallback } from "./sidenav-filter";
+export * from "./Sidenav";
+export { SidenavFilter } from "./SidenavFilter";
+export type { OnChangeInput, OnChangeCallback } from "./SidenavFilter";

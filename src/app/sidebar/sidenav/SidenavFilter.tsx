@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Menu, MenuItem, Input } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
-import styles from "./sidenav.module.css";
+import { Input } from "@dhis2/ui";
+import React, { useState } from "react";
+import styles from "./Sidenav.module.css";
 
 export type OnChangeInput = {
     name?: string;
