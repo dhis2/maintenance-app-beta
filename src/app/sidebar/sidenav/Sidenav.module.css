@@ -1,0 +1,154 @@
+/* Most of this is copied from https://github.com/dhis2/design-specs/blob/master/src/components/sidenav.css */
+
+/* component-specific variables not defined in ui */
+html {
+    --sidenav-dark-bg-hover: #2c3644;
+    --sidenav-dark-bg-selected: #040506;
+}
+
+/* nuke list styles */
+.sidenav-wrap ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* wrapper */
+.sidenav-wrap {
+    width: 100%;
+    height: 100%;
+    background: var(--colors-grey900);
+    overflow-y: auto;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+/* parent */
+.sidenav-parent button {
+    border: none;
+    background: var(--colors-grey900);
+    color: white;
+    font-size: 15px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 36px;
+    padding: 8px 8px 8px 12px;
+}
+.sidenav-parent button:hover {
+    background: var(--sidenav-dark-bg-hover);
+}
+.sidenav-parent button:focus {
+    outline: 2px solid white;
+    background: var(--sidenav-dark-bg-hover);
+    outline-offset: -2px;
+}
+.sidenav-parent button:disabled {
+    color: var(--colors-grey500);
+    cursor: not-allowed;
+}
+.sidenav-parent button:disabled:hover {
+    background: var(--colors-grey900);
+}
+.sidenav-parent-chevron {
+    margin-left: auto;
+    width: 16px;
+    height: 16px;
+    transition: transform .1s linear;   
+}
+.parent-is-open .sidenav-parent-chevron {
+ 
+    transform: rotate(180deg);
+}
+
+/* Link */
+.sidenav-link-wrapper {
+    display: flex;
+}
+.sidenav-link a {
+    display: block;
+    min-height: 36px;
+    padding: 8px 8px 8px 12px;
+    background: var(--colors-grey900);
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+}
+.sidenav-link:hover,.sidenav-link a:hover {
+    background: var(--sidenav-dark-bg-hover);
+}
+.sidenav-link:focus,.sidenav-link a:focus {
+    outline: 2px solid white;
+    background: var(--sidenav-dark-bg-hover);
+    outline-offset: -2px;
+}
+.sidenav-link-disabled, .sidenav-link-disabled a {
+    cursor: not-allowed;
+    color: var(--colors-grey500);
+}
+.sidenav-link-disabled:hover,.sidenav-link-disabled:hover > a {
+    background: var(--colors-grey900);
+}
+.sidenav-link a.active, .sidenav-link :global(.active) {
+    font-weight: 600;
+    background: var(--sidenav-dark-bg-selected);
+    box-shadow: inset 6px 0px 0px 0px var(--colors-teal500);
+}
+.sidenav-link.active:hover {
+    background: var(--sidenav-dark-bg-selected);
+}
+.sidenav-item-icon {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+}
+/* indent inside a parent */
+.sidenav-parent .sidenav-link a {
+    padding-left: var(--spacers-dp32);
+}
+/* extra-indent if parent has an icon */
+.sidenav-parent-has-icon .sidenav-link {
+    padding-left: var(--spacers-dp48);
+}
+
+/* Divider */
+.sidenav-divider {
+    border-bottom: 1px solid var(--colors-grey700);
+    margin: var(--spacers-dp8) var(--spacers-dp12);
+}
+
+/* Title */
+.sidenav-section-title {
+    padding: var(--spacers-dp8) var(--spacers-dp12);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--colors-grey300);
+}
+
+/* Footer */
+.sidenav-footer {
+    margin-top: auto;
+}
+
+.sidenav-filter {
+    padding: var(--spacers-dp12) var(--spacers-dp8) var(--spacers-dp16);
+}
+.sidenav-filter input {
+    background: #131a22;
+    border: 1px solid #111111;
+    color: var(--colors-grey050);
+}
+
+.sidenav-filter input::placeholder {
+    color: var(--colors-grey400);
+}
+
+.sidenav-filter input:focus {
+    background: #131a22;
+    border-color: var(--colors-grey700);
+    box-shadow: var(--colors-grey400) 0px 0px 0px 2px inset;
+}
