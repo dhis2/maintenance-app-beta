@@ -47,19 +47,21 @@ const SidebarParent = ({
     isFiltered,
 }: SidebarParentProps) => {
     const { pathname } = useLocation();
-
     // Check if any of the children match the current path
     // If they do, parent should be open by default
     const routePathMatch = links.some((link) => {
         return matchPath(link.to, pathname);
     });
+    const [isOpen, setIsOpen] = useState(routePathMatch);
 
-    const forceOpen = (isFiltered && links.length > 0) || undefined;
+    const forceOpen = (isFiltered && links.length > 0);
+    const open = isOpen || forceOpen;
+
     return (
         <SidenavParent
             label={label}
-            initialOpen={routePathMatch}
-            forceOpen={forceOpen}
+            open={open}
+            onClick={() => setIsOpen(!open)}
         >
             {links.map(({ to, label }) => (
                 <SidebarNavLink key={label} to={to} label={label} />

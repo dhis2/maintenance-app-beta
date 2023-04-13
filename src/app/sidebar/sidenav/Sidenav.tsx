@@ -22,37 +22,29 @@ export const SidenavFooter = ({ children }) => (
 interface SidenavParentProps {
     label: string;
     icon?: React.ReactNode;
-    forceOpen?: boolean;
-    initialOpen?: boolean;
     disabled?: boolean;
     children: React.ReactNode;
+    open: boolean;
+    onClick?: () => void;
 }
 
 export const SidenavParent = ({
     label,
     icon,
-    initialOpen,
     disabled,
     children,
-    forceOpen,
+    open,
+    onClick,
 }: SidenavParentProps) => {
-    const [showChildren, setShowChildren] = React.useState(!!initialOpen);
-
-    const toggleChildren = React.useCallback(() => {
-        setShowChildren((showResults) => !showResults);
-    }, []);
-
-    const isOpen = forceOpen || showChildren;
-
     return (
         <>
             <li
                 className={cx(styles["sidenav-parent"], {
                     [styles["sidenav-parent-has-icon"]]: icon,
-                    [styles["parent-is-open"]]: isOpen,
+                    [styles["parent-is-open"]]: open,
                 })}
             >
-                <button onClick={toggleChildren} disabled={disabled}>
+                <button onClick={onClick} disabled={disabled}>
                     {icon && (
                         <span className={styles["sidenav-item-icon"]}>
                             {icon}
@@ -65,7 +57,7 @@ export const SidenavParent = ({
                         <IconChevronDown16 />
                     </span>
                 </button>
-                {isOpen && (
+                {open && (
                     <ul className={styles["sidenav-submenu"]}>{children}</ul>
                 )}
             </li>
@@ -116,6 +108,7 @@ export const SidenavLinkBase = ({ children, disabled }) => (
         {children}
     </li>
 );
+
 /**
  * If children is a string, it will be rendered as a link.
  * if not it's up to the rendered child to render an "a"-tag for proper styling
