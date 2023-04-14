@@ -1,16 +1,10 @@
-import { useDataQuery } from "@dhis2/app-runtime";
 import React from "react";
-import { Loader } from "../components/";
-
-const query = {
-    schemas: {
-        resource: "schemas",
-        fields: "authorities, displayName, name, plural, singular, translatable, properties",
-    },
-};
+import { Loader } from "../components/loading/Loader";
+import { useLoadSchemas } from "../schemas/";
 
 export const LoadApp = ({ children }) => {
-    const queryResponse = useDataQuery(query);
+    const queryResponse = useLoadSchemas();
+
     return (
         <Loader queryResponse={queryResponse} label="schemas">
             {children}
