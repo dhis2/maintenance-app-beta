@@ -42,4 +42,3 @@ export const DataElementsCardGroup = ({ showTitle }: { showTitle?: boolean }) =>
 
 export const Component = DataElementsOverview;
 
-//export default DataElementsOverview;
