@@ -11,4 +11,5 @@ export const AllOverview = () => {
     );
 };
 
+export const Component = AllOverview;
 export default AllOverview;

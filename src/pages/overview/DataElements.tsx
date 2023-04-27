@@ -20,7 +20,7 @@ export const DataElementsOverview = () => {
 
 export const DataElementsCardGroup = ({ showTitle }: { showTitle?: boolean }) => {
     return (
-        <SummaryCardGroup title={showTitle && TITLE}>
+        <SummaryCardGroup title={showTitle ? TITLE : undefined}>
             <SummaryCard title="Data Element" to={"/dataElements"}>
                 {i18n.t(
                     "Building block elements of your database. The foundation of data collection and analysis."
@@ -40,4 +40,6 @@ export const DataElementsCardGroup = ({ showTitle }: { showTitle?: boolean }) =>
     );
 };
 
-export default DataElementsOverview;
+export const Component = DataElementsOverview;
+
+//export default DataElementsOverview;
