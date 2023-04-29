@@ -1,20 +1,20 @@
 import i18n from "@dhis2/d2-i18n";
 import React from "react";
 import { SummaryCard, SummaryCardGroup } from "./card";
-import { GroupOverview, GroupOverviewSummary } from "./overview";
+import { OverviewGroup, OverViewGroupSummary } from "./group";
 
 const TITLE = i18n.t("Data elements");
 
 export const DataElementsOverview = () => {
     return (
-        <GroupOverview title={i18n.t("Data elements")}>
-            <GroupOverviewSummary>
+        <OverviewGroup title={i18n.t("Data elements")}>
+            <OverViewGroupSummary>
                 {i18n.t(
                     "Data elements are the core foundational item of DHIS2 and are used for data collection. Data elements can be organised by group and group set."
                 )}
-            </GroupOverviewSummary>
+            </OverViewGroupSummary>
             <DataElementsCardGroup />
-        </GroupOverview>
+        </OverviewGroup>
     );
 };
 
