@@ -5,6 +5,7 @@ import {
     Section,
 } from "../../constants/sections";
 import { getOverviewPath } from "../routes/routePaths";
+
 export interface LinkItem {
     to: string;
     label: string;
@@ -40,7 +41,7 @@ export const sidebarLinks = {
         ],
     },
     dataElements: {
-        label: i18n.t("Data elements"),
+        label: SECTIONS_MAP.dataElement.titlePlural,
         links: [
             getOverviewLinkItem(SECTIONS_MAP.dataElement.name),
             getSectionLinkItem(SECTIONS_MAP.dataElement),
@@ -49,7 +50,7 @@ export const sidebarLinks = {
         ],
     },
     dataSets: {
-        label: i18n.t("Data sets"),
+        label: SECTIONS_MAP.dataSet.titlePlural,
         links: [
             getOverviewLinkItem(SECTIONS_MAP.dataSet.name),
             getSectionLinkItem(SECTIONS_MAP.dataSet),
@@ -57,7 +58,7 @@ export const sidebarLinks = {
         ],
     },
     indicators: {
-        label: i18n.t("Indicators"),
+        label: SECTIONS_MAP.indicator.titlePlural,
         links: [
             getOverviewLinkItem(SECTIONS_MAP.indicator.name),
             getSectionLinkItem(SECTIONS_MAP.indicator),
@@ -69,7 +70,7 @@ export const sidebarLinks = {
         ],
     },
     organisationUnits: {
-        label: i18n.t("Organisation units"),
+        label: SECTIONS_MAP.organisationUnit.titlePlural,
         links: [
             getOverviewLinkItem(SECTIONS_MAP.organisationUnit.name),
             getSectionLinkItem(SECTIONS_MAP.organisationUnit),
@@ -78,7 +79,7 @@ export const sidebarLinks = {
         ],
     },
     programsAndTracker: {
-        label: i18n.t("Programs and tracker"),
+        label: SECTIONS_MAP.programsAndTracker.title,
         links: [
             getOverviewLinkItem(SECTIONS_MAP.programsAndTracker.name),
             getSectionLinkItem(SECTIONS_MAP.program),
@@ -89,7 +90,7 @@ export const sidebarLinks = {
         ],
     },
     validation: {
-        label: i18n.t("Validation"),
+        label: SECTIONS_MAP.validation.titlePlural,
         links: [
             getOverviewLinkItem(SECTIONS_MAP.validation.name),
             getSectionLinkItem(SECTIONS_MAP.validationRule),
