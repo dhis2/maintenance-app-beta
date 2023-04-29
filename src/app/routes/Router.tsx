@@ -27,7 +27,7 @@ function createOverviewLazyRouteFunction(
     }
 }
 
-const Routes = createRoutesFromElements(
+const routes = createRoutesFromElements(
     <Route element={<Layout />} errorElement={<DefaultErrorRoute />}>
         <Route path="/" element={<Navigate to="/overview" />} />
         <Route path="/overview" element={<Outlet />}>
@@ -43,7 +43,7 @@ const Routes = createRoutesFromElements(
     </Route>
 );
 
-export const hashRouter = createHashRouter(Routes);
+export const hashRouter = createHashRouter(routes);
 
 export const ConfiguredRouter = () => {
     return <RouterProvider router={hashRouter} />;
