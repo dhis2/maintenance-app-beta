@@ -3,17 +3,18 @@ import React from "react";
 import { getSectionPath } from "../../app/routes/routePaths";
 import { SECTIONS_MAP } from "../../constants";
 import { SummaryCard, SummaryCardGroup } from "./card";
-import { OverviewGroup, OverViewGroupSummary } from "./group";
+import { OverviewGroup, OverviewGroupSummary } from "./group";
+
 const TITLE = SECTIONS_MAP.dataElement.titlePlural;
 
 export const DataElementsOverview = () => {
     return (
         <OverviewGroup title={TITLE}>
-            <OverViewGroupSummary>
+            <OverviewGroupSummary>
                 {i18n.t(
                     "Data elements are the core foundational item of DHIS2 and are used for data collection. Data elements can be organised by group and group set."
                 )}
-            </OverViewGroupSummary>
+            </OverviewGroupSummary>
             <DataElementsCardGroup />
         </OverviewGroup>
     );

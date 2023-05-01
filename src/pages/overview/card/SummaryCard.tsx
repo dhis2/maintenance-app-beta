@@ -61,7 +61,7 @@ interface SummaryCardActionsProps {
 }
 
 export const SummaryCardActions = ({ to }: SummaryCardActionsProps) => {
-    const path = resolvePath(to).pathname
+    const path = resolvePath(to).pathname;
     return (
         <div className={styles.cardActions}>
             <Link to={path.concat(`/${routePaths.sectionNew}`)}>

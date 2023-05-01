@@ -10,6 +10,6 @@ export const OverviewGroup = ({ children, title }) => {
     );
 };
 
-export const OverViewGroupSummary = ({ children }) => (
+export const OverviewGroupSummary = ({ children }) => (
     <div className={styles.summary}>{children}</div>
 );
