@@ -9,8 +9,10 @@ import {
     LazyRouteFunction,
     NonIndexRouteObject,
 } from "react-router-dom";
+import { SECTIONS_MAP } from "../../constants";
 import { Layout } from "../layout";
 import { DefaultErrorRoute } from "./DefaultErrorRoute";
+import { getSectionPath, routePaths } from "./routePaths";
 
 // This loads all the overview routes in the same chunk since they resolve to the same promise
 // see https://reactrouter.com/en/main/route/lazy#multiple-routes-in-a-single-file
@@ -29,14 +31,14 @@ function createOverviewLazyRouteFunction(
 
 const routes = createRoutesFromElements(
     <Route element={<Layout />} errorElement={<DefaultErrorRoute />}>
-        <Route path="/" element={<Navigate to="/overview" />} />
-        <Route path="/overview" element={<Outlet />}>
+        <Route path="/" element={<Navigate to={routePaths.overviewRoot} />} />
+        <Route path={routePaths.overviewRoot} element={<Outlet />}>
             <Route
-                index={true}
+                index
                 lazy={createOverviewLazyRouteFunction("AllOverview")}
             />
             <Route
-                path="dataElements"
+                path={getSectionPath(SECTIONS_MAP.dataElement)}
                 lazy={createOverviewLazyRouteFunction("DataElements")}
             />
         </Route>
