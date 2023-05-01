@@ -1,6 +1,6 @@
-import React from "react";
 import { useDataQuery } from "@dhis2/app-runtime";
-import { Loader } from "../components/loading/Loader";
+import React from "react";
+import { Loader } from "../components/";
 
 const query = {
     schemas: {

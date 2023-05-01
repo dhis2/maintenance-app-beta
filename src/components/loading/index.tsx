@@ -1,3 +1,1 @@
-
-
-export { Loader } from './loader'
+export { Loader } from './Loader'

@@ -1,1 +1,1 @@
-export { DefaultLazyLoad } from './lazy/DefaultLazyLoad';
+export { Loader } from './loading';
