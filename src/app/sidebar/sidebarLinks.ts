@@ -33,6 +33,7 @@ export const sidebarLinks = {
         links: [
             getOverviewLinkItem(SECTIONS_MAP.category),
             getSectionLinkItem(SECTIONS_MAP.categoryOption),
+            getSectionLinkItem(SECTIONS_MAP.category),
             getSectionLinkItem(SECTIONS_MAP.categoryCombo),
             getSectionLinkItem(SECTIONS_MAP.categoryOptionCombo),
             getSectionLinkItem(SECTIONS_MAP.categoryOptionGroup),
