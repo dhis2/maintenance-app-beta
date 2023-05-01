@@ -3,7 +3,7 @@ import {
     SECTIONS_MAP,
     Section,
 } from "../../constants/sections";
-import { getOverviewPath } from "../routes/routePaths";
+import { getOverviewPath, getSectionPath } from "../routes/routePaths";
 
 export interface LinkItem {
     to: string;
@@ -19,12 +19,12 @@ export type SidebarLinks = Record<string, ParentLink>;
 
 const getOverviewLinkItem = (section: Section): LinkItem => ({
     label: i18n.t("Overview"),
-    to: getOverviewPath(section.namePlural),
+    to: getOverviewPath(section),
 });
 
 const getSectionLinkItem = (section: Section): LinkItem => ({
     label: i18n.t(section.title),
-    to: section.namePlural
+    to: getSectionPath(section),
 });
 
 export const sidebarLinks = {

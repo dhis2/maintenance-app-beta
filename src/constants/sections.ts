@@ -2,8 +2,8 @@ import i18n from "@dhis2/d2-i18n";
 
 export type Section = {
     name: string;
-    namePlural?: string;
-    titlePlural?: string;
+    namePlural: string;
+    titlePlural: string;
     title: string;
 };
 type SectionMap = {
@@ -262,7 +262,3 @@ export const SECTIONS_MAP = {
 export type SectionName =
     (typeof SECTIONS_MAP)[keyof typeof SECTIONS_MAP]["name"];
 
-export type SectionNamePlural =
-    (typeof SECTIONS_MAP)[keyof typeof SECTIONS_MAP]["namePlural"];
-
-export const SECTIONS: Section[] = Object.values(SECTIONS_MAP);
