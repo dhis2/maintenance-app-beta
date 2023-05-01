@@ -19,7 +19,7 @@ export type SidebarLinks = Record<string, ParentLink>;
 
 const getOverviewLinkItem = (section: Section): LinkItem => ({
     label: i18n.t("Overview"),
-    to: getOverviewPath(section.name),
+    to: getOverviewPath(section.namePlural),
 });
 
 const getSectionLinkItem = (section: Section): LinkItem => ({
