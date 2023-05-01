@@ -7,11 +7,12 @@ import {
     Route,
     createRoutesFromElements,
     LazyRouteFunction,
-    NonIndexRouteObject,
+    RouteObject,
 } from "react-router-dom";
-import { SECTIONS_MAP } from "../../constants";
+import { SECTIONS_MAP, Section } from "../../constants";
 import { Layout } from "../layout";
 import { DefaultErrorRoute } from "./DefaultErrorRoute";
+import { LegacyAppRedirect } from "./LegacyAppRedirect";
 import { getSectionPath, routePaths } from "./routePaths";
 
 // This loads all the overview routes in the same chunk since they resolve to the same promise
@@ -19,15 +20,56 @@ import { getSectionPath, routePaths } from "./routePaths";
 // Overviews are small, and the AllOverview would load all the other overviews anyway,
 // so it's propbably better to load them all at once
 function createOverviewLazyRouteFunction(
-    section: string
-): LazyRouteFunction<NonIndexRouteObject> {
+    componentName: string
+): LazyRouteFunction<RouteObject> {
     return async () => {
-        const component = await import(`../../pages/overview/index`);
+        const routeComponent = await import(`../../pages/overview/index`);
         return {
-            Component: component[section],
-        }
-    }
+            Component: routeComponent[componentName],
+        };
+    };
 }
+
+function createSectionLazyRouteFunction(
+    section: Section,
+    componentFileName: string
+): LazyRouteFunction<RouteObject> {
+    return async () => {
+        try {
+            return await import(
+                `../../pages/${section.namePlural}/${componentFileName}`
+            );
+        } catch (e) {
+            // means the component is not implemented yet
+            // fallback to redirect to legacy
+            if (e.code === "MODULE_NOT_FOUND") {
+                return {
+                    element: (
+                        <LegacyAppRedirect
+                            section={section}
+                            isNew={componentFileName === "New"}
+                        />
+                    ),
+                };
+            }
+            throw e;
+        }
+    };
+}
+
+const sectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
+    <Route key={section.namePlural} path={`${getSectionPath(section)}`}>
+        <Route index lazy={createSectionLazyRouteFunction(section, "List")} />
+        <Route
+            path={routePaths.sectionNew}
+            lazy={createSectionLazyRouteFunction(section, "New")}
+        />
+        <Route
+            path=":id"
+            lazy={createSectionLazyRouteFunction(section, "Edit")}
+        />
+    </Route>
+));
 
 const routes = createRoutesFromElements(
     <Route element={<Layout />} errorElement={<DefaultErrorRoute />}>
@@ -42,6 +84,7 @@ const routes = createRoutesFromElements(
                 lazy={createOverviewLazyRouteFunction("DataElements")}
             />
         </Route>
+        {sectionRoutes}
     </Route>
 );
 

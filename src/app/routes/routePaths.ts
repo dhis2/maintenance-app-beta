@@ -1,7 +1,9 @@
-import type { Section } from '../../constants/sections';
+import type { Section } from "../../constants/sections";
 
 export const routePaths = {
-    overviewRoot: "/overview",
+    overviewRoot: "overview",
+    sectionNew: "new",
+
 } as const;
 
 export const getOverviewPath = (section: Section) => {
@@ -9,5 +11,9 @@ export const getOverviewPath = (section: Section) => {
 };
 
 export const getSectionPath = (section: Section) => {
-    return section.namePlural
+    return section.namePlural;
+};
+
+export const getSectionNewPath = (section: Section) => {
+    return `${getSectionPath(section)}/${routePaths.sectionNew}`;
 }

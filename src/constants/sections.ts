@@ -261,4 +261,3 @@ export const SECTIONS_MAP = {
 
 export type SectionName =
     (typeof SECTIONS_MAP)[keyof typeof SECTIONS_MAP]["name"];
-
