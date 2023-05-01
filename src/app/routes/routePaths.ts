@@ -1,6 +1,3 @@
-export const overviewPath = (section) => {
-    return `overview/${section}`;
-};
 
 export const routePaths = {
     overviewRoot: "/overview",

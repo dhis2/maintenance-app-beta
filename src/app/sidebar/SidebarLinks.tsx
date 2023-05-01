@@ -1,7 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import {
     SECTIONS_MAP,
-    SectionNamePlural,
     Section,
 } from "../../constants/sections";
 import { getOverviewPath } from "../routes/routePaths";
@@ -18,21 +17,21 @@ export interface ParentLink {
 
 export type SidebarLinks = Record<string, ParentLink>;
 
-const getOverviewLinkItem = (sectionName: SectionNamePlural): LinkItem => ({
+const getOverviewLinkItem = (section: Section): LinkItem => ({
     label: i18n.t("Overview"),
-    to: getOverviewPath(sectionName),
+    to: getOverviewPath(section.name),
 });
 
 const getSectionLinkItem = (section: Section): LinkItem => ({
     label: i18n.t(section.title),
-    to: section.namePlural ?? section.name,
+    to: section.namePlural
 });
 
 export const sidebarLinks = {
     categories: {
         label: SECTIONS_MAP.category.titlePlural,
         links: [
-            getOverviewLinkItem(SECTIONS_MAP.category.name),
+            getOverviewLinkItem(SECTIONS_MAP.category),
             getSectionLinkItem(SECTIONS_MAP.categoryOption),
             getSectionLinkItem(SECTIONS_MAP.categoryCombo),
             getSectionLinkItem(SECTIONS_MAP.categoryOptionCombo),
@@ -43,7 +42,7 @@ export const sidebarLinks = {
     dataElements: {
         label: SECTIONS_MAP.dataElement.titlePlural,
         links: [
-            getOverviewLinkItem(SECTIONS_MAP.dataElement.name),
+            getOverviewLinkItem(SECTIONS_MAP.dataElement),
             getSectionLinkItem(SECTIONS_MAP.dataElement),
             getSectionLinkItem(SECTIONS_MAP.dataElementGroup),
             getSectionLinkItem(SECTIONS_MAP.dataElementGroupSet),
@@ -52,7 +51,7 @@ export const sidebarLinks = {
     dataSets: {
         label: SECTIONS_MAP.dataSet.titlePlural,
         links: [
-            getOverviewLinkItem(SECTIONS_MAP.dataSet.name),
+            getOverviewLinkItem(SECTIONS_MAP.dataSet),
             getSectionLinkItem(SECTIONS_MAP.dataSet),
             getSectionLinkItem(SECTIONS_MAP.dataSetNotification),
         ],
@@ -60,7 +59,7 @@ export const sidebarLinks = {
     indicators: {
         label: SECTIONS_MAP.indicator.titlePlural,
         links: [
-            getOverviewLinkItem(SECTIONS_MAP.indicator.name),
+            getOverviewLinkItem(SECTIONS_MAP.indicator),
             getSectionLinkItem(SECTIONS_MAP.indicator),
             getSectionLinkItem(SECTIONS_MAP.indicatorType),
             getSectionLinkItem(SECTIONS_MAP.indicatorGroup),
@@ -72,7 +71,7 @@ export const sidebarLinks = {
     organisationUnits: {
         label: SECTIONS_MAP.organisationUnit.titlePlural,
         links: [
-            getOverviewLinkItem(SECTIONS_MAP.organisationUnit.name),
+            getOverviewLinkItem(SECTIONS_MAP.organisationUnit),
             getSectionLinkItem(SECTIONS_MAP.organisationUnit),
             getSectionLinkItem(SECTIONS_MAP.organisationUnitGroup),
             getSectionLinkItem(SECTIONS_MAP.organisationUnitGroupSet),
@@ -81,7 +80,7 @@ export const sidebarLinks = {
     programsAndTracker: {
         label: SECTIONS_MAP.programsAndTracker.title,
         links: [
-            getOverviewLinkItem(SECTIONS_MAP.programsAndTracker.name),
+            getOverviewLinkItem(SECTIONS_MAP.programsAndTracker),
             getSectionLinkItem(SECTIONS_MAP.program),
             getSectionLinkItem(SECTIONS_MAP.trackedEntityType),
             getSectionLinkItem(SECTIONS_MAP.trackedEntityAttribute),
@@ -92,7 +91,7 @@ export const sidebarLinks = {
     validation: {
         label: SECTIONS_MAP.validation.titlePlural,
         links: [
-            getOverviewLinkItem(SECTIONS_MAP.validation.name),
+            getOverviewLinkItem(SECTIONS_MAP.validation),
             getSectionLinkItem(SECTIONS_MAP.validationRule),
             getSectionLinkItem(SECTIONS_MAP.validationRuleGroup),
             getSectionLinkItem(SECTIONS_MAP.validationNotification),

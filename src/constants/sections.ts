@@ -26,8 +26,8 @@ export const SECTIONS_MAP = {
     categoryCombo: {
         name: "categoryCombo",
         namePlural: "categoryCombos",
-        title: i18n.t("Category combo"),
-        titlePlural: i18n.t("Category combos"),
+        title: i18n.t("Category combination"),
+        titlePlural: i18n.t("Category combinations"),
     },
     categoryOptionCombo: {
         name: "categoryOptionCombo",
@@ -133,6 +133,8 @@ export const SECTIONS_MAP = {
     },
     programsAndTracker: {
         name: "programsAndTracker",
+        namePlural: "programsAndTracker",
+        titlePlural: i18n.t("Programs and Tracker"),
         title: i18n.t("Programs and Tracker"),
     },
     program: {
@@ -220,7 +222,7 @@ export const SECTIONS_MAP = {
         titlePlural: i18n.t("Predictors"),
     },
     pushAnalysis: {
-        name: "pushAnalysi",
+        name: "pushAnalysis",
         namePlural: "pushAnalysis",
         title: i18n.t("Push analysis"),
         titlePlural: i18n.t("Push analyses"),
@@ -258,8 +260,9 @@ export const SECTIONS_MAP = {
 } as const satisfies SectionMap;
 
 export type SectionName =
-    (typeof SECTIONS_MAP)[keyof typeof SECTIONS_MAP]["schemaName"];
+    (typeof SECTIONS_MAP)[keyof typeof SECTIONS_MAP]["name"];
+
 export type SectionNamePlural =
-    (typeof SECTIONS_MAP)[keyof typeof SECTIONS_MAP]["pluralSchemaName"];
+    (typeof SECTIONS_MAP)[keyof typeof SECTIONS_MAP]["namePlural"];
 
 export const SECTIONS: Section[] = Object.values(SECTIONS_MAP);
