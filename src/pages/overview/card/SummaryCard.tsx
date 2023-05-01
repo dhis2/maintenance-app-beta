@@ -2,7 +2,8 @@ import i18n from "@dhis2/d2-i18n";
 import { Card, Button } from "@dhis2/ui";
 import { IconEdit24 } from "@dhis2/ui-icons";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, resolvePath } from "react-router-dom";
+import { routePaths } from "../../../app/routes/routePaths";
 import styles from "./SummaryCard.module.css";
 
 const DEFAULT_ICON = <IconEdit24 />;
@@ -60,12 +61,13 @@ interface SummaryCardActionsProps {
 }
 
 export const SummaryCardActions = ({ to }: SummaryCardActionsProps) => {
+    const path = resolvePath(to).pathname
     return (
         <div className={styles.cardActions}>
-            <Link to={to.concat("/new")}>
+            <Link to={path.concat(`/${routePaths.sectionNew}`)}>
                 <Button secondary>{i18n.t("Add new")}</Button>
             </Link>
-            <Link to={to}>
+            <Link to={path}>
                 <Button secondary>{i18n.t("Manage")}</Button>
             </Link>
         </div>
