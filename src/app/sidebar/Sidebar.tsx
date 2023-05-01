@@ -51,9 +51,8 @@ const SidebarParent = ({
     // Check if any of the children match the current path
     // If they do, parent should be open by default
     const routePathMatch = links.some((link) => {
-        return matchPath(link.to, pathname);
+        return matchPath(`${link.to}/*`, pathname);
     });
-
     const forceOpen = (isFiltered && links.length > 0) || undefined;
     return (
         <SidenavParent
