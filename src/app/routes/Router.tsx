@@ -57,17 +57,31 @@ function createSectionLazyRouteFunction(
     };
 }
 
+const TestWrapper = ({ children }: { children?: React.ReactNode }) => {
+    return (
+        <div>
+            helloasf
+            <Outlet />
+        </div>
+    );
+};
 const sectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
     <Route key={section.namePlural} path={`${getSectionPath(section)}`}>
         <Route index lazy={createSectionLazyRouteFunction(section, "List")} />
-        <Route
-            path={routePaths.sectionNew}
-            lazy={createSectionLazyRouteFunction(section, "New")}
-        />
-        <Route
-            path=":id"
-            lazy={createSectionLazyRouteFunction(section, "Edit")}
-        />
+        <Route path="" element={<TestWrapper />}>
+            asf
+            <Route
+                path={routePaths.sectionNew}
+                lazy={createSectionLazyRouteFunction(section, "New")}
+                handle={{
+                    hideSidebar: true
+                }}
+            />
+            <Route
+                path=":id"
+                lazy={createSectionLazyRouteFunction(section, "Edit")}
+            />
+        </Route>
     </Route>
 ));
 
