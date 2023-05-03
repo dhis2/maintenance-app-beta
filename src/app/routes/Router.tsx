@@ -85,7 +85,7 @@ const routes = createRoutesFromElements(
             />
             <Route
                 path={getSectionPath(SECTIONS_MAP.category)}
-                lazy={createOverviewLazyRouteFunction("Category")}
+                lazy={createOverviewLazyRouteFunction("Categories")}
             />
         </Route>
         {sectionRoutes}
