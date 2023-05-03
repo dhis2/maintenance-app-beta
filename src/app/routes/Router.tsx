@@ -23,7 +23,7 @@ function createOverviewLazyRouteFunction(
     componentName: string
 ): LazyRouteFunction<RouteObject> {
     return async () => {
-        const routeComponent = await import(`../../pages/overview/index`);
+        const routeComponent = await import(`../../pages/overview/`);
         return {
             Component: routeComponent[componentName],
         };
@@ -82,6 +82,10 @@ const routes = createRoutesFromElements(
             <Route
                 path={getSectionPath(SECTIONS_MAP.dataElement)}
                 lazy={createOverviewLazyRouteFunction("DataElements")}
+            />
+            <Route
+                path={getSectionPath(SECTIONS_MAP.category)}
+                lazy={createOverviewLazyRouteFunction("Category")}
             />
         </Route>
         {sectionRoutes}

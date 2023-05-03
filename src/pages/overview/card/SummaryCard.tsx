@@ -3,7 +3,11 @@ import { Card, Button } from "@dhis2/ui";
 import { IconEdit24 } from "@dhis2/ui-icons";
 import React from "react";
 import { Link, resolvePath } from "react-router-dom";
-import { routePaths } from "../../../app/routes/routePaths";
+import {
+    getSectionNewPath,
+    getSectionPath,
+} from "../../../app/routes/routePaths";
+import { SECTIONS_MAP, Section } from "../../../constants";
 import styles from "./SummaryCard.module.css";
 
 const DEFAULT_ICON = <IconEdit24 />;
@@ -30,23 +34,22 @@ export const SummaryCardGroup = ({
 interface SummaryCardProps {
     children: React.ReactNode;
     icon?: React.ReactNode;
-    title: string;
-    to: string;
+    section: Section;
 }
 
 export const SummaryCard = ({
-    children,
     icon = DEFAULT_ICON,
-    title,
-    to,
+    children,
+    section,
 }: SummaryCardProps) => {
+    const title = section.title;
     return (
         <Card>
             <div className={styles.cardWrapper}>
                 <div className={styles.cardIcon}>{icon}</div>
                 <SummaryCardHeader>{title}</SummaryCardHeader>
                 <SummaryCardContent>{children}</SummaryCardContent>
-                <SummaryCardActions to={to} />
+                <SummaryCardActions section={section} />
             </div>
         </Card>
     );
@@ -57,17 +60,25 @@ export const SummaryCardContent = ({ children }) => {
 };
 
 interface SummaryCardActionsProps {
-    to: string;
+    section: Section;
 }
 
-export const SummaryCardActions = ({ to }: SummaryCardActionsProps) => {
-    const path = resolvePath(to).pathname;
+export const SummaryCardActions = ({ section }: SummaryCardActionsProps) => {
+    // paths are relative by default, use resolvePath to resolve from root
+    const managePath = resolvePath(getSectionPath(section));
+    const newModelPath = resolvePath(getSectionNewPath(section));
+
+    // categoryOptionCombo is the only section that should not be creatable
+    // TODO: implement auth and move this there
+    const canCreate = section.name !== SECTIONS_MAP.categoryOptionCombo.name;
     return (
         <div className={styles.cardActions}>
-            <Link to={path.concat(`/${routePaths.sectionNew}`)}>
-                <Button secondary>{i18n.t("Add new")}</Button>
-            </Link>
-            <Link to={path}>
+            {canCreate && (
+                <Link to={newModelPath}>
+                    <Button secondary>{i18n.t("Add new")}</Button>
+                </Link>
+            )}
+            <Link to={managePath}>
                 <Button secondary>{i18n.t("Manage")}</Button>
             </Link>
         </div>

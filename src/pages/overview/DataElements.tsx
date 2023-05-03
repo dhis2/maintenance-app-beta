@@ -27,26 +27,17 @@ export const DataElementsCardGroup = ({
 }) => {
     return (
         <SummaryCardGroup title={showTitle ? TITLE : undefined}>
-            <SummaryCard
-                title={SECTIONS_MAP.dataElement.title}
-                to={getSectionPath(SECTIONS_MAP.dataElement)}
-            >
+            <SummaryCard section={SECTIONS_MAP.dataElement}>
                 {i18n.t(
                     "Building block elements of your database. The foundation of data collection and analysis."
                 )}
             </SummaryCard>
-            <SummaryCard
-                title={SECTIONS_MAP.dataElementGroup.title}
-                to={getSectionPath(SECTIONS_MAP.dataElementGroup)}
-            >
+            <SummaryCard section={SECTIONS_MAP.dataElementGroup}>
                 {i18n.t(
                     "Improve analysis of single data elements by combining them into data element groups."
                 )}
             </SummaryCard>
-            <SummaryCard
-                title={SECTIONS_MAP.dataElementGroupSet.title}
-                to={getSectionPath(SECTIONS_MAP.dataElementGroupSet)}
-            >
+            <SummaryCard section={SECTIONS_MAP.dataElementGroupSet}>
                 {i18n.t(
                     "Add another level of organisation by grouping data element groups into group sets."
                 )}
