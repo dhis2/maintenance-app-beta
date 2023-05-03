@@ -9,14 +9,10 @@ const legacyPath = "/dhis-web-maintenance/index.html#/";
 
 const getLegacyBaseUrl = (baseUrl: string) => `${baseUrl}${legacyPath}`;
 
-// some sections does not follow the <mainModel>Section/name pattern
-// so we need to map them to the correct "mainModel" in the legacy app
-const legacySectionPathMap = {
-    [SECTIONS_MAP.programIndicator.name]: "indicator",
-    [SECTIONS_MAP.programIndicatorGroup.name]: "indicator",
-    [SECTIONS_MAP.trackedEntityAttribute.name]: "program",
-    [SECTIONS_MAP.trackedEntityType.name]: "program",
-    [SECTIONS_MAP.relationshipType.name]: "program",
+// some sections does not have the same "parent"-section in legacy app
+// so we need to map them to the correct "parent" in the legacy app
+const legacySectionMap = {
+    [SECTIONS_MAP.program.parentSectionKey]: "program",
 };
 
 const getLegacySectionPath = (
@@ -32,15 +28,9 @@ const getLegacySectionPath = (
         id = isNew ? "add" : params?.id || "";
     }
 
-    let legacySection = legacySectionPathMap[section.name];
+    let legacySection = legacySectionMap[section.name];
     if (!legacySection) {
-        // most sections are grouped under the main "model"-name in the legacy app
-        // eg. categoryCombos have this path: /categorySection/categoryCombo
-        // so we get the first portion of the section ("category" in "categoryCombo") before the first capital letter
-        const firstCapitalIndex = section.name.search(/[A-Z]/);
-        const subIndex =
-            firstCapitalIndex === -1 ? section.name.length : firstCapitalIndex;
-        legacySection = section.name.substring(0, subIndex);
+        legacySection = section.parentSectionKey ?? section.name;
     }
 
     return `${view}/${legacySection}Section/${section.name}/${id}`;
