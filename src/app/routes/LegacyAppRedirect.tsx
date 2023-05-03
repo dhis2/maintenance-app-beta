@@ -3,11 +3,21 @@ import i18n from "@dhis2/d2-i18n";
 import { NoticeBox, Button } from "@dhis2/ui";
 import React from "react";
 import { useParams, Params } from "react-router-dom";
-import { Section } from "../../constants";
+import { Section, SECTIONS_MAP } from "../../constants";
 
 const legacyPath = "/dhis-web-maintenance/index.html#/";
 
-const legacyBaseUrl = (baseUrl: string) => `${baseUrl}${legacyPath}`;
+const getLegacyBaseUrl = (baseUrl: string) => `${baseUrl}${legacyPath}`;
+
+// some sections does not follow the <mainModel>Section/name pattern
+// so we need to map them to the correct "mainModel" in the legacy app
+const legacySectionPathMap = {
+    [SECTIONS_MAP.programIndicator.name]: "indicator",
+    [SECTIONS_MAP.programIndicatorGroup.name]: "indicator",
+    [SECTIONS_MAP.trackedEntityAttribute.name]: "program",
+    [SECTIONS_MAP.trackedEntityType.name]: "program",
+    [SECTIONS_MAP.relationshipType.name]: "program",
+};
 
 const getLegacySectionPath = (
     section: Section,
@@ -21,7 +31,19 @@ const getLegacySectionPath = (
         view = "edit";
         id = isNew ? "add" : params?.id || "";
     }
-    return `${view}/${section.name}Section/${section.name}/${id}`;
+
+    let legacySection = legacySectionPathMap[section.name];
+    if (!legacySection) {
+        // most sections are grouped under the main "model"-name in the legacy app
+        // eg. categoryCombos have this path: /categorySection/categoryCombo
+        // so we get the first portion of the section ("category" in "categoryCombo") before the first capital letter
+        const firstCapitalIndex = section.name.search(/[A-Z]/);
+        const subIndex =
+            firstCapitalIndex === -1 ? section.name.length : firstCapitalIndex;
+        legacySection = section.name.substring(0, subIndex);
+    }
+
+    return `${view}/${legacySection}Section/${section.name}/${id}`;
 };
 
 type LegacyAppRedirectProps = {
@@ -36,7 +58,7 @@ export const LegacyAppRedirect = ({
     const params = useParams();
     const { baseUrl } = useConfig();
 
-    const redirectUrl = legacyBaseUrl(baseUrl).concat(
+    const redirectUrl = getLegacyBaseUrl(baseUrl).concat(
         getLegacySectionPath(section, params, isNew)
     );
 
