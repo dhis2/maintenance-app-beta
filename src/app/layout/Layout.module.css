@@ -20,7 +20,6 @@
 
 .main {
     padding: 16px;
-    overflow: hidden;
     grid-area: main;
     background-color: var(--colors-grey100);
 }
