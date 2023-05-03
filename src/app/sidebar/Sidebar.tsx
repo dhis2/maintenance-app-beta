@@ -1,5 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, matchPath } from "react-router-dom";
 import { HidePreventUnmount } from "../../components/utils/HidePreventUnmount";
 import styles from "./Sidebar.module.css";
@@ -53,16 +53,28 @@ const SidebarParent = ({
         return matchPath(link.to, pathname);
     });
     const [isOpen, setIsOpen] = useState(routePathMatch);
+    // use separate state for "open" while filtered
+    // so parent can be closed while filtered and fall back to previous open
+    // state when filter is cleared
+    const [openFiltered, setOpenFiltered] = useState(false);
 
-    const forceOpen = (isFiltered && links.length > 0);
-    const open = isOpen || forceOpen;
+    useEffect(() => {
+        if (isFiltered) {
+            setOpenFiltered(isFiltered);
+        }
+    }, [isFiltered]);
 
+    const handleOpen = () => {
+        if (openFiltered) {
+            setOpenFiltered(false);
+        } else {
+            setIsOpen(!isOpen);
+        }
+    };
+
+    const open = isFiltered ? openFiltered : isOpen;
     return (
-        <SidenavParent
-            label={label}
-            open={open}
-            onClick={() => setIsOpen(!open)}
-        >
+        <SidenavParent label={label} open={open} onClick={handleOpen}>
             {links.map(({ to, label }) => (
                 <SidebarNavLink key={label} to={to} label={label} />
             ))}
