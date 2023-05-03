@@ -173,6 +173,12 @@ export const SECTIONS_MAP = {
         title: i18n.t("Program stage"),
         titlePlural: i18n.t("Program stages"),
     },
+    relationshipType: {
+      name: "relationshipType",
+      namePlural: "relationshipTypes",
+      title: i18n.t("Relationship type"),
+      titlePlural: i18n.t("Relationship types"),
+    },
     validation: {
         name: "validation",
         namePlural: "validations",

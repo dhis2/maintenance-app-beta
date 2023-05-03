@@ -85,6 +85,7 @@ export const sidebarLinks = {
             getSectionLinkItem(SECTIONS_MAP.program),
             getSectionLinkItem(SECTIONS_MAP.trackedEntityType),
             getSectionLinkItem(SECTIONS_MAP.trackedEntityAttribute),
+            getSectionLinkItem(SECTIONS_MAP.relationshipType),
             getSectionLinkItem(SECTIONS_MAP.programRule),
             getSectionLinkItem(SECTIONS_MAP.programRuleVariable),
         ],
