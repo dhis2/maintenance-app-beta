@@ -70,7 +70,13 @@ const SidebarParent = ({
 const matchLabel = (label: string, filterValue: string) =>
     label.toLowerCase().includes(filterValue.toLowerCase());
 
-export const Sidebar = ({ links = sidebarLinks }: { links?: SidebarLinks }) => {
+export const Sidebar = ({
+    className,
+    links = sidebarLinks,
+}: {
+    className?: string;
+    links?: SidebarLinks;
+}) => {
     const [filterValue, setFilterValue] = useState("");
 
     const handleFilterChange = (input: OnChangeInput) => {
@@ -95,7 +101,7 @@ export const Sidebar = ({ links = sidebarLinks }: { links?: SidebarLinks }) => {
     const noMatch = isFiltered && numberOfFilteredLinks === 0;
 
     return (
-        <aside className={styles.sidebar}>
+        <aside className={className}>
             <Sidenav>
                 <SidenavFilter onChange={handleFilterChange} />
                 <SidenavItems>

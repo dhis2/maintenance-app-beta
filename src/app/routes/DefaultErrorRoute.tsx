@@ -1,7 +1,7 @@
 import { NoticeBox } from "@dhis2/ui";
 import React from "react";
 import { useRouteError, isRouteErrorResponse } from "react-router-dom";
-import { BaseLayoutWithSidebar } from "../layout";
+import { SidebarLayout } from "../layout";
 
 export const DefaultErrorRoute = () => {
     const error = useRouteError();
@@ -14,12 +14,12 @@ export const DefaultErrorRoute = () => {
         message = error?.error?.message
     }
     return (
-        <BaseLayoutWithSidebar>
+        <SidebarLayout>
             <NoticeBox
                 warning={isRouteError}
                 error={!isRouteError}
                 title={title}
             >{message}</NoticeBox>
-        </BaseLayoutWithSidebar>
+        </SidebarLayout>
     );
 };

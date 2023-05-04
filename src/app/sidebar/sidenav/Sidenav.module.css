@@ -24,6 +24,10 @@ html {
     flex-direction: column;
 }
 
+.sidenav-items {
+    overflow-y: auto;
+}
+
 /* parent */
 .sidenav-parent button {
     border: none;

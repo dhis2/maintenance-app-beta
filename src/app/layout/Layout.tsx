@@ -1,3 +1,4 @@
+import cx from "classnames";
 import React from "react";
 import { Outlet, useMatches } from "react-router-dom";
 import { MatchRouteHandle } from "../routes/types";
@@ -9,33 +10,41 @@ interface BaseLayoutProps {
     sidebar?: React.ReactNode;
 }
 
-export const BaseLayout = ({ children, sidebar }: BaseLayoutProps) => {
+export const BaseSidebarLayout = ({ children, sidebar }: BaseLayoutProps) => {
     return (
         <div className={css.wrapper}>
-            {sidebar && <aside className={css.sidebar}>{sidebar}</aside>}
+            {sidebar}
             <div className={css.main}>{children}</div>
         </div>
     );
 };
 
-export const BaseLayoutWithSidebar = ({
+export const SidebarLayout = ({
     children,
+    hideSidebar,
 }: {
     children: React.ReactNode;
+    hideSidebar?: boolean;
 }) => {
-    return <BaseLayout sidebar={<Sidebar />}>{children}</BaseLayout>;
+    return (
+        <BaseSidebarLayout
+            sidebar={<Sidebar className={cx(css.sidebar, {[css.hide]: hideSidebar})} />}
+        >
+            {children}
+        </BaseSidebarLayout>
+    );
 };
 
 export const Layout = () => {
     const matches = useMatches() as MatchRouteHandle[];
     // routes can specify a handle to hide the sidebar
-    const showSidebar = matches.some((match) => match.handle?.hideSidebar);
+    // hide the sidebar if any matched route specifies it
+    const hideSidebar = matches.some((match) => match.handle?.hideSidebar);
 
-    const LayoutComponent = showSidebar ? BaseLayout : BaseLayoutWithSidebar;
     return (
-        <LayoutComponent>
+        <SidebarLayout hideSidebar={hideSidebar}>
             <Outlet />
-        </LayoutComponent>
+        </SidebarLayout>
     );
 };
 
