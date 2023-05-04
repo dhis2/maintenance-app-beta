@@ -80,7 +80,7 @@ const sectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
 
 const routes = createRoutesFromElements(
     <Route element={<Layout />} errorElement={<DefaultErrorRoute />}>
-        <Route path="/" element={<Navigate to={routePaths.overviewRoot} />} />
+        <Route path="/" element={<Navigate to={routePaths.overviewRoot} replace />} />
         <Route path={routePaths.overviewRoot} element={<Outlet />}>
             <Route
                 index
