@@ -27,13 +27,9 @@ export const BaseLayoutWithSidebar = ({
 };
 
 export const Layout = () => {
-    const matches = useMatches();
-
+    const matches = useMatches() as MatchRouteHandle[];
     // routes can specify a handle to hide the sidebar
-    const showSidebar = matches.some((match) => {
-        const sidebarHandleMatch = match as MatchRouteHandle;
-        return sidebarHandleMatch.handle?.hideSidebar;
-    });
+    const showSidebar = matches.some((match) => match.handle?.hideSidebar);
 
     const LayoutComponent = showSidebar ? BaseLayout : BaseLayoutWithSidebar;
     return (
