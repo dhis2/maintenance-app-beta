@@ -1,10 +1,6 @@
 import React from "react";
-import {
-    Link,
-    To,
-    useMatches,
-} from "react-router-dom";
-import { SECTIONS_MAP, Section } from "../../constants";
+import { Link, To, useMatches } from "react-router-dom";
+import { SECTIONS_MAP } from "../../constants";
 import { getSectionPath, getOverviewPath } from "../routes/routePaths";
 import { MatchRouteHandle } from "../routes/types";
 import css from "./Breadcrumb.module.css";
@@ -24,18 +20,6 @@ export const BreadcrumbItem = ({ label, to }: BreadcrumbItemProps) => {
     );
 };
 
-export const BreadcrumbSectionItem = ({
-    label,
-    section,
-}: {
-    label?: string;
-    section: Section;
-}) => (
-    <Link className={css.breadcrumbItem} to={`/${getSectionPath(section)}`}>
-        {label ?? section.titlePlural}
-    </Link>
-);
-
 export const Breadcrumb = () => {
     const matches = useMatches() as MatchRouteHandle[];
     const section = matches.find((match) => !!match.handle?.section)?.handle
@@ -45,34 +29,29 @@ export const Breadcrumb = () => {
         return null;
     }
 
-    const extraCrumbs = matches
-        .filter((match) => match.handle?.crumb)
-        .map((match) => {
-            console.log(match);
-            return match.handle?.crumb?.(match) as JSX.Element;
-        });
-    const CrumbElements: JSX.Element[] = [];
+    const sectionCrumb = (
+        <BreadcrumbItem
+            to={`/${getSectionPath(section)}`}
+            label={section.title}
+        />
+    );
+    let overviewCrumb: JSX.Element | undefined;
 
     if (section.parentSectionKey) {
         const parentSection = SECTIONS_MAP[section.parentSectionKey];
-        CrumbElements.push(
+        overviewCrumb = (
             <BreadcrumbItem
                 to={`/${getOverviewPath(parentSection)}`}
-                label={parentSection.title}
+                label={parentSection.titlePlural}
             />
         );
     }
-    CrumbElements.push(<BreadcrumbSectionItem section={section} />);
 
-    const finalCrumb = CrumbElements.concat(...extraCrumbs);
     return (
         <div className={css.breadcrumbWrapper}>
-            {finalCrumb.map((crumb, i) => (
-                <span key={i}>
-                    {crumb}
-                    <Separator />
-                </span>
-            ))}
+            {overviewCrumb}
+            <Separator />
+            {sectionCrumb}
         </div>
     );
 };

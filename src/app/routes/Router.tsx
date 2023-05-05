@@ -12,11 +12,10 @@ import {
 } from "react-router-dom";
 import { SECTIONS_MAP, Section } from "../../constants";
 import { Layout } from "../layout";
-import { Breadcrumb, BreadcrumbItem } from "../layout/Breadcrumb";
+import { Breadcrumb } from "../layout/Breadcrumb";
 import { DefaultErrorRoute } from "./DefaultErrorRoute";
 import { LegacyAppRedirect } from "./LegacyAppRedirect";
 import { getSectionPath, routePaths } from "./routePaths";
-import type { RouteHandle } from "./types";
 
 // This loads all the overview routes in the same chunk since they resolve to the same promise
 // see https://reactrouter.com/en/main/route/lazy#multiple-routes-in-a-single-file
@@ -65,15 +64,15 @@ const sectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
         key={section.namePlural}
         path={getSectionPath(section)}
         handle={{ section }}
+        element={
+            <>
+                <Breadcrumb />
+                <Outlet />
+            </>
+        }
     >
         <Route index lazy={createSectionLazyRouteFunction(section, "List")} />
         <Route
-            element={
-                <>
-                    <Breadcrumb />
-                    <Outlet />
-                </>
-            }
             handle={{
                 hideSidebar: true,
             }}
@@ -81,32 +80,10 @@ const sectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
             <Route
                 path={routePaths.sectionNew}
                 lazy={createSectionLazyRouteFunction(section, "New")}
-                handle={{
-                    crumb: () => (
-                        <BreadcrumbItem
-                            label={`${i18n.t("New {{modelName}}", {
-                                modelName: section.title,
-                            })}`}
-                            to={routePaths.sectionNew}
-                        />
-                    ),
-                }}
             />
             <Route
                 path=":id"
                 lazy={createSectionLazyRouteFunction(section, "Edit")}
-                handle={
-                    {
-                        crumb: (match) => (
-                            <BreadcrumbItem
-                                label={`${i18n.t("Edit {{modelName}}", {
-                                    modelName: section.title,
-                                })}`}
-                                to={`/${match?.params?.id}`}
-                            />
-                        ),
-                    } as RouteHandle
-                }
             />
         </Route>
     </Route>

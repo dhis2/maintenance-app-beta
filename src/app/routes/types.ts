@@ -9,8 +9,6 @@ type MatchWithHandle<THandle> = ReturnType<typeof useMatches>[number] & { handle
 export type RouteHandle = {
     hideSidebar?: boolean;
     section?: Section;
-    crumb: (match: MatchRouteHandle) => JSX.Element
 }
-
 
 export type MatchRouteHandle = MatchWithHandle<RouteHandle>;
