@@ -11,7 +11,7 @@ export const CategoryOverview = () => {
         <OverviewGroup title={TITLE}>
             <OverviewGroupSummary>
                 {i18n.t(
-                    "Data elements are the core foundational item of DHIS2 and are used for data collection. Data elements can be organised by group and group set."
+                    'Categories are typically a concept, for example "Gender", "Age" or "Disease Status". Use categories to disaggregate data elements into individual components. You can also use category combinations to assign metadata attributes to all data recorded in a specific dataset.'
                 )}
             </OverviewGroupSummary>
             <CategoryCardGroup />
@@ -29,12 +29,12 @@ export const CategoryCardGroup = ({ showTitle }: { showTitle?: boolean }) => {
             </SummaryCard>
             <SummaryCard section={SECTIONS_MAP.category}>
                 {i18n.t(
-                    "Disaggregate data elements into individual components. Can also be used to to assign metadata attributes to data sets or programs."
+                    "Disaggregate data elements into individual components."
                 )}
             </SummaryCard>
             <SummaryCard section={SECTIONS_MAP.categoryCombo}>
                 {i18n.t(
-                    "Combine multiple categories into a related set that can be assigned to data elements for dissagregation."
+                    "Combine multiple categories into a related set that can be assigned to data elements for dissagregation. Can also be used to to assign metadata attributes to data sets or programs."
                 )}
             </SummaryCard>
             <SummaryCard section={SECTIONS_MAP.categoryOptionCombo}>
