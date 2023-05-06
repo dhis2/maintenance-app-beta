@@ -28,10 +28,7 @@ const getLegacySectionPath = (
         id = isNew ? "add" : params?.id || "";
     }
 
-    let legacySection = legacySectionMap[section.name];
-    if (!legacySection) {
-        legacySection = section.parentSectionKey ?? section.name;
-    }
+    const legacySection = legacySectionMap[section?.parentSectionKey ?? ""];
 
     return `${view}/${legacySection}Section/${section.name}/${id}`;
 };

@@ -142,14 +142,14 @@ export const SECTIONS_MAP = {
         namePlural: "trackedEntityAttributes",
         title: i18n.t("Tracked entity attribute"),
         titlePlural: i18n.t("Tracked entity attributes"),
-        parentSectionKey: "trackedEntityAttribute",
+        parentSectionKey: "programsAndTracker",
     },
     trackedEntityType: {
         name: "trackedEntityType",
         namePlural: "trackedEntityTypes",
         title: i18n.t("Tracked entity type"),
         titlePlural: i18n.t("Tracked entity types"),
-        parentSectionKey: "trackedEntityAttribute",
+        parentSectionKey: "programsAndTracker",
     },
     programsAndTracker: {
         name: "programsAndTracker",
