@@ -1,24 +1,7 @@
-export type SchemaPropertyType =
-    | "REFERENCE"
-    | "BOOLEAN"
-    | "TEXT"
-    | "DATE"
-    | "IDENTIFIER"
-    | "URL"
-    | "CONSTANT"
-    | "INTEGER"
-    | "COMPLEX"
-    | "PHONENUMBER"
-    | "EMAIL"
-    | "COLOR"
-    | "PASSWORD"
-    | "NUMBER"
-    | "GEOLOCATION";
-
 export interface Schema {
     authorities: SchemaAuthorities;
     klass: string;
-    name: string;
+    name: SchemaName;
     plural: string;
     singular: string;
     metadata: boolean;
@@ -32,18 +15,52 @@ export interface Schema {
     dataShareable: boolean;
     persisted: boolean;
     embeddedObject: boolean;
-    properties: SchemaFieldProperties[];
+    properties: SchemaFieldProperty[];
 }
 
 export type PickSchemaProperties<T extends keyof Schema> = Pick<Schema, T>;
 
-export interface SchemaFieldProperties {
+export interface SchemaFieldProperty {
     name: string;
     fieldName?: string;
-    propertyType: SchemaPropertyType | "COLLECTION";
-    itemPropertyType?: SchemaPropertyType;
+    propertyType: SchemaFieldPropertyType | "COLLECTION";
+    itemPropertyType?: SchemaFieldPropertyType;
     klass: string;
     itemKlass?: string;
+    unique: boolean;
+    required: boolean;
+    length?: number;
+    persisted: boolean;
+    collectionName?: string;
+    collection: boolean;
+    attribute: boolean;
+    simple: boolean;
+    constants?: string[];
+    embeddedObject: boolean;
+    identifiableObject: boolean;
+    relativeApiEndpoint?: string;
+    translatable: boolean;
+    owner: boolean;
+    readable: boolean;
+    writable: boolean;
+}
+
+enum SchemaFieldPropertyType {
+    REFERENCE = "REFERENCE",
+    BOOLEAN = "BOOLEAN",
+    TEXT = "TEXT",
+    DATE = "DATE",
+    IDENTIFIER = "IDENTIFIER",
+    URL = "URL",
+    CONSTANT = "CONSTANT",
+    INTEGER = "INTEGER",
+    COMPLEX = "COMPLEX",
+    PHONENUMBER = "PHONENUMBER",
+    EMAIL = "EMAIL",
+    COLOR = "COLOR",
+    PASSWORD = "PASSWORD",
+    NUMBER = "NUMBER",
+    GEOLOCATION = "GEOLOCATION",
 }
 
 // https://docs.dhis2.org/javadoc/2.39/org/hisp/dhis/security/AuthorityType.html
