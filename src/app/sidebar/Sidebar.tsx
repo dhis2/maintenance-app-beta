@@ -65,8 +65,8 @@ const SidebarParent = ({
     }, [isFiltered]);
 
     const handleOpen = () => {
-        if (openFiltered) {
-            setOpenFiltered(false);
+        if (isFiltered) {
+            setOpenFiltered(!openFiltered);
         } else {
             setIsOpen(!isOpen);
         }
