@@ -46,12 +46,6 @@ export interface SchemaFieldProperties {
     itemKlass?: string;
 }
 
-export type Id = string;
-
-export interface ModelReference {
-    id: Id;
-}
-
 // https://docs.dhis2.org/javadoc/2.39/org/hisp/dhis/security/AuthorityType.html
 enum SchemaAuthorityType {
     CREATE = "CREATE",
