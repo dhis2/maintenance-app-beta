@@ -6,6 +6,7 @@ import type { SchemaPropertyFields } from "./useLoadSchemas";
 type Schemas = ModelSchemas<SchemaPropertyFields>;
 
 type EmptyStore = Record<string, never>
+
 export interface SchemasStore {
     schemas: Schemas | EmptyStore;
     setSchemas: (schemas: Schemas) => void;

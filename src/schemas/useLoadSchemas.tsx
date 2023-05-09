@@ -3,9 +3,6 @@ import { useEffect } from "react";
 import { useSchemaStore } from "../schemas/schemaStore";
 import {
     PickSchemaProperties,
-    SchemaName,
-    Schema,
-    ModelSchemas,
 } from "../types/schemaBase";
 
 export const schemaPropertyFields = [
@@ -19,6 +16,8 @@ export const schemaPropertyFields = [
 
 export type SchemaPropertyFields = (typeof schemaPropertyFields)[number];
 
+type Schema = PickSchemaProperties<SchemaPropertyFields>;
+
 const query = {
     schemas: {
         resource: "schemas",
@@ -30,24 +29,22 @@ const query = {
 
 interface ModelSchemaResponse {
     schemas: {
-        schemas: PickSchemaProperties<SchemaPropertyFields>[];
+        schemas: Schema[];
     };
 }
 
 export const useLoadSchemas = () => {
-    const queryResponse = useDataQuery(query);
+    const queryResponse = useDataQuery<ModelSchemaResponse>(query);
     const setSchemas = useSchemaStore((state) => state.setSchemas);
 
     useEffect(() => {
         if (queryResponse.data) {
-            const schemaResponse =
-                queryResponse.data as unknown as ModelSchemaResponse;
+            const schemaResponse = queryResponse.data;
             const schemas = schemaResponse.schemas.schemas;
 
-            const modelSchemas = Object.fromEntries(
-                schemas.map((schema) => [schema.name, schema])
-            ) as ModelSchemas<SchemaPropertyFields>;
-
+            const modelSchemas = schemas.map((schema) => ({
+                [schema.name]: schema,
+            }));
             setSchemas(modelSchemas);
         }
     }, [setSchemas, queryResponse.data]);
