@@ -5,7 +5,7 @@ export type Section = {
     namePlural: string;
     titlePlural: string;
     title: string;
-    parentSectionKey?: string;
+    parentSectionKey: string;
 };
 type SectionMap = {
     [key: string]: Section;
@@ -17,6 +17,7 @@ export const SECTIONS_MAP = {
         namePlural: "categories",
         title: i18n.t("Category"),
         titlePlural: i18n.t("Categories"),
+        parentSectionKey: "category",
     },
     categoryOption: {
         name: "categoryOption",
@@ -240,6 +241,7 @@ export const SECTIONS_MAP = {
         namePlural: "other",
         title: i18n.t("Other"),
         titlePlural: i18n.t("Other"),
+        parentSectionKey: "other",
     },
     constant: {
         name: "constant",
