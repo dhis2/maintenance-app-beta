@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@dhis2/app-runtime": "^3.8.0",
+    "@tanem/react-nprogress": "^5.0.38",
     "react-router-dom": "^6.10.0"
   }
 }

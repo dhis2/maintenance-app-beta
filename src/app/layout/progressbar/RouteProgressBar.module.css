@@ -1,0 +1,23 @@
+.progressBarWrapper {
+    --animationDuration: 200ms;
+    transition: opacity var(--animationDuration) linear;
+    pointer-events: none;
+    opacity: 1;
+}
+
+.progressBarWrapper.finished {
+    opacity: 0;
+}
+
+.progressBar {
+    --progress: 0%;
+    margin-left: var(--progress);
+    transition: margin-left var(--animationDuration) linear;
+    background: #29d;
+    height: 2px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
