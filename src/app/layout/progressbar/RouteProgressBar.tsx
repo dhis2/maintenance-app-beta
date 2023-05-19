@@ -12,6 +12,7 @@ export const RouteProgress = () => {
     const location = useLocation();
     const isLoading = navigation.state === LOADING_STATE;
     // key is used to reset the state of the progress when location changes
+    // cannot use location.key directly since that will cancel the animation early (location.key and isLoading are updated at the same time)
     const [keyIncrement, setKeyIncrement] = React.useState(0);
 
     React.useEffect(() => {
@@ -49,7 +50,6 @@ export const RouteProgressBar = ({ isLoading }) => {
 };
 
 const ProgressBar = ({ progress }: { progress: number }) => {
-    console.log({ progress });
     return (
         <div
             className={css.progressBar}
