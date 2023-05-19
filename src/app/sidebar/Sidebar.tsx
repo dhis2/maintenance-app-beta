@@ -1,7 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, matchPath } from "react-router-dom";
-import { HidePreventUnmount } from "../../components/utils/HidePreventUnmount";
+import { HidePreventUnmount } from "../../components";
 import styles from "./Sidebar.module.css";
 import {
     LinkItem,
