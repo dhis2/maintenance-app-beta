@@ -1,7 +1,7 @@
 import { useNProgress } from "@tanem/react-nprogress";
 import cx from "classnames";
-import React from "react";
-import { useNavigation, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigation } from "react-router-dom";
 import css from "./RouteProgressBar.module.css";
 
 const LOADING_STATE = "loading";
@@ -9,22 +9,23 @@ const ANIMATION_DURATION = 200;
 
 export const RouteProgress = () => {
     const navigation = useNavigation();
-    const location = useLocation();
     const isLoading = navigation.state === LOADING_STATE;
-    // key is used to reset the state of the progress when location changes
-    // cannot use location.key directly since that will cancel the animation early (location.key and isLoading are updated at the same time)
-    const [keyIncrement, setKeyIncrement] = React.useState(0);
+    // key is used to reset the state of the progress when location changes.
+    // Cannot use navigation.location.key directly because navigation.location
+    // will be undefined when navigation is not in a loading state, causing the animation
+    // to cancel early because the key will change at the same time as isLoading.
+    // ref holds the previous version of this value, so we can use it to create a "sticky" key
+    const prevNavigationKeyRef = React.useRef<string | undefined>(undefined);
+    const stickyKey = navigation.location?.key || prevNavigationKeyRef.current;
 
-    React.useEffect(() => {
-        // use timeout so animation has a chance to complete before resetting
-        const timeout = setTimeout(
-            () => setKeyIncrement((inc) => inc + 1),
-            ANIMATION_DURATION
-        );
-        () => clearTimeout(timeout);
-    }, [location.key]);
+    useEffect(() => {
+        const currentNavigationKey = navigation.location?.key;
+        if (currentNavigationKey) {
+            prevNavigationKeyRef.current = currentNavigationKey;
+        }
+    }, [navigation.location?.key]);
 
-    return <RouteProgressBar key={keyIncrement} isLoading={isLoading} />;
+    return <RouteProgressBar key={stickyKey} isLoading={isLoading} />;
 };
 
 export const RouteProgressBar = ({ isLoading }) => {
