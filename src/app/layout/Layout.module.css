@@ -1,8 +1,13 @@
 @value m-medium: (min-width: 768px);
 
+:global a {
+    color: initial;
+    text-decoration: none;
+}
+
 .wrapper {
     display: grid;
-    grid-template-areas: 'sidebar' 'main';
+    grid-template-areas: "sidebar" "main";
     line-height: 20px;
     font-size: 14px;
     height: 100%;
@@ -33,15 +38,13 @@
         display: grid;
         grid-template-columns: auto 1fr;
         grid-template-rows: none;
-        grid-template-areas:
-            'sidebar   main';
+        grid-template-areas: "sidebar   main";
     }
     .sidebar {
         width: 240px;
         overflow: auto;
     }
     .main {
-        overflow-y:auto
+        overflow-y: auto;
     }
 }
-

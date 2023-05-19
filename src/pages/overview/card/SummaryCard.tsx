@@ -2,7 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import { Card, Button } from "@dhis2/ui";
 import { IconEdit24 } from "@dhis2/ui-icons";
 import React from "react";
-import { Link, resolvePath } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
     getSectionNewPath,
     getSectionPath,
@@ -45,12 +45,14 @@ export const SummaryCard = ({
     const title = section.title;
     return (
         <Card>
-            <div className={styles.cardWrapper}>
-                <div className={styles.cardIcon}>{icon}</div>
-                <SummaryCardHeader>{title}</SummaryCardHeader>
-                <SummaryCardContent>{children}</SummaryCardContent>
-                <SummaryCardActions section={section} />
-            </div>
+            <Link to={`/${getSectionPath(section)}`}>
+                <div className={styles.cardWrapper}>
+                    <div className={styles.cardIcon}>{icon}</div>
+                    <SummaryCardHeader>{title}</SummaryCardHeader>
+                    <SummaryCardContent>{children}</SummaryCardContent>
+                    <SummaryCardActions section={section} />
+                </div>
+            </Link>
         </Card>
     );
 };
@@ -64,21 +66,17 @@ interface SummaryCardActionsProps {
 }
 
 export const SummaryCardActions = ({ section }: SummaryCardActionsProps) => {
-    // paths are relative by default, use resolvePath to resolve from root
-    const managePath = resolvePath(getSectionPath(section));
-    const newModelPath = resolvePath(getSectionNewPath(section));
-
     // categoryOptionCombo is the only section that should not be creatable
     // TODO: implement auth and move this there
     const canCreate = section.name !== SECTIONS_MAP.categoryOptionCombo.name;
     return (
         <div className={styles.cardActions}>
             {canCreate && (
-                <Link to={newModelPath}>
+                <Link to={`/${getSectionNewPath}`} tabIndex={-1}>
                     <Button secondary>{i18n.t("Add new")}</Button>
                 </Link>
             )}
-            <Link to={managePath}>
+            <Link to={`/${getSectionPath(section)}`} tabIndex={-1}>
                 <Button secondary>{i18n.t("Manage")}</Button>
             </Link>
         </div>
