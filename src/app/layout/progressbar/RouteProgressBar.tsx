@@ -1,6 +1,6 @@
 import { useNProgress } from "@tanem/react-nprogress";
 import cx from "classnames";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigation } from "react-router-dom";
 import css from "./RouteProgressBar.module.css";
 
@@ -15,15 +15,15 @@ export const RouteProgress = () => {
     // will be undefined when navigation is not in a loading state, causing the animation
     // to cancel early because the key will change at the same time as isLoading.
     // ref holds the previous version of this value, so we can use it to create a "sticky" key
-    const prevNavigationKeyRef = React.useRef<string | undefined>(undefined);
-    const stickyKey = navigation.location?.key || prevNavigationKeyRef.current;
+    const prevNavigationKeyRef = useRef<string | undefined>(undefined);
+    const currentNavigationKey = navigation.location?.key;
+    const stickyKey = currentNavigationKey || prevNavigationKeyRef.current;
 
     useEffect(() => {
-        const currentNavigationKey = navigation.location?.key;
         if (currentNavigationKey) {
             prevNavigationKeyRef.current = currentNavigationKey;
         }
-    }, [navigation.location?.key]);
+    }, [currentNavigationKey]);
 
     return <RouteProgressBar key={stickyKey} isLoading={isLoading} />;
 };
