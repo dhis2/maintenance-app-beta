@@ -1,3 +1,4 @@
+import { CircularLoader } from "@dhis2/ui";
 import React from "react";
 import {
     createHashRouter,
@@ -6,57 +7,18 @@ import {
     Navigate,
     Route,
     createRoutesFromElements,
-    LazyRouteFunction,
     RouteObject,
 } from "react-router-dom";
-import { SECTIONS_MAP, Section } from "../../constants";
-import { Layout } from "../layout";
+import { LoadingSpinner } from "../../components/loading/LoadingSpinner";
+import { SECTIONS_MAP } from "../../constants";
+import { Layout, SidebarLayout } from "../layout";
 import { DefaultErrorRoute } from "./DefaultErrorRoute";
-import { LegacyAppRedirect } from "./LegacyAppRedirect";
+import {
+    createOverviewLazyRouteFunction,
+    createSectionLazyRouteFunction,
+} from "./lazyLoadFunctions";
+import { ResetRouterContext } from "./ResetRouterContext";
 import { getSectionPath, routePaths } from "./routePaths";
-
-// This loads all the overview routes in the same chunk since they resolve to the same promise
-// see https://reactrouter.com/en/main/route/lazy#multiple-routes-in-a-single-file
-// Overviews are small, and the AllOverview would load all the other overviews anyway,
-// so it's propbably better to load them all at once
-function createOverviewLazyRouteFunction(
-    componentName: string
-): LazyRouteFunction<RouteObject> {
-    return async () => {
-        const routeComponent = await import(`../../pages/overview/`);
-        return {
-            Component: routeComponent[componentName],
-        };
-    };
-}
-
-function createSectionLazyRouteFunction(
-    section: Section,
-    componentFileName: string
-): LazyRouteFunction<RouteObject> {
-    return async () => {
-        try {
-            return await import(
-                `../../pages/${section.namePlural}/${componentFileName}`
-            );
-        } catch (e) {
-            // means the component is not implemented yet
-            // fallback to redirect to legacy
-            if (e.code === "MODULE_NOT_FOUND") {
-                return {
-                    element: (
-                        <LegacyAppRedirect
-                            section={section}
-                            isNew={componentFileName === "New"}
-                        />
-                    ),
-                };
-            }
-            throw e;
-        }
-    };
-}
-
 const sectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
     <Route
         key={section.namePlural}
@@ -80,7 +42,10 @@ const sectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
 
 const routes = createRoutesFromElements(
     <Route element={<Layout />} errorElement={<DefaultErrorRoute />}>
-        <Route path="/" element={<Navigate to={routePaths.overviewRoot} replace />} />
+        <Route
+            path="/"
+            element={<Navigate to={routePaths.overviewRoot} replace />}
+        />
         <Route path={routePaths.overviewRoot} element={<Outlet />}>
             <Route
                 index
@@ -99,8 +64,29 @@ const routes = createRoutesFromElements(
     </Route>
 );
 
-export const hashRouter = createHashRouter(routes);
+const createRouter = (routes: RouteObject[]) => createHashRouter(routes);
+const hashRouter = createRouter(routes);
 
 export const ConfiguredRouter = () => {
-    return <RouterProvider router={hashRouter} />;
+    const [router, setRouter] = React.useState(hashRouter);
+
+    // this can be used to reset the router
+    // eg when an error occurs, it can be used to retry loading a chunk
+    // note that this umounts and remounts the entire router-tree
+    const reset = React.useCallback(() => {
+        setRouter(createRouter(routes));
+    }, []);
+
+    return (
+        <ResetRouterContext.Provider value={{ reset }}>
+            <RouterProvider
+                router={router}
+                fallbackElement={
+                    <SidebarLayout>
+                        <LoadingSpinner />
+                    </SidebarLayout>
+                }
+            />
+        </ResetRouterContext.Provider>
+    );
 };

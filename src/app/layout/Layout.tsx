@@ -24,7 +24,7 @@ export const SidebarLayout = ({
     children,
     hideSidebar,
 }: {
-    children: React.ReactNode;
+    children?: React.ReactNode;
     hideSidebar?: boolean;
 }) => {
     return (

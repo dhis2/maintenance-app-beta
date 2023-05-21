@@ -1,4 +1,7 @@
-
 .loadingSpinner {
+    margin: var(--spacers-dp8);
+}
+
+.centered {
     margin: var(--spacers-dp8) auto;
 }
