@@ -16,7 +16,6 @@ export const RouteProgress = () => {
     // will be undefined when navigation is not in a loading state, causing the animation
     // to cancel early because the key will change at the same time as isLoading.
     // Once navigation has finished, locationKey will be the same as previous (but now undefined)
-    // navigation.location.key
     // so fallback to that once navigation has finished.
     const resetKey = navigation.location?.key || locationKey;
 
