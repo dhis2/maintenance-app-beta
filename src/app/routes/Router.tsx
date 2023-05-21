@@ -9,7 +9,7 @@ import {
     createRoutesFromElements,
     RouteObject,
 } from "react-router-dom";
-import { LoadingSpinner } from "../../components/loading/LoadingSpinner";
+import { LoadingSpinner } from "../../components/loading";
 import { SECTIONS_MAP } from "../../constants";
 import { Layout, SidebarLayout } from "../layout";
 import { DefaultErrorRoute } from "./DefaultErrorRoute";
