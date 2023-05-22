@@ -1,8 +1,8 @@
 import i18n from "@dhis2/d2-i18n";
-import { CircularLoader , NoticeBox } from "@dhis2/ui";
+import { CircularLoader, NoticeBox } from "@dhis2/ui";
 import React from "react";
 import { QueryResponse } from "../../types/query";
-import styles from "./Loader.module.css";
+import { LoadingSpinner } from "./LoadingSpinner";
 
 interface LoaderProps {
     children: React.ReactNode;
@@ -11,7 +11,7 @@ interface LoaderProps {
 }
 export const Loader = ({ children, queryResponse, label }: LoaderProps) => {
     if (queryResponse.loading) {
-        return <CircularLoader className={styles.loadingSpinner} />;
+        return <LoadingSpinner />;
     }
     if (queryResponse.error) {
         const message = queryResponse.error?.message;
