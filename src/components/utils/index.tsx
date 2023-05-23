@@ -1,1 +1,1 @@
-export { HidePreventUnmount } from "./HidePreventUnmount";
+export { HidePreventUnmount } from './HidePreventUnmount'

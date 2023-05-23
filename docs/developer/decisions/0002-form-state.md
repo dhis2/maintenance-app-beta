@@ -7,8 +7,8 @@ validation and error display. We had to pick one of the existing solutions.
 
 ## Considered Options
 
-* React Final Form
-* React Form Hook
+-   React Final Form
+-   React Form Hook
 
 ## Decision Outcome
 

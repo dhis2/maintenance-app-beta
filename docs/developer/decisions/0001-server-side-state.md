@@ -8,8 +8,8 @@ whatsoever.
 
 ## Considered Options
 
-* tanstack-query + app-runtime
-* app-runtime
+-   tanstack-query + app-runtime
+-   app-runtime
 
 ## Decision Outcome
 
@@ -21,5 +21,5 @@ apps.
 
 ### Positive Consequences
 
-* We keep apps consistent
-* One way of upgrading across apps
+-   We keep apps consistent
+-   One way of upgrading across apps

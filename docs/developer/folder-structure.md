@@ -43,6 +43,6 @@ Example:
 
 ## References
 
-* Talked about this during a design phase meeting on 2022-12-08. Link to the
-  notes
-  [here](https://docs.google.com/document/d/1LLeGl85sADqIPGRzOncHD3ffC8KXh1ePmObXAsBYGO4/edit#heading=h.f773ks5f8nmg).
+-   Talked about this during a design phase meeting on 2022-12-08. Link to the
+    notes
+    [here](https://docs.google.com/document/d/1LLeGl85sADqIPGRzOncHD3ffC8KXh1ePmObXAsBYGO4/edit#heading=h.f773ks5f8nmg).

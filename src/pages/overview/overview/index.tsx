@@ -1,1 +1,1 @@
-export * from "./GroupOverview";
+export * from './GroupOverview'

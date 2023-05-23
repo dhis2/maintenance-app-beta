@@ -1,5 +1,5 @@
-import { NoticeBox } from "@dhis2/ui";
-import React from "react";
+import { NoticeBox } from '@dhis2/ui'
+import React from 'react'
 import {
     createHashRouter,
     RouterProvider,
@@ -7,23 +7,23 @@ import {
     useRouteError,
     Navigate,
     isRouteErrorResponse,
-} from "react-router-dom";
-import { routes } from "../pages";
-import { Layout } from "./layout";
-import { Sidebar } from "./sidebar"
+} from 'react-router-dom'
+import { routes } from '../pages'
+import { Layout } from './layout'
+import { Sidebar } from './sidebar'
 
 const LayoutElement = () => (
     <Layout sidebar={<Sidebar />}>
         <Outlet />
     </Layout>
-);
+)
 
 const DefaultErrorRoute = () => {
-    const error = useRouteError();
-    const isRouteError = isRouteErrorResponse(error);
+    const error = useRouteError()
+    const isRouteError = isRouteErrorResponse(error)
 
-    let title = "An error occurred";
-    let message = error?.message ?? "An unknown error occurred.";
+    let title = 'An error occurred'
+    let message = error?.message ?? 'An unknown error occurred.'
     if (isRouteError) {
         title = error.statusText
         message = error?.error?.message
@@ -34,10 +34,12 @@ const DefaultErrorRoute = () => {
                 warning={isRouteError}
                 error={!isRouteError}
                 title={title}
-            >{message}</NoticeBox>
+            >
+                {message}
+            </NoticeBox>
         </Layout>
-    );
-};
+    )
+}
 const router = createHashRouter([
     {
         // no path means its a layout route
@@ -60,11 +62,11 @@ const router = createHashRouter([
         children: routes,
     },
     {
-        path: "/",
+        path: '/',
         element: <Navigate to="/overview" />,
     },
-]);
+])
 
 export const ConfiguredRouter = () => {
-    return <RouterProvider router={router} />;
-};
+    return <RouterProvider router={router} />
+}
