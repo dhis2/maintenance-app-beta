@@ -1,11 +1,11 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import type { ModelSchemas } from "../types/schemaBase";
-import type { SchemaPropertyFields } from "./useLoadSchemas";
+import type { Schemas } from "./useLoadSchemas";
 
-type Schemas = ModelSchemas<SchemaPropertyFields>;
+type EmptyStore = Record<string, never>;
 
-type EmptyStore = Record<string, never>
+const isEmptyStore = (store: Record<string, unknown>): store is EmptyStore =>
+    Object.keys(store).length === 0;
 
 export interface SchemasStore {
     schemas: Schemas | EmptyStore;
@@ -22,8 +22,10 @@ export const useSchemaStore = create<SchemasStore>()(
 export const useSchemas = () => {
     const schemas = useSchemaStore((state) => state.schemas);
 
-    // cast to Schemas to avoid having to check for empty store
-    // in every component that uses this hook
-    // schemas should be loaded before rest of the app is rendered
-    return schemas as Schemas;
+    if (isEmptyStore(schemas)) {
+        // schemas should be loaded before rest of the app (and this is used)
+        throw new Error("Schemas not loaded");
+    }
+
+    return schemas;
 };

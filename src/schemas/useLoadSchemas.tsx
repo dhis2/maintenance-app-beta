@@ -1,9 +1,7 @@
 import { useDataQuery } from "@dhis2/app-runtime";
 import { useEffect } from "react";
 import { useSchemaStore } from "../schemas/schemaStore";
-import {
-    PickSchemaProperties,
-} from "../types/schemaBase";
+import { ModelSchemas, PickSchemaProperties } from "./schemaBase";
 
 export const schemaPropertyFields = [
     "authorities",
@@ -15,6 +13,7 @@ export const schemaPropertyFields = [
 ] as const;
 
 export type SchemaPropertyFields = (typeof schemaPropertyFields)[number];
+export type Schemas = ModelSchemas<SchemaPropertyFields>;
 
 type Schema = PickSchemaProperties<SchemaPropertyFields>;
 
@@ -42,9 +41,10 @@ export const useLoadSchemas = () => {
             const schemaResponse = queryResponse.data;
             const schemas = schemaResponse.schemas.schemas;
 
-            const modelSchemas = schemas.map((schema) => ({
-                [schema.name]: schema,
-            }));
+            const modelSchemas = Object.fromEntries(
+                schemas.map((schema) => [schema.name, schema])
+            ) as Schemas;
+
             setSchemas(modelSchemas);
         }
     }, [setSchemas, queryResponse.data]);
