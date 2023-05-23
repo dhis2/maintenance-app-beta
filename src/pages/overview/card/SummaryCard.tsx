@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Card, Button } from '@dhis2/ui'
 import { IconEdit24 } from '@dhis2/ui-icons'
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { Link } from 'react-router-dom'
 import {
     getSectionNewPath,
@@ -44,14 +44,14 @@ export const SummaryCard = ({
     const title = section.title
     return (
         <Card>
-            <Link to={`/${getSectionPath(section)}`}>
-                <div className={styles.cardWrapper}>
+            <div className={styles.cardWrapper}>
+                <Link to={`/${getSectionPath(section)}`}>
                     <div className={styles.cardIcon}>{icon}</div>
                     <SummaryCardHeader>{title}</SummaryCardHeader>
                     <SummaryCardContent>{children}</SummaryCardContent>
-                    <SummaryCardActions section={section} />
-                </div>
-            </Link>
+                </Link>
+                <SummaryCardActions section={section} />
+            </div>
         </Card>
     )
 }
@@ -71,7 +71,7 @@ export const SummaryCardActions = ({ section }: SummaryCardActionsProps) => {
     return (
         <div className={styles.cardActions}>
             {canCreate && (
-                <Link to={`/${getSectionNewPath}`} tabIndex={-1}>
+                <Link to={`/${getSectionNewPath(section)}`} tabIndex={-1}>
                     <Button secondary>{i18n.t('Add new')}</Button>
                 </Link>
             )}
