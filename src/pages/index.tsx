@@ -1,5 +1,5 @@
-import { AllOverview, route as overviewRoute } from "./overview";
+import { AllOverview, route as overviewRoute } from './overview'
 
 export { AllOverview }
 
-export const routes = [overviewRoute];
+export const routes = [overviewRoute]

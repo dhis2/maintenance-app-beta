@@ -3,9 +3,8 @@ import { AppWrapper, ConfiguredRouter } from './app/'
 
 const MyApp = () => (
     <AppWrapper>
-         <ConfiguredRouter />
+        <ConfiguredRouter />
     </AppWrapper>
-   
 )
 
 export default MyApp

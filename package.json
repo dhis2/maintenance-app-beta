@@ -1,28 +1,30 @@
 {
-  "name": "maintenance-app",
-  "version": "1.0.0",
-  "description": "",
-  "license": "BSD-3-Clause",
-  "private": true,
-  "scripts": {
-    "build": "d2-app-scripts build",
-    "start": "d2-app-scripts start",
-    "test": "d2-app-scripts test",
-    "deploy": "d2-app-scripts deploy",
-    "lint": "yarn d2-style check",
-    "lint:staged": "yarn lint --staged",
-    "format": "yarn d2-style apply",
-    "format:staged": "yarn format --staged"
-  },
-  "devDependencies": {
-    "@dhis2/cli-app-scripts": "^10.2.0",
-    "@dhis2/cli-style": "^10.5.1",
-    "@typescript-eslint/eslint-plugin": "^5.55.0",
-    "@typescript-eslint/parser": "^5.55.0",
-    "typescript": "^4.9.5"
-  },
-  "dependencies": {
-    "@dhis2/app-runtime": "^3.8.0",
-    "react-router-dom": "^6.8.0"
-  }
+    "name": "maintenance-app",
+    "version": "1.0.0",
+    "description": "",
+    "license": "BSD-3-Clause",
+    "private": true,
+    "scripts": {
+        "build": "d2-app-scripts build",
+        "start": "d2-app-scripts start",
+        "test": "d2-app-scripts test",
+        "deploy": "d2-app-scripts deploy",
+        "lint": "yarn d2-style check",
+        "lint:staged": "yarn lint --staged",
+        "format": "yarn d2-style apply",
+        "format:staged": "yarn format --staged"
+    },
+    "devDependencies": {
+        "@dhis2/cli-app-scripts": "^10.2.0",
+        "@dhis2/cli-style": "^10.5.1",
+        "@testing-library/react": "^14.0.0",
+        "@types/jest": "^29.5.1",
+        "@typescript-eslint/eslint-plugin": "^5.55.0",
+        "@typescript-eslint/parser": "^5.55.0",
+        "typescript": "^4.9.5"
+    },
+    "dependencies": {
+        "@dhis2/app-runtime": "^3.8.0",
+        "react-router-dom": "^6.8.0"
+    }
 }

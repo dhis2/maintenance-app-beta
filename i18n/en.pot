@@ -1,0 +1,100 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2023-05-16T11:32:25.799Z\n"
+"PO-Revision-Date: 2023-05-16T11:32:25.799Z\n"
+
+msgid "Metadata Overview"
+msgstr "Metadata Overview"
+
+msgid "No menu items found for"
+msgstr "No menu items found for"
+
+msgid "Categories"
+msgstr "Categories"
+
+msgid "Overview"
+msgstr "Overview"
+
+msgid "Category Options"
+msgstr "Category Options"
+
+msgid "Category combination"
+msgstr "Category combination"
+
+msgid "Category Option Combination"
+msgstr "Category Option Combination"
+
+msgid "Data elements"
+msgstr "Data elements"
+
+msgid "Data element groups"
+msgstr "Data element groups"
+
+msgid "Data element group set"
+msgstr "Data element group set"
+
+msgid "Data sets"
+msgstr "Data sets"
+
+msgid "Indicators"
+msgstr "Indicators"
+
+msgid "Organisation units"
+msgstr "Organisation units"
+
+msgid "Programs and tracker"
+msgstr "Programs and tracker"
+
+msgid "Validation"
+msgstr "Validation"
+
+msgid "Search for menu items"
+msgstr "Search for menu items"
+
+msgid "Add new"
+msgstr "Add new"
+
+msgid "Manage"
+msgstr "Manage"
+
+msgid "Failed to load {{label}}"
+msgstr "Failed to load {{label}}"
+
+msgid "Failed to load"
+msgstr "Failed to load"
+
+msgid "Metadata management"
+msgstr "Metadata management"
+
+msgid ""
+"Data elements are the core foundational item of DHIS2 and are used for data "
+"collection. Data elements can be organised by group and group set."
+msgstr ""
+"Data elements are the core foundational item of DHIS2 and are used for data "
+"collection. Data elements can be organised by group and group set."
+
+msgid ""
+"Building block elements of your database. The foundation of data collection "
+"and analysis."
+msgstr ""
+"Building block elements of your database. The foundation of data collection "
+"and analysis."
+
+msgid ""
+"Improve analysis of single data elements by combining them into data "
+"element groups."
+msgstr ""
+"Improve analysis of single data elements by combining them into data "
+"element groups."
+
+msgid ""
+"Add another level of organisation by grouping data element groups into "
+"group sets."
+msgstr ""
+"Add another level of organisation by grouping data element groups into "
+"group sets."
