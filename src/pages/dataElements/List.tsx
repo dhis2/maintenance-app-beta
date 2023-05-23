@@ -1,5 +1,5 @@
-import React from 'react';
+import React from 'react'
 
 export const Component = () => {
-    return <div>This is a list of Data Elements</div>;
-};
+    return <div>This is a list of Data Elements</div>
+}

@@ -7,4 +7,4 @@ some experience with that library already.
 
 ## Decisions
 
-* [Managing form state with react-form-hook](./decisions/0002-form-state.md)
+-   [Managing form state with react-form-hook](./decisions/0002-form-state.md)

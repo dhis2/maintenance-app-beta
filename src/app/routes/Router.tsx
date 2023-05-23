@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import {
     createHashRouter,
     RouterProvider,
@@ -8,12 +8,14 @@ import {
     createRoutesFromElements,
     LazyRouteFunction,
     RouteObject,
-} from "react-router-dom";
-import { SECTIONS_MAP, Section } from "../../constants";
-import { Layout } from "../layout";
-import { DefaultErrorRoute } from "./DefaultErrorRoute";
-import { LegacyAppRedirect } from "./LegacyAppRedirect";
-import { getSectionPath, routePaths } from "./routePaths";
+    useParams,
+} from 'react-router-dom'
+import { SECTIONS_MAP, Section } from '../../constants'
+import { isValidUid } from '../../models'
+import { Layout } from '../layout'
+import { DefaultErrorRoute } from './DefaultErrorRoute'
+import { LegacyAppRedirect } from './LegacyAppRedirect'
+import { getSectionPath, routePaths } from './routePaths'
 
 // This loads all the overview routes in the same chunk since they resolve to the same promise
 // see https://reactrouter.com/en/main/route/lazy#multiple-routes-in-a-single-file
@@ -23,11 +25,11 @@ function createOverviewLazyRouteFunction(
     componentName: string
 ): LazyRouteFunction<RouteObject> {
     return async () => {
-        const routeComponent = await import(`../../pages/overview/`);
+        const routeComponent = await import(`../../pages/overview/`)
         return {
             Component: routeComponent[componentName],
-        };
-    };
+        }
+    }
 }
 
 function createSectionLazyRouteFunction(
@@ -38,24 +40,36 @@ function createSectionLazyRouteFunction(
         try {
             return await import(
                 `../../pages/${section.namePlural}/${componentFileName}`
-            );
+            )
         } catch (e) {
             // means the component is not implemented yet
             // fallback to redirect to legacy
-            if (e.code === "MODULE_NOT_FOUND") {
+            if (e.code === 'MODULE_NOT_FOUND') {
                 return {
                     element: (
                         <LegacyAppRedirect
                             section={section}
-                            isNew={componentFileName === "New"}
+                            isNew={componentFileName === 'New'}
                         />
                     ),
-                };
+                }
             }
-            throw e;
+            throw e
         }
-    };
+    }
 }
+
+const VerifyModelId = () => {
+    const { id } = useParams()
+
+    if (!isValidUid(id)) {
+        throw new Error('Invalid model id.')
+    }
+    return <Outlet />
+}
+
+const sectionsNoEditRoute = new Set<Section>([SECTIONS_MAP.locale])
+const sectionsNoNewRoute = new Set<Section>([SECTIONS_MAP.categoryOptionCombo])
 
 const sectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
     <Route
@@ -63,44 +77,54 @@ const sectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
         path={getSectionPath(section)}
         handle={{ section }}
     >
-        <Route index lazy={createSectionLazyRouteFunction(section, "List")} />
-        <Route
-            path={routePaths.sectionNew}
-            lazy={createSectionLazyRouteFunction(section, "New")}
-            handle={{
-                hideSidebar: true,
-            }}
-        />
-        <Route
-            path=":id"
-            lazy={createSectionLazyRouteFunction(section, "Edit")}
-        />
+        <Route index lazy={createSectionLazyRouteFunction(section, 'List')} />
+        {!sectionsNoNewRoute.has(section) && (
+            <Route
+                path={routePaths.sectionNew}
+                lazy={createSectionLazyRouteFunction(section, 'New')}
+                handle={{
+                    hideSidebar: true,
+                }}
+            />
+        )}
+
+        {!sectionsNoEditRoute.has(section) && (
+            <Route path=":id" element={<VerifyModelId />}>
+                <Route
+                    index
+                    lazy={createSectionLazyRouteFunction(section, 'Edit')}
+                ></Route>
+            </Route>
+        )}
     </Route>
-));
+))
 
 const routes = createRoutesFromElements(
     <Route element={<Layout />} errorElement={<DefaultErrorRoute />}>
-        <Route path="/" element={<Navigate to={routePaths.overviewRoot} replace />} />
-        <Route path={routePaths.overviewRoot} element={<Outlet />}>
+        <Route
+            path="/"
+            element={<Navigate to={routePaths.overviewRoot} replace />}
+        />
+        <Route path={routePaths.overviewRoot}>
             <Route
                 index
-                lazy={createOverviewLazyRouteFunction("AllOverview")}
+                lazy={createOverviewLazyRouteFunction('AllOverview')}
             />
             <Route
                 path={getSectionPath(SECTIONS_MAP.dataElement)}
-                lazy={createOverviewLazyRouteFunction("DataElements")}
+                lazy={createOverviewLazyRouteFunction('DataElements')}
             />
             <Route
                 path={getSectionPath(SECTIONS_MAP.category)}
-                lazy={createOverviewLazyRouteFunction("Categories")}
+                lazy={createOverviewLazyRouteFunction('Categories')}
             />
         </Route>
         {sectionRoutes}
     </Route>
-);
+)
 
-export const hashRouter = createHashRouter(routes);
+export const hashRouter = createHashRouter(routes)
 
 export const ConfiguredRouter = () => {
-    return <RouterProvider router={hashRouter} />;
-};
+    return <RouterProvider router={hashRouter} />
+}

@@ -1,14 +1,14 @@
-import i18n from "@dhis2/d2-i18n";
-import React, { useState } from "react";
-import { NavLink, useLocation, matchPath } from "react-router-dom";
-import { HidePreventUnmount } from "../../components/utils/HidePreventUnmount";
-import styles from "./Sidebar.module.css";
+import i18n from '@dhis2/d2-i18n'
+import React, { useEffect, useState } from 'react'
+import { NavLink, useLocation, matchPath } from 'react-router-dom'
+import { HidePreventUnmount } from '../../components'
+import styles from './Sidebar.module.css'
 import {
     LinkItem,
     ParentLink,
     SidebarLinks,
     sidebarLinks,
-} from "./sidebarLinks";
+} from './sidebarLinks'
 import {
     Sidenav,
     SidenavItems,
@@ -16,11 +16,11 @@ import {
     SidenavLink,
     SidenavFilter,
     OnChangeInput,
-} from "./sidenav";
+} from './sidenav'
 
 interface SidebarNavLinkProps extends LinkItem {
-    disabled?: boolean;
-    end?: boolean;
+    disabled?: boolean
+    end?: boolean
 }
 
 const SidebarNavLink = ({ to, label, disabled, end }: SidebarNavLinkProps) => {
@@ -32,13 +32,13 @@ const SidebarNavLink = ({ to, label, disabled, end }: SidebarNavLinkProps) => {
             label={label}
             end={end}
         />
-    );
-};
+    )
+}
 
 interface SidebarParentProps {
-    isFiltered: boolean;
-    label: string;
-    links: LinkItem[];
+    isFiltered: boolean
+    label: string
+    links: LinkItem[]
 }
 
 const SidebarParent = ({
@@ -46,44 +46,59 @@ const SidebarParent = ({
     links = [],
     isFiltered,
 }: SidebarParentProps) => {
-    const { pathname } = useLocation();
-
+    const { pathname } = useLocation()
     // Check if any of the children match the current path
     // If they do, parent should be open by default
     const routePathMatch = links.some((link) => {
-        return matchPath(`${link.to}/*`, pathname);
-    });
-    const forceOpen = (isFiltered && links.length > 0) || undefined;
+        return matchPath(`${link.to}/*`, pathname)
+    })
+    const [isOpen, setIsOpen] = useState(routePathMatch)
+    // use separate state for "open" while filtered
+    // so parent can be closed while filtered and fall back to previous open
+    // state when filter is cleared
+    const [openFiltered, setOpenFiltered] = useState(false)
+
+    useEffect(() => {
+        if (isFiltered) {
+            setOpenFiltered(isFiltered)
+        }
+    }, [isFiltered])
+
+    const handleOpen = () => {
+        if (isFiltered) {
+            setOpenFiltered(!openFiltered)
+        } else {
+            setIsOpen(!isOpen)
+        }
+    }
+
+    const open = isFiltered ? openFiltered : isOpen
     return (
-        <SidenavParent
-            label={label}
-            initialOpen={routePathMatch}
-            forceOpen={forceOpen}
-        >
+        <SidenavParent label={label} open={open} onClick={handleOpen}>
             {links.map(({ to, label }) => (
                 <SidebarNavLink key={label} to={to} label={label} />
             ))}
         </SidenavParent>
-    );
-};
+    )
+}
 
 const matchLabel = (label: string, filterValue: string) =>
-    label.toLowerCase().includes(filterValue.toLowerCase());
+    label.toLowerCase().includes(filterValue.toLowerCase())
 
 export const Sidebar = ({
     className,
     links = sidebarLinks,
 }: {
-    className?: string;
-    links?: SidebarLinks;
+    className?: string
+    links?: SidebarLinks
 }) => {
-    const [filterValue, setFilterValue] = useState("");
+    const [filterValue, setFilterValue] = useState('')
 
     const handleFilterChange = (input: OnChangeInput) => {
-        setFilterValue(input.value);
-    };
+        setFilterValue(input.value)
+    }
 
-    const isFiltered = filterValue !== "";
+    const isFiltered = filterValue !== ''
     const filteredSidebarLinks: ParentLink[] = Object.values(links).map(
         ({ label, links }) => ({
             label,
@@ -91,14 +106,14 @@ export const Sidebar = ({
                 ? links // show all if parent label matches
                 : links.filter(({ label }) => matchLabel(label, filterValue)),
         })
-    );
+    )
 
     const numberOfFilteredLinks = filteredSidebarLinks.reduce(
         (acc, curr) => acc + curr.links.length,
         0
-    );
+    )
 
-    const noMatch = isFiltered && numberOfFilteredLinks === 0;
+    const noMatch = isFiltered && numberOfFilteredLinks === 0
 
     return (
         <aside className={className}>
@@ -107,7 +122,7 @@ export const Sidebar = ({
                 <SidenavItems>
                     <SidebarNavLink
                         to="/overview"
-                        label={i18n.t("Metadata Overview")}
+                        label={i18n.t('Metadata Overview')}
                         end={true}
                     />
                     {noMatch && <NoMatchMessage filter={filterValue} />}
@@ -123,14 +138,18 @@ export const Sidebar = ({
                 </SidenavItems>
             </Sidenav>
         </aside>
-    );
-};
+    )
+}
 
-const NoMatchMessage = ({ filter }) => (
+type NoMatchMessageProps = {
+    filter: string
+}
+
+const NoMatchMessage: React.FC<NoMatchMessageProps> = ({ filter }) => (
     <div className={styles.noMatchMessage}>
-        {i18n.t("No menu items found for")} <br />
+        {i18n.t('No menu items found for')} <br />
         {filter}
     </div>
-);
+)
 
-export default Sidebar;
+export default Sidebar
