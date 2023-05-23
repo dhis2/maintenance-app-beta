@@ -8,7 +8,7 @@ import {
     ParentLink,
     SidebarLinks,
     sidebarLinks,
-} from './sidebarLinks'
+} from './SidebarLinks'
 import {
     Sidenav,
     SidenavItems,
