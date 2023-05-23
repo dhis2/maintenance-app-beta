@@ -8,8 +8,10 @@ import {
     createRoutesFromElements,
     LazyRouteFunction,
     RouteObject,
+    useParams,
 } from "react-router-dom";
 import { SECTIONS_MAP, Section } from "../../constants";
+import { isValidUid } from "../../models";
 import { Layout } from "../layout";
 import { DefaultErrorRoute } from "./DefaultErrorRoute";
 import { LegacyAppRedirect } from "./LegacyAppRedirect";
@@ -57,6 +59,18 @@ function createSectionLazyRouteFunction(
     };
 }
 
+const VerifyModelId = () => {
+    const { id } = useParams();
+
+    if (!isValidUid(id)) {
+        throw new Error("Invalid model id.");
+    }
+    return <Outlet />;
+};
+
+const sectionsNoEditRoute = new Set<Section>([SECTIONS_MAP.locale]);
+const sectionsNoNewRoute = new Set<Section>([SECTIONS_MAP.categoryOptionCombo]);
+
 const sectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
     <Route
         key={section.namePlural}
@@ -64,24 +78,34 @@ const sectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
         handle={{ section }}
     >
         <Route index lazy={createSectionLazyRouteFunction(section, "List")} />
-        <Route
-            path={routePaths.sectionNew}
-            lazy={createSectionLazyRouteFunction(section, "New")}
-            handle={{
-                hideSidebar: true,
-            }}
-        />
-        <Route
-            path=":id"
-            lazy={createSectionLazyRouteFunction(section, "Edit")}
-        />
+        {!sectionsNoNewRoute.has(section) && (
+            <Route
+                path={routePaths.sectionNew}
+                lazy={createSectionLazyRouteFunction(section, "New")}
+                handle={{
+                    hideSidebar: true,
+                }}
+            />
+        )}
+
+        {!sectionsNoEditRoute.has(section) && (
+            <Route path=":id" element={<VerifyModelId />}>
+                <Route
+                    index
+                    lazy={createSectionLazyRouteFunction(section, "Edit")}
+                ></Route>
+            </Route>
+        )}
     </Route>
 ));
 
 const routes = createRoutesFromElements(
     <Route element={<Layout />} errorElement={<DefaultErrorRoute />}>
-        <Route path="/" element={<Navigate to={routePaths.overviewRoot} replace />} />
-        <Route path={routePaths.overviewRoot} element={<Outlet />}>
+        <Route
+            path="/"
+            element={<Navigate to={routePaths.overviewRoot} replace />}
+        />
+        <Route path={routePaths.overviewRoot}>
             <Route
                 index
                 lazy={createOverviewLazyRouteFunction("AllOverview")}
