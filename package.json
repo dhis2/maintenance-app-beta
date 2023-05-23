@@ -25,6 +25,6 @@
     },
     "dependencies": {
         "@dhis2/app-runtime": "^3.8.0",
-        "react-router-dom": "6.10.0"
+        "react-router-dom": "^6.11.2"
     }
 }
