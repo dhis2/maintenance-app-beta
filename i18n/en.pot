@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-05-23T12:27:28.800Z\n"
-"PO-Revision-Date: 2023-05-23T12:27:28.800Z\n"
+"POT-Creation-Date: 2023-05-23T13:31:53.974Z\n"
+"PO-Revision-Date: 2023-05-23T13:31:53.974Z\n"
 
 msgid "Section is not implemented yet"
 msgstr "Section is not implemented yet"
@@ -33,53 +33,11 @@ msgstr "Metadata Overview"
 msgid "No menu items found for"
 msgstr "No menu items found for"
 
-msgid "Categories"
-msgstr "Categories"
-
 msgid "Overview"
 msgstr "Overview"
 
-msgid "Category Options"
-msgstr "Category Options"
-
-msgid "Category combination"
-msgstr "Category combination"
-
-msgid "Category Option Combination"
-msgstr "Category Option Combination"
-
-msgid "Data elements"
-msgstr "Data elements"
-
-msgid "Data element groups"
-msgstr "Data element groups"
-
-msgid "Data element group set"
-msgstr "Data element group set"
-
-msgid "Data sets"
-msgstr "Data sets"
-
-msgid "Indicators"
-msgstr "Indicators"
-
-msgid "Organisation units"
-msgstr "Organisation units"
-
-msgid "Programs and tracker"
-msgstr "Programs and tracker"
-
-msgid "Validation"
-msgstr "Validation"
-
 msgid "Search for menu items"
 msgstr "Search for menu items"
-
-msgid "Add new"
-msgstr "Add new"
-
-msgid "Manage"
-msgstr "Manage"
 
 msgid "Failed to load {{label}}"
 msgstr "Failed to load {{label}}"
@@ -90,11 +48,17 @@ msgstr "Failed to load"
 msgid "Category"
 msgstr "Category"
 
+msgid "Categories"
+msgstr "Categories"
+
 msgid "Category option"
 msgstr "Category option"
 
 msgid "Category options"
 msgstr "Category options"
+
+msgid "Category combination"
+msgstr "Category combination"
 
 msgid "Category combinations"
 msgstr "Category combinations"
@@ -120,14 +84,26 @@ msgstr "Category option group sets"
 msgid "Data element"
 msgstr "Data element"
 
+msgid "Data elements"
+msgstr "Data elements"
+
 msgid "Data element group"
 msgstr "Data element group"
+
+msgid "Data element groups"
+msgstr "Data element groups"
+
+msgid "Data element group set"
+msgstr "Data element group set"
 
 msgid "Data element group sets"
 msgstr "Data element group sets"
 
 msgid "Data set"
 msgstr "Data set"
+
+msgid "Data sets"
+msgstr "Data sets"
 
 msgid "Data set notification"
 msgstr "Data set notification"
@@ -137,6 +113,9 @@ msgstr "Data set notification templates"
 
 msgid "Indicator"
 msgstr "Indicator"
+
+msgid "Indicators"
+msgstr "Indicators"
 
 msgid "Indicator type"
 msgstr "Indicator type"
@@ -158,6 +137,9 @@ msgstr "Indicator group sets"
 
 msgid "Organisation unit"
 msgstr "Organisation unit"
+
+msgid "Organisation units"
+msgstr "Organisation units"
 
 msgid "Organisation unit group"
 msgstr "Organisation unit group"
@@ -227,6 +209,9 @@ msgstr "Relationship type"
 
 msgid "Relationship types"
 msgstr "Relationship types"
+
+msgid "Validation"
+msgstr "Validation"
 
 msgid "Validations"
 msgstr "Validations"
@@ -385,3 +370,9 @@ msgid ""
 msgstr ""
 "Add another level of organisation by grouping data element groups into "
 "group sets."
+
+msgid "Add new"
+msgstr "Add new"
+
+msgid "Manage"
+msgstr "Manage"
