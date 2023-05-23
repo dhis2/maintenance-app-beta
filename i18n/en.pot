@@ -5,8 +5,27 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-05-16T11:32:25.799Z\n"
-"PO-Revision-Date: 2023-05-16T11:32:25.799Z\n"
+"POT-Creation-Date: 2023-05-23T13:31:53.974Z\n"
+"PO-Revision-Date: 2023-05-23T13:31:53.974Z\n"
+
+msgid "Section is not implemented yet"
+msgstr "Section is not implemented yet"
+
+msgid ""
+"This section has not been implemented yet. Click the button below to go to "
+"the corresponding page in the legacy app."
+msgstr ""
+"This section has not been implemented yet. Click the button below to go to "
+"the corresponding page in the legacy app."
+
+msgid "Go to legacy app"
+msgstr "Go to legacy app"
+
+msgid "Not found"
+msgstr "Not found"
+
+msgid "The page you are looking for does not exist."
+msgstr "The page you are looking for does not exist."
 
 msgid "Metadata Overview"
 msgstr "Metadata Overview"
@@ -14,53 +33,11 @@ msgstr "Metadata Overview"
 msgid "No menu items found for"
 msgstr "No menu items found for"
 
-msgid "Categories"
-msgstr "Categories"
-
 msgid "Overview"
 msgstr "Overview"
 
-msgid "Category Options"
-msgstr "Category Options"
-
-msgid "Category combination"
-msgstr "Category combination"
-
-msgid "Category Option Combination"
-msgstr "Category Option Combination"
-
-msgid "Data elements"
-msgstr "Data elements"
-
-msgid "Data element groups"
-msgstr "Data element groups"
-
-msgid "Data element group set"
-msgstr "Data element group set"
-
-msgid "Data sets"
-msgstr "Data sets"
-
-msgid "Indicators"
-msgstr "Indicators"
-
-msgid "Organisation units"
-msgstr "Organisation units"
-
-msgid "Programs and tracker"
-msgstr "Programs and tracker"
-
-msgid "Validation"
-msgstr "Validation"
-
 msgid "Search for menu items"
 msgstr "Search for menu items"
-
-msgid "Add new"
-msgstr "Add new"
-
-msgid "Manage"
-msgstr "Manage"
 
 msgid "Failed to load {{label}}"
 msgstr "Failed to load {{label}}"
@@ -68,10 +45,305 @@ msgstr "Failed to load {{label}}"
 msgid "Failed to load"
 msgstr "Failed to load"
 
+msgid "Category"
+msgstr "Category"
+
+msgid "Categories"
+msgstr "Categories"
+
+msgid "Category option"
+msgstr "Category option"
+
+msgid "Category options"
+msgstr "Category options"
+
+msgid "Category combination"
+msgstr "Category combination"
+
+msgid "Category combinations"
+msgstr "Category combinations"
+
+msgid "Category option combination"
+msgstr "Category option combination"
+
+msgid "Category option combinations"
+msgstr "Category option combinations"
+
+msgid "Category option group"
+msgstr "Category option group"
+
+msgid "Category option groups"
+msgstr "Category option groups"
+
+msgid "Category option group set"
+msgstr "Category option group set"
+
+msgid "Category option group sets"
+msgstr "Category option group sets"
+
+msgid "Data element"
+msgstr "Data element"
+
+msgid "Data elements"
+msgstr "Data elements"
+
+msgid "Data element group"
+msgstr "Data element group"
+
+msgid "Data element groups"
+msgstr "Data element groups"
+
+msgid "Data element group set"
+msgstr "Data element group set"
+
+msgid "Data element group sets"
+msgstr "Data element group sets"
+
+msgid "Data set"
+msgstr "Data set"
+
+msgid "Data sets"
+msgstr "Data sets"
+
+msgid "Data set notification"
+msgstr "Data set notification"
+
+msgid "Data set notification templates"
+msgstr "Data set notification templates"
+
+msgid "Indicator"
+msgstr "Indicator"
+
+msgid "Indicators"
+msgstr "Indicators"
+
+msgid "Indicator type"
+msgstr "Indicator type"
+
+msgid "Indicator types"
+msgstr "Indicator types"
+
+msgid "Indicator group"
+msgstr "Indicator group"
+
+msgid "Indicator groups"
+msgstr "Indicator groups"
+
+msgid "Indicator group set"
+msgstr "Indicator group set"
+
+msgid "Indicator group sets"
+msgstr "Indicator group sets"
+
+msgid "Organisation unit"
+msgstr "Organisation unit"
+
+msgid "Organisation units"
+msgstr "Organisation units"
+
+msgid "Organisation unit group"
+msgstr "Organisation unit group"
+
+msgid "Organisation unit groups"
+msgstr "Organisation unit groups"
+
+msgid "Organisation unit group set"
+msgstr "Organisation unit group set"
+
+msgid "Organisation unit group sets"
+msgstr "Organisation unit group sets"
+
+msgid "Tracked entity attribute"
+msgstr "Tracked entity attribute"
+
+msgid "Tracked entity attributes"
+msgstr "Tracked entity attributes"
+
+msgid "Tracked entity type"
+msgstr "Tracked entity type"
+
+msgid "Tracked entity types"
+msgstr "Tracked entity types"
+
+msgid "Programs and Tracker"
+msgstr "Programs and Tracker"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "Programs"
+msgstr "Programs"
+
+msgid "Program indicator"
+msgstr "Program indicator"
+
+msgid "Program indicators"
+msgstr "Program indicators"
+
+msgid "Program indicatorGroup"
+msgstr "Program indicatorGroup"
+
+msgid "Program indicatorGroups"
+msgstr "Program indicatorGroups"
+
+msgid "Program rule"
+msgstr "Program rule"
+
+msgid "Program rules"
+msgstr "Program rules"
+
+msgid "Program rule variable"
+msgstr "Program rule variable"
+
+msgid "Program rule variables"
+msgstr "Program rule variables"
+
+msgid "Program stage"
+msgstr "Program stage"
+
+msgid "Program stages"
+msgstr "Program stages"
+
+msgid "Relationship type"
+msgstr "Relationship type"
+
+msgid "Relationship types"
+msgstr "Relationship types"
+
+msgid "Validation"
+msgstr "Validation"
+
+msgid "Validations"
+msgstr "Validations"
+
+msgid "Validation rule"
+msgstr "Validation rule"
+
+msgid "Validation rules"
+msgstr "Validation rules"
+
+msgid "Validation rule group"
+msgstr "Validation rule group"
+
+msgid "Validation rule groups"
+msgstr "Validation rule groups"
+
+msgid "Validation notification"
+msgstr "Validation notification"
+
+msgid "Validation notification templates"
+msgstr "Validation notification templates"
+
+msgid "Other"
+msgstr "Other"
+
+msgid "Constant"
+msgstr "Constant"
+
+msgid "Constants"
+msgstr "Constants"
+
+msgid "Attribute"
+msgstr "Attribute"
+
+msgid "Attributes"
+msgstr "Attributes"
+
+msgid "Option set"
+msgstr "Option set"
+
+msgid "Option sets"
+msgstr "Option sets"
+
+msgid "Predictor"
+msgstr "Predictor"
+
+msgid "Predictors"
+msgstr "Predictors"
+
+msgid "Push analysis"
+msgstr "Push analysis"
+
+msgid "Push analyses"
+msgstr "Push analyses"
+
+msgid "External map layer"
+msgstr "External map layer"
+
+msgid "External map layers"
+msgstr "External map layers"
+
+msgid "Data approval level"
+msgstr "Data approval level"
+
+msgid "Data approval levels"
+msgstr "Data approval levels"
+
+msgid "Data approval workflow"
+msgstr "Data approval workflow"
+
+msgid "Data approval workflows"
+msgstr "Data approval workflows"
+
+msgid "Locale"
+msgstr "Locale"
+
+msgid "Locales"
+msgstr "Locales"
+
+msgid "SQL view"
+msgstr "SQL view"
+
+msgid "SQL views"
+msgstr "SQL views"
+
 msgid "Metadata management"
 msgstr "Metadata management"
 
 msgid ""
+"Categories are typically a concept, for example \"Gender\", \"Age\" or "
+"\"Disease Status\". Use categories to disaggregate data elements into "
+"individual components. You can also use category combinations to assign "
+"metadata attributes to all data recorded in a specific dataset."
+msgstr ""
+"Categories are typically a concept, for example \"Gender\", \"Age\" or "
+"\"Disease Status\". Use categories to disaggregate data elements into "
+"individual components. You can also use category combinations to assign "
+"metadata attributes to all data recorded in a specific dataset."
+
+msgid "Individual values or options that can be selected within a category."
+msgstr "Individual values or options that can be selected within a category."
+
+msgid "Disaggregate data elements into individual components."
+msgstr "Disaggregate data elements into individual components."
+
+msgid ""
+"Combine multiple categories into a related set that can be assigned to data "
+"elements for dissagregation. Can also be used to to assign metadata "
+"attributes to data sets or programs."
+msgstr ""
+"Combine multiple categories into a related set that can be assigned to data "
+"elements for dissagregation. Can also be used to to assign metadata "
+"attributes to data sets or programs."
+
+msgid ""
+"Specify code and attributes to enable easier data exchange with other "
+"systems."
+msgstr ""
+"Specify code and attributes to enable easier data exchange with other "
+"systems."
+
+msgid "Group category options and improve analysis with category option group sets."
+msgstr "Group category options and improve analysis with category option group sets."
+
+msgid ""
+"Classify category options groups to add more dimensionality to captured "
+"data for analysis."
+msgstr ""
+"Classify category options groups to add more dimensionality to captured "
+"data for analysis."
+
+msgid ""
 "Data elements are the core foundational item of DHIS2 and are used for data "
 "collection. Data elements can be organised by group and group set."
 msgstr ""
@@ -98,3 +370,9 @@ msgid ""
 msgstr ""
 "Add another level of organisation by grouping data element groups into "
 "group sets."
+
+msgid "Add new"
+msgstr "Add new"
+
+msgid "Manage"
+msgstr "Manage"

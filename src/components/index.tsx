@@ -1,1 +1,2 @@
-export { DefaultLazyLoad } from './lazy/DefaultLazyLoad'
+export { Loader } from './loading'
+export { HidePreventUnmount } from './HidePreventUnmount'

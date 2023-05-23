@@ -1,34 +1,50 @@
-@value m-medium from './breakpoints.css';
+@value m-medium: (min-width: 768px);
 
+:global a {
+    color: initial;
+    text-decoration: none;
+}
 
 .wrapper {
     display: grid;
     grid-template-areas: 'sidebar' 'main';
     line-height: 20px;
     font-size: 14px;
+    height: 100%;
+    background: var(--colors-grey900);
+    grid-template-rows: auto 1fr;
+    overflow: auto;
+}
+
+.main {
+    padding: 16px;
+    grid-area: main;
+    background-color: var(--colors-grey100);
+    width: 100%;
+}
+
+.sidebar {
+    grid-area: sidebar;
+}
+
+.sidebar.hide {
+    width: 0px;
+    height: 0px;
 }
 
 @media m-medium {
     .wrapper {
         height: 100%;
         display: grid;
-        grid-template-columns: 240px auto;
-        grid-template-areas:
-            'sidebar   main';
+        grid-template-columns: auto 1fr;
+        grid-template-rows: none;
+        grid-template-areas: 'sidebar   main';
     }
-}
-
-
-.main {
-    padding: 16px;
-    overflow: hidden;
-    grid-area: main;
-    background-color: var(--colors-grey100);
-}
-
-.sidebar {
-    grid-area: sidebar;
-    overflow-y: auto;
-    height: 100%;
-    background: var(--colors-grey900);
+    .sidebar {
+        width: 240px;
+        overflow: auto;
+    }
+    .main {
+        overflow-y: auto;
+    }
 }

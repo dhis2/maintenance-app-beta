@@ -1,14 +1,14 @@
 import i18n from '@dhis2/d2-i18n'
 import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation, matchPath } from 'react-router-dom'
-import { HidePreventUnmount } from '../../components/utils/HidePreventUnmount'
+import { HidePreventUnmount } from '../../components'
 import styles from './Sidebar.module.css'
 import {
     LinkItem,
     ParentLink,
     SidebarLinks,
     sidebarLinks,
-} from './SidebarLinks'
+} from './sidebarLinks'
 import {
     Sidenav,
     SidenavItems,
@@ -50,7 +50,7 @@ const SidebarParent = ({
     // Check if any of the children match the current path
     // If they do, parent should be open by default
     const routePathMatch = links.some((link) => {
-        return matchPath(link.to, pathname)
+        return matchPath(`${link.to}/*`, pathname)
     })
     const [isOpen, setIsOpen] = useState(routePathMatch)
     // use separate state for "open" while filtered
@@ -85,7 +85,13 @@ const SidebarParent = ({
 const matchLabel = (label: string, filterValue: string) =>
     label.toLowerCase().includes(filterValue.toLowerCase())
 
-export const Sidebar = ({ links = sidebarLinks }: { links?: SidebarLinks }) => {
+export const Sidebar = ({
+    className,
+    links = sidebarLinks,
+}: {
+    className?: string
+    links?: SidebarLinks
+}) => {
     const [filterValue, setFilterValue] = useState('')
 
     const handleFilterChange = (input: OnChangeInput) => {
@@ -110,7 +116,7 @@ export const Sidebar = ({ links = sidebarLinks }: { links?: SidebarLinks }) => {
     const noMatch = isFiltered && numberOfFilteredLinks === 0
 
     return (
-        <aside className={styles.sidebar}>
+        <aside className={className}>
             <Sidenav>
                 <SidenavFilter onChange={handleFilterChange} />
                 <SidenavItems>

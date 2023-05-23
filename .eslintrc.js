@@ -2,7 +2,11 @@
 const { config } = require('@dhis2/cli-style')
 
 module.exports = {
-    extends: [config.eslintReact, 'plugin:@typescript-eslint/recommended'],
+    extends: [
+        config.eslintReact,
+        'plugin:@typescript-eslint/recommended',
+        'plugin:import/typescript',
+    ],
     settings: {
         'import/resolver': {
             node: {

@@ -1,8 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
 import { Card, Button } from '@dhis2/ui'
 import { IconEdit24 } from '@dhis2/ui-icons'
-import React, { PropsWithChildren } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
+import {
+    getSectionNewPath,
+    getSectionPath,
+} from '../../../app/routes/routePaths'
+import { SECTIONS_MAP, Section } from '../../../constants'
 import styles from './SummaryCard.module.css'
 
 const DEFAULT_ICON = <IconEdit24 />
@@ -26,25 +31,27 @@ export const SummaryCardGroup: React.FC<
 }
 
 interface SummaryCardProps {
+    children: React.ReactNode
     icon?: React.ReactNode
-    title: string
-    to: string
+    section: Section
 }
 
-export const SummaryCard: React.FC<PropsWithChildren<SummaryCardProps>> = ({
-    children,
+export const SummaryCard = ({
     icon = DEFAULT_ICON,
-    title,
-    to,
-}) => {
+    children,
+    section,
+}: SummaryCardProps) => {
+    const title = section.title
     return (
         <Card>
-            <div className={styles.cardWrapper}>
-                <div className={styles.cardIcon}>{icon}</div>
-                <SummaryCardHeader>{title}</SummaryCardHeader>
-                <SummaryCardContent>{children}</SummaryCardContent>
-                <SummaryCardActions to={to} />
-            </div>
+            <Link to={`/${getSectionPath(section)}`}>
+                <div className={styles.cardWrapper}>
+                    <div className={styles.cardIcon}>{icon}</div>
+                    <SummaryCardHeader>{title}</SummaryCardHeader>
+                    <SummaryCardContent>{children}</SummaryCardContent>
+                    <SummaryCardActions section={section} />
+                </div>
+            </Link>
         </Card>
     )
 }
@@ -54,18 +61,21 @@ export const SummaryCardContent = ({ children }: PropsWithChildren) => {
 }
 
 interface SummaryCardActionsProps {
-    to: string
+    section: Section
 }
 
-export const SummaryCardActions: React.FC<SummaryCardActionsProps> = ({
-    to,
-}) => {
+export const SummaryCardActions = ({ section }: SummaryCardActionsProps) => {
+    // categoryOptionCombo is the only section that should not be creatable
+    // TODO: implement auth and move this there
+    const canCreate = section.name !== SECTIONS_MAP.categoryOptionCombo.name
     return (
         <div className={styles.cardActions}>
-            <Link to={to.concat('/new')}>
-                <Button secondary>{i18n.t('Add new')}</Button>
-            </Link>
-            <Link to={to}>
+            {canCreate && (
+                <Link to={`/${getSectionNewPath}`} tabIndex={-1}>
+                    <Button secondary>{i18n.t('Add new')}</Button>
+                </Link>
+            )}
+            <Link to={`/${getSectionPath(section)}`} tabIndex={-1}>
                 <Button secondary>{i18n.t('Manage')}</Button>
             </Link>
         </div>

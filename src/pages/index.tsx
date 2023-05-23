@@ -1,5 +1,3 @@
-import { AllOverview, route as overviewRoute } from './overview'
-
-export { AllOverview }
-
-export const routes = [overviewRoute]
+/**
+ * There should not be any exports here, because all pages should be lazy loaded.
+ */

@@ -1,20 +1,21 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
+import { SECTIONS_MAP } from '../../constants'
 import { SummaryCard, SummaryCardGroup } from './card'
-import { GroupOverview, GroupOverviewSummary } from './overview'
+import { OverviewGroup, OverviewGroupSummary } from './group'
 
-const TITLE = i18n.t('Data elements')
+const TITLE = SECTIONS_MAP.dataElement.titlePlural
 
 export const DataElementsOverview = () => {
     return (
-        <GroupOverview title={i18n.t('Data elements')}>
-            <GroupOverviewSummary>
+        <OverviewGroup title={TITLE}>
+            <OverviewGroupSummary>
                 {i18n.t(
                     'Data elements are the core foundational item of DHIS2 and are used for data collection. Data elements can be organised by group and group set.'
                 )}
-            </GroupOverviewSummary>
+            </OverviewGroupSummary>
             <DataElementsCardGroup />
-        </GroupOverview>
+        </OverviewGroup>
     )
 }
 
@@ -24,21 +25,18 @@ export const DataElementsCardGroup = ({
     showTitle?: boolean
 }) => {
     return (
-        <SummaryCardGroup title={showTitle ? TITLE : ''}>
-            <SummaryCard title="Data Element" to={'/dataElements'}>
+        <SummaryCardGroup title={showTitle ? TITLE : undefined}>
+            <SummaryCard section={SECTIONS_MAP.dataElement}>
                 {i18n.t(
                     'Building block elements of your database. The foundation of data collection and analysis.'
                 )}
             </SummaryCard>
-            <SummaryCard title="Data Element group" to={'/dataElementGroups'}>
+            <SummaryCard section={SECTIONS_MAP.dataElementGroup}>
                 {i18n.t(
                     'Improve analysis of single data elements by combining them into data element groups.'
                 )}
             </SummaryCard>
-            <SummaryCard
-                title="Data Element group set"
-                to={'/dataElementGroupSet'}
-            >
+            <SummaryCard section={SECTIONS_MAP.dataElementGroupSet}>
                 {i18n.t(
                     'Add another level of organisation by grouping data element groups into group sets.'
                 )}
@@ -47,4 +45,4 @@ export const DataElementsCardGroup = ({
     )
 }
 
-export default DataElementsOverview
+export const Component = DataElementsOverview
