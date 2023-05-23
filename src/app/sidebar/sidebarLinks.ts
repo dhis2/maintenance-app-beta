@@ -1,31 +1,28 @@
-import i18n from "@dhis2/d2-i18n";
-import {
-    SECTIONS_MAP,
-    Section,
-} from "../../constants/sections";
-import { getOverviewPath, getSectionPath } from "../routes/routePaths";
+import i18n from '@dhis2/d2-i18n'
+import { SECTIONS_MAP, Section } from '../../constants/sections'
+import { getOverviewPath, getSectionPath } from '../routes/routePaths'
 
 export interface LinkItem {
-    to: string;
-    label: string;
+    to: string
+    label: string
 }
 
 export interface ParentLink {
-    label: string;
-    links: LinkItem[];
+    label: string
+    links: LinkItem[]
 }
 
-export type SidebarLinks = Record<string, ParentLink>;
+export type SidebarLinks = Record<string, ParentLink>
 
 const getOverviewLinkItem = (section: Section): LinkItem => ({
-    label: i18n.t("Overview"),
+    label: i18n.t('Overview'),
     to: getOverviewPath(section),
-});
+})
 
 const getSectionLinkItem = (section: Section): LinkItem => ({
     label: i18n.t(section.title),
     to: getSectionPath(section),
-});
+})
 
 export const sidebarLinks = {
     categories: {
@@ -99,4 +96,4 @@ export const sidebarLinks = {
             getSectionLinkItem(SECTIONS_MAP.validationNotification),
         ],
     },
-} satisfies SidebarLinks;
+} satisfies SidebarLinks
