@@ -1,7 +1,7 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import { useEffect } from 'react'
-import { useSchemaStore } from '../schemas/schemaStore'
 import { ModelSchemas, PickSchemaProperties } from './schemaBase'
+import { useSchemaStore } from './schemaStore'
 
 export const schemaPropertyFields = [
     'authorities',
@@ -21,14 +21,23 @@ const query = {
     schemas: {
         resource: 'schemas',
         params: {
-            fields: schemaPropertyFields.join(','),
+            fields: schemaPropertyFields,
         },
     },
-} as const
+    authorities: {
+        resource: 'me',
+        params: {
+            fields: ['authorities', 'avatar', 'email', 'name', 'settings'], // same fields as headbar to hit the cache
+        },
+    },
+}
 
 interface ModelSchemaResponse {
     schemas: {
         schemas: Schema[]
+    }
+    authorities: {
+        authorities: string[]
     }
 }
 
