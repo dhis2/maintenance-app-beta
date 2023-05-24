@@ -1,3 +1,3 @@
 # Maintenance app
 
-* [Developer docs](./docs/developer/README.md)
+-   [Developer docs](./docs/developer/README.md)
