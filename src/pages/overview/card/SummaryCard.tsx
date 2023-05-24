@@ -19,9 +19,10 @@ const SummaryCardHeader = ({ children }: PropsWithChildren) => (
 interface SummaryCardGroupProps {
     title: string
 }
-export const SummaryCardGroup: React.FC<
-    PropsWithChildren<SummaryCardGroupProps>
-> = ({ children, title }) => {
+export const SummaryCardGroup = ({
+    children,
+    title,
+}: PropsWithChildren<SummaryCardGroupProps>) => {
     return (
         <>
             {title && <div className={styles.cardGroupHeader}>{title}</div>}
