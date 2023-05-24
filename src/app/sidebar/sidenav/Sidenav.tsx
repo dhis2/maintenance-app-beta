@@ -27,14 +27,14 @@ interface SidenavParentProps {
     onClick?: () => void
 }
 
-export const SidenavParent: React.FC<PropsWithChildren<SidenavParentProps>> = ({
+export const SidenavParent = ({
     label,
     icon,
     disabled,
     children,
     open,
     onClick,
-}) => {
+}: PropsWithChildren<SidenavParentProps>) => {
     return (
         <>
             <li
@@ -102,9 +102,10 @@ interface SidenavLinkBaseProps {
     disabled: boolean
 }
 
-export const SidenavLinkBase: React.FC<
-    PropsWithChildren<SidenavLinkBaseProps>
-> = ({ children, disabled }) => (
+export const SidenavLinkBase = ({
+    children,
+    disabled,
+}: PropsWithChildren<SidenavLinkBaseProps>) => (
     <li
         className={cx(styles['sidenav-link'], {
             [styles['sidenav-link-disabled']]: disabled,
@@ -159,10 +160,10 @@ export const SidenavLink = ({
 
 export const SidenavDivider = () => <li className="sidenav-divider"></li>
 
-interface SidenavSectionTitle {
+interface SidenavSectionTitleProps {
     label: string
 }
 
-export const SidenavSectionTitle: React.FC<SidenavSectionTitle> = ({
-    label,
-}) => <li className="sidenav-section-title">{label}</li>
+export const SidenavSectionTitle = ({ label }: SidenavSectionTitleProps) => (
+    <li className="sidenav-section-title">{label}</li>
+)

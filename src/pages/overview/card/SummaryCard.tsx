@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Card, Button } from '@dhis2/ui'
 import { IconEdit24 } from '@dhis2/ui-icons'
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { Link } from 'react-router-dom'
 import {
     getSectionNewPath,
@@ -19,9 +19,10 @@ const SummaryCardHeader = ({ children }: PropsWithChildren) => (
 interface SummaryCardGroupProps {
     title: string
 }
-export const SummaryCardGroup: React.FC<
-    PropsWithChildren<SummaryCardGroupProps>
-> = ({ children, title }) => {
+export const SummaryCardGroup = ({
+    children,
+    title,
+}: PropsWithChildren<SummaryCardGroupProps>) => {
     return (
         <>
             {title && <div className={styles.cardGroupHeader}>{title}</div>}

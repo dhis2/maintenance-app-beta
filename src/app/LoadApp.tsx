@@ -1,5 +1,5 @@
 import { useDataQuery } from '@dhis2/app-runtime'
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { Loader } from '../components/loading/Loader'
 
 const query = {
@@ -9,11 +9,7 @@ const query = {
     },
 }
 
-interface LoadAppProps {
-    children: React.ReactNode
-}
-
-export const LoadApp: React.FC<LoadAppProps> = ({ children }) => {
+export const LoadApp = ({ children }: PropsWithChildren) => {
     const queryResponse = useDataQuery(query)
     return (
         <Loader queryResponse={queryResponse} label="schemas">
