@@ -20,7 +20,7 @@ const schemaFields = schemaPropertyFields.concat()
 
 export type SchemaPropertyFields = (typeof schemaPropertyFields)[number]
 export type Schema = PickSchemaProperties<SchemaPropertyFields>
-export type ModelSchemas = BaseModelSchemas<SchemaPropertyFields>
+export type ModelSchemas = BaseModelSchemas<Schema>
 
 // same fields as headbar-request to hit the cache
 export const userFields = [

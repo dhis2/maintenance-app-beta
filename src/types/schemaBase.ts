@@ -207,10 +207,5 @@ export type SchemaName =
     | 'validationRuleGroup'
     | 'visualization'
 
-export type BaseModelSchemas<
-    TSchemaFields extends keyof SchemaBase = keyof SchemaBase
-> = Record<SchemaName, PickSchemaProperties<TSchemaFields>>
-
-// export type ModelSchemas<
-//     SchemaFields extends keyof SchemaProperties = keyof SchemaProperties
-// > = { [key: string]: Pick<SchemaProperties, SchemaFields> };
+export type BaseModelSchemas<TSchema extends Partial<SchemaBase> = SchemaBase> =
+    Record<SchemaName, TSchema>
