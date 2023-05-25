@@ -5,15 +5,13 @@ import { useCurrentUserAuthorities } from './currentUserStore'
 /* NOTE: read/update are checked using access properties on a model */
 
 // user can create model if they have any of the following authorities
-const canCreateAuthTypes = new Set([
+const createAuthTypes = [
     SchemaAuthorityType.CREATE,
     SchemaAuthorityType.CREATE_PRIVATE,
     SchemaAuthorityType.CREATE_PUBLIC,
-])
-type CreateAuthType =
-    | SchemaAuthorityType.CREATE
-    | SchemaAuthorityType.CREATE_PRIVATE
-    | SchemaAuthorityType.CREATE_PUBLIC
+] as const
+const canCreateAuthTypes = new Set(createAuthTypes)
+type CreateAuthType = (typeof createAuthTypes)[number]
 
 type Operation = CreateAuthType | SchemaAuthorityType.DELETE
 
