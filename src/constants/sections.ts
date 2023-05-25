@@ -1,5 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
-import type { SectionMap } from '../types'
+import type { SectionMap, Section } from '../types'
+
+// for convenience so types can be imported with the map below
+export type { SectionMap, Section }
 
 export const SECTIONS_MAP = {
     category: {

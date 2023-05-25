@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, PropsWithChildren } from 'react'
 import { NavLink, useLocation, matchPath } from 'react-router-dom'
 import { HidePreventUnmount } from '../../components'
 import styles from './Sidebar.module.css'
@@ -145,7 +145,7 @@ type NoMatchMessageProps = {
     filter: string
 }
 
-const NoMatchMessage: React.FC<NoMatchMessageProps> = ({ filter }) => (
+const NoMatchMessage = ({ filter }: PropsWithChildren<NoMatchMessageProps>) => (
     <div className={styles.noMatchMessage}>
         {i18n.t('No menu items found for')} <br />
         {filter}
