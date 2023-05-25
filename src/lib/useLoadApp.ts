@@ -1,11 +1,11 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import { useEffect } from 'react'
-import type { BaseModelSchemas, PickSchemaProperties } from '../types'
+import type { ModelSchemasBase, PickSchemaProperties } from '../types'
 import type { CurrentUser as CurrentUserBase } from '../types/models'
 import { useSetSchemas } from './schemas'
 import { useSetCurrentUser } from './user'
 
-export const schemaPropertyFields = [
+export const schemaFields = [
     'authorities',
     'displayName',
     'name',
@@ -16,11 +16,11 @@ export const schemaPropertyFields = [
 
 // workaround to widen the type, because useQuery() does not allow for
 // readonly types (even though it should)
-const schemaFields = schemaPropertyFields.concat()
+const schemaFieldsFilter = schemaFields.concat()
 
-export type SchemaPropertyFields = (typeof schemaPropertyFields)[number]
+export type SchemaPropertyFields = (typeof schemaFieldsFilter)[number]
 export type Schema = PickSchemaProperties<SchemaPropertyFields>
-export type ModelSchemas = BaseModelSchemas<Schema>
+export type ModelSchemas = ModelSchemasBase<Schema>
 
 // same fields as headbar-request to hit the cache
 export const userFields = [
@@ -32,7 +32,7 @@ export const userFields = [
 ] as const
 // workaround to widen the type, because useQuery() does not allow for
 // readonly types
-const currentUserFields = userFields.concat()
+const userFieldsFilter = userFields.concat()
 
 type UserPropertyFields = (typeof userFields)[number]
 type CurrentUserResponse = Pick<CurrentUserBase, UserPropertyFields>
@@ -45,13 +45,13 @@ const query = {
     schemas: {
         resource: 'schemas',
         params: {
-            fields: schemaFields,
+            fields: schemaFieldsFilter,
         },
     },
     currentUser: {
         resource: 'me',
         params: {
-            fields: currentUserFields,
+            fields: userFieldsFilter,
         },
     },
 }

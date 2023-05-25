@@ -207,5 +207,5 @@ export type SchemaName =
     | 'validationRuleGroup'
     | 'visualization'
 
-export type BaseModelSchemas<TSchema extends Partial<SchemaBase> = SchemaBase> =
+export type ModelSchemasBase<TSchema extends Partial<SchemaBase> = SchemaBase> =
     Record<SchemaName, TSchema>
