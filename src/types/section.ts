@@ -1,7 +1,7 @@
 import type { SchemaName } from './schemaBase'
 
 export type Section = {
-    name: SchemaName
+    name: SchemaName | string
     namePlural: string
     titlePlural: string
     title: string

@@ -1,4 +1,6 @@
-export interface Schema {
+// called "SchemaBase" because the actual Schema we use
+// is a subset of this type (due to field-filtering)
+export interface SchemaBase {
     authorities: SchemaAuthorities
     klass: string
     name: SchemaName
@@ -18,7 +20,10 @@ export interface Schema {
     properties: SchemaFieldProperty[]
 }
 
-export type PickSchemaProperties<T extends keyof Schema> = Pick<Schema, T>
+export type PickSchemaProperties<T extends keyof SchemaBase> = Pick<
+    SchemaBase,
+    T
+>
 
 export interface SchemaFieldProperty {
     name: string
@@ -202,8 +207,9 @@ export type SchemaName =
     | 'validationRuleGroup'
     | 'visualization'
 
-export type ModelSchemas<TSchemaFields extends keyof Schema = keyof Schema> =
-    Record<SchemaName, PickSchemaProperties<TSchemaFields>>
+export type BaseModelSchemas<
+    TSchemaFields extends keyof SchemaBase = keyof SchemaBase
+> = Record<SchemaName, PickSchemaProperties<TSchemaFields>>
 
 // export type ModelSchemas<
 //     SchemaFields extends keyof SchemaProperties = keyof SchemaProperties

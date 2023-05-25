@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react'
-import { Loader } from '../components/loading/Loader'
+import { Loader } from '../components'
 import { useLoadApp } from '../lib'
 
 export const LoadApp = ({ children }: PropsWithChildren) => {

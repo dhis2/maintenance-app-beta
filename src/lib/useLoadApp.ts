@@ -1,7 +1,7 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import { useEffect } from 'react'
+import type { BaseModelSchemas, PickSchemaProperties } from '../types'
 import type { CurrentUser as CurrentUserBase } from '../types/models'
-import type { ModelSchemas, PickSchemaProperties } from './schemas'
 import { useSetSchemas } from './schemas'
 import { useSetCurrentUser } from './user'
 
@@ -15,12 +15,12 @@ export const schemaPropertyFields = [
 ] as const
 
 // workaround to widen the type, because useQuery() does not allow for
-// readonly types
+// readonly types (even though it should)
 const schemaFields = schemaPropertyFields.concat()
 
 export type SchemaPropertyFields = (typeof schemaPropertyFields)[number]
 export type Schema = PickSchemaProperties<SchemaPropertyFields>
-export type Schemas = ModelSchemas<SchemaPropertyFields>
+export type ModelSchemas = BaseModelSchemas<SchemaPropertyFields>
 
 // same fields as headbar-request to hit the cache
 export const userFields = [
@@ -37,7 +37,7 @@ const currentUserFields = userFields.concat()
 type UserPropertyFields = (typeof userFields)[number]
 type CurrentUserResponse = Pick<CurrentUserBase, UserPropertyFields>
 
-export interface CurrentUser {
+export interface CurrentUser extends Omit<CurrentUserResponse, 'authorities'> {
     authorities: Set<string> // use a set for faster lookup
 }
 
@@ -51,12 +51,12 @@ const query = {
     currentUser: {
         resource: 'me',
         params: {
-            fields: currentUserFields.concat(),
+            fields: currentUserFields,
         },
     },
 }
 
-interface ModelSchemaResponse {
+interface QueryResponse {
     schemas: {
         schemas: Schema[]
     }
@@ -64,7 +64,7 @@ interface ModelSchemaResponse {
 }
 
 export const useLoadApp = () => {
-    const queryResponse = useDataQuery<ModelSchemaResponse>(query)
+    const queryResponse = useDataQuery<QueryResponse>(query)
     const setSchemas = useSetSchemas()
     const setCurrentUser = useSetCurrentUser()
 
@@ -75,7 +75,7 @@ export const useLoadApp = () => {
 
             const modelSchemas = Object.fromEntries(
                 schemas.map((schema) => [schema.name, schema])
-            ) as Schemas
+            ) as ModelSchemas
 
             const currentUserResponse = schemaResponse.currentUser
             const currentUser: CurrentUser = {
