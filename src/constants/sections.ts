@@ -1,15 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-
-export type Section = {
-    name: string
-    namePlural: string
-    titlePlural: string
-    title: string
-    parentSectionKey: string
-}
-type SectionMap = {
-    [key: string]: Section
-}
+import type { SectionMap } from '../types'
 
 export const SECTIONS_MAP = {
     category: {

@@ -1,9 +1,9 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import { useEffect } from 'react'
-import type { MeDto } from '../types/'
+import type { CurrentUser as CurrentUserBase } from '../types/models'
 import type { ModelSchemas, PickSchemaProperties } from './schemas'
 import { useSetSchemas } from './schemas'
-import { useSetCurrentUser } from './user/currentUserStore'
+import { useSetCurrentUser } from './user'
 
 export const schemaPropertyFields = [
     'authorities',
@@ -19,8 +19,8 @@ export const schemaPropertyFields = [
 const schemaFields = schemaPropertyFields.concat()
 
 export type SchemaPropertyFields = (typeof schemaPropertyFields)[number]
+export type Schema = PickSchemaProperties<SchemaPropertyFields>
 export type Schemas = ModelSchemas<SchemaPropertyFields>
-type Schema = PickSchemaProperties<SchemaPropertyFields>
 
 // same fields as headbar-request to hit the cache
 export const userFields = [
@@ -35,7 +35,7 @@ export const userFields = [
 const currentUserFields = userFields.concat()
 
 type UserPropertyFields = (typeof userFields)[number]
-type CurrentUserResponse = Pick<MeDto, UserPropertyFields>
+type CurrentUserResponse = Pick<CurrentUserBase, UserPropertyFields>
 
 export interface CurrentUser {
     authorities: Set<string> // use a set for faster lookup

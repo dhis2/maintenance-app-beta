@@ -64,7 +64,7 @@ enum SchemaFieldPropertyType {
 }
 
 // https://docs.dhis2.org/javadoc/2.39/org/hisp/dhis/security/AuthorityType.html
-enum SchemaAuthorityType {
+export enum SchemaAuthorityType {
     CREATE = 'CREATE',
     CREATE_PRIVATE = 'CREATE_PRIVATE',
     CREATE_PUBLIC = 'CREATE_PUBLIC',
@@ -79,6 +79,7 @@ export interface SchemaAuthority {
     type: SchemaAuthorityType
     authorities: string[]
 }
+
 export type SchemaAuthorities = SchemaAuthority[]
 
 export type SchemaName =

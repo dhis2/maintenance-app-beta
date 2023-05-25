@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
+import type { SchemaName } from '../../types'
 import type { Schemas } from './useLoadSchemas'
 
 export interface SchemasStore {
@@ -27,3 +28,5 @@ export const useSchemaStore = create<SchemasStore>()(
 export const useSetSchemas = () => useSchemaStore((state) => state.setSchemas)
 
 export const useSchemas = () => useSchemaStore((state) => state.getSchemas())
+export const useSchema = (schemaName: SchemaName) =>
+    useSchemaStore((state) => state.getSchemas()[schemaName])

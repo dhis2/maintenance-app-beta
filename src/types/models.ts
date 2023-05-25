@@ -1,2950 +1,434 @@
-import type {
-    Access,
-    AccessWithData,
-    ModelBase,
-    ModelReference,
-    Geometry,
-    ReportingParams,
-    ProgramOwner,
-    Translation,
-} from './modelBase'
-
-export interface AggregateDataExchange extends ModelBase {
-    source: unknown
-    target: unknown
-}
-
-export interface AnalyticsPeriodBoundary extends ModelBase {
-    analyticsPeriodBoundaryType: AnalyticsPeriodBoundaryAnalyticsPeriodBoundaryType
-    boundaryTarget: string
-    offsetPeriodType: string
-    offsetPeriods: number
-}
-
-export interface AnalyticsTableHook extends ModelBase {
-    analyticsTableType: AnalyticsTableHookAnalyticsTableType
-    phase: AnalyticsTableHookPhase
-    resourceTableType: AnalyticsTableHookResourceTableType
-    sql: string
-}
-
-export interface ApiToken extends ModelBase {
-    attributes: unknown[]
-    expire: number
-    type: Type
-    version: number
-}
-
-export interface Attribute extends ModelBase {
-    categoryAttribute: boolean
-    categoryOptionAttribute: boolean
-    categoryOptionComboAttribute: boolean
-    categoryOptionGroupAttribute: boolean
-    categoryOptionGroupSetAttribute: boolean
-    constantAttribute: boolean
-    dataElementAttribute: boolean
-    dataElementGroupAttribute: boolean
-    dataElementGroupSetAttribute: boolean
-    dataSetAttribute: boolean
-    description: string
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    documentAttribute: boolean
-    eventChartAttribute: boolean
-    eventReportAttribute: boolean
-    formName: string
-    indicatorAttribute: boolean
-    indicatorGroupAttribute: boolean
-    legendSetAttribute: boolean
-    mandatory: boolean
-    mapAttribute: boolean
-    objectTypes: string
-    optionAttribute: boolean
-    optionSet: OptionSet
-    optionSetAttribute: boolean
-    organisationUnitAttribute: boolean
-    organisationUnitGroupAttribute: boolean
-    organisationUnitGroupSetAttribute: boolean
-    programAttribute: boolean
-    programIndicatorAttribute: boolean
-    programStageAttribute: boolean
-    relationshipTypeAttribute: boolean
-    sectionAttribute: boolean
-    shortName: string
-    sortOrder: number
-    sqlViewAttribute: boolean
-    trackedEntityAttributeAttribute: boolean
-    trackedEntityTypeAttribute: boolean
-    unique: boolean
-    userAttribute: boolean
-    userGroupAttribute: boolean
-    validationRuleAttribute: boolean
-    validationRuleGroupAttribute: boolean
-    valueType: ValueType
-    visualizationAttribute: boolean
-}
-
-export interface AttributeValue {
-    attribute: Attribute
-    value: string
-}
-
-export interface Axis {
-    axis: number
-    dimensionalItem: string
-}
-
-export interface Category extends ModelBase {
-    aggregationType: AggregationType
-    allItems: boolean
-    categoryCombos: CategoryCombo[]
-    categoryOptions: CategoryOption[]
-    dataDimension: boolean
-    dataDimensionType: DataDimensionType
-    description: string
-    dimension: string
-    dimensionItemKeywords: unknown
-    dimensionType: DimensionType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    filter: string
-    formName: string
-    items: unknown[]
-    legendSet: LegendSet
-    optionSet: OptionSet
-    programStage: ProgramStage
-    repetition: EventRepetition
-    shortName: string
-    valueType: ValueType
-}
-
-export interface CategoryCombo extends ModelBase {
-    categories: Category[]
-    categoryOptionCombos: CategoryOptionCombo[]
-    dataDimensionType: DataDimensionType
-    isDefault: boolean
-    skipTotal: boolean
-}
-
-export interface CategoryDimension {
-    category: Category
-    categoryOptions: object
-}
-
-export interface CategoryOption extends ModelBase {
-    access: AccessWithData
-    aggregationType: AggregationType
-    categories: Category[]
-    categoryOptionCombos: CategoryOptionCombo[]
-    categoryOptionGroups: CategoryOptionGroup[]
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    endDate: string
-    formName: string
-    isDefault: boolean
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    organisationUnits: OrganisationUnit[]
-    queryMods: unknown
-    shortName: string
-    startDate: string
-    style: ObjectStyle
-}
-
-export interface CategoryOptionCombo extends ModelBase {
-    aggregationType: AggregationType
-    categoryCombo: CategoryCombo
-    categoryOptions: CategoryOption[]
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    formName: string
-    ignoreApproval: boolean
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    queryMods: unknown
-    shortName: string
-}
-
-export interface CategoryOptionGroup extends ModelBase {
-    aggregationType: AggregationType
-    categoryOptions: CategoryOption[]
-    dataDimensionType: DataDimensionType
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    formName: string
-    groupSets: CategoryOptionGroupSet[]
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    queryMods: unknown
-    shortName: string
-}
-
-export interface CategoryOptionGroupSet extends ModelBase {
-    aggregationType: AggregationType
-    allItems: boolean
-    categoryOptionGroups: CategoryOptionGroup[]
-    dataDimension: boolean
-    dataDimensionType: DataDimensionType
-    description: string
-    dimension: string
-    dimensionItemKeywords: unknown
-    dimensionType: DimensionType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    filter: string
-    formName: string
-    items: unknown[]
-    legendSet: LegendSet
-    optionSet: OptionSet
-    programStage: ProgramStage
-    repetition: EventRepetition
-    shortName: string
-    valueType: ValueType
-}
-
-export interface CategoryOptionGroupSetDimension {
-    categoryOptionGroupSet: CategoryOptionGroupSet
-    categoryOptionGroups: object
-}
-
-export interface Constant extends ModelBase {
-    description: string
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    formName: string
-    shortName: string
-    value: number
-}
-
-export interface Dashboard extends ModelBase {
-    allowedFilters: string[]
-    dashboardItems: DashboardItem[]
-    description: string
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    formName: string
-    itemConfig: unknown
-    itemCount: number
-    layout: unknown
-    restrictFilters: boolean
-    shortName: string
-}
-
-export interface DashboardItem extends ModelBase {
-    appKey: string
-    contentCount: number
-    eventChart: EventChart
-    eventReport: EventReport
-    eventVisualization: EventVisualization
-    height: number
-    interpretationCount: number
-    interpretationLikeCount: number
-    map: Map
-    messages: boolean
-    reports: Report[]
-    resources: Document[]
-    shape: DashboardItemShape
-    text: string
-    type: Type
-    users: User[]
-    visualization: Visualization
-    width: number
-    x: number
-    y: number
-}
-
-export interface DataApprovalLevel extends ModelBase {
-    categoryOptionGroupSet: CategoryOptionGroupSet
-    level: number
-    orgUnitLevel: number
-    orgUnitLevelName: string
-}
-
-export interface DataApprovalWorkflow extends ModelBase {
-    categoryCombo: CategoryCombo
-    dataApprovalLevels: DataApprovalLevel[]
-    dataSets: DataSet[]
-    periodType: string
-}
-
-export interface DataElement extends ModelBase {
-    aggregationLevels: number[]
-    aggregationType: AggregationType
-    categoryCombo: CategoryCombo
-    commentOptionSet: OptionSet
-    dataElementGroups: DataElementGroup[]
-    dataSetElements: DataSetElement[]
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    domainType: DataElementDomainType
-    fieldMask: string
-    formName: string
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    optionSet: OptionSet
-    optionSetValue: boolean
-    queryMods: unknown
-    shortName: string
-    style: ObjectStyle
-    url: string
-    valueType: ValueType
-    valueTypeOptions: unknown
-    zeroIsSignificant: boolean
-}
-
-export interface DataElementGroup extends ModelBase {
-    aggregationType: AggregationType
-    dataElements: DataElement[]
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    formName: string
-    groupSets: DataElementGroupSet[]
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    queryMods: unknown
-    shortName: string
-}
-
-export interface DataElementGroupSet extends ModelBase {
-    aggregationType: AggregationType
-    allItems: boolean
-    compulsory: boolean
-    dataDimension: boolean
-    dataDimensionType: DataDimensionType
-    dataElementGroups: DataElementGroup[]
-    description: string
-    dimension: string
-    dimensionItemKeywords: unknown
-    dimensionType: DimensionType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    filter: string
-    formName: string
-    items: unknown[]
-    legendSet: LegendSet
-    optionSet: OptionSet
-    programStage: ProgramStage
-    repetition: EventRepetition
-    shortName: string
-    valueType: ValueType
-}
-
-export interface DataElementGroupSetDimension {
-    dataElementGroupSet: DataElementGroupSet
-    dataElementGroups: object
-}
-
-export interface DataElementOperand extends ModelBase {
-    aggregationType: AggregationType
-    attributeOptionCombo: CategoryOptionCombo
-    categoryOptionCombo: CategoryOptionCombo
-    dataElement: DataElement
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    formName: string
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    queryMods: unknown
-    shortName: string
-}
-
-export interface DataEntryForm extends ModelBase {
-    format: number
-    htmlCode: string
-    style: DataEntryFormStyle
-}
-
-export interface DataInputPeriod {
-    closingDate: string
-    openingDate: string
-    period: ModelReference
-}
-
-export interface DataSet extends ModelBase {
-    access: AccessWithData
-    aggregationType: AggregationType
-    categoryCombo: CategoryCombo
-    compulsoryDataElementOperands: DataElementOperand[]
-    compulsoryFieldsCompleteOnly: boolean
-    dataElementDecoration: boolean
-    dataEntryForm: DataEntryForm
-    dataInputPeriods: DataInputPeriod[]
-    dataSetElements: DataSetElement[]
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    expiryDays: number
-    fieldCombinationRequired: boolean
-    formName: string
-    formType: FormType
-    indicators: Indicator[]
-    interpretations: Interpretation[]
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    mobile: boolean
-    noValueRequiresComment: boolean
-    notificationRecipients: UserGroup
-    notifyCompletingUser: boolean
-    openFuturePeriods: number
-    openPeriodsAfterCoEndDate: number
-    organisationUnits: OrganisationUnit[]
-    periodType: string
-    queryMods: unknown
-    renderAsTabs: boolean
-    renderHorizontally: boolean
-    sections: Section[]
-    shortName: string
-    skipOffline: boolean
-    style: ObjectStyle
-    timelyDays: number
-    validCompleteOnly: boolean
-    version: number
-    workflow: DataApprovalWorkflow
-}
-
-export interface DataSetElement {
-    categoryCombo: CategoryCombo
-    dataElement: DataElement
-    dataSet: DataSet
-}
-
-export interface DataSetNotificationTemplate extends ModelBase {
-    dataSetNotificationTrigger: DataSetNotificationTemplateDataSetNotificationTrigger
-    dataSets: DataSet[]
-    deliveryChannels: never[]
-    displayMessageTemplate: string
-    displaySubjectTemplate: string
-    messageTemplate: string
-    notificationRecipient: DataSetNotificationTemplateNotificationRecipient
-    notifyParentOrganisationUnitOnly: boolean
-    notifyUsersInHierarchyOnly: boolean
-    recipientUserGroup: UserGroup
-    relativeScheduledDays: number
-    sendStrategy: SendStrategy
-    subjectTemplate: string
-}
-
-export interface DatastoreEntry extends ModelBase {
-    key: string
-    namespace: string
-    value: string
-}
-
-export interface Document extends ModelBase {
-    attachment: boolean
-    contentType: string
-    external: boolean
-    url: string
-}
-
-export interface EventChart extends ModelBase {
-    aggregationType: AggregationType
-    attributeDimensions: unknown[]
-    attributeValueDimension: TrackedEntityAttribute
-    baseLineLabel: string
-    baseLineValue: number
-    categoryDimensions: CategoryDimension[]
-    categoryOptionGroupSetDimensions: CategoryOptionGroupSetDimension[]
-    collapseDataDimensions: boolean
-    columnDimensions: string[]
-    columns: unknown[]
-    completedOnly: boolean
-    cumulativeValues: boolean
-    dataDimensionItems: unknown[]
-    dataElementDimensions: TrackedEntityDataElementDimension[]
-    dataElementGroupSetDimensions: DataElementGroupSetDimension[]
-    dataElementValueDimension: DataElement
-    description: string
-    digitGroupSeparator: DigitGroupSeparator
-    displayBaseLineLabel: string
-    displayDescription: string
-    displayDomainAxisLabel: string
-    displayFormName: string
-    displayRangeAxisLabel: string
-    displayShortName: string
-    displaySubtitle: string
-    displayTargetLineLabel: string
-    displayTitle: string
-    domainAxisLabel: string
-    endDate: string
-    eventStatus: EventStatus
-    filterDimensions: string[]
-    filters: unknown[]
-    formName: string
-    hideEmptyRowItems: HideEmptyRowItems
-    hideLegend: boolean
-    hideNaData: boolean
-    hideSubtitle: boolean
-    hideTitle: boolean
-    interpretations: Interpretation[]
-    itemOrganisationUnitGroups: OrganisationUnitGroup[]
-    legacy: boolean
-    legendDisplayStrategy: EventChartLegendDisplayStrategy
-    legendSet: LegendSet
-    noSpaceBetweenColumns: boolean
-    orgUnitField: string
-    organisationUnitGroupSetDimensions: OrganisationUnitGroupSetDimension[]
-    organisationUnitLevels: number[]
-    organisationUnits: OrganisationUnit[]
-    outputType: OutputType
-    parentGraphMap: Record<string, unknown>
-    percentStackedValues: boolean
-    periods: ModelReference[]
-    program: Program
-    programIndicatorDimensions: TrackedEntityProgramIndicatorDimension[]
-    programStage: ProgramStage
-    programStatus: ProgramStatus
-    rangeAxisDecimals: number
-    rangeAxisLabel: string
-    rangeAxisMaxValue: number
-    rangeAxisMinValue: number
-    rangeAxisSteps: number
-    regressionType: RegressionType
-    relativePeriods: unknown
-    rowDimensions: string[]
-    rows: unknown[]
-    shortName: string
-    showData: boolean
-    sortOrder: number
-    startDate: string
-    subscribed: boolean
-    subscribers: string[]
-    subtitle: string
-    targetLineLabel: string
-    targetLineValue: number
-    timeField: string
-    title: string
-    topLimit: number
-    type: Type
-    userOrgUnitType: UserOrgUnitType
-    userOrganisationUnit: boolean
-    userOrganisationUnitChildren: boolean
-    userOrganisationUnitGrandChildren: boolean
-    value: unknown
-    yearlySeries: string[]
-}
-
-export interface EventHook extends ModelBase {
-    description: string
-    disabled: boolean
-    source: unknown
-    targets: unknown[]
-}
-
-export interface EventRepetition {
-    dimension: string
-    indexes: number[]
-    parent: EventRepetitionParent
-}
-
-export interface EventReport extends ModelBase {
-    aggregationType: AggregationType
-    attributeDimensions: unknown[]
-    attributeValueDimension: TrackedEntityAttribute
-    categoryDimensions: CategoryDimension[]
-    categoryOptionGroupSetDimensions: CategoryOptionGroupSetDimension[]
-    colSubTotals: boolean
-    colTotals: boolean
-    collapseDataDimensions: boolean
-    columnDimensions: string[]
-    columns: unknown[]
-    completedOnly: boolean
-    dataDimensionItems: unknown[]
-    dataElementDimensions: TrackedEntityDataElementDimension[]
-    dataElementGroupSetDimensions: DataElementGroupSetDimension[]
-    dataElementValueDimension: DataElement
-    dataType: DataType
-    description: string
-    digitGroupSeparator: DigitGroupSeparator
-    displayDensity: DisplayDensity
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    displaySubtitle: string
-    displayTitle: string
-    endDate: string
-    eventStatus: EventStatus
-    filterDimensions: string[]
-    filters: unknown[]
-    fontSize: FontSize
-    formName: string
-    hideEmptyRows: boolean
-    hideNaData: boolean
-    hideSubtitle: boolean
-    hideTitle: boolean
-    interpretations: Interpretation[]
-    itemOrganisationUnitGroups: OrganisationUnitGroup[]
-    legacy: boolean
-    orgUnitField: string
-    organisationUnitGroupSetDimensions: OrganisationUnitGroupSetDimension[]
-    organisationUnitLevels: number[]
-    organisationUnits: OrganisationUnit[]
-    outputType: OutputType
-    parentGraphMap: Record<string, unknown>
-    periods: ModelReference[]
-    program: Program
-    programIndicatorDimensions: TrackedEntityProgramIndicatorDimension[]
-    programStage: ProgramStage
-    programStatus: ProgramStatus
-    relativePeriods: unknown
-    rowDimensions: string[]
-    rowSubTotals: boolean
-    rowTotals: boolean
-    rows: unknown[]
-    shortName: string
-    showDimensionLabels: boolean
-    showHierarchy: boolean
-    simpleDimensions: unknown[]
-    sortOrder: number
-    startDate: string
-    subscribed: boolean
-    subscribers: string[]
-    subtitle: string
-    timeField: string
-    title: string
-    topLimit: number
-    type: Type
-    userOrgUnitType: UserOrgUnitType
-    userOrganisationUnit: boolean
-    userOrganisationUnitChildren: boolean
-    userOrganisationUnitGrandChildren: boolean
-    value: unknown
-}
-
-export interface EventVisualization extends ModelBase {
-    aggregationType: AggregationType
-    attributeDimensions: unknown[]
-    attributeValueDimension: TrackedEntityAttribute
-    baseLineLabel: string
-    baseLineValue: number
-    categoryDimensions: CategoryDimension[]
-    categoryOptionGroupSetDimensions: CategoryOptionGroupSetDimension[]
-    colSubTotals: boolean
-    colTotals: boolean
-    collapseDataDimensions: boolean
-    columnDimensions: string[]
-    columns: unknown[]
-    completedOnly: boolean
-    cumulativeValues: boolean
-    dataDimensionItems: unknown[]
-    dataElementDimensions: TrackedEntityDataElementDimension[]
-    dataElementGroupSetDimensions: DataElementGroupSetDimension[]
-    dataElementValueDimension: DataElement
-    dataType: DataType
-    description: string
-    digitGroupSeparator: DigitGroupSeparator
-    displayBaseLineLabel: string
-    displayDensity: DisplayDensity
-    displayDescription: string
-    displayDomainAxisLabel: string
-    displayFormName: string
-    displayRangeAxisLabel: string
-    displayShortName: string
-    displaySubtitle: string
-    displayTargetLineLabel: string
-    displayTitle: string
-    domainAxisLabel: string
-    endDate: string
-    eventStatus: EventStatus
-    filterDimensions: string[]
-    filters: unknown[]
-    fontSize: FontSize
-    formName: string
-    hideEmptyRowItems: HideEmptyRowItems
-    hideEmptyRows: boolean
-    hideLegend: boolean
-    hideNaData: boolean
-    hideSubtitle: boolean
-    hideTitle: boolean
-    interpretations: Interpretation[]
-    itemOrganisationUnitGroups: OrganisationUnitGroup[]
-    legacy: boolean
-    legend: unknown
-    noSpaceBetweenColumns: boolean
-    orgUnitField: string
-    organisationUnitGroupSetDimensions: OrganisationUnitGroupSetDimension[]
-    organisationUnitLevels: number[]
-    organisationUnits: OrganisationUnit[]
-    outputType: OutputType
-    parentGraphMap: Record<string, unknown>
-    percentStackedValues: boolean
-    periods: ModelReference[]
-    program: Program
-    programIndicatorDimensions: TrackedEntityProgramIndicatorDimension[]
-    programStage: ProgramStage
-    programStatus: ProgramStatus
-    rangeAxisDecimals: number
-    rangeAxisLabel: string
-    rangeAxisMaxValue: number
-    rangeAxisMinValue: number
-    rangeAxisSteps: number
-    regressionType: RegressionType
-    relativePeriods: unknown
-    repetitions: EventRepetition[]
-    rowDimensions: string[]
-    rowSubTotals: boolean
-    rowTotals: boolean
-    rows: unknown[]
-    shortName: string
-    showData: boolean
-    showDimensionLabels: boolean
-    showHierarchy: boolean
-    simpleDimensions: unknown[]
-    sortOrder: number
-    startDate: string
-    subscribed: boolean
-    subscribers: string[]
-    subtitle: string
-    targetLineLabel: string
-    targetLineValue: number
-    timeField: string
-    title: string
-    topLimit: number
-    type: Type
-    userOrgUnitType: UserOrgUnitType
-    userOrganisationUnit: boolean
-    userOrganisationUnitChildren: boolean
-    userOrganisationUnitGrandChildren: boolean
-    value: unknown
-}
-
-export interface Expression {
-    description: string
-    displayDescription: string
-    expression: string
-    missingValueStrategy: MissingValueStrategy
-    slidingWindow: boolean
-    translations: Translation[]
-}
-
-export interface ExpressionDimensionItem extends ModelBase {
-    aggregateExportAttributeOptionCombo: string
-    aggregateExportCategoryOptionCombo: string
-    aggregationType: AggregationType
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    expression: string
-    formName: string
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    missingValueStrategy: MissingValueStrategy
-    queryMods: unknown
-    shortName: string
-    slidingWindow: boolean
-}
-
-export interface ExternalFileResource extends ModelBase {
-    accessToken: string
-    expires: string
-    fileResource: FileResource
-}
-
-export interface ExternalMapLayer extends ModelBase {
-    attribution: string
-    imageFormat: ExternalMapLayerImageFormat
-    layers: string
-    legendSet: LegendSet
-    legendSetUrl: string
-    mapLayerPosition: ExternalMapLayerMapLayerPosition
-    mapService: ExternalMapLayerMapService
-    url: string
-}
-
-export interface FileResource extends ModelBase {
-    contentLength: string
-    contentMd5: string
-    contentType: string
-    domain: FileResourceDomain
-    hasMultipleStorageFiles: boolean
-    storageStatus: FileResourceStorageStatus
-}
-
-// no schema and cant find any information about this
-export type Icon = unknown
-
-export interface Indicator extends ModelBase {
-    aggregateExportAttributeOptionCombo: string
-    aggregateExportCategoryOptionCombo: string
-    aggregationType: AggregationType
-    annualized: boolean
-    dataSets: DataSet[]
-    decimals: number
-    denominator: string
-    denominatorDescription: string
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDenominatorDescription: string
-    displayDescription: string
-    displayFormName: string
-    displayNumeratorDescription: string
-    displayShortName: string
-    explodedDenominator: string
-    explodedNumerator: string
-    formName: string
-    indicatorGroups: IndicatorGroup[]
-    indicatorType: IndicatorType
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    numerator: string
-    numeratorDescription: string
-    queryMods: unknown
-    shortName: string
-    style: ObjectStyle
-    url: string
-}
-
-export interface IndicatorGroup extends ModelBase {
-    description: string
-    groupSets: IndicatorGroupSet[]
-    indicatorGroupSet: IndicatorGroupSet
-    indicators: Indicator[]
-}
-
-export interface IndicatorGroupSet extends ModelBase {
-    compulsory: boolean
-    description: string
-    indicatorGroups: IndicatorGroup[]
-    shortName: string
-}
-
-export interface IndicatorType extends ModelBase {
-    factor: number
-    number: boolean
-}
-
-export interface Interpretation extends ModelBase {
-    comments: InterpretationComment[]
-    dataSet: DataSet
-    eventChart: EventChart
-    eventReport: EventReport
-    eventVisualization: EventVisualization
-    likedBy: User[]
-    likes: number
-    map: Map
-    mentions: unknown[]
-    organisationUnit: OrganisationUnit
-    period: ModelReference
-    text: string
-    type: Type
-    visualization: Visualization
-}
-
-export interface InterpretationComment extends ModelBase {
-    mentions: unknown[]
-    text: string
-}
-
-export interface ItemConfig {
-    insertHeight: number
-    insertPosition: ItemConfigInsertPosition
-}
-
-export interface JobConfiguration extends ModelBase {
-    configurable: boolean
-    cronExpression: string
-    delay: number
-    enabled: boolean
-    jobParameters: unknown
-    jobStatus: JobConfigurationJobStatus
-    jobType: JobConfigurationJobType
-    lastExecuted: string
-    lastExecutedStatus: JobConfigurationLastExecutedStatus
-    lastRuntimeExecution: string
-    leaderOnlyJob: boolean
-    nextExecutionTime: string
-    schedulingType: JobConfigurationSchedulingType
-    userUid: string
-}
-
-export interface Legend extends ModelBase {
-    color: string
-    endValue: number
-    image: string
-    startValue: number
-}
-
-export interface LegendDefinitions {
-    set: LegendSet
-    showKey: boolean
-    strategy: LegendDefinitionsStrategy
-    style: LegendDefinitionsStyle
-}
-
-export interface LegendSet extends ModelBase {
-    legends: Legend[]
-    symbolizer: string
-}
-
-export interface Map extends ModelBase {
-    basemap: string
-    description: string
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    formName: string
-    interpretations: Interpretation[]
-    latitude: number
-    longitude: number
-    mapViews: MapView[]
-    shortName: string
-    subscribed: boolean
-    subscribers: string[]
-    title: string
-    zoom: number
-}
-
-export interface MapView extends ModelBase {
-    aggregationType: AggregationType
-    areaRadius: number
-    attributeDimensions: unknown[]
-    categoryDimensions: CategoryDimension[]
-    categoryOptionGroupSetDimensions: CategoryOptionGroupSetDimension[]
-    classes: number
-    colorHigh: string
-    colorLow: string
-    colorScale: string
-    columnDimensions: string[]
-    columns: unknown[]
-    completedOnly: boolean
-    config: string
-    dataDimensionItems: unknown[]
-    dataElementDimensions: TrackedEntityDataElementDimension[]
-    dataElementGroupSetDimensions: DataElementGroupSetDimension[]
-    description: string
-    digitGroupSeparator: DigitGroupSeparator
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    displaySubtitle: string
-    displayTitle: string
-    endDate: string
-    eventClustering: boolean
-    eventCoordinateField: string
-    eventPointColor: string
-    eventPointRadius: number
-    eventStatus: EventStatus
-    filterDimensions: string[]
-    filters: unknown[]
-    followUp: boolean
-    formName: string
-    hidden: boolean
-    hideSubtitle: boolean
-    hideTitle: boolean
-    interpretations: Interpretation[]
-    itemOrganisationUnitGroups: OrganisationUnitGroup[]
-    labelFontColor: string
-    labelFontSize: string
-    labelFontStyle: string
-    labelFontWeight: string
-    labelTemplate: string
-    labels: boolean
-    layer: string
-    legendSet: LegendSet
-    method: number
-    noDataColor: string
-    opacity: number
-    orgUnitField: string
-    orgUnitFieldDisplayName: string
-    organisationUnitColor: string
-    organisationUnitGroupSet: OrganisationUnitGroupSet
-    organisationUnitGroupSetDimensions: OrganisationUnitGroupSetDimension[]
-    organisationUnitLevels: number[]
-    organisationUnitSelectionMode: MapViewOrganisationUnitSelectionMode
-    organisationUnits: OrganisationUnit[]
-    parentGraph: string
-    parentGraphMap: Record<string, unknown>
-    parentLevel: number
-    periods: ModelReference[]
-    program: Program
-    programIndicatorDimensions: TrackedEntityProgramIndicatorDimension[]
-    programStage: ProgramStage
-    programStatus: ProgramStatus
-    radiusHigh: number
-    radiusLow: number
-    relativePeriods: unknown
-    renderingStrategy: MapViewRenderingStrategy
-    rows: unknown[]
-    shortName: string
-    sortOrder: number
-    startDate: string
-    styleDataItem: object
-    subscribed: boolean
-    subscribers: string[]
-    subtitle: string
-    thematicMapType: MapViewThematicMapType
-    timeField: string
-    title: string
-    topLimit: number
-    trackedEntityType: TrackedEntityType
-    userOrgUnitType: UserOrgUnitType
-    userOrganisationUnit: boolean
-    userOrganisationUnitChildren: boolean
-    userOrganisationUnitGrandChildren: boolean
-}
-
-export interface MessageConversation extends ModelBase {
-    assignee: User
-    extMessageId: string
-    followUp: boolean
-    lastMessage: string
-    lastSender: User
-    lastSenderFirstname: string
-    lastSenderSurname: string
-    messageCount: number
-    messageType: MessageConversationMessageType
-    messages: unknown[]
-    priority: MessageConversationPriority
-    read: boolean
-    status: MessageConversationStatus
-    subject: string
-    userFirstname: string
-    userMessages: unknown[]
-    userSurname: string
-}
-
-export interface MetadataProposal {
-    change: unknown
-    comment: string
-    created: string
-    createdBy: User
-    finalised: string
-    finalisedBy: User
-    id: string
-    reason: string
-    status: MetadataProposalStatus
-    target: MetadataProposalTarget
-    targetId: string
-    type: Type
-}
-
-export interface MetadataVersion extends ModelBase {
-    hashCode: string
-    importDate: string
-    type: Type
-}
-
-export interface MinMaxDataElement {
-    dataElement: DataElement
-    generated: boolean
-    max: number
-    min: number
-    optionCombo: CategoryOptionCombo
-    source: OrganisationUnit
-}
-
-export interface OAuth2Client extends ModelBase {
-    cid: string
-    grantTypes: string[]
-    redirectUris: string[]
-    secret: string
-}
-
-export interface ObjectStyle {
-    color: string
-    icon: string
-}
-
-export interface Option extends ModelBase {
-    description: string
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    formName: string
-    optionSet: OptionSet
-    shortName: string
-    sortOrder: number
-    style: ObjectStyle
-}
-
-export interface OptionGroup extends ModelBase {
-    aggregationType: AggregationType
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    formName: string
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    optionSet: OptionSet
-    options: Option[]
-    queryMods: unknown
-    shortName: string
-}
-
-export interface OptionGroupSet extends ModelBase {
-    aggregationType: AggregationType
-    allItems: boolean
-    dataDimension: boolean
-    dataDimensionType: DataDimensionType
-    description: string
-    dimension: string
-    dimensionItemKeywords: unknown
-    dimensionType: DimensionType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    filter: string
-    formName: string
-    items: unknown[]
-    legendSet: LegendSet
-    optionGroups: OptionGroup[]
-    optionSet: OptionSet
-    programStage: ProgramStage
-    repetition: EventRepetition
-    shortName: string
-    valueType: ValueType
-}
-
-export interface OptionSet extends ModelBase {
-    description: string
-    options: Option[]
-    valueType: ValueType
-    version: number
-}
-
-export interface OrganisationUnit extends ModelBase {
-    address: string
-    aggregationType: AggregationType
-    ancestors: OrganisationUnit[]
-    children: OrganisationUnit[]
-    closedDate: string
-    comment: string
-    contactPerson: string
-    dataSets: DataSet[]
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    email: string
-    formName: string
-    geometry: Geometry
-    image: FileResource
-    leaf: boolean
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    level: string
-    memberCount: number
-    openingDate: string
-    organisationUnitGroups: OrganisationUnitGroup[]
-    parent: OrganisationUnit
-    path: string
-    phoneNumber: string
-    programs: Program[]
-    queryMods: unknown
-    shortName: string
-    type: string
-    url: string
-    users: User[]
-}
-
-export interface OrganisationUnitGroup extends ModelBase {
-    aggregationType: AggregationType
-    color: string
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    featureType: FeatureType
-    formName: string
-    geometry: Geometry
-    groupSets: OrganisationUnitGroupSet[]
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    organisationUnits: OrganisationUnit[]
-    queryMods: unknown
-    shortName: string
-    symbol: string
-}
-
-export interface OrganisationUnitGroupSet extends ModelBase {
-    aggregationType: AggregationType
-    allItems: boolean
-    compulsory: boolean
-    dataDimension: boolean
-    dataDimensionType: DataDimensionType
-    description: string
-    dimension: string
-    dimensionItemKeywords: unknown
-    dimensionType: DimensionType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    filter: string
-    formName: string
-    includeSubhierarchyInAnalytics: boolean
-    items: unknown[]
-    legendSet: LegendSet
-    optionSet: OptionSet
-    organisationUnitGroups: OrganisationUnitGroup[]
-    programStage: ProgramStage
-    repetition: EventRepetition
-    shortName: string
-    valueType: ValueType
-}
-
-export interface OrganisationUnitGroupSetDimension {
-    organisationUnitGroupSet: OrganisationUnitGroupSet
-    organisationUnitGroups: object
-}
-
-export interface OrganisationUnitLevel extends ModelBase {
-    level: number
-    offlineLevels: number
-}
-
-export interface OutlierAnalysis {
-    enabled: boolean
-    extremeLines: unknown
-    normalizationMethod: OutlierAnalysisNormalizationMethod
-    outlierMethod: OutlierAnalysisOutlierMethod
-    thresholdFactor: number
-}
-
-export interface Predictor extends ModelBase {
-    annualSampleCount: number
-    description: string
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    formName: string
-    generator: Expression
-    organisationUnitDescendants: PredictorOrganisationUnitDescendants
-    organisationUnitLevels: OrganisationUnitLevel[]
-    output: DataElement
-    outputCombo: CategoryOptionCombo
-    periodType: string
-    predictorGroups: PredictorGroup[]
-    sampleSkipTest: Expression
-    sequentialSampleCount: number
-    sequentialSkipCount: number
-    shortName: string
-}
-
-export interface PredictorGroup extends ModelBase {
-    description: string
-    predictors: Predictor[]
-}
-
-export interface Program extends ModelBase {
-    access: AccessWithData
-    accessLevel: ProgramAccessLevel
-    categoryCombo: CategoryCombo
-    completeEventsExpiryDays: number
-    dataEntryForm: DataEntryForm
-    description: string
-    displayDescription: string
-    displayEnrollmentDateLabel: string
-    displayFormName: string
-    displayFrontPageList: boolean
-    displayIncidentDate: boolean
-    displayIncidentDateLabel: string
-    displayShortName: string
-    enrollmentDateLabel: string
-    expiryDays: number
-    expiryPeriodType: string
-    featureType: FeatureType
-    formName: string
-    ignoreOverdueEvents: boolean
-    incidentDateLabel: string
-    maxTeiCountToReturn: number
-    minAttributesRequiredToSearch: number
-    notificationTemplates: ProgramNotificationTemplate[]
-    onlyEnrollOnce: boolean
-    openDaysAfterCoEndDate: number
-    organisationUnits: OrganisationUnit[]
-    programIndicators: ProgramIndicator[]
-    programRuleVariables: ProgramRuleVariable[]
-    programSections: ProgramSection[]
-    programStages: ProgramStage[]
-    programTrackedEntityAttributes: ProgramTrackedEntityAttribute[]
-    programType: ProgramProgramType
-    registration: boolean
-    relatedProgram: Program
-    selectEnrollmentDatesInFuture: boolean
-    selectIncidentDatesInFuture: boolean
-    shortName: string
-    skipOffline: boolean
-    style: ObjectStyle
-    trackedEntityType: TrackedEntityType
-    useFirstStageDuringRegistration: boolean
-    userRoles: UserRole[]
-    version: number
-    withoutRegistration: boolean
-}
-
-export interface ProgramDataElementDimensionItem extends ModelBase {
-    aggregationType: AggregationType
-    dataElement: DataElement
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    formName: string
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    program: Program
-    queryMods: unknown
-    shortName: string
-    valueType: ValueType
-}
-
-export interface ProgramIndicator extends ModelBase {
-    aggregateExportAttributeOptionCombo: string
-    aggregateExportCategoryOptionCombo: string
-    aggregationType: AggregationType
-    analyticsPeriodBoundaries: AnalyticsPeriodBoundary[]
-    analyticsType: ProgramIndicatorAnalyticsType
-    decimals: number
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDescription: string
-    displayFormName: string
-    displayInForm: boolean
-    displayShortName: string
-    expression: string
-    filter: string
-    formName: string
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    orgUnitField: string
-    program: Program
-    programIndicatorGroups: ProgramIndicatorGroup[]
-    queryMods: unknown
-    shortName: string
-    style: ObjectStyle
-}
-
-export interface ProgramIndicatorGroup extends ModelBase {
-    description: string
-    programIndicators: ProgramIndicator[]
-}
-
-export interface ProgramInstance extends ModelBase {
-    completedBy: string
-    createdAtClient: string
-    createdByUserInfo: unknown
-    deleted: boolean
-    endDate: string
-    enrollmentDate: string
-    followup: boolean
-    geometry: Geometry
-    incidentDate: string
-    lastUpdatedAtClient: string
-    lastUpdatedByUserInfo: unknown
-    messageConversations: MessageConversation[]
-    organisationUnit: OrganisationUnit
-    program: Program
-    programStageInstances: ProgramStageInstance[]
-    relationshipItems: unknown[]
-    status: ProgramInstanceStatus
-    storedBy: string
-    trackedEntityComments: unknown[]
-    trackedEntityInstance: TrackedEntityInstance
-}
-
-export interface ProgramNotificationTemplate extends ModelBase {
-    deliveryChannels: never[]
-    displayMessageTemplate: string
-    displaySubjectTemplate: string
-    messageTemplate: string
-    notificationRecipient: ProgramNotificationTemplateNotificationRecipient
-    notificationTrigger: ProgramNotificationTemplateNotificationTrigger
-    notifyParentOrganisationUnitOnly: boolean
-    notifyUsersInHierarchyOnly: boolean
-    recipientDataElement: DataElement
-    recipientProgramAttribute: TrackedEntityAttribute
-    recipientUserGroup: UserGroup
-    relativeScheduledDays: number
-    sendRepeatable: boolean
-    subjectTemplate: string
-}
-
-export interface ProgramRule extends ModelBase {
-    condition: string
-    description: string
-    priority: number
-    program: Program
-    programRuleActions: ProgramRuleAction[]
-    programStage: ProgramStage
-}
-
-export interface ProgramRuleAction extends ModelBase {
-    content: string
-    data: string
-    dataElement: DataElement
-    displayContent: string
-    evaluationEnvironments: never[]
-    evaluationTime: ProgramRuleActionEvaluationTime
-    location: string
-    option: Option
-    optionGroup: OptionGroup
-    programIndicator: ProgramIndicator
-    programRule: ProgramRule
-    programRuleActionType: ProgramRuleActionProgramRuleActionType
-    programStage: ProgramStage
-    programStageSection: ProgramStageSection
-    templateUid: string
-    trackedEntityAttribute: TrackedEntityAttribute
-}
-
-export interface ProgramRuleVariable extends ModelBase {
-    dataElement: DataElement
-    program: Program
-    programRuleVariableSourceType: ProgramRuleVariableProgramRuleVariableSourceType
-    programStage: ProgramStage
-    trackedEntityAttribute: TrackedEntityAttribute
-    useCodeForOptionSet: boolean
-    valueType: ValueType
-}
-
-export interface ProgramSection extends ModelBase {
-    description: string
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    formName: string
-    program: Program
-    renderType: unknown
-    shortName: string
-    sortOrder: number
-    style: ObjectStyle
-    trackedEntityAttributes: TrackedEntityAttribute[]
-}
-
-export interface ProgramStage extends ModelBase {
-    access: AccessWithData
-    allowGenerateNextVisit: boolean
-    autoGenerateEvent: boolean
-    blockEntryForm: boolean
-    dataEntryForm: DataEntryForm
-    description: string
-    displayDescription: string
-    displayDueDateLabel: string
-    displayExecutionDateLabel: string
-    displayFormName: string
-    displayGenerateEventBox: boolean
-    displayShortName: string
-    dueDateLabel: string
-    enableUserAssignment: boolean
-    executionDateLabel: string
-    featureType: FeatureType
-    formName: string
-    formType: FormType
-    generatedByEnrollmentDate: boolean
-    hideDueDate: boolean
-    minDaysFromStart: number
-    nextScheduleDate: DataElement
-    notificationTemplates: ProgramNotificationTemplate[]
-    openAfterEnrollment: boolean
-    periodType: string
-    preGenerateUID: boolean
-    program: Program
-    programStageDataElements: ProgramStageDataElement[]
-    programStageSections: ProgramStageSection[]
-    referral: boolean
-    remindCompleted: boolean
-    repeatable: boolean
-    reportDateToUse: string
-    shortName: string
-    sortOrder: number
-    standardInterval: number
-    style: ObjectStyle
-    validationStrategy: ProgramStageValidationStrategy
-}
-
-export interface ProgramStageDataElement extends ModelBase {
-    allowFutureDate: boolean
-    allowProvidedElsewhere: boolean
-    compulsory: boolean
-    dataElement: DataElement
-    displayInReports: boolean
-    programStage: ProgramStage
-    renderOptionsAsRadio: boolean
-    renderType: unknown
-    skipAnalytics: boolean
-    skipSynchronization: boolean
-    sortOrder: number
-}
-
-export interface ProgramStageInstance extends ModelBase {
-    assignedUser: User
-    attributeOptionCombo: CategoryOptionCombo
-    comments: unknown[]
-    completed: boolean
-    completedBy: string
-    completedDate: string
-    creatableInSearchScope: boolean
-    createdAtClient: string
-    createdByUserInfo: unknown
-    deleted: boolean
-    dueDate: string
-    eventDataValues: unknown[]
-    eventDate: string
-    geometry: Geometry
-    lastUpdatedAtClient: string
-    lastUpdatedByUserInfo: unknown
-    messageConversations: MessageConversation[]
-    organisationUnit: OrganisationUnit
-    programInstance: ProgramInstance
-    programStage: ProgramStage
-    relationshipItems: unknown[]
-    status: ProgramStageInstanceStatus
-    storedBy: string
-}
-
-export interface ProgramStageInstanceFilter extends ModelBase {
-    description: string
-    displayDescription: string
-    eventQueryCriteria: unknown
-    program: string
-    programStage: string
-}
-
-export interface ProgramStageSection extends ModelBase {
-    dataElements: DataElement[]
-    description: string
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    formName: string
-    programIndicators: ProgramIndicator[]
-    programStage: ProgramStage
-    renderType: unknown
-    shortName: string
-    sortOrder: number
-    style: ObjectStyle
-}
-
-export interface ProgramStageWorkingList extends ModelBase {
-    description: string
-    displayDescription: string
-    program: Program
-    programStage: ProgramStage
-    programStageQueryCriteria: unknown
-}
-
-export interface ProgramTrackedEntityAttribute extends ModelBase {
-    allowFutureDate: boolean
-    displayInList: boolean
-    displayShortName: string
-    mandatory: boolean
-    program: Program
-    renderOptionsAsRadio: boolean
-    renderType: unknown
-    searchable: boolean
-    sortOrder: number
-    trackedEntityAttribute: TrackedEntityAttribute
-    valueType: ValueType
-}
-
-export interface ProgramTrackedEntityAttributeDimensionItem extends ModelBase {
-    aggregationType: AggregationType
-    attribute: TrackedEntityAttribute
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    formName: string
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    program: Program
-    queryMods: unknown
-    shortName: string
-}
-
-export interface PushAnalysis extends ModelBase {
-    dashboard: Dashboard
-    message: string
-    recipientUserGroups: UserGroup[]
-    title: string
-}
-
-export interface Relationship extends ModelBase {
-    deleted: boolean
-    description: string
-    formName: string
-    from: unknown
-    relationshipType: RelationshipType
-    style: ObjectStyle
-    to: unknown
-}
-
-export interface RelationshipConstraint {
-    program: Program
-    programStage: ProgramStage
-    relationshipEntity: RelationshipConstraintRelationshipEntity
-    trackedEntityType: TrackedEntityType
-    trackerDataView: unknown
-}
-
-export interface RelationshipItem {
-    programInstance: ProgramInstance
-    programStageInstance: ProgramStageInstance
-    relationship: Relationship
-    trackedEntityInstance: TrackedEntityInstance
-}
-
-export interface RelationshipType extends ModelBase {
-    access: AccessWithData
-    bidirectional: boolean
-    description: string
-    displayFromToName: string
-    displayToFromName: string
-    fromConstraint: RelationshipConstraint
-    fromToName: string
-    referral: boolean
-    toConstraint: RelationshipConstraint
-    toFromName: string
-}
-
-export interface Report extends ModelBase {
-    cacheStrategy: CacheStrategy
-    designContent: string
-    relativePeriods: unknown
-    reportParams: ReportingParams
-    type: Type
-    visualization: Visualization
-}
-
-export interface ReportingRate extends ModelBase {
-    aggregationType: AggregationType
-    dataSet: DataSet
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    formName: string
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    metric: ReportingRateMetric
-    queryMods: unknown
-    shortName: string
-}
-
-export interface Route extends ModelBase {
-    auth: unknown
-    authorities: string[]
-    description: string
-    disabled: boolean
-    headers: Record<string, unknown>
-    url: string
-}
-
-export interface SMSCommand extends ModelBase {
-    codeValueSeparator: string
-    completenessMethod: SMSCommandCompletenessMethod
-    currentPeriodUsedForReporting: boolean
-    dataset: DataSet
-    defaultMessage: string
-    moreThanOneOrgUnitMessage: string
-    noUserMessage: string
-    parserType: SMSCommandParserType
-    program: Program
-    programStage: ProgramStage
-    receivedMessage: string
-    separator: string
-    smsCodes: unknown[]
-    specialCharacters: unknown[]
-    successMessage: string
-    userGroup: UserGroup
-    wrongFormatMessage: string
-}
-
-export interface Section extends ModelBase {
-    categoryCombos: CategoryCombo[]
-    dataElements: DataElement[]
-    dataSet: DataSet
-    description: string
-    disableDataElementAutoGroup: boolean
-    greyedFields: DataElementOperand[]
-    indicators: Indicator[]
-    showColumnTotals: boolean
-    showRowTotals: boolean
-    sortOrder: number
-}
-
-export interface SeriesKey {
-    hidden: boolean
-    label: unknown
-}
-
-export interface Sharing {
-    external: boolean
-    owner: string
-    public: string
-    userGroups: Record<string, unknown>
-    users: Record<string, unknown>
-}
-
-export interface SqlView extends ModelBase {
-    access: AccessWithData
-    cacheStrategy: CacheStrategy
-    description: string
-    sqlQuery: string
-    type: Type
-    updateJobId: string
-}
-
-export interface TrackedEntityAttribute extends ModelBase {
-    aggregationType: AggregationType
-    confidential: boolean
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDescription: string
-    displayFormName: string
-    displayInListNoProgram: boolean
-    displayOnVisitSchedule: boolean
-    displayShortName: string
-    expression: string
-    fieldMask: string
-    formName: string
-    generated: boolean
-    inherit: boolean
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    optionSet: OptionSet
-    optionSetValue: boolean
-    orgunitScope: boolean
-    pattern: string
-    queryMods: unknown
-    shortName: string
-    skipSynchronization: boolean
-    sortOrderInListNoProgram: number
-    sortOrderInVisitSchedule: number
-    style: ObjectStyle
-    unique: boolean
-    valueType: ValueType
-}
-
-export interface TrackedEntityAttributeValue {
-    created: string
-    lastUpdated: string
-    storedBy: string
-    trackedEntityAttribute: TrackedEntityAttribute
-    trackedEntityInstance: TrackedEntityInstance
-    value: string
-}
-
-export interface TrackedEntityDataElementDimension {
-    dataElement: DataElement
-    filter: string
-    legendSet: LegendSet
-    programStage: ProgramStage
-}
-
-export interface TrackedEntityInstance extends ModelBase {
-    createdAtClient: string
-    createdByUserInfo: unknown
-    deleted: boolean
-    geometry: Geometry
-    inactive: boolean
-    lastUpdatedAtClient: string
-    lastUpdatedByUserInfo: unknown
-    organisationUnit: OrganisationUnit
-    potentialDuplicate: boolean
-    programInstances: ProgramInstance[]
-    programOwners: ProgramOwner[]
-    relationshipItems: unknown[]
-    storedBy: string
-    trackedEntityAttributeValues: TrackedEntityAttributeValue[]
-    trackedEntityType: TrackedEntityType
-}
-
-export interface TrackedEntityInstanceFilter extends ModelBase {
-    description: string
-    displayDescription: string
-    enrollmentCreatedPeriod: unknown
-    enrollmentStatus: TrackedEntityInstanceFilterEnrollmentStatus
-    entityQueryCriteria: unknown
-    eventFilters: unknown[]
-    followup: boolean
-    program: Program
-    sortOrder: number
-    style: ObjectStyle
-}
-
-export interface TrackedEntityProgramIndicatorDimension {
-    filter: string
-    legendSet: LegendSet
-    programIndicator: ProgramIndicator
-}
-
-export interface TrackedEntityType extends ModelBase {
-    access: AccessWithData
-    allowAuditLog: boolean
-    description: string
-    displayDescription: string
-    displayFormName: string
-    displayShortName: string
-    featureType: FeatureType
-    formName: string
-    maxTeiCountToReturn: number
-    minAttributesRequiredToSearch: number
-    shortName: string
-    style: ObjectStyle
-    trackedEntityTypeAttributes: TrackedEntityTypeAttribute[]
-}
-
-export interface TrackedEntityTypeAttribute extends ModelBase {
-    displayInList: boolean
-    displayShortName: string
-    mandatory: boolean
-    searchable: boolean
-    trackedEntityAttribute: TrackedEntityAttribute
-    trackedEntityType: TrackedEntityType
-    valueType: ValueType
-}
-
-export interface User extends ModelBase {
-    accountExpiry: string
-    avatar: FileResource
-    birthday: string
-    catDimensionConstraints: Category[]
-    cogsDimensionConstraints: CategoryOptionGroupSet[]
-    dataViewMaxOrganisationUnitLevel: number
-    dataViewOrganisationUnits: OrganisationUnit[]
-    disabled: boolean
-    education: string
-    email: string
-    employer: string
-    externalAuth: boolean
-    facebookMessenger: string
-    firstName: string
-    gender: string
-    interests: string
-    introduction: string
-    invitation: boolean
-    jobTitle: string
-    languages: string
-    lastCheckedInterpretations: string
-    lastLogin: string
-    ldapId: string
-    nationality: string
-    openId: string
-    organisationUnits: OrganisationUnit[]
-    password: string
-    passwordLastUpdated: string
-    phoneNumber: string
-    selfRegistered: boolean
-    settings: string
-    skype: string
-    surname: string
-    teiSearchOrganisationUnits: OrganisationUnit[]
-    telegram: string
-    twitter: string
-    twoFactorEnabled: boolean
-    userCredentials: UserCredentialsDto
-    userGroups: UserGroup[]
-    userRoles: UserRole[]
-    username: string
-    welcomeMessage: string
-    whatsApp: string
-}
-
-export interface UserAccess {
-    access: string
-    displayName: string
-    id: string
-}
-
-export interface UserCredentialsDto {
-    access: Access
-    accountExpiry: string
-    catDimensionConstraints: Category[]
-    cogsDimensionConstraints: CategoryOptionGroupSet[]
-    disabled: boolean
-    externalAuth: boolean
-    id: string
-    idToken: string
-    invitation: boolean
-    lastLogin: string
-    ldapId: string
-    openId: string
-    password: string
-    passwordLastUpdated: string
-    previousPasswords: string[]
-    restoreExpiry: string
-    restoreToken: string
-    selfRegistered: boolean
-    sharing: Sharing
-    twoFA: boolean
-    uid: string
-    userRoles: UserRole[]
-    username: string
-    uuid: string
-}
-
-export interface UserGroup extends ModelBase {
-    managedByGroups: UserGroup[]
-    managedGroups: UserGroup[]
-    users: User[]
-}
-
-export interface UserGroupAccess {
-    access: string
-    displayName: string
-    id: string
-}
-
-export interface UserRole extends ModelBase {
-    authorities: string[]
-    description: string
-    restrictions: string[]
-    users: User[]
-}
-
-export interface ValidationNotificationTemplate extends ModelBase {
-    displayMessageTemplate: string
-    displaySubjectTemplate: string
-    messageTemplate: string
-    notifyParentOrganisationUnitOnly: boolean
-    notifyUsersInHierarchyOnly: boolean
-    recipientUserGroups: UserGroup[]
-    sendStrategy: SendStrategy
-    subjectTemplate: string
-    validationRules: ValidationRule[]
-}
-
-export interface ValidationResult {
-    attributeOptionCombo: CategoryOptionCombo
-    created: string
-    dayInPeriod: number
-    id: string
-    leftsideValue: number
-    notificationSent: boolean
-    organisationUnit: OrganisationUnit
-    period: ModelReference
-    rightsideValue: number
-    validationRule: ValidationRule
-}
-
-export interface ValidationRule extends ModelBase {
-    aggregateExportAttributeOptionCombo: string
-    aggregateExportCategoryOptionCombo: string
-    aggregationType: AggregationType
-    description: string
-    dimensionItem: string
-    dimensionItemType: DimensionItemType
-    displayDescription: string
-    displayFormName: string
-    displayInstruction: string
-    displayShortName: string
-    formName: string
-    importance: ValidationRuleImportance
-    instruction: string
-    leftSide: Expression
-    legendSet: LegendSet
-    legendSets: LegendSet[]
-    notificationTemplates: ValidationNotificationTemplate[]
-    operator: ValidationRuleOperator
-    organisationUnitLevels: number[]
-    periodType: string
-    queryMods: unknown
-    rightSide: Expression
-    shortName: string
-    skipFormValidation: boolean
-    validationRuleGroups: ValidationRuleGroup[]
-}
-
-export interface ValidationRuleGroup extends ModelBase {
-    description: string
-    validationRules: ValidationRule[]
-}
-
-export interface Visualization extends ModelBase {
-    aggregationType: AggregationType
-    attributeDimensions: unknown[]
-    axes: unknown[]
-    baseLineLabel: string
-    baseLineValue: number
-    categoryDimensions: CategoryDimension[]
-    categoryOptionGroupSetDimensions: CategoryOptionGroupSetDimension[]
-    colSubTotals: boolean
-    colTotals: boolean
-    colorSet: string
-    columnDimensions: string[]
-    columns: unknown[]
-    completedOnly: boolean
-    cumulativeValues: boolean
-    dataDimensionItems: unknown[]
-    dataElementDimensions: TrackedEntityDataElementDimension[]
-    dataElementGroupSetDimensions: DataElementGroupSetDimension[]
-    description: string
-    digitGroupSeparator: DigitGroupSeparator
-    displayBaseLineLabel: string
-    displayDensity: DisplayDensity
-    displayDescription: string
-    displayDomainAxisLabel: string
-    displayFormName: string
-    displayRangeAxisLabel: string
-    displayShortName: string
-    displaySubtitle: string
-    displayTargetLineLabel: string
-    displayTitle: string
-    domainAxisLabel: string
-    endDate: string
-    filterDimensions: string[]
-    filters: unknown[]
-    fixColumnHeaders: boolean
-    fixRowHeaders: boolean
-    fontSize: FontSize
-    fontStyle: unknown
-    formName: string
-    hideEmptyColumns: boolean
-    hideEmptyRowItems: HideEmptyRowItems
-    hideEmptyRows: boolean
-    hideLegend: boolean
-    hideSubtitle: boolean
-    hideTitle: boolean
-    icons: Icon[]
-    interpretations: Interpretation[]
-    itemOrganisationUnitGroups: OrganisationUnitGroup[]
-    legend: unknown
-    measureCriteria: string
-    noSpaceBetweenColumns: boolean
-    numberType: VisualizationNumberType
-    optionalAxes: Axis[]
-    orgUnitField: string
-    organisationUnitGroupSetDimensions: OrganisationUnitGroupSetDimension[]
-    organisationUnitLevels: number[]
-    organisationUnits: OrganisationUnit[]
-    outlierAnalysis: unknown
-    parentGraphMap: Record<string, unknown>
-    percentStackedValues: boolean
-    periods: ModelReference[]
-    programIndicatorDimensions: TrackedEntityProgramIndicatorDimension[]
-    rangeAxisDecimals: number
-    rangeAxisLabel: string
-    rangeAxisMaxValue: number
-    rangeAxisMinValue: number
-    rangeAxisSteps: number
-    regression: boolean
-    regressionType: RegressionType
-    relativePeriods: unknown
-    reportingParams: ReportingParams
-    rowDimensions: string[]
-    rowSubTotals: boolean
-    rowTotals: boolean
-    rows: unknown[]
-    series: unknown[]
-    seriesKey: unknown
-    shortName: string
-    showData: boolean
-    showDimensionLabels: boolean
-    showHierarchy: boolean
-    skipRounding: boolean
-    sortOrder: number
-    startDate: string
-    subscribed: boolean
-    subscribers: string[]
-    subtitle: string
-    targetLineLabel: string
-    targetLineValue: number
-    timeField: string
-    title: string
-    topLimit: number
-    type: Type
-    userOrgUnitType: UserOrgUnitType
-    userOrganisationUnit: boolean
-    userOrganisationUnitChildren: boolean
-    userOrganisationUnitGrandChildren: boolean
-    visualizationPeriodName: string
-    yearlySeries: string[]
-}
-
-export enum AnalyticsPeriodBoundaryAnalyticsPeriodBoundaryType {
-    AFTER_END_OF_REPORTING_PERIOD = 'AFTER_END_OF_REPORTING_PERIOD',
-    AFTER_START_OF_REPORTING_PERIOD = 'AFTER_START_OF_REPORTING_PERIOD',
-    BEFORE_END_OF_REPORTING_PERIOD = 'BEFORE_END_OF_REPORTING_PERIOD',
-    BEFORE_START_OF_REPORTING_PERIOD = 'BEFORE_START_OF_REPORTING_PERIOD',
-}
-
-export enum AnalyticsTableHookAnalyticsTableType {
-    COMPLETENESS = 'COMPLETENESS',
-    COMPLETENESS_TARGET = 'COMPLETENESS_TARGET',
-    DATA_VALUE = 'DATA_VALUE',
-    ENROLLMENT = 'ENROLLMENT',
-    EVENT = 'EVENT',
-    ORG_UNIT_TARGET = 'ORG_UNIT_TARGET',
-    OWNERSHIP = 'OWNERSHIP',
-    VALIDATION_RESULT = 'VALIDATION_RESULT',
-}
-
-export enum AnalyticsTableHookPhase {
-    ANALYTICS_TABLE_POPULATED = 'ANALYTICS_TABLE_POPULATED',
-    RESOURCE_TABLE_POPULATED = 'RESOURCE_TABLE_POPULATED',
-}
-
-export enum AnalyticsTableHookResourceTableType {
-    CATEGORY_OPTION_COMBO_NAME = 'CATEGORY_OPTION_COMBO_NAME',
-    CATEGORY_STRUCTURE = 'CATEGORY_STRUCTURE',
-    DATA_APPROVAL_MIN_LEVEL = 'DATA_APPROVAL_MIN_LEVEL',
-    DATA_APPROVAL_REMAP_LEVEL = 'DATA_APPROVAL_REMAP_LEVEL',
-    DATA_ELEMENT_CATEGORY_OPTION_COMBO = 'DATA_ELEMENT_CATEGORY_OPTION_COMBO',
-    DATA_ELEMENT_GROUP_SET_STRUCTURE = 'DATA_ELEMENT_GROUP_SET_STRUCTURE',
-    DATA_ELEMENT_STRUCTURE = 'DATA_ELEMENT_STRUCTURE',
-    DATA_SET_ORG_UNIT_CATEGORY = 'DATA_SET_ORG_UNIT_CATEGORY',
-    DATE_PERIOD_STRUCTURE = 'DATE_PERIOD_STRUCTURE',
-    INDICATOR_GROUP_SET_STRUCTURE = 'INDICATOR_GROUP_SET_STRUCTURE',
-    ORG_UNIT_GROUP_SET_STRUCTURE = 'ORG_UNIT_GROUP_SET_STRUCTURE',
-    ORG_UNIT_STRUCTURE = 'ORG_UNIT_STRUCTURE',
-    PERIOD_STRUCTURE = 'PERIOD_STRUCTURE',
-}
-
-export enum ApiTokenType {
-    PERSONAL_ACCESS_TOKEN = 'PERSONAL_ACCESS_TOKEN',
-}
-
-export enum ValueType {
-    AGE = 'AGE',
-    BOOLEAN = 'BOOLEAN',
-    COORDINATE = 'COORDINATE',
-    DATE = 'DATE',
-    DATETIME = 'DATETIME',
-    EMAIL = 'EMAIL',
-    FILE_RESOURCE = 'FILE_RESOURCE',
-    GEOJSON = 'GEOJSON',
-    IMAGE = 'IMAGE',
-    INTEGER = 'INTEGER',
-    INTEGER_NEGATIVE = 'INTEGER_NEGATIVE',
-    INTEGER_POSITIVE = 'INTEGER_POSITIVE',
-    INTEGER_ZERO_OR_POSITIVE = 'INTEGER_ZERO_OR_POSITIVE',
-    LETTER = 'LETTER',
-    LONG_TEXT = 'LONG_TEXT',
-    MULTI_TEXT = 'MULTI_TEXT',
-    NUMBER = 'NUMBER',
-    ORGANISATION_UNIT = 'ORGANISATION_UNIT',
-    PERCENTAGE = 'PERCENTAGE',
-    PHONE_NUMBER = 'PHONE_NUMBER',
-    REFERENCE = 'REFERENCE',
-    TEXT = 'TEXT',
-    TIME = 'TIME',
-    TRACKER_ASSOCIATE = 'TRACKER_ASSOCIATE',
-    TRUE_ONLY = 'TRUE_ONLY',
-    UNIT_INTERVAL = 'UNIT_INTERVAL',
-    URL = 'URL',
-    USERNAME = 'USERNAME',
-}
-
-export enum DataDimensionType {
-    ATTRIBUTE = 'ATTRIBUTE',
-    DISAGGREGATION = 'DISAGGREGATION',
-}
-
-export enum DimensionType {
-    ATTRIBUTE_OPTION_COMBO = 'ATTRIBUTE_OPTION_COMBO',
-    CATEGORY = 'CATEGORY',
-    CATEGORY_OPTION_COMBO = 'CATEGORY_OPTION_COMBO',
-    CATEGORY_OPTION_GROUP_SET = 'CATEGORY_OPTION_GROUP_SET',
-    DATA_COLLAPSED = 'DATA_COLLAPSED',
-    DATA_ELEMENT_GROUP_SET = 'DATA_ELEMENT_GROUP_SET',
-    DATA_X = 'DATA_X',
-    OPTION_GROUP_SET = 'OPTION_GROUP_SET',
-    ORGANISATION_UNIT = 'ORGANISATION_UNIT',
-    ORGANISATION_UNIT_GROUP = 'ORGANISATION_UNIT_GROUP',
-    ORGANISATION_UNIT_GROUP_SET = 'ORGANISATION_UNIT_GROUP_SET',
-    ORGANISATION_UNIT_LEVEL = 'ORGANISATION_UNIT_LEVEL',
-    PERIOD = 'PERIOD',
-    PROGRAM_ATTRIBUTE = 'PROGRAM_ATTRIBUTE',
-    PROGRAM_DATA_ELEMENT = 'PROGRAM_DATA_ELEMENT',
-    PROGRAM_INDICATOR = 'PROGRAM_INDICATOR',
-    STATIC = 'STATIC',
-    VALIDATION_RULE = 'VALIDATION_RULE',
-}
-
-export enum AggregationType {
-    AVERAGE = 'AVERAGE',
-    AVERAGE_SUM_ORG_UNIT = 'AVERAGE_SUM_ORG_UNIT',
-    COUNT = 'COUNT',
-    CUSTOM = 'CUSTOM',
-    DEFAULT = 'DEFAULT',
-    FIRST = 'FIRST',
-    FIRST_AVERAGE_ORG_UNIT = 'FIRST_AVERAGE_ORG_UNIT',
-    FIRST_FIRST_ORG_UNIT = 'FIRST_FIRST_ORG_UNIT',
-    LAST = 'LAST',
-    LAST_AVERAGE_ORG_UNIT = 'LAST_AVERAGE_ORG_UNIT',
-    LAST_IN_PERIOD = 'LAST_IN_PERIOD',
-    LAST_IN_PERIOD_AVERAGE_ORG_UNIT = 'LAST_IN_PERIOD_AVERAGE_ORG_UNIT',
-    LAST_LAST_ORG_UNIT = 'LAST_LAST_ORG_UNIT',
-    MAX = 'MAX',
-    MAX_SUM_ORG_UNIT = 'MAX_SUM_ORG_UNIT',
-    MIN = 'MIN',
-    MIN_SUM_ORG_UNIT = 'MIN_SUM_ORG_UNIT',
-    NONE = 'NONE',
-    STDDEV = 'STDDEV',
-    SUM = 'SUM',
-    VARIANCE = 'VARIANCE',
-}
-
-export enum DimensionItemType {
-    CATEGORY_OPTION = 'CATEGORY_OPTION',
-    CATEGORY_OPTION_GROUP = 'CATEGORY_OPTION_GROUP',
-    DATA_ELEMENT = 'DATA_ELEMENT',
-    DATA_ELEMENT_GROUP = 'DATA_ELEMENT_GROUP',
-    DATA_ELEMENT_OPERAND = 'DATA_ELEMENT_OPERAND',
-    EXPRESSION_DIMENSION_ITEM = 'EXPRESSION_DIMENSION_ITEM',
-    INDICATOR = 'INDICATOR',
-    OPTION_GROUP = 'OPTION_GROUP',
-    ORGANISATION_UNIT = 'ORGANISATION_UNIT',
-    ORGANISATION_UNIT_GROUP = 'ORGANISATION_UNIT_GROUP',
-    PERIOD = 'PERIOD',
-    PROGRAM_ATTRIBUTE = 'PROGRAM_ATTRIBUTE',
-    PROGRAM_DATA_ELEMENT = 'PROGRAM_DATA_ELEMENT',
-    PROGRAM_INDICATOR = 'PROGRAM_INDICATOR',
-    REPORTING_RATE = 'REPORTING_RATE',
-}
-
-export enum DashboardItemType {
-    APP = 'APP',
-    EVENT_CHART = 'EVENT_CHART',
-    EVENT_REPORT = 'EVENT_REPORT',
-    EVENT_VISUALIZATION = 'EVENT_VISUALIZATION',
-    MAP = 'MAP',
-    MESSAGES = 'MESSAGES',
-    REPORTS = 'REPORTS',
-    RESOURCES = 'RESOURCES',
-    TEXT = 'TEXT',
-    USERS = 'USERS',
-    VISUALIZATION = 'VISUALIZATION',
-}
-
-export enum DashboardItemShape {
-    DOUBLE_WIDTH = 'DOUBLE_WIDTH',
-    FULL_WIDTH = 'FULL_WIDTH',
-    NORMAL = 'NORMAL',
-}
-
-export enum DataElementDomainType {
-    AGGREGATE = 'AGGREGATE',
-    TRACKER = 'TRACKER',
-}
-
-export enum DataEntryFormStyle {
-    COMFORTABLE = 'COMFORTABLE',
-    COMPACT = 'COMPACT',
-    NONE = 'NONE',
-    NORMAL = 'NORMAL',
-}
-
-export enum FormType {
-    CUSTOM = 'CUSTOM',
-    DEFAULT = 'DEFAULT',
-    SECTION = 'SECTION',
-    SECTION_MULTIORG = 'SECTION_MULTIORG',
-}
-
-export enum DataSetNotificationTemplateDataSetNotificationTrigger {
-    DATA_SET_COMPLETION = 'DATA_SET_COMPLETION',
-    SCHEDULED_DAYS = 'SCHEDULED_DAYS',
-}
-
-export enum SendStrategy {
-    COLLECTIVE_SUMMARY = 'COLLECTIVE_SUMMARY',
-    SINGLE_NOTIFICATION = 'SINGLE_NOTIFICATION',
-}
-
-export enum DataSetNotificationTemplateNotificationRecipient {
-    ORGANISATION_UNIT_CONTACT = 'ORGANISATION_UNIT_CONTACT',
-    USER_GROUP = 'USER_GROUP',
-}
-
-export enum Type {
-    AREA = 'AREA',
-    BAR = 'BAR',
-    BUBBLE = 'BUBBLE',
-    COLUMN = 'COLUMN',
-    GAUGE = 'GAUGE',
-    LINE = 'LINE',
-    LINE_LIST = 'LINE_LIST',
-    PIE = 'PIE',
-    PIVOT_TABLE = 'PIVOT_TABLE',
-    RADAR = 'RADAR',
-    SCATTER = 'SCATTER',
-    SINGLE_VALUE = 'SINGLE_VALUE',
-    STACKED_AREA = 'STACKED_AREA',
-    STACKED_BAR = 'STACKED_BAR',
-    STACKED_COLUMN = 'STACKED_COLUMN',
-    YEAR_OVER_YEAR_COLUMN = 'YEAR_OVER_YEAR_COLUMN',
-    YEAR_OVER_YEAR_LINE = 'YEAR_OVER_YEAR_LINE',
-}
-
-export enum EventStatus {
-    ACTIVE = 'ACTIVE',
-    COMPLETED = 'COMPLETED',
-    OVERDUE = 'OVERDUE',
-    SCHEDULE = 'SCHEDULE',
-    SKIPPED = 'SKIPPED',
-    VISITED = 'VISITED',
-}
-
-export enum RegressionType {
-    LINEAR = 'LINEAR',
-    LOESS = 'LOESS',
-    NONE = 'NONE',
-    POLYNOMIAL = 'POLYNOMIAL',
-}
-
-export enum ProgramStatus {
-    ACTIVE = 'ACTIVE',
-    CANCELLED = 'CANCELLED',
-    COMPLETED = 'COMPLETED',
-}
-
-export enum HideEmptyRowItems {
-    AFTER_LAST = 'AFTER_LAST',
-    ALL = 'ALL',
-    BEFORE_FIRST = 'BEFORE_FIRST',
-    BEFORE_FIRST_AFTER_LAST = 'BEFORE_FIRST_AFTER_LAST',
-    NONE = 'NONE',
-}
-
-export enum OutputType {
-    ENROLLMENT = 'ENROLLMENT',
-    EVENT = 'EVENT',
-    TRACKED_ENTITY_INSTANCE = 'TRACKED_ENTITY_INSTANCE',
-}
-
-export enum EventChartLegendDisplayStrategy {
-    BY_DATA_ITEM = 'BY_DATA_ITEM',
-    FIXED = 'FIXED',
-}
-
-export enum DigitGroupSeparator {
-    COMMA = 'COMMA',
-    NONE = 'NONE',
-    SPACE = 'SPACE',
-}
-
-export enum UserOrgUnitType {
-    DATA_CAPTURE = 'DATA_CAPTURE',
-    DATA_OUTPUT = 'DATA_OUTPUT',
-    TEI_SEARCH = 'TEI_SEARCH',
-}
-
-export enum EventRepetitionParent {
-    COLUMN = 'COLUMN',
-    FILTER = 'FILTER',
-    ROW = 'ROW',
-}
-
-export enum DisplayDensity {
-    COMFORTABLE = 'COMFORTABLE',
-    COMPACT = 'COMPACT',
-    NONE = 'NONE',
-    NORMAL = 'NORMAL',
-}
-
-export enum DataType {
-    AGGREGATED_VALUES = 'AGGREGATED_VALUES',
-    EVENTS = 'EVENTS',
-}
-
-export enum FontSize {
-    LARGE = 'LARGE',
-    NORMAL = 'NORMAL',
-    SMALL = 'SMALL',
-}
-
-export enum MissingValueStrategy {
-    NEVER_SKIP = 'NEVER_SKIP',
-    SKIP_IF_ALL_VALUES_MISSING = 'SKIP_IF_ALL_VALUES_MISSING',
-    SKIP_IF_ANY_VALUE_MISSING = 'SKIP_IF_ANY_VALUE_MISSING',
-}
-
-export enum ExternalMapLayerImageFormat {
-    JPG = 'JPG',
-    PNG = 'PNG',
-}
-
-export enum ExternalMapLayerMapService {
-    TMS = 'TMS',
-    VECTOR_STYLE = 'VECTOR_STYLE',
-    WMS = 'WMS',
-    XYZ = 'XYZ',
-}
-
-export enum ExternalMapLayerMapLayerPosition {
-    BASEMAP = 'BASEMAP',
-    OVERLAY = 'OVERLAY',
-}
-
-export enum FileResourceStorageStatus {
-    FAILED = 'FAILED',
-    NONE = 'NONE',
-    PENDING = 'PENDING',
-    STORED = 'STORED',
-}
-
-export enum FileResourceDomain {
-    DATA_VALUE = 'DATA_VALUE',
-    DOCUMENT = 'DOCUMENT',
-    MESSAGE_ATTACHMENT = 'MESSAGE_ATTACHMENT',
-    ORG_UNIT = 'ORG_UNIT',
-    PUSH_ANALYSIS = 'PUSH_ANALYSIS',
-    USER_AVATAR = 'USER_AVATAR',
-}
-
-export enum InterpretationType {
-    DATASET_REPORT = 'DATASET_REPORT',
-    EVENT_CHART = 'EVENT_CHART',
-    EVENT_REPORT = 'EVENT_REPORT',
-    EVENT_VISUALIZATION = 'EVENT_VISUALIZATION',
-    MAP = 'MAP',
-    VISUALIZATION = 'VISUALIZATION',
-}
-
-export enum ItemConfigInsertPosition {
-    END = 'END',
-    START = 'START',
-}
-
-export enum JobConfigurationJobStatus {
-    COMPLETED = 'COMPLETED',
-    DISABLED = 'DISABLED',
-    FAILED = 'FAILED',
-    NOT_STARTED = 'NOT_STARTED',
-    RUNNING = 'RUNNING',
-    SCHEDULED = 'SCHEDULED',
-    STOPPED = 'STOPPED',
-}
-
-export enum JobConfigurationJobType {
-    ACCOUNT_EXPIRY_ALERT = 'ACCOUNT_EXPIRY_ALERT',
-    AGGREGATE_DATA_EXCHANGE = 'AGGREGATE_DATA_EXCHANGE',
-    ANALYTICSTABLE_UPDATE = 'ANALYTICSTABLE_UPDATE',
-    ANALYTICS_TABLE = 'ANALYTICS_TABLE',
-    COMPLETE_DATA_SET_REGISTRATION_IMPORT = 'COMPLETE_DATA_SET_REGISTRATION_IMPORT',
-    CONTINUOUS_ANALYTICS_TABLE = 'CONTINUOUS_ANALYTICS_TABLE',
-    CREDENTIALS_EXPIRY_ALERT = 'CREDENTIALS_EXPIRY_ALERT',
-    DATAVALUE_IMPORT = 'DATAVALUE_IMPORT',
-    DATAVALUE_IMPORT_INTERNAL = 'DATAVALUE_IMPORT_INTERNAL',
-    DATA_INTEGRITY = 'DATA_INTEGRITY',
-    DATA_SET_NOTIFICATION = 'DATA_SET_NOTIFICATION',
-    DATA_STATISTICS = 'DATA_STATISTICS',
-    DATA_SYNC = 'DATA_SYNC',
-    DISABLE_INACTIVE_USERS = 'DISABLE_INACTIVE_USERS',
-    ENROLLMENT_IMPORT = 'ENROLLMENT_IMPORT',
-    EVENT_IMPORT = 'EVENT_IMPORT',
-    EVENT_PROGRAMS_DATA_SYNC = 'EVENT_PROGRAMS_DATA_SYNC',
-    FILE_RESOURCE_CLEANUP = 'FILE_RESOURCE_CLEANUP',
-    GEOJSON_IMPORT = 'GEOJSON_IMPORT',
-    GML_IMPORT = 'GML_IMPORT',
-    IMAGE_PROCESSING = 'IMAGE_PROCESSING',
-    LEADER_ELECTION = 'LEADER_ELECTION',
-    LEADER_RENEWAL = 'LEADER_RENEWAL',
-    MATERIALIZED_SQL_VIEW_UPDATE = 'MATERIALIZED_SQL_VIEW_UPDATE',
-    METADATA_IMPORT = 'METADATA_IMPORT',
-    META_DATA_SYNC = 'META_DATA_SYNC',
-    MOCK = 'MOCK',
-    MONITORING = 'MONITORING',
-    PREDICTOR = 'PREDICTOR',
-    PROGRAM_DATA_SYNC = 'PROGRAM_DATA_SYNC',
-    PROGRAM_NOTIFICATIONS = 'PROGRAM_NOTIFICATIONS',
-    PUSH_ANALYSIS = 'PUSH_ANALYSIS',
-    REMOVE_USED_OR_EXPIRED_RESERVED_VALUES = 'REMOVE_USED_OR_EXPIRED_RESERVED_VALUES',
-    RESOURCE_TABLE = 'RESOURCE_TABLE',
-    SEND_SCHEDULED_MESSAGE = 'SEND_SCHEDULED_MESSAGE',
-    SMS_SEND = 'SMS_SEND',
-    SYSTEM_VERSION_UPDATE_CHECK = 'SYSTEM_VERSION_UPDATE_CHECK',
-    TEI_IMPORT = 'TEI_IMPORT',
-    TEST = 'TEST',
-    TRACKER_IMPORT_JOB = 'TRACKER_IMPORT_JOB',
-    TRACKER_IMPORT_NOTIFICATION_JOB = 'TRACKER_IMPORT_NOTIFICATION_JOB',
-    TRACKER_IMPORT_RULE_ENGINE_JOB = 'TRACKER_IMPORT_RULE_ENGINE_JOB',
-    TRACKER_PROGRAMS_DATA_SYNC = 'TRACKER_PROGRAMS_DATA_SYNC',
-    TRACKER_SEARCH_OPTIMIZATION = 'TRACKER_SEARCH_OPTIMIZATION',
-    VALIDATION_RESULTS_NOTIFICATION = 'VALIDATION_RESULTS_NOTIFICATION',
-}
-
-export enum JobConfigurationSchedulingType {
-    CRON = 'CRON',
-    FIXED_DELAY = 'FIXED_DELAY',
-}
-
-export enum JobConfigurationLastExecutedStatus {
-    COMPLETED = 'COMPLETED',
-    DISABLED = 'DISABLED',
-    FAILED = 'FAILED',
-    NOT_STARTED = 'NOT_STARTED',
-    RUNNING = 'RUNNING',
-    SCHEDULED = 'SCHEDULED',
-    STOPPED = 'STOPPED',
-}
-
-export enum LegendDefinitionsStyle {
-    FILL = 'FILL',
-    TEXT = 'TEXT',
-}
-
-export enum LegendDefinitionsStrategy {
-    BY_DATA_ITEM = 'BY_DATA_ITEM',
-    FIXED = 'FIXED',
-}
-
-export enum MapViewOrganisationUnitSelectionMode {
-    ACCESSIBLE = 'ACCESSIBLE',
-    ALL = 'ALL',
-    CAPTURE = 'CAPTURE',
-    CHILDREN = 'CHILDREN',
-    DESCENDANTS = 'DESCENDANTS',
-    SELECTED = 'SELECTED',
-}
-
-export enum MapViewRenderingStrategy {
-    SINGLE = 'SINGLE',
-    SPLIT_BY_PERIOD = 'SPLIT_BY_PERIOD',
-    TIMELINE = 'TIMELINE',
-}
-
-export enum MapViewEventStatus {
-    ACTIVE = 'ACTIVE',
-    COMPLETED = 'COMPLETED',
-    OVERDUE = 'OVERDUE',
-    SCHEDULE = 'SCHEDULE',
-    SKIPPED = 'SKIPPED',
-}
-
-export enum MapViewThematicMapType {
-    BUBBLE = 'BUBBLE',
-    CHOROPLETH = 'CHOROPLETH',
-}
-
-export enum MessageConversationMessageType {
-    PRIVATE = 'PRIVATE',
-    SYSTEM = 'SYSTEM',
-    SYSTEM_VERSION_UPDATE = 'SYSTEM_VERSION_UPDATE',
-    TICKET = 'TICKET',
-    VALIDATION_RESULT = 'VALIDATION_RESULT',
-}
-
-export enum MessageConversationPriority {
-    HIGH = 'HIGH',
-    LOW = 'LOW',
-    MEDIUM = 'MEDIUM',
-    NONE = 'NONE',
-}
-
-export enum MessageConversationStatus {
-    INVALID = 'INVALID',
-    NONE = 'NONE',
-    OPEN = 'OPEN',
-    PENDING = 'PENDING',
-    SOLVED = 'SOLVED',
-}
-
-export enum MetadataProposalType {
-    ADD = 'ADD',
-    REMOVE = 'REMOVE',
-    UPDATE = 'UPDATE',
-}
-
-export enum MetadataProposalTarget {
-    ORGANISATION_UNIT = 'ORGANISATION_UNIT',
-}
-
-export enum MetadataProposalStatus {
-    ACCEPTED = 'ACCEPTED',
-    NEEDS_UPDATE = 'NEEDS_UPDATE',
-    PROPOSED = 'PROPOSED',
-    REJECTED = 'REJECTED',
-}
-
-export enum MetadataVersionType {
-    ATOMIC = 'ATOMIC',
-    BEST_EFFORT = 'BEST_EFFORT',
-}
-
-export enum FeatureType {
-    MULTI_POLYGON = 'MULTI_POLYGON',
-    NONE = 'NONE',
-    POINT = 'POINT',
-    POLYGON = 'POLYGON',
-    SYMBOL = 'SYMBOL',
-}
-
-export enum OutlierAnalysisNormalizationMethod {
-    Y_RESIDUALS_LINEAR = 'Y_RESIDUALS_LINEAR',
-}
-
-export enum OutlierAnalysisOutlierMethod {
-    IQR = 'IQR',
-    MODIFIED_Z_SCORE = 'MODIFIED_Z_SCORE',
-    STANDARD_Z_SCORE = 'STANDARD_Z_SCORE',
-}
-
-export enum PredictorOrganisationUnitDescendants {
-    DESCENDANTS = 'DESCENDANTS',
-    SELECTED = 'SELECTED',
-}
-
-export enum ProgramProgramType {
-    WITHOUT_REGISTRATION = 'WITHOUT_REGISTRATION',
-    WITH_REGISTRATION = 'WITH_REGISTRATION',
-}
-
-export enum ProgramAccessLevel {
-    AUDITED = 'AUDITED',
-    CLOSED = 'CLOSED',
-    OPEN = 'OPEN',
-    PROTECTED = 'PROTECTED',
-}
-
-export enum ProgramIndicatorAnalyticsType {
-    ENROLLMENT = 'ENROLLMENT',
-    EVENT = 'EVENT',
-}
-
-export enum ProgramInstanceStatus {
-    ACTIVE = 'ACTIVE',
-    CANCELLED = 'CANCELLED',
-    COMPLETED = 'COMPLETED',
-}
-
-export enum ProgramNotificationTemplateNotificationTrigger {
-    COMPLETION = 'COMPLETION',
-    ENROLLMENT = 'ENROLLMENT',
-    PROGRAM_RULE = 'PROGRAM_RULE',
-    SCHEDULED_DAYS_DUE_DATE = 'SCHEDULED_DAYS_DUE_DATE',
-    SCHEDULED_DAYS_ENROLLMENT_DATE = 'SCHEDULED_DAYS_ENROLLMENT_DATE',
-    SCHEDULED_DAYS_INCIDENT_DATE = 'SCHEDULED_DAYS_INCIDENT_DATE',
-}
-
-export enum ProgramNotificationTemplateNotificationRecipient {
-    DATA_ELEMENT = 'DATA_ELEMENT',
-    ORGANISATION_UNIT_CONTACT = 'ORGANISATION_UNIT_CONTACT',
-    PROGRAM_ATTRIBUTE = 'PROGRAM_ATTRIBUTE',
-    TRACKED_ENTITY_INSTANCE = 'TRACKED_ENTITY_INSTANCE',
-    USERS_AT_ORGANISATION_UNIT = 'USERS_AT_ORGANISATION_UNIT',
-    USER_GROUP = 'USER_GROUP',
-    WEB_HOOK = 'WEB_HOOK',
-}
-
-export enum ProgramRuleActionProgramRuleActionType {
-    ASSIGN = 'ASSIGN',
-    CREATEEVENT = 'CREATEEVENT',
-    DISPLAYKEYVALUEPAIR = 'DISPLAYKEYVALUEPAIR',
-    DISPLAYTEXT = 'DISPLAYTEXT',
-    ERRORONCOMPLETE = 'ERRORONCOMPLETE',
-    HIDEFIELD = 'HIDEFIELD',
-    HIDEOPTION = 'HIDEOPTION',
-    HIDEOPTIONGROUP = 'HIDEOPTIONGROUP',
-    HIDEPROGRAMSTAGE = 'HIDEPROGRAMSTAGE',
-    HIDESECTION = 'HIDESECTION',
-    SCHEDULEMESSAGE = 'SCHEDULEMESSAGE',
-    SENDMESSAGE = 'SENDMESSAGE',
-    SETMANDATORYFIELD = 'SETMANDATORYFIELD',
-    SHOWERROR = 'SHOWERROR',
-    SHOWOPTIONGROUP = 'SHOWOPTIONGROUP',
-    SHOWWARNING = 'SHOWWARNING',
-    WARNINGONCOMPLETE = 'WARNINGONCOMPLETE',
-}
-
-export enum ProgramRuleActionEvaluationTime {
-    ALWAYS = 'ALWAYS',
-    ON_COMPLETE = 'ON_COMPLETE',
-    ON_DATA_ENTRY = 'ON_DATA_ENTRY',
-}
-
-export enum ProgramRuleVariableProgramRuleVariableSourceType {
-    CALCULATED_VALUE = 'CALCULATED_VALUE',
-    DATAELEMENT_CURRENT_EVENT = 'DATAELEMENT_CURRENT_EVENT',
-    DATAELEMENT_NEWEST_EVENT_PROGRAM = 'DATAELEMENT_NEWEST_EVENT_PROGRAM',
-    DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE = 'DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE',
-    DATAELEMENT_PREVIOUS_EVENT = 'DATAELEMENT_PREVIOUS_EVENT',
-    TEI_ATTRIBUTE = 'TEI_ATTRIBUTE',
-}
-
-export enum ProgramStageValidationStrategy {
-    ON_COMPLETE = 'ON_COMPLETE',
-    ON_UPDATE_AND_INSERT = 'ON_UPDATE_AND_INSERT',
-}
-
-export enum ProgramStageInstanceStatus {
-    ACTIVE = 'ACTIVE',
-    COMPLETED = 'COMPLETED',
-    OVERDUE = 'OVERDUE',
-    SCHEDULE = 'SCHEDULE',
-    SKIPPED = 'SKIPPED',
-    VISITED = 'VISITED',
-}
-
-export enum RelationshipConstraintRelationshipEntity {
-    PROGRAM_INSTANCE = 'PROGRAM_INSTANCE',
-    PROGRAM_STAGE_INSTANCE = 'PROGRAM_STAGE_INSTANCE',
-    TRACKED_ENTITY_INSTANCE = 'TRACKED_ENTITY_INSTANCE',
-}
-
-export enum ReportType {
-    HTML = 'HTML',
-    JASPER_JDBC = 'JASPER_JDBC',
-    JASPER_REPORT_TABLE = 'JASPER_REPORT_TABLE',
-}
-
-export enum CacheStrategy {
-    CACHE_10_MINUTES = 'CACHE_10_MINUTES',
-    CACHE_15_MINUTES = 'CACHE_15_MINUTES',
-    CACHE_1_HOUR = 'CACHE_1_HOUR',
-    CACHE_1_MINUTE = 'CACHE_1_MINUTE',
-    CACHE_30_MINUTES = 'CACHE_30_MINUTES',
-    CACHE_5_MINUTES = 'CACHE_5_MINUTES',
-    CACHE_6AM_TOMORROW = 'CACHE_6AM_TOMORROW',
-    CACHE_TWO_WEEKS = 'CACHE_TWO_WEEKS',
-    NO_CACHE = 'NO_CACHE',
-    RESPECT_SYSTEM_SETTING = 'RESPECT_SYSTEM_SETTING',
-}
-
-export enum ReportingRateMetric {
-    ACTUAL_REPORTS = 'ACTUAL_REPORTS',
-    ACTUAL_REPORTS_ON_TIME = 'ACTUAL_REPORTS_ON_TIME',
-    EXPECTED_REPORTS = 'EXPECTED_REPORTS',
-    REPORTING_RATE = 'REPORTING_RATE',
-    REPORTING_RATE_ON_TIME = 'REPORTING_RATE_ON_TIME',
-}
-
-export enum SMSCommandCompletenessMethod {
-    ALL_DATAVALUE = 'ALL_DATAVALUE',
-    AT_LEAST_ONE_DATAVALUE = 'AT_LEAST_ONE_DATAVALUE',
-    DO_NOT_MARK_COMPLETE = 'DO_NOT_MARK_COMPLETE',
-}
-
-export enum SMSCommandParserType {
-    ALERT_PARSER = 'ALERT_PARSER',
-    EVENT_REGISTRATION_PARSER = 'EVENT_REGISTRATION_PARSER',
-    J2ME_PARSER = 'J2ME_PARSER',
-    KEY_VALUE_PARSER = 'KEY_VALUE_PARSER',
-    PROGRAM_STAGE_DATAENTRY_PARSER = 'PROGRAM_STAGE_DATAENTRY_PARSER',
-    TRACKED_ENTITY_REGISTRATION_PARSER = 'TRACKED_ENTITY_REGISTRATION_PARSER',
-    UNREGISTERED_PARSER = 'UNREGISTERED_PARSER',
-}
-
-export enum SqlViewType {
-    MATERIALIZED_VIEW = 'MATERIALIZED_VIEW',
-    QUERY = 'QUERY',
-    VIEW = 'VIEW',
-}
-
-export enum TrackedEntityInstanceFilterEnrollmentStatus {
-    ACTIVE = 'ACTIVE',
-    CANCELLED = 'CANCELLED',
-    COMPLETED = 'COMPLETED',
-}
-
-export enum ValidationRuleImportance {
-    HIGH = 'HIGH',
-    LOW = 'LOW',
-    MEDIUM = 'MEDIUM',
-}
-
-export enum ValidationRuleOperator {
-    compulsory_pair = 'compulsory_pair',
-    equal_to = 'equal_to',
-    exclusive_pair = 'exclusive_pair',
-    greater_than = 'greater_than',
-    greater_than_or_equal_to = 'greater_than_or_equal_to',
-    less_than = 'less_than',
-    less_than_or_equal_to = 'less_than_or_equal_to',
-    not_equal_to = 'not_equal_to',
-}
-
-export enum VisualizationType {
-    AREA = 'AREA',
-    BAR = 'BAR',
-    BUBBLE = 'BUBBLE',
-    COLUMN = 'COLUMN',
-    GAUGE = 'GAUGE',
-    LINE = 'LINE',
-    PIE = 'PIE',
-    PIVOT_TABLE = 'PIVOT_TABLE',
-    RADAR = 'RADAR',
-    SCATTER = 'SCATTER',
-    SINGLE_VALUE = 'SINGLE_VALUE',
-    STACKED_AREA = 'STACKED_AREA',
-    STACKED_BAR = 'STACKED_BAR',
-    STACKED_COLUMN = 'STACKED_COLUMN',
-    YEAR_OVER_YEAR_COLUMN = 'YEAR_OVER_YEAR_COLUMN',
-    YEAR_OVER_YEAR_LINE = 'YEAR_OVER_YEAR_LINE',
-}
-
-export enum VisualizationNumberType {
-    COLUMN_PERCENTAGE = 'COLUMN_PERCENTAGE',
-    ROW_PERCENTAGE = 'ROW_PERCENTAGE',
-    VALUE = 'VALUE',
-}
-
-export type Model =
-    | AggregateDataExchange
-    | AnalyticsPeriodBoundary
-    | AnalyticsTableHook
-    | ApiToken
-    | Attribute
-    | AttributeValue
-    | Axis
-    | Category
-    | CategoryCombo
-    | CategoryDimension
-    | CategoryOption
-    | CategoryOptionCombo
-    | CategoryOptionGroup
-    | CategoryOptionGroupSet
-    | CategoryOptionGroupSetDimension
-    | Constant
-    | Dashboard
-    | DashboardItem
-    | DataApprovalLevel
-    | DataApprovalWorkflow
-    | DataElement
-    | DataElementGroup
-    | DataElementGroupSet
-    | DataElementGroupSetDimension
-    | DataElementOperand
-    | DataEntryForm
-    | DataInputPeriod
-    | DataSet
-    | DataSetElement
-    | DataSetNotificationTemplate
-    | DatastoreEntry
-    | Document
-    | EventChart
-    | EventHook
-    | EventRepetition
-    | EventReport
-    | EventVisualization
-    | Expression
-    | ExpressionDimensionItem
-    | ExternalFileResource
-    | ExternalMapLayer
-    | FileResource
-    | Icon
-    | Indicator
-    | IndicatorGroup
-    | IndicatorGroupSet
-    | IndicatorType
-    | Interpretation
-    | InterpretationComment
-    | ItemConfig
-    | JobConfiguration
-    | Legend
-    | LegendDefinitions
-    | LegendSet
-    | Map
-    | MapView
-    | MessageConversation
-    | MetadataProposal
-    | MetadataVersion
-    | MinMaxDataElement
-    | OAuth2Client
-    | ObjectStyle
-    | Option
-    | OptionGroup
-    | OptionGroupSet
-    | OptionSet
-    | OrganisationUnit
-    | OrganisationUnitGroup
-    | OrganisationUnitGroupSet
-    | OrganisationUnitGroupSetDimension
-    | OrganisationUnitLevel
-    | OutlierAnalysis
-    | Predictor
-    | PredictorGroup
-    | Program
-    | ProgramDataElementDimensionItem
-    | ProgramIndicator
-    | ProgramIndicatorGroup
-    | ProgramInstance
-    | ProgramNotificationTemplate
-    | ProgramRule
-    | ProgramRuleAction
-    | ProgramRuleVariable
-    | ProgramSection
-    | ProgramStage
-    | ProgramStageDataElement
-    | ProgramStageInstance
-    | ProgramStageInstanceFilter
-    | ProgramStageSection
-    | ProgramStageWorkingList
-    | ProgramTrackedEntityAttribute
-    | ProgramTrackedEntityAttributeDimensionItem
-    | PushAnalysis
-    | Relationship
-    | RelationshipConstraint
-    | RelationshipItem
-    | RelationshipType
-    | Report
-    | ReportingRate
-    | Route
-    | SMSCommand
-    | Section
-    | SeriesKey
-    | Sharing
-    | SqlView
-    | TrackedEntityAttribute
-    | TrackedEntityAttributeValue
-    | TrackedEntityDataElementDimension
-    | TrackedEntityInstance
-    | TrackedEntityInstanceFilter
-    | TrackedEntityProgramIndicatorDimension
-    | TrackedEntityType
-    | TrackedEntityTypeAttribute
-    | User
-    | UserAccess
-    | UserCredentialsDto
-    | UserGroup
-    | UserGroupAccess
-    | UserRole
-    | ValidationNotificationTemplate
-    | ValidationResult
-    | ValidationRule
-    | ValidationRuleGroup
-    | Visualization
+/* istanbul ignore file */
+/* tslint:disable */
+
+export type { Access } from './models/Access'
+export type { AccessData } from './models/AccessData'
+export type { AddOperation } from './models/AddOperation'
+export type { AggregateDataExchange } from './models/AggregateDataExchange'
+export type { AggregateDataExchangeJobParameters } from './models/AggregateDataExchangeJobParameters'
+export type { AnalyticsJobParameters } from './models/AnalyticsJobParameters'
+export { AnalyticsPeriodBoundary } from './models/AnalyticsPeriodBoundary'
+export { AnalyticsTableHook } from './models/AnalyticsTableHook'
+export type { Api } from './models/Api'
+export { ApiToken } from './models/ApiToken'
+export type { ApiTokenAuth } from './models/ApiTokenAuth'
+export { App } from './models/App'
+export type { AppActivities } from './models/AppActivities'
+export type { AppDeveloper } from './models/AppDeveloper'
+export type { AppDhis } from './models/AppDhis'
+export type { AppIcons } from './models/AppIcons'
+export type { ApprovalDto } from './models/ApprovalDto'
+export type { ApprovalsDto } from './models/ApprovalsDto'
+export { ApprovalStatusDto } from './models/ApprovalStatusDto'
+export type { AppSettings } from './models/AppSettings'
+export type { AppVersion } from './models/AppVersion'
+export { Attribute } from './models/Attribute'
+export type { AttributeValue } from './models/AttributeValue'
+export type { AttributeValueFilter } from './models/AttributeValueFilter'
+export type { AvailabilityStatus } from './models/AvailabilityStatus'
+export type { Axis } from './models/Axis'
+export { AxisV2 } from './models/AxisV2'
+export type { BaseIdentifiableObject } from './models/BaseIdentifiableObject'
+export type { BatchResponseStatus } from './models/BatchResponseStatus'
+export type { Body } from './models/Body'
+export type { BulkJsonPatch } from './models/BulkJsonPatch'
+export type { BulkSmsGatewayConfig } from './models/BulkSmsGatewayConfig'
+export type { CascadeSharingReport } from './models/CascadeSharingReport'
+export { Category } from './models/Category'
+export { CategoryCombo } from './models/CategoryCombo'
+export type { CategoryDimension } from './models/CategoryDimension'
+export { CategoryOption } from './models/CategoryOption'
+export { CategoryOptionCombo } from './models/CategoryOptionCombo'
+export { CategoryOptionGroup } from './models/CategoryOptionGroup'
+export { CategoryOptionGroupSet } from './models/CategoryOptionGroupSet'
+export type { CategoryOptionGroupSetDimension } from './models/CategoryOptionGroupSetDimension'
+export type { ClickatellGatewayConfig } from './models/ClickatellGatewayConfig'
+export type { CodeList } from './models/CodeList'
+export type { Column } from './models/Column'
+export type { CompleteStatusDto } from './models/CompleteStatusDto'
+export { Config } from './models/Config'
+export { Configuration } from './models/Configuration'
+export type { ConsoleTarget } from './models/ConsoleTarget'
+export type { Constant } from './models/Constant'
+export type { ContinuousAnalyticsJobParameters } from './models/ContinuousAnalyticsJobParameters'
+export { CustomDataEntryFormDto } from './models/CustomDataEntryFormDto'
+export type { Dashboard } from './models/Dashboard'
+export { DashboardItem } from './models/DashboardItem'
+export type { DashboardSearchResult } from './models/DashboardSearchResult'
+export type { DashboardWidgetAppSettings } from './models/DashboardWidgetAppSettings'
+export type { DataAnalysisParams } from './models/DataAnalysisParams'
+export type { DataApprovalLevel } from './models/DataApprovalLevel'
+export type { DataApprovalPermissions } from './models/DataApprovalPermissions'
+export { DataApprovalWorkflow } from './models/DataApprovalWorkflow'
+export type { DatabaseInfo } from './models/DatabaseInfo'
+export { DataDimensionItem } from './models/DataDimensionItem'
+export { DataElement } from './models/DataElement'
+export type { DataElementGroup } from './models/DataElementGroup'
+export { DataElementGroupSet } from './models/DataElementGroupSet'
+export type { DataElementGroupSetDimension } from './models/DataElementGroupSetDimension'
+export type { DataElementOperand } from './models/DataElementOperand'
+export { DataEntryForm } from './models/DataEntryForm'
+export type { DataInputPeriod } from './models/DataInputPeriod'
+export { DataIntegrityCheck } from './models/DataIntegrityCheck'
+export type { DataIntegrityDetails } from './models/DataIntegrityDetails'
+export type { DataIntegrityIssue } from './models/DataIntegrityIssue'
+export { DataIntegrityJobParameters } from './models/DataIntegrityJobParameters'
+export type { DataIntegritySummary } from './models/DataIntegritySummary'
+export { DataSet } from './models/DataSet'
+export type { DataSetCompletionDto } from './models/DataSetCompletionDto'
+export type { DataSetElement } from './models/DataSetElement'
+export { DataSetNotificationTemplate } from './models/DataSetNotificationTemplate'
+export type { DatastoreEntry } from './models/DatastoreEntry'
+export type { DataSummary } from './models/DataSummary'
+export type { DataSynchronizationJobParameters } from './models/DataSynchronizationJobParameters'
+export type { DataValue } from './models/DataValue'
+export { DataValueAuditDto } from './models/DataValueAuditDto'
+export type { DataValueCategoryDto } from './models/DataValueCategoryDto'
+export type { DataValueContextDto } from './models/DataValueContextDto'
+export type { DataValueDto } from './models/DataValueDto'
+export type { DataValueFollowUpRequest } from './models/DataValueFollowUpRequest'
+export { DataValuesDto } from './models/DataValuesDto'
+export type { DataValueSet } from './models/DataValueSet'
+export type { DataValuesFollowUpRequest } from './models/DataValuesFollowUpRequest'
+export { DateFilterPeriod } from './models/DateFilterPeriod'
+export type { DeflatedDataValue } from './models/DeflatedDataValue'
+export type { DeletedObject } from './models/DeletedObject'
+export type { Developer } from './models/Developer'
+export type { Dhis2Info } from './models/Dhis2Info'
+export type { DimensionalItemObject } from './models/DimensionalItemObject'
+export type { DimensionalObject } from './models/DimensionalObject'
+export type { DimensionItemKeywords } from './models/DimensionItemKeywords'
+export type { DisableInactiveUsersJobParameters } from './models/DisableInactiveUsersJobParameters'
+export type { Document } from './models/Document'
+export type { Dxf2DeprecatedTrackerEvent_DataValue } from './models/Dxf2DeprecatedTrackerEvent_DataValue'
+export { Dxf2DeprecatedTrackerEvent_Event } from './models/Dxf2DeprecatedTrackerEvent_Event'
+export { Dxf2DeprecatedTrackerTrackedentity_Attribute } from './models/Dxf2DeprecatedTrackerTrackedentity_Attribute'
+export type { Email } from './models/Email'
+export { Enrollment } from './models/Enrollment'
+export { Entity } from './models/Entity'
+export { EntityQueryCriteria } from './models/EntityQueryCriteria'
+export type { EntriesResponse } from './models/EntriesResponse'
+export type { Error } from './models/Error'
+export { ErrorReport } from './models/ErrorReport'
+export { Event } from './models/Event'
+export type { EventDataFilter } from './models/EventDataFilter'
+export type { EventDataValue } from './models/EventDataValue'
+export type { EventFilter } from './models/EventFilter'
+export type { EventHook } from './models/EventHook'
+export type { Eventhook_Source } from './models/Eventhook_Source'
+export type { EventProgramsDataSynchronizationJobParameters } from './models/EventProgramsDataSynchronizationJobParameters'
+export { EventQueryCriteria } from './models/EventQueryCriteria'
+export { EventRepetition } from './models/EventRepetition'
+export type { EventRow } from './models/EventRow'
+export type { EventRows } from './models/EventRows'
+export { EventVisualization } from './models/EventVisualization'
+export type { ExecutionPlan } from './models/ExecutionPlan'
+export { Expression } from './models/Expression'
+export { ExpressionDimensionItem } from './models/ExpressionDimensionItem'
+export { ExternalMapLayer } from './models/ExternalMapLayer'
+export type { FavoriteStatistics } from './models/FavoriteStatistics'
+export { Field } from './models/Field'
+export type { FieldPath } from './models/FieldPath'
+export type { FieldPathTransformer } from './models/FieldPathTransformer'
+export { FileResource } from './models/FileResource'
+export { FileResourceOwner } from './models/FileResourceOwner'
+export type { FileTypeValueOptions } from './models/FileTypeValueOptions'
+export type { Filter } from './models/Filter'
+export type { FilterPeriod } from './models/FilterPeriod'
+export type { FollowupAnalysisMetadata } from './models/FollowupAnalysisMetadata'
+export type { FollowupAnalysisResponse } from './models/FollowupAnalysisResponse'
+export type { FollowupParams } from './models/FollowupParams'
+export type { FollowupValue } from './models/FollowupValue'
+export { FontStyle } from './models/FontStyle'
+export type { Form } from './models/Form'
+export type { GenericGatewayParameter } from './models/GenericGatewayParameter'
+export { GenericHttpGatewayConfig } from './models/GenericHttpGatewayConfig'
+export type { GeoFeature } from './models/GeoFeature'
+export type { GistPager } from './models/GistPager'
+export { GistPreferences } from './models/GistPreferences'
+export type { GoogleAccessToken } from './models/GoogleAccessToken'
+export type { Grid } from './models/Grid'
+export { GridHeader } from './models/GridHeader'
+export type { GridResponse } from './models/GridResponse'
+export type { Group } from './models/Group'
+export type { HttpBasicAuth } from './models/HttpBasicAuth'
+export type { I18nLocale } from './models/I18nLocale'
+export type { I18nOutput } from './models/I18nOutput'
+export { Icon } from './models/Icon'
+export type { IconDto } from './models/IconDto'
+export type { IconResponse } from './models/IconResponse'
+export type { IdentifiableObject } from './models/IdentifiableObject'
+export type { IdentifiableObjects } from './models/IdentifiableObjects'
+export type { IdObject } from './models/IdObject'
+export { IdScheme } from './models/IdScheme'
+export type { IdSchemes } from './models/IdSchemes'
+export type { ImageResource } from './models/ImageResource'
+export { ImportConflict } from './models/ImportConflict'
+export type { ImportConflicts } from './models/ImportConflicts'
+export type { ImportCount } from './models/ImportCount'
+export { ImportOptions } from './models/ImportOptions'
+export { ImportReport } from './models/ImportReport'
+export { ImportSummaries } from './models/ImportSummaries'
+export { ImportSummary } from './models/ImportSummary'
+export { IncomingSms } from './models/IncomingSms'
+export type { IndexResource } from './models/IndexResource'
+export type { IndexResources } from './models/IndexResources'
+export { Indicator } from './models/Indicator'
+export type { IndicatorGroup } from './models/IndicatorGroup'
+export type { IndicatorGroupSet } from './models/IndicatorGroupSet'
+export type { IndicatorType } from './models/IndicatorType'
+export { Interpretation } from './models/Interpretation'
+export type { IpAllowedList } from './models/IpAllowedList'
+export { Item } from './models/Item'
+export { ItemConfig } from './models/ItemConfig'
+export type { JmsTarget } from './models/JmsTarget'
+export { JobConfiguration } from './models/JobConfiguration'
+export { JobTypeInfo } from './models/JobTypeInfo'
+export type { JobTypes } from './models/JobTypes'
+export type { JsonPatch } from './models/JsonPatch'
+export type { JsonRoot } from './models/JsonRoot'
+export type { KafkaTarget } from './models/KafkaTarget'
+export type { Keyword } from './models/Keyword'
+export type { Layout } from './models/Layout'
+export type { LeaderNodeInfo } from './models/LeaderNodeInfo'
+export type { Legend } from './models/Legend'
+export { LegendDefinitions } from './models/LegendDefinitions'
+export type { LegendSet } from './models/LegendSet'
+export type { Line } from './models/Line'
+export type { LockExceptionDto } from './models/LockExceptionDto'
+export type { LockExceptionsDto } from './models/LockExceptionsDto'
+export type { Map } from './models/Map'
+export { MapView } from './models/MapView'
+export type { MeDto as CurrentUser } from './models/MeDto'
+export type { Mention } from './models/Mention'
+export type { MergeObject } from './models/MergeObject'
+export { MessageConversation } from './models/MessageConversation'
+export type { Meta } from './models/Meta'
+export type { MetadataAdjustParams } from './models/MetadataAdjustParams'
+export { MetadataExportParams } from './models/MetadataExportParams'
+export { MetadataImportParams } from './models/MetadataImportParams'
+export { MetadataItem } from './models/MetadataItem'
+export type { MetadataProposeParams } from './models/MetadataProposeParams'
+export type { MetadataSyncJobParameters } from './models/MetadataSyncJobParameters'
+export { MetadataVersion } from './models/MetadataVersion'
+export type { MethodAllowedList } from './models/MethodAllowedList'
+export type { MinMaxValueDto } from './models/MinMaxValueDto'
+export type { MinMaxValueParams } from './models/MinMaxValueParams'
+export type { MonitoringJobParameters } from './models/MonitoringJobParameters'
+export { Node } from './models/Node'
+export type { Note } from './models/Note'
+export { Notification } from './models/Notification'
+export type { ObjectCount } from './models/ObjectCount'
+export type { ObjectReport } from './models/ObjectReport'
+export type { ObjectStyle } from './models/ObjectStyle'
+export { ObjectValueTypeRenderingOption } from './models/ObjectValueTypeRenderingOption'
+export type { Option } from './models/Option'
+export { OptionGroup } from './models/OptionGroup'
+export { OptionGroupSet } from './models/OptionGroupSet'
+export { OptionSet } from './models/OptionSet'
+export { OrderCriteria } from './models/OrderCriteria'
+export { OrganisationUnit } from './models/OrganisationUnit'
+export { OrganisationUnitGroup } from './models/OrganisationUnitGroup'
+export { OrganisationUnitGroupSet } from './models/OrganisationUnitGroupSet'
+export type { OrganisationUnitGroupSetDimension } from './models/OrganisationUnitGroupSetDimension'
+export type { OrganisationUnitLevel } from './models/OrganisationUnitLevel'
+export { OrgUnitInfo } from './models/OrgUnitInfo'
+export { OrgUnitMergeQuery } from './models/OrgUnitMergeQuery'
+export type { OrgUnitProfile } from './models/OrgUnitProfile'
+export type { OrgUnitProfileData } from './models/OrgUnitProfileData'
+export type { OrgUnitSplitQuery } from './models/OrgUnitSplitQuery'
+export { OutboundMessageResponseSummary } from './models/OutboundMessageResponseSummary'
+export { OutboundSms } from './models/OutboundSms'
+export { OutlierAnalysis } from './models/OutlierAnalysis'
+export { OutlierDetectionMetadata } from './models/OutlierDetectionMetadata'
+export type { OutlierDetectionResponse } from './models/OutlierDetectionResponse'
+export type { OutlierLine } from './models/OutlierLine'
+export type { OutlierValue } from './models/OutlierValue'
+export type { Pager } from './models/Pager'
+export type { PerformanceMetrics } from './models/PerformanceMetrics'
+export type { Period } from './models/Period'
+export type { PersistenceReport } from './models/PersistenceReport'
+export { PotentialDuplicate } from './models/PotentialDuplicate'
+export { Predictor } from './models/Predictor'
+export type { PredictorGroup } from './models/PredictorGroup'
+export type { PredictorJobParameters } from './models/PredictorJobParameters'
+export { Process } from './models/Process'
+export { ProcessInfo } from './models/ProcessInfo'
+export type { ProfileItem } from './models/ProfileItem'
+export { Program } from './models/Program'
+export { ProgramDataElementDimensionItem } from './models/ProgramDataElementDimensionItem'
+export { ProgramIndicator } from './models/ProgramIndicator'
+export type { ProgramIndicatorGroup } from './models/ProgramIndicatorGroup'
+export { ProgramMessage } from './models/ProgramMessage'
+export type { ProgramMessageRecipients } from './models/ProgramMessageRecipients'
+export { ProgramNotificationTemplate } from './models/ProgramNotificationTemplate'
+export type { ProgramOwner } from './models/ProgramOwner'
+export type { ProgramRule } from './models/ProgramRule'
+export { ProgramRuleAction } from './models/ProgramRuleAction'
+export { ProgramRuleVariable } from './models/ProgramRuleVariable'
+export type { ProgramSection } from './models/ProgramSection'
+export { ProgramStage } from './models/ProgramStage'
+export type { ProgramStageDataElement } from './models/ProgramStageDataElement'
+export { ProgramStageQueryCriteria } from './models/ProgramStageQueryCriteria'
+export type { ProgramStageSection } from './models/ProgramStageSection'
+export type { ProgramStageWorkingList } from './models/ProgramStageWorkingList'
+export { ProgramTrackedEntityAttribute } from './models/ProgramTrackedEntityAttribute'
+export type { ProgramTrackedEntityAttributeDimensionItem } from './models/ProgramTrackedEntityAttributeDimensionItem'
+export { Property } from './models/Property'
+export type { PushAnalysis } from './models/PushAnalysis'
+export type { PushAnalysisJobParameters } from './models/PushAnalysisJobParameters'
+export { QueryModifiers } from './models/QueryModifiers'
+export type { Rectangle } from './models/Rectangle'
+export type { Ref_EventChart } from './models/Ref_EventChart'
+export type { Ref_EventReport } from './models/Ref_EventReport'
+export type { Ref_InterpretationComment } from './models/Ref_InterpretationComment'
+export type { Ref_Message } from './models/Ref_Message'
+export type { Ref_Program_Enrollment } from './models/Ref_Program_Enrollment'
+export type { Ref_Relationship_Relationship } from './models/Ref_Relationship_Relationship'
+export type { Ref_SimpleEventVisualizationView } from './models/Ref_SimpleEventVisualizationView'
+export type { Ref_SimpleVisualizationView } from './models/Ref_SimpleVisualizationView'
+export type { Ref_SubexpressionDimensionItem } from './models/Ref_SubexpressionDimensionItem'
+export type { Ref_TrackedEntityComment } from './models/Ref_TrackedEntityComment'
+export type { Reference } from './models/Reference'
+export type { RefererAllowedList } from './models/RefererAllowedList'
+export type { Relationship } from './models/Relationship'
+export type { Relationship_RelationshipItem } from './models/Relationship_RelationshipItem'
+export { RelationshipConstraint } from './models/RelationshipConstraint'
+export type { RelationshipItem } from './models/RelationshipItem'
+export type { RelationshipType } from './models/RelationshipType'
+export type { RelativePeriods } from './models/RelativePeriods'
+export type { RemoveByIdOperation } from './models/RemoveByIdOperation'
+export type { RemoveOperation } from './models/RemoveOperation'
+export type { ReplaceOperation } from './models/ReplaceOperation'
+export { Report } from './models/Report'
+export type { ReportingParams } from './models/ReportingParams'
+export { ReportingRate } from './models/ReportingRate'
+export type { RequestInfo } from './models/RequestInfo'
+export type { ReservedValue } from './models/ReservedValue'
+export type { Review } from './models/Review'
+export type { Route } from './models/Route'
+export { SchedulerEntry } from './models/SchedulerEntry'
+export { SchedulerEntryJob } from './models/SchedulerEntryJob'
+export type { SchedulerQueue } from './models/SchedulerQueue'
+export type { Section as DataSetSection } from './models/Section'
+export { Series } from './models/Series'
+export type { SeriesKey } from './models/SeriesKey'
+export type { Sharing } from './models/Sharing'
+export type { SharingObject } from './models/SharingObject'
+export type { SharingUser } from './models/SharingUser'
+export type { SharingUserAccess } from './models/SharingUserAccess'
+export type { SharingUserGroupAccess } from './models/SharingUserGroupAccess'
+export { SimpleDimension } from './models/SimpleDimension'
+export type { SimpleImageResource } from './models/SimpleImageResource'
+export { SMPPGatewayConfig } from './models/SMPPGatewayConfig'
+export type { SMSCode } from './models/SMSCode'
+export { SMSCommand } from './models/SMSCommand'
+export type { SmsConfiguration } from './models/SmsConfiguration'
+export type { SmsJobParameters } from './models/SmsJobParameters'
+export type { SMSSpecialCharacter } from './models/SMSSpecialCharacter'
+export type { Source } from './models/Source'
+export type { SourceParams } from './models/SourceParams'
+export type { SourceRequest } from './models/SourceRequest'
+export type { Spacing } from './models/Spacing'
+export { SqlView } from './models/SqlView'
+export type { SqlViewUpdateParameters } from './models/SqlViewUpdateParameters'
+export { Stage } from './models/Stage'
+export type { Stats } from './models/Stats'
+export { StyledObject } from './models/StyledObject'
+export type { StyleObject } from './models/StyleObject'
+export type { SystemInfo } from './models/SystemInfo'
+export { Target } from './models/Target'
+export type { TargetRequest } from './models/TargetRequest'
+export { TestJobParameters } from './models/TestJobParameters'
+export type { TimingsStats } from './models/TimingsStats'
+export type { TrackedEntity } from './models/TrackedEntity'
+export { TrackedEntityAttribute } from './models/TrackedEntityAttribute'
+export type { TrackedEntityAttributeDimension } from './models/TrackedEntityAttributeDimension'
+export type { TrackedEntityAttributeValue } from './models/TrackedEntityAttributeValue'
+export type { TrackedEntityDataElementDimension } from './models/TrackedEntityDataElementDimension'
+export { TrackedEntityFilter } from './models/TrackedEntityFilter'
+export { Trackedentityfilter_EventFilter } from './models/Trackedentityfilter_EventFilter'
+export { TrackedEntityInstance } from './models/TrackedEntityInstance'
+export type { TrackedEntityProgramIndicatorDimension } from './models/TrackedEntityProgramIndicatorDimension'
+export type { TrackedEntityProgramOwner } from './models/TrackedEntityProgramOwner'
+export { TrackedEntityType } from './models/TrackedEntityType'
+export { TrackedEntityTypeAttribute } from './models/TrackedEntityTypeAttribute'
+export type { TrackerDataView } from './models/TrackerDataView'
+export { TrackerIdSchemeParam } from './models/TrackerIdSchemeParam'
+export { TrackerImportsReport_ImportReport } from './models/TrackerImportsReport_ImportReport'
+export type { TrackerImportsReport_Stats } from './models/TrackerImportsReport_Stats'
+export type { TrackerProgramsDataSynchronizationJobParameters } from './models/TrackerProgramsDataSynchronizationJobParameters'
+export type { TrackerTrigramIndexJobParameters } from './models/TrackerTrigramIndexJobParameters'
+export { TrackerTypeReport } from './models/TrackerTypeReport'
+export type { Translation } from './models/Translation'
+export type { TrigramSummary } from './models/TrigramSummary'
+export type { TypeReport } from './models/TypeReport'
+export type { UID_CategoryCombo } from './models/UID_CategoryCombo'
+export type { UID_CategoryOptionCombo } from './models/UID_CategoryOptionCombo'
+export type { UID_DataApprovalWorkflow } from './models/UID_DataApprovalWorkflow'
+export type { UID_DataElement } from './models/UID_DataElement'
+export type { UID_DataSet } from './models/UID_DataSet'
+export type { UID_JobConfiguration } from './models/UID_JobConfiguration'
+export type { UID_OrganisationUnit } from './models/UID_OrganisationUnit'
+export type { UID_RelationshipType } from './models/UID_RelationshipType'
+export type { UID_WebapiControllerTrackerView_Attribute } from './models/UID_WebapiControllerTrackerView_Attribute'
+export type { UID_WebapiControllerTrackerView_Enrollment } from './models/UID_WebapiControllerTrackerView_Enrollment'
+export type { UID_WebapiControllerTrackerView_Event } from './models/UID_WebapiControllerTrackerView_Event'
+export type { UID_WebapiControllerTrackerView_Note } from './models/UID_WebapiControllerTrackerView_Note'
+export type { UID_WebapiControllerTrackerView_Relationship } from './models/UID_WebapiControllerTrackerView_Relationship'
+export type { UID_WebapiControllerTrackerView_TrackedEntity } from './models/UID_WebapiControllerTrackerView_TrackedEntity'
+export type { UID_WebapiControllerTrackerView_User } from './models/UID_WebapiControllerTrackerView_User'
+export type { UID_WebapiControllerTrackerViewRelationshipItem_Enrollment } from './models/UID_WebapiControllerTrackerViewRelationshipItem_Enrollment'
+export type { UID_WebapiControllerTrackerViewRelationshipItem_Event } from './models/UID_WebapiControllerTrackerViewRelationshipItem_Event'
+export type { UID_WebapiControllerTrackerViewRelationshipItem_TrackedEntity } from './models/UID_WebapiControllerTrackerViewRelationshipItem_TrackedEntity'
+export type { UpdateFollowUpForDataValuesRequest } from './models/UpdateFollowUpForDataValuesRequest'
+export type { User } from './models/User'
+export type { UserAccess } from './models/UserAccess'
+export type { UserCredentialsDto } from './models/UserCredentialsDto'
+export type { UserGroup } from './models/UserGroup'
+export type { UserGroupAccess } from './models/UserGroupAccess'
+export type { UserInfoSnapshot } from './models/UserInfoSnapshot'
+export type { UserLookup } from './models/UserLookup'
+export type { UserLookups } from './models/UserLookups'
+export type { UserMessage } from './models/UserMessage'
+export type { UserRole } from './models/UserRole'
+export { UserSettings } from './models/UserSettings'
+export { ValidationNotificationTemplate } from './models/ValidationNotificationTemplate'
+export type { ValidationReport } from './models/ValidationReport'
+export type { ValidationResult } from './models/ValidationResult'
+export type { ValidationResultView } from './models/ValidationResultView'
+export { ValidationRule } from './models/ValidationRule'
+export type { ValidationRuleExpressionDetails } from './models/ValidationRuleExpressionDetails'
+export type { ValidationRuleGroup } from './models/ValidationRuleGroup'
+export type { ValidationRulesAnalysisParams } from './models/ValidationRulesAnalysisParams'
+export type { ValidationSummary } from './models/ValidationSummary'
+export type { ValueTypeOptions } from './models/ValueTypeOptions'
+export { Visualization } from './models/Visualization'
+export type { VisualizationFontStyle } from './models/VisualizationFontStyle'
+export type { Warning } from './models/Warning'
+export type { WebapiControllerDatastoreController_Pager } from './models/WebapiControllerDatastoreController_Pager'
+export { WebapiControllerTrackerView_Attribute } from './models/WebapiControllerTrackerView_Attribute'
+export type { WebapiControllerTrackerView_DataValue } from './models/WebapiControllerTrackerView_DataValue'
+export { WebapiControllerTrackerView_Enrollment } from './models/WebapiControllerTrackerView_Enrollment'
+export { WebapiControllerTrackerView_Event } from './models/WebapiControllerTrackerView_Event'
+export type { WebapiControllerTrackerView_Note } from './models/WebapiControllerTrackerView_Note'
+export type { WebapiControllerTrackerView_ProgramOwner } from './models/WebapiControllerTrackerView_ProgramOwner'
+export type { WebapiControllerTrackerView_Relationship } from './models/WebapiControllerTrackerView_Relationship'
+export type { WebapiControllerTrackerView_RelationshipItem } from './models/WebapiControllerTrackerView_RelationshipItem'
+export type { WebapiControllerTrackerView_TrackedEntity } from './models/WebapiControllerTrackerView_TrackedEntity'
+export type { WebapiControllerTrackerView_User } from './models/WebapiControllerTrackerView_User'
+export { WebapiControllerTrackerViewRelationshipItem_Enrollment } from './models/WebapiControllerTrackerViewRelationshipItem_Enrollment'
+export { WebapiControllerTrackerViewRelationshipItem_Event } from './models/WebapiControllerTrackerViewRelationshipItem_Event'
+export type { WebapiControllerTrackerViewRelationshipItem_TrackedEntity } from './models/WebapiControllerTrackerViewRelationshipItem_TrackedEntity'
+export type { WebapiWebdomain_Dashboard } from './models/WebapiWebdomain_Dashboard'
+export type { WebapiWebdomain_MessageConversation } from './models/WebapiWebdomain_MessageConversation'
+export type { WebapiWebdomainForm_Category } from './models/WebapiWebdomainForm_Category'
+export type { WebapiWebdomainForm_CategoryCombo } from './models/WebapiWebdomainForm_CategoryCombo'
+export type { WebapiWebdomainForm_Option } from './models/WebapiWebdomainForm_Option'
+export type { WebapiWebdomainSharing_Sharing } from './models/WebapiWebdomainSharing_Sharing'
+export { WebApp } from './models/WebApp'
+export type { WebhookTarget } from './models/WebhookTarget'
+export type { WebLocale } from './models/WebLocale'
+export { WebMessage } from './models/WebMessage'
+export type { WebModule } from './models/WebModule'
+export type { GistModel } from './utility'
