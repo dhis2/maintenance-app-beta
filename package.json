@@ -12,7 +12,8 @@
         "lint": "yarn d2-style check",
         "lint:staged": "yarn lint --staged",
         "format": "yarn d2-style apply",
-        "format:staged": "yarn format --staged"
+        "format:staged": "yarn format --staged",
+        "check-types": "tsc --noemit"
     },
     "devDependencies": {
         "@dhis2/cli-app-scripts": "^10.2.0",
