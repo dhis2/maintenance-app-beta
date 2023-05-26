@@ -10,6 +10,7 @@ const createAuthTypes = [
     SchemaAuthorityType.CREATE_PRIVATE,
     SchemaAuthorityType.CREATE_PUBLIC,
 ] as const
+
 const canCreateAuthTypes = new Set(createAuthTypes)
 type CreateAuthType = (typeof createAuthTypes)[number]
 
@@ -53,6 +54,9 @@ export const useCanCreate = (
     return useIsOperationAllowed(section, createAuthType)
 }
 
+// note the access.delete property on the target model should also be checked
+// before trying to delete a model
+// but this can be used to check wether a delete component should be rendered for a section at all
 export const useCanDelete = (section: Section | SchemaName) => {
     return useIsOperationAllowed(section, SchemaAuthorityType.DELETE)
 }
