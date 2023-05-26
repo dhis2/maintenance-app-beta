@@ -1,16 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-declare namespace NodeJS {
-    interface Process {
-        env: {
-            [key: string]: string | undefined
-            NODE_ENV: 'development' | 'production' | 'test'
-        }
-    }
-}
 
 declare module '@dhis2/d2-i18n' {
     export function t(key: string, options?: any): string
 }
+
+declare module '@dhis2/ui'
+declare module '@dhis2/ui-icons'
 
 declare module '*.bmp' {
     const src: string
