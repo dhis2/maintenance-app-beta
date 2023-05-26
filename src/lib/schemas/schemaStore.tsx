@@ -1,12 +1,12 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import type { SchemaName } from '../../types'
-import type { Schemas } from './useLoadSchemas'
+import type { ModelSchemas } from '../useLoadApp'
 
 export interface SchemasStore {
-    schemas: Schemas | undefined
-    getSchemas: () => Schemas
-    setSchemas: (schemas: Schemas) => void
+    schemas: ModelSchemas | undefined
+    getSchemas: () => ModelSchemas
+    setSchemas: (schemas: ModelSchemas) => void
 }
 
 export const useSchemaStore = create<SchemasStore>()(
