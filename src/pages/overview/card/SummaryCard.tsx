@@ -17,7 +17,7 @@ const SummaryCardHeader = ({ children }: PropsWithChildren) => (
 )
 
 interface SummaryCardGroupProps {
-    title: string
+    title?: string
 }
 export const SummaryCardGroup = ({
     children,

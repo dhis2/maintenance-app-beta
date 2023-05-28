@@ -11,7 +11,7 @@ const getLegacyBaseUrl = (baseUrl: string) => `${baseUrl}${legacyPath}`
 
 // some sections does not have the same "parent"-section in legacy app
 // so we need to map them to the correct "parent" in the legacy app
-const legacySectionMap = {
+const legacySectionMap: Record<string, string> = {
     [SECTIONS_MAP.program.parentSectionKey]: 'program',
 }
 
@@ -29,8 +29,7 @@ const getLegacySectionPath = (
     }
 
     const legacySection =
-        legacySectionMap[section?.parentSectionKey ?? ''] ??
-        section.parentSectionKey
+        legacySectionMap[section.parentSectionKey] ?? section.parentSectionKey
 
     return `${view}/${legacySection}Section/${section.name}/${id}`
 }
