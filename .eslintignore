@@ -1,1 +1,13 @@
+# DHIS2 Platform
+node_modules
+.d2
+src/locales
+build
+cypress.env.json
+.vscode
+.env.development.local
+.env.test.local
+.env.production.local
+cypress/screenshots/*
+
 src/types/generated
