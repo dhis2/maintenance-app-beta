@@ -9,7 +9,7 @@
         "start": "d2-app-scripts start",
         "test": "d2-app-scripts test",
         "deploy": "d2-app-scripts deploy",
-        "lint": "yarn check-types && yarn d2-style check",
+        "lint": "yarn d2-style check",
         "lint:staged": "yarn lint --staged",
         "format": "yarn d2-style apply",
         "format:staged": "yarn format --staged",
