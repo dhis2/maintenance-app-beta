@@ -1,0 +1,23 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: maintenance-app-beta
+  description: |
+    The new version of Mantenance app 
+  links:
+    - title: Website
+      url: http://backstage.io
+    - title: Documentation
+      url: https://backstage.io/docs
+    - title: Storybook
+      url: https://backstage.io/storybook
+    - title: Discord Chat
+      url: https://discord.com/invite/EBHEGzX
+  annotations:
+    github.com/project-slug: dhis2/maintenance-app-beta
+    # backstage.io/techdocs-ref: dir:.
+    # lighthouse.com/website-url: https://backstage.io
+spec:
+  type: web-app
+  owner: platform-frontend
+  lifecycle: beta
