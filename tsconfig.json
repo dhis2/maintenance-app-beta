@@ -20,8 +20,5 @@
         "jsx": "react",
         "rootDir": "src"
     },
-    // include entrypoint instead of wildcard to prevent adding
-    // untracked files
-    "include": ["src/App.tsx", "global.d.ts", "**/*.test.*"],
     "exclude": ["node_modules", "build"]
 }
