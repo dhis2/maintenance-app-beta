@@ -6,7 +6,8 @@ import { NotFound } from './NotFoundRoute'
 import { isNotFoundError } from './utils'
 
 export const DefaultErrorRoute = () => {
-    const error = useRouteError()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const error: any = useRouteError()
     const isRouteError = isRouteErrorResponse(error)
 
     let title = 'An error occurred'

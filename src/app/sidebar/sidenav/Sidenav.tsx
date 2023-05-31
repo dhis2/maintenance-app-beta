@@ -99,7 +99,7 @@ interface SidenavLinkProps {
 }
 
 interface SidenavLinkBaseProps {
-    disabled: boolean
+    disabled?: boolean
 }
 
 export const SidenavLinkBase = ({
