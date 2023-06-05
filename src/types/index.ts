@@ -1,1 +1,1 @@
-export * from './errors'
+export type * from './query'

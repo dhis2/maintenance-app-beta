@@ -11,8 +11,8 @@ import {
     useParams,
 } from 'react-router-dom'
 import { SECTIONS_MAP, Section } from '../../constants'
+import { isModuleNotFoundError } from '../../lib'
 import { isValidUid } from '../../models'
-import { isModuleNotFoundError } from '../../types'
 import { Layout } from '../layout'
 import { DefaultErrorRoute } from './DefaultErrorRoute'
 import { LegacyAppRedirect } from './LegacyAppRedirect'
