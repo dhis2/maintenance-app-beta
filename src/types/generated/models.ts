@@ -3774,12 +3774,12 @@ export type GeoFeature = {
 }
 
 export type GistPager = {
-    nextPage: string
+    nextPage?: string
     page: number
-    pageCount: number
+    pageCount?: number
     pageSize: number
-    prevPage: string
-    total: number
+    prevPage?: string
+    total?: number
 }
 
 export type GistPreferences = {
@@ -6762,11 +6762,11 @@ export type OutlierValue = {
 }
 
 export type Pager = {
-    nextPage: string
+    nextPage?: string
     page: number
     pageCount: number
     pageSize: number
-    prevPage: string
+    prevPage?: string
     total: number
 }
 

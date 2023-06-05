@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { CircularLoader, NoticeBox } from '@dhis2/ui'
 import React from 'react'
-import { QueryResponse } from '../../types/query'
+import { QueryResponse } from '../../types'
 import styles from './Loader.module.css'
 
 interface LoaderProps {

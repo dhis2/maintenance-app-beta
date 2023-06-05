@@ -19,9 +19,6 @@
         "esModuleInterop": true,
         "jsx": "react",
         "rootDir": "src"
-
-        // This caused some NASTY bugs with Context usage (different imports = different instances)
-        // "forceConsistentCasingInFileNames": true
     },
     "exclude": ["node_modules", "build"]
 }
