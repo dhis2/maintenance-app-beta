@@ -4,6 +4,7 @@ import { Outlet, useMatches } from 'react-router-dom'
 import { MatchRouteHandle } from '../routes/types'
 import { Sidebar } from '../sidebar'
 import css from './Layout.module.css'
+import { RouteProgress } from './progressbar/RouteProgressBar'
 
 interface BaseLayoutProps {
     children: React.ReactNode
@@ -47,6 +48,7 @@ export const Layout = () => {
 
     return (
         <SidebarLayout hideSidebar={hideSidebar}>
+            <RouteProgress />
             <Outlet />
         </SidebarLayout>
     )
