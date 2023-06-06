@@ -32,22 +32,26 @@ export type GistModelCollection<T> = GistModel<T>[]
 // need it's own type because the key is based on the resource
 export type GistModelCollectionPart<
     T extends IdentifiableObject,
-    Resource extends string
+    Resource extends string = string
 > = {
     [K in Resource]: GistModel<T>[]
 }
 
-export type GistCollectionResponse<
-    T extends IdentifiableObject,
-    Resource extends string
-> = {
+export type GistPagedResponse = {
     pager: GistPager
-} & GistModelCollectionPart<T, Resource>
+}
 
-export type GistObjectResponse<T extends IdentifiableObject> = GistModel<T>
+export type GistCollectionResponse<
+    T extends IdentifiableObject = IdentifiableObject,
+    Resource extends string = string
+> = GistPagedResponse & GistModelCollectionPart<T, Resource>
+
+export type GistObjectResponse<
+    T extends IdentifiableObject = IdentifiableObject
+> = GistModel<T>
 
 export type GistResponse<
-    T extends IdentifiableObject,
+    T extends IdentifiableObject = IdentifiableObject,
     R extends string = string
 > = GistCollectionResponse<T, R> | GistObjectResponse<T>
 
