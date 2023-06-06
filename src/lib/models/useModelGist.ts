@@ -41,8 +41,9 @@ function createGistQuery(
     return {
         result: {
             resource: `${resource}`,
-            params: ({ page }) => ({
+            params: ({ page, ...dynamicParams }) => ({
                 ...params,
+                ...dynamicParams,
                 page,
             }),
         },
@@ -87,7 +88,7 @@ type GistPaginator = {
 
 type BaseUseGistModelResult<Response> = Pick<
     QueryResponse,
-    'loading' | 'error' | 'called'
+    'loading' | 'error' | 'called' | 'refetch'
 > & {
     data?: Response
 }
@@ -107,26 +108,17 @@ const isDataCollection = (
     return (data as GistCollectionResponse)?.pager !== undefined
 }
 
-export function useModelGist<
-    Response extends GistPagedResponse,
-    R extends string = string
-    // ResourceType extends GistResourceTypeEnum = ResolveResourceTypeFromString<R>
->(
+export function useModelGist<Response extends GistPagedResponse>(
     gistResource: GistResourceString,
     params?: GistParams
 ): UseGistModelResultPaginated<Response>
-export function useModelGist<
-    Response extends GistObjectResponse
-    // ResourceType extends GistResourceTypeEnum = ResolveResourceTypeFromString<R>
->(
+
+export function useModelGist<Response extends GistObjectResponse>(
     gistResource: GistResourceString,
     params?: GistParams
 ): UseGistModelResult<Response>
-export function useModelGist<
-    Response extends GistResponse<IdentifiableObject, R>,
-    R extends string = string
-    // ResourceType extends GistResourceTypeEnum = ResolveResourceTypeFromString<R>
->(
+
+export function useModelGist<Response extends GistResponse>(
     gistResource: GistResourceString,
     params?: GistParams
 ): UseGistModelResult<Response> {
@@ -154,6 +146,7 @@ export function useModelGist<
             called: queryResponse.called,
             error: queryResponse.error,
             data: stickyData?.result,
+            refetch: queryResponse.refetch,
         }
         if (pagination) {
             const result: UseGistModelResultPaginated<Response> = {
