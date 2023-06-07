@@ -69,11 +69,13 @@ interface QueryResponse {
     currentUser: CurrentUserResponse
 }
 
-const mapSchemaProperties = (
-    properties: SchemaResponse['properties']
-): Schema['properties'] => {
-    const propEntries = properties.map((prop) => [prop.fieldName, prop])
-    return Object.fromEntries(propEntries)
+const formatSchema = (schema: SchemaResponse): Schema => {
+    const propEntries = schema.properties.map((prop) => [prop.fieldName, prop])
+    const mappedProperties = Object.fromEntries(propEntries)
+    return {
+        ...schema,
+        properties: mappedProperties,
+    }
 }
 
 export const useLoadApp = () => {
@@ -87,13 +89,7 @@ export const useLoadApp = () => {
             const schemas = schemaResponse.schemas.schemas
 
             const modelSchemas = Object.fromEntries(
-                schemas.map((schema) => [
-                    schema.name,
-                    {
-                        ...schema,
-                        properties: mapSchemaProperties(schema.properties),
-                    },
-                ])
+                schemas.map((schema) => [schema.name, formatSchema(schema)])
             ) as ModelSchemas
 
             const currentUserResponse = schemaResponse.currentUser
