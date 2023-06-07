@@ -56,11 +56,24 @@ const query = {
     },
 }
 
+// properties are returned as an array, but we map them by fieldName
+type SchemaResponse = Omit<Schema, 'properties'> & {
+    properties: Schema['properties'][number][]
+}
+const s = {} as SchemaResponse
+
 interface QueryResponse {
     schemas: {
-        schemas: Schema[]
+        schemas: SchemaResponse[]
     }
     currentUser: CurrentUserResponse
+}
+
+const mapSchemaProperties = (
+    properties: SchemaResponse['properties']
+): Schema['properties'] => {
+    const propEntries = properties.map((prop) => [prop.fieldName, prop])
+    return Object.fromEntries(propEntries)
 }
 
 export const useLoadApp = () => {
@@ -74,7 +87,13 @@ export const useLoadApp = () => {
             const schemas = schemaResponse.schemas.schemas
 
             const modelSchemas = Object.fromEntries(
-                schemas.map((schema) => [schema.name, schema])
+                schemas.map((schema) => [
+                    schema.name,
+                    {
+                        ...schema,
+                        properties: mapSchemaProperties(schema.properties),
+                    },
+                ])
             ) as ModelSchemas
 
             const currentUserResponse = schemaResponse.currentUser
