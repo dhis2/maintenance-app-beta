@@ -1,1 +1,1 @@
-export type * from './query'
+export * from './query'
