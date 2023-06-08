@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
@@ -109,5 +110,15 @@ describe('Sidebar', () => {
                 expect(getByText('Metadata Overview')).toBeDefined()
             })
         })
+    })
+
+    it('should allow tabbing through the menu', () => {
+        const { getByPlaceholderText, getByText } = renderSideBar()
+
+        getByPlaceholderText(/Search/).focus()
+        userEvent.tab()
+        expect(getByText('Metadata Overview')).toHaveFocus()
+        userEvent.tab()
+        expect(getByText('Categories').parentElement).toHaveFocus()
     })
 })
