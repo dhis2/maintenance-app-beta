@@ -4,6 +4,7 @@ import { useCurrentUserAuthorities } from './currentUserStore'
 
 /* NOTE: read/update are checked using access properties on a model */
 
+const ALL_AUTHORITY = 'ALL'
 // user can create model if they have any of the following authorities
 const createAuthTypes = [
     SchemaAuthorityType.CREATE,
@@ -14,13 +15,17 @@ const createAuthTypes = [
 const canCreateAuthTypes = new Set<SchemaAuthorityType>(createAuthTypes)
 type CreateAuthType = (typeof createAuthTypes)[number]
 
-type Operation = CreateAuthType | SchemaAuthorityType.DELETE
+export type Operation = CreateAuthType | SchemaAuthorityType.DELETE
 
 export const isOperationAllowed = (
     operation: Operation,
     schema: ReturnType<typeof useSchema>,
     userAuthorities: Set<string>
 ) => {
+    if (userAuthorities.has(ALL_AUTHORITY)) {
+        return true
+    }
+
     const authoritiesNeeded = schema.authorities.find((auth) => {
         // if operation is CREATE it can be any of types in canCreateAuthTypes
         if (operation === SchemaAuthorityType.CREATE) {
