@@ -1,6 +1,6 @@
 import { SchemaName } from './schemaBase'
 
-export interface Section {
+export interface SectionBase {
     name: string
     namePlural: string
     titlePlural: string
@@ -9,13 +9,14 @@ export interface Section {
 }
 
 // SchemaSection is a section that can be mapped directly to a schema by the name
-export interface SchemaSection extends Section {
+export interface SchemaSection extends SectionBase {
     name: SchemaName
 }
 
-export type SectionMap = {
-    [key: string]: Section | SchemaSection
+export type Section = SchemaSection | SectionBase
+
+export type SchemaSectionMap = {
+    [key in SchemaName]?: SchemaSection
 }
 
-export const isSchemaSection = (section: Section): section is SchemaSection =>
-    section.name in SchemaName
+export type SectionMap = Record<string, Section | SchemaSection>

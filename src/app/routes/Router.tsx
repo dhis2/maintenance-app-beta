@@ -10,11 +10,16 @@ import {
     RouteObject,
     useParams,
 } from 'react-router-dom'
-import { SECTIONS_MAP, Section } from '../../constants'
-import { isValidUid, isModuleNotFoundError } from '../../lib'
+import { SECTIONS_MAP, SCHEMA_SECTIONS, Section } from '../../constants'
+import {
+    isValidUid,
+    isModuleNotFoundError,
+    SchemaAuthorityType,
+} from '../../lib'
 import { Layout } from '../layout'
 import { DefaultErrorRoute } from './DefaultErrorRoute'
 import { LegacyAppRedirect } from './LegacyAppRedirect'
+import { ProtectedSection } from './ProtectedSection'
 import { getSectionPath, routePaths } from './routePaths'
 
 // This loads all the overview routes in the same chunk since they resolve to the same promise
@@ -71,31 +76,37 @@ const VerifyModelId = () => {
 const sectionsNoEditRoute = new Set<Section>([SECTIONS_MAP.locale])
 const sectionsNoNewRoute = new Set<Section>([SECTIONS_MAP.categoryOptionCombo])
 
-const sectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
+const sectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
     <Route
         key={section.namePlural}
         path={getSectionPath(section)}
         handle={{ section }}
     >
         <Route index lazy={createSectionLazyRouteFunction(section, 'List')} />
-        {!sectionsNoNewRoute.has(section) && (
-            <Route
-                path={routePaths.sectionNew}
-                lazy={createSectionLazyRouteFunction(section, 'New')}
-                handle={{
-                    hideSidebar: true,
-                }}
-            />
-        )}
-
-        {!sectionsNoEditRoute.has(section) && (
-            <Route path=":id" element={<VerifyModelId />}>
+        <Route handle={{ hideSidebar: true }}>
+            {!sectionsNoNewRoute.has(section) && (
                 <Route
-                    index
-                    lazy={createSectionLazyRouteFunction(section, 'Edit')}
-                ></Route>
-            </Route>
-        )}
+                    element={
+                        <ProtectedSection
+                            operation={SchemaAuthorityType.CREATE}
+                        />
+                    }
+                >
+                    <Route
+                        path={routePaths.sectionNew}
+                        lazy={createSectionLazyRouteFunction(section, 'New')}
+                    />
+                </Route>
+            )}
+            {!sectionsNoEditRoute.has(section) && (
+                <Route path=":id" element={<VerifyModelId />}>
+                    <Route
+                        index
+                        lazy={createSectionLazyRouteFunction(section, 'Edit')}
+                    ></Route>
+                </Route>
+            )}
+        </Route>
     </Route>
 ))
 

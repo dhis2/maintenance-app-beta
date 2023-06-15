@@ -20,7 +20,9 @@ export const useCurrentUserStore = create<CurrentUserStore>()(
 
             return currentUser
         },
-        setCurrentUser: (currentUser) => set({ currentUser }),
+        setCurrentUser: (currentUser) => {
+            set({ currentUser })
+        },
     }))
 )
 

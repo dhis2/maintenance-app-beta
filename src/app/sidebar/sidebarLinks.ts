@@ -51,7 +51,7 @@ export const sidebarLinks = {
         links: [
             getOverviewLinkItem(SECTIONS_MAP.dataSet),
             getSectionLinkItem(SECTIONS_MAP.dataSet),
-            getSectionLinkItem(SECTIONS_MAP.dataSetNotification),
+            getSectionLinkItem(SECTIONS_MAP.dataSetNotificationTemplate),
         ],
     },
     indicators: {
@@ -93,7 +93,7 @@ export const sidebarLinks = {
             getOverviewLinkItem(SECTIONS_MAP.validation),
             getSectionLinkItem(SECTIONS_MAP.validationRule),
             getSectionLinkItem(SECTIONS_MAP.validationRuleGroup),
-            getSectionLinkItem(SECTIONS_MAP.validationNotification),
+            getSectionLinkItem(SECTIONS_MAP.validationNotificationTemplate),
         ],
     },
 } satisfies SidebarLinks

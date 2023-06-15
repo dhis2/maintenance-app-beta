@@ -1,5 +1,4 @@
 import { useDataQuery } from '@dhis2/app-runtime'
-import { useEffect } from 'react'
 import type { ModelSchemasBase, PickSchemaProperties } from '../types'
 import type { CurrentUser as CurrentUserBase } from '../types/models'
 import { useSetSchemas } from './schemas'
@@ -60,7 +59,6 @@ const query = {
 type SchemaResponse = Omit<Schema, 'properties'> & {
     properties: Schema['properties'][number][]
 }
-const s = {} as SchemaResponse
 
 interface QueryResponse {
     schemas: {
@@ -79,29 +77,26 @@ const formatSchema = (schema: SchemaResponse): Schema => {
 }
 
 export const useLoadApp = () => {
-    const queryResponse = useDataQuery<QueryResponse>(query)
     const setSchemas = useSetSchemas()
     const setCurrentUser = useSetCurrentUser()
-
-    useEffect(() => {
-        if (queryResponse.data) {
-            const schemaResponse = queryResponse.data
-            const schemas = schemaResponse.schemas.schemas
+    const queryResponse = useDataQuery<QueryResponse>(query, {
+        onComplete: (queryData) => {
+            const data = queryData as unknown as QueryResponse // need to find onComplete signature in app-runtime
+            const schemas = data.schemas.schemas
 
             const modelSchemas = Object.fromEntries(
                 schemas.map((schema) => [schema.name, formatSchema(schema)])
             ) as ModelSchemas
 
-            const currentUserResponse = schemaResponse.currentUser
+            const currentUserResponse = data.currentUser
             const currentUser: CurrentUser = {
                 ...currentUserResponse,
                 authorities: new Set(currentUserResponse.authorities),
             }
-
             setSchemas(modelSchemas)
             setCurrentUser(currentUser)
-        }
-    }, [setSchemas, setCurrentUser, queryResponse.data])
+        },
+    })
 
     return queryResponse
 }
