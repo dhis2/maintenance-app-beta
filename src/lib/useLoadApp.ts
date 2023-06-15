@@ -81,7 +81,7 @@ export const useLoadApp = () => {
     const setCurrentUser = useSetCurrentUser()
     const queryResponse = useDataQuery<QueryResponse>(query, {
         onComplete: (queryData) => {
-            const data = queryData as unknown as QueryResponse // need to find onComplete signature in app-runtime
+            const data = queryData as unknown as QueryResponse // need to fix onComplete signature in app-runtime
             const schemas = data.schemas.schemas
 
             const modelSchemas = Object.fromEntries(
