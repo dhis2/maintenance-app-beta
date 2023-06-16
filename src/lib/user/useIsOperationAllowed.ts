@@ -1,4 +1,9 @@
-import { SchemaName, SchemaAuthorityType, SchemaSection } from '../../types'
+import {
+    SchemaName,
+    SchemaAuthorityType,
+    SchemaSection,
+    SchemaAuthorities,
+} from '../../types'
 import { useSchema } from '../schemas'
 import { useCurrentUserAuthorities } from './currentUserStore'
 
@@ -19,14 +24,15 @@ export type Operation = CreateAuthType | SchemaAuthorityType.DELETE
 
 export const isOperationAllowed = (
     operation: Operation,
-    schema: ReturnType<typeof useSchema>,
+    schemaAuthorities: SchemaAuthorities,
+    //schema: ReturnType<typeof useSchema>,
     userAuthorities: Set<string>
 ) => {
     if (userAuthorities.has(ALL_AUTHORITY)) {
         return true
     }
 
-    const authoritiesNeeded = schema.authorities.find((auth) => {
+    const authoritiesNeeded = schemaAuthorities.find((auth) => {
         // if operation is CREATE it can be any of types in canCreateAuthTypes
         if (operation === SchemaAuthorityType.CREATE) {
             return canCreateAuthTypes.has(auth.type)
@@ -49,7 +55,11 @@ export const useIsOperationAllowed = (
     const userAuthorities = useCurrentUserAuthorities()
     const modelSchema = useSchema(modelName)
 
-    return isOperationAllowed(operation, modelSchema, userAuthorities)
+    return isOperationAllowed(
+        operation,
+        modelSchema.authorities,
+        userAuthorities
+    )
 }
 
 export const useCanCreate = (
