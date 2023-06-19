@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { PropsWithChildren } from 'react'
+import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { useSchemaSectionHandleOrThrow } from '../../lib'
 import {
@@ -7,10 +7,12 @@ import {
     useIsOperationAllowed,
 } from '../../lib/user/useIsOperationAllowed'
 
-type ProtectedSectionRouteProps = PropsWithChildren<{
+type CheckAuthorityForSectionProps = {
     operation: Operation
-}>
-export const ProtectedSection = ({ operation }: ProtectedSectionRouteProps) => {
+}
+export const CheckAuthorityForSection = ({
+    operation,
+}: CheckAuthorityForSectionProps) => {
     const section = useSchemaSectionHandleOrThrow()
     const allowed = useIsOperationAllowed(section, operation)
 

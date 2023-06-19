@@ -17,9 +17,9 @@ import {
     SchemaAuthorityType,
 } from '../../lib'
 import { Layout } from '../layout'
+import { CheckAuthorityForSection } from './CheckAuthorityForSection'
 import { DefaultErrorRoute } from './DefaultErrorRoute'
 import { LegacyAppRedirect } from './LegacyAppRedirect'
-import { ProtectedSection } from './ProtectedSection'
 import { getSectionPath, routePaths } from './routePaths'
 
 // This loads all the overview routes in the same chunk since they resolve to the same promise
@@ -87,12 +87,13 @@ const sectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
             {!sectionsNoNewRoute.has(section) && (
                 <Route
                     element={
-                        <ProtectedSection
+                        <CheckAuthorityForSection
                             operation={SchemaAuthorityType.CREATE}
                         />
                     }
                 >
                     <Route
+                        index
                         path={routePaths.sectionNew}
                         lazy={createSectionLazyRouteFunction(section, 'New')}
                     />
