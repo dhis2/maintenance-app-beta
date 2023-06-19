@@ -81,14 +81,13 @@ export const useLoadApp = () => {
     const setCurrentUser = useSetCurrentUser()
     const queryResponse = useDataQuery<QueryResponse>(query, {
         onComplete: (queryData) => {
-            const data = queryData as unknown as QueryResponse // need to fix onComplete signature in app-runtime
-            const schemas = data.schemas.schemas
+            const schemas = queryData.schemas.schemas
 
             const modelSchemas = Object.fromEntries(
                 schemas.map((schema) => [schema.name, formatSchema(schema)])
             ) as ModelSchemas
 
-            const currentUserResponse = data.currentUser
+            const currentUserResponse = queryData.currentUser
             const currentUser: CurrentUser = {
                 ...currentUserResponse,
                 authorities: new Set(currentUserResponse.authorities),
