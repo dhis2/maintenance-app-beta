@@ -1,8 +1,5 @@
 import { SchemaAuthorities, SchemaAuthorityType } from './../../types'
-import {
-    isOperationAllowed,
-    useIsOperationAllowed,
-} from './useIsOperationAllowed'
+import { isOperationAllowed } from './useIsOperationAllowed'
 
 describe('isOperationAllowed', () => {
     const dataElementSchemaAuthorities: SchemaAuthorities = [
