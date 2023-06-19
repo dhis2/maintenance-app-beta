@@ -19,8 +19,8 @@ export const useSectionHandleOrThrow = (): Section => {
 }
 
 export const useSchemaSectionHandleOrThrow = (): SchemaSection => {
-    const section = useSectionHandleOrThrow()
-    if (!isSchemaSection(section)) {
+    const section = useSectionHandle()
+    if (!section || !isSchemaSection(section)) {
         throw new Error('No schema section handle found')
     }
     return section
