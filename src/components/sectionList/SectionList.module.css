@@ -1,0 +1,16 @@
+.listRow {
+}
+
+.listRow td {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.listActions {
+    display: flex;
+    gap: 8px;
+}
+
+.listActions button {
+    padding: 0 2px !important;
+}
