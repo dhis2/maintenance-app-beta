@@ -10,7 +10,12 @@ import {
     RouteObject,
     useParams,
 } from 'react-router-dom'
-import { SECTIONS_MAP, SCHEMA_SECTIONS, Section } from '../../constants'
+import {
+    SECTIONS_MAP,
+    SCHEMA_SECTIONS,
+    Section,
+    SchemaSection,
+} from '../../constants'
 import {
     isValidUid,
     isModuleNotFoundError,
@@ -73,10 +78,11 @@ const VerifyModelId = () => {
     return <Outlet />
 }
 
-const sectionsNoEditRoute = new Set<Section>([SECTIONS_MAP.locale])
-const sectionsNoNewRoute = new Set<Section>([SECTIONS_MAP.categoryOptionCombo])
+const sectionsNoNewRoute = new Set<SchemaSection>([
+    SECTIONS_MAP.categoryOptionCombo,
+])
 
-const sectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
+const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
     <Route
         key={section.namePlural}
         path={getSectionPath(section)}
@@ -99,14 +105,12 @@ const sectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
                     />
                 </Route>
             )}
-            {!sectionsNoEditRoute.has(section) && (
-                <Route path=":id" element={<VerifyModelId />}>
-                    <Route
-                        index
-                        lazy={createSectionLazyRouteFunction(section, 'Edit')}
-                    ></Route>
-                </Route>
-            )}
+            <Route path=":id" element={<VerifyModelId />}>
+                <Route
+                    index
+                    lazy={createSectionLazyRouteFunction(section, 'Edit')}
+                ></Route>
+            </Route>
         </Route>
     </Route>
 ))
@@ -131,7 +135,7 @@ const routes = createRoutesFromElements(
                 lazy={createOverviewLazyRouteFunction('Categories')}
             />
         </Route>
-        {sectionRoutes}
+        {schemaSectionRoutes}
     </Route>
 )
 
