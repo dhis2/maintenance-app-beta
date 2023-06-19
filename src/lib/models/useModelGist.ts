@@ -86,20 +86,20 @@ type GistPaginator = {
     getPrevPage: () => boolean
 }
 
-type BaseUseGistModelResult<Response> = Pick<
+type BaseUseModelGistResult<Response> = Pick<
     QueryResponse,
     'loading' | 'error' | 'called' | 'refetch'
 > & {
     data?: Response
 }
 
-type UseGistModelResultPaginated<Response> =
-    BaseUseGistModelResult<Response> & {
+type UseModelGistResultPaginated<Response> =
+    BaseUseModelGistResult<Response> & {
         pagination: GistPaginator
     }
-type UseGistModelResult<Response extends GistResponse> =
-    | BaseUseGistModelResult<Response>
-    | UseGistModelResultPaginated<Response>
+type UseModelGistResult<Response extends GistResponse> =
+    | BaseUseModelGistResult<Response>
+    | UseModelGistResultPaginated<Response>
 
 const isDataCollection = (
     data: unknown
@@ -111,17 +111,17 @@ const isDataCollection = (
 export function useModelGist<Response extends GistPagedResponse>(
     gistResource: GistResourceString,
     params?: GistParams
-): UseGistModelResultPaginated<Response>
+): UseModelGistResultPaginated<Response>
 
 export function useModelGist<Response extends GistObjectResponse>(
     gistResource: GistResourceString,
     params?: GistParams
-): UseGistModelResult<Response>
+): UseModelGistResult<Response>
 
 export function useModelGist<Response extends GistResponse>(
     gistResource: GistResourceString,
     params?: GistParams
-): UseGistModelResult<Response> {
+): UseModelGistResult<Response> {
     const [gistQuery] = useState<GistQuery>(
         createGistQuery(gistResource, params)
     )
@@ -141,7 +141,7 @@ export function useModelGist<Response extends GistResponse>(
     )
 
     return React.useMemo(() => {
-        const baseResult: UseGistModelResult<Response> = {
+        const baseResult: UseModelGistResult<Response> = {
             loading: queryResponse.loading,
             called: queryResponse.called,
             error: queryResponse.error,
@@ -149,7 +149,7 @@ export function useModelGist<Response extends GistResponse>(
             refetch: queryResponse.refetch,
         }
         if (pagination) {
-            const result: UseGistModelResultPaginated<Response> = {
+            const result: UseModelGistResultPaginated<Response> = {
                 ...baseResult,
                 pagination,
             }
