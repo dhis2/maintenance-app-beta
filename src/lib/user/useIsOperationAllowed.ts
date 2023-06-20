@@ -25,7 +25,6 @@ export type Operation = CreateAuthType | SchemaAuthorityType.DELETE
 export const isOperationAllowed = (
     operation: Operation,
     schemaAuthorities: SchemaAuthorities,
-    //schema: ReturnType<typeof useSchema>,
     userAuthorities: Set<string>
 ) => {
     if (userAuthorities.has(ALL_AUTHORITY)) {
