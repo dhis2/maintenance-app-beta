@@ -44,7 +44,7 @@ export const SummaryCard = ({
 }: SummaryCardProps) => {
     const title = section.title
     return (
-        <Card>
+        <Card dataTest={`card-${title}`}>
             <div className={styles.cardWrapper}>
                 <Link to={`/${getSectionPath(section)}`}>
                     <div className={styles.cardIcon}>{icon}</div>
