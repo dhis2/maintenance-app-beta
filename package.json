@@ -13,16 +13,21 @@
         "lint:staged": "yarn lint --staged",
         "format": "yarn d2-style apply",
         "format:staged": "yarn format --staged",
-        "check-types": "tsc --noemit"
+        "check-types": "tsc --noemit",
+        "cypress:open": "REACT_APP_NODE_ENV=test yarn cypress open",
+        "cypress:run": "REACT_APP_NODE_ENV=test yarn cypress run"
     },
     "devDependencies": {
         "@dhis2/cli-app-scripts": "^10.2.0",
         "@dhis2/cli-style": "^10.5.1",
+        "@dhis2/cypress-commands": "^10.0.3",
+        "@dhis2/cypress-plugins": "^10.0.3",
         "@testing-library/react": "^14.0.0",
         "@types/jest": "^29.5.1",
         "@types/react": "^18.2.6",
         "@typescript-eslint/eslint-plugin": "^5.55.0",
         "@typescript-eslint/parser": "^5.55.0",
+        "cypress": "^12.14.0",
         "typescript": "^5.0.4"
     },
     "dependencies": {

@@ -13,8 +13,8 @@ ls:
 
     cypress:
         .dir: camelCase
-        .js: camelCase
-        .ts: camelCase
+        .e2e.js: camelCase
+        .e2e.ts: camelCase
 
     docs:
         .dir: kebab-case
