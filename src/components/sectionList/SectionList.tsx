@@ -8,23 +8,33 @@ import {
     Checkbox,
 } from '@dhis2/ui'
 import React, { PropsWithChildren } from 'react'
+import { CheckBoxOnChangeObject } from '../../types'
 import { IdentifiableObject } from '../../types/generated'
 import { SelectedColumns } from './types'
 
 type SectionListProps<Model extends IdentifiableObject> = {
     headerColumns: SelectedColumns<Model>
+    onSelectAll: (checked: boolean) => void
+    allSelected?: boolean
 }
 
 export const SectionList = <Model extends IdentifiableObject>({
+    allSelected,
     headerColumns,
     children,
+    onSelectAll,
 }: PropsWithChildren<SectionListProps<Model>>) => {
     return (
         <DataTable>
             <TableHead>
                 <DataTableRow>
                     <DataTableColumnHeader width="48px">
-                        <Checkbox />
+                        <Checkbox
+                            checked={allSelected}
+                            onChange={({ checked }: CheckBoxOnChangeObject) =>
+                                onSelectAll(checked)
+                            }
+                        />
                     </DataTableColumnHeader>
                     {headerColumns.map((headerColumn) => (
                         <DataTableColumnHeader

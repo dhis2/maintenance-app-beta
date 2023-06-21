@@ -7,3 +7,8 @@ export type SelectedColumn<Model extends IdentifiableObject> = {
 
 export type SelectedColumns<Model extends IdentifiableObject> =
     SelectedColumn<Model>[]
+export type CheckBoxOnChangeObject = {
+    checked: boolean
+    name?: string
+    value?: string
+}

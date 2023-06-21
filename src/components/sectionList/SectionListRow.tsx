@@ -2,23 +2,32 @@ import { DataTableRow, DataTableCell, Checkbox, Button } from '@dhis2/ui'
 import { IconEdit24, IconMore24 } from '@dhis2/ui-icons'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { IdentifiableObject } from '../../types/generated'
+import { CheckBoxOnChangeObject } from '../../types'
+import { IdentifiableObject, GistModel } from '../../types/models'
 import css from './SectionList.module.css'
 import { SelectedColumns } from './types'
-
 export type SectionListRowProps<Model extends IdentifiableObject> = {
-    modelData: Model
+    modelData: Model | GistModel<Model>
     selectedColumns: SelectedColumns<Model>
+    onSelect: (modelId: string, checked: boolean) => void
+    selected: boolean
 }
 
 export function SectionListRow<Model extends IdentifiableObject>({
     selectedColumns,
     modelData,
+    onSelect,
+    selected,
 }: SectionListRowProps<Model>) {
     return (
         <DataTableRow className={css.listRow}>
             <DataTableCell width="48px">
-                <Checkbox value="false" />
+                <Checkbox
+                    checked={selected}
+                    onChange={({ checked }: CheckBoxOnChangeObject) => {
+                        onSelect(modelData.id, checked)
+                    }}
+                />
             </DataTableCell>
             {selectedColumns.map(({ modelPropertyName }) => (
                 <DataTableCell key={modelPropertyName}>

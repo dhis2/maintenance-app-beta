@@ -1,8 +1,18 @@
 import i18n from '@dhis2/d2-i18n'
 import React, { useEffect } from 'react'
-import { SectionList, SectionListRow, SelectedColumns } from '../../components'
+import {
+    SectionList,
+    SectionListRow,
+    SectionListWrapper,
+    SelectedColumns,
+} from '../../components'
 import { useModelGist } from '../../lib/'
-import { DataElement, GistCollectionResponse } from '../../types/generated'
+import {
+    DataElement,
+    GistCollectionResponse,
+    GistModel,
+    IdentifiableObject,
+} from '../../types/models'
 
 const filterFields = [
     'access',
@@ -58,15 +68,10 @@ export const Component = () => {
                 type="text"
                 onChange={(val) => setFilter(val.target.value)}
             ></input>
-            <SectionList headerColumns={defaulHeaderColumns}>
-                {data?.result.map((dataElement) => (
-                    <SectionListRow
-                        key={dataElement.id}
-                        modelData={dataElement}
-                        selectedColumns={defaulHeaderColumns}
-                    />
-                ))}
-            </SectionList>
+            <SectionListWrapper
+                defaultColumns={defaulHeaderColumns}
+                data={data}
+            />
             <button onClick={() => pagination.getNextPage()}>Next Page</button>
         </div>
     )

@@ -7,7 +7,7 @@ import { IdentifiableObject, GistPager } from './'
 type ModelReferenceCollection<T = IdentifiableObject> = Array<T>
 type ModelReference = IdentifiableObject | ModelReferenceCollection
 
-type BaseGist<T> = {
+type BaseGist<T> = IdentifiableObject & {
     apiEndpoints: GistApiEndpoints<T>
 }
 export type GistApiEndpoints<T> = {
