@@ -18,7 +18,7 @@
         // Import non-ES modules as default imports.
         "esModuleInterop": true,
         "jsx": "react",
-        "rootDirs": ["src", "cypress"]
+        "rootDir": "src"
     },
-    "exclude": ["node_modules", "build"]
+    "exclude": ["node_modules", "build", "cypress", "cypress.config.ts"]
 }
