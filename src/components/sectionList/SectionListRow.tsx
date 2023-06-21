@@ -6,6 +6,7 @@ import { CheckBoxOnChangeObject } from '../../types'
 import { IdentifiableObject, GistModel } from '../../types/models'
 import css from './SectionList.module.css'
 import { SelectedColumns } from './types'
+
 export type SectionListRowProps<Model extends IdentifiableObject> = {
     modelData: Model | GistModel<Model>
     selectedColumns: SelectedColumns<Model>

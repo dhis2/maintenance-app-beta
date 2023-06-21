@@ -4,8 +4,10 @@ import {
     GistModel,
     GistCollectionResponse,
 } from '../../types/models'
+import { FilterWrapper } from './filters/FilterWrapper'
 import { SectionList } from './SectionList'
 import { SectionListRow } from './SectionListRow'
+import { SelectionListHeader } from './SelectionListHeaderNormal'
 import { SelectedColumns } from './types'
 
 type SectionListWrapperProps<Model extends IdentifiableObject> = {
@@ -21,9 +23,8 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
     const [selectedColumns, setSelectedColumns] =
         useState<SelectedColumns<Model>>(defaultColumns)
     const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set())
-    console.log({ selectedModels })
+
     const handleSelect = (id: string, checked: boolean) => {
-        console.log('select', id, checked)
         if (checked) {
             setSelectedModels(new Set(selectedModels).add(id))
         } else {
@@ -54,22 +55,26 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
     }, [data?.result, selectedModels.size])
 
     return (
-        <SectionList
-            headerColumns={selectedColumns}
-            onSelectAll={handleSelectAll}
-            allSelected={allSelected}
-        >
-            {!data?.result
-                ? 'Loading...'
-                : data?.result.map((model) => (
-                      <SectionListRow
-                          key={model.id}
-                          modelData={model}
-                          selectedColumns={selectedColumns}
-                          onSelect={handleSelect}
-                          selected={selectedModels.has(model.id)}
-                      />
-                  ))}
-        </SectionList>
+        <div>
+            <FilterWrapper />
+            <SelectionListHeader />
+            <SectionList
+                headerColumns={selectedColumns}
+                onSelectAll={handleSelectAll}
+                allSelected={allSelected}
+            >
+                {!data?.result
+                    ? 'Loading...'
+                    : data?.result.map((model) => (
+                          <SectionListRow
+                              key={model.id}
+                              modelData={model}
+                              selectedColumns={selectedColumns}
+                              onSelect={handleSelect}
+                              selected={selectedModels.has(model.id)}
+                          />
+                      ))}
+            </SectionList>
+        </div>
     )
 }
