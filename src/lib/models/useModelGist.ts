@@ -42,6 +42,7 @@ function createGistQuery(
         result: {
             resource: `${resource}`,
             params: ({ page, ...dynamicParams }) => ({
+                total: true,
                 ...params,
                 ...dynamicParams,
                 page,
@@ -75,15 +76,28 @@ function usePagination(
         return true
     }, [refetch, pager])
 
+    const goToPage = useCallback(
+        (page: number) => {
+            if (!pager?.pageCount || page > pager.pageCount) {
+                return false
+            }
+            refetch({ page: page })
+            return true
+        },
+        [refetch, pager]
+    )
+
     return {
         getNextPage,
         getPrevPage,
+        goToPage,
     }
 }
 
 type GistPaginator = {
     getNextPage: () => boolean
     getPrevPage: () => boolean
+    goToPage: (page: number) => boolean
 }
 
 type BaseUseModelGistResult<Response> = Pick<
@@ -103,7 +117,7 @@ type UseModelGistResult<Response extends GistResponse> =
 
 const isDataCollection = (
     data: unknown
-): data is GistCollectionResponse<IdentifiableObject, GistResourceString> => {
+): data is GistCollectionResponse<IdentifiableObject> => {
     // gist endpoints are always paged if they're collections
     return (data as GistCollectionResponse)?.pager !== undefined
 }
