@@ -5,17 +5,9 @@ import { MatchRouteHandle } from './../app/routes/types'
 
 export const useSectionHandle = (): Section | undefined => {
     const matches = useMatches() as MatchRouteHandle[]
-    const match = matches.find((matches) => matches.handle?.section)
+    const match = matches.find((routeMatch) => routeMatch.handle?.section)
 
     return match?.handle?.section
-}
-
-export const useSectionHandleOrThrow = (): Section => {
-    const section = useSectionHandle()
-    if (!section) {
-        throw new Error('No section handle found')
-    }
-    return section
 }
 
 export const useSchemaSectionHandleOrThrow = (): SchemaSection => {

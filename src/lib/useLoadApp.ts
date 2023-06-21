@@ -79,21 +79,29 @@ const formatSchema = (schema: SchemaResponse): Schema => {
 export const useLoadApp = () => {
     const setSchemas = useSetSchemas()
     const setCurrentUser = useSetCurrentUser()
+
     const queryResponse = useDataQuery<QueryResponse>(query, {
         onComplete: (queryData) => {
-            const schemas = queryData.schemas.schemas
+            try {
+                const schemas = queryData.schemas.schemas
 
-            const modelSchemas = Object.fromEntries(
-                schemas.map((schema) => [schema.name, formatSchema(schema)])
-            ) as ModelSchemas
+                const schemaEntries = schemas.map((schema) => [
+                    schema.name,
+                    formatSchema(schema),
+                ])
+                const modelSchemas: ModelSchemas =
+                    Object.fromEntries(schemaEntries)
 
-            const currentUserResponse = queryData.currentUser
-            const currentUser: CurrentUser = {
-                ...currentUserResponse,
-                authorities: new Set(currentUserResponse.authorities),
+                const currentUserResponse = queryData.currentUser
+                const currentUser: CurrentUser = {
+                    ...currentUserResponse,
+                    authorities: new Set(currentUserResponse.authorities),
+                }
+                setSchemas(modelSchemas)
+                setCurrentUser(currentUser)
+            } catch (e) {
+                console.log('Failed to load app', e)
             }
-            setSchemas(modelSchemas)
-            setCurrentUser(currentUser)
         },
     })
 
