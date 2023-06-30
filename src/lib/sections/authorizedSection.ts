@@ -4,7 +4,6 @@ import {
     isSchemaSection,
     Section,
     isNonSchemaSection,
-    isOverviewSection,
 } from '../../constants'
 import { useSchemas } from '../schemas'
 import { ModelSchemas } from '../useLoadApp'

@@ -3,13 +3,7 @@ import React, { useEffect, useState, PropsWithChildren } from 'react'
 import { NavLink, useLocation, matchPath } from 'react-router-dom'
 import { HidePreventUnmount } from '../../components'
 import styles from './Sidebar.module.css'
-import {
-    LinkItem,
-    ParentLink,
-    SidebarLinks,
-    sidebarLinks,
-    useSidebarLinks,
-} from './sidebarLinks'
+import { LinkItem, ParentLink, useSidebarLinks } from './sidebarLinks'
 import {
     Sidenav,
     SidenavItems,
