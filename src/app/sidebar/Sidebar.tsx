@@ -8,6 +8,7 @@ import {
     ParentLink,
     SidebarLinks,
     sidebarLinks,
+    useSidebarLinks,
 } from './sidebarLinks'
 import {
     Sidenav,
@@ -18,7 +19,9 @@ import {
     OnChangeInput,
 } from './sidenav'
 
-interface SidebarNavLinkProps extends LinkItem {
+interface SidebarNavLinkProps {
+    label: string
+    to: string
     disabled?: boolean
     end?: boolean
 }
@@ -85,13 +88,8 @@ const SidebarParent = ({
 const matchLabel = (label: string, filterValue: string) =>
     label.toLowerCase().includes(filterValue.toLowerCase())
 
-export const Sidebar = ({
-    className,
-    links = sidebarLinks,
-}: {
-    className?: string
-    links?: SidebarLinks
-}) => {
+export const Sidebar = ({ className }: { className?: string }) => {
+    const sidebarLinks = useSidebarLinks()
     const [filterValue, setFilterValue] = useState('')
 
     const handleFilterChange = (input: OnChangeInput) => {
@@ -99,7 +97,7 @@ export const Sidebar = ({
     }
 
     const isFiltered = filterValue !== ''
-    const filteredSidebarLinks: ParentLink[] = Object.values(links).map(
+    const filteredSidebarLinks: ParentLink[] = sidebarLinks.map(
         ({ label, links }) => ({
             label,
             links: matchLabel(label, filterValue)

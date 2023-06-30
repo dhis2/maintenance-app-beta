@@ -1,11 +1,4 @@
-import {
-    SchemaName,
-    SchemaAuthorityType,
-    SchemaSection,
-    SchemaAuthorities,
-} from '../../types'
-import { useSchema } from '../schemas'
-import { useCurrentUserAuthorities } from './currentUserStore'
+import { SchemaAuthorityType, SchemaAuthorities } from '../../types'
 
 /* NOTE: read/update are checked using access properties on a model */
 
@@ -22,7 +15,7 @@ type CreateAuthType = (typeof createAuthTypes)[number]
 
 export type Operation = CreateAuthType | SchemaAuthorityType.DELETE
 
-export const isOperationAllowed = (
+export const isOperationAuthorized = (
     operation: Operation,
     schemaAuthorities: SchemaAuthorities,
     userAuthorities: Set<string>
@@ -46,31 +39,13 @@ export const isOperationAllowed = (
     return authoritiesNeeded.some((auth) => userAuthorities.has(auth))
 }
 
-export const useIsOperationAllowed = (
-    section: SchemaSection | SchemaName,
-    operation: Operation
+export const canCreate = (
+    schemaAuthorities: SchemaAuthorities,
+    userAuthorities: Set<string>
 ) => {
-    const modelName = typeof section === 'string' ? section : section.name
-    const userAuthorities = useCurrentUserAuthorities()
-    const modelSchema = useSchema(modelName)
-
-    return isOperationAllowed(
-        operation,
-        modelSchema.authorities,
+    return isOperationAuthorized(
+        SchemaAuthorityType.CREATE,
+        schemaAuthorities,
         userAuthorities
     )
-}
-
-export const useCanCreate = (
-    section: SchemaSection | SchemaName,
-    createAuthType: CreateAuthType = SchemaAuthorityType.CREATE
-) => {
-    return useIsOperationAllowed(section, createAuthType)
-}
-
-// note the access.delete property on the target model should also be checked
-// before trying to delete a model
-// but this can be used to check whether a delete component should be rendered for a section at all
-export const useCanDelete = (section: SchemaSection | SchemaName) => {
-    return useIsOperationAllowed(section, SchemaAuthorityType.DELETE)
 }

@@ -5,6 +5,10 @@ import {
     SchemaSection,
     SchemaName,
     SchemaSectionMap,
+    SchemaAuthorityType,
+    OverviewSectionMap,
+    OverviewSection,
+    NonSchemaSection,
 } from '../types'
 
 // for convenience so types can be imported with the map below
@@ -156,49 +160,49 @@ export const SCHEMA_SECTIONS = {
         namePlural: 'programs',
         title: i18n.t('Program'),
         titlePlural: i18n.t('Programs'),
-        parentSectionKey: 'program',
+        parentSectionKey: 'programsAndTracker',
     },
     programIndicator: {
         name: SchemaName.programIndicator,
         namePlural: 'programIndicators',
         title: i18n.t('Program indicator'),
         titlePlural: i18n.t('Program indicators'),
-        parentSectionKey: 'program',
+        parentSectionKey: 'programsAndTracker',
     },
     programIndicatorGroup: {
         name: SchemaName.programIndicatorGroup,
         namePlural: 'programIndicatorGroups',
         title: i18n.t('Program indicator group'),
         titlePlural: i18n.t('Program indicator groups'),
-        parentSectionKey: 'program',
+        parentSectionKey: 'programsAndTracker',
     },
     programRule: {
         name: SchemaName.programRule,
         namePlural: 'programRules',
         title: i18n.t('Program rule'),
         titlePlural: i18n.t('Program rules'),
-        parentSectionKey: 'program',
+        parentSectionKey: 'programsAndTracker',
     },
     programRuleVariable: {
         name: SchemaName.programRuleVariable,
         namePlural: 'programRuleVariables',
         title: i18n.t('Program rule variable'),
         titlePlural: i18n.t('Program rule variables'),
-        parentSectionKey: 'program',
+        parentSectionKey: 'programsAndTracker',
     },
     programStage: {
         name: SchemaName.programStage,
         namePlural: 'programStages',
         title: i18n.t('Program stage'),
         titlePlural: i18n.t('Program stages'),
-        parentSectionKey: 'program',
+        parentSectionKey: 'programsAndTracker',
     },
     relationshipType: {
         name: SchemaName.relationshipType,
         namePlural: 'relationshipTypes',
         title: i18n.t('Relationship type'),
         titlePlural: i18n.t('Relationship types'),
-        parentSectionKey: 'program',
+        parentSectionKey: 'programsAndTracker',
     },
 
     validationRule: {
@@ -206,21 +210,21 @@ export const SCHEMA_SECTIONS = {
         namePlural: 'validationRules',
         title: i18n.t('Validation rule'),
         titlePlural: i18n.t('Validation rules'),
-        parentSectionKey: 'program',
+        parentSectionKey: 'validation',
     },
     validationRuleGroup: {
         name: SchemaName.validationRuleGroup,
         namePlural: 'validationRuleGroups',
         title: i18n.t('Validation rule group'),
         titlePlural: i18n.t('Validation rule groups'),
-        parentSectionKey: 'program',
+        parentSectionKey: 'validation',
     },
     validationNotificationTemplate: {
         name: SchemaName.validationNotificationTemplate,
         namePlural: 'validationNotificationTemplates',
         title: i18n.t('Validation notification template'),
         titlePlural: i18n.t('Validation notification templates'),
-        parentSectionKey: 'program',
+        parentSectionKey: 'validation',
     },
     constant: {
         name: SchemaName.constant,
@@ -287,42 +291,106 @@ export const SCHEMA_SECTIONS = {
     },
 } as const satisfies SchemaSectionMap
 
-export const NON_SCHEMA_SECTION = {
+export const OVERVIEW_SECTIONS = {
+    category: {
+        name: SchemaName.category,
+        namePlural: 'categories',
+        title: i18n.t('Category'),
+        titlePlural: i18n.t('Categories'),
+        componentName: 'Categories',
+    },
+    dataElement: {
+        name: SchemaName.dataElement,
+        namePlural: 'dataElements',
+        title: i18n.t('Data element'),
+        titlePlural: i18n.t('Data elements'),
+        componentName: 'DataElements',
+    },
+    dataSet: {
+        name: SchemaName.dataSet,
+        namePlural: 'dataSets',
+        title: i18n.t('Data set'),
+        titlePlural: i18n.t('Data sets'),
+        componentName: 'DataSets',
+    },
+    indicator: {
+        name: SchemaName.indicator,
+        namePlural: 'indicators',
+        title: i18n.t('Indicator'),
+        titlePlural: i18n.t('Indicators'),
+        componentName: 'Indicators',
+    },
+    organisationUnit: {
+        name: SchemaName.organisationUnit,
+        namePlural: 'organisationUnits',
+        title: i18n.t('Organisation unit'),
+        titlePlural: i18n.t('Organisation units'),
+        componentName: 'OrganisationUnits',
+    },
     programsAndTracker: {
         name: 'programsAndTracker',
-        namePlural: 'programsAndTrackers',
+        namePlural: 'programsAndTracker',
         title: i18n.t('Programs and Tracker'),
-        titlePlural: i18n.t('Programs and Trackers'),
-        parentSectionKey: 'trackedEntityAttribute',
+        titlePlural: i18n.t('Programs and Tracker'),
+        componentName: 'ProgramsAndTracker',
     },
     validation: {
         name: 'validation',
         namePlural: 'validations',
         title: i18n.t('Validation'),
         titlePlural: i18n.t('Validations'),
-        parentSectionKey: 'program',
+        componentName: 'Validations',
     },
     other: {
         name: 'other',
         namePlural: 'others',
         title: i18n.t('Other'),
-        titlePlural: i18n.t('Others'),
-        parentSectionKey: 'other',
+        titlePlural: i18n.t('Other'),
+        componentName: 'Other',
     },
+} as const satisfies OverviewSectionMap
+
+export const NON_SCHEMA_SECTION = {
     locale: {
         name: 'locale',
         namePlural: 'locales',
         title: i18n.t('Locale'),
         titlePlural: i18n.t('Locales'),
         parentSectionKey: 'other',
+        authorities: [
+            {
+                type: SchemaAuthorityType.CREATE_PUBLIC,
+                authorities: ['F_SYSTEM_SETTING', 'F_LOCALE_ADD'],
+            },
+            {
+                type: SchemaAuthorityType.CREATE_PRIVATE,
+                authorities: ['F_SYSTEM_SETTING', 'F_LOCALE_ADD'],
+            },
+            {
+                type: SchemaAuthorityType.DELETE,
+                authorities: ['F_SYSTEM_SETTING'],
+            },
+        ],
     },
 } as const satisfies SectionMap
 
 export const SECTIONS_MAP = {
     ...SCHEMA_SECTIONS,
     ...NON_SCHEMA_SECTION,
-} as const
+} as const satisfies SectionMap
 
 export const isSchemaSection = (section: Section): section is SchemaSection => {
     return (SCHEMA_SECTIONS as SectionMap)[section.name] !== undefined
+}
+
+export const isOverviewSection = (
+    section: Section
+): section is OverviewSection => {
+    return (OVERVIEW_SECTIONS as OverviewSectionMap)[section.name] !== undefined
+}
+
+export const isNonSchemaSection = (
+    section: Section
+): section is NonSchemaSection => {
+    return (NON_SCHEMA_SECTION as SectionMap)[section.name] !== undefined
 }

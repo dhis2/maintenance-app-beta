@@ -3,7 +3,13 @@ import i18n from '@dhis2/d2-i18n'
 import { NoticeBox, Button } from '@dhis2/ui'
 import React from 'react'
 import { useParams, Params } from 'react-router-dom'
-import { Section, SECTIONS_MAP } from '../../constants'
+import {
+    isNonSchemaSection,
+    isOverviewSection,
+    isSchemaSection,
+    Section,
+    SECTIONS_MAP,
+} from '../../constants'
 
 const legacyPath = '/dhis-web-maintenance/index.html#/'
 
@@ -28,6 +34,10 @@ const getLegacySectionPath = (
         id = isNew ? 'add' : params?.id || ''
     }
 
+    if (isOverviewSection(section)) {
+        const legacySection = legacySectionMap[section.name] ?? section.name
+        return `list/${legacySection}Section`
+    }
     const legacySection =
         legacySectionMap[section.parentSectionKey] ?? section.parentSectionKey
 

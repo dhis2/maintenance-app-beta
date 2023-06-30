@@ -5,8 +5,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-05-23T13:31:53.974Z\n"
-"PO-Revision-Date: 2023-05-23T13:31:53.974Z\n"
+"POT-Creation-Date: 2023-06-21T21:00:56.973Z\n"
+"PO-Revision-Date: 2023-06-21T21:00:56.973Z\n"
+
+msgid "schemas"
+msgstr "schemas"
+
+msgid "You do not have the authority to view this page."
+msgstr "You do not have the authority to view this page."
 
 msgid "Section is not implemented yet"
 msgstr "Section is not implemented yet"
@@ -105,8 +111,8 @@ msgstr "Data set"
 msgid "Data sets"
 msgstr "Data sets"
 
-msgid "Data set notification"
-msgstr "Data set notification"
+msgid "Data set notification template"
+msgstr "Data set notification template"
 
 msgid "Data set notification templates"
 msgstr "Data set notification templates"
@@ -165,9 +171,6 @@ msgstr "Tracked entity type"
 msgid "Tracked entity types"
 msgstr "Tracked entity types"
 
-msgid "Programs and Tracker"
-msgstr "Programs and Tracker"
-
 msgid "Program"
 msgstr "Program"
 
@@ -180,11 +183,11 @@ msgstr "Program indicator"
 msgid "Program indicators"
 msgstr "Program indicators"
 
-msgid "Program indicatorGroup"
-msgstr "Program indicatorGroup"
+msgid "Program indicator group"
+msgstr "Program indicator group"
 
-msgid "Program indicatorGroups"
-msgstr "Program indicatorGroups"
+msgid "Program indicator groups"
+msgstr "Program indicator groups"
 
 msgid "Program rule"
 msgstr "Program rule"
@@ -210,12 +213,6 @@ msgstr "Relationship type"
 msgid "Relationship types"
 msgstr "Relationship types"
 
-msgid "Validation"
-msgstr "Validation"
-
-msgid "Validations"
-msgstr "Validations"
-
 msgid "Validation rule"
 msgstr "Validation rule"
 
@@ -228,14 +225,11 @@ msgstr "Validation rule group"
 msgid "Validation rule groups"
 msgstr "Validation rule groups"
 
-msgid "Validation notification"
-msgstr "Validation notification"
+msgid "Validation notification template"
+msgstr "Validation notification template"
 
 msgid "Validation notification templates"
 msgstr "Validation notification templates"
-
-msgid "Other"
-msgstr "Other"
 
 msgid "Constant"
 msgstr "Constant"
@@ -285,17 +279,35 @@ msgstr "Data approval workflow"
 msgid "Data approval workflows"
 msgstr "Data approval workflows"
 
-msgid "Locale"
-msgstr "Locale"
-
-msgid "Locales"
-msgstr "Locales"
-
 msgid "SQL view"
 msgstr "SQL view"
 
 msgid "SQL views"
 msgstr "SQL views"
+
+msgid "Programs and Tracker"
+msgstr "Programs and Tracker"
+
+msgid "Programs and Trackers"
+msgstr "Programs and Trackers"
+
+msgid "Validation"
+msgstr "Validation"
+
+msgid "Validations"
+msgstr "Validations"
+
+msgid "Other"
+msgstr "Other"
+
+msgid "Others"
+msgstr "Others"
+
+msgid "Locale"
+msgstr "Locale"
+
+msgid "Locales"
+msgstr "Locales"
 
 msgid "Metadata management"
 msgstr "Metadata management"

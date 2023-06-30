@@ -3,9 +3,9 @@
 export interface SchemaBase {
     authorities: SchemaAuthorities
     klass: string
-    name: SchemaName
+    name: string
     plural: string
-    singular: string
+    singular: SchemaName
     metadata: boolean
     displayName: string
     shareable: boolean
@@ -82,10 +82,10 @@ export enum SchemaAuthorityType {
 }
 export interface SchemaAuthority {
     type: SchemaAuthorityType
-    authorities: string[]
+    authorities: string[] | readonly string[]
 }
 
-export type SchemaAuthorities = SchemaAuthority[]
+export type SchemaAuthorities = readonly SchemaAuthority[]
 
 export enum SchemaName {
     access = 'access',

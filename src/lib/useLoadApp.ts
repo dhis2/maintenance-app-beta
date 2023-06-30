@@ -9,6 +9,7 @@ export const schemaFields = [
     'displayName',
     'name',
     'plural',
+    'singular',
     'translatable',
     'properties',
 ] as const
@@ -86,7 +87,7 @@ export const useLoadApp = () => {
                 const schemas = queryData.schemas.schemas
 
                 const schemaEntries = schemas.map((schema) => [
-                    schema.name,
+                    schema.singular,
                     formatSchema(schema),
                 ])
                 const modelSchemas: ModelSchemas =
@@ -104,6 +105,5 @@ export const useLoadApp = () => {
             }
         },
     })
-
     return queryResponse
 }

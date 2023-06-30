@@ -3,4 +3,4 @@ export {
     useCurrentUser,
     useCurrentUserAuthorities,
 } from './currentUserStore'
-export type * from './useIsOperationAllowed'
+export * from './useIsOperationAllowed'
