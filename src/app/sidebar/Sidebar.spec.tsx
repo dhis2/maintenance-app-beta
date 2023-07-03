@@ -5,6 +5,19 @@ import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { Sidebar } from './Sidebar'
 
+jest.mock('./SidebarLinks', () => {
+    const originalModule = jest.requireActual('./SidebarLinks')
+    const links = Object.values(originalModule.sidebarLinks)
+    //Mock the default export and named export 'foo'
+    return {
+        __esModule: true,
+        ...originalModule,
+        useSidebarLinks: jest.fn(() => {
+            return Object.values(links)
+        }),
+    }
+})
+
 describe('Sidebar', () => {
     const renderSideBar = () =>
         render(<Sidebar />, {
