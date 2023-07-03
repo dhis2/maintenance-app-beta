@@ -1,6 +1,5 @@
 import { useMatches } from 'react-router-dom'
-import { isSchemaSection } from '../constants'
-import { SchemaSection, Section } from '../types'
+import { Section } from '../types'
 import { MatchRouteHandle } from './../app/routes/types'
 
 export const useSectionHandle = (): Section | undefined => {
@@ -8,12 +7,4 @@ export const useSectionHandle = (): Section | undefined => {
     const match = matches.find((routeMatch) => routeMatch.handle?.section)
 
     return match?.handle?.section
-}
-
-export const useSchemaSectionHandleOrThrow = (): SchemaSection => {
-    const section = useSectionHandle()
-    if (!section || !isSchemaSection(section)) {
-        throw new Error('No schema section handle found')
-    }
-    return section
 }

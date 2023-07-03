@@ -8,9 +8,6 @@ export interface SectionBase {
 }
 
 // SchemaSection is a section that can be mapped directly to a schema by the name
-// export interface SchemaSection extends SectionBase {
-//     name: SchemaName
-// }
 
 export type SchemaSection = SectionBase & {
     name: SchemaName
@@ -22,19 +19,9 @@ export type NonSchemaSection = SectionBase & {
     parentSectionKey: string
 }
 
-// export interface NonSchemaSection extends SectionBase {
-//     authorities?: SchemaAuthorities
-// }
-
 export type OverviewSection = SectionBase & {
     componentName: string
 }
-
-// export interface OverviewSectionI extends OverviewSectionBase {
-//     test?: string
-// }
-
-// export type OverviewSection = Omit<SectionBase, 'parentSectionKey'> // OverviewSectionI
 
 export type Section = SchemaSection | NonSchemaSection | OverviewSection
 
