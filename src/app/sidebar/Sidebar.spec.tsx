@@ -3,18 +3,18 @@ import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
+import { useIsSectionAuthorizedPredicate } from '../../lib'
 import { Sidebar } from './Sidebar'
 
-jest.mock('./SidebarLinks', () => {
-    const originalModule = jest.requireActual('./SidebarLinks')
-    const links = Object.values(originalModule.sidebarLinks)
-    //Mock the default export and named export 'foo'
+const mockedUseIsSectionAuthorizedPredicate = jest.mocked(
+    useIsSectionAuthorizedPredicate
+)
+
+jest.mock('../../lib', () => {
+    const originalModule = jest.requireActual('../../lib')
     return {
-        __esModule: true,
         ...originalModule,
-        useSidebarLinks: jest.fn(() => {
-            return Object.values(links)
-        }),
+        useIsSectionAuthorizedPredicate: jest.fn(() => () => true),
     }
 })
 
@@ -23,6 +23,11 @@ describe('Sidebar', () => {
         render(<Sidebar />, {
             wrapper: BrowserRouter,
         })
+
+    beforeEach(() => {
+        // reset url to root
+        window.history.pushState({}, '', '/')
+    })
     it('should display the list of top-level categories', () => {
         const { getByText } = renderSideBar()
 
@@ -133,5 +138,43 @@ describe('Sidebar', () => {
         expect(getByText('Metadata Overview')).toHaveFocus()
         userEvent.tab()
         expect(getByText('Categories').parentElement).toHaveFocus()
+    })
+
+    describe('unauthorized sections', () => {
+        it('should hide child links that link to unauthorized sections', () => {
+            const unauthorizedSections = [
+                'Category option',
+                'Category combination',
+                'Category option combination',
+            ]
+            mockedUseIsSectionAuthorizedPredicate.mockImplementation(
+                () => (section) => !unauthorizedSections.includes(section.title)
+            )
+            const { queryByText, getByText } = renderSideBar()
+            const expectedSubCategories = [
+                'Overview',
+                'Category option group',
+                'Category option group set',
+            ]
+            expectedSubCategories.forEach((title) =>
+                expect(queryByText(title)).toBeNull()
+            )
+            getByText('Categories').click()
+            expectedSubCategories.forEach((title) =>
+                expect(getByText(title)).not.toBeNull()
+            )
+            expect(queryByText('Category option')).toBeNull()
+            expect(queryByText('Category combination')).toBeNull()
+            expect(queryByText('Category option combination')).toBeNull()
+        })
+
+        it('should hide parent if all children are unauthorized', () => {
+            mockedUseIsSectionAuthorizedPredicate.mockImplementation(
+                () => (section) =>
+                    !section.title.toLowerCase().includes('category')
+            )
+            const { queryByText } = renderSideBar()
+            expect(queryByText('Categories')).toBeNull()
+        })
     })
 })

@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
-import { SECTIONS_MAP } from '../../constants'
+import { OVERVIEW_SECTIONS, SECTIONS_MAP } from '../../constants'
 import { FilterAuthorizedSections, SummaryCard, SummaryCardGroup } from './card'
 import { OverviewGroup, OverviewGroupSummary } from './group'
 
@@ -21,7 +21,10 @@ export const CategoryOverview = () => {
 
 export const CategoryCardGroup = ({ showTitle }: { showTitle?: boolean }) => {
     return (
-        <SummaryCardGroup title={showTitle ? TITLE : undefined}>
+        <SummaryCardGroup
+            title={showTitle ? TITLE : undefined}
+            section={OVERVIEW_SECTIONS.category}
+        >
             <FilterAuthorizedSections>
                 <SummaryCard section={SECTIONS_MAP.categoryOption}>
                     {i18n.t(
