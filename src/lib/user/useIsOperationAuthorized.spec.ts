@@ -1,8 +1,8 @@
 import { expect } from '@jest/globals'
-import { SchemaAuthorities, SchemaAuthorityType } from './../../types'
-import { isOperationAuthorized } from './useIsOperationAllowed'
+import { SchemaAuthorities, SchemaAuthorityType } from '../../types'
+import { isOperationAuthorized } from './useIsOperationAuthorized'
 
-describe('isOperationAllowed', () => {
+describe('isOperationAuthorized', () => {
     const dataElementSchemaAuthorities: SchemaAuthorities = [
         {
             type: SchemaAuthorityType.CREATE_PUBLIC,
@@ -85,6 +85,32 @@ describe('isOperationAllowed', () => {
         const allowed = isOperationAuthorized(
             SchemaAuthorityType.DELETE,
             dataElementSchemaAuthorities,
+            userAuthorities
+        )
+        expect(allowed).toBe(false)
+    })
+
+    it('should return false if userAuthorities is empty', () => {
+        const userAuthorities = new Set([])
+        const dataElementSchemaAuthorities: SchemaAuthorities = [
+            {
+                type: SchemaAuthorityType.CREATE_PRIVATE,
+                authorities: ['F_DATAELEMENT_PRIVATE_ADD'],
+            },
+        ]
+        const allowed = isOperationAuthorized(
+            SchemaAuthorityType.DELETE,
+            dataElementSchemaAuthorities,
+            userAuthorities
+        )
+        expect(allowed).toBe(false)
+    })
+
+    it('should return false if schemaAuthorities is empty', () => {
+        const userAuthorities = new Set([])
+        const allowed = isOperationAuthorized(
+            SchemaAuthorityType.DELETE,
+            [],
             userAuthorities
         )
         expect(allowed).toBe(false)
