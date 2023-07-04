@@ -1,1 +1,0 @@
-export { isValidUid } from './uid'

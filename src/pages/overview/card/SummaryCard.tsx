@@ -8,6 +8,8 @@ import {
     getSectionPath,
 } from '../../../app/routes/routePaths'
 import { SECTIONS_MAP, Section } from '../../../constants'
+import { useIsSectionAuthorizedPredicate } from '../../../lib'
+import { OverviewSection } from '../../../types'
 import styles from './SummaryCard.module.css'
 
 const DEFAULT_ICON = <IconEdit24 />
@@ -18,11 +20,19 @@ const SummaryCardHeader = ({ children }: PropsWithChildren) => (
 
 interface SummaryCardGroupProps {
     title?: string
+    section: OverviewSection
 }
+
 export const SummaryCardGroup = ({
     children,
     title,
+    section,
 }: PropsWithChildren<SummaryCardGroupProps>) => {
+    const isSectionAuthorized = useIsSectionAuthorizedPredicate()
+    const isOverviewAuthorized = isSectionAuthorized(section)
+    if (!isOverviewAuthorized) {
+        return null
+    }
     return (
         <>
             {title && <div className={styles.cardGroupHeader}>{title}</div>}
@@ -44,7 +54,7 @@ export const SummaryCard = ({
 }: SummaryCardProps) => {
     const title = section.title
     return (
-        <Card>
+        <Card dataTest={`card-${title}`}>
             <div className={styles.cardWrapper}>
                 <Link to={`/${getSectionPath(section)}`}>
                     <div className={styles.cardIcon}>{icon}</div>

@@ -5,12 +5,7 @@ import { useQueryParam, ObjectParam } from 'use-query-params'
 import css from './Filters.module.css'
 
 type ConstantSelectionFilterProps = {
-    filterKey: string
     label: string
-    options: {
-        label: string
-        value: string
-    }
 }
 
 export const ConstantSelectionFilter = ({
@@ -22,7 +17,8 @@ export const ConstantSelectionFilter = ({
     return (
         <SingleSelect
             className={css.constantSelectionFilter}
-            onChange={({ selected }) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            onChange={({ selected }: any) => {
                 setFilter((prev) => ({ ...prev, domainType: selected }))
                 console.log('selected', selected)
             }}

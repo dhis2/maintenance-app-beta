@@ -12,10 +12,17 @@ import {
 } from 'react-router-dom'
 import { QueryParamProvider } from 'use-query-params'
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6'
-import { SECTIONS_MAP, Section } from '../../constants'
-import { isModuleNotFoundError } from '../../lib'
-import { isValidUid } from '../../models'
+import {
+    SECTIONS_MAP,
+    SCHEMA_SECTIONS,
+    Section,
+    SchemaSection,
+    OVERVIEW_SECTIONS,
+} from '../../constants'
+import { isValidUid, isModuleNotFoundError } from '../../lib'
+import { OverviewSection } from '../../types'
 import { Layout } from '../layout'
+import { CheckAuthorityForSection } from './CheckAuthorityForSection'
 import { DefaultErrorRoute } from './DefaultErrorRoute'
 import { LegacyAppRedirect } from './LegacyAppRedirect'
 import { getSectionPath, routePaths } from './routePaths'
@@ -24,12 +31,21 @@ import { getSectionPath, routePaths } from './routePaths'
 // Overviews are small, and the AllOverview would load all the other overviews anyway,
 // so it's propbably better to load them all at once
 function createOverviewLazyRouteFunction(
-    componentName: keyof typeof import('../../pages/overview/')
+    componentName: string, //keyof typeof import('../../pages/overview/'),
+    section?: OverviewSection
 ): LazyRouteFunction<RouteObject> {
     return async () => {
         const routeComponent = await import(`../../pages/overview/`)
+        const name = componentName as keyof typeof routeComponent
+        const Component = routeComponent[name]
+        if (!Component && section) {
+            return {
+                element: <LegacyAppRedirect section={section} />,
+            }
+        }
+
         return {
-            Component: routeComponent[componentName],
+            Component: routeComponent[name],
         }
     }
 }
@@ -70,34 +86,31 @@ const VerifyModelId = () => {
     return <Outlet />
 }
 
-const sectionsNoEditRoute = new Set<Section>([SECTIONS_MAP.locale])
-const sectionsNoNewRoute = new Set<Section>([SECTIONS_MAP.categoryOptionCombo])
+const sectionsNoNewRoute = new Set<SchemaSection>([
+    SECTIONS_MAP.categoryOptionCombo,
+])
 
-const sectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
+const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
     <Route
         key={section.namePlural}
         path={getSectionPath(section)}
         handle={{ section }}
     >
         <Route index lazy={createSectionLazyRouteFunction(section, 'List')} />
-        {!sectionsNoNewRoute.has(section) && (
-            <Route
-                path={routePaths.sectionNew}
-                lazy={createSectionLazyRouteFunction(section, 'New')}
-                handle={{
-                    hideSidebar: true,
-                }}
-            />
-        )}
-
-        {!sectionsNoEditRoute.has(section) && (
+        <Route handle={{ hideSidebar: true }}>
+            {!sectionsNoNewRoute.has(section) && (
+                <Route
+                    path={routePaths.sectionNew}
+                    lazy={createSectionLazyRouteFunction(section, 'New')}
+                />
+            )}
             <Route path=":id" element={<VerifyModelId />}>
                 <Route
                     index
                     lazy={createSectionLazyRouteFunction(section, 'Edit')}
                 ></Route>
             </Route>
-        )}
+        </Route>
     </Route>
 ))
 
@@ -114,21 +127,26 @@ const routes = createRoutesFromElements(
             path="/"
             element={<Navigate to={routePaths.overviewRoot} replace />}
         />
-        <Route path={routePaths.overviewRoot}>
-            <Route
-                index
-                lazy={createOverviewLazyRouteFunction('AllOverview')}
-            />
-            <Route
-                path={getSectionPath(SECTIONS_MAP.dataElement)}
-                lazy={createOverviewLazyRouteFunction('DataElements')}
-            />
-            <Route
-                path={getSectionPath(SECTIONS_MAP.category)}
-                lazy={createOverviewLazyRouteFunction('Categories')}
-            />
+        <Route element={<CheckAuthorityForSection />}>
+            <Route path={routePaths.overviewRoot}>
+                <Route
+                    index
+                    lazy={createOverviewLazyRouteFunction('AllOverview')}
+                />
+                {Object.values(OVERVIEW_SECTIONS).map((section) => (
+                    <Route
+                        key={section.name}
+                        path={getSectionPath(section)}
+                        lazy={createOverviewLazyRouteFunction(
+                            section.componentName,
+                            section
+                        )}
+                        handle={{ section }}
+                    />
+                ))}
+            </Route>
+            {schemaSectionRoutes}
         </Route>
-        {sectionRoutes}
     </Route>
 )
 
