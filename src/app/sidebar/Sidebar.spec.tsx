@@ -14,7 +14,7 @@ jest.mock('../../lib', () => {
     const originalModule = jest.requireActual('../../lib')
     return {
         ...originalModule,
-        useIsSectionAuthorizedPredicate: jest.fn(() => () => true),
+        useIsSectionAuthorizedPredicate: jest.fn(),
     }
 })
 
@@ -27,6 +27,10 @@ describe('Sidebar', () => {
     beforeEach(() => {
         // reset url to root
         window.history.pushState({}, '', '/')
+        jest.resetAllMocks()
+        mockedUseIsSectionAuthorizedPredicate.mockImplementation(
+            () => () => true
+        )
     })
     it('should display the list of top-level categories', () => {
         const { getByText } = renderSideBar()
