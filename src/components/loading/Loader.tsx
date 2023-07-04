@@ -29,6 +29,5 @@ export const Loader = ({ children, queryResponse, label }: LoaderProps) => {
             </NoticeBox>
         )
     }
-
     return <>{children}</>
 }

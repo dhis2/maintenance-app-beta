@@ -1,10 +1,17 @@
 import i18n from '@dhis2/d2-i18n'
-import { SECTIONS_MAP, Section } from '../../constants/sections'
+import { useMemo } from 'react'
+import {
+    OVERVIEW_SECTIONS,
+    SECTIONS_MAP,
+    Section,
+} from '../../constants/sections'
+import { useIsSectionAuthorizedPredicate } from '../../lib'
 import { getOverviewPath, getSectionPath } from '../routes/routePaths'
 
 export interface LinkItem {
     to: string
     label: string
+    section: Section
 }
 
 export interface ParentLink {
@@ -17,18 +24,20 @@ export type SidebarLinks = Record<string, ParentLink>
 const getOverviewLinkItem = (section: Section): LinkItem => ({
     label: i18n.t('Overview'),
     to: getOverviewPath(section),
+    section,
 })
 
 const getSectionLinkItem = (section: Section): LinkItem => ({
     label: i18n.t(section.title),
     to: getSectionPath(section),
+    section,
 })
 
 export const sidebarLinks = {
     categories: {
-        label: SECTIONS_MAP.category.titlePlural,
+        label: OVERVIEW_SECTIONS.category.titlePlural,
         links: [
-            getOverviewLinkItem(SECTIONS_MAP.category),
+            getOverviewLinkItem(OVERVIEW_SECTIONS.category),
             getSectionLinkItem(SECTIONS_MAP.categoryOption),
             getSectionLinkItem(SECTIONS_MAP.category),
             getSectionLinkItem(SECTIONS_MAP.categoryCombo),
@@ -38,26 +47,26 @@ export const sidebarLinks = {
         ],
     },
     dataElements: {
-        label: SECTIONS_MAP.dataElement.titlePlural,
+        label: OVERVIEW_SECTIONS.dataElement.titlePlural,
         links: [
-            getOverviewLinkItem(SECTIONS_MAP.dataElement),
+            getOverviewLinkItem(OVERVIEW_SECTIONS.dataElement),
             getSectionLinkItem(SECTIONS_MAP.dataElement),
             getSectionLinkItem(SECTIONS_MAP.dataElementGroup),
             getSectionLinkItem(SECTIONS_MAP.dataElementGroupSet),
         ],
     },
     dataSets: {
-        label: SECTIONS_MAP.dataSet.titlePlural,
+        label: OVERVIEW_SECTIONS.dataSet.titlePlural,
         links: [
-            getOverviewLinkItem(SECTIONS_MAP.dataSet),
+            getOverviewLinkItem(OVERVIEW_SECTIONS.dataSet),
             getSectionLinkItem(SECTIONS_MAP.dataSet),
-            getSectionLinkItem(SECTIONS_MAP.dataSetNotification),
+            getSectionLinkItem(SECTIONS_MAP.dataSetNotificationTemplate),
         ],
     },
     indicators: {
-        label: SECTIONS_MAP.indicator.titlePlural,
+        label: OVERVIEW_SECTIONS.indicator.titlePlural,
         links: [
-            getOverviewLinkItem(SECTIONS_MAP.indicator),
+            getOverviewLinkItem(OVERVIEW_SECTIONS.indicator),
             getSectionLinkItem(SECTIONS_MAP.indicator),
             getSectionLinkItem(SECTIONS_MAP.indicatorType),
             getSectionLinkItem(SECTIONS_MAP.indicatorGroup),
@@ -67,18 +76,18 @@ export const sidebarLinks = {
         ],
     },
     organisationUnits: {
-        label: SECTIONS_MAP.organisationUnit.titlePlural,
+        label: OVERVIEW_SECTIONS.organisationUnit.titlePlural,
         links: [
-            getOverviewLinkItem(SECTIONS_MAP.organisationUnit),
+            getOverviewLinkItem(OVERVIEW_SECTIONS.organisationUnit),
             getSectionLinkItem(SECTIONS_MAP.organisationUnit),
             getSectionLinkItem(SECTIONS_MAP.organisationUnitGroup),
             getSectionLinkItem(SECTIONS_MAP.organisationUnitGroupSet),
         ],
     },
     programsAndTracker: {
-        label: SECTIONS_MAP.programsAndTracker.title,
+        label: OVERVIEW_SECTIONS.programsAndTracker.title,
         links: [
-            getOverviewLinkItem(SECTIONS_MAP.programsAndTracker),
+            getOverviewLinkItem(OVERVIEW_SECTIONS.programsAndTracker),
             getSectionLinkItem(SECTIONS_MAP.program),
             getSectionLinkItem(SECTIONS_MAP.trackedEntityType),
             getSectionLinkItem(SECTIONS_MAP.trackedEntityAttribute),
@@ -88,12 +97,28 @@ export const sidebarLinks = {
         ],
     },
     validation: {
-        label: SECTIONS_MAP.validation.titlePlural,
+        label: OVERVIEW_SECTIONS.validation.titlePlural,
         links: [
-            getOverviewLinkItem(SECTIONS_MAP.validation),
+            getOverviewLinkItem(OVERVIEW_SECTIONS.validation),
             getSectionLinkItem(SECTIONS_MAP.validationRule),
             getSectionLinkItem(SECTIONS_MAP.validationRuleGroup),
-            getSectionLinkItem(SECTIONS_MAP.validationNotification),
+            getSectionLinkItem(SECTIONS_MAP.validationNotificationTemplate),
         ],
     },
 } satisfies SidebarLinks
+
+export const useSidebarLinks = (): ParentLink[] => {
+    const isSectionAuthorized = useIsSectionAuthorizedPredicate()
+
+    return useMemo(() => {
+        const authorizedSidebarLinks: ParentLink[] = Object.values(sidebarLinks)
+            .map(({ label, links }) => ({
+                label,
+                links: links.filter(({ section }) =>
+                    isSectionAuthorized(section)
+                ),
+            }))
+            .filter(({ links }) => links.length > 0)
+        return authorizedSidebarLinks
+    }, [isSectionAuthorized])
+}
