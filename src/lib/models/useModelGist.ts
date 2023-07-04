@@ -42,6 +42,7 @@ function createGistQuery(
         result: {
             resource: `${resource}`,
             params: ({ page, ...dynamicParams }) => ({
+                pageListName: 'result',
                 total: true,
                 ...params,
                 ...dynamicParams,

@@ -44,7 +44,6 @@ export const Component = () => {
         'dataElements/gist',
         {
             fields: filterFields.concat(),
-            pageListName: 'result',
             order: 'name:ASC',
         }
     )
