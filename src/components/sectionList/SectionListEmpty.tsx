@@ -8,9 +8,7 @@ export const SectionListEmpty = () => {
         <DataTableRow>
             <DataTableCell colSpan="100%">
                 <p className={css.listEmpty}>
-                    {i18n.t(
-                        "There's no items that match your selected filter."
-                    )}
+                    {i18n.t("There aren't any items that match your filter.")}
                 </p>
             </DataTableCell>
         </DataTableRow>
