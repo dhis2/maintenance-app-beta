@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { SingleSelect, SingleSelectOption } from '@dhis2/ui'
 import React from 'react'
 import {
@@ -32,6 +33,7 @@ export const ConstantSelectionFilter = ({
             placeholder={label}
             dense
             filterable={filterable}
+            noMatchText={i18n.t('No matches')}
         >
             <SingleSelectOption key={'all'} label={'All'} value={''} />
             {Object.entries(constants).map(([key, label]) => (

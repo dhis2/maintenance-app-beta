@@ -8,7 +8,7 @@ import { IDENTIFIABLE_KEY, useSectionListFilter } from './useSectionListFilter'
 
 export const IdentifiableFilter = () => {
     const [filter, setFilter] = useSectionListFilter(IDENTIFIABLE_KEY)
-    const [value, setValue] = useState(filter)
+    const [value, setValue] = useState(filter || '')
     const debouncedValue = useDebounce<typeof filter>(value, 200)
 
     useEffect(() => {
