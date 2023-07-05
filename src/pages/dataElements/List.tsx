@@ -39,27 +39,24 @@ const defaulHeaderColumns: SelectedColumns<FilteredDataElement> = [
 
 export const Component = () => {
     const initialParams = useQueryParamsForModelGist()
-    const { refetch, data, pagination } = useModelGist<DataElements>(
-        'dataElements/gist',
-        {
-            fields: filterFields.concat(),
-            ...initialParams,
-        }
-    )
-    useSectionListFilterRefetch(refetch)
+    const gistResponse = useModelGist<DataElements>('dataElements/gist', {
+        fields: filterFields.concat(),
+        ...initialParams,
+    })
+
+    useSectionListFilterRefetch(gistResponse.refetch)
 
     return (
         <div>
             <SectionListWrapper
                 defaultColumns={defaulHeaderColumns}
-                data={data}
                 filterElement={
                     <>
                         <DomainTypeSelectionFilter />
                         <ValueTypeSelectionFilter />
                     </>
                 }
-                pagination={pagination}
+                gistResponse={gistResponse}
             />
         </div>
     )

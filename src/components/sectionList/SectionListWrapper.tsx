@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from 'react'
-import { GistPaginator } from '../../lib/models/useModelGist'
+import { UseModelGistResultPaginated } from '../../lib/models/useModelGist'
 import { IdentifiableObject, GistCollectionResponse } from '../../types/models'
 import { FilterWrapper } from './filters/FilterWrapper'
 import { SectionList } from './SectionList'
-import { SectionListEmpty } from './SectionListEmpty'
 import { SectionListLoader } from './SectionListLoader'
+import { SectionListEmpty, SectionListError } from './SectionListMessage'
 import { SectionListPagination } from './SectionListPagination'
 import { SectionListRow } from './SectionListRow'
 import { SelectionListHeader } from './SelectionListHeaderNormal'
@@ -13,20 +13,20 @@ import { SelectedColumns } from './types'
 type SectionListWrapperProps<Model extends IdentifiableObject> = {
     availableColumns?: SelectedColumns<Model>
     defaultColumns: SelectedColumns<Model>
-    data?: GistCollectionResponse<Model>
     filterElement?: React.ReactElement
-    pagination: GistPaginator
+    gistResponse: UseModelGistResultPaginated<GistCollectionResponse<Model>>
 }
 export const SectionListWrapper = <Model extends IdentifiableObject>({
     availableColumns,
     defaultColumns,
-    data,
     filterElement,
-    pagination,
+    gistResponse,
 }: SectionListWrapperProps<Model>) => {
     const [selectedColumns, setSelectedColumns] =
         useState<SelectedColumns<Model>>(defaultColumns)
     const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set())
+
+    const { pagination, error, data } = gistResponse
 
     const handleSelect = (id: string, checked: boolean) => {
         if (checked) {
@@ -58,6 +58,19 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
         )
     }, [data?.result, selectedModels.size])
 
+    const SectionListMessage = () => {
+        if (error) {
+            console.log(error.details)
+            return <SectionListError />
+        }
+        if (!data?.result) {
+            return <SectionListLoader />
+        }
+        if (data?.result?.length < 1) {
+            return <SectionListEmpty />
+        }
+        return null
+    }
     return (
         <div>
             <FilterWrapper>{filterElement}</FilterWrapper>
@@ -67,11 +80,8 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
                 onSelectAll={handleSelectAll}
                 allSelected={allSelected}
             >
-                {!data?.result ? (
-                    <SectionListLoader />
-                ) : data.result.length < 1 ? (
-                    <SectionListEmpty />
-                ) : (
+                <SectionListMessage />
+                {data?.result &&
                     data?.result.map((model) => (
                         <SectionListRow
                             key={model.id}
@@ -80,8 +90,7 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
                             onSelect={handleSelect}
                             selected={selectedModels.has(model.id)}
                         />
-                    ))
-                )}
+                    ))}
                 <SectionListPagination pagination={pagination} />
             </SectionList>
         </div>

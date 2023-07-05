@@ -120,11 +120,11 @@ type BaseUseModelGistResult<Response> = Pick<
     data?: Response
 }
 
-type UseModelGistResultPaginated<Response> =
+export type UseModelGistResultPaginated<Response> =
     BaseUseModelGistResult<Response> & {
         pagination: GistPaginator
     }
-type UseModelGistResult<Response extends GistResponse> =
+export type UseModelGistResult<Response extends GistResponse> =
     | BaseUseModelGistResult<Response>
     | UseModelGistResultPaginated<Response>
 
