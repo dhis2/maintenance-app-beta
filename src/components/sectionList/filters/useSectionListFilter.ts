@@ -1,8 +1,13 @@
-import { useCallback, useMemo, useEffect } from 'react'
+import { useCallback, useMemo, useEffect, useRef } from 'react'
 import { useQueryParam, ObjectParam } from 'use-query-params'
-import { Schema, useSchemaFromHandle, CustomObjectParam } from '../../../lib'
+import {
+    Schema,
+    useSchemaFromHandle,
+    CustomObjectParam,
+    GistParams,
+} from '../../../lib'
 import { QueryRefetchFunction } from '../../../types'
-import { GistParams } from '../../../types/generated'
+import { usePaginiationQueryParams } from '../SectionListPagination'
 
 type ObjectParamType = typeof ObjectParam.default
 
@@ -28,7 +33,7 @@ const IDENTIFIABLE_FIELDS = {
     },
 }
 
-const getRelevantFiltersForSchema = (
+const getVerifiedFiltersForSchema = (
     filters: ObjectParamType,
     schema: Schema
 ): Filters => {
@@ -53,7 +58,7 @@ export const useSectionListFilters = (): ReturnType<
     const schema = useSchemaFromHandle()
 
     return useMemo(
-        () => [getRelevantFiltersForSchema(filter, schema), setFilter],
+        () => [getVerifiedFiltersForSchema(filter, schema), setFilter],
         [filter, schema, setFilter]
     )
 }
@@ -129,11 +134,29 @@ export const useSectionListQueryFilter = () => {
 
 export const useSectionListFilterRefetch = (refetch: QueryRefetchFunction) => {
     const { filter, rootJunction } = useSectionListQueryFilter()
+    const firstRender = useRef(true)
 
     useEffect(() => {
+        if (firstRender.current) {
+            firstRender.current = false
+            return
+        }
         refetch({
             filter,
             rootJunction,
+            page: 1, // reset to first page when filter changes
         })
     }, [refetch, filter, rootJunction])
+}
+
+export const useQueryParamsForModelGist = (): GistParams => {
+    const [paginationParams] = usePaginiationQueryParams()
+    const filterParams = useSectionListQueryFilter()
+
+    return useMemo(() => {
+        return {
+            ...paginationParams,
+            ...filterParams,
+        }
+    }, [paginationParams, filterParams])
 }

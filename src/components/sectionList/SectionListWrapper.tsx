@@ -1,8 +1,10 @@
 import React, { useMemo, useState } from 'react'
+import { GistPaginator } from '../../lib/models/useModelGist'
 import { IdentifiableObject, GistCollectionResponse } from '../../types/models'
 import { FilterWrapper } from './filters/FilterWrapper'
 import { SectionList } from './SectionList'
 import { SectionListLoader } from './SectionListLoader'
+import { SectionListPagination } from './SectionListPagination'
 import { SectionListRow } from './SectionListRow'
 import { SelectionListHeader } from './SelectionListHeaderNormal'
 import { SelectedColumns } from './types'
@@ -12,12 +14,14 @@ type SectionListWrapperProps<Model extends IdentifiableObject> = {
     defaultColumns: SelectedColumns<Model>
     data?: GistCollectionResponse<Model>
     filterElement?: React.ReactElement
+    pagination: GistPaginator
 }
 export const SectionListWrapper = <Model extends IdentifiableObject>({
     availableColumns,
     defaultColumns,
     data,
     filterElement,
+    pagination,
 }: SectionListWrapperProps<Model>) => {
     const [selectedColumns, setSelectedColumns] =
         useState<SelectedColumns<Model>>(defaultColumns)
@@ -75,6 +79,7 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
                         />
                     ))
                 )}
+                <SectionListPagination pagination={pagination} />
             </SectionList>
         </div>
     )

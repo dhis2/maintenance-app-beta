@@ -12,7 +12,7 @@ import {
 import { QueryResponse, Query } from '../../types/query'
 
 // these normally are just strings, but useQuery supports arrays
-type GistParams = Omit<BaseGistParams, 'fields' | 'filter'> & {
+export type GistParams = Omit<BaseGistParams, 'fields' | 'filter'> & {
     fields?: string | string[]
     filter?: string | string[]
 }
@@ -41,13 +41,12 @@ function createGistQuery(
     return {
         result: {
             resource: `${resource}`,
-            params: ({ page, ...dynamicParams }) => ({
+            params: ({ ...dynamicParams }) => ({
                 pageListName: 'result',
                 total: true,
                 order: 'name:ASC',
                 ...params,
                 ...dynamicParams,
-                page,
             }),
         },
     }
@@ -89,17 +88,29 @@ function usePagination(
         [refetch, pager]
     )
 
+    const changePageSize = useCallback(
+        (pageSize: number) => {
+            refetch({ pageSize: pageSize })
+            return true
+        },
+        [refetch]
+    )
+
     return {
         getNextPage,
         getPrevPage,
         goToPage,
+        changePageSize,
+        pager,
     }
 }
 
-type GistPaginator = {
+export type GistPaginator = {
+    changePageSize: (pageSize: number) => boolean
     getNextPage: () => boolean
     getPrevPage: () => boolean
     goToPage: (page: number) => boolean
+    pager?: GistPager
 }
 
 type BaseUseModelGistResult<Response> = Pick<
@@ -117,7 +128,7 @@ type UseModelGistResult<Response extends GistResponse> =
     | BaseUseModelGistResult<Response>
     | UseModelGistResultPaginated<Response>
 
-const isDataCollection = (
+export const isDataCollection = (
     data: unknown
 ): data is GistCollectionResponse<IdentifiableObject> => {
     // gist endpoints are always paged if they're collections
@@ -141,16 +152,8 @@ export function useModelGist<Response extends GistResponse>(
     const [gistQuery] = useState<GistQuery>(
         createGistQuery(gistResource, params)
     )
-    // workaround to keep previous data while fetching, to prevent flickering
-    // "mimicks" react-query's 'keepPreviousData'
-    const [previousData, setPreviousData] =
-        useState<GistQueryResult<Response>>()
     const queryResponse = useDataQuery<GistQueryResult<Response>>(gistQuery)
-    const stickyData = queryResponse.data || previousData
 
-    if (queryResponse.data && previousData !== queryResponse.data) {
-        setPreviousData(queryResponse.data)
-    }
     const pagination = usePagination(
         queryResponse.refetch,
         queryResponse.data?.result
@@ -161,7 +164,7 @@ export function useModelGist<Response extends GistResponse>(
             loading: queryResponse.loading,
             called: queryResponse.called,
             error: queryResponse.error,
-            data: stickyData?.result,
+            data: queryResponse.data?.result,
             refetch: queryResponse.refetch,
         }
         if (pagination) {
@@ -172,5 +175,5 @@ export function useModelGist<Response extends GistResponse>(
             return result
         }
         return baseResult
-    }, [queryResponse, stickyData, pagination])
+    }, [queryResponse, pagination])
 }

@@ -4,11 +4,10 @@ import {
     SectionListWrapper,
     SelectedColumns,
     useSectionListFilterRefetch,
-} from '../../components'
-import {
     DomainTypeSelectionFilter,
     ValueTypeSelectionFilter,
-} from '../../components/sectionList/filters/ConstantSelectionFilter'
+    useQueryParamsForModelGist,
+} from '../../components'
 import { useModelGist } from '../../lib/'
 import { DataElement, GistCollectionResponse } from '../../types/models'
 
@@ -39,10 +38,12 @@ const defaulHeaderColumns: SelectedColumns<FilteredDataElement> = [
 ]
 
 export const Component = () => {
+    const initialParams = useQueryParamsForModelGist()
     const { refetch, data, pagination } = useModelGist<DataElements>(
         'dataElements/gist',
         {
             fields: filterFields.concat(),
+            ...initialParams,
         }
     )
     useSectionListFilterRefetch(refetch)
@@ -58,8 +59,8 @@ export const Component = () => {
                         <ValueTypeSelectionFilter />
                     </>
                 }
+                pagination={pagination}
             />
-            <button onClick={() => pagination.getNextPage()}>Next Page</button>
         </div>
     )
 }
