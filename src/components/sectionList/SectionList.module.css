@@ -30,3 +30,7 @@
 .listActions button {
     padding: 0 2px !important;
 }
+
+.listEmpty {
+    text-align: center;
+}

@@ -3,6 +3,7 @@ import { GistPaginator } from '../../lib/models/useModelGist'
 import { IdentifiableObject, GistCollectionResponse } from '../../types/models'
 import { FilterWrapper } from './filters/FilterWrapper'
 import { SectionList } from './SectionList'
+import { SectionListEmpty } from './SectionListEmpty'
 import { SectionListLoader } from './SectionListLoader'
 import { SectionListPagination } from './SectionListPagination'
 import { SectionListRow } from './SectionListRow'
@@ -68,6 +69,8 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
             >
                 {!data?.result ? (
                     <SectionListLoader />
+                ) : data.result.length < 1 ? (
+                    <SectionListEmpty />
                 ) : (
                     data?.result.map((model) => (
                         <SectionListRow

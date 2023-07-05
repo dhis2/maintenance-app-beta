@@ -56,6 +56,9 @@ export const SectionListPagination = ({
         })
     }, [pagination, setPaginationParams])
 
+    if (!pagination.pager?.total) {
+        return null
+    }
     return (
         <DataTableRow>
             <DataTableCell colSpan="100%">

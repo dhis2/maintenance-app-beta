@@ -33,6 +33,7 @@ export const ConstantSelectionFilter = ({
             placeholder={label}
             dense
             filterable={filterable}
+            filterPlaceholder={i18n.t('Type to filter options')}
             noMatchText={i18n.t('No matches')}
         >
             <SingleSelectOption key={'all'} label={'All'} value={''} />
