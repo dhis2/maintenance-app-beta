@@ -1,33 +1,63 @@
 import { SingleSelect, SingleSelectOption } from '@dhis2/ui'
 import React from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { useQueryParam, ObjectParam } from 'use-query-params'
+import {
+    DOMAIN_TYPE,
+    VALUE_TYPE,
+} from '../../../constants/translatedModelConstants'
+import { SelectOnChangeObject } from '../../../types'
 import css from './Filters.module.css'
+import { useSectionListFilter } from './useSectionListFilter'
 
 type ConstantSelectionFilterProps = {
     label: string
+    constants: Record<string, string>
+    filterKey: string
+    filterable?: boolean
 }
 
 export const ConstantSelectionFilter = ({
+    constants,
+    filterKey,
     label,
+    filterable,
 }: ConstantSelectionFilterProps) => {
-    const [value, setValue] = React.useState('')
-    const [filter, setFilter] = useQueryParam('filter', ObjectParam)
-
+    const [filter, setFilter] = useSectionListFilter(filterKey)
     return (
         <SingleSelect
             className={css.constantSelectionFilter}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            onChange={({ selected }: any) => {
-                setFilter((prev) => ({ ...prev, domainType: selected }))
-                console.log('selected', selected)
+            onChange={({ selected }: SelectOnChangeObject) => {
+                setFilter(selected)
             }}
-            selected={filter?.domainType || ''}
+            selected={filter}
             placeholder={label}
+            dense
+            filterable={filterable}
         >
-            <SingleSelectOption label="option one" value="1" />
-            <SingleSelectOption label="option two" value="2" />
-            <SingleSelectOption label="option three" value="3" />
+            <SingleSelectOption key={'all'} label={'All'} value={''} />
+            {Object.entries(constants).map(([key, label]) => (
+                <SingleSelectOption key={key} label={label} value={key} />
+            ))}
         </SingleSelect>
+    )
+}
+
+export const DomainTypeSelectionFilter = () => {
+    return (
+        <ConstantSelectionFilter
+            label={'Domain type'}
+            filterKey="domainType"
+            constants={DOMAIN_TYPE}
+        />
+    )
+}
+
+export const ValueTypeSelectionFilter = () => {
+    return (
+        <ConstantSelectionFilter
+            label={'Value type'}
+            filterKey="valueType"
+            constants={VALUE_TYPE}
+            filterable
+        />
     )
 }

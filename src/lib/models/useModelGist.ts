@@ -44,6 +44,7 @@ function createGistQuery(
             params: ({ page, ...dynamicParams }) => ({
                 pageListName: 'result',
                 total: true,
+                order: 'name:ASC',
                 ...params,
                 ...dynamicParams,
                 page,

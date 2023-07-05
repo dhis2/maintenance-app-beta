@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useEffect } from 'react'
 import { useQueryParam, ObjectParam } from 'use-query-params'
-import { Schema, useSchemaFromHandle } from '../../../lib'
+import { Schema, useSchemaFromHandle, CustomObjectParam } from '../../../lib'
 import { QueryRefetchFunction } from '../../../types'
 import { GistParams } from '../../../types/generated'
 
@@ -9,9 +9,9 @@ type ObjectParamType = typeof ObjectParam.default
 type Filters = Record<string, string | undefined>
 
 // special key for handling search for identifiable objects
-// eg. searches for name, code and shortname
+// eg. searches for name, code, id and shortname
 // this would translate to "token" in the old API, but does not exist in GIST-API
-const IDENTIFIABLE_KEY = 'identifiable'
+export const IDENTIFIABLE_KEY = 'identifiable'
 
 const IDENTIFIABLE_FIELDS = {
     name: {
@@ -35,8 +35,7 @@ const getRelevantFiltersForSchema = (
     if (!filters) {
         return {}
     }
-    /* TODO: verify values for filters
-    Might want to do this when parsing to queryFilter. */
+    /* TODO: verify values for filters */
     const relevantFilters = Object.entries(filters).filter(([key]) => {
         return key === IDENTIFIABLE_KEY || schema.properties[key]
     })
@@ -44,7 +43,7 @@ const getRelevantFiltersForSchema = (
 }
 
 const useFilterQueryParam = () => {
-    return useQueryParam('filter', ObjectParam)
+    return useQueryParam('filter', CustomObjectParam)
 }
 
 export const useSectionListFilters = (): ReturnType<
@@ -82,9 +81,7 @@ export const useSectionListFilter = (
         [filterKey, setFilters]
     )
 
-    return useMemo(() => {
-        return [filters?.[filterKey] ?? undefined, boundSetFilter]
-    }, [filters, filterKey, boundSetFilter])
+    return [filters?.[filterKey] ?? undefined, boundSetFilter]
 }
 
 export type ParseToQueryFilterResult = {
@@ -100,7 +97,7 @@ const parseToQueryFilter = (filters: Filters): ParseToQueryFilterResult => {
     // Groups are a powerful way to combine filters,
     // here we use them for identifiable filters, to group them with "OR" and
     // rest of the filters with "AND".
-    // Unfortunately, it doesn't work to send groups without at least two,
+    // Unfortunately, it doesn't work to use groups without at least two,
     // so we need to add them conditionally.
     // see https://docs.dhis2.org/en/develop/using-the-api/dhis-core-version-239/metadata-gist.html#gist_parameters_filter
     const identifiableFilterGroup = hasOtherFilters ? `0:` : ''

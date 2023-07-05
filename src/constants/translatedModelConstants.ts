@@ -64,7 +64,7 @@ export const VALUE_TYPE = {
     GEOJSON: i18n.t('GeoJSON'),
 }
 
-export const constantPropertyTranlsations = {
+export const constantPropertyTranslations = {
     aggregationType: AGGREGATION_TYPE,
     domainType: DOMAIN_TYPE,
     valueType: VALUE_TYPE,

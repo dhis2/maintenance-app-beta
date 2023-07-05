@@ -1,23 +1,22 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
-    SectionList,
-    SectionListRow,
     SectionListWrapper,
     SelectedColumns,
+    useSectionListFilterRefetch,
 } from '../../components'
-import { useModelGist } from '../../lib/'
 import {
-    DataElement,
-    GistCollectionResponse,
-    GistModel,
-    IdentifiableObject,
-} from '../../types/models'
+    DomainTypeSelectionFilter,
+    ValueTypeSelectionFilter,
+} from '../../components/sectionList/filters/ConstantSelectionFilter'
+import { useModelGist } from '../../lib/'
+import { DataElement, GistCollectionResponse } from '../../types/models'
 
 const filterFields = [
     'access',
     'id',
     'name',
+    'code',
     'domainType',
     'valueType',
     'lastUpdated',
@@ -44,32 +43,21 @@ export const Component = () => {
         'dataElements/gist',
         {
             fields: filterFields.concat(),
-            order: 'name:ASC',
         }
     )
-
-    const [filter, setFilter] = React.useState('')
-
-    useEffect(() => {
-        if (filter) {
-            console.log('refetch', filter)
-            refetch({
-                filter: [`name:ilike:${filter}`, 'domainType:eq:AGGREGATE'],
-            })
-        } else {
-            refetch({ filter: undefined })
-        }
-    }, [refetch, filter])
+    useSectionListFilterRefetch(refetch)
 
     return (
         <div>
-            <input
-                type="text"
-                onChange={(val) => setFilter(val.target.value)}
-            ></input>
             <SectionListWrapper
                 defaultColumns={defaulHeaderColumns}
                 data={data}
+                filterElement={
+                    <>
+                        <DomainTypeSelectionFilter />
+                        <ValueTypeSelectionFilter />
+                    </>
+                }
             />
             <button onClick={() => pagination.getNextPage()}>Next Page</button>
         </div>
