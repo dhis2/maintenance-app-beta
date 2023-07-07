@@ -56,6 +56,7 @@ const validatePagerParams = (
     const pageSize = params.pageSize as number
     const page = params.page as number
 
+    // since pageSize can be changed in URL, find the closest valid pageSize
     const validatedPageSize = PAGE_SIZES.reduce((prev, curr) =>
         Math.abs(curr - pageSize) < Math.abs(prev - pageSize) ? curr : prev
     )

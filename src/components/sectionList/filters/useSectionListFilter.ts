@@ -76,6 +76,9 @@ export const useSectionListFilters = () => {
     )
 }
 
+/** Helper-hook to select a single filter.
+ * eg. [domainType, setDomainType] = useSectionListFilter('domainType')
+ */
 export const useSectionListFilter = (
     filterKey: string
 ): [string | undefined, (value: string | undefined) => void] => {
