@@ -6,25 +6,22 @@
     align-items: center;
     height: 48px;
     padding: var(--spacers-dp8);
-    margin-top: 8px;
+    margin-top: var(--spacers-dp8);
     gap: var(--spacers-dp8);
 }
 
 .listHeaderNormal a {
-    line-height: 16px;
-}
-
-.listRow {
+    line-height: var(--spacers-dp16);
 }
 
 .listRow td {
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: var(--spacers-dp8);
+    padding-bottom: var(--spacers-dp8);
 }
 
 .listActions {
     display: flex;
-    gap: 8px;
+    gap: var(--spacers-dp8);
 }
 
 .listActions button {
