@@ -1,10 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelect, SingleSelectOption } from '@dhis2/ui'
 import React from 'react'
-import {
-    DOMAIN_TYPE,
-    VALUE_TYPE,
-} from '../../../constants/translatedModelConstants'
 import { SelectOnChangeObject } from '../../../types'
 import css from './Filters.module.css'
 import { useSectionListFilter } from './useSectionListFilter'
@@ -41,26 +37,5 @@ export const ConstantSelectionFilter = ({
                 <SingleSelectOption key={key} label={label} value={key} />
             ))}
         </SingleSelect>
-    )
-}
-
-export const DomainTypeSelectionFilter = () => {
-    return (
-        <ConstantSelectionFilter
-            label={'Domain type'}
-            filterKey="domainType"
-            constants={DOMAIN_TYPE}
-        />
-    )
-}
-
-export const ValueTypeSelectionFilter = () => {
-    return (
-        <ConstantSelectionFilter
-            label={'Value type'}
-            filterKey="valueType"
-            constants={VALUE_TYPE}
-            filterable
-        />
     )
 }

@@ -5,8 +5,10 @@ export type SelectedColumn<Model extends IdentifiableObject> = {
     modelPropertyName: keyof Model
 }
 
-export type SelectedColumns<Model extends IdentifiableObject> =
-    SelectedColumn<Model>[]
+export type SelectedColumns<
+    Model extends IdentifiableObject = IdentifiableObject
+> = SelectedColumn<Model>[]
+
 export type CheckBoxOnChangeObject = {
     checked: boolean
     name?: string
