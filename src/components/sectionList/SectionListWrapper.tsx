@@ -1,5 +1,5 @@
+import { FetchError } from '@dhis2/app-runtime'
 import React, { useMemo, useState } from 'react'
-import { UseModelGistResultPaginated } from '../../lib/models/useModelGist'
 import { IdentifiableObject, GistCollectionResponse } from '../../types/models'
 import { FilterWrapper } from './filters/FilterWrapper'
 import { SectionList } from './SectionList'
@@ -14,19 +14,19 @@ type SectionListWrapperProps<Model extends IdentifiableObject> = {
     availableColumns?: SelectedColumns<Model>
     defaultColumns: SelectedColumns<Model>
     filterElement?: React.ReactElement
-    gistResponse: UseModelGistResultPaginated<GistCollectionResponse<Model>>
+    data: GistCollectionResponse<Model> | undefined
+    error: FetchError | undefined
 }
 export const SectionListWrapper = <Model extends IdentifiableObject>({
     availableColumns,
     defaultColumns,
     filterElement,
-    gistResponse,
+    data,
+    error,
 }: SectionListWrapperProps<Model>) => {
     const [selectedColumns, setSelectedColumns] =
         useState<SelectedColumns<Model>>(defaultColumns)
     const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set())
-
-    const { pagination, error, data } = gistResponse
 
     const handleSelect = (id: string, checked: boolean) => {
         if (checked) {
@@ -71,6 +71,7 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
         }
         return null
     }
+
     return (
         <div>
             <FilterWrapper>{filterElement}</FilterWrapper>
@@ -91,7 +92,7 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
                             selected={selectedModels.has(model.id)}
                         />
                     ))}
-                <SectionListPagination pagination={pagination} />
+                <SectionListPagination data={data} />
             </SectionList>
         </div>
     )

@@ -135,24 +135,31 @@ export const isDataCollection = (
     return (data as GistCollectionResponse)?.pager !== undefined
 }
 
+type UseDataQueryOptions = Parameters<typeof useDataQuery>[1]
 export function useModelGist<Response extends GistPagedResponse>(
     gistResource: GistResourceString,
-    params?: GistParams
+    params?: GistParams,
+    dataQueryOptions?: UseDataQueryOptions
 ): UseModelGistResultPaginated<Response>
 
 export function useModelGist<Response extends GistObjectResponse>(
     gistResource: GistResourceString,
-    params?: GistParams
+    params?: GistParams,
+    dataQueryOptions?: UseDataQueryOptions
 ): UseModelGistResult<Response>
 
 export function useModelGist<Response extends GistResponse>(
     gistResource: GistResourceString,
-    params?: GistParams
+    params?: GistParams,
+    dataQueryOptions?: Parameters<typeof useDataQuery>[1]
 ): UseModelGistResult<Response> {
     const [gistQuery] = useState<GistQuery>(
         createGistQuery(gistResource, params)
     )
-    const queryResponse = useDataQuery<GistQueryResult<Response>>(gistQuery)
+    const queryResponse = useDataQuery<GistQueryResult<Response>>(
+        gistQuery,
+        dataQueryOptions
+    )
 
     const pagination = usePagination(
         queryResponse.refetch,

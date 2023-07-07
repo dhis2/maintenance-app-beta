@@ -3,10 +3,10 @@ import React from 'react'
 import {
     SectionListWrapper,
     SelectedColumns,
-    useSectionListFilterRefetch,
     DomainTypeSelectionFilter,
     ValueTypeSelectionFilter,
     useQueryParamsForModelGist,
+    useSectionListParamsRefetch,
 } from '../../components'
 import { useModelGist } from '../../lib/'
 import { DataElement, GistCollectionResponse } from '../../types/models'
@@ -39,12 +39,17 @@ const defaulHeaderColumns: SelectedColumns<FilteredDataElement> = [
 
 export const Component = () => {
     const initialParams = useQueryParamsForModelGist()
-    const gistResponse = useModelGist<DataElements>('dataElements/gist', {
-        fields: filterFields.concat(),
-        ...initialParams,
-    })
+    const { refetch, error, data } = useModelGist<DataElements>(
+        'dataElements/gist',
+        {
+            fields: filterFields.concat(),
+            ...initialParams,
+        },
+        // refetched on mount by useSectionListParamsRefetch below
+        { lazy: true }
+    )
 
-    useSectionListFilterRefetch(gistResponse.refetch)
+    useSectionListParamsRefetch(refetch)
 
     return (
         <div>
@@ -56,7 +61,8 @@ export const Component = () => {
                         <ValueTypeSelectionFilter />
                     </>
                 }
-                gistResponse={gistResponse}
+                error={error}
+                data={data}
             />
         </div>
     )

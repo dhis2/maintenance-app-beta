@@ -1,13 +1,12 @@
-import { useCallback, useMemo, useEffect, useRef } from 'react'
-import { useQueryParam, ObjectParam } from 'use-query-params'
+import { useCallback, useMemo } from 'react'
+import { useQueryParam, ObjectParam, UrlUpdateType } from 'use-query-params'
 import {
     Schema,
     useSchemaFromHandle,
     CustomObjectParam,
     GistParams,
 } from '../../../lib'
-import { QueryRefetchFunction } from '../../../types'
-import { usePaginiationQueryParams } from '../SectionListPagination'
+import { usePaginationQueryParams } from '../SectionListPagination'
 
 type ObjectParamType = typeof ObjectParam.default
 
@@ -51,14 +50,28 @@ const useFilterQueryParam = () => {
     return useQueryParam('filter', CustomObjectParam)
 }
 
-export const useSectionListFilters = (): ReturnType<
-    typeof useQueryParam<Filters | null | undefined, Filters>
-> => {
-    const [filter, setFilter] = useFilterQueryParam()
+export const useSectionListFilters = () => {
+    const [filter, setFilterParam] = useFilterQueryParam()
+    const [, setPagingParam] = usePaginationQueryParams()
+
     const schema = useSchemaFromHandle()
 
+    // override setFilter to be able to reset Page when filter changes
+    const setFilter = useCallback(
+        (
+            filter: Parameters<typeof setFilterParam>[0],
+            updateType?: UrlUpdateType
+        ) => {
+            setFilterParam(filter, updateType)
+            // set page to 1 when filter changes
+            // do this here instead of useEffect to prevent unnecessary refetches
+            setPagingParam((pagingParams) => ({ ...pagingParams, page: 1 }))
+        },
+        [setFilterParam, setPagingParam]
+    )
+
     return useMemo(
-        () => [getVerifiedFiltersForSchema(filter, schema), setFilter],
+        () => [getVerifiedFiltersForSchema(filter, schema), setFilter] as const,
         [filter, schema, setFilter]
     )
 }
@@ -94,7 +107,7 @@ export type ParseToQueryFilterResult = {
     rootJunction: GistParams['rootJunction']
 }
 
-const parseToQueryFilter = (filters: Filters): ParseToQueryFilterResult => {
+const parseToGistQueryFilter = (filters: Filters): ParseToQueryFilterResult => {
     const { [IDENTIFIABLE_KEY]: identifiableValue, ...restFilters } = filters
     const queryFilters: string[] = []
 
@@ -128,29 +141,12 @@ export const useSectionListQueryFilter = () => {
     const [filters] = useSectionListFilters()
 
     return useMemo(() => {
-        return parseToQueryFilter(filters)
+        return parseToGistQueryFilter(filters)
     }, [filters])
 }
 
-export const useSectionListFilterRefetch = (refetch: QueryRefetchFunction) => {
-    const { filter, rootJunction } = useSectionListQueryFilter()
-    const firstRender = useRef(true)
-
-    useEffect(() => {
-        if (firstRender.current) {
-            firstRender.current = false
-            return
-        }
-        refetch({
-            filter,
-            rootJunction,
-            page: 1, // reset to first page when filter changes
-        })
-    }, [refetch, filter, rootJunction])
-}
-
 export const useQueryParamsForModelGist = (): GistParams => {
-    const [paginationParams] = usePaginiationQueryParams()
+    const [paginationParams] = usePaginationQueryParams()
     const filterParams = useSectionListQueryFilter()
 
     return useMemo(() => {
