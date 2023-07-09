@@ -105,39 +105,31 @@ export const useSectionListFilter = (
     return [filters?.[filterKey] ?? undefined, boundSetFilter]
 }
 
-export type ParseToQueryFilterResult = {
-    filter: string[]
-    rootJunction: GistParams['rootJunction']
-}
-
-const parseToGistQueryFilter = (filters: Filters): ParseToQueryFilterResult => {
+const parseToGistQueryFilter = (filters: Filters): string[] => {
     const { [IDENTIFIABLE_KEY]: identifiableValue, ...restFilters } = filters
     const queryFilters: string[] = []
 
-    const hasOtherFilters = Object.keys(restFilters).length > 0
     // Groups are a powerful way to combine filters,
     // here we use them for identifiable filters, to group them with "OR" and
     // rest of the filters with "AND".
-    // Unfortunately, it doesn't work to use groups without at least two,
-    // so we need to add them conditionally.
     // see https://docs.dhis2.org/en/develop/using-the-api/dhis-core-version-239/metadata-gist.html#gist_parameters_filter
-    const identifiableFilterGroup = hasOtherFilters ? `0:` : ''
     if (identifiableValue) {
+        const identifiableFilterGroup = `0:`
         Object.entries(IDENTIFIABLE_FIELDS).forEach(([key, { operator }]) => {
             queryFilters.push(
                 `${identifiableFilterGroup}${key}:${operator}:${identifiableValue}`
             )
         })
     }
-    const restFilterGroup = identifiableValue ? `1:` : ''
+    let restFilterGroup: number | undefined
+    if (identifiableValue) {
+        restFilterGroup = 1
+    }
     Object.entries(restFilters).forEach(([key, value]) => {
-        queryFilters.push(`${restFilterGroup}${key}:eq:${value}`)
+        const group = restFilterGroup ? `${restFilterGroup++}:` : ''
+        queryFilters.push(`${group}${key}:eq:${value}`)
     })
-    // when there are no other filters than identifiable, we can't group them
-    // and thus we need to set rootJunction to OR
-    const rootJunction =
-        identifiableValue && !hasOtherFilters ? 'OR' : undefined
-    return { filter: queryFilters, rootJunction }
+    return queryFilters
 }
 
 export const useSectionListQueryFilter = () => {
@@ -155,7 +147,7 @@ export const useQueryParamsForModelGist = (): GistParams => {
     return useMemo(() => {
         return {
             ...paginationParams,
-            ...filterParams,
+            filter: filterParams,
         }
     }, [paginationParams, filterParams])
 }

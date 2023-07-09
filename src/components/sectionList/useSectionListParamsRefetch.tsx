@@ -1,18 +1,14 @@
 import { useEffect } from 'react'
 import { QueryRefetchFunction } from '../../types'
-import { useSectionListQueryFilter } from './filters'
-import { usePaginationQueryParams } from './SectionListPagination'
+import { useQueryParamsForModelGist } from './filters'
 
 /** Refetches when filter and pagination params change  */
 export const useSectionListParamsRefetch = (refetch: QueryRefetchFunction) => {
-    const { filter, rootJunction } = useSectionListQueryFilter()
-    const [paginationParams] = usePaginationQueryParams()
+    const params = useQueryParamsForModelGist()
 
     useEffect(() => {
         refetch({
-            ...paginationParams,
-            filter,
-            rootJunction,
+            ...params,
         })
-    }, [refetch, paginationParams, filter, rootJunction])
+    }, [refetch, params])
 }

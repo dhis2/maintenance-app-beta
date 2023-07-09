@@ -60,7 +60,7 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
 
     const SectionListMessage = () => {
         if (error) {
-            console.log(error.details)
+            console.log(error.details || error)
             return <SectionListError />
         }
         if (!data?.result) {
