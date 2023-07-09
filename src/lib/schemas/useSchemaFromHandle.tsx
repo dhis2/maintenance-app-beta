@@ -1,4 +1,5 @@
-import { useSchema, useSchemaSectionHandleOrThrow } from '../'
+import { useSchemaSectionHandleOrThrow } from '../routeUtils'
+import { useSchema } from './schemaStore'
 
 export const useSchemaFromHandle = () => {
     const section = useSchemaSectionHandleOrThrow()
