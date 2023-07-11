@@ -5,7 +5,7 @@ import { IdentifiableObject, GistPager } from './'
 type ModelReferenceCollection<T = IdentifiableObject> = Array<T>
 type ModelReference = IdentifiableObject | ModelReferenceCollection
 
-type BaseGist<T> = {
+type BaseGist<T> = IdentifiableObject & {
     apiEndpoints: GistApiEndpoints<T>
 }
 export type GistApiEndpoints<T> = {
@@ -27,25 +27,29 @@ export type GistModel<T> = BaseGist<T> & {
 export type GistModelCollection<T> = GistModel<T>[]
 
 // a modelcollection with the keyprop
-// need it's own type because the key is based on the resource
+// need it's own type because the name of the list is based on resource or pagedListName query-param
 export type GistModelCollectionPart<
     T extends IdentifiableObject,
-    Resource extends string
+    PagedListName extends string = 'result'
 > = {
-    [K in Resource]: GistModel<T>[]
+    [K in PagedListName]: GistModel<T>[]
+}
+
+export type GistPagedResponse = {
+    pager: GistPager
 }
 
 export type GistCollectionResponse<
-    T extends IdentifiableObject,
-    Resource extends string
-> = {
-    pager: GistPager
-} & GistModelCollectionPart<T, Resource>
+    T extends IdentifiableObject = IdentifiableObject,
+    PagedListName extends string = 'result'
+> = GistPagedResponse & GistModelCollectionPart<T, PagedListName>
 
-export type GistObjectResponse<T extends IdentifiableObject> = GistModel<T>
+export type GistObjectResponse<
+    T extends IdentifiableObject = IdentifiableObject
+> = GistModel<T>
 
 export type GistResponse<
-    T extends IdentifiableObject,
+    T extends IdentifiableObject = IdentifiableObject,
     R extends string = string
 > = GistCollectionResponse<T, R> | GistObjectResponse<T>
 
@@ -99,6 +103,7 @@ export type GistParams = {
     order?: string
     page?: number
     pageSize?: number
+    pageListName?: string
     references?: boolean
     rootJunction?: 'AND' | 'OR'
     total?: boolean

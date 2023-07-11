@@ -33,7 +33,9 @@
         "typescript": "^5.0.4"
     },
     "dependencies": {
-        "@dhis2/app-runtime": "^3.9.4",
+        "@dhis2/app-runtime": "^3.9.3",
+        "@dhis2/ui": "^8.13.10",
+        "use-query-params": "^2.2.1",
         "react-router-dom": "^6.11.2",
         "zustand": "^4.3.8"
     }

@@ -10,6 +10,8 @@ import {
     RouteObject,
     useParams,
 } from 'react-router-dom'
+import { QueryParamProvider } from 'use-query-params'
+import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6'
 import {
     SECTIONS_MAP,
     SCHEMA_SECTIONS,
@@ -24,7 +26,6 @@ import { CheckAuthorityForSection } from './CheckAuthorityForSection'
 import { DefaultErrorRoute } from './DefaultErrorRoute'
 import { LegacyAppRedirect } from './LegacyAppRedirect'
 import { getSectionPath, routePaths } from './routePaths'
-
 // This loads all the overview routes in the same chunk since they resolve to the same promise
 // see https://reactrouter.com/en/main/route/lazy#multiple-routes-in-a-single-file
 // Overviews are small, and the AllOverview would load all the other overviews anyway,
@@ -114,7 +115,14 @@ const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
 ))
 
 const routes = createRoutesFromElements(
-    <Route element={<Layout />} errorElement={<DefaultErrorRoute />}>
+    <Route
+        element={
+            <QueryParamProvider adapter={ReactRouter6Adapter}>
+                <Layout />
+            </QueryParamProvider>
+        }
+        errorElement={<DefaultErrorRoute />}
+    >
         <Route
             path="/"
             element={<Navigate to={routePaths.overviewRoot} replace />}
@@ -143,7 +151,6 @@ const routes = createRoutesFromElements(
 )
 
 export const hashRouter = createHashRouter(routes)
-
 export const ConfiguredRouter = () => {
     return <RouterProvider router={hashRouter} />
 }
