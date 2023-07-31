@@ -1,0 +1,22 @@
+.container {
+    display: block;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.form {
+    padding-bottom: 68px;
+}
+
+.formActions {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    padding: var(--spacers-dp16) 0;
+    box-shadow: 0 0 3px rgba(0,0,0,0.8);
+    background: var(--colors-white);
+}
