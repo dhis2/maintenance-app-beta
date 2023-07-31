@@ -1,1 +1,1 @@
-export * from "./OverviewGroup";
+export * from './OverviewGroup'

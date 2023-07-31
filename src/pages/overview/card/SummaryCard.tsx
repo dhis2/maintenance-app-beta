@@ -1,40 +1,50 @@
-import i18n from "@dhis2/d2-i18n";
-import { Card, Button } from "@dhis2/ui";
-import { IconEdit24 } from "@dhis2/ui-icons";
-import React from "react";
-import { Link, resolvePath } from "react-router-dom";
+import i18n from '@dhis2/d2-i18n'
+import { Card, Button } from '@dhis2/ui'
+import { IconEdit24 } from '@dhis2/ui-icons'
+import React, { PropsWithChildren } from 'react'
+import { Link } from 'react-router-dom'
 import {
     getSectionNewPath,
     getSectionPath,
-} from "../../../app/routes/routePaths";
-import { SECTIONS_MAP, Section } from "../../../constants";
-import styles from "./SummaryCard.module.css";
+} from '../../../app/routes/routePaths'
+import { SECTIONS_MAP, Section } from '../../../constants'
+import { useIsSectionAuthorizedPredicate } from '../../../lib'
+import { OverviewSection } from '../../../types'
+import styles from './SummaryCard.module.css'
 
-const DEFAULT_ICON = <IconEdit24 />;
+const DEFAULT_ICON = <IconEdit24 />
 
-const SummaryCardHeader = ({ children }: { children: React.ReactNode }) => (
+const SummaryCardHeader = ({ children }: PropsWithChildren) => (
     <div className={styles.cardHeader}>{children}</div>
-);
+)
+
+interface SummaryCardGroupProps {
+    title?: string
+    section: OverviewSection
+}
 
 export const SummaryCardGroup = ({
     children,
     title,
-}: {
-    children: React.ReactNode;
-    title?: string;
-}) => {
+    section,
+}: PropsWithChildren<SummaryCardGroupProps>) => {
+    const isSectionAuthorized = useIsSectionAuthorizedPredicate()
+    const isOverviewAuthorized = isSectionAuthorized(section)
+    if (!isOverviewAuthorized) {
+        return null
+    }
     return (
         <>
             {title && <div className={styles.cardGroupHeader}>{title}</div>}
             <div className={styles.cardGroup}>{children}</div>
         </>
-    );
-};
+    )
+}
 
 interface SummaryCardProps {
-    children: React.ReactNode;
-    icon?: React.ReactNode;
-    section: Section;
+    children: React.ReactNode
+    icon?: React.ReactNode
+    section: Section
 }
 
 export const SummaryCard = ({
@@ -42,45 +52,43 @@ export const SummaryCard = ({
     children,
     section,
 }: SummaryCardProps) => {
-    const title = section.title;
+    const title = section.title
     return (
-        <Card>
+        <Card dataTest={`card-${title}`}>
             <div className={styles.cardWrapper}>
-                <div className={styles.cardIcon}>{icon}</div>
-                <SummaryCardHeader>{title}</SummaryCardHeader>
-                <SummaryCardContent>{children}</SummaryCardContent>
+                <Link to={`/${getSectionPath(section)}`}>
+                    <div className={styles.cardIcon}>{icon}</div>
+                    <SummaryCardHeader>{title}</SummaryCardHeader>
+                    <SummaryCardContent>{children}</SummaryCardContent>
+                </Link>
                 <SummaryCardActions section={section} />
             </div>
         </Card>
-    );
-};
+    )
+}
 
-export const SummaryCardContent = ({ children }) => {
-    return <p className={styles.cardContent}>{children}</p>;
-};
+export const SummaryCardContent = ({ children }: PropsWithChildren) => {
+    return <p className={styles.cardContent}>{children}</p>
+}
 
 interface SummaryCardActionsProps {
-    section: Section;
+    section: Section
 }
 
 export const SummaryCardActions = ({ section }: SummaryCardActionsProps) => {
-    // paths are relative by default, use resolvePath to resolve from root
-    const managePath = resolvePath(getSectionPath(section));
-    const newModelPath = resolvePath(getSectionNewPath(section));
-
     // categoryOptionCombo is the only section that should not be creatable
     // TODO: implement auth and move this there
-    const canCreate = section.name !== SECTIONS_MAP.categoryOptionCombo.name;
+    const canCreate = section.name !== SECTIONS_MAP.categoryOptionCombo.name
     return (
         <div className={styles.cardActions}>
             {canCreate && (
-                <Link to={newModelPath}>
-                    <Button secondary>{i18n.t("Add new")}</Button>
+                <Link to={`/${getSectionNewPath(section)}`} tabIndex={-1}>
+                    <Button secondary>{i18n.t('Add new')}</Button>
                 </Link>
             )}
-            <Link to={managePath}>
-                <Button secondary>{i18n.t("Manage")}</Button>
+            <Link to={`/${getSectionPath(section)}`} tabIndex={-1}>
+                <Button secondary>{i18n.t('Manage')}</Button>
             </Link>
         </div>
-    );
-};
+    )
+}

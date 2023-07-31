@@ -1,19 +1,13 @@
-import { useDataQuery } from "@dhis2/app-runtime";
-import React from "react";
-import { Loader } from "../components/";
+import i18n from '@dhis2/d2-i18n'
+import React, { PropsWithChildren } from 'react'
+import { Loader } from '../components'
+import { useLoadApp } from '../lib'
 
-const query = {
-    schemas: {
-        resource: "schemas",
-        fields: "authorities, displayName, name, plural, singular, translatable, properties",
-    },
-};
-
-export const LoadApp = ({ children }) => {
-    const queryResponse = useDataQuery(query);
+export const LoadApp = ({ children }: PropsWithChildren) => {
+    const queryResponse = useLoadApp()
     return (
-        <Loader queryResponse={queryResponse} label="schemas">
+        <Loader queryResponse={queryResponse} label={i18n.t('schemas')}>
             {children}
         </Loader>
-    );
-};
+    )
+}

@@ -1,2 +1,2 @@
-export * from './Layout';
-export * from './Breadcrumb';
+export { Layout, SidebarLayout } from './Layout'
+export * from './Breadcrumb'

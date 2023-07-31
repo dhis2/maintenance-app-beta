@@ -1,28 +1,42 @@
 {
-  "name": "maintenance-app",
-  "version": "1.0.0",
-  "description": "",
-  "license": "BSD-3-Clause",
-  "private": true,
-  "scripts": {
-    "build": "d2-app-scripts build",
-    "start": "d2-app-scripts start",
-    "test": "d2-app-scripts test",
-    "deploy": "d2-app-scripts deploy",
-    "lint": "yarn d2-style check",
-    "lint:staged": "yarn lint --staged",
-    "format": "yarn d2-style apply",
-    "format:staged": "yarn format --staged"
-  },
-  "devDependencies": {
-    "@dhis2/cli-app-scripts": "^10.2.0",
-    "@dhis2/cli-style": "^10.5.1",
-    "@typescript-eslint/eslint-plugin": "^5.55.0",
-    "@typescript-eslint/parser": "^5.55.0",
-    "typescript": "^4.9.5"
-  },
-  "dependencies": {
-    "@dhis2/app-runtime": "^3.8.0",
-    "react-router-dom": "^6.10.0"
-  }
+    "name": "maintenance-app",
+    "version": "1.0.0",
+    "description": "",
+    "license": "BSD-3-Clause",
+    "private": true,
+    "scripts": {
+        "build": "d2-app-scripts build",
+        "start": "d2-app-scripts start",
+        "test": "d2-app-scripts test",
+        "deploy": "d2-app-scripts deploy",
+        "lint": "yarn d2-style check",
+        "lint:staged": "yarn lint --staged",
+        "format": "yarn d2-style apply",
+        "format:staged": "yarn format --staged",
+        "check-types": "tsc --noemit",
+        "cypress:open": "REACT_APP_NODE_ENV=test yarn cypress open",
+        "cypress:run": "REACT_APP_NODE_ENV=test yarn cypress run"
+    },
+    "devDependencies": {
+        "@dhis2/cli-app-scripts": "^10.2.0",
+        "@dhis2/cli-style": "^10.5.1",
+        "@dhis2/cypress-commands": "^10.0.3",
+        "@dhis2/cypress-plugins": "^10.0.3",
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^12.1.5",
+        "@testing-library/user-event": "^12.8.3",
+        "@types/jest": "^29.5.1",
+        "@types/react": "^18.2.6",
+        "@typescript-eslint/eslint-plugin": "^5.55.0",
+        "@typescript-eslint/parser": "^5.55.0",
+        "cypress": "^12.14.0",
+        "typescript": "^5.0.4"
+    },
+    "dependencies": {
+        "@dhis2/app-runtime": "^3.9.3",
+        "@dhis2/ui": "^8.13.10",
+        "use-query-params": "^2.2.1",
+        "react-router-dom": "^6.11.2",
+        "zustand": "^4.3.8"
+    }
 }

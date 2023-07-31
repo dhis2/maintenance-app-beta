@@ -7,5 +7,5 @@ capable of.
 
 Current candidates are:
 
-* Redux - Better for complex use-cases and debugging
-* Zustand - Simpler setup and usage
+-   Redux - Better for complex use-cases and debugging
+-   Zustand - Simpler setup and usage

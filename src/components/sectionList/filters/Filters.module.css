@@ -1,0 +1,23 @@
+.selectionFilter {
+    min-width: 190px;
+}
+
+.constantSelectionFilter {
+    composes: selectionFilter;
+}
+
+/* make dense selection fields same height as text field*/
+.constantSelectionFilter [data-test='dhis2-uicore-select-input'] {
+    max-height: 32px;
+}
+
+.identifiableSelectionFilter {
+    width: 320px;
+}
+
+.filterWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+}
