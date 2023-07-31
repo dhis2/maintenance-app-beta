@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-05T12:02:44.326Z\n"
-"PO-Revision-Date: 2023-09-05T12:02:44.326Z\n"
+"POT-Creation-Date: 2023-09-05T13:13:32.512Z\n"
+"PO-Revision-Date: 2023-09-05T13:13:32.512Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -47,6 +47,12 @@ msgstr "Search for menu items"
 
 msgid "Retry"
 msgstr "Retry"
+
+msgid "All"
+msgstr "All"
+
+msgid "Category combo"
+msgstr "Category combo"
 
 msgid "Failed to load {{label}}"
 msgstr "Failed to load {{label}}"
@@ -516,6 +522,128 @@ msgstr "Last updated"
 msgid "Public access"
 msgstr "Public access"
 
+msgid "Basic information"
+msgstr "Basic information"
+
+msgid "Set up the information for this data element"
+msgstr "Set up the information for this data element"
+
+msgid "Name (required)"
+msgstr "Name (required)"
+
+msgid "A data element name should be concise and easy to recognize."
+msgstr "A data element name should be concise and easy to recognize."
+
+msgid "Short name (required)"
+msgstr "Short name (required)"
+
+msgid "Often used in reports where space is limited"
+msgstr "Often used in reports where space is limited"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Explain the purpose of this data element and how it's measured."
+msgstr "Explain the purpose of this data element and how it's measured."
+
+msgid "Url"
+msgstr "Url"
+
+msgid "A web link that provides extra information"
+msgstr "A web link that provides extra information"
+
+msgid "Field mask"
+msgstr "Field mask"
+
+msgid "Use a pattern to limit what information can be entered."
+msgstr "Use a pattern to limit what information can be entered."
+
+msgid "e.g. 999-000-0000"
+msgstr "e.g. 999-000-0000"
+
+msgid "StandardForm name"
+msgstr "StandardForm name"
+
+msgid "An alternative name used in section or automatic data entry forms."
+msgstr "An alternative name used in section or automatic data entry forms."
+
+msgid "Value type (required)"
+msgstr "Value type (required)"
+
+msgid "The type of data that will be recorded."
+msgstr "The type of data that will be recorded."
+
+msgid "Aggretation type (required)"
+msgstr "Aggretation type (required)"
+
+msgid "The default way to aggregate this data element in analytics."
+msgstr "The default way to aggregate this data element in analytics."
+
+msgid "Disaggregation and Option sets"
+msgstr "Disaggregation and Option sets"
+
+msgid "Set up disaggregation and predefined options."
+msgstr "Set up disaggregation and predefined options."
+
+msgid "Category combination (required)"
+msgstr "Category combination (required)"
+
+msgid "Choose how this data element is disaggregated"
+msgstr "Choose how this data element is disaggregated"
+
+msgid "Choose a set of predefined options for data entry"
+msgstr "Choose a set of predefined options for data entry"
+
+msgid "Option set comment"
+msgstr "Option set comment"
+
+msgid "Choose a set of predefined comment for data entry"
+msgstr "Choose a set of predefined comment for data entry"
+
+msgid "Legends"
+msgstr "Legends"
+
+msgid ""
+"Visualize values for this data element in Analytics app. Multiple legends "
+"can be applied."
+msgstr ""
+"Visualize values for this data element in Analytics app. Multiple legends "
+"can be applied."
+
+msgid "Aggregation levels"
+msgstr "Aggregation levels"
+
+msgid "Selected legends"
+msgstr "Selected legends"
+
+msgid "Refresh list"
+msgstr "Refresh list"
+
+msgid "Add new"
+msgstr "Add new"
+
+msgid "Filter available legends"
+msgstr "Filter available legends"
+
+msgid "Color and icon"
+msgstr "Color and icon"
+
+msgid ""
+"A color and icon are helpful for identifying data elements in "
+"information-dense screens."
+msgstr ""
+"A color and icon are helpful for identifying data elements in "
+"information-dense screens."
+
+msgid "Domain (required)"
+msgstr "Domain (required)"
+
+msgid "A data element can either be aggregated or tracked data."
+msgstr "A data element can either be aggregated or tracked data."
+
 msgid "Metadata management"
 msgstr "Metadata management"
 
@@ -589,9 +717,6 @@ msgid ""
 msgstr ""
 "Add another level of organisation by grouping data element groups into "
 "group sets."
-
-msgid "Add new"
-msgstr "Add new"
 
 msgid "Manage"
 msgstr "Manage"

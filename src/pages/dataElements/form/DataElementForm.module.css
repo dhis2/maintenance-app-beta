@@ -1,0 +1,7 @@
+.container {
+    background: var(--colors-white);
+    padding: var(--spacers-dp16);
+    padding: 16px;
+    height: 100%;
+    box-sizing: border-box;
+}
