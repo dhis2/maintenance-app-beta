@@ -1,57 +1,41 @@
-import React from "react";
-import { Link, To, useMatches } from "react-router-dom";
-import { SECTIONS_MAP } from "../../constants";
-import { getSectionPath, getOverviewPath } from "../routes/routePaths";
-import { MatchRouteHandle } from "../routes/types";
-import css from "./Breadcrumb.module.css";
+import React from 'react'
+import { Link, useMatches } from 'react-router-dom'
+import { Section, isOverviewSection } from '../../constants'
+import { getSectionPath, getOverviewPath } from '../routes/routePaths'
+import { MatchRouteHandle } from '../routes/types'
+import css from './Breadcrumb.module.css'
 
-const Separator = () => <span className={css.separator}>/</span>;
+const BreadcrumbSeparator = () => <span className={css.separator}>/</span>
 
 type BreadcrumbItemProps = {
-    label?: string;
-    to: To;
-};
+    section: Section
+    label?: string
+}
 
-export const BreadcrumbItem = ({ label, to }: BreadcrumbItemProps) => {
+export const BreadcrumbItem = ({ section, label }: BreadcrumbItemProps) => {
+    const isOverview = isOverviewSection(section)
+    const link = isOverview ? getOverviewPath(section) : getSectionPath(section)
+
+    label = label ?? isOverview ? section.titlePlural : section.title
+
     return (
-        <Link className={css.breadcrumbItem} to={to}>
+        <Link className={css.breadcrumbItem} to={`/${link}`}>
             {label}
         </Link>
-    );
-};
+    )
+}
 
-export const Breadcrumb = () => {
-    const matches = useMatches() as MatchRouteHandle[];
-    const section = matches.find((match) => !!match.handle?.section)?.handle
-        ?.section;
+export const Breadcrumbs = () => {
+    const matches = useMatches() as MatchRouteHandle[]
 
-    if (!section) {
-        return null;
-    }
+    const crumbs = matches
+        .filter((match) => match.handle?.crumb)
+        .map((match) => (
+            <span key={match.id}>
+                {match.handle?.crumb()}
+                <BreadcrumbSeparator />
+            </span>
+        ))
 
-    const sectionCrumb = (
-        <BreadcrumbItem
-            to={`/${getSectionPath(section)}`}
-            label={section.title}
-        />
-    );
-    let overviewCrumb: JSX.Element | undefined;
-
-    if (section.parentSectionKey) {
-        const parentSection = SECTIONS_MAP[section.parentSectionKey];
-        overviewCrumb = (
-            <BreadcrumbItem
-                to={`/${getOverviewPath(parentSection)}`}
-                label={parentSection.titlePlural}
-            />
-        );
-    }
-
-    return (
-        <div className={css.breadcrumbWrapper}>
-            {overviewCrumb}
-            <Separator />
-            {sectionCrumb}
-        </div>
-    );
-};
+    return <div className={css.breadcrumbWrapper}>{crumbs}</div>
+}
