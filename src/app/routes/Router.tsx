@@ -114,6 +114,7 @@ const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
         <Route
             handle={{
                 hideSidebar: true,
+                showFooter: true,
                 crumb: () => <BreadcrumbItem section={section} />,
             }}
         >
