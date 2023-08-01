@@ -46,6 +46,13 @@
     padding-bottom: 16px;
 }
 
+.footerPlaceholder {
+    grid-area: footer;
+    width: 100vw;
+    padding: var(--spacers-dp16) 0;
+    background: var(--colors-white);
+}
+
 @media m-medium {
     .wrapper {
         height: 100%;

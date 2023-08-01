@@ -20,6 +20,7 @@ export const BaseLayout = ({
         <div className={showFooter ? css.wrapperWithFooter : css.wrapper}>
             {sidebar}
             <div className={css.main}>{children}</div>
+            {showFooter && <div className={css.footerPlaceholder}></div>}
         </div>
     )
 }
