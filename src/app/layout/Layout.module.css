@@ -17,7 +17,7 @@
 }
 .wrapperWithFooter {
     composes: wrapper;
-    grid-template-areas: 'sidebar main' 'footer footer';
+    grid-template-areas: 'sidebar' 'main' 'footer';
     grid-template-rows: auto 1fr 68px;
     overflow-y: auto;
 }
