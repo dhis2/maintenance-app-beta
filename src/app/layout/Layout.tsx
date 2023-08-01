@@ -8,11 +8,16 @@ import css from './Layout.module.css'
 interface BaseLayoutProps {
     children: React.ReactNode
     sidebar?: React.ReactNode
+    showFooter?: boolean
 }
 
-export const BaseSidebarLayout = ({ children, sidebar }: BaseLayoutProps) => {
+export const BaseLayout = ({
+    children,
+    sidebar,
+    showFooter,
+}: BaseLayoutProps) => {
     return (
-        <div className={css.wrapper}>
+        <div className={showFooter ? css.wrapperWithFooter : css.wrapper}>
             {sidebar}
             <div className={css.main}>{children}</div>
         </div>
@@ -22,12 +27,15 @@ export const BaseSidebarLayout = ({ children, sidebar }: BaseLayoutProps) => {
 export const SidebarLayout = ({
     children,
     hideSidebar,
+    showFooter,
 }: {
     children: React.ReactNode
     hideSidebar?: boolean
+    showFooter?: boolean
 }) => {
     return (
-        <BaseSidebarLayout
+        <BaseLayout
+            showFooter={showFooter}
             sidebar={
                 <Sidebar
                     className={cx(css.sidebar, { [css.hide]: hideSidebar })}
@@ -35,7 +43,7 @@ export const SidebarLayout = ({
             }
         >
             {children}
-        </BaseSidebarLayout>
+        </BaseLayout>
     )
 }
 
@@ -44,9 +52,10 @@ export const Layout = () => {
     // routes can specify a handle to hide the sidebar
     // hide the sidebar if any matched route specifies it
     const hideSidebar = matches.some((match) => match.handle?.hideSidebar)
+    const showFooter = matches.some((match) => match.handle?.showFooter)
 
     return (
-        <SidebarLayout hideSidebar={hideSidebar}>
+        <SidebarLayout hideSidebar={hideSidebar} showFooter={showFooter}>
             <Outlet />
         </SidebarLayout>
     )
