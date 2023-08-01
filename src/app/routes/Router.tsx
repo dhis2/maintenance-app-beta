@@ -107,6 +107,7 @@ const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
             <Route path=":id" element={<VerifyModelId />}>
                 <Route
                     index
+                    handle={{ showFooter: true }}
                     lazy={createSectionLazyRouteFunction(section, 'Edit')}
                 ></Route>
             </Route>
