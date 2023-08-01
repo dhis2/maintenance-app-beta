@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-07-31T08:48:00.070Z\n"
-"PO-Revision-Date: 2023-07-31T08:48:00.070Z\n"
+"POT-Creation-Date: 2023-07-31T11:36:19.094Z\n"
+"PO-Revision-Date: 2023-07-31T11:36:19.094Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -622,12 +622,6 @@ msgstr "Domain (required)"
 
 msgid "A data element can either be aggregated or tracked data."
 msgstr "A data element can either be aggregated or tracked data."
-
-msgid "aggregate"
-msgstr "aggregate"
-
-msgid "tracker"
-msgstr "tracker"
 
 msgid "Metadata management"
 msgstr "Metadata management"

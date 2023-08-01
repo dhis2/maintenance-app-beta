@@ -97,7 +97,7 @@ const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
         handle={{ section }}
     >
         <Route index lazy={createSectionLazyRouteFunction(section, 'List')} />
-        <Route handle={{ hideSidebar: true, showFooter: true }}>
+        <Route handle={{ hideSidebar: true }}>
             {!sectionsNoNewRoute.has(section) && (
                 <Route
                     path={routePaths.sectionNew}
