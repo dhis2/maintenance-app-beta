@@ -1,7 +1,11 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import type { ModelSchemasBase, PickSchemaProperties } from '../types'
-import type { CurrentUser as CurrentUserBase } from '../types/models'
+import type {
+    CurrentUser as CurrentUserBase,
+    SystemSettings,
+} from '../types/models'
 import { useSetSchemas } from './schemas'
+import { useSetSystemSettings } from './systemSettings'
 import { useSetCurrentUser } from './user'
 
 export const schemaFields = [
@@ -54,6 +58,9 @@ const query = {
             fields: userFieldsFilter,
         },
     },
+    systemSettings: {
+        resource: 'systemSettings',
+    },
 }
 
 // properties are returned as an array, but we map them by fieldName
@@ -66,6 +73,7 @@ interface QueryResponse {
         schemas: SchemaResponse[]
     }
     currentUser: CurrentUserResponse
+    systemSettings: SystemSettings
 }
 
 const formatSchema = (schema: SchemaResponse): Schema => {
@@ -80,6 +88,7 @@ const formatSchema = (schema: SchemaResponse): Schema => {
 export const useLoadApp = () => {
     const setSchemas = useSetSchemas()
     const setCurrentUser = useSetCurrentUser()
+    const setSystemSettings = useSetSystemSettings()
 
     const queryResponse = useDataQuery<QueryResponse>(query, {
         onComplete: (queryData) => {
@@ -100,6 +109,7 @@ export const useLoadApp = () => {
                 }
                 setSchemas(modelSchemas)
                 setCurrentUser(currentUser)
+                setSystemSettings(queryData.systemSettings)
             } catch (e) {
                 console.log('Failed to load app', e)
             }
