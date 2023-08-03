@@ -16,7 +16,7 @@ export type SchemaSection = SectionBase & {
 }
 
 export type NonSchemaSection = SectionBase & {
-    authorities?: SchemaAuthorities
+    authorities: SchemaAuthorities
     parentSectionKey: OverviewSectionName
 }
 
@@ -24,6 +24,7 @@ export type OverviewSection = SectionBase & {
     componentName: string
 }
 
+export type ModelSection = SchemaSection | NonSchemaSection
 export type Section = SchemaSection | NonSchemaSection | OverviewSection
 
 export type SchemaSectionMap = {
@@ -32,4 +33,4 @@ export type SchemaSectionMap = {
 
 export type OverviewSectionMap = Record<string, OverviewSection>
 
-export type SectionMap = Record<string, SchemaSection | NonSchemaSection>
+export type SectionMap = Record<string, ModelSection>

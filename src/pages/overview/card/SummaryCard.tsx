@@ -7,8 +7,11 @@ import {
     getSectionNewPath,
     getSectionPath,
 } from '../../../app/routes/routePaths'
-import { SECTIONS_MAP, Section } from '../../../constants'
-import { useIsSectionAuthorizedPredicate } from '../../../lib'
+import { Section } from '../../../constants'
+import {
+    useCanCreateModelInSection,
+    useIsSectionAuthorizedPredicate,
+} from '../../../lib'
 import { OverviewSection } from '../../../types'
 import styles from './SummaryCard.module.css'
 
@@ -76,9 +79,7 @@ interface SummaryCardActionsProps {
 }
 
 export const SummaryCardActions = ({ section }: SummaryCardActionsProps) => {
-    // categoryOptionCombo is the only section that should not be creatable
-    // TODO: implement auth and move this there
-    const canCreate = section.name !== SECTIONS_MAP.categoryOptionCombo.name
+    const canCreate = useCanCreateModelInSection(section)
     return (
         <div className={styles.cardActions}>
             {canCreate && (
