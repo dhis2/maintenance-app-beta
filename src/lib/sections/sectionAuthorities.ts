@@ -15,7 +15,6 @@ import {
     isNonCreateableSchema,
     useCurrentUserAuthorities,
 } from '../user'
-
 type UserAuthorities = ReturnType<typeof useCurrentUserAuthorities>
 
 const isNonCreateableSection = (section: Section): section is SchemaSection => {
@@ -54,7 +53,7 @@ function canCreateModelInSection(
 }
 
 /**
- * Authorization of a section is determined by the following:
+ * Authorization (ie if a section should be viewable) of a section is determined by the following:
  *  - the user must have any CREATE authority on the schema
  *  - if systemSetting keyRequireAddToView is false, sections are always authorized
  *  - overviewSections are authorized if any of their child sections are authorized
@@ -87,14 +86,6 @@ export const useIsSectionAuthorizedPredicate = () => {
     )
 
     return isSectionAuthorizedPredicate
-}
-
-/**
- * Checks if a section is authorized, ie. the user can view the section
- */
-export const useIsSectionAuthorized = (section: Section) => {
-    const isSectionAuthorizedPredicate = useIsSectionAuthorizedPredicate()
-    return isSectionAuthorizedPredicate(section)
 }
 
 export const useCanCreateModelInSection = (section: Section) => {

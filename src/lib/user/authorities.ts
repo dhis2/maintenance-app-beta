@@ -33,7 +33,7 @@ export const hasAuthorityForOperation = (
         return true
     }
 
-    const authoritiesNeeded = schemaAuthorities.find((auth) => {
+    const authoritiesNeeded = schemaAuthorities?.find((auth) => {
         // if operation is CREATE it can be any of types in canCreateAuthTypes
         if (operation === SchemaAuthorityType.CREATE) {
             return canCreateAuthTypes.has(auth.type)
