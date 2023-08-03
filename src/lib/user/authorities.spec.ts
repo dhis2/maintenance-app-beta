@@ -171,11 +171,11 @@ describe('hasAuthorityForOperation', () => {
 
         it('should return false if schema is categoryOptionCombo', () => {
             const categoryOptionComboSchemaMock = {
-                singular: 'dataElement',
-                plural: 'dataElements',
-                name: 'dataElement',
-                displayName: 'Data Element',
-                collectionName: 'dataElements',
+                singular: 'categoryOptionCombo',
+                plural: 'categoryOptionCombos',
+                name: 'categoryOptionCombo',
+                displayName: 'Category option combo',
+                collectionName: 'categoryOptionCombos',
                 authorities: [
                     {
                         type: 'CREATE_PUBLIC',
