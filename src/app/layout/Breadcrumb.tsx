@@ -32,7 +32,7 @@ export const Breadcrumbs = () => {
         .filter((match) => match.handle?.crumb)
         .map((match) => (
             <span key={match.id}>
-                {match.handle?.crumb()}
+                {match.handle?.crumb?.()}
                 <BreadcrumbSeparator />
             </span>
         ))

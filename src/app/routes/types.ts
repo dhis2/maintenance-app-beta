@@ -11,7 +11,7 @@ type MatchWithHandle<THandle> = ReturnType<typeof useMatches>[number] & {
 export type RouteHandle = {
     hideSidebar?: boolean
     section?: SchemaSection
-    crumb: () => React.ReactNode
+    crumb?: () => React.ReactNode
 }
 
 export type MatchRouteHandle = MatchWithHandle<RouteHandle>
