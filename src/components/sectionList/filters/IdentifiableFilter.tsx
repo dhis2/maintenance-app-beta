@@ -11,6 +11,7 @@ export const IdentifiableFilter = () => {
     const [value, setValue] = useState(filter || '')
     const debouncedValue = useDebounce<typeof filter>(value, 200)
 
+    // console.warn(value)
     useEffect(() => {
         setFilter(debouncedValue || undefined) // convert empty string to undefined
     }, [debouncedValue, setFilter])
@@ -28,6 +29,7 @@ export const IdentifiableFilter = () => {
                 placeholder={i18n.t('Search by name, code or ID')}
                 onChange={(value: InputOnChangeObject) => setValue(value.value)}
                 value={value}
+                dataTest="input-search-name"
                 dense
             />
         </>
