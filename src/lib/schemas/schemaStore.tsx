@@ -35,6 +35,6 @@ export const useSchemas = () => useSchemaStore((state) => state.getSchemas())
 
 export function useSchema(schemaName: SchemaName): Schema {
     return useSchemaStore((state) => {
-        return state.getSchema(schemaName as SchemaName)
+        return state.getSchema(schemaName)
     })
 }
