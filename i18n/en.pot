@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-05T13:15:06.184Z\n"
-"PO-Revision-Date: 2023-09-05T13:15:06.184Z\n"
+"POT-Creation-Date: 2023-09-05T13:15:27.767Z\n"
+"PO-Revision-Date: 2023-09-05T13:15:27.767Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -615,6 +615,15 @@ msgstr ""
 
 msgid "Aggregation levels"
 msgstr "Aggregation levels"
+
+msgid "Aggregation level(s)"
+msgstr "Aggregation level(s)"
+
+msgid "Custom attributes"
+msgstr "Custom attributes"
+
+msgid "Custom fields for your DHIS2 instance"
+msgstr "Custom fields for your DHIS2 instance"
 
 msgid "Selected legends"
 msgstr "Selected legends"

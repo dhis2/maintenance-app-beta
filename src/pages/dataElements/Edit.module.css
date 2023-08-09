@@ -9,7 +9,7 @@
     left: 0;
     bottom: 0;
     width: 100vw;
-    padding: var(--spacers-dp16) 0;
+    padding: var(--spacers-dp16);
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
     background: var(--colors-white);
 }
