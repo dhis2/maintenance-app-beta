@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-08-08T12:40:12.963Z\n"
-"PO-Revision-Date: 2023-08-08T12:40:12.963Z\n"
+"POT-Creation-Date: 2023-08-09T14:02:29.045Z\n"
+"PO-Revision-Date: 2023-08-09T14:02:29.045Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -83,6 +83,18 @@ msgstr "Clear all filters"
 
 msgid "Search by name, code or ID"
 msgstr "Search by name, code or ID"
+
+msgid "An error occurred while rendering the value"
+msgstr "An error occurred while rendering the value"
+
+msgid "Public can edit"
+msgstr "Public can edit"
+
+msgid "Public can view"
+msgstr "Public can view"
+
+msgid "Public can not access"
+msgstr "Public can not access"
 
 msgid "Category"
 msgstr "Category"

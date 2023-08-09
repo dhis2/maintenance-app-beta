@@ -1,5 +1,6 @@
-import i18n from '@dhis2/d2-i18n'
 import React from 'react'
+import { ConstantValue } from './ConstantValue'
+import { DateValue } from './DateValue'
 import type { ValueDetails } from './ModelValue'
 import { PublicAccessValue, isSharing } from './PublicAccess'
 import { TextValue } from './TextValue'
@@ -9,8 +10,16 @@ export const ModelValueRenderer = ({ value, schemaProperty }: ValueDetails) => {
         return <PublicAccessValue value={value} />
     }
 
-    if (typeof value === 'string') {
-        return <TextValue value={value} />
+    if (schemaProperty.propertyType === 'CONSTANT') {
+        return <ConstantValue value={value as string} />
     }
-    return <span>{i18n.t('An error occurred while rendering the value')} </span>
+
+    if (schemaProperty.propertyType === 'DATE') {
+        return <DateValue value={value as string} />
+    }
+
+    if (value) {
+        return <TextValue value={value.toString()} />
+    }
+    return null
 }

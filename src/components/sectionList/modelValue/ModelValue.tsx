@@ -19,9 +19,14 @@ export const ModelValue = ({
     value,
 }: ModelValueProps) => {
     const schemaProperty = schema.properties[modelPropertyName]
+
     if (!schemaProperty) {
-        throw new Error('Property not found in schema')
+        console.warn(
+            `Property ${modelPropertyName} not found in schema, value not rendered: ${value}`
+        )
+        return null
     }
+
     return (
         <span>
             <ModelValueRenderer value={value} schemaProperty={schemaProperty} />
