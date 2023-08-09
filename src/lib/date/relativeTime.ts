@@ -16,7 +16,7 @@ const units: TimeUnit[] = [
 
 const lang = i18n.language || 'en'
 const relativeTimeFormatter = new Intl.RelativeTimeFormat(lang, {
-    numeric: 'auto',
+    numeric: 'always',
 })
 
 /**
@@ -25,12 +25,9 @@ const relativeTimeFormatter = new Intl.RelativeTimeFormat(lang, {
  * @param from     - the dateTime of reference
  */
 export function getRelativeTime(
-    relative: Date | null,
+    relative: Date,
     from: Date = new Date()
 ): string {
-    if (!relative) {
-        return ''
-    }
     const delta = relative.getTime() - from.getTime()
     return getRelativeTimeFromDelta(delta)
 }
@@ -42,7 +39,8 @@ export function getRelativeTime(
 export function getRelativeTimeFromDelta(delta: number): string {
     // get closest unit
     for (const { unit, ms } of units) {
-        if (Math.abs(delta) >= ms || unit === 'second') {
+        const absoluteDelta = Math.abs(delta)
+        if (absoluteDelta >= ms || unit === 'second') {
             return relativeTimeFormatter.format(Math.round(delta / ms), unit)
         }
     }

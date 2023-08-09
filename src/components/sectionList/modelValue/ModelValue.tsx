@@ -27,9 +27,5 @@ export const ModelValue = ({
         return null
     }
 
-    return (
-        <span>
-            <ModelValueRenderer value={value} schemaProperty={schemaProperty} />
-        </span>
-    )
+    return <ModelValueRenderer value={value} schemaProperty={schemaProperty} />
 }
