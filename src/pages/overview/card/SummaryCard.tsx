@@ -7,12 +7,11 @@ import {
     getSectionNewPath,
     getSectionPath,
 } from '../../../app/routes/routePaths'
-import { Section } from '../../../constants'
 import {
     useCanCreateModelInSection,
     useIsSectionAuthorizedPredicate,
 } from '../../../lib'
-import { OverviewSection } from '../../../types'
+import { ModelSection, OverviewSection } from '../../../types'
 import styles from './SummaryCard.module.css'
 
 const DEFAULT_ICON = <IconEdit24 />
@@ -47,7 +46,7 @@ export const SummaryCardGroup = ({
 interface SummaryCardProps {
     children: React.ReactNode
     icon?: React.ReactNode
-    section: Section
+    section: ModelSection
 }
 
 export const SummaryCard = ({
@@ -75,7 +74,7 @@ export const SummaryCardContent = ({ children }: PropsWithChildren) => {
 }
 
 interface SummaryCardActionsProps {
-    section: Section
+    section: ModelSection
 }
 
 export const SummaryCardActions = ({ section }: SummaryCardActionsProps) => {

@@ -3,9 +3,10 @@ import {
     SECTIONS_MAP,
     isSchemaSection,
     Section,
-    isNonSchemaSection,
     SchemaSection,
+    isOverviewSection,
 } from '../../constants'
+import { ModelSection } from '../../types'
 import { useSchemas } from '../schemas'
 import { useSystemSetting } from '../systemSettings'
 import { ModelSchemas } from '../useLoadApp'
@@ -28,27 +29,19 @@ const isNonCreateableSection = (section: Section): section is SchemaSection => {
  */
 
 function canCreateModelInSection(
-    section: Section,
+    section: ModelSection,
     userAuthorities: UserAuthorities,
     schemas: ModelSchemas
 ): boolean {
     if (isSchemaSection(section)) {
         const schema = schemas[section.name]
-
         return canCreate(schema, userAuthorities)
-    } else if (isNonSchemaSection(section)) {
+    } else {
+        // NonSchemaSection
         if (!section.authorities) {
             return true
         }
         return hasCreateAuthority(section.authorities, userAuthorities)
-    } else {
-        // overview section
-        // check that any of the child sections are authorized
-        return Object.values(SECTIONS_MAP)
-            .filter((section) => section.parentSectionKey === section.name)
-            .some((section) =>
-                canCreateModelInSection(section, userAuthorities, schemas)
-            )
     }
 }
 
@@ -67,17 +60,26 @@ export const useIsSectionAuthorizedPredicate = () => {
     const requireCreateAuthToView = useSystemSetting('keyRequireAddToView')
 
     const isSectionAuthorizedPredicate = useCallback(
-        (section: Section) => {
+        (section: Section): boolean => {
             if (!requireCreateAuthToView) {
                 return true
             }
             // if schema is non-creatable, we still need to check authority for creation
-            // but circumvent the check for nonCreateableSchemas that is done in canCreate
-            // - since the section should still be viewable
+            // but circumvent the check for nonCreateableSchemas that is done in canCreate,
+            // since the section should still be viewable
             if (isNonCreateableSection(section)) {
                 return hasCreateAuthority(
                     schemas[section.name].authorities,
                     userAuthorities
+                )
+            }
+            if (isOverviewSection(section)) {
+                // check that any of the child sections are authorized
+                const childSections = Object.values(SECTIONS_MAP).filter(
+                    (section) => section.parentSectionKey === section.name
+                )
+                return childSections.some((section) =>
+                    isSectionAuthorizedPredicate(section)
                 )
             }
             return canCreateModelInSection(section, userAuthorities, schemas)
@@ -88,7 +90,7 @@ export const useIsSectionAuthorizedPredicate = () => {
     return isSectionAuthorizedPredicate
 }
 
-export const useCanCreateModelInSection = (section: Section) => {
+export const useCanCreateModelInSection = (section: ModelSection) => {
     const userAuthorities = useCurrentUserAuthorities()
     const schemas = useSchemas()
 
