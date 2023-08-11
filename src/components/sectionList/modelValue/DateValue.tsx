@@ -5,14 +5,14 @@ import { getRelativeTime } from '../../../lib'
 export const DateValue = ({ value }: { value?: string }) => {
     const { fromServerDate } = useTimeZoneConversion()
 
+    const clientDate = fromServerDate(value)
+
     if (!value) {
         return null
     }
 
-    const clientDate = fromServerDate(value)
-
     return (
-        <span title={clientDate.toLocaleString()}>
+        <span title={clientDate.getClientZonedISOString()}>
             {getRelativeTime(clientDate)}
         </span>
     )

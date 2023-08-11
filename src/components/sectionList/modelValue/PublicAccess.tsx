@@ -18,7 +18,7 @@ const getPublicAccessString = (value: Sharing): string => {
         } else if (metadata === 'r-') {
             return i18n.t('Public can view')
         } else if (metadata === '--') {
-            return i18n.t('Public can not access')
+            return i18n.t('Public cannot access')
         }
     }
     return 'N/A'

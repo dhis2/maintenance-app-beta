@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-08-09T14:02:29.045Z\n"
-"PO-Revision-Date: 2023-08-09T14:02:29.045Z\n"
+"POT-Creation-Date: 2023-08-11T22:42:01.858Z\n"
+"PO-Revision-Date: 2023-08-11T22:42:01.858Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -84,8 +84,8 @@ msgstr "Clear all filters"
 msgid "Search by name, code or ID"
 msgstr "Search by name, code or ID"
 
-msgid "An error occurred while rendering the value"
-msgstr "An error occurred while rendering the value"
+msgid "None"
+msgstr "None"
 
 msgid "Public can edit"
 msgstr "Public can edit"
@@ -93,8 +93,8 @@ msgstr "Public can edit"
 msgid "Public can view"
 msgstr "Public can view"
 
-msgid "Public can not access"
-msgstr "Public can not access"
+msgid "Public cannot access"
+msgstr "Public cannot access"
 
 msgid "Category"
 msgstr "Category"
@@ -401,9 +401,6 @@ msgstr "Min (sum in org unit)"
 
 msgid "Max (sum in org unit)"
 msgstr "Max (sum in org unit)"
-
-msgid "None"
-msgstr "None"
 
 msgid "Custom"
 msgstr "Custom"

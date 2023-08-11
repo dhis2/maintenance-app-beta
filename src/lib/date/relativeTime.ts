@@ -1,4 +1,4 @@
-import i18n from '@dhis2/d2-i18n'
+import { relativeTimeLocale } from './locale'
 
 type TimeUnit = {
     unit: Intl.RelativeTimeFormatUnit
@@ -14,8 +14,7 @@ const units: TimeUnit[] = [
     { unit: 'second', ms: 1000 },
 ]
 
-const lang = i18n.language || 'en'
-const relativeTimeFormatter = new Intl.RelativeTimeFormat(lang, {
+const relativeTimeFormatter = new Intl.RelativeTimeFormat(relativeTimeLocale, {
     numeric: 'always',
 })
 
@@ -38,8 +37,8 @@ export function getRelativeTime(
  */
 export function getRelativeTimeFromDelta(delta: number): string {
     // get closest unit
+    const absoluteDelta = Math.abs(delta)
     for (const { unit, ms } of units) {
-        const absoluteDelta = Math.abs(delta)
         if (absoluteDelta >= ms || unit === 'second') {
             return relativeTimeFormatter.format(Math.round(delta / ms), unit)
         }
