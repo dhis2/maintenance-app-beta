@@ -1,39 +1,27 @@
 import * as Models from './generated/models'
 import * as Utility from './generated/utility'
 //export type * from './generated/utility'
-//import { Query } from './query'
+import { Query as DataQuery } from './query'
+
 type Resource = {
-    dataElement: Models.DataElement
-    categoryCombo: Models.CategoryCombo
+    dataElements: Models.DataElement
+    categoryCombos: Models.CategoryCombo
 }
-
-type GistResourceString = `${string}/gist`
-type ResourceQuery = Query[number]
-type GistResourceQuery = Omit<ResourceQuery, 'resource'> & {
-    resource: GistResourceString
-}
-
-// note that we do not support parallel queries
-// this makes it significantly easier to implement
-// and parallel use of gist queries shouldn't be a common use case
-type GistQuery = {
-    result: GistResourceQuery
-}
-const QR = {} as GistResourceQuery
-
-// const query = {
-//     resource: 'dataElement', //'dataElement',
-//     params: {
-//         fields: ['id', 'name', 'valueType', 'categoryCombo[id,name]'],
-//     },
-// } as const
-
-type ExtractModelFromParams<P extends ResourceQuery['params']> = {}
-
 type ParamFields = string[] | readonly string[]
+type ResourceQuery = Omit<DataQuery[number], 'params'> & {
+    params?: {
+        fields?: ParamFields
+    }
+}
+type Query = {
+    [key: string]: ResourceQuery
+}
+
 type Last<T extends any[]> = T extends [...infer _, infer L] ? L : never
 type RemoveLast<T extends any[]> = T extends [...infer R, any] ? R : never
-
+type RemoveSpaces<S extends string> = S extends `${infer T} ${infer U}`
+    ? RemoveSpaces<`${T}${U}`>
+    : S
 /* 
   Helper Type to split a nested field string into components.
   NOTE: This only supports one level of nesting.
@@ -42,7 +30,10 @@ type RemoveLast<T extends any[]> = T extends [...infer R, any] ? R : never
  Split<'categoryOptions,id,name,sharing[public,owner]', ','>
  becomes: ["categoryOptions", "id", "name", "sharing[public,owner]"]
 */
-type SplitFieldFilter<S extends string, D extends string> = string extends S
+type RecursiveSplitFieldFilter<
+    S extends string,
+    D extends string = ','
+> = string extends S
     ? string[]
     : S extends ''
     ? []
@@ -56,16 +47,16 @@ type SplitFieldFilter<S extends string, D extends string> = string extends S
           // Since there's no way to "store" the result of the recursion, we need to do it twice
           [
               T,
-              ...RemoveLast<SplitFieldFilter<RM, D>>,
-              `${Last<SplitFieldFilter<RM, D>>}[${NM}]`
+              ...RemoveLast<RecursiveSplitFieldFilter<RM, D>>,
+              `${Last<RecursiveSplitFieldFilter<RM, D>>}[${NM}]`
           ]
-        : [T, ...SplitFieldFilter<U, D>]
+        : [T, ...RecursiveSplitFieldFilter<U, D>]
     : [S]
 
-type Spltt = SplitFieldFilter<
-    'categoryOptions,id,name,sharing[public,owner]',
-    ','
->
+type SplitFieldFilter<
+    S extends string,
+    D extends string = ','
+> = RecursiveSplitFieldFilter<RemoveSpaces<S>, D>
 
 // helper to ensure that a key is a key of an object, if not return never
 // mainly to prevent super deep ternaries
@@ -104,55 +95,25 @@ type RecursiveModelFromFields<
         : unknown // not a key of Model, return unknown
 }
 
-type ModelKeys = keyof Models.DataElement & string
-
-type RecurTest = RecursiveModelFromFields<
-    Models.DataElement,
-    ['id', 'name', 'categoryCombo[id,name]'][number]
->
-const RT = {} as RecurTest
-
-// [
-//     'id',
-//     'attributeValues[value,attribute]',
-//     // 'asf',
-//     'categoryCombo[categoryOptionCombos,id,name,sharing]'
-// ][number]
-const obj = {} as RecurTest
-
 // Gets the union of query.params.fields
 // note that this assumes all keys, in the case of no field-filter
 ///which would not match the api - which would have some defaults
 type FieldsFromQuery<Q extends ResourceQuery> =
-    'fields' extends keyof Q['params']
-        ? Q['params']['fields'] extends ParamFields
-            ? Q['params']['fields'][number]
-            : keyof Resource[Q['resource']] & string // if fields are not an array, return all from Model
-        : keyof Resource[Q['resource']] & string // if no fields, return all from Model
-
-type ModelFromQuery<Q extends ResourceQuery> =
     Q['resource'] extends keyof Resource
-        ? RecursiveModelFromFields<
-              Resource[Q['resource']],
-              Q['params']['fields'][number]
-              // FieldsFromQuery<Q>
-          >
+        ? 'fields' extends keyof Q['params']
+            ? Q['params']['fields'] extends ParamFields
+                ? Q['params']['fields'][number]
+                : keyof Resource[Q['resource']] & string // if fields are not an array, return all from Model
+            : keyof Resource[Q['resource']] & string // if no fields, return all from Model
+        : string
+
+export type ModelFromResourceQuery<Q extends ResourceQuery> =
+    Q['resource'] extends keyof Resource
+        ? RecursiveModelFromFields<Resource[Q['resource']], FieldsFromQuery<Q>>
         : unknown
 
-const query2 = {
-    resource: 'dataElement',
-    params: {
-        fields: ['id', 'name', 'valueType', 'categoryCombo[name,id]'] as const,
-    },
-} as const
-type T2 = ModelFromQuery<typeof query2>
-const asf = {} as T2
-asf.categoryCombo.id
-type Result = ModelFromQuery<{
-    resource: 'dataElement'
-    params: {
-        fields: ['id', 'name', 'valueType', 'categoryCombo[id,displayName]']
-    }
-}>
-
-const res = {} as Result
+export type ModelsFromQuery<Q extends Query> = {
+    [K in keyof Q]: Q[K]['resource'] extends keyof Resources
+        ? ModelFromResourceQuery<Q[K]>
+        : unknown
+}
