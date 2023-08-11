@@ -171,9 +171,9 @@ type GetModelType<T> = T extends ModelReference
 
 // helper type for PickInReferences
 // Wraps the type in ModelCollection if FullModel extends ModelReferenceCollection
-type MaybeModelCollection<
+export type MaybeModelCollection<
     ModelType,
-    FullModel extends ModelReference
+    FullModel //extends ModelReference
 > = FullModel extends ModelReferenceCollection
     ? ModelReferenceCollection<ModelType>
     : ModelType
