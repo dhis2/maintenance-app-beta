@@ -146,14 +146,14 @@ export const SCHEMA_SECTIONS = {
         namePlural: 'trackedEntityAttributes',
         title: i18n.t('Tracked entity attribute'),
         titlePlural: i18n.t('Tracked entity attributes'),
-        parentSectionKey: 'trackedEntityAttribute',
+        parentSectionKey: 'programsAndTracker',
     },
     trackedEntityType: {
         name: SchemaName.trackedEntityType,
         namePlural: 'trackedEntityTypes',
         title: i18n.t('Tracked entity type'),
         titlePlural: i18n.t('Tracked entity types'),
-        parentSectionKey: 'trackedEntityAttribute',
+        parentSectionKey: 'programsAndTracker',
     },
     program: {
         name: SchemaName.program,
@@ -291,6 +291,7 @@ export const SCHEMA_SECTIONS = {
     },
 } as const satisfies SchemaSectionMap
 
+export type OverviewSectionName = keyof typeof OVERVIEW_SECTIONS
 export const OVERVIEW_SECTIONS = {
     category: {
         name: SchemaName.category,
@@ -386,7 +387,10 @@ export const isSchemaSection = (section: Section): section is SchemaSection => {
 export const isOverviewSection = (
     section: Section
 ): section is OverviewSection => {
-    return (OVERVIEW_SECTIONS as OverviewSectionMap)[section.name] !== undefined
+    return (
+        !(section as SchemaSection).parentSectionKey &&
+        (OVERVIEW_SECTIONS as OverviewSectionMap)[section.name] !== undefined
+    )
 }
 
 export const isNonSchemaSection = (
