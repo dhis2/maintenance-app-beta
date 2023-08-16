@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
+import { parsePublicAccessString } from '../../../lib'
 import { Sharing } from '../../../types/generated'
 
 export const isSharing = (value: unknown): value is Sharing => {
@@ -7,21 +8,20 @@ export const isSharing = (value: unknown): value is Sharing => {
 }
 
 const getPublicAccessString = (value: Sharing): string => {
-    const publicAccessString = value.public
-    const metadata = publicAccessString.substring(0, 2)
-    const data = publicAccessString.substring(2, 4)
-    const other = publicAccessString.substring(4)
+    const publicAccess = parsePublicAccessString(value.public)
 
-    if (other === '----' && (data === '--' || data === 'r-' || data === 'rw')) {
-        if (metadata === 'rw') {
-            return i18n.t('Public can edit')
-        } else if (metadata === 'r-') {
-            return i18n.t('Public can view')
-        } else if (metadata === '--') {
-            return i18n.t('Public cannot access')
-        }
+    if (!publicAccess) {
+        return 'N/A'
     }
-    return 'N/A'
+    const { metadata } = publicAccess
+
+    if (metadata.write) {
+        return i18n.t('Public can edit')
+    } else if (metadata.read) {
+        return i18n.t('Public can view')
+    }
+
+    return i18n.t('Public cannot access')
 }
 
 export const PublicAccessValue = ({ value }: { value: Sharing }) => {
