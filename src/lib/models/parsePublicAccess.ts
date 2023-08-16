@@ -8,9 +8,10 @@ export type PublicAccess = {
 }
 
 const parseAccessPart = (accessPart: string): PublicAccessPart => {
+    const canRead = accessPart[0] === 'r'
     return {
         read: accessPart[0] === 'r',
-        write: accessPart[1] === 'w',
+        write: canRead && accessPart[1] === 'w',
     }
 }
 
