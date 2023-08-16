@@ -3,9 +3,9 @@ import { parsePublicAccessString } from './parsePublicAccess'
 describe('parsePublicAccessString', () => {
     const validAccessCases = [
         {
-            input: 'rw------',
+            input: '--------',
             expected: {
-                metadata: { read: true, write: true },
+                metadata: { read: false, write: false },
                 data: { read: false, write: false },
             },
         },
@@ -13,6 +13,13 @@ describe('parsePublicAccessString', () => {
             input: 'r-------',
             expected: {
                 metadata: { read: true, write: false },
+                data: { read: false, write: false },
+            },
+        },
+        {
+            input: 'rw------',
+            expected: {
+                metadata: { read: true, write: true },
                 data: { read: false, write: false },
             },
         },
@@ -28,13 +35,6 @@ describe('parsePublicAccessString', () => {
             expected: {
                 metadata: { read: false, write: false },
                 data: { read: true, write: true },
-            },
-        },
-        {
-            input: 'rw------',
-            expected: {
-                metadata: { read: true, write: true },
-                data: { read: false, write: false },
             },
         },
         {
