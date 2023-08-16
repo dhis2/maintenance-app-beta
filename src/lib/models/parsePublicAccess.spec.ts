@@ -44,16 +44,16 @@ describe('parsePublicAccessString', () => {
                 data: { read: true, write: true },
             },
         },
-        // Add more valid test cases here
     ]
 
     const invalidAccessCases = [
         '',
         'invalid',
-        'r--------', // to many dashes
-        'rw----x---', // Invalid character
+        'r--------', // too many dashes
+        'rxrw----', // invalid character
         '-w------', // cannot have write without read
         '-r-w----',
+        'rwrwrwrw',
     ]
 
     it.each(validAccessCases)(

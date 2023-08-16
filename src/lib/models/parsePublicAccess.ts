@@ -15,7 +15,7 @@ const parseAccessPart = (accessPart: string): PublicAccessPart => {
 }
 
 // metadata is first part, data second, rest (other) parts are not used
-// eg. rw-------- = metadata: rw, data: --
+// eg. rw------ = metadata: rw, data: --
 const publicAccessRegex = /^(r-|rw|--)(r-|rw|--)(-){4}$/
 
 export const parsePublicAccessString = (
