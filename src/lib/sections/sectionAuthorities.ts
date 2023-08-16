@@ -47,8 +47,8 @@ function canCreateModelInSection(
 
 /**
  * Authorization (ie if a section should be viewable) of a section is determined by the following:
- *  - the user must have any CREATE authority on the schema
- *  - if systemSetting keyRequireAddToView is false, sections are always authorized
+ *  - if systemSetting `keyRequireAddToView` is false, sections are always authorized
+ *  - if `keyRequireAddToView` is true, the user must have any CREATE authority on the schema
  *  - overviewSections are authorized if any of their child sections are authorized
  * Returns a predicate because it's more versatile than a direct hook, since the
  * check can be used in loops.
@@ -76,10 +76,11 @@ export const useIsSectionAuthorizedPredicate = () => {
             if (isOverviewSection(section)) {
                 // check that any of the child sections are authorized
                 const childSections = Object.values(SECTIONS_MAP).filter(
-                    (section) => section.parentSectionKey === section.name
+                    (childSection) =>
+                        childSection.parentSectionKey === section.name
                 )
-                return childSections.some((section) =>
-                    isSectionAuthorizedPredicate(section)
+                return childSections.some((childSection) =>
+                    isSectionAuthorizedPredicate(childSection)
                 )
             }
             return canCreateModelInSection(section, userAuthorities, schemas)
