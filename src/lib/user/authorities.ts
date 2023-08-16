@@ -33,8 +33,12 @@ export const hasAuthorityForOperation = (
         return true
     }
 
+    if (!schemaAuthorities) {
+        return false
+    }
+
     const authoritiesNeeded = schemaAuthorities
-        ?.filter((auth) => {
+        .filter((auth) => {
             // if operation is CREATE it can be any of types in canCreateAuthTypes
             if (operation === SchemaAuthorityType.CREATE) {
                 return canCreateAuthTypes.has(auth.type)
@@ -43,9 +47,6 @@ export const hasAuthorityForOperation = (
         })
         .flatMap((schemaAuthority) => schemaAuthority.authorities)
 
-    if (!authoritiesNeeded) {
-        return false
-    }
     return authoritiesNeeded.some((auth) => userAuthorities.has(auth))
 }
 
