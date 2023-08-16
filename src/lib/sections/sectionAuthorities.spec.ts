@@ -1,7 +1,10 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { SECTIONS_MAP } from '../../constants'
-import { useSystemSetting } from '../systemSettings'
-import { useCurrentUserAuthorities } from '../user'
+import { OVERVIEW_SECTIONS, SECTIONS_MAP } from '../../constants'
+import { SystemSettings } from '../../types'
+import { useSchemaStore } from '../schemas/schemaStore'
+import { useSystemSettingsStore } from '../systemSettings/systemSettingsStore'
+import { ModelSchemas, CurrentUser } from '../useLoadApp'
+import { useCurrentUserStore } from '../user/currentUserStore'
 import { SchemaName } from './../../types/schemaBase'
 import {
     useCanCreateModelInSection,
@@ -27,6 +30,69 @@ const mockedSchemas = {
             {
                 type: 'DELETE',
                 authorities: ['F_DATAELEMENT_DELETE'],
+            },
+        ],
+    },
+    [SchemaName.dataElement]: {
+        singular: 'dataElement',
+        plural: 'dataElements',
+        name: 'dataElement',
+        displayName: 'Data Element',
+        collectionName: 'dataElements',
+        authorities: [
+            {
+                type: 'CREATE_PUBLIC',
+                authorities: ['F_DATAELEMENT_PUBLIC_ADD'],
+            },
+            {
+                type: 'CREATE_PRIVATE',
+                authorities: ['F_DATAELEMENT_PRIVATE_ADD'],
+            },
+            {
+                type: 'DELETE',
+                authorities: ['F_DATAELEMENT_DELETE'],
+            },
+        ],
+    },
+    [SchemaName.dataElementGroup]: {
+        singular: 'dataElementGroup',
+        plural: 'dataElementGroups',
+        name: 'dataElementGroup',
+        displayName: 'Data Element Group',
+        collectionName: 'dataElementGroups',
+        authorities: [
+            {
+                type: 'CREATE_PUBLIC',
+                authorities: ['F_DATAELEMENTGROUP_PUBLIC_ADD'],
+            },
+            {
+                type: 'CREATE_PRIVATE',
+                authorities: ['F_DATAELEMENTGROUP_PRIVATE_ADD'],
+            },
+            {
+                type: 'DELETE',
+                authorities: ['F_DATAELEMENTGROUP_DELETE'],
+            },
+        ],
+    },
+    [SchemaName.dataElementGroupSet]: {
+        singular: 'dataElementGroupSet',
+        plural: 'dataElementGroupSets',
+        name: 'dataElementGroupSet',
+        displayName: 'Data Element Group Set',
+        collectionName: 'dataElementGroupSets',
+        authorities: [
+            {
+                type: 'CREATE_PUBLIC',
+                authorities: ['F_DATAELEMENTGROUPSET_PUBLIC_ADD'],
+            },
+            {
+                type: 'CREATE_PRIVATE',
+                authorities: ['F_DATAELEMENTGROUPSET_PRIVATE_ADD'],
+            },
+            {
+                type: 'DELETE',
+                authorities: ['F_DATAELEMENTGROUPSET_DELETE'],
             },
         ],
     },
@@ -72,42 +138,29 @@ const mockedSchemas = {
             },
         ],
     },
+} as unknown as ModelSchemas
+
+const setMockedKeyRequireAddToView = (value: boolean) => {
+    const mockedSystemSettings = {
+        keyRequireAddToView: value,
+    } as SystemSettings
+    useSystemSettingsStore.getState().setSystemSettings(mockedSystemSettings)
 }
 
-jest.mock('../systemSettings', () => {
-    const originalModule = jest.requireActual('../systemSettings')
-    return {
-        ...originalModule,
-        useSystemSetting: jest.fn(),
-    }
-})
-jest.mock('../schemas', () => {
-    const originalModule = jest.requireActual('../schemas')
-    return {
-        ...originalModule,
-        useSchemas: jest.fn(() => mockedSchemas),
-    }
-})
-
-jest.mock('../user', () => {
-    const originalModule = jest.requireActual('../user')
-    return {
-        ...originalModule,
-        useCurrentUserAuthorities: jest.fn(),
-    }
-})
-
-const mockedUseCurrentUserAuthorities = jest.mocked(useCurrentUserAuthorities)
-const mockedUseSystemSetting = jest.mocked(useSystemSetting)
+const setMockedAuthorities = (authorities: Set<string>) => {
+    const mockedCurrentUser = {
+        authorities,
+    } as unknown as CurrentUser
+    useCurrentUserStore.getState().setCurrentUser(mockedCurrentUser)
+}
 
 describe('sectionAuthorities', () => {
+    beforeAll(() => {
+        useSchemaStore.getState().setSchemas(mockedSchemas)
+    })
     beforeEach(() => {
-        mockedUseCurrentUserAuthorities.mockReset()
-        mockedUseSystemSetting.mockReset()
-        mockedUseCurrentUserAuthorities.mockImplementation(
-            () => new Set(['F_DATAELEMENT_PUBLIC_ADD'])
-        )
-        mockedUseSystemSetting.mockImplementation(() => true)
+        setMockedAuthorities(new Set(['F_DATAELEMENT_PUBLIC_ADD']))
+        setMockedKeyRequireAddToView(true)
     })
     describe('useIsSectionAuthorizedPredicate', () => {
         it('should return a predicate function', () => {
@@ -127,9 +180,8 @@ describe('sectionAuthorities', () => {
             expect(isAllowed).toBe(true)
         })
         it('predicate function should return false when user does not have required authorites', async () => {
-            mockedUseCurrentUserAuthorities.mockImplementation(
-                () => new Set(['F_DATAELEMENT_DELETE'])
-            )
+            setMockedAuthorities(new Set(['F_DATAELEMENT_DELETE']))
+
             const { result } = renderHook(() =>
                 useIsSectionAuthorizedPredicate()
             )
@@ -139,7 +191,8 @@ describe('sectionAuthorities', () => {
             expect(isAllowed).toBe(false)
         })
         it('predicate function should return true if systemSetting keyRequireAddToView is false, even without required auth', async () => {
-            mockedUseSystemSetting.mockImplementation(() => false)
+            setMockedKeyRequireAddToView(false)
+            setMockedAuthorities(new Set())
             const { result } = renderHook(() =>
                 useIsSectionAuthorizedPredicate()
             )
@@ -147,6 +200,62 @@ describe('sectionAuthorities', () => {
 
             const isAllowed = isSectionAuthorized(SECTIONS_MAP.dataElement)
             expect(isAllowed).toBe(true)
+        })
+        describe('overviewSection', () => {
+            it('predicate function should return true when user has at least one authority for child section', async () => {
+                const { result } = renderHook(() =>
+                    useIsSectionAuthorizedPredicate()
+                )
+                const isSectionAuthorized = result.current
+
+                const isAllowed = isSectionAuthorized(
+                    OVERVIEW_SECTIONS.dataElement
+                )
+                expect(isAllowed).toBe(true)
+            })
+            it('predicate function should return true when user has required authorites for child section that is not the same as parentKeyName', async () => {
+                setMockedAuthorities(
+                    new Set(['F_DATAELEMENTGROUP_CREATE_PUBLIC'])
+                )
+
+                const { result } = renderHook(() =>
+                    useIsSectionAuthorizedPredicate()
+                )
+                const isSectionAuthorized = result.current
+
+                const isAllowed = isSectionAuthorized(
+                    OVERVIEW_SECTIONS.dataElement
+                )
+                expect(isAllowed).toBe(false)
+            })
+
+            it('predicate function should return false when user does not have required authorites for any child section', async () => {
+                setMockedAuthorities(new Set(['F_DATAELEMENT_DELETE']))
+
+                const { result } = renderHook(() =>
+                    useIsSectionAuthorizedPredicate()
+                )
+                const isSectionAuthorized = result.current
+
+                const isAllowed = isSectionAuthorized(
+                    OVERVIEW_SECTIONS.dataElement
+                )
+                expect(isAllowed).toBe(false)
+            })
+
+            it('predicate function should return true if systemSetting keyRequireAddToView is false, even without required auth', async () => {
+                setMockedKeyRequireAddToView(false)
+                setMockedAuthorities(new Set())
+                const { result } = renderHook(() =>
+                    useIsSectionAuthorizedPredicate()
+                )
+                const isSectionAuthorized = result.current
+
+                const isAllowed = isSectionAuthorized(
+                    OVERVIEW_SECTIONS.dataElement
+                )
+                expect(isAllowed).toBe(true)
+            })
         })
     })
     describe('useCanCreateModelInSection', () => {
@@ -167,12 +276,11 @@ describe('sectionAuthorities', () => {
             expect(isSectionAuthorized).toBe(false)
         })
         it('should return false if section is categoryOptionCombo, even with required auth', () => {
-            mockedUseCurrentUserAuthorities.mockImplementation(
-                () =>
-                    new Set([
-                        'F_CATEGORY_COMBO_PUBLIC_ADD',
-                        'F_CATEGORY_COMB_PRIVATE_ADD',
-                    ])
+            setMockedAuthorities(
+                new Set([
+                    'F_CATEGORY_COMBO_PUBLIC_ADD',
+                    'F_CATEGORY_COMB_PRIVATE_ADD',
+                ])
             )
             const { result } = renderHook(() =>
                 useCanCreateModelInSection(SECTIONS_MAP.categoryOptionCombo)
