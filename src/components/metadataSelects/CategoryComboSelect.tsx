@@ -5,23 +5,23 @@ import { SearchableSingleSelect } from '../SearchableSingleSelect'
 interface CategoryComboQueryResult {
     categoryCombos: {
         pager: {
-            pageCount: number,
-            pageSize: number,
-            page: number,
-            total: number,
-        },
+            pageCount: number
+            pageSize: number
+            page: number
+            total: number
+        }
         categoryCombos: Array<{
-            id: string,
-            displayName: string,
-        }>,
+            id: string
+            displayName: string
+        }>
     }
 }
 
 type QueryParams = {
-    page: number,
-    pageSize: number,
-    fields: string[],
-    filter?: string,
+    page: number
+    pageSize: number
+    fields: string[]
+    filter?: string
 }
 
 const query = {
@@ -43,16 +43,19 @@ const query = {
     },
 }
 
-interface Option { value: string, label: string }
+interface Option {
+    value: string
+    label: string
+}
 export function CategoryComboSelect({
     onChange,
     selected,
 }: {
-    onChange: ({ value, label }: Option) => void,
+    onChange: ({ value, label }: Option) => void
     // Must be an option as we always must supply the selected option, but the
     // list might not contain it when filtering / loading the first page of
     // options
-    selected?: Option,
+    selected?: Option
 }) {
     // Using a ref because we don't want to react to a change of this value
     // It's guaranteed that we have the correct value because we reset the
@@ -61,21 +64,22 @@ export function CategoryComboSelect({
     // but before we call a state setter. The state setter will cause a
     // rerender during which the new pages value can be accessed already
     const pages = useRef(1)
-    const [loadedOptions, setLoadedOptions] = useState<Array<{
-      value: string,
-      label: string,
-    }>>([])
+    const [loadedOptions, setLoadedOptions] = useState<
+        Array<{
+            value: string
+            label: string
+        }>
+    >([])
 
     const [params, setParams] = useState({ page: 1, filter: '' })
-    const filterTimeout = useRef<ReturnType<typeof setTimeout>>()
-    const adjustQueryParamsWithChangedFilter = useCallback(({ value }: { value: string }) => {
-        clearTimeout(filterTimeout.current)
-        filterTimeout.current = setTimeout(() => {
+    const adjustQueryParamsWithChangedFilter = useCallback(
+        ({ value }: { value: string }) => {
             pages.current = 1
             setLoadedOptions([])
             setParams({ page: 1, filter: value })
-        }, 200)
-    }, [])
+        },
+        []
+    )
 
     const incrementPage = ({ isIntersecting }: { isIntersecting: boolean }) => {
         if (!isIntersecting) {
@@ -84,8 +88,7 @@ export function CategoryComboSelect({
 
         setParams((prevParams) => {
             const prevPage = prevParams.page
-            const nextPage =
-                prevPage < pages.current ? prevPage + 1 : prevPage
+            const nextPage = prevPage < pages.current ? prevPage + 1 : prevPage
             return { ...prevParams, page: nextPage }
         })
     }
@@ -98,10 +101,12 @@ export function CategoryComboSelect({
             // refetch existing options
             setLoadedOptions((prevLoadedOptions) => [
                 ...prevLoadedOptions,
-                ...data?.categoryCombos.categoryCombos.map(({ id, displayName }) => ({
-                    value: id,
-                    label: displayName,
-                })) || [],
+                ...(data?.categoryCombos.categoryCombos.map(
+                    ({ id, displayName }) => ({
+                        value: id,
+                        label: displayName,
+                    })
+                ) || []),
             ])
         },
     })
@@ -111,14 +116,18 @@ export function CategoryComboSelect({
         refetch(params)
     }, [params, refetch])
 
-    const actualOptions = !selected || loadedOptions.find(({ value }) => value === selected?.value)
-        ? loadedOptions
-        : [selected, ...loadedOptions]
+    const actualOptions =
+        !selected ||
+        loadedOptions.find(({ value }) => value === selected?.value)
+            ? loadedOptions
+            : [selected, ...loadedOptions]
 
     return (
         <SearchableSingleSelect
             onChange={({ selected }) => {
-                const nextSelected = loadedOptions.find(({ value }) => value === selected)
+                const nextSelected = loadedOptions.find(
+                    ({ value }) => value === selected
+                )
                 onChange(nextSelected as Option)
             }}
             onIntersectionChange={incrementPage}
