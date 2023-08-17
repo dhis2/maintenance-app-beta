@@ -13,12 +13,13 @@ jest.mock('../../lib', () => {
     return {
         ...originalModule,
         useIsSectionAuthorizedPredicate: jest.fn(),
+        useCanCreateModelInSection: jest.fn(() => true),
     }
 })
 
 beforeEach(() => {
     configure({ testIdAttribute: 'data-test' })
-    jest.resetAllMocks()
+    mockedUseIsSectionAuthorizedPredicate.mockReset()
     mockedUseIsSectionAuthorizedPredicate.mockImplementation(() => () => true)
 })
 

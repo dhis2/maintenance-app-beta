@@ -1,12 +1,13 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
-import type { SchemaName } from '../../types'
-import type { ModelSchemas } from '../useLoadApp'
+import { SchemaName } from '../../types'
+import type { ModelSchemas, Schema } from '../useLoadApp'
 
 export interface SchemasStore {
     schemas: ModelSchemas | undefined
     getSchemas: () => ModelSchemas
     setSchemas: (schemas: ModelSchemas) => void
+    getSchema: (schemaName: SchemaName) => Schema
 }
 
 export const useSchemaStore = create<SchemasStore>()(
@@ -21,6 +22,9 @@ export const useSchemaStore = create<SchemasStore>()(
 
             return schemas
         },
+        getSchema(schemaName: SchemaName) {
+            return get().getSchemas()[schemaName]
+        },
         setSchemas: (schemas) => set({ schemas }),
     }))
 )
@@ -28,5 +32,9 @@ export const useSchemaStore = create<SchemasStore>()(
 export const useSetSchemas = () => useSchemaStore((state) => state.setSchemas)
 
 export const useSchemas = () => useSchemaStore((state) => state.getSchemas())
-export const useSchema = (schemaName: SchemaName) =>
-    useSchemaStore((state) => state.getSchemas()[schemaName])
+
+export function useSchema(schemaName: SchemaName): Schema {
+    return useSchemaStore((state) => {
+        return state.getSchema(schemaName)
+    })
+}

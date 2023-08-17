@@ -15,6 +15,7 @@ jest.mock('../../lib', () => {
     return {
         ...originalModule,
         useIsSectionAuthorizedPredicate: jest.fn(),
+        useCanCreateModelInSection: jest.fn(() => true),
     }
 })
 

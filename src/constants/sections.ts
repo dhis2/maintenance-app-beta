@@ -381,7 +381,8 @@ export const SECTIONS_MAP = {
 } as const satisfies SectionMap
 
 export const isSchemaSection = (section: Section): section is SchemaSection => {
-    return (SCHEMA_SECTIONS as SectionMap)[section.name] !== undefined
+    const schema = (SCHEMA_SECTIONS as SectionMap)[section.name]
+    return schema !== undefined && !!schema.parentSectionKey
 }
 
 export const isOverviewSection = (
