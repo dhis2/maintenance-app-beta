@@ -1,13 +1,20 @@
 import i18n from '@dhis2/d2-i18n'
 
 const TRANSLATED_PROPERTY: Record<string, string> = {
-    name: i18n.t('Name'),
-    shortName: i18n.t('Short name'),
-    lastUpdated: i18n.t('Last updated'),
+    code: i18n.t('Code'),
+    createdBy: i18n.t('Created by'),
+    favorite: i18n.t('Favorite'),
+    href: i18n.t('Href'),
+    id: i18n.t('Id'),
+    lastUpdatedBy: i18n.t('Last updated by'),
     created: i18n.t('Created'),
-    sharing: i18n.t('Sharing'),
     domainType: i18n.t('Domain type'),
+    lastUpdated: i18n.t('Last updated'),
+    name: i18n.t('Name'),
+    sharing: i18n.t('Sharing'),
+    shortName: i18n.t('Short name'),
     valueType: i18n.t('Value type'),
+    user: i18n.t('Owner'), // user refers to the owner of the object
 }
 
 const camelCaseToSentenceCase = (camelCase: string) =>

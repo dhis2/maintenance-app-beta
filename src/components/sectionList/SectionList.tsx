@@ -9,7 +9,6 @@ import {
 } from '@dhis2/ui'
 import React, { PropsWithChildren } from 'react'
 import { CheckBoxOnChangeObject } from '../../types'
-import { IdentifiableObject } from '../../types/generated'
 import { SelectedColumns } from './types'
 
 type SectionListProps = {

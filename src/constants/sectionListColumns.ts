@@ -17,6 +17,8 @@ type ColumnsForSection = {
 
 type MergedColumnsForSection = Record<string, MergedColumnConfig>
 
+// this is the default that all columns that are not specified
+// in columnsForSection below
 const columnsDefault = {
     available: [
         'name',
@@ -32,7 +34,13 @@ const columnsDefault = {
     default: ['name', 'sharing', 'lastUpdated'],
 } satisfies ColumnConfig
 
-const columnsforSection: ColumnsForSection = {
+// this is the default columns shown in the list for each section
+// Note: by default, the available columns are merged with columnsDefault.available above.
+// If it's needed to override this for a section, set overrideDefaultAvailable to true
+// and list all available columns in the available array below.
+// Default-list will NOT be merged with columnsDefault.default - list all explicitly.
+// elements in the default array implies they are also available, no need to list them in both.
+const columnsForSection: ColumnsForSection = {
     dataElement: {
         default: ['name', 'domainType', 'valueType', 'lastUpdated', 'sharing'],
     },
@@ -44,14 +52,14 @@ const mergeArraysUnique = <T>(...arrays: T[][]): T[] =>
 const mergeColumnsConfig = () => {
     const merged: MergedColumnsForSection = {}
 
-    Object.entries(columnsforSection).forEach(
+    Object.entries(columnsForSection).forEach(
         ([sectionName, sectionColumnsMeta]) => {
             const mergedAvailable = mergeArraysUnique(
                 sectionColumnsMeta.default,
                 sectionColumnsMeta.available || [],
-                (sectionColumnsMeta.overrideDefaultAvailable &&
-                    columnsDefault.available) ||
-                    []
+                sectionColumnsMeta.overrideDefaultAvailable
+                    ? []
+                    : columnsDefault.available
             )
 
             merged[sectionName] = {
@@ -71,8 +79,7 @@ export const getColumnsForSection = (
     sectionName: string
 ): MergedColumnConfig => {
     if (mergedColumns[sectionName]) {
-        // cannot infer parent-object, see https://github.com/microsoft/TypeScript/issues/42384
-        return mergedColumns[sectionName] as MergedColumnConfig
+        return mergedColumns[sectionName]
     }
     return columnsDefault
 }
