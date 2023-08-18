@@ -380,6 +380,10 @@ export const SECTIONS_MAP = {
     ...NON_SCHEMA_SECTION,
 } as const satisfies SectionMap
 
+export type SectionKey = keyof typeof SECTIONS_MAP
+export type SectionName =
+    (typeof SECTIONS_MAP)[keyof typeof SECTIONS_MAP]['name']
+
 export const isSchemaSection = (section: Section): section is SchemaSection => {
     const schema = (SCHEMA_SECTIONS as SectionMap)[section.name]
     return schema !== undefined && !!schema.parentSectionKey
