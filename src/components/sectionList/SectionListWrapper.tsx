@@ -10,23 +10,20 @@ import { SectionListRow } from './SectionListRow'
 import { SectionListTitle } from './SectionListTitle'
 import { SelectionListHeader } from './SelectionListHeaderNormal'
 import { SelectedColumns } from './types'
+import { useHeaderColumns } from './useHeaderColumns'
 
 type SectionListWrapperProps<Model extends IdentifiableObject> = {
-    availableColumns?: SelectedColumns<Model>
-    defaultColumns: SelectedColumns<Model>
     filterElement?: React.ReactElement
     data: GistCollectionResponse<Model> | undefined
     error: FetchError | undefined
 }
+
 export const SectionListWrapper = <Model extends IdentifiableObject>({
-    availableColumns,
-    defaultColumns,
     filterElement,
     data,
     error,
 }: SectionListWrapperProps<Model>) => {
-    const [selectedColumns, setSelectedColumns] =
-        useState<SelectedColumns<Model>>(defaultColumns)
+    const { headerColumns } = useHeaderColumns()
     const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set())
 
     const handleSelect = (id: string, checked: boolean) => {
@@ -79,21 +76,20 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
             <FilterWrapper>{filterElement}</FilterWrapper>
             <SelectionListHeader />
             <SectionList
-                headerColumns={selectedColumns}
+                headerColumns={headerColumns}
                 onSelectAll={handleSelectAll}
                 allSelected={allSelected}
             >
                 <SectionListMessage />
-                {data?.result &&
-                    data?.result.map((model) => (
-                        <SectionListRow
-                            key={model.id}
-                            modelData={model}
-                            selectedColumns={selectedColumns}
-                            onSelect={handleSelect}
-                            selected={selectedModels.has(model.id)}
-                        />
-                    ))}
+                {data?.result.map((model) => (
+                    <SectionListRow
+                        key={model.id}
+                        modelData={model}
+                        selectedColumns={headerColumns}
+                        onSelect={handleSelect}
+                        selected={selectedModels.has(model.id)}
+                    />
+                ))}
                 <SectionListPagination data={data} />
             </SectionList>
         </div>

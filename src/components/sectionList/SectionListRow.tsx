@@ -9,7 +9,7 @@ import { SelectedColumns } from './types'
 
 export type SectionListRowProps<Model extends IdentifiableObject> = {
     modelData: Model | GistModel<Model>
-    selectedColumns: SelectedColumns<Model>
+    selectedColumns: SelectedColumns
     onSelect: (modelId: string, checked: boolean) => void
     selected: boolean
 }
@@ -33,9 +33,7 @@ export function SectionListRow<Model extends IdentifiableObject>({
             {selectedColumns.map(({ modelPropertyName }) => (
                 <DataTableCell key={modelPropertyName}>
                     {/* TODO: Handle constant translations and resolve displayvalues to components */}
-                    {typeof modelData[modelPropertyName] === 'object'
-                        ? modelPropertyName
-                        : modelData[modelPropertyName]}
+                    {modelPropertyName}
                 </DataTableCell>
             ))}
             <DataTableCell>

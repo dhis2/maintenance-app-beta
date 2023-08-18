@@ -35,14 +35,13 @@ const columnsDefault = {
 const columnsforSection: ColumnsForSection = {
     dataElement: {
         default: ['name', 'domainType', 'valueType', 'lastUpdated', 'sharing'],
-        available: ['test'],
     },
 }
 
 const mergeArraysUnique = <T>(...arrays: T[][]): T[] =>
     Array.from(new Set(arrays.flat()))
 
-const mergeColumnsMeta = () => {
+const mergeColumnsConfig = () => {
     const merged: MergedColumnsForSection = {}
 
     Object.entries(columnsforSection).forEach(
@@ -66,12 +65,12 @@ const mergeColumnsMeta = () => {
     return merged
 }
 
-const mergedColumns = mergeColumnsMeta()
+const mergedColumns = mergeColumnsConfig()
 
 export const getColumnsForSection = (
     sectionName: string
 ): MergedColumnConfig => {
-    if (mergedColumns[sectionName as SectionName]) {
+    if (mergedColumns[sectionName]) {
         // cannot infer parent-object, see https://github.com/microsoft/TypeScript/issues/42384
         return mergedColumns[sectionName] as MergedColumnConfig
     }

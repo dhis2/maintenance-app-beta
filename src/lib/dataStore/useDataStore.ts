@@ -99,14 +99,16 @@ export function useDataStoreValues<ResultType = ObjectResult>(
 
     const query = queryCreators.getValues(mergedOptions)
     const selector = mergedOptions.select ?? selectIdentity
-
+    const placeholderData = mergedOptions.placeholderData
+        ? { result: mergedOptions.placeholderData }
+        : undefined
     const queryResult = useQuery({
         queryKey: [query],
         queryFn: createBoundQueryFn<WrapInResult<ResultType>>(engine),
+        placeholderData,
         // hide ".result" from consumer
         select: (data) => selector(data.result as ResultType),
     })
-
     const mutationFn = async (data: ResultType) => {
         const mutation = queryCreators.setValues({
             namespace: mergedOptions.namespace,

@@ -31,9 +31,7 @@ export const ManageColumnsDialog = ({ onClose }: ManageColumnsDialogProps) => {
     const columnsConfig = getColumnsForSection(section.name)
 
     useEffect(() => {
-        if (savedColumns) {
-            setPendingSelectedColumns(savedColumns)
-        }
+        setPendingSelectedColumns(savedColumns)
     }, [savedColumns])
 
     const handleSave = () => {
@@ -70,6 +68,7 @@ export const ManageColumnsDialog = ({ onClose }: ManageColumnsDialogProps) => {
             </ModalTitle>
             <ModalContent>
                 <Transfer
+                    enableOrderChange
                     leftHeader={<p>{i18n.t('Available table columns')}</p>}
                     rightHeader={i18n.t('Selected table columns')}
                     onChange={handleChange}
