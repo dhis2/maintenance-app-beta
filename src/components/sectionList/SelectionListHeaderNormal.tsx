@@ -4,9 +4,13 @@ import { IconAdd24 } from '@dhis2/ui-icons'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { routePaths } from '../../app/routes/routePaths'
+import { ManageColumnsDialog } from './manageColumns/ManageColumns'
 import css from './SectionList.module.css'
 
 export const SelectionListHeader = () => {
+    const [manageColumnsOpen, setManageColumnsOpen] = React.useState(false)
+
+    const handleClose = () => setManageColumnsOpen(false)
     return (
         <div className={css.listHeaderNormal}>
             <Link to={routePaths.sectionNew}>
@@ -15,7 +19,10 @@ export const SelectionListHeader = () => {
                 </Button>
             </Link>
             <Button small>{i18n.t('Download')}</Button>
-            <Button small>{i18n.t('Manage Columns')}</Button>
+            <Button small onClick={() => setManageColumnsOpen((prev) => !prev)}>
+                {i18n.t('Manage Columns')}
+            </Button>
+            {manageColumnsOpen && <ManageColumnsDialog onClose={handleClose} />}
         </div>
     )
 }
