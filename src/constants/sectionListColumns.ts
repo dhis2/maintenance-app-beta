@@ -6,9 +6,16 @@ interface ColumnConfig {
     default: string[]
 }
 
+interface MergedColumnConfig {
+    available: string[]
+    default: string[]
+}
+
 type ColumnsForSection = {
     [key in SectionName]?: ColumnConfig
 }
+
+type MergedColumnsForSection = Record<string, MergedColumnConfig>
 
 const columnsDefault = {
     available: [
@@ -36,10 +43,10 @@ const mergeArraysUnique = <T>(...arrays: T[][]): T[] =>
     Array.from(new Set(arrays.flat()))
 
 const mergeColumnsMeta = () => {
-    const merged: ColumnsForSection = {}
+    const merged: MergedColumnsForSection = {}
 
     Object.entries(columnsforSection).forEach(
-        ([section, sectionColumnsMeta]) => {
+        ([sectionName, sectionColumnsMeta]) => {
             const mergedAvailable = mergeArraysUnique(
                 sectionColumnsMeta.default,
                 sectionColumnsMeta.available || [],
@@ -48,7 +55,7 @@ const mergeColumnsMeta = () => {
                     []
             )
 
-            merged[section as SectionName] = {
+            merged[sectionName] = {
                 available: mergedAvailable,
                 default: sectionColumnsMeta.default
                     ? sectionColumnsMeta.default
@@ -61,10 +68,12 @@ const mergeColumnsMeta = () => {
 
 const mergedColumns = mergeColumnsMeta()
 
-export const getColumnsForSection = (section: SectionName): ColumnConfig => {
-    if (mergedColumns[section]) {
+export const getColumnsForSection = (
+    sectionName: string
+): MergedColumnConfig => {
+    if (mergedColumns[sectionName as SectionName]) {
         // cannot infer parent-object, see https://github.com/microsoft/TypeScript/issues/42384
-        return mergedColumns[section] as ColumnConfig
+        return mergedColumns[sectionName] as MergedColumnConfig
     }
     return columnsDefault
 }
