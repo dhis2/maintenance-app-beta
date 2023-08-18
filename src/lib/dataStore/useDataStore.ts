@@ -81,9 +81,11 @@ const queryCreators = {
 const defaultOptions = {
     global: false,
 }
+const selectIdentity = <TData>(data: TData) => data
 
 type UseDataStoreValuesOptions<ResultType> = GetValuesOptions & {
     placeholderData?: ResultType
+    select?: (data: ResultType) => ResultType
 }
 export function useDataStoreValues<ResultType = ObjectResult>(
     options: UseDataStoreValuesOptions<ResultType>
@@ -92,15 +94,17 @@ export function useDataStoreValues<ResultType = ObjectResult>(
         ...defaultOptions,
         ...options,
     }
-    const query = queryCreators.getValues(mergedOptions)
     const queryClient = useQueryClient()
     const engine = useDataEngine()
+
+    const query = queryCreators.getValues(mergedOptions)
+    const selector = mergedOptions.select ?? selectIdentity
 
     const queryResult = useQuery({
         queryKey: [query],
         queryFn: createBoundQueryFn<WrapInResult<ResultType>>(engine),
-        placeholderData: { result: mergedOptions.placeholderData },
-        select: (data) => data?.result,
+        // hide ".result" from consumer
+        select: (data) => selector(data.result as ResultType),
     })
 
     const mutationFn = async (data: ResultType) => {
