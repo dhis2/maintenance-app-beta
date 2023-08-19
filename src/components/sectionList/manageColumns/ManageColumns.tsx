@@ -11,6 +11,7 @@ import {
 import React, { useEffect, useMemo, useState } from 'react'
 import { getColumnsForSection, getTranslatedProperty } from '../../../constants'
 import { useModelSectionHandleOrThrow } from '../../../lib'
+import css from './ManageColumns.module.css'
 import { useSelectedColumns } from './useSelectedColumns'
 
 type ManageColumnsDialogProps = {
@@ -24,6 +25,9 @@ export const ManageColumnsDialog = ({ onClose }: ManageColumnsDialogProps) => {
         mutation,
     } = useSelectedColumns()
 
+    const queryClient = useQueryClient()
+
+    queryClient.getQueryState([])?.status
     const section = useModelSectionHandleOrThrow()
     const [pendingSelectedColumns, setPendingSelectedColumns] = useState<
         string[]
@@ -68,9 +72,18 @@ export const ManageColumnsDialog = ({ onClose }: ManageColumnsDialogProps) => {
             </ModalTitle>
             <ModalContent>
                 <Transfer
+                    height={'320px'}
                     enableOrderChange
-                    leftHeader={<p>{i18n.t('Available table columns')}</p>}
-                    rightHeader={i18n.t('Selected table columns')}
+                    leftHeader={
+                        <TransferHeader>
+                            {i18n.t('Available table columns')}
+                        </TransferHeader>
+                    }
+                    rightHeader={
+                        <TransferHeader>
+                            {i18n.t('Selected table columns')}
+                        </TransferHeader>
+                    }
                     onChange={handleChange}
                     loading={query.isLoading}
                     loadingPicked={query.isLoading}
@@ -78,6 +91,7 @@ export const ManageColumnsDialog = ({ onClose }: ManageColumnsDialogProps) => {
                     selected={pendingSelectedColumns}
                 />
                 <Button
+                    className={css.resetDefaultButton}
                     small
                     secondary
                     onClick={handleSetDefault}
@@ -103,3 +117,7 @@ export const ManageColumnsDialog = ({ onClose }: ManageColumnsDialogProps) => {
         </Modal>
     )
 }
+
+const TransferHeader = ({ children }: React.PropsWithChildren) => (
+    <div className={css.transferHeader}>{children}</div>
+)
