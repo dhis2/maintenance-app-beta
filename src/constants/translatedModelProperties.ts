@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 
 const TRANSLATED_PROPERTY: Record<string, string> = {
+    categoryCombo: i18n.t('Category combination'),
     code: i18n.t('Code'),
     createdBy: i18n.t('Created by'),
     favorite: i18n.t('Favorite'),
@@ -14,7 +15,9 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     sharing: i18n.t('Sharing'),
     shortName: i18n.t('Short name'),
     valueType: i18n.t('Value type'),
+
     user: i18n.t('Owner'), // user refers to the owner of the object
+    zeroIsSignificant: i18n.t('Zero is significant'),
 }
 
 const camelCaseToSentenceCase = (camelCase: string) =>
@@ -26,8 +29,11 @@ const markNotTranslated = (property: string) =>
     `** ${camelCaseToSentenceCase(property)} **`
 
 export const getTranslatedProperty = (property: string) => {
+    if (i18n.exists(property)) {
+        return i18n.t(property)
+    }
     if (property in TRANSLATED_PROPERTY) {
         return TRANSLATED_PROPERTY[property]
     }
-    return TRANSLATED_PROPERTY[property] || markNotTranslated(property)
+    return markNotTranslated(property)
 }

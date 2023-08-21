@@ -1,9 +1,15 @@
 import { useCallback, useMemo } from 'react'
-import { getColumnsForSection } from '../../../constants'
-import { useSchemaFromHandle } from '../../../lib'
+import { useQueryClient } from 'react-query'
+import { Section, getColumnsForSection } from '../../../constants'
+import { useModelSectionHandleOrThrow, useSchemaFromHandle } from '../../../lib'
 import { useDataStoreValues } from '../../../lib/dataStore'
+import {
+    queryCreators,
+    useMutateDataStoreValues,
+} from '../../../lib/dataStore/useDataStore'
+import { ModelSection } from '../../../types'
 
-type Columns = string[]
+export type Columns = string[]
 type ColumnsResult = Record<
     string,
     {
@@ -12,7 +18,7 @@ type ColumnsResult = Record<
 >
 
 const maintenanceNamespace = 'maintenance'
-const configurableColumnsKey = 'configurableColumns'
+const configurableColumnsKey = 'configurableColumnsTest'
 
 // check that columns are valid - because data in dataStore should not
 // be trusted - since there's no validation server-side.
@@ -20,34 +26,32 @@ const configurableColumnsKey = 'configurableColumns'
 // this stores columns as filters - eg. categoryCombo[displayName]
 // remove this part, sicne we're not interested in them
 // also map displayName to name, since in GIST-API 'names' are translated
-const mapToValidColumns = (sectionName: string) => {
+const createValidColumnsSelect = (sectionName: string) => {
     const validColumns = new Set(getColumnsForSection(sectionName).available)
-    return (data: ColumnsResult): ColumnsResult => {
-        const entries = Object.entries(data).map(([k, v]) => [
-            k,
-            {
-                columns: v.columns
-                    .map((c) =>
-                        c
-                            .replace('displayName', 'name')
-                            .replace(/(.*)\[.+\]/, '$1')
-                    )
-                    .filter((c) => validColumns.has(c)),
-            },
-        ])
-        return Object.fromEntries(entries)
+
+    return (data: ColumnsResult): Columns => {
+        const columnsForSection = data?.[sectionName]?.columns
+        if (!columnsForSection) {
+            return []
+        }
+        return columnsForSection
+            .map((c) =>
+                c.replace('displayName', 'name').replace(/(.*)\[.+\]/, '$1')
+            )
+            .filter((c) => validColumns.has(c))
     }
 }
 
+const getColumnListBySection = (section: ModelSection) => section.name
+
 export const useSelectedColumns = () => {
-    const section = useSchemaFromHandle()
-    // same as used in old maintenance app
-    const columnListName = section.singular
+    const section = useModelSectionHandleOrThrow()
+    const columnListName = getColumnListBySection(section)
     const select = useMemo(
-        () => mapToValidColumns(columnListName),
+        () => createValidColumnsSelect(columnListName),
         [columnListName]
     )
-    const [queryResult, mutation] = useDataStoreValues<ColumnsResult>({
+    const query = useDataStoreValues({
         namespace: maintenanceNamespace,
         key: configurableColumnsKey,
         placeholderData: {
@@ -55,41 +59,65 @@ export const useSelectedColumns = () => {
                 columns: getColumnsForSection(columnListName).default,
             },
         },
+        // selects the specific section from the result
         select,
     })
 
+    let selectedColumnsForSection = query.data || []
+    if (query.error) {
+        if (query.error?.details.httpStatusCode !== 404) {
+            console.error(query.error)
+        }
+        selectedColumnsForSection = getColumnsForSection(columnListName).default
+    }
+
+    return {
+        columns: selectedColumnsForSection,
+        query: query,
+    }
+}
+
+export const useMutateSelectedColumns = () => {
+    const section = useModelSectionHandleOrThrow()
+    const queryClient = useQueryClient()
+    const columnListName = getColumnListBySection(section)
+
+    const mutation = useMutateDataStoreValues({
+        namespace: maintenanceNamespace,
+        key: configurableColumnsKey,
+    })
+    const mutate = mutation.mutate
     const saveColumns = useCallback(
-        (
+        async (
             newColumns: Columns,
-            mutateOptions?: Parameters<typeof mutation.mutate>[1]
+            mutateOptions?: Parameters<typeof mutate>[1]
         ) => {
-            const prevData = queryResult.data || {}
+            const valuesQueryKey = [
+                queryCreators.getValues({
+                    namespace: maintenanceNamespace,
+                    key: configurableColumnsKey,
+                }),
+            ]
+            let prevData = {}
+
+            try {
+                // note, because selectors are per-observer, these are not "mapped" to valid a specific section
+                // it's exact data as we got from the request
+                prevData = await queryClient.fetchQuery(valuesQueryKey)
+            } catch (e) {
+                // default to empty object
+            }
+
             const newColumnsData: ColumnsResult = {
                 ...prevData,
                 [columnListName]: {
                     columns: newColumns,
                 },
             }
-            return mutation.mutate(newColumnsData, mutateOptions)
+            return mutate(newColumnsData, mutateOptions)
         },
-        [queryResult.data, columnListName, mutation]
+        [queryClient, mutate, columnListName]
     )
 
-    // select columns for this section
-    // cannot do this in "select" - because mutation need the
-    // full ColumnsResult object to save all columns
-    let selectedColumnsForSection =
-        queryResult.data?.[columnListName]?.columns || []
-
-    if (queryResult.error) {
-        console.error(queryResult.error)
-        selectedColumnsForSection = getColumnsForSection(columnListName).default
-    }
-
-    return {
-        columns: selectedColumnsForSection,
-        saveColumns,
-        mutation,
-        query: queryResult,
-    }
+    return { mutation, saveColumns }
 }

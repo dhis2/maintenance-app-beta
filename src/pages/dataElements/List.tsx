@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     SectionListWrapper,
     DomainTypeSelectionFilter,
@@ -6,6 +6,7 @@ import {
     useQueryParamsForModelGist,
     useSectionListParamsRefetch,
 } from '../../components'
+import { useSelectedColumns } from '../../components/sectionList/manageColumns/useSelectedColumns'
 import { useModelGist } from '../../lib/'
 import { DataElement, GistCollectionResponse } from '../../types/models'
 
@@ -25,6 +26,7 @@ type FilteredDataElement = Pick<DataElement, (typeof filterFields)[number]>
 type DataElements = GistCollectionResponse<FilteredDataElement>
 
 export const Component = () => {
+    const { columns, query } = useSelectedColumns()
     const initialParams = useQueryParamsForModelGist()
     const { refetch, error, data } = useModelGist<DataElements>(
         'dataElements/gist',
@@ -36,7 +38,19 @@ export const Component = () => {
         { lazy: true }
     )
 
-    useSectionListParamsRefetch(refetch)
+    useEffect(() => {
+        console.log(query.isPlaceholderData)
+        // wait to fetch until selected-columns are loaded
+        // so we dont fetch data multiple times
+        if (query.isPlaceholderData) {
+            return
+        }
+        refetch({
+            ...initialParams,
+            fields: columns.concat('id'),
+        })
+    }, [refetch, initialParams, columns, query.isPlaceholderData])
+    //useSectionListParamsRefetch(refetch)
 
     return (
         <div>

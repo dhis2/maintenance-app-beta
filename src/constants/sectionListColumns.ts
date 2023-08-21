@@ -17,19 +17,19 @@ type ColumnsForSection = {
 
 type MergedColumnsForSection = Record<string, MergedColumnConfig>
 
+// list of modelProperties to show in List
 // this is the default that all columns that are not specified
 // in columnsForSection below
 const columnsDefault = {
     available: [
         'name',
+        'shortName',
         'code',
         'created',
         'createdBy',
-        'favorite',
         'href',
         'id',
         'lastUpdatedBy',
-        'user',
     ],
     default: ['name', 'sharing', 'lastUpdated'],
 } satisfies ColumnConfig
@@ -43,6 +43,7 @@ const columnsDefault = {
 const columnsForSection: ColumnsForSection = {
     dataElement: {
         default: ['name', 'domainType', 'valueType', 'lastUpdated', 'sharing'],
+        available: ['zeroIsSignificant', 'categoryCombo'],
     },
 }
 

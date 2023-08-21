@@ -8,33 +8,37 @@ import {
     ButtonStrip,
     Transfer,
 } from '@dhis2/ui'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { getColumnsForSection, getTranslatedProperty } from '../../../constants'
-import { useModelSectionHandleOrThrow } from '../../../lib'
+import { mergeArraysUnique, useModelSectionHandleOrThrow } from '../../../lib'
 import css from './ManageColumns.module.css'
-import { useSelectedColumns } from './useSelectedColumns'
+import {
+    useMutateSelectedColumns,
+    useSelectedColumns,
+} from './useSelectedColumns'
 
 type ManageColumnsDialogProps = {
     onClose: () => void
 }
 export const ManageColumnsDialog = ({ onClose }: ManageColumnsDialogProps) => {
-    const {
-        columns: savedColumns,
-        query,
-        saveColumns,
-        mutation,
-    } = useSelectedColumns()
-
-    const queryClient = useQueryClient()
-
-    queryClient.getQueryState([])?.status
     const section = useModelSectionHandleOrThrow()
     const [pendingSelectedColumns, setPendingSelectedColumns] = useState<
         string[]
     >([])
+    // ignore updates to saved-columns while selecting
+    const isTouched = useRef(false)
+
+    const { columns: savedColumns, query } = useSelectedColumns()
+    const { saveColumns, mutation } = useMutateSelectedColumns()
+
     const columnsConfig = getColumnsForSection(section.name)
 
     useEffect(() => {
+        // if savedColumns were to update while selecting (it shouldn't )
+        // make sure to not overwrite the selected columns
+        if (isTouched.current) {
+            return
+        }
         setPendingSelectedColumns(savedColumns)
     }, [savedColumns])
 
@@ -49,6 +53,7 @@ export const ManageColumnsDialog = ({ onClose }: ManageColumnsDialogProps) => {
     }
 
     const handleChange = ({ selected }: { selected: string[] }) => {
+        isTouched.current = true
         setPendingSelectedColumns(selected)
     }
 
