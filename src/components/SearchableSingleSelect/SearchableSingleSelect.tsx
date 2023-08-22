@@ -1,15 +1,48 @@
+import i18n from '@dhis2/d2-i18n'
 import {
     CircularLoader,
     Input,
     SingleSelect,
     SingleSelectOption,
 } from '@dhis2/ui'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { forwardRef, useCallback, useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
+import classes from './SearchableSingleSelect.module.css'
 
 interface Option {
     value: string
     label: string
+}
+
+const Loader = forwardRef<HTMLDivElement, object>(function Loader(_, ref) {
+    return (
+        <div ref={ref} className={classes.loader}>
+            <CircularLoader />
+        </div>
+    )
+})
+
+function Error({
+    msg,
+    onRetryClick,
+}: {
+    msg: string
+    onRetryClick: () => void
+}) {
+    return (
+        <div className={classes.error}>
+            <div className={classes.errorInnerWrapper}>
+                <span className={classes.loadingErrorLabel}>{msg}</span>
+                <button
+                    className={classes.errorRetryButton}
+                    type="button"
+                    onClick={onRetryClick}
+                >
+                    {i18n.t('Retry')}
+                </button>
+            </div>
+        </div>
+    )
 }
 
 type OnChange = ({ selected }: { selected: string }) => void
@@ -23,13 +56,18 @@ interface SearchableSingleSelectPropTypes {
     onChange: OnChange
     onFilterChange: OnFilterChange
     onIntersectionChange: OnIntersectionChange
+    onRetryClick: () => void
     options: Option[]
     preventIntersectionDetection: boolean
-    selected?: string
     showEndLoader: boolean
+    loading: boolean
+    selected?: string
+    error?: string
 }
 
 export const SearchableSingleSelect = ({
+    error,
+    loading,
     onChange,
     onFilterChange,
     onIntersectionChange,
@@ -37,6 +75,7 @@ export const SearchableSingleSelect = ({
     preventIntersectionDetection,
     selected,
     showEndLoader,
+    onRetryClick,
 }: SearchableSingleSelectPropTypes) => {
     const [currentlyIntersecting, setCurrentlyIntersecting] = useState(false)
     const [loadingSpinnerRef, setLoadingSpinnerRef] = useState<HTMLElement>()
@@ -82,6 +121,10 @@ export const SearchableSingleSelect = ({
         onIntersectionChange,
     ])
 
+    const hasSelectedInOptionList = !!options.find(
+        ({ value }) => value === selected
+    )
+
     return (
         <SingleSelect selected={selected} onChange={onChange}>
             <div
@@ -106,25 +149,27 @@ export const SearchableSingleSelect = ({
                 <SingleSelectOption key={value} value={value} label={label} />
             ))}
 
-            {showEndLoader && (
-                <div
+            {hasSelectedInOptionList && (
+                <SingleSelectOption
+                    className={classes.invisibleOption}
+                    value={selected}
+                    label=""
+                />
+            )}
+
+            {!error && !loading && showEndLoader && (
+                <Loader
                     ref={(ref) => {
                         if (!!ref && ref !== loadingSpinnerRef) {
                             setLoadingSpinnerRef(ref)
                         }
                     }}
-                    style={{
-                        height: 80,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        paddingTop: 20,
-                        overflow: 'hidden',
-                    }}
-                >
-                    <CircularLoader />
-                </div>
+                />
             )}
+
+            {!error && loading && <Loader />}
+
+            {error && <Error msg={error} onRetryClick={onRetryClick} />}
         </SingleSelect>
     )
 }

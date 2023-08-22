@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-08-24T11:40:58.199Z\n"
-"PO-Revision-Date: 2023-08-24T11:40:58.199Z\n"
+"POT-Creation-Date: 2023-09-05T12:02:13.081Z\n"
+"PO-Revision-Date: 2023-09-05T12:02:13.081Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -44,6 +44,9 @@ msgstr "Overview"
 
 msgid "Search for menu items"
 msgstr "Search for menu items"
+
+msgid "Retry"
+msgstr "Retry"
 
 msgid "Failed to load {{label}}"
 msgstr "Failed to load {{label}}"

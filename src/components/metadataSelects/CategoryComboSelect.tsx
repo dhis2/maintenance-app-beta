@@ -1,141 +1,106 @@
-import { useDataQuery } from '@dhis2/app-runtime'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
+import { useModelGist } from '../../lib'
+import { CategoryCombo, GistCollectionResponse } from '../../types/generated'
 import { SearchableSingleSelect } from '../SearchableSingleSelect'
 
-interface CategoryComboQueryResult {
-    categoryCombos: {
-        pager: {
-            pageCount: number
-            pageSize: number
-            page: number
-            total: number
-        }
-        categoryCombos: Array<{
-            id: string
-            displayName: string
-        }>
-    }
-}
-
-type QueryParams = {
-    page: number
-    pageSize: number
-    fields: string[]
-    filter?: string
-}
-
-const query = {
-    categoryCombos: {
-        resource: 'categoryCombos',
-        params: ({ ...dynamicParams }) => {
-            const baseParams: QueryParams = {
-                page: dynamicParams.page,
-                pageSize: 20,
-                fields: ['id', 'displayName'],
-            }
-
-            if (dynamicParams.filter) {
-                baseParams.filter = `displayName:ilike:${dynamicParams.filter}`
-            }
-
-            return baseParams
-        },
-    },
-}
+const filterFields = ['id', 'name'] as const //(name is translated by default in /gist)
+type FilteredCategoryCombo = Pick<CategoryCombo, (typeof filterFields)[number]>
+type CategoryComboQueryResult = GistCollectionResponse<FilteredCategoryCombo>
 
 interface Option {
     value: string
     label: string
 }
+
 export function CategoryComboSelect({
     onChange,
     selected,
 }: {
-    onChange: ({ value, label }: Option) => void
+    onChange: ({ selected }: { selected: string }) => void
     // Must be an option as we always must supply the selected option, but the
     // list might not contain it when filtering / loading the first page of
     // options
-    selected?: Option
+    selected?: string
 }) {
-    // Using a ref because we don't want to react to a change of this value
-    // It's guaranteed that we have the correct value because we reset the
-    // value before fetching a new set of options when filtering / resetting
-    // the filter as well as setting the value after the fetch has completed
-    // but before we call a state setter. The state setter will cause a
-    // rerender during which the new pages value can be accessed already
-    const pages = useRef(1)
-    const [loadedOptions, setLoadedOptions] = useState<
-        Array<{
-            value: string
-            label: string
-        }>
-    >([])
+    // Using a ref because we don't want to react to changes.
+    // We're using this value only when imperatively calling `refetch`,
+    // nothing that depends on the render-cycle depends on this value
+    const filterRef = useRef('')
 
-    const [params, setParams] = useState({ page: 1, filter: '' })
+    const [loadedOptions, setLoadedOptions] = useState<Option[]>([])
+    const queryResult = useModelGist<CategoryComboQueryResult>(
+        'categoryCombos/gist',
+        { pageSize: 10 },
+        {
+            variables: { page: 1, filter: '' },
+            onComplete: (input: unknown) => {
+                const data = input as { result: CategoryComboQueryResult }
+                const { pager, result } = data.result
+                // We want to add new options to existing ones so we don't have to
+                // refetch existing options
+                setLoadedOptions((prevLoadedOptions) => [
+                    // We only want to add when the current page is > 1
+                    ...(pager.page === 1 ? [] : prevLoadedOptions),
+                    ...(result.map(({ id, name }) => ({
+                        value: id,
+                        label: name,
+                    })) || []),
+                ])
+
+                return data
+            },
+        }
+    )
+    const { refetch, data } = queryResult
+    const pager = data?.pager
+    const page = pager?.page || 0
+    const pageCount = pager?.pageCount || 0
+
     const adjustQueryParamsWithChangedFilter = useCallback(
         ({ value }: { value: string }) => {
-            pages.current = 1
-            setLoadedOptions([])
-            setParams({ page: 1, filter: value })
+            const nextFilter = value ? `name:ilike:${value}` : ''
+            filterRef.current = nextFilter
+            refetch({ page: 1, filter: nextFilter })
         },
-        []
+        [refetch]
     )
 
-    const incrementPage = ({ isIntersecting }: { isIntersecting: boolean }) => {
-        if (!isIntersecting) {
-            return false
-        }
+    const incrementPage = useCallback(
+        ({ isIntersecting }: { isIntersecting: boolean }) => {
+            if (!isIntersecting) {
+                return false
+            }
 
-        setParams((prevParams) => {
-            const prevPage = prevParams.page
-            const nextPage = prevPage < pages.current ? prevPage + 1 : prevPage
-            return { ...prevParams, page: nextPage }
-        })
-    }
-
-    const queryResult = useDataQuery<CategoryComboQueryResult>(query, {
-        lazy: true,
-        onComplete: (data) => {
-            pages.current = data.categoryCombos.pager.pageCount
-            // We want to add new options to existing ones so we don't have to
-            // refetch existing options
-            setLoadedOptions((prevLoadedOptions) => [
-                ...prevLoadedOptions,
-                ...(data?.categoryCombos.categoryCombos.map(
-                    ({ id, displayName }) => ({
-                        value: id,
-                        label: displayName,
-                    })
-                ) || []),
-            ])
+            refetch({
+                page: page < pageCount ? page + 1 : page,
+                filter: filterRef.current,
+            })
         },
-    })
+        [refetch, page, pageCount]
+    )
 
-    const { refetch } = queryResult
-    useEffect(() => {
-        refetch(params)
-    }, [params, refetch])
-
-    const actualOptions =
-        !selected ||
-        loadedOptions.find(({ value }) => value === selected?.value)
-            ? loadedOptions
-            : [selected, ...loadedOptions]
+    const error = queryResult.error
+        ? 'An error has occurred. Please try again'
+        : ''
+    console.log('> queryResult.error', queryResult.error)
 
     return (
         <SearchableSingleSelect
-            onChange={({ selected }) => {
-                const nextSelected = loadedOptions.find(
-                    ({ value }) => value === selected
-                )
-                onChange(nextSelected as Option)
-            }}
+            onChange={onChange}
             onIntersectionChange={incrementPage}
-            options={actualOptions}
+            options={loadedOptions}
             preventIntersectionDetection={queryResult.loading}
-            selected={selected?.value}
-            showEndLoader={!queryResult.loading && params.page < pages.current}
+            selected={selected}
+            showEndLoader={!queryResult.loading && page < pageCount}
             onFilterChange={adjustQueryParamsWithChangedFilter}
+            loading={queryResult.loading}
+            error={error}
+            onRetryClick={() => {
+                refetch({
+                    page: pager?.page || 1,
+                    filter: filterRef.current,
+                })
+            }}
         />
     )
 }

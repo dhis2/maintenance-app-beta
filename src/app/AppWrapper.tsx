@@ -10,7 +10,7 @@ export const AppWrapper = ({ children }: AppWrapperProps) => {
     return (
         <>
             <CssReset />
-            <CssVariables spacers colors />
+            <CssVariables theme spacers colors />
             <LoadApp>{children}</LoadApp>
         </>
     )
