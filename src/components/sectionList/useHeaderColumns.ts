@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { getTranslatedProperty } from '../../constants'
-import { useSelectedColumns } from './manageColumns/useSelectedColumns'
+import { useSelectedColumns } from './listView/useSelectedColumns'
 import type { SelectedColumn } from './types'
 
 export const useHeaderColumns = () => {

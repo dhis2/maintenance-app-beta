@@ -18,7 +18,7 @@ type ColumnsResult = Record<
 >
 
 const maintenanceNamespace = 'maintenance'
-const configurableColumnsKey = 'configurableColumnsTest'
+const configurableColumnsKey = 'modelListViews'
 
 // check that columns are valid - because data in dataStore should not
 // be trusted - since there's no validation server-side.

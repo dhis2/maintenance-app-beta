@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-06-21T21:00:56.973Z\n"
-"PO-Revision-Date: 2023-06-21T21:00:56.973Z\n"
+"POT-Creation-Date: 2023-08-19T21:39:42.855Z\n"
+"PO-Revision-Date: 2023-08-19T21:39:42.855Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -50,6 +50,63 @@ msgstr "Failed to load {{label}}"
 
 msgid "Failed to load"
 msgstr "Failed to load"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "There aren't any items that match your filter."
+msgstr "There aren't any items that match your filter."
+
+msgid "An error occurred"
+msgstr "An error occurred"
+
+msgid "An error occurred while loading the items."
+msgstr "An error occurred while loading the items."
+
+msgid "{{modelName}} management"
+msgstr "{{modelName}} management"
+
+msgid "New"
+msgstr "New"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Manage Columns"
+msgstr "Manage Columns"
+
+msgid "Type to filter options"
+msgstr "Type to filter options"
+
+msgid "No matches"
+msgstr "No matches"
+
+msgid "Clear all filters"
+msgstr "Clear all filters"
+
+msgid "Search by name, code or ID"
+msgstr "Search by name, code or ID"
+
+msgid "Manage {{section}} table columns"
+msgstr "Manage {{section}} table columns"
+
+msgid "Available table columns"
+msgstr "Available table columns"
+
+msgid "Selected table columns"
+msgstr "Selected table columns"
+
+msgid "Reset to default columns"
+msgstr "Reset to default columns"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Update table columns"
+msgstr "Update table columns"
+
+msgid "None"
+msgstr "None"
 
 msgid "Category"
 msgstr "Category"
@@ -288,9 +345,6 @@ msgstr "SQL views"
 msgid "Programs and Tracker"
 msgstr "Programs and Tracker"
 
-msgid "Programs and Trackers"
-msgstr "Programs and Trackers"
-
 msgid "Validation"
 msgstr "Validation"
 
@@ -300,14 +354,203 @@ msgstr "Validations"
 msgid "Other"
 msgstr "Other"
 
-msgid "Others"
-msgstr "Others"
-
 msgid "Locale"
 msgstr "Locale"
 
 msgid "Locales"
 msgstr "Locales"
+
+msgid "Sum"
+msgstr "Sum"
+
+msgid "Average"
+msgstr "Average"
+
+msgid "Average (sum in org unit)"
+msgstr "Average (sum in org unit)"
+
+msgid "Last value (sum in org unit hierarchy)"
+msgstr "Last value (sum in org unit hierarchy)"
+
+msgid "Last value (average in org unit)"
+msgstr "Last value (average in org unit)"
+
+msgid "Last value (last in org unit hierarchy)"
+msgstr "Last value (last in org unit hierarchy)"
+
+msgid "Last value in period (sum in org unit hierarchy)"
+msgstr "Last value in period (sum in org unit hierarchy)"
+
+msgid "Lastinperiodaverageorgunit"
+msgstr "Lastinperiodaverageorgunit"
+
+msgid "First value (sum in org unit hierarchy)"
+msgstr "First value (sum in org unit hierarchy)"
+
+msgid "First value (average in org unit hierarchy)"
+msgstr "First value (average in org unit hierarchy)"
+
+msgid "First value (first in org unit hierarchy)"
+msgstr "First value (first in org unit hierarchy)"
+
+msgid "Count"
+msgstr "Count"
+
+msgid "Standard deviation"
+msgstr "Standard deviation"
+
+msgid "Variance"
+msgstr "Variance"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Min (sum in org unit)"
+msgstr "Min (sum in org unit)"
+
+msgid "Max (sum in org unit)"
+msgstr "Max (sum in org unit)"
+
+msgid "Custom"
+msgstr "Custom"
+
+msgid "Default"
+msgstr "Default"
+
+msgid "Aggregate"
+msgstr "Aggregate"
+
+msgid "Tracker"
+msgstr "Tracker"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Long text"
+msgstr "Long text"
+
+msgid "Text with multiple values"
+msgstr "Text with multiple values"
+
+msgid "Letter"
+msgstr "Letter"
+
+msgid "Phone number"
+msgstr "Phone number"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Yes/No"
+msgstr "Yes/No"
+
+msgid "Yes only"
+msgstr "Yes only"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Date and time"
+msgstr "Date and time"
+
+msgid "Time"
+msgstr "Time"
+
+msgid "Number"
+msgstr "Number"
+
+msgid "Unit interval"
+msgstr "Unit interval"
+
+msgid "Percentage"
+msgstr "Percentage"
+
+msgid "Integer"
+msgstr "Integer"
+
+msgid "Positive integer"
+msgstr "Positive integer"
+
+msgid "Negative integer"
+msgstr "Negative integer"
+
+msgid "Positive or Zero integer"
+msgstr "Positive or Zero integer"
+
+msgid "Tracker associate"
+msgstr "Tracker associate"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Coordinate"
+msgstr "Coordinate"
+
+msgid "Reference"
+msgstr "Reference"
+
+msgid "Age"
+msgstr "Age"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "File"
+msgstr "File"
+
+msgid "Image"
+msgstr "Image"
+
+msgid "GeoJSON"
+msgstr "GeoJSON"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Created by"
+msgstr "Created by"
+
+msgid "Favorite"
+msgstr "Favorite"
+
+msgid "Href"
+msgstr "Href"
+
+msgid "Id"
+msgstr "Id"
+
+msgid "Last updated by"
+msgstr "Last updated by"
+
+msgid "Created"
+msgstr "Created"
+
+msgid "Domain type"
+msgstr "Domain type"
+
+msgid "Last updated"
+msgstr "Last updated"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Sharing"
+msgstr "Sharing"
+
+msgid "Short name"
+msgstr "Short name"
+
+msgid "Value type"
+msgstr "Value type"
+
+msgid "Owner"
+msgstr "Owner"
+
+msgid "Zero is significant"
+msgstr "Zero is significant"
 
 msgid "Metadata management"
 msgstr "Metadata management"

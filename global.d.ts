@@ -2,6 +2,7 @@
 
 declare module '@dhis2/d2-i18n' {
     export function t(key: string, options?: any): string
+    export function exists(key: string): boolean
 }
 
 declare module '@dhis2/ui'

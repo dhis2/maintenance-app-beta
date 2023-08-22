@@ -9,8 +9,8 @@ import {
     Transfer,
 } from '@dhis2/ui'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { getColumnsForSection, getTranslatedProperty } from '../../../constants'
-import { mergeArraysUnique, useModelSectionHandleOrThrow } from '../../../lib'
+import { getTranslatedProperty, getColumnsForSection } from '../../../constants'
+import { useModelSectionHandleOrThrow } from '../../../lib'
 import css from './ManageColumns.module.css'
 import {
     useMutateSelectedColumns,
@@ -32,6 +32,7 @@ export const ManageColumnsDialog = ({ onClose }: ManageColumnsDialogProps) => {
     const { saveColumns, mutation } = useMutateSelectedColumns()
 
     const columnsConfig = getColumnsForSection(section.name)
+    columnsConfig.available
 
     useEffect(() => {
         // if savedColumns were to update while selecting (it shouldn't )

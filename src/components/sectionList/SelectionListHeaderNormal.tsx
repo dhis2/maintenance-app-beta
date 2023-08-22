@@ -4,7 +4,7 @@ import { IconAdd24 } from '@dhis2/ui-icons'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { routePaths } from '../../app/routes/routePaths'
-import { ManageColumnsDialog } from './manageColumns/ManageColumns'
+import { ManageColumnsDialog } from './listView/ManageColumns'
 import css from './SectionList.module.css'
 
 export const SelectionListHeader = () => {

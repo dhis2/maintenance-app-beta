@@ -6,7 +6,7 @@ import {
     useQueryParamsForModelGist,
     useSectionListParamsRefetch,
 } from '../../components'
-import { useSelectedColumns } from '../../components/sectionList/manageColumns/useSelectedColumns'
+import { useSelectedColumns } from '../../components/sectionList/listView/useSelectedColumns'
 import { useModelGist } from '../../lib/'
 import { DataElement, GistCollectionResponse } from '../../types/models'
 
