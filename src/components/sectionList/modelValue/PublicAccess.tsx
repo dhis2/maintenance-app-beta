@@ -11,8 +11,9 @@ const getPublicAccessString = (value: Sharing): string => {
     const publicAccess = parsePublicAccessString(value.public)
 
     if (!publicAccess) {
-        return 'N/A'
+        throw new Error('Invalid public access string')
     }
+
     const { metadata } = publicAccess
 
     if (metadata.write) {
