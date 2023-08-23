@@ -21,11 +21,12 @@ import {
 } from '../../constants'
 import { isValidUid, isModuleNotFoundError } from '../../lib'
 import { OverviewSection } from '../../types'
-import { Layout } from '../layout'
+import { Layout, Breadcrumbs, BreadcrumbItem } from '../layout'
 import { CheckAuthorityForSection } from './CheckAuthorityForSection'
 import { DefaultErrorRoute } from './DefaultErrorRoute'
 import { LegacyAppRedirect } from './LegacyAppRedirect'
 import { getSectionPath, routePaths } from './routePaths'
+
 // This loads all the overview routes in the same chunk since they resolve to the same promise
 // see https://reactrouter.com/en/main/route/lazy#multiple-routes-in-a-single-file
 // Overviews are small, and the AllOverview would load all the other overviews anyway,
@@ -94,10 +95,28 @@ const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
     <Route
         key={section.namePlural}
         path={getSectionPath(section)}
-        handle={{ section }}
+        handle={{
+            section,
+            crumb: () => (
+                <BreadcrumbItem
+                    section={OVERVIEW_SECTIONS[section.parentSectionKey]}
+                />
+            ),
+        }}
+        element={
+            <>
+                <Breadcrumbs />
+                <Outlet />
+            </>
+        }
     >
         <Route index lazy={createSectionLazyRouteFunction(section, 'List')} />
-        <Route handle={{ hideSidebar: true }}>
+        <Route
+            handle={{
+                hideSidebar: true,
+                crumb: () => <BreadcrumbItem section={section} />,
+            }}
+        >
             {!sectionsNoNewRoute.has(section) && (
                 <Route
                     path={routePaths.sectionNew}

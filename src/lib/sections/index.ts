@@ -1,1 +1,1 @@
-export * from './isSectionAuthorized'
+export * from './sectionAuthorities'

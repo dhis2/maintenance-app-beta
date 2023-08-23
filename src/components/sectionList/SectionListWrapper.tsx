@@ -9,6 +9,7 @@ import { SectionListLoader } from './SectionListLoader'
 import { SectionListEmpty, SectionListError } from './SectionListMessages'
 import { SectionListPagination } from './SectionListPagination'
 import { SectionListRow } from './SectionListRow'
+import { SectionListTitle } from './SectionListTitle'
 import { SelectionListHeader } from './SelectionListHeaderNormal'
 import { SelectedColumns } from './types'
 
@@ -77,6 +78,7 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
 
     return (
         <div>
+            <SectionListTitle />
             <FilterWrapper>{filterElement}</FilterWrapper>
             <SelectionListHeader />
             <SectionList

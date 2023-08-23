@@ -18,12 +18,13 @@
         "cypress:run": "REACT_APP_NODE_ENV=test yarn cypress run"
     },
     "devDependencies": {
-        "@dhis2/cli-app-scripts": "^10.2.0",
+        "@dhis2/cli-app-scripts": "^10.3.9",
         "@dhis2/cli-style": "^10.5.1",
         "@dhis2/cypress-commands": "^10.0.3",
         "@dhis2/cypress-plugins": "^10.0.3",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^12.1.5",
+        "@testing-library/react-hooks": "^8.0.1",
         "@testing-library/user-event": "^12.8.3",
         "@types/jest": "^29.5.1",
         "@types/react": "^18.2.6",

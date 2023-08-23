@@ -1,3 +1,4 @@
+import type { OverviewSectionName } from '../constants'
 import { SchemaAuthorities, SchemaName } from './schemaBase'
 
 export interface SectionBase {
@@ -11,18 +12,19 @@ export interface SectionBase {
 
 export type SchemaSection = SectionBase & {
     name: SchemaName
-    parentSectionKey: string
+    parentSectionKey: OverviewSectionName
 }
 
 export type NonSchemaSection = SectionBase & {
-    authorities?: SchemaAuthorities
-    parentSectionKey: string
+    authorities: SchemaAuthorities
+    parentSectionKey: OverviewSectionName
 }
 
 export type OverviewSection = SectionBase & {
     componentName: string
 }
 
+export type ModelSection = SchemaSection | NonSchemaSection
 export type Section = SchemaSection | NonSchemaSection | OverviewSection
 
 export type SchemaSectionMap = {
@@ -31,4 +33,4 @@ export type SchemaSectionMap = {
 
 export type OverviewSectionMap = Record<string, OverviewSection>
 
-export type SectionMap = Record<string, SchemaSection | NonSchemaSection>
+export type SectionMap = Record<string, ModelSection>

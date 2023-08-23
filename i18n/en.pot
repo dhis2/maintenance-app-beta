@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-08-23T15:13:44.652Z\n"
-"PO-Revision-Date: 2023-08-23T15:13:44.652Z\n"
+"POT-Creation-Date: 2023-08-23T15:22:19.454Z\n"
+"PO-Revision-Date: 2023-08-23T15:22:19.454Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -62,6 +62,9 @@ msgstr "An error occurred"
 
 msgid "An error occurred while loading the items."
 msgstr "An error occurred while loading the items."
+
+msgid "{{modelName}} management"
+msgstr "{{modelName}} management"
 
 msgid "New"
 msgstr "New"

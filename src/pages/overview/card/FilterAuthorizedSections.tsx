@@ -4,7 +4,7 @@ import { Section } from '../../../types'
 
 type FilterAuthorizedSectionsProps = {
     children: ReactElement<{
-        section: Section
+        section?: Section
     }>[]
 }
 
@@ -15,6 +15,9 @@ export const FilterAuthorizedSections = ({
     return (
         <>
             {React.Children.map(children, (child) => {
+                if (!child.props.section) {
+                    return child
+                }
                 if (child && isSectionAuthorized(child.props.section)) {
                     return child
                 }

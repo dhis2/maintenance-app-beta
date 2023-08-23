@@ -7,9 +7,11 @@ import {
     getSectionNewPath,
     getSectionPath,
 } from '../../../app/routes/routePaths'
-import { SECTIONS_MAP, Section } from '../../../constants'
-import { useIsSectionAuthorizedPredicate } from '../../../lib'
-import { OverviewSection } from '../../../types'
+import {
+    useCanCreateModelInSection,
+    useIsSectionAuthorizedPredicate,
+} from '../../../lib'
+import { ModelSection, OverviewSection } from '../../../types'
 import styles from './SummaryCard.module.css'
 
 const DEFAULT_ICON = <IconEdit24 />
@@ -44,7 +46,7 @@ export const SummaryCardGroup = ({
 interface SummaryCardProps {
     children: React.ReactNode
     icon?: React.ReactNode
-    section: Section
+    section: ModelSection
 }
 
 export const SummaryCard = ({
@@ -72,13 +74,11 @@ export const SummaryCardContent = ({ children }: PropsWithChildren) => {
 }
 
 interface SummaryCardActionsProps {
-    section: Section
+    section: ModelSection
 }
 
 export const SummaryCardActions = ({ section }: SummaryCardActionsProps) => {
-    // categoryOptionCombo is the only section that should not be creatable
-    // TODO: implement auth and move this there
-    const canCreate = section.name !== SECTIONS_MAP.categoryOptionCombo.name
+    const canCreate = useCanCreateModelInSection(section)
     return (
         <div className={styles.cardActions}>
             {canCreate && (

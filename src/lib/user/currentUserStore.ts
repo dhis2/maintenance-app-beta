@@ -33,6 +33,8 @@ export const useCurrentUser = () =>
     useCurrentUserStore((state) => state.getCurrentUser())
 
 export const useCurrentUserAuthorities = () => {
-    const currentUser = useCurrentUserStore((state) => state.getCurrentUser())
-    return currentUser.authorities
+    const authorities = useCurrentUserStore(
+        (state) => state.getCurrentUser().authorities
+    )
+    return authorities
 }
