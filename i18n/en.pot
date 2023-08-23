@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-08-11T22:42:01.858Z\n"
-"PO-Revision-Date: 2023-08-11T22:42:01.858Z\n"
+"POT-Creation-Date: 2023-08-23T15:13:44.652Z\n"
+"PO-Revision-Date: 2023-08-23T15:13:44.652Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -78,14 +78,14 @@ msgstr "Type to filter options"
 msgid "No matches"
 msgstr "No matches"
 
+msgid "Data set"
+msgstr "Data set"
+
 msgid "Clear all filters"
 msgstr "Clear all filters"
 
 msgid "Search by name, code or ID"
 msgstr "Search by name, code or ID"
-
-msgid "None"
-msgstr "None"
 
 msgid "Public can edit"
 msgstr "Public can edit"
@@ -149,9 +149,6 @@ msgstr "Data element group set"
 
 msgid "Data element group sets"
 msgstr "Data element group sets"
-
-msgid "Data set"
-msgstr "Data set"
 
 msgid "Data sets"
 msgstr "Data sets"
@@ -401,6 +398,9 @@ msgstr "Min (sum in org unit)"
 
 msgid "Max (sum in org unit)"
 msgstr "Max (sum in org unit)"
+
+msgid "None"
+msgstr "None"
 
 msgid "Custom"
 msgstr "Custom"
