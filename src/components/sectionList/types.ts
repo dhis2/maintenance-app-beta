@@ -1,9 +1,9 @@
-export type SelectedColumn = {
+export type SelectedColumn<Model = unknown> = {
     label: string
-    modelPropertyName: string
+    modelPropertyName: keyof Model & string
 }
 
-export type SelectedColumns = SelectedColumn[]
+export type SelectedColumns<Model = unknown> = Array<SelectedColumn<Model>>
 
 export type CheckBoxOnChangeObject = {
     checked: boolean

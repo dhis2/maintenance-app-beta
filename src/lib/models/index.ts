@@ -6,3 +6,4 @@ export type {
     UseModelGistResult,
 } from './useModelGist'
 export { isValidUid } from './uid'
+export { parsePublicAccessString } from './parsePublicAccess'

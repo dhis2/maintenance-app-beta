@@ -3,15 +3,21 @@ import { IconEdit24, IconMore24 } from '@dhis2/ui-icons'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { CheckBoxOnChangeObject } from '../../types'
-import { IdentifiableObject, GistModel } from '../../types/models'
+import { IdentifiableObject, GistModel, DataElement } from '../../types/models'
 import css from './SectionList.module.css'
-import { SelectedColumns } from './types'
+import { SelectedColumns, SelectedColumn } from './types'
 
-export type SectionListRowProps<Model extends IdentifiableObject> = {
-    modelData: Model | GistModel<Model>
-    selectedColumns: SelectedColumns
+type AnyModel<Model> = GistModel<Model> | Model
+
+export type SectionListRowProps<Model> = {
+    modelData: AnyModel<Model>
+    selectedColumns: SelectedColumns<Model>
     onSelect: (modelId: string, checked: boolean) => void
     selected: boolean
+    renderValue: (
+        column: SelectedColumn<Model>['modelPropertyName'],
+        value: AnyModel<Model>[keyof Model]
+    ) => React.ReactNode
 }
 
 export function SectionListRow<Model extends IdentifiableObject>({
@@ -19,6 +25,7 @@ export function SectionListRow<Model extends IdentifiableObject>({
     modelData,
     onSelect,
     selected,
+    renderValue,
 }: SectionListRowProps<Model>) {
     return (
         <DataTableRow className={css.listRow}>
@@ -32,8 +39,11 @@ export function SectionListRow<Model extends IdentifiableObject>({
             </DataTableCell>
             {selectedColumns.map(({ modelPropertyName }) => (
                 <DataTableCell key={modelPropertyName}>
-                    {/* TODO: Handle constant translations and resolve displayvalues to components */}
-                    {modelPropertyName}
+                    {modelData[modelPropertyName] &&
+                        renderValue(
+                            modelPropertyName,
+                            modelData[modelPropertyName as keyof Model]
+                        )}
                 </DataTableCell>
             ))}
             <DataTableCell>

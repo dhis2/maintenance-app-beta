@@ -1,7 +1,13 @@
 import { FetchError } from '@dhis2/app-runtime'
 import React, { useMemo, useState } from 'react'
-import { IdentifiableObject, GistCollectionResponse } from '../../types/models'
+import { useSchemaFromHandle } from '../../lib'
+import {
+    IdentifiableObject,
+    GistCollectionResponse,
+    DataElement,
+} from '../../types/models'
 import { FilterWrapper } from './filters/FilterWrapper'
+import { ModelValue } from './modelValue/ModelValue'
 import { SectionList } from './SectionList'
 import { SectionListLoader } from './SectionListLoader'
 import { SectionListEmpty, SectionListError } from './SectionListMessages'
@@ -9,7 +15,6 @@ import { SectionListPagination } from './SectionListPagination'
 import { SectionListRow } from './SectionListRow'
 import { SectionListTitle } from './SectionListTitle'
 import { SelectionListHeader } from './SelectionListHeaderNormal'
-import { SelectedColumns } from './types'
 import { useHeaderColumns } from './useHeaderColumns'
 
 type SectionListWrapperProps<Model extends IdentifiableObject> = {
@@ -25,6 +30,7 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
 }: SectionListWrapperProps<Model>) => {
     const { headerColumns } = useHeaderColumns()
     const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set())
+    const schema = useSchemaFromHandle()
 
     const handleSelect = (id: string, checked: boolean) => {
         if (checked) {
@@ -82,12 +88,22 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
             >
                 <SectionListMessage />
                 {data?.result.map((model) => (
-                    <SectionListRow
+                    <SectionListRow<Model>
                         key={model.id}
                         modelData={model}
                         selectedColumns={headerColumns}
                         onSelect={handleSelect}
                         selected={selectedModels.has(model.id)}
+                        renderValue={(modelPropertyName, value) => {
+                            value
+                            return (
+                                <ModelValue
+                                    modelPropertyName={modelPropertyName}
+                                    schema={schema}
+                                    value={value}
+                                />
+                            )
+                        }}
                     />
                 ))}
                 <SectionListPagination data={data} />
