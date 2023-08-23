@@ -1,4 +1,5 @@
 import React from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
 import { Schema, SchemaFieldProperty } from '../../../lib'
 import { ModelValueRenderer } from './ModelValueRenderer'
 
@@ -11,6 +12,10 @@ type ModelValueProps = {
     schema: Schema
     modelPropertyName: string
     value: unknown
+}
+
+const ModelValueError = () => {
+    return <span>Error</span>
 }
 
 export const ModelValue = ({
@@ -27,5 +32,9 @@ export const ModelValue = ({
         return null
     }
 
-    return <ModelValueRenderer value={value} schemaProperty={schemaProperty} />
+    return (
+        <ErrorBoundary FallbackComponent={ModelValueError}>
+            <ModelValueRenderer value={value} schemaProperty={schemaProperty} />
+        </ErrorBoundary>
+    )
 }
