@@ -1,4 +1,5 @@
 import React from 'react'
+import { BooleanValue } from './BooleanValue'
 import { ConstantValue } from './ConstantValue'
 import { DateValue } from './DateValue'
 import type { ValueDetails } from './ModelValue'
@@ -16,6 +17,10 @@ export const ModelValueRenderer = ({ value, schemaProperty }: ValueDetails) => {
 
     if (schemaProperty.propertyType === 'DATE') {
         return <DateValue value={value as string} />
+    }
+
+    if (typeof value === 'boolean') {
+        return <BooleanValue value={value} />
     }
 
     if (value) {
