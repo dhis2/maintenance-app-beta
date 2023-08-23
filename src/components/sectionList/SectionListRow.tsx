@@ -3,7 +3,7 @@ import { IconEdit24, IconMore24 } from '@dhis2/ui-icons'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { CheckBoxOnChangeObject } from '../../types'
-import { IdentifiableObject, GistModel, DataElement } from '../../types/models'
+import { IdentifiableObject, GistModel } from '../../types/models'
 import css from './SectionList.module.css'
 import { SelectedColumns, SelectedColumn } from './types'
 
