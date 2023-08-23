@@ -16,9 +16,10 @@ export function useOptionsQuery({
     const [loadedOptions, setLoadedOptions] = useState<SelectOption[]>([])
     const queryResult = useModelGist<CategoryComboQueryResult>(
         'categoryCombos/gist',
-        { pageSize: 10 },
+        // { pageSize: 10 },
+        {},
         {
-            variables: { page: 1, filter: '' },
+            variables: { pageSize: 10, filter: '' },
             onComplete: (input: unknown) => {
                 if (initialSelected && !fetchedInitialOptionRef.current) {
                     fetchedInitialOptionRef.current = true
