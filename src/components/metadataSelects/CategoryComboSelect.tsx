@@ -1,15 +1,34 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { useModelGist } from '../../lib'
-import { CategoryCombo, GistCollectionResponse } from '../../types/generated'
+import { SelectOption } from '../../types'
 import { SearchableSingleSelect } from '../SearchableSingleSelect'
+import { useInitialOptionQuery } from './useInitialOptionQuery'
+import { useOptionsQuery } from './useOptionsQuery'
 
-const filterFields = ['id', 'name'] as const //(name is translated by default in /gist)
-type FilteredCategoryCombo = Pick<CategoryCombo, (typeof filterFields)[number]>
-type CategoryComboQueryResult = GistCollectionResponse<FilteredCategoryCombo>
+function computeDisplayOptions({
+    selected,
+    selectedOption,
+    options,
+}: {
+    options: SelectOption[]
+    selected?: string
+    selectedOption?: SelectOption
+}): SelectOption[] {
+    // This happens only when we haven't fetched the lable for an initially
+    // selected value. Don't show anything to prevent error that an option is
+    // missing
+    if (!selectedOption && selected) {
+        return []
+    }
 
-interface Option {
-    value: string
-    label: string
+    const optionsContainSelected = options?.find(
+        ({ value }) => value === selected
+    )
+
+    if (selectedOption && !optionsContainSelected) {
+        return [...(options as SelectOption[]), selectedOption as SelectOption]
+    }
+
+    return options
 }
 
 export function CategoryComboSelect({
@@ -17,9 +36,6 @@ export function CategoryComboSelect({
     selected,
 }: {
     onChange: ({ selected }: { selected: string }) => void
-    // Must be an option as we always must supply the selected option, but the
-    // list might not contain it when filtering / loading the first page of
-    // options
     selected?: string
 }) {
     // Using a ref because we don't want to react to changes.
@@ -27,30 +43,25 @@ export function CategoryComboSelect({
     // nothing that depends on the render-cycle depends on this value
     const filterRef = useRef('')
 
-    const [loadedOptions, setLoadedOptions] = useState<Option[]>([])
-    const queryResult = useModelGist<CategoryComboQueryResult>(
-        'categoryCombos/gist',
-        { pageSize: 10 },
-        {
-            variables: { page: 1, filter: '' },
-            onComplete: (input: unknown) => {
-                const data = input as { result: CategoryComboQueryResult }
-                const { pager, result } = data.result
-                // We want to add new options to existing ones so we don't have to
-                // refetch existing options
-                setLoadedOptions((prevLoadedOptions) => [
-                    // We only want to add when the current page is > 1
-                    ...(pager.page === 1 ? [] : prevLoadedOptions),
-                    ...(result.map(({ id, name }) => ({
-                        value: id,
-                        label: name,
-                    })) || []),
-                ])
+    // We need to persist the selected option so we can display an <Option />
+    // when the current list doesn't contain the selected option (e.g. when
+    // the page with the selected option hasn't been reached yet or when
+    // filtering)
+    const [selectedOption, setSelectedOption] = useState<SelectOption>()
 
-                return data
-            },
-        }
-    )
+    const { refetch: fetchInitialOption, ...initialOptionQuery } =
+        useInitialOptionQuery({
+            selected,
+            onComplete: setSelectedOption,
+        })
+
+    const queryResult = useOptionsQuery({
+        // the selected value will only be used when parsing the initial result,
+        // and then never again, so there's no need to persist the first value
+        initialSelected: selected,
+        setSelectedOption,
+        fetchInitialOption,
+    })
     const { refetch, data } = queryResult
     const pager = data?.pager
     const page = pager?.page || 0
@@ -79,21 +90,42 @@ export function CategoryComboSelect({
         [refetch, page, pageCount]
     )
 
-    const error = queryResult.error
-        ? 'An error has occurred. Please try again'
-        : ''
-    console.log('> queryResult.error', queryResult.error)
+    const loading = queryResult.loading || initialOptionQuery.loading
+    const error =
+        queryResult.error || initialOptionQuery.error
+            ? // @TODO: Ask Joe what do do here!
+              'An error has occurred. Please try again'
+            : ''
+
+    const displayOptions = computeDisplayOptions({
+        selected,
+        selectedOption,
+        options: data?.result,
+    })
+
+    // Initially we potentially have a selected value, but we might not have
+    // fetched the corresponding label yet. Therefore we don't want to pass in
+    // any value to the "selected" prop, as otherwise an error will be thrown
+    const showSelected = !!displayOptions.find(
+        ({ value }) => value === selected
+    )
 
     return (
         <SearchableSingleSelect
-            onChange={onChange}
+            onChange={({ selected }) => {
+                const option = data.result.find(
+                    ({ value }) => value === selected
+                )
+                setSelectedOption(option)
+                onChange({ selected })
+            }}
             onIntersectionChange={incrementPage}
-            options={loadedOptions}
-            preventIntersectionDetection={queryResult.loading}
-            selected={selected}
-            showEndLoader={!queryResult.loading && page < pageCount}
+            options={displayOptions}
+            preventIntersectionDetection={loading}
+            selected={showSelected ? selected : ''}
+            showEndLoader={!loading && page < pageCount}
             onFilterChange={adjustQueryParamsWithChangedFilter}
-            loading={queryResult.loading}
+            loading={loading}
             error={error}
             onRetryClick={() => {
                 refetch({
