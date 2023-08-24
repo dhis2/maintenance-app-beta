@@ -24,10 +24,7 @@ export const Component = () => {
     }
 
     return (
-        <Form
-            onSubmit={onSubmit}
-            initialValues={initialValues}
-        >
+        <Form onSubmit={onSubmit} initialValues={initialValues}>
             {({ handleSubmit }) => (
                 <form onSubmit={handleSubmit}>
                     <div className={classes.form}>
@@ -41,7 +38,9 @@ export const Component = () => {
 
                                 <Button
                                     onClick={() => {
-                                        alert('@TODO(Data elements/new): Implement me!')
+                                        alert(
+                                            '@TODO(Data elements/new): Implement me!'
+                                        )
                                         navigate(-1)
                                     }}
                                 >
