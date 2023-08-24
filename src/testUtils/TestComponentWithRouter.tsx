@@ -19,7 +19,7 @@ type AppTestWrapperProps = React.PropsWithChildren<{
     dataForCustomProvider: DataProviderTypeMock
 }>
 
-const ComponentWithProvider = ({
+export const ComponentWithProvider = ({
     dataForCustomProvider,
     children,
 }: AppTestWrapperProps) => {

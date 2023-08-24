@@ -24,7 +24,7 @@ const renderSection = async (dataProvider: DataProviderTypeMock) => {
 
     const result = render(
         <TestComponentWithRouter
-            path="/dataElemnts"
+            path="/dataElements"
             dataProvider={dataProvider}
             routeOptions={routeOptions}
         >
