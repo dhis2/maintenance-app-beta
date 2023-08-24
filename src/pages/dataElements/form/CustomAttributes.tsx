@@ -9,49 +9,41 @@ export function CustomAttributes({
     attributes = [],
 }: {
     attributes?: Array<{
-        id: string,
-        displayFormName: string,
+        id: string
+        displayFormName: string
         // @TODO(CustomAttributes): Implement all possible value types!
-        valueType: 'TEXT' | 'LONG_TEXT',
-        code: string,
-        mandatory: boolean,
-    }>,
+        valueType: 'TEXT' | 'LONG_TEXT'
+        code: string
+        mandatory: boolean
+    }>
 }) {
     return (
         <>
             {attributes.map((attribute) => {
-                const {
-                    mandatory: required,
-                    valueType,
-                    displayFormName,
-                    id,
-                } = attribute
+                const name = `attributeValues.${attribute.id}`
 
-                // @TODO(CustomAttributes): What to use as name?
-                const name = `attribute.${id}`
-
-                if (valueType === 'TEXT') {
+                if (attribute.valueType === 'TEXT') {
                     return (
                         <StandardFormSection key={attribute.id}>
                             <FieldRFF
                                 component={InputFieldFF}
-                                required={required}
+                                required={attribute.mandatory}
                                 inputWidth={inputWidth}
-                                label={displayFormName}
+                                label={attribute.displayFormName}
                                 name={name}
                             />
                         </StandardFormSection>
                     )
                 }
 
-                if (valueType === 'LONG_TEXT') {
+                if (attribute.valueType === 'LONG_TEXT') {
                     return (
                         <StandardFormSection key={attribute.id}>
                             <FieldRFF
                                 component={TextAreaFieldFF}
-                                required={required}
+                                required={attribute.mandatory}
                                 inputWidth={inputWidth}
-                                label={displayFormName}
+                                label={attribute.displayFormName}
                                 name={name}
                             />
                         </StandardFormSection>
@@ -59,7 +51,7 @@ export function CustomAttributes({
                 }
 
                 throw new Error(
-                    `@TODO(CustomAttributes): Implement value type "${valueType}"!`
+                    `@TODO(CustomAttributes): Implement value type "${attribute.valueType}"!`
                 )
             })}
         </>

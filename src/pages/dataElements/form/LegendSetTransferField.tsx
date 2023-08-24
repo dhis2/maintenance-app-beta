@@ -1,9 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import { ButtonStrip, Button, Field, Transfer } from '@dhis2/ui'
 import React, { useState } from 'react'
-import classes from './LegendsTransferField.module.css'
+import classes from './LegendSetTransferField.module.css'
 
-export function LegendsTransferField({
+export function LegendSetTransferField({
     name,
     options,
     selected,
@@ -14,18 +14,18 @@ export function LegendsTransferField({
     helpText,
     validationText,
 }: {
-    name: string,
+    name: string
     options: Array<{
-        value: string,
-        label: string,
-    }>,
-    selected: Array<string>,
-    onRefreshLegends: () => void,
-    onAddNewLegends: () => void,
-    onChange: ({ selected }: { selected: Array<string> }) => void,
-    error?: boolean,
-    helpText?: string,
-    validationText?: string,
+        value: string
+        label: string
+    }>
+    selected: Array<string>
+    onRefreshLegends: () => void
+    onAddNewLegends: () => void
+    onChange: ({ selected }: { selected: Array<string> }) => void
+    error?: boolean
+    helpText?: string
+    validationText?: string
 }) {
     const [searchTerm, setSearchTerm] = useState('')
 
@@ -64,7 +64,9 @@ export function LegendsTransferField({
                 onChange={onChange}
                 searchTerm={searchTerm}
                 filterPlaceholder={i18n.t('Filter available legends')}
-                onFilterChange={({ value }: { value: string }) => setSearchTerm(value)}
+                onFilterChange={({ value }: { value: string }) =>
+                    setSearchTerm(value)
+                }
                 rightHeader={rightHeader}
                 leftFooter={leftFooter}
             />

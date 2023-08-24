@@ -13,24 +13,20 @@ import {
     StandardFormSectionDescription,
     StandardFormField,
 } from '../../../components'
-import {
-    ColorAndIconField,
-    DomainField,
-    LegendsField,
-} from './custom-fields'
 import { CustomAttributes } from './CustomAttributes'
+import { ColorAndIconField, DomainField, LegendSetField } from './customFields'
 import { EditableFieldWrapper } from './EditableFieldWrapper'
 import {
     useAddAggregationLevelMutation,
     useAddCategoryComboMutation,
     useAddLegendMutation,
-    useAddOptionSetCommentMutation,
+    useAddCommentOptionSetMutation,
     useAddOptionSetMutation,
     useAggregationLevelsQuery,
     useCategoryCombosQuery,
     useCustomAttributesQuery,
-    useLegendsQuery,
-    useOptionSetCommentsQuery,
+    useLegendSetQuery,
+    useCommentOptionSetsQuery,
     useOptionSetsQuery,
 } from './hooks'
 
@@ -38,14 +34,14 @@ export function DataElementForm() {
     const customAttributes = useCustomAttributesQuery()
     const categoryCombos = useCategoryCombosQuery()
     const optionSets = useOptionSetsQuery()
-    const optionSetComments = useOptionSetCommentsQuery()
-    const legends = useLegendsQuery()
+    const commentOptionSets = useCommentOptionSetsQuery()
+    const legendSet = useLegendSetQuery()
     const aggregationLevels = useAggregationLevelsQuery()
 
     const [addingLegend, setAddingLegend] = useState(false)
     const [addingCategoryCombo, setAddingCategoryCombo] = useState(false)
     const [addingOptionSet, setAddingOptionSet] = useState(false)
-    const [addingOptionSetComment, setAddingOptionSetComment] = useState(false)
+    const [addingCommentOptionSet, setAddingCommentOptionSet] = useState(false)
     const [addingAggregationLevel, setAddingAggregationLevel] = useState(false)
 
     // @TODO(DataElementForm): Use these
@@ -53,26 +49,24 @@ export function DataElementForm() {
     const [addLegend] = useAddLegendMutation()
     const [addCategoryCombo] = useAddCategoryComboMutation()
     const [addOptionSet] = useAddOptionSetMutation()
-    const [addOptionSetComment] = useAddOptionSetCommentMutation()
+    const [addCommentOptionSet] = useAddCommentOptionSetMutation()
     const [addAggregationLevel] = useAddAggregationLevelMutation()
     /* eslint-enable @typescript-eslint/no-unused-vars */
 
-    const loading = (
+    const loading =
         categoryCombos.loading ||
         optionSets.loading ||
-        optionSetComments.loading ||
-        legends.loading ||
+        commentOptionSets.loading ||
+        legendSet.loading ||
         aggregationLevels.loading ||
         customAttributes.loading
-    )
-    const error = (
+    const error =
         categoryCombos.error ||
         optionSets.error ||
-        optionSetComments.error ||
-        legends.error ||
+        commentOptionSets.error ||
+        legendSet.error ||
         aggregationLevels.error ||
         customAttributes.error
-    )
 
     if (loading) {
         return <>@TODO(DataElementForm): Loading</>
@@ -81,7 +75,8 @@ export function DataElementForm() {
     if (error) {
         return (
             <>
-                @TODO(DataElementForm): Error<br />
+                @TODO(DataElementForm): Error
+                <br />
                 {error.toString()}
             </>
         )
@@ -90,8 +85,12 @@ export function DataElementForm() {
     return (
         <>
             <StandardFormSection>
-                <StandardFormSectionTitle>{i18n.t('Basic information')}</StandardFormSectionTitle>
-                <StandardFormSectionDescription>{i18n.t('Set up the information for this data element')}</StandardFormSectionDescription>
+                <StandardFormSectionTitle>
+                    {i18n.t('Basic information')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t('Set up the information for this data element')}
+                </StandardFormSectionDescription>
 
                 <StandardFormField>
                     <FieldRFF
@@ -100,7 +99,9 @@ export function DataElementForm() {
                         inputWidth="400px"
                         label={i18n.t('Name (required)')}
                         name="name"
-                        helpText={i18n.t('A data element name should be concise and easy to recognize.')}
+                        helpText={i18n.t(
+                            'A data element name should be concise and easy to recognize.'
+                        )}
                     />
                 </StandardFormField>
 
@@ -111,7 +112,9 @@ export function DataElementForm() {
                         inputWidth="400px"
                         name="shortName"
                         label={i18n.t('Short name (required)')}
-                        helpText={i18n.t('Often used in reports where space is limited')}
+                        helpText={i18n.t(
+                            'Often used in reports where space is limited'
+                        )}
                     />
                 </StandardFormField>
 
@@ -130,7 +133,9 @@ export function DataElementForm() {
                         inputWidth="400px"
                         name="description"
                         label={i18n.t('Description')}
-                        helpText={i18n.t("Explain the purpose of this data element and how it's measured.")}
+                        helpText={i18n.t(
+                            "Explain the purpose of this data element and how it's measured."
+                        )}
                     />
                 </StandardFormField>
 
@@ -140,7 +145,9 @@ export function DataElementForm() {
                         inputWidth="400px"
                         name="url"
                         label={i18n.t('Url')}
-                        helpText={i18n.t('A web link that provides extra information')}
+                        helpText={i18n.t(
+                            'A web link that provides extra information'
+                        )}
                     />
                 </StandardFormField>
 
@@ -154,7 +161,9 @@ export function DataElementForm() {
                         inputWidth="400px"
                         name="fieldMask"
                         label={i18n.t('Field mask')}
-                        helpText={i18n.t('Use a pattern to limit what information can be entered.')}
+                        helpText={i18n.t(
+                            'Use a pattern to limit what information can be entered.'
+                        )}
                         placeholder={i18n.t('e.g. 999-000-0000')}
                     />
                 </StandardFormField>
@@ -165,7 +174,9 @@ export function DataElementForm() {
                         inputWidth="400px"
                         name="formName"
                         label={i18n.t('StandardForm name')}
-                        helpText={i18n.t('An alternative name used in section or automatic data entry forms.')}
+                        helpText={i18n.t(
+                            'An alternative name used in section or automatic data entry forms.'
+                        )}
                     />
                 </StandardFormField>
 
@@ -180,10 +191,10 @@ export function DataElementForm() {
                         inputWidth="400px"
                         name="valueType"
                         label={i18n.t('Value type (required)')}
-                        helpText={i18n.t('The type of data that will be recorded.')}
-                        options={[
-                            { value: 'number', label: 'Number' },
-                        ]}
+                        helpText={i18n.t(
+                            'The type of data that will be recorded.'
+                        )}
+                        options={[{ value: 'NUMBER', label: 'Number' }]}
                     />
                 </StandardFormField>
 
@@ -194,15 +205,21 @@ export function DataElementForm() {
                         inputWidth="400px"
                         name="aggregationType"
                         label={i18n.t('Aggretation type (required)')}
-                        helpText={i18n.t('The default way to aggregate this data element in analytics.')}
-                        options={[{ value: 'sum', label: 'Sum' }]}
+                        helpText={i18n.t(
+                            'The default way to aggregate this data element in analytics.'
+                        )}
+                        options={[{ value: 'SUM', label: 'Sum' }]}
                     />
                 </StandardFormField>
             </StandardFormSection>
 
             <StandardFormSection>
-                <StandardFormSectionTitle>{i18n.t('Disaggregation and Option sets')}</StandardFormSectionTitle>
-                <StandardFormSectionDescription>{i18n.t('Set up disaggregation and predefined options.')}</StandardFormSectionDescription>
+                <StandardFormSectionTitle>
+                    {i18n.t('Disaggregation and Option sets')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t('Set up disaggregation and predefined options.')}
+                </StandardFormSectionDescription>
 
                 <StandardFormField>
                     <EditableFieldWrapper
@@ -215,7 +232,9 @@ export function DataElementForm() {
                             name="categoryCombo"
                             inputWidth="400px"
                             label={i18n.t('Category combination (required)')}
-                            helpText={i18n.t('Choose how this data element is disaggregated')}
+                            helpText={i18n.t(
+                                'Choose how this data element is disaggregated'
+                            )}
                             options={categoryCombos.data}
                         />
                     </EditableFieldWrapper>
@@ -233,44 +252,56 @@ export function DataElementForm() {
                             inputWidth="400px"
                             options={optionSets.data}
                             label={i18n.t('Option set')}
-                            helpText={i18n.t('Choose a set of predefined options for data entry')}
+                            helpText={i18n.t(
+                                'Choose a set of predefined options for data entry'
+                            )}
                         />
                     </EditableFieldWrapper>
                 </StandardFormField>
 
                 <StandardFormField>
                     <EditableFieldWrapper
-                        onRefresh={optionSetComments.refetch}
-                        onAddNew={() => setAddingOptionSetComment(true)}
+                        onRefresh={commentOptionSets.refetch}
+                        onAddNew={() => setAddingCommentOptionSet(true)}
                     >
                         <FieldRFF
                             required
                             component={SingleSelectFieldFF}
-                            name="optionSetComment"
+                            name="commentOptionSet"
                             inputWidth="400px"
-                            options={optionSetComments.data}
+                            options={commentOptionSets.data}
                             label={i18n.t('Option set comment')}
-                            helpText={i18n.t('Choose a set of predefined comment for data entry')}
+                            helpText={i18n.t(
+                                'Choose a set of predefined comment for data entry'
+                            )}
                         />
                     </EditableFieldWrapper>
                 </StandardFormField>
             </StandardFormSection>
 
             <StandardFormSection>
-                <StandardFormSectionTitle>{i18n.t('Legends')}</StandardFormSectionTitle>
-                <StandardFormSectionDescription>{i18n.t('Visualize values for this data element in Analytics app. Multiple legends can be applied.')}</StandardFormSectionDescription>
+                <StandardFormSectionTitle>
+                    {i18n.t('LegendSet')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Visualize values for this data element in Analytics app. Multiple legendSet can be applied.'
+                    )}
+                </StandardFormSectionDescription>
 
                 <StandardFormField>
-                    <LegendsField
-                        options={legends.data}
-                        onRefresh={legends.refetch}
+                    <LegendSetField
+                        options={legendSet.data}
+                        onRefresh={legendSet.refetch}
                         onAddNew={() => setAddingLegend(true)}
                     />
                 </StandardFormField>
             </StandardFormSection>
 
             <StandardFormSection>
-                <StandardFormSectionTitle>{i18n.t('Aggregation levels')}</StandardFormSectionTitle>
+                <StandardFormSectionTitle>
+                    {i18n.t('Aggregation levels')}
+                </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {`
                         @TODO(DataElementForm): Help text to describe the aggregation levels
@@ -290,9 +321,11 @@ export function DataElementForm() {
                             component={MultiSelectFieldFF}
                             name="aggregationLevels"
                             inputWidth="400px"
-                            options={optionSetComments.data}
+                            options={commentOptionSets.data}
                             label={i18n.t('Aggregation level(s)')}
-                            helpText={i18n.t('Choose how this data element is disaggregated')}
+                            helpText={i18n.t(
+                                'Choose how this data element is disaggregated'
+                            )}
                         />
                     </EditableFieldWrapper>
                 </StandardFormField>
@@ -300,18 +333,29 @@ export function DataElementForm() {
 
             {customAttributes.data?.length && (
                 <StandardFormSection>
-                    <StandardFormSectionTitle>{i18n.t('Custom attributes')}</StandardFormSectionTitle>
-                    <StandardFormSectionDescription>{i18n.t('Custom fields for your DHIS2 instance')}</StandardFormSectionDescription>
+                    <StandardFormSectionTitle>
+                        {i18n.t('Custom attributes')}
+                    </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        {i18n.t('Custom fields for your DHIS2 instance')}
+                    </StandardFormSectionDescription>
 
-                    <CustomAttributes attributes={customAttributes.data || []} />
+                    <CustomAttributes
+                        attributes={customAttributes.data || []}
+                    />
                 </StandardFormSection>
             )}
 
-            {addingLegend && `@TODO(DataElementForm): add Modal(?) for adding a new legend`}
-            {addingCategoryCombo && `@TODO(DataElementForm): add Modal(?) for adding a new category combo`}
-            {addingOptionSet && `@TODO(DataElementForm): add Modal(?) for adding a new option set`}
-            {addingOptionSetComment && `@TODO(DataElementForm): add Modal(?) for adding a new option set combo`}
-            {addingAggregationLevel && `@TODO(DataElementForm): add Modal(?) for adding a new aggregation level`}
+            {addingLegend &&
+                `@TODO(DataElementForm): add Modal(?) for adding a new legend`}
+            {addingCategoryCombo &&
+                `@TODO(DataElementForm): add Modal(?) for adding a new category combo`}
+            {addingOptionSet &&
+                `@TODO(DataElementForm): add Modal(?) for adding a new option set`}
+            {addingCommentOptionSet &&
+                `@TODO(DataElementForm): add Modal(?) for adding a new option set combo`}
+            {addingAggregationLevel &&
+                `@TODO(DataElementForm): add Modal(?) for adding a new aggregation level`}
         </>
     )
 }

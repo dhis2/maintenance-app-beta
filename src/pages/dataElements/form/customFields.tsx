@@ -2,13 +2,15 @@ import i18n from '@dhis2/d2-i18n'
 import { Field, Radio } from '@dhis2/ui'
 import React from 'react'
 import { useField } from 'react-final-form'
-import { LegendsTransferField } from './LegendsTransferField'
+import { LegendSetTransferField } from './LegendSetTransferField'
 
 export function ColorAndIconField() {
     return (
         <Field
             label={i18n.t('Color and icon')}
-            helpText={i18n.t('A color and icon are helpful for identifying data elements in information-dense screens.')}
+            helpText={i18n.t(
+                'A color and icon are helpful for identifying data elements in information-dense screens.'
+            )}
         >
             @TODO(custom fields): Implement me! (1)
         </Field>
@@ -26,7 +28,9 @@ export function DomainField() {
             required
             name={name}
             label={i18n.t('Domain (required)')}
-            helpText={i18n.t('A data element can either be aggregated or tracked data.')}
+            helpText={i18n.t(
+                'A data element can either be aggregated or tracked data.'
+            )}
             error={!!error}
             validationText={error}
         >
@@ -55,23 +59,23 @@ export function DomainField() {
     )
 }
 
-export function LegendsField({
+export function LegendSetField({
     options,
     onRefresh,
     onAddNew,
 }: {
     options: Array<{
-        value: string,
-        label: string,
-    }>,
-    onRefresh: () => void,
-    onAddNew: () => void,
+        value: string
+        label: string
+    }>
+    onRefresh: () => void
+    onAddNew: () => void
 }) {
-    const name = 'legends'
-    const { input, meta } = useField(name)
+    const name = 'legendSet'
+    const { input, meta } = useField(name, { multiple: true })
 
     return (
-        <LegendsTransferField
+        <LegendSetTransferField
             name={name}
             selected={input.value}
             onChange={input.onChange}
