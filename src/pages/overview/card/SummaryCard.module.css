@@ -45,7 +45,7 @@
     margin-top: auto;
     padding-top: 12px;
     display: flex;
-    gap: 8px;
+    gap: var(--spacers-dp8);
 }
 
 .cardActions a {
