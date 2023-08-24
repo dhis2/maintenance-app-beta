@@ -5,13 +5,17 @@ import { Link } from 'react-router-dom'
 import { CheckBoxOnChangeObject } from '../../types'
 import { IdentifiableObject, GistModel } from '../../types/models'
 import css from './SectionList.module.css'
-import { SelectedColumns } from './types'
+import { SelectedColumns, SelectedColumn } from './types'
 
 export type SectionListRowProps<Model extends IdentifiableObject> = {
-    modelData: Model | GistModel<Model>
+    modelData: GistModel<Model>
     selectedColumns: SelectedColumns<Model>
     onSelect: (modelId: string, checked: boolean) => void
     selected: boolean
+    renderValue: (
+        column: SelectedColumn<Model>['modelPropertyName'],
+        value: GistModel<Model>[typeof column]
+    ) => React.ReactNode
 }
 
 export function SectionListRow<Model extends IdentifiableObject>({
@@ -19,6 +23,7 @@ export function SectionListRow<Model extends IdentifiableObject>({
     modelData,
     onSelect,
     selected,
+    renderValue,
 }: SectionListRowProps<Model>) {
     return (
         <DataTableRow className={css.listRow}>
@@ -32,10 +37,11 @@ export function SectionListRow<Model extends IdentifiableObject>({
             </DataTableCell>
             {selectedColumns.map(({ modelPropertyName }) => (
                 <DataTableCell key={modelPropertyName}>
-                    {/* TODO: Handle constant translations and resolve displayvalues to components */}
-                    {typeof modelData[modelPropertyName] === 'object'
-                        ? modelPropertyName
-                        : modelData[modelPropertyName]}
+                    {modelData[modelPropertyName] &&
+                        renderValue(
+                            modelPropertyName,
+                            modelData[modelPropertyName]
+                        )}
                 </DataTableCell>
             ))}
             <DataTableCell>

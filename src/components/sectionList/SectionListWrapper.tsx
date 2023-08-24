@@ -1,7 +1,9 @@
 import { FetchError } from '@dhis2/app-runtime'
 import React, { useMemo, useState } from 'react'
+import { useSchemaFromHandle } from '../../lib'
 import { IdentifiableObject, GistCollectionResponse } from '../../types/models'
 import { FilterWrapper } from './filters/FilterWrapper'
+import { ModelValue } from './modelValue/ModelValue'
 import { SectionList } from './SectionList'
 import { SectionListLoader } from './SectionListLoader'
 import { SectionListEmpty, SectionListError } from './SectionListMessages'
@@ -25,6 +27,7 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
     data,
     error,
 }: SectionListWrapperProps<Model>) => {
+    const schema = useSchemaFromHandle()
     const [selectedColumns, setSelectedColumns] =
         useState<SelectedColumns<Model>>(defaultColumns)
     const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set())
@@ -84,16 +87,24 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
                 allSelected={allSelected}
             >
                 <SectionListMessage />
-                {data?.result &&
-                    data?.result.map((model) => (
-                        <SectionListRow
-                            key={model.id}
-                            modelData={model}
-                            selectedColumns={selectedColumns}
-                            onSelect={handleSelect}
-                            selected={selectedModels.has(model.id)}
-                        />
-                    ))}
+                {data?.result.map((model) => (
+                    <SectionListRow
+                        key={model.id}
+                        modelData={model}
+                        selectedColumns={selectedColumns}
+                        onSelect={handleSelect}
+                        selected={selectedModels.has(model.id)}
+                        renderValue={(modelPropertyName, value) => {
+                            return (
+                                <ModelValue
+                                    modelPropertyName={modelPropertyName}
+                                    schema={schema}
+                                    value={value}
+                                />
+                            )
+                        }}
+                    />
+                ))}
                 <SectionListPagination data={data} />
             </SectionList>
         </div>
