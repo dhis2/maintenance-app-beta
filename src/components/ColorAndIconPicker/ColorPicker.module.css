@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    gap: var(--spacers-dp8);
+    padding: var(--spacers-dp8);
+    border-radius: 3px;
+    border: 1px solid var(--colors-grey600);
+    background: var(--colors-white);
+    width: 68px;
+    cursor: pointer;
+}
+
+.chosenColor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 26px;
+    width: 26px;
+    border: 1px solid var(--colors-black);
+}
+
+.hasColor .chosenColor {
+    border: 0;
+}
+
+.openCloseIconContainer {
+    display: flex;
+    align-items: center;
+}
+
+.colors {
+    width: 110px;
+    height: 30px;
+}

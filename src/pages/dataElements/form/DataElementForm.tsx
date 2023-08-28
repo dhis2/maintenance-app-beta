@@ -25,7 +25,6 @@ import {
     useAggregationLevelsQuery,
     useCategoryCombosQuery,
     useCustomAttributesQuery,
-    useLegendSetQuery,
     useCommentOptionSetsQuery,
     useOptionSetsQuery,
 } from './hooks'
@@ -35,10 +34,8 @@ export function DataElementForm() {
     const categoryCombos = useCategoryCombosQuery()
     const optionSets = useOptionSetsQuery()
     const commentOptionSets = useCommentOptionSetsQuery()
-    const legendSet = useLegendSetQuery()
     const aggregationLevels = useAggregationLevelsQuery()
 
-    const [addingLegend, setAddingLegend] = useState(false)
     const [addingCategoryCombo, setAddingCategoryCombo] = useState(false)
     const [addingOptionSet, setAddingOptionSet] = useState(false)
     const [addingCommentOptionSet, setAddingCommentOptionSet] = useState(false)
@@ -57,14 +54,12 @@ export function DataElementForm() {
         categoryCombos.loading ||
         optionSets.loading ||
         commentOptionSets.loading ||
-        legendSet.loading ||
         aggregationLevels.loading ||
         customAttributes.loading
     const error =
         categoryCombos.error ||
         optionSets.error ||
         commentOptionSets.error ||
-        legendSet.error ||
         aggregationLevels.error ||
         customAttributes.error
 
@@ -290,11 +285,7 @@ export function DataElementForm() {
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
-                    <LegendSetField
-                        options={legendSet.data}
-                        onRefresh={legendSet.refetch}
-                        onAddNew={() => setAddingLegend(true)}
-                    />
+                    <LegendSetField />
                 </StandardFormField>
             </StandardFormSection>
 
@@ -346,8 +337,6 @@ export function DataElementForm() {
                 </StandardFormSection>
             )}
 
-            {addingLegend &&
-                `@TODO(DataElementForm): add Modal(?) for adding a new legend`}
             {addingCategoryCombo &&
                 `@TODO(DataElementForm): add Modal(?) for adding a new category combo`}
             {addingOptionSet &&

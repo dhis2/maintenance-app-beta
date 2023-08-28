@@ -1,10 +1,16 @@
 import i18n from '@dhis2/d2-i18n'
 import { Field, Radio } from '@dhis2/ui'
-import React from 'react'
+import React, { useState } from 'react'
 import { useField } from 'react-final-form'
+import { ColorAndIconPicker } from '../../../components'
+import { useLegendSetQuery } from './hooks'
 import { LegendSetTransferField } from './LegendSetTransferField'
 
+// @TODO(custom fields): Implement me! (1)
 export function ColorAndIconField() {
+    const { input: colorInput } = useField('color')
+    const { input: iconInput } = useField('icon')
+
     return (
         <Field
             label={i18n.t('Color and icon')}
@@ -12,7 +18,16 @@ export function ColorAndIconField() {
                 'A color and icon are helpful for identifying data elements in information-dense screens.'
             )}
         >
-            @TODO(custom fields): Implement me! (1)
+            <ColorAndIconPicker
+                icon={iconInput.value}
+                color={colorInput.value}
+                onIconPick={({ icon }: { icon: string }) => {
+                    iconInput.onChange(icon)
+                }}
+                onColorPick={({ color }: { color: string }) => {
+                    colorInput.onChange(color)
+                }}
+            />
         </Field>
     )
 }
@@ -59,30 +74,27 @@ export function DomainField() {
     )
 }
 
-export function LegendSetField({
-    options,
-    onRefresh,
-    onAddNew,
-}: {
-    options: Array<{
-        value: string
-        label: string
-    }>
-    onRefresh: () => void
-    onAddNew: () => void
-}) {
+export function LegendSetField() {
     const name = 'legendSet'
+    const legendSet = useLegendSetQuery()
+    const [addingLegend, setAddingLegend] = useState(false)
     const { input, meta } = useField(name, { multiple: true })
 
     return (
-        <LegendSetTransferField
-            name={name}
-            selected={input.value}
-            onChange={input.onChange}
-            error={!!meta.error}
-            options={options}
-            onRefreshLegends={onRefresh}
-            onAddNewLegends={onAddNew}
-        />
+        <>
+            <LegendSetTransferField
+                name={name}
+                loading={legendSet.loading}
+                selected={input.value}
+                onChange={input.onChange}
+                error={!!meta.error}
+                options={legendSet.data}
+                onRefreshLegends={legendSet.refetch}
+                onAddNewLegends={() => setAddingLegend(true)}
+            />
+
+            {addingLegend &&
+                `@TODO(DataElementForm): add Modal(?) for adding a new legend`}
+        </>
     )
 }

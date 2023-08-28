@@ -1,3 +1,4 @@
+export * from './ColorAndIconPicker'
 export { Loader } from './loading'
 export { HidePreventUnmount } from './HidePreventUnmount'
 export * from './metadataSelects'

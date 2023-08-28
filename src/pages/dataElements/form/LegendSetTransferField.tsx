@@ -4,14 +4,15 @@ import React, { useState } from 'react'
 import classes from './LegendSetTransferField.module.css'
 
 export function LegendSetTransferField({
-    name,
-    options,
-    selected,
-    onRefreshLegends,
-    onAddNewLegends,
-    onChange,
     error,
     helpText,
+    loading,
+    name,
+    onAddNewLegends,
+    onChange,
+    onRefreshLegends,
+    options,
+    selected,
     validationText,
 }: {
     name: string
@@ -23,6 +24,7 @@ export function LegendSetTransferField({
     onRefreshLegends: () => void
     onAddNewLegends: () => void
     onChange: ({ selected }: { selected: Array<string> }) => void
+    loading: boolean
     error?: boolean
     helpText?: string
     validationText?: string
@@ -59,6 +61,7 @@ export function LegendSetTransferField({
             <Transfer
                 enableOrderChange
                 filterable
+                loading={loading}
                 options={options}
                 selected={selected}
                 onChange={onChange}
