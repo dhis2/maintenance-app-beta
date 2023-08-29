@@ -114,7 +114,6 @@ const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
         <Route
             handle={{
                 hideSidebar: true,
-                showFooter: true,
                 crumb: () => <BreadcrumbItem section={section} />,
             }}
         >
@@ -129,7 +128,7 @@ const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
                     index
                     handle={{ showFooter: true }}
                     lazy={createSectionLazyRouteFunction(section, 'Edit')}
-                ></Route>
+                />
             </Route>
         </Route>
     </Route>
