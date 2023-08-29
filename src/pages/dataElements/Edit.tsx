@@ -78,6 +78,8 @@ export const Component = () => {
         code: dataElement.code,
         description: dataElement.description,
         url: dataElement.url,
+        color: dataElement.style.color,
+        icon: dataElement.style.icon,
         fieldMask: dataElement.fieldMask,
         formName: dataElement.formName,
         valueType: dataElement.valueType,

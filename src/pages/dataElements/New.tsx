@@ -11,8 +11,9 @@ export const Component = () => {
     const initialValues = {
         legends: [],
         domain: 'aggregate',
-        valueType: 'number',
-        aggregationType: 'sum',
+        valueType: 'NUMBER',
+        aggregationType: 'SUM',
+        legendSet: [],
     }
 
     const navigate = useNavigate()

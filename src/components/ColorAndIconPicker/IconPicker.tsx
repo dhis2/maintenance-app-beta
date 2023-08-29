@@ -12,7 +12,7 @@ export function IconPicker({
     onIconPick: ({ icon }: { icon: string }) => void
     icon?: string
 }) {
-    const [showPicker, setShowPicker] = useState(true)
+    const [showPicker, setShowPicker] = useState(false)
     const icons = useIconsQuery()
     const selectedIcon = icons.data.all.find(({ key }) => key === icon)
 
