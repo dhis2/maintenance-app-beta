@@ -1,3 +1,5 @@
 export * from '../../types/schemaBase'
 export { useSchemas, useSchema, useSetSchemas } from './schemaStore'
+export { translateAggregationType } from './translateAggregationType'
+export { translateValueType } from './translateValueType'
 export * from './useSchemaFromHandle'
