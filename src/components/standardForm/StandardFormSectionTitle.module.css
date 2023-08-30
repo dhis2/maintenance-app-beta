@@ -1,6 +1,6 @@
 .standardFormSectionTitle {
     margin: 0 0 var(--spacers-dp8);
-
-    /* @TODO(standard form section title): Ask Joe! */
-    font-size: 30px;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--colors-grey800);
 }

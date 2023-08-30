@@ -1,6 +1,6 @@
 .standardFormSectionDescription {
     margin: 0 0 var(--spacers-dp16);
-
-    /* @TODO(standard form section title): Ask Joe! */
-    font-size: 16px;
+    font-size: 14px;
+    line-height: 19px;
+    color: var(--colors-grey800);
 }
