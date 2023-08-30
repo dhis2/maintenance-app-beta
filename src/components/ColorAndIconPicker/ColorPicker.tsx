@@ -65,11 +65,11 @@ export function ColorPicker({
     return (
         <>
             <div
+                ref={ref}
                 onClick={() => setShowPicker(true)}
                 className={cx(classes.container, {
                     [classes.hasColor]: !!color,
                 })}
-                ref={ref}
             >
                 <div
                     className={classes.chosenColor}
@@ -90,11 +90,15 @@ export function ColorPicker({
                             <SwatchesPicker
                                 presetColors={COLORS}
                                 color={color}
-                                onChangeComplete={({ hex }: { hex: string }) =>
-                                    onColorPick({
-                                        color: hex === color ? '' : hex,
-                                    })
-                                }
+                                onChangeComplete={({
+                                    hex,
+                                }: {
+                                    hex: string
+                                }) => {
+                                    const nextColor = hex === color ? '' : hex
+                                    onColorPick({ color: nextColor })
+                                    setShowPicker(false)
+                                }}
                             />
                         </div>
                     </Popper>
