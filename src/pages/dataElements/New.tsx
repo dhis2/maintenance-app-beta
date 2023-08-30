@@ -1,10 +1,14 @@
-import { Button, ButtonStrip } from '@dhis2/ui'
+import { Button, ButtonStrip, CircularLoader } from '@dhis2/ui'
 import React from 'react'
 import { Form } from 'react-final-form'
 import { useNavigate } from 'react-router-dom'
 import { StandardFormSection } from '../../components'
-import { DataElementForm } from './form'
+import { SCHEMA_SECTIONS } from '../../constants'
+import { getSectionPath } from '../../lib'
+import { DataElementFormFields } from './form'
 import classes from './New.module.css'
+
+const listPath = `/${getSectionPath(SCHEMA_SECTIONS.dataElement)}`
 
 export const Component = () => {
     // @TODO(DataElements/new): values dynamic or static?
@@ -29,7 +33,7 @@ export const Component = () => {
             {({ handleSubmit, submitting }) => (
                 <form onSubmit={handleSubmit}>
                     <div className={classes.form}>
-                        <DataElementForm />
+                        <DataElementFormFields />
 
                         <StandardFormSection>
                             <ButtonStrip>

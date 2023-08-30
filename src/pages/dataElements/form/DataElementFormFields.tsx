@@ -14,7 +14,13 @@ import {
     StandardFormField,
 } from '../../../components'
 import { CustomAttributes } from './CustomAttributes'
-import { ColorAndIconField, DomainField, LegendSetField } from './customFields'
+import {
+    AggregationTypeField,
+    ColorAndIconField,
+    DomainField,
+    LegendSetField,
+    ValueTypeField,
+} from './customFields'
 import { EditableFieldWrapper } from './EditableFieldWrapper'
 import {
     useAddAggregationLevelMutation,
@@ -29,7 +35,7 @@ import {
     useOptionSetsQuery,
 } from './hooks'
 
-export function DataElementForm() {
+export function DataElementFormFields() {
     const customAttributes = useCustomAttributesQuery()
     const categoryCombos = useCategoryCombosQuery()
     const optionSets = useOptionSetsQuery()
@@ -180,31 +186,11 @@ export function DataElementForm() {
                 </StandardFormField>
 
                 <StandardFormField>
-                    <FieldRFF
-                        component={SingleSelectFieldFF}
-                        required
-                        inputWidth="400px"
-                        name="valueType"
-                        label={i18n.t('Value type (required)')}
-                        helpText={i18n.t(
-                            'The type of data that will be recorded.'
-                        )}
-                        options={[{ value: 'NUMBER', label: 'Number' }]}
-                    />
+                    <ValueTypeField />
                 </StandardFormField>
 
                 <StandardFormField>
-                    <FieldRFF
-                        required
-                        component={SingleSelectFieldFF}
-                        inputWidth="400px"
-                        name="aggregationType"
-                        label={i18n.t('Aggretation type (required)')}
-                        helpText={i18n.t(
-                            'The default way to aggregate this data element in analytics.'
-                        )}
-                        options={[{ value: 'SUM', label: 'Sum' }]}
-                    />
+                    <AggregationTypeField />
                 </StandardFormField>
             </StandardFormSection>
 

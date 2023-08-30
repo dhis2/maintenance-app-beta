@@ -1,5 +1,6 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import { useMemo } from 'react'
+import { Attribute } from '../../../types/generated'
 
 export function useCategoryCombosQuery() {
     return {
@@ -105,7 +106,7 @@ const CUSTOM_ATTRIBUTES_QUERY = {
     attributes: {
         resource: 'attributes',
         params: {
-            fields: ['*', 'optionSet[*]'],
+            fields: ['*', 'optionSet[*, options[id,displayName,name,code]]'],
             paging: false,
             filter: 'dataElementAttribute:eq:true',
         },
@@ -115,14 +116,7 @@ const CUSTOM_ATTRIBUTES_QUERY = {
 // @TODO(useCustomAttributesQuery): create response type
 interface QueryResponse {
     attributes: {
-        attributes: Array<{
-            id: string
-            displayFormName: string
-            // @TODO(CustomAttributes): Implement all possible value types!
-            valueType: 'TEXT' | 'LONG_TEXT'
-            code: string
-            mandatory: boolean
-        }>
+        attributes: Attribute[]
     }
 }
 

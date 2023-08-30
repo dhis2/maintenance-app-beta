@@ -1,2 +1,2 @@
-export { DataElementForm } from './DataElementForm'
+export { DataElementFormFields } from './DataElementFormFields'
 export { useCustomAttributesQuery } from './hooks'

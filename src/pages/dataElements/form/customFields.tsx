@@ -1,8 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
-import { Field, Radio } from '@dhis2/ui'
+import { Field, Radio, SingleSelectFieldFF } from '@dhis2/ui'
 import React, { useState } from 'react'
-import { useField } from 'react-final-form'
+import { Field as FieldRFF, useField } from 'react-final-form'
 import { ColorAndIconPicker } from '../../../components'
+import {
+    useSchemas,
+    translateAggregationType,
+    translateValueType,
+} from '../../../lib'
 import { useLegendSetQuery } from './hooks'
 import { LegendSetTransferField } from './LegendSetTransferField'
 
@@ -96,5 +101,52 @@ export function LegendSetField() {
             {addingLegend &&
                 `@TODO(DataElementForm): add Modal(?) for adding a new legend`}
         </>
+    )
+}
+
+export function ValueTypeField() {
+    const schemas = useSchemas()
+    const { dataElement } = schemas
+    const options = dataElement.properties.valueType.constants?.map(
+        (constant) => ({
+            value: constant,
+            label: translateValueType(constant),
+        })
+    )
+
+    return (
+        <FieldRFF
+            component={SingleSelectFieldFF}
+            required
+            inputWidth="400px"
+            name="valueType"
+            label={i18n.t('Value type (required)')}
+            helpText={i18n.t('The type of data that will be recorded.')}
+            options={options || []}
+        />
+    )
+}
+
+export function AggregationTypeField() {
+    const { dataElement } = useSchemas()
+    const options = dataElement.properties.aggregationType.constants?.map(
+        (constant) => ({
+            value: constant,
+            label: translateAggregationType(constant),
+        })
+    )
+
+    return (
+        <FieldRFF
+            component={SingleSelectFieldFF}
+            required
+            inputWidth="400px"
+            name="aggregationType"
+            label={i18n.t('Aggretation type (required)')}
+            helpText={i18n.t(
+                'The default way to aggregate this data element in analytics.'
+            )}
+            options={options || []}
+        />
     )
 }
