@@ -3,17 +3,18 @@ import React from 'react'
 import { Loader } from './Loader'
 
 describe('Loader', () => {
-    it('should show the spinner when loading', () => {
+    it('should show the spinner and defer showing the content while loading', () => {
         const response: any = {
             loading: true,
         }
-        const { getByRole } = render(
+        const { getByRole, queryByText } = render(
             <Loader queryResponse={response}>
                 <div>content</div>
             </Loader>
         )
 
         expect(getByRole('progressbar')).not.toBeNull()
+        expect(queryByText('content')).toBeNull()
     })
     it('should show error message when response fails', () => {
         const response: any = {

@@ -4,7 +4,7 @@ import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 import { QueryParamProvider } from 'use-query-params'
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6'
 
-export type DataProviderTypeMock = {
+export type CustomData = {
     [resourceName: string]: CustomResource
 }
 
@@ -16,7 +16,7 @@ type CustomResource =
       ) => Promise<unknown>)
 
 type AppTestWrapperProps = React.PropsWithChildren<{
-    dataForCustomProvider: DataProviderTypeMock
+    dataForCustomProvider: CustomData
 }>
 
 export const ComponentWithProvider = ({
@@ -42,13 +42,13 @@ export const ComponentWithProvider = ({
 
 type TestComponentWithRouterProps = React.PropsWithChildren<{
     path: string
-    dataProvider: DataProviderTypeMock
+    customData: CustomData
     routeOptions: any
 }>
 
 const TestComponentWithRouter = ({
     path,
-    dataProvider,
+    customData,
     routeOptions,
     children,
 }: TestComponentWithRouterProps) => {
@@ -56,7 +56,7 @@ const TestComponentWithRouter = ({
         {
             path,
             element: (
-                <ComponentWithProvider dataForCustomProvider={dataProvider}>
+                <ComponentWithProvider dataForCustomProvider={customData}>
                     <QueryParamProvider adapter={ReactRouter6Adapter}>
                         {children}
                     </QueryParamProvider>

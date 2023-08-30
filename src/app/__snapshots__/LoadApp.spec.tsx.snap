@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LoadApp should set the schema before loading the app 1`] = `
+exports[`LoadApp should set the schema 1`] = `
 Array [
   Object {
     "access": Object {

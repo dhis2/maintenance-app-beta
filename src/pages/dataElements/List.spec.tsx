@@ -13,11 +13,11 @@ import { OVERVIEW_SECTIONS } from '../../constants'
 import { useSchemaStore } from '../../lib/schemas/schemaStore'
 import { ModelSchemas } from '../../lib/useLoadApp'
 import TestComponentWithRouter, {
-    DataProviderTypeMock,
+    CustomData,
 } from '../../testUtils/TestComponentWithRouter'
 import { Component as DataElementList } from './List'
 
-const renderSection = async (dataProvider: DataProviderTypeMock) => {
+const renderSection = async (customData: CustomData) => {
     const routeOptions = {
         handle: { section: OVERVIEW_SECTIONS.dataElement },
     }
@@ -25,7 +25,7 @@ const renderSection = async (dataProvider: DataProviderTypeMock) => {
     const result = render(
         <TestComponentWithRouter
             path="/dataElements"
-            dataProvider={dataProvider}
+            customData={customData}
             routeOptions={routeOptions}
         >
             <DataElementList />
@@ -42,20 +42,20 @@ describe('Data Elements List', () => {
         useSchemaStore.getState().setSchemas({
             dataElement: dataElementSchemaMock,
         } as unknown as ModelSchemas)
+
         jest.spyOn(console, 'warn').mockImplementation((value) => {
-            if (value.match(/No server timezone/)) {
-                //
-            } else {
+            if (!value.match(/No server timezone/)) {
                 console.warn(value)
             }
         })
     })
+    afterEach(jest.clearAllMocks)
 
     it('should show the list of elements', async () => {
-        const dataProvider = {
+        const customData = {
             'dataElements/gist': dataElementsMock,
         }
-        const { getByText, getByTestId } = await renderSection(dataProvider)
+        const { getByText, getByTestId } = await renderSection(customData)
 
         expect(
             getByText('Accute Flaccid Paralysis (Deaths < 5 yrs)')
@@ -68,10 +68,10 @@ describe('Data Elements List', () => {
         )
     })
     it('should display all the columns', async () => {
-        const dataProvider = {
+        const customData = {
             'dataElements/gist': dataElementsMock,
         }
-        const { getByText } = await renderSection(dataProvider)
+        const { getByText } = await renderSection(customData)
         const columns = [
             'Name',
             'Domain',
@@ -85,7 +85,7 @@ describe('Data Elements List', () => {
         })
     })
     it('should allow searching for value', async () => {
-        const dataProvider = {
+        const customData = {
             'dataElements/gist': (
                 resource: string,
                 r: { params: { filter: string[] } }
@@ -103,7 +103,7 @@ describe('Data Elements List', () => {
                 }
             },
         }
-        const { findByText, getByTestId } = await renderSection(dataProvider)
+        const { findByText, getByTestId } = await renderSection(customData)
         const searchInput =
             getByTestId('input-search-name').getElementsByTagName('input')[0]
 
@@ -115,12 +115,12 @@ describe('Data Elements List', () => {
     })
 
     it('should display error when an API call fails', async () => {
-        const dataProvider = {
+        const customData = {
             'dataElements/gist': () => {
                 return Promise.reject('401 backend error')
             },
         }
-        const { getByText } = await renderSection(dataProvider)
+        const { getByText } = await renderSection(customData)
 
         expect(getByText('An error occurred')).not.toBeNull()
         expect(
@@ -132,7 +132,7 @@ describe('Data Elements List', () => {
         afterEach(jest.resetAllMocks)
 
         const renderWithPager = async () => {
-            const dataProvider = {
+            const customData = {
                 'dataElements/gist': (
                     resource: string,
                     r: { params: { filter: string[]; page: number } }
@@ -184,7 +184,7 @@ describe('Data Elements List', () => {
                     return Promise.reject('something wrong with mock')
                 },
             }
-            return renderSection(dataProvider)
+            return renderSection(customData)
         }
         it('should display the page number', async () => {
             const { getByTestId } = await renderWithPager()
@@ -274,11 +274,11 @@ describe('Data Elements List', () => {
     })
     // select all
     it('should allow selecting all items', async () => {
-        const dataProvider = {
+        const customData = {
             'dataElements/gist': dataElementsMock,
         }
         const { getByTestId, queryAllByTestId } = await renderSection(
-            dataProvider
+            customData
         )
 
         userEvent.click(getByTestId('section-list-selectall'))
@@ -296,10 +296,10 @@ describe('Data Elements List', () => {
 
     // empty list
     it('should allow selecting all items', async () => {
-        const dataProvider = {
+        const customData = {
             'dataElements/gist': { ...dataElementsMock, result: [] },
         }
-        const { getByTestId } = await renderSection(dataProvider)
+        const { getByTestId } = await renderSection(customData)
 
         expect(getByTestId('dhis2-uicore-tablebody')).toHaveTextContent(
             "There aren't any items that match your filter."

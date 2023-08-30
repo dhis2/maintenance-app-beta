@@ -20,9 +20,17 @@ describe('LoadApp', () => {
         name: 'dhis2 user',
         authorities: ['auth1', 'auth2-duplicated', 'auth2-duplicated', 'auth3'],
     }
+
     const mockSettings = {
         keyDateFormat: 'yyyy-MM-dd',
     }
+
+    const dataProvider = {
+        schemas: fullSchema,
+        me: mockUser,
+        systemSettings: mockSettings,
+    }
+
     beforeEach(async () => {
         // eslint-disable-next-line @typescript-eslint/no-extra-semi
         ;(useSetSchemas as jest.Mock).mockImplementation(() => setSchemaMock)
@@ -31,16 +39,10 @@ describe('LoadApp', () => {
         )
         ;(useSetCurrentUser as jest.Mock).mockImplementation(() => setUserMock)
 
-        const dataProvider = {
-            schemas: fullSchema,
-            me: mockUser,
-            systemSettings: mockSettings,
-        }
-
         const result = render(
             <TestComponentWithRouter
                 path="/dataElements"
-                dataProvider={dataProvider}
+                customData={dataProvider}
                 routeOptions={{}}
             >
                 <LoadApp>the app</LoadApp>
@@ -51,18 +53,18 @@ describe('LoadApp', () => {
         )
     })
 
-    it('should set the schema before loading the app', async () => {
+    it('should set the schema', async () => {
         expect(setSchemaMock.mock.lastCall).toMatchSnapshot()
     })
 
-    it('should set the current useer before loading the app', async () => {
+    it('should set the current useer removing any duplicate authorities', async () => {
         expect(setUserMock.mock.lastCall[0]).toEqual({
             name: 'dhis2 user',
             authorities: new Set(['auth1', 'auth2-duplicated', 'auth3']),
         })
     })
 
-    it('should set the systemm settings before loading the app', async () => {
+    it('should set the systemm settings', async () => {
         expect(setSystemSettingsMock.mock.lastCall[0]).toEqual(mockSettings)
     })
 })
