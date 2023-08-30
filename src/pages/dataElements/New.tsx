@@ -26,26 +26,35 @@ export const Component = () => {
 
     return (
         <Form onSubmit={onSubmit} initialValues={initialValues}>
-            {({ handleSubmit }) => (
+            {({ handleSubmit, submitting }) => (
                 <form onSubmit={handleSubmit}>
                     <div className={classes.form}>
                         <DataElementForm />
 
                         <StandardFormSection>
                             <ButtonStrip>
-                                <Button primary type="submit">
-                                    Save and close
+                                <Button
+                                    primary
+                                    disabled={submitting}
+                                    type="submit"
+                                >
+                                    {submitting && (
+                                        <span
+                                            className={
+                                                classes.saveButtonLoadingIcon
+                                            }
+                                        >
+                                            <CircularLoader small />
+                                        </span>
+                                    )}
+                                    Create data element
                                 </Button>
 
                                 <Button
-                                    onClick={() => {
-                                        alert(
-                                            '@TODO(Data elements/new): Implement me!'
-                                        )
-                                        navigate(-1)
-                                    }}
+                                    disabled={submitting}
+                                    onClick={() => navigate(listPath)}
                                 >
-                                    Cancel
+                                    Exit without saving
                                 </Button>
                             </ButtonStrip>
                         </StandardFormSection>

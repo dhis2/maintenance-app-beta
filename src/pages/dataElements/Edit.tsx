@@ -94,7 +94,7 @@ export const Component = () => {
 
     return (
         <Form onSubmit={onSubmit} initialValues={initialValues}>
-            {({ handleSubmit }) => (
+            {({ handleSubmit, submitting }) => (
                 <form onSubmit={handleSubmit}>
                     <div className={classes.form}>
                         <DataElementForm />
@@ -102,17 +102,22 @@ export const Component = () => {
 
                     <div className={classes.formActions}>
                         <ButtonStrip>
-                            <Button primary type="submit">
+                            <Button primary disabled={submitting} type="submit">
+                                {submitting && (
+                                    <span
+                                        className={
+                                            classes.saveButtonLoadingIcon
+                                        }
+                                    >
+                                        <CircularLoader small />
+                                    </span>
+                                )}
                                 Save and close
                             </Button>
 
                             <Button
-                                onClick={() => {
-                                    alert(
-                                        '@TODO(Data elements/edit): Implement me!'
-                                    )
-                                    navigate(-1)
-                                }}
+                                disabled={submitting}
+                                onClick={() => navigate(listPath)}
                             >
                                 Cancel
                             </Button>
