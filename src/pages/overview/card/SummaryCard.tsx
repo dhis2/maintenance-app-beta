@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom'
 import {
     getSectionNewPath,
     getSectionPath,
-} from '../../../app/routes/routePaths'
-import {
     useCanCreateModelInSection,
     useIsSectionAuthorizedPredicate,
 } from '../../../lib'
