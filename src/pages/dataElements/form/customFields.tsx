@@ -38,9 +38,9 @@ export function ColorAndIconField() {
 }
 
 export function DomainField() {
-    const name = 'domain'
-    const aggregateInput = useField(name, { type: 'radio', value: 'aggregate' })
-    const trackerInput = useField(name, { type: 'radio', value: 'tracker' })
+    const name = 'domainType'
+    const aggregateInput = useField(name, { type: 'radio', value: 'AGGREGATE' })
+    const trackerInput = useField(name, { type: 'radio', value: 'TRACKER' })
     const error = aggregateInput.meta.error || trackerInput.meta.error
 
     return (
