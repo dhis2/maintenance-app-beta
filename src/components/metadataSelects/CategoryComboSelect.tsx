@@ -25,7 +25,7 @@ function computeDisplayOptions({
     )
 
     if (selectedOption && !optionsContainSelected) {
-        return [...(options as SelectOption[]), selectedOption as SelectOption]
+        return [...options, selectedOption]
     }
 
     return options
