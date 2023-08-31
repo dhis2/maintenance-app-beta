@@ -112,7 +112,13 @@ export const SearchableSingleSelect = ({
     )
 
     return (
-        <SingleSelect selected={selected} onChange={onChange}>
+        <SingleSelect
+            // Initially we potentially have a selected value, but we might not have
+            // fetched the corresponding label yet. Therefore we don't want to pass in
+            // any value to the "selected" prop, as otherwise an error will be thrown
+            selected={hasSelectedInOptionList ? selected : ''}
+            onChange={onChange}
+        >
             <div
                 style={{
                     position: 'sticky',

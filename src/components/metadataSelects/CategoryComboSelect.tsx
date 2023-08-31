@@ -95,13 +95,6 @@ export function CategoryComboSelect({
         options: data?.result,
     })
 
-    // Initially we potentially have a selected value, but we might not have
-    // fetched the corresponding label yet. Therefore we don't want to pass in
-    // any value to the "selected" prop, as otherwise an error will be thrown
-    const showSelected = !!displayOptions.find(
-        ({ value }) => value === selected
-    )
-
     return (
         <SearchableSingleSelect
             onChange={({ selected }) => {
@@ -113,7 +106,7 @@ export function CategoryComboSelect({
             }}
             onEndReached={incrementPage}
             options={displayOptions}
-            selected={showSelected ? selected : ''}
+            selected={selected}
             showEndLoader={!loading && page < pageCount}
             onFilterChange={adjustQueryParamsWithChangedFilter}
             loading={loading}
