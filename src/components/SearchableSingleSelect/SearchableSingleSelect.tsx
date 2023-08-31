@@ -47,18 +47,12 @@ function Error({
 
 type OnChange = ({ selected }: { selected: string }) => void
 type OnFilterChange = ({ value }: { value: string }) => void
-type OnIntersectionChange = ({
-    isIntersecting,
-}: {
-    isIntersecting: boolean
-}) => void
 interface SearchableSingleSelectPropTypes {
     onChange: OnChange
     onFilterChange: OnFilterChange
-    onIntersectionChange: OnIntersectionChange
+    onEndReached: () => void
     onRetryClick: () => void
     options: Option[]
-    preventIntersectionDetection: boolean
     showEndLoader: boolean
     loading: boolean
     selected?: string
@@ -70,9 +64,8 @@ export const SearchableSingleSelect = ({
     loading,
     onChange,
     onFilterChange,
-    onIntersectionChange,
+    onEndReached,
     options,
-    preventIntersectionDetection,
     selected,
     showEndLoader,
     onRetryClick,
@@ -98,14 +91,19 @@ export const SearchableSingleSelect = ({
     useEffect(() => {
         // We don't want to wait for intersections when loading as that can
         // cause buggy behavior
-        if (loadingSpinnerRef && !preventIntersectionDetection) {
+        if (loadingSpinnerRef && !loading) {
             const observer = new IntersectionObserver(
                 (entries) => {
                     const [{ isIntersecting }] = entries
+                    const intersectionChanged =
+                        isIntersecting !== currentlyIntersecting
 
-                    if (isIntersecting !== currentlyIntersecting) {
+                    if (intersectionChanged) {
                         setCurrentlyIntersecting(isIntersecting)
-                        onIntersectionChange({ isIntersecting })
+                    }
+
+                    if (intersectionChanged && isIntersecting) {
+                        onEndReached()
                     }
                 },
                 { threshold: 0.8 }
@@ -114,12 +112,7 @@ export const SearchableSingleSelect = ({
             observer.observe(loadingSpinnerRef)
             return () => observer.disconnect()
         }
-    }, [
-        loadingSpinnerRef,
-        currentlyIntersecting,
-        preventIntersectionDetection,
-        onIntersectionChange,
-    ])
+    }, [loadingSpinnerRef, currentlyIntersecting, loading, onEndReached])
 
     const hasSelectedInOptionList = !!options.find(
         ({ value }) => value === selected

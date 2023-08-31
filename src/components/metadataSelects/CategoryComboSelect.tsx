@@ -78,13 +78,7 @@ export function CategoryComboSelect({
     )
 
     const incrementPage = useCallback(
-        ({ isIntersecting }: { isIntersecting: boolean }) => {
-            if (!isIntersecting) {
-                return false
-            }
-
-            refetch({ page: page + 1, filter: filterRef.current })
-        },
+        () => refetch({ page: page + 1, filter: filterRef.current }),
         [refetch, page]
     )
 
@@ -117,9 +111,8 @@ export function CategoryComboSelect({
                 setSelectedOption(option)
                 onChange({ selected })
             }}
-            onIntersectionChange={incrementPage}
+            onEndReached={incrementPage}
             options={displayOptions}
-            preventIntersectionDetection={loading}
             selected={showSelected ? selected : ''}
             showEndLoader={!loading && page < pageCount}
             onFilterChange={adjustQueryParamsWithChangedFilter}
