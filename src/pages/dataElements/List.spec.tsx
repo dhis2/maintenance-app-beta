@@ -38,18 +38,18 @@ const renderSection = async (customData: CustomData) => {
 }
 
 describe('Data Elements List', () => {
-    beforeEach(() => {
-        useSchemaStore.getState().setSchemas({
-            dataElement: dataElementSchemaMock,
-        } as unknown as ModelSchemas)
+    useSchemaStore.getState().setSchemas({
+        dataElement: dataElementSchemaMock,
+    } as unknown as ModelSchemas)
 
+    beforeEach(() => {
         jest.spyOn(console, 'warn').mockImplementation((value) => {
             if (!value.match(/No server timezone/)) {
                 console.warn(value)
             }
         })
     })
-    afterEach(jest.clearAllMocks)
+    afterEach(jest.restoreAllMocks)
 
     it('should show the list of elements', async () => {
         const customData = {
@@ -202,18 +202,13 @@ describe('Data Elements List', () => {
         })
         // next page
         it('should allowing going to Next page', async () => {
-            const { getByTestId } = await renderWithPager()
+            const { getByTestId, findByText, queryByText } =
+                await renderWithPager()
 
             userEvent.click(getByTestId('dhis2-uiwidgets-pagination-page-next'))
 
-            expect(pagerMock.mock.lastCall[0].params).toMatchObject(
-                expect.objectContaining({
-                    page: 2,
-                    pageListName: 'result',
-                    pageSize: 20,
-                    total: true,
-                })
-            )
+            await findByText('second page result')
+            expect(queryByText('first page result')).toBeNull()
         })
 
         // previous page
