@@ -17,7 +17,7 @@ const ADD_NEW_DATA_ELEMENT_MUTATION = {
     resource: 'dataElements',
     type: 'create',
     data: (de: object) => de,
-}
+} as const
 
 const formatFormValues = ({
     values,
@@ -101,8 +101,10 @@ export const Component = () => {
             customAttributes: customAttributesQuery.data,
         })
 
+        // We want the promise so we know when submitting is done. The promise
+        // returned by the mutation function of useDataMutation will never
+        // resolve
         return dataEngine.mutate(ADD_NEW_DATA_ELEMENT_MUTATION, {
-            type: 'create',
             variables: payload,
         })
     }
