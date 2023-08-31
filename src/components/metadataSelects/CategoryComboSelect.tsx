@@ -31,8 +31,6 @@ function computeDisplayOptions({
     return options
 }
 
-const PAGE_SIZE = 10
-
 export function CategoryComboSelect({
     onChange,
     selected,
@@ -44,7 +42,7 @@ export function CategoryComboSelect({
     // We're using this value only when imperatively calling `refetch`,
     // nothing that depends on the render-cycle depends on this value
     const filterRef = useRef('')
-    const pageSizeRef = useRef(PAGE_SIZE)
+    const pageRef = useRef(0)
 
     // We need to persist the selected option so we can display an <Option />
     // when the current list doesn't contain the selected option (e.g. when
@@ -69,17 +67,12 @@ export function CategoryComboSelect({
     const pager = data?.pager
     const page = pager?.page || 0
     const pageCount = pager?.pageCount || 0
-    const pageSize = pager?.pageSize || 0
-    const total = pager?.total || 0
 
     const adjustQueryParamsWithChangedFilter = useCallback(
         ({ value }: { value: string }) => {
             const nextFilter = value ? `name:ilike:${value}` : ''
             filterRef.current = nextFilter
-            refetch({
-                pageSize: nextFilter ? PAGE_SIZE : pageSizeRef.current,
-                filter: nextFilter,
-            })
+            refetch({ page: 0, filter: nextFilter })
         },
         [refetch]
     )
@@ -90,15 +83,9 @@ export function CategoryComboSelect({
                 return false
             }
 
-            pageSizeRef.current =
-                pageSize >= total ? pageSize : pageSize + PAGE_SIZE
-
-            refetch({
-                pageSize: pageSizeRef.current,
-                filter: filterRef.current,
-            })
+            refetch({ page: page + 1, filter: filterRef.current })
         },
-        [refetch, pageSize, total]
+        [refetch, page]
     )
 
     const loading = queryResult.loading || initialOptionQuery.loading
@@ -140,7 +127,7 @@ export function CategoryComboSelect({
             error={error}
             onRetryClick={() => {
                 refetch({
-                    pageSize: pageSizeRef.current,
+                    pageSize: pageRef.current,
                     filter: filterRef.current,
                 })
             }}
