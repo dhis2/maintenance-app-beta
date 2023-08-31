@@ -16,35 +16,31 @@ export function useOptionsQuery({
     const [loadedOptions, setLoadedOptions] = useState<SelectOption[]>([])
     const queryResult = useModelGist<CategoryComboQueryResult>(
         'categoryCombos/gist',
-        // { pageSize: 10 },
         {},
-        {
-            variables: { pageSize: 10, filter: '' },
-            onComplete: (input: unknown) => {
-                if (initialSelected && !fetchedInitialOptionRef.current) {
-                    fetchedInitialOptionRef.current = true
-
-                    const nextData = input as {
-                        result: CategoryComboQueryResult
-                    }
-                    const initiallySelectedOption =
-                        nextData?.result.result.find(
-                            (option) => option.id === initialSelected
-                        )
-
-                    if (initiallySelectedOption) {
-                        setSelectedOption({
-                            value: initialSelected as string,
-                            label: initiallySelectedOption.name,
-                        })
-                    } else if (initialSelected) {
-                        fetchInitialOption()
-                    }
-                }
-            },
-        }
+        { variables: { pageSize: 10, filter: '' } }
     )
     const { data } = queryResult
+
+    // Must be done in `useEffect` and not in `onComplete`, as `onComplete`
+    // won't get called when useDataQuery has the values in cache already
+    useEffect(() => {
+        if (data && initialSelected && !fetchedInitialOptionRef.current) {
+            fetchedInitialOptionRef.current = true
+
+            const initiallySelectedOption = data.result.find(
+                (option) => option.id === initialSelected
+            )
+
+            if (initiallySelectedOption) {
+                setSelectedOption({
+                    value: initialSelected as string,
+                    label: initiallySelectedOption.name,
+                })
+            } else if (initialSelected) {
+                fetchInitialOption()
+            }
+        }
+    }, [data, fetchInitialOption, initialSelected, setSelectedOption])
 
     // Must be done in `useEffect` and not in `onComplete`, as `onComplete`
     // won't get called when useDataQuery has the values in cache already
