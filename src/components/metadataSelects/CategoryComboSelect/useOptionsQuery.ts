@@ -19,6 +19,7 @@ const CATEGORY_COMBOS_QUERY = {
                 page: variables.page,
                 pageSize: 10,
                 fields: ['id', 'displayName', 'isDefault'],
+                order: ['isDefault:desc', 'displayName'],
             }
 
             if (variables.filter) {
