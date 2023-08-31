@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { useModelGist } from '../../lib'
-import { SelectOption } from '../../types'
+import { useModelGist } from '../../../lib'
+import { SelectOption } from '../../../types'
 import { CategoryComboQueryResult } from './types'
 
 export function useOptionsQuery({

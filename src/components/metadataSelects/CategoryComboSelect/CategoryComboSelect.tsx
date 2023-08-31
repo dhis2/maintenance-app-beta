@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { SelectOption } from '../../types'
-import { SearchableSingleSelect } from '../SearchableSingleSelect'
+import { SelectOption } from '../../../types'
+import { SearchableSingleSelect } from '../../SearchableSingleSelect'
 import { useInitialOptionQuery } from './useInitialOptionQuery'
 import { useOptionsQuery } from './useOptionsQuery'
 

@@ -1,1 +1,1 @@
-export { CategoryComboSelect } from './CategoryComboSelect'
+export * from './CategoryComboSelect'

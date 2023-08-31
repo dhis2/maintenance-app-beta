@@ -1,5 +1,5 @@
 import { useDataQuery } from '@dhis2/app-runtime'
-import { SelectOption } from '../../types'
+import { SelectOption } from '../../../types'
 import { FilteredCategoryCombo } from './types'
 
 type InitialCategoryComboQueryResult = {
