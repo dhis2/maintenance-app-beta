@@ -25,5 +25,5 @@ const translations: { [key: string]: string } = {
 }
 
 export function translateAggregationType(valueType: string) {
-    return translations[valueType] || ''
+    return translations[valueType] || valueType
 }

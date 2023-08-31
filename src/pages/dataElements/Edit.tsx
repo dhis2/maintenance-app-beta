@@ -77,6 +77,7 @@ function computeInitialValues({
         color: dataElement.style?.color,
         icon: dataElement.style?.icon,
         fieldMask: dataElement.fieldMask,
+        domainType: dataElement.domainType,
         formName: dataElement.formName,
         valueType: dataElement.valueType,
         aggregationType: dataElement.aggregationType,
@@ -84,7 +85,7 @@ function computeInitialValues({
         optionSet: '', // dataElement.optionSet,
         commentOptionSet: '', // dataElement.commentOptionSet,
         legendSet: [], // dataElement.legendSet || [],
-        aggregationLevels: dataElement.aggregationLevels,
+        aggregationLevels: [], // dataElement.aggregationLevels || [],
         attributeValues: customAttributeInitialValues,
     }
 }

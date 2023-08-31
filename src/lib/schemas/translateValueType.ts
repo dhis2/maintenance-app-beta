@@ -32,5 +32,5 @@ const translations: { [key: string]: string } = {
 }
 
 export function translateValueType(valueType: string) {
-    return translations[valueType] || ''
+    return translations[valueType] || valueType
 }
