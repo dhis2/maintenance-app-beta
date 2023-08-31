@@ -70,7 +70,6 @@ export const SearchableSingleSelect = ({
     showEndLoader,
     onRetryClick,
 }: SearchableSingleSelectPropTypes) => {
-    const [currentlyIntersecting, setCurrentlyIntersecting] = useState(false)
     const [loadingSpinnerRef, setLoadingSpinnerRef] = useState<HTMLElement>()
     const debouncedOnFilterChange = useDebouncedCallback<OnFilterChange>(
         (args) => onFilterChange(args),
@@ -95,14 +94,8 @@ export const SearchableSingleSelect = ({
             const observer = new IntersectionObserver(
                 (entries) => {
                     const [{ isIntersecting }] = entries
-                    const intersectionChanged =
-                        isIntersecting !== currentlyIntersecting
 
-                    if (intersectionChanged) {
-                        setCurrentlyIntersecting(isIntersecting)
-                    }
-
-                    if (intersectionChanged && isIntersecting) {
+                    if (isIntersecting) {
                         onEndReached()
                     }
                 },
@@ -112,7 +105,7 @@ export const SearchableSingleSelect = ({
             observer.observe(loadingSpinnerRef)
             return () => observer.disconnect()
         }
-    }, [loadingSpinnerRef, currentlyIntersecting, loading, onEndReached])
+    }, [loadingSpinnerRef, loading, onEndReached])
 
     const hasSelectedInOptionList = !!options.find(
         ({ value }) => value === selected
