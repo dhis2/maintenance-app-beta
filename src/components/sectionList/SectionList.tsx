@@ -30,6 +30,7 @@ export const SectionList = <Model extends IdentifiableObject>({
                 <DataTableRow>
                     <DataTableColumnHeader width="48px">
                         <Checkbox
+                            dataTest="section-list-selectall"
                             checked={allSelected}
                             onChange={({ checked }: CheckBoxOnChangeObject) =>
                                 onSelectAll(checked)

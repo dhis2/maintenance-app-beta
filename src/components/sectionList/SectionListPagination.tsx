@@ -153,7 +153,7 @@ export const SectionListPagination = ({ data }: SectionListPaginationProps) => {
     )
 
     return (
-        <DataTableRow>
+        <DataTableRow dataTest="section-list-pagination">
             <DataTableCell colSpan="100%">
                 <Pagination
                     pageSizes={PAGE_SIZES.map((s) => s.toString())}

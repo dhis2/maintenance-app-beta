@@ -26,9 +26,13 @@ export function SectionListRow<Model extends IdentifiableObject>({
     renderValue,
 }: SectionListRowProps<Model>) {
     return (
-        <DataTableRow className={css.listRow}>
+        <DataTableRow
+            className={css.listRow}
+            dataTest={`section-list-row-${modelData.id}`}
+        >
             <DataTableCell width="48px">
                 <Checkbox
+                    dataTest="section-list-row-checkbox"
                     checked={selected}
                     onChange={({ checked }: CheckBoxOnChangeObject) => {
                         onSelect(modelData.id, checked)

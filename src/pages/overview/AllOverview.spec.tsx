@@ -18,7 +18,6 @@ jest.mock('../../lib', () => {
 })
 
 beforeEach(() => {
-    configure({ testIdAttribute: 'data-test' })
     mockedUseIsSectionAuthorizedPredicate.mockReset()
     mockedUseIsSectionAuthorizedPredicate.mockImplementation(() => () => true)
 })

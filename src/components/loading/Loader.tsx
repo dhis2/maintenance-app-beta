@@ -24,7 +24,10 @@ export const Loader = ({ children, queryResponse, label }: LoaderProps) => {
 
         const finalMessage = `${labelMessage}${errorMessage}.`
         return (
-            <NoticeBox title={i18n.t('Failed to load')}>
+            <NoticeBox
+                dataTest="loader-notice-box"
+                title={i18n.t('Failed to load')}
+            >
                 {finalMessage}
             </NoticeBox>
         )

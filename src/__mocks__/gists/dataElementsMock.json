@@ -1,0 +1,125 @@
+{
+    "pager": {
+        "page": 1,
+        "pageSize": 5,
+        "total": 1061,
+        "nextPage": "/dataElements/gist?pageListName=result&total=true&order=name:ASC&fields=access,id,name,code,domainType,valueType,lastUpdated,sharing&pageSize=5&page=2",
+        "pageCount": 213
+    },
+    "result": [
+        {
+            "access": {
+                "manage": true,
+                "externalize": false,
+                "write": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
+            "id": "FTRrcoaog83",
+            "name": "Accute Flaccid Paralysis (Deaths < 5 yrs)",
+            "code": "DE_1148614",
+            "domainType": "AGGREGATE",
+            "valueType": "NUMBER",
+            "lastUpdated": "2017-05-19T15:13:52.488",
+            "sharing": {
+                "owner": "GOLswS44mh8",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            }
+        },
+        {
+            "access": {
+                "manage": true,
+                "externalize": false,
+                "write": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
+            "id": "P3jJH5Tu5VC",
+            "name": "Acute Flaccid Paralysis (AFP) follow-up",
+            "code": "DE_359049",
+            "domainType": "AGGREGATE",
+            "valueType": "NUMBER",
+            "lastUpdated": "2017-05-19T15:13:52.487",
+            "sharing": {
+                "owner": "GOLswS44mh8",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            }
+        },
+        {
+            "access": {
+                "manage": true,
+                "externalize": false,
+                "write": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
+            "id": "FQ2o8UBlcrS",
+            "name": "Acute Flaccid Paralysis (AFP) new",
+            "code": "DE_388",
+            "domainType": "AGGREGATE",
+            "valueType": "NUMBER",
+            "lastUpdated": "2017-05-19T15:13:52.487",
+            "sharing": {
+                "owner": "GOLswS44mh8",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            }
+        },
+        {
+            "access": {
+                "manage": true,
+                "externalize": false,
+                "write": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
+            "id": "M62VHgYT2n0",
+            "name": "Acute Flaccid Paralysis (AFP) referrals",
+            "code": "DE_358943",
+            "domainType": "AGGREGATE",
+            "valueType": "NUMBER",
+            "lastUpdated": "2014-11-11T21:56:05.787",
+            "sharing": {
+                "owner": "GOLswS44mh8",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            }
+        },
+        {
+            "access": {
+                "manage": true,
+                "externalize": false,
+                "write": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
+            "id": "WO8yRIZb7nb",
+            "name": "Additional medication",
+            "domainType": "TRACKER",
+            "valueType": "TEXT",
+            "lastUpdated": "2019-08-21T13:08:02.032",
+            "sharing": {
+                "owner": "xE7jOejl9FI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "r-------"
+            }
+        }
+    ]
+}
