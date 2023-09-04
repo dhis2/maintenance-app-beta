@@ -38,18 +38,17 @@ const renderSection = async (customData: CustomData) => {
 }
 
 describe('Data Elements List', () => {
+    jest.spyOn(console, 'warn').mockImplementation((value) => {
+        if (!value.match(/No server timezone/)) {
+            console.warn(value)
+        }
+    })
+
     useSchemaStore.getState().setSchemas({
         dataElement: dataElementSchemaMock,
     } as unknown as ModelSchemas)
 
-    beforeEach(() => {
-        jest.spyOn(console, 'warn').mockImplementation((value) => {
-            if (!value.match(/No server timezone/)) {
-                console.warn(value)
-            }
-        })
-    })
-    afterEach(jest.restoreAllMocks)
+    afterAll(jest.restoreAllMocks)
 
     it('should show the list of elements', async () => {
         const customData = {
