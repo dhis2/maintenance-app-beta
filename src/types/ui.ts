@@ -20,3 +20,8 @@ export type SelectOnChangeObject = {
     selected: string | undefined
 }
 export type SelectOnChange = (value: SelectOnChangeObject) => void
+
+export interface SelectOption {
+    value: string
+    label: string
+}
