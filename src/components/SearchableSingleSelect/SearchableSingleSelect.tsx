@@ -119,22 +119,24 @@ export const SearchableSingleSelect = ({
             selected={hasSelectedInOptionList ? selected : ''}
             onChange={onChange}
         >
-            <div
-                style={{
-                    position: 'sticky',
-                    top: '0',
-                    padding: 16,
-                    boxShadow: '0 0 4px rgba(0,0,0,0.4)',
-                    background: 'white',
-                }}
-            >
-                <Input
-                    dense
-                    value={filterValue}
-                    onChange={({ value }: { value: string }) =>
-                        setFilterValue(value)
-                    }
-                />
+            <div className={classes.searchField}>
+                <div className={classes.searchInput}>
+                    <Input
+                        dense
+                        value={filterValue}
+                        onChange={({ value }: { value: string }) =>
+                            setFilterValue(value)
+                        }
+                    />
+                </div>
+
+                <button
+                    className={classes.clearButton}
+                    disabled={!filterValue}
+                    onClick={() => setFilterValue('')}
+                >
+                    clear
+                </button>
             </div>
 
             {options.map(({ value, label }) => (

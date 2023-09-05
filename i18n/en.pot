@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-05T12:02:32.050Z\n"
-"PO-Revision-Date: 2023-09-05T12:02:32.050Z\n"
+"POT-Creation-Date: 2023-09-05T12:02:44.326Z\n"
+"PO-Revision-Date: 2023-09-05T12:02:44.326Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -53,6 +53,9 @@ msgstr "Failed to load {{label}}"
 
 msgid "Failed to load"
 msgstr "Failed to load"
+
+msgid "None"
+msgstr "None"
 
 msgid "Actions"
 msgstr "Actions"
@@ -404,9 +407,6 @@ msgstr "Min (sum in org unit)"
 
 msgid "Max (sum in org unit)"
 msgstr "Max (sum in org unit)"
-
-msgid "None"
-msgstr "None"
 
 msgid "Custom"
 msgstr "Custom"

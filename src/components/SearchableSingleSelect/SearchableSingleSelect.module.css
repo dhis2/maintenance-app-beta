@@ -36,3 +36,33 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+.searchField {
+    display: flex;
+    gap: var(--spacers-dp8);
+    position: sticky;
+    top: 0;
+    padding: var(--spacers-dp16);
+    boxShadow: 0 0 4px rgba(0,0,0,0.4);
+    background: var(--colors-white);
+}
+
+.searchInput {
+    flex-grow: 1;
+}
+
+.clearButton {
+    font-size: 14px;
+    flex-grow: 0;
+    background: none;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.clearButton:hover {
+    color: var(--theme-valid);
+    text-decoration: none;
+}
