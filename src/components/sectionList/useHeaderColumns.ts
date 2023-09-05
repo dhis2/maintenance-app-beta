@@ -1,15 +1,14 @@
 import { useMemo } from 'react'
-import { getTranslatedProperty } from '../../constants'
-import { useSelectedColumns } from './listView/useSelectedColumns'
+import { useModelListView } from './listView'
 import type { SelectedColumn } from './types'
 
 export const useHeaderColumns = () => {
-    const { columns } = useSelectedColumns()
+    const { columns } = useModelListView()
 
     const headerColumns: SelectedColumn[] = useMemo(() => {
         return columns.map((c) => ({
-            modelPropertyName: c,
-            label: getTranslatedProperty(c),
+            modelPropertyName: c.path,
+            label: c.label,
         }))
     }, [columns])
     return { headerColumns }

@@ -1,29 +1,36 @@
-import { uniq } from 'remeda'
+import { uniq, uniqBy } from 'remeda'
 import { SectionName } from './sections'
+import { getTranslatedProperty } from './translatedModelProperties'
 
-interface ViewConfigPart {
-    available?: string[]
-    overrideDefaultAvailable?: boolean
-    default: string[]
+interface ModelPropertyDescriptor {
+    label: string
+    path: string
 }
 
-type ViewConfig = {
+type ModelPropertyConfig = string | ModelPropertyDescriptor
+interface ViewConfigPart {
+    available?: ModelPropertyConfig[]
+    overrideDefaultAvailable?: boolean
+    default: ModelPropertyConfig[]
+}
+
+interface ViewConfig {
     columns: ViewConfigPart
     filters: ViewConfigPart
 }
 
-type ResolvedViewConfigPart = {
-    available: string[]
-    default: string[]
+interface ResolvedViewConfigPart {
+    available: ModelPropertyDescriptor[]
+    default: ModelPropertyDescriptor[]
 }
-type ResolvedViewConfig = {
+interface ResolvedViewConfig {
     columns: ResolvedViewConfigPart
     filters: ResolvedViewConfigPart
 }
 
 // generic here is just used for "satisfies" below, for code-completion of future customizations
 type SectionListViewConfig<Key extends string = string> = {
-    [key in Key]?: ResolvedViewConfig
+    [key in Key]?: ViewConfig
 }
 
 // This is the default views, and can be overriden per section in modelListViewsConfig below
@@ -73,19 +80,35 @@ const modelListViewsConfig = {
     },
 } satisfies SectionListViewConfig<SectionName>
 
-const mergeArraysUnique = <T>(...arrays: T[][]): T[] => uniq(arrays.flat())
+const toModelPropertyDescriptor = (propertyConfig: ModelPropertyConfig) => {
+    if (typeof propertyConfig === 'string') {
+        return {
+            label: getTranslatedProperty(propertyConfig),
+            path: propertyConfig,
+        }
+    }
+    return propertyConfig
+}
 
 const resolveViewPart = (part: ViewConfigPart, type: keyof ViewConfig) => {
-    const mergedAvailable = mergeArraysUnique(
-        part.default,
-        part.available || [],
-        part.overrideDefaultAvailable
-            ? []
-            : defaultModelViewConfig[type].available
+    const mergedAvailableDescriptors = uniqBy(
+        [
+            part.default,
+            part.available || [],
+            part.overrideDefaultAvailable
+                ? []
+                : defaultModelViewConfig[type].available,
+        ]
+            .flat()
+            .map(toModelPropertyDescriptor),
+        (prop) => prop.path
     )
+    const defaultPropConfig =
+        part.default || defaultModelViewConfig[type].default
+    const defaultDescriptors = defaultPropConfig.map(toModelPropertyDescriptor)
     return {
-        available: mergedAvailable,
-        default: part.default || defaultModelViewConfig[type].default,
+        available: mergedAvailableDescriptors,
+        default: defaultDescriptors,
     }
 }
 // merge the default modelViewConfig with the modelViewsConfig for each section
@@ -103,17 +126,23 @@ const resolveListViewsConfig = () => {
 }
 
 const mergedModelViewsConfig = resolveListViewsConfig()
+const resolvedDefaultConfig = {
+    columns: resolveViewPart(defaultModelViewConfig.columns, 'columns'),
+    filters: resolveViewPart(defaultModelViewConfig.filters, 'filters'),
+}
 
-export const getViewForSection = (sectionName: string): ResolvedViewConfig => {
+export const getViewConfigForSection = (
+    sectionName: string
+): ResolvedViewConfig => {
     if (mergedModelViewsConfig[sectionName]) {
         return mergedModelViewsConfig[sectionName] as ResolvedViewConfig
     }
-    return defaultModelViewConfig
+    return resolvedDefaultConfig
 }
 
 export const getColumnsForSection = (
     sectionName: string
 ): ResolvedViewConfig['columns'] => {
-    const view = getViewForSection(sectionName)
+    const view = getViewConfigForSection(sectionName)
     return view.columns
 }

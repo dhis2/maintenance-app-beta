@@ -4,9 +4,8 @@ import {
     DomainTypeSelectionFilter,
     ValueTypeSelectionFilter,
     useQueryParamsForModelGist,
-    useSectionListParamsRefetch,
 } from '../../components'
-import { useSelectedColumns } from '../../components/sectionList/listView/useSelectedColumns'
+import { useModelListView } from '../../components/sectionList/listView'
 import { useModelGist } from '../../lib/'
 import { DataElement, GistCollectionResponse } from '../../types/models'
 
@@ -26,7 +25,7 @@ type FilteredDataElement = Pick<DataElement, (typeof filterFields)[number]>
 type DataElements = GistCollectionResponse<FilteredDataElement>
 
 export const Component = () => {
-    const { columns, query } = useSelectedColumns()
+    const { columns, query: listViewQuery } = useModelListView()
     const initialParams = useQueryParamsForModelGist()
     const { refetch, error, data } = useModelGist<DataElements>(
         'dataElements/gist',
@@ -34,23 +33,20 @@ export const Component = () => {
             fields: filterFields.concat(),
             ...initialParams,
         },
-        // refetched on mount by useSectionListParamsRefetch below
+        // refetched on mount by effect below
         { lazy: true }
     )
-
     useEffect(() => {
-        console.log(query.isPlaceholderData)
         // wait to fetch until selected-columns are loaded
         // so we dont fetch data multiple times
-        if (query.isPlaceholderData) {
+        if (listViewQuery.isLoading) {
             return
         }
         refetch({
             ...initialParams,
-            fields: columns.concat('id'),
+            fields: columns.map((c) => c.path).concat('id'),
         })
-    }, [refetch, initialParams, columns, query.isPlaceholderData])
-    //useSectionListParamsRefetch(refetch)
+    }, [refetch, initialParams, columns, listViewQuery.isLoading])
 
     return (
         <div>

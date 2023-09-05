@@ -4,7 +4,7 @@ import { IconAdd24 } from '@dhis2/ui-icons'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { routePaths } from '../../app/routes/routePaths'
-import { ManageColumnsDialog } from './listView/ManageColumns'
+import { ManageListViewDialog } from './listView/ManageListViewDialog'
 import css from './SectionList.module.css'
 
 export const SelectionListHeader = () => {
@@ -22,7 +22,9 @@ export const SelectionListHeader = () => {
             <Button small onClick={() => setManageColumnsOpen((prev) => !prev)}>
                 {i18n.t('Manage Columns')}
             </Button>
-            {manageColumnsOpen && <ManageColumnsDialog onClose={handleClose} />}
+            {manageColumnsOpen && (
+                <ManageListViewDialog onClose={handleClose} />
+            )}
         </div>
     )
 }

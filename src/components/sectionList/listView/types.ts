@@ -2,21 +2,16 @@ import { SectionName } from '../../../constants'
 
 export interface ModelListView {
     name: string
-    sectionModel: SectionName
-    columns: Array<ModelListViewColumn>
-    filters: Array<ModelListViewFilter>
+    sectionModel: string
+    columns: Array<ViewPropertyDescriptor>
+    filters: Array<ViewPropertyDescriptor>
 }
 
 export type ModelListViews = {
-    [key in SectionName]?: ModelListView
+    [key in SectionName]?: ModelListView[]
 }
 
-interface ModelListViewColumn {
+export interface ViewPropertyDescriptor {
     label: string
-    path: string
-}
-
-interface ModelListViewFilter {
-    name: string
     path: string
 }
