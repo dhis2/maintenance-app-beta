@@ -1,4 +1,5 @@
 import { useDataQuery } from '@dhis2/app-runtime'
+import { useRef } from 'react'
 import { SelectOption } from '../../../types'
 import { FilteredCategoryCombo } from './types'
 
@@ -23,8 +24,9 @@ export function useInitialOptionQuery({
     onComplete: (option: SelectOption) => void
     selected?: string
 }) {
+    const initialSelected = useRef(selected)
     return useDataQuery<InitialCategoryComboQueryResult>(INITIAL_OPTION_QUERY, {
-        lazy: true,
+        lazy: !initialSelected.current,
         variables: { id: selected },
         onComplete: (data) => {
             const categoryCombo = data.categoryCombo

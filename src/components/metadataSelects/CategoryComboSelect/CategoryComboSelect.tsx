@@ -50,20 +50,13 @@ export function CategoryComboSelect({
     // filtering)
     const [selectedOption, setSelectedOption] = useState<SelectOption>()
 
-    const { refetch: fetchInitialOption, ...initialOptionQuery } =
-        useInitialOptionQuery({
-            selected,
-            onComplete: setSelectedOption,
-        })
-
-    const queryResult = useOptionsQuery({
-        // the selected value will only be used when parsing the initial result,
-        // and then never again, so there's no need to persist the first value
-        initialSelected: selected,
-        setSelectedOption,
-        fetchInitialOption,
+    const optionsQuery = useOptionsQuery()
+    const initialOptionQuery = useInitialOptionQuery({
+        selected,
+        onComplete: setSelectedOption,
     })
-    const { refetch, data } = queryResult
+
+    const { refetch, data } = optionsQuery
     const pager = data?.pager
     const page = pager?.page || 0
     const pageCount = pager?.pageCount || 0
@@ -82,9 +75,9 @@ export function CategoryComboSelect({
         [refetch, page]
     )
 
-    const loading = queryResult.loading || initialOptionQuery.loading
+    const loading = optionsQuery.loading || initialOptionQuery.loading
     const error =
-        queryResult.error || initialOptionQuery.error
+        optionsQuery.error || initialOptionQuery.error
             ? // @TODO: Ask Joe what do do here!
               'An error has occurred. Please try again'
             : ''

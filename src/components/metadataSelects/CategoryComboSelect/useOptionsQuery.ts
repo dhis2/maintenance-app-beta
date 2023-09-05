@@ -1,6 +1,6 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { SelectOption } from '../../../types'
 import { CategoryCombo, Pager } from '../../../types/generated'
 
@@ -34,16 +34,7 @@ const CATEGORY_COMBOS_QUERY = {
     },
 }
 
-export function useOptionsQuery({
-    initialSelected,
-    setSelectedOption,
-    fetchInitialOption,
-}: {
-    setSelectedOption: (option: SelectOption) => void
-    fetchInitialOption: () => void
-    initialSelected?: string
-}) {
-    const fetchedInitialOptionRef = useRef(false)
+export function useOptionsQuery() {
     const [loadedOptions, setLoadedOptions] = useState<SelectOption[]>([])
     // The gist doesn't include the `isDefault` value, need to use `useDataQuery`
     const queryResult = useDataQuery<CategoryComboQueryResult>(
@@ -56,28 +47,6 @@ export function useOptionsQuery({
         }
     )
     const { data } = queryResult
-
-    // Must be done in `useEffect` and not in `onComplete`, as `onComplete`
-    // won't get called when useDataQuery has the values in cache already
-    useEffect(() => {
-        if (data && initialSelected && !fetchedInitialOptionRef.current) {
-            fetchedInitialOptionRef.current = true
-
-            const initiallySelectedOption =
-                data.categoryCombos.categoryCombos.find(
-                    (option) => option.id === initialSelected
-                )
-
-            if (initiallySelectedOption) {
-                setSelectedOption({
-                    value: initialSelected as string,
-                    label: initiallySelectedOption.displayName,
-                })
-            } else if (initialSelected) {
-                fetchInitialOption()
-            }
-        }
-    }, [data, fetchInitialOption, initialSelected, setSelectedOption])
 
     // Must be done in `useEffect` and not in `onComplete`, as `onComplete`
     // won't get called when useDataQuery has the values in cache already
