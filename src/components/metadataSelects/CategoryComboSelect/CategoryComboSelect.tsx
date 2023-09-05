@@ -34,9 +34,11 @@ function computeDisplayOptions({
 export function CategoryComboSelect({
     onChange,
     selected,
+    showAllOption,
 }: {
     onChange: ({ selected }: { selected: string }) => void
     selected?: string
+    showAllOption?: boolean
 }) {
     // Using a ref because we don't want to react to changes.
     // We're using this value only when imperatively calling `refetch`,
@@ -90,11 +92,17 @@ export function CategoryComboSelect({
 
     return (
         <SearchableSingleSelect
+            showAllOption={showAllOption}
             onChange={({ selected }) => {
-                const option = data.result.find(
-                    ({ value }) => value === selected
-                )
-                setSelectedOption(option)
+                if (selected === selectedOption?.value) {
+                    setSelectedOption(undefined)
+                } else {
+                    const option = data.result.find(
+                        ({ value }) => value === selected
+                    )
+                    setSelectedOption(option)
+                }
+
                 onChange({ selected })
             }}
             onEndReached={incrementPage}

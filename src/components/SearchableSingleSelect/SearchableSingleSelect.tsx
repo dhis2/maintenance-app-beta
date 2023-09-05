@@ -57,9 +57,11 @@ interface SearchableSingleSelectPropTypes {
     loading: boolean
     selected?: string
     error?: string
+    showAllOption?: boolean
 }
 
 export const SearchableSingleSelect = ({
+    showAllOption,
     error,
     loading,
     onChange,
@@ -111,6 +113,10 @@ export const SearchableSingleSelect = ({
         ({ value }) => value === selected
     )
 
+    const withAllOptions = showAllOption
+        ? [{ value: '', label: i18n.t('All') }, ...options]
+        : options
+
     return (
         <SingleSelect
             // Initially we potentially have a selected value, but we might not have
@@ -118,6 +124,7 @@ export const SearchableSingleSelect = ({
             // any value to the "selected" prop, as otherwise an error will be thrown
             selected={hasSelectedInOptionList ? selected : ''}
             onChange={onChange}
+            placeholder={i18n.t('Category combo')}
         >
             <div className={classes.searchField}>
                 <div className={classes.searchInput}>
@@ -139,7 +146,7 @@ export const SearchableSingleSelect = ({
                 </button>
             </div>
 
-            {options.map(({ value, label }) => (
+            {withAllOptions.map(({ value, label }) => (
                 <SingleSelectOption key={value} value={value} label={label} />
             ))}
 
