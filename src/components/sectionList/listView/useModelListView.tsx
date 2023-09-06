@@ -1,14 +1,14 @@
 import { useMemo, useCallback } from 'react'
 import { useQueryClient } from 'react-query'
 import { z } from 'zod'
-import { SECTIONS_MAP, getViewConfigForSection } from '../../../constants'
+import { getViewConfigForSection, sectionNames } from '../../../constants'
 import { useModelSectionHandleOrThrow } from '../../../lib'
 import { useDataStoreValues } from '../../../lib/dataStore'
 import {
     queryCreators,
     useMutateDataStoreValues,
 } from '../../../lib/dataStore/useDataStore'
-import { ModelListView } from './types'
+import { ModelListView, ViewPropertyDescriptor } from './types'
 
 const maintenanceNamespace = 'maintenance'
 const configurableColumnsKey = 'modelListViews'
@@ -29,7 +29,15 @@ const modelListViewSchema = z.object({
 
 type DataModelListView = z.infer<typeof modelListViewSchema>
 
-const modelListViewsSchema = z.record(z.array(modelListViewSchema).length(1)) // TODO: support only one view for now - but update this to support multiple views
+const modelListViewsSchema = z
+    // TODO: support only one view for now - but update this to support multiple views
+    .record(
+        z
+            .string()
+            .refine((val) => sectionNames.has(val), 'Not a valid section'),
+        z.array(modelListViewSchema).length(1)
+    )
+    .refine((val) => Object.keys(val).length > 0)
 type DataModelListViews = z.infer<typeof modelListViewsSchema>
 
 const getDefaultViewForSection = (sectionName: string): ModelListView => {
@@ -55,14 +63,15 @@ const parseViewToModelListView = (
     const viewConfig = getViewConfigForSection(name)
 
     const parsedView = listView.data
-    // map to config to make sure we don't use invalid column
-    const columns = viewConfig.columns.available
-        .filter((col) => parsedView.columns.includes(col.path))
-        .map((c) => ({
-            ...c,
-            path: c.path.replace('displayName', 'name'),
-            // .replace(/(.*)\[.+\]/, '$1'),
-        }))
+
+    const availableColumnsMap = new Map(
+        viewConfig.columns.available.map((c) => [c.path, c] as const)
+    )
+    // map to config to make sure we don't use invalid columns
+    // Preserve order by mapping from parsedView to config-object
+    const columns = parsedView.columns
+        .filter((col) => availableColumnsMap.has(col))
+        .map((col) => availableColumnsMap.get(col) as ViewPropertyDescriptor)
 
     const filters = viewConfig.filters.available.filter((col) =>
         parsedView.filters.includes(col.path)
@@ -70,8 +79,8 @@ const parseViewToModelListView = (
 
     return {
         ...parsedView,
-        columns: columns.length < 1 ? viewConfig.columns.default : columns,
-        filters: filters.length < 1 ? viewConfig.columns.default : filters,
+        columns,
+        filters,
     }
 }
 
@@ -96,6 +105,7 @@ const formatViewToDataStore = (
 const createValidViewSelect = (sectionName: string) => {
     return (data: DataModelListViews): ModelListView => {
         const modelListViews = modelListViewsSchema.safeParse(data)
+
         if (!modelListViews.success) {
             console.warn('Failed to parse modelListViews', modelListViews.error)
             return getDefaultViewForSection(sectionName)

@@ -380,6 +380,10 @@ export const SECTIONS_MAP = {
     ...NON_SCHEMA_SECTION,
 } as const satisfies SectionMap
 
+export const sectionNames = new Set<string>(
+    Object.values(SECTIONS_MAP).map((section) => section.name)
+)
+
 export type SectionKey = keyof typeof SECTIONS_MAP
 export type SectionName =
     (typeof SECTIONS_MAP)[keyof typeof SECTIONS_MAP]['name']
