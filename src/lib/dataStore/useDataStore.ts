@@ -1,10 +1,4 @@
-import {
-    FetchError,
-    useDataEngine,
-    useDataMutation,
-    useDataQuery,
-} from '@dhis2/app-runtime'
-import { useMemo } from 'react'
+import { useDataEngine } from '@dhis2/app-runtime'
 import {
     useQuery,
     useMutation,
@@ -23,21 +17,12 @@ type GetMutationTypeUnion<MutationType extends string> = {
 }
 type UpdateMutationTypeUnion = GetMutationTypeUnion<'update'>
 type UpdateMutation = Extract<Mutation, UpdateMutationTypeUnion>
-type CreateMutation = Extract<Mutation, GetMutationTypeUnion<'create'>>
 type UpdateMutationData = UpdateMutation['data']
-// type UpdateMutation = { type: 'update' | 'replace' | 'json-patch'; /* other properties */ };
-// type DeleteMutation = { type: 'delete'; /* other properties */ };
-
-//type Mutation = UpdateMutation | DeleteMutation;
 
 type DataStoreOptions = {
     namespace: string
     key?: string
     global?: boolean
-}
-
-type WrapInResult<TResult> = {
-    result: TResult
 }
 
 type ObjectResult = Record<string, any>
@@ -70,17 +55,6 @@ export const queryCreators = {
             resource: `${getDataStoreResource(global)}`,
             id: `${namespace}/${key}`,
         },
-    }),
-    createKey: <TData>({
-        namespace,
-        global,
-        key,
-        data,
-    }: SetValuesOptions<TData>): CreateMutation => ({
-        resource: `${getDataStoreResource(global)}/${namespace}/${key}`,
-        type: 'create',
-        // engine enforces data to be an object with keys, but can actually store any JSON-value
-        data: data as CreateMutation['data'],
     }),
     setValues: <TData>({
         namespace,
@@ -149,23 +123,7 @@ export const useMutateDataStoreValues = (options: ValuesOptions) => {
             global: mergedOptions.global,
             data,
         })
-        try {
-            return await engine.mutate(mutation)
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (error: any) {
-            // if namespace or key does not exist, create it
-            if (error.details?.httpStatusCode === 404) {
-                const mut = queryCreators.createKey({
-                    namespace: mergedOptions.namespace,
-                    key: mergedOptions.key,
-                    global: mergedOptions.global,
-                    data,
-                })
-                return engine.mutate(mut)
-            } else {
-                throw error
-            }
-        }
+        return await engine.mutate(mutation)
     }
     const mutation = useMutation({
         mutationFn,
