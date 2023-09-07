@@ -1,11 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
-import {
-    InputFieldFF,
-    SingleSelectFieldFF,
-    MultiSelectFieldFF,
-    TextAreaFieldFF,
-} from '@dhis2/ui'
-import React, { useState } from 'react'
+import { InputFieldFF, TextAreaFieldFF } from '@dhis2/ui'
+import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import {
     StandardFormSection,
@@ -16,58 +11,22 @@ import {
 import { CustomAttributes } from './CustomAttributes'
 import {
     AggregationTypeField,
+    AggregationLevelsField,
+    CategoryComboField,
     ColorAndIconField,
     DomainField,
     LegendSetField,
+    OptionSetField,
+    OptionSetCommentField,
     ValueTypeField,
 } from './customFields'
-import { EditableFieldWrapper } from './EditableFieldWrapper'
-import {
-    useAddAggregationLevelMutation,
-    useAddCategoryComboMutation,
-    useAddLegendMutation,
-    useAddCommentOptionSetMutation,
-    useAddOptionSetMutation,
-    useAggregationLevelsQuery,
-    useCategoryCombosQuery,
-    useCustomAttributesQuery,
-    useCommentOptionSetsQuery,
-    useOptionSetsQuery,
-} from './hooks'
+import { useCustomAttributesQuery } from './hooks'
 
 export function DataElementFormFields() {
     const customAttributes = useCustomAttributesQuery()
-    const categoryCombos = useCategoryCombosQuery()
-    const optionSets = useOptionSetsQuery()
-    const commentOptionSets = useCommentOptionSetsQuery()
-    const aggregationLevels = useAggregationLevelsQuery()
 
-    const [addingCategoryCombo, setAddingCategoryCombo] = useState(false)
-    const [addingOptionSet, setAddingOptionSet] = useState(false)
-    const [addingCommentOptionSet, setAddingCommentOptionSet] = useState(false)
-    const [addingAggregationLevel, setAddingAggregationLevel] = useState(false)
-
-    // @TODO(DataElementForm): Use these
-    /* eslint-disable @typescript-eslint/no-unused-vars */
-    const [addLegend] = useAddLegendMutation()
-    const [addCategoryCombo] = useAddCategoryComboMutation()
-    const [addOptionSet] = useAddOptionSetMutation()
-    const [addCommentOptionSet] = useAddCommentOptionSetMutation()
-    const [addAggregationLevel] = useAddAggregationLevelMutation()
-    /* eslint-enable @typescript-eslint/no-unused-vars */
-
-    const loading =
-        categoryCombos.loading ||
-        optionSets.loading ||
-        commentOptionSets.loading ||
-        aggregationLevels.loading ||
-        customAttributes.loading
-    const error =
-        categoryCombos.error ||
-        optionSets.error ||
-        commentOptionSets.error ||
-        aggregationLevels.error ||
-        customAttributes.error
+    const loading = customAttributes.loading
+    const error = customAttributes.error
 
     if (loading) {
         return <>@TODO(DataElementForm): Loading</>
@@ -203,60 +162,15 @@ export function DataElementFormFields() {
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
-                    <EditableFieldWrapper
-                        onRefresh={categoryCombos.refetch}
-                        onAddNew={() => setAddingCategoryCombo(true)}
-                    >
-                        <FieldRFF
-                            required
-                            component={SingleSelectFieldFF}
-                            name="categoryCombo"
-                            inputWidth="400px"
-                            label={i18n.t('Category combination (required)')}
-                            helpText={i18n.t(
-                                'Choose how this data element is disaggregated'
-                            )}
-                            options={categoryCombos.data}
-                        />
-                    </EditableFieldWrapper>
+                    <CategoryComboField />
                 </StandardFormField>
 
                 <StandardFormField>
-                    <EditableFieldWrapper
-                        onRefresh={optionSets.refetch}
-                        onAddNew={() => setAddingOptionSet(true)}
-                    >
-                        <FieldRFF
-                            required
-                            component={SingleSelectFieldFF}
-                            name="optionSet"
-                            inputWidth="400px"
-                            options={optionSets.data}
-                            label={i18n.t('Option set')}
-                            helpText={i18n.t(
-                                'Choose a set of predefined options for data entry'
-                            )}
-                        />
-                    </EditableFieldWrapper>
+                    <OptionSetField />
                 </StandardFormField>
 
                 <StandardFormField>
-                    <EditableFieldWrapper
-                        onRefresh={commentOptionSets.refetch}
-                        onAddNew={() => setAddingCommentOptionSet(true)}
-                    >
-                        <FieldRFF
-                            required
-                            component={SingleSelectFieldFF}
-                            name="commentOptionSet"
-                            inputWidth="400px"
-                            options={commentOptionSets.data}
-                            label={i18n.t('Option set comment')}
-                            helpText={i18n.t(
-                                'Choose a set of predefined comment for data entry'
-                            )}
-                        />
-                    </EditableFieldWrapper>
+                    <OptionSetCommentField />
                 </StandardFormField>
             </StandardFormSection>
 
@@ -289,22 +203,7 @@ export function DataElementFormFields() {
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
-                    <EditableFieldWrapper
-                        onRefresh={aggregationLevels.refetch}
-                        onAddNew={() => setAddingAggregationLevel(true)}
-                    >
-                        <FieldRFF
-                            required
-                            component={MultiSelectFieldFF}
-                            name="aggregationLevels"
-                            inputWidth="400px"
-                            options={commentOptionSets.data}
-                            label={i18n.t('Aggregation level(s)')}
-                            helpText={i18n.t(
-                                'Choose how this data element is disaggregated'
-                            )}
-                        />
-                    </EditableFieldWrapper>
+                    <AggregationLevelsField />
                 </StandardFormField>
             </StandardFormSection>
 
@@ -322,15 +221,6 @@ export function DataElementFormFields() {
                     />
                 </StandardFormSection>
             )}
-
-            {addingCategoryCombo &&
-                `@TODO(DataElementForm): add Modal(?) for adding a new category combo`}
-            {addingOptionSet &&
-                `@TODO(DataElementForm): add Modal(?) for adding a new option set`}
-            {addingCommentOptionSet &&
-                `@TODO(DataElementForm): add Modal(?) for adding a new option set combo`}
-            {addingAggregationLevel &&
-                `@TODO(DataElementForm): add Modal(?) for adding a new aggregation level`}
         </>
     )
 }

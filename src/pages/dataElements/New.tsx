@@ -67,17 +67,17 @@ const formatFormValues = ({
     return payload
 }
 
+// @TODO(DataElements/new): values dynamic or static?
+const initialValues = {
+    domain: 'aggregate',
+    valueType: 'NUMBER',
+    aggregationType: 'SUM',
+    legendSet: [],
+    aggregationLevels: [],
+}
+
 export const Component = () => {
     const dataEngine = useDataEngine()
-
-    // @TODO(DataElements/new): values dynamic or static?
-    const initialValues = {
-        legends: [],
-        domain: 'aggregate',
-        valueType: 'NUMBER',
-        aggregationType: 'SUM',
-        legendSet: [],
-    }
 
     const navigate = useNavigate()
     const customAttributesQuery = useCustomAttributesQuery()

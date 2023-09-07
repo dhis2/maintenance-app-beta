@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-05T13:18:37.488Z\n"
-"PO-Revision-Date: 2023-09-05T13:18:37.488Z\n"
+"POT-Creation-Date: 2023-09-11T06:58:45.433Z\n"
+"PO-Revision-Date: 2023-09-11T06:58:45.433Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -54,8 +54,8 @@ msgstr "Retry"
 msgid "All"
 msgstr "All"
 
-msgid "Category combo"
-msgstr "Category combo"
+msgid "Filter options"
+msgstr "Filter options"
 
 msgid "Failed to load {{label}}"
 msgstr "Failed to load {{label}}"
@@ -63,8 +63,20 @@ msgstr "Failed to load {{label}}"
 msgid "Failed to load"
 msgstr "Failed to load"
 
+msgid "Aggregation level(s)"
+msgstr "Aggregation level(s)"
+
+msgid "Category combo"
+msgstr "Category combo"
+
 msgid "None"
 msgstr "None"
+
+msgid "Filter legend sets"
+msgstr "Filter legend sets"
+
+msgid "Option set"
+msgstr "Option set"
 
 msgid "Actions"
 msgstr "Actions"
@@ -302,9 +314,6 @@ msgstr "Attribute"
 
 msgid "Attributes"
 msgstr "Attributes"
-
-msgid "Option set"
-msgstr "Option set"
 
 msgid "Option sets"
 msgstr "Option sets"
@@ -609,21 +618,6 @@ msgstr "Disaggregation and Option sets"
 msgid "Set up disaggregation and predefined options."
 msgstr "Set up disaggregation and predefined options."
 
-msgid "Category combination (required)"
-msgstr "Category combination (required)"
-
-msgid "Choose how this data element is disaggregated"
-msgstr "Choose how this data element is disaggregated"
-
-msgid "Choose a set of predefined options for data entry"
-msgstr "Choose a set of predefined options for data entry"
-
-msgid "Option set comment"
-msgstr "Option set comment"
-
-msgid "Choose a set of predefined comment for data entry"
-msgstr "Choose a set of predefined comment for data entry"
-
 msgid "LegendSet"
 msgstr "LegendSet"
 
@@ -637,26 +631,11 @@ msgstr ""
 msgid "Aggregation levels"
 msgstr "Aggregation levels"
 
-msgid "Aggregation level(s)"
-msgstr "Aggregation level(s)"
-
 msgid "Custom attributes"
 msgstr "Custom attributes"
 
 msgid "Custom fields for your DHIS2 instance"
 msgstr "Custom fields for your DHIS2 instance"
-
-msgid "Selected legends"
-msgstr "Selected legends"
-
-msgid "Refresh list"
-msgstr "Refresh list"
-
-msgid "Add new"
-msgstr "Add new"
-
-msgid "Filter available legends"
-msgstr "Filter available legends"
 
 msgid "Color and icon"
 msgstr "Color and icon"
@@ -674,6 +653,15 @@ msgstr "Domain (required)"
 msgid "A data element can either be aggregated or tracked data."
 msgstr "A data element can either be aggregated or tracked data."
 
+msgid "Selected legends"
+msgstr "Selected legends"
+
+msgid "Refresh list"
+msgstr "Refresh list"
+
+msgid "Add new"
+msgstr "Add new"
+
 msgid "Value type (required)"
 msgstr "Value type (required)"
 
@@ -685,6 +673,21 @@ msgstr "Aggretation type (required)"
 
 msgid "The default way to aggregate this data element in analytics."
 msgstr "The default way to aggregate this data element in analytics."
+
+msgid "Category combination (required)"
+msgstr "Category combination (required)"
+
+msgid "Choose how this data element is disaggregated"
+msgstr "Choose how this data element is disaggregated"
+
+msgid "Choose a set of predefined options for data entry"
+msgstr "Choose a set of predefined options for data entry"
+
+msgid "Option set comment"
+msgstr "Option set comment"
+
+msgid "Choose a set of predefined comment for data entry"
+msgstr "Choose a set of predefined comment for data entry"
 
 msgid "Metadata management"
 msgstr "Metadata management"
