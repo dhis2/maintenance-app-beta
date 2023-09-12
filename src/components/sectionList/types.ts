@@ -1,6 +1,8 @@
+import { IdentifiableObject } from '../../types/generated'
+
 export type SelectedColumn = {
     label: string
-    modelPropertyName: string
+    path: string
 }
 
 export type SelectedColumns = SelectedColumn[]

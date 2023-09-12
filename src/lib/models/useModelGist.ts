@@ -15,6 +15,7 @@ import { QueryResponse, Query } from '../../types/query'
 export type GistParams = Omit<BaseGistParams, 'fields' | 'filter'> & {
     fields?: string | string[]
     filter?: string | string[]
+    pageSize?: number
 }
 
 type GistResourceString = `${string}/gist`

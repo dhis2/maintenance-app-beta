@@ -29,6 +29,7 @@ export const SectionList = ({
                 <DataTableRow>
                     <DataTableColumnHeader width="48px">
                         <Checkbox
+                            dataTest="section-list-selectall"
                             checked={allSelected}
                             onChange={({ checked }: CheckBoxOnChangeObject) =>
                                 onSelectAll(checked)
@@ -52,7 +53,7 @@ const HeaderColumns = ({
 }) => (
     <>
         {headerColumns.map((headerColumn) => (
-            <DataTableColumnHeader key={headerColumn.modelPropertyName}>
+            <DataTableColumnHeader key={headerColumn.path}>
                 {headerColumn.label}
             </DataTableColumnHeader>
         ))}

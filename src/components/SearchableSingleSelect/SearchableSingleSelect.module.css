@@ -1,0 +1,68 @@
+.invisibleOption {
+    display: none;
+}
+
+.loader {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    overflow: hidden;
+}
+
+.error {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    padding: var(--spacers-dp12) 16px;
+}
+
+.errorInnerWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.loadingErrorLabel {
+    color: var(--theme-error);
+}
+
+.errorRetryButton {
+    background: none;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.searchField {
+    display: flex;
+    gap: var(--spacers-dp8);
+    position: sticky;
+    top: 0;
+    padding: var(--spacers-dp16);
+    boxShadow: 0 0 4px rgba(0,0,0,0.4);
+    background: var(--colors-white);
+}
+
+.searchInput {
+    flex-grow: 1;
+}
+
+.clearButton {
+    font-size: 14px;
+    flex-grow: 0;
+    background: none;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.clearButton:hover {
+    color: var(--theme-valid);
+    text-decoration: none;
+}

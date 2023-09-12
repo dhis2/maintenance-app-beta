@@ -1,7 +1,9 @@
 import { FetchError } from '@dhis2/app-runtime'
 import React, { useMemo, useState } from 'react'
+import { useSchemaFromHandle } from '../../lib'
 import { IdentifiableObject, GistCollectionResponse } from '../../types/models'
 import { FilterWrapper } from './filters/FilterWrapper'
+import { ModelValue } from './modelValue/ModelValue'
 import { SectionList } from './SectionList'
 import { SectionListLoader } from './SectionListLoader'
 import { SectionListEmpty, SectionListError } from './SectionListMessages'
@@ -9,7 +11,6 @@ import { SectionListPagination } from './SectionListPagination'
 import { SectionListRow } from './SectionListRow'
 import { SectionListTitle } from './SectionListTitle'
 import { SelectionListHeader } from './SelectionListHeaderNormal'
-import { SelectedColumns } from './types'
 import { useHeaderColumns } from './useHeaderColumns'
 
 type SectionListWrapperProps<Model extends IdentifiableObject> = {
@@ -24,6 +25,7 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
     error,
 }: SectionListWrapperProps<Model>) => {
     const { headerColumns } = useHeaderColumns()
+    const schema = useSchemaFromHandle()
     const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set())
 
     const handleSelect = (id: string, checked: boolean) => {
@@ -88,6 +90,16 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
                         selectedColumns={headerColumns}
                         onSelect={handleSelect}
                         selected={selectedModels.has(model.id)}
+                        renderColumnValue={({ path }) => {
+                            return (
+                                <ModelValue
+                                    modelPropertyName={path}
+                                    schema={schema}
+                                    // TODO: fix this and enable support for nested paths
+                                    value={model[path as keyof Model]}
+                                />
+                            )
+                        }}
                     />
                 ))}
                 <SectionListPagination data={data} />

@@ -83,11 +83,15 @@ export const SummaryCardActions = ({ section }: SummaryCardActionsProps) => {
         <div className={styles.cardActions}>
             {canCreate && (
                 <Link to={`/${getSectionNewPath(section)}`} tabIndex={-1}>
-                    <Button secondary>{i18n.t('Add new')}</Button>
+                    <Button secondary small>
+                        {i18n.t('Add new')}
+                    </Button>
                 </Link>
             )}
             <Link to={`/${getSectionPath(section)}`} tabIndex={-1}>
-                <Button secondary>{i18n.t('Manage')}</Button>
+                <Button secondary small>
+                    {i18n.t('Manage')}
+                </Button>
             </Link>
         </div>
     )

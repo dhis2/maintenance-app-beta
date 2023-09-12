@@ -7,7 +7,7 @@ export const useHeaderColumns = () => {
 
     const headerColumns: SelectedColumn[] = useMemo(() => {
         return columns.map((c) => ({
-            modelPropertyName: c.path,
+            path: c.path,
             label: c.label,
         }))
     }, [columns])

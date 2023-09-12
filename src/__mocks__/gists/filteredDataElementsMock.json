@@ -1,0 +1,32 @@
+{
+    "pager": {
+        "page": 1,
+        "pageSize": 20,
+        "total": 1,
+        "pageCount": 1
+    },
+    "result": [
+        {
+            "access": {
+                "manage": true,
+                "externalize": false,
+                "write": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
+            "id": "JuTpJ2Ywq5b",
+            "name": "FILTERED Age of LLINs",
+            "domainType": "TRACKER",
+            "valueType": "INTEGER_ZERO_OR_POSITIVE",
+            "lastUpdated": "2019-08-21T13:08:02.032",
+            "sharing": {
+                "owner": "xE7jOejl9FI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "r-------"
+            }
+        }
+    ]
+}
