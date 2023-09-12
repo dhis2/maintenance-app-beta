@@ -13,7 +13,7 @@ const CATEGORY_COMBOS_QUERY = {
         resource: 'organisationUnitLevels',
         params: {
             paging: false,
-            fields: ['id', 'displayName'],
+            fields: ['displayName', 'level'],
             order: ['displayName'],
             filter: 'name:ne:default',
         },
@@ -29,8 +29,8 @@ export function useOptionsQuery() {
     return useMemo(() => {
         const aggregationLevels = data?.aggregationLevels.organisationUnitLevels
         const loadedOptions =
-            aggregationLevels?.map(({ id, displayName }) => ({
-                value: id,
+            aggregationLevels?.map(({ level, displayName }) => ({
+                value: level,
                 label: displayName,
             })) || []
 

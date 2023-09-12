@@ -1,13 +1,20 @@
-import { useDataQuery } from '@dhis2/app-runtime'
+import { useDataEngine, useDataQuery } from '@dhis2/app-runtime'
 import { Button, ButtonStrip, CircularLoader } from '@dhis2/ui'
+import { FormApi } from 'final-form'
 import React from 'react'
-import { Form } from 'react-final-form'
+import { withTypes } from 'react-final-form'
 import { useNavigate, useParams } from 'react-router-dom'
 import { SCHEMA_SECTIONS } from '../../constants'
 import { getSectionPath } from '../../lib'
 import { Attribute, DataElement } from '../../types/generated'
+import { formatFormValues } from './edit'
 import classes from './Edit.module.css'
 import { DataElementFormFields, useCustomAttributesQuery } from './form'
+import { FormValues } from './form/types'
+
+type FinalFormFormApi = FormApi<FormValues>
+
+const { Form } = withTypes<FormValues>()
 
 type DataElementQueryResponse = {
     dataElement: DataElement
@@ -37,36 +44,20 @@ function computeInitialValues({
     dataElement: DataElement
     customAttributes: Attribute[]
 }) {
-    const customAttributeInitialValues = customAttributes.reduce(
-        (acc, customAttribute) => {
-            const attributeValue = dataElement.attributeValues.find(
-                (currentAttribute) =>
-                    customAttribute.id === currentAttribute.attribute.id
-            )
+    // We want to have an array in the state with all attributes, not just the
+    // ones that have a value which is what the endpoint responds with
+    const attributeValues = customAttributes.map((attribute) => {
+        const attributeValue = dataElement.attributeValues.find(
+            (currentAttributeValue) =>
+                attribute.id === currentAttributeValue.attribute.id
+        )
 
-            if (!attributeValue?.value) {
-                return { ...acc, [customAttribute.id]: '' }
-            }
+        if (!attributeValue) {
+            return { attribute, value: '' }
+        }
 
-            if (typeof customAttribute.optionSet?.options === 'undefined') {
-                return { ...acc, [customAttribute.id]: attributeValue?.value }
-            }
-
-            const selectedOption = customAttribute.optionSet.options.find(
-                (option) => option.code === attributeValue.value
-            )
-
-            if (!selectedOption) {
-                return { ...acc, [customAttribute.id]: '' }
-            }
-
-            return {
-                ...acc,
-                [customAttribute.id]: selectedOption.code,
-            }
-        },
-        {}
-    )
+        return attributeValue
+    })
 
     return {
         name: dataElement.name,
@@ -74,35 +65,32 @@ function computeInitialValues({
         code: dataElement.code,
         description: dataElement.description,
         url: dataElement.url,
-        color: dataElement.style?.color,
-        icon: dataElement.style?.icon,
+        style: {
+            color: dataElement.style?.color,
+            icon: dataElement.style?.icon,
+        },
         fieldMask: dataElement.fieldMask,
         domainType: dataElement.domainType,
         formName: dataElement.formName,
         valueType: dataElement.valueType,
         aggregationType: dataElement.aggregationType,
-        categoryCombo: '', // dataElement.categoryCombo?.id,
-        optionSet: '', // dataElement.optionSet,
-        commentOptionSet: '', // dataElement.commentOptionSet,
-        legendSet: [], // dataElement.legendSet || [],
-        aggregationLevels: [], // dataElement.aggregationLevels || [],
-        attributeValues: customAttributeInitialValues,
+        categoryCombo: dataElement.categoryCombo || { id: '' },
+        optionSet: dataElement.optionSet || { id: '' },
+        commentOptionSet: dataElement.commentOptionSet || { id: '' },
+        legendSets: dataElement.legendSets || [],
+        aggregationLevels: dataElement.aggregationLevels || [],
+        attributeValues,
     }
 }
 
 export const Component = () => {
+    const dataEngine = useDataEngine()
     const navigate = useNavigate()
     const params = useParams()
 
-    const dataElementQuery = useDataElementQuery(params.id as string)
+    const dataElementId = params.id as string
+    const dataElementQuery = useDataElementQuery(dataElementId)
     const customAttributesQuery = useCustomAttributesQuery()
-
-    const onSubmit = (values: object) => {
-        console.log(
-            '@TODO(DataElements/edit): Implement onSubmit; values:',
-            values
-        )
-    }
 
     const loading = dataElementQuery.loading || customAttributesQuery.loading
     const error = dataElementQuery.error || customAttributesQuery.error
@@ -115,6 +103,29 @@ export const Component = () => {
     if (loading) {
         // @TODO(Edit): Implement loading screen
         return 'Loading...'
+    }
+
+    function onSubmit(values: FormValues, form: FinalFormFormApi) {
+        const dirtyFields = form.getState().dirtyFields
+        const jsonPatchPayload = formatFormValues({
+            values,
+            dirtyFields,
+            dataElement: dataElementQuery.data?.dataElement as DataElement,
+        })
+
+        // We want the promise so we know when submitting is done. The promise
+        // returned by the mutation function of useDataMutation will never
+        // resolve
+        const ADD_NEW_DATA_ELEMENT_MUTATION = {
+            resource: 'dataElements',
+            id: dataElementId,
+            type: 'json-patch',
+            data: ({ operations }: { operations: any[] }) => operations,
+        } as const
+
+        return dataEngine.mutate(ADD_NEW_DATA_ELEMENT_MUTATION, {
+            variables: { operations: jsonPatchPayload },
+        })
     }
 
     const initialValues = computeInitialValues({

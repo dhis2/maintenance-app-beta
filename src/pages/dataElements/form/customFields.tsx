@@ -26,8 +26,8 @@ import { EditableFieldWrapper } from './EditableFieldWrapper'
 
 // @TODO(custom fields): Implement me! (1)
 export function ColorAndIconField() {
-    const { input: colorInput } = useField('color')
-    const { input: iconInput } = useField('icon')
+    const { input: colorInput } = useField('style.color')
+    const { input: iconInput } = useField('style.icon')
 
     return (
         <Field
@@ -93,8 +93,14 @@ export function DomainField() {
 }
 
 export function LegendSetField() {
-    const name = 'legendSet'
-    const { input, meta } = useField(name, { multiple: true })
+    const name = 'legendSets'
+    const { input, meta } = useField(name, {
+        multiple: true,
+        format: (legendSets: { id: string }[]) =>
+            legendSets?.map((legendSet) => legendSet.id),
+        parse: (ids: string[]) => ids.map((id) => ({ id })),
+    })
+
     const newLegendSetLink = useHref('/legendSets/new')
     const legendSetHandle = useRef({
         refetch: () => {
@@ -191,7 +197,7 @@ export function AggregationTypeField() {
 
 export function CategoryComboField() {
     const newCategoryComboLink = useHref('/categoryCombos/new')
-    const { input, meta } = useField('categoryCombo')
+    const { input, meta } = useField('categoryCombo.id')
     const categoryComboHandle = useRef({
         refetch: () => {
             throw new Error('Not initialized')
@@ -206,7 +212,7 @@ export function CategoryComboField() {
             <div className={classes.categoryComboSelect}>
                 <Field
                     required
-                    name="categoryCombo"
+                    name="categoryCombo.id"
                     label={i18n.t('Category combination (required)')}
                     helpText={i18n.t(
                         'Choose how this data element is disaggregated'
@@ -229,7 +235,7 @@ export function CategoryComboField() {
 
 export function OptionSetField() {
     const newOptionSetLink = useHref('/optionSets/new')
-    const { input, meta } = useField('optionSet')
+    const { input, meta } = useField('optionSet.id')
     const optionSetHandle = useRef({
         refetch: () => {
             throw new Error('Not initialized')
@@ -243,7 +249,7 @@ export function OptionSetField() {
         >
             <div className={classes.optionSetSelect}>
                 <Field
-                    name="optionSet"
+                    name="optionSet.id"
                     label={i18n.t('Option set')}
                     helpText={i18n.t(
                         'Choose a set of predefined options for data entry'
@@ -266,7 +272,7 @@ export function OptionSetField() {
 
 export function OptionSetCommentField() {
     const newOptionSetLink = useHref('/optionSets/new')
-    const { input, meta } = useField('commentOptionSet')
+    const { input, meta } = useField('commentOptionSet.id')
     const optionSetHandle = useRef({
         refetch: () => {
             throw new Error('Not initialized')
@@ -280,7 +286,7 @@ export function OptionSetCommentField() {
         >
             <div className={classes.optionSetSelect}>
                 <Field
-                    name="commentOptionSet"
+                    name="commentOptionSet.id"
                     label={i18n.t('Option set comment')}
                     helpText={i18n.t(
                         'Choose a set of predefined comment for data entry'
@@ -303,7 +309,11 @@ export function OptionSetCommentField() {
 
 export function AggregationLevelsField() {
     const newAggregationLevelLink = useHref('/organisationUnitLevel/new')
-    const { input, meta } = useField('aggregationLevels', { multiple: true })
+    const { input, meta } = useField('aggregationLevels', {
+        multiple: true,
+        format: (levels: number[]) => levels.map((level) => level.toString()),
+        parse: (levels: string[]) => levels.map((level) => parseInt(level, 10)),
+    })
     const aggregationLevelHandle = useRef({
         refetch: () => {
             throw new Error('Not initialized')

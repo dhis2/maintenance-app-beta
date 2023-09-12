@@ -217,7 +217,7 @@ export function DataElementFormFields() {
                     </StandardFormSectionDescription>
 
                     <CustomAttributes
-                        attributes={customAttributes.data || []}
+                        customAttributes={customAttributes.data || []}
                     />
                 </StandardFormSection>
             )}

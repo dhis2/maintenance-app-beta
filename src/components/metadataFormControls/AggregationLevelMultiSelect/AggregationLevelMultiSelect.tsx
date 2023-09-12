@@ -79,7 +79,7 @@ export const AggregationLevelMultiSelect = forwardRef(
 
                 {displayOptions.map(({ value, label }) => (
                     <MultiSelectOption
-                        value={value}
+                        value={value.toString()}
                         label={label}
                         key={value}
                     />

@@ -6,12 +6,40 @@ import { useNavigate } from 'react-router-dom'
 import { StandardFormSection } from '../../components'
 import { SCHEMA_SECTIONS } from '../../constants'
 import { getSectionPath } from '../../lib'
-import { Attribute } from '../../types/generated'
+import { Attribute, DataElement } from '../../types/generated'
 import { DataElementFormFields, useCustomAttributesQuery } from './form'
-import { FormValues } from './form/FormValues'
+import { FormValues } from './form/types'
 import classes from './New.module.css'
 
 const listPath = `/${getSectionPath(SCHEMA_SECTIONS.dataElement)}`
+
+function computeInitialValues(customAttributes: Attribute[]) {
+    const attributeValues = customAttributes.map((attribute) => ({
+        attribute,
+        value: '',
+    }))
+
+    return {
+        name: '',
+        shortName: '',
+        code: '',
+        description: '',
+        url: '',
+        color: '',
+        icon: '',
+        fieldMask: '',
+        domainType: '',
+        formName: '',
+        valueType: '',
+        aggregationType: '',
+        categoryCombo: '',
+        optionSet: '',
+        commentOptionSet: '',
+        legendSets: [],
+        aggregationLevels: [],
+        attributeValues,
+    }
+}
 
 const ADD_NEW_DATA_ELEMENT_MUTATION = {
     resource: 'dataElements',
@@ -19,16 +47,15 @@ const ADD_NEW_DATA_ELEMENT_MUTATION = {
     data: (de: object) => de,
 } as const
 
-const formatFormValues = ({
-    values,
-    customAttributes,
-}: {
+interface FormatFormValuesArgs {
     values: FormValues
     customAttributes: Attribute[]
-}) => {
-    const payload = {
+}
+
+function formatFormValues({ values, customAttributes }: FormatFormValuesArgs) {
+    return {
         aggregationLevels:
-            values.aggregationLevels?.map((level) => parseInt(level, 10)) || [],
+            values.aggregationLevels?.map((level) => level) || [],
         aggregationType: values.aggregationType,
         attributeValues: Object.entries(values.attributeValues || {}).map(
             ([attributeId, value]) => {
@@ -53,8 +80,8 @@ const formatFormValues = ({
         optionSet: { id: values.optionSet },
         shortName: values.shortName,
         style: {
-            color: values.color,
-            icon: values.icon,
+            color: values.style?.color,
+            icon: values.style?.icon,
         },
         url: values.url,
         valueType: values.valueType,
@@ -62,20 +89,9 @@ const formatFormValues = ({
         // @TODO(DataElements/new): This form value is not present in the specs
         zeroIsSignificant: false,
     }
-
-    // @TODO(DataElements/new): Do something with this value!
-    return payload
 }
 
 // @TODO(DataElements/new): values dynamic or static?
-const initialValues = {
-    domain: 'aggregate',
-    valueType: 'NUMBER',
-    aggregationType: 'SUM',
-    legendSet: [],
-    aggregationLevels: [],
-}
-
 export const Component = () => {
     const dataEngine = useDataEngine()
 
@@ -94,6 +110,8 @@ export const Component = () => {
         // @TODO(Edit): Implement loading screen
         return 'Loading...'
     }
+
+    const initialValues = computeInitialValues(customAttributesQuery.data)
 
     function onSubmit(values: FormValues) {
         const payload = formatFormValues({

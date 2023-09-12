@@ -1,14 +1,20 @@
 import { InputFieldFF, SingleSelectFieldFF, TextAreaFieldFF } from '@dhis2/ui'
 import * as React from 'react'
-import { Field as FieldRFF } from 'react-final-form'
+import { Field as FieldRFF, useFormState } from 'react-final-form'
 import { StandardFormSection } from '../../../components'
 import { Attribute } from '../../../types/generated'
+import { FormValues } from './types'
 
 const inputWidth = '440px'
 
-type CustomAttributeProps = { attribute: Attribute }
-function CustomAttribute({ attribute }: CustomAttributeProps) {
-    const name = `attributeValues.${attribute.id}`
+type CustomAttributeProps = {
+    attribute: Attribute
+    index: number
+}
+
+function CustomAttribute({ attribute, index }: CustomAttributeProps) {
+    // console.log('> attribute', attribute)
+    const name = `attributeValues[${index}].value`
 
     if (attribute.optionSet?.options) {
         const options = attribute.optionSet?.options.map(
@@ -65,13 +71,36 @@ function CustomAttribute({ attribute }: CustomAttributeProps) {
     )
 }
 
-type CustomAttributesProps = { attributes?: Attribute[] }
-export function CustomAttributes({ attributes = [] }: CustomAttributesProps) {
+type CustomAttributesProps = { customAttributes?: Attribute[] }
+export function CustomAttributes({
+    customAttributes = [],
+}: CustomAttributesProps) {
+    const { initialValues } = useFormState<FormValues>()
+
     return (
         <>
-            {attributes.map((attribute) => (
-                <CustomAttribute key={attribute.id} attribute={attribute} />
-            ))}
+            {initialValues.attributeValues?.map((attributeValue, index) => {
+                const attributeValueId = attributeValue.attribute.id
+                const attribute = customAttributes.find(
+                    ({ id }) => id === attributeValueId
+                )
+
+                if (!attribute) {
+                    console.warn(
+                        `Could not find attribute for attributeValue with id "${attributeValueId}"`
+                    )
+
+                    return null
+                }
+
+                return (
+                    <CustomAttribute
+                        key={attributeValue.attribute.id}
+                        attribute={attribute}
+                        index={index}
+                    />
+                )
+            })}
         </>
     )
 }

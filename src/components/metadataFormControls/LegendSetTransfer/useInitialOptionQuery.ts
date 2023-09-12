@@ -4,7 +4,9 @@ import { SelectOption } from '../../../types'
 import { FilteredLegendSet } from './types'
 
 type InitialLegendSetQueryResult = {
-    legendSets: FilteredLegendSet[]
+    legendSets: {
+        legendSets: FilteredLegendSet[]
+    }
 }
 
 export function useInitialOptionQuery({
@@ -18,8 +20,8 @@ export function useInitialOptionQuery({
     const query = {
         legendSets: {
             resource: 'legendSets',
-            id: (variables: Record<string, string>) => variables.id,
             params: {
+                paging: false,
                 fields: ['id', 'displayName'],
                 filter: `id:in:[${initialSelected.current.join(',')}]`,
             },
@@ -30,7 +32,7 @@ export function useInitialOptionQuery({
         lazy: !initialSelected.current,
         variables: { id: selected },
         onComplete: (data) => {
-            const { legendSets } = data
+            const { legendSets } = data.legendSets
             const options = legendSets.map(({ id, displayName }) => ({
                 value: id,
                 label: displayName,
