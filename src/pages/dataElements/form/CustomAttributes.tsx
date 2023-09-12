@@ -1,9 +1,8 @@
 import { InputFieldFF, SingleSelectFieldFF, TextAreaFieldFF } from '@dhis2/ui'
 import * as React from 'react'
-import { Field as FieldRFF, useFormState } from 'react-final-form'
+import { Field as FieldRFF } from 'react-final-form'
 import { StandardFormSection } from '../../../components'
 import { Attribute } from '../../../types/generated'
-import { FormValues } from './types'
 
 const inputWidth = '440px'
 
@@ -13,7 +12,6 @@ type CustomAttributeProps = {
 }
 
 function CustomAttribute({ attribute, index }: CustomAttributeProps) {
-    // console.log('> attribute', attribute)
     const name = `attributeValues[${index}].value`
 
     if (attribute.optionSet?.options) {
@@ -71,32 +69,18 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
     )
 }
 
-type CustomAttributesProps = { customAttributes?: Attribute[] }
 export function CustomAttributes({
     customAttributes = [],
-}: CustomAttributesProps) {
-    const { initialValues } = useFormState<FormValues>()
-
+}: {
+    customAttributes?: Attribute[]
+}) {
     return (
         <>
-            {initialValues.attributeValues?.map((attributeValue, index) => {
-                const attributeValueId = attributeValue.attribute.id
-                const attribute = customAttributes.find(
-                    ({ id }) => id === attributeValueId
-                )
-
-                if (!attribute) {
-                    console.warn(
-                        `Could not find attribute for attributeValue with id "${attributeValueId}"`
-                    )
-
-                    return null
-                }
-
+            {customAttributes.map((customAttribute, index) => {
                 return (
                     <CustomAttribute
-                        key={attributeValue.attribute.id}
-                        attribute={attribute}
+                        key={customAttribute.id}
+                        attribute={customAttribute}
                         index={index}
                     />
                 )

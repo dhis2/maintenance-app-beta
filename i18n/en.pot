@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-12T11:10:34.695Z\n"
-"PO-Revision-Date: 2023-09-12T11:10:34.695Z\n"
+"POT-Creation-Date: 2023-09-12T13:53:30.779Z\n"
+"PO-Revision-Date: 2023-09-12T13:53:30.779Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -549,6 +549,12 @@ msgstr "Positive or Zero Integer"
 msgid "Tracker Associate"
 msgstr "Tracker Associate"
 
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Save and close"
+msgstr "Save and close"
+
 msgid "Name"
 msgstr "Name"
 
@@ -563,6 +569,12 @@ msgstr "Last updated"
 
 msgid "Public access"
 msgstr "Public access"
+
+msgid "Create data element"
+msgstr "Create data element"
+
+msgid "Exit without saving"
+msgstr "Exit without saving"
 
 msgid "Basic information"
 msgstr "Basic information"

@@ -9,7 +9,7 @@ const CUSTOM_ATTRIBUTES_QUERY = {
             fields: [
                 'id',
                 'mandatory',
-                'dispayFormName',
+                'displayFormName',
                 'valueType',
                 'optionSet[*, options[id,displayName,name,code]]',
             ],
