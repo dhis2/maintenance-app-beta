@@ -1,10 +1,11 @@
 import { useDataEngine, useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { FormApi } from 'final-form'
-import React from 'react'
+import { NoticeBox } from '@dhis2/ui'
+import { FORM_ERROR, FormApi } from 'final-form'
+import React, { useEffect, useRef } from 'react'
 import { withTypes } from 'react-final-form'
 import { useNavigate, useParams } from 'react-router-dom'
-import { StandardFormActions } from '../../components'
+import { StandardFormActions, StandardFormSection } from '../../components'
 import { SCHEMA_SECTIONS } from '../../constants'
 import { getSectionPath } from '../../lib'
 import { JsonPatchOperation } from '../../types'
@@ -107,7 +108,7 @@ export const Component = () => {
         return 'Loading...'
     }
 
-    function onSubmit(values: FormValues, form: FinalFormFormApi) {
+    async function onSubmit(values: FormValues, form: FinalFormFormApi) {
         const dirtyFields = form.getState().dirtyFields
         const jsonPatchPayload = formatFormValues({
             values,
@@ -126,9 +127,15 @@ export const Component = () => {
                 operations,
         } as const
 
-        return dataEngine.mutate(ADD_NEW_DATA_ELEMENT_MUTATION, {
-            variables: { operations: jsonPatchPayload },
-        })
+        try {
+            await dataEngine.mutate(ADD_NEW_DATA_ELEMENT_MUTATION, {
+                variables: { operations: jsonPatchPayload },
+            })
+        } catch (e) {
+            return { [FORM_ERROR]: (e as Error | string).toString() }
+        }
+
+        navigate(listPath)
     }
 
     const initialValues = computeInitialValues({
@@ -138,22 +145,63 @@ export const Component = () => {
 
     return (
         <Form onSubmit={onSubmit} initialValues={initialValues}>
-            {({ handleSubmit, submitting }) => (
+            {({ handleSubmit, submitting, submitError }) => (
                 <form onSubmit={handleSubmit}>
-                    <div className={classes.form}>
-                        <DataElementFormFields />
-                    </div>
-
-                    <div className={classes.formActions}>
-                        <StandardFormActions
-                            cancelLabel={i18n.t('Cancel')}
-                            submitLabel={i18n.t('Save and close')}
-                            submitting={submitting}
-                            onCancelClick={() => navigate(listPath)}
-                        />
-                    </div>
+                    <FormContents
+                        submitError={submitError}
+                        submitting={submitting}
+                    />
                 </form>
             )}
         </Form>
+    )
+}
+
+function FormContents({
+    submitError,
+    submitting,
+}: {
+    submitting: boolean
+    submitError?: string
+}) {
+    const formErrorRef = useRef<HTMLDivElement | null>(null)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (submitError) {
+            formErrorRef.current?.scrollIntoView({ behavior: 'smooth' })
+        }
+    }, [submitError])
+
+    return (
+        <>
+            {submitError && (
+                <StandardFormSection>
+                    <div ref={formErrorRef}>
+                        <NoticeBox
+                            error
+                            title={i18n.t(
+                                'Something went wrong when submitting the form'
+                            )}
+                        >
+                            {submitError}
+                        </NoticeBox>
+                    </div>
+                </StandardFormSection>
+            )}
+
+            <div className={classes.form}>
+                <DataElementFormFields />
+            </div>
+
+            <div className={classes.formActions}>
+                <StandardFormActions
+                    cancelLabel={i18n.t('Cancel')}
+                    submitLabel={i18n.t('Save and close')}
+                    submitting={submitting}
+                    onCancelClick={() => navigate(listPath)}
+                />
+            </div>
+        </>
     )
 }

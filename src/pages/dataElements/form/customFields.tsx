@@ -67,27 +67,31 @@ export function DomainField() {
             error={!!error}
             validationText={error}
         >
-            <Radio
-                {...aggregateInput.input}
-                label={i18n.t('Aggregate')}
-                onChange={(
-                    _: object,
-                    e: React.ChangeEvent<HTMLInputElement>
-                ) => {
-                    aggregateInput.input.onChange(e)
-                }}
-            />
+            <div>
+                <Radio
+                    {...aggregateInput.input}
+                    className={classes.domainTypeRadioButton}
+                    label={i18n.t('Aggregate')}
+                    onChange={(
+                        _: object,
+                        e: React.ChangeEvent<HTMLInputElement>
+                    ) => {
+                        aggregateInput.input.onChange(e)
+                    }}
+                />
 
-            <Radio
-                {...trackerInput.input}
-                label={i18n.t('Tracker')}
-                onChange={(
-                    _: object,
-                    e: React.ChangeEvent<HTMLInputElement>
-                ) => {
-                    trackerInput.input.onChange(e)
-                }}
-            />
+                <Radio
+                    {...trackerInput.input}
+                    label={i18n.t('Tracker')}
+                    className={classes.domainTypeRadioButton}
+                    onChange={(
+                        _: object,
+                        e: React.ChangeEvent<HTMLInputElement>
+                    ) => {
+                        trackerInput.input.onChange(e)
+                    }}
+                />
+            </div>
         </Field>
     )
 }

@@ -1,7 +1,8 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip, CircularLoader } from '@dhis2/ui'
-import React from 'react'
+import { NoticeBox } from '@dhis2/ui'
+import { FORM_ERROR } from 'final-form'
+import React, { useEffect, useRef } from 'react'
 import { Form } from 'react-final-form'
 import { useNavigate } from 'react-router-dom'
 import { StandardFormActions, StandardFormSection } from '../../components'
@@ -33,9 +34,9 @@ function computeInitialValues(customAttributes: Attribute[]) {
         formName: '',
         valueType: '',
         aggregationType: '',
-        categoryCombo: '',
-        optionSet: '',
-        commentOptionSet: '',
+        categoryCombo: { id: '' },
+        optionSet: { id: '' },
+        commentOptionSet: { id: '' },
         legendSets: [],
         aggregationLevels: [],
         attributeValues,
@@ -48,37 +49,25 @@ const ADD_NEW_DATA_ELEMENT_MUTATION = {
     data: (de: object) => de,
 } as const
 
-interface FormatFormValuesArgs {
-    values: FormValues
-    customAttributes: Attribute[]
-}
-
-function formatFormValues({ values, customAttributes }: FormatFormValuesArgs) {
+function formatFormValues({ values }: { values: FormValues }) {
     return {
-        aggregationLevels:
-            values.aggregationLevels?.map((level) => level) || [],
+        aggregationLevels: values.aggregationLevels,
         aggregationType: values.aggregationType,
-        attributeValues: Object.entries(values.attributeValues || {}).map(
-            ([attributeId, value]) => {
-                const customAttribute = customAttributes.find(
-                    ({ id }) => id === attributeId
-                ) as Attribute
-                return {
-                    value,
-                    attribute: { id: attributeId, name: customAttribute.name },
-                }
-            }
-        ),
-        categoryCombo: { id: values.categoryCombo },
+        attributeValues: values.attributeValues.filter(({ value }) => !!value),
+        categoryCombo: values.categoryCombo.id
+            ? values.categoryCombo
+            : undefined,
         code: values.code,
-        commentOptionSet: { id: values.commentOptionSet },
+        commentOptionSet: values.commentOptionSet.id
+            ? values.commentOptionSet
+            : undefined,
         description: values.description,
         domainType: values.domainType,
         fieldMask: values.fieldMask,
         formName: values.formName,
-        legendSets: values.legendSet || [],
+        legendSets: values.legendSets,
         name: values.name,
-        optionSet: { id: values.optionSet },
+        optionSet: values.optionSet.id ? values.optionSet : undefined,
         shortName: values.shortName,
         style: {
             color: values.style?.color,
@@ -114,38 +103,83 @@ export const Component = () => {
 
     const initialValues = computeInitialValues(customAttributesQuery.data)
 
-    function onSubmit(values: FormValues) {
-        const payload = formatFormValues({
-            values,
-            customAttributes: customAttributesQuery.data,
-        })
+    async function onSubmit(values: FormValues) {
+        const payload = formatFormValues({ values })
 
-        // We want the promise so we know when submitting is done. The promise
-        // returned by the mutation function of useDataMutation will never
-        // resolve
-        return dataEngine.mutate(ADD_NEW_DATA_ELEMENT_MUTATION, {
-            variables: payload,
-        })
+        try {
+            // We want the promise so we know when submitting is done. The promise
+            // returned by the mutation function of useDataMutation will never
+            // resolve
+            await dataEngine.mutate(ADD_NEW_DATA_ELEMENT_MUTATION, {
+                variables: payload,
+            })
+        } catch (e) {
+            console.log('> e', e)
+            return { [FORM_ERROR]: (e as Error | string).toString() }
+        }
+
+        navigate(listPath)
     }
 
     return (
         <Form onSubmit={onSubmit} initialValues={initialValues}>
-            {({ handleSubmit, submitting }) => (
+            {({ handleSubmit, submitting, submitError }) => (
                 <form onSubmit={handleSubmit}>
-                    <div className={classes.form}>
-                        <DataElementFormFields />
-
-                        <StandardFormSection>
-                            <StandardFormActions
-                                cancelLabel={i18n.t('Create data element')}
-                                submitLabel={i18n.t('Exit without saving')}
-                                submitting={submitting}
-                                onCancelClick={() => navigate(listPath)}
-                            />
-                        </StandardFormSection>
-                    </div>
+                    <FormContents
+                        submitError={submitError}
+                        submitting={submitting}
+                    />
                 </form>
             )}
         </Form>
+    )
+}
+
+function FormContents({
+    submitError,
+    submitting,
+}: {
+    submitting: boolean
+    submitError?: string
+}) {
+    const formErrorRef = useRef<HTMLDivElement | null>(null)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (submitError) {
+            formErrorRef.current?.scrollIntoView({ behavior: 'smooth' })
+        }
+    }, [submitError])
+
+    return (
+        <>
+            <div className={classes.form}>
+                <DataElementFormFields />
+
+                {submitError && (
+                    <StandardFormSection>
+                        <div ref={formErrorRef}>
+                            <NoticeBox
+                                error
+                                title={i18n.t(
+                                    'Something went wrong when submitting the form'
+                                )}
+                            >
+                                {submitError}
+                            </NoticeBox>
+                        </div>
+                    </StandardFormSection>
+                )}
+
+                <StandardFormSection>
+                    <StandardFormActions
+                        cancelLabel={i18n.t('Exit without saving')}
+                        submitLabel={i18n.t('Create data element')}
+                        submitting={submitting}
+                        onCancelClick={() => navigate(listPath)}
+                    />
+                </StandardFormSection>
+            </div>
+        </>
     )
 }
