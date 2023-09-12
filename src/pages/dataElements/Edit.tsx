@@ -1,11 +1,13 @@
 import { useDataEngine, useDataQuery } from '@dhis2/app-runtime'
-import { Button, ButtonStrip, CircularLoader } from '@dhis2/ui'
+import i18n from '@dhis2/d2-i18n'
 import { FormApi } from 'final-form'
 import React from 'react'
 import { withTypes } from 'react-final-form'
 import { useNavigate, useParams } from 'react-router-dom'
+import { StandardFormActions } from '../../components'
 import { SCHEMA_SECTIONS } from '../../constants'
 import { getSectionPath } from '../../lib'
+import { JsonPatchOperation } from '../../types'
 import { Attribute, DataElement } from '../../types/generated'
 import { formatFormValues } from './edit'
 import classes from './Edit.module.css'
@@ -120,7 +122,8 @@ export const Component = () => {
             resource: 'dataElements',
             id: dataElementId,
             type: 'json-patch',
-            data: ({ operations }: { operations: any[] }) => operations,
+            data: ({ operations }: { operations: JsonPatchOperation[] }) =>
+                operations,
         } as const
 
         return dataEngine.mutate(ADD_NEW_DATA_ELEMENT_MUTATION, {
@@ -142,27 +145,12 @@ export const Component = () => {
                     </div>
 
                     <div className={classes.formActions}>
-                        <ButtonStrip>
-                            <Button primary disabled={submitting} type="submit">
-                                {submitting && (
-                                    <span
-                                        className={
-                                            classes.saveButtonLoadingIcon
-                                        }
-                                    >
-                                        <CircularLoader small />
-                                    </span>
-                                )}
-                                Save and close
-                            </Button>
-
-                            <Button
-                                disabled={submitting}
-                                onClick={() => navigate(listPath)}
-                            >
-                                Cancel
-                            </Button>
-                        </ButtonStrip>
+                        <StandardFormActions
+                            cancelLabel={i18n.t('Cancel')}
+                            submitLabel={i18n.t('Save and close')}
+                            submitting={submitting}
+                            onCancelClick={() => navigate(listPath)}
+                        />
                     </div>
                 </form>
             )}

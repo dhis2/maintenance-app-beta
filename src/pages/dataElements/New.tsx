@@ -1,12 +1,13 @@
 import { useDataEngine } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip, CircularLoader } from '@dhis2/ui'
 import React from 'react'
 import { Form } from 'react-final-form'
 import { useNavigate } from 'react-router-dom'
-import { StandardFormSection } from '../../components'
+import { StandardFormActions, StandardFormSection } from '../../components'
 import { SCHEMA_SECTIONS } from '../../constants'
 import { getSectionPath } from '../../lib'
-import { Attribute, DataElement } from '../../types/generated'
+import { Attribute } from '../../types/generated'
 import { DataElementFormFields, useCustomAttributesQuery } from './form'
 import { FormValues } from './form/types'
 import classes from './New.module.css'
@@ -135,31 +136,12 @@ export const Component = () => {
                         <DataElementFormFields />
 
                         <StandardFormSection>
-                            <ButtonStrip>
-                                <Button
-                                    primary
-                                    disabled={submitting}
-                                    type="submit"
-                                >
-                                    {submitting && (
-                                        <span
-                                            className={
-                                                classes.saveButtonLoadingIcon
-                                            }
-                                        >
-                                            <CircularLoader small />
-                                        </span>
-                                    )}
-                                    Create data element
-                                </Button>
-
-                                <Button
-                                    disabled={submitting}
-                                    onClick={() => navigate(listPath)}
-                                >
-                                    Exit without saving
-                                </Button>
-                            </ButtonStrip>
+                            <StandardFormActions
+                                cancelLabel={i18n.t('Create data element')}
+                                submitLabel={i18n.t('Exit without saving')}
+                                submitting={submitting}
+                                onCancelClick={() => navigate(listPath)}
+                            />
                         </StandardFormSection>
                     </div>
                 </form>
