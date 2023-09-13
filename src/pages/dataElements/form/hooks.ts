@@ -11,7 +11,7 @@ const CUSTOM_ATTRIBUTES_QUERY = {
                 'mandatory',
                 'displayFormName',
                 'valueType',
-                'optionSet[*, options[id,displayName,name,code]]',
+                'optionSet[options[id,displayName,name,code]]',
             ],
             paging: false,
             filter: 'dataElementAttribute:eq:true',
