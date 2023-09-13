@@ -5,7 +5,7 @@ export interface Icon {
     description: string
     href: string
     key: string
-    keywords: string[]
+    keywords?: string[]
 }
 
 type IconsResponse = {

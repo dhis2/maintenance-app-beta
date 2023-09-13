@@ -1,16 +1,18 @@
 import { Icon } from './useIconsQuery'
 
+const match = (left: string, right: string) => {
+    return left?.toLowerCase().includes(right.toLowerCase())
+}
+
 export function filterIcons(icons: Icon[], filterText: string) {
-    const lowerText = filterText.toLowerCase()
-    return icons.filter(({ key, description, keywords }) => {
-        const matchesKey = key.indexOf(lowerText) > -1
-        const matchesDescription =
-            description && description.toLowerCase().indexOf(lowerText) > -1
-        const matchesKeyWords =
-            keywords &&
-            keywords.some(
-                (keyword) => keyword.toLowerCase().indexOf(lowerText) > -1
-            )
-        return matchesKey || matchesDescription || matchesKeyWords
-    })
+    if (!filterText) {
+        return icons
+    }
+
+    return icons.filter(
+        ({ key, description, keywords }) =>
+            match(key, filterText) ||
+            match(description, filterText) ||
+            keywords?.some((keyword) => match(keyword, filterText))
+    )
 }
