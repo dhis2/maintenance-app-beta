@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-13T07:57:51.987Z\n"
-"PO-Revision-Date: 2023-09-13T07:57:51.987Z\n"
+"POT-Creation-Date: 2023-09-13T14:05:55.693Z\n"
+"PO-Revision-Date: 2023-09-13T14:05:55.693Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -519,36 +519,6 @@ msgstr "Image"
 msgid "GeoJSON"
 msgstr "GeoJSON"
 
-msgid "Average (sum in org unit hierarchy)"
-msgstr "Average (sum in org unit hierarchy)"
-
-msgid "Last value (average in org unit hierarchy)"
-msgstr "Last value (average in org unit hierarchy)"
-
-msgid "Last value in period (average in org unit hierarchy)"
-msgstr "Last value in period (average in org unit hierarchy)"
-
-msgid "First value (averge in org unit hierarchy)"
-msgstr "First value (averge in org unit hierarchy)"
-
-msgid "Yes Only"
-msgstr "Yes Only"
-
-msgid "Date & Time"
-msgstr "Date & Time"
-
-msgid "Positive Integer"
-msgstr "Positive Integer"
-
-msgid "Negative Integer"
-msgstr "Negative Integer"
-
-msgid "Positive or Zero Integer"
-msgstr "Positive or Zero Integer"
-
-msgid "Tracker Associate"
-msgstr "Tracker Associate"
-
 msgid "Something went wrong when submitting the form"
 msgstr "Something went wrong when submitting the form"
 
@@ -627,8 +597,8 @@ msgstr "StandardForm name"
 msgid "An alternative name used in section or automatic data entry forms."
 msgstr "An alternative name used in section or automatic data entry forms."
 
-msgid "Zero is significant"
-msgstr "Zero is significant"
+msgid "Store zero data values"
+msgstr "Store zero data values"
 
 msgid "Disaggregation and Option sets"
 msgstr "Disaggregation and Option sets"
@@ -686,8 +656,8 @@ msgstr "Value type (required)"
 msgid "The type of data that will be recorded."
 msgstr "The type of data that will be recorded."
 
-msgid "Aggretation type (required)"
-msgstr "Aggretation type (required)"
+msgid "Aggregation type (required)"
+msgstr "Aggregation type (required)"
 
 msgid "The default way to aggregate this data element in analytics."
 msgstr "The default way to aggregate this data element in analytics."
@@ -783,7 +753,3 @@ msgstr ""
 
 msgid "Manage"
 msgstr "Manage"
-
-msgctxt "TEXT"
-msgid "MULTI"
-msgstr "MULTI_TEXT"

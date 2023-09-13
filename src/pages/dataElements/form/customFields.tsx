@@ -16,11 +16,8 @@ import {
     OptionSetSelect,
     LegendSetTransfer,
 } from '../../../components'
-import {
-    useSchemas,
-    translateAggregationType,
-    translateValueType,
-} from '../../../lib'
+import { AGGREGATION_TYPE, DOMAIN_TYPE, VALUE_TYPE } from '../../../constants'
+import { useSchemas } from '../../../lib'
 import classes from './customFields.module.css'
 import { EditableFieldWrapper } from './EditableFieldWrapper'
 
@@ -70,7 +67,7 @@ export function DomainField() {
                 <Radio
                     {...aggregateInput.input}
                     className={classes.domainTypeRadioButton}
-                    label={i18n.t('Aggregate')}
+                    label={DOMAIN_TYPE.AGGREGATE}
                     onChange={(
                         _: object,
                         e: React.ChangeEvent<HTMLInputElement>
@@ -81,7 +78,7 @@ export function DomainField() {
 
                 <Radio
                     {...trackerInput.input}
-                    label={i18n.t('Tracker')}
+                    label={DOMAIN_TYPE.TRACKER}
                     className={classes.domainTypeRadioButton}
                     onChange={(
                         _: object,
@@ -157,7 +154,7 @@ export function ValueTypeField() {
     const options = dataElement.properties.valueType.constants?.map(
         (constant) => ({
             value: constant,
-            label: translateValueType(constant),
+            label: VALUE_TYPE[constant as keyof typeof VALUE_TYPE],
         })
     )
 
@@ -179,7 +176,7 @@ export function AggregationTypeField() {
     const options = dataElement.properties.aggregationType.constants?.map(
         (constant) => ({
             value: constant,
-            label: translateAggregationType(constant),
+            label: AGGREGATION_TYPE[constant as keyof typeof AGGREGATION_TYPE],
         })
     )
 
@@ -189,7 +186,7 @@ export function AggregationTypeField() {
             required
             inputWidth="400px"
             name="aggregationType"
-            label={i18n.t('Aggretation type (required)')}
+            label={i18n.t('Aggregation type (required)')}
             helpText={i18n.t(
                 'The default way to aggregate this data element in analytics.'
             )}
