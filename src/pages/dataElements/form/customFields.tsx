@@ -24,7 +24,6 @@ import {
 import classes from './customFields.module.css'
 import { EditableFieldWrapper } from './EditableFieldWrapper'
 
-// @TODO(custom fields): Implement me! (1)
 export function ColorAndIconField() {
     const { input: colorInput } = useField('style.color')
     const { input: iconInput } = useField('style.icon')

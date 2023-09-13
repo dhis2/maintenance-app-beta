@@ -19,7 +19,6 @@ const CUSTOM_ATTRIBUTES_QUERY = {
     },
 }
 
-// @TODO(useCustomAttributesQuery): create response type
 interface QueryResponse {
     attributes: {
         attributes: Attribute[]
