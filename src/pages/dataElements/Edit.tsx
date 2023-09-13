@@ -82,6 +82,7 @@ function computeInitialValues({
         commentOptionSet: dataElement.commentOptionSet || { id: '' },
         legendSets: dataElement.legendSets || [],
         aggregationLevels: dataElement.aggregationLevels || [],
+        zeroIsSignificant: dataElement.zeroIsSignificant,
         attributeValues,
     }
 }

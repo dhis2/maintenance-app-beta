@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { InputFieldFF, TextAreaFieldFF } from '@dhis2/ui'
+import { CheckboxFieldFF, InputFieldFF, TextAreaFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import {
@@ -137,6 +137,15 @@ export function DataElementFormFields() {
                         helpText={i18n.t(
                             'An alternative name used in section or automatic data entry forms.'
                         )}
+                    />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <FieldRFF
+                        component={CheckboxFieldFF}
+                        name="zeroIsSignificant"
+                        label={i18n.t('Store zero data values')}
+                        type="checkbox"
                     />
                 </StandardFormField>
 

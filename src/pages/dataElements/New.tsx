@@ -75,9 +75,7 @@ function formatFormValues({ values }: { values: FormValues }) {
         },
         url: values.url,
         valueType: values.valueType,
-
-        // @TODO(DataElements/new): This form value is not present in the specs
-        zeroIsSignificant: false,
+        zeroIsSignificant: values.zeroIsSignificant,
     }
 }
 

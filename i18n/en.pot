@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-12T14:52:51.124Z\n"
-"PO-Revision-Date: 2023-09-12T14:52:51.124Z\n"
+"POT-Creation-Date: 2023-09-13T07:57:51.987Z\n"
+"PO-Revision-Date: 2023-09-13T07:57:51.987Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -626,6 +626,9 @@ msgstr "StandardForm name"
 
 msgid "An alternative name used in section or automatic data entry forms."
 msgstr "An alternative name used in section or automatic data entry forms."
+
+msgid "Zero is significant"
+msgstr "Zero is significant"
 
 msgid "Disaggregation and Option sets"
 msgstr "Disaggregation and Option sets"
