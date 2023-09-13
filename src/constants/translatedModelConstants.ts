@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 
 // because of the way d2-i18n works, we cannot translate dynamic values
 // so we have to list them manually
-export const AGGREGATION_TYPE: { [key: string]: string } = {
+export const AGGREGATION_TYPE = {
     SUM: i18n.t('Sum'),
     AVERAGE: i18n.t('Average'),
     AVERAGE_SUM_ORG_UNIT: i18n.t('Average (sum in org unit)'),
@@ -28,12 +28,12 @@ export const AGGREGATION_TYPE: { [key: string]: string } = {
     DEFAULT: i18n.t('Default'),
 }
 
-export const DOMAIN_TYPE: { [key: string]: string } = {
+export const DOMAIN_TYPE = {
     AGGREGATE: i18n.t('Aggregate'),
     TRACKER: i18n.t('Tracker'),
 }
 
-export const VALUE_TYPE: { [key: string]: string } = {
+export const VALUE_TYPE = {
     TEXT: i18n.t('Text'),
     LONG_TEXT: i18n.t('Long text'),
     MULTI_TEXT: i18n.t('Text with multiple values'),

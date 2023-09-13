@@ -11,7 +11,7 @@ interface FormatFormValuesArgs {
     values: FormValues
 }
 
-const sanitizeDirtyValyeKeys = (keys: DataElementKey[]) => {
+const sanitizeDirtyValueKeys = (keys: DataElementKey[]) => {
     const attributeValuesDirty = keys.find((key) =>
         key.startsWith('attributeValues')
     )
@@ -41,7 +41,7 @@ export function formatFormValues({
 
     const dirtyFieldsKeys = Object.keys(dirtyFields) as DataElementKey[]
     const adjustedDirtyFieldsKeys: DataElementKey[] =
-        sanitizeDirtyValyeKeys(dirtyFieldsKeys)
+        sanitizeDirtyValueKeys(dirtyFieldsKeys)
 
     return adjustedDirtyFieldsKeys.map((name) => ({
         op: get(name, dataElement) ? 'replace' : 'add',
