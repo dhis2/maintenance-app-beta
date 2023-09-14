@@ -30,15 +30,11 @@ export function useCustomAttributesQuery() {
         CUSTOM_ATTRIBUTES_QUERY
     )
 
-    const data = useMemo(() => {
-        return customAttributes.data?.attributes.attributes || []
-    }, [customAttributes.data])
-
     return useMemo(
         () => ({
             ...customAttributes,
-            data,
+            data: customAttributes.data?.attributes.attributes || [],
         }),
-        [customAttributes, data]
+        [customAttributes]
     )
 }

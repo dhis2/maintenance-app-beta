@@ -20,7 +20,7 @@ import {
     OptionSetCommentField,
     ValueTypeField,
 } from './customFields'
-import { useCustomAttributesQuery } from './hooks'
+import { useCustomAttributesQuery } from './useCustomAttributesQuery'
 
 export function DataElementFormFields() {
     const customAttributes = useCustomAttributesQuery()

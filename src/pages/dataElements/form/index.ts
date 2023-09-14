@@ -1,3 +1,3 @@
 export { DataElementFormFields } from './DataElementFormFields'
 export { computeInitialValues } from './computeInitialValues'
-export { useCustomAttributesQuery } from './hooks'
+export { useCustomAttributesQuery } from './useCustomAttributesQuery'
