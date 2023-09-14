@@ -117,5 +117,34 @@ describe('path', () => {
             const result = getFieldFilterFromPath(path)
             expect(result).toBe('user[address[city]]')
         })
+
+        it('should drop nested fields if maxDepth is 0', () => {
+            const path = 'sharing.public'
+            const result = getFieldFilterFromPath(path, 0)
+            expect(result).toBe('sharing')
+
+            const pathArr = ['sharing', 'public']
+            const resultArr = getFieldFilterFromPath(pathArr, 0)
+            expect(resultArr).toBe(result)
+        })
+
+        it('should drop nested fields according to maxDepth', () => {
+            const path = 'sharing.public'
+
+            const result = getFieldFilterFromPath(path, 1)
+
+            expect(result).toBe('sharing[public]')
+
+            const deCatComboPath = 'dataElement.categoryCombo.id'
+            const resultDepth1 = getFieldFilterFromPath(deCatComboPath, 1)
+
+            expect(resultDepth1).toBe('dataElement[categoryCombo]')
+
+            const resultDepth2 = getFieldFilterFromPath(deCatComboPath, 2)
+            expect(resultDepth2).toBe('dataElement[categoryCombo[id]]')
+
+            const resultDepth3 = getFieldFilterFromPath(deCatComboPath, 3)
+            expect(resultDepth3).toBe('dataElement[categoryCombo[id]]')
+        })
     })
 })

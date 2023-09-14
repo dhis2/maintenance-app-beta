@@ -74,7 +74,13 @@ const modelListViewsConfig = {
     dataElement: {
         columns: {
             available: ['zeroIsSignificant', 'categoryCombo'],
-            default: ['name', 'domainType', 'valueType', 'lastUpdated'],
+            default: [
+                'name',
+                'domainType',
+                'valueType',
+                'lastUpdated',
+                'sharing.public',
+            ],
         },
         filters: {
             default: ['name', 'domainType', 'valueType'],
@@ -92,7 +98,6 @@ const toModelPropertyDescriptor = (
         const availableDescriptor = available?.find(
             (prop) => prop.path === propertyConfig
         )
-        console.log({ availableDescriptor })
 
         return (
             availableDescriptor || {
