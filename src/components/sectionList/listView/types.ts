@@ -1,17 +1,13 @@
 import { SectionName } from '../../../constants'
+import type { ModelPropertyDescriptor } from '../../../constants'
 
 export interface ModelListView {
     name: string
     sectionModel: string
-    columns: Array<ViewPropertyDescriptor>
-    filters: Array<ViewPropertyDescriptor>
+    columns: Array<ModelPropertyDescriptor>
+    filters: Array<ModelPropertyDescriptor>
 }
 
 export type ModelListViews = {
     [key in SectionName]?: ModelListView[]
-}
-
-export interface ViewPropertyDescriptor {
-    label: string
-    path: string
 }

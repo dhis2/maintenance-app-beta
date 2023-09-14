@@ -1,17 +1,21 @@
-import { uniq, uniqBy } from 'remeda'
+import i18n from '@dhis2/d2-i18n'
+import { uniqBy } from 'remeda'
+import { PublicAccessValue } from '../components/sectionList/modelValue/PublicAccess'
 import { SectionName } from './sections'
 import { getTranslatedProperty } from './translatedModelProperties'
 
-interface ModelPropertyDescriptor {
+export interface ModelPropertyDescriptor {
     label: string
     path: string
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    component?: React.FC<{ value: any }>
 }
 
 type ModelPropertyConfig = string | ModelPropertyDescriptor
 interface ViewConfigPart {
     available?: ModelPropertyConfig[]
     overrideDefaultAvailable?: boolean
-    default: ModelPropertyConfig[]
+    default?: ModelPropertyConfig[]
 }
 
 interface ViewConfig {
@@ -45,8 +49,13 @@ const defaultModelViewConfig = {
             'href',
             'id',
             'lastUpdatedBy',
+            {
+                label: i18n.t('Public access'),
+                path: 'sharing.public',
+                component: PublicAccessValue,
+            },
         ],
-        default: ['name', 'sharing', 'lastUpdated'],
+        default: ['name', 'sharing.public', 'lastUpdated'],
     },
     filters: {
         available: ['name'],
@@ -64,14 +73,8 @@ const defaultModelViewConfig = {
 const modelListViewsConfig = {
     dataElement: {
         columns: {
-            default: [
-                'name',
-                'domainType',
-                'valueType',
-                'lastUpdated',
-                'sharing',
-            ],
             available: ['zeroIsSignificant', 'categoryCombo'],
+            default: ['name', 'domainType', 'valueType', 'lastUpdated'],
         },
         filters: {
             default: ['name', 'domainType', 'valueType'],
@@ -80,12 +83,23 @@ const modelListViewsConfig = {
     },
 } satisfies SectionListViewConfig<SectionName>
 
-const toModelPropertyDescriptor = (propertyConfig: ModelPropertyConfig) => {
+const toModelPropertyDescriptor = (
+    propertyConfig: ModelPropertyConfig,
+    available?: ModelPropertyDescriptor[]
+): ModelPropertyDescriptor => {
     if (typeof propertyConfig === 'string') {
-        return {
-            label: getTranslatedProperty(propertyConfig),
-            path: propertyConfig,
-        }
+        // simple descriptors can refer to previously defined descriptors
+        const availableDescriptor = available?.find(
+            (prop) => prop.path === propertyConfig
+        )
+        console.log({ availableDescriptor })
+
+        return (
+            availableDescriptor || {
+                label: getTranslatedProperty(propertyConfig),
+                path: propertyConfig,
+            }
+        )
     }
     return propertyConfig
 }
@@ -93,26 +107,28 @@ const toModelPropertyDescriptor = (propertyConfig: ModelPropertyConfig) => {
 const resolveViewPart = (part: ViewConfigPart, type: keyof ViewConfig) => {
     const mergedAvailableDescriptors = uniqBy(
         [
-            part.default,
             part.available || [],
             part.overrideDefaultAvailable
                 ? []
                 : defaultModelViewConfig[type].available,
+            part.default || [],
         ]
             .flat()
-            .map(toModelPropertyDescriptor),
+            .map((propConfig) => toModelPropertyDescriptor(propConfig)),
         (prop) => prop.path
     )
     const defaultPropConfig =
         part.default || defaultModelViewConfig[type].default
-    const defaultDescriptors = defaultPropConfig.map(toModelPropertyDescriptor)
+    const defaultDescriptors = defaultPropConfig.map((propConfig) =>
+        toModelPropertyDescriptor(propConfig, mergedAvailableDescriptors)
+    )
     return {
         available: mergedAvailableDescriptors,
         default: defaultDescriptors,
     }
 }
 // merge the default modelViewConfig with the modelViewsConfig for each section
-const resolveListViewsConfig = () => {
+const resolveListViewsConfig = (): SectionListViewConfig => {
     const merged: SectionListViewConfig = {}
 
     Object.entries(modelListViewsConfig).forEach((viewConfig) => {

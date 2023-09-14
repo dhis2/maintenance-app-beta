@@ -8,7 +8,7 @@ import {
     queryCreators,
     useMutateDataStoreValues,
 } from '../../../lib/dataStore/useDataStore'
-import { ModelListView, ViewPropertyDescriptor } from './types'
+import { ModelListView } from './types'
 
 const maintenanceNamespace = 'maintenance'
 const configurableColumnsKey = 'modelListViews'
@@ -71,7 +71,10 @@ const parseViewToModelListView = (
     // Preserve order by mapping from parsedView to config-object
     const columns = parsedView.columns
         .filter((col) => availableColumnsMap.has(col))
-        .map((col) => availableColumnsMap.get(col) as ViewPropertyDescriptor)
+        .map((col) => {
+            const columnConfig = availableColumnsMap.get(col)
+            return columnConfig as NonNullable<typeof columnConfig>
+        })
 
     const filters = viewConfig.filters.available.filter((col) =>
         parsedView.filters.includes(col.path)

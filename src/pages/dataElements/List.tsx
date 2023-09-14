@@ -6,7 +6,7 @@ import {
     useQueryParamsForModelGist,
 } from '../../components'
 import { useModelListView } from '../../components/sectionList/listView'
-import { useModelGist } from '../../lib/'
+import { getFieldFilterFromPath, useModelGist } from '../../lib/'
 import { DataElement, GistCollectionResponse } from '../../types/models'
 
 const filterFields = [
@@ -44,7 +44,9 @@ export const Component = () => {
         }
         refetch({
             ...initialParams,
-            fields: columns.map((c) => c.path).concat('id'),
+            fields: columns
+                .map((column) => getFieldFilterFromPath(column.path))
+                .concat('id'),
         })
     }, [refetch, initialParams, columns, listViewQuery.isLoading])
 

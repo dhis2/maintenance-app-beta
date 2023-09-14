@@ -1,40 +1,71 @@
 import React from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
-import { Schema, SchemaFieldProperty } from '../../../lib'
+import {
+    Schema,
+    SchemaFieldProperty,
+    getIn,
+    stringToPathArray,
+} from '../../../lib'
 import { ModelValueRenderer } from './ModelValueRenderer'
-
-export type ValueDetails = {
-    schemaProperty: SchemaFieldProperty
-    value: unknown
-}
 
 type ModelValueProps = {
     schema: Schema
-    modelPropertyName: string
-    value: unknown
+    path: string
+    model: unknown
+    // override renderer
+    component?: React.ComponentType<{
+        value: unknown
+        schemaProperty: SchemaFieldProperty
+    }>
 }
 
 const ModelValueError = () => {
     return <span>Error</span>
 }
 
-export const ModelValue = ({
-    schema,
-    modelPropertyName,
-    value,
-}: ModelValueProps) => {
-    const schemaProperty = schema.properties[modelPropertyName]
+const getSchemaProperty = (
+    schema: Schema,
+    path: string
+): SchemaFieldProperty | undefined => {
+    const pathParts = stringToPathArray(path).map((part) => {
+        if (part === 'id') {
+            return 'uid' // fieldName for 'id' is "uid" in schema.properties
+        }
+        return part
+    })
+    const rootPath = pathParts[0]
 
-    if (!schemaProperty) {
+    const schemaProperty = schema.properties[rootPath]
+    return schemaProperty
+}
+
+export const ModelValue = ({
+    component,
+    schema,
+    path,
+    model,
+}: ModelValueProps) => {
+    const schemaProperty = getSchemaProperty(schema, path)
+
+    const value = getIn(model, path)
+
+    if (!schemaProperty || value == undefined) {
         console.warn(
-            `Property ${modelPropertyName} not found in schema, value not rendered: ${value}`
+            `Property ${path} not found in schema, value not rendered: ${value}`
         )
         return null
     }
 
     return (
         <ErrorBoundary FallbackComponent={ModelValueError}>
-            <ModelValueRenderer value={value} schemaProperty={schemaProperty} />
+            {component ? (
+                React.createElement(component, { value, schemaProperty })
+            ) : (
+                <ModelValueRenderer
+                    value={value}
+                    schemaProperty={schemaProperty}
+                />
+            )}
         </ErrorBoundary>
     )
 }
