@@ -26,7 +26,7 @@ const sanitizeDirtyValueKeys = (keys: DataElementKey[]) => {
     ]
 }
 
-export function formatFormValues({
+export function createJsonPatchOperations({
     dirtyFields,
     dataElement,
     values: unsanitizedValues,

@@ -10,7 +10,7 @@ import { SCHEMA_SECTIONS } from '../../constants'
 import { getSectionPath } from '../../lib'
 import { JsonPatchOperation } from '../../types'
 import { Attribute, DataElement } from '../../types/generated'
-import { formatFormValues } from './edit'
+import { createJsonPatchOperations } from './edit'
 import classes from './Edit.module.css'
 import { DataElementFormFields, useCustomAttributesQuery } from './form'
 import { FormValues } from './form/types'
@@ -111,7 +111,7 @@ export const Component = () => {
 
     async function onSubmit(values: FormValues, form: FinalFormFormApi) {
         const dirtyFields = form.getState().dirtyFields
-        const jsonPatchPayload = formatFormValues({
+        const jsonPatchPayload = createJsonPatchOperations({
             values,
             dirtyFields,
             dataElement: dataElementQuery.data?.dataElement as DataElement,
