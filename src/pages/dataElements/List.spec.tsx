@@ -9,7 +9,7 @@ import React from 'react'
 import dataElementsMock from '../../__mocks__/gists/dataElementsMock.json'
 import filteredDataElementsMock from '../../__mocks__/gists/filteredDataElementsMock.json'
 import dataElementSchemaMock from '../../__mocks__/schema/dataElementsSchema.json'
-import { OVERVIEW_SECTIONS } from '../../constants'
+import { SECTIONS_MAP } from '../../constants'
 import { useSchemaStore } from '../../lib/schemas/schemaStore'
 import { ModelSchemas } from '../../lib/useLoadApp'
 import TestComponentWithRouter, {
@@ -19,7 +19,7 @@ import { Component as DataElementList } from './List'
 
 const renderSection = async (customData: CustomData) => {
     const routeOptions = {
-        handle: { section: OVERVIEW_SECTIONS.dataElement },
+        handle: { section: SECTIONS_MAP.dataElement },
     }
 
     const result = render(
@@ -53,6 +53,7 @@ describe('Data Elements List', () => {
     it('should show the list of elements', async () => {
         const customData = {
             'dataElements/gist': dataElementsMock,
+            userDataStore: {},
         }
         const { getByText, getByTestId } = await renderSection(customData)
 
@@ -69,6 +70,7 @@ describe('Data Elements List', () => {
     it('should display all the columns', async () => {
         const customData = {
             'dataElements/gist': dataElementsMock,
+            userDataStore: {},
         }
         const { getByText } = await renderSection(customData)
         const columns = [
@@ -85,6 +87,7 @@ describe('Data Elements List', () => {
     })
     it('should allow searching for value', async () => {
         const customData = {
+            userDataStore: {},
             'dataElements/gist': (
                 resource: string,
                 r: { params: { filter: string[] } }
@@ -115,6 +118,7 @@ describe('Data Elements List', () => {
 
     it('should display error when an API call fails', async () => {
         const customData = {
+            userDataStore: {},
             'dataElements/gist': () => {
                 return Promise.reject('401 backend error')
             },
@@ -132,6 +136,7 @@ describe('Data Elements List', () => {
 
         const renderWithPager = async () => {
             const customData = {
+                userDataStore: {},
                 'dataElements/gist': (
                     resource: string,
                     r: { params: { filter: string[]; page: number } }
@@ -235,6 +240,7 @@ describe('Data Elements List', () => {
         // I tried different approaches and failed. Leaving it here temporarily in case someone want to give it  a go.
         it.skip('should not show next in last page', async () => {
             const { getByTestId, findByText } = await renderSection({
+                userDataStore: {},
                 'dataElements/gist': {
                     pager: {
                         page: 54,
@@ -269,6 +275,7 @@ describe('Data Elements List', () => {
     // select all
     it('should allow selecting all items', async () => {
         const customData = {
+            userDataStore: {},
             'dataElements/gist': dataElementsMock,
         }
         const { getByTestId, queryAllByTestId } = await renderSection(
@@ -291,6 +298,7 @@ describe('Data Elements List', () => {
     // empty list
     it('should allow selecting all items', async () => {
         const customData = {
+            userDataStore: {},
             'dataElements/gist': { ...dataElementsMock, result: [] },
         }
         const { getByTestId } = await renderSection(customData)

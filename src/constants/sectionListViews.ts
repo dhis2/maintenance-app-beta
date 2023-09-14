@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { PublicAccessValue } from '../components/sectionList/modelValue/PublicAccess'
-import { uniqueBy } from '../lib/utils'
+import { uniqueBy } from '../lib'
 import { SectionName } from './sections'
 import { getTranslatedProperty } from './translatedModelProperties'
 
@@ -76,8 +76,8 @@ const modelListViewsConfig = {
             available: ['zeroIsSignificant', 'categoryCombo'],
             default: [
                 'name',
-                'domainType',
-                'valueType',
+                { label: i18n.t('Domain'), path: 'domainType' },
+                { label: i18n.t('Value'), path: 'valueType' },
                 'lastUpdated',
                 'sharing.public',
             ],

@@ -45,7 +45,7 @@ export const Component = () => {
         refetch({
             ...initialParams,
             fields: columns
-                .map((column) => getFieldFilterFromPath(column.path))
+                .map((column) => getFieldFilterFromPath(column.path, 0))
                 .concat('id'),
         })
     }, [refetch, initialParams, columns, listViewQuery.isLoading])
