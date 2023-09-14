@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
-import { uniqBy } from 'remeda'
 import { PublicAccessValue } from '../components/sectionList/modelValue/PublicAccess'
+import { uniqueBy } from '../lib/utils'
 import { SectionName } from './sections'
 import { getTranslatedProperty } from './translatedModelProperties'
 
@@ -105,7 +105,7 @@ const toModelPropertyDescriptor = (
 }
 
 const resolveViewPart = (part: ViewConfigPart, type: keyof ViewConfig) => {
-    const mergedAvailableDescriptors = uniqBy(
+    const mergedAvailableDescriptors = uniqueBy(
         [
             part.available || [],
             part.overrideDefaultAvailable
