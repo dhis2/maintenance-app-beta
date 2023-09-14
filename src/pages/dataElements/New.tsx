@@ -30,7 +30,7 @@ function computeInitialValues(customAttributes: Attribute[]) {
         color: '',
         icon: '',
         fieldMask: '',
-        domainType: '',
+        domainType: 'AGGREGATE',
         formName: '',
         valueType: '',
         aggregationType: '',
