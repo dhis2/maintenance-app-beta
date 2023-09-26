@@ -5,8 +5,11 @@ import {
     SECTIONS_MAP,
     Section,
 } from '../../constants/sections'
-import { useIsSectionAuthorizedPredicate } from '../../lib'
-import { getOverviewPath, getSectionPath } from '../routes/routePaths'
+import {
+    getOverviewPath,
+    getSectionPath,
+    useIsSectionAuthorizedPredicate,
+} from '../../lib'
 
 export interface LinkItem {
     to: string

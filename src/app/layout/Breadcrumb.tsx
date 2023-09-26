@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useMatches } from 'react-router-dom'
 import { Section, isOverviewSection } from '../../constants'
-import { getSectionPath, getOverviewPath } from '../routes/routePaths'
+import { getSectionPath, getOverviewPath } from '../../lib'
 import { MatchRouteHandle } from '../routes/types'
 import css from './Breadcrumb.module.css'
 

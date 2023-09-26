@@ -43,7 +43,7 @@
     position: sticky;
     top: 0;
     padding: var(--spacers-dp16);
-    boxShadow: 0 0 4px rgba(0,0,0,0.4);
+    box-shadow: 0 0 4px rgba(0,0,0,0.4);
     background: var(--colors-white);
 }
 

@@ -1,8 +1,13 @@
-import React, { useCallback, useRef, useState } from 'react'
-import { SelectOption } from '../../../types'
+import React, {
+    forwardRef,
+    useCallback,
+    useImperativeHandle,
+    useRef,
+    useState,
+} from 'react'
+import { SelectOption, QueryResponse } from '../../../types'
+import { Pager } from '../../../types/generated'
 import { SearchableSingleSelect } from '../../SearchableSingleSelect'
-import { useInitialOptionQuery } from './useInitialOptionQuery'
-import { useOptionsQuery } from './useOptionsQuery'
 
 function computeDisplayOptions({
     selected,
@@ -31,15 +36,42 @@ function computeDisplayOptions({
     return options
 }
 
-export function CategoryComboSelect({
-    onChange,
+type UseInitialOptionQuery = ({
     selected,
-    showAllOption,
+    onComplete,
 }: {
+    onComplete: (option: SelectOption) => void
+    selected?: string
+}) => QueryResponse
+
+interface ModelSingleSelectProps {
     onChange: ({ selected }: { selected: string }) => void
+    placeholder?: string
     selected?: string
     showAllOption?: boolean
-}) {
+    onBlur?: () => void
+    onFocus?: () => void
+    useInitialOptionQuery: UseInitialOptionQuery
+    useOptionsQuery: () => QueryResponse
+}
+
+export interface ModelSingleSelectHandle {
+    refetch: () => void
+}
+
+export const ModelSingleSelect = forwardRef(function ModelSingleSelect(
+    {
+        onChange,
+        placeholder = '',
+        selected,
+        showAllOption,
+        onBlur,
+        onFocus,
+        useInitialOptionQuery,
+        useOptionsQuery,
+    }: ModelSingleSelectProps,
+    ref
+) {
     // Using a ref because we don't want to react to changes.
     // We're using this value only when imperatively calling `refetch`,
     // nothing that depends on the render-cycle depends on this value
@@ -59,45 +91,61 @@ export function CategoryComboSelect({
     })
 
     const { refetch, data } = optionsQuery
-    const pager = data?.pager
+    const pager = (data as { pager: Pager })?.pager
     const page = pager?.page || 0
     const pageCount = pager?.pageCount || 0
 
+    useImperativeHandle(
+        ref,
+        () => ({
+            refetch: () => {
+                pageRef.current = 1
+                refetch({ page: pageRef.current, filter: filterRef.current })
+            },
+        }),
+        [refetch]
+    )
+
     const adjustQueryParamsWithChangedFilter = useCallback(
         ({ value }: { value: string }) => {
-            const nextFilter = value ? `name:ilike:${value}` : ''
-            filterRef.current = nextFilter
-            refetch({ page: 0, filter: nextFilter })
+            pageRef.current = 1
+            filterRef.current = value
+            refetch({ page: pageRef.current, filter: value })
         },
         [refetch]
     )
 
-    const incrementPage = useCallback(
-        () => refetch({ page: page + 1, filter: filterRef.current }),
-        [refetch, page]
-    )
+    const incrementPage = useCallback(() => {
+        pageRef.current = page + 1
+        refetch({ page: pageRef.current, filter: filterRef.current })
+    }, [refetch, page])
 
-    const loading = optionsQuery.loading || initialOptionQuery.loading
+    const loading =
+        optionsQuery.fetching ||
+        optionsQuery.loading ||
+        initialOptionQuery.loading
     const error =
         optionsQuery.error || initialOptionQuery.error
             ? // @TODO: Ask Joe what do do here!
               'An error has occurred. Please try again'
             : ''
+    const result = (data as { result: SelectOption[] })?.result || []
 
     const displayOptions = computeDisplayOptions({
         selected,
         selectedOption,
-        options: data?.result,
+        options: result,
     })
 
     return (
         <SearchableSingleSelect
+            placeholder={placeholder}
             showAllOption={showAllOption}
             onChange={({ selected }) => {
                 if (selected === selectedOption?.value) {
                     setSelectedOption(undefined)
                 } else {
-                    const option = data.result.find(
+                    const option = result.find(
                         ({ value }) => value === selected
                     )
                     setSelectedOption(option)
@@ -114,10 +162,12 @@ export function CategoryComboSelect({
             error={error}
             onRetryClick={() => {
                 refetch({
-                    pageSize: pageRef.current,
+                    page: pageRef.current,
                     filter: filterRef.current,
                 })
             }}
+            onBlur={onBlur}
+            onFocus={onFocus}
         />
     )
-}
+})

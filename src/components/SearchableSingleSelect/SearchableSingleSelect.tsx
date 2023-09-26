@@ -5,8 +5,9 @@ import {
     SingleSelect,
     SingleSelectOption,
 } from '@dhis2/ui'
-import React, { forwardRef, useCallback, useEffect, useState } from 'react'
-import { useDebouncedCallback } from 'use-debounce'
+import React, { forwardRef, useEffect, useState } from 'react'
+// import { useDebouncedCallback } from 'use-debounce'
+import { useDebouncedState } from '../../lib'
 import classes from './SearchableSingleSelect.module.css'
 
 interface Option {
@@ -53,41 +54,38 @@ interface SearchableSingleSelectPropTypes {
     onEndReached: () => void
     onRetryClick: () => void
     options: Option[]
+    placeholder: string
     showEndLoader: boolean
     loading: boolean
     selected?: string
     error?: string
     showAllOption?: boolean
+    onBlur?: () => void
+    onFocus?: () => void
 }
 
 export const SearchableSingleSelect = ({
-    showAllOption,
     error,
     loading,
+    placeholder,
+    onBlur,
     onChange,
-    onFilterChange,
     onEndReached,
+    onFilterChange,
+    onFocus,
+    onRetryClick,
     options,
     selected,
+    showAllOption,
     showEndLoader,
-    onRetryClick,
 }: SearchableSingleSelectPropTypes) => {
     const [loadingSpinnerRef, setLoadingSpinnerRef] = useState<HTMLElement>()
-    const debouncedOnFilterChange = useDebouncedCallback<OnFilterChange>(
-        (args) => onFilterChange(args),
-        200
-    )
 
-    // We want to defer the actual filter value so we don't send a request with
-    // every key stroke
-    const [filterValue, _setFilterValue] = useState('')
-    const setFilterValue = useCallback(
-        (nextFilterValue: string) => {
-            _setFilterValue(nextFilterValue)
-            debouncedOnFilterChange({ value: nextFilterValue })
-        },
-        [debouncedOnFilterChange]
-    )
+    const { liveValue: filter, setValue: setFilterValue } =
+        useDebouncedState<string>({
+            initialValue: '',
+            onSetDebouncedValue: (value: string) => onFilterChange({ value }),
+        })
 
     useEffect(() => {
         // We don't want to wait for intersections when loading as that can
@@ -124,22 +122,25 @@ export const SearchableSingleSelect = ({
             // any value to the "selected" prop, as otherwise an error will be thrown
             selected={hasSelectedInOptionList ? selected : ''}
             onChange={onChange}
-            placeholder={i18n.t('Category combo')}
+            placeholder={placeholder}
+            onBlur={onBlur}
+            onFocus={onFocus}
         >
             <div className={classes.searchField}>
                 <div className={classes.searchInput}>
                     <Input
                         dense
-                        value={filterValue}
+                        value={filter}
                         onChange={({ value }: { value: string }) =>
                             setFilterValue(value)
                         }
+                        placeholder={i18n.t('Filter options')}
                     />
                 </div>
 
                 <button
                     className={classes.clearButton}
-                    disabled={!filterValue}
+                    disabled={!filter}
                     onClick={() => setFilterValue('')}
                 >
                     clear

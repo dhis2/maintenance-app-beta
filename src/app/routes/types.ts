@@ -10,6 +10,7 @@ type MatchWithHandle<THandle> = ReturnType<typeof useMatches>[number] & {
 // common type for possible handle-properties used in Route
 export type RouteHandle = {
     hideSidebar?: boolean
+    showFooter?: boolean
     section?: SchemaSection
     crumb?: () => React.ReactNode
 }

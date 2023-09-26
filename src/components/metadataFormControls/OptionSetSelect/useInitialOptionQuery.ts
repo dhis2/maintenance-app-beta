@@ -1,18 +1,18 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import { useRef } from 'react'
 import { SelectOption } from '../../../types'
-import { FilteredCategoryCombo } from './types'
+import { FilteredOptionSet } from './types'
 
-type InitialCategoryComboQueryResult = {
-    categoryCombo: FilteredCategoryCombo
+type InitialOptionSetQueryResult = {
+    optionSet: FilteredOptionSet
 }
 
 const INITIAL_OPTION_QUERY = {
-    categoryCombo: {
-        resource: 'categoryCombos',
+    optionSet: {
+        resource: 'optionSets',
         id: (variables: Record<string, string>) => variables.id,
         params: {
-            fields: ['id', 'name'],
+            fields: ['id', 'displayName'],
         },
     },
 }
@@ -25,12 +25,12 @@ export function useInitialOptionQuery({
     selected?: string
 }) {
     const initialSelected = useRef(selected)
-    return useDataQuery<InitialCategoryComboQueryResult>(INITIAL_OPTION_QUERY, {
+    return useDataQuery<InitialOptionSetQueryResult>(INITIAL_OPTION_QUERY, {
         lazy: !initialSelected.current,
         variables: { id: selected },
         onComplete: (data) => {
-            const categoryCombo = data.categoryCombo
-            const { id: value, name: label } = categoryCombo
+            const optionSet = data.optionSet
+            const { id: value, displayName: label } = optionSet
             onComplete({ value, label })
         },
     })

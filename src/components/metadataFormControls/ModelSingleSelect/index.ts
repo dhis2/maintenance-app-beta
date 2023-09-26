@@ -1,0 +1,1 @@
+export { ModelSingleSelect } from './ModelSingleSelect'

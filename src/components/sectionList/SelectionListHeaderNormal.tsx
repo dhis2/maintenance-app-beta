@@ -3,7 +3,7 @@ import { Button } from '@dhis2/ui'
 import { IconAdd24 } from '@dhis2/ui-icons'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { routePaths } from '../../app/routes/routePaths'
+import { routePaths } from '../../lib'
 import css from './SectionList.module.css'
 
 export const SelectionListHeader = () => {

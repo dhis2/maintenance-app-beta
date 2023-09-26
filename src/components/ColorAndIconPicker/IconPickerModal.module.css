@@ -1,0 +1,36 @@
+.tabBar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    background: var(--colors-white);
+}
+
+.search {
+    border-bottom: 1px solid var(--colors-grey400);
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 8px;
+}
+
+.iconsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacers-dp8);
+    padding: var(--spacers-dp8);
+}
+
+.iconContainer {
+    cursor: pointer;
+}
+
+.active, .iconContainer:hover {
+    outline: var(--colors-blue300) solid 3px;
+}
+
+.iconImage {
+    display: block;
+    height: 48px;
+    width: 48px;
+}
