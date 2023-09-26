@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { OVERVIEW_SECTIONS, SECTIONS_MAP } from '../../constants'
 import { SystemSettings } from '../../types'
+import { OVERVIEW_SECTIONS, SECTIONS_MAP } from '../constants'
 import { useSchemaStore } from '../schemas/schemaStore'
 import { useSystemSettingsStore } from '../systemSettings/systemSettingsStore'
 import { ModelSchemas, CurrentUser } from '../useLoadApp'

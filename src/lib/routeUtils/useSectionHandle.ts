@@ -1,7 +1,7 @@
 import { useMatches } from 'react-router-dom'
 import { MatchRouteHandle } from '../../app/routes/types'
-import { isOverviewSection, isSchemaSection } from '../../constants'
 import { ModelSection, SchemaSection, Section } from '../../types'
+import { isOverviewSection, isSchemaSection } from '../constants'
 
 export const useSectionHandle = (): Section | undefined => {
     const matches = useMatches() as MatchRouteHandle[]

@@ -1,8 +1,5 @@
 import React from 'react'
-import {
-    DOMAIN_TYPE,
-    VALUE_TYPE,
-} from '../../../constants/translatedModelConstants'
+import { DOMAIN_TYPE, VALUE_TYPE } from '../../../lib'
 import { ConstantSelectionFilter } from './ConstantSelectionFilter'
 
 export const DomainTypeSelectionFilter = () => {

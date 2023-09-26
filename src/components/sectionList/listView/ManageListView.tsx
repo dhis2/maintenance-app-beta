@@ -1,8 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, Transfer } from '@dhis2/ui'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { getColumnsForSection } from '../../../constants'
-import { useModelSectionHandleOrThrow } from '../../../lib'
+import {
+    getColumnsForSection,
+    useModelSectionHandleOrThrow,
+} from '../../../lib'
 import css from './ManageListView.module.css'
 import { useModelListView, useMutateModelListViews } from './useModelListView'
 

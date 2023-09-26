@@ -1,5 +1,5 @@
-import { SectionName } from '../../../constants'
-import type { ModelPropertyDescriptor } from '../../../constants'
+import { SectionName } from '../../../lib'
+import type { ModelPropertyDescriptor } from '../../../lib'
 
 export interface ModelListView {
     name: string

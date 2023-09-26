@@ -4,8 +4,8 @@ import {
     OVERVIEW_SECTIONS,
     SECTIONS_MAP,
     Section,
-} from '../../constants/sections'
-import { useIsSectionAuthorizedPredicate } from '../../lib'
+    useIsSectionAuthorizedPredicate,
+} from '../../lib'
 import { getOverviewPath, getSectionPath } from '../routes/routePaths'
 
 export interface LinkItem {
