@@ -25,7 +25,7 @@ type DataStoreOptions = {
     global?: boolean
 }
 
-type ObjectResult = Record<string, any>
+type ObjectResult = Record<string, unknown>
 
 const createBoundQueryFn =
     <TData>(engine: DataEngine) =>
@@ -38,8 +38,8 @@ const getDataStoreResource = (global?: boolean) =>
 type NamespaceOptions = Pick<DataStoreOptions, 'namespace' | 'global'>
 
 type ValuesOptions = NamespaceOptions & { key: string }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type SetValuesOptions<ResultType = any> = ValuesOptions & {
+
+type SetValuesOptions<ResultType> = ValuesOptions & {
     data: ResultType
 }
 

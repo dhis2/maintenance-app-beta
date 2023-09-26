@@ -1,4 +1,4 @@
-import type { OverviewSectionName, SectionName } from '../constants'
+import type { OverviewSectionName } from '../constants'
 import { SchemaAuthorities, SchemaName } from './schemaBase'
 
 export interface SectionBase {
