@@ -1,4 +1,4 @@
-import type { Section } from '../../constants/sections'
+import type { Section } from '../../lib'
 
 export const routePaths = {
     overviewRoot: 'overview',

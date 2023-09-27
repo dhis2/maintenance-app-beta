@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
-import { OVERVIEW_SECTIONS, SECTIONS_MAP } from '../../constants'
+import { OVERVIEW_SECTIONS, SECTIONS_MAP } from '../../lib'
 import { FilterAuthorizedSections, SummaryCard, SummaryCardGroup } from './card'
 import { OverviewGroup, OverviewGroupSummary } from './group'
 

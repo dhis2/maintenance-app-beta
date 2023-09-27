@@ -18,8 +18,9 @@ import {
     Section,
     SchemaSection,
     OVERVIEW_SECTIONS,
-} from '../../constants'
-import { isValidUid, isModuleNotFoundError } from '../../lib'
+    isValidUid,
+    isModuleNotFoundError,
+} from '../../lib'
 import { OverviewSection } from '../../types'
 import { Layout, Breadcrumbs, BreadcrumbItem } from '../layout'
 import { CheckAuthorityForSection } from './CheckAuthorityForSection'

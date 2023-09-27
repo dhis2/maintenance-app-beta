@@ -1,8 +1,11 @@
 import { useMemo, useCallback } from 'react'
 import { useQueryClient } from 'react-query'
 import { z } from 'zod'
-import { getViewConfigForSection, sectionNames } from '../../../constants'
-import { useModelSectionHandleOrThrow } from '../../../lib'
+import {
+    getViewConfigForSection,
+    sectionNames,
+    useModelSectionHandleOrThrow,
+} from '../../../lib'
 import { useDataStoreValues } from '../../../lib/dataStore'
 import {
     queryCreators,

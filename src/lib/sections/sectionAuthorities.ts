@@ -1,12 +1,12 @@
 import { useCallback } from 'react'
+import { ModelSection } from '../../types'
 import {
     SECTIONS_MAP,
     isSchemaSection,
     Section,
     SchemaSection,
     isOverviewSection,
-} from '../../constants'
-import { ModelSection } from '../../types'
+} from '../constants'
 import { useSchemas } from '../schemas'
 import { useSystemSetting } from '../systemSettings'
 import { ModelSchemas } from '../useLoadApp'

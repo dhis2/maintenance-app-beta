@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { configure, render } from '@testing-library/react'
 import React from 'react'
 import { useMatches, HashRouter } from 'react-router-dom'
-import { OVERVIEW_SECTIONS, SECTIONS_MAP } from '../../constants/sections'
+import { OVERVIEW_SECTIONS, SECTIONS_MAP } from '../../lib'
 import { MatchRouteHandle, RouteHandle } from '../routes/types'
 import { Breadcrumbs, BreadcrumbItem } from './Breadcrumb'
 

@@ -9,7 +9,7 @@ import {
     OverviewSectionMap,
     OverviewSection,
     NonSchemaSection,
-} from '../types'
+} from '../../types'
 
 // for convenience so types can be imported with the map below
 export type { SectionMap, Section, SchemaSection, SchemaSectionMap }

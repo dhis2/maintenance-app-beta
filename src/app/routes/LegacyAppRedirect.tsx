@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import { NoticeBox, Button } from '@dhis2/ui'
 import React from 'react'
 import { useParams, Params } from 'react-router-dom'
-import { isOverviewSection, Section, SECTIONS_MAP } from '../../constants'
+import { isOverviewSection, Section, SECTIONS_MAP } from '../../lib'
 
 const legacyPath = '/dhis-web-maintenance/index.html#/'
 

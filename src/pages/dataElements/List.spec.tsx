@@ -9,7 +9,7 @@ import React from 'react'
 import dataElementsMock from '../../__mocks__/gists/dataElementsMock.json'
 import filteredDataElementsMock from '../../__mocks__/gists/filteredDataElementsMock.json'
 import dataElementSchemaMock from '../../__mocks__/schema/dataElementsSchema.json'
-import { SECTIONS_MAP } from '../../constants'
+import { SECTIONS_MAP } from '../../lib'
 import { useSchemaStore } from '../../lib/schemas/schemaStore'
 import { ModelSchemas } from '../../lib/useLoadApp'
 import TestComponentWithRouter, {

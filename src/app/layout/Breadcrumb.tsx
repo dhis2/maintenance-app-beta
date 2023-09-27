@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useMatches } from 'react-router-dom'
-import { Section, isOverviewSection } from '../../constants'
+import { Section, isOverviewSection } from '../../lib'
 import { getSectionPath, getOverviewPath } from '../routes/routePaths'
 import { MatchRouteHandle } from '../routes/types'
 import css from './Breadcrumb.module.css'
