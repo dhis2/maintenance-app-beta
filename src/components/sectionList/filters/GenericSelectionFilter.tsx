@@ -1,11 +1,9 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import React, { useState } from 'react'
 import { useInfiniteQuery, QueryFunctionContext } from 'react-query'
-import { useModelSectionHandleOrThrow } from '../../../lib'
 import { Query } from '../../../types'
 import {
     BaseIdentifiableObject,
-    IdentifiableObject,
     ModelCollectionResponse,
 } from '../../../types/generated'
 import { SearchableSingleSelect } from '../../SearchableSingleSelect'
