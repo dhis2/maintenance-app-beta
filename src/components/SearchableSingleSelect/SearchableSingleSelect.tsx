@@ -58,11 +58,13 @@ interface SearchableSingleSelectPropTypes {
     selected?: string
     error?: string
     showAllOption?: boolean
+    label: string
 }
 
 export const SearchableSingleSelect = ({
     showAllOption,
     error,
+    label,
     loading,
     onChange,
     onFilterChange,
@@ -96,7 +98,6 @@ export const SearchableSingleSelect = ({
             const observer = new IntersectionObserver(
                 (entries) => {
                     const [{ isIntersecting }] = entries
-
                     if (isIntersecting) {
                         onEndReached()
                     }
@@ -124,7 +125,7 @@ export const SearchableSingleSelect = ({
             // any value to the "selected" prop, as otherwise an error will be thrown
             selected={hasSelectedInOptionList ? selected : ''}
             onChange={onChange}
-            placeholder={i18n.t('Category combo')}
+            placeholder={label}
         >
             <div className={classes.searchField}>
                 <div className={classes.searchInput}>

@@ -5,6 +5,7 @@ import {
     ValueTypeSelectionFilter,
     useQueryParamsForModelGist,
 } from '../../components'
+import { GenericSelectionFilter } from '../../components/sectionList/filters/GenericSelectionFilter'
 import { useModelListView } from '../../components/sectionList/listView'
 import { getFieldFilterFromPath, useModelGist } from '../../lib/'
 import { DataElement, GistCollectionResponse } from '../../types/models'
@@ -27,6 +28,7 @@ type DataElements = GistCollectionResponse<FilteredDataElement>
 export const Component = () => {
     const { columns, query: listViewQuery } = useModelListView()
     const initialParams = useQueryParamsForModelGist()
+
     const { refetch, error, data } = useModelGist<DataElements>(
         'dataElements/gist',
         {
@@ -52,6 +54,11 @@ export const Component = () => {
 
     return (
         <div>
+            <GenericSelectionFilter
+                label="Data elements"
+                filterKey="uid"
+                query={{ resource: 'dataElements' }}
+            />
             <SectionListWrapper
                 filterElement={
                     <>

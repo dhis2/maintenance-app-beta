@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { PublicAccessValue } from '../components/sectionList/modelValue/PublicAccess'
-import { uniqueBy } from '../lib'
+import { uniqueBy } from '../lib/utils/uniqueBy'
 import { SectionName } from './sections'
 import { getTranslatedProperty } from './translatedModelProperties'
 

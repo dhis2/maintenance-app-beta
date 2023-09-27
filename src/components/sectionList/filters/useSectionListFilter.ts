@@ -126,6 +126,9 @@ const parseToGistQueryFilter = (filters: Filters): string[] => {
         restFilterGroup = 1
     }
     Object.entries(restFilters).forEach(([key, value]) => {
+        if (key === 'uid') {
+            key = 'id'
+        }
         const group = restFilterGroup ? `${restFilterGroup++}:` : ''
         queryFilters.push(`${group}${key}:eq:${value}`)
     })

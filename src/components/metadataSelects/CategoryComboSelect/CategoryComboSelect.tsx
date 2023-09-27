@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import React, { useCallback, useRef, useState } from 'react'
 import { SelectOption } from '../../../types'
 import { SearchableSingleSelect } from '../../SearchableSingleSelect'
@@ -92,6 +93,7 @@ export function CategoryComboSelect({
 
     return (
         <SearchableSingleSelect
+            label={i18n.t('Category combo')}
             showAllOption={showAllOption}
             onChange={({ selected }) => {
                 if (selected === selectedOption?.value) {
