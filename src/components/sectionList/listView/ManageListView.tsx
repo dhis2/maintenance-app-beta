@@ -1,5 +1,6 @@
+import { FetchError } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, Transfer } from '@dhis2/ui'
+import { Button, Field, NoticeBox, Transfer } from '@dhis2/ui'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import {
     getColumnsForSection,
@@ -7,7 +8,6 @@ import {
 } from '../../../lib'
 import css from './ManageListView.module.css'
 import { useModelListView, useMutateModelListViews } from './useModelListView'
-
 interface RenderProps {
     handleSave: () => void
     isSaving: boolean
@@ -31,6 +31,9 @@ export const ManageListView = ({
     const [pendingSelectedColumns, setPendingSelectedColumns] = useState<
         string[]
     >(() => savedColumns.map(toPath))
+    const [error, setError] = useState<string | undefined>()
+    const [saveError, setSaveError] = useState<FetchError | undefined>()
+
     const { saveColumns, mutation } = useMutateModelListViews()
 
     const columnsConfig = getColumnsForSection(section.name)
@@ -45,18 +48,30 @@ export const ManageListView = ({
     }, [savedColumns])
 
     const handleSave = () => {
+        if (pendingSelectedColumns.length < 1) {
+            setError(i18n.t('At least one column must be selected'))
+            return
+        }
         saveColumns(pendingSelectedColumns, {
             onSuccess: () => onSaved(),
+            onError: (error) => {
+                if (error instanceof FetchError) {
+                    setSaveError(error)
+                }
+            },
         })
-    }
-
-    const handleSetDefault = () => {
-        setPendingSelectedColumns(columnsConfig.default.map(toPath))
     }
 
     const handleChange = ({ selected }: { selected: string[] }) => {
         isTouched.current = true
+
         setPendingSelectedColumns(selected)
+        setError(undefined)
+        setSaveError(undefined)
+    }
+
+    const handleSetDefault = () => {
+        handleChange({ selected: columnsConfig.default.map(toPath) })
     }
 
     const transferOptions = useMemo(
@@ -72,25 +87,27 @@ export const ManageListView = ({
 
     return (
         <>
-            <Transfer
-                height={'320px'}
-                enableOrderChange
-                leftHeader={
-                    <TransferHeader>
-                        {i18n.t('Available table columns')}
-                    </TransferHeader>
-                }
-                rightHeader={
-                    <TransferHeader>
-                        {i18n.t('Selected table columns')}
-                    </TransferHeader>
-                }
-                onChange={handleChange}
-                loading={query.isLoading}
-                loadingPicked={query.isLoading}
-                options={transferOptions}
-                selected={pendingSelectedColumns}
-            />
+            <Field error={!!error} validationText={error} name={'columns'}>
+                <Transfer
+                    height={'320px'}
+                    enableOrderChange
+                    leftHeader={
+                        <TransferHeader>
+                            {i18n.t('Available table columns')}
+                        </TransferHeader>
+                    }
+                    rightHeader={
+                        <TransferHeader>
+                            {i18n.t('Selected table columns')}
+                        </TransferHeader>
+                    }
+                    onChange={handleChange}
+                    loading={query.isLoading}
+                    loadingPicked={query.isLoading}
+                    options={transferOptions}
+                    selected={pendingSelectedColumns}
+                />
+            </Field>
             <Button
                 className={css.resetDefaultButton}
                 small
@@ -100,6 +117,13 @@ export const ManageListView = ({
             >
                 {i18n.t('Reset to default columns')}
             </Button>
+            {saveError && (
+                <p>
+                    <NoticeBox error title={i18n.t('Failed to save')}>
+                        {saveError.message}
+                    </NoticeBox>
+                </p>
+            )}
             {children({ handleSave, isSaving: mutation.isLoading })}
         </>
     )
