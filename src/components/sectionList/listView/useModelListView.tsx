@@ -23,14 +23,14 @@ const valuesQueryKey = [
     }),
 ]
 
-const modelListViewSchema = z.object({
+const dataStoreModelListViewSchema = z.object({
     name: z.string(),
     sectionModel: z.string(),
     columns: z.array(z.string()),
     filters: z.array(z.string()),
 })
 
-type DataModelListView = z.infer<typeof modelListViewSchema>
+type DataStoreModelListView = z.infer<typeof dataStoreModelListViewSchema>
 
 const modelListViewsSchema = z
     // TODO: support only one view for now - but update this to support multiple views
@@ -38,10 +38,11 @@ const modelListViewsSchema = z
         z
             .string()
             .refine((val) => sectionNames.has(val), 'Not a valid section'),
-        z.array(modelListViewSchema).length(1)
+        z.array(dataStoreModelListViewSchema).length(1)
     )
     .refine((val) => Object.keys(val).length > 0)
-type DataModelListViews = z.infer<typeof modelListViewsSchema>
+
+type DataStoreModelListViews = z.infer<typeof modelListViewsSchema>
 
 const getDefaultViewForSection = (sectionName: string): ModelListView => {
     const defaultViewConfig = getViewConfigForSection(sectionName)
@@ -56,10 +57,10 @@ const getDefaultViewForSection = (sectionName: string): ModelListView => {
 // parses and validates stored data in UserDataStore to internal format
 // labels are not stored since these are translated
 const parseViewToModelListView = (
-    data: DataModelListView,
+    data: DataStoreModelListView,
     name: string
 ): ModelListView => {
-    const listView = modelListViewSchema.safeParse(data)
+    const listView = dataStoreModelListViewSchema.safeParse(data)
     if (!listView.success) {
         return getDefaultViewForSection(name)
     }
@@ -92,7 +93,7 @@ const parseViewToModelListView = (
 
 const formatViewToDataStore = (
     view: ModelListView
-): z.infer<typeof modelListViewSchema> => {
+): z.infer<typeof dataStoreModelListViewSchema> => {
     const savedView = {
         ...view,
         columns: view.columns.map((c) => c.path),
@@ -109,7 +110,7 @@ const formatViewToDataStore = (
 // remove this part, sicne we're not interested in them
 // also map displayName to name, since in GIST-API 'names' are translated
 const createValidViewSelect = (sectionName: string) => {
-    return (data: DataModelListViews): ModelListView => {
+    return (data: DataStoreModelListViews): ModelListView => {
         const modelListViews = modelListViewsSchema.safeParse(data)
 
         if (!modelListViews.success) {
@@ -164,7 +165,7 @@ export const useMutateModelListViews = () => {
     const getListViews = useCallback(() => {
         // note, because selectors are per-observer, these are not "mapped" to valid a specific section
         // it's exact data as we got from the request
-        const prevData: WrapInResult<DataModelListViews> | undefined =
+        const prevData: WrapInResult<DataStoreModelListViews> | undefined =
             queryClient.getQueryData(valuesQueryKey)
         if (!prevData) {
             return {}
@@ -175,7 +176,7 @@ export const useMutateModelListViews = () => {
 
     const saveView = useCallback(
         async (
-            newView: Partial<DataModelListView> & { name: string },
+            newView: Partial<DataStoreModelListView> & { name: string },
             mutateOptions?: Parameters<typeof mutate>[1]
         ) => {
             const prevData = getListViews()
@@ -197,7 +198,7 @@ export const useMutateModelListViews = () => {
                 return view
             })
 
-            const newViewsData: DataModelListViews = {
+            const newViewsData: DataStoreModelListViews = {
                 ...prevData,
                 [section.name]: newViewsForSection,
             }
