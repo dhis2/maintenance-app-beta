@@ -1,0 +1,12 @@
+.editableFieldWrapper {
+    display: flex;
+    gap: 8px;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+
+    /* 19px height of label text + 2px margin-top of input */
+    padding-top: 21px;
+}

@@ -1,0 +1,20 @@
+.categoryComboSelect, .optionSetSelect {
+    width: 400px;
+}
+
+.legendsOptionsFooter {
+    padding: var(--spacers-dp8) 0;
+}
+
+.legendsPickedHeader {
+    padding: var(--spacers-dp8) 0;
+    margin: 0;
+}
+
+label.domainTypeRadioButton {
+    display: inline-flex;
+}
+
+.domainTypeRadioButton + .domainTypeRadioButton {
+    margin-left: var(--spacers-dp8);
+}

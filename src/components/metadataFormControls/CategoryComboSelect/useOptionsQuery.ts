@@ -25,7 +25,7 @@ const CATEGORY_COMBOS_QUERY = {
             if (variables.filter) {
                 return {
                     ...params,
-                    filter: variables.filter,
+                    filter: `name:ilike:${variables.filter}`,
                 }
             }
 

@@ -18,15 +18,16 @@ import {
     Section,
     SchemaSection,
     OVERVIEW_SECTIONS,
-    isValidUid,
+    getSectionPath,
     isModuleNotFoundError,
+    isValidUid,
+    routePaths,
 } from '../../lib'
 import { OverviewSection } from '../../types'
 import { Layout, Breadcrumbs, BreadcrumbItem } from '../layout'
 import { CheckAuthorityForSection } from './CheckAuthorityForSection'
 import { DefaultErrorRoute } from './DefaultErrorRoute'
 import { LegacyAppRedirect } from './LegacyAppRedirect'
-import { getSectionPath, routePaths } from './routePaths'
 
 // This loads all the overview routes in the same chunk since they resolve to the same promise
 // see https://reactrouter.com/en/main/route/lazy#multiple-routes-in-a-single-file
@@ -127,8 +128,9 @@ const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
             <Route path=":id" element={<VerifyModelId />}>
                 <Route
                     index
+                    handle={{ showFooter: true }}
                     lazy={createSectionLazyRouteFunction(section, 'Edit')}
-                ></Route>
+                />
             </Route>
         </Route>
     </Route>

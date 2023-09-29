@@ -8,7 +8,7 @@ ls:
         .spec.tsx: PascalCase | camelCase
         .spec.ts: PascalCase | camelCase
         .tsx: PascalCase | camelCase
-        .module.css: PascalCase
+        .module.css: PascalCase | camelCase
         .d.ts: kebab-case
 
     cypress:
@@ -28,3 +28,4 @@ ignore:
     - src/types/generated
     - src/app/__snapshots__
     - src/__mocks__
+    - src/pages/dataElements/__mocks__

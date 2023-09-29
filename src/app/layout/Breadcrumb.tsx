@@ -1,8 +1,12 @@
 import React from 'react'
 import { Link, useMatches } from 'react-router-dom'
-import { Section, isOverviewSection } from '../../lib'
-import { getSectionPath, getOverviewPath } from '../routes/routePaths'
-import { MatchRouteHandle } from '../routes/types'
+import {
+    Section,
+    isOverviewSection,
+    getSectionPath,
+    getOverviewPath,
+} from '../../lib'
+import type { MatchRouteHandle } from '../routes/types'
 import css from './Breadcrumb.module.css'
 
 const BreadcrumbSeparator = () => <span className={css.separator}>/</span>

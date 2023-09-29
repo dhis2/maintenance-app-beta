@@ -1,0 +1,6 @@
+.standardFormSectionTitle {
+    margin: 0 0 var(--spacers-dp8);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--colors-grey800);
+}
