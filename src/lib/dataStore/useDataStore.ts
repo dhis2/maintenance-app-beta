@@ -82,7 +82,7 @@ type UseDataStoreValuesOptions<SelectResult, ResultType> = ValuesOptions & {
     select?: (data: ResultType) => SelectResult
     enabled?: boolean
 }
-export function useDataStoreValues<
+export function useDataStoreValuesQuery<
     ResultType = ObjectResult,
     SelectResult = ResultType
 >(options: UseDataStoreValuesOptions<SelectResult, ResultType>) {
@@ -107,7 +107,7 @@ export function useDataStoreValues<
     })
 }
 
-export const useMutateDataStoreValues = (options: ValuesOptions) => {
+export const useMutateDataStoreValuesQuery = (options: ValuesOptions) => {
     const mergedOptions = {
         ...defaultOptions,
         ...options,

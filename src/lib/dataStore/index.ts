@@ -1,1 +1,1 @@
-export { useDataStoreValues } from './useDataStore'
+export { useDataStoreValuesQuery as useDataStoreValues } from './useDataStore'

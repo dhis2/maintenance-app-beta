@@ -9,7 +9,7 @@ import {
 import { useDataStoreValues } from '../../../lib/dataStore'
 import {
     queryCreators,
-    useMutateDataStoreValues,
+    useMutateDataStoreValuesQuery,
 } from '../../../lib/dataStore/useDataStore'
 import { ModelListView } from './types'
 
@@ -156,7 +156,7 @@ export const useMutateModelListViews = () => {
     const section = useModelSectionHandleOrThrow()
     const queryClient = useQueryClient()
 
-    const mutation = useMutateDataStoreValues({
+    const mutation = useMutateDataStoreValuesQuery({
         namespace: maintenanceNamespace,
         key: configurableColumnsKey,
     })
