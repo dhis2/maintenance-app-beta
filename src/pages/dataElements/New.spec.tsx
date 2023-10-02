@@ -1,10 +1,4 @@
-import {
-    RenderResult,
-    act,
-    fireEvent,
-    render,
-    waitFor,
-} from '@testing-library/react'
+import { RenderResult, fireEvent, render } from '@testing-library/react'
 import React from 'react'
 import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 import dataElementSchemaMock from '../../__mocks__/schema/dataElementsSchema.json'
