@@ -55,6 +55,7 @@ export function DataElementFormFields() {
                 <StandardFormField>
                     <FieldRFF
                         component={InputFieldFF}
+                        dataTest="dataelementsformfields-name"
                         required
                         inputWidth="400px"
                         label={i18n.t('Name (required)')}
@@ -62,13 +63,16 @@ export function DataElementFormFields() {
                         helpText={i18n.t(
                             'A data element name should be concise and easy to recognize.'
                         )}
+                        validate={(value) => (!value ? 'Required' : undefined)}
                     />
                 </StandardFormField>
 
                 <StandardFormField>
                     <FieldRFF
-                        component={InputFieldFF}
                         required
+                        component={InputFieldFF}
+                        dataTest="dataelementsformfields-shortname"
+                        validate={(value) => (!value ? 'Required' : undefined)}
                         inputWidth="400px"
                         name="shortName"
                         label={i18n.t('Short name (required)')}
@@ -81,6 +85,7 @@ export function DataElementFormFields() {
                 <StandardFormField>
                     <FieldRFF
                         component={InputFieldFF}
+                        dataTest="dataelementsformfields-code"
                         inputWidth="150px"
                         name="code"
                         label={i18n.t('Code')}
@@ -90,6 +95,7 @@ export function DataElementFormFields() {
                 <StandardFormField>
                     <FieldRFF
                         component={TextAreaFieldFF}
+                        dataTest="dataelementsformfields-description"
                         inputWidth="400px"
                         name="description"
                         label={i18n.t('Description')}
@@ -102,6 +108,7 @@ export function DataElementFormFields() {
                 <StandardFormField>
                     <FieldRFF
                         component={InputFieldFF}
+                        dataTest="dataelementsformfields-url"
                         inputWidth="400px"
                         name="url"
                         label={i18n.t('Url')}
@@ -119,6 +126,7 @@ export function DataElementFormFields() {
                     <FieldRFF
                         component={InputFieldFF}
                         inputWidth="400px"
+                        dataTest="dataelementsformfields-fieldmask"
                         name="fieldMask"
                         label={i18n.t('Field mask')}
                         helpText={i18n.t(
@@ -131,6 +139,7 @@ export function DataElementFormFields() {
                 <StandardFormField>
                     <FieldRFF
                         component={InputFieldFF}
+                        dataTest="dataelementsformfields-formname"
                         inputWidth="400px"
                         name="formName"
                         label={i18n.t('StandardForm name')}
@@ -143,6 +152,7 @@ export function DataElementFormFields() {
                 <StandardFormField>
                     <FieldRFF
                         component={CheckboxFieldFF}
+                        dataTest="dataelementsformfields-zeroissignificant"
                         name="zeroIsSignificant"
                         label={i18n.t('Store zero data values')}
                         type="checkbox"

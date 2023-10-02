@@ -4,15 +4,17 @@ import classes from './EditableFieldWrapper.module.css'
 
 export function EditableFieldWrapper({
     children,
+    dataTest,
     onRefresh,
     onAddNew,
 }: {
     children: React.ReactNode
+    dataTest?: string
     onRefresh: (e: React.MouseEvent<HTMLButtonElement>) => void
     onAddNew: (e: React.MouseEvent<HTMLButtonElement>) => void
 }) {
     return (
-        <div className={classes.editableFieldWrapper}>
+        <div data-test={dataTest} className={classes.editableFieldWrapper}>
             <div>{children}</div>
 
             <div className={classes.actions}>
