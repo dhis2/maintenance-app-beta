@@ -113,7 +113,6 @@ export const Component = () => {
                 variables: payload,
             })
         } catch (e) {
-            console.log('> e', e)
             return { [FORM_ERROR]: (e as Error | string).toString() }
         }
 

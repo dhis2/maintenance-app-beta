@@ -64,9 +64,8 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
         )
     }
 
-    throw new Error(
-        `@TODO(CustomAttributes): Implement value type "${attribute.valueType}"!`
-    )
+    // @TODO: Verify that all value types have been covered!
+    throw new Error(`Implement value type "${attribute.valueType}"!`)
 }
 
 export function CustomAttributes({
