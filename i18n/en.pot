@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-10-04T08:57:37.954Z\n"
-"PO-Revision-Date: 2023-10-04T08:57:37.954Z\n"
+"POT-Creation-Date: 2023-10-04T12:04:30.821Z\n"
+"PO-Revision-Date: 2023-10-04T12:04:30.821Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -78,11 +78,14 @@ msgstr "Aggregation level(s)"
 msgid "Category combo"
 msgstr "Category combo"
 
-msgid "None"
-msgstr "None"
+msgid "Default (none)"
+msgstr "Default (none)"
 
 msgid "Filter legend sets"
 msgstr "Filter legend sets"
+
+msgid "None"
+msgstr "None"
 
 msgid "Option set"
 msgstr "Option set"

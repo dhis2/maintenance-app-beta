@@ -3,6 +3,7 @@ import { CheckboxFieldFF, InputFieldFF, TextAreaFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import {
+    Loader,
     StandardFormSection,
     StandardFormSectionTitle,
     StandardFormSectionDescription,
@@ -25,25 +26,11 @@ import { useCustomAttributesQuery } from './useCustomAttributesQuery'
 export function DataElementFormFields() {
     const customAttributes = useCustomAttributesQuery()
 
-    const loading = customAttributes.loading
-    const error = customAttributes.error
-
-    if (loading) {
-        return <>@TODO(DataElementForm): Loading</>
-    }
-
-    if (error) {
-        return (
-            <>
-                @TODO(DataElementForm): Error
-                <br />
-                {error.toString()}
-            </>
-        )
-    }
-
     return (
-        <>
+        <Loader
+            queryResponse={customAttributes}
+            label={i18n.t('Custom attributes')}
+        >
             <StandardFormSection>
                 <StandardFormSectionTitle>
                     {i18n.t('Basic information')}
@@ -232,6 +219,6 @@ export function DataElementFormFields() {
                     />
                 </StandardFormSection>
             )}
-        </>
+        </Loader>
     )
 }
