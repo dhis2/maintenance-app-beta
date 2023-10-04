@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-13T14:05:55.693Z\n"
-"PO-Revision-Date: 2023-09-13T14:05:55.693Z\n"
+"POT-Creation-Date: 2023-10-04T08:57:37.954Z\n"
+"PO-Revision-Date: 2023-10-04T08:57:37.954Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -47,6 +47,15 @@ msgstr "Search for menu items"
 
 msgid "Search icons"
 msgstr "Search icons"
+
+msgid "Select"
+msgstr "Select"
+
+msgid "Remove icon"
+msgstr "Remove icon"
+
+msgid "Cancel"
+msgstr "Cancel"
 
 msgid "Retry"
 msgstr "Retry"
@@ -521,9 +530,6 @@ msgstr "GeoJSON"
 
 msgid "Something went wrong when submitting the form"
 msgstr "Something went wrong when submitting the form"
-
-msgid "Cancel"
-msgstr "Cancel"
 
 msgid "Save and close"
 msgstr "Save and close"
