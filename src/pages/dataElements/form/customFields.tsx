@@ -220,6 +220,7 @@ export function CategoryComboField() {
                     validationText={meta.error}
                 >
                     <CategoryComboSelect
+                        required
                         placeholder=""
                         ref={categoryComboHandle}
                         selected={input.value}
