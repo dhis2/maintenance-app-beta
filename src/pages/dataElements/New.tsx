@@ -27,8 +27,10 @@ function computeInitialValues(customAttributes: Attribute[]) {
         code: '',
         description: '',
         url: '',
-        color: '',
-        icon: '',
+        style: {
+            color: '',
+            icon: '',
+        },
         fieldMask: '',
         domainType: 'AGGREGATE',
         formName: '',
