@@ -58,7 +58,9 @@ export function DataElementFormFields() {
                         dataTest="dataelementsformfields-name"
                         required
                         inputWidth="400px"
-                        label={i18n.t('Name (required)')}
+                        label={i18n.t('{{fieldLabel}} (required)', {
+                            fieldLabel: i18n.t('Name'),
+                        })}
                         name="name"
                         helpText={i18n.t(
                             'A data element name should be concise and easy to recognize.'
@@ -75,7 +77,9 @@ export function DataElementFormFields() {
                         validate={(value) => (!value ? 'Required' : undefined)}
                         inputWidth="400px"
                         name="shortName"
-                        label={i18n.t('Short name (required)')}
+                        label={i18n.t('{{fieldLabel}} (required)', {
+                            fieldLabel: i18n.t('Short name'),
+                        })}
                         helpText={i18n.t(
                             'Often used in reports where space is limited'
                         )}

@@ -67,7 +67,9 @@ export function DomainField() {
             required
             dataTest="dataelementsformfields-domaintype"
             name={name}
-            label={i18n.t('Domain (required)')}
+            label={i18n.t('{{fieldLabel}} (required)', {
+                fieldLabel: i18n.t('Domain'),
+            })}
             helpText={i18n.t(
                 'A data element can either be aggregated or tracked data.'
             )}
@@ -177,7 +179,9 @@ export function ValueTypeField() {
             validate={(value: string) => (!value ? 'Required' : undefined)}
             inputWidth="400px"
             name="valueType"
-            label={i18n.t('Value type (required)')}
+            label={i18n.t('{{fieldLabel}} (required)', {
+                fieldLabel: i18n.t('Value type'),
+            })}
             helpText={i18n.t('The type of data that will be recorded.')}
             options={options || []}
         />
@@ -201,7 +205,9 @@ export function AggregationTypeField() {
             validate={(value: string) => (!value ? 'Required' : undefined)}
             inputWidth="400px"
             name="aggregationType"
-            label={i18n.t('Aggregation type (required)')}
+            label={i18n.t('{{fieldLabel}} (required)', {
+                fieldLabel: i18n.t('Aggregation type'),
+            })}
             helpText={i18n.t(
                 'The default way to aggregate this data element in analytics.'
             )}
@@ -232,7 +238,9 @@ export function CategoryComboField() {
                         !value ? 'Required' : undefined
                     }
                     name="categoryCombo.id"
-                    label={i18n.t('Category combination (required)')}
+                    label={i18n.t('{{fieldLabel}} (required)', {
+                        fieldLabel: i18n.t('Category combination'),
+                    })}
                     helpText={i18n.t(
                         'Choose how this data element is disaggregated'
                     )}
