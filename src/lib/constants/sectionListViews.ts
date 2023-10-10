@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
-import { PublicAccessValue } from '../../components/sectionList/modelValue/PublicAccess'
+// import { PublicAccessValue } from '../../components/sectionList/modelValue/PublicAccess'
 import { uniqueBy } from '../utils'
-import { SectionName } from './sections'
+import type { SectionName } from './sections'
 import { getTranslatedProperty } from './translatedModelProperties'
 
 export interface ModelPropertyDescriptor {
@@ -52,7 +52,7 @@ const defaultModelViewConfig = {
             {
                 label: i18n.t('Public access'),
                 path: 'sharing.public',
-                component: PublicAccessValue,
+                // component: PublicAccessValue,
             },
         ],
         default: ['name', 'sharing.public', 'lastUpdated'],

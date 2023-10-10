@@ -5,7 +5,7 @@ import {
     useQueryClient,
     QueryFunctionContext,
 } from 'react-query'
-import { Query } from '../../types'
+import type { Query } from '../../types'
 
 // types not exported from app-runtime...
 type DataEngine = ReturnType<typeof useDataEngine>
@@ -98,13 +98,17 @@ export function useDataStoreValuesQuery<
         ? { result: mergedOptions.placeholderData }
         : undefined
 
-    return useQuery({
+    const res = useQuery({
         queryKey: [query],
         queryFn: createBoundQueryFn(engine),
         placeholderData,
         // hide ".result" from consumer
         select: (data) => select(data.result) as SelectResult,
     })
+
+    // console.log({ res })
+
+    return res
 }
 
 export const useMutateDataStoreValuesQuery = (options: ValuesOptions) => {

@@ -5,13 +5,11 @@ import {
     getViewConfigForSection,
     sectionNames,
     useModelSectionHandleOrThrow,
-} from '../../../lib'
-import { useDataStoreValues } from '../../../lib/dataStore'
-import {
+    useDataStoreValuesQuery,
     queryCreators,
     useMutateDataStoreValuesQuery,
-} from '../../../lib/dataStore/useDataStore'
-import { ModelListView } from './types'
+} from '../../../lib'
+import type { ModelListView } from './types'
 
 const maintenanceNamespace = 'maintenance'
 const configurableColumnsKey = 'modelListViews'
@@ -103,12 +101,9 @@ const formatViewToDataStore = (
     return savedView
 }
 
+// selects the specific section from the result, based on sectionName
 // check that columns are valid - because data in dataStore should not
 // be trusted - since there's no validation server-side.
-// we use same dataStore-keys as old app to be backwards-compatible
-// this stores columns as filters - eg. categoryCombo[displayName]
-// remove this part, sicne we're not interested in them
-// also map displayName to name, since in GIST-API 'names' are translated
 const createValidViewSelect = (sectionName: string) => {
     return (data: DataStoreModelListViews): ModelListView => {
         const modelListViews = modelListViewsSchema.safeParse(data)
@@ -130,7 +125,7 @@ export const useModelListView = () => {
     const section = useModelSectionHandleOrThrow()
     const select = useMemo(() => createValidViewSelect(section.name), [section])
 
-    const query = useDataStoreValues({
+    const query = useDataStoreValuesQuery({
         namespace: maintenanceNamespace,
         key: configurableColumnsKey,
         // selects the specific section from the result
