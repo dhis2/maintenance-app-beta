@@ -31,38 +31,24 @@ jest.mock('@dhis2/ui', () => {
 
 async function changeSingleSelect(
     result: RenderResult,
-    selectLabel: string,
-    value: string
+    selectLabelText: string,
+    text: string
 ) {
-    const label = result.getByText(selectLabel)
-    expect(label).toBeTruthy()
-
-    const field = label.parentNode?.parentNode as HTMLElement
+    const selectLabel = await result.findByText(selectLabelText)
+    const field = selectLabel.parentNode?.parentNode as HTMLElement
     expect(field).toBeTruthy()
 
     const trigger = field.querySelector(
         '[data-test="dhis2-uicore-select-input"].root'
     ) as HTMLElement
     expect(trigger).toBeTruthy()
-
     fireEvent.click(trigger)
 
-    await waitFor(() => {
-        expect(
-            result.container.querySelector('[data-test="dhis2-uicore-layer"]')
-        ).toBeTruthy()
+    await result.findByTestId('dhis2-uicore-layer')
+    const optionElement = await result.findByText(text, {
+        selector: '[data-value]',
     })
 
-    const optionSelector = `[data-value="${value}"]`
-    await waitFor(() => {
-        if (!result.container.querySelector(optionSelector)) {
-            throw new Error('Could not find option')
-        }
-    })
-
-    const optionElement = result.container.querySelector(
-        optionSelector
-    ) as HTMLElement
     fireEvent.click(optionElement)
 }
 
@@ -98,16 +84,13 @@ describe('Data Elements / New', () => {
             </ComponentWithProvider>
         )
 
-        await waitFor(() => {
-            expect(result.queryByText('Exit without saving')).toBeTruthy()
+        const cancelButton = await result.findByText('Exit without saving', {
+            selector: 'button',
         })
 
         expect(List).toHaveBeenCalledTimes(0)
 
-        const cancelButton = result.queryByText('Exit without saving', {
-            selector: 'button',
-        })
-        fireEvent.click(cancelButton as HTMLButtonElement)
+        fireEvent.click(cancelButton)
 
         expect(List).toHaveBeenCalledTimes(1)
     })
@@ -120,18 +103,11 @@ describe('Data Elements / New', () => {
             </ComponentWithProvider>
         )
 
-        await waitFor(() => {
-            expect(result.queryByText('Create data element')).toBeTruthy()
-        })
-
-        const submitButton = result.queryByText('Create data element', {
+        const submitButton = await result.findByText('Create data element', {
             selector: 'button',
         })
-        fireEvent.click(submitButton as HTMLButtonElement)
 
-        await waitFor(() => {
-            expect(result.container.querySelector('.error')).toBeTruthy()
-        })
+        fireEvent.click(submitButton as HTMLButtonElement)
 
         expect(
             result.container.querySelectorAll('.error[data-test*="validation"]')
@@ -190,43 +166,35 @@ describe('Data Elements / New', () => {
             </>
         )
 
-        await waitFor(() => {
-            expect(result.queryByText('Create data element')).toBeTruthy()
+        const submitButton = await result.findByText('Create data element', {
+            selector: 'button',
         })
 
-        act(() => {
-            fireEvent.change(
-                result.getByLabelText('Name (required)*') as HTMLElement,
-                { target: { value: 'Data element name' } }
-            )
-        })
+        expect(submitButton).toBeTruthy()
 
-        act(() => {
-            fireEvent.change(
-                result.getByLabelText('Short name (required)*') as HTMLElement,
-                { target: { value: 'Data element short name' } }
-            )
-        })
+        fireEvent.change(
+            result.getByLabelText('Name (required)*') as HTMLElement,
+            { target: { value: 'Data element name' } }
+        )
+
+        fireEvent.change(
+            result.getByLabelText('Short name (required)*') as HTMLElement,
+            { target: { value: 'Data element short name' } }
+        )
 
         await act(async () => {
-            await changeSingleSelect(result, 'Value type (required)', 'TEXT')
+            await changeSingleSelect(result, 'Value type (required)', 'Text')
         })
 
         await act(async () => {
             await changeSingleSelect(
                 result,
                 'Aggregation type (required)',
-                'SUM'
+                'Sum'
             )
         })
 
-        act(() => {
-            fireEvent.click(
-                result.queryByText('Create data element', {
-                    selector: 'button',
-                }) as HTMLButtonElement
-            )
-        })
+        fireEvent.click(submitButton)
 
         await waitFor(() => {
             expect(List).toHaveBeenCalledTimes(1)
