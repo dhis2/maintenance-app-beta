@@ -56,16 +56,10 @@ export const ModelValue = ({
         return null
     }
 
+    const Component = component || ModelValueRenderer
     return (
         <ErrorBoundary FallbackComponent={ModelValueError}>
-            {component ? (
-                React.createElement(component, { value, schemaProperty })
-            ) : (
-                <ModelValueRenderer
-                    value={value}
-                    schemaProperty={schemaProperty}
-                />
-            )}
+            <Component value={value} schemaProperty={schemaProperty} />
         </ErrorBoundary>
     )
 }
