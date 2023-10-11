@@ -1,5 +1,3 @@
-import { IdentifiableObject } from '../../types/generated'
-
 export type SelectedColumn = {
     label: string
     path: string

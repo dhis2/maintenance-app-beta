@@ -36,6 +36,7 @@ export const Component = () => {
         // refetched on mount by effect below
         { lazy: true }
     )
+
     useEffect(() => {
         // wait to fetch until selected-columns are loaded
         // so we dont fetch data multiple times
