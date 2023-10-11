@@ -1,7 +1,7 @@
 import get from 'lodash/fp/get'
 import { JsonPatchOperation } from '../../../types'
 import { DataElement } from '../../../types/generated'
-import { FormValues } from '../form/types'
+import type { FormValues } from '../form'
 
 type DataElementKey = keyof DataElement
 

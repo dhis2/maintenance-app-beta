@@ -13,7 +13,7 @@ import { Attribute, DataElement } from '../../types/generated'
 import { createJsonPatchOperations } from './edit'
 import classes from './Edit.module.css'
 import { DataElementFormFields, useCustomAttributesQuery } from './form'
-import { FormValues } from './form/types'
+import type { FormValues } from './form'
 
 type FinalFormFormApi = FormApi<FormValues>
 

@@ -10,7 +10,7 @@ import { SCHEMA_SECTIONS } from '../../constants'
 import { getSectionPath } from '../../lib'
 import { Attribute } from '../../types/generated'
 import { DataElementFormFields, useCustomAttributesQuery } from './form'
-import { FormValues } from './form/types'
+import type { FormValues } from './form'
 import classes from './New.module.css'
 
 const listPath = `/${getSectionPath(SCHEMA_SECTIONS.dataElement)}`
