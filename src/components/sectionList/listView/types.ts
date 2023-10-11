@@ -4,8 +4,8 @@ import type { ModelPropertyDescriptor } from '../../../lib'
 export interface ModelListView {
     name: string
     sectionModel: string
-    columns: Array<ModelPropertyDescriptor>
-    filters: Array<ModelPropertyDescriptor>
+    columns: ReadonlyArray<ModelPropertyDescriptor>
+    filters: ReadonlyArray<ModelPropertyDescriptor>
 }
 
 export type ModelListViews = {

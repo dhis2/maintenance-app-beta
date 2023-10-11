@@ -5,7 +5,7 @@ export type SelectedColumn = {
     path: string
 }
 
-export type SelectedColumns = SelectedColumn[]
+export type SelectedColumns = ReadonlyArray<SelectedColumn>
 
 export type CheckBoxOnChangeObject = {
     checked: boolean

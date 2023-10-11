@@ -11,12 +11,7 @@ import { ModelValueRenderer } from './ModelValueRenderer'
 type ModelValueProps = {
     schema: Schema
     path: string
-    model: unknown
-    // override renderer
-    component?: React.ComponentType<{
-        value: unknown
-        schemaProperty: SchemaFieldProperty
-    }>
+    sectionModel: unknown
 }
 
 const ModelValueError = () => {
@@ -39,27 +34,23 @@ const getSchemaProperty = (
     return schemaProperty
 }
 
-export const ModelValue = ({
-    component,
-    schema,
-    path,
-    model,
-}: ModelValueProps) => {
+export const ModelValue = ({ schema, path, sectionModel }: ModelValueProps) => {
     const schemaProperty = getSchemaProperty(schema, path)
 
-    const value = getIn(model, path)
+    const value = getIn(sectionModel, path)
 
     if (!schemaProperty || value == undefined) {
-        console.warn(
-            `Property ${path} not found in schema, value not rendered: ${value}`
-        )
+        console.warn(`Property ${path} not found, value not rendered: ${value}`)
         return null
     }
 
-    const Component = component || ModelValueRenderer
     return (
         <ErrorBoundary FallbackComponent={ModelValueError}>
-            <Component value={value} schemaProperty={schemaProperty} />
+            <ModelValueRenderer
+                path={path}
+                value={value}
+                schemaProperty={schemaProperty}
+            />
         </ErrorBoundary>
     )
 }

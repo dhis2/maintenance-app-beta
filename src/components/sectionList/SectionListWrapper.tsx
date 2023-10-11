@@ -95,12 +95,7 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
                                 <ModelValue
                                     path={path}
                                     schema={schema}
-                                    component={
-                                        headerColumns.find(
-                                            (c) => c.path === path
-                                        )?.component
-                                    }
-                                    model={model}
+                                    sectionModel={model}
                                 />
                             )
                         }}

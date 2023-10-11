@@ -132,7 +132,8 @@ export const useModelListView = () => {
         select,
     })
 
-    if (query.error) {
+    // 404 errors are expected when user havent saved any views
+    if (query.error && (query.error as any).details?.httpStatusCode !== 404) {
         console.error(query.error)
     }
 

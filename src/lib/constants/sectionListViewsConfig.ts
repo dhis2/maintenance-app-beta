@@ -1,5 +1,4 @@
 import i18n from '@dhis2/d2-i18n'
-// import { PublicAccessValue } from '../../components/sectionList/modelValue/PublicAccess'
 import { uniqueBy } from '../utils'
 import type { SectionName } from './sections'
 import { getTranslatedProperty } from './translatedModelProperties'
@@ -7,15 +6,13 @@ import { getTranslatedProperty } from './translatedModelProperties'
 export interface ModelPropertyDescriptor {
     label: string
     path: string
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    component?: React.FC<{ value: any }>
 }
 
 type ModelPropertyConfig = string | ModelPropertyDescriptor
 interface ViewConfigPart {
-    available?: ModelPropertyConfig[]
+    available?: ReadonlyArray<ModelPropertyConfig>
     overrideDefaultAvailable?: boolean
-    default?: ModelPropertyConfig[]
+    default?: ReadonlyArray<ModelPropertyConfig>
 }
 
 interface ViewConfig {
@@ -24,8 +21,8 @@ interface ViewConfig {
 }
 
 interface ResolvedViewConfigPart {
-    available: ModelPropertyDescriptor[]
-    default: ModelPropertyDescriptor[]
+    available: ReadonlyArray<ModelPropertyDescriptor>
+    default: ReadonlyArray<ModelPropertyDescriptor>
 }
 interface ResolvedViewConfig {
     columns: ResolvedViewConfigPart
@@ -52,7 +49,6 @@ const defaultModelViewConfig = {
             {
                 label: i18n.t('Public access'),
                 path: 'sharing.public',
-                // component: PublicAccessValue,
             },
         ],
         default: ['name', 'sharing.public', 'lastUpdated'],
