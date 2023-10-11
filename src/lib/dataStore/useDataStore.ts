@@ -98,17 +98,13 @@ export function useDataStoreValuesQuery<
         ? { result: mergedOptions.placeholderData }
         : undefined
 
-    const res = useQuery({
+    return useQuery({
         queryKey: [query],
         queryFn: createBoundQueryFn(engine),
         placeholderData,
         // hide ".result" from consumer
         select: (data) => select(data.result) as SelectResult,
     })
-
-    // console.log({ res })
-
-    return res
 }
 
 export const useMutateDataStoreValuesQuery = (options: ValuesOptions) => {

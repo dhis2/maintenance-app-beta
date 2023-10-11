@@ -4,4 +4,3 @@ export {
     useCurrentUserAuthorities,
 } from './currentUserStore'
 export * from './authorities'
-// asf
