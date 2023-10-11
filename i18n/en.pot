@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-09-13T14:05:55.693Z\n"
-"PO-Revision-Date: 2023-09-13T14:05:55.693Z\n"
+"POT-Creation-Date: 2023-10-11T10:29:42.492Z\n"
+"PO-Revision-Date: 2023-10-11T10:29:42.492Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -555,14 +555,14 @@ msgstr "Basic information"
 msgid "Set up the information for this data element"
 msgstr "Set up the information for this data element"
 
-msgid "Name (required)"
-msgstr "Name (required)"
+msgid "{{fieldLabel}} (required)"
+msgstr "{{fieldLabel}} (required)"
 
 msgid "A data element name should be concise and easy to recognize."
 msgstr "A data element name should be concise and easy to recognize."
 
-msgid "Short name (required)"
-msgstr "Short name (required)"
+msgid "Short name"
+msgstr "Short name"
 
 msgid "Often used in reports where space is limited"
 msgstr "Often used in reports where space is limited"
@@ -635,9 +635,6 @@ msgstr ""
 "A color and icon are helpful for identifying data elements in "
 "information-dense screens."
 
-msgid "Domain (required)"
-msgstr "Domain (required)"
-
 msgid "A data element can either be aggregated or tracked data."
 msgstr "A data element can either be aggregated or tracked data."
 
@@ -650,20 +647,17 @@ msgstr "Refresh list"
 msgid "Add new"
 msgstr "Add new"
 
-msgid "Value type (required)"
-msgstr "Value type (required)"
+msgid "Value type"
+msgstr "Value type"
 
 msgid "The type of data that will be recorded."
 msgstr "The type of data that will be recorded."
 
-msgid "Aggregation type (required)"
-msgstr "Aggregation type (required)"
+msgid "Aggregation type"
+msgstr "Aggregation type"
 
 msgid "The default way to aggregate this data element in analytics."
 msgstr "The default way to aggregate this data element in analytics."
-
-msgid "Category combination (required)"
-msgstr "Category combination (required)"
 
 msgid "Choose how this data element is disaggregated"
 msgstr "Choose how this data element is disaggregated"

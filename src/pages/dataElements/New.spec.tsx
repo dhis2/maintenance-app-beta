@@ -70,11 +70,10 @@ describe('Data Elements / New', () => {
     }
 
     it('should return to the list view when cancelling', async () => {
-        const List: React.FC = jest.fn(() => <div />)
         const router = createMemoryRouter(
             [
                 { path: '/new', element: <New /> },
-                { path: '/dataElements', element: <List /> },
+                { path: '/dataElements', element: <div>List view</div> },
             ],
             { initialEntries: ['/new'] }
         )
@@ -89,11 +88,12 @@ describe('Data Elements / New', () => {
             selector: 'button',
         })
 
-        expect(List).toHaveBeenCalledTimes(0)
+        expect(result.queryByText('List view')).toBeNull()
 
         fireEvent.click(cancelButton)
 
-        expect(List).toHaveBeenCalledTimes(1)
+        const listView = await result.findByText('List view')
+        expect(listView).toBeTruthy()
     })
 
     it('should not submit when required values are missing', async () => {
@@ -111,42 +111,44 @@ describe('Data Elements / New', () => {
         fireEvent.click(submitButton as HTMLButtonElement)
 
         expect(
-            result.container.querySelectorAll('.error[data-test*="validation"]')
-                .length
-        ).toBe(4)
-
-        expect(
-            result.container.querySelector(
-                '[data-test="dataelementsformfields-name"] .error'
+            result.container.querySelectorAll(
+                '.error[data-test$="-validation"]'
             )
-        ).toBeTruthy()
+        ).toHaveLength(4)
 
-        expect(
-            result.container.querySelector(
-                '[data-test="dataelementsformfields-shortname"] .error'
-            )
-        ).toBeTruthy()
+        const nameRequiredError = await result.findByText('Required', {
+            selector: '[data-test="dataelementsformfields-name-validation"]',
+        })
+        expect(nameRequiredError).toBeTruthy()
 
-        expect(
-            result.container.querySelector(
-                '[data-test="dataelementsformfields-valuetype"] .error'
-            )
-        ).toBeTruthy()
+        const shortNameRequiredError = await result.findByText('Required', {
+            selector:
+                '[data-test="dataelementsformfields-shortname-validation"]',
+        })
+        expect(shortNameRequiredError).toBeTruthy()
 
-        expect(
-            result.container.querySelector(
-                '[data-test="dataelementsformfields-aggregationtype"] .error'
-            )
-        ).toBeTruthy()
+        const valueTypeRequiredError = await result.findByText('Required', {
+            selector:
+                '[data-test="dataelementsformfields-valuetype-validation"]',
+        })
+        expect(valueTypeRequiredError).toBeTruthy()
+
+        const aggregationTypeRequiredError = await result.findByText(
+            'Required',
+            {
+                selector:
+                    '[data-test="dataelementsformfields-aggregationtype-validation"]',
+            }
+        )
+        expect(aggregationTypeRequiredError).toBeTruthy()
     })
 
     it('should submit the data and return to the list view on success', async () => {
-        const List: React.FC = jest.fn(() => <div />)
         const dataElementCustomData = jest.fn(() => Promise.resolve({}))
         const router = createMemoryRouter(
             [
                 { path: '/new', element: <New /> },
-                { path: '/dataElements', element: <List /> },
+                { path: '/dataElements', element: <div>List view</div> },
             ],
             {
                 initialIndex: 0,
@@ -174,31 +176,26 @@ describe('Data Elements / New', () => {
         expect(submitButton).toBeTruthy()
 
         fireEvent.change(
-            result.getByLabelText('Name (required)*') as HTMLElement,
+            result.getByRole('textbox', {
+                name: 'Name (required) *',
+            }) as HTMLElement,
             { target: { value: 'Data element name' } }
         )
 
         fireEvent.change(
-            result.getByLabelText('Short name (required)*') as HTMLElement,
+            result.getByRole('textbox', {
+                name: 'Short name (required) *',
+            }) as HTMLElement,
             { target: { value: 'Data element short name' } }
         )
 
-        await act(async () => {
-            await changeSingleSelect(result, 'Value type (required)', 'Text')
-        })
+        await changeSingleSelect(result, 'Value type (required)', 'Text')
 
-        await act(async () => {
-            await changeSingleSelect(
-                result,
-                'Aggregation type (required)',
-                'Sum'
-            )
-        })
+        await changeSingleSelect(result, 'Aggregation type (required)', 'Sum')
 
         fireEvent.click(submitButton)
 
-        await waitFor(() => {
-            expect(List).toHaveBeenCalledTimes(1)
-        })
+        const listView = await result.findByText('List view')
+        expect(listView).toBeTruthy()
     })
 })
