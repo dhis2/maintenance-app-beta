@@ -1,5 +1,5 @@
-import { useDataQuery } from '@dhis2/app-runtime'
 import { useRef } from 'react'
+import { useOptionSetQuery } from '../../../lib'
 import { SelectOption } from '../../../types'
 import { FilteredOptionSet } from './types'
 
@@ -7,15 +7,7 @@ type InitialOptionSetQueryResult = {
     optionSet: FilteredOptionSet
 }
 
-const INITIAL_OPTION_QUERY = {
-    optionSet: {
-        resource: 'optionSets',
-        id: (variables: Record<string, string>) => variables.id,
-        params: {
-            fields: ['id', 'displayName'],
-        },
-    },
-}
+const fields = ['id', 'displayName']
 
 export function useInitialOptionQuery({
     selected,
@@ -25,10 +17,10 @@ export function useInitialOptionQuery({
     selected?: string
 }) {
     const initialSelected = useRef(selected)
-    return useDataQuery<InitialOptionSetQueryResult>(INITIAL_OPTION_QUERY, {
+    return useOptionSetQuery<InitialOptionSetQueryResult>({
         lazy: !initialSelected.current,
-        variables: { id: selected },
-        onComplete: (data) => {
+        variables: { id: selected, fields },
+        onComplete: (data: InitialOptionSetQueryResult) => {
             const optionSet = data.optionSet
             const { id: value, displayName: label } = optionSet
             onComplete({ value, label })

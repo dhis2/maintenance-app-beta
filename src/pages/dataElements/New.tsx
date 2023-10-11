@@ -12,11 +12,8 @@ import {
 } from '../../components'
 import { SCHEMA_SECTIONS, getSectionPath, useSchemas } from '../../lib'
 import { Attribute } from '../../types/generated'
-import {
-    DataElementFormFields,
-    useCustomAttributesQuery,
-    useValidate,
-} from './form'
+import { useCustomAttributesQuery } from './fields'
+import { DataElementFormFields, validate } from './form'
 import type { FormValues } from './form'
 import classes from './New.module.css'
 
@@ -101,7 +98,6 @@ function formatFormValues({ values }: { values: FormValues }) {
 }
 
 export const Component = () => {
-    const validate = useValidate()
     const dataEngine = useDataEngine()
     const navigate = useNavigate()
     const customAttributesQuery = useCustomAttributesQuery()

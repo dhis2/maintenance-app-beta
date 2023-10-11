@@ -14,6 +14,7 @@ export const CategoryComboSelect = forwardRef(function CategoryComboSelect(
     {
         onChange,
         invalid,
+        disabled,
         placeholder = i18n.t('Category combo'),
         required,
         selected,
@@ -28,6 +29,7 @@ export const CategoryComboSelect = forwardRef(function CategoryComboSelect(
             ref={ref}
             required={required}
             invalid={invalid}
+            disabled={disabled}
             useInitialOptionQuery={useInitialOptionQuery}
             useOptionsQuery={useOptionsQuery}
             placeholder={placeholder}
