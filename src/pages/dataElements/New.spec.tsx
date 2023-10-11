@@ -53,9 +53,10 @@ async function changeSingleSelect(
 }
 
 describe('Data Elements / New', () => {
+    const consoleWarn = console.warn
     jest.spyOn(console, 'warn').mockImplementation((value) => {
         if (!value.match(/The query should be static/)) {
-            console.warn(value)
+            consoleWarn(value)
         }
     })
 
