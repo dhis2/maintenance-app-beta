@@ -6,6 +6,7 @@ import { useOptionsQuery } from './useOptionsQuery'
 
 interface OptionSetSelectProps {
     onChange: ({ selected }: { selected: string }) => void
+    invalid?: boolean
     placeholder?: string
     selected?: string
     showAllOption?: boolean
@@ -16,6 +17,7 @@ interface OptionSetSelectProps {
 export const OptionSetSelect = forwardRef(function OptionSetSelect(
     {
         onChange,
+        invalid,
         placeholder = i18n.t('Option set'),
         selected,
         showAllOption,
@@ -27,6 +29,7 @@ export const OptionSetSelect = forwardRef(function OptionSetSelect(
     return (
         <ModelSingleSelect
             ref={ref}
+            invalid={invalid}
             useInitialOptionQuery={useInitialOptionQuery}
             useOptionsQuery={useOptionsQuery}
             placeholder={placeholder}

@@ -46,6 +46,7 @@ type UseInitialOptionQuery = ({
 
 interface ModelSingleSelectProps {
     onChange: ({ selected }: { selected: string }) => void
+    invalid?: boolean
     placeholder?: string
     selected?: string
     showAllOption?: boolean
@@ -62,6 +63,7 @@ export interface ModelSingleSelectHandle {
 export const ModelSingleSelect = forwardRef(function ModelSingleSelect(
     {
         onChange,
+        invalid,
         placeholder = '',
         selected,
         showAllOption,
@@ -139,6 +141,7 @@ export const ModelSingleSelect = forwardRef(function ModelSingleSelect(
 
     return (
         <SearchableSingleSelect
+            invalid={invalid}
             placeholder={placeholder}
             showAllOption={showAllOption}
             onChange={({ selected }) => {

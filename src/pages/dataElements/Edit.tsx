@@ -12,7 +12,11 @@ import { JsonPatchOperation } from '../../types'
 import { Attribute, DataElement } from '../../types/generated'
 import { createJsonPatchOperations } from './edit'
 import classes from './Edit.module.css'
-import { DataElementFormFields, useCustomAttributesQuery } from './form'
+import {
+    DataElementFormFields,
+    useCustomAttributesQuery,
+    validate,
+} from './form'
 import type { FormValues } from './form'
 
 type FinalFormFormApi = FormApi<FormValues>
@@ -145,7 +149,11 @@ export const Component = () => {
     })
 
     return (
-        <Form onSubmit={onSubmit} initialValues={initialValues}>
+        <Form
+            onSubmit={onSubmit}
+            validate={validate}
+            initialValues={initialValues}
+        >
             {({ handleSubmit, submitting, submitError }) => (
                 <form onSubmit={handleSubmit}>
                     <FormContents

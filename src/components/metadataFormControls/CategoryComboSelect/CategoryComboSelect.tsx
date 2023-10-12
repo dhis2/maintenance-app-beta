@@ -6,6 +6,7 @@ import { useOptionsQuery } from './useOptionsQuery'
 
 interface CategoryComboSelectProps {
     onChange: ({ selected }: { selected: string }) => void
+    invalid?: boolean
     placeholder?: string
     selected?: string
     showAllOption?: boolean
@@ -16,6 +17,7 @@ interface CategoryComboSelectProps {
 export const CategoryComboSelect = forwardRef(function CategoryComboSelect(
     {
         onChange,
+        invalid,
         placeholder = i18n.t('Category combo'),
         selected,
         showAllOption,
@@ -27,6 +29,7 @@ export const CategoryComboSelect = forwardRef(function CategoryComboSelect(
     return (
         <ModelSingleSelect
             ref={ref}
+            invalid={invalid}
             useInitialOptionQuery={useInitialOptionQuery}
             useOptionsQuery={useOptionsQuery}
             placeholder={placeholder}

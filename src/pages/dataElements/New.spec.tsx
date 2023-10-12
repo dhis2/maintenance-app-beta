@@ -108,7 +108,7 @@ describe('Data Elements / New', () => {
             result.container.querySelectorAll(
                 '.error[data-test$="-validation"]'
             )
-        ).toHaveLength(4)
+        ).toHaveLength(5)
 
         const nameRequiredError = await result.findByText('Required', {
             selector: '[data-test="dataelementsformfields-name-validation"]',
@@ -135,6 +135,12 @@ describe('Data Elements / New', () => {
             }
         )
         expect(aggregationTypeRequiredError).toBeTruthy()
+
+        const categoryComboRequiredError = await result.findByText('Required', {
+            selector:
+                '[data-test="dataelementsformfields-categorycombo-validation"]',
+        })
+        expect(categoryComboRequiredError).toBeTruthy()
     })
 
     it('should submit the data and return to the list view on success', async () => {
@@ -184,8 +190,12 @@ describe('Data Elements / New', () => {
         )
 
         await changeSingleSelect(result, 'Value type (required)', 'Text')
-
         await changeSingleSelect(result, 'Aggregation type (required)', 'Sum')
+        await changeSingleSelect(
+            result,
+            'Category combination (required)',
+            'None'
+        )
 
         fireEvent.click(submitButton)
 
