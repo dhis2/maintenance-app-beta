@@ -64,6 +64,7 @@ export function DomainField() {
         value: 'TRACKER',
         validate,
     })
+    const touched = aggregateInput.meta.touched || trackerInput.meta.touched
     const error = aggregateInput.meta.error || trackerInput.meta.error
 
     return (
@@ -77,8 +78,8 @@ export function DomainField() {
             helpText={i18n.t(
                 'A data element can either be aggregated or tracked data.'
             )}
-            error={!!error}
-            validationText={error}
+            error={touched && !!error}
+            validationText={touched ? error : undefined}
         >
             <div>
                 <Radio
@@ -238,9 +239,6 @@ export function CategoryComboField() {
             <div className={classes.categoryComboSelect}>
                 <Field
                     required
-                    validate={(value: string) =>
-                        !value ? 'Required' : undefined
-                    }
                     name="categoryCombo.id"
                     label={i18n.t('{{fieldLabel}} (required)', {
                         fieldLabel: i18n.t('Category combination'),
@@ -248,11 +246,14 @@ export function CategoryComboField() {
                     helpText={i18n.t(
                         'Choose how this data element is disaggregated'
                     )}
-                    validationText={meta.error}
+                    error={meta.touched && !!meta.error}
+                    validationText={meta.touched ? meta.error : undefined}
+                    dataTest="dataelementsformfields-categorycombo"
                 >
                     <CategoryComboSelect
                         required
                         placeholder=""
+                        invalid={meta.touched && !!meta.error}
                         ref={categoryComboHandle}
                         selected={input.value}
                         onChange={({ selected }) => input.onChange(selected)}
@@ -287,10 +288,13 @@ export function OptionSetField() {
                     helpText={i18n.t(
                         'Choose a set of predefined options for data entry'
                     )}
-                    validationText={meta.error}
+                    validationText={meta.touched ? meta.error : undefined}
+                    error={meta.touched && !!meta.error}
+                    dataTest="dataelementsformfields-optionset"
                 >
                     <OptionSetSelect
                         placeholder=""
+                        invalid={meta.touched && !!meta.error}
                         ref={optionSetHandle}
                         selected={input.value}
                         onChange={({ selected }) => input.onChange(selected)}
@@ -325,10 +329,13 @@ export function OptionSetCommentField() {
                     helpText={i18n.t(
                         'Choose a set of predefined comment for data entry'
                     )}
-                    validationText={meta.error}
+                    validationText={meta.touched ? meta.error : undefined}
+                    error={meta.touched && !!meta.error}
+                    dataTest="dataelementsformfields-commentoptionset"
                 >
                     <OptionSetSelect
                         ref={optionSetHandle}
+                        invalid={meta.touched && !!meta.error}
                         placeholder=""
                         selected={input.value}
                         onChange={({ selected }) => input.onChange(selected)}
@@ -367,10 +374,13 @@ export function AggregationLevelsField() {
                     helpText={i18n.t(
                         'Choose how this data element is disaggregated'
                     )}
-                    validationText={meta.error}
+                    validationText={meta.touched ? meta.error : undefined}
+                    error={meta.touched && !!meta.error}
+                    dataTest="dataelementsformfields-aggregationlevels"
                 >
                     <AggregationLevelMultiSelect
                         ref={aggregationLevelHandle}
+                        invalid={meta.touched && !!meta.error}
                         inputWidth="400px"
                         placeholder=""
                         selected={input.value}

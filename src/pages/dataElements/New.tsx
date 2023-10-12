@@ -12,7 +12,11 @@ import {
 } from '../../components'
 import { SCHEMA_SECTIONS, getSectionPath } from '../../lib'
 import { Attribute } from '../../types/generated'
-import { DataElementFormFields, useCustomAttributesQuery } from './form'
+import {
+    DataElementFormFields,
+    useCustomAttributesQuery,
+    validate,
+} from './form'
 import type { FormValues } from './form'
 import classes from './New.module.css'
 
@@ -30,15 +34,12 @@ function computeInitialValues(customAttributes: Attribute[]) {
         code: '',
         description: '',
         url: '',
-        style: {
-            color: '',
-            icon: '',
-        },
         fieldMask: '',
         domainType: 'AGGREGATE',
         formName: '',
         valueType: '',
         aggregationType: '',
+        style: { icon: '', color: '' },
         categoryCombo: { id: '' },
         optionSet: { id: '' },
         commentOptionSet: { id: '' },
@@ -112,7 +113,11 @@ export const Component = () => {
             queryResponse={customAttributesQuery}
             label={i18n.t('Custom attributes')}
         >
-            <Form onSubmit={onSubmit} initialValues={initialValues}>
+            <Form
+                onSubmit={onSubmit}
+                validate={validate}
+                initialValues={initialValues}
+            >
                 {({ handleSubmit, submitting, submitError }) => (
                     <form onSubmit={handleSubmit}>
                         <FormContents

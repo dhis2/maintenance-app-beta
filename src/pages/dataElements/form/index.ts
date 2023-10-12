@@ -1,4 +1,5 @@
 export { DataElementFormFields } from './DataElementFormFields'
 export { computeInitialValues } from './computeInitialValues'
 export { useCustomAttributesQuery } from './useCustomAttributesQuery'
-export { FormValues } from './types'
+export type { FormValues } from './types'
+export { validate } from './validate'
