@@ -1,0 +1,66 @@
+[
+    {
+        "valueType": "TEXT",
+        "mandatory": false,
+        "optionSet": {
+            "options": [
+                {
+                    "code": "INPUT",
+                    "name": "Input",
+                    "displayName": "Input",
+                    "id": "Fr4igNnPYTv"
+                },
+                {
+                    "code": "ACTIVITY",
+                    "name": "Activity",
+                    "displayName": "Activity",
+                    "id": "xuAA8BQjdZq"
+                },
+                {
+                    "code": "OUTPUT",
+                    "name": "Output",
+                    "displayName": "Output",
+                    "id": "tpJ71rNdmeo"
+                },
+                {
+                    "code": "IMPACT",
+                    "name": "Impact",
+                    "displayName": "Impact",
+                    "id": "QIbgv5M77In"
+                }
+            ]
+        },
+        "displayFormName": "Classification",
+        "id": "Z4X3J7jMLYV"
+    },
+    {
+        "valueType": "LONG_TEXT",
+        "mandatory": false,
+        "displayFormName": "Collection method",
+        "id": "qXS2NDUEAOS"
+    },
+    {
+        "valueType": "TEXT",
+        "mandatory": false,
+        "displayFormName": "NGO ID",
+        "id": "n2xYlNbsfko"
+    },
+    {
+        "valueType": "TEXT",
+        "mandatory": false,
+        "displayFormName": "PEPFAR ID",
+        "id": "dLHLR5O4YFI"
+    },
+    {
+        "valueType": "TEXT",
+        "mandatory": false,
+        "displayFormName": "Rationale",
+        "id": "AhsCAtM3L0g"
+    },
+    {
+        "valueType": "TEXT",
+        "mandatory": false,
+        "displayFormName": "Unit of measure",
+        "id": "Y1LUDU8sWBR"
+    }
+]
