@@ -31,6 +31,7 @@ export function ColorAndIconField() {
 
     return (
         <Field
+            dataTest="dataelementsformfields-colorandicon"
             label={i18n.t('Color and icon')}
             helpText={i18n.t(
                 'A color and icon are helpful for identifying data elements in information-dense screens.'
@@ -52,15 +53,27 @@ export function ColorAndIconField() {
 
 export function DomainField() {
     const name = 'domainType'
-    const aggregateInput = useField(name, { type: 'radio', value: 'AGGREGATE' })
-    const trackerInput = useField(name, { type: 'radio', value: 'TRACKER' })
+    const validate = (value: string) => (!value ? 'Required' : undefined)
+    const aggregateInput = useField(name, {
+        type: 'radio',
+        value: 'AGGREGATE',
+        validate,
+    })
+    const trackerInput = useField(name, {
+        type: 'radio',
+        value: 'TRACKER',
+        validate,
+    })
     const error = aggregateInput.meta.error || trackerInput.meta.error
 
     return (
         <Field
             required
+            dataTest="dataelementsformfields-domaintype"
             name={name}
-            label={i18n.t('Domain (required)')}
+            label={i18n.t('{{fieldLabel}} (required)', {
+                fieldLabel: i18n.t('Domain'),
+            })}
             helpText={i18n.t(
                 'A data element can either be aggregated or tracked data.'
             )}
@@ -137,6 +150,7 @@ export function LegendSetField() {
 
     return (
         <Field
+            dataTest="dataelementsformfields-legendsets"
             error={!!meta.error}
             validationText={meta.error?.toString()}
             name={name}
@@ -161,14 +175,17 @@ export function ValueTypeField() {
             label: VALUE_TYPE[constant as keyof typeof VALUE_TYPE],
         })
     )
-
     return (
         <FieldRFF
             component={SingleSelectFieldFF}
+            dataTest="dataelementsformfields-valuetype"
             required
+            validate={(value: string) => (!value ? 'Required' : undefined)}
             inputWidth="400px"
             name="valueType"
-            label={i18n.t('Value type (required)')}
+            label={i18n.t('{{fieldLabel}} (required)', {
+                fieldLabel: i18n.t('Value type'),
+            })}
             helpText={i18n.t('The type of data that will be recorded.')}
             options={options || []}
         />
@@ -187,10 +204,14 @@ export function AggregationTypeField() {
     return (
         <FieldRFF
             component={SingleSelectFieldFF}
+            dataTest="dataelementsformfields-aggregationtype"
             required
+            validate={(value: string) => (!value ? 'Required' : undefined)}
             inputWidth="400px"
             name="aggregationType"
-            label={i18n.t('Aggregation type (required)')}
+            label={i18n.t('{{fieldLabel}} (required)', {
+                fieldLabel: i18n.t('Aggregation type'),
+            })}
             helpText={i18n.t(
                 'The default way to aggregate this data element in analytics.'
             )}
@@ -210,14 +231,20 @@ export function CategoryComboField() {
 
     return (
         <EditableFieldWrapper
+            dataTest="dataelementsformfields-categorycombo"
             onRefresh={() => categoryComboHandle.current.refetch()}
             onAddNew={() => window.open(newCategoryComboLink, '_blank')}
         >
             <div className={classes.categoryComboSelect}>
                 <Field
                     required
+                    validate={(value: string) =>
+                        !value ? 'Required' : undefined
+                    }
                     name="categoryCombo.id"
-                    label={i18n.t('Category combination (required)')}
+                    label={i18n.t('{{fieldLabel}} (required)', {
+                        fieldLabel: i18n.t('Category combination'),
+                    })}
                     helpText={i18n.t(
                         'Choose how this data element is disaggregated'
                     )}
@@ -248,6 +275,7 @@ export function OptionSetField() {
 
     return (
         <EditableFieldWrapper
+            dataTest="dataelementsformfields-optionset"
             onRefresh={() => optionSetHandle.current.refetch()}
             onAddNew={() => window.open(newOptionSetLink, '_blank')}
         >
@@ -285,6 +313,7 @@ export function OptionSetCommentField() {
 
     return (
         <EditableFieldWrapper
+            dataTest="dataelementsformfields-commentoptionset"
             onRefresh={() => optionSetHandle.current.refetch()}
             onAddNew={() => window.open(newOptionSetLink, '_blank')}
         >
@@ -326,6 +355,7 @@ export function AggregationLevelsField() {
 
     return (
         <EditableFieldWrapper
+            dataTest="dataelementsformfields-aggregationlevels"
             onRefresh={() => aggregationLevelHandle.current.refetch()}
             onAddNew={() => window.open(newAggregationLevelLink, '_blank')}
         >

@@ -90,12 +90,12 @@ export const Component = () => {
 
     if (error && !loading) {
         // @TODO(Edit): Implement error screen
-        return `Error: ${error.toString()}`
+        return <>Error: {error.toString()}</>
     }
 
     if (loading) {
         // @TODO(Edit): Implement loading screen
-        return 'Loading...'
+        return <>Loading...</>
     }
 
     const initialValues = computeInitialValues(customAttributesQuery.data)
