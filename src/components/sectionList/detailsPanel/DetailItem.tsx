@@ -1,7 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import React from 'react'
-import { selectedLocale } from '../../../lib/date/locale'
 import css from './DetailsPanel.module.css'
 
 type DetailItemProps = {
@@ -25,7 +24,7 @@ export const ApiUrlValue = ({ value }: { value: string }) => {
     return (
         <span>
             <a href={value} target="_blank" rel="noopener noreferrer">
-                API URL link
+                {i18n.t('API URL link')}
             </a>
             <Button
                 className={css.detailItemValueButton}
@@ -37,15 +36,4 @@ export const ApiUrlValue = ({ value }: { value: string }) => {
             </Button>
         </span>
     )
-}
-
-const dateTimeFormater = new Intl.DateTimeFormat(selectedLocale, {
-    dateStyle: 'short',
-    timeStyle: 'short',
-})
-
-export const DateValue = ({ value }: { value: string }) => {
-    const date = new Date(value)
-    const formattedDate = dateTimeFormater.format(date)
-    return formattedDate
 }
