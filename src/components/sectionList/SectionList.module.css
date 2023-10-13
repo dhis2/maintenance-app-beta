@@ -6,8 +6,18 @@
     align-items: center;
     height: 48px;
     padding: var(--spacers-dp8);
-    margin-top: var(--spacers-dp8);
     gap: var(--spacers-dp8);
+}
+
+.listToolbarWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.listDetailsWrapper {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    margin-top: var(--spacers-dp8);
 }
 
 .listHeaderNormal a {

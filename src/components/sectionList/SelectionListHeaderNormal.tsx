@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button } from '@dhis2/ui'
+import { Button, DataTableToolbar } from '@dhis2/ui'
 import { IconAdd24 } from '@dhis2/ui-icons'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -12,7 +12,7 @@ export const SelectionListHeader = () => {
 
     const handleClose = () => setManageColumnsOpen(false)
     return (
-        <div className={css.listHeaderNormal}>
+        <DataTableToolbar className={css.listHeaderNormal}>
             <Link to={routePaths.sectionNew}>
                 <Button small icon={<IconAdd24 />}>
                     {i18n.t('New')}
@@ -25,6 +25,6 @@ export const SelectionListHeader = () => {
             {manageColumnsOpen && (
                 <ManageListViewDialog onClose={handleClose} />
             )}
-        </div>
+        </DataTableToolbar>
     )
 }

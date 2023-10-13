@@ -18,10 +18,10 @@ export function EditableFieldWrapper({
             <div>{children}</div>
 
             <div className={classes.actions}>
-                <Button small onClick={onRefresh}>
+                <Button small onClick={(_, e) => onRefresh(e)}>
                     Refresh
                 </Button>
-                <Button small onClick={onAddNew}>
+                <Button small onClick={(_, e) => onAddNew(e)}>
                     Add new
                 </Button>
             </div>

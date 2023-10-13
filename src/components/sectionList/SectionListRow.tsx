@@ -13,12 +13,14 @@ export type SectionListRowProps<Model extends IdentifiableObject> = {
     onSelect: (modelId: string, checked: boolean) => void
     selected: boolean
     renderColumnValue: (column: SelectedColumn) => React.ReactNode
+    onClick?: (modelData: GistModel<Model>) => void
 }
 
 export function SectionListRow<Model extends IdentifiableObject>({
     selectedColumns,
     modelData,
     onSelect,
+    onClick,
     selected,
     renderColumnValue,
 }: SectionListRowProps<Model>) {
@@ -37,7 +39,10 @@ export function SectionListRow<Model extends IdentifiableObject>({
                 />
             </DataTableCell>
             {selectedColumns.map((selectedColumn) => (
-                <DataTableCell key={selectedColumn.path}>
+                <DataTableCell
+                    key={selectedColumn.path}
+                    onClick={() => onClick?.(modelData)}
+                >
                     {renderColumnValue(selectedColumn)}
                 </DataTableCell>
             ))}
