@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-10-11T10:29:42.492Z\n"
-"PO-Revision-Date: 2023-10-11T10:29:42.492Z\n"
+"POT-Creation-Date: 2023-10-13T14:02:26.143Z\n"
+"PO-Revision-Date: 2023-10-13T14:02:26.143Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -101,6 +101,36 @@ msgstr "Download"
 
 msgid "Manage Columns"
 msgstr "Manage Columns"
+
+msgid "Short name"
+msgstr "Short name"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Created"
+msgstr "Created"
+
+msgid "Last updated"
+msgstr "Last updated"
+
+msgid "Id"
+msgstr "Id"
+
+msgid "API URL"
+msgstr "API URL"
+
+msgid "Copy"
+msgstr "Copy"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Details"
+msgstr "Details"
+
+msgid "Failed to load details"
+msgstr "Failed to load details"
 
 msgid "Type to filter options"
 msgstr "Type to filter options"
@@ -552,41 +582,23 @@ msgstr "Image"
 msgid "GeoJSON"
 msgstr "GeoJSON"
 
-msgid "Code"
-msgstr "Code"
-
 msgid "Created by"
 msgstr "Created by"
 
 msgid "Favorite"
 msgstr "Favorite"
 
-msgid "Href"
-msgstr "Href"
-
-msgid "Id"
-msgstr "Id"
-
 msgid "Last updated by"
 msgstr "Last updated by"
 
-msgid "Created"
-msgstr "Created"
-
 msgid "Domain type"
 msgstr "Domain type"
-
-msgid "Last updated"
-msgstr "Last updated"
 
 msgid "Name"
 msgstr "Name"
 
 msgid "Sharing"
 msgstr "Sharing"
-
-msgid "Short name"
-msgstr "Short name"
 
 msgid "Value type"
 msgstr "Value type"
@@ -620,9 +632,6 @@ msgstr "{{fieldLabel}} (required)"
 
 msgid "A data element name should be concise and easy to recognize."
 msgstr "A data element name should be concise and easy to recognize."
-
-msgid "Short name"
-msgstr "Short name"
 
 msgid "Often used in reports where space is limited"
 msgstr "Often used in reports where space is limited"
@@ -703,9 +712,6 @@ msgstr "Refresh list"
 
 msgid "Add new"
 msgstr "Add new"
-
-msgid "Value type"
-msgstr "Value type"
 
 msgid "The type of data that will be recorded."
 msgstr "The type of data that will be recorded."

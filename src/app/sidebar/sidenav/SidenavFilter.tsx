@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Input } from '@dhis2/ui'
+import { Input, InputEventPayload } from '@dhis2/ui'
 import React, { useState } from 'react'
 import styles from './Sidenav.module.css'
 
@@ -20,10 +20,10 @@ export const SidenavFilter = ({ onChange }: SidenavParentProps) => {
     const [value, setValue] = useState('')
 
     const handleChange = (
-        input: OnChangeInput,
+        input: InputEventPayload,
         e: React.ChangeEvent<HTMLInputElement>
     ) => {
-        setValue(input.value)
+        setValue(input.value ?? '')
         if (onChange) {
             onChange(input, e)
         }

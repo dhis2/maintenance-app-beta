@@ -7,11 +7,17 @@
     padding: var(--spacers-dp16);
 }
 
+.detailsPanelWrapper {
+    position: sticky;
+    top: var(--spacers-dp8);
+}
+
 .detailsPanelHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-weight: 600;
+    padding-bottom: var(--spacers-dp16);
 }
 
 .detailsPanelHeaderTitle {
@@ -22,7 +28,6 @@
 
 .detailsPanelTitle {
     padding: 0;
-    padding-top: var(--spacers-dp16);
     margin: 0;
     font-size: 18px;
     font-weight: 500;

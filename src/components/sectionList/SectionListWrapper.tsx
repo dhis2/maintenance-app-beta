@@ -2,7 +2,7 @@ import { FetchError } from '@dhis2/app-runtime'
 import React, { useMemo, useState } from 'react'
 import { useSchemaFromHandle } from '../../lib'
 import { IdentifiableObject, GistCollectionResponse } from '../../types/models'
-import DetailsPanel from './detailsPanel/DetailsPanel'
+import { DetailsPanel, DefaultDetailsPanelContent } from './detailsPanel'
 import { FilterWrapper } from './filters/FilterWrapper'
 import { useModelListView } from './listView'
 import { ModelValue } from './modelValue/ModelValue'
@@ -118,10 +118,11 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
                 {detailsId && (
                     <DetailsPanel
                         onClose={() => setDetailsId(undefined)}
-                        modelId={detailsId}
                         // reset component state when modelId changes
                         key={detailsId}
-                    />
+                    >
+                        <DefaultDetailsPanelContent modelId={detailsId} />
+                    </DetailsPanel>
                 )}
             </div>
         </div>

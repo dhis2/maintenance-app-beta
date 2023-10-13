@@ -1,110 +1,57 @@
-import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Card, IconCross24, Button, ButtonStrip } from '@dhis2/ui'
-import React, { PropsWithChildren, useRef } from 'react'
-import {
-    getTranslatedProperty,
-    useModelSectionHandleOrThrow,
-} from '../../../lib'
-import { Query, WrapQueryResponse } from '../../../types'
-import { BaseIdentifiableObject } from '../../../types/models'
-import { Loader } from '../../loading'
-import { DetailItem } from './DetailItem'
+import { Card, IconCross24, Button, ButtonStrip, NoticeBox } from '@dhis2/ui'
+import React, { PropsWithChildren } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
+import { Link } from 'react-router-dom'
 import css from './DetailsPanel.module.css'
 
 type DetailsPanelProps = {
-    modelId: string
-    query?: Query
+    children: React.ReactNode
     onClose: () => void
 }
 
-const defaultQueryFields = [
-    'code',
-    'created',
-    'lastUpdated',
-    'displayName',
-    'id',
-    // 'shortName',
-    'href',
-] as const
-
-const createDefaultDetailsQuery = (resource: string, id: string): Query => ({
-    result: {
-        resource,
-        id,
-        params: {
-            fields: defaultQueryFields.concat(),
-        },
-    },
-})
-
-type DetailsResponse = Pick<
-    BaseIdentifiableObject,
-    (typeof defaultQueryFields)[number]
->
-
-export const DetailsPanel = ({
-    modelId,
-    query,
-    onClose,
-}: DetailsPanelProps) => {
-    const schema = useModelSectionHandleOrThrow()
-    // used to prevent changing query after initial render
-    const queryRef = useRef(
-        query ?? createDefaultDetailsQuery(schema.namePlural, modelId)
-    )
-
-    const detailsQueryResponse = useDataQuery<
-        WrapQueryResponse<DetailsResponse, 'result'>
-    >(queryRef.current)
-
-    // const detailItems = detailsQueryResponse.data?.result.
+export const DetailsPanel = ({ children, onClose }: DetailsPanelProps) => {
     return (
         <aside className={css.detailsPanel}>
             <Card className={css.detailsPanelCard}>
-                <DetailsPanelHeader onClose={onClose} />
-                <Loader queryResponse={detailsQueryResponse}>
-                    <DetailsPanelContent
-                        data={
-                            detailsQueryResponse.data
-                                ?.result as NonNullable<DetailsResponse>
-                        }
-                    />
-                </Loader>
+                <div className={css.detailsPanelWrapper}>
+                    <DetailsPanelHeader onClose={onClose} />
+                    <ErrorBoundary FallbackComponent={DetailsPanelError}>
+                        {children}
+                    </ErrorBoundary>
+                </div>
             </Card>
         </aside>
     )
 }
 
-type DetailsContent = {
-    data: DetailsResponse
+type DetailsContentProps = {
+    children: React.ReactNode
+    displayName: string
+    modelId: string
 }
 
-const DetailsPanelContent = ({ data }: DetailsContent) => {
-    const detailItems = Object.entries(data)
-        .filter(([key]) => key !== 'displayName')
-        .map(([key, value]) => (
-            <DetailItem
-                key={key}
-                propertyKey={key}
-                label={getTranslatedProperty(key)}
-                value={value}
-            />
-        ))
+export const DetailsPanelContent = ({
+    children,
+    displayName,
+    modelId,
+}: DetailsContentProps) => {
     return (
-        <div className={css.detailsPanelContent}>
-            <div className={css.detailsPanelTitle}>{data.displayName}</div>
-            <DetailsPanelButtons />
-            <DetailsList>{detailItems}</DetailsList>
+        <div>
+            <div className={css.detailsPanelTitle}>{displayName}</div>
+            <DetailsPanelButtons modelId={modelId} />
+            <DetailsList>{children}</DetailsList>
         </div>
     )
 }
 
-const DetailsPanelButtons = () => (
+const DetailsPanelButtons = ({ modelId }: { modelId: string }) => (
     <ButtonStrip>
-        <Button secondary small>
-            {i18n.t('Edit')}
-        </Button>
+        <Link to={modelId}>
+            <Button secondary small>
+                {i18n.t('Edit')}
+            </Button>
+        </Link>
     </ButtonStrip>
 )
 
@@ -121,4 +68,10 @@ export const DetailsList = ({ children }: PropsWithChildren) => (
     <div className={css.detailsList}>{children}</div>
 )
 
-export default DetailsPanel
+const DetailsPanelError = () => {
+    return (
+        <NoticeBox title={i18n.t('An error occurred')} error>
+            {i18n.t('Failed to load details')}
+        </NoticeBox>
+    )
+}
