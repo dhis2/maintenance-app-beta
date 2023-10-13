@@ -32,9 +32,9 @@ const createDefaultDetailsQuery = (
         resource,
         id,
         params: {
-            fields: defaultQueryFields.filter(
-                (field) => !!schemaProperties[field]
-            ),
+            fields: defaultQueryFields
+                .filter((field) => !!schemaProperties[field])
+                .concat('id'),
         },
     },
 })
