@@ -100,6 +100,7 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
                                     )
                                 }}
                                 selected={selectedModels.has(model.id)}
+                                active={model.id === detailsId}
                                 renderColumnValue={({ path }) => {
                                     return (
                                         <ModelValue

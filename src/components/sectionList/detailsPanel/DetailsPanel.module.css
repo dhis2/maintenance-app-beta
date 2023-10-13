@@ -1,6 +1,19 @@
 .detailsPanel {
     width: 300px;
     margin-left: var(--spacers-dp8);
+    grid-area: details;
+}
+
+@media (max-width: 1200px) {
+    .detailsPanel {
+        margin-top: var(--spacers-dp8);
+        width: 100%;
+        /* max-height: 500px; */
+        margin-left: 0;
+    }
+    .detailsPanelCard {
+        height: auto !important;
+    }
 }
 
 .detailsPanelCard {

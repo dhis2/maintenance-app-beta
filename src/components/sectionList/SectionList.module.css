@@ -12,12 +12,25 @@
 .listToolbarWrapper {
     display: flex;
     flex-direction: column;
+    grid-area: 'list';
 }
 
 .listDetailsWrapper {
     display: grid;
     grid-template-columns: 1fr auto;
+    grid-template-rows: none;
+    grid-template-areas: 'list details';
     margin-top: var(--spacers-dp8);
+}
+
+@media (max-width: 1200px) {
+    .listDetailsWrapper {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: none;
+        grid-template-areas: 'list' 'details';
+        margin-top: var(--spacers-dp8);
+    }
 }
 
 .listHeaderNormal a {
@@ -27,6 +40,10 @@
 .listRow td {
     padding-top: var(--spacers-dp8);
     padding-bottom: var(--spacers-dp8);
+}
+
+.listRow.active td {
+    background-color: var(--colors-grey200);
 }
 
 .listActions {
