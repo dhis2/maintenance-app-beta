@@ -8,12 +8,12 @@ import { useModelListView } from './listView'
 import { ModelValue } from './modelValue/ModelValue'
 import { SectionList } from './SectionList'
 import css from './SectionList.module.css'
+import { SectionListHeader } from './SectionListHeaderNormal'
 import { SectionListLoader } from './SectionListLoader'
 import { SectionListEmpty, SectionListError } from './SectionListMessages'
 import { SectionListPagination } from './SectionListPagination'
 import { SectionListRow } from './SectionListRow'
 import { SectionListTitle } from './SectionListTitle'
-import { SelectionListHeader } from './SelectionListHeaderNormal'
 
 type SectionListWrapperProps<Model extends IdentifiableObject> = {
     filterElement?: React.ReactElement
@@ -81,7 +81,7 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
             <FilterWrapper>{filterElement}</FilterWrapper>
             <div className={css.listDetailsWrapper}>
                 <div className={css.listToolbarWrapper}>
-                    <SelectionListHeader />
+                    <SectionListHeader />
                     <SectionList
                         headerColumns={headerColumns}
                         onSelectAll={handleSelectAll}

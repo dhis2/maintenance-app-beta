@@ -7,7 +7,7 @@ import { routePaths } from '../../lib'
 import { ManageListViewDialog } from './listView/ManageListViewDialog'
 import css from './SectionList.module.css'
 
-export const SelectionListHeader = () => {
+export const SectionListHeader = () => {
     const [manageColumnsOpen, setManageColumnsOpen] = React.useState(false)
 
     const handleClose = () => setManageColumnsOpen(false)
