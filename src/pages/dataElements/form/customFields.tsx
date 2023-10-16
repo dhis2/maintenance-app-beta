@@ -178,10 +178,9 @@ export function ValueTypeField() {
     )
     return (
         <FieldRFF
+            required
             component={SingleSelectFieldFF}
             dataTest="dataelementsformfields-valuetype"
-            required
-            validate={(value: string) => (!value ? 'Required' : undefined)}
             inputWidth="400px"
             name="valueType"
             label={i18n.t('{{fieldLabel}} (required)', {
@@ -207,7 +206,6 @@ export function AggregationTypeField() {
             component={SingleSelectFieldFF}
             dataTest="dataelementsformfields-aggregationtype"
             required
-            validate={(value: string) => (!value ? 'Required' : undefined)}
             inputWidth="400px"
             name="aggregationType"
             label={i18n.t('{{fieldLabel}} (required)', {

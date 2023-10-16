@@ -3,7 +3,6 @@ import { CheckboxFieldFF, InputFieldFF, TextAreaFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import {
-    Loader,
     StandardFormSection,
     StandardFormSectionTitle,
     StandardFormSectionDescription,
@@ -21,16 +20,10 @@ import {
     OptionSetCommentField,
     ValueTypeField,
 } from './customFields'
-import { useCustomAttributesQuery } from './useCustomAttributesQuery'
 
 export function DataElementFormFields() {
-    const customAttributes = useCustomAttributesQuery()
-
     return (
-        <Loader
-            queryResponse={customAttributes}
-            label={i18n.t('Custom attributes')}
-        >
+        <>
             <StandardFormSection>
                 <StandardFormSectionTitle>
                     {i18n.t('Basic information')}
@@ -52,7 +45,6 @@ export function DataElementFormFields() {
                         helpText={i18n.t(
                             'A data element name should be concise and easy to recognize.'
                         )}
-                        validate={(value) => (!value ? 'Required' : undefined)}
                     />
                 </StandardFormField>
 
@@ -61,7 +53,6 @@ export function DataElementFormFields() {
                         required
                         component={InputFieldFF}
                         dataTest="dataelementsformfields-shortname"
-                        validate={(value) => (!value ? 'Required' : undefined)}
                         inputWidth="400px"
                         name="shortName"
                         label={i18n.t('{{fieldLabel}} (required)', {
@@ -214,20 +205,16 @@ export function DataElementFormFields() {
                 </StandardFormField>
             </StandardFormSection>
 
-            {customAttributes.data?.length > 0 && (
-                <StandardFormSection>
-                    <StandardFormSectionTitle>
-                        {i18n.t('Custom attributes')}
-                    </StandardFormSectionTitle>
-                    <StandardFormSectionDescription>
-                        {i18n.t('Custom fields for your DHIS2 instance')}
-                    </StandardFormSectionDescription>
+            <StandardFormSection>
+                <StandardFormSectionTitle>
+                    {i18n.t('Custom attributes')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t('Custom fields for your DHIS2 instance')}
+                </StandardFormSectionDescription>
 
-                    <CustomAttributes
-                        customAttributes={customAttributes.data || []}
-                    />
-                </StandardFormSection>
-            )}
-        </Loader>
+                <CustomAttributes />
+            </StandardFormSection>
+        </>
     )
 }
