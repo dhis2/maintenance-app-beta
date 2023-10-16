@@ -2,9 +2,12 @@ import i18n from '@dhis2/d2-i18n'
 import {
     ButtonStrip,
     Button,
+    CheckboxFieldFF,
     Field,
+    InputFieldFF,
     Radio,
     SingleSelectFieldFF,
+    TextAreaFieldFF,
 } from '@dhis2/ui'
 import React, { useRef } from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
@@ -24,6 +27,80 @@ import {
 } from '../../../lib'
 import classes from './customFields.module.css'
 import { EditableFieldWrapper } from './EditableFieldWrapper'
+
+export function NameField() {
+    return (
+        <FieldRFF
+            component={InputFieldFF}
+            dataTest="dataelementsformfields-name"
+            required
+            inputWidth="400px"
+            label={i18n.t('{{fieldLabel}} (required)', {
+                fieldLabel: i18n.t('Name'),
+            })}
+            name="name"
+            helpText={i18n.t(
+                'A data element name should be concise and easy to recognize.'
+            )}
+        />
+    )
+}
+
+export function ShortNameField() {
+    return (
+        <FieldRFF
+            component={InputFieldFF}
+            dataTest="dataelementsformfields-shortname"
+            required
+            inputWidth="400px"
+            label={i18n.t('{{fieldLabel}} (required)', {
+                fieldLabel: i18n.t('Short name'),
+            })}
+            name="name"
+            helpText={i18n.t('Often used in reports where space is limited')}
+        />
+    )
+}
+
+export function CodeField() {
+    return (
+        <FieldRFF
+            component={InputFieldFF}
+            dataTest="dataelementsformfields-code"
+            inputWidth="150px"
+            name="code"
+            label={i18n.t('Code')}
+        />
+    )
+}
+
+export function DescriptionField() {
+    return (
+        <FieldRFF
+            component={TextAreaFieldFF}
+            dataTest="dataelementsformfields-description"
+            inputWidth="400px"
+            name="description"
+            label={i18n.t('Description')}
+            helpText={i18n.t(
+                "Explain the purpose of this data element and how it's measured."
+            )}
+        />
+    )
+}
+
+export function UrlField() {
+    return (
+        <FieldRFF
+            component={InputFieldFF}
+            dataTest="dataelementsformfields-url"
+            inputWidth="400px"
+            name="url"
+            label={i18n.t('Url')}
+            helpText={i18n.t('A web link that provides extra information')}
+        />
+    )
+}
 
 export function ColorAndIconField() {
     const { input: colorInput } = useField('style.color')
@@ -48,6 +125,49 @@ export function ColorAndIconField() {
                 }}
             />
         </Field>
+    )
+}
+
+export function FieldMaskField() {
+    return (
+        <FieldRFF
+            component={InputFieldFF}
+            inputWidth="400px"
+            dataTest="dataelementsformfields-fieldmask"
+            name="fieldMask"
+            label={i18n.t('Field mask')}
+            helpText={i18n.t(
+                'Use a pattern to limit what information can be entered.'
+            )}
+            placeholder={i18n.t('e.g. 999-000-0000')}
+        />
+    )
+}
+
+export function FormNameField() {
+    return (
+        <FieldRFF
+            component={InputFieldFF}
+            dataTest="dataelementsformfields-formname"
+            inputWidth="400px"
+            name="formName"
+            label={i18n.t('StandardForm name')}
+            helpText={i18n.t(
+                'An alternative name used in section or automatic data entry forms.'
+            )}
+        />
+    )
+}
+
+export function ZeroIsSignificantField() {
+    return (
+        <FieldRFF
+            component={CheckboxFieldFF}
+            dataTest="dataelementsformfields-zeroissignificant"
+            name="zeroIsSignificant"
+            label={i18n.t('Store zero data values')}
+            type="checkbox"
+        />
     )
 }
 
