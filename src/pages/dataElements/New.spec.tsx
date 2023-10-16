@@ -108,7 +108,7 @@ describe('Data Elements / New', () => {
             result.container.querySelectorAll(
                 '.error[data-test$="-validation"]'
             )
-        ).toHaveLength(5)
+        ).toHaveLength(3)
 
         const nameRequiredError = await result.findByText('Required', {
             selector: '[data-test="dataelementsformfields-name-validation"]',
@@ -121,21 +121,6 @@ describe('Data Elements / New', () => {
         })
         expect(shortNameRequiredError).toBeTruthy()
 
-        const valueTypeRequiredError = await result.findByText('Required', {
-            selector:
-                '[data-test="dataelementsformfields-valuetype-validation"]',
-        })
-        expect(valueTypeRequiredError).toBeTruthy()
-
-        const aggregationTypeRequiredError = await result.findByText(
-            'Required',
-            {
-                selector:
-                    '[data-test="dataelementsformfields-aggregationtype-validation"]',
-            }
-        )
-        expect(aggregationTypeRequiredError).toBeTruthy()
-
         const categoryComboRequiredError = await result.findByText('Required', {
             selector:
                 '[data-test="dataelementsformfields-categorycombo-validation"]',
@@ -144,7 +129,7 @@ describe('Data Elements / New', () => {
     })
 
     it('should submit the data and return to the list view on success', async () => {
-        const dataElementCustomData = jest.fn(() => Promise.resolve({}))
+        const dataElementCustomData = () => Promise.resolve({})
         const router = createMemoryRouter(
             [
                 { path: '/new', element: <New /> },
@@ -189,8 +174,6 @@ describe('Data Elements / New', () => {
             { target: { value: 'Data element short name' } }
         )
 
-        await changeSingleSelect(result, 'Value type (required)', 'Text')
-        await changeSingleSelect(result, 'Aggregation type (required)', 'Sum')
         await changeSingleSelect(
             result,
             'Category combination (required)',

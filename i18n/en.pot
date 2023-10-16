@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-10-12T14:24:56.855Z\n"
-"PO-Revision-Date: 2023-10-12T14:24:56.855Z\n"
+"POT-Creation-Date: 2023-10-16T12:26:20.848Z\n"
+"PO-Revision-Date: 2023-10-16T12:26:20.848Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -549,6 +549,12 @@ msgstr "Exit without saving"
 msgid "Create data element"
 msgstr "Create data element"
 
+msgid "Loading custom attributes"
+msgstr "Loading custom attributes"
+
+msgid "Something went wrong with retrieving the custom attributes"
+msgstr "Something went wrong with retrieving the custom attributes"
+
 msgid "Basic information"
 msgstr "Basic information"
 
@@ -673,6 +679,9 @@ msgstr "Choose a set of predefined comment for data entry"
 
 msgid "Required"
 msgstr "Required"
+
+msgid "The value is to long. You can use up to 255 characters"
+msgstr "The value is to long. You can use up to 255 characters"
 
 msgid "Metadata management"
 msgstr "Metadata management"

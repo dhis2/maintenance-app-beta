@@ -2,12 +2,12 @@ import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { NoticeBox } from '@dhis2/ui'
 import { FORM_ERROR } from 'final-form'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { Form } from 'react-final-form'
 import { useNavigate } from 'react-router-dom'
 import { StandardFormActions, StandardFormSection } from '../../components'
 import { SCHEMA_SECTIONS } from '../../constants'
-import { getSectionPath } from '../../lib'
+import { getSectionPath, useSchemas } from '../../lib'
 import { Attribute } from '../../types/generated'
 import {
     DataElementFormFields,
@@ -19,31 +19,46 @@ import classes from './New.module.css'
 
 const listPath = `/${getSectionPath(SCHEMA_SECTIONS.dataElement)}`
 
-function computeInitialValues(customAttributes: Attribute[]) {
-    const attributeValues = customAttributes.map((attribute) => ({
-        attribute,
-        value: '',
-    }))
+function useInitialValues(customAttributes: Attribute[]) {
+    const schemas = useSchemas()
 
-    return {
-        name: '',
-        shortName: '',
-        code: '',
-        description: '',
-        url: '',
-        fieldMask: '',
-        domainType: 'AGGREGATE',
-        formName: '',
-        valueType: '',
-        aggregationType: '',
-        style: { icon: '', color: '' },
-        categoryCombo: { id: '' },
-        optionSet: { id: '' },
-        commentOptionSet: { id: '' },
-        legendSets: [],
-        aggregationLevels: [],
-        attributeValues,
-    }
+    const attributeValues = useMemo(
+        () =>
+            customAttributes.map((attribute) => ({
+                attribute,
+                value: '',
+            })),
+        [customAttributes]
+    )
+
+    return useMemo(
+        () => ({
+            name: '',
+            shortName: '',
+            code: '',
+            description: '',
+            url: '',
+            fieldMask: '',
+            domainType: 'AGGREGATE',
+            formName: '',
+            valueType: schemas.dataElement.properties.valueType.constants?.[0],
+            aggregationType:
+                schemas.dataElement.properties.aggregationType.constants?.[0],
+            style: { icon: '', color: '' },
+            categoryCombo: { id: '' },
+            optionSet: { id: '' },
+            commentOptionSet: { id: '' },
+            legendSets: [],
+            aggregationLevels: [],
+            attributeValues,
+            zeroIsSignificant: false,
+        }),
+        [
+            attributeValues,
+            schemas.dataElement.properties.valueType.constants,
+            schemas.dataElement.properties.aggregationType.constants,
+        ]
+    )
 }
 
 const ADD_NEW_DATA_ELEMENT_MUTATION = {
@@ -92,6 +107,8 @@ export const Component = () => {
     const loading = customAttributesQuery.loading
     const error = customAttributesQuery.error
 
+    const initialValues = useInitialValues(customAttributesQuery.data)
+
     if (error && !loading) {
         // @TODO(Edit): Implement error screen
         return <>Error: {error.toString()}</>
@@ -101,8 +118,6 @@ export const Component = () => {
         // @TODO(Edit): Implement loading screen
         return <>Loading...</>
     }
-
-    const initialValues = computeInitialValues(customAttributesQuery.data)
 
     async function onSubmit(values: FormValues) {
         const payload = formatFormValues({ values })
