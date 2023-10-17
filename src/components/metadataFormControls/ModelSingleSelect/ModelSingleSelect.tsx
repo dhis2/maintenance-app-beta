@@ -38,7 +38,11 @@ function computeDisplayOptions({
             : options
 
     if (!required) {
-        return [{ value: '', label: i18n.t('None') }, ...withSelectedOption]
+        // This default value has been copied from the old app
+        return [
+            { value: '', label: i18n.t('<No value>') },
+            ...withSelectedOption,
+        ]
     }
 
     return withSelectedOption
