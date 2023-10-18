@@ -9,13 +9,10 @@ import { SelectedColumns, SelectedColumn } from './types'
 
 export type SectionListRowProps<Model extends IdentifiableObject> = {
     modelData: GistModel<Model>
-    selectedColumns: SelectedColumns<Model>
+    selectedColumns: SelectedColumns
     onSelect: (modelId: string, checked: boolean) => void
     selected: boolean
-    renderValue: (
-        column: SelectedColumn<Model>['modelPropertyName'],
-        value: GistModel<Model>[typeof column]
-    ) => React.ReactNode
+    renderColumnValue: (column: SelectedColumn) => React.ReactNode
 }
 
 export function SectionListRow<Model extends IdentifiableObject>({
@@ -23,7 +20,7 @@ export function SectionListRow<Model extends IdentifiableObject>({
     modelData,
     onSelect,
     selected,
-    renderValue,
+    renderColumnValue,
 }: SectionListRowProps<Model>) {
     return (
         <DataTableRow
@@ -39,13 +36,9 @@ export function SectionListRow<Model extends IdentifiableObject>({
                     }}
                 />
             </DataTableCell>
-            {selectedColumns.map(({ modelPropertyName }) => (
-                <DataTableCell key={modelPropertyName}>
-                    {modelData[modelPropertyName] &&
-                        renderValue(
-                            modelPropertyName,
-                            modelData[modelPropertyName]
-                        )}
+            {selectedColumns.map((selectedColumn) => (
+                <DataTableCell key={selectedColumn.path}>
+                    {renderColumnValue(selectedColumn)}
                 </DataTableCell>
             ))}
             <DataTableCell>

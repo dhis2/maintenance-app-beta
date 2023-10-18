@@ -18,8 +18,6 @@ import {
     Section,
     SchemaSection,
     OVERVIEW_SECTIONS,
-} from '../../constants'
-import {
     getSectionPath,
     isModuleNotFoundError,
     isValidUid,

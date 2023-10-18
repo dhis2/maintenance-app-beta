@@ -3,6 +3,7 @@ import React, { useMemo, useState } from 'react'
 import { useSchemaFromHandle } from '../../lib'
 import { IdentifiableObject, GistCollectionResponse } from '../../types/models'
 import { FilterWrapper } from './filters/FilterWrapper'
+import { useModelListView } from './listView'
 import { ModelValue } from './modelValue/ModelValue'
 import { SectionList } from './SectionList'
 import { SectionListLoader } from './SectionListLoader'
@@ -11,25 +12,20 @@ import { SectionListPagination } from './SectionListPagination'
 import { SectionListRow } from './SectionListRow'
 import { SectionListTitle } from './SectionListTitle'
 import { SelectionListHeader } from './SelectionListHeaderNormal'
-import { SelectedColumns } from './types'
 
 type SectionListWrapperProps<Model extends IdentifiableObject> = {
-    availableColumns?: SelectedColumns<Model>
-    defaultColumns: SelectedColumns<Model>
     filterElement?: React.ReactElement
     data: GistCollectionResponse<Model> | undefined
     error: FetchError | undefined
 }
+
 export const SectionListWrapper = <Model extends IdentifiableObject>({
-    availableColumns,
-    defaultColumns,
     filterElement,
     data,
     error,
 }: SectionListWrapperProps<Model>) => {
+    const { columns: headerColumns } = useModelListView()
     const schema = useSchemaFromHandle()
-    const [selectedColumns, setSelectedColumns] =
-        useState<SelectedColumns<Model>>(defaultColumns)
     const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set())
 
     const handleSelect = (id: string, checked: boolean) => {
@@ -82,7 +78,7 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
             <FilterWrapper>{filterElement}</FilterWrapper>
             <SelectionListHeader />
             <SectionList
-                headerColumns={selectedColumns}
+                headerColumns={headerColumns}
                 onSelectAll={handleSelectAll}
                 allSelected={allSelected}
             >
@@ -91,15 +87,15 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
                     <SectionListRow
                         key={model.id}
                         modelData={model}
-                        selectedColumns={selectedColumns}
+                        selectedColumns={headerColumns}
                         onSelect={handleSelect}
                         selected={selectedModels.has(model.id)}
-                        renderValue={(modelPropertyName, value) => {
+                        renderColumnValue={({ path }) => {
                             return (
                                 <ModelValue
-                                    modelPropertyName={modelPropertyName}
+                                    path={path}
                                     schema={schema}
-                                    value={value}
+                                    sectionModel={model}
                                 />
                             )
                         }}

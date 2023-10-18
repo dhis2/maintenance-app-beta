@@ -1,6 +1,5 @@
 import type { useMatches } from 'react-router-dom'
-import type { SchemaSection } from '../../constants/sections'
-
+import type { ModelSection } from '../../types'
 // utility type to type a match with a handle-property returned from useMatches
 // since handle is unknown, we need to cast it to the correct type
 type MatchWithHandle<THandle> = ReturnType<typeof useMatches>[number] & {
@@ -10,8 +9,8 @@ type MatchWithHandle<THandle> = ReturnType<typeof useMatches>[number] & {
 // common type for possible handle-properties used in Route
 export type RouteHandle = {
     hideSidebar?: boolean
+    section?: ModelSection
     showFooter?: boolean
-    section?: SchemaSection
     crumb?: () => React.ReactNode
 }
 

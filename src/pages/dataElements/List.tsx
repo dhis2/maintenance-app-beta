@@ -1,14 +1,12 @@
-import i18n from '@dhis2/d2-i18n'
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     SectionListWrapper,
-    SelectedColumns,
     DomainTypeSelectionFilter,
     ValueTypeSelectionFilter,
     useQueryParamsForModelGist,
-    useSectionListParamsRefetch,
 } from '../../components'
-import { useModelGist } from '../../lib/'
+import { useModelListView } from '../../components/sectionList/listView'
+import { getFieldFilterFromPath, useModelGist } from '../../lib/'
 import { DataElement, GistCollectionResponse } from '../../types/models'
 
 const filterFields = [
@@ -26,18 +24,8 @@ type FilteredDataElement = Pick<DataElement, (typeof filterFields)[number]>
 
 type DataElements = GistCollectionResponse<FilteredDataElement>
 
-const defaulHeaderColumns: SelectedColumns<FilteredDataElement> = [
-    {
-        modelPropertyName: 'name',
-        label: i18n.t('Name'),
-    },
-    { modelPropertyName: 'domainType', label: i18n.t('Domain') },
-    { modelPropertyName: 'valueType', label: i18n.t('Value') },
-    { modelPropertyName: 'lastUpdated', label: i18n.t('Last updated') },
-    { modelPropertyName: 'sharing', label: i18n.t('Public access') },
-]
-
 export const Component = () => {
+    const { columns, query: listViewQuery } = useModelListView()
     const initialParams = useQueryParamsForModelGist()
     const { refetch, error, data } = useModelGist<DataElements>(
         'dataElements/gist',
@@ -45,16 +33,27 @@ export const Component = () => {
             fields: filterFields.concat(),
             ...initialParams,
         },
-        // refetched on mount by useSectionListParamsRefetch below
+        // refetched on mount by effect below
         { lazy: true }
     )
 
-    useSectionListParamsRefetch(refetch)
+    useEffect(() => {
+        // wait to fetch until selected-columns are loaded
+        // so we dont fetch data multiple times
+        if (listViewQuery.isLoading) {
+            return
+        }
+        refetch({
+            ...initialParams,
+            fields: columns
+                .map((column) => getFieldFilterFromPath(column.path, 0))
+                .concat('id'),
+        })
+    }, [refetch, initialParams, columns, listViewQuery.isLoading])
 
     return (
         <div>
             <SectionListWrapper
-                defaultColumns={defaulHeaderColumns}
                 filterElement={
                     <>
                         <DomainTypeSelectionFilter />

@@ -16,8 +16,12 @@ import {
     OptionSetSelect,
     LegendSetTransfer,
 } from '../../../components'
-import { AGGREGATION_TYPE, DOMAIN_TYPE, VALUE_TYPE } from '../../../constants'
-import { useSchemas } from '../../../lib'
+import {
+    AGGREGATION_TYPE,
+    DOMAIN_TYPE,
+    VALUE_TYPE,
+    useSchemas,
+} from '../../../lib'
 import classes from './customFields.module.css'
 import { EditableFieldWrapper } from './EditableFieldWrapper'
 

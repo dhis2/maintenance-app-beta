@@ -1,13 +1,23 @@
 import React from 'react'
+import { SchemaFieldProperty } from '../../../lib'
 import { BooleanValue } from './BooleanValue'
 import { ConstantValue } from './ConstantValue'
 import { DateValue } from './DateValue'
-import type { ValueDetails } from './ModelValue'
-import { PublicAccessValue, isSharing } from './PublicAccess'
+import { PublicAccessValue } from './PublicAccess'
 import { TextValue } from './TextValue'
 
-export const ModelValueRenderer = ({ value, schemaProperty }: ValueDetails) => {
-    if (schemaProperty.fieldName === 'sharing' && isSharing(value)) {
+export type ValueDetails = {
+    schemaProperty: SchemaFieldProperty
+    value: unknown
+    path: string
+}
+
+export const ModelValueRenderer = ({
+    path,
+    value,
+    schemaProperty,
+}: ValueDetails) => {
+    if (path === 'sharing.public' && typeof value === 'string') {
         return <PublicAccessValue value={value} />
     }
 

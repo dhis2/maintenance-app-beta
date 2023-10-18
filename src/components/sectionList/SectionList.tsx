@@ -9,21 +9,20 @@ import {
 } from '@dhis2/ui'
 import React, { PropsWithChildren } from 'react'
 import { CheckBoxOnChangeObject } from '../../types'
-import { IdentifiableObject } from '../../types/generated'
 import { SelectedColumns } from './types'
 
-type SectionListProps<Model extends IdentifiableObject> = {
-    headerColumns: SelectedColumns<Model>
+type SectionListProps = {
+    headerColumns: SelectedColumns
     onSelectAll: (checked: boolean) => void
     allSelected?: boolean
 }
 
-export const SectionList = <Model extends IdentifiableObject>({
+export const SectionList = ({
     allSelected,
     headerColumns,
     children,
     onSelectAll,
-}: PropsWithChildren<SectionListProps<Model>>) => {
+}: PropsWithChildren<SectionListProps>) => {
     return (
         <DataTable>
             <TableHead>
@@ -37,19 +36,27 @@ export const SectionList = <Model extends IdentifiableObject>({
                             }
                         />
                     </DataTableColumnHeader>
-                    {headerColumns.map((headerColumn) => (
-                        <DataTableColumnHeader
-                            key={headerColumn.modelPropertyName}
-                        >
-                            {headerColumn.label}
-                        </DataTableColumnHeader>
-                    ))}
-                    <DataTableColumnHeader>
-                        {i18n.t('Actions')}
-                    </DataTableColumnHeader>
+                    {headerColumns.length > 0 && (
+                        <HeaderColumns headerColumns={headerColumns} />
+                    )}
                 </DataTableRow>
             </TableHead>
             <TableBody>{children}</TableBody>
         </DataTable>
     )
 }
+
+const HeaderColumns = ({
+    headerColumns,
+}: {
+    headerColumns: SelectedColumns
+}) => (
+    <>
+        {headerColumns.map((headerColumn) => (
+            <DataTableColumnHeader key={headerColumn.path}>
+                {headerColumn.label}
+            </DataTableColumnHeader>
+        ))}
+        <DataTableColumnHeader>{i18n.t('Actions')}</DataTableColumnHeader>
+    </>
+)

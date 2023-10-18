@@ -1,3 +1,4 @@
+import { FetchError } from '@dhis2/app-runtime'
 import {
     render,
     waitForElementToBeRemoved,
@@ -9,7 +10,8 @@ import React from 'react'
 import dataElementsMock from '../../__mocks__/gists/dataElementsMock.json'
 import filteredDataElementsMock from '../../__mocks__/gists/filteredDataElementsMock.json'
 import dataElementSchemaMock from '../../__mocks__/schema/dataElementsSchema.json'
-import { OVERVIEW_SECTIONS } from '../../constants'
+import { useModelListView } from '../../components/sectionList/listView'
+import { SECTIONS_MAP } from '../../lib'
 import { useSchemaStore } from '../../lib/schemas/schemaStore'
 import { ModelSchemas } from '../../lib/useLoadApp'
 import TestComponentWithRouter, {
@@ -19,7 +21,7 @@ import { Component as DataElementList } from './List'
 
 const renderSection = async (customData: CustomData) => {
     const routeOptions = {
-        handle: { section: OVERVIEW_SECTIONS.dataElement },
+        handle: { section: SECTIONS_MAP.dataElement },
     }
 
     const result = render(
@@ -37,10 +39,19 @@ const renderSection = async (customData: CustomData) => {
     return result
 }
 
+// userDataStore returns 404 if user hasnt edited a view, this is expected behaviour
+const error404 = new FetchError({
+    type: 'unknown',
+    message: '404 not found',
+    details: { httpStatusCode: 404 } as FetchError['details'],
+})
+const defaultUserDataStoreData = () => Promise.reject(new FetchError(error404))
+
 describe('Data Elements List', () => {
+    const originalWarn = console.warn
     jest.spyOn(console, 'warn').mockImplementation((value) => {
         if (!value.match(/No server timezone/)) {
-            console.warn(value)
+            originalWarn(value)
         }
     })
 
@@ -53,6 +64,7 @@ describe('Data Elements List', () => {
     it('should show the list of elements', async () => {
         const customData = {
             'dataElements/gist': dataElementsMock,
+            userDataStore: defaultUserDataStoreData,
         }
         const { getByText, getByTestId } = await renderSection(customData)
 
@@ -69,6 +81,7 @@ describe('Data Elements List', () => {
     it('should display all the columns', async () => {
         const customData = {
             'dataElements/gist': dataElementsMock,
+            userDataStore: defaultUserDataStoreData,
         }
         const { getByText } = await renderSection(customData)
         const columns = [
@@ -85,6 +98,7 @@ describe('Data Elements List', () => {
     })
     it('should allow searching for value', async () => {
         const customData = {
+            userDataStore: defaultUserDataStoreData,
             'dataElements/gist': (
                 resource: string,
                 r: { params: { filter: string[] } }
@@ -115,6 +129,7 @@ describe('Data Elements List', () => {
 
     it('should display error when an API call fails', async () => {
         const customData = {
+            userDataStore: defaultUserDataStoreData,
             'dataElements/gist': () => {
                 return Promise.reject('401 backend error')
             },
@@ -132,6 +147,7 @@ describe('Data Elements List', () => {
 
         const renderWithPager = async () => {
             const customData = {
+                userDataStore: defaultUserDataStoreData,
                 'dataElements/gist': (
                     resource: string,
                     r: { params: { filter: string[]; page: number } }
@@ -235,6 +251,7 @@ describe('Data Elements List', () => {
         // I tried different approaches and failed. Leaving it here temporarily in case someone want to give it  a go.
         it.skip('should not show next in last page', async () => {
             const { getByTestId, findByText } = await renderSection({
+                userDataStore: defaultUserDataStoreData,
                 'dataElements/gist': {
                     pager: {
                         page: 54,
@@ -269,6 +286,7 @@ describe('Data Elements List', () => {
     // select all
     it('should allow selecting all items', async () => {
         const customData = {
+            userDataStore: defaultUserDataStoreData,
             'dataElements/gist': dataElementsMock,
         }
         const { getByTestId, queryAllByTestId } = await renderSection(
@@ -291,6 +309,7 @@ describe('Data Elements List', () => {
     // empty list
     it('should allow selecting all items', async () => {
         const customData = {
+            userDataStore: defaultUserDataStoreData,
             'dataElements/gist': { ...dataElementsMock, result: [] },
         }
         const { getByTestId } = await renderSection(customData)

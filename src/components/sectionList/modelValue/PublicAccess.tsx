@@ -7,8 +7,8 @@ export const isSharing = (value: unknown): value is Sharing => {
     return typeof (value as Sharing).public === 'string'
 }
 
-const getPublicAccessString = (value: Sharing): string => {
-    const publicAccess = parsePublicAccessString(value.public)
+const getPublicAccessString = (value: string): string => {
+    const publicAccess = parsePublicAccessString(value)
 
     if (!publicAccess) {
         throw new Error('Invalid public access string')
@@ -25,6 +25,6 @@ const getPublicAccessString = (value: Sharing): string => {
     return i18n.t('Public cannot access')
 }
 
-export const PublicAccessValue = ({ value }: { value: Sharing }) => {
+export const PublicAccessValue = ({ value }: { value: string }) => {
     return <span>{getPublicAccessString(value)}</span>
 }

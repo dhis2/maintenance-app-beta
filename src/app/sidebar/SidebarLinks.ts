@@ -4,8 +4,6 @@ import {
     OVERVIEW_SECTIONS,
     SECTIONS_MAP,
     Section,
-} from '../../constants/sections'
-import {
     getOverviewPath,
     getSectionPath,
     useIsSectionAuthorizedPredicate,

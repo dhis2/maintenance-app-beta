@@ -108,11 +108,38 @@ msgstr "Type to filter options"
 msgid "No matches"
 msgstr "No matches"
 
+msgid "Data set"
+msgstr "Data set"
+
 msgid "Clear all filters"
 msgstr "Clear all filters"
 
 msgid "Search by name, code or ID"
 msgstr "Search by name, code or ID"
+
+msgid "At least one column must be selected"
+msgstr "At least one column must be selected"
+
+msgid "Available table columns"
+msgstr "Available table columns"
+
+msgid "Selected table columns"
+msgstr "Selected table columns"
+
+msgid "Reset to default columns"
+msgstr "Reset to default columns"
+
+msgid "Failed to save"
+msgstr "Failed to save"
+
+msgid "Manage {{section}} table columns"
+msgstr "Manage {{section}} table columns"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Update table columns"
+msgstr "Update table columns"
 
 msgid "Public can edit"
 msgstr "Public can edit"
@@ -122,6 +149,15 @@ msgstr "Public can view"
 
 msgid "Public cannot access"
 msgstr "Public cannot access"
+
+msgid "Public access"
+msgstr "Public access"
+
+msgid "Domain"
+msgstr "Domain"
+
+msgid "Value"
+msgstr "Value"
 
 msgid "Category"
 msgstr "Category"
@@ -176,9 +212,6 @@ msgstr "Data element group set"
 
 msgid "Data element group sets"
 msgstr "Data element group sets"
-
-msgid "Data set"
-msgstr "Data set"
 
 msgid "Data sets"
 msgstr "Data sets"
@@ -519,29 +552,56 @@ msgstr "Image"
 msgid "GeoJSON"
 msgstr "GeoJSON"
 
-msgid "Something went wrong when submitting the form"
-msgstr "Something went wrong when submitting the form"
+msgid "Code"
+msgstr "Code"
 
-msgid "Cancel"
-msgstr "Cancel"
+msgid "Created by"
+msgstr "Created by"
 
-msgid "Save and close"
-msgstr "Save and close"
+msgid "Favorite"
+msgstr "Favorite"
 
-msgid "Name"
-msgstr "Name"
+msgid "Href"
+msgstr "Href"
 
-msgid "Domain"
-msgstr "Domain"
+msgid "Id"
+msgstr "Id"
 
-msgid "Value"
-msgstr "Value"
+msgid "Last updated by"
+msgstr "Last updated by"
+
+msgid "Created"
+msgstr "Created"
+
+msgid "Domain type"
+msgstr "Domain type"
 
 msgid "Last updated"
 msgstr "Last updated"
 
-msgid "Public access"
-msgstr "Public access"
+msgid "Name"
+msgstr "Name"
+
+msgid "Sharing"
+msgstr "Sharing"
+
+msgid "Short name"
+msgstr "Short name"
+
+msgid "Value type"
+msgstr "Value type"
+
+msgid "Owner"
+msgstr "Owner"
+
+msgid "Zero is significant"
+msgstr "Zero is significant"
+
+msgid "Something went wrong when submitting the form"
+msgstr "Something went wrong when submitting the form"
+
+msgid "Save and close"
+msgstr "Save and close"
 
 msgid "Exit without saving"
 msgstr "Exit without saving"
@@ -566,9 +626,6 @@ msgstr "Short name"
 
 msgid "Often used in reports where space is limited"
 msgstr "Often used in reports where space is limited"
-
-msgid "Code"
-msgstr "Code"
 
 msgid "Description"
 msgstr "Description"

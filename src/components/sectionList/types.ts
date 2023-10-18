@@ -1,13 +1,9 @@
-import { IdentifiableObject } from '../../types/generated'
-
-export type SelectedColumn<Model extends IdentifiableObject> = {
+export type SelectedColumn = {
     label: string
-    modelPropertyName: keyof Model & string
+    path: string
 }
 
-export type SelectedColumns<
-    Model extends IdentifiableObject = IdentifiableObject
-> = SelectedColumn<Model>[]
+export type SelectedColumns = ReadonlyArray<SelectedColumn>
 
 export type CheckBoxOnChangeObject = {
     checked: boolean
