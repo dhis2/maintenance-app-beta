@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Input } from '@dhis2/ui'
+import { Input, InputEventPayload } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useDebounce } from '../../../lib'
 import { InputOnChangeObject } from '../../../types'
@@ -26,7 +26,9 @@ export const IdentifiableFilter = () => {
             <Input
                 className={css.identifiableSelectionFilter}
                 placeholder={i18n.t('Search by name, code or ID')}
-                onChange={(value: InputOnChangeObject) => setValue(value.value)}
+                onChange={(value: InputEventPayload) =>
+                    setValue(value.value ?? '')
+                }
                 value={value}
                 dataTest="input-search-name"
                 dense

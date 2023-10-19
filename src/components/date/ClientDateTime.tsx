@@ -1,5 +1,5 @@
 import { useTimeZoneConversion } from '@dhis2/app-runtime'
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { selectedLocale } from '../../lib'
 
 type DateTimeFormatOptions = Intl.DateTimeFormatOptions
@@ -15,7 +15,8 @@ type ClientDateTimeProps = {
 }
 
 export const ClientDateTime = ({ value, options }: ClientDateTimeProps) => {
-    // note options cannot change after initial render
+    // NOTE: options cannot change after initial render
+    // this is to prevent having to memo the options object in the consuming component
     const [dateTimeFormatter] = useState<Intl.DateTimeFormat>(() =>
         options
             ? new Intl.DateTimeFormat(selectedLocale, options)

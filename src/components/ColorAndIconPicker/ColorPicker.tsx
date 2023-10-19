@@ -84,7 +84,7 @@ export function ColorPicker({
             </div>
 
             {showPicker && (
-                <Layer onBackdropClick={() => setShowPicker(false)} transparent>
+                <Layer onBackdropClick={() => setShowPicker(false)} translucent>
                     <Popper placement="bottom-start" reference={ref}>
                         <div className={classes.colors}>
                             <SwatchesPicker

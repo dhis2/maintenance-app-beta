@@ -1,19 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
-import { Input, InputEventPayload } from '@dhis2/ui'
+import { Input, InputEventPayload, InputChangeHandler } from '@dhis2/ui'
 import React, { useState } from 'react'
 import styles from './Sidenav.module.css'
 
-export type OnChangeInput = {
-    name?: string
-    value: string
-}
-export type OnChangeCallback = (
-    input: OnChangeInput,
-    e: React.ChangeEvent<HTMLInputElement>
-) => void
-
 interface SidenavParentProps {
-    onChange?: OnChangeCallback
+    onChange?: InputChangeHandler
 }
 
 export const SidenavFilter = ({ onChange }: SidenavParentProps) => {

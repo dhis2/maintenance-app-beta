@@ -180,7 +180,9 @@ export function ValueTypeField() {
             component={SingleSelectFieldFF}
             dataTest="dataelementsformfields-valuetype"
             required
-            validate={(value: string) => (!value ? 'Required' : undefined)}
+            validate={(value: string | undefined) =>
+                !value ? 'Required' : undefined
+            }
             inputWidth="400px"
             name="valueType"
             label={i18n.t('{{fieldLabel}} (required)', {
@@ -206,7 +208,9 @@ export function AggregationTypeField() {
             component={SingleSelectFieldFF}
             dataTest="dataelementsformfields-aggregationtype"
             required
-            validate={(value: string) => (!value ? 'Required' : undefined)}
+            validate={(value: string | undefined) =>
+                !value ? 'Required' : undefined
+            }
             inputWidth="400px"
             name="aggregationType"
             label={i18n.t('{{fieldLabel}} (required)', {
@@ -238,9 +242,6 @@ export function CategoryComboField() {
             <div className={classes.categoryComboSelect}>
                 <Field
                     required
-                    validate={(value: string) =>
-                        !value ? 'Required' : undefined
-                    }
                     name="categoryCombo.id"
                     label={i18n.t('{{fieldLabel}} (required)', {
                         fieldLabel: i18n.t('Category combination'),

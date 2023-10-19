@@ -131,9 +131,7 @@ export const SearchableSingleSelect = ({
                     <Input
                         dense
                         value={filter}
-                        onChange={({ value }: { value: string }) =>
-                            setFilterValue(value)
-                        }
+                        onChange={({ value }) => setFilterValue(value ?? '')}
                         placeholder={i18n.t('Filter options')}
                     />
                 </div>
@@ -151,7 +149,7 @@ export const SearchableSingleSelect = ({
                 <SingleSelectOption key={value} value={value} label={label} />
             ))}
 
-            {hasSelectedInOptionList && (
+            {hasSelectedInOptionList && selected && (
                 <SingleSelectOption
                     className={classes.invisibleOption}
                     value={selected}

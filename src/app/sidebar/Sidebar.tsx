@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import { InputEventPayload } from '@dhis2/ui'
 import React, { useEffect, useState, PropsWithChildren } from 'react'
 import { NavLink, useLocation, matchPath } from 'react-router-dom'
 import { HidePreventUnmount } from '../../components'
@@ -10,7 +11,6 @@ import {
     SidenavParent,
     SidenavLink,
     SidenavFilter,
-    OnChangeInput,
 } from './sidenav'
 
 interface SidebarNavLinkProps {
@@ -86,8 +86,8 @@ export const Sidebar = ({ className }: { className?: string }) => {
     const sidebarLinks = useSidebarLinks()
     const [filterValue, setFilterValue] = useState('')
 
-    const handleFilterChange = (input: OnChangeInput) => {
-        setFilterValue(input.value)
+    const handleFilterChange = (input: InputEventPayload) => {
+        setFilterValue(input.value ?? '')
     }
 
     const isFiltered = filterValue !== ''
