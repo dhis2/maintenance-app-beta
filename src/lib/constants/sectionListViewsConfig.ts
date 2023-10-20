@@ -73,7 +73,7 @@ const modelListViewsConfig = {
             default: [
                 'name',
                 { label: i18n.t('Domain'), path: 'domainType' },
-                { label: i18n.t('Value'), path: 'valueType' },
+                { label: i18n.t('Value type'), path: 'valueType' },
                 'lastUpdated',
                 'sharing.public',
             ],
