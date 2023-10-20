@@ -25,6 +25,7 @@ const defaultQueryFields = [
     'id',
     'shortName',
     'href',
+    'createdBy',
 ] as const
 
 const createDefaultDetailsQuery = (
@@ -86,6 +87,9 @@ const DetailsContent = ({ data }: { data: DetailsResponse }) => {
                     </DetailItem>
                 )}
                 <DetailItem label={i18n.t('Code')}>{data.code}</DetailItem>
+                <DetailItem label={i18n.t('Created by')}>
+                    {data.createdBy.displayName}
+                </DetailItem>
                 <DetailItem label={i18n.t('Created')}>
                     <ClientDateTime value={data.created} />
                 </DetailItem>
