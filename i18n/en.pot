@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-10-13T14:02:26.143Z\n"
-"PO-Revision-Date: 2023-10-13T14:02:26.143Z\n"
+"POT-Creation-Date: 2023-10-20T09:42:02.072Z\n"
+"PO-Revision-Date: 2023-10-20T09:42:02.072Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -81,6 +81,15 @@ msgstr "Option set"
 msgid "Actions"
 msgstr "Actions"
 
+msgid "New"
+msgstr "New"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Manage Columns"
+msgstr "Manage Columns"
+
 msgid "There aren't any items that match your filter."
 msgstr "There aren't any items that match your filter."
 
@@ -92,15 +101,6 @@ msgstr "An error occurred while loading the items."
 
 msgid "{{modelName}} management"
 msgstr "{{modelName}} management"
-
-msgid "New"
-msgstr "New"
-
-msgid "Download"
-msgstr "Download"
-
-msgid "Manage Columns"
-msgstr "Manage Columns"
 
 msgid "Short name"
 msgstr "Short name"
@@ -119,6 +119,9 @@ msgstr "Id"
 
 msgid "API URL"
 msgstr "API URL"
+
+msgid "API URL link"
+msgstr "API URL link"
 
 msgid "Copy"
 msgstr "Copy"
