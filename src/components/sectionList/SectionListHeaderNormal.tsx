@@ -12,7 +12,7 @@ export const SectionListHeader = () => {
 
     const handleClose = () => setManageColumnsOpen(false)
     return (
-        <DataTableToolbar className={css.listHeaderNormal}>
+        <div className={css.listHeaderNormal}>
             <Link to={routePaths.sectionNew}>
                 <Button small icon={<IconAdd24 />}>
                     {i18n.t('New')}
@@ -25,6 +25,6 @@ export const SectionListHeader = () => {
             {manageColumnsOpen && (
                 <ManageListViewDialog onClose={handleClose} />
             )}
-        </DataTableToolbar>
+        </div>
     )
 }
