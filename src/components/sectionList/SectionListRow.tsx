@@ -9,12 +9,12 @@ import css from './SectionList.module.css'
 import { SelectedColumns, SelectedColumn } from './types'
 
 export type SectionListRowProps<Model extends IdentifiableObject> = {
-    modelData: GistModel<Model>
+    modelData: GistModel<Model> | Model
     selectedColumns: SelectedColumns
     onSelect: (modelId: string, checked: boolean) => void
     selected: boolean
     renderColumnValue: (column: SelectedColumn) => React.ReactNode
-    onClick?: (modelData: GistModel<Model>) => void
+    onClick?: (modelData: GistModel<Model> | Model) => void
     active?: boolean
 }
 

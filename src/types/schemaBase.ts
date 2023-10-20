@@ -50,7 +50,7 @@ export interface SchemaFieldProperty {
     writable: boolean
 }
 
-enum SchemaFieldPropertyType {
+export enum SchemaFieldPropertyType {
     REFERENCE = 'REFERENCE',
     BOOLEAN = 'BOOLEAN',
     TEXT = 'TEXT',

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-10-20T09:42:02.072Z\n"
-"PO-Revision-Date: 2023-10-20T09:42:02.072Z\n"
+"POT-Creation-Date: 2023-10-20T11:27:17.939Z\n"
+"PO-Revision-Date: 2023-10-20T11:27:17.939Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -189,8 +189,8 @@ msgstr "Public access"
 msgid "Domain"
 msgstr "Domain"
 
-msgid "Value"
-msgstr "Value"
+msgid "Value type"
+msgstr "Value type"
 
 msgid "Category"
 msgstr "Category"
@@ -602,9 +602,6 @@ msgstr "Name"
 
 msgid "Sharing"
 msgstr "Sharing"
-
-msgid "Value type"
-msgstr "Value type"
 
 msgid "Owner"
 msgstr "Owner"

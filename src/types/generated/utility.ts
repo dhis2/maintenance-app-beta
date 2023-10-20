@@ -2,7 +2,7 @@
 import { IdentifiableObject, GistPager, Pager } from './'
 // import { CategoryCombo, DataElement } from "../generated";
 
-type ModelReferenceCollection<T = IdentifiableObject> = Array<T>
+export type ModelReferenceCollection<T = IdentifiableObject> = Array<T>
 type ModelReference = IdentifiableObject | ModelReferenceCollection
 
 export type ModelCollectionPart<

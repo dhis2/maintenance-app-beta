@@ -6,10 +6,10 @@ import {
     withDefault,
 } from 'use-query-params'
 import { GistPaginator } from '../../lib/'
-import { GistCollectionResponse } from '../../types/generated'
+import { Pager } from '../../types/generated'
 
 type SectionListPaginationProps = {
-    data: GistCollectionResponse | undefined
+    pager: Pager | undefined
 }
 
 type PaginationQueryParams = {
@@ -67,10 +67,7 @@ const validatePagerParams = (
     }
 }
 
-function useUpdatePaginationParams(
-    data?: GistCollectionResponse
-): GistPaginator {
-    const pager = data?.pager
+function useUpdatePaginationParams(pager?: Pager): GistPaginator {
     const [, setParams] = usePaginationQueryParams()
 
     const getNextPage = useCallback(() => {
@@ -123,9 +120,11 @@ function useUpdatePaginationParams(
 const clamp = (value: number, min: number, max: number) =>
     Math.max(min, Math.min(value, max))
 
-export const SectionListPagination = ({ data }: SectionListPaginationProps) => {
+export const SectionListPagination = ({
+    pager,
+}: SectionListPaginationProps) => {
     const [paginationParams] = usePaginationQueryParams()
-    const pagination = useUpdatePaginationParams(data)
+    const pagination = useUpdatePaginationParams(pager)
 
     useEffect(() => {
         // since page can be controlled by params

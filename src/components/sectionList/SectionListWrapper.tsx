@@ -1,7 +1,7 @@
 import { FetchError } from '@dhis2/app-runtime'
 import React, { useMemo, useState } from 'react'
 import { useSchemaFromHandle } from '../../lib'
-import { IdentifiableObject, GistCollectionResponse } from '../../types/models'
+import { Pager, ModelCollection } from '../../types/models'
 import { DetailsPanel, DefaultDetailsPanelContent } from './detailsPanel'
 import { FilterWrapper } from './filters/FilterWrapper'
 import { useModelListView } from './listView'
@@ -15,17 +15,20 @@ import { SectionListPagination } from './SectionListPagination'
 import { SectionListRow } from './SectionListRow'
 import { SectionListTitle } from './SectionListTitle'
 
-type SectionListWrapperProps<Model extends IdentifiableObject> = {
+type SectionListWrapperProps = {
     filterElement?: React.ReactElement
-    data: GistCollectionResponse<Model> | undefined
+    data: ModelCollection | undefined
+    pager: Pager | undefined
     error: FetchError | undefined
 }
 
-export const SectionListWrapper = <Model extends IdentifiableObject>({
+export const SectionListWrapper = ({
     filterElement,
     data,
     error,
-}: SectionListWrapperProps<Model>) => {
+    pager,
+}: SectionListWrapperProps) => {
+    data
     const { columns: headerColumns } = useModelListView()
     const schema = useSchemaFromHandle()
     const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set())
@@ -44,7 +47,7 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
         if (checked) {
             setSelectedModels(
                 new Set(
-                    data?.result?.map((model) => {
+                    data?.map((model) => {
                         return model.id
                     })
                 )
@@ -55,21 +58,18 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
     }
 
     const allSelected = useMemo(() => {
-        return (
-            data?.result.length !== 0 &&
-            data?.result.length === selectedModels.size
-        )
-    }, [data?.result, selectedModels.size])
+        return data?.length !== 0 && data?.length === selectedModels.size
+    }, [data, selectedModels.size])
 
     const SectionListMessage = () => {
         if (error) {
             console.log(error.details || error)
             return <SectionListError />
         }
-        if (!data?.result) {
+        if (!data) {
             return <SectionListLoader />
         }
-        if (data?.result?.length < 1) {
+        if (data.length < 1) {
             return <SectionListEmpty />
         }
         return null
@@ -88,7 +88,7 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
                         allSelected={allSelected}
                     >
                         <SectionListMessage />
-                        {data?.result.map((model) => (
+                        {data?.map((model) => (
                             <SectionListRow
                                 key={model.id}
                                 modelData={model}
@@ -113,7 +113,7 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
                             />
                         ))}
 
-                        <SectionListPagination data={data} />
+                        <SectionListPagination pager={pager} />
                     </SectionList>
                 </div>
                 {detailsId && (

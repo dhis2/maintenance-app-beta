@@ -1,3 +1,4 @@
+import { useDataQuery } from '@dhis2/app-runtime'
 import React, { useEffect } from 'react'
 import {
     SectionListWrapper,
@@ -6,8 +7,10 @@ import {
     useQueryParamsForModelGist,
 } from '../../components'
 import { useModelListView } from '../../components/sectionList/listView'
-import { getFieldFilterFromPath, useModelGist } from '../../lib/'
-import { DataElement, GistCollectionResponse } from '../../types/models'
+import { useSchemaFromHandle } from '../../lib/'
+import { getFieldFilter } from '../../lib/models/path'
+import { Query, WrapQueryResponse } from '../../types'
+import { DataElement, ModelCollectionResponse } from '../../types/models'
 
 const filterFields = [
     'access',
@@ -22,17 +25,23 @@ const filterFields = [
 
 type FilteredDataElement = Pick<DataElement, (typeof filterFields)[number]>
 
-type DataElements = GistCollectionResponse<FilteredDataElement>
+type DataElements = ModelCollectionResponse<FilteredDataElement, 'dataElements'>
+
+type DataElementsResponse = WrapQueryResponse<DataElements>
+
+const query: Query = {
+    result: {
+        resource: 'dataElements',
+        params: (params) => params,
+    },
+}
 
 export const Component = () => {
     const { columns, query: listViewQuery } = useModelListView()
     const initialParams = useQueryParamsForModelGist()
-    const { refetch, error, data } = useModelGist<DataElements>(
-        'dataElements/gist',
-        {
-            fields: filterFields.concat(),
-            ...initialParams,
-        },
+    const schema = useSchemaFromHandle()
+    const { refetch, error, data } = useDataQuery<DataElementsResponse>(
+        query,
         // refetched on mount by effect below
         { lazy: true }
     )
@@ -46,10 +55,10 @@ export const Component = () => {
         refetch({
             ...initialParams,
             fields: columns
-                .map((column) => getFieldFilterFromPath(column.path, 0))
+                .map((column) => getFieldFilter(schema, column.path))
                 .concat('id'),
         })
-    }, [refetch, initialParams, columns, listViewQuery.isLoading])
+    }, [refetch, initialParams, columns, listViewQuery.isLoading, schema])
 
     return (
         <div>
@@ -61,7 +70,8 @@ export const Component = () => {
                     </>
                 }
                 error={error}
-                data={data}
+                data={data?.result.dataElements}
+                pager={data?.result.pager}
             />
         </div>
     )
