@@ -28,24 +28,21 @@ export const DetailsPanel = ({ children, onClose }: DetailsPanelProps) => {
 type DetailsContentProps = {
     children: React.ReactNode
     displayName: string
-    modelId: string
 }
 
 export const DetailsPanelContent = ({
     children,
     displayName,
-    modelId,
 }: DetailsContentProps) => {
     return (
         <div>
             <div className={css.detailsPanelTitle}>{displayName}</div>
-            <DetailsPanelButtons modelId={modelId} />
-            <DetailsList>{children}</DetailsList>
+            {children}
         </div>
     )
 }
 
-const DetailsPanelButtons = ({ modelId }: { modelId: string }) => (
+export const DetailsPanelButtons = ({ modelId }: { modelId: string }) => (
     <ButtonStrip>
         <Link to={modelId}>
             <Button secondary small>
