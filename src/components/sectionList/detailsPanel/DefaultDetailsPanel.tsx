@@ -94,7 +94,7 @@ const DetailsContent = ({ data }: { data: DetailsResponse }) => {
                     <ClientDateTime value={data.created} />
                 </DetailItem>
                 <DetailItem label={i18n.t('Last updated')}>
-                    <ClientDateTime value={data.created} />
+                    <ClientDateTime value={data.lastUpdated} />
                 </DetailItem>
                 <DetailItem label={i18n.t('Id')}>{data.id}</DetailItem>
                 <DetailItem label={i18n.t('API URL')}>
