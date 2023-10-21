@@ -5,13 +5,13 @@ import i18n from '@dhis2/d2-i18n'
 export const AGGREGATION_TYPE = {
     SUM: i18n.t('Sum'),
     AVERAGE: i18n.t('Average'),
-    AVERAGE_SUM_ORG_UNIT: i18n.t('Average (sum in org unit)'),
+    AVERAGE_SUM_ORG_UNIT: i18n.t('Average (sum in org unit hierarchy)'),
     LAST: i18n.t('Last value (sum in org unit hierarchy)'),
-    LAST_AVERAGE_ORG_UNIT: i18n.t('Last value (average in org unit)'),
+    LAST_AVERAGE_ORG_UNIT: i18n.t('Last value (average in org unit hierarchy)'),
     LAST_LAST_ORG_UNIT: i18n.t('Last value (last in org unit hierarchy)'),
     LAST_IN_PERIOD: i18n.t('Last value in period (sum in org unit hierarchy)'),
     LAST_IN_PERIOD_AVERAGE_ORG_UNIT: i18n.t(
-        'Last in period (average in orgunit)'
+        'Last value in period (average in org unit hierarchy)'
     ),
     FIRST: i18n.t('First value (sum in org unit hierarchy)'),
     FIRST_AVERAGE_ORG_UNIT: i18n.t(
@@ -23,8 +23,8 @@ export const AGGREGATION_TYPE = {
     VARIANCE: i18n.t('Variance'),
     MIN: i18n.t('Min'),
     MAX: i18n.t('Max'),
-    MIN_SUM_ORG_UNIT: i18n.t('Min (sum in org unit)'),
-    MAX_SUM_ORG_UNIT: i18n.t('Max (sum in org unit)'),
+    MIN_SUM_ORG_UNIT: i18n.t('Min (sum in org unit hierarchy)'),
+    MAX_SUM_ORG_UNIT: i18n.t('Max (sum in org unit hierarchy)'),
     NONE: i18n.t('None'),
     CUSTOM: i18n.t('Custom'),
     DEFAULT: i18n.t('Default'),
