@@ -132,11 +132,25 @@ const parseToGistQueryFilter = (filters: Filters): string[] => {
     return queryFilters
 }
 
+const parseToQueryFilter = (filters: Filters): string[] => {
+    const { [IDENTIFIABLE_KEY]: identifiableValue, ...restFilters } = filters
+    const queryFilters: string[] = []
+
+    const identifiableFilter = `identifiable:token:${identifiableValue}`
+    if (identifiableValue) {
+        queryFilters.push(identifiableFilter)
+    }
+    Object.entries(restFilters).forEach(([key, value]) => {
+        queryFilters.push(`${key}:eq:${value}`)
+    })
+    return queryFilters
+}
+
 export const useSectionListQueryFilter = () => {
     const [filters] = useSectionListFilters()
 
     return useMemo(() => {
-        return parseToGistQueryFilter(filters)
+        return parseToQueryFilter(filters)
     }, [filters])
 }
 
