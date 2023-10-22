@@ -5,6 +5,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { CheckBoxOnChangeObject } from '../../types'
 import { IdentifiableObject, GistModel } from '../../types/models'
+import {
+    ListActions,
+    ActionEdit,
+    ActionMore,
+} from './listActions/SectionListActions'
 import css from './SectionList.module.css'
 import { SelectedColumns, SelectedColumn } from './types'
 
@@ -51,35 +56,38 @@ export function SectionListRow<Model extends IdentifiableObject>({
                 </DataTableCell>
             ))}
             <DataTableCell>
-                <ListActions modelId={modelData.id} />
+                <ListActions>
+                    <ActionEdit modelId={modelData.id} />
+                    <ActionMore />
+                </ListActions>
             </DataTableCell>
         </DataTableRow>
     )
 }
 
-const ListActions = ({ modelId }: { modelId: string }) => {
-    return (
-        <div className={css.listActions}>
-            <ActionEdit modelId={modelId} />
-            <ActionMore />
-        </div>
-    )
-}
+// const ListActions = ({ modelId }: { modelId: string }) => {
+//     return (
+//         <div className={css.listActions}>
+//             <ActionEdit modelId={modelId} />
+//             <ActionMore />
+//         </div>
+//     )
+// }
 
-const ActionEdit = ({ modelId }: { modelId: string }) => {
-    return (
-        <Link to={`${modelId}`}>
-            <Button small secondary>
-                <IconEdit24 />
-            </Button>
-        </Link>
-    )
-}
+// const ActionEdit = ({ modelId }: { modelId: string }) => {
+//     return (
+//         <Link to={`${modelId}`}>
+//             <Button small secondary>
+//                 <IconEdit24 />
+//             </Button>
+//         </Link>
+//     )
+// }
 
-const ActionMore = () => {
-    return (
-        <Button small secondary>
-            <IconMore24 />
-        </Button>
-    )
-}
+// const ActionMore = () => {
+//     return (
+//         <Button small secondary>
+//             <IconMore24 />
+//         </Button>
+//     )
+// }

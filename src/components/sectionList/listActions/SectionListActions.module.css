@@ -1,0 +1,12 @@
+.listActions {
+    display: flex;
+    gap: var(--spacers-dp8);
+}
+
+.listActions button {
+    padding: 0 2px !important;
+}
+
+.actionMorePopover {
+    box-shadow: none !important;
+}
