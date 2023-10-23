@@ -219,7 +219,7 @@ export function DataElementFormFields() {
                 </StandardFormField>
             </StandardFormSection>
 
-            {customAttributes.data?.length && (
+            {customAttributes.data?.length > 0 && (
                 <StandardFormSection>
                     <StandardFormSectionTitle>
                         {i18n.t('Custom attributes')}
