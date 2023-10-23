@@ -4,6 +4,11 @@ import { useSchemaFromHandle } from '../../lib'
 import { Pager, ModelCollection } from '../../types/models'
 import { DetailsPanel, DefaultDetailsPanelContent } from './detailsPanel'
 import { FilterWrapper } from './filters/FilterWrapper'
+import {
+    ActionEdit,
+    ActionMore,
+    ListActions,
+} from './listActions/SectionListActions'
 import { useModelListView } from './listView'
 import { ModelValue } from './modelValue/ModelValue'
 import { SectionList } from './SectionList'
@@ -57,6 +62,9 @@ export const SectionListWrapper = ({
         }
     }
 
+    const handleShowDetails = (id: string) =>
+        setDetailsId((prevDetailsId) => (prevDetailsId === id ? undefined : id))
+
     const allSelected = useMemo(() => {
         return data?.length !== 0 && data?.length === selectedModels.size
     }, [data, selectedModels.size])
@@ -95,12 +103,21 @@ export const SectionListWrapper = ({
                                 selectedColumns={headerColumns}
                                 onSelect={handleSelect}
                                 onClick={({ id }) => {
-                                    setDetailsId((prevDetailsId) =>
-                                        prevDetailsId === id ? undefined : id
-                                    )
+                                    handleShowDetails(id)
                                 }}
                                 selected={selectedModels.has(model.id)}
                                 active={model.id === detailsId}
+                                renderActions={(id) => (
+                                    <ListActions>
+                                        <ActionEdit modelId={id} />
+                                        <ActionMore
+                                            modelId={id}
+                                            onShowDetailsClick={() =>
+                                                handleShowDetails(id)
+                                            }
+                                        />
+                                    </ListActions>
+                                )}
                                 renderColumnValue={({ path }) => {
                                     return (
                                         <ModelValue
