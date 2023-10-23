@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import {
     Button,
     FlyoutMenu,
@@ -9,7 +10,7 @@ import {
     Popover,
 } from '@dhis2/ui'
 import React, { useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHref, useLinkClickHandler } from 'react-router-dom'
 import css from './SectionListActions.module.css'
 
 export const ListActions = ({ children }: React.PropsWithChildren) => {
@@ -26,35 +27,56 @@ export const ActionEdit = ({ modelId }: { modelId: string }) => {
     )
 }
 
-export const ActionMore = () => {
+type ActionMoreProps = {
+    modelId: string
+    onShowDetailsClick: () => void
+}
+export const ActionMore = ({
+    modelId,
+    onShowDetailsClick,
+}: ActionMoreProps) => {
     const [open, setOpen] = useState(false)
     const ref = useRef(null)
+    const href = useHref(modelId, { relative: 'path' })
+    const handleClick = useLinkClickHandler(modelId)
+
     return (
         <div ref={ref}>
-            <Button small secondary onClick={() => setOpen(!open)}>
-                <IconMore24 />
-                {open && (
-                    <Popover
-                        className={css.actionMorePopover}
-                        arrow={false}
-                        placement="bottom-end"
-                        reference={ref}
-                    >
-                        <FlyoutMenu>
-                            <MenuItem
-                                dense
-                                label={'Show details'}
-                                icon={<IconMore16 />}
-                            />
-                            <MenuItem
-                                dense
-                                label={'Edit'}
-                                icon={<IconEdit16 />}
-                            />
-                        </FlyoutMenu>
-                    </Popover>
-                )}
-            </Button>
+            <Button
+                small
+                secondary
+                onClick={() => setOpen(!open)}
+                icon={<IconMore24 />}
+            ></Button>
+            {open && (
+                <Popover
+                    className={css.actionMorePopover}
+                    arrow={false}
+                    placement="bottom-end"
+                    reference={ref}
+                    onClickOutside={() => setOpen(false)}
+                >
+                    <FlyoutMenu>
+                        <MenuItem
+                            dense
+                            label={i18n.t('Show details')}
+                            icon={<IconMore16 />}
+                            onClick={onShowDetailsClick}
+                        />
+                        <MenuItem
+                            dense
+                            label={i18n.t('Edit')}
+                            icon={<IconEdit16 />}
+                            onClick={(_, e) => {
+                                handleClick(e)
+                                setOpen(false)
+                            }}
+                            target="_blank"
+                            href={href}
+                        ></MenuItem>
+                    </FlyoutMenu>
+                </Popover>
+            )}
         </div>
     )
 }

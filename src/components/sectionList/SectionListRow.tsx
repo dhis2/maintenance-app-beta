@@ -18,6 +18,7 @@ export type SectionListRowProps<Model extends IdentifiableObject> = {
     selectedColumns: SelectedColumns
     onSelect: (modelId: string, checked: boolean) => void
     selected: boolean
+    renderActions: (modelId: string) => React.ReactNode
     renderColumnValue: (column: SelectedColumn) => React.ReactNode
     onClick?: (modelData: GistModel<Model> | Model) => void
     active?: boolean
@@ -30,6 +31,7 @@ export function SectionListRow<Model extends IdentifiableObject>({
     onSelect,
     onClick,
     selected,
+    renderActions,
     renderColumnValue,
 }: SectionListRowProps<Model>) {
     return (
@@ -55,12 +57,7 @@ export function SectionListRow<Model extends IdentifiableObject>({
                     {renderColumnValue(selectedColumn)}
                 </DataTableCell>
             ))}
-            <DataTableCell>
-                <ListActions>
-                    <ActionEdit modelId={modelData.id} />
-                    <ActionMore />
-                </ListActions>
-            </DataTableCell>
+            <DataTableCell>{renderActions(modelData.id)}</DataTableCell>
         </DataTableRow>
     )
 }
