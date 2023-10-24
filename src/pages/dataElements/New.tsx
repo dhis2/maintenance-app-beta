@@ -5,7 +5,11 @@ import { FORM_ERROR } from 'final-form'
 import React, { useEffect, useRef } from 'react'
 import { Form } from 'react-final-form'
 import { useNavigate } from 'react-router-dom'
-import { StandardFormActions, StandardFormSection } from '../../components'
+import {
+    Loader,
+    StandardFormActions,
+    StandardFormSection,
+} from '../../components'
 import { SCHEMA_SECTIONS, getSectionPath } from '../../lib'
 import { Attribute } from '../../types/generated'
 import { DataElementFormFields, useCustomAttributesQuery } from './form'
@@ -26,8 +30,10 @@ function computeInitialValues(customAttributes: Attribute[]) {
         code: '',
         description: '',
         url: '',
-        color: '',
-        icon: '',
+        style: {
+            color: '',
+            icon: '',
+        },
         fieldMask: '',
         domainType: 'AGGREGATE',
         formName: '',
@@ -78,27 +84,11 @@ function formatFormValues({ values }: { values: FormValues }) {
     }
 }
 
-// @TODO(DataElements/new): values dynamic or static?
 export const Component = () => {
     const dataEngine = useDataEngine()
-
     const navigate = useNavigate()
     const customAttributesQuery = useCustomAttributesQuery()
-
-    const loading = customAttributesQuery.loading
-    const error = customAttributesQuery.error
-
-    if (error && !loading) {
-        // @TODO(Edit): Implement error screen
-        return <>Error: {error.toString()}</>
-    }
-
-    if (loading) {
-        // @TODO(Edit): Implement loading screen
-        return <>Loading...</>
-    }
-
-    const initialValues = computeInitialValues(customAttributesQuery.data)
+    const initialValues = computeInitialValues(customAttributesQuery.data || [])
 
     async function onSubmit(values: FormValues) {
         const payload = formatFormValues({ values })
@@ -111,7 +101,6 @@ export const Component = () => {
                 variables: payload,
             })
         } catch (e) {
-            console.log('> e', e)
             return { [FORM_ERROR]: (e as Error | string).toString() }
         }
 
@@ -119,16 +108,21 @@ export const Component = () => {
     }
 
     return (
-        <Form onSubmit={onSubmit} initialValues={initialValues}>
-            {({ handleSubmit, submitting, submitError }) => (
-                <form onSubmit={handleSubmit}>
-                    <FormContents
-                        submitError={submitError}
-                        submitting={submitting}
-                    />
-                </form>
-            )}
-        </Form>
+        <Loader
+            queryResponse={customAttributesQuery}
+            label={i18n.t('Custom attributes')}
+        >
+            <Form onSubmit={onSubmit} initialValues={initialValues}>
+                {({ handleSubmit, submitting, submitError }) => (
+                    <form onSubmit={handleSubmit}>
+                        <FormContents
+                            submitError={submitError}
+                            submitting={submitting}
+                        />
+                    </form>
+                )}
+            </Form>
+        </Loader>
     )
 }
 

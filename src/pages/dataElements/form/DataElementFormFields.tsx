@@ -3,6 +3,7 @@ import { CheckboxFieldFF, InputFieldFF, TextAreaFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import {
+    Loader,
     StandardFormSection,
     StandardFormSectionTitle,
     StandardFormSectionDescription,
@@ -25,25 +26,11 @@ import { useCustomAttributesQuery } from './useCustomAttributesQuery'
 export function DataElementFormFields() {
     const customAttributes = useCustomAttributesQuery()
 
-    const loading = customAttributes.loading
-    const error = customAttributes.error
-
-    if (loading) {
-        return <>@TODO(DataElementForm): Loading</>
-    }
-
-    if (error) {
-        return (
-            <>
-                @TODO(DataElementForm): Error
-                <br />
-                {error.toString()}
-            </>
-        )
-    }
-
     return (
-        <>
+        <Loader
+            queryResponse={customAttributes}
+            label={i18n.t('Custom attributes')}
+        >
             <StandardFormSection>
                 <StandardFormSectionTitle>
                     {i18n.t('Basic information')}
@@ -217,12 +204,14 @@ export function DataElementFormFields() {
                     {i18n.t('Aggregation levels')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {`
-                        @TODO(DataElementForm): Help text to describe the aggregation levels
-                          functionality. It appears as if this section hasn't been
-                          finalized yet by Joe, so I guess we'll have to talk about
-                          this particluar part.
-                    `}
+                    By default, the aggregation will start at the lowest
+                    assigned organisation unit. If you for example select
+                    &quot;Chiefdom&quot;, it means that &quot;Chiefdom&quot;,
+                    &quot;District&quot; and &quot;National&quot; aggregates use
+                    &quot;Chiefdom&quot; (the highest aggregation level
+                    available) as the data source, and PHU data will not be
+                    included. PHU will still be available for the PHU level, but
+                    not included in the aggregations to the levels above.
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
@@ -230,7 +219,7 @@ export function DataElementFormFields() {
                 </StandardFormField>
             </StandardFormSection>
 
-            {customAttributes.data?.length && (
+            {customAttributes.data?.length > 0 && (
                 <StandardFormSection>
                     <StandardFormSectionTitle>
                         {i18n.t('Custom attributes')}
@@ -244,6 +233,6 @@ export function DataElementFormFields() {
                     />
                 </StandardFormSection>
             )}
-        </>
+        </Loader>
     )
 }

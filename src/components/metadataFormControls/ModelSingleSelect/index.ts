@@ -1,1 +1,1 @@
-export { ModelSingleSelect } from './ModelSingleSelect'
+export * from './ModelSingleSelect'

@@ -48,6 +48,15 @@ msgstr "Search for menu items"
 msgid "Search icons"
 msgstr "Search icons"
 
+msgid "Select"
+msgstr "Select"
+
+msgid "Remove icon"
+msgstr "Remove icon"
+
+msgid "Cancel"
+msgstr "Cancel"
+
 msgid "Retry"
 msgstr "Retry"
 
@@ -69,11 +78,14 @@ msgstr "Aggregation level(s)"
 msgid "Category combo"
 msgstr "Category combo"
 
-msgid "None"
-msgstr "None"
+msgid "Default (none)"
+msgstr "Default (none)"
 
 msgid "Filter legend sets"
 msgstr "Filter legend sets"
+
+msgid "None"
+msgstr "None"
 
 msgid "Option set"
 msgstr "Option set"

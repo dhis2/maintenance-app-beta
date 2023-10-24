@@ -3,7 +3,7 @@
     gap: var(--spacers-dp8);
     padding: var(--spacers-dp8);
     border-radius: 3px;
-    border: 1px solid var(--colors-grey600);
+    border: 1px solid var(--colors-grey500);
     background: var(--colors-white);
     width: 68px;
     cursor: pointer;
@@ -15,7 +15,8 @@
     justify-content: center;
     height: 26px;
     width: 26px;
-    border: 1px solid var(--colors-black);
+    border: 1px dashed var(--colors-grey400);
+    border-radius: 2px;
 }
 
 .hasColor .chosenColor {

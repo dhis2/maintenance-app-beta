@@ -46,6 +46,6 @@ export function createJsonPatchOperations({
     return adjustedDirtyFieldsKeys.map((name) => ({
         op: get(name, dataElement) ? 'replace' : 'add',
         path: `/${name.replace(/[.]/g, '/')}`,
-        value: get(name, values),
+        value: get(name, values) || '',
     }))
 }

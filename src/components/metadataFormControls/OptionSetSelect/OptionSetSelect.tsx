@@ -1,22 +1,20 @@
 import i18n from '@dhis2/d2-i18n'
 import React, { forwardRef } from 'react'
 import { ModelSingleSelect } from '../ModelSingleSelect'
+import type { ModelSingleSelectProps } from '../ModelSingleSelect'
 import { useInitialOptionQuery } from './useInitialOptionQuery'
 import { useOptionsQuery } from './useOptionsQuery'
 
-interface OptionSetSelectProps {
-    onChange: ({ selected }: { selected: string }) => void
-    placeholder?: string
-    selected?: string
-    showAllOption?: boolean
-    onBlur?: () => void
-    onFocus?: () => void
-}
+type OptionSetSelectProps = Omit<
+    ModelSingleSelectProps,
+    'useInitialOptionQuery' | 'useOptionsQuery'
+>
 
 export const OptionSetSelect = forwardRef(function OptionSetSelect(
     {
         onChange,
         placeholder = i18n.t('Option set'),
+        required,
         selected,
         showAllOption,
         onBlur,
@@ -27,6 +25,7 @@ export const OptionSetSelect = forwardRef(function OptionSetSelect(
     return (
         <ModelSingleSelect
             ref={ref}
+            required={required}
             useInitialOptionQuery={useInitialOptionQuery}
             useOptionsQuery={useOptionsQuery}
             placeholder={placeholder}
