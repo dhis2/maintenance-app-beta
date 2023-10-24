@@ -112,7 +112,7 @@ export function DataElementFormFields() {
 
             <StandardFormSection>
                 <StandardFormSectionTitle>
-                    {i18n.t('LegendSet')}
+                    {i18n.t('Legend set')}
                 </StandardFormSectionTitle>
 
                 <StandardFormSectionDescription>
