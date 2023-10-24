@@ -633,6 +633,12 @@ msgstr "Exit without saving"
 msgid "Create data element"
 msgstr "Create data element"
 
+msgid "Loading custom attributes"
+msgstr "Loading custom attributes"
+
+msgid "Something went wrong with retrieving the custom attributes"
+msgstr "Something went wrong with retrieving the custom attributes"
+
 msgid "Basic information"
 msgstr "Basic information"
 
@@ -745,6 +751,12 @@ msgstr "Option set comment"
 
 msgid "Choose a set of predefined comment for data entry"
 msgstr "Choose a set of predefined comment for data entry"
+
+msgid "Required"
+msgstr "Required"
+
+msgid "The value is to long. You can use up to 255 characters"
+msgstr "The value is to long. You can use up to 255 characters"
 
 msgid "Metadata management"
 msgstr "Metadata management"

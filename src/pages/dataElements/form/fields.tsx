@@ -2,9 +2,12 @@ import i18n from '@dhis2/d2-i18n'
 import {
     ButtonStrip,
     Button,
+    CheckboxFieldFF,
     Field,
+    InputFieldFF,
     Radio,
     SingleSelectFieldFF,
+    TextAreaFieldFF,
 } from '@dhis2/ui'
 import React, { useRef } from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
@@ -24,6 +27,80 @@ import {
 } from '../../../lib'
 import classes from './customFields.module.css'
 import { EditableFieldWrapper } from './EditableFieldWrapper'
+
+export function NameField() {
+    return (
+        <FieldRFF
+            component={InputFieldFF}
+            dataTest="dataelementsformfields-name"
+            required
+            inputWidth="400px"
+            label={i18n.t('{{fieldLabel}} (required)', {
+                fieldLabel: i18n.t('Name'),
+            })}
+            name="name"
+            helpText={i18n.t(
+                'A data element name should be concise and easy to recognize.'
+            )}
+        />
+    )
+}
+
+export function ShortNameField() {
+    return (
+        <FieldRFF
+            component={InputFieldFF}
+            dataTest="dataelementsformfields-shortname"
+            required
+            inputWidth="400px"
+            label={i18n.t('{{fieldLabel}} (required)', {
+                fieldLabel: i18n.t('Short name'),
+            })}
+            name="name"
+            helpText={i18n.t('Often used in reports where space is limited')}
+        />
+    )
+}
+
+export function CodeField() {
+    return (
+        <FieldRFF
+            component={InputFieldFF}
+            dataTest="dataelementsformfields-code"
+            inputWidth="150px"
+            name="code"
+            label={i18n.t('Code')}
+        />
+    )
+}
+
+export function DescriptionField() {
+    return (
+        <FieldRFF
+            component={TextAreaFieldFF}
+            dataTest="dataelementsformfields-description"
+            inputWidth="400px"
+            name="description"
+            label={i18n.t('Description')}
+            helpText={i18n.t(
+                "Explain the purpose of this data element and how it's measured."
+            )}
+        />
+    )
+}
+
+export function UrlField() {
+    return (
+        <FieldRFF
+            component={InputFieldFF}
+            dataTest="dataelementsformfields-url"
+            inputWidth="400px"
+            name="url"
+            label={i18n.t('Url')}
+            helpText={i18n.t('A web link that provides extra information')}
+        />
+    )
+}
 
 export function ColorAndIconField() {
     const { input: colorInput } = useField('style.color')
@@ -51,6 +128,49 @@ export function ColorAndIconField() {
     )
 }
 
+export function FieldMaskField() {
+    return (
+        <FieldRFF
+            component={InputFieldFF}
+            inputWidth="400px"
+            dataTest="dataelementsformfields-fieldmask"
+            name="fieldMask"
+            label={i18n.t('Field mask')}
+            helpText={i18n.t(
+                'Use a pattern to limit what information can be entered.'
+            )}
+            placeholder={i18n.t('e.g. 999-000-0000')}
+        />
+    )
+}
+
+export function FormNameField() {
+    return (
+        <FieldRFF
+            component={InputFieldFF}
+            dataTest="dataelementsformfields-formname"
+            inputWidth="400px"
+            name="formName"
+            label={i18n.t('StandardForm name')}
+            helpText={i18n.t(
+                'An alternative name used in section or automatic data entry forms.'
+            )}
+        />
+    )
+}
+
+export function ZeroIsSignificantField() {
+    return (
+        <FieldRFF
+            component={CheckboxFieldFF}
+            dataTest="dataelementsformfields-zeroissignificant"
+            name="zeroIsSignificant"
+            label={i18n.t('Store zero data values')}
+            type="checkbox"
+        />
+    )
+}
+
 export function DomainField() {
     const name = 'domainType'
     const validate = (value: string) => (!value ? 'Required' : undefined)
@@ -64,6 +184,7 @@ export function DomainField() {
         value: 'TRACKER',
         validate,
     })
+    const touched = aggregateInput.meta.touched || trackerInput.meta.touched
     const error = aggregateInput.meta.error || trackerInput.meta.error
 
     return (
@@ -77,8 +198,8 @@ export function DomainField() {
             helpText={i18n.t(
                 'A data element can either be aggregated or tracked data.'
             )}
-            error={!!error}
-            validationText={error}
+            error={touched && !!error}
+            validationText={touched ? error : undefined}
         >
             <div>
                 <Radio
@@ -177,12 +298,9 @@ export function ValueTypeField() {
     )
     return (
         <FieldRFF
+            required
             component={SingleSelectFieldFF}
             dataTest="dataelementsformfields-valuetype"
-            required
-            validate={(value: string | undefined) =>
-                !value ? 'Required' : undefined
-            }
             inputWidth="400px"
             name="valueType"
             label={i18n.t('{{fieldLabel}} (required)', {
@@ -208,9 +326,6 @@ export function AggregationTypeField() {
             component={SingleSelectFieldFF}
             dataTest="dataelementsformfields-aggregationtype"
             required
-            validate={(value: string | undefined) =>
-                !value ? 'Required' : undefined
-            }
             inputWidth="400px"
             name="aggregationType"
             label={i18n.t('{{fieldLabel}} (required)', {
@@ -249,11 +364,14 @@ export function CategoryComboField() {
                     helpText={i18n.t(
                         'Choose how this data element is disaggregated'
                     )}
-                    validationText={meta.error}
+                    error={meta.touched && !!meta.error}
+                    validationText={meta.touched ? meta.error : undefined}
+                    dataTest="dataelementsformfields-categorycombo"
                 >
                     <CategoryComboSelect
                         required
                         placeholder=""
+                        invalid={meta.touched && !!meta.error}
                         ref={categoryComboHandle}
                         selected={input.value}
                         onChange={({ selected }) => input.onChange(selected)}
@@ -288,10 +406,13 @@ export function OptionSetField() {
                     helpText={i18n.t(
                         'Choose a set of predefined options for data entry'
                     )}
-                    validationText={meta.error}
+                    validationText={meta.touched ? meta.error : undefined}
+                    error={meta.touched && !!meta.error}
+                    dataTest="dataelementsformfields-optionset"
                 >
                     <OptionSetSelect
                         placeholder=""
+                        invalid={meta.touched && !!meta.error}
                         ref={optionSetHandle}
                         selected={input.value}
                         onChange={({ selected }) => input.onChange(selected)}
@@ -326,10 +447,13 @@ export function OptionSetCommentField() {
                     helpText={i18n.t(
                         'Choose a set of predefined comment for data entry'
                     )}
-                    validationText={meta.error}
+                    validationText={meta.touched ? meta.error : undefined}
+                    error={meta.touched && !!meta.error}
+                    dataTest="dataelementsformfields-commentoptionset"
                 >
                     <OptionSetSelect
                         ref={optionSetHandle}
+                        invalid={meta.touched && !!meta.error}
                         placeholder=""
                         selected={input.value}
                         onChange={({ selected }) => input.onChange(selected)}
@@ -368,10 +492,13 @@ export function AggregationLevelsField() {
                     helpText={i18n.t(
                         'Choose how this data element is disaggregated'
                     )}
-                    validationText={meta.error}
+                    validationText={meta.touched ? meta.error : undefined}
+                    error={meta.touched && !!meta.error}
+                    dataTest="dataelementsformfields-aggregationlevels"
                 >
                     <AggregationLevelMultiSelect
                         ref={aggregationLevelHandle}
+                        invalid={meta.touched && !!meta.error}
                         inputWidth="400px"
                         placeholder=""
                         selected={input.value}

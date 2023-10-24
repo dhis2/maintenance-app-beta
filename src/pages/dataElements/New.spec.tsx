@@ -1,10 +1,4 @@
-import {
-    RenderResult,
-    act,
-    fireEvent,
-    render,
-    waitFor,
-} from '@testing-library/react'
+import { RenderResult, fireEvent, render } from '@testing-library/react'
 import React from 'react'
 import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 import dataElementSchemaMock from '../../__mocks__/schema/dataElementsSchema.json'
@@ -114,7 +108,7 @@ describe('Data Elements / New', () => {
             result.container.querySelectorAll(
                 '.error[data-test$="-validation"]'
             )
-        ).toHaveLength(4)
+        ).toHaveLength(3)
 
         const nameRequiredError = await result.findByText('Required', {
             selector: '[data-test="dataelementsformfields-name-validation"]',
@@ -127,24 +121,15 @@ describe('Data Elements / New', () => {
         })
         expect(shortNameRequiredError).toBeTruthy()
 
-        const valueTypeRequiredError = await result.findByText('Required', {
+        const categoryComboRequiredError = await result.findByText('Required', {
             selector:
-                '[data-test="dataelementsformfields-valuetype-validation"]',
+                '[data-test="dataelementsformfields-categorycombo-validation"]',
         })
-        expect(valueTypeRequiredError).toBeTruthy()
-
-        const aggregationTypeRequiredError = await result.findByText(
-            'Required',
-            {
-                selector:
-                    '[data-test="dataelementsformfields-aggregationtype-validation"]',
-            }
-        )
-        expect(aggregationTypeRequiredError).toBeTruthy()
+        expect(categoryComboRequiredError).toBeTruthy()
     })
 
     it('should submit the data and return to the list view on success', async () => {
-        const dataElementCustomData = jest.fn(() => Promise.resolve({}))
+        const dataElementCustomData = () => Promise.resolve({})
         const router = createMemoryRouter(
             [
                 { path: '/new', element: <New /> },
@@ -189,9 +174,11 @@ describe('Data Elements / New', () => {
             { target: { value: 'Data element short name' } }
         )
 
-        await changeSingleSelect(result, 'Value type (required)', 'Text')
-
-        await changeSingleSelect(result, 'Aggregation type (required)', 'Sum')
+        await changeSingleSelect(
+            result,
+            'Category combination (required)',
+            'None'
+        )
 
         fireEvent.click(submitButton)
 
