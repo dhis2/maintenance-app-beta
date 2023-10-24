@@ -3,27 +3,42 @@ import { JsonPatchOperation } from '../../../types'
 import { DataElement } from '../../../types/generated'
 import type { FormValues } from '../form'
 
-type DataElementKey = keyof DataElement
-
 interface FormatFormValuesArgs {
     dataElement: DataElement
     dirtyFields: { [name: string]: boolean }
     values: FormValues
 }
 
-const sanitizeDirtyValueKeys = (keys: DataElementKey[]) => {
-    const attributeValuesDirty = keys.find((key) =>
-        key.startsWith('attributeValues')
+const sanitizeDirtyValueKeys = (keys: string[]) => {
+    // these are removed from the dirtyKeys
+    // attributeValues is an array in the form, thus fields will be attributeValues[0] etc
+    // style.code should post to style, not style.code, because it's a complex object
+    const keyStartsWithToRemove = ['attributeValues', 'style'] as const
+    const shouldInclude = Object.fromEntries(
+        keys.map((key) => [key, false])
+    ) as Record<(typeof keyStartsWithToRemove)[number], boolean>
+
+    const keysWithout = keys.filter(
+        (key) =>
+            !keyStartsWithToRemove.some((keyToRemove) => {
+                const shouldRemove = key.startsWith(keyToRemove)
+                if (shouldRemove) {
+                    shouldInclude[keyToRemove] = true
+                }
+                return shouldRemove
+            })
     )
 
-    if (!attributeValuesDirty) {
+    // no difference
+    if (keysWithout.length === keys.length) {
         return keys
     }
 
-    return [
-        ...keys.filter((key) => !key.startsWith('attributeValues')),
-        'attributeValues' as DataElementKey,
-    ]
+    const keysToInclude = Object.entries(shouldInclude)
+        .filter(([, val]) => val)
+        .map(([key]) => key)
+
+    return keysWithout.concat(keysToInclude)
 }
 
 export function createJsonPatchOperations({
@@ -39,9 +54,8 @@ export function createJsonPatchOperations({
         ),
     }
 
-    const dirtyFieldsKeys = Object.keys(dirtyFields) as DataElementKey[]
-    const adjustedDirtyFieldsKeys: DataElementKey[] =
-        sanitizeDirtyValueKeys(dirtyFieldsKeys)
+    const dirtyFieldsKeys = Object.keys(dirtyFields)
+    const adjustedDirtyFieldsKeys = sanitizeDirtyValueKeys(dirtyFieldsKeys)
 
     return adjustedDirtyFieldsKeys.map((name) => ({
         op: get(name, dataElement) ? 'replace' : 'add',
