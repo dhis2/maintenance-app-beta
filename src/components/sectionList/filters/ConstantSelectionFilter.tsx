@@ -31,6 +31,7 @@ export const ConstantSelectionFilter = ({
             filterable={filterable}
             filterPlaceholder={i18n.t('Type to filter options')}
             noMatchText={i18n.t('No matches')}
+            prefix={label}
         >
             <SingleSelectOption key={'all'} label={'All'} value={''} />
             {Object.entries(constants).map(([key, label]) => (

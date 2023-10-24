@@ -58,6 +58,7 @@ export const DataElementInDataSetFilter = () => {
             filterable={true}
             filterPlaceholder={i18n.t('Type to filter options')}
             noMatchText={i18n.t('No matches')}
+            prefix={i18n.t('Data set')}
         >
             <SingleSelectOption key={'all'} label={'All'} value={''} />
             {options?.map(({ label, value }) => (
