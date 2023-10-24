@@ -9,6 +9,7 @@
 /* make dense selection fields same height as text field*/
 .constantSelectionFilter [data-test='dhis2-uicore-select-input'] {
     max-height: 32px;
+    min-height: 32px;
 }
 
 .identifiableSelectionFilter {

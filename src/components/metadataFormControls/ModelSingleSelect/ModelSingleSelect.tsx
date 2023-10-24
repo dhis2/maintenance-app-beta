@@ -61,6 +61,7 @@ export interface ModelSingleSelectProps {
     required?: boolean
     invalid?: boolean
     placeholder?: string
+    prefix?: string
     selected?: string
     showAllOption?: boolean
     onBlur?: () => void
@@ -74,6 +75,7 @@ export const ModelSingleSelect = forwardRef(function ModelSingleSelect(
         onChange,
         invalid,
         placeholder = '',
+        prefix,
         required,
         selected,
         showAllOption,
@@ -154,6 +156,7 @@ export const ModelSingleSelect = forwardRef(function ModelSingleSelect(
         <SearchableSingleSelect
             invalid={invalid}
             placeholder={placeholder}
+            prefix={prefix}
             showAllOption={showAllOption}
             onChange={({ selected }) => {
                 if (selected === selectedOption?.value) {

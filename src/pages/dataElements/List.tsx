@@ -6,6 +6,7 @@ import {
     ValueTypeSelectionFilter,
     useQueryParamsForModelGist,
 } from '../../components'
+import { CategoryComboFilter } from '../../components/sectionList/filters/CategoryComboFilter'
 import { DataElementInDataSetFilter } from '../../components/sectionList/filters/DataElementInDataSetFilter'
 import { useModelListView } from '../../components/sectionList/listView'
 import { useSchemaFromHandle } from '../../lib/'
@@ -59,6 +60,9 @@ export const Component = () => {
             if (field === 'dataSetElements') {
                 return `dataSetElements.dataSet.id:eq:${value}`
             }
+            if (field === 'categoryCombo') {
+                return `categoryCombo.id:eq:${value}`
+            }
             return filter
         })
 
@@ -81,6 +85,7 @@ export const Component = () => {
                         <DomainTypeSelectionFilter />
                         <ValueTypeSelectionFilter />
                         <DataElementInDataSetFilter />
+                        <CategoryComboFilter />
                     </>
                 }
                 error={error}

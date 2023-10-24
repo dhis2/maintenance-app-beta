@@ -55,6 +55,7 @@ interface SearchableSingleSelectPropTypes {
     onRetryClick: () => void
     options: Option[]
     placeholder: string
+    prefix?: string
     showEndLoader: boolean
     loading: boolean
     selected?: string
@@ -70,6 +71,7 @@ export const SearchableSingleSelect = ({
     error,
     loading,
     placeholder,
+    prefix,
     onBlur,
     onChange,
     onEndReached,
@@ -126,6 +128,7 @@ export const SearchableSingleSelect = ({
             error={invalid}
             onChange={onChange}
             placeholder={placeholder}
+            prefix={prefix}
             onBlur={onBlur}
             onFocus={onFocus}
         >
