@@ -69,7 +69,7 @@ const defaultModelViewConfig = {
 const modelListViewsConfig = {
     dataElement: {
         columns: {
-            available: ['zeroIsSignificant', 'categoryCombo'],
+            available: ['zeroIsSignificant', 'categoryCombo', 'formName'],
             default: [
                 'name',
                 { label: i18n.t('Domain'), path: 'domainType' },

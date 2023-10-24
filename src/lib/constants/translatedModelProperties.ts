@@ -7,6 +7,7 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     favorite: i18n.t('Favorite'),
     href: i18n.t('API URL'),
     id: i18n.t('Id'),
+    formName: i18n.t('Form name'),
     lastUpdatedBy: i18n.t('Last updated by'),
     created: i18n.t('Created'),
     domainType: i18n.t('Domain type'),
