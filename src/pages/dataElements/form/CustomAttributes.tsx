@@ -18,16 +18,25 @@ type CustomAttributeProps = {
     index: number
 }
 
+type DisplayOptions = Array<{
+    value: string | undefined
+    label: string
+}>
+
 function CustomAttribute({ attribute, index }: CustomAttributeProps) {
     const name = `attributeValues[${index}].value`
 
     if (attribute.optionSet?.options) {
-        const options = attribute.optionSet?.options.map(
+        let options: DisplayOptions = [
+            { value: undefined, label: i18n.t('<No value>') },
+        ]
+        const mappedOptions = attribute.optionSet.options.map(
             ({ code, displayName }) => ({
                 value: code,
                 label: displayName,
             })
         )
+        options = options.concat(mappedOptions)
 
         return (
             <StandardFormSection key={attribute.id}>
