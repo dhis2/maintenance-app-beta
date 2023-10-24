@@ -56,7 +56,7 @@ export function ShortNameField() {
             label={i18n.t('{{fieldLabel}} (required)', {
                 fieldLabel: i18n.t('Short name'),
             })}
-            name="name"
+            name="shortName"
             helpText={i18n.t('Often used in reports where space is limited')}
         />
     )
