@@ -9,13 +9,7 @@ import {
     Popover,
 } from '@dhis2/ui'
 import React, { useRef, useState } from 'react'
-import {
-    Link,
-    useHref,
-    useLinkClickHandler,
-    useNavigate,
-    useNavigation,
-} from 'react-router-dom'
+import { Link, useHref, useLinkClickHandler } from 'react-router-dom'
 import css from './SectionListActions.module.css'
 
 export const ListActions = ({ children }: React.PropsWithChildren) => {
@@ -44,7 +38,6 @@ export const ActionMore = ({
     const ref = useRef(null)
     const href = useHref(modelId, { relative: 'path' })
     const handleClick = useLinkClickHandler(modelId)
-    const navigate = useNavigate()
     return (
         <div ref={ref}>
             <Button
@@ -66,7 +59,10 @@ export const ActionMore = ({
                             dense
                             label={'Show details'}
                             icon={<IconMore16 />}
-                            onClick={onShowDetailsClick}
+                            onClick={() => {
+                                setOpen(false)
+                                onShowDetailsClick()
+                            }}
                         />
                         <MenuItem
                             dense
