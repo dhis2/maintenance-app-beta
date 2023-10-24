@@ -6,6 +6,7 @@ import {
     ValueTypeSelectionFilter,
     useQueryParamsForModelGist,
 } from '../../components'
+import { DataElementInDataSetFilter } from '../../components/sectionList/filters/DataElementInDataSetFilter'
 import { useModelListView } from '../../components/sectionList/listView'
 import { useSchemaFromHandle } from '../../lib/'
 import { getFieldFilter } from '../../lib/models/path'
@@ -52,11 +53,23 @@ export const Component = () => {
         if (listViewQuery.isLoading) {
             return
         }
+
+        const filters = initialParams.filter.map((filter) => {
+            const [field, operator, value] = filter.split(':')
+            if (field === 'dataSetElements') {
+                return `dataSetElements.dataSet.id:eq:${value}`
+            }
+            return filter
+        })
+
+        const fields = columns
+            .map((column) => getFieldFilter(schema, column.path))
+            .concat('id')
+
         refetch({
             ...initialParams,
-            fields: columns
-                .map((column) => getFieldFilter(schema, column.path))
-                .concat('id'),
+            fields: fields,
+            filter: filters,
         })
     }, [refetch, initialParams, columns, listViewQuery.isLoading, schema])
 
@@ -67,6 +80,7 @@ export const Component = () => {
                     <>
                         <DomainTypeSelectionFilter />
                         <ValueTypeSelectionFilter />
+                        <DataElementInDataSetFilter />
                     </>
                 }
                 error={error}

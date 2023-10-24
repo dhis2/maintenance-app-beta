@@ -154,7 +154,9 @@ export const useSectionListQueryFilter = () => {
     }, [filters])
 }
 
-export const useQueryParamsForModelGist = (): GistParams => {
+export const useQueryParamsForModelGist = (): GistParams & {
+    filter: string[]
+} => {
     const [paginationParams] = usePaginationQueryParams()
     const filterParams = useSectionListQueryFilter()
 
