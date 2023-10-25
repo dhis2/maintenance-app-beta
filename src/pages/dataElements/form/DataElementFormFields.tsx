@@ -204,14 +204,9 @@ export function DataElementFormFields() {
                     {i18n.t('Aggregation levels')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    By default, the aggregation will start at the lowest
-                    assigned organisation unit. If you for example select
-                    &quot;Chiefdom&quot;, it means that &quot;Chiefdom&quot;,
-                    &quot;District&quot; and &quot;National&quot; aggregates use
-                    &quot;Chiefdom&quot; (the highest aggregation level
-                    available) as the data source, and PHU data will not be
-                    included. PHU will still be available for the PHU level, but
-                    not included in the aggregations to the levels above.
+                    {i18n.t(
+                        'By default, the aggregation will start at the lowest assigned organisation unit. If you for example select "Chiefdom", it means that "Chiefdom", "District" and "National" aggregates use "Chiefdom" (the highest aggregation level available) as the data source, and PHU data will not be included. PHU will still be available for the PHU level, but not included in the aggregations to the levels above.'
+                    )}
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
