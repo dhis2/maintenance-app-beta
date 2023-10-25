@@ -2,6 +2,7 @@ import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { NoticeBox } from '@dhis2/ui'
 import { FORM_ERROR } from 'final-form'
+import createFocusDecorator from 'final-form-focus'
 import React, { useEffect, useMemo, useRef } from 'react'
 import { Form } from 'react-final-form'
 import { useNavigate } from 'react-router-dom'
@@ -22,6 +23,8 @@ import type { FormValues } from './form'
 import classes from './New.module.css'
 
 const listPath = `/${getSectionPath(SCHEMA_SECTIONS.dataElement)}`
+
+const focusDecorator = createFocusDecorator<FormValues>()
 
 function useInitialValues(customAttributes: Attribute[]) {
     const schemas = useSchemas()
@@ -123,7 +126,6 @@ export const Component = () => {
 
     async function onSubmit(values: FormValues) {
         const payload = formatFormValues({ values })
-
         try {
             // We want the promise so we know when submitting is done. The promise
             // returned by the mutation function of useDataMutation will never
@@ -143,6 +145,7 @@ export const Component = () => {
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
+            decorators={[focusDecorator]}
         >
             {({ handleSubmit, submitting, submitError }) => (
                 <form onSubmit={handleSubmit}>
