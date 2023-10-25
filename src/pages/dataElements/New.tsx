@@ -6,7 +6,12 @@ import React, { useEffect, useMemo, useRef } from 'react'
 import { Form } from 'react-final-form'
 import { useNavigate } from 'react-router-dom'
 import { StandardFormActions, StandardFormSection } from '../../components'
-import { SCHEMA_SECTIONS, getSectionPath, useSchemas } from '../../lib'
+import {
+    DEFAULT_CATEGORY_COMBO_ID,
+    SCHEMA_SECTIONS,
+    getSectionPath,
+    useSchemas,
+} from '../../lib'
 import { Attribute } from '../../types/generated'
 import {
     DataElementFormFields,
@@ -44,7 +49,7 @@ function useInitialValues(customAttributes: Attribute[]) {
             aggregationType:
                 schemas.dataElement.properties.aggregationType.constants?.[0],
             style: { icon: '', color: '' },
-            categoryCombo: { id: '' },
+            categoryCombo: { id: DEFAULT_CATEGORY_COMBO_ID },
             optionSet: { id: '' },
             commentOptionSet: { id: '' },
             legendSets: [],
