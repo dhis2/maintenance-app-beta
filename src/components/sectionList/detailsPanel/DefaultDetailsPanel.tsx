@@ -21,6 +21,7 @@ const defaultQueryFields = [
     'code',
     'created',
     'lastUpdated',
+    'lastUpdatedBy',
     'displayName',
     'id',
     'shortName',
@@ -92,6 +93,9 @@ const DetailsContent = ({ data }: { data: DetailsResponse }) => {
                 </DetailItem>
                 <DetailItem label={i18n.t('Created')}>
                     <ClientDateTime value={data.created} />
+                </DetailItem>
+                <DetailItem label={i18n.t('Last updated by')}>
+                    {data.lastUpdatedBy.displayName}
                 </DetailItem>
                 <DetailItem label={i18n.t('Last updated')}>
                     <ClientDateTime value={data.lastUpdated} />
