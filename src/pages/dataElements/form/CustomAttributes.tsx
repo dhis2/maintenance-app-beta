@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { InputFieldFF, SingleSelectFieldFF, TextAreaFieldFF } from '@dhis2/ui'
 import * as React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
@@ -15,12 +16,17 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
     const name = `attributeValues[${index}].value`
 
     if (attribute.optionSet?.options) {
-        const options = attribute.optionSet?.options.map(
+        const attributeOptions = attribute.optionSet?.options.map(
             ({ code, displayName }) => ({
                 value: code,
                 label: displayName,
             })
         )
+
+        const options = [
+            { value: '', label: i18n.t('<No value>') },
+            ...(attributeOptions || []),
+        ]
 
         return (
             <StandardFormSection key={attribute.id}>
