@@ -8,11 +8,15 @@ import { Pager } from '../../../types/generated'
 const HAS_FIELD_VALUE_QUERY = {
     dataElements: {
         resource: 'dataElements',
-        params: (variables: Record<string, string>) => ({
-            pageSize: 1,
-            fields: 'id',
-            filter: [`${variables.field}:eq:${variables.value}`],
-        }),
+        params: (variables: Record<string, string>) => {
+            const filter = [`${variables.field}:eq:${variables.value}`]
+
+            if (variables.id) {
+                filter.push(`id:ne:${variables.id}`)
+            }
+
+            return { pageSize: 1, fields: 'id', filter }
+        },
     },
 }
 
@@ -22,7 +26,13 @@ interface QueryResponse {
     }
 }
 
-export function useIsFieldValueUnique(field: string) {
+export function useIsFieldValueUnique({
+    field,
+    id,
+}: {
+    field: string
+    id: string
+}) {
     const engine = useDataEngine()
 
     const validate = useMemo(
@@ -33,7 +43,7 @@ export function useIsFieldValueUnique(field: string) {
                 }
 
                 const data = (await engine.query(HAS_FIELD_VALUE_QUERY, {
-                    variables: { field, value },
+                    variables: { field, value, id },
                 })) as unknown as QueryResponse
 
                 if (data.dataElements.pager.total > 0) {
@@ -42,7 +52,7 @@ export function useIsFieldValueUnique(field: string) {
                     )
                 }
             }),
-        [field, engine]
+        [field, engine, id]
     )
 
     return useDebouncedCallback(validate, 200, { leading: true })

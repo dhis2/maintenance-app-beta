@@ -12,6 +12,7 @@ import {
 import React, { useRef } from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import { useHref } from 'react-router'
+import { useParams } from 'react-router-dom'
 import {
     AggregationLevelMultiSelect,
     ColorAndIconPicker,
@@ -30,8 +31,13 @@ import { EditableFieldWrapper } from './EditableFieldWrapper'
 import { useIsFieldValueUnique } from './useIsFieldValueUnique'
 
 export function NameField() {
+    const params = useParams()
+    const dataElementId = params.id as string
+    const checkIsValueTaken = useIsFieldValueUnique({
+        field: 'name',
+        id: dataElementId,
+    })
     const { meta } = useField('name')
-    const checkIsValueTaken = useIsFieldValueUnique('name')
 
     return (
         <FieldRFF
@@ -56,8 +62,13 @@ export function NameField() {
 }
 
 export function ShortNameField() {
+    const params = useParams()
+    const dataElementId = params.id as string
+    const checkIsValueTaken = useIsFieldValueUnique({
+        field: 'shortName',
+        id: dataElementId,
+    })
     const { meta } = useField('shortName')
-    const checkIsValueTaken = useIsFieldValueUnique('shortName')
 
     return (
         <FieldRFF
