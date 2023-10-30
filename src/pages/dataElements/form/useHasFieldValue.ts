@@ -23,6 +23,7 @@ interface QueryResponse {
 export function useHasFieldValue(field: string) {
     const queryResult = useDataQuery<QueryResponse>(HAS_FIELD_VALUE_QUERY, {
         lazy: true,
+        variables: { field, value: '' },
     })
 
     return useMemo(
