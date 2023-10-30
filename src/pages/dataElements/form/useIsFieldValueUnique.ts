@@ -1,6 +1,8 @@
-import { useDataQuery } from '@dhis2/app-runtime'
+import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { useMemo } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
+import { memoize } from '../../../lib'
 import { Pager } from '../../../types/generated'
 
 const HAS_FIELD_VALUE_QUERY = {
@@ -21,35 +23,27 @@ interface QueryResponse {
 }
 
 export function useIsFieldValueUnique(field: string) {
-    const queryResult = useDataQuery<QueryResponse>(HAS_FIELD_VALUE_QUERY, {
-        lazy: true,
-        variables: { field, value: '' },
-    })
+    const engine = useDataEngine()
 
-    return useMemo(
-        () => ({
-            ...queryResult,
-            refetch: (value: string) => {
+    const validate = useMemo(
+        () =>
+            memoize(async (value: string) => {
                 if (!value) {
-                    return
+                    return undefined
                 }
 
-                return queryResult.refetch({ field, value }).then(
-                    // We don't have access to app-runtime's internal type `JsonMap`,
-                    // so we have to ignore the type error
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                    // @ts-ignore
-                    (data: QueryResponse) => {
-                        if (data.dataElements.pager.total) {
-                            return i18n.t(
-                                'This {{field}} already exists, please choose antoher one',
-                                { field }
-                            )
-                        }
-                    }
-                )
-            },
-        }),
-        [field, queryResult]
+                const data = (await engine.query(HAS_FIELD_VALUE_QUERY, {
+                    variables: { field, value },
+                })) as unknown as QueryResponse
+
+                if (data.dataElements.pager.total > 0) {
+                    return i18n.t(
+                        'This field requires a unique value, please choose another one'
+                    )
+                }
+            }),
+        [field, engine]
     )
+
+    return useDebouncedCallback(validate, 200, { leading: true })
 }

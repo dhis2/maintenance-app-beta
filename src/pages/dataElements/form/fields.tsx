@@ -30,15 +30,12 @@ import { EditableFieldWrapper } from './EditableFieldWrapper'
 import { useIsFieldValueUnique } from './useIsFieldValueUnique'
 
 export function NameField() {
-    const {
-        loading,
-        fetching,
-        refetch: checkIsValueTaken,
-    } = useIsFieldValueUnique('name')
+    const { meta } = useField('name')
+    const checkIsValueTaken = useIsFieldValueUnique('name')
 
     return (
         <FieldRFF
-            loading={loading || fetching}
+            loading={meta.validating}
             component={InputFieldFF}
             dataTest="dataelementsformfields-name"
             required
@@ -59,15 +56,12 @@ export function NameField() {
 }
 
 export function ShortNameField() {
-    const {
-        loading,
-        fetching,
-        refetch: checkIsValueTaken,
-    } = useIsFieldValueUnique('shortName')
+    const { meta } = useField('shortName')
+    const checkIsValueTaken = useIsFieldValueUnique('shortName')
 
     return (
         <FieldRFF
-            loading={loading || fetching}
+            loading={meta.validating}
             component={InputFieldFF}
             dataTest="dataelementsformfields-shortname"
             required
@@ -93,6 +87,7 @@ export function CodeField() {
             inputWidth="150px"
             name="code"
             label={i18n.t('Code')}
+            validateFields={[]}
         />
     )
 }
@@ -108,6 +103,7 @@ export function DescriptionField() {
             helpText={i18n.t(
                 "Explain the purpose of this data element and how it's measured."
             )}
+            validateFields={[]}
         />
     )
 }
@@ -121,13 +117,18 @@ export function UrlField() {
             name="url"
             label={i18n.t('Url')}
             helpText={i18n.t('A web link that provides extra information')}
+            validateFields={[]}
         />
     )
 }
 
 export function ColorAndIconField() {
-    const { input: colorInput } = useField('style.color')
-    const { input: iconInput } = useField('style.icon')
+    const { input: colorInput } = useField('style.color', {
+        validateFields: [],
+    })
+    const { input: iconInput } = useField('style.icon', {
+        validateFields: [],
+    })
 
     return (
         <Field
@@ -163,6 +164,7 @@ export function FieldMaskField() {
                 'Use a pattern to limit what information can be entered.'
             )}
             placeholder={i18n.t('e.g. 999-000-0000')}
+            validateFields={[]}
         />
     )
 }
@@ -178,6 +180,7 @@ export function FormNameField() {
             helpText={i18n.t(
                 'An alternative name used in section or automatic data entry forms.'
             )}
+            validateFields={[]}
         />
     )
 }
@@ -190,6 +193,7 @@ export function ZeroIsSignificantField() {
             name="zeroIsSignificant"
             label={i18n.t('Store zero data values')}
             type="checkbox"
+            validateFields={[]}
         />
     )
 }
@@ -201,11 +205,13 @@ export function DomainField() {
         type: 'radio',
         value: 'AGGREGATE',
         validate,
+        validateFields: [],
     })
     const trackerInput = useField(name, {
         type: 'radio',
         value: 'TRACKER',
         validate,
+        validateFields: [],
     })
     const touched = aggregateInput.meta.touched || trackerInput.meta.touched
     const error = aggregateInput.meta.error || trackerInput.meta.error
@@ -260,6 +266,7 @@ export function LegendSetField() {
         format: (legendSets: { id: string }[]) =>
             legendSets?.map((legendSet) => legendSet.id),
         parse: (ids: string[]) => ids.map((id) => ({ id })),
+        validateFields: [],
     })
 
     const newLegendSetLink = useHref('/legendSets/new')
@@ -331,6 +338,7 @@ export function ValueTypeField() {
             })}
             helpText={i18n.t('The type of data that will be recorded.')}
             options={options || []}
+            validateFields={[]}
         />
     )
 }
@@ -358,13 +366,16 @@ export function AggregationTypeField() {
                 'The default way to aggregate this data element in analytics.'
             )}
             options={options || []}
+            validateFields={[]}
         />
     )
 }
 
 export function CategoryComboField() {
     const newCategoryComboLink = useHref('/categoryCombos/new')
-    const { input, meta } = useField('categoryCombo.id')
+    const { input, meta } = useField('categoryCombo.id', {
+        validateFields: [],
+    })
     const categoryComboHandle = useRef({
         refetch: () => {
             throw new Error('Not initialized')
@@ -409,7 +420,9 @@ export function CategoryComboField() {
 
 export function OptionSetField() {
     const newOptionSetLink = useHref('/optionSets/new')
-    const { input, meta } = useField('optionSet.id')
+    const { input, meta } = useField('optionSet.id', {
+        validateFields: [],
+    })
     const optionSetHandle = useRef({
         refetch: () => {
             throw new Error('Not initialized')
@@ -450,7 +463,9 @@ export function OptionSetField() {
 
 export function OptionSetCommentField() {
     const newOptionSetLink = useHref('/optionSets/new')
-    const { input, meta } = useField('commentOptionSet.id')
+    const { input, meta } = useField('commentOptionSet.id', {
+        validateFields: [],
+    })
     const optionSetHandle = useRef({
         refetch: () => {
             throw new Error('Not initialized')
@@ -495,6 +510,7 @@ export function AggregationLevelsField() {
         multiple: true,
         format: (levels: number[]) => levels.map((level) => level.toString()),
         parse: (levels: string[]) => levels.map((level) => parseInt(level, 10)),
+        validateFields: [],
     })
     const aggregationLevelHandle = useRef({
         refetch: () => {

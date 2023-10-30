@@ -176,6 +176,7 @@ export const Component = () => {
                 label={i18n.t('Custom attributes')}
             >
                 <Form
+                    validateOnBlur
                     onSubmit={onSubmit}
                     validate={validate}
                     initialValues={initialValues}
