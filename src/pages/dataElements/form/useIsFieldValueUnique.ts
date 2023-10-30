@@ -20,7 +20,7 @@ interface QueryResponse {
     }
 }
 
-export function useHasFieldValue(field: string) {
+export function useIsFieldValueUnique(field: string) {
     const queryResult = useDataQuery<QueryResponse>(HAS_FIELD_VALUE_QUERY, {
         lazy: true,
         variables: { field, value: '' },

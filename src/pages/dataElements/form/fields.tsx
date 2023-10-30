@@ -27,14 +27,14 @@ import {
 } from '../../../lib'
 import classes from './customFields.module.css'
 import { EditableFieldWrapper } from './EditableFieldWrapper'
-import { useHasFieldValue } from './useHasFieldValue'
+import { useIsFieldValueUnique } from './useIsFieldValueUnique'
 
 export function NameField() {
     const {
         loading,
         fetching,
         refetch: checkIsValueTaken,
-    } = useHasFieldValue('name')
+    } = useIsFieldValueUnique('name')
 
     return (
         <FieldRFF
@@ -60,7 +60,7 @@ export function ShortNameField() {
         loading,
         fetching,
         refetch: checkIsValueTaken,
-    } = useHasFieldValue('shortName')
+    } = useIsFieldValueUnique('shortName')
 
     return (
         <FieldRFF
