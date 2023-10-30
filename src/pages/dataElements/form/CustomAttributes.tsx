@@ -14,25 +14,25 @@ type CustomAttributeProps = {
 
 function CustomAttribute({ attribute, index }: CustomAttributeProps) {
     const name = `attributeValues[${index}].value`
+    const required = attribute.mandatory
 
     if (attribute.optionSet?.options) {
-        const attributeOptions = attribute.optionSet?.options.map(
+        const options = attribute.optionSet?.options.map(
             ({ code, displayName }) => ({
                 value: code,
                 label: displayName,
             })
         )
 
-        const options = [
-            { value: '', label: i18n.t('<No value>') },
-            ...(attributeOptions || []),
-        ]
+        if (required) {
+            options.unshift({ value: '', label: i18n.t('<No value>') })
+        }
 
         return (
             <StandardFormSection key={attribute.id}>
                 <FieldRFF
                     component={SingleSelectFieldFF}
-                    required={attribute.mandatory}
+                    required={required}
                     inputWidth={inputWidth}
                     label={attribute.displayFormName}
                     name={name}
@@ -47,7 +47,7 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
             <StandardFormSection key={attribute.id}>
                 <FieldRFF
                     component={InputFieldFF}
-                    required={attribute.mandatory}
+                    required={required}
                     inputWidth={inputWidth}
                     label={attribute.displayFormName}
                     name={name}
@@ -61,7 +61,7 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
             <StandardFormSection key={attribute.id}>
                 <FieldRFF
                     component={TextAreaFieldFF}
-                    required={attribute.mandatory}
+                    required={required}
                     inputWidth={inputWidth}
                     label={attribute.displayFormName}
                     name={name}
