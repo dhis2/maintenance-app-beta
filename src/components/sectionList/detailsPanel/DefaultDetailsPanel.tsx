@@ -65,6 +65,7 @@ export const DefaultDetailsPanelContent = ({ modelId }: DetailsPanelProps) => {
     const detailsQueryResponse = useDataQuery<
         WrapQueryResponse<DetailsResponse, 'result'>
     >(queryRef.current)
+
     return (
         <Loader queryResponse={detailsQueryResponse}>
             <DetailsContent
@@ -95,7 +96,9 @@ const DetailsContent = ({ data }: { data: DetailsResponse }) => {
                     <ClientDateTime value={data.created} />
                 </DetailItem>
                 <DetailItem label={i18n.t('Last updated by')}>
-                    {data.lastUpdatedBy.displayName}
+                    {data.lastUpdatedBy
+                        ? data.lastUpdatedBy.displayName
+                        : data.createdBy.displayName}
                 </DetailItem>
                 <DetailItem label={i18n.t('Last updated')}>
                     <ClientDateTime value={data.lastUpdated} />
