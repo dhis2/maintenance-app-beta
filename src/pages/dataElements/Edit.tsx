@@ -18,7 +18,7 @@ import classes from './Edit.module.css'
 import {
     DataElementFormFields,
     useCustomAttributesQuery,
-    validate,
+    useValidate,
 } from './form'
 import type { FormValues } from './form'
 
@@ -147,6 +147,7 @@ export const Component = () => {
     const dataElementQuery = useDataElementQuery(dataElementId)
     const customAttributesQuery = useCustomAttributesQuery()
     const patchDirtyFields = usePatchDirtyFields()
+    const validate = useValidate()
 
     async function onSubmit(values: FormValues, form: FinalFormFormApi) {
         const errors = await patchDirtyFields({

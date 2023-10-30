@@ -15,7 +15,7 @@ import { Attribute } from '../../types/generated'
 import {
     DataElementFormFields,
     useCustomAttributesQuery,
-    validate,
+    useValidate,
 } from './form'
 import type { FormValues } from './form'
 import classes from './New.module.css'
@@ -101,6 +101,7 @@ function formatFormValues({ values }: { values: FormValues }) {
 }
 
 export const Component = () => {
+    const validate = useValidate()
     const dataEngine = useDataEngine()
     const navigate = useNavigate()
     const customAttributesQuery = useCustomAttributesQuery()
