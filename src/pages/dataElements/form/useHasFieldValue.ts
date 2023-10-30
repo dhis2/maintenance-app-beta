@@ -8,7 +8,7 @@ const HAS_FIELD_VALUE_QUERY = {
         resource: 'dataElements',
         params: (variables: Record<string, string>) => ({
             pageSize: 1,
-            fields: '',
+            fields: 'id',
             filter: [`${variables.field}:eq:${variables.value}`],
         }),
     },
@@ -38,13 +38,14 @@ export function useHasFieldValue(field: string) {
                     // so we have to ignore the type error
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
-                    (data: QueryResponse) =>
-                        data.dataElements.pager.total
-                            ? i18n.t(
-                                  'This {{field}} already exists, please choose antoher one',
-                                  { field }
-                              )
-                            : undefined
+                    (data: QueryResponse) => {
+                        if (data.dataElements.pager.total) {
+                            return i18n.t(
+                                'This {{field}} already exists, please choose antoher one',
+                                { field }
+                            )
+                        }
+                    }
                 )
             },
         }),
