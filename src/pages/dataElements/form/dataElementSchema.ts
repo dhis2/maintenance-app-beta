@@ -2,10 +2,19 @@ import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 
 const requiredMessage = i18n.t('Required')
+const max50Message = i18n.t('Cannot be longer than {{number}} character', {
+    number: 50,
+})
 
 export const dataElementSchema = z.object({
-    name: z.string().min(1, { message: requiredMessage }),
-    shortName: z.string().min(1, { message: requiredMessage }),
+    name: z
+        .string()
+        .min(1, { message: requiredMessage })
+        .max(50, { message: max50Message }),
+    shortName: z
+        .string()
+        .min(1, { message: requiredMessage })
+        .max(50, { message: max50Message }),
     code: z.string().optional(),
     description: z
         .string()
