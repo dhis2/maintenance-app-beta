@@ -27,10 +27,18 @@ import {
 } from '../../../lib'
 import classes from './customFields.module.css'
 import { EditableFieldWrapper } from './EditableFieldWrapper'
+import { useHasFieldValue } from './useHasFieldValue'
 
 export function NameField() {
+    const {
+        loading,
+        fetching,
+        refetch: checkIsValueTaken,
+    } = useHasFieldValue('name')
+
     return (
         <FieldRFF
+            loading={loading || fetching}
             component={InputFieldFF}
             dataTest="dataelementsformfields-name"
             required
@@ -42,13 +50,21 @@ export function NameField() {
             helpText={i18n.t(
                 'A data element name should be concise and easy to recognize.'
             )}
+            validate={checkIsValueTaken}
         />
     )
 }
 
 export function ShortNameField() {
+    const {
+        loading,
+        fetching,
+        refetch: checkIsValueTaken,
+    } = useHasFieldValue('shortName')
+
     return (
         <FieldRFF
+            loading={loading || fetching}
             component={InputFieldFF}
             dataTest="dataelementsformfields-shortname"
             required
@@ -58,6 +74,7 @@ export function ShortNameField() {
             })}
             name="shortName"
             helpText={i18n.t('Often used in reports where space is limited')}
+            validate={checkIsValueTaken}
         />
     )
 }
