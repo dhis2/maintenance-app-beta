@@ -50,7 +50,10 @@ export function NameField() {
             helpText={i18n.t(
                 'A data element name should be concise and easy to recognize.'
             )}
-            validate={checkIsValueTaken}
+            // Do not pass checkIsValueTaken directly, otherwise memoization
+            // won't work due to additional arguments being passed
+            validate={(name: string) => checkIsValueTaken(name)}
+            validateFields={[]}
         />
     )
 }
@@ -74,7 +77,10 @@ export function ShortNameField() {
             })}
             name="shortName"
             helpText={i18n.t('Often used in reports where space is limited')}
-            validate={checkIsValueTaken}
+            // Do not pass checkIsValueTaken directly, otherwise memoization
+            // won't work due to additional arguments being passed
+            validate={(shortName: string) => checkIsValueTaken(shortName)}
+            validateFields={[]}
         />
     )
 }
