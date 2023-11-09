@@ -129,7 +129,10 @@ describe('Data Elements / New', () => {
     })
 
     it('should submit the data and return to the list view on success', async () => {
-        const dataElementCustomData = () => Promise.resolve({})
+        const dataElementCustomData = () =>
+            Promise.resolve({
+                pager: { total: 0 },
+            })
         const router = createMemoryRouter(
             [
                 { path: '/new', element: <New /> },
