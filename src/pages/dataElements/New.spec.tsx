@@ -160,19 +160,21 @@ describe('Data Elements / New', () => {
 
         expect(submitButton).toBeTruthy()
 
-        fireEvent.change(
-            result.getByRole('textbox', {
-                name: 'Name (required) *',
-            }) as HTMLElement,
-            { target: { value: 'Data element name' } }
-        )
+        const nameInput = result.getByRole('textbox', {
+            name: 'Name (required) *',
+        }) as HTMLInputElement
+        fireEvent.change(nameInput, {
+            target: { value: 'Data element name' },
+        })
+        fireEvent.blur(nameInput)
 
-        fireEvent.change(
-            result.getByRole('textbox', {
-                name: 'Short name (required) *',
-            }) as HTMLElement,
-            { target: { value: 'Data element short name' } }
-        )
+        const shortNameInput = result.getByRole('textbox', {
+            name: 'Short name (required) *',
+        }) as HTMLInputElement
+        fireEvent.change(shortNameInput, {
+            target: { value: 'Data element short name' },
+        })
+        fireEvent.blur(shortNameInput)
 
         await changeSingleSelect(
             result,
