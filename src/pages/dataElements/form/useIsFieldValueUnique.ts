@@ -1,8 +1,8 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
+import memoize from 'lodash/memoize'
 import { useMemo } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
-import { memoize } from '../../../lib'
 import { Pager } from '../../../types/generated'
 
 const HAS_FIELD_VALUE_QUERY = {
