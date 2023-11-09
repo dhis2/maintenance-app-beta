@@ -48,6 +48,10 @@ export function DataElementFormFields() {
                 </StandardFormField>
 
                 <StandardFormField>
+                    <FormNameField />
+                </StandardFormField>
+
+                <StandardFormField>
                     <CodeField />
                 </StandardFormField>
 
@@ -65,10 +69,6 @@ export function DataElementFormFields() {
 
                 <StandardFormField>
                     <FieldMaskField />
-                </StandardFormField>
-
-                <StandardFormField>
-                    <FormNameField />
                 </StandardFormField>
 
                 <StandardFormField>
