@@ -12,33 +12,65 @@ export const createDataElementSchema = (schemas: ModelSchemas) =>
         name: z
             .string()
             .min(1, { message: requiredMessage })
-            .max(schemas.dataElement.properties.name.length || 255, {
+            .max(schemas.dataElement.properties.name.length as number, {
                 message: max50Message,
-            }),
+            })
+            .trim(),
         shortName: z
             .string()
             .min(1, { message: requiredMessage })
-            .max(schemas.dataElement.properties.shortName.length || 255, {
+            .max(schemas.dataElement.properties.shortName.length as number, {
                 message: max50Message,
-            }),
-        code: z.string().optional(),
+            })
+            .trim(),
+        code: z
+            .string()
+            .max(schemas.dataElement.properties.code.length as number, {
+                message: max50Message,
+            })
+            .trim()
+            .optional(),
         description: z
             .string()
-            .max(255, {
+            .max(schemas.dataElement.properties.description.length as number, {
                 message: i18n.t(
                     'The value is to long. You can use up to 255 characters'
                 ),
             })
+            .trim()
             .optional(),
-        url: z.string().optional(),
+        formName: z
+            .string()
+            .max(schemas.dataElement.properties.formName.length as number, {
+                message: i18n.t(
+                    'The value is to long. You can use up to 255 characters'
+                ),
+            })
+            .trim()
+            .optional(),
+        url: z
+            .string()
+            .max(schemas.dataElement.properties.url.length as number, {
+                message: i18n.t(
+                    'The value is to long. You can use up to 255 characters'
+                ),
+            })
+            .trim()
+            .optional(),
+        fieldMask: z
+            .string()
+            .max(schemas.dataElement.properties.fieldMask.length as number, {
+                message: i18n.t(
+                    'The value is to long. You can use up to 255 characters'
+                ),
+            })
+            .trim()
+            .optional(),
         style: z.object({
             color: z.string().optional(),
             icon: z.string().optional(),
         }),
-        icon: z.string().optional(),
-        fieldMask: z.string().optional(),
         domainType: z.union([z.literal('AGGREGATE'), z.literal('TRACKER')]),
-        formName: z.string().optional(),
         valueType: z
             .union([
                 z.literal('TEXT'),
