@@ -37,7 +37,9 @@ export function NameField() {
         field: 'name',
         id: dataElementId,
     })
-    const { meta } = useField('name')
+    const { meta } = useField('name', {
+        subscription: { validating: true },
+    })
 
     return (
         <FieldRFF
@@ -68,7 +70,9 @@ export function ShortNameField() {
         field: 'shortName',
         id: dataElementId,
     })
-    const { meta } = useField('shortName')
+    const { meta } = useField('shortName', {
+        subscription: { validating: true },
+    })
 
     return (
         <FieldRFF
