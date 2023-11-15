@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-10-11T10:29:42.492Z\n"
-"PO-Revision-Date: 2023-10-11T10:29:42.492Z\n"
+"POT-Creation-Date: 2023-10-25T11:43:32.223Z\n"
+"PO-Revision-Date: 2023-10-25T11:43:32.223Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -48,6 +48,15 @@ msgstr "Search for menu items"
 msgid "Search icons"
 msgstr "Search icons"
 
+msgid "Select"
+msgstr "Select"
+
+msgid "Remove icon"
+msgstr "Remove icon"
+
+msgid "Cancel"
+msgstr "Cancel"
+
 msgid "Retry"
 msgstr "Retry"
 
@@ -69,11 +78,14 @@ msgstr "Aggregation level(s)"
 msgid "Category combo"
 msgstr "Category combo"
 
-msgid "None"
-msgstr "None"
+msgid "Default (none)"
+msgstr "Default (none)"
 
 msgid "Filter legend sets"
 msgstr "Filter legend sets"
+
+msgid "None"
+msgstr "None"
 
 msgid "Option set"
 msgstr "Option set"
@@ -108,9 +120,6 @@ msgstr "Type to filter options"
 msgid "No matches"
 msgstr "No matches"
 
-msgid "Data set"
-msgstr "Data set"
-
 msgid "Clear all filters"
 msgstr "Clear all filters"
 
@@ -134,9 +143,6 @@ msgstr "Failed to save"
 
 msgid "Manage {{section}} table columns"
 msgstr "Manage {{section}} table columns"
-
-msgid "Cancel"
-msgstr "Cancel"
 
 msgid "Update table columns"
 msgstr "Update table columns"
@@ -212,6 +218,9 @@ msgstr "Data element group set"
 
 msgid "Data element group sets"
 msgstr "Data element group sets"
+
+msgid "Data set"
+msgstr "Data set"
 
 msgid "Data sets"
 msgstr "Data sets"
@@ -597,6 +606,9 @@ msgstr "Owner"
 msgid "Zero is significant"
 msgstr "Zero is significant"
 
+msgid "Custom attributes"
+msgstr "Custom attributes"
+
 msgid "Something went wrong when submitting the form"
 msgstr "Something went wrong when submitting the form"
 
@@ -620,9 +632,6 @@ msgstr "{{fieldLabel}} (required)"
 
 msgid "A data element name should be concise and easy to recognize."
 msgstr "A data element name should be concise and easy to recognize."
-
-msgid "Short name"
-msgstr "Short name"
 
 msgid "Often used in reports where space is limited"
 msgstr "Often used in reports where space is limited"
@@ -676,9 +685,6 @@ msgstr ""
 msgid "Aggregation levels"
 msgstr "Aggregation levels"
 
-msgid "Custom attributes"
-msgstr "Custom attributes"
-
 msgid "Custom fields for your DHIS2 instance"
 msgstr "Custom fields for your DHIS2 instance"
 
@@ -703,9 +709,6 @@ msgstr "Refresh list"
 
 msgid "Add new"
 msgstr "Add new"
-
-msgid "Value type"
-msgstr "Value type"
 
 msgid "The type of data that will be recorded."
 msgstr "The type of data that will be recorded."
