@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 import type { ModelSchemas } from '../../../lib'
+import { DataElement } from '../../../types/generated'
 
 const requiredMessage = i18n.t('Required')
 const max50Message = i18n.t('Cannot be longer than {{number}} character', {
@@ -72,61 +73,10 @@ export const createDataElementSchema = (schemas: ModelSchemas) =>
         }),
         domainType: z.union([z.literal('AGGREGATE'), z.literal('TRACKER')]),
         valueType: z
-            .union([
-                z.literal('TEXT'),
-                z.literal('LONG_TEXT'),
-                z.literal('MULTI_TEXT'),
-                z.literal('LETTER'),
-                z.literal('PHONE_NUMBER'),
-                z.literal('EMAIL'),
-                z.literal('BOOLEAN'),
-                z.literal('TRUE_ONLY'),
-                z.literal('DATE'),
-                z.literal('DATETIME'),
-                z.literal('TIME'),
-                z.literal('NUMBER'),
-                z.literal('UNIT_INTERVAL'),
-                z.literal('PERCENTAGE'),
-                z.literal('INTEGER'),
-                z.literal('INTEGER_POSITIVE'),
-                z.literal('INTEGER_NEGATIVE'),
-                z.literal('INTEGER_ZERO_OR_POSITIVE'),
-                z.literal('TRACKER_ASSOCIATE'),
-                z.literal('USERNAME'),
-                z.literal('COORDINATE'),
-                z.literal('ORGANISATION_UNIT'),
-                z.literal('REFERENCE'),
-                z.literal('AGE'),
-                z.literal('URL'),
-                z.literal('FILE_RESOURCE'),
-                z.literal('IMAGE'),
-                z.literal('GEOJSON'),
-            ])
+            .nativeEnum(DataElement.valueType)
             .refine((v) => !!v, { message: requiredMessage }),
         aggregationType: z
-            .union([
-                z.literal('SUM'),
-                z.literal('AVERAGE'),
-                z.literal('AVERAGE_SUM_ORG_UNIT'),
-                z.literal('LAST'),
-                z.literal('LAST_AVERAGE_ORG_UNIT'),
-                z.literal('LAST_LAST_ORG_UNIT'),
-                z.literal('LAST_IN_PERIOD'),
-                z.literal('LAST_IN_PERIOD_AVERAGE_ORG_UNIT'),
-                z.literal('FIRST'),
-                z.literal('FIRST_AVERAGE_ORG_UNIT'),
-                z.literal('FIRST_FIRST_ORG_UNIT'),
-                z.literal('COUNT'),
-                z.literal('STDDEV'),
-                z.literal('VARIANCE'),
-                z.literal('MIN'),
-                z.literal('MAX'),
-                z.literal('MIN_SUM_ORG_UNIT'),
-                z.literal('MAX_SUM_ORG_UNIT'),
-                z.literal('NONE'),
-                z.literal('CUSTOM'),
-                z.literal('DEFAULT'),
-            ])
+            .nativeEnum(DataElement.aggregationType)
             .refine((v) => !!v, { message: requiredMessage }),
         categoryCombo: z.object({
             id: z.string().min(1, { message: requiredMessage }),
