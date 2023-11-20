@@ -423,7 +423,14 @@ export function CategoryComboField() {
                         invalid={meta.touched && !!meta.error}
                         ref={categoryComboHandle}
                         selected={input.value}
-                        onChange={({ selected }) => input.onChange(selected)}
+                        onChange={({ selected }) => {
+                            input.onChange(selected)
+
+                            // Our selects don't trigger a blur event when
+                            // selecting a value, but the select is not focused
+                            // anymore either
+                            input.onBlur()
+                        }}
                         onBlur={input.onBlur}
                         onFocus={input.onFocus}
                     />
