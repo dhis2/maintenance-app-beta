@@ -9,17 +9,23 @@
     gap: var(--spacers-dp8);
 }
 
+.list {
+    grid-area: list;
+}
+
 .listToolbarWrapper {
     display: flex;
     flex-direction: column;
-    grid-area: 'list';
+    grid-area: list;
 }
 
 .listDetailsWrapper {
     display: grid;
     grid-template-columns: 1fr auto;
-    grid-template-rows: none;
-    grid-template-areas: 'list details';
+    grid-template-rows: auto;
+    grid-template-areas:
+        'header details'
+        'list details';
     margin-top: var(--spacers-dp8);
 }
 
@@ -28,12 +34,16 @@
         display: grid;
         grid-template-rows: auto;
         grid-template-columns: none;
-        grid-template-areas: 'list' 'details';
+        grid-template-areas:
+            'header'
+            'list'
+            'details';
         margin-top: var(--spacers-dp8);
     }
 }
 
 .listHeaderNormal a {
+    grid-area: header;
     line-height: var(--spacers-dp16);
 }
 

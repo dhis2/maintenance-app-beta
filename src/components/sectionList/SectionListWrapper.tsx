@@ -80,42 +80,40 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
             <SectionListTitle />
             <FilterWrapper>{filterElement}</FilterWrapper>
             <div className={css.listDetailsWrapper}>
-                <div className={css.listToolbarWrapper}>
-                    <SectionListHeader />
-                    <SectionList
-                        headerColumns={headerColumns}
-                        onSelectAll={handleSelectAll}
-                        allSelected={allSelected}
-                    >
-                        <SectionListMessage />
-                        {data?.result.map((model) => (
-                            <SectionListRow
-                                key={model.id}
-                                modelData={model}
-                                selectedColumns={headerColumns}
-                                onSelect={handleSelect}
-                                onClick={({ id }) => {
-                                    setDetailsId((prevDetailsId) =>
-                                        prevDetailsId === id ? undefined : id
-                                    )
-                                }}
-                                selected={selectedModels.has(model.id)}
-                                active={model.id === detailsId}
-                                renderColumnValue={({ path }) => {
-                                    return (
-                                        <ModelValue
-                                            path={path}
-                                            schema={schema}
-                                            sectionModel={model}
-                                        />
-                                    )
-                                }}
-                            />
-                        ))}
+                <SectionListHeader />
+                <SectionList
+                    headerColumns={headerColumns}
+                    onSelectAll={handleSelectAll}
+                    allSelected={allSelected}
+                >
+                    <SectionListMessage />
+                    {data?.result.map((model) => (
+                        <SectionListRow
+                            key={model.id}
+                            modelData={model}
+                            selectedColumns={headerColumns}
+                            onSelect={handleSelect}
+                            onClick={({ id }) => {
+                                setDetailsId((prevDetailsId) =>
+                                    prevDetailsId === id ? undefined : id
+                                )
+                            }}
+                            selected={selectedModels.has(model.id)}
+                            active={model.id === detailsId}
+                            renderColumnValue={({ path }) => {
+                                return (
+                                    <ModelValue
+                                        path={path}
+                                        schema={schema}
+                                        sectionModel={model}
+                                    />
+                                )
+                            }}
+                        />
+                    ))}
 
-                        <SectionListPagination data={data} />
-                    </SectionList>
-                </div>
+                    <SectionListPagination data={data} />
+                </SectionList>
                 {detailsId && (
                     <DetailsPanel
                         onClose={() => setDetailsId(undefined)}
