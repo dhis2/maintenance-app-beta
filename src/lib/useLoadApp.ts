@@ -43,9 +43,9 @@ type CurrentUserResponse = Pick<CurrentUserBase, UserPropertyFields>
 
 /**
  * !!! WARNING !!!
- * This should not be used in production code! If we need it, then we should
- * rename it as there's already a `CurrentUser` type exported from the
- * generated schema types
+ * There's already a `CurrentUser` type exported from the generated schema
+ * types. We need to think about the name of this type, see:
+ * https://github.com/dhis2/maintenance-app-beta/pull/359#discussion_r1399267866
  */
 export interface CurrentUser extends Omit<CurrentUserResponse, 'authorities'> {
     authorities: Set<string> // use a set for faster lookup
