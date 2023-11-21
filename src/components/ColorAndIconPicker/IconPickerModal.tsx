@@ -19,15 +19,17 @@ import { useIconsQuery, Icon } from './useIconsQuery'
 type TabName = 'all' | 'positive' | 'negative' | 'outline'
 
 export function IconPickerModal({
+    selected,
     onChange,
     onCancel,
 }: {
+    selected: string
     onChange: ({ icon }: { icon: string }) => void
     onCancel: () => void
 }) {
     const [searchValue, setSearchValue] = useState('')
     const [activeTab, setActiveTab] = useState<TabName>('all')
-    const [icon, setIcon] = useState('')
+    const [icon, setIcon] = useState(selected)
     const icons = useIconsQuery()
     const displayIcons = searchValue
         ? filterIcons(icons.data[activeTab], searchValue)
@@ -107,11 +109,15 @@ export function IconPickerModal({
                         disabled={!icon}
                         onClick={() => onChange({ icon })}
                     >
-                        Select
+                        {i18n.t('Select')}
+                    </Button>
+
+                    <Button onClick={() => onChange({ icon: '' })}>
+                        {i18n.t('Remove icon')}
                     </Button>
 
                     <Button secondary onClick={onCancel}>
-                        Cancel
+                        {i18n.t('Cancel')}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

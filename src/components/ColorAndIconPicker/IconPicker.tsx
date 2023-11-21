@@ -1,4 +1,4 @@
-import { IconChevronDown16, IconChevronUp16, IconEmptyFrame24 } from '@dhis2/ui'
+import { IconChevronDown16, IconChevronUp16 } from '@dhis2/ui'
 import cx from 'classnames'
 import React, { useState } from 'react'
 import classes from './IconPicker.module.css'
@@ -25,7 +25,6 @@ export function IconPicker({
                 })}
             >
                 <div className={classes.chosenIcon}>
-                    {!icon && <IconEmptyFrame24 />}
                     {selectedIcon && (
                         <img
                             className={classes.iconImage}
@@ -42,6 +41,7 @@ export function IconPicker({
 
             {showPicker && (
                 <IconPickerModal
+                    selected={icon}
                     onCancel={() => setShowPicker(false)}
                     onChange={({ icon }) => {
                         onIconPick({ icon })

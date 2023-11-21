@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-10-20T09:42:02.072Z\n"
-"PO-Revision-Date: 2023-10-20T09:42:02.072Z\n"
+"POT-Creation-Date: 2023-11-21T15:50:53.793Z\n"
+"PO-Revision-Date: 2023-11-21T15:50:53.793Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -48,6 +48,15 @@ msgstr "Search for menu items"
 msgid "Search icons"
 msgstr "Search icons"
 
+msgid "Select"
+msgstr "Select"
+
+msgid "Remove icon"
+msgstr "Remove icon"
+
+msgid "Cancel"
+msgstr "Cancel"
+
 msgid "Retry"
 msgstr "Retry"
 
@@ -74,6 +83,9 @@ msgstr "None"
 
 msgid "Filter legend sets"
 msgstr "Filter legend sets"
+
+msgid "<No value>"
+msgstr "<No value>"
 
 msgid "Option set"
 msgstr "Option set"
@@ -108,8 +120,14 @@ msgstr "Short name"
 msgid "Code"
 msgstr "Code"
 
+msgid "Created by"
+msgstr "Created by"
+
 msgid "Created"
 msgstr "Created"
+
+msgid "Last updated by"
+msgstr "Last updated by"
 
 msgid "Last updated"
 msgstr "Last updated"
@@ -141,9 +159,6 @@ msgstr "Type to filter options"
 msgid "No matches"
 msgstr "No matches"
 
-msgid "Data set"
-msgstr "Data set"
-
 msgid "Clear all filters"
 msgstr "Clear all filters"
 
@@ -167,9 +182,6 @@ msgstr "Failed to save"
 
 msgid "Manage {{section}} table columns"
 msgstr "Manage {{section}} table columns"
-
-msgid "Cancel"
-msgstr "Cancel"
 
 msgid "Update table columns"
 msgstr "Update table columns"
@@ -245,6 +257,9 @@ msgstr "Data element group set"
 
 msgid "Data element group sets"
 msgstr "Data element group sets"
+
+msgid "Data set"
+msgstr "Data set"
 
 msgid "Data sets"
 msgstr "Data sets"
@@ -585,14 +600,8 @@ msgstr "Image"
 msgid "GeoJSON"
 msgstr "GeoJSON"
 
-msgid "Created by"
-msgstr "Created by"
-
 msgid "Favorite"
 msgstr "Favorite"
-
-msgid "Last updated by"
-msgstr "Last updated by"
 
 msgid "Domain type"
 msgstr "Domain type"
@@ -611,6 +620,9 @@ msgstr "Owner"
 
 msgid "Zero is significant"
 msgstr "Zero is significant"
+
+msgid "Custom attributes"
+msgstr "Custom attributes"
 
 msgid "Something went wrong when submitting the form"
 msgstr "Something went wrong when submitting the form"
@@ -688,8 +700,20 @@ msgstr ""
 msgid "Aggregation levels"
 msgstr "Aggregation levels"
 
-msgid "Custom attributes"
-msgstr "Custom attributes"
+msgid ""
+"By default, the aggregation will start at the lowest assigned organisation "
+"unit. If you for example select \"Chiefdom\", it means that \"Chiefdom\", "
+"\"District\" and \"National\" aggregates use \"Chiefdom\" (the highest "
+"aggregation level available) as the data source, and PHU data will not be "
+"included. PHU will still be available for the PHU level, but not included "
+"in the aggregations to the levels above."
+msgstr ""
+"By default, the aggregation will start at the lowest assigned organisation "
+"unit. If you for example select \"Chiefdom\", it means that \"Chiefdom\", "
+"\"District\" and \"National\" aggregates use \"Chiefdom\" (the highest "
+"aggregation level available) as the data source, and PHU data will not be "
+"included. PHU will still be available for the PHU level, but not included "
+"in the aggregations to the levels above."
 
 msgid "Custom fields for your DHIS2 instance"
 msgstr "Custom fields for your DHIS2 instance"
