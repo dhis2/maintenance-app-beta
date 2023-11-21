@@ -74,8 +74,8 @@ export function IconPickerModal({
                             dense
                             placeholder={i18n.t('Search icons')}
                             value={searchValue}
-                            onChange={({ value }: { value: string }) =>
-                                setSearchValue(value)
+                            onChange={({ value }) =>
+                                setSearchValue(value || '')
                             }
                         />
                     </div>

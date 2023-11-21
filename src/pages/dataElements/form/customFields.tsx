@@ -3,7 +3,7 @@ import {
     ButtonStrip,
     Button,
     Field,
-    Radio,
+    RadioFieldFF,
     SingleSelectFieldFF,
 } from '@dhis2/ui'
 import React, { useRef } from 'react'
@@ -81,28 +81,17 @@ export function DomainField() {
             validationText={error}
         >
             <div>
-                <Radio
-                    {...aggregateInput.input}
+                <RadioFieldFF
                     className={classes.domainTypeRadioButton}
                     label={DOMAIN_TYPE.AGGREGATE}
-                    onChange={(
-                        _: object,
-                        e: React.ChangeEvent<HTMLInputElement>
-                    ) => {
-                        aggregateInput.input.onChange(e)
-                    }}
+                    input={aggregateInput.input}
+                    meta={aggregateInput.meta}
                 />
-
-                <Radio
-                    {...trackerInput.input}
-                    label={DOMAIN_TYPE.TRACKER}
+                <RadioFieldFF
                     className={classes.domainTypeRadioButton}
-                    onChange={(
-                        _: object,
-                        e: React.ChangeEvent<HTMLInputElement>
-                    ) => {
-                        trackerInput.input.onChange(e)
-                    }}
+                    label={DOMAIN_TYPE.TRACKER}
+                    input={trackerInput.input}
+                    meta={trackerInput.meta}
                 />
             </div>
         </Field>
