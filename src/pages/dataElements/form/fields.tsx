@@ -215,17 +215,14 @@ export function ZeroIsSignificantField() {
 
 export function DomainField() {
     const name = 'domainType'
-    const validate = (value: string) => (!value ? 'Required' : undefined)
     const aggregateInput = useField(name, {
         type: 'radio',
         value: 'AGGREGATE',
-        validate,
         validateFields: [],
     })
     const trackerInput = useField(name, {
         type: 'radio',
         value: 'TRACKER',
-        validate,
         validateFields: [],
     })
     const touched = aggregateInput.meta.touched || trackerInput.meta.touched
