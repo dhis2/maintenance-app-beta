@@ -1,64 +1,69 @@
 import get from 'lodash/fp/get'
 import { JsonPatchOperation } from '../../../types'
-import { DataElement } from '../../../types/generated'
-import type { FormValues } from '../form'
+import { Attribute, AttributeValue } from './../../../types/generated/models'
 
-interface FormatFormValuesArgs {
-    dataElement: DataElement
-    dirtyFields: { [name: string]: boolean }
+type PatchAttributeFields = {
+    id: Attribute['id']
+}
+
+type PatchAttributeValue = {
+    attribute: PatchAttributeFields
+    value: AttributeValue['value']
+}
+
+type ModelWithAttributeValues = {
+    attributeValues: PatchAttributeValue[]
+}
+
+interface FormatFormValuesArgs<FormValues extends ModelWithAttributeValues> {
+    originalValue: unknown
+    dirtyFields: { [key in keyof FormValues]?: boolean }
     values: FormValues
 }
 
-const sanitizeDirtyValueKeys = (keys: string[]) => {
-    // these are removed from the dirtyKeys
-    // attributeValues is an array in the form, thus fields will be attributeValues[0] etc
-    // style.code should post to style, not style.code, because it's a complex object
-    const keyStartsWithToRemove = ['attributeValues', 'style'] as const
-    const shouldInclude = Object.fromEntries(
-        keys.map((key) => [key, false])
-    ) as Record<(typeof keyStartsWithToRemove)[number], boolean>
-
-    const keysWithout = keys.filter(
-        (key) =>
-            !keyStartsWithToRemove.some((keyToRemove) => {
-                const shouldRemove = key.startsWith(keyToRemove)
-                if (shouldRemove) {
-                    shouldInclude[keyToRemove] = true
-                }
-                return shouldRemove
-            })
+// these are removed from the dirtyKeys
+// attributeValues is an array in the form, thus the key will be attributeValues[0] etc
+// remove these, and replace with 'attributeValues'
+// style.code should post to style, not style.code, because it's a complex object
+const complexKeys = ['attributeValues', 'style'] as const
+export const sanitizeDirtyValueKeys = (dirtyKeys: string[]) => {
+    const complexChanges = complexKeys.filter((complexKey) =>
+        dirtyKeys.some((dirtyKey) => dirtyKey.startsWith(complexKey))
     )
 
-    // no difference
-    if (keysWithout.length === keys.length) {
-        return keys
-    }
+    const dirtyKeysWithoutComplexKeys = dirtyKeys.filter(
+        (dirtyKey) =>
+            !complexChanges.some((complexKey) =>
+                dirtyKey.startsWith(complexKey)
+            )
+    )
 
-    const keysToInclude = Object.entries(shouldInclude)
-        .filter(([, val]) => val)
-        .map(([key]) => key)
-
-    return keysWithout.concat(keysToInclude)
+    return dirtyKeysWithoutComplexKeys.concat(complexChanges)
 }
 
-export function createJsonPatchOperations({
+export function createJsonPatchOperations<
+    FormValues extends ModelWithAttributeValues
+>({
     dirtyFields,
-    dataElement,
+    originalValue,
     values: unsanitizedValues,
-}: FormatFormValuesArgs): JsonPatchOperation[] {
+}: FormatFormValuesArgs<FormValues>): JsonPatchOperation[] {
     // Remove attribute values without a value
     const values = {
         ...unsanitizedValues,
-        attributeValues: unsanitizedValues.attributeValues.filter(
-            ({ value }) => !!value
-        ),
+        attributeValues: unsanitizedValues.attributeValues
+            .filter(({ value }) => !!value)
+            .map((value) => ({
+                value: value.value,
+                attribute: { id: value.attribute.id },
+            })),
     }
 
     const dirtyFieldsKeys = Object.keys(dirtyFields)
     const adjustedDirtyFieldsKeys = sanitizeDirtyValueKeys(dirtyFieldsKeys)
 
     return adjustedDirtyFieldsKeys.map((name) => ({
-        op: get(name, dataElement) ? 'replace' : 'add',
+        op: get(name, originalValue) ? 'replace' : 'add',
         path: `/${name.replace(/[.]/g, '/')}`,
         value: get(name, values) || '',
     }))
