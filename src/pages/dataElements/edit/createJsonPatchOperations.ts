@@ -2,12 +2,12 @@ import get from 'lodash/fp/get'
 import { JsonPatchOperation } from '../../../types'
 import { Attribute, AttributeValue } from './../../../types/generated/models'
 
-type PatchAttributeFields = {
+type PatchAttribute = {
     id: Attribute['id']
 }
 
 type PatchAttributeValue = {
-    attribute: PatchAttributeFields
+    attribute: PatchAttribute
     value: AttributeValue['value']
 }
 
