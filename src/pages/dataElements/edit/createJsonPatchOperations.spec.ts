@@ -105,7 +105,7 @@ describe('createJsonPatchOperations', () => {
                 originalValue: {
                     id: 'foo',
                     name: 'bar',
-                    attributeValues: [],
+                    attributeValues: [{ value: '', attribute: 'foo' }],
                 },
                 values: {
                     name: 'baz',
