@@ -30,7 +30,7 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
             })
         )
 
-        if (required) {
+        if (!required) {
             options.unshift({ value: '', label: i18n.t('<No value>') })
         }
 
