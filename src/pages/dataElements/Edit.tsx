@@ -15,8 +15,12 @@ import { JsonPatchOperation } from '../../types'
 import { Attribute, DataElement } from '../../types/generated'
 import { createJsonPatchOperations } from './edit/'
 import classes from './Edit.module.css'
-import { DataElementFormFields, useCustomAttributesQuery } from './form'
-import { FormValues } from './form/types'
+import {
+    DataElementFormFields,
+    useCustomAttributesQuery,
+    useValidate,
+} from './form'
+import type { FormValues } from './form'
 
 type FinalFormFormApi = FormApi<FormValues>
 
@@ -143,6 +147,7 @@ export const Component = () => {
     const dataElementQuery = useDataElementQuery(dataElementId)
     const customAttributesQuery = useCustomAttributesQuery()
     const patchDirtyFields = usePatchDirtyFields()
+    const validate = useValidate()
 
     async function onSubmit(values: FormValues, form: FinalFormFormApi) {
         const errors = await patchDirtyFields({
@@ -170,7 +175,12 @@ export const Component = () => {
                 queryResponse={customAttributesQuery}
                 label={i18n.t('Custom attributes')}
             >
-                <Form onSubmit={onSubmit} initialValues={initialValues}>
+                <Form
+                    validateOnBlur
+                    onSubmit={onSubmit}
+                    validate={validate}
+                    initialValues={initialValues}
+                >
                     {({ handleSubmit, submitting, submitError }) => (
                         <form onSubmit={handleSubmit}>
                             <FormContents

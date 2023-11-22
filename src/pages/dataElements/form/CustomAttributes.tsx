@@ -1,9 +1,15 @@
 import i18n from '@dhis2/d2-i18n'
-import { InputFieldFF, SingleSelectFieldFF, TextAreaFieldFF } from '@dhis2/ui'
+import {
+    InputFieldFF,
+    NoticeBox,
+    SingleSelectFieldFF,
+    TextAreaFieldFF,
+} from '@dhis2/ui'
 import * as React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import { StandardFormSection } from '../../../components'
 import { Attribute } from '../../../types/generated'
+import { useCustomAttributesQuery } from './useCustomAttributesQuery'
 
 const inputWidth = '440px'
 
@@ -74,14 +80,31 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
     throw new Error(`Implement value type "${attribute.valueType}"!`)
 }
 
-export function CustomAttributes({
-    customAttributes = [],
-}: {
-    customAttributes?: Attribute[]
-}) {
+export function CustomAttributes() {
+    const customAttributes = useCustomAttributesQuery()
+    const loading = customAttributes.loading
+    const error = customAttributes.error
+
+    if (loading) {
+        return <>{i18n.t('Loading custom attributes')}</>
+    }
+
+    if (error) {
+        return (
+            <NoticeBox
+                error
+                title={i18n.t(
+                    'Something went wrong with retrieving the custom attributes'
+                )}
+            >
+                {error.toString()}
+            </NoticeBox>
+        )
+    }
+
     return (
         <>
-            {customAttributes.map((customAttribute, index) => {
+            {customAttributes.data?.map((customAttribute, index) => {
                 return (
                     <CustomAttribute
                         key={customAttribute.id}
