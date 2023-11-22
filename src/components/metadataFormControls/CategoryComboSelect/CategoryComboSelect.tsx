@@ -13,6 +13,7 @@ type CategoryComboSelectProps = Omit<
 export const CategoryComboSelect = forwardRef(function CategoryComboSelect(
     {
         onChange,
+        invalid,
         placeholder = i18n.t('Category combo'),
         required,
         selected,
@@ -26,6 +27,7 @@ export const CategoryComboSelect = forwardRef(function CategoryComboSelect(
         <ModelSingleSelect
             ref={ref}
             required={required}
+            invalid={invalid}
             useInitialOptionQuery={useInitialOptionQuery}
             useOptionsQuery={useOptionsQuery}
             placeholder={placeholder}

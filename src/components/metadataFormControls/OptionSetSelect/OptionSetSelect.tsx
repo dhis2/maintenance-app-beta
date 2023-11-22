@@ -13,6 +13,7 @@ type OptionSetSelectProps = Omit<
 export const OptionSetSelect = forwardRef(function OptionSetSelect(
     {
         onChange,
+        invalid,
         placeholder = i18n.t('Option set'),
         required,
         selected,
@@ -26,6 +27,7 @@ export const OptionSetSelect = forwardRef(function OptionSetSelect(
         <ModelSingleSelect
             ref={ref}
             required={required}
+            invalid={invalid}
             useInitialOptionQuery={useInitialOptionQuery}
             useOptionsQuery={useOptionsQuery}
             placeholder={placeholder}

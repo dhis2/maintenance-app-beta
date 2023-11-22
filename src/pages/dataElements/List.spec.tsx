@@ -75,7 +75,7 @@ describe('Data Elements List', () => {
         const { id } = dataElementsMock.result[0]
         const firstRow = getByTestId(`section-list-row-${id}`)
         expect(firstRow).toHaveTextContent(
-            'Accute Flaccid Paralysis (Deaths < 5 yrs)AggregateNumber6 years agoPublic can edit'
+            /Accute Flaccid Paralysis \(Deaths < 5 yrs\)AggregateNumber\d+ years agoPublic can edit/
         )
     })
     it('should display all the columns', async () => {

@@ -8,7 +8,7 @@ import { useSetSchemas } from './schemas'
 import { useSetSystemSettings } from './systemSettings'
 import { useSetCurrentUser } from './user'
 
-export const schemaFields = [
+const schemaFields = [
     'authorities',
     'displayName',
     'name',
@@ -22,12 +22,12 @@ export const schemaFields = [
 // readonly types (even though it should)
 const schemaFieldsFilter = schemaFields.concat()
 
-export type SchemaPropertyFields = (typeof schemaFieldsFilter)[number]
+type SchemaPropertyFields = (typeof schemaFieldsFilter)[number]
 export type Schema = PickSchemaProperties<SchemaPropertyFields>
 export type ModelSchemas = ModelSchemasBase<Schema>
 
 // same fields as headbar-request to hit the cache
-export const userFields = [
+const userFields = [
     'authorities',
     'avatar',
     'email',
@@ -41,6 +41,12 @@ const userFieldsFilter = userFields.concat()
 type UserPropertyFields = (typeof userFields)[number]
 type CurrentUserResponse = Pick<CurrentUserBase, UserPropertyFields>
 
+/**
+ * !!! WARNING !!!
+ * There's already a `CurrentUser` type exported from the generated schema
+ * types. We need to think about the name of this type, see:
+ * https://github.com/dhis2/maintenance-app-beta/pull/359#discussion_r1399267866
+ */
 export interface CurrentUser extends Omit<CurrentUserResponse, 'authorities'> {
     authorities: Set<string> // use a set for faster lookup
 }
