@@ -5,7 +5,7 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     code: i18n.t('Code'),
     createdBy: i18n.t('Created by'),
     favorite: i18n.t('Favorite'),
-    href: i18n.t('Href'),
+    href: i18n.t('API URL'),
     id: i18n.t('Id'),
     lastUpdatedBy: i18n.t('Last updated by'),
     created: i18n.t('Created'),
@@ -15,7 +15,6 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     sharing: i18n.t('Sharing'),
     shortName: i18n.t('Short name'),
     valueType: i18n.t('Value type'),
-
     user: i18n.t('Owner'), // user refers to the owner of the object
     zeroIsSignificant: i18n.t('Zero is significant'),
 }

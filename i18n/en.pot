@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-11-16T09:17:45.955Z\n"
-"PO-Revision-Date: 2023-11-16T09:17:45.955Z\n"
+"POT-Creation-Date: 2023-11-22T13:05:25.319Z\n"
+"PO-Revision-Date: 2023-11-22T13:05:25.319Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -93,6 +93,15 @@ msgstr "Option set"
 msgid "Actions"
 msgstr "Actions"
 
+msgid "New"
+msgstr "New"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Manage Columns"
+msgstr "Manage Columns"
+
 msgid "There aren't any items that match your filter."
 msgstr "There aren't any items that match your filter."
 
@@ -105,14 +114,44 @@ msgstr "An error occurred while loading the items."
 msgid "{{modelName}} management"
 msgstr "{{modelName}} management"
 
-msgid "New"
-msgstr "New"
+msgid "Short name"
+msgstr "Short name"
 
-msgid "Download"
-msgstr "Download"
+msgid "Code"
+msgstr "Code"
 
-msgid "Manage Columns"
-msgstr "Manage Columns"
+msgid "Created by"
+msgstr "Created by"
+
+msgid "Created"
+msgstr "Created"
+
+msgid "Last updated by"
+msgstr "Last updated by"
+
+msgid "Last updated"
+msgstr "Last updated"
+
+msgid "Id"
+msgstr "Id"
+
+msgid "API URL"
+msgstr "API URL"
+
+msgid "API URL link"
+msgstr "API URL link"
+
+msgid "Copy"
+msgstr "Copy"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Details"
+msgstr "Details"
+
+msgid "Failed to load details"
+msgstr "Failed to load details"
 
 msgid "Type to filter options"
 msgstr "Type to filter options"
@@ -561,41 +600,17 @@ msgstr "Image"
 msgid "GeoJSON"
 msgstr "GeoJSON"
 
-msgid "Code"
-msgstr "Code"
-
-msgid "Created by"
-msgstr "Created by"
-
 msgid "Favorite"
 msgstr "Favorite"
 
-msgid "Href"
-msgstr "Href"
-
-msgid "Id"
-msgstr "Id"
-
-msgid "Last updated by"
-msgstr "Last updated by"
-
-msgid "Created"
-msgstr "Created"
-
 msgid "Domain type"
 msgstr "Domain type"
-
-msgid "Last updated"
-msgstr "Last updated"
 
 msgid "Name"
 msgstr "Name"
 
 msgid "Sharing"
 msgstr "Sharing"
-
-msgid "Short name"
-msgstr "Short name"
 
 msgid "Value type"
 msgstr "Value type"

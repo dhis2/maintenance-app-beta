@@ -60,10 +60,9 @@ html {
     margin-left: auto;
     width: 16px;
     height: 16px;
-    transition: transform .1s linear;   
+    transition: transform 0.1s linear;
 }
 .parent-is-open .sidenav-parent-chevron {
- 
     transform: rotate(180deg);
 }
 
@@ -82,22 +81,27 @@ html {
     display: flex;
     align-items: center;
 }
-.sidenav-link:hover,.sidenav-link a:hover {
+.sidenav-link:hover,
+.sidenav-link a:hover {
     background: var(--sidenav-dark-bg-hover);
 }
-.sidenav-link:focus,.sidenav-link a:focus {
+.sidenav-link:focus,
+.sidenav-link a:focus {
     outline: 2px solid white;
     background: var(--sidenav-dark-bg-hover);
     outline-offset: -2px;
 }
-.sidenav-link-disabled, .sidenav-link-disabled a {
+.sidenav-link-disabled,
+.sidenav-link-disabled a {
     cursor: not-allowed;
     color: var(--colors-grey500);
 }
-.sidenav-link-disabled:hover,.sidenav-link-disabled:hover > a {
+.sidenav-link-disabled:hover,
+.sidenav-link-disabled:hover > a {
     background: var(--colors-grey900);
 }
-.sidenav-link a.active, .sidenav-link :global(.active) {
+.sidenav-link a.active,
+.sidenav-link :global(.active) {
     font-weight: 600;
     background: var(--sidenav-dark-bg-selected);
     box-shadow: inset 6px 0px 0px 0px var(--colors-teal500);

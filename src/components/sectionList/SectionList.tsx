@@ -9,6 +9,7 @@ import {
 } from '@dhis2/ui'
 import React, { PropsWithChildren } from 'react'
 import { CheckBoxOnChangeObject } from '../../types'
+import css from './SectionList.module.css'
 import { SelectedColumns } from './types'
 
 type SectionListProps = {
@@ -24,7 +25,7 @@ export const SectionList = ({
     onSelectAll,
 }: PropsWithChildren<SectionListProps>) => {
     return (
-        <DataTable>
+        <DataTable className={css.list}>
             <TableHead>
                 <DataTableRow>
                     <DataTableColumnHeader width="48px">

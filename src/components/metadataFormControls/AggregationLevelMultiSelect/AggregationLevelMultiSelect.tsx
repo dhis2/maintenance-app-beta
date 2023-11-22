@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { MultiSelect, MultiSelectOption } from '@dhis2/ui'
+import { MultiSelect, MultiSelectField, MultiSelectOption } from '@dhis2/ui'
 import React, { forwardRef, useImperativeHandle } from 'react'
 import classes from './AggregationLevelMultiSelect.module.css'
 import { useOptionsQuery } from './useOptionsQuery'
@@ -64,7 +64,6 @@ export const AggregationLevelMultiSelect = forwardRef(
 
         return (
             <MultiSelect
-                inputWidth={inputWidth}
                 placeholder={placeholder}
                 onChange={({ selected }: { selected: string[] }) => {
                     onChange({ selected })

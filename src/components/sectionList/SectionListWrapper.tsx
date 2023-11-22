@@ -2,16 +2,18 @@ import { FetchError } from '@dhis2/app-runtime'
 import React, { useMemo, useState } from 'react'
 import { useSchemaFromHandle } from '../../lib'
 import { IdentifiableObject, GistCollectionResponse } from '../../types/models'
+import { DetailsPanel, DefaultDetailsPanelContent } from './detailsPanel'
 import { FilterWrapper } from './filters/FilterWrapper'
 import { useModelListView } from './listView'
 import { ModelValue } from './modelValue/ModelValue'
 import { SectionList } from './SectionList'
+import css from './SectionList.module.css'
+import { SectionListHeader } from './SectionListHeaderNormal'
 import { SectionListLoader } from './SectionListLoader'
 import { SectionListEmpty, SectionListError } from './SectionListMessages'
 import { SectionListPagination } from './SectionListPagination'
 import { SectionListRow } from './SectionListRow'
 import { SectionListTitle } from './SectionListTitle'
-import { SelectionListHeader } from './SelectionListHeaderNormal'
 
 type SectionListWrapperProps<Model extends IdentifiableObject> = {
     filterElement?: React.ReactElement
@@ -27,6 +29,7 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
     const { columns: headerColumns } = useModelListView()
     const schema = useSchemaFromHandle()
     const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set())
+    const [detailsId, setDetailsId] = useState<string | undefined>()
 
     const handleSelect = (id: string, checked: boolean) => {
         if (checked) {
@@ -76,33 +79,51 @@ export const SectionListWrapper = <Model extends IdentifiableObject>({
         <div>
             <SectionListTitle />
             <FilterWrapper>{filterElement}</FilterWrapper>
-            <SelectionListHeader />
-            <SectionList
-                headerColumns={headerColumns}
-                onSelectAll={handleSelectAll}
-                allSelected={allSelected}
-            >
-                <SectionListMessage />
-                {data?.result.map((model) => (
-                    <SectionListRow
-                        key={model.id}
-                        modelData={model}
-                        selectedColumns={headerColumns}
-                        onSelect={handleSelect}
-                        selected={selectedModels.has(model.id)}
-                        renderColumnValue={({ path }) => {
-                            return (
-                                <ModelValue
-                                    path={path}
-                                    schema={schema}
-                                    sectionModel={model}
-                                />
-                            )
-                        }}
-                    />
-                ))}
-                <SectionListPagination data={data} />
-            </SectionList>
+            <div className={css.listDetailsWrapper}>
+                <SectionListHeader />
+                <SectionList
+                    headerColumns={headerColumns}
+                    onSelectAll={handleSelectAll}
+                    allSelected={allSelected}
+                >
+                    <SectionListMessage />
+                    {data?.result.map((model) => (
+                        <SectionListRow
+                            key={model.id}
+                            modelData={model}
+                            selectedColumns={headerColumns}
+                            onSelect={handleSelect}
+                            onClick={({ id }) => {
+                                setDetailsId((prevDetailsId) =>
+                                    prevDetailsId === id ? undefined : id
+                                )
+                            }}
+                            selected={selectedModels.has(model.id)}
+                            active={model.id === detailsId}
+                            renderColumnValue={({ path }) => {
+                                return (
+                                    <ModelValue
+                                        path={path}
+                                        schema={schema}
+                                        sectionModel={model}
+                                    />
+                                )
+                            }}
+                        />
+                    ))}
+
+                    <SectionListPagination data={data} />
+                </SectionList>
+                {detailsId && (
+                    <DetailsPanel
+                        onClose={() => setDetailsId(undefined)}
+                        // reset component state when modelId changes
+                        key={detailsId}
+                    >
+                        <DefaultDetailsPanelContent modelId={detailsId} />
+                    </DetailsPanel>
+                )}
+            </div>
         </div>
     )
 }

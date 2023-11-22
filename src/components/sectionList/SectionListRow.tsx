@@ -1,5 +1,6 @@
 import { DataTableRow, DataTableCell, Checkbox, Button } from '@dhis2/ui'
 import { IconEdit24, IconMore24 } from '@dhis2/ui-icons'
+import cx from 'classnames'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { CheckBoxOnChangeObject } from '../../types'
@@ -13,19 +14,24 @@ export type SectionListRowProps<Model extends IdentifiableObject> = {
     onSelect: (modelId: string, checked: boolean) => void
     selected: boolean
     renderColumnValue: (column: SelectedColumn) => React.ReactNode
+    onClick?: (modelData: GistModel<Model>) => void
+    active?: boolean
 }
 
 export function SectionListRow<Model extends IdentifiableObject>({
+    active,
     selectedColumns,
     modelData,
     onSelect,
+    onClick,
     selected,
     renderColumnValue,
 }: SectionListRowProps<Model>) {
     return (
         <DataTableRow
-            className={css.listRow}
+            className={cx(css.listRow, { [css.active]: active })}
             dataTest={`section-list-row-${modelData.id}`}
+            selected={selected}
         >
             <DataTableCell width="48px">
                 <Checkbox
@@ -37,7 +43,10 @@ export function SectionListRow<Model extends IdentifiableObject>({
                 />
             </DataTableCell>
             {selectedColumns.map((selectedColumn) => (
-                <DataTableCell key={selectedColumn.path}>
+                <DataTableCell
+                    key={selectedColumn.path}
+                    onClick={() => onClick?.(modelData)}
+                >
                     {renderColumnValue(selectedColumn)}
                 </DataTableCell>
             ))}

@@ -5,3 +5,7 @@ export type QueryResponse = ReturnType<typeof useDataQuery>
 export type Query = Parameters<typeof useDataQuery>[0]
 
 export type QueryRefetchFunction = QueryResponse['refetch']
+
+export type WrapQueryResponse<T, S extends string = 'result'> = {
+    [K in S]: T
+}

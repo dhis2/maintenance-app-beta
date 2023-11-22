@@ -100,7 +100,8 @@ export const LegendSetTransfer = forwardRef(function LegendSetSelect(
     )
 
     const adjustQueryParamsWithChangedFilter = useCallback(
-        ({ value }: { value: string }) => {
+        ({ value }: { value: string | undefined }) => {
+            value = value ?? ''
             setSearchTerm(value)
             pageRef.current = 1
             refetch({ page: pageRef.current, filter: value })
@@ -131,7 +132,6 @@ export const LegendSetTransfer = forwardRef(function LegendSetSelect(
             options={displayOptions}
             selected={selected}
             loading={loading}
-            error={error}
             onChange={({ selected }: { selected: string[] }) => {
                 const nextSelectedOptions = displayOptions.filter(({ value }) =>
                     selected.includes(value)

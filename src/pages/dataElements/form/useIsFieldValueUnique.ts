@@ -37,7 +37,7 @@ export function useIsFieldValueUnique({
 
     const validate = useMemo(
         () =>
-            memoize(async (value: string) => {
+            memoize(async (value?: string) => {
                 if (!value) {
                     return undefined
                 }

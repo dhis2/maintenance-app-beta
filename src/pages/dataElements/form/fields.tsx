@@ -4,8 +4,8 @@ import {
     Button,
     CheckboxFieldFF,
     Field,
+    RadioFieldFF,
     InputFieldFF,
-    Radio,
     SingleSelectFieldFF,
     TextAreaFieldFF,
 } from '@dhis2/ui'
@@ -57,7 +57,7 @@ export function NameField() {
             )}
             // Do not pass checkIsValueTaken directly, otherwise memoization
             // won't work due to additional arguments being passed
-            validate={(name: string) => checkIsValueTaken(name)}
+            validate={(name: string | undefined) => checkIsValueTaken(name)}
             validateFields={[]}
         />
     )
@@ -88,7 +88,9 @@ export function ShortNameField() {
             helpText={i18n.t('Often used in reports where space is limited')}
             // Do not pass checkIsValueTaken directly, otherwise memoization
             // won't work due to additional arguments being passed
-            validate={(shortName: string) => checkIsValueTaken(shortName)}
+            validate={(shortName: string | undefined) =>
+                checkIsValueTaken(shortName)
+            }
             validateFields={[]}
         />
     )
@@ -243,28 +245,17 @@ export function DomainField() {
             validationText={touched ? error : undefined}
         >
             <div>
-                <Radio
-                    {...aggregateInput.input}
+                <RadioFieldFF
                     className={classes.domainTypeRadioButton}
                     label={DOMAIN_TYPE.AGGREGATE}
-                    onChange={(
-                        _: object,
-                        e: React.ChangeEvent<HTMLInputElement>
-                    ) => {
-                        aggregateInput.input.onChange(e)
-                    }}
+                    input={aggregateInput.input}
+                    meta={aggregateInput.meta}
                 />
-
-                <Radio
-                    {...trackerInput.input}
-                    label={DOMAIN_TYPE.TRACKER}
+                <RadioFieldFF
                     className={classes.domainTypeRadioButton}
-                    onChange={(
-                        _: object,
-                        e: React.ChangeEvent<HTMLInputElement>
-                    ) => {
-                        trackerInput.input.onChange(e)
-                    }}
+                    label={DOMAIN_TYPE.TRACKER}
+                    input={trackerInput.input}
+                    meta={trackerInput.meta}
                 />
             </div>
         </Field>
