@@ -116,7 +116,7 @@ function usePatchDirtyFields() {
         const jsonPatchPayload = createJsonPatchOperations({
             values,
             dirtyFields,
-            dataElement,
+            originalValue: dataElement,
         })
 
         // We want the promise so we know when submitting is done. The promise

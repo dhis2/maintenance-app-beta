@@ -1,50 +1,69 @@
 import get from 'lodash/fp/get'
 import { JsonPatchOperation } from '../../../types'
-import { DataElement } from '../../../types/generated'
-import type { FormValues } from '../form'
+import { Attribute, AttributeValue } from './../../../types/generated/models'
 
-type DataElementKey = keyof DataElement
+type PatchAttribute = {
+    id: Attribute['id']
+}
 
-interface FormatFormValuesArgs {
-    dataElement: DataElement
-    dirtyFields: { [name: string]: boolean }
+type PatchAttributeValue = {
+    attribute: PatchAttribute
+    value: AttributeValue['value']
+}
+
+type ModelWithAttributeValues = {
+    attributeValues: PatchAttributeValue[]
+}
+
+interface FormatFormValuesArgs<FormValues extends ModelWithAttributeValues> {
+    originalValue: unknown
+    dirtyFields: { [key in keyof FormValues]?: boolean }
     values: FormValues
 }
 
-const sanitizeDirtyValueKeys = (keys: DataElementKey[]) => {
-    const attributeValuesDirty = keys.find((key) =>
-        key.startsWith('attributeValues')
+// these are removed from the dirtyKeys
+// attributeValues is an array in the form, thus the key will be attributeValues[0] etc
+// remove these, and replace with 'attributeValues'
+// style.code should post to style, not style.code, because it's a complex object
+const complexKeys = ['attributeValues', 'style'] as const
+export const sanitizeDirtyValueKeys = (dirtyKeys: string[]) => {
+    const complexChanges = complexKeys.filter((complexKey) =>
+        dirtyKeys.some((dirtyKey) => dirtyKey.startsWith(complexKey))
     )
 
-    if (!attributeValuesDirty) {
-        return keys
-    }
+    const dirtyKeysWithoutComplexKeys = dirtyKeys.filter(
+        (dirtyKey) =>
+            !complexChanges.some((complexKey) =>
+                dirtyKey.startsWith(complexKey)
+            )
+    )
 
-    return [
-        ...keys.filter((key) => !key.startsWith('attributeValues')),
-        'attributeValues' as DataElementKey,
-    ]
+    return dirtyKeysWithoutComplexKeys.concat(complexChanges)
 }
 
-export function createJsonPatchOperations({
+export function createJsonPatchOperations<
+    FormValues extends ModelWithAttributeValues
+>({
     dirtyFields,
-    dataElement,
+    originalValue,
     values: unsanitizedValues,
-}: FormatFormValuesArgs): JsonPatchOperation[] {
+}: FormatFormValuesArgs<FormValues>): JsonPatchOperation[] {
     // Remove attribute values without a value
     const values = {
         ...unsanitizedValues,
-        attributeValues: unsanitizedValues.attributeValues.filter(
-            ({ value }) => !!value
-        ),
+        attributeValues: unsanitizedValues.attributeValues
+            .filter(({ value }) => !!value)
+            .map((value) => ({
+                value: value.value,
+                attribute: { id: value.attribute.id },
+            })),
     }
 
-    const dirtyFieldsKeys = Object.keys(dirtyFields) as DataElementKey[]
-    const adjustedDirtyFieldsKeys: DataElementKey[] =
-        sanitizeDirtyValueKeys(dirtyFieldsKeys)
+    const dirtyFieldsKeys = Object.keys(dirtyFields)
+    const adjustedDirtyFieldsKeys = sanitizeDirtyValueKeys(dirtyFieldsKeys)
 
     return adjustedDirtyFieldsKeys.map((name) => ({
-        op: get(name, dataElement) ? 'replace' : 'add',
+        op: get(name, originalValue) ? 'replace' : 'add',
         path: `/${name.replace(/[.]/g, '/')}`,
         value: get(name, values) || '',
     }))
