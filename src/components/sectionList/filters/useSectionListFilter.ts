@@ -1,11 +1,6 @@
 import { useCallback, useMemo } from 'react'
 import { useQueryParam, ObjectParam, UrlUpdateType } from 'use-query-params'
-import {
-    Schema,
-    useSchemaFromHandle,
-    CustomObjectParam,
-    GistParams,
-} from '../../../lib'
+import { Schema, useSchemaFromHandle, CustomObjectParam } from '../../../lib'
 import { usePaginationQueryParams } from '../SectionListPagination'
 
 type ObjectParamType = typeof ObjectParam.default
@@ -16,21 +11,6 @@ type Filters = Record<string, string | undefined>
 // eg. searches for name, code, id and shortname
 // this would translate to "token" in the old API, but does not exist in GIST-API
 export const IDENTIFIABLE_KEY = 'identifiable'
-
-const IDENTIFIABLE_FIELDS = {
-    name: {
-        operator: 'ilike',
-    },
-    code: {
-        operator: 'ilike',
-    },
-    shortName: {
-        operator: 'ilike',
-    },
-    id: {
-        operator: 'eq',
-    },
-}
 
 const getVerifiedFiltersForSchema = (
     filters: ObjectParamType,

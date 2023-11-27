@@ -5,14 +5,13 @@ import {
     NumericObjectParam,
     withDefault,
 } from 'use-query-params'
-import { GistPaginator } from '../../lib/'
 import { Pager } from '../../types/generated'
 
 type SectionListPaginationProps = {
     pager: Pager | undefined
 }
 
-type PaginationQueryParams = {
+export type PaginationQueryParams = {
     page: number
     pageSize: number
 }
@@ -67,16 +66,15 @@ const validatePagerParams = (
     }
 }
 
-function useUpdatePaginationParams(pager?: Pager): GistPaginator {
-    const [, setParams] = usePaginationQueryParams()
+type Paginator = {
+    changePageSize: (pageSize: number) => boolean
+    getPrevPage: () => boolean
+    goToPage: (page: number) => boolean
+    pager?: Pager
+}
 
-    const getNextPage = useCallback(() => {
-        if (!pager?.nextPage) {
-            return false
-        }
-        setParams((prevPager) => ({ ...prevPager, page: pager.page + 1 }))
-        return true
-    }, [pager, setParams])
+function useUpdatePaginationParams(pager?: Pager): Paginator {
+    const [, setParams] = usePaginationQueryParams()
 
     const getPrevPage = useCallback(() => {
         if (!pager?.prevPage) {
@@ -106,7 +104,6 @@ function useUpdatePaginationParams(pager?: Pager): GistPaginator {
     )
 
     return {
-        getNextPage,
         getPrevPage,
         goToPage,
         changePageSize,
