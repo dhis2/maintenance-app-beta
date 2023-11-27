@@ -17,7 +17,6 @@ export function ColorAndIconPicker({
     return (
         <div className={classes.container}>
             <ColorPicker color={color} onColorPick={onColorPick} />
-
             <IconPicker icon={icon} onIconPick={onIconPick} />
         </div>
     )

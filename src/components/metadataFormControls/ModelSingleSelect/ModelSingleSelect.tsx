@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import React, {
     forwardRef,
     useCallback,
@@ -12,10 +13,12 @@ import { SearchableSingleSelect } from '../../SearchableSingleSelect'
 function computeDisplayOptions({
     selected,
     selectedOption,
+    required,
     options,
 }: {
     options: SelectOption[]
     selected?: string
+    required?: boolean
     selectedOption?: SelectOption
 }): SelectOption[] {
     // This happens only when we haven't fetched the lable for an initially
@@ -29,11 +32,20 @@ function computeDisplayOptions({
         ({ value }) => value === selected
     )
 
-    if (selectedOption && !optionsContainSelected) {
-        return [...options, selectedOption]
+    const withSelectedOption =
+        selectedOption && !optionsContainSelected
+            ? [...options, selectedOption]
+            : options
+
+    if (!required) {
+        // This default value has been copied from the old app
+        return [
+            { value: '', label: i18n.t('<No value>') },
+            ...withSelectedOption,
+        ]
     }
 
-    return options
+    return withSelectedOption
 }
 
 type UseInitialOptionQuery = ({
@@ -44,8 +56,10 @@ type UseInitialOptionQuery = ({
     selected?: string
 }) => QueryResponse
 
-interface ModelSingleSelectProps {
+export interface ModelSingleSelectProps {
     onChange: ({ selected }: { selected: string }) => void
+    required?: boolean
+    invalid?: boolean
     placeholder?: string
     selected?: string
     showAllOption?: boolean
@@ -55,14 +69,12 @@ interface ModelSingleSelectProps {
     useOptionsQuery: () => QueryResponse
 }
 
-export interface ModelSingleSelectHandle {
-    refetch: () => void
-}
-
 export const ModelSingleSelect = forwardRef(function ModelSingleSelect(
     {
         onChange,
+        invalid,
         placeholder = '',
+        required,
         selected,
         showAllOption,
         onBlur,
@@ -134,11 +146,13 @@ export const ModelSingleSelect = forwardRef(function ModelSingleSelect(
     const displayOptions = computeDisplayOptions({
         selected,
         selectedOption,
+        required,
         options: result,
     })
 
     return (
         <SearchableSingleSelect
+            invalid={invalid}
             placeholder={placeholder}
             showAllOption={showAllOption}
             onChange={({ selected }) => {

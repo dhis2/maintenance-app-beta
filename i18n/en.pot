@@ -5,8 +5,13 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2023-10-20T11:27:17.939Z\n"
 "PO-Revision-Date: 2023-10-20T11:27:17.939Z\n"
+=======
+"POT-Creation-Date: 2023-11-22T13:05:25.319Z\n"
+"PO-Revision-Date: 2023-11-22T13:05:25.319Z\n"
+>>>>>>> master
 
 msgid "schemas"
 msgstr "schemas"
@@ -48,6 +53,15 @@ msgstr "Search for menu items"
 msgid "Search icons"
 msgstr "Search icons"
 
+msgid "Select"
+msgstr "Select"
+
+msgid "Remove icon"
+msgstr "Remove icon"
+
+msgid "Cancel"
+msgstr "Cancel"
+
 msgid "Retry"
 msgstr "Retry"
 
@@ -74,6 +88,9 @@ msgstr "None"
 
 msgid "Filter legend sets"
 msgstr "Filter legend sets"
+
+msgid "<No value>"
+msgstr "<No value>"
 
 msgid "Option set"
 msgstr "Option set"
@@ -108,9 +125,21 @@ msgstr "Short name"
 msgid "Code"
 msgstr "Code"
 
+<<<<<<< HEAD
 msgid "Created"
 msgstr "Created"
 
+=======
+msgid "Created by"
+msgstr "Created by"
+
+msgid "Created"
+msgstr "Created"
+
+msgid "Last updated by"
+msgstr "Last updated by"
+
+>>>>>>> master
 msgid "Last updated"
 msgstr "Last updated"
 
@@ -141,9 +170,6 @@ msgstr "Type to filter options"
 msgid "No matches"
 msgstr "No matches"
 
-msgid "Data set"
-msgstr "Data set"
-
 msgid "Clear all filters"
 msgstr "Clear all filters"
 
@@ -167,9 +193,6 @@ msgstr "Failed to save"
 
 msgid "Manage {{section}} table columns"
 msgstr "Manage {{section}} table columns"
-
-msgid "Cancel"
-msgstr "Cancel"
 
 msgid "Update table columns"
 msgstr "Update table columns"
@@ -245,6 +268,9 @@ msgstr "Data element group set"
 
 msgid "Data element group sets"
 msgstr "Data element group sets"
+
+msgid "Data set"
+msgstr "Data set"
 
 msgid "Data sets"
 msgstr "Data sets"
@@ -585,6 +611,7 @@ msgstr "Image"
 msgid "GeoJSON"
 msgstr "GeoJSON"
 
+<<<<<<< HEAD
 msgid "Created by"
 msgstr "Created by"
 
@@ -594,6 +621,11 @@ msgstr "Favorite"
 msgid "Last updated by"
 msgstr "Last updated by"
 
+=======
+msgid "Favorite"
+msgstr "Favorite"
+
+>>>>>>> master
 msgid "Domain type"
 msgstr "Domain type"
 
@@ -603,11 +635,20 @@ msgstr "Name"
 msgid "Sharing"
 msgstr "Sharing"
 
+<<<<<<< HEAD
+=======
+msgid "Value type"
+msgstr "Value type"
+
+>>>>>>> master
 msgid "Owner"
 msgstr "Owner"
 
 msgid "Zero is significant"
 msgstr "Zero is significant"
+
+msgid "Custom attributes"
+msgstr "Custom attributes"
 
 msgid "Something went wrong when submitting the form"
 msgstr "Something went wrong when submitting the form"
@@ -621,11 +662,63 @@ msgstr "Exit without saving"
 msgid "Create data element"
 msgstr "Create data element"
 
+msgid "Loading custom attributes"
+msgstr "Loading custom attributes"
+
+msgid "Something went wrong with retrieving the custom attributes"
+msgstr "Something went wrong with retrieving the custom attributes"
+
 msgid "Basic information"
 msgstr "Basic information"
 
 msgid "Set up the information for this data element"
 msgstr "Set up the information for this data element"
+
+msgid "Disaggregation and Option sets"
+msgstr "Disaggregation and Option sets"
+
+msgid "Set up disaggregation and predefined options."
+msgstr "Set up disaggregation and predefined options."
+
+msgid "LegendSet"
+msgstr "LegendSet"
+
+msgid ""
+"Visualize values for this data element in Analytics app. Multiple legendSet "
+"can be applied."
+msgstr ""
+"Visualize values for this data element in Analytics app. Multiple legendSet "
+"can be applied."
+
+msgid "Aggregation levels"
+msgstr "Aggregation levels"
+
+msgid ""
+"By default, the aggregation will start at the lowest assigned organisation "
+"unit. If you for example select \"Chiefdom\", it means that \"Chiefdom\", "
+"\"District\" and \"National\" aggregates use \"Chiefdom\" (the highest "
+"aggregation level available) as the data source, and PHU data will not be "
+"included. PHU will still be available for the PHU level, but not included "
+"in the aggregations to the levels above."
+msgstr ""
+"By default, the aggregation will start at the lowest assigned organisation "
+"unit. If you for example select \"Chiefdom\", it means that \"Chiefdom\", "
+"\"District\" and \"National\" aggregates use \"Chiefdom\" (the highest "
+"aggregation level available) as the data source, and PHU data will not be "
+"included. PHU will still be available for the PHU level, but not included "
+"in the aggregations to the levels above."
+
+msgid "Custom fields for your DHIS2 instance"
+msgstr "Custom fields for your DHIS2 instance"
+
+msgid "Required"
+msgstr "Required"
+
+msgid "Cannot be longer than {{number}} character"
+msgstr "Cannot be longer than {{number}} character"
+
+msgid "The value is to long. You can use up to 255 characters"
+msgstr "The value is to long. You can use up to 255 characters"
 
 msgid "{{fieldLabel}} (required)"
 msgstr "{{fieldLabel}} (required)"
@@ -648,6 +741,16 @@ msgstr "Url"
 msgid "A web link that provides extra information"
 msgstr "A web link that provides extra information"
 
+msgid "Color and icon"
+msgstr "Color and icon"
+
+msgid ""
+"A color and icon are helpful for identifying data elements in "
+"information-dense screens."
+msgstr ""
+"A color and icon are helpful for identifying data elements in "
+"information-dense screens."
+
 msgid "Field mask"
 msgstr "Field mask"
 
@@ -665,41 +768,6 @@ msgstr "An alternative name used in section or automatic data entry forms."
 
 msgid "Store zero data values"
 msgstr "Store zero data values"
-
-msgid "Disaggregation and Option sets"
-msgstr "Disaggregation and Option sets"
-
-msgid "Set up disaggregation and predefined options."
-msgstr "Set up disaggregation and predefined options."
-
-msgid "LegendSet"
-msgstr "LegendSet"
-
-msgid ""
-"Visualize values for this data element in Analytics app. Multiple legendSet "
-"can be applied."
-msgstr ""
-"Visualize values for this data element in Analytics app. Multiple legendSet "
-"can be applied."
-
-msgid "Aggregation levels"
-msgstr "Aggregation levels"
-
-msgid "Custom attributes"
-msgstr "Custom attributes"
-
-msgid "Custom fields for your DHIS2 instance"
-msgstr "Custom fields for your DHIS2 instance"
-
-msgid "Color and icon"
-msgstr "Color and icon"
-
-msgid ""
-"A color and icon are helpful for identifying data elements in "
-"information-dense screens."
-msgstr ""
-"A color and icon are helpful for identifying data elements in "
-"information-dense screens."
 
 msgid "A data element can either be aggregated or tracked data."
 msgstr "A data element can either be aggregated or tracked data."
@@ -733,6 +801,9 @@ msgstr "Option set comment"
 
 msgid "Choose a set of predefined comment for data entry"
 msgstr "Choose a set of predefined comment for data entry"
+
+msgid "This field requires a unique value, please choose another one"
+msgstr "This field requires a unique value, please choose another one"
 
 msgid "Metadata management"
 msgstr "Metadata management"

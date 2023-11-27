@@ -31,6 +31,7 @@ interface AggregationLevelMultiSelectProps {
     onChange: ({ selected }: { selected: string[] }) => void
     onRetryClick: () => void
     inputWidth?: string
+    invalid?: boolean
     placeholder?: string
     selected?: string[]
     showAllOption?: boolean
@@ -43,6 +44,7 @@ export const AggregationLevelMultiSelect = forwardRef(
         {
             onChange,
             inputWidth,
+            invalid,
             selected,
             showAllOption,
             placeholder = i18n.t('Aggregation level(s)'),
@@ -66,7 +68,7 @@ export const AggregationLevelMultiSelect = forwardRef(
                 onChange={({ selected }: { selected: string[] }) => {
                     onChange({ selected })
                 }}
-                error={!!optionsQuery.error}
+                error={!!optionsQuery.error || invalid}
                 selected={loading ? [] : selected}
                 loading={loading}
                 onBlur={onBlur}

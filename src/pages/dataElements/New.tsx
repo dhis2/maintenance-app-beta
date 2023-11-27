@@ -2,44 +2,66 @@ import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { NoticeBox } from '@dhis2/ui'
 import { FORM_ERROR } from 'final-form'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { Form } from 'react-final-form'
 import { useNavigate } from 'react-router-dom'
-import { StandardFormActions, StandardFormSection } from '../../components'
-import { SCHEMA_SECTIONS, getSectionPath } from '../../lib'
+import {
+    Loader,
+    StandardFormActions,
+    StandardFormSection,
+} from '../../components'
+import { SCHEMA_SECTIONS, getSectionPath, useSchemas } from '../../lib'
 import { Attribute } from '../../types/generated'
-import { DataElementFormFields, useCustomAttributesQuery } from './form'
-import { FormValues } from './form/types'
+import {
+    DataElementFormFields,
+    useCustomAttributesQuery,
+    useValidate,
+} from './form'
+import type { FormValues } from './form'
 import classes from './New.module.css'
 
 const listPath = `/${getSectionPath(SCHEMA_SECTIONS.dataElement)}`
 
-function computeInitialValues(customAttributes: Attribute[]) {
-    const attributeValues = customAttributes.map((attribute) => ({
-        attribute,
-        value: '',
-    }))
+function useInitialValues(customAttributes: Attribute[]) {
+    const schemas = useSchemas()
 
-    return {
-        name: '',
-        shortName: '',
-        code: '',
-        description: '',
-        url: '',
-        color: '',
-        icon: '',
-        fieldMask: '',
-        domainType: 'AGGREGATE',
-        formName: '',
-        valueType: '',
-        aggregationType: '',
-        categoryCombo: { id: '' },
-        optionSet: { id: '' },
-        commentOptionSet: { id: '' },
-        legendSets: [],
-        aggregationLevels: [],
-        attributeValues,
-    }
+    const attributeValues = useMemo(
+        () =>
+            customAttributes.map((attribute) => ({
+                attribute,
+                value: '',
+            })),
+        [customAttributes]
+    )
+
+    return useMemo(
+        () => ({
+            name: '',
+            shortName: '',
+            code: '',
+            description: '',
+            url: '',
+            fieldMask: '',
+            domainType: 'AGGREGATE',
+            formName: '',
+            valueType: schemas.dataElement.properties.valueType.constants?.[0],
+            aggregationType:
+                schemas.dataElement.properties.aggregationType.constants?.[0],
+            style: { icon: '', color: '' },
+            categoryCombo: { id: '' },
+            optionSet: { id: '' },
+            commentOptionSet: { id: '' },
+            legendSets: [],
+            aggregationLevels: [],
+            attributeValues,
+            zeroIsSignificant: false,
+        }),
+        [
+            attributeValues,
+            schemas.dataElement.properties.valueType.constants,
+            schemas.dataElement.properties.aggregationType.constants,
+        ]
+    )
 }
 
 const ADD_NEW_DATA_ELEMENT_MUTATION = {
@@ -78,15 +100,16 @@ function formatFormValues({ values }: { values: FormValues }) {
     }
 }
 
-// @TODO(DataElements/new): values dynamic or static?
 export const Component = () => {
+    const validate = useValidate()
     const dataEngine = useDataEngine()
-
     const navigate = useNavigate()
     const customAttributesQuery = useCustomAttributesQuery()
 
     const loading = customAttributesQuery.loading
     const error = customAttributesQuery.error
+
+    const initialValues = useInitialValues(customAttributesQuery.data)
 
     if (error && !loading) {
         // @TODO(Edit): Implement error screen
@@ -97,8 +120,6 @@ export const Component = () => {
         // @TODO(Edit): Implement loading screen
         return <>Loading...</>
     }
-
-    const initialValues = computeInitialValues(customAttributesQuery.data)
 
     async function onSubmit(values: FormValues) {
         const payload = formatFormValues({ values })
@@ -111,7 +132,6 @@ export const Component = () => {
                 variables: payload,
             })
         } catch (e) {
-            console.log('> e', e)
             return { [FORM_ERROR]: (e as Error | string).toString() }
         }
 
@@ -119,16 +139,26 @@ export const Component = () => {
     }
 
     return (
-        <Form onSubmit={onSubmit} initialValues={initialValues}>
-            {({ handleSubmit, submitting, submitError }) => (
-                <form onSubmit={handleSubmit}>
-                    <FormContents
-                        submitError={submitError}
-                        submitting={submitting}
-                    />
-                </form>
-            )}
-        </Form>
+        <Loader
+            queryResponse={customAttributesQuery}
+            label={i18n.t('Custom attributes')}
+        >
+            <Form
+                validateOnBlur
+                onSubmit={onSubmit}
+                validate={validate}
+                initialValues={initialValues}
+            >
+                {({ handleSubmit, submitting, submitError }) => (
+                    <form onSubmit={handleSubmit}>
+                        <FormContents
+                            submitError={submitError}
+                            submitting={submitting}
+                        />
+                    </form>
+                )}
+            </Form>
+        </Loader>
     )
 }
 

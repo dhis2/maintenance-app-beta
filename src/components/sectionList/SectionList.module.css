@@ -9,17 +9,35 @@
     gap: var(--spacers-dp8);
 }
 
+<<<<<<< HEAD
 .listToolbarWrapper {
     display: flex;
     flex-direction: column;
     grid-area: 'list';
+=======
+.list {
+    grid-area: list;
+}
+
+.listToolbarWrapper {
+    display: flex;
+    flex-direction: column;
+    grid-area: list;
+>>>>>>> master
 }
 
 .listDetailsWrapper {
     display: grid;
     grid-template-columns: 1fr auto;
+<<<<<<< HEAD
     grid-template-rows: none;
     grid-template-areas: 'list details';
+=======
+    grid-template-rows: auto;
+    grid-template-areas:
+        'header details'
+        'list details';
+>>>>>>> master
     margin-top: var(--spacers-dp8);
 }
 
@@ -28,12 +46,20 @@
         display: grid;
         grid-template-rows: auto;
         grid-template-columns: none;
+<<<<<<< HEAD
         grid-template-areas: 'list' 'details';
+=======
+        grid-template-areas:
+            'header'
+            'list'
+            'details';
+>>>>>>> master
         margin-top: var(--spacers-dp8);
     }
 }
 
 .listHeaderNormal a {
+    grid-area: header;
     line-height: var(--spacers-dp16);
 }
 

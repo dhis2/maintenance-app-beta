@@ -2,8 +2,8 @@
 import { IdentifiableObject, GistPager, Pager } from './'
 // import { CategoryCombo, DataElement } from "../generated";
 
-export type ModelReferenceCollection<T = IdentifiableObject> = Array<T>
-type ModelReference = IdentifiableObject | ModelReferenceCollection
+export type ModelCollection<T = IdentifiableObject> = Array<T>
+type ModelReference = IdentifiableObject | ModelCollection
 
 export type ModelCollectionPart<
     T extends IdentifiableObject,
@@ -31,7 +31,7 @@ export type GistApiEndpoints<T> = {
  */
 export type GistModel<T> = BaseGist<T> & {
     [P in keyof T]: T[P] extends ModelReference
-        ? T[P] extends ModelReferenceCollection
+        ? T[P] extends ModelCollection
             ? number // map array-references to number (gist shows total in collection)
             : string // map references to a string (gist shows id)
         : T[P]
@@ -84,7 +84,7 @@ export type GetGistResponseForReference<
     GR
 > = GR extends GistCollectionResponse<infer RootGistModel, infer R> //extends GistResponse<IdentifiableObject, string>> = string
     ? ReferenceKey extends keyof RootGistModel
-        ? RootGistModel[ReferenceKey] extends ModelReferenceCollection<
+        ? RootGistModel[ReferenceKey] extends ModelCollection<
               infer ReferencedModel extends IdentifiableObject
           >
             ? GistCollectionResponse<ReferencedModel, ReferenceKey>
@@ -94,7 +94,7 @@ export type GetGistResponseForReference<
         : never
     : GR extends GistObjectResponse<infer GistModel>
     ? ReferenceKey extends keyof GistModel
-        ? GistModel[ReferenceKey] extends ModelReferenceCollection<
+        ? GistModel[ReferenceKey] extends ModelCollection<
               infer ReferencedModel extends IdentifiableObject
           >
             ? GistCollectionResponse<ReferencedModel, ReferenceKey>
@@ -149,7 +149,7 @@ export type GistParams = {
 export type GetReferencedModels<T extends IdentifiableObject> = {
     [P in keyof T as T[P] extends ModelReference
         ? P
-        : never]: T[P] extends ModelReferenceCollection ? T[P][number] : T[P]
+        : never]: T[P] extends ModelCollection ? T[P][number] : T[P]
 }
 
 /**
@@ -187,9 +187,7 @@ type GetModelType<T> = T extends ModelReference
 type MaybeModelCollection<
     ModelType,
     FullModel extends ModelReference
-> = FullModel extends ModelReferenceCollection
-    ? ModelReferenceCollection<ModelType>
-    : ModelType
+> = FullModel extends ModelCollection ? ModelCollection<ModelType> : ModelType
 /**
  * Utility type that picks the properties (RefProps) from the referenced models (RefModelsUnion) in Model
  *

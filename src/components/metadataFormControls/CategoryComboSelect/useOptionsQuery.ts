@@ -62,6 +62,8 @@ export function useOptionsQuery() {
                     const { id, displayName, isDefault } = catCombo
                     return {
                         value: id,
+                        // This should be distinguishable from other selects
+                        // where "none" means no selection
                         label: isDefault ? i18n.t('None') : displayName,
                     }
                 }) || []),

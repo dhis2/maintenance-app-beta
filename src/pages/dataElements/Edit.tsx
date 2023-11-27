@@ -5,14 +5,22 @@ import { FORM_ERROR, FormApi } from 'final-form'
 import React, { useEffect, useRef } from 'react'
 import { withTypes } from 'react-final-form'
 import { useNavigate, useParams } from 'react-router-dom'
-import { StandardFormActions, StandardFormSection } from '../../components'
+import {
+    Loader,
+    StandardFormActions,
+    StandardFormSection,
+} from '../../components'
 import { SCHEMA_SECTIONS, getSectionPath } from '../../lib'
 import { JsonPatchOperation } from '../../types'
 import { Attribute, DataElement } from '../../types/generated'
 import { createJsonPatchOperations } from './edit/'
 import classes from './Edit.module.css'
-import { DataElementFormFields, useCustomAttributesQuery } from './form'
-import { FormValues } from './form/types'
+import {
+    DataElementFormFields,
+    useCustomAttributesQuery,
+    useValidate,
+} from './form'
+import type { FormValues } from './form'
 
 type FinalFormFormApi = FormApi<FormValues>
 
@@ -40,12 +48,18 @@ function useDataElementQuery(id: string) {
 }
 
 function computeInitialValues({
+    dataElementId,
     dataElement,
     customAttributes,
 }: {
+    dataElementId: string
     dataElement: DataElement
     customAttributes: Attribute[]
 }) {
+    if (!dataElement) {
+        return {}
+    }
+
     // We want to have an array in the state with all attributes, not just the
     // ones that have a value which is what the endpoint responds with
     const attributeValues = customAttributes.map((attribute) => {
@@ -62,6 +76,7 @@ function computeInitialValues({
     })
 
     return {
+        id: dataElementId,
         name: dataElement.name,
         shortName: dataElement.shortName,
         code: dataElement.code,
@@ -86,34 +101,22 @@ function computeInitialValues({
     }
 }
 
-export const Component = () => {
+function usePatchDirtyFields() {
     const dataEngine = useDataEngine()
-    const navigate = useNavigate()
-    const params = useParams()
 
-    const dataElementId = params.id as string
-    const dataElementQuery = useDataElementQuery(dataElementId)
-    const customAttributesQuery = useCustomAttributesQuery()
-
-    const loading = dataElementQuery.loading || customAttributesQuery.loading
-    const error = dataElementQuery.error || customAttributesQuery.error
-
-    if (error && !loading) {
-        // @TODO(Edit): Implement error screen
-        return `Error: ${error.toString()}`
-    }
-
-    if (loading) {
-        // @TODO(Edit): Implement loading screen
-        return 'Loading...'
-    }
-
-    async function onSubmit(values: FormValues, form: FinalFormFormApi) {
-        const dirtyFields = form.getState().dirtyFields
+    return async ({
+        values,
+        dirtyFields,
+        dataElement,
+    }: {
+        values: FormValues
+        dirtyFields: { [name: string]: boolean }
+        dataElement: DataElement
+    }) => {
         const jsonPatchPayload = createJsonPatchOperations({
             values,
             dirtyFields,
-            dataElement: dataElementQuery.data?.dataElement as DataElement,
+            originalValue: dataElement,
         })
 
         // We want the promise so we know when submitting is done. The promise
@@ -121,7 +124,7 @@ export const Component = () => {
         // resolve
         const ADD_NEW_DATA_ELEMENT_MUTATION = {
             resource: 'dataElements',
-            id: dataElementId,
+            id: values.id,
             type: 'json-patch',
             data: ({ operations }: { operations: JsonPatchOperation[] }) =>
                 operations,
@@ -134,26 +137,61 @@ export const Component = () => {
         } catch (e) {
             return { [FORM_ERROR]: (e as Error | string).toString() }
         }
+    }
+}
+
+export const Component = () => {
+    const navigate = useNavigate()
+    const params = useParams()
+    const dataElementId = params.id as string
+    const dataElementQuery = useDataElementQuery(dataElementId)
+    const customAttributesQuery = useCustomAttributesQuery()
+    const patchDirtyFields = usePatchDirtyFields()
+    const validate = useValidate()
+
+    async function onSubmit(values: FormValues, form: FinalFormFormApi) {
+        const errors = await patchDirtyFields({
+            values,
+            dirtyFields: form.getState().dirtyFields,
+            dataElement: dataElementQuery.data?.dataElement as DataElement,
+        })
+
+        if (errors) {
+            return errors
+        }
 
         navigate(listPath)
     }
 
     const initialValues = computeInitialValues({
+        dataElementId,
         dataElement: dataElementQuery.data?.dataElement as DataElement,
-        customAttributes: customAttributesQuery.data,
+        customAttributes: customAttributesQuery.data || [],
     })
 
     return (
-        <Form onSubmit={onSubmit} initialValues={initialValues}>
-            {({ handleSubmit, submitting, submitError }) => (
-                <form onSubmit={handleSubmit}>
-                    <FormContents
-                        submitError={submitError}
-                        submitting={submitting}
-                    />
-                </form>
-            )}
-        </Form>
+        <Loader queryResponse={dataElementQuery} label={i18n.t('Data element')}>
+            <Loader
+                queryResponse={customAttributesQuery}
+                label={i18n.t('Custom attributes')}
+            >
+                <Form
+                    validateOnBlur
+                    onSubmit={onSubmit}
+                    validate={validate}
+                    initialValues={initialValues}
+                >
+                    {({ handleSubmit, submitting, submitError }) => (
+                        <form onSubmit={handleSubmit}>
+                            <FormContents
+                                submitError={submitError}
+                                submitting={submitting}
+                            />
+                        </form>
+                    )}
+                </Form>
+            </Loader>
+        </Loader>
     )
 }
 
