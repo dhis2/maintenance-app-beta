@@ -5,13 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-<<<<<<< HEAD
-"POT-Creation-Date: 2023-10-20T11:27:17.939Z\n"
-"PO-Revision-Date: 2023-10-20T11:27:17.939Z\n"
-=======
 "POT-Creation-Date: 2023-11-22T13:05:25.319Z\n"
 "PO-Revision-Date: 2023-11-22T13:05:25.319Z\n"
->>>>>>> master
 
 msgid "schemas"
 msgstr "schemas"
@@ -125,11 +120,6 @@ msgstr "Short name"
 msgid "Code"
 msgstr "Code"
 
-<<<<<<< HEAD
-msgid "Created"
-msgstr "Created"
-
-=======
 msgid "Created by"
 msgstr "Created by"
 
@@ -139,7 +129,6 @@ msgstr "Created"
 msgid "Last updated by"
 msgstr "Last updated by"
 
->>>>>>> master
 msgid "Last updated"
 msgstr "Last updated"
 
@@ -611,21 +600,9 @@ msgstr "Image"
 msgid "GeoJSON"
 msgstr "GeoJSON"
 
-<<<<<<< HEAD
-msgid "Created by"
-msgstr "Created by"
-
 msgid "Favorite"
 msgstr "Favorite"
 
-msgid "Last updated by"
-msgstr "Last updated by"
-
-=======
-msgid "Favorite"
-msgstr "Favorite"
-
->>>>>>> master
 msgid "Domain type"
 msgstr "Domain type"
 
@@ -635,12 +612,9 @@ msgstr "Name"
 msgid "Sharing"
 msgstr "Sharing"
 
-<<<<<<< HEAD
-=======
 msgid "Value type"
 msgstr "Value type"
 
->>>>>>> master
 msgid "Owner"
 msgstr "Owner"
 
