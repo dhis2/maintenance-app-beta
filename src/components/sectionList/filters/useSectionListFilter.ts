@@ -105,29 +105,16 @@ export const useSectionListFilter = (
     return [filters?.[filterKey] ?? undefined, boundSetFilter]
 }
 
-const parseToGistQueryFilter = (filters: Filters): string[] => {
+const parseToQueryFilter = (filters: Filters): string[] => {
     const { [IDENTIFIABLE_KEY]: identifiableValue, ...restFilters } = filters
     const queryFilters: string[] = []
 
-    // Groups are a powerful way to combine filters,
-    // here we use them for identifiable filters, to group them with "OR" and
-    // rest of the filters with "AND".
-    // see https://docs.dhis2.org/en/develop/using-the-api/dhis-core-version-239/metadata-gist.html#gist_parameters_filter
+    const identifiableFilter = `identifiable:token:${identifiableValue}`
     if (identifiableValue) {
-        const identifiableFilterGroup = `0:`
-        Object.entries(IDENTIFIABLE_FIELDS).forEach(([key, { operator }]) => {
-            queryFilters.push(
-                `${identifiableFilterGroup}${key}:${operator}:${identifiableValue}`
-            )
-        })
-    }
-    let restFilterGroup: number | undefined
-    if (identifiableValue) {
-        restFilterGroup = 1
+        queryFilters.push(identifiableFilter)
     }
     Object.entries(restFilters).forEach(([key, value]) => {
-        const group = restFilterGroup ? `${restFilterGroup++}:` : ''
-        queryFilters.push(`${group}${key}:eq:${value}`)
+        queryFilters.push(`${key}:eq:${value}`)
     })
     return queryFilters
 }
@@ -136,11 +123,11 @@ export const useSectionListQueryFilter = () => {
     const [filters] = useSectionListFilters()
 
     return useMemo(() => {
-        return parseToGistQueryFilter(filters)
+        return parseToQueryFilter(filters)
     }, [filters])
 }
 
-export const useQueryParamsForModelGist = (): GistParams => {
+export const useQueryParamsForModelGist = () => {
     const [paginationParams] = usePaginationQueryParams()
     const filterParams = useSectionListQueryFilter()
 
