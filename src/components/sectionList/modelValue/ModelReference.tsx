@@ -12,7 +12,7 @@ export const isModelReference = (value: unknown): value is ModelReference => {
 }
 
 export const ModelReference = ({ value }: { value?: ModelReference }) => {
-    let displayValue = value?.displayName || value?.name
+    let displayValue = value?.displayName
     // default categoryCombos should display as None
     if (displayValue === 'default') {
         displayValue = i18n.t('None')
