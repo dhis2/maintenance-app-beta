@@ -59,7 +59,7 @@ export const getFieldFilterFromPath = (
     return recur(resolvePath(path), 0)
 }
 
-export const getSchemaPropertyFromPath = (
+export const getSchemaPropertyForPath = (
     schema: Schema,
     path: string
 ): SchemaFieldProperty | undefined => {
@@ -76,7 +76,7 @@ export const getSchemaPropertyFromPath = (
 }
 
 export const getFieldFilter = (schema: Schema, path: string) => {
-    const schemaProperty = getSchemaPropertyFromPath(schema, path)
+    const schemaProperty = getSchemaPropertyForPath(schema, path)
 
     if (schemaProperty?.propertyType === SchemaFieldPropertyType.REFERENCE) {
         return `${schemaProperty.fieldName}[id, displayName]`
