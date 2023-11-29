@@ -54,16 +54,20 @@ export const SummaryCard = ({
 }: SummaryCardProps) => {
     const title = section.title
     return (
-        <Card dataTest={`card-${title}`}>
+        <div data-test={`card-${title}`}>
             <div className={styles.cardWrapper}>
-                <Link to={`/${getSectionPath(section)}`}>
-                    <div className={styles.cardIcon}>{icon}</div>
-                    <SummaryCardHeader>{title}</SummaryCardHeader>
-                    <SummaryCardContent>{children}</SummaryCardContent>
+                <Link
+                    className={styles.cardTopLink}
+                    to={`/${getSectionPath(section)}`}
+                >
+                    <div className={styles.cardTop}>
+                        <SummaryCardHeader>{title}</SummaryCardHeader>
+                        <SummaryCardContent>{children}</SummaryCardContent>
+                    </div>
                 </Link>
                 <SummaryCardActions section={section} />
             </div>
-        </Card>
+        </div>
     )
 }
 
