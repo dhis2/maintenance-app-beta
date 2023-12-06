@@ -133,6 +133,7 @@ export const useModelListView = () => {
     })
 
     // 404 errors are expected when user havent saved any views
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (query.error && (query.error as any).details?.httpStatusCode !== 404) {
         console.error(query.error)
     }
@@ -163,11 +164,14 @@ export const useMutateModelListViews = () => {
         // it's exact data as we got from the request
         const prevData: WrapInResult<DataStoreModelListViews> | undefined =
             queryClient.getQueryData(valuesQueryKey)
-        if (!prevData) {
+
+        // need to validate here since we're not using a selector
+        const validView = modelListViewsSchema.safeParse(prevData?.result)
+        if (!validView.success) {
             return {}
         }
 
-        return prevData.result
+        return validView.data
     }, [queryClient])
 
     const saveView = useCallback(
