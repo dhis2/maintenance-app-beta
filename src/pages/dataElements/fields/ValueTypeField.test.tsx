@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
 import { Form } from 'react-final-form'
-import { useSchemas, useOptionSetQuery } from '../../../lib'
+import { VALUE_TYPE, useSchemas, useOptionSetQuery } from '../../../lib'
 import { ValueTypeField } from './ValueTypeField'
 
 jest.mock('../../../lib/optionSet/useOptionSetQuery', () => ({
@@ -15,53 +15,23 @@ jest.mock('../../../lib/schemas/schemaStore', () => {
     }
 })
 
-// `(useOptionSetQuery as jest.Mock).mockImplementation` causes the code to be
-// built wrongly and subsequently to bug out
-const uOSQ = useOptionSetQuery as jest.Mock
-const uS = useSchemas as jest.Mock
-
-const valueTypes = [
-    'TEXT',
-    'LONG_TEXT',
-    'MULTI_TEXT',
-    'LETTER',
-    'PHONE_NUMBER',
-    'EMAIL',
-    'BOOLEAN',
-    'TRUE_ONLY',
-    'DATE',
-    'DATETIME',
-    'TIME',
-    'NUMBER',
-    'UNIT_INTERVAL',
-    'PERCENTAGE',
-    'INTEGER',
-    'INTEGER_POSITIVE',
-    'INTEGER_NEGATIVE',
-    'INTEGER_ZERO_OR_POSITIVE',
-    'TRACKER_ASSOCIATE',
-    'USERNAME',
-    'COORDINATE',
-    'ORGANISATION_UNIT',
-    'REFERENCE',
-    'AGE',
-    'URL',
-    'FILE_RESOURCE',
-    'IMAGE',
-    'GEOJSON',
-]
+const valueTypes = Object.keys(VALUE_TYPE)
 
 describe('<ValueTypeField />', () => {
-    it('should not have the MULTI_TEXT option when a different value is selected', async () => {
-        const uS = useSchemas as jest.Mock
-        uS.mockImplementation(() => ({
-            dataElement: {
-                properties: {
-                    valueType: { constants: valueTypes },
-                },
-            },
-        }))
+    // `(useOptionSetQuery as jest.Mock).mockImplementation` causes the code to be
+    // built wrongly and subsequently to bug out
+    const uOSQ = useOptionSetQuery as jest.Mock
+    const uS = useSchemas as jest.Mock
 
+    uS.mockImplementation(() => ({
+        dataElement: {
+            properties: {
+                valueType: { constants: valueTypes },
+            },
+        },
+    }))
+
+    it('should not have the MULTI_TEXT option when a different value is selected', async () => {
         uOSQ.mockImplementation(() => ({
             called: false,
             loading: false,
@@ -104,15 +74,6 @@ describe('<ValueTypeField />', () => {
     })
 
     it('should have the MULTI_TEXT option when the selected value is MULTI_TEXT', async () => {
-        const uS = useSchemas as jest.Mock
-        uS.mockImplementation(() => ({
-            dataElement: {
-                properties: {
-                    valueType: { constants: valueTypes },
-                },
-            },
-        }))
-
         const mockResult = {
             called: false,
             loading: false,
@@ -155,14 +116,6 @@ describe('<ValueTypeField />', () => {
     })
 
     it("should have the MULTI_TEXT option auto-selected when the option set's valueType is MULTI_TEXT", async () => {
-        uS.mockImplementation(() => ({
-            dataElement: {
-                properties: {
-                    valueType: { constants: valueTypes },
-                },
-            },
-        }))
-
         const mockResult = {
             called: false,
             loading: false,

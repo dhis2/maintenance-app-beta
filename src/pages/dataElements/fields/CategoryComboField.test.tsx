@@ -35,6 +35,7 @@ describe('<CategoryComboField />', () => {
                 ),
             },
         ])
+
         const result = render(
             <ComponentWithProvider dataForCustomProvider={customData}>
                 <RouterProvider router={router} />

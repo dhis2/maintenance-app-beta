@@ -5,12 +5,9 @@ import { Field as FieldRFF, useForm, useFormState } from 'react-final-form'
 import { AGGREGATION_TYPE, required, useSchemas } from '../../../lib'
 
 /**
- *
- * Field rule: When value type has a certain value, disable aggregationType
- *             field
- * Field rule: When value type has a certain value, disable aggregationType
- *             value to ''
- *
+ * Field rule: When value type has a certain value,
+ *             disable aggregationType field
+ * Field rule: When value type is disabled, set value to ''
  */
 const aggregationTypeHelpText = i18n.t(
     'The default way to aggregate this data element in analytics.'
