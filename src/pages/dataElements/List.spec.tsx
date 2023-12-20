@@ -7,17 +7,19 @@ import {
 } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
-import dataElementsMock from '../../__mocks__/gists/dataElementsMock.json'
-import filteredDataElementsMock from '../../__mocks__/gists/filteredDataElementsMock.json'
 import dataElementSchemaMock from '../../__mocks__/schema/dataElementsSchema.json'
-import { useModelListView } from '../../components/sectionList/listView'
 import { SECTIONS_MAP } from '../../lib'
 import { useSchemaStore } from '../../lib/schemas/schemaStore'
 import { ModelSchemas } from '../../lib/useLoadApp'
 import TestComponentWithRouter, {
     CustomData,
 } from '../../testUtils/TestComponentWithRouter'
+import dataElementsMock from './__mocks__/list/dataElementsMock.json'
+import filteredDataElementsMock from './__mocks__/list/filteredDataElementsMock.json'
 import { Component as DataElementList } from './List'
+
+const FIRST_DATA_ELEMENT = dataElementsMock.dataElements[0]
+const FIRST_FILTERED_DATA_ELEMENT = filteredDataElementsMock.dataElements[0]
 
 const renderSection = async (customData: CustomData) => {
     const routeOptions = {
@@ -33,6 +35,7 @@ const renderSection = async (customData: CustomData) => {
             <DataElementList />
         </TestComponentWithRouter>
     )
+
     await waitForElementToBeRemoved(() =>
         result.queryByTestId('dhis2-uicore-circularloader')
     )
@@ -63,7 +66,7 @@ describe('Data Elements List', () => {
 
     it('should show the list of elements', async () => {
         const customData = {
-            'dataElements/gist': dataElementsMock,
+            dataElements: dataElementsMock,
             userDataStore: defaultUserDataStoreData,
         }
         const { getByText, getByTestId } = await renderSection(customData)
@@ -72,7 +75,7 @@ describe('Data Elements List', () => {
             getByText('Accute Flaccid Paralysis (Deaths < 5 yrs)')
         ).not.toBeNull()
 
-        const { id } = dataElementsMock.result[0]
+        const { id } = FIRST_DATA_ELEMENT
         const firstRow = getByTestId(`section-list-row-${id}`)
         expect(firstRow).toHaveTextContent(
             /Accute Flaccid Paralysis \(Deaths < 5 yrs\)AggregateNumber\d+ years agoPublic can edit/
@@ -80,39 +83,39 @@ describe('Data Elements List', () => {
     })
     it('should display all the columns', async () => {
         const customData = {
-            'dataElements/gist': dataElementsMock,
+            dataElements: dataElementsMock,
             userDataStore: defaultUserDataStoreData,
         }
         const { getByText } = await renderSection(customData)
         const columns = [
             'Name',
             'Domain',
-            'Value',
+            'Value type',
             'Last updated',
             'Public access',
             'Actions',
         ]
-        columns.forEach((colummn) => {
-            expect(getByText(colummn)).not.toBeNull()
+
+        columns.forEach((column) => {
+            expect(getByText(column, { selector: 'span' })).not.toBeNull()
         })
     })
     it('should allow searching for value', async () => {
         const customData = {
             userDataStore: defaultUserDataStoreData,
-            'dataElements/gist': (
+            dataElements: (
                 resource: string,
                 r: { params: { filter: string[] } }
             ) => {
                 const filters = r.params.filter?.join(',')
-                switch (filters) {
-                    case '':
-                        return Promise.resolve(dataElementsMock)
-                    case '0:name:ilike:Age of LLINs,0:code:ilike:Age of LLINs,0:shortName:ilike:Age of LLINs,0:id:eq:Age of LLINs':
-                        return Promise.resolve(filteredDataElementsMock)
-                    default:
-                        return Promise.reject(
-                            `no matched data provider for resource:${resource},filters:${filters}`
-                        )
+                if (filters === '') {
+                    return Promise.resolve(dataElementsMock)
+                } else if (filters.startsWith('identifiable')) {
+                    return Promise.resolve(filteredDataElementsMock)
+                } else {
+                    return Promise.reject(
+                        `no matched data provider for resource:${resource},filters:${filters}`
+                    )
                 }
             },
         }
@@ -130,7 +133,7 @@ describe('Data Elements List', () => {
     it('should display error when an API call fails', async () => {
         const customData = {
             userDataStore: defaultUserDataStoreData,
-            'dataElements/gist': () => {
+            dataElements: () => {
                 return Promise.reject('401 backend error')
             },
         }
@@ -148,7 +151,7 @@ describe('Data Elements List', () => {
         const renderWithPager = async () => {
             const customData = {
                 userDataStore: defaultUserDataStoreData,
-                'dataElements/gist': (
+                dataElements: (
                     resource: string,
                     r: { params: { filter: string[]; page: number } }
                 ) => {
@@ -159,13 +162,11 @@ describe('Data Elements List', () => {
                             page: 1,
                             pageSize: 20,
                             total: 1061,
-                            nextPage:
-                                '/dataElements/gist?pageListName=result&total=true&order=name:ASC&fields=access,id,name,code,domainType,valueType,lastUpdated,sharing&pageSize=20&page=2',
                             pageCount: 54,
                         },
-                        result: [
+                        dataElements: [
                             {
-                                ...filteredDataElementsMock.result[0],
+                                ...FIRST_FILTERED_DATA_ELEMENT,
                                 name: 'first page result',
                             },
                         ],
@@ -175,15 +176,11 @@ describe('Data Elements List', () => {
                             page: 2,
                             pageSize: 20,
                             total: 1061,
-                            prevPage:
-                                '/dataElements/gist?pageListName=result&total=true&order=name:ASC&fields=access,id,name,code,domainType,valueType,lastUpdated,sharing&pageSize=20&page=1',
-                            nextPage:
-                                '/dataElements/gist?pageListName=result&total=true&order=name:ASC&fields=access,id,name,code,domainType,valueType,lastUpdated,sharing&pageSize=20&page=3',
                             pageCount: 54,
                         },
-                        result: [
+                        dataElements: [
                             {
-                                ...filteredDataElementsMock.result[0],
+                                ...FIRST_FILTERED_DATA_ELEMENT,
                                 name: 'second page result',
                             },
                         ],
@@ -252,18 +249,16 @@ describe('Data Elements List', () => {
         it.skip('should not show next in last page', async () => {
             const { getByTestId, findByText } = await renderSection({
                 userDataStore: defaultUserDataStoreData,
-                'dataElements/gist': {
+                dataElements: {
                     pager: {
                         page: 54,
                         pageSize: 20,
                         total: 1061,
-                        prevPage:
-                            '/dataElements/gist?pageListName=result&total=true&order=name:ASC&fields=access,id,name,code,domainType,valueType,lastUpdated,sharing&pageSize=20&page=53',
                         pageCount: 54,
                     },
                     result: [
                         {
-                            ...filteredDataElementsMock.result[0],
+                            ...FIRST_FILTERED_DATA_ELEMENT,
                             name: 'last page result',
                         },
                     ],
@@ -287,7 +282,7 @@ describe('Data Elements List', () => {
     it('should allow selecting all items', async () => {
         const customData = {
             userDataStore: defaultUserDataStoreData,
-            'dataElements/gist': dataElementsMock,
+            dataElements: dataElementsMock,
         }
         const { getByTestId, queryAllByTestId } = await renderSection(
             customData
@@ -307,10 +302,10 @@ describe('Data Elements List', () => {
     })
 
     // empty list
-    it('should allow selecting all items', async () => {
+    it('should show message when no items match filter', async () => {
         const customData = {
             userDataStore: defaultUserDataStoreData,
-            'dataElements/gist': { ...dataElementsMock, result: [] },
+            dataElements: { ...dataElementsMock, dataElements: [] },
         }
         const { getByTestId } = await renderSection(customData)
 

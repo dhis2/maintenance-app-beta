@@ -1,0 +1,211 @@
+{
+    "pager": {
+        "page": 1,
+        "total": 1037,
+        "pageSize": 20,
+        "nextPage": "http://localhost:8080/api/40/dataElements?page=2&pageSize=20&fields=name%2CdomainType%2CvalueType%2ClastUpdated%2Csharing%5Bpublic%5D%2Cid",
+        "pageCount": 52
+    },
+    "dataElements": [
+        {
+            "name": "Accute Flaccid Paralysis (Deaths < 5 yrs)",
+            "lastUpdated": "2017-05-19T15:13:52.488",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "NUMBER",
+            "domainType": "AGGREGATE",
+            "id": "FTRrcoaog83"
+        },
+        {
+            "name": "Acute Flaccid Paralysis (AFP) follow-up",
+            "lastUpdated": "2017-05-19T15:13:52.487",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "NUMBER",
+            "domainType": "AGGREGATE",
+            "id": "P3jJH5Tu5VC"
+        },
+        {
+            "name": "Acute Flaccid Paralysis (AFP) new",
+            "lastUpdated": "2017-05-19T15:13:52.487",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "NUMBER",
+            "domainType": "AGGREGATE",
+            "id": "FQ2o8UBlcrS"
+        },
+        {
+            "name": "Acute Flaccid Paralysis (AFP) referrals",
+            "lastUpdated": "2014-11-11T21:56:05.787",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "NUMBER",
+            "domainType": "AGGREGATE",
+            "id": "M62VHgYT2n0"
+        },
+        {
+            "name": "Additional medication",
+            "lastUpdated": "2019-08-21T13:08:02.032",
+            "sharing": {
+                "public": "r-------"
+            },
+            "valueType": "TEXT",
+            "domainType": "TRACKER",
+            "id": "WO8yRIZb7nb"
+        },
+        {
+            "name": "Additional notes related to facility",
+            "lastUpdated": "2014-11-11T21:56:05.454",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "LONG_TEXT",
+            "domainType": "AGGREGATE",
+            "id": "uF1DLnZNlWe"
+        },
+        {
+            "name": "Admission Date",
+            "lastUpdated": "2014-11-11T21:56:05.406",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "DATE",
+            "domainType": "TRACKER",
+            "id": "eMyVanycQSC"
+        },
+        {
+            "name": "Age in years",
+            "lastUpdated": "2017-06-02T11:41:14.500",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "INTEGER",
+            "domainType": "TRACKER",
+            "id": "qrur9Dvnyt5"
+        },
+        {
+            "name": "Age of LLINs",
+            "lastUpdated": "2019-08-21T13:08:02.032",
+            "sharing": {
+                "public": "r-------"
+            },
+            "valueType": "INTEGER_ZERO_OR_POSITIVE",
+            "domainType": "TRACKER",
+            "id": "JuTpJ2Ywq5b"
+        },
+        {
+            "name": "Albendazole given at ANC (2nd trimester)",
+            "lastUpdated": "2014-11-11T21:56:05.636",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "NUMBER",
+            "domainType": "AGGREGATE",
+            "id": "hCVSHjcml9g"
+        },
+        {
+            "name": "All access routes are clearly marked and safe",
+            "lastUpdated": "2015-03-11T12:00:11.266",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "TRUE_ONLY",
+            "domainType": "AGGREGATE",
+            "id": "rxt7nvPyRUi"
+        },
+        {
+            "name": "Allergies (multi-select)",
+            "lastUpdated": "2023-06-27T12:49:42.472",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "MULTI_TEXT",
+            "domainType": "AGGREGATE",
+            "id": "ZxH5QHtTTtX"
+        },
+        {
+            "name": "All other follow-ups",
+            "lastUpdated": "2014-11-11T21:56:05.627",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "NUMBER",
+            "domainType": "AGGREGATE",
+            "id": "RUv0hqER0zV"
+        },
+        {
+            "name": "All other new",
+            "lastUpdated": "2014-11-11T21:56:05.728",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "NUMBER",
+            "domainType": "AGGREGATE",
+            "id": "A2VfEfPflHV"
+        },
+        {
+            "name": "All other referrals",
+            "lastUpdated": "2014-11-11T21:56:05.792",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "NUMBER",
+            "domainType": "AGGREGATE",
+            "id": "laZLQdnucV1"
+        },
+        {
+            "name": "All sterilisation equipment is validated / licensed",
+            "lastUpdated": "2014-11-11T21:56:05.454",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "BOOLEAN",
+            "domainType": "AGGREGATE",
+            "id": "U7v0q0amJqi"
+        },
+        {
+            "name": "Anaemia follow-up",
+            "lastUpdated": "2014-11-11T21:56:05.908",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "NUMBER",
+            "domainType": "AGGREGATE",
+            "id": "jmWyJFtE7Af"
+        },
+        {
+            "name": "Anaemia new",
+            "lastUpdated": "2014-11-11T21:56:05.694",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "NUMBER",
+            "domainType": "AGGREGATE",
+            "id": "HLPuaFB7Frw"
+        },
+        {
+            "name": "Anaemia referrals",
+            "lastUpdated": "2014-11-11T21:56:05.700",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "NUMBER",
+            "domainType": "AGGREGATE",
+            "id": "yqBkn9CWKih"
+        },
+        {
+            "name": "An alternative to communicate if telephone line is off is always available",
+            "lastUpdated": "2014-11-11T21:56:05.445",
+            "sharing": {
+                "public": "rw------"
+            },
+            "valueType": "TRUE_ONLY",
+            "domainType": "AGGREGATE",
+            "id": "sPQgYGhXnXI"
+        }
+    ]
+}

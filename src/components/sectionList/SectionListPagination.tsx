@@ -5,14 +5,13 @@ import {
     NumericObjectParam,
     withDefault,
 } from 'use-query-params'
-import { GistPaginator } from '../../lib/'
-import { GistCollectionResponse } from '../../types/generated'
+import { Pager } from '../../types/generated'
 
 type SectionListPaginationProps = {
-    data: GistCollectionResponse | undefined
+    pager: Pager | undefined
 }
 
-type PaginationQueryParams = {
+export type PaginationQueryParams = {
     page: number
     pageSize: number
 }
@@ -67,19 +66,15 @@ const validatePagerParams = (
     }
 }
 
-function useUpdatePaginationParams(
-    data?: GistCollectionResponse
-): GistPaginator {
-    const pager = data?.pager
-    const [, setParams] = usePaginationQueryParams()
+type Paginator = {
+    changePageSize: (pageSize: number) => boolean
+    getPrevPage: () => boolean
+    goToPage: (page: number) => boolean
+    pager?: Pager
+}
 
-    const getNextPage = useCallback(() => {
-        if (!pager?.nextPage) {
-            return false
-        }
-        setParams((prevPager) => ({ ...prevPager, page: pager.page + 1 }))
-        return true
-    }, [pager, setParams])
+function useUpdatePaginationParams(pager?: Pager): Paginator {
+    const [, setParams] = usePaginationQueryParams()
 
     const getPrevPage = useCallback(() => {
         if (!pager?.prevPage) {
@@ -109,7 +104,6 @@ function useUpdatePaginationParams(
     )
 
     return {
-        getNextPage,
         getPrevPage,
         goToPage,
         changePageSize,
@@ -123,9 +117,11 @@ function useUpdatePaginationParams(
 const clamp = (value: number, min: number, max: number) =>
     Math.max(min, Math.min(value, max))
 
-export const SectionListPagination = ({ data }: SectionListPaginationProps) => {
+export const SectionListPagination = ({
+    pager,
+}: SectionListPaginationProps) => {
     const [paginationParams] = usePaginationQueryParams()
-    const pagination = useUpdatePaginationParams(data)
+    const pagination = useUpdatePaginationParams(pager)
 
     useEffect(() => {
         // since page can be controlled by params

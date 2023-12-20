@@ -1,3 +1,6 @@
+import { SchemaFieldPropertyType, type SchemaFieldProperty } from '../schemas'
+import type { Schema } from '../useLoadApp'
+
 export const stringToPathArray = (str: string): string[] => str.split('.')
 
 const resolvePath = (path: string | string[]): string[] => {
@@ -54,4 +57,30 @@ export const getFieldFilterFromPath = (
     }
 
     return recur(resolvePath(path), 0)
+}
+
+export const getSchemaPropertyForPath = (
+    schema: Schema,
+    path: string
+): SchemaFieldProperty | undefined => {
+    const pathParts = stringToPathArray(path).map((part) => {
+        if (part === 'id') {
+            return 'uid' // fieldName for 'id' is "uid" in schema.properties
+        }
+        return part
+    })
+    const rootPath = pathParts[0]
+
+    const schemaProperty = schema.properties[rootPath]
+    return schemaProperty
+}
+
+export const getFieldFilter = (schema: Schema, path: string) => {
+    const schemaProperty = getSchemaPropertyForPath(schema, path)
+
+    if (schemaProperty?.propertyType === SchemaFieldPropertyType.REFERENCE) {
+        return `${schemaProperty.fieldName}[id, displayName]`
+    }
+
+    return getFieldFilterFromPath(path)
 }

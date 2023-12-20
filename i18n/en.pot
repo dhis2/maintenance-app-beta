@@ -201,8 +201,8 @@ msgstr "Public access"
 msgid "Domain"
 msgstr "Domain"
 
-msgid "Value"
-msgstr "Value"
+msgid "Value type"
+msgstr "Value type"
 
 msgid "Category"
 msgstr "Category"
