@@ -34,6 +34,10 @@ type SectionListViewConfig<Key extends string = string> = {
     [key in Key]?: ViewConfig
 }
 
+const DESCRIPTORS = {
+    publicAccess: { path: 'sharing.public', label: i18n.t('Public access') },
+} satisfies Record<string, ModelPropertyDescriptor>
+
 // This is the default views, and can be overriden per section in modelListViewsConfig below
 const defaultModelViewConfig = {
     columns: {
@@ -46,10 +50,7 @@ const defaultModelViewConfig = {
             'href',
             'id',
             'lastUpdatedBy',
-            {
-                label: i18n.t('Public access'),
-                path: 'sharing.public',
-            },
+            DESCRIPTORS.publicAccess,
         ],
         default: ['name', 'sharing.public', 'lastUpdated'],
     },
@@ -69,13 +70,21 @@ const defaultModelViewConfig = {
 const modelListViewsConfig = {
     dataElement: {
         columns: {
-            available: ['zeroIsSignificant', 'categoryCombo'],
+            available: [
+                'zeroIsSignificant',
+                'categoryCombo',
+                // {
+                //     label: i18n.t('Hello available public'),
+                //     path: 'sharing.public',
+                // },
+            ],
             default: [
                 'name',
                 { label: i18n.t('Domain'), path: 'domainType' },
                 { label: i18n.t('Value type'), path: 'valueType' },
                 'lastUpdated',
-                'sharing.public',
+                // 'sharing.public',
+                { label: i18n.t('Hello public'), path: 'sharing.public' },
             ],
         },
         filters: {

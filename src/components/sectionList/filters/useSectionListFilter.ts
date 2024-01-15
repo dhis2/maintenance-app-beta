@@ -1,16 +1,18 @@
 import { useCallback, useMemo } from 'react'
 import { useQueryParam, ObjectParam, UrlUpdateType } from 'use-query-params'
-import { Schema, useSchemaFromHandle, CustomObjectParam } from '../../../lib'
+import {
+    Schema,
+    useSchemaFromHandle,
+    CustomObjectParam,
+    SectionListFilterObjectParamType,
+    getViewConfigForSection,
+    IDENTIFIABLE_KEY,
+} from '../../../lib'
 import { usePaginationQueryParams } from '../SectionListPagination'
 
 type ObjectParamType = typeof ObjectParam.default
 
 type Filters = Record<string, string | undefined>
-
-// special key for handling search for identifiable objects
-// eg. searches for name, code, id and shortname
-// this would translate to "token" in the old API, but does not exist in GIST-API
-export const IDENTIFIABLE_KEY = 'identifiable'
 
 const getVerifiedFiltersForSchema = (
     filters: ObjectParamType,
@@ -19,6 +21,23 @@ const getVerifiedFiltersForSchema = (
     if (!filters) {
         return {}
     }
+    /* TODO: verify values for filters */
+    const relevantFilters = Object.entries(filters).filter(([key]) => {
+        return key === IDENTIFIABLE_KEY || schema.properties[key]
+    })
+    return Object.fromEntries(relevantFilters)
+}
+
+const getRelevantFiltersForSchema = (
+    filters: SectionListFilterObjectParamType,
+    schema: Schema
+): Filters => {
+    if (!filters) {
+        return {}
+    }
+    const viewConfig = getViewConfigForSection(schema.singular)
+    const relevantFilterKeys =
+        viewConfig.filters.available.concat('identifiable')
     /* TODO: verify values for filters */
     const relevantFilters = Object.entries(filters).filter(([key]) => {
         return key === IDENTIFIABLE_KEY || schema.properties[key]
