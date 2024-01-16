@@ -1,0 +1,8 @@
+.legendsOptionsFooter {
+    padding: var(--spacers-dp8) 0;
+}
+
+.legendsPickedHeader {
+    padding: var(--spacers-dp8) 0;
+    margin: 0;
+}

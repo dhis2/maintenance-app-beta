@@ -1,6 +1,7 @@
 export * from './ColorAndIconPicker'
-export { Loader } from './loading'
+export * from './EditableFieldWrapper'
 export { HidePreventUnmount } from './HidePreventUnmount'
+export { Loader } from './loading'
 export * from './metadataFormControls'
 export * from './SearchableSingleSelect'
 export * from './sectionList'

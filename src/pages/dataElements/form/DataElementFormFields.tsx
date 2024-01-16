@@ -6,13 +6,13 @@ import {
     StandardFormSectionDescription,
     StandardFormField,
 } from '../../../components'
-import { CustomAttributes } from './CustomAttributes'
 import {
     AggregationLevelsField,
     AggregationTypeField,
     CategoryComboField,
     CodeField,
     ColorAndIconField,
+    CustomAttributes,
     DescriptionField,
     DomainField,
     FieldMaskField,
@@ -25,7 +25,7 @@ import {
     UrlField,
     ValueTypeField,
     ZeroIsSignificantField,
-} from './fields'
+} from '../fields'
 
 export function DataElementFormFields() {
     return (

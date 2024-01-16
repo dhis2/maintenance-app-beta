@@ -184,7 +184,6 @@ describe('Data Elements / New', () => {
             'Category combination (required)',
             'None'
         )
-
         fireEvent.click(submitButton)
 
         const listView = await result.findByText('List view')

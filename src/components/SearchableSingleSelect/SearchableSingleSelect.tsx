@@ -57,6 +57,7 @@ interface SearchableSingleSelectPropTypes {
     placeholder: string
     showEndLoader: boolean
     loading: boolean
+    disabled?: boolean
     selected?: string
     invalid?: boolean
     error?: string
@@ -67,6 +68,7 @@ interface SearchableSingleSelectPropTypes {
 
 export const SearchableSingleSelect = ({
     invalid,
+    disabled,
     error,
     loading,
     placeholder,
@@ -123,6 +125,7 @@ export const SearchableSingleSelect = ({
             // fetched the corresponding label yet. Therefore we don't want to pass in
             // any value to the "selected" prop, as otherwise an error will be thrown
             selected={hasSelectedInOptionList ? selected : ''}
+            disabled={disabled}
             error={invalid}
             onChange={onChange}
             placeholder={placeholder}
