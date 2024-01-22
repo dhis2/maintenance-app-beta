@@ -23,7 +23,13 @@ export function DataElementsField() {
 
     const newDataElementsLink = useHref('/dataElements/new')
     const dataElementsHandle = useRef({
+<<<<<<< HEAD
         refetch: () => console.error('Not initialized'),
+=======
+        refetch: () => {
+            throw new Error('Not initialized')
+        },
+>>>>>>> ced3ce0 (feat: add data element group New and Edit views)
     })
 
     const rightHeader = (
