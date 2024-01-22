@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-05T22:36:56.541Z\n"
-"PO-Revision-Date: 2024-03-05T22:36:56.541Z\n"
+"POT-Creation-Date: 2024-03-05T22:37:09.323Z\n"
+"PO-Revision-Date: 2024-03-05T22:37:09.323Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -80,6 +80,9 @@ msgstr "Category combo"
 
 msgid "None"
 msgstr "None"
+
+msgid "Filter data elements"
+msgstr "Filter data elements"
 
 msgid "Filter legend sets"
 msgstr "Filter legend sets"
@@ -636,9 +639,6 @@ msgstr "This field requires a unique value, please choose another one"
 msgid "Required"
 msgstr "Required"
 
-msgid "Custom attributes"
-msgstr "Custom attributes"
-
 msgid "Something went wrong when submitting the form"
 msgstr "Something went wrong when submitting the form"
 
@@ -647,6 +647,45 @@ msgstr "Save and close"
 
 msgid "Exit without saving"
 msgstr "Exit without saving"
+
+msgid "Create data element group"
+msgstr "Create data element group"
+
+msgid "Selected data elements"
+msgstr "Selected data elements"
+
+msgid "Refresh list"
+msgstr "Refresh list"
+
+msgid "Add new"
+msgstr "Add new"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Explain the purpose of this data element and how it's measured."
+msgstr "Explain the purpose of this data element and how it's measured."
+
+msgid "{{fieldLabel}} (required)"
+msgstr "{{fieldLabel}} (required)"
+
+msgid "A data element name should be concise and easy to recognize."
+msgstr "A data element name should be concise and easy to recognize."
+
+msgid "Often used in reports where space is limited"
+msgstr "Often used in reports where space is limited"
+
+msgid "Basic information"
+msgstr "Basic information"
+
+msgid "Set up the information for this data element group"
+msgstr "Set up the information for this data element group"
+
+msgid "@TODO"
+msgstr "@TODO"
+
+msgid "Custom attributes"
+msgstr "Custom attributes"
 
 msgid "Create data element"
 msgstr "Create data element"
@@ -659,9 +698,6 @@ msgstr "The default way to aggregate this data element in analytics."
 
 msgid "Disabled for the selected value type."
 msgstr "Disabled for the selected value type."
-
-msgid "{{fieldLabel}} (required)"
-msgstr "{{fieldLabel}} (required)"
 
 msgid "Aggregation type"
 msgstr "Aggregation type"
@@ -681,12 +717,6 @@ msgstr "Loading custom attributes"
 
 msgid "Something went wrong with retrieving the custom attributes"
 msgstr "Something went wrong with retrieving the custom attributes"
-
-msgid "Description"
-msgstr "Description"
-
-msgid "Explain the purpose of this data element and how it's measured."
-msgstr "Explain the purpose of this data element and how it's measured."
 
 msgid "Domain"
 msgstr "Domain"
@@ -712,15 +742,6 @@ msgstr "An alternative name used in section or automatic data entry forms."
 msgid "Selected legends"
 msgstr "Selected legends"
 
-msgid "Refresh list"
-msgstr "Refresh list"
-
-msgid "Add new"
-msgstr "Add new"
-
-msgid "A data element name should be concise and easy to recognize."
-msgstr "A data element name should be concise and easy to recognize."
-
 msgid "Option set comment"
 msgstr "Option set comment"
 
@@ -729,9 +750,6 @@ msgstr "Choose a set of predefined comment for data entry"
 
 msgid "Choose a set of predefined options for data entry"
 msgstr "Choose a set of predefined options for data entry"
-
-msgid "Often used in reports where space is limited"
-msgstr "Often used in reports where space is limited"
 
 msgid "Url"
 msgstr "Url"
@@ -751,9 +769,6 @@ msgstr ""
 
 msgid "Store zero data values"
 msgstr "Store zero data values"
-
-msgid "Basic information"
-msgstr "Basic information"
 
 msgid "Set up the information for this data element"
 msgstr "Set up the information for this data element"

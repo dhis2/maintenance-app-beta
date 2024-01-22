@@ -150,6 +150,7 @@ export const Component = () => {
                         <FormContents
                             submitError={submitError}
                             submitting={submitting}
+                            onCancelClick={() => navigate(listPath)}
                         />
                     </form>
                 )}
@@ -160,13 +161,14 @@ export const Component = () => {
 
 function FormContents({
     submitError,
+    onCancelClick,
     submitting,
 }: {
     submitting: boolean
+    onCancelClick: () => void
     submitError?: string
 }) {
     const formErrorRef = useRef<HTMLDivElement | null>(null)
-    const navigate = useNavigate()
 
     useEffect(() => {
         if (submitError) {
@@ -199,7 +201,7 @@ function FormContents({
                         cancelLabel={i18n.t('Exit without saving')}
                         submitLabel={i18n.t('Create data element')}
                         submitting={submitting}
-                        onCancelClick={() => navigate(listPath)}
+                        onCancelClick={onCancelClick}
                     />
                 </StandardFormSection>
             </div>
