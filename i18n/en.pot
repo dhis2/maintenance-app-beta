@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-05T22:40:52.624Z\n"
-"PO-Revision-Date: 2024-03-05T22:40:52.624Z\n"
+"POT-Creation-Date: 2024-03-05T22:43:53.123Z\n"
+"PO-Revision-Date: 2024-03-05T22:43:53.123Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -674,6 +674,12 @@ msgstr "Refresh list"
 
 msgid "Add new"
 msgstr "Add new"
+
+msgid "Explain the purpose of this data element and how it's measured."
+msgstr "Explain the purpose of this data element and how it's measured."
+
+msgid "A data element name should be concise and easy to recognize."
+msgstr "A data element name should be concise and easy to recognize."
 
 msgid "Basic information"
 msgstr "Basic information"
