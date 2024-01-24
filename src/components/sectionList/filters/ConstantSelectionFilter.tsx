@@ -1,14 +1,14 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelect, SingleSelectOption } from '@dhis2/ui'
 import React from 'react'
+import { FilterKey, useSectionListFilter } from '../../../lib'
 import { SelectOnChangeObject } from '../../../types'
 import css from './Filters.module.css'
-import { useSectionListFilter } from './useSectionListFilter'
 
 type ConstantSelectionFilterProps = {
     label: string
     constants: Record<string, string>
-    filterKey: string
+    filterKey: FilterKey
     filterable?: boolean
 }
 
@@ -19,13 +19,14 @@ export const ConstantSelectionFilter = ({
     filterable,
 }: ConstantSelectionFilterProps) => {
     const [filter, setFilter] = useSectionListFilter(filterKey)
+
     return (
         <SingleSelect
             className={css.constantSelectionFilter}
             onChange={({ selected }: SelectOnChangeObject) => {
-                setFilter(selected)
+                setFilter(selected ? [selected] : undefined)
             }}
-            selected={filter}
+            selected={Array.isArray(filter) ? filter[0] : filter}
             placeholder={label}
             dense
             filterable={filterable}

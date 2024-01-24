@@ -1,3 +1,2 @@
 export * from './viewConfigResolver'
-export * from './sectionListViewFilterKeys'
-// export * from './sectionListViewsConfig'
+export * from './sectionListViewsConfig'

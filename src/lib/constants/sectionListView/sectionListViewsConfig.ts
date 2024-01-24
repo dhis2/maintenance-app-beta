@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import type { ConfigurableFilterKey } from './sectionListViewFilterKeys'
+import type { ConfigurableFilterKey } from '../../sectionList/filters/'
 
 export interface ModelPropertyDescriptor {
     label: string

@@ -7,7 +7,7 @@ import {
     useQueryParamsForModelGist,
 } from '../../components'
 import { useModelListView } from '../../components/sectionList/listView'
-import { useSchemaFromHandle } from '../../lib/'
+import { useSchemaFromHandle, useParamsForDataQuery } from '../../lib/'
 import { getFieldFilter } from '../../lib/models/path'
 import { Query, WrapQueryResponse } from '../../types'
 import { DataElement, ModelCollectionResponse } from '../../types/models'
@@ -38,7 +38,7 @@ const query: Query = {
 
 export const Component = () => {
     const { columns, query: listViewQuery } = useModelListView()
-    const initialParams = useQueryParamsForModelGist()
+    const initialParams = useParamsForDataQuery()
     const schema = useSchemaFromHandle()
     const { refetch, error, data } = useDataQuery<DataElementsResponse>(
         query,
