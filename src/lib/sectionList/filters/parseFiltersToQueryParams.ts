@@ -14,9 +14,9 @@ const getQueryParamForFilter = (
     key: FilterKey,
     value: AllValues,
     section?: Section
-): string => {
+): string | undefined => {
     if (!value) {
-        return ''
+        return undefined
     }
     if (key === 'identifiable') {
         return `identifiable:token:${value}`
@@ -34,13 +34,13 @@ export const parseFiltersToQueryParams = (
     filters: ParsedFilterParams,
     section?: Section
 ): string[] => {
-    const queryFilters: string[] = []
-    for (const [key, value] of Object.entries(filters)) {
-        if (!value) {
-            continue
-        }
-        const filter = getQueryParamForFilter(key as FilterKey, value, section)
-        queryFilters.push(filter)
-    }
+    const queryFilters = Object.entries(filters)
+        .map(([key, value]) =>
+            getQueryParamForFilter(key as FilterKey, value, section)
+        )
+        .filter(
+            (queryFilter): queryFilter is string => queryFilter !== undefined
+        )
+
     return queryFilters
 }
