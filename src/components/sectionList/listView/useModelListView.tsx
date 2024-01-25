@@ -78,8 +78,8 @@ const parseViewToModelListView = (
             return columnConfig as NonNullable<typeof columnConfig>
         })
 
-    const filters = viewConfig.filters.available.filter((col) =>
-        parsedView.filters.includes(col.path)
+    const filters = viewConfig.filters.available.filter((filterDescriptor) =>
+        parsedView.filters.includes(filterDescriptor.filterKey)
     )
 
     return {
@@ -95,7 +95,7 @@ const formatViewToDataStore = (
     const savedView = {
         ...view,
         columns: view.columns.map((c) => c.path),
-        filters: view.filters.map((f) => f.path),
+        filters: view.filters.map((f) => f.filterKey),
     }
 
     return savedView

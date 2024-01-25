@@ -1,9 +1,5 @@
 import { useMemo } from 'react'
-import {
-    useModelSectionHandleOrThrow,
-    useSectionHandle,
-} from './../../routeUtils/useSectionHandle'
-import { ParsedFilterParams } from './filtersQueryParamSimple'
+import { useSectionHandle } from './../../routeUtils/useSectionHandle'
 import { parseFiltersToQueryParams } from './parseFiltersToQueryParams'
 import { useSectionListFilters } from './useSectionListFilters'
 

@@ -4,7 +4,6 @@ import {
     SectionListWrapper,
     DomainTypeSelectionFilter,
     ValueTypeSelectionFilter,
-    useQueryParamsForModelGist,
 } from '../../components'
 import { useModelListView } from '../../components/sectionList/listView'
 import { useSchemaFromHandle, useParamsForDataQuery } from '../../lib/'
