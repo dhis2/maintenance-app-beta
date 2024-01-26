@@ -1,10 +1,6 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import React, { useEffect } from 'react'
-import {
-    SectionListWrapper,
-    DomainTypeSelectionFilter,
-    ValueTypeSelectionFilter,
-} from '../../components'
+import { SectionListWrapper } from '../../components'
 import { useModelListView } from '../../components/sectionList/listView'
 import { useSchemaFromHandle, useParamsForDataQuery } from '../../lib/'
 import { getFieldFilter } from '../../lib/models/path'
@@ -62,12 +58,6 @@ export const Component = () => {
     return (
         <div>
             <SectionListWrapper
-                filterElement={
-                    <>
-                        <DomainTypeSelectionFilter />
-                        <ValueTypeSelectionFilter />
-                    </>
-                }
                 error={error}
                 data={data?.result.dataElements}
                 pager={data?.result.pager}

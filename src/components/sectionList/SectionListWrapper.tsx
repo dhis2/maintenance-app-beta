@@ -16,14 +16,12 @@ import { SectionListRow } from './SectionListRow'
 import { SectionListTitle } from './SectionListTitle'
 
 type SectionListWrapperProps = {
-    filterElement?: React.ReactElement
     data: ModelCollection | undefined
     pager: Pager | undefined
     error: FetchError | undefined
 }
 
 export const SectionListWrapper = ({
-    filterElement,
     data,
     error,
     pager,
