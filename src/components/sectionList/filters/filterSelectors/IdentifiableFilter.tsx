@@ -5,7 +5,7 @@ import {
     useDebounce,
     IDENTIFIABLE_KEY,
     useSectionListFilter,
-} from '../../../lib'
+} from '../../../../lib'
 import css from './Filters.module.css'
 
 export const IdentifiableFilter = () => {

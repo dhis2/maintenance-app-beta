@@ -15,7 +15,7 @@ export const filterParamsSchema = z
         categoryCombo: zodArrayIds,
         dataSet: zodArrayIds,
         domainType: z.array(z.nativeEnum(DataElement.domainType)),
-        valueType: z.array(z.string()),
+        valueType: z.array(z.nativeEnum(DataElement.valueType)),
     })
     .partial()
 

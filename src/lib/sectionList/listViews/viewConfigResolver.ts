@@ -1,5 +1,5 @@
+import { getTranslatedProperty } from '../../constants/translatedModelProperties'
 import { uniqueBy } from '../../utils'
-import { getTranslatedProperty } from '../translatedModelProperties'
 import {
     defaultModelViewConfig,
     modelListViewsConfig,
@@ -23,7 +23,7 @@ interface ResolvedSectionListView {
     [key: string]: ResolvedViewConfig
 }
 
-const toModelPropertyDescriptor = (
+export const toModelPropertyDescriptor = (
     propertyConfig: ModelPropertyConfig
 ): ModelPropertyDescriptor => {
     if (typeof propertyConfig === 'string') {
@@ -35,7 +35,9 @@ const toModelPropertyDescriptor = (
     return propertyConfig
 }
 
-const toFilterDescriptor = (propertyConfig: FilterConfig): FilterDescriptor => {
+export const toFilterDescriptor = (
+    propertyConfig: FilterConfig
+): FilterDescriptor => {
     if (typeof propertyConfig === 'string') {
         return {
             label: getTranslatedProperty(propertyConfig),
@@ -111,7 +113,7 @@ const resolveListViewsConfig = () => {
     return merged
 }
 
-const mergedModelViewsConfig = resolveListViewsConfig()
+const resolvedModelViewsConfig = resolveListViewsConfig()
 const resolvedDefaultConfig = {
     columns: resolveColumnConfig(defaultModelViewConfig.columns),
     filters: resolveFilterConfig(defaultModelViewConfig.filters),
@@ -120,7 +122,7 @@ const resolvedDefaultConfig = {
 export const getViewConfigForSection = (
     sectionName: string
 ): ResolvedViewConfig => {
-    const resolvedConfig = mergedModelViewsConfig[sectionName]
+    const resolvedConfig = resolvedModelViewsConfig[sectionName]
     if (resolvedConfig) {
         return resolvedConfig
     }

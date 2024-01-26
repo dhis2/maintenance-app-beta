@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelect, SingleSelectOption } from '@dhis2/ui'
 import React from 'react'
-import { FilterKey, useSectionListFilter } from '../../../lib'
-import { SelectOnChangeObject } from '../../../types'
+import { FilterKey, useSectionListFilter } from '../../../../lib'
+import { SelectOnChangeObject } from '../../../../types'
 import css from './Filters.module.css'
 
 type ConstantSelectionFilterProps = {
@@ -19,7 +19,6 @@ export const ConstantSelectionFilter = ({
     filterable,
 }: ConstantSelectionFilterProps) => {
     const [filter, setFilter] = useSectionListFilter(filterKey)
-
     return (
         <SingleSelect
             className={css.constantSelectionFilter}
