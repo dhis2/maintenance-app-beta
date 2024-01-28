@@ -28,6 +28,7 @@ export const ConstantSelectionFilter = ({
             selected={Array.isArray(filter) ? filter[0] : filter}
             placeholder={label}
             dense
+            prefix={label}
             filterable={filterable}
             filterPlaceholder={i18n.t('Type to filter options')}
             noMatchText={i18n.t('No matches')}

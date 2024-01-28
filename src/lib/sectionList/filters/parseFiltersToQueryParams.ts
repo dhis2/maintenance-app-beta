@@ -27,6 +27,9 @@ const getQueryParamForFilter = (
             return `dataSetElements.dataSet.id:in:[${v.join(',')}]`
         }
     }
+    if (key === 'categoryCombo') {
+        return `categoryCombo.id:in:[${(value as string[]).join(',')}]`
+    }
     return defaultFilter(key, value)
 }
 
@@ -41,6 +44,5 @@ export const parseFiltersToQueryParams = (
         .filter(
             (queryFilter): queryFilter is string => queryFilter !== undefined
         )
-
     return queryFilters
 }

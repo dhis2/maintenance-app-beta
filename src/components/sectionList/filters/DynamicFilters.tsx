@@ -2,6 +2,8 @@ import React from 'react'
 import { ConfigurableFilterKey } from './../../../lib'
 import {
     AggregationTypeFilter,
+    CategoryComboFilter,
+    DataSetFilter,
     DomainTypeSelectionFilter,
     ValueTypeSelectionFilter,
 } from './filterSelectors'
@@ -10,6 +12,8 @@ import { useFilterKeys } from './useFilterKeys'
 type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
 
 const filterKeyToComponentMap: FilterKeyToComponentMap = {
+    categoryCombo: CategoryComboFilter,
+    dataSet: DataSetFilter,
     domainType: DomainTypeSelectionFilter,
     valueType: ValueTypeSelectionFilter,
     aggregationType: AggregationTypeFilter,
@@ -17,7 +21,6 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
 
 export const DynamicFilters = () => {
     const filterKeys = useFilterKeys()
-
     return (
         <>
             {filterKeys.map((filterKey) => {

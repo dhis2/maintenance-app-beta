@@ -17,8 +17,7 @@ export type FiltersWithValue = {
 
 export const useFilterKeys = () => {
     const [filters] = useSectionListFilters()
-    const views = useModelListView()
-    const viewFilters = views.filters
+    const { filters: viewFilters } = useModelListView()
     // combine filters and views, since filters in URL might not be selected for view
     // but we should show them when they have a value
     const filterKeys = useMemo(() => {

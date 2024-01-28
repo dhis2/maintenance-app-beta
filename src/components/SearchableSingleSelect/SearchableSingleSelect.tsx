@@ -6,11 +6,10 @@ import {
     SingleSelectOption,
 } from '@dhis2/ui'
 import React, { forwardRef, useEffect, useState } from 'react'
-// import { useDebouncedCallback } from 'use-debounce'
 import { useDebouncedState } from '../../lib'
 import classes from './SearchableSingleSelect.module.css'
 
-interface Option {
+export interface Option {
     value: string
     label: string
 }
@@ -55,6 +54,7 @@ interface SearchableSingleSelectPropTypes {
     onRetryClick: () => void
     options: Option[]
     placeholder: string
+    prefix?: string
     showEndLoader: boolean
     loading: boolean
     selected?: string
@@ -70,6 +70,7 @@ export const SearchableSingleSelect = ({
     error,
     loading,
     placeholder,
+    prefix,
     onBlur,
     onChange,
     onEndReached,
@@ -126,6 +127,7 @@ export const SearchableSingleSelect = ({
             error={invalid}
             onChange={onChange}
             placeholder={placeholder}
+            prefix={prefix}
             onBlur={onBlur}
             onFocus={onFocus}
         >

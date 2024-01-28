@@ -1,15 +1,6 @@
 import { useMemo } from 'react'
-import { useSectionListFilters } from './filters'
-import { parseFiltersToQueryParams } from './filters/parseFiltersToQueryParams'
+import { useFilterQueryParams } from './filters'
 import { usePaginationQueryParams } from './usePaginationParams'
-
-export const useFilterQueryParams = (): string[] => {
-    const [filters] = useSectionListFilters()
-
-    return useMemo(() => {
-        return parseFiltersToQueryParams(filters)
-    }, [filters])
-}
 
 export const useParamsForDataQuery = () => {
     const [paginationParams] = usePaginationQueryParams()
