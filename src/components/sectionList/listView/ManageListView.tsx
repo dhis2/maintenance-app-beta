@@ -29,7 +29,7 @@ type FormValues = {
 }
 const validate = (values: FormValues) => {
     const errors: Record<string, string> = {}
-    console.log({ values })
+
     if (values.columns.length < 1) {
         errors.columns = i18n.t('At least one column must be selected')
     }
@@ -91,7 +91,6 @@ export const ManageListView = ({
     return (
         <>
             <Form
-                validateOnBlur
                 onSubmit={handleSave}
                 initialValues={initialValues}
                 validate={validate}

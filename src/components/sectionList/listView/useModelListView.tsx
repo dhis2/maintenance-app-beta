@@ -221,6 +221,5 @@ export const useMutateModelListViews = () => {
         [saveView]
     )
 
-    console.log({ saveColumns, saveView })
     return { mutation, saveColumns, saveView }
 }
