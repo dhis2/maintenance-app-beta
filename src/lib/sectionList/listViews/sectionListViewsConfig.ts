@@ -45,6 +45,10 @@ const FILTERS = {
         label: i18n.t('Category combo'),
     },
     dataSet: { filterKey: 'dataSet', label: i18n.t('Data set') },
+    publicAccess: {
+        filterKey: 'publicAccess',
+        label: i18n.t('Public access'),
+    },
 } satisfies Record<string, FilterDescriptor>
 
 // This is the default views, and can be overriden per section in modelListViewsConfig below
@@ -98,7 +102,7 @@ export const modelListViewsConfig = {
                 FILTERS.dataSet,
                 'categoryCombo',
             ],
-            available: ['categoryCombo'],
+            available: ['categoryCombo', FILTERS.publicAccess],
         },
     },
 } satisfies SectionListViewConfig

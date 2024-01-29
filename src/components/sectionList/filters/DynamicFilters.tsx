@@ -7,6 +7,7 @@ import {
     DomainTypeSelectionFilter,
     ValueTypeSelectionFilter,
 } from './filterSelectors'
+import { PublicAccessFilter } from './filterSelectors/PublicAccessFilter'
 import { useFilterKeys } from './useFilterKeys'
 
 type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
@@ -17,6 +18,7 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
     domainType: DomainTypeSelectionFilter,
     valueType: ValueTypeSelectionFilter,
     aggregationType: AggregationTypeFilter,
+    publicAccess: PublicAccessFilter,
 }
 
 export const DynamicFilters = () => {

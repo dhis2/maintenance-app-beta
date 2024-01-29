@@ -19,13 +19,18 @@ export const ConstantSelectionFilter = ({
     filterable,
 }: ConstantSelectionFilterProps) => {
     const [filter, setFilter] = useSectionListFilter(filterKey)
+
+    const selected = Array.isArray(filter) ? filter[0] : filter
+    const isInOptions =
+        selected && constants[selected as keyof typeof constants]
+
     return (
         <SingleSelect
             className={css.constantSelectionFilter}
             onChange={({ selected }: SelectOnChangeObject) => {
                 setFilter(selected ? [selected] : undefined)
             }}
-            selected={Array.isArray(filter) ? filter[0] : filter}
+            selected={isInOptions ? selected : undefined}
             placeholder={label}
             dense
             prefix={label}

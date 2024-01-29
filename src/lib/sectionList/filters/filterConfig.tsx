@@ -2,7 +2,7 @@ import { StringParam } from 'use-query-params'
 import { z } from 'zod'
 import { DataElement } from '../../../types/generated'
 import { IDENTIFIABLE_KEY } from '../../constants'
-import { isValidUid } from '../../models'
+import { isValidUid, parsePublicAccessString } from '../../models'
 import { CustomDelimitedArrayParam } from './customParams'
 
 const zodArrayIds = z.array(z.string().refine((val) => isValidUid(val)))
@@ -15,6 +15,9 @@ export const filterParamsSchema = z
         categoryCombo: zodArrayIds,
         dataSet: zodArrayIds,
         domainType: z.array(z.nativeEnum(DataElement.domainType)),
+        publicAccess: z.array(
+            z.string().refine((val) => parsePublicAccessString(val) !== null)
+        ),
         valueType: z.array(z.nativeEnum(DataElement.valueType)),
     })
     .partial()
@@ -28,6 +31,7 @@ export const filterQueryParamType = {
     valueType: CustomDelimitedArrayParam,
     dataSet: CustomDelimitedArrayParam,
     categoryCombo: CustomDelimitedArrayParam,
+    publicAccess: CustomDelimitedArrayParam,
 } as const satisfies QueryParamsConfigMap
 
 export const validFilterKeys = Object.keys(filterQueryParamType)

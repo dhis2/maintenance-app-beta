@@ -10,6 +10,9 @@ const defaultFilter = (key: FilterKey, value: AllValues): string => {
     return `${key}:${operator}:${valuesString}`
 }
 
+const inFilter = (filterPath: string, value: string[]) =>
+    `${filterPath}:in:[${value.join(',')}]`
+
 const getQueryParamForFilter = (
     key: FilterKey,
     value: AllValues,
@@ -24,11 +27,14 @@ const getQueryParamForFilter = (
     if (key === 'dataSet') {
         const v = value as string[]
         if (section?.name === SECTIONS_MAP.dataElement.name) {
-            return `dataSetElements.dataSet.id:in:[${v.join(',')}]`
+            return inFilter('dataSetElements.dataSet.id', v)
         }
     }
     if (key === 'categoryCombo') {
-        return `categoryCombo.id:in:[${(value as string[]).join(',')}]`
+        return inFilter('categoryCombo.id', value as string[])
+    }
+    if (key === 'publicAccess') {
+        return inFilter('sharing.public', value as string[])
     }
     return defaultFilter(key, value)
 }
