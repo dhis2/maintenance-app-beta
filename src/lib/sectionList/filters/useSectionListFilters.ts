@@ -1,9 +1,6 @@
 import { useCallback, useMemo } from 'react'
 import { useQueryParams } from 'use-query-params'
-import {
-    usePaginationQueryParams,
-    useUpdatePaginationParams,
-} from '../usePaginationParams'
+import { usePaginationQueryParams } from '../usePaginationParams'
 import {
     ParsedFilterParams,
     filterQueryParamType,
@@ -34,9 +31,10 @@ export const useSectionListFilters = () => {
                 const resetParams = Object.fromEntries(
                     validFilterKeys.map((key) => [key, undefined])
                 )
-                return setFilterParams(resetParams)
+                setFilterParams(resetParams)
+            } else {
+                setFilterParams(filter, updateType)
             }
-            setFilterParams(filter, updateType)
             // set page to 1 when filter changes
             // do this here instead of useEffect to prevent unnecessary refetches
             setPagingParams((pagingParams) => ({ ...pagingParams, page: 1 }))
