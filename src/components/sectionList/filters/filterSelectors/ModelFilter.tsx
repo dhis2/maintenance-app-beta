@@ -1,7 +1,7 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import React, { useCallback, useRef, useState } from 'react'
-import type { Query } from '../../../../types'
-import { Pager } from '../../../../types/generated'
+import { useInfiniteDataQuery } from '../../../../lib/query'
+import type { ResultQuery } from '../../../../types'
 import { Option, SearchableSingleSelect } from '../../../SearchableSingleSelect'
 
 function computeDisplayOptions({
@@ -34,27 +34,15 @@ function computeDisplayOptions({
     }))
 }
 
-type ModelQuery = {
-    result: Query[keyof Query]
-}
-
 type OptionResult = {
     id: string
     displayName: string
 }
 
-type OptionsResult = {
-    result: {
-        pager: Pager
-    } & { [key: string]: OptionResult[] }
-}
-
-type PagedResult = { pager: Pager } & OptionsResult
-
 const createInitialOptionQuery = (
     resource: string,
     selected?: string
-): ModelQuery => ({
+): ResultQuery => ({
     result: {
         resource: resource,
         id: selected,
@@ -69,7 +57,7 @@ export interface ModelSingleSelectProps {
     onChange: ({ selected }: { selected: string | undefined }) => void
     selected?: string
     placeholder: string
-    query: Query
+    query: ResultQuery
 }
 
 export const ModelFilterSelect = ({
@@ -82,7 +70,6 @@ export const ModelFilterSelect = ({
     // We're using this value only when imperatively calling `refetch`,
     // nothing that depends on the render-cycle depends on this value
     const filterRef = useRef<string | undefined>()
-    const pageRef = useRef(0)
 
     const [initialQuery] = useState(() =>
         createInitialOptionQuery(query.result.resource, selected)
@@ -101,9 +88,9 @@ export const ModelFilterSelect = ({
     // the page with the selected option hasn't been reached yet or when
     // filtering)
     const [selectedOption, setSelectedOption] = useState<OptionResult>()
-
-    const optionsQueryResult = useDataQuery<PagedResult>(query)
-    const { refetch, data } = optionsQueryResult
+    const optionsQueryResult = useInfiniteDataQuery<OptionResult>(query)
+    // const optionsQueryResult = useDataQuery<PagedResult>(query)
+    const { refetch, data, incrementPage } = optionsQueryResult
 
     const pager = data?.result.pager
     const page = pager?.page || 0
@@ -111,20 +98,14 @@ export const ModelFilterSelect = ({
 
     const refetchWithFilter = useCallback(
         ({ value }: { value: string }) => {
-            pageRef.current = 1
             filterRef.current = value ? `displayName:ilike:${value}` : undefined
             refetch({
-                page: pageRef.current,
-                filter: value ? filterRef.current : undefined,
+                page: 1,
+                filter: filterRef.current,
             })
         },
         [refetch]
     )
-
-    const incrementPage = useCallback(() => {
-        pageRef.current = page + 1
-        refetch({ page: pageRef.current, filter: filterRef.current })
-    }, [refetch, page])
 
     const loading =
         optionsQueryResult.fetching ||
@@ -145,33 +126,36 @@ export const ModelFilterSelect = ({
     })
 
     return (
-        <SearchableSingleSelect
-            placeholder={placeholder}
-            prefix={placeholder}
-            showAllOption={true}
-            onChange={({ selected }) => {
-                if (selected === selectedOption?.id) {
-                    setSelectedOption(undefined)
-                } else {
-                    const option = options.find(({ id }) => id === selected)
-                    setSelectedOption(option)
-                }
+        <div style={{ minWidth: 200 }}>
+            <SearchableSingleSelect
+                dense
+                placeholder={placeholder}
+                prefix={placeholder}
+                showAllOption={true}
+                onChange={({ selected }) => {
+                    if (selected === selectedOption?.id) {
+                        setSelectedOption(undefined)
+                    } else {
+                        const option = options.find(({ id }) => id === selected)
+                        setSelectedOption(option)
+                    }
 
-                onChange({ selected: selected })
-            }}
-            onEndReached={incrementPage}
-            options={displayOptions}
-            selected={selected}
-            showEndLoader={!loading && page < pageCount}
-            onFilterChange={refetchWithFilter}
-            loading={loading}
-            error={error}
-            onRetryClick={() => {
-                refetch({
-                    page: pageRef.current,
-                    filter: filterRef.current,
-                })
-            }}
-        />
+                    onChange({ selected: selected })
+                }}
+                onEndReached={incrementPage}
+                options={displayOptions}
+                selected={selected}
+                showEndLoader={!loading && page < pageCount}
+                onFilterChange={refetchWithFilter}
+                loading={loading}
+                error={error}
+                onRetryClick={() => {
+                    refetch({
+                        page: page,
+                        filter: filterRef.current,
+                    })
+                }}
+            />
+        </div>
     )
 }

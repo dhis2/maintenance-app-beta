@@ -1,6 +1,6 @@
-import { Query } from '../../../../types'
+import { ResultQuery } from '../../../../types'
 
-export const createFilterDataQuery = (resource: string): Query => ({
+export const createFilterDataQuery = (resource: string): ResultQuery => ({
     result: {
         resource: resource,
         params: (params) => ({

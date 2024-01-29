@@ -52,6 +52,7 @@ interface SearchableSingleSelectPropTypes {
     onFilterChange: OnFilterChange
     onEndReached: () => void
     onRetryClick: () => void
+    dense?: boolean
     options: Option[]
     placeholder: string
     prefix?: string
@@ -68,6 +69,7 @@ interface SearchableSingleSelectPropTypes {
 export const SearchableSingleSelect = ({
     invalid,
     error,
+    dense,
     loading,
     placeholder,
     prefix,
@@ -130,6 +132,7 @@ export const SearchableSingleSelect = ({
             prefix={prefix}
             onBlur={onBlur}
             onFocus={onFocus}
+            dense={dense}
         >
             <div className={classes.searchField}>
                 <div className={classes.searchInput}>
