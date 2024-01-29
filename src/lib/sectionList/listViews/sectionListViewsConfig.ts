@@ -86,13 +86,13 @@ export const defaultModelViewConfig = {
 export const modelListViewsConfig = {
     dataElement: {
         columns: {
-            available: ['zeroIsSignificant', 'categoryCombo'],
+            available: ['zeroIsSignificant', DESCRIPTORS.publicAccess],
             default: [
                 'name',
                 { label: i18n.t('Domain'), path: 'domainType' },
                 { label: i18n.t('Value type'), path: 'valueType' },
+                'categoryCombo',
                 'lastUpdated',
-                DESCRIPTORS.publicAccess,
             ],
         },
         filters: {
