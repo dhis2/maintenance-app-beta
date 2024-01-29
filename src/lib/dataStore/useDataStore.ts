@@ -124,7 +124,6 @@ export const useMutateDataStoreValuesQuery = (options: ValuesOptions) => {
             global: mergedOptions.global,
             data,
         })
-        //  queryClient.setQueryData(valuesQueryKey, data)
         return await engine.mutate(mutation)
     }
     const mutation = useMutation({

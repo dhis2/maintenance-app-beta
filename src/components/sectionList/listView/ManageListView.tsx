@@ -1,6 +1,7 @@
 import { FetchError } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button, Field, NoticeBox, Transfer, TransferOption } from '@dhis2/ui'
+import { FORM_ERROR } from 'final-form'
 import React, { useMemo } from 'react'
 import { Form, useField } from 'react-final-form'
 import {
@@ -8,7 +9,6 @@ import {
     getFiltersForSection,
     useModelSectionHandleOrThrow,
 } from '../../../lib'
-import { LoadingSpinner } from '../../loading/LoadingSpinner'
 import css from './ManageListView.module.css'
 import { useModelListView, useMutateModelListViews } from './useModelListView'
 
@@ -48,24 +48,28 @@ export const ManageListView = ({
         query,
     } = useModelListView()
     const section = useModelSectionHandleOrThrow()
-    const { saveView } = useMutateModelListViews()
+    const { saveView, mutation } = useMutateModelListViews()
 
     const columnsConfig = getColumnsForSection(section.name)
     const filtersConfig = getFiltersForSection(section.name)
 
-    const handleSave = (values: FormValues) => {
-        return new Promise((resolve, reject) => {
-            const view = {
-                name: 'default',
-                columns: values.columns,
-                filters: values.filters,
-            }
+    const handleSave = async (values: FormValues) => {
+        const view = {
+            name: 'default',
+            columns: values.columns,
+            filters: values.filters,
+        }
+
+        return new Promise((resolve) => {
             saveView(view, {
                 onSuccess: () => resolve(onSaved()),
                 onError: (error) => {
                     if (error instanceof FetchError) {
-                        reject(error)
+                        resolve({ [FORM_ERROR]: error.message })
                     }
+                    resolve({
+                        [FORM_ERROR]: i18n.t('An unknown error occurred'),
+                    })
                 },
             })
         })
@@ -82,11 +86,7 @@ export const ManageListView = ({
                     ? savedFilters.map((f) => f.filterKey)
                     : filtersConfig.default.map((f) => f.filterKey),
         }
-    }, [savedColumns, savedFilters, columnsConfig, filtersConfig])
-
-    if (query.isLoading) {
-        return <LoadingSpinner />
-    }
+    }, [savedFilters, savedColumns, filtersConfig, columnsConfig])
 
     return (
         <>
@@ -99,6 +99,7 @@ export const ManageListView = ({
                     <form onSubmit={handleSubmit}>
                         <TransferField
                             name={'columns'}
+                            loading={query.isLoading}
                             defaultOptions={columnsConfig.default.map(
                                 (c) => c.path
                             )}
@@ -108,6 +109,7 @@ export const ManageListView = ({
                         />
                         <TransferField
                             name={'filters'}
+                            loading={query.isLoading}
                             defaultOptions={filtersConfig.default.map(
                                 (c) => c.filterKey
                             )}
@@ -121,7 +123,7 @@ export const ManageListView = ({
                                     error
                                     title={i18n.t('Failed to save')}
                                 >
-                                    {submitError.message}
+                                    {submitError}
                                 </NoticeBox>
                             </p>
                         )}
@@ -137,18 +139,19 @@ export const ManageListView = ({
 
 type TransferField = {
     name: string
+    loading?: boolean
     defaultOptions: string[]
     availableOptions: TransferOption[]
 }
 const TransferField = ({
     name,
+    loading,
     defaultOptions,
     availableOptions,
 }: TransferField) => {
     const { input, meta } = useField(name, {
         multiple: true,
     })
-
     const handleSetDefault = () => {
         input.onChange(defaultOptions)
     }
@@ -161,6 +164,7 @@ const TransferField = ({
             >
                 <Transfer
                     height={'320px'}
+                    loading={loading}
                     enableOrderChange
                     leftHeader={
                         <TransferHeader>{i18n.t('Available')}</TransferHeader>
