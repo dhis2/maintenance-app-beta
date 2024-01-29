@@ -48,7 +48,7 @@ export const ManageListView = ({
         query,
     } = useModelListView()
     const section = useModelSectionHandleOrThrow()
-    const { saveView, mutation } = useMutateModelListViews()
+    const { saveView } = useMutateModelListViews()
 
     const columnsConfig = getColumnsForSection(section.name)
     const filtersConfig = getFiltersForSection(section.name)

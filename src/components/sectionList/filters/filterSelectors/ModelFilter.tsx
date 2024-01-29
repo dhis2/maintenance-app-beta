@@ -1,31 +1,37 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import React, { useCallback, useRef, useState } from 'react'
 import { useInfiniteDataQuery } from '../../../../lib/query'
-import type { ResultQuery } from '../../../../types'
+import type { ResultQuery, WrapQueryResponse } from '../../../../types'
 import { Option, SearchableSingleSelect } from '../../../SearchableSingleSelect'
 
+type OptionResult = {
+    id: string
+    displayName: string
+}
+
 function computeDisplayOptions({
-    selected,
-    selectedOption,
+    initialSelectedOption,
+    initialSelected,
     options,
 }: {
     options: OptionResult[]
-    selected?: string
-    required?: boolean
-    selectedOption?: OptionResult
+    initialSelected?: string
+    initialSelectedOption?: OptionResult
 }): Option[] {
     // This happens only when we haven't fetched the label for an initially
     // selected value. Don't show anything to prevent error that an option is
     // missing
-    if (!selectedOption && selected) {
+    if (!initialSelectedOption && initialSelected) {
         return []
     }
 
-    const optionsContainSelected = options?.find(({ id }) => id === selected)
+    const optionsContainSelected = options?.find(
+        ({ id }) => id === initialSelected
+    )
 
     const withSelectedOption =
-        selectedOption && !optionsContainSelected
-            ? [...options, selectedOption]
+        initialSelectedOption && !optionsContainSelected
+            ? [...options, initialSelectedOption]
             : options
 
     return withSelectedOption.map((option) => ({
@@ -34,22 +40,13 @@ function computeDisplayOptions({
     }))
 }
 
-type OptionResult = {
-    id: string
-    displayName: string
-}
-
-const createInitialOptionQuery = (
-    resource: string,
-    selected?: string
-): ResultQuery => ({
+const createInitialOptionQuery = (resource: string): ResultQuery => ({
     result: {
         resource: resource,
-        id: selected,
-        params: (params) => ({
-            ...params,
+        id: (variables: Record<string, string>) => variables.id,
+        params: {
             fields: ['id', 'displayName'],
-        }),
+        },
     },
 })
 
@@ -70,26 +67,30 @@ export const ModelFilterSelect = ({
     // We're using this value only when imperatively calling `refetch`,
     // nothing that depends on the render-cycle depends on this value
     const filterRef = useRef<string | undefined>()
-
-    const [initialQuery] = useState(() =>
-        createInitialOptionQuery(query.result.resource, selected)
-    )
-
-    const initialOptionResult = useDataQuery<OptionResult>(initialQuery, {
-        // run only when we have an initial selected value
-        lazy: initialQuery.result.id === undefined,
-        onComplete: (data) => {
-            setSelectedOption(data)
-        },
-    })
-
+    const initialSelected = useRef(selected)
     // We need to persist the selected option so we can display an <Option />
     // when the current list doesn't contain the selected option (e.g. when
     // the page with the selected option hasn't been reached yet or when
     // filtering)
-    const [selectedOption, setSelectedOption] = useState<OptionResult>()
+    const [initialSelectedOption, setInitialSelectedOption] =
+        useState<OptionResult>()
+    const [initialQuery] = useState(() =>
+        createInitialOptionQuery(query.result.resource)
+    )
+
+    const initialOptionResult = useDataQuery<WrapQueryResponse<OptionResult>>(
+        initialQuery,
+        {
+            // run only when we have an initial selected value
+            lazy: initialSelected.current === undefined,
+            variables: { id: selected },
+            onComplete: (data) => {
+                setInitialSelectedOption(data.result)
+            },
+        }
+    )
+
     const optionsQueryResult = useInfiniteDataQuery<OptionResult>(query)
-    // const optionsQueryResult = useDataQuery<PagedResult>(query)
     const { refetch, data, incrementPage } = optionsQueryResult
 
     const pager = data?.result.pager
@@ -120,8 +121,8 @@ export const ModelFilterSelect = ({
     const options = data?.result[dataResultKey] || []
 
     const displayOptions = computeDisplayOptions({
-        selected,
-        selectedOption,
+        initialSelectedOption,
+        initialSelected: initialSelected.current,
         options,
     })
 
@@ -133,14 +134,7 @@ export const ModelFilterSelect = ({
                 prefix={placeholder}
                 showAllOption={true}
                 onChange={({ selected }) => {
-                    if (selected === selectedOption?.id) {
-                        setSelectedOption(undefined)
-                    } else {
-                        const option = options.find(({ id }) => id === selected)
-                        setSelectedOption(option)
-                    }
-
-                    onChange({ selected: selected })
+                    onChange({ selected })
                 }}
                 onEndReached={incrementPage}
                 options={displayOptions}
