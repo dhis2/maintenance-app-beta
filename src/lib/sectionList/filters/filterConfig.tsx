@@ -1,7 +1,7 @@
 import { StringParam } from 'use-query-params'
 import { z } from 'zod'
 import { DataElement } from '../../../types/generated'
-import { IDENTIFIABLE_KEY } from '../../constants'
+import { IDENTIFIABLE_FILTER_KEY } from '../../constants'
 import { isValidUid, parsePublicAccessString } from '../../models'
 import { CustomDelimitedArrayParam } from './customParams'
 
@@ -10,7 +10,7 @@ const zodArrayIds = z.array(z.string().refine((val) => isValidUid(val)))
 /* Zod schema for validation of the decoded params */
 export const filterParamsSchema = z
     .object({
-        [IDENTIFIABLE_KEY]: z.string(),
+        [IDENTIFIABLE_FILTER_KEY]: z.string(),
         aggregationType: z.array(z.nativeEnum(DataElement.aggregationType)),
         categoryCombo: zodArrayIds,
         dataSet: zodArrayIds,
@@ -25,7 +25,7 @@ export const filterParamsSchema = z
 /* useQueryParams config-map object
 Mapping each filter to a config object that handles encoding/decoding */
 export const filterQueryParamType = {
-    [IDENTIFIABLE_KEY]: StringParam,
+    [IDENTIFIABLE_FILTER_KEY]: StringParam,
     aggregationType: CustomDelimitedArrayParam,
     domainType: CustomDelimitedArrayParam,
     valueType: CustomDelimitedArrayParam,
@@ -53,5 +53,8 @@ type QueryParamsConfigMap = {
 
 export type FilterKey = keyof ParsedFilterParams
 // Identifiable is not configurable, and is always shown in the list
-export type ConfigurableFilterKey = Exclude<FilterKey, typeof IDENTIFIABLE_KEY>
+export type ConfigurableFilterKey = Exclude<
+    FilterKey,
+    typeof IDENTIFIABLE_FILTER_KEY
+>
 export type FilterKeys = FilterKey[]

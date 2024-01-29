@@ -1,19 +1,10 @@
 import { useMemo } from 'react'
 import {
     useSectionListFilters,
-    ParsedFilterParams,
     ConfigurableFilterKey,
-    IDENTIFIABLE_KEY,
+    IDENTIFIABLE_FILTER_KEY,
 } from '../../../lib'
 import { useModelListView } from '../listView'
-
-export type FiltersWithValue = {
-    [FilterKey in ConfigurableFilterKey]: {
-        value: ParsedFilterParams[FilterKey]
-        label: string
-        filterKey: FilterKey
-    }
-}
 
 export const useFilterKeys = () => {
     const [filters] = useSectionListFilters()
@@ -26,7 +17,7 @@ export const useFilterKeys = () => {
             .filter(
                 ([filterKey, value]) =>
                     value !== undefined &&
-                    filterKey !== IDENTIFIABLE_KEY &&
+                    filterKey !== IDENTIFIABLE_FILTER_KEY &&
                     !viewFilterKeys.includes(filterKey as ConfigurableFilterKey)
             )
             .map(([filterKey]) => filterKey) as ConfigurableFilterKey[]
