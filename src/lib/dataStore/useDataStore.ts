@@ -102,6 +102,7 @@ export function useDataStoreValuesQuery<
         queryKey: [query],
         queryFn: createBoundQueryFn(engine),
         placeholderData,
+        // keepPreviousData: true,
         // hide ".result" from consumer
         select: (data) => select(data.result) as SelectResult,
     })
@@ -123,6 +124,7 @@ export const useMutateDataStoreValuesQuery = (options: ValuesOptions) => {
             global: mergedOptions.global,
             data,
         })
+        //  queryClient.setQueryData(valuesQueryKey, data)
         return await engine.mutate(mutation)
     }
     const mutation = useMutation({

@@ -39,6 +39,14 @@ const DESCRIPTORS = {
     publicAccess: { path: 'sharing.public', label: i18n.t('Public access') },
 } satisfies Record<string, ModelPropertyDescriptor>
 
+const FILTERS = {
+    categoryCombo: {
+        filterKey: 'categoryCombo',
+        label: i18n.t('Category combo'),
+    },
+    dataSet: { filterKey: 'dataSet', label: i18n.t('Data set') },
+} satisfies Record<string, FilterDescriptor>
+
 // This is the default views, and can be overriden per section in modelListViewsConfig below
 export const defaultModelViewConfig = {
     columns: {
@@ -84,7 +92,12 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            default: ['domainType', 'valueType', 'dataSet', 'categoryCombo'],
+            default: [
+                'domainType',
+                'valueType',
+                FILTERS.dataSet,
+                'categoryCombo',
+            ],
             available: ['categoryCombo'],
         },
     },

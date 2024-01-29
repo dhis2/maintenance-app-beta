@@ -14,7 +14,7 @@ import {
 export const useSectionListFilters = () => {
     const [filters, setFilterParams] = useQueryParams(filterQueryParamType)
     const [, setPagingParams] = usePaginationQueryParams()
-    console.log({ filters })
+
     const parsedFilters = useMemo(() => {
         const parsed = filterParamsSchema.safeParse(filters)
         if (parsed.success) {

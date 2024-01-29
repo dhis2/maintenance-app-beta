@@ -22,24 +22,24 @@ export const ManageListViewDialog = ({
     return (
         <Modal onClose={onClose} position="top">
             <ModalTitle>
-                {i18n.t('Manage {{section}} table columns', {
+                {i18n.t('Manage {{section}} view', {
                     section: section.title,
                 })}
             </ModalTitle>
             <ModalContent>
                 <ManageListView onSaved={onClose}>
-                    {({ handleSave, isSaving }) => (
+                    {({ submitting }) => (
                         <ModalActions>
                             <ButtonStrip>
                                 <Button onClick={onClose} secondary>
                                     {i18n.t('Cancel')}
                                 </Button>
                                 <Button
-                                    onClick={handleSave}
+                                    type="submit"
                                     primary
-                                    loading={isSaving}
+                                    loading={submitting}
                                 >
-                                    {i18n.t('Update table columns')}
+                                    {i18n.t('Update view')}
                                 </Button>
                             </ButtonStrip>
                         </ModalActions>

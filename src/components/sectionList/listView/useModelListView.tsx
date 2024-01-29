@@ -138,7 +138,7 @@ export const useModelListView = () => {
         console.error(query.error)
     }
 
-    const selectedView = getDefaultViewForSection(section.name)
+    const selectedView = query.data || getDefaultViewForSection(section.name)
 
     const columns = selectedView.columns
     const filters = selectedView.filters
@@ -221,5 +221,6 @@ export const useMutateModelListViews = () => {
         [saveView]
     )
 
-    return { mutation, saveColumns }
+    console.log({ saveColumns, saveView })
+    return { mutation, saveColumns, saveView }
 }
