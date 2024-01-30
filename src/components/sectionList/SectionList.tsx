@@ -8,7 +8,9 @@ import {
     Checkbox,
 } from '@dhis2/ui'
 import React, { PropsWithChildren } from 'react'
+import { isSchemaSection, useSectionHandle } from '../../lib'
 import { CheckBoxOnChangeObject } from '../../types'
+import { HeaderColumnsSortable } from './ColumnHeaderSortable'
 import css from './SectionList.module.css'
 import { SelectedColumns } from './types'
 
@@ -28,7 +30,7 @@ export const SectionList = ({
         <DataTable className={css.list}>
             <TableHead>
                 <DataTableRow>
-                    <DataTableColumnHeader width="48px">
+                    <DataTableColumnHeader width={'48px'}>
                         <Checkbox
                             dataTest="section-list-selectall"
                             checked={allSelected}
@@ -51,13 +53,26 @@ const HeaderColumns = ({
     headerColumns,
 }: {
     headerColumns: SelectedColumns
-}) => (
-    <>
-        {headerColumns.map((headerColumn) => (
-            <DataTableColumnHeader key={headerColumn.path}>
-                {headerColumn.label}
-            </DataTableColumnHeader>
-        ))}
-        <DataTableColumnHeader>{i18n.t('Actions')}</DataTableColumnHeader>
-    </>
-)
+}) => {
+    const section = useSectionHandle()
+
+    // if the section does not have a schema, disable sorting for now
+    // sorting needs to check for schema-properties to know what columns are sortable
+    return (
+        <>
+            {section && isSchemaSection(section) ? (
+                <HeaderColumnsSortable
+                    section={section}
+                    headerColumns={headerColumns}
+                />
+            ) : (
+                headerColumns.map((headerColumn) => (
+                    <DataTableColumnHeader key={headerColumn.path}>
+                        {headerColumn.label}
+                    </DataTableColumnHeader>
+                ))
+            )}
+            <DataTableColumnHeader>{i18n.t('Actions')}</DataTableColumnHeader>
+        </>
+    )
+}
