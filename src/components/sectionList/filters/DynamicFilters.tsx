@@ -6,8 +6,8 @@ import {
     DataSetFilter,
     DomainTypeSelectionFilter,
     ValueTypeSelectionFilter,
+    PublicAccessFilter,
 } from './filterSelectors'
-import { PublicAccessFilter } from './filterSelectors/PublicAccessFilter'
 import { useFilterKeys } from './useFilterKeys'
 
 type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>

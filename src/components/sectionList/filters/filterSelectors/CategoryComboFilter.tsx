@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import { useSectionListFilter } from '../../../../lib'
-import { createFilterDataQuery } from './createdFilterDataQuery'
+import { createFilterDataQuery } from './createFilterDataQuery'
 import { ModelFilterSelect } from './ModelFilter'
 
 const query = createFilterDataQuery('categoryCombos')
