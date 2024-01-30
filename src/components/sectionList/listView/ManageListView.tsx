@@ -29,6 +29,7 @@ type FormValues = {
     columns: string[]
     filters: string[]
 }
+
 const validate = (values: FormValues) => {
     const errors: Record<string, string> = {}
 
@@ -91,53 +92,48 @@ export const ManageListView = ({
     }, [savedFilters, savedColumns, filtersConfig, columnsConfig])
 
     return (
-        <>
-            <Form
-                onSubmit={handleSave}
-                initialValues={initialValues}
-                validate={validate}
-            >
-                {({ handleSubmit, submitting, submitError }) => (
-                    <form onSubmit={handleSubmit}>
-                        <TransferField
-                            name={'columns'}
-                            availableLabel={i18n.t('Available columns')}
-                            selectedLabel={i18n.t('Selected columns')}
-                            loading={query.isLoading}
-                            defaultOptions={columnsConfig.default.map(toPath)}
-                            availableOptions={columnsConfig.available.map(
-                                (c) => ({ label: c.label, value: c.path })
-                            )}
-                        />
-                        <TransferField
-                            name={'filters'}
-                            availableLabel={i18n.t('Available filters')}
-                            selectedLabel={i18n.t('Selected filters')}
-                            loading={query.isLoading}
-                            defaultOptions={filtersConfig.default.map(
-                                toFilterKey
-                            )}
-                            availableOptions={filtersConfig.available.map(
-                                (f) => ({ label: f.label, value: f.filterKey })
-                            )}
-                        />
-                        {submitError && (
-                            <p>
-                                <NoticeBox
-                                    error
-                                    title={i18n.t('Failed to save')}
-                                >
-                                    {submitError}
-                                </NoticeBox>
-                            </p>
-                        )}
-                        {children({
-                            submitting,
-                        })}
-                    </form>
-                )}
-            </Form>
-        </>
+        <Form
+            onSubmit={handleSave}
+            initialValues={initialValues}
+            validate={validate}
+        >
+            {({ handleSubmit, submitting, submitError }) => (
+                <form onSubmit={handleSubmit}>
+                    <TransferField
+                        name={'columns'}
+                        availableLabel={i18n.t('Available columns')}
+                        selectedLabel={i18n.t('Selected columns')}
+                        loading={query.isLoading}
+                        defaultOptions={columnsConfig.default.map(toPath)}
+                        availableOptions={columnsConfig.available.map((c) => ({
+                            label: c.label,
+                            value: c.path,
+                        }))}
+                    />
+                    <TransferField
+                        name={'filters'}
+                        availableLabel={i18n.t('Available filters')}
+                        selectedLabel={i18n.t('Selected filters')}
+                        loading={query.isLoading}
+                        defaultOptions={filtersConfig.default.map(toFilterKey)}
+                        availableOptions={filtersConfig.available.map((f) => ({
+                            label: f.label,
+                            value: f.filterKey,
+                        }))}
+                    />
+                    {submitError && (
+                        <p>
+                            <NoticeBox error title={i18n.t('Failed to save')}>
+                                {submitError}
+                            </NoticeBox>
+                        </p>
+                    )}
+                    {children({
+                        submitting,
+                    })}
+                </form>
+            )}
+        </Form>
     )
 }
 
