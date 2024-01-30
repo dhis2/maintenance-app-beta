@@ -99,6 +99,8 @@ export const ManageListView = ({
                     <form onSubmit={handleSubmit}>
                         <TransferField
                             name={'columns'}
+                            availableLabel={i18n.t('Available columns')}
+                            selectedLabel={i18n.t('Selected columns')}
                             loading={query.isLoading}
                             defaultOptions={columnsConfig.default.map(
                                 (c) => c.path
@@ -109,6 +111,8 @@ export const ManageListView = ({
                         />
                         <TransferField
                             name={'filters'}
+                            availableLabel={i18n.t('Available filters')}
+                            selectedLabel={i18n.t('Selected filters')}
                             loading={query.isLoading}
                             defaultOptions={filtersConfig.default.map(
                                 (c) => c.filterKey
@@ -142,12 +146,16 @@ type TransferField = {
     loading?: boolean
     defaultOptions: string[]
     availableOptions: TransferOption[]
+    availableLabel: string
+    selectedLabel: string
 }
 const TransferField = ({
     name,
     loading,
     defaultOptions,
     availableOptions,
+    availableLabel,
+    selectedLabel,
 }: TransferField) => {
     const { input, meta } = useField(name, {
         multiple: true,
@@ -163,29 +171,32 @@ const TransferField = ({
                 name={'columns'}
             >
                 <Transfer
+                    className={css.transferContainer}
                     height={'320px'}
                     loading={loading}
                     enableOrderChange
                     leftHeader={
-                        <TransferHeader>{i18n.t('Available')}</TransferHeader>
+                        <TransferHeader>{availableLabel}</TransferHeader>
                     }
                     rightHeader={
-                        <TransferHeader>{i18n.t('Selected')}</TransferHeader>
+                        <TransferHeader>{selectedLabel}</TransferHeader>
                     }
                     selected={input.value}
                     onChange={({ selected }) => input.onChange(selected)}
                     options={availableOptions}
+                    rightFooter={
+                        <Button
+                            className={css.resetDefaultButton}
+                            small
+                            secondary
+                            onClick={handleSetDefault}
+                            disabled={meta.submitting}
+                        >
+                            {i18n.t('Reset to default')}
+                        </Button>
+                    }
                 />
             </Field>
-            <Button
-                className={css.resetDefaultButton}
-                small
-                secondary
-                onClick={handleSetDefault}
-                disabled={meta.submitting}
-            >
-                {i18n.t('Reset to default')}
-            </Button>
         </div>
     )
 }

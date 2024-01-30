@@ -1,9 +1,23 @@
-.resetDefaultButton {
-    margin-top: var(--spacers-dp12) !important;
-}
-
 .transferHeader {
     margin: var(--spacers-dp8) 0px;
     color: var(--colors-grey700);
     font-weight: 400;
+}
+
+.transferContainer {
+    padding-bottom: var(--spacers-dp16);
+}
+
+/* placing reset-button inside right-footer while keeping the ui implementation
+of reorder-buttons */
+.transferContainer :global(div[data-test='dhis2-uicore-transfer-rightfooter']) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--spacers-dp8);
+}
+
+.resetDefaultButton {
+    margin-top: var(--spacers-dp8);
 }
