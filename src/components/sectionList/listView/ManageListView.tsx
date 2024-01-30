@@ -22,6 +22,8 @@ type ManageColumnsDialogProps = {
 }
 
 const toPath = (propertyDescriptor: { path: string }) => propertyDescriptor.path
+const toFilterKey = (filterDescriptor: { filterKey: string }) =>
+    filterDescriptor.filterKey
 
 type FormValues = {
     columns: string[]
@@ -83,8 +85,8 @@ export const ManageListView = ({
                     : columnsConfig.default.map(toPath),
             filters:
                 savedFilters.length > 0
-                    ? savedFilters.map((f) => f.filterKey)
-                    : filtersConfig.default.map((f) => f.filterKey),
+                    ? savedFilters.map(toFilterKey)
+                    : filtersConfig.default.map(toFilterKey),
         }
     }, [savedFilters, savedColumns, filtersConfig, columnsConfig])
 
@@ -102,9 +104,7 @@ export const ManageListView = ({
                             availableLabel={i18n.t('Available columns')}
                             selectedLabel={i18n.t('Selected columns')}
                             loading={query.isLoading}
-                            defaultOptions={columnsConfig.default.map(
-                                (c) => c.path
-                            )}
+                            defaultOptions={columnsConfig.default.map(toPath)}
                             availableOptions={columnsConfig.available.map(
                                 (c) => ({ label: c.label, value: c.path })
                             )}
@@ -115,10 +115,10 @@ export const ManageListView = ({
                             selectedLabel={i18n.t('Selected filters')}
                             loading={query.isLoading}
                             defaultOptions={filtersConfig.default.map(
-                                (c) => c.filterKey
+                                toFilterKey
                             )}
                             availableOptions={filtersConfig.available.map(
-                                (c) => ({ label: c.label, value: c.filterKey })
+                                (f) => ({ label: f.label, value: f.filterKey })
                             )}
                         />
                         {submitError && (
