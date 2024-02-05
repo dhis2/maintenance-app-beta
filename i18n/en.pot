@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-05T18:46:53.934Z\n"
-"PO-Revision-Date: 2024-03-05T18:46:53.934Z\n"
+"POT-Creation-Date: 2024-03-05T22:36:56.541Z\n"
+"PO-Revision-Date: 2024-03-05T22:36:56.541Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -65,12 +65,6 @@ msgstr "All"
 
 msgid "Filter options"
 msgstr "Filter options"
-
-msgid "Something went wrong when submitting the form"
-msgstr "Something went wrong when submitting the form"
-
-msgid "Save and close"
-msgstr "Save and close"
 
 msgid "Failed to load {{label}}"
 msgstr "Failed to load {{label}}"
@@ -644,6 +638,12 @@ msgstr "Required"
 
 msgid "Custom attributes"
 msgstr "Custom attributes"
+
+msgid "Something went wrong when submitting the form"
+msgstr "Something went wrong when submitting the form"
+
+msgid "Save and close"
+msgstr "Save and close"
 
 msgid "Exit without saving"
 msgstr "Exit without saving"

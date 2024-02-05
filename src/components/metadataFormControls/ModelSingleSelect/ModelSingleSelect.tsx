@@ -12,7 +12,7 @@ import { SearchableSingleSelect } from '../../SearchableSingleSelect'
 
 function computeDisplayOptions({
     selected,
-    selectedOption,
+    selectedOption: _selectedOption,
     required,
     options,
 }: {
@@ -21,11 +21,18 @@ function computeDisplayOptions({
     required?: boolean
     selectedOption?: SelectOption
 }): SelectOption[] {
-    // This happens only when we haven't fetched the lable for an initially
-    // selected value. Don't show anything to prevent error that an option is
-    // missing
-    if (!selectedOption && selected) {
-        return []
+    let selectedOption = _selectedOption
+    if (!_selectedOption && selected) {
+        const foundOption = options.find((option) => option.value === selected)
+
+        // This happens only when we haven't fetched the lable for an initially
+        // selected value. Don't show anything to prevent error that an option is
+        // missing
+        if (!foundOption) {
+            return []
+        }
+
+        selectedOption = foundOption
     }
 
     const optionsContainSelected = options?.find(
