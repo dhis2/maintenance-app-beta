@@ -3,45 +3,49 @@ import { ButtonStrip, Button, Field } from '@dhis2/ui'
 import React, { useRef } from 'react'
 import { useField } from 'react-final-form'
 import { useHref } from 'react-router'
-import { DataElementsTransfer } from '../../../components'
-import classes from './DataElementsField.module.css'
+import { DataElementGroupsTransfer } from '../../../components'
+import classes from './DataElementGroupsField.module.css'
 
 /**
  *
- * DataElements
+ * DataElementGroups
  *
  */
-export function DataElementsField() {
-    const name = 'dataElements'
+export function DataElementGroupsField() {
+    const name = 'dataElementGroups'
     const { input, meta } = useField(name, {
         multiple: true,
-        format: (dataElements: { id: string }[]) =>
-            dataElements?.map((dataElements) => dataElements.id),
+        format: (dataElementGroups: { id: string }[]) =>
+            dataElementGroups?.map((dataElementGroups) => dataElementGroups.id),
         parse: (ids: string[]) => ids.map((id) => ({ id })),
         validateFields: [],
     })
 
-    const newDataElementsLink = useHref('/dataElements/new')
-    const dataElementsHandle = useRef({
-        refetch: () => console.error('Not initialized'),
+    const newDataElementGroupsLink = useHref('/dataElementGroups/new')
+    const dataElementGroupsHandle = useRef({
+        refetch: () => {
+            throw new Error('Not initialized')
+        },
     })
 
     const rightHeader = (
-        <p className={classes.dataElementsPickedHeader}>
-            {i18n.t('Selected data elements')}
+        <p className={classes.dataElementGroupsPickedHeader}>
+            {i18n.t('Selected data element groups')}
         </p>
     )
 
     const leftFooter = (
-        <div className={classes.dataElementsOptionsFooter}>
+        <div className={classes.dataElementGroupsOptionsFooter}>
             <ButtonStrip>
-                <Button small onClick={dataElementsHandle.current.refetch}>
+                <Button small onClick={dataElementGroupsHandle.current.refetch}>
                     {i18n.t('Refresh list')}
                 </Button>
 
                 <Button
                     small
-                    onClick={() => window.open(newDataElementsLink, '_blank')}
+                    onClick={() =>
+                        window.open(newDataElementGroupsLink, '_blank')
+                    }
                 >
                     {i18n.t('Add new')}
                 </Button>
@@ -51,13 +55,13 @@ export function DataElementsField() {
 
     return (
         <Field
-            dataTest="formfields-dataElementsets"
+            dataTest="dataelementsformfields-dataElementGroupsets"
             error={!!meta.error}
             validationText={meta.error?.toString()}
             name={name}
         >
-            <DataElementsTransfer
-                ref={dataElementsHandle}
+            <DataElementGroupsTransfer
+                ref={dataElementGroupsHandle}
                 selected={input.value}
                 onChange={({ selected }) => input.onChange(selected)}
                 rightHeader={rightHeader}

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-05T22:45:48.089Z\n"
-"PO-Revision-Date: 2024-03-05T22:45:48.089Z\n"
+"POT-Creation-Date: 2024-03-05T22:45:57.361Z\n"
+"PO-Revision-Date: 2024-03-05T22:45:57.361Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -110,6 +110,9 @@ msgstr "Category combo"
 
 msgid "None"
 msgstr "None"
+
+msgid "Filter data element groups"
+msgstr "Filter data element groups"
 
 msgid "Filter data elements"
 msgstr "Filter data elements"
@@ -657,17 +660,20 @@ msgstr "This field requires a unique value, please choose another one"
 msgid "Required"
 msgstr "Required"
 
-msgid "Custom attributes"
-msgstr "Custom attributes"
-
 msgid "Exit without saving"
 msgstr "Exit without saving"
 
 msgid "Create data element group"
 msgstr "Create data element group"
 
-msgid "Selected data elements"
-msgstr "Selected data elements"
+msgid "Compulsory"
+msgstr "Compulsory"
+
+msgid "Data dimension"
+msgstr "Data dimension"
+
+msgid "Selected data element groups"
+msgstr "Selected data element groups"
 
 msgid "Refresh list"
 msgstr "Refresh list"
@@ -687,11 +693,17 @@ msgstr "Basic information"
 msgid "Set up the information for this data element group"
 msgstr "Set up the information for this data element group"
 
-msgid "Explain the purpose of this data element group."
-msgstr "Explain the purpose of this data element group."
-
 msgid "@TODO"
 msgstr "@TODO"
+
+msgid "Custom attributes"
+msgstr "Custom attributes"
+
+msgid "Selected data elements"
+msgstr "Selected data elements"
+
+msgid "Explain the purpose of this data element group."
+msgstr "Explain the purpose of this data element group."
 
 msgid "Custom fields for your DHIS2 instance"
 msgstr "Custom fields for your DHIS2 instance"
