@@ -35,17 +35,16 @@ export function AggregationTypeField() {
 
     useEffect(() => {
         if (disabled) {
-            change('aggregationType', '')
+            change('aggregationType', 'NONE')
         }
     }, [change, disabled])
 
     const { dataElement } = useSchemas()
-    const options = dataElement.properties.aggregationType.constants?.map(
-        (constant) => ({
+    const options =
+        dataElement.properties.aggregationType.constants?.map((constant) => ({
             value: constant,
             label: AGGREGATION_TYPE[constant as keyof typeof AGGREGATION_TYPE],
-        })
-    )
+        })) || []
 
     const helpText = disabled
         ? `${aggregationTypeHelpText} ${aggregationTypeDisabledHelpText}`
@@ -70,7 +69,7 @@ export function AggregationTypeField() {
                       })
             }
             helpText={helpText}
-            options={options || []}
+            options={options}
             validateFields={[]}
             // @TODO: Why can I not use `FormValues` here?
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
