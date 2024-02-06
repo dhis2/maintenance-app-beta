@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF } from '@dhis2/ui'
 import React, { useEffect } from 'react'
-import { Field as FieldRFF, useForm, useFormState } from 'react-final-form'
+import { Field as FieldRFF, useForm, useField } from 'react-final-form'
 import { AGGREGATION_TYPE, required, useSchemas } from '../../../lib'
 
 const DISABLING_VALUE_TYPES = [
@@ -30,8 +30,9 @@ const aggregationTypeDisabledHelpText = i18n.t(
 )
 export function AggregationTypeField() {
     const { change } = useForm()
-    const { values } = useFormState({ subscription: { values: true } })
-    const disabled = DISABLING_VALUE_TYPES.includes(values.valueType)
+    const valueTypeField = useField('valueType')
+    const valueType = valueTypeField.input.value
+    const disabled = DISABLING_VALUE_TYPES.includes(valueType)
 
     useEffect(() => {
         if (disabled) {
