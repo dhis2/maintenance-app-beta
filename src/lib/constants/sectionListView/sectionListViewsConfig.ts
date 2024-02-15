@@ -80,7 +80,7 @@ export const modelListViewsConfig = {
                 { label: i18n.t('Domain'), path: 'domainType' },
                 { label: i18n.t('Value type'), path: 'valueType' },
                 'lastUpdated',
-                'sharing.public',
+                DESCRIPTORS.publicAccess,
             ],
         },
         filters: {
