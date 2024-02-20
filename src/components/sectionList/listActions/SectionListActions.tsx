@@ -11,6 +11,7 @@ import {
 } from '@dhis2/ui'
 import React, { useRef, useState } from 'react'
 import { Link, useHref, useLinkClickHandler } from 'react-router-dom'
+import { LinkButton } from '../../LinkButton'
 import css from './SectionListActions.module.css'
 
 export const ListActions = ({ children }: React.PropsWithChildren) => {
@@ -19,11 +20,9 @@ export const ListActions = ({ children }: React.PropsWithChildren) => {
 
 export const ActionEdit = ({ modelId }: { modelId: string }) => {
     return (
-        <Link to={`${modelId}`}>
-            <Button small secondary>
-                <IconEdit24 />
-            </Button>
-        </Link>
+        <LinkButton small secondary to={modelId}>
+            <IconEdit24 />
+        </LinkButton>
     )
 }
 
@@ -38,7 +37,8 @@ export const ActionMore = ({
     const [open, setOpen] = useState(false)
     const ref = useRef(null)
     const href = useHref(modelId, { relative: 'path' })
-    const handleClick = useLinkClickHandler(modelId)
+
+    const handleEditClick = useLinkClickHandler(modelId)
 
     return (
         <div ref={ref}>
@@ -61,14 +61,17 @@ export const ActionMore = ({
                             dense
                             label={i18n.t('Show details')}
                             icon={<IconMore16 />}
-                            onClick={onShowDetailsClick}
+                            onClick={() => {
+                                onShowDetailsClick()
+                                setOpen(false)
+                            }}
                         />
                         <MenuItem
                             dense
                             label={i18n.t('Edit')}
                             icon={<IconEdit16 />}
                             onClick={(_, e) => {
-                                handleClick(e)
+                                handleEditClick(e)
                                 setOpen(false)
                             }}
                             target="_blank"

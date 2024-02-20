@@ -3,7 +3,8 @@
     gap: var(--spacers-dp8);
 }
 
-.listActions button {
+.listActions button,
+.listActions a {
     padding: 0 2px !important;
 }
 
