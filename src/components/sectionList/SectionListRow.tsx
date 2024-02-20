@@ -1,15 +1,8 @@
-import { DataTableRow, DataTableCell, Checkbox, Button } from '@dhis2/ui'
-import { IconEdit24, IconMore24 } from '@dhis2/ui-icons'
+import { DataTableRow, DataTableCell, Checkbox } from '@dhis2/ui'
 import cx from 'classnames'
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { CheckBoxOnChangeObject } from '../../types'
 import { IdentifiableObject, GistModel } from '../../types/models'
-import {
-    ListActions,
-    ActionEdit,
-    ActionMore,
-} from './listActions/SectionListActions'
 import css from './SectionList.module.css'
 import { SelectedColumns, SelectedColumn } from './types'
 
@@ -61,30 +54,3 @@ export function SectionListRow<Model extends IdentifiableObject>({
         </DataTableRow>
     )
 }
-
-// const ListActions = ({ modelId }: { modelId: string }) => {
-//     return (
-//         <div className={css.listActions}>
-//             <ActionEdit modelId={modelId} />
-//             <ActionMore />
-//         </div>
-//     )
-// }
-
-// const ActionEdit = ({ modelId }: { modelId: string }) => {
-//     return (
-//         <Link to={`${modelId}`}>
-//             <Button small secondary>
-//                 <IconEdit24 />
-//             </Button>
-//         </Link>
-//     )
-// }
-
-// const ActionMore = () => {
-//     return (
-//         <Button small secondary>
-//             <IconMore24 />
-//         </Button>
-//     )
-// }
