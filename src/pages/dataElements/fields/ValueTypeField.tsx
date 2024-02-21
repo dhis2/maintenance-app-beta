@@ -59,6 +59,7 @@ export function ValueTypeField() {
         values.valueType === 'MULTI_TEXT' ||
         (values.optionSet?.id &&
             optionSetQuery.data?.optionSets.valueType === 'MULTI_TEXT')
+
     const options = dataElement.properties.valueType.constants
         ?.map((constant) => ({
             value: constant,
