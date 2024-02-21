@@ -16,10 +16,7 @@ export const dataElementSchema = z
         }),
         domainType: z.union([z.literal('AGGREGATE'), z.literal('TRACKER')]),
         valueType: z.nativeEnum(DataElement.valueType),
-        aggregationType: z.union([
-            z.nativeEnum(DataElement.aggregationType),
-            z.string().max(0),
-        ]),
+        aggregationType: z.nativeEnum(DataElement.aggregationType),
         optionSet: z.object({ id: z.string() }),
         commentOptionSet: z.object({ id: z.string() }),
         legendSets: z.array(z.object({ id: z.string() })),

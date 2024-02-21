@@ -53,9 +53,6 @@ export function AggregationTypeField() {
 
     return (
         <FieldRFF
-            // See https://final-form.org/docs/react-final-form/types/FieldProps#validate
-            // for why this is necessary
-            key={disabled ? 0 : 1}
             disabled={disabled}
             component={SingleSelectFieldFF}
             dataTest="formfields-aggregationtype"
@@ -72,17 +69,7 @@ export function AggregationTypeField() {
             helpText={helpText}
             options={options}
             validateFields={[]}
-            // @TODO: Why can I not use `FormValues` here?
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            validate={(value: string | undefined, values: any) => {
-                const { valueType } = values
-                // Using the `disabled` value from above causes an issue:
-                //   Warning: Cannot update a component (`ForwardRef(Field)`)
-                //   while rendering a different component
-                //   (`ForwardRef(Field)`)
-                const isDisabled = DISABLING_VALUE_TYPES.includes(valueType)
-                return isDisabled ? undefined : required(value)
-            }}
+            validate={required}
         />
     )
 }
