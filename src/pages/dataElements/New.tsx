@@ -10,10 +10,15 @@ import {
     StandardFormActions,
     StandardFormSection,
 } from '../../components'
-import { SCHEMA_SECTIONS, getSectionPath, useSchemas } from '../../lib'
+import {
+    SCHEMA_SECTIONS,
+    getSectionPath,
+    useSchemas,
+    validate,
+} from '../../lib'
 import { Attribute } from '../../types/generated'
 import { useCustomAttributesQuery } from './fields'
-import { DataElementFormFields, validate } from './form'
+import { DataElementFormFields, dataElementSchema } from './form'
 import type { FormValues } from './form'
 import classes from './New.module.css'
 
@@ -142,7 +147,9 @@ export const Component = () => {
             <Form
                 validateOnBlur
                 onSubmit={onSubmit}
-                validate={validate}
+                validate={(values: FormValues) => {
+                    return validate(dataElementSchema, values)
+                }}
                 initialValues={initialValues}
             >
                 {({ handleSubmit, submitting, submitError }) => (

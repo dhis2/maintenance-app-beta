@@ -10,13 +10,13 @@ import {
     StandardFormActions,
     StandardFormSection,
 } from '../../components'
-import { SCHEMA_SECTIONS, getSectionPath } from '../../lib'
+import { SCHEMA_SECTIONS, getSectionPath, validate } from '../../lib'
 import { JsonPatchOperation } from '../../types'
 import { Attribute, DataElement } from '../../types/generated'
 import { createJsonPatchOperations } from './edit/'
 import classes from './Edit.module.css'
 import { useCustomAttributesQuery } from './fields'
-import { DataElementFormFields, validate } from './form'
+import { DataElementFormFields, dataElementSchema } from './form'
 import type { FormValues } from './form'
 
 type FinalFormFormApi = FormApi<FormValues>
@@ -174,7 +174,9 @@ export const Component = () => {
                 <Form
                     validateOnBlur
                     onSubmit={onSubmit}
-                    validate={validate}
+                    validate={(values: FormValues) => {
+                        return validate(dataElementSchema, values)
+                    }}
                     initialValues={initialValues}
                 >
                     {({ handleSubmit, submitting, submitError }) => (
