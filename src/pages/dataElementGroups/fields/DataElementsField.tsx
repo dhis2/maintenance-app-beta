@@ -23,9 +23,7 @@ export function DataElementsField() {
 
     const newDataElementsLink = useHref('/dataElements/new')
     const dataElementsHandle = useRef({
-        refetch: () => {
-            throw new Error('Not initialized')
-        },
+        refetch: () => console.error('Not initialized'),
     })
 
     const rightHeader = (
