@@ -6,8 +6,11 @@ import React, { useEffect, useRef } from 'react'
 import { Form } from 'react-final-form'
 import { useNavigate } from 'react-router-dom'
 import { StandardFormActions, StandardFormSection } from '../../components'
-import { SCHEMA_SECTIONS, getSectionPath } from '../../lib'
-import { DataElementGroupSetFormFields, validate } from './form'
+import { SCHEMA_SECTIONS, getSectionPath, validate } from '../../lib'
+import {
+    DataElementGroupSetFormFields,
+    dataElementGroupSetSchema,
+} from './form'
 import type { FormValues } from './form'
 import classes from './New.module.css'
 
@@ -52,7 +55,9 @@ export function Component() {
         <Form
             validateOnBlur
             onSubmit={onSubmit}
-            validate={validate}
+            validate={(values: FormValues) => {
+                return validate(dataElementGroupSetSchema, values)
+            }}
             initialValues={initialValues}
         >
             {({ handleSubmit, submitting, submitError }) => (
