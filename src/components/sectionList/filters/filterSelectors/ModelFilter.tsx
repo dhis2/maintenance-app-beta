@@ -68,12 +68,10 @@ export const ModelFilterSelect = ({
     // nothing that depends on the render-cycle depends on this value
     const filterRef = useRef<string | undefined>()
     const initialSelected = useRef(selected)
-    // We need to persist the selected option so we can display an <Option />
-    // when the current list doesn't contain the selected option (e.g. when
-    // the page with the selected option hasn't been reached yet or when
-    // filtering)
-    const [initialSelectedOption, setInitialSelectedOption] =
-        useState<OptionResult>()
+
+    // this is only done once, and will not update if query changes
+    // using useState instead of useRef because it's unecessary to call this every render
+    // and useRef does not support a callback
     const [initialQuery] = useState(() =>
         createInitialOptionQuery(query.result.resource)
     )
@@ -84,11 +82,10 @@ export const ModelFilterSelect = ({
             // run only when we have an initial selected value
             lazy: initialSelected.current === undefined,
             variables: { id: selected },
-            onComplete: (data) => {
-                setInitialSelectedOption(data.result)
-            },
         }
     )
+
+    const initialSelectedOption = initialOptionResult.data?.result
 
     const optionsQueryResult = useInfiniteDataQuery<OptionResult>(query)
     const { refetch, data, incrementPage } = optionsQueryResult
@@ -112,11 +109,13 @@ export const ModelFilterSelect = ({
         optionsQueryResult.fetching ||
         optionsQueryResult.loading ||
         initialOptionResult.loading
+
     const error =
         optionsQueryResult.error || initialOptionResult.error
             ? // @TODO: Ask Joe what do do here!
               'An error has occurred. Please try again'
             : ''
+
     const dataResultKey = query.result.resource
     const options = data?.result[dataResultKey] || []
 
