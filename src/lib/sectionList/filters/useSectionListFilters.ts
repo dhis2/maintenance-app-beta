@@ -1,9 +1,6 @@
 import { useCallback, useMemo } from 'react'
 import { useQueryParams } from 'use-query-params'
-import {
-    usePaginationQueryParams,
-    useUpdatePaginationParams,
-} from '../usePaginationParams'
+import { usePaginationQueryParams } from '../usePaginationParams'
 import {
     ParsedFilterParams,
     filterQueryParamType,
