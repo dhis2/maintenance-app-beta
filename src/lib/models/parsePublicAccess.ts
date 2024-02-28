@@ -26,10 +26,24 @@ export const parsePublicAccessString = (
     if (!matches) {
         return null
     }
-    const [_, metadata, data] = matches
+    const [, metadata, data] = matches
 
     return {
         metadata: parseAccessPart(metadata),
         data: parseAccessPart(data),
     }
+}
+
+const accessPartToString = (accessPart: PublicAccessPart): string => {
+    if (accessPart.write) {
+        return 'rw'
+    }
+    return accessPart.read ? 'r-' : '--'
+}
+
+export const formatPublicAccess = (publicAccess: PublicAccess): string => {
+    const metadata = accessPartToString(publicAccess.metadata)
+    const data = accessPartToString(publicAccess.data)
+
+    return metadata + data + '----'
 }

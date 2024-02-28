@@ -10,6 +10,7 @@ type ConstantSelectionFilterProps = {
     constants: Record<string, string>
     filterKey: FilterKey
     filterable?: boolean
+    formatFilter?: (filter: string | undefined) => string | undefined
 }
 
 export const ConstantSelectionFilter = ({
@@ -17,10 +18,15 @@ export const ConstantSelectionFilter = ({
     filterKey,
     label,
     filterable,
+    formatFilter,
 }: ConstantSelectionFilterProps) => {
     const [filter, setFilter] = useSectionListFilter(filterKey)
 
-    const selected = Array.isArray(filter) ? filter[0] : filter
+    let selected = Array.isArray(filter) ? filter[0] : filter
+    if (formatFilter) {
+        selected = formatFilter(selected)
+    }
+
     const isInOptions =
         selected && constants[selected as keyof typeof constants]
 
