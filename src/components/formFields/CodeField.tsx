@@ -2,19 +2,15 @@ import i18n from '@dhis2/d2-i18n'
 import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
-import { useCheckMaxLengthFromSchema } from '../../../lib'
-import type { SchemaName } from '../../../types'
+import { SchemaSection, useCheckMaxLengthFromSchema } from '../../lib'
 
-export function CodeField() {
-    const validate = useCheckMaxLengthFromSchema(
-        'dataElement' as SchemaName,
-        'code'
-    )
+export function CodeField({ schemaSection }: { schemaSection: SchemaSection }) {
+    const validate = useCheckMaxLengthFromSchema(schemaSection.name, 'code')
 
     return (
         <FieldRFF
             component={InputFieldFF}
-            dataTest="dataelementsformfields-code"
+            dataTest="formfields-code"
             inputWidth="150px"
             name="code"
             label={i18n.t('Code')}

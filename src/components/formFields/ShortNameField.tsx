@@ -4,31 +4,30 @@ import React, { useMemo } from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
+    SchemaSection,
     composeAsyncValidators,
     required,
     useCheckMaxLengthFromSchema,
     useIsFieldValueUnique,
-} from '../../../lib'
-import type { SchemaName } from '../../../types'
-import type { FormValues } from '../form'
+} from '../../lib'
 
-function useValidator() {
+function useValidator({ schemaSection }: { schemaSection: SchemaSection }) {
     const params = useParams()
-    const dataElementId = params.id as string
+    const modelId = params.id as string
     const checkIsValueTaken = useIsFieldValueUnique({
-        model: 'dataElements',
+        model: schemaSection.namePlural,
         field: 'name',
-        id: dataElementId,
+        id: modelId,
     })
 
     const checkMaxLength = useCheckMaxLengthFromSchema(
-        'dataElement' as SchemaName,
-        'formName'
+        schemaSection.name,
+        'shortName'
     )
 
     return useMemo(
         () =>
-            composeAsyncValidators<string, FormValues>([
+            composeAsyncValidators<string>([
                 checkIsValueTaken,
                 checkMaxLength,
                 required,
@@ -37,24 +36,33 @@ function useValidator() {
     )
 }
 
-export function ShortNameField() {
-    const validator = useValidator()
+export function ShortNameField({
+    helpText,
+    schemaSection,
+}: {
+    helpText?: string
+    schemaSection: SchemaSection
+}) {
+    const validator = useValidator({ schemaSection })
     const { meta } = useField('shortName', {
         subscription: { validating: true },
     })
+
+    const helpString =
+        helpText || i18n.t('Often used in reports where space is limited')
 
     return (
         <FieldRFF<string | undefined>
             loading={meta.validating}
             component={InputFieldFF}
-            dataTest="dataelementsformfields-shortname"
+            dataTest="formfields-shortname"
             required
             inputWidth="400px"
             label={i18n.t('{{fieldLabel}} (required)', {
                 fieldLabel: i18n.t('Short name'),
             })}
             name="shortName"
-            helpText={i18n.t('Often used in reports where space is limited')}
+            helpText={helpString}
             validate={(name?: string) => validator(name)}
             validateFields={[]}
         />

@@ -1,6 +1,6 @@
 import type { FormFieldValidator } from './types'
 
-export const composeAsyncValidators = <Value, FormValues>(
+export const composeAsyncValidators = <Value, FormValues = unknown>(
     validators: FormFieldValidator<Value, FormValues>[]
 ): FormFieldValidator<Value, FormValues> => {
     return async (value?: Value, formValues?: FormValues) => {

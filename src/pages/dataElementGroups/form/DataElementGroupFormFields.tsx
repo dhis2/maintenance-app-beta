@@ -6,13 +6,8 @@ import {
     StandardFormSectionDescription,
     StandardFormField,
 } from '../../../components'
-import {
-    CodeField,
-    DataElementsField,
-    DescriptionField,
-    NameField,
-    ShortNameField,
-} from '../fields'
+import { DefaultIdentifiableFields } from '../../../components/formFields'
+import { DataElementsField } from '../fields'
 
 export function DataElementGroupFormFields() {
     return (
@@ -28,21 +23,7 @@ export function DataElementGroupFormFields() {
                     )}
                 </StandardFormSectionDescription>
 
-                <StandardFormField>
-                    <NameField />
-                </StandardFormField>
-
-                <StandardFormField>
-                    <ShortNameField />
-                </StandardFormField>
-
-                <StandardFormField>
-                    <CodeField />
-                </StandardFormField>
-
-                <StandardFormField>
-                    <DescriptionField />
-                </StandardFormField>
+                <DefaultIdentifiableFields />
             </StandardFormSection>
 
             <StandardFormSection>

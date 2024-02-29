@@ -7,27 +7,31 @@ import {
     StandardFormField,
 } from '../../../components'
 import {
+    CodeField,
+    DescriptionField,
+    NameField,
+    ShortNameField,
+} from '../../../components/formFields'
+import { SCHEMA_SECTIONS } from '../../../lib'
+import {
     AggregationLevelsField,
     AggregationTypeField,
     CategoryComboField,
-    CodeField,
     ColorAndIconField,
     CustomAttributes,
-    DescriptionField,
     DomainField,
     FieldMaskField,
     FormNameField,
     LegendSetField,
-    NameField,
     OptionSetCommentField,
     OptionSetField,
-    ShortNameField,
     UrlField,
     ValueTypeField,
     ZeroIsSignificantField,
 } from '../fields'
 
 export function DataElementFormFields() {
+    const schemaSection = SCHEMA_SECTIONS.dataElement
     return (
         <>
             <StandardFormSection>
@@ -40,11 +44,11 @@ export function DataElementFormFields() {
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
-                    <NameField />
+                    <NameField schemaSection={schemaSection} />
                 </StandardFormField>
 
                 <StandardFormField>
-                    <ShortNameField />
+                    <ShortNameField schemaSection={schemaSection} />
                 </StandardFormField>
 
                 <StandardFormField>
@@ -52,11 +56,11 @@ export function DataElementFormFields() {
                 </StandardFormField>
 
                 <StandardFormField>
-                    <CodeField />
+                    <CodeField schemaSection={schemaSection} />
                 </StandardFormField>
 
                 <StandardFormField>
-                    <DescriptionField />
+                    <DescriptionField schemaSection={schemaSection} />
                 </StandardFormField>
 
                 <StandardFormField>
