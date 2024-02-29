@@ -1,6 +1,6 @@
 import React from 'react'
-import { useSchemaSectionHandleOrThrow } from '../../lib'
-import { StandardFormField } from '../standardForm'
+import { useSchemaSectionHandleOrThrow } from '../../../lib'
+import { StandardFormField } from '../../standardForm'
 import { CodeField } from './CodeField'
 import { NameField } from './NameField'
 import { ShortNameField } from './ShortNameField'

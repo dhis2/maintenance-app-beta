@@ -9,7 +9,7 @@ import {
     required,
     useCheckMaxLengthFromSchema,
     useIsFieldValueUnique,
-} from '../../lib'
+} from '../../../lib'
 
 function useValidator({ schemaSection }: { schemaSection: SchemaSection }) {
     const params = useParams()

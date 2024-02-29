@@ -11,7 +11,7 @@ import {
     DescriptionField,
     NameField,
     ShortNameField,
-} from '../../../components/formFields'
+} from '../../../components/form'
 import { SCHEMA_SECTIONS } from '../../../lib'
 import {
     AggregationLevelsField,

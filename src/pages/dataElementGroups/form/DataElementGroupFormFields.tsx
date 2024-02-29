@@ -9,7 +9,7 @@ import {
 import {
     DefaultIdentifiableFields,
     DescriptionField,
-} from '../../../components/formFields'
+} from '../../../components/form'
 import { SCHEMA_SECTIONS } from '../../../lib'
 import { DataElementsField } from '../fields'
 

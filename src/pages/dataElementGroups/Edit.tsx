@@ -1,20 +1,21 @@
-import { useDataEngine, useDataQuery } from '@dhis2/app-runtime'
+import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { NoticeBox } from '@dhis2/ui'
-import { FORM_ERROR, FormApi } from 'final-form'
-import React, { useEffect, useRef } from 'react'
+import { FormApi } from 'final-form'
+import React from 'react'
 import { withTypes } from 'react-final-form'
 import { useNavigate, useParams } from 'react-router-dom'
+import { Loader } from '../../components'
+import { CustomAttributes, DefaultFormContents } from '../../components/form'
 import {
-    Loader,
-    StandardFormActions,
-    StandardFormSection,
-} from '../../components'
-import { SCHEMA_SECTIONS, getSectionPath, validate } from '../../lib'
-import { JsonPatchOperation } from '../../types'
-import { DataElementGroup } from '../../types/generated'
-import { createJsonPatchOperations } from './edit/'
-import classes from './Edit.module.css'
+    SCHEMA_SECTIONS,
+    getSectionPath,
+    usePatchModel,
+    validate,
+} from '../../lib'
+import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
+import { getAllAttributeValues } from '../../lib/models/attributes'
+import { Attribute, DataElementGroup } from '../../types/generated'
+import { useCustomAttributesQuery } from '../dataElements/fields'
 import { DataElementGroupFormFields, dataElementGroupSchema } from './form'
 import type { FormValues } from './form'
 
@@ -26,168 +27,130 @@ type DataElementGroupQueryResponse = {
     dataElementGroup: DataElementGroup
 }
 
-const listPath = `/${getSectionPath(SCHEMA_SECTIONS.dataElementGroup)}`
+const section = SCHEMA_SECTIONS.dataElementGroup
+
+const query = {
+    dataElementGroup: {
+        resource: `dataElementGroups`,
+        id: ({ id }: Record<string, string>) => id,
+        params: {
+            fields: ['*', 'attributeValues[*]'],
+        },
+    },
+}
 
 function useDataElementGroupQuery(id: string) {
-    const DATA_ELEMENT_QUERY = {
-        dataElementGroup: {
-            resource: `dataElementGroups/${id}`,
-            params: {
-                fields: ['*', 'attributeValues[*]'],
-            },
-        },
-    }
-
-    return useDataQuery<DataElementGroupQueryResponse>(DATA_ELEMENT_QUERY, {
+    return useDataQuery<DataElementGroupQueryResponse>(query, {
         variables: { id },
     })
 }
 
-function usePatchDirtyFields() {
-    const dataEngine = useDataEngine()
+function computeInitialValues({
+    dataElementGroup,
+    customAttributes,
+}: {
+    dataElementGroup: DataElementGroup
+    customAttributes: Attribute[]
+}) {
+    if (!dataElementGroup) {
+        return {}
+    }
 
-    return async ({
-        values,
-        dirtyFields,
+    // We want to have an array in the state with all attributes, not just the
+    // ones that are set
+    const attributeValues = getAllAttributeValues(
         dataElementGroup,
-    }: {
-        values: FormValues
-        dirtyFields: { [name: string]: boolean }
-        dataElementGroup: DataElementGroup
-    }) => {
-        const jsonPatchPayload = createJsonPatchOperations({
-            values,
-            dirtyFields,
-            originalValue: dataElementGroup,
-        })
+        customAttributes
+    )
 
-        // We want the promise so we know when submitting is done. The promise
-        // returned by the mutation function of useDataMutation will never
-        // resolve
-        const ADD_NEW_DATA_ELEMENT_MUTATION = {
-            resource: 'dataElementGroups',
-            id: values.id,
-            type: 'json-patch',
-            data: ({ operations }: { operations: JsonPatchOperation[] }) =>
-                operations,
-        } as const
-
-        try {
-            await dataEngine.mutate(ADD_NEW_DATA_ELEMENT_MUTATION, {
-                variables: { operations: jsonPatchPayload },
-            })
-        } catch (e) {
-            return { [FORM_ERROR]: (e as Error | string).toString() }
-        }
+    return {
+        id: dataElementGroup.id,
+        name: dataElementGroup.name,
+        shortName: dataElementGroup.shortName,
+        code: dataElementGroup.code,
+        dataElements: dataElementGroup.dataElements,
+        attributeValues,
     }
 }
 
 export const Component = () => {
-    const navigate = useNavigate()
     const params = useParams()
     const dataElementGroupId = params.id as string
     const dataElementGroupQuery = useDataElementGroupQuery(dataElementGroupId)
-    const patchDirtyFields = usePatchDirtyFields()
+    const attributesQuery = useCustomAttributesQuery()
 
-    async function onSubmit(values: FormValues, form: FinalFormFormApi) {
-        const errors = await patchDirtyFields({
-            values,
-            dirtyFields: form.getState().dirtyFields,
-            dataElementGroup: dataElementGroupQuery.data
-                ?.dataElementGroup as DataElementGroup,
-        })
-
-        if (errors) {
-            return errors
-        }
-
-        navigate(listPath)
-    }
-
-    const dataElementGroup = dataElementGroupQuery.data
-        ?.dataElementGroup as DataElementGroup
-    const initialValues = dataElementGroup
-        ? {
-              id: dataElementGroupId,
-              name: dataElementGroup.name,
-              shortName: dataElementGroup.shortName,
-              code: dataElementGroup.code,
-              description: dataElementGroup.description,
-              dataElements: dataElementGroup.dataElements || [],
-          }
-        : {}
+    const dataElementGroup = dataElementGroupQuery.data?.dataElementGroup
 
     return (
         <Loader
             queryResponse={dataElementGroupQuery}
             label={i18n.t('Data element group')}
         >
-            <Form
-                validateOnBlur
-                onSubmit={onSubmit}
-                validate={(values: FormValues) => {
-                    return validate(dataElementGroupSchema, values)
-                }}
-                initialValues={initialValues}
+            <Loader
+                queryResponse={attributesQuery}
+                label={i18n.t('Attributes')}
             >
-                {({ handleSubmit, submitting, submitError }) => (
-                    <form onSubmit={handleSubmit}>
-                        <FormContents
-                            submitError={submitError}
-                            submitting={submitting}
-                        />
-                    </form>
-                )}
-            </Form>
+                <DataElementGroupForm
+                    dataElementGroup={dataElementGroup as DataElementGroup}
+                    attributes={attributesQuery.data}
+                ></DataElementGroupForm>
+            </Loader>
         </Loader>
     )
 }
 
-function FormContents({
-    submitError,
-    submitting,
+function DataElementGroupForm({
+    dataElementGroup,
+    attributes,
 }: {
-    submitting: boolean
-    submitError?: string
+    dataElementGroup: DataElementGroup
+    attributes: Attribute[]
 }) {
-    const formErrorRef = useRef<HTMLDivElement | null>(null)
     const navigate = useNavigate()
+    const patchDirtyFields = usePatchModel(
+        dataElementGroup.id,
+        section.namePlural
+    )
 
-    useEffect(() => {
-        if (submitError) {
-            formErrorRef.current?.scrollIntoView({ behavior: 'smooth' })
+    async function onSubmit(values: FormValues, form: FinalFormFormApi) {
+        const jsonPatchOperations = createJsonPatchOperations({
+            values,
+            dirtyFields: form.getState().dirtyFields,
+            originalValue: dataElementGroup,
+        })
+        const errors = await patchDirtyFields(jsonPatchOperations)
+
+        if (errors) {
+            return errors
         }
-    }, [submitError])
+
+        navigate(getSectionPath(section))
+    }
 
     return (
-        <>
-            {submitError && (
-                <StandardFormSection>
-                    <div ref={formErrorRef}>
-                        <NoticeBox
-                            error
-                            title={i18n.t(
-                                'Something went wrong when submitting the form'
-                            )}
-                        >
-                            {submitError}
-                        </NoticeBox>
-                    </div>
-                </StandardFormSection>
+        <Form
+            validateOnBlur
+            onSubmit={onSubmit}
+            validate={(values: FormValues) => {
+                return validate(dataElementGroupSchema, values)
+            }}
+            initialValues={computeInitialValues({
+                dataElementGroup,
+                customAttributes: attributes,
+            })}
+        >
+            {({ handleSubmit, submitting, submitError }) => (
+                <form onSubmit={handleSubmit}>
+                    <DefaultFormContents
+                        section={section}
+                        submitting={submitting}
+                        submitError={submitError}
+                    >
+                        <DataElementGroupFormFields />
+                        <CustomAttributes />
+                    </DefaultFormContents>
+                </form>
             )}
-
-            <div className={classes.form}>
-                <DataElementGroupFormFields />
-            </div>
-
-            <div className={classes.formActions}>
-                <StandardFormActions
-                    cancelLabel={i18n.t('Cancel')}
-                    submitLabel={i18n.t('Save and close')}
-                    submitting={submitting}
-                    onCancelClick={() => navigate(listPath)}
-                />
-            </div>
-        </>
+        </Form>
     )
 }
