@@ -14,10 +14,7 @@ export function DescriptionField({
     const validate = useCheckMaxLengthFromSchema(schemaSection.name, 'formName')
 
     const helpString =
-        helpText ||
-        i18n.t(
-            "Explain the purpose of this data element and how it's measured."
-        )
+        helpText || i18n.t("Explain the purpose of this and how it's measured.")
 
     return (
         <FieldRFF

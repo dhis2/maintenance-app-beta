@@ -6,8 +6,14 @@ import {
     StandardFormSectionDescription,
     StandardFormField,
 } from '../../../components'
-import { DefaultIdentifiableFields } from '../../../components/formFields'
+import {
+    DefaultIdentifiableFields,
+    DescriptionField,
+} from '../../../components/formFields'
+import { SCHEMA_SECTIONS } from '../../../lib'
 import { DataElementsField } from '../fields'
+
+const schemaSection = SCHEMA_SECTIONS.dataElementGroup
 
 export function DataElementGroupFormFields() {
     return (
@@ -24,6 +30,15 @@ export function DataElementGroupFormFields() {
                 </StandardFormSectionDescription>
 
                 <DefaultIdentifiableFields />
+
+                <StandardFormField>
+                    <DescriptionField
+                        schemaSection={schemaSection}
+                        helpText={i18n.t(
+                            'Explain the purpose of this data element group.'
+                        )}
+                    />
+                </StandardFormField>
             </StandardFormSection>
 
             <StandardFormSection>

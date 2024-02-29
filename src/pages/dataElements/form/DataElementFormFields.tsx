@@ -60,7 +60,12 @@ export function DataElementFormFields() {
                 </StandardFormField>
 
                 <StandardFormField>
-                    <DescriptionField schemaSection={schemaSection} />
+                    <DescriptionField
+                        helpText={i18n.t(
+                            'Explain the purpose of this data element.'
+                        )}
+                        schemaSection={schemaSection}
+                    />
                 </StandardFormField>
 
                 <StandardFormField>
