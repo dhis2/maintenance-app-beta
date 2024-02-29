@@ -74,7 +74,7 @@ export function AggregationTypeField() {
             validateFields={[]}
             // @TODO: Why can I not use `FormValues` here?
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            validate={(value: string, values: any) => {
+            validate={(value: string | undefined, values: any) => {
                 const { valueType } = values
                 // Using the `disabled` value from above causes an issue:
                 //   Warning: Cannot update a component (`ForwardRef(Field)`)
