@@ -7,18 +7,7 @@ import { getFieldFilter } from '../../lib/models/path'
 import { Query, WrapQueryResponse } from '../../types'
 import { DataElement, ModelCollectionResponse } from '../../types/models'
 
-const filterFields = [
-    'access',
-    'id',
-    'name',
-    'code',
-    'domainType',
-    'valueType',
-    'lastUpdated',
-    'sharing',
-] as const
-
-type FilteredDataElement = Pick<DataElement, (typeof filterFields)[number]>
+type FilteredDataElement = Pick<DataElement, 'id'> & Partial<DataElement>
 
 type DataElements = ModelCollectionResponse<FilteredDataElement, 'dataElements'>
 
