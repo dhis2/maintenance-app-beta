@@ -139,10 +139,17 @@ export const useModelListView = () => {
         console.error(query.error)
     }
 
-    const selectedView = query.data || getDefaultViewForSection(section.name)
+    const defaultView = getDefaultViewForSection(section.name)
+    const selectedView = query.data || defaultView
 
-    const columns = selectedView.columns
-    const filters = selectedView.filters
+    const columns =
+        selectedView.columns.length < 1
+            ? defaultView.columns
+            : selectedView.columns
+    const filters =
+        selectedView.filters.length < 1
+            ? defaultView.filters
+            : selectedView.filters
 
     return { view: selectedView, columns, filters, query }
 }
