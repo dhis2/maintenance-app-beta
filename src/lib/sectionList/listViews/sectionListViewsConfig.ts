@@ -11,6 +11,10 @@ export interface FilterDescriptor {
     filterKey: ConfigurableFilterKey
 }
 
+type Descriptor =
+    | (ModelPropertyDescriptor & Partial<FilterDescriptor>)
+    | (FilterDescriptor & Partial<ModelPropertyDescriptor>)
+
 /* Configs can either define the label and filterKey, or a string
 If config is a string, getTranslatedProperty will be used to get the label.  */
 
@@ -36,20 +40,12 @@ export type SectionListViewConfig<Key extends string = string> = {
 }
 
 const DESCRIPTORS = {
-    publicAccess: { path: 'sharing.public', label: i18n.t('Public access') },
-} satisfies Record<string, ModelPropertyDescriptor>
-
-const FILTERS = {
-    categoryCombo: {
-        filterKey: 'categoryCombo',
-        label: i18n.t('Category combo'),
-    },
-    dataSet: { filterKey: 'dataSet', label: i18n.t('Data set') },
     publicAccess: {
-        filterKey: 'publicAccess',
+        path: 'sharing.public',
         label: i18n.t('Public access'),
+        filterKey: 'publicAccess',
     },
-} satisfies Record<string, FilterDescriptor>
+} satisfies Record<string, Descriptor>
 
 // This is the default views, and can be overriden per section in modelListViewsConfig below
 export const defaultModelViewConfig = {
@@ -86,7 +82,7 @@ export const defaultModelViewConfig = {
 export const modelListViewsConfig = {
     dataElement: {
         columns: {
-            available: ['zeroIsSignificant', DESCRIPTORS.publicAccess],
+            available: ['zeroIsSignificant'],
             default: [
                 'name',
                 { label: i18n.t('Domain type'), path: 'domainType' },
@@ -97,13 +93,8 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            default: [
-                'domainType',
-                'valueType',
-                FILTERS.dataSet,
-                'categoryCombo',
-            ],
-            available: ['categoryCombo', FILTERS.publicAccess],
+            default: ['domainType', 'valueType', 'dataSet', 'categoryCombo'],
+            available: [DESCRIPTORS.publicAccess],
         },
     },
 } satisfies SectionListViewConfig
