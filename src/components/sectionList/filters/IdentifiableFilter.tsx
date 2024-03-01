@@ -1,10 +1,12 @@
 import i18n from '@dhis2/d2-i18n'
 import { Input, InputEventPayload } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
-import { useDebounce } from '../../../lib'
-import { InputOnChangeObject } from '../../../types'
+import {
+    useDebounce,
+    IDENTIFIABLE_KEY,
+    useSectionListFilter,
+} from '../../../lib'
 import css from './Filters.module.css'
-import { IDENTIFIABLE_KEY, useSectionListFilter } from './useSectionListFilter'
 
 export const IdentifiableFilter = () => {
     const [filter, setFilter] = useSectionListFilter(IDENTIFIABLE_KEY)

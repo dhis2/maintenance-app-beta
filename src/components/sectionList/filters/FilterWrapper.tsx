@@ -1,9 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import React from 'react'
+import { useSectionListFilters } from './../../../lib'
 import css from './Filters.module.css'
 import { IdentifiableFilter } from './IdentifiableFilter'
-import { useSectionListFilters } from './useSectionListFilter'
 
 type FilterWrapperProps = React.PropsWithChildren
 

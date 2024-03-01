@@ -1,4 +1,3 @@
-export * from './CustomQueryParam'
 export {
     routePaths,
     getOverviewPath,
