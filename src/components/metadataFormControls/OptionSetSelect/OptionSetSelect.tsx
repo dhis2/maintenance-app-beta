@@ -1,9 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import React, { forwardRef } from 'react'
+import { useOptionSetsQuery } from '../../../lib'
 import { ModelSingleSelect } from '../ModelSingleSelect'
 import type { ModelSingleSelectProps } from '../ModelSingleSelect'
 import { useInitialOptionQuery } from './useInitialOptionQuery'
-import { useOptionsQuery } from './useOptionsQuery'
 
 type OptionSetSelectProps = Omit<
     ModelSingleSelectProps,
@@ -29,7 +29,7 @@ export const OptionSetSelect = forwardRef(function OptionSetSelect(
             required={required}
             invalid={invalid}
             useInitialOptionQuery={useInitialOptionQuery}
-            useOptionsQuery={useOptionsQuery}
+            useOptionsQuery={useOptionSetsQuery}
             placeholder={placeholder}
             showAllOption={showAllOption}
             onChange={onChange}

@@ -624,6 +624,12 @@ msgstr "Owner"
 msgid "Zero is significant"
 msgstr "Zero is significant"
 
+msgid "This field requires a unique value, please choose another one"
+msgstr "This field requires a unique value, please choose another one"
+
+msgid "Required"
+msgstr "Required"
+
 msgid "Custom attributes"
 msgstr "Custom attributes"
 
@@ -639,11 +645,103 @@ msgstr "Exit without saving"
 msgid "Create data element"
 msgstr "Create data element"
 
+msgid "Choose how this data element is disaggregated"
+msgstr "Choose how this data element is disaggregated"
+
+msgid "The default way to aggregate this data element in analytics."
+msgstr "The default way to aggregate this data element in analytics."
+
+msgid "Disabled for the selected value type."
+msgstr "Disabled for the selected value type."
+
+msgid "{{fieldLabel}} (required)"
+msgstr "{{fieldLabel}} (required)"
+
+msgid "Aggregation type"
+msgstr "Aggregation type"
+
+msgid "Color and icon"
+msgstr "Color and icon"
+
+msgid ""
+"A color and icon are helpful for identifying data elements in "
+"information-dense screens."
+msgstr ""
+"A color and icon are helpful for identifying data elements in "
+"information-dense screens."
+
 msgid "Loading custom attributes"
 msgstr "Loading custom attributes"
 
 msgid "Something went wrong with retrieving the custom attributes"
 msgstr "Something went wrong with retrieving the custom attributes"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Explain the purpose of this data element and how it's measured."
+msgstr "Explain the purpose of this data element and how it's measured."
+
+msgid "A data element can either be aggregated or tracked data."
+msgstr "A data element can either be aggregated or tracked data."
+
+msgid "Field mask"
+msgstr "Field mask"
+
+msgid "Use a pattern to limit what information can be entered."
+msgstr "Use a pattern to limit what information can be entered."
+
+msgid "e.g. 999-000-0000"
+msgstr "e.g. 999-000-0000"
+
+msgid "StandardForm name"
+msgstr "StandardForm name"
+
+msgid "An alternative name used in section or automatic data entry forms."
+msgstr "An alternative name used in section or automatic data entry forms."
+
+msgid "Selected legends"
+msgstr "Selected legends"
+
+msgid "Refresh list"
+msgstr "Refresh list"
+
+msgid "Add new"
+msgstr "Add new"
+
+msgid "A data element name should be concise and easy to recognize."
+msgstr "A data element name should be concise and easy to recognize."
+
+msgid "Option set comment"
+msgstr "Option set comment"
+
+msgid "Choose a set of predefined comment for data entry"
+msgstr "Choose a set of predefined comment for data entry"
+
+msgid "Choose a set of predefined options for data entry"
+msgstr "Choose a set of predefined options for data entry"
+
+msgid "Often used in reports where space is limited"
+msgstr "Often used in reports where space is limited"
+
+msgid "Url"
+msgstr "Url"
+
+msgid "A web link that provides extra information"
+msgstr "A web link that provides extra information"
+
+msgid "The type of data that will be recorded."
+msgstr "The type of data that will be recorded."
+
+msgid ""
+"Disabled as the value type must match the value type of the selected option "
+"set"
+msgstr ""
+"Disabled as the value type must match the value type of the selected option "
+"set"
+
+msgid "Store zero data values"
+msgstr "Store zero data values"
 
 msgid "Basic information"
 msgstr "Basic information"
@@ -687,100 +785,6 @@ msgstr ""
 
 msgid "Custom fields for your DHIS2 instance"
 msgstr "Custom fields for your DHIS2 instance"
-
-msgid "Required"
-msgstr "Required"
-
-msgid "Cannot be longer than {{number}} character"
-msgstr "Cannot be longer than {{number}} character"
-
-msgid "The value is to long. You can use up to 255 characters"
-msgstr "The value is to long. You can use up to 255 characters"
-
-msgid "{{fieldLabel}} (required)"
-msgstr "{{fieldLabel}} (required)"
-
-msgid "A data element name should be concise and easy to recognize."
-msgstr "A data element name should be concise and easy to recognize."
-
-msgid "Often used in reports where space is limited"
-msgstr "Often used in reports where space is limited"
-
-msgid "Description"
-msgstr "Description"
-
-msgid "Explain the purpose of this data element and how it's measured."
-msgstr "Explain the purpose of this data element and how it's measured."
-
-msgid "Url"
-msgstr "Url"
-
-msgid "A web link that provides extra information"
-msgstr "A web link that provides extra information"
-
-msgid "Color and icon"
-msgstr "Color and icon"
-
-msgid ""
-"A color and icon are helpful for identifying data elements in "
-"information-dense screens."
-msgstr ""
-"A color and icon are helpful for identifying data elements in "
-"information-dense screens."
-
-msgid "Field mask"
-msgstr "Field mask"
-
-msgid "Use a pattern to limit what information can be entered."
-msgstr "Use a pattern to limit what information can be entered."
-
-msgid "e.g. 999-000-0000"
-msgstr "e.g. 999-000-0000"
-
-msgid "StandardForm name"
-msgstr "StandardForm name"
-
-msgid "An alternative name used in section or automatic data entry forms."
-msgstr "An alternative name used in section or automatic data entry forms."
-
-msgid "Store zero data values"
-msgstr "Store zero data values"
-
-msgid "A data element can either be aggregated or tracked data."
-msgstr "A data element can either be aggregated or tracked data."
-
-msgid "Selected legends"
-msgstr "Selected legends"
-
-msgid "Refresh list"
-msgstr "Refresh list"
-
-msgid "Add new"
-msgstr "Add new"
-
-msgid "The type of data that will be recorded."
-msgstr "The type of data that will be recorded."
-
-msgid "Aggregation type"
-msgstr "Aggregation type"
-
-msgid "The default way to aggregate this data element in analytics."
-msgstr "The default way to aggregate this data element in analytics."
-
-msgid "Choose how this data element is disaggregated"
-msgstr "Choose how this data element is disaggregated"
-
-msgid "Choose a set of predefined options for data entry"
-msgstr "Choose a set of predefined options for data entry"
-
-msgid "Option set comment"
-msgstr "Option set comment"
-
-msgid "Choose a set of predefined comment for data entry"
-msgstr "Choose a set of predefined comment for data entry"
-
-msgid "This field requires a unique value, please choose another one"
-msgstr "This field requires a unique value, please choose another one"
 
 msgid "Metadata management"
 msgstr "Metadata management"

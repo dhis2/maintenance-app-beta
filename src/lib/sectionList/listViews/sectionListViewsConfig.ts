@@ -89,10 +89,11 @@ export const modelListViewsConfig = {
             available: ['zeroIsSignificant', DESCRIPTORS.publicAccess],
             default: [
                 'name',
-                { label: i18n.t('Domain'), path: 'domainType' },
+                { label: i18n.t('Domain type'), path: 'domainType' },
                 { label: i18n.t('Value type'), path: 'valueType' },
                 'categoryCombo',
                 'lastUpdated',
+                DESCRIPTORS.publicAccess,
             ],
         },
         filters: {

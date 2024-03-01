@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import memoize from 'lodash/memoize'
 import { useMemo } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
-import { Pager } from '../../../types/generated'
+import { Pager } from '../../types/generated'
 
 const HAS_FIELD_VALUE_QUERY = {
     dataElements: {

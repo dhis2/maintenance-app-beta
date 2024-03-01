@@ -1,7 +1,7 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import { useEffect, useMemo, useState } from 'react'
-import { SelectOption } from '../../../types'
-import { OptionSet, Pager } from '../../../types/generated'
+import { SelectOption } from '../../types'
+import { OptionSet, Pager } from '../../types/generated'
 
 type OptionSetQueryResult = {
     optionSets: {
@@ -33,7 +33,7 @@ const CATEGORY_COMBOS_QUERY = {
     },
 }
 
-export function useOptionsQuery() {
+export function useOptionSetsQuery() {
     const [loadedOptions, setLoadedOptions] = useState<SelectOption[]>([])
     const queryResult = useDataQuery<OptionSetQueryResult>(
         CATEGORY_COMBOS_QUERY,

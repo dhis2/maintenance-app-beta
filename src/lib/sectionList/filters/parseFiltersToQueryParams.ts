@@ -1,7 +1,20 @@
-import { SECTIONS_MAP, Section } from '../../constants'
+import { ModelSection } from '../../../types'
+import { Section } from '../../constants'
+import { SchemaName } from '../../schemas'
 import { FilterKey, ParsedFilterParams } from './filterConfig'
 
 type AllValues = ParsedFilterParams[keyof ParsedFilterParams]
+
+/* Type to resolve the correct type for the value of the filter-handler based on the parsed type */
+type FilterToQueryParamsMap = {
+    [key in keyof ParsedFilterParams]: (
+        value: NonNullable<ParsedFilterParams[key]>,
+        section: Section
+    ) => string
+}
+
+const inFilter = (filterPath: string, value: string[]) =>
+    `${filterPath}:in:[${value.join(',')}]`
 
 const defaultFilter = (key: FilterKey, value: AllValues): string => {
     const isArray = Array.isArray(value)
@@ -10,38 +23,39 @@ const defaultFilter = (key: FilterKey, value: AllValues): string => {
     return `${key}:${operator}:${valuesString}`
 }
 
-const inFilter = (filterPath: string, value: string[]) =>
-    `${filterPath}:in:[${value.join(',')}]`
+/* Override how to resolve the actual queryParam (when used in a request) for a filter */
+
+const filterToQueryParamMap: FilterToQueryParamsMap = {
+    identifiable: (value) => `identifiable:token:${value}`,
+    categoryCombo: (value) => inFilter('categoryCombo.id', value),
+    dataSet: (value, section) =>
+        section.name === SchemaName.dataElement
+            ? inFilter('dataSetElements.dataSet.id', value)
+            : defaultFilter('dataSet', value),
+    publicAccess: (value) => inFilter('sharing.public', value),
+}
 
 const getQueryParamForFilter = (
     key: FilterKey,
     value: AllValues,
-    section?: Section
+    section: ModelSection
 ): string | undefined => {
     if (!value) {
         return undefined
     }
-    if (key === 'identifiable') {
-        return `identifiable:token:${value}`
+    const filterHandler = filterToQueryParamMap[key]
+    if (filterHandler) {
+        // see https://www.totaltypescript.com/as-never#unions-of-functions-with-incompatible-params
+        // this is fine
+        return filterHandler(value as never, section)
     }
-    if (key === 'dataSet') {
-        const v = value as string[]
-        if (section?.name === SECTIONS_MAP.dataElement.name) {
-            return inFilter('dataSetElements.dataSet.id', v)
-        }
-    }
-    if (key === 'categoryCombo') {
-        return inFilter('categoryCombo.id', value as string[])
-    }
-    if (key === 'publicAccess') {
-        return inFilter('sharing.public', value as string[])
-    }
+
     return defaultFilter(key, value)
 }
 
 export const parseFiltersToQueryParams = (
     filters: ParsedFilterParams,
-    section?: Section
+    section: ModelSection
 ): string[] => {
     const queryFilters = Object.entries(filters)
         .map(([key, value]) =>
