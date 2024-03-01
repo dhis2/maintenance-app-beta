@@ -66,21 +66,22 @@ const parseViewToModelListView = (
 
     const parsedView = listView.data
 
-    const availableColumnsMap = new Map(
-        viewConfig.columns.available.map((c) => [c.path, c] as const)
-    )
     // map to config to make sure we don't use invalid columns
     // Preserve order by mapping from parsedView to config-object
-    const columns = parsedView.columns
-        .filter((col) => availableColumnsMap.has(col))
-        .map((col) => {
-            const columnConfig = availableColumnsMap.get(col)
-            return columnConfig as NonNullable<typeof columnConfig>
-        })
+    const columns = parsedView.columns.flatMap((path) => {
+        const columnConfig = viewConfig.columns.available.find(
+            (col) => col.path === path
+        )
+        return columnConfig ? [columnConfig] : []
+    })
 
-    const filters = viewConfig.filters.available.filter((filterDescriptor) =>
-        parsedView.filters.includes(filterDescriptor.filterKey)
-    )
+    const filters = parsedView.filters.flatMap((filterKey) => {
+        const filterConfig = viewConfig.filters.available.find(
+            (filter) => filter.filterKey === filterKey
+        )
+
+        return filterConfig ? [filterConfig] : []
+    })
 
     return {
         ...parsedView,
@@ -138,10 +139,17 @@ export const useModelListView = () => {
         console.error(query.error)
     }
 
-    const selectedView = query.data || getDefaultViewForSection(section.name)
+    const defaultView = getDefaultViewForSection(section.name)
+    const selectedView = query.data || defaultView
 
-    const columns = selectedView.columns
-    const filters = selectedView.filters
+    const columns =
+        selectedView.columns.length < 1
+            ? defaultView.columns
+            : selectedView.columns
+    const filters =
+        selectedView.filters.length < 1
+            ? defaultView.filters
+            : selectedView.filters
 
     return { view: selectedView, columns, filters, query }
 }
@@ -221,5 +229,5 @@ export const useMutateModelListViews = () => {
         [saveView]
     )
 
-    return { mutation, saveColumns }
+    return { mutation, saveColumns, saveView }
 }

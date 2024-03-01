@@ -1,132 +1,211 @@
 import { FetchError } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, Field, NoticeBox, Transfer } from '@dhis2/ui'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { Button, Field, NoticeBox, Transfer, TransferOption } from '@dhis2/ui'
+import { FORM_ERROR } from 'final-form'
+import React, { useMemo } from 'react'
+import { Form, useField } from 'react-final-form'
 import {
     getColumnsForSection,
+    getFiltersForSection,
     useModelSectionHandleOrThrow,
 } from '../../../lib'
 import css from './ManageListView.module.css'
 import { useModelListView, useMutateModelListViews } from './useModelListView'
 
 interface RenderProps {
-    handleSave: () => void
-    isSaving: boolean
+    submitting: boolean
 }
+
 type ManageColumnsDialogProps = {
     onSaved: () => void
     children: (props: RenderProps) => React.ReactNode
 }
 
 const toPath = (propertyDescriptor: { path: string }) => propertyDescriptor.path
+const toFilterKey = (filterDescriptor: { filterKey: string }) =>
+    filterDescriptor.filterKey
 
+type FormValues = {
+    columns: string[]
+    filters: string[]
+}
+
+const validate = (values: FormValues) => {
+    const errors: Record<string, string> = {}
+
+    if (values.columns.length < 1) {
+        errors.columns = i18n.t('At least one column must be selected')
+    }
+    if (values.filters.length < 1) {
+        errors.filters = i18n.t('At least one filter must be selected')
+    }
+    return errors
+}
 export const ManageListView = ({
     onSaved,
     children,
 }: ManageColumnsDialogProps) => {
+    const {
+        columns: savedColumns,
+        filters: savedFilters,
+        query,
+    } = useModelListView()
     const section = useModelSectionHandleOrThrow()
-    // ignore updates to saved-columns while selecting
-    const isTouched = useRef(false)
-
-    const { columns: savedColumns, query } = useModelListView()
-    const [pendingSelectedColumns, setPendingSelectedColumns] = useState<
-        string[]
-    >(() => savedColumns.map(toPath))
-    const [error, setError] = useState<string | undefined>()
-    const [saveError, setSaveError] = useState<FetchError | undefined>()
-
-    const { saveColumns, mutation } = useMutateModelListViews()
+    const { saveView } = useMutateModelListViews()
 
     const columnsConfig = getColumnsForSection(section.name)
+    const filtersConfig = getFiltersForSection(section.name)
 
-    useEffect(() => {
-        // if savedColumns were to update while selecting (it shouldn't )
-        // make sure to not overwrite the selected columns
-        if (isTouched.current) {
-            return
-        }
-        setPendingSelectedColumns(savedColumns.map(toPath))
-    }, [savedColumns])
+    const defaultColumns = columnsConfig.default.map(toPath)
+    const defaultFilters = filtersConfig.default.map(toFilterKey)
 
-    const handleSave = () => {
-        if (pendingSelectedColumns.length < 1) {
-            setError(i18n.t('At least one column must be selected'))
-            return
+    const handleSave = async (values: FormValues) => {
+        const isDefault = (arr: string[], def: string[]) =>
+            arr.join() === def.join()
+
+        // save empty view if default, this makes the app able to update the default view
+        const view = {
+            name: 'default',
+            columns: isDefault(values.columns, defaultColumns)
+                ? []
+                : values.columns,
+            filters: isDefault(values.filters, defaultFilters)
+                ? []
+                : values.filters,
         }
-        saveColumns(pendingSelectedColumns, {
-            onSuccess: () => onSaved(),
-            onError: (error) => {
-                if (error instanceof FetchError) {
-                    setSaveError(error)
-                }
-            },
+
+        return new Promise((resolve) => {
+            saveView(view, {
+                onSuccess: () => resolve(onSaved()),
+                onError: (error) => {
+                    if (error instanceof FetchError) {
+                        resolve({ [FORM_ERROR]: error.message })
+                    }
+                    resolve({
+                        [FORM_ERROR]: i18n.t('An unknown error occurred'),
+                    })
+                },
+            })
         })
     }
 
-    const handleChange = ({ selected }: { selected: string[] }) => {
-        isTouched.current = true
-
-        setPendingSelectedColumns(selected)
-        setError(undefined)
-        setSaveError(undefined)
-    }
-
-    const handleSetDefault = () => {
-        handleChange({ selected: columnsConfig.default.map(toPath) })
-    }
-
-    const transferOptions = useMemo(
-        () =>
-            columnsConfig.available
-                .map((column) => ({
-                    label: column.label,
-                    value: column.path,
-                }))
-                .sort((a, b) => a.label.localeCompare(b.label)),
-        [columnsConfig.available]
-    )
+    const initialValues = useMemo(() => {
+        return {
+            columns:
+                savedColumns.length > 0
+                    ? savedColumns.map(toPath)
+                    : defaultColumns,
+            filters:
+                savedFilters.length > 0
+                    ? savedFilters.map(toFilterKey)
+                    : defaultFilters,
+        }
+    }, [savedFilters, savedColumns, defaultColumns, defaultFilters])
 
     return (
-        <>
-            <Field error={!!error} validationText={error} name={'columns'}>
+        <Form
+            onSubmit={handleSave}
+            initialValues={initialValues}
+            validate={validate}
+        >
+            {({ handleSubmit, submitting, submitError }) => (
+                <form onSubmit={handleSubmit}>
+                    <TransferField
+                        name={'columns'}
+                        availableLabel={i18n.t('Available columns')}
+                        selectedLabel={i18n.t('Selected columns')}
+                        loading={query.isLoading}
+                        defaultOptions={defaultColumns}
+                        availableOptions={columnsConfig.available.map((c) => ({
+                            label: c.label,
+                            value: c.path,
+                        }))}
+                    />
+                    <TransferField
+                        name={'filters'}
+                        availableLabel={i18n.t('Available filters')}
+                        selectedLabel={i18n.t('Selected filters')}
+                        loading={query.isLoading}
+                        defaultOptions={defaultFilters}
+                        availableOptions={filtersConfig.available.map((f) => ({
+                            label: f.label,
+                            value: f.filterKey,
+                        }))}
+                    />
+                    {submitError && (
+                        <p>
+                            <NoticeBox error title={i18n.t('Failed to save')}>
+                                {submitError}
+                            </NoticeBox>
+                        </p>
+                    )}
+                    {children({
+                        submitting,
+                    })}
+                </form>
+            )}
+        </Form>
+    )
+}
+
+type TransferField = {
+    name: string
+    loading?: boolean
+    defaultOptions: string[]
+    availableOptions: TransferOption[]
+    availableLabel: string
+    selectedLabel: string
+}
+const TransferField = ({
+    name,
+    loading,
+    defaultOptions,
+    availableOptions,
+    availableLabel,
+    selectedLabel,
+}: TransferField) => {
+    const { input, meta } = useField(name, {
+        multiple: true,
+    })
+    const handleSetDefault = () => {
+        input.onChange(defaultOptions)
+    }
+
+    return (
+        <div>
+            <Field
+                error={!!meta.error}
+                validationText={meta.error}
+                name={'columns'}
+            >
                 <Transfer
+                    className={css.transferContainer}
                     height={'320px'}
+                    loading={loading}
                     enableOrderChange
                     leftHeader={
-                        <TransferHeader>
-                            {i18n.t('Available table columns')}
-                        </TransferHeader>
+                        <TransferHeader>{availableLabel}</TransferHeader>
                     }
                     rightHeader={
-                        <TransferHeader>
-                            {i18n.t('Selected table columns')}
-                        </TransferHeader>
+                        <TransferHeader>{selectedLabel}</TransferHeader>
                     }
-                    onChange={handleChange}
-                    loading={query.isLoading}
-                    loadingPicked={query.isLoading}
-                    options={transferOptions}
-                    selected={pendingSelectedColumns}
+                    selected={input.value}
+                    onChange={({ selected }) => input.onChange(selected)}
+                    options={availableOptions}
+                    rightFooter={
+                        <Button
+                            className={css.resetDefaultButton}
+                            small
+                            secondary
+                            onClick={handleSetDefault}
+                            disabled={meta.submitting}
+                        >
+                            {i18n.t('Reset to default')}
+                        </Button>
+                    }
                 />
             </Field>
-            <Button
-                className={css.resetDefaultButton}
-                small
-                secondary
-                onClick={handleSetDefault}
-                disabled={mutation.isLoading}
-            >
-                {i18n.t('Reset to default columns')}
-            </Button>
-            {saveError && (
-                <p>
-                    <NoticeBox error title={i18n.t('Failed to save')}>
-                        {saveError.message}
-                    </NoticeBox>
-                </p>
-            )}
-            {children({ handleSave, isSaving: mutation.isLoading })}
-        </>
+        </div>
     )
 }
 

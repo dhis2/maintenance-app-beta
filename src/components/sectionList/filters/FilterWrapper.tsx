@@ -2,12 +2,11 @@ import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import React from 'react'
 import { useSectionListFilters } from './../../../lib'
-import css from './Filters.module.css'
-import { IdentifiableFilter } from './IdentifiableFilter'
+import { DynamicFilters } from './DynamicFilters'
+import { IdentifiableFilter } from './filterSelectors/IdentifiableFilter'
+import css from './FilterWrapper.module.css'
 
-type FilterWrapperProps = React.PropsWithChildren
-
-export const FilterWrapper = ({ children }: FilterWrapperProps) => {
+export const FilterWrapper = () => {
     const [, setFilters] = useSectionListFilters()
 
     const handleClear = () => {
@@ -17,7 +16,7 @@ export const FilterWrapper = ({ children }: FilterWrapperProps) => {
     return (
         <div className={css.filterWrapper}>
             <IdentifiableFilter />
-            {children}
+            <DynamicFilters />
             <Button small onClick={handleClear}>
                 {i18n.t('Clear all filters')}
             </Button>

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2023-11-23T14:09:23.068Z\n"
-"PO-Revision-Date: 2023-11-23T14:09:23.068Z\n"
+"POT-Creation-Date: 2024-03-01T17:52:14.520Z\n"
+"PO-Revision-Date: 2024-03-01T17:52:14.520Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -66,6 +66,12 @@ msgstr "All"
 msgid "Filter options"
 msgstr "Filter options"
 
+msgid "Something went wrong when submitting the form"
+msgstr "Something went wrong when submitting the form"
+
+msgid "Save and close"
+msgstr "Save and close"
+
 msgid "Failed to load {{label}}"
 msgstr "Failed to load {{label}}"
 
@@ -99,8 +105,8 @@ msgstr "New"
 msgid "Download"
 msgstr "Download"
 
-msgid "Manage Columns"
-msgstr "Manage Columns"
+msgid "Manage View"
+msgstr "Manage View"
 
 msgid "There aren't any items that match your filter."
 msgstr "There aren't any items that match your filter."
@@ -153,38 +159,56 @@ msgstr "Details"
 msgid "Failed to load details"
 msgstr "Failed to load details"
 
+msgid "Clear all filters"
+msgstr "Clear all filters"
+
 msgid "Type to filter options"
 msgstr "Type to filter options"
 
 msgid "No matches"
 msgstr "No matches"
 
-msgid "Clear all filters"
-msgstr "Clear all filters"
+msgid "Data set"
+msgstr "Data set"
 
 msgid "Search by name, code or ID"
 msgstr "Search by name, code or ID"
 
+msgid "Public access"
+msgstr "Public access"
+
 msgid "At least one column must be selected"
 msgstr "At least one column must be selected"
 
-msgid "Available table columns"
-msgstr "Available table columns"
+msgid "At least one filter must be selected"
+msgstr "At least one filter must be selected"
 
-msgid "Selected table columns"
-msgstr "Selected table columns"
+msgid "An unknown error occurred"
+msgstr "An unknown error occurred"
 
-msgid "Reset to default columns"
-msgstr "Reset to default columns"
+msgid "Available columns"
+msgstr "Available columns"
+
+msgid "Selected columns"
+msgstr "Selected columns"
+
+msgid "Available filters"
+msgstr "Available filters"
+
+msgid "Selected filters"
+msgstr "Selected filters"
 
 msgid "Failed to save"
 msgstr "Failed to save"
 
-msgid "Manage {{section}} table columns"
-msgstr "Manage {{section}} table columns"
+msgid "Reset to default"
+msgstr "Reset to default"
 
-msgid "Update table columns"
-msgstr "Update table columns"
+msgid "Manage {{section}} view"
+msgstr "Manage {{section}} view"
+
+msgid "Update view"
+msgstr "Update view"
 
 msgid "Public can edit"
 msgstr "Public can edit"
@@ -194,15 +218,6 @@ msgstr "Public can view"
 
 msgid "Public cannot access"
 msgstr "Public cannot access"
-
-msgid "Public access"
-msgstr "Public access"
-
-msgid "Domain"
-msgstr "Domain"
-
-msgid "Value type"
-msgstr "Value type"
 
 msgid "Category"
 msgstr "Category"
@@ -257,9 +272,6 @@ msgstr "Data element group set"
 
 msgid "Data element group sets"
 msgstr "Data element group sets"
-
-msgid "Data set"
-msgstr "Data set"
 
 msgid "Data sets"
 msgstr "Data sets"
@@ -630,12 +642,6 @@ msgstr "Required"
 msgid "Custom attributes"
 msgstr "Custom attributes"
 
-msgid "Something went wrong when submitting the form"
-msgstr "Something went wrong when submitting the form"
-
-msgid "Save and close"
-msgstr "Save and close"
-
 msgid "Exit without saving"
 msgstr "Exit without saving"
 
@@ -678,6 +684,9 @@ msgstr "Description"
 
 msgid "Explain the purpose of this data element and how it's measured."
 msgstr "Explain the purpose of this data element and how it's measured."
+
+msgid "Domain"
+msgstr "Domain"
 
 msgid "A data element can either be aggregated or tracked data."
 msgstr "A data element can either be aggregated or tracked data."

@@ -16,19 +16,16 @@ import { SectionListRow } from './SectionListRow'
 import { SectionListTitle } from './SectionListTitle'
 
 type SectionListWrapperProps = {
-    filterElement?: React.ReactElement
     data: ModelCollection | undefined
     pager: Pager | undefined
     error: FetchError | undefined
 }
 
 export const SectionListWrapper = ({
-    filterElement,
     data,
     error,
     pager,
 }: SectionListWrapperProps) => {
-    data
     const { columns: headerColumns } = useModelListView()
     const schema = useSchemaFromHandle()
     const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set())
@@ -78,7 +75,7 @@ export const SectionListWrapper = ({
     return (
         <div>
             <SectionListTitle />
-            <FilterWrapper>{filterElement}</FilterWrapper>
+            <FilterWrapper />
             <div className={css.listDetailsWrapper}>
                 <SectionListHeader />
                 <SectionList

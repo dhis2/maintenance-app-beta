@@ -13,22 +13,26 @@ type FilterToQueryParamsMap = {
     ) => string
 }
 
-/* Override how to resolve the actual queryParam (when used in a request) for a filter */
-
-const filterToQueryParamMap: FilterToQueryParamsMap = {
-    identifiable: (value) => `identifiable:token:${value}`,
-    dataSet: (value, section) =>
-        section.name === SchemaName.dataElement
-            ? `dataSetElements.dataSet.id:in:[${value.join(',')}]`
-            : defaultFilter('dataSet', value),
-    aggregationType: (value) => `aggregationType:in:[${value.join(',')}]`,
-}
+const inFilter = (filterPath: string, value: string[]) =>
+    `${filterPath}:in:[${value.join(',')}]`
 
 const defaultFilter = (key: FilterKey, value: AllValues): string => {
     const isArray = Array.isArray(value)
     const valuesString = isArray ? `[${value.join(',')}]` : value?.toString()
     const operator = isArray ? 'in' : 'eq'
     return `${key}:${operator}:${valuesString}`
+}
+
+/* Override how to resolve the actual queryParam (when used in a request) for a filter */
+
+const filterToQueryParamMap: FilterToQueryParamsMap = {
+    identifiable: (value) => `identifiable:token:${value}`,
+    categoryCombo: (value) => inFilter('categoryCombo.id', value),
+    dataSet: (value, section) =>
+        section.name === SchemaName.dataElement
+            ? inFilter('dataSetElements.dataSet.id', value)
+            : defaultFilter('dataSet', value),
+    publicAccess: (value) => inFilter('sharing.public', value),
 }
 
 const getQueryParamForFilter = (
@@ -60,6 +64,5 @@ export const parseFiltersToQueryParams = (
         .filter(
             (queryFilter): queryFilter is string => queryFilter !== undefined
         )
-
     return queryFilters
 }

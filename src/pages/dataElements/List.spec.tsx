@@ -89,10 +89,11 @@ describe('Data Elements List', () => {
         const { getByText } = await renderSection(customData)
         const columns = [
             'Name',
-            'Domain',
+            'Domain type',
             'Value type',
-            'Last updated',
+            'Category combination',
             'Public access',
+            'Last updated',
             'Actions',
         ]
 

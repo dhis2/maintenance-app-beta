@@ -20,7 +20,7 @@ export const SectionListHeader = () => {
             </Link>
             <Button small>{i18n.t('Download')}</Button>
             <Button small onClick={() => setManageColumnsOpen((prev) => !prev)}>
-                {i18n.t('Manage Columns')}
+                {i18n.t('Manage View')}
             </Button>
             {manageColumnsOpen && (
                 <ManageListViewDialog onClose={handleClose} />

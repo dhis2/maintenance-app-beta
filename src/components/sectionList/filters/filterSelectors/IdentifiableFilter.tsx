@@ -3,13 +3,13 @@ import { Input, InputEventPayload } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import {
     useDebounce,
-    IDENTIFIABLE_KEY,
+    IDENTIFIABLE_FILTER_KEY,
     useSectionListFilter,
-} from '../../../lib'
+} from '../../../../lib'
 import css from './Filters.module.css'
 
 export const IdentifiableFilter = () => {
-    const [filter, setFilter] = useSectionListFilter(IDENTIFIABLE_KEY)
+    const [filter, setFilter] = useSectionListFilter(IDENTIFIABLE_FILTER_KEY)
     const [value, setValue] = useState(filter || '')
     const debouncedValue = useDebounce<typeof filter>(value, 200)
 
