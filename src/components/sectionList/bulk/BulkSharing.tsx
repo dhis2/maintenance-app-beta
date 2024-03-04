@@ -195,18 +195,24 @@ const SharingSelection = ({
             <div className={css.selectionWrapper}>
                 <Field
                     label={i18n.t('User or group')}
-                    className={css.fieldWrapper}
+                    className={css.sharingEntitySelect}
                 >
                     <SharingSearchSelect onChange={handleSelectSharingEntity} />
                 </Field>
-                <Field label={i18n.t('Metadata access')}>
+                <Field
+                    className={css.accessField}
+                    label={i18n.t('Metadata access')}
+                >
                     <MetadataAccessField
                         value={accessString}
                         onChange={(selected) => setAccessString(selected)}
                     />
                 </Field>
                 {dataShareable && (
-                    <Field label={i18n.t('Data access')}>
+                    <Field
+                        className={css.accessField}
+                        label={i18n.t('Data access')}
+                    >
                         <DataAccessField
                             value={accessString}
                             onChange={(selected) => setAccessString(selected)}
