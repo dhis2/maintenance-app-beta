@@ -1,19 +1,19 @@
-import { useConfig, useDataEngine, useDataMutation } from '@dhis2/app-runtime'
+import { useConfig } from '@dhis2/app-runtime'
 import { useCallback } from 'react'
-import { JsonPatchOperation, SchemaName } from '../../../types'
+import { JsonPatchOperation } from '../../../types'
 
-type Mutation = Parameters<typeof useDataMutation>[0]
+// TODO: use this when mutation support objects as json-patch
+//type Mutation = Parameters<typeof useDataMutation>[0]
+// const query = {
+//     type: 'json-patch',
+//     data: ({ data }: Record<string, string>) => data,
+// } as const
 
-const query = {
-    type: 'json-patch',
-    data: ({ data }: Record<string, string>) => data,
-} as const
-
-const createQuery = (modelName: string): Mutation => ({
-    ...query,
-    resource: modelName,
-    id: 'sharing',
-})
+// const createQuery = (modelName: string): Mutation => ({
+//     ...query,
+//     resource: modelName,
+//     id: 'sharing',
+// })
 
 export type SharingJsonPatchOperation = Omit<JsonPatchOperation, 'value'> & {
     value?: {
@@ -52,7 +52,9 @@ export const useBulkSharingMutation = ({
                     body: JSON.stringify(data),
                 }
             )
-            return request.then((r) => (r.ok ? r.json() : Promise.reject(r)))
+            return request.then((r) =>
+                r.ok ? r.json() : r.json().then((e) => Promise.reject(e))
+            )
         },
         [config, modelNamePlural]
     )

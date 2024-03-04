@@ -1,7 +1,7 @@
 .bulkSharingWrapper {
     display: flex;
     flex-direction: column;
-    gap: var(--spacers-dp8);
+    gap: var(--spacers-dp16);
 }
 
 .fieldWrapper {
@@ -18,7 +18,46 @@
 .selectionWrapper {
     display: flex;
     gap: var(--spacers-dp4);
-    background-color: var(--colors-red050);
+    background-color: var(--colors-grey050);
     padding: var(--spacers-dp12);
-    align-items: flex-end;
+}
+
+.addActionButton {
+    margin-bottom: -1px;
+    align-self: flex-end;
+}
+
+.actionCancelButton {
+    margin-inline-start: auto;
+}
+
+.actionSummary {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp16);
+    padding: 0 var(--spacers-dp8);
+}
+
+.actionSummaryDisplayName {
+    max-width: 350px;
+}
+
+.accessSummary {
+    display: flex;
+    gap: var(--spacers-dp8);
+    align-items: center;
+}
+
+.accessSummary span {
+    display: flex;
+    gap: var(--spacers-dp4);
+    align-items: center;
+}
+
+.actionNoAccess {
+    color: var(--colors-red600);
+}
+
+.actionAccessAdd {
+    color: var(--colors-green600);
 }

@@ -27,14 +27,19 @@ export const BulkSharingDialog = ({
                 })}
             </ModalTitle>
             <ModalContent>
-                <BulkSharing selectedModels={selectedModels}>
-                    {({ handleSave }) => (
+                <BulkSharing onSaved={onClose} selectedModels={selectedModels}>
+                    {({ submitting, disableSave }) => (
                         <ModalActions>
                             <ButtonStrip>
                                 <Button onClick={onClose} secondary>
                                     {i18n.t('Cancel')}
                                 </Button>
-                                <Button onClick={handleSave} primary>
+                                <Button
+                                    type="submit"
+                                    primary
+                                    loading={submitting}
+                                    disabled={disableSave}
+                                >
                                     {i18n.t('Update sharing')}
                                 </Button>
                             </ButtonStrip>

@@ -1,14 +1,16 @@
+import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, Divider, Field, SingleSelect } from '@dhis2/ui'
-import React, { useState } from 'react'
+import { Button, Divider, Field, NoticeBox } from '@dhis2/ui'
+import React, { FormEvent, useState } from 'react'
 import { useSchemaFromHandle } from '../../../lib'
-import { JsonPatchOperation } from '../../../types'
 import {
     SharingSearchSelect,
     MetadataAccessField,
     SharingSearchResult,
+    DataAccessField,
 } from '../../sharing'
 import css from './Bulk.module.css'
+import { ActionSummary } from './BulkActionSummary'
 import {
     SharingJsonPatchOperation,
     useBulkSharingMutation,
@@ -16,7 +18,14 @@ import {
 
 type BulkSharingProps = {
     selectedModels: Set<string>
-    children: ({ handleSave }: { handleSave: () => void }) => React.ReactNode
+    onSaved: () => void
+    children: ({
+        submitting,
+        disableSave,
+    }: {
+        submitting: boolean
+        disableSave: boolean
+    }) => React.ReactNode
 }
 
 export type SharingAction = {
@@ -41,37 +50,108 @@ const actionToJsonPatchOperation = (
     }
 }
 
-export const BulkSharing = ({ children, selectedModels }: BulkSharingProps) => {
-    const schema = useSchemaFromHandle()
-    const dataShareable = schema?.dataShareable
-    const mutation = useBulkSharingMutation({ modelNamePlural: schema.plural })
-    const [sharingActions, setSharingActions] = useState<SharingAction[]>([])
+/*
+   Usage of React-Final-Form does not seem necessary because we're not using 
+   validation or initialState. And the result of the form (list of added SharingActions) are not kept in form-state. 
+   However, we still need some metastate for the form.
+   */
+type FormMetaState = {
+    submitting: boolean
+    error: undefined | string
+}
 
-    const handleSave = () => {
+export const BulkSharing = ({
+    children,
+    selectedModels,
+    onSaved,
+}: BulkSharingProps) => {
+    const schema = useSchemaFromHandle()
+    const dataShareable = !schema?.dataShareable
+    const mutation = useBulkSharingMutation({ modelNamePlural: schema.plural })
+
+    const [sharingActions, setSharingActions] = useState<SharingAction[]>([])
+    const [metaState, setMetaState] = useState<FormMetaState>({
+        submitting: false,
+        error: undefined,
+    })
+
+    const { show: showSuccessAlert } = useAlert(
+        i18n.t('Successfully updated sharing for {{number}} items', {
+            number: selectedModels.size,
+        }),
+        { success: true }
+    )
+
+    const handleSave = async (e: FormEvent) => {
+        e.preventDefault()
         const ids = Array.from(selectedModels)
         const operations = sharingActions.map(actionToJsonPatchOperation)
-        mutation(ids, operations)
+        setMetaState({ submitting: true, error: undefined })
+        try {
+            await mutation(ids, operations)
+            setMetaState({ submitting: false, error: undefined })
+            showSuccessAlert()
+            onSaved()
+        } catch (e) {
+            console.error(e)
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const error = e as any
+            if ('message' in error) {
+                setMetaState({ submitting: false, error: error.message })
+            } else {
+                setMetaState({
+                    submitting: false,
+                    error: i18n.t('An unknown error occurred'),
+                })
+            }
+        }
+    }
+
+    const handleAddSharingAction = (action: SharingAction) => {
+        setSharingActions((prev) => {
+            const actionExists = sharingActions.some(
+                (a) => a.sharingEntity.id === action.sharingEntity.id
+            )
+            if (actionExists) {
+                // if the user/group already exists, update with new action
+                return sharingActions.map((a) =>
+                    a.sharingEntity.id === action.sharingEntity.id ? action : a
+                )
+            }
+            return [action, ...prev]
+        })
     }
 
     return (
-        <div className={css.bulkSharingWrapper}>
+        <form className={css.bulkSharingWrapper} onSubmit={handleSave}>
             <SharingSelection
                 dataShareable={dataShareable}
-                onAddSharingAction={(action) =>
-                    setSharingActions((prev) => [action, ...prev])
-                }
+                onAddSharingAction={handleAddSharingAction}
             />
             <SharingSummary
                 numberOfSelectedModels={selectedModels.size}
                 sharingActions={sharingActions}
+                dataShareable={dataShareable}
                 onRemoveSharingAction={(action) =>
                     setSharingActions((prev) =>
                         prev.filter((a) => a !== action)
                     )
                 }
             />
-            {children({ handleSave })}
-        </div>
+            {metaState.error && (
+                <NoticeBox
+                    error={true}
+                    title={i18n.t('Failed to update sharing')}
+                >
+                    {metaState.error}
+                </NoticeBox>
+            )}
+
+            {children({
+                submitting: metaState.submitting,
+                disableSave: sharingActions.length < 1,
+            })}
+        </form>
     )
 }
 
@@ -88,8 +168,7 @@ const SharingSelection = ({
         SharingSearchResult | undefined
     >()
 
-    const [metadataAccess, setMetadataAccess] = useState<string>('r-------')
-    const [dataAccess, setDataAccess] = useState<string>('--------')
+    const [accessString, setAccessString] = useState<string>('r-------')
 
     const handleSelectSharingEntity = (selected: SharingSearchResult) => {
         setSelectedSharingEntity(selected)
@@ -102,7 +181,7 @@ const SharingSelection = ({
         const action = {
             op: 'replace',
             sharingEntity: selectedSharingEntity,
-            access: metadataAccess,
+            access: accessString,
         } as const
 
         onAddSharingAction(action)
@@ -122,21 +201,20 @@ const SharingSelection = ({
                 </Field>
                 <Field label={i18n.t('Metadata access')}>
                     <MetadataAccessField
-                        value={metadataAccess}
-                        onChange={(selected) => setMetadataAccess(selected)}
+                        value={accessString}
+                        onChange={(selected) => setAccessString(selected)}
                     />
                 </Field>
                 {dataShareable && (
                     <Field label={i18n.t('Data access')}>
-                        <SingleSelect
-                            dense
-                            placeholder={i18n.t('Choose a level')}
-                            onChange={() => {}}
-                            dataTest="dhis2-uicore-singleselect"
+                        <DataAccessField
+                            value={accessString}
+                            onChange={(selected) => setAccessString(selected)}
                         />
                     </Field>
                 )}
                 <Button
+                    className={css.addActionButton}
                     onClick={handleAddSharingAction}
                     disabled={!selectedSharingEntity}
                 >
@@ -148,10 +226,12 @@ const SharingSelection = ({
 }
 
 const SharingSummary = ({
+    dataShareable,
     numberOfSelectedModels,
     sharingActions,
     onRemoveSharingAction,
 }: {
+    dataShareable: boolean
     numberOfSelectedModels: number
     sharingActions: SharingAction[]
     onRemoveSharingAction: (action: SharingAction) => void
@@ -163,14 +243,14 @@ const SharingSummary = ({
                     number: numberOfSelectedModels,
                 })}{' '}
             </SharingSubTitle>
-            <div>
-                {sharingActions.map((action, index) => (
-                    <div key={index}>
-                        {action.sharingEntity.name} - {action.access}
-                    </div>
-                ))}
-                <Divider />
-            </div>
+            {sharingActions.map((action) => (
+                <ActionSummary
+                    key={action.sharingEntity.id}
+                    action={action}
+                    dataShareable={dataShareable}
+                    onRemove={() => onRemoveSharingAction(action)}
+                />
+            ))}
         </div>
     )
 }
