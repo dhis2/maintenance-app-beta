@@ -8,8 +8,8 @@ import {
 import * as React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import { StandardFormSection } from '../../../components'
+import { useCustomAttributesQuery } from '../../../components/form'
 import { Attribute } from '../../../types/generated'
-import { useCustomAttributesQuery } from './useCustomAttributesQuery'
 
 const inputWidth = '440px'
 

@@ -9,7 +9,6 @@ export function useCheckMaxLengthFromSchema(
 ) {
     const schema = useSchema(model)
     const maxLength = schema.properties[property].length
-    console.log({ maxLength, schema })
     const checkMaxLength = useMemo(
         () =>
             maxLength == undefined

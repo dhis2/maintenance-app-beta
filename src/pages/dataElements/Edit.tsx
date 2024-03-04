@@ -10,12 +10,12 @@ import {
     StandardFormActions,
     StandardFormSection,
 } from '../../components'
+import { useCustomAttributesQuery } from '../../components/form'
 import { SCHEMA_SECTIONS, getSectionPath, validate } from '../../lib'
 import { JsonPatchOperation } from '../../types'
 import { Attribute, DataElement } from '../../types/generated'
 import { createJsonPatchOperations } from './edit/'
 import classes from './Edit.module.css'
-import { useCustomAttributesQuery } from './fields'
 import { DataElementFormFields, dataElementSchema } from './form'
 import type { FormValues } from './form'
 
