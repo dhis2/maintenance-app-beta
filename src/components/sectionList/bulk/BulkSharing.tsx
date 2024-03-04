@@ -66,7 +66,7 @@ export const BulkSharing = ({
     onSaved,
 }: BulkSharingProps) => {
     const schema = useSchemaFromHandle()
-    const dataShareable = !schema?.dataShareable
+    const dataShareable = schema.dataShareable
     const mutation = useBulkSharingMutation({ modelNamePlural: schema.plural })
 
     const [sharingActions, setSharingActions] = useState<SharingAction[]>([])
