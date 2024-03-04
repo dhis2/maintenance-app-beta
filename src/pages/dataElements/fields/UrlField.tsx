@@ -14,7 +14,7 @@ export function UrlField() {
     return (
         <FieldRFF
             component={InputFieldFF}
-            dataTest="dataelementsformfields-url"
+            dataTest="formfields-url"
             inputWidth="400px"
             name="url"
             label={i18n.t('Url')}

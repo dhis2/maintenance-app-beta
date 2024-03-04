@@ -7,7 +7,7 @@ export function ZeroIsSignificantField() {
     return (
         <FieldRFF
             component={CheckboxFieldFF}
-            dataTest="dataelementsformfields-zeroissignificant"
+            dataTest="formfields-zeroissignificant"
             name="zeroIsSignificant"
             label={i18n.t('Store zero data values')}
             type="checkbox"

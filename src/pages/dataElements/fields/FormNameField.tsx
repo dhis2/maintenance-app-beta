@@ -14,7 +14,7 @@ export function FormNameField() {
     return (
         <FieldRFF
             component={InputFieldFF}
-            dataTest="dataelementsformfields-formname"
+            dataTest="formfields-formname"
             inputWidth="400px"
             name="formName"
             label={i18n.t('Form name')}

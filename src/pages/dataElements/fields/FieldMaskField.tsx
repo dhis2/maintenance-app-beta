@@ -15,7 +15,7 @@ export function FieldMaskField() {
         <FieldRFF
             component={InputFieldFF}
             inputWidth="400px"
-            dataTest="dataelementsformfields-fieldmask"
+            dataTest="formfields-fieldmask"
             name="fieldMask"
             label={i18n.t('Field mask')}
             helpText={i18n.t(

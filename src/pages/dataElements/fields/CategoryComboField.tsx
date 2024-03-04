@@ -50,7 +50,7 @@ export function CategoryComboField() {
 
     return (
         <EditableFieldWrapper
-            dataTest="dataelementsformfields-categorycombo"
+            dataTest="formfields-categorycombo"
             onRefresh={() => categoryComboHandle.current.refetch()}
             onAddNew={() => window.open(newCategoryComboLink, '_blank')}
         >
@@ -66,7 +66,7 @@ export function CategoryComboField() {
                     )}
                     error={meta.touched && !!meta.error}
                     validationText={meta.touched ? meta.error : undefined}
-                    dataTest="dataelementsformfields-categorycombo"
+                    dataTest="formfields-categorycombo"
                 >
                     <CategoryComboSelect
                         required

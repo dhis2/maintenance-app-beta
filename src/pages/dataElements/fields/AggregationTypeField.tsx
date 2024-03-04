@@ -58,7 +58,7 @@ export function AggregationTypeField() {
             key={disabled ? 0 : 1}
             disabled={disabled}
             component={SingleSelectFieldFF}
-            dataTest="dataelementsformfields-aggregationtype"
+            dataTest="formfields-aggregationtype"
             required={!disabled}
             inputWidth="400px"
             name="aggregationType"

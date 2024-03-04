@@ -86,7 +86,6 @@ export function CustomAttributes() {
     const customAttributes = formState.initialValues.attributeValues?.map(
         (av) => av.attribute
     )
-    console.log('> <CustomAttribute /> customAttributes:', customAttributes)
 
     return (
         <>

@@ -14,7 +14,7 @@ export function ColorAndIconField() {
 
     return (
         <Field
-            dataTest="dataelementsformfields-colorandicon"
+            dataTest="formfields-colorandicon"
             label={i18n.t('Color and icon')}
             helpText={i18n.t(
                 'A color and icon are helpful for identifying data elements in information-dense screens.'

@@ -51,7 +51,7 @@ export function DataElementsField() {
 
     return (
         <Field
-            dataTest="dataelementsformfields-dataElementsets"
+            dataTest="formfields-dataElementsets"
             error={!!meta.error}
             validationText={meta.error?.toString()}
             name={name}

@@ -28,7 +28,6 @@ interface QueryResponse {
 
 export function useCustomAttributesQuery() {
     const schemaSection = useSchemaSectionHandleOrThrow()
-
     const customAttributes = useDataQuery<QueryResponse>(
         CUSTOM_ATTRIBUTES_QUERY,
         { variables: { modelName: schemaSection.name } }
