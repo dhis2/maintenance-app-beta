@@ -141,6 +141,7 @@ export const SearchableSingleSelect = ({
                 <div className={classes.searchInput}>
                     <Input
                         dense
+                        initialFocus
                         value={filter}
                         onChange={({ value }) => setFilterValue(value ?? '')}
                         placeholder={i18n.t('Filter options')}

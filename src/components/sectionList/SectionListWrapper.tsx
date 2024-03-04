@@ -2,6 +2,7 @@ import { FetchError } from '@dhis2/app-runtime'
 import React, { useMemo, useState } from 'react'
 import { useSchemaFromHandle } from '../../lib'
 import { Pager, ModelCollection } from '../../types/models'
+import { SectionListHeaderBulk } from './bulk'
 import { DetailsPanel, DefaultDetailsPanelContent } from './detailsPanel'
 import { FilterWrapper } from './filters/FilterWrapper'
 import { useModelListView } from './listView'
@@ -77,7 +78,14 @@ export const SectionListWrapper = ({
             <SectionListTitle />
             <FilterWrapper />
             <div className={css.listDetailsWrapper}>
-                <SectionListHeader />
+                {selectedModels.size > 0 ? (
+                    <SectionListHeaderBulk
+                        selectedModels={selectedModels}
+                        onDeselectAll={() => setSelectedModels(new Set())}
+                    />
+                ) : (
+                    <SectionListHeader />
+                )}
                 <SectionList
                     headerColumns={headerColumns}
                     onSelectAll={handleSelectAll}
