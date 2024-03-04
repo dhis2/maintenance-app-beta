@@ -5,6 +5,7 @@ import {
     StandardFormSectionTitle,
     StandardFormSectionDescription,
     StandardFormField,
+    CustomAttributes,
 } from '../../../components'
 import {
     CodeField,
@@ -18,7 +19,6 @@ import {
     AggregationTypeField,
     CategoryComboField,
     ColorAndIconField,
-    CustomAttributes,
     DomainField,
     FieldMaskField,
     FormNameField,

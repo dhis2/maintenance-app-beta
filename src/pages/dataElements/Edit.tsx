@@ -12,6 +12,7 @@ import {
 } from '../../components'
 import { useCustomAttributesQuery } from '../../components/form'
 import { SCHEMA_SECTIONS, getSectionPath, validate } from '../../lib'
+import { getAllAttributeValues } from '../../lib/models/attributes'
 import { JsonPatchOperation } from '../../types'
 import { Attribute, DataElement } from '../../types/generated'
 import { createJsonPatchOperations } from './edit/'
@@ -49,28 +50,15 @@ function computeInitialValues({
     dataElement,
     customAttributes,
 }: {
-    dataElementId: string
     dataElement: DataElement
     customAttributes: Attribute[]
+    dataElementId: string
 }) {
     if (!dataElement) {
         return {}
     }
 
-    // We want to have an array in the state with all attributes, not just the
-    // ones that have a value which is what the endpoint responds with
-    const attributeValues = customAttributes.map((attribute) => {
-        const attributeValue = dataElement.attributeValues.find(
-            (currentAttributeValue) =>
-                attribute.id === currentAttributeValue.attribute.id
-        )
-
-        if (!attributeValue) {
-            return { attribute, value: '' }
-        }
-
-        return attributeValue
-    })
+    const attributeValues = getAllAttributeValues(dataElement, customAttributes)
 
     return {
         id: dataElementId,
