@@ -106,19 +106,7 @@ export const Component = () => {
     const dataEngine = useDataEngine()
     const navigate = useNavigate()
     const customAttributesQuery = useCustomAttributesQuery()
-    const loading = customAttributesQuery.loading
-    const error = customAttributesQuery.error
     const initialValues = useInitialValues(customAttributesQuery.data)
-
-    if (error && !loading) {
-        // @TODO(Edit): Implement error screen
-        return <>Error: {error.toString()}</>
-    }
-
-    if (loading) {
-        // @TODO(Edit): Implement loading screen
-        return <>Loading...</>
-    }
 
     async function onSubmit(values: FormValues) {
         const payload = formatFormValues({ values })

@@ -6,7 +6,6 @@ import { withTypes } from 'react-final-form'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Loader } from '../../components'
 import {
-    CustomAttributes,
     DefaultFormContents,
     useCustomAttributesQuery,
 } from '../../components/form'
