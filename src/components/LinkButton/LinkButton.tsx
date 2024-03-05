@@ -58,6 +58,10 @@ export const LinkButton = ({
     const handleClick = (
         event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
     ) => {
+        if (disabled) {
+            event.preventDefault()
+            return
+        }
         if (onClick) {
             onClick(event)
         }
