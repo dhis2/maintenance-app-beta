@@ -2,23 +2,41 @@ import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { NoticeBox } from '@dhis2/ui'
 import { FORM_ERROR } from 'final-form'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { Form } from 'react-final-form'
 import { useNavigate } from 'react-router-dom'
-import { StandardFormActions, StandardFormSection } from '../../components'
+import {
+    Loader,
+    StandardFormActions,
+    StandardFormSection,
+} from '../../components'
+import { useCustomAttributesQuery } from '../../components/form'
 import { SCHEMA_SECTIONS, getSectionPath, validate } from '../../lib'
+import { Attribute } from '../../types/generated'
 import { DataElementGroupFormFields, dataElementGroupSchema } from './form'
 import type { FormValues } from './form'
 import classes from './New.module.css'
 
 const listPath = `/${getSectionPath(SCHEMA_SECTIONS.dataElementGroup)}`
 
-const initialValues = {
-    name: '',
-    shortName: '',
-    code: '',
-    description: '',
-    dataElements: [],
+function useInitialValues(customAttributes: Attribute[]) {
+    const attributeValues = useMemo(
+        () =>
+            customAttributes.map((attribute) => ({
+                attribute,
+                value: '',
+            })),
+        [customAttributes]
+    )
+
+    return {
+        name: '',
+        shortName: '',
+        code: '',
+        description: '',
+        dataElements: [],
+        attributeValues,
+    }
 }
 
 const ADD_NEW_DATA_ELEMENT_GROUP_MUTATION = {
@@ -30,8 +48,22 @@ const ADD_NEW_DATA_ELEMENT_GROUP_MUTATION = {
 export function Component() {
     const dataEngine = useDataEngine()
     const navigate = useNavigate()
+    const customAttributesQuery = useCustomAttributesQuery()
+    const loading = customAttributesQuery.loading
+    const error = customAttributesQuery.error
+    const initialValues = useInitialValues(customAttributesQuery.data)
 
-    const onSubmit = async (payload: FormValues) => {
+    if (error && !loading) {
+        // @TODO(Edit): Implement error screen
+        return <>Error: {error.toString()}</>
+    }
+
+    if (loading) {
+        // @TODO(Edit): Implement loading screen
+        return <>Loading...</>
+    }
+
+    async function onSubmit(payload: FormValues) {
         try {
             // We want the promise so we know when submitting is done. The promise
             // returned by the mutation function of useDataMutation will never
@@ -47,24 +79,29 @@ export function Component() {
     }
 
     return (
-        <Form
-            validateOnBlur
-            onSubmit={onSubmit}
-            validate={(values: FormValues) => {
-                return validate(dataElementGroupSchema, values)
-            }}
-            initialValues={initialValues}
+        <Loader
+            queryResponse={customAttributesQuery}
+            label={i18n.t('Custom attributes')}
         >
-            {({ handleSubmit, submitting, submitError }) => (
-                <form onSubmit={handleSubmit}>
-                    <FormContents
-                        submitError={submitError}
-                        submitting={submitting}
-                        onCancelClick={() => navigate(listPath)}
-                    />
-                </form>
-            )}
-        </Form>
+            <Form
+                validateOnBlur
+                onSubmit={onSubmit}
+                validate={(values: FormValues) => {
+                    return validate(dataElementGroupSchema, values)
+                }}
+                initialValues={initialValues}
+            >
+                {({ handleSubmit, submitting, submitError }) => (
+                    <form onSubmit={handleSubmit}>
+                        <FormContents
+                            submitError={submitError}
+                            submitting={submitting}
+                            onCancelClick={() => navigate(listPath)}
+                        />
+                    </form>
+                )}
+            </Form>
+        </Loader>
     )
 }
 

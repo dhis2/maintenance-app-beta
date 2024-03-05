@@ -106,10 +106,8 @@ export const Component = () => {
     const dataEngine = useDataEngine()
     const navigate = useNavigate()
     const customAttributesQuery = useCustomAttributesQuery()
-
     const loading = customAttributesQuery.loading
     const error = customAttributesQuery.error
-
     const initialValues = useInitialValues(customAttributesQuery.data)
 
     if (error && !loading) {

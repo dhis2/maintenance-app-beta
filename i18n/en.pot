@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-05T22:37:21.854Z\n"
-"PO-Revision-Date: 2024-03-05T22:37:21.854Z\n"
+"POT-Creation-Date: 2024-03-05T22:39:55.667Z\n"
+"PO-Revision-Date: 2024-03-05T22:39:55.667Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -657,6 +657,9 @@ msgstr "This field requires a unique value, please choose another one"
 msgid "Required"
 msgstr "Required"
 
+msgid "Custom attributes"
+msgstr "Custom attributes"
+
 msgid "Exit without saving"
 msgstr "Exit without saving"
 
@@ -684,8 +687,8 @@ msgstr "Explain the purpose of this data element group."
 msgid "@TODO"
 msgstr "@TODO"
 
-msgid "Custom attributes"
-msgstr "Custom attributes"
+msgid "Custom fields for your DHIS2 instance"
+msgstr "Custom fields for your DHIS2 instance"
 
 msgid "Create data element"
 msgstr "Create data element"
@@ -711,12 +714,6 @@ msgid ""
 msgstr ""
 "A color and icon are helpful for identifying data elements in "
 "information-dense screens."
-
-msgid "Loading custom attributes"
-msgstr "Loading custom attributes"
-
-msgid "Something went wrong with retrieving the custom attributes"
-msgstr "Something went wrong with retrieving the custom attributes"
 
 msgid "Domain"
 msgstr "Domain"
@@ -809,9 +806,6 @@ msgstr ""
 "aggregation level available) as the data source, and PHU data will not be "
 "included. PHU will still be available for the PHU level, but not included "
 "in the aggregations to the levels above."
-
-msgid "Custom fields for your DHIS2 instance"
-msgstr "Custom fields for your DHIS2 instance"
 
 msgid "Metadata management"
 msgstr "Metadata management"
