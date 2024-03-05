@@ -2,11 +2,17 @@ import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { NoticeBox } from '@dhis2/ui'
 import { FORM_ERROR } from 'final-form'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { Form } from 'react-final-form'
 import { useNavigate } from 'react-router-dom'
-import { StandardFormActions, StandardFormSection } from '../../components'
+import {
+    Loader,
+    StandardFormActions,
+    StandardFormSection,
+} from '../../components'
+import { useCustomAttributesQuery } from '../../components/form'
 import { SCHEMA_SECTIONS, getSectionPath, validate } from '../../lib'
+import { Attribute } from '../../types/generated'
 import {
     DataElementGroupSetFormFields,
     dataElementGroupSetSchema,
@@ -16,14 +22,26 @@ import classes from './New.module.css'
 
 const listPath = `/${getSectionPath(SCHEMA_SECTIONS.dataElementGroupSet)}`
 
-const initialValues = {
-    name: '',
-    shortName: '',
-    code: '',
-    description: '',
-    compulsory: false,
-    dataDimension: false,
-    dataElementGroups: [],
+function useInitialValues(customAttributes: Attribute[]) {
+    const attributeValues = useMemo(
+        () =>
+            customAttributes.map((attribute) => ({
+                attribute,
+                value: '',
+            })),
+        [customAttributes]
+    )
+
+    return {
+        name: '',
+        shortName: '',
+        code: '',
+        description: '',
+        compulsory: false,
+        dataDimension: false,
+        dataElementGroups: [],
+        attributeValues,
+    }
 }
 
 const ADD_NEW_DATA_ELEMENT_GROUP_MUTATION = {
@@ -35,6 +53,8 @@ const ADD_NEW_DATA_ELEMENT_GROUP_MUTATION = {
 export function Component() {
     const dataEngine = useDataEngine()
     const navigate = useNavigate()
+    const customAttributesQuery = useCustomAttributesQuery()
+    const initialValues = useInitialValues(customAttributesQuery.data)
 
     const onSubmit = async (payload: FormValues) => {
         try {
@@ -52,24 +72,29 @@ export function Component() {
     }
 
     return (
-        <Form
-            validateOnBlur
-            onSubmit={onSubmit}
-            validate={(values: FormValues) => {
-                return validate(dataElementGroupSetSchema, values)
-            }}
-            initialValues={initialValues}
+        <Loader
+            queryResponse={customAttributesQuery}
+            label={i18n.t('Custom attributes')}
         >
-            {({ handleSubmit, submitting, submitError }) => (
-                <form onSubmit={handleSubmit}>
-                    <FormContents
-                        submitError={submitError}
-                        submitting={submitting}
-                        onCancelClick={() => navigate(listPath)}
-                    />
-                </form>
-            )}
-        </Form>
+            <Form
+                validateOnBlur
+                onSubmit={onSubmit}
+                validate={(values: FormValues) => {
+                    return validate(dataElementGroupSetSchema, values)
+                }}
+                initialValues={initialValues}
+            >
+                {({ handleSubmit, submitting, submitError }) => (
+                    <form onSubmit={handleSubmit}>
+                        <FormContents
+                            submitError={submitError}
+                            submitting={submitting}
+                            onCancelClick={() => navigate(listPath)}
+                        />
+                    </form>
+                )}
+            </Form>
+        </Loader>
     )
 }
 

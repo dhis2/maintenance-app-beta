@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-05T22:45:57.361Z\n"
-"PO-Revision-Date: 2024-03-05T22:45:57.361Z\n"
+"POT-Creation-Date: 2024-03-05T22:46:07.098Z\n"
+"PO-Revision-Date: 2024-03-05T22:46:07.098Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -660,6 +660,9 @@ msgstr "This field requires a unique value, please choose another one"
 msgid "Required"
 msgstr "Required"
 
+msgid "Custom attributes"
+msgstr "Custom attributes"
+
 msgid "Exit without saving"
 msgstr "Exit without saving"
 
@@ -681,32 +684,29 @@ msgstr "Refresh list"
 msgid "Add new"
 msgstr "Add new"
 
-msgid "Explain the purpose of this data element and how it's measured."
-msgstr "Explain the purpose of this data element and how it's measured."
-
-msgid "A data element name should be concise and easy to recognize."
-msgstr "A data element name should be concise and easy to recognize."
-
 msgid "Basic information"
 msgstr "Basic information"
 
 msgid "Set up the information for this data element group"
 msgstr "Set up the information for this data element group"
 
+msgid "Explain the purpose of this data element group."
+msgstr "Explain the purpose of this data element group."
+
 msgid "@TODO"
 msgstr "@TODO"
 
-msgid "Custom attributes"
-msgstr "Custom attributes"
+msgid "Custom fields for your DHIS2 instance"
+msgstr "Custom fields for your DHIS2 instance"
 
 msgid "Selected data elements"
 msgstr "Selected data elements"
 
-msgid "Explain the purpose of this data element group."
-msgstr "Explain the purpose of this data element group."
+msgid "Explain the purpose of this data element and how it's measured."
+msgstr "Explain the purpose of this data element and how it's measured."
 
-msgid "Custom fields for your DHIS2 instance"
-msgstr "Custom fields for your DHIS2 instance"
+msgid "A data element name should be concise and easy to recognize."
+msgstr "A data element name should be concise and easy to recognize."
 
 msgid "Create data element"
 msgstr "Create data element"

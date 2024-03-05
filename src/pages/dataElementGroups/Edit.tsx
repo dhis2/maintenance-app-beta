@@ -64,8 +64,6 @@ function computeInitialValues({
         dataElementGroup,
         customAttributes
     )
-    console.log('> customAttributes', customAttributes)
-    console.log('> attributeValues', attributeValues)
 
     return {
         id: dataElementGroup.id,
