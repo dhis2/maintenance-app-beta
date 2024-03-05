@@ -10,7 +10,7 @@ import {
     Popover,
 } from '@dhis2/ui'
 import React, { useRef, useState } from 'react'
-import { Link, useHref, useLinkClickHandler } from 'react-router-dom'
+import { useHref, useLinkClickHandler } from 'react-router-dom'
 import { LinkButton } from '../../LinkButton'
 import css from './SectionListActions.module.css'
 

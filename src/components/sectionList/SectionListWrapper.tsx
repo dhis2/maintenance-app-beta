@@ -1,15 +1,11 @@
 import { FetchError } from '@dhis2/app-runtime'
 import React, { useMemo, useState } from 'react'
-import { useSchemaFromHandle } from '../../lib'
+import { BaseListModel, useSchemaFromHandle } from '../../lib'
 import { Pager, ModelCollection } from '../../types/models'
 import { SectionListHeaderBulk } from './bulk'
 import { DetailsPanel, DefaultDetailsPanelContent } from './detailsPanel'
 import { FilterWrapper } from './filters/FilterWrapper'
-import {
-    ActionEdit,
-    ActionMore,
-    ListActions,
-} from './listActions/SectionListActions'
+import { DefaultListActions } from './listActions'
 import { useModelListView } from './listView'
 import { ModelValue } from './modelValue/ModelValue'
 import { SectionList } from './SectionList'
@@ -22,7 +18,7 @@ import { SectionListRow } from './SectionListRow'
 import { SectionListTitle } from './SectionListTitle'
 
 type SectionListWrapperProps = {
-    data: ModelCollection | undefined
+    data: ModelCollection<BaseListModel> | undefined
     pager: Pager | undefined
     error: FetchError | undefined
 }
@@ -122,16 +118,11 @@ export const SectionListWrapper = ({
                                     />
                                 )
                             }}
-                            renderActions={(id) => (
-                                <ListActions>
-                                    <ActionEdit modelId={id} />
-                                    <ActionMore
-                                        modelId={id}
-                                        onShowDetailsClick={() =>
-                                            handleShowDetails(id)
-                                        }
-                                    />
-                                </ListActions>
+                            renderActions={() => (
+                                <DefaultListActions
+                                    model={model}
+                                    onShowDetails={handleShowDetails}
+                                />
                             )}
                         />
                     ))}
