@@ -1,8 +1,6 @@
-import { DataTableRow, DataTableCell, Checkbox, Button } from '@dhis2/ui'
-import { IconEdit24, IconMore24 } from '@dhis2/ui-icons'
+import { DataTableRow, DataTableCell, Checkbox } from '@dhis2/ui'
 import cx from 'classnames'
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { CheckBoxOnChangeObject } from '../../types'
 import { IdentifiableObject, GistModel } from '../../types/models'
 import css from './SectionList.module.css'
@@ -13,6 +11,7 @@ export type SectionListRowProps<Model extends IdentifiableObject> = {
     selectedColumns: SelectedColumns
     onSelect: (modelId: string, checked: boolean) => void
     selected: boolean
+    renderActions: (modelId: string) => React.ReactNode
     renderColumnValue: (column: SelectedColumn) => React.ReactNode
     onClick?: (modelData: GistModel<Model> | Model) => void
     active?: boolean
@@ -25,6 +24,7 @@ export function SectionListRow<Model extends IdentifiableObject>({
     onSelect,
     onClick,
     selected,
+    renderActions,
     renderColumnValue,
 }: SectionListRowProps<Model>) {
     return (
@@ -50,36 +50,7 @@ export function SectionListRow<Model extends IdentifiableObject>({
                     {renderColumnValue(selectedColumn)}
                 </DataTableCell>
             ))}
-            <DataTableCell>
-                <ListActions modelId={modelData.id} />
-            </DataTableCell>
+            <DataTableCell>{renderActions(modelData.id)}</DataTableCell>
         </DataTableRow>
-    )
-}
-
-const ListActions = ({ modelId }: { modelId: string }) => {
-    return (
-        <div className={css.listActions}>
-            <ActionEdit modelId={modelId} />
-            <ActionMore />
-        </div>
-    )
-}
-
-const ActionEdit = ({ modelId }: { modelId: string }) => {
-    return (
-        <Link to={`${modelId}`}>
-            <Button small secondary>
-                <IconEdit24 />
-            </Button>
-        </Link>
-    )
-}
-
-const ActionMore = () => {
-    return (
-        <Button small secondary>
-            <IconMore24 />
-        </Button>
     )
 }

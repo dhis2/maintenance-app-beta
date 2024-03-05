@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-01T17:52:14.520Z\n"
-"PO-Revision-Date: 2024-03-01T17:52:14.520Z\n"
+"POT-Creation-Date: 2024-03-05T18:46:53.934Z\n"
+"PO-Revision-Date: 2024-03-05T18:46:53.934Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -176,6 +176,9 @@ msgstr "Search by name, code or ID"
 
 msgid "Public access"
 msgstr "Public access"
+
+msgid "Show details"
+msgstr "Show details"
 
 msgid "At least one column must be selected"
 msgstr "At least one column must be selected"
