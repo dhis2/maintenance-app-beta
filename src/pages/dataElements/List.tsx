@@ -1,4 +1,5 @@
 import { useDataQuery } from '@dhis2/app-runtime'
+import { SharingDialog } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { SectionListWrapper } from '../../components'
 import { useModelListView } from '../../components/sectionList/listView'

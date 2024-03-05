@@ -6,12 +6,15 @@ import {
     IconEdit24,
     IconMore16,
     IconMore24,
+    IconShare16,
     MenuItem,
     Popover,
 } from '@dhis2/ui'
 import React, { useRef, useState } from 'react'
 import { useHref, useLinkClickHandler } from 'react-router-dom'
+import { BaseListModel } from '../../../lib'
 import { LinkButton } from '../../LinkButton'
+import { WrapWithTooltip } from '../../tooltip'
 import css from './SectionListActions.module.css'
 
 export const ListActions = ({ children }: React.PropsWithChildren) => {
@@ -26,12 +29,30 @@ export const ActionEdit = ({ modelId }: { modelId: string }) => {
     )
 }
 
+export const ActionOpenSharing = ({
+    modelId,
+    onOpenSharingClick,
+}: {
+    modelId: string
+    onOpenSharingClick: () => void
+}) => {
+    return (
+        <Button small secondary onClick={onOpenSharingClick}>
+            {i18n.t('Open sharing')}
+        </Button>
+    )
+}
+
 type ActionMoreProps = {
     modelId: string
+    editAccess: boolean
     onShowDetailsClick: () => void
+    onOpenSharingClick: () => void
 }
 export const ActionMore = ({
     modelId,
+    editAccess,
+    onOpenSharingClick,
     onShowDetailsClick,
 }: ActionMoreProps) => {
     const [open, setOpen] = useState(false)
@@ -77,6 +98,21 @@ export const ActionMore = ({
                             target="_blank"
                             href={href}
                         ></MenuItem>
+                        <WrapWithTooltip
+                            condition={!editAccess}
+                            content={WrapWithTooltip.TOOLTIPS.disabled}
+                        >
+                            <MenuItem
+                                dense
+                                disabled={!editAccess}
+                                label={i18n.t('Sharing settings')}
+                                icon={<IconShare16 />}
+                                onClick={() => {
+                                    onOpenSharingClick()
+                                    setOpen(false)
+                                }}
+                            ></MenuItem>
+                        </WrapWithTooltip>
                     </FlyoutMenu>
                 </Popover>
             )}

@@ -1,3 +1,10 @@
+import type { Access, BaseIdentifiableObject } from '../../types/generated'
+
+export const editAccess = (access: Access) => access.write
+
+export const canEditModel = (model: Pick<BaseIdentifiableObject, 'access'>) =>
+    editAccess(model.access)
+
 export type ParsedAccessPart = {
     read: boolean
     write: boolean

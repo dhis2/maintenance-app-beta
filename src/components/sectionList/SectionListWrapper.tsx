@@ -1,4 +1,5 @@
 import { FetchError } from '@dhis2/app-runtime'
+import { SharingDialog } from '@dhis2/ui'
 import React, { useMemo, useState } from 'react'
 import { BaseListModel, useSchemaFromHandle } from '../../lib'
 import { Pager, ModelCollection } from '../../types/models'
@@ -32,6 +33,7 @@ export const SectionListWrapper = ({
     const schema = useSchemaFromHandle()
     const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set())
     const [detailsId, setDetailsId] = useState<string | undefined>()
+    const [sharingDialogId, setSharingDialogId] = useState<string | undefined>()
 
     const handleSelect = (id: string, checked: boolean) => {
         if (checked) {
@@ -121,7 +123,8 @@ export const SectionListWrapper = ({
                             renderActions={() => (
                                 <DefaultListActions
                                     model={model}
-                                    onShowDetails={handleShowDetails}
+                                    onShowDetailsClick={handleShowDetails}
+                                    onOpenSharingClick={setSharingDialogId}
                                 />
                             )}
                         />
@@ -139,6 +142,16 @@ export const SectionListWrapper = ({
                     </DetailsPanel>
                 )}
             </div>
+            {sharingDialogId && (
+                <SharingDialog
+                    id={sharingDialogId}
+                    /* @TODO: Sharing dialog does not support metadata
+                    but it works if you pass the correct type*/
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    type={schema.singular as any}
+                    onClose={() => setSharingDialogId(undefined)}
+                />
+            )}
         </div>
     )
 }

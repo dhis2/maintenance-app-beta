@@ -2,6 +2,7 @@ import { DataTableRow, DataTableCell, Checkbox } from '@dhis2/ui'
 import cx from 'classnames'
 import React from 'react'
 import { BaseListModel } from '../../lib'
+import { canEditModel } from '../../lib/models/access'
 import { CheckBoxOnChangeObject } from '../../types'
 import { WrapWithTooltip } from '../tooltip'
 import css from './SectionList.module.css'
@@ -28,6 +29,7 @@ export function SectionListRow<Model extends BaseListModel>({
     renderActions,
     renderColumnValue,
 }: SectionListRowProps<Model>) {
+    const editAccess = canEditModel(modelData)
     return (
         <DataTableRow
             className={cx(css.listRow, { [css.active]: active })}
@@ -36,11 +38,11 @@ export function SectionListRow<Model extends BaseListModel>({
         >
             <DataTableCell width="48px">
                 <WrapWithTooltip
-                    condition={!modelData.access.write}
+                    condition={!editAccess}
                     content={WrapWithTooltip.TOOLTIPS.disabled}
                 >
                     <Checkbox
-                        disabled={!modelData.access.write}
+                        disabled={!editAccess}
                         dataTest="section-list-row-checkbox"
                         checked={selected}
                         onChange={({ checked }: CheckBoxOnChangeObject) => {
