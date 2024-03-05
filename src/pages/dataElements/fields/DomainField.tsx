@@ -35,7 +35,7 @@ export function DomainField() {
     return (
         <Field
             required
-            dataTest="dataelementsformfields-domaintype"
+            dataTest="formfields-domaintype"
             name={name}
             label={i18n.t('{{fieldLabel}} (required)', {
                 fieldLabel: i18n.t('Domain'),

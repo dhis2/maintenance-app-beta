@@ -1,17 +1,15 @@
 import i18n from '@dhis2/d2-i18n'
-import {
-    InputFieldFF,
-    NoticeBox,
-    SingleSelectFieldFF,
-    TextAreaFieldFF,
-} from '@dhis2/ui'
+import { InputFieldFF, SingleSelectFieldFF, TextAreaFieldFF } from '@dhis2/ui'
 import * as React from 'react'
-import { Field as FieldRFF } from 'react-final-form'
-import { StandardFormSection } from '../../../components'
-import { Attribute } from '../../../types/generated'
-import { useCustomAttributesQuery } from './useCustomAttributesQuery'
+import { Field as FieldRFF, useFormState } from 'react-final-form'
+import { StandardFormSection } from '../..'
+import { Attribute, AttributeValue } from '../../../types/generated'
 
 const inputWidth = '440px'
+
+type ValuesWithAttributes = {
+    attributeValues: AttributeValue[]
+}
 
 type CustomAttributeProps = {
     attribute: Attribute
@@ -81,30 +79,17 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
 }
 
 export function CustomAttributes() {
-    const customAttributes = useCustomAttributesQuery()
-    const loading = customAttributes.loading
-    const error = customAttributes.error
+    const formState = useFormState<ValuesWithAttributes>({
+        subscription: { initialValues: true },
+    })
 
-    if (loading) {
-        return <>{i18n.t('Loading custom attributes')}</>
-    }
-
-    if (error) {
-        return (
-            <NoticeBox
-                error
-                title={i18n.t(
-                    'Something went wrong with retrieving the custom attributes'
-                )}
-            >
-                {error.toString()}
-            </NoticeBox>
-        )
-    }
+    const customAttributes = formState.initialValues.attributeValues?.map(
+        (av) => av.attribute
+    )
 
     return (
         <>
-            {customAttributes.data?.map((customAttribute, index) => {
+            {customAttributes?.map((customAttribute, index) => {
                 return (
                     <CustomAttribute
                         key={customAttribute.id}

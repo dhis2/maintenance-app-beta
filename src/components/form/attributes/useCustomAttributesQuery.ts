@@ -1,11 +1,12 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import { useMemo } from 'react'
+import { useSchemaSectionHandleOrThrow } from '../../../lib'
 import { Attribute } from '../../../types/generated'
 
 const CUSTOM_ATTRIBUTES_QUERY = {
     attributes: {
         resource: 'attributes',
-        params: {
+        params: ({ modelName }: Record<string, string>) => ({
             fields: [
                 'id',
                 'mandatory',
@@ -14,8 +15,8 @@ const CUSTOM_ATTRIBUTES_QUERY = {
                 'optionSet[options[id,displayName,name,code]]',
             ],
             paging: false,
-            filter: 'dataElementAttribute:eq:true',
-        },
+            filter: `${modelName}Attribute:eq:true`,
+        }),
     },
 }
 
@@ -26,8 +27,10 @@ interface QueryResponse {
 }
 
 export function useCustomAttributesQuery() {
+    const schemaSection = useSchemaSectionHandleOrThrow()
     const customAttributes = useDataQuery<QueryResponse>(
-        CUSTOM_ATTRIBUTES_QUERY
+        CUSTOM_ATTRIBUTES_QUERY,
+        { variables: { modelName: schemaSection.name } }
     )
 
     return useMemo(

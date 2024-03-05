@@ -1,4 +1,6 @@
 export * from './AggregationLevelMultiSelect'
 export * from './CategoryComboSelect'
+export * from './DataElementGroupsTransfer'
+export * from './DataElementsTransfer'
 export * from './LegendSetTransfer'
 export * from './OptionSetSelect'

@@ -48,9 +48,7 @@ describe('<CategoryComboField />', () => {
         fireEvent.click(submitButton)
 
         expect(
-            result.getByTestId(
-                'dataelementsformfields-categorycombo-validation'
-            )
+            result.getByTestId('formfields-categorycombo-validation')
         ).toBeTruthy()
         expect(onSubmit).toHaveBeenCalledTimes(0)
     })

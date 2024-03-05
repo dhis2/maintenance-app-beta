@@ -4,6 +4,19 @@ import React, { useEffect } from 'react'
 import { Field as FieldRFF, useForm, useFormState } from 'react-final-form'
 import { AGGREGATION_TYPE, required, useSchemas } from '../../../lib'
 
+const DISABLING_VALUE_TYPES = [
+    'TEXT',
+    'LONG_TEXT',
+    'MULTI_TEXT',
+    'LETTER',
+    'PHONE_NUMBER',
+    'EMAIL',
+    'TRACKER_ASSOCIATE',
+    'USERNAME',
+    'FILE_RESOURCE',
+    'COORDINATE',
+]
+
 /**
  * Field rule: When value type has a certain value,
  *             disable aggregationType field
@@ -18,18 +31,7 @@ const aggregationTypeDisabledHelpText = i18n.t(
 export function AggregationTypeField() {
     const { change } = useForm()
     const { values } = useFormState({ subscription: { values: true } })
-    const disabled = [
-        'TEXT',
-        'LONG_TEXT',
-        'MULTI_TEXT',
-        'LETTER',
-        'PHONE_NUMBER',
-        'EMAIL',
-        'TRACKER_ASSOCIATE',
-        'USERNAME',
-        'FILE_RESOURCE',
-        'COORDINATE',
-    ].includes(values.valueType)
+    const disabled = DISABLING_VALUE_TYPES.includes(values.valueType)
 
     useEffect(() => {
         if (disabled) {
@@ -51,19 +53,36 @@ export function AggregationTypeField() {
 
     return (
         <FieldRFF
+            // See https://final-form.org/docs/react-final-form/types/FieldProps#validate
+            // for why this is necessary
+            key={disabled ? 0 : 1}
             disabled={disabled}
             component={SingleSelectFieldFF}
-            dataTest="dataelementsformfields-aggregationtype"
-            required
+            dataTest="formfields-aggregationtype"
+            required={!disabled}
             inputWidth="400px"
             name="aggregationType"
-            label={i18n.t('{{fieldLabel}} (required)', {
-                fieldLabel: i18n.t('Aggregation type'),
-            })}
+            label={
+                disabled
+                    ? i18n.t('Aggregation type')
+                    : i18n.t('{{fieldLabel}} (required)', {
+                          fieldLabel: i18n.t('Aggregation type'),
+                      })
+            }
             helpText={helpText}
             options={options || []}
             validateFields={[]}
-            validate={required}
+            // @TODO: Why can I not use `FormValues` here?
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            validate={(value: string | undefined, values: any) => {
+                const { valueType } = values
+                // Using the `disabled` value from above causes an issue:
+                //   Warning: Cannot update a component (`ForwardRef(Field)`)
+                //   while rendering a different component
+                //   (`ForwardRef(Field)`)
+                const isDisabled = DISABLING_VALUE_TYPES.includes(valueType)
+                return isDisabled ? undefined : required(value)
+            }}
         />
     )
 }

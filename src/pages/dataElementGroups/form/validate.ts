@@ -1,5 +1,5 @@
 import { setIn } from 'final-form'
-import { dataElementSchema } from './dataElementSchema'
+import { dataElementGroupSchema } from './dataElementGroupSchema'
 import type { FormValues } from './types'
 
 // @TODO: Figure out if there's a utility for this? I couldn't find one
@@ -12,7 +12,7 @@ function segmentsToPath(segments: Array<string | number>) {
 }
 
 export function validate(values: FormValues) {
-    const zodResult = dataElementSchema.safeParse(values)
+    const zodResult = dataElementGroupSchema.safeParse(values)
 
     if (zodResult.success !== false) {
         return undefined

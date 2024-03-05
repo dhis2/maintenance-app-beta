@@ -30,7 +30,7 @@ export function AggregationLevelsField() {
 
     return (
         <EditableFieldWrapper
-            dataTest="dataelementsformfields-aggregationlevels"
+            dataTest="formfields-aggregationlevels"
             onRefresh={() => aggregationLevelHandle.current.refetch()}
             onAddNew={() => window.open(newAggregationLevelLink, '_blank')}
         >
@@ -43,7 +43,7 @@ export function AggregationLevelsField() {
                     )}
                     validationText={meta.touched ? meta.error : undefined}
                     error={meta.touched && !!meta.error}
-                    dataTest="dataelementsformfields-aggregationlevels"
+                    dataTest="formfields-aggregationlevels"
                 >
                     <AggregationLevelMultiSelect
                         ref={aggregationLevelHandle}
