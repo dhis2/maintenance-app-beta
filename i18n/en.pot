@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-05T18:46:53.934Z\n"
-"PO-Revision-Date: 2024-03-05T18:46:53.934Z\n"
+"POT-Creation-Date: 2024-03-05T22:55:26.244Z\n"
+"PO-Revision-Date: 2024-03-05T22:55:26.244Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -72,6 +72,30 @@ msgstr "Something went wrong when submitting the form"
 msgid "Save and close"
 msgstr "Save and close"
 
+msgid "<No value>"
+msgstr "<No value>"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "A name should be concise and easy to recognize."
+msgstr "A name should be concise and easy to recognize."
+
+msgid "{{fieldLabel}} (required)"
+msgstr "{{fieldLabel}} (required)"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Often used in reports where space is limited"
+msgstr "Often used in reports where space is limited"
+
+msgid "Short name"
+msgstr "Short name"
+
 msgid "Failed to load {{label}}"
 msgstr "Failed to load {{label}}"
 
@@ -87,11 +111,14 @@ msgstr "Category combo"
 msgid "None"
 msgstr "None"
 
+msgid "Filter data element groups"
+msgstr "Filter data element groups"
+
+msgid "Filter data elements"
+msgstr "Filter data elements"
+
 msgid "Filter legend sets"
 msgstr "Filter legend sets"
-
-msgid "<No value>"
-msgstr "<No value>"
 
 msgid "Option set"
 msgstr "Option set"
@@ -119,12 +146,6 @@ msgstr "An error occurred while loading the items."
 
 msgid "{{modelName}} management"
 msgstr "{{modelName}} management"
-
-msgid "Short name"
-msgstr "Short name"
-
-msgid "Code"
-msgstr "Code"
 
 msgid "Created by"
 msgstr "Created by"
@@ -621,9 +642,6 @@ msgstr "Favorite"
 msgid "Domain type"
 msgstr "Domain type"
 
-msgid "Name"
-msgstr "Name"
-
 msgid "Sharing"
 msgstr "Sharing"
 
@@ -648,6 +666,48 @@ msgstr "Custom attributes"
 msgid "Exit without saving"
 msgstr "Exit without saving"
 
+msgid "Create data element group"
+msgstr "Create data element group"
+
+msgid "Compulsory"
+msgstr "Compulsory"
+
+msgid "Data dimension"
+msgstr "Data dimension"
+
+msgid "Selected data element groups"
+msgstr "Selected data element groups"
+
+msgid "Refresh list"
+msgstr "Refresh list"
+
+msgid "Add new"
+msgstr "Add new"
+
+msgid "Basic information"
+msgstr "Basic information"
+
+msgid "Set up the information for this data element group"
+msgstr "Set up the information for this data element group"
+
+msgid "Explain the purpose of this data element group."
+msgstr "Explain the purpose of this data element group."
+
+msgid "@TODO"
+msgstr "@TODO"
+
+msgid "Custom fields for your DHIS2 instance"
+msgstr "Custom fields for your DHIS2 instance"
+
+msgid "Selected data elements"
+msgstr "Selected data elements"
+
+msgid "Explain the purpose of this data element and how it's measured."
+msgstr "Explain the purpose of this data element and how it's measured."
+
+msgid "A data element name should be concise and easy to recognize."
+msgstr "A data element name should be concise and easy to recognize."
+
 msgid "Create data element"
 msgstr "Create data element"
 
@@ -659,9 +719,6 @@ msgstr "The default way to aggregate this data element in analytics."
 
 msgid "Disabled for the selected value type."
 msgstr "Disabled for the selected value type."
-
-msgid "{{fieldLabel}} (required)"
-msgstr "{{fieldLabel}} (required)"
 
 msgid "Aggregation type"
 msgstr "Aggregation type"
@@ -675,18 +732,6 @@ msgid ""
 msgstr ""
 "A color and icon are helpful for identifying data elements in "
 "information-dense screens."
-
-msgid "Loading custom attributes"
-msgstr "Loading custom attributes"
-
-msgid "Something went wrong with retrieving the custom attributes"
-msgstr "Something went wrong with retrieving the custom attributes"
-
-msgid "Description"
-msgstr "Description"
-
-msgid "Explain the purpose of this data element and how it's measured."
-msgstr "Explain the purpose of this data element and how it's measured."
 
 msgid "Domain"
 msgstr "Domain"
@@ -703,23 +748,14 @@ msgstr "Use a pattern to limit what information can be entered."
 msgid "e.g. 999-000-0000"
 msgstr "e.g. 999-000-0000"
 
-msgid "StandardForm name"
-msgstr "StandardForm name"
+msgid "Form name"
+msgstr "Form name"
 
 msgid "An alternative name used in section or automatic data entry forms."
 msgstr "An alternative name used in section or automatic data entry forms."
 
 msgid "Selected legends"
 msgstr "Selected legends"
-
-msgid "Refresh list"
-msgstr "Refresh list"
-
-msgid "Add new"
-msgstr "Add new"
-
-msgid "A data element name should be concise and easy to recognize."
-msgstr "A data element name should be concise and easy to recognize."
 
 msgid "Option set comment"
 msgstr "Option set comment"
@@ -729,9 +765,6 @@ msgstr "Choose a set of predefined comment for data entry"
 
 msgid "Choose a set of predefined options for data entry"
 msgstr "Choose a set of predefined options for data entry"
-
-msgid "Often used in reports where space is limited"
-msgstr "Often used in reports where space is limited"
 
 msgid "Url"
 msgstr "Url"
@@ -752,11 +785,11 @@ msgstr ""
 msgid "Store zero data values"
 msgstr "Store zero data values"
 
-msgid "Basic information"
-msgstr "Basic information"
-
 msgid "Set up the information for this data element"
 msgstr "Set up the information for this data element"
+
+msgid "Explain the purpose of this data element."
+msgstr "Explain the purpose of this data element."
 
 msgid "Disaggregation and Option sets"
 msgstr "Disaggregation and Option sets"
@@ -791,9 +824,6 @@ msgstr ""
 "aggregation level available) as the data source, and PHU data will not be "
 "included. PHU will still be available for the PHU level, but not included "
 "in the aggregations to the levels above."
-
-msgid "Custom fields for your DHIS2 instance"
-msgstr "Custom fields for your DHIS2 instance"
 
 msgid "Metadata management"
 msgstr "Metadata management"

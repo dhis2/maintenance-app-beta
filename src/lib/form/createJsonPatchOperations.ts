@@ -1,6 +1,10 @@
 import get from 'lodash/fp/get'
-import { JsonPatchOperation } from '../../../types'
-import { Attribute, AttributeValue } from './../../../types/generated/models'
+import { JsonPatchOperation } from '../../types'
+import {
+    Attribute,
+    AttributeValue,
+    IdentifiableObject,
+} from './../../types/generated/models'
 
 type PatchAttribute = {
     id: Attribute['id']
@@ -11,7 +15,7 @@ type PatchAttributeValue = {
     value: AttributeValue['value']
 }
 
-type ModelWithAttributeValues = {
+type ModelWithAttributeValues = IdentifiableObject & {
     attributeValues: PatchAttributeValue[]
 }
 

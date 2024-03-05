@@ -23,7 +23,7 @@ export function OptionSetField() {
 
     return (
         <EditableFieldWrapper
-            dataTest="dataelementsformfields-optionset"
+            dataTest="formfields-optionset"
             onRefresh={() => optionSetHandle.current.refetch()}
             onAddNew={() => window.open(newOptionSetLink, '_blank')}
         >
@@ -36,7 +36,7 @@ export function OptionSetField() {
                     )}
                     validationText={meta.touched ? meta.error : undefined}
                     error={meta.touched && !!meta.error}
-                    dataTest="dataelementsformfields-optionset"
+                    dataTest="formfields-optionset"
                 >
                     <OptionSetSelect
                         showAllOption

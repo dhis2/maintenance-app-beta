@@ -53,7 +53,7 @@ export function LegendSetField() {
 
     return (
         <Field
-            dataTest="dataelementsformfields-legendsets"
+            dataTest="formfields-legendsets"
             error={!!meta.error}
             validationText={meta.error?.toString()}
             name={name}

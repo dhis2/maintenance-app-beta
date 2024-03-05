@@ -28,7 +28,7 @@ export function OptionSetCommentField() {
 
     return (
         <EditableFieldWrapper
-            dataTest="dataelementsformfields-commentoptionset"
+            dataTest="formfields-commentoptionset"
             onRefresh={() => optionSetHandle.current.refetch()}
             onAddNew={() => window.open(newOptionSetLink, '_blank')}
         >
@@ -41,7 +41,7 @@ export function OptionSetCommentField() {
                     )}
                     validationText={meta.touched ? meta.error : undefined}
                     error={meta.touched && !!meta.error}
-                    dataTest="dataelementsformfields-commentoptionset"
+                    dataTest="formfields-commentoptionset"
                 >
                     <OptionSetSelect
                         showAllOption

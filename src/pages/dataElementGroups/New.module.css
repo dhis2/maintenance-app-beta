@@ -1,0 +1,5 @@
+.form {
+    background: var(--colors-white);
+    padding: var(--spacers-dp16);
+    padding-bottom: var(--spacers-dp32);
+}
