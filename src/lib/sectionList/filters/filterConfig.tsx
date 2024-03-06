@@ -2,7 +2,7 @@ import { StringParam } from 'use-query-params'
 import { z } from 'zod'
 import { DataElement } from '../../../types/generated'
 import { IDENTIFIABLE_FILTER_KEY } from '../../constants'
-import { isValidUid, parsePublicAccessString } from '../../models'
+import { isValidUid, parseAccessString } from '../../models'
 import { CustomDelimitedArrayParam } from './customParams'
 
 const zodArrayIds = z.array(z.string().refine((val) => isValidUid(val)))
@@ -16,7 +16,7 @@ export const filterParamsSchema = z
         dataSet: zodArrayIds,
         domainType: z.array(z.nativeEnum(DataElement.domainType)),
         publicAccess: z.array(
-            z.string().refine((val) => parsePublicAccessString(val) !== null)
+            z.string().refine((val) => parseAccessString(val) !== null)
         ),
         valueType: z.array(z.nativeEnum(DataElement.valueType)),
     })

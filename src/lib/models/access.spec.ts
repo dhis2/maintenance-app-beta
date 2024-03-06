@@ -1,6 +1,6 @@
-import { parsePublicAccessString } from './parsePublicAccess'
+import { parseAccessString } from './access'
 
-describe('parsePublicAccessString', () => {
+describe('parseAccessString', () => {
     const validAccessCases = [
         {
             input: '--------',
@@ -59,7 +59,7 @@ describe('parsePublicAccessString', () => {
     it.each(validAccessCases)(
         'correctly parses valid publicAccess string: $input',
         ({ input, expected }) => {
-            const result = parsePublicAccessString(input)
+            const result = parseAccessString(input)
             expect(result).toEqual(expected)
         }
     )
@@ -67,7 +67,7 @@ describe('parsePublicAccessString', () => {
     it.each(invalidAccessCases)(
         'returns null for invalid publicAccess string $input',
         (testCase) => {
-            const result = parsePublicAccessString(testCase)
+            const result = parseAccessString(testCase)
             expect(result).toBeNull()
         }
     )

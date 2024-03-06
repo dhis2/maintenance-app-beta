@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, Divider, IconAdd16, IconCross16 } from '@dhis2/ui'
 import React from 'react'
-import { PublicAccessPart, parsePublicAccessString } from '../../../lib'
+import { ParsedAccessPart, parseAccessString } from '../../../lib'
 import css from './Bulk.module.css'
 import type { SharingAction } from './BulkSharing'
 
@@ -43,7 +43,7 @@ const ActionAccessSummary = ({
     action,
     dataShareable,
 }: ActionAccessSummaryProps) => {
-    const parsed = parsePublicAccessString(action.access)
+    const parsed = parseAccessString(action.access)
 
     if (parsed === null) {
         return null
@@ -57,7 +57,7 @@ const ActionAccessSummary = ({
     )
 }
 
-const MetadataAccess = ({ access }: { access: PublicAccessPart }) => {
+const MetadataAccess = ({ access }: { access: ParsedAccessPart }) => {
     const noAccess = access.read === false
 
     if (noAccess) {
@@ -70,7 +70,7 @@ const MetadataAccess = ({ access }: { access: PublicAccessPart }) => {
     return <AddAccess label={label} />
 }
 
-const DataAccess = ({ access }: { access: PublicAccessPart }) => {
+const DataAccess = ({ access }: { access: ParsedAccessPart }) => {
     const noAccess = access.read === false
 
     if (noAccess) {

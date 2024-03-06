@@ -2,13 +2,13 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelect, SingleSelectOption } from '@dhis2/ui'
 import React from 'react'
 import {
-    PublicAccess,
-    PublicAccessPart,
-    formatPublicAccess,
-    parsePublicAccessString,
+    ParsedAccess,
+    ParsedAccessPart,
+    formatAccessToString,
+    parseAccessString,
 } from '../../lib'
 
-const defaultParsedAccess: PublicAccess = {
+const defaultParsedAccess: ParsedAccess = {
     metadata: { read: false, write: false },
     data: { read: false, write: false },
 }
@@ -22,23 +22,23 @@ type DataAccessFieldProps = {
 
 export const DataAccessField = ({ onChange, value }: DataAccessFieldProps) => {
     const parsed = value
-        ? parsePublicAccessString(value) || defaultParsedAccess
+        ? parseAccessString(value) || defaultParsedAccess
         : defaultParsedAccess
 
-    // selected is here is metadata access string only (data will always be --)
+    // selected is here is data access string only (metadata will always be --)
     const handleChange = ({ selected }: { selected: string }) => {
-        const selectedDataAccess = parsePublicAccessString(selected)
-            ?.data as NonNullable<PublicAccessPart>
+        const selectedDataAccess = parseAccessString(selected)
+            ?.data as NonNullable<ParsedAccessPart>
 
-        const formatted = formatPublicAccess({
+        const accessString = formatAccessToString({
             metadata: parsed.metadata,
             data: selectedDataAccess,
         })
 
-        onChange(formatted)
+        onChange(accessString)
     }
 
-    const valueWithOnlyData = formatPublicAccess({
+    const valueWithOnlyData = formatAccessToString({
         metadata: defaultParsedAccess.metadata,
         data: parsed.data,
     })

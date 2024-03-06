@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
-import { formatPublicAccess, parsePublicAccessString } from '../../../../lib'
+import { formatAccessToString, parseAccessString } from '../../../../lib'
 import { ConstantSelectionFilter } from './ConstantSelectionFilter'
 
 // currently we only care about metadata access
@@ -17,11 +17,11 @@ export const PublicAccessFilter = () => {
         if (!filter) {
             return undefined
         }
-        const parsedPublicAccessString = parsePublicAccessString(filter)
+        const parsedPublicAccessString = parseAccessString(filter)
         if (!parsedPublicAccessString) {
             return undefined
         }
-        const withoutDataAccess = formatPublicAccess({
+        const withoutDataAccess = formatAccessToString({
             metadata: parsedPublicAccessString.metadata,
             data: { read: false, write: false },
         })
