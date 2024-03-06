@@ -100,7 +100,7 @@ export const ActionMore = ({
                         ></MenuItem>
                         <WrapWithTooltip
                             condition={!editAccess}
-                            content={WrapWithTooltip.TOOLTIPS.disabled}
+                            content={WrapWithTooltip.TOOLTIPS.noEditAccess}
                         >
                             <MenuItem
                                 dense

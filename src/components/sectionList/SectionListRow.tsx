@@ -39,7 +39,7 @@ export function SectionListRow<Model extends BaseListModel>({
             <DataTableCell width="48px">
                 <WrapWithTooltip
                     condition={!editAccess}
-                    content={WrapWithTooltip.TOOLTIPS.disabled}
+                    content={WrapWithTooltip.TOOLTIPS.noEditAccess}
                 >
                     <Checkbox
                         disabled={!editAccess}

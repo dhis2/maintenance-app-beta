@@ -8,7 +8,7 @@ type WrapWithTooltipProps = {
 } & TooltipProps
 
 const TOOLTIPS = {
-    disabled: i18n.t('You do not have access to edit this item.'),
+    noEditAccess: i18n.t('You do not have access to edit this item.'),
 }
 
 export const WrapWithTooltip = ({
