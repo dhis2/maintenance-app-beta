@@ -71,14 +71,12 @@ describe('Data Elements List', () => {
         }
         const { getByText, getByTestId } = await renderSection(customData)
 
-        expect(
-            getByText('Accute Flaccid Paralysis (Deaths < 5 yrs)')
-        ).not.toBeNull()
+        expect(getByText('ANC 1st visit')).not.toBeNull()
 
         const { id } = FIRST_DATA_ELEMENT
         const firstRow = getByTestId(`section-list-row-${id}`)
         expect(firstRow).toHaveTextContent(
-            /Accute Flaccid Paralysis \(Deaths < 5 yrs\)AggregateNumber\d+ years agoPublic can edit/
+            /ANC 1st visitAggregateNumberFixed\/Outreach\d+ years agoPublic can view/
         )
     })
     it('should display all the columns', async () => {
