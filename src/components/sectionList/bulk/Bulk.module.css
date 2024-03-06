@@ -1,0 +1,70 @@
+.bulkSharingWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp16);
+}
+
+.sharingEntitySelect {
+    flex-shrink: 0;
+    flex-basis: 160px;
+    flex-grow: 1;
+    max-width: 250px;
+}
+
+.subtitle {
+    font-size: 14px;
+}
+
+.selectionWrapper {
+    display: flex;
+    gap: var(--spacers-dp4);
+    background-color: var(--colors-grey050);
+    padding: var(--spacers-dp12);
+    align-items: flex-end;
+}
+
+.accessField {
+    flex-basis: 160px;
+    flex-grow: 1;
+    flex-shrink: 0;
+    max-width: 250px;
+}
+
+.addActionButton {
+    margin-bottom: -1px;
+}
+
+.actionCancelButton {
+    margin-inline-start: auto;
+}
+
+.actionSummary {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp16);
+    padding: 0 var(--spacers-dp8);
+}
+
+.actionSummaryDisplayName {
+    max-width: 350px;
+}
+
+.accessSummary {
+    display: flex;
+    gap: var(--spacers-dp8);
+    align-items: center;
+}
+
+.accessSummary span {
+    display: flex;
+    gap: var(--spacers-dp4);
+    align-items: center;
+}
+
+.actionNoAccess {
+    color: var(--colors-red600);
+}
+
+.actionAccessAdd {
+    color: var(--colors-green700);
+}

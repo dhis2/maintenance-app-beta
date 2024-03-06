@@ -50,7 +50,7 @@ type OnFilterChange = ({ value }: { value: string }) => void
 interface SearchableSingleSelectPropTypes {
     onChange: OnChange
     onFilterChange: OnFilterChange
-    onEndReached: () => void
+    onEndReached?: () => void
     onRetryClick: () => void
     dense?: boolean
     options: Option[]
@@ -103,7 +103,7 @@ export const SearchableSingleSelect = ({
                     const [{ isIntersecting }] = entries
 
                     if (isIntersecting) {
-                        onEndReached()
+                        onEndReached?.()
                     }
                 },
                 { threshold: 0.8 }
@@ -141,6 +141,7 @@ export const SearchableSingleSelect = ({
                 <div className={classes.searchInput}>
                     <Input
                         dense
+                        initialFocus
                         value={filter}
                         onChange={({ value }) => setFilterValue(value ?? '')}
                         placeholder={i18n.t('Filter options')}

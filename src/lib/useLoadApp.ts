@@ -16,6 +16,8 @@ const schemaFields = [
     'singular',
     'translatable',
     'properties',
+    'shareable',
+    'dataShareable',
 ] as const
 
 // workaround to widen the type, because useQuery() does not allow for

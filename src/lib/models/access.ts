@@ -1,13 +1,13 @@
-export type PublicAccessPart = {
+export type ParsedAccessPart = {
     read: boolean
     write: boolean
 }
-export type PublicAccess = {
-    metadata: PublicAccessPart
-    data: PublicAccessPart
+export type ParsedAccess = {
+    metadata: ParsedAccessPart
+    data: ParsedAccessPart
 }
 
-const parseAccessPart = (accessPart: string): PublicAccessPart => {
+const parseAccessPart = (accessPart: string): ParsedAccessPart => {
     const canRead = accessPart[0] === 'r'
     return {
         read: canRead,
@@ -19,10 +19,10 @@ const parseAccessPart = (accessPart: string): PublicAccessPart => {
 // eg. rw------ = metadata: rw, data: --
 const publicAccessRegex = /^(r-|rw|--)(r-|rw|--)(-){4}$/
 
-export const parsePublicAccessString = (
-    publicAccess: string
-): PublicAccess | null => {
-    const matches = publicAccess.match(publicAccessRegex)
+export const parseAccessString = (
+    accessString: string
+): ParsedAccess | null => {
+    const matches = accessString.match(publicAccessRegex)
     if (!matches) {
         return null
     }
@@ -34,14 +34,14 @@ export const parsePublicAccessString = (
     }
 }
 
-const accessPartToString = (accessPart: PublicAccessPart): string => {
+const accessPartToString = (accessPart: ParsedAccessPart): string => {
     if (accessPart.write) {
         return 'rw'
     }
     return accessPart.read ? 'r-' : '--'
 }
 
-export const formatPublicAccess = (publicAccess: PublicAccess): string => {
+export const formatAccessToString = (publicAccess: ParsedAccess): string => {
     const metadata = accessPartToString(publicAccess.metadata)
     const data = accessPartToString(publicAccess.data)
 
