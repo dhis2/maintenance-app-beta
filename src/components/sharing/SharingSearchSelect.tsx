@@ -1,8 +1,6 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { IconUser16, IconUserGroup16 } from '@dhis2/ui'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { Sharing } from '../../types/generated'
+import React, { useCallback, useMemo, useState } from 'react'
 import { SearchableSingleSelect } from '../SearchableSingleSelect'
 
 const query = {
@@ -52,7 +50,7 @@ export const SharingSearchSelect = ({ onChange }: SharingSearchSelectProps) => {
             variables: { searchFilter: '' },
         })
 
-    const formattedData: SharingSearchResult[] = useMemo(() => {
+    const formattedData = useMemo(() => {
         if (!data?.result) {
             return []
         }
@@ -111,14 +109,10 @@ export const SharingSearchSelect = ({ onChange }: SharingSearchSelectProps) => {
             placeholder={i18n.t('Search for a user or group')}
             onFilterChange={handleFetch}
             selected={selected}
-            options={formattedData.map((res) => ({
-                label: res.displayName,
-                value: res.id,
-            }))}
+            options={formattedData}
             onChange={handleChange}
             onRetryClick={() => refetch()}
             loading={loading}
-            onEndReached={() => {}}
             showEndLoader={loading}
             error={error?.message}
         />
