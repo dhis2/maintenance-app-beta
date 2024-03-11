@@ -1,1 +1,1 @@
-export { WrapWithTooltip } from './WrapTooltip'
+export { TooltipWrapper } from './TooltipWrapper'

@@ -1,10 +1,10 @@
 import { DataTableRow, DataTableCell, Checkbox } from '@dhis2/ui'
 import cx from 'classnames'
 import React from 'react'
-import { BaseListModel } from '../../lib'
+import { BaseListModel, TOOLTIPS } from '../../lib'
 import { canEditModel } from '../../lib/models/access'
 import { CheckBoxOnChangeObject } from '../../types'
-import { WrapWithTooltip } from '../tooltip'
+import { TooltipWrapper } from '../tooltip'
 import css from './SectionList.module.css'
 import { SelectedColumns, SelectedColumn } from './types'
 
@@ -37,9 +37,9 @@ export function SectionListRow<Model extends BaseListModel>({
             selected={selected}
         >
             <DataTableCell width="48px">
-                <WrapWithTooltip
+                <TooltipWrapper
                     condition={!editAccess}
-                    content={WrapWithTooltip.TOOLTIPS.noEditAccess}
+                    content={TOOLTIPS.noEditAccess}
                 >
                     <Checkbox
                         disabled={!editAccess}
@@ -49,7 +49,7 @@ export function SectionListRow<Model extends BaseListModel>({
                             onSelect(modelData.id, checked)
                         }}
                     />
-                </WrapWithTooltip>
+                </TooltipWrapper>
             </DataTableCell>
             {selectedColumns.map((selectedColumn) => (
                 <DataTableCell

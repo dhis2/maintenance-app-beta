@@ -12,9 +12,9 @@ import {
 } from '@dhis2/ui'
 import React, { useRef, useState } from 'react'
 import { useHref, useLinkClickHandler } from 'react-router-dom'
-import { BaseListModel } from '../../../lib'
+import { TOOLTIPS } from '../../../lib'
 import { LinkButton } from '../../LinkButton'
-import { WrapWithTooltip } from '../../tooltip'
+import { TooltipWrapper } from '../../tooltip'
 import css from './SectionListActions.module.css'
 
 export const ListActions = ({ children }: React.PropsWithChildren) => {
@@ -26,20 +26,6 @@ export const ActionEdit = ({ modelId }: { modelId: string }) => {
         <LinkButton small secondary to={modelId}>
             <IconEdit24 />
         </LinkButton>
-    )
-}
-
-export const ActionOpenSharing = ({
-    modelId,
-    onOpenSharingClick,
-}: {
-    modelId: string
-    onOpenSharingClick: () => void
-}) => {
-    return (
-        <Button small secondary onClick={onOpenSharingClick}>
-            {i18n.t('Open sharing')}
-        </Button>
     )
 }
 
@@ -98,9 +84,9 @@ export const ActionMore = ({
                             target="_blank"
                             href={href}
                         ></MenuItem>
-                        <WrapWithTooltip
+                        <TooltipWrapper
                             condition={!editAccess}
-                            content={WrapWithTooltip.TOOLTIPS.noEditAccess}
+                            content={TOOLTIPS.noEditAccess}
                         >
                             <MenuItem
                                 dense
@@ -112,7 +98,7 @@ export const ActionMore = ({
                                     setOpen(false)
                                 }}
                             ></MenuItem>
-                        </WrapWithTooltip>
+                        </TooltipWrapper>
                     </FlyoutMenu>
                 </Popover>
             )}
