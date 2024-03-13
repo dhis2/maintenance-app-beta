@@ -1,7 +1,7 @@
 import { FetchError } from '@dhis2/app-runtime'
 import { SharingDialog } from '@dhis2/ui'
 import React, { useCallback, useState } from 'react'
-import { BaseListModel, useSchemaFromHandle } from '../../lib'
+import { BaseListModel, canEditModel, useSchemaFromHandle } from '../../lib'
 import { Pager, ModelCollection } from '../../types/models'
 import { SectionListHeaderBulk } from './bulk'
 import { DetailsPanel, DefaultDetailsPanelContent } from './detailsPanel'
@@ -33,8 +33,8 @@ export const SectionListWrapper = ({
 }: SectionListWrapperProps) => {
     const { columns: headerColumns } = useModelListView()
     const schema = useSchemaFromHandle()
-    const { selectedModels, isAllSelected, selectModel, selectAll, clearAll } =
-        useSelectedModels({ data })
+    const { selectedModels, checkAllSelected, add, remove, toggle, clearAll } =
+        useSelectedModels()
     const [detailsId, setDetailsId] = useState<string | undefined>()
     const [sharingDialogId, setSharingDialogId] = useState<string | undefined>()
 
@@ -51,6 +51,25 @@ export const SectionListWrapper = ({
         }
         return null
     }
+
+    const handleSelectAll = useCallback(
+        (checked: boolean) => {
+            if (!data) {
+                return
+            }
+            if (checked) {
+                const editableIds = data
+                    .filter((model) => canEditModel(model))
+                    .map((model) => model.id)
+                add(editableIds)
+            } else {
+                remove(
+                    data.filter((model) => model.id).map((model) => model.id)
+                )
+            }
+        },
+        [data, add, remove]
+    )
 
     const handleDetailsClick = useCallback(
         ({ id }: BaseListModel) => {
@@ -83,6 +102,8 @@ export const SectionListWrapper = ({
         [handleDetailsClick, setSharingDialogId]
     )
 
+    const isAllSelected = data ? checkAllSelected(data) : false
+
     return (
         <div>
             <SectionListTitle />
@@ -98,7 +119,7 @@ export const SectionListWrapper = ({
                 )}
                 <SectionList
                     headerColumns={headerColumns}
-                    onSelectAll={selectAll}
+                    onSelectAll={handleSelectAll}
                     allSelected={isAllSelected}
                 >
                     <SectionListMessage />
@@ -107,7 +128,7 @@ export const SectionListWrapper = ({
                             key={model.id}
                             modelData={model}
                             selectedColumns={headerColumns}
-                            onSelect={selectModel}
+                            onSelect={toggle}
                             onClick={handleDetailsClick}
                             selected={selectedModels.has(model.id)}
                             active={model.id === detailsId}

@@ -1,62 +1,48 @@
 // export interface useSelecto
+import { memoize } from 'lodash'
 import { useState, useMemo, useCallback } from 'react'
 import { BaseListModel, canEditModel } from '../../lib'
 
-export function useSelectedModels({
-    data,
-    initialSelected,
-}: {
-    data: BaseListModel[] | undefined
-    initialSelected?: string[]
-}) {
+export type UseSelectedModelsOptions = { intialSelected?: string[] }
+
+export function useSelectedModels(options?: UseSelectedModelsOptions) {
     const [selectedModels, setSelectedModels] = useState<Set<string>>(
-        () => new Set(initialSelected || [])
+        () => new Set(options?.intialSelected || [])
     )
 
-    const selectModel = useCallback(
-        (id: string, checked: boolean) => {
-            if (checked) {
-                setSelectedModels((prevSelected) => {
-                    const newSelected = new Set(prevSelected)
-                    newSelected.add(id)
-                    return newSelected
-                })
-            } else {
-                setSelectedModels((prevSelected) => {
-                    const newSelected = new Set(prevSelected)
-                    newSelected.delete(id)
-                    return newSelected
-                })
-            }
+    const add = useCallback(
+        (ids: string | string[]) => {
+            const addIds = Array.isArray(ids) ? ids : [ids]
+            setSelectedModels((prevSelected) => {
+                const newSelected = new Set(prevSelected)
+                addIds.forEach((id) => newSelected.add(id))
+                return newSelected
+            })
         },
         [setSelectedModels]
     )
 
-    const selectAll = useCallback(
-        (checked: boolean) => {
+    const remove = useCallback(
+        (ids: string | string[]) => {
+            const removeIds = Array.isArray(ids) ? ids : [ids]
+
+            setSelectedModels((prevSelected) => {
+                const newSelected = new Set(prevSelected)
+                removeIds.forEach((id) => newSelected.delete(id))
+                return newSelected
+            })
+        },
+        [setSelectedModels]
+    )
+    const toggle = useCallback(
+        (ids: string | string[], checked: boolean) => {
             if (checked) {
-                setSelectedModels((prev) => {
-                    const prevSeleted = Array.from(prev)
-                    const allEditable =
-                        data?.flatMap((model) => {
-                            return canEditModel(model) ? [model.id] : []
-                        }) || []
-                    return new Set([...prevSeleted, ...allEditable])
-                })
+                add(ids)
             } else {
-                setSelectedModels((prev) => {
-                    // since data can be selected from multiple pages
-                    // remove only selected models that are in the current data/page
-                    // eg. keep selected models that are not in the current data
-                    const newSelected = new Set(prev)
-                    data?.forEach((m) =>
-                        prev.has(m.id) ? newSelected.delete(m.id) : null
-                    )
-                    return new Set(newSelected)
-                })
+                remove(ids)
             }
         },
-        [data, setSelectedModels]
+        [add, remove]
     )
 
     const clearAll = useCallback(
@@ -64,21 +50,25 @@ export function useSelectedModels({
         [setSelectedModels]
     )
 
-    const isAllSelected = useMemo(() => {
-        if (!data) {
-            return false
-        }
-        // do not include uneditable models when checking if all are selected
-        return data
-            .filter((m) => canEditModel(m))
-            .every((model) => selectedModels.has(model.id))
-    }, [data, selectedModels])
+    const checkAllSelected = useMemo(
+        () =>
+            memoize((data: BaseListModel[]) => {
+                if (!data) {
+                    return false
+                }
+                return data
+                    .filter((m) => canEditModel(m))
+                    .every((model) => selectedModels.has(model.id))
+            }),
+        [selectedModels]
+    )
 
     return {
         selectedModels,
-        isAllSelected,
-        selectModel,
-        selectAll,
+        checkAllSelected,
+        add,
+        remove,
+        toggle,
         clearAll,
     }
 }
