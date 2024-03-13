@@ -1,23 +1,25 @@
 import { DataTableRow, DataTableCell, Checkbox } from '@dhis2/ui'
 import cx from 'classnames'
 import React from 'react'
+import { BaseListModel, TOOLTIPS } from '../../lib'
+import { canEditModel } from '../../lib/models/access'
 import { CheckBoxOnChangeObject } from '../../types'
-import { IdentifiableObject, GistModel } from '../../types/models'
+import { TooltipWrapper } from '../tooltip'
 import css from './SectionList.module.css'
 import { SelectedColumns, SelectedColumn } from './types'
 
-export type SectionListRowProps<Model extends IdentifiableObject> = {
-    modelData: GistModel<Model> | Model
+export type SectionListRowProps<Model extends BaseListModel> = {
+    modelData: Model
     selectedColumns: SelectedColumns
     onSelect: (modelId: string, checked: boolean) => void
     selected: boolean
     renderActions: (modelId: string) => React.ReactNode
     renderColumnValue: (column: SelectedColumn) => React.ReactNode
-    onClick?: (modelData: GistModel<Model> | Model) => void
+    onClick?: (modelData: Model) => void
     active?: boolean
 }
 
-export function SectionListRow<Model extends IdentifiableObject>({
+export function SectionListRow<Model extends BaseListModel>({
     active,
     selectedColumns,
     modelData,
@@ -27,6 +29,7 @@ export function SectionListRow<Model extends IdentifiableObject>({
     renderActions,
     renderColumnValue,
 }: SectionListRowProps<Model>) {
+    const editAccess = canEditModel(modelData)
     return (
         <DataTableRow
             className={cx(css.listRow, { [css.active]: active })}
@@ -34,13 +37,19 @@ export function SectionListRow<Model extends IdentifiableObject>({
             selected={selected}
         >
             <DataTableCell width="48px">
-                <Checkbox
-                    dataTest="section-list-row-checkbox"
-                    checked={selected}
-                    onChange={({ checked }: CheckBoxOnChangeObject) => {
-                        onSelect(modelData.id, checked)
-                    }}
-                />
+                <TooltipWrapper
+                    condition={!editAccess}
+                    content={TOOLTIPS.noEditAccess}
+                >
+                    <Checkbox
+                        disabled={!editAccess}
+                        dataTest="section-list-row-checkbox"
+                        checked={selected}
+                        onChange={({ checked }: CheckBoxOnChangeObject) => {
+                            onSelect(modelData.id, checked)
+                        }}
+                    />
+                </TooltipWrapper>
             </DataTableCell>
             {selectedColumns.map((selectedColumn) => (
                 <DataTableCell

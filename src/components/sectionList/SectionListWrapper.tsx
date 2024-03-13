@@ -1,15 +1,12 @@
 import { FetchError } from '@dhis2/app-runtime'
+import { SharingDialog } from '@dhis2/ui'
 import React, { useMemo, useState } from 'react'
-import { useSchemaFromHandle } from '../../lib'
+import { BaseListModel, useSchemaFromHandle } from '../../lib'
 import { Pager, ModelCollection } from '../../types/models'
 import { SectionListHeaderBulk } from './bulk'
 import { DetailsPanel, DefaultDetailsPanelContent } from './detailsPanel'
 import { FilterWrapper } from './filters/FilterWrapper'
-import {
-    ActionEdit,
-    ActionMore,
-    ListActions,
-} from './listActions/SectionListActions'
+import { DefaultListActions } from './listActions'
 import { useModelListView } from './listView'
 import { ModelValue } from './modelValue/ModelValue'
 import { SectionList } from './SectionList'
@@ -22,7 +19,7 @@ import { SectionListRow } from './SectionListRow'
 import { SectionListTitle } from './SectionListTitle'
 
 type SectionListWrapperProps = {
-    data: ModelCollection | undefined
+    data: ModelCollection<BaseListModel> | undefined
     pager: Pager | undefined
     error: FetchError | undefined
 }
@@ -36,6 +33,7 @@ export const SectionListWrapper = ({
     const schema = useSchemaFromHandle()
     const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set())
     const [detailsId, setDetailsId] = useState<string | undefined>()
+    const [sharingDialogId, setSharingDialogId] = useState<string | undefined>()
 
     const handleSelect = (id: string, checked: boolean) => {
         if (checked) {
@@ -122,16 +120,12 @@ export const SectionListWrapper = ({
                                     />
                                 )
                             }}
-                            renderActions={(id) => (
-                                <ListActions>
-                                    <ActionEdit modelId={id} />
-                                    <ActionMore
-                                        modelId={id}
-                                        onShowDetailsClick={() =>
-                                            handleShowDetails(id)
-                                        }
-                                    />
-                                </ListActions>
+                            renderActions={() => (
+                                <DefaultListActions
+                                    model={model}
+                                    onShowDetailsClick={handleShowDetails}
+                                    onOpenSharingClick={setSharingDialogId}
+                                />
                             )}
                         />
                     ))}
@@ -148,6 +142,16 @@ export const SectionListWrapper = ({
                     </DetailsPanel>
                 )}
             </div>
+            {sharingDialogId && (
+                <SharingDialog
+                    id={sharingDialogId}
+                    /* @TODO: Sharing dialog does not support metadata
+                    but it works if you pass the correct type*/
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    type={schema.singular as any}
+                    onClose={() => setSharingDialogId(undefined)}
+                />
+            )}
         </div>
     )
 }

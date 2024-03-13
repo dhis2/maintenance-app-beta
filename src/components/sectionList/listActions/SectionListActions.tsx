@@ -6,12 +6,15 @@ import {
     IconEdit24,
     IconMore16,
     IconMore24,
+    IconShare16,
     MenuItem,
     Popover,
 } from '@dhis2/ui'
 import React, { useRef, useState } from 'react'
-import { Link, useHref, useLinkClickHandler } from 'react-router-dom'
+import { useHref, useLinkClickHandler } from 'react-router-dom'
+import { TOOLTIPS } from '../../../lib'
 import { LinkButton } from '../../LinkButton'
+import { TooltipWrapper } from '../../tooltip'
 import css from './SectionListActions.module.css'
 
 export const ListActions = ({ children }: React.PropsWithChildren) => {
@@ -28,10 +31,14 @@ export const ActionEdit = ({ modelId }: { modelId: string }) => {
 
 type ActionMoreProps = {
     modelId: string
+    editAccess: boolean
     onShowDetailsClick: () => void
+    onOpenSharingClick: () => void
 }
 export const ActionMore = ({
     modelId,
+    editAccess,
+    onOpenSharingClick,
     onShowDetailsClick,
 }: ActionMoreProps) => {
     const [open, setOpen] = useState(false)
@@ -77,6 +84,21 @@ export const ActionMore = ({
                             target="_blank"
                             href={href}
                         ></MenuItem>
+                        <TooltipWrapper
+                            condition={!editAccess}
+                            content={TOOLTIPS.noEditAccess}
+                        >
+                            <MenuItem
+                                dense
+                                disabled={!editAccess}
+                                label={i18n.t('Sharing settings')}
+                                icon={<IconShare16 />}
+                                onClick={() => {
+                                    onOpenSharingClick()
+                                    setOpen(false)
+                                }}
+                            ></MenuItem>
+                        </TooltipWrapper>
                     </FlyoutMenu>
                 </Popover>
             )}
