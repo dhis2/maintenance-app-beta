@@ -8,7 +8,7 @@ import {
 import userEvent from '@testing-library/user-event'
 import React from 'react'
 import dataElementSchemaMock from '../../__mocks__/schema/dataElementsSchema.json'
-import { SECTIONS_MAP } from '../../lib'
+import { SECTIONS_MAP, canEditModel } from '../../lib'
 import { useSchemaStore } from '../../lib/schemas/schemaStore'
 import { ModelSchemas } from '../../lib/useLoadApp'
 import TestComponentWithRouter, {
@@ -291,13 +291,24 @@ describe('Data Elements List', () => {
 
         const allCheckBoxes = queryAllByTestId('section-list-row-checkbox')
 
+        // should only select checkboxes that are editable
+        const numberOfEditableItems = dataElementsMock.dataElements.reduce(
+            (acc, de) => (de && canEditModel(de) ? acc + 1 : acc),
+            0
+        )
         expect(allCheckBoxes.length).toEqual(dataElementsMock.pager.pageSize)
-        // the UI library doesn't seem to apply checked on the input, which would have been a better test, so checking "checked" class on the svg icon
+        let numberOfSelectedBoxes = 0
         allCheckBoxes.forEach((checkbox) => {
-            expect(checkbox.getElementsByTagName('svg')[0]).toHaveClass(
-                'checked'
-            )
+            // the UI library doesn't seem to apply checked on the input, which would have been a better test, so checking "checked" class on the svg icon
+            if (
+                checkbox
+                    .getElementsByTagName('svg')[0]
+                    .classList.contains('checked')
+            ) {
+                numberOfSelectedBoxes++
+            }
         })
+        expect(numberOfSelectedBoxes).toEqual(numberOfEditableItems)
     })
 
     // empty list
