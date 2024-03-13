@@ -13,8 +13,12 @@ import { getFieldFilter } from '../../lib/models/path'
 import { Query, WrapQueryResponse } from '../../types'
 import { DataElement, ModelCollectionResponse } from '../../types/models'
 
+<<<<<<< HEAD:src/pages/dataElements/List.tsx
 type FilteredDataElement = Pick<DataElement, DefaultFields> &
     Partial<DataElement>
+=======
+type ModelListResponse = WrapQueryResponse<PagedResponse<BaseListModel, string>>
+>>>>>>> fix(form): hide custom attributes section if no attributes assigned:src/pages/GenericList.tsx
 
 type DataElements = ModelCollectionResponse<FilteredDataElement, 'dataElements'>
 
@@ -30,8 +34,13 @@ const query: Query = {
 export const Component = () => {
     const { columns, query: listViewQuery } = useModelListView()
     const initialParams = useParamsForDataQuery()
+<<<<<<< HEAD:src/pages/dataElements/List.tsx
     const schema = useSchemaFromHandle()
     const { refetch, error, data } = useDataQuery<DataElementsResponse>(
+=======
+
+    const { refetch, error, data } = useDataQuery<ModelListResponse>(
+>>>>>>> fix(form): hide custom attributes section if no attributes assigned:src/pages/GenericList.tsx
         query,
         // refetched on mount by effect below
         { lazy: true }
