@@ -126,28 +126,51 @@ export const ManageListView = ({
         >
             {({ handleSubmit, submitting, submitError }) => (
                 <form onSubmit={handleSubmit}>
-                    <TransferField
-                        name={'columns'}
-                        availableLabel={i18n.t('Available columns')}
-                        selectedLabel={i18n.t('Selected columns')}
-                        loading={query.isLoading}
-                        defaultOptions={defaultColumns}
-                        availableOptions={columnsConfig.available.map((c) => ({
-                            label: c.label,
-                            value: c.path,
-                        }))}
-                    />
-                    <TransferField
-                        name={'filters'}
-                        availableLabel={i18n.t('Available filters')}
-                        selectedLabel={i18n.t('Selected filters')}
-                        loading={query.isLoading}
-                        defaultOptions={defaultFilters}
-                        availableOptions={filtersConfig.available.map((f) => ({
-                            label: f.label,
-                            value: f.filterKey,
-                        }))}
-                    />
+                    <TabBar>
+                        <Tab
+                            selected={selectedTab === 'columns'}
+                            onClick={(_, e) => handleChangeTab('columns', e)}
+                        >
+                            {i18n.t('Columns')}
+                        </Tab>
+                        <Tab
+                            selected={selectedTab === 'filters'}
+                            onClick={(_, e) => handleChangeTab('filters', e)}
+                        >
+                            {i18n.t('Filters')}
+                        </Tab>
+                    </TabBar>
+
+                    <TabContent show={selectedTab === 'columns'}>
+                        <TransferField
+                            name={'columns'}
+                            availableLabel={i18n.t('Available columns')}
+                            selectedLabel={i18n.t('Selected columns')}
+                            loading={query.isLoading}
+                            defaultOptions={defaultColumns}
+                            availableOptions={columnsConfig.available.map(
+                                (c) => ({
+                                    label: c.label,
+                                    value: c.path,
+                                })
+                            )}
+                        />
+                    </TabContent>
+                    <TabContent show={selectedTab === 'filters'}>
+                        <TransferField
+                            name={'filters'}
+                            availableLabel={i18n.t('Available filters')}
+                            selectedLabel={i18n.t('Selected filters')}
+                            loading={query.isLoading}
+                            defaultOptions={defaultFilters}
+                            availableOptions={filtersConfig.available.map(
+                                (f) => ({
+                                    label: f.label,
+                                    value: f.filterKey,
+                                })
+                            )}
+                        />
+                    </TabContent>
                     {submitError && (
                         <p>
                             <NoticeBox error title={i18n.t('Failed to save')}>
