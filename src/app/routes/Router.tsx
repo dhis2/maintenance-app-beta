@@ -23,11 +23,19 @@ import {
     isValidUid,
     routePaths,
 } from '../../lib'
+import { GenericList } from '../../pages/GenericList'
 import { OverviewSection } from '../../types'
 import { Layout, Breadcrumbs, BreadcrumbItem } from '../layout'
 import { CheckAuthorityForSection } from './CheckAuthorityForSection'
 import { DefaultErrorRoute } from './DefaultErrorRoute'
 import { LegacyAppRedirect } from './LegacyAppRedirect'
+
+// Use GenericList-component for these sections
+const ENABLED_GENERIC_LIST_ROUTES = new Set<Section>([
+    SECTIONS_MAP.dataElement,
+    SECTIONS_MAP.dataElementGroup,
+    SECTIONS_MAP.dataElementGroupSet,
+])
 
 // This loads all the overview routes in the same chunk since they resolve to the same promise
 // see https://reactrouter.com/en/main/route/lazy#multiple-routes-in-a-single-file
@@ -66,6 +74,14 @@ function createSectionLazyRouteFunction(
             // means the component is not implemented yet
             // fallback to redirect to legacy
             if (isModuleNotFoundError(e)) {
+                if (
+                    componentFileName === 'List' &&
+                    ENABLED_GENERIC_LIST_ROUTES.has(section)
+                ) {
+                    return {
+                        element: <GenericList key={section.name} />,
+                    }
+                }
                 return {
                     element: (
                         <LegacyAppRedirect
