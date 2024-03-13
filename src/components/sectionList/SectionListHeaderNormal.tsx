@@ -18,7 +18,6 @@ export const SectionListHeader = () => {
                     {i18n.t('New')}
                 </Button>
             </Link>
-            <Button small>{i18n.t('Download')}</Button>
             <Button small onClick={() => setManageColumnsOpen((prev) => !prev)}>
                 {i18n.t('Manage View')}
             </Button>
