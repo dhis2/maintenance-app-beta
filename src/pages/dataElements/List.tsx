@@ -1,24 +1,20 @@
 import { useDataQuery } from '@dhis2/app-runtime'
+import { SharingDialog } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { SectionListWrapper } from '../../components'
 import { useModelListView } from '../../components/sectionList/listView'
-import { useSchemaFromHandle, useParamsForDataQuery } from '../../lib/'
+import {
+    useSchemaFromHandle,
+    useParamsForDataQuery,
+    DEFAULT_FIELD_FILTERS,
+    DefaultFields,
+} from '../../lib/'
 import { getFieldFilter } from '../../lib/models/path'
 import { Query, WrapQueryResponse } from '../../types'
 import { DataElement, ModelCollectionResponse } from '../../types/models'
 
-const filterFields = [
-    'access',
-    'id',
-    'name',
-    'code',
-    'domainType',
-    'valueType',
-    'lastUpdated',
-    'sharing',
-] as const
-
-type FilteredDataElement = Pick<DataElement, (typeof filterFields)[number]>
+type FilteredDataElement = Pick<DataElement, DefaultFields> &
+    Partial<DataElement>
 
 type DataElements = ModelCollectionResponse<FilteredDataElement, 'dataElements'>
 
@@ -51,7 +47,7 @@ export const Component = () => {
             ...initialParams,
             fields: columns
                 .map((column) => getFieldFilter(schema, column.path))
-                .concat('id'),
+                .concat(DEFAULT_FIELD_FILTERS),
         })
     }, [refetch, initialParams, columns, listViewQuery.isLoading, schema])
 

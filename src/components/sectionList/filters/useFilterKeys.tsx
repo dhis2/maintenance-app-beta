@@ -6,6 +6,9 @@ import {
 } from '../../../lib'
 import { useModelListView } from '../listView'
 
+/**
+ * Get the filterKeys for for which filters to show.
+ * This depends on the current "modelList" view, and selected filters with values in the url */
 export const useFilterKeys = () => {
     const [filters] = useSectionListFilters()
     const { filters: viewFilters } = useModelListView()

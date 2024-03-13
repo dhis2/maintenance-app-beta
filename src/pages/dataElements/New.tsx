@@ -10,13 +10,15 @@ import {
     StandardFormActions,
     StandardFormSection,
 } from '../../components'
-import { SCHEMA_SECTIONS, getSectionPath, useSchemas } from '../../lib'
-import { Attribute } from '../../types/generated'
+import { useCustomAttributesQuery } from '../../components/form'
 import {
-    DataElementFormFields,
-    useCustomAttributesQuery,
-    useValidate,
-} from './form'
+    SCHEMA_SECTIONS,
+    getSectionPath,
+    useSchemas,
+    validate,
+} from '../../lib'
+import { Attribute } from '../../types/generated'
+import { DataElementFormFields, dataElementSchema } from './form'
 import type { FormValues } from './form'
 import classes from './New.module.css'
 
@@ -101,25 +103,10 @@ function formatFormValues({ values }: { values: FormValues }) {
 }
 
 export const Component = () => {
-    const validate = useValidate()
     const dataEngine = useDataEngine()
     const navigate = useNavigate()
     const customAttributesQuery = useCustomAttributesQuery()
-
-    const loading = customAttributesQuery.loading
-    const error = customAttributesQuery.error
-
     const initialValues = useInitialValues(customAttributesQuery.data)
-
-    if (error && !loading) {
-        // @TODO(Edit): Implement error screen
-        return <>Error: {error.toString()}</>
-    }
-
-    if (loading) {
-        // @TODO(Edit): Implement loading screen
-        return <>Loading...</>
-    }
 
     async function onSubmit(values: FormValues) {
         const payload = formatFormValues({ values })
@@ -146,7 +133,9 @@ export const Component = () => {
             <Form
                 validateOnBlur
                 onSubmit={onSubmit}
-                validate={validate}
+                validate={(values: FormValues) => {
+                    return validate(dataElementSchema, values)
+                }}
                 initialValues={initialValues}
             >
                 {({ handleSubmit, submitting, submitError }) => (
@@ -154,6 +143,7 @@ export const Component = () => {
                         <FormContents
                             submitError={submitError}
                             submitting={submitting}
+                            onCancelClick={() => navigate(listPath)}
                         />
                     </form>
                 )}
@@ -164,13 +154,14 @@ export const Component = () => {
 
 function FormContents({
     submitError,
+    onCancelClick,
     submitting,
 }: {
     submitting: boolean
+    onCancelClick: () => void
     submitError?: string
 }) {
     const formErrorRef = useRef<HTMLDivElement | null>(null)
-    const navigate = useNavigate()
 
     useEffect(() => {
         if (submitError) {
@@ -203,7 +194,7 @@ function FormContents({
                         cancelLabel={i18n.t('Exit without saving')}
                         submitLabel={i18n.t('Create data element')}
                         submitting={submitting}
-                        onCancelClick={() => navigate(listPath)}
+                        onCancelClick={onCancelClick}
                     />
                 </StandardFormSection>
             </div>

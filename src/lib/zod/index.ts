@@ -1,0 +1,1 @@
+export { segmentsToPath } from './segmentsToPath'

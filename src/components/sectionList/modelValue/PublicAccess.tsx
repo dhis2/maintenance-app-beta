@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
-import { parsePublicAccessString } from '../../../lib'
+import { parseAccessString } from '../../../lib'
 import { Sharing } from '../../../types/generated'
 
 export const isSharing = (value: unknown): value is Sharing => {
@@ -8,7 +8,7 @@ export const isSharing = (value: unknown): value is Sharing => {
 }
 
 const getPublicAccessString = (value: string): string => {
-    const publicAccess = parsePublicAccessString(value)
+    const publicAccess = parseAccessString(value)
 
     if (!publicAccess) {
         throw new Error('Invalid public access string')

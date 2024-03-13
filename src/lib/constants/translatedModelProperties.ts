@@ -10,6 +10,7 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     lastUpdatedBy: i18n.t('Last updated by'),
     created: i18n.t('Created'),
     domainType: i18n.t('Domain type'),
+    dataSet: i18n.t('Data set'),
     lastUpdated: i18n.t('Last updated'),
     name: i18n.t('Name'),
     sharing: i18n.t('Sharing'),

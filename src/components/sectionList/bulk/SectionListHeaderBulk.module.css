@@ -1,0 +1,11 @@
+.listHeaderBulk {
+    background-color: var(--colors-green050);
+    width: 100%;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: var(--spacers-dp8);
+    gap: var(--spacers-dp8);
+    border: 2px solid var(--colors-green800) !important;
+}

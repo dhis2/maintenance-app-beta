@@ -102,7 +102,6 @@ export function useDataStoreValuesQuery<
         queryKey: [query],
         queryFn: createBoundQueryFn(engine),
         placeholderData,
-        // keepPreviousData: true,
         // hide ".result" from consumer
         select: (data) => select(data.result) as SelectResult,
     })

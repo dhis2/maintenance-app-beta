@@ -1,0 +1,7 @@
+label.domainTypeRadioButton {
+    display: inline-flex;
+}
+
+.domainTypeRadioButton + .domainTypeRadioButton {
+    margin-left: var(--spacers-dp8);
+}

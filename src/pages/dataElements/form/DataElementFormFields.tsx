@@ -5,29 +5,33 @@ import {
     StandardFormSectionTitle,
     StandardFormSectionDescription,
     StandardFormField,
+    CustomAttributes,
 } from '../../../components'
-import { CustomAttributes } from './CustomAttributes'
+import {
+    CodeField,
+    DescriptionField,
+    NameField,
+    ShortNameField,
+} from '../../../components/form'
+import { SCHEMA_SECTIONS } from '../../../lib'
 import {
     AggregationLevelsField,
     AggregationTypeField,
     CategoryComboField,
-    CodeField,
     ColorAndIconField,
-    DescriptionField,
     DomainField,
     FieldMaskField,
     FormNameField,
     LegendSetField,
-    NameField,
     OptionSetCommentField,
     OptionSetField,
-    ShortNameField,
     UrlField,
     ValueTypeField,
     ZeroIsSignificantField,
-} from './fields'
+} from '../fields'
 
 export function DataElementFormFields() {
+    const schemaSection = SCHEMA_SECTIONS.dataElement
     return (
         <>
             <StandardFormSection>
@@ -40,11 +44,11 @@ export function DataElementFormFields() {
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
-                    <NameField />
+                    <NameField schemaSection={schemaSection} />
                 </StandardFormField>
 
                 <StandardFormField>
-                    <ShortNameField />
+                    <ShortNameField schemaSection={schemaSection} />
                 </StandardFormField>
 
                 <StandardFormField>
@@ -52,11 +56,16 @@ export function DataElementFormFields() {
                 </StandardFormField>
 
                 <StandardFormField>
-                    <CodeField />
+                    <CodeField schemaSection={schemaSection} />
                 </StandardFormField>
 
                 <StandardFormField>
-                    <DescriptionField />
+                    <DescriptionField
+                        helpText={i18n.t(
+                            'Explain the purpose of this data element.'
+                        )}
+                        schemaSection={schemaSection}
+                    />
                 </StandardFormField>
 
                 <StandardFormField>

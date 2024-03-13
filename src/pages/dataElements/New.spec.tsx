@@ -9,6 +9,16 @@ import attributes from './__mocks__/attributes.json'
 import categoryCombosPage1 from './__mocks__/categoryCombosPage1.json'
 import { Component as New } from './New'
 
+jest.mock('../../lib/routeUtils/useSectionHandle', () => ({
+    useSchemaSectionHandleOrThrow: jest.fn(() => ({
+        name: 'dataElement',
+        namePlural: 'dataElements',
+        parentSectionKey: 'dataElement',
+        title: 'Data element',
+        titlePlural: 'Data elements',
+    })),
+}))
+
 // @TODO: For some reason string interpolation somewhere within the Transfer
 //        component does not get transpiled correctly for the cjs build when
 //        building the UI library. We'll have to address that at some point.
@@ -66,10 +76,10 @@ describe('Data Elements / New', () => {
     it('should return to the list view when cancelling', async () => {
         const router = createMemoryRouter(
             [
-                { path: '/new', element: <New /> },
+                { path: '/dataElements/new', element: <New /> },
                 { path: '/dataElements', element: <div>List view</div> },
             ],
-            { initialEntries: ['/new'] }
+            { initialEntries: ['/dataElements/new'] }
         )
 
         const result = render(
@@ -111,19 +121,17 @@ describe('Data Elements / New', () => {
         ).toHaveLength(3)
 
         const nameRequiredError = await result.findByText('Required', {
-            selector: '[data-test="dataelementsformfields-name-validation"]',
+            selector: '[data-test="formfields-name-validation"]',
         })
         expect(nameRequiredError).toBeTruthy()
 
         const shortNameRequiredError = await result.findByText('Required', {
-            selector:
-                '[data-test="dataelementsformfields-shortname-validation"]',
+            selector: '[data-test="formfields-shortname-validation"]',
         })
         expect(shortNameRequiredError).toBeTruthy()
 
         const categoryComboRequiredError = await result.findByText('Required', {
-            selector:
-                '[data-test="dataelementsformfields-categorycombo-validation"]',
+            selector: '[data-test="formfields-categorycombo-validation"]',
         })
         expect(categoryComboRequiredError).toBeTruthy()
     })
@@ -135,12 +143,12 @@ describe('Data Elements / New', () => {
             })
         const router = createMemoryRouter(
             [
-                { path: '/new', element: <New /> },
+                { path: '/dataElements/new', element: <New /> },
                 { path: '/dataElements', element: <div>List view</div> },
             ],
             {
                 initialIndex: 0,
-                initialEntries: ['/new'],
+                initialEntries: ['/dataElements/new'],
             }
         )
         const result = render(
@@ -184,7 +192,6 @@ describe('Data Elements / New', () => {
             'Category combination (required)',
             'None'
         )
-
         fireEvent.click(submitButton)
 
         const listView = await result.findByText('List view')

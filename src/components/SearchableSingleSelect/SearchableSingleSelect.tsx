@@ -50,7 +50,7 @@ type OnFilterChange = ({ value }: { value: string }) => void
 interface SearchableSingleSelectPropTypes {
     onChange: OnChange
     onFilterChange: OnFilterChange
-    onEndReached: () => void
+    onEndReached?: () => void
     onRetryClick: () => void
     dense?: boolean
     options: Option[]
@@ -58,6 +58,7 @@ interface SearchableSingleSelectPropTypes {
     prefix?: string
     showEndLoader: boolean
     loading: boolean
+    disabled?: boolean
     selected?: string
     invalid?: boolean
     error?: string
@@ -68,6 +69,7 @@ interface SearchableSingleSelectPropTypes {
 
 export const SearchableSingleSelect = ({
     invalid,
+    disabled,
     error,
     dense,
     loading,
@@ -101,7 +103,7 @@ export const SearchableSingleSelect = ({
                     const [{ isIntersecting }] = entries
 
                     if (isIntersecting) {
-                        onEndReached()
+                        onEndReached?.()
                     }
                 },
                 { threshold: 0.8 }
@@ -126,6 +128,7 @@ export const SearchableSingleSelect = ({
             // fetched the corresponding label yet. Therefore we don't want to pass in
             // any value to the "selected" prop, as otherwise an error will be thrown
             selected={hasSelectedInOptionList ? selected : ''}
+            disabled={disabled}
             error={invalid}
             onChange={onChange}
             placeholder={placeholder}
@@ -138,6 +141,7 @@ export const SearchableSingleSelect = ({
                 <div className={classes.searchInput}>
                     <Input
                         dense
+                        initialFocus
                         value={filter}
                         onChange={({ value }) => setFilterValue(value ?? '')}
                         placeholder={i18n.t('Filter options')}
