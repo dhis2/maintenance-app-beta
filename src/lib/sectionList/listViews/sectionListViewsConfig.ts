@@ -64,7 +64,7 @@ export const defaultModelViewConfig = {
         default: ['name', DESCRIPTORS.publicAccess, 'lastUpdated'],
     },
     filters: {
-        available: [],
+        available: [DESCRIPTORS.publicAccess],
         default: [
             // NOTE: Identifiable is special, and is always included in the default filters
             // It should not be handled the same way as "configurable" filters
