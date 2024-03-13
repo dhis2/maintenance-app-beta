@@ -13,13 +13,18 @@ export type SectionListRowProps<Model extends BaseListModel> = {
     selectedColumns: SelectedColumns
     onSelect: (modelId: string, checked: boolean) => void
     selected: boolean
-    renderActions: (modelId: string) => React.ReactNode
-    renderColumnValue: (column: SelectedColumn) => React.ReactNode
+    renderActions: (model: Model) => React.ReactNode
+    renderColumnValue: (
+        column: SelectedColumn,
+        modelData: Model
+    ) => React.ReactNode
     onClick?: (modelData: Model) => void
     active?: boolean
 }
 
-export function SectionListRow<Model extends BaseListModel>({
+export const SectionListRow = React.memo(function SectionListRow<
+    Model extends BaseListModel
+>({
     active,
     selectedColumns,
     modelData,
@@ -56,10 +61,14 @@ export function SectionListRow<Model extends BaseListModel>({
                     key={selectedColumn.path}
                     onClick={() => onClick?.(modelData)}
                 >
-                    {renderColumnValue(selectedColumn)}
+                    {renderColumnValue(selectedColumn, modelData)}
                 </DataTableCell>
             ))}
-            <DataTableCell>{renderActions(modelData.id)}</DataTableCell>
+            <DataTableCell>{renderActions(modelData)}</DataTableCell>
         </DataTableRow>
     )
-}
+})
+
+export const MemoedSectionListRow = React.memo(
+    SectionListRow
+) as typeof SectionListRow

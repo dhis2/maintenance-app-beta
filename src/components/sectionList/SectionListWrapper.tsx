@@ -1,6 +1,6 @@
 import { FetchError } from '@dhis2/app-runtime'
 import { SharingDialog } from '@dhis2/ui'
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { BaseListModel, useSchemaFromHandle } from '../../lib'
 import { Pager, ModelCollection } from '../../types/models'
 import { SectionListHeaderBulk } from './bulk'
@@ -17,6 +17,8 @@ import { SectionListEmpty, SectionListError } from './SectionListMessages'
 import { SectionListPagination } from './SectionListPagination'
 import { SectionListRow } from './SectionListRow'
 import { SectionListTitle } from './SectionListTitle'
+import { SelectedColumn } from './types'
+import { useSelectedModels } from './useSelectedModels'
 
 type SectionListWrapperProps = {
     data: ModelCollection<BaseListModel> | undefined
@@ -31,39 +33,10 @@ export const SectionListWrapper = ({
 }: SectionListWrapperProps) => {
     const { columns: headerColumns } = useModelListView()
     const schema = useSchemaFromHandle()
-    const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set())
+    const { selectedModels, isAllSelected, selectModel, selectAll, clearAll } =
+        useSelectedModels({ data })
     const [detailsId, setDetailsId] = useState<string | undefined>()
     const [sharingDialogId, setSharingDialogId] = useState<string | undefined>()
-
-    const handleSelect = (id: string, checked: boolean) => {
-        if (checked) {
-            setSelectedModels(new Set(selectedModels).add(id))
-        } else {
-            selectedModels.delete(id)
-            setSelectedModels(new Set(selectedModels))
-        }
-    }
-
-    const handleSelectAll = (checked: boolean) => {
-        if (checked) {
-            setSelectedModels(
-                new Set(
-                    data?.map((model) => {
-                        return model.id
-                    })
-                )
-            )
-        } else {
-            setSelectedModels(new Set())
-        }
-    }
-
-    const handleShowDetails = (id: string) =>
-        setDetailsId((prevDetailsId) => (prevDetailsId === id ? undefined : id))
-
-    const allSelected = useMemo(() => {
-        return data?.length !== 0 && data?.length === selectedModels.size
-    }, [data, selectedModels.size])
 
     const SectionListMessage = () => {
         if (error) {
@@ -79,6 +52,37 @@ export const SectionListWrapper = ({
         return null
     }
 
+    const handleDetailsClick = useCallback(
+        ({ id }: BaseListModel) => {
+            setDetailsId((prevDetailsId) =>
+                prevDetailsId === id ? undefined : id
+            )
+        },
+        [setDetailsId]
+    )
+
+    /* Note that SectionListRow is memoed, to prevent re-rendering
+    every item when interacting with a row */
+    const renderColumnValue = useCallback(
+        ({ path }: SelectedColumn, model: BaseListModel) => {
+            return (
+                <ModelValue path={path} schema={schema} sectionModel={model} />
+            )
+        },
+        [schema]
+    )
+
+    const renderActions = useCallback(
+        (model: BaseListModel) => (
+            <DefaultListActions
+                model={model}
+                onShowDetailsClick={handleDetailsClick}
+                onOpenSharingClick={setSharingDialogId}
+            />
+        ),
+        [handleDetailsClick, setSharingDialogId]
+    )
+
     return (
         <div>
             <SectionListTitle />
@@ -87,15 +91,15 @@ export const SectionListWrapper = ({
                 {selectedModels.size > 0 ? (
                     <SectionListHeaderBulk
                         selectedModels={selectedModels}
-                        onDeselectAll={() => setSelectedModels(new Set())}
+                        onDeselectAll={clearAll}
                     />
                 ) : (
                     <SectionListHeader />
                 )}
                 <SectionList
                     headerColumns={headerColumns}
-                    onSelectAll={handleSelectAll}
-                    allSelected={allSelected}
+                    onSelectAll={selectAll}
+                    allSelected={isAllSelected}
                 >
                     <SectionListMessage />
                     {data?.map((model) => (
@@ -103,33 +107,14 @@ export const SectionListWrapper = ({
                             key={model.id}
                             modelData={model}
                             selectedColumns={headerColumns}
-                            onSelect={handleSelect}
-                            onClick={({ id }) => {
-                                setDetailsId((prevDetailsId) =>
-                                    prevDetailsId === id ? undefined : id
-                                )
-                            }}
+                            onSelect={selectModel}
+                            onClick={handleDetailsClick}
                             selected={selectedModels.has(model.id)}
                             active={model.id === detailsId}
-                            renderColumnValue={({ path }) => {
-                                return (
-                                    <ModelValue
-                                        path={path}
-                                        schema={schema}
-                                        sectionModel={model}
-                                    />
-                                )
-                            }}
-                            renderActions={() => (
-                                <DefaultListActions
-                                    model={model}
-                                    onShowDetailsClick={handleShowDetails}
-                                    onOpenSharingClick={setSharingDialogId}
-                                />
-                            )}
+                            renderColumnValue={renderColumnValue}
+                            renderActions={renderActions}
                         />
                     ))}
-
                     <SectionListPagination pager={pager} />
                 </SectionList>
                 {detailsId && (

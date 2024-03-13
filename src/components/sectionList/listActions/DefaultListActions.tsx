@@ -7,7 +7,7 @@ type ModelWithAccess = Pick<BaseIdentifiableObject, 'id' | 'access'>
 
 type DefaultListActionProps = {
     model: ModelWithAccess
-    onShowDetailsClick: (id: string) => void
+    onShowDetailsClick: (model: ModelWithAccess) => void
     onOpenSharingClick: (id: string) => void
 }
 
@@ -23,7 +23,7 @@ export const DefaultListActions = ({
             <ActionMore
                 modelId={model.id}
                 editAccess={editAccess}
-                onShowDetailsClick={() => onShowDetailsClick(model.id)}
+                onShowDetailsClick={() => onShowDetailsClick(model)}
                 onOpenSharingClick={() => onOpenSharingClick(model.id)}
             />
         </ListActions>
