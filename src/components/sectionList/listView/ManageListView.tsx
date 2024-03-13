@@ -1,8 +1,16 @@
 import { FetchError } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, Field, NoticeBox, Transfer, TransferOption } from '@dhis2/ui'
+import {
+    Button,
+    Field,
+    NoticeBox,
+    Tab,
+    TabBar,
+    Transfer,
+    TransferOption,
+} from '@dhis2/ui'
 import { FORM_ERROR } from 'final-form'
-import React, { useMemo } from 'react'
+import React, { SyntheticEvent, useMemo } from 'react'
 import { Form, useField } from 'react-final-form'
 import {
     getColumnsForSection,
@@ -50,6 +58,9 @@ export const ManageListView = ({
         filters: savedFilters,
         query,
     } = useModelListView()
+    const [selectedTab, setSelectedTab] = React.useState<'columns' | 'filters'>(
+        'columns' as const
+    )
     const section = useModelSectionHandleOrThrow()
     const { saveView } = useMutateModelListViews()
 
@@ -102,6 +113,11 @@ export const ManageListView = ({
         }
     }, [savedFilters, savedColumns, defaultColumns, defaultFilters])
 
+    const handleChangeTab = (tab: 'columns' | 'filters', e: SyntheticEvent) => {
+        e.preventDefault()
+        setSelectedTab(tab)
+    }
+
     return (
         <Form
             onSubmit={handleSave}
@@ -110,28 +126,51 @@ export const ManageListView = ({
         >
             {({ handleSubmit, submitting, submitError }) => (
                 <form onSubmit={handleSubmit}>
-                    <TransferField
-                        name={'columns'}
-                        availableLabel={i18n.t('Available columns')}
-                        selectedLabel={i18n.t('Selected columns')}
-                        loading={query.isLoading}
-                        defaultOptions={defaultColumns}
-                        availableOptions={columnsConfig.available.map((c) => ({
-                            label: c.label,
-                            value: c.path,
-                        }))}
-                    />
-                    <TransferField
-                        name={'filters'}
-                        availableLabel={i18n.t('Available filters')}
-                        selectedLabel={i18n.t('Selected filters')}
-                        loading={query.isLoading}
-                        defaultOptions={defaultFilters}
-                        availableOptions={filtersConfig.available.map((f) => ({
-                            label: f.label,
-                            value: f.filterKey,
-                        }))}
-                    />
+                    <TabBar>
+                        <Tab
+                            selected={selectedTab === 'columns'}
+                            onClick={(_, e) => handleChangeTab('columns', e)}
+                        >
+                            {i18n.t('Columns')}
+                        </Tab>
+                        <Tab
+                            selected={selectedTab === 'filters'}
+                            onClick={(_, e) => handleChangeTab('filters', e)}
+                        >
+                            {i18n.t('Filters')}
+                        </Tab>
+                    </TabBar>
+
+                    <TabContent show={selectedTab === 'columns'}>
+                        <TransferField
+                            name={'columns'}
+                            availableLabel={i18n.t('Available columns')}
+                            selectedLabel={i18n.t('Selected columns')}
+                            loading={query.isLoading}
+                            defaultOptions={defaultColumns}
+                            availableOptions={columnsConfig.available.map(
+                                (c) => ({
+                                    label: c.label,
+                                    value: c.path,
+                                })
+                            )}
+                        />
+                    </TabContent>
+                    <TabContent show={selectedTab === 'filters'}>
+                        <TransferField
+                            name={'filters'}
+                            availableLabel={i18n.t('Available filters')}
+                            selectedLabel={i18n.t('Selected filters')}
+                            loading={query.isLoading}
+                            defaultOptions={defaultFilters}
+                            availableOptions={filtersConfig.available.map(
+                                (f) => ({
+                                    label: f.label,
+                                    value: f.filterKey,
+                                })
+                            )}
+                        />
+                    </TabContent>
                     {submitError && (
                         <p>
                             <NoticeBox error title={i18n.t('Failed to save')}>
@@ -211,4 +250,11 @@ const TransferField = ({
 
 const TransferHeader = ({ children }: React.PropsWithChildren) => (
     <div className={css.transferHeader}>{children}</div>
+)
+
+const TabContent = ({
+    children,
+    show,
+}: React.PropsWithChildren<{ show: boolean }>) => (
+    <div style={{ display: show ? 'initial' : 'none' }}>{children}</div>
 )

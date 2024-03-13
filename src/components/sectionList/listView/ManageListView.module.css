@@ -5,6 +5,7 @@
 }
 
 .transferContainer {
+    padding-top: var(--spacers-dp16);
     padding-bottom: var(--spacers-dp16);
 }
 
@@ -20,4 +21,7 @@ of reorder-buttons */
 
 .resetDefaultButton {
     margin-top: var(--spacers-dp8);
+}
+
+.tabContent {
 }
