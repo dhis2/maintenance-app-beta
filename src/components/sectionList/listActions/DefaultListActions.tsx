@@ -9,12 +9,14 @@ type DefaultListActionProps = {
     model: ModelWithAccess
     onShowDetailsClick: (model: ModelWithAccess) => void
     onOpenSharingClick: (id: string) => void
+    onDeleteClick: () => void
 }
 
 export const DefaultListActions = ({
     model,
     onShowDetailsClick,
     onOpenSharingClick,
+    onDeleteClick,
 }: DefaultListActionProps) => {
     const editAccess = canEditModel(model)
     return (
@@ -25,6 +27,7 @@ export const DefaultListActions = ({
                 editAccess={editAccess}
                 onShowDetailsClick={() => onShowDetailsClick(model)}
                 onOpenSharingClick={() => onOpenSharingClick(model.id)}
+                onDeleteClick={onDeleteClick}
             />
         </ListActions>
     )

@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import {
     Button,
     FlyoutMenu,
+    IconDelete16,
     IconEdit16,
     IconEdit24,
     IconMore16,
@@ -34,12 +35,14 @@ type ActionMoreProps = {
     editAccess: boolean
     onShowDetailsClick: () => void
     onOpenSharingClick: () => void
+    onDeleteClick: () => void
 }
 export const ActionMore = ({
     modelId,
     editAccess,
     onOpenSharingClick,
     onShowDetailsClick,
+    onDeleteClick,
 }: ActionMoreProps) => {
     const [open, setOpen] = useState(false)
     const ref = useRef(null)
@@ -83,7 +86,8 @@ export const ActionMore = ({
                             }}
                             target="_blank"
                             href={href}
-                        ></MenuItem>
+                        />
+
                         <TooltipWrapper
                             condition={!editAccess}
                             content={TOOLTIPS.noEditAccess}
@@ -99,6 +103,18 @@ export const ActionMore = ({
                                 }}
                             ></MenuItem>
                         </TooltipWrapper>
+
+                        <MenuItem
+                            dense
+                            label={i18n.t('Delete')}
+                            icon={<IconDelete16 />}
+                            onClick={() => {
+                                onDeleteClick()
+                                setOpen(false)
+                            }}
+                            target="_blank"
+                            href={href}
+                        />
                     </FlyoutMenu>
                 </Popover>
             )}

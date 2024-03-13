@@ -57,6 +57,7 @@ export const Component = () => {
                 error={error}
                 data={data?.result.dataElements}
                 pager={data?.result.pager}
+                refetch={refetch}
             />
         </div>
     )

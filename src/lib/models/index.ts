@@ -1,5 +1,6 @@
 export { isValidUid } from './uid'
 export * from './access'
 export { getIn, stringToPathArray, getFieldFilterFromPath } from './path'
+export { useDeleteModelMutation } from './useDeleteModelMutation'
 export { useIsFieldValueUnique } from './useIsFieldValueUnique'
 export { useCheckMaxLengthFromSchema } from './useCheckMaxLengthFromSchema'
