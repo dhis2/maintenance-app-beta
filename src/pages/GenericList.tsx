@@ -12,9 +12,7 @@ import { getFieldFilter } from '../lib/models/path'
 import { Query, WrapQueryResponse } from '../types'
 import { PagedResponse } from '../types/models'
 
-type ModelListResponsze = WrapQueryResponse<
-    PagedResponse<BaseListModel, string>
->
+type ModelListResponse = WrapQueryResponse<PagedResponse<BaseListModel, string>>
 
 const createQuery = (modelName: string): Query => ({
     result: {
@@ -30,7 +28,7 @@ export const GenericList = () => {
     const [query] = useState(() => createQuery(modelListName))
     const initialParams = useParamsForDataQuery()
 
-    const { refetch, error, data } = useDataQuery<ModelListResponsze>(
+    const { refetch, error, data } = useDataQuery<ModelListResponse>(
         query,
         // refetched on mount by effect below
         { lazy: true }

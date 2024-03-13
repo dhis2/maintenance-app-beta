@@ -1,2 +1,2 @@
-export { CustomAttributes } from './CustomAttributes'
+export { CustomAttributesSection } from './CustomAttributes'
 export { useCustomAttributesQuery } from './useCustomAttributesQuery'

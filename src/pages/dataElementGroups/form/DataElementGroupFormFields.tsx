@@ -5,7 +5,7 @@ import {
     StandardFormSectionTitle,
     StandardFormSectionDescription,
     StandardFormField,
-    CustomAttributes,
+    CustomAttributesSection,
 } from '../../../components'
 import {
     DefaultIdentifiableFields,
@@ -56,17 +56,7 @@ export function DataElementGroupFormFields() {
                 </StandardFormField>
             </StandardFormSection>
 
-            <StandardFormSection>
-                <StandardFormSectionTitle>
-                    {i18n.t('Custom attributes')}
-                </StandardFormSectionTitle>
-
-                <StandardFormSectionDescription>
-                    {i18n.t('Custom fields for your DHIS2 instance')}
-                </StandardFormSectionDescription>
-
-                <CustomAttributes />
-            </StandardFormSection>
+            <CustomAttributesSection />
         </>
     )
 }
