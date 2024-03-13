@@ -48,7 +48,8 @@ export function DataElementGroupFormFields() {
                 </StandardFormSectionTitle>
 
                 <StandardFormSectionDescription>
-                    {i18n.t('@TODO')}
+                    {/* TODO: ADD DESCRIPTION */}
+                    {''}
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
