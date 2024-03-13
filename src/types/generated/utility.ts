@@ -11,12 +11,8 @@ export type ModelCollectionResponse<
 > = PagedResponse<T, PagedListName>
 
 export type PagedResponse<T, PagedListName extends string = 'result'> = {
-    pager: Pager
-} & CollectionPart<T, PagedListName>
-
-type CollectionPart<T, PagedListName extends string = 'result'> = {
     [K in PagedListName]: T[]
-}
+} & { pager: Pager }
 
 type BaseGist<T> = IdentifiableObject & {
     apiEndpoints: GistApiEndpoints<T>
