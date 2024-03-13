@@ -1,5 +1,7 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import { useMemo } from 'react'
+import { PagedResponse } from './../../types/generated/utility'
+import { WrapQueryResponse } from './../../types/query'
 
 export interface Icon {
     description: string
@@ -8,12 +10,10 @@ export interface Icon {
     keywords?: string[]
 }
 
-type IconsResponse = {
-    icons: Array<Icon>
-}
+type IconsResponse = WrapQueryResponse<PagedResponse<Icon, 'icons'>>
 
 const ICONS_QUERY = {
-    icons: {
+    result: {
         resource: 'icons',
     },
 }
@@ -30,8 +30,7 @@ export function useIconsQuery() {
                 outline: [],
             }
         }
-
-        const { icons: unsortedIcons } = data
+        const { icons: unsortedIcons } = data.result
         const sortedIcons = unsortedIcons.sort(
             ({ key: left }, { key: right }) => left.localeCompare(right)
         )

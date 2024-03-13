@@ -5,22 +5,23 @@ import { IdentifiableObject, GistPager, Pager } from './'
 export type ModelCollection<T = IdentifiableObject> = Array<T>
 type ModelReference = IdentifiableObject | ModelCollection
 
-export type ModelCollectionPart<
-    T extends IdentifiableObject,
-    PagedListName extends string = 'result'
-> = {
-    [K in PagedListName]: T[]
-}
 export type ModelCollectionResponse<
     T extends IdentifiableObject = IdentifiableObject,
     PagedListName extends string = 'result'
-> = {
+> = PagedResponse<T, PagedListName>
+
+export type PagedResponse<T, PagedListName extends string = 'result'> = {
     pager: Pager
-} & ModelCollectionPart<T, PagedListName>
+} & CollectionPart<T, PagedListName>
+
+type CollectionPart<T, PagedListName extends string = 'result'> = {
+    [K in PagedListName]: T[]
+}
 
 type BaseGist<T> = IdentifiableObject & {
     apiEndpoints: GistApiEndpoints<T>
 }
+
 export type GistApiEndpoints<T> = {
     // filter keys that are references and map them to string
     [P in keyof T as T[P] extends ModelReference ? P : never]: string
