@@ -10,7 +10,7 @@ import {
     TransferOption,
 } from '@dhis2/ui'
 import { FORM_ERROR } from 'final-form'
-import React, { SyntheticEvent, useMemo } from 'react'
+import React, { SyntheticEvent, useMemo, useState } from 'react'
 import { Form, useField } from 'react-final-form'
 import {
     getColumnsForSection,
@@ -61,6 +61,15 @@ export const ManageListView = ({
     const [selectedTab, setSelectedTab] = React.useState<'columns' | 'filters'>(
         'columns' as const
     )
+    const [initialValues] = useState(() => ({
+        columns:
+            savedColumns.length > 0 ? savedColumns.map(toPath) : defaultColumns,
+        filters:
+            savedFilters.length > 0
+                ? savedFilters.map(toFilterKey)
+                : defaultFilters,
+    }))
+
     const section = useModelSectionHandleOrThrow()
     const { saveView } = useMutateModelListViews()
 
@@ -99,19 +108,6 @@ export const ManageListView = ({
             })
         })
     }
-
-    const initialValues = useMemo(() => {
-        return {
-            columns:
-                savedColumns.length > 0
-                    ? savedColumns.map(toPath)
-                    : defaultColumns,
-            filters:
-                savedFilters.length > 0
-                    ? savedFilters.map(toFilterKey)
-                    : defaultFilters,
-        }
-    }, [savedFilters, savedColumns, defaultColumns, defaultFilters])
 
     const handleChangeTab = (tab: 'columns' | 'filters', e: SyntheticEvent) => {
         e.preventDefault()
