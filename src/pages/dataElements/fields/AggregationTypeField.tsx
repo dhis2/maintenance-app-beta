@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF } from '@dhis2/ui'
 import React, { useEffect } from 'react'
-import { Field as FieldRFF, useForm, useFormState } from 'react-final-form'
+import { Field as FieldRFF, useForm, useField } from 'react-final-form'
 import { AGGREGATION_TYPE, required, useSchemas } from '../../../lib'
 
 const DISABLING_VALUE_TYPES = [
@@ -30,22 +30,22 @@ const aggregationTypeDisabledHelpText = i18n.t(
 )
 export function AggregationTypeField() {
     const { change } = useForm()
-    const { values } = useFormState({ subscription: { values: true } })
-    const disabled = DISABLING_VALUE_TYPES.includes(values.valueType)
+    const valueTypeField = useField('valueType')
+    const valueType = valueTypeField.input.value
+    const disabled = DISABLING_VALUE_TYPES.includes(valueType)
 
     useEffect(() => {
         if (disabled) {
-            change('aggregationType', '')
+            change('aggregationType', 'NONE')
         }
     }, [change, disabled])
 
     const { dataElement } = useSchemas()
-    const options = dataElement.properties.aggregationType.constants?.map(
-        (constant) => ({
+    const options =
+        dataElement.properties.aggregationType.constants?.map((constant) => ({
             value: constant,
             label: AGGREGATION_TYPE[constant as keyof typeof AGGREGATION_TYPE],
-        })
-    )
+        })) || []
 
     const helpText = disabled
         ? `${aggregationTypeHelpText} ${aggregationTypeDisabledHelpText}`
@@ -53,9 +53,6 @@ export function AggregationTypeField() {
 
     return (
         <FieldRFF
-            // See https://final-form.org/docs/react-final-form/types/FieldProps#validate
-            // for why this is necessary
-            key={disabled ? 0 : 1}
             disabled={disabled}
             component={SingleSelectFieldFF}
             dataTest="formfields-aggregationtype"
@@ -70,19 +67,9 @@ export function AggregationTypeField() {
                       })
             }
             helpText={helpText}
-            options={options || []}
+            options={options}
             validateFields={[]}
-            // @TODO: Why can I not use `FormValues` here?
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            validate={(value: string | undefined, values: any) => {
-                const { valueType } = values
-                // Using the `disabled` value from above causes an issue:
-                //   Warning: Cannot update a component (`ForwardRef(Field)`)
-                //   while rendering a different component
-                //   (`ForwardRef(Field)`)
-                const isDisabled = DISABLING_VALUE_TYPES.includes(valueType)
-                return isDisabled ? undefined : required(value)
-            }}
+            validate={required}
         />
     )
 }

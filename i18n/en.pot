@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-05T22:55:26.244Z\n"
-"PO-Revision-Date: 2024-03-05T22:55:26.244Z\n"
+"POT-Creation-Date: 2024-03-13T00:05:18.041Z\n"
+"PO-Revision-Date: 2024-03-13T00:05:18.041Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -147,6 +147,57 @@ msgstr "An error occurred while loading the items."
 msgid "{{modelName}} management"
 msgstr "{{modelName}} management"
 
+msgid "Metadata access"
+msgstr "Metadata access"
+
+msgid "Metadata view and edit"
+msgstr "Metadata view and edit"
+
+msgid "Metadata view only"
+msgstr "Metadata view only"
+
+msgid "Data access"
+msgstr "Data access"
+
+msgid "Data view and capture"
+msgstr "Data view and capture"
+
+msgid "Data view only"
+msgstr "Data view only"
+
+msgid "Successfully updated sharing for {{number}} items"
+msgstr "Successfully updated sharing for {{number}} items"
+
+msgid "An unknown error occurred"
+msgstr "An unknown error occurred"
+
+msgid "Failed to update sharing"
+msgstr "Failed to update sharing"
+
+msgid "Update sharing for users and groups"
+msgstr "Update sharing for users and groups"
+
+msgid "User or group"
+msgstr "User or group"
+
+msgid "Add to actions"
+msgstr "Add to actions"
+
+msgid "Access to be updated for {{number}} items"
+msgstr "Access to be updated for {{number}} items"
+
+msgid "Update sharing for {{number}} items"
+msgstr "Update sharing for {{number}} items"
+
+msgid "Update sharing"
+msgstr "Update sharing"
+
+msgid "{{number}} selected"
+msgstr "{{number}} selected"
+
+msgid "Deselect all"
+msgstr "Deselect all"
+
 msgid "Created by"
 msgstr "Created by"
 
@@ -207,9 +258,6 @@ msgstr "At least one column must be selected"
 msgid "At least one filter must be selected"
 msgstr "At least one filter must be selected"
 
-msgid "An unknown error occurred"
-msgstr "An unknown error occurred"
-
 msgid "Available columns"
 msgstr "Available columns"
 
@@ -242,6 +290,21 @@ msgstr "Public can view"
 
 msgid "Public cannot access"
 msgstr "Public cannot access"
+
+msgid "Can edit and capture"
+msgstr "Can edit and capture"
+
+msgid "View only"
+msgstr "View only"
+
+msgid "No access"
+msgstr "No access"
+
+msgid "Edit and view"
+msgstr "Edit and view"
+
+msgid "Search for a user or group"
+msgstr "Search for a user or group"
 
 msgid "Category"
 msgstr "Category"
