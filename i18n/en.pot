@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-14T07:46:13.251Z\n"
-"PO-Revision-Date: 2024-03-14T07:46:13.251Z\n"
+"POT-Creation-Date: 2024-03-14T07:46:23.636Z\n"
+"PO-Revision-Date: 2024-03-14T07:46:23.636Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -146,6 +146,12 @@ msgstr "An error occurred while loading the items."
 
 msgid "{{modelName}} management"
 msgstr "{{modelName}} management"
+
+msgid "Successfully deleted the {{model}}"
+msgstr "Successfully deleted the {{model}}"
+
+msgid "Failed deleting the {{model}}!"
+msgstr "Failed deleting the {{model}}!"
 
 msgid "Metadata access"
 msgstr "Metadata access"
