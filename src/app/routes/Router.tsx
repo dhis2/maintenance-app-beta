@@ -23,7 +23,7 @@ import {
     isValidUid,
     routePaths,
 } from '../../lib'
-import { GenericList } from '../../pages/GenericList'
+import { GenericSectionList } from '../../pages/GenericSectionList'
 import { OverviewSection } from '../../types'
 import { Layout, Breadcrumbs, BreadcrumbItem } from '../layout'
 import { CheckAuthorityForSection } from './CheckAuthorityForSection'
@@ -31,6 +31,7 @@ import { DefaultErrorRoute } from './DefaultErrorRoute'
 import { LegacyAppRedirect } from './LegacyAppRedirect'
 
 // Use GenericList-component for these sections
+// can easily remove the check to get every list route to use the generic list
 const ENABLED_GENERIC_LIST_ROUTES = new Set<Section>([
     SECTIONS_MAP.dataElement,
     SECTIONS_MAP.dataElementGroup,
@@ -79,7 +80,7 @@ function createSectionLazyRouteFunction(
                     ENABLED_GENERIC_LIST_ROUTES.has(section)
                 ) {
                     return {
-                        element: <GenericList key={section.name} />,
+                        element: <GenericSectionList key={section.name} />,
                     }
                 }
                 return {

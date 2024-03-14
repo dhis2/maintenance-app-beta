@@ -23,7 +23,7 @@ const createQuery = (modelName: string): Query => ({
     },
 })
 
-export const GenericList = () => {
+export const GenericSectionList = () => {
     const { columns, query: listViewQuery } = useModelListView()
     const schema = useSchemaFromHandle()
     const modelListName = schema.plural
