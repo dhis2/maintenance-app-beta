@@ -47,8 +47,7 @@ function useInitialValues(customAttributes: Attribute[]) {
             domainType: 'AGGREGATE',
             formName: '',
             valueType: schemas.dataElement.properties.valueType.constants?.[0],
-            aggregationType:
-                schemas.dataElement.properties.aggregationType.constants?.[0],
+            aggregationType: 'NONE',
             style: { icon: '', color: '' },
             categoryCombo: { id: '' },
             optionSet: { id: '' },
@@ -58,11 +57,7 @@ function useInitialValues(customAttributes: Attribute[]) {
             attributeValues,
             zeroIsSignificant: false,
         }),
-        [
-            attributeValues,
-            schemas.dataElement.properties.valueType.constants,
-            schemas.dataElement.properties.aggregationType.constants,
-        ]
+        [attributeValues, schemas.dataElement.properties.valueType.constants]
     )
 }
 
