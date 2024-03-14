@@ -1,4 +1,5 @@
-import { FetchError } from '@dhis2/app-runtime'
+import { FetchError, useAlert } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
 import { SharingDialog } from '@dhis2/ui'
 import React, { useCallback, useState } from 'react'
 import { BaseListModel, canEditModel, useSchemaFromHandle, useDeleteModelMutation } from '../../lib'
@@ -39,14 +40,37 @@ export const SectionListWrapper = ({
         useSelectedModels()
     const [detailsId, setDetailsId] = useState<string | undefined>()
     const [sharingDialogId, setSharingDialogId] = useState<string | undefined>()
+    const { show: showDeletionSuccess } = useAlert(
+        i18n.t('Successfully deleted the {{model}}', {
+            model: schema.singular,
+        }),
+        { success: true }
+    )
+    const { show: showDeletionFailure } = useAlert(
+        i18n.t('Failed deleting the {{model}}!', {
+            model: schema.singular,
+        }),
+        { success: false }
+    )
     const deleteModelMutation = useDeleteModelMutation()
     const deleteModel = useCallback(async (id: string) => {
-        await deleteModelMutation.mutateAsync({
-            id,
-            schema,
-        })
-        refetch()
-    }, [deleteModelMutation, schema, refetch])
+        try {
+            await deleteModelMutation.mutateAsync({
+                id,
+                schema,
+            })
+            refetch()
+            showDeletionSuccess()
+        } catch (e) {
+            showDeletionFailure()
+        }
+    }, [
+        deleteModelMutation,
+        schema,
+        refetch,
+        showDeletionSuccess,
+        showDeletionFailure,
+    ])
 
     const SectionListMessage = () => {
         if (error) {
