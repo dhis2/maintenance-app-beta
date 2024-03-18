@@ -32,16 +32,16 @@ export const ActionEdit = ({ modelId }: { modelId: string }) => {
 
 type ActionMoreProps = {
     modelId: string
-    deleteAccess: boolean
-    editAccess: boolean
+    deletable: boolean
+    editable: boolean
     onShowDetailsClick: () => void
     onOpenSharingClick: () => void
     onDeleteClick: () => void
 }
 export const ActionMore = ({
     modelId,
-    deleteAccess,
-    editAccess,
+    deletable,
+    editable,
     onOpenSharingClick,
     onShowDetailsClick,
     onDeleteClick,
@@ -91,12 +91,12 @@ export const ActionMore = ({
                         />
 
                         <TooltipWrapper
-                            condition={!editAccess}
+                            condition={!editable}
                             content={TOOLTIPS.noEditAccess}
                         >
                             <MenuItem
                                 dense
-                                disabled={!editAccess}
+                                disabled={!editable}
                                 label={i18n.t('Sharing settings')}
                                 icon={<IconShare16 />}
                                 onClick={() => {
@@ -107,12 +107,12 @@ export const ActionMore = ({
                         </TooltipWrapper>
 
                         <TooltipWrapper
-                            condition={!deleteAccess}
+                            condition={!deletable}
                             content={TOOLTIPS.noEditAccess}
                         >
                             <MenuItem
                                 dense
-                                disabled={!deleteAccess}
+                                disabled={!deletable}
                                 label={i18n.t('Delete')}
                                 icon={<IconDelete16 />}
                                 onClick={() => {

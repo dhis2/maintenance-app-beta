@@ -16,16 +16,16 @@ export const DefaultListActions = ({
     onOpenSharingClick,
     onDeleteClick,
 }: DefaultListActionProps) => {
-    const deleteAccess = canDeleteModel(model)
-    const editAccess = canEditModel(model)
+    const deletable = canDeleteModel(model)
+    const editable = canEditModel(model)
 
     return (
         <ListActions>
             <ActionEdit modelId={model.id} />
             <ActionMore
                 modelId={model.id}
-                deleteAccess={deleteAccess}
-                editAccess={editAccess}
+                deletable={editable}
+                editable={deletable}
                 onShowDetailsClick={() => onShowDetailsClick(model)}
                 onOpenSharingClick={() => onOpenSharingClick(model.id)}
                 onDeleteClick={onDeleteClick}
