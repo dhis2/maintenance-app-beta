@@ -32,6 +32,7 @@ export const ActionEdit = ({ modelId }: { modelId: string }) => {
 
 type ActionMoreProps = {
     modelId: string
+    deleteAccess: boolean
     editAccess: boolean
     onShowDetailsClick: () => void
     onOpenSharingClick: () => void
@@ -39,6 +40,7 @@ type ActionMoreProps = {
 }
 export const ActionMore = ({
     modelId,
+    deleteAccess,
     editAccess,
     onOpenSharingClick,
     onShowDetailsClick,
@@ -104,17 +106,23 @@ export const ActionMore = ({
                             ></MenuItem>
                         </TooltipWrapper>
 
-                        <MenuItem
-                            dense
-                            label={i18n.t('Delete')}
-                            icon={<IconDelete16 />}
-                            onClick={() => {
-                                onDeleteClick()
-                                setOpen(false)
-                            }}
-                            target="_blank"
-                            href={href}
-                        />
+                        <TooltipWrapper
+                            condition={!deleteAccess}
+                            content={TOOLTIPS.noEditAccess}
+                        >
+                            <MenuItem
+                                dense
+                                disabled={!deleteAccess}
+                                label={i18n.t('Delete')}
+                                icon={<IconDelete16 />}
+                                onClick={() => {
+                                    onDeleteClick()
+                                    setOpen(false)
+                                }}
+                                target="_blank"
+                                href={href}
+                            />
+                        </TooltipWrapper>
                     </FlyoutMenu>
                 </Popover>
             )}
