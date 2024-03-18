@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-14T07:46:23.636Z\n"
-"PO-Revision-Date: 2024-03-14T07:46:23.636Z\n"
+"POT-Creation-Date: 2024-03-18T01:33:26.193Z\n"
+"PO-Revision-Date: 2024-03-18T01:33:26.193Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -146,12 +146,6 @@ msgstr "An error occurred while loading the items."
 
 msgid "{{modelName}} management"
 msgstr "{{modelName}} management"
-
-msgid "Successfully deleted the {{model}}"
-msgstr "Successfully deleted the {{model}}"
-
-msgid "Failed deleting the {{model}}!"
-msgstr "Failed deleting the {{model}}!"
 
 msgid "Metadata access"
 msgstr "Metadata access"
@@ -743,6 +737,15 @@ msgstr "This field requires a unique value, please choose another one"
 
 msgid "Required"
 msgstr "Required"
+
+msgid "Successfully deleted {{modelType}} \"{{displayName}}\""
+msgstr "Successfully deleted {{modelType}} \"{{displayName}}\""
+
+msgid "Failed to delete {{modelType}} \"{{displayName}}\"! {{messages}}"
+msgstr "Failed to delete {{modelType}} \"{{displayName}}\"! {{messages}}"
+
+msgid "Failed to delete {{modelType}} \"{{displayName}}\"!"
+msgstr "Failed to delete {{modelType}} \"{{displayName}}\"!"
 
 msgid "Custom attributes"
 msgstr "Custom attributes"

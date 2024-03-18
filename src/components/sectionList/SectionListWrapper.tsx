@@ -1,5 +1,4 @@
-import { FetchError, useAlert } from '@dhis2/app-runtime'
-import i18n from '@dhis2/d2-i18n'
+import { FetchError } from '@dhis2/app-runtime'
 import { SharingDialog } from '@dhis2/ui'
 import React, { useCallback, useState } from 'react'
 import {
@@ -47,8 +46,8 @@ export const SectionListWrapper = ({
     const [sharingDialogId, setSharingDialogId] = useState<string | undefined>()
     const deleteModelMutation = useDeleteModelMutation(schema)
     const deleteModel = useCallback(
-        async (id: string) => {
-            await deleteModelMutation.mutateAsync({ id })
+        async ({ id, displayName }: BaseListModel) => {
+            await deleteModelMutation.mutateAsync({ id, displayName })
             refetch()
         },
         [deleteModelMutation, refetch]
@@ -113,7 +112,7 @@ export const SectionListWrapper = ({
                 model={model}
                 onShowDetailsClick={handleDetailsClick}
                 onOpenSharingClick={setSharingDialogId}
-                onDeleteClick={() => deleteModel(model.id)}
+                onDeleteClick={() => deleteModel(model)}
             />
         ),
         [handleDetailsClick, setSharingDialogId, deleteModel]

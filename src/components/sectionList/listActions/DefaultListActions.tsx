@@ -1,13 +1,11 @@
 import React from 'react'
+import { BaseListModel } from '../../../lib'
 import { canEditModel } from '../../../lib/models/access'
-import { BaseIdentifiableObject } from '../../../types/generated'
 import { ListActions, ActionEdit, ActionMore } from './SectionListActions'
 
-type ModelWithAccess = Pick<BaseIdentifiableObject, 'id' | 'access'>
-
 type DefaultListActionProps = {
-    model: ModelWithAccess
-    onShowDetailsClick: (model: ModelWithAccess) => void
+    model: BaseListModel
+    onShowDetailsClick: (model: BaseListModel) => void
     onOpenSharingClick: (id: string) => void
     onDeleteClick: () => void
 }
