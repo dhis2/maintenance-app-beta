@@ -78,7 +78,12 @@ function ConfirmationDialog({
     onDeleteSuccess: () => void
 }) {
     const schema = useSchemaFromHandle()
-    const deleteModelMutation = useDeleteModelMutation(schema)
+    const deleteModelMutation = useDeleteModelMutation(schema, {
+        onSuccess: () => {
+            showDeletionSuccess()
+            onDeleteSuccess()
+        },
+    })
     const deleteModel = async () => {
         await deleteModelMutation.mutateAsync({
             id: modelId,
@@ -95,16 +100,6 @@ function ConfirmationDialog({
             }),
         { success: true }
     )
-
-    const deleteAndClose = () =>
-        deleteModel()
-            .then(() => {
-                showDeletionSuccess()
-                onDeleteSuccess()
-            })
-            // We don't need to do anything on error except for catching it,
-            // we have all the information on the deleteModelMutation value
-            .catch(() => null)
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const errorReports = (deleteModelMutation.error as any)?.details?.response
@@ -155,7 +150,7 @@ function ConfirmationDialog({
                     <Button
                         disabled={deleteModelMutation.isLoading}
                         destructive
-                        onClick={deleteAndClose}
+                        onClick={deleteModel}
                     >
                         {deleteModelMutation.isLoading && (
                             <span className={classes.deleteButtonLoadingIcon}>

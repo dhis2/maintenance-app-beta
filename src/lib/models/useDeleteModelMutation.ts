@@ -8,10 +8,11 @@ type MutationFnArgs = {
     messages?: string[]
 }
 
-export function useDeleteModelMutation(schema: Schema) {
+export function useDeleteModelMutation(schema: Schema, options?: object) {
     const engine = useDataEngine()
 
     return useMutation({
+        ...options,
         mutationFn: (variables: MutationFnArgs) => {
             return engine.mutate({
                 resource: schema.plural,
