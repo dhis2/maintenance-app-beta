@@ -160,7 +160,7 @@ function ConfirmationDialog({
 
                         {deleteModelMutation.isError
                             ? i18n.t('Try again')
-                            : i18n.t('Yes')}
+                            : i18n.t('Confirm deletion')}
                     </Button>
                     <Button onClick={onCancel}>{i18n.t('No')}</Button>
                 </ButtonStrip>
