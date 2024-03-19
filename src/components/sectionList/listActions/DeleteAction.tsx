@@ -93,10 +93,8 @@ function ConfirmationDialog({
         { success: true }
     )
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const errorReports = (deleteModelMutation.error as any)?.details?.response
-        ?.errorReports
-
+    const errorReports =
+        deleteModelMutation.error?.details.response.errorReports
     return (
         <Modal>
             <ModalTitle>
@@ -124,13 +122,9 @@ function ConfirmationDialog({
 
                         {!!errorReports?.length && (
                             <ul>
-                                {errorReports.map(
-                                    // @TODO: I have no idea why TS says "message" isn't being used?
-                                    // eslint-disable-next-line react/no-unused-prop-types
-                                    ({ message }: { message: string }) => (
-                                        <li key={message}>{message}</li>
-                                    )
-                                )}
+                                {errorReports.map(({ message }) => (
+                                    <li key={message}>{message}</li>
+                                ))}
                             </ul>
                         )}
                     </NoticeBox>
