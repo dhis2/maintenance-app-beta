@@ -31,22 +31,24 @@ export const ActionEdit = ({ modelId }: { modelId: string }) => {
 }
 
 type ActionMoreProps = {
-    modelId: string
     deletable: boolean
     editable: boolean
+    modelId: string
+    modelDisplayName: string
     modelType: string
     onShowDetailsClick: () => void
     onOpenSharingClick: () => void
-    onDeleteClick: () => void
+    onDeleteSuccess: () => void
 }
 export const ActionMore = ({
-    modelId,
     deletable,
     editable,
+    modelId,
+    modelDisplayName,
     modelType,
     onOpenSharingClick,
     onShowDetailsClick,
-    onDeleteClick,
+    onDeleteSuccess,
 }: ActionMoreProps) => {
     const [open, setOpen] = useState(false)
     const ref = useRef(null)
@@ -108,15 +110,22 @@ export const ActionMore = ({
                             />
                         </TooltipWrapper>
 
-                        <DeleteAction
-                            modelType={modelType}
-                            deletable={deletable}
-                            onCancel={() => setOpen(false)}
-                            onClick={() => {
-                                onDeleteClick()
-                                setOpen(false)
-                            }}
-                        />
+                        <TooltipWrapper
+                            condition={!deletable}
+                            content={TOOLTIPS.noDeleteAccess}
+                        >
+                            <DeleteAction
+                                modelDisplayName={modelDisplayName}
+                                modelId={modelId}
+                                modelType={modelType}
+                                disabled={!deletable}
+                                onDeleteSuccess={() => {
+                                    onDeleteSuccess()
+                                    setOpen(false)
+                                }}
+                                onCancel={() => setOpen(false)}
+                            />
+                        </TooltipWrapper>
                     </FlyoutMenu>
                 </Popover>
             )}

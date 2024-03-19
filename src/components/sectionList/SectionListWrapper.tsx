@@ -1,12 +1,7 @@
 import { FetchError } from '@dhis2/app-runtime'
 import { SharingDialog } from '@dhis2/ui'
 import React, { useCallback, useState } from 'react'
-import {
-    BaseListModel,
-    canEditModel,
-    useSchemaFromHandle,
-    useDeleteModelMutation,
-} from '../../lib'
+import { BaseListModel, canEditModel, useSchemaFromHandle } from '../../lib'
 import { Pager, ModelCollection } from '../../types/models'
 import { SectionListHeaderBulk } from './bulk'
 import { DetailsPanel, DefaultDetailsPanelContent } from './detailsPanel'
@@ -44,14 +39,6 @@ export const SectionListWrapper = ({
         useSelectedModels()
     const [detailsId, setDetailsId] = useState<string | undefined>()
     const [sharingDialogId, setSharingDialogId] = useState<string | undefined>()
-    const deleteModelMutation = useDeleteModelMutation(schema)
-    const deleteModel = useCallback(
-        async ({ id, displayName }: BaseListModel) => {
-            await deleteModelMutation.mutateAsync({ id, displayName })
-            refetch()
-        },
-        [deleteModelMutation, refetch]
-    )
 
     const SectionListMessage = () => {
         if (error) {
@@ -113,15 +100,10 @@ export const SectionListWrapper = ({
                 modelType={schema.displayName}
                 onShowDetailsClick={handleDetailsClick}
                 onOpenSharingClick={setSharingDialogId}
-                onDeleteClick={() => deleteModel(model)}
+                onDeleteSuccess={refetch}
             />
         ),
-        [
-            handleDetailsClick,
-            setSharingDialogId,
-            deleteModel,
-            schema.displayName,
-        ]
+        [handleDetailsClick, setSharingDialogId, schema.displayName, refetch]
     )
 
     const isAllSelected = data ? checkAllSelected(data) : false

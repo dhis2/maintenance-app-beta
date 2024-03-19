@@ -8,7 +8,7 @@ type DefaultListActionProps = {
     modelType: string
     onShowDetailsClick: (model: BaseListModel) => void
     onOpenSharingClick: (id: string) => void
-    onDeleteClick: () => void
+    onDeleteSuccess: () => void
 }
 
 export const DefaultListActions = ({
@@ -16,7 +16,7 @@ export const DefaultListActions = ({
     modelType,
     onShowDetailsClick,
     onOpenSharingClick,
-    onDeleteClick,
+    onDeleteSuccess,
 }: DefaultListActionProps) => {
     const deletable = canDeleteModel(model)
     const editable = canEditModel(model)
@@ -25,13 +25,14 @@ export const DefaultListActions = ({
         <ListActions>
             <ActionEdit modelId={model.id} />
             <ActionMore
-                modelId={model.id}
                 deletable={editable}
                 editable={deletable}
+                modelId={model.id}
+                modelDisplayName={model.displayName}
+                modelType={modelType}
                 onShowDetailsClick={() => onShowDetailsClick(model)}
                 onOpenSharingClick={() => onOpenSharingClick(model.id)}
-                onDeleteClick={onDeleteClick}
-                modelType={modelType}
+                onDeleteSuccess={onDeleteSuccess}
             />
         </ListActions>
     )

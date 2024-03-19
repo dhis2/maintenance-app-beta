@@ -2,55 +2,61 @@ import i18n from '@dhis2/d2-i18n'
 import {
     Button,
     ButtonStrip,
+    CircularLoader,
     IconDelete16,
     MenuItem,
     Modal,
     ModalActions,
+    ModalContent,
     ModalTitle,
+    NoticeBox,
 } from '@dhis2/ui'
 import React, { useState } from 'react'
-import { TOOLTIPS } from '../../../lib'
-import { TooltipWrapper } from '../../tooltip'
+import { useSchemaFromHandle, useDeleteModelMutation } from '../../../lib'
+import classes from './DeleteAction.module.css'
 
 export function DeleteAction({
-    deletable,
+    disabled,
+    modelId,
+    modelDisplayName,
     modelType,
-    onClick,
     onCancel,
+    onDeleteSuccess,
 }: {
-    deletable: boolean
+    disabled: boolean
+    modelId: string
+    modelDisplayName: string
     modelType: string
-    onClick: () => void
     onCancel: () => void
+    onDeleteSuccess: () => void
 }) {
     const [showConfirmationDialog, setShowConfirmationDialog] = useState(false)
+    const deleteAndClose = () => {
+        setShowConfirmationDialog(false)
+        onDeleteSuccess()
+    }
+    const closeAndCancel = () => {
+        setShowConfirmationDialog(false)
+        onCancel()
+    }
 
     return (
         <>
-            <TooltipWrapper
-                condition={!deletable}
-                content={TOOLTIPS.noDeleteAccess}
-            >
-                <MenuItem
-                    dense
-                    disabled={!deletable}
-                    label={i18n.t('Delete')}
-                    icon={<IconDelete16 />}
-                    onClick={() => setShowConfirmationDialog(true)}
-                />
-            </TooltipWrapper>
+            <MenuItem
+                dense
+                disabled={disabled}
+                label={i18n.t('Delete')}
+                icon={<IconDelete16 />}
+                onClick={() => setShowConfirmationDialog(true)}
+            />
 
             {showConfirmationDialog && (
                 <ConfirmationDialog
+                    modelDisplayName={modelDisplayName}
+                    modelId={modelId}
                     modelType={modelType}
-                    onConfirm={() => {
-                        setShowConfirmationDialog(false)
-                        onClick()
-                    }}
-                    onCancel={() => {
-                        setShowConfirmationDialog(false)
-                        onCancel()
-                    }}
+                    onDeleteSuccess={deleteAndClose}
+                    onCancel={closeAndCancel}
                 />
             )}
         </>
@@ -58,31 +64,97 @@ export function DeleteAction({
 }
 
 function ConfirmationDialog({
+    modelId,
+    modelDisplayName,
     modelType,
     onCancel,
-    onConfirm,
+    onDeleteSuccess,
 }: {
+    modelId: string
+    modelDisplayName: string
     modelType: string
     onCancel: () => void
-    onConfirm: () => void
+    onDeleteSuccess: () => void
 }) {
+    const schema = useSchemaFromHandle()
+    const deleteModelMutation = useDeleteModelMutation(schema)
+    const deleteModel = async () => {
+        await deleteModelMutation.mutateAsync({
+            id: modelId,
+            displayName: modelDisplayName,
+        })
+        onDeleteSuccess()
+    }
+
+    const deleteAndClose = () =>
+        deleteModel()
+            .then(onDeleteSuccess)
+            // We don't need to do anything on error except for catching it,
+            // we have all the information on the deleteModelMutation value
+            .catch(() => null)
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const errorReports = (deleteModelMutation.error as any)?.details?.response
+        ?.errorReports
+
     return (
         <Modal>
             <ModalTitle>
                 {i18n.t(
                     'Are you sure that you want to delete this {{modelType}}?',
-                    {
-                        modelType: modelType,
-                    }
+                    { modelType }
                 )}
             </ModalTitle>
 
+            {!!deleteModelMutation.error && (
+                <ModalContent>
+                    <NoticeBox
+                        error
+                        title={i18n.t(
+                            'Something went wrong deleting the {{modelType}}',
+                            { modelType }
+                        )}
+                    >
+                        <div>
+                            {i18n.t(
+                                'Failed to delete {{modelType}} "{{modelDisplayName}}"! {{messages}}',
+                                { modelDisplayName, modelType }
+                            )}
+                        </div>
+
+                        {!!errorReports?.length && (
+                            <ul>
+                                {errorReports.map(
+                                    // @TODO: I have no idea why TS says "message" isn't being used?
+                                    // eslint-disable-next-line react/no-unused-prop-types
+                                    ({ message }: { message: string }) => (
+                                        <li key={message}>{message}</li>
+                                    )
+                                )}
+                            </ul>
+                        )}
+                    </NoticeBox>
+                </ModalContent>
+            )}
+
             <ModalActions>
                 <ButtonStrip>
-                    <Button onClick={onCancel}>No</Button>
-                    <Button destructive onClick={onConfirm}>
-                        Yes
+                    <Button
+                        disabled={deleteModelMutation.isLoading}
+                        destructive
+                        onClick={deleteAndClose}
+                    >
+                        {deleteModelMutation.isLoading && (
+                            <span className={classes.deleteButtonLoadingIcon}>
+                                <CircularLoader extrasmall />
+                            </span>
+                        )}
+
+                        {deleteModelMutation.isError
+                            ? i18n.t('Try again')
+                            : i18n.t('Yes')}
                     </Button>
+                    <Button onClick={onCancel}>{i18n.t('No')}</Button>
                 </ButtonStrip>
             </ModalActions>
         </Modal>
