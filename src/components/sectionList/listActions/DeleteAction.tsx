@@ -160,7 +160,13 @@ function ConfirmationDialog({
                             ? i18n.t('Try again')
                             : i18n.t('Confirm deletion')}
                     </Button>
-                    <Button onClick={onCancel}>{i18n.t('No')}</Button>
+
+                    <Button
+                        disabled={deleteModelMutation.isLoading}
+                        onClick={onCancel}
+                    >
+                        {i18n.t('No')}
+                    </Button>
                 </ButtonStrip>
             </ModalActions>
         </Modal>
