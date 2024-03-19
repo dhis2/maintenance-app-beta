@@ -27,8 +27,7 @@ export const DefaultListActions = ({
             <ActionMore
                 deletable={editable}
                 editable={deletable}
-                modelId={model.id}
-                modelDisplayName={model.displayName}
+                model={model}
                 modelType={modelType}
                 onShowDetailsClick={() => onShowDetailsClick(model)}
                 onOpenSharingClick={() => onOpenSharingClick(model.id)}

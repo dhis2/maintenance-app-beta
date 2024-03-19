@@ -13,20 +13,22 @@ import {
     NoticeBox,
 } from '@dhis2/ui'
 import React, { useState } from 'react'
-import { useSchemaFromHandle, useDeleteModelMutation } from '../../../lib'
+import {
+    BaseListModel,
+    useSchemaFromHandle,
+    useDeleteModelMutation,
+} from '../../../lib'
 import classes from './DeleteAction.module.css'
 
 export function DeleteAction({
     disabled,
-    modelId,
-    modelDisplayName,
+    model,
     modelType,
     onCancel,
     onDeleteSuccess,
 }: {
     disabled: boolean
-    modelId: string
-    modelDisplayName: string
+    model: BaseListModel
     modelType: string
     onCancel: () => void
     onDeleteSuccess: () => void
@@ -53,8 +55,7 @@ export function DeleteAction({
 
             {showConfirmationDialog && (
                 <ConfirmationDialog
-                    modelDisplayName={modelDisplayName}
-                    modelId={modelId}
+                    model={model}
                     modelType={modelType}
                     onDeleteSuccess={deleteAndClose}
                     onCancel={closeAndCancel}
@@ -65,14 +66,12 @@ export function DeleteAction({
 }
 
 function ConfirmationDialog({
-    modelId,
-    modelDisplayName,
+    model,
     modelType,
     onCancel,
     onDeleteSuccess,
 }: {
-    modelId: string
-    modelDisplayName: string
+    model: BaseListModel
     modelType: string
     onCancel: () => void
     onDeleteSuccess: () => void
@@ -88,7 +87,7 @@ function ConfirmationDialog({
     const { show: showDeletionSuccess } = useAlert(
         () =>
             i18n.t('Successfully deleted {{modelType}} "{{displayName}}"', {
-                displayName: modelDisplayName,
+                displayName: model.displayName,
                 modelType,
             }),
         { success: true }
@@ -118,8 +117,8 @@ function ConfirmationDialog({
                     >
                         <div>
                             {i18n.t(
-                                'Failed to delete {{modelType}} "{{modelDisplayName}}"! {{messages}}',
-                                { modelDisplayName, modelType }
+                                'Failed to delete {{modelType}} "{{displayName}}"! {{messages}}',
+                                { displayName: model.displayName, modelType }
                             )}
                         </div>
 
@@ -145,8 +144,8 @@ function ConfirmationDialog({
                         destructive
                         onClick={() =>
                             deleteModelMutation.mutate({
-                                id: modelId,
-                                displayName: modelDisplayName,
+                                id: model.id,
+                                displayName: model.displayName,
                             })
                         }
                     >

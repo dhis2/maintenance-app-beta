@@ -12,7 +12,7 @@ import {
 } from '@dhis2/ui'
 import React, { useRef, useState } from 'react'
 import { useHref, useLinkClickHandler } from 'react-router-dom'
-import { TOOLTIPS } from '../../../lib'
+import { TOOLTIPS, BaseListModel } from '../../../lib'
 import { LinkButton } from '../../LinkButton'
 import { TooltipWrapper } from '../../tooltip'
 import { DeleteAction } from './DeleteAction'
@@ -33,8 +33,7 @@ export const ActionEdit = ({ modelId }: { modelId: string }) => {
 type ActionMoreProps = {
     deletable: boolean
     editable: boolean
-    modelId: string
-    modelDisplayName: string
+    model: BaseListModel
     modelType: string
     onShowDetailsClick: () => void
     onOpenSharingClick: () => void
@@ -43,8 +42,7 @@ type ActionMoreProps = {
 export const ActionMore = ({
     deletable,
     editable,
-    modelId,
-    modelDisplayName,
+    model,
     modelType,
     onOpenSharingClick,
     onShowDetailsClick,
@@ -52,9 +50,9 @@ export const ActionMore = ({
 }: ActionMoreProps) => {
     const [open, setOpen] = useState(false)
     const ref = useRef(null)
-    const href = useHref(modelId, { relative: 'path' })
+    const href = useHref(model.id, { relative: 'path' })
 
-    const handleEditClick = useLinkClickHandler(modelId)
+    const handleEditClick = useLinkClickHandler(model.id)
 
     return (
         <div ref={ref}>
@@ -115,8 +113,7 @@ export const ActionMore = ({
                             content={TOOLTIPS.noDeleteAccess}
                         >
                             <DeleteAction
-                                modelDisplayName={modelDisplayName}
-                                modelId={modelId}
+                                model={model}
                                 modelType={modelType}
                                 disabled={!deletable}
                                 onDeleteSuccess={() => {
