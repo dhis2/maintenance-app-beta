@@ -84,13 +84,6 @@ function ConfirmationDialog({
             onDeleteSuccess()
         },
     })
-    const deleteModel = async () => {
-        await deleteModelMutation.mutateAsync({
-            id: modelId,
-            displayName: modelDisplayName,
-        })
-        onDeleteSuccess()
-    }
 
     const { show: showDeletionSuccess } = useAlert(
         () =>
@@ -150,7 +143,12 @@ function ConfirmationDialog({
                     <Button
                         disabled={deleteModelMutation.isLoading}
                         destructive
-                        onClick={deleteModel}
+                        onClick={() =>
+                            deleteModelMutation.mutate({
+                                id: modelId,
+                                displayName: modelDisplayName,
+                            })
+                        }
                     >
                         {deleteModelMutation.isLoading && (
                             <span className={classes.deleteButtonLoadingIcon}>

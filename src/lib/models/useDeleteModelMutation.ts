@@ -8,7 +8,9 @@ type MutationFnArgs = {
     messages?: string[]
 }
 
-export function useDeleteModelMutation(schema: Schema, options?: object) {
+type Options = Omit<Parameters<typeof useMutation>[1], 'mutationFn'>
+
+export function useDeleteModelMutation(schema: Schema, options?: Options) {
     const engine = useDataEngine()
 
     return useMutation({
