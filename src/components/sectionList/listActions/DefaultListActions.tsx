@@ -5,6 +5,7 @@ import { ListActions, ActionEdit, ActionMore } from './SectionListActions'
 
 type DefaultListActionProps = {
     model: BaseListModel
+    modelType: string
     onShowDetailsClick: (model: BaseListModel) => void
     onOpenSharingClick: (id: string) => void
     onDeleteClick: () => void
@@ -12,6 +13,7 @@ type DefaultListActionProps = {
 
 export const DefaultListActions = ({
     model,
+    modelType,
     onShowDetailsClick,
     onOpenSharingClick,
     onDeleteClick,
@@ -29,6 +31,7 @@ export const DefaultListActions = ({
                 onShowDetailsClick={() => onShowDetailsClick(model)}
                 onOpenSharingClick={() => onOpenSharingClick(model.id)}
                 onDeleteClick={onDeleteClick}
+                modelType={modelType}
             />
         </ListActions>
     )

@@ -2,7 +2,6 @@ import i18n from '@dhis2/d2-i18n'
 import {
     Button,
     FlyoutMenu,
-    IconDelete16,
     IconEdit16,
     IconEdit24,
     IconMore16,
@@ -16,6 +15,7 @@ import { useHref, useLinkClickHandler } from 'react-router-dom'
 import { TOOLTIPS } from '../../../lib'
 import { LinkButton } from '../../LinkButton'
 import { TooltipWrapper } from '../../tooltip'
+import { DeleteAction } from './DeleteAction'
 import css from './SectionListActions.module.css'
 
 export const ListActions = ({ children }: React.PropsWithChildren) => {
@@ -34,6 +34,7 @@ type ActionMoreProps = {
     modelId: string
     deletable: boolean
     editable: boolean
+    modelType: string
     onShowDetailsClick: () => void
     onOpenSharingClick: () => void
     onDeleteClick: () => void
@@ -42,6 +43,7 @@ export const ActionMore = ({
     modelId,
     deletable,
     editable,
+    modelType,
     onOpenSharingClick,
     onShowDetailsClick,
     onDeleteClick,
@@ -59,7 +61,7 @@ export const ActionMore = ({
                 secondary
                 onClick={() => setOpen(!open)}
                 icon={<IconMore24 />}
-            ></Button>
+            />
             {open && (
                 <Popover
                     className={css.actionMorePopover}
@@ -103,26 +105,18 @@ export const ActionMore = ({
                                     onOpenSharingClick()
                                     setOpen(false)
                                 }}
-                            ></MenuItem>
-                        </TooltipWrapper>
-
-                        <TooltipWrapper
-                            condition={!deletable}
-                            content={TOOLTIPS.noEditAccess}
-                        >
-                            <MenuItem
-                                dense
-                                disabled={!deletable}
-                                label={i18n.t('Delete')}
-                                icon={<IconDelete16 />}
-                                onClick={() => {
-                                    onDeleteClick()
-                                    setOpen(false)
-                                }}
-                                target="_blank"
-                                href={href}
                             />
                         </TooltipWrapper>
+
+                        <DeleteAction
+                            modelType={modelType}
+                            deletable={deletable}
+                            onCancel={() => setOpen(false)}
+                            onClick={() => {
+                                onDeleteClick()
+                                setOpen(false)
+                            }}
+                        />
                     </FlyoutMenu>
                 </Popover>
             )}

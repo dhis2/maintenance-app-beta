@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-18T01:33:26.193Z\n"
-"PO-Revision-Date: 2024-03-18T01:33:26.193Z\n"
+"POT-Creation-Date: 2024-03-19T00:47:49.739Z\n"
+"PO-Revision-Date: 2024-03-19T00:47:49.739Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -249,14 +249,17 @@ msgstr "Search by name, code or ID"
 msgid "Public access"
 msgstr "Public access"
 
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Are you sure that you want to delete this data element?"
+msgstr "Are you sure that you want to delete this data element?"
+
 msgid "Show details"
 msgstr "Show details"
 
 msgid "Sharing settings"
 msgstr "Sharing settings"
-
-msgid "Delete"
-msgstr "Delete"
 
 msgid "At least one column must be selected"
 msgstr "At least one column must be selected"
@@ -566,6 +569,9 @@ msgstr "Locales"
 
 msgid "You do not have access to edit this item."
 msgstr "You do not have access to edit this item."
+
+msgid "You do not have access to delete this item."
+msgstr "You do not have access to delete this item."
 
 msgid "Sum"
 msgstr "Sum"
