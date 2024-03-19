@@ -1,3 +1,4 @@
+import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
     Button,
@@ -86,9 +87,21 @@ function ConfirmationDialog({
         onDeleteSuccess()
     }
 
+    const { show: showDeletionSuccess } = useAlert(
+        () =>
+            i18n.t('Successfully deleted {{modelType}} "{{displayName}}"', {
+                displayName: modelDisplayName,
+                modelType,
+            }),
+        { success: true }
+    )
+
     const deleteAndClose = () =>
         deleteModel()
-            .then(onDeleteSuccess)
+            .then(() => {
+                showDeletionSuccess()
+                onDeleteSuccess()
+            })
             // We don't need to do anything on error except for catching it,
             // we have all the information on the deleteModelMutation value
             .catch(() => null)
