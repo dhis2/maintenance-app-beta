@@ -15,8 +15,8 @@ import {
 import React, { useState } from 'react'
 import {
     BaseListModel,
-    useSchemaFromHandle,
     useDeleteModelMutation,
+    useSchemaSectionHandleOrThrow,
 } from '../../../lib'
 import classes from './DeleteAction.module.css'
 
@@ -71,8 +71,9 @@ function ConfirmationDialog({
     onCancel: () => void
     onDeleteSuccess: () => void
 }) {
-    const schema = useSchemaFromHandle()
-    const deleteModelMutation = useDeleteModelMutation(schema, {
+    const section = useSchemaSectionHandleOrThrow()
+
+    const deleteModelMutation = useDeleteModelMutation(section.namePlural, {
         onSuccess: () => {
             showDeletionSuccess()
             onDeleteSuccess()
@@ -83,7 +84,7 @@ function ConfirmationDialog({
         () =>
             i18n.t('Successfully deleted {{modelType}} "{{displayName}}"', {
                 displayName: model.displayName,
-                modelType: schema.displayName,
+                modelType: section.title,
             }),
         { success: true }
     )
@@ -97,7 +98,7 @@ function ConfirmationDialog({
             <ModalTitle>
                 {i18n.t(
                     'Are you sure that you want to delete this {{modelType}}?',
-                    { modelType: schema.displayName }
+                    { modelType: section.title }
                 )}
             </ModalTitle>
 
@@ -107,7 +108,7 @@ function ConfirmationDialog({
                         error
                         title={i18n.t(
                             'Something went wrong deleting the {{modelType}}',
-                            { modelType: schema.displayName }
+                            { modelType: section.title }
                         )}
                     >
                         <div>
@@ -115,7 +116,7 @@ function ConfirmationDialog({
                                 'Failed to delete {{modelType}} "{{displayName}}"! {{messages}}',
                                 {
                                     displayName: model.displayName,
-                                    modelType: schema.displayName,
+                                    modelType: section.title,
                                 }
                             )}
                         </div>
