@@ -23,13 +23,11 @@ import classes from './DeleteAction.module.css'
 export function DeleteAction({
     disabled,
     model,
-    modelType,
     onCancel,
     onDeleteSuccess,
 }: {
     disabled: boolean
     model: BaseListModel
-    modelType: string
     onCancel: () => void
     onDeleteSuccess: () => void
 }) {
@@ -56,7 +54,6 @@ export function DeleteAction({
             {showConfirmationDialog && (
                 <ConfirmationDialog
                     model={model}
-                    modelType={modelType}
                     onDeleteSuccess={deleteAndClose}
                     onCancel={closeAndCancel}
                 />
@@ -67,12 +64,10 @@ export function DeleteAction({
 
 function ConfirmationDialog({
     model,
-    modelType,
     onCancel,
     onDeleteSuccess,
 }: {
     model: BaseListModel
-    modelType: string
     onCancel: () => void
     onDeleteSuccess: () => void
 }) {
@@ -88,7 +83,7 @@ function ConfirmationDialog({
         () =>
             i18n.t('Successfully deleted {{modelType}} "{{displayName}}"', {
                 displayName: model.displayName,
-                modelType,
+                modelType: schema.displayName,
             }),
         { success: true }
     )
@@ -102,7 +97,7 @@ function ConfirmationDialog({
             <ModalTitle>
                 {i18n.t(
                     'Are you sure that you want to delete this {{modelType}}?',
-                    { modelType }
+                    { modelType: schema.displayName }
                 )}
             </ModalTitle>
 
@@ -112,13 +107,16 @@ function ConfirmationDialog({
                         error
                         title={i18n.t(
                             'Something went wrong deleting the {{modelType}}',
-                            { modelType }
+                            { modelType: schema.displayName }
                         )}
                     >
                         <div>
                             {i18n.t(
                                 'Failed to delete {{modelType}} "{{displayName}}"! {{messages}}',
-                                { displayName: model.displayName, modelType }
+                                {
+                                    displayName: model.displayName,
+                                    modelType: schema.displayName,
+                                }
                             )}
                         </div>
 

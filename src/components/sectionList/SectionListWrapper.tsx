@@ -97,13 +97,12 @@ export const SectionListWrapper = ({
         (model: BaseListModel) => (
             <DefaultListActions
                 model={model}
-                modelType={schema.displayName}
                 onShowDetailsClick={handleDetailsClick}
                 onOpenSharingClick={setSharingDialogId}
                 onDeleteSuccess={refetch}
             />
         ),
-        [handleDetailsClick, setSharingDialogId, schema.displayName, refetch]
+        [handleDetailsClick, setSharingDialogId, refetch]
     )
 
     const isAllSelected = data ? checkAllSelected(data) : false

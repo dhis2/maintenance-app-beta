@@ -34,7 +34,6 @@ type ActionMoreProps = {
     deletable: boolean
     editable: boolean
     model: BaseListModel
-    modelType: string
     onShowDetailsClick: () => void
     onOpenSharingClick: () => void
     onDeleteSuccess: () => void
@@ -43,7 +42,6 @@ export const ActionMore = ({
     deletable,
     editable,
     model,
-    modelType,
     onOpenSharingClick,
     onShowDetailsClick,
     onDeleteSuccess,
@@ -114,7 +112,6 @@ export const ActionMore = ({
                         >
                             <DeleteAction
                                 model={model}
-                                modelType={modelType}
                                 disabled={!deletable}
                                 onDeleteSuccess={() => {
                                     onDeleteSuccess()
