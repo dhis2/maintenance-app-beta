@@ -90,7 +90,7 @@ function ConfirmationDialog({
     )
 
     const errorReports =
-        deleteModelMutation.error?.details.response.errorReports
+        deleteModelMutation.error?.details?.response?.errorReports
     return (
         <Modal>
             <ModalTitle>
