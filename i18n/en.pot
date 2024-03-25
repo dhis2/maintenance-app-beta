@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-19T00:47:49.739Z\n"
-"PO-Revision-Date: 2024-03-19T00:47:49.739Z\n"
+"POT-Creation-Date: 2024-03-20T01:08:59.818Z\n"
+"PO-Revision-Date: 2024-03-20T01:08:59.818Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -252,8 +252,23 @@ msgstr "Public access"
 msgid "Delete"
 msgstr "Delete"
 
-msgid "Are you sure that you want to delete this data element?"
-msgstr "Are you sure that you want to delete this data element?"
+msgid "Successfully deleted {{modelType}} \"{{displayName}}\""
+msgstr "Successfully deleted {{modelType}} \"{{displayName}}\""
+
+msgid "Are you sure that you want to delete this {{modelType}}?"
+msgstr "Are you sure that you want to delete this {{modelType}}?"
+
+msgid "Something went wrong deleting the {{modelType}}"
+msgstr "Something went wrong deleting the {{modelType}}"
+
+msgid "Failed to delete {{modelType}} \"{{displayName}}\"! {{messages}}"
+msgstr "Failed to delete {{modelType}} \"{{displayName}}\"! {{messages}}"
+
+msgid "Try again"
+msgstr "Try again"
+
+msgid "Confirm deletion"
+msgstr "Confirm deletion"
 
 msgid "Show details"
 msgstr "Show details"
@@ -743,15 +758,6 @@ msgstr "This field requires a unique value, please choose another one"
 
 msgid "Required"
 msgstr "Required"
-
-msgid "Successfully deleted {{modelType}} \"{{displayName}}\""
-msgstr "Successfully deleted {{modelType}} \"{{displayName}}\""
-
-msgid "Failed to delete {{modelType}} \"{{displayName}}\"! {{messages}}"
-msgstr "Failed to delete {{modelType}} \"{{displayName}}\"! {{messages}}"
-
-msgid "Failed to delete {{modelType}} \"{{displayName}}\"!"
-msgstr "Failed to delete {{modelType}} \"{{displayName}}\"!"
 
 msgid "Custom attributes"
 msgstr "Custom attributes"
