@@ -1,13 +1,20 @@
-import { useDataEngine } from '@dhis2/app-runtime'
-import { useMutation } from 'react-query'
+import { FetchError, useDataEngine } from '@dhis2/app-runtime'
+import { useMutation, UseMutationOptions } from 'react-query'
+import { ImportSummary } from '../../types'
 
 type MutationFnArgs = {
     id: string
     displayName: string
-    messages?: string[]
 }
 
-type Options = Omit<Parameters<typeof useMutation>[1], 'mutationFn'>
+type DeleteMutationError = Omit<FetchError, 'details'> & {
+    details: ImportSummary
+}
+
+type Options = Omit<
+    UseMutationOptions<ImportSummary, DeleteMutationError, MutationFnArgs>,
+    'mutationFn'
+>
 
 export function useDeleteModelMutation(
     schemaResource: string,
@@ -17,12 +24,12 @@ export function useDeleteModelMutation(
 
     return useMutation({
         ...options,
-        mutationFn: (variables: MutationFnArgs) => {
+        mutationFn: (variables) => {
             return engine.mutate({
                 resource: schemaResource,
                 id: variables.id,
                 type: 'delete',
-            })
+            }) as Promise<ImportSummary>
         },
     })
 }
