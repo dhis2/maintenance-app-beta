@@ -2,7 +2,11 @@ import i18n from '@dhis2/d2-i18n'
 import { InputFieldFF, SingleSelectFieldFF, TextAreaFieldFF } from '@dhis2/ui'
 import * as React from 'react'
 import { Field as FieldRFF, useFormState } from 'react-final-form'
-import { StandardFormSection } from '../..'
+import {
+    StandardFormSection,
+    StandardFormSectionDescription,
+    StandardFormSectionTitle,
+} from '../..'
 import { Attribute, AttributeValue } from '../../../types/generated'
 
 const inputWidth = '440px'
@@ -78,7 +82,7 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
     throw new Error(`Implement value type "${attribute.valueType}"!`)
 }
 
-export function CustomAttributes() {
+export function CustomAttributesSection() {
     const formState = useFormState<ValuesWithAttributes>({
         subscription: { initialValues: true },
     })
@@ -86,9 +90,19 @@ export function CustomAttributes() {
     const customAttributes = formState.initialValues.attributeValues?.map(
         (av) => av.attribute
     )
+    if (!customAttributes || customAttributes?.length < 1) {
+        return null
+    }
 
     return (
-        <>
+        <StandardFormSection>
+            <StandardFormSectionTitle>
+                {i18n.t('Custom attributes')}
+            </StandardFormSectionTitle>
+
+            <StandardFormSectionDescription>
+                {i18n.t('Custom fields for your DHIS2 instance')}
+            </StandardFormSectionDescription>
             {customAttributes?.map((customAttribute, index) => {
                 return (
                     <CustomAttribute
@@ -98,6 +112,6 @@ export function CustomAttributes() {
                     />
                 )
             })}
-        </>
+        </StandardFormSection>
     )
 }
