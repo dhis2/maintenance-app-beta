@@ -10,3 +10,4 @@ cypress.env.json
 .env.production.local
 cypress/screenshots/*
 coverage/
+cypress.env.json

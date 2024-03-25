@@ -4,7 +4,9 @@ import React, { PropsWithChildren } from 'react'
 import styles from './Sidenav.module.css'
 
 export const Sidenav = ({ children }: PropsWithChildren) => (
-    <nav className={styles['sidenav-wrap']}>{children}</nav>
+    <nav data-test="sidenav" className={styles['sidenav-wrap']}>
+        {children}
+    </nav>
 )
 
 export const SidenavItems = ({ children }: PropsWithChildren) => (
