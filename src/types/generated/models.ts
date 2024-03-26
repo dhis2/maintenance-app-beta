@@ -551,7 +551,7 @@ export type BulkSmsGatewayConfig = {
 
 export type CascadeSharingReport = {
     countUpdatedDashboardItems: number
-    errorReports: Array<ErrorReport>
+    errorReports: Array<ErrorReportLegacy>
     updateObjects: Record<string, Array<IdObject>>
 }
 
@@ -2481,7 +2481,7 @@ export type Error = {
     uid: string
 }
 
-export type ErrorReport = {
+export type ErrorReportLegacy = {
     errorCode: ErrorReport.errorCode
     errorKlass: string
     errorProperties: Array<Record<string, any>>
@@ -4555,7 +4555,7 @@ export type ImportSummaries = {
     deleted: number
     ignored: number
     importOptions: ImportOptions
-    importSummaries: Array<ImportSummary>
+    importSummaries: Array<ImportSummaryLegacy>
     imported: number
     responseType: string
     status: ImportSummaries.status
@@ -4571,7 +4571,7 @@ export namespace ImportSummaries {
     }
 }
 
-export type ImportSummary = {
+export type ImportSummaryLegacy = {
     conflicts: Array<ImportConflict>
     dataSetComplete: string
     description: string
@@ -5945,7 +5945,7 @@ export type ObjectCount = {
 
 export type ObjectReport = {
     displayName: string
-    errorReports: Array<ErrorReport>
+    errorReports: Array<ErrorReportLegacy>
     index: number
     klass: string
     uid: string

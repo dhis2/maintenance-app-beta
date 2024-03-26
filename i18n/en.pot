@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-13T00:05:18.041Z\n"
-"PO-Revision-Date: 2024-03-13T00:05:18.041Z\n"
+"POT-Creation-Date: 2024-03-20T01:08:59.818Z\n"
+"PO-Revision-Date: 2024-03-20T01:08:59.818Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -249,14 +249,44 @@ msgstr "Search by name, code or ID"
 msgid "Public access"
 msgstr "Public access"
 
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Successfully deleted {{modelType}} \"{{displayName}}\""
+msgstr "Successfully deleted {{modelType}} \"{{displayName}}\""
+
+msgid "Are you sure that you want to delete this {{modelType}}?"
+msgstr "Are you sure that you want to delete this {{modelType}}?"
+
+msgid "Something went wrong deleting the {{modelType}}"
+msgstr "Something went wrong deleting the {{modelType}}"
+
+msgid "Failed to delete {{modelType}} \"{{displayName}}\"! {{messages}}"
+msgstr "Failed to delete {{modelType}} \"{{displayName}}\"! {{messages}}"
+
+msgid "Try again"
+msgstr "Try again"
+
+msgid "Confirm deletion"
+msgstr "Confirm deletion"
+
 msgid "Show details"
 msgstr "Show details"
+
+msgid "Sharing settings"
+msgstr "Sharing settings"
 
 msgid "At least one column must be selected"
 msgstr "At least one column must be selected"
 
 msgid "At least one filter must be selected"
 msgstr "At least one filter must be selected"
+
+msgid "Columns"
+msgstr "Columns"
+
+msgid "Filters"
+msgstr "Filters"
 
 msgid "Available columns"
 msgstr "Available columns"
@@ -551,6 +581,12 @@ msgstr "Locale"
 
 msgid "Locales"
 msgstr "Locales"
+
+msgid "You do not have access to edit this item."
+msgstr "You do not have access to edit this item."
+
+msgid "You do not have access to delete this item."
+msgstr "You do not have access to delete this item."
 
 msgid "Sum"
 msgstr "Sum"
