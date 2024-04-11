@@ -114,7 +114,7 @@ const createValidViewSelect = (sectionName: string) => {
             return getDefaultViewForSection(sectionName)
         }
 
-        const viewForSection = modelListViews.data[sectionName][0]
+        const viewForSection = modelListViews.data[sectionName]?.[0]
         if (!viewForSection) {
             return getDefaultViewForSection(sectionName)
         }
