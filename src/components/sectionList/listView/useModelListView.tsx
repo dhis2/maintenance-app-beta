@@ -66,22 +66,13 @@ const parseViewToModelListView = (
 
     const parsedView = listView.data
 
-    // map to config to make sure we don't use invalid columns
-    // Preserve order by mapping from parsedView to config-object
-    const columns = parsedView.columns.flatMap((path) => {
-        const columnConfig = viewConfig.columns.available.find(
-            (col) => col.path === path
-        )
-        return columnConfig ? [columnConfig] : []
-    })
+    const columns = parsedView.columns.filter((path) =>
+        viewConfig.columns.available.includes(path)
+    )
 
-    const filters = parsedView.filters.flatMap((filterKey) => {
-        const filterConfig = viewConfig.filters.available.find(
-            (filter) => filter.filterKey === filterKey
-        )
-
-        return filterConfig ? [filterConfig] : []
-    })
+    const filters = parsedView.filters.filter((filterKey) =>
+        viewConfig.filters.available.includes(filterKey)
+    )
 
     return {
         ...parsedView,
@@ -95,8 +86,8 @@ const formatViewToDataStore = (
 ): z.infer<typeof dataStoreModelListViewSchema> => {
     const savedView = {
         ...view,
-        columns: view.columns.map((c) => c.path),
-        filters: view.filters.map((f) => f.filterKey),
+        columns: view.columns,
+        filters: view.filters,
     }
 
     return savedView
@@ -114,7 +105,7 @@ const createValidViewSelect = (sectionName: string) => {
             return getDefaultViewForSection(sectionName)
         }
 
-        const viewForSection = modelListViews.data[sectionName][0]
+        const viewForSection = modelListViews.data[sectionName]?.[0]
         if (!viewForSection) {
             return getDefaultViewForSection(sectionName)
         }

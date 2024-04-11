@@ -1,5 +1,4 @@
 import { useDataQuery } from '@dhis2/app-runtime'
-import { SharingDialog } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { SectionListWrapper } from '../../components'
 import { useModelListView } from '../../components/sectionList/listView'
@@ -46,7 +45,7 @@ export const Component = () => {
         refetch({
             ...initialParams,
             fields: columns
-                .map((column) => getFieldFilter(schema, column.path))
+                .map((column) => getFieldFilter(schema, column))
                 .concat(DEFAULT_FIELD_FILTERS),
         })
     }, [refetch, initialParams, columns, listViewQuery.isLoading, schema])

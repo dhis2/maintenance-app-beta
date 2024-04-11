@@ -1,5 +1,4 @@
 import React from 'react'
-import { ConfigurableFilterKey } from './../../../lib'
 import {
     AggregationTypeFilter,
     CategoryComboFilter,
@@ -10,9 +9,7 @@ import {
 } from './filterSelectors'
 import { useFilterKeys } from './useFilterKeys'
 
-type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
-
-const filterKeyToComponentMap: FilterKeyToComponentMap = {
+const filterKeyToComponentMap: Record<string, React.FC> = {
     categoryCombo: CategoryComboFilter,
     dataSet: DataSetFilter,
     domainType: DomainTypeSelectionFilter,
