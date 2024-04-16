@@ -8,24 +8,29 @@ import {
     Checkbox,
 } from '@dhis2/ui'
 import React, { PropsWithChildren } from 'react'
-import { isSchemaSection, useSectionHandle } from '../../lib'
+import {
+    isSchemaSection,
+    useSectionHandle,
+    getTranslatedProperty,
+} from '../../lib'
 import { CheckBoxOnChangeObject } from '../../types'
 import { HeaderColumnsSortable } from './ColumnHeaderSortable'
+import { useModelListView } from './listView'
 import css from './SectionList.module.css'
 import { SelectedColumns } from './types'
 
 type SectionListProps = {
-    headerColumns: SelectedColumns
     onSelectAll: (checked: boolean) => void
     allSelected?: boolean
 }
 
 export const SectionList = ({
     allSelected,
-    headerColumns,
     children,
     onSelectAll,
 }: PropsWithChildren<SectionListProps>) => {
+    const { columns: headerColumns } = useModelListView()
+
     return (
         <DataTable className={css.list}>
             <TableHead>
@@ -66,9 +71,9 @@ const HeaderColumns = ({
                     headerColumns={headerColumns}
                 />
             ) : (
-                headerColumns.map((headerColumn) => (
-                    <DataTableColumnHeader key={headerColumn.path}>
-                        {headerColumn.label}
+                headerColumns.map((column) => (
+                    <DataTableColumnHeader key={column}>
+                        {getTranslatedProperty(column)}
                     </DataTableColumnHeader>
                 ))
             )}

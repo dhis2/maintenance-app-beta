@@ -5,6 +5,7 @@ import {
     isValidSortPathForSchema,
     useSchema,
     useSectionListSortOrder,
+    getTranslatedProperty,
 } from '../../lib'
 import { SelectedColumn, SelectedColumns } from './types'
 
@@ -38,8 +39,7 @@ export const HeaderColumnsSortable = ({
     )
 
     const getDataTableSortDirection = (column: SelectedColumn) => {
-        const allowSort =
-            column && isValidSortPathForSchema(schema, column.path)
+        const allowSort = column && isValidSortPathForSchema(schema, column)
 
         if (!allowSort) {
             return undefined
@@ -48,22 +48,27 @@ export const HeaderColumnsSortable = ({
             return 'default'
         }
         const [sortedColumn, sortedDirection] = sortOrder
-        const columnIsSorted = sortedColumn === column.path
+        const columnIsSorted = sortedColumn === column
         return columnIsSorted ? sortedDirection : 'default'
     }
 
     return (
         <>
-            {headerColumns.map((headerColumn) => (
-                <DataTableColumnHeader
-                    sortDirection={getDataTableSortDirection(headerColumn)}
-                    onSortIconClick={handleSortOrderChange}
-                    key={headerColumn.path}
-                    name={headerColumn.path}
-                >
-                    {headerColumn.label}
-                </DataTableColumnHeader>
-            ))}
+            {headerColumns.map((headerColumn) => {
+                const sortDirection = getDataTableSortDirection(headerColumn)
+                return (
+                    <DataTableColumnHeader
+                        sortDirection={sortDirection}
+                        onSortIconClick={
+                            sortDirection ? handleSortOrderChange : undefined
+                        }
+                        key={headerColumn}
+                        name={headerColumn}
+                    >
+                        {getTranslatedProperty(headerColumn)}
+                    </DataTableColumnHeader>
+                )
+            })}
         </>
     )
 }
