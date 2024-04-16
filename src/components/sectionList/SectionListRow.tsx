@@ -5,12 +5,12 @@ import { BaseListModel, TOOLTIPS } from '../../lib'
 import { canEditModel } from '../../lib/models/access'
 import { CheckBoxOnChangeObject } from '../../types'
 import { TooltipWrapper } from '../tooltip'
+import { useModelListView } from './listView'
 import css from './SectionList.module.css'
-import { SelectedColumns, SelectedColumn } from './types'
+import { SelectedColumn } from './types'
 
 export type SectionListRowProps<Model extends BaseListModel> = {
     modelData: Model
-    selectedColumns: SelectedColumns
     onSelect: (modelId: string, checked: boolean) => void
     selected: boolean
     renderActions: (model: Model) => React.ReactNode
@@ -26,7 +26,6 @@ export const SectionListRow = React.memo(function SectionListRow<
     Model extends BaseListModel
 >({
     active,
-    selectedColumns,
     modelData,
     onSelect,
     onClick,
@@ -35,6 +34,8 @@ export const SectionListRow = React.memo(function SectionListRow<
     renderColumnValue,
 }: SectionListRowProps<Model>) {
     const editAccess = canEditModel(modelData)
+    const { columns: selectedColumns } = useModelListView()
+
     return (
         <DataTableRow
             className={cx(css.listRow, { [css.active]: active })}
@@ -58,7 +59,7 @@ export const SectionListRow = React.memo(function SectionListRow<
             </DataTableCell>
             {selectedColumns.map((selectedColumn) => (
                 <DataTableCell
-                    key={selectedColumn.path}
+                    key={selectedColumn}
                     onClick={() => onClick?.(modelData)}
                 >
                     {renderColumnValue(selectedColumn, modelData)}

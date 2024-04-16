@@ -16,6 +16,7 @@ import {
     getColumnsForSection,
     getFiltersForSection,
     useModelSectionHandleOrThrow,
+    getTranslatedProperty,
 } from '../../../lib'
 import css from './ManageListView.module.css'
 import { useModelListView, useMutateModelListViews } from './useModelListView'
@@ -28,10 +29,6 @@ type ManageColumnsDialogProps = {
     onSaved: () => void
     children: (props: RenderProps) => React.ReactNode
 }
-
-const toPath = (propertyDescriptor: { path: string }) => propertyDescriptor.path
-const toFilterKey = (filterDescriptor: { filterKey: string }) =>
-    filterDescriptor.filterKey
 
 type FormValues = {
     columns: string[]
@@ -49,6 +46,7 @@ const validate = (values: FormValues) => {
     }
     return errors
 }
+
 export const ManageListView = ({
     onSaved,
     children,
@@ -67,8 +65,8 @@ export const ManageListView = ({
     const columnsConfig = getColumnsForSection(section.name)
     const filtersConfig = getFiltersForSection(section.name)
 
-    const defaultColumns = columnsConfig.default.map(toPath)
-    const defaultFilters = filtersConfig.default.map(toFilterKey)
+    const defaultColumns = columnsConfig.default
+    const defaultFilters = filtersConfig.default
 
     const handleSave = async (values: FormValues) => {
         const isDefault = (arr: string[], def: string[]) =>
@@ -102,14 +100,8 @@ export const ManageListView = ({
 
     const initialValues = useMemo(() => {
         return {
-            columns:
-                savedColumns.length > 0
-                    ? savedColumns.map(toPath)
-                    : defaultColumns,
-            filters:
-                savedFilters.length > 0
-                    ? savedFilters.map(toFilterKey)
-                    : defaultFilters,
+            columns: savedColumns.length > 0 ? savedColumns : defaultColumns,
+            filters: savedFilters.length > 0 ? savedFilters : defaultFilters,
         }
     }, [savedFilters, savedColumns, defaultColumns, defaultFilters])
 
@@ -149,9 +141,9 @@ export const ManageListView = ({
                             loading={query.isLoading}
                             defaultOptions={defaultColumns}
                             availableOptions={columnsConfig.available.map(
-                                (c) => ({
-                                    label: c.label,
-                                    value: c.path,
+                                (path) => ({
+                                    label: getTranslatedProperty(path),
+                                    value: path,
                                 })
                             )}
                         />
@@ -164,9 +156,9 @@ export const ManageListView = ({
                             loading={query.isLoading}
                             defaultOptions={defaultFilters}
                             availableOptions={filtersConfig.available.map(
-                                (f) => ({
-                                    label: f.label,
-                                    value: f.filterKey,
+                                (filterKey) => ({
+                                    label: getTranslatedProperty(filterKey),
+                                    value: filterKey,
                                 })
                             )}
                         />

@@ -1,7 +1,4 @@
-export type SelectedColumn = {
-    label: string
-    path: string
-}
+export type SelectedColumn = string
 
 export type SelectedColumns = ReadonlyArray<SelectedColumn>
 

@@ -18,6 +18,8 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     valueType: i18n.t('Value type'),
     user: i18n.t('Owner'), // user refers to the owner of the object
     zeroIsSignificant: i18n.t('Zero is significant'),
+    'sharing.public': i18n.t('Public access'),
+    publicAccess: i18n.t('Public access'),
 }
 
 const camelCaseToSentenceCase = (camelCase: string) =>

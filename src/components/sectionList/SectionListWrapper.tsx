@@ -7,7 +7,6 @@ import { SectionListHeaderBulk } from './bulk'
 import { DetailsPanel, DefaultDetailsPanelContent } from './detailsPanel'
 import { FilterWrapper } from './filters/FilterWrapper'
 import { DefaultListActions } from './listActions'
-import { useModelListView } from './listView'
 import { ModelValue } from './modelValue/ModelValue'
 import { SectionList } from './SectionList'
 import css from './SectionList.module.css'
@@ -33,7 +32,6 @@ export const SectionListWrapper = ({
     pager,
     refetch,
 }: SectionListWrapperProps) => {
-    const { columns: headerColumns } = useModelListView()
     const schema = useSchemaFromHandle()
     const { selectedModels, checkAllSelected, add, remove, toggle, clearAll } =
         useSelectedModels()
@@ -85,7 +83,7 @@ export const SectionListWrapper = ({
     /* Note that SectionListRow is memoed, to prevent re-rendering
     every item when interacting with a row */
     const renderColumnValue = useCallback(
-        ({ path }: SelectedColumn, model: BaseListModel) => {
+        (path: SelectedColumn, model: BaseListModel) => {
             return (
                 <ModelValue path={path} schema={schema} sectionModel={model} />
             )
@@ -121,7 +119,6 @@ export const SectionListWrapper = ({
                     <SectionListHeader />
                 )}
                 <SectionList
-                    headerColumns={headerColumns}
                     onSelectAll={handleSelectAll}
                     allSelected={isAllSelected}
                 >
@@ -130,7 +127,6 @@ export const SectionListWrapper = ({
                         <SectionListRow
                             key={model.id}
                             modelData={model}
-                            selectedColumns={headerColumns}
                             onSelect={toggle}
                             onClick={handleDetailsClick}
                             selected={selectedModels.has(model.id)}

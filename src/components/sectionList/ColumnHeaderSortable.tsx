@@ -5,6 +5,7 @@ import {
     isValidSortPathForSchema,
     useSchema,
     useSectionListSortOrder,
+    getTranslatedProperty,
 } from '../../lib'
 import { SelectedColumn, SelectedColumns } from './types'
 
@@ -38,8 +39,7 @@ export const HeaderColumnsSortable = ({
     )
 
     const getDataTableSortDirection = (column: SelectedColumn) => {
-        const allowSort =
-            column && isValidSortPathForSchema(schema, column.path)
+        const allowSort = column && isValidSortPathForSchema(schema, column)
 
         if (!allowSort) {
             return undefined
@@ -48,7 +48,7 @@ export const HeaderColumnsSortable = ({
             return 'default'
         }
         const [sortedColumn, sortedDirection] = sortOrder
-        const columnIsSorted = sortedColumn === column.path
+        const columnIsSorted = sortedColumn === column
         return columnIsSorted ? sortedDirection : 'default'
     }
 
@@ -58,10 +58,10 @@ export const HeaderColumnsSortable = ({
                 <DataTableColumnHeader
                     sortDirection={getDataTableSortDirection(headerColumn)}
                     onSortIconClick={handleSortOrderChange}
-                    key={headerColumn.path}
-                    name={headerColumn.path}
+                    key={headerColumn}
+                    name={headerColumn}
                 >
-                    {headerColumn.label}
+                    {getTranslatedProperty(headerColumn)}
                 </DataTableColumnHeader>
             ))}
         </>

@@ -5,6 +5,6 @@ export {
     useUpdatePaginationParams,
 } from './usePaginationParams'
 export * from './useParamsForDataQuery'
-export * from './listViews'
+export * from './sectionListViewsConfig'
 export * from './useSectionListSortOrder'
 export * from './fieldFilters'

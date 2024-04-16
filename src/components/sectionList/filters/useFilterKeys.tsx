@@ -15,17 +15,16 @@ export const useFilterKeys = () => {
     // combine filters and views, since filters in URL might not be selected for view
     // but we should show them when they have a value
     const filterKeys = useMemo(() => {
-        const viewFilterKeys = viewFilters.map(({ filterKey }) => filterKey)
         const selectedFiltersNotInView = Object.entries(filters)
             .filter(
                 ([filterKey, value]) =>
                     value !== undefined &&
                     filterKey !== IDENTIFIABLE_FILTER_KEY &&
-                    !viewFilterKeys.includes(filterKey as ConfigurableFilterKey)
+                    !viewFilters.includes(filterKey as ConfigurableFilterKey)
             )
             .map(([filterKey]) => filterKey) as ConfigurableFilterKey[]
 
-        return viewFilterKeys.concat(selectedFiltersNotInView)
+        return viewFilters.concat(selectedFiltersNotInView)
     }, [filters, viewFilters])
     return filterKeys
 }
