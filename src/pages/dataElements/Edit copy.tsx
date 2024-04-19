@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useDataEngine, useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { NoticeBox } from '@dhis2/ui'
@@ -18,19 +19,19 @@ import { JsonPatchOperation } from '../../types'
 import { Attribute, DataElement } from '../../types/generated'
 import classes from './Edit.module.css'
 import { DataElementFormFields, dataElementSchema } from './form'
-import type { FormValues } from './form'
+import type { DataElementFormValues } from './form'
 
-type FinalFormFormApi = FormApi<FormValues>
+type FinalFormFormApi = FormApi<DataElementFormValues>
 
-const { Form } = withTypes<FormValues>()
+const { Form } = withTypes<DataElementFormValues>()
 
 type DataElementQueryResponse = {
-    dataElement: DataElement
+    dataElement: DataElementFormValues
 }
 
 const listPath = `/${getSectionPath(SCHEMA_SECTIONS.dataElement)}`
 
-const fieldFilters = [
+export const fieldFilters = [
     'id',
     'displayName',
     'code',
@@ -44,7 +45,7 @@ const fieldFilters = [
     'valueType',
     'aggregationType',
     'categoryCombo[id,displayName]',
-    'optionSet[id,displayName]',
+    'optionSet[id,displayName,valueType]',
     'commentOptionSet[id,displayName]',
     'legendSets[id,displayName]',
     'aggregationLevels',
@@ -52,10 +53,15 @@ const fieldFilters = [
     'attributeValues[value,attribute[id,displayName]]',
 ] as const
 
+// const fieldFilterObj = {
+//     ['id', { root: 'optionSet', 'fields': ['']}]
+// }
+
 function useDataElementQuery(id: string) {
     const DATA_ELEMENT_QUERY = {
         dataElement: {
-            resource: `dataElements/${id}`,
+            resource: `dataElements`,
+            id: ({ id }: Record<string, string>) => id,
             params: {
                 fields: fieldFilters.concat(),
             },
@@ -67,43 +73,27 @@ function useDataElementQuery(id: string) {
     })
 }
 
+const computeDefaultValues = (initialValues): Partial<DataElementFormFields> => {
+    return {
+        ...initialValues,
+    }
+}
+
 function computeInitialValues({
-    dataElementId,
     dataElement,
     customAttributes,
 }: {
     dataElement: DataElement
     customAttributes: Attribute[]
-    dataElementId: string
-}) {
+}): DataElementFormValues {
     if (!dataElement) {
-        return {}
+        throw new Error('Data element not found')
     }
 
     const attributeValues = getAllAttributeValues(dataElement, customAttributes)
 
     return {
-        id: dataElementId,
-        name: dataElement.name,
-        shortName: dataElement.shortName,
-        code: dataElement.code,
-        description: dataElement.description,
-        url: dataElement.url,
-        style: {
-            color: dataElement.style?.color,
-            icon: dataElement.style?.icon,
-        },
-        fieldMask: dataElement.fieldMask,
-        domainType: dataElement.domainType,
-        formName: dataElement.formName,
-        valueType: dataElement.valueType,
-        aggregationType: dataElement.aggregationType,
-        categoryCombo: dataElement.categoryCombo || { id: '' },
-        optionSet: dataElement.optionSet || { id: '' },
-        commentOptionSet: dataElement.commentOptionSet || { id: '' },
-        legendSets: dataElement.legendSets || [],
-        aggregationLevels: dataElement.aggregationLevels || [],
-        zeroIsSignificant: dataElement.zeroIsSignificant,
+        ...dataElement,
         attributeValues,
     }
 }
@@ -116,7 +106,7 @@ function usePatchDirtyFields() {
         dirtyFields,
         dataElement,
     }: {
-        values: FormValues
+        values: DataElementFormValues
         dirtyFields: { [name: string]: boolean }
         dataElement: DataElement
     }) => {
@@ -155,7 +145,10 @@ export const Component = () => {
     const customAttributesQuery = useCustomAttributesQuery()
     const patchDirtyFields = usePatchDirtyFields()
 
-    async function onSubmit(values: FormValues, form: FinalFormFormApi) {
+    async function onSubmit(
+        values: DataElementFormValues,
+        form: FinalFormFormApi
+    ) {
         const errors = await patchDirtyFields({
             values,
             dirtyFields: form.getState().dirtyFields,
@@ -170,7 +163,6 @@ export const Component = () => {
     }
 
     const initialValues = computeInitialValues({
-        dataElementId,
         dataElement: dataElementQuery.data?.dataElement as DataElement,
         customAttributes: customAttributesQuery.data || [],
     })
@@ -184,7 +176,7 @@ export const Component = () => {
                 <Form
                     validateOnBlur
                     onSubmit={onSubmit}
-                    validate={(values: FormValues) => {
+                    validate={(values: DataElementFormValues) => {
                         return validate(dataElementSchema, values)
                     }}
                     initialValues={initialValues}
@@ -251,3 +243,16 @@ function FormContents({
         </>
     )
 }
+
+
+type StepKind = "goto" | "waitForSelector"
+
+type StepKindObject<TStepKind extends StepKind> = {
+    [key in TStepKind]: string
+}
+
+type Step = StepKindObject<"goto"> |  StepKindObject<"waitForSelector">
+
+const s = {} as Step
+
+s.
