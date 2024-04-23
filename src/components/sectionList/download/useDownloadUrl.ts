@@ -14,14 +14,15 @@ type GetDownloadLinkOptions = {
     filters: string[]
     model: string
     sharing?: boolean
-    compression: 'zip' | 'gzip' | 'uncompressed'
+    compression: 'zip' | 'gz' | 'uncompressed'
+    selected?: Set<string>
 }
 const getDownloadLink = (options: GetDownloadLinkOptions) => {
     const { baseUrl, download, filters, model, compression, sharing } = options
     const filterString =
         filters.length === 0
             ? ''
-            : `filter=${encodeUriComponents(filters).join('&filter=')}`
+            : `filter=${filters.map(encodeURIComponent).join('&filter=')}`
     const downloadString = download ? 'download=true' : ''
     const metadataString =
         compression === 'uncompressed'
@@ -29,11 +30,20 @@ const getDownloadLink = (options: GetDownloadLinkOptions) => {
             : `metadata.json.${compression}`
     const objectString = `${model}=true`
     const sharingString = sharing ? 'includeSharing=true' : ''
-    return `${baseUrl}/api/${metadataString}?${objectString}&${downloadString}&${filterString}&${sharingString}`
+    const selectedFilterString = options.selected?.size
+        ? `filter=id:in:[${Array.from(options.selected)
+              .map(encodeURIComponent)
+              .join(',')}]`
+        : ''
+
+    return `${baseUrl}/api/${metadataString}?${objectString}&${downloadString}&${filterString}&${sharingString}&${selectedFilterString}`
 }
-export const useDownloadUrl = (
-    { downloadParam }: { downloadParam: boolean } = { downloadParam: true }
-) => {
+
+type UseDownloadUrlOptions = {
+    selectedModels: Set<string>
+}
+
+export const useDownloadUrl = ({ selectedModels }: UseDownloadUrlOptions) => {
     const section = useSchemaSectionHandleOrThrow()
     const { baseUrl } = useConfig()
     const {
@@ -42,10 +52,11 @@ export const useDownloadUrl = (
     const { filter: filterParams } = useParamsForDataQuery()
     return getDownloadLink({
         baseUrl,
-        download: downloadParam,
+        download: true,
         filters: filter === 'all' ? [] : filterParams,
         model: section.namePlural,
         sharing: includeSharing,
         compression,
+        selected: selectedModels,
     })
 }

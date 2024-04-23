@@ -10,28 +10,19 @@ import React from 'react'
 import { Field } from 'react-final-form'
 import { useModelSectionHandleOrThrow } from '../../../lib'
 import css from './DownloadDialog.module.css'
-import { useDownloadFormState } from './DownloadForm'
 import { useDownloadTotalQuery } from './useDownloadTotalQuery'
 
 type DownloadDialogContentProps = {
-    children?: React.ReactNode
     selectedModels: Set<string>
 }
 
 export const DownloadDialogContent = ({
-    children,
     selectedModels,
 }: DownloadDialogContentProps) => {
     const section = useModelSectionHandleOrThrow()
-    const {
-        values: { filter },
-    } = useDownloadFormState()
     // only used to get total number of selected fields
     const totalQuery = useDownloadTotalQuery({ withFilters: false })
     const totalWithFiltersQuery = useDownloadTotalQuery({ withFilters: true })
-
-    const downloadTotal =
-        filter === 'selected' ? selectedModels.size : totalQuery.data || 0
 
     return (
         <>
@@ -56,7 +47,7 @@ export const DownloadDialogContent = ({
                         <Field<string | undefined>
                             name="compression"
                             component={RadioFieldFF}
-                            value="gzip"
+                            value="gz"
                             label="Gzip"
                             type="radio"
                         />

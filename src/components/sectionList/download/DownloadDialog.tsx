@@ -2,7 +2,7 @@ import { Button, ButtonStrip, Modal, ModalActions } from '@dhis2/ui'
 import React from 'react'
 import { LinkButton } from '../../LinkButton'
 import { DownloadDialogContent } from './DownloadDialogContent'
-import { DownloadForm } from './DownloadForm'
+import { DownloadFormWrapper } from './DownloadForm'
 import { useDownloadUrl } from './useDownloadUrl'
 
 type DownloadDialogProps = {
@@ -16,16 +16,16 @@ export const DownloadDialog = ({
 }: DownloadDialogProps) => {
     return (
         <Modal onClose={onClose}>
-            <DownloadForm>
+            <DownloadFormWrapper>
                 <DownloadDialogContent selectedModels={selectedModels} />
-                <Actions onClose={onClose} />
-            </DownloadForm>
+                <Actions onClose={onClose} selectedModels={selectedModels} />
+            </DownloadFormWrapper>
         </Modal>
     )
 }
 
-const Actions = ({ onClose }: { onClose: () => void }) => {
-    const downloadUrl = useDownloadUrl()
+const Actions = ({ onClose, selectedModels }: DownloadDialogProps) => {
+    const downloadUrl = useDownloadUrl({ selectedModels })
     return (
         <ModalActions>
             <ButtonStrip>

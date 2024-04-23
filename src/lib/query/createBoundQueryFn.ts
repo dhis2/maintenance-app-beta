@@ -1,10 +1,5 @@
 import { useDataEngine } from '@dhis2/app-runtime'
-import {
-    useQuery,
-    useMutation,
-    useQueryClient,
-    QueryFunctionContext,
-} from 'react-query'
+import { QueryFunctionContext } from 'react-query'
 import type { Query } from '../../types'
 
 type DataEngine = ReturnType<typeof useDataEngine>
