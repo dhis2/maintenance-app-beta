@@ -1,0 +1,12 @@
+
+.downloadForm {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp16);
+}
+
+.horizontalRadio div {
+    display: flex;
+    gap: var(--spacers-dp16);
+}
+

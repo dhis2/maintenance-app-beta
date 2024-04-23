@@ -3,7 +3,7 @@ import { SharingDialog } from '@dhis2/ui'
 import React, { useCallback, useState } from 'react'
 import { BaseListModel, canEditModel, useSchemaFromHandle } from '../../lib'
 import { Pager, ModelCollection } from '../../types/models'
-import { SectionListHeaderBulk } from './bulk'
+import { ToolbarSelected } from './bulk'
 import { DetailsPanel, DefaultDetailsPanelContent } from './detailsPanel'
 import { FilterWrapper } from './filters/FilterWrapper'
 import { DefaultListActions } from './listActions'
@@ -11,12 +11,12 @@ import { useModelListView } from './listView'
 import { ModelValue } from './modelValue/ModelValue'
 import { SectionList } from './SectionList'
 import css from './SectionList.module.css'
-import { SectionListHeader } from './SectionListHeaderNormal'
 import { SectionListLoader } from './SectionListLoader'
 import { SectionListEmpty, SectionListError } from './SectionListMessages'
 import { SectionListPagination } from './SectionListPagination'
 import { SectionListRow } from './SectionListRow'
 import { SectionListTitle } from './SectionListTitle'
+import { Toolbar } from './toolbar'
 import { SelectedColumn } from './types'
 import { useSelectedModels } from './useSelectedModels'
 
@@ -112,14 +112,10 @@ export const SectionListWrapper = ({
             <SectionListTitle />
             <FilterWrapper />
             <div className={css.listDetailsWrapper}>
-                {selectedModels.size > 0 ? (
-                    <SectionListHeaderBulk
-                        selectedModels={selectedModels}
-                        onDeselectAll={clearAll}
-                    />
-                ) : (
-                    <SectionListHeader />
-                )}
+                <Toolbar
+                    selectedModels={selectedModels}
+                    onDeselectAll={clearAll}
+                />
                 <SectionList
                     headerColumns={headerColumns}
                     onSelectAll={handleSelectAll}

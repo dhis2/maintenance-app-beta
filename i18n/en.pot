@@ -132,15 +132,6 @@ msgstr "Option set"
 msgid "Actions"
 msgstr "Actions"
 
-msgid "New"
-msgstr "New"
-
-msgid "Download"
-msgstr "Download"
-
-msgid "Manage View"
-msgstr "Manage View"
-
 msgid "There aren't any items that match your filter."
 msgstr "There aren't any items that match your filter."
 
@@ -198,12 +189,6 @@ msgstr "Update sharing for {{number}} items"
 msgid "Update sharing"
 msgstr "Update sharing"
 
-msgid "{{number}} selected"
-msgstr "{{number}} selected"
-
-msgid "Deselect all"
-msgstr "Deselect all"
-
 msgid "Created by"
 msgstr "Created by"
 
@@ -236,6 +221,9 @@ msgstr "Details"
 
 msgid "Failed to load details"
 msgstr "Failed to load details"
+
+msgid "Download {{number}} {{section}}"
+msgstr "Download {{number}} {{section}}"
 
 msgid "Clear all filters"
 msgstr "Clear all filters"
@@ -326,6 +314,21 @@ msgstr "Public can view"
 
 msgid "Public cannot access"
 msgstr "Public cannot access"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "New"
+msgstr "New"
+
+msgid "Manage View"
+msgstr "Manage View"
+
+msgid "{{number}} selected"
+msgstr "{{number}} selected"
+
+msgid "Deselect all"
+msgstr "Deselect all"
 
 msgid "Can edit and capture"
 msgstr "Can edit and capture"
