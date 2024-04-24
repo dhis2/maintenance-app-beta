@@ -28,10 +28,9 @@ export const useDownloadTotalQuery = (
         total: {
             resource: `${section.namePlural}.json`,
             params: {
-                ...((mergedOptions.withFilters && {
+                ...(mergedOptions.withFilters && {
                     filter: selectedFilters,
-                }) ||
-                    undefined),
+                }),
                 pageSize: 1,
                 fields: 'id',
             },
