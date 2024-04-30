@@ -1,37 +1,30 @@
 import {
     Button,
     Checkbox,
-    DataTable,
     DataTableCell,
     DataTableRow,
     IconChevronDown16,
     IconChevronRight16,
 } from '@dhis2/ui'
 import {
-    Column,
-    Table,
     ExpandedState,
     useReactTable,
     getCoreRowModel,
-    getPaginationRowModel,
-    getFilteredRowModel,
     getExpandedRowModel,
     ColumnDef,
     flexRender,
 } from '@tanstack/react-table'
 import React, { useMemo, useState } from 'react'
-import { SectionList, SectionListRow } from '../../../components'
+import { SectionList } from '../../../components'
 import { FilterWrapper } from '../../../components/sectionList/filters/FilterWrapper'
-import { DefaultListActions } from '../../../components/sectionList/listActions'
+import { useModelListView } from '../../../components/sectionList/listView'
+import { ModelValue } from '../../../components/sectionList/modelValue/ModelValue'
+import { SectionListHeader } from '../../../components/sectionList/SectionListHeaderNormal'
 import { SectionListTitle } from '../../../components/sectionList/SectionListTitle'
+import { ModelPropertyDescriptor, useSchemaFromHandle } from '../../../lib'
 import { OrganisationUnit } from '../../../types/generated'
-import {
-    UseRootOrganisationUnit,
-    useExpandedOrgUnits,
-    useRootOrganisationUnit,
-} from './useRootOrganisationUnit'
+import { useExpandedOrgUnits } from './useRootOrganisationUnit'
 
-type PartialChildren = Partial<Pick<OrganisationUnit, 'children'>>
 export type OrganisationUnitListItem = Pick<
     OrganisationUnit,
     'id' | 'displayName' | 'access' | 'children' | 'path' | 'level' | 'parent'
@@ -40,48 +33,58 @@ export type OrganisationUnitListItem = Pick<
 }
 
 const useColumns = () => {
-    const columns: ColumnDef<OrganisationUnitListItem>[] = [
-        // {
-        //     id: 'checkbox',
-        //     // accessorKey: 'checkbox',
-        //     header: ({ table }) => (
-        //         <Checkbox
-        //             checked={table.getIsAllRowsSelected()}
-        //             onChange={() => table.getToggleAllRowsSelectedHandler()}
-        //         />
-        //     ),
-        // },
-        {
-            header: 'DisplayName',
-            accessorKey: 'displayName',
-            cell: ({ row, getValue }) => getValue<string>(),
-        },
-        {
-            accessorKey: 'id',
-            header: 'id',
-            cell: (cell) => cell.getValue(),
-        },
-    ]
+    const { columns: selectedColumns } = useModelListView()
+    const schema = useSchemaFromHandle()
 
-    return columns
+    const columnDefinitions: ColumnDef<OrganisationUnitListItem>[] = useMemo(
+        () =>
+            selectedColumns.map((descriptor) => {
+                return {
+                    accessorKey: descriptor.path,
+                    header: descriptor.label,
+                    cell: ({ row }) => {
+                        console.log({ orgin: row.original })
+                        return (
+                            <ModelValue
+                                path={
+                                    descriptor.path === 'name'
+                                        ? 'displayName'
+                                        : descriptor.path
+                                }
+                                schema={schema}
+                                sectionModel={row.original}
+                            />
+                        )
+                    },
+                }
+            }),
+        [selectedColumns, schema]
+    )
+
+    return {
+        columnDefinitions,
+        selectedColumns,
+    }
 }
 
 export const OrganisationUnitList = () => {
     //  const rootQuery = useRootOrganisationUnit()
     //  rootQuery.data
-    const columns = useColumns()
+
+    const { columnDefinitions, selectedColumns } = useColumns()
     //console.log(rootQuery)
 
     const [expanded, setExpanded] = useState<ExpandedState>({
         //  ImspTQPwCqd: true,
     })
-
+    const headers = columnDefinitions.map((c) => c.header)
     console.log({ expanded })
-    const expandedQueries = useExpandedOrgUnits({ expanded })
+    const expandedQueries = useExpandedOrgUnits({
+        expanded,
+        fieldFilters: selectedColumns.map((c) => c.path),
+    })
     const data = useMemo(
-        () =>
-            expandedQueries.filter((q) => q.isSuccess).map((q) => q.data!) ??
-            [],
+        () => expandedQueries.filter((q) => !!q.data).map((q) => q.data!) ?? [],
         [expandedQueries]
     )
 
@@ -89,7 +92,7 @@ export const OrganisationUnitList = () => {
 
     console.log({ data, rootData })
     const table = useReactTable({
-        columns,
+        columns: columnDefinitions,
         data: rootData ?? [],
         getRowId: (row) => row.id,
         getCoreRowModel: getCoreRowModel<OrganisationUnitListItem>(),
@@ -119,6 +122,7 @@ export const OrganisationUnitList = () => {
 
         getExpandedRowModel: getExpandedRowModel(),
         onExpandedChange: setExpanded,
+
         state: {
             expanded,
         },
@@ -132,6 +136,8 @@ export const OrganisationUnitList = () => {
     return (
         <div>
             <SectionListTitle />
+            <FilterWrapper />
+            <SectionListHeader />
             {/* <FilterWrapper /> */}
             <SectionList
                 allSelected={table.getIsAllRowsSelected()}
@@ -155,6 +161,10 @@ export const OrganisationUnitList = () => {
                                         <Button
                                             secondary
                                             type="button"
+                                            loading={
+                                                row.getIsExpanded() &&
+                                                row.subRows.length < 1
+                                            }
                                             icon={
                                                 row.getIsExpanded() ? (
                                                     <IconChevronDown16 />
@@ -164,7 +174,12 @@ export const OrganisationUnitList = () => {
                                             }
                                             // onClick={row.getToggleExpandedHandler()}
                                             onClick={() => row.toggleExpanded()}
-                                        />
+                                        >
+                                            {/* {row.getIsExpanded() &&
+                                            row.subRows.length < 1
+                                                ? 'loading'
+                                                : null} */}
+                                        </Button>
                                     ) : null}{' '}
                                     <Checkbox
                                         checked={row.getIsSelected()}

@@ -97,4 +97,13 @@ export const modelListViewsConfig = {
             available: [DESCRIPTORS.publicAccess],
         },
     },
+    organisationUnit: {
+        columns: {
+            available: [],
+            default: ['name', 'id', 'code', 'lastUpdated'],
+        },
+        filters: {
+            default: [],
+        },
+    },
 } satisfies SectionListViewConfig

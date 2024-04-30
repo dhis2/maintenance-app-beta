@@ -23,6 +23,7 @@ const orgUnitFields = [
     'level',
     'path',
     'parent',
+    'ancestors[id,displayName,level,path]',
     'children[id,displayName,access,parent,level, path,children~isNotEmpty~rename(hasChildren)]',
 ]
 const rootOrgUnitQuery = {
@@ -58,8 +59,10 @@ export const useRootOrganisationUnit = () => {
 
 export const useExpandedOrgUnits = ({
     expanded,
+    fieldFilters,
 }: {
     expanded: ExpandedState
+    fieldFilters: string[]
 }) => {
     const rootOrgUnits = useRootOrganisationUnit()
 
@@ -76,7 +79,7 @@ export const useExpandedOrgUnits = ({
                     resource: 'organisationUnits',
                     id,
                     params: {
-                        fields: orgUnitFields,
+                        fields: orgUnitFields.concat(fieldFilters),
                         // filter: `parent.id:eq:${id}`,
                         // sort: 'displayName:desc',
                     },
