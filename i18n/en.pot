@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-20T01:08:59.818Z\n"
-"PO-Revision-Date: 2024-03-20T01:08:59.818Z\n"
+"POT-Creation-Date: 2024-04-30T06:34:26.402Z\n"
+"PO-Revision-Date: 2024-04-30T06:34:26.402Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -74,6 +74,12 @@ msgstr "Save and close"
 
 msgid "<No value>"
 msgstr "<No value>"
+
+msgid "Custom attributes"
+msgstr "Custom attributes"
+
+msgid "Custom fields for your DHIS2 instance"
+msgstr "Custom fields for your DHIS2 instance"
 
 msgid "Code"
 msgstr "Code"
@@ -759,9 +765,6 @@ msgstr "This field requires a unique value, please choose another one"
 msgid "Required"
 msgstr "Required"
 
-msgid "Custom attributes"
-msgstr "Custom attributes"
-
 msgid "Exit without saving"
 msgstr "Exit without saving"
 
@@ -792,20 +795,8 @@ msgstr "Set up the information for this data element group"
 msgid "Explain the purpose of this data element group."
 msgstr "Explain the purpose of this data element group."
 
-msgid "@TODO"
-msgstr "@TODO"
-
-msgid "Custom fields for your DHIS2 instance"
-msgstr "Custom fields for your DHIS2 instance"
-
 msgid "Selected data elements"
 msgstr "Selected data elements"
-
-msgid "Explain the purpose of this data element and how it's measured."
-msgstr "Explain the purpose of this data element and how it's measured."
-
-msgid "A data element name should be concise and easy to recognize."
-msgstr "A data element name should be concise and easy to recognize."
 
 msgid "Create data element"
 msgstr "Create data element"
@@ -896,8 +887,8 @@ msgstr "Disaggregation and Option sets"
 msgid "Set up disaggregation and predefined options."
 msgstr "Set up disaggregation and predefined options."
 
-msgid "LegendSet"
-msgstr "LegendSet"
+msgid "Legend set"
+msgstr "Legend set"
 
 msgid ""
 "Visualize values for this data element in Analytics app. Multiple legendSet "

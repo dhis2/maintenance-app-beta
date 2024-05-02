@@ -69,7 +69,7 @@ jobs:
               run: yarn d2-app-scripts test --coverage
 
             - name: Upload coverage to Codecov
-              uses: codecov/codecov-action@v1
+              uses: codecov/codecov-action@v3
 
     e2e:
         runs-on: ubuntu-latest
@@ -98,8 +98,8 @@ jobs:
                   BROWSER: none
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-                  CYPRESS_dhis2BaseUrl: https://debug.dhis2.org/dev
+                  CYPRESS_dhis2BaseUrl: https://debug.dhis2.org/2.41dev
                   CYPRESS_dhis2Username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
                   CYPRESS_dhis2Password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
-                  CYPRESS_dhis2ApiVersion: 40
+                  CYPRESS_dhis2ApiVersion: 41
                   CYPRESS_networkMode: live
