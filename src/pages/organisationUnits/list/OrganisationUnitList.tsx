@@ -13,21 +13,39 @@ import {
     getExpandedRowModel,
     ColumnDef,
     flexRender,
+    Row,
 } from '@tanstack/react-table'
 import React, { useMemo, useState } from 'react'
-import { SectionList } from '../../../components'
-import { FilterWrapper } from '../../../components/sectionList/filters/FilterWrapper'
+import { IdentifiableFilter, SectionList } from '../../../components'
 import { useModelListView } from '../../../components/sectionList/listView'
 import { ModelValue } from '../../../components/sectionList/modelValue/ModelValue'
 import { SectionListHeader } from '../../../components/sectionList/SectionListHeaderNormal'
 import { SectionListTitle } from '../../../components/sectionList/SectionListTitle'
-import { ModelPropertyDescriptor, useSchemaFromHandle } from '../../../lib'
+import {
+    SchemaName,
+    useFilterQueryParams,
+    useSchema,
+    useSchemaFromHandle,
+} from '../../../lib'
 import { OrganisationUnit } from '../../../types/generated'
-import { useExpandedOrgUnits } from './useRootOrganisationUnit'
+import css from './OrganisationUnitList.module.css'
+import {
+    useExpandedOrgUnits,
+    useOrganisationUnits,
+} from './useRootOrganisationUnit'
+import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
+import { getFieldFilter } from '../../../lib/models/path'
 
 export type OrganisationUnitListItem = Pick<
     OrganisationUnit,
-    'id' | 'displayName' | 'access' | 'children' | 'path' | 'level' | 'parent'
+    | 'id'
+    | 'displayName'
+    | 'access'
+    | 'children'
+    | 'path'
+    | 'level'
+    | 'parent'
+    | 'ancestors'
 > & {
     hasChildren?: boolean
 }
@@ -68,32 +86,74 @@ const useColumns = () => {
 }
 
 export const OrganisationUnitList = () => {
-    //  const rootQuery = useRootOrganisationUnit()
-    //  rootQuery.data
-
     const { columnDefinitions, selectedColumns } = useColumns()
-    //console.log(rootQuery)
+    const filters = useFilterQueryParams()
 
-    const [expanded, setExpanded] = useState<ExpandedState>({
-        //  ImspTQPwCqd: true,
-    })
-    const headers = columnDefinitions.map((c) => c.header)
-    console.log({ expanded })
-    const expandedQueries = useExpandedOrgUnits({
-        expanded,
-        fieldFilters: selectedColumns.map((c) => c.path),
-    })
-    const data = useMemo(
-        () => expandedQueries.filter((q) => !!q.data).map((q) => q.data!) ?? [],
-        [expandedQueries]
+    const rootOrgUnits = useCurrentUserRootOrgUnits()
+    const rootOrgUnitsSet = useMemo(
+        () => new Set(rootOrgUnits.map((ou) => ou.id)),
+        [rootOrgUnits]
+    )
+    const schema = useSchema(SchemaName.organisationUnit)
+
+    const [expanded, setExpanded] = useState<ExpandedState>(() =>
+        Object.fromEntries(rootOrgUnits.map((ou) => [ou.id, true]))
     )
 
-    const rootData = useMemo(() => data.filter((d) => d.level === 1), [data])
+    const orgUnitQueries = useOrganisationUnits({
+        ids: Object.keys(expanded),
+        fieldFilters: selectedColumns.map((column) =>
+            getFieldFilter(schema, column.path)
+        ),
+        filters,
+    })
+    console.log({ orgUnits: orgUnitQueries })
+    // const expandedQueries = useExpandedOrgUnits({
+    //     expanded: expanded,
+    //     fieldFilters: selectedColumns.map((column) =>
+    //         getFieldFilter(schema, column.path)
+    //     ),
+    // })
+    // const data = useMemo(
+    //     () => expandedQueries.filter((q) => !!q.data).map((q) => q.data!) ?? [],
+    //     [expandedQueries]
+    // )
 
-    console.log({ data, rootData })
+    const allOrgUnits = useMemo(
+        () =>
+            orgUnitQueries
+                .filter((q) => !!q.data)
+                .flatMap((q) => q.data.organisationUnits!) ?? [],
+        [orgUnitQueries]
+    )
+    const rootData = useMemo(
+        () =>
+            orgUnitQueries
+                .filter((d) => d.data?.queryContext.parent === undefined)
+                .flatMap((d) => d.data?.organisationUnits ?? []),
+        [orgUnitQueries]
+    )
+
+    const flatAncestors = useMemo(() => {
+        if (filters.length < 1) {
+            return []
+        }
+        const ancestors = allOrgUnits
+            .filter((ou) => ou.ancestors.length > 0)
+            .flatMap((ou) => ou.ancestors)
+        // .filter((ou) => ou.level === 1)
+        return Array.from(new Map(ancestors.map((a) => [a.id, a])).values())
+    }, [allOrgUnits, filters])
+
+    const tree =
+        filters.length > 0
+            ? flatAncestors.filter((a) => a.level === 1)
+            : rootData
+    console.log({ ddata: allOrgUnits, rootData, tree, flatAncestors })
     const table = useReactTable({
         columns: columnDefinitions,
-        data: rootData ?? [],
+        // columns
+        data: tree ?? [],
         getRowId: (row) => row.id,
         getCoreRowModel: getCoreRowModel<OrganisationUnitListItem>(),
         getRowCanExpand: (row) => {
@@ -104,20 +164,25 @@ export const OrganisationUnitList = () => {
                 !!row.original.hasChildren
             )
         },
-        getSubRows: (row) => {
-            console.log({ data })
-            const dfilter = data
-                .filter((d) => d?.id === row.id)
-                .flatMap((d) => d.children)
-            console.log({ dfilter })
-            return dfilter
-            return data.filter((d) => d.id === row.id)
-            const expandedRows =
-                expandedQueries.find((q) => q.data?.result.id === row.id)?.data
-                    ?.result.children ?? []
 
-            console.log('subrows', row.children, expandedRows)
-            return row.children?.concat(expandedRows)
+        getSubRows: (row) => {
+            if (filters.length > 0) {
+                return flatAncestors.filter((ou) => ou.parent?.id === row.id)
+                // .map((ou) => ou.children)
+            }
+            const isRoot = rootOrgUnitsSet.has(row.id)
+            if (isRoot) {
+                return rootData
+                    .filter((d) => d?.id === row.id)
+                    .flatMap((d) => d.children)
+            }
+
+            return orgUnitQueries
+                .filter((q) => q.data?.queryContext.parent === row.id)
+                .flatMap((q) => q.data?.organisationUnits ?? [])
+            // return ddata
+            //     .filter((d) => d?.id === row.id)
+            //     .flatMap((d) => d.children)
         },
 
         getExpandedRowModel: getExpandedRowModel(),
@@ -136,9 +201,8 @@ export const OrganisationUnitList = () => {
     return (
         <div>
             <SectionListTitle />
-            <FilterWrapper />
+            <IdentifiableFilter />
             <SectionListHeader />
-            {/* <FilterWrapper /> */}
             <SectionList
                 allSelected={table.getIsAllRowsSelected()}
                 headerColumns={table.getHeaderGroups()[0].headers.map((h) => ({
@@ -147,68 +211,75 @@ export const OrganisationUnitList = () => {
                 }))}
                 onSelectAll={() => table.toggleAllRowsSelected()}
             >
-                {table.getRowModel().rows.map((row) => {
-                    return (
-                        <DataTableRow key={row.id}>
-                            <DataTableCell>
-                                <span
-                                    style={{
-                                        paddingLeft: `${row.depth * 2}rem`,
-                                        display: 'flex',
-                                    }}
-                                >
-                                    {row.getCanExpand() ? (
-                                        <Button
-                                            secondary
-                                            type="button"
-                                            loading={
-                                                row.getIsExpanded() &&
-                                                row.subRows.length < 1
-                                            }
-                                            icon={
-                                                row.getIsExpanded() ? (
-                                                    <IconChevronDown16 />
-                                                ) : (
-                                                    <IconChevronRight16 />
-                                                )
-                                            }
-                                            // onClick={row.getToggleExpandedHandler()}
-                                            onClick={() => row.toggleExpanded()}
-                                        >
-                                            {/* {row.getIsExpanded() &&
-                                            row.subRows.length < 1
-                                                ? 'loading'
-                                                : null} */}
-                                        </Button>
-                                    ) : null}{' '}
-                                    <Checkbox
-                                        checked={row.getIsSelected()}
-                                        onChange={({ checked }) =>
-                                            row.toggleSelected(checked)
-                                        }
-                                    />
-                                </span>
-                            </DataTableCell>
-                            {row.getVisibleCells().map((cell) => {
-                                return (
-                                    <DataTableCell key={cell.id}>
-                                        {flexRender(
-                                            cell.column.columnDef.cell,
-                                            cell.getContext()
-                                        )}
-                                    </DataTableCell>
-                                )
-                            })}
-                            <DataTableCell>
-                                {/* <DefaultListActions
-                                    model={row.original}
-                                    onShowDetailsClick={() => undefined}
-                                /> */}
-                            </DataTableCell>
-                        </DataTableRow>
-                    )
-                })}
+                {table.getRowModel().rows.map((row) => (
+                    <OrganisationUnitRowSimple key={row.id} row={row} />
+                ))}
             </SectionList>
         </div>
+    )
+}
+
+// const OrganisationUnitRow = ({ row, filters }: { row: Row<OrganisationUnitListItem> }) => {
+//     if(row.)
+// }
+// const OrganisationUnitRowWithAncestors = (
+//     row: Row<OrganisationUnitListItem>
+// ) => return
+
+const OrganisationUnitRowSimple = ({
+    row,
+}: {
+    row: Row<OrganisationUnitListItem>
+}) => {
+    return (
+        <DataTableRow key={row.id}>
+            <DataTableCell>
+                <span
+                    style={{
+                        paddingLeft: `${row.depth * 2}rem`,
+                        display: 'flex',
+                    }}
+                >
+                    {row.getCanExpand() ? (
+                        <Button
+                            className={css.expandButton}
+                            secondary
+                            type="button"
+                            loading={
+                                row.getIsExpanded() && row.subRows.length < 1
+                            }
+                            icon={
+                                row.getIsExpanded() ? (
+                                    <IconChevronDown16 />
+                                ) : (
+                                    <IconChevronRight16 />
+                                )
+                            }
+                            onClick={row.getToggleExpandedHandler()}
+                        ></Button>
+                    ) : null}{' '}
+                    <Checkbox
+                        checked={row.getIsSelected()}
+                        onChange={({ checked }) => row.toggleSelected(checked)}
+                    />
+                </span>
+            </DataTableCell>
+            {row.getVisibleCells().map((cell) => {
+                return (
+                    <DataTableCell key={cell.id}>
+                        {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                        )}
+                    </DataTableCell>
+                )
+            })}
+            <DataTableCell>
+                {/* <DefaultListActions
+            model={row.original}
+            onShowDetailsClick={() => undefined}
+        /> */}
+            </DataTableCell>
+        </DataTableRow>
     )
 }

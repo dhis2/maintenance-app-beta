@@ -1,7 +1,7 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import { useMemo } from 'react'
 import { QueryFunctionContext } from 'react-query'
-import type { DataEngine, Query } from '../../types'
+import type { DataEngine, Query, ResourceQuery } from '../../types'
 // types not exported from app-runtime...
 
 export const createBoundQueryFn =
@@ -13,4 +13,21 @@ export const useBoundQueryFn = () => {
     const dataEngine = useDataEngine()
 
     return useMemo(() => createBoundQueryFn(dataEngine), [dataEngine])
+}
+
+export const createBoundResourceQueryFn =
+    (engine: DataEngine) =>
+    async <TData>({
+        queryKey: [query],
+        signal,
+    }: QueryFunctionContext<[ResourceQuery]>) => {
+        const result = await engine.query({ result: query }, { signal })
+        console.log('res', result)
+        return result.result as TData
+    }
+
+export const useBoundResourceQueryFn = () => {
+    const dataEngine = useDataEngine()
+
+    return useMemo(() => createBoundResourceQueryFn(dataEngine), [dataEngine])
 }

@@ -9,12 +9,15 @@ import {
 import {
     createBoundQueryFn,
     useBoundQueryFn,
+    useBoundResourceQueryFn,
 } from '../../../lib/query/useBoundQueryFn'
 import { WrapQueryResponse } from '../../../types'
 import { OrganisationUnitListItem } from './OrganisationUnitList'
 import { replace } from 'lodash'
 import { ExpandedState } from '@tanstack/react-table'
 import { WrapperComponent } from '@testing-library/react-hooks'
+import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
+import { PagedResponse } from '../../../types/generated'
 
 const orgUnitFields = [
     'id',
@@ -23,7 +26,7 @@ const orgUnitFields = [
     'level',
     'path',
     'parent',
-    'ancestors[id,displayName,level,path]',
+    'ancestors[id,displayName,level,path,parent,children[id,displayName,level,path,children]]',
     'children[id,displayName,access,parent,level, path,children~isNotEmpty~rename(hasChildren)]',
 ]
 const rootOrgUnitQuery = {
@@ -37,38 +40,94 @@ const rootOrgUnitQuery = {
     },
 } as const
 
-type OrganisationUnitResponse = WrapQueryResponse<{
-    organisationUnits: OrganisationUnitListItem[]
-}>
+type OrganisationUnitResponse = PagedResponse<
+    OrganisationUnitListItem,
+    'organisationUnits'
+>
 
-export const useRootOrganisationUnit = () => {
-    const dataEngine = useDataEngine()
-    const queryClient = useQueryClient()
-    const queryFn = useBoundQueryFn()
-    const query = useQuery({
-        queryKey: [rootOrgUnitQuery],
-        queryFn: queryFn<OrganisationUnitResponse>,
-        select: (data) => {
-            return data.result.organisationUnits // || []
-        },
-        staleTime: Infinity,
-        cacheTime: Infinity,
-    })
-    return query
+type OrganisationUnitResponseWithQueryContext = OrganisationUnitResponse & {
+    queryContext: {
+        parent: string | undefined
+    }
 }
 
-export const useExpandedOrgUnits = ({
-    expanded,
-    fieldFilters,
-}: {
-    expanded: ExpandedState
+type UseOrganisationUnitOptions = {
+    ids: string[]
     fieldFilters: string[]
-}) => {
-    const rootOrgUnits = useRootOrganisationUnit()
+    filters?: string[]
+}
+export const useOrganisationUnits = ({
+    ids,
+    fieldFilters,
+    filters,
+}: UseOrganisationUnitOptions) => {
+    const boundQueryFn = useBoundResourceQueryFn()
+    const rootOrgUnits = useCurrentUserRootOrgUnits()
 
+    const rootOrgUnitsSet = useMemo(
+        () => new Set(rootOrgUnits.map((ou) => ou.id)),
+        [rootOrgUnits]
+    )
+
+    const deduplicatedIds = useMemo(() => {
+        console.log({ ids })
+        return Array.from(new Set([...ids, ...rootOrgUnitsSet]))
+    }, [ids, rootOrgUnitsSet])
+
+    console.log({ deduplicatedIds })
+    const queryObjects = deduplicatedIds.map((id) => {
+        const isRoot = rootOrgUnitsSet.has(id)
+        const expandedFilter = isRoot ? `id:eq:${id}` : `parent.id:eq:${id}`
+        const filter = filters && filters.length > 0 ? filters : expandedFilter
+        console.log({ filter, filters })
+        const resourceQuery = {
+            resource: 'organisationUnits',
+            params: {
+                fields: orgUnitFields.concat(fieldFilters),
+                filter,
+            },
+        } as const
+        const options: UseQueryOptions<
+            OrganisationUnitResponseWithQueryContext,
+            unknown,
+            OrganisationUnitResponseWithQueryContext,
+            [typeof resourceQuery]
+        > = {
+            queryKey: [resourceQuery],
+            queryFn: (queryOptions) =>
+                boundQueryFn<OrganisationUnitResponse>(queryOptions).then(
+                    (response) => ({
+                        ...response,
+                        queryContext: {
+                            parent: isRoot ? undefined : id,
+                        },
+                    })
+                ), // queryFn<OrganisationUnitResponse>,
+
+            keepPreviousData: true,
+            staleTime: Infinity,
+            cacheTime: Infinity,
+        }
+        return options
+    })
+
+    console.log({ queryObjects })
+    const qs = useQueries(queryObjects)
+    return qs
+    // return qs.map(q => q.data?.queryContext.parent)
+}
+
+export const useExpandedOrgUnits = (
+    {
+        expanded,
+        fieldFilters,
+    }: {
+        expanded: ExpandedState
+        fieldFilters: string[]
+    } = { expanded: {}, fieldFilters: [] }
+) => {
     const queryFn = useBoundQueryFn()
     const queryObjects = Object.entries(expanded)
-        .concat(rootOrgUnits.data?.map(({ id }) => [id, true]) ?? [])
         .filter(
             ([id, expanded], index, arr) =>
                 !!expanded && arr.findIndex(([i]) => i === id) === index
@@ -80,8 +139,6 @@ export const useExpandedOrgUnits = ({
                     id,
                     params: {
                         fields: orgUnitFields.concat(fieldFilters),
-                        // filter: `parent.id:eq:${id}`,
-                        // sort: 'displayName:desc',
                     },
                 },
             } as const
