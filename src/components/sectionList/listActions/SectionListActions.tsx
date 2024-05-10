@@ -7,6 +7,7 @@ import {
     IconMore16,
     IconMore24,
     IconShare16,
+    IconTranslate16,
     MenuItem,
     Popover,
 } from '@dhis2/ui'
@@ -33,17 +34,21 @@ export const ActionEdit = ({ modelId }: { modelId: string }) => {
 type ActionMoreProps = {
     deletable: boolean
     editable: boolean
+    translatable: boolean
     model: BaseListModel
     onShowDetailsClick: () => void
     onOpenSharingClick: () => void
+    onTranslateClick: () => void
     onDeleteSuccess: () => void
 }
 export const ActionMore = ({
     deletable,
     editable,
+    translatable,
     model,
     onOpenSharingClick,
     onShowDetailsClick,
+    onTranslateClick,
     onDeleteSuccess,
 }: ActionMoreProps) => {
     const [open, setOpen] = useState(false)
@@ -105,7 +110,17 @@ export const ActionMore = ({
                                 }}
                             />
                         </TooltipWrapper>
-
+                        {translatable && (
+                            <MenuItem
+                                dense
+                                label={i18n.t('Translate')}
+                                icon={<IconTranslate16 />}
+                                onClick={() => {
+                                    onTranslateClick()
+                                    setOpen(false)
+                                }}
+                            />
+                        )}
                         <TooltipWrapper
                             condition={!deletable}
                             content={TOOLTIPS.noDeleteAccess}

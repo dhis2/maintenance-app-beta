@@ -19,6 +19,7 @@ import { SectionListTitle } from './SectionListTitle'
 import { Toolbar } from './toolbar'
 import { SelectedColumn } from './types'
 import { useSelectedModels } from './useSelectedModels'
+import { TranslationDialog } from './translation'
 
 type SectionListWrapperProps = {
     data: ModelCollection<BaseListModel> | undefined
@@ -35,10 +36,14 @@ export const SectionListWrapper = ({
 }: SectionListWrapperProps) => {
     const { columns: headerColumns } = useModelListView()
     const schema = useSchemaFromHandle()
+
     const { selectedModels, checkAllSelected, add, remove, toggle, clearAll } =
         useSelectedModels()
     const [detailsId, setDetailsId] = useState<string | undefined>()
     const [sharingDialogId, setSharingDialogId] = useState<string | undefined>()
+    const [translationDialogModel, setTranslationDialogModel] = useState<
+        BaseListModel | undefined
+    >(undefined)
 
     const SectionListMessage = () => {
         if (error) {
@@ -100,6 +105,7 @@ export const SectionListWrapper = ({
                 onShowDetailsClick={handleDetailsClick}
                 onOpenSharingClick={setSharingDialogId}
                 onDeleteSuccess={refetch}
+                onOpenTranslationClick={setTranslationDialogModel}
             />
         ),
         [handleDetailsClick, setSharingDialogId, refetch]
@@ -155,6 +161,12 @@ export const SectionListWrapper = ({
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     type={schema.singular as any}
                     onClose={() => setSharingDialogId(undefined)}
+                />
+            )}
+            {translationDialogModel && (
+                <TranslationDialog
+                    model={translationDialogModel}
+                    onClose={() => setTranslationDialogModel(undefined)}
                 />
             )}
         </div>
