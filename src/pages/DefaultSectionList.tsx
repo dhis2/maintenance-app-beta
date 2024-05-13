@@ -48,7 +48,6 @@ export const DefaultSectionList = () => {
                 error={error as FetchError | undefined}
                 data={modelList}
                 pager={data?.result.pager}
-                // key={schema.name}
             />
         </div>
     )
