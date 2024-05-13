@@ -3,7 +3,6 @@ import { SharingDialog } from '@dhis2/ui'
 import React, { useCallback, useState } from 'react'
 import { BaseListModel, canEditModel, useSchemaFromHandle } from '../../lib'
 import { Pager, ModelCollection } from '../../types/models'
-import { ToolbarSelected } from './bulk'
 import { DetailsPanel, DefaultDetailsPanelContent } from './detailsPanel'
 import { FilterWrapper } from './filters/FilterWrapper'
 import { DefaultListActions } from './listActions'
@@ -17,9 +16,9 @@ import { SectionListPagination } from './SectionListPagination'
 import { SectionListRow } from './SectionListRow'
 import { SectionListTitle } from './SectionListTitle'
 import { Toolbar } from './toolbar'
+import { TranslationDialog } from './translation'
 import { SelectedColumn } from './types'
 import { useSelectedModels } from './useSelectedModels'
-import { TranslationDialog } from './translation'
 
 type SectionListWrapperProps = {
     data: ModelCollection<BaseListModel> | undefined

@@ -9,8 +9,8 @@ import {
 } from '@dhis2/ui'
 import React from 'react'
 import { BaseListModel } from '../../../lib'
-import { TranslationFormContents } from './TranslationForm'
 import { WebLocale } from '../../../types/generated'
+import { TranslationFormContents } from './TranslationForm'
 
 type TranslationDialogProps = {
     onClose: () => void
@@ -28,17 +28,19 @@ export const TranslationDialog = ({
     })
 
     return (
-        <Modal onClose={onClose} large={true}>
+        <Modal onClose={onClose} large={true} position="middle">
             <ModalTitle>
                 {i18n.t('Translate {{modelName}}', {
                     modelName: model.displayName,
                 })}
             </ModalTitle>
+
             <ModalContent>
-                <p>Translate Model {model.displayName}</p>
                 <TranslationFormContents
                     model={model}
                     selectedLocale={selectedLocale}
+                    setSelectedLocale={setSelectedLocale}
+                    onClose={onClose}
                 />
                 {/**
                  * Selector for locale

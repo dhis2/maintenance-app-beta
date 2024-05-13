@@ -285,6 +285,9 @@ msgstr "Show details"
 msgid "Sharing settings"
 msgstr "Sharing settings"
 
+msgid "Translate"
+msgstr "Translate"
+
 msgid "At least one column must be selected"
 msgstr "At least one column must be selected"
 
@@ -338,6 +341,8 @@ msgstr "{{number}} selected"
 
 msgid "Deselect all"
 msgstr "Deselect all"
+msgid "Translate {{modelName}}"
+msgstr "Translate {{modelName}}"
 
 msgid "Can edit and capture"
 msgstr "Can edit and capture"
@@ -756,6 +761,9 @@ msgstr "GeoJSON"
 msgid "Favorite"
 msgstr "Favorite"
 
+msgid "Form name"
+msgstr "Form name"
+
 msgid "Domain type"
 msgstr "Domain type"
 
@@ -849,9 +857,6 @@ msgstr "Use a pattern to limit what information can be entered."
 
 msgid "e.g. 999-000-0000"
 msgstr "e.g. 999-000-0000"
-
-msgid "Form name"
-msgstr "Form name"
 
 msgid "An alternative name used in section or automatic data entry forms."
 msgstr "An alternative name used in section or automatic data entry forms."

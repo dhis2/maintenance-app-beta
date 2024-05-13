@@ -38,6 +38,7 @@ export const Component = () => {
     )
 
     useEffect(() => {
+        console.log(schema, 'schema')
         // wait to fetch until selected-columns are loaded
         // so we dont fetch data multiple times
         if (listViewQuery.isLoading) {
