@@ -32,6 +32,8 @@ const filterToQueryParamMap: FilterToQueryParamsMap = {
         section.name === SchemaName.dataElement
             ? inFilter('dataSetElements.dataSet.id', value)
             : defaultFilter('dataSet', value),
+    dataElement: (value) => inFilter('dataElements.id', value),
+    dataElementGroup: (value) => inFilter('dataElementGroups.id', value),
     publicAccess: (value) => inFilter('sharing.public', value),
 }
 

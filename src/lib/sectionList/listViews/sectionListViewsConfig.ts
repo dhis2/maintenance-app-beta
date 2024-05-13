@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import { SectionName } from '../../constants'
 import type { ConfigurableFilterKey } from '../filters'
 
 export interface ModelPropertyDescriptor {
@@ -29,8 +30,8 @@ export interface ViewConfigPart<TEntry> {
 }
 
 export interface ViewConfig {
-    columns: ViewConfigPart<ModelPropertyConfig>
-    filters: ViewConfigPart<FilterConfig>
+    columns?: ViewConfigPart<ModelPropertyConfig>
+    filters?: ViewConfigPart<FilterConfig>
 }
 
 // generic here is just used for "satisfies" below, for code-completion of future customizations
@@ -97,4 +98,26 @@ export const modelListViewsConfig = {
             available: [DESCRIPTORS.publicAccess],
         },
     },
-} satisfies SectionListViewConfig
+    dataElementGroup: {
+        columns: {},
+        filters: {
+            default: [
+                {
+                    label: i18n.t('Data element'),
+                    filterKey: 'dataElement',
+                },
+            ],
+        },
+    },
+    dataElementGroupSet: {
+        columns: {},
+        filters: {
+            default: [
+                {
+                    label: i18n.t('Data element group'),
+                    filterKey: 'dataElementGroup',
+                },
+            ],
+        },
+    },
+} satisfies SectionListViewConfig<SectionName>
