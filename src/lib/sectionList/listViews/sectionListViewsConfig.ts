@@ -30,8 +30,8 @@ export interface ViewConfigPart<TEntry> {
 }
 
 export interface ViewConfig {
-    columns?: ViewConfigPart<ModelPropertyConfig>
-    filters?: ViewConfigPart<FilterConfig>
+    columns: ViewConfigPart<ModelPropertyConfig>
+    filters: ViewConfigPart<FilterConfig>
 }
 
 // generic here is just used for "satisfies" below, for code-completion of future customizations
