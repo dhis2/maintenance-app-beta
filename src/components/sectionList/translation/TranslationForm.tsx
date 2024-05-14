@@ -94,7 +94,7 @@ export const TranslationForm = ({
             {({ handleSubmit, submitting, submitError }) => (
                 <form onSubmit={handleSubmit}>
                     <>
-                        <TranslationFormFields initialValues={initialValues} />
+                        <TranslationFormFields />
                         <ButtonStrip>
                             <Button onClick={onClose}>Cancel</Button>
                             <Button primary type="submit" disabled={submitting}>
@@ -117,21 +117,9 @@ export const TranslationForm = ({
 }
 
 export const TranslationFormFields = () => {
-<<<<<<< HEAD
     const { initialValues } = useFormState({
         subscription: { initialValues: true },
     })
-
-    return Object.keys(initialValues).map((fieldName) => (
-        <Field<string | undefined>
-            key={fieldName}
-            name={fieldName}
-            component={InputFieldFF}
-            label={getTranslatedProperty(constantCaseToCamelCase(fieldName))}
-        />
-    ))
-=======
-    const { initialValues } = useFormState()
 
     return (
         <>
@@ -148,5 +136,4 @@ export const TranslationFormFields = () => {
             ))}
         </>
     )
->>>>>>> cbe12cd (fix(list): translation dialog mutation fix)
 }
