@@ -18,13 +18,14 @@ export function IconPicker({
 
     return (
         <>
-            <div
+            <button
                 onClick={() => setShowPicker(true)}
                 className={cx(classes.container, {
                     [classes.hasIcon]: !!icon,
                 })}
+                data-test="iconpicker-trigger"
             >
-                <div className={classes.chosenIcon}>
+                <span className={classes.chosenIcon}>
                     {selectedIcon && (
                         <img
                             className={classes.iconImage}
@@ -32,12 +33,12 @@ export function IconPicker({
                             src={selectedIcon.href}
                         />
                     )}
-                </div>
+                </span>
 
-                <div className={classes.openCloseIconContainer}>
+                <span className={classes.openCloseIconContainer}>
                     {showPicker ? <IconChevronUp16 /> : <IconChevronDown16 />}
-                </div>
-            </div>
+                </span>
+            </button>
 
             {showPicker && (
                 <IconPickerModal
