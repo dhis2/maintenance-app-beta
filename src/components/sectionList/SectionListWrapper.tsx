@@ -24,12 +24,14 @@ type SectionListWrapperProps = {
     data: ModelCollection<BaseListModel> | undefined
     pager: Pager | undefined
     error: FetchError | undefined
+    refetch: () => void
 }
 
 export const SectionListWrapper = ({
     data,
     error,
     pager,
+    refetch,
 }: SectionListWrapperProps) => {
     const { columns: headerColumns } = useModelListView()
     const schema = useSchemaFromHandle()
@@ -97,9 +99,10 @@ export const SectionListWrapper = ({
                 model={model}
                 onShowDetailsClick={handleDetailsClick}
                 onOpenSharingClick={setSharingDialogId}
+                onDeleteSuccess={refetch}
             />
         ),
-        [handleDetailsClick, setSharingDialogId]
+        [handleDetailsClick, setSharingDialogId, refetch]
     )
 
     const isAllSelected = data ? checkAllSelected(data) : false

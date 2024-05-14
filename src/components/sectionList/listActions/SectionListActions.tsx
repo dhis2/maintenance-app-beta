@@ -12,9 +12,10 @@ import {
 } from '@dhis2/ui'
 import React, { useRef, useState } from 'react'
 import { useHref, useLinkClickHandler } from 'react-router-dom'
-import { TOOLTIPS } from '../../../lib'
+import { TOOLTIPS, BaseListModel } from '../../../lib'
 import { LinkButton } from '../../LinkButton'
 import { TooltipWrapper } from '../../tooltip'
+import { DeleteAction } from './DeleteAction'
 import css from './SectionListActions.module.css'
 
 export const ListActions = ({ children }: React.PropsWithChildren) => {
@@ -30,22 +31,26 @@ export const ActionEdit = ({ modelId }: { modelId: string }) => {
 }
 
 type ActionMoreProps = {
-    modelId: string
-    editAccess: boolean
+    deletable: boolean
+    editable: boolean
+    model: BaseListModel
     onShowDetailsClick: () => void
     onOpenSharingClick: () => void
+    onDeleteSuccess: () => void
 }
 export const ActionMore = ({
-    modelId,
-    editAccess,
+    deletable,
+    editable,
+    model,
     onOpenSharingClick,
     onShowDetailsClick,
+    onDeleteSuccess,
 }: ActionMoreProps) => {
     const [open, setOpen] = useState(false)
     const ref = useRef(null)
-    const href = useHref(modelId, { relative: 'path' })
+    const href = useHref(model.id, { relative: 'path' })
 
-    const handleEditClick = useLinkClickHandler(modelId)
+    const handleEditClick = useLinkClickHandler(model.id)
 
     return (
         <div ref={ref}>
@@ -54,7 +59,7 @@ export const ActionMore = ({
                 secondary
                 onClick={() => setOpen(!open)}
                 icon={<IconMore24 />}
-            ></Button>
+            />
             {open && (
                 <Popover
                     className={css.actionMorePopover}
@@ -83,21 +88,37 @@ export const ActionMore = ({
                             }}
                             target="_blank"
                             href={href}
-                        ></MenuItem>
+                        />
+
                         <TooltipWrapper
-                            condition={!editAccess}
+                            condition={!editable}
                             content={TOOLTIPS.noEditAccess}
                         >
                             <MenuItem
                                 dense
-                                disabled={!editAccess}
+                                disabled={!editable}
                                 label={i18n.t('Sharing settings')}
                                 icon={<IconShare16 />}
                                 onClick={() => {
                                     onOpenSharingClick()
                                     setOpen(false)
                                 }}
-                            ></MenuItem>
+                            />
+                        </TooltipWrapper>
+
+                        <TooltipWrapper
+                            condition={!deletable}
+                            content={TOOLTIPS.noDeleteAccess}
+                        >
+                            <DeleteAction
+                                model={model}
+                                disabled={!deletable}
+                                onDeleteSuccess={() => {
+                                    onDeleteSuccess()
+                                    setOpen(false)
+                                }}
+                                onCancel={() => setOpen(false)}
+                            />
                         </TooltipWrapper>
                     </FlyoutMenu>
                 </Popover>

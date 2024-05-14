@@ -34,7 +34,8 @@ export const DefaultSectionList = () => {
             },
         },
     }
-    const { error, data } = useQuery({
+
+    const { error, data, refetch } = useQuery({
         queryKey: [query],
         queryFn: ({ queryKey: [query], signal }) => {
             return engine.query(query, { signal }) as Promise<ModelListResponse>
@@ -48,7 +49,7 @@ export const DefaultSectionList = () => {
                 error={error as FetchError | undefined}
                 data={modelList}
                 pager={data?.result.pager}
-                // key={schema.name}
+                refetch={refetch}
             />
         </div>
     )

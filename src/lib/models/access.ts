@@ -1,9 +1,13 @@
 import type { Access, BaseIdentifiableObject } from '../../types/generated'
 
 export const hasWriteAccess = (access: Partial<Access>) => !!access.write
+export const hasDeleteAccess = (access: Partial<Access>) => !!access.delete
 
 export const canEditModel = (model: Pick<BaseIdentifiableObject, 'access'>) =>
     hasWriteAccess(model.access)
+
+export const canDeleteModel = (model: Pick<BaseIdentifiableObject, 'access'>) =>
+    hasDeleteAccess(model.access)
 
 export type ParsedAccessPart = {
     read: boolean

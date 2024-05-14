@@ -16,11 +16,14 @@ type FilterToQueryParamsMap = {
 const inFilter = (filterPath: string, value: string[]) =>
     `${filterPath}:in:[${value.join(',')}]`
 
-const defaultFilter = (key: FilterKey, value: AllValues): string => {
-    const isArray = Array.isArray(value)
-    const valuesString = isArray ? `[${value.join(',')}]` : value?.toString()
-    const operator = isArray ? 'in' : 'eq'
-    return `${key}:${operator}:${valuesString}`
+const defaultFilter = (
+    key: FilterKey,
+    value: NonNullable<AllValues>
+): string => {
+    if (Array.isArray(value)) {
+        return inFilter(key, value)
+    }
+    return `${key}:eq:${value}`
 }
 
 /* Override how to resolve the actual queryParam (when used in a request) for a filter */

@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import {
-    CustomAttributes,
+    CustomAttributesSection,
     StandardFormSection,
     StandardFormSectionTitle,
     StandardFormSectionDescription,
@@ -60,7 +60,8 @@ export function DataElementGroupSetFormFields() {
                 </StandardFormSectionTitle>
 
                 <StandardFormSectionDescription>
-                    {i18n.t('@TODO')}
+                    {/* TODO: ADD DESCRIPTION */}
+                    {''}
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
@@ -68,17 +69,7 @@ export function DataElementGroupSetFormFields() {
                 </StandardFormField>
             </StandardFormSection>
 
-            <StandardFormSection>
-                <StandardFormSectionTitle>
-                    {i18n.t('Custom attributes')}
-                </StandardFormSectionTitle>
-
-                <StandardFormSectionDescription>
-                    {i18n.t('Custom fields for your DHIS2 instance')}
-                </StandardFormSectionDescription>
-
-                <CustomAttributes />
-            </StandardFormSection>
+            <CustomAttributesSection />
         </>
     )
 }

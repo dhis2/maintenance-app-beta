@@ -21,7 +21,7 @@ export function DefaultFormContents({
     const formErrorRef = useRef<HTMLDivElement | null>(null)
     const navigate = useNavigate()
 
-    const listPath = getSectionPath(section)
+    const listPath = `/${getSectionPath(section)}`
     useEffect(() => {
         if (submitError) {
             formErrorRef.current?.scrollIntoView({ behavior: 'smooth' })

@@ -94,8 +94,8 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
+            available: [],
             default: ['domainType', 'valueType', 'dataSet', 'categoryCombo'],
-            available: [DESCRIPTORS.publicAccess],
         },
     },
     dataElementGroup: {
