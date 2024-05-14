@@ -18,6 +18,8 @@ import {
 } from './TranslationForm'
 import { WebLocale } from '../../../types/generated'
 import { Loader } from '../../loading'
+import { TranslationForm } from './TranslationForm'
+import { useDBLocales, useLastSelectedLocale } from './translationFormHooks'
 
 type TranslationDialogProps = {
     onClose: () => void
@@ -30,9 +32,8 @@ export const TranslationDialog = ({
 }: TranslationDialogProps) => {
     const dbLocalesQuery = useDBLocales()
 
-    const [selectedLocaleString, setSelectedLocaleString] = React.useState<
-        string | undefined
-    >(undefined)
+    const [selectedLocaleString, setSelectedLocaleString] =
+        useLastSelectedLocale()
 
     const selectedLocale = useMemo(() => {
         if (!selectedLocaleString) {
@@ -59,7 +60,15 @@ export const TranslationDialog = ({
                             setSelectedLocaleString(selected)
                         }
                     >
-                        {dbLocalesQuery.data?.map((locale) => (
+                        {dbLocalesQuery?.data ? (
+                            dbLocalesQuery?.data?.map((locale, index) => (
+                                <SingleSelectOption
+                                    key={locale.locale}
+                                    label={locale.displayName}
+                                    value={locale.locale}
+                                />
+                            ))
+                        ) : (
                             <SingleSelectOption
                                 key={locale.locale}
                                 label={locale.displayName}

@@ -1,7 +1,9 @@
-import { useDataQuery } from '@dhis2/app-runtime'
-import { InputFieldFF } from '@dhis2/ui'
-import React, { useState } from 'react'
+import { useAlert, useDataEngine, useDataQuery } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
+import { Button, ButtonStrip, InputFieldFF } from '@dhis2/ui'
+import React, { useMemo } from 'react'
 import { Field, Form, useFormState } from 'react-final-form'
+import { FORM_ERROR } from 'final-form'
 import {
     BaseListModel,
     getTranslatedProperty,
@@ -12,67 +14,14 @@ import { constantCaseToCamelCase } from '../../../lib/utils/caseTransformers'
 import { Query, WrapQueryResponse } from '../../../types'
 import { WebLocale, Translation } from '../../../types/generated'
 import { LoadingSpinner } from '../../loading/LoadingSpinner'
-
-const { Field, Form: RFForm } = ReactFinalForm
-
-type DBLocalesResponse = WrapQueryResponse<WebLocale[]>
-
-export const useDBLocales = () => {
-    const query = useDataQuery<DBLocalesResponse>({
-        result: {
-            resource: 'locales/db',
-        },
-    })
-
-    return {
-        ...query,
-        data: query.data?.result,
-    }
-}
-
-const useLocales = (modelId: string) => {
-    const schema = useSchemaFromHandle()
-    const [query] = useState<Query>(() => ({
-        result: {
-            resource: `${schema.plural}`,
-            id: `${modelId}/translations`,
-        },
-    }))
-
-    const queryResult =
-        useDataQuery<WrapQueryResponse<{ translations: Translation[] }>>(query)
-
-    return {
-        ...queryResult,
-        data: queryResult.data?.result,
-    }
-}
-
-const useInitialValues = (model: BaseListModel, selectedLocale: WebLocale) => {
-    const { data } = useLocales(model.id)
-    const schema = useSchemaFromHandle()
-
-    if (!data) {
-        return undefined
-    }
-
-    const fieldsWithValues = data.translations
-        .filter((translation) => translation.locale === selectedLocale.locale)
-        .reduce((acc, translation) => {
-            acc[translation.property] = translation.value
-            return acc
-        }, {} as Record<string, string>)
-
-    const allFieldsWithValues = Object.values(schema.properties)
-        .filter((field) => field.translatable)
-        .map((field) => camelCaseToConstantCase(field.name))
-        .reduce((acc, fieldName) => {
-            acc[fieldName] = fieldsWithValues[fieldName]
-            return acc
-        }, {} as Record<string, string>)
-
-    return allFieldsWithValues
-}
+import style from './translation.module.css'
+import {
+    useInitialValues,
+    transformFormValues,
+    FormObj,
+    TranslationType,
+    useLocales,
+} from './translationFormHooks'
 
 export const TranslationForm = ({
     model,
@@ -86,18 +35,89 @@ export const TranslationForm = ({
     onClose: () => void
 }) => {
     const initialValues = useInitialValues(model, selectedLocale)
+    const { data: translations, refetch } = useLocales(model.id)
+
+    const { show } = useAlert(
+        ({ message }) => message,
+        ({ isSuccess }) => (isSuccess ? { success: true } : { critical: true })
+    )
+    const engine = useDataEngine()
+    const schema = useSchemaFromHandle()
 
     if (!initialValues) {
         return <LoadingSpinner />
     }
+
+    const submitForm = async (values: FormObj) => {
+        const formData = transformFormValues(values, selectedLocale)
+        const withoutFormTranslations =
+            translations?.translations.filter((t) => {
+                const translation = formData.find(
+                    (formTranslation) =>
+                        formTranslation.locale === t.locale &&
+                        formTranslation.property === t.property
+                )
+                return !translation
+            }) || []
+
+        const allTranslations = withoutFormTranslations
+            .concat(formData)
+            .filter((t) => t.value != undefined)
+
+        try {
+            const UPDATE_MUTATION = {
+                resource: `${schema.plural}`,
+                type: 'update',
+                id: `${model.id}/translations`,
+                data: {
+                    translations: allTranslations,
+                },
+            } as const
+
+            await engine.mutate(UPDATE_MUTATION)
+            refetch()
+            show({
+                message: i18n.t('Translation updated successfully'),
+                isSuccess: true,
+            })
+        } catch (error) {
+            return { [FORM_ERROR]: (error as Error | string).toString() }
+        }
+    }
+
     return (
-        <Form onSubmit={() => undefined} initialValues={initialValues}>
-            {() => <TranslationFormFields />}
+        <Form
+            onSubmit={submitForm}
+            initialValues={initialValues}
+            subscription={{ submitting: true, submitError: true }}
+        >
+            {({ handleSubmit, submitting, submitError }) => (
+                <form onSubmit={handleSubmit}>
+                    <>
+                        <TranslationFormFields initialValues={initialValues} />
+                        <ButtonStrip>
+                            <Button onClick={onClose}>Cancel</Button>
+                            <Button primary type="submit" disabled={submitting}>
+                                {i18n.t('Save')}
+                            </Button>
+                            <Button
+                                primary
+                                type="submit"
+                                disabled={submitting}
+                                onClick={() => handleSubmit() && onClose()}
+                            >
+                                {i18n.t('Save and close')}
+                            </Button>
+                        </ButtonStrip>
+                    </>
+                </form>
+            )}
         </Form>
     )
 }
 
 export const TranslationFormFields = () => {
+<<<<<<< HEAD
     const { initialValues } = useFormState({
         subscription: { initialValues: true },
     })
@@ -110,4 +130,23 @@ export const TranslationFormFields = () => {
             label={getTranslatedProperty(constantCaseToCamelCase(fieldName))}
         />
     ))
+=======
+    const { initialValues } = useFormState()
+
+    return (
+        <>
+            {Object.keys(initialValues).map((fieldName) => (
+                <Field<string | undefined>
+                    className={style.row}
+                    key={fieldName}
+                    name={fieldName}
+                    component={InputFieldFF}
+                    label={getTranslatedProperty(
+                        constantCaseToCamelCase(fieldName)
+                    )}
+                />
+            ))}
+        </>
+    )
+>>>>>>> cbe12cd (fix(list): translation dialog mutation fix)
 }
