@@ -24,7 +24,11 @@ export const DownloadFormWrapper = ({
 }) => (
     // onSubmit is not used because the result of the form-state is just a link
     // only use form to handle state
-    <Form onSubmit={() => undefined} initialValues={initialValues}>
+    <Form
+        onSubmit={() => undefined}
+        initialValues={initialValues}
+        subscription={{}}
+    >
         {() => children}
     </Form>
 )
