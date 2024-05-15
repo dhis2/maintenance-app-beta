@@ -30,7 +30,7 @@ export const getDownloadLink = (options: GetDownloadLinkOptions) => {
             ? 'metadata.json'
             : `metadata.json.${compression}`
     const objectString = `${model}=true`
-    const sharingString = optionalQueryParam('includeSharing=true', !!sharing)
+    const sharingString = optionalQueryParam('skipSharing=true', !sharing)
 
     const selectedFilterString = optionalQueryParam(
         `filter=id:in:[${Array.from(options.selected || [])
