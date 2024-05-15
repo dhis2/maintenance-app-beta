@@ -7,7 +7,6 @@ import { useDownloadFormState } from './DownloadForm'
 
 type GetDownloadLinkOptions = {
     baseUrl: string
-    download?: boolean
     filters: readonly string[]
     model: string
     sharing?: boolean
@@ -19,12 +18,12 @@ const optionalQueryParam = (paramValue: string, condition: boolean) =>
     condition ? `&${paramValue}` : ''
 
 export const getDownloadLink = (options: GetDownloadLinkOptions) => {
-    const { baseUrl, download, filters, model, compression, sharing } = options
+    const { baseUrl, filters, model, compression, sharing } = options
     const filterString = optionalQueryParam(
         `filter=${filters.map(encodeURIComponent).join('&filter=')}`,
         filters.length > 0
     )
-    const downloadString = optionalQueryParam('download=true', !!download)
+    const downloadString = `&download=true`
     const metadataString =
         compression === 'uncompressed'
             ? 'metadata.json'
