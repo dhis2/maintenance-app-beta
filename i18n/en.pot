@@ -330,6 +330,7 @@ msgstr "Public can view"
 msgid "Public cannot access"
 msgstr "Public cannot access"
 
+<<<<<<< HEAD
 msgid "New"
 msgstr "New"
 
@@ -343,6 +344,19 @@ msgid "Deselect all"
 msgstr "Deselect all"
 msgid "Translate {{modelName}}"
 msgstr "Translate {{modelName}}"
+=======
+msgid "Base locale reference"
+msgstr "Base locale reference"
+
+msgid "Translation updated successfully"
+msgstr "Translation updated successfully"
+
+msgid "Choose a Locale to translate from the menu above"
+msgstr "Choose a Locale to translate from the menu above"
+
+msgid "Save translations"
+msgstr "Save translations"
+>>>>>>> 3daee24 (feat: implement translation dialogue with specs)
 
 msgid "Can edit and capture"
 msgstr "Can edit and capture"

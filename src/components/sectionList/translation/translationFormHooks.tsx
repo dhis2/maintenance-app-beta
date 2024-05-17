@@ -1,5 +1,5 @@
 import { useDataQuery } from '@dhis2/app-runtime'
-import { useState, Dispatch, SetStateAction } from 'react'
+import { useState, Dispatch, SetStateAction, useMemo } from 'react'
 import { BaseListModel, useSchemaFromHandle } from '../../../lib'
 import { camelCaseToConstantCase } from '../../../lib/utils'
 import { Query, WrapQueryResponse } from '../../../types'
@@ -19,6 +19,13 @@ export interface FormObj {
     SHORT_NAME: string | undefined
 }
 
+export const initialFormObj: FormObj = {
+    DESCRIPTION: "",
+    FORM_NAME: "",
+    NAME: "",
+    SHORT_NAME: ""
+};
+
 export const useDBLocales = () => {
     const query = useDataQuery<DBLocalesResponse>({
         result: {
@@ -28,6 +35,27 @@ export const useDBLocales = () => {
     return {
         ...query,
         data: query.data?.result,
+    }
+}
+
+export const useField = (modelId: string) => {
+    const schema = useSchemaFromHandle()
+    const [query] = useState(() => ({
+        result: {
+            resource: `${schema.plural}`,
+            id: `${modelId}`,
+            params: {
+                fields: ['name', 'shortName', 'description', 'formName'],
+            },
+        },
+    }))
+
+    const queryResult =
+        useDataQuery<WrapQueryResponse<{ translations: Translation[] }>>(query)
+
+    return {
+        ...queryResult,
+        data: queryResult.data?.result,
     }
 }
 
@@ -49,18 +77,42 @@ export const useLocales = (modelId: string) => {
     }
 }
 
-export const useInitialValues = (
+export const useInitialFieldsAndValues = (
     model: BaseListModel,
-    selectedLocale: WebLocale
+    selectedLocale?: WebLocale
 ) => {
-    const { data } = useLocales(model.id)
-    const schema = useSchemaFromHandle()
-    if (!data) {
-        return undefined
+    const schema = useSchemaFromHandle();
+    const { data } = useField(model.id);
+    const { data: translations } = useLocales(model.id);
+
+    if (!data || !translations) {
+        return undefined;
     }
 
-    const fieldsWithValues = data.translations
-        .filter((translation) => translation.locale === selectedLocale.locale)
+    if (!selectedLocale) {
+        const initialFields = Object.entries(data || {}).reduce((obj: any, [key, value]) => {
+            obj[camelCaseToConstantCase(key)] = value;
+            return obj;
+        }, {});
+
+        const finalfields = Object.values(schema.properties)
+            .filter((field) => field.translatable)
+            .map((field) => camelCaseToConstantCase(field.name))
+            .reduce((obj: any, key) => {
+                obj[key] = initialFields.hasOwnProperty(key) ? initialFields[key] : '';
+                return obj;
+            }, {});
+
+        return finalfields;
+    }
+
+    const fieldsWithValues = translations.translations
+        .filter((translation) => {
+            if (selectedLocale.locale === "en") {
+                return translation.locale.startsWith("en")
+            }
+            return translation.locale === selectedLocale.locale
+        })
         .reduce((acc, translation) => {
             acc[translation.property] = translation.value
             return acc
@@ -70,11 +122,12 @@ export const useInitialValues = (
         .filter((field) => field.translatable)
         .map((field) => camelCaseToConstantCase(field.name))
         .reduce((acc, fieldName) => {
-            acc[fieldName] = fieldsWithValues[fieldName]
+
+            acc[fieldName] = fieldsWithValues[fieldName] || '';
             return acc
         }, {} as Record<string, string>)
-    return allFieldsWithValues
-}
+    return allFieldsWithValues;
+};
 
 export const transformFormValues = (
     formValues: FormObj,
