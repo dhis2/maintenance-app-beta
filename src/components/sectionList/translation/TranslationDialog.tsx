@@ -18,9 +18,9 @@ import {
 } from './TranslationForm'
 import { WebLocale } from '../../../types/generated'
 import { Loader } from '../../loading'
+import style from './translation.module.css'
 import { TranslationForm } from './TranslationForm'
 import { useDBLocales, useLastSelectedLocale } from './translationFormHooks'
-import style from './translation.module.css'
 
 type TranslationDialogProps = {
     onClose: () => void

@@ -1,5 +1,5 @@
 import { useDataQuery } from '@dhis2/app-runtime'
-import { useState, Dispatch, SetStateAction, useMemo } from 'react'
+import { useState, Dispatch, SetStateAction } from 'react'
 import { BaseListModel, useSchemaFromHandle } from '../../../lib'
 import { camelCaseToConstantCase } from '../../../lib/utils'
 import { Query, WrapQueryResponse } from '../../../types'
@@ -11,7 +11,6 @@ export interface TranslationType {
     property: string
     value: string
 }
-
 export interface FormObj {
     DESCRIPTION: string | undefined
     FORM_NAME: string | undefined
@@ -20,11 +19,11 @@ export interface FormObj {
 }
 
 export const initialFormObj: FormObj = {
-    DESCRIPTION: "",
-    FORM_NAME: "",
-    NAME: "",
-    SHORT_NAME: ""
-};
+    DESCRIPTION: '',
+    FORM_NAME: '',
+    NAME: '',
+    SHORT_NAME: '',
+}
 
 export const useDBLocales = () => {
     const query = useDataQuery<DBLocalesResponse>({
@@ -51,7 +50,7 @@ export const useField = (modelId: string) => {
     }))
 
     const queryResult =
-        useDataQuery<WrapQueryResponse<{ translations: Translation[] }>>(query)
+        useDataQuery<WrapQueryResponse<{ translations: Translation }>>(query)
 
     return {
         ...queryResult,
@@ -77,39 +76,51 @@ export const useLocales = (modelId: string) => {
     }
 }
 
+/**
+ * conditionally get the intial fields of the translation form
+ * if theres a selected locale, we get the translations value
+ * if theres no selected loacale, we get the original value
+ * @returns finalfields || allFieldsWithValues
+ */
+
 export const useInitialFieldsAndValues = (
     model: BaseListModel,
     selectedLocale?: WebLocale
 ) => {
-    const schema = useSchemaFromHandle();
-    const { data } = useField(model.id);
-    const { data: translations } = useLocales(model.id);
+    const schema = useSchemaFromHandle()
+    const { data } = useField(model.id)
+    const { data: translations } = useLocales(model.id)
 
     if (!data || !translations) {
-        return undefined;
+        return undefined
     }
 
     if (!selectedLocale) {
-        const initialFields = Object.entries(data || {}).reduce((obj: any, [key, value]) => {
-            obj[camelCaseToConstantCase(key)] = value;
-            return obj;
-        }, {});
+        const initialFields = Object.entries(data || {}).reduce(
+            (obj: any, [key, value]) => {
+                obj[camelCaseToConstantCase(key)] = value
+                return obj
+            },
+            {}
+        )
 
         const finalfields = Object.values(schema.properties)
             .filter((field) => field.translatable)
             .map((field) => camelCaseToConstantCase(field.name))
-            .reduce((obj: any, key) => {
-                obj[key] = initialFields.hasOwnProperty(key) ? initialFields[key] : '';
-                return obj;
-            }, {});
+            .reduce((obj: Record<string, string>, key) => {
+                obj[key] = initialFields.hasOwnProperty(key)
+                    ? initialFields[key]
+                    : ''
+                return obj
+            }, {})
 
-        return finalfields;
+        return finalfields
     }
 
     const fieldsWithValues = translations.translations
         .filter((translation) => {
-            if (selectedLocale.locale === "en") {
-                return translation.locale.startsWith("en")
+            if (selectedLocale.locale === 'en') {
+                return translation.locale.startsWith('en')
             }
             return translation.locale === selectedLocale.locale
         })
@@ -122,12 +133,11 @@ export const useInitialFieldsAndValues = (
         .filter((field) => field.translatable)
         .map((field) => camelCaseToConstantCase(field.name))
         .reduce((acc, fieldName) => {
-
-            acc[fieldName] = fieldsWithValues[fieldName] || '';
+            acc[fieldName] = fieldsWithValues[fieldName] || ''
             return acc
         }, {} as Record<string, string>)
-    return allFieldsWithValues;
-};
+    return allFieldsWithValues
+}
 
 export const transformFormValues = (
     formValues: FormObj,
