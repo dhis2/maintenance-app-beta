@@ -14,7 +14,7 @@ describe('getDownloadLink', () => {
     it('should should return the correct URL', () => {
         const result = getDownloadLink(baseOptions)
         expect(result).toBe(
-            'http://localhost:8080/api/metadata.json.zip?dataElements=true&download=true&includeSharing=true'
+            'http://localhost:8080/api/metadata.json.zip?dataElements=true&download=true'
         )
     })
 
@@ -22,7 +22,7 @@ describe('getDownloadLink', () => {
         const filters = ['domainType:eq:AGGREGATE', 'valueType:eq:NUMBER']
         const result = getDownloadLink({ ...baseOptions, filters })
         expect(result).toBe(
-            'http://localhost:8080/api/metadata.json.zip?dataElements=true&download=true&includeSharing=true&filter=domainType%3Aeq%3AAGGREGATE&filter=valueType%3Aeq%3ANUMBER'
+            'http://localhost:8080/api/metadata.json.zip?dataElements=true&download=true&filter=domainType%3Aeq%3AAGGREGATE&filter=valueType%3Aeq%3ANUMBER'
         )
     })
 
@@ -32,7 +32,7 @@ describe('getDownloadLink', () => {
             compression: 'uncompressed',
         })
         expect(result).toBe(
-            'http://localhost:8080/api/metadata.json?dataElements=true&download=true&includeSharing=true'
+            'http://localhost:8080/api/metadata.json?dataElements=true&download=true'
         )
     })
 
@@ -40,7 +40,7 @@ describe('getDownloadLink', () => {
         const selected = new Set(['id1', 'id2'])
         const result = getDownloadLink({ ...baseOptions, selected })
         expect(result).toBe(
-            'http://localhost:8080/api/metadata.json.zip?dataElements=true&download=true&includeSharing=true&filter=id:in:[id1,id2]'
+            'http://localhost:8080/api/metadata.json.zip?dataElements=true&download=true&filter=id:in:[id1,id2]'
         )
     })
 })

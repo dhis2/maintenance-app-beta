@@ -54,7 +54,6 @@ export const useDownloadUrl = ({ selectedModels }: UseDownloadUrlOptions) => {
     const filterParams = useFilterQueryParams()
     return getDownloadLink({
         baseUrl,
-        download: true,
         filters: filter === 'all' ? [] : filterParams,
         model: section.namePlural,
         sharing: includeSharing,
