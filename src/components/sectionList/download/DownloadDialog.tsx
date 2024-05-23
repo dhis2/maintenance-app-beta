@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip, Modal, ModalActions } from '@dhis2/ui'
 import React from 'react'
 import { LinkButton } from '../../LinkButton'
@@ -30,10 +31,10 @@ const Actions = ({ onClose, selectedModels }: DownloadDialogProps) => {
         <ModalActions>
             <ButtonStrip>
                 <Button onClick={onClose} secondary>
-                    Cancel
+                    {i18n.t('Cancel')}
                 </Button>
                 <LinkButton primary onClick={onClose} href={downloadUrl}>
-                    Download
+                    {i18n.t('Download')}
                 </LinkButton>
             </ButtonStrip>
         </ModalActions>

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-05-14T13:41:39.673Z\n"
-"PO-Revision-Date: 2024-05-14T13:41:39.673Z\n"
+"POT-Creation-Date: 2024-05-23T08:44:35.734Z\n"
+"PO-Revision-Date: 2024-05-23T08:44:35.734Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -222,6 +222,9 @@ msgstr "Details"
 msgid "Failed to load details"
 msgstr "Failed to load details"
 
+msgid "Download"
+msgstr "Download"
+
 msgid "Download {{section}}"
 msgstr "Download {{section}}"
 
@@ -323,9 +326,6 @@ msgstr "Public can view"
 
 msgid "Public cannot access"
 msgstr "Public cannot access"
-
-msgid "Download"
-msgstr "Download"
 
 msgid "New"
 msgstr "New"

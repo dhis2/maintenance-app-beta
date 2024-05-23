@@ -55,7 +55,7 @@ export const DownloadDialogContent = ({
                             name="compression"
                             component={RadioFieldFF}
                             value="uncompressed"
-                            label="Uncompressed"
+                            label={i18n.t('Uncompressed')}
                             type="radio"
                         />
                     </UIField>
