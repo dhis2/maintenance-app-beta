@@ -86,6 +86,7 @@ export const TranslationForm = ({
                 message: i18n.t('Translation updated successfully'),
                 isSuccess: true,
             })
+            onClose()
         } catch (error) {
             return { [FORM_ERROR]: (error as Error | string).toString() }
         }
@@ -99,6 +100,7 @@ export const TranslationForm = ({
         >
             {({ handleSubmit, submitting, submitError }) => (
                 <form onSubmit={handleSubmit}>
+                    {submitting && <LoadingSpinner />}
                     <>
                         <div className={style.formObj}>
                             <div className={style.formSection}>
@@ -152,12 +154,13 @@ export const TranslationForm = ({
                                 primary
                                 type="submit"
                                 disabled={submitting}
-                                onClick={() => handleSubmit() && onClose()}
+                                onClick={() => handleSubmit()}
                             >
                                 {i18n.t('Save translations')}
                             </Button>
                         </ButtonStrip>
                     </>
+
                 </form>
             )}
         </Form>

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-05-23T08:44:35.734Z\n"
-"PO-Revision-Date: 2024-05-23T08:44:35.734Z\n"
+"POT-Creation-Date: 2024-05-27T19:37:19.150Z\n"
+"PO-Revision-Date: 2024-05-27T19:37:19.150Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -291,6 +291,9 @@ msgstr "Translate"
 msgid "At least one column must be selected"
 msgstr "At least one column must be selected"
 
+msgid "At least one filter must be selected"
+msgstr "At least one filter must be selected"
+
 msgid "Columns"
 msgstr "Columns"
 
@@ -330,7 +333,6 @@ msgstr "Public can view"
 msgid "Public cannot access"
 msgstr "Public cannot access"
 
-<<<<<<< HEAD
 msgid "New"
 msgstr "New"
 
@@ -344,7 +346,6 @@ msgid "Deselect all"
 msgstr "Deselect all"
 msgid "Translate {{modelName}}"
 msgstr "Translate {{modelName}}"
-=======
 msgid "Base locale reference"
 msgstr "Base locale reference"
 
@@ -356,7 +357,6 @@ msgstr "Choose a Locale to translate from the menu above"
 
 msgid "Save translations"
 msgstr "Save translations"
->>>>>>> 3daee24 (feat: implement translation dialogue with specs)
 
 msgid "Can edit and capture"
 msgstr "Can edit and capture"

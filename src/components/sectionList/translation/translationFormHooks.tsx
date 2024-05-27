@@ -97,8 +97,8 @@ export const useInitialFieldsAndValues = (
 
     if (!selectedLocale) {
         const initialFields = Object.entries(data || {}).reduce(
-            (obj: any, [key, value]) => {
-                obj[camelCaseToConstantCase(key)] = value
+            (obj: Record<string, string>, [key, value]) => {
+                obj[camelCaseToConstantCase(key)] = value.toString();
                 return obj
             },
             {}
@@ -139,6 +139,8 @@ export const useInitialFieldsAndValues = (
     return allFieldsWithValues
 }
 
+
+// Function to transform form values
 export const transformFormValues = (
     formValues: FormObj,
     selectedLocale: WebLocale
