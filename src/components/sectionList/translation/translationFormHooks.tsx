@@ -98,7 +98,7 @@ export const useInitialFieldsAndValues = (
     if (!selectedLocale) {
         const initialFields = Object.entries(data || {}).reduce(
             (obj: Record<string, string>, [key, value]) => {
-                obj[camelCaseToConstantCase(key)] = value.toString();
+                obj[camelCaseToConstantCase(key)] = value.toString()
                 return obj
             },
             {}
@@ -108,9 +108,10 @@ export const useInitialFieldsAndValues = (
             .filter((field) => field.translatable)
             .map((field) => camelCaseToConstantCase(field.name))
             .reduce((obj: Record<string, string>, key) => {
-                obj[key] = initialFields.hasOwnProperty(key)
-                    ? initialFields[key]
-                    : ''
+                obj[camelCaseToConstantCase(key)] =
+                    Object.prototype.hasOwnProperty.call(initialFields, key)
+                        ? initialFields[key]
+                        : ''
                 return obj
             }, {})
 
@@ -138,7 +139,6 @@ export const useInitialFieldsAndValues = (
         }, {} as Record<string, string>)
     return allFieldsWithValues
 }
-
 
 // Function to transform form values
 export const transformFormValues = (
