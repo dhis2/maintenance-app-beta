@@ -1,19 +1,15 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import { useQuery } from 'react-query'
-import {
-    useFilterQueryParams,
-    useSchemaSectionHandleOrThrow,
-} from '../../../lib'
 import { createBoundQueryFn } from '../../../lib/query'
 import { Pager } from '../../../types/generated'
 
 const defaultOptions = {
-    withFilters: false,
     enabled: true,
 }
 type UseDownloadTotalQueryOptions = {
-    withFilters?: boolean
+    filters?: string[]
     enabled?: boolean
+    modelNamePlural: string
 }
 
 export const useDownloadTotalQuery = (
@@ -21,15 +17,13 @@ export const useDownloadTotalQuery = (
 ) => {
     const mergedOptions = { ...defaultOptions, ...options }
     const dataEngine = useDataEngine()
-    const section = useSchemaSectionHandleOrThrow()
-    const selectedFilters = useFilterQueryParams()
 
     const query = {
         total: {
-            resource: `${section.namePlural}.json`,
+            resource: `${mergedOptions.modelNamePlural}.json`,
             params: {
-                ...(mergedOptions.withFilters && {
-                    filter: selectedFilters,
+                ...(mergedOptions.filters && {
+                    filter: mergedOptions.filters,
                 }),
                 pageSize: 1,
                 fields: 'id',

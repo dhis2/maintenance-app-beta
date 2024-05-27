@@ -5,7 +5,7 @@ import { z } from 'zod'
 const downloadSchema = z.object({
     compression: z.enum(['zip', 'gz', 'uncompressed']).default('zip'),
     includeSharing: z.boolean().default(true),
-    filter: z.enum(['filters', 'selected', 'all']).default('all'),
+    filterType: z.enum(['filters', 'selected', 'all']).default('all'),
 })
 
 export type DownloadFormValues = z.infer<typeof downloadSchema>
