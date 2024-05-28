@@ -139,7 +139,7 @@ export const DownloadDialogContent = ({
                     <Field
                         component={CheckboxFieldFF}
                         name="includeSharing"
-                        label="Include user sharing settings"
+                        label={i18n.t('Include user sharing settings')}
                         type="checkbox"
                     />
                 </form>
