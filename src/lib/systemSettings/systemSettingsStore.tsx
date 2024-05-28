@@ -5,9 +5,9 @@ export interface SystemSettingsStore {
     systemSettings: SystemSettings | undefined
     getSystemSettings: () => SystemSettings
     setSystemSettings: (systemSettings: SystemSettings) => void
-    getSystemSetting: (
-        settingsKey: SystemSettingsKey
-    ) => SystemSettings[typeof settingsKey]
+    getSystemSetting: <TKey extends SystemSettingsKey>(
+        settingsKey: TKey
+    ) => SystemSettings[TKey]
 }
 
 export const useSystemSettingsStore = create<SystemSettingsStore>()(
@@ -24,7 +24,7 @@ export const useSystemSettingsStore = create<SystemSettingsStore>()(
         },
         setSystemSettings: (systemSettings: SystemSettings) =>
             set({ systemSettings }),
-        getSystemSetting: (settingsKey: SystemSettingsKey) =>
+        getSystemSetting: (settingsKey) =>
             get().getSystemSettings()[settingsKey],
     })
 )
@@ -35,5 +35,6 @@ export const useSetSystemSettings = () =>
 export const useSystemSettings = () =>
     useSystemSettingsStore((state) => state.getSystemSettings())
 
-export const useSystemSetting = (settingsKey: SystemSettingsKey) =>
-    useSystemSettingsStore((state) => state.getSystemSetting(settingsKey))
+export const useSystemSetting = <TKey extends SystemSettingsKey>(
+    settingsKey: TKey
+) => useSystemSettingsStore((state) => state.getSystemSetting(settingsKey))
