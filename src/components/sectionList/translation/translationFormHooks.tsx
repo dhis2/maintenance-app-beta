@@ -108,10 +108,11 @@ export const useInitialFieldsAndValues = (
             .filter((field) => field.translatable)
             .map((field) => camelCaseToConstantCase(field.name))
             .reduce((obj: Record<string, string>, key) => {
-                obj[camelCaseToConstantCase(key)] =
+                obj[key] =
                     Object.prototype.hasOwnProperty.call(initialFields, key)
                         ? initialFields[key]
                         : ''
+
                 return obj
             }, {})
 
