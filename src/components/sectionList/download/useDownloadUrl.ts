@@ -1,13 +1,13 @@
 import { useConfig } from '@dhis2/app-runtime'
 import { useFilterQueryParams } from '../../../lib'
-import { useDownloadFormState } from './DownloadForm'
+import { DownloadFormValues, useDownloadFormState } from './DownloadForm'
 
 type GetDownloadLinkOptions = {
     baseUrl: string
     filters: readonly string[]
     modelNamePlural: string
     sharing?: boolean
-    compression: 'zip' | 'gz' | 'uncompressed'
+    compression: DownloadFormValues['compression']
 }
 
 export const getDownloadLink = (options: GetDownloadLinkOptions) => {
