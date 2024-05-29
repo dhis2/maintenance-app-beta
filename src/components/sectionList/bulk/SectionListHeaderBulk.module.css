@@ -1,5 +1,5 @@
 .listHeaderBulk {
-    background-color: var(--colors-green050);
+    background-color: var(--colors-teal100);
     width: 100%;
     height: 24px;
     display: flex;
@@ -7,5 +7,5 @@
     height: 48px;
     padding: var(--spacers-dp8);
     gap: var(--spacers-dp8);
-    border: 2px solid var(--colors-green800) !important;
+    border: 2px solid var(--colors-teal500) !important;
 }
