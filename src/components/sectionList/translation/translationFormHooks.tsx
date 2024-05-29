@@ -1,14 +1,7 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import { useState, Dispatch, SetStateAction, useMemo } from 'react'
-import { BaseListModel, useSchemaFromHandle } from '../../../lib'
-import { camelCaseToConstantCase } from '../../../lib/utils'
 import { Query, WrapQueryResponse } from '../../../types'
-import {
-    WebLocale,
-    Translation,
-    BaseIdentifiableObject,
-    DataElement,
-} from '../../../types/generated'
+import { WebLocale, Translation } from '../../../types/generated'
 import { TranslationFormValues } from './TranslationForm'
 
 type DBLocalesResponse = WrapQueryResponse<WebLocale[]>
@@ -23,18 +16,6 @@ export const useDBLocales = () => {
         ...query,
         data: query.data?.result,
     }
-}
-const translateableFields = [
-    'name',
-    'shortName',
-    'description',
-    'formName',
-] as const
-type BaseReferenceValues = {
-    name?: string
-    shortName?: string
-    description?: string
-    formName?: string
 }
 
 export const useBaseReferenceValues = ({

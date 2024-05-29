@@ -1,13 +1,6 @@
 import { useAlert, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import {
-    Button,
-    ButtonStrip,
-    InputField,
-    InputFieldFF,
-    TextAreaField,
-    TextAreaFieldFF,
-} from '@dhis2/ui'
+import { Button, ButtonStrip, InputField, InputFieldFF } from '@dhis2/ui'
 import { FORM_ERROR } from 'final-form'
 import React from 'react'
 import { Field, Form } from 'react-final-form'
