@@ -5,7 +5,8 @@ import {
     ButtonStrip,
     InputField,
     InputFieldFF,
-    NoticeBox,
+    TextAreaField,
+    TextAreaFieldFF,
 } from '@dhis2/ui'
 import { FORM_ERROR } from 'final-form'
 import React from 'react'
@@ -15,20 +16,21 @@ import {
     getTranslatedProperty,
     useSchemaFromHandle,
 } from '../../../lib'
-import { camelCaseToConstantCase } from '../../../lib/utils'
-import { constantCaseToCamelCase } from '../../../lib/utils/caseTransformers'
-import { Query, WrapQueryResponse } from '../../../types'
-import { WebLocale, Translation } from '../../../types/generated'
+import { camelCaseToConstantCase } from '../../../lib/utils/caseTransformers'
+import { WebLocale } from '../../../types/generated'
 import { LoadingSpinner } from '../../loading/LoadingSpinner'
 import style from './translation.module.css'
 import {
     transformFormValues,
-    FormObj,
-    useLocales,
-    initialFormObj,
     useInitialFieldsAndValues,
     useBaseReferenceValues,
 } from './translationFormHooks'
+
+type TranslationValues = Record<string, string>
+
+type Locale = string
+
+export type TranslationFormValues = Record<Locale, TranslationValues>
 
 export const TranslationForm = ({
     model,
@@ -52,35 +54,26 @@ export const TranslationForm = ({
         .filter((field) => field.translatable)
         .map((field) => field.name)
 
-    const { data: translations, refetch } = useLocales(model.id)
     const { data: baseReferenceValues } = useBaseReferenceValues({
+        modelNamePlural: schema.plural,
         modelId: model.id,
         translatableFields,
     })
-    const initialFields = useInitialFieldsAndValues(model, selectedLocale)
+
+    const initialFields = useInitialFieldsAndValues({
+        modelId: model.id,
+        modelNamePlural: schema.plural,
+    })
 
     if (!initialFields || !baseReferenceValues) {
         return <LoadingSpinner />
     }
 
-    const submitForm = async (values: FormObj) => {
+    const submitForm = async (values: TranslationFormValues) => {
         if (!selectedLocale) {
             return undefined
         }
-        const formData = transformFormValues(values, selectedLocale)
-        const withoutFormTranslations =
-            translations?.translations.filter((t) => {
-                const translation = formData.find(
-                    (formTranslation) =>
-                        formTranslation.locale === t.locale &&
-                        formTranslation.property === t.property
-                )
-                return !translation
-            }) || []
-
-        const allTranslations = withoutFormTranslations
-            .concat(formData)
-            .filter((t) => t.value.trim().length > 0)
+        const formData = transformFormValues(values)
 
         try {
             const UPDATE_MUTATION = {
@@ -88,12 +81,12 @@ export const TranslationForm = ({
                 type: 'update',
                 id: `${model.id}/translations`,
                 data: {
-                    translations: allTranslations,
+                    translations: formData,
                 },
             } as const
 
             await engine.mutate(UPDATE_MUTATION)
-            refetch()
+
             show({
                 message: i18n.t('Translation updated successfully'),
                 isSuccess: true,
@@ -120,30 +113,26 @@ export const TranslationForm = ({
                                     key={field}
                                     label={getTranslatedProperty(field)}
                                     disabled
-                                    value={
-                                        baseReferenceValues[field] // as string | undefined
-                                    }
+                                    value={baseReferenceValues[field]}
                                 />
                             ))}
                         </div>
 
                         {selectedLocale ? (
                             <div className={style.formSection}>
-                                {Object.keys(initialFormObj).map(
-                                    (fieldName) => (
-                                        <Field<string | undefined>
-                                            className={style.row}
-                                            key={fieldName}
-                                            name={fieldName}
-                                            component={InputFieldFF}
-                                            label={getTranslatedProperty(
-                                                constantCaseToCamelCase(
-                                                    fieldName
-                                                )
-                                            )}
-                                        />
-                                    )
-                                )}
+                                {translatableFields.map((fieldName) => (
+                                    <Field<string | undefined>
+                                        className={style.row}
+                                        key={fieldName}
+                                        name={`${
+                                            selectedLocale.locale
+                                        }.${camelCaseToConstantCase(
+                                            fieldName
+                                        )}`}
+                                        component={InputFieldFF}
+                                        label={getTranslatedProperty(fieldName)}
+                                    />
+                                ))}
                             </div>
                         ) : (
                             <p className={style.warnText}>
@@ -163,15 +152,6 @@ export const TranslationForm = ({
                             onClick={() => handleSubmit()}
                         >
                             {i18n.t('Save translations')}
-                        </Button>
-                        <Button
-                            primary
-                            type="submit"
-                            disabled={submitting}
-                            loading={submitting}
-                            onClick={() => handleSubmit()}
-                        >
-                            {i18n.t('Save and close')}
                         </Button>
                     </ButtonStrip>
                 </form>

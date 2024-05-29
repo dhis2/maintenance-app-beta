@@ -1,5 +1,5 @@
 import { useDataQuery } from '@dhis2/app-runtime'
-import { useState, Dispatch, SetStateAction } from 'react'
+import { useState, Dispatch, SetStateAction, useMemo } from 'react'
 import { BaseListModel, useSchemaFromHandle } from '../../../lib'
 import { camelCaseToConstantCase } from '../../../lib/utils'
 import { Query, WrapQueryResponse } from '../../../types'
@@ -9,19 +9,9 @@ import {
     BaseIdentifiableObject,
     DataElement,
 } from '../../../types/generated'
+import { TranslationFormValues } from './TranslationForm'
 
 type DBLocalesResponse = WrapQueryResponse<WebLocale[]>
-export interface TranslationType {
-    locale: string
-    property: string
-    value: string
-}
-export interface FormObj {
-    DESCRIPTION: string | undefined
-    FORM_NAME: string | undefined
-    NAME: string | undefined
-    SHORT_NAME: string | undefined
-}
 
 export const useDBLocales = () => {
     const query = useDataQuery<DBLocalesResponse>({
@@ -49,15 +39,16 @@ type BaseReferenceValues = {
 
 export const useBaseReferenceValues = ({
     modelId,
+    modelNamePlural,
     translatableFields,
 }: {
     modelId: string
+    modelNamePlural: string
     translatableFields: string[]
 }) => {
-    const schema = useSchemaFromHandle()
     const [query] = useState(() => ({
         result: {
-            resource: `${schema.plural}`,
+            resource: modelNamePlural,
             id: `${modelId}`,
             params: {
                 fields: translatableFields,
@@ -74,11 +65,16 @@ export const useBaseReferenceValues = ({
     }
 }
 
-export const useLocales = (modelId: string) => {
-    const schema = useSchemaFromHandle()
+export const useTranslations = ({
+    modelId,
+    modelNamePlural,
+}: {
+    modelId: string
+    modelNamePlural: string
+}) => {
     const [query] = useState<Query>(() => ({
         result: {
-            resource: `${schema.plural}`,
+            resource: modelNamePlural,
             id: `${modelId}/translations`,
         },
     }))
@@ -92,48 +88,46 @@ export const useLocales = (modelId: string) => {
     }
 }
 
-export const useInitialFieldsAndValues = (
-    model: BaseListModel,
-    selectedLocale?: WebLocale
-) => {
-    const schema = useSchemaFromHandle()
-    const { data: translations } = useLocales(model.id)
+export const useInitialFieldsAndValues = ({
+    modelId,
+    modelNamePlural,
+}: {
+    modelId: string
+    modelNamePlural: string
+}) => {
+    const { data: translations } = useTranslations({ modelId, modelNamePlural })
 
-    if (!translations || !selectedLocale) {
-        return undefined
-    }
-
-    const fieldsWithValues = translations.translations
-        .filter((translation) => {
-            return translation.locale === selectedLocale.locale
-        })
-        .reduce((acc, translation) => {
-            acc[translation.property] = translation.value
+    return useMemo(() => {
+        if (!translations) {
+            return undefined
+        }
+        return translations.translations.reduce((acc, translation) => {
+            if (!acc[translation.locale]) {
+                acc[translation.locale] = {
+                    [translation.property]: translation.value,
+                }
+            } else {
+                acc[translation.locale][translation.property] =
+                    translation.value
+            }
             return acc
-        }, {} as Record<string, string>)
-
-    const allFieldsWithValues = Object.values(schema.properties)
-        .filter((field) => field.translatable)
-        .map((field) => camelCaseToConstantCase(field.name))
-        .reduce((acc, fieldName) => {
-            acc[fieldName] = fieldsWithValues[fieldName] || ''
-            return acc
-        }, {} as Record<string, string>)
-    return allFieldsWithValues
+        }, {} as TranslationFormValues)
+    }, [translations])
 }
 
 // Function to transform form values
 export const transformFormValues = (
-    formValues: FormObj,
-    selectedLocale: WebLocale
-) => {
-    const translations = Object.entries(formValues).map(
-        ([key, value]: [string, string]) => {
-            return {
-                locale: selectedLocale.locale,
-                property: key,
-                value: value,
-            }
+    formValues: TranslationFormValues
+): Translation[] => {
+    const translations = Object.entries(formValues).flatMap(
+        ([locale, valueObject]) => {
+            return Object.entries(valueObject).map(([property, value]) => {
+                return {
+                    locale,
+                    property,
+                    value,
+                }
+            })
         }
     )
 
