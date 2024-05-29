@@ -3,7 +3,12 @@ import { useState, Dispatch, SetStateAction } from 'react'
 import { BaseListModel, useSchemaFromHandle } from '../../../lib'
 import { camelCaseToConstantCase } from '../../../lib/utils'
 import { Query, WrapQueryResponse } from '../../../types'
-import { WebLocale, Translation } from '../../../types/generated'
+import {
+    WebLocale,
+    Translation,
+    BaseIdentifiableObject,
+    DataElement,
+} from '../../../types/generated'
 
 type DBLocalesResponse = WrapQueryResponse<WebLocale[]>
 export interface TranslationType {
@@ -18,13 +23,6 @@ export interface FormObj {
     SHORT_NAME: string | undefined
 }
 
-export const initialFormObj: FormObj = {
-    DESCRIPTION: '',
-    FORM_NAME: '',
-    NAME: '',
-    SHORT_NAME: '',
-}
-
 export const useDBLocales = () => {
     const query = useDataQuery<DBLocalesResponse>({
         result: {
@@ -36,21 +34,39 @@ export const useDBLocales = () => {
         data: query.data?.result,
     }
 }
+const translateableFields = [
+    'name',
+    'shortName',
+    'description',
+    'formName',
+] as const
+type BaseReferenceValues = {
+    name?: string
+    shortName?: string
+    description?: string
+    formName?: string
+}
 
-export const useField = (modelId: string) => {
+export const useBaseReferenceValues = ({
+    modelId,
+    translatableFields,
+}: {
+    modelId: string
+    translatableFields: string[]
+}) => {
     const schema = useSchemaFromHandle()
     const [query] = useState(() => ({
         result: {
             resource: `${schema.plural}`,
             id: `${modelId}`,
             params: {
-                fields: ['name', 'shortName', 'description', 'formName'],
+                fields: translatableFields,
             },
         },
     }))
 
     const queryResult =
-        useDataQuery<WrapQueryResponse<{ translations: Translation }>>(query)
+        useDataQuery<WrapQueryResponse<Record<string, string>>>(query)
 
     return {
         ...queryResult,
@@ -76,56 +92,19 @@ export const useLocales = (modelId: string) => {
     }
 }
 
-/**
- * conditionally get the intial fields of the translation form
- * if theres a selected locale, we get the translations value
- * if theres no selected loacale, we get the original value
- * @returns finalfields || allFieldsWithValues
- */
-
 export const useInitialFieldsAndValues = (
     model: BaseListModel,
     selectedLocale?: WebLocale
 ) => {
     const schema = useSchemaFromHandle()
-    const { data } = useField(model.id)
     const { data: translations } = useLocales(model.id)
 
-    if (!data || !translations) {
+    if (!translations || !selectedLocale) {
         return undefined
-    }
-
-    if (!selectedLocale) {
-        const initialFields = Object.entries(data || {}).reduce(
-            (obj: Record<string, string>, [key, value]) => {
-                obj[camelCaseToConstantCase(key)] = value.toString()
-                return obj
-            },
-            {}
-        )
-
-        const finalfields = Object.values(schema.properties)
-            .filter((field) => field.translatable)
-            .map((field) => camelCaseToConstantCase(field.name))
-            .reduce((obj: Record<string, string>, key) => {
-                obj[key] = Object.prototype.hasOwnProperty.call(
-                    initialFields,
-                    key
-                )
-                    ? initialFields[key]
-                    : ''
-
-                return obj
-            }, {})
-
-        return finalfields
     }
 
     const fieldsWithValues = translations.translations
         .filter((translation) => {
-            if (selectedLocale.locale === 'en') {
-                return translation.locale.startsWith('en')
-            }
             return translation.locale === selectedLocale.locale
         })
         .reduce((acc, translation) => {

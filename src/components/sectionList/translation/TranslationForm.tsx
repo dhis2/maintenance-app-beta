@@ -1,6 +1,12 @@
 import { useAlert, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip, InputField, InputFieldFF } from '@dhis2/ui'
+import {
+    Button,
+    ButtonStrip,
+    InputField,
+    InputFieldFF,
+    NoticeBox,
+} from '@dhis2/ui'
 import { FORM_ERROR } from 'final-form'
 import React from 'react'
 import { Field, Form } from 'react-final-form'
@@ -21,6 +27,7 @@ import {
     useLocales,
     initialFormObj,
     useInitialFieldsAndValues,
+    useBaseReferenceValues,
 } from './translationFormHooks'
 
 export const TranslationForm = ({
@@ -41,34 +48,39 @@ export const TranslationForm = ({
         ({ isSuccess }) => (isSuccess ? { success: true } : { critical: true })
     )
 
-    const { data: translations, refetch } = useLocales(model.id)
+    const translatableFields = Object.values(schema.properties)
+        .filter((field) => field.translatable)
+        .map((field) => field.name)
 
+    const { data: translations, refetch } = useLocales(model.id)
+    const { data: baseReferenceValues } = useBaseReferenceValues({
+        modelId: model.id,
+        translatableFields,
+    })
     const initialFields = useInitialFieldsAndValues(model, selectedLocale)
 
-    if (!initialFields) {
+    if (!initialFields || !baseReferenceValues) {
         return <LoadingSpinner />
     }
 
     const submitForm = async (values: FormObj) => {
-        const formData =
-            selectedLocale && transformFormValues(values, selectedLocale)
+        if (!selectedLocale) {
+            return undefined
+        }
+        const formData = transformFormValues(values, selectedLocale)
         const withoutFormTranslations =
             translations?.translations.filter((t) => {
-                const translation =
-                    formData &&
-                    formData.find(
-                        (formTranslation) =>
-                            formTranslation.locale === t.locale &&
-                            formTranslation.property === t.property
-                    )
+                const translation = formData.find(
+                    (formTranslation) =>
+                        formTranslation.locale === t.locale &&
+                        formTranslation.property === t.property
+                )
                 return !translation
             }) || []
 
-        const allTranslations =
-            formData &&
-            withoutFormTranslations
-                .concat(formData)
-                .filter((t) => t.value != undefined)
+        const allTranslations = withoutFormTranslations
+            .concat(formData)
+            .filter((t) => t.value.trim().length > 0)
 
         try {
             const UPDATE_MUTATION = {
@@ -95,71 +107,73 @@ export const TranslationForm = ({
     return (
         <Form
             onSubmit={submitForm}
-            initialValues={initialFormObj}
+            initialValues={initialFields}
             subscription={{ submitting: true, submitError: true }}
         >
             {({ handleSubmit, submitting, submitError }) => (
                 <form onSubmit={handleSubmit}>
-                    {submitting && <LoadingSpinner />}
-                    <>
-                        <div className={style.formObj}>
-                            <div className={style.formSection}>
-                                {initialFields &&
-                                    Object.entries(initialFields).map(
-                                        ([key, value]) => (
-                                            <InputField
-                                                className={style.row}
-                                                key={key}
-                                                label={getTranslatedProperty(
-                                                    constantCaseToCamelCase(key)
-                                                )}
-                                                disabled
-                                                value={
-                                                    value as string | undefined
-                                                }
-                                            />
-                                        )
-                                    )}
-                            </div>
-
-                            {selectedLocale ? (
-                                <div className={style.formSection}>
-                                    {Object.keys(initialFormObj).map(
-                                        (fieldName) => (
-                                            <Field<string | undefined>
-                                                className={style.row}
-                                                key={fieldName}
-                                                name={fieldName}
-                                                component={InputFieldFF}
-                                                label={getTranslatedProperty(
-                                                    constantCaseToCamelCase(
-                                                        fieldName
-                                                    )
-                                                )}
-                                            />
-                                        )
-                                    )}
-                                </div>
-                            ) : (
-                                <p className={style.warnText}>
-                                    {i18n.t(
-                                        'Choose a Locale to translate from the menu above'
-                                    )}
-                                </p>
-                            )}
+                    <div className={style.formObj}>
+                        <div className={style.formSection}>
+                            {translatableFields.map((field) => (
+                                <InputField
+                                    className={style.row}
+                                    key={field}
+                                    label={getTranslatedProperty(field)}
+                                    disabled
+                                    value={
+                                        baseReferenceValues[field] // as string | undefined
+                                    }
+                                />
+                            ))}
                         </div>
-                        <ButtonStrip end>
-                            <Button onClick={onClose}>Cancel</Button>
-                            <Button
-                                primary
-                                type="submit"
-                                disabled={submitting}
-                                onClick={() => handleSubmit()}
-                            >
-                                {i18n.t('Save translations')}
-                            </Button>
-                        </ButtonStrip>
-                    </>
+
+                        {selectedLocale ? (
+                            <div className={style.formSection}>
+                                {Object.keys(initialFormObj).map(
+                                    (fieldName) => (
+                                        <Field<string | undefined>
+                                            className={style.row}
+                                            key={fieldName}
+                                            name={fieldName}
+                                            component={InputFieldFF}
+                                            label={getTranslatedProperty(
+                                                constantCaseToCamelCase(
+                                                    fieldName
+                                                )
+                                            )}
+                                        />
+                                    )
+                                )}
+                            </div>
+                        ) : (
+                            <p className={style.warnText}>
+                                {i18n.t(
+                                    'Choose a Locale to translate from the menu above'
+                                )}
+                            </p>
+                        )}
+                    </div>
+                    <ButtonStrip end>
+                        <Button onClick={onClose}>Cancel</Button>
+                        <Button
+                            primary
+                            type="submit"
+                            disabled={submitting}
+                            loading={submitting}
+                            onClick={() => handleSubmit()}
+                        >
+                            {i18n.t('Save translations')}
+                        </Button>
+                        <Button
+                            primary
+                            type="submit"
+                            disabled={submitting}
+                            loading={submitting}
+                            onClick={() => handleSubmit()}
+                        >
+                            {i18n.t('Save and close')}
+                        </Button>
+                    </ButtonStrip>
                 </form>
             )}
         </Form>
