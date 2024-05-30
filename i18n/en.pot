@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-04-30T06:34:26.402Z\n"
-"PO-Revision-Date: 2024-04-30T06:34:26.402Z\n"
+"POT-Creation-Date: 2024-05-23T08:44:35.734Z\n"
+"PO-Revision-Date: 2024-05-23T08:44:35.734Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -132,15 +132,6 @@ msgstr "Option set"
 msgid "Actions"
 msgstr "Actions"
 
-msgid "New"
-msgstr "New"
-
-msgid "Download"
-msgstr "Download"
-
-msgid "Manage View"
-msgstr "Manage View"
-
 msgid "There aren't any items that match your filter."
 msgstr "There aren't any items that match your filter."
 
@@ -198,12 +189,6 @@ msgstr "Update sharing for {{number}} items"
 msgid "Update sharing"
 msgstr "Update sharing"
 
-msgid "{{number}} selected"
-msgstr "{{number}} selected"
-
-msgid "Deselect all"
-msgstr "Deselect all"
-
 msgid "Created by"
 msgstr "Created by"
 
@@ -236,6 +221,24 @@ msgstr "Details"
 
 msgid "Failed to load details"
 msgstr "Failed to load details"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Download {{section}}"
+msgstr "Download {{section}}"
+
+msgid "{{model}} to include"
+msgstr "{{model}} to include"
+
+msgid "All ({{number}})"
+msgstr "All ({{number}})"
+
+msgid "Only selected ({{number}})"
+msgstr "Only selected ({{number}})"
+
+msgid "Only objects that match selected filters ({{number}})"
+msgstr "Only objects that match selected filters ({{number}})"
 
 msgid "Clear all filters"
 msgstr "Clear all filters"
@@ -285,9 +288,6 @@ msgstr "Sharing settings"
 msgid "At least one column must be selected"
 msgstr "At least one column must be selected"
 
-msgid "At least one filter must be selected"
-msgstr "At least one filter must be selected"
-
 msgid "Columns"
 msgstr "Columns"
 
@@ -326,6 +326,18 @@ msgstr "Public can view"
 
 msgid "Public cannot access"
 msgstr "Public cannot access"
+
+msgid "New"
+msgstr "New"
+
+msgid "Manage View"
+msgstr "Manage View"
+
+msgid "{{number}} selected"
+msgstr "{{number}} selected"
+
+msgid "Deselect all"
+msgstr "Deselect all"
 
 msgid "Can edit and capture"
 msgstr "Can edit and capture"
