@@ -291,9 +291,6 @@ msgstr "Translate"
 msgid "At least one column must be selected"
 msgstr "At least one column must be selected"
 
-msgid "At least one filter must be selected"
-msgstr "At least one filter must be selected"
-
 msgid "Columns"
 msgstr "Columns"
 
@@ -357,6 +354,17 @@ msgstr "Translation updated successfully"
 
 msgid "Save translations"
 msgstr "Save translations"
+msgid "New"
+msgstr "New"
+
+msgid "Manage View"
+msgstr "Manage View"
+
+msgid "{{number}} selected"
+msgstr "{{number}} selected"
+
+msgid "Deselect all"
+msgstr "Deselect all"
 
 msgid "Can edit and capture"
 msgstr "Can edit and capture"
