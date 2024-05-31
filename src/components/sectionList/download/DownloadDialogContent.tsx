@@ -97,7 +97,7 @@ export const DownloadDialogContent = ({
                             content={i18n.t('No items selected')}
                         >
                             <Field<string | undefined>
-                                name="filter"
+                                name="filterType"
                                 component={RadioFieldFF}
                                 label={
                                     hasSelected
@@ -116,7 +116,7 @@ export const DownloadDialogContent = ({
                             content={i18n.t('No filters applied')}
                         >
                             <Field<string | undefined>
-                                name="filter"
+                                name="filterType"
                                 label={
                                     totalWithFiltersQuery.data
                                         ? i18n.t(
