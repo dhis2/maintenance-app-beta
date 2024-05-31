@@ -24,7 +24,7 @@ export const DownloadDialog = ({
 
     return (
         <Modal onClose={onClose}>
-            <DownloadFormWrapper>
+            <DownloadFormWrapper hasSelected={selectedModels.size > 0}>
                 <DownloadDialogContent
                     section={section}
                     selectedModels={selectedModels}

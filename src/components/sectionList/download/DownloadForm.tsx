@@ -15,20 +15,33 @@ const { Form } = withTypes<DownloadFormValues>()
 export const useDownloadFormState = () =>
     useFormState<DownloadFormValues>({ subscription: { values: true } })
 
-const initialValues = downloadSchema.parse({})
+const getInititalValues = ({ hasSelected }: { hasSelected: boolean }) => {
+    return downloadSchema.parse({
+        filterType: hasSelected ? 'selected' : 'all',
+    })
+}
 
 export const DownloadFormWrapper = ({
     children,
+    hasSelected,
 }: {
     children: React.ReactNode
-}) => (
+    hasSelected: boolean
+}) => {
+    const initialValues = React.useMemo(
+        () => getInititalValues({ hasSelected }),
+        [hasSelected]
+    )
+
     // onSubmit is not used because the result of the form-state is just a link
     // only use form to handle state
-    <Form
-        onSubmit={() => undefined}
-        initialValues={initialValues}
-        subscription={{}}
-    >
-        {() => children}
-    </Form>
-)
+    return (
+        <Form
+            onSubmit={() => undefined}
+            initialValues={initialValues}
+            subscription={{}}
+        >
+            {() => children}
+        </Form>
+    )
+}
