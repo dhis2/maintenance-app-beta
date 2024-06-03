@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-05-23T08:44:35.734Z\n"
-"PO-Revision-Date: 2024-05-23T08:44:35.734Z\n"
+"POT-Creation-Date: 2024-06-03T14:46:54.023Z\n"
+"PO-Revision-Date: 2024-06-03T14:46:54.023Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -228,17 +228,35 @@ msgstr "Download"
 msgid "Download {{section}}"
 msgstr "Download {{section}}"
 
+msgid "Uncompressed"
+msgstr "Uncompressed"
+
 msgid "{{model}} to include"
 msgstr "{{model}} to include"
 
 msgid "All ({{number}})"
 msgstr "All ({{number}})"
 
+msgid "No items selected"
+msgstr "No items selected"
+
 msgid "Only selected ({{number}})"
 msgstr "Only selected ({{number}})"
 
-msgid "Only objects that match selected filters ({{number}})"
-msgstr "Only objects that match selected filters ({{number}})"
+msgid "Only selected"
+msgstr "Only selected"
+
+msgid "No filters applied"
+msgstr "No filters applied"
+
+msgid "Only items that match selected filters ({{number}})"
+msgstr "Only items that match selected filters ({{number}})"
+
+msgid "Only items that match selected filters"
+msgstr "Only items that match selected filters"
+
+msgid "Include user sharing settings"
+msgstr "Include user sharing settings"
 
 msgid "Clear all filters"
 msgstr "Clear all filters"
@@ -284,6 +302,9 @@ msgstr "Show details"
 
 msgid "Sharing settings"
 msgstr "Sharing settings"
+
+msgid "Translate"
+msgstr "Translate"
 
 msgid "At least one column must be selected"
 msgstr "At least one column must be selected"
@@ -338,6 +359,21 @@ msgstr "{{number}} selected"
 
 msgid "Deselect all"
 msgstr "Deselect all"
+
+msgid "Choose a Locale to translate from the menu above"
+msgstr "Choose a Locale to translate from the menu above"
+
+msgid "Translate: {{modelName}}"
+msgstr "Translate: {{modelName}}"
+
+msgid "Base locale reference"
+msgstr "Base locale reference"
+
+msgid "Translation updated successfully"
+msgstr "Translation updated successfully"
+
+msgid "Save translations"
+msgstr "Save translations"
 
 msgid "Can edit and capture"
 msgstr "Can edit and capture"
@@ -756,6 +792,9 @@ msgstr "GeoJSON"
 msgid "Favorite"
 msgstr "Favorite"
 
+msgid "Form name"
+msgstr "Form name"
+
 msgid "Domain type"
 msgstr "Domain type"
 
@@ -849,9 +888,6 @@ msgstr "Use a pattern to limit what information can be entered."
 
 msgid "e.g. 999-000-0000"
 msgstr "e.g. 999-000-0000"
-
-msgid "Form name"
-msgstr "Form name"
 
 msgid "An alternative name used in section or automatic data entry forms."
 msgstr "An alternative name used in section or automatic data entry forms."

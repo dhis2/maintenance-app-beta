@@ -3,7 +3,6 @@ import { SharingDialog } from '@dhis2/ui'
 import React, { useCallback, useState } from 'react'
 import { BaseListModel, canEditModel, useSchemaFromHandle } from '../../lib'
 import { Pager, ModelCollection } from '../../types/models'
-import { ToolbarSelected } from './bulk'
 import { DetailsPanel, DefaultDetailsPanelContent } from './detailsPanel'
 import { FilterWrapper } from './filters/FilterWrapper'
 import { DefaultListActions } from './listActions'
@@ -17,6 +16,7 @@ import { SectionListPagination } from './SectionListPagination'
 import { SectionListRow } from './SectionListRow'
 import { SectionListTitle } from './SectionListTitle'
 import { Toolbar } from './toolbar'
+import { TranslationDialog } from './translation'
 import { SelectedColumn } from './types'
 import { useSelectedModels } from './useSelectedModels'
 
@@ -35,10 +35,14 @@ export const SectionListWrapper = ({
 }: SectionListWrapperProps) => {
     const { columns: headerColumns } = useModelListView()
     const schema = useSchemaFromHandle()
+
     const { selectedModels, checkAllSelected, add, remove, toggle, clearAll } =
         useSelectedModels()
     const [detailsId, setDetailsId] = useState<string | undefined>()
     const [sharingDialogId, setSharingDialogId] = useState<string | undefined>()
+    const [translationDialogModel, setTranslationDialogModel] = useState<
+        BaseListModel | undefined
+    >(undefined)
 
     const SectionListMessage = () => {
         if (error) {
@@ -100,6 +104,7 @@ export const SectionListWrapper = ({
                 onShowDetailsClick={handleDetailsClick}
                 onOpenSharingClick={setSharingDialogId}
                 onDeleteSuccess={refetch}
+                onOpenTranslationClick={setTranslationDialogModel}
             />
         ),
         [handleDetailsClick, setSharingDialogId, refetch]
@@ -155,6 +160,12 @@ export const SectionListWrapper = ({
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     type={schema.singular as any}
                     onClose={() => setSharingDialogId(undefined)}
+                />
+            )}
+            {translationDialogModel && (
+                <TranslationDialog
+                    model={translationDialogModel}
+                    onClose={() => setTranslationDialogModel(undefined)}
                 />
             )}
         </div>
