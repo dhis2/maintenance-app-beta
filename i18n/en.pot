@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-06-03T09:35:22.324Z\n"
-"PO-Revision-Date: 2024-06-03T09:35:22.324Z\n"
+"POT-Creation-Date: 2024-06-03T14:31:57.236Z\n"
+"PO-Revision-Date: 2024-06-03T14:31:57.237Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -228,17 +228,35 @@ msgstr "Download"
 msgid "Download {{section}}"
 msgstr "Download {{section}}"
 
+msgid "Uncompressed"
+msgstr "Uncompressed"
+
 msgid "{{model}} to include"
 msgstr "{{model}} to include"
 
 msgid "All ({{number}})"
 msgstr "All ({{number}})"
 
+msgid "No items selected"
+msgstr "No items selected"
+
 msgid "Only selected ({{number}})"
 msgstr "Only selected ({{number}})"
 
-msgid "Only objects that match selected filters ({{number}})"
-msgstr "Only objects that match selected filters ({{number}})"
+msgid "Only selected"
+msgstr "Only selected"
+
+msgid "No filters applied"
+msgstr "No filters applied"
+
+msgid "Only items that match selected filters ({{number}})"
+msgstr "Only items that match selected filters ({{number}})"
+
+msgid "Only items that match selected filters"
+msgstr "Only items that match selected filters"
+
+msgid "Include user sharing settings"
+msgstr "Include user sharing settings"
 
 msgid "Clear all filters"
 msgstr "Clear all filters"
@@ -365,6 +383,21 @@ msgstr "{{number}} selected"
 
 msgid "Deselect all"
 msgstr "Deselect all"
+
+msgid "Choose a Locale to translate from the menu above"
+msgstr "Choose a Locale to translate from the menu above"
+
+msgid "Translate: {{modelName}}"
+msgstr "Translate: {{modelName}}"
+
+msgid "Base locale reference"
+msgstr "Base locale reference"
+
+msgid "Translation updated successfully"
+msgstr "Translation updated successfully"
+
+msgid "Save translations"
+msgstr "Save translations"
 
 msgid "Can edit and capture"
 msgstr "Can edit and capture"

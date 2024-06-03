@@ -1,26 +1,17 @@
 import i18n from '@dhis2/d2-i18n'
 import {
-    Button,
-    ButtonStrip,
     Modal,
-    ModalActions,
     ModalContent,
     ModalTitle,
-    SingleSelect,
+    SingleSelectField,
     SingleSelectOption,
 } from '@dhis2/ui'
 import React, { useMemo } from 'react'
 import { BaseListModel } from '../../../lib'
-import {
-    TranslationForm,
-    TranslationFormFields,
-    useDBLocales,
-} from './TranslationForm'
-import { WebLocale } from '../../../types/generated'
 import { Loader } from '../../loading'
 import style from './translation.module.css'
 import { TranslationForm } from './TranslationForm'
-import { useDBLocales, useLastSelectedLocale } from './translationFormHooks'
+import { useLastSelectedLocale, useDBLocales } from './translationFormHooks'
 
 type TranslationDialogProps = {
     onClose: () => void
@@ -38,10 +29,10 @@ export const TranslationDialog = ({
         useLastSelectedLocale()
 
     const selectedLocale = useMemo(() => {
-        if (!selectedLocaleString || !dbLocalesQuery.data) {
+        if (!selectedLocaleString || !dbLocales) {
             return undefined
         }
-        return dbLocalesQuery.data?.find(
+        return dbLocales.find(
             (locale) => locale.locale === selectedLocaleString
         )
     }, [selectedLocaleString, dbLocales])
@@ -51,6 +42,10 @@ export const TranslationDialog = ({
             <ModalTitle>
                 {i18n.t('Translate: {{modelName}}', {
                     modelName: model.displayName,
+                    nsSeparator: `:::`,
+                    interpolation: {
+                        escapeValue: false,
+                    },
                 })}
             </ModalTitle>
             <Loader queryResponse={dbLocalesQuery}>
@@ -65,21 +60,13 @@ export const TranslationDialog = ({
                                 setSelectedLocaleString(selected)
                             }
                         >
-                            {dbLocalesQuery?.data ? (
-                                dbLocalesQuery?.data?.map((locale, index) => (
-                                    <SingleSelectOption
-                                        key={locale.locale}
-                                        label={`${locale.displayName} - (${locale.name})`}
-                                        value={locale.locale}
-                                    />
-                                ))
-                            ) : (
+                            {dbLocalesQuery.data?.map((locale) => (
                                 <SingleSelectOption
-                                    label="Loading locales..."
-                                    value="loading"
-                                    disabled
+                                    key={locale.locale}
+                                    label={`${locale.displayName} - (${locale.name})`}
+                                    value={locale.locale}
                                 />
-                            )}
+                            ))}
                         </SingleSelectField>
                     </div>
 

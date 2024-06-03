@@ -24,7 +24,6 @@ export type TranslationFormValues = Record<Locale, TranslationValues>
 export const TranslationForm = ({
     model,
     selectedLocale,
-    setSelectedLocale,
     onClose,
 }: {
     model: BaseListModel
@@ -42,8 +41,6 @@ export const TranslationForm = ({
     const translatableFields = Object.values(schema.properties)
         .filter((field) => field.translatable)
         .map((field) => field.name)
-
-    console.log(translatableFields, 'translatableFields')
 
     const { data: baseReferenceValues } = useBaseReferenceValues({
         modelNamePlural: schema.plural,
