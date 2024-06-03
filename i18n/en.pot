@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-06-03T14:31:57.236Z\n"
-"PO-Revision-Date: 2024-06-03T14:31:57.237Z\n"
+"POT-Creation-Date: 2024-06-03T14:46:54.023Z\n"
+"PO-Revision-Date: 2024-06-03T14:46:54.023Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -348,30 +348,6 @@ msgstr "Public can view"
 msgid "Public cannot access"
 msgstr "Public cannot access"
 
-msgid "New"
-msgstr "New"
-
-msgid "Manage View"
-msgstr "Manage View"
-
-msgid "{{number}} selected"
-msgstr "{{number}} selected"
-
-msgid "Deselect all"
-msgstr "Deselect all"
-msgid "Translate {{modelName}}"
-msgstr "Translate {{modelName}}"
-msgid "Choose a Locale to translate from the menu above"
-msgstr "Choose a Locale to translate from the menu above"
-
-msgid "Base locale reference"
-msgstr "Base locale reference"
-
-msgid "Translation updated successfully"
-msgstr "Translation updated successfully"
-
-msgid "Save translations"
-msgstr "Save translations"
 msgid "New"
 msgstr "New"
 

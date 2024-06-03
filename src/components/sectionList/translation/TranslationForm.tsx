@@ -4,7 +4,7 @@ import { Button, ButtonStrip, NoticeBox } from '@dhis2/ui'
 import { FORM_ERROR } from 'final-form'
 import React from 'react'
 import { Form } from 'react-final-form'
-import { BaseListModel, useSchemaFromHandle } from '../../../lib'
+import { BaseListModel, Schema, useSchemaFromHandle } from '../../../lib'
 import { WebLocale } from '../../../types/generated'
 import { LoadingSpinner } from '../../loading/LoadingSpinner'
 import TranslatableFields from './TranslatableFields'
@@ -18,8 +18,26 @@ import {
 type TranslationValues = Record<string, string>
 
 type Locale = string
-
 export type TranslationFormValues = Record<Locale, TranslationValues>
+
+const availableTranslateableFields = [
+    'name',
+    'shortName',
+    'formName',
+    'description',
+]
+
+/**
+ *  Get the translateable fields for schemaa.
+ * Not every models has all the availableTranslateable fields,
+ * so we need to filter based on the schema.
+ * This also controls the order of the rendered fields */
+
+const getTranslateableFieldsForSchema = (schema: Schema) => {
+    return availableTranslateableFields.filter(
+        (field) => schema.properties[field]?.translatable
+    )
+}
 
 export const TranslationForm = ({
     model,
@@ -38,9 +56,7 @@ export const TranslationForm = ({
         ({ isSuccess }) => (isSuccess ? { success: true } : { critical: true })
     )
 
-    const translatableFields = Object.values(schema.properties)
-        .filter((field) => field.translatable)
-        .map((field) => field.name)
+    const translatableFields = getTranslateableFieldsForSchema(schema)
 
     const { data: baseReferenceValues } = useBaseReferenceValues({
         modelNamePlural: schema.plural,

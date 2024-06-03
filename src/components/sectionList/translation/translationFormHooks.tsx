@@ -69,6 +69,10 @@ export const useTranslations = ({
     }
 }
 
+/**
+ * Transforms the normalized translations array into a nested object that can be used as a form-state.
+ * of the form: { [locale]: { [property]: value }
+ */
 export const useInitialFieldsAndValues = ({
     modelId,
     modelNamePlural,
@@ -96,7 +100,7 @@ export const useInitialFieldsAndValues = ({
     }, [translations])
 }
 
-// Function to transform form values
+/* Transforms the nested form-object back into a normalized array of translations */
 export const transformFormValues = (
     formValues: TranslationFormValues
 ): Translation[] => {
