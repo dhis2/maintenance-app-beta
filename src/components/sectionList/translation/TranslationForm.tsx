@@ -97,49 +97,6 @@ export const TranslationForm = ({
             {({ handleSubmit, submitting, submitError }) => (
                 <form onSubmit={handleSubmit}>
                     {submitError && <NoticeBox error>{submitError}</NoticeBox>}
-                    {/* <div className={style.formObj}>
-                        <div className={style.formSection}>
-                            {translatableFields.map((field) => (
-                                <React.Fragment key={field}>
-                                    {field === 'description' ? (
-                                        <TextAreaField
-                                            className={style.row}
-                                            label={getTranslatedProperty(field)}
-                                            disabled
-                                            value={baseReferenceValues[field]}
-                                        />
-                                    ) : (
-                                        <InputField
-                                            className={style.row}
-                                            label={getTranslatedProperty(field)}
-                                            disabled
-                                            value={baseReferenceValues[field]}
-                                        />
-                                    )}
-                                </React.Fragment>
-                            ))}
-                        </div>
-
-                        {selectedLocale ? (
-                            <div className={style.formSection}>
-                                {translatableFields.map((fieldName) => (
-                                    <Field<string | undefined>
-                                        className={style.row}
-                                        key={fieldName}
-                                        name={`${selectedLocale.locale}.${camelCaseToConstantCase(fieldName)}`}
-                                        component={fieldName === 'description' ? TextAreaFieldFF : InputFieldFF}
-                                        label={getTranslatedProperty(fieldName)}
-                                    />
-                                ))}
-                            </div>
-                        ) : (
-                            <p className={style.warnText}>
-                                {i18n.t(
-                                    'Choose a Locale to translate from the menu above'
-                                )}
-                            </p>
-                        )}
-                    </div> */}
                     <TranslatableFields
                         translatableFields={translatableFields}
                         baseReferenceValues={baseReferenceValues}
