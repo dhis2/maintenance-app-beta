@@ -1,10 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip, Modal, ModalActions } from '@dhis2/ui'
 import React from 'react'
-import {
-    useFilterQueryParams,
-    useModelSectionHandleOrThrow,
-} from '../../../lib'
+import { useModelSectionHandleOrThrow } from '../../../lib'
 import { ModelSection } from '../../../types'
 import { LinkButton } from '../../LinkButton'
 import { DownloadDialogContent } from './DownloadDialogContent'
@@ -24,7 +21,7 @@ export const DownloadDialog = ({
 
     return (
         <Modal onClose={onClose}>
-            <DownloadFormWrapper>
+            <DownloadFormWrapper hasSelected={selectedModels.size > 0}>
                 <DownloadDialogContent
                     section={section}
                     selectedModels={selectedModels}
