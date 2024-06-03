@@ -96,13 +96,17 @@ export const TranslationForm = ({
         >
             {({ handleSubmit, submitting, submitError }) => (
                 <form onSubmit={handleSubmit}>
-                    {submitError && <NoticeBox error>{submitError}</NoticeBox>}
                     <TranslatableFields
                         translatableFields={translatableFields}
                         baseReferenceValues={baseReferenceValues}
                         selectedLocale={selectedLocale}
-                        style={style}
                     />
+                    <div className={style.notice}>
+                        {submitError && (
+                            <NoticeBox error>{submitError}</NoticeBox>
+                        )}
+                    </div>
+
                     <ButtonStrip end>
                         <Button onClick={onClose}>Cancel</Button>
                         <Button

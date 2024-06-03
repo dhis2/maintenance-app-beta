@@ -32,6 +32,10 @@ textarea {
     width: 50%;
 }
 
+.notice {
+    margin-bottom: 15px;
+}
+
 .warnText {
     color: var(--colors-grey600);
     width: 70%;

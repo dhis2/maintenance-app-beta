@@ -9,19 +9,18 @@ import React from 'react'
 import { Field } from 'react-final-form'
 import { getTranslatedProperty } from '../../../lib'
 import { camelCaseToConstantCase } from '../../../lib/utils/caseTransformers'
+import style from './translation.module.css'
 
 interface TranslatableFieldsProps {
     translatableFields: string[]
     baseReferenceValues: Record<string, string>
     selectedLocale?: { locale: string } | undefined
-    style: any
 }
 
 const TranslatableFields: React.FC<TranslatableFieldsProps> = ({
     translatableFields,
     baseReferenceValues,
     selectedLocale,
-    style,
 }) => {
     return (
         <div className={style.formObj}>
