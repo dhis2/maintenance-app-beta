@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-05-27T19:37:19.150Z\n"
-"PO-Revision-Date: 2024-05-27T19:37:19.150Z\n"
+"POT-Creation-Date: 2024-06-03T09:35:22.324Z\n"
+"PO-Revision-Date: 2024-06-03T09:35:22.324Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -346,14 +346,14 @@ msgid "Deselect all"
 msgstr "Deselect all"
 msgid "Translate {{modelName}}"
 msgstr "Translate {{modelName}}"
+msgid "Choose a Locale to translate from the menu above"
+msgstr "Choose a Locale to translate from the menu above"
+
 msgid "Base locale reference"
 msgstr "Base locale reference"
 
 msgid "Translation updated successfully"
 msgstr "Translation updated successfully"
-
-msgid "Choose a Locale to translate from the menu above"
-msgstr "Choose a Locale to translate from the menu above"
 
 msgid "Save translations"
 msgstr "Save translations"

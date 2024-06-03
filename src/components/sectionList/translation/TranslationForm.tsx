@@ -1,17 +1,13 @@
 import { useAlert, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip, InputField, InputFieldFF } from '@dhis2/ui'
+import { Button, ButtonStrip, NoticeBox } from '@dhis2/ui'
 import { FORM_ERROR } from 'final-form'
 import React from 'react'
-import { Field, Form } from 'react-final-form'
-import {
-    BaseListModel,
-    getTranslatedProperty,
-    useSchemaFromHandle,
-} from '../../../lib'
-import { camelCaseToConstantCase } from '../../../lib/utils/caseTransformers'
+import { Form } from 'react-final-form'
+import { BaseListModel, useSchemaFromHandle } from '../../../lib'
 import { WebLocale } from '../../../types/generated'
 import { LoadingSpinner } from '../../loading/LoadingSpinner'
+import TranslatableFields from './TranslatableFields'
 import style from './translation.module.css'
 import {
     transformFormValues,
@@ -46,6 +42,8 @@ export const TranslationForm = ({
     const translatableFields = Object.values(schema.properties)
         .filter((field) => field.translatable)
         .map((field) => field.name)
+
+    console.log(translatableFields, 'translatableFields')
 
     const { data: baseReferenceValues } = useBaseReferenceValues({
         modelNamePlural: schema.plural,
@@ -98,16 +96,27 @@ export const TranslationForm = ({
         >
             {({ handleSubmit, submitting, submitError }) => (
                 <form onSubmit={handleSubmit}>
-                    <div className={style.formObj}>
+                    {submitError && <NoticeBox error>{submitError}</NoticeBox>}
+                    {/* <div className={style.formObj}>
                         <div className={style.formSection}>
                             {translatableFields.map((field) => (
-                                <InputField
-                                    className={style.row}
-                                    key={field}
-                                    label={getTranslatedProperty(field)}
-                                    disabled
-                                    value={baseReferenceValues[field]}
-                                />
+                                <React.Fragment key={field}>
+                                    {field === 'description' ? (
+                                        <TextAreaField
+                                            className={style.row}
+                                            label={getTranslatedProperty(field)}
+                                            disabled
+                                            value={baseReferenceValues[field]}
+                                        />
+                                    ) : (
+                                        <InputField
+                                            className={style.row}
+                                            label={getTranslatedProperty(field)}
+                                            disabled
+                                            value={baseReferenceValues[field]}
+                                        />
+                                    )}
+                                </React.Fragment>
                             ))}
                         </div>
 
@@ -117,12 +126,8 @@ export const TranslationForm = ({
                                     <Field<string | undefined>
                                         className={style.row}
                                         key={fieldName}
-                                        name={`${
-                                            selectedLocale.locale
-                                        }.${camelCaseToConstantCase(
-                                            fieldName
-                                        )}`}
-                                        component={InputFieldFF}
+                                        name={`${selectedLocale.locale}.${camelCaseToConstantCase(fieldName)}`}
+                                        component={fieldName === 'description' ? TextAreaFieldFF : InputFieldFF}
                                         label={getTranslatedProperty(fieldName)}
                                     />
                                 ))}
@@ -134,7 +139,13 @@ export const TranslationForm = ({
                                 )}
                             </p>
                         )}
-                    </div>
+                    </div> */}
+                    <TranslatableFields
+                        translatableFields={translatableFields}
+                        baseReferenceValues={baseReferenceValues}
+                        selectedLocale={selectedLocale}
+                        style={style}
+                    />
                     <ButtonStrip end>
                         <Button onClick={onClose}>Cancel</Button>
                         <Button

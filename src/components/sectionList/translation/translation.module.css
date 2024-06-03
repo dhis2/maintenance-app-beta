@@ -19,10 +19,12 @@
     display: flex;
     align-items: center;
     margin-right: 10px;
-    /* gap: 10px; */
     width: 100%;
 }
 input {
+    margin-right: 10px !important;
+}
+textarea {
     margin-right: 10px !important;
 }
 
