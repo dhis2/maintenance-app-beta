@@ -15,10 +15,8 @@ const { Form } = withTypes<DownloadFormValues>()
 export const useDownloadFormState = () =>
     useFormState<DownloadFormValues>({ subscription: { values: true } })
 
-const getInititalValues = ({ hasSelected }: { hasSelected: boolean }) => {
-    return downloadSchema.parse({
-        filterType: hasSelected ? 'selected' : 'all',
-    })
+const getInititalValues = (initialValues: Partial<DownloadFormValues>) => {
+    return downloadSchema.parse(initialValues)
 }
 
 export const DownloadFormWrapper = ({
@@ -29,7 +27,8 @@ export const DownloadFormWrapper = ({
     hasSelected: boolean
 }) => {
     const initialValues = React.useMemo(
-        () => getInititalValues({ hasSelected }),
+        () =>
+            getInititalValues({ filterType: hasSelected ? 'selected' : 'all' }),
         [hasSelected]
     )
 
