@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import { SectionName } from '../../constants'
 import type { ConfigurableFilterKey } from '../filters'
 
 export interface ModelPropertyDescriptor {
@@ -97,4 +98,26 @@ export const modelListViewsConfig = {
             default: ['domainType', 'valueType', 'dataSet', 'categoryCombo'],
         },
     },
-} satisfies SectionListViewConfig
+    dataElementGroup: {
+        columns: {},
+        filters: {
+            default: [
+                {
+                    label: i18n.t('Data element'),
+                    filterKey: 'dataElement',
+                },
+            ],
+        },
+    },
+    dataElementGroupSet: {
+        columns: {},
+        filters: {
+            default: [
+                {
+                    label: i18n.t('Data element group'),
+                    filterKey: 'dataElementGroup',
+                },
+            ],
+        },
+    },
+} satisfies SectionListViewConfig<SectionName>

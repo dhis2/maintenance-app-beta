@@ -7,6 +7,8 @@ import {
     DomainTypeSelectionFilter,
     ValueTypeSelectionFilter,
     PublicAccessFilter,
+    DataElementFilter,
+    DataElementGroupFilter,
 } from './filterSelectors'
 import { useFilterKeys } from './useFilterKeys'
 
@@ -15,6 +17,8 @@ type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
 const filterKeyToComponentMap: FilterKeyToComponentMap = {
     categoryCombo: CategoryComboFilter,
     dataSet: DataSetFilter,
+    dataElement: DataElementFilter,
+    dataElementGroup: DataElementGroupFilter,
     domainType: DomainTypeSelectionFilter,
     valueType: ValueTypeSelectionFilter,
     aggregationType: AggregationTypeFilter,
