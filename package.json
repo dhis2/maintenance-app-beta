@@ -37,7 +37,7 @@
     },
     "dependencies": {
         "@dhis2/app-runtime": "^3.9.3",
-        "@dhis2/ui": "^9.2.0",
+        "@dhis2/ui": "^9.4.6",
         "@types/lodash": "^4.14.198",
         "lodash": "^4.17.21",
         "react-color": "^2.19.3",
