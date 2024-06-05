@@ -36,7 +36,7 @@
         "whatwg-fetch": "^3.6.17"
     },
     "dependencies": {
-        "@dhis2/app-runtime": "^3.9.3",
+        "@dhis2/app-runtime": "^3.10.4",
         "@dhis2/ui": "^9.2.0",
         "@types/lodash": "^4.14.198",
         "lodash": "^4.17.21",
