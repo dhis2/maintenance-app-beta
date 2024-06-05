@@ -47,7 +47,7 @@
         "use-debounce": "^9.0.4",
         "use-query-params": "^2.2.1",
         "zod": "^3.22.2",
-        "zustand": "^4.4.0"
+        "zustand": "^4.5.2"
     },
     "resolutions": {
         "@dhis2/ui": "^9.2.0"
