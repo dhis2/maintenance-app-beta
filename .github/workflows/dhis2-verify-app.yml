@@ -24,6 +24,9 @@ jobs:
             - uses: c-hive/gha-yarn-cache@v1
             - run: yarn install --frozen-lockfile
 
+            - name: Check types
+              run: yarn check-types
+
             - name: Build
               run: yarn d2-app-scripts build
 
