@@ -14,10 +14,6 @@ const categoryCombos = [
         id: 'gbvX3pogf7p',
     },
     {
-        displayName: 'default',
-        id: 'bjDvmb4bfuf',
-    },
-    {
         displayName: 'Fixed/Outreach',
         id: 'KYYSTxeVw28',
     },
@@ -126,7 +122,7 @@ export const dataResolvers = {
 }
 
 describe('<CategoryComboSelect />', () => {
-    it('should render all options', async () => {
+    it('should render all options and None (default catCombo)', async () => {
         const onChange = jest.fn()
         const result = render(
             <ComponentWithProvider dataForCustomProvider={dataResolvers}>
@@ -145,6 +141,10 @@ describe('<CategoryComboSelect />', () => {
             )
             expect(selectOptions).toBeTruthy()
         }
+        const noneOption = await result.findByText('None', {
+            selector: '[data-test="dhis2-uicore-singleselectoption"]',
+        })
+        expect(noneOption).toBeInTheDocument()
     })
 
     it('should add an "empty" option when not required', async () => {
@@ -162,6 +162,15 @@ describe('<CategoryComboSelect />', () => {
         const selectInput = result.getByTestId('dhis2-uicore-select-input')
         fireEvent.click(selectInput)
 
+        const noneLabel = await result.findByText('None', {
+            selector: '[data-test="dhis2-uicore-singleselectoption"]',
+        })
+        const selectedLabel = await result.findByText(/No value/, {
+            selector: '[data-test="dhis2-uicore-singleselectoption"]',
+        })
+
+        expect(noneLabel).toBeInTheDocument()
+        expect(selectedLabel).toBeInTheDocument()
         // We'd find a single option if we didn't wait for this. The test would
         // subsequently fail as there'd be exactly one categoryCombo option
         await waitFor(() => {
@@ -169,11 +178,11 @@ describe('<CategoryComboSelect />', () => {
                 'dhis2-uicore-singleselectoption'
             )
 
-            expect(allOptions).toHaveLength(categoryCombos.length + 1)
+            expect(allOptions).toHaveLength(categoryCombos.length + 2)
         })
     })
 
-    it('should doesn\'t add an "empty" option when not required', async () => {
+    it('should not add an "empty" option when not required', async () => {
         const onChange = jest.fn()
         const dataResolvers = {
             categoryCombos: categoryCombosResolver,
@@ -195,7 +204,7 @@ describe('<CategoryComboSelect />', () => {
                 'dhis2-uicore-singleselectoption'
             )
 
-            expect(allOptions).toHaveLength(categoryCombos.length)
+            expect(allOptions).toHaveLength(categoryCombos.length + 1)
         })
     })
 

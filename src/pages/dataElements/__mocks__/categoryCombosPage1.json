@@ -7,7 +7,6 @@
         "pageCount": 3
     },
     "categoryCombos": [
-        { "displayName": "default", "id": "bjDvmb4bfuf", "isDefault": true },
         { "displayName": "Births", "id": "m2jTvAj5kkm", "isDefault": false },
         {
             "displayName": "Commodities",
