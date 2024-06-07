@@ -24,12 +24,11 @@ describe('Data elements', () => {
         cy.get('[data-test="formfields-shortname-content"] input').type(
             `shortname ${now}`
         )
+
+        // verify default catcombo is selected
         cy.get(
             '[data-test="formfields-categorycombo"] [data-test="dhis2-uicore-select-input"]'
-        ).click()
-        cy.get(
-            '[data-test="dhis2-uicore-singleselectoption"]:contains("None")'
-        ).click()
+        ).should('contain', 'None')
 
         // Submit form
         cy.get('button:contains("Create data element")').click()
@@ -105,15 +104,7 @@ describe('Data elements', () => {
             '[data-test="dhis2-uicore-singleselectoption"]:contains("Sum")'
         ).click()
 
-        // Select category combo
-        cy.get(
-            '[data-test="formfields-categorycombo"] [data-test="dhis2-uicore-select-input"]'
-        ).click()
-        cy.get(
-            '[data-test="dhis2-uicore-singleselectoption"]:contains("None")'
-        ).click()
-
-        // Select category combo
+        // Select option set
         cy.get(
             '[data-test="formfields-optionset"] [data-test="dhis2-uicore-select-input"]'
         ).click()
@@ -121,7 +112,7 @@ describe('Data elements', () => {
             '[data-test="dhis2-uicore-singleselectoption"]:contains("ARV drugs")'
         ).click()
 
-        // Select category combo
+        // Select comment optionset combo
         cy.get(
             '[data-test="formfields-commentoptionset"] [data-test="dhis2-uicore-select-input"]'
         ).click()
@@ -191,19 +182,16 @@ describe('Data elements', () => {
         // Submit form
         cy.get('button:contains("Create data element")').click()
 
-        // Should have required errors for name, shortname and cat combo
+        // Should have required errors for name, shortname
         cy.get('[data-test$="-validation"]:contains("Required")').should(
             'have.length',
-            3
+            2
         )
         cy.get(
             '[data-test="formfields-name-validation"]:contains("Required")'
         ).should('exist')
         cy.get(
             '[data-test="formfields-shortname-validation"]:contains("Required")'
-        ).should('exist')
-        cy.get(
-            '[data-test="formfields-categorycombo-validation"]:contains("Required")'
         ).should('exist')
     })
 })
