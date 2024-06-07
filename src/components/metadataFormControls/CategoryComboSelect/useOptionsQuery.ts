@@ -1,6 +1,7 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { useEffect, useMemo, useState } from 'react'
+import { DEFAULT_CATEGORY_COMBO } from '../../../lib'
 import { SelectOption } from '../../../types'
 import { CategoryCombo, Pager } from '../../../types/generated'
 
@@ -18,20 +19,29 @@ const CATEGORY_COMBOS_QUERY = {
             const params = {
                 page: variables.page,
                 pageSize: 10,
-                fields: ['id', 'displayName', 'isDefault'],
-                order: ['isDefault:desc', 'displayName'],
+                fields: ['id', 'displayName'],
+                filter: ['isDefault:eq:false'],
+                order: ['displayName'],
             }
 
             if (variables.filter) {
                 return {
                     ...params,
-                    filter: `name:ilike:${variables.filter}`,
+                    filter: [
+                        ...params.filter,
+                        `name:ilike:${variables.filter}`,
+                    ],
                 }
             }
 
             return params
         },
     },
+}
+
+const DEFAULT_CATEGORY_SELECT_OPTION = {
+    value: DEFAULT_CATEGORY_COMBO.id,
+    label: DEFAULT_CATEGORY_COMBO.displayName,
 }
 
 export function useOptionsQuery() {
@@ -59,12 +69,12 @@ export function useOptionsQuery() {
                 // We only want to add when the current page is > 1
                 ...(pager.page === 1 ? [] : prevLoadedOptions),
                 ...(categoryCombos.map((catCombo) => {
-                    const { id, displayName, isDefault } = catCombo
+                    const { id, displayName } = catCombo
                     return {
                         value: id,
                         // This should be distinguishable from other selects
                         // where "none" means no selection
-                        label: isDefault ? i18n.t('None') : displayName,
+                        label: displayName,
                     }
                 }) || []),
             ])
@@ -76,7 +86,8 @@ export function useOptionsQuery() {
             ...queryResult,
             data: {
                 pager: queryResult.data?.categoryCombos.pager,
-                result: loadedOptions,
+                //always show Default (None)
+                result: [DEFAULT_CATEGORY_SELECT_OPTION, ...loadedOptions],
             },
         }),
         [loadedOptions, queryResult]
