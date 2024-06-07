@@ -19,6 +19,7 @@ export function IconPicker({
     return (
         <>
             <button
+                type="button"
                 onClick={() => setShowPicker(true)}
                 className={cx(classes.container, {
                     [classes.hasIcon]: !!icon,

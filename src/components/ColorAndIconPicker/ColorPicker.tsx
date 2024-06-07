@@ -18,6 +18,7 @@ export function ColorPicker({
     return (
         <>
             <button
+                type="button"
                 ref={ref}
                 onClick={() => setShowPicker(true)}
                 className={cx(classes.container, {
