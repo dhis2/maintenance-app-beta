@@ -1,3 +1,10 @@
+## [0.1.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.1.0...v0.1.1) (2024-06-07)
+
+
+### Bug Fixes
+
+* trigger release ([f05dca1](https://github.com/dhis2/maintenance-app-beta/commit/f05dca13f0fb45204fb1803d866725394a3aaef3))
+
 # 1.0.0 (2024-06-07)
 
 
