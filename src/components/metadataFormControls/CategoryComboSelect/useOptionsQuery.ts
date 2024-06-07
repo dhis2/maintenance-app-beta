@@ -66,8 +66,6 @@ export function useOptionsQuery() {
             // We want to add new options to existing ones so we don't have to
             // refetch existing options
             setLoadedOptions((prevLoadedOptions) => [
-                //always show Default (None)
-                DEFAULT_CATEGORY_SELECT_OPTION,
                 // We only want to add when the current page is > 1
                 ...(pager.page === 1 ? [] : prevLoadedOptions),
                 ...(categoryCombos.map((catCombo) => {
@@ -88,7 +86,8 @@ export function useOptionsQuery() {
             ...queryResult,
             data: {
                 pager: queryResult.data?.categoryCombos.pager,
-                result: loadedOptions,
+                //always show Default (None)
+                result: [DEFAULT_CATEGORY_SELECT_OPTION, ...loadedOptions],
             },
         }),
         [loadedOptions, queryResult]
