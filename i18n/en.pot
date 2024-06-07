@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-06-03T14:46:54.023Z\n"
-"PO-Revision-Date: 2024-06-03T14:46:54.023Z\n"
+"POT-Creation-Date: 2024-06-07T14:39:06.772Z\n"
+"PO-Revision-Date: 2024-06-07T14:39:06.773Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -113,9 +113,6 @@ msgstr "Aggregation level(s)"
 
 msgid "Category combo"
 msgstr "Category combo"
-
-msgid "None"
-msgstr "None"
 
 msgid "Filter data element groups"
 msgstr "Filter data element groups"
@@ -338,6 +335,9 @@ msgstr "Manage {{section}} view"
 
 msgid "Update view"
 msgstr "Update view"
+
+msgid "None"
+msgstr "None"
 
 msgid "Public can edit"
 msgstr "Public can edit"
