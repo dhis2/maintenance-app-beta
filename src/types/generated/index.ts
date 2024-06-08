@@ -2,3 +2,4 @@
 
 export * from './models'
 export type * from './utility'
+export { PickWithFieldFilters } from './PickWithFieldFilters'
