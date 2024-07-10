@@ -1,4 +1,4 @@
-describe('Data elements', () => {
+describe('Data elements / New', () => {
     it('should create a data element with only the required values', () => {
         const now = Date.now()
         const newDataElementName = `ZZZ ${now}` // Will be at the end, does not pollute the first page of the list
