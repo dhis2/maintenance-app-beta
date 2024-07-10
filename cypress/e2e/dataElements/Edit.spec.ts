@@ -15,10 +15,7 @@ describe('Data elements / Edit', () => {
             .click()
 
         // Go to Edit form
-        cy.get(
-            '[data-test="dhis2-uicore-datatablecell"]:contains("ANC 1st visit")'
-        )
-            .parents('tr')
+        cy.get('[data-test="dhis2-uicore-tablebody"] tr:first-child')
             .find('td:last-child a')
             .click()
 
@@ -37,10 +34,7 @@ describe('Data elements / Edit', () => {
         cy.contains('Data element management').should('exist')
 
         // Go to Edit form
-        cy.get(
-            '[data-test="dhis2-uicore-datatablecell"]:contains("ANC 1st visit")'
-        )
-            .parents('tr')
+        cy.get('[data-test="dhis2-uicore-tablebody"] tr:first-child')
             .find('td:last-child a')
             .click()
 
@@ -64,10 +58,7 @@ describe('Data elements / Edit', () => {
             .click()
 
         // Go to Edit form
-        cy.get(
-            '[data-test="dhis2-uicore-datatablecell"]:contains("ANC 1st visit")'
-        )
-            .parents('tr')
+        cy.get('[data-test="dhis2-uicore-tablebody"] tr:first-child')
             .find('td:last-child a')
             .click()
 
