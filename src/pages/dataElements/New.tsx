@@ -12,6 +12,7 @@ import {
 } from '../../components'
 import { useCustomAttributesQuery } from '../../components/form'
 import {
+    DEFAULT_CATEGORY_COMBO,
     SCHEMA_SECTIONS,
     getSectionPath,
     useSchemas,
@@ -49,7 +50,7 @@ function useInitialValues(customAttributes: Attribute[]) {
             valueType: schemas.dataElement.properties.valueType.constants?.[0],
             aggregationType: 'NONE',
             style: { icon: '', color: '' },
-            categoryCombo: { id: '' },
+            categoryCombo: DEFAULT_CATEGORY_COMBO,
             optionSet: { id: '' },
             commentOptionSet: { id: '' },
             legendSets: [],

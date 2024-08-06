@@ -44,9 +44,6 @@ const validate = (values: FormValues) => {
     if (values.columns.length < 1) {
         errors.columns = i18n.t('At least one column must be selected')
     }
-    if (values.filters.length < 1) {
-        errors.filters = i18n.t('At least one filter must be selected')
-    }
     return errors
 }
 export const ManageListView = ({

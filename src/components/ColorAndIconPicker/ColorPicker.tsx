@@ -17,22 +17,24 @@ export function ColorPicker({
 
     return (
         <>
-            <div
+            <button
+                type="button"
                 ref={ref}
                 onClick={() => setShowPicker(true)}
                 className={cx(classes.container, {
                     [classes.hasColor]: !!color,
                 })}
+                data-test="colorpicker-trigger"
             >
-                <div
+                <span
                     className={classes.chosenColor}
                     style={{ background: color }}
                 />
 
-                <div className={classes.openCloseIconContainer}>
+                <span className={classes.openCloseIconContainer}>
                     {showPicker ? <IconChevronUp16 /> : <IconChevronDown16 />}
-                </div>
-            </div>
+                </span>
+            </button>
 
             {showPicker && (
                 <Layer onBackdropClick={() => setShowPicker(false)} translucent>

@@ -3,11 +3,17 @@ import { Button, DataTableToolbar } from '@dhis2/ui'
 import { IconAdd24 } from '@dhis2/ui-icons'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { routePaths } from '../../lib'
-import { ManageListViewDialog } from './listView/ManageListViewDialog'
-import css from './SectionList.module.css'
+import { routePaths } from '../../../lib'
+import { ManageListViewDialog } from '../listView/ManageListViewDialog'
+import css from './Toolbar.module.css'
 
-export const SectionListHeader = () => {
+type ToolbarNormalProps = {
+    downloadButtonElement?: JSX.Element
+}
+
+export const ToolbarNormal = ({
+    downloadButtonElement,
+}: ToolbarNormalProps) => {
     const [manageColumnsOpen, setManageColumnsOpen] = React.useState(false)
 
     const handleClose = () => setManageColumnsOpen(false)
@@ -18,7 +24,7 @@ export const SectionListHeader = () => {
                     {i18n.t('New')}
                 </Button>
             </Link>
-            <Button small>{i18n.t('Download')}</Button>
+            {downloadButtonElement}
             <Button small onClick={() => setManageColumnsOpen((prev) => !prev)}>
                 {i18n.t('Manage View')}
             </Button>

@@ -11,6 +11,7 @@
 
 .list {
     grid-area: list;
+    align-self: start;
 }
 
 .listToolbarWrapper {
@@ -22,7 +23,7 @@
 .listDetailsWrapper {
     display: grid;
     grid-template-columns: 1fr auto;
-    grid-template-rows: auto;
+    grid-template-rows: auto 1fr;
     grid-template-areas:
         'header details'
         'list details';

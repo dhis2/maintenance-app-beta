@@ -2,18 +2,20 @@ import i18n from '@dhis2/d2-i18n'
 import { Button, DataTableToolbar } from '@dhis2/ui'
 import React from 'react'
 import { useSchemaFromHandle } from '../../../lib'
-import { BulkSharingDialog } from './BulkSharingDialog'
-import css from './SectionListHeaderBulk.module.css'
+import { BulkSharingDialog } from '../bulk/BulkSharingDialog'
+import css from './Toolbar.module.css'
 
-type SectionListHeaderBulkProps = {
+type ToolbarSelectedProps = {
     selectedModels: Set<string>
     onDeselectAll: () => void
+    downloadButtonElement: JSX.Element
 }
 
-export const SectionListHeaderBulk = ({
+export const ToolbarSelected = ({
     selectedModels,
     onDeselectAll,
-}: SectionListHeaderBulkProps) => {
+    downloadButtonElement,
+}: ToolbarSelectedProps) => {
     const [sharingDialogOpen, setSharingDialogOpen] = React.useState(false)
     const sharable = useSchemaFromHandle().shareable
 
@@ -28,6 +30,7 @@ export const SectionListHeaderBulk = ({
                     {i18n.t('Update sharing')}
                 </Button>
             )}
+            {downloadButtonElement}
             <Button small onClick={() => onDeselectAll()}>
                 {i18n.t('Deselect all')}
             </Button>

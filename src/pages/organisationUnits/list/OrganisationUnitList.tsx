@@ -19,22 +19,22 @@ import React, { useMemo, useState } from 'react'
 import { IdentifiableFilter, SectionList } from '../../../components'
 import { useModelListView } from '../../../components/sectionList/listView'
 import { ModelValue } from '../../../components/sectionList/modelValue/ModelValue'
-import { SectionListHeader } from '../../../components/sectionList/SectionListHeaderNormal'
 import { SectionListTitle } from '../../../components/sectionList/SectionListTitle'
+import { ToolbarNormal } from '../../../components/sectionList/toolbar/ToolbarNormal'
 import {
     SchemaName,
     useFilterQueryParams,
     useSchema,
     useSchemaFromHandle,
 } from '../../../lib'
+import { getFieldFilter } from '../../../lib/models/path'
+import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
 import { OrganisationUnit } from '../../../types/generated'
 import css from './OrganisationUnitList.module.css'
 import {
     useExpandedOrgUnits,
     useOrganisationUnits,
 } from './useRootOrganisationUnit'
-import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
-import { getFieldFilter } from '../../../lib/models/path'
 
 export type OrganisationUnitListItem = Pick<
     OrganisationUnit,
@@ -123,7 +123,7 @@ export const OrganisationUnitList = () => {
         () =>
             orgUnitQueries
                 .filter((q) => !!q.data)
-                .flatMap((q) => q.data.organisationUnits!) ?? [],
+                .flatMap((q) => q.data?.organisationUnits) ?? [],
         [orgUnitQueries]
     )
     const rootData = useMemo(
@@ -202,7 +202,7 @@ export const OrganisationUnitList = () => {
         <div>
             <SectionListTitle />
             <IdentifiableFilter />
-            <SectionListHeader />
+            <ToolbarNormal />
             <SectionList
                 allSelected={table.getIsAllRowsSelected()}
                 headerColumns={table.getHeaderGroups()[0].headers.map((h) => ({

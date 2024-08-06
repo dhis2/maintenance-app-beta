@@ -1,0 +1,48 @@
+.row {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--colors-grey400);
+}
+
+.baseLocale {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--colors-grey200);
+    color: var(--colors-grey600);
+    padding: 5px 10px;
+}
+.formObj {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    width: 100%;
+}
+input {
+    margin-right: 10px !important;
+}
+textarea {
+    margin-right: 10px !important;
+}
+
+.formSection {
+    width: 50%;
+}
+
+.notice {
+    margin-bottom: 15px;
+}
+
+.warnText {
+    color: var(--colors-grey600);
+    width: 70%;
+    text-align: center;
+    font-size: 14px;
+}
+
+.SingleSelectField {
+    width: 50%;
+}

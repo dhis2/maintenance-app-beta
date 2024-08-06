@@ -114,12 +114,6 @@ describe('Data Elements / New', () => {
 
         fireEvent.click(submitButton as HTMLButtonElement)
 
-        expect(
-            result.container.querySelectorAll(
-                '.error[data-test$="-validation"]'
-            )
-        ).toHaveLength(3)
-
         const nameRequiredError = await result.findByText('Required', {
             selector: '[data-test="formfields-name-validation"]',
         })
@@ -130,10 +124,11 @@ describe('Data Elements / New', () => {
         })
         expect(shortNameRequiredError).toBeTruthy()
 
-        const categoryComboRequiredError = await result.findByText('Required', {
-            selector: '[data-test="formfields-categorycombo-validation"]',
-        })
-        expect(categoryComboRequiredError).toBeTruthy()
+        expect(
+            result.container.querySelectorAll(
+                '.error[data-test$="-validation"]'
+            )
+        ).toHaveLength(2)
     })
 
     it('should submit the data and return to the list view on success', async () => {
