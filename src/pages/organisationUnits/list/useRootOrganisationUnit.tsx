@@ -19,26 +19,31 @@ import { WrapperComponent } from '@testing-library/react-hooks'
 import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
 import { PagedResponse } from '../../../types/generated'
 
-const orgUnitFields = [
+const staticOrgUnitFields = [
     'id',
     'access',
     'displayName',
     'level',
     'path',
     'parent',
-    'ancestors[id,displayName,level,path,parent,children[id,displayName,level,path,children]]',
-    'children[id,displayName,access,parent,level, path,children~isNotEmpty~rename(hasChildren)]',
 ]
-const rootOrgUnitQuery = {
-    result: {
-        resource: 'organisationUnits',
-        params: {
-            paging: false,
-            fields: orgUnitFields,
-            filter: 'level:eq:1',
-        },
-    },
-} as const
+// const orgUnitFields = [
+//     'id',
+//     'access',
+//     'displayName',
+//     'level',
+//     'path',
+//     'parent',
+//     'ancestors[id,displayName,level,path,parent,children[id]]',
+//     'children[id,displayName,access,parent,level, path,children~isNotEmpty~rename(hasChildren)]',
+// ]
+
+const getOrgUnitFieldFilters = (fieldFilters: string[]) => {
+    const orgUnitFields = staticOrgUnitFields.concat(fieldFilters)
+    const ancestorFields = `ancestors[${orgUnitFields.join()},children~isNotEmpty~rename(hasChildren)]`
+    const childrenFields = `children[${orgUnitFields.join()},children~isNotEmpty~rename(hasChildren)]`
+    return orgUnitFields.concat(ancestorFields, childrenFields)
+}
 
 type OrganisationUnitResponse = PagedResponse<
     OrganisationUnitListItem,
@@ -75,6 +80,24 @@ export const useOrganisationUnits = ({
     }, [ids, rootOrgUnitsSet])
 
     console.log({ deduplicatedIds })
+    const filterRootQuery = {
+        queryFn: (queryOptions) =>
+            boundQueryFn<OrganisationUnitResponse>(queryOptions).then(
+                (response) => ({
+                    ...response,
+                    queryContext: { parent: undefined },
+                })
+            ),
+        queryKey: [
+            {
+                resource: 'organisationUnits',
+                params: {
+                    fields: getOrgUnitFieldFilters(fieldFilters),
+                    filter: filters,
+                },
+            }, // as const,
+        ],
+    }
     const queryObjects = deduplicatedIds.map((id) => {
         const isRoot = rootOrgUnitsSet.has(id)
         const expandedFilter = isRoot ? `id:eq:${id}` : `parent.id:eq:${id}`
@@ -83,10 +106,10 @@ export const useOrganisationUnits = ({
         const resourceQuery = {
             resource: 'organisationUnits',
             params: {
-                fields: orgUnitFields.concat(fieldFilters),
-                filter,
+                fields: getOrgUnitFieldFilters(fieldFilters),
+                filter, //: expandedFilter,
             },
-        } as const
+        } //as const
         const options: UseQueryOptions<
             OrganisationUnitResponseWithQueryContext,
             unknown,
@@ -104,12 +127,13 @@ export const useOrganisationUnits = ({
                     })
                 ), // queryFn<OrganisationUnitResponse>,
 
-            keepPreviousData: true,
-            staleTime: Infinity,
-            cacheTime: Infinity,
+            // keepPreviousData: true,
+            staleTime: 60000,
+            cacheTime: 60000,
         }
         return options
     })
+    // .concat(filterRootQuery)
 
     console.log({ queryObjects })
     const qs = useQueries(queryObjects)

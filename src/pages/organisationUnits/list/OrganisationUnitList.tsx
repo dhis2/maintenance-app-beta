@@ -15,7 +15,7 @@ import {
     flexRender,
     Row,
 } from '@tanstack/react-table'
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { IdentifiableFilter, SectionList } from '../../../components'
 import { useModelListView } from '../../../components/sectionList/listView'
 import { ModelValue } from '../../../components/sectionList/modelValue/ModelValue'
@@ -35,19 +35,14 @@ import {
     useExpandedOrgUnits,
     useOrganisationUnits,
 } from './useRootOrganisationUnit'
+import { filter } from 'lodash'
 
 export type OrganisationUnitListItem = Pick<
     OrganisationUnit,
-    | 'id'
-    | 'displayName'
-    | 'access'
-    | 'children'
-    | 'path'
-    | 'level'
-    | 'parent'
-    | 'ancestors'
+    'id' | 'displayName' | 'access' | 'path' | 'level' | 'parent' | 'ancestors'
 > & {
     hasChildren?: boolean
+    children: OrganisationUnitListItem[]
 }
 
 const useColumns = () => {
@@ -85,20 +80,38 @@ const useColumns = () => {
     }
 }
 
+const useTreeData = () => {}
+
 export const OrganisationUnitList = () => {
     const { columnDefinitions, selectedColumns } = useColumns()
     const filters = useFilterQueryParams()
 
+    const hasExpandedAfterFilter = React.useRef(false)
+
     const rootOrgUnits = useCurrentUserRootOrgUnits()
+    const minimumOrgUnitLevel = rootOrgUnits[0].level
     const rootOrgUnitsSet = useMemo(
         () => new Set(rootOrgUnits.map((ou) => ou.id)),
         [rootOrgUnits]
     )
     const schema = useSchema(SchemaName.organisationUnit)
 
-    const [expanded, setExpanded] = useState<ExpandedState>(() =>
+    const [expanded, _setExpanded] = useState<ExpandedState>(() =>
         Object.fromEntries(rootOrgUnits.map((ou) => [ou.id, true]))
     )
+
+    const setExpanded: React.Dispatch<React.SetStateAction<ExpandedState>> =
+        useCallback(
+            (expandedState) => {
+                _setExpanded(expandedState)
+                hasExpandedAfterFilter.current = true
+            },
+            [_setExpanded]
+        )
+
+    useEffect(() => {
+        hasExpandedAfterFilter.current = false
+    }, [filters])
 
     const orgUnitQueries = useOrganisationUnits({
         ids: Object.keys(expanded),
@@ -107,53 +120,52 @@ export const OrganisationUnitList = () => {
         ),
         filters,
     })
-    console.log({ orgUnits: orgUnitQueries })
-    // const expandedQueries = useExpandedOrgUnits({
-    //     expanded: expanded,
-    //     fieldFilters: selectedColumns.map((column) =>
-    //         getFieldFilter(schema, column.path)
-    //     ),
-    // })
-    // const data = useMemo(
-    //     () => expandedQueries.filter((q) => !!q.data).map((q) => q.data!) ?? [],
-    //     [expandedQueries]
-    // )
 
-    const allOrgUnits = useMemo(
+    const allOrgUnitsMap = useMemo(
         () =>
             orgUnitQueries
                 .filter((q) => !!q.data)
-                .flatMap((q) => q.data?.organisationUnits) ?? [],
+                .flatMap((q) => {
+                    const queryOrgs = q.data.organisationUnits
+                    const children = queryOrgs.flatMap((ou) => ou.children)
+                    const ancestors = queryOrgs.flatMap((ou) => ou.ancestors)
+                    return [...queryOrgs, ...children, ...ancestors]
+                })
+                .reduce((acc, ou) => {
+                    acc[ou.id] = ou
+                    return acc
+                }, {} as Record<string, OrganisationUnitListItem>),
         [orgUnitQueries]
     )
-    const rootData = useMemo(
-        () =>
-            orgUnitQueries
-                .filter((d) => d.data?.queryContext.parent === undefined)
-                .flatMap((d) => d.data?.organisationUnits ?? []),
-        [orgUnitQueries]
+    const flatOrgUnits = useMemo(
+        () => Object.values(allOrgUnitsMap),
+        [allOrgUnitsMap]
     )
 
-    const flatAncestors = useMemo(() => {
-        if (filters.length < 1) {
-            return []
+    const rootData = useMemo(() => {
+        const rootInData = flatOrgUnits.filter((d) => d.parent === undefined)
+        // .flatMap((d) => d.data?.organisationUnits ?? [])
+
+        if (rootInData.length > 0) {
+            return rootInData
         }
-        const ancestors = allOrgUnits
-            .filter((ou) => ou.ancestors.length > 0)
+        // if we dont have root in data, eg. we might be searching, find the tree root from ancestors
+        const rootAncestor = flatOrgUnits
+            .filter((ou) => ou?.ancestors?.length > 0)
             .flatMap((ou) => ou.ancestors)
-        // .filter((ou) => ou.level === 1)
-        return Array.from(new Map(ancestors.map((a) => [a.id, a])).values())
-    }, [allOrgUnits, filters])
+            .filter((ou) => ou.level === minimumOrgUnitLevel)[0]
+        console.log({ rootAncestor })
+        return rootAncestor //allOrgUnitsMap[rootAncestor?.id]
+    }, [minimumOrgUnitLevel, flatOrgUnits])
 
-    const tree =
-        filters.length > 0
-            ? flatAncestors.filter((a) => a.level === 1)
-            : rootData
-    console.log({ ddata: allOrgUnits, rootData, tree, flatAncestors })
+    console.log({ rootData, flatOrgUnits, allOrgUnitsMap })
+    // if we are searching, rootData contain the root of the search, and can be at any level
+    // thus we're using the ancestors to build the tree
     const table = useReactTable({
         columns: columnDefinitions,
         // columns
-        data: tree ?? [],
+        data: rootData ?? [],
+        // paginateExpandedRows
         getRowId: (row) => row.id,
         getCoreRowModel: getCoreRowModel<OrganisationUnitListItem>(),
         getRowCanExpand: (row) => {
@@ -164,30 +176,31 @@ export const OrganisationUnitList = () => {
                 !!row.original.hasChildren
             )
         },
-
         getSubRows: (row) => {
-            if (filters.length > 0) {
-                return flatAncestors.filter((ou) => ou.parent?.id === row.id)
-                // .map((ou) => ou.children)
+            // if (row.children) {
+            //     return row.children
+            // }
+            // const isRoot = rootData //rootOrgUnitsSet.has(row.id)
+            const rootNode = allOrgUnitsMap[row.id]
+            if (rootNode && rootNode.children?.length > 0) {
+                return rootNode.children
+                // .filter((d) => d?.id === row.id)
+                // .flatMap((d) => d.children)
             }
-            const isRoot = rootOrgUnitsSet.has(row.id)
-            if (isRoot) {
-                return rootData
-                    .filter((d) => d?.id === row.id)
-                    .flatMap((d) => d.children)
-            }
-
-            return orgUnitQueries
-                .filter((q) => q.data?.queryContext.parent === row.id)
-                .flatMap((q) => q.data?.organisationUnits ?? [])
-            // return ddata
-            //     .filter((d) => d?.id === row.id)
-            //     .flatMap((d) => d.children)
+            return flatOrgUnits.filter((d) => d.parent?.id === row.id)
         },
 
         getExpandedRowModel: getExpandedRowModel(),
         onExpandedChange: setExpanded,
+        // getIsRowExpanded(row) {
+        //     if (filters.length < 1) {
+        //         return expanded[row.id]
+        //         // return expanded[row.id]
+        //     }
 
+        //     return hasExpandedAfterFilter.current ? expanded[row.id] : true
+        //     // return row.getIsAllParentsExpanded()
+        // },
         state: {
             expanded,
         },
@@ -197,7 +210,9 @@ export const OrganisationUnitList = () => {
         table,
         data: rootData,
         exp: table.getExpandedRowModel(),
+        expanded,
     })
+
     return (
         <div>
             <SectionListTitle />
