@@ -4,7 +4,6 @@ import {
     DataTableCell,
     DataTableRow,
     IconArrowDown16,
-    IconArrowLeft16,
     IconChevronDown16,
     IconChevronRight16,
 } from '@dhis2/ui'
@@ -17,7 +16,7 @@ import {
     flexRender,
     Row,
 } from '@tanstack/react-table'
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { IdentifiableFilter, SectionList } from '../../../components'
 import { useModelListView } from '../../../components/sectionList/listView'
 import { ModelValue } from '../../../components/sectionList/modelValue/ModelValue'
@@ -25,7 +24,6 @@ import { SectionListTitle } from '../../../components/sectionList/SectionListTit
 import { ToolbarNormal } from '../../../components/sectionList/toolbar/ToolbarNormal'
 import {
     SchemaName,
-    useFilterQueryParams,
     useSchema,
     useSchemaFromHandle,
     useSectionListFilter,
@@ -36,14 +34,14 @@ import { OrganisationUnit } from '../../../types/generated'
 import css from './OrganisationUnitList.module.css'
 import {
     useFilteredOrgUnits,
-    useOrgUnitChildrenQueries,
-    useRootOrganisationUnits,
+    usePaginiatedChildrenOrgUnitsController,
 } from './useRootOrganisationUnit'
 
 export type OrganisationUnitListItem = Pick<
     OrganisationUnit,
-    'id' | 'displayName' | 'access' | 'path' | 'level' | 'parent' | 'ancestors'
+    'id' | 'displayName' | 'access' | 'path' | 'level' | 'parent'
 > & {
+    ancestors: OrganisationUnitListItem[]
     hasChildren?: boolean
     childCount: number
 }
@@ -54,30 +52,25 @@ const useColumns = () => {
 
     const columnDefinitions: ColumnDef<OrganisationUnitListItem>[] = useMemo(
         () =>
-            selectedColumns
-                .map((descriptor) => {
-                    return {
-                        accessorKey: descriptor.path,
-                        header: descriptor.label,
-                        cell: ({ row }) => {
-                            return (
-                                <ModelValue
-                                    path={
-                                        descriptor.path === 'name'
-                                            ? 'displayName'
-                                            : descriptor.path
-                                    }
-                                    schema={schema}
-                                    sectionModel={row.original}
-                                />
-                            )
-                        },
-                    }
-                })
-                .concat({
-                    header: 'Actions',
-                    cell: () => <span>Test</span>,
-                }),
+            selectedColumns.map((descriptor) => {
+                return {
+                    accessorKey: descriptor.path,
+                    header: descriptor.label,
+                    cell: ({ row }) => {
+                        return (
+                            <ModelValue
+                                path={
+                                    descriptor.path === 'name'
+                                        ? 'displayName'
+                                        : descriptor.path
+                                }
+                                schema={schema}
+                                sectionModel={row.original}
+                            />
+                        )
+                    },
+                }
+            }),
         [selectedColumns, schema]
     )
 
@@ -93,17 +86,20 @@ export const OrganisationUnitList = () => {
     const [queryFilter] = useSectionListFilter('identifiable')
 
     const userRootOrgUnits = useCurrentUserRootOrgUnits()
-    const userRootOrgUnitIds = userRootOrgUnits.map((ou) => ou.id)
+    const userRootOrgUnitIds = useMemo(
+        () => userRootOrgUnits.map((ou) => ou.id),
+        [userRootOrgUnits]
+    )
     const schema = useSchema(SchemaName.organisationUnit)
 
     // the expanded organisationUnit Ids
-    // note that this controls which orgUnits we load data for through useOrgUnitChildrenQueries
+    // note that this controls which orgUnits we load data for through usePaginatedChildrenOrgUnitsController
     const [expanded, setExpanded] = useState<ExpandedState>(() =>
         Object.fromEntries(userRootOrgUnitIds.map((ouId) => [ouId, true]))
     )
 
     // we keep a diferent state for the expanded org units during filtering
-    // because we want to expand all ancestors - but do NOT want to load data through useOrgUnitChildrenQueries
+    // because we want to expand all ancestors - but do NOT want to load data through usePaginatedChildrenOrgUnitsController
     // since we already get the data we need through useFilteredOrgUnits
 
     const [expandedDuringFilter, setExpandedDuringFilter] =
@@ -120,12 +116,12 @@ export const OrganisationUnitList = () => {
     })
     const isFiltering = !!queryFilter && !orgUnitFiltered.isIdle
 
-    const orgUnitQueries = useOrgUnitChildrenQueries({
-        ids: Object.keys(expanded).concat(
-            !isFiltering ? userRootOrgUnitIds : []
-        ),
+    const { queries, fetchNextPage } = usePaginiatedChildrenOrgUnitsController({
+        parentIds: Object.keys(expanded),
         fieldFilters,
     })
+
+    console.log({ queries })
 
     const mergedExpanded = useMemo(() => {
         if (expanded === true || expandedDuringFilter === true) {
@@ -159,37 +155,37 @@ export const OrganisationUnitList = () => {
         setExpandedDuringFilter(expandedObj)
         // this will "hide" data from useOrgUnitChildrenQueries, and only show the relevant data for the filter
         setExpanded({})
-    }, [userRootOrgUnits, isFiltering, orgUnitFiltered.data])
+    }, [
+        userRootOrgUnits,
+        isFiltering,
+        orgUnitFiltered.data,
+        userRootOrgUnitIds,
+    ])
 
     console.log({
         orgUnitFiltered,
-        orgUnitQueries,
         expanded,
         mergedExpanded,
         expandedDuringFilter,
     })
 
-    const allOrgUnitsMap = useMemo(
-        () =>
-            orgUnitQueries
-                .concat(orgUnitFiltered)
-                .filter((q) => !!q.data)
-                .flatMap((q) => {
-                    const queryOrgs = q.data.organisationUnits
-                    //      const children = queryOrgs.flatMap((ou) => ou.children)
-                    const ancestors = queryOrgs.flatMap((ou) => ou.ancestors)
-                    return [...queryOrgs, ...ancestors]
-                })
-                .reduce((acc, ou) => {
-                    acc[ou.id] = ou
-                    return acc
-                }, {} as Record<string, OrganisationUnitListItem>),
-        [orgUnitQueries, orgUnitFiltered]
-    )
-    const flatOrgUnits = useMemo(
-        () => Object.values(allOrgUnitsMap),
-        [allOrgUnitsMap]
-    )
+    const flatOrgUnits = useMemo(() => {
+        //gather all orgUnits and their ancestors and deduplicate them
+        const deduplicatedOrgUnits = queries
+            .concat(orgUnitFiltered)
+            .filter((q) => !!q.data)
+            .flatMap((q) => {
+                const queryOrgs = q.data.organisationUnits
+                //      const children = queryOrgs.flatMap((ou) => ou.children)
+                const ancestors = queryOrgs.flatMap((ou) => ou.ancestors)
+                return [...queryOrgs, ...ancestors]
+            })
+            .reduce((acc, ou) => {
+                acc[ou.id] = ou
+                return acc
+            }, {} as Record<string, OrganisationUnitListItem>)
+        return Object.values(deduplicatedOrgUnits)
+    }, [queries, orgUnitFiltered])
 
     const computedRoot = useMemo(() => {
         return flatOrgUnits.filter(
@@ -197,7 +193,6 @@ export const OrganisationUnitList = () => {
         )
     }, [flatOrgUnits, userRootOrgUnitIds])
 
-    console.log({ orgUnitQueries })
     // if we are searching, rootData contain the root of the search, and can be at any level
     // thus we're using the ancestors to build the tree
     const table = useReactTable({
@@ -245,6 +240,7 @@ export const OrganisationUnitList = () => {
                         row={row}
                         setExpanded={setExpanded}
                         isFiltering={isFiltering}
+                        fetchNextPage={fetchNextPage}
                     />
                 ))}
             </SectionList>
@@ -263,81 +259,103 @@ const OrganisationUnitRowSimple = ({
     row,
     setExpanded,
     isFiltering,
+    fetchNextPage,
 }: {
     row: Row<OrganisationUnitListItem>
     setExpanded: React.Dispatch<React.SetStateAction<ExpandedState>>
     isFiltering: boolean
+    fetchNextPage: (id: string) => void
 }) => {
+    const parentRow = row.getParentRow()
     return (
-        <DataTableRow key={row.id}>
-            <DataTableCell>
-                <span
-                    style={{
-                        paddingLeft: `${row.depth * 2}rem`,
-                        display: 'flex',
-                    }}
-                >
-                    {row.getCanExpand() ? (
-                        <>
-                            {isFiltering &&
-                                row.original.childCount !==
-                                    row.subRows.length && (
-                                    <Button
-                                        secondary
-                                        onClick={() => {
-                                            setExpanded((prev) => ({
-                                                ...prev,
-                                                [row.id]: prev[row.id]
-                                                    ? !prev[row.id]
-                                                    : true,
-                                            }))
-                                        }}
-                                        icon={<IconArrowDown16 />}
-                                    >
-                                        Show all
-                                    </Button>
-                                )}
-                            <Button
-                                className={css.expandButton}
-                                secondary
-                                type="button"
-                                loading={
-                                    false
-                                    // row.getIsExpanded() && row.subRows.length < 1
-                                }
-                                icon={
-                                    row.getIsExpanded() ? (
-                                        <IconChevronDown16 />
-                                    ) : (
-                                        <IconChevronRight16 />
-                                    )
-                                }
-                                onClick={row.getToggleExpandedHandler()}
-                            ></Button>
-                        </>
-                    ) : null}
-                    <Checkbox
-                        checked={row.getIsSelected()}
-                        onChange={({ checked }) => row.toggleSelected(checked)}
-                    />
-                </span>
-            </DataTableCell>
-            {row.getVisibleCells().map((cell) => {
-                return (
-                    <DataTableCell key={cell.id}>
-                        {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                        )}
-                    </DataTableCell>
-                )
-            })}
-            <DataTableCell>
-                {/* <DefaultListActions
+        <>
+            <DataTableRow key={row.id}>
+                <DataTableCell>
+                    <span
+                        style={{
+                            paddingLeft: `${row.depth * 2}rem`,
+                            display: 'flex',
+                        }}
+                    >
+                        {row.getCanExpand() ? (
+                            <>
+                                {/* {isFiltering &&
+                                    row.original.childCount !==
+                                        row.subRows.length && (
+                                        <Button
+                                            secondary
+                                            onClick={() => {
+                                                setExpanded((prev) => ({
+                                                    ...prev,
+                                                    [row.id]: prev[row.id]
+                                                        ? !prev[row.id]
+                                                        : true,
+                                                }))
+                                            }}
+                                            icon={<IconArrowDown16 />}
+                                        >
+                                            Show all
+                                        </Button>
+                                    )} */}
+                                <Button
+                                    className={css.expandButton}
+                                    secondary
+                                    type="button"
+                                    loading={
+                                        row.getIsExpanded() &&
+                                        row.subRows.length < 1
+                                    }
+                                    icon={
+                                        row.getIsExpanded() ? (
+                                            <IconChevronDown16 />
+                                        ) : (
+                                            <IconChevronRight16 />
+                                        )
+                                    }
+                                    onClick={row.getToggleExpandedHandler()}
+                                ></Button>
+                            </>
+                        ) : null}
+                        <Checkbox
+                            checked={row.getIsSelected()}
+                            onChange={({ checked }) =>
+                                row.toggleSelected(checked)
+                            }
+                        />
+                    </span>
+                </DataTableCell>
+                {row.getVisibleCells().map((cell) => {
+                    return (
+                        <DataTableCell key={cell.id}>
+                            {flexRender(
+                                cell.column.columnDef.cell,
+                                cell.getContext()
+                            )}
+                        </DataTableCell>
+                    )
+                })}
+                <DataTableCell>
+                    {/* <DefaultListActions
             model={row.original}
             onShowDetailsClick={() => undefined}
         /> */}
-            </DataTableCell>
-        </DataTableRow>
+                </DataTableCell>
+            </DataTableRow>
+            {!isFiltering &&
+                parentRow &&
+                parentRow.getIsExpanded() &&
+                parentRow.subRows.length !== parentRow?.original.childCount &&
+                row === parentRow.subRows[parentRow.subRows.length - 1] && (
+                    <DataTableRow>
+                        <DataTableCell
+                            colSpan="100"
+                            style={{ textAlign: 'center' }}
+                            onClick={() => fetchNextPage(parentRow.original.id)}
+                        >
+                            Load more for {parentRow.original.displayName}
+                        </DataTableCell>
+                    </DataTableRow>
+                )}
+        </>
     )
 }

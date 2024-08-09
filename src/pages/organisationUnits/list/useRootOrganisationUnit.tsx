@@ -1,5 +1,5 @@
 import { useDataEngine } from '@dhis2/app-runtime'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
     useQuery,
     useQueryClient,
@@ -149,4 +149,86 @@ export const useFilteredOrgUnits = ({
     }
 
     return useQuery(options)
+}
+
+export type ParentIdToPages = Record<string, number[]>
+
+type UsePaginatedChildrenOrgUnitsOptions = {
+    parentIds: string[]
+    fieldFilters: string[]
+    filters?: string[]
+    enabled?: boolean
+}
+
+export const usePaginiatedChildrenOrgUnitsController = (
+    options: UsePaginatedChildrenOrgUnitsOptions
+) => {
+    const boundQueryFn = useBoundResourceQueryFn()
+    const parentIds = options.parentIds
+
+    // store a "map" of pages to fetch for each parent id
+    const [parentIdPages, setFetchPages] = useState<ParentIdToPages>(
+        Object.fromEntries(parentIds.map((id) => [id, [1]]))
+    )
+
+    // this will create a query for each parent id and each page
+    // eg if parentIds = ['a', 'b'] and fetchPages = {a: [1, 2], b: [1]}
+    // then queries will be [['a', 1], ['a', 2], ['b', 1]]
+    const queries = useMemo(() => {
+        const idsToFetch = parentIds.map(
+            (id) => [id, parentIdPages[id] || [1]] as const
+        )
+        console.log({ idsToFetch })
+        const ret = idsToFetch.flatMap(([id, pages]) =>
+            pages.map((p) => [id, p] as const)
+        )
+        return ret
+    }, [parentIds, parentIdPages])
+
+    const fetchNextPage = useCallback(
+        (id: string) => {
+            setFetchPages((prev) => {
+                const pages = prev[id] || [1]
+                return {
+                    ...prev,
+                    [id]: [...pages, pages[pages.length - 1] + 1],
+                }
+            })
+        },
+        [setFetchPages]
+    )
+
+    const queryObjects = queries.map(([id, page]) => {
+        const resourceQuery = {
+            resource: 'organisationUnits',
+            params: {
+                fields: getOrgUnitFieldFilters(options.fieldFilters),
+                filter: `parent.id:eq:${id}`,
+                order: 'displayName:asc',
+                page: page,
+            },
+        } //as const
+        const queryOptions: UseQueryOptions<
+            OrganisationUnitResponse,
+            unknown,
+            OrganisationUnitResponse,
+            [typeof resourceQuery]
+        > = {
+            enabled: true, // options.enabled,
+            queryKey: [resourceQuery],
+            queryFn: boundQueryFn,
+            // keepPreviousData: true,
+            staleTime: 60000,
+            cacheTime: 60000,
+            meta: { parent: id },
+        }
+        return queryOptions
+    })
+    // .concat(filterRootQuery)
+
+    const qs = useQueries(queryObjects)
+    return {
+        queries: qs,
+        fetchNextPage,
+    }
 }
