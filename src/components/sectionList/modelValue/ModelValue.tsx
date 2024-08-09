@@ -39,7 +39,6 @@ export const ModelValue = ({ schema, path, sectionModel }: ModelValueProps) => {
     const schemaProperty = getSchemaProperty(schema, path)
 
     const value = getIn(sectionModel, path)
-    console.log({ path, schema, sectionModel })
     // if (path === 'name' && 'displayName' in sectionModel) {
     //     value = get(sectionModel, 'displayName')
     // }
