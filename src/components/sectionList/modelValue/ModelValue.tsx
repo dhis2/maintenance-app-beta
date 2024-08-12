@@ -39,11 +39,9 @@ export const ModelValue = ({ schema, path, sectionModel }: ModelValueProps) => {
     const schemaProperty = getSchemaProperty(schema, path)
 
     const value = getIn(sectionModel, path)
-    // if (path === 'name' && 'displayName' in sectionModel) {
-    //     value = get(sectionModel, 'displayName')
-    // }
+
     if (!schemaProperty || value == undefined) {
-        // console.warn(`Property ${path} not found, value not rendered: ${value}`)
+        console.warn(`Property ${path} not found, value not rendered: ${value}`)
         return null
     }
 

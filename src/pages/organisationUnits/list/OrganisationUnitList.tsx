@@ -82,8 +82,7 @@ const useColumns = () => {
 
 export const OrganisationUnitList = () => {
     const { columnDefinitions, selectedColumns } = useColumns()
-    //const filters = useFilterQueryParams()
-    const [queryFilter] = useSectionListFilter('identifiable')
+    const [identifiableFilter] = useSectionListFilter('identifiable')
 
     const userRootOrgUnits = useCurrentUserRootOrgUnits()
     const userRootOrgUnitIds = useMemo(
@@ -110,18 +109,16 @@ export const OrganisationUnitList = () => {
     )
 
     const orgUnitFiltered = useFilteredOrgUnits({
-        filters: [queryFilter || ''],
+        searchQuery: identifiableFilter,
         fieldFilters,
-        enabled: !!queryFilter,
+        enabled: !!identifiableFilter,
     })
-    const isFiltering = !!queryFilter && !orgUnitFiltered.isIdle
+    const isFiltering = !!identifiableFilter && !orgUnitFiltered.isIdle
 
     const { queries, fetchNextPage } = usePaginiatedChildrenOrgUnitsController({
         parentIds: Object.keys(expanded),
         fieldFilters,
     })
-
-    console.log({ queries })
 
     const mergedExpanded = useMemo(() => {
         if (expanded === true || expandedDuringFilter === true) {
@@ -138,7 +135,6 @@ export const OrganisationUnitList = () => {
                     userRootOrgUnitIds.map((ouId) => [ouId, true])
                 )
             )
-            //setExpanded(table.initialState.expanded)
         }
         if (!orgUnitFiltered.data) {
             return
@@ -176,7 +172,6 @@ export const OrganisationUnitList = () => {
             .filter((q) => !!q.data)
             .flatMap((q) => {
                 const queryOrgs = q.data.organisationUnits
-                //      const children = queryOrgs.flatMap((ou) => ou.children)
                 const ancestors = queryOrgs.flatMap((ou) => ou.ancestors)
                 return [...queryOrgs, ...ancestors]
             })
@@ -193,32 +188,22 @@ export const OrganisationUnitList = () => {
         )
     }, [flatOrgUnits, userRootOrgUnitIds])
 
-    // if we are searching, rootData contain the root of the search, and can be at any level
-    // thus we're using the ancestors to build the tree
     const table = useReactTable({
         columns: columnDefinitions,
         // note data must change for table to re-compute
-        // thus we cant use the same object from a query that grabs the root
+        // thus we have to compute the root whenver data changes (since subrows is not part of the data)
         data: computedRoot,
-        // paginateExpandedRows
         getRowId: (row) => row.id,
         getCoreRowModel: getCoreRowModel<OrganisationUnitListItem>(),
         getRowCanExpand: (row) => row.original.childCount > 0,
-
         getSubRows: (row) => {
             return flatOrgUnits.filter((d) => d.parent?.id === row.id)
         },
-
         getExpandedRowModel: getExpandedRowModel(),
         onExpandedChange: isFiltering ? setExpandedDuringFilter : setExpanded,
         state: {
             expanded: isFiltering ? expandedDuringFilter : expanded,
         },
-    })
-
-    console.log({
-        table,
-        exp: table.getExpandedRowModel(),
     })
 
     return (
@@ -248,13 +233,6 @@ export const OrganisationUnitList = () => {
     )
 }
 
-// const OrganisationUnitRow = ({ row, filters }: { row: Row<OrganisationUnitListItem> }) => {
-//     if(row.)
-// }
-// const OrganisationUnitRowWithAncestors = (
-//     row: Row<OrganisationUnitListItem>
-// ) => return
-
 const OrganisationUnitRowSimple = ({
     row,
     setExpanded,
@@ -279,24 +257,29 @@ const OrganisationUnitRowSimple = ({
                     >
                         {row.getCanExpand() ? (
                             <>
-                                {/* {isFiltering &&
+                                {isFiltering &&
                                     row.original.childCount !==
                                         row.subRows.length && (
                                         <Button
                                             secondary
                                             onClick={() => {
-                                                setExpanded((prev) => ({
-                                                    ...prev,
-                                                    [row.id]: prev[row.id]
-                                                        ? !prev[row.id]
-                                                        : true,
-                                                }))
+                                                setExpanded((prev) => {
+                                                    if (prev === true) {
+                                                        return prev
+                                                    }
+                                                    return {
+                                                        ...prev,
+                                                        [row.id]: prev[row.id]
+                                                            ? !prev[row.id]
+                                                            : true,
+                                                    }
+                                                })
                                             }}
                                             icon={<IconArrowDown16 />}
                                         >
                                             Show all
                                         </Button>
-                                    )} */}
+                                    )}
                                 <Button
                                     className={css.expandButton}
                                     secondary
