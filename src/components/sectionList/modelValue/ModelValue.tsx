@@ -7,7 +7,6 @@ import {
     stringToPathArray,
 } from '../../../lib'
 import { ModelValueRenderer } from './ModelValueRenderer'
-import { get } from 'lodash'
 
 type ModelValueProps = {
     schema: Schema
