@@ -120,13 +120,6 @@ export const OrganisationUnitList = () => {
         fieldFilters,
     })
 
-    const mergedExpanded = useMemo(() => {
-        if (expanded === true || expandedDuringFilter === true) {
-            return true
-        }
-        return { ...expanded, ...expandedDuringFilter }
-    }, [expanded, expandedDuringFilter])
-
     // expand ancestors of the filtered org units
     useEffect(() => {
         if (!isFiltering) {
@@ -161,7 +154,6 @@ export const OrganisationUnitList = () => {
     console.log({
         orgUnitFiltered,
         expanded,
-        mergedExpanded,
         expandedDuringFilter,
     })
 
@@ -191,7 +183,7 @@ export const OrganisationUnitList = () => {
     const table = useReactTable({
         columns: columnDefinitions,
         // note data must change for table to re-compute
-        // thus we have to compute the root whenver data changes (since subrows is not part of the data)
+        // thus we have to compute the root whenever data changes (since subrows is not part of the data)
         data: computedRoot,
         getRowId: (row) => row.id,
         getCoreRowModel: getCoreRowModel<OrganisationUnitListItem>(),
