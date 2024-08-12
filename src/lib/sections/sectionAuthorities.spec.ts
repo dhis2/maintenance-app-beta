@@ -33,27 +33,6 @@ const mockedSchemas = {
             },
         ],
     },
-    [SchemaName.dataElement]: {
-        singular: 'dataElement',
-        plural: 'dataElements',
-        name: 'dataElement',
-        displayName: 'Data Element',
-        collectionName: 'dataElements',
-        authorities: [
-            {
-                type: 'CREATE_PUBLIC',
-                authorities: ['F_DATAELEMENT_PUBLIC_ADD'],
-            },
-            {
-                type: 'CREATE_PRIVATE',
-                authorities: ['F_DATAELEMENT_PRIVATE_ADD'],
-            },
-            {
-                type: 'DELETE',
-                authorities: ['F_DATAELEMENT_DELETE'],
-            },
-        ],
-    },
     [SchemaName.dataElementGroup]: {
         singular: 'dataElementGroup',
         plural: 'dataElementGroups',

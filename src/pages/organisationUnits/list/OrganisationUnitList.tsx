@@ -35,7 +35,7 @@ import css from './OrganisationUnitList.module.css'
 import {
     useFilteredOrgUnits,
     usePaginiatedChildrenOrgUnitsController,
-} from './useRootOrganisationUnit'
+} from './useOrganisationUnits'
 
 export type OrganisationUnitListItem = Pick<
     OrganisationUnit,
