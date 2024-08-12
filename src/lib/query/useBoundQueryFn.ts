@@ -20,9 +20,8 @@ export const createBoundResourceQueryFn =
     async <TData>({
         queryKey: [query],
         signal,
-    }: QueryFunctionContext<[ResourceQuery]>) => {
+    }: QueryFunctionContext<Readonly<[ResourceQuery]>>) => {
         const result = await engine.query({ result: query }, { signal })
-        console.log('res', result)
         return result.result as TData
     }
 

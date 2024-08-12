@@ -73,7 +73,7 @@ type UsePaginatedChildrenOrgUnitsOptions = {
     enabled?: boolean
 }
 
-export const usePaginiatedChildrenOrgUnitsController = (
+export const usePaginatedChildrenOrgUnitsController = (
     options: UsePaginatedChildrenOrgUnitsOptions
 ) => {
     const boundQueryFn = useBoundResourceQueryFn()
@@ -119,16 +119,11 @@ export const usePaginiatedChildrenOrgUnitsController = (
                 order: 'displayName:asc',
                 page: page,
             },
-        } //as const
-        const queryOptions: UseQueryOptions<
-            OrganisationUnitResponse,
-            unknown,
-            OrganisationUnitResponse,
-            [typeof resourceQuery]
-        > = {
+        }
+        const queryOptions = {
             enabled: options.enabled,
-            queryKey: [resourceQuery],
-            queryFn: boundQueryFn,
+            queryKey: [resourceQuery] as const,
+            queryFn: boundQueryFn<OrganisationUnitResponse>,
             staleTime: 60000,
             cacheTime: 60000,
             meta: { parent: id },

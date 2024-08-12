@@ -34,7 +34,7 @@ import { OrganisationUnit } from '../../../types/generated'
 import css from './OrganisationUnitList.module.css'
 import {
     useFilteredOrgUnits,
-    usePaginiatedChildrenOrgUnitsController,
+    usePaginatedChildrenOrgUnitsController,
 } from './useOrganisationUnits'
 
 export type OrganisationUnitListItem = Pick<
@@ -115,7 +115,7 @@ export const OrganisationUnitList = () => {
     })
     const isFiltering = !!identifiableFilter && !orgUnitFiltered.isIdle
 
-    const { queries, fetchNextPage } = usePaginiatedChildrenOrgUnitsController({
+    const { queries, fetchNextPage } = usePaginatedChildrenOrgUnitsController({
         parentIds: Object.keys(expanded),
         fieldFilters,
     })
