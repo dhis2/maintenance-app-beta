@@ -29,11 +29,10 @@
         "@testing-library/user-event": "^12.8.3",
         "@types/jest": "^29.5.3",
         "@types/react": "^18.2.6",
-        "@typescript-eslint/eslint-plugin": "7",
-        "@typescript-eslint/parser": "7",
+        "@typescript-eslint/eslint-plugin": "^5.55.0",
+        "@typescript-eslint/parser": "^5.55.0",
         "cypress": "^12.14.0",
-        "eslint": "8",
-        "typescript": "^5.5.4",
+        "typescript": "^5.0.4",
         "whatwg-fetch": "^3.6.17"
     },
     "dependencies": {
@@ -52,7 +51,6 @@
         "zustand": "^4.4.0"
     },
     "resolutions": {
-        "@dhis2/ui": "^9.2.0",
-        "eslint": "8.57.0"
+        "@dhis2/ui": "^9.2.0"
     }
 }

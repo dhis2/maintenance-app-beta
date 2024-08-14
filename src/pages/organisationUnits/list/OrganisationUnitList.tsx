@@ -163,7 +163,8 @@ export const OrganisationUnitList = () => {
             .concat(orgUnitFiltered)
             .filter((q) => !!q.data)
             .flatMap((q) => {
-                const queryOrgs = q.data.organisationUnits
+                // TODO can remove q.data? once we update to typescript 5.5
+                const queryOrgs = q.data?.organisationUnits ?? []
                 const ancestors = queryOrgs.flatMap((ou) => ou.ancestors)
                 return [...queryOrgs, ...ancestors]
             })
