@@ -2,11 +2,16 @@ import { useDataEngine } from '@dhis2/app-runtime'
 import { useMemo } from 'react'
 import { QueryFunctionContext } from 'react-query'
 import type { DataEngine, Query, ResourceQuery } from '../../types'
-// types not exported from app-runtime...
+
+type DataQueryQueryKey = Readonly<[Query, ...unknown[]]>
+type ResourceQueryKey = Readonly<[ResourceQuery, ...unknown[]]>
 
 export const createBoundQueryFn =
     (engine: DataEngine) =>
-    <TData>({ queryKey: [query], signal }: QueryFunctionContext<[Query]>) =>
+    <TData>({
+        queryKey: [query],
+        signal,
+    }: QueryFunctionContext<DataQueryQueryKey>) =>
         engine.query(query, { signal }) as Promise<TData> // engine.query is not generic...
 
 export const useBoundQueryFn = () => {
@@ -20,7 +25,7 @@ export const createBoundResourceQueryFn =
     async <TData>({
         queryKey: [query],
         signal,
-    }: QueryFunctionContext<Readonly<[ResourceQuery]>>) => {
+    }: QueryFunctionContext<ResourceQueryKey>) => {
         const result = await engine.query({ result: query }, { signal })
         return result.result as TData
     }
