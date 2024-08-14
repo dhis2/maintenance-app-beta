@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from 'react'
-import { useQuery, useQueries, UseQueryOptions } from 'react-query'
+import { useQuery, useQueries } from 'react-query'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
 import { PagedResponse } from '../../../types/generated'
-import { OrganisationUnitListItem } from './OrganisationUnitList'
+import type { OrganisationUnitListItem } from './OrganisationUnitList'
 
 const staticOrgUnitFields = [
     'id',
@@ -26,7 +26,7 @@ type OrganisationUnitResponse = PagedResponse<
     'organisationUnits'
 >
 
-type useFilteredOrgUnitsOptions = {
+type UseFilteredOrgUnitsOptions = {
     fieldFilters: string[]
     searchQuery?: string
     enabled?: boolean
@@ -35,33 +35,25 @@ export const useFilteredOrgUnits = ({
     fieldFilters,
     searchQuery,
     enabled,
-}: useFilteredOrgUnitsOptions) => {
+}: UseFilteredOrgUnitsOptions) => {
     const boundQueryFn = useBoundResourceQueryFn()
 
     const resourceQuery = {
         resource: 'organisationUnits',
         params: {
             fields: getOrgUnitFieldFilters(fieldFilters),
-            //filter: filters, //: expandedFilter,
             query: searchQuery,
             withinUserHierarchy: true,
         },
-    } //as const
-    const options: UseQueryOptions<
-        OrganisationUnitResponse,
-        unknown,
-        OrganisationUnitResponse,
-        [typeof resourceQuery]
-    > = {
-        enabled: enabled,
-        queryKey: [resourceQuery],
-        queryFn: boundQueryFn,
-        // keepPreviousData: true,
-        staleTime: 60000,
-        cacheTime: 60000,
     }
 
-    return useQuery(options)
+    return useQuery({
+        enabled,
+        queryKey: [resourceQuery],
+        queryFn: boundQueryFn<OrganisationUnitResponse>,
+        staleTime: 60000,
+        cacheTime: 60000,
+    })
 }
 
 export type ParentIdToPages = Record<string, number[]>
@@ -122,18 +114,18 @@ export const usePaginatedChildrenOrgUnitsController = (
         }
         const queryOptions = {
             enabled: options.enabled,
-            queryKey: [resourceQuery] as const,
+            queryKey: [resourceQuery],
             queryFn: boundQueryFn<OrganisationUnitResponse>,
             staleTime: 60000,
             cacheTime: 60000,
             meta: { parent: id },
-        }
+        } as const
         return queryOptions
     })
 
-    const qs = useQueries(queryObjects)
+    const queries = useQueries(queryObjects)
     return {
-        queries: qs,
+        queries,
         fetchNextPage,
     }
 }

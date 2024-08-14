@@ -89,6 +89,7 @@ export const OrganisationUnitList = () => {
         () => userRootOrgUnits.map((ou) => ou.id),
         [userRootOrgUnits]
     )
+
     const schema = useSchema(SchemaName.organisationUnit)
 
     // the expanded organisationUnit Ids
@@ -144,18 +145,7 @@ export const OrganisationUnitList = () => {
         setExpandedDuringFilter(expandedObj)
         // this will "hide" data from useOrgUnitChildrenQueries, and only show the relevant data for the filter
         setExpanded({})
-    }, [
-        userRootOrgUnits,
-        isFiltering,
-        orgUnitFiltered.data,
-        userRootOrgUnitIds,
-    ])
-
-    console.log({
-        orgUnitFiltered,
-        expanded,
-        expandedDuringFilter,
-    })
+    }, [isFiltering, orgUnitFiltered.data, userRootOrgUnitIds])
 
     const flatOrgUnits = useMemo(() => {
         //gather all orgUnits and their ancestors and deduplicate them
