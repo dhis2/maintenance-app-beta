@@ -3,7 +3,7 @@ import { SystemSettings } from '../../types'
 import { OVERVIEW_SECTIONS, SECTIONS_MAP } from '../constants'
 import { useSchemaStore } from '../schemas/schemaStore'
 import { useSystemSettingsStore } from '../systemSettings/systemSettingsStore'
-import { ModelSchemas, CurrentUser } from '../useLoadApp'
+import { ModelSchemas } from '../useLoadApp'
 import { useCurrentUserStore } from '../user/currentUserStore'
 import { SchemaName } from './../../types/schemaBase'
 import {
@@ -119,6 +119,25 @@ const mockedSchemas = {
     },
 } as unknown as ModelSchemas
 
+const baseMockedCurrentUser = {
+    organisationUnits: [
+        {
+            id: 'ImspTQPwCqd',
+            level: 1,
+        },
+    ],
+    name: 'John Traore',
+    email: 'dummy@dhis2.org',
+    settings: {
+        keyMessageSmsNotification: false,
+        keyCurrentStyle: 'light_blue/light_blue.css',
+        keyStyle: 'light_blue/light_blue.css',
+        keyUiLocale: 'en',
+        keyAnalysisDisplayProperty: 'name',
+        keyMessageEmailNotification: false,
+    },
+}
+
 const setMockedKeyRequireAddToView = (value: boolean) => {
     const mockedSystemSettings = {
         keyRequireAddToView: value,
@@ -128,8 +147,9 @@ const setMockedKeyRequireAddToView = (value: boolean) => {
 
 const setMockedAuthorities = (authorities: Set<string>) => {
     const mockedCurrentUser = {
+        ...baseMockedCurrentUser,
         authorities,
-    } as unknown as CurrentUser
+    }
     useCurrentUserStore.getState().setCurrentUser(mockedCurrentUser)
 }
 
