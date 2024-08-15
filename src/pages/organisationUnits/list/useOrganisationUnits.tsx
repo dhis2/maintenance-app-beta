@@ -60,7 +60,7 @@ export const useFilteredOrgUnits = ({
 export type ParentIdToPages = Record<string, number[]>
 
 type UsePaginatedChildrenOrgUnitsOptions = {
-    parentIds: string[]
+    parentIds: Record<string, boolean>
     fieldFilters: string[]
     filters?: string[]
     enabled?: boolean
@@ -74,14 +74,14 @@ export const usePaginatedChildrenOrgUnitsController = (
 
     // store a "map" of pages to fetch for each parent id
     const [parentIdPages, setFetchPages] = useState<ParentIdToPages>(
-        Object.fromEntries(parentIds.map((id) => [id, [1]]))
+        Object.fromEntries(Object.keys(parentIds).map((id) => [id, [1]]))
     )
 
     // this will create a query for each parent id and each page
     // eg if parentIds = ['a', 'b'] and fetchPages = {a: [1, 2], b: [1]}
     // then queries will be [['a', 1], ['a', 2], ['b', 1]]
     const flatParentIdPages = useMemo(() => {
-        const idsToFetch = parentIds.map(
+        const idsToFetch = Object.keys(parentIds).map(
             (id) => [id, parentIdPages[id] || [1]] as const
         )
         const ret = idsToFetch.flatMap(([id, pages]) =>

@@ -39,9 +39,9 @@ export type OrganisationUnitListItem = Pick<
 
 const useColumns = () => {
     const { columns: selectedColumns } = useModelListView()
-    const schema = useSchemaFromHandle()
+    const schema = useSchema(SchemaName.organisationUnit)
 
-    const columnDefinitions: ColumnDef<OrganisationUnitListItem>[] = useMemo(
+    const columnDefinitions = useMemo(
         () =>
             selectedColumns.map((descriptor) => {
                 return {
@@ -60,63 +60,45 @@ const useColumns = () => {
                             />
                         )
                     },
-                }
+                    meta: {
+                        fieldFilter: getFieldFilter(schema, descriptor.path),
+                    },
+                } satisfies ColumnDef<OrganisationUnitListItem>
             }),
         [selectedColumns, schema]
     )
 
-    return {
-        columnDefinitions,
-        selectedColumns,
-    }
+    return columnDefinitions
 }
 
 export const OrganisationUnitList = () => {
-    const { columnDefinitions, selectedColumns } = useColumns()
+    const columnDefinitions = useColumns()
     const [identifiableFilter] = useSectionListFilter('identifiable')
-
     const userRootOrgUnits = useCurrentUserRootOrgUnits()
-    const userRootOrgUnitIds = useMemo(
-        () => userRootOrgUnits.map((ou) => ou.id),
-        [userRootOrgUnits]
-    )
-    const inititalExpandedState = useMemo(() => {
-        return Object.fromEntries(
-            userRootOrgUnitIds.map((ouId) => [ouId, true])
-        )
-    }, [userRootOrgUnitIds])
-    const schema = useSchema(SchemaName.organisationUnit)
 
+    const initialExpandedState = useMemo(() => {
+        return Object.fromEntries(userRootOrgUnits.map((ou) => [ou.id, true]))
+    }, [userRootOrgUnits])
+
+    const [parentIdsToLoad, setParentIdsToLoad] = useState<ExpandedStateList>(
+        () => initialExpandedState
+    )
     // the expanded organisationUnit Ids
-    // note that this controls which orgUnits we load data for through usePaginatedChildrenOrgUnitsController
-    const [expanded, setExpanded] = useState<ExpandedStateList>(
-        () => inititalExpandedState
+    const [expanded, setExpanded] = useState<ExpandedState>(
+        () => initialExpandedState
     )
 
-    // we keep a diferent state for the expanded org units during filtering
-    // because we want to expand all ancestors - but do NOT want to load data through usePaginatedChildrenOrgUnitsController
-    // since we already get the data we need through useFilteredOrgUnits
-    const [expandedDuringFilter, setExpandedDuringFilter] =
-        useState<ExpandedStateList>({})
-
-    const fieldFilters = selectedColumns.map((column) =>
-        getFieldFilter(schema, column.path)
+    const fieldFilters = columnDefinitions.map(
+        (column) => column.meta.fieldFilter
     )
+
+    const isFiltering = !!identifiableFilter
 
     const orgUnitFiltered = useFilteredOrgUnits({
         searchQuery: identifiableFilter,
         fieldFilters,
-        enabled: !!identifiableFilter,
+        enabled: isFiltering,
     })
-    const isFiltering = !!identifiableFilter
-
-    const parentIdsToLoad = useMemo(() => {
-        if (isFiltering) {
-            return Object.keys(expanded)
-        }
-        // when we are not filtering we always want to load the root org units, so that the table is never empty
-        return Object.keys({ ...inititalExpandedState, ...expanded })
-    }, [isFiltering, expanded, inititalExpandedState])
 
     const { queries, fetchNextPage } = usePaginatedChildrenOrgUnitsController({
         parentIds: parentIdsToLoad,
@@ -125,26 +107,17 @@ export const OrganisationUnitList = () => {
 
     // expand ancestors of the filtered org units
     useEffect(() => {
+        // reset state when not filtering
         if (!isFiltering) {
-            setExpanded(inititalExpandedState)
+            setExpanded(initialExpandedState)
+            setParentIdsToLoad(initialExpandedState)
             return
         }
-        if (!orgUnitFiltered.data) {
-            return
-        }
-        const ancestorIds = orgUnitFiltered.data?.organisationUnits.flatMap(
-            (ou) => ou.ancestors.map((a) => a.id)
-        )
-        if (!ancestorIds) {
-            return
-        }
-        const expandedObj = Object.fromEntries(
-            ancestorIds.map((id) => [id, true])
-        )
-        setExpandedDuringFilter(expandedObj)
-        // this will "hide" data from useOrgUnitChildrenQueries, and only show the relevant data for the filter
-        setExpanded({})
-    }, [isFiltering, orgUnitFiltered.data, inititalExpandedState])
+        // if we are filtering, expand all, and reset parentIdsToLoad
+        setExpanded(true)
+        // hide data from usePaginatedChildrenOrgUnitsController
+        setParentIdsToLoad({})
+    }, [isFiltering, initialExpandedState])
 
     const flatOrgUnits = useMemo(() => {
         //gather all orgUnits and their ancestors and deduplicate them
@@ -167,35 +140,45 @@ export const OrganisationUnitList = () => {
 
     const computedRoot = useMemo(() => {
         return flatOrgUnits.filter(
-            (ou) => !ou.parent || userRootOrgUnitIds.includes(ou.id)
+            (ou) => !ou.parent || initialExpandedState[ou.id]
         )
-    }, [flatOrgUnits, userRootOrgUnitIds])
+    }, [flatOrgUnits, initialExpandedState])
 
-    // handle when expanded
     const handleExpand = useCallback(
         (valueOrUpdater: Updater<ExpandedState>) => {
-            // we are just using ExpandedStateList in state, because we need the exact Ids to load
-            // but API exposes ExpandedState (includes true to expand all)
-            // so we handle and translate that to expand all loaded units
-            const setExpandedFunc = isFiltering
-                ? setExpandedDuringFilter
-                : setExpanded
-            const expandAll = () =>
-                Object.fromEntries(
-                    flatOrgUnits.map((ou) => [ou.id, true] as const)
-                )
+            // when we expand something and are not filtering, we need to load the children
+            // also translate expandedState === true (expand all) to expand all loaded units
+            const getAllExpanded = () =>
+                Object.fromEntries(flatOrgUnits.map((ou) => [ou.id, true]))
+            // we always want to keep root loaded
+            const getValueWithRoot = (value: ExpandedStateList) => ({
+                ...initialExpandedState,
+                ...value,
+            })
             if (typeof valueOrUpdater === 'function') {
-                setExpandedFunc((old) => {
+                setExpanded((old) => {
                     const value = valueOrUpdater(old)
-                    return value === true ? expandAll() : value
+                    if (!isFiltering) {
+                        setParentIdsToLoad(
+                            value === true
+                                ? getAllExpanded()
+                                : getValueWithRoot(value)
+                        )
+                    }
+                    return value
                 })
             } else {
-                setExpandedFunc(
-                    valueOrUpdater === true ? expandAll() : valueOrUpdater
-                )
+                setExpanded(valueOrUpdater)
+                if (!isFiltering) {
+                    setParentIdsToLoad(
+                        valueOrUpdater === true
+                            ? getAllExpanded()
+                            : getValueWithRoot(valueOrUpdater)
+                    )
+                }
             }
         },
-        [isFiltering, setExpandedDuringFilter, setExpanded, flatOrgUnits]
+        [isFiltering, setExpanded, flatOrgUnits]
     )
 
     const table = useReactTable({
@@ -212,7 +195,7 @@ export const OrganisationUnitList = () => {
         getExpandedRowModel: getExpandedRowModel(),
         onExpandedChange: handleExpand,
         state: {
-            expanded: isFiltering ? expandedDuringFilter : expanded,
+            expanded,
         },
     })
 
@@ -233,7 +216,18 @@ export const OrganisationUnitList = () => {
                     <OrganisationUnitRow
                         key={row.id}
                         row={row}
-                        setExpanded={setExpanded}
+                        toggleShowAll={(id) =>
+                            setParentIdsToLoad((prev) => {
+                                const { [id]: wasShown, ...withoutId } = prev
+                                if (wasShown) {
+                                    return withoutId
+                                }
+                                return { ...prev, [id]: true }
+                            })
+                        }
+                        showAllActive={
+                            parentIdsToLoad[row.original.id] === true
+                        }
                         isFiltering={isFiltering}
                         fetchNextPage={fetchNextPage}
                     />
