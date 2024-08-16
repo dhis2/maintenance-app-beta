@@ -2,9 +2,12 @@ import { UseQueryResult } from 'react-query'
 import {
     SectionListEmpty,
     SectionListError,
+    SectionListMessage,
 } from '../../../components/sectionList/SectionListMessages'
+import { Center } from '@dhis2/ui'
 import React from 'react'
 import { SectionListLoader } from '../../../components/sectionList/SectionListLoader'
+import i18n from '@dhis2/d2-i18n'
 
 type OrganisationUnitListMessageProps = {
     orgUnitCount: number
@@ -27,15 +30,25 @@ export const OrganisationUnitListMessage = ({
 
     // we only show loading indicator when we don't have any data to show
     // and some query is loading
-    const anyFirstLoading =
+    const showLoading =
         orgUnitCount < 1 && queries.some((query) => query.isLoading)
 
-    if (anyFirstLoading) {
+    if (showLoading) {
         return <SectionListLoader />
     }
 
-    if (orgUnitCount < 1) {
+    if (isFiltering && orgUnitCount < 1) {
         return <SectionListEmpty />
     }
+    // if for some reason we don't have any data, are not loading and are not filtering
+    // it could mean that the user doesn't have access to any org units
+    if (orgUnitCount < 1) {
+        return (
+            <SectionListMessage>
+                <Center>{i18n.t('No organisation units available')}</Center>
+            </SectionListMessage>
+        )
+    }
+
     return null
 }

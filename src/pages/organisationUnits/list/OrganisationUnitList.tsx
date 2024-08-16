@@ -233,7 +233,7 @@ export const OrganisationUnitList = () => {
                 <OrganisationUnitListMessage
                     isFiltering={isFiltering}
                     queries={queries.concat(orgUnitFiltered)}
-                    orgUnitCount={flatOrgUnits.length}
+                    orgUnitCount={table.getRowCount()}
                 />
                 {table.getRowModel().rows.map((row) => (
                     <OrganisationUnitRow
