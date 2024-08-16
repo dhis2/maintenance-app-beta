@@ -124,6 +124,7 @@ const baseMockedCurrentUser = {
         {
             id: 'ImspTQPwCqd',
             level: 1,
+            path: '/ImspTQPwCqd',
         },
     ],
     name: 'John Traore',

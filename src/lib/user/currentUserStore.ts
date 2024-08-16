@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
+import { findMinimumRootUnits } from '../organisationUnit'
 import type { CurrentUser, UserAssignedOrganisationUnits } from '../useLoadApp'
 
 export interface CurrentUserStore {
@@ -24,12 +25,10 @@ export const useCurrentUserStore = create<CurrentUserStore>()(
             return currentUser
         },
         setCurrentUser: (currentUser) => {
-            const minumumOrgUnitLevel = Math.min(
-                ...currentUser.organisationUnits.map((ou) => ou.level)
+            const rootOrganisationUnits = findMinimumRootUnits(
+                currentUser.organisationUnits
             )
-            const rootOrganisationUnits = currentUser.organisationUnits.filter(
-                (ou) => ou.level === minumumOrgUnitLevel
-            )
+
             set({ currentUser, rootOrganisationUnits })
         },
         getRootOrganisationUnits: () => {

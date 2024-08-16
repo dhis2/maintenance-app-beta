@@ -40,7 +40,7 @@ const userFields = [
 // workaround to widen the type, because useQuery() does not allow for
 // readonly types
 // also add complex field-filters that are not trivial to reuse for types
-const orgUnitFields = ['id', 'level'] as const
+const orgUnitFields = ['id', 'level', 'path'] as const
 const userFieldsFilter = [
     ...userFields,
     `organisationUnits[${orgUnitFields.join(',')}]`,
