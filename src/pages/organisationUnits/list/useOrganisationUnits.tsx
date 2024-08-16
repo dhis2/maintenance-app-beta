@@ -53,7 +53,7 @@ export const useFilteredOrgUnits = ({
         queryFn: boundQueryFn<OrganisationUnitResponse>,
         staleTime: 60000,
         cacheTime: 60000,
-        // keepPreviousData: true,
+        keepPreviousData: true,
     })
 }
 

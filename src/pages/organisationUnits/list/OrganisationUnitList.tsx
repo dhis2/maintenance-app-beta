@@ -27,6 +27,7 @@ import {
     useFilteredOrgUnits,
     usePaginatedChildrenOrgUnitsController,
 } from './useOrganisationUnits'
+import { OrganisationUnitListMessage } from './OrganisationUnitListMessage'
 
 export type OrganisationUnitListItem = Pick<
     OrganisationUnit,
@@ -229,6 +230,11 @@ export const OrganisationUnitList = () => {
                 }))}
                 onSelectAll={() => table.toggleAllRowsSelected()}
             >
+                <OrganisationUnitListMessage
+                    isFiltering={isFiltering}
+                    queries={queries.concat(orgUnitFiltered)}
+                    orgUnitCount={flatOrgUnits.length}
+                />
                 {table.getRowModel().rows.map((row) => (
                     <OrganisationUnitRow
                         key={row.id}
