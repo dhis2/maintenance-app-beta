@@ -21,22 +21,18 @@ import {
 } from '../../../lib'
 import { getFieldFilter } from '../../../lib/models/path'
 import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
-import { OrganisationUnit } from '../../../types/generated'
+import { OrganisationUnitListMessage } from './OrganisationUnitListMessage'
 import { OrganisationUnitRow } from './OrganisationUnitRow'
 import {
+    PartialOrganisationUnit,
     useFilteredOrgUnits,
     usePaginatedChildrenOrgUnitsController,
 } from './useOrganisationUnits'
-import { OrganisationUnitListMessage } from './OrganisationUnitListMessage'
 
-export type OrganisationUnitListItem = Pick<
-    OrganisationUnit,
-    'id' | 'displayName' | 'access' | 'path' | 'level' | 'parent'
-> & {
-    ancestors: OrganisationUnitListItem[]
-    hasChildren?: boolean
-    childCount: number
-}
+export type OrganisationUnitListItem = Omit<
+    PartialOrganisationUnit,
+    'ancestors'
+>
 
 const useColumns = () => {
     const { columns: selectedColumns } = useModelListView()
@@ -147,8 +143,9 @@ export const OrganisationUnitList = () => {
         setExpanded({})
     }, [isFiltering, orgUnitFiltered.data, inititalExpandedState])
 
-    const flatOrgUnits = useMemo(() => {
-        //gather all orgUnits and their ancestors and deduplicate them
+    const { rootOrgUnits, flatOrgUnits } = useMemo(() => {
+        const rootOrgUnits: OrganisationUnitListItem[] = []
+        //gather all loaded orgUnits and their ancestors and deduplicate them
         const deduplicatedOrgUnits = queries
             .concat(orgUnitFiltered)
             .flatMap((q) => {
@@ -160,17 +157,18 @@ export const OrganisationUnitList = () => {
                 return [...queryOrgs, ...ancestors]
             })
             .reduce((acc, ou) => {
+                if (userRootOrgUnitIds.includes(ou.id)) {
+                    rootOrgUnits.push(ou)
+                }
                 acc[ou.id] = ou
                 return acc
             }, {} as Record<string, OrganisationUnitListItem>)
-        return Object.values(deduplicatedOrgUnits)
-    }, [queries, orgUnitFiltered])
 
-    const computedRoot = useMemo(() => {
-        return flatOrgUnits.filter(
-            (ou) => !ou.parent || userRootOrgUnitIds.includes(ou.id)
-        )
-    }, [flatOrgUnits, userRootOrgUnitIds])
+        return {
+            rootOrgUnits,
+            flatOrgUnits: Object.values(deduplicatedOrgUnits),
+        }
+    }, [queries, orgUnitFiltered, userRootOrgUnitIds])
 
     // handle when expanded
     const handleExpand = useCallback(
@@ -203,7 +201,7 @@ export const OrganisationUnitList = () => {
         columns: columnDefinitions,
         // note data must change for table to re-compute
         // thus we have to compute the root whenever data changes (since subrows is not part of the data)
-        data: computedRoot,
+        data: rootOrgUnits,
         getRowId: (row) => row.id,
         getCoreRowModel: getCoreRowModel<OrganisationUnitListItem>(),
         getRowCanExpand: (row) => row.original.childCount > 0,
