@@ -1,8 +1,7 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useQuery, useQueries } from 'react-query'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
-import { PagedResponse } from '../../../types/generated'
-import type { OrganisationUnitListItem } from './OrganisationUnitList'
+import { OrganisationUnit, PagedResponse } from '../../../types/generated'
 
 const staticOrgUnitFields = [
     'id',
@@ -17,12 +16,20 @@ const staticOrgUnitFields = [
 const getOrgUnitFieldFilters = (fieldFilters: string[]) => {
     const orgUnitFields = staticOrgUnitFields.concat(fieldFilters)
     const ancestorFields = `ancestors[${orgUnitFields.join()},href]`
-    // const childrenFields = `children[${orgUnitFields.join()},children~isNotEmpty~rename(hasChildren)]`
     return orgUnitFields.concat(ancestorFields)
 }
 
+export type PartialOrganisationUnit = Pick<
+    OrganisationUnit,
+    'id' | 'displayName' | 'access' | 'path' | 'level' | 'parent'
+> & {
+    ancestors: Omit<PartialOrganisationUnit, 'ancestors'>[]
+    hasChildren?: boolean
+    childCount: number
+}
+
 type OrganisationUnitResponse = PagedResponse<
-    OrganisationUnitListItem,
+    PartialOrganisationUnit,
     'organisationUnits'
 >
 
@@ -106,11 +113,12 @@ export const usePaginatedChildrenOrgUnitsController = (
     const queryObjects = flatParentIdPages.map(([id, page]) => {
         const resourceQuery = {
             resource: 'organisationUnits',
+            id,
             params: {
                 fields: getOrgUnitFieldFilters(options.fieldFilters),
-                filter: `parent.id:eq:${id}`,
                 order: 'displayName:asc',
                 page: page,
+                includeChildren: true,
             },
         }
         const queryOptions = {
