@@ -91,6 +91,10 @@ export const usePaginatedChildrenOrgUnitsController = (
         const idsToFetch = parentIds.map(
             (id) => [id, parentIdPages[id] || [1]] as const
         )
+        const re = parentIds.flatMap((id) => {
+            const pages = parentIdPages[id] || [1]
+            return pages.map((p) => [id, p] as const)
+        })
         const ret = idsToFetch.flatMap(([id, pages]) =>
             pages.map((p) => [id, p] as const)
         )
@@ -113,12 +117,11 @@ export const usePaginatedChildrenOrgUnitsController = (
     const queryObjects = flatParentIdPages.map(([id, page]) => {
         const resourceQuery = {
             resource: 'organisationUnits',
-            id,
             params: {
                 fields: getOrgUnitFieldFilters(options.fieldFilters),
+                filter: `parent.id:eq:${id}`,
                 order: 'displayName:asc',
                 page: page,
-                includeChildren: true,
             },
         }
         const queryOptions = {
