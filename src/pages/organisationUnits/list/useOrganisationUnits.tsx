@@ -88,17 +88,10 @@ export const usePaginatedChildrenOrgUnitsController = (
     // eg if parentIds = ['a', 'b'] and fetchPages = {a: [1, 2], b: [1]}
     // then queries will be [['a', 1], ['a', 2], ['b', 1]]
     const flatParentIdPages = useMemo(() => {
-        const idsToFetch = parentIds.map(
-            (id) => [id, parentIdPages[id] || [1]] as const
-        )
-        const re = parentIds.flatMap((id) => {
+        return parentIds.flatMap((id) => {
             const pages = parentIdPages[id] || [1]
             return pages.map((p) => [id, p] as const)
         })
-        const ret = idsToFetch.flatMap(([id, pages]) =>
-            pages.map((p) => [id, p] as const)
-        )
-        return ret
     }, [parentIds, parentIdPages])
 
     const fetchNextPage = useCallback(
