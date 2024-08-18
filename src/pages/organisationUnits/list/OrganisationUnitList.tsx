@@ -144,7 +144,7 @@ export const OrganisationUnitList = () => {
     }, [isFiltering, orgUnitFiltered.data, inititalExpandedState])
 
     const { rootOrgUnits, flatOrgUnits } = useMemo(() => {
-        const rootOrgUnits: OrganisationUnitListItem[] = []
+        const rootOrgUnits = new Map<string, OrganisationUnitListItem>()
         //gather all loaded orgUnits and their ancestors and deduplicate them
         const deduplicatedOrgUnits = queries
             .concat(orgUnitFiltered)
@@ -158,14 +158,14 @@ export const OrganisationUnitList = () => {
             })
             .reduce((acc, ou) => {
                 if (userRootOrgUnitIds.includes(ou.id)) {
-                    rootOrgUnits.push(ou)
+                    rootOrgUnits.set(ou.id, ou)
                 }
                 acc[ou.id] = ou
                 return acc
             }, {} as Record<string, OrganisationUnitListItem>)
 
         return {
-            rootOrgUnits,
+            rootOrgUnits: Array.from(rootOrgUnits.values()),
             flatOrgUnits: Object.values(deduplicatedOrgUnits),
         }
     }, [queries, orgUnitFiltered, userRootOrgUnitIds])
