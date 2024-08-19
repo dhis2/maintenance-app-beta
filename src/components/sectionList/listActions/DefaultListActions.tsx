@@ -27,8 +27,8 @@ export const DefaultListActions = ({
         <ListActions>
             <ActionEdit modelId={model.id} />
             <ActionMore
-                deletable={editable}
-                editable={deletable}
+                deletable={deletable}
+                editable={editable}
                 translatable={schema.translatable}
                 model={model}
                 onShowDetailsClick={() => onShowDetailsClick(model)}
