@@ -19,13 +19,11 @@ export const OrganisationUnitRow = ({
     setExpanded,
     isFiltering,
     fetchNextPage,
-    refetch,
 }: {
     row: Row<OrganisationUnitListItem>
     setExpanded: React.Dispatch<React.SetStateAction<ExpandedStateList>>
     isFiltering: boolean
     fetchNextPage: (id: string) => void
-    refetch: () => void
 }) => {
     const parentRow = row.getParentRow()
 
@@ -102,9 +100,6 @@ export const OrganisationUnitRow = ({
                     <OrganisationUnitListActions
                         model={row.original}
                         // onOpenTranslationClick={()=>{}}
-                        onDeleteSuccess={() => {
-                            refetch()
-                        }}
                     />
                 </DataTableCell>
             </DataTableRow>

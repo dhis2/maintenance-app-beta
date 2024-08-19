@@ -8,6 +8,7 @@ import {
     Popover,
 } from '@dhis2/ui'
 import React, { useState, useRef } from 'react'
+import { useQueryClient } from 'react-query'
 import { useHref, useLinkClickHandler } from 'react-router-dom'
 import { DeleteAction } from '../../../components/sectionList/listActions/DeleteAction'
 import {
@@ -21,15 +22,22 @@ import { canDeleteModel } from '../../../lib/models/access'
 type OrganisationUnitListActionProps = {
     model: BaseListModel
     // onOpenTranslationClick: (model: BaseListModel) => void
-    onDeleteSuccess: () => void
+    // onDeleteSuccess: () => void
 }
 
 export const OrganisationUnitListActions = ({
     model,
-    // onOpenTranslationClick,
-    onDeleteSuccess,
-}: OrganisationUnitListActionProps) => {
+}: // onOpenTranslationClick,
+// onDeleteSuccess,
+OrganisationUnitListActionProps) => {
     const deletable = canDeleteModel(model)
+    const queryClient = useQueryClient()
+
+    const handleDeleteSuccess = () => {
+        queryClient.invalidateQueries({
+            queryKey: [{ resource: 'organisationUnits' }],
+        })
+    }
 
     return (
         <ListActions>
@@ -38,7 +46,7 @@ export const OrganisationUnitListActions = ({
                 deletable={deletable}
                 model={model}
                 // onTranslateClick={() => onOpenTranslationClick(model)}
-                onDeleteSuccess={onDeleteSuccess}
+                onDeleteSuccess={handleDeleteSuccess}
             />
         </ListActions>
     )

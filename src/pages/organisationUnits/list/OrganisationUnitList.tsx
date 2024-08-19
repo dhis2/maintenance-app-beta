@@ -240,14 +240,6 @@ export const OrganisationUnitList = () => {
                         setExpanded={setExpanded}
                         isFiltering={isFiltering}
                         fetchNextPage={fetchNextPage}
-                        refetch={() => {
-                            // const queryClient = useQueryClient()
-                            // queryClient.invalidateQueries({ querykey: [{resource: 'organisationUnits'}]})
-                            isFiltering
-                                ? orgUnitFiltered.refetch()
-                                : queries.map((q) => q.refetch())
-                            return
-                        }}
                     />
                 ))}
             </SectionList>
