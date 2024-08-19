@@ -112,7 +112,10 @@ export const usePaginatedChildrenOrgUnitsController = (
             resource: 'organisationUnits',
             params: {
                 fields: getOrgUnitFieldFilters(options.fieldFilters),
-                filter: `parent.id:eq:${id}`,
+                // `id:eq:id` is for an edge-case where a root-unit is a leaf-node
+                // and `parent.id`-filter would return empty results
+                filter: [`parent.id:eq:${id}`, `id:eq:${id}`],
+                rootJunction: 'OR',
                 order: 'displayName:asc',
                 page: page,
             },
