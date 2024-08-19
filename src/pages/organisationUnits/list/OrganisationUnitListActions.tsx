@@ -17,11 +17,9 @@ import {
 import { TooltipWrapper } from '../../../components/tooltip'
 import { BaseListModel, TOOLTIPS } from '../../../lib'
 import { canDeleteModel } from '../../../lib/models/access'
-import css from './OrganisationUnitListActions.module.css'
 
 type OrganisationUnitListActionProps = {
     model: BaseListModel
-
     // onOpenTranslationClick: (model: BaseListModel) => void
     onDeleteSuccess: () => void
 }
@@ -75,7 +73,6 @@ const OrganisationUnitActionMore = ({
             />
             {open && (
                 <Popover
-                    className={css.actionMorePopover}
                     arrow={false}
                     placement="bottom-end"
                     reference={ref}

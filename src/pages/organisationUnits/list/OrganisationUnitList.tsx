@@ -23,9 +23,6 @@ import { getFieldFilter } from '../../../lib/models/path'
 import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
 import { OrganisationUnitListMessage } from './OrganisationUnitListMessage'
 import { OrganisationUnitRow } from './OrganisationUnitRow'
-import { OrganisationUnit } from '../../../types/generated'
-import css from './OrganisationUnitList.module.css'
-import { OrganisationUnitListActions } from './OrganisationUnitListActions'
 import {
     PartialOrganisationUnit,
     useFilteredOrgUnits,
@@ -243,7 +240,14 @@ export const OrganisationUnitList = () => {
                         setExpanded={setExpanded}
                         isFiltering={isFiltering}
                         fetchNextPage={fetchNextPage}
-                        refetch={orgUnitFiltered.refetch}
+                        refetch={() => {
+                            // const queryClient = useQueryClient()
+                            // queryClient.invalidateQueries({ querykey: [{resource: 'organisationUnits'}]})
+                            isFiltering
+                                ? orgUnitFiltered.refetch()
+                                : queries.map((q) => q.refetch())
+                            return
+                        }}
                     />
                 ))}
             </SectionList>

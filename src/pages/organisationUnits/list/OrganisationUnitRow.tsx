@@ -12,7 +12,7 @@ import { ExpandedStateList, flexRender, Row } from '@tanstack/react-table'
 import React from 'react'
 import type { OrganisationUnitListItem } from './OrganisationUnitList'
 import css from './OrganisationUnitList.module.css'
-import {OrganisationUnitListActions} from "./OrganisationUnitListActions";
+import { OrganisationUnitListActions } from './OrganisationUnitListActions'
 
 export const OrganisationUnitRow = ({
     row,
@@ -25,7 +25,7 @@ export const OrganisationUnitRow = ({
     setExpanded: React.Dispatch<React.SetStateAction<ExpandedStateList>>
     isFiltering: boolean
     fetchNextPage: (id: string) => void
-    refetch: () => {}
+    refetch: () => void
 }) => {
     const parentRow = row.getParentRow()
 
