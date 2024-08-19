@@ -1,13 +1,13 @@
+import i18n from '@dhis2/d2-i18n'
+import { Center } from '@dhis2/ui'
+import React from 'react'
 import { UseQueryResult } from 'react-query'
+import { SectionListLoader } from '../../../components/sectionList/SectionListLoader'
 import {
     SectionListEmpty,
     SectionListError,
     SectionListMessage,
 } from '../../../components/sectionList/SectionListMessages'
-import { Center } from '@dhis2/ui'
-import React from 'react'
-import { SectionListLoader } from '../../../components/sectionList/SectionListLoader'
-import i18n from '@dhis2/d2-i18n'
 
 type OrganisationUnitListMessageProps = {
     orgUnitCount: number
@@ -25,7 +25,6 @@ export const OrganisationUnitListMessage = ({
     if (firstError) {
         console.error(firstError.error)
         return <SectionListError />
-        return <p>Failed to load organisation units</p>
     }
 
     // we only show loading indicator when we don't have any data to show
