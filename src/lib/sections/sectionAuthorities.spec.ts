@@ -3,7 +3,7 @@ import { SystemSettings } from '../../types'
 import { OVERVIEW_SECTIONS, SECTIONS_MAP } from '../constants'
 import { useSchemaStore } from '../schemas/schemaStore'
 import { useSystemSettingsStore } from '../systemSettings/systemSettingsStore'
-import { ModelSchemas, CurrentUser } from '../useLoadApp'
+import { ModelSchemas } from '../useLoadApp'
 import { useCurrentUserStore } from '../user/currentUserStore'
 import { SchemaName } from './../../types/schemaBase'
 import {
@@ -12,27 +12,6 @@ import {
 } from './sectionAuthorities'
 
 const mockedSchemas = {
-    [SchemaName.dataElement]: {
-        singular: 'dataElement',
-        plural: 'dataElements',
-        name: 'dataElement',
-        displayName: 'Data Element',
-        collectionName: 'dataElements',
-        authorities: [
-            {
-                type: 'CREATE_PUBLIC',
-                authorities: ['F_DATAELEMENT_PUBLIC_ADD'],
-            },
-            {
-                type: 'CREATE_PRIVATE',
-                authorities: ['F_DATAELEMENT_PRIVATE_ADD'],
-            },
-            {
-                type: 'DELETE',
-                authorities: ['F_DATAELEMENT_DELETE'],
-            },
-        ],
-    },
     [SchemaName.dataElement]: {
         singular: 'dataElement',
         plural: 'dataElements',
@@ -140,6 +119,26 @@ const mockedSchemas = {
     },
 } as unknown as ModelSchemas
 
+const baseMockedCurrentUser = {
+    organisationUnits: [
+        {
+            id: 'ImspTQPwCqd',
+            level: 1,
+            path: '/ImspTQPwCqd',
+        },
+    ],
+    name: 'John Traore',
+    email: 'dummy@dhis2.org',
+    settings: {
+        keyMessageSmsNotification: false,
+        keyCurrentStyle: 'light_blue/light_blue.css',
+        keyStyle: 'light_blue/light_blue.css',
+        keyUiLocale: 'en',
+        keyAnalysisDisplayProperty: 'name',
+        keyMessageEmailNotification: false,
+    },
+}
+
 const setMockedKeyRequireAddToView = (value: boolean) => {
     const mockedSystemSettings = {
         keyRequireAddToView: value,
@@ -149,8 +148,9 @@ const setMockedKeyRequireAddToView = (value: boolean) => {
 
 const setMockedAuthorities = (authorities: Set<string>) => {
     const mockedCurrentUser = {
+        ...baseMockedCurrentUser,
         authorities,
-    } as unknown as CurrentUser
+    }
     useCurrentUserStore.getState().setCurrentUser(mockedCurrentUser)
 }
 

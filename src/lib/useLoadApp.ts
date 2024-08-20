@@ -2,6 +2,7 @@ import { useDataQuery } from '@dhis2/app-runtime'
 import type { ModelSchemasBase, PickSchemaProperties } from '../types'
 import type {
     CurrentUser as CurrentUserBase,
+    OrganisationUnit,
     SystemSettings,
 } from '../types/models'
 import { useSetSchemas } from './schemas'
@@ -38,10 +39,20 @@ const userFields = [
 ] as const
 // workaround to widen the type, because useQuery() does not allow for
 // readonly types
-const userFieldsFilter = userFields.concat()
-
+// also add complex field-filters that are not trivial to reuse for types
+const orgUnitFields = ['id', 'level', 'path'] as const
+const userFieldsFilter = [
+    ...userFields,
+    `organisationUnits[${orgUnitFields.join(',')}]`,
+]
+export type UserAssignedOrganisationUnits = Pick<
+    OrganisationUnit,
+    (typeof orgUnitFields)[number]
+>[]
 type UserPropertyFields = (typeof userFields)[number]
-type CurrentUserResponse = Pick<CurrentUserBase, UserPropertyFields>
+type CurrentUserResponse = Pick<CurrentUserBase, UserPropertyFields> & {
+    organisationUnits: UserAssignedOrganisationUnits
+}
 
 /**
  * !!! WARNING !!!

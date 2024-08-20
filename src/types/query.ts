@@ -1,5 +1,7 @@
 import type { useDataQuery } from '@dhis2/app-runtime'
+import { useDataEngine } from '@dhis2/app-runtime'
 
+export type DataEngine = ReturnType<typeof useDataEngine>
 export type QueryResponse = ReturnType<typeof useDataQuery>
 
 export type Query = Parameters<typeof useDataQuery>[0]

@@ -5414,7 +5414,7 @@ export namespace MapView {
 export type CurrentUser = {
     access: Access
     authorities: Array<string>
-    avatar: FileResource
+    avatar?: FileResource
     birthday: string
     created: string
     dataSets: Array<string>

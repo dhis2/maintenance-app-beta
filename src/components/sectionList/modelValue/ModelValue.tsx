@@ -11,7 +11,7 @@ import { ModelValueRenderer } from './ModelValueRenderer'
 type ModelValueProps = {
     schema: Schema
     path: string
-    sectionModel: unknown
+    sectionModel: Record<string, unknown>
 }
 
 const ModelValueError = () => {

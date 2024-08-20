@@ -1,16 +1,20 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
-import type { CurrentUser } from '../useLoadApp'
+import { findMinimumRootUnits } from '../organisationUnit'
+import type { CurrentUser, UserAssignedOrganisationUnits } from '../useLoadApp'
 
 export interface CurrentUserStore {
     currentUser: CurrentUser | undefined
+    rootOrganisationUnits: UserAssignedOrganisationUnits
     getCurrentUser: () => CurrentUser
     setCurrentUser: (currentUser: CurrentUser) => void
+    getRootOrganisationUnits: () => UserAssignedOrganisationUnits
 }
 
 export const useCurrentUserStore = create<CurrentUserStore>()(
     devtools((set, get) => ({
         currentUser: undefined,
+        rootOrganisationUnits: [],
         getCurrentUser: () => {
             const currentUser = get().currentUser
 
@@ -21,7 +25,14 @@ export const useCurrentUserStore = create<CurrentUserStore>()(
             return currentUser
         },
         setCurrentUser: (currentUser) => {
-            set({ currentUser })
+            const rootOrganisationUnits = findMinimumRootUnits(
+                currentUser.organisationUnits
+            )
+
+            set({ currentUser, rootOrganisationUnits })
+        },
+        getRootOrganisationUnits: () => {
+            return get().rootOrganisationUnits
         },
     }))
 )
@@ -37,4 +48,11 @@ export const useCurrentUserAuthorities = () => {
         (state) => state.getCurrentUser().authorities
     )
     return authorities
+}
+
+export const useCurrentUserRootOrgUnits = () => {
+    const rootOrgUnits = useCurrentUserStore((state) =>
+        state.getRootOrganisationUnits()
+    )
+    return rootOrgUnits
 }

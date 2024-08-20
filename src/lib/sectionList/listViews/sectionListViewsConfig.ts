@@ -97,4 +97,13 @@ export const modelListViewsConfig = {
             default: ['domainType', 'valueType', 'dataSet', 'categoryCombo'],
         },
     },
+    organisationUnit: {
+        columns: {
+            available: [],
+            default: ['name', 'id', 'code', 'lastUpdated'],
+        },
+        filters: {
+            default: [],
+        },
+    },
 } satisfies SectionListViewConfig
