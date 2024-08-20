@@ -5,22 +5,25 @@ import {
     DataTableCell,
     DataTableRow,
     IconArrowDown16,
+    IconArrowUp16,
     IconChevronDown16,
     IconChevronRight16,
 } from '@dhis2/ui'
-import { ExpandedStateList, flexRender, Row } from '@tanstack/react-table'
+import { flexRender, Row } from '@tanstack/react-table'
 import React from 'react'
 import type { OrganisationUnitListItem } from './OrganisationUnitList'
 import css from './OrganisationUnitList.module.css'
 
 export const OrganisationUnitRow = ({
     row,
-    setExpanded,
+    toggleShowAll,
+    showAllActive,
     isFiltering,
     fetchNextPage,
 }: {
     row: Row<OrganisationUnitListItem>
-    setExpanded: React.Dispatch<React.SetStateAction<ExpandedStateList>>
+    toggleShowAll: (id: string) => void
+    showAllActive: boolean
     isFiltering: boolean
     fetchNextPage: (id: string) => void
 }) => {
@@ -39,21 +42,21 @@ export const OrganisationUnitRow = ({
                         {row.getCanExpand() ? (
                             <>
                                 {isFiltering &&
-                                    row.original.childCount !==
-                                        row.subRows.length && (
+                                    (showAllActive ||
+                                        row.original.childCount !==
+                                            row.subRows.length) && (
                                         <Button
                                             secondary
                                             onClick={() => {
-                                                setExpanded((prev) => {
-                                                    return {
-                                                        ...prev,
-                                                        [row.id]: prev[row.id]
-                                                            ? !prev[row.id]
-                                                            : true,
-                                                    }
-                                                })
+                                                toggleShowAll(row.original.id)
                                             }}
-                                            icon={<IconArrowDown16 />}
+                                            icon={
+                                                showAllActive ? (
+                                                    <IconArrowUp16 />
+                                                ) : (
+                                                    <IconArrowDown16 />
+                                                )
+                                            }
                                         >
                                             Show all
                                         </Button>
