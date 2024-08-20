@@ -1,3 +1,10 @@
+# [0.3.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.2.0...v0.3.0) (2024-08-20)
+
+
+### Features
+
+* implement org unit list actions to edit and delete org unit ([#405](https://github.com/dhis2/maintenance-app-beta/issues/405)) ([cb2d5eb](https://github.com/dhis2/maintenance-app-beta/commit/cb2d5eb028685e8504346ecbaaf9f69ad59b88e8))
+
 # [0.2.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.1.1...v0.2.0) (2024-08-20)
 
 
