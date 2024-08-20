@@ -1,3 +1,10 @@
+# [0.2.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.1.1...v0.2.0) (2024-08-20)
+
+
+### Features
+
+* **orgunit-list:** implement orgunit list ([#403](https://github.com/dhis2/maintenance-app-beta/issues/403)) ([a948938](https://github.com/dhis2/maintenance-app-beta/commit/a948938de6f862461e572c65d92fb6fb5073746e))
+
 ## [0.1.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.1.0...v0.1.1) (2024-06-07)
 
 
