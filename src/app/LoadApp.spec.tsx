@@ -32,6 +32,7 @@ describe('LoadApp', () => {
     }
 
     beforeEach(async () => {
+        // eslint-disable-next-line @typescript-eslint/no-extra-semi
         ;(useSetSchemas as jest.Mock).mockImplementation(() => setSchemaMock)
         ;(useSetSystemSettings as jest.Mock).mockImplementation(
             () => setSystemSettingsMock
