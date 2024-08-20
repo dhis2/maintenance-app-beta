@@ -2,9 +2,9 @@ import {
     ColumnDef,
     ExpandedState,
     ExpandedStateList,
-    Updater,
     getCoreRowModel,
     getExpandedRowModel,
+    Updater,
     useReactTable,
 } from '@tanstack/react-table'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'

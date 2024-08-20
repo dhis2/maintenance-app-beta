@@ -13,6 +13,7 @@ import { flexRender, Row } from '@tanstack/react-table'
 import React from 'react'
 import type { OrganisationUnitListItem } from './OrganisationUnitList'
 import css from './OrganisationUnitList.module.css'
+import { OrganisationUnitListActions } from './OrganisationUnitListActions'
 
 export const OrganisationUnitRow = ({
     row,
@@ -99,10 +100,10 @@ export const OrganisationUnitRow = ({
                     )
                 })}
                 <DataTableCell>
-                    {/* <DefaultListActions
-            model={row.original}
-            onShowDetailsClick={() => undefined}
-        /> */}
+                    <OrganisationUnitListActions
+                        model={row.original}
+                        // onOpenTranslationClick={()=>{}}
+                    />
                 </DataTableCell>
             </DataTableRow>
             {!isFiltering &&
