@@ -1,3 +1,10 @@
+## [0.3.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.3.0...v0.3.1) (2024-08-20)
+
+
+### Bug Fixes
+
+* **icon:** add app icon ([5ace070](https://github.com/dhis2/maintenance-app-beta/commit/5ace0708768cd58a7c1e7e075066f76552fb7ec8))
+
 # [0.3.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.2.0...v0.3.0) (2024-08-20)
 
 
