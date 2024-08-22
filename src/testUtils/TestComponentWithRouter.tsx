@@ -30,7 +30,7 @@ export const ComponentWithProvider = ({
                 apiVersion: 41,
             }}
             plugin={false}
-            parentAlertsAdd={() => {}}
+            parentAlertsAdd={() => undefined}
             showAlertsInPlugin={true}
         >
             <CustomDataProvider
