@@ -58,7 +58,10 @@ function computeInitialValues({
         return {}
     }
 
-    const attributeValues = getAllAttributeValues(dataElement, customAttributes)
+    const attributeValues = getAllAttributeValues(
+        dataElement.attributeValues,
+        customAttributes
+    )
 
     return {
         id: dataElementId,
