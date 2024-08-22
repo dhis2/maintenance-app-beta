@@ -1,3 +1,24 @@
+## [0.3.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.3.0...v0.3.1) (2024-08-20)
+
+
+### Bug Fixes
+
+* **icon:** add app icon ([5ace070](https://github.com/dhis2/maintenance-app-beta/commit/5ace0708768cd58a7c1e7e075066f76552fb7ec8))
+
+# [0.3.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.2.0...v0.3.0) (2024-08-20)
+
+
+### Features
+
+* implement org unit list actions to edit and delete org unit ([#405](https://github.com/dhis2/maintenance-app-beta/issues/405)) ([cb2d5eb](https://github.com/dhis2/maintenance-app-beta/commit/cb2d5eb028685e8504346ecbaaf9f69ad59b88e8))
+
+# [0.2.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.1.1...v0.2.0) (2024-08-20)
+
+
+### Features
+
+* **orgunit-list:** implement orgunit list ([#403](https://github.com/dhis2/maintenance-app-beta/issues/403)) ([a948938](https://github.com/dhis2/maintenance-app-beta/commit/a948938de6f862461e572c65d92fb6fb5073746e))
+
 ## [0.1.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.1.0...v0.1.1) (2024-06-07)
 
 
