@@ -61,7 +61,7 @@ function computeInitialValues({
     // We want to have an array in the state with all attributes, not just the
     // ones that are set
     const attributeValues = getAllAttributeValues(
-        dataElementGroup,
+        dataElementGroup.attributeValues,
         customAttributes
     )
 
@@ -143,11 +143,7 @@ function DataElementGroupForm({
         >
             {({ handleSubmit, submitting, submitError }) => (
                 <form onSubmit={handleSubmit}>
-                    <DefaultFormContents
-                        section={section}
-                        submitting={submitting}
-                        submitError={submitError}
-                    >
+                    <DefaultFormContents section={section}>
                         <DataElementGroupFormFields />
                     </DefaultFormContents>
                 </form>
