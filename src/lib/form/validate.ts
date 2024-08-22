@@ -20,3 +20,9 @@ export function validate<FormValues>(
 
     return allFormErrors
 }
+
+export function createFormValidate<FormValues>(
+    zodSchema: z.ZodType<any, any, any>
+) {
+    return (values: FormValues) => validate(zodSchema, values)
+}
