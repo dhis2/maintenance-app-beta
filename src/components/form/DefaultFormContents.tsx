@@ -6,18 +6,20 @@ import { getSectionPath } from '../../lib'
 import { ModelSection } from '../../types'
 import { StandardFormSection, StandardFormActions } from '../standardForm'
 import classes from './DefaultFormContents.module.css'
+import { useFormState } from 'react-final-form'
 
 export function DefaultFormContents({
     children,
     section,
-    submitError,
-    submitting,
 }: {
     children: React.ReactNode
     section: ModelSection
-    submitting: boolean
-    submitError?: string
 }) {
+    const { submitting, submitError } = useFormState({
+        subscription: { submitting: true, submitError: true },
+    })
+
+    console.log({ submitError })
     const formErrorRef = useRef<HTMLDivElement | null>(null)
     const navigate = useNavigate()
 
