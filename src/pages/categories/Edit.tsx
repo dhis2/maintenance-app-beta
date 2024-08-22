@@ -9,6 +9,7 @@ import type { FormApi } from 'final-form'
 
 import {
     DEFAULT_FIELD_FILTERS,
+    SCHEMA_SECTIONS,
     SECTIONS_MAP,
     getSectionPath,
     useModelSectionHandleOrThrow,
@@ -28,7 +29,16 @@ import { ResourceQuery } from '../../types'
 import { getAllAttributeValues } from '../../lib/models/attributes'
 import { useQueries, useQuery } from 'react-query'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { DefaultFormContents, useCustomAttributesQuery } from '../../components'
+import {
+    DefaultFormContents,
+    DefaultIdentifiableFields,
+    DescriptionField,
+    StandardFormField,
+    StandardFormSection,
+    StandardFormSectionDescription,
+    StandardFormSectionTitle,
+    useCustomAttributesQuery,
+} from '../../components'
 import React, { useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { init } from 'lodash/fp'
@@ -37,9 +47,11 @@ import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperati
 import { categorySchema } from './form'
 import { createFormValidate } from '../../lib/form/validate'
 import { useAlert } from '@dhis2/app-runtime'
+import { CheckboxFieldFF, RadioFieldFF, Field as UIField } from '@dhis2/ui'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
+    'name',
     'shortName',
     'code',
     'description',
@@ -78,7 +90,59 @@ export const Component = () => {
             validate={createFormValidate(categorySchema)}
         >
             <DefaultFormContents section={SECTIONS_MAP['category']}>
-                <div>Test</div>
+                <StandardFormSection>
+                    <StandardFormSectionTitle>
+                        Basic information
+                    </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        Set up the basic information for this category.
+                    </StandardFormSectionDescription>
+                    <DefaultIdentifiableFields />
+                    <DescriptionField
+                        schemaSection={SCHEMA_SECTIONS.category}
+                        helpText="Explain the purpose of this category."
+                    />
+                </StandardFormSection>
+
+                <StandardFormSection>
+                    <StandardFormSectionTitle>
+                        Data configuration
+                    </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        Choose how this category will be used to capture and
+                        analyze data.
+                    </StandardFormSectionDescription>
+                    <StandardFormField>
+                        <UIField
+                            label="Data dimension type (required)"
+                            helpText="hello"
+                        >
+                            <Field<string | undefined>
+                                name="dataDimensionType"
+                                component={RadioFieldFF}
+                                label="Disaggregation"
+                                type="radio"
+                                value={'DISAGGREGATION'}
+                            />
+                            <Field<string | undefined>
+                                name="dataDimensionType"
+                                component={RadioFieldFF}
+                                label="Attribute"
+                                type="radio"
+                                value={'ATTRIBUTE'}
+                            />
+                        </UIField>
+                    </StandardFormField>
+                    <StandardFormField>
+                        <Field
+                            name="dataDimension"
+                            type="checkbox"
+                            component={CheckboxFieldFF}
+                            label="Use as data dimension"
+                            helpText="Category will be available to the analytics as another dimension"
+                        />
+                    </StandardFormField>
+                </StandardFormSection>
             </DefaultFormContents>
         </EditForm>
     )
@@ -101,7 +165,10 @@ function EditForm<TInitialValues extends ModelWithAttributes>(
 ) {
     const section = useModelSectionHandleOrThrow()
     const patchDirtyFields = usePatchModel(props.modelId, section.namePlural)
-    const noChangesAlert = useAlert('No changes to be saved')
+    const saveAlert = useAlert(
+        ({ message }) => message,
+        (options) => options
+    )
     const navigate = useNavigate()
 
     const onSubmit: OnSubmit<TInitialValues> = async (values, form) => {
@@ -111,12 +178,18 @@ function EditForm<TInitialValues extends ModelWithAttributes>(
             originalValue: form.getState().initialValues,
         })
         if (jsonPatchOperations.length < 1) {
-            noChangesAlert.show()
+            saveAlert.show({
+                message: 'No changes to be saved',
+            })
             navigate(`/${getSectionPath(section)}`)
             return
         }
         const errors = await patchDirtyFields(jsonPatchOperations)
-        return errors
+        if (errors) {
+            return errors
+        }
+        saveAlert.show({ message: 'Saved successfully', success: true })
+        navigate(`/${getSectionPath(section)}`)
     }
 
     const customAttributes = useCustomAttributesQuery()
