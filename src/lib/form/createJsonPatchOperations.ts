@@ -16,12 +16,12 @@ type PatchAttributeValue = {
 }
 
 type ModelWithAttributeValues = IdentifiableObject & {
-    attributeValues: PatchAttributeValue[]
+    attributeValues?: PatchAttributeValue[]
 }
 
 interface FormatFormValuesArgs<FormValues extends ModelWithAttributeValues> {
     originalValue: unknown
-    dirtyFields: { [key in keyof FormValues]?: boolean }
+    dirtyFields: Record<string, boolean>
     values: FormValues
 }
 
@@ -55,12 +55,11 @@ export function createJsonPatchOperations<
     // Remove attribute values without a value
     const values = {
         ...unsanitizedValues,
-        attributeValues: unsanitizedValues.attributeValues
-            .filter(({ value }) => !!value)
-            .map((value) => ({
-                value: value.value,
-                attribute: { id: value.attribute.id },
-            })),
+        ...(unsanitizedValues.attributeValues && {
+            attributeValues: unsanitizedValues.attributeValues.filter(
+                ({ value }) => !!value
+            ),
+        }),
     }
 
     const dirtyFieldsKeys = Object.keys(dirtyFields)
