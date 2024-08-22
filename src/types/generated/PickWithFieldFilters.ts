@@ -1,4 +1,4 @@
-import { BaseIdentifiableObject } from './generated'
+import type { BaseIdentifiableObject } from './models'
 
 type RemoveSpaces<S extends string> = S extends `${infer T} ${infer U}`
     ? RemoveSpaces<`${T}${U}`>
@@ -58,7 +58,10 @@ type RecursivePickWithFieldFilter<
  * de.categoryCombo.categories.map(c => c.displayName)
  **/
 
-export type PickWithFieldFilters<TModel, TFieldFilters extends string[]> =
+export type PickWithFieldFilters<
+    TModel,
+    TFieldFilters extends readonly string[]
+> =
     // RecursivePick<TModel, TFieldFilters[number]> will return an union of objects for each entry in fieldFilter-array.
     // Thus we convert this to an intersection to get one object with all the picked properties.
     UnionToIntersection<
