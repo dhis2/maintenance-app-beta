@@ -6316,7 +6316,7 @@ export type OrganisationUnit = {
     phoneNumber: string
     programs: Array<Program>
     queryMods: QueryModifiers
-    sharing: Sharing
+    sharing: Sharing | {}
     shortName: string
     translations: Array<Translation>
     type: string
@@ -9484,64 +9484,11 @@ export type UpdateFollowUpForDataValuesRequest = {
 }
 
 export type User = {
-    access: Access
-    accountExpiry: string
-    attributeValues: Array<AttributeValue>
-    avatar: FileResource
-    birthday: string
-    catDimensionConstraints: Array<Category>
-    code: string
-    cogsDimensionConstraints: Array<CategoryOptionGroupSet>
-    created: string
-    createdBy: User
-    dataViewMaxOrganisationUnitLevel: number
-    dataViewOrganisationUnits: Array<OrganisationUnit>
-    disabled: boolean
-    displayName: string
-    education: string
-    email: string
-    employer: string
-    externalAuth: boolean
-    facebookMessenger: string
-    favorite: boolean
-    favorites: Array<string>
-    firstName: string
-    gender: string
-    href: string
     id: string
-    interests: string
-    introduction: string
-    invitation: boolean
-    jobTitle: string
-    languages: string
-    lastCheckedInterpretations: string
-    lastLogin: string
-    lastUpdated: string
-    lastUpdatedBy: User
-    ldapId: string
-    nationality: string
-    openId: string
-    organisationUnits: Array<OrganisationUnit>
-    password: string
-    passwordLastUpdated: string
-    phoneNumber: string
-    selfRegistered: boolean
-    settings: UserSettings
-    sharing: Sharing
-    skype: string
-    surname: string
-    teiSearchOrganisationUnits: Array<OrganisationUnit>
-    telegram: string
-    translations: Array<Translation>
-    twitter: string
-    twoFactorEnabled: boolean
-    user: User
-    userCredentials: UserCredentialsDto
-    userGroups: Array<UserGroup>
-    userRoles: Array<UserRole>
+    code: string | null
+    displayName: string
     username: string
-    welcomeMessage: string
-    whatsApp: string
+    name: string
 }
 
 export type UserAccess = {

@@ -23,6 +23,7 @@
         "@dhis2/cli-style": "^10.5.1",
         "@dhis2/cypress-commands": "^10.0.3",
         "@dhis2/cypress-plugins": "^10.0.3",
+        "@faker-js/faker": "^8.4.1",
         "@testing-library/jest-dom": "^6.1.2",
         "@testing-library/react": "^12.1.5",
         "@testing-library/react-hooks": "^8.0.1",

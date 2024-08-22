@@ -77,6 +77,7 @@ const OrganisationUnitActionMore = ({
                 small
                 secondary
                 onClick={() => setOpen(!open)}
+                dataTest="row-actions-menu-button"
                 icon={<IconMore24 />}
             />
             {open && (
@@ -85,6 +86,7 @@ const OrganisationUnitActionMore = ({
                     placement="bottom-end"
                     reference={ref}
                     onClickOutside={() => setOpen(false)}
+                    dataTest="row-actions-menu"
                 >
                     <FlyoutMenu>
                         <MenuItem

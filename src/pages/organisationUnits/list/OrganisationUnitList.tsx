@@ -114,6 +114,7 @@ export const OrganisationUnitList = () => {
     const { rootOrgUnits, flatOrgUnits } = useMemo(() => {
         const rootOrgUnits = new Map<string, OrganisationUnitListItem>()
         //gather all loaded orgUnits and their ancestors and deduplicate them
+
         const deduplicatedOrgUnits = queries
             .concat(orgUnitFiltered)
             .flatMap((q) => {
