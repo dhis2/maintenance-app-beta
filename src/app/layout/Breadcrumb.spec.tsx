@@ -76,7 +76,8 @@ describe('BreadcrumbItem', () => {
     })
 })
 describe('Breadcrumbs', () => {
-    it('should render crumb components in handle ', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    it('should render crumb components in handle', () => {
         const { getByText } = render(<Breadcrumbs />, { wrapper: HashRouter })
 
         expect(getByText('Crumb 1')).toBeDefined()
