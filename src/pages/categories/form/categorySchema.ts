@@ -1,16 +1,25 @@
 import { z } from 'zod'
-import { Category, DataElement } from '../../../types/generated'
+import { Category } from '../../../types/generated'
+import { getDefaults } from '../../../lib'
 
-export const categorySchema = z
-    .object({
-        name: z.string().trim(),
-        shortName: z.string().trim(),
-        code: z.string().trim(),
-        description: z.string().trim(),
-        dataDimensionType: z.nativeEnum(Category.dataDimensionType),
-        dataDimension: z.boolean().default(true),
-        categoryOptions: z.array(z.object({ id: z.string() })),
-    })
-    .partial()
+export const categorySchema = z.object({
+    name: z.string().trim().min(5),
+    shortName: z.string().trim(),
+    code: z.string().trim().optional(),
+    description: z.string().trim().optional(),
+    dataDimensionType: z
+        .nativeEnum(Category.dataDimensionType)
+        .default(Category.dataDimensionType.DISAGGREGATION),
+    dataDimension: z.boolean().default(true),
+    categoryOptions: z.array(z.object({ id: z.string() })).default([]),
+    attributeValues: z.array(
+        z.object({
+            value: z.string().optional(),
+            attribute: z.object({
+                id: z.string(),
+            }),
+        })
+    ),
+})
 
-const defaultValues = categorySchema.parse({})
+export const initialValues = getDefaults(categorySchema)
