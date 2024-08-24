@@ -1,56 +1,24 @@
-import {
-    Form as ReactFinalForm,
-    withTypes,
-    FormProps,
-    useForm,
-    Field,
-} from 'react-final-form'
-import type { FormApi } from 'final-form'
+import { Field } from 'react-final-form'
 
-import {
-    DEFAULT_FIELD_FILTERS,
-    SCHEMA_SECTIONS,
-    SECTIONS_MAP,
-    getSectionPath,
-    useModelSectionHandleOrThrow,
-    useOnSubmitEdit,
-    usePatchModel,
-    useSchemaFromHandle,
-    useSchemaSectionHandleOrThrow,
-    validate,
-} from '../../lib'
-import {
-    Attribute,
-    AttributeValue,
-    IdentifiableObject,
-    PickWithFieldFilters,
-} from '../../types/generated'
+import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP } from '../../lib'
+import { PickWithFieldFilters } from '../../types/generated'
 import { Category } from '../../types/models'
-import { ResourceQuery } from '../../types'
-import { getAllAttributeValues } from '../../lib/models/attributes'
-import { useQueries, useQuery } from 'react-query'
-import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import {
-    CustomAttributesSection,
     DefaultFormContents,
     DefaultIdentifiableFields,
     DescriptionField,
-    EditFormBase,
+    NewFormBase,
     StandardFormField,
     StandardFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-    useCustomAttributesQuery,
 } from '../../components'
-import React, { useMemo } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { init } from 'lodash/fp'
-import { LoadingSpinner } from '../../components/loading/LoadingSpinner'
-import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
+import React from 'react'
+import { useParams } from 'react-router-dom'
 import { categorySchema } from './form'
 import { createFormValidate } from '../../lib/form/validate'
-import { useAlert } from '@dhis2/app-runtime'
 import { CheckboxFieldFF, RadioFieldFF, Field as UIField } from '@dhis2/ui'
+import { initialValues } from './form/categorySchema'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -70,24 +38,13 @@ type CategoryFormValues = PickWithFieldFilters<Category, typeof fieldFilters>
 
 export const Component = () => {
     const section = SECTIONS_MAP.category
-    const queryFn = useBoundResourceQueryFn()
     const modelId = useParams().id as string
-    const query = {
-        resource: 'categories',
-        id: modelId,
-        params: {
-            fields: fieldFilters.concat(),
-        },
-    }
-    const categoryQuery = useQuery({
-        queryKey: [query],
-        queryFn: queryFn<CategoryFormValues>,
-    })
 
+    console.log({ initialValues })
     return (
-        <EditFormBase
+        <NewFormBase<CategoryFormValues>
             modelId={modelId}
-            initialValues={categoryQuery.data}
+            initialValues={initialValues}
             validate={createFormValidate(categorySchema)}
         >
             <DefaultFormContents section={section}>
@@ -144,8 +101,7 @@ export const Component = () => {
                         />
                     </StandardFormField>
                 </StandardFormSection>
-                <CustomAttributesSection />
             </DefaultFormContents>
-        </EditFormBase>
+        </NewFormBase>
     )
 }
