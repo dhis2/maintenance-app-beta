@@ -1,3 +1,5 @@
 export * from './fields'
 export { DefaultFormContents } from './DefaultFormContents'
 export * from './attributes'
+export * from './EditFormBase'
+export * from './NewFormBase'
