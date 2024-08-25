@@ -1,4 +1,4 @@
-import { useAlert, useDataEngine } from '@dhis2/app-runtime'
+import { useAlert } from '@dhis2/app-runtime'
 import { useMemo } from 'react'
 import { FormProps } from 'react-final-form'
 import { useNavigate } from 'react-router-dom'
@@ -48,7 +48,7 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
             saveAlert.show({ message: 'Saved successfully', success: true })
             navigate(`/${getSectionPath(section)}`)
         },
-        [patchDirtyFields, saveAlert, navigate]
+        [patchDirtyFields, saveAlert, navigate, section]
     )
 }
 
@@ -65,7 +65,7 @@ export const useOnSubmitNew = <TFormValues>({
     const navigate = useNavigate()
 
     return useMemo<OnSubmit<TFormValues>>(
-        () => async (values, form) => {
+        () => async (values) => {
             if (!values) {
                 console.error('Tried to save new object without any changes', {
                     values,
@@ -83,6 +83,6 @@ export const useOnSubmitNew = <TFormValues>({
             saveAlert.show({ message: 'Created successfully', success: true })
             navigate(`/${getSectionPath(section)}`)
         },
-        [createModel, saveAlert, navigate]
+        [createModel, saveAlert, navigate, section]
     )
 }

@@ -6,7 +6,7 @@ export const useCreateModel = (resource: string) => {
     const dataEngine = useDataEngine()
 
     const create = useCallback(
-        async (data: Record<string, any>) => {
+        async (data: Record<string, unknown>) => {
             try {
                 await dataEngine.mutate({
                     resource,
@@ -17,7 +17,7 @@ export const useCreateModel = (resource: string) => {
                 return { [FORM_ERROR]: (error as Error | string).toString() }
             }
         },
-        [dataEngine]
+        [dataEngine, resource]
     )
     return create
 }

@@ -1,5 +1,4 @@
 import { Field, FieldProps, FieldSet } from '@dhis2/ui'
-import cx from 'classnames'
 import React from 'react'
 import css from './HorizontalFieldGroup.module.css'
 
