@@ -15,7 +15,10 @@ import { PagedResponse } from '../types/models'
 
 type ModelListResponse = WrapQueryResponse<PagedResponse<BaseListModel, string>>
 
-export const DefaultSectionList = () => {
+type DefaultSectionListProps = {
+    filters: string[]
+}
+export const DefaultSectionList = ({ filters }: DefaultSectionListProps) => {
     const { columns } = useModelListView()
     const schema = useSchemaFromHandle()
     const engine = useDataEngine()
@@ -28,6 +31,7 @@ export const DefaultSectionList = () => {
             resource: modelListName,
             params: {
                 ...initialParams,
+                filter: initialParams.filter.concat(filters ?? []),
                 fields: columns
                     .map((column) => getFieldFilter(schema, column.path))
                     .concat(DEFAULT_FIELD_FILTERS),
