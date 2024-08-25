@@ -8,7 +8,7 @@ import { StandardFormSection, StandardFormActions } from '../standardForm'
 import classes from './DefaultFormContents.module.css'
 import { useFormState } from 'react-final-form'
 
-export function DefaultFormContents({
+export function DefaultEditFormContents({
     children,
     section,
 }: {
@@ -19,7 +19,6 @@ export function DefaultFormContents({
         subscription: { submitting: true, submitError: true },
     })
 
-    console.log({ submitError })
     const formErrorRef = useRef<HTMLDivElement | null>(null)
     const navigate = useNavigate()
 
@@ -56,5 +55,57 @@ export function DefaultFormContents({
                 />
             </div>
         </>
+    )
+}
+
+export function DefaultNewFormContents({
+    section,
+    children,
+}: {
+    children: React.ReactNode
+    section: ModelSection
+}) {
+    const { submitting, submitError } = useFormState({
+        subscription: { submitting: true, submitError: true },
+    })
+
+    const formErrorRef = useRef<HTMLDivElement | null>(null)
+    const navigate = useNavigate()
+
+    const listPath = `/${getSectionPath(section)}`
+    useEffect(() => {
+        if (submitError) {
+            formErrorRef.current?.scrollIntoView({ behavior: 'smooth' })
+        }
+    }, [submitError])
+
+    return (
+        <div className={classes.form}>
+            {children}
+            {submitError && (
+                <StandardFormSection>
+                    <div ref={formErrorRef}>
+                        <NoticeBox
+                            error
+                            title={i18n.t(
+                                'Something went wrong when submitting the form'
+                            )}
+                        >
+                            {submitError}
+                        </NoticeBox>
+                    </div>
+                </StandardFormSection>
+            )}
+            <div className={classes.formActions}>
+                <StandardFormActions
+                    cancelLabel={i18n.t('Exit without saving')}
+                    submitLabel={i18n.t('Create {{modelName}} ', {
+                        modelName: section.title,
+                    })}
+                    submitting={submitting}
+                    onCancelClick={() => navigate(listPath)}
+                />
+            </div>
+        </div>
     )
 }
