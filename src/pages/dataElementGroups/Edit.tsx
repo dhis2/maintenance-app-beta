@@ -6,7 +6,7 @@ import { withTypes } from 'react-final-form'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Loader } from '../../components'
 import {
-    DefaultFormContents,
+    DefaultEditFormContents,
     useCustomAttributesQuery,
 } from '../../components/form'
 import {
@@ -141,11 +141,11 @@ function DataElementGroupForm({
                 customAttributes: attributes,
             })}
         >
-            {({ handleSubmit, submitting, submitError }) => (
+            {({ handleSubmit }) => (
                 <form onSubmit={handleSubmit}>
-                    <DefaultFormContents section={section}>
+                    <DefaultEditFormContents section={section}>
                         <DataElementGroupFormFields />
-                    </DefaultFormContents>
+                    </DefaultEditFormContents>
                 </form>
             )}
         </Form>
