@@ -11,6 +11,7 @@ import {
     StandardFormSection,
 } from '../../components'
 import { useCustomAttributesQuery } from '../../components/form'
+import { AttributeMetadata } from '../../components/form/attributes/useCustomAttributesQuery'
 import { SCHEMA_SECTIONS, getSectionPath, validate } from '../../lib'
 import { Attribute } from '../../types/generated'
 import {
@@ -22,7 +23,7 @@ import classes from './New.module.css'
 
 const listPath = `/${getSectionPath(SCHEMA_SECTIONS.dataElementGroupSet)}`
 
-function useInitialValues(customAttributes: Attribute[]) {
+function useInitialValues(customAttributes: AttributeMetadata[]) {
     const attributeValues = useMemo(
         () =>
             customAttributes.map((attribute) => ({

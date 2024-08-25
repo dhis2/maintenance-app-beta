@@ -1,1 +1,1 @@
-export { categorySchema } from './categorySchema'
+export { categorySchema, validate } from './categorySchema'

@@ -1,5 +1,5 @@
 export * from './fields'
-export { DefaultFormContents } from './DefaultFormContents'
+export { DefaultEditFormContents } from './DefaultFormContents'
 export * from './attributes'
-export * from './EditFormBase'
-export * from './NewFormBase'
+export * from './helpers'
+export * from './FormBase'
