@@ -1,56 +1,13 @@
-import {
-    Form as ReactFinalForm,
-    withTypes,
-    FormProps,
-    useForm,
-    Field,
-} from 'react-final-form'
-import type { FormApi } from 'final-form'
-
-import {
-    DEFAULT_FIELD_FILTERS,
-    SCHEMA_SECTIONS,
-    SECTIONS_MAP,
-    getSectionPath,
-    useModelSectionHandleOrThrow,
-    useOnSubmitEdit,
-    usePatchModel,
-    useSchemaFromHandle,
-    useSchemaSectionHandleOrThrow,
-    validate,
-} from '../../lib'
-import {
-    Attribute,
-    AttributeValue,
-    IdentifiableObject,
-    PickWithFieldFilters,
-} from '../../types/generated'
-import { Category } from '../../types/models'
-import { ResourceQuery } from '../../types'
-import { getAllAttributeValues } from '../../lib/models/attributes'
-import { useQueries, useQuery } from 'react-query'
+import React from 'react'
+import { useQuery } from 'react-query'
+import { useParams } from 'react-router-dom'
+import { DefaultEditFormContents, FormBase } from '../../components'
+import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import {
-    CustomAttributesSection,
-    DefaultFormContents,
-    DefaultIdentifiableFields,
-    DescriptionField,
-    EditFormBase,
-    StandardFormField,
-    StandardFormSection,
-    StandardFormSectionDescription,
-    StandardFormSectionTitle,
-    useCustomAttributesQuery,
-} from '../../components'
-import React, { useMemo } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { init } from 'lodash/fp'
-import { LoadingSpinner } from '../../components/loading/LoadingSpinner'
-import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
-import { categorySchema } from './form'
-import { createFormValidate } from '../../lib/form/validate'
-import { useAlert } from '@dhis2/app-runtime'
-import { CheckboxFieldFF, RadioFieldFF, Field as UIField } from '@dhis2/ui'
+import { PickWithFieldFilters } from '../../types/generated'
+import { Category } from '../../types/models'
+import { validate } from './form'
+import { CategoryFormFields } from './form/CategoryFormFields'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -59,14 +16,16 @@ const fieldFilters = [
     'code',
     'description',
     'categoryCombos',
-    'categoryOptions',
+    'categoryOptions[id,displayName]',
     'dataDimension',
     'dataDimensionType',
-    'displayFormName',
-    // 'attributeValues',
+    'attributeValues[value,attribute[id]]',
 ] as const
 
-type CategoryFormValues = PickWithFieldFilters<Category, typeof fieldFilters>
+export type CategoryFormValues = PickWithFieldFilters<
+    Category,
+    typeof fieldFilters
+>
 
 export const Component = () => {
     const section = SECTIONS_MAP.category
@@ -85,67 +44,15 @@ export const Component = () => {
     })
 
     return (
-        <EditFormBase
-            modelId={modelId}
+        <FormBase
+            onSubmit={useOnSubmitEdit({ section, modelId })}
+            section={section}
             initialValues={categoryQuery.data}
-            validate={createFormValidate(categorySchema)}
+            validate={validate}
         >
-            <DefaultFormContents section={section}>
-                <StandardFormSection>
-                    <StandardFormSectionTitle>
-                        Basic information
-                    </StandardFormSectionTitle>
-                    <StandardFormSectionDescription>
-                        Set up the basic information for this category.
-                    </StandardFormSectionDescription>
-                    <DefaultIdentifiableFields />
-                    <DescriptionField
-                        schemaSection={section}
-                        helpText="Explain the purpose of this category."
-                    />
-                </StandardFormSection>
-
-                <StandardFormSection>
-                    <StandardFormSectionTitle>
-                        Data configuration
-                    </StandardFormSectionTitle>
-                    <StandardFormSectionDescription>
-                        Choose how this category will be used to capture and
-                        analyze data.
-                    </StandardFormSectionDescription>
-                    <StandardFormField>
-                        <UIField
-                            label="Data dimension type (required)"
-                            helpText="hello"
-                        >
-                            <Field<string | undefined>
-                                name="dataDimensionType"
-                                component={RadioFieldFF}
-                                label="Disaggregation"
-                                type="radio"
-                                value={'DISAGGREGATION'}
-                            />
-                            <Field<string | undefined>
-                                name="dataDimensionType"
-                                component={RadioFieldFF}
-                                label="Attribute"
-                                type="radio"
-                                value={'ATTRIBUTE'}
-                            />
-                        </UIField>
-                    </StandardFormField>
-                    <StandardFormField>
-                        <Field
-                            name="dataDimension"
-                            type="checkbox"
-                            component={CheckboxFieldFF}
-                            label="Use as data dimension"
-                            helpText="Category will be available to the analytics as another dimension"
-                        />
-                    </StandardFormField>
-                </StandardFormSection>
-                <CustomAttributesSection />
-            </DefaultFormContents>
-        </EditFormBase>
+            <DefaultEditFormContents section={section}>
+                <CategoryFormFields />
+            </DefaultEditFormContents>
+        </FormBase>
     )
 }

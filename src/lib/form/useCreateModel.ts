@@ -1,7 +1,6 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import { FORM_ERROR } from 'final-form'
 import { useCallback } from 'react'
-import { JsonPatchOperation } from '../../types'
 
 export const useCreateModel = (resource: string) => {
     const dataEngine = useDataEngine()
