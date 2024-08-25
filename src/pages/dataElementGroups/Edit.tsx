@@ -18,7 +18,7 @@ import {
 } from '../../lib'
 import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
 import { getAllAttributeValues } from '../../lib/models/attributes'
-import { Attribute, DataElementGroup } from '../../types/generated'
+import { DataElementGroup } from '../../types/generated'
 import { DataElementGroupFormFields, dataElementGroupSchema } from './form'
 import type { FormValues } from './form'
 

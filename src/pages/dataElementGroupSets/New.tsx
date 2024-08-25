@@ -13,7 +13,6 @@ import {
 import { useCustomAttributesQuery } from '../../components/form'
 import { AttributeMetadata } from '../../components/form/attributes/useCustomAttributesQuery'
 import { SCHEMA_SECTIONS, getSectionPath, validate } from '../../lib'
-import { Attribute } from '../../types/generated'
 import {
     DataElementGroupSetFormFields,
     dataElementGroupSetSchema,

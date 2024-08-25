@@ -3,7 +3,6 @@ import {
     PartialAttributeValue,
     getAllAttributeValues,
 } from '../../lib/models/attributes'
-import { IdentifiableObject, AttributeValue } from '../../types/generated'
 import { useCustomAttributesQuery } from './attributes'
 
 type ModelWithAttributes = {

@@ -8,7 +8,7 @@ type ModelWithAttributes = {
     attributeValues?: PartialAttributeValue[]
 }
 
-type OwnProps<TValues = Record<string, any>> = {
+type OwnProps<TValues = Record<string, unknown>> = {
     initialValues: TValues | undefined
     children: React.ReactNode
 }
