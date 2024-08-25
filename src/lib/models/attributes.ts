@@ -1,6 +1,5 @@
 import type {
     IdentifiableObject,
-    Attribute,
     AttributeValue,
     PickWithFieldFilters,
 } from '../../types/generated'

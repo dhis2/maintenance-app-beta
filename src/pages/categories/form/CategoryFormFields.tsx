@@ -7,7 +7,6 @@ import {
     DefaultIdentifiableFields,
     StandardFormField,
     StandardFormSection,
-    DefaultEditFormContents,
     StandardFormSectionTitle,
     StandardFormSectionDescription,
     DescriptionField,
