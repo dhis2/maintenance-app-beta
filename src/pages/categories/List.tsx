@@ -1,7 +1,6 @@
-// @ts-nocheck
 import React from 'react'
 import { DefaultSectionList } from '../DefaultSectionList'
 
 export const Component = () => (
-    <DefaultSectionList filter={['name:ne:default']} />
+    <DefaultSectionList filters={['name:ne:default']} />
 )
