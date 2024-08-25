@@ -1,17 +1,17 @@
-import { FormProps } from 'react-final-form'
-import { usePatchModel } from './usePatchModel'
 import { useAlert, useDataEngine } from '@dhis2/app-runtime'
-import { createJsonPatchOperations } from './createJsonPatchOperations'
+import { useMemo } from 'react'
+import { FormProps } from 'react-final-form'
 import { useNavigate } from 'react-router-dom'
 import { ModelSection } from '../../types'
-import { useMemo } from 'react'
 import { IdentifiableObject } from '../../types/generated'
 import { getSectionPath } from '../routeUtils'
+import { createJsonPatchOperations } from './createJsonPatchOperations'
 import { useCreateModel } from './useCreateModel'
+import { usePatchModel } from './usePatchModel'
 
 type OnSubmit<TValues> = FormProps<TValues>['onSubmit']
 
-type UseOnSubmitOptions = {
+type UseOnSubmitEditOptions = {
     modelId: string
     section: ModelSection
 }
@@ -19,7 +19,7 @@ type UseOnSubmitOptions = {
 export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
     modelId,
     section,
-}: UseOnSubmitOptions) => {
+}: UseOnSubmitEditOptions) => {
     const patchDirtyFields = usePatchModel(modelId, section.namePlural)
     const saveAlert = useAlert(
         ({ message }) => message,
@@ -52,10 +52,11 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
     )
 }
 
-export const useOnSubmitNew = <TFormValues extends IdentifiableObject>({
+export const useOnSubmitNew = <TFormValues>({
     section,
-}: UseOnSubmitOptions) => {
-    const dataEngine = useDataEngine()
+}: {
+    section: ModelSection
+}) => {
     const createModel = useCreateModel(section.namePlural)
     const saveAlert = useAlert(
         ({ message }) => message,

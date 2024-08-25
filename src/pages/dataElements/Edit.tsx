@@ -11,6 +11,7 @@ import {
     StandardFormSection,
 } from '../../components'
 import { useCustomAttributesQuery } from '../../components/form'
+import { AttributeMetadata } from '../../components/form/attributes/useCustomAttributesQuery'
 import { SCHEMA_SECTIONS, getSectionPath, validate } from '../../lib'
 import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
 import { getAllAttributeValues } from '../../lib/models/attributes'
@@ -51,7 +52,7 @@ function computeInitialValues({
     customAttributes,
 }: {
     dataElement: DataElement
-    customAttributes: Attribute[]
+    customAttributes: AttributeMetadata[]
     dataElementId: string
 }) {
     if (!dataElement) {
@@ -86,7 +87,7 @@ function computeInitialValues({
         aggregationLevels: dataElement.aggregationLevels || [],
         zeroIsSignificant: dataElement.zeroIsSignificant,
         attributeValues,
-    }
+    } as FormValues
 }
 
 function usePatchDirtyFields() {

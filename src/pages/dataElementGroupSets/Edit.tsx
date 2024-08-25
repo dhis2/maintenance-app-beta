@@ -9,6 +9,7 @@ import {
     DefaultEditFormContents,
     useCustomAttributesQuery,
 } from '../../components/form'
+import { AttributeMetadata } from '../../components/form/attributes/useCustomAttributesQuery'
 import {
     SCHEMA_SECTIONS,
     getSectionPath,
@@ -17,7 +18,7 @@ import {
 } from '../../lib'
 import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
 import { getAllAttributeValues } from '../../lib/models/attributes'
-import { Attribute, DataElementGroupSet } from '../../types/generated'
+import { DataElementGroupSet } from '../../types/generated'
 import {
     DataElementGroupSetFormFields,
     dataElementGroupSetSchema,
@@ -55,7 +56,7 @@ function computeInitialValues({
     customAttributes,
 }: {
     dataElementGroupSet: DataElementGroupSet
-    customAttributes: Attribute[]
+    customAttributes: AttributeMetadata[]
 }) {
     if (!dataElementGroupSet) {
         return {}
@@ -78,7 +79,7 @@ function computeInitialValues({
         dataDimension: dataElementGroupSet.dataDimension,
         dataElementGroups: dataElementGroupSet.dataElementGroups || [],
         attributeValues,
-    }
+    } as FormValues
 }
 
 export const Component = () => {
@@ -117,7 +118,7 @@ function DataElementGroupSetForm({
     attributes,
 }: {
     dataElementGroupSet: DataElementGroupSet
-    attributes: Attribute[]
+    attributes: AttributeMetadata[]
 }) {
     const navigate = useNavigate()
     const patchDirtyFields = usePatchModel(
