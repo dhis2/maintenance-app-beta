@@ -19,8 +19,9 @@ export const categorySchema = z.object({
     dataDimension: z.boolean().default(true),
     categoryOptions: z
         .array(z.object({ id: z.string() }))
-        .min(1)
+        .min(1, 'At least one category option is required')
         .default([]),
+
     attributeValues: z
         .array(
             z.object({

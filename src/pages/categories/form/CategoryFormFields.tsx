@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF, RadioFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { Field } from 'react-final-form'
+import { Field, useForm, useFormState } from 'react-final-form'
 import {
     CustomAttributesSection,
     DefaultIdentifiableFields,
@@ -11,6 +11,8 @@ import {
     StandardFormSectionDescription,
     DescriptionField,
     HorizontalFieldGroup,
+    ModelTransferField,
+    ModelTransfer,
 } from '../../../components'
 import { SECTIONS_MAP } from '../../../lib'
 
@@ -72,6 +74,31 @@ export const CategoryFormFields = () => {
                             'Category will be available to the analytics as another dimension'
                         )}
                     />
+                </StandardFormField>
+            </StandardFormSection>
+
+            <StandardFormSection>
+                <StandardFormSectionTitle>
+                    {i18n.t('Category options')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Choose the category options to include in this category.'
+                    )}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <StandardFormField>
+                        <ModelTransferField
+                            label={i18n.t('Category options')}
+                            name="categoryOptions"
+                            query={{
+                                resource: 'categoryOptions',
+                                params: {
+                                    filter: ['isDefault:eq:false'],
+                                },
+                            }}
+                        />
+                    </StandardFormField>
                 </StandardFormField>
             </StandardFormSection>
             <CustomAttributesSection />
