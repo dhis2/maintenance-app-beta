@@ -1,21 +1,31 @@
 import i18n from '@dhis2/d2-i18n'
-import { ButtonStrip, Button, Field } from '@dhis2/ui'
+import { ButtonStrip, Button, Field, TransferProps } from '@dhis2/ui'
 import React, { useRef } from 'react'
 import { useField } from 'react-final-form'
 import { useHref } from 'react-router'
 import { DisplayableModel, ModelTransfer } from '../../../components'
 import { getSectionNewPath } from '../../../lib'
 import { PlainResourceQuery } from '../../../types'
+import { LinkButton } from '../../LinkButton'
+import css from './ModelTransfer.module.css'
 
 type ModelTransferFieldProps = {
     name: string
     query: PlainResourceQuery
-    label: string
-}
+    label?: string
+} & Pick<
+    TransferProps,
+    'rightHeader' | 'leftHeader' | 'rightFooter' | 'leftFooter'
+>
+
 export function ModelTransferField<TModel extends DisplayableModel>({
     name,
     query,
     label,
+    rightHeader,
+    leftHeader,
+    rightFooter,
+    leftFooter,
 }: ModelTransferFieldProps) {
     const modelName = query.resource
     const { input, meta } = useField<TModel[]>(name, {
@@ -30,22 +40,6 @@ export function ModelTransferField<TModel extends DisplayableModel>({
         },
     })
 
-    const rightHeader = <p>{i18n.t('Selected options')}</p>
-
-    const leftFooter = (
-        <div>
-            <ButtonStrip>
-                <Button small onClick={modelTransferHandle.current.refetch}>
-                    {i18n.t('Refresh list')}
-                </Button>
-
-                <Button small onClick={() => window.open(newLink, '_blank')}>
-                    {i18n.t('Add new')}
-                </Button>
-            </ButtonStrip>
-        </div>
-    )
-
     return (
         <Field
             dataTest="formfields-modeltransfer"
@@ -53,19 +47,61 @@ export function ModelTransferField<TModel extends DisplayableModel>({
             validationText={(meta.touched && meta.error?.toString()) || ''}
             name={name}
             label={label}
+            className={css.moduleTransferField}
         >
             <ModelTransfer
                 ref={modelTransferHandle}
-                filterPlaceHolder="Search"
+                filterPlaceholder="Filter available category options"
+                filterPlaceholderPicked="Filter selected category options"
                 selected={input.value}
                 onChange={({ selected }) => {
                     input.onChange(selected)
                     input.onBlur()
                 }}
-                rightHeader={rightHeader}
-                leftFooter={leftFooter}
+                leftHeader={<TransferHeader>{leftHeader}</TransferHeader>}
+                rightHeader={<TransferHeader>{rightHeader}</TransferHeader>}
+                leftFooter={
+                    leftFooter ?? (
+                        <DefaultTransferLeftFooter
+                            onRefreshClick={modelTransferHandle.current.refetch}
+                            newLink={newLink}
+                        />
+                    )
+                }
+                rightFooter={rightFooter}
                 query={query}
+                height={'350px'}
+                optionsWidth="500px"
+                selectedWidth="500px"
+                enableOrderChange={true}
             />
         </Field>
+    )
+}
+
+const TransferHeader = ({ children }: { children: React.ReactNode }) => {
+    if (typeof children === 'string') {
+        return <div className={css.modelTransferHeader}>{children}</div>
+    }
+    return <>{children}</>
+}
+
+const DefaultTransferLeftFooter = ({
+    onRefreshClick,
+    newLink,
+}: {
+    onRefreshClick: () => void
+    newLink: string
+}) => {
+    return (
+        <ButtonStrip className={css.modelTransferFooter}>
+            <Button small onClick={onRefreshClick}>
+                {i18n.t('Refresh list')}
+            </Button>
+
+            <LinkButton small href={newLink} target="_blank">
+                {i18n.t('Add new')}
+            </LinkButton>
+        </ButtonStrip>
     )
 }
