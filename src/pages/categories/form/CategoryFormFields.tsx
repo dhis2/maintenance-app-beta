@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF, RadioFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { Field, useForm, useFormState } from 'react-final-form'
+import { Field } from 'react-final-form'
 import {
     CustomAttributesSection,
     DefaultIdentifiableFields,
@@ -12,7 +12,6 @@ import {
     DescriptionField,
     HorizontalFieldGroup,
     ModelTransferField,
-    ModelTransfer,
 } from '../../../components'
 import { SECTIONS_MAP } from '../../../lib'
 
@@ -97,6 +96,8 @@ export const CategoryFormFields = () => {
                                     filter: ['isDefault:eq:false'],
                                 },
                             }}
+                            leftHeader={i18n.t('Available category options')}
+                            rightHeader={i18n.t('Selected category options')}
                         />
                     </StandardFormField>
                 </StandardFormField>
