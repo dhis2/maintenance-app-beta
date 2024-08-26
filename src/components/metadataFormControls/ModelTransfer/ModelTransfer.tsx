@@ -98,13 +98,7 @@ export const ModelTransfer = forwardRef(function ModelTransfer<
 
     const handleOnChange = ({ selected }: { selected: string[] }) => {
         // map the selected ids to the full model
-        const allDataMap = new Map(
-            queryResult.data?.pages.flatMap((page) =>
-                page[modelName].map((d) => [d.id, d] as const)
-            )
-        )
-
-        // loop selected to map, to preserve order
+        // loop through selected to keep order
         const selectedModels = selected
             .map((id) => allDataMap.get(id))
             .filter((model): model is TModel => !!model)
