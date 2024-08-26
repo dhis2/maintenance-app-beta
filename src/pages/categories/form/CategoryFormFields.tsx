@@ -88,7 +88,6 @@ export const CategoryFormFields = () => {
                 <StandardFormField>
                     <StandardFormField>
                         <ModelTransferField
-                            label={i18n.t('Category options')}
                             name="categoryOptions"
                             query={{
                                 resource: 'categoryOptions',
@@ -98,6 +97,12 @@ export const CategoryFormFields = () => {
                             }}
                             leftHeader={i18n.t('Available category options')}
                             rightHeader={i18n.t('Selected category options')}
+                            filterPlaceholder={i18n.t(
+                                'Filter available category options'
+                            )}
+                            filterPlaceholderPicked={i18n.t(
+                                'Filter selected category options'
+                            )}
                         />
                     </StandardFormField>
                 </StandardFormField>
