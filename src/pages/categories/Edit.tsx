@@ -15,7 +15,6 @@ const fieldFilters = [
     'shortName',
     'code',
     'description',
-    'categoryCombos',
     'categoryOptions[id,displayName]',
     'dataDimension',
     'dataDimensionType',
