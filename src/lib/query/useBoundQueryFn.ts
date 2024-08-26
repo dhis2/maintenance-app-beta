@@ -20,13 +20,32 @@ export const useBoundQueryFn = () => {
     return useMemo(() => createBoundQueryFn(dataEngine), [dataEngine])
 }
 
+const mergePageParam = (query: ResourceQuery, pageParam?: number) => {
+    return {
+        ...query,
+        params: {
+            ...query.params,
+            page: pageParam,
+        },
+    }
+}
+
 export const createBoundResourceQueryFn =
     (engine: DataEngine) =>
     async <TData>({
         queryKey: [query],
+        pageParam,
         signal,
     }: QueryFunctionContext<ResourceQueryKey>) => {
-        const result = await engine.query({ result: query }, { signal })
+        const result = await engine.query(
+            {
+                result:
+                    typeof pageParam === 'number'
+                        ? mergePageParam(query, pageParam)
+                        : query,
+            },
+            { signal }
+        )
         return result.result as TData
     }
 

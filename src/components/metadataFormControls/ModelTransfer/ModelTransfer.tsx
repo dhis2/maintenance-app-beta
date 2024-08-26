@@ -1,16 +1,14 @@
-import { Transfer } from '@dhis2/ui'
-import React, { forwardRef, useImperativeHandle, useState } from 'react'
+import { Transfer, TransferProps } from '@dhis2/ui'
+import React, {
+    forwardRef,
+    useImperativeHandle,
+    useMemo,
+    useState,
+} from 'react'
 import { useInfiniteQuery } from 'react-query'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
-import { PlainResourceQuery, ResourceQuery } from '../../../types'
+import { PlainResourceQuery } from '../../../types'
 import { PagedResponse } from '../../../types/generated'
-
-type ModelTransferProps<TModel> = {
-    filterPlaceHolder: string
-    selected: TModel[]
-    onChange: ({ selected }: { selected: TModel[] }) => void
-    query: PlainResourceQuery
-}
 
 type Response<Model> = PagedResponse<Model, string>
 
@@ -23,7 +21,6 @@ const defaultQuery = {
     params: {
         order: 'displayName:asc',
         fields: ['id', 'displayName'],
-        // filter: ['isDefault:eq:false'],
     },
 }
 
@@ -32,41 +29,47 @@ const toDisplayOption = (model: DisplayableModel) => ({
     label: model.displayName,
 })
 
+type OwnProps<TModel> = {
+    selected: TModel[]
+    onChange: ({ selected }: { selected: TModel[] }) => void
+    query: PlainResourceQuery
+}
+type ModelTransferProps<TModel> = Omit<
+    TransferProps,
+    | keyof OwnProps<TModel>
+    | 'options'
+    | 'selected'
+    | 'filterable'
+    | 'onFilterChange'
+> &
+    OwnProps<TModel>
+
 export const ModelTransfer = forwardRef(function ModelTransfer<
     TModel extends DisplayableModel
->(props: ModelTransferProps<TModel>, ref: React.Ref<{ refetch: () => void }>) {
+>(
+    { selected, onChange, query, ...transferProps }: ModelTransferProps<TModel>,
+    ref: React.Ref<{ refetch: () => void }>
+) {
     const queryFn = useBoundResourceQueryFn()
     const [searchTerm, setSearchTerm] = useState('')
 
     const searchFilter = `identifiable:token:${searchTerm}`
     const filter: string[] = searchTerm ? [searchFilter] : []
-    const params = props.query.params
+    const params = query.params
 
-    const query = {
-        ...props.query,
+    const queryObject = {
+        ...query,
         params: {
             ...defaultQuery.params,
-            ...props.query.params,
+            ...params,
             filter: filter.concat(params?.filter || []),
         },
     }
     const modelName = query.resource
 
     const queryResult = useInfiniteQuery({
-        queryKey: [query] as const,
-        queryFn: ({ pageParam = 1, queryKey: [q], ...rest }) =>
-            queryFn<Response<TModel>>({
-                ...rest,
-                queryKey: [
-                    {
-                        ...q,
-                        params: {
-                            ...q.params,
-                            page: pageParam,
-                        },
-                    },
-                ],
-            }),
+        queryKey: [queryObject] as const,
+        queryFn: queryFn<Response<TModel>>,
         keepPreviousData: true,
         getNextPageParam: (lastPage) =>
             lastPage.pager.nextPage ? lastPage.pager.page + 1 : undefined,
@@ -78,45 +81,54 @@ export const ModelTransfer = forwardRef(function ModelTransfer<
         refetch: () => queryResult.refetch(),
     }))
 
-    const selectedOptions = props.selected.map(toDisplayOption)
-
-    const loadedOptions = queryResult.data?.pages.flatMap((page) =>
-        page[modelName].map(toDisplayOption)
+    const allDataMap = useMemo(
+        () =>
+            new Map(
+                queryResult.data?.pages.flatMap((page) =>
+                    page[modelName].map((d) => [d.id, d] as const)
+                )
+            ),
+        [queryResult.data, modelName]
     )
 
+    const selectedOptions = selected.map(toDisplayOption)
+    const loadedOptions = Array.from(allDataMap.values()).map(toDisplayOption)
+    // always include selected options
     const allOptions = selectedOptions.concat(loadedOptions || [])
 
-    /* We need to find the full model, because what we get back is just a string */
     const handleOnChange = ({ selected }: { selected: string[] }) => {
-        const selectedModels = queryResult.data?.pages.flatMap((page) =>
-            page[modelName].filter((model) => selected.includes(model.id))
+        // map the selected ids to the full model
+        const allDataMap = new Map(
+            queryResult.data?.pages.flatMap((page) =>
+                page[modelName].map((d) => [d.id, d] as const)
+            )
         )
 
-        if (selectedModels) {
-            props.onChange({
-                selected: selectedModels,
-            })
-        }
+        // loop selected to map, to preserve order
+        const selectedModels = selected
+            .map((id) => allDataMap.get(id))
+            .filter((model): model is TModel => !!model)
+
+        onChange({
+            selected: selectedModels,
+        })
     }
 
     return (
         <Transfer
-            loading={queryResult.isFetching}
+            filterablePicked={true}
             loadingPicked={false}
-            filterable
-            filterPlaceholder={props.filterPlaceHolder || 'Filter'}
-            searchTerm={searchTerm}
+            loading={queryResult.isFetching}
+            {...transferProps}
             options={allOptions}
+            filterable
+            searchTerm={searchTerm}
             onEndReached={queryResult.fetchNextPage}
             onFilterChange={({ value }) =>
                 value !== undefined && setSearchTerm(value)
             }
             selected={selectedOptions.map((o) => o.value)}
             onChange={handleOnChange}
-            selectedWidth="50%"
-            optionsWidth="50%"
-            leftFooter={props.leftFooter}
-            rightHeader={props.rightHeader}
-        ></Transfer>
+        />
     )
 })
