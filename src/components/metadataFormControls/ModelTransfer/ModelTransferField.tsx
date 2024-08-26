@@ -15,7 +15,12 @@ type ModelTransferFieldProps = {
     label?: string
 } & Pick<
     TransferProps,
-    'rightHeader' | 'leftHeader' | 'rightFooter' | 'leftFooter'
+    | 'rightHeader'
+    | 'leftHeader'
+    | 'rightFooter'
+    | 'leftFooter'
+    | 'filterPlaceholder'
+    | 'filterPlaceholderPicked'
 >
 
 export function ModelTransferField<TModel extends DisplayableModel>({
@@ -26,6 +31,8 @@ export function ModelTransferField<TModel extends DisplayableModel>({
     leftHeader,
     rightFooter,
     leftFooter,
+    filterPlaceholder,
+    filterPlaceholderPicked,
 }: ModelTransferFieldProps) {
     const modelName = query.resource
     const { input, meta } = useField<TModel[]>(name, {
@@ -51,8 +58,12 @@ export function ModelTransferField<TModel extends DisplayableModel>({
         >
             <ModelTransfer
                 ref={modelTransferHandle}
-                filterPlaceholder="Filter available category options"
-                filterPlaceholderPicked="Filter selected category options"
+                filterPlaceholder={
+                    filterPlaceholder || i18n.t('Filter available items')
+                }
+                filterPlaceholderPicked={
+                    filterPlaceholderPicked || i18n.t('Filter selected items')
+                }
                 selected={input.value}
                 onChange={({ selected }) => {
                     input.onChange(selected)
