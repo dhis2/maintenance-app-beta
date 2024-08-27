@@ -33,11 +33,19 @@ interface QueryResponse {
     }
 }
 
-export function useCustomAttributesQuery() {
+type UseCustomAttributesQueryOptions = {
+    enabled?: boolean
+}
+export function useCustomAttributesQuery({
+    enabled = true,
+}: UseCustomAttributesQueryOptions = {}) {
     const schemaSection = useSchemaSectionHandleOrThrow()
     const customAttributes = useDataQuery<QueryResponse>(
         CUSTOM_ATTRIBUTES_QUERY,
-        { variables: { modelName: schemaSection.name } }
+        {
+            lazy: enabled,
+            variables: { modelName: schemaSection.name },
+        }
     )
 
     return useMemo(
