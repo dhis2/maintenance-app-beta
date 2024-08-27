@@ -1,4 +1,3 @@
-
 .breadcrumbWrapper {
     margin-bottom: 8px;
 }
@@ -11,7 +10,7 @@
 }
 
 span.breadcrumbItem {
-    cursor: pointer
+    cursor: pointer;
 }
 
 .breadcrumbItem:hover {

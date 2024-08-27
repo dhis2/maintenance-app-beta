@@ -19,7 +19,7 @@
         "postinstall": "yarn d2-style install"
     },
     "devDependencies": {
-        "@dhis2/cli-app-scripts": "^10.3.9",
+        "@dhis2/cli-app-scripts": "^11.7.0",
         "@dhis2/cli-style": "^10.5.1",
         "@dhis2/cypress-commands": "^10.0.3",
         "@dhis2/cypress-plugins": "^10.0.3",
@@ -32,12 +32,13 @@
         "@typescript-eslint/eslint-plugin": "^5.55.0",
         "@typescript-eslint/parser": "^5.55.0",
         "cypress": "^12.14.0",
+        "eslint": "^8",
         "typescript": "^5.0.4",
         "whatwg-fetch": "^3.6.17"
     },
     "dependencies": {
         "@dhis2/app-runtime": "^3.9.3",
-        "@dhis2/ui": "^9.2.0",
+        "@dhis2/ui": "^9.11.3",
         "@tanstack/react-table": "^8.16.0",
         "@types/lodash": "^4.14.198",
         "lodash": "^4.17.21",
@@ -51,6 +52,6 @@
         "zustand": "^4.4.0"
     },
     "resolutions": {
-        "@dhis2/ui": "^9.2.0"
+        "eslint": "^8"
     }
 }
