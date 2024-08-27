@@ -43,6 +43,7 @@ export const Component = () => {
             section={section}
             initialValues={categoryCombo.data}
             validate={validate}
+            includeAttributes={false}
         >
             <DefaultEditFormContents section={section}>
                 <CategoryComboFormFields />

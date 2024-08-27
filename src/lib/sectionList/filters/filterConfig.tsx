@@ -13,6 +13,7 @@ export const filterParamsSchema = z
         [IDENTIFIABLE_FILTER_KEY]: z.string(),
         aggregationType: z.array(z.nativeEnum(DataElement.aggregationType)),
         categoryCombo: zodArrayIds,
+        category: zodArrayIds,
         dataSet: zodArrayIds,
         domainType: z.array(z.nativeEnum(DataElement.domainType)),
         publicAccess: z.array(
@@ -31,6 +32,7 @@ export const filterQueryParamType = {
     domainType: CustomDelimitedArrayParam,
     valueType: CustomDelimitedArrayParam,
     dataSet: CustomDelimitedArrayParam,
+    category: CustomDelimitedArrayParam,
     categoryCombo: CustomDelimitedArrayParam,
     publicAccess: CustomDelimitedArrayParam,
     dataDimensionType: StringParam,
