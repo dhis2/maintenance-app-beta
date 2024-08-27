@@ -29,6 +29,9 @@ export const ComponentWithProvider = ({
                 baseUrl: 'http://dhis2-imaginary-test-server',
                 apiVersion: 41,
             }}
+            plugin={false}
+            parentAlertsAdd={() => undefined}
+            showAlertsInPlugin={true}
         >
             <CustomDataProvider
                 data={dataForCustomProvider as any}
