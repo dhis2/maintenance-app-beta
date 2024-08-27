@@ -30,7 +30,12 @@ const defaultFilter = (
 
 const filterToQueryParamMap: FilterToQueryParamsMap = {
     identifiable: (value) => `identifiable:token:${value}`,
-    categoryCombo: (value) => inFilter('categoryCombo.id', value),
+    categoryCombo: (value, section) => {
+        if (section.name === 'category') {
+            return inFilter('categoryCombos.id', value)
+        }
+        return inFilter('categoryCombo.id', value)
+    },
     dataSet: (value, section) =>
         section.name === SchemaName.dataElement
             ? inFilter('dataSetElements.dataSet.id', value)
