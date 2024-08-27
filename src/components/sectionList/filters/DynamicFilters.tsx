@@ -7,6 +7,7 @@ import {
     DomainTypeSelectionFilter,
     ValueTypeSelectionFilter,
     PublicAccessFilter,
+    DataDimensionTypeFilter,
 } from './filterSelectors'
 import { useFilterKeys } from './useFilterKeys'
 
@@ -19,6 +20,7 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
     valueType: ValueTypeSelectionFilter,
     aggregationType: AggregationTypeFilter,
     publicAccess: PublicAccessFilter,
+    dataDimensionType: DataDimensionTypeFilter,
 }
 
 export const DynamicFilters = () => {
