@@ -14,7 +14,7 @@ export const categoryComboSchema = z.object({
     dataDimensionType: z
         .nativeEnum(CategoryCombo.dataDimensionType)
         .default(CategoryCombo.dataDimensionType.DISAGGREGATION),
-    dataDimension: z.boolean().default(true),
+    skipTotal: z.boolean().default(false),
     categories: z
         .array(z.object({ id: z.string() }))
         .min(1, 'At least one category is required')
