@@ -96,16 +96,14 @@ export function DefaultNewFormContents({
                     </div>
                 </StandardFormSection>
             )}
-            <div className={classes.formActions}>
-                <StandardFormActions
-                    cancelLabel={i18n.t('Exit without saving')}
-                    submitLabel={i18n.t('Create {{modelName}} ', {
-                        modelName: section.title,
-                    })}
-                    submitting={submitting}
-                    onCancelClick={() => navigate(listPath)}
-                />
-            </div>
+            <StandardFormActions
+                cancelLabel={i18n.t('Exit without saving')}
+                submitLabel={i18n.t('Create {{modelName}} ', {
+                    modelName: section.title,
+                })}
+                submitting={submitting}
+                onCancelClick={() => navigate(listPath)}
+            />
         </div>
     )
 }
