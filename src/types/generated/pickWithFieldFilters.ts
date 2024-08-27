@@ -1,4 +1,5 @@
 import type { BaseIdentifiableObject } from './models'
+import { Prettify } from './utility'
 
 type RemoveSpaces<S extends string> = S extends `${infer T} ${infer U}`
     ? RemoveSpaces<`${T}${U}`>
@@ -36,7 +37,9 @@ type RecursivePickWithFieldFilter<
     ? {
           // create an object with root key, and recursively pick the nested fields
           [K in Root]: MaybeCollection<
-              RecursivePickWithFieldFilter<GetModel<Model[Root]>, Nested>,
+              Prettify<
+                  RecursivePickWithFieldFilter<GetModel<Model[Root]>, Nested>
+              >,
               Model[Root]
           >
       }
@@ -64,9 +67,11 @@ export type PickWithFieldFilters<
 > =
     // RecursivePick<TModel, TFieldFilters[number]> will return an union of objects for each entry in fieldFilter-array.
     // Thus we convert this to an intersection to get one object with all the picked properties.
-    UnionToIntersection<
-        RecursivePickWithFieldFilter<
-            TModel,
-            RemoveSpaces<TFieldFilters[number]>
+    Prettify<
+        UnionToIntersection<
+            RecursivePickWithFieldFilter<
+                TModel,
+                RemoveSpaces<TFieldFilters[number]>
+            >
         >
     >
