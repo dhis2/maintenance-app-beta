@@ -3,7 +3,6 @@ import { CheckboxFieldFF, RadioFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field } from 'react-final-form'
 import {
-    CustomAttributesSection,
     StandardFormField,
     StandardFormSection,
     StandardFormSectionTitle,
@@ -15,9 +14,9 @@ import {
 } from '../../../components'
 import { SECTIONS_MAP } from '../../../lib'
 
-export const CategoryComboFormFields = () => {
-    const section = SECTIONS_MAP.category
+const section = SECTIONS_MAP.categoryCombo
 
+export const CategoryComboFormFields = () => {
     return (
         <>
             <StandardFormSection>

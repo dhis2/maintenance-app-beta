@@ -21,8 +21,9 @@ export type CategoryComboFormValues = PickWithFieldFilters<
     typeof fieldFilters
 >
 
+const section = SECTIONS_MAP.categoryCombo
+
 export const Component = () => {
-    const section = SECTIONS_MAP.category
     const queryFn = useBoundResourceQueryFn()
     const modelId = useParams().id as string
     const query = {
