@@ -1,5 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
+import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
+import { Field } from 'react-final-form'
 import {
     StandardFormField,
     StandardFormSection,
@@ -9,8 +11,6 @@ import {
     CustomAttributesSection,
 } from '../../../components'
 import { SECTIONS_MAP } from '../../../lib'
-import { Field } from 'react-final-form'
-import { InputFieldFF } from '@dhis2/ui'
 
 const section = SECTIONS_MAP.categoryCombo
 
