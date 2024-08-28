@@ -1,15 +1,14 @@
 import { z } from 'zod'
-import { getDefaults } from '../../../lib'
-import { createFormValidate } from '../../../lib/form/validate'
+import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
 import { Category } from '../../../types/generated'
 import { CategoryFormValues } from '../Edit'
 
 /*  Note that this describes what we send to the server, 
     and not what is stored in the form. */
+const { identifiable, referenceCollection, withAttributeValues } =
+    modelFormSchemas
 
-export const categorySchema = z.object({
-    id: z.string().optional(),
-    name: z.string().trim(),
+export const categorySchema = identifiable.merge(withAttributeValues).extend({
     shortName: z.string().trim(),
     code: z.string().trim().optional(),
     description: z.string().trim().optional(),
@@ -17,20 +16,8 @@ export const categorySchema = z.object({
         .nativeEnum(Category.dataDimensionType)
         .default(Category.dataDimensionType.DISAGGREGATION),
     dataDimension: z.boolean().default(true),
-    categoryOptions: z
-        .array(z.object({ id: z.string() }))
+    categoryOptions: referenceCollection
         .min(1, 'At least one category option is required')
-        .default([]),
-
-    attributeValues: z
-        .array(
-            z.object({
-                value: z.string(),
-                attribute: z.object({
-                    id: z.string(),
-                }),
-            })
-        )
         .default([]),
 })
 
