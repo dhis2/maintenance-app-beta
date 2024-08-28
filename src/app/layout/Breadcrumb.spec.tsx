@@ -76,23 +76,20 @@ describe('BreadcrumbItem', () => {
     })
 })
 describe('Breadcrumbs', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     it('should render crumb components in handle', () => {
         const { getByText } = render(<Breadcrumbs />, { wrapper: HashRouter })
 
         expect(getByText('Crumb 1')).toBeDefined()
         expect(getByText('Crumb 2')).toBeDefined()
-    }),
-        it('should not crash when no crumb components are in handle ', () => {
-            mockedUseMatches.mockReturnValue([
-                mockHandle({ hideSidebar: true }),
-            ])
+    })
+    it('should not crash when no crumb components are in handle ', () => {
+        mockedUseMatches.mockReturnValue([mockHandle({ hideSidebar: true })])
 
-            const { queryByText } = render(<Breadcrumbs />)
+        const { queryByText } = render(<Breadcrumbs />)
 
-            expect(queryByText('Crumb 1')).not.toBeInTheDocument()
-            expect(queryByText('Crumb 2')).not.toBeInTheDocument()
-        })
+        expect(queryByText('Crumb 1')).not.toBeInTheDocument()
+        expect(queryByText('Crumb 2')).not.toBeInTheDocument()
+    })
 
     describe('with BreadcrumbItem', () => {
         beforeEach(() => {
