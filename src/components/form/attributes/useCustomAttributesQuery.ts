@@ -43,7 +43,7 @@ export function useCustomAttributesQuery({
     const customAttributes = useDataQuery<QueryResponse>(
         CUSTOM_ATTRIBUTES_QUERY,
         {
-            lazy: enabled,
+            lazy: !enabled,
             variables: { modelName: schemaSection.name },
         }
     )
