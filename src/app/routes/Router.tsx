@@ -6,9 +6,6 @@ import {
     Navigate,
     Route,
     createRoutesFromElements,
-    LazyRouteFunction,
-    IndexRouteObject,
-    NonIndexRouteObject,
     useParams,
 } from 'react-router-dom'
 import { QueryParamProvider } from 'use-query-params'
@@ -48,25 +45,10 @@ import { LegacyAppRedirect } from './LegacyAppRedirect'
 //     convertJSONOutput: boolean = true
 //   ): Promise<IPlayerStats | IStatsItem[]>
 
-// overrides to narrow type
 function createOverviewLazyRouteFunction(
-    index: false,
-    componentName: string,
-    section?: OverviewSection
-): LazyRouteFunction<NonIndexRouteObject>
-function createOverviewLazyRouteFunction(
-    index: true,
-    componentName: string,
-    section?: OverviewSection
-): LazyRouteFunction<IndexRouteObject>
-
-function createOverviewLazyRouteFunction(
-    index: boolean = false,
     componentName: string, //keyof typeof import('../../pages/overview/'),
     section?: OverviewSection
-):
-    | LazyRouteFunction<NonIndexRouteObject>
-    | LazyRouteFunction<IndexRouteObject> {
+) {
     return async () => {
         const routeComponent = await import(`../../pages/overview/`)
         const name = componentName as keyof typeof routeComponent
@@ -83,25 +65,10 @@ function createOverviewLazyRouteFunction(
     }
 }
 
-// overrides to narrow type
 function createSectionLazyRouteFunction(
-    index: false,
     section: Section,
     componentFileName: string
-): LazyRouteFunction<NonIndexRouteObject>
-function createSectionLazyRouteFunction(
-    index: true,
-    section: Section,
-    componentFileName: string
-): LazyRouteFunction<IndexRouteObject>
-
-function createSectionLazyRouteFunction(
-    index: boolean = false,
-    section: Section,
-    componentFileName: string
-):
-    | LazyRouteFunction<NonIndexRouteObject>
-    | LazyRouteFunction<IndexRouteObject> {
+) {
     return async () => {
         try {
             return await import(
@@ -157,10 +124,7 @@ const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
             </>
         }
     >
-        <Route
-            index
-            lazy={createSectionLazyRouteFunction(true, section, 'List')}
-        />
+        <Route index lazy={createSectionLazyRouteFunction(section, 'List')} />
         <Route
             handle={{
                 hideSidebar: true,
@@ -170,14 +134,14 @@ const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
             {!sectionsNoNewRoute.has(section) && (
                 <Route
                     path={routePaths.sectionNew}
-                    lazy={createSectionLazyRouteFunction(false, section, 'New')}
+                    lazy={createSectionLazyRouteFunction(section, 'New')}
                 />
             )}
             <Route path=":id" element={<VerifyModelId />}>
                 <Route
                     index
                     handle={{ showFooter: true }}
-                    lazy={createSectionLazyRouteFunction(true, section, 'Edit')}
+                    lazy={createSectionLazyRouteFunction(section, 'Edit')}
                 />
             </Route>
         </Route>
@@ -201,14 +165,13 @@ const routes = createRoutesFromElements(
             <Route path={routePaths.overviewRoot}>
                 <Route
                     index
-                    lazy={createOverviewLazyRouteFunction(true, 'AllOverview')}
+                    lazy={createOverviewLazyRouteFunction('AllOverview')}
                 />
                 {Object.values(OVERVIEW_SECTIONS).map((section) => (
                     <Route
                         key={section.name}
                         path={getSectionPath(section)}
                         lazy={createOverviewLazyRouteFunction(
-                            false,
                             section.componentName,
                             section
                         )}
