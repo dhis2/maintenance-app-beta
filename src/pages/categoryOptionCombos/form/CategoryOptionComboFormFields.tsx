@@ -12,7 +12,7 @@ import {
 } from '../../../components'
 import { SECTIONS_MAP } from '../../../lib'
 
-const section = SECTIONS_MAP.categoryCombo
+const section = SECTIONS_MAP.categoryOptionCombo
 
 export const CategoryOptionComboFormFields = () => {
     return (
