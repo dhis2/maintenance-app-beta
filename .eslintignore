@@ -11,3 +11,4 @@ cypress.env.json
 cypress/screenshots/*
 
 src/types/generated
+.prettierrc.js

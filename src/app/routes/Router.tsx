@@ -6,8 +6,6 @@ import {
     Navigate,
     Route,
     createRoutesFromElements,
-    LazyRouteFunction,
-    RouteObject,
     useParams,
 } from 'react-router-dom'
 import { QueryParamProvider } from 'use-query-params'
@@ -33,10 +31,24 @@ import { LegacyAppRedirect } from './LegacyAppRedirect'
 // see https://reactrouter.com/en/main/route/lazy#multiple-routes-in-a-single-file
 // Overviews are small, and the AllOverview would load all the other overviews anyway,
 // so it's propbably better to load them all at once
+
+// function foo<T extends boolean>(returnString: T): T extends true ? string : number;
+// function foo<T extends boolean>(returnString: T): string | number {
+//   return returnString ? String(Math.random()) : Math.random();
+// }
+
+// function getStatsById(userId: string, timeWindow: TimeWindow, convertJSONOutput: true): Promise<IPlayerStats>;
+// function getStatsById(userId: string, timeWindow: TimeWindow, convertJSONOutput: false): Promise<IStatsItem[]>;
+// function getStatsById(
+//     userId: string,
+//     timeWindow: TimeWindow = TimeWindow.Alltime,
+//     convertJSONOutput: boolean = true
+//   ): Promise<IPlayerStats | IStatsItem[]>
+
 function createOverviewLazyRouteFunction(
     componentName: string, //keyof typeof import('../../pages/overview/'),
     section?: OverviewSection
-): LazyRouteFunction<RouteObject> {
+) {
     return async () => {
         const routeComponent = await import(`../../pages/overview/`)
         const name = componentName as keyof typeof routeComponent
@@ -56,7 +68,7 @@ function createOverviewLazyRouteFunction(
 function createSectionLazyRouteFunction(
     section: Section,
     componentFileName: string
-): LazyRouteFunction<RouteObject> {
+) {
     return async () => {
         try {
             return await import(
