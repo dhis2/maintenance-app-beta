@@ -107,6 +107,12 @@ export const modelListViewsConfig = {
             default: [],
         },
     },
+    categoryOption: {
+        columns: {},
+        filters: {
+            default: ['category', 'categoryOptionGroup'],
+        },
+    },
     category: {
         columns: {
             default: [
