@@ -80,52 +80,56 @@ describe('Sidebar', () => {
     })
 
     describe('searching', () => {
-        it('should filter the list when a search string is entered', () => {
+        it('should filter the list when a search string is entered', async () => {
+            const user = userEvent.setup()
             const { getByPlaceholderText, getByText, queryByText } =
                 renderSideBar()
 
             expect(queryByText('Data element group')).toBeNull()
 
-            userEvent.type(getByPlaceholderText(/Search/), 'elements')
+            await user.type(getByPlaceholderText(/Search/), 'elements')
 
             expect(getByText('Data elements')).toBeDefined()
             expect(getByText('Overview')).toBeDefined()
             expect(getByText('Data element group')).toBeDefined()
             expect(getByText('Data element group set')).toBeDefined()
         })
-        it('should allow searching for a match in a subcategory', () => {
+        it('should allow searching for a match in a subcategory', async () => {
+            const user = userEvent.setup()
             const { getByPlaceholderText, getByText, queryByText } =
                 renderSideBar()
 
             expect(queryByText('Data element group')).toBeNull()
 
-            userEvent.type(getByPlaceholderText(/Search/), 'group')
+            await user.type(getByPlaceholderText(/Search/), 'group')
 
             expect(queryByText('Overview')).toBeNull()
             expect(getByText('Data element group')).toBeDefined()
             expect(getByText('Data element group set')).toBeDefined()
         })
         describe('when no match', () => {
-            it('should display an appropriate message', () => {
+            it('should display an appropriate message', async () => {
+                const user = userEvent.setup()
                 const { getByPlaceholderText, getByText, queryByText } =
                     renderSideBar()
 
                 expect(queryByText('Data element group')).toBeNull()
 
-                userEvent.type(
+                await user.type(
                     getByPlaceholderText(/Search/),
                     'something not in list'
                 )
 
                 expect(getByText(/No menu items found for/)).toBeDefined()
             })
-            it('should still display "MetaData Overview"', () => {
+            it('should still display "MetaData Overview"', async () => {
+                const user = userEvent.setup()
                 const { getByPlaceholderText, getByText, queryByText } =
                     renderSideBar()
 
                 expect(queryByText('Data element group')).toBeNull()
 
-                userEvent.type(
+                await user.type(
                     getByPlaceholderText(/Search/),
                     'something not in list'
                 )
@@ -135,13 +139,14 @@ describe('Sidebar', () => {
         })
     })
 
-    it('should allow tabbing through the menu', () => {
+    it('should allow tabbing through the menu', async () => {
+        const user = userEvent.setup()
         const { getByPlaceholderText, getByText } = renderSideBar()
 
         getByPlaceholderText(/Search/).focus()
-        userEvent.tab()
+        await user.tab()
         expect(getByText('Metadata Overview')).toHaveFocus()
-        userEvent.tab()
+        await user.tab()
         expect(getByText('Categories').parentElement).toHaveFocus()
     })
 

@@ -25,7 +25,8 @@
     cursor: pointer;
 }
 
-.active, .iconContainer:hover {
+.active,
+.iconContainer:hover {
     outline: var(--colors-blue300) solid 3px;
 }
 
