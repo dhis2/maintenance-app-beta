@@ -20,7 +20,11 @@ import { DeleteAction } from './DeleteAction'
 import css from './SectionListActions.module.css'
 
 export const ListActions = ({ children }: React.PropsWithChildren) => {
-    return <div className={css.listActions}>{children}</div>
+    return (
+        <div className={css.listActions} data-test="row-actions">
+            {children}
+        </div>
+    )
 }
 
 export const ActionEdit = ({ modelId }: { modelId: string }) => {

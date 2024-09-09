@@ -66,6 +66,7 @@ export const OrganisationUnitRow = ({
                                     className={css.expandButton}
                                     secondary
                                     type="button"
+                                    dataTest="row-expand-icon"
                                     loading={
                                         row.getIsExpanded() &&
                                         row.subRows.length < 1
