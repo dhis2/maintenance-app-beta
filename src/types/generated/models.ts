@@ -9489,6 +9489,60 @@ export type User = {
     displayName: string
     username: string
     name: string
+    access: Access
+    accountExpiry: string
+    attributeValues: Array<AttributeValue>
+    avatar: FileResource
+    birthday: string
+    catDimensionConstraints: Array<Category>
+    cogsDimensionConstraints: Array<CategoryOptionGroupSet>
+    created: string
+    createdBy: User
+    dataViewMaxOrganisationUnitLevel: number
+    dataViewOrganisationUnits: Array<OrganisationUnit>
+    disabled: boolean
+    education: string
+    email: string
+    employer: string
+    externalAuth: boolean
+    facebookMessenger: string
+    favorite: boolean
+    favorites: Array<string>
+    firstName: string
+    gender: string
+    href: string
+    interests: string
+    introduction: string
+    invitation: boolean
+    jobTitle: string
+    languages: string
+    lastCheckedInterpretations: string
+    lastLogin: string
+    lastUpdated: string
+    lastUpdatedBy: User
+    ldapId: string
+    nationality: string
+    openId: string
+    organisationUnits: Array<OrganisationUnit>
+    password: string
+    passwordLastUpdated: string
+    phoneNumber: string
+    selfRegistered: boolean
+    settings: UserSettings
+    sharing: Sharing
+    skype: string
+    surname: string
+    teiSearchOrganisationUnits: Array<OrganisationUnit>
+    telegram: string
+    translations: Array<Translation>
+    twitter: string
+    twoFactorEnabled: boolean
+    user: User
+    userCredentials: UserCredentialsDto
+    userGroups: Array<UserGroup>
+    userRoles: Array<UserRole>
+    welcomeMessage: string
+    whatsApp: string
 }
 
 export type UserAccess = {
