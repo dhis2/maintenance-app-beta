@@ -3,6 +3,7 @@ import {
     AGGREGATION_TYPE,
     DATA_DIMENSION_TYPE,
     DOMAIN_TYPE,
+    getTranslatedProperty,
     VALUE_TYPE,
 } from '../../../../lib'
 import { ConstantSelectionFilter } from './ConstantSelectionFilter'
@@ -10,7 +11,7 @@ import { ConstantSelectionFilter } from './ConstantSelectionFilter'
 export const DomainTypeSelectionFilter = () => {
     return (
         <ConstantSelectionFilter
-            label={'Domain type'}
+            label={getTranslatedProperty('domainType')}
             filterKey="domainType"
             constants={DOMAIN_TYPE}
         />
@@ -20,7 +21,7 @@ export const DomainTypeSelectionFilter = () => {
 export const ValueTypeSelectionFilter = () => {
     return (
         <ConstantSelectionFilter
-            label={'Value type'}
+            label={getTranslatedProperty('valueType')}
             filterKey="valueType"
             constants={VALUE_TYPE}
             filterable
@@ -31,7 +32,7 @@ export const ValueTypeSelectionFilter = () => {
 export const AggregationTypeFilter = () => {
     return (
         <ConstantSelectionFilter
-            label={'Aggregation type'}
+            label={getTranslatedProperty('aggregationType')}
             filterKey="aggregationType"
             constants={AGGREGATION_TYPE}
             filterable
@@ -42,7 +43,7 @@ export const AggregationTypeFilter = () => {
 export const DataDimensionTypeFilter = () => {
     return (
         <ConstantSelectionFilter
-            label={'Data dimension type'}
+            label={getTranslatedProperty('dataDimensionType')}
             filterKey="dataDimensionType"
             constants={DATA_DIMENSION_TYPE}
         />
