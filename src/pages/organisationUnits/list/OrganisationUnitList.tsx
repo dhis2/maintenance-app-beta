@@ -200,12 +200,10 @@ export const OrganisationUnitList = () => {
             <IdentifiableFilter />
             <ToolbarNormal />
             <SectionList
-                allSelected={table.getIsAllRowsSelected()}
                 headerColumns={table.getHeaderGroups()[0].headers.map((h) => ({
                     label: h.column.columnDef.header as string,
                     path: h.column.id,
                 }))}
-                onSelectAll={() => table.toggleAllRowsSelected()}
             >
                 <OrganisationUnitListMessage
                     isFiltering={isFiltering}
