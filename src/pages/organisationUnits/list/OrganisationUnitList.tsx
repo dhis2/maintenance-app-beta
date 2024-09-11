@@ -12,7 +12,6 @@ import { IdentifiableFilter, SectionList } from '../../../components'
 import { useModelListView } from '../../../components/sectionList/listView'
 import { ModelValue } from '../../../components/sectionList/modelValue/ModelValue'
 import { SectionListTitle } from '../../../components/sectionList/SectionListTitle'
-import { ToolbarNormal } from '../../../components/sectionList/toolbar/ToolbarNormal'
 import { SchemaName, useSchema, useSectionListFilter } from '../../../lib'
 import { getFieldFilter } from '../../../lib/models/path'
 import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
@@ -23,6 +22,7 @@ import {
     useFilteredOrgUnits,
     usePaginatedChildrenOrgUnitsController,
 } from './useOrganisationUnits'
+import { ToolbarNormal } from '../../../components/sectionList/toolbar/ToolbarNormal'
 
 export type OrganisationUnitListItem = Omit<
     PartialOrganisationUnit,
