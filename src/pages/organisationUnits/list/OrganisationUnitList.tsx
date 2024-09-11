@@ -192,6 +192,7 @@ export const OrganisationUnitList = () => {
         state: {
             expanded,
         },
+        enableSubRowSelection: false,
     })
 
     return (
