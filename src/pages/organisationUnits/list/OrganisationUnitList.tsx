@@ -209,7 +209,7 @@ export const OrganisationUnitList = () => {
                                 .flatRows.map((r) => r.id)
                         )
                     }
-                    onDeselectAll={() => {}}
+                    onDeselectAll={() => {table.resetRowSelection(true)}}
                 />
                 <SectionList
                     headerColumns={table
