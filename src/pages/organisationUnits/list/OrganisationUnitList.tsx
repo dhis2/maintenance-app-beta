@@ -9,11 +9,20 @@ import {
 } from '@tanstack/react-table'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { IdentifiableFilter, SectionList } from '../../../components'
+import {
+    DefaultDetailsPanelContent,
+    DetailsPanel,
+} from '../../../components/sectionList/detailsPanel'
 import { useModelListView } from '../../../components/sectionList/listView'
 import { ModelValue } from '../../../components/sectionList/modelValue/ModelValue'
 import { SectionListTitle } from '../../../components/sectionList/SectionListTitle'
 import { Toolbar } from '../../../components/sectionList/toolbar'
-import { SchemaName, useSchema, useSectionListFilter } from '../../../lib'
+import {
+    BaseListModel,
+    SchemaName,
+    useSchema,
+    useSectionListFilter,
+} from '../../../lib'
 import { getFieldFilter } from '../../../lib/models/path'
 import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
 import css from './OrganisationUnitList.module.css'
@@ -79,6 +88,17 @@ export const OrganisationUnitList = () => {
     // the expanded organisationUnit Ids
     const [expanded, setExpanded] = useState<ExpandedState>(
         () => initialExpandedState
+    )
+
+    const [detailsId, setDetailsId] = useState<string | undefined>()
+
+    const handleDetailsClick = useCallback(
+        ({ id }: BaseListModel) => {
+            setDetailsId((prevDetailsId) =>
+                prevDetailsId === id ? undefined : id
+            )
+        },
+        [setDetailsId]
     )
 
     const fieldFilters = columnDefinitions.map(
@@ -209,7 +229,9 @@ export const OrganisationUnitList = () => {
                                 .flatRows.map((r) => r.id)
                         )
                     }
-                    onDeselectAll={() => {table.resetRowSelection(true)}}
+                    onDeselectAll={() => {
+                        table.resetRowSelection(true)
+                    }}
                 />
                 <SectionList
                     headerColumns={table
@@ -241,11 +263,21 @@ export const OrganisationUnitList = () => {
                             showAllActive={
                                 parentIdsToLoad[row.original.id] === true
                             }
+                            onShowDetailsClick={handleDetailsClick}
                             isFiltering={isFiltering}
                             fetchNextPage={fetchNextPage}
                         />
                     ))}
                 </SectionList>
+                {detailsId && (
+                    <DetailsPanel
+                        onClose={() => setDetailsId(undefined)}
+                        // reset component state when modelId changes
+                        key={detailsId}
+                    >
+                        <DefaultDetailsPanelContent modelId={detailsId} />
+                    </DetailsPanel>
+                )}
             </div>
         </div>
     )
