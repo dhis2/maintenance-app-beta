@@ -56,6 +56,12 @@ const renderList = async ({
             path="/organisationUnits"
             customData={{
                 organisationUnits: (type: any, params: any) => {
+                    if (type === 'read' && params.id !== undefined) {
+                        const foundOrgUnit = organisationUnits.find(
+                            (ou) => ou.id === params.id
+                        )
+                        return foundOrgUnit
+                    }
                     if (type === 'read') {
                         const regex = /:(\w+)$/
                         const orgUnitFilter =
@@ -358,7 +364,7 @@ describe('Org Unit List', () => {
         ).toHaveClass('disabled')
     })
 
-    it('delete an org unit when possible', async () => {
+    it('deletes an org unit when possible', async () => {
         const rootOrg = testOrgUnit({ level: 1, childCount: 2 })
         const child1 = testOrgUnit({
             level: 2,
@@ -486,6 +492,135 @@ describe('Org Unit List', () => {
         expect(links[0]).toHaveAttribute(
             'href',
             `/organisationUnits/${child1.id}`
+        )
+    })
+
+    it('has show a detail panel', async () => {
+        const rootOrg = testOrgUnit({ level: 1, childCount: 2 })
+        const child1 = testOrgUnit({
+            level: 2,
+            ancestors: [rootOrg],
+            parentId: rootOrg.id,
+            childCount: 0,
+            access: testAccess({ deleteAccess: true }),
+        })
+        const child2 = testOrgUnit({
+            level: 2,
+            ancestors: [rootOrg],
+            parentId: rootOrg.id,
+            childCount: 0,
+        })
+
+        const screen = await renderList({
+            rootOrgUnits: [rootOrg],
+            otherOrgUnits: [child1, child2],
+        })
+
+        const tableRows = screen.getAllByTestId('dhis2-uicore-datatablerow')
+        expect(tableRows.length).toBe(4)
+
+        expect(tableRows[2]).toHaveTextContent(child1.displayName!)
+        const actionButton = within(tableRows[2]).getByTestId(
+            'row-actions-menu-button'
+        )
+        fireEvent.click(actionButton)
+        const actionsMenu = screen.getByTestId('row-actions-menu')
+        expect(actionsMenu).toBeVisible()
+        fireEvent.click(within(actionsMenu).getByText('Show details'))
+        const detailsPanel = await screen.findByTestId('details-panel')
+        expect(detailsPanel).toBeVisible()
+        expect(detailsPanel).toHaveTextContent(child1.displayName!)
+        expect(detailsPanel).toHaveTextContent(child1.code!)
+        expect(detailsPanel).toHaveTextContent(child1.id!)
+        expect(detailsPanel).toHaveTextContent(child1.createdBy!.displayName!)
+        expect(detailsPanel).toHaveTextContent(
+            child1.lastUpdatedBy!.displayName!
+        )
+        expect(
+            within(detailsPanel).getByText('API URL link').closest('a')
+        ).toHaveAttribute('href', child1.href)
+    })
+
+    it('should open and close the multi select toolbar', async () => {
+        const rootOrg = testOrgUnit({ level: 1, childCount: 2 })
+        const child1 = testOrgUnit({
+            level: 2,
+            ancestors: [rootOrg],
+            parentId: rootOrg.id,
+            childCount: 0,
+            access: testAccess({ deleteAccess: true }),
+        })
+        const child2 = testOrgUnit({
+            level: 2,
+            ancestors: [rootOrg],
+            parentId: rootOrg.id,
+            childCount: 0,
+        })
+
+        const screen = await renderList({
+            rootOrgUnits: [rootOrg],
+            otherOrgUnits: [child1, child2],
+        })
+
+        const tableRows = screen.getAllByTestId('dhis2-uicore-datatablerow')
+        expect(tableRows.length).toBe(4)
+
+        const secondChildCheckBox = within(tableRows[3]).getByRole('checkbox')
+        fireEvent.click(secondChildCheckBox)
+
+        const toolbar = screen.getByTestId('dhis2-uicore-tabletoolbar')
+        expect(toolbar).toBeVisible()
+        expect(secondChildCheckBox).toBeChecked()
+
+        fireEvent.click(within(toolbar).getByText('Deselect all'))
+        expect(secondChildCheckBox).not.toBeChecked()
+        expect(toolbar).not.toBeVisible()
+    })
+
+    it('should download all selected rows', async () => {
+        const rootOrg = testOrgUnit({ level: 1, childCount: 2 })
+        const child1 = testOrgUnit({
+            level: 2,
+            ancestors: [rootOrg],
+            parentId: rootOrg.id,
+            childCount: 0,
+            access: testAccess({ deleteAccess: true }),
+        })
+        const child2 = testOrgUnit({
+            level: 2,
+            ancestors: [rootOrg],
+            parentId: rootOrg.id,
+            childCount: 0,
+        })
+
+        const screen = await renderList({
+            rootOrgUnits: [rootOrg],
+            otherOrgUnits: [child1, child2],
+        })
+
+        const tableRows = screen.getAllByTestId('dhis2-uicore-datatablerow')
+        expect(tableRows.length).toBe(4)
+
+        const rootRow = tableRows[1]
+        const secondChildRow = tableRows[3]
+        fireEvent.click(within(rootRow).getByRole('checkbox'))
+        fireEvent.click(within(secondChildRow).getByRole('checkbox'))
+
+        const toolbar = screen.getByTestId('dhis2-uicore-tabletoolbar')
+        fireEvent.click(within(toolbar).getByText('Download'))
+
+        const downloadModal = await screen.findByTestId('download-modal')
+        expect(downloadModal).toBeVisible()
+        const downloadModelsSelector = within(downloadModal).getByTestId(
+            'download-models-to-include'
+        )
+        const radios = within(downloadModelsSelector).getAllByRole('radio')
+        const selectedRadio = radios.find(
+            (radio) => (radio as HTMLInputElement).checked
+        )
+        expect(selectedRadio).not.toBeNull()
+        expect(selectedRadio!.closest('label')).toHaveTextContent(
+            'Only selected (2)'
         )
     })
 })

@@ -129,7 +129,7 @@ export type GistParams = {
  * A utility type that takes a Model (eg. DataElement)
  * and returns a type with the properties that are references
  * Note that in case of collections, the type of the property will be the type of the items in the collection
- * 
+ *
  * Eg. GetReferencedModels<DataElement> will return:
  *  {
 *   categoryCombo: CategoryCombo;
