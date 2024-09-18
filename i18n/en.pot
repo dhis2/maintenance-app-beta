@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-19T17:31:35.987Z\n"
-"PO-Revision-Date: 2024-08-19T17:31:35.987Z\n"
+"POT-Creation-Date: 2024-09-18T19:16:18.994Z\n"
+"PO-Revision-Date: 2024-09-18T19:16:18.994Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -962,6 +962,42 @@ msgstr ""
 "aggregation level available) as the data source, and PHU data will not be "
 "included. PHU will still be available for the PHU level, but not included "
 "in the aggregations to the levels above."
+
+msgid "Create organisation unit"
+msgstr "Create organisation unit"
+
+msgid "Set up the basic information for this organisation unit."
+msgstr "Set up the basic information for this organisation unit."
+
+msgid "Opening date"
+msgstr "Opening date"
+
+msgid "Closed date"
+msgstr "Closed date"
+
+msgid "{{fieldLabel}}"
+msgstr "{{fieldLabel}}"
+
+msgid "Contact person"
+msgstr "Contact person"
+
+msgid "Address"
+msgstr "Address"
+
+msgid "A web link that provides extra information."
+msgstr "A web link that provides extra information."
+
+msgid "Location"
+msgstr "Location"
+
+msgid "Set up the organisation unit location."
+msgstr "Set up the organisation unit location."
+
+msgid "Latitude"
+msgstr "Latitude"
+
+msgid "Longitude"
+msgstr "Longitude"
 
 msgid "No organisation units available"
 msgstr "No organisation units available"
