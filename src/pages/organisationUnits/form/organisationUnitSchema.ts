@@ -5,6 +5,7 @@ export const organisationUnitSchema = z.object({
     shortName: z.string().trim(),
     code: z.string().trim(),
     description: z.string().trim(),
+    image: z.object({ id: z.string() }).optional(),
     attributeValues: z.array(
         z.object({
             value: z.string().optional(),

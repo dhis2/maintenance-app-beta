@@ -1,11 +1,54 @@
 import i18n from '@dhis2/d2-i18n'
 import { InputFieldFF } from '@dhis2/ui'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Field as FieldRFF } from 'react-final-form'
-import { SchemaSection, useCheckMaxLengthFromSchema } from '../../../lib'
+import { useParams } from 'react-router-dom'
+import {
+    composeAsyncValidators,
+    required,
+    SchemaFieldPropertyType,
+    SchemaSection,
+    useIsFieldValueUnique,
+    useSchema,
+} from '../../../lib'
+import { useCheckMaxLengthFromPropriety } from '../../../lib/models/useCheckMaxLengthFromSchema'
+function useValidator({
+    schemaSection,
+    propriety,
+}: {
+    schemaSection: SchemaSection
+    propriety: string
+}) {
+    const schema = useSchema(schemaSection.name)
+    const proprietyDetails = schema.properties[propriety]
+
+    const validators = useMemo(() => [], [])
+    const params = useParams()
+    const modelId = params.id as string
+    const checkMaxLength = useCheckMaxLengthFromPropriety(proprietyDetails)
+    const checkIsValueTaken = useIsFieldValueUnique({
+        model: schemaSection.namePlural,
+        field: propriety,
+        id: modelId,
+    })
+    if (proprietyDetails.propertyType === SchemaFieldPropertyType.REFERENCE) {
+        validators.push(checkMaxLength)
+    }
+    if (proprietyDetails.unique) {
+        validators.push(checkIsValueTaken)
+    }
+    if (proprietyDetails.required) {
+        validators.push(required)
+    }
+
+    return useMemo(
+        () => composeAsyncValidators<string>(validators),
+        [validators]
+    )
+}
 
 export function CodeField({ schemaSection }: { schemaSection: SchemaSection }) {
-    const validate = useCheckMaxLengthFromSchema(schemaSection.name, 'code')
+    const validator = useValidator({ schemaSection, propriety: 'code' })
 
     return (
         <FieldRFF
@@ -15,7 +58,7 @@ export function CodeField({ schemaSection }: { schemaSection: SchemaSection }) {
             name="code"
             label={i18n.t('Code')}
             validateFields={[]}
-            validate={validate}
+            validate={(code?: string) => validator(code)}
         />
     )
 }

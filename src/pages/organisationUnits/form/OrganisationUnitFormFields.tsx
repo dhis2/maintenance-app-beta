@@ -1,5 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
+import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
+import { Field as FieldRFF } from 'react-final-form'
 import {
     CustomAttributesSection,
     StandardFormField,
@@ -11,11 +13,9 @@ import {
     DefaultIdentifiableFields,
     DescriptionField,
 } from '../../../components/form'
+import { DateField } from '../../../components/form/fields/DateField'
 import { SCHEMA_SECTIONS } from '../../../lib'
 import { ImageField } from './ImageField'
-import { Field as FieldRFF } from 'react-final-form'
-import { InputFieldFF } from '@dhis2/ui'
-import { DateField } from '../../../components/form/fields/DateField'
 
 const schemaSection = SCHEMA_SECTIONS.organisationUnit
 
@@ -36,7 +36,6 @@ export function OrganisationUnitFormField() {
                 <StandardFormField>
                     <DateField
                         name="openingDate"
-                        required
                         label={i18n.t('Opening date')}
                     />
                 </StandardFormField>
@@ -44,6 +43,14 @@ export function OrganisationUnitFormField() {
                     <DateField
                         name="closedDate"
                         label={i18n.t('Closed date')}
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <FieldRFF<string | undefined>
+                        component={InputFieldFF}
+                        inputWidth="400px"
+                        label={i18n.t('Comment')}
+                        name="comment"
                     />
                 </StandardFormField>
                 <StandardFormField>
@@ -55,34 +62,26 @@ export function OrganisationUnitFormField() {
                 <FieldRFF<string | undefined>
                     component={InputFieldFF}
                     inputWidth="400px"
-                    label={i18n.t('{{fieldLabel}}', {
-                        fieldLabel: i18n.t('Contact person'),
-                    })}
+                    label={i18n.t('Contact person')}
                     name="contactPerson"
                 />
                 <FieldRFF<string | undefined>
                     component={InputFieldFF}
                     inputWidth="400px"
-                    label={i18n.t('{{fieldLabel}}', {
-                        fieldLabel: i18n.t('Address'),
-                    })}
+                    label={i18n.t('Address')}
                     name="address"
                 />
                 <FieldRFF<string | undefined>
                     component={InputFieldFF}
                     inputWidth="400px"
-                    label={i18n.t('{{fieldLabel}}', {
-                        fieldLabel: i18n.t('Email'),
-                    })}
+                    label={i18n.t('Email')}
                     name="email"
                     type="email"
                 />
                 <FieldRFF<string | undefined>
                     component={InputFieldFF}
                     inputWidth="400px"
-                    label={i18n.t('{{fieldLabel}}', {
-                        fieldLabel: i18n.t('Phone number'),
-                    })}
+                    label={i18n.t('Phone number')}
                     name="phoneNumber"
                     type="tel"
                 />
@@ -90,9 +89,7 @@ export function OrganisationUnitFormField() {
                 <FieldRFF<string | undefined>
                     component={InputFieldFF}
                     inputWidth="400px"
-                    label={i18n.t('{{fieldLabel}}', {
-                        fieldLabel: i18n.t('URL'),
-                    })}
+                    label={i18n.t('URL')}
                     name="url"
                     type="url"
                     helpText={i18n.t(
@@ -113,19 +110,21 @@ export function OrganisationUnitFormField() {
                 <FieldRFF<string | undefined>
                     component={InputFieldFF}
                     inputWidth="400px"
-                    label={i18n.t('{{fieldLabel}}', {
-                        fieldLabel: i18n.t('Latitude'),
-                    })}
+                    label={i18n.t('Latitude')}
                     name="geometry.latitude"
+                    type="number"
+                    min="-90"
+                    max="90"
                 />
 
                 <FieldRFF<string | undefined>
                     component={InputFieldFF}
                     inputWidth="400px"
-                    label={i18n.t('{{fieldLabel}}', {
-                        fieldLabel: i18n.t('Longitude'),
-                    })}
+                    label={i18n.t('Longitude')}
                     name="geometry.longitude"
+                    type="number"
+                    min="-180"
+                    max="180"
                 />
             </StandardFormSection>
 

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-18T19:16:18.994Z\n"
-"PO-Revision-Date: 2024-09-18T19:16:18.994Z\n"
+"POT-Creation-Date: 2024-09-26T17:26:13.691Z\n"
+"PO-Revision-Date: 2024-09-26T17:26:13.691Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -966,6 +966,12 @@ msgstr ""
 msgid "Create organisation unit"
 msgstr "Create organisation unit"
 
+msgid "Upload an image"
+msgstr "Upload an image"
+
+msgid "Remove"
+msgstr "Remove"
+
 msgid "Set up the basic information for this organisation unit."
 msgstr "Set up the basic information for this organisation unit."
 
@@ -975,8 +981,8 @@ msgstr "Opening date"
 msgid "Closed date"
 msgstr "Closed date"
 
-msgid "{{fieldLabel}}"
-msgstr "{{fieldLabel}}"
+msgid "Comment"
+msgstr "Comment"
 
 msgid "Contact person"
 msgstr "Contact person"
