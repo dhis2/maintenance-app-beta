@@ -7,6 +7,7 @@ import { getSectionPath } from '../../lib'
 import { ModelSection } from '../../types'
 import { StandardFormSection, StandardFormActions } from '../standardForm'
 import classes from './DefaultFormContents.module.css'
+import { DefaultFormErrorNotice } from './DefaultFormErrorNotice'
 
 export function DefaultEditFormContents({
     children,
@@ -15,37 +16,22 @@ export function DefaultEditFormContents({
     children: React.ReactNode
     section: ModelSection
 }) {
-    const { submitting, submitError } = useFormState({
-        subscription: { submitting: true, submitError: true },
+    const { submitting } = useFormState({
+        subscription: { submitting: true },
     })
-
-    const formErrorRef = useRef<HTMLDivElement | null>(null)
     const navigate = useNavigate()
 
     const listPath = `/${getSectionPath(section)}`
-    useEffect(() => {
-        if (submitError) {
-            formErrorRef.current?.scrollIntoView({ behavior: 'smooth' })
-        }
-    }, [submitError])
 
     return (
         <>
-            <div className={classes.form}>{children}</div>
-            {submitError && (
+            <div className={classes.form}>
+                {children}
+
                 <StandardFormSection>
-                    <div ref={formErrorRef}>
-                        <NoticeBox
-                            error
-                            title={i18n.t(
-                                'Something went wrong when submitting the form'
-                            )}
-                        >
-                            {submitError}
-                        </NoticeBox>
-                    </div>
+                    <DefaultFormErrorNotice />
                 </StandardFormSection>
-            )}
+            </div>
             <div className={classes.formActions}>
                 <StandardFormActions
                     cancelLabel={i18n.t('Cancel')}
@@ -65,37 +51,20 @@ export function DefaultNewFormContents({
     children: React.ReactNode
     section: ModelSection
 }) {
-    const { submitting, submitError } = useFormState({
-        subscription: { submitting: true, submitError: true },
+    const { submitting } = useFormState({
+        subscription: { submitting: true },
     })
 
-    const formErrorRef = useRef<HTMLDivElement | null>(null)
     const navigate = useNavigate()
 
     const listPath = `/${getSectionPath(section)}`
-    useEffect(() => {
-        if (submitError) {
-            formErrorRef.current?.scrollIntoView({ behavior: 'smooth' })
-        }
-    }, [submitError])
 
     return (
         <div className={classes.form}>
             {children}
-            {submitError && (
-                <StandardFormSection>
-                    <div ref={formErrorRef}>
-                        <NoticeBox
-                            error
-                            title={i18n.t(
-                                'Something went wrong when submitting the form'
-                            )}
-                        >
-                            {submitError}
-                        </NoticeBox>
-                    </div>
-                </StandardFormSection>
-            )}
+            <StandardFormSection>
+                <DefaultFormErrorNotice />
+            </StandardFormSection>
             <StandardFormActions
                 cancelLabel={i18n.t('Exit without saving')}
                 submitLabel={i18n.t('Create {{modelName}} ', {
