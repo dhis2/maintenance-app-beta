@@ -1,9 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import { NoticeBox } from '@dhis2/ui'
+import { FormState } from 'final-form'
 import React, { useEffect, useRef } from 'react'
 import { useFormState } from 'react-final-form'
 import css from './DefaultFormErrorNotice.module.css'
-import { FormState } from 'final-form'
 
 const formStateSubscriptions = {
     errors: true,

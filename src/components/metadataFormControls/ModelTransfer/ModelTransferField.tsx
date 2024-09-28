@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { ButtonStrip, Button, Field, TransferProps } from '@dhis2/ui'
+import { Button, ButtonStrip, Field, TransferProps } from '@dhis2/ui'
 import React, { useRef } from 'react'
 import { useField } from 'react-final-form'
 import { useHref } from 'react-router'
@@ -8,7 +8,6 @@ import { getSectionNewPath } from '../../../lib'
 import { PlainResourceQuery } from '../../../types'
 import { LinkButton } from '../../LinkButton'
 import css from './ModelTransfer.module.css'
-import { DataElement } from '../../../types/generated'
 
 // this currently does not need a generic, because the value of the field is not passed
 // or available from props. However if it's made available,
