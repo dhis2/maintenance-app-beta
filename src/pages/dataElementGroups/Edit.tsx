@@ -6,9 +6,10 @@ import { withTypes } from 'react-final-form'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Loader } from '../../components'
 import {
-    DefaultFormContents,
+    DefaultEditFormContents,
     useCustomAttributesQuery,
 } from '../../components/form'
+import { AttributeMetadata } from '../../components/form/attributes/useCustomAttributesQuery'
 import {
     SCHEMA_SECTIONS,
     getSectionPath,
@@ -17,7 +18,7 @@ import {
 } from '../../lib'
 import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
 import { getAllAttributeValues } from '../../lib/models/attributes'
-import { Attribute, DataElementGroup } from '../../types/generated'
+import { DataElementGroup } from '../../types/generated'
 import { DataElementGroupFormFields, dataElementGroupSchema } from './form'
 import type { FormValues } from './form'
 
@@ -52,7 +53,7 @@ function computeInitialValues({
     customAttributes,
 }: {
     dataElementGroup: DataElementGroup
-    customAttributes: Attribute[]
+    customAttributes: AttributeMetadata[]
 }) {
     if (!dataElementGroup) {
         return {}
@@ -61,7 +62,7 @@ function computeInitialValues({
     // We want to have an array in the state with all attributes, not just the
     // ones that are set
     const attributeValues = getAllAttributeValues(
-        dataElementGroup,
+        dataElementGroup.attributeValues,
         customAttributes
     )
 
@@ -72,7 +73,7 @@ function computeInitialValues({
         code: dataElementGroup.code,
         dataElements: dataElementGroup.dataElements,
         attributeValues,
-    }
+    } as FormValues
 }
 
 export const Component = () => {
@@ -106,7 +107,7 @@ function DataElementGroupForm({
     attributes,
 }: {
     dataElementGroup: DataElementGroup
-    attributes: Attribute[]
+    attributes: AttributeMetadata[]
 }) {
     const navigate = useNavigate()
     const patchDirtyFields = usePatchModel(
@@ -141,15 +142,11 @@ function DataElementGroupForm({
                 customAttributes: attributes,
             })}
         >
-            {({ handleSubmit, submitting, submitError }) => (
+            {({ handleSubmit }) => (
                 <form onSubmit={handleSubmit}>
-                    <DefaultFormContents
-                        section={section}
-                        submitting={submitting}
-                        submitError={submitError}
-                    >
+                    <DefaultEditFormContents section={section}>
                         <DataElementGroupFormFields />
-                    </DefaultFormContents>
+                    </DefaultEditFormContents>
                 </form>
             )}
         </Form>

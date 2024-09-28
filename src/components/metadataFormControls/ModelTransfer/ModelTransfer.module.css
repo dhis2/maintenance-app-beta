@@ -1,0 +1,12 @@
+.modelTransferField {
+    width: 100%;
+}
+
+.modelTransferFooter {
+    padding: var(--spacers-dp8) 0;
+}
+
+.modelTransferHeader {
+    padding-block: var(--spacers-dp8);
+    padding-inline: var(--spacers-dp4);
+}

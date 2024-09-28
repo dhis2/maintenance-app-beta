@@ -11,11 +11,12 @@ import {
     StandardFormSection,
 } from '../../components'
 import { useCustomAttributesQuery } from '../../components/form'
+import { AttributeMetadata } from '../../components/form/attributes/useCustomAttributesQuery'
 import { SCHEMA_SECTIONS, getSectionPath, validate } from '../../lib'
 import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
 import { getAllAttributeValues } from '../../lib/models/attributes'
 import { JsonPatchOperation } from '../../types'
-import { Attribute, DataElement } from '../../types/generated'
+import { DataElement } from '../../types/generated'
 import classes from './Edit.module.css'
 import { DataElementFormFields, dataElementSchema } from './form'
 import type { FormValues } from './form'
@@ -51,14 +52,17 @@ function computeInitialValues({
     customAttributes,
 }: {
     dataElement: DataElement
-    customAttributes: Attribute[]
+    customAttributes: AttributeMetadata[]
     dataElementId: string
 }) {
     if (!dataElement) {
         return {}
     }
 
-    const attributeValues = getAllAttributeValues(dataElement, customAttributes)
+    const attributeValues = getAllAttributeValues(
+        dataElement.attributeValues,
+        customAttributes
+    )
 
     return {
         id: dataElementId,
@@ -83,7 +87,7 @@ function computeInitialValues({
         aggregationLevels: dataElement.aggregationLevels || [],
         zeroIsSignificant: dataElement.zeroIsSignificant,
         attributeValues,
-    }
+    } as FormValues
 }
 
 function usePatchDirtyFields() {
