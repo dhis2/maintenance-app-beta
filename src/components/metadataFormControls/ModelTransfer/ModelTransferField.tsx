@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { ButtonStrip, Button, Field, TransferProps } from '@dhis2/ui'
+import { Button, ButtonStrip, Field, TransferProps } from '@dhis2/ui'
 import React, { useRef } from 'react'
 import { useField } from 'react-final-form'
 import { useHref } from 'react-router'
@@ -9,6 +9,9 @@ import { PlainResourceQuery } from '../../../types'
 import { LinkButton } from '../../LinkButton'
 import css from './ModelTransfer.module.css'
 
+// this currently does not need a generic, because the value of the field is not passed
+// or available from props. However if it's made available,
+// the generic of <TModel extends DisplayableModel> should be added.
 type ModelTransferFieldProps = {
     name: string
     query: PlainResourceQuery
@@ -23,7 +26,7 @@ type ModelTransferFieldProps = {
     | 'filterPlaceholderPicked'
 >
 
-export function ModelTransferField<TModel extends DisplayableModel>({
+export function ModelTransferField({
     name,
     query,
     label,
@@ -35,7 +38,7 @@ export function ModelTransferField<TModel extends DisplayableModel>({
     filterPlaceholderPicked,
 }: ModelTransferFieldProps) {
     const modelName = query.resource
-    const { input, meta } = useField<TModel[]>(name, {
+    const { input, meta } = useField<DisplayableModel[]>(name, {
         multiple: true,
         validateFields: [],
     })

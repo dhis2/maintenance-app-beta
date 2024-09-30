@@ -1,6 +1,7 @@
 import { Transfer, TransferProps } from '@dhis2/ui'
 import React, {
     forwardRef,
+    RefAttributes,
     useImperativeHandle,
     useMemo,
     useState,
@@ -44,12 +45,12 @@ type ModelTransferProps<TModel> = Omit<
 > &
     OwnProps<TModel>
 
-export const ModelTransfer = forwardRef(function ModelTransfer<
-    TModel extends DisplayableModel
->(
+type ImperativeRef = { refetch: () => void }
+
+const BaseModelTransfer = <TModel extends DisplayableModel>(
     { selected, onChange, query, ...transferProps }: ModelTransferProps<TModel>,
-    ref: React.Ref<{ refetch: () => void }>
-) {
+    ref: React.Ref<ImperativeRef>
+) => {
     const queryFn = useBoundResourceQueryFn()
     const [searchTerm, setSearchTerm] = useState('')
 
@@ -125,4 +126,15 @@ export const ModelTransfer = forwardRef(function ModelTransfer<
             onChange={handleOnChange}
         />
     )
-})
+}
+
+// this is needed to support generics with ref-forwarding
+interface ModelTransferWithForwardedRef
+    extends React.FC<ModelTransferProps<DisplayableModel>> {
+    <TModel extends DisplayableModel>(
+        props: ModelTransferProps<TModel> & RefAttributes<ImperativeRef>
+    ): React.ReactNode
+}
+
+export const ModelTransfer: ModelTransferWithForwardedRef =
+    forwardRef(BaseModelTransfer)

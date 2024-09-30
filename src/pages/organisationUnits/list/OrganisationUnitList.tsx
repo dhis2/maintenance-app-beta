@@ -12,10 +12,11 @@ import { IdentifiableFilter, SectionList } from '../../../components'
 import { useModelListView } from '../../../components/sectionList/listView'
 import { ModelValue } from '../../../components/sectionList/modelValue/ModelValue'
 import { SectionListTitle } from '../../../components/sectionList/SectionListTitle'
-import { ToolbarNormal } from '../../../components/sectionList/toolbar/ToolbarNormal'
+import { Toolbar } from '../../../components/sectionList/toolbar'
 import { SchemaName, useSchema, useSectionListFilter } from '../../../lib'
 import { getFieldFilter } from '../../../lib/models/path'
 import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
+import css from './OrganisationUnitList.module.css'
 import { OrganisationUnitListMessage } from './OrganisationUnitListMessage'
 import { OrganisationUnitRow } from './OrganisationUnitRow'
 import {
@@ -114,6 +115,7 @@ export const OrganisationUnitList = () => {
     const { rootOrgUnits, flatOrgUnits } = useMemo(() => {
         const rootOrgUnits = new Map<string, OrganisationUnitListItem>()
         //gather all loaded orgUnits and their ancestors and deduplicate them
+
         const deduplicatedOrgUnits = queries
             .concat(orgUnitFiltered)
             .flatMap((q) => {
@@ -191,47 +193,62 @@ export const OrganisationUnitList = () => {
         state: {
             expanded,
         },
+        enableSubRowSelection: false,
     })
 
     return (
         <div>
             <SectionListTitle />
             <IdentifiableFilter />
-            <ToolbarNormal />
-            <SectionList
-                allSelected={table.getIsAllRowsSelected()}
-                headerColumns={table.getHeaderGroups()[0].headers.map((h) => ({
-                    label: h.column.columnDef.header as string,
-                    path: h.column.id,
-                }))}
-                onSelectAll={() => table.toggleAllRowsSelected()}
-            >
-                <OrganisationUnitListMessage
-                    isFiltering={isFiltering}
-                    queries={queries.concat(orgUnitFiltered)}
-                    orgUnitCount={table.getRowCount()}
+            <div className={css.listDetailsWrapper}>
+                <Toolbar
+                    selectedModels={
+                        new Set(
+                            table
+                                .getSelectedRowModel()
+                                .flatRows.map((r) => r.id)
+                        )
+                    }
+                    onDeselectAll={() => {
+                        table.resetRowSelection(true)
+                    }}
                 />
-                {table.getRowModel().rows.map((row) => (
-                    <OrganisationUnitRow
-                        key={row.id}
-                        row={row}
-                        toggleShowAll={(id) =>
-                            setParentIdsToLoad((prev) => {
-                                const { [id]: wasShown, ...withoutId } = prev
-                                if (wasShown) {
-                                    return withoutId
-                                }
-                                return { ...prev, [id]: true }
-                            })
-                        }
-                        showAllActive={
-                            parentIdsToLoad[row.original.id] === true
-                        }
+                <SectionList
+                    headerColumns={table
+                        .getHeaderGroups()[0]
+                        .headers.map((h) => ({
+                            label: h.column.columnDef.header as string,
+                            path: h.column.id,
+                        }))}
+                >
+                    <OrganisationUnitListMessage
                         isFiltering={isFiltering}
-                        fetchNextPage={fetchNextPage}
+                        queries={queries.concat(orgUnitFiltered)}
+                        orgUnitCount={table.getRowCount()}
                     />
-                ))}
-            </SectionList>
+                    {table.getRowModel().rows.map((row) => (
+                        <OrganisationUnitRow
+                            key={row.id}
+                            row={row}
+                            toggleShowAll={(id) =>
+                                setParentIdsToLoad((prev) => {
+                                    const { [id]: wasShown, ...withoutId } =
+                                        prev
+                                    if (wasShown) {
+                                        return withoutId
+                                    }
+                                    return { ...prev, [id]: true }
+                                })
+                            }
+                            showAllActive={
+                                parentIdsToLoad[row.original.id] === true
+                            }
+                            isFiltering={isFiltering}
+                            fetchNextPage={fetchNextPage}
+                        />
+                    ))}
+                </SectionList>
+            </div>
         </div>
     )
 }

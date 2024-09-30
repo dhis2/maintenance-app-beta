@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 
 const TRANSLATED_PROPERTY: Record<string, string> = {
+    aggregationType: i18n.t('Aggregation type'),
     categoryCombo: i18n.t('Category combination'),
     code: i18n.t('Code'),
     createdBy: i18n.t('Created by'),

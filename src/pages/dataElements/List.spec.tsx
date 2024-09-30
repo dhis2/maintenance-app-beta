@@ -213,10 +213,13 @@ describe('Data Elements List', () => {
         })
         // next page
         it('should allowing going to Next page', async () => {
+            const user = userEvent.setup()
             const { getByTestId, findByText, queryByText } =
                 await renderWithPager()
 
-            userEvent.click(getByTestId('dhis2-uiwidgets-pagination-page-next'))
+            await user.click(
+                getByTestId('dhis2-uiwidgets-pagination-page-next')
+            )
 
             await findByText('second page result')
             expect(queryByText('first page result')).toBeNull()
@@ -224,6 +227,7 @@ describe('Data Elements List', () => {
 
         // previous page
         it('should allow going to Previous page ', async () => {
+            const user = userEvent.setup()
             const { getByTestId, findByText, queryByText } =
                 await renderWithPager()
 
@@ -231,12 +235,14 @@ describe('Data Elements List', () => {
             await findByText('first page result')
 
             // go to next page
-            userEvent.click(getByTestId('dhis2-uiwidgets-pagination-page-next'))
+            await user.click(
+                getByTestId('dhis2-uiwidgets-pagination-page-next')
+            )
             await findByText('second page result')
             expect(queryByText('first page result')).toBeNull()
 
             // go back to previous page
-            userEvent.click(
+            await user.click(
                 getByTestId('dhis2-uiwidgets-pagination-page-previous')
             )
             await findByText('first page result')
@@ -279,6 +285,7 @@ describe('Data Elements List', () => {
     })
     // select all
     it('should allow selecting all items', async () => {
+        const user = userEvent.setup()
         const customData = {
             userDataStore: defaultUserDataStoreData,
             dataElements: dataElementsMock,
@@ -287,7 +294,7 @@ describe('Data Elements List', () => {
             customData
         )
 
-        userEvent.click(getByTestId('section-list-selectall'))
+        await user.click(getByTestId('section-list-selectall'))
 
         const allCheckBoxes = queryAllByTestId('section-list-row-checkbox')
 

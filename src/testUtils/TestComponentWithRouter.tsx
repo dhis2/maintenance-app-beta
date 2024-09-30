@@ -46,7 +46,7 @@ export const ComponentWithProvider = ({
 type TestComponentWithRouterProps = React.PropsWithChildren<{
     path: string
     customData: CustomData
-    routeOptions: any
+    routeOptions?: any
 }>
 
 const TestComponentWithRouter = ({
