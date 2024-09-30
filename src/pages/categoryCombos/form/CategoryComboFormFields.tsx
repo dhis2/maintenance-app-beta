@@ -76,7 +76,7 @@ export const CategoryComboFormFields = () => {
 
             <StandardFormSection>
                 <StandardFormSectionTitle>
-                    {i18n.t('Categories')}
+                    <label htmlFor="categories">{i18n.t('Categories')}</label>
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
