@@ -13,7 +13,7 @@ type DetailsPanelProps = {
 export const DetailsPanel = ({ children, onClose }: DetailsPanelProps) => {
     return (
         <aside className={css.detailsPanel}>
-            <Card className={css.detailsPanelCard}>
+            <Card className={css.detailsPanelCard} dataTest="details-panel">
                 <div className={css.detailsPanelWrapper}>
                     <DetailsPanelHeader onClose={onClose} />
                     <ErrorBoundary FallbackComponent={DetailsPanelError}>

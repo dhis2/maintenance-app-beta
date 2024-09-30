@@ -3,6 +3,7 @@ import {
     Button,
     FlyoutMenu,
     IconEdit16,
+    IconMore16,
     IconMore24,
     MenuItem,
     Popover,
@@ -21,14 +22,14 @@ import { canDeleteModel } from '../../../lib/models/access'
 
 type OrganisationUnitListActionProps = {
     model: BaseListModel
+    onShowDetailsClick: (model: BaseListModel) => void
     // onOpenTranslationClick: (model: BaseListModel) => void
-    // onDeleteSuccess: () => void
 }
 
 export const OrganisationUnitListActions = ({
     model,
+    onShowDetailsClick,
 }: // onOpenTranslationClick,
-// onDeleteSuccess,
 OrganisationUnitListActionProps) => {
     const deletable = canDeleteModel(model)
     const queryClient = useQueryClient()
@@ -47,6 +48,7 @@ OrganisationUnitListActionProps) => {
                 model={model}
                 // onTranslateClick={() => onOpenTranslationClick(model)}
                 onDeleteSuccess={handleDeleteSuccess}
+                onShowDetailsClick={onShowDetailsClick}
             />
         </ListActions>
     )
@@ -57,6 +59,7 @@ type OrganisationUnitActionMoreProps = {
     model: BaseListModel
     // onTranslateClick: () => void
     onDeleteSuccess: () => void
+    onShowDetailsClick: (model: BaseListModel) => void
 }
 
 const OrganisationUnitActionMore = ({
@@ -64,6 +67,7 @@ const OrganisationUnitActionMore = ({
     model,
     // onTranslateClick,
     onDeleteSuccess,
+    onShowDetailsClick,
 }: OrganisationUnitActionMoreProps) => {
     const [open, setOpen] = useState(false)
     const ref = useRef(null)
@@ -89,6 +93,15 @@ const OrganisationUnitActionMore = ({
                     dataTest="row-actions-menu"
                 >
                     <FlyoutMenu>
+                        <MenuItem
+                            dense
+                            label={i18n.t('Show details')}
+                            icon={<IconMore16 />}
+                            onClick={() => {
+                                onShowDetailsClick(model)
+                                setOpen(false)
+                            }}
+                        />
                         <MenuItem
                             dense
                             label={i18n.t('Edit')}

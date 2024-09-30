@@ -11,6 +11,7 @@ import {
 } from '@dhis2/ui'
 import { flexRender, Row } from '@tanstack/react-table'
 import React from 'react'
+import { BaseListModel } from '../../../lib'
 import type { OrganisationUnitListItem } from './OrganisationUnitList'
 import css from './OrganisationUnitList.module.css'
 import { OrganisationUnitListActions } from './OrganisationUnitListActions'
@@ -21,12 +22,14 @@ export const OrganisationUnitRow = ({
     showAllActive,
     isFiltering,
     fetchNextPage,
+    onShowDetailsClick,
 }: {
     row: Row<OrganisationUnitListItem>
     toggleShowAll: (id: string) => void
     showAllActive: boolean
     isFiltering: boolean
     fetchNextPage: (id: string) => void
+    onShowDetailsClick: (model: BaseListModel) => void
 }) => {
     const parentRow = row.getParentRow()
 
@@ -103,6 +106,7 @@ export const OrganisationUnitRow = ({
                 <DataTableCell>
                     <OrganisationUnitListActions
                         model={row.original}
+                        onShowDetailsClick={onShowDetailsClick}
                         // onOpenTranslationClick={()=>{}}
                     />
                 </DataTableCell>
