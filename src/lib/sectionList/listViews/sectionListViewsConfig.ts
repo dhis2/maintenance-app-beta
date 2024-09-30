@@ -109,10 +109,28 @@ export const modelListViewsConfig = {
     },
     category: {
         columns: {
-            default: ['name', 'dataDimensionType', DESCRIPTORS.publicAccess],
+            default: [
+                'name',
+                'dataDimensionType',
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
         },
         filters: {
             default: ['dataDimensionType', 'categoryCombo'],
+        },
+    },
+    categoryCombo: {
+        columns: {
+            default: [
+                'name',
+                'dataDimensionType',
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+        },
+        filters: {
+            default: ['dataDimensionType', 'category'],
         },
     },
 } satisfies SectionListViewConfig<SectionName>
