@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.4.0...v0.5.0) (2024-09-30)
+
+
+### Features
+
+* **catCombo:** add category combo form and list ([#410](https://github.com/dhis2/maintenance-app-beta/issues/410)) ([7687c13](https://github.com/dhis2/maintenance-app-beta/commit/7687c13d99335154880275e7631af9c221d0aceb))
+
 # [0.4.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.3.1...v0.4.0) (2024-09-28)
 
 
