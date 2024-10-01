@@ -7,6 +7,7 @@ import { ModelSection } from '../../types'
 import { StandardFormSection, StandardFormActions } from '../standardForm'
 import classes from './DefaultFormContents.module.css'
 import { DefaultFormErrorNotice } from './DefaultFormErrorNotice'
+import { Card } from '@dhis2/ui'
 
 export function DefaultEditFormContents({
     children,
@@ -24,13 +25,13 @@ export function DefaultEditFormContents({
 
     return (
         <>
-            <div className={classes.form}>
+            <Card className={classes.form}>
                 {children}
 
                 <StandardFormSection>
                     <DefaultFormErrorNotice />
                 </StandardFormSection>
-            </div>
+            </Card>
             <div className={classes.formActions}>
                 <StandardFormActions
                     cancelLabel={i18n.t('Cancel')}
