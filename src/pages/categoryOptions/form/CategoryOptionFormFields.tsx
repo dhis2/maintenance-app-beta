@@ -12,6 +12,8 @@ import {
 } from '../../../components'
 import { DateField } from '../../../components/form/fields/DateField'
 import { SECTIONS_MAP } from '../../../lib'
+import { InputFieldFF } from '@dhis2/ui'
+import { Field } from 'react-final-form'
 
 const section = SECTIONS_MAP.categoryOption
 
@@ -30,11 +32,32 @@ export const CategoryOptionFormFields = () => {
                 <DefaultIdentifiableFields />
 
                 <StandardFormField>
+                    <Field
+                        component={InputFieldFF}
+                        dataTest="formfields-formname"
+                        inputWidth="400px"
+                        name="formName"
+                        label={i18n.t('Form name')}
+                        helpText={i18n.t(
+                            'An alternative name used in section or automatic data entry forms.'
+                        )}
+                        validateFields={[]}
+                    />
+                </StandardFormField>
+                <StandardFormField>
                     <DescriptionField schemaSection={section} />
                 </StandardFormField>
             </StandardFormSection>
 
             <StandardFormSection>
+                <StandardFormSectionTitle>
+                    {i18n.t('Availability configuration')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Choose when, and for which organisation units this category option will be available.'
+                    )}
+                </StandardFormSectionDescription>
                 <StandardFormField>
                     <DateField name="startDate" label="Pick a start date" />
                 </StandardFormField>
