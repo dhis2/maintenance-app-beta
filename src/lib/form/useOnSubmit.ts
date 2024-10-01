@@ -1,4 +1,5 @@
 import { useAlert } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
 import { useMemo } from 'react'
 import { FormProps } from 'react-final-form'
 import { useNavigate } from 'react-router-dom'
@@ -36,7 +37,7 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
             })
             if (jsonPatchOperations.length < 1) {
                 saveAlert.show({
-                    message: 'No changes to be saved',
+                    message: i18n.t('No changes to be saved'),
                 })
                 navigate(`/${getSectionPath(section)}`)
                 return
@@ -45,7 +46,10 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
             if (errors) {
                 return errors
             }
-            saveAlert.show({ message: 'Saved successfully', success: true })
+            saveAlert.show({
+                message: i18n.t('Saved successfully'),
+                success: true,
+            })
             navigate(`/${getSectionPath(section)}`)
         },
         [patchDirtyFields, saveAlert, navigate, section]
@@ -71,7 +75,7 @@ export const useOnSubmitNew = <TFormValues>({
                     values,
                 })
                 saveAlert.show({
-                    message: 'Cannot save empty object',
+                    message: i18n.t('Cannot save empty object'),
                     error: true,
                 })
                 return
@@ -80,7 +84,10 @@ export const useOnSubmitNew = <TFormValues>({
             if (errors) {
                 return errors
             }
-            saveAlert.show({ message: 'Created successfully', success: true })
+            saveAlert.show({
+                message: i18n.t('Created successfully'),
+                success: true,
+            })
             navigate(`/${getSectionPath(section)}`)
         },
         [createModel, saveAlert, navigate, section]

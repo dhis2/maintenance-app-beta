@@ -32,7 +32,6 @@ describe('LoadApp', () => {
     }
 
     beforeEach(async () => {
-        // eslint-disable-next-line @typescript-eslint/no-extra-semi
         ;(useSetSchemas as jest.Mock).mockImplementation(() => setSchemaMock)
         ;(useSetSystemSettings as jest.Mock).mockImplementation(
             () => setSystemSettingsMock
@@ -57,7 +56,7 @@ describe('LoadApp', () => {
         expect(setSchemaMock.mock.lastCall).toMatchSnapshot()
     })
 
-    it('should set the current useer removing any duplicate authorities', async () => {
+    it('should set the current user removing any duplicate authorities', async () => {
         expect(setUserMock.mock.lastCall[0]).toEqual({
             name: 'dhis2 user',
             authorities: new Set(['auth1', 'auth2-duplicated', 'auth3']),

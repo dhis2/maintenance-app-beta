@@ -78,6 +78,7 @@ export const DownloadDialogContent = ({
                             model: section.titlePlural,
                         })}
                         className={css.horizontalRadio}
+                        dataTest="download-models-to-include"
                     >
                         <Field<string | undefined>
                             name="filterType"

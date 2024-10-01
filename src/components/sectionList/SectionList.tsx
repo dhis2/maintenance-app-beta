@@ -16,7 +16,7 @@ import { SelectedColumns } from './types'
 
 type SectionListProps = {
     headerColumns: SelectedColumns
-    onSelectAll: (checked: boolean) => void
+    onSelectAll?: (checked: boolean) => void
     allSelected?: boolean
 }
 
@@ -31,13 +31,17 @@ export const SectionList = ({
             <TableHead>
                 <DataTableRow>
                     <DataTableColumnHeader width={'48px'}>
-                        <Checkbox
-                            dataTest="section-list-selectall"
-                            checked={allSelected}
-                            onChange={({ checked }: CheckBoxOnChangeObject) =>
-                                onSelectAll(checked)
-                            }
-                        />
+                        {onSelectAll && (
+                            <Checkbox
+                                dataTest="section-list-selectall"
+                                checked={allSelected}
+                                onChange={({
+                                    checked,
+                                }: CheckBoxOnChangeObject) =>
+                                    onSelectAll!(checked)
+                                }
+                            />
+                        )}
                     </DataTableColumnHeader>
                     {headerColumns.length > 0 && (
                         <HeaderColumns headerColumns={headerColumns} />

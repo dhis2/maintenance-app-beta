@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { config } = require('@dhis2/cli-style')
 
 module.exports = {
@@ -16,5 +16,7 @@ module.exports = {
     },
     rules: {
         'import/extensions': 'off',
+        '@typescript-eslint/no-explicit-any': 1,
+        '@typescript-eslint/no-unused-vars': 1,
     },
 }

@@ -63,4 +63,5 @@ export type ConfigurableFilterKey = Exclude<
     FilterKey,
     typeof IDENTIFIABLE_FILTER_KEY
 >
+
 export type FilterKeys = FilterKey[]
