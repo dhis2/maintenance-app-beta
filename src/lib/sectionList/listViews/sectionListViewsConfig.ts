@@ -133,13 +133,4 @@ export const modelListViewsConfig = {
             default: ['dataDimensionType', 'category'],
         },
     },
-    categoryOptionCombo: {
-        columns: {
-            default: ['name', 'code', 'lastUpdated'],
-        },
-        filters: {
-            default: ['categoryCombo'],
-            overrideDefaultAvailable: true,
-        },
-    },
 } satisfies SectionListViewConfig<SectionName>

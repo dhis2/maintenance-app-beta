@@ -29,6 +29,9 @@ export const ComponentWithProvider = ({
                 baseUrl: 'http://dhis2-imaginary-test-server',
                 apiVersion: 41,
             }}
+            plugin={false}
+            parentAlertsAdd={() => undefined}
+            showAlertsInPlugin={true}
         >
             <CustomDataProvider
                 data={dataForCustomProvider as any}
@@ -43,7 +46,7 @@ export const ComponentWithProvider = ({
 type TestComponentWithRouterProps = React.PropsWithChildren<{
     path: string
     customData: CustomData
-    routeOptions: any
+    routeOptions?: any
 }>
 
 const TestComponentWithRouter = ({

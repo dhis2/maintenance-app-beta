@@ -3,6 +3,6 @@
     margin-right: 8px;
 }
 
-.deleteButtonLoadingIcon :global([role="progressbar"]) {
+.deleteButtonLoadingIcon :global([role='progressbar']) {
     border-color: rgba(110, 122, 138, 0.15) rgba(110, 122, 138, 0.15) white;
 }

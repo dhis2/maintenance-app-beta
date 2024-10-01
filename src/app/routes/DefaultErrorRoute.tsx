@@ -15,7 +15,7 @@ export const DefaultErrorRoute = () => {
 
     if (isRouteError) {
         title = error.statusText
-        message = error?.error?.message
+        message = error?.data?.message
     }
 
     return (

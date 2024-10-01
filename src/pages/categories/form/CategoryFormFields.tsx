@@ -78,7 +78,9 @@ export const CategoryFormFields = () => {
 
             <StandardFormSection>
                 <StandardFormSectionTitle>
-                    {i18n.t('Category options')}
+                    <label htmlFor={'categoryOptions'}>
+                        {i18n.t('Category options')}
+                    </label>
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(

@@ -92,7 +92,7 @@ function ConfirmationDialog({
     const errorReports =
         deleteModelMutation.error?.details?.response?.errorReports
     return (
-        <Modal>
+        <Modal dataTest="delete-confirmation-modal">
             <ModalTitle>
                 {i18n.t(
                     'Are you sure that you want to delete this {{modelType}}?',

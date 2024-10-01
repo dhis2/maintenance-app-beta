@@ -20,7 +20,7 @@ export const DownloadDialog = ({
     const section = useModelSectionHandleOrThrow()
 
     return (
-        <Modal onClose={onClose}>
+        <Modal onClose={onClose} dataTest="download-modal">
             <DownloadFormWrapper hasSelected={selectedModels.size > 0}>
                 <DownloadDialogContent
                     section={section}

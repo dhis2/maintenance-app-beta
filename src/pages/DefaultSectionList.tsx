@@ -16,7 +16,7 @@ import { PagedResponse } from '../types/models'
 type ModelListResponse = WrapQueryResponse<PagedResponse<BaseListModel, string>>
 
 type DefaultSectionListProps = {
-    filters?: string[]
+    filters: string[]
 }
 export const DefaultSectionList = ({ filters }: DefaultSectionListProps) => {
     const { columns } = useModelListView()
