@@ -1,23 +1,22 @@
 import { FetchError } from '@dhis2/app-runtime'
 import {
-    render,
-    waitForElementToBeRemoved,
     fireEvent,
+    render,
     waitFor,
+    waitForElementToBeRemoved,
 } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
+import currentUserMock from '../../__mocks__/currentUserMock.json'
 import dataElementSchemaMock from '../../__mocks__/schema/dataElementsSchema.json'
-import { SECTIONS_MAP, canEditModel, useCurrentUser } from '../../lib'
-import { useCurrentUserStore } from '../../lib/user/currentUserStore'
+import { SECTIONS_MAP, canEditModel } from '../../lib'
 import { useSchemaStore } from '../../lib/schemas/schemaStore'
 import { ModelSchemas } from '../../lib/useLoadApp'
+import { useCurrentUserStore } from '../../lib/user/currentUserStore'
 import TestComponentWithRouter, {
     CustomData,
 } from '../../testUtils/TestComponentWithRouter'
 import dataElementsMock from './__mocks__/list/dataElementsMock.json'
-import currentUserMock from '../../__mocks__/currentUserMock.json'
-
 import filteredDataElementsMock from './__mocks__/list/filteredDataElementsMock.json'
 import { Component as DataElementList } from './List'
 
