@@ -8,13 +8,16 @@ import {
 import userEvent from '@testing-library/user-event'
 import React from 'react'
 import dataElementSchemaMock from '../../__mocks__/schema/dataElementsSchema.json'
-import { SECTIONS_MAP, canEditModel } from '../../lib'
+import { SECTIONS_MAP, canEditModel, useCurrentUser } from '../../lib'
+import { useCurrentUserStore } from '../../lib/user/currentUserStore'
 import { useSchemaStore } from '../../lib/schemas/schemaStore'
 import { ModelSchemas } from '../../lib/useLoadApp'
 import TestComponentWithRouter, {
     CustomData,
 } from '../../testUtils/TestComponentWithRouter'
 import dataElementsMock from './__mocks__/list/dataElementsMock.json'
+import currentUserMock from '../../__mocks__/currentUserMock.json'
+
 import filteredDataElementsMock from './__mocks__/list/filteredDataElementsMock.json'
 import { Component as DataElementList } from './List'
 
@@ -58,6 +61,10 @@ describe('Data Elements List', () => {
         }
     })
 
+    useCurrentUserStore.getState().setCurrentUser({
+        ...currentUserMock,
+        authorities: new Set(currentUserMock.authorities),
+    })
     useSchemaStore.getState().setSchemas({
         dataElement: dataElementSchemaMock,
     } as unknown as ModelSchemas)
