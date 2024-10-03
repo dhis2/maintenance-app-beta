@@ -10,6 +10,13 @@
         "keyAnalysisDisplayProperty": "name",
         "keyMessageEmailNotification": false
     },
+    "organisationUnits": [
+        {
+            "path": "/ImspTQPwCqd",
+            "id": "ImspTQPwCqd",
+            "level": 1
+        }
+    ],
     "authorities": [
         "F_METADATA_EXPORT",
         "F_PROGRAMDATAELEMENT_DELETE",

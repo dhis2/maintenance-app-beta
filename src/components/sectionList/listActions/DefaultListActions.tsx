@@ -22,6 +22,7 @@ export const DefaultListActions = ({
 
     const deletable = canDeleteModel(model)
     const editable = canEditModel(model)
+    const shareable = schema.shareable
 
     return (
         <ListActions>
@@ -30,6 +31,7 @@ export const DefaultListActions = ({
                 deletable={deletable}
                 editable={editable}
                 translatable={schema.translatable}
+                shareable={shareable}
                 model={model}
                 onShowDetailsClick={() => onShowDetailsClick(model)}
                 onOpenSharingClick={() => onOpenSharingClick(model.id)}

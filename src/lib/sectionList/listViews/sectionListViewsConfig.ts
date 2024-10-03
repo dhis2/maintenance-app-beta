@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import { SectionName } from '../../constants'
 import type { ConfigurableFilterKey } from '../filters'
 
 export interface ModelPropertyDescriptor {
@@ -106,4 +107,30 @@ export const modelListViewsConfig = {
             default: [],
         },
     },
-} satisfies SectionListViewConfig
+    category: {
+        columns: {
+            default: [
+                'name',
+                'dataDimensionType',
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+        },
+        filters: {
+            default: ['dataDimensionType', 'categoryCombo'],
+        },
+    },
+    categoryCombo: {
+        columns: {
+            default: [
+                'name',
+                'dataDimensionType',
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+        },
+        filters: {
+            default: ['dataDimensionType', 'category'],
+        },
+    },
+} satisfies SectionListViewConfig<SectionName>

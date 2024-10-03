@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-03T15:13:27.140Z\n"
-"PO-Revision-Date: 2024-10-03T15:13:27.140Z\n"
+"POT-Creation-Date: 2024-10-03T18:22:15.004Z\n"
+"PO-Revision-Date: 2024-10-03T18:22:15.004Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -66,11 +66,23 @@ msgstr "All"
 msgid "Filter options"
 msgstr "Filter options"
 
-msgid "Something went wrong when submitting the form"
-msgstr "Something went wrong when submitting the form"
-
 msgid "Save and close"
 msgstr "Save and close"
+
+msgid "Exit without saving"
+msgstr "Exit without saving"
+
+msgid "Create {{modelName}} "
+msgstr "Create {{modelName}} "
+
+msgid "Validation errors"
+msgstr "Validation errors"
+
+msgid "Some fields have validation errors. Please fix them before saving."
+msgstr "Some fields have validation errors. Please fix them before saving."
+
+msgid "Something went wrong when submitting the form"
+msgstr "Something went wrong when submitting the form"
 
 msgid "<No value>"
 msgstr "<No value>"
@@ -122,6 +134,18 @@ msgstr "Filter data elements"
 
 msgid "Filter legend sets"
 msgstr "Filter legend sets"
+
+msgid "Filter available items"
+msgstr "Filter available items"
+
+msgid "Filter selected items"
+msgstr "Filter selected items"
+
+msgid "Refresh list"
+msgstr "Refresh list"
+
+msgid "Add new"
+msgstr "Add new"
 
 msgid "Option set"
 msgstr "Option set"
@@ -258,6 +282,9 @@ msgstr "Include user sharing settings"
 msgid "Clear all filters"
 msgstr "Clear all filters"
 
+msgid "Category"
+msgstr "Category"
+
 msgid "Type to filter options"
 msgstr "Type to filter options"
 
@@ -389,9 +416,6 @@ msgstr "Edit and view"
 
 msgid "Search for a user or group"
 msgstr "Search for a user or group"
-
-msgid "Category"
-msgstr "Category"
 
 msgid "Categories"
 msgstr "Categories"
@@ -789,6 +813,12 @@ msgstr "Image"
 msgid "GeoJSON"
 msgstr "GeoJSON"
 
+msgid "Disaggregation"
+msgstr "Disaggregation"
+
+msgid "Aggregation type"
+msgstr "Aggregation type"
+
 msgid "Favorite"
 msgstr "Favorite"
 
@@ -810,14 +840,86 @@ msgstr "Owner"
 msgid "Zero is significant"
 msgstr "Zero is significant"
 
+msgid "Data dimension type"
+msgstr "Data dimension type"
+
 msgid "This field requires a unique value, please choose another one"
 msgstr "This field requires a unique value, please choose another one"
+
+msgid "No changes to be saved"
+msgstr "No changes to be saved"
+
+msgid "Saved successfully"
+msgstr "Saved successfully"
+
+msgid "Cannot save empty object"
+msgstr "Cannot save empty object"
+
+msgid "Created successfully"
+msgstr "Created successfully"
 
 msgid "Required"
 msgstr "Required"
 
-msgid "Exit without saving"
-msgstr "Exit without saving"
+msgid "Basic information"
+msgstr "Basic information"
+
+msgid "Set up the basic information for this category."
+msgstr "Set up the basic information for this category."
+
+msgid "Explain the purpose of this category."
+msgstr "Explain the purpose of this category."
+
+msgid "Data configuration"
+msgstr "Data configuration"
+
+msgid "Choose how this category will be used to capture and analyze"
+msgstr "Choose how this category will be used to capture and analyze"
+
+msgid "Use as data dimension"
+msgstr "Use as data dimension"
+
+msgid "Category will be available to the analytics as another dimension"
+msgstr "Category will be available to the analytics as another dimension"
+
+msgid "Choose the category options to include in this category."
+msgstr "Choose the category options to include in this category."
+
+msgid "Available category options"
+msgstr "Available category options"
+
+msgid "Selected category options"
+msgstr "Selected category options"
+
+msgid "Filter available category options"
+msgstr "Filter available category options"
+
+msgid "Filter selected category options"
+msgstr "Filter selected category options"
+
+msgid "Choose how this category combo will be used to capture and analyze data."
+msgstr "Choose how this category combo will be used to capture and analyze data."
+
+msgid "Skip category total in reports"
+msgstr "Skip category total in reports"
+
+msgid "Choose the categories to include in this category combo."
+msgstr "Choose the categories to include in this category combo."
+
+msgid "Available categories"
+msgstr "Available categories"
+
+msgid "Selected categories"
+msgstr "Selected categories"
+
+msgid "Filter available categories"
+msgstr "Filter available categories"
+
+msgid "Filter selected categories"
+msgstr "Filter selected categories"
+
+msgid "At least one category is required"
+msgstr "At least one category is required"
 
 msgid "Create data element group"
 msgstr "Create data element group"
@@ -830,15 +932,6 @@ msgstr "Data dimension"
 
 msgid "Selected data element groups"
 msgstr "Selected data element groups"
-
-msgid "Refresh list"
-msgstr "Refresh list"
-
-msgid "Add new"
-msgstr "Add new"
-
-msgid "Basic information"
-msgstr "Basic information"
 
 msgid "Set up the information for this data element group"
 msgstr "Set up the information for this data element group"
@@ -860,9 +953,6 @@ msgstr "The default way to aggregate this data element in analytics."
 
 msgid "Disabled for the selected value type."
 msgstr "Disabled for the selected value type."
-
-msgid "Aggregation type"
-msgstr "Aggregation type"
 
 msgid "Color and icon"
 msgstr "Color and icon"

@@ -6,6 +6,20 @@ export type QueryResponse = ReturnType<typeof useDataQuery>
 
 export type Query = Parameters<typeof useDataQuery>[0]
 
+type QueryParams = {
+    pageSize?: number
+    page?: number
+    fields?: string | string[]
+    filter: string | string[]
+    [key: string]: unknown
+}
+
+export type PlainResourceQuery = {
+    resource: string
+    id?: string
+    params?: QueryParams
+}
+
 export type ResourceQuery = Query[keyof Query]
 
 export type QueryRefetchFunction = QueryResponse['refetch']

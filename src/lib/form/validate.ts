@@ -8,7 +8,6 @@ export function validate<FormValues>(
     values: FormValues
 ) {
     const zodResult = zodSchema.safeParse(values)
-
     if (zodResult.success !== false) {
         return undefined
     }
@@ -17,6 +16,9 @@ export function validate<FormValues>(
         const errorPath = segmentsToPath(error.path)
         return setIn(formErrors, errorPath, error.message)
     }, {})
-
     return allFormErrors
+}
+
+export function createFormValidate<FormValues>(zodSchema: z.AnyZodObject) {
+    return (values: FormValues) => validate(zodSchema, values)
 }

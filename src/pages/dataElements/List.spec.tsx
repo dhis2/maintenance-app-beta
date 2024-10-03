@@ -1,16 +1,18 @@
 import { FetchError } from '@dhis2/app-runtime'
 import {
-    render,
-    waitForElementToBeRemoved,
     fireEvent,
+    render,
     waitFor,
+    waitForElementToBeRemoved,
 } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
+import currentUserMock from '../../__mocks__/currentUserMock.json'
 import dataElementSchemaMock from '../../__mocks__/schema/dataElementsSchema.json'
 import { SECTIONS_MAP, canEditModel } from '../../lib'
 import { useSchemaStore } from '../../lib/schemas/schemaStore'
 import { ModelSchemas } from '../../lib/useLoadApp'
+import { useCurrentUserStore } from '../../lib/user/currentUserStore'
 import TestComponentWithRouter, {
     CustomData,
 } from '../../testUtils/TestComponentWithRouter'
@@ -58,6 +60,10 @@ describe('Data Elements List', () => {
         }
     })
 
+    useCurrentUserStore.getState().setCurrentUser({
+        ...currentUserMock,
+        authorities: new Set(currentUserMock.authorities),
+    })
     useSchemaStore.getState().setSchemas({
         dataElement: dataElementSchemaMock,
     } as unknown as ModelSchemas)

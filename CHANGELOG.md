@@ -1,3 +1,33 @@
+# [0.7.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.6.0...v0.7.0) (2024-10-03)
+
+
+### Features
+
+* **category-option-combos:** forms ([#411](https://github.com/dhis2/maintenance-app-beta/issues/411)) ([1b3ede4](https://github.com/dhis2/maintenance-app-beta/commit/1b3ede4c9386c9c99e1f9967e1b160bddf50ff50))
+
+# [0.6.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.5.0...v0.6.0) (2024-09-30)
+
+
+### Features
+
+* add details panel to org list ([8d3b87b](https://github.com/dhis2/maintenance-app-beta/commit/8d3b87b7c47399bac5a8c4b88a8c0046fd69ca74))
+
+# [0.5.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.4.0...v0.5.0) (2024-09-30)
+
+
+### Features
+
+* **catCombo:** add category combo form and list ([#410](https://github.com/dhis2/maintenance-app-beta/issues/410)) ([7687c13](https://github.com/dhis2/maintenance-app-beta/commit/7687c13d99335154880275e7631af9c221d0aceb))
+
+# [0.4.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.3.1...v0.4.0) (2024-09-28)
+
+
+### Features
+
+* **categories:** category forms and form refactor ([#407](https://github.com/dhis2/maintenance-app-beta/issues/407)) ([66216c4](https://github.com/dhis2/maintenance-app-beta/commit/66216c4c4c7beb11411e790fd804a0761e980b19))
+* org list deselect all + multi select actions  ([56fa5fc](https://github.com/dhis2/maintenance-app-beta/commit/56fa5fc572903636e802a2ff0c47d23432abe38a))
+* remove select all checkbox from org list ([84cfd3e](https://github.com/dhis2/maintenance-app-beta/commit/84cfd3eb8d5161b3ee7d47779fae88bd13790021))
+
 ## [0.3.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.3.0...v0.3.1) (2024-08-20)
 
 
