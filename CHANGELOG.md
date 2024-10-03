@@ -1,3 +1,10 @@
+# [0.7.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.6.0...v0.7.0) (2024-10-03)
+
+
+### Features
+
+* **category-option-combos:** forms ([#411](https://github.com/dhis2/maintenance-app-beta/issues/411)) ([1b3ede4](https://github.com/dhis2/maintenance-app-beta/commit/1b3ede4c9386c9c99e1f9967e1b160bddf50ff50))
+
 # [0.6.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.5.0...v0.6.0) (2024-09-30)
 
 
