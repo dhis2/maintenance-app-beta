@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-26T17:26:13.691Z\n"
-"PO-Revision-Date: 2024-09-26T17:26:13.691Z\n"
+"POT-Creation-Date: 2024-10-03T15:13:27.140Z\n"
+"PO-Revision-Date: 2024-10-03T15:13:27.140Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -972,6 +972,16 @@ msgstr "Upload an image"
 msgid "Remove"
 msgstr "Remove"
 
+msgid "Placement in hierarchy"
+msgstr "Placement in hierarchy"
+
+msgid ""
+"Choose where this new organisation unit should be placed in the existing "
+"hierarchy"
+msgstr ""
+"Choose where this new organisation unit should be placed in the existing "
+"hierarchy"
+
 msgid "Set up the basic information for this organisation unit."
 msgstr "Set up the basic information for this organisation unit."
 
@@ -1004,6 +1014,19 @@ msgstr "Latitude"
 
 msgid "Longitude"
 msgstr "Longitude"
+
+msgid "New organisation unit will be created inside"
+msgstr "New organisation unit will be created inside"
+
+msgid "Creating first organisation unit"
+msgstr "Creating first organisation unit"
+
+msgid ""
+"This is the first organisation unit and will be created as the root of the "
+"hierarchy."
+msgstr ""
+"This is the first organisation unit and will be created as the root of the "
+"hierarchy."
 
 msgid "No organisation units available"
 msgstr "No organisation units available"

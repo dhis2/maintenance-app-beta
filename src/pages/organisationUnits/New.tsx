@@ -53,6 +53,7 @@ function formatFormValues({ values }: { values: FormValues }) {
         email: values.email,
         phoneNumber: values.phoneNumber,
         url: values.url,
+        parent: values.parent,
         geometry:
             values.geometry?.longitude && values.geometry?.latitude
                 ? {

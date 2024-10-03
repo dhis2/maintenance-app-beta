@@ -16,12 +16,26 @@ import {
 import { DateField } from '../../../components/form/fields/DateField'
 import { SCHEMA_SECTIONS } from '../../../lib'
 import { ImageField } from './ImageField'
+import { OrganisationUnitSelector } from './OrganisationUnitSelector'
 
 const schemaSection = SCHEMA_SECTIONS.organisationUnit
 
 export function OrganisationUnitFormField() {
     return (
         <>
+            <StandardFormSection>
+                <StandardFormSectionTitle>
+                    {i18n.t('Placement in hierarchy')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Choose where this new organisation unit should be placed in the existing hierarchy'
+                    )}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <OrganisationUnitSelector />
+                </StandardFormField>
+            </StandardFormSection>
             <StandardFormSection>
                 <StandardFormSectionTitle>
                     {i18n.t('Basic information')}

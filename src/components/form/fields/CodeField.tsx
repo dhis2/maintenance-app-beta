@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { InputFieldFF } from '@dhis2/ui'
+import { InputFieldFF, Validator } from '@dhis2/ui'
 import React, { useMemo } from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import { useParams } from 'react-router-dom'
@@ -22,7 +22,7 @@ function useValidator({
     const schema = useSchema(schemaSection.name)
     const proprietyDetails = schema.properties[propriety]
 
-    const validators = useMemo(() => [], [])
+    const validators = useMemo(() => [] as Validator[], [])
     const params = useParams()
     const modelId = params.id as string
     const checkMaxLength = useCheckMaxLengthFromPropriety(proprietyDetails)
@@ -30,7 +30,7 @@ function useValidator({
         model: schemaSection.namePlural,
         field: propriety,
         id: modelId,
-    })
+    }) as Validator
     if (proprietyDetails.propertyType === SchemaFieldPropertyType.REFERENCE) {
         validators.push(checkMaxLength)
     }
