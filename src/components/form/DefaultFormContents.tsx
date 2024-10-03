@@ -1,10 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
+import { Card } from '@dhis2/ui'
 import React from 'react'
 import { useFormState } from 'react-final-form'
 import { useNavigate } from 'react-router-dom'
 import { getSectionPath } from '../../lib'
 import { ModelSection } from '../../types'
-import { StandardFormSection, StandardFormActions } from '../standardForm'
+import { StandardFormActions, StandardFormSection } from '../standardForm'
 import classes from './DefaultFormContents.module.css'
 import { DefaultFormErrorNotice } from './DefaultFormErrorNotice'
 
@@ -24,13 +25,13 @@ export function DefaultEditFormContents({
 
     return (
         <>
-            <div className={classes.form}>
+            <Card className={classes.form}>
                 {children}
 
                 <StandardFormSection>
                     <DefaultFormErrorNotice />
                 </StandardFormSection>
-            </div>
+            </Card>
             <div className={classes.formActions}>
                 <StandardFormActions
                     cancelLabel={i18n.t('Cancel')}
@@ -59,7 +60,7 @@ export function DefaultNewFormContents({
     const listPath = `/${getSectionPath(section)}`
 
     return (
-        <div className={classes.form}>
+        <Card className={classes.form}>
             {children}
             <StandardFormSection>
                 <DefaultFormErrorNotice />
@@ -72,6 +73,6 @@ export function DefaultNewFormContents({
                 submitting={submitting}
                 onCancelClick={() => navigate(listPath)}
             />
-        </div>
+        </Card>
     )
 }

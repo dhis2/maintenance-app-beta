@@ -28,6 +28,8 @@
     grid-area: main;
     background-color: var(--colors-grey100);
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .sidebar {

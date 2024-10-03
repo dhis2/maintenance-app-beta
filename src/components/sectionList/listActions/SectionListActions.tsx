@@ -39,6 +39,7 @@ type ActionMoreProps = {
     deletable: boolean
     editable: boolean
     translatable: boolean
+    shareable: boolean
     model: BaseListModel
     onShowDetailsClick: () => void
     onOpenSharingClick: () => void
@@ -49,6 +50,7 @@ export const ActionMore = ({
     deletable,
     editable,
     translatable,
+    shareable,
     model,
     onOpenSharingClick,
     onShowDetailsClick,
@@ -99,21 +101,23 @@ export const ActionMore = ({
                             href={href}
                         />
 
-                        <TooltipWrapper
-                            condition={!editable}
-                            content={TOOLTIPS.noEditAccess}
-                        >
-                            <MenuItem
-                                dense
-                                disabled={!editable}
-                                label={i18n.t('Sharing settings')}
-                                icon={<IconShare16 />}
-                                onClick={() => {
-                                    onOpenSharingClick()
-                                    setOpen(false)
-                                }}
-                            />
-                        </TooltipWrapper>
+                        {shareable && (
+                            <TooltipWrapper
+                                condition={!editable}
+                                content={TOOLTIPS.noEditAccess}
+                            >
+                                <MenuItem
+                                    dense
+                                    disabled={!editable}
+                                    label={i18n.t('Sharing settings')}
+                                    icon={<IconShare16 />}
+                                    onClick={() => {
+                                        onOpenSharingClick()
+                                        setOpen(false)
+                                    }}
+                                />
+                            </TooltipWrapper>
+                        )}
                         {translatable && (
                             <MenuItem
                                 dense

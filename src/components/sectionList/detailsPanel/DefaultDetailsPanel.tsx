@@ -92,7 +92,7 @@ const DetailsContent = ({ data }: { data: DetailsResponse }) => {
                     {data.createdBy?.displayName}
                 </DetailItem>
                 <DetailItem label={i18n.t('Created')}>
-                    <ClientDateTime value={data.created} />
+                    <ClientDateTime value={data?.created} />
                 </DetailItem>
                 <DetailItem label={i18n.t('Last updated by')}>
                     {data.lastUpdatedBy
