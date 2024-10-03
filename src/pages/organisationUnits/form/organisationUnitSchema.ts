@@ -1,22 +1,28 @@
 import { z } from 'zod'
+import { CategoryFormValues } from '../../categories/Edit'
+import { getDefaults } from '../../../lib'
+import { categorySchema } from '../../categories/form'
+import { OrganisationUnit } from '../../../types/generated'
 
 export const organisationUnitSchema = z.object({
-    name: z.string().trim(),
-    shortName: z.string().trim(),
-    code: z.string().trim(),
-    description: z.string().trim(),
+    name: z.string().trim().default(''),
+    shortName: z.string().trim().default(''),
+    code: z.string().trim().optional(),
+    description: z.string().trim().optional(),
     image: z.object({ id: z.string() }).optional(),
-    attributeValues: z.array(
-        z.object({
-            value: z.string().optional(),
-            attribute: z.object({
-                id: z.string(),
-            }),
-        })
-    ),
+    attributeValues: z
+        .array(
+            z.object({
+                value: z.string().optional(),
+                attribute: z.object({
+                    id: z.string(),
+                }),
+            })
+        )
+        .optional(),
     phoneNumber: z.string().optional(),
     contactPerson: z.string().optional(),
-    openingDate: z.string(),
+    openingDate: z.string().default(''),
     email: z.string().optional(),
     address: z.string().optional(),
     url: z.string().optional(),
@@ -28,3 +34,7 @@ export const organisationUnitSchema = z.object({
         })
         .optional(),
 })
+
+export const initialValues: Partial<OrganisationUnit> = getDefaults(
+    organisationUnitSchema
+)

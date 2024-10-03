@@ -1,44 +1,16 @@
-import i18n from '@dhis2/d2-i18n'
-import { NoticeBox } from '@dhis2/ui'
-import React, { useMemo } from 'react'
-import { Form } from 'react-final-form'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { FormBase, useCustomAttributesQuery } from '../../components'
+import { SECTIONS_MAP, useOnSubmitNew, validate } from '../../lib'
 import {
-    StandardFormActions,
-    StandardFormSection,
-    useCustomAttributesQuery,
-} from '../../components'
-import { getSectionPath, SCHEMA_SECTIONS, validate } from '../../lib'
-import { Attribute } from '../../types/generated'
-import classes from '../dataElementGroupSets/New.module.css'
-import {
-    OrganisationUnitFormField,
     FormValues,
+    initialValues,
+    OrganisationUnitFormField,
     organisationUnitSchema,
 } from './form'
+import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
 
-const listPath = `/${getSectionPath(SCHEMA_SECTIONS.organisationUnit)}`
-
-function useInitialValues(customAttributes: Attribute[]) {
-    const attributeValues = useMemo(
-        () =>
-            customAttributes.map((attribute) => ({
-                attribute,
-                value: '',
-            })),
-        [customAttributes]
-    )
-
-    return {
-        name: '',
-        shortName: '',
-        code: '',
-        description: '',
-        openingDate: '',
-        attributeValues,
-    }
-}
-function formatFormValues({ values }: { values: FormValues }) {
+function formatFormValues(values: FormValues) {
     return {
         name: values.name,
         shortName: values.shortName,
@@ -67,58 +39,28 @@ function formatFormValues({ values }: { values: FormValues }) {
         attributeValues: values.attributeValues.filter(({ value }) => !!value),
     }
 }
+const section = SECTIONS_MAP.organisationUnit
 
 export const Component = () => {
-    const navigate = useNavigate()
-    const customAttributesQuery = useCustomAttributesQuery()
-    const initialValues = useInitialValues(customAttributesQuery.data)
-
     async function onSubmit(values: FormValues) {
-        const payload = formatFormValues({
-            values,
-        })
+        const payload = formatFormValues(values)
         console.log('SUBMITTING', payload)
     }
 
     return (
-        <Form
-            validateOnBlur
-            onSubmit={onSubmit}
+        <FormBase
+            onSubmit={useOnSubmitNew({
+                section,
+                valueFormatter: formatFormValues,
+            })}
+            initialValues={initialValues}
             validate={(values: FormValues) => {
                 return validate(organisationUnitSchema, values)
             }}
-            initialValues={initialValues}
         >
-            {({ handleSubmit, submitting, submitError }) => (
-                <form onSubmit={handleSubmit}>
-                    <div className={classes.form}>
-                        <OrganisationUnitFormField />
-                        {submitError && (
-                            <StandardFormSection>
-                                <div>
-                                    <NoticeBox
-                                        error
-                                        title={i18n.t(
-                                            'Something went wrong when submitting the form'
-                                        )}
-                                    >
-                                        {submitError}
-                                    </NoticeBox>
-                                </div>
-                            </StandardFormSection>
-                        )}
-
-                        <StandardFormSection>
-                            <StandardFormActions
-                                cancelLabel={i18n.t('Exit without saving')}
-                                submitLabel={i18n.t('Create organisation unit')}
-                                submitting={submitting}
-                                onCancelClick={() => navigate(listPath)}
-                            />
-                        </StandardFormSection>
-                    </div>
-                </form>
-            )}
-        </Form>
+            <DefaultNewFormContents section={section}>
+                <OrganisationUnitFormField />
+            </DefaultNewFormContents>
+        </FormBase>
     )
 }
