@@ -32,6 +32,7 @@ export function DateField({
         calendarDateString,
     }) => {
         input.onChange(calendarDateString)
+        input.onBlur()
     }
 
     return (
@@ -45,6 +46,7 @@ export function DateField({
             inputWidth="400px"
             error={meta.touched && meta.invalid && meta.error}
             validationText={meta.touched && meta.error}
+            onBlur={(_, e) => input.onBlur(e)}
             {...calendarInputProps}
             // hack to workaround type-error
             // TODO: fix once missing type is added to UI
