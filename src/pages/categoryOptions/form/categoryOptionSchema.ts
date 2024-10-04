@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { getDefaults, modelFormSchemas } from '../../../lib'
 import { createFormValidate } from '../../../lib/form/validate'
-import { CategoryOptionFormValues } from '../Edit'
+import i18n from '@dhis2/d2-i18n'
 
 const { withAttributeValues, identifiable, referenceCollection } =
     modelFormSchemas
@@ -17,8 +17,15 @@ export const categoryOptionSchema = identifiable
         endDate: z.string().optional(),
         organisationUnits: referenceCollection.optional(),
     })
+    .refine(
+        (data) =>
+            data?.startDate && data?.endDate && data.startDate <= data.endDate,
+        {
+            message: i18n.t('End date should be after start date'),
+            path: ['endDate'],
+        }
+    )
 
-export const initialValues: Partial<CategoryOptionFormValues> =
-    getDefaults(categoryOptionSchema)
+export const initialValues = getDefaults(categoryOptionSchema)
 
 export const validate = createFormValidate(categoryOptionSchema)

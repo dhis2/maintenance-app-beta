@@ -1,7 +1,6 @@
 import { z } from 'zod'
 import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
 import { Category } from '../../../types/generated'
-import { CategoryFormValues } from '../Edit'
 
 /*  Note that this describes what we send to the server, 
     and not what is stored in the form. */
@@ -21,7 +20,6 @@ export const categorySchema = identifiable.merge(withAttributeValues).extend({
         .default([]),
 })
 
-export const initialValues: Partial<CategoryFormValues> =
-    getDefaults(categorySchema)
+export const initialValues = getDefaults(categorySchema)
 
 export const validate = createFormValidate(categorySchema)
