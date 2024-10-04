@@ -2,7 +2,12 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { DefaultEditFormContents, FormBase } from '../../components'
-import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
+import {
+    ATTRIBUTE_VALUES_FIELD_FILTERS,
+    DEFAULT_FIELD_FILTERS,
+    SECTIONS_MAP,
+    useOnSubmitEdit,
+} from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import {
     CategoryOptionCombo,
@@ -12,9 +17,9 @@ import { validate, CategoryOptionComboFormFields } from './form'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
+    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
     'code',
-    'attributeValues[attribute[id,displayName],value]',
 ] as const
 
 export type CategoryOptionComboFormValues = PickWithFieldFilters<
