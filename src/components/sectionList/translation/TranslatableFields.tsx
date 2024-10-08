@@ -23,20 +23,20 @@ const TranslatableFields: React.FC<TranslatableFieldsProps> = ({
     selectedLocale,
 }) => {
     return (
-        <div className={style.formObj}>
+        <div className={style.translateableFields}>
             <div className={style.formSection}>
                 {translatableFields.map((field) => (
                     <React.Fragment key={field}>
                         {field === 'description' ? (
                             <TextAreaField
-                                className={style.row}
+                                className={style.rowStart}
                                 label={getTranslatedProperty(field)}
                                 disabled
                                 value={baseReferenceValues[field]}
                             />
                         ) : (
                             <InputField
-                                className={style.row}
+                                className={style.rowStart}
                                 label={getTranslatedProperty(field)}
                                 disabled
                                 value={baseReferenceValues[field]}

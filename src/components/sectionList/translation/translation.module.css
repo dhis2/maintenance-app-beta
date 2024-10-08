@@ -1,10 +1,13 @@
 .row {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--colors-grey400);
+    border-block-end: 1px solid var(--colors-grey400);
+    padding-block: 10px;
+}
+
+.rowStart {
+    composes: row;
+    padding-inline-end: 10px;
 }
 
 .baseLocale {
@@ -13,19 +16,13 @@
     justify-content: space-between;
     background-color: var(--colors-grey200);
     color: var(--colors-grey600);
-    padding: 5px 10px;
+    padding-block: 5px;
+    padding-inline: 10px;
 }
-.formObj {
+.translateableFields {
     display: flex;
     align-items: center;
-    margin-right: 10px;
     width: 100%;
-}
-input {
-    margin-right: 10px !important;
-}
-textarea {
-    margin-right: 10px !important;
 }
 
 .formSection {
@@ -33,7 +30,7 @@ textarea {
 }
 
 .notice {
-    margin-bottom: 15px;
+    margin-block-end: 15px;
 }
 
 .warnText {
