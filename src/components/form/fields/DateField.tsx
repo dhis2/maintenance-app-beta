@@ -1,7 +1,7 @@
 import { CalendarInput, CalendarInputProps } from '@dhis2/ui'
 import React from 'react'
 import { useField } from 'react-final-form'
-import { selectedLocale, useSystemSettings } from '../../../lib'
+import { selectedLocale, useSystemSetting } from '../../../lib'
 
 type DateFieldProps = Omit<
     CalendarInputProps,
@@ -16,8 +16,7 @@ export function DateField({
     label,
     ...calendarInputProps
 }: DateFieldProps) {
-    const settings = useSystemSettings()
-    const { keyCalendar: calendar } = settings
+    const calendar = useSystemSetting('keyCalendar')
     const locale = selectedLocale
     const { meta, input } = useField<string | undefined>(name, {
         format: (value) => {
