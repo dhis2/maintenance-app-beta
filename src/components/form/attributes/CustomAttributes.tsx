@@ -78,6 +78,19 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
         )
     }
 
+    if (attribute.valueType === 'GEOJSON') {
+        return (
+            <StandardFormSection key={attribute.id}>
+                <FieldRFF
+                    component={TextAreaFieldFF}
+                    required={required}
+                    inputWidth={inputWidth}
+                    label={attribute.displayFormName}
+                    name={name}
+                />
+            </StandardFormSection>
+        )
+    }
     // @TODO: Verify that all value types have been covered!
     throw new Error(`Implement value type "${attribute.valueType}"!`)
 }
