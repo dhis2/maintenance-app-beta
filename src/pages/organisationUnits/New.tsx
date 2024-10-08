@@ -1,6 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { FormBase, useCustomAttributesQuery } from '../../components'
+import { FormBase } from '../../components'
 import { SECTIONS_MAP, useOnSubmitNew, validate } from '../../lib'
 import {
     FormValues,
@@ -10,7 +9,9 @@ import {
 } from './form'
 import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
 
-function formatFormValues(values: FormValues) {
+const formatFormValues: (values: FormValues) => Record<string, unknown> = (
+    values
+) => {
     return {
         name: values.name,
         shortName: values.shortName,
@@ -42,18 +43,13 @@ function formatFormValues(values: FormValues) {
 const section = SECTIONS_MAP.organisationUnit
 
 export const Component = () => {
-    async function onSubmit(values: FormValues) {
-        const payload = formatFormValues(values)
-        console.log('SUBMITTING', payload)
-    }
-
     return (
         <FormBase
             onSubmit={useOnSubmitNew({
                 section,
                 valueFormatter: formatFormValues,
             })}
-            initialValues={initialValues}
+            initialValues={initialValues as FormValues}
             validate={(values: FormValues) => {
                 return validate(organisationUnitSchema, values)
             }}

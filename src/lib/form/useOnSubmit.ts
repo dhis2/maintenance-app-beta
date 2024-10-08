@@ -9,7 +9,6 @@ import { getSectionPath } from '../routeUtils'
 import { createJsonPatchOperations } from './createJsonPatchOperations'
 import { useCreateModel } from './useCreateModel'
 import { usePatchModel } from './usePatchModel'
-import { FormValues } from '../../pages/organisationUnits/form'
 
 type OnSubmit<TValues> = FormProps<TValues>['onSubmit']
 
@@ -59,10 +58,10 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
 
 export const useOnSubmitNew = <TFormValues>({
     section,
-    valueFormatter = (v) => v,
+    valueFormatter,
 }: {
     section: ModelSection
-    valueFormatter: (values: FormValues) => FormValues
+    valueFormatter?: (values: TFormValues) => Record<string, unknown>
 }) => {
     const createModel = useCreateModel(section.namePlural)
     const saveAlert = useAlert(
@@ -83,7 +82,10 @@ export const useOnSubmitNew = <TFormValues>({
                 })
                 return
             }
-            const errors = await createModel(valueFormatter(values))
+            const formattedValues = valueFormatter
+                ? valueFormatter(values)
+                : values
+            const errors = await createModel(formattedValues)
             if (errors) {
                 return errors
             }

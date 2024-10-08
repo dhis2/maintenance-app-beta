@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { Schema, z } from 'zod'
 import { CategoryFormValues } from '../../categories/Edit'
 import { getDefaults } from '../../../lib'
 import { categorySchema } from '../../categories/form'
@@ -35,6 +35,6 @@ export const organisationUnitSchema = z.object({
         .optional(),
 })
 
-export const initialValues: Partial<OrganisationUnit> = getDefaults(
-    organisationUnitSchema
+export const initialValues = getDefaults(
+    organisationUnitSchema as z.AnyZodObject
 )
