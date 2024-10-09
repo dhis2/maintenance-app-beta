@@ -35,21 +35,23 @@ export function DateField({
     }
 
     return (
-        <CalendarInput
-            date={input.value}
-            name={name}
-            calendar={calendar as CalendarInputProps['calendar']}
-            onDateSelect={handleChange}
-            timeZone={'utc'}
-            locale={locale}
-            inputWidth="400px"
-            error={meta.touched && meta.invalid && meta.error}
-            validationText={meta.touched && meta.error}
-            onBlur={(_, e) => input.onBlur(e)}
-            {...calendarInputProps}
-            // hack to workaround type-error
-            // TODO: fix once missing type is added to UI
-            {...{ clearable: true, label }}
-        />
+        <div style={{ width: '400px' }}>
+            {/* TODO: we can remove style above, once inputWidth for CalendarInput is fixed */}
+            <CalendarInput
+                date={input.value}
+                name={name}
+                calendar={calendar as CalendarInputProps['calendar']}
+                onDateSelect={handleChange}
+                timeZone={'utc'}
+                locale={locale}
+                error={meta.touched && meta.invalid && meta.error}
+                validationText={meta.touched && meta.error}
+                onBlur={(_, e) => input.onBlur(e)}
+                {...calendarInputProps}
+                // hack to workaround type-error
+                // TODO: fix once missing type is added to UI
+                {...{ clearable: true, label }}
+            />
+        </div>
     )
 }
