@@ -7,6 +7,7 @@
     "scripts": {
         "build": "d2-app-scripts build",
         "start": "d2-app-scripts start",
+        "start:nobrowser": "BROWSER=none d2-app-scripts start",
         "test": "d2-app-scripts test",
         "deploy": "d2-app-scripts deploy",
         "lint": "yarn d2-style check",
