@@ -27,10 +27,8 @@ export function DateField({
         },
     })
 
-    const handleChange: CalendarInputProps['onDateSelect'] = ({
-        calendarDateString,
-    }) => {
-        input.onChange(calendarDateString)
+    const handleChange: CalendarInputProps['onDateSelect'] = (payload) => {
+        input.onChange(payload?.calendarDateString)
         input.onBlur()
     }
 
