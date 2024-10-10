@@ -18,8 +18,12 @@ export const categoryOptionSchema = identifiable
         organisationUnits: referenceCollection.optional(),
     })
     .refine(
-        (data) =>
-            data?.startDate && data?.endDate && data.startDate <= data.endDate,
+        (data) => {
+            if (data.startDate && data.endDate) {
+                return data.startDate <= data.endDate
+            }
+            return true
+        },
         {
             message: i18n.t('End date should be after start date'),
             path: ['endDate'],
