@@ -45,10 +45,9 @@ export function DateField({
                 error={meta.touched && meta.invalid && meta.error}
                 validationText={meta.touched && meta.error}
                 onBlur={(_, e) => input.onBlur(e)}
+                clearable
+                label={label}
                 {...calendarInputProps}
-                // hack to workaround type-error
-                // TODO: fix once missing type is added to UI
-                {...{ clearable: true, label }}
             />
         </div>
     )
