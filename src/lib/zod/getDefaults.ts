@@ -14,7 +14,6 @@ type WrapNonDefaultsInOptional<T extends z.ZodTypeAny> = T extends z.ZodEffects<
 // added some type-improvements
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getDefaults<T extends z.AnyZodObject | z.ZodEffects<any>>(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     schema: T //z.AnyZodObject | z.ZodEffects<any>
 ): z.infer<WrapNonDefaultsInOptional<T>> {
     // Check if it's a ZodEffect
