@@ -14,6 +14,7 @@ export const filterParamsSchema = z
         aggregationType: z.array(z.nativeEnum(DataElement.aggregationType)),
         categoryCombo: zodArrayIds,
         category: zodArrayIds,
+        categoryOptionGroup: zodArrayIds,
         dataSet: zodArrayIds,
         domainType: z.array(z.nativeEnum(DataElement.domainType)),
         publicAccess: z.array(
@@ -34,6 +35,7 @@ export const filterQueryParamType = {
     dataSet: CustomDelimitedArrayParam,
     category: CustomDelimitedArrayParam,
     categoryCombo: CustomDelimitedArrayParam,
+    categoryOptionGroup: CustomDelimitedArrayParam,
     publicAccess: CustomDelimitedArrayParam,
     dataDimensionType: StringParam,
 } as const satisfies QueryParamsConfigMap
