@@ -1,19 +1,19 @@
 import i18n from '@dhis2/d2-i18n'
+import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
+import { Field } from 'react-final-form'
 import {
-    StandardFormField,
-    StandardFormSection,
-    StandardFormSectionTitle,
-    StandardFormSectionDescription,
     CustomAttributesSection,
     DefaultIdentifiableFields,
     DescriptionField,
     OrganisationUnitField,
+    StandardFormField,
+    StandardFormSection,
+    StandardFormSectionDescription,
+    StandardFormSectionTitle,
 } from '../../../components'
 import { DateField } from '../../../components/form/fields/DateField'
 import { SECTIONS_MAP } from '../../../lib'
-import { InputFieldFF } from '@dhis2/ui'
-import { Field } from 'react-final-form'
 
 const section = SECTIONS_MAP.categoryOption
 

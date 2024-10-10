@@ -1,7 +1,7 @@
+import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 import { getDefaults, modelFormSchemas } from '../../../lib'
 import { createFormValidate } from '../../../lib/form/validate'
-import i18n from '@dhis2/d2-i18n'
 
 const { withAttributeValues, identifiable, referenceCollection } =
     modelFormSchemas
