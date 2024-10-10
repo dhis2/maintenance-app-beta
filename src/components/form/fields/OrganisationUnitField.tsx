@@ -15,22 +15,15 @@ type OrganisationUnitFieldProps = {
 type OrganisationUnitFormValue = {
     id: string
     path: string
+    displayName: string
 }
 
 export const OrganisationUnitField = ({ name }: OrganisationUnitFieldProps) => {
     const { input, meta } = useField<
         OrganisationUnitFormValue[],
         HTMLElement,
-        string[]
-    >(name ?? 'organisationUnits', {
-        format: (orgUnits) => orgUnits?.map((ou) => ou.path),
-        parse: (orgUnitPaths) => {
-            return orgUnitPaths?.map((ouPath) => ({
-                id: ouPath.split('/').slice(-1)[0],
-                path: ouPath,
-            }))
-        },
-    })
+        OrganisationUnitFormValue[]
+    >(name ?? 'organisationUnits')
 
     const roots = useCurrentUserRootOrgUnits()
 
@@ -38,10 +31,22 @@ export const OrganisationUnitField = ({ name }: OrganisationUnitFieldProps) => {
 
     const handleChange: OrganisationUnitTreeProps['onChange'] = ({
         selected,
+        displayName,
+        id,
+        path,
     }) => {
-        input.onChange(selected)
+        const prevSelected = new Map(input.value.map((ou) => [ou.path, ou]))
+        const newSelected = selected.map((selectedPath) => {
+            const prev = prevSelected.get(selectedPath)
+            return prev ?? { id, path, displayName }
+        })
+
+        input.onChange(newSelected)
         input.onBlur()
     }
+
+    const selectedPaths = input.value?.map((ou) => ou.path) ?? []
+
     return (
         <Field
             label={i18n.t('Select organisation units')}
@@ -51,7 +56,7 @@ export const OrganisationUnitField = ({ name }: OrganisationUnitFieldProps) => {
             <OrganisationUnitTree
                 roots={rootIds}
                 onChange={handleChange}
-                selected={input.value || []}
+                selected={selectedPaths}
                 initiallyExpanded={rootIds}
             />
         </Field>
