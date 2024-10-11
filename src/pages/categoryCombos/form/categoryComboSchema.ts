@@ -10,7 +10,7 @@ const { identifiable, withAttributeValues, referenceCollection } =
 export const categoryComboSchema = identifiable
     .merge(withAttributeValues)
     .extend({
-        code: z.string().trim().optional().default('hello'),
+        code: z.string().trim().optional(),
         dataDimensionType: z
             .nativeEnum(CategoryCombo.dataDimensionType)
             .default(CategoryCombo.dataDimensionType.DISAGGREGATION),
