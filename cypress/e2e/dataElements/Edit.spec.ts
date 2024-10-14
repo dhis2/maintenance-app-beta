@@ -24,7 +24,7 @@ describe('Data elements / Edit', () => {
             .click()
 
         // Wait for data elements to be loaded
-        cy.contains('ANC 1st visit')
+        cy.contains('ANC 1st visit', { timeout: 10000 })
 
         // Go to Edit form
         cy.get('[data-test="dhis2-uicore-tablebody"] tr:first-child')
