@@ -1,3 +1,12 @@
+const saveAndExpect = (expected) => {
+    cy.intercept({ pathname: /dataElements/, method: 'PATCH' }, (req) => {
+        expect(req.body).to.deep.equal(expected)
+        req.reply({ statusCode: 200 })
+    })
+
+    cy.get('button:contains("Save and close")').click()
+}
+
 describe('Data elements / Edit', () => {
     it('should change a value', () => {
         const now = Date.now()
@@ -28,20 +37,13 @@ describe('Data elements / Edit', () => {
             .clear()
             .type(`description ${now}`)
 
-        // Submit form
-        cy.get('button:contains("Save and close")').click()
-
-        // cy.contains('Data element management').should('exist')
-
-        // Go to Edit form
-        cy.get('[data-test="dhis2-uicore-tablebody"] tr:first-child')
-            .find('td:last-child a')
-            .click()
-
-        cy.get('[data-test="formfields-description"] textarea').should(
-            'have.value',
-            `description ${now}`
-        )
+        saveAndExpect([
+            {
+                op: 'replace',
+                path: '/description',
+                value: `description ${now}`,
+            },
+        ])
     })
 
     // it('should not submit successfully when a required value has been removed', () => {
