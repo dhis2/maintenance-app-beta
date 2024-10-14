@@ -11,17 +11,7 @@ describe('Data elements / Edit', () => {
     it('should change a value', () => {
         const now = Date.now()
 
-        cy.visit('/')
-
-        // Open data elements group in side nav
-        cy.get('[data-test="sidenav"] button:contains("Data elements")', {
-            timeout: 10000,
-        }).click()
-
-        // Navigate to data element list view
-        cy.get('[data-test="sidenav"] a:contains("Data element")')
-            .first() // the selector will also grab "Data element group" and "Data element group set"
-            .click()
+        cy.visit('/#/dataElements')
 
         // Wait for data elements to be loaded
         cy.contains('ANC 1st visit', { timeout: 10000 })
