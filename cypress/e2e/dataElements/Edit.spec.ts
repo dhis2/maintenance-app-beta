@@ -23,6 +23,9 @@ describe('Data elements / Edit', () => {
             .first() // the selector will also grab "Data element group" and "Data element group set"
             .click()
 
+        // Wait for data elements to be loaded
+        cy.contains('ANC 1st visit')
+
         // Go to Edit form
         cy.get('[data-test="dhis2-uicore-tablebody"] tr:first-child')
             .find('td:last-child a')
