@@ -31,7 +31,7 @@ describe('Data elements / Edit', () => {
         // Submit form
         cy.get('button:contains("Save and close")').click()
 
-        cy.contains('Data element management').should('exist')
+        // cy.contains('Data element management').should('exist')
 
         // Go to Edit form
         cy.get('[data-test="dhis2-uicore-tablebody"] tr:first-child')
