@@ -1,8 +1,5 @@
-import { Schema, z } from 'zod'
-import { CategoryFormValues } from '../../categories/Edit'
+import { z } from 'zod'
 import { getDefaults } from '../../../lib'
-import { categorySchema } from '../../categories/form'
-import { OrganisationUnit } from '../../../types/generated'
 
 export const organisationUnitSchema = z.object({
     name: z.string().trim().default(''),

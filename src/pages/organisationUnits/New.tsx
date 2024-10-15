@@ -1,5 +1,6 @@
 import React from 'react'
 import { FormBase } from '../../components'
+import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
 import { SECTIONS_MAP, useOnSubmitNew, validate } from '../../lib'
 import {
     FormValues,
@@ -7,26 +8,13 @@ import {
     OrganisationUnitFormField,
     organisationUnitSchema,
 } from './form'
-import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
 
 const formatFormValues: (values: FormValues) => Record<string, unknown> = (
     values
 ) => {
     return {
-        name: values.name,
-        shortName: values.shortName,
-        code: values.code,
-        openingDate: values.openingDate,
-        closedDate: values.closedDate,
-        comment: values.comment,
-        image: values.image,
-        description: values.description,
-        contactPerson: values.contactPerson,
-        address: values.address,
-        email: values.email,
-        phoneNumber: values.phoneNumber,
-        url: values.url,
-        parent: values.parent,
+        ...values,
+        parent: values.parent && values.parent[0],
         geometry:
             values.geometry?.longitude && values.geometry?.latitude
                 ? {

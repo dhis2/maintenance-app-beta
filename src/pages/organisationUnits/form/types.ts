@@ -1,3 +1,5 @@
 import { OrganisationUnit } from '../../../types/generated'
 
-export type FormValues = OrganisationUnit
+export type FormValues = Omit<OrganisationUnit, 'parent'> & {
+    parent: { id: string }[]
+}

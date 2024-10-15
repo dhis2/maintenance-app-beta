@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-08T12:33:31.612Z\n"
-"PO-Revision-Date: 2024-10-08T12:33:31.612Z\n"
+"POT-Creation-Date: 2024-10-15T11:17:07.503Z\n"
+"PO-Revision-Date: 2024-10-15T11:17:07.503Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -107,6 +107,9 @@ msgstr "{{fieldLabel}} (required)"
 
 msgid "Name"
 msgstr "Name"
+
+msgid "Select organisation units"
+msgstr "Select organisation units"
 
 msgid "Often used in reports where space is limited"
 msgstr "Often used in reports where space is limited"
@@ -285,6 +288,9 @@ msgstr "Clear all filters"
 msgid "Category"
 msgstr "Category"
 
+msgid "Category option group"
+msgstr "Category option group"
+
 msgid "Type to filter options"
 msgstr "Type to filter options"
 
@@ -437,9 +443,6 @@ msgstr "Category option combination"
 
 msgid "Category option combinations"
 msgstr "Category option combinations"
-
-msgid "Category option group"
-msgstr "Category option group"
 
 msgid "Category option groups"
 msgstr "Category option groups"
@@ -846,6 +849,9 @@ msgstr "Data dimension type"
 msgid "This field requires a unique value, please choose another one"
 msgstr "This field requires a unique value, please choose another one"
 
+msgid "{{label}} (required)"
+msgstr "{{label}} (required)"
+
 msgid "No changes to be saved"
 msgstr "No changes to be saved"
 
@@ -921,6 +927,25 @@ msgstr "Filter selected categories"
 msgid "At least one category is required"
 msgstr "At least one category is required"
 
+msgid "Set up the basic information for this category option."
+msgstr "Set up the basic information for this category option."
+
+msgid "An alternative name used in section or automatic data entry forms."
+msgstr "An alternative name used in section or automatic data entry forms."
+
+msgid "Availability configuration"
+msgstr "Availability configuration"
+
+msgid ""
+"Choose when, and for which organisation units this category option will be "
+"available."
+msgstr ""
+"Choose when, and for which organisation units this category option will be "
+"available."
+
+msgid "End date should be after start date"
+msgstr "End date should be after start date"
+
 msgid "Create data element group"
 msgstr "Create data element group"
 
@@ -978,9 +1003,6 @@ msgstr "Use a pattern to limit what information can be entered."
 
 msgid "e.g. 999-000-0000"
 msgstr "e.g. 999-000-0000"
-
-msgid "An alternative name used in section or automatic data entry forms."
-msgstr "An alternative name used in section or automatic data entry forms."
 
 msgid "Selected legends"
 msgstr "Selected legends"
