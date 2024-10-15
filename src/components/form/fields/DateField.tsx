@@ -1,36 +1,54 @@
-import i18n from '@dhis2/d2-i18n'
-import { CalendarInput, TextAreaFieldFF } from '@dhis2/ui'
+import { CalendarInput, CalendarInputProps } from '@dhis2/ui'
 import React from 'react'
-import { Field as FieldRFF } from 'react-final-form'
-import { SchemaSection, useCheckMaxLengthFromSchema } from '../../../lib'
+import { useField } from 'react-final-form'
+import { selectedLocale, useSystemSetting } from '../../../lib'
 
+type DateFieldProps = Omit<
+    CalendarInputProps,
+    'name' | 'calendar' | 'onDateSelect' | 'date'
+> & {
+    name: string
+    // this is not exposed in CalendarInputProps - but it should be
+    label?: string
+}
 export function DateField({
     name,
     label,
-    calendar = 'gregory',
-}: {
-    name: string
-    label?: string
-    calendar?: string
-}) {
+    ...calendarInputProps
+}: DateFieldProps) {
+    const calendar = useSystemSetting('keyCalendar')
+    const locale = selectedLocale
+    const { meta, input } = useField<string | undefined>(name, {
+        format: (value) => {
+            if (value) {
+                return value.slice(0, 10)
+            }
+            return value
+        },
+    })
+
+    const handleChange: CalendarInputProps['onDateSelect'] = (payload) => {
+        input.onChange(payload?.calendarDateString)
+        input.onBlur()
+    }
+
     return (
-        <FieldRFF name={name}>
-            {(props) => (
-                <CalendarInput
-                    {...props}
-                    input={props.input}
-                    meta={props.meta}
-                    editable
-                    date={props.input.value}
-                    calendar="gregory"
-                    onDateSelect={(date) => {
-                        props.input.onChange(
-                            date ? date?.calendarDateString : ''
-                        )
-                    }}
-                    timeZone={'UTC'}
-                />
-            )}
-        </FieldRFF>
+        <div style={{ width: '400px' }}>
+            {/* TODO: we can remove style above, once inputWidth for CalendarInput is fixed */}
+            <CalendarInput
+                date={input.value}
+                name={name}
+                calendar={calendar as CalendarInputProps['calendar']}
+                onDateSelect={handleChange}
+                timeZone={'utc'}
+                locale={locale}
+                error={meta.touched && meta.invalid && meta.error}
+                validationText={meta.touched && meta.error}
+                onBlur={(_, e) => input.onBlur(e)}
+                clearable
+                label={label}
+                {...calendarInputProps}
+            />
+        </div>
     )
 }

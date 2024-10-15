@@ -72,7 +72,7 @@ export const TranslationDialog = ({
 
                     <TranslationForm
                         model={model}
-                        selectedLocale={selectedLocale && selectedLocale}
+                        selectedLocale={selectedLocale}
                         onClose={onClose}
                     />
                 </ModalContent>

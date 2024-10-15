@@ -1,3 +1,10 @@
+## [0.7.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.7.0...v0.7.1) (2024-10-08)
+
+
+### Bug Fixes
+
+* translationDialog styles bleeding to other components ([#420](https://github.com/dhis2/maintenance-app-beta/issues/420)) ([3f6876b](https://github.com/dhis2/maintenance-app-beta/commit/3f6876b47dc7eeea76cfb5a5e7bd696485f296ef))
+
 # [0.7.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.6.0...v0.7.0) (2024-10-03)
 
 

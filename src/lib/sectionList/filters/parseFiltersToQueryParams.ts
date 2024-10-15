@@ -37,6 +37,7 @@ const filterToQueryParamMap: FilterToQueryParamsMap = {
         }
         return inFilter('categoryCombo.id', value)
     },
+    categoryOptionGroup: (value) => inFilter('categoryOptionGroups.id', value),
     dataSet: (value, section) =>
         section.name === SchemaName.dataElement
             ? inFilter('dataSetElements.dataSet.id', value)
