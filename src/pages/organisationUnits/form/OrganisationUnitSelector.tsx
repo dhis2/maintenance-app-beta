@@ -1,8 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
+import { NoticeBox } from '@dhis2/ui'
 import { IconInfo16 } from '@dhis2/ui-icons'
 import React, { useState } from 'react'
 import { OrganisationUnitField } from '../../../components'
 import { OrganisationUnitFormValue } from '../../../components/form/fields/OrganisationUnitField'
+import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
 import classes from './OrganisationUnitSelector.module.css'
 
 export function OrganisationUnitSelector() {
@@ -13,7 +15,9 @@ export function OrganisationUnitSelector() {
             ? setSelectedOrgUnit(orgUnits[0].displayName)
             : setSelectedOrgUnit(undefined)
 
-    return (
+    const userRootOrgUnits = useCurrentUserRootOrgUnits()
+
+    return userRootOrgUnits.length > 0 ? (
         <>
             <div className={classes.selectedOrgUnitBox}>
                 <OrganisationUnitField
@@ -35,5 +39,11 @@ export function OrganisationUnitSelector() {
                 </div>
             )}
         </>
+    ) : (
+        <NoticeBox title={i18n.t('Creating first organisation unit')}>
+            {i18n.t(
+                'This is the first organisation unit and will be created as the root of the hierarchy.'
+            )}
+        </NoticeBox>
     )
 }

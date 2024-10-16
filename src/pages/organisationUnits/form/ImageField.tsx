@@ -14,7 +14,8 @@ export function ImageField() {
     const dataEngine = useDataEngine()
     const fieldName = 'image'
     const { input } = useField(fieldName)
-    const currentFile: File | undefined = input.value || undefined
+    const currentFile: { name?: string; id?: string } | undefined =
+        input.value || undefined
 
     const uploadFile = async (fileToUpload: File) => {
         const ADD_NEW_FILE_RESOURCE_MUTATION = {
@@ -93,7 +94,7 @@ export function ImageField() {
                     />
 
                     <FileList>
-                        {currentFile && (
+                        {currentFile?.id && (
                             <FileListItem
                                 key={currentFile?.name}
                                 label={currentFile?.name}
