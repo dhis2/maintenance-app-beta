@@ -1,0 +1,17 @@
+.selectedOrgUnitInfo {
+    display: flex;
+    gap: 4px;
+    flex-direction: row;
+    align-items: center;
+}
+
+.selectedOrgUnitBox {
+    width: 600px;
+    height: 350px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    resize: both;
+    overflow: auto;
+    white-space: pre-wrap;
+}
