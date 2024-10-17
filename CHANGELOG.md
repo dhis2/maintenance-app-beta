@@ -1,3 +1,10 @@
+# [0.8.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.7.1...v0.8.0) (2024-10-17)
+
+
+### Features
+
+* add category options form and list ([#419](https://github.com/dhis2/maintenance-app-beta/issues/419)) ([68566e4](https://github.com/dhis2/maintenance-app-beta/commit/68566e4af99c39847f96795eecc617ff44e2d3b3))
+
 ## [0.7.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.7.0...v0.7.1) (2024-10-08)
 
 
