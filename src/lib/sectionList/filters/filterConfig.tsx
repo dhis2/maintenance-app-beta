@@ -1,9 +1,10 @@
-import { StringParam } from 'use-query-params'
+import { StringParam, BooleanParam } from 'use-query-params'
 import { z } from 'zod'
 import { Category, DataElement } from '../../../types/generated'
 import { IDENTIFIABLE_FILTER_KEY } from '../../constants'
 import { isValidUid, parseAccessString } from '../../models'
 import { CustomDelimitedArrayParam } from './customParams'
+import { KeysOfValue } from '../../../types/utility'
 
 const zodArrayIds = z.array(z.string().refine((val) => isValidUid(val)))
 
@@ -22,6 +23,7 @@ export const filterParamsSchema = z
         ),
         valueType: z.array(z.nativeEnum(DataElement.valueType)),
         dataDimensionType: z.nativeEnum(Category.dataDimensionType),
+        ignoreApproval: z.boolean(),
     })
     .partial()
 
@@ -38,6 +40,7 @@ export const filterQueryParamType = {
     categoryOptionGroup: CustomDelimitedArrayParam,
     publicAccess: CustomDelimitedArrayParam,
     dataDimensionType: StringParam,
+    ignoreApproval: BooleanParam,
 } as const satisfies QueryParamsConfigMap
 
 export const validFilterKeys = Object.keys(filterQueryParamType)
@@ -47,6 +50,8 @@ export type ParsedFilterParams = z.infer<typeof filterParamsSchema>
 type MapZodTypeToQueryParamConfig<TZodResultType> =
     TZodResultType extends string
         ? typeof StringParam
+        : TZodResultType extends boolean
+        ? typeof BooleanParam
         : typeof CustomDelimitedArrayParam
 
 /* Type is just used to verify that the ParamType-config matches the zod schema
@@ -62,6 +67,11 @@ export type FilterKey = keyof ParsedFilterParams
 export type ConfigurableFilterKey = Exclude<
     FilterKey,
     typeof IDENTIFIABLE_FILTER_KEY
+>
+
+export type BooleanFilterKey = KeysOfValue<
+    ParsedFilterParams,
+    boolean | undefined
 >
 
 export type FilterKeys = FilterKey[]

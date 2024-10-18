@@ -137,6 +137,19 @@ export const modelListViewsConfig = {
         },
         filters: {
             default: ['dataDimensionType', 'category'],
+            available: ['ignoreApproval'],
+        },
+    },
+    categoryOptionCombo: {
+        columns: {
+            default: ['name', 'code', 'lastUpdated'],
+            overrideDefaultAvailable: true,
+            available: ['categoryCombo', 'ignoreApproval'],
+        },
+        filters: {
+            default: ['categoryCombo'],
+            available: ['ignoreApproval'],
+            overrideDefaultAvailable: true,
         },
     },
 } satisfies SectionListViewConfig<SectionName>

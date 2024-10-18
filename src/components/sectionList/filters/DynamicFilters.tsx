@@ -3,13 +3,14 @@ import { ConfigurableFilterKey } from './../../../lib'
 import {
     AggregationTypeFilter,
     CategoryComboFilter,
-    DataSetFilter,
-    DomainTypeSelectionFilter,
-    ValueTypeSelectionFilter,
-    PublicAccessFilter,
-    DataDimensionTypeFilter,
     Categoryfilter,
     CategoryOptionGroupFilter,
+    DataDimensionTypeFilter,
+    DataSetFilter,
+    DomainTypeSelectionFilter,
+    IgnoreApprovalFilter,
+    PublicAccessFilter,
+    ValueTypeSelectionFilter,
 } from './filterSelectors'
 import { useFilterKeys } from './useFilterKeys'
 
@@ -25,6 +26,7 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
     aggregationType: AggregationTypeFilter,
     publicAccess: PublicAccessFilter,
     dataDimensionType: DataDimensionTypeFilter,
+    ignoreApproval: IgnoreApprovalFilter,
 }
 
 export const DynamicFilters = () => {
