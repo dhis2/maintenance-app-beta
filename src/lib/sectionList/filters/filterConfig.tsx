@@ -74,4 +74,9 @@ export type BooleanFilterKey = KeysOfValue<
     boolean | undefined
 >
 
+export type StringFilterKey = KeysOfValue<
+    ParsedFilterParams,
+    string[] | string | undefined
+>
+
 export type FilterKeys = FilterKey[]
