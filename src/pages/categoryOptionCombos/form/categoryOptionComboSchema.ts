@@ -8,6 +8,7 @@ const { withAttributeValues } = modelFormSchemas
 export const categoryOptionComboSchema = withAttributeValues.extend({
     id: z.string(),
     code: z.string().trim().optional(),
+    ignoreApproval: z.boolean().optional().default(false),
 })
 
 export const initialValues = getDefaults(categoryOptionComboSchema)

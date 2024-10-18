@@ -22,6 +22,7 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     user: i18n.t('Owner'), // user refers to the owner of the object
     zeroIsSignificant: i18n.t('Zero is significant'),
     dataDimensionType: i18n.t('Data dimension type'),
+    ignoreApproval: i18n.t('Ignore data approval'),
 }
 
 const camelCaseToSentenceCase = (camelCase: string) =>
