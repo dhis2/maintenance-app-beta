@@ -1,10 +1,10 @@
-import { StringParam, BooleanParam } from 'use-query-params'
+import { BooleanParam, StringParam } from 'use-query-params'
 import { z } from 'zod'
 import { Category, DataElement } from '../../../types/generated'
+import { KeysOfValue } from '../../../types/utility'
 import { IDENTIFIABLE_FILTER_KEY } from '../../constants'
 import { isValidUid, parseAccessString } from '../../models'
 import { CustomDelimitedArrayParam } from './customParams'
-import { KeysOfValue } from '../../../types/utility'
 
 const zodArrayIds = z.array(z.string().refine((val) => isValidUid(val)))
 
