@@ -1,0 +1,10 @@
+{
+  "version": "v1",
+  "packages": {
+    "@dhis2/cli-style": {
+      "signature": "fa8458d8b7a914c8b399a564b7b02d21",
+      "file": true,
+      "replaced": "^10.5.1"
+    }
+  }
+}

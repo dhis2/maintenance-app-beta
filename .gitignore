@@ -11,3 +11,4 @@ cypress.env.json
 cypress/screenshots/*
 coverage/
 cypress.env.json
+.yalc
