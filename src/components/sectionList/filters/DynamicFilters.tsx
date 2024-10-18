@@ -4,6 +4,7 @@ import {
     AggregationTypeFilter,
     CategoryComboFilter,
     Categoryfilter,
+    CategoryOptionFilter,
     CategoryOptionGroupFilter,
     DataDimensionTypeFilter,
     DataSetFilter,
@@ -18,6 +19,7 @@ type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
 
 const filterKeyToComponentMap: FilterKeyToComponentMap = {
     category: Categoryfilter,
+    categoryOption: CategoryOptionFilter,
     categoryCombo: CategoryComboFilter,
     categoryOptionGroup: CategoryOptionGroupFilter,
     dataSet: DataSetFilter,

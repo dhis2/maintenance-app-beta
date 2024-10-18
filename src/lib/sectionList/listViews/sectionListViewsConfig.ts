@@ -143,12 +143,14 @@ export const modelListViewsConfig = {
     categoryOptionCombo: {
         columns: {
             default: ['name', 'code', 'lastUpdated'],
-            overrideDefaultAvailable: true,
             available: ['categoryCombo', 'ignoreApproval'],
+            // categoryOptionCombo does not have publicAccess
+            overrideDefaultAvailable: true,
         },
         filters: {
-            default: ['categoryCombo'],
+            default: ['categoryOption', 'categoryCombo'],
             available: ['ignoreApproval'],
+            // categoryOptionCombo does not have publicAccess
             overrideDefaultAvailable: true,
         },
     },
