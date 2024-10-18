@@ -61,11 +61,20 @@ export const ManageListView = ({
     const section = useModelSectionHandleOrThrow()
     const { saveView } = useMutateModelListViews()
 
-    const columnsConfig = getColumnsForSection(section.name)
-    const filtersConfig = getFiltersForSection(section.name)
+    const { defaultColumns, defaultFilters, columnsConfig, filtersConfig } =
+        useMemo(() => {
+            const columnsConfig = getColumnsForSection(section.name)
+            const filtersConfig = getFiltersForSection(section.name)
 
-    const defaultColumns = columnsConfig.default.map(toPath)
-    const defaultFilters = filtersConfig.default.map(toFilterKey)
+            const defaultColumns = columnsConfig.default.map(toPath)
+            const defaultFilters = filtersConfig.default.map(toFilterKey)
+            return {
+                defaultColumns,
+                defaultFilters,
+                columnsConfig,
+                filtersConfig,
+            }
+        }, [section.name])
 
     const handleSave = async (values: FormValues) => {
         const isDefault = (arr: string[], def: string[]) =>
