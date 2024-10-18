@@ -3,13 +3,15 @@ import { ConfigurableFilterKey } from './../../../lib'
 import {
     AggregationTypeFilter,
     CategoryComboFilter,
+    Categoryfilter,
+    CategoryOptionFilter,
+    CategoryOptionGroupFilter,
+    DataDimensionTypeFilter,
     DataSetFilter,
     DomainTypeSelectionFilter,
-    ValueTypeSelectionFilter,
+    IgnoreApprovalFilter,
     PublicAccessFilter,
-    DataDimensionTypeFilter,
-    Categoryfilter,
-    CategoryOptionGroupFilter,
+    ValueTypeSelectionFilter,
 } from './filterSelectors'
 import { useFilterKeys } from './useFilterKeys'
 
@@ -17,6 +19,7 @@ type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
 
 const filterKeyToComponentMap: FilterKeyToComponentMap = {
     category: Categoryfilter,
+    categoryOption: CategoryOptionFilter,
     categoryCombo: CategoryComboFilter,
     categoryOptionGroup: CategoryOptionGroupFilter,
     dataSet: DataSetFilter,
@@ -25,6 +28,7 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
     aggregationType: AggregationTypeFilter,
     publicAccess: PublicAccessFilter,
     dataDimensionType: DataDimensionTypeFilter,
+    ignoreApproval: IgnoreApprovalFilter,
 }
 
 export const DynamicFilters = () => {

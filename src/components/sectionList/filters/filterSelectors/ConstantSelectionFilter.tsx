@@ -1,14 +1,14 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelect, SingleSelectOption } from '@dhis2/ui'
 import React from 'react'
-import { FilterKey, useSectionListFilter } from '../../../../lib'
+import { StringFilterKey, useSectionListFilter } from '../../../../lib'
 import { SelectOnChangeObject } from '../../../../types'
 import css from './Filters.module.css'
 
 type ConstantSelectionFilterProps = {
     label: string
     constants: Record<string, string>
-    filterKey: FilterKey
+    filterKey: StringFilterKey
     filterable?: boolean
     formatFilter?: (filter: string | undefined) => string | undefined
 }
