@@ -21,7 +21,7 @@ export function ImageField() {
         const ADD_NEW_FILE_RESOURCE_MUTATION = {
             resource: 'fileResources',
             type: 'create',
-            data: (de: object) => de,
+            data: fileToUpload,
         } as const
         const fileToUploadDetails = {
             name: fileToUpload.name,

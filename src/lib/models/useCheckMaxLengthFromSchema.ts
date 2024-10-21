@@ -8,20 +8,14 @@ export function useCheckMaxLengthFromSchema(
     property: string
 ) {
     const schema = useSchema(model)
-    return useCheckMaxLengthFromProperty(schema.properties[property])
+    return checkMaxLengthFromProperty(schema.properties[property])
 }
 
-export function useCheckMaxLengthFromProperty(
+export function checkMaxLengthFromProperty(
     propertyDetails: SchemaFieldProperty
-) {
+): (value: unknown) => (string | undefined) {
     const maxLength = propertyDetails.length
-    const checkMaxLength = useMemo(
-        () =>
-            maxLength == undefined
-                ? () => undefined
-                : createMaxCharacterLength(maxLength),
-        [maxLength]
-    )
-
-    return checkMaxLength
+    return maxLength == undefined
+            ? () => undefined
+            : createMaxCharacterLength(maxLength)
 }

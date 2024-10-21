@@ -1,22 +1,15 @@
 import { z } from 'zod'
-import { getDefaults } from '../../../lib'
+import { getDefaults, modelFormSchemas } from '../../../lib'
+import i18n from '@dhis2/d2-i18n'
 
-export const organisationUnitSchema = z.object({
+const { withAttributeValues } = modelFormSchemas
+
+export const organisationUnitSchema = withAttributeValues.extend({
     name: z.string().trim().default(''),
     shortName: z.string().trim().default(''),
     code: z.string().trim().optional(),
     description: z.string().trim().optional(),
     image: z.object({ id: z.string() }).optional(),
-    attributeValues: z
-        .array(
-            z.object({
-                value: z.string().optional(),
-                attribute: z.object({
-                    id: z.string(),
-                }),
-            })
-        )
-        .optional(),
     phoneNumber: z.string().optional(),
     contactPerson: z.string().optional(),
     openingDate: z.string().default(''),

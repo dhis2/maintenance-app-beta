@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { SchemaFieldPropertyType, SchemaSection } from '../../types'
 import { composeAsyncValidators, required } from '../form'
 import { useSchema } from '../schemas'
-import { useCheckMaxLengthFromProperty } from './useCheckMaxLengthFromSchema'
+import { checkMaxLengthFromProperty } from './useCheckMaxLengthFromSchema'
 import { useIsFieldValueUnique } from './useIsFieldValueUnique'
 
 export function useValidator({
@@ -20,7 +20,7 @@ export function useValidator({
     const validators = useMemo(() => [] as Validator[], [])
     const params = useParams()
     const modelId = params.id as string
-    const checkMaxLength = useCheckMaxLengthFromProperty(propertyDetails)
+    const checkMaxLength = checkMaxLengthFromProperty(propertyDetails)
     const checkIsValueTaken = useIsFieldValueUnique({
         model: schemaSection.namePlural,
         field: property,
