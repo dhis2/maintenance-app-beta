@@ -13,7 +13,11 @@ import {
 } from '@dhis2/ui'
 import React, { useRef, useState } from 'react'
 import { useHref, useLinkClickHandler } from 'react-router-dom'
-import { TOOLTIPS, BaseListModel } from '../../../lib'
+import {
+    TOOLTIPS,
+    BaseListModel,
+    useCreateLocationSearchState,
+} from '../../../lib'
 import { LinkButton } from '../../LinkButton'
 import { TooltipWrapper } from '../../tooltip'
 import { DeleteAction } from './DeleteAction'
@@ -28,8 +32,14 @@ export const ListActions = ({ children }: React.PropsWithChildren) => {
 }
 
 export const ActionEdit = ({ modelId }: { modelId: string }) => {
+    const preservedSearchState = useCreateLocationSearchState()
     return (
-        <LinkButton small secondary to={modelId}>
+        <LinkButton
+            small
+            secondary
+            to={{ pathname: modelId }}
+            state={preservedSearchState}
+        >
             <IconEdit24 />
         </LinkButton>
     )
@@ -60,8 +70,16 @@ export const ActionMore = ({
     const [open, setOpen] = useState(false)
     const ref = useRef(null)
     const href = useHref(model.id, { relative: 'path' })
+    const preservedSearchState = useCreateLocationSearchState()
 
-    const handleEditClick = useLinkClickHandler(model.id)
+    const handleEditClick = useLinkClickHandler(
+        {
+            pathname: model.id,
+        },
+        {
+            state: preservedSearchState,
+        }
+    )
 
     return (
         <div ref={ref}>
@@ -89,17 +107,23 @@ export const ActionMore = ({
                                 setOpen(false)
                             }}
                         />
-                        <MenuItem
-                            dense
-                            label={i18n.t('Edit')}
-                            icon={<IconEdit16 />}
-                            onClick={(_, e) => {
-                                handleEditClick(e)
-                                setOpen(false)
-                            }}
-                            target="_blank"
-                            href={href}
-                        />
+
+                        <TooltipWrapper
+                            condition={!editable}
+                            content={TOOLTIPS.noEditAccess}
+                        >
+                            <MenuItem
+                                dense
+                                label={i18n.t('Edit')}
+                                icon={<IconEdit16 />}
+                                onClick={(_, e) => {
+                                    handleEditClick(e)
+                                    setOpen(false)
+                                }}
+                                target="_blank"
+                                href={href}
+                            />
+                        </TooltipWrapper>
 
                         {shareable && (
                             <TooltipWrapper
