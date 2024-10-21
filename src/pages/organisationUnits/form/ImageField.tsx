@@ -1,14 +1,25 @@
-import { useDataEngine } from '@dhis2/app-runtime'
+import { useConfig, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
     FileInput,
     FileInputChangeHandler,
     FileList,
     FileListItem,
-    Label,
+    Field as UIField,
 } from '@dhis2/ui'
-import React from 'react'
-import { Field as FieldRFF, useField } from 'react-final-form'
+import React, { useState } from 'react'
+import { useField } from 'react-final-form'
+import css from './ImageField.module.css'
+
+const fileToBase64 = (file: File): Promise<string> => {
+    const reader = new FileReader()
+
+    return new Promise((resolve, reject) => {
+        reader.readAsDataURL(file)
+        reader.onload = () => resolve(reader.result as string)
+        reader.onerror = reject
+    })
+}
 
 export function ImageField() {
     const dataEngine = useDataEngine()
@@ -16,6 +27,8 @@ export function ImageField() {
     const { input } = useField(fieldName)
     const currentFile: { name?: string; id?: string } | undefined =
         input.value || undefined
+
+    const [fileBase64, setFileBase64] = useState<string | undefined>()
 
     const uploadFile = async (fileToUpload: File) => {
         const fileToUploadDetails = {
@@ -61,45 +74,68 @@ export function ImageField() {
         input.onBlur()
     }
     const deleteFile = () => {
+        setFileBase64(undefined)
         input.onChange(undefined)
         input.onBlur()
     }
-    const handleChange: FileInputChangeHandler = ({ files }) => {
+    const handleChange: FileInputChangeHandler = async ({ files }) => {
         const newFile = files[0]
         if (newFile instanceof File) {
             uploadFile(newFile)
+            const file64 = await fileToBase64(newFile)
+            setFileBase64(file64)
         }
     }
 
     return (
-        <FieldRFF<string | undefined> name={fieldName}>
-            {() => (
-                <>
-                    <Label htmlFor={fieldName}>{i18n.t('Image')}</Label>
+        <UIField label={i18n.t('Image')} name="image">
+            <div className={css.fileInputWrapper}>
+                <ImagePreview
+                    fileBase64={fileBase64}
+                    fileResource={input.value}
+                />
+                <FileInput
+                    accept="image/*"
+                    buttonLabel={i18n.t('Upload an image')}
+                    multiple={false}
+                    name={input.name}
+                    onChange={handleChange}
+                    error={!!(input.value && input.value.error)}
+                    valid={!!(input.value && input.value.id)}
+                />
+            </div>
 
-                    <FileInput
-                        accept="image/*"
-                        buttonLabel={i18n.t('Upload an image')}
-                        multiple={false}
-                        name={input.name}
-                        onChange={handleChange}
-                        small
-                        error={!!(input.value && input.value.error)}
-                        valid={!!(input.value && input.value.id)}
+            <FileList>
+                {currentFile?.id && (
+                    <FileListItem
+                        key={currentFile?.name}
+                        label={currentFile?.name}
+                        onRemove={deleteFile}
+                        removeText={i18n.t('Remove')}
                     />
-
-                    <FileList>
-                        {currentFile?.id && (
-                            <FileListItem
-                                key={currentFile?.name}
-                                label={currentFile?.name}
-                                onRemove={deleteFile}
-                                removeText={i18n.t('Remove')}
-                            />
-                        )}
-                    </FileList>
-                </>
-            )}
-        </FieldRFF>
+                )}
+            </FileList>
+        </UIField>
     )
+}
+
+const ImagePreview = ({
+    fileBase64,
+    fileResource,
+}: {
+    fileBase64?: string
+    fileResource?: { id: string }
+}) => {
+    const baseUrl = useConfig().baseUrl
+
+    if (fileBase64) {
+        return <img src={fileBase64} alt={i18n.t('Preview of current icon')} />
+    }
+
+    if (fileResource && fileResource.id) {
+        const src = `${baseUrl}/fileResources/${fileResource.id}/data`
+
+        return <img src={src} alt={i18n.t('Preview of current icon')} />
+    }
+    return null
 }
