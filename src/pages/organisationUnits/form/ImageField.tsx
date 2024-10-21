@@ -18,11 +18,6 @@ export function ImageField() {
         input.value || undefined
 
     const uploadFile = async (fileToUpload: File) => {
-        const ADD_NEW_FILE_RESOURCE_MUTATION = {
-            resource: 'fileResources',
-            type: 'create',
-            data: fileToUpload,
-        } as const
         const fileToUploadDetails = {
             name: fileToUpload.name,
             size: fileToUpload.size,
@@ -33,12 +28,11 @@ export function ImageField() {
             error: undefined,
         })
         try {
-            const postResponse = (await dataEngine.mutate(
-                ADD_NEW_FILE_RESOURCE_MUTATION,
-                {
-                    variables: { file: fileToUpload },
-                }
-            )) as {
+            const postResponse = (await dataEngine.mutate({
+                resource: 'fileResources',
+                type: 'create',
+                data: { file: fileToUpload },
+            })) as {
                 response: {
                     fileResource: { id: string; storageStatus: string }
                 }
@@ -49,6 +43,7 @@ export function ImageField() {
                 error: undefined,
             })
         } catch (e) {
+            console.error(e)
             updateInputValue({
                 ...fileToUploadDetails,
                 id: undefined,
