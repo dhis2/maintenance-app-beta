@@ -1,4 +1,3 @@
-import { useTo } from './useLocationSearchState'
 import { useCallback, useMemo } from 'react'
 import {
     Location,
@@ -76,7 +75,6 @@ export const useNavigateWithSearchState = () => {
     Use this to re-apply the saved-search-state when navigating between pages. */
 export const useToWithSearchState = (to: To) => {
     const location = useLocationWithSearchState()
-
     return useMemo(() => {
         return applySearchState(to, location.state)
     }, [to, location.state])
