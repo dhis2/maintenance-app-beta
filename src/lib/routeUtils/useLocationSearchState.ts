@@ -17,15 +17,15 @@ type LocationSearchState = {
     search?: string
 } | null
 
-export const createLocationState = (search: string): LocationSearchState => ({
+const createLocationState = (search: string): LocationSearchState => ({
     search,
 })
 
-const applySearchState = (to: To, location: LocationSearchState) => {
+const applySearchState = (to: To, locationSearchState: LocationSearchState) => {
     if (typeof to === 'string') {
-        return { pathname: to, search: location?.search }
+        return { pathname: to, search: locationSearchState?.search }
     }
-    return { ...to, search: to.search || location?.search }
+    return { ...to, search: to.search || locationSearchState?.search }
 }
 
 /**
@@ -33,7 +33,7 @@ const applySearchState = (to: To, location: LocationSearchState) => {
  * Pass the returned state to Link components or as options to navigate as "state"-property.
  * @returns an object that holds the current search-state.
  */
-export const useCreateLocationSearchState = () => {
+export const useLocationSearchState = () => {
     const location = useLocation()
 
     return useMemo(

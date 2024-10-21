@@ -13,11 +13,7 @@ import {
 } from '@dhis2/ui'
 import React, { useRef, useState } from 'react'
 import { useHref, useLinkClickHandler } from 'react-router-dom'
-import {
-    TOOLTIPS,
-    BaseListModel,
-    useCreateLocationSearchState,
-} from '../../../lib'
+import { TOOLTIPS, BaseListModel, useLocationSearchState } from '../../../lib'
 import { LinkButton } from '../../LinkButton'
 import { TooltipWrapper } from '../../tooltip'
 import { DeleteAction } from './DeleteAction'
@@ -32,7 +28,7 @@ export const ListActions = ({ children }: React.PropsWithChildren) => {
 }
 
 export const ActionEdit = ({ modelId }: { modelId: string }) => {
-    const preservedSearchState = useCreateLocationSearchState()
+    const preservedSearchState = useLocationSearchState()
     return (
         <LinkButton
             small
@@ -70,7 +66,7 @@ export const ActionMore = ({
     const [open, setOpen] = useState(false)
     const ref = useRef(null)
     const href = useHref(model.id, { relative: 'path' })
-    const preservedSearchState = useCreateLocationSearchState()
+    const preservedSearchState = useLocationSearchState()
 
     const handleEditClick = useLinkClickHandler(
         {

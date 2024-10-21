@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import {
     routePaths,
     useCanCreateModelInSection,
-    useCreateLocationSearchState,
+    useLocationSearchState,
     useModelSectionHandleOrThrow,
 } from '../../../lib'
 import { ManageListViewDialog } from '../listView/ManageListViewDialog'
@@ -22,7 +22,7 @@ export const ToolbarNormal = ({
     const [manageColumnsOpen, setManageColumnsOpen] = React.useState(false)
     const section = useModelSectionHandleOrThrow()
     const canCreateModel = useCanCreateModelInSection(section)
-    const locationState = useCreateLocationSearchState()
+    const locationState = useLocationSearchState()
 
     const handleClose = () => setManageColumnsOpen(false)
     return (
