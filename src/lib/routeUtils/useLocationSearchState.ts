@@ -29,6 +29,11 @@ const applySearchState = (to: To, location: LocationSearchState) => {
     return { ...to, search: to.search || location?.search }
 }
 
+/**
+ * Use this to preserve the current search-state between pages.
+ * Pass the returned state to Link components or as options to navigate as "state"-property.
+ * @returns an object that holds the current search-state.
+ */
 export const useCreateLocationSearchState = () => {
     const location = useLocation()
 
@@ -39,12 +44,14 @@ export const useCreateLocationSearchState = () => {
 }
 
 /** This is just a type-wrapper, applying the LocationSearchState type to useLocation  */
-export const useLocationWithSearchState = (): Location<LocationSearchState> => {
-    return useLocation()
-}
+export const useLocationWithSearchState: () => Location<LocationSearchState> =
+    useLocation
 
 /**
  * Wraps react-router "useNavigate" to include the search state as query-Paramters, retrieved from the location state.
+ *
+ * Use this to reapply the saved search-state when navigating between pages.
+ *
  * Note that the current route has to include the search state in the location state,
  * which can be achieved by passing "state" to Link components or as options to navigate.
  * This will put the transiently saved search-state back in as active search-params (eg. result in query-Params in the URL).
@@ -65,6 +72,8 @@ export const useNavigateWithSearchState = () => {
     return overiddenNavigate
 }
 
+/* Helper-hook to create a "to"-object that can be passed to react-router Link components (and navigate).
+    Use this to re-apply the saved-search-state when navigating between pages. */
 export const useToWithSearchState = (to: To) => {
     const location = useLocationWithSearchState()
 

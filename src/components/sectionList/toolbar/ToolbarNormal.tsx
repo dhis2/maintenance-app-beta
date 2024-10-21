@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import {
     routePaths,
     useCanCreateModelInSection,
+    useCreateLocationSearchState,
     useModelSectionHandleOrThrow,
 } from '../../../lib'
 import { ManageListViewDialog } from '../listView/ManageListViewDialog'
@@ -21,12 +22,13 @@ export const ToolbarNormal = ({
     const [manageColumnsOpen, setManageColumnsOpen] = React.useState(false)
     const section = useModelSectionHandleOrThrow()
     const canCreateModel = useCanCreateModelInSection(section)
+    const locationState = useCreateLocationSearchState()
 
     const handleClose = () => setManageColumnsOpen(false)
     return (
         <DataTableToolbar className={css.listHeaderNormal}>
             {canCreateModel && (
-                <Link to={routePaths.sectionNew}>
+                <Link to={routePaths.sectionNew} state={locationState}>
                     <Button small icon={<IconAdd24 />}>
                         {i18n.t('New')}
                     </Button>
