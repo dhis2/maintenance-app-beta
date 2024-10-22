@@ -10,20 +10,28 @@ import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
 
 type OrganisationUnitFieldProps = {
     name?: string
+    singleSelection?: boolean
+    onChange?: (orgUnits: OrganisationUnitFormValue[]) => void
 }
 
-type OrganisationUnitFormValue = {
+export type OrganisationUnitFormValue = {
     id: string
     path: string
     displayName: string
 }
 
-export const OrganisationUnitField = ({ name }: OrganisationUnitFieldProps) => {
+export const OrganisationUnitField = ({
+    name,
+    onChange,
+    singleSelection = false,
+}: OrganisationUnitFieldProps) => {
     const { input, meta } = useField<
-        OrganisationUnitFormValue[],
+        OrganisationUnitFormValue[] | '',
         HTMLElement,
         OrganisationUnitFormValue[]
-    >(name ?? 'organisationUnits')
+    >(name ?? 'organisationUnits', {
+        format: (value) => (value === '' ? [] : value),
+    })
 
     const roots = useCurrentUserRootOrgUnits()
 
@@ -35,7 +43,9 @@ export const OrganisationUnitField = ({ name }: OrganisationUnitFieldProps) => {
         id,
         path,
     }) => {
-        const prevSelected = new Map(input.value.map((ou) => [ou.path, ou]))
+        const prevSelected = input.value
+            ? new Map(input.value.map((ou) => [ou.path, ou]))
+            : new Map()
         const newSelected = selected.map((selectedPath) => {
             const prev = prevSelected.get(selectedPath)
             return prev ?? { id, path, displayName }
@@ -43,6 +53,9 @@ export const OrganisationUnitField = ({ name }: OrganisationUnitFieldProps) => {
 
         input.onChange(newSelected)
         input.onBlur()
+        if (onChange) {
+            onChange(newSelected)
+        }
     }
 
     const selectedPaths = input.value?.map((ou) => ou.path) ?? []
@@ -55,6 +68,7 @@ export const OrganisationUnitField = ({ name }: OrganisationUnitFieldProps) => {
         >
             <OrganisationUnitTree
                 roots={rootIds}
+                singleSelection={singleSelection}
                 onChange={handleChange}
                 selected={selectedPaths}
                 initiallyExpanded={rootIds}

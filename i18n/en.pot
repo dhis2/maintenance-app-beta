@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-30T15:09:50.864Z\n"
-"PO-Revision-Date: 2024-09-30T15:09:50.864Z\n"
+"POT-Creation-Date: 2024-10-22T10:31:57.931Z\n"
+"PO-Revision-Date: 2024-10-22T10:31:57.932Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -108,6 +108,9 @@ msgstr "{{fieldLabel}} (required)"
 msgid "Name"
 msgstr "Name"
 
+msgid "Select organisation units"
+msgstr "Select organisation units"
+
 msgid "Often used in reports where space is limited"
 msgstr "Often used in reports where space is limited"
 
@@ -119,21 +122,6 @@ msgstr "Failed to load {{label}}"
 
 msgid "Failed to load"
 msgstr "Failed to load"
-
-msgid "Download"
-msgstr "Download"
-
-msgid "Merge"
-msgstr "Merge"
-
-msgid "Delete source data element values"
-msgstr "Delete source data element values"
-
-msgid "Last updated"
-msgstr "Last updated"
-
-msgid "Discard"
-msgstr "Discard"
 
 msgid "Aggregation level(s)"
 msgstr "Aggregation level(s)"
@@ -234,6 +222,9 @@ msgstr "Created"
 msgid "Last updated by"
 msgstr "Last updated by"
 
+msgid "Last updated"
+msgstr "Last updated"
+
 msgid "Id"
 msgstr "Id"
 
@@ -254,6 +245,9 @@ msgstr "Details"
 
 msgid "Failed to load details"
 msgstr "Failed to load details"
+
+msgid "Download"
+msgstr "Download"
 
 msgid "Download {{section}}"
 msgstr "Download {{section}}"
@@ -293,6 +287,9 @@ msgstr "Clear all filters"
 
 msgid "Category"
 msgstr "Category"
+
+msgid "Category option group"
+msgstr "Category option group"
 
 msgid "Type to filter options"
 msgstr "Type to filter options"
@@ -446,9 +443,6 @@ msgstr "Category option combination"
 
 msgid "Category option combinations"
 msgstr "Category option combinations"
-
-msgid "Category option group"
-msgstr "Category option group"
 
 msgid "Category option groups"
 msgstr "Category option groups"
@@ -933,6 +927,25 @@ msgstr "Filter selected categories"
 msgid "At least one category is required"
 msgstr "At least one category is required"
 
+msgid "Set up the basic information for this category option."
+msgstr "Set up the basic information for this category option."
+
+msgid "An alternative name used in section or automatic data entry forms."
+msgstr "An alternative name used in section or automatic data entry forms."
+
+msgid "Availability configuration"
+msgstr "Availability configuration"
+
+msgid ""
+"Choose when, and for which organisation units this category option will be "
+"available."
+msgstr ""
+"Choose when, and for which organisation units this category option will be "
+"available."
+
+msgid "End date should be after start date"
+msgstr "End date should be after start date"
+
 msgid "Create data element group"
 msgstr "Create data element group"
 
@@ -990,9 +1003,6 @@ msgstr "Use a pattern to limit what information can be entered."
 
 msgid "e.g. 999-000-0000"
 msgstr "e.g. 999-000-0000"
-
-msgid "An alternative name used in section or automatic data entry forms."
-msgstr "An alternative name used in section or automatic data entry forms."
 
 msgid "Selected legends"
 msgstr "Selected legends"
@@ -1064,6 +1074,74 @@ msgstr ""
 "aggregation level available) as the data source, and PHU data will not be "
 "included. PHU will still be available for the PHU level, but not included "
 "in the aggregations to the levels above."
+
+msgid "Upload an image"
+msgstr "Upload an image"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Max size 5MB. Supported file size are .jpg, .png, and .gif."
+msgstr "Max size 5MB. Supported file size are .jpg, .png, and .gif."
+
+msgid "Preview of current icon"
+msgstr "Preview of current icon"
+
+msgid "Placement in hierarchy"
+msgstr "Placement in hierarchy"
+
+msgid ""
+"Choose where this new organisation unit should be placed in the existing "
+"hierarchy"
+msgstr ""
+"Choose where this new organisation unit should be placed in the existing "
+"hierarchy"
+
+msgid "Set up the basic information for this organisation unit."
+msgstr "Set up the basic information for this organisation unit."
+
+msgid "Opening date"
+msgstr "Opening date"
+
+msgid "Closed date"
+msgstr "Closed date"
+
+msgid "Comment"
+msgstr "Comment"
+
+msgid "Contact person"
+msgstr "Contact person"
+
+msgid "Address"
+msgstr "Address"
+
+msgid "A web link that provides extra information."
+msgstr "A web link that provides extra information."
+
+msgid "Location"
+msgstr "Location"
+
+msgid "Set up the organisation unit location."
+msgstr "Set up the organisation unit location."
+
+msgid "Latitude"
+msgstr "Latitude"
+
+msgid "Longitude"
+msgstr "Longitude"
+
+msgid "New organisation unit will be created inside {{displayName}}"
+msgstr "New organisation unit will be created inside {{displayName}}"
+
+msgid "Creating first organisation unit"
+msgstr "Creating first organisation unit"
+
+msgid ""
+"This is the first organisation unit and will be created as the root of the "
+"hierarchy."
+msgstr ""
+"This is the first organisation unit and will be created as the root of the "
+"hierarchy."
 
 msgid "No organisation units available"
 msgstr "No organisation units available"

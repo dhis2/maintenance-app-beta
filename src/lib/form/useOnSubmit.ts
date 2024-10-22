@@ -58,8 +58,10 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
 
 export const useOnSubmitNew = <TFormValues>({
     section,
+    valueFormatter,
 }: {
     section: ModelSection
+    valueFormatter?: (values: TFormValues) => Record<string, unknown>
 }) => {
     const createModel = useCreateModel(section.namePlural)
     const saveAlert = useAlert(
@@ -80,7 +82,10 @@ export const useOnSubmitNew = <TFormValues>({
                 })
                 return
             }
-            const errors = await createModel(values)
+            const formattedValues = valueFormatter
+                ? valueFormatter(values)
+                : values
+            const errors = await createModel(formattedValues)
             if (errors) {
                 return errors
             }
