@@ -2,7 +2,12 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { DefaultEditFormContents, FormBase } from '../../components'
-import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
+import {
+    ATTRIBUTE_VALUES_FIELD_FILTERS,
+    DEFAULT_FIELD_FILTERS,
+    SECTIONS_MAP,
+    useOnSubmitEdit,
+} from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PickWithFieldFilters } from '../../types/generated'
 import { CategoryOptionGroup } from '../../types/models'
@@ -11,6 +16,7 @@ import { validate } from './form/categoryOptionGroupSchema'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
+    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
     'shortName',
     'code',
@@ -18,7 +24,6 @@ const fieldFilters = [
     'categoryOptions[id,displayName]',
     'dataDimension',
     'dataDimensionType',
-    'attributeValues[value,attribute[id]]',
 ] as const
 
 export type CategoryOptionGroupFormValues = PickWithFieldFilters<
