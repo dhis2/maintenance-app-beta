@@ -5,7 +5,7 @@ import { DefaultEditFormContents, FormBase } from '../../components'
 import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PickWithFieldFilters } from '../../types/generated'
-import { Category } from '../../types/models'
+import { CategoryOptionGroup } from '../../types/models'
 import CategoryOptionGroupFormFields from './form/CategoryOptionGroupFormFields'
 import { validate } from './form/categoryOptionGroupSchema'
 
@@ -21,8 +21,8 @@ const fieldFilters = [
     'attributeValues[value,attribute[id]]',
 ] as const
 
-export type CategoryFormValues = PickWithFieldFilters<
-    Category,
+export type CategoryOptionGroupFormValues = PickWithFieldFilters<
+    CategoryOptionGroup,
     typeof fieldFilters
 >
 
@@ -37,16 +37,16 @@ export const Component = () => {
             fields: fieldFilters.concat(),
         },
     }
-    const categoryQuery = useQuery({
+    const categoryOptionGroupQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<CategoryFormValues>,
+        queryFn: queryFn<CategoryOptionGroupFormValues>,
     })
 
     return (
         <FormBase
             onSubmit={useOnSubmitEdit({ section, modelId })}
             section={section}
-            initialValues={categoryQuery.data}
+            initialValues={categoryOptionGroupQuery.data}
             validate={validate}
         >
             <DefaultEditFormContents section={section}>
