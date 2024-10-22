@@ -12,7 +12,12 @@ import {
 } from '../../components'
 import { useCustomAttributesQuery } from '../../components/form'
 import { AttributeMetadata } from '../../components/form/attributes/useCustomAttributesQuery'
-import { SCHEMA_SECTIONS, getSectionPath, validate } from '../../lib'
+import {
+    SCHEMA_SECTIONS,
+    getSectionPath,
+    useNavigateWithSearchState,
+    validate,
+} from '../../lib'
 import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
 import { getAllAttributeValues } from '../../lib/models/attributes'
 import { JsonPatchOperation } from '../../types'
@@ -130,7 +135,7 @@ function usePatchDirtyFields() {
 }
 
 export const Component = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigateWithSearchState()
     const params = useParams()
     const dataElementId = params.id as string
     const dataElementQuery = useDataElementQuery(dataElementId)
@@ -193,7 +198,7 @@ function FormContents({
     submitError?: string
 }) {
     const formErrorRef = useRef<HTMLDivElement | null>(null)
-    const navigate = useNavigate()
+    const navigate = useNavigateWithSearchState()
 
     useEffect(() => {
         if (submitError) {
