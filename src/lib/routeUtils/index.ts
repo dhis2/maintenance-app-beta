@@ -5,3 +5,4 @@ export {
     getSectionNewPath,
 } from './routePaths'
 export * from './useSectionHandle'
+export * from './useLocationSearchState'

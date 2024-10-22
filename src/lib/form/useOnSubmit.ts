@@ -5,7 +5,7 @@ import { FormProps } from 'react-final-form'
 import { useNavigate } from 'react-router-dom'
 import { ModelSection } from '../../types'
 import { IdentifiableObject } from '../../types/generated'
-import { getSectionPath } from '../routeUtils'
+import { getSectionPath, useNavigateWithSearchState } from '../routeUtils'
 import { createJsonPatchOperations } from './createJsonPatchOperations'
 import { useCreateModel } from './useCreateModel'
 import { usePatchModel } from './usePatchModel'
@@ -26,7 +26,8 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
         ({ message }) => message,
         (options) => options
     )
-    const navigate = useNavigate()
+
+    const navigate = useNavigateWithSearchState()
 
     return useMemo<OnSubmit<TFormValues>>(
         () => async (values, form) => {
@@ -68,7 +69,7 @@ export const useOnSubmitNew = <TFormValues>({
         ({ message }) => message,
         (options) => options
     )
-    const navigate = useNavigate()
+    const navigate = useNavigateWithSearchState()
 
     return useMemo<OnSubmit<TFormValues>>(
         () => async (values) => {
