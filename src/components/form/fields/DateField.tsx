@@ -36,6 +36,7 @@ export function DateField({
         <div style={{ width: '400px' }}>
             {/* TODO: we can remove style above, once inputWidth for CalendarInput is fixed */}
             <CalendarInput
+                label={label}
                 date={input.value}
                 name={name}
                 calendar={calendar as CalendarInputProps['calendar']}
@@ -46,7 +47,6 @@ export function DateField({
                 validationText={meta.touched && meta.error}
                 onBlur={(_, e) => input.onBlur(e)}
                 clearable
-                label={label}
                 {...calendarInputProps}
             />
         </div>
