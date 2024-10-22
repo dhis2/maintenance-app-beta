@@ -1,3 +1,11 @@
+# [0.9.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.8.0...v0.9.0) (2024-10-22)
+
+
+### Features
+
+* new org unit form ([cee3edc](https://github.com/dhis2/maintenance-app-beta/commit/cee3edc5eded14f57dd6ec076baf7f8733b19ea5))
+* preserve list state between form navigation ([#425](https://github.com/dhis2/maintenance-app-beta/issues/425)) ([da1f11f](https://github.com/dhis2/maintenance-app-beta/commit/da1f11f5a53c6c1f8874d9ce7af449f1d02e6ffc))
+
 # [0.8.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.7.1...v0.8.0) (2024-10-17)
 
 
