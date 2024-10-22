@@ -1,0 +1,9 @@
+
+.fileInputWrapper {
+    display: flex;
+    gap: var(--spacers-dp4);
+}
+
+.fileInputWrapper img {
+    height: 36px;
+}
