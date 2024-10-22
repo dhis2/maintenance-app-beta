@@ -2,7 +2,6 @@ import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 import { getDefaults, modelFormSchemas } from '../../../lib'
 import { createFormValidate } from '../../../lib/form/validate'
-import { CategoryComboFormValues } from '../Edit'
 import { CategoryCombo } from './../../../types/generated/models'
 
 const { identifiable, withAttributeValues, referenceCollection } =
@@ -21,7 +20,6 @@ export const categoryComboSchema = identifiable
             .default([]),
     })
 
-export const initialValues: Partial<CategoryComboFormValues> =
-    getDefaults(categoryComboSchema)
+export const initialValues = getDefaults(categoryComboSchema)
 
 export const validate = createFormValidate(categoryComboSchema)

@@ -19,6 +19,6 @@ export function validate<FormValues>(
     return allFormErrors
 }
 
-export function createFormValidate<FormValues>(zodSchema: z.AnyZodObject) {
-    return (values: FormValues) => validate(zodSchema, values)
+export function createFormValidate(zodSchema: z.ZodTypeAny) {
+    return <FormValues>(values: FormValues) => validate(zodSchema, values)
 }

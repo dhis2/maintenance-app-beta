@@ -9,31 +9,34 @@ import {
     useOnSubmitEdit,
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import {
-    CategoryOptionCombo,
-    PickWithFieldFilters,
-} from '../../types/generated'
-import { validate, CategoryOptionComboFormFields } from './form'
+import { CategoryOption, PickWithFieldFilters } from '../../types/generated'
+import { validate, CategoryOptionFormFields } from './form'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
     'code',
+    'shortName',
+    'description',
+    'startDate',
+    'endDate',
+    'organisationUnits[id,displayName,path]',
 ] as const
 
-export type CategoryOptionComboFormValues = PickWithFieldFilters<
-    CategoryOptionCombo,
+export type CategoryOptionFormValues = PickWithFieldFilters<
+    CategoryOption,
     typeof fieldFilters
 >
 
-const section = SECTIONS_MAP.categoryOptionCombo
+const section = SECTIONS_MAP.categoryOption
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const modelId = useParams().id as string
+
     const query = {
-        resource: 'categoryOptionCombos',
+        resource: 'categoryOptions',
         id: modelId,
         params: {
             fields: fieldFilters.concat(),
@@ -41,7 +44,7 @@ export const Component = () => {
     }
     const categoryOptionCombo = useQuery({
         queryKey: [query],
-        queryFn: queryFn<CategoryOptionComboFormValues>,
+        queryFn: queryFn<CategoryOptionFormValues>,
     })
 
     return (
@@ -52,7 +55,7 @@ export const Component = () => {
             validate={validate}
         >
             <DefaultEditFormContents section={section}>
-                <CategoryOptionComboFormFields />
+                <CategoryOptionFormFields />
             </DefaultEditFormContents>
         </FormBase>
     )

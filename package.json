@@ -1,6 +1,6 @@
 {
     "name": "maintenance-app",
-    "version": "0.7.1",
+    "version": "0.8.0",
     "description": "",
     "license": "BSD-3-Clause",
     "private": true,
@@ -39,7 +39,8 @@
     },
     "dependencies": {
         "@dhis2/app-runtime": "^3.9.3",
-        "@dhis2/ui": "^9.11.3",
+        "@dhis2/multi-calendar-dates": "^2.0.0-alpha.5",
+        "@dhis2/ui": "^10.0.0-alpha.3",
         "@tanstack/react-table": "^8.16.0",
         "@types/lodash": "^4.14.198",
         "lodash": "^4.17.21",
@@ -53,6 +54,8 @@
         "zustand": "^4.4.0"
     },
     "resolutions": {
-        "eslint": "^8"
+        "eslint": "^8",
+        "@dhis2/multi-calendar-dates": "^2.0.0-alpha.5",
+        "@dhis2/ui": "^10.0.0-alpha.3"
     }
 }
