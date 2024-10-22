@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-16T11:01:15.583Z\n"
-"PO-Revision-Date: 2024-10-16T11:01:15.584Z\n"
+"POT-Creation-Date: 2024-10-22T10:31:57.931Z\n"
+"PO-Revision-Date: 2024-10-22T10:31:57.932Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1081,6 +1081,12 @@ msgstr "Upload an image"
 msgid "Remove"
 msgstr "Remove"
 
+msgid "Max size 5MB. Supported file size are .jpg, .png, and .gif."
+msgstr "Max size 5MB. Supported file size are .jpg, .png, and .gif."
+
+msgid "Preview of current icon"
+msgstr "Preview of current icon"
+
 msgid "Placement in hierarchy"
 msgstr "Placement in hierarchy"
 
@@ -1124,8 +1130,8 @@ msgstr "Latitude"
 msgid "Longitude"
 msgstr "Longitude"
 
-msgid "New organisation unit will be created inside"
-msgstr "New organisation unit will be created inside"
+msgid "New organisation unit will be created inside {{displayName}}"
+msgstr "New organisation unit will be created inside {{displayName}}"
 
 msgid "Creating first organisation unit"
 msgstr "Creating first organisation unit"

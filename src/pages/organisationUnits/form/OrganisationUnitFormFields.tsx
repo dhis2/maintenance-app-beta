@@ -51,6 +51,7 @@ export function OrganisationUnitFormField() {
                     <DateField
                         name="openingDate"
                         label={i18n.t('Opening date')}
+                        required
                     />
                 </StandardFormField>
                 <StandardFormField>

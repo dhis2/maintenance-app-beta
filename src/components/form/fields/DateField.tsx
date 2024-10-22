@@ -10,10 +10,12 @@ type DateFieldProps = Omit<
     name: string
     // this is not exposed in CalendarInputProps - but it should be
     label?: string
+    required?: boolean
 }
 export function DateField({
     name,
     label,
+    required,
     ...calendarInputProps
 }: DateFieldProps) {
     const calendar = useSystemSetting('keyCalendar')
@@ -43,10 +45,10 @@ export function DateField({
                 timeZone={'utc'}
                 locale={locale}
                 error={meta.touched && meta.invalid && meta.error}
-                validationText={meta.touched && meta.error}
+                validationText={meta.touched ? meta.error : undefined}
                 onBlur={(_, e) => input.onBlur(e)}
                 clearable
-                label={label}
+                label={required ? `${label} *` : label}
                 {...calendarInputProps}
             />
         </div>

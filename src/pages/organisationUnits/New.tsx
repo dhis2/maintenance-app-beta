@@ -14,7 +14,6 @@ const formatFormValues: (values: FormValues) => Record<string, unknown> = (
 ) => {
     return {
         ...values,
-        parent: values.parent && values.parent[0],
         geometry:
             values.geometry?.longitude && values.geometry?.latitude
                 ? {

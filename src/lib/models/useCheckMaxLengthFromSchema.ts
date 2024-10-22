@@ -1,5 +1,4 @@
 import { createMaxCharacterLength } from '@dhis2/ui'
-import { useMemo } from 'react'
 import { SchemaFieldProperty, SchemaName } from '../../types'
 import { useSchema } from '../schemas'
 
@@ -13,9 +12,9 @@ export function useCheckMaxLengthFromSchema(
 
 export function checkMaxLengthFromProperty(
     propertyDetails: SchemaFieldProperty
-): (value: unknown) => (string | undefined) {
+): (value: unknown) => string | undefined {
     const maxLength = propertyDetails.length
     return maxLength == undefined
-            ? () => undefined
-            : createMaxCharacterLength(maxLength)
+        ? () => undefined
+        : createMaxCharacterLength(maxLength)
 }

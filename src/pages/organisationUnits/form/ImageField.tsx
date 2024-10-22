@@ -6,6 +6,7 @@ import {
     FileList,
     FileListItem,
     Field as UIField,
+    Help,
 } from '@dhis2/ui'
 import React, { useState } from 'react'
 import { useField } from 'react-final-form'
@@ -24,9 +25,7 @@ const fileToBase64 = (file: File): Promise<string> => {
 export function ImageField() {
     const dataEngine = useDataEngine()
     const fieldName = 'image'
-    const { input } = useField(fieldName)
-    const currentFile: { name?: string; id?: string } | undefined =
-        input.value || undefined
+    const { input } = useField(fieldName, { format: (value) => value })
 
     const [fileBase64, setFileBase64] = useState<string | undefined>()
 
@@ -106,15 +105,20 @@ export function ImageField() {
             </div>
 
             <FileList>
-                {currentFile?.id && (
+                {input.value?.id && (
                     <FileListItem
-                        key={currentFile?.name}
-                        label={currentFile?.name}
+                        key={input.value?.id}
+                        label={input.value?.name}
                         onRemove={deleteFile}
                         removeText={i18n.t('Remove')}
                     />
                 )}
             </FileList>
+            <Help>
+                {i18n.t(
+                    'Max size 5MB. Supported file size are .jpg, .png, and .gif.'
+                )}
+            </Help>
         </UIField>
     )
 }

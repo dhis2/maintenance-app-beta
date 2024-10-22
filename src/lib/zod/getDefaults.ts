@@ -12,7 +12,6 @@ type WrapNonDefaultsInOptional<T extends z.ZodTypeAny> = T extends z.ZodEffects<
 
 // inspired by: https://github.com/colinhacks/zod/discussions/1953#discussioncomment-5695528
 // added some type-improvements
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getDefaults<T extends z.AnyZodObject | z.ZodEffects<any>>(
     schema: T
 ): z.infer<WrapNonDefaultsInOptional<T>> {
@@ -34,15 +33,13 @@ export function getDefaults<T extends z.AnyZodObject | z.ZodEffects<any>>(
         if (innerSchema instanceof z.ZodArray) {
             return []
         }
-        // return an empty string if it is
-        if (innerSchema instanceof z.ZodString) {
-            return ''
-        }
         // return an content of object recursivly
         if (innerSchema instanceof z.ZodObject) {
             return getDefaults(innerSchema)
         }
-
+        if (innerSchema instanceof z.ZodOptional) {
+            return undefined
+        }
         if (!('innerType' in innerSchema._def)) {
             return undefined
         }
