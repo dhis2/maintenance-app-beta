@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { DataElement } from '../../../types/generated'
 
 export const dataElementSchema = z
     .object({
