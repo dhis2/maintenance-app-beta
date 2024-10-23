@@ -23,12 +23,12 @@ function CategoryOptionGroupFormFields() {
                     {i18n.t('Basic information')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t('Set up the basic information for this category.')}
+                    {i18n.t('Set up the basic information for this category option group.')}
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />
                 <DescriptionField
                     schemaSection={section}
-                    helpText={i18n.t('Explain the purpose of this category.')}
+                    helpText={i18n.t('Explain the purpose of this category option group.')}
                 />
             </StandardFormSection>
 
@@ -38,7 +38,7 @@ function CategoryOptionGroupFormFields() {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose how this category will be used to capture and analyze'
+                        'Choose how this category option  will be used to capture and analyze'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
@@ -68,7 +68,7 @@ function CategoryOptionGroupFormFields() {
                         component={CheckboxFieldFF}
                         label={i18n.t('Use as data dimension')}
                         helpText={i18n.t(
-                            'Category will be available to the analytics as another dimension'
+                            'Category option group will be available to the analytics as another dimension'
                         )}
                     />
                 </StandardFormField>
