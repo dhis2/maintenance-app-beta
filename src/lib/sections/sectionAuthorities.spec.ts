@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 import { SystemSettings } from '../../types'
 import { OVERVIEW_SECTIONS, SECTIONS_MAP } from '../constants'
 import { useSchemaStore } from '../schemas/schemaStore'
