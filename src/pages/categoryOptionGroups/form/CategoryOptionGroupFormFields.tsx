@@ -1,23 +1,21 @@
 import i18n from '@dhis2/d2-i18n'
-import { CheckboxFieldFF, RadioFieldFF } from '@dhis2/ui'
+import { RadioFieldFF, CheckboxFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field } from 'react-final-form'
 import {
-    CustomAttributesSection,
     DefaultIdentifiableFields,
-    StandardFormField,
-    StandardFormSection,
-    StandardFormSectionTitle,
-    StandardFormSectionDescription,
     DescriptionField,
     HorizontalFieldGroup,
     ModelTransferField,
+    StandardFormField,
+    StandardFormSection,
+    StandardFormSectionDescription,
+    StandardFormSectionTitle,
 } from '../../../components'
 import { SECTIONS_MAP } from '../../../lib'
 
-export const CategoryFormFields = () => {
-    const section = SECTIONS_MAP.category
-
+function CategoryOptionGroupFormFields() {
+    const section = SECTIONS_MAP.categoryOptionGroup
     return (
         <>
             <StandardFormSection>
@@ -25,7 +23,9 @@ export const CategoryFormFields = () => {
                     {i18n.t('Basic information')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t('Set up the basic information for this category.')}
+                    {i18n.t(
+                        'Set up the basic information for this category option group.'
+                    )}
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />
                 <DescriptionField
@@ -42,7 +42,7 @@ export const CategoryFormFields = () => {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose how this category option group will be used to capture and analyze'
+                        'Choose how this category option  will be used to capture and analyze'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
@@ -86,7 +86,7 @@ export const CategoryFormFields = () => {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose the category options to include in this category option group.'
+                        'Choose the category options to include in this category.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
@@ -111,7 +111,8 @@ export const CategoryFormFields = () => {
                     </StandardFormField>
                 </StandardFormField>
             </StandardFormSection>
-            <CustomAttributesSection />
         </>
     )
 }
+
+export default CategoryOptionGroupFormFields
