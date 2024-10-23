@@ -23,12 +23,16 @@ function CategoryOptionGroupFormFields() {
                     {i18n.t('Basic information')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t('Set up the basic information for this category option group.')}
+                    {i18n.t(
+                        'Set up the basic information for this category option group.'
+                    )}
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />
                 <DescriptionField
                     schemaSection={section}
-                    helpText={i18n.t('Explain the purpose of this category option group.')}
+                    helpText={i18n.t(
+                        'Explain the purpose of this category option group.'
+                    )}
                 />
             </StandardFormSection>
 
