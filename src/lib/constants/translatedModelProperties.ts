@@ -3,6 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 const TRANSLATED_PROPERTY: Record<string, string> = {
     aggregationType: i18n.t('Aggregation type'),
     categoryCombo: i18n.t('Category combination'),
+    categoryOption: i18n.t('Category option'),
     code: i18n.t('Code'),
     createdBy: i18n.t('Created by'),
     description: i18n.t('Description'),
@@ -22,6 +23,7 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     user: i18n.t('Owner'), // user refers to the owner of the object
     zeroIsSignificant: i18n.t('Zero is significant'),
     dataDimensionType: i18n.t('Data dimension type'),
+    ignoreApproval: i18n.t('Ignore data approval'),
 }
 
 const camelCaseToSentenceCase = (camelCase: string) =>

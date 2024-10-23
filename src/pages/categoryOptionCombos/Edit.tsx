@@ -20,6 +20,7 @@ const fieldFilters = [
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
     'code',
+    'ignoreApproval',
 ] as const
 
 export type CategoryOptionComboFormValues = PickWithFieldFilters<
