@@ -42,6 +42,7 @@ export function ModelTransferField({
         multiple: true,
         validateFields: [],
     })
+    console.log(input, 'input')
     const newLink = useHref(`/${getSectionNewPath(modelName)}`)
 
     const modelTransferHandle = useRef({
