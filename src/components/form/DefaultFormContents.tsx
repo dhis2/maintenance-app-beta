@@ -2,8 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { Card } from '@dhis2/ui'
 import React from 'react'
 import { useFormState } from 'react-final-form'
-import { useNavigate } from 'react-router-dom'
-import { getSectionPath } from '../../lib'
+import { getSectionPath, useNavigateWithSearchState } from '../../lib'
 import { ModelSection } from '../../types'
 import { StandardFormActions, StandardFormSection } from '../standardForm'
 import classes from './DefaultFormContents.module.css'
@@ -19,7 +18,7 @@ export function DefaultEditFormContents({
     const { submitting } = useFormState({
         subscription: { submitting: true },
     })
-    const navigate = useNavigate()
+    const navigate = useNavigateWithSearchState()
 
     const listPath = `/${getSectionPath(section)}`
 
@@ -55,7 +54,7 @@ export function DefaultNewFormContents({
         subscription: { submitting: true },
     })
 
-    const navigate = useNavigate()
+    const navigate = useNavigateWithSearchState()
 
     const listPath = `/${getSectionPath(section)}`
 

@@ -1,3 +1,24 @@
+# [0.10.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.9.0...v0.10.0) (2024-10-23)
+
+
+### Bug Fixes
+
+* lint errors ([b5a0828](https://github.com/dhis2/maintenance-app-beta/commit/b5a0828ac1a8369e2e2021c6c09f5f2e237dfda7))
+
+
+### Features
+
+* add category option combo list ([252fb8e](https://github.com/dhis2/maintenance-app-beta/commit/252fb8e2f47e22112ba37638e1c9e075ccfe5dab))
+* implement new and edit forms ([6033dfd](https://github.com/dhis2/maintenance-app-beta/commit/6033dfd644ad48fca942ddce8dcfd4528f26af23))
+
+# [0.9.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.8.0...v0.9.0) (2024-10-22)
+
+
+### Features
+
+* new org unit form ([cee3edc](https://github.com/dhis2/maintenance-app-beta/commit/cee3edc5eded14f57dd6ec076baf7f8733b19ea5))
+* preserve list state between form navigation ([#425](https://github.com/dhis2/maintenance-app-beta/issues/425)) ([da1f11f](https://github.com/dhis2/maintenance-app-beta/commit/da1f11f5a53c6c1f8874d9ce7af449f1d02e6ffc))
+
 # [0.8.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.7.1...v0.8.0) (2024-10-17)
 
 

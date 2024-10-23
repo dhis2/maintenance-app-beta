@@ -16,6 +16,7 @@ import {
     DEFAULT_CATEGORY_COMBO,
     SCHEMA_SECTIONS,
     getSectionPath,
+    useNavigateWithSearchState,
     useSchemas,
     validate,
 } from '../../lib'
@@ -100,7 +101,7 @@ function formatFormValues({ values }: { values: FormValues }) {
 
 export const Component = () => {
     const dataEngine = useDataEngine()
-    const navigate = useNavigate()
+    const navigate = useNavigateWithSearchState()
     const customAttributesQuery = useCustomAttributesQuery()
     const initialValues = useInitialValues(customAttributesQuery.data)
 

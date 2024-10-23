@@ -5,6 +5,7 @@ import {
     isOverviewSection,
     getSectionPath,
     getOverviewPath,
+    useToWithSearchState,
 } from '../../lib'
 import type { MatchRouteHandle } from '../routes/types'
 import css from './Breadcrumb.module.css'
@@ -19,11 +20,12 @@ type BreadcrumbItemProps = {
 export const BreadcrumbItem = ({ section, label }: BreadcrumbItemProps) => {
     const isOverview = isOverviewSection(section)
     const link = isOverview ? getOverviewPath(section) : getSectionPath(section)
+    const to = useToWithSearchState(`/${link}`)
 
     label = label ?? isOverview ? section.titlePlural : section.title
 
     return (
-        <Link className={css.breadcrumbItem} to={`/${link}`}>
+        <Link className={css.breadcrumbItem} to={to}>
             {label}
         </Link>
     )

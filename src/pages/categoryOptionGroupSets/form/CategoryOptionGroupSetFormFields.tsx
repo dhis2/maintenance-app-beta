@@ -80,24 +80,21 @@ function CategoryOptionGroupSetFormFields() {
 
             <StandardFormSection>
                 <StandardFormSectionTitle>
-                    <label htmlFor={'categoryOptions'}>
-                        {i18n.t('Category options')}
+                    <label htmlFor={'categoryOptionGroups'}>
+                        {i18n.t('Category option Groups')}
                     </label>
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose the category options to include in this category option group set.'
+                        'Choose the category option Groups to include in this category option group set.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <StandardFormField>
                         <ModelTransferField
-                            name="categoryOptions"
+                            name="categoryOptionGroups"
                             query={{
-                                resource: 'categoryOptions',
-                                params: {
-                                    filter: ['isDefault:eq:false'],
-                                },
+                                resource: 'categoryOptionGroups',
                             }}
                             leftHeader={i18n.t('Available category options')}
                             rightHeader={i18n.t('Selected category options')}
