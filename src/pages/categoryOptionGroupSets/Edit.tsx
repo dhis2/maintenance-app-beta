@@ -10,9 +10,9 @@ import {
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PickWithFieldFilters } from '../../types/generated'
-import { CategoryOptionGroup } from '../../types/models'
-import CategoryOptionGroupFormFields from './form/CategoryOptionGroupFormFields'
-import { validate } from './form/categoryOptionGroupSchema'
+import { CategoryOptionGroupSet } from '../../types/models'
+import CategoryOptionGroupSetFormFields from './form/CategoryOptionGroupSetFormFields'
+import { validate } from './form/categoryOptionGroupSetSchema'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -21,43 +21,43 @@ const fieldFilters = [
     'shortName',
     'code',
     'description',
-    'categoryOptions[id,displayName]',
+    'categoryOptionGroups[id,displayName]',
     'dataDimension',
     'dataDimensionType',
 ] as const
 
-export type CategoryOptionGroupFormValues = PickWithFieldFilters<
-    CategoryOptionGroup,
+export type CategoryOptionGroupSetFormValues = PickWithFieldFilters<
+    CategoryOptionGroupSet,
     typeof fieldFilters
 >
 
 export const Component = () => {
-    const section = SECTIONS_MAP.categoryOptionGroup
+    const section = SECTIONS_MAP.categoryOptionGroupSet
     const queryFn = useBoundResourceQueryFn()
     const modelId = useParams().id as string
     const query = {
-        resource: 'categoryOptionGroups',
+        resource: 'categoryOptionGroupSets',
         id: modelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const categoryOptionGroupQuery = useQuery({
+    const categoryOptionGroupSetQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<CategoryOptionGroupFormValues>,
+        queryFn: queryFn<CategoryOptionGroupSetFormValues>,
     })
 
-    console.log(categoryOptionGroupQuery, 'categoryOptionGroupSetQuery')
+    console.log(categoryOptionGroupSetQuery, 'categoryOptionGroupSetQuery')
 
     return (
         <FormBase
             onSubmit={useOnSubmitEdit({ section, modelId })}
             section={section}
-            initialValues={categoryOptionGroupQuery.data}
+            initialValues={categoryOptionGroupSetQuery.data}
             validate={validate}
         >
             <DefaultEditFormContents section={section}>
-                <CategoryOptionGroupFormFields />
+                <CategoryOptionGroupSetFormFields />
             </DefaultEditFormContents>
         </FormBase>
     )

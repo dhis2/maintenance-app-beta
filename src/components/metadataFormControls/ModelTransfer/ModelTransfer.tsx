@@ -51,6 +51,7 @@ const BaseModelTransfer = <TModel extends DisplayableModel>(
     { selected, onChange, query, ...transferProps }: ModelTransferProps<TModel>,
     ref: React.Ref<ImperativeRef>
 ) => {
+    console.log(selected, 'selected')
     const queryFn = useBoundResourceQueryFn()
     const [searchTerm, setSearchTerm] = useState('')
 
@@ -92,7 +93,7 @@ const BaseModelTransfer = <TModel extends DisplayableModel>(
         [queryResult.data, modelName]
     )
 
-    const selectedOptions = selected.map(toDisplayOption)
+    const selectedOptions = selected ? selected?.map(toDisplayOption) : []
     const loadedOptions = Array.from(allDataMap.values()).map(toDisplayOption)
     // always include selected options
     const allOptions = selectedOptions.concat(loadedOptions || [])

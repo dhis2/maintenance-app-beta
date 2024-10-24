@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-22T10:31:57.931Z\n"
-"PO-Revision-Date: 2024-10-22T10:31:57.932Z\n"
+"POT-Creation-Date: 2024-10-23T13:30:57.424Z\n"
+"PO-Revision-Date: 2024-10-23T13:30:57.424Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -849,6 +849,9 @@ msgstr "Data dimension type"
 msgid "This field requires a unique value, please choose another one"
 msgstr "This field requires a unique value, please choose another one"
 
+msgid "{{label}} (required)"
+msgstr "{{label}} (required)"
+
 msgid "No changes to be saved"
 msgstr "No changes to be saved"
 
@@ -870,23 +873,27 @@ msgstr "Basic information"
 msgid "Set up the basic information for this category."
 msgstr "Set up the basic information for this category."
 
-msgid "Explain the purpose of this category."
-msgstr "Explain the purpose of this category."
+msgid "Explain the purpose of this category option group."
+msgstr "Explain the purpose of this category option group."
 
 msgid "Data configuration"
 msgstr "Data configuration"
 
-msgid "Choose how this category will be used to capture and analyze"
-msgstr "Choose how this category will be used to capture and analyze"
+msgid "Choose how this category option group will be used to capture and analyze"
+msgstr "Choose how this category option group will be used to capture and analyze"
 
 msgid "Use as data dimension"
 msgstr "Use as data dimension"
 
-msgid "Category will be available to the analytics as another dimension"
-msgstr "Category will be available to the analytics as another dimension"
+msgid ""
+"Category option group will be available to the analytics as another "
+"dimension"
+msgstr ""
+"Category option group will be available to the analytics as another "
+"dimension"
 
-msgid "Choose the category options to include in this category."
-msgstr "Choose the category options to include in this category."
+msgid "Choose the category options to include in this category option group."
+msgstr "Choose the category options to include in this category option group."
 
 msgid "Available category options"
 msgstr "Available category options"
@@ -923,6 +930,45 @@ msgstr "Filter selected categories"
 
 msgid "At least one category is required"
 msgstr "At least one category is required"
+
+msgid "Set up the basic information for this category option group set."
+msgstr "Set up the basic information for this category option group set."
+
+msgid "Explain the purpose of this category option group set."
+msgstr "Explain the purpose of this category option group set."
+
+msgid ""
+"Choose how this category option group set will be used to capture and "
+"analyze"
+msgstr ""
+"Choose how this category option group set will be used to capture and "
+"analyze"
+
+msgid ""
+"Category option group set will be available to the analytics as another "
+"dimension"
+msgstr ""
+"Category option group set will be available to the analytics as another "
+"dimension"
+
+msgid "Category option Groups"
+msgstr "Category option Groups"
+
+msgid ""
+"Choose the category option Groups to include in this category option group "
+"set."
+msgstr ""
+"Choose the category option Groups to include in this category option group "
+"set."
+
+msgid "Set up the basic information for this category option group."
+msgstr "Set up the basic information for this category option group."
+
+msgid "Choose how this category option  will be used to capture and analyze"
+msgstr "Choose how this category option  will be used to capture and analyze"
+
+msgid "Choose the category options to include in this category."
+msgstr "Choose the category options to include in this category."
 
 msgid "Set up the basic information for this category option."
 msgstr "Set up the basic information for this category option."
