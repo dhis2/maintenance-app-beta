@@ -4,6 +4,7 @@ import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import {
     CustomAttributesSection,
+    ModelTransferField,
     StandardFormField,
     StandardFormSection,
     StandardFormSectionDescription,
@@ -14,13 +15,17 @@ import {
     DescriptionField,
 } from '../../../components/form'
 import { DateField } from '../../../components/form/fields/DateField'
-import { SCHEMA_SECTIONS } from '../../../lib'
+import { SCHEMA_SECTIONS, useSystemSetting } from '../../../lib'
 import { ImageField } from './ImageField'
 import { OrganisationUnitSelector } from './OrganisationUnitSelector'
 
 const schemaSection = SCHEMA_SECTIONS.organisationUnit
 
 export function OrganisationUnitFormField() {
+    const allowReferenceAssignments = useSystemSetting(
+        'keyAllowObjectAssignment'
+    )
+
     return (
         <>
             <StandardFormSection>
@@ -142,6 +147,50 @@ export function OrganisationUnitFormField() {
                     max="180"
                 />
             </StandardFormSection>
+            {allowReferenceAssignments && (
+                <StandardFormSection>
+                    <StandardFormSectionTitle>
+                        {i18n.t('Reference assignment')}
+                    </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        {i18n.t(
+                            'Assign the organisation unit to related objects.'
+                        )}
+                    </StandardFormSectionDescription>
+                    <StandardFormField>
+                        <ModelTransferField
+                            name="dataSets"
+                            query={{
+                                resource: 'dataSets',
+                            }}
+                            leftHeader={i18n.t('Available data sets')}
+                            rightHeader={i18n.t('Selected data sets')}
+                            filterPlaceholder={i18n.t(
+                                'Filter available data sets'
+                            )}
+                            filterPlaceholderPicked={i18n.t(
+                                'Filter selected data sets'
+                            )}
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <ModelTransferField
+                            name="programs"
+                            query={{
+                                resource: 'programs',
+                            }}
+                            leftHeader={i18n.t('Available programs')}
+                            rightHeader={i18n.t('Selected programs')}
+                            filterPlaceholder={i18n.t(
+                                'Filter available programs'
+                            )}
+                            filterPlaceholderPicked={i18n.t(
+                                'Filter selected programs'
+                            )}
+                        />
+                    </StandardFormField>
+                </StandardFormSection>
+            )}
 
             <CustomAttributesSection />
         </>
