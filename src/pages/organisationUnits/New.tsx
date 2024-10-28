@@ -9,21 +9,11 @@ import {
     organisationUnitSchema,
 } from './form'
 
-const formatFormValues: (values: FormValues) => Record<string, unknown> = (
-    values
-) => {
+export const formatFormValues: (
+    values: FormValues
+) => Record<string, unknown> = (values) => {
     return {
         ...values,
-        geometry:
-            values.geometry?.longitude && values.geometry?.latitude
-                ? {
-                      type: 'Point',
-                      coordinates: [
-                          values.geometry?.longitude,
-                          values.geometry?.latitude,
-                      ],
-                  }
-                : undefined,
         attributeValues: values.attributeValues.filter(({ value }) => !!value),
     }
 }

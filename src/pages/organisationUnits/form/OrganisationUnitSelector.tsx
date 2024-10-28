@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Field, NoticeBox, OrganisationUnitTree } from '@dhis2/ui'
 import { IconInfo16 } from '@dhis2/ui-icons'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useField } from 'react-final-form'
 import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
 import classes from './OrganisationUnitSelector.module.css'
@@ -11,7 +11,9 @@ export function OrganisationUnitSelector() {
     const { input, meta } = useField(fieldName, { format: (value) => value })
     const userRootOrgUnits = useCurrentUserRootOrgUnits()
     const userRootOrgUnitsIds = userRootOrgUnits.map((unit) => `/${unit.id}`)
-    const [selected, setSelected] = useState<[string] | []>([])
+    const [selected, setSelected] = useState<[string] | []>(
+        input.value?.path ? [input.value.path] : []
+    )
 
     const handleChange = (orgUnit: {
         displayName: string
@@ -40,7 +42,10 @@ export function OrganisationUnitSelector() {
                             singleSelection
                             roots={userRootOrgUnitsIds}
                             selected={selected}
-                            initiallyExpanded={userRootOrgUnitsIds}
+                            initiallyExpanded={[
+                                ...userRootOrgUnitsIds,
+                                ...selected,
+                            ]}
                         />
                     </div>
                     {input.value?.displayName && (
