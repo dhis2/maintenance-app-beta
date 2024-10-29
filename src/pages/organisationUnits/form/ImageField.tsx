@@ -136,7 +136,7 @@ const ImagePreview = ({
     }
 
     if (fileResource && fileResource.id) {
-        const src = `${baseUrl}/fileResources/${fileResource.id}/data`
+        const src = `${baseUrl}/api/fileResources/${fileResource.id}/data`
 
         return <img src={src} alt={i18n.t('Preview of current icon')} />
     }
