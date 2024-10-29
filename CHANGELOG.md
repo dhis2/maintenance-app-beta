@@ -1,3 +1,10 @@
+## [0.10.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.10.0...v0.10.1) (2024-10-24)
+
+
+### Bug Fixes
+
+* **orgUnit:** add reference assignment fields ([#428](https://github.com/dhis2/maintenance-app-beta/issues/428)) ([215a99f](https://github.com/dhis2/maintenance-app-beta/commit/215a99fbfe45df8ab295dbb0636b8a036d1d6745))
+
 # [0.10.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.9.0...v0.10.0) (2024-10-23)
 
 

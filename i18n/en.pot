@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-23T13:30:57.424Z\n"
-"PO-Revision-Date: 2024-10-23T13:30:57.424Z\n"
+"POT-Creation-Date: 2024-10-23T11:07:53.225Z\n"
+"PO-Revision-Date: 2024-10-23T11:07:53.225Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -123,6 +123,21 @@ msgstr "Failed to load {{label}}"
 msgid "Failed to load"
 msgstr "Failed to load"
 
+msgid "Download"
+msgstr "Download"
+
+msgid "Merge"
+msgstr "Merge"
+
+msgid "Delete source data element values"
+msgstr "Delete source data element values"
+
+msgid "Last updated"
+msgstr "Last updated"
+
+msgid "Discard"
+msgstr "Discard"
+
 msgid "Aggregation level(s)"
 msgstr "Aggregation level(s)"
 
@@ -222,9 +237,6 @@ msgstr "Created"
 msgid "Last updated by"
 msgstr "Last updated by"
 
-msgid "Last updated"
-msgstr "Last updated"
-
 msgid "Id"
 msgstr "Id"
 
@@ -245,9 +257,6 @@ msgstr "Details"
 
 msgid "Failed to load details"
 msgstr "Failed to load details"
-
-msgid "Download"
-msgstr "Download"
 
 msgid "Download {{section}}"
 msgstr "Download {{section}}"
@@ -1172,6 +1181,36 @@ msgstr "Latitude"
 
 msgid "Longitude"
 msgstr "Longitude"
+
+msgid "Reference assignments"
+msgstr "Reference assignments"
+
+msgid "Assign the organisation unit to related models."
+msgstr "Assign the organisation unit to related models."
+
+msgid "Available data sets"
+msgstr "Available data sets"
+
+msgid "Selected data sets"
+msgstr "Selected data sets"
+
+msgid "Filter available data sets"
+msgstr "Filter available data sets"
+
+msgid "Filter selected data sets"
+msgstr "Filter selected data sets"
+
+msgid "Available programs"
+msgstr "Available programs"
+
+msgid "Selected programs"
+msgstr "Selected programs"
+
+msgid "Filter available programs"
+msgstr "Filter available programs"
+
+msgid "Filter selected programs"
+msgstr "Filter selected programs"
 
 msgid "New organisation unit will be created inside {{displayName}}"
 msgstr "New organisation unit will be created inside {{displayName}}"

@@ -1,7 +1,8 @@
 import { z } from 'zod'
 import { getDefaults, modelFormSchemas } from '../../../lib'
 
-const { withAttributeValues, identifiable } = modelFormSchemas
+const { withAttributeValues, identifiable, referenceCollection } =
+    modelFormSchemas
 
 export const organisationUnitSchema = identifiable
     .merge(withAttributeValues)
@@ -24,6 +25,8 @@ export const organisationUnitSchema = identifiable
                 latitude: z.string().optional(),
             })
             .optional(),
+        programs: referenceCollection.optional().default([]),
+        dataSets: referenceCollection.optional().default([]),
     })
 
 export const initialValues = getDefaults(
