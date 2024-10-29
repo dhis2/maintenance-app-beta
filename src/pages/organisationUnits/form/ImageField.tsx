@@ -43,7 +43,7 @@ export function ImageField() {
             const postResponse = (await dataEngine.mutate({
                 resource: 'fileResources',
                 type: 'create',
-                data: { file: fileToUpload },
+                data: { file: fileToUpload, domain: 'ORG_UNIT' },
             })) as {
                 response: {
                     fileResource: { id: string; storageStatus: string }
@@ -103,7 +103,6 @@ export function ImageField() {
                     valid={!!(input.value && input.value.id)}
                 />
             </div>
-
             <FileList>
                 {input.value?.id && (
                     <FileListItem

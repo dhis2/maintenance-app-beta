@@ -53,7 +53,7 @@ export function OrganisationUnitSelector() {
                             <IconInfo16 />
                             <p>
                                 {i18n.t(
-                                    'New organisation unit will be created inside {{displayName}}',
+                                    'Organisation unit will be positioned inside {{displayName}}',
                                     { displayName: input.value.displayName }
                                 )}
                             </p>

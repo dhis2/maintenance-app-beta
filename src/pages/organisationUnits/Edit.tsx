@@ -26,7 +26,7 @@ const fieldFilters = [
     'openingDate',
     'closedDate',
     'comment',
-    'image',
+    'image[id,name]',
     'description',
     'contactPerson',
     'address',
