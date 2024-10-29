@@ -9,14 +9,6 @@ import {
     organisationUnitSchema,
 } from './form'
 
-export const formatFormValues: (
-    values: FormValues
-) => Record<string, unknown> = (values) => {
-    return {
-        ...values,
-        attributeValues: values.attributeValues.filter(({ value }) => !!value),
-    }
-}
 const section = SECTIONS_MAP.organisationUnit
 
 export const Component = () => {
@@ -24,7 +16,6 @@ export const Component = () => {
         <FormBase
             onSubmit={useOnSubmitNew({
                 section,
-                valueFormatter: formatFormValues,
             })}
             initialValues={initialValues as FormValues}
             validate={(values: FormValues) => {

@@ -15,7 +15,7 @@ type PatchAttributeValue = {
     value: AttributeValue['value']
 }
 
-type ModelWithAttributeValues = IdentifiableObject & {
+export type ModelWithAttributeValues = IdentifiableObject & {
     attributeValues?: PatchAttributeValue[]
 }
 
