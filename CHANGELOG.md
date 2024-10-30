@@ -1,3 +1,11 @@
+## [0.10.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.10.1...v0.10.2) (2024-10-30)
+
+
+### Bug Fixes
+
+* **categoryOptionCombo:** add ignore approval field ([#423](https://github.com/dhis2/maintenance-app-beta/issues/423)) ([a5c7ac5](https://github.com/dhis2/maintenance-app-beta/commit/a5c7ac5613fa87afb4100aff26b0901c4262509c))
+* **manageView:** stable initialValues for form ([#424](https://github.com/dhis2/maintenance-app-beta/issues/424)) ([2c5066a](https://github.com/dhis2/maintenance-app-beta/commit/2c5066aa28c2cea30117a24d6cca1d6f31dde358))
+
 ## [0.10.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.10.0...v0.10.1) (2024-10-24)
 
 
