@@ -5,10 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-13T12:57:12.003Z\n"
-"PO-Revision-Date: 2024-11-13T12:57:12.004Z\n"
-"POT-Creation-Date: 2024-11-13T08:29:01.348Z\n"
-"PO-Revision-Date: 2024-11-13T08:29:01.348Z\n"
+"POT-Creation-Date: 2024-11-18T12:47:17.175Z\n"
+"PO-Revision-Date: 2024-11-18T12:47:17.175Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1042,6 +1040,9 @@ msgstr ""
 "Choose when, and for which organisation units this category option will be "
 "available."
 
+msgid "Form name should not exceed 230 characters"
+msgstr "Form name should not exceed 230 characters"
+
 msgid "End date should be after start date"
 msgstr "End date should be after start date"
 
@@ -1176,6 +1177,12 @@ msgstr ""
 "aggregation level available) as the data source, and PHU data will not be "
 "included. PHU will still be available for the PHU level, but not included "
 "in the aggregations to the levels above."
+
+msgid "Delete source indicator types"
+msgstr "Delete source indicator types"
+
+msgid "Merge"
+msgstr "Merge"
 
 msgid "Longitude"
 msgstr "Longitude"
