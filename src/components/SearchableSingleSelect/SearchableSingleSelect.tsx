@@ -47,14 +47,14 @@ function Error({
 
 type OnChange = ({ selected }: { selected: string }) => void
 type OnFilterChange = ({ value }: { value: string }) => void
-interface SearchableSingleSelectPropTypes {
+export interface SearchableSingleSelectPropTypes {
     onChange: OnChange
     onFilterChange: OnFilterChange
     onEndReached?: () => void
     onRetryClick: () => void
     dense?: boolean
     options: Option[]
-    placeholder: string
+    placeholder?: string
     prefix?: string
     showEndLoader: boolean
     loading: boolean
