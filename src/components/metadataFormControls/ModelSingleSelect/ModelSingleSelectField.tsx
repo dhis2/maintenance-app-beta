@@ -8,43 +8,52 @@ import {
     ModelSingleSelect,
 } from './ModelSingleSelectRefactor'
 
-// this currently does not need a generic, because the value of the field is not passed
-// or available from props. However if it's made available,
-// the generic of <TModel extends DisplayableModel> should be added.
-type ModelSingleSelectFieldProps = {
+type OwnProps<TModel extends DisplayableModel> = {
     name: string
     query: PlainResourceQuery
     label?: string
     placeholder?: string
     helpText?: string
-} & ModelSingleSelectProps<DisplayableModel>
+    required?: boolean
+    onChange?: ModelSingleSelectProps<TModel>['onChange']
+}
 
-export function ModelSingleSelectField({
+type ModelSingleSelectFieldProps<TModel extends DisplayableModel> = Omit<
+    ModelSingleSelectProps<TModel>,
+    'selected' | 'onChange'
+> &
+    OwnProps<TModel>
+
+export function ModelSingleSelectField<TModel extends DisplayableModel>({
     name,
     query,
     label,
     helpText,
+    required,
+    onChange,
     ...modelSingleSelectProps
-}: ModelSingleSelectFieldProps) {
-    const { input, meta } = useField<DisplayableModel | undefined>(name, {
+}: ModelSingleSelectFieldProps<TModel>) {
+    const { input, meta } = useField<TModel | undefined>(name, {
         validateFields: [],
     })
 
     return (
         <Field
-            dataTest="formfields-modelsingleselect"
+            dataTest={`formfields-modelsingleselect-${name}`}
             error={meta.invalid}
             validationText={(meta.touched && meta.error?.toString()) || ''}
             name={name}
             label={label}
             helpText={helpText}
+            required={required}
         >
-            <ModelSingleSelect
+            <ModelSingleSelect<TModel>
                 {...modelSingleSelectProps}
                 selected={input.value}
-                onChange={({ selected }) => {
+                onChange={(selected) => {
                     input.onChange(selected)
                     input.onBlur()
+                    onChange?.(selected)
                 }}
                 query={query}
             />
