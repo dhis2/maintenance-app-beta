@@ -1,15 +1,14 @@
 import i18n from '@dhis2/d2-i18n'
 import React, { forwardRef } from 'react'
-import { ModelSingleSelect } from '../ModelSingleSelect'
-import type { ModelSingleSelectProps } from '../ModelSingleSelect'
+import { ModelSingleSelect } from '../ModelSingleSelect/ModelSingleSelectRefactor'
+import type { ModelSingleSelectProps } from '../ModelSingleSelect/ModelSingleSelectRefactor'
 import { useInitialOptionQuery } from './useInitialOptionQuery'
 import { useOptionsQuery } from './useOptionsQuery'
+import { DisplayableModel } from '../../../types/models'
 
-type CategoryComboSelectProps = Omit<
-    ModelSingleSelectProps,
-    'useInitialOptionQuery' | 'useOptionsQuery'
->
-
+type CategoryComboSelectProps = ModelSingleSelectProps<DisplayableModel> & {
+    required?: boolean
+}
 export const CategoryComboSelect = forwardRef(function CategoryComboSelect(
     {
         onChange,
@@ -26,7 +25,6 @@ export const CategoryComboSelect = forwardRef(function CategoryComboSelect(
 ) {
     return (
         <ModelSingleSelect
-            ref={ref}
             required={required}
             invalid={invalid}
             disabled={disabled}

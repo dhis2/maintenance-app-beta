@@ -10,7 +10,7 @@ type QueryParams = {
     pageSize?: number
     page?: number
     fields?: string | string[]
-    filter: string | string[]
+    filter?: string | string[]
     [key: string]: unknown
 }
 
