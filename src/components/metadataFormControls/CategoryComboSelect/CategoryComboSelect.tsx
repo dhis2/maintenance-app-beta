@@ -1,41 +1,39 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { forwardRef } from 'react'
-import { ModelSingleSelect } from '../ModelSingleSelect/ModelSingleSelectRefactor'
-import type { ModelSingleSelectProps } from '../ModelSingleSelect/ModelSingleSelectRefactor'
-import { useInitialOptionQuery } from './useInitialOptionQuery'
-import { useOptionsQuery } from './useOptionsQuery'
+import React from 'react'
+import { PlainResourceQuery } from '../../../types'
+import { CategoryCombo } from '../../../types/generated'
 import { DisplayableModel } from '../../../types/models'
+import {
+    ModelSingleSelect,
+    ModelSingleSelectProps,
+} from '../ModelSingleSelect/ModelSingleSelectRefactor'
 
-type CategoryComboSelectProps = ModelSingleSelectProps<DisplayableModel> & {
-    required?: boolean
+export const categoryCombosSelectQuery = {
+    resource: 'categoryCombos',
+    params: {
+        filter: 'isDefault:eq:false',
+        fields: ['id', 'displayName'],
+    },
+} as const satisfies PlainResourceQuery
+
+type CategoryComboSelectProps<TCategoryCombo extends DisplayableModel> = Omit<
+    ModelSingleSelectProps<TCategoryCombo>,
+    'query'
+> & {
+    query?: PlainResourceQuery
 }
-export const CategoryComboSelect = forwardRef(function CategoryComboSelect(
-    {
-        onChange,
-        invalid,
-        disabled,
-        placeholder = i18n.t('Category combo'),
-        required,
-        selected,
-        showAllOption,
-        onBlur,
-        onFocus,
-    }: CategoryComboSelectProps,
-    ref
-) {
+
+export const CategoryComboSelect = <
+    TCategoryCombo extends Partial<CategoryCombo> & DisplayableModel = Pick<
+        CategoryCombo,
+        'id' | 'displayName'
+    >
+>({
+    query,
+    ...modelSingleSelectProps
+}: CategoryComboSelectProps<TCategoryCombo>) => {
+    const resolvedQuery = query ?? categoryCombosSelectQuery
     return (
-        <ModelSingleSelect
-            required={required}
-            invalid={invalid}
-            disabled={disabled}
-            useInitialOptionQuery={useInitialOptionQuery}
-            useOptionsQuery={useOptionsQuery}
-            placeholder={placeholder}
-            showAllOption={showAllOption}
-            onChange={onChange}
-            selected={selected}
-            onBlur={onBlur}
-            onFocus={onFocus}
-        />
+        <ModelSingleSelect {...modelSingleSelectProps} query={resolvedQuery} />
     )
-})
+}

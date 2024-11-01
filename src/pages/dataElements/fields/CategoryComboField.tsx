@@ -1,23 +1,21 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useEffect, useRef } from 'react'
-import { useForm, useFormState } from 'react-final-form'
+import React, { useEffect } from 'react'
+import { useField, useForm } from 'react-final-form'
 import { useHref } from 'react-router'
 import { EditableFieldWrapper } from '../../../components'
 import { ModelSingleSelectField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectField'
 import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
-import {
-    DEFAULT_CATEGORY_COMBO,
-    useDefaultCategoryComboQuery,
-} from '../../../lib'
+import { DEFAULT_CATEGORY_COMBO } from '../../../lib'
 import { PlainResourceQuery } from '../../../types'
 import classes from './CategoryComboField.module.css'
 
 const query = {
     resource: 'categoryCombos',
     params: {
-        filter: 'isDefault:eq:false',
+        filter: ['isDefault:eq:false'],
+        fields: ['id', 'displayName'],
     },
-} satisfies PlainResourceQuery
+} as const satisfies PlainResourceQuery
 
 /*
  * @TODO: Verify that the api ignores the category combo when it's disabled.
@@ -30,23 +28,25 @@ const query = {
  */
 export function CategoryComboField() {
     const refresh = useRefreshModelSingleSelect(query)
-    const defaultCategoryComboQuery = useDefaultCategoryComboQuery()
     const { change } = useForm()
-    const { values } = useFormState({ subscription: { values: true } })
-    const domainTypeIsTracker = values.domainType === 'TRACKER'
+    const {
+        input: { value: domainTypeValue },
+    } = useField('domainType')
+
+    const domainTypeIsTracker = domainTypeValue === 'TRACKER'
     const disabled = domainTypeIsTracker
     const newCategoryComboLink = useHref('/categoryCombos/new')
 
     useEffect(() => {
-        if (defaultCategoryComboQuery.data?.id && domainTypeIsTracker) {
-            change('categoryCombo.id', defaultCategoryComboQuery.data.id)
+        if (domainTypeIsTracker) {
+            change('categoryCombo', DEFAULT_CATEGORY_COMBO)
         }
-    }, [change, defaultCategoryComboQuery.data?.id, domainTypeIsTracker])
+    }, [change, domainTypeIsTracker])
 
     return (
         <EditableFieldWrapper
             dataTest="formfields-categorycombo"
-            onRefresh={() => refresh}
+            onRefresh={() => refresh()}
             onAddNew={() => window.open(newCategoryComboLink, '_blank')}
         >
             <div className={classes.categoryComboSelect}>
