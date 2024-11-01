@@ -25,6 +25,7 @@ export type ModelSingleSelectProps<TModel extends DisplayableModel> = Omit<
     | 'available'
     | 'onFilterChange'
     | 'onRetryClick'
+    | 'onEndReached'
     | 'showEndLoader'
     | 'loading'
     | 'error'
@@ -67,10 +68,8 @@ export const ModelSingleSelect = <TModel extends DisplayableModel>({
             lastPage.pager.nextPage ? lastPage.pager.page + 1 : undefined,
         getPreviousPageParam: (firstPage) =>
             firstPage.pager.prevPage ? firstPage.pager.page - 1 : undefined,
-        // select: select
-        //     ? (data) => select(data.pages.flatMap((p) => p[modelName]))
-        //     : undefined,
     })
+
     const allDataMap = useMemo(() => {
         const flatData =
             queryResult.data?.pages.flatMap((page) => page[modelName]) ?? []
