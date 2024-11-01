@@ -41,7 +41,11 @@ function useDataElementQuery(id: string) {
         dataElement: {
             resource: `dataElements/${id}`,
             params: {
-                fields: ['*', 'attributeValues[*]'],
+                fields: [
+                    '*',
+                    'categoryCombo[id,displayName]',
+                    'attributeValues[*]',
+                ],
             },
         },
     }

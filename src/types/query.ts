@@ -14,6 +14,7 @@ type QueryParams = {
     [key: string]: unknown
 }
 
+/* A simple resource-query, without params callback */
 export type PlainResourceQuery = {
     resource: string
     id?: string
