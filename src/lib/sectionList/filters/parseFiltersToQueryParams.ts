@@ -10,11 +10,11 @@ type FilterToQueryParamsMap = {
     [key in keyof ParsedFilterParams]: (
         value: NonNullable<ParsedFilterParams[key]>,
         section: Section
-    ) => string
+    ) => string[] | string
 }
 
 const inFilter = (filterPath: string, value: string[]) =>
-    `${filterPath}:in:[${value.join(',')}]`
+    value.length > 0 ? `${filterPath}:in:[${value.join(',')}]` : ''
 
 const defaultFilter = (
     key: FilterKey,
@@ -42,11 +42,15 @@ const filterToQueryParamMap: FilterToQueryParamsMap = {
     categoryOptionGroup: (value) => inFilter('categoryOptionGroups.id', value),
     dataSet: (value, section) => {
         if (section.name === SchemaName.dataElement) {
-            const emptyIsSelected = value.filter((id) => id === 'NO_DATASET')
-            if (emptyIsSelected.length > 0) {
-                return `dataSetElements:empty`
+            const withoutEmpty = value.filter((id) => id !== 'NO_DATASET')
+            const dataSetInFilter = inFilter(
+                'dataSetElements.dataSet.id',
+                withoutEmpty
+            )
+            if (value.length !== withoutEmpty.length) {
+                return [dataSetInFilter, 'dataSetElements:empty']
             }
-            return inFilter('dataSetElements.dataSet.id', value)
+            return dataSetInFilter
         }
         return defaultFilter('dataSet', value)
     },
@@ -57,7 +61,7 @@ const getQueryParamForFilter = (
     key: FilterKey,
     value: AllValues,
     section: ModelSection
-): string | undefined => {
+): string | string[] | undefined => {
     if (!value) {
         return undefined
     }
@@ -76,11 +80,12 @@ export const parseFiltersToQueryParams = (
     section: ModelSection
 ): string[] => {
     const queryFilters = Object.entries(filters)
-        .map(([key, value]) =>
+        .flatMap(([key, value]) =>
             getQueryParamForFilter(key as FilterKey, value, section)
         )
         .filter(
-            (queryFilter): queryFilter is string => queryFilter !== undefined
+            (queryFilter): queryFilter is string =>
+                queryFilter != undefined && queryFilter?.length > 0
         )
     return queryFilters
 }
