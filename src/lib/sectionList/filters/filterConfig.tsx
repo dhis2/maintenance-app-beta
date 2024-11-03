@@ -18,7 +18,12 @@ export const filterParamsSchema = z
         formType: z.array(z.nativeEnum(DataSet.formType)),
         categoryOption: zodArrayIds,
         categoryOptionGroup: zodArrayIds,
-        dataSet: zodArrayIds,
+        dataSet: z.array(
+            z
+                .string()
+                .refine((val) => isValidUid(val))
+                .or(z.literal('NO_DATASET'))
+        ),
         domainType: z.array(z.nativeEnum(DataElement.domainType)),
         publicAccess: z.array(
             z.string().refine((val) => parseAccessString(val) !== null)

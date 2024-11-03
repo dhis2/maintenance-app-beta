@@ -40,10 +40,16 @@ const filterToQueryParamMap: FilterToQueryParamsMap = {
         return inFilter('categoryCombo.id', value)
     },
     categoryOptionGroup: (value) => inFilter('categoryOptionGroups.id', value),
-    dataSet: (value, section) =>
-        section.name === SchemaName.dataElement
-            ? inFilter('dataSetElements.dataSet.id', value)
-            : defaultFilter('dataSet', value),
+    dataSet: (value, section) => {
+        if (section.name === SchemaName.dataElement) {
+            const emptyIsSelected = value.filter((id) => id === 'NO_DATASET')
+            if (emptyIsSelected.length > 0) {
+                return `dataSetElements:empty`
+            }
+            return inFilter('dataSetElements.dataSet.id', value)
+        }
+        return defaultFilter('dataSet', value)
+    },
     publicAccess: (value) => inFilter('sharing.public', value),
 }
 

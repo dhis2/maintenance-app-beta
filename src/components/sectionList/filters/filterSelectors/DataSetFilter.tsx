@@ -1,24 +1,46 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import { useSectionListFilter } from '../../../../lib'
-import { createFilterDataQuery } from './createFilterDataQuery'
-import { ModelFilterSelect } from './ModelFilter'
-
-const query = createFilterDataQuery('dataSets')
+import { PlainResourceQuery } from '../../../../types'
+import { ModelMultiSelect } from '../../../metadataFormControls'
+const query = {
+    resource: 'dataSets',
+    params: {
+        fields: ['id', 'displayName'],
+        order: 'displayName:asc',
+        pageSize: 5,
+    },
+} as const satisfies PlainResourceQuery
 
 export const DataSetFilter = () => {
     const [filter, setFilter] = useSectionListFilter('dataSet')
 
-    const selected = filter?.[0]
-
     return (
-        <ModelFilterSelect
-            placeholder={i18n.t('Data set')}
+        <ModelMultiSelect
             query={query}
-            selected={selected}
+            selected={filter || []}
+            prefix={i18n.t('Data set')}
+            dense
             onChange={({ selected }) =>
-                setFilter(selected ? [selected] : undefined)
+                selected.length < 1
+                    ? setFilter(undefined)
+                    : setFilter(selected.map((s) => s.id))
             }
+            select={(value) => [
+                { id: 'NO_DATASET', displayName: '<No Data set>' },
+                ...value,
+            ]}
         />
     )
+
+    // return (
+    //     <ModelFilterSelect
+    //         placeholder={i18n.t('Data set')}
+    //         query={query}
+    //         selected={selected}
+    //         onChange={({ selected }) =>
+    //             setFilter(selected ? [selected] : undefined)
+    //         }
+    //     />
+    //  )
 }
