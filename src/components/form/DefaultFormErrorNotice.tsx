@@ -87,7 +87,7 @@ const ErrorList = ({ errors }: { errors: Record<string, string> }) => {
                         >
                             {labels.get(key) || key}:
                         </span>
-                        <span>{value}</span>
+                        <span>{JSON.stringify(value)}</span>
                     </li>
                 )
             })}

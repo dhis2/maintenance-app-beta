@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-28T13:53:29.437Z\n"
-"PO-Revision-Date: 2024-10-28T13:53:29.437Z\n"
+"POT-Creation-Date: 2024-11-04T08:55:34.983Z\n"
+"PO-Revision-Date: 2024-11-04T08:55:34.985Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -819,6 +819,27 @@ msgstr "GeoJSON"
 msgid "Disaggregation"
 msgstr "Disaggregation"
 
+msgid "Point"
+msgstr "Point"
+
+msgid "MultiPoint"
+msgstr "MultiPoint"
+
+msgid "LineString"
+msgstr "LineString"
+
+msgid "MultiLineString"
+msgstr "MultiLineString"
+
+msgid "Polygon"
+msgstr "Polygon"
+
+msgid "MultiPolygon"
+msgstr "MultiPolygon"
+
+msgid "GeometryCollection"
+msgstr "GeometryCollection"
+
 msgid "Aggregation type"
 msgstr "Aggregation type"
 
@@ -1173,8 +1194,8 @@ msgstr "Filter available programs"
 msgid "Filter selected programs"
 msgstr "Filter selected programs"
 
-msgid "New organisation unit will be created inside {{displayName}}"
-msgstr "New organisation unit will be created inside {{displayName}}"
+msgid "Organisation unit will be positioned inside {{displayName}}"
+msgstr "Organisation unit will be positioned inside {{displayName}}"
 
 msgid "Creating first organisation unit"
 msgstr "Creating first organisation unit"

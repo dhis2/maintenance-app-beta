@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { Field, InputField } from '@dhis2/ui'
 import React from 'react'
 import { useField } from 'react-final-form'
+import { getConstantTranslation } from '../../../lib'
 
 export function GeometryFields() {
     const fieldName = 'geometry'
@@ -11,8 +12,8 @@ export function GeometryFields() {
         longitude,
         latitude,
     }: {
-        longitude?: string
-        latitude?: string
+        longitude?: number
+        latitude?: number
     }) => {
         const geometry = {
             type: 'Point',
@@ -26,21 +27,23 @@ export function GeometryFields() {
         <>
             <Field
                 name={fieldName}
-                error={meta.touched && meta.error}
-                validationText={meta.touched ? meta.error : undefined}
+                error={meta.touched && !!meta.error}
+                validationText={meta.touched ? meta.error?.type : undefined}
             >
                 <InputField
                     onChange={(e) =>
                         handleChange({
-                            longitude: e.value,
-                            latitude: input.value.coordinates?.[1],
+                            longitude: e.value
+                                ? parseFloat(e.value)
+                                : undefined,
+                            latitude: input.value?.coordinates?.[1],
                         })
                     }
                     label={i18n.t('Longitude')}
                     inputWidth="400px"
                     name="longitude"
                     type="number"
-                    value={input.value.coordinates?.[0].toString()}
+                    value={input.value.coordinates?.[0]?.toString()}
                     min="-90"
                     max="90"
                     step="any"
@@ -48,15 +51,15 @@ export function GeometryFields() {
                 <InputField
                     onChange={(e) =>
                         handleChange({
-                            longitude: input.value.coordinates?.[0],
-                            latitude: e.value,
+                            longitude: input.value?.coordinates?.[0],
+                            latitude: e.value ? parseFloat(e.value) : undefined,
                         })
                     }
                     inputWidth="400px"
                     label={i18n.t('Longitude')}
                     name="latitude"
                     type="number"
-                    value={input.value.coordinates?.[1].toString()}
+                    value={input.value?.coordinates?.[1]?.toString()}
                     min="-180"
                     max="180"
                     step="any"
@@ -65,8 +68,8 @@ export function GeometryFields() {
         </>
     ) : (
         <InputField
-            value={i18n.t('{{type}} coordinates are not editable', {
-                type: input.value?.type,
+            placeholder={i18n.t('{{type}} coordinates are not editable', {
+                type: getConstantTranslation(input.value?.type),
             })}
             inputWidth="400px"
             disabled

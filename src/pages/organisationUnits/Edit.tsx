@@ -11,11 +11,7 @@ import {
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { OrganisationUnit, PickWithFieldFilters } from '../../types/generated'
-import {
-    FormValues,
-    OrganisationUnitFormField,
-    organisationUnitSchema,
-} from './form'
+import { OrganisationUnitFormField, organisationUnitSchema } from './form'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -71,8 +67,8 @@ export const Component = () => {
                 modelId,
             })}
             section={section}
-            initialValues={orgUnit.data as FormValues}
-            validate={(values: FormValues) => {
+            initialValues={orgUnit.data}
+            validate={(values: OrgUnitFormValues) => {
                 return validate(organisationUnitSchema, values)
             }}
         >
