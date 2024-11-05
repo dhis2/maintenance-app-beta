@@ -163,6 +163,21 @@ export const modelListViewsConfig = {
         },
         filters: {
             default: ['dataDimensionType', 'category'],
+            available: ['ignoreApproval'],
+        },
+    },
+    categoryOptionCombo: {
+        columns: {
+            default: ['name', 'code', 'lastUpdated'],
+            available: ['categoryCombo', 'ignoreApproval'],
+            // categoryOptionCombo does not have publicAccess
+            overrideDefaultAvailable: true,
+        },
+        filters: {
+            default: ['categoryOption', 'categoryCombo'],
+            available: ['ignoreApproval'],
+            // categoryOptionCombo does not have publicAccess
+            overrideDefaultAvailable: true,
         },
     },
 } satisfies SectionListViewConfig<SectionName>
