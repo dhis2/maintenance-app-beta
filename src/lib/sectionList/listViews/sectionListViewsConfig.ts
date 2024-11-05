@@ -136,7 +136,7 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            default: ['dataDimensionType', 'categoryCombo'],
+            default: ['dataDimensionType'],
         },
     },
     categoryOptionGroup: {

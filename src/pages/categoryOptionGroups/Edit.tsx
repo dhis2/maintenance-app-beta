@@ -47,8 +47,6 @@ export const Component = () => {
         queryFn: queryFn<CategoryOptionGroupFormValues>,
     })
 
-    console.log(categoryOptionGroupQuery, 'categoryOptionGroupSetQuery')
-
     return (
         <FormBase
             onSubmit={useOnSubmitEdit({ section, modelId })}
