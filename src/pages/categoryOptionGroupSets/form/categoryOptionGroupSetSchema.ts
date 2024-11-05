@@ -16,7 +16,7 @@ export const categoryOptionGroupSetSchema = identifiable
             .default(CategoryOptionGroupSet.dataDimensionType.DISAGGREGATION),
         dataDimension: z.boolean().default(true),
         categoryOptionGroups: referenceCollection
-            .min(1, 'At least one category option is required')
+            .min(1, 'At least one category option group is required')
             .default([]),
     })
 
