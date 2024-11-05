@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-04T08:55:34.983Z\n"
-"PO-Revision-Date: 2024-11-04T08:55:34.985Z\n"
+"POT-Creation-Date: 2024-11-05T07:23:15.731Z\n"
+"PO-Revision-Date: 2024-11-05T07:23:15.732Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -288,6 +288,9 @@ msgstr "Clear all filters"
 msgid "Category"
 msgstr "Category"
 
+msgid "Category option"
+msgstr "Category option"
+
 msgid "Category option group"
 msgstr "Category option group"
 
@@ -425,9 +428,6 @@ msgstr "Search for a user or group"
 
 msgid "Categories"
 msgstr "Categories"
-
-msgid "Category option"
-msgstr "Category option"
 
 msgid "Category options"
 msgstr "Category options"
@@ -867,6 +867,9 @@ msgstr "Zero is significant"
 msgid "Data dimension type"
 msgstr "Data dimension type"
 
+msgid "Ignore data approval"
+msgstr "Ignore data approval"
+
 msgid "This field requires a unique value, please choose another one"
 msgstr "This field requires a unique value, please choose another one"
 
@@ -951,6 +954,48 @@ msgstr "Filter selected categories"
 
 msgid "At least one category is required"
 msgstr "At least one category is required"
+
+msgid "Set up the basic information for this category option group set."
+msgstr "Set up the basic information for this category option group set."
+
+msgid "Explain the purpose of this category option group set."
+msgstr "Explain the purpose of this category option group set."
+
+msgid ""
+"Choose how this category option group set will be used to capture and "
+"analyze"
+msgstr ""
+"Choose how this category option group set will be used to capture and "
+"analyze"
+
+msgid ""
+"Category option group set will be available to the analytics as another "
+"dimension"
+msgstr ""
+"Category option group set will be available to the analytics as another "
+"dimension"
+
+msgid "Category option Groups"
+msgstr "Category option Groups"
+
+msgid ""
+"Choose the category option groups to include in this category option group "
+"set."
+msgstr ""
+"Choose the category option groups to include in this category option group "
+"set."
+
+msgid "Available category option groups"
+msgstr "Available category option groups"
+
+msgid "Selected category option groups"
+msgstr "Selected category option groups"
+
+msgid "Filter available category option groups"
+msgstr "Filter available category option groups"
+
+msgid "Filter selected category option groups"
+msgstr "Filter selected category option groups"
 
 msgid "Set up the basic information for this category option group."
 msgstr "Set up the basic information for this category option group."

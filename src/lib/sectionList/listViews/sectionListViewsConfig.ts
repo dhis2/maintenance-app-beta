@@ -126,6 +126,19 @@ export const modelListViewsConfig = {
             default: ['dataDimensionType', 'categoryCombo'],
         },
     },
+    categoryOptionGroupSet: {
+        columns: {
+            default: [
+                'name',
+                'dataDimensionType',
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+        },
+        filters: {
+            default: ['dataDimensionType'],
+        },
+    },
     categoryOptionGroup: {
         columns: {
             default: [
@@ -150,6 +163,21 @@ export const modelListViewsConfig = {
         },
         filters: {
             default: ['dataDimensionType', 'category'],
+            available: ['ignoreApproval'],
+        },
+    },
+    categoryOptionCombo: {
+        columns: {
+            default: ['name', 'code', 'lastUpdated'],
+            available: ['categoryCombo', 'ignoreApproval'],
+            // categoryOptionCombo does not have publicAccess
+            overrideDefaultAvailable: true,
+        },
+        filters: {
+            default: ['categoryOption', 'categoryCombo'],
+            available: ['ignoreApproval'],
+            // categoryOptionCombo does not have publicAccess
+            overrideDefaultAvailable: true,
         },
     },
 } satisfies SectionListViewConfig<SectionName>

@@ -9,51 +9,53 @@ import {
     useOnSubmitEdit,
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import {
-    CategoryOptionCombo,
-    PickWithFieldFilters,
-} from '../../types/generated'
-import { validate, CategoryOptionComboFormFields } from './form'
+import { PickWithFieldFilters } from '../../types/generated'
+import { CategoryOptionGroupSet } from '../../types/models'
+import CategoryOptionGroupSetFormFields from './form/CategoryOptionGroupSetFormFields'
+import { validate } from './form/categoryOptionGroupSetSchema'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
+    'shortName',
     'code',
-    'ignoreApproval',
+    'description',
+    'categoryOptionGroups[id,displayName]',
+    'dataDimension',
+    'dataDimensionType',
 ] as const
 
-export type CategoryOptionComboFormValues = PickWithFieldFilters<
-    CategoryOptionCombo,
+export type CategoryOptionGroupSetFormValues = PickWithFieldFilters<
+    CategoryOptionGroupSet,
     typeof fieldFilters
 >
 
-const section = SECTIONS_MAP.categoryOptionCombo
-
 export const Component = () => {
+    const section = SECTIONS_MAP.categoryOptionGroupSet
     const queryFn = useBoundResourceQueryFn()
     const modelId = useParams().id as string
     const query = {
-        resource: 'categoryOptionCombos',
+        resource: 'categoryOptionGroupSets',
         id: modelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const categoryOptionCombo = useQuery({
+    const categoryOptionGroupSetQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<CategoryOptionComboFormValues>,
+        queryFn: queryFn<CategoryOptionGroupSetFormValues>,
     })
 
     return (
         <FormBase
             onSubmit={useOnSubmitEdit({ section, modelId })}
             section={section}
-            initialValues={categoryOptionCombo.data}
+            initialValues={categoryOptionGroupSetQuery.data}
             validate={validate}
         >
             <DefaultEditFormContents section={section}>
-                <CategoryOptionComboFormFields />
+                <CategoryOptionGroupSetFormFields />
             </DefaultEditFormContents>
         </FormBase>
     )

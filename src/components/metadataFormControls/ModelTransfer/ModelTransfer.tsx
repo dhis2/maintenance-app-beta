@@ -92,7 +92,7 @@ const BaseModelTransfer = <TModel extends DisplayableModel>(
         [queryResult.data, modelName]
     )
 
-    const selectedOptions = selected.map(toDisplayOption)
+    const selectedOptions = selected ? selected?.map(toDisplayOption) : []
     const loadedOptions = Array.from(allDataMap.values()).map(toDisplayOption)
     // always include selected options
     const allOptions = selectedOptions.concat(loadedOptions || [])

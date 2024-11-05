@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { InputFieldFF } from '@dhis2/ui'
+import { CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field } from 'react-final-form'
 import {
@@ -38,6 +38,15 @@ export const CategoryOptionComboFormFields = () => {
 
                 <StandardFormField>
                     <CodeField schemaSection={section} />
+                </StandardFormField>
+                <StandardFormField>
+                    <Field
+                        component={CheckboxFieldFF}
+                        name="ignoreApproval"
+                        label={i18n.t('Ignore data approval')}
+                        validateFields={[]}
+                        type="checkbox"
+                    />
                 </StandardFormField>
             </StandardFormSection>
             <CustomAttributesSection />
