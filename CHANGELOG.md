@@ -1,3 +1,10 @@
+# [0.11.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.10.2...v0.11.0) (2024-11-05)
+
+
+### Features
+
+* category option group sets ([#427](https://github.com/dhis2/maintenance-app-beta/issues/427)) ([37b4051](https://github.com/dhis2/maintenance-app-beta/commit/37b4051e7ff081a43a2fd399ee94272922808d98))
+
 ## [0.10.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.10.1...v0.10.2) (2024-10-30)
 
 
