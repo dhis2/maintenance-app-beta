@@ -2,7 +2,12 @@ import '@testing-library/jest-dom'
 import { configure, render } from '@testing-library/react'
 import React from 'react'
 import { useMatches, HashRouter } from 'react-router-dom'
-import { OVERVIEW_SECTIONS, SECTIONS_MAP } from '../../lib'
+import {
+    getOverviewPath,
+    getSectionPath,
+    OVERVIEW_SECTIONS,
+    SECTIONS_MAP,
+} from '../../lib'
 import { MatchRouteHandle, RouteHandle } from '../routes/types'
 import { Breadcrumbs, BreadcrumbItem } from './Breadcrumb'
 
@@ -34,9 +39,12 @@ beforeEach(() => {
 })
 
 describe('BreadcrumbItem', () => {
-    it('should render a link based on the section title', () => {
+    it('should render a link based on the given label', () => {
         const { getByRole } = render(
-            <BreadcrumbItem section={SECTIONS_MAP.dataElement} />,
+            <BreadcrumbItem
+                label={'Data element'}
+                to={`/${getSectionPath(SECTIONS_MAP.dataElement)}`}
+            />,
             { wrapper: HashRouter }
         )
 
@@ -46,9 +54,12 @@ describe('BreadcrumbItem', () => {
         expect(DataElementLink).toHaveAttribute('href', '#/dataElements')
     })
 
-    it('should render a link to overview-section using plural title if overview-section', () => {
+    it('should render a correct link to overview-section using plural title if overview-section', () => {
         const { getByRole } = render(
-            <BreadcrumbItem section={OVERVIEW_SECTIONS.dataElement} />,
+            <BreadcrumbItem
+                to={`/${getOverviewPath(OVERVIEW_SECTIONS.dataElement)}`}
+                label={'Data elements'}
+            />,
             { wrapper: HashRouter }
         )
 
@@ -59,20 +70,6 @@ describe('BreadcrumbItem', () => {
             'href',
             '#/overview/dataElements'
         )
-    })
-    it('should render a link with label-prop instead of section title if provided', () => {
-        const { getByRole } = render(
-            <BreadcrumbItem
-                section={SECTIONS_MAP.dataElement}
-                label={'Custom label'}
-            />,
-            { wrapper: HashRouter }
-        )
-
-        const DataElementLink = getByRole('link')
-        expect(DataElementLink).toBeDefined()
-        expect(DataElementLink).toHaveTextContent('Data elements')
-        expect(DataElementLink).toHaveAttribute('href', '#/dataElements')
     })
 })
 describe('Breadcrumbs', () => {
@@ -97,13 +94,19 @@ describe('Breadcrumbs', () => {
                 mockHandle({
                     crumb: () => (
                         <BreadcrumbItem
-                            section={OVERVIEW_SECTIONS.dataElement}
+                            to={`/${getOverviewPath(
+                                OVERVIEW_SECTIONS.dataElement
+                            )}`}
+                            label={OVERVIEW_SECTIONS.dataElement.titlePlural}
                         />
                     ),
                 }),
                 mockHandle({
                     crumb: () => (
-                        <BreadcrumbItem section={SECTIONS_MAP.dataElement} />
+                        <BreadcrumbItem
+                            to={`/${getSectionPath(SECTIONS_MAP.dataElement)}`}
+                            label={SECTIONS_MAP.dataElement.titlePlural}
+                        />
                     ),
                 }),
             ])
