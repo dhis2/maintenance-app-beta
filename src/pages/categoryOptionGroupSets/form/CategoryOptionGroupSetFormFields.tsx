@@ -102,7 +102,7 @@ function CategoryOptionGroupSetFormFields() {
                                 'Filter available category option groups'
                             )}
                             filterPlaceholderPicked={i18n.t(
-                                'Filter selected category options'
+                                'Filter selected category option groups'
                             )}
                         />
                     </StandardFormField>
