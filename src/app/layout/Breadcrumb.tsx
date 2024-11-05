@@ -1,35 +1,43 @@
 import React from 'react'
-import { Link, useMatches } from 'react-router-dom'
-import {
-    Section,
-    isOverviewSection,
-    getSectionPath,
-    getOverviewPath,
-    useToWithSearchState,
-} from '../../lib'
+import { Link, To, useLocation, useMatches, matchPath } from 'react-router-dom'
+import { useToWithSearchState } from '../../lib'
 import type { MatchRouteHandle } from '../routes/types'
 import css from './Breadcrumb.module.css'
 
 const BreadcrumbSeparator = () => <span className={css.separator}>/</span>
 
 type BreadcrumbItemProps = {
-    section: Section
-    label?: string
+    label: string
+    to: To
 }
 
-export const BreadcrumbItem = ({ section, label }: BreadcrumbItemProps) => {
-    const isOverview = isOverviewSection(section)
-    const link = isOverview ? getOverviewPath(section) : getSectionPath(section)
-    const to = useToWithSearchState(`/${link}`)
+export const BreadcrumbItem = ({ label, to }: BreadcrumbItemProps) => {
+    const resolvedTo = useToWithSearchState(to)
+    const currentLoc = useLocation()
 
-    label = label ?? isOverview ? section.titlePlural : section.title
+    if (resolvedTo.pathname) {
+        const match = matchPath(resolvedTo.pathname, currentLoc.pathname)
+        if (match?.pattern.end) {
+            return <BreadCrumbEndItem label={label} />
+        }
+    }
 
     return (
-        <Link className={css.breadcrumbItem} to={to}>
+        <Link
+            className={css.breadcrumbItemLink}
+            to={resolvedTo}
+            state={{ search: resolvedTo.search }}
+        >
             {label}
         </Link>
     )
 }
+
+/** Component that is used for "End links", where the current route is the end of the path
+ * and thus should not be a link */
+export const BreadCrumbEndItem = ({ label }: { label: string }) => (
+    <span className={css.breadcrumbItem}>{label}</span>
+)
 
 export const Breadcrumbs = () => {
     const matches = useMatches() as MatchRouteHandle[]
@@ -38,7 +46,10 @@ export const Breadcrumbs = () => {
         .filter((match) => match.handle?.crumb)
         .map((match) => (
             <span key={match.id}>
-                {match.handle?.crumb?.()}
+                {match.handle?.crumb?.({
+                    params: match.params,
+                    pathname: match.pathname,
+                })}
                 <BreadcrumbSeparator />
             </span>
         ))
