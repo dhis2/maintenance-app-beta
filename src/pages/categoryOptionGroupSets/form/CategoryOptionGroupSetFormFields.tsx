@@ -86,7 +86,7 @@ function CategoryOptionGroupSetFormFields() {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose the category option Groups to include in this category option group set.'
+                        'Choose the category option groups to include in this category option group set.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
