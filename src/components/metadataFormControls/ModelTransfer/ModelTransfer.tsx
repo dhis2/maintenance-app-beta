@@ -51,7 +51,6 @@ const BaseModelTransfer = <TModel extends DisplayableModel>(
     { selected, onChange, query, ...transferProps }: ModelTransferProps<TModel>,
     ref: React.Ref<ImperativeRef>
 ) => {
-    console.log(selected, 'selected')
     const queryFn = useBoundResourceQueryFn()
     const [searchTerm, setSearchTerm] = useState('')
 
