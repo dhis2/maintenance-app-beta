@@ -13,9 +13,10 @@ import {
 import {
     DefaultIdentifiableFields,
     DescriptionField,
-} from '../../../components/form'
+} from '../../../components'
 import { DateField } from '../../../components/form/fields/DateField'
 import { SCHEMA_SECTIONS, useSystemSetting } from '../../../lib'
+import { GeometryFields } from './GeometryFields'
 import { ImageField } from './ImageField'
 import { OrganisationUnitSelector } from './OrganisationUnitSelector'
 
@@ -126,26 +127,7 @@ export function OrganisationUnitFormField() {
                 <StandardFormSectionDescription>
                     {i18n.t('Set up the organisation unit location.')}
                 </StandardFormSectionDescription>
-
-                <FieldRFF<string | undefined>
-                    component={InputFieldFF}
-                    inputWidth="400px"
-                    label={i18n.t('Latitude')}
-                    name="geometry.latitude"
-                    type="number"
-                    min="-90"
-                    max="90"
-                />
-
-                <FieldRFF<string | undefined>
-                    component={InputFieldFF}
-                    inputWidth="400px"
-                    label={i18n.t('Longitude')}
-                    name="geometry.longitude"
-                    type="number"
-                    min="-180"
-                    max="180"
-                />
+                <GeometryFields />
             </StandardFormSection>
             {allowReferenceAssignments && (
                 <StandardFormSection>
