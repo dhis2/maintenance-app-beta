@@ -126,6 +126,19 @@ export const modelListViewsConfig = {
             default: ['dataDimensionType', 'categoryCombo'],
         },
     },
+    categoryOptionGroupSet: {
+        columns: {
+            default: [
+                'name',
+                'dataDimensionType',
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+        },
+        filters: {
+            default: ['dataDimensionType'],
+        },
+    },
     categoryOptionGroup: {
         columns: {
             default: [
