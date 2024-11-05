@@ -97,7 +97,7 @@ function CategoryOptionGroupSetFormFields() {
                                 resource: 'categoryOptionGroups',
                             }}
                             leftHeader={i18n.t('Available category option groups')}
-                            rightHeader={i18n.t('Selected category options')}
+                            rightHeader={i18n.t('Selected category option groups')}
                             filterPlaceholder={i18n.t(
                                 'Filter available category option groups'
                             )}
