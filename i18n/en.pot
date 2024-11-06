@@ -5,8 +5,13 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2024-11-13T08:29:01.348Z\n"
 "PO-Revision-Date: 2024-11-13T08:29:01.348Z\n"
+=======
+"POT-Creation-Date: 2024-11-06T18:43:30.317Z\n"
+"PO-Revision-Date: 2024-11-06T18:43:30.318Z\n"
+>>>>>>> f9bc738 (feat(dataSet): dataSet sectionedForm)
 
 msgid "schemas"
 msgstr "schemas"
@@ -1162,6 +1167,36 @@ msgstr ""
 "aggregation level available) as the data source, and PHU data will not be "
 "included. PHU will still be available for the PHU level, but not included "
 "in the aggregations to the levels above."
+
+msgid "Set up the basic information for this data set."
+msgstr "Set up the basic information for this data set."
+
+msgid "Configure data elements"
+msgstr "Configure data elements"
+
+msgid "Choose what data is collected for this data set."
+msgstr "Choose what data is collected for this data set."
+
+msgid "Setup"
+msgstr "Setup"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Data Elements"
+msgstr "Data Elements"
+
+msgid "Periods"
+msgstr "Periods"
+
+msgid "Organisation Units"
+msgstr "Organisation Units"
+
+msgid "Form"
+msgstr "Form"
+
+msgid "Advanced"
+msgstr "Advanced"
 
 msgid "Longitude"
 msgstr "Longitude"

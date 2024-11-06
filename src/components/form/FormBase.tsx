@@ -20,7 +20,7 @@ type OwnProps<TValues = Record<string, unknown>> = {
     includeAttributes?: boolean
 }
 
-type FormBaseProps<TValues> = FormProps<TValues> & OwnProps<TValues>
+export type FormBaseProps<TValues> = FormProps<TValues> & OwnProps<TValues>
 
 export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
     children,

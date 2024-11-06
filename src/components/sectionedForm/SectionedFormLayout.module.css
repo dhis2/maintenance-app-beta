@@ -1,0 +1,70 @@
+@value m-medium: (min-width: 768px);
+
+/* The purpose of this wrappper is for the */
+.layoutWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: auto;
+}
+.wrapper {
+    display: grid;
+    height: 100%;
+    grid-template-areas: 'sidebar' 'main' 'footer';
+    grid-template-rows: auto 1fr 68px;
+    overflow: auto;
+    /* border-color: var(--colors-grey400);
+    border-style: solid;
+    border-width: 1px; */
+    border: 1px solid var(--colors-grey300);
+    /* box-shadow: 0 -1px 0 0 var(--colors-grey300) inset; */
+}
+.main {
+    padding: var(--spacers-dp16);
+    grid-area: main;
+    background-color: var(--colors-white);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.main > div {
+    overflow-y: auto;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background-color: #fff;
+    width: 240px;
+    /* min-width: 240px; */
+    overflow: auto;
+    height: 100%;
+    border-radius: 0;
+    border-inline-end: 1px solid var(--colors-grey300);
+}
+
+.footer {
+    grid-area: footer;
+    width: 100%;
+    background: var(--colors-white);
+    border-top: 1px solid var(--colors-grey300);
+    display: flex;
+}
+
+@media m-medium {
+    .wrapper {
+        height: 100%;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: 1fr 68px;
+        grid-template-areas: 'sidebar main' 'footer footer';
+    }
+    .sidebar {
+        /* width: 240px; */
+        overflow: auto;
+    }
+    .main {
+        overflow-y: auto;
+    }
+}

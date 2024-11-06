@@ -27,10 +27,16 @@ const withAttributeValues = z.object({
     attributeValues: attributeValues,
 })
 
+const style = z.object({
+    color: z.string().optional(),
+    icon: z.string().optional(),
+})
+
 export const modelFormSchemas = {
     objectReference: modelReference,
     referenceCollection,
     identifiable,
     attributeValues,
     withAttributeValues,
+    style,
 }

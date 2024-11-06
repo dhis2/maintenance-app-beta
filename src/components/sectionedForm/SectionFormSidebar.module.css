@@ -1,0 +1,109 @@
+.sidebar {
+    overflow: auto;
+    height: 100%;
+}
+
+.listItem {
+    box-shadow: 0px -1px 0px 0px var(--colors-grey300) inset;
+    padding: var(--spacers-dp16);
+    gap: 10px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.listItem:hover {
+    background-color: var(--colors-grey050);
+}
+
+.listItem.selected {
+    background-color: var(--colors-grey100);
+    box-shadow: 4px 0px 0px 0px var(--colors-blue700) inset;
+    cursor: initial;
+}
+
+.listItem header {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.listItem .checkInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.listItem .subtitle {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    font-size: 12px;
+    gap: 4px;
+    color: var(--colors-grey700);
+}
+
+.noItemsMessage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 14px;
+    color: var(--colors-grey700);
+}
+
+.subtitleSection {
+    flex-shrink: 0;
+}
+
+.statusIcon {
+    flex-shrink: 0;
+}
+
+.listToolbar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: var(--spacers-dp8) var(--spacers-dp8) var(--spacers-dp8)
+        var(--spacers-dp16);
+    border-width: 1px 0px 1px;
+    border-style: solid;
+    border-color: var(--colors-grey400);
+}
+
+.toolbarTabs {
+    border-width: 1px 0px 0px;
+    border-style: solid;
+    border-color: var(--colors-grey400);
+    box-shadow: none;
+}
+
+.slowCheckInfo {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-inline-start: 1px solid var(--colors-grey300);
+    padding-inline-start: 6px;
+    color: var(--colors-grey700);
+}
+
+/* disable borders and shadows from UI TabBar and Tab
+Prevents "double" border
+*/
+.toolbarTabs div,
+.toolbarTabs button {
+    box-shadow: none;
+    border: none !important;
+}
+
+.errorIcon {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+}
+
+.searchInput {
+    width: 180px;
+}

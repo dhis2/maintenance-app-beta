@@ -1,0 +1,26 @@
+.defaultFormFooter {
+}
+
+.footerWrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+    align-self: center;
+    gap: 4px;
+}
+
+.sectionActions {
+    display: flex;
+    gap: var(--spacers-dp8);
+}
+
+.verticalDivider {
+    border-left: 1px solid var(--colors-grey300);
+    height: 100%;
+    width: 20px;
+}
+
+.submitActions {
+    display: flex;
+    gap: 8px;
+}

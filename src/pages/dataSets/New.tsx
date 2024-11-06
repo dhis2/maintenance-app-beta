@@ -1,63 +1,34 @@
 import React from 'react'
+import { FormBase } from '../../components'
+import { DefaultSectionedFormSidebar } from '../../components/sectionedForm/DefaultSectionedFormSidebar'
+import { DefaultSectionedFormFooter } from '../../components/sectionedForm/SectionedFormFooter'
+import { SectionedFormLayout } from '../../components/sectionedForm/SectionedFormLayout'
 import {
-    SectionedFormBase,
-    SectionedFormSection,
-    SectionFormField,
-    useSectionedFormState,
+    SectionedFormDescriptorProvider,
+    SECTIONS_MAP,
+    useOnSubmitEdit,
+    useOnSubmitNew,
 } from '../../lib'
-import { LinkButton } from '../../components/LinkButton'
-import { NavLink } from 'react-router-dom'
+import { DataSetFormContents } from './form/DataSetFormContents'
+import { initialValues, validate } from './form/dataSetFormSchema'
+import { DataSetFormDescriptor } from './form/formDescriptor'
+
+const section = SECTIONS_MAP.dataSet
 export const Component = () => {
-    const [inc, setInc] = React.useState(0)
-
     return (
-        <div>
-            <h1>New Data Set</h1>
-            <p>This is where you can create a new data set</p>
-            <div>
-                <SectionedFormBase name="dataSet">
-                    <SideBar />
-                    <SectionedFormSection label="Basic" name="basic">
-                        <div>
-                            <SectionFormField name="name" label="Name">
-                                <input type="text" />
-                            </SectionFormField>
-                        </div>
-                    </SectionedFormSection>
-                    <SectionedFormSection label="Advanced" name="advanced">
-                        <div>
-                            <SectionFormField name="name" label="Name">
-                                <input type="text" />
-                            </SectionFormField>
-                        </div>
-                    </SectionedFormSection>
-                </SectionedFormBase>
-                <input
-                    type="button"
-                    value="inc"
-                    onClick={() => setInc(inc + 1)}
-                />
-            </div>
-        </div>
-    )
-}
-
-const SideBar = () => {
-    const sections = useSectionedFormState((state) => state.sections)
-    const state = useSectionedFormState()
-    console.log({ sections })
-    const sectionForField = state.getSectionsForField('name')
-    console.log({ sectionForField })
-    return (
-        <div>
-            <h2>Sections</h2>
-            <ul>
-                {sections.map((section) => (
-                    <li key={section.name}>{section.label}</li>
-                ))}
-                <LinkButton to="/overview">Overview</LinkButton>
-                <NavLink to={'/overview'}>Overview</NavLink>
-            </ul>
-        </div>
+        <SectionedFormDescriptorProvider initialValue={DataSetFormDescriptor}>
+            <SectionedFormLayout
+                sidebar={<DefaultSectionedFormSidebar />}
+                footer={<DefaultSectionedFormFooter />}
+            >
+                <FormBase
+                    onSubmit={useOnSubmitNew({ section })}
+                    initialValues={initialValues}
+                    validate={validate}
+                >
+                    <DataSetFormContents />
+                </FormBase>
+            </SectionedFormLayout>
+        </SectionedFormDescriptorProvider>
     )
 }
