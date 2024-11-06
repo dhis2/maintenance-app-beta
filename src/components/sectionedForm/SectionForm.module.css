@@ -1,26 +1,39 @@
-.defaultFormFooter {
+.sections {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp24);
+}
+
+.sectionedForm {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp16);
 }
 
 .footerWrapper {
     display: flex;
-    justify-content: space-between;
-    padding: 0 16px;
-    align-self: center;
-    gap: 4px;
+    gap: var(--spacers-dp16);
+    height: 100%;
+    align-items: center;
 }
 
 .sectionActions {
     display: flex;
     gap: var(--spacers-dp8);
+    width: var(--sidebar-width);
+    height: 100%;
+    border-inline-end: 1px solid var(--colors-grey300);
+    display: flex;
+    align-items: center;
+    padding-inline: var(--spacers-dp16);
 }
 
 .verticalDivider {
-    border-left: 1px solid var(--colors-grey300);
-    height: 100%;
-    width: 20px;
+    align-self: stretch;
+    width: 0;
 }
 
-.submitActions {
+.formActions {
     display: flex;
     gap: 8px;
 }

@@ -57,7 +57,12 @@ export const DataSetFormDescriptor = {
         {
             name: 'periods',
             label: i18n.t('Periods'),
-            fields: [],
+            fields: [
+                {
+                    name: 'periodType',
+                    label: i18n.t('Period type'),
+                },
+            ],
         },
         { name: 'validation', label: i18n.t('Validation'), fields: [] },
         {

@@ -16,14 +16,13 @@ type MaybeModelWithAttributes = {
 
 type OwnProps<TValues = Record<string, unknown>> = {
     initialValues: TValues | undefined
-    children: React.ReactNode
+    children: FormProps<TValues>['children']
     includeAttributes?: boolean
 }
 
 export type FormBaseProps<TValues> = FormProps<TValues> & OwnProps<TValues>
 
 export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
-    children,
     initialValues,
     onSubmit,
     validate,
@@ -56,18 +55,27 @@ export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
         return <LoadingSpinner />
     }
 
+    const { render, children } = reactFinalFormProps
+    let resolvedRender = render
+
+    // support a default render wrapping children in form if children is not a function
+    if (!render && typeof children !== 'function') {
+        resolvedRender = ({ handleSubmit }) => (
+            <form onSubmit={handleSubmit}>{children}</form>
+        )
+    }
+
     return (
         <ReactFinalForm<TInitialValues>
             validateOnBlur={true}
             initialValues={initialValuesWithAttributes}
-            render={({ handleSubmit }) => (
-                <form onSubmit={handleSubmit}>{children}</form>
-            )}
             onSubmit={(values, form) => onSubmit(valueFormatter(values), form)}
             validate={(values) =>
                 validate ? validate(valueFormatter(values)) : undefined
             }
             {...reactFinalFormProps}
-        />
+        >
+            {typeof children === 'function' ? children : resolvedRender}
+        </ReactFinalForm>
     )
 }
