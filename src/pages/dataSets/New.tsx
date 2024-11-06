@@ -15,9 +15,10 @@ import { initialValues, validate } from './form/dataSetFormSchema'
 import { DataSetFormDescriptor } from './form/formDescriptor'
 
 const section = SECTIONS_MAP.dataSet
+
 export const Component = () => {
     return (
-        <SectionedFormDescriptorProvider initialValue={DataSetFormDescriptor}>
+        <SectionedFormDescriptorProvider formDescriptor={DataSetFormDescriptor}>
             <FormBase
                 onSubmit={useOnSubmitNew({ section })}
                 initialValues={initialValues}

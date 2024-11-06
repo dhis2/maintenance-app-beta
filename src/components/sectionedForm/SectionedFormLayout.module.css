@@ -1,6 +1,5 @@
 @value m-medium: (min-width: 768px);
 
-/* The purpose of this wrappper is for the */
 .layoutWrapper {
     display: flex;
     flex-direction: column;
@@ -31,7 +30,6 @@
     background-color: #fff;
     min-width: var(--sidebar-width);
     height: 100%;
-    border-radius: 0;
     border-inline-end: 1px solid var(--colors-grey300);
 }
 
@@ -39,7 +37,7 @@
     grid-area: footer;
     width: 100%;
     background: var(--colors-white);
-    border-top: 1px solid var(--colors-grey300);
+    border-block-start: 1px solid var(--colors-grey300);
     display: flex;
 }
 

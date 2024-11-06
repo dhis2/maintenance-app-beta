@@ -1,9 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import {
-    createUseSelectedSection,
-    SectionedFormDescriptor,
-    useSelectedSection,
-} from '../../../lib'
+import { SectionedFormDescriptor } from '../../../lib'
 import { DataSetFormValues } from './fieldFilters'
 
 export const DataSetFormDescriptor = {

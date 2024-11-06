@@ -7,12 +7,12 @@ import {
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
+    SectionedFormSectionRouter,
 } from '../../../components'
 import {
     SectionedFormSection,
     SectionedFormSections,
 } from '../../../components/sectionedForm'
-import { SectionedFormSectionRouter } from '../../../components/sectionedForm/SectionedFormSectionRouter'
 import { SECTIONS_MAP, useSectionedFormDescriptor } from '../../../lib'
 import { CategoryComboField } from '../../dataElements/fields'
 import { DataSetFormDescriptor } from './formDescriptor'

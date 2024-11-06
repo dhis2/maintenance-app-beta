@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react'
-import { SectionDescriptor, SectionedFormDescriptor } from './formDescriptor'
+import { SectionDescriptor, SectionedFormDescriptor } from './types'
 
 /* Some of the types in this file may look complex.
     However they are here to help type-safety and autocommpletion for consumers.
@@ -50,6 +50,7 @@ function createContextValue<const T extends SectionedFormDescriptor>(
         },
     }
 }
+
 type SectionFormContextValue<T extends SectionedFormDescriptor> = ReturnType<
     typeof createContextValue<T>
 >
@@ -62,12 +63,12 @@ export const SectionedFormDescriptorProvider = <
     T extends SectionedFormDescriptor
 >({
     children,
-    initialValue,
+    formDescriptor,
 }: {
-    initialValue: T
+    formDescriptor: T
     children: React.ReactNode
 }) => {
-    const [contextValue] = useState(() => createContextValue(initialValue))
+    const [contextValue] = useState(() => createContextValue(formDescriptor))
 
     return (
         <SectionedFormContext.Provider value={contextValue}>

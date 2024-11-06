@@ -5,11 +5,9 @@ export type FieldDescriptor<T = unknown> = {
     name: keyof T | (string & {})
 }
 
-export type SectionDescriptor<T> = {
+export type SectionDescriptor<T = unknown> = {
     label: string
     name: string
-    // keyof T | (string & {}) allows auto-completion for fields, while also allowing
-    // any other string to be used as a key
     fields: FieldDescriptor<T>[]
 }
 
