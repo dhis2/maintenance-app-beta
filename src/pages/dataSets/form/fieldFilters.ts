@@ -7,7 +7,7 @@ import { DataSet, PickWithFieldFilters } from '../../../types/generated'
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
-    'categoryCombos[id,displayName]',
+    'categoryCombo[id,displayName]',
     'dataElementDecoration',
     'dataEntryForm[id]',
     'dataInputPeriods',
@@ -22,12 +22,13 @@ const fieldFilters = [
     'renderAsTabs',
     'renderHorizontally',
     'sections',
+    'style',
     'skipOffline',
     'timelyDays',
     'validCommpleteOnly',
 ] as const
 
-// DisplayOptions are handld by client only
+// DisplayOptions are handled by client only, and thus dont have a generated type
 // TODO: this should have a zod-schema and validation
 type DisplayOptions = Record<string, unknown>
 

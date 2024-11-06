@@ -24,23 +24,3 @@ export const useSelectedSection = () => {
         removeDefaultsFromUrl: true,
     })
 }
-
-/* Helper to create a type-safe hook for useSelectedSection */
-export const createUseSelectedSection = <
-    TSection extends string,
-    TDefault extends TSection
->(
-    sections: TSection[],
-    defaultSection: TDefault
-) => {
-    const queryParamType = withDefault(
-        createEnumParam<TSection>(sections),
-        defaultSection
-    )
-    const useSelectedSection = () => {
-        return useQueryParam(FORM_SECTION_PARAM_KEY, queryParamType, {
-            removeDefaultsFromUrl: true,
-        })
-    }
-    return useSelectedSection
-}
