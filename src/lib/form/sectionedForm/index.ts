@@ -1,6 +1,6 @@
-export { SectionFormField } from './SectionedFormField'
-export { SectionedFormSection } from './SectionedFormSection'
-export { SectionedFormBase } from './SectionedFormBase'
-export { useSectionedFormState } from './useSectionedFormState'
 export * from './useSelectedSection'
-export * from './SectionedFormDescriptorProvider'
+export {
+    useSectionedFormDescriptor,
+    SectionedFormDescriptorProvider,
+} from './SectionedFormContext'
+export * from './types'
