@@ -1,4 +1,4 @@
-import { NoticeBox } from '@dhis2/ui'
+// import { NoticeBox } from '@dhis2/ui'
 import React, { useMemo } from 'react'
 import { FormProps, Form as ReactFinalForm } from 'react-final-form'
 import {
@@ -10,6 +10,8 @@ import { useCustomAttributesQuery } from './attributes'
 
 type MaybeModelWithAttributes = {
     id?: string
+    name?: string
+    factor?: string
     attributeValues?: PartialAttributeValue[] | undefined
 }
 
@@ -44,9 +46,9 @@ export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
         }
     }, [customAttributes.data, initialValues, includeAttributes])
 
-    if (customAttributes.error) {
-        return <NoticeBox error title="Failed to load custom attributes" />
-    }
+    // if (customAttributes.error) {
+    //     return <NoticeBox error title="Failed to load custom attributes" />
+    // }
 
     if (!initialValuesWithAttributes || customAttributes.loading) {
         return <LoadingSpinner />

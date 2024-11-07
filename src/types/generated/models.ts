@@ -4776,7 +4776,7 @@ export type IndicatorType = {
     created: string
     createdBy: User
     displayName: string
-    factor: number
+    factor: string
     favorite: boolean
     favorites: Array<string>
     href: string
