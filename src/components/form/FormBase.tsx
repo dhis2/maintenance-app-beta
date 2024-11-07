@@ -1,7 +1,10 @@
 import { NoticeBox } from '@dhis2/ui'
 import React, { useMemo } from 'react'
-import { FormProps, Form as ReactFinalForm } from 'react-final-form'
-import { defaultValueFormatter } from '../../lib/form/useOnSubmit'
+import {
+    FormProps,
+    FormRenderProps,
+    Form as ReactFinalForm,
+} from 'react-final-form'
 import {
     PartialAttributeValue,
     getAllAttributeValues,
@@ -18,6 +21,10 @@ type OwnProps<TValues = Record<string, unknown>> = {
     initialValues: TValues | undefined
     children: FormProps<TValues>['children']
     includeAttributes?: boolean
+    // we cant remove these props due to FormProps definition, but set to never to avoid confusion
+    // since we're override this and just use children props
+    render?: never
+    component?: never
 }
 
 export type FormBaseProps<TValues> = FormProps<TValues> & OwnProps<TValues>
@@ -55,15 +62,16 @@ export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
         return <LoadingSpinner />
     }
 
-    const { render, children } = reactFinalFormProps
-    let resolvedRender = render
+    const { children } = reactFinalFormProps
 
-    // support a default render wrapping children in form if children is not a function
-    if (!render && typeof children !== 'function') {
-        resolvedRender = ({ handleSubmit }) => (
-            <form onSubmit={handleSubmit}>{children}</form>
-        )
-    }
+    // by defualt we wrap children and add form
+    // but if it's a function - we let the consumer override it
+    const defaultRender =
+        typeof children === 'function'
+            ? children
+            : ({ handleSubmit }: FormRenderProps<TInitialValues>) => (
+                  <form onSubmit={handleSubmit}>{children}</form>
+              )
 
     return (
         <ReactFinalForm<TInitialValues>
@@ -75,7 +83,7 @@ export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
             }
             {...reactFinalFormProps}
         >
-            {typeof children === 'function' ? children : resolvedRender}
+            {defaultRender}
         </ReactFinalForm>
     )
 }

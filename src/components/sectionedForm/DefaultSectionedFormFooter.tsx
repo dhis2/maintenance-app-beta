@@ -4,11 +4,13 @@ import React from 'react'
 import { useSectionedFormDescriptor, useSelectedSection } from '../../lib'
 import { LinkButton } from '../LinkButton'
 import { SectionedFormFooter } from './SectionedFormFooter'
+import { useForm } from 'react-final-form'
 
 export const DefaultSectionedFormFooter = () => {
     const descriptor = useSectionedFormDescriptor()
     const [selected, setSelectedSection] = useSelectedSection()
 
+    const { submit } = useForm()
     const currSelectedIndex = descriptor.sections.findIndex(
         (s) => s.name === selected
     )
@@ -45,7 +47,7 @@ export const DefaultSectionedFormFooter = () => {
                 )}
             </SectionedFormFooter.SectionActions>
             <SectionedFormFooter.FormActions>
-                <Button primary type="submit">
+                <Button primary type="submit" onClick={submit}>
                     {i18n.t('Save and exit')}
                 </Button>
                 <LinkButton to={'..'}>
