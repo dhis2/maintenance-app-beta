@@ -59,9 +59,7 @@ export const SectionedFormContext = createContext<ReturnType<
     typeof createContextValue
 > | null>(null)
 
-export const SectionedFormDescriptorProvider = <
-    T extends SectionedFormDescriptor
->({
+export const SectionedFormProvider = <T extends SectionedFormDescriptor>({
     children,
     formDescriptor,
 }: {
@@ -77,7 +75,7 @@ export const SectionedFormDescriptorProvider = <
     )
 }
 
-export const useSectionedFormDescriptor = <
+export const useSectionedFormContext = <
     T extends SectionedFormDescriptor
 >() => {
     const context = React.useContext(SectionedFormContext)

@@ -1,12 +1,12 @@
 import React from 'react'
-import { useSectionedFormDescriptor, useSelectedSection } from '../../lib'
+import { useSectionedFormContext, useSelectedSection } from '../../lib'
 import {
     SectionedFormSidebar,
     SectionedFormSidebarItem,
 } from './SectionedFormSidebar'
 
 export const DefaultSectionedFormSidebar = () => {
-    const { sections } = useSectionedFormDescriptor()
+    const { sections } = useSectionedFormContext()
 
     const [selected] = useSelectedSection()
 

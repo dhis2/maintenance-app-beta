@@ -13,14 +13,13 @@ import {
     SectionedFormSection,
     SectionedFormSections,
 } from '../../../components/sectionedForm'
-import { SECTIONS_MAP, useSectionedFormDescriptor } from '../../../lib'
+import { SECTIONS_MAP, useSectionedFormContext } from '../../../lib'
 import { DataSetFormDescriptor } from './formDescriptor'
 
 const section = SECTIONS_MAP.dataSet
 
 export const DataSetFormContents = () => {
-    const descriptor =
-        useSectionedFormDescriptor<typeof DataSetFormDescriptor>()
+    const descriptor = useSectionedFormContext<typeof DataSetFormDescriptor>()
 
     return (
         <SectionedFormSections>

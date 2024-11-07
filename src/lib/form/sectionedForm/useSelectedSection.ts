@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useQueryParam, createEnumParam, withDefault } from 'use-query-params'
-import { useSectionedFormDescriptor } from './SectionedFormContext'
+import { useSectionedFormContext } from './SectionedFormContext'
 
 export const FORM_SECTION_PARAM_KEY = 'section'
 
@@ -9,7 +9,7 @@ export const getSectionSearchParam = (section: string) => {
 }
 
 export const useSelectedSection = () => {
-    const { sections } = useSectionedFormDescriptor()
+    const { sections } = useSectionedFormContext()
 
     const paramConfig = useMemo(
         () =>

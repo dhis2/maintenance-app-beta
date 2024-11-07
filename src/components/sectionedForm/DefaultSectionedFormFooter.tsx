@@ -1,13 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import React from 'react'
-import { useSectionedFormDescriptor, useSelectedSection } from '../../lib'
+import { useForm } from 'react-final-form'
+import { useSectionedFormContext, useSelectedSection } from '../../lib'
 import { LinkButton } from '../LinkButton'
 import { SectionedFormFooter } from './SectionedFormFooter'
-import { useForm } from 'react-final-form'
 
 export const DefaultSectionedFormFooter = () => {
-    const descriptor = useSectionedFormDescriptor()
+    const descriptor = useSectionedFormContext()
     const [selected, setSelectedSection] = useSelectedSection()
 
     const { submit } = useForm()

@@ -4,13 +4,8 @@ import {
     SectionedFormLayout,
     DefaultSectionedFormFooter,
     DefaultSectionedFormSidebar,
-    StandardFormSection,
 } from '../../components'
-import {
-    SectionedFormDescriptorProvider,
-    SECTIONS_MAP,
-    useOnSubmitNew,
-} from '../../lib'
+import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { DataSetFormContents } from './form/DataSetFormContents'
 import { initialValues, validate } from './form/dataSetFormSchema'
 import { DataSetFormDescriptor } from './form/formDescriptor'
@@ -19,7 +14,7 @@ const section = SECTIONS_MAP.dataSet
 
 export const Component = () => {
     return (
-        <SectionedFormDescriptorProvider formDescriptor={DataSetFormDescriptor}>
+        <SectionedFormProvider formDescriptor={DataSetFormDescriptor}>
             <FormBase
                 onSubmit={useOnSubmitNew({ section })}
                 initialValues={initialValues}
@@ -39,6 +34,6 @@ export const Component = () => {
                     )
                 }}
             </FormBase>
-        </SectionedFormDescriptorProvider>
+        </SectionedFormProvider>
     )
 }
