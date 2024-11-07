@@ -13,7 +13,7 @@ export const dataSetFormSchema = identifiable
         description: z.string().trim().optional(),
         style,
         dataElements: referenceCollection.default([]),
-        categoryCombo: z.object({ id: z.string() }),
+        // categoryCombo: z.object({ id: z.string() }),
     })
 
 export const initialValues = getDefaults(dataSetFormSchema)

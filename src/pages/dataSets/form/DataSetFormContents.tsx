@@ -14,7 +14,6 @@ import {
     SectionedFormSections,
 } from '../../../components/sectionedForm'
 import { SECTIONS_MAP, useSectionedFormDescriptor } from '../../../lib'
-import { CategoryComboField } from '../../dataElements/fields'
 import { DataSetFormDescriptor } from './formDescriptor'
 
 const section = SECTIONS_MAP.dataSet
@@ -56,9 +55,6 @@ export const DataSetFormContents = () => {
                                 resource: 'dataElements',
                             }}
                         />
-                    </StandardFormField>
-                    <StandardFormField>
-                        <CategoryComboField />
                     </StandardFormField>
                 </SectionedFormSection>
                 <SectionedFormSection

@@ -4,6 +4,7 @@ import {
     SectionedFormLayout,
     DefaultSectionedFormFooter,
     DefaultSectionedFormSidebar,
+    StandardFormSection,
 } from '../../components'
 import {
     SectionedFormDescriptorProvider,
