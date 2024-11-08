@@ -12,6 +12,7 @@ import {
     IgnoreApprovalFilter,
     PublicAccessFilter,
     ValueTypeSelectionFilter,
+    FormTypeFilter,
 } from './filterSelectors'
 import { useFilterKeys } from './useFilterKeys'
 
@@ -19,6 +20,7 @@ type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
 
 const filterKeyToComponentMap: FilterKeyToComponentMap = {
     category: Categoryfilter,
+    formType: FormTypeFilter,
     categoryOption: CategoryOptionFilter,
     categoryCombo: CategoryComboFilter,
     categoryOptionGroup: CategoryOptionGroupFilter,

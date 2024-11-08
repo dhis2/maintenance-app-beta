@@ -98,6 +98,20 @@ export const modelListViewsConfig = {
             default: ['domainType', 'valueType', 'dataSet', 'categoryCombo'],
         },
     },
+    dataSet: {
+        columns: {
+            default: [
+                'name',
+                { label: i18n.t('Form type'), path: 'formType' },
+                { label: i18n.t('Period type'), path: 'periodType' },
+                'lastUpdated',
+                DESCRIPTORS.publicAccess,
+            ],
+        },
+        filters: {
+            default: ['formType'],
+        },
+    },
     organisationUnit: {
         columns: {
             available: [],
