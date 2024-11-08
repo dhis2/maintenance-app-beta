@@ -4,10 +4,9 @@
     gap: var(--spacers-dp24);
 }
 
-.sectionedForm {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacers-dp16);
+.sections section {
+    background-color: var(--colors-white);
+    padding: 16px;
 }
 
 .footerWrapper {
@@ -36,4 +35,21 @@
 .formActions {
     display: flex;
     gap: 8px;
+}
+
+.bottomErrorNoticeWrapper {
+    margin-top: auto;
+    position: sticky;
+    inset-block-end: 0;
+    padding: var(--spacers-dp16);
+    z-index: 1;
+}
+.bottomNoticeBox {
+    max-width: 640px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.bottomNoticeBox > div {
+    /* width: 100%; */
 }

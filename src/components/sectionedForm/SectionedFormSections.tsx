@@ -24,7 +24,3 @@ export const SectionedFormSection = ({
         </section>
     )
 }
-export const SectionedForm = {
-    Sections: SectionedFormSections,
-    Section: SectionedFormSection,
-}

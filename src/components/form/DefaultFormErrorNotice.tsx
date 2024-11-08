@@ -1,50 +1,41 @@
 import i18n from '@dhis2/d2-i18n'
 import { NoticeBox } from '@dhis2/ui'
-import { FormState } from 'final-form'
 import React, { useEffect, useRef } from 'react'
-import { useFormState } from 'react-final-form'
 import css from './DefaultFormErrorNotice.module.css'
-
-const formStateSubscriptions = {
-    errors: true,
-    submitError: true,
-    submitFailed: true,
-    hasValidationErrors: true,
-    hasSubmitErrors: true,
-    dirtySinceLastSubmit: true,
-}
-
-type FormStateErrors = Pick<
-    FormState<unknown>,
-    keyof typeof formStateSubscriptions
->
+import { useFormStateErrors } from './useFormStateErrors'
 
 export function DefaultFormErrorNotice() {
-    const partialFormState: FormStateErrors = useFormState({
-        subscription: formStateSubscriptions,
-    })
-    // only show after trying to submit
-    if (
-        !partialFormState.submitFailed ||
-        (partialFormState.submitFailed && partialFormState.dirtySinceLastSubmit)
-    ) {
+    const formStateErrors = useFormStateErrors()
+    console.log(formStateErrors)
+    if (!formStateErrors.shouldShowErrors) {
         return null
     }
-
-    if (partialFormState.hasValidationErrors) {
-        return <ValidationErrors formStateErrors={partialFormState} />
+    if (formStateErrors.hasValidationErrors) {
+        return (
+            <ValidationErrorNotice>
+                <ErrorList
+                    errors={errorsWithLabels(
+                        formStateErrors.validationErrors || {}
+                    )}
+                />
+            </ValidationErrorNotice>
+        )
     }
 
-    if (partialFormState.hasSubmitErrors) {
-        return <ServerSubmitError formStateErrors={partialFormState} />
+    if (formStateErrors.hasSubmitErrors) {
+        return (
+            <ServerSubmitErrorNotice>
+                {formStateErrors.submitError}
+            </ServerSubmitErrorNotice>
+        )
     }
     return null
 }
 
-const ValidationErrors = ({
-    formStateErrors,
+export const ValidationErrorNotice = ({
+    children,
 }: {
-    formStateErrors: FormStateErrors
+    children: React.ReactNode
 }) => {
     const ref = useRef<HTMLDivElement>(null)
     useEffect(() => {
@@ -52,6 +43,9 @@ const ValidationErrors = ({
             ref.current.scrollIntoView({ behavior: 'smooth' })
         }
     }, [])
+    if (closed) {
+        return null
+    }
     return (
         <div ref={ref}>
             <NoticeBox
@@ -64,17 +58,13 @@ const ValidationErrors = ({
                         'Some fields have validation errors. Please fix them before saving.'
                     )}
                 </p>
-                {formStateErrors.errors && (
-                    <ErrorList errors={formStateErrors.errors} />
-                )}
+                {children}
             </NoticeBox>
         </div>
     )
 }
 
-const ErrorList = ({ errors }: { errors: Record<string, string> }) => {
-    const labels = getFieldLabelsBestEffort()
-
+export const ErrorList = ({ errors }: { errors: Record<string, string> }) => {
     return (
         <ul style={{ padding: '0 16px' }}>
             {Object.entries(errors).map(([key, value]) => {
@@ -85,7 +75,7 @@ const ErrorList = ({ errors }: { errors: Record<string, string> }) => {
                                 fontWeight: '600',
                             }}
                         >
-                            {labels.get(key) || key}:
+                            {key}:
                         </span>
                         <span>{JSON.stringify(value)}</span>
                     </li>
@@ -95,10 +85,10 @@ const ErrorList = ({ errors }: { errors: Record<string, string> }) => {
     )
 }
 
-const ServerSubmitError = ({
-    formStateErrors,
+export const ServerSubmitErrorNotice = ({
+    children,
 }: {
-    formStateErrors: FormStateErrors
+    children: React.ReactNode
 }) => {
     const ref = useRef<HTMLDivElement>(null)
     useEffect(() => {
@@ -109,12 +99,22 @@ const ServerSubmitError = ({
     return (
         <div ref={ref}>
             <NoticeBox
+                className={css.noticeBox}
                 error
                 title={i18n.t('Something went wrong when submitting the form')}
             >
-                <p>{formStateErrors.submitError}</p>
+                <p>{children}</p>
             </NoticeBox>
         </div>
+    )
+}
+
+const errorsWithLabels = (errors: Record<string, string>) => {
+    const labels = getFieldLabelsBestEffort()
+    return Object.fromEntries(
+        Object.entries(errors).map(([key, value]) => {
+            return [labels.get(key) || key, value]
+        })
     )
 }
 

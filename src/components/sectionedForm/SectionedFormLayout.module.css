@@ -11,14 +11,11 @@
     display: grid;
     height: 100%;
     grid-template-areas: 'sidebar' 'main' 'footer';
-    grid-template-rows: auto 1fr 68px;
     overflow: auto;
     border: 1px solid var(--colors-grey300);
 }
 .main {
-    padding: var(--spacers-dp16);
     grid-area: main;
-    background-color: var(--colors-white);
     width: 100%;
     display: flex;
     flex-direction: column;
