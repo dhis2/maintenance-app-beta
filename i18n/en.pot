@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-05T07:23:15.731Z\n"
-"PO-Revision-Date: 2024-11-05T07:23:15.732Z\n"
+"POT-Creation-Date: 2024-11-05T14:43:19.245Z\n"
+"PO-Revision-Date: 2024-11-05T14:43:19.245Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -32,6 +32,12 @@ msgstr "Not found"
 
 msgid "The page you are looking for does not exist."
 msgstr "The page you are looking for does not exist."
+
+msgid "New {{modelName}}"
+msgstr "New {{modelName}}"
+
+msgid "Edit {{modelName}}"
+msgstr "Edit {{modelName}}"
 
 msgid "Metadata Overview"
 msgstr "Metadata Overview"
@@ -1153,6 +1159,27 @@ msgstr ""
 "aggregation level available) as the data source, and PHU data will not be "
 "included. PHU will still be available for the PHU level, but not included "
 "in the aggregations to the levels above."
+
+msgid "Setup"
+msgstr "Setup"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Data Elements"
+msgstr "Data Elements"
+
+msgid "Periods"
+msgstr "Periods"
+
+msgid "Organisation Units"
+msgstr "Organisation Units"
+
+msgid "Form"
+msgstr "Form"
+
+msgid "Advanced"
+msgstr "Advanced"
 
 msgid "Longitude"
 msgstr "Longitude"
