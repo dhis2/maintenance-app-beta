@@ -47,13 +47,34 @@
     inset-block-end: 0;
     padding: var(--spacers-dp16);
     z-index: 1;
+    display: flex;
 }
-.bottomNoticeBox {
-    max-width: 640px;
+.errorNoticeBox {
+    min-width: 640px;
     max-height: 300px;
-    overflow-y: auto;
+    overflow: auto;
 }
 
-.bottomNoticeBox > div {
-    /* width: 100%; */
+/* This basically selects the wrapper (inside UI) of the box-content*/
+.errorNoticeBox > div:nth-child(2) {
+    flex-grow: 1;
+    /* icon in title takes 24+12px, so calc this and fix overflow issues */
+    max-width: calc(100% - 36px);
+}
+.errorNoticeBoxHeader {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--fontSizes-dp16);
+    font-weight: bold;
+}
+
+.errorNoticeBoxHeader h6 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 19px;
+    margin: 0px;
+}
+
+.errorNoticeBoxContent {
+    overflow: auto;
 }

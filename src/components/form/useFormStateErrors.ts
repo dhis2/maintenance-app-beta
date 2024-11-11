@@ -1,4 +1,5 @@
 import { FormState, FormSubscription } from 'final-form'
+import { useCallback, useEffect, useState } from 'react'
 import { useFormState } from 'react-final-form'
 
 const formStateSubscriptions = {
@@ -8,6 +9,7 @@ const formStateSubscriptions = {
     hasValidationErrors: true,
     hasSubmitErrors: true,
     dirtySinceLastSubmit: true,
+    modifiedSinceLastSubmit: true,
 } satisfies FormSubscription
 
 type FinalFormErrorProps = Pick<
@@ -30,6 +32,7 @@ export const useFormStateErrors = (): FormErrorState => {
         hasValidationErrors,
         submitError,
         submitFailed,
+        modifiedSinceLastSubmit,
     }: FinalFormErrorProps = useFormState({
         subscription: formStateSubscriptions,
     })
@@ -40,6 +43,7 @@ export const useFormStateErrors = (): FormErrorState => {
     const shouldShowErrors =
         (hasAnyError && submitFailed && !dirtySinceLastSubmit) ||
         (submitFailed && hasSubmitErrors)
+
     return {
         dirtySinceLastSubmit,
         hasSubmitErrors,
@@ -48,5 +52,6 @@ export const useFormStateErrors = (): FormErrorState => {
         submitError,
         submitFailed,
         validationErrors: errors,
+        modifiedSinceLastSubmit,
     }
 }

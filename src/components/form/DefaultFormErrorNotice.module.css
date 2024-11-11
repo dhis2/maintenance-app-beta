@@ -1,3 +1,7 @@
 .noticeBox {
     max-width: 640px;
 }
+
+.errorList {
+    padding: 0;
+}

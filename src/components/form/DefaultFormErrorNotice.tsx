@@ -57,7 +57,7 @@ export const ValidationErrorNotice = ({
 
 export const ErrorList = ({ errors }: { errors: Record<string, string> }) => {
     return (
-        <ul style={{ padding: '0 16px' }}>
+        <ul className={css.errorList}>
             {Object.entries(errors).map(([key, value]) => {
                 return (
                     <li key={key} style={{ display: 'flex', gap: '8px' }}>

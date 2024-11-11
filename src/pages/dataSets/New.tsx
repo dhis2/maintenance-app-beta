@@ -30,8 +30,8 @@ export const Component = () => {
                         >
                             <form onSubmit={handleSubmit}>
                                 <DataSetFormContents />
-                                <SectionedFormErrorNotice />
                             </form>
+                            <SectionedFormErrorNotice />
                         </SectionedFormLayout>
                     )
                 }}

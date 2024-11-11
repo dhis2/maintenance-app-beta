@@ -1,5 +1,6 @@
-import { NoticeBox } from '@dhis2/ui'
-import React from 'react'
+import i18n from '@dhis2/d2-i18n'
+import { IconCross16, NoticeBox } from '@dhis2/ui'
+import React, { useEffect, useState } from 'react'
 import { useSectionedFormContext } from '../../lib'
 import { useFormStateErrors } from '../form'
 import {
@@ -18,8 +19,14 @@ export function SectionedFormErrorNotice() {
 export function SectionedFormErrors() {
     const formStateErrors = useFormStateErrors()
     const context = useSectionedFormContext()
+    const [closed, setClosed] = useState(false)
 
-    if (!formStateErrors.shouldShowErrors) {
+    useEffect(() => {
+        // allow error box to show again if closed
+        setClosed(false)
+    }, [formStateErrors.modifiedSinceLastSubmit])
+
+    if (!formStateErrors.shouldShowErrors || !!closed) {
         return null
     }
 
@@ -30,16 +37,22 @@ export function SectionedFormErrors() {
             )
         )
         return (
-            <NoticeBox className={css.bottomNoticeBox} warning>
-                <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                    }}
-                >
-                    <div>Validation errors</div>
+            <NoticeBox className={css.errorNoticeBox} warning>
+                {/* minor hack, because title-prop only allows string, and we want to include a button*/}
+                <div className={css.errorNoticeBoxHeader}>
+                    <h6>{i18n.t('Validation errors')}</h6>
+                    <span onClick={() => setClosed((prev) => !prev)}>
+                        <IconCross16 />
+                    </span>
                 </div>
-                <div>
+                <div className={css.errorNoticeBoxContent}>
+                    <ErrorList errors={errorsWithlabels} />
+                    <ErrorList errors={errorsWithlabels} />
+                    <ErrorList errors={errorsWithlabels} />
+                    <ErrorList errors={errorsWithlabels} />
+                    <ErrorList errors={errorsWithlabels} />
+                    <ErrorList errors={errorsWithlabels} />
+                    <ErrorList errors={errorsWithlabels} />
                     <ErrorList errors={errorsWithlabels} />
                 </div>
             </NoticeBox>
