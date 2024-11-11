@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-08T09:09:58.739Z\n"
-"PO-Revision-Date: 2024-11-08T09:09:58.740Z\n"
+"POT-Creation-Date: 2024-11-11T12:39:32.386Z\n"
+"PO-Revision-Date: 2024-11-11T12:39:32.387Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -306,8 +306,8 @@ msgstr "Data set"
 msgid "Search by name, code or ID"
 msgstr "Search by name, code or ID"
 
-msgid "Indicator"
-msgstr "Indicator"
+msgid "Indicator Type"
+msgstr "Indicator Type"
 
 msgid "Public access"
 msgstr "Public access"
@@ -482,6 +482,9 @@ msgstr "Data set notification template"
 
 msgid "Data set notification templates"
 msgstr "Data set notification templates"
+
+msgid "Indicator"
+msgstr "Indicator"
 
 msgid "Indicators"
 msgstr "Indicators"
