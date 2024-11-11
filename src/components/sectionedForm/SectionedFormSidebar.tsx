@@ -1,7 +1,7 @@
 import cx from 'classnames'
 import React, { useMemo } from 'react'
 import { createSearchParams, Link, useSearchParams } from 'react-router-dom'
-import { FORM_SECTION_PARAM_KEY, SectionedFormDescriptor } from '../../lib'
+import { FORM_SECTION_PARAM_KEY, scrollToSection } from '../../lib'
 import css from './SectionFormSidebar.module.css'
 
 export const SectionedFormSidebar = ({
@@ -14,17 +14,16 @@ export const SectionedFormSidebar = ({
 
 export type SectionedFormSidebarItemProps = {
     children: React.ReactNode
-    selected: boolean
+    active: boolean
     sectionName: string
 }
 
 export const SectionedFormSidebarItem = ({
     children,
-    selected,
+    active,
     sectionName,
 }: SectionedFormSidebarItemProps) => {
     const [searchParams] = useSearchParams()
-
     // we want to use a link in the list (due to semantic html and accessbility reasons)
     // thus we need to create new SearchParams with the section parameter
     // in case we want to preserve other search-params
@@ -39,8 +38,14 @@ export const SectionedFormSidebarItem = ({
 
     return (
         <Link
-            className={cx(css.listItem, { [css.selected]: selected })}
+            className={cx(css.listItem, {
+                [css.selected]: active,
+            })}
             to={{ search: toWithSectionParam }}
+            replace
+            onClick={() => {
+                scrollToSection(sectionName)
+            }}
         >
             {children}
         </Link>

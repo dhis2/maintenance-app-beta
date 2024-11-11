@@ -4,6 +4,10 @@
     gap: var(--spacers-dp24);
 }
 
+.sections[hidden] {
+    display: none;
+}
+
 .sections section {
     background-color: var(--colors-white);
     padding: 16px;

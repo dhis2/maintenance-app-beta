@@ -9,8 +9,13 @@ export type SectionedFormSectionProps = {
 
 export const SectionedFormSections = ({
     children,
-}: React.PropsWithChildren) => {
-    return <div className={css.sections}>{children}</div>
+    hidden,
+}: React.PropsWithChildren<{ hidden?: boolean }>) => {
+    return (
+        <div className={css.sections} id="sections" hidden={hidden}>
+            {children}
+        </div>
+    )
 }
 
 export const SectionedFormSection = ({

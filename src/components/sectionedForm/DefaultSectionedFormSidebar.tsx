@@ -13,7 +13,7 @@ export const DefaultSectionedFormSidebar = () => {
     const items = sections.map((section) => (
         <SectionedFormSidebarItem
             key={section.name}
-            selected={selected === section.name}
+            active={selected === section.name}
             sectionName={section.name}
         >
             {section.label}
