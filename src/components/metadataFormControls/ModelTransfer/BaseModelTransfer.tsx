@@ -15,7 +15,7 @@ type OwnProps<TModel> = {
 
 export type BaseModelTransferProps<TModel> = Omit<
     TransferProps,
-    keyof OwnProps<TModel> | 'options' | 'selected'
+    keyof OwnProps<TModel> | 'options'
 > &
     OwnProps<TModel>
 
