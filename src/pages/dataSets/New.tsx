@@ -4,7 +4,6 @@ import {
     SectionedFormLayout,
     DefaultSectionedFormFooter,
     DefaultSectionedFormSidebar,
-    SectionedFormErrorNotice,
 } from '../../components'
 import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { DataSetFormContents } from './form/DataSetFormContents'
@@ -31,7 +30,6 @@ export const Component = () => {
                             <form onSubmit={handleSubmit}>
                                 <DataSetFormContents />
                             </form>
-                            <SectionedFormErrorNotice />
                         </SectionedFormLayout>
                     )
                 }}
