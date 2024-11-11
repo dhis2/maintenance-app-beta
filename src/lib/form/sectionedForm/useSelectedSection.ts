@@ -26,10 +26,6 @@ const defaultSetHandlerOptions: UseSelectedSectionSetHandlerOptions = {
 
 export const FORM_SECTION_PARAM_KEY = 'section'
 
-export const getSectionSearchParam = (section: string) => {
-    return `${FORM_SECTION_PARAM_KEY}=${section}`
-}
-
 export const scrollToSection = (
     section: string,
     scrollOptions?: ScrollOptions
