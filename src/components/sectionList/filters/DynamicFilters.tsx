@@ -8,6 +8,7 @@ import {
     CategoryOptionGroupFilter,
     DataDimensionTypeFilter,
     DataSetFilter,
+    IndicatorFilter,
     DomainTypeSelectionFilter,
     IgnoreApprovalFilter,
     PublicAccessFilter,
@@ -19,6 +20,7 @@ type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
 
 const filterKeyToComponentMap: FilterKeyToComponentMap = {
     category: Categoryfilter,
+    indicatorType: IndicatorFilter,
     categoryOption: CategoryOptionFilter,
     categoryCombo: CategoryComboFilter,
     categoryOptionGroup: CategoryOptionGroupFilter,
@@ -33,6 +35,7 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
 
 export const DynamicFilters = () => {
     const filterKeys = useFilterKeys()
+
     return (
         <>
             {filterKeys.map((filterKey) => {

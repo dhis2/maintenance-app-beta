@@ -21,9 +21,21 @@ export const organisationUnitSchema = identifiable
         parent: z.object({ id: z.string() }).optional(),
         geometry: z
             .object({
-                longitude: z.string().optional(),
-                latitude: z.string().optional(),
+                type: z.literal('Point'),
+                coordinates: z.array(z.number()).length(2),
             })
+            .or(
+                z.object({
+                    type: z.union([
+                        z.literal('Multipoint'),
+                        z.literal('Linestring'),
+                        z.literal('Multilinestring'),
+                        z.literal('Polygon'),
+                        z.literal('Multipolygon'),
+                        z.literal('Geometrycollection'),
+                    ]),
+                })
+            )
             .optional(),
         programs: referenceCollection.optional().default([]),
         dataSets: referenceCollection.optional().default([]),

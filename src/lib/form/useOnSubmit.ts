@@ -6,7 +6,10 @@ import { useNavigate } from 'react-router-dom'
 import { ModelSection } from '../../types'
 import { IdentifiableObject } from '../../types/generated'
 import { getSectionPath, useNavigateWithSearchState } from '../routeUtils'
-import { createJsonPatchOperations } from './createJsonPatchOperations'
+import {
+    createJsonPatchOperations,
+    ModelWithAttributeValues,
+} from './createJsonPatchOperations'
 import { useCreateModel } from './useCreateModel'
 import { usePatchModel } from './usePatchModel'
 
@@ -57,9 +60,25 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
     )
 }
 
-export const useOnSubmitNew = <TFormValues>({
+export const defaultNewValueFormatter = <
+    TFormValues extends ModelWithAttributeValues
+>(
+    values: TFormValues
+) => {
+    if (values.attributeValues) {
+        return {
+            ...values,
+            attributeValues: values.attributeValues.filter(
+                ({ value }) => !!value
+            ),
+        }
+    }
+    return values
+}
+
+export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
     section,
-    valueFormatter,
+    valueFormatter = defaultNewValueFormatter,
 }: {
     section: ModelSection
     valueFormatter?: (values: TFormValues) => Record<string, unknown>
@@ -96,6 +115,6 @@ export const useOnSubmitNew = <TFormValues>({
             })
             navigate(`/${getSectionPath(section)}`)
         },
-        [createModel, saveAlert, navigate, section]
+        [createModel, saveAlert, navigate, section, valueFormatter]
     )
 }

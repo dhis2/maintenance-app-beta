@@ -1,3 +1,11 @@
+# [0.12.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.11.0...v0.12.0) (2024-11-07)
+
+
+### Features
+
+* add dataset lists ([de9f34d](https://github.com/dhis2/maintenance-app-beta/commit/de9f34d9d4a9ed42d92ab50ce0eeb8d08d4bb166))
+* add org unit edit form ([#430](https://github.com/dhis2/maintenance-app-beta/issues/430)) ([79a1892](https://github.com/dhis2/maintenance-app-beta/commit/79a18921c876a36d357edee88f38114bc412a0a9))
+
 # [0.11.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.10.2...v0.11.0) (2024-11-05)
 
 

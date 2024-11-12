@@ -69,11 +69,22 @@ export const DATA_DIMENSION_TYPE = {
     ATTRIBUTE: i18n.t('Attribute'),
 }
 
+export const GEOMETRY_TYPE = {
+    POINT: i18n.t('Point'),
+    MULTIPOINT: i18n.t('MultiPoint'),
+    LINESTRING: i18n.t('LineString'),
+    MULTILINESTRING: i18n.t('MultiLineString'),
+    POLYGON: i18n.t('Polygon'),
+    MULTIPOLYGON: i18n.t('MultiPolygon'),
+    GEOMETRYCOLLECTION: i18n.t('GeometryCollection'),
+}
+
 const allConstantTranslations: Record<string, string> = {
     ...AGGREGATION_TYPE,
     ...DOMAIN_TYPE,
     ...VALUE_TYPE,
     ...DATA_DIMENSION_TYPE,
+    ...GEOMETRY_TYPE,
 }
 
 export const getConstantTranslation = (constant: string): string => {

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-23T11:07:53.225Z\n"
-"PO-Revision-Date: 2024-10-23T11:07:53.225Z\n"
+"POT-Creation-Date: 2024-11-05T14:43:19.245Z\n"
+"PO-Revision-Date: 2024-11-05T14:43:19.245Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -32,6 +32,12 @@ msgstr "Not found"
 
 msgid "The page you are looking for does not exist."
 msgstr "The page you are looking for does not exist."
+
+msgid "New {{modelName}}"
+msgstr "New {{modelName}}"
+
+msgid "Edit {{modelName}}"
+msgstr "Edit {{modelName}}"
 
 msgid "Metadata Overview"
 msgstr "Metadata Overview"
@@ -122,21 +128,6 @@ msgstr "Failed to load {{label}}"
 
 msgid "Failed to load"
 msgstr "Failed to load"
-
-msgid "Download"
-msgstr "Download"
-
-msgid "Merge"
-msgstr "Merge"
-
-msgid "Delete source data element values"
-msgstr "Delete source data element values"
-
-msgid "Last updated"
-msgstr "Last updated"
-
-msgid "Discard"
-msgstr "Discard"
 
 msgid "Aggregation level(s)"
 msgstr "Aggregation level(s)"
@@ -237,6 +228,9 @@ msgstr "Created"
 msgid "Last updated by"
 msgstr "Last updated by"
 
+msgid "Last updated"
+msgstr "Last updated"
+
 msgid "Id"
 msgstr "Id"
 
@@ -257,6 +251,9 @@ msgstr "Details"
 
 msgid "Failed to load details"
 msgstr "Failed to load details"
+
+msgid "Download"
+msgstr "Download"
 
 msgid "Download {{section}}"
 msgstr "Download {{section}}"
@@ -297,6 +294,9 @@ msgstr "Clear all filters"
 msgid "Category"
 msgstr "Category"
 
+msgid "Category option"
+msgstr "Category option"
+
 msgid "Category option group"
 msgstr "Category option group"
 
@@ -311,6 +311,9 @@ msgstr "Data set"
 
 msgid "Search by name, code or ID"
 msgstr "Search by name, code or ID"
+
+msgid "Indicator Type"
+msgstr "Indicator Type"
 
 msgid "Public access"
 msgstr "Public access"
@@ -434,9 +437,6 @@ msgstr "Search for a user or group"
 
 msgid "Categories"
 msgstr "Categories"
-
-msgid "Category option"
-msgstr "Category option"
 
 msgid "Category options"
 msgstr "Category options"
@@ -828,6 +828,27 @@ msgstr "GeoJSON"
 msgid "Disaggregation"
 msgstr "Disaggregation"
 
+msgid "Point"
+msgstr "Point"
+
+msgid "MultiPoint"
+msgstr "MultiPoint"
+
+msgid "LineString"
+msgstr "LineString"
+
+msgid "MultiLineString"
+msgstr "MultiLineString"
+
+msgid "Polygon"
+msgstr "Polygon"
+
+msgid "MultiPolygon"
+msgstr "MultiPolygon"
+
+msgid "GeometryCollection"
+msgstr "GeometryCollection"
+
 msgid "Aggregation type"
 msgstr "Aggregation type"
 
@@ -854,6 +875,9 @@ msgstr "Zero is significant"
 
 msgid "Data dimension type"
 msgstr "Data dimension type"
+
+msgid "Ignore data approval"
+msgstr "Ignore data approval"
 
 msgid "This field requires a unique value, please choose another one"
 msgstr "This field requires a unique value, please choose another one"
@@ -939,36 +963,6 @@ msgstr "Filter selected categories"
 
 msgid "At least one category is required"
 msgstr "At least one category is required"
-
-msgid "Set up the basic information for this category option group set."
-msgstr "Set up the basic information for this category option group set."
-
-msgid "Explain the purpose of this category option group set."
-msgstr "Explain the purpose of this category option group set."
-
-msgid ""
-"Choose how this category option group set will be used to capture and "
-"analyze"
-msgstr ""
-"Choose how this category option group set will be used to capture and "
-"analyze"
-
-msgid ""
-"Category option group set will be available to the analytics as another "
-"dimension"
-msgstr ""
-"Category option group set will be available to the analytics as another "
-"dimension"
-
-msgid "Category option Groups"
-msgstr "Category option Groups"
-
-msgid ""
-"Choose the category option Groups to include in this category option group "
-"set."
-msgstr ""
-"Choose the category option Groups to include in this category option group "
-"set."
 
 msgid "Set up the basic information for this category option group."
 msgstr "Set up the basic information for this category option group."
@@ -1127,6 +1121,33 @@ msgstr ""
 "included. PHU will still be available for the PHU level, but not included "
 "in the aggregations to the levels above."
 
+msgid "Setup"
+msgstr "Setup"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Data Elements"
+msgstr "Data Elements"
+
+msgid "Periods"
+msgstr "Periods"
+
+msgid "Organisation Units"
+msgstr "Organisation Units"
+
+msgid "Form"
+msgstr "Form"
+
+msgid "Advanced"
+msgstr "Advanced"
+
+msgid "Longitude"
+msgstr "Longitude"
+
+msgid "{{type}} coordinates are not editable"
+msgstr "{{type}} coordinates are not editable"
+
 msgid "Upload an image"
 msgstr "Upload an image"
 
@@ -1176,17 +1197,17 @@ msgstr "Location"
 msgid "Set up the organisation unit location."
 msgstr "Set up the organisation unit location."
 
-msgid "Latitude"
-msgstr "Latitude"
+msgid "Reference assignment"
+msgstr "Reference assignment"
 
 msgid "Longitude"
 msgstr "Longitude"
 
-msgid "Reference assignments"
-msgstr "Reference assignments"
+msgid "Reference assignment"
+msgstr "Reference assignment"
 
-msgid "Assign the organisation unit to related models."
-msgstr "Assign the organisation unit to related models."
+msgid "Assign the organisation unit to related objects."
+msgstr "Assign the organisation unit to related objects."
 
 msgid "Available data sets"
 msgstr "Available data sets"
@@ -1212,8 +1233,8 @@ msgstr "Filter available programs"
 msgid "Filter selected programs"
 msgstr "Filter selected programs"
 
-msgid "New organisation unit will be created inside {{displayName}}"
-msgstr "New organisation unit will be created inside {{displayName}}"
+msgid "Organisation unit will be positioned inside {{displayName}}"
+msgstr "Organisation unit will be positioned inside {{displayName}}"
 
 msgid "Creating first organisation unit"
 msgstr "Creating first organisation unit"
