@@ -16,7 +16,7 @@ import {
     SECTIONS_MAP,
     useSectionedFormContext,
     useSelectedSection,
-    useUpdateSelectedSectionOnScroll,
+    useSyncSelectedSectionWithScroll,
 } from '../../../lib'
 import { DataSetFormDescriptor } from './formDescriptor'
 
@@ -24,7 +24,7 @@ const section = SECTIONS_MAP.dataSet
 
 export const DataSetFormContents = () => {
     const descriptor = useSectionedFormContext<typeof DataSetFormDescriptor>()
-    useUpdateSelectedSectionOnScroll()
+    useSyncSelectedSectionWithScroll()
     const [selectedSection] = useSelectedSection()
     return (
         <>

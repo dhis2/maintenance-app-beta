@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
     useQueryParam,
     createEnumParam,
@@ -30,7 +30,12 @@ export const scrollToSection = (
     section: string,
     scrollOptions?: ScrollOptions
 ) => {
-    document.getElementById(section)?.scrollIntoView(scrollOptions)
+    // wait for the event loop to be cleared to ensure that the element is in the DOM
+    // before scrolling to it, eg if navigating from a link
+    setTimeout(
+        () => document.getElementById(section)?.scrollIntoView(scrollOptions),
+        0
+    )
 }
 
 export const useSelectedSection = () => {
@@ -73,15 +78,16 @@ export const useSelectedSection = () => {
  * Update the selected section (in searchParams) based on the section that is in view
  * This keeps the selected section in sync with the section that is in view.
  */
-export const useUpdateSelectedSectionOnScroll = () => {
+export const useSyncSelectedSectionWithScroll = () => {
     const { sections } = useSectionedFormContext()
-    const [selected, setSection] = useSelectedSection()
+    const [selectedSection, setSection] = useSelectedSection()
 
     useEffect(() => {
-        // scroll to section on initial render based on search-param
-        document
-            .getElementById(selected)
-            ?.scrollIntoView({ behavior: 'instant' })
+        const elem = document.getElementById(selectedSection)
+        if (elem) {
+            scrollToSection(selectedSection, { behavior: 'instant' })
+        }
+        // we only do this on first render, for links - scrollToSection should be called imperatively
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -89,24 +95,25 @@ export const useUpdateSelectedSectionOnScroll = () => {
         const sectionElements = sections
             .map((section) => document.getElementById(section.name))
             .filter((s) => !!s)
-        const currentInView = new Set<string>()
+
+        const currentInView = new Map<string, IntersectionObserverEntry>()
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        currentInView.add(entry.target.id)
+                        currentInView.set(entry.target.id, entry)
                     } else {
                         currentInView.delete(entry.target.id)
                     }
                 })
-                const firstSectionInView = sections.find((s) =>
+                const firstVisible = sections.find((s) =>
                     currentInView.has(s.name)
                 )
-                if (firstSectionInView) {
-                    setSection(firstSectionInView.name)
+                if (firstVisible) {
+                    setSection(firstVisible.name)
                 }
             },
-            { threshold: 0.6 }
+            { threshold: 0.5 }
         )
         sectionElements.forEach((section) => {
             observer.observe(section)
