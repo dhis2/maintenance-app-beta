@@ -2,11 +2,11 @@ import i18n from '@dhis2/d2-i18n'
 import { IconCross16, NoticeBox } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useSectionedFormContext } from '../../lib'
-import { useFormStateErrors } from '../form'
 import {
     ErrorList,
     ServerSubmitErrorNotice,
 } from '../form/DefaultFormErrorNotice'
+import { useFormStateErrors } from '../form/useFormStateErrors'
 import css from './SectionForm.module.css'
 
 export function SectionedFormErrorNotice() {
@@ -46,13 +46,6 @@ export function SectionedFormErrors() {
                     </span>
                 </div>
                 <div className={css.errorNoticeBoxContent}>
-                    <ErrorList errors={errorsWithlabels} />
-                    <ErrorList errors={errorsWithlabels} />
-                    <ErrorList errors={errorsWithlabels} />
-                    <ErrorList errors={errorsWithlabels} />
-                    <ErrorList errors={errorsWithlabels} />
-                    <ErrorList errors={errorsWithlabels} />
-                    <ErrorList errors={errorsWithlabels} />
                     <ErrorList errors={errorsWithlabels} />
                 </div>
             </NoticeBox>
