@@ -9,8 +9,6 @@ import {
     StandardFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-} from '../../../components'
-import {
     DefaultIdentifiableFields,
     DescriptionField,
 } from '../../../components'
