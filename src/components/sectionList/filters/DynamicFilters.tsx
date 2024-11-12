@@ -7,7 +7,7 @@ import {
     CategoryOptionFilter,
     CategoryOptionGroupFilter,
     DataDimensionTypeFilter,
-    DataSetFilter,
+    IndicatorFilter,
     DomainTypeSelectionFilter,
     IgnoreApprovalFilter,
     PublicAccessFilter,
@@ -21,10 +21,10 @@ type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
 const filterKeyToComponentMap: FilterKeyToComponentMap = {
     category: Categoryfilter,
     formType: FormTypeFilter,
+    indicatorType: IndicatorFilter,
     categoryOption: CategoryOptionFilter,
     categoryCombo: CategoryComboFilter,
     categoryOptionGroup: CategoryOptionGroupFilter,
-    dataSet: DataSetFilter,
     domainType: DomainTypeSelectionFilter,
     valueType: ValueTypeSelectionFilter,
     aggregationType: AggregationTypeFilter,
@@ -35,6 +35,7 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
 
 export const DynamicFilters = () => {
     const filterKeys = useFilterKeys()
+
     return (
         <>
             {filterKeys.map((filterKey) => {

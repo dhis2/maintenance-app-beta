@@ -1,22 +1,19 @@
-import { Transfer, TransferProps } from '@dhis2/ui'
-import React, {
-    forwardRef,
-    RefAttributes,
-    useImperativeHandle,
-    useMemo,
-    useState,
-} from 'react'
+import i18n from '@dhis2/d2-i18n'
+import { Button, ButtonStrip } from '@dhis2/ui'
+import React, { useMemo, useState } from 'react'
 import { useInfiniteQuery } from 'react-query'
+import { useHref } from 'react-router-dom'
+import { useDebouncedCallback } from 'use-debounce'
+import { getSectionNewPath } from '../../../lib'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
 import { PlainResourceQuery } from '../../../types'
 import { PagedResponse } from '../../../types/generated'
+import { DisplayableModel } from '../../../types/models'
+import { LinkButton } from '../../LinkButton'
+import { BaseModelTransfer, BaseModelTransferProps } from './BaseModelTransfer'
+import css from './ModelTransfer.module.css'
 
 type Response<Model> = PagedResponse<Model, string>
-
-export type DisplayableModel = {
-    id: string
-    displayName: string
-}
 
 const defaultQuery = {
     params: {
@@ -25,32 +22,23 @@ const defaultQuery = {
     },
 }
 
-const toDisplayOption = (model: DisplayableModel) => ({
-    value: model.id,
-    label: model.displayName,
-})
-
-type OwnProps<TModel> = {
-    selected: TModel[]
-    onChange: ({ selected }: { selected: TModel[] }) => void
-    query: PlainResourceQuery
+export type ModelTranferProps<TModel extends DisplayableModel> = Omit<
+    BaseModelTransferProps<TModel>,
+    'available' | 'filterable'
+> & {
+    query: Omit<PlainResourceQuery, 'id'>
 }
-type ModelTransferProps<TModel> = Omit<
-    TransferProps,
-    | keyof OwnProps<TModel>
-    | 'options'
-    | 'selected'
-    | 'filterable'
-    | 'onFilterChange'
-> &
-    OwnProps<TModel>
 
-type ImperativeRef = { refetch: () => void }
-
-const BaseModelTransfer = <TModel extends DisplayableModel>(
-    { selected, onChange, query, ...transferProps }: ModelTransferProps<TModel>,
-    ref: React.Ref<ImperativeRef>
-) => {
+export const ModelTransfer = <TModel extends DisplayableModel>({
+    selected,
+    query,
+    leftHeader,
+    rightHeader,
+    leftFooter,
+    filterPlaceholder,
+    filterPlaceholderPicked,
+    ...baseModelTransferProps
+}: ModelTranferProps<TModel>) => {
     const queryFn = useBoundResourceQueryFn()
     const [searchTerm, setSearchTerm] = useState('')
 
@@ -67,6 +55,7 @@ const BaseModelTransfer = <TModel extends DisplayableModel>(
         },
     }
     const modelName = query.resource
+    const newLink = useHref(`/${getSectionNewPath(modelName)}`)
 
     const queryResult = useInfiniteQuery({
         queryKey: [queryObject] as const,
@@ -77,64 +66,73 @@ const BaseModelTransfer = <TModel extends DisplayableModel>(
         getPreviousPageParam: (firstPage) =>
             firstPage.pager.prevPage ? firstPage.pager.page - 1 : undefined,
     })
-
-    useImperativeHandle(ref, () => ({
-        refetch: () => queryResult.refetch(),
-    }))
-
     const allDataMap = useMemo(
-        () =>
-            new Map(
-                queryResult.data?.pages.flatMap((page) =>
-                    page[modelName].map((d) => [d.id, d] as const)
-                )
-            ),
+        () => queryResult.data?.pages.flatMap((page) => page[modelName]) ?? [],
         [queryResult.data, modelName]
     )
 
-    const selectedOptions = selected ? selected?.map(toDisplayOption) : []
-    const loadedOptions = Array.from(allDataMap.values()).map(toDisplayOption)
-    // always include selected options
-    const allOptions = selectedOptions.concat(loadedOptions || [])
-
-    const handleOnChange = ({ selected }: { selected: string[] }) => {
-        // map the selected ids to the full model
-        // loop through selected to keep order
-        const selectedModels = selected
-            .map((id) => allDataMap.get(id))
-            .filter((model): model is TModel => !!model)
-
-        onChange({
-            selected: selectedModels,
-        })
-    }
+    const handleFilterChange = useDebouncedCallback(({ value }) => {
+        if (value != undefined) {
+            setSearchTerm(value)
+        }
+    }, 250)
 
     return (
-        <Transfer
-            filterablePicked={true}
-            loadingPicked={false}
-            loading={queryResult.isFetching}
-            {...transferProps}
-            options={allOptions}
+        <BaseModelTransfer
+            enableOrderChange
+            height={'350px'}
+            optionsWidth="500px"
+            selectedWidth="500px"
             filterable
-            searchTerm={searchTerm}
+            filterablePicked
             onEndReached={queryResult.fetchNextPage}
-            onFilterChange={({ value }) =>
-                value !== undefined && setSearchTerm(value)
+            available={allDataMap}
+            selected={selected}
+            onFilterChange={handleFilterChange}
+            filterPlaceholder={
+                filterPlaceholder || i18n.t('Filter available items')
             }
-            selected={selectedOptions.map((o) => o.value)}
-            onChange={handleOnChange}
+            filterPlaceholderPicked={
+                filterPlaceholderPicked || i18n.t('Filter selected items')
+            }
+            leftHeader={<TransferHeader>{leftHeader}</TransferHeader>}
+            rightHeader={<TransferHeader>{rightHeader}</TransferHeader>}
+            leftFooter={
+                leftFooter ?? (
+                    <DefaultTransferLeftFooter
+                        onRefreshClick={queryResult.refetch}
+                        newLink={newLink}
+                    />
+                )
+            }
+            {...baseModelTransferProps}
         />
     )
 }
 
-// this is needed to support generics with ref-forwarding
-interface ModelTransferWithForwardedRef
-    extends React.FC<ModelTransferProps<DisplayableModel>> {
-    <TModel extends DisplayableModel>(
-        props: ModelTransferProps<TModel> & RefAttributes<ImperativeRef>
-    ): React.ReactNode
+const TransferHeader = ({ children }: { children: React.ReactNode }) => {
+    if (typeof children === 'string') {
+        return <div className={css.modelTransferHeader}>{children}</div>
+    }
+    return <>{children}</>
 }
 
-export const ModelTransfer: ModelTransferWithForwardedRef =
-    forwardRef(BaseModelTransfer)
+const DefaultTransferLeftFooter = ({
+    onRefreshClick,
+    newLink,
+}: {
+    onRefreshClick: () => void
+    newLink: string
+}) => {
+    return (
+        <ButtonStrip className={css.modelTransferFooter}>
+            <Button small onClick={onRefreshClick}>
+                {i18n.t('Refresh list')}
+            </Button>
+
+            <LinkButton small href={newLink} target="_blank">
+                {i18n.t('Add new')}
+            </LinkButton>
+        </ButtonStrip>
+    )
+}

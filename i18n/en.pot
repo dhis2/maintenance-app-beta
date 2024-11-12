@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-05T07:23:15.731Z\n"
-"PO-Revision-Date: 2024-11-05T07:23:15.732Z\n"
+"POT-Creation-Date: 2024-11-12T08:30:18.816Z\n"
+"PO-Revision-Date: 2024-11-12T08:30:18.816Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -32,6 +32,12 @@ msgstr "Not found"
 
 msgid "The page you are looking for does not exist."
 msgstr "The page you are looking for does not exist."
+
+msgid "New {{modelName}}"
+msgstr "New {{modelName}}"
+
+msgid "Edit {{modelName}}"
+msgstr "Edit {{modelName}}"
 
 msgid "Metadata Overview"
 msgstr "Metadata Overview"
@@ -300,11 +306,11 @@ msgstr "Type to filter options"
 msgid "No matches"
 msgstr "No matches"
 
-msgid "Data set"
-msgstr "Data set"
-
 msgid "Search by name, code or ID"
 msgstr "Search by name, code or ID"
+
+msgid "Indicator Type"
+msgstr "Indicator Type"
 
 msgid "Public access"
 msgstr "Public access"
@@ -470,6 +476,9 @@ msgstr "Data element group set"
 
 msgid "Data element group sets"
 msgstr "Data element group sets"
+
+msgid "Data set"
+msgstr "Data set"
 
 msgid "Data sets"
 msgstr "Data sets"
@@ -890,6 +899,12 @@ msgstr "Created successfully"
 
 msgid "Required"
 msgstr "Required"
+
+msgid "Form type"
+msgstr "Form type"
+
+msgid "Period type"
+msgstr "Period type"
 
 msgid "Basic information"
 msgstr "Basic information"

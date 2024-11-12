@@ -2,28 +2,32 @@
     margin-bottom: 8px;
 }
 
-.breadcrumbItem {
-    color: var(--colors-blue600);
-    text-decoration: none;
+.breadCrumbItem {
     font-size: 14px;
     line-height: 18px;
 }
 
-span.breadcrumbItem {
+.breadcrumbItemLink {
+    composes: breadCrumbItem;
+    color: var(--colors-blue600);
+    text-decoration: none;
+}
+
+span.breadcrumbItemLink {
     cursor: pointer;
 }
 
-.breadcrumbItem:hover {
+.breadcrumbItemLink:hover {
     text-decoration: underline;
     color: var(--colors-blue700);
 }
 
-.breadcrumbItem:active {
+.breadcrumbItemLink:active {
     text-decoration: underline;
     color: var(--colors-blue900);
 }
 
-.breadcrumbItem:focus {
+.breadcrumbItemLink:focus {
     outline: 1px solid var(--colors-blue600);
 }
 

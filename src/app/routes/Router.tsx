@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import {
     createHashRouter,
@@ -20,13 +21,14 @@ import {
     isModuleNotFoundError,
     isValidUid,
     routePaths,
+    getOverviewPath,
 } from '../../lib'
 import { OverviewSection } from '../../types'
 import { Layout, Breadcrumbs, BreadcrumbItem } from '../layout'
 import { CheckAuthorityForSection } from './CheckAuthorityForSection'
 import { DefaultErrorRoute } from './DefaultErrorRoute'
 import { LegacyAppRedirect } from './LegacyAppRedirect'
-
+import { RouteHandle } from './types'
 // This loads all the overview routes in the same chunk since they resolve to the same promise
 // see https://reactrouter.com/en/main/route/lazy#multiple-routes-in-a-single-file
 // Overviews are small, and the AllOverview would load all the other overviews anyway,
@@ -109,14 +111,22 @@ const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
     <Route
         key={section.namePlural}
         path={getSectionPath(section)}
-        handle={{
-            section,
-            crumb: () => (
-                <BreadcrumbItem
-                    section={OVERVIEW_SECTIONS[section.parentSectionKey]}
-                />
-            ),
-        }}
+        handle={
+            {
+                section,
+                crumb: () => (
+                    <BreadcrumbItem
+                        label={
+                            OVERVIEW_SECTIONS[section.parentSectionKey]
+                                .titlePlural
+                        }
+                        to={`/${getOverviewPath(
+                            OVERVIEW_SECTIONS[section.parentSectionKey]
+                        )}`}
+                    />
+                ),
+            } satisfies RouteHandle
+        }
         element={
             <>
                 <Breadcrumbs />
@@ -126,21 +136,52 @@ const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
     >
         <Route index lazy={createSectionLazyRouteFunction(section, 'List')} />
         <Route
-            handle={{
-                hideSidebar: true,
-                crumb: () => <BreadcrumbItem section={section} />,
-            }}
+            handle={
+                {
+                    hideSidebar: true,
+                    crumb: (matchInfo) => (
+                        <BreadcrumbItem
+                            label={section.title}
+                            to={matchInfo.pathname}
+                        />
+                    ),
+                } satisfies RouteHandle
+            }
         >
             {!sectionsNoNewRoute.has(section) && (
                 <Route
                     path={routePaths.sectionNew}
                     lazy={createSectionLazyRouteFunction(section, 'New')}
+                    handle={
+                        {
+                            crumb: (matchInfo) => (
+                                <BreadcrumbItem
+                                    label={i18n.t('New {{modelName}}', {
+                                        modelName: section.title,
+                                    })}
+                                    to={matchInfo.pathname}
+                                />
+                            ),
+                        } satisfies RouteHandle
+                    }
                 />
             )}
             <Route path=":id" element={<VerifyModelId />}>
                 <Route
                     index
-                    handle={{ showFooter: true }}
+                    handle={
+                        {
+                            showFooter: true,
+                            crumb: (matchInfo) => (
+                                <BreadcrumbItem
+                                    label={i18n.t('Edit {{modelName}}', {
+                                        modelName: section.title,
+                                    })}
+                                    to={matchInfo.pathname}
+                                />
+                            ),
+                        } satisfies RouteHandle
+                    }
                     lazy={createSectionLazyRouteFunction(section, 'Edit')}
                 />
             </Route>
@@ -175,7 +216,7 @@ const routes = createRoutesFromElements(
                             section.componentName,
                             section
                         )}
-                        handle={{ section }}
+                        handle={{ section } satisfies RouteHandle}
                     />
                 ))}
             </Route>

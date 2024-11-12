@@ -26,6 +26,7 @@ export const filterParamsSchema = z
         valueType: z.array(z.nativeEnum(DataElement.valueType)),
         dataDimensionType: z.nativeEnum(Category.dataDimensionType),
         ignoreApproval: z.boolean(),
+        indicatorType: zodArrayIds,
     })
     .partial()
 
@@ -45,6 +46,7 @@ export const filterQueryParamType = {
     publicAccess: CustomDelimitedArrayParam,
     dataDimensionType: StringParam,
     ignoreApproval: BooleanParam,
+    indicatorType: CustomDelimitedArrayParam,
 } as const satisfies QueryParamsConfigMap
 
 export const validFilterKeys = Object.keys(filterQueryParamType)
