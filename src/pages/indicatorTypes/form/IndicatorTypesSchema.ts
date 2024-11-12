@@ -5,10 +5,7 @@ const { identifiable } = modelFormSchemas
 
 export const IndicatorSchema = identifiable.extend({
     name: z.string().min(1, 'Name is required'),
-    factor: z
-        .string()
-        .min(1, 'Factor is required')
-        .regex(/^\d+(\.\d+)?$/, 'Factor must be a valid number'),
+    factor: z.coerce.number().int(),
 })
 
 export const initialValues = getDefaults(IndicatorSchema)

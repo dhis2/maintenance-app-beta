@@ -128,10 +128,28 @@ export const modelListViewsConfig = {
     },
     indicator: {
         columns: {
-            default: ['name', DESCRIPTORS.publicAccess, 'lastUpdated'],
+            default: [
+                'name',
+                { label: i18n.t('Indicator Type'), path: 'indicatorType' },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
         },
         filters: {
             default: ['indicatorType'],
+        },
+    },
+    indicatorType: {
+        columns: {
+            default: [
+                'name',
+                { label: i18n.t('Factor'), path: 'factor' },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+        },
+        filters: {
+            default: [],
         },
     },
     categoryOptionGroupSet: {

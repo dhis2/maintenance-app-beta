@@ -28,7 +28,7 @@ export const Component = () => {
             fields: fieldFilters.concat(),
         },
     }
-    const IndicatorTypeQuery = useQuery({
+    const indicatorTypeQuery = useQuery({
         queryKey: [query],
         queryFn: queryFn<IndicatorTypesFormValues>,
     })
@@ -36,7 +36,7 @@ export const Component = () => {
         <FormBase
             onSubmit={useOnSubmitEdit({ section, modelId })}
             section={section}
-            initialValues={IndicatorTypeQuery.data as IndicatorTypesFormValues}
+            initialValues={indicatorTypeQuery.data}
             validate={validate}
         >
             <DefaultNewFormContents section={section}>
