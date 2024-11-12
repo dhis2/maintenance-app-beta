@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-11T12:39:32.386Z\n"
-"PO-Revision-Date: 2024-11-11T12:39:32.387Z\n"
+"POT-Creation-Date: 2024-11-05T07:23:15.731Z\n"
+"PO-Revision-Date: 2024-11-05T07:23:15.732Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -822,6 +822,27 @@ msgstr "GeoJSON"
 msgid "Disaggregation"
 msgstr "Disaggregation"
 
+msgid "Point"
+msgstr "Point"
+
+msgid "MultiPoint"
+msgstr "MultiPoint"
+
+msgid "LineString"
+msgstr "LineString"
+
+msgid "MultiLineString"
+msgstr "MultiLineString"
+
+msgid "Polygon"
+msgstr "Polygon"
+
+msgid "MultiPolygon"
+msgstr "MultiPolygon"
+
+msgid "GeometryCollection"
+msgstr "GeometryCollection"
+
 msgid "Aggregation type"
 msgstr "Aggregation type"
 
@@ -1094,6 +1115,12 @@ msgstr ""
 "included. PHU will still be available for the PHU level, but not included "
 "in the aggregations to the levels above."
 
+msgid "Longitude"
+msgstr "Longitude"
+
+msgid "{{type}} coordinates are not editable"
+msgstr "{{type}} coordinates are not editable"
+
 msgid "Upload an image"
 msgstr "Upload an image"
 
@@ -1143,8 +1170,8 @@ msgstr "Location"
 msgid "Set up the organisation unit location."
 msgstr "Set up the organisation unit location."
 
-msgid "Latitude"
-msgstr "Latitude"
+msgid "Reference assignment"
+msgstr "Reference assignment"
 
 msgid "Longitude"
 msgstr "Longitude"
@@ -1179,8 +1206,8 @@ msgstr "Filter available programs"
 msgid "Filter selected programs"
 msgstr "Filter selected programs"
 
-msgid "New organisation unit will be created inside {{displayName}}"
-msgstr "New organisation unit will be created inside {{displayName}}"
+msgid "Organisation unit will be positioned inside {{displayName}}"
+msgstr "Organisation unit will be positioned inside {{displayName}}"
 
 msgid "Creating first organisation unit"
 msgstr "Creating first organisation unit"

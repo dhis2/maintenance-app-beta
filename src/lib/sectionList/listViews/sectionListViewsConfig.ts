@@ -134,6 +134,19 @@ export const modelListViewsConfig = {
             default: ['indicatorType'],
         },
     },
+    categoryOptionGroupSet: {
+        columns: {
+            default: [
+                'name',
+                'dataDimensionType',
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+        },
+        filters: {
+            default: ['dataDimensionType'],
+        },
+    },
     categoryOptionGroup: {
         columns: {
             default: [
