@@ -31,11 +31,6 @@
     padding-inline: var(--spacers-dp16);
 }
 
-.verticalDivider {
-    align-self: stretch;
-    width: 0;
-}
-
 .formActions {
     display: flex;
     gap: 8px;
