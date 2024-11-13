@@ -1,5 +1,5 @@
 import React from 'react'
-import { ConfigurableFilterKey } from './../../../lib'
+import { ConfigurableFilterKey } from '../../../../lib'
 import {
     AggregationTypeFilter,
     CategoryComboFilter,
@@ -13,8 +13,9 @@ import {
     PublicAccessFilter,
     ValueTypeSelectionFilter,
     FormTypeFilter,
-} from './filterSelectors'
-import { useFilterKeys } from './useFilterKeys'
+    DataSetFilter
+} from '.'
+import { useFilterKeys } from '../useFilterKeys'
 
 type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
 
@@ -31,6 +32,7 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
     publicAccess: PublicAccessFilter,
     dataDimensionType: DataDimensionTypeFilter,
     ignoreApproval: IgnoreApprovalFilter,
+    dataSet: DataSetFilter,
 }
 
 export const DynamicFilters = () => {

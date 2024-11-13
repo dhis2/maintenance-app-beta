@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-12T08:30:18.816Z\n"
-"PO-Revision-Date: 2024-11-12T08:30:18.816Z\n"
+"POT-Creation-Date: 2024-11-13T12:57:12.003Z\n"
+"PO-Revision-Date: 2024-11-13T12:57:12.004Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -306,6 +306,9 @@ msgstr "Type to filter options"
 msgid "No matches"
 msgstr "No matches"
 
+msgid "Data set"
+msgstr "Data set"
+
 msgid "Search by name, code or ID"
 msgstr "Search by name, code or ID"
 
@@ -476,9 +479,6 @@ msgstr "Data element group set"
 
 msgid "Data element group sets"
 msgstr "Data element group sets"
-
-msgid "Data set"
-msgstr "Data set"
 
 msgid "Data sets"
 msgstr "Data sets"
@@ -849,6 +849,12 @@ msgstr "MultiPolygon"
 msgid "GeometryCollection"
 msgstr "GeometryCollection"
 
+msgid "Section"
+msgstr "Section"
+
+msgid "Section Multi-org"
+msgstr "Section Multi-org"
+
 msgid "Aggregation type"
 msgstr "Aggregation type"
 
@@ -860,6 +866,9 @@ msgstr "Form name"
 
 msgid "Domain type"
 msgstr "Domain type"
+
+msgid "Form type"
+msgstr "Form type"
 
 msgid "Sharing"
 msgstr "Sharing"
@@ -899,9 +908,6 @@ msgstr "Created successfully"
 
 msgid "Required"
 msgstr "Required"
-
-msgid "Form type"
-msgstr "Form type"
 
 msgid "Period type"
 msgstr "Period type"
