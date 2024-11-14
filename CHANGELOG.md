@@ -1,3 +1,15 @@
+# [0.13.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.12.0...v0.13.0) (2024-11-14)
+
+
+### Bug Fixes
+
+* address feedback on org unit edit page ([2341bcb](https://github.com/dhis2/maintenance-app-beta/commit/2341bcbde28c85cd0d490438a99135155f419cc4))
+
+
+### Features
+
+* add indicators list view ([#432](https://github.com/dhis2/maintenance-app-beta/issues/432)) ([16814c1](https://github.com/dhis2/maintenance-app-beta/commit/16814c1061ccfc853ca058215df8b0c4c82a9480))
+
 # [0.12.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.11.0...v0.12.0) (2024-11-07)
 
 
