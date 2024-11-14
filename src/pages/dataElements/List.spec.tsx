@@ -172,7 +172,7 @@ describe('Data Elements List', () => {
                         dataElements: [
                             {
                                 ...FIRST_FILTERED_DATA_ELEMENT,
-                                name: 'first page result',
+                                displayName: 'first page result',
                             },
                         ],
                     }
@@ -186,7 +186,7 @@ describe('Data Elements List', () => {
                         dataElements: [
                             {
                                 ...FIRST_FILTERED_DATA_ELEMENT,
-                                name: 'second page result',
+                                displayName: 'second page result',
                             },
                         ],
                     }
@@ -218,7 +218,7 @@ describe('Data Elements List', () => {
             ).toHaveAttribute('disabled')
         })
         // next page
-        it('should allowing going to Next page', async () => {
+        it('should allow going to Next page', async () => {
             const user = userEvent.setup()
             const { getByTestId, findByText, queryByText } =
                 await renderWithPager()
@@ -270,7 +270,7 @@ describe('Data Elements List', () => {
                     result: [
                         {
                             ...FIRST_FILTERED_DATA_ELEMENT,
-                            name: 'last page result',
+                            displayName: 'last page result',
                         },
                     ],
                 },
