@@ -32,6 +32,7 @@ const filterToQueryParamMap: FilterToQueryParamsMap = {
     identifiable: (value) => `identifiable:token:${value}`,
     category: (value) => inFilter('categories.id', value),
     categoryOption: (value) => inFilter('categoryOptions.id', value),
+    indicatorType: (value) => inFilter('indicatorType.id', value),
     categoryCombo: (value, section) => {
         if (section.name === 'category') {
             return inFilter('categoryCombos.id', value)
