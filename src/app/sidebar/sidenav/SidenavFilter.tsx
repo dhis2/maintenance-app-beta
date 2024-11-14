@@ -1,10 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
-import { Input, InputEventPayload, InputChangeHandler } from '@dhis2/ui'
+import { InputEventPayload, InputEventHandler } from '@dhis2/ui'
 import React, { useState } from 'react'
+import { ClearableInput } from '../../../components'
 import styles from './Sidenav.module.css'
 
 interface SidenavParentProps {
-    onChange?: InputChangeHandler
+    onChange?: InputEventHandler<React.SyntheticEvent>
 }
 
 export const SidenavFilter = ({ onChange }: SidenavParentProps) => {
@@ -12,7 +13,7 @@ export const SidenavFilter = ({ onChange }: SidenavParentProps) => {
 
     const handleChange = (
         input: InputEventPayload,
-        e: React.ChangeEvent<HTMLInputElement>
+        e: React.SyntheticEvent
     ) => {
         setValue(input.value ?? '')
         if (onChange) {
@@ -21,13 +22,20 @@ export const SidenavFilter = ({ onChange }: SidenavParentProps) => {
     }
 
     return (
-        <Input
-            className={styles['sidenav-filter']}
-            dense
-            type="text"
-            value={value}
-            placeholder={i18n.t('Search for menu items')}
-            onChange={handleChange}
-        />
+        <div>
+            <ClearableInput
+                className={styles['sidenav-filter']}
+                dense
+                name="sidenav-filter"
+                type="text"
+                value={value}
+                placeholder={i18n.t('Search for menu items')}
+                onChange={handleChange}
+                showClearButton={value.length > 0}
+                onClear={(e) =>
+                    handleChange({ value: '', name: 'sidenav-filter' }, e)
+                }
+            />
+        </div>
     )
 }

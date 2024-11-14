@@ -1,0 +1,17 @@
+.clearableInputWrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: flex-start;
+}
+
+.clearableInputWrapper > div {
+    flex-grow: 1;
+}
+
+.clearableInputClearButton {
+    cursor: pointer;
+    position: absolute;
+    display: inline-flex;
+    right: var(--spacers-dp16);
+}
