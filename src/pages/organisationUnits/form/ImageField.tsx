@@ -43,7 +43,7 @@ export function ImageField() {
             const postResponse = (await dataEngine.mutate({
                 resource: 'fileResources',
                 type: 'create',
-                data: { file: fileToUpload },
+                data: { file: fileToUpload, domain: 'ORG_UNIT' },
             })) as {
                 response: {
                     fileResource: { id: string; storageStatus: string }
@@ -103,7 +103,6 @@ export function ImageField() {
                     valid={!!(input.value && input.value.id)}
                 />
             </div>
-
             <FileList>
                 {input.value?.id && (
                     <FileListItem
@@ -116,7 +115,7 @@ export function ImageField() {
             </FileList>
             <Help>
                 {i18n.t(
-                    'Max size 5MB. Supported file size are .jpg, .png, and .gif.'
+                    'Max size 10MB. Supported file size are .jpg, .png, and .gif.'
                 )}
             </Help>
         </UIField>
@@ -137,7 +136,7 @@ const ImagePreview = ({
     }
 
     if (fileResource && fileResource.id) {
-        const src = `${baseUrl}/fileResources/${fileResource.id}/data`
+        const src = `${baseUrl}/api/fileResources/${fileResource.id}/data`
 
         return <img src={src} alt={i18n.t('Preview of current icon')} />
     }

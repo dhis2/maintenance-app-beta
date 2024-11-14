@@ -9,24 +9,6 @@ import {
     organisationUnitSchema,
 } from './form'
 
-const formatFormValues: (values: FormValues) => Record<string, unknown> = (
-    values
-) => {
-    return {
-        ...values,
-        geometry:
-            values.geometry?.longitude && values.geometry?.latitude
-                ? {
-                      type: 'Point',
-                      coordinates: [
-                          values.geometry?.longitude,
-                          values.geometry?.latitude,
-                      ],
-                  }
-                : undefined,
-        attributeValues: values.attributeValues.filter(({ value }) => !!value),
-    }
-}
 const section = SECTIONS_MAP.organisationUnit
 
 export const Component = () => {
@@ -34,7 +16,6 @@ export const Component = () => {
         <FormBase
             onSubmit={useOnSubmitNew({
                 section,
-                valueFormatter: formatFormValues,
             })}
             initialValues={initialValues as FormValues}
             validate={(values: FormValues) => {

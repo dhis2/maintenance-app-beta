@@ -14,7 +14,7 @@ import {
 import { SCHEMA_SECTIONS } from '../../../lib'
 import { DataElementsField } from '../fields'
 
-const schemaSection = SCHEMA_SECTIONS.dataElementGroup
+const section = SCHEMA_SECTIONS.dataElementGroup
 
 export function DataElementGroupFormFields() {
     return (
@@ -34,7 +34,7 @@ export function DataElementGroupFormFields() {
 
                 <StandardFormField>
                     <DescriptionField
-                        schemaSection={schemaSection}
+                        schemaSection={section}
                         helpText={i18n.t(
                             'Explain the purpose of this data element group.'
                         )}
@@ -57,7 +57,7 @@ export function DataElementGroupFormFields() {
                 </StandardFormField>
             </StandardFormSection>
 
-            <CustomAttributesSection />
+            <CustomAttributesSection schemaSection={section} />
         </>
     )
 }

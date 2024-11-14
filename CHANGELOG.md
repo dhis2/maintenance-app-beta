@@ -1,3 +1,30 @@
+# [0.13.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.12.0...v0.13.0) (2024-11-14)
+
+
+### Bug Fixes
+
+* address feedback on org unit edit page ([2341bcb](https://github.com/dhis2/maintenance-app-beta/commit/2341bcbde28c85cd0d490438a99135155f419cc4))
+
+
+### Features
+
+* add indicators list view ([#432](https://github.com/dhis2/maintenance-app-beta/issues/432)) ([16814c1](https://github.com/dhis2/maintenance-app-beta/commit/16814c1061ccfc853ca058215df8b0c4c82a9480))
+
+# [0.12.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.11.0...v0.12.0) (2024-11-07)
+
+
+### Features
+
+* add dataset lists ([de9f34d](https://github.com/dhis2/maintenance-app-beta/commit/de9f34d9d4a9ed42d92ab50ce0eeb8d08d4bb166))
+* add org unit edit form ([#430](https://github.com/dhis2/maintenance-app-beta/issues/430)) ([79a1892](https://github.com/dhis2/maintenance-app-beta/commit/79a18921c876a36d357edee88f38114bc412a0a9))
+
+# [0.11.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.10.2...v0.11.0) (2024-11-05)
+
+
+### Features
+
+* category option group sets ([#427](https://github.com/dhis2/maintenance-app-beta/issues/427)) ([37b4051](https://github.com/dhis2/maintenance-app-beta/commit/37b4051e7ff081a43a2fd399ee94272922808d98))
+
 ## [0.10.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.10.1...v0.10.2) (2024-10-30)
 
 

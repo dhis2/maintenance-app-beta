@@ -6,7 +6,10 @@ import { useNavigate } from 'react-router-dom'
 import { ModelSection } from '../../types'
 import { IdentifiableObject } from '../../types/generated'
 import { getSectionPath, useNavigateWithSearchState } from '../routeUtils'
-import { createJsonPatchOperations } from './createJsonPatchOperations'
+import {
+    createJsonPatchOperations,
+    ModelWithAttributeValues,
+} from './createJsonPatchOperations'
 import { useCreateModel } from './useCreateModel'
 import { usePatchModel } from './usePatchModel'
 
@@ -57,12 +60,26 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
     )
 }
 
-export const useOnSubmitNew = <TFormValues>({
+export const defaultValueFormatter = <
+    TFormValues extends ModelWithAttributeValues
+>(
+    values: TFormValues
+) => {
+    if (values.attributeValues) {
+        return {
+            ...values,
+            attributeValues: values.attributeValues.filter(
+                ({ value }) => !!value
+            ),
+        }
+    }
+    return values
+}
+
+export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
     section,
-    valueFormatter,
 }: {
     section: ModelSection
-    valueFormatter?: (values: TFormValues) => Record<string, unknown>
 }) => {
     const createModel = useCreateModel(section.namePlural)
     const saveAlert = useAlert(
@@ -83,10 +100,7 @@ export const useOnSubmitNew = <TFormValues>({
                 })
                 return
             }
-            const formattedValues = valueFormatter
-                ? valueFormatter(values)
-                : values
-            const errors = await createModel(formattedValues)
+            const errors = await createModel(values)
             if (errors) {
                 return errors
             }

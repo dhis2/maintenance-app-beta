@@ -9,13 +9,12 @@ import {
     StandardFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-} from '../../../components'
-import {
     DefaultIdentifiableFields,
     DescriptionField,
-} from '../../../components/form'
+} from '../../../components'
 import { DateField } from '../../../components/form/fields/DateField'
-import { SCHEMA_SECTIONS, useSystemSetting } from '../../../lib'
+import { SCHEMA_SECTIONS, SECTIONS_MAP, useSystemSetting } from '../../../lib'
+import { GeometryFields } from './GeometryFields'
 import { ImageField } from './ImageField'
 import { OrganisationUnitSelector } from './OrganisationUnitSelector'
 
@@ -25,6 +24,8 @@ export function OrganisationUnitFormField() {
     const allowReferenceAssignments = useSystemSetting(
         'keyAllowObjectAssignment'
     )
+
+    const section = SECTIONS_MAP.organisationUnit
 
     return (
         <>
@@ -79,43 +80,52 @@ export function OrganisationUnitFormField() {
                 <StandardFormField>
                     <DescriptionField schemaSection={schemaSection} />
                 </StandardFormField>
-                <FieldRFF<string | undefined>
-                    component={InputFieldFF}
-                    inputWidth="400px"
-                    label={i18n.t('Contact person')}
-                    name="contactPerson"
-                />
-                <FieldRFF<string | undefined>
-                    component={InputFieldFF}
-                    inputWidth="400px"
-                    label={i18n.t('Address')}
-                    name="address"
-                />
-                <FieldRFF<string | undefined>
-                    component={InputFieldFF}
-                    inputWidth="400px"
-                    label={i18n.t('Email')}
-                    name="email"
-                    type="email"
-                />
-                <FieldRFF<string | undefined>
-                    component={InputFieldFF}
-                    inputWidth="400px"
-                    label={i18n.t('Phone number')}
-                    name="phoneNumber"
-                    type="tel"
-                />
-
-                <FieldRFF<string | undefined>
-                    component={InputFieldFF}
-                    inputWidth="400px"
-                    label={i18n.t('URL')}
-                    name="url"
-                    type="url"
-                    helpText={i18n.t(
-                        'A web link that provides extra information.'
-                    )}
-                />
+                <StandardFormField>
+                    <FieldRFF<string | undefined>
+                        component={InputFieldFF}
+                        inputWidth="400px"
+                        label={i18n.t('Contact person')}
+                        name="contactPerson"
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <FieldRFF<string | undefined>
+                        component={InputFieldFF}
+                        inputWidth="400px"
+                        label={i18n.t('Address')}
+                        name="address"
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <FieldRFF<string | undefined>
+                        component={InputFieldFF}
+                        inputWidth="400px"
+                        label={i18n.t('Email')}
+                        name="email"
+                        type="email"
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <FieldRFF<string | undefined>
+                        component={InputFieldFF}
+                        inputWidth="400px"
+                        label={i18n.t('Phone number')}
+                        name="phoneNumber"
+                        type="tel"
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <FieldRFF<string | undefined>
+                        component={InputFieldFF}
+                        inputWidth="400px"
+                        label={i18n.t('URL')}
+                        name="url"
+                        type="url"
+                        helpText={i18n.t(
+                            'A web link that provides extra information.'
+                        )}
+                    />
+                </StandardFormField>
             </StandardFormSection>
 
             <StandardFormSection>
@@ -126,26 +136,7 @@ export function OrganisationUnitFormField() {
                 <StandardFormSectionDescription>
                     {i18n.t('Set up the organisation unit location.')}
                 </StandardFormSectionDescription>
-
-                <FieldRFF<string | undefined>
-                    component={InputFieldFF}
-                    inputWidth="400px"
-                    label={i18n.t('Latitude')}
-                    name="geometry.latitude"
-                    type="number"
-                    min="-90"
-                    max="90"
-                />
-
-                <FieldRFF<string | undefined>
-                    component={InputFieldFF}
-                    inputWidth="400px"
-                    label={i18n.t('Longitude')}
-                    name="geometry.longitude"
-                    type="number"
-                    min="-180"
-                    max="180"
-                />
+                <GeometryFields />
             </StandardFormSection>
             {allowReferenceAssignments && (
                 <StandardFormSection>
@@ -192,7 +183,7 @@ export function OrganisationUnitFormField() {
                 </StandardFormSection>
             )}
 
-            <CustomAttributesSection />
+            <CustomAttributesSection schemaSection={section} />
         </>
     )
 }

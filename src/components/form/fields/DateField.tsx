@@ -44,7 +44,7 @@ export function DateField({
                 onDateSelect={handleChange}
                 timeZone={'utc'}
                 locale={locale}
-                error={meta.touched && meta.invalid && meta.error}
+                error={!!(meta.touched && meta.invalid && meta.error)}
                 validationText={meta.touched ? meta.error : undefined}
                 onBlur={(_, e) => input.onBlur(e)}
                 clearable
