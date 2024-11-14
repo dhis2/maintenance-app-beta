@@ -1,3 +1,11 @@
+## [0.13.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.13.0...v0.13.1) (2024-11-14)
+
+
+### Bug Fixes
+
+* stop row loaders if there is an error ([#440](https://github.com/dhis2/maintenance-app-beta/issues/440)) ([44a8080](https://github.com/dhis2/maintenance-app-beta/commit/44a8080f5899aafcdd6f5c7b9b17af1ee1949b1a))
+* **optionSetSelect:** fix optionSet crashing with initialValue ([#439](https://github.com/dhis2/maintenance-app-beta/issues/439)) ([93b8d68](https://github.com/dhis2/maintenance-app-beta/commit/93b8d682dc1aab707701308ec130a6af60498f55))
+
 # [0.13.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.12.0...v0.13.0) (2024-11-14)
 
 
