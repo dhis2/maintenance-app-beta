@@ -23,6 +23,7 @@ export const OrganisationUnitRow = ({
     isFiltering,
     fetchNextPage,
     onShowDetailsClick,
+    hasErrored,
 }: {
     row: Row<OrganisationUnitListItem>
     toggleShowAll: (id: string) => void
@@ -30,6 +31,7 @@ export const OrganisationUnitRow = ({
     isFiltering: boolean
     fetchNextPage: (id: string) => void
     onShowDetailsClick: (model: BaseListModel) => void
+    hasErrored: boolean
 }) => {
     const parentRow = row.getParentRow()
 
@@ -72,7 +74,8 @@ export const OrganisationUnitRow = ({
                                     dataTest="row-expand-icon"
                                     loading={
                                         row.getIsExpanded() &&
-                                        row.subRows.length < 1
+                                        row.subRows.length < 1 &&
+                                        !hasErrored
                                     }
                                     icon={
                                         row.getIsExpanded() ? (

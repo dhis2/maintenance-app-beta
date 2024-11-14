@@ -60,7 +60,7 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
     )
 }
 
-export const defaultNewValueFormatter = <
+export const defaultValueFormatter = <
     TFormValues extends ModelWithAttributeValues
 >(
     values: TFormValues
@@ -78,10 +78,8 @@ export const defaultNewValueFormatter = <
 
 export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
     section,
-    valueFormatter = defaultNewValueFormatter,
 }: {
     section: ModelSection
-    valueFormatter?: (values: TFormValues) => Record<string, unknown>
 }) => {
     const createModel = useCreateModel(section.namePlural)
     const saveAlert = useAlert(
@@ -102,10 +100,7 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
                 })
                 return
             }
-            const formattedValues = valueFormatter
-                ? valueFormatter(values)
-                : values
-            const errors = await createModel(formattedValues)
+            const errors = await createModel(values)
             if (errors) {
                 return errors
             }
@@ -115,6 +110,6 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
             })
             navigate(`/${getSectionPath(section)}`)
         },
-        [createModel, saveAlert, navigate, section, valueFormatter]
+        [createModel, saveAlert, navigate, section]
     )
 }

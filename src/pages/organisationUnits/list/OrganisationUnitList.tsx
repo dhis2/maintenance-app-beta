@@ -105,17 +105,17 @@ export const OrganisationUnitList = () => {
         (column) => column.meta.fieldFilter
     )
 
+    const { queries, fetchNextPage } = usePaginatedChildrenOrgUnitsController({
+        parentIds: parentIdsToLoad,
+        fieldFilters,
+    })
     const isFiltering = !!identifiableFilter
+    const hasErrored = queries.find((query) => query.error) !== undefined
 
     const orgUnitFiltered = useFilteredOrgUnits({
         searchQuery: identifiableFilter,
         fieldFilters,
         enabled: isFiltering,
-    })
-
-    const { queries, fetchNextPage } = usePaginatedChildrenOrgUnitsController({
-        parentIds: parentIdsToLoad,
-        fieldFilters,
     })
 
     // expand ancestors of the filtered org units
@@ -265,6 +265,7 @@ export const OrganisationUnitList = () => {
                             }
                             onShowDetailsClick={handleDetailsClick}
                             isFiltering={isFiltering}
+                            hasErrored={hasErrored}
                             fetchNextPage={fetchNextPage}
                         />
                     ))}
