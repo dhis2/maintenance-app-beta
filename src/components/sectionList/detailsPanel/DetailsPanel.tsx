@@ -3,6 +3,9 @@ import { Card, IconCross24, Button, ButtonStrip, NoticeBox } from '@dhis2/ui'
 import React, { PropsWithChildren } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Link } from 'react-router-dom'
+import { TOOLTIPS } from '../../../lib'
+import { LinkButton } from '../../LinkButton'
+import { TooltipWrapper } from '../../tooltip'
 import css from './DetailsPanel.module.css'
 
 type DetailsPanelProps = {
@@ -42,13 +45,19 @@ export const DetailsPanelContent = ({
     )
 }
 
-export const DetailsPanelButtons = ({ modelId }: { modelId: string }) => (
+export const DetailsPanelButtons = ({
+    modelId,
+    editable,
+}: {
+    modelId: string
+    editable?: boolean
+}) => (
     <ButtonStrip>
-        <Link to={modelId}>
-            <Button secondary small>
+        <TooltipWrapper condition={!editable} content={TOOLTIPS.noEditAccess}>
+            <LinkButton small secondary to={modelId} disabled={!editable}>
                 {i18n.t('Edit')}
-            </Button>
-        </Link>
+            </LinkButton>
+        </TooltipWrapper>
     </ButtonStrip>
 )
 

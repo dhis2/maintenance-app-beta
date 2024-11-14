@@ -1,7 +1,7 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import React, { useRef } from 'react'
-import { Schema, useSchemaFromHandle } from '../../../lib'
+import { canEditModel, Schema, useSchemaFromHandle } from '../../../lib'
 import { Query, WrapQueryResponse } from '../../../types'
 import { BaseIdentifiableObject } from '../../../types/models'
 import { ClientDateTime } from '../../date'
@@ -18,6 +18,7 @@ type DetailsPanelProps = {
 }
 
 const defaultQueryFields = [
+    'access',
     'code',
     'created',
     'lastUpdated',
@@ -78,9 +79,10 @@ export const DefaultDetailsPanelContent = ({ modelId }: DetailsPanelProps) => {
 }
 
 const DetailsContent = ({ data }: { data: DetailsResponse }) => {
+    const canEdit = canEditModel(data)
     return (
         <DetailsPanelContent displayName={data.displayName}>
-            <DetailsPanelButtons modelId={data.id} />
+            <DetailsPanelButtons modelId={data.id} editable={canEdit} />
             <DetailsList>
                 {data.shortName && (
                     <DetailItem label={i18n.t('Short name')}>
