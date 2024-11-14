@@ -5,6 +5,7 @@ import {
     FormRenderProps,
     Form as ReactFinalForm,
 } from 'react-final-form'
+import { defaultValueFormatter } from '../../lib/form/'
 import {
     PartialAttributeValue,
     getAllAttributeValues,
