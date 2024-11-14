@@ -59,6 +59,7 @@ export const defaultModelViewConfig = {
             'createdBy',
             'href',
             'id',
+            'lastUpdatedBy',
             DESCRIPTORS.publicAccess,
         ],
         default: ['name', DESCRIPTORS.publicAccess, 'lastUpdated'],
@@ -107,7 +108,19 @@ export const modelListViewsConfig = {
         },
     },
     categoryOption: {
-        columns: {},
+        columns: {
+            available: [
+                'name',
+                'code',
+                'created',
+                'createdBy',
+                'href',
+                'id',
+                DESCRIPTORS.publicAccess,
+            ],
+            default: ['name', DESCRIPTORS.publicAccess, 'lastUpdated'],
+            overrideDefaultAvailable: true,
+        },
         filters: {
             default: ['category', 'categoryOptionGroup'],
         },
