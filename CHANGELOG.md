@@ -1,3 +1,11 @@
+## [0.13.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.13.1...v0.13.2) (2024-11-14)
+
+
+### Bug Fixes
+
+* **categoryOptionGroupSet:** update view config and formName validation ([#442](https://github.com/dhis2/maintenance-app-beta/issues/442)) ([b0253a1](https://github.com/dhis2/maintenance-app-beta/commit/b0253a17105759e0b1e4e2523bcdf2be759b6131))
+* **list:** disable list buttons when no access ([#441](https://github.com/dhis2/maintenance-app-beta/issues/441)) ([5c0941f](https://github.com/dhis2/maintenance-app-beta/commit/5c0941f0deda2b6e29601e8d2c576de3792587bc))
+
 ## [0.13.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.13.0...v0.13.1) (2024-11-14)
 
 
