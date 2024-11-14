@@ -7,6 +7,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../..'
+import { SchemaSection } from '../../../types'
 import { Attribute, AttributeValue } from '../../../types/generated'
 
 const inputWidth = '440px'
@@ -95,7 +96,11 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
     throw new Error(`Implement value type "${attribute.valueType}"!`)
 }
 
-export function CustomAttributesSection() {
+export function CustomAttributesSection({
+    schemaSection,
+}: {
+    schemaSection: SchemaSection
+}) {
     const formState = useFormState<ValuesWithAttributes>({
         subscription: { initialValues: true },
     })
@@ -110,11 +115,14 @@ export function CustomAttributesSection() {
     return (
         <StandardFormSection>
             <StandardFormSectionTitle>
-                {i18n.t('Custom attributes')}
+                {i18n.t('Attributes')}
             </StandardFormSectionTitle>
 
             <StandardFormSectionDescription>
-                {i18n.t('Custom fields for your DHIS2 instance')}
+                {i18n.t(
+                    'Set up information for the attributes assigned to {{modelName}}',
+                    { modelName: schemaSection.titlePlural.toLowerCase() }
+                )}
             </StandardFormSectionDescription>
             {customAttributes?.map((customAttribute, index) => {
                 return (

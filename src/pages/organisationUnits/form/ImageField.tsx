@@ -115,7 +115,7 @@ export function ImageField() {
             </FileList>
             <Help>
                 {i18n.t(
-                    'Max size 5MB. Supported file size are .jpg, .png, and .gif.'
+                    'Max size 10MB. Supported file size are .jpg, .png, and .gif.'
                 )}
             </Help>
         </UIField>

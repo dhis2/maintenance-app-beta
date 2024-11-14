@@ -111,7 +111,7 @@ export const CategoryFormFields = () => {
                     </StandardFormField>
                 </StandardFormField>
             </StandardFormSection>
-            <CustomAttributesSection />
+            <CustomAttributesSection schemaSection={section} />
         </>
     )
 }

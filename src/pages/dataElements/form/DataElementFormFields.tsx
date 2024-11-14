@@ -31,7 +31,7 @@ import {
 } from '../fields'
 
 export function DataElementFormFields() {
-    const schemaSection = SCHEMA_SECTIONS.dataElement
+    const section = SCHEMA_SECTIONS.dataElement
     return (
         <>
             <StandardFormSection>
@@ -44,11 +44,11 @@ export function DataElementFormFields() {
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
-                    <NameField schemaSection={schemaSection} />
+                    <NameField schemaSection={section} />
                 </StandardFormField>
 
                 <StandardFormField>
-                    <ShortNameField schemaSection={schemaSection} />
+                    <ShortNameField schemaSection={section} />
                 </StandardFormField>
 
                 <StandardFormField>
@@ -56,7 +56,7 @@ export function DataElementFormFields() {
                 </StandardFormField>
 
                 <StandardFormField>
-                    <CodeField schemaSection={schemaSection} />
+                    <CodeField schemaSection={section} />
                 </StandardFormField>
 
                 <StandardFormField>
@@ -64,7 +64,7 @@ export function DataElementFormFields() {
                         helpText={i18n.t(
                             'Explain the purpose of this data element.'
                         )}
-                        schemaSection={schemaSection}
+                        schemaSection={section}
                     />
                 </StandardFormField>
 
@@ -151,7 +151,7 @@ export function DataElementFormFields() {
                 </StandardFormField>
             </StandardFormSection>
 
-            <CustomAttributesSection />
+            <CustomAttributesSection schemaSection={section} />
         </>
     )
 }
