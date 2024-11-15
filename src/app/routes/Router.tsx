@@ -22,6 +22,7 @@ import {
     isValidUid,
     routePaths,
     getOverviewPath,
+    isMergableSection,
 } from '../../lib'
 import { OverviewSection } from '../../types'
 import { Layout, Breadcrumbs, BreadcrumbItem } from '../layout'
@@ -69,7 +70,7 @@ function createOverviewLazyRouteFunction(
 
 function createSectionLazyRouteFunction(
     section: Section,
-    componentFileName: string
+    componentFileName: 'New' | 'Edit' | 'List' | 'Merge'
 ) {
     return async () => {
         try {
@@ -160,6 +161,24 @@ const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
                                 <BreadcrumbItem
                                     label={i18n.t('New {{modelName}}', {
                                         modelName: section.title,
+                                    })}
+                                    to={matchInfo.pathname}
+                                />
+                            ),
+                        } satisfies RouteHandle
+                    }
+                />
+            )}
+            {isMergableSection(section) && (
+                <Route
+                    path={routePaths.merge}
+                    lazy={createSectionLazyRouteFunction(section, 'Merge')}
+                    handle={
+                        {
+                            crumb: (matchInfo) => (
+                                <BreadcrumbItem
+                                    label={i18n.t('Merge {{modelName}}', {
+                                        modelName: section.titlePlural,
                                     })}
                                     to={matchInfo.pathname}
                                 />
