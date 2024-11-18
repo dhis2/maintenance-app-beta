@@ -79,12 +79,20 @@ export const GEOMETRY_TYPE = {
     GEOMETRYCOLLECTION: i18n.t('GeometryCollection'),
 }
 
+export const FORM_TYPE = {
+    CUSTOM: i18n.t('Custom'),
+    DEFAULT: i18n.t('Default'),
+    SECTION: i18n.t('Section'),
+    SECTION_MULTIORG: i18n.t('Section Multi-org'),
+}
+
 const allConstantTranslations: Record<string, string> = {
     ...AGGREGATION_TYPE,
     ...DOMAIN_TYPE,
     ...VALUE_TYPE,
     ...DATA_DIMENSION_TYPE,
     ...GEOMETRY_TYPE,
+    ...FORM_TYPE,
 }
 
 export const getConstantTranslation = (constant: string): string => {

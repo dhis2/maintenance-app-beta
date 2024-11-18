@@ -7,6 +7,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "POT-Creation-Date: 2024-11-18T05:31:50.557Z\n"
 "PO-Revision-Date: 2024-11-18T05:31:50.557Z\n"
+"POT-Creation-Date: 2024-11-13T12:57:12.003Z\n"
+"PO-Revision-Date: 2024-11-13T12:57:12.004Z\n"
+"POT-Creation-Date: 2024-11-13T08:29:01.348Z\n"
+"PO-Revision-Date: 2024-11-13T08:29:01.348Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -93,11 +97,11 @@ msgstr "Something went wrong when submitting the form"
 msgid "<No value>"
 msgstr "<No value>"
 
-msgid "Custom attributes"
-msgstr "Custom attributes"
+msgid "Attributes"
+msgstr "Attributes"
 
-msgid "Custom fields for your DHIS2 instance"
-msgstr "Custom fields for your DHIS2 instance"
+msgid "Set up information for the attributes assigned to {{modelName}}"
+msgstr "Set up information for the attributes assigned to {{modelName}}"
 
 msgid "Code"
 msgstr "Code"
@@ -612,9 +616,6 @@ msgstr "Constants"
 msgid "Attribute"
 msgstr "Attribute"
 
-msgid "Attributes"
-msgstr "Attributes"
-
 msgid "Option sets"
 msgstr "Option sets"
 
@@ -849,6 +850,12 @@ msgstr "MultiPolygon"
 msgid "GeometryCollection"
 msgstr "GeometryCollection"
 
+msgid "Section"
+msgstr "Section"
+
+msgid "Section Multi-org"
+msgstr "Section Multi-org"
+
 msgid "Aggregation type"
 msgstr "Aggregation type"
 
@@ -860,6 +867,9 @@ msgstr "Form name"
 
 msgid "Domain type"
 msgstr "Domain type"
+
+msgid "Form type"
+msgstr "Form type"
 
 msgid "Sharing"
 msgstr "Sharing"
@@ -902,6 +912,8 @@ msgstr "Required"
 
 msgid "Factor"
 msgstr "Factor"
+msgid "Period type"
+msgstr "Period type"
 
 msgid "Basic information"
 msgstr "Basic information"
@@ -1036,6 +1048,9 @@ msgstr ""
 
 msgid "End date should be after start date"
 msgstr "End date should be after start date"
+
+msgid "Custom attributes"
+msgstr "Custom attributes"
 
 msgid "Create data element group"
 msgstr "Create data element group"
@@ -1181,8 +1196,8 @@ msgstr "Upload an image"
 msgid "Remove"
 msgstr "Remove"
 
-msgid "Max size 5MB. Supported file size are .jpg, .png, and .gif."
-msgstr "Max size 5MB. Supported file size are .jpg, .png, and .gif."
+msgid "Max size 10MB. Supported file size are .jpg, .png, and .gif."
+msgstr "Max size 10MB. Supported file size are .jpg, .png, and .gif."
 
 msgid "Preview of current icon"
 msgstr "Preview of current icon"

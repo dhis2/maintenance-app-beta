@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import React from 'react'
 import { useSectionListFilters } from './../../../lib'
-import { DynamicFilters } from './DynamicFilters'
+import { DynamicFilters } from './filterSelectors/DynamicFilters'
 import { IdentifiableFilter } from './filterSelectors/IdentifiableFilter'
 import css from './FilterWrapper.module.css'
 

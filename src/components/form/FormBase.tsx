@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import { FormProps, Form as ReactFinalForm } from 'react-final-form'
+import { defaultValueFormatter } from '../../lib/form/useOnSubmit'
 import {
     PartialAttributeValue,
     getAllAttributeValues,
@@ -24,6 +25,9 @@ type FormBaseProps<TValues> = FormProps<TValues> & OwnProps<TValues>
 export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
     children,
     initialValues,
+    onSubmit,
+    validate,
+    valueFormatter = defaultValueFormatter,
     includeAttributes = true,
     ...reactFinalFormProps
 }: FormBaseProps<TInitialValues>) {
@@ -55,6 +59,10 @@ export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
             render={({ handleSubmit }) => (
                 <form onSubmit={handleSubmit}>{children}</form>
             )}
+            onSubmit={(values, form) => onSubmit(valueFormatter(values), form)}
+            validate={(values) =>
+                validate ? validate(valueFormatter(values)) : undefined
+            }
             {...reactFinalFormProps}
         />
     )

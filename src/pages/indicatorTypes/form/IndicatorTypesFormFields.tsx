@@ -10,10 +10,12 @@ import {
     StandardFormSectionDescription,
     NameField,
 } from '../../../components'
-import { useSchemaSectionHandleOrThrow } from '../../../lib'
+import { SECTIONS_MAP, useSchemaSectionHandleOrThrow } from '../../../lib'
 
 export const IndicatorTypesFormFields = () => {
+    const section = SECTIONS_MAP.indicatorType
     const schemaSection = useSchemaSectionHandleOrThrow()
+
     return (
         <>
             <StandardFormSection>
@@ -41,7 +43,8 @@ export const IndicatorTypesFormFields = () => {
                     />
                 </StandardFormField>
             </StandardFormSection>
-            <CustomAttributesSection />
+
+            <CustomAttributesSection schemaSection={section} />
         </>
     )
 }
