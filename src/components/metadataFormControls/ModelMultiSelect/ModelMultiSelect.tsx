@@ -1,16 +1,12 @@
 import React, { useMemo, useRef, useState } from 'react'
-import { useInfiniteQuery, useQuery } from 'react-query'
 import { useDebouncedCallback } from 'use-debounce'
-import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
 import { PlainResourceQuery } from '../../../types'
-import { PagedResponse } from '../../../types/generated'
 import { DisplayableModel } from '../../../types/models'
 import {
     BaseModelMultiSelect,
     BaseModelMultiSelectProps,
 } from './BaseModelMultiSelect'
-
-type Response<Model> = PagedResponse<Model, string>
+import { useModelMultiSelectQuery } from './useModelMultiSelectQuery'
 
 const defaultQuery = {
     params: {
@@ -43,9 +39,9 @@ export const ModelMultiSelect = <TModel extends DisplayableModel>({
     select,
     ...baseModelSingleSelectProps
 }: ModelMultiSelectProps<TModel>) => {
-    const queryFn = useBoundResourceQueryFn()
     // keep select in ref, so we dont recompute for inline selects
     const selectRef = useRef(select)
+    select = selectRef.current
     const [searchTerm, setSearchTerm] = useState('')
     const searchFilter = `identifiable:token:${searchTerm}`
     const filter: string[] = searchTerm ? [searchFilter] : []
@@ -59,61 +55,24 @@ export const ModelMultiSelect = <TModel extends DisplayableModel>({
             filter: filter.concat(params?.filter || []),
         },
     }
-    const modelName = query.resource
-
-    const queryResult = useInfiniteQuery({
-        queryKey: [queryObject] as const,
-        queryFn: queryFn<Response<TModel>>,
-        keepPreviousData: true,
-        getNextPageParam: (lastPage) =>
-            lastPage.pager.nextPage ? lastPage.pager.page + 1 : undefined,
-        getPreviousPageParam: (firstPage) =>
-            firstPage.pager.prevPage ? firstPage.pager.page - 1 : undefined,
-    })
-
-    const allDataMap = useMemo(() => {
-        const flatData =
-            queryResult.data?.pages.flatMap((page) => page[modelName]) ?? []
-        if (selectRef.current) {
-            return selectRef.current(flatData)
-        }
-        return flatData
-    }, [queryResult.data, modelName])
-
-    const selectedWithoutData = selected.filter(
-        (s) => allDataMap.find((d) => d.id === s) === undefined
-    )
-
-    const selectedQuery = useQuery({
-        queryKey: [
-            {
-                resource: modelName,
-                params: { filter: [`id:in:[${selected?.join()}]`] },
-            },
-        ] as const,
-        queryFn: queryFn<Response<TModel>>,
-        enabled:
-            typeof selected?.[0] === 'string' && selectedWithoutData.length > 0,
-    })
-
-    const resolvedSelected = useMemo(() => {
-        if (selectedQuery.data) {
-            return selectedQuery.data[modelName]
-        }
-        if (selectedWithoutData.length === 0) {
-            return selected.map(
-                (s) => allDataMap.find((d) => d.id === s) as TModel
-            )
-        }
-        return selected as TModel[]
-    }, [
-        selectedQuery.data,
+    const {
+        selected: selectedData,
+        available: availableData,
+        isLoading,
+        error,
+        availableQuery,
+    } = useModelMultiSelectQuery({
+        query: queryObject,
         selected,
-        modelName,
-        allDataMap,
-        selectedWithoutData.length,
-    ])
-    console.log({ resolvedSelected, selected })
+    })
+
+    const resolvedAvailable = useMemo(() => {
+        if (select) {
+            return select(availableData)
+        }
+        return availableData
+    }, [availableData])
+
     const handleFilterChange = useDebouncedCallback(({ value }) => {
         if (value != undefined) {
             setSearchTerm(value)
@@ -124,14 +83,14 @@ export const ModelMultiSelect = <TModel extends DisplayableModel>({
     return (
         <BaseModelMultiSelect
             {...baseModelSingleSelectProps}
-            selected={resolvedSelected}
-            available={allDataMap}
+            selected={selectedData}
+            available={resolvedAvailable}
             onFilterChange={handleFilterChange}
-            onRetryClick={queryResult.refetch}
-            showEndLoader={!!queryResult.hasNextPage}
-            onEndReached={queryResult.fetchNextPage}
-            loading={queryResult.isLoading}
-            error={queryResult.error as string | undefined}
+            onRetryClick={availableQuery.refetch}
+            showEndLoader={!!availableQuery.hasNextPage}
+            onEndReached={() => !isLoading && availableQuery.fetchNextPage()}
+            loading={isLoading}
+            error={error?.toString()}
         />
     )
 }

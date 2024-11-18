@@ -62,7 +62,6 @@ export const BaseModelMultiSelect = <TModel extends DisplayableModel>({
             if (!selected) {
                 return
             }
-
             const selectedModels = selected
                 .map((s) => allModelsMap.get(s))
                 .filter((s) => !!s)

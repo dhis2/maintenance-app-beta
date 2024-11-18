@@ -11,7 +11,8 @@ type QueryParams = {
     page?: number
     fields?: string | string[]
     filter?: string | string[]
-    [key: string]: unknown
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any
 }
 
 export type PlainResourceQuery = {

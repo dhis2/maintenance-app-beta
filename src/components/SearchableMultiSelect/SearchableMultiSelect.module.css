@@ -37,6 +37,9 @@
     cursor: pointer;
 }
 
+.multiSelect {
+    min-width: 150px;
+}
 .searchField {
     display: flex;
     gap: var(--spacers-dp8);

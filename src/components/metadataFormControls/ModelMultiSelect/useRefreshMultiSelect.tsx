@@ -2,17 +2,16 @@ import { useCallback } from 'react'
 import { useQueryClient, InvalidateQueryFilters } from 'react-query'
 import { PlainResourceQuery } from '../../../types'
 
-export const useRefreshModelSingleSelect = (
+export const useRefreshModelMultiSelect = (
     query: Omit<PlainResourceQuery, 'id'>
 ) => {
     const queryClient = useQueryClient()
 
     return useCallback(
         (invalidateFilters?: InvalidateQueryFilters) => {
-            console.log('invalidate', query)
             queryClient.invalidateQueries({
                 queryKey: [query],
-                // ...invalidateFilters,
+                ...invalidateFilters,
             })
         },
         [queryClient, query]
