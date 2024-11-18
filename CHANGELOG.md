@@ -1,3 +1,31 @@
+## [0.13.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.13.1...v0.13.2) (2024-11-14)
+
+
+### Bug Fixes
+
+* **categoryOptionGroupSet:** update view config and formName validation ([#442](https://github.com/dhis2/maintenance-app-beta/issues/442)) ([b0253a1](https://github.com/dhis2/maintenance-app-beta/commit/b0253a17105759e0b1e4e2523bcdf2be759b6131))
+* **list:** disable list buttons when no access ([#441](https://github.com/dhis2/maintenance-app-beta/issues/441)) ([5c0941f](https://github.com/dhis2/maintenance-app-beta/commit/5c0941f0deda2b6e29601e8d2c576de3792587bc))
+
+## [0.13.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.13.0...v0.13.1) (2024-11-14)
+
+
+### Bug Fixes
+
+* stop row loaders if there is an error ([#440](https://github.com/dhis2/maintenance-app-beta/issues/440)) ([44a8080](https://github.com/dhis2/maintenance-app-beta/commit/44a8080f5899aafcdd6f5c7b9b17af1ee1949b1a))
+* **optionSetSelect:** fix optionSet crashing with initialValue ([#439](https://github.com/dhis2/maintenance-app-beta/issues/439)) ([93b8d68](https://github.com/dhis2/maintenance-app-beta/commit/93b8d682dc1aab707701308ec130a6af60498f55))
+
+# [0.13.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.12.0...v0.13.0) (2024-11-14)
+
+
+### Bug Fixes
+
+* address feedback on org unit edit page ([2341bcb](https://github.com/dhis2/maintenance-app-beta/commit/2341bcbde28c85cd0d490438a99135155f419cc4))
+
+
+### Features
+
+* add indicators list view ([#432](https://github.com/dhis2/maintenance-app-beta/issues/432)) ([16814c1](https://github.com/dhis2/maintenance-app-beta/commit/16814c1061ccfc853ca058215df8b0c4c82a9480))
+
 # [0.12.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.11.0...v0.12.0) (2024-11-07)
 
 

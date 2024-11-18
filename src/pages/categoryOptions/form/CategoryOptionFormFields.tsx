@@ -70,7 +70,7 @@ export const CategoryOptionFormFields = () => {
                 </StandardFormField>
             </StandardFormSection>
 
-            <CustomAttributesSection />
+            <CustomAttributesSection schemaSection={section} />
         </>
     )
 }

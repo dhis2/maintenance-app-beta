@@ -27,11 +27,18 @@ export const ListActions = ({ children }: React.PropsWithChildren) => {
     )
 }
 
-export const ActionEdit = ({ modelId }: { modelId: string }) => {
+export const ActionEdit = ({
+    modelId,
+    disabled,
+}: {
+    modelId: string
+    disabled?: boolean
+}) => {
     const preservedSearchState = useLocationSearchState()
     return (
         <LinkButton
             small
+            disabled={disabled}
             secondary
             to={{ pathname: modelId }}
             state={preservedSearchState}
@@ -110,6 +117,7 @@ export const ActionMore = ({
                         >
                             <MenuItem
                                 dense
+                                disabled={!editable}
                                 label={i18n.t('Edit')}
                                 icon={<IconEdit16 />}
                                 onClick={(_, e) => {

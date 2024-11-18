@@ -4,7 +4,7 @@ import { SelectOption } from '../../../types'
 import { FilteredOptionSet } from './types'
 
 type InitialOptionSetQueryResult = {
-    optionSet: FilteredOptionSet
+    optionSets: FilteredOptionSet
 }
 
 const fields = ['id', 'displayName']
@@ -21,7 +21,7 @@ export function useInitialOptionQuery({
         lazy: !initialSelected.current,
         variables: { id: selected, fields },
         onComplete: (data: InitialOptionSetQueryResult) => {
-            const optionSet = data.optionSet
+            const optionSet = data.optionSets
             const { id: value, displayName: label } = optionSet
             onComplete({ value, label })
         },

@@ -61,7 +61,9 @@
     background-color: #f9fafb;
 }
 
-.linkButton.disabled {
+.linkButton.disabled,
+.linkButton.disabled:active,
+.linkButton.disabled:focus {
     border-color: var(--colors-grey400);
     background-color: #f9fafb;
     box-shadow: none;
@@ -112,7 +114,9 @@
     outline-offset: -5px;
 }
 
-.primary.disabled {
+.primary.disabled,
+.primary.disabled:active,
+.primary.disabled:focus {
     border-color: #93a6bd;
     background: #b3c6de;
     box-shadow: none;
@@ -140,7 +144,9 @@
     background-color: transparent;
 }
 
-.secondary.disabled {
+.secondary.disabled,
+.secondary.disabled:active,
+.secondary.disabled:focus {
     border-color: rgba(74, 87, 104, 0.25);
     background-color: transparent;
     box-shadow: none;
@@ -175,7 +181,9 @@
     background-color: #b72229;
 }
 
-.destructive.disabled {
+.destructive.disabled,
+.destructive.disabled:active,
+.destructive.disabled:focus {
     border-color: #c59898;
     background: #d6a8a8;
     box-shadow: none;
@@ -205,7 +213,9 @@
     box-shadow: none;
 }
 
-.destructive.secondary.disabled {
+.destructive.secondary.disabled,
+.destructive.secondary.disabled:active,
+.destructive.secondary.disabled:focus {
     background: transparent;
     border-color: rgba(74, 87, 104, 0.25);
     color: rgba(183, 28, 28, 0.6);
