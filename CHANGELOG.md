@@ -1,3 +1,10 @@
+# [0.14.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.13.2...v0.14.0) (2024-11-18)
+
+
+### Features
+
+* data set list view ([#435](https://github.com/dhis2/maintenance-app-beta/issues/435)) ([cf6c751](https://github.com/dhis2/maintenance-app-beta/commit/cf6c7516e8b0e012ef37e23846cd67a8ef80f9b8))
+
 ## [0.13.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.13.1...v0.13.2) (2024-11-14)
 
 
