@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-05T14:43:19.245Z\n"
-"PO-Revision-Date: 2024-11-05T14:43:19.245Z\n"
+"POT-Creation-Date: 2024-11-18T05:31:50.557Z\n"
+"PO-Revision-Date: 2024-11-18T05:31:50.557Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -900,6 +900,9 @@ msgstr "Created successfully"
 msgid "Required"
 msgstr "Required"
 
+msgid "Factor"
+msgstr "Factor"
+
 msgid "Basic information"
 msgstr "Basic information"
 
@@ -963,6 +966,48 @@ msgstr "Filter selected categories"
 
 msgid "At least one category is required"
 msgstr "At least one category is required"
+
+msgid "Set up the basic information for this category option group set."
+msgstr "Set up the basic information for this category option group set."
+
+msgid "Explain the purpose of this category option group set."
+msgstr "Explain the purpose of this category option group set."
+
+msgid ""
+"Choose how this category option group set will be used to capture and "
+"analyze"
+msgstr ""
+"Choose how this category option group set will be used to capture and "
+"analyze"
+
+msgid ""
+"Category option group set will be available to the analytics as another "
+"dimension"
+msgstr ""
+"Category option group set will be available to the analytics as another "
+"dimension"
+
+msgid "Category option Groups"
+msgstr "Category option Groups"
+
+msgid ""
+"Choose the category option groups to include in this category option group "
+"set."
+msgstr ""
+"Choose the category option groups to include in this category option group "
+"set."
+
+msgid "Available category option groups"
+msgstr "Available category option groups"
+
+msgid "Selected category option groups"
+msgstr "Selected category option groups"
+
+msgid "Filter available category option groups"
+msgstr "Filter available category option groups"
+
+msgid "Filter selected category option groups"
+msgstr "Filter selected category option groups"
 
 msgid "Set up the basic information for this category option group."
 msgstr "Set up the basic information for this category option group."
@@ -1121,26 +1166,8 @@ msgstr ""
 "included. PHU will still be available for the PHU level, but not included "
 "in the aggregations to the levels above."
 
-msgid "Setup"
-msgstr "Setup"
-
-msgid "Data"
-msgstr "Data"
-
-msgid "Data Elements"
-msgstr "Data Elements"
-
-msgid "Periods"
-msgstr "Periods"
-
-msgid "Organisation Units"
-msgstr "Organisation Units"
-
-msgid "Form"
-msgstr "Form"
-
-msgid "Advanced"
-msgstr "Advanced"
+msgid "Set up the basic information for this Indicator Type."
+msgstr "Set up the basic information for this Indicator Type."
 
 msgid "Longitude"
 msgstr "Longitude"
@@ -1196,12 +1223,6 @@ msgstr "Location"
 
 msgid "Set up the organisation unit location."
 msgstr "Set up the organisation unit location."
-
-msgid "Reference assignment"
-msgstr "Reference assignment"
-
-msgid "Longitude"
-msgstr "Longitude"
 
 msgid "Reference assignment"
 msgstr "Reference assignment"

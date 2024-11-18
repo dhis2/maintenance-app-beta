@@ -144,7 +144,6 @@ export const modelListViewsConfig = {
             default: [
                 'name',
                 { label: i18n.t('Factor'), path: 'factor' },
-                DESCRIPTORS.publicAccess,
                 'lastUpdated',
             ],
         },

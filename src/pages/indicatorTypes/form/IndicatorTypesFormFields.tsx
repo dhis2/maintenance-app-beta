@@ -8,9 +8,12 @@ import {
     StandardFormSection,
     StandardFormSectionTitle,
     StandardFormSectionDescription,
+    NameField,
 } from '../../../components'
+import { useSchemaSectionHandleOrThrow } from '../../../lib'
 
 export const IndicatorTypesFormFields = () => {
+    const schemaSection = useSchemaSectionHandleOrThrow()
     return (
         <>
             <StandardFormSection>
@@ -24,18 +27,14 @@ export const IndicatorTypesFormFields = () => {
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
-                    <Field
-                        name="name"
-                        component={InputFieldFF}
-                        label={i18n.t('Name')}
-                        required
-                    />
+                    <NameField schemaSection={schemaSection} />
                 </StandardFormField>
 
                 <StandardFormField>
                     <Field
                         name="factor"
                         type="number"
+                        inputWidth="400px"
                         component={InputFieldFF}
                         label={i18n.t('Factor')}
                         required

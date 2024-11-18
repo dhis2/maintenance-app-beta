@@ -4,7 +4,6 @@ import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
 const { identifiable } = modelFormSchemas
 
 export const IndicatorSchema = identifiable.extend({
-    name: z.string().min(1, 'Name is required'),
     factor: z.coerce.number().int(),
 })
 
