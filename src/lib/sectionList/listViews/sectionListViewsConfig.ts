@@ -172,6 +172,14 @@ export const modelListViewsConfig = {
                 { label: i18n.t('Factor'), path: 'factor' },
                 'lastUpdated',
             ],
+            available: [
+                'code',
+                'created',
+                'createdBy',
+                'href',
+                'id',
+                'lastUpdatedBy',
+            ],
         },
         filters: {
             default: [],
