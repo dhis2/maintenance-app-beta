@@ -76,6 +76,7 @@ export const SearchableMultiSelect = ({
 
     return (
         <MultiSelect
+            className={classes.multiSelect}
             selected={selected}
             disabled={disabled}
             error={!!error}
@@ -95,16 +96,9 @@ export const SearchableMultiSelect = ({
                         value={filter}
                         onChange={({ value }) => setFilterValue(value ?? '')}
                         placeholder={i18n.t('Filter options')}
+                        type="search"
                     />
                 </div>
-                <button
-                    className={classes.clearButton}
-                    disabled={!filter}
-                    onClick={() => setFilterValue('')}
-                    type="button"
-                >
-                    clear
-                </button>
             </div>
 
             {options.map(({ value, label }) => (
