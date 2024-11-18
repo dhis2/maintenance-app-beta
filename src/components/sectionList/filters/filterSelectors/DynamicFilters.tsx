@@ -1,5 +1,6 @@
 import React from 'react'
-import { ConfigurableFilterKey } from './../../../lib'
+import { ConfigurableFilterKey } from '../../../../lib'
+import { useFilterKeys } from '../useFilterKeys'
 import {
     AggregationTypeFilter,
     CategoryComboFilter,
@@ -7,30 +8,31 @@ import {
     CategoryOptionFilter,
     CategoryOptionGroupFilter,
     DataDimensionTypeFilter,
-    DataSetFilter,
     IndicatorFilter,
     DomainTypeSelectionFilter,
     IgnoreApprovalFilter,
     PublicAccessFilter,
     ValueTypeSelectionFilter,
-} from './filterSelectors'
-import { useFilterKeys } from './useFilterKeys'
+    FormTypeFilter,
+    DataSetFilter,
+} from '.'
 
 type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
 
 const filterKeyToComponentMap: FilterKeyToComponentMap = {
     category: Categoryfilter,
+    formType: FormTypeFilter,
     indicatorType: IndicatorFilter,
     categoryOption: CategoryOptionFilter,
     categoryCombo: CategoryComboFilter,
     categoryOptionGroup: CategoryOptionGroupFilter,
-    dataSet: DataSetFilter,
     domainType: DomainTypeSelectionFilter,
     valueType: ValueTypeSelectionFilter,
     aggregationType: AggregationTypeFilter,
     publicAccess: PublicAccessFilter,
     dataDimensionType: DataDimensionTypeFilter,
     ignoreApproval: IgnoreApprovalFilter,
+    dataSet: DataSetFilter,
 }
 
 export const DynamicFilters = () => {

@@ -1,6 +1,6 @@
 import { BooleanParam, StringParam } from 'use-query-params'
 import { z } from 'zod'
-import { Category, DataElement } from '../../../types/generated'
+import { Category, DataElement, DataSet } from '../../../types/generated'
 import { KeysOfValue } from '../../../types/utility'
 import { IDENTIFIABLE_FILTER_KEY } from '../../constants'
 import { isValidUid, parseAccessString } from '../../models'
@@ -15,6 +15,7 @@ export const filterParamsSchema = z
         aggregationType: z.array(z.nativeEnum(DataElement.aggregationType)),
         categoryCombo: zodArrayIds,
         category: zodArrayIds,
+        formType: z.array(z.nativeEnum(DataSet.formType)),
         categoryOption: zodArrayIds,
         categoryOptionGroup: zodArrayIds,
         dataSet: zodArrayIds,
@@ -38,6 +39,7 @@ export const filterQueryParamType = {
     valueType: CustomDelimitedArrayParam,
     dataSet: CustomDelimitedArrayParam,
     category: CustomDelimitedArrayParam,
+    formType: CustomDelimitedArrayParam,
     categoryOption: CustomDelimitedArrayParam,
     categoryCombo: CustomDelimitedArrayParam,
     categoryOptionGroup: CustomDelimitedArrayParam,

@@ -5,6 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2024-11-13T12:57:12.003Z\n"
+"PO-Revision-Date: 2024-11-13T12:57:12.004Z\n"
 "POT-Creation-Date: 2024-11-13T08:29:01.348Z\n"
 "PO-Revision-Date: 2024-11-13T08:29:01.348Z\n"
 
@@ -846,6 +848,12 @@ msgstr "MultiPolygon"
 msgid "GeometryCollection"
 msgstr "GeometryCollection"
 
+msgid "Section"
+msgstr "Section"
+
+msgid "Section Multi-org"
+msgstr "Section Multi-org"
+
 msgid "Aggregation type"
 msgstr "Aggregation type"
 
@@ -857,6 +865,9 @@ msgstr "Form name"
 
 msgid "Domain type"
 msgstr "Domain type"
+
+msgid "Form type"
+msgstr "Form type"
 
 msgid "Sharing"
 msgstr "Sharing"
@@ -896,6 +907,9 @@ msgstr "Created successfully"
 
 msgid "Required"
 msgstr "Required"
+
+msgid "Period type"
+msgstr "Period type"
 
 msgid "Basic information"
 msgstr "Basic information"
@@ -960,6 +974,48 @@ msgstr "Filter selected categories"
 
 msgid "At least one category is required"
 msgstr "At least one category is required"
+
+msgid "Set up the basic information for this category option group set."
+msgstr "Set up the basic information for this category option group set."
+
+msgid "Explain the purpose of this category option group set."
+msgstr "Explain the purpose of this category option group set."
+
+msgid ""
+"Choose how this category option group set will be used to capture and "
+"analyze"
+msgstr ""
+"Choose how this category option group set will be used to capture and "
+"analyze"
+
+msgid ""
+"Category option group set will be available to the analytics as another "
+"dimension"
+msgstr ""
+"Category option group set will be available to the analytics as another "
+"dimension"
+
+msgid "Category option Groups"
+msgstr "Category option Groups"
+
+msgid ""
+"Choose the category option groups to include in this category option group "
+"set."
+msgstr ""
+"Choose the category option groups to include in this category option group "
+"set."
+
+msgid "Available category option groups"
+msgstr "Available category option groups"
+
+msgid "Selected category option groups"
+msgstr "Selected category option groups"
+
+msgid "Filter available category option groups"
+msgstr "Filter available category option groups"
+
+msgid "Filter selected category option groups"
+msgstr "Filter selected category option groups"
 
 msgid "Set up the basic information for this category option group."
 msgstr "Set up the basic information for this category option group."
@@ -1175,12 +1231,6 @@ msgstr "Location"
 
 msgid "Set up the organisation unit location."
 msgstr "Set up the organisation unit location."
-
-msgid "Reference assignment"
-msgstr "Reference assignment"
-
-msgid "Longitude"
-msgstr "Longitude"
 
 msgid "Reference assignment"
 msgstr "Reference assignment"
