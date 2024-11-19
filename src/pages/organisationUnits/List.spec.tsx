@@ -32,6 +32,7 @@ const renderList = async ({
     rootOrgUnits = [testOrgUnit()] as Partial<OrganisationUnit>[],
     otherOrgUnits = [] as Partial<OrganisationUnit>[],
     userDataStore = defaultUserDataStoreData,
+    customData = undefined,
 }) => {
     const routeOptions = {
         handle: { section: SECTIONS_MAP.organisationUnit },
@@ -54,31 +55,33 @@ const renderList = async ({
     const result = render(
         <TestComponentWithRouter
             path="/organisationUnits"
-            customData={{
-                organisationUnits: (type: any, params: any) => {
-                    if (type === 'read' && params.id !== undefined) {
-                        const foundOrgUnit = organisationUnits.find(
-                            (ou) => ou.id === params.id
-                        )
-                        return foundOrgUnit
-                    }
-                    if (type === 'read') {
-                        const regex = /:(\w+)$/
-                        const orgUnitFilter =
-                            params.params.filter[0].match(regex)[1]
-                        const filteredOrgUnits = organisationUnits.filter(
-                            (ou) =>
-                                ou.id === orgUnitFilter ||
-                                ou.parent?.id === orgUnitFilter
-                        )
-                        return { organisationUnits: filteredOrgUnits }
-                    }
-                    if (type === 'delete') {
-                        deleteOrgUnitMock(params)
-                    }
-                },
-                userDataStore,
-            }}
+            customData={
+                customData || {
+                    organisationUnits: (type: any, params: any) => {
+                        if (type === 'read' && params.id !== undefined) {
+                            const foundOrgUnit = organisationUnits.find(
+                                (ou) => ou.id === params.id
+                            )
+                            return foundOrgUnit
+                        }
+                        if (type === 'read') {
+                            const regex = /:(\w+)$/
+                            const orgUnitFilter =
+                                params.params.filter[0].match(regex)[1]
+                            const filteredOrgUnits = organisationUnits.filter(
+                                (ou) =>
+                                    ou.id === orgUnitFilter ||
+                                    ou.parent?.id === orgUnitFilter
+                            )
+                            return { organisationUnits: filteredOrgUnits }
+                        }
+                        if (type === 'delete') {
+                            deleteOrgUnitMock(params)
+                        }
+                    },
+                    userDataStore,
+                }
+            }
             routeOptions={routeOptions}
         >
             <OrgUnitsList />
@@ -310,6 +313,120 @@ describe('Org Unit List', () => {
         expect(tableRowsRefreshed[6]).toHaveTextContent(
             root2Level3Child.displayName!
         )
+    })
+
+    it('should load more rows on load more', async () => {
+        const rootOrg1 = testOrgUnit({ level: 1, childCount: 3 })
+        const root1Level2Child1 = testOrgUnit({
+            level: 2,
+            ancestors: [rootOrg1],
+            parentId: rootOrg1.id,
+            childCount: 0,
+        })
+        const root1Level2Child2 = testOrgUnit({
+            level: 2,
+            ancestors: [rootOrg1],
+            parentId: rootOrg1.id,
+            childCount: 0,
+        })
+        const root1Level2Child3 = testOrgUnit({
+            level: 2,
+            ancestors: [rootOrg1],
+            parentId: rootOrg1.id,
+            childCount: 0,
+        })
+
+        const customData = {
+            organisationUnits: (type: any, params: any) => {
+                if (type === 'read' && params.params.page === 1) {
+                    return { organisationUnits: [rootOrg1, root1Level2Child1] }
+                }
+                if (type === 'read' && params.params.page === 2) {
+                    return {
+                        organisationUnits: [
+                            rootOrg1,
+                            root1Level2Child2,
+                            root1Level2Child3,
+                        ],
+                    }
+                }
+            },
+            userDataStore: defaultUserDataStoreData,
+        }
+
+        const screen = await renderList({
+            rootOrgUnits: [rootOrg1],
+            customData,
+        })
+
+        const tableRows = screen.getAllByTestId('dhis2-uicore-datatablerow')
+        expect(tableRows.length).toBe(4)
+        expect(tableRows[3]).toHaveTextContent(
+            `Load more for ${rootOrg1.displayName}`
+        )
+        fireEvent.click(within(tableRows[3]).getByTestId('load-more'))
+        let tableRowsRefreshed: any = []
+        await waitFor(() => {
+            tableRowsRefreshed = screen.getAllByTestId(
+                'dhis2-uicore-datatablerow'
+            )
+            expect(tableRowsRefreshed.length).toBe(5)
+        })
+    })
+
+    it('should load more the right rows when first load more fails', async () => {
+        const rootOrg1 = testOrgUnit({ level: 1, childCount: 3 })
+        const root1Level2Child1 = testOrgUnit({
+            level: 2,
+            ancestors: [rootOrg1],
+            parentId: rootOrg1.id,
+            childCount: 0,
+        })
+        const root1Level2Child2 = testOrgUnit({
+            level: 2,
+            ancestors: [rootOrg1],
+            parentId: rootOrg1.id,
+            childCount: 0,
+        })
+        const root1Level2Child3 = testOrgUnit({
+            level: 2,
+            ancestors: [rootOrg1],
+            parentId: rootOrg1.id,
+            childCount: 0,
+        })
+        const loadPageThreeMock = jest.fn()
+
+        const customData = {
+            organisationUnits: (type: any, params: any) => {
+                if (type === 'read' && params.params.page === 1) {
+                    return { organisationUnits: [rootOrg1, root1Level2Child1] }
+                }
+                if (type === 'read' && params.params.page === 2) {
+                    throw 'ERROR'
+                }
+                if (type === 'read' && params.params.page === 3) {
+                    loadPageThreeMock()
+                }
+            },
+            userDataStore: defaultUserDataStoreData,
+        }
+
+        const screen = await renderList({
+            rootOrgUnits: [rootOrg1],
+            customData,
+        })
+
+        const tableRows = screen.getAllByTestId('dhis2-uicore-datatablerow')
+        expect(tableRows.length).toBe(4)
+        expect(tableRows[3]).toHaveTextContent(
+            `Load more for ${rootOrg1.displayName}`
+        )
+        fireEvent.click(within(tableRows[3]).getByTestId('load-more'))
+        await waitFor(() => {
+            expect(screen.getByTestId('dhis2-uicore-noticebox')).toBeVisible()
+        })
+        fireEvent.click(within(tableRows[3]).getByTestId('load-more'))
+        expect(loadPageThreeMock).not.toHaveBeenCalled()
     })
 
     it('should show a clickable delete action when org unit can be deleted', async () => {

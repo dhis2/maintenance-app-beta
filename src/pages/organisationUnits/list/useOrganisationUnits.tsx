@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useQuery, useQueries } from 'react-query'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
 import { OrganisationUnit, PagedResponse } from '../../../types/generated'
@@ -83,7 +83,7 @@ export const usePaginatedChildrenOrgUnitsController = (
     const [parentIdPages, setFetchPages] = useState<ParentIdToPages>(
         Object.fromEntries(Object.keys(parentIds).map((id) => [id, [1]]))
     )
-
+    const [hasErrored, setHasErrored] = useState(false)
     // this will create a query for each parent id and each page
     // eg if parentIds = ['a', 'b'] and fetchPages = {a: [1, 2], b: [1]}
     // then queries will be [['a', 1], ['a', 2], ['b', 1]]
@@ -98,40 +98,51 @@ export const usePaginatedChildrenOrgUnitsController = (
         (id: string) => {
             setFetchPages((prev) => {
                 const pages = prev[id] || [1]
+                const nextPaged = hasErrored
+                    ? [...pages]
+                    : [...pages, pages[pages.length - 1] + 1]
                 return {
                     ...prev,
-                    [id]: [...pages, pages[pages.length - 1] + 1],
+                    [id]: nextPaged,
                 }
             })
         },
-        [setFetchPages]
+        [setFetchPages, hasErrored]
+    )
+    const queryObjects = useMemo(
+        () =>
+            flatParentIdPages.map(([id, page]) => {
+                const resourceQuery = {
+                    resource: 'organisationUnits',
+                    params: {
+                        fields: getOrgUnitFieldFilters(options.fieldFilters),
+                        // `id:eq:id` is for an edge-case where a root-unit is a leaf-node
+                        // and `parent.id`-filter would return empty results
+                        filter: [`parent.id:eq:${id}`, `id:eq:${id}`],
+                        rootJunction: 'OR',
+                        order: 'displayName:asc',
+                        page: page,
+                    },
+                }
+                const queryOptions = {
+                    enabled: options.enabled,
+                    queryKey: [resourceQuery],
+                    queryFn: boundQueryFn<OrganisationUnitResponse>,
+                    staleTime: 60000,
+                    cacheTime: 60000,
+                    meta: { parent: id },
+                } as const
+                return queryOptions
+            }),
+        [flatParentIdPages]
     )
 
-    const queryObjects = flatParentIdPages.map(([id, page]) => {
-        const resourceQuery = {
-            resource: 'organisationUnits',
-            params: {
-                fields: getOrgUnitFieldFilters(options.fieldFilters),
-                // `id:eq:id` is for an edge-case where a root-unit is a leaf-node
-                // and `parent.id`-filter would return empty results
-                filter: [`parent.id:eq:${id}`, `id:eq:${id}`],
-                rootJunction: 'OR',
-                order: 'displayName:asc',
-                page: page,
-            },
-        }
-        const queryOptions = {
-            enabled: options.enabled,
-            queryKey: [resourceQuery],
-            queryFn: boundQueryFn<OrganisationUnitResponse>,
-            staleTime: 60000,
-            cacheTime: 60000,
-            meta: { parent: id },
-        } as const
-        return queryOptions
-    })
-
     const queries = useQueries(queryObjects)
+
+    useEffect(() => {
+        setHasErrored(queries.some((query) => query.isError))
+    }, [queries.some((query) => query.isError)])
+
     return {
         queries,
         fetchNextPage,
