@@ -13,6 +13,7 @@ import {
     CodeField,
 } from '../../../components'
 import { SECTIONS_MAP } from '../../../lib'
+import { CategoriesField } from './CategoriesField'
 
 const section = SECTIONS_MAP.categoryCombo
 
@@ -84,25 +85,7 @@ export const CategoryComboFormFields = () => {
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <StandardFormField>
-                        <ModelTransferField
-                            name="categories"
-                            query={{
-                                resource: 'categories',
-                                params: {
-                                    filter: ['name:ne:default'],
-                                },
-                            }}
-                            leftHeader={i18n.t('Available categories')}
-                            rightHeader={i18n.t('Selected categories')}
-                            filterPlaceholder={i18n.t(
-                                'Filter available categories'
-                            )}
-                            filterPlaceholderPicked={i18n.t(
-                                'Filter selected categories'
-                            )}
-                        />
-                    </StandardFormField>
+                    <CategoriesField />
                 </StandardFormField>
             </StandardFormSection>
         </>
