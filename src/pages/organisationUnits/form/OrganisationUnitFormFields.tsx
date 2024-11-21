@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Field, InputFieldFF } from '@dhis2/ui'
+import { Field, InputFieldFF, TextAreaFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import {
@@ -68,7 +68,7 @@ export function OrganisationUnitFormField() {
                 </StandardFormField>
                 <StandardFormField>
                     <FieldRFF<string | undefined>
-                        component={InputFieldFF}
+                        component={TextAreaFieldFF}
                         inputWidth="400px"
                         label={i18n.t('Comment')}
                         name="comment"

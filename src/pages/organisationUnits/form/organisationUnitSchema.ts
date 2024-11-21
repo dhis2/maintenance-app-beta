@@ -13,9 +13,9 @@ export const organisationUnitSchema = identifiable
         description: z
             .string()
             .trim()
-            .max(200000, {
+            .max(2147483647, {
                 message: i18n.t('Should not exceed {{maxLength}} characters', {
-                    maxLength: 200000,
+                    maxLength: 2147483647,
                 }),
             })
             .optional(),
@@ -50,9 +50,9 @@ export const organisationUnitSchema = identifiable
         closedDate: z.string().optional(),
         comment: z
             .string()
-            .max(200000, {
+            .max(2147483647, {
                 message: i18n.t('Should not exceed {{maxLength}} characters', {
-                    maxLength: 200000,
+                    maxLength: 2147483647,
                 }),
             })
             .optional(),
