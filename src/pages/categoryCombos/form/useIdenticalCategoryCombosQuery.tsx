@@ -10,7 +10,7 @@ export type IdenticalCategoryCombosQueryResult = PagedResponse<
     'categoryCombos'
 >
 
-type UseIdenticalCategoryCombosQuery = {
+type UseIdenticalCategoryCombosQueryOptions = {
     categoryComboId?: string
     selectedCategories: CategoriesValue
 } & Pick<
@@ -22,7 +22,7 @@ export const useIdenticalCategoryCombosQuery = ({
     categoryComboId,
     selectedCategories,
     ...queryOptions
-}: UseIdenticalCategoryCombosQuery) => {
+}: UseIdenticalCategoryCombosQueryOptions) => {
     const queryFn = useBoundResourceQueryFn()
     const notSameCatComboFilter = `id:ne:${categoryComboId}`
     const idFilters = selectedCategories.map(
