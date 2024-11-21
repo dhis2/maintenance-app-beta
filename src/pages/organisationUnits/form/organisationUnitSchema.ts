@@ -13,23 +13,23 @@ export const organisationUnitSchema = identifiable
         description: z
             .string()
             .trim()
-            .max(500, {
+            .max(200000, {
                 message: i18n.t('Should not exceed {{maxLength}} characters', {
-                    maxLength: 500,
+                    maxLength: 200000,
                 }),
             })
             .optional(),
         image: z.object({ id: z.string() }).optional(),
         phoneNumber: z
             .string()
-            .min(10, { message: i18n.t('Must be a valid mobile number') })
-            .max(14, { message: i18n.t('Must be a valid mobile number') })
+            .min(0, { message: i18n.t('Must be a valid mobile number') })
+            .max(150, { message: i18n.t('Must be a valid mobile number') })
             .optional(),
         contactPerson: z
             .string()
-            .max(230, {
+            .max(255, {
                 message: i18n.t('Should not exceed {{maxLength}} characters', {
-                    maxLength: 230,
+                    maxLength: 255,
                 }),
             })
             .optional(),
@@ -39,7 +39,7 @@ export const organisationUnitSchema = identifiable
             .string()
             .max(230, {
                 message: i18n.t('Should not exceed {{maxLength}} characters', {
-                    maxLength: 230,
+                    maxLength: 255,
                 }),
             })
             .optional(),
@@ -50,9 +50,9 @@ export const organisationUnitSchema = identifiable
         closedDate: z.string().optional(),
         comment: z
             .string()
-            .max(230, {
+            .max(200000, {
                 message: i18n.t('Should not exceed {{maxLength}} characters', {
-                    maxLength: 230,
+                    maxLength: 200000,
                 }),
             })
             .optional(),
