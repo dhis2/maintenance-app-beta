@@ -87,7 +87,13 @@ export function ImageField() {
     }
 
     return (
-        <UIField label={i18n.t('Image')} name="image">
+        <UIField
+            label={i18n.t('Image')}
+            name="image"
+            error={!!(input.value && input.value.error)}
+            valid={!!(input.value && input.value.id)}
+            validationText={input.value?.error}
+        >
             <div className={css.fileInputWrapper}>
                 <ImagePreview
                     fileBase64={fileBase64}

@@ -48,7 +48,7 @@ export function DateField({
                 validationText={meta.touched ? meta.error : undefined}
                 onBlur={(_, e) => input.onBlur(e)}
                 clearable
-                label={required ? `${label} *` : label}
+                label={required ? `${label} (required) *` : label}
                 {...calendarInputProps}
             />
         </div>

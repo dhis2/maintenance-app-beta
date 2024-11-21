@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { InputFieldFF } from '@dhis2/ui'
+import { Field, InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import {
@@ -49,7 +49,7 @@ export function OrganisationUnitFormField() {
 
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Set up the basic information for this organisation unit.'
+                        'Set up the basic information for this organisation unit'
                     )}
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />

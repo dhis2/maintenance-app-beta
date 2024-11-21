@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 import { getDefaults, modelFormSchemas } from '../../../lib'
 
@@ -9,20 +10,71 @@ export const organisationUnitSchema = identifiable
     .extend({
         shortName: z.string().trim().default(''),
         code: z.string().trim().optional(),
-        description: z.string().trim().optional(),
+        description: z
+            .string()
+            .trim()
+            .max(500, {
+                message: i18n.t('Should not exceed {{maxLength}} characters', {
+                    maxLength: 500,
+                }),
+            })
+            .optional(),
         image: z.object({ id: z.string() }).optional(),
-        phoneNumber: z.string().optional(),
-        contactPerson: z.string().optional(),
+        phoneNumber: z
+            .string()
+            .min(10, { message: i18n.t('Must be a valid mobile number') })
+            .max(14, { message: i18n.t('Must be a valid mobile number') })
+            .optional(),
+        contactPerson: z
+            .string()
+            .max(230, {
+                message: i18n.t('Should not exceed {{maxLength}} characters', {
+                    maxLength: 230,
+                }),
+            })
+            .optional(),
         openingDate: z.string(),
-        email: z.string().optional(),
-        address: z.string().optional(),
-        url: z.string().optional(),
+        email: z.string().email().optional(),
+        address: z
+            .string()
+            .max(230, {
+                message: i18n.t('Should not exceed {{maxLength}} characters', {
+                    maxLength: 230,
+                }),
+            })
+            .optional(),
+        url: z
+            .string()
+            .url({ message: i18n.t('Must be a valid url') })
+            .optional(),
         closedDate: z.string().optional(),
+        comment: z
+            .string()
+            .max(230, {
+                message: i18n.t('Should not exceed {{maxLength}} characters', {
+                    maxLength: 230,
+                }),
+            })
+            .optional(),
         parent: z.object({ id: z.string() }).optional(),
         geometry: z
             .object({
                 type: z.literal('Point'),
-                coordinates: z.array(z.number()).length(2),
+                coordinates: z
+                    .array(z.number())
+                    .length(2)
+                    .refine(
+                        (coord) =>
+                            coord[0] >= -90 &&
+                            coord[0] <= 90 &&
+                            coord[1] >= -180 &&
+                            coord[1] <= 180,
+                        {
+                            message: i18n.t(
+                                'Longitude should be between -90 and 90. Latitude should be between -180 and 180'
+                            ),
+                        }
+                    ),
             })
             .or(
                 z.object({

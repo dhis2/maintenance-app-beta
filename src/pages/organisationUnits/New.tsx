@@ -10,7 +10,6 @@ import {
 } from './form'
 
 const section = SECTIONS_MAP.organisationUnit
-
 export const Component = () => {
     return (
         <FormBase
