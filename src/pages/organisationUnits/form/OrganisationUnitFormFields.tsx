@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Field, InputFieldFF, TextAreaFieldFF } from '@dhis2/ui'
+import { InputFieldFF, TextAreaFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import {
@@ -31,7 +31,9 @@ export function OrganisationUnitFormField() {
         <>
             <StandardFormSection>
                 <StandardFormSectionTitle>
-                    {i18n.t('Placement in hierarchy')}
+                    <label htmlFor="parent">
+                        {i18n.t('Placement in hierarchy')}
+                    </label>
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(

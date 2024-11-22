@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
-import { getDefaults, modelFormSchemas } from '../../../lib'
+import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 
 const { withAttributeValues, identifiable, referenceCollection } =
     modelFormSchemas
@@ -56,7 +56,7 @@ export const organisationUnitSchema = identifiable
                 }),
             })
             .optional(),
-        parent: z.object({ id: z.string() }).optional(),
+        parent: z.object({ id: z.string(), path: z.string() }).optional(),
         geometry: z
             .object({
                 type: z.literal('Point'),
@@ -92,7 +92,22 @@ export const organisationUnitSchema = identifiable
         programs: referenceCollection.optional().default([]),
         dataSets: referenceCollection.optional().default([]),
     })
+    .refine(
+        (orgUnit) => {
+            if (!orgUnit.id) {
+                return true
+            }
+            const isDescendantOfSelf = orgUnit.parent?.path.includes(orgUnit.id)
+            return !isDescendantOfSelf
+        },
+        {
+            message: i18n.t(
+                'Parent organisation unit cannot be itself or a descendant of itself.'
+            ),
+            path: ['parent'],
+        }
+    )
 
-export const initialValues = getDefaults(
-    organisationUnitSchema as z.AnyZodObject
-)
+export const initialValues = getDefaults(organisationUnitSchema)
+
+export const validate = createFormValidate(organisationUnitSchema)

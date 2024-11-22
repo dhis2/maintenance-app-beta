@@ -1,13 +1,8 @@
 import React from 'react'
 import { FormBase } from '../../components'
 import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
-import { SECTIONS_MAP, useOnSubmitNew, validate } from '../../lib'
-import {
-    FormValues,
-    initialValues,
-    OrganisationUnitFormField,
-    organisationUnitSchema,
-} from './form'
+import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
+import { initialValues, OrganisationUnitFormField, validate } from './form'
 
 const section = SECTIONS_MAP.organisationUnit
 export const Component = () => {
@@ -16,10 +11,8 @@ export const Component = () => {
             onSubmit={useOnSubmitNew({
                 section,
             })}
-            initialValues={initialValues as FormValues}
-            validate={(values: FormValues) => {
-                return validate(organisationUnitSchema, values)
-            }}
+            initialValues={initialValues}
+            validate={validate}
         >
             <DefaultNewFormContents section={section}>
                 <OrganisationUnitFormField />
