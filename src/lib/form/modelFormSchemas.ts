@@ -33,4 +33,5 @@ export const modelFormSchemas = {
     identifiable,
     attributeValues,
     withAttributeValues,
+    modelReference,
 }
