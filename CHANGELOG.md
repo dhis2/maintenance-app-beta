@@ -1,3 +1,10 @@
+# [0.15.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.14.0...v0.15.0) (2024-11-22)
+
+
+### Features
+
+* **categoryCombo:** add warning and validations ([#446](https://github.com/dhis2/maintenance-app-beta/issues/446)) ([1b777a6](https://github.com/dhis2/maintenance-app-beta/commit/1b777a62617093c8a185d2324f6c35f139b07aff))
+
 # [0.14.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.13.2...v0.14.0) (2024-11-18)
 
 
