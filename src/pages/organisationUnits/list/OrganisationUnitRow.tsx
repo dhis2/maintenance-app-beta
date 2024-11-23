@@ -124,6 +124,7 @@ export const OrganisationUnitRow = ({
                             colSpan="100"
                             style={{ textAlign: 'center' }}
                             onClick={() => fetchNextPage(parentRow.original.id)}
+                            dataTest="load-more"
                         >
                             {i18n.t('Load more for {{orgUnitName}}', {
                                 orgUnitName: parentRow.original.displayName,
