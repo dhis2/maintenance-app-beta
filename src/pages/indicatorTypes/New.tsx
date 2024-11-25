@@ -14,6 +14,7 @@ export const Component = () => {
             initialValues={initialValues}
             onSubmit={useOnSubmitNew({ section })}
             validate={validate}
+            includeAttributes={false}
         >
             <DefaultNewFormContents section={section}>
                 <IndicatorTypesFormFields />

@@ -38,6 +38,7 @@ export const Component = () => {
             section={section}
             initialValues={indicatorTypeQuery.data}
             validate={validate}
+            includeAttributes={false}
         >
             <DefaultNewFormContents section={section}>
                 <IndicatorTypesFormFields />
