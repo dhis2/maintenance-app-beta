@@ -1,3 +1,10 @@
+## [0.16.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.16.0...v0.16.1) (2024-11-25)
+
+
+### Bug Fixes
+
+* address feedback from org unit new form ([#447](https://github.com/dhis2/maintenance-app-beta/issues/447)) ([958563e](https://github.com/dhis2/maintenance-app-beta/commit/958563e5805fcb7d942749aabb82964f80492bc7))
+
 # [0.16.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.15.0...v0.16.0) (2024-11-25)
 
 
