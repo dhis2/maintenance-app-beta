@@ -1,0 +1,23 @@
+.categoriesFieldWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacers-dp8);
+}
+
+.categoriesNoticesWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+    max-width: 650px;
+}
+
+.identicalCategoriesList a {
+    color: var(--colors-blue600);
+}
+
+.identicalCategoriesList {
+    margin-inline: 0;
+    margin-block: var(--spacers-dp8);
+    max-height: 250px;
+    overflow: auto;
+}

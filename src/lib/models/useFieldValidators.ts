@@ -26,7 +26,7 @@ export function useValidator({
         field: property,
         id: modelId,
     }) as Validator
-    if (propertyDetails.propertyType === SchemaFieldPropertyType.REFERENCE) {
+    if (propertyDetails.length) {
         validators.push(checkMaxLength)
     }
     if (propertyDetails.unique) {
