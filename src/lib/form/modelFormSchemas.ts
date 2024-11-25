@@ -1,6 +1,7 @@
+import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 
-/*  Note that these schemas describes validations for what we send to the server, 
+/*  Note that these schemas describes validations for what we send to the server,
     and not what is stored in the form. Unknown keys are stripped by default. */
 
 const modelReference = z.object({ id: z.string() })
@@ -15,7 +16,11 @@ const identifiable = z.object({
 const attributeValues = z
     .array(
         z.object({
-            value: z.string(),
+            value: z.string().max(230, {
+                message: i18n.t('Should not exceed {{maxLength}} characters', {
+                    maxLength: 230,
+                }),
+            }),
             attribute: z.object({
                 id: z.string(),
             }),

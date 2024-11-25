@@ -1,0 +1,5 @@
+.coordinateField > div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp16);
+}

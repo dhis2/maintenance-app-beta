@@ -3,6 +3,7 @@ import { Field, InputField } from '@dhis2/ui'
 import React from 'react'
 import { useField } from 'react-final-form'
 import { getConstantTranslation } from '../../../lib'
+import css from './GeometryFields.module.css'
 
 export function GeometryFields() {
     const fieldName = 'geometry'
@@ -19,16 +20,19 @@ export function GeometryFields() {
             type: 'Point',
             coordinates: [longitude || undefined, latitude || undefined],
         }
-
         input.onChange(geometry)
+        input.onBlur()
     }
 
     return !input.value || input.value?.type === 'Point' ? (
         <>
             <Field
+                className={css.coordinateField}
                 name={fieldName}
                 error={meta.touched && !!meta.error}
-                validationText={meta.touched ? meta.error?.type : undefined}
+                validationText={
+                    meta.touched ? meta.error?.coordinates : undefined
+                }
             >
                 <InputField
                     onChange={(e) =>
