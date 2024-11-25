@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-21T14:53:27.430Z\n"
-"PO-Revision-Date: 2024-11-21T14:53:27.430Z\n"
+"POT-Creation-Date: 2024-11-25T10:03:10.019Z\n"
+"PO-Revision-Date: 2024-11-25T10:03:10.019Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -952,15 +952,6 @@ msgstr "Filter available category options"
 msgid "Filter selected category options"
 msgstr "Filter selected category options"
 
-msgid "Choose how this category combo will be used to capture and analyze data."
-msgstr "Choose how this category combo will be used to capture and analyze data."
-
-msgid "Skip category total in reports"
-msgstr "Skip category total in reports"
-
-msgid "Choose the categories to include in this category combo."
-msgstr "Choose the categories to include in this category combo."
-
 msgid "Available categories"
 msgstr "Available categories"
 
@@ -973,8 +964,46 @@ msgstr "Filter available categories"
 msgid "Filter selected categories"
 msgstr "Filter selected categories"
 
-msgid "At least one category is required"
-msgstr "At least one category is required"
+msgid "{{count}} category option combinations will be generated."
+msgid_plural "{{count}} category option combinations will be generated."
+msgstr[0] "{{count}} category option combinations will be generated."
+msgstr[1] "{{count}} category option combinations will be generated."
+
+msgid "More than 4 Categories"
+msgstr "More than 4 Categories"
+
+msgid "A Category combination with more than 4 categories is not recommended."
+msgstr "A Category combination with more than 4 categories is not recommended."
+
+msgid "Identical Category Combination"
+msgstr "Identical Category Combination"
+
+msgid ""
+"One or more Category combinations with the same categories already exist in "
+"the system. \n"
+"        It is strongly discouraged to have more than one Category "
+"combination with the same categories."
+msgstr ""
+"One or more Category combinations with the same categories already exist in "
+"the system. \n"
+"        It is strongly discouraged to have more than one Category "
+"combination with the same categories."
+
+msgid "Choose how this category combo will be used to capture and analyze data."
+msgstr "Choose how this category combo will be used to capture and analyze data."
+
+msgid "Skip category total in reports"
+msgstr "Skip category total in reports"
+
+msgid "Choose the categories to include in this category combo."
+msgstr "Choose the categories to include in this category combo."
+
+msgid ""
+"The number of generated category option combinations exceeds the limit of "
+"{{limit}}"
+msgstr ""
+"The number of generated category option combinations exceeds the limit of "
+"{{limit}}"
 
 msgid "Set up the basic information for this category option group set."
 msgstr "Set up the basic information for this category option group set."
