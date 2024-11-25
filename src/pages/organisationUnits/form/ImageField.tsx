@@ -25,7 +25,7 @@ const fileToBase64 = (file: File): Promise<string> => {
 export function ImageField() {
     const dataEngine = useDataEngine()
     const fieldName = 'image'
-    const { input } = useField(fieldName, { format: (value) => value })
+    const { input, meta } = useField(fieldName, { format: (value) => value })
 
     const [fileBase64, setFileBase64] = useState<string | undefined>()
 
@@ -90,8 +90,8 @@ export function ImageField() {
         <UIField
             label={i18n.t('Image')}
             name="image"
-            error={!!(input.value && input.value.error)}
-            valid={!!(input.value && input.value.id)}
+            error={meta.invalid}
+            valid={meta.valid}
             validationText={input.value?.error}
         >
             <div className={css.fileInputWrapper}>
