@@ -1,5 +1,5 @@
 import { CalendarInput, CalendarInputProps } from '@dhis2/ui'
-import React from 'react'
+import React, { useState } from 'react'
 import { useField } from 'react-final-form'
 import { selectedLocale, useSystemSetting } from '../../../lib'
 
@@ -12,6 +12,11 @@ type DateFieldProps = Omit<
     label?: string
     required?: boolean
 }
+type ValidationProps = {
+    error: boolean
+    validationText?: string
+    valid?: boolean
+}
 export function DateField({
     name,
     label,
@@ -20,35 +25,44 @@ export function DateField({
 }: DateFieldProps) {
     const calendar = useSystemSetting('keyCalendar')
     const locale = selectedLocale
-    const { meta, input } = useField<string | undefined>(name, {
-        format: (value) => {
-            if (value) {
-                return value.slice(0, 10)
+    const [validation, setValidation] = useState<ValidationProps>({
+        error: false,
+    })
+
+    const { input } = useField<string | undefined>(name, {
+        validate: () => {
+            if (validation.error) {
+                return validation.validationText
             }
-            return value
         },
     })
 
-    const handleChange: CalendarInputProps['onDateSelect'] = (payload) => {
-        input.onChange(payload?.calendarDateString)
+    const handleChange: CalendarInputProps['onDateSelect'] = (
+        payload: {
+            calendarDateString: string
+            validation?: ValidationProps
+        } | null
+    ) => {
+        setValidation(payload?.validation || { error: false })
+        input.onChange(payload?.calendarDateString || '')
         input.onBlur()
     }
 
     return (
-        <div style={{ width: '400px' }}>
-            {/* TODO: we can remove style above, once inputWidth for CalendarInput is fixed */}
+        <div>
             <CalendarInput
+                inputWidth={'400px'}
                 date={input.value}
                 name={name}
                 calendar={calendar as CalendarInputProps['calendar']}
                 onDateSelect={handleChange}
                 timeZone={'utc'}
                 locale={locale}
-                error={!!(meta.touched && meta.invalid && meta.error)}
-                validationText={meta.touched ? meta.error : undefined}
                 onBlur={(_, e) => input.onBlur(e)}
                 clearable
                 label={required ? `${label} (required) *` : label}
+                {...validation}
+                valid={validation?.valid && input?.value !== ''}
                 {...calendarInputProps}
             />
         </div>
