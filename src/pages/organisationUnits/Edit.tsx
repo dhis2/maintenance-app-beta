@@ -7,11 +7,10 @@ import {
     DEFAULT_FIELD_FILTERS,
     SECTIONS_MAP,
     useOnSubmitEdit,
-    validate,
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { OrganisationUnit, PickWithFieldFilters } from '../../types/generated'
-import { OrganisationUnitFormField, organisationUnitSchema } from './form'
+import { OrganisationUnitFormField, validate } from './form'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -68,9 +67,7 @@ export const Component = () => {
             })}
             section={section}
             initialValues={orgUnit.data}
-            validate={(values: OrgUnitFormValues) => {
-                return validate(organisationUnitSchema, values)
-            }}
+            validate={validate}
         >
             <DefaultEditFormContents section={section}>
                 <OrganisationUnitFormField />

@@ -3,6 +3,7 @@ import { InputFieldFF, SingleSelectFieldFF, TextAreaFieldFF } from '@dhis2/ui'
 import * as React from 'react'
 import { Field as FieldRFF, useFormState } from 'react-final-form'
 import {
+    StandardFormField,
     StandardFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
@@ -38,7 +39,7 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
         }
 
         return (
-            <StandardFormSection key={attribute.id}>
+            <StandardFormField key={attribute.id}>
                 <FieldRFF
                     component={SingleSelectFieldFF}
                     required={required}
@@ -47,13 +48,13 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
                     name={name}
                     options={options}
                 />
-            </StandardFormSection>
+            </StandardFormField>
         )
     }
 
     if (attribute.valueType === 'TEXT') {
         return (
-            <StandardFormSection key={attribute.id}>
+            <StandardFormField key={attribute.id}>
                 <FieldRFF
                     component={InputFieldFF}
                     required={required}
@@ -61,13 +62,13 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
                     label={attribute.displayFormName}
                     name={name}
                 />
-            </StandardFormSection>
+            </StandardFormField>
         )
     }
 
     if (attribute.valueType === 'LONG_TEXT') {
         return (
-            <StandardFormSection key={attribute.id}>
+            <StandardFormField key={attribute.id}>
                 <FieldRFF
                     component={TextAreaFieldFF}
                     required={required}
@@ -75,13 +76,13 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
                     label={attribute.displayFormName}
                     name={name}
                 />
-            </StandardFormSection>
+            </StandardFormField>
         )
     }
 
     if (attribute.valueType === 'GEOJSON') {
         return (
-            <StandardFormSection key={attribute.id}>
+            <StandardFormField key={attribute.id}>
                 <FieldRFF
                     component={TextAreaFieldFF}
                     required={required}
@@ -89,7 +90,7 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
                     label={attribute.displayFormName}
                     name={name}
                 />
-            </StandardFormSection>
+            </StandardFormField>
         )
     }
     // @TODO: Verify that all value types have been covered!
