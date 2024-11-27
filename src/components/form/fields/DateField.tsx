@@ -1,8 +1,8 @@
+import i18n from '@dhis2/d2-i18n'
 import { CalendarInput, CalendarInputProps } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useField } from 'react-final-form'
 import { selectedLocale, useSystemSetting } from '../../../lib'
-import i18n from '@dhis2/d2-i18n'
 
 type DateFieldProps = Omit<
     CalendarInputProps,
