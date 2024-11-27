@@ -33,24 +33,22 @@ export function DateField({
 
     const { input, meta } = useField<string | undefined>(name)
 
-    useEffect(() => {
-        if (input.value === '' && meta.touched && required) {
-            setValidation({
-                error: true,
-                valid: false,
-                validationCode: 'EMPTY',
-                validationText: i18n.t('Required'),
-            })
-        }
-    }, [required, input.value, meta.touched])
-
     const handleChange: CalendarInputProps['onDateSelect'] = (
         payload: {
             calendarDateString: string
             validation?: ValidationProps
         } | null
     ) => {
-        setValidation(payload?.validation || { error: false })
+        if (!payload?.calendarDateString && required) {
+            setValidation({
+                error: true,
+                valid: false,
+                validationCode: 'EMPTY',
+                validationText: i18n.t('Required'),
+            })
+        } else {
+            setValidation(payload?.validation || { error: false })
+        }
         input.onChange(payload?.calendarDateString || '')
         input.onBlur()
     }
