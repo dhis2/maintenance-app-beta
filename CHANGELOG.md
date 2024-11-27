@@ -1,3 +1,10 @@
+# [0.17.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.16.1...v0.17.0) (2024-11-27)
+
+
+### Features
+
+* add format validation to date fields and to dates in schemas ([#451](https://github.com/dhis2/maintenance-app-beta/issues/451)) ([4ea1d3c](https://github.com/dhis2/maintenance-app-beta/commit/4ea1d3c22133b2f9b63bc58cbf69b3d09e70e2a9))
+
 ## [0.16.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.16.0...v0.16.1) (2024-11-25)
 
 
