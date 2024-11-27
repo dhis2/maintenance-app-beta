@@ -123,7 +123,7 @@ export const DataSetFormContents = () => {
                             'These options are used for advanced data set configurations.'
                         )}
                     </StandardFormSectionDescription>
-                    <div style={{ height: 300 }} />
+                    <div style={{ height: 900 }} />
                 </SectionedFormSection>
             </SectionedFormSections>
         </>
