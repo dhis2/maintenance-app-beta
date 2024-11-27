@@ -28,9 +28,7 @@ export const DataSetFormContents = () => {
     const [selectedSection] = useSelectedSection()
     return (
         <>
-            <SectionedFormSections
-                hidden={selectedSection === descriptor.getSection('form').name}
-            >
+            <SectionedFormSections>
                 <SectionedFormSection
                     name={descriptor.getSection('setup').name}
                 >
@@ -106,6 +104,13 @@ export const DataSetFormContents = () => {
                             'Configure which organisation units can collect data for this data set.'
                         )}
                     </StandardFormSectionDescription>
+                    <div style={{ height: 300 }} />
+                </SectionedFormSection>
+                <SectionedFormSection name={descriptor.getSection('form').name}>
+                    <StandardFormSectionTitle>
+                        {i18n.t('Data entry form')}
+                    </StandardFormSectionTitle>
+                    <div style={{ height: 300 }} />
                 </SectionedFormSection>
                 <SectionedFormSection
                     name={descriptor.getSection('advanced').name}
@@ -118,13 +123,7 @@ export const DataSetFormContents = () => {
                             'These options are used for advanced data set configurations.'
                         )}
                     </StandardFormSectionDescription>
-                </SectionedFormSection>
-            </SectionedFormSections>
-            <SectionedFormSections hidden={selectedSection !== 'form'}>
-                <SectionedFormSection name={descriptor.getSection('form').name}>
-                    <StandardFormSectionTitle>
-                        {i18n.t('Data entry form')}
-                    </StandardFormSectionTitle>
+                    <div style={{ height: 300 }} />
                 </SectionedFormSection>
             </SectionedFormSections>
         </>
