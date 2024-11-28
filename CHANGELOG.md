@@ -1,3 +1,10 @@
+# [0.18.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.17.0...v0.18.0) (2024-11-28)
+
+
+### Features
+
+* implement description field validation ([#449](https://github.com/dhis2/maintenance-app-beta/issues/449)) ([e3329ff](https://github.com/dhis2/maintenance-app-beta/commit/e3329ffcb4053ca1db1395fe892da7434250b608))
+
 # [0.17.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.16.1...v0.17.0) (2024-11-27)
 
 
