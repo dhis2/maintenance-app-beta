@@ -8,7 +8,8 @@
     flex-shrink: 0;
     flex-basis: 160px;
     flex-grow: 1;
-    max-width: 250px;
+    min-width: 250px;
+    max-width: 300px;
 }
 
 .subtitle {
@@ -27,7 +28,7 @@
     flex-basis: 160px;
     flex-grow: 1;
     flex-shrink: 0;
-    max-width: 250px;
+    max-width: 225px;
 }
 
 .addActionButton {

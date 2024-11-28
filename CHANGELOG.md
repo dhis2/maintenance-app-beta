@@ -1,3 +1,25 @@
+# [0.17.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.16.1...v0.17.0) (2024-11-27)
+
+
+### Features
+
+* add format validation to date fields and to dates in schemas ([#451](https://github.com/dhis2/maintenance-app-beta/issues/451)) ([4ea1d3c](https://github.com/dhis2/maintenance-app-beta/commit/4ea1d3c22133b2f9b63bc58cbf69b3d09e70e2a9))
+
+## [0.16.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.16.0...v0.16.1) (2024-11-25)
+
+
+### Bug Fixes
+
+* address feedback from org unit new form ([#447](https://github.com/dhis2/maintenance-app-beta/issues/447)) ([958563e](https://github.com/dhis2/maintenance-app-beta/commit/958563e5805fcb7d942749aabb82964f80492bc7))
+
+# [0.16.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.15.0...v0.16.0) (2024-11-25)
+
+
+### Features
+
+* add indicator list type list view ([#433](https://github.com/dhis2/maintenance-app-beta/issues/433)) ([2668c68](https://github.com/dhis2/maintenance-app-beta/commit/2668c683fcda0807f34cb3c2a92f405d5ff66578))
+* upgrade ui library to latest version ([#448](https://github.com/dhis2/maintenance-app-beta/issues/448)) ([ba73ad8](https://github.com/dhis2/maintenance-app-beta/commit/ba73ad8f9b8114203b3c874f6d8e055fe83856e2))
+
 # [0.15.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.14.0...v0.15.0) (2024-11-22)
 
 

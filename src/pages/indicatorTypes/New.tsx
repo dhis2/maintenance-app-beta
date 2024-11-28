@@ -1,21 +1,23 @@
 import React from 'react'
-import { FormBase } from '../../components'
 import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
+import { FormBase } from '../../components/form/FormBase'
 import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
-import { initialValues, OrganisationUnitFormField, validate } from './form'
+import { validate } from './form'
+import { IndicatorTypesFormFields } from './form/IndicatorTypesFormFields'
+import { initialValues } from './form/IndicatorTypesSchema'
 
-const section = SECTIONS_MAP.organisationUnit
+const section = SECTIONS_MAP.indicatorType
+
 export const Component = () => {
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({
-                section,
-            })}
             initialValues={initialValues}
+            onSubmit={useOnSubmitNew({ section })}
             validate={validate}
+            includeAttributes={false}
         >
             <DefaultNewFormContents section={section}>
-                <OrganisationUnitFormField />
+                <IndicatorTypesFormFields />
             </DefaultNewFormContents>
         </FormBase>
     )

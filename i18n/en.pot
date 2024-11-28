@@ -5,8 +5,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-21T14:53:27.430Z\n"
-"PO-Revision-Date: 2024-11-21T14:53:27.430Z\n"
+"POT-Creation-Date: 2024-11-27T08:30:38.416Z\n"
+"PO-Revision-Date: 2024-11-27T08:30:38.417Z\n"
+"POT-Creation-Date: 2024-11-26T14:06:00.934Z\n"
+"PO-Revision-Date: 2024-11-26T14:06:00.934Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -101,6 +103,9 @@ msgstr "Set up information for the attributes assigned to {{modelName}}"
 
 msgid "Code"
 msgstr "Code"
+
+msgid "Required"
+msgstr "Required"
 
 msgid "Description"
 msgstr "Description"
@@ -891,6 +896,9 @@ msgstr "This field requires a unique value, please choose another one"
 msgid "{{label}} (required)"
 msgstr "{{label}} (required)"
 
+msgid "Should not exceed {{maxLength}} characters"
+msgstr "Should not exceed {{maxLength}} characters"
+
 msgid "No changes to be saved"
 msgstr "No changes to be saved"
 
@@ -903,11 +911,11 @@ msgstr "Cannot save empty object"
 msgid "Created successfully"
 msgstr "Created successfully"
 
-msgid "Required"
-msgstr "Required"
-
 msgid "Period type"
 msgstr "Period type"
+
+msgid "Factor"
+msgstr "Factor"
 
 msgid "Basic information"
 msgstr "Basic information"
@@ -1207,6 +1215,9 @@ msgstr ""
 "included. PHU will still be available for the PHU level, but not included "
 "in the aggregations to the levels above."
 
+msgid "Set up the basic information for this Indicator Type."
+msgstr "Set up the basic information for this Indicator Type."
+
 msgid "Longitude"
 msgstr "Longitude"
 
@@ -1235,8 +1246,8 @@ msgstr ""
 "Choose where this new organisation unit should be placed in the existing "
 "hierarchy"
 
-msgid "Set up the basic information for this organisation unit."
-msgstr "Set up the basic information for this organisation unit."
+msgid "Set up the basic information for this organisation unit"
+msgstr "Set up the basic information for this organisation unit"
 
 msgid "Opening date"
 msgstr "Opening date"
@@ -1304,6 +1315,22 @@ msgid ""
 msgstr ""
 "This is the first organisation unit and will be created as the root of the "
 "hierarchy."
+
+msgid "Must be a valid mobile number"
+msgstr "Must be a valid mobile number"
+
+msgid "Must be a valid url"
+msgstr "Must be a valid url"
+
+msgid ""
+"Longitude should be between -90 and 90. Latitude should be between -180 and "
+"180"
+msgstr ""
+"Longitude should be between -90 and 90. Latitude should be between -180 and "
+"180"
+
+msgid "Parent organisation unit cannot be itself or a descendant of itself."
+msgstr "Parent organisation unit cannot be itself or a descendant of itself."
 
 msgid "No organisation units available"
 msgstr "No organisation units available"
