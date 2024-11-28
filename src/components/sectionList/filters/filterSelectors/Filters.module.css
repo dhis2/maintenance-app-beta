@@ -12,7 +12,7 @@
 }
 
 .identifiableSelectionFilter {
-    width: 320px;
+    width: 320px !important;
 }
 
 .filterWrapper {
