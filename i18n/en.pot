@@ -5,6 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2024-11-27T08:30:38.416Z\n"
+"PO-Revision-Date: 2024-11-27T08:30:38.417Z\n"
 "POT-Creation-Date: 2024-11-26T14:06:00.934Z\n"
 "PO-Revision-Date: 2024-11-26T14:06:00.934Z\n"
 
