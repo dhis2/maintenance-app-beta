@@ -98,6 +98,20 @@ export const modelListViewsConfig = {
             default: ['domainType', 'valueType', 'dataSet', 'categoryCombo'],
         },
     },
+    dataSet: {
+        columns: {
+            default: [
+                'name',
+                { label: i18n.t('Form type'), path: 'formType' },
+                { label: i18n.t('Period type'), path: 'periodType' },
+                'lastUpdated',
+                DESCRIPTORS.publicAccess,
+            ],
+        },
+        filters: {
+            default: ['formType'],
+        },
+    },
     organisationUnit: {
         columns: {
             available: [],
@@ -108,7 +122,19 @@ export const modelListViewsConfig = {
         },
     },
     categoryOption: {
-        columns: {},
+        columns: {
+            available: [
+                'name',
+                'code',
+                'created',
+                'createdBy',
+                'href',
+                'id',
+                DESCRIPTORS.publicAccess,
+            ],
+            default: ['name', DESCRIPTORS.publicAccess, 'lastUpdated'],
+            overrideDefaultAvailable: true,
+        },
         filters: {
             default: ['category', 'categoryOptionGroup'],
         },
@@ -128,10 +154,35 @@ export const modelListViewsConfig = {
     },
     indicator: {
         columns: {
-            default: ['name', DESCRIPTORS.publicAccess, 'lastUpdated'],
+            default: [
+                'name',
+                { label: i18n.t('Indicator Type'), path: 'indicatorType' },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
         },
         filters: {
             default: ['indicatorType'],
+        },
+    },
+    indicatorType: {
+        columns: {
+            default: [
+                'name',
+                { label: i18n.t('Factor'), path: 'factor' },
+                'lastUpdated',
+            ],
+            available: [
+                'code',
+                'created',
+                'createdBy',
+                'href',
+                'id',
+                'lastUpdatedBy',
+            ],
+        },
+        filters: {
+            default: [],
         },
     },
     categoryOptionGroupSet: {

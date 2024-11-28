@@ -5,6 +5,7 @@ import {
     DOMAIN_TYPE,
     getTranslatedProperty,
     VALUE_TYPE,
+    FORM_TYPE,
 } from '../../../../lib'
 import { ConstantSelectionFilter } from './ConstantSelectionFilter'
 
@@ -14,6 +15,15 @@ export const DomainTypeSelectionFilter = () => {
             label={getTranslatedProperty('domainType')}
             filterKey="domainType"
             constants={DOMAIN_TYPE}
+        />
+    )
+}
+export const FormTypeFilter = () => {
+    return (
+        <ConstantSelectionFilter
+            label={getTranslatedProperty('formType')}
+            filterKey="formType"
+            constants={FORM_TYPE}
         />
     )
 }

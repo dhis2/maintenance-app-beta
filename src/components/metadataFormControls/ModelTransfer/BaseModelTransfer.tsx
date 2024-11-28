@@ -58,6 +58,7 @@ export const BaseModelTransfer = <TModel extends DisplayableModel>({
 
     return (
         <Transfer
+            maxSelections={5000}
             {...transferProps}
             selected={selectedTransferValues}
             options={allTransferOptions}

@@ -15,6 +15,7 @@ import { useCustomAttributesQuery } from './attributes'
 
 type MaybeModelWithAttributes = {
     id?: string
+    name?: string
     attributeValues?: PartialAttributeValue[] | undefined
 }
 

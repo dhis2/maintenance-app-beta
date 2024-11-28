@@ -11,10 +11,16 @@ export const categoryOptionSchema = identifiable
     .extend({
         code: z.string().trim().optional(),
         shortName: z.string().trim(),
-        formName: z.string().trim().optional(),
+        formName: z
+            .string()
+            .trim()
+            .max(230, {
+                message: i18n.t('Form name should not exceed 230 characters'),
+            })
+            .optional(),
         description: z.string().trim().optional(),
-        startDate: z.string().optional(),
-        endDate: z.string().optional(),
+        startDate: z.string().date().optional(),
+        endDate: z.string().date().optional(),
         organisationUnits: referenceCollection.optional(),
     })
     .refine(

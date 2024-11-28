@@ -1,3 +1,55 @@
+# [0.17.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.16.1...v0.17.0) (2024-11-27)
+
+
+### Features
+
+* add format validation to date fields and to dates in schemas ([#451](https://github.com/dhis2/maintenance-app-beta/issues/451)) ([4ea1d3c](https://github.com/dhis2/maintenance-app-beta/commit/4ea1d3c22133b2f9b63bc58cbf69b3d09e70e2a9))
+
+## [0.16.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.16.0...v0.16.1) (2024-11-25)
+
+
+### Bug Fixes
+
+* address feedback from org unit new form ([#447](https://github.com/dhis2/maintenance-app-beta/issues/447)) ([958563e](https://github.com/dhis2/maintenance-app-beta/commit/958563e5805fcb7d942749aabb82964f80492bc7))
+
+# [0.16.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.15.0...v0.16.0) (2024-11-25)
+
+
+### Features
+
+* add indicator list type list view ([#433](https://github.com/dhis2/maintenance-app-beta/issues/433)) ([2668c68](https://github.com/dhis2/maintenance-app-beta/commit/2668c683fcda0807f34cb3c2a92f405d5ff66578))
+* upgrade ui library to latest version ([#448](https://github.com/dhis2/maintenance-app-beta/issues/448)) ([ba73ad8](https://github.com/dhis2/maintenance-app-beta/commit/ba73ad8f9b8114203b3c874f6d8e055fe83856e2))
+
+# [0.15.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.14.0...v0.15.0) (2024-11-22)
+
+
+### Features
+
+* **categoryCombo:** add warning and validations ([#446](https://github.com/dhis2/maintenance-app-beta/issues/446)) ([1b777a6](https://github.com/dhis2/maintenance-app-beta/commit/1b777a62617093c8a185d2324f6c35f139b07aff))
+
+# [0.14.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.13.2...v0.14.0) (2024-11-18)
+
+
+### Features
+
+* data set list view ([#435](https://github.com/dhis2/maintenance-app-beta/issues/435)) ([cf6c751](https://github.com/dhis2/maintenance-app-beta/commit/cf6c7516e8b0e012ef37e23846cd67a8ef80f9b8))
+
+## [0.13.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.13.1...v0.13.2) (2024-11-14)
+
+
+### Bug Fixes
+
+* **categoryOptionGroupSet:** update view config and formName validation ([#442](https://github.com/dhis2/maintenance-app-beta/issues/442)) ([b0253a1](https://github.com/dhis2/maintenance-app-beta/commit/b0253a17105759e0b1e4e2523bcdf2be759b6131))
+* **list:** disable list buttons when no access ([#441](https://github.com/dhis2/maintenance-app-beta/issues/441)) ([5c0941f](https://github.com/dhis2/maintenance-app-beta/commit/5c0941f0deda2b6e29601e8d2c576de3792587bc))
+
+## [0.13.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.13.0...v0.13.1) (2024-11-14)
+
+
+### Bug Fixes
+
+* stop row loaders if there is an error ([#440](https://github.com/dhis2/maintenance-app-beta/issues/440)) ([44a8080](https://github.com/dhis2/maintenance-app-beta/commit/44a8080f5899aafcdd6f5c7b9b17af1ee1949b1a))
+* **optionSetSelect:** fix optionSet crashing with initialValue ([#439](https://github.com/dhis2/maintenance-app-beta/issues/439)) ([93b8d68](https://github.com/dhis2/maintenance-app-beta/commit/93b8d682dc1aab707701308ec130a6af60498f55))
+
 # [0.13.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.12.0...v0.13.0) (2024-11-14)
 
 
