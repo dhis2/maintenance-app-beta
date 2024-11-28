@@ -50,6 +50,10 @@ const DESCRIPTORS = {
         path: 'displayName',
         label: i18n.t('Name'),
     },
+    shortName: {
+        path: 'displayShortName',
+        label: i18n.t('Short name'),
+    },
 } satisfies Record<string, Descriptor>
 
 // This is the default views, and can be overriden per section in modelListViewsConfig below
@@ -57,7 +61,6 @@ export const defaultModelViewConfig = {
     columns: {
         available: [
             DESCRIPTORS.name,
-            'shortName',
             'code',
             'created',
             'createdBy',
@@ -78,6 +81,11 @@ export const defaultModelViewConfig = {
     },
 } satisfies ViewConfig
 
+const defaultAvailableColumnsNoSharing =
+    defaultModelViewConfig.columns.available.filter(
+        (col) => col !== DESCRIPTORS.publicAccess
+    )
+
 /* this is the default views (eg. which columns and filters) to show in the List-page for each section
 	Note: by default, the available columns are merged with columnsDefault.available above.
 	If it's needed to override this for a section, set overrideDefaultAvailable to true
@@ -88,7 +96,7 @@ export const defaultModelViewConfig = {
 export const modelListViewsConfig = {
     dataElement: {
         columns: {
-            available: ['zeroIsSignificant'],
+            available: [DESCRIPTORS.shortName, 'zeroIsSignificant'],
             default: [
                 DESCRIPTORS.name,
                 { label: i18n.t('Domain type'), path: 'domainType' },
@@ -103,6 +111,18 @@ export const modelListViewsConfig = {
             default: ['domainType', 'valueType', 'dataSet', 'categoryCombo'],
         },
     },
+    dataElementGroup: {
+        columns: {
+            available: [DESCRIPTORS.shortName],
+        },
+        filters: {},
+    },
+    dataElementGroupSet: {
+        columns: {
+            available: [DESCRIPTORS.shortName],
+        },
+        filters: {},
+    },
     dataSet: {
         columns: {
             default: [
@@ -112,6 +132,7 @@ export const modelListViewsConfig = {
                 'lastUpdated',
                 DESCRIPTORS.publicAccess,
             ],
+            available: [DESCRIPTORS.shortName],
         },
         filters: {
             default: ['formType'],
@@ -119,7 +140,7 @@ export const modelListViewsConfig = {
     },
     organisationUnit: {
         columns: {
-            available: [],
+            available: [DESCRIPTORS.shortName],
             default: [DESCRIPTORS.name, 'id', 'code', 'lastUpdated'],
         },
         filters: {
@@ -130,6 +151,7 @@ export const modelListViewsConfig = {
         columns: {
             available: [
                 DESCRIPTORS.name,
+                DESCRIPTORS.shortName,
                 'code',
                 'created',
                 'createdBy',
@@ -156,6 +178,7 @@ export const modelListViewsConfig = {
                 DESCRIPTORS.publicAccess,
                 'lastUpdated',
             ],
+            available: [DESCRIPTORS.shortName],
         },
         filters: {
             default: ['dataDimensionType', 'categoryCombo'],
@@ -165,10 +188,11 @@ export const modelListViewsConfig = {
         columns: {
             default: [
                 DESCRIPTORS.name,
-                { label: i18n.t('Indicator Type'), path: 'indicatorType' },
+                'indicatorType',
                 DESCRIPTORS.publicAccess,
                 'lastUpdated',
             ],
+            available: [DESCRIPTORS.shortName],
         },
         filters: {
             default: ['indicatorType'],
@@ -177,21 +201,17 @@ export const modelListViewsConfig = {
     indicatorType: {
         columns: {
             default: [
-                'name',
+                DESCRIPTORS.name,
                 { label: i18n.t('Factor'), path: 'factor' },
                 'lastUpdated',
             ],
-            available: [
-                'code',
-                'created',
-                'createdBy',
-                'href',
-                'id',
-                'lastUpdatedBy',
-            ],
+            available: defaultAvailableColumnsNoSharing,
+            overrideDefaultAvailable: true,
         },
         filters: {
             default: [],
+            available: [],
+            overrideDefaultAvailable: true,
         },
     },
     categoryOptionGroupSet: {
@@ -202,6 +222,7 @@ export const modelListViewsConfig = {
                 DESCRIPTORS.publicAccess,
                 'lastUpdated',
             ],
+            available: [DESCRIPTORS.shortName],
         },
         filters: {
             default: ['dataDimensionType'],
@@ -215,6 +236,7 @@ export const modelListViewsConfig = {
                 DESCRIPTORS.publicAccess,
                 'lastUpdated',
             ],
+            available: [DESCRIPTORS.shortName],
         },
         filters: {
             default: ['dataDimensionType'],
@@ -237,7 +259,7 @@ export const modelListViewsConfig = {
     categoryOptionCombo: {
         columns: {
             default: [DESCRIPTORS.name, 'code', 'lastUpdated'],
-            available: ['categoryCombo', 'ignoreApproval'],
+            available: defaultAvailableColumnsNoSharing,
             // categoryOptionCombo does not have publicAccess
             overrideDefaultAvailable: true,
         },
