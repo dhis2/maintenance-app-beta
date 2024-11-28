@@ -174,6 +174,26 @@ export const modelListViewsConfig = {
             default: ['indicatorType'],
         },
     },
+    indicatorType: {
+        columns: {
+            default: [
+                'name',
+                { label: i18n.t('Factor'), path: 'factor' },
+                'lastUpdated',
+            ],
+            available: [
+                'code',
+                'created',
+                'createdBy',
+                'href',
+                'id',
+                'lastUpdatedBy',
+            ],
+        },
+        filters: {
+            default: [],
+        },
+    },
     categoryOptionGroupSet: {
         columns: {
             default: [
