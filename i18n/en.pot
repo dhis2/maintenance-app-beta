@@ -7,6 +7,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "POT-Creation-Date: 2024-11-27T08:30:38.416Z\n"
 "PO-Revision-Date: 2024-11-27T08:30:38.417Z\n"
+"POT-Creation-Date: 2024-11-26T14:06:00.934Z\n"
+"PO-Revision-Date: 2024-11-26T14:06:00.934Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -101,6 +103,9 @@ msgstr "Set up information for the attributes assigned to {{modelName}}"
 
 msgid "Code"
 msgstr "Code"
+
+msgid "Required"
+msgstr "Required"
 
 msgid "Description"
 msgstr "Description"
@@ -905,9 +910,6 @@ msgstr "Cannot save empty object"
 
 msgid "Created successfully"
 msgstr "Created successfully"
-
-msgid "Required"
-msgstr "Required"
 
 msgid "Period type"
 msgstr "Period type"

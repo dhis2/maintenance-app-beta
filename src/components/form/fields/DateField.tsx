@@ -1,5 +1,6 @@
+import i18n from '@dhis2/d2-i18n'
 import { CalendarInput, CalendarInputProps } from '@dhis2/ui'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useField } from 'react-final-form'
 import { selectedLocale, useSystemSetting } from '../../../lib'
 
@@ -16,6 +17,7 @@ type ValidationProps = {
     error: boolean
     validationText?: string
     valid?: boolean
+    validationCode?: string
 }
 export function DateField({
     name,
@@ -29,13 +31,7 @@ export function DateField({
         error: false,
     })
 
-    const { input } = useField<string | undefined>(name, {
-        validate: () => {
-            if (validation.error) {
-                return validation.validationText
-            }
-        },
-    })
+    const { input, meta } = useField<string | undefined>(name)
 
     const handleChange: CalendarInputProps['onDateSelect'] = (
         payload: {
@@ -43,7 +39,16 @@ export function DateField({
             validation?: ValidationProps
         } | null
     ) => {
-        setValidation(payload?.validation || { error: false })
+        if (!payload?.calendarDateString && required) {
+            setValidation({
+                error: true,
+                valid: false,
+                validationCode: 'EMPTY',
+                validationText: i18n.t('Required'),
+            })
+        } else {
+            setValidation(payload?.validation || { error: false })
+        }
         input.onChange(payload?.calendarDateString || '')
         input.onBlur()
     }
@@ -54,13 +59,15 @@ export function DateField({
                 inputWidth={'400px'}
                 date={input.value}
                 name={name}
+                required={required}
                 calendar={calendar as CalendarInputProps['calendar']}
                 onDateSelect={handleChange}
                 timeZone={'utc'}
                 locale={locale}
+                format={'YYYY-MM-DD'}
                 onBlur={(_, e) => input.onBlur(e)}
                 clearable
-                label={required ? `${label} (required) *` : label}
+                label={required ? `${label} (required)` : label}
                 {...validation}
                 valid={validation?.valid && input?.value !== ''}
                 {...calendarInputProps}
