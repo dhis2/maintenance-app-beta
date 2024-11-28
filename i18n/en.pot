@@ -362,6 +362,15 @@ msgstr "Type to filter options"
 msgid "No matches"
 msgstr "No matches"
 
+msgid "Data element"
+msgstr "Data element"
+
+msgid "Data element group"
+msgstr "Data element group"
+
+msgid "Data element group set"
+msgstr "Data element group set"
+
 msgid "Data set"
 msgstr "Data set"
 
@@ -530,20 +539,11 @@ msgstr "Category option group set"
 msgid "Category option group sets"
 msgstr "Category option group sets"
 
-msgid "Data element"
-msgstr "Data element"
-
 msgid "Data elements"
 msgstr "Data elements"
 
-msgid "Data element group"
-msgstr "Data element group"
-
 msgid "Data element groups"
 msgstr "Data element groups"
-
-msgid "Data element group set"
-msgstr "Data element group set"
 
 msgid "Data element group sets"
 msgstr "Data element group sets"
@@ -983,35 +983,41 @@ msgstr "Yearly"
 msgid "Aggregation type"
 msgstr "Aggregation type"
 
+msgid "Compulsory"
+msgstr "Compulsory"
+
+msgid "Data dimension"
+msgstr "Data dimension"
+
+msgid "Data dimension type"
+msgstr "Data dimension type"
+
+msgid "Domain type"
+msgstr "Domain type"
+
 msgid "Favorite"
 msgstr "Favorite"
 
 msgid "Form name"
 msgstr "Form name"
 
-msgid "Domain type"
-msgstr "Domain type"
-
 msgid "Form type"
 msgstr "Form type"
+
+msgid "Ignore data approval"
+msgstr "Ignore data approval"
 
 msgid "Sharing"
 msgstr "Sharing"
 
-msgid "Value type"
-msgstr "Value type"
-
 msgid "Owner"
 msgstr "Owner"
 
+msgid "Value type"
+msgstr "Value type"
+
 msgid "Zero is significant"
 msgstr "Zero is significant"
-
-msgid "Data dimension type"
-msgstr "Data dimension type"
-
-msgid "Ignore data approval"
-msgstr "Ignore data approval"
 
 msgid "This field requires a unique value, please choose another one"
 msgstr "This field requires a unique value, please choose another one"
@@ -1213,12 +1219,6 @@ msgstr "Custom attributes"
 
 msgid "Create data element group"
 msgstr "Create data element group"
-
-msgid "Compulsory"
-msgstr "Compulsory"
-
-msgid "Data dimension"
-msgstr "Data dimension"
 
 msgid "Selected data element groups"
 msgstr "Selected data element groups"
