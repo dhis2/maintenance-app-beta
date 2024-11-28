@@ -75,6 +75,7 @@ export const ManageListView = ({
                 filtersConfig,
             }
         }, [section.name])
+    const hasAvailableFilters = filtersConfig.available.length > 0
 
     const handleSave = async (values: FormValues) => {
         const isDefault = (arr: string[], def: string[]) =>
@@ -139,12 +140,16 @@ export const ManageListView = ({
                         >
                             {i18n.t('Columns')}
                         </Tab>
-                        <Tab
-                            selected={selectedTab === 'filters'}
-                            onClick={(_, e) => handleChangeTab('filters', e)}
-                        >
-                            {i18n.t('Filters')}
-                        </Tab>
+                        {hasAvailableFilters && (
+                            <Tab
+                                selected={selectedTab === 'filters'}
+                                onClick={(_, e) =>
+                                    handleChangeTab('filters', e)
+                                }
+                            >
+                                {i18n.t('Filters')}
+                            </Tab>
+                        )}
                     </TabBar>
 
                     <TabContent show={selectedTab === 'columns'}>
@@ -154,12 +159,12 @@ export const ManageListView = ({
                             selectedLabel={i18n.t('Selected columns')}
                             loading={query.isLoading}
                             defaultOptions={defaultColumns}
-                            availableOptions={columnsConfig.available.map(
-                                (c) => ({
+                            availableOptions={columnsConfig.available
+                                .map((c) => ({
                                     label: c.label,
                                     value: c.path,
-                                })
-                            )}
+                                }))
+                                .sort((a, b) => a.label.localeCompare(b.label))}
                         />
                     </TabContent>
                     <TabContent show={selectedTab === 'filters'}>
@@ -169,12 +174,12 @@ export const ManageListView = ({
                             selectedLabel={i18n.t('Selected filters')}
                             loading={query.isLoading}
                             defaultOptions={defaultFilters}
-                            availableOptions={filtersConfig.available.map(
-                                (f) => ({
+                            availableOptions={filtersConfig.available
+                                .map((f) => ({
                                     label: f.label,
                                     value: f.filterKey,
-                                })
-                            )}
+                                }))
+                                .sort((a, b) => a.label.localeCompare(b.label))}
                         />
                     </TabContent>
                     {submitError && (
