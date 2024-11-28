@@ -11,7 +11,10 @@ export function DescriptionField({
     helpText?: string
     schemaSection: SchemaSection
 }) {
-    const validate = useCheckMaxLengthFromSchema(schemaSection.name, 'formName')
+    const validate = useCheckMaxLengthFromSchema(
+        schemaSection.name,
+        'description'
+    )
 
     return (
         <FieldRFF
