@@ -1279,6 +1279,12 @@ msgstr "Advanced"
 msgid "Set up the basic information for this Indicator Type."
 msgstr "Set up the basic information for this Indicator Type."
 
+msgid "Delete source indicator types"
+msgstr "Delete source indicator types"
+
+msgid "Merge"
+msgstr "Merge"
+
 msgid "Longitude"
 msgstr "Longitude"
 
