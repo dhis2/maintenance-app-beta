@@ -80,14 +80,14 @@ export const ManageListView = ({
         const isDefault = (arr: string[], def: string[]) =>
             arr.join() === def.join()
 
-        // save empty view if default, this makes the app able to update the default view
+        // save default as null, this makes the app able to update the default view
         const view = {
             name: 'default',
             columns: isDefault(values.columns, defaultColumns)
-                ? []
+                ? null
                 : values.columns,
             filters: isDefault(values.filters, defaultFilters)
-                ? []
+                ? null
                 : values.filters,
         }
 
@@ -108,16 +108,10 @@ export const ManageListView = ({
 
     const initialValues = useMemo(() => {
         return {
-            columns:
-                savedColumns.length > 0
-                    ? savedColumns.map(toPath)
-                    : defaultColumns,
-            filters:
-                savedFilters.length > 0
-                    ? savedFilters.map(toFilterKey)
-                    : defaultFilters,
+            columns: savedColumns.map(toPath),
+            filters: savedFilters.map(toFilterKey),
         }
-    }, [savedFilters, savedColumns, defaultColumns, defaultFilters])
+    }, [savedFilters, savedColumns])
 
     const handleChangeTab = (tab: 'columns' | 'filters', e: SyntheticEvent) => {
         e.preventDefault()
