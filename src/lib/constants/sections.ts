@@ -85,6 +85,14 @@ export const SCHEMA_SECTIONS = {
         titlePlural: i18n.t('Data sets'),
         parentSectionKey: 'dataSet',
     },
+    // @ts-expect-error temporary route for testing
+    dataSetWIP: {
+        name: SchemaName.dataSet,
+        namePlural: 'dataSetsWip',
+        title: i18n.t('Data set'),
+        titlePlural: i18n.t('Data sets'),
+        parentSectionKey: 'dataSet',
+    },
     dataSetNotificationTemplate: {
         name: SchemaName.dataSetNotificationTemplate,
         namePlural: 'dataSetNotifications',

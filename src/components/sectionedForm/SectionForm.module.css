@@ -1,0 +1,75 @@
+.sections {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp24);
+}
+
+.sections[hidden] {
+    display: none;
+}
+
+.sections section {
+    background-color: var(--colors-white);
+    padding: 16px;
+}
+
+.footerWrapper {
+    display: flex;
+    gap: var(--spacers-dp16);
+    height: 100%;
+    align-items: center;
+}
+
+.sectionActions {
+    display: flex;
+    gap: var(--spacers-dp8);
+    width: var(--sidebar-width);
+    height: 100%;
+    border-inline-end: 1px solid var(--colors-grey300);
+    display: flex;
+    align-items: center;
+    padding-inline: var(--spacers-dp16);
+}
+
+.formActions {
+    display: flex;
+    gap: 8px;
+}
+
+.bottomErrorNoticeWrapper {
+    margin-top: auto;
+    position: sticky;
+    inset-block-end: 0;
+    padding: var(--spacers-dp16);
+    z-index: 1;
+    display: flex;
+}
+.errorNoticeBox {
+    min-width: 640px;
+    max-height: 300px;
+    overflow: auto;
+}
+
+/* This basically selects the wrapper (inside UI) of the box-content*/
+.errorNoticeBox > div:nth-child(2) {
+    flex-grow: 1;
+    /* icon in title takes 24+12px, so calc this and fix overflow issues */
+    max-width: calc(100% - 36px);
+}
+.errorNoticeBoxHeader {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--fontSizes-dp16);
+    font-weight: bold;
+}
+
+.errorNoticeBoxHeader h6 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 19px;
+    margin: 0px;
+}
+
+.errorNoticeBoxContent {
+    overflow: auto;
+}

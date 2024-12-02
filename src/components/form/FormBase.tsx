@@ -1,7 +1,11 @@
 import { NoticeBox } from '@dhis2/ui'
 import React, { useMemo } from 'react'
-import { FormProps, Form as ReactFinalForm } from 'react-final-form'
-import { defaultValueFormatter } from '../../lib/form/useOnSubmit'
+import {
+    FormProps,
+    FormRenderProps,
+    Form as ReactFinalForm,
+} from 'react-final-form'
+import { defaultValueFormatter } from '../../lib/form/'
 import {
     PartialAttributeValue,
     getAllAttributeValues,
@@ -17,14 +21,17 @@ type MaybeModelWithAttributes = {
 
 type OwnProps<TValues = Record<string, unknown>> = {
     initialValues: TValues | undefined
-    children: React.ReactNode
+    children: FormProps<TValues>['children']
     includeAttributes?: boolean
+    // we cant remove these props due to FormProps definition, but set to never to avoid confusion
+    // since we're override this and just use children props
+    render?: never
+    component?: never
 }
 
-type FormBaseProps<TValues> = FormProps<TValues> & OwnProps<TValues>
+export type FormBaseProps<TValues> = FormProps<TValues> & OwnProps<TValues>
 
 export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
-    children,
     initialValues,
     onSubmit,
     validate,
@@ -57,18 +64,28 @@ export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
         return <LoadingSpinner />
     }
 
+    const { children } = reactFinalFormProps
+
+    // by defualt we wrap children and add form
+    // but if it's a function - we let the consumer override it
+    const defaultRender =
+        typeof children === 'function'
+            ? children
+            : ({ handleSubmit }: FormRenderProps<TInitialValues>) => (
+                  <form onSubmit={handleSubmit}>{children}</form>
+              )
+
     return (
         <ReactFinalForm<TInitialValues>
             validateOnBlur={true}
             initialValues={initialValuesWithAttributes}
-            render={({ handleSubmit }) => (
-                <form onSubmit={handleSubmit}>{children}</form>
-            )}
             onSubmit={(values, form) => onSubmit(valueFormatter(values), form)}
             validate={(values) =>
                 validate ? validate(valueFormatter(values)) : undefined
             }
             {...reactFinalFormProps}
-        />
+        >
+            {defaultRender}
+        </ReactFinalForm>
     )
 }
