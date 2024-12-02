@@ -24,8 +24,9 @@ const valuesQueryKey = [
 const dataStoreModelListViewSchema = z.object({
     name: z.string(),
     sectionModel: z.string(),
-    columns: z.array(z.string()),
-    filters: z.array(z.string()),
+    // null means explicit default
+    columns: z.array(z.string()).nullable(),
+    filters: z.array(z.string()).nullable(),
 })
 
 type DataStoreModelListView = z.infer<typeof dataStoreModelListViewSchema>
@@ -59,8 +60,10 @@ const parseViewToModelListView = (
     name: string
 ): ModelListView => {
     const listView = dataStoreModelListViewSchema.safeParse(data)
+
+    const defaultView = getDefaultViewForSection(name)
     if (!listView.success) {
-        return getDefaultViewForSection(name)
+        return defaultView
     }
     const viewConfig = getViewConfigForSection(name)
 
@@ -68,24 +71,26 @@ const parseViewToModelListView = (
 
     // map to config to make sure we don't use invalid columns
     // Preserve order by mapping from parsedView to config-object
-    const columns = parsedView.columns.flatMap((path) => {
-        const columnConfig = viewConfig.columns.available.find(
-            (col) => col.path === path
-        )
-        return columnConfig ? [columnConfig] : []
-    })
+    const columns =
+        parsedView.columns?.flatMap((path) => {
+            const columnConfig = viewConfig.columns.available.find(
+                (col) => col.path === path
+            )
+            return columnConfig ? [columnConfig] : []
+        }) || defaultView.columns
 
-    const filters = parsedView.filters.flatMap((filterKey) => {
-        const filterConfig = viewConfig.filters.available.find(
-            (filter) => filter.filterKey === filterKey
-        )
+    const filters =
+        parsedView.filters?.flatMap((filterKey) => {
+            const filterConfig = viewConfig.filters.available.find(
+                (filter) => filter.filterKey === filterKey
+            )
 
-        return filterConfig ? [filterConfig] : []
-    })
+            return filterConfig ? [filterConfig] : []
+        }) || defaultView.filters
 
     return {
         ...parsedView,
-        columns,
+        columns: columns.length < 1 ? defaultView.columns : columns,
         filters,
     }
 }
@@ -142,15 +147,8 @@ export const useModelListView = () => {
     const defaultView = getDefaultViewForSection(section.name)
     const selectedView = query.data || defaultView
 
-    const columns =
-        selectedView.columns.length < 1
-            ? defaultView.columns
-            : selectedView.columns
-    const filters =
-        selectedView.filters.length < 1
-            ? defaultView.filters
-            : selectedView.filters
-
+    const columns = selectedView.columns
+    const filters = selectedView.filters
     return { view: selectedView, columns, filters, query }
 }
 
