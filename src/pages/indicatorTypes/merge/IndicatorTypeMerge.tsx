@@ -1,11 +1,29 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip, CheckboxFieldFF, RadioFieldFF } from '@dhis2/ui'
+import {
+    Button,
+    ButtonStrip,
+    CheckboxFieldFF,
+    FieldGroup,
+    RadioFieldFF,
+} from '@dhis2/ui'
 import React, { useMemo } from 'react'
 import { Field, Form } from 'react-final-form'
 import { z } from 'zod'
-import { ModelTransferField } from '../../../components'
+import {
+    ModelTransferField,
+    StandardFormSection,
+    StandardFormSectionTitle,
+} from '../../../components'
 import { HorizontalFieldGroup } from '../../../components/form'
+import {
+    BaseSourcesField,
+    BaseTargetField,
+    MergeSourcesTargetWrapper,
+} from '../../../components/merge'
+import { ModelMultiSelectField } from '../../../components/metadataFormControls/ModelMultiSelect'
+import { ModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect'
+import { ModelFilterSelect } from '../../../components/sectionList/filters/filterSelectors/ModelFilter'
 import { getDefaults } from '../../../lib'
 import { mergeFormSchema, validate } from './indicatorTypeMergeSchema'
 
@@ -52,46 +70,60 @@ export const IndicatorTypeMergeForm = ({
                         padding: '16px',
                     }}
                 >
-                    <ModelTransferField
-                        name="sources"
-                        query={{
-                            resource: 'indicatorTypes',
-                            params: {
-                                fields: 'id,displayName',
-                                filter: values.target
-                                    ? `id:!in:[${values.target}]`
-                                    : [],
-                            },
-                        }}
-                        label="Source indicator types"
-                    />
-                    <ModelTransferField
-                        name="target"
-                        label="Target indicator type"
-                        query={{
-                            resource: 'indicatorTypes',
-                            params: {
-                                fields: 'id,displayName',
-                                filter:
-                                    values.sources.length > 0
-                                        ? `id:!in:[${Array.from(
-                                              values.sources.map((s) =>
-                                                  typeof s === 'string'
-                                                      ? s
-                                                      : s.id
-                                              )
-                                          )}]`
+                    <MergeSourcesTargetWrapper>
+                        <BaseSourcesField
+                            query={{
+                                resource: 'indicatorTypes',
+                                params: {
+                                    fields: 'id,displayName',
+                                    filter: values.target
+                                        ? `id:!in:[${values.target}]`
                                         : [],
-                            },
-                        }}
-                    />
+                                },
+                            }}
+                        />
+                        <BaseTargetField
+                            query={{
+                                resource: 'indicatorTypes',
+                                params: {
+                                    fields: 'id,displayName',
+                                },
+                            }}
+                        />
+                    </MergeSourcesTargetWrapper>
 
-                    <Field
-                        component={CheckboxFieldFF}
-                        name="deleteSources"
-                        label={i18n.t('Delete source indicator types')}
-                        type="checkbox"
-                    />
+                    <StandardFormSection>
+                        <StandardFormSectionTitle>
+                            {i18n.t('Merge settings')}
+                        </StandardFormSectionTitle>
+
+                        <FieldGroup
+                            label={i18n.t(
+                                'What should happen to the source indicator types after the merge is complete?'
+                            )}
+                        >
+                            <Field<string | undefined>
+                                component={RadioFieldFF}
+                                name="deleteSources"
+                                label={i18n.t(
+                                    'Keep {{count}} source indicator types',
+                                    { count: values.sources.length }
+                                )}
+                                type="radio"
+                                value={'keep'}
+                            />
+                            <Field<string | undefined>
+                                component={RadioFieldFF}
+                                name="deleteSources"
+                                label={i18n.t(
+                                    'Delete {{count}} source indicator types',
+                                    { count: values.sources.length }
+                                )}
+                                type="radio"
+                                value={'delete'}
+                            />
+                        </FieldGroup>
+                    </StandardFormSection>
                     <ButtonStrip>
                         <Button primary type="submit">
                             {i18n.t('Merge')}
