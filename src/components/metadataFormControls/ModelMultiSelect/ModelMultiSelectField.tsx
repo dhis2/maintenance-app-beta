@@ -15,7 +15,7 @@ type OwnProps<TModel extends DisplayableModel> = {
     onChange?: ModelMultiSelectProps<TModel>['onChange']
 }
 
-type ModelMultiSelectFieldProps<TModel extends DisplayableModel> = Omit<
+export type ModelMultiSelectFieldProps<TModel extends DisplayableModel> = Omit<
     ModelMultiSelectProps<TModel>,
     'selected' | 'onChange'
 > &
@@ -47,10 +47,10 @@ export function ModelMultiSelectField<TModel extends DisplayableModel>({
             <ModelMultiSelect<TModel>
                 {...modelSingleSelectProps}
                 selected={input.value}
-                onChange={(selected) => {
-                    input.onChange(selected)
+                onChange={(payload) => {
+                    input.onChange(payload.selected)
                     input.onBlur()
-                    onChange?.(selected)
+                    onChange?.(payload)
                 }}
                 query={query}
             />

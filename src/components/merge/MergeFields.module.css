@@ -1,0 +1,25 @@
+.targetSourceWrapper {
+    display: grid;
+    /* grid is used to place the arrow between the children*/
+    grid-template-areas: 'source arrow target';
+    grid-template-columns: minmax(380px, max-content) 24px minmax(
+            380px,
+            max-content
+        );
+    gap: var(--spacers-dp8);
+    background-color: var(--colors-grey100);
+    padding: var(--spacers-dp16);
+    justify-content: start;
+    align-items: center;
+    width: min-content;
+}
+
+.targetSourceWrapper > div {
+    max-width: 380px;
+}
+
+.targetSourceWrapper > svg {
+    grid-area: arrow;
+    color: var(--colors-grey700);
+    margin-block-start: 19px; /* 19px is the default height of the field label */
+}
