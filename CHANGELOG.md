@@ -1,3 +1,10 @@
+# [0.19.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.18.0...v0.19.0) (2024-12-02)
+
+
+### Features
+
+* **sectionedForm:** initial architecture and base components ([#431](https://github.com/dhis2/maintenance-app-beta/issues/431)) ([74acd06](https://github.com/dhis2/maintenance-app-beta/commit/74acd06a28416a290c49486fa88bea8d2288bb97))
+
 # [0.18.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.17.0...v0.18.0) (2024-11-28)
 
 
