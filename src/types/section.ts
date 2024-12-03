@@ -22,6 +22,7 @@ export type NonSchemaSection = SectionBase & {
 
 export type OverviewSection = SectionBase & {
     componentName: string
+    routeName?: string
 }
 
 export type ModelSection = SchemaSection | NonSchemaSection
