@@ -11,7 +11,7 @@ const defaultQuery = {
     params: {
         order: 'displayName:asc',
         fields: ['id', 'displayName'],
-        pageSize: 2,
+        pageSize: 10,
     },
 } satisfies Omit<PlainResourceQuery, 'resource'>
 
@@ -61,6 +61,7 @@ export const useModelMultiSelectQuery = <TModel extends DisplayableModel>({
         queryFn: queryFn<Response<TModel>>,
         enabled: selectedWithoutData.length > 0,
     })
+
     const resolvedSelected = selected.map((s) => {
         if (typeof s === 'string') {
             return (

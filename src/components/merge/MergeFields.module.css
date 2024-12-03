@@ -9,13 +9,8 @@
     gap: var(--spacers-dp8);
     background-color: var(--colors-grey100);
     padding: var(--spacers-dp16);
-    justify-content: start;
     align-items: center;
     width: min-content;
-}
-
-.targetSourceWrapper > div {
-    max-width: 380px;
 }
 
 .targetSourceWrapper > svg {

@@ -1,1 +1,2 @@
-export * from './BaseMergeFields'
+export * from './MergeFieldsBase'
+export * from './MergeFormBase'
