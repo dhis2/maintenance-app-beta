@@ -40,6 +40,8 @@ export const ModelMultiSelect = <TModel extends DisplayableModel>({
     ...baseModelSingleSelectProps
 }: ModelMultiSelectProps<TModel>) => {
     // keep select in ref, so we dont recompute for inline selects
+    const selectRef = useRef(select)
+    selectRef.current = select
     const [searchTerm, setSearchTerm] = useState('')
     const searchFilter = `identifiable:token:${searchTerm}`
     const filter: string[] = searchTerm ? [searchFilter] : []
@@ -64,7 +66,9 @@ export const ModelMultiSelect = <TModel extends DisplayableModel>({
         selected,
     })
 
-    const resolvedAvailable = select ? select(availableData) : availableData
+    const resolvedAvailable = useMemo(() => {
+        return select ? select(availableData) : availableData
+    }, [availableData, select])
 
     const handleFilterChange = useDebouncedCallback(({ value }) => {
         if (value != undefined) {

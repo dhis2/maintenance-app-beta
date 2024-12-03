@@ -1,50 +1,64 @@
+import { useDataEngine } from '@dhis2/app-runtime'
 import { Card } from '@dhis2/ui'
-import React from 'react'
-import { useQuery } from 'react-query'
-import { useNavigate } from 'react-router-dom'
+import React, { useMemo } from 'react'
 import { StandardFormSectionTitle } from '../../components'
-import { LoadingSpinner } from '../../components/loading/LoadingSpinner'
-import { useLocationWithState } from '../../lib'
-import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { ModelCollectionResponse } from '../../types/generated'
+import { MergeFormBase } from '../../components/merge'
+import { getDefaults, useLocationWithState } from '../../lib'
 import { IndicatorTypeMergeForm } from './merge/IndicatorTypeMerge'
+import {
+    IndicatorTypeMergeFormValues,
+    mergeFormSchema,
+    validate,
+} from './merge/indicatorTypeMergeSchema'
+import { Form } from 'react-final-form'
+import { FORM_ERROR } from 'final-form'
 
 export const Component = () => {
     const location = useLocationWithState<{ selectedModels: Set<string> }>()
-    const queryFn = useBoundResourceQueryFn()
+    const dataEngine = useDataEngine()
+    const initialValues = useMemo(() => {
+        const defaults = {
+            ...getDefaults(mergeFormSchema),
+            target: undefined,
+            sources: Array.from(location.state?.selectedModels || []).map(
+                (id) => ({
+                    id,
+                    // placeholder for displayName, select will load labels
+                    displayName: 'Loading...',
+                })
+            ),
+        }
 
-    const initialSelected = location.state?.selectedModels
-        ? Array.from(location.state.selectedModels)
-        : []
+        return defaults
+    }, [location.state?.selectedModels])
 
-    const q = useQuery({
-        queryKey: [
-            {
-                resource: 'indicatorTypes',
-                params: {
-                    filter: `id:in:[${initialSelected.join()}]`,
-                    fields: ['id', 'displayName'],
-                    paging: false,
+    const onSubmit = async (values: IndicatorTypeMergeFormValues) => {
+        try {
+            const res = await dataEngine.mutate({
+                resource: 'indicatorTypes/merge',
+                type: 'create',
+                data: {
+                    target: values.target.id,
+                    sources: values.sources.map(({ id }) => id),
+                    deleteSources: values.deleteSources === 'delete',
                 },
-            },
-        ],
-        queryFn: queryFn<
-            ModelCollectionResponse<
-                { id: string; displayName: string },
-                'indicatorTypes'
-            >
-        >,
-        enabled: initialSelected.length > 0,
-        select: (data) => data.indicatorTypes,
-    })
+            })
+        } catch (e) {
+            console.error(e)
+            return { [FORM_ERROR]: e.toString() }
+        }
+    }
 
     return (
-        <Card>
+        <MergeFormBase
+            initialValues={initialValues}
+            onSubmit={onSubmit}
+            validate={validate}
+        >
             <StandardFormSectionTitle>
                 Configure indicator type merge
             </StandardFormSectionTitle>
-            {q.isLoading && <LoadingSpinner />}
-            {q.isSuccess && <IndicatorTypeMergeForm selectedModels={q.data} />}
-        </Card>
+            <IndicatorTypeMergeForm />
+        </MergeFormBase>
     )
 }
