@@ -13,7 +13,8 @@ export const getSectionPath = (section: Section | string) => {
     if (typeof section === 'string') {
         return section
     }
-    return section.namePlural
+    return section.routeName || section.namePlural
+
 }
 
 export const getSectionNewPath = (section: Section | string) => {
