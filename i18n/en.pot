@@ -5,10 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-27T08:30:38.416Z\n"
-"PO-Revision-Date: 2024-11-27T08:30:38.417Z\n"
-"POT-Creation-Date: 2024-11-26T14:06:00.934Z\n"
-"PO-Revision-Date: 2024-11-26T14:06:00.934Z\n"
+"POT-Creation-Date: 2024-12-03T07:31:45.454Z\n"
+"PO-Revision-Date: 2024-12-03T07:31:45.455Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -424,6 +422,15 @@ msgstr "Translation updated successfully"
 
 msgid "Save translations"
 msgstr "Save translations"
+
+msgid "Go back"
+msgstr "Go back"
+
+msgid "Next section"
+msgstr "Next section"
+
+msgid "Save and exit"
+msgstr "Save and exit"
 
 msgid "Can edit and capture"
 msgstr "Can edit and capture"
@@ -1214,6 +1221,60 @@ msgstr ""
 "aggregation level available) as the data source, and PHU data will not be "
 "included. PHU will still be available for the PHU level, but not included "
 "in the aggregations to the levels above."
+
+msgid "Set up the basic information for this data set."
+msgstr "Set up the basic information for this data set."
+
+msgid "Configure data elements"
+msgstr "Configure data elements"
+
+msgid "Choose what data is collected for this data set."
+msgstr "Choose what data is collected for this data set."
+
+msgid "Configure data entry periods"
+msgstr "Configure data entry periods"
+
+msgid "Choose for what time periods data can be entered for this data set"
+msgstr "Choose for what time periods data can be entered for this data set"
+
+msgid "Validation and limitations"
+msgstr "Validation and limitations"
+
+msgid "Configure how data can and must be entered for this data"
+msgstr "Configure how data can and must be entered for this data"
+
+msgid "Configure which organisation units can collect data for this data set."
+msgstr "Configure which organisation units can collect data for this data set."
+
+msgid "Data entry form"
+msgstr "Data entry form"
+
+msgid "Advanced options"
+msgstr "Advanced options"
+
+msgid "These options are used for advanced data set configurations."
+msgstr "These options are used for advanced data set configurations."
+
+msgid "Setup"
+msgstr "Setup"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Data Elements"
+msgstr "Data Elements"
+
+msgid "Periods"
+msgstr "Periods"
+
+msgid "Organisation Units"
+msgstr "Organisation Units"
+
+msgid "Form"
+msgstr "Form"
+
+msgid "Advanced"
+msgstr "Advanced"
 
 msgid "Set up the basic information for this Indicator Type."
 msgstr "Set up the basic information for this Indicator Type."

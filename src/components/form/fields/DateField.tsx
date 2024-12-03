@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { CalendarInput, CalendarInputProps } from '@dhis2/ui'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useField } from 'react-final-form'
 import { selectedLocale, useSystemSetting } from '../../../lib'
 
@@ -16,7 +16,7 @@ type DateFieldProps = Omit<
 type ValidationProps = {
     error: boolean
     validationText?: string
-    valid?: boolean
+    valid: boolean
     validationCode?: string
 }
 export function DateField({
@@ -29,10 +29,18 @@ export function DateField({
     const locale = selectedLocale
     const [validation, setValidation] = useState<ValidationProps>({
         error: false,
+        valid: true,
     })
 
     const { input, meta } = useField<string | undefined>(name)
 
+    useEffect(() => {
+        if (input.value) {
+            const dateWithNoTimestamp = input.value.substring(0, 10)
+            input.onChange(dateWithNoTimestamp)
+            input.onBlur()
+        }
+    }, [])
     const handleChange: CalendarInputProps['onDateSelect'] = (
         payload: {
             calendarDateString: string
@@ -47,7 +55,7 @@ export function DateField({
                 validationText: i18n.t('Required'),
             })
         } else {
-            setValidation(payload?.validation || { error: false })
+            setValidation(payload?.validation || { error: false, valid: true })
         }
         input.onChange(payload?.calendarDateString || '')
         input.onBlur()

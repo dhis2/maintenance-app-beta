@@ -13,6 +13,7 @@ import {
     DefaultDetailsPanelContent,
     DetailsPanel,
 } from '../../../components/sectionList/detailsPanel'
+import { DynamicFilters } from '../../../components/sectionList/filters/filterSelectors/DynamicFilters'
 import { useModelListView } from '../../../components/sectionList/listView'
 import { ModelValue } from '../../../components/sectionList/modelValue/ModelValue'
 import { SectionListTitle } from '../../../components/sectionList/SectionListTitle'
@@ -219,7 +220,10 @@ export const OrganisationUnitList = () => {
     return (
         <div>
             <SectionListTitle />
-            <IdentifiableFilter />
+            <div className={css.filterWrapper}>
+                <IdentifiableFilter />
+                <DynamicFilters />
+            </div>
             <div className={css.listDetailsWrapper}>
                 <Toolbar
                     selectedModels={
