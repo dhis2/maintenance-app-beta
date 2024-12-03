@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 
 const TRANSLATED_PROPERTY: Record<string, string> = {
     aggregationType: i18n.t('Aggregation type'),
+    category: i18n.t('Category'),
     categoryCombo: i18n.t('Category combination'),
     categoryOption: i18n.t('Category option'),
     code: i18n.t('Code'),
@@ -11,6 +12,7 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     formName: i18n.t('Form name'),
     href: i18n.t('API URL'),
     id: i18n.t('Id'),
+    indicatorType: i18n.t('Indicator type'),
     lastUpdatedBy: i18n.t('Last updated by'),
     created: i18n.t('Created'),
     domainType: i18n.t('Domain type'),

@@ -9,6 +9,7 @@
     "dataElements": [
         {
             "name": "ANC 1st visit",
+            "displayName": "ANC 1st visit",
             "lastUpdated": "2017-03-02T16:52:07.101",
             "sharing": {
                 "public": "r-------"
@@ -31,6 +32,7 @@
         },
         {
             "name": "ANC 2nd visit",
+            "displayName": "ANC 2nd visit",
             "lastUpdated": "2024-03-05T22:55:32.803",
             "sharing": {
                 "public": "r-------"
@@ -53,6 +55,7 @@
         },
         {
             "name": "ANC 3rd visit",
+            "displayName": "ANC 3rd visit",
             "lastUpdated": "2024-03-05T23:09:47.216",
             "sharing": {
                 "public": "r-------"
@@ -75,6 +78,7 @@
         },
         {
             "name": "ANC 4th or more visits",
+            "displayName": "ANC 4th or more visits",
             "lastUpdated": "2024-03-05T09:48:09.192",
             "sharing": {
                 "public": "rw------"
@@ -97,6 +101,7 @@
         },
         {
             "name": "ARI treated with antibiotics (pneumonia) follow-up",
+            "displayName": "ARI treated with antibiotics (pneumonia) follow-up",
             "lastUpdated": "2024-03-05T23:10:04.850",
             "sharing": {
                 "public": "rw------"
@@ -119,6 +124,7 @@
         },
         {
             "name": "ARI treated with antibiotics (pneumonia) new",
+            "displayName": "ARI treated with antibiotics (pneumonia) new",
             "lastUpdated": "2024-03-05T22:52:47.886",
             "sharing": {
                 "public": "r-------"
@@ -141,6 +147,7 @@
         },
         {
             "name": "ARI treated with antibiotics (pneumonia) referrals",
+            "displayName": "ARI treated with antibiotics (pneumonia) referrals",
             "lastUpdated": "2024-03-05T09:48:09.193",
             "sharing": {
                 "public": "rw------"
@@ -163,6 +170,7 @@
         },
         {
             "name": "ARI treated without antibiotics (cough) follow-up",
+            "displayName": "ARI treated without antibiotics (cough) follow-up",
             "lastUpdated": "2024-03-05T09:48:09.191",
             "sharing": {
                 "public": "rw------"
@@ -185,6 +193,7 @@
         },
         {
             "name": "ARI treated without antibiotics (cough) new",
+            "displayName": "ARI treated without antibiotics (cough) new",
             "lastUpdated": "2024-03-05T09:48:09.194",
             "sharing": {
                 "public": "rw------"
@@ -207,6 +216,7 @@
         },
         {
             "name": "ARI treated without antibiotics (cough) referrals",
+            "displayName": "ARI treated without antibiotics (cough) referrals",
             "lastUpdated": "2024-03-05T09:48:09.191",
             "sharing": {
                 "public": "rw------"
@@ -229,6 +239,7 @@
         },
         {
             "name": "ART No clients who stopped TRT due to TRT failure",
+            "displayName": "ART No clients who stopped TRT due to TRT failure",
             "lastUpdated": "2024-03-05T09:48:09.194",
             "sharing": {
                 "public": "rw------"
@@ -251,6 +262,7 @@
         },
         {
             "name": "ART No clients who stopped TRT due to adverse clinical status/event",
+            "displayName": "ART No clients who stopped TRT due to adverse clinical status/event",
             "lastUpdated": "2024-03-05T09:48:09.191",
             "sharing": {
                 "public": "rw------"
@@ -273,6 +285,7 @@
         },
         {
             "name": "ART No clients with change of regimen due to drug toxicity",
+            "displayName": "ART No clients with change of regimen due to drug toxicity",
             "lastUpdated": "2024-03-05T09:48:09.195",
             "sharing": {
                 "public": "rw------"
@@ -295,6 +308,7 @@
         },
         {
             "name": "ART No clients with new adverse drug reaction",
+            "displayName": "ART No clients with new adverse drug reaction",
             "lastUpdated": "2024-03-05T09:48:09.191",
             "sharing": {
                 "public": "rw------"
@@ -317,6 +331,7 @@
         },
         {
             "name": "ART No started Opportunist Infection prophylaxis",
+            "displayName": "ART No started Opportunist Infection prophylaxis",
             "lastUpdated": "2024-03-05T09:48:09.191",
             "sharing": {
                 "public": "rw------"
@@ -339,6 +354,7 @@
         },
         {
             "name": "ART clients with new adverse clinical event",
+            "displayName": "ART clients with new adverse clinical event",
             "lastUpdated": "2024-03-05T09:48:09.192",
             "sharing": {
                 "public": "rw------"
@@ -361,6 +377,7 @@
         },
         {
             "name": "ART defaulters",
+            "displayName": "ART defaulters",
             "lastUpdated": "2024-03-05T09:48:09.192",
             "sharing": {
                 "public": "rw------"
@@ -383,6 +400,7 @@
         },
         {
             "name": "ART enrollment stage 1",
+            "displayName": "ART enrollment stage 1",
             "lastUpdated": "2024-03-05T09:48:09.194",
             "sharing": {
                 "public": "rw------"
@@ -405,6 +423,7 @@
         },
         {
             "name": "ART enrollment stage 2",
+            "displayName": "ART enrollment stage 2",
             "lastUpdated": "2024-03-05T09:48:09.190",
             "sharing": {
                 "public": "rw------"
@@ -427,6 +446,7 @@
         },
         {
             "name": "ART enrollment stage 3",
+            "displayName": "ART enrollment stage 3",
             "lastUpdated": "2024-03-05T09:48:09.193",
             "sharing": {
                 "public": "rw------"
