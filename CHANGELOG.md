@@ -1,3 +1,11 @@
+## [0.19.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.19.0...v0.19.1) (2024-12-03)
+
+
+### Bug Fixes
+
+* **list:** use translated values for name and shortName ([#438](https://github.com/dhis2/maintenance-app-beta/issues/438)) ([19a763d](https://github.com/dhis2/maintenance-app-beta/commit/19a763d418e7d542c1e49bfc7fb87396fbf6af4e))
+* **modelListView:** allow empty filters ([#454](https://github.com/dhis2/maintenance-app-beta/issues/454)) [skip release] ([177220f](https://github.com/dhis2/maintenance-app-beta/commit/177220f8e17c5644fb416900ea30ae25f2783886))
+
 # [0.19.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.18.0...v0.19.0) (2024-12-02)
 
 
