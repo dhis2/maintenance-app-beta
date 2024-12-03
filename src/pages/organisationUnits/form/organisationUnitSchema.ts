@@ -10,15 +10,7 @@ export const organisationUnitSchema = identifiable
     .extend({
         shortName: z.string().trim().default(''),
         code: z.string().trim().optional(),
-        description: z
-            .string()
-            .trim()
-            .max(2147483647, {
-                message: i18n.t('Should not exceed {{maxLength}} characters', {
-                    maxLength: 2147483647,
-                }),
-            })
-            .optional(),
+        description: z.string().trim().optional(),
         image: z.object({ id: z.string() }).optional(),
         phoneNumber: z
             .string()
@@ -50,9 +42,9 @@ export const organisationUnitSchema = identifiable
         closedDate: z.string().date().optional(),
         comment: z
             .string()
-            .max(2147483647, {
+            .max(2000, {
                 message: i18n.t('Should not exceed {{maxLength}} characters', {
-                    maxLength: 2147483647,
+                    maxLength: 2000,
                 }),
             })
             .optional(),

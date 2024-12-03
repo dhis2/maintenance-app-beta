@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
 import { Category } from '../../../types/generated'
 
-/*  Note that this describes what we send to the server, 
+/*  Note that this describes what we send to the server,
     and not what is stored in the form. */
 const { identifiable, referenceCollection, withAttributeValues } =
     modelFormSchemas
