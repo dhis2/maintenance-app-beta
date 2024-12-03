@@ -1,7 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import { z } from 'zod'
-import { StandardFormSectionTitle } from '../../../components'
+import {
+    StandardFormSectionDescription,
+    StandardFormSectionTitle,
+} from '../../../components'
 import {
     BaseSourcesField,
     BaseTargetField,
@@ -22,6 +25,15 @@ export const IndicatorTypeMergeForm = () => {
     console.log({ formState })
     return (
         <>
+            <StandardFormSectionDescription>
+                The merge operation will merge the source indicator types into
+                the target indicator type. One or many source indicator types
+                can be specified.
+                <br /> <br />
+                Only one target should be specified. The merge operation will
+                transfer all of the indicator metadata associations to the
+                source indicator types over to the target indicator type.
+            </StandardFormSectionDescription>
             <MergeSourcesTargetWrapper>
                 <BaseSourcesField
                     label={i18n.t('Indicator types to be merged (source)')}
