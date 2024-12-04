@@ -24,10 +24,3 @@
         margin-top: var(--spacers-dp8);
     }
 }
-
-.filterWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    align-items: center;
-}

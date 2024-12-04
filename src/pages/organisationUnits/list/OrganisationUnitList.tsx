@@ -220,10 +220,6 @@ export const OrganisationUnitList = () => {
     return (
         <div>
             <SectionListTitle />
-            <div className={css.filterWrapper}>
-                <IdentifiableFilter />
-                <DynamicFilters />
-            </div>
             <div className={css.listDetailsWrapper}>
                 <Toolbar
                     selectedModels={
