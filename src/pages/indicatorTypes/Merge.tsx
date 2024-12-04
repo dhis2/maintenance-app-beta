@@ -1,8 +1,8 @@
 import { useDataEngine } from '@dhis2/app-runtime'
-import { Card } from '@dhis2/ui'
+import { FORM_ERROR } from 'final-form'
 import React, { useMemo } from 'react'
 import { StandardFormSectionTitle } from '../../components'
-import { MergeFormBase } from '../../components/merge'
+import { DefaultMergeFormContents, MergeFormBase } from '../../components/merge'
 import { getDefaults, useLocationWithState } from '../../lib'
 import { IndicatorTypeMergeForm } from './merge/IndicatorTypeMerge'
 import {
@@ -10,8 +10,6 @@ import {
     mergeFormSchema,
     validate,
 } from './merge/indicatorTypeMergeSchema'
-import { Form } from 'react-final-form'
-import { FORM_ERROR } from 'final-form'
 
 export const Component = () => {
     const location = useLocationWithState<{ selectedModels: Set<string> }>()
@@ -39,9 +37,10 @@ export const Component = () => {
                 type: 'create',
                 data,
             })
+            return undefined
         } catch (e) {
             console.error(e)
-            return { [FORM_ERROR]: e.toString() }
+            return { [FORM_ERROR]: (e as Error).toString() }
         }
     }
 
@@ -51,10 +50,15 @@ export const Component = () => {
             onSubmit={onSubmit}
             validate={validate}
         >
-            <StandardFormSectionTitle>
-                Configure indicator type merge
-            </StandardFormSectionTitle>
-            <IndicatorTypeMergeForm />
+            <DefaultMergeFormContents
+                title={
+                    <StandardFormSectionTitle>
+                        Configure indicator type merge
+                    </StandardFormSectionTitle>
+                }
+            >
+                <IndicatorTypeMergeForm />
+            </DefaultMergeFormContents>
         </MergeFormBase>
     )
 }

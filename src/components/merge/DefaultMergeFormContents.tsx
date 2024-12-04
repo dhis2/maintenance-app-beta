@@ -4,10 +4,12 @@ import React from 'react'
 import { useFormState } from 'react-final-form'
 import { DefaultFormErrorNotice } from '../form/DefaultFormErrorNotice'
 import { LinkButton } from '../LinkButton'
+import { StandardFormSectionTitle } from '../standardForm'
 
 export const DefaultMergeFormContents = ({
     children,
-}: React.PropsWithChildren) => {
+    title,
+}: React.PropsWithChildren<{ title?: React.ReactNode }>) => {
     const { submitting, submitSucceeded } = useFormState({
         subscription: { submitting: true, submitSucceeded: true },
     })
@@ -16,17 +18,21 @@ export const DefaultMergeFormContents = ({
         return <MergeComplete />
     }
 
+    if (submitting) {
+        return (
+            <>
+                {title}
+                <MergeInProgress />
+            </>
+        )
+    }
     return (
-        <div>
-            {submitting && <MergeInProgress />}
-            {!submitting && !submitSucceeded && (
-                <>
-                    {children}
-                    <DefaultFormErrorNotice />
-                    <MergeActions />
-                </>
-            )}
-        </div>
+        <>
+            {title}
+            {children}
+            <DefaultFormErrorNotice />
+            <MergeActions />
+        </>
     )
 }
 
@@ -55,7 +61,9 @@ export const MergeInProgress = () => {
 export const MergeComplete = () => {
     return (
         <div>
-            <h2>Merge complete</h2>
+            <StandardFormSectionTitle>
+                {i18n.t('Merge complete')}
+            </StandardFormSectionTitle>
             <LinkButton to="../">{i18n.t('Back to list')}</LinkButton>
         </div>
     )
