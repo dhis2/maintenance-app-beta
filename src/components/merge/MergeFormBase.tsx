@@ -9,7 +9,9 @@ import { MergeFormValuesBase } from './mergeSchemaBase'
 
 export type MergeFormBaseProps<TValues> = {
     initialValues: Partial<TValues>
-    onSubmit: (values: TValues) => Promise<Record<string, unknown>>
+    onSubmit: (
+        values: TValues
+    ) => Promise<Record<string, unknown | undefined> | undefined>
     validate: (values: TValues) => Record<string, string> | undefined
     children: React.ReactNode
 }
@@ -30,7 +32,7 @@ export const MergeFormBase = <TValues extends MergeFormValuesBase>({
                 submitSucceeded: true,
             }}
         >
-            {({ handleSubmit, submitSucceeded, submitting }) => (
+            {({ handleSubmit }) => (
                 <form
                     onSubmit={handleSubmit}
                     style={{
@@ -41,32 +43,7 @@ export const MergeFormBase = <TValues extends MergeFormValuesBase>({
                         backgroundColor: 'white',
                     }}
                 >
-                    {submitting && (
-                        <span>
-                            <CircularLoader small />
-                            Merging...
-                        </span>
-                    )}
-                    {!submitting && !submitSucceeded && (
-                        <>
-                            {children}
-                            <DefaultFormErrorNotice />
-                            <ButtonStrip>
-                                <Button primary type="submit">
-                                    {i18n.t('Merge')}
-                                </Button>
-                                <Button secondary>{i18n.t('Cancel')}</Button>
-                            </ButtonStrip>
-                        </>
-                    )}
-                    {submitSucceeded && (
-                        <div>
-                            <h2>Merge complete</h2>
-                            <LinkButton to="../">
-                                {i18n.t('Back to list')}
-                            </LinkButton>
-                        </div>
-                    )}
+                    {children}
                 </form>
             )}
         </Form>
