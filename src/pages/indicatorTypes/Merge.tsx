@@ -2,7 +2,11 @@ import { useDataEngine } from '@dhis2/app-runtime'
 import { FORM_ERROR } from 'final-form'
 import React, { useMemo } from 'react'
 import { StandardFormSectionTitle } from '../../components'
-import { DefaultMergeFormContents, MergeFormBase } from '../../components/merge'
+import {
+    DefaultMergeFormContents,
+    MergeComplete,
+    MergeFormBase,
+} from '../../components/merge'
 import { getDefaults, useLocationWithState } from '../../lib'
 import { IndicatorTypeMergeForm } from './merge/IndicatorTypeMerge'
 import {
@@ -55,6 +59,16 @@ export const Component = () => {
                     <StandardFormSectionTitle>
                         Configure indicator type merge
                     </StandardFormSectionTitle>
+                }
+                mergeCompleteElement={
+                    <MergeComplete>
+                        <p>
+                            The indicator types merge operation is complete.
+                            <br /> <br />
+                            All selected indicator types were merged
+                            successfully.
+                        </p>
+                    </MergeComplete>
                 }
             >
                 <IndicatorTypeMergeForm />

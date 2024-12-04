@@ -9,13 +9,17 @@ import { StandardFormSectionTitle } from '../standardForm'
 export const DefaultMergeFormContents = ({
     children,
     title,
-}: React.PropsWithChildren<{ title?: React.ReactNode }>) => {
+    mergeCompleteElement = <MergeComplete />,
+}: React.PropsWithChildren<{
+    title?: React.ReactNode
+    mergeCompleteElement?: React.ReactElement
+}>) => {
     const { submitting, submitSucceeded } = useFormState({
         subscription: { submitting: true, submitSucceeded: true },
     })
 
     if (submitSucceeded) {
-        return <MergeComplete />
+        return mergeCompleteElement
     }
 
     if (submitting) {
@@ -58,12 +62,13 @@ export const MergeInProgress = () => {
     )
 }
 
-export const MergeComplete = () => {
+export const MergeComplete = ({ children }: React.PropsWithChildren) => {
     return (
         <div>
             <StandardFormSectionTitle>
                 {i18n.t('Merge complete')}
             </StandardFormSectionTitle>
+            {children}
             <LinkButton to="../">{i18n.t('Back to list')}</LinkButton>
         </div>
     )

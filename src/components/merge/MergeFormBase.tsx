@@ -1,10 +1,5 @@
-import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip, Card, CircularLoader } from '@dhis2/ui'
 import React from 'react'
 import { Form } from 'react-final-form'
-import { DefaultFormErrorNotice } from '../form/DefaultFormErrorNotice'
-import { LinkButton } from '../LinkButton'
-import { LoadingSpinner } from '../loading/LoadingSpinner'
 import { MergeFormValuesBase } from './mergeSchemaBase'
 
 export type MergeFormBaseProps<TValues> = {
