@@ -14,7 +14,6 @@ export const getSectionPath = (section: Section | string) => {
         return section
     }
     return section.routeName || section.namePlural
-
 }
 
 export const getSectionNewPath = (section: Section | string) => {

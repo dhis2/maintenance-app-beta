@@ -74,7 +74,9 @@ function createSectionLazyRouteFunction(
     return async () => {
         try {
             return await import(
-                `../../pages/${section.routeName || section.namePlural}/${componentFileName}`
+                `../../pages/${
+                    section.routeName || section.namePlural
+                }/${componentFileName}`
             )
         } catch (e) {
             // means the component is not implemented yet
