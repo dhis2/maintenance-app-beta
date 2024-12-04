@@ -1,22 +1,16 @@
-import React, { useMemo, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
+import { useModelMultiSelectQuery } from '../../../lib/models/useModelMultiSelectQuery'
 import { PlainResourceQuery } from '../../../types'
-import { DisplayableModel } from '../../../types/models'
+import { PartialLoadedDisplayableModel } from '../../../types/models'
 import {
     BaseModelMultiSelect,
     BaseModelMultiSelectProps,
 } from './BaseModelMultiSelect'
-import { useModelMultiSelectQuery } from './useModelMultiSelectQuery'
 
-const defaultQuery = {
-    params: {
-        order: 'displayName:asc',
-        fields: ['id', 'displayName'],
-        pageSize: 10,
-    },
-} satisfies Omit<PlainResourceQuery, 'resource'>
-
-export type ModelMultiSelectProps<TModel extends DisplayableModel> = Omit<
+export type ModelMultiSelectProps<
+    TModel extends PartialLoadedDisplayableModel
+> = Omit<
     BaseModelMultiSelectProps<TModel>,
     | 'available'
     | 'onFilterChange'
@@ -29,19 +23,17 @@ export type ModelMultiSelectProps<TModel extends DisplayableModel> = Omit<
 > & {
     query: Omit<PlainResourceQuery, 'id'>
     onFilterChange?: (value: string) => void
+    /* Select is a way to transform or filter out available options */
     select?: (value: TModel[]) => TModel[]
-    selected: TModel[] | string[] | undefined
+    selected: TModel[] | undefined
 }
 
-export const ModelMultiSelect = <TModel extends DisplayableModel>({
+export const ModelMultiSelect = <TModel extends PartialLoadedDisplayableModel>({
     selected = [],
     query,
     select,
     ...baseModelSingleSelectProps
 }: ModelMultiSelectProps<TModel>) => {
-    // keep select in ref, so we dont recompute for inline selects
-    const selectRef = useRef(select)
-    selectRef.current = select
     const [searchTerm, setSearchTerm] = useState('')
     const searchFilter = `identifiable:token:${searchTerm}`
     const filter: string[] = searchTerm ? [searchFilter] : []
@@ -50,13 +42,13 @@ export const ModelMultiSelect = <TModel extends DisplayableModel>({
     const queryObject = {
         ...query,
         params: {
-            ...defaultQuery.params,
             ...params,
             filter: filter.concat(params?.filter || []),
         },
     }
     const {
         selected: selectedData,
+        selectedQuery,
         available: availableData,
         isLoading,
         error,
@@ -65,10 +57,24 @@ export const ModelMultiSelect = <TModel extends DisplayableModel>({
         query: queryObject,
         selected,
     })
+    const onChange = baseModelSingleSelectProps.onChange
 
-    const resolvedAvailable = useMemo(() => {
-        return select ? select(availableData) : availableData
-    }, [availableData, select])
+    // if we had to fetch selected data, update the form value
+    // this basically adds the displayName to the formState
+    useEffect(() => {
+        if (!selectedQuery.data) {
+            return
+        }
+        const hasSelectedWithoutData = selected.some(
+            (s) => s.displayName === undefined
+        )
+
+        if (hasSelectedWithoutData) {
+            onChange({ selected: selectedData })
+        }
+    }, [selectedQuery.data, selected, selectedData, onChange])
+
+    const resolvedAvailable = select ? select(availableData) : availableData
 
     const handleFilterChange = useDebouncedCallback(({ value }) => {
         if (value != undefined) {

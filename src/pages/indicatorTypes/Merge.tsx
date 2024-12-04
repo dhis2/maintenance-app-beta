@@ -16,6 +16,7 @@ import { FORM_ERROR } from 'final-form'
 export const Component = () => {
     const location = useLocationWithState<{ selectedModels: Set<string> }>()
     const dataEngine = useDataEngine()
+
     const initialValues = useMemo(() => {
         const defaults = {
             ...getDefaults(mergeFormSchema),
@@ -23,8 +24,6 @@ export const Component = () => {
             sources: Array.from(location.state?.selectedModels || []).map(
                 (id) => ({
                     id,
-                    // placeholder for displayName, select will load labels
-                    displayName: 'Loading...',
                 })
             ),
         }
@@ -34,14 +33,11 @@ export const Component = () => {
 
     const onSubmit = async (values: IndicatorTypeMergeFormValues) => {
         try {
+            const data = mergeFormSchema.parse(values)
             const res = await dataEngine.mutate({
                 resource: 'indicatorTypes/merge',
                 type: 'create',
-                data: {
-                    target: values.target.id,
-                    sources: values.sources.map(({ id }) => id),
-                    deleteSources: values.deleteSources === 'delete',
-                },
+                data,
             })
         } catch (e) {
             console.error(e)

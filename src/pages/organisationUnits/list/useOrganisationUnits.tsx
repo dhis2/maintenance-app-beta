@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
-import { useQuery, useQueries } from 'react-query'
+import { useQuery, useQueries, useQueryClient } from 'react-query'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
 import { OrganisationUnit, PagedResponse } from '../../../types/generated'
 
@@ -78,7 +78,6 @@ export const usePaginatedChildrenOrgUnitsController = (
 ) => {
     const boundQueryFn = useBoundResourceQueryFn()
     const parentIds = options.parentIds
-
     // store a "map" of pages to fetch for each parent id
     const [parentIdPages, setFetchPages] = useState<ParentIdToPages>(
         Object.fromEntries(Object.keys(parentIds).map((id) => [id, [1]]))
@@ -132,6 +131,7 @@ export const usePaginatedChildrenOrgUnitsController = (
     })
 
     const queries = useQueries(queryObjects)
+
     return {
         queries,
         fetchNextPage,
