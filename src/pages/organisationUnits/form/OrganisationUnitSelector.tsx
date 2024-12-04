@@ -10,8 +10,8 @@ export function OrganisationUnitSelector() {
     const fieldName = 'parent'
     const { input, meta } = useField(fieldName, { format: (value) => value })
     const userRootOrgUnits = useCurrentUserRootOrgUnits()
-    const userRootOrgUnitsIds = userRootOrgUnits.map((unit) => `${unit.id}`)
-    const userRootOrgUnitsPaths = userRootOrgUnits.map((unit) => `/${unit.id}`)
+    const userRootOrgUnitsIds = userRootOrgUnits.map((unit) => unit.id)
+    const userRootOrgUnitsPaths = userRootOrgUnits.map((unit) => unit.path)
     const [selected, setSelected] = useState<[string] | []>(
         input.value?.path ? [input.value.path] : []
     )

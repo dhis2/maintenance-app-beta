@@ -38,7 +38,6 @@ export function DateField({
         if (input.value) {
             const dateWithNoTimestamp = input.value.substring(0, 10)
             input.onChange(dateWithNoTimestamp)
-            input.onBlur()
         }
     }, [])
     const handleChange: CalendarInputProps['onDateSelect'] = (
