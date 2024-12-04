@@ -1,13 +1,13 @@
 import React, { useCallback, useMemo } from 'react'
-import { DisplayableModel } from '../../../types/models'
+import { PartialLoadedDisplayableModel } from '../../../types/models'
 import {
     SearchableMultiSelect,
     SearchableMultiSelectPropTypes,
 } from '../../SearchableMultiSelect'
 
-const toDisplayOption = (model: DisplayableModel) => ({
+const toDisplayOption = (model: PartialLoadedDisplayableModel) => ({
     value: model.id,
-    label: model.displayName,
+    label: model.displayName || 'Loading...',
 })
 
 type OwnProps<TModel> = {
@@ -17,14 +17,18 @@ type OwnProps<TModel> = {
     noValueOption?: { value: string; label: string }
 }
 
-export type BaseModelMultiSelectProps<TModel extends DisplayableModel> = Omit<
+export type BaseModelMultiSelectProps<
+    TModel extends PartialLoadedDisplayableModel
+> = Omit<
     SearchableMultiSelectPropTypes,
     keyof OwnProps<TModel> | 'options' | 'selected'
 > &
     OwnProps<TModel>
 
 /* Simple wrapper component handle generic models with MultiSelect-component. */
-export const BaseModelMultiSelect = <TModel extends DisplayableModel>({
+export const BaseModelMultiSelect = <
+    TModel extends PartialLoadedDisplayableModel
+>({
     available,
     selected,
     onChange,
