@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useField } from 'react-final-form'
 import { useDebouncedCallback } from 'use-debounce'
 import { useModelMultiSelectQuery } from '../../lib'
-import { PlainResourceQuery } from '../../types'
+import { PlainResourceQuery, Optional } from '../../types'
 import { DisplayableModel } from '../../types/models'
 import {
     ModelMultiSelectField,
@@ -11,8 +11,6 @@ import {
 } from '../metadataFormControls'
 import { SearchableSingleSelect } from '../SearchableSingleSelect'
 import css from './MergeFields.module.css'
-
-type Optional<T, K extends keyof T> = Partial<Pick<T, K>> & Omit<T, K>
 
 type BaseSourceFieldProps = Optional<
     ModelMultiSelectFieldProps<DisplayableModel>,
