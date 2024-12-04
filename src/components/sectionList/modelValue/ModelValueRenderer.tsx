@@ -41,7 +41,7 @@ export const ModelValueRenderer = ({
         return <BooleanValue value={value} />
     }
 
-    if (value) {
+    if (value ?? false) {
         return <TextValue value={value.toString()} />
     }
     return null

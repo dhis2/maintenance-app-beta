@@ -11,10 +11,13 @@ import {
     NameField,
 } from '../../../components'
 import { SECTIONS_MAP, useSchemaSectionHandleOrThrow } from '../../../lib'
+import { useValidator } from '../../../lib/models/useFieldValidators'
 
 export const IndicatorTypesFormFields = () => {
     const section = SECTIONS_MAP.indicatorType
     const schemaSection = useSchemaSectionHandleOrThrow()
+
+    const validateFactor = useValidator({ schemaSection, property: 'factor' })
 
     return (
         <>
@@ -39,6 +42,7 @@ export const IndicatorTypesFormFields = () => {
                         inputWidth="400px"
                         component={InputFieldFF}
                         label={i18n.t('Factor')}
+                        validate={validateFactor}
                         required
                     />
                 </StandardFormField>
