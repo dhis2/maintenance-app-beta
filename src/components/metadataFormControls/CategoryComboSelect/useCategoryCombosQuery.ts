@@ -44,7 +44,7 @@ const DEFAULT_CATEGORY_SELECT_OPTION = {
     label: DEFAULT_CATEGORY_COMBO.displayName,
 }
 
-export function useOptionsQuery() {
+export function useCategoryCombosQuery() {
     const [loadedOptions, setLoadedOptions] = useState<SelectOption[]>([])
     // The gist doesn't include the `isDefault` value, need to use `useDataQuery`
     const queryResult = useDataQuery<CategoryComboQueryResult>(

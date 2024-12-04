@@ -39,7 +39,7 @@ export const BaseModelSingleSelect = <
     const { allModelsMap, allSingleSelectOptions } = useMemo(() => {
         const allModelsMap = new Map(available.map((o) => [o.id, o]))
         // due to pagination, the selected model might not be in the available list, so add it
-        if (selected && !allModelsMap.get(selected.id)) {
+        if (selected && selected.id && !allModelsMap.get(selected.id)) {
             allModelsMap.set(selected.id, selected)
         }
         const allSingleSelectOptions = Array.from(allModelsMap).map(
