@@ -25,7 +25,7 @@ export const organisationUnitSchema = identifiable
                 }),
             })
             .optional(),
-        openingDate: z.string().date(),
+        openingDate: z.coerce.date(),
         email: z.string().email().optional(),
         address: z
             .string()
@@ -39,7 +39,7 @@ export const organisationUnitSchema = identifiable
             .string()
             .url({ message: i18n.t('Must be a valid url') })
             .optional(),
-        closedDate: z.string().date().optional(),
+        closedDate: z.coerce.date().optional(),
         comment: z
             .string()
             .max(2000, {

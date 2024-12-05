@@ -32,14 +32,10 @@ export function DateField({
         valid: true,
     })
 
-    const { input, meta } = useField<string | undefined>(name)
+    const { input } = useField<string | undefined>(name, {
+        format: (value) => (value ? value.substring(0, 10) : ''),
+    })
 
-    useEffect(() => {
-        if (input.value) {
-            const dateWithNoTimestamp = input.value.substring(0, 10)
-            input.onChange(dateWithNoTimestamp)
-        }
-    }, [])
     const handleChange: CalendarInputProps['onDateSelect'] = (
         payload: {
             calendarDateString: string
