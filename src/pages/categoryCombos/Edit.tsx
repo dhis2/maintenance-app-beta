@@ -11,7 +11,7 @@ const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     'name',
     'code',
-    'categories[id,displayName]',
+    'categories[id,displayName,categoryOptions~size~rename(categoryOptionsSize)],',
     'skipTotal',
     'dataDimensionType',
 ] as const
