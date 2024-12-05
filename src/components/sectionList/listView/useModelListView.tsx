@@ -148,7 +148,9 @@ export const useModelListView = () => {
     const selectedView = query.data || defaultView
 
     const columns = selectedView.columns
-    const filters = selectedView.filters
+    const filters = query.data?.filters?.length
+        ? query.data.filters
+        : defaultView.filters
     return { view: selectedView, columns, filters, query }
 }
 

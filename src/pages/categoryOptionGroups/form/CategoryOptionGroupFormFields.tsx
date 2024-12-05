@@ -65,17 +65,6 @@ function CategoryOptionGroupFormFields() {
                         />
                     </HorizontalFieldGroup>
                 </StandardFormField>
-                <StandardFormField>
-                    <Field
-                        name="dataDimension"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
-                        label={i18n.t('Use as data dimension')}
-                        helpText={i18n.t(
-                            'Category option group will be available to the analytics as another dimension'
-                        )}
-                    />
-                </StandardFormField>
             </StandardFormSection>
 
             <StandardFormSection>
