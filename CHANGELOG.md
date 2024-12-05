@@ -1,3 +1,14 @@
+## [0.19.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.19.1...v0.19.2) (2024-12-05)
+
+
+### Bug Fixes
+
+* date field to format date before displaying, org unit filters ([#456](https://github.com/dhis2/maintenance-app-beta/issues/456)) ([8537bce](https://github.com/dhis2/maintenance-app-beta/commit/8537bceb284d098500eed2497292c9ab033ebff0))
+* refresh list view on close of dialog ([#461](https://github.com/dhis2/maintenance-app-beta/issues/461)) ([c10d79f](https://github.com/dhis2/maintenance-app-beta/commit/c10d79ffba8383e9559906f98bb858e6113bba83))
+* **categoryCombo:** validation and load optionSize on initial load [skip release] ([#457](https://github.com/dhis2/maintenance-app-beta/issues/457)) ([a1a6110](https://github.com/dhis2/maintenance-app-beta/commit/a1a611021f8e9db17bf87c3e28a32ccc1dcbf691))
+* **categoryOption:** load formName [skip release] ([#458](https://github.com/dhis2/maintenance-app-beta/issues/458)) ([bb3baee](https://github.com/dhis2/maintenance-app-beta/commit/bb3baee8c14ac44554e75d48abd0d80113d8e8cf))
+* **categoryOptionGroups:** add custom attributesection to group/groupset [skip release] ([#459](https://github.com/dhis2/maintenance-app-beta/issues/459)) ([5c853bc](https://github.com/dhis2/maintenance-app-beta/commit/5c853bc995886b1d6ee97be447f87ba3c0df76dd))
+
 ## [0.19.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.19.0...v0.19.1) (2024-12-03)
 
 
