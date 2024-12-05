@@ -1,7 +1,12 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, DataTableToolbar } from '@dhis2/ui'
 import React from 'react'
-import { useSchemaFromHandle } from '../../../lib'
+import {
+    useCanMergeModelInCurrentSection,
+    useLocationState,
+    useSchemaFromHandle,
+} from '../../../lib'
+import { LinkButton } from '../../LinkButton'
 import { BulkSharingDialog } from '../bulk/BulkSharingDialog'
 import css from './Toolbar.module.css'
 
@@ -18,8 +23,13 @@ export const ToolbarSelected = ({
 }: ToolbarSelectedProps) => {
     const [sharingDialogOpen, setSharingDialogOpen] = React.useState(false)
     const sharable = useSchemaFromHandle().shareable
-
+    const mergeable = useCanMergeModelInCurrentSection()
     const handleClose = () => setSharingDialogOpen(false)
+
+    const searchStateWithSelectedModels = useLocationState({
+        selectedModels,
+    })
+
     return (
         <DataTableToolbar className={css.listHeaderBulk}>
             <span>
@@ -29,6 +39,15 @@ export const ToolbarSelected = ({
                 <Button small onClick={() => setSharingDialogOpen(true)}>
                     {i18n.t('Update sharing')}
                 </Button>
+            )}
+            {mergeable && (
+                <LinkButton
+                    small
+                    to={'merge'}
+                    state={searchStateWithSelectedModels}
+                >
+                    {i18n.t('Merge...')}
+                </LinkButton>
             )}
             {downloadButtonElement}
             <Button small onClick={() => onDeselectAll()}>
