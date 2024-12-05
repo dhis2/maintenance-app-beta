@@ -42,12 +42,17 @@ type ResolveTransformer<Model, S> =
               Pick<Rename<Model, FieldName, NewName>, NewName>,
               `${NewName}${Rest}`
           >
-        : S extends `${infer FieldName extends string}~size${infer Rest}`
+        : S extends `${infer FieldName extends string &
+              keyof Model}~size${infer Rest}`
         ? ResolveTransformer<
               { [K in FieldName]: number },
               `${FieldName}${Rest}`
           >
         : Model
+
+type SplitNested<S> = S extends `${infer Nested}],${infer Rest}`
+    ? [`${Nested}]`, Rest]
+    : [S]
 
 type RecursivePickWithFieldFilter<
     Model,
@@ -63,7 +68,10 @@ type RecursivePickWithFieldFilter<
           // create an object with root key, and recursively pick the nested fields
           [K in Root]: MaybeCollection<
               Prettify<
-                  RecursivePickWithFieldFilter<GetModel<Model[Root]>, Nested>
+                  PickWithFieldFilters<
+                      GetModel<Model[Root]>,
+                      SplitNested<Nested>
+                  >
               >,
               Model[Root]
           >
@@ -103,3 +111,14 @@ export type PickWithFieldFilters<
             >
         >
     >
+
+// type Test = PickWithFieldFilters<
+//     CategoryCombo,
+//     [
+//         'id',
+//         'name',
+//         'categories[id,displayName,code,categoryOptions[id,displayName],attributeValues~size]',
+//         'categoryOptionCombos~size~rename(cocSize)'
+//         // 'categories~size~rename(K)'
+//     ]
+// >
