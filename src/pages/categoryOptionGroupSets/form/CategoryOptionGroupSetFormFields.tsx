@@ -3,6 +3,7 @@ import { RadioFieldFF, CheckboxFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field } from 'react-final-form'
 import {
+    CustomAttributesSection,
     DefaultIdentifiableFields,
     DescriptionField,
     HorizontalFieldGroup,
@@ -112,6 +113,7 @@ function CategoryOptionGroupSetFormFields() {
                     </StandardFormField>
                 </StandardFormField>
             </StandardFormSection>
+            <CustomAttributesSection schemaSection={section} />
         </>
     )
 }
