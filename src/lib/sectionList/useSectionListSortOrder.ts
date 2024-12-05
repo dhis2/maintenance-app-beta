@@ -41,7 +41,7 @@ export const isValidSortPathForSchema = (schema: Schema, path: string) => {
     const schemaProperty = getSchemaPropertyForPath(schema, path)
 
     // sorting for metadata-API only works on simple and persisted properties
-    if (schemaProperty && schemaProperty.simple && schemaProperty.persisted) {
+    if (schemaProperty && schemaProperty.simple) {
         return true
     }
     return false

@@ -44,6 +44,11 @@ export const SectionListWrapper = ({
         BaseListModel | undefined
     >(undefined)
 
+    const onSharingDialogClose = () => {
+        setSharingDialogId(undefined)
+        refetch()
+    }
+
     const SectionListMessage = () => {
         if (error) {
             console.log(error.details || error)
@@ -159,7 +164,7 @@ export const SectionListWrapper = ({
                     but it works if you pass the correct type*/
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     type={schema.singular as any}
-                    onClose={() => setSharingDialogId(undefined)}
+                    onClose={() => onSharingDialogClose()}
                 />
             )}
             {translationDialogModel && (
