@@ -1,3 +1,10 @@
+## [0.19.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.19.2...v0.19.3) (2024-12-05)
+
+
+### Bug Fixes
+
+* **categoryOptionGroup:** remove dataDimension field ([#460](https://github.com/dhis2/maintenance-app-beta/issues/460)) ([276e4ab](https://github.com/dhis2/maintenance-app-beta/commit/276e4abc4ec378afafa7414d8333aec1208f00e5))
+
 ## [0.19.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.19.1...v0.19.2) (2024-12-05)
 
 
