@@ -16,7 +16,6 @@ export const categoryOptionGroupSchema = identifiable
         dataDimensionType: z
             .nativeEnum(CategoryOptionGroup.dataDimensionType)
             .default(CategoryOptionGroup.dataDimensionType.DISAGGREGATION),
-        dataDimension: z.boolean().default(true),
         categoryOptions: referenceCollection
             .min(1, 'At least one category option is required')
             .default([]),

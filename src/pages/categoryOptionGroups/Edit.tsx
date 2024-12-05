@@ -22,7 +22,6 @@ const fieldFilters = [
     'code',
     'description',
     'categoryOptions[id,displayName]',
-    'dataDimension',
     'dataDimensionType',
 ] as const
 
