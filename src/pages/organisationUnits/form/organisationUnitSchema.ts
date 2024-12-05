@@ -10,15 +10,7 @@ export const organisationUnitSchema = identifiable
     .extend({
         shortName: z.string().trim().default(''),
         code: z.string().trim().optional(),
-        description: z
-            .string()
-            .trim()
-            .max(2147483647, {
-                message: i18n.t('Should not exceed {{maxLength}} characters', {
-                    maxLength: 2147483647,
-                }),
-            })
-            .optional(),
+        description: z.string().trim().optional(),
         image: z.object({ id: z.string() }).optional(),
         phoneNumber: z
             .string()
@@ -33,7 +25,7 @@ export const organisationUnitSchema = identifiable
                 }),
             })
             .optional(),
-        openingDate: z.string().date(),
+        openingDate: z.coerce.date(),
         email: z.string().email().optional(),
         address: z
             .string()
@@ -47,12 +39,12 @@ export const organisationUnitSchema = identifiable
             .string()
             .url({ message: i18n.t('Must be a valid url') })
             .optional(),
-        closedDate: z.string().date().optional(),
+        closedDate: z.coerce.date().optional(),
         comment: z
             .string()
-            .max(2147483647, {
+            .max(2000, {
                 message: i18n.t('Should not exceed {{maxLength}} characters', {
-                    maxLength: 2147483647,
+                    maxLength: 2000,
                 }),
             })
             .optional(),

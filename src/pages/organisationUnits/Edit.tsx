@@ -10,7 +10,11 @@ import {
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { OrganisationUnit, PickWithFieldFilters } from '../../types/generated'
-import { OrganisationUnitFormField, validate } from './form'
+import {
+    OrganisationUnitFormField,
+    organisationUnitSchema,
+    validate,
+} from './form'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
