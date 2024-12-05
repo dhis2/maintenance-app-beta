@@ -24,6 +24,31 @@ type MaybeCollection<Model, FullModel> = FullModel extends Array<infer U>
     ? Model[] | Extract<FullModel, undefined | null>
     : Model | Extract<FullModel, undefined | null>
 
+type Rename<T, K extends keyof T, N extends string> = Pick<
+    T,
+    Exclude<keyof T, K>
+> & { [P in N]: T[K] }
+
+type IsFieldTransformer<S> = S extends `${string}~size`
+    ? true
+    : S extends `${string}~rename(${string})`
+    ? true
+    : false
+
+type ResolveTransformer<Model, S> =
+    S extends `${infer FieldName extends string &
+        keyof Model}~rename(${infer NewName extends string})${infer Rest}`
+        ? ResolveTransformer<
+              Pick<Rename<Model, FieldName, NewName>, NewName>,
+              `${NewName}${Rest}`
+          >
+        : S extends `${infer FieldName extends string}~size${infer Rest}`
+        ? ResolveTransformer<
+              { [K in FieldName]: number },
+              `${FieldName}${Rest}`
+          >
+        : Model
+
 type RecursivePickWithFieldFilter<
     Model,
     S extends string,
@@ -49,7 +74,10 @@ type RecursivePickWithFieldFilter<
     ? Pick<Model, S>
     : S extends ':owner'
     ? BaseIdentifiableObject
-    : never //[Model, S] // not a key of Model, ignore
+    : IsFieldTransformer<S> extends true
+    ? ResolveTransformer<Model, S>
+    : never
+// : never //[Model, S] // not a key of Model, ignore
 
 /**
  * From Model, Pick properties (and nested properties) using a field filter-array.
