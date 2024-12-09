@@ -41,7 +41,7 @@ export const MergeFormBase = <TValues extends MergeFormValuesBase>({
 export const StyledMergeForm = ({
     children,
     ...formProps
-}: React.PropsWithChildren<React.ComponentProps<'form'>>) => (
+}: React.ComponentProps<'form'>) => (
     <form className={cx(css.mergeForm, formProps.className)} {...formProps}>
         {children}
     </form>

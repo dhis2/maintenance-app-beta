@@ -1,0 +1,8 @@
+.mergeForm {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: var(--spacers-dp16);
+    box-shadow: var(--elevations-e100);
+    border-radius: 3px;
+}
