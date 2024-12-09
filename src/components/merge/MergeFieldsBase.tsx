@@ -95,10 +95,11 @@ export const BaseTargetField = ({
             dataTest="formfields-mergetarget"
             error={targetField.meta.invalid}
             validationText={
-                (targetField.meta.touched &&
-                    targetField.meta.error?.id?.toString()) ||
+                ((targetField.meta.touched || targetField.meta.submitFailed) &&
+                    targetField.meta.error?.toString()) ||
                 ''
             }
+            required
         >
             <SearchableSingleSelect
                 loading={queryResult.isLoading}

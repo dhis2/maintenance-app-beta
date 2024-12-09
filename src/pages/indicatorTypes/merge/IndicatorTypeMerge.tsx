@@ -1,6 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
-import { z } from 'zod'
 import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
@@ -11,18 +10,8 @@ import {
     MergeSourcesTargetWrapper,
 } from '../../../components/merge'
 import { DeleteSourcesFields } from '../../../components/merge/DeleteSourcesRadioFields'
-import { mergeFormSchema } from './indicatorTypeMergeSchema'
-import { useFormState } from 'react-final-form'
-
-type DataElementMergeFormProps = {
-    selectedModels: string[] // { id: string; displayName: string }[]
-}
-
-type IndicatorTypeFormValues = z.infer<typeof mergeFormSchema>
 
 export const IndicatorTypeMergeForm = () => {
-    const formState = useFormState()
-    console.log({ formState })
     return (
         <>
             <StandardFormSectionDescription>
