@@ -34,7 +34,6 @@ export function ModelMultiSelectField<TModel extends DisplayableModel>({
         validateFields: [],
     })
 
-    console.log('multifield', input.value)
     return (
         <Field
             dataTest={`formfields-modelmultiselect-${name}`}

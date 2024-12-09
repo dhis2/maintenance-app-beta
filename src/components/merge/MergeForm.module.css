@@ -5,4 +5,11 @@
     gap: var(--spacers-dp16);
     box-shadow: var(--elevations-e100);
     border-radius: 3px;
+    background-color: var(--colors-white);
+}
+
+.mergeInProgress {
+    display: flex;
+    gap: var(--spacers-dp8);
+    font-weight: 500;
 }

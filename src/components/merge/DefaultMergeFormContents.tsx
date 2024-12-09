@@ -1,22 +1,29 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip, CircularLoader } from '@dhis2/ui'
 import React from 'react'
-import { useFormState } from 'react-final-form'
+import { useField, useFormState } from 'react-final-form'
+import { useModelSectionHandleOrThrow } from '../../lib'
+import { ModelSection } from '../../types'
 import { DefaultFormErrorNotice } from '../form/DefaultFormErrorNotice'
 import { LinkButton } from '../LinkButton'
 import { StandardFormSectionTitle } from '../standardForm'
+import css from './MergeForm.module.css'
+import { MergeFormValuesBase } from './mergeSchemaBase'
 
 export const DefaultMergeFormContents = ({
     children,
     title,
     mergeCompleteElement = <MergeComplete />,
+    mergeInProgressElement,
 }: React.PropsWithChildren<{
     title?: React.ReactNode
     mergeCompleteElement?: React.ReactElement
+    mergeInProgressElement?: React.ReactElement
 }>) => {
-    const { submitting, submitSucceeded } = useFormState({
+    const { submitting, submitSucceeded } = useFormState<MergeFormValuesBase>({
         subscription: { submitting: true, submitSucceeded: true },
     })
+    const section = useModelSectionHandleOrThrow()
 
     if (submitSucceeded) {
         return mergeCompleteElement
@@ -26,7 +33,9 @@ export const DefaultMergeFormContents = ({
         return (
             <>
                 {title}
-                <MergeInProgress />
+                {mergeInProgressElement ?? (
+                    <MergeInProgress modelSection={section} />
+                )}
             </>
         )
     }
@@ -53,11 +62,26 @@ export const MergeActions = () => {
     )
 }
 
-export const MergeInProgress = () => {
+export const MergeInProgress = ({
+    modelSection,
+}: {
+    modelSection: ModelSection
+}) => {
+    const count = useField<string[]>('sources').input.value?.length
+    const modelLabel =
+        count === 1 ? modelSection.title : modelSection.titlePlural
+
+    const inProgressLabel = count
+        ? i18n.t('Merging {{count}} {{model}}...', {
+              count: count,
+              model: modelLabel,
+          })
+        : i18n.t('Merging...')
+
     return (
-        <div>
+        <div className={css.mergeInProgress}>
             <CircularLoader small />
-            Merging...
+            {inProgressLabel}
         </div>
     )
 }
