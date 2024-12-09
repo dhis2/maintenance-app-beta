@@ -5,6 +5,7 @@ import dataElementSchemaMock from '../../__mocks__/schema/dataElementsSchema.jso
 import { useSchemaStore } from '../../lib/schemas/schemaStore'
 import { ModelSchemas } from '../../lib/useLoadApp'
 import { ComponentWithProvider } from '../../testUtils/TestComponentWithRouter'
+import { generateDefaultAddFormTests } from '../defaultFormTests'
 import attributes from './__mocks__/attributes.json'
 import categoryCombosPage1 from './__mocks__/categoryCombosPage1.json'
 import { Component as New } from './New'
@@ -55,6 +56,8 @@ async function changeSingleSelect(
 
     fireEvent.click(optionElement)
 }
+
+generateDefaultAddFormTests({ componentName: 'Data element group set' })
 
 describe('Data Elements / New', () => {
     const consoleWarn = console.warn
@@ -192,4 +195,13 @@ describe('Data Elements / New', () => {
         const listView = await result.findByText('List view')
         expect(listView).toBeTruthy()
     })
+
+    it('contain all needed field', () => {})
+    it('should show an error if name field is too long', () => {})
+    it('should show an error if short name field is too long', () => {})
+    it('should show an error if code field is too long', () => {})
+    it('should show an error if description field is too long', () => {})
+    it('should show an error if name field is a duplicate', () => {})
+    it('should show an error if short name field is a duplicate', () => {})
+    it('should show an error if code field is a duplicate', () => {})
 })
