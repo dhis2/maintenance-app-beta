@@ -91,7 +91,7 @@ const renderList = async ({
     return result
 }
 
-describe('Org Unit List', () => {
+describe('Organisation unit list', () => {
     const originalWarn = console.warn
     jest.spyOn(console, 'warn').mockImplementation((value) => {
         if (!value.match(/No server timezone/)) {
