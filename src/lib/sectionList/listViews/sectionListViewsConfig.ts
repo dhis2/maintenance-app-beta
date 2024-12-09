@@ -145,6 +145,7 @@ export const modelListViewsConfig = {
         },
         filters: {
             default: [],
+            overrideDefaultAvailable: true,
         },
     },
     categoryOption: {

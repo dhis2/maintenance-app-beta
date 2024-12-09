@@ -149,6 +149,7 @@ export const useModelListView = () => {
 
     const columns = selectedView.columns
     const filters = selectedView.filters
+
     return { view: selectedView, columns, filters, query }
 }
 

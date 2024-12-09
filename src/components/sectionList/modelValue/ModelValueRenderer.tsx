@@ -21,7 +21,6 @@ export const ModelValueRenderer = ({
     const hasToStringMethod = (
         value: unknown
     ): value is { toString: () => string } =>
-        typeof value === 'object' &&
         typeof (value as any).toString === 'function'
 
     if (path === 'sharing.public' && typeof value === 'string') {

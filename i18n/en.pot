@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-04T10:11:21.431Z\n"
-"PO-Revision-Date: 2024-12-04T10:11:21.431Z\n"
+"POT-Creation-Date: 2024-12-09T08:26:30.983Z\n"
+"PO-Revision-Date: 2024-12-09T08:26:30.983Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1009,6 +1009,9 @@ msgstr "Skip category total in reports"
 
 msgid "Choose the categories to include in this category combo."
 msgstr "Choose the categories to include in this category combo."
+
+msgid "At least one category is required"
+msgstr "At least one category is required"
 
 msgid ""
 "The number of generated category option combinations exceeds the limit of "

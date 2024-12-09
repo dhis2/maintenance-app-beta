@@ -3,6 +3,7 @@ import { RadioFieldFF, CheckboxFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field } from 'react-final-form'
 import {
+    CustomAttributesSection,
     DefaultIdentifiableFields,
     DescriptionField,
     HorizontalFieldGroup,
@@ -65,17 +66,6 @@ function CategoryOptionGroupFormFields() {
                         />
                     </HorizontalFieldGroup>
                 </StandardFormField>
-                <StandardFormField>
-                    <Field
-                        name="dataDimension"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
-                        label={i18n.t('Use as data dimension')}
-                        helpText={i18n.t(
-                            'Category option group will be available to the analytics as another dimension'
-                        )}
-                    />
-                </StandardFormField>
             </StandardFormSection>
 
             <StandardFormSection>
@@ -110,6 +100,7 @@ function CategoryOptionGroupFormFields() {
                         />
                     </StandardFormField>
                 </StandardFormField>
+                <CustomAttributesSection schemaSection={section} />
             </StandardFormSection>
         </>
     )

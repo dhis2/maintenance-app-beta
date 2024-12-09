@@ -23,6 +23,7 @@ export const categoryComboSchema = identifiable
                     categoryOptionsSize: z.number(),
                 })
             )
+            .min(1, i18n.t('At least one category is required'))
             .refine(
                 (categories) => {
                     const generatedCocsCount = categories.reduce(
