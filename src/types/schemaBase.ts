@@ -35,6 +35,8 @@ export interface SchemaFieldProperty {
     unique: boolean
     required: boolean
     length?: number
+    max?: number
+    min?: number
     persisted: boolean
     collectionName?: string
     collection: boolean

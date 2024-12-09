@@ -18,6 +18,12 @@ export const ModelValueRenderer = ({
     value,
     schemaProperty,
 }: ValueDetails) => {
+    const hasToStringMethod = (
+        value: unknown
+    ): value is { toString: () => string } =>
+        typeof value === 'object' &&
+        typeof (value as any).toString === 'function'
+
     if (path === 'sharing.public' && typeof value === 'string') {
         return <PublicAccessValue value={value} />
     }
@@ -41,8 +47,9 @@ export const ModelValueRenderer = ({
         return <BooleanValue value={value} />
     }
 
-    if (value ?? false) {
+    if (value !== null && value !== undefined && hasToStringMethod(value)) {
         return <TextValue value={value.toString()} />
     }
+
     return null
 }
