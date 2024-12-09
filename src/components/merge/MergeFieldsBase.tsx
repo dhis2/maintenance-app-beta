@@ -113,13 +113,9 @@ export const BaseTargetField = ({
                 showEndLoader={!!queryResult.availableQuery.hasNextPage}
                 selected={targetField.input.value?.id}
                 onChange={({ selected }) => {
-                    targetField.input.onChange({
-                        target: {
-                            value: queryResult.available.find(
-                                (d) => d.id === selected
-                            ),
-                        },
-                    })
+                    targetField.input.onChange(
+                        queryResult.available.find((d) => d.id === selected)
+                    )
                 }}
                 placeholder={placeholder || 'Select the model to merge into'}
             />

@@ -1,5 +1,7 @@
+import cx from 'classnames'
 import React from 'react'
 import { Form } from 'react-final-form'
+import css from './MergeForm.module.css'
 import { MergeFormValuesBase } from './mergeSchemaBase'
 
 export type MergeFormBaseProps<TValues> = {
@@ -28,19 +30,19 @@ export const MergeFormBase = <TValues extends MergeFormValuesBase>({
             }}
         >
             {({ handleSubmit }) => (
-                <form
-                    onSubmit={handleSubmit}
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '16px',
-                        padding: '16px',
-                        backgroundColor: 'white',
-                    }}
-                >
+                <StyledMergeForm onSubmit={handleSubmit}>
                     {children}
-                </form>
+                </StyledMergeForm>
             )}
         </Form>
     )
 }
+
+export const StyledMergeForm = ({
+    children,
+    ...formProps
+}: React.PropsWithChildren<React.ComponentProps<'form'>>) => (
+    <form className={cx(css.mergeForm, formProps.className)} {...formProps}>
+        {children}
+    </form>
+)
