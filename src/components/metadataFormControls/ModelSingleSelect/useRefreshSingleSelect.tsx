@@ -9,10 +9,9 @@ export const useRefreshModelSingleSelect = (
 
     return useCallback(
         (invalidateFilters?: InvalidateQueryFilters) => {
-            console.log('invalidate', query)
             queryClient.invalidateQueries({
                 queryKey: [query],
-                // ...invalidateFilters,
+                ...invalidateFilters,
             })
         },
         [queryClient, query]

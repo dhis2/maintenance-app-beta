@@ -77,7 +77,7 @@ export interface ModelSingleSelectProps {
     useOptionsQuery: () => QueryResponse
 }
 
-export const ModelSingleSelect = forwardRef(function ModelSingleSelect(
+export const ModelSingleSelectLegacy = forwardRef(function ModelSingleSelect(
     {
         onChange,
         invalid,
