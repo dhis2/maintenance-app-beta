@@ -1,7 +1,6 @@
 import { Field } from '@dhis2/ui'
 import React from 'react'
-import { useField } from 'react-final-form'
-import { PlainResourceQuery } from '../../../types'
+import { useField, UseFieldConfig } from 'react-final-form'
 import { DisplayableModel } from '../../../types/models'
 import {
     ModelSingleSelectProps,
@@ -10,7 +9,6 @@ import {
 
 type OwnProps<TModel extends DisplayableModel> = {
     name: string
-    query: PlainResourceQuery
     label?: string
     placeholder?: string
     helpText?: string
@@ -18,23 +16,39 @@ type OwnProps<TModel extends DisplayableModel> = {
     onChange?: ModelSingleSelectProps<TModel>['onChange']
 }
 
+type RelevantUseFieldProps<TModel extends DisplayableModel> = Pick<
+    UseFieldConfig<TModel | undefined>,
+    'validate' | 'validateFields' | 'initialValue' | 'format' | 'parse' | 'data'
+    >
+
 type ModelSingleSelectFieldProps<TModel extends DisplayableModel> = Omit<
     ModelSingleSelectProps<TModel>,
     'selected' | 'onChange'
 > &
-    OwnProps<TModel>
+    OwnProps<TModel> & RelevantUseFieldProps<TModel>
 
 export function ModelSingleSelectField<TModel extends DisplayableModel>({
     name,
-    query,
     label,
     helpText,
     required,
     onChange,
+    // react-final-form props
+    validate,
+    validateFields,
+    initialValue,
+    format,
+    parse,
+    data,
     ...modelSingleSelectProps
 }: ModelSingleSelectFieldProps<TModel>) {
     const { input, meta } = useField<TModel | undefined>(name, {
-        validateFields: [],
+        validateFields: validateFields ?? [],
+        validate,
+        initialValue,
+        format,
+        parse,
+        data
     })
 
     return (
@@ -55,7 +69,6 @@ export function ModelSingleSelectField<TModel extends DisplayableModel>({
                     input.onBlur()
                     onChange?.(selected)
                 }}
-                query={query}
             />
         </Field>
     )

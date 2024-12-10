@@ -11,7 +11,7 @@ const toDisplayOption = (model: DisplayableModel) => ({
 })
 
 type OwnProps<TModel> = {
-    selected: TModel | undefined
+    selected?: TModel
     available: TModel[]
     onChange: (selected: TModel | undefined) => void
     showNoValueOption?: boolean
