@@ -17,7 +17,7 @@ type OwnProps<TModel> = {
     showNoValueOption?: boolean
 }
 
-export type BaseModelSingleSelectProps<TModel extends DisplayableModel> = Omit<
+export type BaseModelSingleSelectProps<TModel extends DisplayableModel = DisplayableModel> = Omit<
     SearchableSingleSelectPropTypes,
     keyof OwnProps<TModel> | 'options' | 'selected'
 > &

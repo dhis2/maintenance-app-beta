@@ -20,7 +20,7 @@ const defaultQuery = {
     },
 } satisfies Omit<PlainResourceQuery, 'resource'>
 
-export type ModelSingleSelectProps<TModel extends DisplayableModel> = Omit<
+export type ModelSingleSelectProps<TModel extends DisplayableModel = DisplayableModel> = Omit<
     BaseModelSingleSelectProps<TModel>,
     | 'available'
     | 'onFilterChange'
@@ -32,18 +32,16 @@ export type ModelSingleSelectProps<TModel extends DisplayableModel> = Omit<
 > & {
     query: Omit<PlainResourceQuery, 'id'>
     onFilterChange?: (value: string) => void
-    select?: (value: TModel[]) => TModel[]
+    transform?: (value: TModel[]) => TModel[]
 }
 
 export const ModelSingleSelect = <TModel extends DisplayableModel>({
     selected,
     query,
-    select,
+    transform,
     ...baseModelSingleSelectProps
 }: ModelSingleSelectProps<TModel>) => {
     const queryFn = useBoundResourceQueryFn()
-    // keep select in ref, so we dont recompute for inline selects
-    const selectRef = useRef(select)
     const [searchTerm, setSearchTerm] = useState('')
 
     const searchFilter = `identifiable:token:${searchTerm}`
@@ -73,11 +71,12 @@ export const ModelSingleSelect = <TModel extends DisplayableModel>({
     const allDataMap = useMemo(() => {
         const flatData =
             queryResult.data?.pages.flatMap((page) => page[modelName]) ?? []
-        if (selectRef.current) {
-            return selectRef.current(flatData)
-        }
         return flatData
     }, [queryResult.data, modelName])
+
+    const resolvedAvailable = useMemo(() => {
+        return transform ? transform(allDataMap) : allDataMap
+    }, [allDataMap, transform])
 
     const handleFilterChange = useDebouncedCallback(({ value }) => {
         if (value != undefined) {
@@ -90,7 +89,7 @@ export const ModelSingleSelect = <TModel extends DisplayableModel>({
         <BaseModelSingleSelect
             {...baseModelSingleSelectProps}
             selected={selected}
-            available={allDataMap}
+            available={resolvedAvailable}
             onFilterChange={handleFilterChange}
             onRetryClick={queryResult.refetch}
             showEndLoader={!!queryResult.hasNextPage}

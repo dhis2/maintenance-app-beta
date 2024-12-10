@@ -21,7 +21,7 @@ type RelevantUseFieldProps<TModel extends DisplayableModel> = Pick<
     'validate' | 'validateFields' | 'initialValue' | 'format' | 'parse' | 'data'
     >
 
-type ModelSingleSelectFieldProps<TModel extends DisplayableModel> = Omit<
+export type ModelSingleSelectFieldProps<TModel extends DisplayableModel = DisplayableModel> = Omit<
     ModelSingleSelectProps<TModel>,
     'selected' | 'onChange'
 > &

@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useField, useForm } from 'react-final-form'
 import { useHref } from 'react-router'
 import { EditableFieldWrapper } from '../../../components'
-import { ModelSingleSelectField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectField'
+import { ModelSingleSelectField, ModelSingleSelectFieldProps } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectField'
 import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
 import { DEFAULT_CATEGORY_COMBO } from '../../../lib'
 import { PlainResourceQuery } from '../../../types'
@@ -17,6 +17,8 @@ const query = {
     },
 } as const satisfies PlainResourceQuery
 
+// stable reference for transform function
+const withDefaultCategoryCombo: ModelSingleSelectFieldProps['transform'] = (value) => [DEFAULT_CATEGORY_COMBO, ...value]
 /*
  * @TODO: Verify that the api ignores the category combo when it's disabled.
  *        If it does not, file a jira issue and "escalate" this so it will be
@@ -55,7 +57,7 @@ export function CategoryComboField() {
                     name="categoryCombo"
                     label={i18n.t('Category combo')}
                     required
-                    select={(value) => [DEFAULT_CATEGORY_COMBO, ...value]}
+                    transform={withDefaultCategoryCombo}
                     disabled={disabled}
                 />
             </div>
