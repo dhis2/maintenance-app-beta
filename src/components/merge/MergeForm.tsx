@@ -46,3 +46,19 @@ export const StyledMergeForm = ({
         {children}
     </form>
 )
+
+export const FormSections = ({ children }: { children: React.ReactNode }) => (
+    <div className={css.formSections}>{children}</div>
+)
+
+export const FormSection = ({ children }: { children: React.ReactNode }) => (
+    <section className={css.formSection}>{children}</section>
+)
+
+export const Description = ({ children }: { children: React.ReactNode }) => (
+    <p className={css.description}>{children}</p>
+)
+
+export const Title = ({ children }: { children: React.ReactNode }) => (
+    <h2 className={css.title}>{children}</h2>
+)

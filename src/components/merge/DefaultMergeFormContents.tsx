@@ -51,7 +51,7 @@ export const DefaultMergeFormContents = ({
 
 export const MergeActions = () => {
     return (
-        <ButtonStrip>
+        <ButtonStrip className={css.mergeActions}>
             <Button primary type="submit">
                 {i18n.t('Merge')}
             </Button>
@@ -93,7 +93,15 @@ export const MergeComplete = ({ children }: React.PropsWithChildren) => {
                 {i18n.t('Merge complete')}
             </StandardFormSectionTitle>
             {children}
-            <LinkButton to="../">{i18n.t('Back to list')}</LinkButton>
+            <LinkButton
+                className={css.mergeCompleteBackButton}
+                to="../"
+                secondary
+            >
+                {i18n.t('Back to list')}
+            </LinkButton>
         </div>
     )
 }
+
+export const MergeCompleteReport = () => {}

@@ -1,4 +1,6 @@
 export * from './MergeFieldsBase'
-export * from './MergeFormBase'
+export * from './MergeForm'
 export * from './mergeSchemaBase'
 export * from './DefaultMergeFormContents'
+export * from './DeleteSourcesRadioFields'
+export * from './ConfirmationField'
