@@ -115,13 +115,18 @@ export const modelListViewsConfig = {
         columns: {
             available: [DESCRIPTORS.shortName],
         },
-        filters: {},
+        filters: {
+            default: ['dataElement', 'dataElementGroupSet'],
+        },
     },
     dataElementGroupSet: {
         columns: {
             available: [DESCRIPTORS.shortName],
         },
-        filters: {},
+        filters: {
+            available: ['compulsory', 'dataDimension'],
+            default: ['dataElementGroup'],
+        },
     },
     dataSet: {
         columns: {
