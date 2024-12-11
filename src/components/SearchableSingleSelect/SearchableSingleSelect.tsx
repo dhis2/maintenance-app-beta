@@ -145,16 +145,9 @@ export const SearchableSingleSelect = ({
                         value={filter}
                         onChange={({ value }) => setFilterValue(value ?? '')}
                         placeholder={i18n.t('Filter options')}
+                        type='search'
                     />
                 </div>
-
-                <button
-                    className={classes.clearButton}
-                    disabled={!filter}
-                    onClick={() => setFilterValue('')}
-                >
-                    clear
-                </button>
             </div>
 
             {withAllOptions.map(({ value, label }) => (

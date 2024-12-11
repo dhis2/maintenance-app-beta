@@ -2,11 +2,11 @@ import i18n from '@dhis2/d2-i18n'
 import React, { forwardRef } from 'react'
 import { useOptionSetsQuery } from '../../../lib'
 import { ModelSingleSelectLegacy } from '../ModelSingleSelect'
-import type { ModelSingleSelectProps } from '../ModelSingleSelect'
+import type { ModelSingleSelectLegacyProps } from '../ModelSingleSelect'
 import { useInitialOptionQuery } from './useInitialOptionQuery'
 
 type OptionSetSelectProps = Omit<
-    ModelSingleSelectProps,
+    ModelSingleSelectLegacyProps,
     'useInitialOptionQuery' | 'useOptionsQuery'
 >
 

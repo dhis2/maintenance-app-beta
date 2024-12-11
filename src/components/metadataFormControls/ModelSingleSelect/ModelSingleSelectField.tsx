@@ -5,7 +5,7 @@ import { DisplayableModel } from '../../../types/models'
 import {
     ModelSingleSelectProps,
     ModelSingleSelect,
-} from './ModelSingleSelectRefactor'
+} from './ModelSingleSelect'
 
 type OwnProps<TModel extends DisplayableModel> = {
     name: string

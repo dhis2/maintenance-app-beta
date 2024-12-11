@@ -1,197 +1,101 @@
-import i18n from '@dhis2/d2-i18n'
-import React, {
-    forwardRef,
-    useCallback,
-    useImperativeHandle,
-    useRef,
-    useState,
-} from 'react'
-import { SelectOption, QueryResponse } from '../../../types'
-import { Pager } from '../../../types/generated'
-import { SearchableSingleSelect } from '../../SearchableSingleSelect'
+import React, { useMemo, useState } from 'react'
+import { useInfiniteQuery } from 'react-query'
+import { useDebouncedCallback } from 'use-debounce'
+import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
+import { PlainResourceQuery } from '../../../types'
+import { PagedResponse } from '../../../types/generated'
+import { DisplayableModel } from '../../../types/models'
+import {
+    BaseModelSingleSelect,
+    BaseModelSingleSelectProps,
+} from './BaseModelSingleSelect'
 
-function computeDisplayOptions({
-    selected,
-    selectedOption: _selectedOption,
-    required,
-    options,
-}: {
-    options: SelectOption[]
-    selected?: string
-    required?: boolean
-    selectedOption?: SelectOption
-}): SelectOption[] {
-    let selectedOption = _selectedOption
-    if (!_selectedOption && selected) {
-        const foundOption = options.find((option) => option.value === selected)
+type Response<Model> = PagedResponse<Model, string>
 
-        // This happens only when we haven't fetched the lable for an initially
-        // selected value. Don't show anything to prevent error that an option is
-        // missing
-        if (!foundOption) {
-            return []
-        }
+const defaultQuery = {
+    params: {
+        order: 'displayName:asc',
+        fields: ['id', 'displayName'],
+        pageSize: 10,
+    },
+} satisfies Omit<PlainResourceQuery, 'resource'>
 
-        selectedOption = foundOption
-    }
-
-    const optionsContainSelected = options?.find(
-        ({ value }) => value === selected
-    )
-
-    const withSelectedOption =
-        selectedOption && !optionsContainSelected
-            ? [...options, selectedOption]
-            : options
-
-    if (!required) {
-        // This default value has been copied from the old app
-        return [
-            { value: '', label: i18n.t('<No value>') },
-            ...withSelectedOption,
-        ]
-    }
-
-    return withSelectedOption
+export type ModelSingleSelectProps<TModel extends DisplayableModel = DisplayableModel> = Omit<
+    BaseModelSingleSelectProps<TModel>,
+    | 'available'
+    | 'onFilterChange'
+    | 'onRetryClick'
+    | 'onEndReached'
+    | 'showEndLoader'
+    | 'loading'
+    | 'error'
+> & {
+    query: Omit<PlainResourceQuery, 'id'>
+    onFilterChange?: (value: string) => void
+    transform?: (value: TModel[]) => TModel[]
 }
 
-type UseInitialOptionQuery = ({
+export const ModelSingleSelect = <TModel extends DisplayableModel>({
     selected,
-    onComplete,
-}: {
-    onComplete: (option: SelectOption) => void
-    selected?: string
-}) => QueryResponse
+    query,
+    transform,
+    ...baseModelSingleSelectProps
+}: ModelSingleSelectProps<TModel>) => {
+    const queryFn = useBoundResourceQueryFn()
+    const [searchTerm, setSearchTerm] = useState('')
 
-export interface ModelSingleSelectProps {
-    onChange: ({ selected }: { selected: string }) => void
-    required?: boolean
-    disabled?: boolean
-    invalid?: boolean
-    placeholder?: string
-    selected?: string
-    showAllOption?: boolean
-    onBlur?: () => void
-    onFocus?: () => void
-    useInitialOptionQuery: UseInitialOptionQuery
-    useOptionsQuery: () => QueryResponse
-}
+    const searchFilter = `identifiable:token:${searchTerm}`
+    const filter: string[] = searchTerm ? [searchFilter] : []
+    const params = query.params
 
-export const ModelSingleSelectLegacy = forwardRef(function ModelSingleSelect(
-    {
-        onChange,
-        invalid,
-        disabled,
-        placeholder = '',
-        required,
-        selected,
-        showAllOption,
-        onBlur,
-        onFocus,
-        useInitialOptionQuery,
-        useOptionsQuery,
-    }: ModelSingleSelectProps,
-    ref
-) {
-    // Using a ref because we don't want to react to changes.
-    // We're using this value only when imperatively calling `refetch`,
-    // nothing that depends on the render-cycle depends on this value
-    const filterRef = useRef('')
-    const pageRef = useRef(0)
-
-    // We need to persist the selected option so we can display an <Option />
-    // when the current list doesn't contain the selected option (e.g. when
-    // the page with the selected option hasn't been reached yet or when
-    // filtering)
-    const [selectedOption, setSelectedOption] = useState<SelectOption>()
-
-    const optionsQuery = useOptionsQuery()
-    const initialOptionQuery = useInitialOptionQuery({
-        selected,
-        onComplete: setSelectedOption,
-    })
-
-    const { refetch, data } = optionsQuery
-    const pager = (data as { pager: Pager })?.pager
-    const page = pager?.page || 0
-    const pageCount = pager?.pageCount || 0
-
-    useImperativeHandle(
-        ref,
-        () => ({
-            refetch: () => {
-                pageRef.current = 1
-                refetch({ page: pageRef.current, filter: filterRef.current })
-            },
-        }),
-        [refetch]
-    )
-
-    const adjustQueryParamsWithChangedFilter = useCallback(
-        ({ value }: { value: string }) => {
-            pageRef.current = 1
-            filterRef.current = value
-            refetch({ page: pageRef.current, filter: value })
+    const queryObject = {
+        ...query,
+        params: {
+            ...defaultQuery.params,
+            ...params,
+            filter: filter.concat(params?.filter || []),
         },
-        [refetch]
-    )
+    }
+    const modelName = query.resource
 
-    const incrementPage = useCallback(() => {
-        pageRef.current = page + 1
-        refetch({ page: pageRef.current, filter: filterRef.current })
-    }, [refetch, page])
-
-    const loading =
-        optionsQuery.fetching ||
-        optionsQuery.loading ||
-        initialOptionQuery.loading
-    const error =
-        optionsQuery.error || initialOptionQuery.error
-            ? // @TODO: Ask Joe what do do here!
-              'An error has occurred. Please try again'
-            : ''
-    const result = (data as { result: SelectOption[] })?.result || []
-
-    const displayOptions = computeDisplayOptions({
-        selected,
-        selectedOption,
-        required,
-        options: result,
+    const queryResult = useInfiniteQuery({
+        queryKey: [queryObject] as const,
+        queryFn: queryFn<Response<TModel>>,
+        keepPreviousData: true,
+        getNextPageParam: (lastPage) =>
+            lastPage.pager.nextPage ? lastPage.pager.page + 1 : undefined,
+        getPreviousPageParam: (firstPage) =>
+            firstPage.pager.prevPage ? firstPage.pager.page - 1 : undefined,
     })
+
+    const allDataMap = useMemo(() => {
+        const flatData =
+            queryResult.data?.pages.flatMap((page) => page[modelName]) ?? []
+        return flatData
+    }, [queryResult.data, modelName])
+
+    const resolvedAvailable = useMemo(() => {
+        return transform ? transform(allDataMap) : allDataMap
+    }, [allDataMap, transform])
+
+    const handleFilterChange = useDebouncedCallback(({ value }) => {
+        if (value != undefined) {
+            setSearchTerm(value)
+        }
+        baseModelSingleSelectProps.onFilterChange?.(value)
+    }, 250)
 
     return (
-        <SearchableSingleSelect
-            disabled={disabled}
-            invalid={invalid}
-            placeholder={placeholder}
-            showAllOption={showAllOption}
-            onChange={({ selected }) => {
-                if (selected === selectedOption?.value) {
-                    setSelectedOption(undefined)
-                } else {
-                    const option = result.find(
-                        ({ value }) => value === selected
-                    )
-                    setSelectedOption(option)
-                }
-
-                onChange({ selected })
-            }}
-            onEndReached={incrementPage}
-            options={displayOptions}
+        <BaseModelSingleSelect
+            {...baseModelSingleSelectProps}
             selected={selected}
-            showEndLoader={!loading && page < pageCount}
-            onFilterChange={adjustQueryParamsWithChangedFilter}
-            loading={loading}
-            error={error}
-            onRetryClick={() => {
-                refetch({
-                    page: pageRef.current,
-                    filter: filterRef.current,
-                })
-            }}
-            onBlur={onBlur}
-            onFocus={onFocus}
+            available={resolvedAvailable}
+            onFilterChange={handleFilterChange}
+            onRetryClick={queryResult.refetch}
+            showEndLoader={!!queryResult.hasNextPage}
+            onEndReached={queryResult.fetchNextPage}
+            loading={queryResult.isLoading}
+            error={queryResult.error as string | undefined}
         />
     )
-})
+}

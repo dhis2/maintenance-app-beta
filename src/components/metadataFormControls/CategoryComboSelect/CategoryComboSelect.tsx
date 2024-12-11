@@ -1,12 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
-import React from 'react'
+import React, { useCallback } from 'react'
+import { DEFAULT_CATEGORY_COMBO } from '../../../lib'
 import { PlainResourceQuery } from '../../../types'
 import { CategoryCombo } from '../../../types/generated'
 import { DisplayableModel } from '../../../types/models'
 import {
     ModelSingleSelect,
     ModelSingleSelectProps,
-} from '../ModelSingleSelect/ModelSingleSelectRefactor'
+} from '../ModelSingleSelect/ModelSingleSelect'
 
 export const categoryCombosSelectQuery = {
     resource: 'categoryCombos',
@@ -33,7 +34,20 @@ export const CategoryComboSelect = <
     ...modelSingleSelectProps
 }: CategoryComboSelectProps<TCategoryCombo>) => {
     const resolvedQuery = query ?? categoryCombosSelectQuery
+    // add defaultCatcombo (None) to the list of categoryCombos
+    const transform = useCallback(
+        (value: TCategoryCombo[]) => [
+            DEFAULT_CATEGORY_COMBO as TCategoryCombo,
+            ...value,
+        ],
+        []
+    )
+
     return (
-        <ModelSingleSelect {...modelSingleSelectProps} query={resolvedQuery} />
+        <ModelSingleSelect<TCategoryCombo>
+            query={resolvedQuery}
+            transform={transform}
+            {...modelSingleSelectProps}
+        />
     )
 }
