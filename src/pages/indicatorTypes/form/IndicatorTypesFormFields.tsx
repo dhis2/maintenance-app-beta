@@ -1,7 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { Field } from 'react-final-form'
 import {
     CustomAttributesSection,
     StandardFormField,
@@ -11,13 +9,11 @@ import {
     NameField,
 } from '../../../components'
 import { SECTIONS_MAP, useSchemaSectionHandleOrThrow } from '../../../lib'
-import { useValidator } from '../../../lib/models/useFieldValidators'
+import { FactorField } from './FactorField'
 
 export const IndicatorTypesFormFields = () => {
     const section = SECTIONS_MAP.indicatorType
     const schemaSection = useSchemaSectionHandleOrThrow()
-
-    const validateFactor = useValidator({ schemaSection, property: 'factor' })
 
     return (
         <>
@@ -36,15 +32,7 @@ export const IndicatorTypesFormFields = () => {
                 </StandardFormField>
 
                 <StandardFormField>
-                    <Field
-                        name="factor"
-                        type="number"
-                        inputWidth="400px"
-                        component={InputFieldFF}
-                        label={i18n.t('Factor')}
-                        validate={validateFactor}
-                        required
-                    />
+                    <FactorField />
                 </StandardFormField>
             </StandardFormSection>
 
