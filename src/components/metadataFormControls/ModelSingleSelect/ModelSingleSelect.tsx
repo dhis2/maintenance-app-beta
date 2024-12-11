@@ -1,10 +1,12 @@
-import React, { useMemo, useState } from 'react'
-import { useInfiniteQuery } from 'react-query'
+import React, { useEffect, useMemo, useState } from 'react'
+import { useInfiniteQuery, useQuery } from 'react-query'
 import { useDebouncedCallback } from 'use-debounce'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
 import { PlainResourceQuery } from '../../../types'
 import { PagedResponse } from '../../../types/generated'
-import { DisplayableModel } from '../../../types/models'
+import {
+    PartialLoadedDisplayableModel
+} from '../../../types/models'
 import {
     BaseModelSingleSelect,
     BaseModelSingleSelectProps,
@@ -20,7 +22,9 @@ const defaultQuery = {
     },
 } satisfies Omit<PlainResourceQuery, 'resource'>
 
-export type ModelSingleSelectProps<TModel extends DisplayableModel = DisplayableModel> = Omit<
+export type ModelSingleSelectProps<
+    TModel extends PartialLoadedDisplayableModel = PartialLoadedDisplayableModel
+> = Omit<
     BaseModelSingleSelectProps<TModel>,
     | 'available'
     | 'onFilterChange'
@@ -35,7 +39,9 @@ export type ModelSingleSelectProps<TModel extends DisplayableModel = Displayable
     transform?: (value: TModel[]) => TModel[]
 }
 
-export const ModelSingleSelect = <TModel extends DisplayableModel>({
+export const ModelSingleSelect = <
+    TModel extends PartialLoadedDisplayableModel
+>({
     selected,
     query,
     transform,
@@ -43,6 +49,7 @@ export const ModelSingleSelect = <TModel extends DisplayableModel>({
 }: ModelSingleSelectProps<TModel>) => {
     const queryFn = useBoundResourceQueryFn()
     const [searchTerm, setSearchTerm] = useState('')
+    const onChange = baseModelSingleSelectProps.onChange
 
     const searchFilter = `identifiable:token:${searchTerm}`
     const filter: string[] = searchTerm ? [searchFilter] : []
@@ -68,6 +75,23 @@ export const ModelSingleSelect = <TModel extends DisplayableModel>({
             firstPage.pager.prevPage ? firstPage.pager.page - 1 : undefined,
     })
 
+    const shouldFetchSelected = selected && selected.displayName === undefined
+    // if we just have the ID - fetch the displayName
+    const selectedQuery = useQuery({
+        queryKey: [
+            {
+                resource: query.resource,
+                id: selected?.id,
+                params: {
+                    fields: queryObject.params.fields,
+                    order: queryObject.params.order,
+                },
+            },
+        ],
+        queryFn: queryFn<TModel>,
+        enabled: shouldFetchSelected,
+    })
+
     const allDataMap = useMemo(() => {
         const flatData =
             queryResult.data?.pages.flatMap((page) => page[modelName]) ?? []
@@ -77,6 +101,15 @@ export const ModelSingleSelect = <TModel extends DisplayableModel>({
     const resolvedAvailable = useMemo(() => {
         return transform ? transform(allDataMap) : allDataMap
     }, [allDataMap, transform])
+
+    useEffect(() => {
+        if (!selectedQuery.data || selected?.displayName !== undefined) {
+            return
+        }
+        // if we had to fetch the selected model, call the onChange
+        // to update store with the full model
+        onChange?.(selectedQuery.data)
+    }, [selectedQuery.data, selected, onChange])
 
     const handleFilterChange = useDebouncedCallback(({ value }) => {
         if (value != undefined) {

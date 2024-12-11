@@ -1,13 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
 import React, { useCallback, useMemo } from 'react'
-import { DisplayableModel } from '../../../types/models'
+import { DisplayableModel, PartialLoadedDisplayableModel } from '../../../types/models'
 import {
     SearchableSingleSelect,
     SearchableSingleSelectPropTypes,
 } from '../../SearchableSingleSelect'
 
 
-const toDisplayOption = (model: DisplayableModel) => ({
+const toDisplayOption = (model: PartialLoadedDisplayableModel) => ({
     value: model.id,
     label: model.displayName || i18n.t('Loading...'),
 })
@@ -19,14 +19,14 @@ type OwnProps<TModel> = {
     noValueOption?: { value: string; label: string } | boolean
 }
 
-export type BaseModelSingleSelectProps<TModel extends DisplayableModel = DisplayableModel> = Omit<
+export type BaseModelSingleSelectProps<TModel extends PartialLoadedDisplayableModel = PartialLoadedDisplayableModel> = Omit<
     SearchableSingleSelectPropTypes,
     keyof OwnProps<TModel> | 'options' | 'selected'
 > &
     OwnProps<TModel>
 
 /* Simple wrapper component handle generic models with SingleSelect-component. */
-export const BaseModelSingleSelect = <TModel extends DisplayableModel>({
+export const BaseModelSingleSelect = <TModel extends PartialLoadedDisplayableModel>({
     available,
     selected,
     onChange,
