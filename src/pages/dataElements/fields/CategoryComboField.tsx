@@ -1,30 +1,18 @@
 import i18n from '@dhis2/d2-i18n'
 import { Field } from '@dhis2/ui'
-import React, { useEffect } from 'react'
-import { useField, useForm } from 'react-final-form'
+import React, { useEffect, useRef } from 'react'
+import { useField, useForm, useFormState } from 'react-final-form'
 import { useHref } from 'react-router'
 import { CategoryComboSelect, EditableFieldWrapper } from '../../../components'
-import {
-    ModelSingleSelectFieldProps
-} from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectField'
-import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
-import { DEFAULT_CATEGORY_COMBO } from '../../../lib'
-import { PlainResourceQuery } from '../../../types'
+import { useDefaultCategoryComboQuery } from '../../../lib'
 import classes from './CategoryComboField.module.css'
-import { DisplayableModel } from '../../../types/models'
 
-const query = {
-    resource: 'categoryCombos',
-    params: {
-        filter: ['isDefault:eq:false'],
-        fields: ['id', 'displayName'],
-    },
-} as const satisfies PlainResourceQuery
+const required = (value: { id: string }) => {
+    if (!value.id) {
+        return i18n.t('Required')
+    }
+}
 
-// stable reference for transform function
-const withDefaultCategoryCombo: ModelSingleSelectFieldProps['transform'] = (
-    value
-) => [DEFAULT_CATEGORY_COMBO, ...value]
 /*
  * @TODO: Verify that the api ignores the category combo when it's disabled.
  *        If it does not, file a jira issue and "escalate" this so it will be
@@ -35,32 +23,41 @@ const withDefaultCategoryCombo: ModelSingleSelectFieldProps['transform'] = (
  *             domainType is Tracker
  */
 export function CategoryComboField() {
-    const refresh = useRefreshModelSingleSelect(query)
+    const defaultCategoryComboQuery = useDefaultCategoryComboQuery()
     const { change } = useForm()
-    const {
-        input: { value: domainTypeValue },
-    } = useField('domainType')
-    const { input, meta } = useField<DisplayableModel>('categoryCombo', { validateFields: [] })
-    const domainTypeIsTracker = domainTypeValue === 'TRACKER'
+    const { values } = useFormState({ subscription: { values: true } })
+    const domainTypeIsTracker = values.domainType === 'TRACKER'
     const disabled = domainTypeIsTracker
+    const validate = disabled ? undefined : required
     const newCategoryComboLink = useHref('/categoryCombos/new')
+    const { input, meta } = useField('categoryCombo', {
+        validateFields: [],
+        validate,
+        format: (categoryCombo) => categoryCombo.id,
+        parse: (id) => ({ id }),
+    })
+    const categoryComboHandle = useRef({
+        refetch: () => {
+            throw new Error('Not initialized')
+        },
+    })
 
     useEffect(() => {
-        if (domainTypeIsTracker) {
-            change('categoryCombo', DEFAULT_CATEGORY_COMBO)
+        if (defaultCategoryComboQuery.data?.id && domainTypeIsTracker) {
+            change('categoryCombo.id', defaultCategoryComboQuery.data.id)
         }
-    }, [change, domainTypeIsTracker])
+    }, [change, defaultCategoryComboQuery.data?.id, domainTypeIsTracker])
 
     return (
         <EditableFieldWrapper
             dataTest="formfields-categorycombo"
-            onRefresh={() => refresh()}
+            onRefresh={() => categoryComboHandle.current.refetch()}
             onAddNew={() => window.open(newCategoryComboLink, '_blank')}
         >
             <div className={classes.categoryComboSelect}>
                 <Field
                     required
-                    name="categoryCombo"
+                    name="categoryCombo.id"
                     label={i18n.t('{{fieldLabel}} (required)', {
                         fieldLabel: i18n.t('Category combination'),
                     })}
@@ -72,23 +69,18 @@ export function CategoryComboField() {
                     dataTest="formfields-categorycombo"
                 >
                     <CategoryComboSelect
-                        selected={input.value}
+                        required
+                        placeholder=""
                         disabled={disabled}
-                        onChange={(selected) => {
+                        invalid={meta.touched && !!meta.error}
+                        ref={categoryComboHandle}
+                        selected={input.value}
+                        onChange={({ selected }) => {
                             input.onChange(selected)
                             input.onBlur()
                         }}
                         onBlur={input.onBlur}
                         onFocus={input.onFocus}
-                        query={{
-                            resource: 'categoryCombos',
-                            params: {
-                                filter: [
-                                    'isDefault:eq:false',
-                                    'dataDimensionType:eq:DISAGGREGATION',
-                                ],
-                            },
-                        }}
                     />
                 </Field>
             </div>

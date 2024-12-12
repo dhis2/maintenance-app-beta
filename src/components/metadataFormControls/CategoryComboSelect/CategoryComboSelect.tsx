@@ -1,52 +1,43 @@
-import React, { useCallback } from 'react'
-import { DEFAULT_CATEGORY_COMBO } from '../../../lib'
-import { PlainResourceQuery } from '../../../types'
-import { CategoryCombo } from '../../../types/generated'
-import { DisplayableModel } from '../../../types/models'
-import {
-    ModelSingleSelect,
-    ModelSingleSelectProps,
-} from '../ModelSingleSelect/ModelSingleSelect'
+import i18n from '@dhis2/d2-i18n'
+import React, { forwardRef } from 'react'
+import { ModelSingleSelectLegacy } from '../ModelSingleSelect'
+import type { ModelSingleSelectLegacyProps } from '../ModelSingleSelect'
+import { useInitialOptionQuery } from './useInitialOptionQuery'
+import { useOptionsQuery } from './useOptionsQuery'
 
-export const categoryCombosSelectQuery = {
-    resource: 'categoryCombos',
-    params: {
-        filter: 'isDefault:eq:false',
-        fields: ['id', 'displayName'],
-    },
-} as const satisfies PlainResourceQuery
+type CategoryComboSelectProps = Omit<
+    ModelSingleSelectLegacyProps,
+    'useInitialOptionQuery' | 'useOptionsQuery'
+>
 
-type CategoryComboSelectProps<TCategoryCombo extends DisplayableModel> = Omit<
-    ModelSingleSelectProps<TCategoryCombo>,
-    'query'
-> & {
-    query?: PlainResourceQuery
-}
-
-export const CategoryComboSelect = <
-    TCategoryCombo extends Partial<CategoryCombo> & DisplayableModel = Pick<
-        CategoryCombo,
-        'id' | 'displayName'
-    >
->({
-    query,
-    ...modelSingleSelectProps
-}: CategoryComboSelectProps<TCategoryCombo>) => {
-    const resolvedQuery = query ?? categoryCombosSelectQuery
-    // add defaultCatcombo (None) to the list of categoryCombos
-    const transform = useCallback(
-        (value: TCategoryCombo[]) => [
-            DEFAULT_CATEGORY_COMBO as TCategoryCombo,
-            ...value,
-        ],
-        []
-    )
-
+export const CategoryComboSelect = forwardRef(function CategoryComboSelect(
+    {
+        onChange,
+        invalid,
+        disabled,
+        placeholder = i18n.t('Category combo'),
+        required,
+        selected,
+        showAllOption,
+        onBlur,
+        onFocus,
+    }: CategoryComboSelectProps,
+    ref
+) {
     return (
-        <ModelSingleSelect<TCategoryCombo>
-            query={resolvedQuery}
-            transform={transform}
-            {...modelSingleSelectProps}
+        <ModelSingleSelectLegacy
+            ref={ref}
+            required={required}
+            invalid={invalid}
+            disabled={disabled}
+            useInitialOptionQuery={useInitialOptionQuery}
+            useOptionsQuery={useOptionsQuery}
+            placeholder={placeholder}
+            showAllOption={showAllOption}
+            onChange={onChange}
+            selected={selected}
+            onBlur={onBlur}
+            onFocus={onFocus}
         />
     )
-}
+})
