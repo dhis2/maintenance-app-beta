@@ -1,4 +1,3 @@
-import i18n from '@dhis2/d2-i18n'
 import React, { useCallback } from 'react'
 import { DEFAULT_CATEGORY_COMBO } from '../../../lib'
 import { PlainResourceQuery } from '../../../types'

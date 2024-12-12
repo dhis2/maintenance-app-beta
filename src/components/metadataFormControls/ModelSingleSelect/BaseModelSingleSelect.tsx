@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import React, { useCallback, useMemo } from 'react'
-import { DisplayableModel, PartialLoadedDisplayableModel } from '../../../types/models'
+import { PartialLoadedDisplayableModel } from '../../../types/models'
 import {
     SearchableSingleSelect,
     SearchableSingleSelectPropTypes,
@@ -16,7 +16,7 @@ type OwnProps<TModel> = {
     selected?: TModel
     available: TModel[]
     onChange: (selected: TModel | undefined) => void
-    noValueOption?: { value: string; label: string } | boolean
+    showNoValueOption?: { value: string; label: string } | boolean
 }
 
 export type BaseModelSingleSelectProps<TModel extends PartialLoadedDisplayableModel = PartialLoadedDisplayableModel> = Omit<
@@ -30,7 +30,7 @@ export const BaseModelSingleSelect = <TModel extends PartialLoadedDisplayableMod
     available,
     selected,
     onChange,
-    noValueOption,
+    showNoValueOption,
     ...searchableSingleSelectProps
 }: BaseModelSingleSelectProps<TModel>) => {
     const { allModelsMap, allSingleSelectOptions } = useMemo(() => {
@@ -42,21 +42,20 @@ export const BaseModelSingleSelect = <TModel extends PartialLoadedDisplayableMod
         const allSingleSelectOptions = Array.from(allModelsMap).map(
             ([, value]) => toDisplayOption(value)
         )
-        if (noValueOption) {
-            const option = noValueOption === true ? { value: '', label: i18n.t('<No value>') } : noValueOption
-            allSingleSelectOptions.unshift(option)
+        if (showNoValueOption) {
+            allSingleSelectOptions.unshift({ value: '', label: i18n.t('<No value>') })
         }
 
         return {
             allModelsMap,
             allSingleSelectOptions,
         }
-    }, [available, selected, noValueOption])
+    }, [available, selected, showNoValueOption])
 
     const handleOnChange: SearchableSingleSelectPropTypes['onChange'] =
         useCallback(
             ({ selected }) => {
-                // map the selected ids to the full model
+                // map the selected id to the full model
                 const fullSelectedModel = allModelsMap.get(selected)
                 onChange(fullSelectedModel)
             },

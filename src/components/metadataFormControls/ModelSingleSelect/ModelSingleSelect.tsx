@@ -73,9 +73,10 @@ export const ModelSingleSelect = <
             lastPage.pager.nextPage ? lastPage.pager.page + 1 : undefined,
         getPreviousPageParam: (firstPage) =>
             firstPage.pager.prevPage ? firstPage.pager.page - 1 : undefined,
+        staleTime: 60 * 1000,
     })
 
-    const shouldFetchSelected = selected && selected.displayName === undefined
+    const shouldFetchSelected = !!selected && selected.displayName === undefined
     // if we just have the ID - fetch the displayName
     const selectedQuery = useQuery({
         queryKey: [
