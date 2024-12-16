@@ -1,3 +1,12 @@
+## [0.19.4](https://github.com/dhis2/maintenance-app-beta/compare/v0.19.3...v0.19.4) (2024-12-16)
+
+
+### Bug Fixes
+
+* fix type of cat options dates ([#467](https://github.com/dhis2/maintenance-app-beta/issues/467)) [skip release] ([321fed2](https://github.com/dhis2/maintenance-app-beta/commit/321fed28663a39ced7119b0c2094a2d94a78ad69))
+* format factor from number to string on edit ([#466](https://github.com/dhis2/maintenance-app-beta/issues/466)) ([338d4c7](https://github.com/dhis2/maintenance-app-beta/commit/338d4c78787f53af6d21d7f6fcfb6b40edb51634))
+* show zero values, add factor validations ([#463](https://github.com/dhis2/maintenance-app-beta/issues/463)) [skip release] ([1f1dcb1](https://github.com/dhis2/maintenance-app-beta/commit/1f1dcb130dee4593cd0a5f7ae5e29d161812219d))
+
 ## [0.19.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.19.2...v0.19.3) (2024-12-05)
 
 
