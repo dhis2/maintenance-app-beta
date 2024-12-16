@@ -152,7 +152,7 @@ html {
 }
 
 .sidenav-filter input::placeholder {
-    color: var(--colors-grey400);
+    color: var(--colors-grey500);
 }
 
 .sidenav-filter input:focus {
