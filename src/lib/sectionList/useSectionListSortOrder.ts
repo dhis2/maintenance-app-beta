@@ -78,5 +78,5 @@ export const useSectionListSortOrder = () => {
 export const useSortOrderQueryParams = () => {
     const [sortOrder] = useSectionListSortOrder()
 
-    return sortOrder ? formatSortOrderToString(sortOrder) : undefined
+    return sortOrder ? `${sortOrder[0]}:i${sortOrder[1]}` : undefined
 }
