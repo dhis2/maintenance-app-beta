@@ -17,7 +17,7 @@
 .wrapperWithFooter {
     composes: wrapper;
     grid-template-areas: 'sidebar' 'main' 'footer';
-    grid-template-rows: auto 1fr 68px;
+    grid-template-rows: auto 1fr 44px;
     overflow-y: auto;
 }
 
@@ -50,8 +50,9 @@
 .footerPlaceholder {
     grid-area: footer;
     width: 100vw;
-    padding: var(--spacers-dp16) 0;
+    padding: 0;
     background: var(--colors-white);
+    border-top: 1px solid red;
 }
 
 @media m-medium {
@@ -64,7 +65,7 @@
     }
     .wrapperWithFooter {
         grid-template-areas: 'sidebar main' 'footer footer';
-        grid-template-rows: 1fr 68px;
+        grid-template-rows: 1fr 44px;
     }
     .sidebar {
         width: 240px;
