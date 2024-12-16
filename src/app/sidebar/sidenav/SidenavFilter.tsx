@@ -26,7 +26,7 @@ export const SidenavFilter = ({ onChange }: SidenavParentProps) => {
             dense
             type="text"
             value={value}
-            placeholder={i18n.t('Search for menu items')}
+            placeholder={i18n.t('Search menu items')}
             onChange={handleChange}
         />
     )
