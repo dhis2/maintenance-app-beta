@@ -10,6 +10,7 @@ import {
     IconTranslate16,
     MenuItem,
     Popover,
+    colors,
 } from '@dhis2/ui'
 import React, { useRef, useState } from 'react'
 import { useHref, useLinkClickHandler } from 'react-router-dom'
@@ -43,7 +44,7 @@ export const ActionEdit = ({
             to={{ pathname: modelId }}
             state={preservedSearchState}
         >
-            <IconEdit24 />
+            <IconEdit24 color={colors.grey600} />
         </LinkButton>
     )
 }
@@ -90,7 +91,7 @@ export const ActionMore = ({
                 small
                 secondary
                 onClick={() => setOpen(!open)}
-                icon={<IconMore24 />}
+                icon={<IconMore24 color={colors.grey600} />}
             />
             {open && (
                 <Popover
