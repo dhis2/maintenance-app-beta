@@ -19,8 +19,8 @@ export const categoryOptionSchema = identifiable
             })
             .optional(),
         description: z.string().trim().optional(),
-        startDate: z.string().date().optional(),
-        endDate: z.string().date().optional(),
+        startDate: z.coerce.date().optional(),
+        endDate: z.coerce.date().optional(),
         organisationUnits: referenceCollection.optional(),
     })
     .refine(
