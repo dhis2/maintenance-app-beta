@@ -49,6 +49,11 @@ html {
     background: var(--sidenav-dark-bg-hover);
     outline-offset: -2px;
 }
+/* Prevent focus styles when mouse clicking */
+.sidenav-parent button:focus:not(:focus-visible) {
+    outline: none;
+    background: var(--colors-grey900);
+}
 .sidenav-parent button:disabled {
     color: var(--colors-grey500);
     cursor: not-allowed;
@@ -107,6 +112,12 @@ html {
     box-shadow: inset 6px 0px 0px 0px var(--colors-teal500);
 }
 .sidenav-link.active:hover {
+    background: var(--sidenav-dark-bg-selected);
+}
+/* Prevent focus styles when mouse clicking */
+.sidenav-link:focus:not(:focus-visible),
+.sidenav-link a:focus:not(:focus-visible) {
+    outline: none;
     background: var(--sidenav-dark-bg-selected);
 }
 .sidenav-item-icon {
