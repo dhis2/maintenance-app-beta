@@ -1,5 +1,6 @@
 .form {
     background: var(--colors-white);
+    border: 1px solid var(--colors-grey300);
     padding: var(--spacers-dp16);
     padding-bottom: var(--spacers-dp32);
 }
