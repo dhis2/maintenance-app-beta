@@ -6,7 +6,6 @@ import {
     SearchableSingleSelectPropTypes,
 } from '../../SearchableSingleSelect'
 
-
 const toDisplayOption = (model: PartialLoadedDisplayableModel) => ({
     value: model.id,
     label: model.displayName || i18n.t('Loading...'),
@@ -19,14 +18,18 @@ type OwnProps<TModel> = {
     showNoValueOption?: { value: string; label: string } | boolean
 }
 
-export type BaseModelSingleSelectProps<TModel extends PartialLoadedDisplayableModel = PartialLoadedDisplayableModel> = Omit<
+export type BaseModelSingleSelectProps<
+    TModel extends PartialLoadedDisplayableModel = PartialLoadedDisplayableModel
+> = Omit<
     SearchableSingleSelectPropTypes,
     keyof OwnProps<TModel> | 'options' | 'selected'
 > &
     OwnProps<TModel>
 
 /* Simple wrapper component handle generic models with SingleSelect-component. */
-export const BaseModelSingleSelect = <TModel extends PartialLoadedDisplayableModel>({
+export const BaseModelSingleSelect = <
+    TModel extends PartialLoadedDisplayableModel
+>({
     available,
     selected,
     onChange,
@@ -43,7 +46,10 @@ export const BaseModelSingleSelect = <TModel extends PartialLoadedDisplayableMod
             ([, value]) => toDisplayOption(value)
         )
         if (showNoValueOption) {
-            allSingleSelectOptions.unshift({ value: '', label: i18n.t('<No value>') })
+            allSingleSelectOptions.unshift({
+                value: '',
+                label: i18n.t('<No value>'),
+            })
         }
 
         return {

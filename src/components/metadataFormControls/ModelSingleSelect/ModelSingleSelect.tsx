@@ -4,9 +4,7 @@ import { useDebouncedCallback } from 'use-debounce'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
 import { PlainResourceQuery } from '../../../types'
 import { PagedResponse } from '../../../types/generated'
-import {
-    PartialLoadedDisplayableModel
-} from '../../../types/models'
+import { PartialLoadedDisplayableModel } from '../../../types/models'
 import {
     BaseModelSingleSelect,
     BaseModelSingleSelectProps,
