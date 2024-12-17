@@ -43,7 +43,7 @@ function CategoryOptionGroupSetFormFields() {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose how this category option group set will be used to capture and analyze'
+                        'Choose how this category option group set will be used to capture and analyze data.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
@@ -73,7 +73,7 @@ function CategoryOptionGroupSetFormFields() {
                         component={CheckboxFieldFF}
                         label={i18n.t('Use as data dimension')}
                         helpText={i18n.t(
-                            'Category option group set will be available to the analytics as another dimension'
+                            'Make available to analytics apps as a selectable dimension.'
                         )}
                     />
                 </StandardFormField>
@@ -82,7 +82,7 @@ function CategoryOptionGroupSetFormFields() {
             <StandardFormSection>
                 <StandardFormSectionTitle>
                     <label htmlFor={'categoryOptionGroups'}>
-                        {i18n.t('Category option Groups')}
+                        {i18n.t('Category option groups')}
                     </label>
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>

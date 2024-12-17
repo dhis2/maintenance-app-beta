@@ -62,7 +62,7 @@ export function CategoryComboField() {
                         fieldLabel: i18n.t('Category combination'),
                     })}
                     helpText={i18n.t(
-                        'Choose how this data element is disaggregated'
+                        'Choose how this data element is disaggregated.'
                     )}
                     error={meta.touched && !!meta.error}
                     validationText={meta.touched ? meta.error : undefined}

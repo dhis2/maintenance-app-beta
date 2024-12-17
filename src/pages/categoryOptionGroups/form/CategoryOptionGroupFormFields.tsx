@@ -43,7 +43,7 @@ function CategoryOptionGroupFormFields() {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose how this category option  will be used to capture and analyze'
+                        'Choose how this category option  will be used to capture and analyze data.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
@@ -76,7 +76,7 @@ function CategoryOptionGroupFormFields() {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose the category options to include in this category.'
+                        'Choose the options to include in this category option group.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>

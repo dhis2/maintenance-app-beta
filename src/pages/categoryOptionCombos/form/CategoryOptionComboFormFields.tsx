@@ -22,7 +22,9 @@ export const CategoryOptionComboFormFields = () => {
                     {i18n.t('Basic information')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t('Set up the basic information for this category.')}
+                    {i18n.t(
+                        'Set up the basic information for this category option combination.'
+                    )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <Field<string | undefined>

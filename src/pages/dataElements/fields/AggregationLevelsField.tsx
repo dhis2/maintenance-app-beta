@@ -38,9 +38,6 @@ export function AggregationLevelsField() {
                 <Field
                     name="aggregationLevels"
                     label={i18n.t('Aggregation level(s)')}
-                    helpText={i18n.t(
-                        'Choose how this data element is disaggregated'
-                    )}
                     validationText={meta.touched ? meta.error : undefined}
                     error={meta.touched && !!meta.error}
                     dataTest="formfields-aggregationlevels"
