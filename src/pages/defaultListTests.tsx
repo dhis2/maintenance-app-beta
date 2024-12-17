@@ -9,7 +9,7 @@ export const generateDefaultListTests = ({
         it('can change the visible columns through manage view', () => {})
         it('should change the number of items that are displayed in a page when the number of items per page is changed', () => {})
         it('can navigate through pages and show the corresponding items', () => {})
-        it('can sort teh results by columns', () => {})
+        it('can sort the results by columns using a non case sensitive manner', () => {})
         it('should display error when an API call fails', () => {})
     })
 
