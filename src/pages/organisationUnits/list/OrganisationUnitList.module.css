@@ -1,6 +1,10 @@
 .expandButton {
     border: 0 !important;
 }
+.expandButton:hover {
+    background-color: var(--colors-grey300) !important;
+    color: var(--colors-grey900) !important;
+}
 
 .listDetailsWrapper {
     display: grid;
@@ -10,6 +14,11 @@
         'header details'
         'list details';
     margin-top: var(--spacers-dp8);
+}
+
+.orgUnitRow td {
+    padding-block-start: var(--spacers-dp8);
+    padding-block-end: var(--spacers-dp8);
 }
 
 @media (max-width: 1200px) {

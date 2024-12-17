@@ -37,7 +37,7 @@ export const OrganisationUnitRow = ({
 
     return (
         <>
-            <DataTableRow key={row.id}>
+            <DataTableRow className={css.orgUnitRow} key={row.id}>
                 <DataTableCell>
                     <span
                         style={{
@@ -70,6 +70,7 @@ export const OrganisationUnitRow = ({
                                 <Button
                                     className={css.expandButton}
                                     secondary
+                                    small
                                     type="button"
                                     dataTest="row-expand-icon"
                                     loading={
