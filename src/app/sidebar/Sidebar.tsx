@@ -139,8 +139,7 @@ type NoMatchMessageProps = {
 
 const NoMatchMessage = ({ filter }: PropsWithChildren<NoMatchMessageProps>) => (
     <div className={styles.noMatchMessage}>
-        {i18n.t('No menu items found for')} <br />
-        {filter}
+        {i18n.t('No menu items found for')} <br />‘{filter}’
     </div>
 )
 
