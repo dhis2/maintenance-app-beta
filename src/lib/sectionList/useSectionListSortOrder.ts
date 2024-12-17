@@ -34,8 +34,10 @@ const parseSortOrderString = (
     return undefined
 }
 
-const formatSortOrderToString = (value: ParsedSortOrder): string =>
-    `${value[0]}:${value[1]}`
+const formatSortOrderToString = (
+    value: ParsedSortOrder,
+    caseSensitive: boolean = true
+): string => `${value[0]}:${caseSensitive ? '' : 'i'}${value[1]}`
 
 export const isValidSortPathForSchema = (schema: Schema, path: string) => {
     const schemaProperty = getSchemaPropertyForPath(schema, path)
@@ -78,5 +80,5 @@ export const useSectionListSortOrder = () => {
 export const useSortOrderQueryParams = () => {
     const [sortOrder] = useSectionListSortOrder()
 
-    return sortOrder ? `${sortOrder[0]}:i${sortOrder[1]}` : undefined
+    return sortOrder ? formatSortOrderToString(sortOrder, false) : undefined
 }
