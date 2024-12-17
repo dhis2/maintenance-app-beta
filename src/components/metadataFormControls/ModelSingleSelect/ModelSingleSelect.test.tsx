@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, fireEvent, waitFor } from '@testing-library/react'
 import React from 'react'
 import { ComponentWithProvider } from '../../../testUtils/TestComponentWithRouter'
@@ -147,10 +146,6 @@ describe('<CategoryComboSelect />', () => {
             )
             expect(selectOptions).toBeTruthy()
         }
-        // const noneOption = await result.findByText('None', {
-        //     selector: '[data-test="dhis2-uicore-singleselectoption"]',
-        // })
-        // expect(noneOption).toBeInTheDocument()
     })
 
     it('should add an "empty" option when showNoValueOption is true', async () => {
