@@ -8,7 +8,7 @@ type InitialCategoryComboQueryResult = {
     categoryCombo: FilteredCategoryCombo
 }
 
-const INITIAL_OPTION_QUERY = {
+const INITIAL_CATEGORY_COMBO_QUERY = {
     categoryCombo: {
         resource: 'categoryCombos',
         id: (variables: Record<string, string>) => variables.id,
@@ -18,7 +18,7 @@ const INITIAL_OPTION_QUERY = {
     },
 }
 
-export function useInitialOptionQuery({
+export function useInitialCategoryComboQuery({
     selected,
     onComplete,
 }: {
@@ -26,15 +26,18 @@ export function useInitialOptionQuery({
     selected?: string
 }) {
     const initialSelected = useRef(selected)
-    return useDataQuery<InitialCategoryComboQueryResult>(INITIAL_OPTION_QUERY, {
-        lazy:
-            !initialSelected.current ||
-            initialSelected.current === DEFAULT_CATEGORY_COMBO.id,
-        variables: { id: selected },
-        onComplete: (data) => {
-            const categoryCombo = data.categoryCombo
-            const { id: value, displayName: label } = categoryCombo
-            onComplete({ value, label })
-        },
-    })
+    return useDataQuery<InitialCategoryComboQueryResult>(
+        INITIAL_CATEGORY_COMBO_QUERY,
+        {
+            lazy:
+                !initialSelected.current ||
+                initialSelected.current === DEFAULT_CATEGORY_COMBO.id,
+            variables: { id: selected },
+            onComplete: (data) => {
+                const categoryCombo = data.categoryCombo
+                const { id: value, displayName: label } = categoryCombo
+                onComplete({ value, label })
+            },
+        }
+    )
 }

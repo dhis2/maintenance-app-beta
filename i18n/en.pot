@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-09T08:26:30.983Z\n"
-"PO-Revision-Date: 2024-12-09T08:26:30.983Z\n"
+"POT-Creation-Date: 2024-12-11T08:38:02.793Z\n"
+"PO-Revision-Date: 2024-12-11T08:38:02.793Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1233,6 +1233,12 @@ msgstr "Configure data elements"
 
 msgid "Choose what data is collected for this data set."
 msgstr "Choose what data is collected for this data set."
+
+msgid "Data set disaggregation"
+msgstr "Data set disaggregation"
+
+msgid "Choose an optional category combination to disaggregate the entire data set."
+msgstr "Choose an optional category combination to disaggregate the entire data set."
 
 msgid "Configure data entry periods"
 msgstr "Configure data entry periods"
