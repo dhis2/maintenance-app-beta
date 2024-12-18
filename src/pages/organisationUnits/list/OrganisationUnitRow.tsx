@@ -18,16 +18,12 @@ import { OrganisationUnitListActions } from './OrganisationUnitListActions'
 
 export const OrganisationUnitRow = ({
     row,
-    toggleShowAll,
-    showAllActive,
     isFiltering,
     fetchNextPage,
     onShowDetailsClick,
     hasErrored,
 }: {
     row: Row<OrganisationUnitListItem>
-    toggleShowAll: (id: string) => void
-    showAllActive: boolean
     isFiltering: boolean
     fetchNextPage: (id: string) => void
     onShowDetailsClick: (model: BaseListModel) => void
@@ -47,26 +43,6 @@ export const OrganisationUnitRow = ({
                     >
                         {row.getCanExpand() ? (
                             <>
-                                {isFiltering &&
-                                    (showAllActive ||
-                                        row.original.childCount !==
-                                            row.subRows.length) && (
-                                        <Button
-                                            secondary
-                                            onClick={() => {
-                                                toggleShowAll(row.original.id)
-                                            }}
-                                            icon={
-                                                showAllActive ? (
-                                                    <IconArrowUp16 />
-                                                ) : (
-                                                    <IconArrowDown16 />
-                                                )
-                                            }
-                                        >
-                                            Show all
-                                        </Button>
-                                    )}
                                 <Button
                                     className={css.expandButton}
                                     secondary

@@ -56,7 +56,7 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
                 success: true,
             })
             queryClient.invalidateQueries({
-                queryKey: [{ resource: getSectionPath(section) }],
+                queryKey: [{ resource: section.namePlural }],
             })
             navigate(`/${getSectionPath(section)}`)
         },
@@ -114,7 +114,7 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
                 success: true,
             })
             queryClient.invalidateQueries({
-                queryKey: [{ resource: getSectionPath(section) }],
+                queryKey: [{ resource: section.namePlural }],
             })
             navigate(`/${getSectionPath(section)}`)
         },
