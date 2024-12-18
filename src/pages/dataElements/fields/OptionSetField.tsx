@@ -32,7 +32,7 @@ export function OptionSetField() {
                     name="optionSet.id"
                     label={i18n.t('Option set')}
                     helpText={i18n.t(
-                        'Choose a set of predefined options for data entry'
+                        'Choose a set of predefined options for data entry.'
                     )}
                     validationText={meta.touched ? meta.error : undefined}
                     error={meta.touched && !!meta.error}

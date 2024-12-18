@@ -55,7 +55,7 @@ export const CategoryOptionFormFields = () => {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose when, and for which organisation units this category option will be available.'
+                        'Choose when, and for which organisation units, this category option will be available.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>

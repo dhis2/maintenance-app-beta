@@ -121,7 +121,7 @@ export function CustomAttributesSection({
 
             <StandardFormSectionDescription>
                 {i18n.t(
-                    'Set up information for the attributes assigned to {{modelName}}',
+                    'Set up information for the attributes assigned to {{modelName}}.',
                     { modelName: schemaSection.titlePlural.toLowerCase() }
                 )}
             </StandardFormSectionDescription>

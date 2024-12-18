@@ -1,0 +1,8 @@
+.OrganisationUnitTreeWrapper {
+    padding: var(--spacers-dp4);
+    border: 1px solid var(--colors-grey300);
+    border-radius: 3px;
+    width: 640px;
+    max-height: 800px;
+    overflow: auto;
+}

@@ -30,7 +30,7 @@ export function DataElementGroupSetFormFields() {
 
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Set up the information for this data element group'
+                        'Set up the information for this data element group set.'
                     )}
                 </StandardFormSectionDescription>
 
@@ -40,7 +40,7 @@ export function DataElementGroupSetFormFields() {
                     <DescriptionField
                         schemaSection={section}
                         helpText={i18n.t(
-                            'Explain the purpose of this data element group.'
+                            'Explain the purpose of this data element group set.'
                         )}
                     />
                 </StandardFormField>

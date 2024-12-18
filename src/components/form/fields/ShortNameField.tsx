@@ -49,7 +49,7 @@ export function ShortNameField({
     })
 
     const helpString =
-        helpText || i18n.t('Often used in reports where space is limited')
+        helpText || i18n.t('Often used in reports where space is limited.')
 
     return (
         <FieldRFF<string | undefined>

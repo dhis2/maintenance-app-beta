@@ -2,8 +2,9 @@
 
 /* component-specific variables not defined in ui */
 html {
-    --sidenav-dark-bg-hover: #2c3644;
-    --sidenav-dark-bg-selected: #040506;
+    --sidenav-dark-bg: #040506;
+    --sidenav-dark-bg-hover: #0b0d10;
+    --sidenav-dark-bg-selected: #010101;
 }
 
 /* nuke list styles */
@@ -17,44 +18,52 @@ html {
 .sidenav-wrap {
     width: 100%;
     height: 100%;
-    background: var(--colors-grey900);
+    background: var(--sidenav-dark-bg);
     overflow-y: auto;
-    color: white;
+    color: var(--colors-grey300);
     display: flex;
     flex-direction: column;
 }
 
 .sidenav-items {
     overflow-y: auto;
+    scrollbar-color: var(--colors-grey700) var(--sidenav-dark-bg);
+    scrollbar-width: thin;
 }
 
 /* parent */
 .sidenav-parent button {
     border: none;
-    background: var(--colors-grey900);
-    color: white;
-    font-size: 15px;
+    background: var(--sidenav-dark-bg);
+    color: var(--colors-grey300);
+    font-size: 14px;
     text-align: left;
     display: flex;
     align-items: center;
     width: 100%;
-    min-height: 36px;
+    min-height: 32px;
     padding: 8px 8px 8px 12px;
 }
 .sidenav-parent button:hover {
     background: var(--sidenav-dark-bg-hover);
+    text-decoration: underline;
 }
 .sidenav-parent button:focus {
     outline: 2px solid white;
     background: var(--sidenav-dark-bg-hover);
     outline-offset: -2px;
 }
+/* Prevent focus styles when mouse clicking */
+.sidenav-parent button:focus:not(:focus-visible) {
+    outline: none;
+    background: var(--sidenav-dark-bg);
+}
 .sidenav-parent button:disabled {
     color: var(--colors-grey500);
     cursor: not-allowed;
 }
 .sidenav-parent button:disabled:hover {
-    background: var(--colors-grey900);
+    background: var(--sidenav-dark-bg);
 }
 .sidenav-parent-chevron {
     margin-left: auto;
@@ -72,18 +81,19 @@ html {
 }
 .sidenav-link a {
     display: block;
-    min-height: 36px;
+    min-height: 32px;
     padding: 8px 8px 8px 12px;
-    background: var(--colors-grey900);
+    background: var(--sidenav-dark-bg);
     text-decoration: none;
-    color: white;
-    font-size: 15px;
+    color: var(--colors-grey300);
+    font-size: 14px;
     display: flex;
     align-items: center;
 }
 .sidenav-link:hover,
 .sidenav-link a:hover {
     background: var(--sidenav-dark-bg-hover);
+    text-decoration: underline;
 }
 .sidenav-link:focus,
 .sidenav-link a:focus {
@@ -98,15 +108,23 @@ html {
 }
 .sidenav-link-disabled:hover,
 .sidenav-link-disabled:hover > a {
-    background: var(--colors-grey900);
+    background: var(--sidenav-dark-bg);
 }
 .sidenav-link a.active,
 .sidenav-link :global(.active) {
-    font-weight: 600;
+    font-weight: 700;
+    text-decoration: underline;
+    color: var(--colors-grey300);
     background: var(--sidenav-dark-bg-selected);
-    box-shadow: inset 6px 0px 0px 0px var(--colors-teal500);
+    box-shadow: inset 6px 0px 0px 0px var(--colors-teal400);
 }
 .sidenav-link.active:hover {
+    background: var(--sidenav-dark-bg-selected);
+}
+/* Prevent focus styles when mouse clicking */
+.sidenav-link:focus:not(:focus-visible),
+.sidenav-link a:focus:not(:focus-visible) {
+    outline: none;
     background: var(--sidenav-dark-bg-selected);
 }
 .sidenav-item-icon {
@@ -143,20 +161,20 @@ html {
 }
 
 .sidenav-filter {
-    padding: var(--spacers-dp12) var(--spacers-dp8) var(--spacers-dp16);
+    padding: var(--spacers-dp8);
 }
 .sidenav-filter input {
-    background: #131a22;
-    border: 1px solid #111111;
+    background: var(--sidenav-dark-bg);
+    border: 1px solid var(--colors-grey900);
     color: var(--colors-grey050);
 }
 
 .sidenav-filter input::placeholder {
-    color: var(--colors-grey400);
+    color: var(--colors-grey500);
 }
 
 .sidenav-filter input:focus {
-    background: #131a22;
+    background: var(--sidenav-dark-bg);
     border-color: var(--colors-grey700);
-    box-shadow: var(--colors-grey400) 0px 0px 0px 2px inset;
+    box-shadow: var(--colors-grey500) 0px 0px 0px 2px inset;
 }

@@ -26,7 +26,9 @@ export const CategoryComboFormFields = () => {
                     {i18n.t('Basic information')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t('Set up the basic information for this category.')}
+                    {i18n.t(
+                        'Set up the basic information for this category combination.'
+                    )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <NameField schemaSection={section} />
@@ -43,7 +45,7 @@ export const CategoryComboFormFields = () => {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose how this category combo will be used to capture and analyze data.'
+                        'Choose how this category combination will be used to capture and analyze data.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
@@ -84,7 +86,7 @@ export const CategoryComboFormFields = () => {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose the categories to include in this category combo.'
+                        'Choose the categories to include in this category combination.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>

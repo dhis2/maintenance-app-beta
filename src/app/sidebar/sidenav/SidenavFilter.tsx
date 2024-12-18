@@ -24,9 +24,9 @@ export const SidenavFilter = ({ onChange }: SidenavParentProps) => {
         <Input
             className={styles['sidenav-filter']}
             dense
-            type="text"
+            type="search"
             value={value}
-            placeholder={i18n.t('Search for menu items')}
+            placeholder={i18n.t('Search menu items')}
             onChange={handleChange}
         />
     )
