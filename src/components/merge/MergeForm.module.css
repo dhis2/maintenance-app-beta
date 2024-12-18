@@ -1,0 +1,56 @@
+.mergeForm {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacers-dp16);
+    gap: var(--spacers-dp16);
+    box-shadow: var(--elevations-e100);
+    border-radius: 3px;
+    background-color: var(--colors-white);
+}
+
+.description {
+    line-height: 19px;
+    color: var(--colors-grey800);
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+    margin: 0;
+}
+
+.description p {
+    margin: 0;
+}
+
+.mergeInProgress {
+    display: flex;
+    gap: var(--spacers-dp8);
+    font-weight: 500;
+}
+
+.mergeCompleteBackButton {
+    margin-block-start: var(--spacers-dp16);
+}
+
+.formSections {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp16);
+}
+
+.formSection {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+}
+
+.title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--colors-grey800);
+}
+
+.mergeActions {
+    padding-block-start: var(--spacers-dp16);
+}
