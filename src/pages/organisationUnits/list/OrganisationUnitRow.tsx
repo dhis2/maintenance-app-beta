@@ -87,7 +87,9 @@ export const OrganisationUnitRow = ({
                                     onClick={row.getToggleExpandedHandler()}
                                 ></Button>
                             </>
-                        ) : null}
+                        ) : (
+                            <span style={{ width: 26 }} />
+                        )}
                         <Checkbox
                             checked={row.getIsSelected()}
                             onChange={({ checked }) =>

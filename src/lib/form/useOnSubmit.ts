@@ -2,6 +2,7 @@ import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { useMemo } from 'react'
 import { FormProps } from 'react-final-form'
+import { useQueryClient } from 'react-query'
 import { ModelSection } from '../../types'
 import { IdentifiableObject } from '../../types/generated'
 import { getSectionPath, useNavigateWithSearchState } from '../routeUtils'
@@ -24,6 +25,7 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
     section,
 }: UseOnSubmitEditOptions) => {
     const patchDirtyFields = usePatchModel(modelId, section.namePlural)
+    const queryClient = useQueryClient()
     const saveAlert = useAlert(
         ({ message }) => message,
         (options) => options
@@ -53,6 +55,9 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
                 message: i18n.t('Saved successfully'),
                 success: true,
             })
+            queryClient.invalidateQueries({
+                queryKey: [{ resource: getSectionPath(section) }],
+            })
             navigate(`/${getSectionPath(section)}`)
         },
         [patchDirtyFields, saveAlert, navigate, section]
@@ -81,6 +86,7 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
     section: ModelSection
 }) => {
     const createModel = useCreateModel(section.namePlural)
+    const queryClient = useQueryClient()
     const saveAlert = useAlert(
         ({ message }) => message,
         (options) => options
@@ -106,6 +112,9 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
             saveAlert.show({
                 message: i18n.t('Created successfully'),
                 success: true,
+            })
+            queryClient.invalidateQueries({
+                queryKey: [{ resource: getSectionPath(section) }],
             })
             navigate(`/${getSectionPath(section)}`)
         },
