@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-18T13:07:04.607Z\n"
-"PO-Revision-Date: 2024-12-18T13:07:04.607Z\n"
+"POT-Creation-Date: 2024-12-19T13:21:57.978Z\n"
+"PO-Revision-Date: 2024-12-19T13:21:57.978Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1268,6 +1268,69 @@ msgstr "Advanced options"
 
 msgid "These options are used for advanced data set configurations."
 msgstr "These options are used for advanced data set configurations."
+
+msgid "BiMonthly"
+msgstr "BiMonthly"
+
+msgid "BiWeekly"
+msgstr "BiWeekly"
+
+msgid "Daily"
+msgstr "Daily"
+
+msgid "FinancialApril"
+msgstr "FinancialApril"
+
+msgid "FinancialJuly"
+msgstr "FinancialJuly"
+
+msgid "FinancialNov"
+msgstr "FinancialNov"
+
+msgid "FinancialOct"
+msgstr "FinancialOct"
+
+msgid "Monthly"
+msgstr "Monthly"
+
+msgid "Quarterly"
+msgstr "Quarterly"
+
+msgid "QuarterlyNov"
+msgstr "QuarterlyNov"
+
+msgid "SixMonthlyApril"
+msgstr "SixMonthlyApril"
+
+msgid "SixMonthlyNov"
+msgstr "SixMonthlyNov"
+
+msgid "SixMonthly"
+msgstr "SixMonthly"
+
+msgid "TwoYearly"
+msgstr "TwoYearly"
+
+msgid "Weekly"
+msgstr "Weekly"
+
+msgid "WeeklySaturday"
+msgstr "WeeklySaturday"
+
+msgid "WeeklySunday"
+msgstr "WeeklySunday"
+
+msgid "WeeklyThursday"
+msgstr "WeeklyThursday"
+
+msgid "WeeklyWednesday"
+msgstr "WeeklyWednesday"
+
+msgid "Yearly"
+msgstr "Yearly"
+
+msgid "Something went wrong"
+msgstr "Something went wrong"
 
 msgid "Setup"
 msgstr "Setup"
