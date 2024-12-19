@@ -2,8 +2,8 @@ import i18n from '@dhis2/d2-i18n'
 import React, { forwardRef } from 'react'
 import { ModelSingleSelectLegacy } from '../ModelSingleSelect'
 import type { ModelSingleSelectLegacyProps } from '../ModelSingleSelect'
-import { useInitialCategoryComboQuery } from './useInitialCategoryComboQuery'
 import { useCategoryCombosQuery } from './useCategoryCombosQuery'
+import { useInitialCategoryComboQuery } from './useInitialCategoryComboQuery'
 
 type CategoryComboSelectProps = Omit<
     ModelSingleSelectLegacyProps,

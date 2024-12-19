@@ -18,10 +18,10 @@ import {
     useSelectedSection,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
-import { DataSetFormDescriptor } from './formDescriptor'
 import { CategoryComboField } from './CategoryComboField'
-import { PeriodTypeField } from './PeriodTypeField'
 import { ColorAndIconField } from '../../dataElements/fields'
+import { DataSetFormDescriptor } from './formDescriptor'
+import { PeriodTypeField } from './PeriodTypeField'
 
 const section = SECTIONS_MAP.dataSet
 
