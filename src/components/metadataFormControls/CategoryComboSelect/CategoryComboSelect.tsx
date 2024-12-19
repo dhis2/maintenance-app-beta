@@ -2,8 +2,8 @@ import i18n from '@dhis2/d2-i18n'
 import React, { forwardRef } from 'react'
 import { ModelSingleSelectLegacy } from '../ModelSingleSelect'
 import type { ModelSingleSelectLegacyProps } from '../ModelSingleSelect'
-import { useInitialOptionQuery } from './useInitialOptionQuery'
-import { useOptionsQuery } from './useOptionsQuery'
+import { useCategoryCombosQuery } from './useCategoryCombosQuery'
+import { useInitialCategoryComboQuery } from './useInitialCategoryComboQuery'
 
 type CategoryComboSelectProps = Omit<
     ModelSingleSelectLegacyProps,
@@ -30,8 +30,8 @@ export const CategoryComboSelect = forwardRef(function CategoryComboSelect(
             required={required}
             invalid={invalid}
             disabled={disabled}
-            useInitialOptionQuery={useInitialOptionQuery}
-            useOptionsQuery={useOptionsQuery}
+            useInitialOptionQuery={useInitialCategoryComboQuery}
+            useOptionsQuery={useCategoryCombosQuery}
             placeholder={placeholder}
             showAllOption={showAllOption}
             onChange={onChange}

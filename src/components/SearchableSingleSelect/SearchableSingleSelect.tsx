@@ -49,7 +49,7 @@ type OnChange = ({ selected }: { selected: string }) => void
 type OnFilterChange = ({ value }: { value: string }) => void
 export interface SearchableSingleSelectPropTypes {
     onChange: OnChange
-    onFilterChange: OnFilterChange
+    onFilterChange?: OnFilterChange
     onEndReached?: () => void
     onRetryClick: () => void
     dense?: boolean
@@ -65,6 +65,7 @@ export interface SearchableSingleSelectPropTypes {
     showAllOption?: boolean
     onBlur?: () => void
     onFocus?: () => void
+    searchable?: boolean
 }
 
 export const SearchableSingleSelect = ({
@@ -85,13 +86,15 @@ export const SearchableSingleSelect = ({
     selected,
     showAllOption,
     showEndLoader,
+    searchable = true,
 }: SearchableSingleSelectPropTypes) => {
     const [loadingSpinnerRef, setLoadingSpinnerRef] = useState<HTMLElement>()
 
     const { liveValue: filter, setValue: setFilterValue } =
         useDebouncedState<string>({
             initialValue: '',
-            onSetDebouncedValue: (value: string) => onFilterChange({ value }),
+            onSetDebouncedValue: (value: string) =>
+                onFilterChange && onFilterChange({ value }),
         })
 
     useEffect(() => {
@@ -137,18 +140,22 @@ export const SearchableSingleSelect = ({
             onFocus={onFocus}
             dense={dense}
         >
-            <div className={classes.searchField}>
-                <div className={classes.searchInput}>
-                    <Input
-                        dense
-                        initialFocus
-                        value={filter}
-                        onChange={({ value }) => setFilterValue(value ?? '')}
-                        placeholder={i18n.t('Filter options')}
-                        type="search"
-                    />
+            {searchable && (
+                <div className={classes.searchField}>
+                    <div className={classes.searchInput}>
+                        <Input
+                            dense
+                            initialFocus
+                            value={filter}
+                            onChange={({ value }) =>
+                                setFilterValue(value ?? '')
+                            }
+                            placeholder={i18n.t('Filter options')}
+                            type="search"
+                        />
+                    </div>
                 </div>
-            </div>
+            )}
 
             {withAllOptions.map(({ value, label }) => (
                 <SingleSelectOption key={value} value={value} label={label} />
