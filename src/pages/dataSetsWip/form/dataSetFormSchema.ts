@@ -18,8 +18,8 @@ export const dataSetFormSchema = identifiable
         style,
         dataElements: referenceCollection.default([]),
         categoryCombo: z
-            .object({ id: z.string() })
-            .default({ id: DEFAULT_CATEGORY_COMBO.id }),
+            .object({ id: z.string(), displayName: z.string() })
+            .default({ ...DEFAULT_CATEGORY_COMBO }),
         periodType: z.string().default('Monthly'),
     })
 

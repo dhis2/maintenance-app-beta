@@ -15,11 +15,10 @@ import {
 import {
     SECTIONS_MAP,
     useSectionedFormContext,
-    useSelectedSection,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
-import { CategoryComboField } from './CategoryComboField'
 import { ColorAndIconField } from '../../dataElements/fields'
+import { CategoryComboField } from './CategoryComboField'
 import { DataSetFormDescriptor } from './formDescriptor'
 import { PeriodTypeField } from './PeriodTypeField'
 
