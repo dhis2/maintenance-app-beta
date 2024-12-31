@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
-import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
+import { DefaultEditFormContents } from '../../components/form/DefaultFormContents'
 import { FormBase } from '../../components/form/FormBase'
 import { SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
@@ -40,9 +40,9 @@ export const Component = () => {
             validate={validate}
             includeAttributes={false}
         >
-            <DefaultNewFormContents section={section}>
+            <DefaultEditFormContents section={section}>
                 <IndicatorTypesFormFields />
-            </DefaultNewFormContents>
+            </DefaultEditFormContents>
         </FormBase>
     )
 }
