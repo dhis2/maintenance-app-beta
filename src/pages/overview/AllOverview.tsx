@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import { CategoryCardGroup } from './Categories'
+import { OrganisationUnitCardGroup } from './OrganisationUnits'
 import { DataElementsCardGroup } from './DataElements'
 import { OverviewGroup } from './group'
 
@@ -9,6 +10,7 @@ export const AllOverview = () => {
         <OverviewGroup title={i18n.t('Metadata management')}>
             <DataElementsCardGroup showTitle={true} />
             <CategoryCardGroup showTitle={true} />
+            <OrganisationUnitCardGroup showTitle={true} />
         </OverviewGroup>
     )
 }
