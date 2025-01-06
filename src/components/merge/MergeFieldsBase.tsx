@@ -135,10 +135,6 @@ export const MergeSourcesTargetWrapper = ({
     )
 }
 
-export const ConfirmField = ({}: {}) => {
-    return (
-        <Field name="confirm" label="Confirm" required>
-            <input type="checkbox" />
-        </Field>
-    )
+export const ConfirmField = () => {
+    return <Field name="confirm" label="Confirm" required></Field>
 }

@@ -89,36 +89,4 @@ export const Component = () => {
             )}
         </Form>
     )
-
-    // return (
-    //     <MergeFormBase
-    //         initialValues={initialValues}
-    //         onSubmit={onSubmit}
-    //         validate={validate}
-    //     >
-    //         <DefaultMergeFormContents
-    //             title={
-    //                 <StandardFormSectionTitle>
-    //                     Configure indicator type merge
-    //                 </StandardFormSectionTitle>
-    //             }
-    //             mergeCompleteElement={
-    //                 <MergeComplete>
-    //                     <p>
-    //                         {i18n.t(
-    //                             'The indicator types merge operation is complete.'
-    //                         )}
-    //                     </p>
-    //                     <p>
-    //                         {i18n.t(
-    //                             'All selected indicator types were merged successfully.'
-    //                         )}
-    //                     </p>
-    //                 </MergeComplete>
-    //             }
-    //         >
-    //             <IndicatorTypeMergeFormFields />
-    //         </DefaultMergeFormContents>
-    //     </MergeFormBase>
-    // )
 }
