@@ -30,9 +30,7 @@ export const CategoryFormFields = () => {
                 <DefaultIdentifiableFields />
                 <DescriptionField
                     schemaSection={section}
-                    helpText={i18n.t(
-                        'Explain the purpose of this category option group.'
-                    )}
+                    helpText={i18n.t('Explain the purpose of this category.')}
                 />
             </StandardFormSection>
 
@@ -42,7 +40,7 @@ export const CategoryFormFields = () => {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose how this category option group will be used to capture and analyze data.'
+                        'Choose how this category will be used to capture and analyze data.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>

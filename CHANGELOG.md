@@ -1,3 +1,16 @@
+# [0.20.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.19.5...v0.20.0) (2025-01-07)
+
+
+### Bug Fixes
+
+* indent org unit with no child and refresh lists on updates ([#473](https://github.com/dhis2/maintenance-app-beta/issues/473)) [skip release] ([b48825f](https://github.com/dhis2/maintenance-app-beta/commit/b48825f9789572be7cf29694f884b5221ff3c68a))
+* switch indicator type edit form to correct format ([#477](https://github.com/dhis2/maintenance-app-beta/issues/477)) ([71cb979](https://github.com/dhis2/maintenance-app-beta/commit/71cb97999e87f0026e3a09ae83cd8c96dbb36405))
+
+
+### Features
+
+* wrap warnings only on small screens ([#476](https://github.com/dhis2/maintenance-app-beta/issues/476)) ([98de360](https://github.com/dhis2/maintenance-app-beta/commit/98de360960cbad093a226a73d70971366619ced6))
+
 ## [0.19.5](https://github.com/dhis2/maintenance-app-beta/compare/v0.19.4...v0.19.5) (2024-12-18)
 
 
