@@ -8,7 +8,9 @@ const sectionAuthorityMap = new Map<ModelSection, string>([
     [SECTIONS_MAP.indicatorType, 'F_INDICATOR_TYPE_MERGE'],
 ])
 
-const getMergeAuthority = (section: ModelSection): string | undefined => {
+export const getMergeAuthority = (
+    section: ModelSection
+): string | undefined => {
     return sectionAuthorityMap.get(section)
 }
 
