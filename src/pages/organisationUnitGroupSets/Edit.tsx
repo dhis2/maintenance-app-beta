@@ -50,12 +50,9 @@ export const Component = () => {
         queryFn: queryFn<OrganisationUnitGroupSetFormValues>,
     })
 
-    console.log({ aaa: organisationUnitGroupSetQuery.data })
-
     return (
         <FormBase
             onSubmit={useOnSubmitEdit({ section, modelId })}
-            section={section}
             initialValues={organisationUnitGroupSetQuery.data}
             validate={validate}
         >

@@ -69,7 +69,6 @@ export const Component = () => {
                 section,
                 modelId,
             })}
-            section={section}
             initialValues={orgUnit.data}
             validate={validate}
         >

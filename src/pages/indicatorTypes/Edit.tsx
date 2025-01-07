@@ -35,7 +35,6 @@ export const Component = () => {
     return (
         <FormBase
             onSubmit={useOnSubmitEdit({ section, modelId })}
-            section={section}
             initialValues={indicatorTypeQuery.data}
             validate={validate}
             includeAttributes={false}
