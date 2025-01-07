@@ -1,7 +1,12 @@
 .categoriesFieldWrapper {
     display: flex;
-    flex-wrap: wrap;
     gap: var(--spacers-dp8);
+}
+
+@media (max-width: 1200px) {
+    .categoriesFieldWrapper {
+        flex-wrap: wrap;
+    }
 }
 
 .categoriesNoticesWrapper {
