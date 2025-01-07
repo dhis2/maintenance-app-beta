@@ -30,7 +30,7 @@ export const BaseSourcesField = (props: BaseSourceFieldProps) => {
             maxHeight="150px"
             placeholder="Select models to merge"
             // use select to filter out the target from available sources
-            select={(availableSources) =>
+            transform={(availableSources) =>
                 availableSources.filter((s) => s.id !== targetValue?.id)
             }
             {...props}

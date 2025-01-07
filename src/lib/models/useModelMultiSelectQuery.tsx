@@ -52,8 +52,9 @@ export const useModelMultiSelectQuery = <
 }: UseModelMultiSelectQueryOptions<TModel>) => {
     const queryFn = useBoundResourceQueryFn()
     const modelName = query.resource
+    const mergedQuery = withDefaultQuery(query)
     const queryResult = useInfiniteQuery({
-        queryKey: [withDefaultQuery(query)],
+        queryKey: [mergedQuery],
         queryFn: queryFn<Response<TModel>>,
         keepPreviousData: true,
         getNextPageParam: (lastPage) =>
@@ -84,9 +85,8 @@ export const useModelMultiSelectQuery = <
             {
                 resource: modelName,
                 params: {
+                    ...mergedQuery.params,
                     filter: [`id:in:[${selectedWithoutData?.join()}]`],
-                    order: defaultQuery.params.order,
-                    fields: defaultQuery.params.fields,
                     paging: false, // this should be OK since selected should be a limited list...
                 },
             },
@@ -95,16 +95,22 @@ export const useModelMultiSelectQuery = <
         enabled: selectedWithoutData && selectedWithoutData.length > 0,
     })
 
-    const resolvedSelected = selected?.map((s) => {
-        if (s.displayName === undefined) {
-            return (
-                flatData.find((d) => d.id === s.id) ||
-                selectedQuery.data?.[modelName].find((d) => d.id === s.id) ||
-                s
-            )
-        }
-        return s
-    })
+    const resolvedSelected = useMemo(
+        () =>
+            selected?.map((s) => {
+                if (s.displayName === undefined) {
+                    return (
+                        flatData.find((d) => d.id === s.id) ||
+                        selectedQuery.data?.[modelName].find(
+                            (d) => d.id === s.id
+                        ) ||
+                        s
+                    )
+                }
+                return s
+            }),
+        [selected, flatData, selectedQuery.data, modelName]
+    )
 
     return {
         selected: resolvedSelected || [],

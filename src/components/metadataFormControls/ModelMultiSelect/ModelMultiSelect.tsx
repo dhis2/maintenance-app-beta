@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import { useModelMultiSelectQuery } from '../../../lib/models/useModelMultiSelectQuery'
 import { PlainResourceQuery } from '../../../types'
@@ -23,15 +23,14 @@ export type ModelMultiSelectProps<
 > & {
     query: Omit<PlainResourceQuery, 'id'>
     onFilterChange?: (value: string) => void
-    /* Select is a way to transform or filter out available options */
-    select?: (value: TModel[]) => TModel[]
+    transform?: (value: TModel[]) => TModel[]
     selected: TModel[] | undefined
 }
 
 export const ModelMultiSelect = <TModel extends PartialLoadedDisplayableModel>({
     selected = [],
     query,
-    select,
+    transform,
     ...baseModelSingleSelectProps
 }: ModelMultiSelectProps<TModel>) => {
     const [searchTerm, setSearchTerm] = useState('')
@@ -74,7 +73,10 @@ export const ModelMultiSelect = <TModel extends PartialLoadedDisplayableModel>({
         }
     }, [selectedQuery.data, selected, selectedData, onChange])
 
-    const resolvedAvailable = select ? select(availableData) : availableData
+    const resolvedAvailable = useMemo(
+        () => (transform ? transform(availableData) : availableData),
+        [availableData, transform]
+    )
 
     const handleFilterChange = useDebouncedCallback(({ value }) => {
         if (value != undefined) {

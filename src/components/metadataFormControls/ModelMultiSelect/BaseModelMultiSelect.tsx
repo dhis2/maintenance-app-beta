@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import React, { useCallback, useMemo } from 'react'
 import { PartialLoadedDisplayableModel } from '../../../types/models'
 import {
@@ -14,7 +15,7 @@ type OwnProps<TModel> = {
     selected: TModel[]
     available: TModel[]
     onChange: ({ selected }: { selected: TModel[] }) => void
-    noValueOption?: { value: string; label: string }
+    showNoValueOption?: boolean
 }
 
 export type BaseModelMultiSelectProps<
@@ -32,34 +33,36 @@ export const BaseModelMultiSelect = <
     available,
     selected,
     onChange,
-    noValueOption,
+    showNoValueOption: noValueOption,
     ...searchableMultiSelectProps
 }: BaseModelMultiSelectProps<TModel>) => {
-    const { allModelsMap, allSingleSelectOptions, selectedOptions } =
-        useMemo(() => {
-            const allModelsMap = new Map(available.map((o) => [o.id, o]))
-            // due to pagination, the selected models might not be in the available list, so add them
-            selected.forEach((s) => {
-                if (!allModelsMap.get(s.id)) {
-                    allModelsMap.set(s.id, s)
-                }
+    const { allModelsMap, allOptions, selectedOptions } = useMemo(() => {
+        const allModelsMap = new Map(available.map((o) => [o.id, o]))
+        // due to pagination, the selected models might not be in the available list, so add them
+        selected.forEach((s) => {
+            if (!allModelsMap.get(s.id)) {
+                allModelsMap.set(s.id, s)
+            }
+        })
+
+        const allOptions = Array.from(allModelsMap).map(([, value]) =>
+            toDisplayOption(value)
+        )
+
+        const selectedOptions = selected.map((s) => s.id)
+        if (noValueOption) {
+            allOptions.unshift({
+                value: '',
+                label: i18n.t('<No value>'),
             })
+        }
 
-            const allSingleSelectOptions = Array.from(allModelsMap).map(
-                ([, value]) => toDisplayOption(value)
-            )
-
-            const selectedOptions = selected.map((s) => s.id)
-            if (noValueOption) {
-                allSingleSelectOptions.unshift(noValueOption)
-            }
-
-            return {
-                allModelsMap,
-                allSingleSelectOptions,
-                selectedOptions,
-            }
-        }, [available, selected, noValueOption])
+        return {
+            allModelsMap,
+            allOptions,
+            selectedOptions,
+        }
+    }, [available, selected, noValueOption])
 
     const handleOnChange = useCallback(
         ({ selected }: { selected: string[] }) => {
@@ -79,7 +82,7 @@ export const BaseModelMultiSelect = <
         <SearchableMultiSelect
             {...searchableMultiSelectProps}
             selected={selectedOptions}
-            options={allSingleSelectOptions}
+            options={allOptions}
             onChange={handleOnChange}
         />
     )
