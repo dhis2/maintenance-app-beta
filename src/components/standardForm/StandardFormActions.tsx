@@ -23,12 +23,17 @@ export function StandardFormActions({
 }) {
     return (
         <ButtonStrip>
-            <Button primary disabled={submitting} type="submit">
+            <Button primary small disabled={submitting} type="submit">
                 {submitting && <LoadingIcon />}
                 {submitLabel}
             </Button>
 
-            <Button disabled={submitting} onClick={onCancelClick}>
+            <Button
+                secondary
+                small
+                disabled={submitting}
+                onClick={onCancelClick}
+            >
                 {cancelLabel}
             </Button>
         </ButtonStrip>

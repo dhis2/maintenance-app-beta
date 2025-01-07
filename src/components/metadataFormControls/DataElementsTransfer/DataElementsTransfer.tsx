@@ -145,6 +145,9 @@ export const DataElementsTransfer = forwardRef(function DataElementsSelect(
             rightFooter={rightFooter}
             leftHeader={leftHeader}
             leftFooter={leftFooter}
+            height="320px"
+            optionsWidth="480px"
+            selectedWidth="480px"
         />
     )
 })

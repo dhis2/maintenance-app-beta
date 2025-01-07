@@ -40,7 +40,7 @@ export function DataElementFormFields() {
                 </StandardFormSectionTitle>
 
                 <StandardFormSectionDescription>
-                    {i18n.t('Set up the information for this data element')}
+                    {i18n.t('Set up the information for this data element.')}
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
@@ -126,7 +126,7 @@ export function DataElementFormFields() {
 
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Visualize values for this data element in Analytics app. Multiple legendSet can be applied.'
+                        'Visualize values for this data element in Analytics app. Multiple legends can be applied.'
                     )}
                 </StandardFormSectionDescription>
 
@@ -142,7 +142,7 @@ export function DataElementFormFields() {
 
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'By default, the aggregation will start at the lowest assigned organisation unit. If you for example select "Chiefdom", it means that "Chiefdom", "District" and "National" aggregates use "Chiefdom" (the highest aggregation level available) as the data source, and PHU data will not be included. PHU will still be available for the PHU level, but not included in the aggregations to the levels above.'
+                        'By default, aggregation starts at the lowest assigned organisation unit. You can override this by choosing a different level. Choosing a higher level means that data from lower levels will not be included in the aggregation.'
                     )}
                 </StandardFormSectionDescription>
 

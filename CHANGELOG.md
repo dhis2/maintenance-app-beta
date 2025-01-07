@@ -1,3 +1,73 @@
+# [0.20.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.19.5...v0.20.0) (2025-01-07)
+
+
+### Bug Fixes
+
+* indent org unit with no child and refresh lists on updates ([#473](https://github.com/dhis2/maintenance-app-beta/issues/473)) [skip release] ([b48825f](https://github.com/dhis2/maintenance-app-beta/commit/b48825f9789572be7cf29694f884b5221ff3c68a))
+* switch indicator type edit form to correct format ([#477](https://github.com/dhis2/maintenance-app-beta/issues/477)) ([71cb979](https://github.com/dhis2/maintenance-app-beta/commit/71cb97999e87f0026e3a09ae83cd8c96dbb36405))
+
+
+### Features
+
+* wrap warnings only on small screens ([#476](https://github.com/dhis2/maintenance-app-beta/issues/476)) ([98de360](https://github.com/dhis2/maintenance-app-beta/commit/98de360960cbad093a226a73d70971366619ced6))
+
+## [0.19.5](https://github.com/dhis2/maintenance-app-beta/compare/v0.19.4...v0.19.5) (2024-12-18)
+
+
+### Bug Fixes
+
+* adjust form container styles ([6d60814](https://github.com/dhis2/maintenance-app-beta/commit/6d60814971e9265c282dfa5a37594a7101cabb0d))
+* adjust form footer styles ([1be5c38](https://github.com/dhis2/maintenance-app-beta/commit/1be5c3897c5eeebe247e0c357fa2873176588281))
+* adjust global background color ([6eab28e](https://github.com/dhis2/maintenance-app-beta/commit/6eab28ea268ab0044c5fe0ab09a3ec2b301fc9e8))
+* adjust help and description texts ([ec05922](https://github.com/dhis2/maintenance-app-beta/commit/ec0592274004954cdf9b4eedb26130449f921550))
+* adjust org unit row height, expand button ([7e5b7a7](https://github.com/dhis2/maintenance-app-beta/commit/7e5b7a7319ab8f904ac608807843b710cc8a618c))
+* adjust sidebar filter empty state ([dc1f21f](https://github.com/dhis2/maintenance-app-beta/commit/dc1f21fc2239b19c3e1e7035ee1a925ddea0ad15))
+* adjust table icon button color ([fcfc1b5](https://github.com/dhis2/maintenance-app-beta/commit/fcfc1b5a17cf623638f13c53e932b99ce120f422))
+* data element group transfers sizing ([d153156](https://github.com/dhis2/maintenance-app-beta/commit/d15315637b796e0bb2ff55a4d1bedb5a1ca902de))
+* only sort if persisted unless it is display name ([#472](https://github.com/dhis2/maintenance-app-beta/issues/472)) [skip release] ([4e4b5b8](https://github.com/dhis2/maintenance-app-beta/commit/4e4b5b8a80c5e4e1de74c0789c1b53cba4832915))
+* ou-tree field styling ([f0e6d18](https://github.com/dhis2/maintenance-app-beta/commit/f0e6d18327f4f6afa8fa79907893de51bbaaeca8))
+* prevent sidebar focus styles on mouse click ([c43aa2a](https://github.com/dhis2/maintenance-app-beta/commit/c43aa2a9a62d130427e182c4285d769438e68d4c))
+* reduce page-title bottom margin ([e4b3f0c](https://github.com/dhis2/maintenance-app-beta/commit/e4b3f0c1cb4783795e983cf36be9613a4fd0b64d))
+* reduce sidebar filter padding ([f96633b](https://github.com/dhis2/maintenance-app-beta/commit/f96633b181a843b13c97b939869ee29c0983c2e6))
+* remove global lineheight declaration ([6e92f6c](https://github.com/dhis2/maintenance-app-beta/commit/6e92f6cdeda697db31f96f63dba3ae5bd5cae804))
+* sidebar filter placeholder label ([3259147](https://github.com/dhis2/maintenance-app-beta/commit/325914705c9ee1ead647a26ca10144a1b7a4aab2))
+* sidebar filter placeholder style ([70664f3](https://github.com/dhis2/maintenance-app-beta/commit/70664f3bc58fe78b6446d38cec8e1a6bc5cb31be))
+* sidebar, sidenav style adjustments ([501b53c](https://github.com/dhis2/maintenance-app-beta/commit/501b53c7e67752fd5209612fb105e657dcf122ee))
+* sort columns using non case sensitive sort ([#469](https://github.com/dhis2/maintenance-app-beta/issues/469)) [skip release] ([e05fd78](https://github.com/dhis2/maintenance-app-beta/commit/e05fd788249c0bad2911bf37e10e7313d9384b67))
+* use destructive style for delete menu items ([209542b](https://github.com/dhis2/maintenance-app-beta/commit/209542b1fa2b668bb530c271b23f419fbe5beb4e))
+
+
+### Features
+
+* do not allow creation of org units at level 1 unless it's the first ([#470](https://github.com/dhis2/maintenance-app-beta/issues/470)) [skip release] ([21e73b8](https://github.com/dhis2/maintenance-app-beta/commit/21e73b8f15bcb31fa04a2a262bbad74d7d2363f8))
+
+## [0.19.4](https://github.com/dhis2/maintenance-app-beta/compare/v0.19.3...v0.19.4) (2024-12-16)
+
+
+### Bug Fixes
+
+* fix type of cat options dates ([#467](https://github.com/dhis2/maintenance-app-beta/issues/467)) [skip release] ([321fed2](https://github.com/dhis2/maintenance-app-beta/commit/321fed28663a39ced7119b0c2094a2d94a78ad69))
+* format factor from number to string on edit ([#466](https://github.com/dhis2/maintenance-app-beta/issues/466)) ([338d4c7](https://github.com/dhis2/maintenance-app-beta/commit/338d4c78787f53af6d21d7f6fcfb6b40edb51634))
+* show zero values, add factor validations ([#463](https://github.com/dhis2/maintenance-app-beta/issues/463)) [skip release] ([1f1dcb1](https://github.com/dhis2/maintenance-app-beta/commit/1f1dcb130dee4593cd0a5f7ae5e29d161812219d))
+
+## [0.19.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.19.2...v0.19.3) (2024-12-05)
+
+
+### Bug Fixes
+
+* **categoryOptionGroup:** remove dataDimension field ([#460](https://github.com/dhis2/maintenance-app-beta/issues/460)) ([276e4ab](https://github.com/dhis2/maintenance-app-beta/commit/276e4abc4ec378afafa7414d8333aec1208f00e5))
+
+## [0.19.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.19.1...v0.19.2) (2024-12-05)
+
+
+### Bug Fixes
+
+* date field to format date before displaying, org unit filters ([#456](https://github.com/dhis2/maintenance-app-beta/issues/456)) ([8537bce](https://github.com/dhis2/maintenance-app-beta/commit/8537bceb284d098500eed2497292c9ab033ebff0))
+* refresh list view on close of dialog ([#461](https://github.com/dhis2/maintenance-app-beta/issues/461)) ([c10d79f](https://github.com/dhis2/maintenance-app-beta/commit/c10d79ffba8383e9559906f98bb858e6113bba83))
+* **categoryCombo:** validation and load optionSize on initial load [skip release] ([#457](https://github.com/dhis2/maintenance-app-beta/issues/457)) ([a1a6110](https://github.com/dhis2/maintenance-app-beta/commit/a1a611021f8e9db17bf87c3e28a32ccc1dcbf691))
+* **categoryOption:** load formName [skip release] ([#458](https://github.com/dhis2/maintenance-app-beta/issues/458)) ([bb3baee](https://github.com/dhis2/maintenance-app-beta/commit/bb3baee8c14ac44554e75d48abd0d80113d8e8cf))
+* **categoryOptionGroups:** add custom attributesection to group/groupset [skip release] ([#459](https://github.com/dhis2/maintenance-app-beta/issues/459)) ([5c853bc](https://github.com/dhis2/maintenance-app-beta/commit/5c853bc995886b1d6ee97be447f87ba3c0df76dd))
+
 ## [0.19.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.19.0...v0.19.1) (2024-12-03)
 
 

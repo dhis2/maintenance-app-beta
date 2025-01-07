@@ -38,6 +38,7 @@ export const DefaultSectionList = ({ filters }: DefaultSectionListProps) => {
             },
         },
     }
+
     const { error, data, refetch } = useQuery({
         queryKey: [query],
         queryFn: ({ queryKey: [query], signal }) => {

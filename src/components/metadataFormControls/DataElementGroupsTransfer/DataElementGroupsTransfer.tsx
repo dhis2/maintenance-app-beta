@@ -148,6 +148,9 @@ export const DataElementGroupsTransfer = forwardRef(
                 rightFooter={rightFooter}
                 leftHeader={leftHeader}
                 leftFooter={leftFooter}
+                height="320px"
+                optionsWidth="480px"
+                selectedWidth="480px"
             />
         )
     }

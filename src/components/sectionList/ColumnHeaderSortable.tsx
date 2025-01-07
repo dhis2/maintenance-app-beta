@@ -1,4 +1,8 @@
-import { DataTableColumnHeader, DataTableColumnHeaderProps } from '@dhis2/ui'
+import {
+    DataTableColumnHeader,
+    DataTableColumnHeaderProps,
+    DataTableSortDirection,
+} from '@dhis2/ui'
 import React, { useCallback } from 'react'
 import {
     SchemaSection,
@@ -37,11 +41,11 @@ export const HeaderColumnsSortable = ({
         [setSortOrder]
     )
 
-    const getDataTableSortDirection = (column: SelectedColumn) => {
-        const allowSort =
-            column && isValidSortPathForSchema(schema, column.path)
+    const isSortAllowed = (column: SelectedColumn) =>
+        column && isValidSortPathForSchema(schema, column.path)
 
-        if (!allowSort) {
+    const getDataTableSortDirection = (column: SelectedColumn) => {
+        if (!isSortAllowed(column)) {
             return undefined
         }
         if (!sortOrder) {
@@ -57,7 +61,11 @@ export const HeaderColumnsSortable = ({
             {headerColumns.map((headerColumn) => (
                 <DataTableColumnHeader
                     sortDirection={getDataTableSortDirection(headerColumn)}
-                    onSortIconClick={handleSortOrderChange}
+                    onSortIconClick={
+                        isSortAllowed(headerColumn)
+                            ? handleSortOrderChange
+                            : undefined
+                    }
                     key={headerColumn.path}
                     name={headerColumn.path}
                 >

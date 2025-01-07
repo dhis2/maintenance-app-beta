@@ -2,13 +2,17 @@ import i18n from '@dhis2/d2-i18n'
 import { Field, NoticeBox, OrganisationUnitTree } from '@dhis2/ui'
 import { IconInfo16 } from '@dhis2/ui-icons'
 import React, { useState } from 'react'
-import { useField } from 'react-final-form'
+import { FieldRenderProps, useField } from 'react-final-form'
 import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
 import classes from './OrganisationUnitSelector.module.css'
 
 export function OrganisationUnitSelector() {
     const fieldName = 'parent'
-    const { input, meta } = useField(fieldName, { format: (value) => value })
+    const { input, meta } = useField(fieldName, {
+        format: (value) => value,
+        validate: (value) =>
+            !value && userRootOrgUnits.length > 0 ? 'Required' : undefined,
+    })
     const userRootOrgUnits = useCurrentUserRootOrgUnits()
     const userRootOrgUnitsIds = userRootOrgUnits.map((unit) => unit.id)
     const userRootOrgUnitsPaths = userRootOrgUnits.map((unit) => unit.path)

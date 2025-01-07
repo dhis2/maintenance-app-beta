@@ -45,6 +45,7 @@ export function DeleteAction({
         <>
             <MenuItem
                 dense
+                destructive
                 disabled={disabled}
                 label={i18n.t('Delete')}
                 icon={<IconDelete16 />}

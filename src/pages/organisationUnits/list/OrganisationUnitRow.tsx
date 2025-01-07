@@ -18,16 +18,12 @@ import { OrganisationUnitListActions } from './OrganisationUnitListActions'
 
 export const OrganisationUnitRow = ({
     row,
-    toggleShowAll,
-    showAllActive,
     isFiltering,
     fetchNextPage,
     onShowDetailsClick,
     hasErrored,
 }: {
     row: Row<OrganisationUnitListItem>
-    toggleShowAll: (id: string) => void
-    showAllActive: boolean
     isFiltering: boolean
     fetchNextPage: (id: string) => void
     onShowDetailsClick: (model: BaseListModel) => void
@@ -37,7 +33,7 @@ export const OrganisationUnitRow = ({
 
     return (
         <>
-            <DataTableRow key={row.id}>
+            <DataTableRow className={css.orgUnitRow} key={row.id}>
                 <DataTableCell>
                     <span
                         style={{
@@ -47,29 +43,10 @@ export const OrganisationUnitRow = ({
                     >
                         {row.getCanExpand() ? (
                             <>
-                                {isFiltering &&
-                                    (showAllActive ||
-                                        row.original.childCount !==
-                                            row.subRows.length) && (
-                                        <Button
-                                            secondary
-                                            onClick={() => {
-                                                toggleShowAll(row.original.id)
-                                            }}
-                                            icon={
-                                                showAllActive ? (
-                                                    <IconArrowUp16 />
-                                                ) : (
-                                                    <IconArrowDown16 />
-                                                )
-                                            }
-                                        >
-                                            Show all
-                                        </Button>
-                                    )}
                                 <Button
                                     className={css.expandButton}
                                     secondary
+                                    small
                                     type="button"
                                     dataTest="row-expand-icon"
                                     loading={
@@ -87,7 +64,9 @@ export const OrganisationUnitRow = ({
                                     onClick={row.getToggleExpandedHandler()}
                                 ></Button>
                             </>
-                        ) : null}
+                        ) : (
+                            <span style={{ width: 26 }} />
+                        )}
                         <Checkbox
                             checked={row.getIsSelected()}
                             onChange={({ checked }) =>

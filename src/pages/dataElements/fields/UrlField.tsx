@@ -18,7 +18,7 @@ export function UrlField() {
             inputWidth="400px"
             name="url"
             label={i18n.t('Url')}
-            helpText={i18n.t('A web link that provides extra information')}
+            helpText={i18n.t('A web link that provides extra information.')}
             validateFields={[]}
             validate={validate}
         />

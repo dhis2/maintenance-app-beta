@@ -250,19 +250,6 @@ export const OrganisationUnitList = () => {
                         <OrganisationUnitRow
                             key={row.id}
                             row={row}
-                            toggleShowAll={(id) =>
-                                setParentIdsToLoad((prev) => {
-                                    const { [id]: wasShown, ...withoutId } =
-                                        prev
-                                    if (wasShown) {
-                                        return withoutId
-                                    }
-                                    return { ...prev, [id]: true }
-                                })
-                            }
-                            showAllActive={
-                                parentIdsToLoad[row.original.id] === true
-                            }
                             onShowDetailsClick={handleDetailsClick}
                             isFiltering={isFiltering}
                             hasErrored={hasErrored}

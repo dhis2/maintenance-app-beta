@@ -8,7 +8,6 @@
 .wrapper {
     display: grid;
     grid-template-areas: 'sidebar' 'main';
-    line-height: 20px;
     font-size: 14px;
     height: 100%;
     background: var(--colors-grey900);
@@ -18,7 +17,7 @@
 .wrapperWithFooter {
     composes: wrapper;
     grid-template-areas: 'sidebar' 'main' 'footer';
-    grid-template-rows: auto 1fr 68px;
+    grid-template-rows: auto 1fr 44px;
     overflow-y: auto;
 }
 
@@ -26,7 +25,7 @@
     padding: var(--spacers-dp16);
     padding-bottom: 0px;
     grid-area: main;
-    background-color: var(--colors-grey100);
+    background-color: var(--colors-grey200);
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -45,13 +44,13 @@
     font-size: 28px;
     color: var(--colors-grey900);
     line-height: 40px;
-    padding-bottom: 16px;
+    padding-bottom: 8px;
 }
 
 .footerPlaceholder {
     grid-area: footer;
     width: 100vw;
-    padding: var(--spacers-dp16) 0;
+    padding: 0;
     background: var(--colors-white);
 }
 
@@ -65,7 +64,7 @@
     }
     .wrapperWithFooter {
         grid-template-areas: 'sidebar main' 'footer footer';
-        grid-template-rows: 1fr 68px;
+        grid-template-rows: 1fr 44px;
     }
     .sidebar {
         width: 240px;

@@ -26,7 +26,7 @@ export function DataElementGroupFormFields() {
 
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Set up the information for this data element group'
+                        'Set up the information for this data element group.'
                     )}
                 </StandardFormSectionDescription>
 

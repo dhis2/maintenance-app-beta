@@ -47,14 +47,14 @@ function Error({
 
 type OnChange = ({ selected }: { selected: string }) => void
 type OnFilterChange = ({ value }: { value: string }) => void
-interface SearchableSingleSelectPropTypes {
+export interface SearchableSingleSelectPropTypes {
     onChange: OnChange
     onFilterChange: OnFilterChange
     onEndReached?: () => void
     onRetryClick: () => void
     dense?: boolean
     options: Option[]
-    placeholder: string
+    placeholder?: string
     prefix?: string
     showEndLoader: boolean
     loading: boolean
@@ -145,16 +145,9 @@ export const SearchableSingleSelect = ({
                         value={filter}
                         onChange={({ value }) => setFilterValue(value ?? '')}
                         placeholder={i18n.t('Filter options')}
+                        type="search"
                     />
                 </div>
-
-                <button
-                    className={classes.clearButton}
-                    disabled={!filter}
-                    onClick={() => setFilterValue('')}
-                >
-                    clear
-                </button>
             </div>
 
             {withAllOptions.map(({ value, label }) => (

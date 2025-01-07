@@ -6,3 +6,8 @@ export type DisplayableModel = {
     id: string
     displayName: string
 }
+
+export type PartialLoadedDisplayableModel = {
+    id: string
+    displayName?: string
+}

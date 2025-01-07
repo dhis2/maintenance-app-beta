@@ -34,14 +34,19 @@ const parseSortOrderString = (
     return undefined
 }
 
-const formatSortOrderToString = (value: ParsedSortOrder): string =>
-    `${value[0]}:${value[1]}`
+const formatSortOrderToString = (
+    value: ParsedSortOrder,
+    caseSensitive: boolean = true
+): string => `${value[0]}:${caseSensitive ? '' : 'i'}${value[1]}`
 
 export const isValidSortPathForSchema = (schema: Schema, path: string) => {
     const schemaProperty = getSchemaPropertyForPath(schema, path)
 
     // sorting for metadata-API only works on simple and persisted properties
-    if (schemaProperty && schemaProperty.simple) {
+    if (schemaProperty && schemaProperty.simple && schemaProperty.persisted) {
+        return true
+    }
+    if (schemaProperty?.name === 'displayName') {
         return true
     }
     return false
@@ -78,5 +83,5 @@ export const useSectionListSortOrder = () => {
 export const useSortOrderQueryParams = () => {
     const [sortOrder] = useSectionListSortOrder()
 
-    return sortOrder ? formatSortOrderToString(sortOrder) : undefined
+    return sortOrder ? formatSortOrderToString(sortOrder, false) : undefined
 }

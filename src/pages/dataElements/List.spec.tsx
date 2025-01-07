@@ -16,6 +16,7 @@ import { useCurrentUserStore } from '../../lib/user/currentUserStore'
 import TestComponentWithRouter, {
     CustomData,
 } from '../../testUtils/TestComponentWithRouter'
+import { generateDefaultListTests } from '../defaultListTests'
 import dataElementsMock from './__mocks__/list/dataElementsMock.json'
 import filteredDataElementsMock from './__mocks__/list/filteredDataElementsMock.json'
 import { Component as DataElementList } from './List'
@@ -52,7 +53,9 @@ const error404 = new FetchError({
 })
 const defaultUserDataStoreData = () => Promise.reject(new FetchError(error404))
 
-describe('Data Elements List', () => {
+generateDefaultListTests({ componentName: 'Data element' })
+
+describe('Data Element List additional tests', () => {
     const originalWarn = console.warn
     jest.spyOn(console, 'warn').mockImplementation((value) => {
         if (!value.match(/No server timezone/)) {

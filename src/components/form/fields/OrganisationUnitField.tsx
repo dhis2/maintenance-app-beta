@@ -7,6 +7,7 @@ import {
 import React from 'react'
 import { useField } from 'react-final-form'
 import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
+import classes from './OrganisationUnitField.module.css'
 
 type OrganisationUnitFieldProps = {
     name?: string
@@ -66,13 +67,15 @@ export const OrganisationUnitField = ({
             error={meta.touched && meta.error}
             validationText={meta.touched && meta.error}
         >
-            <OrganisationUnitTree
-                roots={rootIds}
-                singleSelection={singleSelection}
-                onChange={handleChange}
-                selected={selectedPaths}
-                initiallyExpanded={rootIds}
-            />
+            <div className={classes.OrganisationUnitTreeWrapper}>
+                <OrganisationUnitTree
+                    roots={rootIds}
+                    singleSelection={singleSelection}
+                    onChange={handleChange}
+                    selected={selectedPaths}
+                    initiallyExpanded={rootIds}
+                />
+            </div>
         </Field>
     )
 }

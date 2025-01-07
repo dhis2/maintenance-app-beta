@@ -30,9 +30,7 @@ export const CategoryFormFields = () => {
                 <DefaultIdentifiableFields />
                 <DescriptionField
                     schemaSection={section}
-                    helpText={i18n.t(
-                        'Explain the purpose of this category option group.'
-                    )}
+                    helpText={i18n.t('Explain the purpose of this category.')}
                 />
             </StandardFormSection>
 
@@ -42,7 +40,7 @@ export const CategoryFormFields = () => {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose how this category option group will be used to capture and analyze'
+                        'Choose how this category will be used to capture and analyze data.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
@@ -72,7 +70,7 @@ export const CategoryFormFields = () => {
                         component={CheckboxFieldFF}
                         label={i18n.t('Use as data dimension')}
                         helpText={i18n.t(
-                            'Category option group will be available to the analytics as another dimension'
+                            'Make available to analytics apps as a selectable dimension.'
                         )}
                     />
                 </StandardFormField>
@@ -85,9 +83,7 @@ export const CategoryFormFields = () => {
                     </label>
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Choose the category options to include in this category option group.'
-                    )}
+                    {i18n.t('Choose the options to include in this category.')}
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <StandardFormField>
