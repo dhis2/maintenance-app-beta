@@ -89,6 +89,7 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
                     inputWidth={inputWidth}
                     label={attribute.displayFormName}
                     name={name}
+                    helpText={i18n.t('Please enter a GeoJSON value.')}
                 />
             </StandardFormField>
         )

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-31T07:44:55.227Z\n"
-"PO-Revision-Date: 2024-12-31T07:44:55.227Z\n"
+"POT-Creation-Date: 2025-01-07T09:54:30.614Z\n"
+"PO-Revision-Date: 2025-01-07T09:54:30.614Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -92,6 +92,9 @@ msgstr "Something went wrong when submitting the form"
 
 msgid "<No value>"
 msgstr "<No value>"
+
+msgid "Please enter a GeoJSON value."
+msgstr "Please enter a GeoJSON value."
 
 msgid "Attributes"
 msgstr "Attributes"
@@ -933,18 +936,14 @@ msgstr "Basic information"
 msgid "Set up the basic information for this category."
 msgstr "Set up the basic information for this category."
 
-msgid "Explain the purpose of this category option group."
-msgstr "Explain the purpose of this category option group."
+msgid "Explain the purpose of this category."
+msgstr "Explain the purpose of this category."
 
 msgid "Data configuration"
 msgstr "Data configuration"
 
-msgid ""
-"Choose how this category option group will be used to capture and analyze "
-"data."
-msgstr ""
-"Choose how this category option group will be used to capture and analyze "
-"data."
+msgid "Choose how this category will be used to capture and analyze data."
+msgstr "Choose how this category will be used to capture and analyze data."
 
 msgid "Use as data dimension"
 msgstr "Use as data dimension"
@@ -1067,6 +1066,9 @@ msgstr "Filter selected category option groups"
 
 msgid "Set up the basic information for this category option group."
 msgstr "Set up the basic information for this category option group."
+
+msgid "Explain the purpose of this category option group."
+msgstr "Explain the purpose of this category option group."
 
 msgid "Choose how this category option  will be used to capture and analyze data."
 msgstr "Choose how this category option  will be used to capture and analyze data."
