@@ -15,17 +15,18 @@ import {
 import {
     SECTIONS_MAP,
     useSectionedFormContext,
-    useSelectedSection,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
+import { ColorAndIconField } from '../../dataElements/fields'
+import { CategoryComboField } from './CategoryComboField'
 import { DataSetFormDescriptor } from './formDescriptor'
+import { PeriodTypeField } from './PeriodTypeField'
 
 const section = SECTIONS_MAP.dataSet
 
 export const DataSetFormContents = () => {
     const descriptor = useSectionedFormContext<typeof DataSetFormDescriptor>()
     useSyncSelectedSectionWithScroll()
-    const [selectedSection] = useSelectedSection()
     return (
         <>
             <SectionedFormSections>
@@ -42,6 +43,7 @@ export const DataSetFormContents = () => {
                     </StandardFormSectionDescription>
                     <DefaultIdentifiableFields />
                     <DescriptionField schemaSection={section} />
+                    <ColorAndIconField />
                 </SectionedFormSection>
                 <SectionedFormSection name={descriptor.getSection('data').name}>
                     <StandardFormSectionTitle>
@@ -60,6 +62,16 @@ export const DataSetFormContents = () => {
                             }}
                         />
                     </StandardFormField>
+                    <div style={{ height: 24 }} />
+                    <StandardFormSectionTitle>
+                        {i18n.t('Data set disaggregation')}
+                    </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        {i18n.t(
+                            'Choose an optional category combination to disaggregate the entire data set.'
+                        )}
+                    </StandardFormSectionDescription>
+                    <CategoryComboField />
                 </SectionedFormSection>
                 <SectionedFormSection
                     name={descriptor.getSection('periods').name}
@@ -72,6 +84,7 @@ export const DataSetFormContents = () => {
                             'Choose for what time periods data can be entered for this data set'
                         )}
                     </StandardFormSectionDescription>
+                    <PeriodTypeField />
                 </SectionedFormSection>
                 <SectionedFormSection
                     name={descriptor.getSection('validation').name}
