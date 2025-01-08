@@ -10,7 +10,6 @@ const section = SECTIONS_MAP.categoryOptionGroup
 export const Component = () => {
     return (
         <FormBase
-            section={section}
             onSubmit={useOnSubmitNew({ section })}
             initialValues={initialValues}
             validate={validate}

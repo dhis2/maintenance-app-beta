@@ -3,10 +3,10 @@ import { FormBase } from '../../components'
 import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
 import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { validate } from './form'
-import { CategoryFormFields } from './form/CategoryFormFields'
-import { initialValues } from './form/categorySchema'
+import { OrganisationalUnitGroupSetFormFields } from './form/OrganisationalUnitGroupSetFormFields'
+import { initialValues } from './form/organisationUnitGroupSetSchema'
 
-const section = SECTIONS_MAP.category
+const section = SECTIONS_MAP.organisationUnitGroupSet
 
 export const Component = () => {
     return (
@@ -16,7 +16,7 @@ export const Component = () => {
             validate={validate}
         >
             <DefaultNewFormContents section={section}>
-                <CategoryFormFields />
+                <OrganisationalUnitGroupSetFormFields />
             </DefaultNewFormContents>
         </FormBase>
     )
