@@ -32,6 +32,8 @@ type DataElementGroupQueryResponse = {
 
 const section = SCHEMA_SECTIONS.dataElementGroup
 
+const listPath = `/${getSectionPath(section)}`
+
 const query = {
     dataElementGroup: {
         resource: `dataElementGroups`,
@@ -127,7 +129,7 @@ function DataElementGroupForm({
             return errors
         }
 
-        navigate(getSectionPath(section))
+        navigate(listPath)
     }
 
     return (
