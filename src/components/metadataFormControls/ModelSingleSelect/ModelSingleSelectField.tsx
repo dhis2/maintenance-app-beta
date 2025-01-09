@@ -66,6 +66,7 @@ export function ModelSingleSelectField<TModel extends DisplayableModel>({
                     input.onBlur()
                     onChange?.(selected)
                 }}
+                invalid={meta.touched && !!meta.error}
             />
         </Field>
     )

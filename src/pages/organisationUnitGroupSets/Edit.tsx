@@ -9,53 +9,55 @@ import {
     useOnSubmitEdit,
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { CategoryOption, PickWithFieldFilters } from '../../types/generated'
-import { validate, CategoryOptionFormFields } from './form'
+import {
+    OrganisationUnitGroupSet,
+    PickWithFieldFilters,
+} from '../../types/generated'
+import { validate } from './form'
+import { OrganisationalUnitGroupSetFormFields } from './form/OrganisationalUnitGroupSetFormFields'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
-    'formName',
-    'code',
     'shortName',
+    'code',
     'description',
-    'startDate',
-    'endDate',
-    'organisationUnits[id,displayName,path]',
+    'compulsory',
+    'dataDimension',
+    'includeSubhierarchyInAnalytics',
+    'organisationUnitGroups[id,displayName]',
 ] as const
 
-export type CategoryOptionFormValues = PickWithFieldFilters<
-    CategoryOption,
+export type OrganisationUnitGroupSetFormValues = PickWithFieldFilters<
+    OrganisationUnitGroupSet,
     typeof fieldFilters
 >
 
-const section = SECTIONS_MAP.categoryOption
-
 export const Component = () => {
+    const section = SECTIONS_MAP.organisationUnitGroupSet
     const queryFn = useBoundResourceQueryFn()
     const modelId = useParams().id as string
-
     const query = {
-        resource: 'categoryOptions',
+        resource: 'organisationUnitGroupSets',
         id: modelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const categoryOptionCombo = useQuery({
+    const organisationUnitGroupSetQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<CategoryOptionFormValues>,
+        queryFn: queryFn<OrganisationUnitGroupSetFormValues>,
     })
 
     return (
         <FormBase
             onSubmit={useOnSubmitEdit({ section, modelId })}
-            initialValues={categoryOptionCombo.data}
+            initialValues={organisationUnitGroupSetQuery.data}
             validate={validate}
         >
             <DefaultEditFormContents section={section}>
-                <CategoryOptionFormFields />
+                <OrganisationalUnitGroupSetFormFields />
             </DefaultEditFormContents>
         </FormBase>
     )

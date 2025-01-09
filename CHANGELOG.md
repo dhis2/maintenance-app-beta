@@ -1,3 +1,18 @@
+# [0.21.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.20.0...v0.21.0) (2025-01-08)
+
+
+### Bug Fixes
+
+* add soem help text and maxLimit to transfers ([#480](https://github.com/dhis2/maintenance-app-beta/issues/480)) ([e75957b](https://github.com/dhis2/maintenance-app-beta/commit/e75957bac9a3accc202865dfc72aed85748aa91e))
+* save navigation for dataelementGroup and -Sets ([#482](https://github.com/dhis2/maintenance-app-beta/issues/482)) ([a5961c7](https://github.com/dhis2/maintenance-app-beta/commit/a5961c7abe1b5bb9ac2a4a939a7b90095e0b5f75))
+* small copy fixes in category form ([#478](https://github.com/dhis2/maintenance-app-beta/issues/478)) [skip release] ([7ec57db](https://github.com/dhis2/maintenance-app-beta/commit/7ec57db188842f3a75d13510b4340e3fc1e6971e))
+
+
+### Features
+
+* add org unit option group set forms and list ([#475](https://github.com/dhis2/maintenance-app-beta/issues/475)) ([57d5c1f](https://github.com/dhis2/maintenance-app-beta/commit/57d5c1f766c5ffaed3796e0fd6187c9acd6d8e9e))
+* data set required and setup fields ([#474](https://github.com/dhis2/maintenance-app-beta/issues/474)) ([f200336](https://github.com/dhis2/maintenance-app-beta/commit/f20033626b276d9de3886fa3c8acadb0da8e7307))
+
 # [0.20.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.19.5...v0.20.0) (2025-01-07)
 
 

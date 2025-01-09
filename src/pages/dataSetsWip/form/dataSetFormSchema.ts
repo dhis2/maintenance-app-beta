@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    DEFAULT_CATEGORY_COMBO,
+    getDefaults,
+    modelFormSchemas,
+} from '../../../lib'
 import { createFormValidate } from '../../../lib/form/validate'
 
 const { withAttributeValues, identifiable, style, referenceCollection } =
@@ -10,10 +14,13 @@ export const dataSetFormSchema = identifiable
     .extend({
         id: z.string().optional(),
         code: z.string().trim().optional(),
-        description: z.string().trim().optional(),
+        description: z.string().trim().max(2000).optional(),
         style,
         dataElements: referenceCollection.default([]),
-        // categoryCombo: z.object({ id: z.string() }),
+        categoryCombo: z
+            .object({ id: z.string(), displayName: z.string() })
+            .default({ ...DEFAULT_CATEGORY_COMBO }),
+        periodType: z.string().default('Monthly'),
     })
 
 export const initialValues = getDefaults(dataSetFormSchema)

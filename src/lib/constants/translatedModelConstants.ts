@@ -86,6 +86,29 @@ export const FORM_TYPE = {
     SECTION_MULTIORG: i18n.t('Section Multi-org'),
 }
 
+const PERIOD_TYPE = {
+    BiMonthly: i18n.t('BiMonthly'),
+    BiWeekly: i18n.t('BiWeekly'),
+    Daily: i18n.t('Daily'),
+    FinancialApril: i18n.t('FinancialApril'),
+    FinancialJuly: i18n.t('FinancialJuly'),
+    FinancialNov: i18n.t('FinancialNov'),
+    FinancialOct: i18n.t('FinancialOct'),
+    Monthly: i18n.t('Monthly'),
+    Quarterly: i18n.t('Quarterly'),
+    QuarterlyNov: i18n.t('QuarterlyNov'),
+    SixMonthlyApril: i18n.t('SixMonthlyApril'),
+    SixMonthlyNov: i18n.t('SixMonthlyNov'),
+    SixMonthly: i18n.t('SixMonthly'),
+    TwoYearly: i18n.t('TwoYearly'),
+    Weekly: i18n.t('Weekly'),
+    WeeklySaturday: i18n.t('WeeklySaturday'),
+    WeeklySunday: i18n.t('WeeklySunday'),
+    WeeklyThursday: i18n.t('WeeklyThursday'),
+    WeeklyWednesday: i18n.t('WeeklyWednesday'),
+    Yearly: i18n.t('Yearly'),
+}
+
 const allConstantTranslations: Record<string, string> = {
     ...AGGREGATION_TYPE,
     ...DOMAIN_TYPE,
@@ -93,6 +116,7 @@ const allConstantTranslations: Record<string, string> = {
     ...DATA_DIMENSION_TYPE,
     ...GEOMETRY_TYPE,
     ...FORM_TYPE,
+    ...PERIOD_TYPE,
 }
 
 export const getConstantTranslation = (constant: string): string => {

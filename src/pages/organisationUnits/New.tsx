@@ -1,17 +1,17 @@
-import React, { useMemo } from 'react'
+import { useAlert, useDataEngine } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
+import { FormApi } from 'final-form'
+import React from 'react'
 import { FormBase } from '../../components'
 import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
 import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
+import { OrganisationUnit } from '../../types/generated'
 import {
     FormValues,
     initialValues,
     OrganisationUnitFormField,
     validate,
 } from './form'
-import { useAlert, useDataEngine } from '@dhis2/app-runtime'
-import i18n from '@dhis2/d2-i18n'
-import { FormApi } from 'final-form'
-import { OrganisationUnit } from '../../types/generated'
 
 const section = SECTIONS_MAP.organisationUnit
 

@@ -1,5 +1,6 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
+import { FORM_ERROR } from 'final-form'
 import { useMemo } from 'react'
 import { FormProps } from 'react-final-form'
 import { useQueryClient } from 'react-query'
@@ -12,7 +13,6 @@ import {
 } from './createJsonPatchOperations'
 import { useCreateModel } from './useCreateModel'
 import { usePatchModel } from './usePatchModel'
-import { FORM_ERROR } from 'final-form'
 
 type OnSubmit<TValues> = FormProps<TValues>['onSubmit']
 

@@ -1,3 +1,6 @@
+import { useAlert, useDataEngine } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
+import { FormApi } from 'final-form'
 import React, { useMemo } from 'react'
 import { useQuery, useQueryClient } from 'react-query'
 import { useParams } from 'react-router-dom'
@@ -10,14 +13,11 @@ import {
     useNavigateWithSearchState,
     usePatchModel,
 } from '../../lib'
+import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
+import { DataEngine } from '../../types'
 import { OrganisationUnit, PickWithFieldFilters } from '../../types/generated'
 import { FormValues, OrganisationUnitFormField, validate } from './form'
-import { useAlert, useDataEngine } from '@dhis2/app-runtime'
-import i18n from '@dhis2/d2-i18n'
-import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
-import { FormApi } from 'final-form'
-import { DataEngine } from '../../types'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -163,7 +163,6 @@ export const Component = () => {
     return (
         <FormBase
             onSubmit={onSubmit}
-            section={section}
             initialValues={orgUnit.data}
             validate={validate}
         >
