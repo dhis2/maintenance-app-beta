@@ -12,9 +12,9 @@ export const organisationUnitGroupSetSchema = identifiable
         shortName: z.string().trim(),
         code: z.string().trim().optional(),
         description: z.string().trim().optional(),
-        compulsory: z.boolean(),
-        dataDimension: z.boolean(),
-        includeSubhierarchyInAnalytics: z.boolean(),
+        compulsory: z.boolean().optional(),
+        dataDimension: z.boolean().optional().default(true),
+        includeSubhierarchyInAnalytics: z.boolean().optional(),
         organisationUnitGroups: z.array(z.object({ id: z.string() })),
     })
 
