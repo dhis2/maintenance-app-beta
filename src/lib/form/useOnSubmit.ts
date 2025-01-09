@@ -12,6 +12,7 @@ import {
 } from './createJsonPatchOperations'
 import { useCreateModel } from './useCreateModel'
 import { usePatchModel } from './usePatchModel'
+import { FORM_ERROR } from 'final-form'
 
 type OnSubmit<TValues> = FormProps<TValues>['onSubmit']
 
@@ -105,9 +106,9 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
                 })
                 return
             }
-            const errors = await createModel(values)
-            if (errors) {
-                return errors
+            const response = await createModel(values)
+            if (response[FORM_ERROR]) {
+                return response
             }
             saveAlert.show({
                 message: i18n.t('Created successfully'),
@@ -117,6 +118,7 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
                 queryKey: [{ resource: section.namePlural }],
             })
             navigate(`/${getSectionPath(section)}`)
+            return response
         },
         [createModel, saveAlert, navigate, section]
     )

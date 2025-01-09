@@ -8,11 +8,12 @@ export const useCreateModel = (resource: string) => {
     const create = useCallback(
         async (data: Record<string, unknown>) => {
             try {
-                await dataEngine.mutate({
+                const response = await dataEngine.mutate({
                     resource,
                     type: 'create',
                     data: data,
                 })
+                return { response }
             } catch (error) {
                 return { [FORM_ERROR]: (error as Error | string).toString() }
             }
