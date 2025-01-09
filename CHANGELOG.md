@@ -1,3 +1,10 @@
+## [0.21.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.21.0...v0.21.1) (2025-01-09)
+
+
+### Bug Fixes
+
+* make org unit group set new form boolean optional. ([#484](https://github.com/dhis2/maintenance-app-beta/issues/484)) ([d0cc27b](https://github.com/dhis2/maintenance-app-beta/commit/d0cc27bf51289fa81a14b4f41edc16d231bb1cd1))
+
 # [0.21.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.20.0...v0.21.0) (2025-01-08)
 
 
