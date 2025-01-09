@@ -206,14 +206,9 @@ export const modelListViewsConfig = {
                 { label: i18n.t('Factor'), path: 'factor' },
                 'lastUpdated',
             ],
-            available: [
-                DESCRIPTORS.name,
-                'created',
-                'href',
-                'id',
-                'lastUpdated',
-                DESCRIPTORS.publicAccess,
-            ],
+            available: defaultAvailableColumnsNoSharing.filter(
+                (column) => column !== 'code'
+            ),
             overrideDefaultAvailable: true,
         },
         filters: {
