@@ -68,13 +68,14 @@ export const ModelSingleSelect = <
         queryFn: queryFn<Response<TModel>>,
         keepPreviousData: true,
         getNextPageParam: (lastPage) =>
-            lastPage.pager.nextPage ? lastPage.pager.page + 1 : undefined,
+            lastPage.pager?.nextPage ? lastPage.pager.page + 1 : undefined,
         getPreviousPageParam: (firstPage) =>
-            firstPage.pager.prevPage ? firstPage.pager.page - 1 : undefined,
+            firstPage.pager?.prevPage ? firstPage.pager.page - 1 : undefined,
         staleTime: 60 * 1000,
     })
 
-    const shouldFetchSelected = !!selected && selected.displayName === undefined
+    const shouldFetchSelected =
+        !!selected && selected.displayName === undefined && !!selected.id
     // if we just have the ID - fetch the displayName
     const selectedQuery = useQuery({
         queryKey: [

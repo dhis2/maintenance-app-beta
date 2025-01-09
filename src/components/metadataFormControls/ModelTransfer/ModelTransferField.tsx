@@ -21,6 +21,7 @@ type ModelTransferFieldProps = {
     | 'leftFooter'
     | 'filterPlaceholder'
     | 'filterPlaceholderPicked'
+    | 'maxSelections'
 >
 
 export function ModelTransferField({
@@ -33,6 +34,7 @@ export function ModelTransferField({
     rightFooter,
     filterPlaceholder,
     filterPlaceholderPicked,
+    maxSelections,
 }: ModelTransferFieldProps) {
     const { input, meta } = useField<DisplayableModel[]>(name, {
         multiple: true,
@@ -61,6 +63,7 @@ export function ModelTransferField({
                 filterPlaceholder={filterPlaceholder}
                 filterPlaceholderPicked={filterPlaceholderPicked}
                 query={query}
+                maxSelections={maxSelections || 5000}
             />
         </Field>
     )

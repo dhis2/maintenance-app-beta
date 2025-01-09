@@ -6,6 +6,7 @@ export interface SectionBase {
     namePlural: string
     titlePlural: string
     title: string
+    routeName?: string
 }
 
 // SchemaSection is a section that can be mapped directly to a schema by the name

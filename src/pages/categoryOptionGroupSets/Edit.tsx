@@ -50,7 +50,6 @@ export const Component = () => {
     return (
         <FormBase
             onSubmit={useOnSubmitEdit({ section, modelId })}
-            section={section}
             initialValues={categoryOptionGroupSetQuery.data}
             validate={validate}
         >

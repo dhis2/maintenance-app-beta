@@ -10,7 +10,7 @@ type OptionSetQueryResult = {
     }
 }
 
-const CATEGORY_COMBOS_QUERY = {
+const OPTION_SETS_QUERY = {
     optionSets: {
         resource: 'optionSets',
         params: (variables: Record<string, string>) => {
@@ -35,15 +35,12 @@ const CATEGORY_COMBOS_QUERY = {
 
 export function useOptionSetsQuery() {
     const [loadedOptions, setLoadedOptions] = useState<SelectOption[]>([])
-    const queryResult = useDataQuery<OptionSetQueryResult>(
-        CATEGORY_COMBOS_QUERY,
-        {
-            variables: {
-                page: 1,
-                filter: '',
-            },
-        }
-    )
+    const queryResult = useDataQuery<OptionSetQueryResult>(OPTION_SETS_QUERY, {
+        variables: {
+            page: 1,
+            filter: '',
+        },
+    })
     const { data } = queryResult
 
     // Must be done in `useEffect` and not in `onComplete`, as `onComplete`

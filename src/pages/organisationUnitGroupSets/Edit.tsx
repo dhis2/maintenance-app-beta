@@ -9,71 +9,55 @@ import {
     useOnSubmitEdit,
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { OrganisationUnit, PickWithFieldFilters } from '../../types/generated'
 import {
-    OrganisationUnitFormField,
-    organisationUnitSchema,
-    validate,
-} from './form'
+    OrganisationUnitGroupSet,
+    PickWithFieldFilters,
+} from '../../types/generated'
+import { validate } from './form'
+import { OrganisationalUnitGroupSetFormFields } from './form/OrganisationalUnitGroupSetFormFields'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
-    'code',
     'shortName',
-    'openingDate',
-    'closedDate',
-    'comment',
-    'image[id,name]',
+    'code',
     'description',
-    'contactPerson',
-    'address',
-    'email',
-    'phoneNumber',
-    'url',
-    'geometry',
-    'dataSets',
-    'programs',
-    'level',
-    'path',
-    'parent[id,path, displayName]',
+    'compulsory',
+    'dataDimension',
+    'includeSubhierarchyInAnalytics',
+    'organisationUnitGroups[id,displayName]',
 ] as const
 
-export type OrgUnitFormValues = PickWithFieldFilters<
-    OrganisationUnit,
+export type OrganisationUnitGroupSetFormValues = PickWithFieldFilters<
+    OrganisationUnitGroupSet,
     typeof fieldFilters
 >
 
-const section = SECTIONS_MAP.organisationUnit
-
 export const Component = () => {
+    const section = SECTIONS_MAP.organisationUnitGroupSet
     const queryFn = useBoundResourceQueryFn()
     const modelId = useParams().id as string
-
     const query = {
-        resource: 'organisationUnits',
+        resource: 'organisationUnitGroupSets',
         id: modelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const orgUnit = useQuery({
+    const organisationUnitGroupSetQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<OrgUnitFormValues>,
+        queryFn: queryFn<OrganisationUnitGroupSetFormValues>,
     })
 
     return (
         <FormBase
-            onSubmit={useOnSubmitEdit({
-                section,
-                modelId,
-            })}
-            initialValues={orgUnit.data}
+            onSubmit={useOnSubmitEdit({ section, modelId })}
+            initialValues={organisationUnitGroupSetQuery.data}
             validate={validate}
         >
             <DefaultEditFormContents section={section}>
-                <OrganisationUnitFormField />
+                <OrganisationalUnitGroupSetFormFields />
             </DefaultEditFormContents>
         </FormBase>
     )

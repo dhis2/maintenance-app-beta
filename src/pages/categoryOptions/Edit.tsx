@@ -51,7 +51,6 @@ export const Component = () => {
     return (
         <FormBase
             onSubmit={useOnSubmitEdit({ section, modelId })}
-            section={section}
             initialValues={categoryOptionCombo.data}
             validate={validate}
         >

@@ -88,7 +88,8 @@ export const SCHEMA_SECTIONS = {
     // @ts-expect-error temporary route for testing
     dataSetWIP: {
         name: SchemaName.dataSet,
-        namePlural: 'dataSetsWip',
+        routeName: 'dataSetsWip',
+        namePlural: 'dataSets',
         title: i18n.t('Data set'),
         titlePlural: i18n.t('Data sets'),
         parentSectionKey: 'dataSet',

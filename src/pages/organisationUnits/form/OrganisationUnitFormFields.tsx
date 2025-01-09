@@ -164,6 +164,7 @@ export function OrganisationUnitFormField() {
                             filterPlaceholderPicked={i18n.t(
                                 'Filter selected data sets'
                             )}
+                            maxSelections={Infinity}
                         />
                     </StandardFormField>
                     <StandardFormField>
@@ -180,6 +181,7 @@ export function OrganisationUnitFormField() {
                             filterPlaceholderPicked={i18n.t(
                                 'Filter selected programs'
                             )}
+                            maxSelections={Infinity}
                         />
                     </StandardFormField>
                 </StandardFormSection>

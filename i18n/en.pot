@@ -7,6 +7,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "POT-Creation-Date: 2025-01-09T08:21:20.586Z\n"
 "PO-Revision-Date: 2025-01-09T08:21:20.586Z\n"
+"POT-Creation-Date: 2025-01-09T14:15:11.611Z\n"
+"PO-Revision-Date: 2025-01-09T14:15:11.611Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -92,6 +94,9 @@ msgstr "Something went wrong when submitting the form"
 
 msgid "<No value>"
 msgstr "<No value>"
+
+msgid "Please enter a GeoJSON value."
+msgstr "Please enter a GeoJSON value."
 
 msgid "Attributes"
 msgstr "Attributes"
@@ -867,6 +872,66 @@ msgstr "Section"
 msgid "Section Multi-org"
 msgstr "Section Multi-org"
 
+msgid "BiMonthly"
+msgstr "BiMonthly"
+
+msgid "BiWeekly"
+msgstr "BiWeekly"
+
+msgid "Daily"
+msgstr "Daily"
+
+msgid "FinancialApril"
+msgstr "FinancialApril"
+
+msgid "FinancialJuly"
+msgstr "FinancialJuly"
+
+msgid "FinancialNov"
+msgstr "FinancialNov"
+
+msgid "FinancialOct"
+msgstr "FinancialOct"
+
+msgid "Monthly"
+msgstr "Monthly"
+
+msgid "Quarterly"
+msgstr "Quarterly"
+
+msgid "QuarterlyNov"
+msgstr "QuarterlyNov"
+
+msgid "SixMonthlyApril"
+msgstr "SixMonthlyApril"
+
+msgid "SixMonthlyNov"
+msgstr "SixMonthlyNov"
+
+msgid "SixMonthly"
+msgstr "SixMonthly"
+
+msgid "TwoYearly"
+msgstr "TwoYearly"
+
+msgid "Weekly"
+msgstr "Weekly"
+
+msgid "WeeklySaturday"
+msgstr "WeeklySaturday"
+
+msgid "WeeklySunday"
+msgstr "WeeklySunday"
+
+msgid "WeeklyThursday"
+msgstr "WeeklyThursday"
+
+msgid "WeeklyWednesday"
+msgstr "WeeklyWednesday"
+
+msgid "Yearly"
+msgstr "Yearly"
+
 msgid "Aggregation type"
 msgstr "Aggregation type"
 
@@ -1238,6 +1303,12 @@ msgstr "Configure data elements"
 msgid "Choose what data is collected for this data set."
 msgstr "Choose what data is collected for this data set."
 
+msgid "Data set disaggregation"
+msgstr "Data set disaggregation"
+
+msgid "Choose an optional category combination to disaggregate the entire data set."
+msgstr "Choose an optional category combination to disaggregate the entire data set."
+
 msgid "Configure data entry periods"
 msgstr "Configure data entry periods"
 
@@ -1262,6 +1333,9 @@ msgstr "Advanced options"
 msgid "These options are used for advanced data set configurations."
 msgstr "These options are used for advanced data set configurations."
 
+msgid "Something went wrong"
+msgstr "Something went wrong"
+
 msgid "Setup"
 msgstr "Setup"
 
@@ -1285,6 +1359,27 @@ msgstr "Advanced"
 
 msgid "Set up the basic information for this Indicator Type."
 msgstr "Set up the basic information for this Indicator Type."
+
+msgid "Set up the basic information for this organisational unit group set."
+msgstr "Set up the basic information for this organisational unit group set."
+
+msgid "Include subhierarchy in analytics"
+msgstr "Include subhierarchy in analytics"
+
+msgid "Choose the groups to include in this organisation unit group set."
+msgstr "Choose the groups to include in this organisation unit group set."
+
+msgid "Available organisation unit groups"
+msgstr "Available organisation unit groups"
+
+msgid "Selected organisation unit groups"
+msgstr "Selected organisation unit groups"
+
+msgid "Filter available organisation unit groups"
+msgstr "Filter available organisation unit groups"
+
+msgid "Filter selected organisation unit groups"
+msgstr "Filter selected organisation unit groups"
 
 msgid "Longitude"
 msgstr "Longitude"
