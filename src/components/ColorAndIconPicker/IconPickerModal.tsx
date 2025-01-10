@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import {
     Button,
     ButtonStrip,
+    CircularLoader,
     Input,
     Modal,
     ModalActions,
@@ -11,8 +12,8 @@ import {
     TabBar,
 } from '@dhis2/ui'
 import cx from 'classnames'
-import React, { useState } from 'react'
-import { filterIcons } from './filterIcons'
+import React, { useEffect, useMemo, useState } from 'react'
+import { useDebouncedState } from '../../lib'
 import classes from './IconPickerModal.module.css'
 import { useIconsQuery, Icon } from './useIconsQuery'
 
@@ -27,13 +28,49 @@ export function IconPickerModal({
     onChange: ({ icon }: { icon: string }) => void
     onCancel: () => void
 }) {
-    const [searchValue, setSearchValue] = useState('')
+    const {
+        liveValue: searchValue,
+        setValue: setSearchValue,
+        debouncedValue: debouncedSearchValue,
+    } = useDebouncedState({
+        initialValue: '',
+    })
+    const [loadingRef, setLoadingRef] = useState<HTMLDivElement | null>(null)
     const [activeTab, setActiveTab] = useState<TabName>('all')
+
     const [icon, setIcon] = useState(selected)
-    const icons = useIconsQuery()
-    const displayIcons = searchValue
-        ? filterIcons(icons.data[activeTab], searchValue)
-        : icons.data[activeTab]
+    const icons = useIconsQuery({
+        search: debouncedSearchValue.trim(),
+    })
+
+    const fetchNextPage = icons.fetchNextPage
+
+    useEffect(() => {
+        if (loadingRef) {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    if (entries[0].isIntersecting) {
+                        fetchNextPage()
+                    }
+                },
+                {
+                    threshold: 1,
+                }
+            )
+            observer.observe(loadingRef)
+            return () => {
+                observer.disconnect()
+            }
+        }
+    }, [fetchNextPage, loadingRef])
+
+    const displayIcons = useMemo(
+        () =>
+            activeTab !== 'all'
+                ? icons.allData.filter((i) => i.key.endsWith(activeTab))
+                : icons.allData,
+        [icons.allData, activeTab]
+    )
 
     return (
         <Modal large onClose={onCancel}>
@@ -79,11 +116,15 @@ export function IconPickerModal({
                             onChange={({ value }) =>
                                 setSearchValue(value || '')
                             }
+                            type="search"
                         />
                     </div>
                 </div>
 
                 <div className={classes.iconsContainer}>
+                    {displayIcons && displayIcons.length === 0 ? (
+                        <span>{i18n.t('No icons match the search.')}</span>
+                    ) : null}
                     {displayIcons.map(({ key, description, href }: Icon) => (
                         <div
                             key={key}
@@ -91,14 +132,28 @@ export function IconPickerModal({
                                 [classes.active]: key === icon,
                             })}
                             onClick={() => setIcon(key)}
+                            title={key}
                         >
                             <img
                                 className={classes.iconImage}
                                 alt={description}
                                 src={href}
+                                loading="lazy"
                             />
                         </div>
                     ))}
+                    {icons.hasNextPage && !icons.isFetching && (
+                        <div
+                            className={classes.iconsLoading}
+                            ref={(ref) => {
+                                if (!!ref && ref !== loadingRef) {
+                                    setLoadingRef(ref)
+                                }
+                            }}
+                        >
+                            <CircularLoader />
+                        </div>
+                    )}
                 </div>
             </ModalContent>
 

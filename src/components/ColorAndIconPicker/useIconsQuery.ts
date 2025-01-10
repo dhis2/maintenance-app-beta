@@ -1,59 +1,66 @@
-import { useDataQuery } from '@dhis2/app-runtime'
 import { useMemo } from 'react'
+import { useQuery, useInfiniteQuery } from 'react-query'
+import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PagedResponse } from './../../types/generated/utility'
-import { WrapQueryResponse } from './../../types/query'
+import { ResourceQuery } from './../../types/query'
 
 export interface Icon {
     description: string
     href: string
     key: string
     keywords?: string[]
+    fileResource: { id: string }
 }
 
-type IconsResponse = WrapQueryResponse<PagedResponse<Icon, 'icons'>>
+type IconsResponse = PagedResponse<Icon, 'icons'>
 
-const ICONS_QUERY = {
-    result: {
-        resource: 'icons',
-    },
+export const useIconQuery = ({ key: iconKey }: { key: string }) => {
+    const queryFn = useBoundResourceQueryFn()
+
+    return useQuery({
+        queryKey: [
+            {
+                resource: 'icons',
+                id: iconKey,
+            } satisfies ResourceQuery,
+        ],
+        queryFn: queryFn<Icon>,
+    })
 }
 
-export function useIconsQuery() {
-    const result = useDataQuery<IconsResponse>(ICONS_QUERY)
-    const { data } = result
-    const icons = useMemo(() => {
-        if (!data) {
-            return {
-                all: [],
-                positive: [],
-                negative: [],
-                outline: [],
-            }
-        }
-        const { icons: unsortedIcons } = data.result
-        const sortedIcons = unsortedIcons.sort(
-            ({ key: left }, { key: right }) => left.localeCompare(right)
-        )
+type UseIconsQueryOptions = {
+    search?: string
+    type?: 'all' | 'default' | 'custom'
+}
 
-        return {
-            all: sortedIcons,
-            positive: sortedIcons.filter((icon) =>
-                icon.key.endsWith('_positive')
-            ),
-            negative: sortedIcons.filter((icon) =>
-                icon.key.endsWith('_negative')
-            ),
-            outline: sortedIcons.filter((icon) =>
-                icon.key.endsWith('_outline')
-            ),
-        }
-    }, [data])
+export function useIconsQuery({ search, type }: UseIconsQueryOptions = {}) {
+    const queryFn = useBoundResourceQueryFn()
+    const params = {
+        pageSize: 143, // 13 * 11 (13 icons per row)
+        type: type || 'all',
+        ...(search ? { search } : undefined),
+    }
+    const result = useInfiniteQuery({
+        queryKey: [
+            {
+                resource: 'icons',
+                params,
+            } satisfies ResourceQuery,
+        ],
+        queryFn: queryFn<IconsResponse>,
+        getNextPageParam: (lastPage) =>
+            lastPage.pager.pageCount > lastPage.pager.page
+                ? lastPage.pager.page + 1
+                : undefined,
+    })
 
-    return useMemo(
-        () => ({
-            ...result,
-            data: icons,
-        }),
-        [result, icons]
+    const allData = useMemo(
+        () => result.data?.pages.flatMap((page) => page.icons) ?? [],
+        [result.data]
     )
+
+    return {
+        allData,
+        ...result,
+    }
 }

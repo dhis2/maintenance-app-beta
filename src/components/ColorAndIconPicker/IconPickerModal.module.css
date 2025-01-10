@@ -15,10 +15,13 @@
 }
 
 .iconsContainer {
+    overflow: auto;
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
     gap: var(--spacers-dp8);
     padding: var(--spacers-dp8);
+    height: 450px;
 }
 
 .iconContainer {
@@ -34,4 +37,8 @@
     display: block;
     height: 48px;
     width: 48px;
+}
+
+.iconsLoading {
+    margin: 0 auto;
 }
