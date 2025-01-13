@@ -83,28 +83,28 @@ export function IconPickerModal({
                             onClick={() => setActiveTab('all')}
                             selected={activeTab === 'all'}
                         >
-                            All
+                            {i18n.t('All')}
                         </Tab>
 
                         <Tab
                             onClick={() => setActiveTab('positive')}
                             selected={activeTab === 'positive'}
                         >
-                            Positive
+                            {i18n.t('Positive')}
                         </Tab>
 
                         <Tab
                             onClick={() => setActiveTab('negative')}
                             selected={activeTab === 'negative'}
                         >
-                            Negative
+                            {i18n.t('Negative')}
                         </Tab>
 
                         <Tab
                             onClick={() => setActiveTab('outline')}
                             selected={activeTab === 'outline'}
                         >
-                            Outline
+                            {i18n.t('Outline')}
                         </Tab>
                     </TabBar>
 

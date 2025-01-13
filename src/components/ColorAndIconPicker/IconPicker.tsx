@@ -3,7 +3,7 @@ import cx from 'classnames'
 import React, { useState } from 'react'
 import classes from './IconPicker.module.css'
 import { IconPickerModal } from './IconPickerModal'
-import { useIconQuery, useIconsQuery } from './useIconsQuery'
+import { useIconQuery } from './useIconsQuery'
 
 export function IconPicker({
     icon = '',
