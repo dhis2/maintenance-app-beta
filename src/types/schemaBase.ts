@@ -46,6 +46,7 @@ export interface SchemaFieldProperty {
     embeddedObject: boolean
     identifiableObject: boolean
     relativeApiEndpoint?: string
+    sortable?: boolean
     translatable: boolean
     owner: boolean
     readable: boolean
