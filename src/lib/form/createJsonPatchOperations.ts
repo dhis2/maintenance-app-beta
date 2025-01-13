@@ -24,7 +24,6 @@ interface FormatFormValuesArgs<FormValues extends ModelWithAttributeValues> {
     originalValue: unknown
     dirtyFields: Record<string, boolean>
     values: FormValues
-    omit?: string[]
 }
 
 // these are removed from the dirtyKeys
@@ -53,7 +52,6 @@ export function createJsonPatchOperations<
     dirtyFields,
     originalValue,
     values: unsanitizedValues,
-    omit,
 }: FormatFormValuesArgs<FormValues>): JsonPatchOperation[] {
     // Remove attribute values without a value
     const values = {
@@ -66,9 +64,7 @@ export function createJsonPatchOperations<
     }
 
     const dirtyFieldsKeys = Object.keys(dirtyFields)
-    const adjustedDirtyFieldsKeys = sanitizeDirtyValueKeys(
-        dirtyFieldsKeys
-    ).filter((key) => !omit?.includes(key))
+    const adjustedDirtyFieldsKeys = sanitizeDirtyValueKeys(dirtyFieldsKeys)
 
     return adjustedDirtyFieldsKeys.map((name) => ({
         op: get(name, originalValue) ? 'replace' : 'add',

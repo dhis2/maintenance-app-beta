@@ -1,4 +1,4 @@
-import { useAlert, useDataEngine } from '@dhis2/app-runtime'
+import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { FormApi } from 'final-form'
 import React, { useMemo } from 'react'
@@ -15,9 +15,9 @@ import {
 } from '../../lib'
 import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { DataEngine } from '../../types'
 import { OrganisationUnit, PickWithFieldFilters } from '../../types/generated'
-import { FormValues, OrganisationUnitFormField, validate } from './form'
+import { OrganisationUnitFormField, validate } from './form'
+import { useOnSaveDatSetsAndPrograms } from './form/useOnSaveDatSetsAndPrograms'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -53,7 +53,7 @@ const section = SECTIONS_MAP.organisationUnit
 export const useOnEditOrgUnits = (modelId: string) => {
     const patchDirtyFields = usePatchModel(modelId, section.namePlural)
     const queryClient = useQueryClient()
-    const dataEngine: DataEngine = useDataEngine()
+    const updateDataSetsAndPrograms = useOnSaveDatSetsAndPrograms()
     const navigate = useNavigateWithSearchState()
     const saveAlert = useAlert(
         ({ message }) => message,
@@ -61,84 +61,52 @@ export const useOnEditOrgUnits = (modelId: string) => {
     )
 
     return useMemo(
-        () => async (values: FormValues, form: FormApi<FormValues>) => {
-            const { dataSets, programs, ...rest } = values
-            const dirtyFields = form.getState().dirtyFields
-            const fieldToEditSeparately = [
-                'dataSets',
-                'programs',
-            ] as (keyof OrganisationUnit)[]
-            const fieldToEditSeparatelyHaveBeenModified = Object.keys(
-                dirtyFields
-            ).some((field) =>
-                (fieldToEditSeparately as string[]).includes(field)
-            )
+        () =>
+            async (
+                values: OrgUnitFormValues,
+                form: FormApi<OrgUnitFormValues>
+            ) => {
+                const { dataSets, programs, ...rest } = values
+                const {
+                    dataSets: dataSetsDirty,
+                    programs: programsDirty,
+                    ...restDirty
+                } = form.getState().dirtyFields
 
-            const orgUnitJsonPatchOperations = createJsonPatchOperations({
-                values: rest,
-                dirtyFields,
-                originalValue: form.getState().initialValues,
-                omit: fieldToEditSeparately,
-            })
+                const fieldToEditSeparatelyHaveBeenModified =
+                    dataSetsDirty || programsDirty
 
-            if (
-                orgUnitJsonPatchOperations.length < 1 &&
-                !fieldToEditSeparatelyHaveBeenModified
-            ) {
-                saveAlert.show({
-                    message: i18n.t('No changes to be saved'),
+                const orgUnitJsonPatchOperations = createJsonPatchOperations({
+                    values,
+                    dirtyFields: restDirty,
+                    originalValue: form.getState().initialValues,
+                })
+
+                if (
+                    orgUnitJsonPatchOperations.length < 1 &&
+                    !fieldToEditSeparatelyHaveBeenModified
+                ) {
+                    saveAlert.show({
+                        message: i18n.t('No changes to be saved'),
+                    })
+                    navigate(`/${getSectionPath(section)}`)
+                    return
+                }
+
+                const orgUnitErrors = await patchDirtyFields(
+                    orgUnitJsonPatchOperations
+                )
+                if (orgUnitErrors) {
+                    return orgUnitErrors
+                }
+
+                await updateDataSetsAndPrograms(modelId, values)
+
+                queryClient.invalidateQueries({
+                    queryKey: [{ resource: section.namePlural }],
                 })
                 navigate(`/${getSectionPath(section)}`)
-                return
-            }
-
-            const orgUnitErrors = await patchDirtyFields(
-                orgUnitJsonPatchOperations
-            )
-            if (orgUnitErrors) {
-                return orgUnitErrors
-            }
-
-            queryClient.invalidateQueries({
-                queryKey: [{ resource: section.namePlural }],
-            })
-            navigate(`/${getSectionPath(section)}`)
-
-            const fieldToEditSeparatelyResults = await Promise.allSettled(
-                fieldToEditSeparately.map((field) =>
-                    dataEngine.mutate({
-                        resource: `organisationUnits`,
-                        type: 'update',
-                        data: { identifiableObjects: values[field] },
-                        id: `${modelId}/${field}`,
-                    })
-                )
-            )
-
-            const fieldToEditSeparatelyErrors = fieldToEditSeparately
-                .map((field, index) =>
-                    fieldToEditSeparatelyResults[index].status === 'rejected'
-                        ? field
-                        : undefined
-                )
-                .filter((field) => !!field)
-
-            if (fieldToEditSeparatelyErrors.length > 0) {
-                saveAlert.show({
-                    message: i18n.t(
-                        `The organisation unit was updated correctly but there was a problem saving ${fieldToEditSeparatelyErrors.join(
-                            ' and '
-                        )}`
-                    ),
-                    warning: true,
-                })
-            } else {
-                saveAlert.show({
-                    message: i18n.t('Saved successfully'),
-                    success: true,
-                })
-            }
-        },
+            },
         [patchDirtyFields, saveAlert, navigate, section]
     )
 }
@@ -159,7 +127,6 @@ export const Component = () => {
         queryKey: [query],
         queryFn: queryFn<OrgUnitFormValues>,
     })
-
     return (
         <FormBase
             onSubmit={onSubmit}
