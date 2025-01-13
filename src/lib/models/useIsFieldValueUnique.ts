@@ -24,7 +24,7 @@ export function useIsFieldValueUnique({
         result: {
             resource: model,
             params: (variables: Record<string, string>) => {
-                const filter = [`${variables.field}:eq:${variables.value}`]
+                const filter = [`${variables.field}:ieq:${variables.value}`]
 
                 if (variables.id) {
                     filter.push(`id:ne:${variables.id}`)

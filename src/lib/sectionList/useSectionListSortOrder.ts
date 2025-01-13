@@ -41,12 +41,11 @@ const formatSortOrderToString = (
 
 export const isValidSortPathForSchema = (schema: Schema, path: string) => {
     const schemaProperty = getSchemaPropertyForPath(schema, path)
-
-    // sorting for metadata-API only works on simple and persisted properties
-    if (schemaProperty && schemaProperty.simple && schemaProperty.persisted) {
-        return true
+    if (schemaProperty && schemaProperty.sortable !== undefined) {
+        return schemaProperty.sortable
     }
-    if (schemaProperty?.name === 'displayName') {
+    // sorting for metadata-API only works on simple and persisted properties if sortable property is not available
+    if (schemaProperty && schemaProperty.simple && schemaProperty.persisted) {
         return true
     }
     return false
