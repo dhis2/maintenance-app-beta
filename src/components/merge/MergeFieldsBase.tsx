@@ -1,15 +1,13 @@
 import { Field, IconArrowRight24 } from '@dhis2/ui'
-import React, { useState } from 'react'
+import React from 'react'
 import { useField } from 'react-final-form'
-import { useDebouncedCallback } from 'use-debounce'
-import { useModelMultiSelectQuery } from '../../lib'
 import { PlainResourceQuery, Optional } from '../../types'
 import { DisplayableModel } from '../../types/models'
 import {
     ModelMultiSelectField,
     ModelMultiSelectFieldProps,
 } from '../metadataFormControls'
-import { SearchableSingleSelect } from '../SearchableSingleSelect'
+import { ModelSingleSelectField } from '../metadataFormControls/ModelSingleSelect'
 import css from './MergeFields.module.css'
 
 type BaseSourceFieldProps = Optional<
@@ -49,78 +47,22 @@ export const BaseTargetField = ({
     label,
     placeholder,
 }: BaseTargetFieldProps) => {
-    const [searchTerm, setSearchTerm] = useState<string>('')
-    // we dont have a good reusable field for ModelSingleSelect, so we need more logic here
-    // TODO: add a reusable field for ModelSingleSelect, like we have for ModelMultiSelect/ModelTransfer
-    const searchFilter = `identifiable:token:${searchTerm}`
-    const filter: string[] = searchTerm ? [searchFilter] : []
-    const params = query.params
-
-    const handleFilterChange = useDebouncedCallback(({ value }) => {
-        if (value != undefined) {
-            setSearchTerm(value)
-        }
-    }, 250)
-
-    const targetField = useField<DisplayableModel | undefined>('target', {})
-    const queryResult = useModelMultiSelectQuery<DisplayableModel>({
-        query: {
-            ...query,
-            params: {
-                ...params,
-                order: 'displayName:asc',
-                fields: ['id', 'displayName'],
-                pageSize: 10,
-                filter: filter.concat(params?.filter || []),
-            },
-        },
-        selected: [],
-    })
     const sourcesValues = useField<DisplayableModel[]>('sources', {
         subscription: { value: true },
     }).input.value
 
-    const options = queryResult.available
-        // filter out the sources from the available targets
-        .filter((model) => !sourcesValues.some((s) => s.id === model.id))
-        .map((option) => ({
-            value: option.id,
-            label: option.displayName,
-        }))
-
     return (
-        <Field
+        <ModelSingleSelectField
             name="target"
-            label={label || 'Target'}
-            dataTest="formfields-mergetarget"
-            error={targetField.meta.invalid}
-            validationText={
-                ((targetField.meta.touched || targetField.meta.submitFailed) &&
-                    targetField.meta.error?.toString()) ||
-                ''
+            query={query}
+            transform={(availableData) =>
+                availableData.filter(
+                    (model) => !sourcesValues.some((s) => s.id === model.id)
+                )
             }
-            required
-        >
-            <SearchableSingleSelect
-                loading={queryResult.isLoading}
-                onFilterChange={handleFilterChange}
-                onEndReached={() =>
-                    queryResult.availableQuery.isLoading &&
-                    queryResult.availableQuery.fetchNextPage()
-                }
-                onRetryClick={queryResult.availableQuery.refetch}
-                error={queryResult.error?.toString()}
-                options={options}
-                showEndLoader={!!queryResult.availableQuery.hasNextPage}
-                selected={targetField.input.value?.id}
-                onChange={({ selected }) => {
-                    targetField.input.onChange(
-                        queryResult.available.find((d) => d.id === selected)
-                    )
-                }}
-                placeholder={placeholder || 'Select the model to merge into'}
-            />
-        </Field>
+            label={label || 'Target'}
+            placeholder={placeholder || 'Select the model to merge into'}
+        />
     )
 }
 
