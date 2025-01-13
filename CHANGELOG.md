@@ -1,3 +1,10 @@
+# [0.22.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.21.1...v0.22.0) (2025-01-09)
+
+
+### Features
+
+* overide indicatortype available ([#481](https://github.com/dhis2/maintenance-app-beta/issues/481)) ([311b401](https://github.com/dhis2/maintenance-app-beta/commit/311b401d74369c2288013c9fee56286e2bbdb352))
+
 ## [0.21.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.21.0...v0.21.1) (2025-01-09)
 
 
