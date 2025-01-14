@@ -47,7 +47,6 @@ export const ModelMultiSelect = <TModel extends PartialLoadedDisplayableModel>({
     }
     const {
         selected: selectedData,
-        selectedQuery,
         available: availableData,
         isLoading,
         error,
@@ -57,21 +56,20 @@ export const ModelMultiSelect = <TModel extends PartialLoadedDisplayableModel>({
         selected,
     })
     const onChange = baseModelSingleSelectProps.onChange
-
     // if we had to fetch selected data, update the form value
     // this basically adds the displayName to the formState
     useEffect(() => {
-        if (!selectedQuery.data) {
-            return
-        }
-        const hasSelectedWithoutData = selected.some(
+        const selectedWithoutData = selected.filter(
             (s) => s.displayName === undefined
         )
+        const hasLoadedSelected = selectedWithoutData.every((s) =>
+            selectedData.find((d) => d.id === s.id)
+        )
 
-        if (hasSelectedWithoutData) {
+        if (selectedWithoutData.length > 0 && hasLoadedSelected) {
             onChange({ selected: selectedData })
         }
-    }, [selectedQuery.data, selected, selectedData, onChange])
+    }, [selected, selectedData, onChange])
 
     const resolvedAvailable = useMemo(
         () => (transform ? transform(availableData) : availableData),

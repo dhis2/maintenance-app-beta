@@ -5,6 +5,8 @@ import { Field, useField } from 'react-final-form'
 import { DisplayableModel } from '../../types/models'
 import css from './MergeFields.module.css'
 
+type DisplayableModelWithName = DisplayableModel & { name: string }
+
 const createConfirmationCode = (targetName: string, count: number) => {
     return `merge-${count}-${targetName.trim()}`
         .substring(0, 25)
@@ -13,11 +15,11 @@ const createConfirmationCode = (targetName: string, count: number) => {
 }
 
 export const ConfirmationField = () => {
-    const target = useField<DisplayableModel>('target', {
+    const target = useField<DisplayableModelWithName>('target', {
         subscription: { value: true },
     }).input.value
 
-    const sources = useField<DisplayableModel[]>('sources', {
+    const sources = useField<DisplayableModelWithName[]>('sources', {
         subscription: { value: true },
     }).input.value
 
@@ -25,7 +27,7 @@ export const ConfirmationField = () => {
         return null
     }
     const confirmationCode = createConfirmationCode(
-        target.displayName,
+        target.name,
         sources?.length ?? 0
     )
     const fieldLabelWithCode = (
@@ -37,7 +39,7 @@ export const ConfirmationField = () => {
 
     return (
         <div className={css.confirmationFieldWrapper}>
-            <h2>Merging cannot be undone</h2>
+            <h2>{i18n.t('Merging cannot be undone')}</h2>
             <Field
                 component={InputFieldFF}
                 name="confirmation"

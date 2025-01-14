@@ -37,11 +37,11 @@ export const Component = () => {
     const onSubmit = async (values: IndicatorTypeMergeFormValues) => {
         try {
             const data = mergeFormSchema.parse(values)
-            const res = (await dataEngine.mutate({
+            await dataEngine.mutate({
                 resource: 'indicatorTypes/merge',
                 type: 'create',
                 data,
-            })) as any
+            })
             return undefined
         } catch (e) {
             console.error(e)

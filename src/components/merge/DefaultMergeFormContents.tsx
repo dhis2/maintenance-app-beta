@@ -103,5 +103,3 @@ export const MergeComplete = ({ children }: React.PropsWithChildren) => {
         </div>
     )
 }
-
-export const MergeCompleteReport = () => {}

@@ -1,9 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
+import { NoticeBox } from '@dhis2/ui'
 import React from 'react'
-import {
-    StandardFormSectionDescription,
-    StandardFormSectionTitle,
-} from '../../../components'
+import { useFormState } from 'react-final-form'
+import { StandardFormSectionTitle } from '../../../components'
 import {
     BaseSourcesField,
     BaseTargetField,
@@ -14,6 +13,7 @@ import {
     FormSections,
     ConfirmationField,
 } from '../../../components/merge'
+import { IndicatorTypeMergeFormValues } from './indicatorTypeMergeSchema'
 
 export const IndicatorTypeMergeFormFields = () => {
     return (
@@ -37,6 +37,9 @@ export const IndicatorTypeMergeFormFields = () => {
                         placeholder={i18n.t('Select indicator types to merge')}
                         query={{
                             resource: 'indicatorTypes',
+                            params: {
+                                fields: ['id', 'displayName', 'name', 'factor'],
+                            },
                         }}
                     />
                     <BaseTargetField
@@ -46,6 +49,9 @@ export const IndicatorTypeMergeFormFields = () => {
                         )}
                         query={{
                             resource: 'indicatorTypes',
+                            params: {
+                                fields: ['id', 'displayName', 'name', 'factor'],
+                            },
                         }}
                     />
                 </MergeSourcesTargetWrapper>
@@ -74,6 +80,42 @@ export const IndicatorTypeMergeFormFields = () => {
             <FormSection>
                 <ConfirmationField />
             </FormSection>
+            <MergeWarnings />
         </FormSections>
     )
+}
+
+const MergeWarnings = () => {
+    const { values } = useFormState<IndicatorTypeMergeFormValues>({
+        subscription: { values: true },
+    })
+
+    if (values.sources?.length === 0 || !values.target) {
+        return null
+    }
+
+    const sourcesWithDifferentFactors =
+        values.sources?.filter((s) => s.factor !== values.target.factor) || []
+    if (sourcesWithDifferentFactors.length > 0) {
+        return (
+            <div style={{ maxWidth: 640 }}>
+                <NoticeBox warning title={i18n.t('Conflicting factors')}>
+                    {i18n.t(
+                        'The following source indicator types have different factors than the target indicator type with factor {{ targetFactor }}:',
+                        { targetFactor: values.target.factor }
+                    )}
+                    <ul>
+                        {sourcesWithDifferentFactors.map((s) => (
+                            <li key={s.id}>{s.displayName ?? s.id}</li>
+                        ))}
+                    </ul>
+                    {i18n.t(
+                        'It is not recommended to merge indicator types with different factors.'
+                    )}
+                </NoticeBox>
+            </div>
+        )
+    }
+
+    return null
 }
