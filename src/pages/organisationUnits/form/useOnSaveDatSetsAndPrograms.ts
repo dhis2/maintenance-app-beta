@@ -1,9 +1,8 @@
-import { DataEngine } from '../../../types'
 import { useAlert, useDataEngine } from '@dhis2/app-runtime'
-import { useMemo } from 'react'
-import { OrgUnitFormValues } from '../Edit'
-import { OrganisationUnit } from '../../../types/generated'
 import i18n from '@dhis2/d2-i18n'
+import { useMemo } from 'react'
+import { DataEngine } from '../../../types'
+import { OrgUnitFormValues } from '../Edit'
 
 export const useOnSaveDatSetsAndPrograms = () => {
     const dataEngine: DataEngine = useDataEngine()
@@ -13,17 +12,17 @@ export const useOnSaveDatSetsAndPrograms = () => {
     )
     return useMemo(
         () => async (orgId: string, values: Partial<OrgUnitFormValues>) => {
-            const fieldToSaveSeparately = [
-                'dataSets',
-                'programs',
-            ]
+            const fieldToSaveSeparately = ['dataSets', 'programs']
 
             const fieldToEditSeparatelyResults = await Promise.allSettled(
                 fieldToSaveSeparately.map((field) =>
                     dataEngine.mutate({
                         resource: `organisationUnits`,
                         type: 'update',
-                        data: { identifiableObjects: values[field as keyof OrgUnitFormValues] },
+                        data: {
+                            identifiableObjects:
+                                values[field as keyof OrgUnitFormValues],
+                        },
                         id: `${orgId}/${field}`,
                     })
                 )

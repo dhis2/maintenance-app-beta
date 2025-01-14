@@ -1,6 +1,7 @@
 import { useAlert } from '@dhis2/app-runtime'
-import { FORM_ERROR, FormApi } from 'final-form'
+import { FORM_ERROR } from 'final-form'
 import React, { useMemo } from 'react'
+import { useQueryClient } from 'react-query'
 import { FormBase } from '../../components'
 import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
 import {
@@ -8,10 +9,9 @@ import {
     SECTIONS_MAP,
     useNavigateWithSearchState,
 } from '../../lib'
-import { initialValues, OrganisationUnitFormField, validate } from './form'
 import { useCreateModel } from '../../lib/form/useCreateModel'
-import { useQueryClient } from 'react-query'
 import { OrgUnitFormValues } from './Edit'
+import { initialValues, OrganisationUnitFormField, validate } from './form'
 import { useOnSaveDatSetsAndPrograms } from './form/useOnSaveDatSetsAndPrograms'
 
 const section = SECTIONS_MAP.organisationUnit
@@ -34,7 +34,11 @@ export const useOnSaveOrgUnits = () => {
             if (createOrgUnitResponse[FORM_ERROR]) {
                 return createOrgUnitResponse
             } else {
-                const orgId = (createOrgUnitResponse.response as {response: {uid: string}} ).response.uid
+                const orgId = (
+                    createOrgUnitResponse.response as {
+                        response: { uid: string }
+                    }
+                ).response.uid
 
                 await updateDataSetsAndPrograms(orgId, { dataSets, programs })
 
