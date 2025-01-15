@@ -17,6 +17,7 @@ import { useModelListView } from '../../../components/sectionList/listView'
 import { ModelValue } from '../../../components/sectionList/modelValue/ModelValue'
 import { SectionListTitle } from '../../../components/sectionList/SectionListTitle'
 import { Toolbar } from '../../../components/sectionList/toolbar'
+import { TranslationDialog } from '../../../components/sectionList/translation'
 import {
     BaseListModel,
     SchemaName,
@@ -33,7 +34,6 @@ import {
     useFilteredOrgUnits,
     usePaginatedChildrenOrgUnitsController,
 } from './useOrganisationUnits'
-import { TranslationDialog } from '../../../components/sectionList/translation'
 
 export type OrganisationUnitListItem = Omit<
     PartialOrganisationUnit,
