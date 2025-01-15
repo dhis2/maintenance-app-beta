@@ -1,3 +1,18 @@
+# [0.23.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.22.0...v0.23.0) (2025-01-15)
+
+
+### Bug Fixes
+
+* check uniqueness of field values to be case insensitive ([#488](https://github.com/dhis2/maintenance-app-beta/issues/488)) ([c2bdebb](https://github.com/dhis2/maintenance-app-beta/commit/c2bdebb92f8cf741967d904387c94a19f22c75cc))
+
+
+### Features
+
+* add translation action to org units ([430da6e](https://github.com/dhis2/maintenance-app-beta/commit/430da6e84e26d4542385106904a16110d680e3cb))
+* make column sortable only if specified by backend ([#487](https://github.com/dhis2/maintenance-app-beta/issues/487)) ([70185b7](https://github.com/dhis2/maintenance-app-beta/commit/70185b7a2f525279496c0f32ed4202e8cf550df5))
+* override indicatortype available ([#486](https://github.com/dhis2/maintenance-app-beta/issues/486)) ([42c0d31](https://github.com/dhis2/maintenance-app-beta/commit/42c0d31ea923ddaf0df0acd8a5af87a7b0ac4acf))
+* show translated short name in details panel and add column ([f45b81f](https://github.com/dhis2/maintenance-app-beta/commit/f45b81f957b0200de203c8ff16e2f11e623227d1))
+
 # [0.22.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.21.1...v0.22.0) (2025-01-09)
 
 
