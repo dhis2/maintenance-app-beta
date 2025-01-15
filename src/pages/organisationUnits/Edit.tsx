@@ -1,20 +1,23 @@
-import React from 'react'
-import { useQuery } from 'react-query'
+import { useAlert } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
+import { FormApi } from 'final-form'
+import React, { useMemo } from 'react'
+import { useQuery, useQueryClient } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { DefaultEditFormContents, FormBase } from '../../components'
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     DEFAULT_FIELD_FILTERS,
+    getSectionPath,
     SECTIONS_MAP,
-    useOnSubmitEdit,
+    useNavigateWithSearchState,
+    usePatchModel,
 } from '../../lib'
+import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { OrganisationUnit, PickWithFieldFilters } from '../../types/generated'
-import {
-    OrganisationUnitFormField,
-    organisationUnitSchema,
-    validate,
-} from './form'
+import { OrganisationUnitFormField, validate } from './form'
+import { useOnSaveDataSetsAndPrograms } from './form/useOnSaveDataSetsAndPrograms'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -33,8 +36,8 @@ const fieldFilters = [
     'phoneNumber',
     'url',
     'geometry',
-    'dataSets',
-    'programs',
+    'dataSets[id,displayName]',
+    'programs[id,displayName]',
     'level',
     'path',
     'parent[id,path, displayName]',
@@ -47,9 +50,71 @@ export type OrgUnitFormValues = PickWithFieldFilters<
 
 const section = SECTIONS_MAP.organisationUnit
 
+export const useOnEditOrgUnits = (modelId: string) => {
+    const patchDirtyFields = usePatchModel(modelId, section.namePlural)
+    const queryClient = useQueryClient()
+    const updateDataSetsAndPrograms = useOnSaveDataSetsAndPrograms()
+    const navigate = useNavigateWithSearchState()
+    const saveAlert = useAlert(
+        ({ message }) => message,
+        (options) => options
+    )
+
+    return useMemo(
+        () =>
+            async (
+                values: OrgUnitFormValues,
+                form: FormApi<OrgUnitFormValues>
+            ) => {
+                const { dataSets, programs, ...rest } = values
+                const {
+                    dataSets: dataSetsDirty,
+                    programs: programsDirty,
+                    ...restDirty
+                } = form.getState().dirtyFields
+
+                const fieldToEditSeparatelyHaveBeenModified =
+                    dataSetsDirty || programsDirty
+
+                const orgUnitJsonPatchOperations = createJsonPatchOperations({
+                    values,
+                    dirtyFields: restDirty,
+                    originalValue: form.getState().initialValues,
+                })
+
+                if (
+                    orgUnitJsonPatchOperations.length < 1 &&
+                    !fieldToEditSeparatelyHaveBeenModified
+                ) {
+                    saveAlert.show({
+                        message: i18n.t('No changes to be saved'),
+                    })
+                    navigate(`/${getSectionPath(section)}`)
+                    return
+                }
+
+                const orgUnitErrors = await patchDirtyFields(
+                    orgUnitJsonPatchOperations
+                )
+                if (orgUnitErrors) {
+                    return orgUnitErrors
+                }
+
+                await updateDataSetsAndPrograms(modelId, values)
+
+                queryClient.invalidateQueries({
+                    queryKey: [{ resource: section.namePlural }],
+                })
+                navigate(`/${getSectionPath(section)}`)
+            },
+        [patchDirtyFields, saveAlert, navigate, section]
+    )
+}
+
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const modelId = useParams().id as string
+    const onSubmit = useOnEditOrgUnits(modelId)
 
     const query = {
         resource: 'organisationUnits',
@@ -62,13 +127,9 @@ export const Component = () => {
         queryKey: [query],
         queryFn: queryFn<OrgUnitFormValues>,
     })
-
     return (
         <FormBase
-            onSubmit={useOnSubmitEdit({
-                section,
-                modelId,
-            })}
+            onSubmit={onSubmit}
             initialValues={orgUnit.data}
             validate={validate}
         >

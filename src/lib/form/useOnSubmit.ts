@@ -1,5 +1,6 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
+import { FORM_ERROR } from 'final-form'
 import { useMemo } from 'react'
 import { FormProps } from 'react-final-form'
 import { useQueryClient } from 'react-query'
@@ -105,9 +106,9 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
                 })
                 return
             }
-            const errors = await createModel(values)
-            if (errors) {
-                return errors
+            const response = await createModel(values)
+            if (response[FORM_ERROR]) {
+                return response
             }
             saveAlert.show({
                 message: i18n.t('Created successfully'),
@@ -117,6 +118,7 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
                 queryKey: [{ resource: section.namePlural }],
             })
             navigate(`/${getSectionPath(section)}`)
+            return response
         },
         [createModel, saveAlert, navigate, section]
     )

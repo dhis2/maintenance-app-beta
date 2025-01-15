@@ -30,4 +30,6 @@ describe('Indicator type add form additional tests', () => {
     it('should show an error if email is not valid', () => {})
     it('should show an error if parent org unit is not selected', () => {})
     it('should allow creation of the first org unit', () => {})
+    it('should save org unit data sets', () => {})
+    it('should save org unit programs', () => {})
 })
