@@ -33,6 +33,7 @@ import {
     useFilteredOrgUnits,
     usePaginatedChildrenOrgUnitsController,
 } from './useOrganisationUnits'
+import { TranslationDialog } from '../../../components/sectionList/translation'
 
 export type OrganisationUnitListItem = Omit<
     PartialOrganisationUnit,
@@ -91,6 +92,9 @@ export const OrganisationUnitList = () => {
     )
 
     const [detailsId, setDetailsId] = useState<string | undefined>()
+    const [translationDialogModel, setTranslationDialogModel] = useState<
+        BaseListModel | undefined
+    >(undefined)
 
     const handleDetailsClick = useCallback(
         ({ id }: BaseListModel) => {
@@ -254,6 +258,7 @@ export const OrganisationUnitList = () => {
                             isFiltering={isFiltering}
                             hasErrored={hasErrored}
                             fetchNextPage={fetchNextPage}
+                            onOpenTranslationClick={setTranslationDialogModel}
                         />
                     ))}
                 </SectionList>
@@ -265,6 +270,12 @@ export const OrganisationUnitList = () => {
                     >
                         <DefaultDetailsPanelContent modelId={detailsId} />
                     </DetailsPanel>
+                )}
+                {translationDialogModel && (
+                    <TranslationDialog
+                        model={translationDialogModel}
+                        onClose={() => setTranslationDialogModel(undefined)}
+                    />
                 )}
             </div>
         </div>

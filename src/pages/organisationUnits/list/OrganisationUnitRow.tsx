@@ -22,12 +22,14 @@ export const OrganisationUnitRow = ({
     fetchNextPage,
     onShowDetailsClick,
     hasErrored,
+    onOpenTranslationClick,
 }: {
     row: Row<OrganisationUnitListItem>
     isFiltering: boolean
     fetchNextPage: (id: string) => void
     onShowDetailsClick: (model: BaseListModel) => void
     hasErrored: boolean
+    onOpenTranslationClick: (model: BaseListModel) => void
 }) => {
     const parentRow = row.getParentRow()
 
@@ -89,7 +91,7 @@ export const OrganisationUnitRow = ({
                     <OrganisationUnitListActions
                         model={row.original}
                         onShowDetailsClick={onShowDetailsClick}
-                        // onOpenTranslationClick={()=>{}}
+                        onOpenTranslationClick={onOpenTranslationClick}
                     />
                 </DataTableCell>
             </DataTableRow>

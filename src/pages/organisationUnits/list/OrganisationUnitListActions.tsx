@@ -5,6 +5,7 @@ import {
     IconEdit16,
     IconMore16,
     IconMore24,
+    IconTranslate16,
     MenuItem,
     Popover,
 } from '@dhis2/ui'
@@ -23,14 +24,14 @@ import { canDeleteModel } from '../../../lib/models/access'
 type OrganisationUnitListActionProps = {
     model: BaseListModel
     onShowDetailsClick: (model: BaseListModel) => void
-    // onOpenTranslationClick: (model: BaseListModel) => void
+    onOpenTranslationClick: (model: BaseListModel) => void
 }
 
 export const OrganisationUnitListActions = ({
     model,
     onShowDetailsClick,
-}: // onOpenTranslationClick,
-OrganisationUnitListActionProps) => {
+    onOpenTranslationClick,
+}: OrganisationUnitListActionProps) => {
     const deletable = canDeleteModel(model)
     const queryClient = useQueryClient()
 
@@ -46,7 +47,7 @@ OrganisationUnitListActionProps) => {
             <OrganisationUnitActionMore
                 deletable={deletable}
                 model={model}
-                // onTranslateClick={() => onOpenTranslationClick(model)}
+                onTranslateClick={() => onOpenTranslationClick(model)}
                 onDeleteSuccess={handleDeleteSuccess}
                 onShowDetailsClick={onShowDetailsClick}
             />
@@ -57,7 +58,7 @@ OrganisationUnitListActionProps) => {
 type OrganisationUnitActionMoreProps = {
     deletable: boolean
     model: BaseListModel
-    // onTranslateClick: () => void
+    onTranslateClick: () => void
     onDeleteSuccess: () => void
     onShowDetailsClick: (model: BaseListModel) => void
 }
@@ -65,7 +66,7 @@ type OrganisationUnitActionMoreProps = {
 const OrganisationUnitActionMore = ({
     deletable,
     model,
-    // onTranslateClick,
+    onTranslateClick,
     onDeleteSuccess,
     onShowDetailsClick,
 }: OrganisationUnitActionMoreProps) => {
@@ -113,17 +114,15 @@ const OrganisationUnitActionMore = ({
                             target="_blank"
                             href={href}
                         />
-
-                        {/* <MenuItem
-                                dense
-                                label={i18n.t('Translate')}
-                                icon={<IconTranslate16 />}
-                                onClick={() => {
-                                    onTranslateClick()
-                                    setOpen(false)
-                                }}
-                            /> */}
-
+                        <MenuItem
+                            dense
+                            label={i18n.t('Translate')}
+                            icon={<IconTranslate16 />}
+                            onClick={() => {
+                                onTranslateClick()
+                                setOpen(false)
+                            }}
+                        />
                         <TooltipWrapper
                             condition={!deletable}
                             content={TOOLTIPS.noDeleteAccess}
