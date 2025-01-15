@@ -17,6 +17,7 @@ import { useModelListView } from '../../../components/sectionList/listView'
 import { ModelValue } from '../../../components/sectionList/modelValue/ModelValue'
 import { SectionListTitle } from '../../../components/sectionList/SectionListTitle'
 import { Toolbar } from '../../../components/sectionList/toolbar'
+import { TranslationDialog } from '../../../components/sectionList/translation'
 import {
     BaseListModel,
     SchemaName,
@@ -91,6 +92,9 @@ export const OrganisationUnitList = () => {
     )
 
     const [detailsId, setDetailsId] = useState<string | undefined>()
+    const [translationDialogModel, setTranslationDialogModel] = useState<
+        BaseListModel | undefined
+    >(undefined)
 
     const handleDetailsClick = useCallback(
         ({ id }: BaseListModel) => {
@@ -254,6 +258,7 @@ export const OrganisationUnitList = () => {
                             isFiltering={isFiltering}
                             hasErrored={hasErrored}
                             fetchNextPage={fetchNextPage}
+                            onOpenTranslationClick={setTranslationDialogModel}
                         />
                     ))}
                 </SectionList>
@@ -265,6 +270,12 @@ export const OrganisationUnitList = () => {
                     >
                         <DefaultDetailsPanelContent modelId={detailsId} />
                     </DetailsPanel>
+                )}
+                {translationDialogModel && (
+                    <TranslationDialog
+                        model={translationDialogModel}
+                        onClose={() => setTranslationDialogModel(undefined)}
+                    />
                 )}
             </div>
         </div>
