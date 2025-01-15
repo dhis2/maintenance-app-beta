@@ -40,7 +40,7 @@ const fieldFilters = [
     'programs[id,displayName]',
     'level',
     'path',
-    'parent[id,path, displayName]',
+    'parent[id,path,displayName]',
 ] as const
 
 export type OrgUnitFormValues = PickWithFieldFilters<

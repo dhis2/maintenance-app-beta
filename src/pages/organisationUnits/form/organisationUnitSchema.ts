@@ -102,4 +102,6 @@ export const organisationUnitSchema = identifiable
 
 export const initialValues = getDefaults(organisationUnitSchema)
 
+export type OrganisationUnitFormValues = typeof initialValues
+
 export const validate = createFormValidate(organisationUnitSchema)
