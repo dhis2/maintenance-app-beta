@@ -148,6 +148,26 @@ export const modelListViewsConfig = {
             overrideDefaultAvailable: true,
         },
     },
+    organisationUnitGroup: {
+        columns: {
+            available: [DESCRIPTORS.shortName],
+            default: [DESCRIPTORS.name, 'id', 'code', 'lastUpdated'],
+        },
+        filters: {
+            default: [],
+            overrideDefaultAvailable: true,
+        },
+    },
+    organisationUnitGroupSet: {
+        columns: {
+            available: [DESCRIPTORS.shortName],
+            default: [DESCRIPTORS.name, 'id', 'code', 'lastUpdated'],
+        },
+        filters: {
+            default: [],
+            overrideDefaultAvailable: true,
+        },
+    },
     categoryOption: {
         columns: {
             available: [
