@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { DataEngine } from '../../../types'
 import { OrgUnitFormValues } from '../Edit'
 
-export const useOnSaveDatSetsAndPrograms = () => {
+export const useOnSaveDataSetsAndPrograms = () => {
     const dataEngine: DataEngine = useDataEngine()
     const saveAlert = useAlert(
         ({ message }) => message,

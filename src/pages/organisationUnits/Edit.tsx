@@ -17,7 +17,7 @@ import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperati
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { OrganisationUnit, PickWithFieldFilters } from '../../types/generated'
 import { OrganisationUnitFormField, validate } from './form'
-import { useOnSaveDatSetsAndPrograms } from './form/useOnSaveDatSetsAndPrograms'
+import { useOnSaveDataSetsAndPrograms } from './form/useOnSaveDataSetsAndPrograms'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -53,7 +53,7 @@ const section = SECTIONS_MAP.organisationUnit
 export const useOnEditOrgUnits = (modelId: string) => {
     const patchDirtyFields = usePatchModel(modelId, section.namePlural)
     const queryClient = useQueryClient()
-    const updateDataSetsAndPrograms = useOnSaveDatSetsAndPrograms()
+    const updateDataSetsAndPrograms = useOnSaveDataSetsAndPrograms()
     const navigate = useNavigateWithSearchState()
     const saveAlert = useAlert(
         ({ message }) => message,
