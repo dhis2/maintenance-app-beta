@@ -25,7 +25,7 @@ const defaultQueryFields = [
     'lastUpdatedBy',
     'displayName',
     'id',
-    'shortName',
+    'displayShortName',
     'href',
     'createdBy',
 ] as const
@@ -48,7 +48,7 @@ const createDefaultDetailsQuery = (
 
 // fields that are not in BaseIdentifiableObject
 type ExtraFields = {
-    shortName?: string
+    displayShortName?: string
 }
 
 type DetailsResponse = Pick<
@@ -84,9 +84,9 @@ const DetailsContent = ({ data }: { data: DetailsResponse }) => {
         <DetailsPanelContent displayName={data.displayName}>
             <DetailsPanelButtons modelId={data.id} editable={canEdit} />
             <DetailsList>
-                {data.shortName && (
+                {data.displayShortName && (
                     <DetailItem label={i18n.t('Short name')}>
-                        {data.shortName}
+                        {data.displayShortName}
                     </DetailItem>
                 )}
                 <DetailItem label={i18n.t('Code')}>{data.code}</DetailItem>

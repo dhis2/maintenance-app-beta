@@ -4,6 +4,12 @@ import { useMemo } from 'react'
 import { DataEngine } from '../../../types'
 import { OrgUnitFormValues } from '../Edit'
 
+type DataSetsAndPrograms = {
+    dataSets?: {
+        id: string
+    }[]
+    programs?: { id: string }[]
+}
 export const useOnSaveDataSetsAndPrograms = () => {
     const dataEngine: DataEngine = useDataEngine()
     const saveAlert = useAlert(
@@ -11,7 +17,7 @@ export const useOnSaveDataSetsAndPrograms = () => {
         (options) => options
     )
     return useMemo(
-        () => async (orgId: string, values: Partial<OrgUnitFormValues>) => {
+        () => async (orgId: string, values: DataSetsAndPrograms) => {
             const fieldToSaveSeparately = ['dataSets', 'programs']
 
             const fieldToEditSeparatelyResults = await Promise.allSettled(
@@ -21,7 +27,7 @@ export const useOnSaveDataSetsAndPrograms = () => {
                         type: 'update',
                         data: {
                             identifiableObjects:
-                                values[field as keyof OrgUnitFormValues],
+                                values[field as keyof DataSetsAndPrograms],
                         },
                         id: `${orgId}/${field}`,
                     })

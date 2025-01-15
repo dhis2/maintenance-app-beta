@@ -10,8 +10,8 @@ import {
     useNavigateWithSearchState,
 } from '../../lib'
 import { useCreateModel } from '../../lib/form/useCreateModel'
-import { OrgUnitFormValues } from './Edit'
 import { initialValues, OrganisationUnitFormField, validate } from './form'
+import { OrganisationUnitFormValues } from './form/organisationUnitSchema'
 import { useOnSaveDataSetsAndPrograms } from './form/useOnSaveDataSetsAndPrograms'
 
 const section = SECTIONS_MAP.organisationUnit
@@ -27,7 +27,7 @@ export const useOnSaveOrgUnits = () => {
     )
 
     return useMemo(
-        () => async (values: OrgUnitFormValues) => {
+        () => async (values: OrganisationUnitFormValues) => {
             const { dataSets, programs, ...restFields } = values
 
             const createOrgUnitResponse = await createModel(restFields)
