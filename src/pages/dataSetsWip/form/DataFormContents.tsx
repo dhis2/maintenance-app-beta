@@ -7,12 +7,9 @@ import {
     StandardFormSectionTitle,
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
-import { useSectionedFormContext } from '../../../lib'
 import { CategoryComboField } from './CategoryComboField'
-import { DataSetFormDescriptor } from './formDescriptor'
 
 export const DataFormContents = ({ name }: { name: string }) => {
-    const descriptor = useSectionedFormContext<typeof DataSetFormDescriptor>()
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>

@@ -5,11 +5,9 @@ import {
     StandardFormSectionTitle,
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
-import { useSyncSelectedSectionWithScroll } from '../../../lib'
 import { PeriodTypeField } from './PeriodTypeField'
 
 export const PeriodsContents = ({ name }: { name: string }) => {
-    useSyncSelectedSectionWithScroll()
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
