@@ -7,11 +7,9 @@ import {
     StandardFormSectionTitle,
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
-import { useSyncSelectedSectionWithScroll } from '../../../lib'
 import { ColorAndIconField } from '../../dataElements/fields'
 
 export const SetupFormContents = ({ name }: { name: string }) => {
-    useSyncSelectedSectionWithScroll()
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
