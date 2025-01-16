@@ -1,40 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import { InputFieldFF } from '@dhis2/ui'
-import React, { useMemo } from 'react'
+import React from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
-import { useParams } from 'react-router-dom'
-import {
-    composeAsyncValidators,
-    required,
-    useCheckMaxLengthFromSchema,
-    useIsFieldValueUnique,
-    SchemaSection,
-} from '../../../lib'
-
-function useValidator({ schemaSection }: { schemaSection: SchemaSection }) {
-    const params = useParams()
-    const modelId = params.id as string
-    const checkIsValueTaken = useIsFieldValueUnique({
-        model: schemaSection.namePlural,
-        field: 'name',
-        id: modelId,
-    })
-
-    const checkMaxLength = useCheckMaxLengthFromSchema(
-        schemaSection.name,
-        'name'
-    )
-
-    return useMemo(
-        () =>
-            composeAsyncValidators<string>([
-                checkIsValueTaken,
-                checkMaxLength,
-                required,
-            ]),
-        [checkIsValueTaken, checkMaxLength]
-    )
-}
+import { SchemaSection } from '../../../lib'
+import { useValidator } from '../../../lib/models/useFieldValidators'
 
 export function NameField({
     schemaSection,
@@ -43,7 +12,7 @@ export function NameField({
     helpText?: string
     schemaSection: SchemaSection
 }) {
-    const validator = useValidator({ schemaSection })
+    const validator = useValidator({ schemaSection, property: 'name' })
     const { meta } = useField('name', {
         subscription: { validating: true },
     })
