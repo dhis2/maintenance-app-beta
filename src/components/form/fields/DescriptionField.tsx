@@ -1,8 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
-import { createMaxCharacterLength, TextAreaFieldFF } from '@dhis2/ui'
+import { TextAreaFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
-import { SchemaSection, useCheckMaxLengthFromSchema } from '../../../lib'
+import { SchemaSection } from '../../../lib'
+import { useValidator } from '../../../lib/models/useFieldValidators'
 
 export function DescriptionField({
     helpText,
@@ -11,7 +12,7 @@ export function DescriptionField({
     helpText?: string
     schemaSection: SchemaSection
 }) {
-    const validate = createMaxCharacterLength(2000)
+    const validate = useValidator({ schemaSection, property: 'description' })
 
     return (
         <FieldRFF
