@@ -22,17 +22,21 @@ export const Component = () => {
                 validate={validate}
                 subscription={{}}
             >
-                {({ handleSubmit }) => {
+                {({ handleSubmit, form }) => {
                     return (
-                        <SectionedFormLayout
-                            sidebar={<DefaultSectionedFormSidebar />}
-                            footer={<DefaultSectionedFormFooter />}
-                        >
-                            <form onSubmit={handleSubmit}>
-                                <DataSetFormContents />
-                            </form>
-                            <SectionedFormErrorNotice />
-                        </SectionedFormLayout>
+                        <>
+                            <SectionedFormLayout
+                                sidebar={<DefaultSectionedFormSidebar />}
+                                footer={<DefaultSectionedFormFooter />}
+                            >
+                                <form onSubmit={handleSubmit}>
+                                    <DataSetFormContents
+                                        formValues={form.getState().values}
+                                    />
+                                </form>
+                                <SectionedFormErrorNotice />
+                            </SectionedFormLayout>
+                        </>
                     )
                 }}
             </FormBase>

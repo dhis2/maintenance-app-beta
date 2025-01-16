@@ -12,8 +12,13 @@ import { OrganisationUnitsFormContents } from './OrganisationUnitsFormContents'
 import { PeriodsContents } from './PeriodsFormContents'
 import { SetupFormContents } from './SetupFormContents'
 import { ValidationFormContents } from './ValidationFormContents'
+import { DataSetFormValues } from './dataSetFormSchema'
 
-export const DataSetFormContents = () => {
+export const DataSetFormContents = ({
+    formValues,
+}: {
+    formValues: DataSetFormValues
+}) => {
     const descriptor = useSectionedFormContext<typeof DataSetFormDescriptor>()
     useSyncSelectedSectionWithScroll()
     return (
@@ -21,7 +26,10 @@ export const DataSetFormContents = () => {
             <SectionedFormSections>
                 <SetupFormContents name={descriptor.getSection('setup').name} />
                 <DataFormContents name={descriptor.getSection('data').name} />
-                <PeriodsContents name={descriptor.getSection('periods').name} />
+                <PeriodsContents
+                    name={descriptor.getSection('periods').name}
+                    formValues={formValues}
+                />
                 <ValidationFormContents
                     name={descriptor.getSection('validation').name}
                 />

@@ -1,0 +1,5 @@
+.hiddenInputField {
+    padding-left: var(--spacers-dp24);
+    padding-top: var(--spacers-dp8);
+    width: 20px;
+}
