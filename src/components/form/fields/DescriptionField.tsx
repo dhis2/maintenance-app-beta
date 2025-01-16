@@ -2,10 +2,11 @@ import i18n from '@dhis2/d2-i18n'
 import { createMaxCharacterLength, TextAreaFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
+import { SchemaSection } from '../../../lib'
+
+const validateMaxLength = createMaxCharacterLength(2000)
 
 export function DescriptionField({ helpText }: { helpText?: string }) {
-    const validate = createMaxCharacterLength(2000)
-
     return (
         <FieldRFF
             component={TextAreaFieldFF}
@@ -14,7 +15,7 @@ export function DescriptionField({ helpText }: { helpText?: string }) {
             name="description"
             label={i18n.t('Description')}
             helpText={helpText}
-            validate={validate}
+            validate={validateMaxLength}
             validateFields={[]}
         />
     )

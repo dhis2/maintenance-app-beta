@@ -1,3 +1,10 @@
+## [0.23.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.23.0...v0.23.1) (2025-01-16)
+
+
+### Bug Fixes
+
+* **validation:** use dynamic schema validator for common fields ([#494](https://github.com/dhis2/maintenance-app-beta/issues/494)) ([0ff52ee](https://github.com/dhis2/maintenance-app-beta/commit/0ff52eeb757a4c1a9484ab70841bd08566d34668))
+
 # [0.23.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.22.0...v0.23.0) (2025-01-15)
 
 
