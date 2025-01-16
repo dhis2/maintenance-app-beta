@@ -1,20 +1,18 @@
 import React from 'react'
 import { SectionedFormSections } from '../../../components/sectionedForm'
+import { AdvancedFormContents } from './AdvancedFormContents'
+import { DataFormContents } from './DataFormContents'
 import {
-    SECTIONS_MAP,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
 import { DataSetFormDescriptor } from './formDescriptor'
-import { SetupFormContents } from './SetupFormContents'
-import { DataFormContents } from './DataFormContents'
-import { PeriodsContents } from './PeriodsFormContents'
-import { ValidationFormContents } from './ValidationFormContents'
-import { OrganisationUnitsFormContents } from './OrganisationUnitsFormContents'
 import { FormFormContents } from './FormFormContents'
-import { AdvancedFormContents } from './AdvancedFormContents'
+import { OrganisationUnitsFormContents } from './OrganisationUnitsFormContents'
+import { PeriodsContents } from './PeriodsFormContents'
+import { SetupFormContents } from './SetupFormContents'
+import { ValidationFormContents } from './ValidationFormContents'
 
-const section = SECTIONS_MAP.dataSet
 
 export const DataSetFormContents = () => {
     const descriptor = useSectionedFormContext<typeof DataSetFormDescriptor>()
