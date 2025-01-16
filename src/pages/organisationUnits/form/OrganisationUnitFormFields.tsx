@@ -80,7 +80,7 @@ export function OrganisationUnitFormField() {
                     <ImageField />
                 </StandardFormField>
                 <StandardFormField>
-                    <DescriptionField schemaSection={schemaSection} />
+                    <DescriptionField />
                 </StandardFormField>
                 <StandardFormField>
                     <FieldRFF<string | undefined>

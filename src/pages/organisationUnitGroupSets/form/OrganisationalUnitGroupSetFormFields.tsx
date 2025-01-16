@@ -32,7 +32,7 @@ export const OrganisationalUnitGroupSetFormFields = () => {
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />
                 <StandardFormField>
-                    <DescriptionField schemaSection={section} />
+                    <DescriptionField />
                 </StandardFormField>
                 <StandardFormField>
                     <FieldRFF

@@ -29,7 +29,6 @@ export const CategoryFormFields = () => {
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />
                 <DescriptionField
-                    schemaSection={section}
                     helpText={i18n.t('Explain the purpose of this category.')}
                 />
             </StandardFormSection>

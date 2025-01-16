@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-15T10:27:11.503Z\n"
-"PO-Revision-Date: 2025-01-15T10:27:11.503Z\n"
+"POT-Creation-Date: 2025-01-16T12:51:51.570Z\n"
+"PO-Revision-Date: 2025-01-16T12:51:51.570Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1292,9 +1292,6 @@ msgstr ""
 "level means that data from lower levels will not be included in the "
 "aggregation."
 
-msgid "Set up the basic information for this data set."
-msgstr "Set up the basic information for this data set."
-
 msgid "Configure data elements"
 msgstr "Configure data elements"
 
@@ -1333,6 +1330,9 @@ msgstr "These options are used for advanced data set configurations."
 
 msgid "Something went wrong"
 msgstr "Something went wrong"
+
+msgid "Set up the basic information for this data set."
+msgstr "Set up the basic information for this data set."
 
 msgid "Setup"
 msgstr "Setup"
