@@ -1,5 +1,5 @@
+import { useQuery, useQueries } from '@tanstack/react-query'
 import { useCallback, useMemo, useState } from 'react'
-import { useQuery, useQueries } from 'react-query'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
 import { OrganisationUnit, PagedResponse } from '../../../types/generated'
 
@@ -131,7 +131,7 @@ export const usePaginatedChildrenOrgUnitsController = (
         return queryOptions
     })
 
-    const queries = useQueries(queryObjects)
+    const queries = useQueries({ queries: queryObjects })
     return {
         queries,
         fetchNextPage,
