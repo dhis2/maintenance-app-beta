@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 import {
     DEFAULT_CATEGORY_COMBO,
@@ -5,7 +6,6 @@ import {
     modelFormSchemas,
 } from '../../../lib'
 import { createFormValidate } from '../../../lib/form/validate'
-import i18n from '@dhis2/d2-i18n'
 
 const { withAttributeValues, identifiable, style, referenceCollection } =
     modelFormSchemas

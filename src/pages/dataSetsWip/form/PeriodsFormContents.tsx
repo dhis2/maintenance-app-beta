@@ -6,10 +6,10 @@ import {
     StandardFormSectionTitle,
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
-import { PeriodTypeField } from './PeriodTypeField'
-import { HiddenInputField } from './HiddenInputField'
 import { DEFAULT_CATEGORY_COMBO } from '../../../lib'
 import { DataSetFormValues } from './dataSetFormSchema'
+import { HiddenInputField } from './HiddenInputField'
+import { PeriodTypeField } from './PeriodTypeField'
 
 export const PeriodsContents = ({
     name,

@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import { Checkbox, InputFieldFF } from '@dhis2/ui'
-import { FieldMetaState, FieldRenderProps, useField } from 'react-final-form'
 import i18n from '@dhis2/d2-i18n'
-import classes from './HiddenInputField.module.css'
-import { InputFieldRestProps } from '@dhis2/ui-forms/types/InputFieldFF/InputFieldFF'
+import { Checkbox, InputFieldFF } from '@dhis2/ui'
 import type { InputFieldProps } from '@dhis2-ui/input'
+import React, { useState } from 'react'
+import { FieldMetaState, useField } from 'react-final-form'
+import classes from './HiddenInputField.module.css'
+
+type InputFieldRestProps = Omit<InputFieldProps, 'onChange' | 'value' | 'name'>
 
 export type HiddenInputFieldProps = InputFieldRestProps & {
     fieldName: string

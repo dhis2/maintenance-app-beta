@@ -6,13 +6,13 @@ import {
 } from '../../../lib'
 import { AdvancedFormContents } from './AdvancedFormContents'
 import { DataFormContents } from './DataFormContents'
+import { DataSetFormValues } from './dataSetFormSchema'
 import { DataSetFormDescriptor } from './formDescriptor'
 import { FormFormContents } from './FormFormContents'
 import { OrganisationUnitsFormContents } from './OrganisationUnitsFormContents'
 import { PeriodsContents } from './PeriodsFormContents'
 import { SetupFormContents } from './SetupFormContents'
 import { ValidationFormContents } from './ValidationFormContents'
-import { DataSetFormValues } from './dataSetFormSchema'
 
 export const DataSetFormContents = ({
     formValues,
