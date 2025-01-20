@@ -38,7 +38,6 @@ export function DataElementGroupSetFormFields() {
 
                 <StandardFormField>
                     <DescriptionField
-                        schemaSection={section}
                         helpText={i18n.t(
                             'Explain the purpose of this data element group set.'
                         )}

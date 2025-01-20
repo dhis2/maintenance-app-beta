@@ -30,7 +30,6 @@ function CategoryOptionGroupSetFormFields() {
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />
                 <DescriptionField
-                    schemaSection={section}
                     helpText={i18n.t(
                         'Explain the purpose of this category option group set.'
                     )}

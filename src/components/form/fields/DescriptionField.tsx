@@ -6,13 +6,7 @@ import { SchemaSection } from '../../../lib'
 
 const validateMaxLength = createMaxCharacterLength(2000)
 
-export function DescriptionField({
-    helpText,
-    schemaSection,
-}: {
-    helpText?: string
-    schemaSection: SchemaSection
-}) {
+export function DescriptionField({ helpText }: { helpText?: string }) {
     return (
         <FieldRFF
             component={TextAreaFieldFF}
