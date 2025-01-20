@@ -1,5 +1,5 @@
-import { useQuery, useQueries } from '@tanstack/react-query'
-import { useCallback, useMemo, useState } from 'react'
+import { useQuery, useQueries, replaceEqualDeep } from '@tanstack/react-query'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
 import { OrganisationUnit, PagedResponse } from '../../../types/generated'
 
@@ -28,7 +28,7 @@ export type PartialOrganisationUnit = Pick<
     childCount: number
 }
 
-type OrganisationUnitResponse = PagedResponse<
+export type OrganisationUnitResponse = PagedResponse<
     PartialOrganisationUnit,
     'organisationUnits'
 >
@@ -107,33 +107,49 @@ export const usePaginatedChildrenOrgUnitsController = (
         [setFetchPages]
     )
 
-    const queryObjects = flatParentIdPages.map(([id, page]) => {
-        const resourceQuery = {
-            resource: 'organisationUnits',
-            params: {
-                fields: getOrgUnitFieldFilters(options.fieldFilters),
-                // `id:eq:id` is for an edge-case where a root-unit is a leaf-node
-                // and `parent.id`-filter would return empty results
-                filter: [`parent.id:eq:${id}`, `id:eq:${id}`],
-                rootJunction: 'OR',
-                order: 'displayName:asc',
-                page: page,
-            },
-        }
-        const queryOptions = {
-            enabled: options.enabled,
-            queryKey: [resourceQuery],
-            queryFn: boundQueryFn<OrganisationUnitResponse>,
-            staleTime: 60000,
-            cacheTime: 60000,
-            meta: { parent: id },
-        } as const
-        return queryOptions
-    })
+    const queryObjects = useMemo(
+        () =>
+            flatParentIdPages.map(([id, page]) => {
+                const resourceQuery = {
+                    resource: 'organisationUnits',
+                    params: {
+                        fields: getOrgUnitFieldFilters(options.fieldFilters),
+                        // `id:eq:id` is for an edge-case where a root-unit is a leaf-node
+                        // and `parent.id`-filter would return empty results
+                        filter: [`parent.id:eq:${id}`, `id:eq:${id}`],
+                        rootJunction: 'OR',
+                        order: 'displayName:asc',
+                        page: page,
+                    },
+                }
+                const queryOptions = {
+                    enabled: options.enabled,
+                    queryKey: [resourceQuery],
+                    queryFn: boundQueryFn<OrganisationUnitResponse>,
+                    staleTime: 60000,
+                    cacheTime: 60000,
+                    meta: { parent: id },
+                } as const
+                return queryOptions
+            }),
+        [flatParentIdPages, options.fieldFilters, options.enabled, boundQueryFn]
+    )
+    const nonStableQueries = useQueries({ queries: queryObjects })
+    // TODO: migrate to combine when upgrading to @tanstack/react-query@5
+    const allData = useStable(nonStableQueries.map((q) => q.data))
 
-    const queries = useQueries({ queries: queryObjects })
     return {
-        queries,
+        allData,
+        queries: nonStableQueries,
         fetchNextPage,
     }
+}
+
+export function useStable<T>(value: T) {
+    const ref = useRef(value)
+    const stable = replaceEqualDeep(ref.current, value)
+    useEffect(() => {
+        ref.current = stable
+    }, [stable])
+    return stable
 }

@@ -52,6 +52,7 @@ export const OrganisationUnitRow = ({
                                     type="button"
                                     dataTest="row-expand-icon"
                                     loading={
+                                        !isFiltering &&
                                         row.getIsExpanded() &&
                                         row.subRows.length < 1 &&
                                         !hasErrored
