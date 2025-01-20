@@ -230,48 +230,38 @@ export const OrganisationUnitList = () => {
 
     const handleExpand = useCallback(
         (valueOrUpdater: Updater<ExpandedState>) => {
-            // when we expand something and are not filtering, we need to load the children
-            // also translate expandedState === true (expand all) to expand all loaded units
             const getAllExpanded = () =>
                 Object.fromEntries(flatOrgUnits.map((ou) => [ou.id, true]))
 
-            setExpanded((old) => {
-                const value =
-                    typeof valueOrUpdater === 'function'
-                        ? valueOrUpdater(old)
-                        : valueOrUpdater
-                if (value === true) {
-                    setParentIdsToLoad(getAllExpanded())
-                    return value
-                }
-                // find which id was toggled
-                const oldSet = new Set(Object.keys(old))
-                const newSet = new Set(Object.keys(value))
+            const newValue =
+                typeof valueOrUpdater === 'function'
+                    ? valueOrUpdater(expanded)
+                    : valueOrUpdater
 
-                const toggledRow = Array.from(
-                    newSet.symmetricDifference(oldSet)
-                ).map((k) => k)[0]
-                if (toggledRow) {
-                    // load children of toggled row
-                    // note that we dont really have to differentiate between removing (collapsing) and adding (expanding)
-                    // because we dont have to remove the children from the loaded data when collapsing.
-                    setParentIdsToLoad((old) => ({
-                        ...old,
-                        [toggledRow]: true,
-                    }))
-                }
-                return value
-            })
+            setExpanded(newValue)
+            if (newValue === true) {
+                setParentIdsToLoad(getAllExpanded())
+                return
+            }
+            const oldSet = new Set(Object.keys(expanded))
+            const newSet = new Set(Object.keys(newValue))
+            // find which id was toggled
+            const toggledRow = Array.from(
+                newSet.symmetricDifference(oldSet)
+            ).map((k) => k)[0]
+
+            if (toggledRow) {
+                // load children of toggled row
+                // note that we dont really have to differentiate between removing (collapsing) and adding (expanding)
+                // because we dont have to remove the children from the loaded data when collapsing.
+                setParentIdsToLoad((old) => ({
+                    ...old,
+                    [toggledRow]: true,
+                }))
+            }
         },
-        [setExpanded, flatOrgUnits]
+        [setExpanded, flatOrgUnits, expanded]
     )
-    console.log({
-        parentIdsToLoad,
-        expanded,
-        rootOrgUnits,
-        flatOrgUnits,
-        orgUnitMap,
-    })
 
     const table = useReactTable({
         columns: columnDefinitions,
