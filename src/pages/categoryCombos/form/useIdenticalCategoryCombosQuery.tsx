@@ -1,4 +1,4 @@
-import { useQuery, QueryObserverOptions } from 'react-query'
+import { useQuery, QueryObserverOptions } from '@tanstack/react-query'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
 import { PagedResponse } from '../../../types/generated'
 import { CategoryComboFormValues } from './categoryComboSchema'

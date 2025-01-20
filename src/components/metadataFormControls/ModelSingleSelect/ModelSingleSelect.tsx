@@ -1,5 +1,5 @@
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import React, { useEffect, useMemo, useState } from 'react'
-import { useInfiniteQuery, useQuery } from 'react-query'
 import { useDebouncedCallback } from 'use-debounce'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
 import { PlainResourceQuery } from '../../../types'
