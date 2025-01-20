@@ -19,14 +19,14 @@ export const ValidationFormContents = ({ name }: { name: string }) => {
                     'Configure how data can and must be entered for this data'
                 )}
             </StandardFormSectionDescription>
-            <StandardFormField>
+            {/* <StandardFormField>
                 <ModelTransferField
                     name={'dataElements'}
                     query={{
                         resource: 'dataElements',
                     }}
                 />
-            </StandardFormField>
+            </StandardFormField> */}
         </SectionedFormSection>
     )
 }

@@ -15,11 +15,12 @@ export const dataSetFormSchema = identifiable
         id: z.string().optional(),
         code: z.string().trim().optional(),
         description: z.string().trim().max(2000).optional(),
-        style,
-        dataElements: referenceCollection.default([]),
+        style: style.optional(),
+        dataSetElements: referenceCollection.default([]),
         categoryCombo: z
             .object({ id: z.string(), displayName: z.string() })
             .default({ ...DEFAULT_CATEGORY_COMBO }),
+        indicators: referenceCollection.default([]),
         periodType: z.string().default('Monthly'),
     })
 
