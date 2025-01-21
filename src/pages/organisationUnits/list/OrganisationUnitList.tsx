@@ -35,6 +35,7 @@ import {
     useFilteredOrgUnits,
     usePaginatedChildrenOrgUnitsController,
 } from './useOrganisationUnits'
+import { difference } from 'lodash'
 
 export type OrganisationUnitListItem = Omit<
     PartialOrganisationUnit,
@@ -247,10 +248,10 @@ export const OrganisationUnitList = () => {
             const oldSet = new Set(Object.keys(expanded))
             const newSet = new Set(Object.keys(newValue))
             // find which id was toggled
-            const toggledRow = Array.from(
-                newSet.symmetricDifference(oldSet)
-            ).map((k) => k)[0]
-
+            const toggledRow = difference(
+                Array.from(newSet),
+                Array.from(oldSet)
+            )[0]
             if (toggledRow) {
                 // load children of toggled row
                 // note that we dont really have to differentiate between removing (collapsing) and adding (expanding)
