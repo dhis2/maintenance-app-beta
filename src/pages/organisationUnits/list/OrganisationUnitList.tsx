@@ -245,12 +245,10 @@ export const OrganisationUnitList = () => {
                 setParentIdsToLoad(getAllExpanded())
                 return
             }
-            const oldSet = new Set(Object.keys(expanded))
-            const newSet = new Set(Object.keys(newValue))
             // find which id was toggled
             const toggledRow = difference(
-                Array.from(newSet),
-                Array.from(oldSet)
+                Object.keys(newValue),
+                Object.keys(expanded)
             )[0]
             if (toggledRow) {
                 // load children of toggled row
