@@ -28,7 +28,7 @@ export const OrganisationalUnitGroupFormFields = () => {
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />
                 <StandardFormField>
-                    <DescriptionField schemaSection={section} />
+                    <DescriptionField />
                 </StandardFormField>
             </StandardFormSection>
             <StandardFormSection>
