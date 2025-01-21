@@ -121,13 +121,12 @@ const transformToOrgUnitListItems = (
 
     return {
         orgUnitMap: allOrgUnitsMap,
-        flatOrgUnits: Array.from(allOrgUnitsMap.values()),
         rootOrgUnits,
     }
 }
 
 /**
- * A collapse tree-like list of organisation units.
+ * A collapsible tree-like list of organisation units.
  *
  * This component is somewhat complex - but it handles a lot of different scenarios.
  *
@@ -218,7 +217,7 @@ export const OrganisationUnitList = () => {
         setParentIdsToLoad({})
     }, [isFiltering, initialExpandedState, orgUnitFiltered.data])
 
-    const { rootOrgUnits, flatOrgUnits, orgUnitMap } = useMemo(() => {
+    const { rootOrgUnits, orgUnitMap } = useMemo(() => {
         const flatData = allData
             .concat(orgUnitFiltered.data ?? [])
             .flatMap((ou) => (ou ? ou.organisationUnits : []))
@@ -231,7 +230,9 @@ export const OrganisationUnitList = () => {
     const handleExpand = useCallback(
         (valueOrUpdater: Updater<ExpandedState>) => {
             const getAllExpanded = () =>
-                Object.fromEntries(flatOrgUnits.map((ou) => [ou.id, true]))
+                Object.fromEntries(
+                    Array.from(orgUnitMap).map(([ouId]) => [ouId, true])
+                )
 
             const newValue =
                 typeof valueOrUpdater === 'function'
@@ -260,7 +261,7 @@ export const OrganisationUnitList = () => {
                 }))
             }
         },
-        [setExpanded, flatOrgUnits, expanded]
+        [setExpanded, orgUnitMap, expanded]
     )
 
     const table = useReactTable({
