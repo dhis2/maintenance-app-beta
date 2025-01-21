@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
+import { useFormState } from 'react-final-form'
 import {
     StandardFormField,
     StandardFormSectionDescription,
@@ -7,17 +8,11 @@ import {
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
 import { DEFAULT_CATEGORY_COMBO } from '../../../lib'
-import { DataSetFormValues } from './dataSetFormSchema'
-import { HiddenInputField } from './HiddenInputField'
+import { CheckboxControlledNumberInput } from './CheckboxControlledNumberInput'
 import { PeriodTypeField } from './PeriodTypeField'
 
-export const PeriodsContents = ({
-    name,
-    formValues,
-}: {
-    name: string
-    formValues: DataSetFormValues
-}) => {
+export const PeriodsContents = ({ name }: { name: string }) => {
+    const formValues = useFormState().values
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
@@ -32,16 +27,16 @@ export const PeriodsContents = ({
                 <PeriodTypeField />
             </StandardFormField>
             <StandardFormField>
-                <HiddenInputField
-                    fieldName="openFuturePeriods"
+                <CheckboxControlledNumberInput
+                    name="openFuturePeriods"
                     label={i18n.t('Allow data entry for future periods')}
                     uncheckedValue={0}
                     min={'1'}
                 />
             </StandardFormField>
             <StandardFormField>
-                <HiddenInputField
-                    fieldName="expiryDays"
+                <CheckboxControlledNumberInput
+                    name="expiryDays"
                     label={i18n.t(
                         'Close data entry a certain number of days after period end (expiry days)'
                     )}
@@ -50,8 +45,8 @@ export const PeriodsContents = ({
             </StandardFormField>
             {formValues?.categoryCombo.id !== DEFAULT_CATEGORY_COMBO.id && (
                 <StandardFormField>
-                    <HiddenInputField
-                        fieldName="openPeriodsAfterCoEndDate"
+                    <CheckboxControlledNumberInput
+                        name="openPeriodsAfterCoEndDate"
                         label={i18n.t(
                             `Close data entry after ${formValues?.categoryCombo.displayName.toLowerCase()} category option end date (if category option exist and has end date)`
                         )}

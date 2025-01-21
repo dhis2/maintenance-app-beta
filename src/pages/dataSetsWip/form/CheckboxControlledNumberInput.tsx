@@ -1,26 +1,26 @@
 import i18n from '@dhis2/d2-i18n'
 import { Checkbox, InputFieldFF } from '@dhis2/ui'
 import type { InputFieldProps } from '@dhis2-ui/input'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FieldMetaState, useField } from 'react-final-form'
 import classes from './HiddenInputField.module.css'
 
 type InputFieldRestProps = Omit<InputFieldProps, 'onChange' | 'value' | 'name'>
 
 export type HiddenInputFieldProps = InputFieldRestProps & {
-    fieldName: string
+    name: string
     label: string
     uncheckedValue: number
 }
 
-export function HiddenInputField({
-    fieldName,
+export function CheckboxControlledNumberInput({
+    name,
     label,
     uncheckedValue,
     ...other
 }: HiddenInputFieldProps) {
     const [isChecked, setIsChecked] = useState(false)
-    const { input, meta } = useField(fieldName, {
+    const { input, meta } = useField(name, {
         parse: (value?: string) =>
             value === undefined || value === '' ? undefined : parseFloat(value),
         type: 'number',
@@ -34,16 +34,20 @@ export function HiddenInputField({
                 : undefined,
     })
 
-    const onCheckboxChange = async () => {
-        await setIsChecked(!isChecked)
+    const onCheckboxChange = () => {
+        setIsChecked(!isChecked)
+    }
+
+    useEffect(() => {
         if (isChecked) {
-            input.onChange(uncheckedValue.toString())
-            input.onBlur()
-        } else {
             input.onChange(undefined)
             input.onBlur()
+        } else {
+            input.onChange(uncheckedValue.toString())
+            input.onBlur()
         }
-    }
+    }, [isChecked])
+
     return (
         <>
             <Checkbox

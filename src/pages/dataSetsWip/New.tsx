@@ -30,9 +30,7 @@ export const Component = () => {
                                 footer={<DefaultSectionedFormFooter />}
                             >
                                 <form onSubmit={handleSubmit}>
-                                    <DataSetFormContents
-                                        formValues={form.getState().values}
-                                    />
+                                    <DataSetFormContents />
                                 </form>
                                 <SectionedFormErrorNotice />
                             </SectionedFormLayout>
