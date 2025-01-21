@@ -7,6 +7,7 @@ import {
     Updater,
     useReactTable,
 } from '@tanstack/react-table'
+import { difference } from 'lodash'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { IdentifiableFilter, SectionList } from '../../../components'
 import {
@@ -35,7 +36,6 @@ import {
     useFilteredOrgUnits,
     usePaginatedChildrenOrgUnitsController,
 } from './useOrganisationUnits'
-import { difference } from 'lodash'
 
 export type OrganisationUnitListItem = Omit<
     PartialOrganisationUnit,
