@@ -29,7 +29,7 @@ export function IconPicker({
                     {selectedIcon && (
                         <img
                             className={classes.iconImage}
-                            alt={selectedIcon.description}
+                            alt={selectedIcon.key}
                             src={selectedIcon.href}
                         />
                     )}

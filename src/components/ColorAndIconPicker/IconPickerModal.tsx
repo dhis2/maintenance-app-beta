@@ -14,10 +14,9 @@ import {
 import cx from 'classnames'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDebouncedState } from '../../lib'
+import { LoadingSpinner } from '../loading/LoadingSpinner'
 import classes from './IconPickerModal.module.css'
 import { useIconsQuery, Icon } from './useIconsQuery'
-import { Loader } from '../loading'
-import { LoadingSpinner } from '../loading/LoadingSpinner'
 
 type TabName = 'all' | 'positive' | 'negative' | 'outline'
 
@@ -75,7 +74,7 @@ export function IconPickerModal({
     )
 
     return (
-        <Modal large onClose={onCancel}>
+        <Modal large onClose={onCancel} dataTest="iconpicker-modal">
             <ModalTitle>Select icon</ModalTitle>
 
             <ModalContent>
@@ -123,14 +122,17 @@ export function IconPickerModal({
                     </div>
                 </div>
 
-                <div className={classes.iconsContainer}>
+                <div
+                    className={classes.iconsContainer}
+                    data-test="icons-container"
+                >
                     <div className={classes.iconMessage}>
                         {icons.isLoading && <LoadingSpinner />}
                         {icons.isSuccess && displayIcons.length === 0 ? (
                             <span>{i18n.t('No icons match the search.')}</span>
                         ) : null}
                     </div>
-                    {displayIcons.map(({ key, description, href }: Icon) => (
+                    {displayIcons.map(({ key, href }: Icon) => (
                         <div
                             key={key}
                             className={cx(classes.iconContainer, {
@@ -141,7 +143,7 @@ export function IconPickerModal({
                         >
                             <img
                                 className={classes.iconImage}
-                                alt={description}
+                                alt={key}
                                 src={href}
                                 loading="lazy"
                             />

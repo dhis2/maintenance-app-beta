@@ -24,6 +24,7 @@ export const useIconQuery = ({ key: iconKey }: { key: string }) => {
                 id: iconKey,
             } satisfies ResourceQuery,
         ],
+        enabled: !!iconKey,
         queryFn: queryFn<Icon>,
     })
 }
@@ -33,10 +34,11 @@ type UseIconsQueryOptions = {
     type?: 'all' | 'default' | 'custom'
 }
 
+const iconsPerRow = 13
 export function useIconsQuery({ search, type }: UseIconsQueryOptions = {}) {
     const queryFn = useBoundResourceQueryFn()
     const params = {
-        pageSize: 143, // 13 * 11 (13 icons per row)
+        pageSize: iconsPerRow * 11,
         type: type || 'all',
         ...(search ? { search } : undefined),
     }
