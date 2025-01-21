@@ -16,6 +16,8 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useDebouncedState } from '../../lib'
 import classes from './IconPickerModal.module.css'
 import { useIconsQuery, Icon } from './useIconsQuery'
+import { Loader } from '../loading'
+import { LoadingSpinner } from '../loading/LoadingSpinner'
 
 type TabName = 'all' | 'positive' | 'negative' | 'outline'
 
@@ -122,9 +124,12 @@ export function IconPickerModal({
                 </div>
 
                 <div className={classes.iconsContainer}>
-                    {displayIcons && displayIcons.length === 0 ? (
-                        <span>{i18n.t('No icons match the search.')}</span>
-                    ) : null}
+                    <div className={classes.iconMessage}>
+                        {icons.isLoading && <LoadingSpinner />}
+                        {icons.isSuccess && displayIcons.length === 0 ? (
+                            <span>{i18n.t('No icons match the search.')}</span>
+                        ) : null}
+                    </div>
                     {displayIcons.map(({ key, description, href }: Icon) => (
                         <div
                             key={key}
