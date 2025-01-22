@@ -19,6 +19,7 @@ export const mergeFormSchema = mergeFormSchemaBase
         target: indicatorTypeSchema,
     })
     .transform((data) => ({
+        ...data,
         sources: data.sources.map((source) => source.id),
         target: data.target.id,
     }))

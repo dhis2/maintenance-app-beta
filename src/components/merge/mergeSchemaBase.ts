@@ -13,7 +13,6 @@ export const mergeFormSchemaBase = z.object({
         .transform((val) => val.map((v) => v.id)),
     target: modelReference.transform((val) => val.id),
     deleteSources: z.boolean().default(false),
-    confirmationText: z.string().default(''),
 })
 
 export type MergeFormValuesBase = Partial<z.input<typeof mergeFormSchemaBase>>

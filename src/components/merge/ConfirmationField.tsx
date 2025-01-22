@@ -44,6 +44,7 @@ export const ConfirmationField = () => {
                 component={InputFieldFF}
                 name="confirmation"
                 label={fieldLabelWithCode}
+                key={confirmationCode}
                 validate={(value) => {
                     const res =
                         value === confirmationCode
