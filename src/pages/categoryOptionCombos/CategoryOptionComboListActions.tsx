@@ -1,17 +1,4 @@
-import React, { useRef, useState } from 'react'
-import {
-    BaseListModel,
-    TOOLTIPS,
-    useLocationSearchState,
-    useSchemaFromHandle,
-} from '../../lib'
-import { canEditModel } from '../../lib/models/access'
-import { TooltipWrapper } from '../../components/tooltip'
-import {
-    ActionEdit,
-    ListActions,
-} from '../../components/sectionList/listActions'
-import { useHref, useLinkClickHandler } from 'react-router-dom'
+import i18n from '@dhis2/d2-i18n'
 import {
     Button,
     colors,
@@ -24,8 +11,21 @@ import {
     MenuItem,
     Popover,
 } from '@dhis2/ui'
+import React, { useRef, useState } from 'react'
+import { useHref, useLinkClickHandler } from 'react-router-dom'
+import {
+    ActionEdit,
+    ListActions,
+} from '../../components/sectionList/listActions'
 import css from '../../components/sectionList/listActions/SectionListActions.module.css'
-import i18n from '@dhis2/d2-i18n'
+import { TooltipWrapper } from '../../components/tooltip'
+import {
+    BaseListModel,
+    TOOLTIPS,
+    useLocationSearchState,
+    useSchemaFromHandle,
+} from '../../lib'
+import { canEditModel } from '../../lib/models/access'
 
 type CategoryOptionComboListActionsProps = {
     model: BaseListModel

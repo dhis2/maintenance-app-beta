@@ -2,6 +2,7 @@ import { FetchError, useDataEngine } from '@dhis2/app-runtime'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { SectionListWrapper } from '../components'
+import { DefaultListActionProps } from '../components/sectionList/listActions/DefaultListActions'
 import { useModelListView } from '../components/sectionList/listView'
 import {
     useSchemaFromHandle,
@@ -12,7 +13,6 @@ import {
 import { getFieldFilter } from '../lib/models/path'
 import { WrapQueryResponse } from '../types'
 import { PagedResponse } from '../types/models'
-import { DefaultListActionProps } from '../components/sectionList/listActions/DefaultListActions'
 
 type ModelListResponse = WrapQueryResponse<PagedResponse<BaseListModel, string>>
 

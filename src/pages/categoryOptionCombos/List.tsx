@@ -1,5 +1,5 @@
-import { DefaultSectionList } from '../DefaultSectionList'
 import React from 'react'
+import { DefaultSectionList } from '../DefaultSectionList'
 import { CategoryOptionComboListActions } from './CategoryOptionComboListActions'
 
 export const Component = () => (

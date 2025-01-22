@@ -6,6 +6,7 @@ import { Pager, ModelCollection } from '../../types/models'
 import { DetailsPanel, DefaultDetailsPanelContent } from './detailsPanel'
 import { FilterWrapper } from './filters/FilterWrapper'
 import { DefaultListActions } from './listActions'
+import { DefaultListActionProps } from './listActions/DefaultListActions'
 import { useModelListView } from './listView'
 import { ModelValue } from './modelValue/ModelValue'
 import { SectionList } from './SectionList'
@@ -19,7 +20,6 @@ import { Toolbar } from './toolbar'
 import { TranslationDialog } from './translation'
 import { SelectedColumn } from './types'
 import { useSelectedModels } from './useSelectedModels'
-import { DefaultListActionProps } from './listActions/DefaultListActions'
 
 type SectionListWrapperProps = {
     data: ModelCollection<BaseListModel> | undefined
