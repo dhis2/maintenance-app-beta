@@ -1,0 +1,1316 @@
+{
+    "pager": {
+        "page": 1,
+        "total": 898,
+        "pageSize": 143,
+        "nextPage": "http://localhost:8080/api/42/icons?page=2&pageSize=143&type=all",
+        "pageCount": 7
+    },
+    "icons": [
+        {
+            "key": "2g_negative",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "OfWRXwC8Lad"
+            },
+            "href": "http://localhost:8080/api/42/icons/2g_negative/icon"
+        },
+        {
+            "key": "2g_outline",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "mh4NLTptHJK"
+            },
+            "href": "http://localhost:8080/api/42/icons/2g_outline/icon"
+        },
+        {
+            "key": "2g_positive",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "MXiwbCkpXZd"
+            },
+            "href": "http://localhost:8080/api/42/icons/2g_positive/icon"
+        },
+        {
+            "key": "3g_negative",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "VFvbdwtAklu"
+            },
+            "href": "http://localhost:8080/api/42/icons/3g_negative/icon"
+        },
+        {
+            "key": "3g_outline",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "K6D19MqeSap"
+            },
+            "href": "http://localhost:8080/api/42/icons/3g_outline/icon"
+        },
+        {
+            "key": "3g_positive",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "qHhxEskOfP8"
+            },
+            "href": "http://localhost:8080/api/42/icons/3g_positive/icon"
+        },
+        {
+            "key": "4x4_negative",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "LiTC5o68UTv"
+            },
+            "href": "http://localhost:8080/api/42/icons/4x4_negative/icon"
+        },
+        {
+            "key": "4x4_outline",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "NK7alEiKM75"
+            },
+            "href": "http://localhost:8080/api/42/icons/4x4_outline/icon"
+        },
+        {
+            "key": "4x4_positive",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "HNyPUjHWDQG"
+            },
+            "href": "http://localhost:8080/api/42/icons/4x4_positive/icon"
+        },
+        {
+            "key": "agriculture_negative",
+            "description": "",
+            "keywords": ["agriculture"],
+            "fileResource": {
+                "id": "BiEqqP27D5H"
+            },
+            "href": "http://localhost:8080/api/42/icons/agriculture_negative/icon"
+        },
+        {
+            "key": "agriculture_outline",
+            "description": "",
+            "keywords": ["agriculture"],
+            "fileResource": {
+                "id": "MqT9XIWA4SK"
+            },
+            "href": "http://localhost:8080/api/42/icons/agriculture_outline/icon"
+        },
+        {
+            "key": "agriculture_positive",
+            "description": "",
+            "keywords": ["agriculture"],
+            "fileResource": {
+                "id": "OzBAO6Rcnk4"
+            },
+            "href": "http://localhost:8080/api/42/icons/agriculture_positive/icon"
+        },
+        {
+            "key": "agriculture_worker_negative",
+            "description": "",
+            "keywords": ["agriculture", "worker"],
+            "fileResource": {
+                "id": "gBciJYGqrDK"
+            },
+            "href": "http://localhost:8080/api/42/icons/agriculture_worker_negative/icon"
+        },
+        {
+            "key": "agriculture_worker_outline",
+            "description": "",
+            "keywords": ["agriculture", "worker"],
+            "fileResource": {
+                "id": "WYRHK8gfkvt"
+            },
+            "href": "http://localhost:8080/api/42/icons/agriculture_worker_outline/icon"
+        },
+        {
+            "key": "agriculture_worker_positive",
+            "description": "",
+            "keywords": ["agriculture", "worker"],
+            "fileResource": {
+                "id": "QNYxp9l65pw"
+            },
+            "href": "http://localhost:8080/api/42/icons/agriculture_worker_positive/icon"
+        },
+        {
+            "key": "alert_circle_negative",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "E0aw9KNl6uc"
+            },
+            "href": "http://localhost:8080/api/42/icons/alert_circle_negative/icon"
+        },
+        {
+            "key": "alert_circle_outline",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "F4iFUJ86PVt"
+            },
+            "href": "http://localhost:8080/api/42/icons/alert_circle_outline/icon"
+        },
+        {
+            "key": "alert_circle_positive",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "KqSmVDjBBQk"
+            },
+            "href": "http://localhost:8080/api/42/icons/alert_circle_positive/icon"
+        },
+        {
+            "key": "alert_negative",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "HA5SiOYhHl1"
+            },
+            "href": "http://localhost:8080/api/42/icons/alert_negative/icon"
+        },
+        {
+            "key": "alert_outline",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "vMWdeSlkz7H"
+            },
+            "href": "http://localhost:8080/api/42/icons/alert_outline/icon"
+        },
+        {
+            "key": "alert_positive",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "mCvqK5yPOhk"
+            },
+            "href": "http://localhost:8080/api/42/icons/alert_positive/icon"
+        },
+        {
+            "key": "alert_triangle_negative",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "d3Pv11MBM9l"
+            },
+            "href": "http://localhost:8080/api/42/icons/alert_triangle_negative/icon"
+        },
+        {
+            "key": "alert_triangle_outline",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "N9RxwWTU9iu"
+            },
+            "href": "http://localhost:8080/api/42/icons/alert_triangle_outline/icon"
+        },
+        {
+            "key": "alert_triangle_positive",
+            "description": "",
+            "keywords": [],
+            "fileResource": {
+                "id": "o0ae6L71NmG"
+            },
+            "href": "http://localhost:8080/api/42/icons/alert_triangle_positive/icon"
+        },
+        {
+            "key": "ambulance_negative",
+            "description": "",
+            "keywords": ["transport", "ambulance"],
+            "fileResource": {
+                "id": "jDOfRkYLqOG"
+            },
+            "href": "http://localhost:8080/api/42/icons/ambulance_negative/icon"
+        },
+        {
+            "key": "ambulance_outline",
+            "description": "",
+            "keywords": ["transport", "ambulance"],
+            "fileResource": {
+                "id": "rJpFErMBDwz"
+            },
+            "href": "http://localhost:8080/api/42/icons/ambulance_outline/icon"
+        },
+        {
+            "key": "ambulance_positive",
+            "description": "",
+            "keywords": ["transport", "ambulance"],
+            "fileResource": {
+                "id": "bnxfK0DVSCL"
+            },
+            "href": "http://localhost:8080/api/42/icons/ambulance_positive/icon"
+        },
+        {
+            "key": "ambulatory_clinic_negative",
+            "description": "",
+            "keywords": ["refer", "health", "ambulatory"],
+            "fileResource": {
+                "id": "HgCoGQgkGd7"
+            },
+            "href": "http://localhost:8080/api/42/icons/ambulatory_clinic_negative/icon"
+        },
+        {
+            "key": "ambulatory_clinic_outline",
+            "description": "",
+            "keywords": ["refer", "health", "ambulatory"],
+            "fileResource": {
+                "id": "gHIBjEENiuW"
+            },
+            "href": "http://localhost:8080/api/42/icons/ambulatory_clinic_outline/icon"
+        },
+        {
+            "key": "ambulatory_clinic_positive",
+            "description": "",
+            "keywords": ["refer", "health", "ambulatory"],
+            "fileResource": {
+                "id": "woGe21VVPGp"
+            },
+            "href": "http://localhost:8080/api/42/icons/ambulatory_clinic_positive/icon"
+        },
+        {
+            "key": "ancv_negative",
+            "description": "ANC visit",
+            "keywords": [],
+            "fileResource": {
+                "id": "KdtxidHWoUh"
+            },
+            "href": "http://localhost:8080/api/42/icons/ancv_negative/icon"
+        },
+        {
+            "key": "ancv_outline",
+            "description": "ANC visit",
+            "keywords": [],
+            "fileResource": {
+                "id": "H9zti4G3sPz"
+            },
+            "href": "http://localhost:8080/api/42/icons/ancv_outline/icon"
+        },
+        {
+            "key": "ancv_positive",
+            "description": "ANC visit",
+            "keywords": [],
+            "fileResource": {
+                "id": "zkqs2HLkeJL"
+            },
+            "href": "http://localhost:8080/api/42/icons/ancv_positive/icon"
+        },
+        {
+            "key": "baby_female_0203m_negative",
+            "description": "",
+            "keywords": ["baby", "2-3 months", "male", "pediatric"],
+            "fileResource": {
+                "id": "WLLNUmRFL01"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_female_0203m_negative/icon"
+        },
+        {
+            "key": "baby_female_0203m_outline",
+            "description": "",
+            "keywords": ["baby", "2-3 months", "male", "pediatric"],
+            "fileResource": {
+                "id": "V9eswhxIMqy"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_female_0203m_outline/icon"
+        },
+        {
+            "key": "baby_female_0203m_positive",
+            "description": "",
+            "keywords": ["baby", "2-3 months", "male", "pediatric"],
+            "fileResource": {
+                "id": "zP0owun7260"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_female_0203m_positive/icon"
+        },
+        {
+            "key": "baby_female_0306m_negative",
+            "description": "",
+            "keywords": ["3-6 months", "baby", "male", "pediatric"],
+            "fileResource": {
+                "id": "SmEFdbVyCIA"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_female_0306m_negative/icon"
+        },
+        {
+            "key": "baby_female_0306m_outline",
+            "description": "",
+            "keywords": ["3-6 months", "baby", "male", "pediatric"],
+            "fileResource": {
+                "id": "j6imZECwRTU"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_female_0306m_outline/icon"
+        },
+        {
+            "key": "baby_female_0306m_positive",
+            "description": "",
+            "keywords": ["3-6 months", "baby", "male", "pediatric"],
+            "fileResource": {
+                "id": "w23HpWZKhf7"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_female_0306m_positive/icon"
+        },
+        {
+            "key": "baby_female_0609m_negative",
+            "description": "",
+            "keywords": ["baby", "6-9 months", "male", "pediatric"],
+            "fileResource": {
+                "id": "xmkLyApsgzl"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_female_0609m_negative/icon"
+        },
+        {
+            "key": "baby_female_0609m_outline",
+            "description": "",
+            "keywords": ["baby", "6-9 months", "male", "pediatric"],
+            "fileResource": {
+                "id": "KeSJwXEG7R4"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_female_0609m_outline/icon"
+        },
+        {
+            "key": "baby_female_0609m_positive",
+            "description": "",
+            "keywords": ["baby", "6-9 months", "male", "pediatric"],
+            "fileResource": {
+                "id": "Mtkjap91vgd"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_female_0609m_positive/icon"
+        },
+        {
+            "key": "baby_male_0203m_negative",
+            "description": "",
+            "keywords": ["baby", "2-3 months", "female", "pediatric"],
+            "fileResource": {
+                "id": "RhNBsyrkVyX"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_male_0203m_negative/icon"
+        },
+        {
+            "key": "baby_male_0203m_outline",
+            "description": "",
+            "keywords": ["baby", "2-3 months", "female", "pediatric"],
+            "fileResource": {
+                "id": "dNk7R0D4Vl4"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_male_0203m_outline/icon"
+        },
+        {
+            "key": "baby_male_0203m_positive",
+            "description": "",
+            "keywords": ["baby", "2-3 months", "female", "pediatric"],
+            "fileResource": {
+                "id": "QAMkZEr9jlz"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_male_0203m_positive/icon"
+        },
+        {
+            "key": "baby_male_0306m_negative",
+            "description": "",
+            "keywords": ["3-6 months", "baby", "female", "pediatric"],
+            "fileResource": {
+                "id": "AYQYPfbqf9R"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_male_0306m_negative/icon"
+        },
+        {
+            "key": "baby_male_0306m_outline",
+            "description": "",
+            "keywords": ["3-6 months", "baby", "female", "pediatric"],
+            "fileResource": {
+                "id": "uc6ly1SyBxx"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_male_0306m_outline/icon"
+        },
+        {
+            "key": "baby_male_0306m_positive",
+            "description": "",
+            "keywords": ["3-6 months", "baby", "female", "pediatric"],
+            "fileResource": {
+                "id": "OnrL2xnoft9"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_male_0306m_positive/icon"
+        },
+        {
+            "key": "baby_male_0609m_negative",
+            "description": "",
+            "keywords": ["baby", "female", "6-9 months", "pediatric"],
+            "fileResource": {
+                "id": "EngOARfvLLr"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_male_0609m_negative/icon"
+        },
+        {
+            "key": "baby_male_0609m_outline",
+            "description": "",
+            "keywords": ["baby", "female", "6-9 months", "pediatric"],
+            "fileResource": {
+                "id": "CLzlMmNqCJT"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_male_0609m_outline/icon"
+        },
+        {
+            "key": "baby_male_0609m_positive",
+            "description": "",
+            "keywords": ["baby", "female", "6-9 months", "pediatric"],
+            "fileResource": {
+                "id": "leyUNDk1obN"
+            },
+            "href": "http://localhost:8080/api/42/icons/baby_male_0609m_positive/icon"
+        },
+        {
+            "key": "basic_motorcycle_negative",
+            "description": "",
+            "keywords": ["motorcycle", "transport"],
+            "fileResource": {
+                "id": "MJ3LjxNrxKW"
+            },
+            "href": "http://localhost:8080/api/42/icons/basic_motorcycle_negative/icon"
+        },
+        {
+            "key": "basic_motorcycle_outline",
+            "description": "",
+            "keywords": ["motorcycle", "transport"],
+            "fileResource": {
+                "id": "Y9XKWgt3rNv"
+            },
+            "href": "http://localhost:8080/api/42/icons/basic_motorcycle_outline/icon"
+        },
+        {
+            "key": "basic_motorcycle_positive",
+            "description": "",
+            "keywords": ["motorcycle", "transport"],
+            "fileResource": {
+                "id": "PB4bdZ7nulY"
+            },
+            "href": "http://localhost:8080/api/42/icons/basic_motorcycle_positive/icon"
+        },
+        {
+            "key": "bike_negative",
+            "description": "",
+            "keywords": ["transport", "bike"],
+            "fileResource": {
+                "id": "gjS9SMZdHbH"
+            },
+            "href": "http://localhost:8080/api/42/icons/bike_negative/icon"
+        },
+        {
+            "key": "bike_outline",
+            "description": "",
+            "keywords": ["transport", "bike"],
+            "fileResource": {
+                "id": "H2NRKq5AWNL"
+            },
+            "href": "http://localhost:8080/api/42/icons/bike_outline/icon"
+        },
+        {
+            "key": "bike_positive",
+            "description": "",
+            "keywords": ["transport", "bike"],
+            "fileResource": {
+                "id": "l9XLtJdDdUg"
+            },
+            "href": "http://localhost:8080/api/42/icons/bike_positive/icon"
+        },
+        {
+            "key": "bills_negative",
+            "description": "Bills",
+            "keywords": ["money", "buck", "bank notes", "currency", "bills"],
+            "fileResource": {
+                "id": "dDLmL8Uz3mY"
+            },
+            "href": "http://localhost:8080/api/42/icons/bills_negative/icon"
+        },
+        {
+            "key": "bills_outline",
+            "description": "Bills",
+            "keywords": ["money", "buck", "bank notes", "currency", "bills"],
+            "fileResource": {
+                "id": "GTCOo4dVO3b"
+            },
+            "href": "http://localhost:8080/api/42/icons/bills_outline/icon"
+        },
+        {
+            "key": "bills_positive",
+            "description": "Bills",
+            "keywords": ["money", "buck", "bank notes", "currency", "bills"],
+            "fileResource": {
+                "id": "G6ZMZbASs3Q"
+            },
+            "href": "http://localhost:8080/api/42/icons/bills_positive/icon"
+        },
+        {
+            "key": "blister_pills_oval_x14_negative",
+            "description": "",
+            "keywords": ["treatment", "pills", "14", "blister", "oval"],
+            "fileResource": {
+                "id": "uT0jzWfC3ao"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_oval_x14_negative/icon"
+        },
+        {
+            "key": "blister_pills_oval_x14_outline",
+            "description": "",
+            "keywords": ["treatment", "pills", "14", "blister", "oval"],
+            "fileResource": {
+                "id": "cCvi06viBCi"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_oval_x14_outline/icon"
+        },
+        {
+            "key": "blister_pills_oval_x14_positive",
+            "description": "",
+            "keywords": ["treatment", "pills", "14", "blister", "oval"],
+            "fileResource": {
+                "id": "LbfZof4vF70"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_oval_x14_positive/icon"
+        },
+        {
+            "key": "blister_pills_oval_x16_negative",
+            "description": "",
+            "keywords": ["treatment", "pills", "16", "blister", "oval"],
+            "fileResource": {
+                "id": "GZavm1cyoe7"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_oval_x16_negative/icon"
+        },
+        {
+            "key": "blister_pills_oval_x16_outline",
+            "description": "",
+            "keywords": ["treatment", "pills", "16", "blister", "oval"],
+            "fileResource": {
+                "id": "xkiWynJ22wf"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_oval_x16_outline/icon"
+        },
+        {
+            "key": "blister_pills_oval_x16_positive",
+            "description": "",
+            "keywords": ["treatment", "pills", "16", "blister", "oval"],
+            "fileResource": {
+                "id": "pBUJKUqinQc"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_oval_x16_positive/icon"
+        },
+        {
+            "key": "blister_pills_oval_x1_negative",
+            "description": "",
+            "keywords": ["treatment", "pills", "1", "blister", "oval"],
+            "fileResource": {
+                "id": "Q1RmgQTthc4"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_oval_x1_negative/icon"
+        },
+        {
+            "key": "blister_pills_oval_x1_outline",
+            "description": "",
+            "keywords": ["treatment", "pills", "1", "blister", "oval"],
+            "fileResource": {
+                "id": "dMT9DjuX9cW"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_oval_x1_outline/icon"
+        },
+        {
+            "key": "blister_pills_oval_x1_positive",
+            "description": "",
+            "keywords": ["treatment", "pills", "1", "blister", "oval"],
+            "fileResource": {
+                "id": "AqmpXlhiUkr"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_oval_x1_positive/icon"
+        },
+        {
+            "key": "blister_pills_oval_x4_negative",
+            "description": "",
+            "keywords": ["treatment", "pills", "4", "blister", "oval"],
+            "fileResource": {
+                "id": "o0w2bltRBwT"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_oval_x4_negative/icon"
+        },
+        {
+            "key": "blister_pills_oval_x4_outline",
+            "description": "",
+            "keywords": ["treatment", "pills", "4", "blister", "oval"],
+            "fileResource": {
+                "id": "xHpyQxfCZux"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_oval_x4_outline/icon"
+        },
+        {
+            "key": "blister_pills_oval_x4_positive",
+            "description": "",
+            "keywords": ["treatment", "pills", "4", "blister", "oval"],
+            "fileResource": {
+                "id": "Zh6rWXvYHPe"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_oval_x4_positive/icon"
+        },
+        {
+            "key": "blister_pills_round_x14_negative",
+            "description": "",
+            "keywords": ["treatment", "pills", "14", "round", "blister"],
+            "fileResource": {
+                "id": "h6BTcOy9JRF"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_round_x14_negative/icon"
+        },
+        {
+            "key": "blister_pills_round_x14_outline",
+            "description": "",
+            "keywords": ["treatment", "pills", "14", "round", "blister"],
+            "fileResource": {
+                "id": "SPwYF1R7BMT"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_round_x14_outline/icon"
+        },
+        {
+            "key": "blister_pills_round_x14_positive",
+            "description": "",
+            "keywords": ["treatment", "pills", "14", "round", "blister"],
+            "fileResource": {
+                "id": "WQYw7fcJP6q"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_round_x14_positive/icon"
+        },
+        {
+            "key": "blister_pills_round_x16_negative",
+            "description": "",
+            "keywords": ["treatment", "pills", "round", "16", "blister"],
+            "fileResource": {
+                "id": "cJjg7ofqyrq"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_round_x16_negative/icon"
+        },
+        {
+            "key": "blister_pills_round_x16_outline",
+            "description": "",
+            "keywords": ["treatment", "pills", "round", "16", "blister"],
+            "fileResource": {
+                "id": "DQ1YqQpGT3R"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_round_x16_outline/icon"
+        },
+        {
+            "key": "blister_pills_round_x16_positive",
+            "description": "",
+            "keywords": ["treatment", "pills", "round", "16", "blister"],
+            "fileResource": {
+                "id": "EDPqxQW4A5K"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_round_x16_positive/icon"
+        },
+        {
+            "key": "blister_pills_round_x1_negative",
+            "description": "",
+            "keywords": ["treatment", "pills", "1", "round", "blister"],
+            "fileResource": {
+                "id": "NgPTUwg4T3A"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_round_x1_negative/icon"
+        },
+        {
+            "key": "blister_pills_round_x1_outline",
+            "description": "",
+            "keywords": ["treatment", "pills", "1", "round", "blister"],
+            "fileResource": {
+                "id": "I3OLNPALXJ2"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_round_x1_outline/icon"
+        },
+        {
+            "key": "blister_pills_round_x1_positive",
+            "description": "",
+            "keywords": ["treatment", "pills", "1", "round", "blister"],
+            "fileResource": {
+                "id": "TNwdZ99Gs6T"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_round_x1_positive/icon"
+        },
+        {
+            "key": "blister_pills_round_x4_negative",
+            "description": "",
+            "keywords": ["treatment", "pills", "round", "4", "blister"],
+            "fileResource": {
+                "id": "hjUymT6TFdv"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_round_x4_negative/icon"
+        },
+        {
+            "key": "blister_pills_round_x4_outline",
+            "description": "",
+            "keywords": ["treatment", "pills", "round", "4", "blister"],
+            "fileResource": {
+                "id": "M7dzOjPMzN5"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_round_x4_outline/icon"
+        },
+        {
+            "key": "blister_pills_round_x4_positive",
+            "description": "",
+            "keywords": ["treatment", "pills", "round", "4", "blister"],
+            "fileResource": {
+                "id": "U2V5sdXYA9D"
+            },
+            "href": "http://localhost:8080/api/42/icons/blister_pills_round_x4_positive/icon"
+        },
+        {
+            "key": "blood_ab_n_negative",
+            "description": "",
+            "keywords": ["ab", "hematology", "negative", "blood"],
+            "fileResource": {
+                "id": "KK4wfayDVQa"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_ab_n_negative/icon"
+        },
+        {
+            "key": "blood_ab_n_outline",
+            "description": "",
+            "keywords": ["ab", "hematology", "negative", "blood"],
+            "fileResource": {
+                "id": "jOySxKfoKWC"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_ab_n_outline/icon"
+        },
+        {
+            "key": "blood_ab_n_positive",
+            "description": "",
+            "keywords": ["ab", "hematology", "negative", "blood"],
+            "fileResource": {
+                "id": "eNAfOchYzQb"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_ab_n_positive/icon"
+        },
+        {
+            "key": "blood_ab_p_negative",
+            "description": "",
+            "keywords": ["ab", "hematology", "positive", "blood"],
+            "fileResource": {
+                "id": "aRe36bn0SXM"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_ab_p_negative/icon"
+        },
+        {
+            "key": "blood_ab_p_outline",
+            "description": "",
+            "keywords": ["ab", "hematology", "positive", "blood"],
+            "fileResource": {
+                "id": "NbehItrAb4m"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_ab_p_outline/icon"
+        },
+        {
+            "key": "blood_ab_p_positive",
+            "description": "",
+            "keywords": ["ab", "hematology", "positive", "blood"],
+            "fileResource": {
+                "id": "MQHD2zqwxNA"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_ab_p_positive/icon"
+        },
+        {
+            "key": "blood_a_n_negative",
+            "description": "",
+            "keywords": ["a", "hematology", "negative", "blood"],
+            "fileResource": {
+                "id": "RW5okqfBgNA"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_a_n_negative/icon"
+        },
+        {
+            "key": "blood_a_n_outline",
+            "description": "",
+            "keywords": ["a", "hematology", "negative", "blood"],
+            "fileResource": {
+                "id": "izqpJLPpbwl"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_a_n_outline/icon"
+        },
+        {
+            "key": "blood_a_n_positive",
+            "description": "",
+            "keywords": ["a", "hematology", "negative", "blood"],
+            "fileResource": {
+                "id": "AvgqHyoztus"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_a_n_positive/icon"
+        },
+        {
+            "key": "blood_a_p_negative",
+            "description": "",
+            "keywords": ["a", "hematology", "positive", "blood"],
+            "fileResource": {
+                "id": "PKDI28hpPza"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_a_p_negative/icon"
+        },
+        {
+            "key": "blood_a_p_outline",
+            "description": "",
+            "keywords": ["a", "hematology", "positive", "blood"],
+            "fileResource": {
+                "id": "DovEsV8rU1C"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_a_p_outline/icon"
+        },
+        {
+            "key": "blood_a_p_positive",
+            "description": "",
+            "keywords": ["a", "hematology", "positive", "blood"],
+            "fileResource": {
+                "id": "rNldzr86jhJ"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_a_p_positive/icon"
+        },
+        {
+            "key": "blood_b_n_negative",
+            "description": "",
+            "keywords": ["hematology", "b", "negative", "blood"],
+            "fileResource": {
+                "id": "cB8EncCkUaH"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_b_n_negative/icon"
+        },
+        {
+            "key": "blood_b_n_outline",
+            "description": "",
+            "keywords": ["hematology", "b", "negative", "blood"],
+            "fileResource": {
+                "id": "S0TLnwgxNbd"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_b_n_outline/icon"
+        },
+        {
+            "key": "blood_b_n_positive",
+            "description": "",
+            "keywords": ["hematology", "b", "negative", "blood"],
+            "fileResource": {
+                "id": "nxv45aP8O7T"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_b_n_positive/icon"
+        },
+        {
+            "key": "blood_b_p_negative",
+            "description": "",
+            "keywords": ["hematology", "b", "positive", "blood"],
+            "fileResource": {
+                "id": "aWEn90LvxdM"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_b_p_negative/icon"
+        },
+        {
+            "key": "blood_b_p_outline",
+            "description": "",
+            "keywords": ["hematology", "b", "positive", "blood"],
+            "fileResource": {
+                "id": "Gn6FBEZI6qv"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_b_p_outline/icon"
+        },
+        {
+            "key": "blood_b_p_positive",
+            "description": "",
+            "keywords": ["hematology", "b", "positive", "blood"],
+            "fileResource": {
+                "id": "vjxXSQoN148"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_b_p_positive/icon"
+        },
+        {
+            "key": "blood_o_n_negative",
+            "description": "",
+            "keywords": ["hematology", "negative", "blood", "o"],
+            "fileResource": {
+                "id": "jo2DV6yuAUa"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_o_n_negative/icon"
+        },
+        {
+            "key": "blood_o_n_outline",
+            "description": "",
+            "keywords": ["hematology", "negative", "blood", "o"],
+            "fileResource": {
+                "id": "DSe5y6bRwOo"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_o_n_outline/icon"
+        },
+        {
+            "key": "blood_o_n_positive",
+            "description": "",
+            "keywords": ["hematology", "negative", "blood", "o"],
+            "fileResource": {
+                "id": "zWQFsiAR506"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_o_n_positive/icon"
+        },
+        {
+            "key": "blood_o_p_negative",
+            "description": "",
+            "keywords": ["hematology", "positive", "blood", "o"],
+            "fileResource": {
+                "id": "REI0eturkII"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_o_p_negative/icon"
+        },
+        {
+            "key": "blood_o_p_outline",
+            "description": "",
+            "keywords": ["hematology", "positive", "blood", "o"],
+            "fileResource": {
+                "id": "v2pNpkdh1Dq"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_o_p_outline/icon"
+        },
+        {
+            "key": "blood_o_p_positive",
+            "description": "",
+            "keywords": ["hematology", "positive", "blood", "o"],
+            "fileResource": {
+                "id": "PvlLzu7NOO5"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_o_p_positive/icon"
+        },
+        {
+            "key": "blood_pressure_2_negative",
+            "description": "",
+            "keywords": ["pressure", "blood"],
+            "fileResource": {
+                "id": "zmj5K5NHnV6"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_pressure_2_negative/icon"
+        },
+        {
+            "key": "blood_pressure_2_outline",
+            "description": "",
+            "keywords": ["pressure", "blood"],
+            "fileResource": {
+                "id": "TnWtqxt7Jvq"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_pressure_2_outline/icon"
+        },
+        {
+            "key": "blood_pressure_2_positive",
+            "description": "",
+            "keywords": ["pressure", "blood"],
+            "fileResource": {
+                "id": "NCenWnvLwzl"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_pressure_2_positive/icon"
+        },
+        {
+            "key": "blood_pressure_monitor_negative",
+            "description": "",
+            "keywords": ["pressure", "blood"],
+            "fileResource": {
+                "id": "TereLBR5m2S"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_pressure_monitor_negative/icon"
+        },
+        {
+            "key": "blood_pressure_monitor_outline",
+            "description": "",
+            "keywords": ["pressure", "blood"],
+            "fileResource": {
+                "id": "RuBmU3CeQDP"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_pressure_monitor_outline/icon"
+        },
+        {
+            "key": "blood_pressure_monitor_positive",
+            "description": "",
+            "keywords": ["pressure", "blood"],
+            "fileResource": {
+                "id": "zd21JD4D6GS"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_pressure_monitor_positive/icon"
+        },
+        {
+            "key": "blood_pressure_negative",
+            "description": "",
+            "keywords": ["Blood Pressure"],
+            "fileResource": {
+                "id": "yjV7vH7Cymn"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_pressure_negative/icon"
+        },
+        {
+            "key": "blood_pressure_outline",
+            "description": "",
+            "keywords": ["Blood Pressure"],
+            "fileResource": {
+                "id": "r3GM3fE0n4c"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_pressure_outline/icon"
+        },
+        {
+            "key": "blood_pressure_positive",
+            "description": "",
+            "keywords": ["Blood Pressure"],
+            "fileResource": {
+                "id": "vdo4TRcdcsR"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_pressure_positive/icon"
+        },
+        {
+            "key": "blood_rh_n_negative",
+            "description": "",
+            "keywords": ["hematology", "negative", "rh", "blood"],
+            "fileResource": {
+                "id": "ds96QxytN9y"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_rh_n_negative/icon"
+        },
+        {
+            "key": "blood_rh_n_outline",
+            "description": "",
+            "keywords": ["hematology", "negative", "rh", "blood"],
+            "fileResource": {
+                "id": "t6g07hZZbU1"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_rh_n_outline/icon"
+        },
+        {
+            "key": "blood_rh_n_positive",
+            "description": "",
+            "keywords": ["hematology", "negative", "rh", "blood"],
+            "fileResource": {
+                "id": "xKhEFlNR4IJ"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_rh_n_positive/icon"
+        },
+        {
+            "key": "blood_rh_p_negative",
+            "description": "",
+            "keywords": ["hematology", "rh", "positive", "blood"],
+            "fileResource": {
+                "id": "Irp7jfTQzXR"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_rh_p_negative/icon"
+        },
+        {
+            "key": "blood_rh_p_outline",
+            "description": "",
+            "keywords": ["hematology", "rh", "positive", "blood"],
+            "fileResource": {
+                "id": "xJQSGG50AGy"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_rh_p_outline/icon"
+        },
+        {
+            "key": "blood_rh_p_positive",
+            "description": "",
+            "keywords": ["hematology", "rh", "positive", "blood"],
+            "fileResource": {
+                "id": "TkrmkK9oWnC"
+            },
+            "href": "http://localhost:8080/api/42/icons/blood_rh_p_positive/icon"
+        },
+        {
+            "key": "boy_0105y_negative",
+            "description": "",
+            "keywords": ["1-5 Yrs", "boy"],
+            "fileResource": {
+                "id": "g0cyhSxyt5G"
+            },
+            "href": "http://localhost:8080/api/42/icons/boy_0105y_negative/icon"
+        },
+        {
+            "key": "boy_0105y_outline",
+            "description": "",
+            "keywords": ["1-5 Yrs", "boy"],
+            "fileResource": {
+                "id": "WSCm0FAWsoV"
+            },
+            "href": "http://localhost:8080/api/42/icons/boy_0105y_outline/icon"
+        },
+        {
+            "key": "boy_0105y_positive",
+            "description": "",
+            "keywords": ["1-5 Yrs", "boy"],
+            "fileResource": {
+                "id": "GOvhmp84Dtn"
+            },
+            "href": "http://localhost:8080/api/42/icons/boy_0105y_positive/icon"
+        },
+        {
+            "key": "boy_1015y_negative",
+            "description": "",
+            "keywords": ["boy", "10-15 Yrs"],
+            "fileResource": {
+                "id": "jkzJCfezv9Z"
+            },
+            "href": "http://localhost:8080/api/42/icons/boy_1015y_negative/icon"
+        },
+        {
+            "key": "boy_1015y_outline",
+            "description": "",
+            "keywords": ["boy", "10-15 Yrs"],
+            "fileResource": {
+                "id": "IxngaxCF5JO"
+            },
+            "href": "http://localhost:8080/api/42/icons/boy_1015y_outline/icon"
+        },
+        {
+            "key": "boy_1015y_positive",
+            "description": "",
+            "keywords": ["boy", "10-15 Yrs"],
+            "fileResource": {
+                "id": "p8d32qKDKe3"
+            },
+            "href": "http://localhost:8080/api/42/icons/boy_1015y_positive/icon"
+        },
+        {
+            "key": "breeding_sites_negative",
+            "description": "Breeding sites",
+            "keywords": [
+                "pupa",
+                "larva",
+                "malaria",
+                "reproduction",
+                "mosquito"
+            ],
+            "fileResource": {
+                "id": "INURXc3w2oY"
+            },
+            "href": "http://localhost:8080/api/42/icons/breeding_sites_negative/icon"
+        },
+        {
+            "key": "breeding_sites_outline",
+            "description": "Breeding sites",
+            "keywords": [
+                "pupa",
+                "larva",
+                "malaria",
+                "reproduction",
+                "mosquito"
+            ],
+            "fileResource": {
+                "id": "E7Vpwi3dQ1m"
+            },
+            "href": "http://localhost:8080/api/42/icons/breeding_sites_outline/icon"
+        },
+        {
+            "key": "breeding_sites_positive",
+            "description": "Breeding sites",
+            "keywords": [
+                "pupa",
+                "larva",
+                "malaria",
+                "reproduction",
+                "mosquito"
+            ],
+            "fileResource": {
+                "id": "ktl6djkXOFE"
+            },
+            "href": "http://localhost:8080/api/42/icons/breeding_sites_positive/icon"
+        },
+        {
+            "key": "calendar_negative",
+            "description": "",
+            "keywords": ["calendar"],
+            "fileResource": {
+                "id": "Z1wCYr0K627"
+            },
+            "href": "http://localhost:8080/api/42/icons/calendar_negative/icon"
+        },
+        {
+            "key": "calendar_outline",
+            "description": "",
+            "keywords": ["calendar"],
+            "fileResource": {
+                "id": "WWVnKX6fmHv"
+            },
+            "href": "http://localhost:8080/api/42/icons/calendar_outline/icon"
+        },
+        {
+            "key": "calendar_positive",
+            "description": "",
+            "keywords": ["calendar"],
+            "fileResource": {
+                "id": "efMYA7aSSts"
+            },
+            "href": "http://localhost:8080/api/42/icons/calendar_positive/icon"
+        },
+        {
+            "key": "cardiogram_e_negative",
+            "description": "Edit ardiogram card",
+            "keywords": ["Cardiogram card", "cardiogram"],
+            "fileResource": {
+                "id": "PnDqMG59iE7"
+            },
+            "href": "http://localhost:8080/api/42/icons/cardiogram_e_negative/icon"
+        },
+        {
+            "key": "cardiogram_e_outline",
+            "description": "Edit ardiogram card",
+            "keywords": ["Cardiogram card", "cardiogram"],
+            "fileResource": {
+                "id": "u3O81OAJnp0"
+            },
+            "href": "http://localhost:8080/api/42/icons/cardiogram_e_outline/icon"
+        },
+        {
+            "key": "cardiogram_e_positive",
+            "description": "Edit ardiogram card",
+            "keywords": ["Cardiogram card", "cardiogram"],
+            "fileResource": {
+                "id": "cMowwCevPSO"
+            },
+            "href": "http://localhost:8080/api/42/icons/cardiogram_e_positive/icon"
+        },
+        {
+            "key": "cardiogram_negative",
+            "description": "Cardiogram card",
+            "keywords": ["medical history"],
+            "fileResource": {
+                "id": "dwWtUs29wP5"
+            },
+            "href": "http://localhost:8080/api/42/icons/cardiogram_negative/icon"
+        },
+        {
+            "key": "cardiogram_outline",
+            "description": "Cardiogram card",
+            "keywords": ["medical history"],
+            "fileResource": {
+                "id": "exLGa0Wnfje"
+            },
+            "href": "http://localhost:8080/api/42/icons/cardiogram_outline/icon"
+        },
+        {
+            "key": "cardiogram_positive",
+            "description": "Cardiogram card",
+            "keywords": ["medical history"],
+            "fileResource": {
+                "id": "cteP1IcxNcG"
+            },
+            "href": "http://localhost:8080/api/42/icons/cardiogram_positive/icon"
+        },
+        {
+            "key": "cervical_cancer_negative",
+            "description": "",
+            "keywords": ["cervical", "cancer", "female"],
+            "fileResource": {
+                "id": "MSu4VkoLvn6"
+            },
+            "href": "http://localhost:8080/api/42/icons/cervical_cancer_negative/icon"
+        },
+        {
+            "key": "cervical_cancer_outline",
+            "description": "",
+            "keywords": ["cervical", "cancer", "female"],
+            "fileResource": {
+                "id": "KULMLhksmlV"
+            },
+            "href": "http://localhost:8080/api/42/icons/cervical_cancer_outline/icon"
+        }
+    ]
+}
