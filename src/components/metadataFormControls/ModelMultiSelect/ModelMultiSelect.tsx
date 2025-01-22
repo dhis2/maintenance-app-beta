@@ -62,11 +62,14 @@ export const ModelMultiSelect = <TModel extends PartialLoadedDisplayableModel>({
         const selectedWithoutData = selected.filter(
             (s) => s.displayName === undefined
         )
-        const hasLoadedSelected = selectedWithoutData.every((s) =>
-            selectedData.find((d) => d.id === s.id)
+        if (selectedWithoutData.length < 1) {
+            return
+        }
+        const hasLoadedSelected = selectedData.every(
+            (s) => s.displayName !== undefined
         )
 
-        if (selectedWithoutData.length > 0 && hasLoadedSelected) {
+        if (hasLoadedSelected) {
             onChange({ selected: selectedData })
         }
     }, [selected, selectedData, onChange])
