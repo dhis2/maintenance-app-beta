@@ -19,12 +19,14 @@ import { Toolbar } from './toolbar'
 import { TranslationDialog } from './translation'
 import { SelectedColumn } from './types'
 import { useSelectedModels } from './useSelectedModels'
+import { DefaultListActionProps } from './listActions/DefaultListActions'
 
 type SectionListWrapperProps = {
     data: ModelCollection<BaseListModel> | undefined
     pager: Pager | undefined
     error: FetchError | undefined
     refetch: () => void
+    ActionsComponent?: React.ComponentType<DefaultListActionProps>
 }
 
 export const SectionListWrapper = ({
@@ -32,6 +34,7 @@ export const SectionListWrapper = ({
     error,
     pager,
     refetch,
+    ActionsComponent,
 }: SectionListWrapperProps) => {
     const { columns: headerColumns } = useModelListView()
     const schema = useSchemaFromHandle()
@@ -103,20 +106,24 @@ export const SectionListWrapper = ({
     )
 
     const renderActions = useCallback(
-        (model: BaseListModel) => (
-            <DefaultListActions
-                model={model}
-                onShowDetailsClick={handleDetailsClick}
-                onOpenSharingClick={setSharingDialogId}
-                onDeleteSuccess={refetch}
-                onOpenTranslationClick={setTranslationDialogModel}
-            />
-        ),
+        (model: BaseListModel) => {
+            const actionsProps = {
+                model,
+                onShowDetailsClick: handleDetailsClick,
+                onOpenSharingClick: setSharingDialogId,
+                onDeleteSuccess: refetch,
+                onOpenTranslationClick: setTranslationDialogModel,
+            }
+            return ActionsComponent !== undefined ? (
+                <ActionsComponent {...actionsProps} />
+            ) : (
+                <DefaultListActions {...actionsProps} />
+            )
+        },
         [handleDetailsClick, setSharingDialogId, refetch]
     )
 
     const isAllSelected = data ? checkAllSelected(data) : false
-
     return (
         <div>
             <SectionListTitle />

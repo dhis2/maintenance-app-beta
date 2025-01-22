@@ -12,13 +12,18 @@ import {
 import { getFieldFilter } from '../lib/models/path'
 import { WrapQueryResponse } from '../types'
 import { PagedResponse } from '../types/models'
+import { DefaultListActionProps } from '../components/sectionList/listActions/DefaultListActions'
 
 type ModelListResponse = WrapQueryResponse<PagedResponse<BaseListModel, string>>
 
 type DefaultSectionListProps = {
     filters?: string[]
+    ActionsComponent?: React.ComponentType<DefaultListActionProps>
 }
-export const DefaultSectionList = ({ filters }: DefaultSectionListProps) => {
+export const DefaultSectionList = ({
+    filters,
+    ActionsComponent,
+}: DefaultSectionListProps) => {
     const { columns } = useModelListView()
     const schema = useSchemaFromHandle()
     const engine = useDataEngine()
@@ -54,6 +59,7 @@ export const DefaultSectionList = ({ filters }: DefaultSectionListProps) => {
                 data={modelList}
                 pager={data?.result.pager}
                 refetch={refetch}
+                ActionsComponent={ActionsComponent}
             />
         </div>
     )
