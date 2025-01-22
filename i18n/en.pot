@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-16T12:51:51.570Z\n"
-"PO-Revision-Date: 2025-01-16T12:51:51.570Z\n"
+"POT-Creation-Date: 2025-01-21T13:59:25.698Z\n"
+"PO-Revision-Date: 2025-01-21T13:59:25.698Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1292,6 +1292,12 @@ msgstr ""
 "level means that data from lower levels will not be included in the "
 "aggregation."
 
+msgid "Advanced options"
+msgstr "Advanced options"
+
+msgid "These options are used for advanced data set configurations."
+msgstr "These options are used for advanced data set configurations."
+
 msgid "Configure data elements"
 msgstr "Configure data elements"
 
@@ -1304,35 +1310,29 @@ msgstr "Data set disaggregation"
 msgid "Choose an optional category combination to disaggregate the entire data set."
 msgstr "Choose an optional category combination to disaggregate the entire data set."
 
+msgid "Data entry form"
+msgstr "Data entry form"
+
+msgid "Configure which organisation units can collect data for this data set."
+msgstr "Configure which organisation units can collect data for this data set."
+
+msgid "Something went wrong"
+msgstr "Something went wrong"
+
 msgid "Configure data entry periods"
 msgstr "Configure data entry periods"
 
 msgid "Choose for what time periods data can be entered for this data set"
 msgstr "Choose for what time periods data can be entered for this data set"
 
+msgid "Set up the basic information for this data set."
+msgstr "Set up the basic information for this data set."
+
 msgid "Validation and limitations"
 msgstr "Validation and limitations"
 
 msgid "Configure how data can and must be entered for this data"
 msgstr "Configure how data can and must be entered for this data"
-
-msgid "Configure which organisation units can collect data for this data set."
-msgstr "Configure which organisation units can collect data for this data set."
-
-msgid "Data entry form"
-msgstr "Data entry form"
-
-msgid "Advanced options"
-msgstr "Advanced options"
-
-msgid "These options are used for advanced data set configurations."
-msgstr "These options are used for advanced data set configurations."
-
-msgid "Something went wrong"
-msgstr "Something went wrong"
-
-msgid "Set up the basic information for this data set."
-msgstr "Set up the basic information for this data set."
 
 msgid "Setup"
 msgstr "Setup"
