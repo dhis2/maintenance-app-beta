@@ -15,9 +15,8 @@
 
 .targetSourceWrapper > svg {
     grid-area: arrow;
-    margin-top: 24px;
     color: var(--colors-grey700);
-    margin-block-start: 29px; /* 19px is the default height of the field label */
+    margin-block-start: 29px;
 }
 
 .confirmationFieldWrapper {
