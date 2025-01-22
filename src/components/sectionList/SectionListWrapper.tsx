@@ -6,6 +6,7 @@ import { Pager, ModelCollection } from '../../types/models'
 import { DetailsPanel, DefaultDetailsPanelContent } from './detailsPanel'
 import { FilterWrapper } from './filters/FilterWrapper'
 import { DefaultListActions } from './listActions'
+import { DefaultListActionProps } from './listActions/DefaultListActions'
 import { useModelListView } from './listView'
 import { ModelValue } from './modelValue/ModelValue'
 import { SectionList } from './SectionList'
@@ -25,6 +26,7 @@ type SectionListWrapperProps = {
     pager: Pager | undefined
     error: FetchError | undefined
     refetch: () => void
+    ActionsComponent?: React.ComponentType<DefaultListActionProps>
 }
 
 export const SectionListWrapper = ({
@@ -32,6 +34,7 @@ export const SectionListWrapper = ({
     error,
     pager,
     refetch,
+    ActionsComponent,
 }: SectionListWrapperProps) => {
     const { columns: headerColumns } = useModelListView()
     const schema = useSchemaFromHandle()
@@ -103,20 +106,24 @@ export const SectionListWrapper = ({
     )
 
     const renderActions = useCallback(
-        (model: BaseListModel) => (
-            <DefaultListActions
-                model={model}
-                onShowDetailsClick={handleDetailsClick}
-                onOpenSharingClick={setSharingDialogId}
-                onDeleteSuccess={refetch}
-                onOpenTranslationClick={setTranslationDialogModel}
-            />
-        ),
+        (model: BaseListModel) => {
+            const actionsProps = {
+                model,
+                onShowDetailsClick: handleDetailsClick,
+                onOpenSharingClick: setSharingDialogId,
+                onDeleteSuccess: refetch,
+                onOpenTranslationClick: setTranslationDialogModel,
+            }
+            return ActionsComponent !== undefined ? (
+                <ActionsComponent {...actionsProps} />
+            ) : (
+                <DefaultListActions {...actionsProps} />
+            )
+        },
         [handleDetailsClick, setSharingDialogId, refetch]
     )
 
     const isAllSelected = data ? checkAllSelected(data) : false
-
     return (
         <div>
             <SectionListTitle />
