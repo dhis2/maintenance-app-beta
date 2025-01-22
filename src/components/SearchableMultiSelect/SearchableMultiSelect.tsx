@@ -87,6 +87,7 @@ export const SearchableMultiSelect = ({
             onFocus={onFocus}
             dense={dense}
             clearable={selected && selected.length > 1}
+            clearText={i18n.t('Clear all')}
         >
             <div className={classes.searchField}>
                 <div className={classes.searchInput}>

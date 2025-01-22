@@ -56,7 +56,7 @@ export const FormSection = ({ children }: { children: React.ReactNode }) => (
 )
 
 export const Description = ({ children }: { children: React.ReactNode }) => (
-    <p className={css.description}>{children}</p>
+    <div className={css.description}>{children}</div>
 )
 
 export const Title = ({ children }: { children: React.ReactNode }) => (
