@@ -9,14 +9,15 @@
     gap: var(--spacers-dp8);
     background-color: var(--colors-grey100);
     padding: var(--spacers-dp16);
-    align-items: center;
+    align-items: flex-start;
     width: min-content;
 }
 
 .targetSourceWrapper > svg {
     grid-area: arrow;
+    margin-top: 24px;
     color: var(--colors-grey700);
-    margin-block-start: 19px; /* 19px is the default height of the field label */
+    margin-block-start: 29px; /* 19px is the default height of the field label */
 }
 
 .confirmationFieldWrapper {
