@@ -74,7 +74,7 @@ export function IconPickerModal({
     )
 
     return (
-        <Modal large onClose={onCancel} dataTest="iconpicker-modal">
+        <Modal large onClose={onCancel}>
             <ModalTitle>Select icon</ModalTitle>
 
             <ModalContent>

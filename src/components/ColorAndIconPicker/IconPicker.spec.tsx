@@ -59,7 +59,7 @@ describe('IconPicker', () => {
         const triggerButton = screen.getByTestId('iconpicker-trigger')
         await userEvent.click(triggerButton)
 
-        expect(screen.getByTestId('iconpicker-modal')).toBeInTheDocument()
+        expect(screen.getByTestId('dhis2-uicore-modal')).toBeInTheDocument()
         const icon = await screen.findByAltText(iconsMock.icons[0].key)
         expect(icon).toBeInTheDocument()
     })
@@ -82,7 +82,9 @@ describe('IconPicker', () => {
         const cancelButton = await screen.findByText('Cancel')
         await userEvent.click(cancelButton)
         expect(mockOnIconPick).not.toHaveBeenCalled()
-        expect(screen.queryByTestId('iconpicker-modal')).not.toBeInTheDocument()
+        expect(
+            screen.queryByTestId('dhis2-uicore-modal')
+        ).not.toBeInTheDocument()
     })
 
     it('calls onIconPick with icon-key and closes the modal when an icon is selected', async () => {
@@ -107,6 +109,8 @@ describe('IconPicker', () => {
         await userEvent.click(selectButton)
 
         expect(mockOnIconPick).toHaveBeenCalledWith({ icon: newIconKey.key })
-        expect(screen.queryByTestId('iconpicker-modal')).not.toBeInTheDocument()
+        expect(
+            screen.queryByTestId('dhis2-uicore-modal')
+        ).not.toBeInTheDocument()
     })
 })
