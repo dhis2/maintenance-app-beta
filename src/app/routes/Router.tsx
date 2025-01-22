@@ -22,10 +22,14 @@ import {
     isValidUid,
     routePaths,
     getOverviewPath,
+    isMergableSection,
 } from '../../lib'
 import { OverviewSection } from '../../types'
 import { Layout, Breadcrumbs, BreadcrumbItem } from '../layout'
-import { CheckAuthorityForSection } from './CheckAuthorityForSection'
+import {
+    SectionAuthorizedGuard,
+    SectionCanMergeGuard,
+} from './AuthorizationGuards'
 import { DefaultErrorRoute } from './DefaultErrorRoute'
 import { LegacyAppRedirect } from './LegacyAppRedirect'
 import { RouteHandle } from './types'
@@ -69,7 +73,7 @@ function createOverviewLazyRouteFunction(
 
 function createSectionLazyRouteFunction(
     section: Section,
-    componentFileName: string
+    componentFileName: 'New' | 'Edit' | 'List' | 'Merge'
 ) {
     return async () => {
         try {
@@ -168,6 +172,26 @@ const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
                     }
                 />
             )}
+            {isMergableSection(section) && (
+                <Route element={<SectionCanMergeGuard />}>
+                    <Route
+                        path={routePaths.merge}
+                        lazy={createSectionLazyRouteFunction(section, 'Merge')}
+                        handle={
+                            {
+                                crumb: (matchInfo) => (
+                                    <BreadcrumbItem
+                                        label={i18n.t('Merge {{modelName}}', {
+                                            modelName: section.titlePlural,
+                                        })}
+                                        to={matchInfo.pathname}
+                                    />
+                                ),
+                            } satisfies RouteHandle
+                        }
+                    />
+                </Route>
+            )}
             <Route path=":id" element={<VerifyModelId />}>
                 <Route
                     index
@@ -204,7 +228,7 @@ const routes = createRoutesFromElements(
             path="/"
             element={<Navigate to={routePaths.overviewRoot} replace />}
         />
-        <Route element={<CheckAuthorityForSection />}>
+        <Route element={<SectionAuthorizedGuard />}>
             <Route path={routePaths.overviewRoot}>
                 <Route
                     index
