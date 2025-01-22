@@ -24,6 +24,16 @@ export const isNonCreateableSchema = (schemaName: SchemaName) => {
     return nonCreateableSchemas.has(schemaName)
 }
 
+export const hasAuthority = (
+    userAuthorities: Set<string>,
+    authority: string
+) => {
+    if (userAuthorities.has(ALL_AUTHORITY)) {
+        return true
+    }
+    return userAuthorities.has(authority)
+}
+
 export const hasAuthorityForOperation = (
     operation: Operation,
     schemaAuthorities: SchemaAuthorities,
