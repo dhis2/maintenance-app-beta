@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-20T11:45:28.000Z\n"
-"PO-Revision-Date: 2025-01-20T11:45:28.000Z\n"
+"POT-Creation-Date: 2025-01-23T07:34:31.973Z\n"
+"PO-Revision-Date: 2025-01-23T07:34:31.973Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1298,6 +1298,9 @@ msgstr "Advanced options"
 msgid "These options are used for advanced data set configurations."
 msgstr "These options are used for advanced data set configurations."
 
+msgid "Value should be bigger than 0"
+msgstr "Value should be bigger than 0"
+
 msgid "Configure data elements"
 msgstr "Configure data elements"
 
@@ -1312,9 +1315,6 @@ msgstr "Choose an optional category combination to disaggregate the entire data 
 
 msgid "Data entry form"
 msgstr "Data entry form"
-
-msgid "Value should be bigger than 0"
-msgstr "Value should be bigger than 0"
 
 msgid "Configure which organisation units can collect data for this data set."
 msgstr "Configure which organisation units can collect data for this data set."

@@ -22,7 +22,7 @@ export const Component = () => {
                 validate={validate}
                 subscription={{}}
             >
-                {({ handleSubmit, form }) => {
+                {({ handleSubmit }) => {
                     return (
                         <>
                             <SectionedFormLayout
