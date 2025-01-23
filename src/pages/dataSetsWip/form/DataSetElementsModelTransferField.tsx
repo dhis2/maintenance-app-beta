@@ -20,6 +20,7 @@ type DataElementWithCategoryCombo = {
     displayName: string
     categoryCombo: { id: string; displayName: string }
 }
+
 type DataSetElement = {
     categoryCombo?: { id: string; name: string; displayName: string }
     dataElement: DataElementWithCategoryCombo
@@ -36,27 +37,18 @@ export function DataSetElementsModelTransferField() {
     >(name, {
         multiple: true,
         validateFields: [],
-        format: (dses) =>
-            dses
-                .map((dse) => ({
-                    id: dse?.dataElement?.id,
-                    displayName: dse?.dataElement?.displayName,
-                    ...dse,
-                }))
-                .sort((a, b) => a.displayName.localeCompare(b.displayName)),
-        parse: (val) =>
-            val.map((de) => ({
-                dataElement: { ...de },
-                categoryCombo: undefined,
-            })),
     })
 
-    const withComboName = input.value.map((dse) => ({
-        ...dse,
-        displayName: dse.categoryCombo
-            ? `${dse.dataElement.displayName} (${dse.categoryCombo?.displayName})`
-            : dse.dataElement.displayName,
-    }))
+    const withComboName =
+        input.value
+            .map((dse) => ({
+                ...dse,
+                id: dse.dataElement.id,
+                displayName: dse.categoryCombo
+                    ? `${dse.dataElement.displayName} (${dse.categoryCombo?.displayName})`
+                    : dse.dataElement.displayName,
+            }))
+            .sort((a, b) => a.displayName.localeCompare(b.displayName)) || []
 
     return (
         <Field
@@ -66,11 +58,24 @@ export function DataSetElementsModelTransferField() {
             name={name}
             className={css.moduleTransferField}
         >
-            <ModelTransfer
+            <ModelTransfer<
+                DataSetElement & DisplayableModel,
+                DataElementWithCategoryCombo
+            >
                 selected={withComboName}
                 onChange={({ selected }) => {
                     input.onChange(selected)
                     input.onBlur()
+                }}
+                transform={(dataElements) => {
+                    return dataElements.map((de) => ({
+                        dataElement: {
+                            ...de,
+                        },
+                        id: de.id,
+                        displayName: de.displayName,
+                        categoryCombo: undefined,
+                    }))
                 }}
                 leftHeader={i18n.t('Available data elements')}
                 rightHeader={i18n.t('Selected data elements')}
@@ -98,16 +103,15 @@ export function DataSetElementsModelTransferField() {
                             disabled={input.value.length === 0}
                             onClick={() => setModalOpen(true)}
                         >
-                            {i18n.t('Custom disaggregation')}{' '}
+                            {i18n.t('Custom disaggregation')}
                         </Button>
                     </div>
                 }
-                maxSelections={Infinity}
             />
             {modalOpen && (
                 <CustomDisaggregationModal
                     onClose={() => setModalOpen(false)}
-                    selected={input.value}
+                    selected={withComboName}
                 />
             )}
         </Field>

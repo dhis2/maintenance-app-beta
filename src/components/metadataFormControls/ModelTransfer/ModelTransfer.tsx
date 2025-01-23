@@ -7,7 +7,7 @@ import { useDebouncedCallback } from 'use-debounce'
 import { getSectionNewPath } from '../../../lib'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
 import { PlainResourceQuery } from '../../../types'
-import { PagedResponse } from '../../../types/generated'
+import { IdentifiableObject, PagedResponse } from '../../../types/generated'
 import { DisplayableModel } from '../../../types/models'
 import { LinkButton } from '../../LinkButton'
 import { BaseModelTransfer, BaseModelTransferProps } from './BaseModelTransfer'
@@ -22,14 +22,18 @@ const defaultQuery = {
     },
 }
 
-export type ModelTranferProps<TModel extends DisplayableModel> = Omit<
-    BaseModelTransferProps<TModel>,
-    'available' | 'filterable'
-> & {
+export type ModelTranferProps<
+    TModel extends DisplayableModel,
+    TModelData
+> = Omit<BaseModelTransferProps<TModel>, 'available' | 'filterable'> & {
     query: Omit<PlainResourceQuery, 'id'>
+    transform?: (value: TModelData[]) => TModel[]
 }
 
-export const ModelTransfer = <TModel extends DisplayableModel>({
+export const ModelTransfer = <
+    TModel extends DisplayableModel,
+    TModelData extends DisplayableModel = TModel
+>({
     selected,
     query,
     leftHeader,
@@ -37,8 +41,9 @@ export const ModelTransfer = <TModel extends DisplayableModel>({
     leftFooter,
     filterPlaceholder,
     filterPlaceholderPicked,
+    transform,
     ...baseModelTransferProps
-}: ModelTranferProps<TModel>) => {
+}: ModelTranferProps<TModel, TModelData>) => {
     const queryFn = useBoundResourceQueryFn()
     const [searchTerm, setSearchTerm] = useState('')
 
@@ -71,6 +76,14 @@ export const ModelTransfer = <TModel extends DisplayableModel>({
         [queryResult.data, modelName]
     )
 
+    const transformedData = useMemo(
+        () =>
+            transform
+                ? transform(allDataMap as unknown as TModelData[])
+                : allDataMap,
+        [allDataMap, transform]
+    )
+
     const handleFilterChange = useDebouncedCallback(({ value }) => {
         if (value != undefined) {
             setSearchTerm(value)
@@ -86,7 +99,7 @@ export const ModelTransfer = <TModel extends DisplayableModel>({
             filterable
             filterablePicked
             onEndReached={queryResult.fetchNextPage}
-            available={allDataMap}
+            available={transformedData}
             selected={selected}
             onFilterChange={handleFilterChange}
             filterPlaceholder={

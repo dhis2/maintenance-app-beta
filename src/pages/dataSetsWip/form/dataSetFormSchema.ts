@@ -28,8 +28,7 @@ export const dataSetFormSchema = identifiable
                     categoryCombo: modelReference.optional(),
                 })
             )
-            .default([])
-            .optional(),
+            .default([]),
         categoryCombo: z
             .object({ id: z.string(), displayName: z.string() })
             .default({ ...DEFAULT_CATEGORY_COMBO }),
@@ -38,5 +37,6 @@ export const dataSetFormSchema = identifiable
     })
 
 export const initialValues = getDefaults(dataSetFormSchema)
+console.log({ initialValues })
 
 export const validate = createFormValidate(dataSetFormSchema)
