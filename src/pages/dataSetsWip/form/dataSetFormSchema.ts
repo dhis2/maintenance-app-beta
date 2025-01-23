@@ -6,8 +6,13 @@ import {
 } from '../../../lib'
 import { createFormValidate } from '../../../lib/form/validate'
 
-const { withAttributeValues, identifiable, style, referenceCollection } =
-    modelFormSchemas
+const {
+    withAttributeValues,
+    identifiable,
+    style,
+    referenceCollection,
+    modelReference,
+} = modelFormSchemas
 
 export const dataSetFormSchema = identifiable
     .merge(withAttributeValues)
@@ -16,7 +21,15 @@ export const dataSetFormSchema = identifiable
         code: z.string().trim().optional(),
         description: z.string().trim().max(2000).optional(),
         style: style.optional(),
-        dataSetElements: referenceCollection.default([]),
+        dataSetElements: z
+            .array(
+                z.object({
+                    dataElement: modelReference,
+                    categoryCombo: modelReference.optional(),
+                })
+            )
+            .default([])
+            .optional(),
         categoryCombo: z
             .object({ id: z.string(), displayName: z.string() })
             .default({ ...DEFAULT_CATEGORY_COMBO }),
