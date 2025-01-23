@@ -8,7 +8,7 @@ import {
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
 import { DEFAULT_CATEGORY_COMBO } from '../../../lib'
-import { CheckboxControlledNumberInput } from './CheckboxControlledNumberInput'
+import { ToggledNumberInput } from './ToggledNumberInput'
 import { PeriodTypeField } from './PeriodTypeField'
 
 export const PeriodsContents = ({ name }: { name: string }) => {
@@ -27,7 +27,7 @@ export const PeriodsContents = ({ name }: { name: string }) => {
                 <PeriodTypeField />
             </StandardFormField>
             <StandardFormField>
-                <CheckboxControlledNumberInput
+                <ToggledNumberInput
                     name="openFuturePeriods"
                     label={i18n.t('Allow data entry for future periods')}
                     uncheckedValue={0}
@@ -35,7 +35,7 @@ export const PeriodsContents = ({ name }: { name: string }) => {
                 />
             </StandardFormField>
             <StandardFormField>
-                <CheckboxControlledNumberInput
+                <ToggledNumberInput
                     name="expiryDays"
                     label={i18n.t(
                         'Close data entry a certain number of days after period end (expiry days)'
@@ -45,7 +45,7 @@ export const PeriodsContents = ({ name }: { name: string }) => {
             </StandardFormField>
             {formValues?.categoryCombo.id !== DEFAULT_CATEGORY_COMBO.id && (
                 <StandardFormField>
-                    <CheckboxControlledNumberInput
+                    <ToggledNumberInput
                         name="openPeriodsAfterCoEndDate"
                         label={i18n.t(
                             `Close data entry after ${formValues?.categoryCombo.displayName.toLowerCase()} category option end date (if category option exist and has end date)`

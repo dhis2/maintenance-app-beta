@@ -13,7 +13,7 @@ export type HiddenInputFieldProps = InputFieldRestProps & {
     uncheckedValue: number
 }
 
-export function CheckboxControlledNumberInput({
+export function ToggledNumberInput({
     name,
     label,
     uncheckedValue,
@@ -41,11 +41,10 @@ export function CheckboxControlledNumberInput({
     useEffect(() => {
         if (isChecked) {
             input.onChange(undefined)
-            input.onBlur()
         } else {
             input.onChange(uncheckedValue.toString())
-            input.onBlur()
         }
+        input.onBlur()
     }, [isChecked])
 
     return (

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-23T07:34:31.973Z\n"
-"PO-Revision-Date: 2025-01-23T07:34:31.973Z\n"
+"POT-Creation-Date: 2025-01-23T14:59:11.968Z\n"
+"PO-Revision-Date: 2025-01-23T14:59:11.968Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1298,9 +1298,6 @@ msgstr "Advanced options"
 msgid "These options are used for advanced data set configurations."
 msgstr "These options are used for advanced data set configurations."
 
-msgid "Value should be bigger than 0"
-msgstr "Value should be bigger than 0"
-
 msgid "Configure data elements"
 msgstr "Configure data elements"
 
@@ -1336,6 +1333,9 @@ msgstr "Close data entry a certain number of days after period end (expiry days)
 
 msgid "Set up the basic information for this data set."
 msgstr "Set up the basic information for this data set."
+
+msgid "Value should be bigger than 0"
+msgstr "Value should be bigger than 0"
 
 msgid "Validation and limitations"
 msgstr "Validation and limitations"
