@@ -1,3 +1,10 @@
+## [0.24.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.24.0...v0.24.1) (2025-01-23)
+
+
+### Bug Fixes
+
+* geometry types to match case ([#501](https://github.com/dhis2/maintenance-app-beta/issues/501)) ([acde49c](https://github.com/dhis2/maintenance-app-beta/commit/acde49c0fdc705cdbc3abd5ec1675f257cb7ad7c))
+
 # [0.24.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.23.1...v0.24.0) (2025-01-22)
 
 
