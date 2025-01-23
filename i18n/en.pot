@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-23T10:27:25.765Z\n"
-"PO-Revision-Date: 2025-01-23T10:27:25.765Z\n"
+"POT-Creation-Date: 2025-01-23T13:15:58.991Z\n"
+"PO-Revision-Date: 2025-01-23T13:15:58.991Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1185,6 +1185,15 @@ msgstr "Choose how this category option  will be used to capture and analyze dat
 
 msgid "Choose the options to include in this category option group."
 msgstr "Choose the options to include in this category option group."
+
+msgid "Configure category options merge"
+msgstr "Configure category options merge"
+
+msgid "The category options merge operation is complete."
+msgstr "The category options merge operation is complete."
+
+msgid "All selected category options were merged successfully."
+msgstr "All selected category options were merged successfully."
 
 msgid "Set up the basic information for this category option."
 msgstr "Set up the basic information for this category option."
