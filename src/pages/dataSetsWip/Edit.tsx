@@ -18,7 +18,10 @@ import { DataSetFormDescriptor } from './form/formDescriptor'
 const section = SECTIONS_MAP.dataSet
 
 const fieldFilters = [
-    'id,displayName,dataSetElements[dataElement[id,displayName],categoryCombo[id]],style[color,icon],indicators[id,displayName]',
+    ':owner',
+    'dataSetElements[dataElement[id,displayName,categoryCombo[id,displayName]],categoryCombo[id,displayName]]',
+    'style[color,icon]',
+    'indicators[id,displayName]',
 ] as const
 type DataSetValues = PickWithFieldFilters<DataSet, typeof fieldFilters>
 
@@ -32,7 +35,7 @@ export const Component = () => {
                 resource: 'dataSets',
                 id,
                 params: {
-                    fields: ':owner,dataSetElements[dataElement[id,displayName],categoryCombo[id]],style[color,icon],indicators[id,displayName]',
+                    fields: fieldFilters,
                 },
             },
         ],
