@@ -10,12 +10,12 @@ import {
 } from '../../components/merge'
 import { getDefaults, useLocationWithState } from '../../lib'
 import { createFormError } from '../../lib/form/createFormError'
+import { CategoryOptionMergeFormFields } from './merge/CategoryOptionMergeFormFields'
 import {
     CategoryOptionMergeFormValues,
     mergeFormSchema,
     validate,
 } from './merge/categoryOptionMergeSchema'
-import { CategoryOptionMergeFormFields } from './merge/CategoryOptionMergeFormFields'
 
 export const Component = () => {
     const location = useLocationWithState<{ selectedModels: Set<string> }>()
