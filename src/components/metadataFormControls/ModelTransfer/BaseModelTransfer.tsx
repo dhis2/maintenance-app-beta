@@ -27,9 +27,11 @@ export const BaseModelTransfer = <TModel extends DisplayableModel>({
     ...transferProps
 }: BaseModelTransferProps<TModel>) => {
     const { allModelsMap, allTransferOptions } = useMemo(() => {
-        const allModels = selected.concat(available)
+        const allModels = available.concat(selected)
         const allModelsMap = new Map(allModels.map((o) => [o.id, o]))
-        const allTransferOptions = allModels.map(toDisplayOption)
+        const allTransferOptions = Array.from(allModelsMap).map(([i, v]) =>
+            toDisplayOption(v)
+        )
         return {
             allModelsMap,
             allTransferOptions,
