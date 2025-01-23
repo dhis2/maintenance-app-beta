@@ -71,11 +71,11 @@ export const organisationUnitSchema = identifiable
             .or(
                 z.object({
                     type: z.union([
-                        z.literal('Multipoint'),
-                        z.literal('Linestring'),
-                        z.literal('Multilinestring'),
+                        z.literal('MultiPoint'),
+                        z.literal('LineString'),
+                        z.literal('MultiLineString'),
                         z.literal('Polygon'),
-                        z.literal('Multipolygon'),
+                        z.literal('MultiPolygon'),
                         z.literal('Geometrycollection'),
                     ]),
                 })
