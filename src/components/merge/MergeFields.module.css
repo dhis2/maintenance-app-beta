@@ -1,0 +1,41 @@
+.targetSourceWrapper {
+    display: grid;
+    /* grid is used to place the arrow between the children*/
+    grid-template-areas: 'source arrow target';
+    grid-template-columns: minmax(380px, max-content) 24px minmax(
+            380px,
+            max-content
+        );
+    gap: var(--spacers-dp8);
+    background-color: var(--colors-grey100);
+    padding: var(--spacers-dp16);
+    align-items: flex-start;
+    width: min-content;
+}
+
+.targetSourceWrapper > svg {
+    grid-area: arrow;
+    color: var(--colors-grey700);
+    margin-block-start: 29px;
+}
+
+.confirmationFieldWrapper {
+    background-color: var(--colors-yellow050);
+    padding: var(--spacers-dp8);
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    gap: var(--spacers-dp8);
+}
+
+.confirmationFieldWrapper h2 {
+    font-size: 14px;
+    margin: 0;
+    color: var(--colors-red800);
+}
+
+.confirmationCode {
+    margin-inline-start: var(--spacers-dp4);
+    font-weight: 500;
+    user-select: none;
+}

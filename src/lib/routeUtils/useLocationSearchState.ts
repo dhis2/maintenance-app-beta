@@ -42,10 +42,18 @@ export const useLocationSearchState = () => {
     )
 }
 
+export const useLocationState = <State>(state: State) => {
+    const locationSearchState = useLocationSearchState()
+
+    return { ...state, ...locationSearchState }
+}
+
 /** This is just a type-wrapper, applying the LocationSearchState type to useLocation  */
 export const useLocationWithSearchState: () => Location<LocationSearchState> =
     useLocation
-
+export const useLocationWithState: <
+    State extends Record<string, unknown>
+>() => Location<(LocationSearchState & Partial<State>) | null> = useLocation
 /**
  * Wraps react-router "useNavigate" to include the search state as query-Paramters, retrieved from the location state.
  *

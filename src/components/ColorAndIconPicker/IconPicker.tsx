@@ -3,7 +3,7 @@ import cx from 'classnames'
 import React, { useState } from 'react'
 import classes from './IconPicker.module.css'
 import { IconPickerModal } from './IconPickerModal'
-import { useIconsQuery } from './useIconsQuery'
+import { useIconQuery } from './useIconsQuery'
 
 export function IconPicker({
     icon = '',
@@ -13,8 +13,7 @@ export function IconPicker({
     icon?: string
 }) {
     const [showPicker, setShowPicker] = useState(false)
-    const icons = useIconsQuery()
-    const selectedIcon = icons.data.all.find(({ key }) => key === icon)
+    const selectedIcon = useIconQuery({ key: icon }).data
 
     return (
         <>
@@ -30,7 +29,7 @@ export function IconPicker({
                     {selectedIcon && (
                         <img
                             className={classes.iconImage}
-                            alt={selectedIcon.description}
+                            alt={selectedIcon.key}
                             src={selectedIcon.href}
                         />
                     )}

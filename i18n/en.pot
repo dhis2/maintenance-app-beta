@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-23T14:59:11.968Z\n"
-"PO-Revision-Date: 2025-01-23T14:59:11.968Z\n"
+"POT-Creation-Date: 2025-01-22T08:07:55.176Z\n"
+"PO-Revision-Date: 2025-01-22T08:07:55.176Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1325,26 +1325,14 @@ msgstr "Configure data entry periods"
 msgid "Choose for what time periods data can be entered for this data set"
 msgstr "Choose for what time periods data can be entered for this data set"
 
-msgid "Allow data entry for future periods"
-msgstr "Allow data entry for future periods"
-
-msgid "Close data entry a certain number of days after period end (expiry days)"
-msgstr "Close data entry a certain number of days after period end (expiry days)"
-
 msgid "Set up the basic information for this data set."
 msgstr "Set up the basic information for this data set."
-
-msgid "Value should be bigger than 0"
-msgstr "Value should be bigger than 0"
 
 msgid "Validation and limitations"
 msgstr "Validation and limitations"
 
 msgid "Configure how data can and must be entered for this data"
 msgstr "Configure how data can and must be entered for this data"
-
-msgid "The number should not have decimals"
-msgstr "The number should not have decimals"
 
 msgid "Setup"
 msgstr "Setup"
@@ -1357,12 +1345,6 @@ msgstr "Data Elements"
 
 msgid "Periods"
 msgstr "Periods"
-
-msgid "Close data entry a certain number of days after period end"
-msgstr "Close data entry a certain number of days after period end"
-
-msgid "Close data entry after category option end date"
-msgstr "Close data entry after category option end date"
 
 msgid "Organisation Units"
 msgstr "Organisation Units"
