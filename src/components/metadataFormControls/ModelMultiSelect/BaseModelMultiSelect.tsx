@@ -45,9 +45,9 @@ export const BaseModelMultiSelect = <
             }
         })
 
-        const allOptions = Array.from(allModelsMap).map(([, value]) => {
-            return toDisplayOption(value)
-        })
+        const allOptions = Array.from(allModelsMap).map(([, value]) =>
+            toDisplayOption(value)
+        )
 
         const selectedOptions = selected.map((s) => s.id)
         if (noValueOption) {

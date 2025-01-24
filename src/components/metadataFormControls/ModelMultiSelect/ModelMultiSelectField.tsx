@@ -33,6 +33,7 @@ export function ModelMultiSelectField<TModel extends DisplayableModel>({
     const { input, meta } = useField<TModel[] | undefined>(name, {
         validateFields: [],
     })
+
     return (
         <Field
             dataTest={`formfields-modelmultiselect-${name}`}
