@@ -35,10 +35,10 @@ export const Component = () => {
                 resource: 'dataSets',
                 id,
                 params: {
-                    fields: fieldFilters,
+                    fields: fieldFilters.concat(),
                 },
             },
-        ],
+        ] as const,
     })
     const modelId = useParams().id as string
 
