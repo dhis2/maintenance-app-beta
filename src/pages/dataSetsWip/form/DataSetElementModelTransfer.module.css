@@ -33,10 +33,6 @@
     width: 50%;
 }
 
-.highlighted .transferOption {
-    color: red;
-}
-
 p.transferOptionCatComboText {
     color: rgba(160, 160, 160);
 }
