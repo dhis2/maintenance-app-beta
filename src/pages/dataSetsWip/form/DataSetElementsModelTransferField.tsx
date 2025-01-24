@@ -35,20 +35,20 @@ export function DataSetElementsModelTransferField() {
         HTMLElement,
         (DisplayableModel & DataSetElement)[]
     >(name, {
+        format: (value) =>
+            value
+                .map((dse) => ({
+                    ...dse,
+                    id: dse.dataElement.id,
+                    displayName: dse.categoryCombo
+                        ? `${dse.dataElement.displayName} (${dse.categoryCombo?.displayName})`
+                        : dse.dataElement.displayName,
+                }))
+                .sort((a, b) => a.displayName.localeCompare(b.displayName)) ||
+            [],
         multiple: true,
         validateFields: [],
     })
-
-    const withComboName =
-        input.value
-            .map((dse) => ({
-                ...dse,
-                id: dse.dataElement.id,
-                displayName: dse.categoryCombo
-                    ? `${dse.dataElement.displayName} (${dse.categoryCombo?.displayName})`
-                    : dse.dataElement.displayName,
-            }))
-            .sort((a, b) => a.displayName.localeCompare(b.displayName)) || []
 
     return (
         <Field
@@ -62,7 +62,7 @@ export function DataSetElementsModelTransferField() {
                 DataSetElement & DisplayableModel,
                 DataElementWithCategoryCombo
             >
-                selected={withComboName}
+                selected={input.value}
                 onChange={({ selected }) => {
                     input.onChange(selected)
                     input.onBlur()
@@ -111,7 +111,7 @@ export function DataSetElementsModelTransferField() {
             {modalOpen && (
                 <CustomDisaggregationModal
                     onClose={() => setModalOpen(false)}
-                    selected={withComboName}
+                    selected={input.value}
                 />
             )}
         </Field>
