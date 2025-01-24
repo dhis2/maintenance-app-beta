@@ -1,3 +1,10 @@
+# [0.25.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.24.1...v0.25.0) (2025-01-24)
+
+
+### Features
+
+* implement indicator merge ([53781e3](https://github.com/dhis2/maintenance-app-beta/commit/53781e3b0389f341a0f2709bc5384f9a1e4234ff))
+
 ## [0.24.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.24.0...v0.24.1) (2025-01-23)
 
 
