@@ -1,3 +1,10 @@
+## [0.25.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.25.0...v0.25.1) (2025-01-24)
+
+
+### Reverts
+
+* Revert "feat: implement indicator merge" ([d8b9b64](https://github.com/dhis2/maintenance-app-beta/commit/d8b9b6433d42acc2c11c1fd5c7feb1cfb3abb2b6))
+
 # [0.25.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.24.1...v0.25.0) (2025-01-24)
 
 
