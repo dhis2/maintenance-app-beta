@@ -37,6 +37,5 @@ export const dataSetFormSchema = identifiable
     })
 
 export const initialValues = getDefaults(dataSetFormSchema)
-console.log({ initialValues })
 
 export const validate = createFormValidate(dataSetFormSchema)
