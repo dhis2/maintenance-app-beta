@@ -7,6 +7,7 @@ import {
     ModalActions,
     ModalContent,
     ModalTitle,
+    TransferOption,
 } from '@dhis2/ui'
 import React, { useState } from 'react'
 import { useField, useForm } from 'react-final-form'
@@ -40,9 +41,7 @@ export function DataSetElementsModelTransferField() {
                 .map((dse) => ({
                     ...dse,
                     id: dse.dataElement.id,
-                    displayName: dse.categoryCombo
-                        ? `${dse.dataElement.displayName} (${dse.categoryCombo?.displayName})`
-                        : dse.dataElement.displayName,
+                    displayName: dse.dataElement.displayName,
                 }))
                 .sort((a, b) => a.displayName.localeCompare(b.displayName)) ||
             [],
@@ -93,6 +92,37 @@ export function DataSetElementsModelTransferField() {
                             'categoryCombo[id,displayName]',
                         ],
                     },
+                }}
+                renderOption={({ value, ...rest }) => {
+                    const resolveCatComboName = (name: string | undefined) =>
+                        name === 'default' ? i18n.t('None') : name
+                    const dataElementName = value.displayName
+                    const overiddenCatComboName = resolveCatComboName(
+                        value.categoryCombo?.displayName
+                    )
+                    const originalCatComboName = resolveCatComboName(
+                        value.dataElement.categoryCombo.displayName
+                    )
+                    return (
+                        <TransferOption
+                            {...rest}
+                            label={
+                                <div>
+                                    <div>{dataElementName}</div>
+                                    <Help
+                                        className={
+                                            css.transferOptionCatComboText
+                                        }
+                                    >
+                                        {overiddenCatComboName
+                                            ? `${overiddenCatComboName} *`
+                                            : originalCatComboName}
+                                    </Help>
+                                </div>
+                            }
+                            value={value.id}
+                        />
+                    )
                 }}
                 enableOrderChange={false}
                 rightFooter={
@@ -165,6 +195,7 @@ const CustomDisaggregationModal = ({
                             </div>
                             <div className={css.categoryComboSelect}>
                                 <ModelSingleSelect
+                                    showNoValueOption
                                     query={{
                                         resource: 'categoryCombos',
                                         params: {
