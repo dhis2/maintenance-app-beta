@@ -15,6 +15,7 @@ import { ModelTransfer } from '../../../components'
 import { ModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { DisplayableModel } from '../../../types/models'
 import css from './DataSetElementModelTransfer.module.css'
+import { CategoryComboSelect } from './CategoryComboField'
 
 type DataElementWithCategoryCombo = {
     id: string
@@ -194,14 +195,11 @@ const CustomDisaggregationModal = ({
                                     )}
                             </div>
                             <div className={css.categoryComboSelect}>
-                                <ModelSingleSelect
-                                    showNoValueOption
+                                <CategoryComboSelect
                                     query={{
-                                        resource: 'categoryCombos',
                                         params: {
                                             filter: [
                                                 'dataDimensionType:eq:DISAGGREGATION',
-                                                'isDefault:eq:false',
                                             ],
                                         },
                                     }}
