@@ -1,9 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
-import { CheckboxFieldFF } from '@dhis2/ui'
+import { CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field } from 'react-final-form'
 import {
-    ModelTransferField,
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
@@ -65,6 +64,21 @@ export const ValidationFormContents = ({ name }: { name: string }) => {
                     )}
                 />
             </StandardFormField>
+            <StandardFormField>
+                <Field
+                    component={InputFieldFF}
+                    label={i18n.t(
+                        'Number of days after period to qualify for on time submission'
+                    )}
+                    helperText={i18n.t(
+                        '"On time" submission rate can be using reporting dates in the Report app. Enter 0 to ignore timely submission.'
+                    )}
+                    name="timelyDays"
+                    inputWidth="200px"
+                    type="number"
+                />
+            </StandardFormField>
+
             {/* <StandardFormField>
                 <ModelTransferField
                     name={'dataElements'}

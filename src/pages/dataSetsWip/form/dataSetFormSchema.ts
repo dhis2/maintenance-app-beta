@@ -48,6 +48,7 @@ export const dataSetFormSchema = identifiable
         fieldCombinationRequired: z.boolean().default(false),
         compulsoryFieldsCompleteOnly: z.boolean().default(false),
         workflow: z.object({ id: z.string() }).optional(),
+        timelyDays: z.string().optional(),
     })
 
 export const initialValues = getDefaults(dataSetFormSchema)
