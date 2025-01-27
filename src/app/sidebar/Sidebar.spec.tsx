@@ -62,19 +62,19 @@ describe('Sidebar', () => {
         ]
         subCategories.forEach((title) => expect(queryByText(title)).toBeNull())
 
-        getByText('Categories').click()
+        await userEvent.click(getByText('Categories'))
 
         subCategories.forEach((title) =>
             expect(getByText(title)).not.toBeNull()
         )
     })
     describe('when a link is clicked', () => {
-        it('should navigate to the target of the link', () => {
+        it('should navigate to the target of the link', async () => {
             const { getByText } = renderSideBar()
-            getByText('Categories').click()
-            getByText('Category combination').click()
+            await userEvent.click(getByText('Categories'))
+            await userEvent.click(getByText('Category combination'))
             expect(window.location.href).toMatch('/categoryCombos')
-            getByText('Overview').click()
+            await userEvent.click(getByText('Overview'))
             expect(window.location.href).toMatch('/overview/categories')
         })
     })
@@ -151,7 +151,7 @@ describe('Sidebar', () => {
     })
 
     describe('unauthorized sections', () => {
-        it('should hide child links that link to unauthorized sections', () => {
+        it('should hide child links that link to unauthorized sections', async () => {
             const unauthorizedSections = [
                 'Category option',
                 'Category combination',
@@ -169,7 +169,7 @@ describe('Sidebar', () => {
             expectedSubCategories.forEach((title) =>
                 expect(queryByText(title)).toBeNull()
             )
-            getByText('Categories').click()
+            await userEvent.click(getByText('Categories'))
             expectedSubCategories.forEach((title) =>
                 expect(getByText(title)).not.toBeNull()
             )

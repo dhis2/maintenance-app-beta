@@ -1,5 +1,5 @@
 import { useDataEngine } from '@dhis2/app-runtime'
-import { QueryFunctionContext } from 'react-query'
+import { QueryFunctionContext } from '@tanstack/react-query'
 import type { Query } from '../../types'
 
 type DataEngine = ReturnType<typeof useDataEngine>

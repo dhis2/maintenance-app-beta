@@ -1,21 +1,19 @@
 import { FetchError } from '@dhis2/app-runtime'
 import { faker } from '@faker-js/faker'
 import {
-    fireEvent,
     render,
     waitFor,
     waitForElementToBeRemoved,
     within,
 } from '@testing-library/react'
+import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import organisationUnitsSchemaMock from '../../__mocks__/schema/organisationUnitsSchema.json'
 import { getRelativeTime, ModelSchemas, SECTIONS_MAP } from '../../lib'
 import { useSchemaStore } from '../../lib/schemas/schemaStore'
 import { useCurrentUserStore } from '../../lib/user/currentUserStore'
-import { testAccess, testOrgUnit, testPager } from '../../testUtils/builders'
-import TestComponentWithRouter, {
-    CustomData,
-} from '../../testUtils/TestComponentWithRouter'
+import { testAccess, testOrgUnit } from '../../testUtils/builders'
+import TestComponentWithRouter from '../../testUtils/TestComponentWithRouter'
 import type { OrganisationUnit } from '../../types/generated'
 import { Component as OrgUnitsList } from './List'
 
@@ -75,6 +73,7 @@ const renderList = async ({
                     }
                     if (type === 'delete') {
                         deleteOrgUnitMock(params)
+                        return { statusCode: 204 }
                     }
                 },
                 userDataStore,
@@ -99,33 +98,37 @@ describe('Organisation unit list', () => {
         }
     })
 
-    it('should show evey org unit in the right order', async () => {
-        const rootOrg1 = testOrgUnit({ level: 1, childCount: 2 })
-        const rootOrg2 = testOrgUnit({ level: 2, childCount: 1 })
+    it('should show every org unit in the right order', async () => {
+        const rootOrg1 = testOrgUnit({ level: 1, childCount: 2, name: 'Root1' })
+        const rootOrg2 = testOrgUnit({ level: 2, childCount: 1, name: 'Root2' })
 
         const root1Level2Child1 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg1],
             parentId: rootOrg1.id,
             childCount: 1,
+            name: 'Root1Level2A',
         })
         const root1Level2Child2 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg1],
             parentId: rootOrg1.id,
             childCount: 0,
+            name: 'Root1Level2B',
         })
         const root1Level3Child1 = testOrgUnit({
             level: 3,
             ancestors: [rootOrg1, root1Level2Child1],
             parentId: root1Level2Child1.id,
             childCount: 0,
+            name: 'Root1Level3A',
         })
         const root2Level3Child = testOrgUnit({
             level: 3,
             ancestors: [rootOrg2],
             parentId: rootOrg2.id,
             childCount: 0,
+            name: 'Root2Level3A',
         })
 
         const screen = await renderList({
@@ -192,24 +195,28 @@ describe('Organisation unit list', () => {
             ancestors: [rootOrg1],
             parentId: rootOrg1.id,
             childCount: 1,
+            name: 'Root1Level2A',
         })
         const root1Level2Child2 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg1],
             parentId: rootOrg1.id,
             childCount: 0,
+            name: 'Root1Level2B',
         })
         const root1Level3Child1 = testOrgUnit({
             level: 3,
             ancestors: [rootOrg1, root1Level2Child1],
             parentId: root1Level2Child1.id,
             childCount: 0,
+            name: 'Root1Level3A',
         })
         const root2Level3Child = testOrgUnit({
             level: 3,
             ancestors: [rootOrg2],
             parentId: rootOrg2.id,
             childCount: 0,
+            name: 'Root2Level3A',
         })
 
         const screen = await renderList({
@@ -228,7 +235,7 @@ describe('Organisation unit list', () => {
         const rootOrg2Row = tableRows[4]
         const rootOrg2RowExpandIcon =
             within(rootOrg2Row).getByTestId('row-expand-icon')
-        fireEvent.click(rootOrg2RowExpandIcon)
+        await userEvent.click(rootOrg2RowExpandIcon)
 
         const tableRowsRefreshed = await screen.findAllByTestId(
             'dhis2-uicore-datatablerow'
@@ -250,24 +257,28 @@ describe('Organisation unit list', () => {
             ancestors: [rootOrg1],
             parentId: rootOrg1.id,
             childCount: 1,
+            name: 'Root1Level2A',
         })
         const root1Level2Child2 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg1],
             parentId: rootOrg1.id,
             childCount: 0,
+            name: 'Root1Level2B',
         })
         const root1Level3Child1 = testOrgUnit({
             level: 3,
             ancestors: [rootOrg1, root1Level2Child1],
             parentId: root1Level2Child1.id,
             childCount: 0,
+            name: 'Root1Level3A',
         })
         const root2Level3Child = testOrgUnit({
             level: 3,
             ancestors: [rootOrg2],
             parentId: rootOrg2.id,
             childCount: 0,
+            name: 'Root2Level3A',
         })
 
         const screen = await renderList({
@@ -286,7 +297,7 @@ describe('Organisation unit list', () => {
         const root1Level2Child1Row = tableRows[2]
         const rootOrg2RowExpandIcon =
             within(root1Level2Child1Row).getByTestId('row-expand-icon')
-        fireEvent.click(rootOrg2RowExpandIcon)
+        await userEvent.click(rootOrg2RowExpandIcon)
 
         let tableRowsRefreshed: any = []
         await waitFor(() => {
@@ -330,7 +341,7 @@ describe('Organisation unit list', () => {
         const actionButton = within(tableRows[1]).getByTestId(
             'row-actions-menu-button'
         )
-        fireEvent.click(actionButton)
+        await userEvent.click(actionButton)
         const actionsMenu = screen.getByTestId('row-actions-menu')
         expect(actionsMenu).toBeVisible()
         expect(
@@ -356,7 +367,7 @@ describe('Organisation unit list', () => {
         const actionButton = within(tableRows[1]).getByTestId(
             'row-actions-menu-button'
         )
-        fireEvent.click(actionButton)
+        await userEvent.click(actionButton)
         const actionsMenu = screen.getByTestId('row-actions-menu')
         expect(actionsMenu).toBeVisible()
         expect(
@@ -372,12 +383,14 @@ describe('Organisation unit list', () => {
             parentId: rootOrg.id,
             childCount: 0,
             access: testAccess({ deleteAccess: true }),
+            name: 'ChildA',
         })
         const child2 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
+            name: 'ChildB',
         })
 
         const screen = await renderList({
@@ -392,17 +405,17 @@ describe('Organisation unit list', () => {
         const actionButton = within(tableRows[2]).getByTestId(
             'row-actions-menu-button'
         )
-        fireEvent.click(actionButton)
+        await userEvent.click(actionButton)
         const actionsMenu = screen.getByTestId('row-actions-menu')
         expect(actionsMenu).toBeVisible()
-        fireEvent.click(within(actionsMenu).getByText('Delete'))
+        await userEvent.click(within(actionsMenu).getByText('Delete'))
 
         const deleteConfirmationModal = await screen.findByTestId(
             'delete-confirmation-modal'
         )
         expect(deleteConfirmationModal).toBeVisible()
 
-        fireEvent.click(
+        await userEvent.click(
             within(deleteConfirmationModal).getByRole('button', {
                 name: 'Confirm deletion',
             })
@@ -419,6 +432,7 @@ describe('Organisation unit list', () => {
             level: 1,
             childCount: 2,
             access: testAccess({ deleteAccess: true }),
+            name: 'ARoot1',
         })
         const child1 = testOrgUnit({
             level: 2,
@@ -426,12 +440,14 @@ describe('Organisation unit list', () => {
             parentId: rootOrg.id,
             childCount: 0,
             access: testAccess({ deleteAccess: true }),
+            name: 'ChildA',
         })
         const child2 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
+            name: 'ChildB',
         })
 
         const screen = await renderList({
@@ -448,7 +464,7 @@ describe('Organisation unit list', () => {
         const actionButton = within(tableRows[2]).getByTestId(
             'row-actions-menu-button'
         )
-        fireEvent.click(actionButton)
+        await userEvent.click(actionButton)
         const actionsMenu = screen.getByTestId('row-actions-menu')
         expect(actionsMenu).toBeVisible()
         expect(
@@ -461,6 +477,7 @@ describe('Organisation unit list', () => {
             level: 1,
             childCount: 2,
             access: testAccess({ deleteAccess: true }),
+            name: 'ARoot1',
         })
         const child1 = testOrgUnit({
             level: 2,
@@ -468,12 +485,14 @@ describe('Organisation unit list', () => {
             parentId: rootOrg.id,
             childCount: 0,
             access: testAccess({ deleteAccess: true }),
+            name: 'ChildA',
         })
         const child2 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
+            name: 'ChildB',
         })
 
         const screen = await renderList({
@@ -503,12 +522,14 @@ describe('Organisation unit list', () => {
             parentId: rootOrg.id,
             childCount: 0,
             access: testAccess({ deleteAccess: true }),
+            name: 'ChildA',
         })
         const child2 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
+            name: 'ChildB',
         })
 
         const screen = await renderList({
@@ -523,10 +544,12 @@ describe('Organisation unit list', () => {
         const actionButton = within(tableRows[2]).getByTestId(
             'row-actions-menu-button'
         )
-        fireEvent.click(actionButton)
+        await userEvent.click(actionButton)
+
         const actionsMenu = screen.getByTestId('row-actions-menu')
         expect(actionsMenu).toBeVisible()
-        fireEvent.click(within(actionsMenu).getByText('Show details'))
+        await userEvent.click(within(actionsMenu).getByText('Show details'))
+
         const detailsPanel = await screen.findByTestId('details-panel')
         expect(detailsPanel).toBeVisible()
         expect(detailsPanel).toHaveTextContent(child1.displayName!)
@@ -566,13 +589,13 @@ describe('Organisation unit list', () => {
         expect(tableRows.length).toBe(4)
 
         const secondChildCheckBox = within(tableRows[3]).getByRole('checkbox')
-        fireEvent.click(secondChildCheckBox)
+        await userEvent.click(secondChildCheckBox)
 
         const toolbar = screen.getByTestId('dhis2-uicore-tabletoolbar')
         expect(toolbar).toBeVisible()
         expect(secondChildCheckBox).toBeChecked()
 
-        fireEvent.click(within(toolbar).getByText('Deselect all'))
+        await userEvent.click(within(toolbar).getByText('Deselect all'))
         expect(secondChildCheckBox).not.toBeChecked()
         expect(toolbar).not.toBeVisible()
     })
@@ -603,11 +626,11 @@ describe('Organisation unit list', () => {
 
         const rootRow = tableRows[1]
         const secondChildRow = tableRows[3]
-        fireEvent.click(within(rootRow).getByRole('checkbox'))
-        fireEvent.click(within(secondChildRow).getByRole('checkbox'))
+        await userEvent.click(within(rootRow).getByRole('checkbox'))
+        await userEvent.click(within(secondChildRow).getByRole('checkbox'))
 
         const toolbar = screen.getByTestId('dhis2-uicore-tabletoolbar')
-        fireEvent.click(within(toolbar).getByText('Download'))
+        await userEvent.click(within(toolbar).getByText('Download'))
 
         const downloadModal = await screen.findByTestId('download-modal')
         expect(downloadModal).toBeVisible()
