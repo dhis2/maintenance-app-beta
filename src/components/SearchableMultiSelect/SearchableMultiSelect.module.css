@@ -48,6 +48,7 @@
     padding: var(--spacers-dp16);
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
     background: var(--colors-white);
+    z-index: 1;
 }
 
 .searchInput {
