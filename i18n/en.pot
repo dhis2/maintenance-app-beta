@@ -5,14 +5,17 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-22T08:07:55.176Z\n"
-"PO-Revision-Date: 2025-01-22T08:07:55.176Z\n"
+"POT-Creation-Date: 2025-01-27T08:46:12.413Z\n"
+"PO-Revision-Date: 2025-01-27T08:46:12.413Z\n"
 
 msgid "schemas"
 msgstr "schemas"
 
 msgid "You do not have the authority to view this page."
 msgstr "You do not have the authority to view this page."
+
+msgid "You are missing the required authority ({{authority}}) to view this page."
+msgstr "You are missing the required authority ({{authority}}) to view this page."
 
 msgid "Section is not implemented yet"
 msgstr "Section is not implemented yet"
@@ -36,6 +39,9 @@ msgstr "The page you are looking for does not exist."
 msgid "New {{modelName}}"
 msgstr "New {{modelName}}"
 
+msgid "Merge {{modelName}}"
+msgstr "Merge {{modelName}}"
+
 msgid "Edit {{modelName}}"
 msgstr "Edit {{modelName}}"
 
@@ -51,8 +57,23 @@ msgstr "Overview"
 msgid "Search menu items"
 msgstr "Search menu items"
 
+msgid "All"
+msgstr "All"
+
+msgid "Positive"
+msgstr "Positive"
+
+msgid "Negative"
+msgstr "Negative"
+
+msgid "Outline"
+msgstr "Outline"
+
 msgid "Search icons"
 msgstr "Search icons"
+
+msgid "No icons match the search."
+msgstr "No icons match the search."
 
 msgid "Select"
 msgstr "Select"
@@ -63,14 +84,14 @@ msgstr "Remove icon"
 msgid "Cancel"
 msgstr "Cancel"
 
-msgid "Retry"
-msgstr "Retry"
-
-msgid "All"
-msgstr "All"
+msgid "Clear all"
+msgstr "Clear all"
 
 msgid "Filter options"
 msgstr "Filter options"
+
+msgid "Retry"
+msgstr "Retry"
 
 msgid "Save and close"
 msgstr "Save and close"
@@ -134,6 +155,32 @@ msgstr "Failed to load {{label}}"
 
 msgid "Failed to load"
 msgstr "Failed to load"
+
+msgid "Merging cannot be undone"
+msgstr "Merging cannot be undone"
+
+msgid "Confirmation code does not match"
+msgstr "Confirmation code does not match"
+
+msgid "Merge"
+msgstr "Merge"
+
+msgid "Merging {{count}} {{model}}..."
+msgid_plural "Merging {{count}} {{model}}..."
+msgstr[0] "Merging {{count}} {{model}}..."
+msgstr[1] "Merging {{count}} {{model}}..."
+
+msgid "Merging..."
+msgstr "Merging..."
+
+msgid "Merge complete"
+msgstr "Merge complete"
+
+msgid "Back to list"
+msgstr "Back to list"
+
+msgid "At least one source is required"
+msgstr "At least one source is required"
 
 msgid "Aggregation level(s)"
 msgstr "Aggregation level(s)"
@@ -410,6 +457,9 @@ msgstr "Manage View"
 
 msgid "{{number}} selected"
 msgstr "{{number}} selected"
+
+msgid "Merge..."
+msgstr "Merge..."
 
 msgid "Deselect all"
 msgstr "Deselect all"
@@ -1319,20 +1369,65 @@ msgstr "Configure which organisation units can collect data for this data set."
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
+msgid "Choose indicators to calculate and show in the data entry form."
+msgstr "Choose indicators to calculate and show in the data entry form."
+
+msgid "Available indicators"
+msgstr "Available indicators"
+
+msgid "Selected indicators"
+msgstr "Selected indicators"
+
+msgid "Search available indicators"
+msgstr "Search available indicators"
+
+msgid "Search selected indicators"
+msgstr "Search selected indicators"
+
+msgid "Available data elements"
+msgstr "Available data elements"
+
+msgid "Search available data elements"
+msgstr "Search available data elements"
+
+msgid "Search selected data elements"
+msgstr "Search selected data elements"
+
+msgid "Data entry form"
+msgstr "Data entry form"
+
+msgid "Configure which organisation units can collect data for this data set."
+msgstr "Configure which organisation units can collect data for this data set."
+
+msgid "Something went wrong"
+msgstr "Something went wrong"
+
 msgid "Configure data entry periods"
 msgstr "Configure data entry periods"
 
 msgid "Choose for what time periods data can be entered for this data set"
 msgstr "Choose for what time periods data can be entered for this data set"
 
+msgid "Allow data entry for future periods"
+msgstr "Allow data entry for future periods"
+
+msgid "Close data entry a certain number of days after period end (expiry days)"
+msgstr "Close data entry a certain number of days after period end (expiry days)"
+
 msgid "Set up the basic information for this data set."
 msgstr "Set up the basic information for this data set."
+
+msgid "Value should be bigger than 0"
+msgstr "Value should be bigger than 0"
 
 msgid "Validation and limitations"
 msgstr "Validation and limitations"
 
 msgid "Configure how data can and must be entered for this data"
 msgstr "Configure how data can and must be entered for this data"
+
+msgid "The number should not have decimals"
+msgstr "The number should not have decimals"
 
 msgid "Setup"
 msgstr "Setup"
@@ -1346,6 +1441,12 @@ msgstr "Data Elements"
 msgid "Periods"
 msgstr "Periods"
 
+msgid "Close data entry a certain number of days after period end"
+msgstr "Close data entry a certain number of days after period end"
+
+msgid "Close data entry after category option end date"
+msgstr "Close data entry after category option end date"
+
 msgid "Organisation Units"
 msgstr "Organisation Units"
 
@@ -1355,8 +1456,75 @@ msgstr "Form"
 msgid "Advanced"
 msgstr "Advanced"
 
+msgid "Configure indicator type merge"
+msgstr "Configure indicator type merge"
+
+msgid "The indicator types merge operation is complete."
+msgstr "The indicator types merge operation is complete."
+
+msgid "All selected indicator types were merged successfully."
+msgstr "All selected indicator types were merged successfully."
+
 msgid "Set up the basic information for this Indicator Type."
 msgstr "Set up the basic information for this Indicator Type."
+
+msgid ""
+"The merge operation will merge the source indicator types into\n"
+"                the target indicator type. One or many source indicator "
+"types\n"
+"                can be specified"
+msgstr ""
+"The merge operation will merge the source indicator types into\n"
+"                the target indicator type. One or many source indicator "
+"types\n"
+"                can be specified"
+
+msgid ""
+"Only one target should be specified. The merge operation will\n"
+"                transfer all of the indicator metadata associations to the\n"
+"                source indicator types over to the target indicator type."
+msgstr ""
+"Only one target should be specified. The merge operation will\n"
+"                transfer all of the indicator metadata associations to the\n"
+"                source indicator types over to the target indicator type."
+
+msgid "Indicator types to be merged (source)"
+msgstr "Indicator types to be merged (source)"
+
+msgid "Select indicator types to merge"
+msgstr "Select indicator types to merge"
+
+msgid "Indicator type to merge into (target)"
+msgstr "Indicator type to merge into (target)"
+
+msgid "Select indicator type to merge into"
+msgstr "Select indicator type to merge into"
+
+msgid "Merge settings"
+msgstr "Merge settings"
+
+msgid ""
+"What should happen to the source indicator types after the merge is "
+"complete?"
+msgstr ""
+"What should happen to the source indicator types after the merge is "
+"complete?"
+
+msgid "Keep {{ count }} source indicator types"
+msgid_plural "Keep {{ count }} source indicator types"
+msgstr[0] "Keep {{ count }} source indicator types"
+msgstr[1] "Keep {{ count }} source indicator types"
+
+msgid "Delete {{ count }} source indicator types"
+msgid_plural "Delete {{ count }} source indicator types"
+msgstr[0] "Delete {{ count }} source indicator types"
+msgstr[1] "Delete {{ count }} source indicator types"
+
+msgid "Conflicting factors"
+msgstr "Conflicting factors"
+
+msgid "It is not recommended to merge indicator types with different factors."
+msgstr "It is not recommended to merge indicator types with different factors."
 
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."
@@ -1378,6 +1546,9 @@ msgstr "Filter available organisation unit groups"
 
 msgid "Filter selected organisation unit groups"
 msgstr "Filter selected organisation unit groups"
+
+msgid "Set up the basic information for this organisational unit group."
+msgstr "Set up the basic information for this organisational unit group."
 
 msgid "Longitude"
 msgstr "Longitude"

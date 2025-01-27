@@ -1,3 +1,38 @@
+# [0.27.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.26.2...v0.27.0) (2025-01-27)
+
+
+### Features
+
+* datasets data fields [DHIS2-18543] ([#498](https://github.com/dhis2/maintenance-app-beta/issues/498)) ([ed440ca](https://github.com/dhis2/maintenance-app-beta/commit/ed440ca9ec10b256c345d5ec772e4cb864e1d48d))
+
+## [0.26.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.26.1...v0.26.2) (2025-01-27)
+
+
+### Bug Fixes
+
+* various bugs in org unit group add form ([#506](https://github.com/dhis2/maintenance-app-beta/issues/506)) ([5f5988b](https://github.com/dhis2/maintenance-app-beta/commit/5f5988b3b05730caa413dc5b3f2208bb716352ec))
+
+## [0.26.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.26.0...v0.26.1) (2025-01-27)
+
+
+### Bug Fixes
+
+* open periods after category option end date should not allow decimals ([#505](https://github.com/dhis2/maintenance-app-beta/issues/505)) ([cdf9197](https://github.com/dhis2/maintenance-app-beta/commit/cdf91978166c664c8b8d15c874acfd6d0884d9e6))
+
+# [0.26.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.25.1...v0.26.0) (2025-01-27)
+
+
+### Features
+
+* data set period fields ([#496](https://github.com/dhis2/maintenance-app-beta/issues/496)) ([328c206](https://github.com/dhis2/maintenance-app-beta/commit/328c206b16fca0178df58f61bbac9e91d576cc93))
+
+## [0.25.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.25.0...v0.25.1) (2025-01-24)
+
+
+### Reverts
+
+* Revert "feat: implement indicator merge" ([d8b9b64](https://github.com/dhis2/maintenance-app-beta/commit/d8b9b6433d42acc2c11c1fd5c7feb1cfb3abb2b6))
+
 # [0.25.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.24.1...v0.25.0) (2025-01-24)
 
 
