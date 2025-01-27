@@ -33,3 +33,21 @@ export const IgnoreApprovalFilter = () => {
         />
     )
 }
+
+export const CompulsoryFilter = () => {
+    return (
+        <BooleanFilter
+            filterKey="compulsory"
+            label={getTranslatedProperty('compulsory')}
+        />
+    )
+}
+
+export const DataDimensionFilter = () => {
+    return (
+        <BooleanFilter
+            filterKey="dataDimension"
+            label={getTranslatedProperty('dataDimension')}
+        />
+    )
+}
