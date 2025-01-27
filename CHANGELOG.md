@@ -1,3 +1,10 @@
+# [0.27.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.26.2...v0.27.0) (2025-01-27)
+
+
+### Features
+
+* datasets data fields [DHIS2-18543] ([#498](https://github.com/dhis2/maintenance-app-beta/issues/498)) ([ed440ca](https://github.com/dhis2/maintenance-app-beta/commit/ed440ca9ec10b256c345d5ec772e4cb864e1d48d))
+
 ## [0.26.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.26.1...v0.26.2) (2025-01-27)
 
 
