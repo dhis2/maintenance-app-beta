@@ -1,3 +1,10 @@
+# [0.26.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.25.1...v0.26.0) (2025-01-27)
+
+
+### Features
+
+* data set period fields ([#496](https://github.com/dhis2/maintenance-app-beta/issues/496)) ([328c206](https://github.com/dhis2/maintenance-app-beta/commit/328c206b16fca0178df58f61bbac9e91d576cc93))
+
 ## [0.25.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.25.0...v0.25.1) (2025-01-24)
 
 
