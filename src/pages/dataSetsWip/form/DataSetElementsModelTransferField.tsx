@@ -12,10 +12,9 @@ import {
 import React, { useState } from 'react'
 import { useField, useForm } from 'react-final-form'
 import { ModelTransfer } from '../../../components'
-import { ModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { DisplayableModel } from '../../../types/models'
-import css from './DataSetElementModelTransfer.module.css'
 import { CategoryComboSelect } from './CategoryComboField'
+import css from './DataSetElementModelTransfer.module.css'
 
 type DataElementWithCategoryCombo = {
     id: string
