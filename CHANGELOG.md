@@ -1,3 +1,10 @@
+## [0.26.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.26.1...v0.26.2) (2025-01-27)
+
+
+### Bug Fixes
+
+* various bugs in org unit group add form ([#506](https://github.com/dhis2/maintenance-app-beta/issues/506)) ([5f5988b](https://github.com/dhis2/maintenance-app-beta/commit/5f5988b3b05730caa413dc5b3f2208bb716352ec))
+
 ## [0.26.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.26.0...v0.26.1) (2025-01-27)
 
 
