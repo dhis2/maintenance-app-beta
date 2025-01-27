@@ -1,3 +1,24 @@
+# [0.26.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.25.1...v0.26.0) (2025-01-27)
+
+
+### Features
+
+* data set period fields ([#496](https://github.com/dhis2/maintenance-app-beta/issues/496)) ([328c206](https://github.com/dhis2/maintenance-app-beta/commit/328c206b16fca0178df58f61bbac9e91d576cc93))
+
+## [0.25.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.25.0...v0.25.1) (2025-01-24)
+
+
+### Reverts
+
+* Revert "feat: implement indicator merge" ([d8b9b64](https://github.com/dhis2/maintenance-app-beta/commit/d8b9b6433d42acc2c11c1fd5c7feb1cfb3abb2b6))
+
+# [0.25.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.24.1...v0.25.0) (2025-01-24)
+
+
+### Features
+
+* implement indicator merge ([53781e3](https://github.com/dhis2/maintenance-app-beta/commit/53781e3b0389f341a0f2709bc5384f9a1e4234ff))
+
 ## [0.24.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.24.0...v0.24.1) (2025-01-23)
 
 
