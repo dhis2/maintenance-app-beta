@@ -26,7 +26,10 @@ export const dataSetFormSchema = identifiable
             .number()
             .int({ message: i18n.t('The number should not have decimals') }),
         expiryDays: z.number(),
-        openPeriodsAfterCoEndDate: z.number().optional(),
+        openPeriodsAfterCoEndDate: z
+            .number()
+            .int({ message: i18n.t('The number should not have decimals') })
+            .optional(),
     })
 
 export const initialValues = getDefaults(dataSetFormSchema)

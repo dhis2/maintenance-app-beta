@@ -40,7 +40,8 @@ export const PeriodsContents = ({ name }: { name: string }) => {
                     label={i18n.t(
                         'Close data entry a certain number of days after period end (expiry days)'
                     )}
-                    uncheckedValue={0.0}
+                    uncheckedValue={0}
+                    min={'1'}
                 />
             </StandardFormField>
             {formValues?.categoryCombo.id !== DEFAULT_CATEGORY_COMBO.id && (
