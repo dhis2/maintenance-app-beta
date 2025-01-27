@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 import {
     DEFAULT_CATEGORY_COMBO,
@@ -34,8 +35,18 @@ export const dataSetFormSchema = identifiable
             .default({ ...DEFAULT_CATEGORY_COMBO }),
         indicators: referenceCollection.default([]),
         periodType: z.string().default('Monthly'),
+        openFuturePeriods: z
+            .number()
+            .int({ message: i18n.t('The number should not have decimals') }),
+        expiryDays: z.number(),
+        openPeriodsAfterCoEndDate: z
+            .number()
+            .int({ message: i18n.t('The number should not have decimals') })
+            .optional(),
     })
 
 export const initialValues = getDefaults(dataSetFormSchema)
+
+export type DataSetFormValues = typeof initialValues
 
 export const validate = createFormValidate(dataSetFormSchema)

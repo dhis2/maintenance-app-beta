@@ -24,15 +24,17 @@ export const Component = () => {
             >
                 {({ handleSubmit }) => {
                     return (
-                        <SectionedFormLayout
-                            sidebar={<DefaultSectionedFormSidebar />}
-                            footer={<DefaultSectionedFormFooter />}
-                        >
-                            <form onSubmit={handleSubmit}>
-                                <DataSetFormContents />
-                            </form>
-                            <SectionedFormErrorNotice />
-                        </SectionedFormLayout>
+                        <>
+                            <SectionedFormLayout
+                                sidebar={<DefaultSectionedFormSidebar />}
+                                footer={<DefaultSectionedFormFooter />}
+                            >
+                                <form onSubmit={handleSubmit}>
+                                    <DataSetFormContents />
+                                </form>
+                                <SectionedFormErrorNotice />
+                            </SectionedFormLayout>
+                        </>
                     )
                 }}
             </FormBase>

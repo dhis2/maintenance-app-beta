@@ -54,7 +54,6 @@ export const Layout = () => {
     // hide the sidebar if any matched route specifies it
     const hideSidebar = matches.some((match) => match.handle?.hideSidebar)
     const showFooter = matches.some((match) => match.handle?.showFooter)
-
     return (
         <SidebarLayout hideSidebar={hideSidebar} showFooter={showFooter}>
             <Outlet />

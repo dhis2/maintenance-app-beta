@@ -3,6 +3,7 @@ import type { Section } from '../../lib'
 export const routePaths = {
     overviewRoot: 'overview',
     sectionNew: 'new',
+    merge: 'merge',
 } as const
 
 export const getOverviewPath = (section: Section) => {

@@ -4,7 +4,7 @@ import { canEditModel, canDeleteModel } from '../../../lib/models/access'
 import { TooltipWrapper } from '../../tooltip'
 import { ListActions, ActionEdit, ActionMore } from './SectionListActions'
 
-type DefaultListActionProps = {
+export type DefaultListActionProps = {
     model: BaseListModel
     onShowDetailsClick: (model: BaseListModel) => void
     onOpenSharingClick: (id: string) => void

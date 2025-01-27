@@ -1,3 +1,55 @@
+## [0.26.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.26.0...v0.26.1) (2025-01-27)
+
+
+### Bug Fixes
+
+* open periods after category option end date should not allow decimals ([#505](https://github.com/dhis2/maintenance-app-beta/issues/505)) ([cdf9197](https://github.com/dhis2/maintenance-app-beta/commit/cdf91978166c664c8b8d15c874acfd6d0884d9e6))
+
+# [0.26.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.25.1...v0.26.0) (2025-01-27)
+
+
+### Features
+
+* data set period fields ([#496](https://github.com/dhis2/maintenance-app-beta/issues/496)) ([328c206](https://github.com/dhis2/maintenance-app-beta/commit/328c206b16fca0178df58f61bbac9e91d576cc93))
+
+## [0.25.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.25.0...v0.25.1) (2025-01-24)
+
+
+### Reverts
+
+* Revert "feat: implement indicator merge" ([d8b9b64](https://github.com/dhis2/maintenance-app-beta/commit/d8b9b6433d42acc2c11c1fd5c7feb1cfb3abb2b6))
+
+# [0.25.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.24.1...v0.25.0) (2025-01-24)
+
+
+### Features
+
+* implement indicator merge ([53781e3](https://github.com/dhis2/maintenance-app-beta/commit/53781e3b0389f341a0f2709bc5384f9a1e4234ff))
+
+## [0.24.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.24.0...v0.24.1) (2025-01-23)
+
+
+### Bug Fixes
+
+* geometry types to match case ([#501](https://github.com/dhis2/maintenance-app-beta/issues/501)) ([acde49c](https://github.com/dhis2/maintenance-app-beta/commit/acde49c0fdc705cdbc3abd5ec1675f257cb7ad7c))
+
+# [0.24.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.23.1...v0.24.0) (2025-01-22)
+
+
+### Bug Fixes
+
+* remove J2ME PARSER ([#500](https://github.com/dhis2/maintenance-app-beta/issues/500)) [skip release] ([e42c830](https://github.com/dhis2/maintenance-app-beta/commit/e42c830106bdbd7a6642fc97be85192c9759f192))
+* **icons:** update icons picker to support paginated api ([#485](https://github.com/dhis2/maintenance-app-beta/issues/485)) [skip release] ([4668167](https://github.com/dhis2/maintenance-app-beta/commit/4668167dc4364c6fc15c949167a2f2030694fb3f))
+* **organisationUnit:** selected org units update according to input.value [skip release] ([#493](https://github.com/dhis2/maintenance-app-beta/issues/493)) ([2562297](https://github.com/dhis2/maintenance-app-beta/commit/256229743beaae59d7b4c7cbcfd56ee222108296))
+
+
+### Features
+
+* implements actions for cat option combos separately ([#499](https://github.com/dhis2/maintenance-app-beta/issues/499)) ([9b11c57](https://github.com/dhis2/maintenance-app-beta/commit/9b11c57f9980750250514da3c6abf938c375e26a))
+* **merge:** indicator types merge ([#455](https://github.com/dhis2/maintenance-app-beta/issues/455)) [skip release] ([b3e80d6](https://github.com/dhis2/maintenance-app-beta/commit/b3e80d6d0e3adf0cdd5752f93fcc85d72853e8b9))
+* org unit group forms ([#479](https://github.com/dhis2/maintenance-app-beta/issues/479)) [skip release] ([b899bdd](https://github.com/dhis2/maintenance-app-beta/commit/b899bddd96337fb825b2f674df14ace5fb955109))
+* split data sets form into multiple components ([#495](https://github.com/dhis2/maintenance-app-beta/issues/495)) [skip release] ([4f412b4](https://github.com/dhis2/maintenance-app-beta/commit/4f412b43998b77c1bc1830f54cabddecb182df77))
+
 ## [0.23.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.23.0...v0.23.1) (2025-01-16)
 
 

@@ -58,6 +58,22 @@ export const DataSetFormDescriptor = {
                     name: 'periodType',
                     label: i18n.t('Period type'),
                 },
+                {
+                    name: 'openFuturePeriods',
+                    label: i18n.t('Allow data entry for future periods'),
+                },
+                {
+                    name: 'expiryDays',
+                    label: i18n.t(
+                        'Close data entry a certain number of days after period end'
+                    ),
+                },
+                {
+                    name: 'openPeriodsAfterCoEndDate',
+                    label: i18n.t(
+                        'Close data entry after category option end date'
+                    ),
+                },
             ],
         },
         { name: 'validation', label: i18n.t('Validation'), fields: [] },

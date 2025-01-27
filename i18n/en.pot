@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-22T07:51:32.489Z\n"
-"PO-Revision-Date: 2025-01-22T07:51:32.489Z\n"
+"POT-Creation-Date: 2025-01-22T08:07:55.176Z\n"
+"PO-Revision-Date: 2025-01-22T08:07:55.176Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1309,6 +1309,15 @@ msgstr "Data set disaggregation"
 
 msgid "Choose an optional category combination to disaggregate the entire data set."
 msgstr "Choose an optional category combination to disaggregate the entire data set."
+
+msgid "Data entry form"
+msgstr "Data entry form"
+
+msgid "Configure which organisation units can collect data for this data set."
+msgstr "Configure which organisation units can collect data for this data set."
+
+msgid "Something went wrong"
+msgstr "Something went wrong"
 
 msgid "Choose indicators to calculate and show in the data entry form."
 msgstr "Choose indicators to calculate and show in the data entry form."
