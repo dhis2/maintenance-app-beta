@@ -7,8 +7,13 @@ import {
 } from '../../../lib'
 import { createFormValidate } from '../../../lib/form/validate'
 
-const { withAttributeValues, identifiable, style, referenceCollection } =
-    modelFormSchemas
+const {
+    withAttributeValues,
+    identifiable,
+    style,
+    referenceCollection,
+    modelReference,
+} = modelFormSchemas
 
 export const dataSetFormSchema = identifiable
     .merge(withAttributeValues)
@@ -16,11 +21,19 @@ export const dataSetFormSchema = identifiable
         id: z.string().optional(),
         code: z.string().trim().optional(),
         description: z.string().trim().max(2000).optional(),
-        style,
-        dataElements: referenceCollection.default([]),
+        style: style.optional(),
+        dataSetElements: z
+            .array(
+                z.object({
+                    dataElement: modelReference,
+                    categoryCombo: modelReference.optional(),
+                })
+            )
+            .default([]),
         categoryCombo: z
             .object({ id: z.string(), displayName: z.string() })
             .default({ ...DEFAULT_CATEGORY_COMBO }),
+        indicators: referenceCollection.default([]),
         periodType: z.string().default('Monthly'),
         openFuturePeriods: z
             .number()

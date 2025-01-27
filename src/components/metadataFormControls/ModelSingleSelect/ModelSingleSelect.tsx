@@ -128,7 +128,7 @@ export const ModelSingleSelect = <
             showEndLoader={!!queryResult.hasNextPage}
             onEndReached={queryResult.fetchNextPage}
             loading={queryResult.isLoading}
-            error={queryResult.error as string | undefined}
+            error={queryResult.error?.toString()}
         />
     )
 }

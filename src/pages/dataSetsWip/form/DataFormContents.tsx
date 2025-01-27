@@ -8,6 +8,7 @@ import {
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
 import { CategoryComboField } from './CategoryComboField'
+import { DataSetElementsModelTransferField } from './DataSetElementsModelTransferField'
 
 export const DataFormContents = ({ name }: { name: string }) => {
     return (
@@ -19,14 +20,8 @@ export const DataFormContents = ({ name }: { name: string }) => {
                 {i18n.t('Choose what data is collected for this data set.')}
             </StandardFormSectionDescription>
             <StandardFormField>
-                <ModelTransferField
-                    name={'dataElements'}
-                    query={{
-                        resource: 'dataElements',
-                    }}
-                />
+                <DataSetElementsModelTransferField />
             </StandardFormField>
-            <div style={{ height: 24 }} />
             <StandardFormSectionTitle>
                 {i18n.t('Data set disaggregation')}
             </StandardFormSectionTitle>
@@ -35,7 +30,31 @@ export const DataFormContents = ({ name }: { name: string }) => {
                     'Choose an optional category combination to disaggregate the entire data set.'
                 )}
             </StandardFormSectionDescription>
-            <CategoryComboField />
+            <StandardFormField>
+                <CategoryComboField />
+            </StandardFormField>
+            <StandardFormSectionTitle>
+                {i18n.t('Indicators')}
+            </StandardFormSectionTitle>
+            <StandardFormSectionDescription>
+                {i18n.t(
+                    'Choose indicators to calculate and show in the data entry form.'
+                )}
+            </StandardFormSectionDescription>
+            <StandardFormField>
+                <ModelTransferField
+                    name={'indicators'}
+                    query={{
+                        resource: 'indicators',
+                    }}
+                    leftHeader={i18n.t('Available indicators')}
+                    rightHeader={i18n.t('Selected indicators')}
+                    filterPlaceholder={i18n.t('Search available indicators')}
+                    filterPlaceholderPicked={i18n.t(
+                        'Search selected indicators'
+                    )}
+                />
+            </StandardFormField>
         </SectionedFormSection>
     )
 }

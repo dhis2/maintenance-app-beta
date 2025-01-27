@@ -1,0 +1,42 @@
+.modelTransferField {
+    width: 100%;
+}
+
+.modelTransferFooter {
+    padding: var(--spacers-dp8) 0;
+}
+
+.modelTransferHeader {
+    padding-block: var(--spacers-dp8);
+    padding-inline: var(--spacers-dp4);
+}
+
+.modalContentWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp16);
+    /* space for scroll-bar (would overlap selects) */
+    padding: var(--spacers-dp8);
+}
+
+.fieldWrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacers-dp16);
+}
+
+.categoryComboSelect {
+    flex-grow: 1;
+}
+
+.dataElementWrapper {
+    width: 50%;
+}
+
+p.transferOptionCatComboText {
+    color: rgba(160, 160, 160);
+}
+
+:global(.highlighted) p.transferOptionCatComboText {
+    color: rgba(220, 220, 220);
+}
