@@ -8,8 +8,8 @@ import {
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
 import { DEFAULT_CATEGORY_COMBO } from '../../../lib'
-import { ToggledNumberInput } from './ToggledNumberInput'
 import { PeriodTypeField } from './PeriodTypeField'
+import { ToggledNumberInput } from './ToggledNumberInput'
 
 export const PeriodsContents = ({ name }: { name: string }) => {
     const formValues = useFormState().values
