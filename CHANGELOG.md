@@ -1,3 +1,10 @@
+## [0.27.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.27.0...v0.27.1) (2025-01-27)
+
+
+### Bug Fixes
+
+* **list:** add additional list filters to dataElementGroup/Set ([#452](https://github.com/dhis2/maintenance-app-beta/issues/452)) ([5abf1f6](https://github.com/dhis2/maintenance-app-beta/commit/5abf1f6344f7bb372390d6c54122b1332df23bfa))
+
 # [0.27.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.26.2...v0.27.0) (2025-01-27)
 
 
