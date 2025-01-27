@@ -43,6 +43,11 @@ export const dataSetFormSchema = identifiable
             .number()
             .int({ message: i18n.t('The number should not have decimals') })
             .optional(),
+        validCompleteOnly: z.boolean().default(false),
+        noValueRequiresComment: z.boolean().default(false),
+        fieldCombinationRequired: z.boolean().default(false),
+        compulsoryFieldsCompleteOnly: z.boolean().default(false),
+        workflow: z.object({ id: z.string() }).optional(),
     })
 
 export const initialValues = getDefaults(dataSetFormSchema)

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-27T08:46:12.413Z\n"
-"PO-Revision-Date: 2025-01-27T08:46:12.413Z\n"
+"POT-Creation-Date: 2025-01-27T14:34:59.887Z\n"
+"PO-Revision-Date: 2025-01-27T14:34:59.887Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1348,6 +1348,9 @@ msgstr "Advanced options"
 msgid "These options are used for advanced data set configurations."
 msgstr "These options are used for advanced data set configurations."
 
+msgid "Approval workflow"
+msgstr "Approval workflow"
+
 msgid "Configure data elements"
 msgstr "Configure data elements"
 
@@ -1359,15 +1362,6 @@ msgstr "Data set disaggregation"
 
 msgid "Choose an optional category combination to disaggregate the entire data set."
 msgstr "Choose an optional category combination to disaggregate the entire data set."
-
-msgid "Data entry form"
-msgstr "Data entry form"
-
-msgid "Configure which organisation units can collect data for this data set."
-msgstr "Configure which organisation units can collect data for this data set."
-
-msgid "Something went wrong"
-msgstr "Something went wrong"
 
 msgid "Choose indicators to calculate and show in the data entry form."
 msgstr "Choose indicators to calculate and show in the data entry form."
@@ -1392,6 +1386,18 @@ msgstr "Search available data elements"
 
 msgid "Search selected data elements"
 msgstr "Search selected data elements"
+
+msgid "Custom disaggregation"
+msgstr "Custom disaggregation"
+
+msgid "Override data element category combination"
+msgstr "Override data element category combination"
+
+msgid "No data elements selected"
+msgstr "No data elements selected"
+
+msgid "Close"
+msgstr "Close"
 
 msgid "Data entry form"
 msgstr "Data entry form"
@@ -1425,6 +1431,22 @@ msgstr "Validation and limitations"
 
 msgid "Configure how data can and must be entered for this data"
 msgstr "Configure how data can and must be entered for this data"
+
+msgid "Completing a data set requires passing validation"
+msgstr "Completing a data set requires passing validation"
+
+msgid "Completing a data set requires all empty values to have a comment"
+msgstr "Completing a data set requires all empty values to have a comment"
+
+msgid "Completing a data set requires compulsory field to have a value"
+msgstr "Completing a data set requires compulsory field to have a value"
+
+msgid ""
+"Data elements with category combinations require all fields to have a value "
+"if one has a value"
+msgstr ""
+"Data elements with category combinations require all fields to have a value "
+"if one has a value"
 
 msgid "The number should not have decimals"
 msgstr "The number should not have decimals"
