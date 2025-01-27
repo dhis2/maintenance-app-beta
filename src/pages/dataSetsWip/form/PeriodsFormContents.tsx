@@ -50,7 +50,8 @@ export const PeriodsContents = ({ name }: { name: string }) => {
                         label={i18n.t(
                             `Close data entry after ${formValues?.categoryCombo.displayName.toLowerCase()} category option end date (if category option exist and has end date)`
                         )}
-                        uncheckedValue={0.0}
+                        uncheckedValue={0}
+                        min={'1'}
                     />
                 </StandardFormField>
             )}
