@@ -1,3 +1,10 @@
+## [0.26.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.26.0...v0.26.1) (2025-01-27)
+
+
+### Bug Fixes
+
+* open periods after category option end date should not allow decimals ([#505](https://github.com/dhis2/maintenance-app-beta/issues/505)) ([cdf9197](https://github.com/dhis2/maintenance-app-beta/commit/cdf91978166c664c8b8d15c874acfd6d0884d9e6))
+
 # [0.26.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.25.1...v0.26.0) (2025-01-27)
 
 
