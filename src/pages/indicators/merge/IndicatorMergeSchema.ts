@@ -7,7 +7,6 @@ const indicatorSchema = z.object({
     id: z.string(),
     displayName: z.string(),
     name: z.string(),
-    factor: z.number().optional(),
 })
 
 export const mergeFormSchema = mergeFormSchemaBase
