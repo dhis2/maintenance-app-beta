@@ -1,5 +1,5 @@
-import { useMemo } from 'react'
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
+import { useMemo } from 'react'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PagedResponse } from './../../types/generated/utility'
 import { ResourceQuery } from './../../types/query'

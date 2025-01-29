@@ -1,5 +1,5 @@
-import { useMemo } from 'react'
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { useMemo } from 'react'
 import { PlainResourceQuery } from '../../types'
 import {
     PagedResponse,
