@@ -11,6 +11,7 @@ import classes from './OrganisationUnitField.module.css'
 
 type OrganisationUnitFieldProps = {
     name?: string
+    label?: string
     singleSelection?: boolean
     onChange?: (orgUnits: OrganisationUnitFormValue[]) => void
 }
@@ -24,6 +25,7 @@ export type OrganisationUnitFormValue = {
 export const OrganisationUnitField = ({
     name,
     onChange,
+    label,
     singleSelection = false,
 }: OrganisationUnitFieldProps) => {
     const { input, meta } = useField<
@@ -63,7 +65,7 @@ export const OrganisationUnitField = ({
 
     return (
         <Field
-            label={i18n.t('Select organisation units')}
+            label={label ?? i18n.t('Select organisation units')}
             error={meta.touched && meta.error}
             validationText={meta.touched && meta.error}
         >
