@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-23T13:15:58.991Z\n"
-"PO-Revision-Date: 2025-01-23T13:15:58.991Z\n"
+"POT-Creation-Date: 2025-01-27T08:46:12.413Z\n"
+"PO-Revision-Date: 2025-01-27T08:46:12.413Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -362,6 +362,15 @@ msgstr "Type to filter options"
 msgid "No matches"
 msgstr "No matches"
 
+msgid "Data element"
+msgstr "Data element"
+
+msgid "Data element group"
+msgstr "Data element group"
+
+msgid "Data element group set"
+msgstr "Data element group set"
+
 msgid "Data set"
 msgstr "Data set"
 
@@ -530,20 +539,11 @@ msgstr "Category option group set"
 msgid "Category option group sets"
 msgstr "Category option group sets"
 
-msgid "Data element"
-msgstr "Data element"
-
 msgid "Data elements"
 msgstr "Data elements"
 
-msgid "Data element group"
-msgstr "Data element group"
-
 msgid "Data element groups"
 msgstr "Data element groups"
-
-msgid "Data element group set"
-msgstr "Data element group set"
 
 msgid "Data element group sets"
 msgstr "Data element group sets"
@@ -983,35 +983,41 @@ msgstr "Yearly"
 msgid "Aggregation type"
 msgstr "Aggregation type"
 
+msgid "Compulsory"
+msgstr "Compulsory"
+
+msgid "Data dimension"
+msgstr "Data dimension"
+
+msgid "Data dimension type"
+msgstr "Data dimension type"
+
+msgid "Domain type"
+msgstr "Domain type"
+
 msgid "Favorite"
 msgstr "Favorite"
 
 msgid "Form name"
 msgstr "Form name"
 
-msgid "Domain type"
-msgstr "Domain type"
-
 msgid "Form type"
 msgstr "Form type"
+
+msgid "Ignore data approval"
+msgstr "Ignore data approval"
 
 msgid "Sharing"
 msgstr "Sharing"
 
-msgid "Value type"
-msgstr "Value type"
-
 msgid "Owner"
 msgstr "Owner"
 
+msgid "Value type"
+msgstr "Value type"
+
 msgid "Zero is significant"
 msgstr "Zero is significant"
-
-msgid "Data dimension type"
-msgstr "Data dimension type"
-
-msgid "Ignore data approval"
-msgstr "Ignore data approval"
 
 msgid "This field requires a unique value, please choose another one"
 msgstr "This field requires a unique value, please choose another one"
@@ -1186,15 +1192,6 @@ msgstr "Choose how this category option  will be used to capture and analyze dat
 msgid "Choose the options to include in this category option group."
 msgstr "Choose the options to include in this category option group."
 
-msgid "Configure category options merge"
-msgstr "Configure category options merge"
-
-msgid "The category options merge operation is complete."
-msgstr "The category options merge operation is complete."
-
-msgid "All selected category options were merged successfully."
-msgstr "All selected category options were merged successfully."
-
 msgid "Set up the basic information for this category option."
 msgstr "Set up the basic information for this category option."
 
@@ -1217,71 +1214,11 @@ msgstr "Form name should not exceed 230 characters"
 msgid "End date should be after start date"
 msgstr "End date should be after start date"
 
-msgid ""
-"The merge operation will merge the source category options into\n"
-"                the target category options. One or many source category "
-"options\n"
-"                can be specified"
-msgstr ""
-"The merge operation will merge the source category options into\n"
-"                the target category options. One or many source category "
-"options\n"
-"                can be specified"
-
-msgid ""
-"Only one target should be specified. The merge operation will\n"
-"                transfer all of the category options metadata associations "
-"to the\n"
-"                source category option  over to the target category option."
-msgstr ""
-"Only one target should be specified. The merge operation will\n"
-"                transfer all of the category options metadata associations "
-"to the\n"
-"                source category option  over to the target category option."
-
-msgid "Category options to be merged (source)"
-msgstr "Category options to be merged (source)"
-
-msgid "Select category options to merge"
-msgstr "Select category options to merge"
-
-msgid "Category options to merge into (target)"
-msgstr "Category options to merge into (target)"
-
-msgid "Select category options to merge into"
-msgstr "Select category options to merge into"
-
-msgid "Merge settings"
-msgstr "Merge settings"
-
-msgid ""
-"What should happen to the source category options after the merge is "
-"complete?"
-msgstr ""
-"What should happen to the source category options after the merge is "
-"complete?"
-
-msgid "Keep {{ count }} source category options"
-msgid_plural "Keep {{ count }} source category options"
-msgstr[0] "Keep {{ count }} source category options"
-msgstr[1] "Keep {{ count }} source category options"
-
-msgid "Delete {{ count }} source category options"
-msgid_plural "Delete {{ count }} source category options"
-msgstr[0] "Delete {{ count }} source category options"
-msgstr[1] "Delete {{ count }} source category options"
-
 msgid "Custom attributes"
 msgstr "Custom attributes"
 
 msgid "Create data element group"
 msgstr "Create data element group"
-
-msgid "Compulsory"
-msgstr "Compulsory"
-
-msgid "Data dimension"
-msgstr "Data dimension"
 
 msgid "Selected data element groups"
 msgstr "Selected data element groups"
@@ -1432,20 +1369,65 @@ msgstr "Configure which organisation units can collect data for this data set."
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
+msgid "Choose indicators to calculate and show in the data entry form."
+msgstr "Choose indicators to calculate and show in the data entry form."
+
+msgid "Available indicators"
+msgstr "Available indicators"
+
+msgid "Selected indicators"
+msgstr "Selected indicators"
+
+msgid "Search available indicators"
+msgstr "Search available indicators"
+
+msgid "Search selected indicators"
+msgstr "Search selected indicators"
+
+msgid "Available data elements"
+msgstr "Available data elements"
+
+msgid "Search available data elements"
+msgstr "Search available data elements"
+
+msgid "Search selected data elements"
+msgstr "Search selected data elements"
+
+msgid "Data entry form"
+msgstr "Data entry form"
+
+msgid "Configure which organisation units can collect data for this data set."
+msgstr "Configure which organisation units can collect data for this data set."
+
+msgid "Something went wrong"
+msgstr "Something went wrong"
+
 msgid "Configure data entry periods"
 msgstr "Configure data entry periods"
 
 msgid "Choose for what time periods data can be entered for this data set"
 msgstr "Choose for what time periods data can be entered for this data set"
 
+msgid "Allow data entry for future periods"
+msgstr "Allow data entry for future periods"
+
+msgid "Close data entry a certain number of days after period end (expiry days)"
+msgstr "Close data entry a certain number of days after period end (expiry days)"
+
 msgid "Set up the basic information for this data set."
 msgstr "Set up the basic information for this data set."
+
+msgid "Value should be bigger than 0"
+msgstr "Value should be bigger than 0"
 
 msgid "Validation and limitations"
 msgstr "Validation and limitations"
 
 msgid "Configure how data can and must be entered for this data"
 msgstr "Configure how data can and must be entered for this data"
+
+msgid "The number should not have decimals"
+msgstr "The number should not have decimals"
 
 msgid "Setup"
 msgstr "Setup"
@@ -1458,6 +1440,12 @@ msgstr "Data Elements"
 
 msgid "Periods"
 msgstr "Periods"
+
+msgid "Close data entry a certain number of days after period end"
+msgstr "Close data entry a certain number of days after period end"
+
+msgid "Close data entry after category option end date"
+msgstr "Close data entry after category option end date"
 
 msgid "Organisation Units"
 msgstr "Organisation Units"
@@ -1512,6 +1500,9 @@ msgstr "Indicator type to merge into (target)"
 msgid "Select indicator type to merge into"
 msgstr "Select indicator type to merge into"
 
+msgid "Merge settings"
+msgstr "Merge settings"
+
 msgid ""
 "What should happen to the source indicator types after the merge is "
 "complete?"
@@ -1555,6 +1546,9 @@ msgstr "Filter available organisation unit groups"
 
 msgid "Filter selected organisation unit groups"
 msgstr "Filter selected organisation unit groups"
+
+msgid "Set up the basic information for this organisational unit group."
+msgstr "Set up the basic information for this organisational unit group."
 
 msgid "Longitude"
 msgstr "Longitude"

@@ -12,21 +12,27 @@ const zodArrayIds = z.array(z.string().refine((val) => isValidUid(val)))
 export const filterParamsSchema = z
     .object({
         [IDENTIFIABLE_FILTER_KEY]: z.string(),
+
         aggregationType: z.array(z.nativeEnum(DataElement.aggregationType)),
-        categoryCombo: zodArrayIds,
         category: zodArrayIds,
-        formType: z.array(z.nativeEnum(DataSet.formType)),
+        categoryCombo: zodArrayIds,
         categoryOption: zodArrayIds,
         categoryOptionGroup: zodArrayIds,
+        compulsory: z.boolean(),
+        dataDimension: z.boolean(),
+        dataDimensionType: z.nativeEnum(Category.dataDimensionType),
+        dataElement: zodArrayIds,
+        dataElementGroup: zodArrayIds,
+        dataElementGroupSet: zodArrayIds,
         dataSet: zodArrayIds,
         domainType: z.array(z.nativeEnum(DataElement.domainType)),
+        formType: z.array(z.nativeEnum(DataSet.formType)),
+        ignoreApproval: z.boolean(),
+        indicatorType: zodArrayIds,
         publicAccess: z.array(
             z.string().refine((val) => parseAccessString(val) !== null)
         ),
         valueType: z.array(z.nativeEnum(DataElement.valueType)),
-        dataDimensionType: z.nativeEnum(Category.dataDimensionType),
-        ignoreApproval: z.boolean(),
-        indicatorType: zodArrayIds,
     })
     .partial()
 
@@ -35,18 +41,23 @@ Mapping each filter to a config object that handles encoding/decoding */
 export const filterQueryParamType = {
     [IDENTIFIABLE_FILTER_KEY]: StringParam,
     aggregationType: CustomDelimitedArrayParam,
-    domainType: CustomDelimitedArrayParam,
-    valueType: CustomDelimitedArrayParam,
-    dataSet: CustomDelimitedArrayParam,
     category: CustomDelimitedArrayParam,
-    formType: CustomDelimitedArrayParam,
-    categoryOption: CustomDelimitedArrayParam,
     categoryCombo: CustomDelimitedArrayParam,
+    categoryOption: CustomDelimitedArrayParam,
     categoryOptionGroup: CustomDelimitedArrayParam,
-    publicAccess: CustomDelimitedArrayParam,
+    compulsory: BooleanParam,
+    dataDimension: BooleanParam,
     dataDimensionType: StringParam,
+    dataElement: CustomDelimitedArrayParam,
+    dataElementGroup: CustomDelimitedArrayParam,
+    dataElementGroupSet: CustomDelimitedArrayParam,
+    dataSet: CustomDelimitedArrayParam,
+    domainType: CustomDelimitedArrayParam,
+    formType: CustomDelimitedArrayParam,
     ignoreApproval: BooleanParam,
     indicatorType: CustomDelimitedArrayParam,
+    publicAccess: CustomDelimitedArrayParam,
+    valueType: CustomDelimitedArrayParam,
 } as const satisfies QueryParamsConfigMap
 
 export const validFilterKeys = Object.keys(filterQueryParamType)

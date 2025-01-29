@@ -12,7 +12,6 @@ export const organisationUnitGroupSchema = identifiable
         shortName: z.string().trim(),
         code: z.string().trim().optional(),
         description: z.string().trim().optional(),
-        compulsory: z.boolean(),
         color: z.string().optional(),
         symbol: z.string().optional(),
         organisationUnits: z.array(z.object({ id: z.string() })),

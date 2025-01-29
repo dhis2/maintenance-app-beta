@@ -13,7 +13,7 @@ import {
 import { SECTIONS_MAP } from '../../../lib'
 
 export const OrganisationalUnitGroupFormFields = () => {
-    const section = SECTIONS_MAP.category
+    const section = SECTIONS_MAP.organisationUnitGroup
 
     return (
         <>
@@ -23,7 +23,7 @@ export const OrganisationalUnitGroupFormFields = () => {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Set up the basic information for this organisational unit group set.'
+                        'Set up the basic information for this organisational unit group.'
                     )}
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />

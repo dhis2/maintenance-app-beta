@@ -17,7 +17,7 @@ import { SECTIONS_MAP } from '../../../lib'
 import { DataDimensionField } from '../../dataElementGroupSets/fields'
 
 export const OrganisationalUnitGroupSetFormFields = () => {
-    const section = SECTIONS_MAP.category
+    const section = SECTIONS_MAP.organisationUnitGroupSet
 
     return (
         <>
