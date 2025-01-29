@@ -26,7 +26,7 @@ export const DataSetFormContents = () => {
                     name={descriptor.getSection('validation').name}
                 />
                 <OrganisationUnitsFormContents
-                    name={descriptor.getSection('validation').name}
+                    name={descriptor.getSection('organisationUnits').name}
                 />
                 <FormFormContents name={descriptor.getSection('form').name} />
                 <AdvancedFormContents
