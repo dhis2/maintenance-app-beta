@@ -1,14 +1,14 @@
 import i18n from '@dhis2/d2-i18n'
+import { Card, RadioFieldFF } from '@dhis2/ui'
 import React from 'react'
+import { Field } from 'react-final-form'
 import {
     HorizontalFieldGroup,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
-import { Card, RadioFieldFF } from '@dhis2/ui'
 import classes from './FormFormContents.module.css'
-import { Field } from 'react-final-form'
 
 const EmptyStateIcon = () => (
     <svg
