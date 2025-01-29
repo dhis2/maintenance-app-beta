@@ -27,7 +27,7 @@ export const CategoryOptionMergeFormFields = () => {
                     <p>
                         {i18n.t(`Only one target should be specified. The merge operation will
                 transfer all of the category options metadata associations to the
-                source category option  over to the target category option.`)}
+                source category option over to the target category option.`)}
                     </p>
                 </Description>
                 <MergeSourcesTargetWrapper>
