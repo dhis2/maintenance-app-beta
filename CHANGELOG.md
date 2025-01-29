@@ -1,3 +1,10 @@
+# [0.29.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.28.0...v0.29.0) (2025-01-29)
+
+
+### Features
+
+* cat options merge ([#502](https://github.com/dhis2/maintenance-app-beta/issues/502)) ([ac45eb4](https://github.com/dhis2/maintenance-app-beta/commit/ac45eb4ab172f0c2925fc8ca948e464a0bccc62f))
+
 # [0.28.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.27.1...v0.28.0) (2025-01-28)
 
 
