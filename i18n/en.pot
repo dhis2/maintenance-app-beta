@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-27T08:46:12.413Z\n"
-"PO-Revision-Date: 2025-01-27T08:46:12.413Z\n"
+"POT-Creation-Date: 2025-01-29T09:32:01.790Z\n"
+"PO-Revision-Date: 2025-01-29T09:32:01.790Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1360,15 +1360,6 @@ msgstr "Data set disaggregation"
 msgid "Choose an optional category combination to disaggregate the entire data set."
 msgstr "Choose an optional category combination to disaggregate the entire data set."
 
-msgid "Data entry form"
-msgstr "Data entry form"
-
-msgid "Configure which organisation units can collect data for this data set."
-msgstr "Configure which organisation units can collect data for this data set."
-
-msgid "Something went wrong"
-msgstr "Something went wrong"
-
 msgid "Choose indicators to calculate and show in the data entry form."
 msgstr "Choose indicators to calculate and show in the data entry form."
 
@@ -1393,8 +1384,41 @@ msgstr "Search available data elements"
 msgid "Search selected data elements"
 msgstr "Search selected data elements"
 
+msgid "Custom disaggregation"
+msgstr "Custom disaggregation"
+
+msgid "Override data element category combination"
+msgstr "Override data element category combination"
+
+msgid "No data elements selected"
+msgstr "No data elements selected"
+
+msgid "Close"
+msgstr "Close"
+
 msgid "Data entry form"
 msgstr "Data entry form"
+
+msgid "Choose and configure how the datatry form looks and works for this data set."
+msgstr "Choose and configure how the datatry form looks and works for this data set."
+
+msgid "Default form"
+msgstr "Default form"
+
+msgid "Data elements are displayed in a standard list"
+msgstr "Data elements are displayed in a standard list"
+
+msgid "Section form"
+msgstr "Section form"
+
+msgid "Group data into sections with additional options"
+msgstr "Group data into sections with additional options"
+
+msgid "Custom form"
+msgstr "Custom form"
+
+msgid "Build and style a custom form layout"
+msgstr "Build and style a custom form layout"
 
 msgid "Configure which organisation units can collect data for this data set."
 msgstr "Configure which organisation units can collect data for this data set."

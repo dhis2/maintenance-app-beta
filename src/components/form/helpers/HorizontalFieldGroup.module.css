@@ -1,4 +1,4 @@
-.horizontalField div {
+.horizontalField > div {
     display: flex;
     gap: var(--spacers-dp16);
 }
