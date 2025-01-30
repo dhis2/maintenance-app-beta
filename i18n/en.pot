@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-30T13:05:23.156Z\n"
-"PO-Revision-Date: 2025-01-30T13:05:23.157Z\n"
+"POT-Creation-Date: 2025-02-04T08:56:24.828Z\n"
+"PO-Revision-Date: 2025-02-04T08:56:24.828Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1489,6 +1489,12 @@ msgstr "Build and style a custom form layout"
 
 msgid "Configure which organisation units can collect data for this data set."
 msgstr "Configure which organisation units can collect data for this data set."
+
+msgid "No selected units"
+msgstr "No selected units"
+
+msgid "{{numberOfUnits}} selected units"
+msgstr "{{numberOfUnits}} selected units"
 
 msgid "Something went wrong"
 msgstr "Something went wrong"
