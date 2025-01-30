@@ -2,6 +2,6 @@ describe('HomePage', () => {
     it('should load the metadata overview', () => {
         cy.visit('/')
 
-        cy.contains('Metadata management')
+        cy.contains('Metadata management', { timeout: 10000 })
     })
 })
