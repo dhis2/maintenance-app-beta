@@ -1,7 +1,7 @@
 import { useAlert } from '@dhis2/app-runtime'
+import { useQueryClient } from '@tanstack/react-query'
 import { FORM_ERROR } from 'final-form'
 import React, { useMemo } from 'react'
-import { useQueryClient } from 'react-query'
 import { FormBase } from '../../components'
 import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
 import {

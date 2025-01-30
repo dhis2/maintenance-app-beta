@@ -4,7 +4,7 @@ import {
     useMutation,
     useQueryClient,
     QueryFunctionContext,
-} from 'react-query'
+} from '@tanstack/react-query'
 import type { Query } from '../../types'
 
 // types not exported from app-runtime...

@@ -9,8 +9,8 @@ import {
     MenuItem,
     Popover,
 } from '@dhis2/ui'
+import { useQueryClient } from '@tanstack/react-query'
 import React, { useState, useRef } from 'react'
-import { useQueryClient } from 'react-query'
 import { useHref, useLinkClickHandler } from 'react-router-dom'
 import { DeleteAction } from '../../../components/sectionList/listActions/DeleteAction'
 import {

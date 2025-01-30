@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-29T09:32:01.790Z\n"
-"PO-Revision-Date: 2025-01-29T09:32:01.790Z\n"
+"POT-Creation-Date: 2025-01-30T13:05:23.156Z\n"
+"PO-Revision-Date: 2025-01-30T13:05:23.157Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1192,6 +1192,15 @@ msgstr "Choose how this category option  will be used to capture and analyze dat
 msgid "Choose the options to include in this category option group."
 msgstr "Choose the options to include in this category option group."
 
+msgid "Configure category options merge"
+msgstr "Configure category options merge"
+
+msgid "The category options merge operation is complete."
+msgstr "The category options merge operation is complete."
+
+msgid "All selected category options were merged successfully."
+msgstr "All selected category options were merged successfully."
+
 msgid "Set up the basic information for this category option."
 msgstr "Set up the basic information for this category option."
 
@@ -1213,6 +1222,60 @@ msgstr "Form name should not exceed 230 characters"
 
 msgid "End date should be after start date"
 msgstr "End date should be after start date"
+
+msgid ""
+"The merge operation will merge the source category options into\n"
+"                the target category options. One or many source category "
+"options\n"
+"                can be specified"
+msgstr ""
+"The merge operation will merge the source category options into\n"
+"                the target category options. One or many source category "
+"options\n"
+"                can be specified"
+
+msgid ""
+"Only one target should be specified. The merge operation will\n"
+"                transfer all of the category options metadata associations "
+"to the\n"
+"                source category option over to the target category option."
+msgstr ""
+"Only one target should be specified. The merge operation will\n"
+"                transfer all of the category options metadata associations "
+"to the\n"
+"                source category option over to the target category option."
+
+msgid "Category options to be merged (source)"
+msgstr "Category options to be merged (source)"
+
+msgid "Select category options to merge"
+msgstr "Select category options to merge"
+
+msgid "Category options to merge into (target)"
+msgstr "Category options to merge into (target)"
+
+msgid "Select category options to merge into"
+msgstr "Select category options to merge into"
+
+msgid "Merge settings"
+msgstr "Merge settings"
+
+msgid ""
+"What should happen to the source category options after the merge is "
+"complete?"
+msgstr ""
+"What should happen to the source category options after the merge is "
+"complete?"
+
+msgid "Keep {{ count }} source category options"
+msgid_plural "Keep {{ count }} source category options"
+msgstr[0] "Keep {{ count }} source category options"
+msgstr[1] "Keep {{ count }} source category options"
+
+msgid "Delete {{ count }} source category options"
+msgid_plural "Delete {{ count }} source category options"
+msgstr[0] "Delete {{ count }} source category options"
+msgstr[1] "Delete {{ count }} source category options"
 
 msgid "Custom attributes"
 msgstr "Custom attributes"
@@ -1399,8 +1462,12 @@ msgstr "Close"
 msgid "Data entry form"
 msgstr "Data entry form"
 
-msgid "Choose and configure how the datatry form looks and works for this data set."
-msgstr "Choose and configure how the datatry form looks and works for this data set."
+msgid ""
+"Choose and configure how the data entry form looks and works for this data "
+"set."
+msgstr ""
+"Choose and configure how the data entry form looks and works for this data "
+"set."
 
 msgid "Default form"
 msgstr "Default form"
@@ -1524,9 +1591,6 @@ msgstr "Indicator type to merge into (target)"
 msgid "Select indicator type to merge into"
 msgstr "Select indicator type to merge into"
 
-msgid "Merge settings"
-msgstr "Merge settings"
-
 msgid ""
 "What should happen to the source indicator types after the merge is "
 "complete?"
@@ -1549,6 +1613,58 @@ msgstr "Conflicting factors"
 
 msgid "It is not recommended to merge indicator types with different factors."
 msgstr "It is not recommended to merge indicator types with different factors."
+
+msgid "Configure indicator merge"
+msgstr "Configure indicator merge"
+
+msgid "The indicator merge operation is complete."
+msgstr "The indicator merge operation is complete."
+
+msgid "All selected indicators were merged successfully."
+msgstr "All selected indicators were merged successfully."
+
+msgid ""
+"The merge operation will merge the source indicators into\n"
+"                the target indicator. One or many source indicators\n"
+"                can be specified"
+msgstr ""
+"The merge operation will merge the source indicators into\n"
+"                the target indicator. One or many source indicators\n"
+"                can be specified"
+
+msgid ""
+"Only one target should be specified. The merge operation will\n"
+"                transfer all of the indicator metadata associations to the\n"
+"                source indicator over to the target indicator."
+msgstr ""
+"Only one target should be specified. The merge operation will\n"
+"                transfer all of the indicator metadata associations to the\n"
+"                source indicator over to the target indicator."
+
+msgid "Indicators to be merged (source)"
+msgstr "Indicators to be merged (source)"
+
+msgid "Select indicators to merge"
+msgstr "Select indicators to merge"
+
+msgid "Indicators to merge into (target)"
+msgstr "Indicators to merge into (target)"
+
+msgid "Select indicator to merge into"
+msgstr "Select indicator to merge into"
+
+msgid "What should happen to the source indicators after the merge is complete?"
+msgstr "What should happen to the source indicators after the merge is complete?"
+
+msgid "Keep {{ count }} source indicators"
+msgid_plural "Keep {{ count }} source indicators"
+msgstr[0] "Keep {{ count }} source indicators"
+msgstr[1] "Keep {{ count }} source indicators"
+
+msgid "Delete {{ count }} source indicators"
+msgid_plural "Delete {{ count }} source indicators"
+msgstr[0] "Delete {{ count }} source indicators"
+msgstr[1] "Delete {{ count }} source indicators"
 
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."

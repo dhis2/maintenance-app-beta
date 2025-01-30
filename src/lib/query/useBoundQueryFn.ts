@@ -1,6 +1,6 @@
 import { useDataEngine } from '@dhis2/app-runtime'
+import { QueryFunctionContext } from '@tanstack/react-query'
 import { useMemo } from 'react'
-import { QueryFunctionContext } from 'react-query'
 import type { DataEngine, Query, ResourceQuery } from '../../types'
 
 type DataQueryQueryKey = Readonly<[Query, ...unknown[]]>

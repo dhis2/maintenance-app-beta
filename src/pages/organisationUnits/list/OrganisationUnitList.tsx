@@ -7,6 +7,7 @@ import {
     Updater,
     useReactTable,
 } from '@tanstack/react-table'
+import { difference } from 'lodash'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { IdentifiableFilter, SectionList } from '../../../components'
 import {
@@ -30,6 +31,7 @@ import css from './OrganisationUnitList.module.css'
 import { OrganisationUnitListMessage } from './OrganisationUnitListMessage'
 import { OrganisationUnitRow } from './OrganisationUnitRow'
 import {
+    OrganisationUnitResponse,
     PartialOrganisationUnit,
     useFilteredOrgUnits,
     usePaginatedChildrenOrgUnitsController,
@@ -38,7 +40,9 @@ import {
 export type OrganisationUnitListItem = Omit<
     PartialOrganisationUnit,
     'ancestors'
->
+> & {
+    subrows?: OrganisationUnitListItem[]
+}
 
 const useColumns = () => {
     const { columns: selectedColumns } = useModelListView()
@@ -74,6 +78,78 @@ const useColumns = () => {
     return columnDefinitions
 }
 
+const transformToOrgUnitListItems = (
+    organisationUnits: OrganisationUnitResponse['organisationUnits'],
+    rootUnits: string[] = []
+) => {
+    const allOrgUnitsMap = new Map<string, OrganisationUnitListItem>()
+    // add ancestors to all orgUnits
+    organisationUnits.forEach((ou) => {
+        allOrgUnitsMap.set(ou.id, ou)
+        ou.ancestors.forEach((ancestor) => {
+            // some field-filters does not work for ancestors (eg. href)
+            // we therefore only add them if we dont have them already
+            // even though you could theoretically just call .set() again
+            if (!allOrgUnitsMap.has(ancestor.id)) {
+                allOrgUnitsMap.set(ancestor.id, ancestor)
+            }
+        })
+    })
+    // gather subrows
+    // note that nested subrows are not updated. So we need to acccess subrows through the returned map.
+    // eg. subrows[0].subrows[0] does not work
+    for (const ou of allOrgUnitsMap.values()) {
+        if (!ou.parent) {
+            continue
+        }
+        const parent = allOrgUnitsMap.get(ou.parent.id)
+        if (parent) {
+            const subrows = parent.subrows?.concat(ou) ?? [ou]
+            const parentWithSubrows = {
+                ...parent,
+                subrows: subrows.sort((a, b) =>
+                    a.displayName
+                        .toLowerCase()
+                        .localeCompare(b.displayName.toLowerCase())
+                ),
+            }
+            allOrgUnitsMap.set(parent.id, parentWithSubrows)
+        }
+    }
+    const rootOrgUnits = rootUnits
+        .map((id) => allOrgUnitsMap.get(id))
+        .filter((u) => !!u)
+
+    return {
+        orgUnitMap: allOrgUnitsMap,
+        rootOrgUnits,
+    }
+}
+
+/**
+ * A collapsible tree-like list of organisation units.
+ *
+ * This component is somewhat complex - but it handles a lot of different scenarios.
+ *
+ * The data-loading logic may seem differen than other orgunit components. Mostly
+ * because we are *not* using "children" property to load nested children.
+ *  We are instead using "parent" filter. This is mainly because it's not possible to
+ * paginate nested collections - and by using "parent"-filter, the children become the "root" result.
+ * We use ancestors and parent properties to build the tree structure.
+ * This also simplies the logic - the tree can be rendered from a single request.
+ *
+ * The data-structure and logic when filtering and not filtering is somewhat different.
+ *   When not filtering, we use "parent" filter to load children of the root units.
+ *      usePaginatedChildrenOrgUnitsController takes a list of parentIds to load children for.
+ *    When filtering we gather ancestors of the units, so we can build the tree "bottom-up".
+ *     Eg. we get matches, but since we want to display them in a nested tree, we also need their ancestors.
+ *     We get ancestors through field-filters - and these are added to the flat list of units.
+ *     We can thus build the tree from a single request with the matches.
+ *
+ * The results of the two methods are merged into a single list of OrganisationUnitListItem.
+ *  This means that when expanding a unit when filtering, the data for that unit will be loaded.
+ *  However, normally (when not expanding more than matches of filter) only data from one of the two lists will be used.
+ */
 export const OrganisationUnitList = () => {
     const columnDefinitions = useColumns()
     const [identifiableFilter] = useSectionListFilter('identifiable')
@@ -95,6 +171,7 @@ export const OrganisationUnitList = () => {
     const [translationDialogModel, setTranslationDialogModel] = useState<
         BaseListModel | undefined
     >(undefined)
+    const isFiltering = !!identifiableFilter
 
     const handleDetailsClick = useCallback(
         ({ id }: BaseListModel) => {
@@ -109,11 +186,12 @@ export const OrganisationUnitList = () => {
         (column) => column.meta.fieldFilter
     )
 
-    const { queries, fetchNextPage } = usePaginatedChildrenOrgUnitsController({
-        parentIds: parentIdsToLoad,
-        fieldFilters,
-    })
-    const isFiltering = !!identifiableFilter
+    const { allData, queries, fetchNextPage } =
+        usePaginatedChildrenOrgUnitsController({
+            parentIds: parentIdsToLoad,
+            fieldFilters,
+        })
+
     const hasErrored = queries.some((query) => query.isError)
 
     const orgUnitFiltered = useFilteredOrgUnits({
@@ -122,83 +200,67 @@ export const OrganisationUnitList = () => {
         enabled: isFiltering,
     })
 
-    // expand ancestors of the filtered org units
+    // expand ancestors when filtering, so that matches are visible
     useEffect(() => {
-        // reset state when not filtering
         if (!isFiltering) {
+            // reset expanded state when not filtering
             setExpanded(initialExpandedState)
             setParentIdsToLoad(initialExpandedState)
             return
         }
-        // if we are filtering, expand all, and reset parentIdsToLoad
-        setExpanded(true)
+        const ancestorIds = orgUnitFiltered.data?.organisationUnits.flatMap(
+            (ou) => ou.ancestors.map((a) => [a.id, true])
+        )
+        if (ancestorIds) {
+            setExpanded(Object.fromEntries(ancestorIds))
+        }
         // hide data from usePaginatedChildrenOrgUnitsController
         setParentIdsToLoad({})
-    }, [isFiltering, initialExpandedState])
+    }, [isFiltering, initialExpandedState, orgUnitFiltered.data])
 
-    const { rootOrgUnits, flatOrgUnits } = useMemo(() => {
-        const rootOrgUnits = new Map<string, OrganisationUnitListItem>()
-        //gather all loaded orgUnits and their ancestors and deduplicate them
-
-        const deduplicatedOrgUnits = queries
-            .concat(orgUnitFiltered)
-            .flatMap((q) => {
-                if (!q.data) {
-                    return []
-                }
-                const queryOrgs = q.data.organisationUnits ?? []
-                const ancestors = queryOrgs.flatMap((ou) => ou.ancestors)
-                return [...queryOrgs, ...ancestors]
-            })
-            .reduce((acc, ou) => {
-                if (initialExpandedState[ou.id]) {
-                    rootOrgUnits.set(ou.id, ou)
-                }
-                acc[ou.id] = ou
-                return acc
-            }, {} as Record<string, OrganisationUnitListItem>)
-
-        return {
-            rootOrgUnits: Array.from(rootOrgUnits.values()),
-            flatOrgUnits: Object.values(deduplicatedOrgUnits),
-        }
-    }, [queries, orgUnitFiltered, initialExpandedState])
+    const { rootOrgUnits, orgUnitMap } = useMemo(() => {
+        const flatData = allData
+            .concat(orgUnitFiltered.data ?? [])
+            .flatMap((ou) => (ou ? ou.organisationUnits : []))
+        return transformToOrgUnitListItems(
+            flatData,
+            userRootOrgUnits.map((ou) => ou.id)
+        )
+    }, [allData, orgUnitFiltered.data, userRootOrgUnits])
 
     const handleExpand = useCallback(
         (valueOrUpdater: Updater<ExpandedState>) => {
-            // when we expand something and are not filtering, we need to load the children
-            // also translate expandedState === true (expand all) to expand all loaded units
             const getAllExpanded = () =>
-                Object.fromEntries(flatOrgUnits.map((ou) => [ou.id, true]))
-            // we always want to keep root loaded
-            const getValueWithRoot = (value: ExpandedStateList) => ({
-                ...initialExpandedState,
-                ...value,
-            })
-            if (typeof valueOrUpdater === 'function') {
-                setExpanded((old) => {
-                    const value = valueOrUpdater(old)
-                    if (!isFiltering) {
-                        setParentIdsToLoad(
-                            value === true
-                                ? getAllExpanded()
-                                : getValueWithRoot(value)
-                        )
-                    }
-                    return value
-                })
-            } else {
-                setExpanded(valueOrUpdater)
-                if (!isFiltering) {
-                    setParentIdsToLoad(
-                        valueOrUpdater === true
-                            ? getAllExpanded()
-                            : getValueWithRoot(valueOrUpdater)
-                    )
-                }
+                Object.fromEntries(
+                    Array.from(orgUnitMap).map(([ouId]) => [ouId, true])
+                )
+
+            const newValue =
+                typeof valueOrUpdater === 'function'
+                    ? valueOrUpdater(expanded)
+                    : valueOrUpdater
+
+            setExpanded(newValue)
+            if (newValue === true) {
+                setParentIdsToLoad(getAllExpanded())
+                return
+            }
+            // find which id was toggled
+            const toggledRow = difference(
+                Object.keys(newValue),
+                Object.keys(expanded)
+            )[0]
+            if (toggledRow) {
+                // load children of toggled row
+                // note that we dont really have to differentiate between removing (collapsing) and adding (expanding)
+                // because we dont have to remove the children from the loaded data when collapsing.
+                setParentIdsToLoad((old) => ({
+                    ...old,
+                    [toggledRow]: true,
+                }))
             }
         },
-        [isFiltering, setExpanded, flatOrgUnits, initialExpandedState]
+        [setExpanded, orgUnitMap, expanded]
     )
 
     const table = useReactTable({
@@ -210,12 +272,15 @@ export const OrganisationUnitList = () => {
         getCoreRowModel: getCoreRowModel<OrganisationUnitListItem>(),
         getRowCanExpand: (row) => row.original.childCount > 0,
         getSubRows: (row) => {
-            return flatOrgUnits.filter((d) => d.parent?.id === row.id)
+            return orgUnitMap.get(row.id)?.subrows //flatOrgUnits.filter((d) => d.parent?.id === row.id)
         },
         getExpandedRowModel: getExpandedRowModel(),
         onExpandedChange: handleExpand,
         state: {
             expanded,
+        },
+        initialState: {
+            expanded: initialExpandedState,
         },
         enableSubRowSelection: false,
     })

@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query'
 import React from 'react'
-import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { DefaultEditFormContents } from '../../components/form/DefaultFormContents'
 import { FormBase } from '../../components/form/FormBase'
