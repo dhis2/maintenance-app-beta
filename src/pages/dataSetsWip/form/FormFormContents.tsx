@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Card, RadioFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { Field } from 'react-final-form'
+import { Field, useFormState } from 'react-final-form'
 import {
     HorizontalFieldGroup,
     StandardFormSectionDescription,
@@ -9,40 +9,62 @@ import {
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
 import classes from './FormFormContents.module.css'
+import cx from 'classnames'
+import css from '../../../app/layout/Layout.module.css'
 
-const EmptyStateIcon = () => (
+const DefaultFormIcon = () => (
     <svg
-        width="64"
-        height="64"
-        viewBox="0 0 64 64"
+        width="32"
+        height="32"
+        viewBox="0 0 32 32"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
     >
-        <path d="M3 17V3H61V17" stroke="#6C7787" strokeWidth="2" />
-        <path d="M61 47L61 61L3 61L3 47" stroke="#6C7787" strokeWidth="2" />
-        <rect
-            x="3"
-            y="20"
-            width="58"
-            height="24"
-            fill="#FBFCFD"
-            stroke="#404B5A"
-            strokeWidth="2"
+        <path d="M10 6H22V8H10V6ZM10 10H22V12H10V10ZM10 24H16V26H10V24ZM10 14H16V16H10V14Z" />
+        <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M24 4H8V28H24V4ZM6 2V30H26V2H6Z"
         />
-        <path d="M8 32L22 32" stroke="#404B5A" strokeWidth="2" />
-        <path d="M16 38L22 32L16 26" stroke="#404B5A" strokeWidth="2" />
-        <path d="M28 26L56 26" stroke="#404B5A" strokeWidth="2" />
-        <path d="M8 9L56 9" stroke="#A0ADBA" strokeWidth="2" />
-        <path d="M8 49L35 49" stroke="#A0ADBA" strokeWidth="2" />
-        <path d="M37 49L47 49" stroke="#A0ADBA" strokeWidth="2" />
-        <path d="M49 49L53 49" stroke="#A0ADBA" strokeWidth="2" />
-        <path d="M8 15L20 15" stroke="#A0ADBA" strokeWidth="2" />
-        <path d="M22 15L30 15" stroke="#A0ADBA" strokeWidth="2" />
-        <path d="M8 55H28" stroke="#A0ADBA" strokeWidth="2" />
-        <path d="M30 55L34 55" stroke="#A0ADBA" strokeWidth="2" />
-        <path d="M36 55L38 55" stroke="#A0ADBA" strokeWidth="2" />
-        <path d="M28 38L56 38" stroke="#404B5A" strokeWidth="2" />
-        <path d="M32 32L56 32" stroke="#404B5A" strokeWidth="2" />
+    </svg>
+)
+
+const SectionFormIcon = () => (
+    <svg
+        width="32"
+        height="32"
+        viewBox="0 0 32 32"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M28 4H4V8H28V4ZM2 2V10H30V2H2Z"
+        />
+        <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M28 14H4V18H28V14ZM2 12V20H30V12H2Z"
+        />
+        <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M28 24H4V28H28V24ZM2 22V30H30V22H2Z"
+        />
+    </svg>
+)
+
+const CustomFormIcon = () => (
+    <svg
+        width="32"
+        height="32"
+        viewBox="0 0 32 32"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path d="M31 16L24 23L22.59 21.59L28.17 16L22.59 10.41L24 9L31 16ZM1 16L8 9L9.41 10.41L3.83 16L9.41 21.59L8 23L1 16Z" />
+        <path d="M12.4199 25.4835L17.6403 6.0008L19.5722 6.51843L14.3518 26.0012L12.4199 25.4835Z" />
     </svg>
 )
 
@@ -50,13 +72,19 @@ const FormTypeCard = ({
     Icon,
     label,
     description,
+    highlighted,
 }: {
     Icon: React.ComponentType
     label: string
     description: string
+    highlighted?: boolean
 }) => {
     return (
-        <div className={classes.formTypeCardContent}>
+        <div
+            className={cx(classes.formTypeCardContent, {
+                [classes.formTypeCardContentHighlihghted]: highlighted,
+            })}
+        >
             {<Icon />}
             <div className={classes.formTypeTitle}>
                 <h4>{label}</h4>
@@ -68,6 +96,7 @@ const FormTypeCard = ({
 
 export const FormFormContents = ({ name }: { name: string }) => {
     const formTypeFieldName = 'formType'
+    const formValues = useFormState().values
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
@@ -86,11 +115,14 @@ export const FormFormContents = ({ name }: { name: string }) => {
                         component={RadioFieldFF}
                         label={
                             <FormTypeCard
-                                Icon={EmptyStateIcon}
+                                Icon={DefaultFormIcon}
                                 label={i18n.t('Default form')}
                                 description={i18n.t(
                                     'Data elements are displayed in a standard list'
                                 )}
+                                highlighted={
+                                    formValues[formTypeFieldName] === 'DEFAULT'
+                                }
                             />
                         }
                         className={classes.formTypeCard}
@@ -104,11 +136,14 @@ export const FormFormContents = ({ name }: { name: string }) => {
                         component={RadioFieldFF}
                         label={
                             <FormTypeCard
-                                Icon={EmptyStateIcon}
+                                Icon={SectionFormIcon}
                                 label={i18n.t('Section form')}
                                 description={i18n.t(
                                     'Group data into sections with additional options'
                                 )}
+                                highlighted={
+                                    formValues[formTypeFieldName] === 'SECTION'
+                                }
                             />
                         }
                         className={classes.formTypeCard}
@@ -123,11 +158,14 @@ export const FormFormContents = ({ name }: { name: string }) => {
                         component={RadioFieldFF}
                         label={
                             <FormTypeCard
-                                Icon={EmptyStateIcon}
+                                Icon={CustomFormIcon}
                                 label={i18n.t('Custom form')}
                                 description={i18n.t(
                                     'Build and style a custom form layout'
                                 )}
+                                highlighted={
+                                    formValues[formTypeFieldName] === 'CUSTOM'
+                                }
                             />
                         }
                         className={classes.formTypeCard}
