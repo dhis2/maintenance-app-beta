@@ -1,3 +1,16 @@
+## [0.29.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.0...v0.29.1) (2025-01-30)
+
+
+### Bug Fixes
+
+* increase cypress timeout in failing test ([2864aa6](https://github.com/dhis2/maintenance-app-beta/commit/2864aa628202f366b1eb8c61a5b4663321c7f1a3))
+* **dependencies:** upgrade dhis2 dependencies ([#497](https://github.com/dhis2/maintenance-app-beta/issues/497)) ([11db8b4](https://github.com/dhis2/maintenance-app-beta/commit/11db8b47668860f441f6a717b0782c3f808eb21b))
+
+
+### Features
+
+* temp data set form section that allows only selecting default ([#507](https://github.com/dhis2/maintenance-app-beta/issues/507)) [skip release] ([ef349a7](https://github.com/dhis2/maintenance-app-beta/commit/ef349a7ad794ca1b90e96c97e5e4dfef0a954550))
+
 # [0.29.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.28.0...v0.29.0) (2025-01-29)
 
 
