@@ -67,7 +67,7 @@ const FormTypeCard = ({
 }
 
 export const FormFormContents = ({ name }: { name: string }) => {
-    const fieldName = 'formType'
+    const formTypeFieldName = 'formType'
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
@@ -75,14 +75,14 @@ export const FormFormContents = ({ name }: { name: string }) => {
             </StandardFormSectionTitle>
             <StandardFormSectionDescription>
                 {i18n.t(
-                    'Choose and configure how the datatry form looks and works for this data set.'
+                    'Choose and configure how the data entry form looks and works for this data set.'
                 )}
             </StandardFormSectionDescription>
 
             <HorizontalFieldGroup className={classes.formTypeCards}>
                 <Card>
                     <Field<string | undefined>
-                        name={fieldName}
+                        name={formTypeFieldName}
                         component={RadioFieldFF}
                         label={
                             <FormTypeCard
@@ -100,7 +100,7 @@ export const FormFormContents = ({ name }: { name: string }) => {
                 </Card>
                 <Card>
                     <Field<string | undefined>
-                        name={fieldName}
+                        name={formTypeFieldName}
                         component={RadioFieldFF}
                         label={
                             <FormTypeCard
@@ -119,7 +119,7 @@ export const FormFormContents = ({ name }: { name: string }) => {
                 </Card>
                 <Card>
                     <Field<string | undefined>
-                        name={fieldName}
+                        name={formTypeFieldName}
                         component={RadioFieldFF}
                         label={
                             <FormTypeCard
