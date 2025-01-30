@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Card, RadioFieldFF } from '@dhis2/ui'
+import cx from 'classnames'
 import React from 'react'
 import { Field, useFormState } from 'react-final-form'
 import {
@@ -9,8 +10,6 @@ import {
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
 import classes from './FormFormContents.module.css'
-import cx from 'classnames'
-import css from '../../../app/layout/Layout.module.css'
 
 const DefaultFormIcon = () => (
     <svg
@@ -22,8 +21,8 @@ const DefaultFormIcon = () => (
     >
         <path d="M10 6H22V8H10V6ZM10 10H22V12H10V10ZM10 24H16V26H10V24ZM10 14H16V16H10V14Z" />
         <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M24 4H8V28H24V4ZM6 2V30H26V2H6Z"
         />
     </svg>
@@ -38,18 +37,18 @@ const SectionFormIcon = () => (
         xmlns="http://www.w3.org/2000/svg"
     >
         <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M28 4H4V8H28V4ZM2 2V10H30V2H2Z"
         />
         <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M28 14H4V18H28V14ZM2 12V20H30V12H2Z"
         />
         <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M28 24H4V28H28V24ZM2 22V30H30V22H2Z"
         />
     </svg>
