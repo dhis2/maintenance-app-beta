@@ -3,7 +3,7 @@ import { Checkbox, InputFieldFF } from '@dhis2/ui'
 import type { InputFieldProps } from '@dhis2-ui/input'
 import React, { useEffect, useState } from 'react'
 import { FieldMetaState, useField } from 'react-final-form'
-import classes from './HiddenInputField.module.css'
+import classes from './ToggledNumberInput.module.css'
 
 type InputFieldRestProps = Omit<InputFieldProps, 'onChange' | 'value' | 'name'>
 

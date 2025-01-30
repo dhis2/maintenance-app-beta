@@ -82,7 +82,16 @@ export const DataSetFormDescriptor = {
             label: i18n.t('Organisation Units'),
             fields: [],
         },
-        { name: 'form', label: i18n.t('Form'), fields: [] },
+        {
+            name: 'form',
+            label: i18n.t('Form'),
+            fields: [
+                {
+                    name: 'formType',
+                    label: i18n.t('Form type'),
+                },
+            ],
+        },
         { name: 'advanced', label: i18n.t('Advanced'), fields: [] },
     ],
 } as const satisfies SectionedFormDescriptor<DataSetFormValues>
