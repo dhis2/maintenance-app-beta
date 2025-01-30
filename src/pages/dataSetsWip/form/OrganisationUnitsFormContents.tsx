@@ -1,19 +1,22 @@
 import i18n from '@dhis2/d2-i18n'
-import React from 'react'
+import React, { useMemo, useState } from 'react'
+import { useFormState } from 'react-final-form'
 import {
+    ModelMultiSelect,
     OrganisationUnitField,
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
+import { OrganisationUnitFormValue } from '../../../components/form/fields/OrganisationUnitField'
 import { SectionedFormSection } from '../../../components/sectionedForm'
 import classes from './OrganisationUnitsFormContents.module.css'
-import { useFormState } from 'react-final-form'
-import { OrganisationUnitFormValue } from '../../../components/form/fields/OrganisationUnitField'
 
 export const OrganisationUnitsFormContents = ({ name }: { name: string }) => {
-    const formValues = useFormState().values
+    const form = useFormState()
+    const formValues = form.values
     const fieldName = 'organisationUnits'
+
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
@@ -26,11 +29,16 @@ export const OrganisationUnitsFormContents = ({ name }: { name: string }) => {
             </StandardFormSectionDescription>
             <div className={classes.organisationUnitSelectorWrapper}>
                 <StandardFormField>
-                    <OrganisationUnitField name={fieldName} label={''} />
+                    <OrganisationUnitField
+                        name={fieldName}
+                        label={''}
+                        withLevelSelector
+                    />
                 </StandardFormField>
                 <div className={classes.organisationUnitSelectorRhs}>
                     <h4>
-                        {formValues[fieldName]?.length === 0
+                        {!formValues[fieldName] ||
+                        formValues[fieldName]?.length === 0
                             ? i18n.t('No selected units')
                             : i18n.t('{{numberOfUnits}} selected units', {
                                   numberOfUnits: formValues[fieldName]?.length,
@@ -38,7 +46,7 @@ export const OrganisationUnitsFormContents = ({ name }: { name: string }) => {
                     </h4>
                     {formValues[fieldName]?.map(
                         (orgUnit: OrganisationUnitFormValue) => (
-                            <p>{orgUnit.displayName}</p>
+                            <p key={orgUnit.id}>{orgUnit.displayName}</p>
                         )
                     )}
                 </div>

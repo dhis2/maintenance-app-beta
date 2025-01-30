@@ -1600,6 +1600,12 @@ msgstr "Display options"
 msgid "Configure which organisation units can collect data for this data set."
 msgstr "Configure which organisation units can collect data for this data set."
 
+msgid "No selected units"
+msgstr "No selected units"
+
+msgid "{{numberOfUnits}} selected units"
+msgstr "{{numberOfUnits}} selected units"
+
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
