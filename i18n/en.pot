@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-27T14:44:18.834Z\n"
-"PO-Revision-Date: 2025-01-27T14:44:18.834Z\n"
+"POT-Creation-Date: 2025-01-30T08:08:31.748Z\n"
+"PO-Revision-Date: 2025-01-30T08:08:31.749Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1348,6 +1348,18 @@ msgstr "Advanced options"
 msgid "These options are used for advanced data set configurations."
 msgstr "These options are used for advanced data set configurations."
 
+msgid "Available data elements"
+msgstr "Available data elements"
+
+msgid "Compulsory data elements"
+msgstr "Compulsory data elements"
+
+msgid "Search available data elements"
+msgstr "Search available data elements"
+
+msgid "Search compulsory data elements"
+msgstr "Search compulsory data elements"
+
 msgid "Approval workflow"
 msgstr "Approval workflow"
 
@@ -1377,12 +1389,6 @@ msgstr "Search available indicators"
 
 msgid "Search selected indicators"
 msgstr "Search selected indicators"
-
-msgid "Available data elements"
-msgstr "Available data elements"
-
-msgid "Search available data elements"
-msgstr "Search available data elements"
 
 msgid "Search selected data elements"
 msgstr "Search selected data elements"
@@ -1447,6 +1453,26 @@ msgid ""
 msgstr ""
 "Data elements with category combinations require all fields to have a value "
 "if one has a value"
+
+msgid "Number of days after period to qualify for on time submission"
+msgstr "Number of days after period to qualify for on time submission"
+
+msgid ""
+"\"On time\" submission rate can be using reporting dates in the Report app. "
+"Enter 0 to ignore timely submission."
+msgstr ""
+"\"On time\" submission rate can be using reporting dates in the Report app. "
+"Enter 0 to ignore timely submission."
+
+msgid "Compulsory data entry"
+msgstr "Compulsory data entry"
+
+msgid ""
+"Optionally configure which data elements must have a value to complete this "
+"data set."
+msgstr ""
+"Optionally configure which data elements must have a value to complete this "
+"data set."
 
 msgid "The number should not have decimals"
 msgstr "The number should not have decimals"

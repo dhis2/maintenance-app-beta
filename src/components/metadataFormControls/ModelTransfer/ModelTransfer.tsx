@@ -123,7 +123,7 @@ export const ModelTransfer = <
     )
 }
 
-const TransferHeader = ({ children }: { children: React.ReactNode }) => {
+export const TransferHeader = ({ children }: { children: React.ReactNode }) => {
     if (typeof children === 'string') {
         return <div className={css.modelTransferHeader}>{children}</div>
     }

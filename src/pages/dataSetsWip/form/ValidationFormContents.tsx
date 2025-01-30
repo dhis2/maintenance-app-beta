@@ -9,6 +9,7 @@ import {
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
 import { DataApprovalWorkflowField } from './DataApprovalWorkflowField'
+import { CompulsoryDataElementsTransfer } from './CompulsoryDataElementsTransfer'
 
 export const ValidationFormContents = ({ name }: { name: string }) => {
     return (
@@ -79,14 +80,17 @@ export const ValidationFormContents = ({ name }: { name: string }) => {
                 />
             </StandardFormField>
 
-            {/* <StandardFormField>
-                <ModelTransferField
-                    name={'dataElements'}
-                    query={{
-                        resource: 'dataElements',
-                    }}
-                />
-            </StandardFormField> */}
+            <StandardFormField>
+                <StandardFormSectionTitle>
+                    {i18n.t('Compulsory data entry')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Optionally configure which data elements must have a value to complete this data set.'
+                    )}
+                </StandardFormSectionDescription>
+                <CompulsoryDataElementsTransfer />
+            </StandardFormField>
         </SectionedFormSection>
     )
 }
