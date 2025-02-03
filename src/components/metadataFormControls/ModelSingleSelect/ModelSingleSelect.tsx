@@ -74,8 +74,21 @@ export const ModelSingleSelect = <
         staleTime: 60 * 1000,
     })
 
+    const allDataMap = useMemo(() => {
+        const flatData =
+            queryResult.data?.pages.flatMap((page) => page[modelName]) ?? []
+        return flatData
+    }, [queryResult.data, modelName])
+
+    const resolvedAvailable = useMemo(() => {
+        return transform ? transform(allDataMap) : allDataMap
+    }, [allDataMap, transform])
+
     const shouldFetchSelected =
-        !!selected && selected.displayName === undefined && !!selected.id
+        !!selected &&
+        selected.displayName === undefined &&
+        !!selected.id &&
+        resolvedAvailable.find((a) => a.id === selected.id) === undefined
     // if we just have the ID - fetch the displayName
     const selectedQuery = useQuery({
         queryKey: [
@@ -92,24 +105,23 @@ export const ModelSingleSelect = <
         enabled: shouldFetchSelected,
     })
 
-    const allDataMap = useMemo(() => {
-        const flatData =
-            queryResult.data?.pages.flatMap((page) => page[modelName]) ?? []
-        return flatData
-    }, [queryResult.data, modelName])
-
-    const resolvedAvailable = useMemo(() => {
-        return transform ? transform(allDataMap) : allDataMap
-    }, [allDataMap, transform])
-
     useEffect(() => {
-        if (!selectedQuery.data || selected?.displayName !== undefined) {
+        if (
+            !selected ||
+            !selectedQuery.data ||
+            selected?.displayName !== undefined
+        ) {
             return
         }
         // if we had to fetch the selected model, call the onChange
         // to update store with the full model
         onChange?.(selectedQuery.data)
     }, [selectedQuery.data, selected, onChange])
+
+    const resolvedSelected =
+        shouldFetchSelected && selectedQuery.data
+            ? selectedQuery.data
+            : selected
 
     const handleFilterChange = useDebouncedCallback(({ value }) => {
         if (value != undefined) {
@@ -121,7 +133,7 @@ export const ModelSingleSelect = <
     return (
         <BaseModelSingleSelect
             {...baseModelSingleSelectProps}
-            selected={selected}
+            selected={resolvedSelected}
             available={resolvedAvailable}
             onFilterChange={handleFilterChange}
             onRetryClick={queryResult.refetch}
