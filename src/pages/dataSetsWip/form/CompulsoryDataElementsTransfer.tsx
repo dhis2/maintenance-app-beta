@@ -1,4 +1,3 @@
-import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { TransferOption, Help } from '@dhis2/ui'
 import React, { useEffect } from 'react'
@@ -6,82 +5,22 @@ import { useField, Field } from 'react-final-form'
 import { TransferHeader } from '../../../components/index'
 import { BaseModelTransfer } from '../../../components/metadataFormControls/ModelTransfer/BaseModelTransfer'
 import css from './CompulsoryDataElementsTransfer.module.css'
-
-const QUERY_CATEGORY_OPTION_COMBOS = {
-    categoryCombos: {
-        resource: 'categoryCombos',
-        params: ({ categoryCombos }) => ({
-            fields: 'id,displayName,categoryOptionCombos[id,displayName]',
-            filter: `id:in:[${categoryCombos.join(',')}]`,
-            paging: false,
-        }),
-    },
-}
-
-const getRelevantCategoryCombos = (value: any) => {
-    return value
-        .map(
-            (dse) =>
-                dse?.categoryCombo?.id ?? dse?.dataElement?.categoryCombo?.id
-        )
-        .sort()
-}
-
-const getOptions = ({ categoryCombos, dataSetElements }) => {
-    if (
-        !categoryCombos ||
-        !dataSetElements ||
-        !categoryCombos?.length ||
-        !dataSetElements?.length
-    ) {
-        return []
-    }
-    const catComboMap = new Map(
-        categoryCombos?.map((cc) => [cc.id, cc.categoryOptionCombos])
-    )
-
-    const options = dataSetElements.flatMap((dse) => {
-        const categoryComboId = dse.dataElement.categoryCombo.id
-        const categoryOptionCombos = catComboMap.get(categoryComboId)
-        // return categoryOptionCombos
-        return categoryOptionCombos?.map((coc) => ({
-            id: `${dse?.dataElement?.id}.${coc?.id}`,
-            displayName: `${dse.displayName}: ${coc.displayName}`,
-            dataElement: {
-                id: dse?.dataElement?.id,
-                displayName: dse?.dataElement?.displayName,
-            },
-            categoryOptionCombo: {
-                id: coc?.id,
-                displayName: coc?.displayName,
-            },
-        }))
-    })
-    // if(options.includes(undefined)) {
-    //     return []
-    // }
-    return options
-}
+import { useGetCDEOOptions } from './useGetCDEOOptions'
 
 export const CompulsoryDataElementsTransfer = () => {
-    const { input: dseInput } = useField('dataSetElements')
     const { input } = useField('compulsoryDataElementOperands')
 
-    const { data, loading, error, refetch } = useDataQuery(
-        QUERY_CATEGORY_OPTION_COMBOS,
-        { lazy: true }
-    )
+    const { options } = useGetCDEOOptions() ?? { options: [] }
 
-    const categoryCombos = getRelevantCategoryCombos(dseInput.value)
-
+    // selected values must be pruned when options change
+    // if a DE has been removed for data set, it cannot be selected as compulsory
     useEffect(() => {
-        refetch({ categoryCombos })
-    }, [JSON.stringify(categoryCombos)])
-
-    const calculatedOptions = getOptions({
-        categoryCombos: data?.categoryCombos?.categoryCombos,
-        dataSetElements: dseInput.value,
-    })
+        const optionIds = options.map(({ id }: { id: string }) => id)
+        const filteredSelected = (input.value || []).filter(
+            ({ id }: { id: string }) => optionIds.includes(id)
+        )
+        input.onChange(filteredSelected)
+    }, [options])
 
     return (
         <>
@@ -89,7 +28,7 @@ export const CompulsoryDataElementsTransfer = () => {
                 {() => (
                     <BaseModelTransfer
                         selected={input.value || []}
-                        available={calculatedOptions || []}
+                        available={options || []}
                         onChange={({ selected }) => {
                             input.onChange(selected)
                         }}
@@ -142,10 +81,6 @@ export const CompulsoryDataElementsTransfer = () => {
                     />
                 )}
             </Field>
-            <pre>{JSON.stringify(data?.categoryCombos, null, 4)}</pre>
-            <pre>{JSON.stringify(dseInput.value, null, 4)}</pre>
-            <h2>OPTIONS</h2>
-            <pre>{JSON.stringify(calculatedOptions, null, 4)}</pre>
         </>
     )
 }
