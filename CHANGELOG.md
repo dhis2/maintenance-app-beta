@@ -1,3 +1,15 @@
+## [0.29.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.1...v0.29.2) (2025-02-04)
+
+
+### Bug Fixes
+
+* **list:** remove deleted model from selected ([#509](https://github.com/dhis2/maintenance-app-beta/issues/509)) ([2ab9b95](https://github.com/dhis2/maintenance-app-beta/commit/2ab9b9571ea214b99616a9a1463cd220960a34a5))
+
+
+### Features
+
+* change svg to images from designs ([#508](https://github.com/dhis2/maintenance-app-beta/issues/508)) [skip release] ([0b94b2f](https://github.com/dhis2/maintenance-app-beta/commit/0b94b2f8eb5acedfa06d3529f0cb9c4443d3ce72))
+
 ## [0.29.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.0...v0.29.1) (2025-01-30)
 
 
