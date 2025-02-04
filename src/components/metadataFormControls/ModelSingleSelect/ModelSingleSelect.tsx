@@ -88,7 +88,9 @@ export const ModelSingleSelect = <
         !!selected &&
         selected.displayName === undefined &&
         !!selected.id &&
+        resolvedAvailable.length > 0 &&
         resolvedAvailable.find((a) => a.id === selected.id) === undefined
+
     // if we just have the ID - fetch the displayName
     const selectedQuery = useQuery({
         queryKey: [
@@ -109,6 +111,7 @@ export const ModelSingleSelect = <
         if (
             !selected ||
             !selectedQuery.data ||
+            !shouldFetchSelected ||
             selected?.displayName !== undefined
         ) {
             return
@@ -116,7 +119,7 @@ export const ModelSingleSelect = <
         // if we had to fetch the selected model, call the onChange
         // to update store with the full model
         onChange?.(selectedQuery.data)
-    }, [selectedQuery.data, selected, onChange])
+    }, [selectedQuery.data, shouldFetchSelected, selected, onChange])
 
     const resolvedSelected =
         shouldFetchSelected && selectedQuery.data
