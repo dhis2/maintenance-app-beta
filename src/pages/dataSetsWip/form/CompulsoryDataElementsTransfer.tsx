@@ -10,11 +10,14 @@ import { useGetCDEOOptions } from './useGetCDEOOptions'
 export const CompulsoryDataElementsTransfer = () => {
     const { input } = useField('compulsoryDataElementOperands')
 
-    const { options } = useGetCDEOOptions() ?? { options: [] }
+    const { options } = useGetCDEOOptions() ?? { options: null }
 
     // selected values must be pruned when options change
     // if a DE has been removed for data set, it cannot be selected as compulsory
     useEffect(() => {
+        if (options === null) {
+            return
+        }
         const optionIds = options.map(({ id }: { id: string }) => id)
         const filteredSelected = (input.value || []).filter(
             ({ id }: { id: string }) => optionIds.includes(id)
@@ -54,6 +57,11 @@ export const CompulsoryDataElementsTransfer = () => {
                         optionsWidth="500px"
                         selectedWidth="500px"
                         renderOption={({ value, ...rest }) => {
+                            const catOptComboName =
+                                value.categoryOptionCombo.displayName ===
+                                'default'
+                                    ? i18n.t('None')
+                                    : value.categoryOptionCombo.displayName
                             return (
                                 <TransferOption
                                     {...rest}
@@ -67,10 +75,7 @@ export const CompulsoryDataElementsTransfer = () => {
                                                     css.transferOptionCatComboText
                                                 }
                                             >
-                                                {
-                                                    value.categoryOptionCombo
-                                                        .displayName
-                                                }
+                                                {catOptComboName}
                                             </Help>
                                         </div>
                                     }

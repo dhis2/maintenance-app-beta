@@ -6,17 +6,16 @@ import { CategoryCombo } from '../../../types/generated'
 const QUERY_CATEGORY_OPTION_COMBOS = {
     categoryCombos: {
         resource: 'categoryCombos',
-        params: ({
-            categoryCombos,
-        }: {
-            categoryCombos: { id: string; name: string }[]
-        }) => ({
-            fields: 'id,displayName,categoryOptionCombos[id,displayName]',
-            filter: `id:in:[${categoryCombos.join(',')}]`,
-            paging: false,
-        }),
+        params: (variables: Record<string, string[]>) => {
+            const params = {
+                fields: 'id,displayName,categoryOptionCombos[id,displayName]',
+                filter: `id:in:[${variables.categoryCombos.join(',')}]`,
+                paging: false,
+            }
+            return params
+        },
     },
-} as const
+}
 
 type DataSetElement = {
     categoryCombo?: {
@@ -114,8 +113,9 @@ const getOptions = ({
     )
 
     const options = dataSetElements.flatMap((dse) => {
-        const categoryComboId = dse.dataElement.categoryCombo.id
-        const categoryOptionCombos = catComboMap.get(categoryComboId) || []
+        const categoryComboId =
+            dse?.categoryCombo?.id ?? dse.dataElement.categoryCombo.id
+        const categoryOptionCombos = catComboMap.get(categoryComboId)
         // return categoryOptionCombos
         return categoryOptionCombos?.map((coc: CategoryOptionCombo) => ({
             id: `${dse?.dataElement?.id}.${coc?.id}`,
@@ -130,13 +130,13 @@ const getOptions = ({
             },
         }))
     })
-    return options
+    return options.filter((opt) => opt !== undefined)
 }
 
 export const useGetCDEOOptions = () => {
     const { input: dseInput } = useField('dataSetElements')
     const ref = useRef<string[]>([])
-    const [options, setOptions] = useState<Option[]>([])
+    const [options, setOptions] = useState<Option[] | null>(null)
     const [error, setError] = useState<Error | undefined>()
     const [loading, setLoading] = useState<boolean>(false)
     const engine = useDataEngine()
