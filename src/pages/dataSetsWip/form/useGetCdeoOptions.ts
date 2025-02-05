@@ -64,7 +64,7 @@ type QueryResponse = {
     }
 }
 
-let compareCategoryCombosArray = (
+const compareCategoryCombosArray = (
     currentCCs: string[],
     newCCs: string[]
 ): boolean => {
@@ -72,7 +72,7 @@ let compareCategoryCombosArray = (
         return true
     }
 
-    let index = 0
+    const index = 0
     for (const cc of newCCs) {
         if (cc !== currentCCs[index]) {
             return true
@@ -133,7 +133,7 @@ const getOptions = ({
     return options.filter((opt) => opt !== undefined)
 }
 
-export const useGetCDEOOptions = () => {
+export const useGetCdeoOptions = () => {
     const { input: dseInput } = useField('dataSetElements')
     const ref = useRef<string[]>([])
     const [options, setOptions] = useState<Option[] | null>(null)
@@ -145,7 +145,7 @@ export const useGetCDEOOptions = () => {
         const determineOptions = async () => {
             setLoading(true)
             const categoryCombos = getRelevantCategoryCombos(dseInput.value)
-            let areCategoryCombosUpdated = compareCategoryCombosArray(
+            const areCategoryCombosUpdated = compareCategoryCombosArray(
                 ref.current,
                 categoryCombos
             )

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-30T08:08:31.748Z\n"
-"PO-Revision-Date: 2025-01-30T08:08:31.749Z\n"
+"POT-Creation-Date: 2025-02-05T10:53:22.635Z\n"
+"PO-Revision-Date: 2025-02-05T10:53:22.635Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1429,6 +1429,16 @@ msgstr "Close data entry a certain number of days after period end (expiry days)
 msgid "Set up the basic information for this data set."
 msgstr "Set up the basic information for this data set."
 
+msgid "Number of days after period to qualify for on time submission"
+msgstr "Number of days after period to qualify for on time submission"
+
+msgid ""
+"\"On time\" submission rate can be using reporting dates in the Report app. "
+"Enter 0 to ignore timely submission."
+msgstr ""
+"\"On time\" submission rate can be using reporting dates in the Report app. "
+"Enter 0 to ignore timely submission."
+
 msgid "Value should be bigger than 0"
 msgstr "Value should be bigger than 0"
 
@@ -1453,16 +1463,6 @@ msgid ""
 msgstr ""
 "Data elements with category combinations require all fields to have a value "
 "if one has a value"
-
-msgid "Number of days after period to qualify for on time submission"
-msgstr "Number of days after period to qualify for on time submission"
-
-msgid ""
-"\"On time\" submission rate can be using reporting dates in the Report app. "
-"Enter 0 to ignore timely submission."
-msgstr ""
-"\"On time\" submission rate can be using reporting dates in the Report app. "
-"Enter 0 to ignore timely submission."
 
 msgid "Compulsory data entry"
 msgstr "Compulsory data entry"

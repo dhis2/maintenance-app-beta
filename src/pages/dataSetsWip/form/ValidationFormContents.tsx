@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
+import { CheckboxFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field } from 'react-final-form'
 import {
@@ -8,8 +8,9 @@ import {
     StandardFormSectionTitle,
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
-import { DataApprovalWorkflowField } from './DataApprovalWorkflowField'
 import { CompulsoryDataElementsTransfer } from './CompulsoryDataElementsTransfer'
+import { DataApprovalWorkflowField } from './DataApprovalWorkflowField'
+import { TimelyDaysField } from './TimelyDaysField'
 
 export const ValidationFormContents = ({ name }: { name: string }) => {
     return (
@@ -66,31 +67,18 @@ export const ValidationFormContents = ({ name }: { name: string }) => {
                 />
             </StandardFormField>
             <StandardFormField>
-                <Field
-                    component={InputFieldFF}
-                    label={i18n.t(
-                        'Number of days after period to qualify for on time submission'
-                    )}
-                    helperText={i18n.t(
-                        '"On time" submission rate can be using reporting dates in the Report app. Enter 0 to ignore timely submission.'
-                    )}
-                    name="timelyDays"
-                    inputWidth="200px"
-                    type="number"
-                />
+                <TimelyDaysField />
             </StandardFormField>
 
-            <StandardFormField>
-                <StandardFormSectionTitle>
-                    {i18n.t('Compulsory data entry')}
-                </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Optionally configure which data elements must have a value to complete this data set.'
-                    )}
-                </StandardFormSectionDescription>
-                <CompulsoryDataElementsTransfer />
-            </StandardFormField>
+            <StandardFormSectionTitle>
+                {i18n.t('Compulsory data entry')}
+            </StandardFormSectionTitle>
+            <StandardFormSectionDescription>
+                {i18n.t(
+                    'Optionally configure which data elements must have a value to complete this data set.'
+                )}
+            </StandardFormSectionDescription>
+            <CompulsoryDataElementsTransfer />
         </SectionedFormSection>
     )
 }
