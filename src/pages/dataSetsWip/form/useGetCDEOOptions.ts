@@ -133,7 +133,7 @@ const getOptions = ({
     return options.filter((opt) => opt !== undefined)
 }
 
-export const useGetCdeoOptions = () => {
+export const useGetCDEOOptions = () => {
     const { input: dseInput } = useField('dataSetElements')
     const ref = useRef<string[]>([])
     const [options, setOptions] = useState<Option[] | null>(null)
