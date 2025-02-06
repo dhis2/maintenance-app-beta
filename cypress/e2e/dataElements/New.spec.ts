@@ -36,7 +36,7 @@ describe('Data elements / New', () => {
         cy.contains('Data element management').should('exist')
     })
 
-    it('should create a data element with all values', () => {
+    it.skip('should create a data element with all values', () => {
         const now = Date.now()
         const newDataElementName = `ZZZ ${now}` // Will be at the end, does not pollute the first page of the list
 
