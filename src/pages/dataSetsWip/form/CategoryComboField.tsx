@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import {
     ModelSingleSelect,
-    ModelSingleSelectField,
+    ModelSingleSelectFormField,
     ModelSingleSelectProps,
 } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { DEFAULT_CATEGORY_COMBO } from '../../../lib'
@@ -27,7 +27,7 @@ const addDefaultCategoryComboTransform = <TCatCombo extends DisplayableModel>(
 
 export function CategoryComboField() {
     return (
-        <ModelSingleSelectField
+        <ModelSingleSelectFormField
             required
             name="categoryCombo"
             label={i18n.t('{{fieldLabel}} (required)', {

@@ -1,9 +1,25 @@
 import { Field } from '@dhis2/ui'
 import React from 'react'
-import { useField } from 'react-final-form'
+import { FieldRenderProps, useField } from 'react-final-form'
 import { PlainResourceQuery } from '../../../types'
 import { DisplayableModel } from '../../../types/models'
 import { ModelMultiSelectProps, ModelMultiSelect } from './ModelMultiSelect'
+
+type RFFProps<TModel extends DisplayableModel> = FieldRenderProps<
+    TModel[] | undefined,
+    HTMLElement
+>
+
+type RelevantRenderProps<TModel extends DisplayableModel> = {
+    input: Pick<
+        FieldRenderProps<TModel[] | undefined>['input'],
+        'value' | 'onChange' | 'onBlur'
+    >
+    meta: Pick<
+        FieldRenderProps<TModel[] | undefined>['meta'],
+        'invalid' | 'touched' | 'error'
+    >
+}
 
 type OwnProps<TModel extends DisplayableModel> = {
     name: string
@@ -28,11 +44,13 @@ export function ModelMultiSelectField<TModel extends DisplayableModel>({
     helpText,
     required,
     onChange,
+    input,
+    meta,
     ...modelSingleSelectProps
-}: ModelMultiSelectFieldProps<TModel>) {
-    const { input, meta } = useField<TModel[] | undefined>(name, {
-        validateFields: [],
-    })
+}: ModelMultiSelectFieldProps<TModel> & RelevantRenderProps<TModel>) {
+    // const { input, meta } = useField<TModel[] | undefined>(name, {
+    //     validateFields: [],
+    // })
 
     return (
         <Field
@@ -55,5 +73,23 @@ export function ModelMultiSelectField<TModel extends DisplayableModel>({
                 query={query}
             />
         </Field>
+    )
+}
+
+export function ModelMultiSelectFormField<TModel extends DisplayableModel>({
+    name,
+    ...modelSingleSelectProps
+}: ModelMultiSelectFieldProps<TModel>) {
+    const { input, meta } = useField<TModel[] | undefined>(name, {
+        validateFields: [],
+    })
+
+    return (
+        <ModelMultiSelectField
+            name={name}
+            input={input}
+            meta={meta}
+            {...modelSingleSelectProps}
+        />
     )
 }
