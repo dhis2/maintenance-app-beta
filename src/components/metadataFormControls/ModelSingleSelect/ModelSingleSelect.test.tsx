@@ -102,13 +102,20 @@ const categoryCombosResolver = (type: string, query: PlainResourceQuery) => {
         return Promise.resolve(categoryCombo)
     }
 
+    const page = query.params?.page || 1
+    const pageSize = query.params?.pageSize || 10
+    const pagedCategoryCombos = categoryCombos.slice(
+        (page - 1) * pageSize,
+        page * pageSize
+    )
+
     return Promise.resolve({
-        categoryCombos,
+        categoryCombos: pagedCategoryCombos,
         pager: {
-            page: 1,
-            total: 23,
-            pageSize: 50,
-            pageCount: 1,
+            page,
+            total: categoryCombos.length,
+            pageSize: pageSize,
+            pageCount: Math.ceil(categoryCombos.length / pageSize),
         },
     })
 }
@@ -138,7 +145,7 @@ describe('<CategoryComboSelect />', () => {
         const selectInput = result.getByTestId('dhis2-uicore-select-input')
         fireEvent.click(selectInput)
 
-        for (let i = 0; i < categoryCombos.length; ++i) {
+        for (let i = 0; i < 5; ++i) {
             const categoryCombo = categoryCombos[i]
             const selectOptions = await result.findByText(
                 categoryCombo.displayName,
@@ -215,13 +222,15 @@ describe('<CategoryComboSelect />', () => {
         expect(selectedLabel).toBeTruthy()
     })
 
-    it('should load the displayName if selected does not include it', async () => {
+    it('should load the displayName if selected does not include it and not in already loaded options', async () => {
         const onChange = jest.fn()
         const dataResolvers = {
             categoryCombos: categoryCombosResolver,
         }
+        // get a catcombo not in the first page...
+        const catCombo = categoryCombos[11]
         const catComboWithoutDisplayName = {
-            id: categoryCombos[0].id,
+            id: catCombo.id,
         }
 
         const result = render(
@@ -238,14 +247,14 @@ describe('<CategoryComboSelect />', () => {
             // should call onChange when it resolves the displayName
             expect(onChange).toHaveBeenCalledTimes(1)
             expect(onChange).toHaveBeenCalledWith({
-                id: catComboWithoutDisplayName.id,
-                displayName: categoryCombos[0].displayName,
+                id: catCombo.id,
+                displayName: catCombo.displayName,
             })
         })
         // const selectInput = result.getByTestId('dhis2-uicore-select-input')
         // fireEvent.click(selectInput)
 
-        const selectedLabel = await result.findByText('Births', {
+        const selectedLabel = await result.findByText(catCombo.displayName, {
             selector: '.root',
         })
         expect(selectedLabel).toBeTruthy()
