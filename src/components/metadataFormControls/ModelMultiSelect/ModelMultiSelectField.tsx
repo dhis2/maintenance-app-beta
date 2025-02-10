@@ -5,11 +5,6 @@ import { PlainResourceQuery } from '../../../types'
 import { DisplayableModel } from '../../../types/models'
 import { ModelMultiSelectProps, ModelMultiSelect } from './ModelMultiSelect'
 
-type RFFProps<TModel extends DisplayableModel> = FieldRenderProps<
-    TModel[] | undefined,
-    HTMLElement
->
-
 type RelevantRenderProps<TModel extends DisplayableModel> = {
     input: Pick<
         FieldRenderProps<TModel[] | undefined>['input'],
@@ -48,10 +43,6 @@ export function ModelMultiSelectField<TModel extends DisplayableModel>({
     meta,
     ...modelSingleSelectProps
 }: ModelMultiSelectFieldProps<TModel> & RelevantRenderProps<TModel>) {
-    // const { input, meta } = useField<TModel[] | undefined>(name, {
-    //     validateFields: [],
-    // })
-
     return (
         <Field
             dataTest={`formfields-modelmultiselect-${name}`}
