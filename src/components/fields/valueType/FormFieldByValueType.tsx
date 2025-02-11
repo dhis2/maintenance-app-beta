@@ -36,8 +36,6 @@ export const FormFieldByValueType = (props: FormFieldByValueTypeProps) => {
     }, [props.valueType, props.required, props.validate])
 
     const commonProps = {
-        // if for some reason the valueType is changed during render (it shouldnt)
-        // we reset the component (by using the key) to get updated validators etc
         ...props,
         validate,
     }

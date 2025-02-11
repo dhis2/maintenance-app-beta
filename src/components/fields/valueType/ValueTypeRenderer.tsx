@@ -31,10 +31,6 @@ export function ValueTypeRenderer(
         return { id: value }
     }, [value])
 
-    const stableInput = useMemo(() => {
-        return { ...props.input, value: stableIdValue }
-    }, [props.input, stableIdValue])
-
     if (valueType === 'BOOLEAN' || valueType === 'TRUE_ONLY') {
         return (
             <CheckboxFieldFF
