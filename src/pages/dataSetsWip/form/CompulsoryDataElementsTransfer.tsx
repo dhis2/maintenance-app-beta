@@ -5,12 +5,14 @@ import { useField, Field } from 'react-final-form'
 import { TransferHeader } from '../../../components/index'
 import { BaseModelTransfer } from '../../../components/metadataFormControls/ModelTransfer/BaseModelTransfer'
 import css from './CompulsoryDataElementsTransfer.module.css'
-import { useGetCDEOOptions } from './useGetCDEOOptions'
+import { useGetCompulsoryDataElementOperandsOptions } from './useGetCompulsoryDataElementOperandsOptions'
 
 export const CompulsoryDataElementsTransfer = () => {
     const { input } = useField('compulsoryDataElementOperands')
 
-    const { options } = useGetCDEOOptions() ?? { options: null }
+    const { options } = useGetCompulsoryDataElementOperandsOptions() ?? {
+        options: null,
+    }
 
     // selected values must be pruned when options change
     // if a DE has been removed for data set, it cannot be selected as compulsory
