@@ -1,8 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useMemo, useState } from 'react'
+import React from 'react'
 import { useFormState } from 'react-final-form'
 import {
-    ModelMultiSelect,
     OrganisationUnitField,
     StandardFormField,
     StandardFormSectionDescription,
@@ -29,11 +28,7 @@ export const OrganisationUnitsFormContents = ({ name }: { name: string }) => {
             </StandardFormSectionDescription>
             <div className={classes.organisationUnitSelectorWrapper}>
                 <StandardFormField>
-                    <OrganisationUnitField
-                        name={fieldName}
-                        label={''}
-                        withLevelSelector
-                    />
+                    <OrganisationUnitField name={fieldName} label={''} />
                 </StandardFormField>
                 <div className={classes.organisationUnitSelectorRhs}>
                     <h4>
