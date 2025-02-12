@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-30T13:05:23.156Z\n"
-"PO-Revision-Date: 2025-01-30T13:05:23.157Z\n"
+"POT-Creation-Date: 2025-02-12T13:11:27.954Z\n"
+"PO-Revision-Date: 2025-02-12T13:11:27.955Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1505,6 +1505,12 @@ msgstr "Allow data entry for future periods"
 msgid "Close data entry a certain number of days after period end (expiry days)"
 msgstr "Close data entry a certain number of days after period end (expiry days)"
 
+msgid "Limit data entry by period"
+msgstr "Limit data entry by period"
+
+msgid "Optionally configure when data can be entered for certain periods"
+msgstr "Optionally configure when data can be entered for certain periods"
+
 msgid "Set up the basic information for this data set."
 msgstr "Set up the basic information for this data set."
 
@@ -1516,6 +1522,45 @@ msgstr "Validation and limitations"
 
 msgid "Configure how data can and must be entered for this data"
 msgstr "Configure how data can and must be entered for this data"
+
+msgid "Add period entry rule"
+msgstr "Add period entry rule"
+
+msgid "Year"
+msgstr "Year"
+
+msgid "Period"
+msgstr "Period"
+
+msgid "Opening date"
+msgstr "Opening date"
+
+msgid "Closing date"
+msgstr "Closing date"
+
+msgid "Closing date must be after start date"
+msgstr "Closing date must be after start date"
+
+msgid "Save period entry rule"
+msgstr "Save period entry rule"
+
+msgid "Opening date: {{openingDate}}"
+msgstr "Opening date: {{openingDate}}"
+
+msgid "No opening date"
+msgstr "No opening date"
+
+msgid "Closing date: {{closingDate}}"
+msgstr "Closing date: {{closingDate}}"
+
+msgid "No closing date"
+msgstr "No closing date"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Add a period entry rule"
+msgstr "Add a period entry rule"
 
 msgid "The number should not have decimals"
 msgstr "The number should not have decimals"
@@ -1699,9 +1744,6 @@ msgstr "{{type}} coordinates are not editable"
 msgid "Upload an image"
 msgstr "Upload an image"
 
-msgid "Remove"
-msgstr "Remove"
-
 msgid "Max size 10MB. Supported file size are .jpg, .png, and .gif."
 msgstr "Max size 10MB. Supported file size are .jpg, .png, and .gif."
 
@@ -1720,9 +1762,6 @@ msgstr ""
 
 msgid "Set up the basic information for this organisation unit"
 msgstr "Set up the basic information for this organisation unit"
-
-msgid "Opening date"
-msgstr "Opening date"
 
 msgid "Closed date"
 msgstr "Closed date"

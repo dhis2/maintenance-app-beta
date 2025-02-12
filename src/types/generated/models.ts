@@ -1701,9 +1701,12 @@ export namespace DataEntryForm {
 }
 
 export type DataInputPeriod = {
-    closingDate: string
-    openingDate: string
-    period: string
+    closingDate?: string
+    openingDate?: string
+    period: {
+        id: string
+        name?: string
+    }
 }
 
 export type DataIntegrityCheck = {
