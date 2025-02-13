@@ -22,6 +22,7 @@ const fieldFilters = [
     'dataSetElements[dataElement[id,displayName,categoryCombo[id,displayName]],categoryCombo[id,displayName]]',
     'style[color,icon]',
     'indicators[id,displayName]',
+    'legendSets[id,displayName]',
 ] as const
 type DataSetValues = PickWithFieldFilters<DataSet, typeof fieldFilters>
 
