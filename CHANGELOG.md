@@ -1,3 +1,10 @@
+## [0.29.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.2...v0.29.3) (2025-02-13)
+
+
+### Bug Fixes
+
+* **router:** fix legacy redirect for vite ([#510](https://github.com/dhis2/maintenance-app-beta/issues/510)) ([7a9d3dd](https://github.com/dhis2/maintenance-app-beta/commit/7a9d3dde00693673f2a4894340746d33ff4c2681))
+
 ## [0.29.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.1...v0.29.2) (2025-02-04)
 
 
