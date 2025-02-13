@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { InputFieldFF, SingleSelectFieldFF, TextAreaFieldFF } from '@dhis2/ui'
+import { SingleSelectFieldFF } from '@dhis2/ui'
 import * as React from 'react'
 import { Field as FieldRFF, useFormState } from 'react-final-form'
 import {
@@ -10,6 +10,7 @@ import {
 } from '../..'
 import { SchemaSection } from '../../../types'
 import { Attribute, AttributeValue } from '../../../types/generated'
+import { FormFieldByValueType } from '../../fields'
 
 const inputWidth = '440px'
 
@@ -52,50 +53,16 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
         )
     }
 
-    if (attribute.valueType === 'TEXT') {
-        return (
-            <StandardFormField key={attribute.id}>
-                <FieldRFF
-                    component={InputFieldFF}
-                    required={required}
-                    inputWidth={inputWidth}
-                    label={attribute.displayFormName}
-                    name={name}
-                />
-            </StandardFormField>
-        )
-    }
-
-    if (attribute.valueType === 'LONG_TEXT') {
-        return (
-            <StandardFormField key={attribute.id}>
-                <FieldRFF
-                    component={TextAreaFieldFF}
-                    required={required}
-                    inputWidth={inputWidth}
-                    label={attribute.displayFormName}
-                    name={name}
-                />
-            </StandardFormField>
-        )
-    }
-
-    if (attribute.valueType === 'GEOJSON') {
-        return (
-            <StandardFormField key={attribute.id}>
-                <FieldRFF
-                    component={TextAreaFieldFF}
-                    required={required}
-                    inputWidth={inputWidth}
-                    label={attribute.displayFormName}
-                    name={name}
-                    helpText={i18n.t('Please enter a GeoJSON value.')}
-                />
-            </StandardFormField>
-        )
-    }
-    // @TODO: Verify that all value types have been covered!
-    throw new Error(`Implement value type "${attribute.valueType}"!`)
+    return (
+        <StandardFormField key={attribute.id}>
+            <FormFieldByValueType
+                valueType={attribute.valueType}
+                name={name}
+                label={attribute.displayFormName}
+                required={required}
+            />
+        </StandardFormField>
+    )
 }
 
 export function CustomAttributesSection({

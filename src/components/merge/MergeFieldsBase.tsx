@@ -4,10 +4,10 @@ import { useField } from 'react-final-form'
 import { PlainResourceQuery, Optional } from '../../types'
 import { DisplayableModel } from '../../types/models'
 import {
-    ModelMultiSelectField,
     ModelMultiSelectFieldProps,
+    ModelMultiSelectFormField,
 } from '../metadataFormControls'
-import { ModelSingleSelectField } from '../metadataFormControls/ModelSingleSelect'
+import { ModelSingleSelectFormField } from '../metadataFormControls/ModelSingleSelect'
 import css from './MergeFields.module.css'
 
 type BaseSourceFieldProps = Optional<
@@ -22,7 +22,7 @@ export const BaseSourcesField = (props: BaseSourceFieldProps) => {
     }).input.value
 
     return (
-        <ModelMultiSelectField
+        <ModelMultiSelectFormField
             name="sources"
             label="Sources"
             maxHeight="150px"
@@ -52,7 +52,7 @@ export const BaseTargetField = ({
     }).input.value
 
     return (
-        <ModelSingleSelectField
+        <ModelSingleSelectFormField
             name="target"
             query={query}
             transform={(availableData) =>
