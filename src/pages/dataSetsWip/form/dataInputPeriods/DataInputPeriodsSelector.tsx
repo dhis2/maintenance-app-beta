@@ -307,13 +307,14 @@ const DataInputPeriodsField = ({
     input: {
         value: DataInputPeriod[]
         onChange: (value: DataInputPeriod[]) => void
+        onBlur: () => void
     }
     dateFormat: SupportedDateFormat
     locale: string
     calendar: SupportedCalendar
     openEditModal: (dip: DataInputPeriod) => void
 }) => {
-    const { value, onChange } = input
+    const { value, onBlur, onChange } = input
     const mappedPeriods = useGetPeriodInformation(
         value,
         calendar as SupportedCalendar,
@@ -324,8 +325,9 @@ const DataInputPeriodsField = ({
             onChange(
                 value.filter((dip: DataInputPeriod) => dip.period.id !== id)
             )
+            onBlur()
         },
-        [onChange, value]
+        [onChange, onBlur, value]
     )
 
     return (
