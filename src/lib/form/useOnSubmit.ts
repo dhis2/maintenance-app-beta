@@ -21,18 +21,42 @@ type UseOnSubmitEditOptions = {
     section: ModelSection
 }
 
+export const useOnEditCompletedSuccessfully = (section: ModelSection) => {
+    const saveAlert = useAlert(
+        ({ message }) => message,
+        (options) => options
+    )
+    const queryClient = useQueryClient()
+    const navigate = useNavigateWithSearchState()
+
+    return useMemo(
+        () =>
+            ({ withChanges }: { withChanges: boolean }) => {
+                if (withChanges) {
+                    saveAlert.show({
+                        message: i18n.t('Saved successfully'),
+                        success: true,
+                    })
+                } else {
+                    saveAlert.show({
+                        message: i18n.t('No changes to be saved'),
+                    })
+                }
+                queryClient.invalidateQueries({
+                    queryKey: [{ resource: section.namePlural }],
+                })
+                navigate(`/${getSectionPath(section)}`)
+            },
+        [saveAlert, queryClient, navigate]
+    )
+}
+
 export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
     modelId,
     section,
 }: UseOnSubmitEditOptions) => {
     const patchDirtyFields = usePatchModel(modelId, section.namePlural)
-    const queryClient = useQueryClient()
-    const saveAlert = useAlert(
-        ({ message }) => message,
-        (options) => options
-    )
-
-    const navigate = useNavigateWithSearchState()
+    const onEditCompletedSuccessfully = useOnEditCompletedSuccessfully(section)
 
     return useMemo<OnSubmit<TFormValues>>(
         () => async (values, form) => {
@@ -42,26 +66,16 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
                 originalValue: form.getState().initialValues,
             })
             if (jsonPatchOperations.length < 1) {
-                saveAlert.show({
-                    message: i18n.t('No changes to be saved'),
-                })
-                navigate(`/${getSectionPath(section)}`)
+                onEditCompletedSuccessfully({ withChanges: false })
                 return
             }
             const errors = await patchDirtyFields(jsonPatchOperations)
             if (errors) {
                 return errors
             }
-            saveAlert.show({
-                message: i18n.t('Saved successfully'),
-                success: true,
-            })
-            queryClient.invalidateQueries({
-                queryKey: [{ resource: section.namePlural }],
-            })
-            navigate(`/${getSectionPath(section)}`)
+            onEditCompletedSuccessfully({ withChanges: true })
         },
-        [patchDirtyFields, saveAlert, navigate, section]
+        [patchDirtyFields, section, onEditCompletedSuccessfully]
     )
 }
 

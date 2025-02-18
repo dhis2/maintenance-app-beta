@@ -1782,6 +1782,7 @@ export type DataSet = {
     displayDescription: string
     displayFormName: string
     displayName: string
+    displayOptions: string
     displayShortName: string
     expiryDays: number
     favorite: boolean
