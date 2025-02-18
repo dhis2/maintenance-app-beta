@@ -17,7 +17,7 @@ import { DataInputPeriod } from '../../../../types/generated'
 import styles from './DataInputPeriodsSelector.module.css'
 import {
     formatISODateTimeString,
-    convertToIso8601ToString,
+    convertToIso8601String,
     convertFromIso8601ToString,
 } from './dateHelpers'
 import { SupportedCalendar, SupportedDateFormat } from './periodTypesMapping'
@@ -120,7 +120,7 @@ const DataInputPeriodModal = ({
                     label={i18n.t('Opening date')}
                     onDateSelect={(date) => {
                         const selectedDate = date?.calendarDateString
-                            ? convertToIso8601ToString(
+                            ? convertToIso8601String(
                                   date?.calendarDateString,
                                   calendar,
                                   dateFormat as SupportedDateFormat
@@ -147,7 +147,7 @@ const DataInputPeriodModal = ({
                         label={i18n.t('Closing date')}
                         onDateSelect={(date) => {
                             const selectedDate = date?.calendarDateString
-                                ? convertToIso8601ToString(
+                                ? convertToIso8601String(
                                       date?.calendarDateString,
                                       calendar,
                                       dateFormat as SupportedDateFormat

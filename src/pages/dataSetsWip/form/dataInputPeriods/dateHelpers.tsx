@@ -78,7 +78,7 @@ export const convertFromIso8601ToString = (
     return `${dateStringPortion}${timeString ? 'T' + timeString : ''}`
 }
 
-export const convertToIso8601ToString = (
+export const convertToIso8601String = (
     date: string,
     calendar: SupportedCalendar,
     dateFormat: SupportedDateFormat
