@@ -1,0 +1,15 @@
+.customTextFields {
+    padding: var(--spacers-dp8) var(--spacers-dp24);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+}
+
+.customTextAlignOptions {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacers-dp8);
+}
+.customTextAlignOptionsAndTitle p {
+    margin: var(--spacers-dp8) 0;
+}

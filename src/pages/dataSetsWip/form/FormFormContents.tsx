@@ -9,6 +9,7 @@ import {
     StandardFormSectionTitle,
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
+import { DisplayOptionsField } from './DisplayOptionsField'
 import classes from './FormFormContents.module.css'
 
 const DefaultFormIcon = () => (
@@ -174,6 +175,12 @@ export const FormFormContents = ({ name }: { name: string }) => {
                     />
                 </Card>
             </HorizontalFieldGroup>
+            <div className={classes.displayOptions}>
+                <StandardFormSectionTitle>
+                    {i18n.t('Display options')}
+                </StandardFormSectionTitle>
+                <DisplayOptionsField />
+            </div>
         </SectionedFormSection>
     )
 }
