@@ -1,5 +1,7 @@
-import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import { useAlert } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import {
     FormBase,
@@ -8,11 +10,25 @@ import {
     DefaultSectionedFormSidebar,
     SectionedFormErrorNotice,
 } from '../../components'
-import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
+import {
+    getSectionPath,
+    SectionedFormProvider,
+    SECTIONS_MAP,
+    useNavigateWithSearchState,
+    useOnSubmitEdit,
+    usePatchModel,
+} from '../../lib'
+import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
+import { useOnEditCompletedSuccessfully } from '../../lib/form/useOnSubmit'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { PickWithFieldFilters, DataSet } from '../../types/generated'
+import { ModelSection } from '../../types'
+import {
+    PickWithFieldFilters,
+    DataSet,
+    IdentifiableObject,
+} from '../../types/generated'
 import { DataSetFormContents } from './form/DataSetFormContents'
-import { validate } from './form/dataSetFormSchema'
+import { validate, dataSetValueFormatter } from './form/dataSetFormSchema'
 import { DataSetFormDescriptor } from './form/formDescriptor'
 
 const section = SECTIONS_MAP.dataSet
@@ -26,6 +42,8 @@ const fieldFilters = [
     'openFuturePeriods',
     'expiryDays',
     'openPeriodsAfterCoEndDate',
+    'formType',
+    'displayOptions',
 ] as const
 type DataSetValues = PickWithFieldFilters<DataSet, typeof fieldFilters>
 
@@ -46,11 +64,19 @@ export const Component = () => {
     })
     const modelId = useParams().id as string
 
+    const initialValues = dataSetValues.data && {
+        ...dataSetValues.data,
+        displayOptions:
+            dataSetValues.data?.displayOptions &&
+            JSON.parse(dataSetValues.data?.displayOptions),
+    }
+
     return (
         <SectionedFormProvider formDescriptor={DataSetFormDescriptor}>
             <FormBase
+                valueFormatter={dataSetValueFormatter}
                 onSubmit={useOnSubmitEdit({ section, modelId })}
-                initialValues={dataSetValues.data}
+                initialValues={initialValues}
                 validate={validate}
                 subscription={{}}
             >

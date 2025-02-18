@@ -5,6 +5,7 @@ import {
     getDefaults,
     modelFormSchemas,
 } from '../../../lib'
+import { ModelWithAttributeValues } from '../../../lib/form/createJsonPatchOperations'
 import { createFormValidate } from '../../../lib/form/validate'
 
 const {
@@ -39,6 +40,23 @@ export const dataSetFormSchema = identifiable
             .number()
             .int({ message: i18n.t('The number should not have decimals') }),
         expiryDays: z.number(),
+        formType: z.enum(['DEFAULT', 'SECTION', 'CUSTOM']).default('DEFAULT'),
+        displayOptions: z
+            .string()
+            .optional()
+            .refine(
+                (val) => {
+                    try {
+                        if (val !== undefined) {
+                            JSON.parse(val)
+                        }
+                        return true
+                    } catch {
+                        return false
+                    }
+                },
+                { message: 'Invalid JSON string' }
+            ),
         openPeriodsAfterCoEndDate: z
             .number()
             .int({ message: i18n.t('The number should not have decimals') })
@@ -50,3 +68,11 @@ export const initialValues = getDefaults(dataSetFormSchema)
 export type DataSetFormValues = typeof initialValues
 
 export const validate = createFormValidate(dataSetFormSchema)
+
+export const dataSetValueFormatter = (values: DataSetFormValues) => {
+    return {
+        ...values,
+        displayOptions:
+            values.displayOptions && JSON.stringify(values.displayOptions),
+    }
+}
