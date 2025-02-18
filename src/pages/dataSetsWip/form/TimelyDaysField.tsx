@@ -8,7 +8,7 @@ export const TimelyDaysField = () => {
 
     const { input, meta } = useField(fieldName, {
         parse: (value?: string) =>
-            value === undefined || value === '' ? undefined : parseFloat(value),
+            value === undefined || value === '' ? 0 : parseFloat(value),
         type: 'number',
         format: (value) => value?.toString(),
     })
@@ -16,7 +16,7 @@ export const TimelyDaysField = () => {
     return (
         <InputFieldFF
             input={input}
-            meta={meta as FieldMetaState<string | undefined>}
+            meta={meta as unknown as FieldMetaState<string | undefined>}
             inputWidth="250px"
             label={i18n.t(
                 'Number of days after period to qualify for on time submission'
