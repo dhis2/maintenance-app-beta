@@ -4,7 +4,7 @@ import {
     generateFixedPeriods,
     createFixedPeriodFromPeriodId,
 } from '@dhis2/multi-calendar-dates'
-import { useEffect, useRef, useState } from 'react'
+import { useMemo } from 'react'
 import { useField } from 'react-final-form'
 import { DataInputPeriod } from '../../../../types/generated'
 import { periodTypesMapping, SupportedCalendar } from './periodTypesMapping'
@@ -75,52 +75,32 @@ export const useGetPeriodInformation = (
     calendar: SupportedCalendar,
     locale: string
 ) => {
-    const [mappedPeriods, setMappedPeriods] = useState<ExpandedDIP[]>([])
-    const ref = useRef<string[]>([])
-    useEffect(() => {
-        const sortedDips = [...dips].sort((a, b) =>
-            a.period.id.localeCompare(b.period.id)
-        )
-        const sortedDipIds = sortedDips.map((dip) => dip.period.id)
+    const sortedDipIDs = dips.map((dip) => dip.period.id).sort()
+    const stringifiedDipIDs = JSON.stringify(sortedDipIDs)
 
-        if (sortedDipIds.every((id, index) => id === ref.current[index])) {
-            setMappedPeriods((prevMappedPeriods) => {
-                return prevMappedPeriods
-                    .map((prevDIP) => {
-                        const updatedDIP = dips.find(
-                            (dip) => dip.period.id === prevDIP.period.id
-                        )
-                        if (!updatedDIP) {
-                            return 'deleted'
-                        }
-                        return {
-                            ...updatedDIP,
-                            periodInformation: prevDIP.periodInformation,
-                        }
-                    })
-                    .filter((dip) => dip !== 'deleted')
+    // create a map with details for each period
+    const periodInformationMap = useMemo(() => {
+        const piMap = new Map()
+        sortedDipIDs.forEach((id) => {
+            const periodInformation = createFixedPeriodFromPeriodId({
+                periodId: id,
+                locale,
+                calendar,
             })
-            return
-        } else {
-            ref.current = sortedDipIds
-            const updatedSortedPeriods = sortedDips
-                .map((dip) => {
-                    const periodInformation = createFixedPeriodFromPeriodId({
-                        periodId: dip.period.id,
-                        locale,
-                        calendar,
-                    })
-                    return { periodInformation, ...dip }
-                })
-                .sort((a, b) =>
-                    a.periodInformation.startDate.localeCompare(
-                        b.periodInformation.startDate
-                    )
-                )
+            piMap.set(id, periodInformation)
+        })
+        return piMap
+    }, [stringifiedDipIDs, calendar, locale])
 
-            setMappedPeriods(updatedSortedPeriods)
-        }
-    }, [dips, locale, calendar])
-
-    return mappedPeriods
+    // return data input period with additional period information and sort
+    return dips
+        .map((dip) => {
+            const periodInformation = periodInformationMap.get(dip.period.id)
+            return { periodInformation, ...dip }
+        })
+        .sort((a, b) =>
+            a.periodInformation.startDate.localeCompare(
+                b.periodInformation.startDate
+            )
+        )
 }
