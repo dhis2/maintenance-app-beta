@@ -2,7 +2,7 @@ import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { useQueryClient } from '@tanstack/react-query'
 import { FORM_ERROR } from 'final-form'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { FormProps } from 'react-final-form'
 import { ModelSection } from '../../types'
 import { IdentifiableObject } from '../../types/generated'
@@ -29,24 +29,23 @@ export const useOnEditCompletedSuccessfully = (section: ModelSection) => {
     const queryClient = useQueryClient()
     const navigate = useNavigateWithSearchState()
 
-    return useMemo(
-        () =>
-            ({ withChanges }: { withChanges: boolean }) => {
-                if (withChanges) {
-                    saveAlert.show({
-                        message: i18n.t('Saved successfully'),
-                        success: true,
-                    })
-                } else {
-                    saveAlert.show({
-                        message: i18n.t('No changes to be saved'),
-                    })
-                }
-                queryClient.invalidateQueries({
-                    queryKey: [{ resource: section.namePlural }],
+    return useCallback(
+        ({ withChanges }: { withChanges: boolean }) => {
+            if (withChanges) {
+                saveAlert.show({
+                    message: i18n.t('Saved successfully'),
+                    success: true,
                 })
-                navigate(`/${getSectionPath(section)}`)
-            },
+            } else {
+                saveAlert.show({
+                    message: i18n.t('No changes to be saved'),
+                })
+            }
+            queryClient.invalidateQueries({
+                queryKey: [{ resource: section.namePlural }],
+            })
+            navigate(`/${getSectionPath(section)}`)
+        },
         [saveAlert, queryClient, navigate]
     )
 }

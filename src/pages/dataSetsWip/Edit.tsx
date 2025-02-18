@@ -60,12 +60,16 @@ export const Component = () => {
     })
     const modelId = useParams().id as string
 
-    const initialValues = dataSetValues.data && {
-        ...dataSetValues.data,
-        displayOptions:
-            dataSetValues.data?.displayOptions &&
-            JSON.parse(dataSetValues.data?.displayOptions),
-    }
+    const initialValues = useMemo(
+        () =>
+            dataSetValues.data && {
+                ...dataSetValues.data,
+                displayOptions:
+                    dataSetValues.data?.displayOptions &&
+                    JSON.parse(dataSetValues.data?.displayOptions),
+            },
+        [dataSetValues.data]
+    )
 
     return (
         <SectionedFormProvider formDescriptor={DataSetFormDescriptor}>

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-02-18T07:33:35.621Z\n"
-"PO-Revision-Date: 2025-02-18T07:33:35.621Z\n"
+"POT-Creation-Date: 2025-02-18T12:21:19.097Z\n"
+"PO-Revision-Date: 2025-02-18T12:21:19.097Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1028,11 +1028,11 @@ msgstr "{{label}} (required)"
 msgid "Should not exceed {{maxLength}} characters"
 msgstr "Should not exceed {{maxLength}} characters"
 
-msgid "No changes to be saved"
-msgstr "No changes to be saved"
-
 msgid "Saved successfully"
 msgstr "Saved successfully"
+
+msgid "No changes to be saved"
+msgstr "No changes to be saved"
 
 msgid "Cannot save empty object"
 msgstr "Cannot save empty object"
