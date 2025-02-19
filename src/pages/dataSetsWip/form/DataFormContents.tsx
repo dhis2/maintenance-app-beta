@@ -10,7 +10,11 @@ import { SectionedFormSection } from '../../../components/sectionedForm'
 import { CategoryComboField } from './CategoryComboField'
 import { DataSetElementsModelTransferField } from './DataSetElementsModelTransferField'
 
-export const DataFormContents = ({ name }: { name: string }) => {
+export const DataFormContents = React.memo(function DataFormContents({
+    name,
+}: {
+    name: string
+}) {
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
@@ -57,4 +61,4 @@ export const DataFormContents = ({ name }: { name: string }) => {
             </StandardFormField>
         </SectionedFormSection>
     )
-}
+})
