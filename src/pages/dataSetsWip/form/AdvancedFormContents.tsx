@@ -6,7 +6,11 @@ import {
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
 
-export const AdvancedFormContents = ({ name }: { name: string }) => {
+export const AdvancedFormContents = React.memo(function AdvancedFormContents({
+    name,
+}: {
+    name: string
+}) {
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
@@ -20,4 +24,4 @@ export const AdvancedFormContents = ({ name }: { name: string }) => {
             <div style={{ height: 900 }} />
         </SectionedFormSection>
     )
-}
+})
