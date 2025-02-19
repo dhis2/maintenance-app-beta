@@ -1,21 +1,15 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
-import { useFormState } from 'react-final-form'
 import {
-    OrganisationUnitField,
+    OrganisationUnitTreeWithToolbarFormField,
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { OrganisationUnitFormValue } from '../../../components/form/fields/OrganisationUnitField'
 import { SectionedFormSection } from '../../../components/sectionedForm'
 import classes from './OrganisationUnitsFormContents.module.css'
 
 export const OrganisationUnitsFormContents = ({ name }: { name: string }) => {
-    const form = useFormState()
-    const formValues = form.values
-    const fieldName = 'organisationUnits'
-
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
@@ -28,23 +22,24 @@ export const OrganisationUnitsFormContents = ({ name }: { name: string }) => {
             </StandardFormSectionDescription>
             <div className={classes.organisationUnitSelectorWrapper}>
                 <StandardFormField>
-                    <OrganisationUnitField name={fieldName} label={''} />
+                    <OrganisationUnitTreeWithToolbarFormField />
                 </StandardFormField>
-                <div className={classes.organisationUnitSelectorRhs}>
-                    <h4>
-                        {!formValues[fieldName] ||
-                        formValues[fieldName]?.length === 0
-                            ? i18n.t('No selected units')
-                            : i18n.t('{{numberOfUnits}} selected units', {
-                                  numberOfUnits: formValues[fieldName]?.length,
-                              })}
-                    </h4>
-                    {formValues[fieldName]?.map(
-                        (orgUnit: OrganisationUnitFormValue) => (
-                            <p key={orgUnit.id}>{orgUnit.displayName}</p>
-                        )
-                    )}
-                </div>
+                {/* <div className={classes.organisationUnitSelectorRhs}>
+                        <h4>
+                            {!formValues[fieldName] ||
+                            formValues[fieldName]?.length === 0
+                                ? i18n.t('No selected units')
+                                : i18n.t('{{numberOfUnits}} selected units', {
+                                      numberOfUnits:
+                                          formValues[fieldName]?.length,
+                                  })}
+                        </h4>
+                        {formValues[fieldName]?.map(
+                            (orgUnit: OrganisationUnitFormValue) => (
+                                <p key={orgUnit.id}>{orgUnit.displayName}</p>
+                            )
+                        )}
+                    </div> */}
             </div>
         </SectionedFormSection>
     )
