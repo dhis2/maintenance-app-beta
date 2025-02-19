@@ -11,8 +11,12 @@ import { DEFAULT_CATEGORY_COMBO } from '../../../lib'
 import { PeriodTypeField } from './PeriodTypeField'
 import { ToggledNumberInput } from './ToggledNumberInput'
 
-export const PeriodsContents = ({ name }: { name: string }) => {
-    const formValues = useFormState().values
+export const PeriodsContents = React.memo(function PeriodsContents({
+    name,
+}: {
+    name: string
+}) {
+    const formValues = useFormState({ subscription: { values: true } }).values
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
@@ -57,4 +61,4 @@ export const PeriodsContents = ({ name }: { name: string }) => {
             )}
         </SectionedFormSection>
     )
-}
+})

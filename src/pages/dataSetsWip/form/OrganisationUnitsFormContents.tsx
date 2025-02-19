@@ -9,22 +9,24 @@ import {
 import { SectionedFormSection } from '../../../components/sectionedForm'
 import classes from './OrganisationUnitsFormContents.module.css'
 
-export const OrganisationUnitsFormContents = ({ name }: { name: string }) => {
-    return (
-        <SectionedFormSection name={name}>
-            <StandardFormSectionTitle>
-                {i18n.t('Organisation units')}
-            </StandardFormSectionTitle>
-            <StandardFormSectionDescription>
-                {i18n.t(
-                    'Configure which organisation units can collect data for this data set.'
-                )}
-            </StandardFormSectionDescription>
-            <div className={classes.organisationUnitSelectorWrapper}>
-                <StandardFormField>
-                    <OrganisationUnitTreeWithToolbarFormField />
-                </StandardFormField>
-                {/* <div className={classes.organisationUnitSelectorRhs}>
+export const OrganisationUnitsFormContents = React.memo(
+    function OrganisationUnitsFormContents({ name }: { name: string }) {
+        console.log('render')
+        return (
+            <SectionedFormSection name={name}>
+                <StandardFormSectionTitle>
+                    {i18n.t('Organisation units')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Configure which organisation units can collect data for this data set.'
+                    )}
+                </StandardFormSectionDescription>
+                <div className={classes.organisationUnitSelectorWrapper}>
+                    <StandardFormField>
+                        <OrganisationUnitTreeWithToolbarFormField />
+                    </StandardFormField>
+                    {/* <div className={classes.organisationUnitSelectorRhs}>
                         <h4>
                             {!formValues[fieldName] ||
                             formValues[fieldName]?.length === 0
@@ -40,7 +42,8 @@ export const OrganisationUnitsFormContents = ({ name }: { name: string }) => {
                             )
                         )}
                     </div> */}
-            </div>
-        </SectionedFormSection>
-    )
-}
+                </div>
+            </SectionedFormSection>
+        )
+    }
+)
