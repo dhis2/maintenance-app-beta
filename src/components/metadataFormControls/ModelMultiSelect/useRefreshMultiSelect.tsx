@@ -1,5 +1,5 @@
+import { useQueryClient, InvalidateQueryFilters } from '@tanstack/react-query'
 import { useCallback } from 'react'
-import { useQueryClient, InvalidateQueryFilters } from 'react-query'
 import { PlainResourceQuery } from '../../../types'
 
 export const useRefreshModelMultiSelect = (

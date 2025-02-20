@@ -1,5 +1,5 @@
+import { useQueryClient } from '@tanstack/react-query'
 import { useMemo, useCallback } from 'react'
-import { useQueryClient } from 'react-query'
 import { z } from 'zod'
 import {
     getViewConfigForSection,

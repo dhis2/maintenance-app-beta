@@ -1,6 +1,6 @@
 import { FetchError, useDataEngine } from '@dhis2/app-runtime'
+import { useQuery } from '@tanstack/react-query'
 import React from 'react'
-import { useQuery } from 'react-query'
 import { SectionListWrapper } from '../components'
 import { DefaultListActionProps } from '../components/sectionList/listActions/DefaultListActions'
 import { useModelListView } from '../components/sectionList/listView'

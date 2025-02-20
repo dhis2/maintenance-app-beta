@@ -37,5 +37,4 @@
 .confirmationCode {
     margin-inline-start: var(--spacers-dp4);
     font-weight: 500;
-    user-select: none;
 }

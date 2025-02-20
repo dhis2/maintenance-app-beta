@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Center } from '@dhis2/ui'
+import { UseQueryResult } from '@tanstack/react-query'
 import React from 'react'
-import { UseQueryResult } from 'react-query'
 import { SectionListLoader } from '../../../components/sectionList/SectionListLoader'
 import {
     SectionListEmpty,

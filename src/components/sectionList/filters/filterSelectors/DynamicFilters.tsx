@@ -15,24 +15,34 @@ import {
     ValueTypeSelectionFilter,
     FormTypeFilter,
     DataSetFilter,
+    DataElementGroupFilter,
+    DataElementGroupSetFilter,
+    DataElementFilter,
+    CompulsoryFilter,
+    DataDimensionFilter,
 } from '.'
 
 type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
 
 const filterKeyToComponentMap: FilterKeyToComponentMap = {
-    category: Categoryfilter,
-    formType: FormTypeFilter,
-    indicatorType: IndicatorFilter,
-    categoryOption: CategoryOptionFilter,
-    categoryCombo: CategoryComboFilter,
-    categoryOptionGroup: CategoryOptionGroupFilter,
-    domainType: DomainTypeSelectionFilter,
-    valueType: ValueTypeSelectionFilter,
     aggregationType: AggregationTypeFilter,
-    publicAccess: PublicAccessFilter,
+    category: Categoryfilter,
+    categoryCombo: CategoryComboFilter,
+    categoryOption: CategoryOptionFilter,
+    categoryOptionGroup: CategoryOptionGroupFilter,
+    compulsory: CompulsoryFilter,
+    dataDimension: DataDimensionFilter,
     dataDimensionType: DataDimensionTypeFilter,
-    ignoreApproval: IgnoreApprovalFilter,
+    dataElement: DataElementFilter,
+    dataElementGroup: DataElementGroupFilter,
+    dataElementGroupSet: DataElementGroupSetFilter,
     dataSet: DataSetFilter,
+    domainType: DomainTypeSelectionFilter,
+    formType: FormTypeFilter,
+    ignoreApproval: IgnoreApprovalFilter,
+    indicatorType: IndicatorFilter,
+    publicAccess: PublicAccessFilter,
+    valueType: ValueTypeSelectionFilter,
 }
 
 export const DynamicFilters = () => {

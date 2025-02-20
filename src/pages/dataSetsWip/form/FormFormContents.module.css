@@ -1,0 +1,45 @@
+.formTypeCard {
+    padding: var(--spacers-dp8) var(--spacers-dp16);
+    gap: 8px;
+}
+
+.formTypeCardContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacers-dp16);
+}
+
+.formTypeCardContent svg {
+    min-width: 40px;
+    max-width: 40px;
+    fill: var(--colors-grey600);
+}
+
+.formTypeCardContentHighlihghted svg {
+    fill: var(--colors-teal700);
+}
+
+.formTypeTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacers-dp4);
+    justify-content: flex-start;
+}
+
+.formTypeTitle * {
+    margin: 0px;
+}
+
+.formTypeTitle p {
+    color: var(--colors-grey800);
+}
+
+.formTypeCards {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    max-width: 1000px;
+    align-items: stretch;
+}

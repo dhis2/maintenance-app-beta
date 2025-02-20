@@ -1,8 +1,8 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { FormApi } from 'final-form'
 import React, { useMemo } from 'react'
-import { useQuery, useQueryClient } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { DefaultEditFormContents, FormBase } from '../../components'
 import {

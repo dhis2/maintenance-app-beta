@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip } from '@dhis2/ui'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import React, { useMemo, useState } from 'react'
-import { useInfiniteQuery } from 'react-query'
 import { useHref } from 'react-router-dom'
 import { useDebouncedCallback } from 'use-debounce'
 import { getSectionNewPath } from '../../../lib'

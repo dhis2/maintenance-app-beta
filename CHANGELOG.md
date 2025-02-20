@@ -1,3 +1,56 @@
+## [0.29.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.2...v0.29.3) (2025-02-13)
+
+
+### Bug Fixes
+
+* **router:** fix legacy redirect for vite ([#510](https://github.com/dhis2/maintenance-app-beta/issues/510)) ([7a9d3dd](https://github.com/dhis2/maintenance-app-beta/commit/7a9d3dde00693673f2a4894340746d33ff4c2681))
+
+## [0.29.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.1...v0.29.2) (2025-02-04)
+
+
+### Bug Fixes
+
+* **list:** remove deleted model from selected ([#509](https://github.com/dhis2/maintenance-app-beta/issues/509)) ([2ab9b95](https://github.com/dhis2/maintenance-app-beta/commit/2ab9b9571ea214b99616a9a1463cd220960a34a5))
+
+
+### Features
+
+* change svg to images from designs ([#508](https://github.com/dhis2/maintenance-app-beta/issues/508)) [skip release] ([0b94b2f](https://github.com/dhis2/maintenance-app-beta/commit/0b94b2f8eb5acedfa06d3529f0cb9c4443d3ce72))
+
+## [0.29.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.0...v0.29.1) (2025-01-30)
+
+
+### Bug Fixes
+
+* increase cypress timeout in failing test ([2864aa6](https://github.com/dhis2/maintenance-app-beta/commit/2864aa628202f366b1eb8c61a5b4663321c7f1a3))
+* **dependencies:** upgrade dhis2 dependencies ([#497](https://github.com/dhis2/maintenance-app-beta/issues/497)) ([11db8b4](https://github.com/dhis2/maintenance-app-beta/commit/11db8b47668860f441f6a717b0782c3f808eb21b))
+
+
+### Features
+
+* temp data set form section that allows only selecting default ([#507](https://github.com/dhis2/maintenance-app-beta/issues/507)) [skip release] ([ef349a7](https://github.com/dhis2/maintenance-app-beta/commit/ef349a7ad794ca1b90e96c97e5e4dfef0a954550))
+
+# [0.29.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.28.0...v0.29.0) (2025-01-29)
+
+
+### Features
+
+* cat options merge ([#502](https://github.com/dhis2/maintenance-app-beta/issues/502)) ([ac45eb4](https://github.com/dhis2/maintenance-app-beta/commit/ac45eb4ab172f0c2925fc8ca948e464a0bccc62f))
+
+# [0.28.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.27.1...v0.28.0) (2025-01-28)
+
+
+### Features
+
+* implement merging of indicators ([#503](https://github.com/dhis2/maintenance-app-beta/issues/503)) ([680bc27](https://github.com/dhis2/maintenance-app-beta/commit/680bc27d01f42e32af0e37f56536e7f537cf35fc))
+
+## [0.27.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.27.0...v0.27.1) (2025-01-27)
+
+
+### Bug Fixes
+
+* **list:** add additional list filters to dataElementGroup/Set ([#452](https://github.com/dhis2/maintenance-app-beta/issues/452)) ([5abf1f6](https://github.com/dhis2/maintenance-app-beta/commit/5abf1f6344f7bb372390d6c54122b1332df23bfa))
+
 # [0.27.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.26.2...v0.27.0) (2025-01-27)
 
 

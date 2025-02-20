@@ -6,6 +6,7 @@ import { hasAuthority, useCurrentUserAuthorities } from '../user'
 const sectionAuthorityMap = new Map<ModelSection, string>([
     [SECTIONS_MAP.indicator, 'F_INDICATOR_MERGE'],
     [SECTIONS_MAP.indicatorType, 'F_INDICATOR_TYPE_MERGE'],
+    [SECTIONS_MAP.categoryOption, 'F_CATEGORY_OPTION_MERGE'],
 ])
 
 export const getMergeAuthority = (

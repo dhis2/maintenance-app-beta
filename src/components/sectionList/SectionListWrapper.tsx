@@ -107,11 +107,14 @@ export const SectionListWrapper = ({
 
     const renderActions = useCallback(
         (model: BaseListModel) => {
-            const actionsProps = {
+            const actionsProps: DefaultListActionProps = {
                 model,
                 onShowDetailsClick: handleDetailsClick,
                 onOpenSharingClick: setSharingDialogId,
-                onDeleteSuccess: refetch,
+                onDeleteSuccess: (model) => {
+                    remove(model.id)
+                    refetch()
+                },
                 onOpenTranslationClick: setTranslationDialogModel,
             }
             return ActionsComponent !== undefined ? (
@@ -120,7 +123,13 @@ export const SectionListWrapper = ({
                 <DefaultListActions {...actionsProps} />
             )
         },
-        [handleDetailsClick, setSharingDialogId, refetch]
+        [
+            handleDetailsClick,
+            setSharingDialogId,
+            refetch,
+            remove,
+            ActionsComponent,
+        ]
     )
 
     const isAllSelected = data ? checkAllSelected(data) : false
