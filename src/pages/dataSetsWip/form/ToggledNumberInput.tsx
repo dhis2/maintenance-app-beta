@@ -19,33 +19,39 @@ export function ToggledNumberInput({
     uncheckedValue,
     ...other
 }: HiddenInputFieldProps) {
-    const [isChecked, setIsChecked] = useState(false)
     const { input, meta } = useField(name, {
-        parse: (value?: string) =>
-            value === undefined || value === '' ? undefined : parseFloat(value),
+        parse: (value?: string) => {
+            return value === undefined || value === ''
+                ? undefined
+                : parseFloat(value)
+        },
         type: 'number',
         format: (value) => value?.toString(),
-        initialValue: uncheckedValue,
-        validate: (value) =>
-            isChecked && value !== undefined && value <= 0
+        validate: (value) => {
+            return value !== undefined && value < 0
                 ? i18n.t('Value should be bigger than 0')
-                : isChecked && value === undefined
+                : value === undefined
                 ? i18n.t('Required')
-                : undefined,
+                : undefined
+        },
     })
+    const [isChecked, setIsChecked] = useState(
+        input.value !== uncheckedValue.toString()
+    )
 
-    const onCheckboxChange = () => {
-        setIsChecked(!isChecked)
-    }
-
-    useEffect(() => {
-        if (isChecked) {
+    const onCheckboxChange = ({ checked }: { checked: boolean }) => {
+        setIsChecked(checked)
+        if (checked) {
             input.onChange(undefined)
         } else {
             input.onChange(uncheckedValue.toString())
         }
         input.onBlur()
-    }, [isChecked])
+    }
+
+    useEffect(() => {
+        setIsChecked(input.value !== uncheckedValue.toString())
+    }, [input.value, uncheckedValue])
 
     return (
         <>
