@@ -12,6 +12,7 @@ import {
     OrganisationUnitGroup,
     OrganisationUnitLevel,
 } from '../../../../types/generated'
+import { ErrorRetry } from '../../../error'
 import { LoadingSpinner } from '../../../loading/LoadingSpinner'
 import css from './OrgUnitLevelGroupSelect.module.css'
 
@@ -77,6 +78,15 @@ export const LevelSelect = ({ onSelect }: LevelSelectProps) => {
         return <LoadingSpinner />
     }
 
+    if (queryResult.isError) {
+        return (
+            <ErrorRetry
+                error={queryResult.error}
+                onRetryClick={queryResult.refetch}
+            />
+        )
+    }
+
     return (
         <div>
             {queryResult.data?.map((level) => (
@@ -122,6 +132,12 @@ export const GroupSelect = ({ onSelect }: GroupSelectProps) => {
             }
             loading={queryResult.isLoading}
         >
+            {queryResult.isError && (
+                <ErrorRetry
+                    error={queryResult.error}
+                    onRetryClick={queryResult.refetch}
+                />
+            )}
             {items.map((group) => (
                 <MenuItem
                     key={group.id}
