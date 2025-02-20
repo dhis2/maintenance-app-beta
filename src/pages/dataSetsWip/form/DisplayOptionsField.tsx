@@ -73,7 +73,7 @@ export function DisplayOptionsField() {
                             label={i18n.t('Subtitle')}
                         />
                         <div className={classes.customTextAlignOptionsAndTitle}>
-                            <p>Position</p>
+                            <p>{i18n.t('Position')}</p>
                             <div className={classes.customTextAlignOptions}>
                                 <RadioFieldFF
                                     label={i18n.t('Line start')}

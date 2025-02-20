@@ -1,6 +1,4 @@
-import { useAlert } from '@dhis2/app-runtime'
-import i18n from '@dhis2/d2-i18n'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import {
@@ -10,18 +8,8 @@ import {
     DefaultSectionedFormSidebar,
     SectionedFormErrorNotice,
 } from '../../components'
-import {
-    getSectionPath,
-    SectionedFormProvider,
-    SECTIONS_MAP,
-    useNavigateWithSearchState,
-    useOnSubmitEdit,
-    usePatchModel,
-} from '../../lib'
-import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
-import { useOnEditCompletedSuccessfully } from '../../lib/form/useOnSubmit'
+import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { ModelSection } from '../../types'
 import {
     PickWithFieldFilters,
     DataSet,
