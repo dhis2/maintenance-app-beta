@@ -6,7 +6,7 @@ import {
     OrganisationUnitTreeProps,
 } from '@dhis2/ui'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import React from 'react'
+import React, { useState } from 'react'
 import { Field } from 'react-final-form'
 import { useCurrentUserRootOrgUnits, useDebouncedState } from '../../../../lib'
 import { useBoundResourceQueryFn } from '../../../../lib/query/useBoundQueryFn'
@@ -18,6 +18,7 @@ import {
     OrgUnitLevelGroupSelect,
     OrgUnitLevelGroupSelectProps,
 } from './OrgUnitLevelGroupSelect'
+import { uniqueBy } from '../../../../lib/utils'
 
 export type SearchOrganisationUnitResponse = PagedResponse<
     Pick<OrganisationUnit, 'path'>,
@@ -43,19 +44,12 @@ export const OrganisationUnitTreeWithToolbar = ({
     onChange,
     ...treeProps
 }: OrganisationUnitFieldProps) => {
+    const [search, setSearch] = useState('')
     const queryClient = useQueryClient()
     const boundQueryFn = useBoundResourceQueryFn()
-    const {
-        debouncedValue: debouncedSearch,
-        liveValue: search,
-        setValue: setSearchValue,
-    } = useDebouncedState({
-        initialValue: '',
-        delay: 250,
-    })
     const roots = useCurrentUserRootOrgUnits()
 
-    const isFiltered = debouncedSearch !== ''
+    const isFiltered = search !== ''
     const matchingSearchUnits = useQuery({
         queryFn: boundQueryFn<SearchOrganisationUnitResponse>,
         enabled: isFiltered,
@@ -63,13 +57,14 @@ export const OrganisationUnitTreeWithToolbar = ({
             {
                 resource: 'organisationUnits',
                 params: {
-                    filter: `identifiable:token:${debouncedSearch}`,
+                    filter: `identifiable:token:${search}`,
                     fields: ['path'],
                     withinUserHierarchy: true,
-                    pageSize: 50,
+                    pageSize: 150,
                 },
             } satisfies PlainResourceQuery,
         ],
+        keepPreviousData: true,
     })
     const searchUnits =
         matchingSearchUnits.data?.organisationUnits.map((ou) => ou.path) ?? []
@@ -114,7 +109,7 @@ export const OrganisationUnitTreeWithToolbar = ({
             })
             const allNewSelected = selected?.concat(orgUnits.organisationUnits)
             if (allNewSelected) {
-                onChange(allNewSelected)
+                onChange(uniqueBy(allNewSelected, (o) => o.path))
             }
         }
 
@@ -139,27 +134,29 @@ export const OrganisationUnitTreeWithToolbar = ({
             })
             const allNewSelected = selected?.concat(orgUnits.organisationUnits)
             if (allNewSelected) {
-                onChange(allNewSelected)
+                onChange(uniqueBy(allNewSelected, (o) => o.path))
             }
         }
 
     return (
         <div className={css.wrapper}>
             <OrganisationUnitTreeToolbar
-                onSearchChange={setSearchValue}
-                searchValue={search}
+                onSearchChange={setSearch}
                 onGroupSelect={handleGroupSelect}
                 onLevelSelect={handleLevelSelect}
             />
-            {matchingSearchUnits.data?.pager.total === 0 && (
-                <p>No organisation units match your search.</p>
-            )}
-            {matchingSearchUnits.data?.pager.nextPage && (
-                <p>
-                    There are more results than are displayed. Please narrow
-                    down the search.
-                </p>
-            )}
+            <div className={css.treeMessage}>
+                {matchingSearchUnits.data?.pager.total === 0 && (
+                    <p>No organisation units match your search.</p>
+                )}
+                {matchingSearchUnits.data?.pager.nextPage && (
+                    <p>
+                        There are more results than are displayed. Please narrow
+                        down the search.
+                    </p>
+                )}
+            </div>
+
             <div className={css.treeWrapper}>
                 {
                     <OrganisationUnitTree
@@ -177,25 +174,28 @@ export const OrganisationUnitTreeWithToolbar = ({
 }
 
 type OrganisationUnitTreeToolbarProps = {
-    searchValue: string | undefined
     onSearchChange: (search: string) => void
     onGroupSelect: OrgUnitLevelGroupSelectProps['onGroupSelect']
     onLevelSelect: OrgUnitLevelGroupSelectProps['onLevelSelect']
 }
 const OrganisationUnitTreeToolbar = ({
     onSearchChange,
-    searchValue,
     onGroupSelect,
     onLevelSelect,
 }: OrganisationUnitTreeToolbarProps) => {
+    const { liveValue: search, setValue: setSearchValue } = useDebouncedState({
+        onSetDebouncedValue: onSearchChange,
+        initialValue: '',
+        delay: 250,
+    })
     return (
         <div className={css.toolbarWrapper}>
             <InputField
                 className={css.searchField}
                 placeholder={i18n.t('Search for organisation units')}
-                value={searchValue}
+                value={search}
                 onChange={(payload) => {
-                    onSearchChange(payload.value ?? '')
+                    setSearchValue(payload.value ?? '')
                 }}
                 clearable
                 dense
