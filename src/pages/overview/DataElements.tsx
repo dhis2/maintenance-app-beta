@@ -11,7 +11,7 @@ export const DataElementsOverview = () => {
         <OverviewGroup title={TITLE}>
             <OverviewGroupSummary>
                 {i18n.t(
-                    'Data elements are the core foundational item of DHIS2 and are used for data collection. Data elements can be organised by group and group set.'
+                    'Data elements are fundamental units for data collection in DHIS2, representing individual data points for both tracker and aggregate data. They serve as the building blocks for capturing, analysing, and reporting information.'
                 )}
             </OverviewGroupSummary>
             <DataElementsCardGroup />
@@ -32,7 +32,8 @@ export const DataElementsCardGroup = ({
             <FilterAuthorizedSections>
                 <SummaryCard section={SECTIONS_MAP.dataElement}>
                     {i18n.t(
-                        'Building block elements of your database. The foundation of data collection and analysis.'
+                        'Create, update, view and delete data elements: the foundation of data collection and analysis.',
+                        { nsSeparator: '~:~' }
                     )}
                 </SummaryCard>
                 <SummaryCard section={SECTIONS_MAP.dataElementGroup}>

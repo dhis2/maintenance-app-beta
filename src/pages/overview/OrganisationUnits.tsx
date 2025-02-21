@@ -11,7 +11,7 @@ export const OrganisationUnitsOverview = () => {
         <OverviewGroup title={TITLE}>
             <OverviewGroupSummary>
                 {i18n.t(
-                    'Organisation units define the locations, or points of service, for which data can be collected. For example, they might be departments, offices, hospitals or clinics. Organisation units can be organised by group and group set.'
+                    'Organisation units are the structural entities within DHIS2 that define locations or points of service where data is collected. Examples include regions, hospitals, clinics, or departments. They help establish the hierarchy and scope for data access, collection, reporting, and analysis. Organisation units can be organised into groups and group sets.'
                 )}
             </OverviewGroupSummary>
             <OrganisationUnitsCardGroup />
@@ -32,22 +32,22 @@ export const OrganisationUnitsCardGroup = ({
             <FilterAuthorizedSections>
                 <SummaryCard section={SECTIONS_MAP.organisationUnit}>
                     {i18n.t(
-                        'An individual organisation unit specifies a location for which data can be collected.'
+                        'Create, update, view and delete individual organisation units.'
                     )}
                 </SummaryCard>
                 <SummaryCard section={SECTIONS_MAP.organisationUnitGroup}>
                     {i18n.t(
-                        'Improve analysis of single organisation units by combining them into organisation unit groups.'
+                        'Categorise similar organisation units into groups, like hospitals or clinics, enabling efficient data aggregation and analysis across diverse locations in DHIS2.'
                     )}
                 </SummaryCard>
                 <SummaryCard section={SECTIONS_MAP.organisationUnitGroupSet}>
                     {i18n.t(
-                        'Add another level of organisation by grouping organisation unit groups into group sets.'
+                        'Organise multiple groups with shared characteristics into sets, allowing for another level of data analysis and comparison across the organisation structure.'
                     )}
                 </SummaryCard>
                 <SummaryCard section={SECTIONS_MAP.organisationUnitLevel}>
                     {i18n.t(
-                        'Organisation unit levels define how organisation units can be structured into a hierarchy and what names are used in that hierarchy.'
+                        'Organisation unit levels define hierarchical layers within the organisation structure, such as national or regional tiers, and specify the names used for each level.'
                     )}
                 </SummaryCard>
             </FilterAuthorizedSections>

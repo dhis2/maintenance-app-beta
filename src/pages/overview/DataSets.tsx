@@ -11,7 +11,7 @@ export const DataSetsOverview = () => {
         <OverviewGroup title={TITLE}>
             <OverviewGroupSummary>
                 {i18n.t(
-                    'Data sets structure how data should be entered and create data entry forms for data collection. A data set defines what data should be collected, when it should be collected, and where it should be collected.'
+                    'Data sets are collections of data elements grouped for aggregate data entry, validation, access, collection frequency and reporting. Data entry forms are defined and configured by data sets. They help streamline the management of data collection routines and ensure consistency across different stages of data handling within DHIS2.'
                 )}
             </OverviewGroupSummary>
             <DataSetsCardGroup />
@@ -28,7 +28,7 @@ export const DataSetsCardGroup = ({ showTitle }: { showTitle?: boolean }) => {
             <FilterAuthorizedSections>
                 <SummaryCard section={SECTIONS_MAP.dataSet}>
                     {i18n.t(
-                        'A data set defines what data should be collected, when it should be collected, and where it should be collected.'
+                        'Create, update, view and delete data sets, specify the related data elements, period type organisation units, sharing settings and workflow approval here.'
                     )}
                 </SummaryCard>
             </FilterAuthorizedSections>
