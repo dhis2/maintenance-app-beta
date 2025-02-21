@@ -159,6 +159,21 @@ msgstr "{{fieldLabel}} (required)"
 msgid "Name"
 msgstr "Name"
 
+msgid "Level"
+msgstr "Level"
+
+msgid "Group"
+msgstr "Group"
+
+msgid "Select units by group or level..."
+msgstr "Select units by group or level..."
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Search for organisation units"
+msgstr "Search for organisation units"
+
 msgid "Select organisation units"
 msgstr "Select organisation units"
 

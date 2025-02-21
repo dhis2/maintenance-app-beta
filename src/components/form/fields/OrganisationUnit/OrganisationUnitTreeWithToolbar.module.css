@@ -1,4 +1,11 @@
+.treeSelectedListWrapper {
+    display: flex;
+    gap: var(--spacers-dp8);
+    max-height: 800px;
+}
+
 .wrapper {
+    flex: 1 1 60%;
     padding: var(--spacing-2dp);
     max-width: 640px;
     border: 1px solid var(--colors-grey300);
@@ -6,7 +13,7 @@
 }
 
 .treeWrapper {
-    max-height: 800px;
+    max-height: 750px;
     overflow: auto;
 }
 

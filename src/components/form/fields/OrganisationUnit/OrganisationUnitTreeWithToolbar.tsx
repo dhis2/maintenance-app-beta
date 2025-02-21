@@ -12,6 +12,7 @@ import { useCurrentUserRootOrgUnits, useDebouncedState } from '../../../../lib'
 import { useBoundResourceQueryFn } from '../../../../lib/query/useBoundQueryFn'
 import { Optional, PagedResponse, PlainResourceQuery } from '../../../../types'
 import { OrganisationUnit } from '../../../../types/generated'
+import { OrganisationUnitSelectedList } from './OrganisationUnitSelectedList'
 import css from './OrganisationUnitTreeWithToolbar.module.css'
 import {
     OrgUnitLevelGroupSelect,
@@ -19,14 +20,14 @@ import {
 } from './OrgUnitLevelGroupSelect'
 
 export type SearchOrganisationUnitResponse = PagedResponse<
-    Pick<OrganisationUnit, 'id' | 'path'>,
+    Pick<OrganisationUnit, 'path'>,
     'organisationUnits'
 >
 
 export type OrganisationUnitValue = {
     id?: string
     path: string
-    displayName?: string
+    displayName: string
 }
 
 export type OrganisationUnitFieldProps = Optional<
@@ -97,12 +98,14 @@ export const OrganisationUnitTreeWithToolbar = ({
     const handleLevelSelect: OrgUnitLevelGroupSelectProps['onLevelSelect'] =
         async (level) => {
             const orgUnits = await queryClient.fetchQuery({
-                queryFn: boundQueryFn<SearchOrganisationUnitResponse>,
+                queryFn: boundQueryFn<{
+                    organisationUnits: OrganisationUnitValue[]
+                }>,
                 queryKey: [
                     {
                         resource: 'organisationUnits',
                         params: {
-                            fields: ['path'],
+                            fields: ['path', 'displayName'],
                             filter: [`level:eq:${level.level}`],
                             paging: false,
                         },
@@ -118,12 +121,14 @@ export const OrganisationUnitTreeWithToolbar = ({
     const handleGroupSelect: OrgUnitLevelGroupSelectProps['onGroupSelect'] =
         async (group) => {
             const orgUnits = await queryClient.fetchQuery({
-                queryFn: boundQueryFn<SearchOrganisationUnitResponse>,
+                queryFn: boundQueryFn<{
+                    organisationUnits: OrganisationUnitValue[]
+                }>,
                 queryKey: [
                     {
                         resource: 'organisationUnits',
                         params: {
-                            fields: ['path'],
+                            fields: ['path', 'displayName'],
                             filter: [
                                 `organisationUnitGroups.id:eq:${group.id}`,
                             ],
@@ -208,13 +213,18 @@ export const OrganisationUnitTreeWithToolbarFormField = () => {
         <Field<OrganisationUnitValue[]>
             name="organisationUnits"
             render={(renderProps) => (
-                <OrganisationUnitTreeWithToolbar
-                    onChange={(value) => {
-                        renderProps.input.onChange(value)
-                        renderProps.input.onBlur()
-                    }}
-                    selected={renderProps.input.value}
-                />
+                <div className={css.treeSelectedListWrapper}>
+                    <OrganisationUnitTreeWithToolbar
+                        onChange={(value) => {
+                            renderProps.input.onChange(value)
+                            renderProps.input.onBlur()
+                        }}
+                        selected={renderProps.input.value}
+                    />
+                    <OrganisationUnitSelectedList
+                        selected={renderProps.input.value}
+                    />
+                </div>
             )}
             format={(p) => p ?? []}
         />
