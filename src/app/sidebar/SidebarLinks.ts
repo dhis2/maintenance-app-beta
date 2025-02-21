@@ -83,6 +83,7 @@ export const sidebarLinks = {
             getSectionLinkItem(SECTIONS_MAP.organisationUnit),
             getSectionLinkItem(SECTIONS_MAP.organisationUnitGroup),
             getSectionLinkItem(SECTIONS_MAP.organisationUnitGroupSet),
+            getSectionLinkItem(SECTIONS_MAP.organisationUnitLevel),
         ],
     },
     programsAndTracker: {
