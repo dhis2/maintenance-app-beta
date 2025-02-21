@@ -100,7 +100,7 @@ export const OrganisationUnitTreeWithToolbar = ({
                     {
                         resource: 'organisationUnits',
                         params: {
-                            fields: ['path', 'displayName'],
+                            fields: ['id', 'path', 'displayName'],
                             filter: [`level:eq:${level.level}`],
                             paging: false,
                         },
@@ -123,7 +123,7 @@ export const OrganisationUnitTreeWithToolbar = ({
                     {
                         resource: 'organisationUnits',
                         params: {
-                            fields: ['path', 'displayName'],
+                            fields: ['id', 'path', 'displayName'],
                             filter: [
                                 `organisationUnitGroups.id:eq:${group.id}`,
                             ],
