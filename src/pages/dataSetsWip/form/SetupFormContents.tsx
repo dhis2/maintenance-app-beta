@@ -3,6 +3,7 @@ import React from 'react'
 import {
     DefaultIdentifiableFields,
     DescriptionField,
+    StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
@@ -23,8 +24,12 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                 {i18n.t('Set up the basic information for this data set.')}
             </StandardFormSectionDescription>
             <DefaultIdentifiableFields />
-            <DescriptionField />
-            <ColorAndIconField />
+            <StandardFormField>
+                <DescriptionField />
+            </StandardFormField>
+            <StandardFormField>
+                <ColorAndIconField />
+            </StandardFormField>
         </SectionedFormSection>
     )
 })
