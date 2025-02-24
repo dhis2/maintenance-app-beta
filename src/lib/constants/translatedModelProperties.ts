@@ -29,8 +29,10 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     name: i18n.t('Name'),
     sharing: i18n.t('Sharing'),
     shortName: i18n.t('Short name'),
+    skipOffline: i18n.t('Skip offline'),
     user: i18n.t('Owner'), // user refers to the owner of the object
     valueType: i18n.t('Value type'),
+    version: i18n.t('Version'),
     zeroIsSignificant: i18n.t('Zero is significant'),
 }
 

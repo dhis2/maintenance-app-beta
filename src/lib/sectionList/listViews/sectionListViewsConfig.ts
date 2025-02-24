@@ -137,10 +137,22 @@ export const modelListViewsConfig = {
                 'lastUpdated',
                 DESCRIPTORS.publicAccess,
             ],
-            available: [DESCRIPTORS.shortName],
+            available: [
+                DESCRIPTORS.shortName,
+                'categoryCombo',
+                'skipOffline',
+                'version',
+                { label: i18n.t('Expiry days'), path: 'expiryDays' },
+                { label: i18n.t('Timely days'), path: 'timelyDays' },
+                {
+                    label: i18n.t('Open future periods'),
+                    path: 'openFuturePeriods',
+                },
+            ],
         },
         filters: {
-            default: ['formType'],
+            default: ['formType', 'categoryCombo'],
+            available: ['dataElement'],
         },
     },
     organisationUnit: {
