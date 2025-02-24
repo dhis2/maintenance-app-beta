@@ -1,3 +1,15 @@
+# [0.30.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.3...v0.30.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* readapt data set form for editing ([#517](https://github.com/dhis2/maintenance-app-beta/issues/517)) [skip release] ([1b23ef9](https://github.com/dhis2/maintenance-app-beta/commit/1b23ef973d5b936d7f72eb0708e52a7814e562e2))
+
+
+### Features
+
+* implement display option custom text field ([#516](https://github.com/dhis2/maintenance-app-beta/issues/516)) ([8b18437](https://github.com/dhis2/maintenance-app-beta/commit/8b184375353187652bef7eb7044bb7ffeb0d4f0e))
+
 ## [0.29.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.2...v0.29.3) (2025-02-13)
 
 
