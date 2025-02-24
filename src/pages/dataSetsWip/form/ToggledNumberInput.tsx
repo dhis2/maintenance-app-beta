@@ -30,13 +30,14 @@ export function ToggledNumberInput({
         validate: (value) => {
             return value !== undefined && value < 0
                 ? i18n.t('Value should be bigger than 0')
-                : value === undefined
+                : isChecked && value === undefined
                 ? i18n.t('Required')
                 : undefined
         },
     })
+
     const [isChecked, setIsChecked] = useState(
-        input.value !== uncheckedValue.toString()
+        input.value !== undefined && input.value !== uncheckedValue.toString()
     )
 
     const onCheckboxChange = ({ checked }: { checked: boolean }) => {
@@ -50,7 +51,9 @@ export function ToggledNumberInput({
     }
 
     useEffect(() => {
-        setIsChecked(input.value !== uncheckedValue.toString())
+        if (input.value !== undefined) {
+            setIsChecked(input.value !== uncheckedValue.toString())
+        }
     }, [input.value, uncheckedValue])
 
     return (

@@ -5,6 +5,7 @@ import {
     getDefaults,
     modelFormSchemas,
 } from '../../../lib'
+import { ModelWithAttributeValues } from '../../../lib/form/createJsonPatchOperations'
 import { createFormValidate } from '../../../lib/form/validate'
 
 const {
@@ -37,8 +38,27 @@ export const dataSetFormSchema = identifiable
         periodType: z.string().default('Monthly'),
         openFuturePeriods: z
             .number()
-            .int({ message: i18n.t('The number should not have decimals') }),
-        expiryDays: z.number(),
+            .int({ message: i18n.t('The number should not have decimals') })
+            .optional(),
+        expiryDays: z.number().optional(),
+        formType: z.enum(['DEFAULT', 'SECTION', 'CUSTOM']).default('DEFAULT'),
+        displayOptions: z
+            .string()
+            .optional()
+            .refine(
+                (val) => {
+                    try {
+                        if (val !== undefined) {
+                            JSON.parse(val)
+                        }
+                        return true
+                    } catch {
+                        return false
+                    }
+                },
+                { message: 'Invalid JSON string' }
+            )
+            .default('{}'),
         openPeriodsAfterCoEndDate: z
             .number()
             .int({ message: i18n.t('The number should not have decimals') })
@@ -50,3 +70,11 @@ export const initialValues = getDefaults(dataSetFormSchema)
 export type DataSetFormValues = typeof initialValues
 
 export const validate = createFormValidate(dataSetFormSchema)
+
+export const dataSetValueFormatter = (values: DataSetFormValues) => {
+    return {
+        ...values,
+        displayOptions:
+            values.displayOptions && JSON.stringify(values.displayOptions),
+    }
+}

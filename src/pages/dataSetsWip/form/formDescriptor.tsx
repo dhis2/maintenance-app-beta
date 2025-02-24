@@ -90,6 +90,10 @@ export const DataSetFormDescriptor = {
                     name: 'formType',
                     label: i18n.t('Form type'),
                 },
+                {
+                    name: 'displayOptions',
+                    label: i18n.t('Display Options'),
+                },
             ],
         },
         { name: 'advanced', label: i18n.t('Advanced'), fields: [] },

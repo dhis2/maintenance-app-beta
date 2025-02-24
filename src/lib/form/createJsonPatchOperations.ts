@@ -30,7 +30,12 @@ interface FormatFormValuesArgs<FormValues extends ModelWithAttributeValues> {
 // attributeValues is an array in the form, thus the key will be attributeValues[0] etc
 // remove these, and replace with 'attributeValues'
 // style.code should post to style, not style.code, because it's a complex object
-const complexKeys = ['attributeValues', 'style', 'dataSetElements'] as const
+const complexKeys = [
+    'attributeValues',
+    'style',
+    'dataSetElements',
+    'displayOptions',
+] as const
 export const sanitizeDirtyValueKeys = (dirtyKeys: string[]) => {
     const complexChanges = complexKeys.filter((complexKey) =>
         dirtyKeys.some((dirtyKey) => dirtyKey.startsWith(complexKey))
