@@ -37,13 +37,9 @@ export function DisplayOptionsField() {
         value: 'line-end',
     })
 
-    const hasAnyDisplayOptions = [
-        titleField,
-        subtitleField,
-        alignFieldEnd,
-        alignFieldCenter,
-        alignFieldStart,
-    ].some((field) => field.input.value)
+    const hasAnyDisplayOptions = [titleField, subtitleField].some(
+        (field) => field.input.value
+    )
     const [isChecked, setIsChecked] = useState(hasAnyDisplayOptions)
 
     const onCheckboxChange = () => {

@@ -175,12 +175,14 @@ export const FormFormContents = ({ name }: { name: string }) => {
                     />
                 </Card>
             </HorizontalFieldGroup>
-            <div className={classes.displayOptions}>
-                <StandardFormSectionTitle>
-                    {i18n.t('Display options')}
-                </StandardFormSectionTitle>
-                <DisplayOptionsField />
-            </div>
+            {formValues.displayOptions !== undefined && (
+                <div className={classes.displayOptions}>
+                    <StandardFormSectionTitle>
+                        {i18n.t('Display options')}
+                    </StandardFormSectionTitle>
+                    <DisplayOptionsField />
+                </div>
+            )}
         </SectionedFormSection>
     )
 }

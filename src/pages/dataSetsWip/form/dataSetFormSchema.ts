@@ -38,8 +38,9 @@ export const dataSetFormSchema = identifiable
         periodType: z.string().default('Monthly'),
         openFuturePeriods: z
             .number()
-            .int({ message: i18n.t('The number should not have decimals') }),
-        expiryDays: z.number(),
+            .int({ message: i18n.t('The number should not have decimals') })
+            .optional(),
+        expiryDays: z.number().optional(),
         formType: z.enum(['DEFAULT', 'SECTION', 'CUSTOM']).default('DEFAULT'),
         displayOptions: z
             .string()
@@ -56,7 +57,8 @@ export const dataSetFormSchema = identifiable
                     }
                 },
                 { message: 'Invalid JSON string' }
-            ),
+            )
+            .default('{}'),
         openPeriodsAfterCoEndDate: z
             .number()
             .int({ message: i18n.t('The number should not have decimals') })
