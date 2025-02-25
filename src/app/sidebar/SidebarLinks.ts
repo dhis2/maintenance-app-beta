@@ -81,9 +81,9 @@ export const sidebarLinks = {
         links: [
             getOverviewLinkItem(OVERVIEW_SECTIONS.organisationUnit),
             getSectionLinkItem(SECTIONS_MAP.organisationUnit),
-            getSectionLinkItem(SECTIONS_MAP.organisationUnitLevel),
             getSectionLinkItem(SECTIONS_MAP.organisationUnitGroup),
             getSectionLinkItem(SECTIONS_MAP.organisationUnitGroupSet),
+            getSectionLinkItem(SECTIONS_MAP.organisationUnitLevel),
         ],
     },
     programsAndTracker: {

@@ -13,7 +13,7 @@ import css from './Toolbar.module.css'
 type ToolbarSelectedProps = {
     selectedModels: Set<string>
     onDeselectAll: () => void
-    downloadButtonElement: JSX.Element
+    downloadButtonElement?: JSX.Element
 }
 
 export const ToolbarSelected = ({

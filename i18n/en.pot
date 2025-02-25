@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-02-20T15:05:44.313Z\n"
-"PO-Revision-Date: 2025-02-20T15:05:44.313Z\n"
+"POT-Creation-Date: 2025-02-24T12:30:39.187Z\n"
+"PO-Revision-Date: 2025-02-24T12:30:39.187Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -587,6 +587,12 @@ msgstr "Organisation unit"
 msgid "Organisation units"
 msgstr "Organisation units"
 
+msgid "Organisation unit level"
+msgstr "Organisation unit level"
+
+msgid "Organisation unit levels"
+msgstr "Organisation unit levels"
+
 msgid "Organisation unit group"
 msgstr "Organisation unit group"
 
@@ -1042,6 +1048,12 @@ msgstr "Created successfully"
 
 msgid "Period type"
 msgstr "Period type"
+
+msgid "Level"
+msgstr "Level"
+
+msgid "Offline levels"
+msgstr "Offline levels"
 
 msgid "Factor"
 msgstr "Factor"
@@ -1716,6 +1728,9 @@ msgstr "Filter selected organisation unit groups"
 
 msgid "Set up the basic information for this organisational unit group."
 msgstr "Set up the basic information for this organisational unit group."
+
+msgid "Save"
+msgstr "Save"
 
 msgid "Longitude"
 msgstr "Longitude"
