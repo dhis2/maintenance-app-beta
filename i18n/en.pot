@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-02-24T12:30:39.187Z\n"
-"PO-Revision-Date: 2025-02-24T12:30:39.187Z\n"
+"POT-Creation-Date: 2025-02-25T14:56:18.250Z\n"
+"PO-Revision-Date: 2025-02-25T14:56:18.250Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1731,6 +1731,9 @@ msgstr "Set up the basic information for this organisational unit group."
 
 msgid "Save"
 msgstr "Save"
+
+msgid "Error saving organisation unit levels"
+msgstr "Error saving organisation unit levels"
 
 msgid "Longitude"
 msgstr "Longitude"

@@ -1,4 +1,4 @@
-import { useDataEngine } from '@dhis2/app-runtime'
+import { useAlert, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
     DataTableCell,
@@ -8,7 +8,6 @@ import {
     SingleSelectOption,
 } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
-import { FORM_ERROR } from 'final-form'
 import React, { useCallback, useState } from 'react'
 import { SectionList } from '../../components'
 import { useModelListView } from '../../components/sectionList/listView'
@@ -52,6 +51,10 @@ export const ListRows = ({
     const dataEngine = useDataEngine()
     const onEditCompletedSuccessfully = useOnEditCompletedSuccessfully(
         SECTIONS_MAP.organisationUnitLevel
+    )
+    const saveAlert = useAlert(
+        ({ message }) => message,
+        (options) => options
     )
     const [editingModel, setEditingModel] = useState<
         undefined | OrgUnitListModel
@@ -118,8 +121,11 @@ export const ListRows = ({
                 })
                 setEditingModel(undefined)
                 refetch()
-            } catch (error) {
-                return { [FORM_ERROR]: (error as Error | string).toString() }
+            } catch {
+                saveAlert.show({
+                    message: i18n.t('Error saving organisation unit levels'),
+                    error: true,
+                })
             }
         }
     }
