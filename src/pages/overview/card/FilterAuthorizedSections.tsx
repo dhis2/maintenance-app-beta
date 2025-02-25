@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react'
 import { useIsSectionAuthorizedPredicate } from '../../../lib'
 import { Section } from '../../../types'
 
-type FilterAuthorizedSectionsProps = {
+export type FilterAuthorizedSectionsProps = {
     children:
         | ReactElement<{
               section?: Section

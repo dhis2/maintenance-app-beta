@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import { OVERVIEW_SECTIONS, SECTIONS_MAP } from '../../lib'
-import { FilterAuthorizedSections, SummaryCard, SummaryCardGroup } from './card'
+import { SummaryCard, SummaryCardGroup } from './card'
 import { OverviewGroup, OverviewGroupSummary } from './group'
 
 const TITLE = SECTIONS_MAP.dataSet.titlePlural
@@ -25,13 +25,11 @@ export const DataSetsCardGroup = ({ showTitle }: { showTitle?: boolean }) => {
             title={showTitle ? TITLE : undefined}
             section={OVERVIEW_SECTIONS.dataSet}
         >
-            <FilterAuthorizedSections>
-                <SummaryCard section={SECTIONS_MAP.dataSet}>
-                    {i18n.t(
-                        'Create, update, view and delete data sets, specify the related data elements, period type organisation units, sharing settings and workflow approval here.'
-                    )}
-                </SummaryCard>
-            </FilterAuthorizedSections>
+            <SummaryCard section={SECTIONS_MAP.dataSet}>
+                {i18n.t(
+                    'Create, update, view and delete data sets, specify the related data elements, period type organisation units, sharing settings and workflow approval here.'
+                )}
+            </SummaryCard>
         </SummaryCardGroup>
     )
 }
