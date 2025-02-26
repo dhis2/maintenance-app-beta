@@ -1,3 +1,11 @@
+## [0.30.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.30.0...v0.30.1) (2025-02-26)
+
+
+### Bug Fixes
+
+* add missing attribute valueTypes ([#512](https://github.com/dhis2/maintenance-app-beta/issues/512)) ([866974e](https://github.com/dhis2/maintenance-app-beta/commit/866974e973f3fcabee07eee0b04f600626f3a0ee))
+* disable failing tests ([#520](https://github.com/dhis2/maintenance-app-beta/issues/520)) [skip release] ([023367a](https://github.com/dhis2/maintenance-app-beta/commit/023367a5d1f42768cd7740ff9fb4da679d7e0afd))
+
 # [0.30.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.3...v0.30.0) (2025-02-24)
 
 
