@@ -16,9 +16,10 @@ const NOTIFICATION_RECIPIENTS_QUERY = {
 }
 
 const NotificationField = () => {
-    const { input: notificationRecipientsInput } = useField(
-        'notificationRecipients'
-    )
+    const {
+        input: notificationRecipientsInput,
+        meta: notificationRecipientsMeta,
+    } = useField('notificationRecipients')
     const { input: notifyCompletingUserInput } = useField(
         'notifyCompletingUser'
     )
@@ -46,7 +47,8 @@ const NotificationField = () => {
             <div style={{ marginInlineStart: '24px' }}>
                 <StandardFormField>
                     <ModelSingleSelectField
-                        name="notificationRecipients"
+                        input={notificationRecipientsInput}
+                        meta={notificationRecipientsMeta}
                         label={i18n.t('Recipient user group')}
                         query={NOTIFICATION_RECIPIENTS_QUERY}
                         disabled={!notificationsEnabled}
