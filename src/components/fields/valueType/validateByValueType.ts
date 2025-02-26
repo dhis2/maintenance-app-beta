@@ -53,7 +53,7 @@ const VALUE_TYPE_VALIDATE = {
     URL: url,
     //true_only doesnt make much sense imo, but this is what the backend is doing...
     TRUE_ONLY: (value: unknown) =>
-        value === 'true' ? undefined : 'Must be true',
+        value === 'true' ? undefined : i18n.t('Must be checked'),
     EMAIL: email,
 } satisfies Partial<Record<ValueType, Validator>>
 
