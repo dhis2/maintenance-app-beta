@@ -32,6 +32,7 @@ const fieldFilters = [
     'openPeriodsAfterCoEndDate',
     'formType',
     'displayOptions',
+    'legendSets[id,displayName]',
 ] as const
 type DataSetValues = PickWithFieldFilters<DataSet, typeof fieldFilters>
 
