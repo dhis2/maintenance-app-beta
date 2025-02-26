@@ -1,21 +1,5 @@
-import { useDataEngine } from '@dhis2/app-runtime'
-import { useEffect, useRef, useState } from 'react'
-import { useField } from 'react-final-form'
-import { CategoryCombo } from '../../../types/generated'
-
-const QUERY_CATEGORY_OPTION_COMBOS = {
-    categoryCombos: {
-        resource: 'categoryCombos',
-        params: (variables: Record<string, string[]>) => {
-            const params = {
-                fields: 'id,displayName,categoryOptionCombos[id,displayName]',
-                filter: `id:in:[${variables.categoryCombos.join(',')}]`,
-                paging: false,
-            }
-            return params
-        },
-    },
-}
+import { useQuery } from '@tanstack/react-query'
+import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
 
 type DataSetElement = {
     categoryCombo?: {
@@ -58,29 +42,6 @@ type Option = {
     }
 }
 
-type QueryResponse = {
-    categoryCombos: {
-        categoryCombos: CategoryComboTruncated[]
-    }
-}
-
-const compareCategoryCombosArray = (
-    currentCCs: string[],
-    newCCs: string[]
-): boolean => {
-    if (currentCCs.length !== newCCs.length) {
-        return true
-    }
-
-    const index = 0
-    for (const cc of newCCs) {
-        if (cc !== currentCCs[index]) {
-            return true
-        }
-    }
-    return false
-}
-
 const getRelevantCategoryCombos = (value: DataSetElement[]) => {
     return value
         .map(
@@ -94,7 +55,7 @@ const getOptions = ({
     categoryCombos,
     dataSetElements,
 }: {
-    categoryCombos: any
+    categoryCombos: CategoryComboTruncated[]
     dataSetElements: DataSetElement[]
 }): Option[] => {
     if (
@@ -105,8 +66,8 @@ const getOptions = ({
     ) {
         return []
     }
-    const catComboMap = new Map<string, CategoryCombo[]>(
-        categoryCombos?.map((cc: CategoryCombo) => [
+    const catComboMap = new Map<string, CategoryOptionCombo[]>(
+        categoryCombos?.map((cc: CategoryComboTruncated) => [
             cc.id,
             cc.categoryOptionCombos,
         ])
@@ -133,57 +94,36 @@ const getOptions = ({
     return options.filter((opt) => opt !== undefined)
 }
 
-export const useGetCompulsoryDataElementOperandsOptions = () => {
-    const { input: dseInput } = useField('dataSetElements')
-    const ref = useRef<string[]>([])
-    const [options, setOptions] = useState<Option[] | null>(null)
-    const [error, setError] = useState<Error | undefined>()
-    const [loading, setLoading] = useState<boolean>(false)
-    const engine = useDataEngine()
+export const useCompulsoryDataElementOperandsQuery = ({
+    dataSetElements,
+}: {
+    dataSetElements: DataSetElement[]
+}) => {
+    const queryFn = useBoundResourceQueryFn()
+    const relevantCatCombos = getRelevantCategoryCombos(dataSetElements)
 
-    useEffect(() => {
-        const determineOptions = async () => {
-            setLoading(true)
-            const categoryCombos = getRelevantCategoryCombos(dseInput.value)
-            const areCategoryCombosUpdated = compareCategoryCombosArray(
-                ref.current,
-                categoryCombos
-            )
+    const queryResult = useQuery({
+        queryKey: [
+            {
+                resource: 'categoryCombos',
+                params: {
+                    fields: [
+                        'id,displayName,categoryOptionCombos[id,displayName]',
+                    ],
+                    filter: [`id:in:[${relevantCatCombos.join(',')}]`],
+                    paging: false,
+                },
+            },
+        ],
+        queryFn: queryFn<{ categoryCombos: CategoryComboTruncated[] }>,
+        enabled: relevantCatCombos?.length > 0,
+        staleTime: 60 * 1000,
+        select: (data) =>
+            getOptions({
+                categoryCombos: data.categoryCombos,
+                dataSetElements,
+            }),
+    })
 
-            if (!areCategoryCombosUpdated) {
-                return
-            }
-
-            ref.current = categoryCombos
-
-            // if empty clear
-            if (!categoryCombos.length) {
-                setOptions([])
-            }
-
-            const data = (await engine.query(QUERY_CATEGORY_OPTION_COMBOS, {
-                variables: { categoryCombos: categoryCombos || [] },
-            })) as unknown as QueryResponse
-            const calculatedOptions = getOptions({
-                categoryCombos: data?.categoryCombos?.categoryCombos,
-                dataSetElements: dseInput.value,
-            })
-            setOptions(calculatedOptions)
-        }
-        try {
-            determineOptions()
-        } catch (e) {
-            if (e instanceof Error) {
-                setError(e as Error)
-            } else {
-                console.error(
-                    'An unknown error occurred when retrieving compulsory data element operand options'
-                )
-            }
-        } finally {
-            setLoading(false)
-        }
-    }, [dseInput.value])
-
-    return { options, loading, error }
+    return queryResult
 }
