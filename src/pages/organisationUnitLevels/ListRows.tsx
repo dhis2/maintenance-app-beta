@@ -56,7 +56,7 @@ export const ListRows = ({
         ({ message }) => message,
         (options) => options
     )
-    const [editingModel, setEditingModel] = useState<
+    const [editingOrgUnitLevel, setEditingOrgUnitLevel] = useState<
         undefined | OrgUnitListModel
     >(undefined)
 
@@ -83,43 +83,46 @@ export const ListRows = ({
             }) as Promise<ModelListResponse>
         },
     })
-    const modelList = data?.result
+    const orgUnitLevels = data?.result
 
     const SectionListMessage = () => {
         if (error) {
             console.log(error)
             return <SectionListError />
         }
-        if (!modelList) {
+        if (!orgUnitLevels) {
             return <SectionListLoader />
         }
-        if (modelList.length < 1) {
+        if (orgUnitLevels.length < 1) {
             return <SectionListEmpty />
         }
         return null
     }
 
     const saveNewOrgLevels = async () => {
-        if (modelList && editingModel) {
-            const newLevels = modelList.map((level, index) =>
-                index === editingModel.index ? editingModel : level
+        if (orgUnitLevels && editingOrgUnitLevel) {
+            const newLevels = orgUnitLevels.map((level, index) =>
+                index === editingOrgUnitLevel.index
+                    ? editingOrgUnitLevel
+                    : level
             )
+            const levelsHaveChanged =
+                editingOrgUnitLevel.index !== undefined &&
+                (editingOrgUnitLevel.name !==
+                    orgUnitLevels[editingOrgUnitLevel.index].name ||
+                    editingOrgUnitLevel.offlineLevels !==
+                        orgUnitLevels[editingOrgUnitLevel.index].offlineLevels)
             const mutation = {
                 resource: 'filledOrganisationUnitLevels',
                 type: 'create',
                 data: { organisationUnitLevels: newLevels },
             } as const
             try {
-                await dataEngine.mutate(mutation)
-                onEditCompletedSuccessfully({
-                    withChanges:
-                        !!editingModel.index &&
-                        (editingModel.displayName !==
-                            modelList[editingModel.index].displayName ||
-                            editingModel.offlineLevels !==
-                                modelList[editingModel.index].offlineLevels),
-                })
-                setEditingModel(undefined)
+                if (levelsHaveChanged) {
+                    await dataEngine.mutate(mutation)
+                }
+                onEditCompletedSuccessfully({ withChanges: levelsHaveChanged })
+                setEditingOrgUnitLevel(undefined)
                 refetch()
             } catch {
                 saveAlert.show({
@@ -134,21 +137,19 @@ export const ListRows = ({
         (props: {
             path: string
             model: BaseListModel
-            isEditingRow: boolean
+            editingOrgUnitLevel?: OrgUnitListModel
         }) => {
-            const { path, model, isEditingRow } = props
-            if (
-                isEditingRow &&
-                path === 'offlineLevels' &&
-                editingModel !== undefined
-            ) {
+            const { path, model, editingOrgUnitLevel } = props
+            if (path === 'offlineLevels' && editingOrgUnitLevel !== undefined) {
                 return (
                     <SingleSelect
                         dense
-                        selected={editingModel.offlineLevels?.toString() || ''}
+                        selected={
+                            editingOrgUnitLevel.offlineLevels?.toString() || ''
+                        }
                         onChange={({ selected }) => {
-                            setEditingModel({
-                                ...editingModel,
+                            setEditingOrgUnitLevel({
+                                ...editingOrgUnitLevel,
                                 offlineLevels:
                                     selected === ''
                                         ? undefined
@@ -173,18 +174,14 @@ export const ListRows = ({
                     </SingleSelect>
                 )
             }
-            if (
-                isEditingRow &&
-                path === 'displayName' &&
-                editingModel !== undefined
-            ) {
+            if (path === 'displayName' && editingOrgUnitLevel !== undefined) {
                 return (
                     <Input
-                        value={editingModel.name || ''}
+                        value={editingOrgUnitLevel.name || ''}
                         width={'100px'}
                         onChange={(event) =>
-                            setEditingModel({
-                                ...editingModel,
+                            setEditingOrgUnitLevel({
+                                ...editingOrgUnitLevel,
                                 ['name']: event.value || '',
                             })
                         }
@@ -195,7 +192,7 @@ export const ListRows = ({
                 <ModelValue path={path} schema={schema} sectionModel={model} />
             )
         },
-        [schema, editingModel]
+        [schema]
     )
 
     return (
@@ -206,7 +203,7 @@ export const ListRows = ({
             }))}
         >
             <SectionListMessage />
-            {modelList?.map((model, index) => (
+            {orgUnitLevels?.map((model, index) => (
                 <DataTableRow
                     className={css.listRow}
                     dataTest={`section-list-row-${model.id}`}
@@ -218,16 +215,21 @@ export const ListRows = ({
                             {renderColumnValue({
                                 path: selectedColumn.path,
                                 model,
-                                isEditingRow: index === editingModel?.index,
+                                editingOrgUnitLevel:
+                                    index === editingOrgUnitLevel?.index
+                                        ? editingOrgUnitLevel
+                                        : undefined,
                             })}
                         </DataTableCell>
                     ))}
                     <DataTableCell>
-                        {index === editingModel?.index ? (
+                        {index === editingOrgUnitLevel?.index ? (
                             <EditingListActions
                                 model={model}
                                 onSaveClick={saveNewOrgLevels}
-                                onCancelClick={() => setEditingModel(undefined)}
+                                onCancelClick={() =>
+                                    setEditingOrgUnitLevel(undefined)
+                                }
                             />
                         ) : (
                             <ViewingListActions
@@ -237,7 +239,7 @@ export const ListRows = ({
                                     onTranslationClick(model)
                                 }
                                 onEditClick={() =>
-                                    setEditingModel({ ...model, index })
+                                    setEditingOrgUnitLevel({ ...model, index })
                                 }
                             />
                         )}
