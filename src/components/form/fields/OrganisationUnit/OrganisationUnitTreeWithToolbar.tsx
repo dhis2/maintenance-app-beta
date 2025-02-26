@@ -10,6 +10,7 @@ import React, { useState } from 'react'
 import { Field } from 'react-final-form'
 import { useCurrentUserRootOrgUnits, useDebouncedState } from '../../../../lib'
 import { useBoundResourceQueryFn } from '../../../../lib/query/useBoundQueryFn'
+import { uniqueBy } from '../../../../lib/utils'
 import { Optional, PagedResponse, PlainResourceQuery } from '../../../../types'
 import { OrganisationUnit } from '../../../../types/generated'
 import { OrganisationUnitSelectedList } from './OrganisationUnitSelectedList'
@@ -18,7 +19,7 @@ import {
     OrgUnitLevelGroupSelect,
     OrgUnitLevelGroupSelectProps,
 } from './OrgUnitLevelGroupSelect'
-import { uniqueBy } from '../../../../lib/utils'
+import { FieldWrapper } from '../../helpers'
 
 export type SearchOrganisationUnitResponse = PagedResponse<
     Pick<OrganisationUnit, 'path'>,
@@ -208,23 +209,41 @@ const OrganisationUnitTreeToolbar = ({
     )
 }
 
-export const OrganisationUnitTreeWithToolbarFormField = () => {
+const OrganisationUnitTreeWithSelectedList = (
+    props: OrganisationUnitFieldProps
+) => {
+    return (
+        <div className={css.treeSelectedListWrapper}>
+            <OrganisationUnitTreeWithToolbar {...props} />
+            <OrganisationUnitSelectedList selected={props.selected} />
+        </div>
+    )
+}
+
+export const OrganisationUnitTreeWithToolbarFormField = ({
+    name,
+    label,
+    ...treeProps
+}: OrganisationUnitFieldProps & { name?: string; label?: string }) => {
+    const resolvedName = name ?? 'organisationUnits'
     return (
         <Field<OrganisationUnitValue[]>
-            name="organisationUnits"
+            name={resolvedName}
             render={(renderProps) => (
-                <div className={css.treeSelectedListWrapper}>
-                    <OrganisationUnitTreeWithToolbar
-                        onChange={(value) => {
-                            renderProps.input.onChange(value)
+                <FieldWrapper
+                    name={resolvedName}
+                    meta={renderProps.meta}
+                    label={label}
+                >
+                    <OrganisationUnitTreeWithSelectedList
+                        {...treeProps}
+                        onChange={(val) => {
+                            renderProps.input.onChange(val)
                             renderProps.input.onBlur()
                         }}
                         selected={renderProps.input.value}
                     />
-                    <OrganisationUnitSelectedList
-                        selected={renderProps.input.value}
-                    />
-                </div>
+                </FieldWrapper>
             )}
             format={(p) => p ?? []}
         />

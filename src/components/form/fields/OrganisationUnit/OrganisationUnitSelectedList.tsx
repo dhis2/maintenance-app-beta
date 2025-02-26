@@ -4,7 +4,7 @@ import css from './OrganisationUnitSelectedList.module.css'
 import { OrganisationUnitValue } from './OrganisationUnitTreeWithToolbar'
 
 export type OrganisationUnitSelectedListProps = {
-    selected: OrganisationUnitValue[]
+    selected: OrganisationUnitValue[] | undefined
 }
 export const OrganisationUnitSelectedList = ({
     selected,
@@ -18,7 +18,7 @@ export const OrganisationUnitSelectedList = ({
 
     const sorted = useMemo(
         () =>
-            selected.sort((a, b) =>
+            selected?.sort((a, b) =>
                 a.displayName?.localeCompare(b?.displayName)
             ),
         [selected]
@@ -27,7 +27,7 @@ export const OrganisationUnitSelectedList = ({
         <div className={css.organisationUnitSelectedWrapper}>
             <h4 className={css.title}>{title}</h4>
             <ul className={css.organisationUnitSelectedList}>
-                {sorted.map((orgUnit: OrganisationUnitValue) => (
+                {sorted?.map((orgUnit: OrganisationUnitValue) => (
                     <li key={orgUnit.path}>{orgUnit.displayName}</li>
                 ))}
             </ul>
