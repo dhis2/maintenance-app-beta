@@ -1,3 +1,47 @@
+# [0.30.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.3...v0.30.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* readapt data set form for editing ([#517](https://github.com/dhis2/maintenance-app-beta/issues/517)) [skip release] ([1b23ef9](https://github.com/dhis2/maintenance-app-beta/commit/1b23ef973d5b936d7f72eb0708e52a7814e562e2))
+
+
+### Features
+
+* implement display option custom text field ([#516](https://github.com/dhis2/maintenance-app-beta/issues/516)) ([8b18437](https://github.com/dhis2/maintenance-app-beta/commit/8b184375353187652bef7eb7044bb7ffeb0d4f0e))
+
+## [0.29.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.2...v0.29.3) (2025-02-13)
+
+
+### Bug Fixes
+
+* **router:** fix legacy redirect for vite ([#510](https://github.com/dhis2/maintenance-app-beta/issues/510)) ([7a9d3dd](https://github.com/dhis2/maintenance-app-beta/commit/7a9d3dde00693673f2a4894340746d33ff4c2681))
+
+## [0.29.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.1...v0.29.2) (2025-02-04)
+
+
+### Bug Fixes
+
+* **list:** remove deleted model from selected ([#509](https://github.com/dhis2/maintenance-app-beta/issues/509)) ([2ab9b95](https://github.com/dhis2/maintenance-app-beta/commit/2ab9b9571ea214b99616a9a1463cd220960a34a5))
+
+
+### Features
+
+* change svg to images from designs ([#508](https://github.com/dhis2/maintenance-app-beta/issues/508)) [skip release] ([0b94b2f](https://github.com/dhis2/maintenance-app-beta/commit/0b94b2f8eb5acedfa06d3529f0cb9c4443d3ce72))
+
+## [0.29.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.0...v0.29.1) (2025-01-30)
+
+
+### Bug Fixes
+
+* increase cypress timeout in failing test ([2864aa6](https://github.com/dhis2/maintenance-app-beta/commit/2864aa628202f366b1eb8c61a5b4663321c7f1a3))
+* **dependencies:** upgrade dhis2 dependencies ([#497](https://github.com/dhis2/maintenance-app-beta/issues/497)) ([11db8b4](https://github.com/dhis2/maintenance-app-beta/commit/11db8b47668860f441f6a717b0782c3f808eb21b))
+
+
+### Features
+
+* temp data set form section that allows only selecting default ([#507](https://github.com/dhis2/maintenance-app-beta/issues/507)) [skip release] ([ef349a7](https://github.com/dhis2/maintenance-app-beta/commit/ef349a7ad794ca1b90e96c97e5e4dfef0a954550))
+
 # [0.29.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.28.0...v0.29.0) (2025-01-29)
 
 

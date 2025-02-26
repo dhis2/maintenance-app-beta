@@ -13,6 +13,11 @@
 .formTypeCardContent svg {
     min-width: 40px;
     max-width: 40px;
+    fill: var(--colors-grey600);
+}
+
+.formTypeCardContentHighlihghted svg {
+    fill: var(--colors-teal700);
 }
 
 .formTypeTitle {
@@ -37,4 +42,8 @@
     gap: 20px;
     max-width: 1000px;
     align-items: stretch;
+}
+
+.displayOptions {
+    margin: var(--spacers-dp32) 0;
 }

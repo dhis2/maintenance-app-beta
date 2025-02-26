@@ -9,7 +9,7 @@ export type DefaultListActionProps = {
     onShowDetailsClick: (model: BaseListModel) => void
     onOpenSharingClick: (id: string) => void
     onOpenTranslationClick: (model: BaseListModel) => void
-    onDeleteSuccess: () => void
+    onDeleteSuccess: (model: BaseListModel) => void
 }
 
 export const DefaultListActions = ({
@@ -42,7 +42,7 @@ export const DefaultListActions = ({
                 onShowDetailsClick={() => onShowDetailsClick(model)}
                 onOpenSharingClick={() => onOpenSharingClick(model.id)}
                 onTranslateClick={() => onOpenTranslationClick(model)}
-                onDeleteSuccess={onDeleteSuccess}
+                onDeleteSuccess={() => onDeleteSuccess(model)}
             />
         </ListActions>
     )
