@@ -224,7 +224,10 @@ export const OrganisationUnitTreeWithToolbarFormField = ({
     name,
     label,
     ...treeProps
-}: OrganisationUnitFieldProps & { name?: string; label?: string }) => {
+}: Omit<OrganisationUnitFieldProps, 'onChange' | 'selected'> & {
+    name?: string
+    label?: string
+}) => {
     const resolvedName = name ?? 'organisationUnits'
     return (
         <Field<OrganisationUnitValue[]>
