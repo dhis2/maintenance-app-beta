@@ -1,3 +1,15 @@
+# [0.31.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.30.1...v0.31.0) (2025-02-26)
+
+
+### Bug Fixes
+
+* notification recipients with single select changes ([#521](https://github.com/dhis2/maintenance-app-beta/issues/521)) ([b90b96d](https://github.com/dhis2/maintenance-app-beta/commit/b90b96de4f8aba31c63ae89510663de4bcaf8b25))
+
+
+### Features
+
+* data sets advanced [DHIS2-18710] ([#511](https://github.com/dhis2/maintenance-app-beta/issues/511)) ([5968a26](https://github.com/dhis2/maintenance-app-beta/commit/5968a26bce4a8fda4b0070fa1689bff58836eaa8))
+
 ## [0.30.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.30.0...v0.30.1) (2025-02-26)
 
 
