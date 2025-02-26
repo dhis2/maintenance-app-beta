@@ -36,6 +36,7 @@ export const OrgUnitLevelGroupSelect = ({
     return (
         <DropdownButton
             secondary
+            small
             open={open}
             onClick={() => setOpen(!open)}
             component={
