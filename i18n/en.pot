@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-02-20T15:05:44.313Z\n"
-"PO-Revision-Date: 2025-02-20T15:05:44.313Z\n"
+"POT-Creation-Date: 2025-02-26T13:29:11.936Z\n"
+"PO-Revision-Date: 2025-02-26T13:29:11.936Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -93,6 +93,27 @@ msgstr "Filter options"
 msgid "Retry"
 msgstr "Retry"
 
+msgid "Please enter a GeoJSON value"
+msgstr "Please enter a GeoJSON value"
+
+msgid "Please provide a positive integer"
+msgstr "Please provide a positive integer"
+
+msgid "Please provide a negative integer"
+msgstr "Please provide a negative integer"
+
+msgid "Please provide a 0 or positive integer"
+msgstr "Please provide a 0 or positive integer"
+
+msgid "Please provide valid percantage (0-100)."
+msgstr "Please provide valid percantage (0-100)."
+
+msgid "Please provide valid unit interval (0-1)."
+msgstr "Please provide valid unit interval (0-1)."
+
+msgid "Must be checked"
+msgstr "Must be checked"
+
 msgid "Save and close"
 msgstr "Save and close"
 
@@ -113,9 +134,6 @@ msgstr "Something went wrong when submitting the form"
 
 msgid "<No value>"
 msgstr "<No value>"
-
-msgid "Please enter a GeoJSON value."
-msgstr "Please enter a GeoJSON value."
 
 msgid "Attributes"
 msgstr "Attributes"
@@ -1405,11 +1423,58 @@ msgstr ""
 "level means that data from lower levels will not be included in the "
 "aggregation."
 
+msgid "Send complete notifications"
+msgstr "Send complete notifications"
+
+msgid "Recipient user group"
+msgstr "Recipient user group"
+
+msgid "Send notification to completing user"
+msgstr "Send notification to completing user"
+
 msgid "Advanced options"
 msgstr "Advanced options"
 
 msgid "These options are used for advanced data set configurations."
 msgstr "These options are used for advanced data set configurations."
+
+msgid "Don't save this data to offline storage (skip offline)"
+msgstr "Don't save this data to offline storage (skip offline)"
+
+msgid ""
+"Include data element descriptions in offline storage (data element "
+"decoration)"
+msgstr ""
+"Include data element descriptions in offline storage (data element "
+"decoration)"
+
+msgid "Use this data set with Java mobile client"
+msgstr "Use this data set with Java mobile client"
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid ""
+"Send notifications when data sets are marked complete, using the DHIS2 "
+"Messages app."
+msgstr ""
+"Send notifications when data sets are marked complete, using the DHIS2 "
+"Messages app."
+
+msgid "Legends"
+msgstr "Legends"
+
+msgid "Choose legends that will do something (?????????)"
+msgstr "Choose legends that will do something (?????????)"
+
+msgid "Available legends"
+msgstr "Available legends"
+
+msgid "Search available legends"
+msgstr "Search available legends"
+
+msgid "Search selected legends"
+msgstr "Search selected legends"
 
 msgid "Available data elements"
 msgstr "Available data elements"
