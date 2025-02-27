@@ -1,3 +1,10 @@
+# [0.33.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.32.0...v0.33.0) (2025-02-27)
+
+
+### Features
+
+* add data input periods [DHIS2-18708] ([#515](https://github.com/dhis2/maintenance-app-beta/issues/515)) ([0fd59b8](https://github.com/dhis2/maintenance-app-beta/commit/0fd59b80c9439f5c138efb7bf543a4dca36ba577))
+
 # [0.32.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.31.0...v0.32.0) (2025-02-27)
 
 
