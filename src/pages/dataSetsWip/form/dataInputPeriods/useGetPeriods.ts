@@ -90,6 +90,8 @@ export const useGetPeriodInformation = (
             piMap.set(id, periodInformation)
         })
         return piMap
+        // sortedDipIDs is not stable, so we use stringifiedDipIDs in useMemo dependencies
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [stringifiedDipIDs, calendar, locale])
 
     // return data input period with additional period information and sort
