@@ -28,7 +28,7 @@ export const Toolbar = ({
 
     const DownloadButtonElement = downloadable ? (
         <DownloadButton onClick={() => setDownloadDialogOpen(true)} />
-    ) : undefined
+    ) : null
 
     return (
         <>

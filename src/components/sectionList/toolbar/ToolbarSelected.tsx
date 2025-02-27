@@ -13,7 +13,7 @@ import css from './Toolbar.module.css'
 type ToolbarSelectedProps = {
     selectedModels: Set<string>
     onDeselectAll: () => void
-    downloadButtonElement?: JSX.Element
+    downloadButtonElement: JSX.Element | null
 }
 
 export const ToolbarSelected = ({
@@ -25,7 +25,6 @@ export const ToolbarSelected = ({
     const sharable = useSchemaFromHandle().shareable
     const mergeable = useCanMergeModelInCurrentSection()
     const handleClose = () => setSharingDialogOpen(false)
-
     const searchStateWithSelectedModels = useLocationState({
         selectedModels,
     })
