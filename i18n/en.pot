@@ -1034,11 +1034,11 @@ msgstr "{{label}} (required)"
 msgid "Should not exceed {{maxLength}} characters"
 msgstr "Should not exceed {{maxLength}} characters"
 
-msgid "No changes to be saved"
-msgstr "No changes to be saved"
-
 msgid "Saved successfully"
 msgstr "Saved successfully"
+
+msgid "No changes to be saved"
+msgstr "No changes to be saved"
 
 msgid "Cannot save empty object"
 msgstr "Cannot save empty object"
@@ -1465,6 +1465,27 @@ msgstr "No data elements selected"
 msgid "Close"
 msgstr "Close"
 
+msgid "Display title / subtitle"
+msgstr "Display title / subtitle"
+
+msgid "Title"
+msgstr "Title"
+
+msgid "Subtitle"
+msgstr "Subtitle"
+
+msgid "Position"
+msgstr "Position"
+
+msgid "Line start"
+msgstr "Line start"
+
+msgid "Center"
+msgstr "Center"
+
+msgid "Line end"
+msgstr "Line end"
+
 msgid "Data entry form"
 msgstr "Data entry form"
 
@@ -1492,6 +1513,9 @@ msgstr "Custom form"
 
 msgid "Build and style a custom form layout"
 msgstr "Build and style a custom form layout"
+
+msgid "Display options"
+msgstr "Display options"
 
 msgid "Configure which organisation units can collect data for this data set."
 msgstr "Configure which organisation units can collect data for this data set."
@@ -1549,6 +1573,9 @@ msgstr "Organisation Units"
 
 msgid "Form"
 msgstr "Form"
+
+msgid "Display Options"
+msgstr "Display Options"
 
 msgid "Advanced"
 msgstr "Advanced"
