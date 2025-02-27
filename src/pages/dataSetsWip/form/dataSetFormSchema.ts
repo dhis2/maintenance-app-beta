@@ -67,6 +67,15 @@ export const dataSetFormSchema = identifiable
         dataElementDecoration: z.boolean().optional(),
         mobile: z.boolean().optional(),
         legendSets: referenceCollection.default([]),
+        dataInputPeriods: z
+            .array(
+                z.object({
+                    period: modelReference,
+                    openingDate: z.string().optional(),
+                    closingDate: z.string().optional(),
+                })
+            )
+            .default([]),
     })
 
 export const initialValues = getDefaults(dataSetFormSchema)
