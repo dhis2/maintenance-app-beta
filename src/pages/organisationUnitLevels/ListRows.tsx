@@ -27,6 +27,7 @@ import {
 } from '../../lib'
 import { useOnEditCompletedSuccessfully } from '../../lib/form/useOnSubmit'
 import { getFieldFilter } from '../../lib/models/path'
+import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { Access } from '../../types/generated'
 import { EditingListActions } from './EditingListActions'
 import { ViewingListActions } from './ViewingListActions'
@@ -39,8 +40,6 @@ export type OrgUnitListModel = {
     offlineLevels?: number
     index?: number
 }
-type ModelListResponse = { result: OrgUnitListModel[] }
-
 export const ListRows = ({
     onTranslationClick,
 }: {
@@ -60,48 +59,42 @@ export const ListRows = ({
         undefined | OrgUnitListModel
     >(undefined)
 
-    const query = {
-        result: {
-            resource: 'filledOrganisationUnitLevels',
-            params: {
-                order: 'level',
-                fields: getViewConfigForSection(schema.name)
-                    .columns.available.map((column) =>
-                        getFieldFilter(schema, column.path)
-                    )
-                    .concat(DEFAULT_FIELD_FILTERS)
-                    .concat(['name']),
-            },
-        },
-    }
-
+    const queryFn = useBoundResourceQueryFn()
     const { error, data, refetch } = useQuery({
-        queryKey: [query],
-        queryFn: ({ queryKey: [query], signal }) => {
-            return dataEngine.query(query, {
-                signal,
-            }) as Promise<ModelListResponse>
-        },
+        queryKey: [
+            {
+                resource: 'filledOrganisationUnitLevels',
+                params: {
+                    order: 'level',
+                    fields: getViewConfigForSection(schema.name)
+                        .columns.available.map((column) =>
+                            getFieldFilter(schema, column.path)
+                        )
+                        .concat(DEFAULT_FIELD_FILTERS)
+                        .concat(['name']),
+                },
+            },
+        ],
+        queryFn: queryFn<OrgUnitListModel[]>,
     })
-    const orgUnitLevels = data?.result
 
     const SectionListMessage = () => {
         if (error) {
             console.log(error)
             return <SectionListError />
         }
-        if (!orgUnitLevels) {
+        if (!data) {
             return <SectionListLoader />
         }
-        if (orgUnitLevels.length < 1) {
+        if (data.length < 1) {
             return <SectionListEmpty />
         }
         return null
     }
 
     const saveNewOrgLevels = async () => {
-        if (orgUnitLevels && editingOrgUnitLevel) {
-            const newLevels = orgUnitLevels.map((level, index) =>
+        if (data && editingOrgUnitLevel) {
+            const newLevels = data.map((level, index) =>
                 index === editingOrgUnitLevel.index
                     ? editingOrgUnitLevel
                     : level
@@ -109,9 +102,9 @@ export const ListRows = ({
             const levelsHaveChanged =
                 editingOrgUnitLevel.index !== undefined &&
                 (editingOrgUnitLevel.name !==
-                    orgUnitLevels[editingOrgUnitLevel.index].name ||
+                    data[editingOrgUnitLevel.index].name ||
                     editingOrgUnitLevel.offlineLevels !==
-                        orgUnitLevels[editingOrgUnitLevel.index].offlineLevels)
+                        data[editingOrgUnitLevel.index].offlineLevels)
             const mutation = {
                 resource: 'filledOrganisationUnitLevels',
                 type: 'create',
@@ -177,8 +170,9 @@ export const ListRows = ({
             if (path === 'displayName' && editingOrgUnitLevel !== undefined) {
                 return (
                     <Input
+                        dense
                         value={editingOrgUnitLevel.name || ''}
-                        width={'100px'}
+                        width={'150px'}
                         onChange={(event) =>
                             setEditingOrgUnitLevel({
                                 ...editingOrgUnitLevel,
@@ -203,7 +197,7 @@ export const ListRows = ({
             }))}
         >
             <SectionListMessage />
-            {orgUnitLevels?.map((model, index) => (
+            {data?.map((model, index) => (
                 <DataTableRow
                     className={css.listRow}
                     dataTest={`section-list-row-${model.id}`}
@@ -222,7 +216,7 @@ export const ListRows = ({
                             })}
                         </DataTableCell>
                     ))}
-                    <DataTableCell>
+                    <DataTableCell width="150px">
                         {index === editingOrgUnitLevel?.index ? (
                             <EditingListActions
                                 model={model}
