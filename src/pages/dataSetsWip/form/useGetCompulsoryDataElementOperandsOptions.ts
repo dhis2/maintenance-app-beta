@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { useCallback } from 'react'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
 
 type DataSetElement = {
@@ -40,6 +41,10 @@ type Option = {
         id: string
         displayName: string
     }
+}
+
+type CategoryComboResponse = {
+    categoryCombos: CategoryComboTruncated[]
 }
 
 const getRelevantCategoryCombos = (value: DataSetElement[]) => {
@@ -118,11 +123,14 @@ export const useCompulsoryDataElementOperandsQuery = ({
         queryFn: queryFn<{ categoryCombos: CategoryComboTruncated[] }>,
         enabled: relevantCatCombos?.length > 0,
         staleTime: 60 * 1000,
-        select: (data) =>
-            getOptions({
-                categoryCombos: data.categoryCombos,
-                dataSetElements,
-            }),
+        select: useCallback(
+            (data: CategoryComboResponse) =>
+                getOptions({
+                    categoryCombos: data.categoryCombos,
+                    dataSetElements,
+                }),
+            [dataSetElements]
+        ),
     })
 
     return queryResult
