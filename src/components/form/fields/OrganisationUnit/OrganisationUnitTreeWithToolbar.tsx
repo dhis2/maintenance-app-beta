@@ -13,13 +13,13 @@ import { useBoundResourceQueryFn } from '../../../../lib/query/useBoundQueryFn'
 import { uniqueBy } from '../../../../lib/utils'
 import { Optional, PagedResponse, PlainResourceQuery } from '../../../../types'
 import { OrganisationUnit } from '../../../../types/generated'
+import { FieldWrapper } from '../../helpers'
 import { OrganisationUnitSelectedList } from './OrganisationUnitSelectedList'
 import css from './OrganisationUnitTreeWithToolbar.module.css'
 import {
     OrgUnitLevelGroupSelect,
     OrgUnitLevelGroupSelectProps,
 } from './OrgUnitLevelGroupSelect'
-import { FieldWrapper } from '../../helpers'
 
 export type SearchOrganisationUnitResponse = PagedResponse<
     Pick<OrganisationUnit, 'path'>,
@@ -65,7 +65,6 @@ export const OrganisationUnitTreeWithToolbar = ({
                 },
             } satisfies PlainResourceQuery,
         ],
-        keepPreviousData: true,
     })
     const searchUnits =
         matchingSearchUnits.data?.organisationUnits.map((ou) => ou.path) ?? []
@@ -148,12 +147,12 @@ export const OrganisationUnitTreeWithToolbar = ({
             />
             <div className={css.treeMessage}>
                 {matchingSearchUnits.data?.pager.total === 0 && (
-                    <p>No organisation units match your search.</p>
+                    <p>{i18n.t('No organisation units match your search.')}</p>
                 )}
                 {matchingSearchUnits.data?.pager.nextPage && (
                     <p>
-                        There are more results than are displayed. Please narrow
-                        down the search.
+                        {i18n.t(`There are too many results to display. Please narrow
+                        down the search.`)}
                     </p>
                 )}
             </div>
