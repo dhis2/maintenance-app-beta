@@ -1,3 +1,10 @@
+# [0.32.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.31.0...v0.32.0) (2025-02-27)
+
+
+### Features
+
+* add missing overviews [DHIS2-18953] ([#518](https://github.com/dhis2/maintenance-app-beta/issues/518)) ([f237fdb](https://github.com/dhis2/maintenance-app-beta/commit/f237fdb00e55455281d2af6d98c0276b32c84acc))
+
 # [0.31.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.30.1...v0.31.0) (2025-02-26)
 
 
