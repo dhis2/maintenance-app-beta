@@ -1,3 +1,42 @@
+# [0.31.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.30.1...v0.31.0) (2025-02-26)
+
+
+### Bug Fixes
+
+* notification recipients with single select changes ([#521](https://github.com/dhis2/maintenance-app-beta/issues/521)) ([b90b96d](https://github.com/dhis2/maintenance-app-beta/commit/b90b96de4f8aba31c63ae89510663de4bcaf8b25))
+
+
+### Features
+
+* data sets advanced [DHIS2-18710] ([#511](https://github.com/dhis2/maintenance-app-beta/issues/511)) ([5968a26](https://github.com/dhis2/maintenance-app-beta/commit/5968a26bce4a8fda4b0070fa1689bff58836eaa8))
+
+## [0.30.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.30.0...v0.30.1) (2025-02-26)
+
+
+### Bug Fixes
+
+* add missing attribute valueTypes ([#512](https://github.com/dhis2/maintenance-app-beta/issues/512)) ([866974e](https://github.com/dhis2/maintenance-app-beta/commit/866974e973f3fcabee07eee0b04f600626f3a0ee))
+* disable failing tests ([#520](https://github.com/dhis2/maintenance-app-beta/issues/520)) [skip release] ([023367a](https://github.com/dhis2/maintenance-app-beta/commit/023367a5d1f42768cd7740ff9fb4da679d7e0afd))
+
+# [0.30.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.3...v0.30.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* readapt data set form for editing ([#517](https://github.com/dhis2/maintenance-app-beta/issues/517)) [skip release] ([1b23ef9](https://github.com/dhis2/maintenance-app-beta/commit/1b23ef973d5b936d7f72eb0708e52a7814e562e2))
+
+
+### Features
+
+* implement display option custom text field ([#516](https://github.com/dhis2/maintenance-app-beta/issues/516)) ([8b18437](https://github.com/dhis2/maintenance-app-beta/commit/8b184375353187652bef7eb7044bb7ffeb0d4f0e))
+
+## [0.29.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.2...v0.29.3) (2025-02-13)
+
+
+### Bug Fixes
+
+* **router:** fix legacy redirect for vite ([#510](https://github.com/dhis2/maintenance-app-beta/issues/510)) ([7a9d3dd](https://github.com/dhis2/maintenance-app-beta/commit/7a9d3dde00693673f2a4894340746d33ff4c2681))
+
 ## [0.29.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.1...v0.29.2) (2025-02-04)
 
 

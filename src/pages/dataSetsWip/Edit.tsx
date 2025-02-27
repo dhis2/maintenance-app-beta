@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import {
     FormBase,
@@ -10,9 +10,13 @@ import {
 } from '../../components'
 import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { PickWithFieldFilters, DataSet } from '../../types/generated'
+import {
+    PickWithFieldFilters,
+    DataSet,
+    IdentifiableObject,
+} from '../../types/generated'
 import { DataSetFormContents } from './form/DataSetFormContents'
-import { validate } from './form/dataSetFormSchema'
+import { validate, dataSetValueFormatter } from './form/dataSetFormSchema'
 import { DataSetFormDescriptor } from './form/formDescriptor'
 
 const section = SECTIONS_MAP.dataSet
@@ -22,6 +26,13 @@ const fieldFilters = [
     'dataSetElements[dataElement[id,displayName,categoryCombo[id,displayName]],categoryCombo[id,displayName]]',
     'style[color,icon]',
     'indicators[id,displayName]',
+    'categoryCombo[id,displayName]',
+    'openFuturePeriods',
+    'expiryDays',
+    'openPeriodsAfterCoEndDate',
+    'formType',
+    'displayOptions',
+    'legendSets[id,displayName]',
 ] as const
 type DataSetValues = PickWithFieldFilters<DataSet, typeof fieldFilters>
 
@@ -42,11 +53,23 @@ export const Component = () => {
     })
     const modelId = useParams().id as string
 
+    const initialValues = useMemo(
+        () =>
+            dataSetValues.data && {
+                ...dataSetValues.data,
+                displayOptions:
+                    dataSetValues.data?.displayOptions &&
+                    JSON.parse(dataSetValues.data?.displayOptions),
+            },
+        [dataSetValues.data]
+    )
+
     return (
         <SectionedFormProvider formDescriptor={DataSetFormDescriptor}>
             <FormBase
+                valueFormatter={dataSetValueFormatter}
                 onSubmit={useOnSubmitEdit({ section, modelId })}
-                initialValues={dataSetValues.data}
+                initialValues={initialValues}
                 validate={validate}
                 subscription={{}}
             >
