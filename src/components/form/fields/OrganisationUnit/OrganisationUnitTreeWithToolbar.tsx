@@ -144,6 +144,7 @@ export const OrganisationUnitTreeWithToolbar = ({
                 onSearchChange={setSearch}
                 onGroupSelect={handleGroupSelect}
                 onLevelSelect={handleLevelSelect}
+                onDeselectAll={() => onChange([])}
             />
             <div className={css.treeMessage}>
                 {matchingSearchUnits.data?.pager.total === 0 && (
@@ -177,9 +178,11 @@ type OrganisationUnitTreeToolbarProps = {
     onSearchChange: (search: string) => void
     onGroupSelect: OrgUnitLevelGroupSelectProps['onGroupSelect']
     onLevelSelect: OrgUnitLevelGroupSelectProps['onLevelSelect']
+    onDeselectAll: OrgUnitLevelGroupSelectProps['onDeselectAll']
 }
 const OrganisationUnitTreeToolbar = ({
     onSearchChange,
+    onDeselectAll,
     onGroupSelect,
     onLevelSelect,
 }: OrganisationUnitTreeToolbarProps) => {
@@ -203,6 +206,7 @@ const OrganisationUnitTreeToolbar = ({
             <OrgUnitLevelGroupSelect
                 onGroupSelect={onGroupSelect}
                 onLevelSelect={onLevelSelect}
+                onDeselectAll={onDeselectAll}
             />
         </div>
     )

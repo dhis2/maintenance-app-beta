@@ -1,5 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
-import { DropdownButton, FlyoutMenu, Input, MenuItem } from '@dhis2/ui'
+import {
+    DropdownButton,
+    FlyoutMenu,
+    Input,
+    MenuDivider,
+    MenuItem,
+} from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { PropsWithChildren, useEffect, useRef, useState } from 'react'
 import {
@@ -19,10 +25,12 @@ import css from './OrgUnitLevelGroupSelect.module.css'
 export type OrgUnitLevelGroupSelectProps = {
     onLevelSelect: (level: PartialOrganisationUnitLevel) => void
     onGroupSelect: (group: PartialOrganisationUnitGroup) => void
+    onDeselectAll?: () => void
 }
 export const OrgUnitLevelGroupSelect = ({
     onLevelSelect,
     onGroupSelect,
+    onDeselectAll,
 }: OrgUnitLevelGroupSelectProps) => {
     const [open, setOpen] = useState(false)
 
@@ -47,6 +55,13 @@ export const OrgUnitLevelGroupSelect = ({
                     <MenuItem label={i18n.t('Group')}>
                         <GroupSelect onSelect={withClose(onGroupSelect)} />
                     </MenuItem>
+                    <MenuDivider />
+                    {onDeselectAll && (
+                        <MenuItem
+                            label={i18n.t('Deselect all')}
+                            onClick={withClose(onDeselectAll)}
+                        />
+                    )}
                 </FlyoutMenu>
             }
         >
