@@ -1,5 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
-import { InputEventPayload } from '@dhis2/ui'
+import {
+    Button,
+    IconArrowLeft16,
+    IconArrowRight16,
+    IconArrowUp16,
+    IconChevronLeft16,
+    IconChevronLeft24,
+    InputEventPayload,
+} from '@dhis2/ui'
 import React, { useEffect, useState, PropsWithChildren } from 'react'
 import { NavLink, useLocation, matchPath } from 'react-router-dom'
 import { HidePreventUnmount } from '../../components'
@@ -12,6 +20,7 @@ import {
     SidenavLink,
     SidenavFilter,
 } from './sidenav'
+import cx from 'classnames'
 
 interface SidebarNavLinkProps {
     label: string
@@ -82,8 +91,15 @@ const SidebarParent = ({
 const matchLabel = (label: string, filterValue: string) =>
     label.toLowerCase().includes(filterValue.toLowerCase())
 
-export const Sidebar = ({ className }: { className?: string }) => {
+export const Sidebar = ({
+    className,
+    hideSidebar,
+}: {
+    className?: string
+    hideSidebar?: boolean
+}) => {
     const sidebarLinks = useSidebarLinks()
+    const [collapsed, setCollapse] = useState(false)
     const [filterValue, setFilterValue] = useState('')
 
     const handleFilterChange = (input: InputEventPayload) => {
@@ -107,8 +123,18 @@ export const Sidebar = ({ className }: { className?: string }) => {
 
     const noMatch = isFiltered && numberOfFilteredLinks === 0
 
+    useEffect(() => {
+        if (hideSidebar !== undefined) {
+            setCollapse(hideSidebar)
+        }
+    }, [hideSidebar])
+
     return (
-        <aside className={className}>
+        <aside
+            className={cx(styles.asideWrapper, className, {
+                [styles.collapsed]: collapsed,
+            })}
+        >
             <Sidenav>
                 <SidenavFilter onChange={handleFilterChange} />
                 <SidenavItems>
@@ -129,6 +155,19 @@ export const Sidebar = ({ className }: { className?: string }) => {
                     ))}
                 </SidenavItems>
             </Sidenav>
+            <button
+                className={styles.collapseButton}
+                type="button"
+                onClick={() => setCollapse(!collapsed)}
+            >
+                <span
+                    className={cx(styles.iconWrapper, {
+                        [styles.collapsed]: collapsed,
+                    })}
+                >
+                    <IconChevronLeft24 />
+                </span>
+            </button>
         </aside>
     )
 }

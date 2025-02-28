@@ -7,3 +7,94 @@
     max-width: 100%;
     word-break: break-word;
 }
+
+/* 
+    Note that the media-query is MIN-width,
+    and thus styles outside of the media-query is
+    for screens smaller than 768px.
+    and inside is the "normal" styles.
+*/
+
+.asideWrapper {
+    --animation-duration: 0.3s;
+    transition: ease width, max-height, visibility, var(--animation-duration);
+    position: relative;
+    overflow-x: hidden;
+    /* min-width: 52px; */
+}
+
+.asideWrapper.collapsed {
+    width: 52px;
+}
+
+.asideWrapper nav {
+    /* minWidth to prevent content-wrapping during collapse */
+    min-width: 240px;
+    transition: opacity ease var(--animation-duration), visibility ease 0.5s;
+}
+
+.collapsed nav {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.iconWrapper svg {
+    transition: var(--animation-duration);
+}
+
+.collapsed svg {
+    transform: rotate(180deg);
+}
+
+[dir='rtl'] .iconWrapper svg {
+    transform: rotate(180deg);
+}
+
+[dir='rtl'] .iconWrapper.collapsed svg {
+    transform: rotate(0);
+}
+
+.collapseButton {
+    transition: ease var(--animation-duration);
+    visibility: visible;
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-end: 0;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    margin: var(--spacers-dp8);
+    background-color: color-mix(
+        in srgb,
+        var(--sidenav-dark-bg-hover),
+        white 10%
+    );
+    color: var(--colors-grey050);
+    border-radius: 4px;
+    border: none;
+}
+
+.collapsed .collapseButton {
+    inset-inline-end: 0px;
+}
+
+@media (max-width: 768px) {
+    .asideWrapper {
+        /* prevent menu from scrolling outside if list-content extends past viewport*/
+        max-width: calc(100vw - 14px) !important;
+    }
+    .asideWrapper.collapsed {
+        width: 100%;
+        max-height: 52px;
+        overflow-x: unset;
+    }
+
+    [dir='rtl'] .iconWrapper svg,
+    .iconWrapper svg {
+        transform: rotate(90deg);
+    }
+    [dir='rtl'] .iconWrapper.collapsed svg,
+    .iconWrapper.collapsed svg {
+        transform: rotate(-90deg);
+    }
+}
