@@ -44,7 +44,7 @@ export const useGetPeriods = ({
     const yearRange = currentYear
         ? Array.from({ length: 16 }, (_, i) => String(-11 + i + currentYear))
         : []
-    const generateYear = selectedYear
+    const generateYear = selectedYear ?? currentYear
     const periods = !selectedPeriodType
         ? []
         : annual
