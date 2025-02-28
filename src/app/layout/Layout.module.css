@@ -35,11 +35,11 @@
     grid-area: sidebar;
 }
 
-/* .sidebar.hide {
-    width: 0px;
+.sidebar.hide {
+    width: 0px !important;
     height: 0px;
     visibility: hidden;
-} */
+}
 
 .pageTitle {
     font-size: 28px;
