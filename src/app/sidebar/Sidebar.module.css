@@ -8,13 +8,6 @@
     word-break: break-word;
 }
 
-/* 
-    Note that the media-query is MIN-width,
-    and thus styles outside of the media-query is
-    for screens smaller than 768px.
-    and inside is the "normal" styles.
-*/
-
 .asideWrapper {
     --animation-duration: 0.3s;
     transition: ease width, max-height, visibility, var(--animation-duration);
@@ -82,6 +75,7 @@
     .asideWrapper {
         /* prevent menu from scrolling outside if list-content extends past viewport*/
         max-width: calc(100vw - 14px) !important;
+        height: max-content;
     }
     .asideWrapper.collapsed {
         width: 100%;
