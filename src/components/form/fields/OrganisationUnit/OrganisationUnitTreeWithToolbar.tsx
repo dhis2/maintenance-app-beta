@@ -6,7 +6,7 @@ import {
     OrganisationUnitTreeProps,
 } from '@dhis2/ui'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Field } from 'react-final-form'
 import { useCurrentUserRootOrgUnits, useDebouncedState } from '../../../../lib'
 import { useBoundResourceQueryFn } from '../../../../lib/query/useBoundQueryFn'
@@ -67,9 +67,22 @@ export const OrganisationUnitTreeWithToolbar = ({
         ],
         keepPreviousData: true,
     })
-    const searchUnits =
-        matchingSearchUnits.data?.organisationUnits.map((ou) => ou.path) || []
-
+    const searchUnitPaths = useMemo(() => {
+        const minRootLevel = roots[0]?.level ?? 1
+        // the filter-prop in OrganisationUnitTree expect the paths to start with the rootIds.
+        // however, when the assigned roots are not the hierarchy root - the paths will not start with the rootIds,
+        // because paths always include the whole hierarchy regardless of assigned units.
+        // thus we need to "trim" the paths to start at the same level as the rootIds.
+        return (
+            matchingSearchUnits.data?.organisationUnits.map((ou) => {
+                const splitPath = ou.path.split('/')
+                const leftTrimmedPath = `/${splitPath
+                    .slice(minRootLevel)
+                    .join('/')}`
+                return leftTrimmedPath
+            }) ?? []
+        )
+    }, [matchingSearchUnits.data?.organisationUnits, roots])
     const rootIds = roots.map((ou) => ou.id)
 
     const selectedPaths = selected?.map((ou) => ou.path) || []
@@ -162,8 +175,8 @@ export const OrganisationUnitTreeWithToolbar = ({
                 {matchingSearchUnits.data?.pager.total !== 0 && (
                     <OrganisationUnitTree
                         roots={rootIds}
-                        initiallyExpanded={rootIds}
-                        filter={isFiltered ? searchUnits : []}
+                        initiallyExpanded={rootIds.map((id) => `/${id}`)}
+                        filter={isFiltered ? searchUnitPaths : []}
                         selected={selectedPaths}
                         onChange={handleChange}
                         {...treeProps}
