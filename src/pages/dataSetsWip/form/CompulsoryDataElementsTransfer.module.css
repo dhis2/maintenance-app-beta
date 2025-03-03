@@ -1,0 +1,7 @@
+p.transferOptionCatComboText {
+    color: rgba(160, 160, 160);
+}
+
+:global(.highlighted) p.transferOptionCatComboText {
+    color: rgba(220, 220, 220);
+}
