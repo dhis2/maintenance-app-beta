@@ -26,11 +26,13 @@ export type OrgUnitLevelGroupSelectProps = {
     onLevelSelect: (level: PartialOrganisationUnitLevel) => void
     onGroupSelect: (group: PartialOrganisationUnitGroup) => void
     onDeselectAll?: () => void
+    minlevel?: number
 }
 export const OrgUnitLevelGroupSelect = ({
     onLevelSelect,
     onGroupSelect,
     onDeselectAll,
+    minlevel,
 }: OrgUnitLevelGroupSelectProps) => {
     const [open, setOpen] = useState(false)
 
@@ -50,7 +52,10 @@ export const OrgUnitLevelGroupSelect = ({
             component={
                 <FlyoutMenu>
                     <MenuItem label={i18n.t('Level')}>
-                        <LevelSelect onSelect={withClose(onLevelSelect)} />
+                        <LevelSelect
+                            onSelect={withClose(onLevelSelect)}
+                            minLevel={minlevel}
+                        />
                     </MenuItem>
                     <MenuItem label={i18n.t('Group')}>
                         <GroupSelect onSelect={withClose(onGroupSelect)} />
@@ -81,8 +86,9 @@ type PartialOrganisationUnitLevel = Pick<OrganisationUnitLevel, LevelFields>
 
 type LevelSelectProps = {
     onSelect: (level: PartialOrganisationUnitLevel) => void
+    minLevel?: number
 }
-export const LevelSelect = ({ onSelect }: LevelSelectProps) => {
+export const LevelSelect = ({ onSelect, minLevel }: LevelSelectProps) => {
     const queryFn = useBoundResourceQueryFn()
     const queryResult = useQuery({
         queryKey: [ORGUNIT_LEVEL_QUERY],
@@ -105,13 +111,15 @@ export const LevelSelect = ({ onSelect }: LevelSelectProps) => {
 
     return (
         <div>
-            {queryResult.data?.map((level) => (
-                <MenuItem
-                    key={level.level}
-                    label={level.displayName}
-                    onClick={() => onSelect(level)}
-                />
-            ))}
+            {queryResult.data
+                ?.filter((level) => level.level >= (minLevel ?? 1))
+                .map((level) => (
+                    <MenuItem
+                        key={level.level}
+                        label={level.displayName}
+                        onClick={() => onSelect(level)}
+                    />
+                ))}
         </div>
     )
 }
