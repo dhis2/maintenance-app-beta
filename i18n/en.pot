@@ -605,6 +605,12 @@ msgstr "Organisation unit"
 msgid "Organisation units"
 msgstr "Organisation units"
 
+msgid "Organisation unit level"
+msgstr "Organisation unit level"
+
+msgid "Organisation unit levels"
+msgstr "Organisation unit levels"
+
 msgid "Organisation unit group"
 msgstr "Organisation unit group"
 
@@ -1066,6 +1072,12 @@ msgstr "Created successfully"
 
 msgid "Period type"
 msgstr "Period type"
+
+msgid "Level"
+msgstr "Level"
+
+msgid "Offline levels"
+msgstr "Offline levels"
 
 msgid "Factor"
 msgstr "Factor"
@@ -1832,6 +1844,12 @@ msgstr "Filter selected organisation unit groups"
 
 msgid "Set up the basic information for this organisational unit group."
 msgstr "Set up the basic information for this organisational unit group."
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Error saving organisation unit levels"
+msgstr "Error saving organisation unit levels"
 
 msgid "Longitude"
 msgstr "Longitude"
