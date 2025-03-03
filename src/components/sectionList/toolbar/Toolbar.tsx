@@ -8,6 +8,7 @@ import { ToolbarSelected } from './ToolbarSelected'
 type ToolbarProps = {
     selectedModels: Set<string>
     onDeselectAll: () => void
+    downloadable?: boolean
 }
 
 const DownloadButton = ({ onClick }: { onClick: () => void }) => (
@@ -16,14 +17,18 @@ const DownloadButton = ({ onClick }: { onClick: () => void }) => (
     </Button>
 )
 
-export const Toolbar = ({ selectedModels, onDeselectAll }: ToolbarProps) => {
+export const Toolbar = ({
+    selectedModels,
+    onDeselectAll,
+    downloadable = true,
+}: ToolbarProps) => {
     const [downloadDialogOpen, setDownloadDialogOpen] = useState(false)
 
     const isAnySelected = selectedModels.size > 0
 
-    const DownloadButtonElement = (
+    const DownloadButtonElement = downloadable ? (
         <DownloadButton onClick={() => setDownloadDialogOpen(true)} />
-    )
+    ) : null
 
     return (
         <>

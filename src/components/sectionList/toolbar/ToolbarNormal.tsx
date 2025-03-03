@@ -13,7 +13,7 @@ import { ManageListViewDialog } from '../listView/ManageListViewDialog'
 import css from './Toolbar.module.css'
 
 type ToolbarNormalProps = {
-    downloadButtonElement?: JSX.Element
+    downloadButtonElement: JSX.Element | null
 }
 
 export const ToolbarNormal = ({

@@ -111,6 +111,7 @@ const VerifyModelId = () => {
 
 const sectionsNoNewRoute = new Set<SchemaSection>([
     SECTIONS_MAP.categoryOptionCombo,
+    SECTIONS_MAP.organisationUnitLevel,
 ])
 
 const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (

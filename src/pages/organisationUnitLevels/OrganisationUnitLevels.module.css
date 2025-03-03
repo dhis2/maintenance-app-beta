@@ -1,0 +1,9 @@
+.editingActions {
+    display: flex;
+    gap: var(--spacers-dp8);
+}
+
+.editingActions button,
+.editingActions a {
+    padding: 0 6px !important;
+}

@@ -1,4 +1,4 @@
-import { SchemaAuthorityType, SchemaAuthorities, SchemaName } from '../../types'
+import { SchemaAuthorities, SchemaAuthorityType, SchemaName } from '../../types'
 import { Schema } from '../useLoadApp'
 
 /* NOTE: read/update are checked using access properties on a model */
@@ -18,6 +18,7 @@ export type Operation = CreateAuthType | SchemaAuthorityType.DELETE
 
 const nonCreateableSchemas = new Set<SchemaName>([
     SchemaName.categoryOptionCombo,
+    SchemaName.organisationUnitLevel,
 ])
 
 export const isNonCreateableSchema = (schemaName: SchemaName) => {

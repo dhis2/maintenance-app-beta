@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-02-27T15:59:31.023Z\n"
-"PO-Revision-Date: 2025-02-27T15:59:31.024Z\n"
+"POT-Creation-Date: 2025-02-28T08:34:38.720Z\n"
+"PO-Revision-Date: 2025-02-28T08:34:38.720Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -134,9 +134,6 @@ msgstr "Something went wrong when submitting the form"
 
 msgid "<No value>"
 msgstr "<No value>"
-
-msgid "Please enter a GeoJSON value."
-msgstr "Please enter a GeoJSON value."
 
 msgid "Attributes"
 msgstr "Attributes"
@@ -639,6 +636,12 @@ msgstr "Organisation unit"
 msgid "Organisation units"
 msgstr "Organisation units"
 
+msgid "Organisation unit level"
+msgstr "Organisation unit level"
+
+msgid "Organisation unit levels"
+msgstr "Organisation unit levels"
+
 msgid "Organisation unit group"
 msgstr "Organisation unit group"
 
@@ -1100,6 +1103,12 @@ msgstr "Created successfully"
 
 msgid "Period type"
 msgstr "Period type"
+
+msgid "Level"
+msgstr "Level"
+
+msgid "Offline levels"
+msgstr "Offline levels"
 
 msgid "Factor"
 msgstr "Factor"
@@ -1866,6 +1875,12 @@ msgstr "Filter selected organisation unit groups"
 
 msgid "Set up the basic information for this organisational unit group."
 msgstr "Set up the basic information for this organisational unit group."
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Error saving organisation unit levels"
+msgstr "Error saving organisation unit levels"
 
 msgid "Longitude"
 msgstr "Longitude"
