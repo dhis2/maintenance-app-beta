@@ -65,9 +65,10 @@ export const OrganisationUnitTreeWithToolbar = ({
                 },
             } satisfies PlainResourceQuery,
         ],
+        keepPreviousData: true,
     })
     const searchUnits =
-        matchingSearchUnits.data?.organisationUnits.map((ou) => ou.path) ?? []
+        matchingSearchUnits.data?.organisationUnits.map((ou) => ou.path) || []
 
     const rootIds = roots.map((ou) => ou.id)
 
@@ -157,18 +158,17 @@ export const OrganisationUnitTreeWithToolbar = ({
                     </p>
                 )}
             </div>
-
             <div className={css.treeWrapper}>
-                {
+                {matchingSearchUnits.data?.pager.total !== 0 && (
                     <OrganisationUnitTree
                         roots={rootIds}
                         initiallyExpanded={rootIds}
-                        filter={searchUnits}
+                        filter={isFiltered ? searchUnits : []}
                         selected={selectedPaths}
                         onChange={handleChange}
                         {...treeProps}
                     />
-                }
+                )}
             </div>
         </div>
     )
