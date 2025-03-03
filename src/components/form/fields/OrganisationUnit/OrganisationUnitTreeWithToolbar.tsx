@@ -49,6 +49,7 @@ export const OrganisationUnitTreeWithToolbar = ({
     const queryClient = useQueryClient()
     const boundQueryFn = useBoundResourceQueryFn()
     const roots = useCurrentUserRootOrgUnits()
+    const minRootLevel = roots[0]?.level ?? 1
 
     const isFiltered = search !== ''
     const matchingSearchUnits = useQuery({
@@ -68,7 +69,6 @@ export const OrganisationUnitTreeWithToolbar = ({
         keepPreviousData: true,
     })
     const searchUnitPaths = useMemo(() => {
-        const minRootLevel = roots[0]?.level ?? 1
         // the filter-prop in OrganisationUnitTree expect the paths to start with the rootIds.
         // however, when the assigned roots are not the hierarchy root - the paths will not start with the rootIds,
         // because paths always include the whole hierarchy regardless of assigned units.
@@ -82,7 +82,7 @@ export const OrganisationUnitTreeWithToolbar = ({
                 return leftTrimmedPath
             }) ?? []
         )
-    }, [matchingSearchUnits.data?.organisationUnits, roots])
+    }, [matchingSearchUnits.data?.organisationUnits, minRootLevel])
     const rootIds = roots.map((ou) => ou.id)
 
     const selectedPaths = selected?.map((ou) => ou.path) || []
@@ -159,6 +159,7 @@ export const OrganisationUnitTreeWithToolbar = ({
                 onGroupSelect={handleGroupSelect}
                 onLevelSelect={handleLevelSelect}
                 onDeselectAll={() => onChange([])}
+                minRootLevel={minRootLevel}
             />
             <div className={css.treeMessage}>
                 {matchingSearchUnits.data?.pager.total === 0 && (
@@ -192,12 +193,14 @@ type OrganisationUnitTreeToolbarProps = {
     onGroupSelect: OrgUnitLevelGroupSelectProps['onGroupSelect']
     onLevelSelect: OrgUnitLevelGroupSelectProps['onLevelSelect']
     onDeselectAll: OrgUnitLevelGroupSelectProps['onDeselectAll']
+    minRootLevel?: number
 }
 const OrganisationUnitTreeToolbar = ({
     onSearchChange,
     onDeselectAll,
     onGroupSelect,
     onLevelSelect,
+    minRootLevel,
 }: OrganisationUnitTreeToolbarProps) => {
     const { liveValue: search, setValue: setSearchValue } = useDebouncedState({
         onSetDebouncedValue: onSearchChange,
@@ -220,6 +223,7 @@ const OrganisationUnitTreeToolbar = ({
                 onGroupSelect={onGroupSelect}
                 onLevelSelect={onLevelSelect}
                 onDeselectAll={onDeselectAll}
+                minlevel={minRootLevel}
             />
         </div>
     )
