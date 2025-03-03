@@ -68,7 +68,11 @@ const NotificationField = () => {
     )
 }
 
-export const AdvancedFormContents = ({ name }: { name: string }) => {
+export const AdvancedFormContents = React.memo(function AdvancedFormContents({
+    name,
+}: {
+    name: string
+}) {
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
@@ -139,4 +143,4 @@ export const AdvancedFormContents = ({ name }: { name: string }) => {
             </StandardFormField>
         </SectionedFormSection>
     )
-}
+})

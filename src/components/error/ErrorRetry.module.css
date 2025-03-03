@@ -1,0 +1,15 @@
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+    padding: var(--spacers-dp12) var(--spacers-dp16);
+    max-width: 450px;
+    position: relative;
+}
+
+.errorMessage {
+    font-size: 14px;
+    color: var(--colors-red600);
+}
