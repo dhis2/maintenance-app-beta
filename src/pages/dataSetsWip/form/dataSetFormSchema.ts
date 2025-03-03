@@ -63,6 +63,19 @@ export const dataSetFormSchema = identifiable
             .number()
             .int({ message: i18n.t('The number should not have decimals') })
             .optional(),
+        skipOffline: z.boolean().optional(),
+        dataElementDecoration: z.boolean().optional(),
+        mobile: z.boolean().optional(),
+        legendSets: referenceCollection.default([]),
+        dataInputPeriods: z
+            .array(
+                z.object({
+                    period: modelReference,
+                    openingDate: z.string().optional(),
+                    closingDate: z.string().optional(),
+                })
+            )
+            .default([]),
     })
 
 export const initialValues = getDefaults(dataSetFormSchema)

@@ -1,3 +1,37 @@
+# [0.33.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.32.0...v0.33.0) (2025-02-27)
+
+
+### Features
+
+* add data input periods [DHIS2-18708] ([#515](https://github.com/dhis2/maintenance-app-beta/issues/515)) ([0fd59b8](https://github.com/dhis2/maintenance-app-beta/commit/0fd59b80c9439f5c138efb7bf543a4dca36ba577))
+
+# [0.32.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.31.0...v0.32.0) (2025-02-27)
+
+
+### Features
+
+* add missing overviews [DHIS2-18953] ([#518](https://github.com/dhis2/maintenance-app-beta/issues/518)) ([f237fdb](https://github.com/dhis2/maintenance-app-beta/commit/f237fdb00e55455281d2af6d98c0276b32c84acc))
+
+# [0.31.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.30.1...v0.31.0) (2025-02-26)
+
+
+### Bug Fixes
+
+* notification recipients with single select changes ([#521](https://github.com/dhis2/maintenance-app-beta/issues/521)) ([b90b96d](https://github.com/dhis2/maintenance-app-beta/commit/b90b96de4f8aba31c63ae89510663de4bcaf8b25))
+
+
+### Features
+
+* data sets advanced [DHIS2-18710] ([#511](https://github.com/dhis2/maintenance-app-beta/issues/511)) ([5968a26](https://github.com/dhis2/maintenance-app-beta/commit/5968a26bce4a8fda4b0070fa1689bff58836eaa8))
+
+## [0.30.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.30.0...v0.30.1) (2025-02-26)
+
+
+### Bug Fixes
+
+* add missing attribute valueTypes ([#512](https://github.com/dhis2/maintenance-app-beta/issues/512)) ([866974e](https://github.com/dhis2/maintenance-app-beta/commit/866974e973f3fcabee07eee0b04f600626f3a0ee))
+* disable failing tests ([#520](https://github.com/dhis2/maintenance-app-beta/issues/520)) [skip release] ([023367a](https://github.com/dhis2/maintenance-app-beta/commit/023367a5d1f42768cd7740ff9fb4da679d7e0afd))
+
 # [0.30.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.29.3...v0.30.0) (2025-02-24)
 
 

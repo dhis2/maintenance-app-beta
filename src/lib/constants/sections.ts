@@ -157,6 +157,13 @@ export const SCHEMA_SECTIONS = {
         titlePlural: i18n.t('Organisation unit group sets'),
         parentSectionKey: 'organisationUnit',
     },
+    organisationUnitLevel: {
+        name: SchemaName.organisationUnitLevel,
+        namePlural: 'organisationUnitLevels',
+        title: i18n.t('Organisation unit level'),
+        titlePlural: i18n.t('Organisation unit levels'),
+        parentSectionKey: 'organisationUnit',
+    },
     trackedEntityAttribute: {
         name: SchemaName.trackedEntityAttribute,
         namePlural: 'trackedEntityAttributes',

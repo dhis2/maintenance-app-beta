@@ -8,6 +8,7 @@ msgstr ""
 "POT-Creation-Date: 2025-02-25T14:56:18.250Z\n"
 "PO-Revision-Date: 2025-02-25T14:56:18.250Z\n"
 
+
 msgid "schemas"
 msgstr "schemas"
 
@@ -604,6 +605,12 @@ msgstr "Organisation unit group set"
 
 msgid "Organisation unit group sets"
 msgstr "Organisation unit group sets"
+
+msgid "Organisation unit level"
+msgstr "Organisation unit level"
+
+msgid "Organisation unit levels"
+msgstr "Organisation unit levels"
 
 msgid "Tracked entity attribute"
 msgstr "Tracked entity attribute"
@@ -1541,6 +1548,12 @@ msgstr "Allow data entry for future periods"
 msgid "Close data entry a certain number of days after period end (expiry days)"
 msgstr "Close data entry a certain number of days after period end (expiry days)"
 
+msgid "Limit data entry by period"
+msgstr "Limit data entry by period"
+
+msgid "Optionally configure when data can be entered for certain periods"
+msgstr "Optionally configure when data can be entered for certain periods"
+
 msgid "Set up the basic information for this data set."
 msgstr "Set up the basic information for this data set."
 
@@ -1552,6 +1565,45 @@ msgstr "Validation and limitations"
 
 msgid "Configure how data can and must be entered for this data"
 msgstr "Configure how data can and must be entered for this data"
+
+msgid "Add period entry rule"
+msgstr "Add period entry rule"
+
+msgid "Year"
+msgstr "Year"
+
+msgid "Period"
+msgstr "Period"
+
+msgid "Opening date"
+msgstr "Opening date"
+
+msgid "Closing date"
+msgstr "Closing date"
+
+msgid "Closing date must be after start date"
+msgstr "Closing date must be after start date"
+
+msgid "Save period entry rule"
+msgstr "Save period entry rule"
+
+msgid "Opening date: {{openingDate}}"
+msgstr "Opening date: {{openingDate}}"
+
+msgid "No opening date"
+msgstr "No opening date"
+
+msgid "Closing date: {{closingDate}}"
+msgstr "Closing date: {{closingDate}}"
+
+msgid "No closing date"
+msgstr "No closing date"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Add a period entry rule"
+msgstr "Add a period entry rule"
 
 msgid "The number should not have decimals"
 msgstr "The number should not have decimals"
@@ -1744,9 +1796,6 @@ msgstr "{{type}} coordinates are not editable"
 msgid "Upload an image"
 msgstr "Upload an image"
 
-msgid "Remove"
-msgstr "Remove"
-
 msgid "Max size 10MB. Supported file size are .jpg, .png, and .gif."
 msgstr "Max size 10MB. Supported file size are .jpg, .png, and .gif."
 
@@ -1765,9 +1814,6 @@ msgstr ""
 
 msgid "Set up the basic information for this organisation unit"
 msgstr "Set up the basic information for this organisation unit"
-
-msgid "Opening date"
-msgstr "Opening date"
 
 msgid "Closed date"
 msgstr "Closed date"
@@ -1910,18 +1956,22 @@ msgstr ""
 "data for analysis."
 
 msgid ""
-"Data elements are the core foundational item of DHIS2 and are used for data "
-"collection. Data elements can be organised by group and group set."
+"Data elements are fundamental units for data collection in DHIS2, "
+"representing individual data points for both tracker and aggregate data. "
+"They serve as the building blocks for capturing, analysing, and reporting "
+"information."
 msgstr ""
-"Data elements are the core foundational item of DHIS2 and are used for data "
-"collection. Data elements can be organised by group and group set."
+"Data elements are fundamental units for data collection in DHIS2, "
+"representing individual data points for both tracker and aggregate data. "
+"They serve as the building blocks for capturing, analysing, and reporting "
+"information."
 
 msgid ""
-"Building block elements of your database. The foundation of data collection "
-"and analysis."
+"Create, update, view and delete data elements: the foundation of data "
+"collection and analysis."
 msgstr ""
-"Building block elements of your database. The foundation of data collection "
-"and analysis."
+"Create, update, view and delete data elements: the foundation of data "
+"collection and analysis."
 
 msgid ""
 "Improve analysis of single data elements by combining them into data "
@@ -1936,6 +1986,71 @@ msgid ""
 msgstr ""
 "Add another level of organisation by grouping data element groups into "
 "group sets."
+
+msgid ""
+"Data sets are collections of data elements grouped for aggregate data "
+"entry, validation, access, collection frequency and reporting. Data entry "
+"forms are defined and configured by data sets. They help streamline the "
+"management of data collection routines and ensure consistency across "
+"different stages of data handling within DHIS2."
+msgstr ""
+"Data sets are collections of data elements grouped for aggregate data "
+"entry, validation, access, collection frequency and reporting. Data entry "
+"forms are defined and configured by data sets. They help streamline the "
+"management of data collection routines and ensure consistency across "
+"different stages of data handling within DHIS2."
+
+msgid ""
+"Create, update, view and delete data sets, specify the related data "
+"elements, period type organisation units, sharing settings and workflow "
+"approval here."
+msgstr ""
+"Create, update, view and delete data sets, specify the related data "
+"elements, period type organisation units, sharing settings and workflow "
+"approval here."
+
+msgid ""
+"Organisation units are the structural entities within DHIS2 that define "
+"locations or points of service where data is collected. Examples include "
+"regions, hospitals, clinics, or departments. They help establish the "
+"hierarchy and scope for data access, collection, reporting, and analysis. "
+"Organisation units can be organised into groups and group sets."
+msgstr ""
+"Organisation units are the structural entities within DHIS2 that define "
+"locations or points of service where data is collected. Examples include "
+"regions, hospitals, clinics, or departments. They help establish the "
+"hierarchy and scope for data access, collection, reporting, and analysis. "
+"Organisation units can be organised into groups and group sets."
+
+msgid "Create, update, view and delete individual organisation units."
+msgstr "Create, update, view and delete individual organisation units."
+
+msgid ""
+"Categorise similar organisation units into groups, like hospitals or "
+"clinics, enabling efficient data aggregation and analysis across diverse "
+"locations in DHIS2."
+msgstr ""
+"Categorise similar organisation units into groups, like hospitals or "
+"clinics, enabling efficient data aggregation and analysis across diverse "
+"locations in DHIS2."
+
+msgid ""
+"Organise multiple groups with shared characteristics into sets, allowing "
+"for another level of data analysis and comparison across the organisation "
+"structure."
+msgstr ""
+"Organise multiple groups with shared characteristics into sets, allowing "
+"for another level of data analysis and comparison across the organisation "
+"structure."
+
+msgid ""
+"Organisation unit levels define hierarchical layers within the organisation "
+"structure, such as national or regional tiers, and specify the names used "
+"for each level."
+msgstr ""
+"Organisation unit levels define hierarchical layers within the organisation "
+"structure, such as national or regional tiers, and specify the names used "
+"for each level."
 
 msgid "Manage"
 msgstr "Manage"
