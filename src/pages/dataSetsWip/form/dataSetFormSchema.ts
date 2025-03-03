@@ -81,6 +81,15 @@ export const dataSetFormSchema = identifiable
                 })
             )
             .optional(),
+        dataInputPeriods: z
+            .array(
+                z.object({
+                    period: modelReference,
+                    openingDate: z.string().optional(),
+                    closingDate: z.string().optional(),
+                })
+            )
+            .default([]),
     })
 
 export const initialValues = getDefaults(dataSetFormSchema)

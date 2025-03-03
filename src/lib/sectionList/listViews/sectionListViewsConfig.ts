@@ -153,6 +153,27 @@ export const modelListViewsConfig = {
             overrideDefaultAvailable: true,
         },
     },
+    organisationUnitLevel: {
+        columns: {
+            available: [
+                DESCRIPTORS.name,
+                'id',
+                { label: i18n.t('Level'), path: 'level' },
+                { label: i18n.t('Offline levels'), path: 'offlineLevels' },
+                'lastUpdated',
+            ],
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Offline levels'), path: 'offlineLevels' },
+                'lastUpdated',
+            ],
+            overrideDefaultAvailable: true,
+        },
+        filters: {
+            default: [],
+            overrideDefaultAvailable: true,
+        },
+    },
     organisationUnitGroup: {
         columns: {
             available: [DESCRIPTORS.shortName],

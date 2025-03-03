@@ -10,6 +10,10 @@ import {
     useIsSectionAuthorizedPredicate,
 } from '../../../lib'
 import { ModelSection, OverviewSection } from '../../../types'
+import {
+    FilterAuthorizedSections,
+    FilterAuthorizedSectionsProps,
+} from './FilterAuthorizedSections'
 import styles from './SummaryCard.module.css'
 
 const DEFAULT_ICON = <IconEdit24 />
@@ -18,7 +22,7 @@ const SummaryCardHeader = ({ children }: PropsWithChildren) => (
     <div className={styles.cardHeader}>{children}</div>
 )
 
-interface SummaryCardGroupProps {
+type SummaryCardGroupProps = FilterAuthorizedSectionsProps & {
     title?: string
     section: OverviewSection
 }
@@ -36,7 +40,10 @@ export const SummaryCardGroup = ({
     return (
         <>
             {title && <div className={styles.cardGroupHeader}>{title}</div>}
-            <div className={styles.cardGroup}>{children}</div>
+
+            <div className={styles.cardGroup}>
+                <FilterAuthorizedSections>{children}</FilterAuthorizedSections>
+            </div>
         </>
     )
 }

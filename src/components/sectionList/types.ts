@@ -1,6 +1,7 @@
 export type SelectedColumn = {
     label: string
     path: string
+    disableSorting?: boolean
 }
 
 export type SelectedColumns = ReadonlyArray<SelectedColumn>
