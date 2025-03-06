@@ -1,3 +1,17 @@
+# [0.34.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.33.0...v0.34.0) (2025-03-06)
+
+
+### Bug Fixes
+
+* handle unselected year for period calcs ([#522](https://github.com/dhis2/maintenance-app-beta/issues/522)) ([33dea73](https://github.com/dhis2/maintenance-app-beta/commit/33dea73bd50ae2231774759cf9379d57f11d8a26))
+
+
+### Features
+
+* add data sets and org units in overview section [DHIS2-18953] ([#523](https://github.com/dhis2/maintenance-app-beta/issues/523)) ([4f0703b](https://github.com/dhis2/maintenance-app-beta/commit/4f0703bac42d07d96f82605459a6a488ece128df))
+* data sets validation fields [DHIS2-18707] ([#513](https://github.com/dhis2/maintenance-app-beta/issues/513)) ([a7c174f](https://github.com/dhis2/maintenance-app-beta/commit/a7c174f920724a2ee2b27fc59e9c4f20d241fbfa))
+* org unit level list ([#519](https://github.com/dhis2/maintenance-app-beta/issues/519)) [skip release] ([95b8b6b](https://github.com/dhis2/maintenance-app-beta/commit/95b8b6b02c2385d38870ae5a4615d2e1374f639f))
+
 # [0.33.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.32.0...v0.33.0) (2025-02-27)
 
 

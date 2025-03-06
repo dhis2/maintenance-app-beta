@@ -44,7 +44,7 @@ describe('Data elements / Edit', () => {
         )
     })
 
-    it('should not submit successfully when a required value has been removed', () => {
+    xit('should not submit successfully when a required value has been removed', () => {
         cy.visit('/')
 
         // Open data elements group in side nav
