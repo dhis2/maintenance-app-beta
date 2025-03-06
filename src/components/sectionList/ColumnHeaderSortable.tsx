@@ -42,7 +42,9 @@ export const HeaderColumnsSortable = ({
     )
 
     const isSortAllowed = (column: SelectedColumn) =>
-        column && isValidSortPathForSchema(schema, column.path)
+        column &&
+        isValidSortPathForSchema(schema, column.path) &&
+        !column.disableSorting
 
     const getDataTableSortDirection = (column: SelectedColumn) => {
         if (!isSortAllowed(column)) {

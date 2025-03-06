@@ -67,6 +67,20 @@ export const dataSetFormSchema = identifiable
         dataElementDecoration: z.boolean().optional(),
         mobile: z.boolean().optional(),
         legendSets: referenceCollection.default([]),
+        validCompleteOnly: z.boolean().default(false),
+        noValueRequiresComment: z.boolean().default(false),
+        fieldCombinationRequired: z.boolean().default(false),
+        compulsoryFieldsCompleteOnly: z.boolean().default(false),
+        workflow: z.object({ id: z.string() }).optional(),
+        timelyDays: z.number().optional().default(15),
+        compulsoryDataElementOperands: z
+            .array(
+                z.object({
+                    dataElement: modelReference,
+                    categoryOptionCombo: modelReference,
+                })
+            )
+            .optional(),
         dataInputPeriods: z
             .array(
                 z.object({

@@ -605,6 +605,12 @@ msgstr "Organisation unit"
 msgid "Organisation units"
 msgstr "Organisation units"
 
+msgid "Organisation unit level"
+msgstr "Organisation unit level"
+
+msgid "Organisation unit levels"
+msgstr "Organisation unit levels"
+
 msgid "Organisation unit group"
 msgstr "Organisation unit group"
 
@@ -1067,6 +1073,12 @@ msgstr "Created successfully"
 msgid "Period type"
 msgstr "Period type"
 
+msgid "Level"
+msgstr "Level"
+
+msgid "Offline levels"
+msgstr "Offline levels"
+
 msgid "Factor"
 msgstr "Factor"
 
@@ -1509,12 +1521,6 @@ msgstr "Search available indicators"
 msgid "Search selected indicators"
 msgstr "Search selected indicators"
 
-msgid "Available data elements"
-msgstr "Available data elements"
-
-msgid "Search available data elements"
-msgstr "Search available data elements"
-
 msgid "Search selected data elements"
 msgstr "Search selected data elements"
 
@@ -1609,6 +1615,16 @@ msgstr "Optionally configure when data can be entered for certain periods"
 msgid "Set up the basic information for this data set."
 msgstr "Set up the basic information for this data set."
 
+msgid "Number of days after period to qualify for on time submission"
+msgstr "Number of days after period to qualify for on time submission"
+
+msgid ""
+"\"On time\" submission rate can be using reporting dates in the Report app. "
+"Enter 0 to ignore timely submission."
+msgstr ""
+"\"On time\" submission rate can be using reporting dates in the Report app. "
+"Enter 0 to ignore timely submission."
+
 msgid "Value should be bigger than 0"
 msgstr "Value should be bigger than 0"
 
@@ -1656,6 +1672,32 @@ msgstr "Remove"
 
 msgid "Add a period entry rule"
 msgstr "Add a period entry rule"
+
+msgid "Completing a data set requires passing validation"
+msgstr "Completing a data set requires passing validation"
+
+msgid "Completing a data set requires all empty values to have a comment"
+msgstr "Completing a data set requires all empty values to have a comment"
+
+msgid "Completing a data set requires compulsory field to have a value"
+msgstr "Completing a data set requires compulsory field to have a value"
+
+msgid ""
+"Data elements with category combinations require all fields to have a value "
+"if one has a value"
+msgstr ""
+"Data elements with category combinations require all fields to have a value "
+"if one has a value"
+
+msgid "Compulsory data entry"
+msgstr "Compulsory data entry"
+
+msgid ""
+"Optionally configure which data elements must have a value to complete this "
+"data set."
+msgstr ""
+"Optionally configure which data elements must have a value to complete this "
+"data set."
 
 msgid "The number should not have decimals"
 msgstr "The number should not have decimals"
@@ -1832,6 +1874,12 @@ msgstr "Filter selected organisation unit groups"
 
 msgid "Set up the basic information for this organisational unit group."
 msgstr "Set up the basic information for this organisational unit group."
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Error saving organisation unit levels"
+msgstr "Error saving organisation unit levels"
 
 msgid "Longitude"
 msgstr "Longitude"
