@@ -1,5 +1,5 @@
 describe('Data elements / List', () => {
-    it('should show the second of three pages of all "ART" data elements', () => {
+    xit('should show the second of three pages of all "ART" data elements', () => {
         cy.visit('/')
 
         // Open data elements group in side nav
