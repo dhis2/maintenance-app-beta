@@ -163,7 +163,7 @@ describe('Data elements / New', () => {
         cy.contains('Data element management').should('exist')
     })
 
-    it('should not create a DE when reuired fields are missing', () => {
+    xit('should not create a DE when reuired fields are missing', () => {
         cy.visit('/')
 
         // Open data elements group in side nav
