@@ -3,8 +3,15 @@ import cx from 'classnames'
 import React, { PropsWithChildren } from 'react'
 import styles from './Sidenav.module.css'
 
-export const Sidenav = ({ children }: PropsWithChildren) => (
-    <nav data-test="sidenav" className={styles['sidenav-wrap']}>
+type WithClassName = {
+    className?: string
+}
+
+export const Sidenav = ({
+    children,
+    className,
+}: PropsWithChildren<WithClassName>) => (
+    <nav data-test="sidenav" className={cx(styles['sidenav-wrap'], className)}>
         {children}
     </nav>
 )

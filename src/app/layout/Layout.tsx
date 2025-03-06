@@ -39,6 +39,7 @@ export const SidebarLayout = ({
             showFooter={showFooter}
             sidebar={
                 <Sidebar
+                    hideSidebar={hideSidebar}
                     className={cx(css.sidebar, { [css.hide]: hideSidebar })}
                 />
             }
