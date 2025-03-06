@@ -58,6 +58,7 @@ export const CompulsoryDataElementsTransfer = () => {
             height="350px"
             optionsWidth="500px"
             selectedWidth="500px"
+            maxSelections={Infinity}
             renderOption={({ value, ...rest }) => {
                 const catOptComboName =
                     value.categoryOptionCombo.displayName === 'default'
