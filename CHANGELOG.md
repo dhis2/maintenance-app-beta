@@ -1,3 +1,10 @@
+## [0.34.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.34.0...v0.34.1) (2025-03-07)
+
+
+### Bug Fixes
+
+* add max selections to compuslory data element operands ([#526](https://github.com/dhis2/maintenance-app-beta/issues/526)) ([454a146](https://github.com/dhis2/maintenance-app-beta/commit/454a146e973e1fa489eb8c1eb77092a195c5422c))
+
 # [0.34.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.33.0...v0.34.0) (2025-03-06)
 
 
