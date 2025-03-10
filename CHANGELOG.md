@@ -1,3 +1,10 @@
+# [0.35.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.34.1...v0.35.0) (2025-03-10)
+
+
+### Features
+
+* data set org units ([#514](https://github.com/dhis2/maintenance-app-beta/issues/514)) ([bd6ffd2](https://github.com/dhis2/maintenance-app-beta/commit/bd6ffd2e8ce811b8c83c49a9da772b530a20a2bd))
+
 ## [0.34.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.34.0...v0.34.1) (2025-03-07)
 
 
