@@ -9,7 +9,11 @@ import {
 import { SectionedFormSection } from '../../../components/sectionedForm'
 import { ColorAndIconField } from '../../dataElements/fields'
 
-export const SetupFormContents = ({ name }: { name: string }) => {
+export const SetupFormContents = React.memo(function SetupFormContents({
+    name,
+}: {
+    name: string
+}) {
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
@@ -23,4 +27,4 @@ export const SetupFormContents = ({ name }: { name: string }) => {
             <ColorAndIconField />
         </SectionedFormSection>
     )
-}
+})
