@@ -165,11 +165,30 @@ msgstr "Level"
 msgid "Group"
 msgstr "Group"
 
+msgid "Deselect all"
+msgstr "Deselect all"
+
 msgid "Select units by group or level..."
 msgstr "Select units by group or level..."
 
 msgid "Search"
 msgstr "Search"
+
+msgid "No selected units"
+msgstr "No selected units"
+
+msgid "{{numberOfUnits}} selected units"
+msgstr "{{numberOfUnits}} selected units"
+
+msgid "No organisation units match your search."
+msgstr "No organisation units match your search."
+
+msgid ""
+"There are too many results to display. Please narrow\n"
+"                        down the search."
+msgstr ""
+"There are too many results to display. Please narrow\n"
+"                        down the search."
 
 msgid "Search for organisation units"
 msgstr "Search for organisation units"
@@ -502,9 +521,6 @@ msgstr "{{number}} selected"
 
 msgid "Merge..."
 msgstr "Merge..."
-
-msgid "Deselect all"
-msgstr "Deselect all"
 
 msgid "Choose a Locale to translate from the menu above"
 msgstr "Choose a Locale to translate from the menu above"
@@ -1614,12 +1630,6 @@ msgstr "Display options"
 
 msgid "Configure which organisation units can collect data for this data set."
 msgstr "Configure which organisation units can collect data for this data set."
-
-msgid "No selected units"
-msgstr "No selected units"
-
-msgid "{{numberOfUnits}} selected units"
-msgstr "{{numberOfUnits}} selected units"
 
 msgid "Something went wrong"
 msgstr "Something went wrong"
