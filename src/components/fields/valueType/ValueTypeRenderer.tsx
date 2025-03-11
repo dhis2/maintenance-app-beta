@@ -3,6 +3,7 @@ import { CheckboxFieldFF, InputFieldFF, TextAreaFieldFF } from '@dhis2/ui'
 import React, { useMemo } from 'react'
 import { FieldRenderProps } from 'react-final-form'
 import { ModelSingleSelectField } from '../../metadataFormControls/ModelSingleSelect'
+import { DateFieldFF, DateTimeFieldFF } from '../date'
 import { ValueType } from './types'
 
 type CommonFieldProps = {
@@ -57,7 +58,6 @@ export function ValueTypeRenderer(
     if (valueType === 'LONG_TEXT') {
         return <TextAreaFieldFF {...props} />
     }
-
     if (valueType === 'NUMBER' || valueType === 'INTEGER') {
         return (
             <InputFieldFF
@@ -116,6 +116,14 @@ export function ValueTypeRenderer(
             />
         )
     }
+
+    if (valueType === 'DATE') {
+        return <DateFieldFF {...props} />
+    }
+    if (valueType === 'DATETIME') {
+        return <DateTimeFieldFF {...props} />
+    }
+
     // render a regular input field if not overridden above
     return <InputFieldFF {...props} />
 }
