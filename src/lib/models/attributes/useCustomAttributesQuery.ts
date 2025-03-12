@@ -1,7 +1,7 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import { useMemo } from 'react'
-import { useSchemaSectionHandleOrThrow } from '../../../lib'
 import { Attribute, PickWithFieldFilters } from '../../../types/generated'
+import { useSchemaSectionHandleOrThrow } from '../../routeUtils'
 
 const attributeFields = [
     'id',
