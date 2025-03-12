@@ -84,6 +84,7 @@ export function ValueTypeRenderer(
         return (
             <ModelSingleSelectField
                 {...props}
+                showNoValueOption
                 query={{
                     resource: 'fileResources',
                 }}
@@ -103,6 +104,7 @@ export function ValueTypeRenderer(
         return (
             <ModelSingleSelectField
                 {...props}
+                showNoValueOption
                 query={{
                     resource: 'organisationUnits',
                 }}
