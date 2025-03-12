@@ -4,7 +4,7 @@ import React, { useMemo } from 'react'
 import { FieldRenderProps } from 'react-final-form'
 import { ValueType } from '../../../lib'
 import { ModelSingleSelectField } from '../../metadataFormControls/ModelSingleSelect'
-import { DateFieldFF, DateTimeFieldFF } from '../date'
+import { DateFieldFF, DateTimeFieldFF, TimeFieldFF } from '../date'
 
 type CommonFieldProps = {
     label?: string
@@ -124,6 +124,9 @@ export function ValueTypeRenderer(
         return <DateTimeFieldFF {...props} />
     }
 
+    if (valueType === 'TIME') {
+        return <TimeFieldFF {...props} />
+    }
     // render a regular input field if not overridden above
     return <InputFieldFF {...props} />
 }

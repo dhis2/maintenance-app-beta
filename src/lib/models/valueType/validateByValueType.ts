@@ -11,6 +11,7 @@ import {
 import { ValueType } from './types'
 
 const VALUE_TYPE_VALIDATE = {
+    TEXT: createCharacterLengthRange(0, 255),
     NUMBER: number,
     INTEGER: integer,
     INTEGER_POSITIVE: composeValidators(integer, (value) =>

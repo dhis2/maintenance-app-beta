@@ -4,22 +4,6 @@
     gap: var(--spacers-dp8);
 }
 
-.timeInput {
-    box-sizing: border-box;
-    font-size: 14px;
-    line-height: 16px;
-    user-select: text;
-    color: rgb(33, 41, 52);
-    background-color: white;
-    padding: 11px 12px;
-    max-height: 40px;
-    outline: 0px;
-    border: 1px solid rgb(160, 173, 186);
-    border-radius: 3px;
-    box-shadow: rgba(48, 54, 60, 0.1) 0px 0px 1px 0px inset;
-    text-overflow: ellipsis;
-}
-
 .withLabel {
     margin-block-start: 21px;
 }
