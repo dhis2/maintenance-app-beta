@@ -16,11 +16,7 @@ const identifiable = z.object({
 const attributeValues = z
     .array(
         z.object({
-            value: z.string().max(230, {
-                message: i18n.t('Should not exceed {{maxLength}} characters', {
-                    maxLength: 230,
-                }),
-            }),
+            value: z.string(),
             attribute: z.object({
                 id: z.string(),
             }),

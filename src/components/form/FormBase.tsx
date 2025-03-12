@@ -9,9 +9,9 @@ import { defaultValueFormatter } from '../../lib/form/'
 import {
     PartialAttributeValue,
     getAllAttributeValues,
+    useCustomAttributesQuery,
 } from '../../lib/models/attributes'
 import { LoadingSpinner } from '../loading/LoadingSpinner'
-import { useCustomAttributesQuery } from './attributes'
 
 type MaybeModelWithAttributes = {
     id?: string
