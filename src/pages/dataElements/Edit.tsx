@@ -10,8 +10,10 @@ import {
     StandardFormActions,
     StandardFormSection,
 } from '../../components'
-import { useCustomAttributesQuery } from '../../components/form'
-import { AttributeMetadata } from '../../components/form/attributes/useCustomAttributesQuery'
+import {
+    AttributeMetadata,
+    useCustomAttributesQuery,
+} from '../../lib/models/attributes/'
 import {
     SCHEMA_SECTIONS,
     getSectionPath,

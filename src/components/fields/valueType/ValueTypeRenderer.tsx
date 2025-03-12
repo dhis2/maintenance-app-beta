@@ -2,9 +2,9 @@ import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF, InputFieldFF, TextAreaFieldFF } from '@dhis2/ui'
 import React, { useMemo } from 'react'
 import { FieldRenderProps } from 'react-final-form'
+import { ValueType } from '../../../lib'
 import { ModelSingleSelectField } from '../../metadataFormControls/ModelSingleSelect'
 import { DateFieldFF, DateTimeFieldFF } from '../date'
-import { ValueType } from './types'
 
 type CommonFieldProps = {
     label?: string

@@ -5,11 +5,7 @@ import React from 'react'
 import { withTypes } from 'react-final-form'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Loader } from '../../components'
-import {
-    DefaultEditFormContents,
-    useCustomAttributesQuery,
-} from '../../components/form'
-import { AttributeMetadata } from '../../components/form/attributes/useCustomAttributesQuery'
+import { DefaultEditFormContents } from '../../components/form'
 import {
     SCHEMA_SECTIONS,
     getSectionPath,
@@ -17,7 +13,11 @@ import {
     validate,
 } from '../../lib'
 import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
-import { getAllAttributeValues } from '../../lib/models/attributes'
+import {
+    getAllAttributeValues,
+    AttributeMetadata,
+    useCustomAttributesQuery,
+} from '../../lib/models/attributes'
 import { DataElementGroupSet } from '../../types/generated'
 import {
     DataElementGroupSetFormFields,
