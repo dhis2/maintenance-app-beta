@@ -2,6 +2,7 @@ import cx from 'classnames'
 import React, { useMemo, useState } from 'react'
 import { DateFieldFF, DateFieldProps } from './DateFieldFF'
 import css from './DateTimeField.module.css'
+import { TimeInput } from './TimeInput'
 
 const defaultTime = '12:00'
 
@@ -34,11 +35,10 @@ export const DateTimeFieldFF = (props: DateFieldProps) => {
     return (
         <div className={css.wrapper}>
             <DateFieldFF {...props} input={input} />
-            <input
-                className={cx(css.timeInput, {
+            <TimeInput
+                className={cx({
                     [css.withLabel]: !!props.label,
                 })}
-                type="time"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
             />
