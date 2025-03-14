@@ -21,13 +21,13 @@ export const CategoryOptionMergeFormFields = () => {
                 <Description>
                     <p>
                         {i18n.t(`The merge operation will merge the source category options into
-                the target category options. One or many source category options
+                the target category option. One or many source category options
                 can be specified`)}
                     </p>
                     <p>
                         {i18n.t(`Only one target should be specified. The merge operation will
                 transfer all of the category options metadata associations to the
-                source category option over to the target category option.`)}
+                source category options over to the target category option.`)}
                     </p>
                 </Description>
                 <MergeSourcesTargetWrapper>
@@ -42,11 +42,9 @@ export const CategoryOptionMergeFormFields = () => {
                         }}
                     />
                     <BaseTargetField
-                        label={i18n.t(
-                            'Category options to merge into (target)'
-                        )}
+                        label={i18n.t('Category option to merge into (target)')}
                         placeholder={i18n.t(
-                            'Select category options to merge into'
+                            'Select category option to merge into'
                         )}
                         query={{
                             resource: 'categoryOptions',
