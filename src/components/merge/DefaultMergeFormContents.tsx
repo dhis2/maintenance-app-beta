@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip, CircularLoader } from '@dhis2/ui'
+import { Button, ButtonStrip, CircularLoader, Tooltip } from '@dhis2/ui'
 import React from 'react'
 import { useField, useFormState } from 'react-final-form'
 import { useModelSectionHandleOrThrow } from '../../lib'
@@ -49,12 +49,50 @@ export const DefaultMergeFormContents = ({
     )
 }
 
+const TooltipWrapper = ({
+    children,
+    codeConfirmInvalid,
+    targetInputEmpty,
+}: React.PropsWithChildren<{
+    codeConfirmInvalid: boolean
+    targetInputEmpty: boolean
+}>) => {
+    if (!codeConfirmInvalid && !targetInputEmpty) {
+        return children
+    }
+    return (
+        <Tooltip
+            content={
+                targetInputEmpty
+                    ? i18n.t('Target must be specified to merge')
+                    : i18n.t(
+                          'Correct confirmation code must be entered to merge'
+                      )
+            }
+        >
+            {children}
+        </Tooltip>
+    )
+}
+
 export const MergeActions = () => {
+    const codeConfirmInvalid = useField<string[]>('confirmation').meta?.invalid
+    const targetInputEmpty = !useField<string[]>('target').input?.value
+
     return (
         <ButtonStrip className={css.mergeActions}>
-            <Button primary type="submit">
-                {i18n.t('Merge')}
-            </Button>
+            <TooltipWrapper
+                codeConfirmInvalid={codeConfirmInvalid ?? false}
+                targetInputEmpty={targetInputEmpty}
+            >
+                <Button
+                    primary
+                    type="submit"
+                    disabled={targetInputEmpty || codeConfirmInvalid}
+                >
+                    {i18n.t('Merge')}
+                </Button>
+            </TooltipWrapper>
             <LinkButton to={'../'} secondary>
                 {i18n.t('Cancel')}
             </LinkButton>

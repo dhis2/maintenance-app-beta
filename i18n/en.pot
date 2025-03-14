@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-03-06T15:14:09.076Z\n"
-"PO-Revision-Date: 2025-03-06T15:14:09.077Z\n"
+"POT-Creation-Date: 2025-03-14T12:45:42.393Z\n"
+"PO-Revision-Date: 2025-03-14T12:45:42.393Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -213,6 +213,12 @@ msgstr "Merging cannot be undone"
 
 msgid "Confirmation code does not match"
 msgstr "Confirmation code does not match"
+
+msgid "Target must be specified to merge"
+msgstr "Target must be specified to merge"
+
+msgid "Correct confirmation code must be entered to merge"
+msgstr "Correct confirmation code must be entered to merge"
 
 msgid "Merge"
 msgstr "Merge"
@@ -1097,9 +1103,6 @@ msgstr "Created successfully"
 
 msgid "Period type"
 msgstr "Period type"
-
-msgid "Level"
-msgstr "Level"
 
 msgid "Offline levels"
 msgstr "Offline levels"
