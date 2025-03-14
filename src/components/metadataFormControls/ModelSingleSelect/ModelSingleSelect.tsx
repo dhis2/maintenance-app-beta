@@ -1,3 +1,5 @@
+import i18n from '@dhis2/d2-i18n'
+import { NoticeBox } from '@dhis2/ui'
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
@@ -84,6 +86,16 @@ export const ModelSingleSelect = <
         return transform ? transform(allDataMap) : allDataMap
     }, [allDataMap, transform])
 
+    useEffect(() => {
+        // fetch until we have resolvedAvailable length equal to the desired page size (or until we reach the end)
+        if (
+            resolvedAvailable.length < (queryObject.params.pageSize ?? 10) &&
+            queryResult.hasNextPage
+        ) {
+            queryResult.fetchNextPage()
+        }
+    }, [resolvedAvailable])
+
     const shouldFetchSelected =
         !!selected &&
         selected.displayName === undefined &&
@@ -132,6 +144,20 @@ export const ModelSingleSelect = <
         }
         baseModelSingleSelectProps.onFilterChange?.(value)
     }, 250)
+
+    if (
+        resolvedAvailable.length === 0 &&
+        filter.length === 0 &&
+        !queryResult.hasNextPage
+    ) {
+        return (
+            <NoticeBox warning>
+                {i18n.t(
+                    'There is nothing available to select. Remove a source item.'
+                )}
+            </NoticeBox>
+        )
+    }
 
     return (
         <BaseModelSingleSelect
