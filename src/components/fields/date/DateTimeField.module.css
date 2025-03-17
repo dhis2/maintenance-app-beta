@@ -1,0 +1,9 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp8);
+}
+
+.withLabel {
+    margin-block-start: 21px;
+}

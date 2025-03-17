@@ -10,9 +10,11 @@ import {
     StandardFormActions,
     StandardFormSection,
 } from '../../components'
-import { useCustomAttributesQuery } from '../../components/form'
-import { AttributeMetadata } from '../../components/form/attributes/useCustomAttributesQuery'
 import { SCHEMA_SECTIONS, getSectionPath, validate } from '../../lib'
+import {
+    AttributeMetadata,
+    useCustomAttributesQuery,
+} from '../../lib/models/attributes/'
 import { DataElementGroupFormFields, dataElementGroupSchema } from './form'
 import type { FormValues } from './form'
 import classes from './New.module.css'
