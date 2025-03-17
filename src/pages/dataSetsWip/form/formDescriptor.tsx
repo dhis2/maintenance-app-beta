@@ -80,7 +80,12 @@ export const DataSetFormDescriptor = {
         {
             name: 'organisationUnits',
             label: i18n.t('Organisation Units'),
-            fields: [],
+            fields: [
+                {
+                    name: 'organisationUnits',
+                    label: i18n.t('Organisation units'),
+                },
+            ],
         },
         {
             name: 'form',

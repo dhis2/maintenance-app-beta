@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-02-28T08:48:54.069Z\n"
-"PO-Revision-Date: 2025-02-28T08:48:54.070Z\n"
+"POT-Creation-Date: 2025-03-06T15:14:09.076Z\n"
+"PO-Revision-Date: 2025-03-06T15:14:09.077Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -158,6 +158,40 @@ msgstr "{{fieldLabel}} (required)"
 
 msgid "Name"
 msgstr "Name"
+
+msgid "Level"
+msgstr "Level"
+
+msgid "Group"
+msgstr "Group"
+
+msgid "Deselect all"
+msgstr "Deselect all"
+
+msgid "Select units by group or level..."
+msgstr "Select units by group or level..."
+
+msgid "Search"
+msgstr "Search"
+
+msgid "No selected units"
+msgstr "No selected units"
+
+msgid "{{numberOfUnits}} selected units"
+msgstr "{{numberOfUnits}} selected units"
+
+msgid "No organisation units match your search."
+msgstr "No organisation units match your search."
+
+msgid ""
+"There are too many results to display. Please narrow\n"
+"                        down the search."
+msgstr ""
+"There are too many results to display. Please narrow\n"
+"                        down the search."
+
+msgid "Search for organisation units"
+msgstr "Search for organisation units"
 
 msgid "Select organisation units"
 msgstr "Select organisation units"
@@ -488,9 +522,6 @@ msgstr "{{number}} selected"
 msgid "Merge..."
 msgstr "Merge..."
 
-msgid "Deselect all"
-msgstr "Deselect all"
-
 msgid "Choose a Locale to translate from the menu above"
 msgstr "Choose a Locale to translate from the menu above"
 
@@ -604,12 +635,6 @@ msgstr "Organisation unit"
 
 msgid "Organisation units"
 msgstr "Organisation units"
-
-msgid "Organisation unit level"
-msgstr "Organisation unit level"
-
-msgid "Organisation unit levels"
-msgstr "Organisation unit levels"
 
 msgid "Organisation unit group"
 msgstr "Organisation unit group"
@@ -1494,6 +1519,21 @@ msgstr "Search available legends"
 msgid "Search selected legends"
 msgstr "Search selected legends"
 
+msgid "Available data elements"
+msgstr "Available data elements"
+
+msgid "Compulsory data elements"
+msgstr "Compulsory data elements"
+
+msgid "Search available data elements"
+msgstr "Search available data elements"
+
+msgid "Search compulsory data elements"
+msgstr "Search compulsory data elements"
+
+msgid "Approval workflow"
+msgstr "Approval workflow"
+
 msgid "Configure data elements"
 msgstr "Configure data elements"
 
@@ -1634,6 +1674,32 @@ msgstr "Validation and limitations"
 msgid "Configure how data can and must be entered for this data"
 msgstr "Configure how data can and must be entered for this data"
 
+msgid "Completing a data set requires passing validation"
+msgstr "Completing a data set requires passing validation"
+
+msgid "Completing a data set requires all empty values to have a comment"
+msgstr "Completing a data set requires all empty values to have a comment"
+
+msgid "Completing a data set requires compulsory field to have a value"
+msgstr "Completing a data set requires compulsory field to have a value"
+
+msgid ""
+"Data elements with category combinations require all fields to have a value "
+"if one has a value"
+msgstr ""
+"Data elements with category combinations require all fields to have a value "
+"if one has a value"
+
+msgid "Compulsory data entry"
+msgstr "Compulsory data entry"
+
+msgid ""
+"Optionally configure which data elements must have a value to complete this "
+"data set."
+msgstr ""
+"Optionally configure which data elements must have a value to complete this "
+"data set."
+
 msgid "Add period entry rule"
 msgstr "Add period entry rule"
 
@@ -1672,32 +1738,6 @@ msgstr "Remove"
 
 msgid "Add a period entry rule"
 msgstr "Add a period entry rule"
-
-msgid "Completing a data set requires passing validation"
-msgstr "Completing a data set requires passing validation"
-
-msgid "Completing a data set requires all empty values to have a comment"
-msgstr "Completing a data set requires all empty values to have a comment"
-
-msgid "Completing a data set requires compulsory field to have a value"
-msgstr "Completing a data set requires compulsory field to have a value"
-
-msgid ""
-"Data elements with category combinations require all fields to have a value "
-"if one has a value"
-msgstr ""
-"Data elements with category combinations require all fields to have a value "
-"if one has a value"
-
-msgid "Compulsory data entry"
-msgstr "Compulsory data entry"
-
-msgid ""
-"Optionally configure which data elements must have a value to complete this "
-"data set."
-msgstr ""
-"Optionally configure which data elements must have a value to complete this "
-"data set."
 
 msgid "The number should not have decimals"
 msgstr "The number should not have decimals"

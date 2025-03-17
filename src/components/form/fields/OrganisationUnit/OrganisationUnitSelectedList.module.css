@@ -1,0 +1,27 @@
+.organisationUnitSelectedWrapper {
+    flex: 1 1 40%;
+    max-width: 400px;
+    border: 1px solid var(--colors-grey300);
+    border-radius: 3px;
+    overflow: auto;
+    padding: var(--spacers-dp8) var(--spacers-dp16);
+    color: var(--colors-grey700);
+    background-color: var(--colors-grey050);
+    max-height: 800px;
+}
+
+.title {
+    font-weight: 500;
+    margin: var(--spacers-dp8) 0;
+    color: var(--colors-grey700);
+}
+
+.organisationUnitSelectedList {
+    margin: 0;
+    padding: var(--spacers-dp4);
+}
+
+.organisationUnitSelectedList > li {
+    list-style: none;
+    margin-block-end: var(--spacers-dp8);
+}

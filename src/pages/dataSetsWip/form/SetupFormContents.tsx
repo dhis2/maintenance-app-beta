@@ -3,13 +3,18 @@ import React from 'react'
 import {
     DefaultIdentifiableFields,
     DescriptionField,
+    StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
 import { ColorAndIconField } from '../../dataElements/fields'
 
-export const SetupFormContents = ({ name }: { name: string }) => {
+export const SetupFormContents = React.memo(function SetupFormContents({
+    name,
+}: {
+    name: string
+}) {
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
@@ -19,8 +24,12 @@ export const SetupFormContents = ({ name }: { name: string }) => {
                 {i18n.t('Set up the basic information for this data set.')}
             </StandardFormSectionDescription>
             <DefaultIdentifiableFields />
-            <DescriptionField />
-            <ColorAndIconField />
+            <StandardFormField>
+                <DescriptionField />
+            </StandardFormField>
+            <StandardFormField>
+                <ColorAndIconField />
+            </StandardFormField>
         </SectionedFormSection>
     )
-}
+})

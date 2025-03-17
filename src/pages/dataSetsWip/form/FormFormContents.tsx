@@ -94,9 +94,13 @@ const FormTypeCard = ({
     )
 }
 
-export const FormFormContents = ({ name }: { name: string }) => {
+export const FormFormContents = React.memo(function FormFormContents({
+    name,
+}: {
+    name: string
+}) {
     const formTypeFieldName = 'formType'
-    const formValues = useFormState().values
+    const formValues = useFormState({ subscription: { values: true } }).values
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
@@ -185,4 +189,4 @@ export const FormFormContents = ({ name }: { name: string }) => {
             )}
         </SectionedFormSection>
     )
-}
+})
