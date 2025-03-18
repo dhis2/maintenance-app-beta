@@ -1,5 +1,4 @@
 import i18n from '@dhis2/d2-i18n'
-import { NoticeBox } from '@dhis2/ui'
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
@@ -37,6 +36,7 @@ export type ModelSingleSelectProps<
     query: Omit<PlainResourceQuery, 'id'>
     onFilterChange?: (value: string) => void
     transform?: (value: TModel[]) => TModel[]
+    noMatchWithoutFilterText?: string
 }
 
 export const ModelSingleSelect = <
@@ -45,6 +45,7 @@ export const ModelSingleSelect = <
     selected,
     query,
     transform,
+    noMatchWithoutFilterText,
     ...baseModelSingleSelectProps
 }: ModelSingleSelectProps<TModel>) => {
     const queryFn = useBoundResourceQueryFn()
@@ -145,20 +146,6 @@ export const ModelSingleSelect = <
         baseModelSingleSelectProps.onFilterChange?.(value)
     }, 250)
 
-    if (
-        resolvedAvailable.length === 0 &&
-        filter.length === 0 &&
-        !queryResult.hasNextPage
-    ) {
-        return (
-            <NoticeBox warning>
-                {i18n.t(
-                    'There is nothing available to select. Remove a source item.'
-                )}
-            </NoticeBox>
-        )
-    }
-
     return (
         <BaseModelSingleSelect
             {...baseModelSingleSelectProps}
@@ -170,6 +157,7 @@ export const ModelSingleSelect = <
             onEndReached={queryResult.fetchNextPage}
             loading={queryResult.isLoading}
             error={queryResult.error?.toString()}
+            noMatchWithoutFilterText={noMatchWithoutFilterText}
         />
     )
 }

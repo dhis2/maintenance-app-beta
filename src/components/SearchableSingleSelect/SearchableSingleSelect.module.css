@@ -66,3 +66,12 @@
     color: var(--theme-valid);
     text-decoration: none;
 }
+
+.noMatchBlock {
+    color: var(--colors-grey700);
+    font-size: 13px;
+    line-height: 16px;
+    padding-block: var(--spacers-dp8);
+    padding-inline: var(--spacers-dp24);
+    text-align: center;
+}

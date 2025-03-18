@@ -54,6 +54,9 @@ export const CategoryOptionMergeFormFields = () => {
                                 fields: ['id', 'displayName', 'name'],
                             },
                         }}
+                        noMatchWithoutFilterText={i18n.t(
+                            'No category options available. Remove one from source.'
+                        )}
                     />
                 </MergeSourcesTargetWrapper>
             </FormSection>

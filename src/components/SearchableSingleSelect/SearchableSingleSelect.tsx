@@ -66,6 +66,7 @@ export interface SearchableSingleSelectPropTypes {
     onBlur?: () => void
     onFocus?: () => void
     searchable?: boolean
+    noMatchWithoutFilterText?: string
 }
 
 export const SearchableSingleSelect = ({
@@ -87,6 +88,7 @@ export const SearchableSingleSelect = ({
     showAllOption,
     showEndLoader,
     searchable = true,
+    noMatchWithoutFilterText,
 }: SearchableSingleSelectPropTypes) => {
     const [loadingSpinnerRef, setLoadingSpinnerRef] = useState<HTMLElement>()
 
@@ -141,19 +143,29 @@ export const SearchableSingleSelect = ({
             dense={dense}
         >
             {searchable && (
-                <div className={classes.searchField}>
-                    <div className={classes.searchInput}>
-                        <Input
-                            dense
-                            initialFocus
-                            value={filter}
-                            onChange={({ value }) =>
-                                setFilterValue(value ?? '')
-                            }
-                            placeholder={i18n.t('Filter options')}
-                            type="search"
-                        />
+                <>
+                    <div className={classes.searchField}>
+                        <div className={classes.searchInput}>
+                            <Input
+                                dense
+                                initialFocus
+                                value={filter}
+                                onChange={({ value }) =>
+                                    setFilterValue(value ?? '')
+                                }
+                                placeholder={i18n.t('Filter options')}
+                                type="search"
+                            />
+                        </div>
                     </div>
+                </>
+            )}
+
+            {withAllOptions.length === 0 && (
+                <div className={classes.noMatchBlock}>
+                    {!filter && noMatchWithoutFilterText
+                        ? noMatchWithoutFilterText
+                        : 'No matches'}
                 </div>
             )}
 

@@ -52,6 +52,7 @@ export function ModelSingleSelectField<
     // data,
     input,
     meta,
+    noMatchWithoutFilterText,
     ...modelSingleSelectProps
 }: ModelSingleSelectFieldProps<TModel> & RelevantRenderProps<TModel>) {
     return (
@@ -73,6 +74,7 @@ export function ModelSingleSelectField<
                     onChange?.(selected)
                 }}
                 invalid={meta.touched && !!meta.error}
+                noMatchWithoutFilterText={noMatchWithoutFilterText}
             />
         </Field>
     )
@@ -87,6 +89,7 @@ export function ModelSingleSelectFormField<TModel extends DisplayableModel>({
     format,
     parse,
     data,
+    noMatchWithoutFilterText,
     ...modelSingleSelectProps
 }: ModelSingleSelectFieldProps<TModel> & RelevantUseFieldProps<TModel>) {
     const { input, meta } = useField<TModel | undefined>(name, {
@@ -102,6 +105,7 @@ export function ModelSingleSelectFormField<TModel extends DisplayableModel>({
         <ModelSingleSelectField
             input={input}
             meta={meta}
+            noMatchWithoutFilterText={noMatchWithoutFilterText}
             {...modelSingleSelectProps}
         />
     )
