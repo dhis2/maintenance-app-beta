@@ -214,6 +214,12 @@ msgstr "Merging cannot be undone"
 msgid "Confirmation code does not match"
 msgstr "Confirmation code does not match"
 
+msgid "Target must be specified to merge"
+msgstr "Target must be specified to merge"
+
+msgid "Correct confirmation code must be entered to merge"
+msgstr "Correct confirmation code must be entered to merge"
+
 msgid "Merge"
 msgstr "Merge"
 
