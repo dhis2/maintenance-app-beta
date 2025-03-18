@@ -25,7 +25,7 @@ export const IndicatorMergeFormFields = () => {
                     <p>
                         {i18n.t(`Only one target should be specified. The merge operation will
                 transfer all of the indicator metadata associations to the
-                source indicator over to the target indicator.`)}
+                source indicators over to the target indicator.`)}
                     </p>
                 </Description>
                 <MergeSourcesTargetWrapper>
@@ -40,7 +40,7 @@ export const IndicatorMergeFormFields = () => {
                         }}
                     />
                     <BaseTargetField
-                        label={i18n.t('Indicators to merge into (target)')}
+                        label={i18n.t('Indicator to merge into (target)')}
                         placeholder={i18n.t('Select indicator to merge into')}
                         query={{
                             resource: 'indicators',
