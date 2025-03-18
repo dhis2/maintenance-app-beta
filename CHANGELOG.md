@@ -1,3 +1,17 @@
+## [0.35.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.35.1...v0.35.2) (2025-03-18)
+
+
+### Bug Fixes
+
+* use appropriate singulars, plurals [BETA-344] ([#531](https://github.com/dhis2/maintenance-app-beta/issues/531)) ([1d687a6](https://github.com/dhis2/maintenance-app-beta/commit/1d687a6603ec0dad1c85c82e3abfe618dfd1e91b))
+
+## [0.35.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.35.0...v0.35.1) (2025-03-17)
+
+
+### Bug Fixes
+
+* initialise isChecked to false and then set it on render ([#528](https://github.com/dhis2/maintenance-app-beta/issues/528)) ([9761604](https://github.com/dhis2/maintenance-app-beta/commit/97616042013fb696b25169a18357b5f176f5ac9b))
+
 # [0.35.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.34.1...v0.35.0) (2025-03-10)
 
 
