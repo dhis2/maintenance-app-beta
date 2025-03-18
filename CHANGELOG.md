@@ -1,3 +1,10 @@
+## [0.35.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.35.2...v0.35.3) (2025-03-18)
+
+
+### Bug Fixes
+
+* prevent merge with invalid inputs [BETA-343] ([#530](https://github.com/dhis2/maintenance-app-beta/issues/530)) ([5dc17d1](https://github.com/dhis2/maintenance-app-beta/commit/5dc17d166e01310c40ba464e0f7de9b2b89a7640))
+
 ## [0.35.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.35.1...v0.35.2) (2025-03-18)
 
 
