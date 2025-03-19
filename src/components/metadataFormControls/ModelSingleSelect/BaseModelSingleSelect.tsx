@@ -33,7 +33,6 @@ export const BaseModelSingleSelect = <
 >({
     available,
     selected,
-    noMatchWithoutFilterText,
     onChange,
     showNoValueOption,
     ...searchableSingleSelectProps
@@ -76,7 +75,6 @@ export const BaseModelSingleSelect = <
             selected={selected?.id}
             options={allSingleSelectOptions}
             onChange={handleOnChange}
-            noMatchWithoutFilterText={noMatchWithoutFilterText}
         />
     )
 }

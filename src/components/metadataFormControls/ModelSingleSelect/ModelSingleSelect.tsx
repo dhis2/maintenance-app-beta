@@ -36,7 +36,6 @@ export type ModelSingleSelectProps<
     query: Omit<PlainResourceQuery, 'id'>
     onFilterChange?: (value: string) => void
     transform?: (value: TModel[]) => TModel[]
-    noMatchWithoutFilterText?: string
 }
 
 export const ModelSingleSelect = <
@@ -45,7 +44,6 @@ export const ModelSingleSelect = <
     selected,
     query,
     transform,
-    noMatchWithoutFilterText,
     ...baseModelSingleSelectProps
 }: ModelSingleSelectProps<TModel>) => {
     const queryFn = useBoundResourceQueryFn()
@@ -157,7 +155,6 @@ export const ModelSingleSelect = <
             onEndReached={queryResult.fetchNextPage}
             loading={queryResult.isLoading}
             error={queryResult.error?.toString()}
-            noMatchWithoutFilterText={noMatchWithoutFilterText}
         />
     )
 }

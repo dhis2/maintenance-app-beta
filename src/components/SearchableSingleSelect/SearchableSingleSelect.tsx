@@ -143,22 +143,20 @@ export const SearchableSingleSelect = ({
             dense={dense}
         >
             {searchable && (
-                <>
-                    <div className={classes.searchField}>
-                        <div className={classes.searchInput}>
-                            <Input
-                                dense
-                                initialFocus
-                                value={filter}
-                                onChange={({ value }) =>
-                                    setFilterValue(value ?? '')
-                                }
-                                placeholder={i18n.t('Filter options')}
-                                type="search"
-                            />
-                        </div>
+                <div className={classes.searchField}>
+                    <div className={classes.searchInput}>
+                        <Input
+                            dense
+                            initialFocus
+                            value={filter}
+                            onChange={({ value }) =>
+                                setFilterValue(value ?? '')
+                            }
+                            placeholder={i18n.t('Filter options')}
+                            type="search"
+                        />
                     </div>
-                </>
+                </div>
             )}
 
             {withAllOptions.length === 0 && (
