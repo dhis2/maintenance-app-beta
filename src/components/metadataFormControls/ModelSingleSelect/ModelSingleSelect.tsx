@@ -1,6 +1,5 @@
-import i18n from '@dhis2/d2-i18n'
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
 import { PlainResourceQuery } from '../../../types'
@@ -49,6 +48,7 @@ export const ModelSingleSelect = <
     const queryFn = useBoundResourceQueryFn()
     const [searchTerm, setSearchTerm] = useState('')
     const onChange = baseModelSingleSelectProps.onChange
+    const [iterationsCount, setIterationsCount] = useState(0)
 
     const searchFilter = `identifiable:token:${searchTerm}`
     const filter: string[] = searchTerm ? [searchFilter] : []
@@ -75,6 +75,13 @@ export const ModelSingleSelect = <
         staleTime: 60 * 1000,
     })
 
+    const fetchNextPage = queryResult?.fetchNextPage
+
+    const onEndReached = useCallback(() => {
+        setIterationsCount((prev) => prev + 1)
+        fetchNextPage()
+    }, [setIterationsCount, fetchNextPage])
+
     const allDataMap = useMemo(() => {
         const flatData =
             queryResult.data?.pages.flatMap((page) => page[modelName]) ?? []
@@ -88,12 +95,20 @@ export const ModelSingleSelect = <
     useEffect(() => {
         // fetch until we have resolvedAvailable length equal to the desired page size (or until we reach the end)
         if (
-            resolvedAvailable.length < (queryObject.params.pageSize ?? 10) &&
+            resolvedAvailable?.length <
+                (iterationsCount + 1) * (queryObject.params.pageSize ?? 10) &&
             queryResult.hasNextPage
         ) {
-            queryResult.fetchNextPage()
+            fetchNextPage({ cancelRefetch: true })
         }
-    }, [resolvedAvailable])
+    }, [
+        resolvedAvailable?.length,
+        queryObject.params.pageSize,
+        queryResult.hasNextPage,
+        fetchNextPage,
+        iterationsCount,
+        queryResult.data?.pages?.length, // necessary in case refetch results in no new resolvedAvailable
+    ])
 
     const shouldFetchSelected =
         !!selected &&
@@ -152,7 +167,7 @@ export const ModelSingleSelect = <
             onFilterChange={handleFilterChange}
             onRetryClick={queryResult.refetch}
             showEndLoader={!!queryResult.hasNextPage}
-            onEndReached={queryResult.fetchNextPage}
+            onEndReached={onEndReached}
             loading={queryResult.isLoading}
             error={queryResult.error?.toString()}
         />
