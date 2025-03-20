@@ -65,6 +65,21 @@ const VALUE_TYPE_VALIDATE = {
     TRUE_ONLY: (value: unknown) =>
         value === 'false' ? i18n.t('Must be checked') : undefined,
     EMAIL: email,
+    DATETIME: (value: unknown) => {
+        if (isEmpty(value)) {
+            return undefined
+        }
+        if (typeof value === 'string') {
+            const [datePart, timePart] = value.split('T')
+            if (datePart && !timePart) {
+                return i18n.t('Please provide a time.')
+            }
+            if (!datePart && timePart) {
+                return i18n.t('Please provide a date.')
+            }
+        }
+        return undefined
+    },
 } satisfies Partial<Record<ValueType, Validator>>
 
 export const getValidateForValueType = (

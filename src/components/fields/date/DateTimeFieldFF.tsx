@@ -1,5 +1,4 @@
-import cx from 'classnames'
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { DateFieldFF, DateFieldProps } from './DateFieldFF'
 import css from './DateTimeField.module.css'
 import { TimeInput } from './TimeInput'
@@ -7,40 +6,50 @@ import { TimeInput } from './TimeInput'
 const defaultTime = '12:00'
 
 export const DateTimeFieldFF = (props: DateFieldProps) => {
-    const [time, setTime] = useState('12:00')
-
     const originalInput = props.input
+    const [datePart, timePart] = (originalInput.value ?? '').split('T')
+
     const input = useMemo(() => {
-        const handleChange = (calendarDateString: string) => {
-            if (!calendarDateString) {
-                originalInput.onChange('')
-                setTime('')
+        const handleChange = (calendarDateString: string, newTime?: string) => {
+            // allow time to be changed without date, should cause
+            // dateTime validator with required date
+            if (!calendarDateString && newTime) {
+                originalInput.onChange('T' + newTime)
                 return
             }
-            // if we select a date, set the time to the default
-            let newTime = time
-            if (!time) {
-                newTime = defaultTime
-                setTime(newTime)
+            // clear both time and date with calendar clear-button
+            if (!calendarDateString) {
+                originalInput.onChange('')
+                originalInput.onBlur()
+                return
             }
-            const dateTime = `${calendarDateString}T${newTime}`
+            const resolvedTime = newTime ?? timePart ?? defaultTime
+            const dateTime = `${calendarDateString}T${resolvedTime}`
             originalInput.onChange(dateTime)
         }
         return {
             ...originalInput,
+            value: datePart,
             onChange: handleChange,
         }
-    }, [time, originalInput])
+    }, [timePart, originalInput, datePart])
 
     return (
         <div className={css.wrapper}>
-            <DateFieldFF {...props} input={input} />
+            <DateFieldFF
+                className={css.dateField}
+                meta={props.meta}
+                input={input}
+                label={props.label}
+                valid={false}
+            />
             <TimeInput
-                className={cx({
-                    [css.withLabel]: !!props.label,
-                })}
-                value={time}
-                onChange={(e) => setTime(e.target.value)}
+                className={css.timeInput}
+                value={timePart || ''}
+                onChange={(payload) => {
+                    input.onChange(datePart, payload.value)
+                }}
+                onBlur={() => input.onBlur()}
             />
         </div>
     )

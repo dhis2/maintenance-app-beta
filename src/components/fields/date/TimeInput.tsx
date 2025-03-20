@@ -1,8 +1,7 @@
-import cx from 'classnames'
+import { Input, InputProps } from '@dhis2/ui'
 import React from 'react'
 import { FieldRenderProps } from 'react-final-form'
 import { FieldWrapper } from '../../form'
-import css from './TimeInput.module.css'
 
 type FinalFormFieldProps = Pick<FieldRenderProps<string>, 'input' | 'meta'>
 
@@ -17,21 +16,13 @@ export function TimeFieldFF({ meta, input, label, required }: TimeFieldProps) {
         <FieldWrapper meta={meta} {...input} label={label} required={required}>
             <TimeInput
                 name={input.name}
-                onChange={input.onChange}
+                onChange={(payload) => input.onChange(payload.value)}
                 value={input.value}
             />
         </FieldWrapper>
     )
 }
 
-export const TimeInput = (
-    inputProps: React.ComponentPropsWithoutRef<'input'>
-) => {
-    return (
-        <input
-            {...inputProps}
-            className={cx(inputProps.className, css.timeInput)}
-            type="time"
-        />
-    )
+export const TimeInput = (inputProps: InputProps) => {
+    return <Input {...inputProps} type="time" />
 }

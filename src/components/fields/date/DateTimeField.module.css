@@ -1,9 +1,10 @@
 .wrapper {
     display: flex;
-    align-items: center;
+    align-items: start;
     gap: var(--spacers-dp8);
 }
 
-.withLabel {
+.timeInput {
+    /* adjust margin for the label of the datefield */
     margin-block-start: 21px;
 }
