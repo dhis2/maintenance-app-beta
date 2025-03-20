@@ -32,6 +32,7 @@ import {
 } from './AuthorizationGuards'
 import { DefaultErrorRoute } from './DefaultErrorRoute'
 import { LegacyAppRedirect } from './LegacyAppRedirect'
+import { SyncURLWithGlobalShell } from './SyncURLWithGlobalShell'
 import { RouteHandle } from './types'
 // This loads all the overview routes in the same chunk since they resolve to the same promise
 // see https://reactrouter.com/en/main/route/lazy#multiple-routes-in-a-single-file
@@ -220,6 +221,7 @@ const routes = createRoutesFromElements(
     <Route
         element={
             <QueryParamProvider adapter={ReactRouter6Adapter}>
+                <SyncURLWithGlobalShell />
                 <Layout />
             </QueryParamProvider>
         }
