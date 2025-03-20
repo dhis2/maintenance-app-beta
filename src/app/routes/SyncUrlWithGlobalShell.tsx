@@ -11,7 +11,7 @@ import { useLocation } from 'react-router-dom'
 
 */
 
-export const SyncURLWithGlobalShell = ({
+export const SyncUrlWithGlobalShell = ({
     children,
 }: {
     children?: React.ReactNode
