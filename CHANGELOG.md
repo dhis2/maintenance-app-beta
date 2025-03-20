@@ -1,3 +1,10 @@
+## [0.35.4](https://github.com/dhis2/maintenance-app-beta/compare/v0.35.3...v0.35.4) (2025-03-20)
+
+
+### Bug Fixes
+
+* sync route updates with global shell ([#533](https://github.com/dhis2/maintenance-app-beta/issues/533)) ([4ea0994](https://github.com/dhis2/maintenance-app-beta/commit/4ea09945115669711a76f788ede0e435b686a075))
+
 ## [0.35.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.35.2...v0.35.3) (2025-03-18)
 
 
