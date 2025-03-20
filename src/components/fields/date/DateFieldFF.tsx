@@ -3,6 +3,7 @@ import { CalendarInput, CalendarInputProps } from '@dhis2/ui'
 import React, { useState } from 'react'
 import { FieldRenderProps } from 'react-final-form'
 import { selectedLocale, useSystemSetting } from '../../../lib'
+import { Optional } from '../../../types'
 
 type FinalFormFieldProps = Pick<FieldRenderProps<string>, 'input' | 'meta'>
 
@@ -13,7 +14,7 @@ export type DateFieldProps = Omit<
     // this is not exposed in CalendarInputProps - but it should be
     label?: string
     required?: boolean
-} & FinalFormFieldProps
+} & Optional<FinalFormFieldProps, 'meta'>
 
 type ValidationProps = {
     error: boolean
@@ -36,9 +37,9 @@ export function DateFieldFF({
     })
     // this is to be able for form-level validation to show the error
     const ffControlledError = {
-        error: meta.error && meta.touched,
-        validationText: meta.error,
-        valid: meta.valid ?? false,
+        error: meta?.error && meta?.touched,
+        validationText: meta?.error,
+        valid: meta?.valid ?? false,
     } satisfies ValidationProps
     const value = input.value ? input.value.substring(0, 10) : ''
 
@@ -67,24 +68,22 @@ export function DateFieldFF({
             : validation
 
     return (
-        <div>
-            <CalendarInput
-                inputWidth={'400px'}
-                date={value}
-                name={input.name}
-                required={required}
-                calendar={calendar as CalendarInputProps['calendar']}
-                onDateSelect={handleChange}
-                timeZone={'utc'}
-                locale={locale}
-                format={'YYYY-MM-DD'}
-                onBlur={(_, e) => input.onBlur(e)}
-                clearable
-                label={required ? `${label} (required)` : label}
-                {...resolvedValidation}
-                valid={resolvedValidation?.valid && input?.value !== ''}
-                {...calendarInputProps}
-            />
-        </div>
+        <CalendarInput
+            inputWidth={'400px'}
+            date={value}
+            name={input.name}
+            required={required}
+            calendar={calendar as CalendarInputProps['calendar']}
+            onDateSelect={handleChange}
+            timeZone={'utc'}
+            locale={locale}
+            format={'YYYY-MM-DD'}
+            onBlur={(_, e) => input.onBlur(e)}
+            clearable
+            label={required ? `${label} (required)` : label}
+            {...resolvedValidation}
+            valid={resolvedValidation?.valid && input?.value !== ''}
+            {...calendarInputProps}
+        />
     )
 }
