@@ -53,6 +53,9 @@ export const IndicatorTypeMergeFormFields = () => {
                                 fields: ['id', 'displayName', 'name', 'factor'],
                             },
                         }}
+                        noMatchWithoutFilterText={i18n.t(
+                            'No indicator types available. Remove one from source.'
+                        )}
                     />
                 </MergeSourcesTargetWrapper>
             </FormSection>

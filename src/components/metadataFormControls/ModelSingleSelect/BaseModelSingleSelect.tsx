@@ -16,6 +16,7 @@ type OwnProps<TModel> = {
     available: TModel[]
     onChange: (selected: TModel | undefined) => void
     showNoValueOption?: { value: string; label: string } | boolean
+    noMatchWithoutFilterText?: string
 }
 
 export type BaseModelSingleSelectProps<

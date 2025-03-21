@@ -40,12 +40,14 @@ type BaseTargetFieldProps = {
     query: PlainResourceQuery
     label?: string
     placeholder?: string
+    noMatchWithoutFilterText?: string
 }
 
 export const BaseTargetField = ({
     query,
     label,
     placeholder,
+    noMatchWithoutFilterText,
 }: BaseTargetFieldProps) => {
     const sourcesValues = useField<DisplayableModel[]>('sources', {
         subscription: { value: true },
@@ -62,6 +64,10 @@ export const BaseTargetField = ({
             }
             label={label || 'Target'}
             placeholder={placeholder || 'Select the model to merge into'}
+            noMatchWithoutFilterText={
+                noMatchWithoutFilterText ??
+                'No potential targets available. Remove an item from sources.'
+            }
         />
     )
 }

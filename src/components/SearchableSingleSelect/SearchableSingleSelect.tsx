@@ -66,6 +66,7 @@ export interface SearchableSingleSelectPropTypes {
     onBlur?: () => void
     onFocus?: () => void
     searchable?: boolean
+    noMatchWithoutFilterText?: string
 }
 
 export const SearchableSingleSelect = ({
@@ -87,6 +88,7 @@ export const SearchableSingleSelect = ({
     showAllOption,
     showEndLoader,
     searchable = true,
+    noMatchWithoutFilterText,
 }: SearchableSingleSelectPropTypes) => {
     const [loadingSpinnerRef, setLoadingSpinnerRef] = useState<HTMLElement>()
 
@@ -154,6 +156,14 @@ export const SearchableSingleSelect = ({
                             type="search"
                         />
                     </div>
+                </div>
+            )}
+
+            {withAllOptions.length === 0 && (
+                <div className={classes.noMatchBlock}>
+                    {!filter && noMatchWithoutFilterText
+                        ? noMatchWithoutFilterText
+                        : 'No matches'}
                 </div>
             )}
 
