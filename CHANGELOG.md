@@ -1,3 +1,10 @@
+## [0.35.5](https://github.com/dhis2/maintenance-app-beta/compare/v0.35.4...v0.35.5) (2025-03-21)
+
+
+### Bug Fixes
+
+* display information when no target is available [BETA-348] ([#532](https://github.com/dhis2/maintenance-app-beta/issues/532)) ([e31ef4b](https://github.com/dhis2/maintenance-app-beta/commit/e31ef4be04673fce83100175927e815fa05f4c8e))
+
 ## [0.35.4](https://github.com/dhis2/maintenance-app-beta/compare/v0.35.3...v0.35.4) (2025-03-20)
 
 
