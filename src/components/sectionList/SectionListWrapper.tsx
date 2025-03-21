@@ -181,6 +181,7 @@ export const SectionListWrapper = ({
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     type={schema.singular as any}
                     onClose={() => onSharingDialogClose()}
+                    dataSharing={schema.dataShareable}
                 />
             )}
             {translationDialogModel && (
