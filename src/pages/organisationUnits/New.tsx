@@ -1,6 +1,4 @@
-import { useAlert } from '@dhis2/app-runtime'
 import { useQueryClient } from '@tanstack/react-query'
-import { FORM_ERROR } from 'final-form'
 import React, { useMemo } from 'react'
 import { FormBase } from '../../components'
 import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
@@ -9,6 +7,7 @@ import {
     SECTIONS_MAP,
     useNavigateWithSearchState,
 } from '../../lib'
+import { createFormError } from '../../lib/form/createFormError'
 import { useCreateModel } from '../../lib/form/useCreateModel'
 import { initialValues, OrganisationUnitFormField, validate } from './form'
 import { OrganisationUnitFormValues } from './form/organisationUnitSchema'
@@ -21,24 +20,16 @@ export const useOnSaveOrgUnits = () => {
     const queryClient = useQueryClient()
     const updateDataSetsAndPrograms = useOnSaveDataSetsAndPrograms()
     const navigate = useNavigateWithSearchState()
-    const saveAlert = useAlert(
-        ({ message }) => message,
-        (options) => options
-    )
 
     return useMemo(
         () => async (values: OrganisationUnitFormValues) => {
             const { dataSets, programs, ...restFields } = values
 
-            const createOrgUnitResponse = await createModel(restFields)
-            if (createOrgUnitResponse[FORM_ERROR]) {
-                return createOrgUnitResponse
+            const { data, error } = await createModel(restFields)
+            if (error) {
+                return createFormError(error)
             }
-            const orgId = (
-                createOrgUnitResponse.response as {
-                    response: { uid: string }
-                }
-            ).response.uid
+            const orgId = (data as { response: { uid: string } }).response.uid
 
             await updateDataSetsAndPrograms(orgId, { dataSets, programs })
 
@@ -47,7 +38,7 @@ export const useOnSaveOrgUnits = () => {
             })
             navigate(`/${getSectionPath(section)}`)
         },
-        [saveAlert, navigate, section, updateDataSetsAndPrograms, queryClient]
+        [createModel, navigate, updateDataSetsAndPrograms, queryClient]
     )
 }
 

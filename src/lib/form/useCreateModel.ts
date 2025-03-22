@@ -1,6 +1,6 @@
 import { useDataEngine } from '@dhis2/app-runtime'
-import { FORM_ERROR } from 'final-form'
 import { useCallback } from 'react'
+import { parseErrorResponse } from '../errors'
 
 export const useCreateModel = (resource: string) => {
     const dataEngine = useDataEngine()
@@ -13,9 +13,9 @@ export const useCreateModel = (resource: string) => {
                     type: 'create',
                     data: data,
                 })
-                return { response }
+                return { data: response }
             } catch (error) {
-                return { [FORM_ERROR]: (error as Error | string).toString() }
+                return { error: parseErrorResponse(error) }
             }
         },
         [dataEngine, resource]

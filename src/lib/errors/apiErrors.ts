@@ -59,10 +59,11 @@ const createErrorReport = (report: Partial<ApiErrorReport>): ApiErrorReport => {
 const createFallbackError = (error: unknown): ApiErrorReport => {
     let message = 'An unknown error occurred'
     try {
-        message = (error as Error).toString()
+        message = (error as Error).message
     } catch (e) {
         console.error('Failed to parse error message', e)
     }
+
     return createErrorReport({
         message,
         original: error,
@@ -85,6 +86,10 @@ export const isApiErrorReport = (error: unknown): error is ApiErrorReport => {
     return false
 }
 
+/**
+ * Ensure that error is of type ApiErrorReport
+ * If not, create a fallback error of type ApiErrorReport
+ */
 export const ensureApiErrorReport = (
     error: unknown
 ): ApiErrorReport | undefined => {
