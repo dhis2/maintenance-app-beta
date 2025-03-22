@@ -54,9 +54,9 @@ export function SectionedFormErrors() {
 
     if (formStateErrors.hasSubmitErrors) {
         return (
-            <ServerSubmitErrorNotice>
-                {formStateErrors.submitError}
-            </ServerSubmitErrorNotice>
+            <ServerSubmitErrorNotice
+                errorReport={formStateErrors.submitError}
+            />
         )
     }
 

@@ -1,3 +1,9 @@
+import { FetchError } from '@dhis2/app-runtime'
+
+export const isFetchError = (error: unknown): error is FetchError => {
+    return error instanceof FetchError
+}
+
 export type ModuleNotFoundError = Error & {
     code: 'MODULE_NOT_FOUND'
 }

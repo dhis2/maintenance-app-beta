@@ -1,7 +1,38 @@
 .noticeBox {
     max-width: 640px;
+    overflow: auto;
+    width: 100%;
 }
 
 .errorList {
     padding: 0;
+}
+
+.errorMessage {
+    margin: 0;
+}
+
+.errorDetailsButton {
+    padding-inline-end: 8px;
+    display: block;
+}
+
+.errorDetails {
+    margin-block-start: var(--spacers-dp4);
+    position: relative;
+    background-color: var(--colors-white);
+    overflow: auto;
+    padding: var(--spacers-dp8);
+    max-height: 400px;
+    white-space: pre-wrap;
+    font-size: 12px;
+    line-height: 1.2;
+    font-family: Menlo, Courier, monospace !important;
+}
+
+.copyButton {
+    position: absolute !important;
+    inset-inline-end: 0px;
+    inset-block-start: var(--spacers-dp8);
+    margin-inline-end: var(--spacers-dp8);
 }

@@ -1,5 +1,6 @@
 import { FormState, FormSubscription } from 'final-form'
 import { useFormState } from 'react-final-form'
+import { ApiErrorReport, ensureApiErrorReport } from '../../lib'
 
 const formStateSubscriptions = {
     errors: true,
@@ -16,11 +17,15 @@ type FinalFormErrorProps = Pick<
     keyof typeof formStateSubscriptions
 >
 
-export type FormErrorState = Omit<FinalFormErrorProps, 'errors'> & {
+export type FormErrorState = Omit<
+    FinalFormErrorProps,
+    'errors' | 'submitError'
+> & {
     // helper to decide wheter a noticebox should be shown
     shouldShowErrors: boolean
     // we rename "errors" to "validationErrors" to make it more clear that it only contain validation errors
     validationErrors: Record<string, string> | undefined
+    submitError: ApiErrorReport | undefined
 }
 
 export const useFormStateErrors = (): FormErrorState => {
@@ -43,12 +48,14 @@ export const useFormStateErrors = (): FormErrorState => {
         (hasAnyError && submitFailed && !dirtySinceLastSubmit) ||
         (submitFailed && hasSubmitErrors)
 
+    // since the error object can be anything, we need to ensure it is an ApiErrorReport
+    const apiError = ensureApiErrorReport(submitError)
     return {
         dirtySinceLastSubmit,
         hasSubmitErrors,
         hasValidationErrors,
         shouldShowErrors,
-        submitError,
+        submitError: apiError,
         submitFailed,
         validationErrors: errors,
         modifiedSinceLastSubmit,
