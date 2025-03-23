@@ -119,7 +119,7 @@ export const parseErrorResponse = (errorResponse: unknown): ApiErrorReport => {
                     errorType: 'mergeReport',
                 } as const)
             )
-            console.log({ errors })
+
             return createErrorReport({
                 message: parsed.data.message,
                 httpStatus: parsed.data.httpStatus,

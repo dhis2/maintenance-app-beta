@@ -7,9 +7,9 @@ import {
     NoticeBox,
 } from '@dhis2/ui'
 import React, { useRef } from 'react'
+import { ApiErrorReport } from '../../lib'
 import css from './DefaultFormErrorNotice.module.css'
 import { useFormStateErrors } from './useFormStateErrors'
-import { ApiErrorReport } from '../../lib'
 
 export function DefaultFormErrorNotice() {
     const formStateErrors = useFormStateErrors()
