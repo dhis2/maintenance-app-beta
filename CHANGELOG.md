@@ -1,3 +1,11 @@
+# [0.36.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.35.5...v0.36.0) (2025-03-24)
+
+
+### Features
+
+* add data sharing to sharing dialog ([#534](https://github.com/dhis2/maintenance-app-beta/issues/534)) ([80d2e28](https://github.com/dhis2/maintenance-app-beta/commit/80d2e286f944eb92524f4822977150217d496575))
+* add documentation for merging ([#527](https://github.com/dhis2/maintenance-app-beta/issues/527)) ([fa41c9e](https://github.com/dhis2/maintenance-app-beta/commit/fa41c9e80f24fe3443cd5138eaa3f50806a7af6a))
+
 ## [0.35.5](https://github.com/dhis2/maintenance-app-beta/compare/v0.35.4...v0.35.5) (2025-03-21)
 
 
