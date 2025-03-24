@@ -4,16 +4,18 @@
 
 ## How to Merge Indicators {#indicators-merge}
 
-The indicator merge feature lets you combine multiple source indicators into a single target indicator. Follow these steps to merge indicators:
+The indicator merge feature lets you combine multiple source indicators into a single target indicator. To use this feature you will need to have `Merge indicators` authority.
+
+Follow these steps to merge indicators:
 
 1. **Go to the Indicators List:**
-   Click on **Indicators -> Indicator** in the left-hand side (LHS) menu.
+   Click on **Indicators -> Indicator** in the left-hand side menu.
 
 2. **Select Source Indicators:**
    Check the boxes next to the indicators you want to merge.
 
 3. **Click the Merge Button:**
-   In the multi-select toolbar at the top, click the **Merge** button.
+   In the multi-select toolbar at the top, click the **Merge** button. Note: This button will not appear if you do not have the `Merge indicators` authority.
 
 4. **Review Selected Indicators:**
    If needed, adjust the list of source indicators to include or remove any selections.
@@ -34,16 +36,18 @@ For more details on how merging indicators affects your metadata, please refer t
 
 ## How to Merge Indicator Types {#indicator-types-merge}
 
-The indicator type merge feature lets you combine multiple source indicator types into a single target indicator type. Follow these steps to merge indicator types:
+The indicator type merge feature lets you combine multiple source indicator types into a single target indicator type. To use this feature you will need to have `Merge indicator types` authority.
+
+Follow these steps to merge indicator types:
 
 1. **Go to the Indicator Types List:**
-   Click on **Indicators -> Indicator Type** in the left-hand side (LHS) menu.
+   Click on **Indicators -> Indicator Type** in the left-hand side menu.
 
 2. **Select Source Indicator Types:**
    Check the boxes next to the indicator types you want to merge.
 
 3. **Click the Merge Button:**
-   In the multi-select toolbar at the top, click the **Merge** button.
+   In the multi-select toolbar at the top, click the **Merge** button. Note: This button will not appear if you do not have the `Merge indicator types` authority.
 
 4. **Review Selected Indicator Types:**
    If needed, adjust the list of source indicator types to include or remove any selections.
@@ -64,16 +68,18 @@ For more details on how merging indicator types affects your metadata, please re
 
 ## How to Merge Category Options {#category-options-merge}
 
-The category option merge feature lets you combine multiple source category options into a single target category option. Follow these steps to merge category options:
+The category option merge feature lets you combine multiple source category options into a single target category option. To use this feature you will need to have `Merge category options` authority.
+
+Follow these steps to merge category options:
 
 1. **Go to the Category Options List:**
-   Click on **Categories -> Category Option** in the left-hand side (LHS) menu.
+   Click on **Categories -> Category Option** in the left-hand side menu.
 
 2. **Select Source Category Options:**
    Check the boxes next to the category options you want to merge.
 
 3. **Click the Merge Button:**
-   In the multi-select toolbar at the top, click the **Merge** button.
+   In the multi-select toolbar at the top, click the **Merge** button. Note: This button will not appear if you do not have the `Merge category options` authority.
 
 4. **Review Selected Category Options:**
    If needed, adjust the list of source category options to include or remove any selections.
