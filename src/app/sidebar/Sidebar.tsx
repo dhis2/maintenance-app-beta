@@ -1,26 +1,18 @@
 import i18n from '@dhis2/d2-i18n'
-import {
-    Button,
-    IconArrowLeft16,
-    IconArrowRight16,
-    IconArrowUp16,
-    IconChevronLeft16,
-    IconChevronLeft24,
-    InputEventPayload,
-} from '@dhis2/ui'
-import React, { useEffect, useState, PropsWithChildren } from 'react'
-import { NavLink, useLocation, matchPath } from 'react-router-dom'
+import { IconChevronLeft24, InputEventPayload } from '@dhis2/ui'
+import cx from 'classnames'
+import React, { PropsWithChildren, useEffect, useState } from 'react'
+import { matchPath, NavLink, useLocation } from 'react-router-dom'
 import { HidePreventUnmount } from '../../components'
 import styles from './Sidebar.module.css'
 import { LinkItem, ParentLink, useSidebarLinks } from './SidebarLinks'
 import {
     Sidenav,
-    SidenavItems,
-    SidenavParent,
-    SidenavLink,
     SidenavFilter,
+    SidenavItems,
+    SidenavLink,
+    SidenavParent,
 } from './sidenav'
-import cx from 'classnames'
 
 interface SidebarNavLinkProps {
     label: string
