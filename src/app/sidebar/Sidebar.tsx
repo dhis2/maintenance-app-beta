@@ -152,13 +152,13 @@ export const Sidebar = ({
                 type="button"
                 onClick={() => setCollapse(!collapsed)}
             >
-                <span
+                <div
                     className={cx(styles.iconWrapper, {
                         [styles.collapsed]: collapsed,
                     })}
                 >
                     <IconChevronLeft24 />
-                </span>
+                </div>
             </button>
         </aside>
     )
