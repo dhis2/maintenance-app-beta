@@ -71,10 +71,7 @@
     border: none;
 }
 
-.collapsed .collapseButton {
-    inset-inline-end: 0px;
-}
-
+/* small screen, nav at top */
 @media (max-width: 768px) {
     .asideWrapper {
         /* prevent menu from scrolling outside if list-content extends past viewport*/
