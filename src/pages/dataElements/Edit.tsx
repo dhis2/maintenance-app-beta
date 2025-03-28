@@ -4,14 +4,12 @@ import { NoticeBox } from '@dhis2/ui'
 import { FORM_ERROR, FormApi } from 'final-form'
 import React, { useEffect, useRef } from 'react'
 import { withTypes } from 'react-final-form'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import {
     Loader,
     StandardFormActions,
     StandardFormSection,
 } from '../../components'
-import { useCustomAttributesQuery } from '../../components/form'
-import { AttributeMetadata } from '../../components/form/attributes/useCustomAttributesQuery'
 import {
     SCHEMA_SECTIONS,
     getSectionPath,
@@ -19,7 +17,11 @@ import {
     validate,
 } from '../../lib'
 import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
-import { getAllAttributeValues } from '../../lib/models/attributes'
+import {
+    getAllAttributeValues,
+    AttributeMetadata,
+    useCustomAttributesQuery,
+} from '../../lib/models/attributes'
 import { JsonPatchOperation } from '../../types'
 import { DataElement } from '../../types/generated'
 import classes from './Edit.module.css'

@@ -5,8 +5,7 @@ import {
     FieldRenderProps,
     Field as FieldRFF,
 } from 'react-final-form'
-import { ValueType } from './types'
-import { getValidateForValueType } from './validateByValueType'
+import { getValidateForValueType, ValueType } from '../../../lib/models'
 import { ValueTypeRenderer } from './ValueTypeRenderer'
 
 type CommonFieldProps = {
@@ -39,6 +38,7 @@ export const FormFieldByValueType = (props: FormFieldByValueTypeProps) => {
         ...props,
         validate,
     }
+
     return (
         <div style={{ width: '440px' }}>
             {/* if for some reason the valueType is changed during render (it shouldnt)

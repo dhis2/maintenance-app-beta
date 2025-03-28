@@ -2,8 +2,9 @@ import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF, InputFieldFF, TextAreaFieldFF } from '@dhis2/ui'
 import React, { useMemo } from 'react'
 import { FieldRenderProps } from 'react-final-form'
+import { ValueType } from '../../../lib'
 import { ModelSingleSelectField } from '../../metadataFormControls/ModelSingleSelect'
-import { ValueType } from './types'
+import { DateFieldFF, DateTimeFieldFF, TimeFieldFF } from '../date'
 
 type CommonFieldProps = {
     label?: string
@@ -57,7 +58,6 @@ export function ValueTypeRenderer(
     if (valueType === 'LONG_TEXT') {
         return <TextAreaFieldFF {...props} />
     }
-
     if (valueType === 'NUMBER' || valueType === 'INTEGER') {
         return (
             <InputFieldFF
@@ -84,6 +84,7 @@ export function ValueTypeRenderer(
         return (
             <ModelSingleSelectField
                 {...props}
+                showNoValueOption
                 query={{
                     resource: 'fileResources',
                 }}
@@ -103,6 +104,7 @@ export function ValueTypeRenderer(
         return (
             <ModelSingleSelectField
                 {...props}
+                showNoValueOption
                 query={{
                     resource: 'organisationUnits',
                 }}
@@ -115,6 +117,17 @@ export function ValueTypeRenderer(
                 }}
             />
         )
+    }
+
+    if (valueType === 'DATE') {
+        return <DateFieldFF {...props} />
+    }
+    if (valueType === 'DATETIME') {
+        return <DateTimeFieldFF {...props} />
+    }
+
+    if (valueType === 'TIME') {
+        return <TimeFieldFF {...props} />
     }
     // render a regular input field if not overridden above
     return <InputFieldFF {...props} />

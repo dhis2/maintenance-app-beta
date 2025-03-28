@@ -4,14 +4,11 @@ import { NoticeBox } from '@dhis2/ui'
 import { FORM_ERROR } from 'final-form'
 import React, { useEffect, useMemo, useRef } from 'react'
 import { Form } from 'react-final-form'
-import { useNavigate } from 'react-router-dom'
 import {
     Loader,
     StandardFormActions,
     StandardFormSection,
 } from '../../components'
-import { useCustomAttributesQuery } from '../../components/form'
-import { AttributeMetadata } from '../../components/form/attributes/useCustomAttributesQuery'
 import {
     DEFAULT_CATEGORY_COMBO,
     SCHEMA_SECTIONS,
@@ -20,6 +17,10 @@ import {
     useSchemas,
     validate,
 } from '../../lib'
+import {
+    AttributeMetadata,
+    useCustomAttributesQuery,
+} from '../../lib/models/attributes'
 import { DataElementFormFields, dataElementSchema } from './form'
 import type { FormValues } from './form'
 import classes from './New.module.css'
