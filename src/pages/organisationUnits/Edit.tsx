@@ -13,6 +13,7 @@ import {
     useNavigateWithSearchState,
     usePatchModel,
 } from '../../lib'
+import { createFormError } from '../../lib/form/createFormError'
 import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { OrganisationUnit, PickWithFieldFilters } from '../../types/generated'
@@ -93,11 +94,11 @@ export const useOnEditOrgUnits = (modelId: string) => {
                     return
                 }
 
-                const orgUnitErrors = await patchDirtyFields(
+                const { error } = await patchDirtyFields(
                     orgUnitJsonPatchOperations
                 )
-                if (orgUnitErrors) {
-                    return orgUnitErrors
+                if (error) {
+                    return createFormError(error)
                 }
 
                 await updateDataSetsAndPrograms(modelId, values)
@@ -107,7 +108,14 @@ export const useOnEditOrgUnits = (modelId: string) => {
                 })
                 navigate(`/${getSectionPath(section)}`)
             },
-        [patchDirtyFields, saveAlert, navigate, section]
+        [
+            patchDirtyFields,
+            saveAlert,
+            navigate,
+            modelId,
+            queryClient,
+            updateDataSetsAndPrograms,
+        ]
     )
 }
 
