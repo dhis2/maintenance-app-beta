@@ -1,3 +1,15 @@
+# [0.37.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.36.0...v0.37.0) (2025-03-31)
+
+
+### Bug Fixes
+
+* **attributes:** fix valueType rendering and validation ([#529](https://github.com/dhis2/maintenance-app-beta/issues/529)) [skip release] ([f24ab2f](https://github.com/dhis2/maintenance-app-beta/commit/f24ab2f163842147a1bc20c19e8f08f4cc32ec37))
+
+
+### Features
+
+* **forms:** improve display of errors ([#535](https://github.com/dhis2/maintenance-app-beta/issues/535)) ([2faa248](https://github.com/dhis2/maintenance-app-beta/commit/2faa248f7daf8a39f841b5e9758f87fcc51c04ad))
+
 # [0.36.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.35.5...v0.36.0) (2025-03-24)
 
 
