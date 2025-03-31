@@ -1,6 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
-import { NoticeBox } from '@dhis2/ui'
-import React from 'react'
+import {
+    Button,
+    IconChevronDown16,
+    IconChevronUp16,
+    IconCopy16,
+    NoticeBox,
+} from '@dhis2/ui'
+import React, { useRef } from 'react'
+import { ApiErrorReport } from '../../lib'
 import css from './DefaultFormErrorNotice.module.css'
 import { useFormStateErrors } from './useFormStateErrors'
 
@@ -24,9 +31,9 @@ export function DefaultFormErrorNotice() {
 
     if (formStateErrors.hasSubmitErrors) {
         return (
-            <ServerSubmitErrorNotice>
-                {formStateErrors.submitError}
-            </ServerSubmitErrorNotice>
+            <ServerSubmitErrorNotice
+                errorReport={formStateErrors.submitError}
+            />
         )
     }
     return null
@@ -76,21 +83,103 @@ export const ErrorList = ({ errors }: { errors: Record<string, string> }) => {
     )
 }
 
-export const ServerSubmitErrorNotice = ({
+export const ServerSubmitErrorNoticeBox = ({
     children,
+    title = i18n.t('Something went wrong when submitting the form'),
 }: {
     children: React.ReactNode
+    title?: string
 }) => {
     return (
-        <div>
-            <NoticeBox
-                className={css.noticeBox}
-                error
-                title={i18n.t('Something went wrong when submitting the form')}
-            >
-                <p>{children}</p>
-            </NoticeBox>
-        </div>
+        <NoticeBox className={css.noticeBox} error title={title}>
+            {children}
+        </NoticeBox>
+    )
+}
+
+export const ServerSubmitErrorNotice = ({
+    errorReport,
+}: {
+    errorReport?: ApiErrorReport
+}) => {
+    const [showDetails, setShowDetails] = React.useState(false)
+    // used to scroll to the error details when the button is clicked
+    const errorDivRef = useRef<HTMLDivElement | null>(null)
+    // used to select the error details text when copy button is clicked
+    const errorPreRef = useRef<HTMLPreElement | null>(null)
+
+    if (!errorReport) {
+        return null
+    }
+
+    const handleToggleDetails = () => {
+        const newShow = !showDetails
+        setShowDetails(newShow)
+        if (newShow) {
+            // timeout because the div may not be expanded yet
+            setTimeout(
+                () =>
+                    errorDivRef.current?.scrollIntoView({
+                        block: 'start',
+                    }),
+                0
+            )
+        }
+    }
+    const handleCopyClick = () => {
+        const div = errorPreRef.current
+        if (!div) {
+            return
+        }
+        const range = document.createRange()
+        range.selectNode(div)
+        window.getSelection()?.removeAllRanges()
+        window.getSelection()?.addRange(range)
+        navigator.clipboard.writeText(verbatimError)
+    }
+
+    const verbatimError = JSON.stringify(errorReport.original, undefined, 2)
+    return (
+        <ServerSubmitErrorNoticeBox>
+            <div ref={errorDivRef}>
+                <div>
+                    <p className={css.errorMessage}>{errorReport.message}</p>
+
+                    <ul className={css.errorList}>
+                        {errorReport.errors.map((e, i) => (
+                            <li key={i}>{e.message}</li>
+                        ))}
+                    </ul>
+                </div>
+                <Button
+                    className={css.errorDetailsButton}
+                    secondary
+                    small
+                    icon={
+                        showDetails ? (
+                            <IconChevronUp16 />
+                        ) : (
+                            <IconChevronDown16 />
+                        )
+                    }
+                    onClick={handleToggleDetails}
+                >
+                    {showDetails
+                        ? i18n.t('Hide Error details')
+                        : i18n.t('Show error details')}
+                </Button>
+            </div>
+            {showDetails && (
+                <pre className={css.errorDetails} ref={errorPreRef}>
+                    <Button
+                        className={css.copyButton}
+                        onClick={handleCopyClick}
+                        icon={<IconCopy16 />}
+                    />
+                    {verbatimError}
+                </pre>
+            )}
+        </ServerSubmitErrorNoticeBox>
     )
 }
 

@@ -1,7 +1,7 @@
 import { useDataEngine } from '@dhis2/app-runtime'
-import { FORM_ERROR } from 'final-form'
 import { useCallback, useState } from 'react'
 import { JsonPatchOperation } from '../../types'
+import { parseErrorResponse } from '../errors'
 
 const createPatchQuery = (id: string, resource: string) => {
     return {
@@ -19,11 +19,12 @@ export const usePatchModel = (id: string, resource: string) => {
     const patch = useCallback(
         async (operations: JsonPatchOperation[]) => {
             try {
-                await dataEngine.mutate(query, {
+                const response = await dataEngine.mutate(query, {
                     variables: { operations },
                 })
+                return { data: response }
             } catch (error) {
-                return { [FORM_ERROR]: (error as Error | string).toString() }
+                return { error: parseErrorResponse(error) }
             }
         },
         [dataEngine, query]

@@ -1,12 +1,12 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { useQueryClient } from '@tanstack/react-query'
-import { FORM_ERROR } from 'final-form'
 import { useCallback, useMemo } from 'react'
 import { FormProps } from 'react-final-form'
 import { ModelSection } from '../../types'
 import { IdentifiableObject } from '../../types/generated'
 import { getSectionPath, useNavigateWithSearchState } from '../routeUtils'
+import { createFormError } from './createFormError'
 import {
     createJsonPatchOperations,
     ModelWithAttributeValues,
@@ -46,7 +46,7 @@ export const useOnEditCompletedSuccessfully = (section: ModelSection) => {
             })
             navigate(`/${getSectionPath(section)}`)
         },
-        [saveAlert, queryClient, navigate]
+        [saveAlert, queryClient, navigate, section]
     )
 }
 
@@ -68,13 +68,15 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
                 onEditCompletedSuccessfully({ withChanges: false })
                 return
             }
-            const errors = await patchDirtyFields(jsonPatchOperations)
-            if (errors) {
-                return errors
+            const response = await patchDirtyFields(jsonPatchOperations)
+
+            if (response.error) {
+                const err = createFormError(response.error)
+                return err
             }
             onEditCompletedSuccessfully({ withChanges: true })
         },
-        [patchDirtyFields, section, onEditCompletedSuccessfully]
+        [patchDirtyFields, onEditCompletedSuccessfully]
     )
 }
 
@@ -120,8 +122,8 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
                 return
             }
             const response = await createModel(values)
-            if (response[FORM_ERROR]) {
-                return response
+            if (response.error) {
+                return createFormError(response.error)
             }
             saveAlert.show({
                 message: i18n.t('Created successfully'),
@@ -133,6 +135,6 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
             navigate(`/${getSectionPath(section)}`)
             return response
         },
-        [createModel, saveAlert, navigate, section]
+        [queryClient, createModel, saveAlert, navigate, section]
     )
 }
