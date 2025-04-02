@@ -112,6 +112,8 @@ export const ServerSubmitErrorNotice = ({
         return null
     }
 
+    const verbatimError = JSON.stringify(errorReport.original, undefined, 2)
+
     const handleToggleDetails = () => {
         const newShow = !showDetails
         setShowDetails(newShow)
@@ -126,6 +128,7 @@ export const ServerSubmitErrorNotice = ({
             )
         }
     }
+
     const handleCopyClick = () => {
         const div = errorPreRef.current
         if (!div) {
@@ -138,7 +141,6 @@ export const ServerSubmitErrorNotice = ({
         navigator.clipboard.writeText(verbatimError)
     }
 
-    const verbatimError = JSON.stringify(errorReport.original, undefined, 2)
     return (
         <ServerSubmitErrorNoticeBox>
             <div ref={errorDivRef}>
@@ -165,7 +167,7 @@ export const ServerSubmitErrorNotice = ({
                     onClick={handleToggleDetails}
                 >
                     {showDetails
-                        ? i18n.t('Hide Error details')
+                        ? i18n.t('Hide error details')
                         : i18n.t('Show error details')}
                 </Button>
             </div>
