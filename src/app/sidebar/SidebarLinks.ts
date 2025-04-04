@@ -107,6 +107,12 @@ export const sidebarLinks = {
             getSectionLinkItem(SECTIONS_MAP.validationNotificationTemplate),
         ],
     },
+    other: {
+        label: OVERVIEW_SECTIONS.other.title,
+        links: [
+            getSectionLinkItem(SECTIONS_MAP.programIndicatorDisaggregation),
+        ],
+    },
 } satisfies SidebarLinks
 
 export const useSidebarLinks = (): ParentLink[] => {
