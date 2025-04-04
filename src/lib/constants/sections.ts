@@ -425,6 +425,27 @@ export const NON_SCHEMA_SECTION = {
             },
         ],
     },
+    programIndicatorDisaggregation: {
+        name: 'programIndicatorDisaggregation',
+        namePlural: 'programIndicatorDisaggregations',
+        title: i18n.t('Program indicator disaggregation'),
+        titlePlural: i18n.t('Program indicator disaggregations'),
+        parentSectionKey: 'other',
+        authorities: [
+            {
+                type: SchemaAuthorityType.CREATE_PUBLIC,
+                authorities: ['F_SYSTEM_SETTING', 'F_LOCALE_ADD'],
+            },
+            {
+                type: SchemaAuthorityType.CREATE_PRIVATE,
+                authorities: ['F_SYSTEM_SETTING', 'F_LOCALE_ADD'],
+            },
+            {
+                type: SchemaAuthorityType.DELETE,
+                authorities: ['F_SYSTEM_SETTING'],
+            },
+        ],
+    },
 } as const satisfies SectionMap
 
 export const SECTIONS_MAP = {
