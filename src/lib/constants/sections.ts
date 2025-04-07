@@ -395,11 +395,11 @@ export const NON_SCHEMA_SECTION = {
             },
         ],
     },
-    programIndicatorDisaggregation: {
-        name: 'programIndicatorDisaggregation',
-        namePlural: 'programIndicatorDisaggregations',
-        title: i18n.t('Program indicator disaggregation'),
-        titlePlural: i18n.t('Program indicator disaggregations'),
+    programDisaggregation: {
+        name: 'programDisaggregation',
+        namePlural: 'programDisaggregations',
+        title: i18n.t('Program disaggregation'),
+        titlePlural: i18n.t('Program disaggregations'),
         parentSectionKey: 'other',
         authorities: [
             {
