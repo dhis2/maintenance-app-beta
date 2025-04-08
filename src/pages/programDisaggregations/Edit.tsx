@@ -25,16 +25,16 @@ export type ProgramFormValues = PickWithFieldFilters<
     typeof fieldFilters
 >
 
-type FormValueOptionMapping = OptionMapping & {
+type CategoryMappingValue = {
+    categoryId: string
+    id: string
+    mappingName: string
+    options: Record<string, OptionMapping>
     deleted: boolean
 }
 type CategoryMappingFormValues = Record<
     string, // categoryId
-    Array<
-        Omit<CategoryMapping, 'optionMappings'> & {
-            options: FormValueOptionMapping[]
-        }
-    >
+    CategoryMappingValue[]
 >
 type ProgramDisaggregationFormValues = {
     categoryMappings: CategoryMappingFormValues
@@ -65,8 +65,8 @@ export const Component = () => {
         const categoryMappings: CategoryMappingFormValues = {}
         const mappingsPerCategory = categoryIds?.forEach((id) => {
             const mappings = res.filter((mapping) => mapping.categoryId === id)
-            const k = categoryMappings[id]
-            categoryMappings[id] = mappings
+
+            categoryMappings[id as keyof CategoryMappingFormValues] = mappings
                 .filter((mapping) => !!mapping)
                 .map(({ categoryId, id, mappingName, optionMappings }) => {
                     const options = optionMappings.reduce((acc, curr) => {
