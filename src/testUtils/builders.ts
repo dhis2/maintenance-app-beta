@@ -89,3 +89,32 @@ export const testOrgUnit = ({
         childCount,
         access,
     } as Partial<OrganisationUnit>)
+
+export const testIndicatorType = ({
+    id = randomDhis2Id(),
+    name = faker.word.noun(),
+    factor = faker.number.int({ min: 0, max: 10 }),
+} = {}) => ({
+    id,
+    name,
+    displayName: name,
+    factor,
+})
+
+export const testIndicator = ({
+    id = randomDhis2Id(),
+    name = faker.word.noun(),
+} = {}) => ({
+    id,
+    name,
+    displayName: name,
+})
+
+export const testCategoryOption = ({
+    id = randomDhis2Id(),
+    name = faker.word.noun(),
+} = {}) => ({
+    id,
+    name,
+    displayName: name,
+})

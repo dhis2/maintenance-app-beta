@@ -22,8 +22,8 @@ export const DeleteSourcesFields = ({
     // translate to a string, since radio only support string
     // note that the union with boolean in format-parameter is due to weird typings in Final Form
     const format = (value: boolean | string | undefined): string | undefined =>
-        value || value === 'delete' ? 'delete' : 'keep'
-    const parse = (value: string | undefined) => value === 'delete'
+        value || value === 'keep' ? 'keep' : 'delete'
+    const parse = (value: string | undefined) => value === 'keep'
 
     const sourcesCnt = sourcesValues.input.value.length
     return (
@@ -32,19 +32,19 @@ export const DeleteSourcesFields = ({
                 <Field
                     name="deleteSources"
                     component={RadioFieldFF}
-                    label={getKeepLabel(sourcesCnt)}
+                    label={getDeleteLabel(sourcesCnt)}
                     format={format}
                     parse={parse}
-                    value="keep"
+                    value={'delete'}
                     type="radio"
                 />
                 <Field
                     name="deleteSources"
                     component={RadioFieldFF}
-                    label={getDeleteLabel(sourcesCnt)}
+                    label={getKeepLabel(sourcesCnt)}
                     format={format}
                     parse={parse}
-                    value={'delete'}
+                    value="keep"
                     type="radio"
                 />
             </FieldGroup>
