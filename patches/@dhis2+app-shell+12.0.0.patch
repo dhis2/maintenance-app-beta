@@ -1,0 +1,13 @@
+diff --git a/node_modules/@dhis2/app-shell/index.html b/node_modules/@dhis2/app-shell/index.html
+index dd10d7d..fb880f5 100644
+--- a/node_modules/@dhis2/app-shell/index.html
++++ b/node_modules/@dhis2/app-shell/index.html
+@@ -10,6 +10,8 @@
+ 
+         <!-- Injection point for base URL from backend -->
+         <meta name="dhis2-base-url" content="__DHIS2_BASE_URL__" />
++        <meta name="dhis2-app-root-url" content="__DHIS2_APP_ROOT_URL__" />
++        <base href="__DHIS2_APP_ROOT_URL__/" />
+ 
+         <!--
+             manifest.json provides metadata used when your web app is installed on a
