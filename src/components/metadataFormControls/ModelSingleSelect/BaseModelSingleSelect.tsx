@@ -9,6 +9,7 @@ import {
 const toDisplayOption = (model: PartialLoadedDisplayableModel) => ({
     value: model.id,
     label: model.displayName || i18n.t('Loading...'),
+    disabled: model.disabled,
 })
 
 type OwnProps<TModel> = {
@@ -50,6 +51,7 @@ export const BaseModelSingleSelect = <
             allSingleSelectOptions.unshift({
                 value: '',
                 label: i18n.t('<No value>'),
+                disabled: undefined,
             })
         }
 
