@@ -12,7 +12,13 @@ import {
 } from '../../types'
 
 // for convenience so types can be imported with the map below
-export type { SectionMap, Section, SchemaSection, SchemaSectionMap }
+export type {
+    SectionMap,
+    Section,
+    SchemaSection,
+    SchemaSectionMap,
+    NonSchemaSection,
+}
 
 export const SCHEMA_SECTIONS = {
     category: {
@@ -373,6 +379,36 @@ export const NON_SCHEMA_SECTION = {
         namePlural: 'locales',
         title: i18n.t('Locale'),
         titlePlural: i18n.t('Locales'),
+        parentSectionKey: 'other',
+        authorities: [
+            {
+                type: SchemaAuthorityType.CREATE_PUBLIC,
+                authorities: [
+                    'F_PROGRAM_PUBLIC_ADD',
+                    'F_PROGRAM_INDICATOR_PUBLIC_ADD',
+                ],
+            },
+            {
+                type: SchemaAuthorityType.CREATE_PRIVATE,
+                authorities: [
+                    'F_PROGRAM_PRIVATE_ADD',
+                    'F_PROGRAM_INDICATOR_PRIVATE_ADD',
+                ],
+            },
+            {
+                type: SchemaAuthorityType.DELETE,
+                authorities: [
+                    'F_PROGRAM_PUBLIC_ADD',
+                    'F_PROGRAM_INDICATOR_PUBLIC_ADD',
+                ],
+            },
+        ],
+    },
+    programDisaggregation: {
+        name: 'programDisaggregation',
+        namePlural: 'programDisaggregations',
+        title: i18n.t('Program disaggregation'),
+        titlePlural: i18n.t('Program disaggregations'),
         parentSectionKey: 'other',
         authorities: [
             {

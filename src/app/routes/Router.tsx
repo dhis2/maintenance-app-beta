@@ -13,9 +13,9 @@ import { QueryParamProvider } from 'use-query-params'
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6'
 import {
     SECTIONS_MAP,
-    SCHEMA_SECTIONS,
     Section,
     SchemaSection,
+    NonSchemaSection,
     OVERVIEW_SECTIONS,
     getSectionPath,
     isModuleNotFoundError,
@@ -110,12 +110,12 @@ const VerifyModelId = () => {
     return <Outlet />
 }
 
-const sectionsNoNewRoute = new Set<SchemaSection>([
+const sectionsNoNewRoute = new Set<SchemaSection | NonSchemaSection>([
     SECTIONS_MAP.categoryOptionCombo,
     SECTIONS_MAP.organisationUnitLevel,
 ])
 
-const schemaSectionRoutes = Object.values(SCHEMA_SECTIONS).map((section) => (
+const schemaSectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
     <Route
         key={section.namePlural}
         path={getSectionPath(section)}

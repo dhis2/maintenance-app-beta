@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-03-14T13:14:16.445Z\n"
-"PO-Revision-Date: 2025-03-14T13:14:16.445Z\n"
+"POT-Creation-Date: 2025-04-07T14:45:20.635Z\n"
+"PO-Revision-Date: 2025-04-07T14:45:20.636Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -117,11 +117,14 @@ msgstr "Some fields have validation errors. Please fix them before saving."
 msgid "Something went wrong when submitting the form"
 msgstr "Something went wrong when submitting the form"
 
+msgid "Hide Error details"
+msgstr "Hide Error details"
+
+msgid "Show error details"
+msgstr "Show error details"
+
 msgid "<No value>"
 msgstr "<No value>"
-
-msgid "Please enter a GeoJSON value."
-msgstr "Please enter a GeoJSON value."
 
 msgid "Attributes"
 msgstr "Attributes"
@@ -783,6 +786,12 @@ msgstr "Locale"
 msgid "Locales"
 msgstr "Locales"
 
+msgid "Program disaggregation"
+msgstr "Program disaggregation"
+
+msgid "Program disaggregations"
+msgstr "Program disaggregations"
+
 msgid "You do not have access to edit this item."
 msgstr "You do not have access to edit this item."
 
@@ -1068,11 +1077,14 @@ msgstr "Zero is significant"
 msgid "This field requires a unique value, please choose another one"
 msgstr "This field requires a unique value, please choose another one"
 
+msgid "Unknown error"
+msgstr "Unknown error"
+
+msgid "Unknown"
+msgstr "Unknown"
+
 msgid "{{label}} (required)"
 msgstr "{{label}} (required)"
-
-msgid "Should not exceed {{maxLength}} characters"
-msgstr "Should not exceed {{maxLength}} characters"
 
 msgid "Saved successfully"
 msgstr "Saved successfully"
@@ -1103,6 +1115,12 @@ msgstr "Please provide valid unit interval (0-1)."
 
 msgid "Must be checked"
 msgstr "Must be checked"
+
+msgid "Please provide a time."
+msgstr "Please provide a time."
+
+msgid "Please provide a date."
+msgstr "Please provide a date."
 
 msgid "Period type"
 msgstr "Period type"
@@ -1323,6 +1341,9 @@ msgstr "Category option to merge into (target)"
 
 msgid "Select category option to merge into"
 msgstr "Select category option to merge into"
+
+msgid "No category options available. Remove one from source."
+msgstr "No category options available. Remove one from source."
 
 msgid "Merge settings"
 msgstr "Merge settings"
@@ -1582,6 +1603,9 @@ msgstr "No data elements selected"
 msgid "Close"
 msgstr "Close"
 
+msgid "Should not exceed {{maxLength}} characters"
+msgstr "Should not exceed {{maxLength}} characters"
+
 msgid "Display title / subtitle"
 msgstr "Display title / subtitle"
 
@@ -1822,6 +1846,9 @@ msgstr "Indicator type to merge into (target)"
 msgid "Select indicator type to merge into"
 msgstr "Select indicator type to merge into"
 
+msgid "No indicator types available. Remove one from source."
+msgstr "No indicator types available. Remove one from source."
+
 msgid ""
 "What should happen to the source indicator types after the merge is "
 "complete?"
@@ -1883,6 +1910,9 @@ msgstr "Indicator to merge into (target)"
 
 msgid "Select indicator to merge into"
 msgstr "Select indicator to merge into"
+
+msgid "No indicators available. Remove one from source."
+msgstr "No indicators available. Remove one from source."
 
 msgid "What should happen to the source indicators after the merge is complete?"
 msgstr "What should happen to the source indicators after the merge is complete?"
