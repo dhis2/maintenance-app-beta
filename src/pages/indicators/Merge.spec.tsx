@@ -1,25 +1,21 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import { SECTIONS_MAP } from '../../lib'
-import { testCategoryOption } from '../../testUtils/builders'
+import { testIndicator } from '../../testUtils/builders'
 import TestComponentWithRouter from '../../testUtils/TestComponentWithRouter'
 import { generateDefaultMergeTests } from '../defaultMergeTests'
 import { Component as Merge } from './Merge'
 
 const renderMerge = async () => {
     const routeOptions = {
-        handle: { section: SECTIONS_MAP.categoryOption },
+        handle: { section: SECTIONS_MAP.indicator },
     }
 
     return render(
         <TestComponentWithRouter
-            path="/categoryOptions/merge"
+            path="/indicators/merge"
             customData={{
-                categoryOptions: [
-                    testCategoryOption(),
-                    testCategoryOption(),
-                    testCategoryOption(),
-                ],
+                indicators: [testIndicator(), testIndicator()],
             }}
             routeOptions={routeOptions}
         >
@@ -27,4 +23,5 @@ const renderMerge = async () => {
         </TestComponentWithRouter>
     )
 }
-generateDefaultMergeTests({ componentName: 'Category option', renderMerge })
+
+generateDefaultMergeTests({ componentName: 'Indicator', renderMerge })
