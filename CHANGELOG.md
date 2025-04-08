@@ -1,3 +1,10 @@
+# [0.38.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.37.0...v0.38.0) (2025-04-08)
+
+
+### Features
+
+* pi disag setup [DHIS2-19430] ([#537](https://github.com/dhis2/maintenance-app-beta/issues/537)) ([753c853](https://github.com/dhis2/maintenance-app-beta/commit/753c853d3e66e443002978946819f2acaa2ef068))
+
 # [0.37.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.36.0...v0.37.0) (2025-03-31)
 
 
