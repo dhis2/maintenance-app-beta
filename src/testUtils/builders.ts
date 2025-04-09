@@ -1,5 +1,10 @@
 import { faker } from '@faker-js/faker'
-import { OrganisationUnit, User } from '../types/generated'
+import {
+    CategoryMapping,
+    OptionMapping,
+    OrganisationUnit,
+    User,
+} from '../types/generated'
 
 export const randomDhis2Id = () =>
     faker.helpers.fromRegExp(/[a-zA-Z]{1}[a-zA-Z0-9]{10}/)
@@ -89,3 +94,26 @@ export const testOrgUnit = ({
         childCount,
         access,
     } as Partial<OrganisationUnit>)
+
+export const testCategoryMapping = ({
+    id = randomDhis2Id(),
+    categoryId = randomDhis2Id(),
+    mappingName = faker.company.name(),
+    optionMappings = [] as OptionMapping[],
+} = {}) => ({
+    id,
+    categoryId,
+    mappingName,
+    optionMappings,
+})
+
+export const testProgram = ({
+    id = randomDhis2Id(),
+    name = faker.person.fullName(),
+    categoryMappings = [] as CategoryMapping[],
+} = {}) => ({
+    id,
+    name,
+    displayName: name,
+    categoryMappings,
+})
