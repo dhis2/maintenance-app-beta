@@ -16,7 +16,7 @@ type GetMutationTypeUnion<MutationType extends string> = {
         : never]: Type['type']
 }
 type UpdateMutationTypeUnion = GetMutationTypeUnion<'update'>
-type UpdateMutation = Extract<Mutation, UpdateMutationTypeUnion>
+export type UpdateMutation = Extract<Mutation, UpdateMutationTypeUnion>
 type UpdateMutationData = UpdateMutation['data']
 
 type DataStoreOptions = {

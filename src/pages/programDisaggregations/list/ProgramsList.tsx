@@ -14,7 +14,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { LoadingSpinner } from '../../../components/loading/LoadingSpinner'
 import { ModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { useLocationSearchState } from '../../../lib'
+import { UpdateMutation, useLocationSearchState } from '../../../lib'
 import { Program } from '../../../types/generated'
 import classes from './ProgramsList.module.css'
 
@@ -66,8 +66,14 @@ export const ProgramsList = () => {
         label: p.name,
     }))
 
-    const handleSelectChange = ({ id }: { id: string }) => {
-        id && navigate(`${id}`, { state: preservedSearchState })
+    const handleSelectChange = (
+        selected:
+            | { id: string; categoryMappings?: { id: string }[] }
+            | undefined
+    ) => {
+        if (selected?.id) {
+            navigate(`${selected.id}`, { state: preservedSearchState })
+        }
     }
 
     const handleEdit = (id: string) => {
@@ -81,9 +87,9 @@ export const ProgramsList = () => {
 
     const handleConfirmDelete = async () => {
         const mutation = {
+            type: 'json-patch',
             resource: `programs`,
             id: programToDelete?.id,
-            type: 'json-patch',
             partial: true,
             data: [
                 {
@@ -92,9 +98,9 @@ export const ProgramsList = () => {
                     value: [],
                 },
             ],
-        } as const
+        } as UpdateMutation
         try {
-            programToDelete && (await dataEngine.mutate(mutation))
+            await dataEngine.mutate(mutation)
             refetch()
         } catch (e) {
             saveAlert.show({
@@ -118,7 +124,8 @@ export const ProgramsList = () => {
                 onChange={handleSelectChange}
                 transform={(results) =>
                     results.map((result) =>
-                        result.categoryMappings?.length > 0
+                        result.categoryMappings &&
+                        result.categoryMappings.length > 0
                             ? { ...result, disabled: true }
                             : result
                     )
