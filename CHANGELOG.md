@@ -1,3 +1,10 @@
+## [0.38.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.38.0...v0.38.1) (2025-04-08)
+
+
+### Bug Fixes
+
+* when merging make deleting sources the default option ([#539](https://github.com/dhis2/maintenance-app-beta/issues/539)) ([a33b8ae](https://github.com/dhis2/maintenance-app-beta/commit/a33b8ae0bdf74fe0b52c0f1afcc16cad78342e06))
+
 # [0.38.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.37.0...v0.38.0) (2025-04-08)
 
 
