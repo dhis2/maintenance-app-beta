@@ -1,0 +1,48 @@
+.categoryCard {
+    margin-block: 8px;
+    padding: 8px;   
+    background-color: var(--colors-grey200); 
+    border: 1px solid var(--colors-grey400);
+    border-radius: 8px;
+}
+
+.categoryHeader {
+    display: flex;
+    align-items: center;
+    margin-block: 8px;
+    justify-content: space-between;
+}
+
+.categoryText {
+    font-size: 16px;
+}
+
+.categoryName {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.categoryTitleContainer {
+    display: flex;
+    align-items: center;
+}
+
+.mappingCard {
+    margin-block: 4px;
+    padding: 8px;
+}
+
+.mappingHeader {
+    display: flex;
+    align-items: center;
+    margin-block-end: 8px;
+}
+
+.mappingText {
+    margin-inline-end: 6px;
+}
+
+.filterInputContainer {
+    margin-block: 16px;
+    margin-inline-start: 8px;
+}
