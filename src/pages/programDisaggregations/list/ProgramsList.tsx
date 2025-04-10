@@ -9,9 +9,9 @@ import {
     ModalTitle,
     NoticeBox,
 } from '@dhis2/ui'
-import get from 'lodash/fp/get'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { LinkButton } from '../../../components/LinkButton'
 import { LoadingSpinner } from '../../../components/loading/LoadingSpinner'
 import { ModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { UpdateMutation, useLocationSearchState } from '../../../lib'
@@ -61,11 +61,6 @@ export const ProgramsList = () => {
         (p) => p.categoryMappings?.length > 0
     )
 
-    const programOptions = programs.map((p) => ({
-        value: p.id,
-        label: p.name,
-    }))
-
     const handleSelectChange = (
         selected:
             | { id: string; categoryMappings?: { id: string }[] }
@@ -74,10 +69,6 @@ export const ProgramsList = () => {
         if (selected?.id) {
             navigate(`${selected.id}`, { state: preservedSearchState })
         }
-    }
-
-    const handleEdit = (id: string) => {
-        navigate(`${id}`, { state: preservedSearchState })
     }
 
     const handleDeleteClick = (program: Program) => {
@@ -102,7 +93,7 @@ export const ProgramsList = () => {
         try {
             await dataEngine.mutate(mutation)
             refetch()
-        } catch (e) {
+        } catch {
             saveAlert.show({
                 message: i18n.t('Cannot delete programs mappings'),
                 error: true,
@@ -155,16 +146,18 @@ export const ProgramsList = () => {
                         <div
                             key={program.id}
                             className={classes.programsListItem}
+                            data-test="program-with-mapping"
                         >
                             <span>{program.name}</span>
                             <div className={classes.programsListItemActions}>
-                                <Button
+                                <LinkButton
+                                    data-test="edit-program"
                                     small
                                     secondary
-                                    onClick={() => handleEdit(program.id)}
+                                    to={`${program.id}`}
                                 >
                                     {i18n.t('Edit')}
-                                </Button>
+                                </LinkButton>
                                 <Button
                                     small
                                     destructive
@@ -180,18 +173,24 @@ export const ProgramsList = () => {
             ) : (
                 !loading &&
                 !error && (
-                    <p>{i18n.t('No programs with existing mappings found.')}</p>
+                    <p data-test="no-programs-with-mappings">
+                        {i18n.t('No programs with existing mappings found.')}
+                    </p>
                 )
             )}
 
             {deleteModalOpen && programToDelete && (
-                <Modal onClose={handleCancelDelete} position="middle">
+                <Modal
+                    onClose={handleCancelDelete}
+                    position="middle"
+                    dataTest="delete-confirmation-modal"
+                >
                     <ModalTitle>{i18n.t('Delete Mapping')}</ModalTitle>
                     <ModalContent>
                         <h4>{i18n.t('This action cannot be undone.')}</h4>
                         <p>
                             {i18n.t(
-                                'All mappings ({{disaggregationMappingsLength}}) will be removed',
+                                'All mappings ({{disaggregationMappingsLength}}) will be removed.',
                                 {
                                     disaggregationMappingsLength:
                                         programToDelete.categoryMappings.length,
