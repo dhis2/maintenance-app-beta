@@ -1,11 +1,14 @@
+import i18n from '@dhis2/d2-i18n'
+import { Button } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import React, { useMemo } from 'react'
 import { Form as ReactFinalForm } from 'react-final-form'
 import { useParams } from 'react-router-dom'
+import { SectionedFormFooter, SectionedFormLayout } from '../../components'
+import { LinkButton } from '../../components/LinkButton'
 import { DEFAULT_FIELD_FILTERS, useBoundResourceQueryFn } from '../../lib'
 import {
-    CategoryMapping,
     OptionMapping,
     PickWithFieldFilters,
     Program,
@@ -101,10 +104,21 @@ export const Component = () => {
                     return (
                         <form>
                             <ProgramDisaggregationFormFields />
+                            <SectionedFormFooter />
                         </form>
                     )
                 }}
             </ReactFinalForm>
+            <SectionedFormFooter>
+                <SectionedFormFooter.FormActions>
+                    <Button primary type="submit" onClick={() => {}}>
+                        {i18n.t('Save and exit')}
+                    </Button>
+                    <LinkButton to={'..'}>
+                        {i18n.t('Exit without saving')}
+                    </LinkButton>
+                </SectionedFormFooter.FormActions>
+            </SectionedFormFooter>
         </div>
     )
 }

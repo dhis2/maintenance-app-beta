@@ -2,6 +2,7 @@ import { Button } from '@dhis2/ui'
 import React from 'react'
 import { Field, useField, useForm, useFormState } from 'react-final-form'
 import { useFieldArray } from 'react-final-form-arrays'
+import { SectionedFormSections } from '../../../components'
 import { ModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { generateDhis2Id } from '../../../lib'
 import { ProgramIndicatorMappingSection } from './ProgramIndicatorMappingSection'
@@ -14,9 +15,11 @@ export const ProgramDisaggregationFormFields = () => {
 
     return (
         <div>
-            <div>Program Disaggregation Form Fields</div>
-            <DisaggregationCategories />
-            <ProgramIndicatorMappingSection />
+            <SectionedFormSections>
+                <div>Program Disaggregation Form Fields</div>
+                <ProgramIndicatorMappingSection />
+                <DisaggregationCategories />
+            </SectionedFormSections>
         </div>
     )
 }
