@@ -1,0 +1,27 @@
+.programsList {
+    max-width: 720px;
+}
+
+.programsList h3 {
+    max-width: 720px;
+}
+
+.programsListItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.programsListItemActions {
+    display: flex;
+    gap: var(--spacers-dp8);
+}
+
+.errorNoticeButton {
+    margin: var(--spacers-dp12) 0;
+}

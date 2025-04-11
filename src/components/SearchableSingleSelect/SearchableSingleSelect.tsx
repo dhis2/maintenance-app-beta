@@ -12,6 +12,7 @@ import classes from './SearchableSingleSelect.module.css'
 export interface Option {
     value: string
     label: string
+    disabled?: boolean
 }
 
 const Loader = forwardRef<HTMLDivElement, object>(function Loader(_, ref) {
@@ -167,8 +168,13 @@ export const SearchableSingleSelect = ({
                 </div>
             )}
 
-            {withAllOptions.map(({ value, label }) => (
-                <SingleSelectOption key={value} value={value} label={label} />
+            {withAllOptions.map(({ value, label, disabled }) => (
+                <SingleSelectOption
+                    key={value}
+                    value={value}
+                    label={label}
+                    disabled={disabled}
+                />
             ))}
 
             {hasSelectedInOptionList && selected && (
