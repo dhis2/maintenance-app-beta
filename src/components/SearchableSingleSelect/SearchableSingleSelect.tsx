@@ -124,10 +124,7 @@ export const SearchableSingleSelect = ({
         ({ value }) => value === selected
     )
 
-    const withAllOptions: (
-        | { label: string; value: string; disabled?: boolean }
-        | Option
-    )[] = showAllOption
+    const withAllOptions = showAllOption
         ? [{ value: '', label: i18n.t('All') }, ...options]
         : options
 

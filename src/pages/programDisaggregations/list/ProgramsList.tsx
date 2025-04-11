@@ -1,4 +1,4 @@
-import { useAlert, useDataEngine, useDataQuery } from '@dhis2/app-runtime'
+import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
     Button,
@@ -9,130 +9,92 @@ import {
     ModalTitle,
     NoticeBox,
 } from '@dhis2/ui'
-import React, { useState } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { LinkButton } from '../../../components/LinkButton'
 import { LoadingSpinner } from '../../../components/loading/LoadingSpinner'
 import { ModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { UpdateMutation, useLocationSearchState } from '../../../lib'
-import { Program } from '../../../types/generated'
+import { useLocationSearchState } from '../../../lib'
+import {
+    PROGRAMS_SELECT_QUERY,
+    useProgramsList,
+    useClearMappingsMutation,
+    getProgramsWithMappings,
+    transformProgramsForSelect,
+    useProgramDeleteModal,
+} from './ProgramListHooks'
 import classes from './ProgramsList.module.css'
-
-export interface ProgramsData {
-    results: {
-        programs: Program[]
-    }
-}
-
-const programsQuery = {
-    resource: 'programs',
-    params: {
-        fields: ['displayName', 'id', 'categoryMappings[id]'],
-    },
-}
-
-const programsQueryResults = {
-    results: {
-        resource: 'programs/gist',
-        params: {
-            fields: ['name', 'displayName', 'id', 'categoryMappings'],
-            order: 'name:asc',
-            pageSize: 200,
-            // filter: 'categoryMappings:!empty',
-        },
-    },
-}
 
 export const ProgramsList = () => {
     const preservedSearchState = useLocationSearchState()
-    const { loading, error, data, refetch } =
-        useDataQuery<ProgramsData>(programsQueryResults)
     const navigate = useNavigate()
-    const dataEngine = useDataEngine()
-    const saveAlert = useAlert(
+    const { data, isLoading, isError, refetch } = useProgramsList()
+    const { mutateAsync: clearMappings } = useClearMappingsMutation()
+    const alert = useAlert(
         ({ message }) => message,
         (options) => options
     )
-    const [deleteModalOpen, setDeleteModalOpen] = useState(false)
-    const [programToDelete, setProgramToDelete] = useState<Program | null>(null)
 
-    const programs = data?.results?.programs || []
-    const programsWithMappings = programs.filter(
-        (p) => p.categoryMappings?.length > 0
+    const {
+        programToDelete,
+        open: openDeleteModal,
+        close: closeDeleteModal,
+        isOpen: isDeleteModalOpen,
+    } = useProgramDeleteModal()
+
+    const programs = data?.programs?.programs
+
+    const programsWithMappings = useMemo(
+        () => getProgramsWithMappings(programs),
+        [programs]
     )
 
-    const handleSelectChange = (
-        selected:
-            | { id: string; categoryMappings?: { id: string }[] }
-            | undefined
-    ) => {
-        if (selected?.id) {
-            navigate(`${selected.id}`, { state: preservedSearchState })
-        }
-    }
-
-    const handleDeleteClick = (program: Program) => {
-        setProgramToDelete(program)
-        setDeleteModalOpen(true)
-    }
+    const handleSelectChange = useCallback(
+        (selected: { id: string } | undefined) => {
+            if (selected?.id) {
+                navigate(`${selected.id}`, { state: preservedSearchState })
+            }
+        },
+        [navigate, preservedSearchState]
+    )
 
     const handleConfirmDelete = async () => {
-        const mutation = {
-            type: 'json-patch',
-            resource: `programs`,
-            id: programToDelete?.id,
-            partial: true,
-            data: [
-                {
-                    op: 'replace',
-                    path: `/categoryMappings`,
-                    value: [],
-                },
-            ],
-        } as UpdateMutation
+        if (!programToDelete) {
+            return
+        }
+
         try {
-            await dataEngine.mutate(mutation)
+            await clearMappings(programToDelete.id)
             refetch()
         } catch {
-            saveAlert.show({
-                message: i18n.t('Cannot delete programs mappings'),
+            alert.show({
+                message: i18n.t('Could not delete program mappings'),
                 error: true,
             })
+        } finally {
+            closeDeleteModal()
         }
-        setDeleteModalOpen(false)
-        setProgramToDelete(null)
-    }
-
-    const handleCancelDelete = () => {
-        setDeleteModalOpen(false)
-        setProgramToDelete(null)
     }
 
     return (
         <div className={classes.programsList}>
             <ModelSingleSelect
-                query={programsQuery}
+                query={PROGRAMS_SELECT_QUERY}
                 onChange={handleSelectChange}
-                transform={(results) =>
-                    results.map((result) =>
-                        result.categoryMappings &&
-                        result.categoryMappings.length > 0
-                            ? { ...result, disabled: true }
-                            : result
-                    )
-                }
+                transform={transformProgramsForSelect}
                 placeholder={i18n.t('Select a Program')}
             />
 
             <h3>{i18n.t('Programs with existing mappings')}</h3>
 
-            {loading && <LoadingSpinner />}
-            {error && (
+            {isLoading && <LoadingSpinner />}
+
+            {isError && (
                 <NoticeBox title={i18n.t('Error')} error>
                     {i18n.t('Could not load programs.')} <br />
                     <Button
                         small
-                        onClick={refetch}
+                        onClick={() => refetch()}
                         className={classes.errorNoticeButton}
                     >
                         {i18n.t('Retry')}
@@ -162,7 +124,7 @@ export const ProgramsList = () => {
                                     small
                                     destructive
                                     secondary
-                                    onClick={() => handleDeleteClick(program)}
+                                    onClick={() => openDeleteModal(program)}
                                 >
                                     {i18n.t('Delete')}
                                 </Button>
@@ -171,17 +133,17 @@ export const ProgramsList = () => {
                     ))}
                 </div>
             ) : (
-                !loading &&
-                !error && (
+                !isLoading &&
+                !isError && (
                     <p data-test="no-programs-with-mappings">
                         {i18n.t('No programs with existing mappings found.')}
                     </p>
                 )
             )}
 
-            {deleteModalOpen && programToDelete && (
+            {isDeleteModalOpen && programToDelete && (
                 <Modal
-                    onClose={handleCancelDelete}
+                    onClose={closeDeleteModal}
                     position="middle"
                     dataTest="delete-confirmation-modal"
                 >
@@ -190,10 +152,10 @@ export const ProgramsList = () => {
                         <h4>{i18n.t('This action cannot be undone.')}</h4>
                         <p>
                             {i18n.t(
-                                'All mappings ({{disaggregationMappingsLength}}) will be removed.',
+                                'All mappings ({{count}}) will be removed.',
                                 {
-                                    disaggregationMappingsLength:
-                                        programToDelete.categoryMappings.length,
+                                    count: programToDelete.categoryMappings
+                                        .length,
                                 }
                             )}
                         </p>
@@ -205,7 +167,9 @@ export const ProgramsList = () => {
                     </ModalContent>
                     <ModalActions>
                         <ButtonStrip>
-                            <Button onClick={handleCancelDelete}>Cancel</Button>
+                            <Button onClick={closeDeleteModal}>
+                                {i18n.t('Cancel')}
+                            </Button>
                             <Button destructive onClick={handleConfirmDelete}>
                                 {i18n.t('Delete')}
                             </Button>
