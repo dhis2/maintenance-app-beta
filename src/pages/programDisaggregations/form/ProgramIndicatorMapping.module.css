@@ -1,0 +1,32 @@
+.collapsibleList {
+    padding-block-start: var(--spacers-dp16);
+}
+
+.mappingList {
+    padding-inline-start: var(--spacers-dp16);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+}
+
+.mappingFields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+}
+
+.mappingSelectWrapper {
+    display: flex;
+    gap: var(--spacers-dp8);
+    width: 100%;
+    align-items: center;
+}
+
+.mappingSelectWrapper > div {
+    flex-grow: 1;
+}
+
+.mappingSelectAddMappingButton {
+    /* offset due to label in SingleSelectField */
+    margin-block-start: 20px;
+}

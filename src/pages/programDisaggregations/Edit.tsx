@@ -9,11 +9,14 @@ import { SectionedFormFooter, SectionedFormLayout } from '../../components'
 import { LinkButton } from '../../components/LinkButton'
 import { DEFAULT_FIELD_FILTERS, useBoundResourceQueryFn } from '../../lib'
 import {
+    ModelCollectionResponse,
     OptionMapping,
     PickWithFieldFilters,
     Program,
+    ProgramIndicator,
 } from '../../types/generated'
 import { ProgramDisaggregationFormFields } from './form'
+import { apiResponseToFormValues } from './form/programDisaggregationSchema'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -23,9 +26,18 @@ const fieldFilters = [
     'categoryMappings',
 ] as const
 
-export type ProgramFormValues = PickWithFieldFilters<
-    Program,
-    typeof fieldFilters
+const programIndicatorFieldFilters = [
+    'id',
+    'name',
+    'displayName',
+    'categoryMappingIds',
+    'attributeCombo[id, displayName, dataDimensionType, categories[id, displayName]]',
+    'categoryCombo[id, displayName, dataDimensionType, categories[id, displayName]]',
+] as const
+export type ProgramData = PickWithFieldFilters<Program, typeof fieldFilters>
+export type ProgramIndicatorData = ModelCollectionResponse<
+    PickWithFieldFilters<ProgramIndicator, typeof programIndicatorFieldFilters>,
+    'programIndicators'
 >
 
 type CategoryMappingValue = {
@@ -54,7 +66,21 @@ export const Component = () => {
 
     const programQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<ProgramFormValues>,
+        queryFn: queryFn<ProgramData>,
+    })
+
+    const programIndicatorsQuery = useQuery({
+        queryKey: [
+            {
+                resource: 'programIndicators',
+                params: {
+                    fields: programIndicatorFieldFilters.concat(),
+                    filter: [`program.id:eq:${id}`, 'categoryMappingIds:gt:0'],
+                    pageSize: 200,
+                },
+            },
+        ],
+        queryFn: queryFn<ProgramIndicatorData>,
     })
 
     const initialValues = useMemo(() => {
@@ -62,9 +88,14 @@ export const Component = () => {
         if (!res) {
             return { categoryMappings: {} }
         }
-        console.log('programQuery.data?.categoryMappings', res)
+        if (programQuery.data && programIndicatorsQuery.data) {
+            const formValues = apiResponseToFormValues({
+                program: programQuery.data,
+                programIndicators: programIndicatorsQuery.data,
+            })
+            console.log({ formValues })
+        }
         const categoryIds = res?.map((mapping) => mapping.categoryId)
-        console.log({ categoryIds })
         const categoryMappings: CategoryMappingFormValues = {}
         const mappingsPerCategory = categoryIds?.forEach((id) => {
             const mappings = res.filter((mapping) => mapping.categoryId === id)
@@ -89,7 +120,7 @@ export const Component = () => {
         return {
             categoryMappings, //: Object.values(categoryMappings),
         }
-    }, [programQuery.data])
+    }, [programQuery.data, programIndicatorsQuery.data])
 
     return (
         <div>
