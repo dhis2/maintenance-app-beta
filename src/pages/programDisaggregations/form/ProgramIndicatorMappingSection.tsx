@@ -13,7 +13,9 @@ import {
     ModelSingleSelect,
     ModelSingleSelectField,
 } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { DisplayableModel } from '../../../types/models'
+import {
+    DisplayableModel,
+} from '../../../types/models'
 import css from './ProgramIndicatorMapping.module.css'
 
 export const ProgramIndicatorMappingSection = () => {
@@ -21,10 +23,15 @@ export const ProgramIndicatorMappingSection = () => {
     const [programIndicators, setProgramIndicators] = React.useState<
         DisplayableModel[]
     >([])
-    const selectedFilter =
-        programIndicators.length > 0
-            ? [`id:!in:[${programIndicators.map((p) => p.id)}]`]
-            : []
+
+    const transformProgramsIndicatorsForSelect = (
+        results: DisplayableModel[]
+    ) =>
+        results.map((result) =>
+            programIndicators.map((p) => p.id).includes(result.id)
+                ? { ...result, disabled: true }
+                : result
+        )
     return (
         <SectionedFormSection name="programIndicatorMappings">
             <ModelSingleSelect<DisplayableModel>
@@ -32,10 +39,7 @@ export const ProgramIndicatorMappingSection = () => {
                     resource: 'programIndicators',
                     params: {
                         fields: ['id', 'name', 'displayName'],
-                        filter: [
-                            'program.id:eq:' + programId,
-                            ...selectedFilter,
-                        ],
+                        filter: ['program.id:eq:' + programId],
                     },
                 }}
                 onChange={(selected) => {
@@ -43,12 +47,13 @@ export const ProgramIndicatorMappingSection = () => {
                         setProgramIndicators([...programIndicators, selected])
                     }
                 }}
+                transform={transformProgramsIndicatorsForSelect}
                 selected={undefined}
                 noMatchWithoutFilterText="No program indicators found"
                 placeholder={i18n.t('Add a program indicator')}
             />
             <div className={css.collapsibleList}>
-                {programIndicators.map((indicator) => (
+                {programIndicators.map((indicator, index) => (
                     <CollapsibleCard
                         key={indicator.id}
                         headerElement={
@@ -59,7 +64,19 @@ export const ProgramIndicatorMappingSection = () => {
                                     })}
                                     title={indicator.displayName}
                                 />
-                                <Button small secondary destructive>
+                                <Button
+                                    small
+                                    secondary
+                                    destructive
+                                    onClick={() => {
+                                        setProgramIndicators(
+                                            programIndicators.filter(
+                                                (_, piIndex) =>
+                                                    index !== piIndex
+                                            )
+                                        )
+                                    }}
+                                >
                                     {i18n.t('Remove program indicator mapping')}
                                 </Button>
                             </CollapsibleCardHeader>
@@ -96,6 +113,7 @@ export const ProgramIndicatorMapping = ({
                         ],
                     },
                 }}
+                showNoValueOption
                 input={categoryCombo.input}
                 meta={categoryCombo.meta}
             />
@@ -126,10 +144,10 @@ export const CategoryMappingSelect = ({
         `programIndicatorMappings.${programIndicatorId}.disaggregation.${category.id}`,
         {
             initialValue:
-                availableMappings.length === 1 ? availableMappings[0].id : null,
+                availableMappings.length >= 1 ? availableMappings[0].id : null,
         }
     )
-    console.log({ availableMappings, selectedMapping })
+    console.log('*********', { availableMappings, selectedMapping })
 
     return (
         <div className={css.mappingSelectWrapper}>
@@ -138,7 +156,7 @@ export const CategoryMappingSelect = ({
                 onChange={(payload) =>
                     selectedMapping.input.onChange(payload.selected)
                 }
-                disabled={availableMappings.length === 0}
+                disabled={availableMappings.length > 1}
                 placeholder={
                     availableMappings.length < 1
                         ? 'No mappings available'
