@@ -10,4 +10,5 @@ export type DisplayableModel = {
 export type PartialLoadedDisplayableModel = {
     id: string
     displayName?: string
+    disabled?: boolean
 }
