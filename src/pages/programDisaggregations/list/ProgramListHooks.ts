@@ -5,6 +5,7 @@ import {
     type UseQueryResult,
 } from '@tanstack/react-query'
 import { useCallback, useState } from 'react'
+import { useBoundQueryFn } from '../../../lib'
 import { Program } from '../../../types/generated'
 
 export const PROGRAMS_GIST_QUERY_KEY = ['programs-gist'] as const
@@ -23,23 +24,27 @@ export const PROGRAMS_SELECT_QUERY = {
     },
 }
 
-export const useProgramsList = (): UseQueryResult<ProgramsGistResponse> => {
-    const engine = useDataEngine()
+export const useProgramsWithMappingsList =
+    (): UseQueryResult<ProgramsGistResponse> => {
+        const queryFn = useBoundQueryFn()
 
-    return useQuery(PROGRAMS_GIST_QUERY_KEY, async () => {
-        const response = await engine.query({
-            programs: {
-                resource: 'programs/gist',
-                params: {
-                    fields: [...fields],
-                    order: 'name:asc',
-                    pageSize: 200,
+        return useQuery({
+            queryKey: [
+                {
+                    programs: {
+                        resource: 'programs/gist',
+                        params: {
+                            fields: [...fields],
+                            filter: ['categoryMappings:!empty'],
+                            order: 'name:asc',
+                            pagSize: 200,
+                        },
+                    },
                 },
-            },
+            ],
+            queryFn: queryFn<ProgramsGistResponse>,
         })
-        return response
-    })
-}
+    }
 
 export const useClearMappingsMutation = () => {
     const engine = useDataEngine()

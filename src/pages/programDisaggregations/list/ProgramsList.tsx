@@ -9,26 +9,23 @@ import {
     ModalTitle,
     NoticeBox,
 } from '@dhis2/ui'
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { LinkButton } from '../../../components/LinkButton'
 import { LoadingSpinner } from '../../../components/loading/LoadingSpinner'
 import { ModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { useLocationSearchState } from '../../../lib'
 import {
     PROGRAMS_SELECT_QUERY,
-    useProgramsList,
+    useProgramsWithMappingsList,
     useClearMappingsMutation,
-    getProgramsWithMappings,
     transformProgramsForSelect,
     useProgramDeleteModal,
 } from './ProgramListHooks'
 import classes from './ProgramsList.module.css'
 
 export const ProgramsList = () => {
-    const preservedSearchState = useLocationSearchState()
     const navigate = useNavigate()
-    const { data, isLoading, isError, refetch } = useProgramsList()
+    const { data, isLoading, isError, refetch } = useProgramsWithMappingsList()
     const { mutateAsync: clearMappings } = useClearMappingsMutation()
     const alert = useAlert(
         ({ message }) => message,
@@ -42,20 +39,15 @@ export const ProgramsList = () => {
         isOpen: isDeleteModalOpen,
     } = useProgramDeleteModal()
 
-    const programs = data?.programs?.programs
-
-    const programsWithMappings = useMemo(
-        () => getProgramsWithMappings(programs),
-        [programs]
-    )
+    const programsWithMappings = data?.programs?.programs
 
     const handleSelectChange = useCallback(
         (selected: { id: string } | undefined) => {
             if (selected?.id) {
-                navigate(`${selected.id}`, { state: preservedSearchState })
+                navigate(`${selected.id}`)
             }
         },
-        [navigate, preservedSearchState]
+        [navigate]
     )
 
     const handleConfirmDelete = async () => {
@@ -102,7 +94,7 @@ export const ProgramsList = () => {
                 </NoticeBox>
             )}
 
-            {programsWithMappings.length > 0 ? (
+            {programsWithMappings && programsWithMappings.length > 0 ? (
                 <div>
                     {programsWithMappings.map((program) => (
                         <div
