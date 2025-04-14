@@ -1,9 +1,14 @@
+.tempContainer {
+    background-color: var(--colors-white);
+    padding: var(--spacers-dp16);
+}
+
 .categoryCard {
     margin-block: 8px;
-    padding: 8px;   
-    background-color: var(--colors-grey200); 
+    padding: 8px;
+    background-color: var(--colors-grey100);
     border: 1px solid var(--colors-grey400);
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
 .categoryHeader {
@@ -27,22 +32,34 @@
     align-items: center;
 }
 
-.mappingCard {
-    margin-block: 4px;
-    padding: 8px;
+.categoryCardDeleted {
+    margin-block: 8px;
+    padding: 12px;
+    background-color: var(--colors-red050);
+    border: 1px solid var(--colors-red200);
+    border-radius: 4px;
 }
 
-.mappingHeader {
-    display: flex;
-    align-items: center;
+.deletedCategoryText {
+    color: var(--colors-red800);
+    font-size: 15px;
+    margin-block-end: var(--spacers-dp8);
+}
+
+.categoryCardSuggested {
+    margin-block: 8px;
+    padding: 8px;
+    background-color: var(--colors-grey100);
+    border: 1px dashed var(--colors-grey400);
+    border-radius: 4px;
+}
+
+.categoryCardSuggested div {
     margin-block-end: 8px;
 }
 
-.mappingText {
-    margin-inline-end: 6px;
-}
-
-.filterInputContainer {
-    margin-block: 16px;
-    margin-inline-start: 8px;
+.suggestedExplanationText {
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }

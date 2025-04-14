@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-04-07T14:45:20.635Z\n"
-"PO-Revision-Date: 2025-04-07T14:45:20.636Z\n"
+"POT-Creation-Date: 2025-04-14T18:25:44.569Z\n"
+"PO-Revision-Date: 2025-04-14T18:25:44.569Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2224,3 +2224,62 @@ msgstr ""
 
 msgid "Manage"
 msgstr "Manage"
+
+msgid "Add a category"
+msgstr "Add a category"
+
+msgid "Add categories from a category combination"
+msgstr "Add categories from a category combination"
+
+msgid "Rename category mapping"
+msgstr "Rename category mapping"
+
+msgid "Apply"
+msgstr "Apply"
+
+msgid "{{categoryMappingName}} mapping will be deleted on save"
+msgstr "{{categoryMappingName}} mapping will be deleted on save"
+
+msgid "Undo delete"
+msgstr "Undo delete"
+
+msgid "Mapping: "
+msgstr "Mapping: "
+
+msgid ""
+"There are no category combinations. Your system must have at least one "
+"category combination in order to disaggregate a program indicator."
+msgstr ""
+"There are no category combinations. Your system must have at least one "
+"category combination in order to disaggregate a program indicator."
+
+msgid "No new categories to add"
+msgstr "No new categories to add"
+
+msgid "1 category added"
+msgstr "1 category added"
+
+msgid "{{newlyAddedCount}} categories added"
+msgstr "{{newlyAddedCount}} categories added"
+
+msgid ""
+"{{newlyAddedCount}} categories added ({{alreadyAddedCount}} already in the "
+"list)"
+msgstr ""
+"{{newlyAddedCount}} categories added ({{alreadyAddedCount}} already in the "
+"list)"
+
+msgid "Disaggregation categories"
+msgstr "Disaggregation categories"
+
+msgid "Suggested based on Program Indicator selections"
+msgstr "Suggested based on Program Indicator selections"
+
+msgid "Add category"
+msgstr "Add category"
+
+msgid "{{categoryName}} and all mappings will be deleted on save"
+msgstr "{{categoryName}} and all mappings will be deleted on save"
+
+msgid "Add mapping"
+msgstr "Add mapping"

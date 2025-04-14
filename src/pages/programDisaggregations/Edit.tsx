@@ -90,7 +90,6 @@ export const Component = () => {
 
     return (
         <div>
-            <span>Placeholder for program disaggregations (edit){id}</span>
             <ReactFinalForm
                 initialValues={initialValues}
                 onSubmit={() => {}}
