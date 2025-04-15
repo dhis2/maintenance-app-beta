@@ -112,10 +112,27 @@ type ProgramIndicatorValue = Record<
     }
 >
 
-const getCategoriesFromProgramIndicatorSelections = (
-    programIndicatorsValue: ProgramIndicatorValue,
+// const getCategoriesFromProgramIndicatorSelections = (
+//     programIndicatorsValue: ProgramIndicatorValue,
+//     categoriesWithMappings: string[]
+// ) => {
+//     const programCategories = Object.values(programIndicatorsValue)
+//         ?.map((piValue) => {
+//             return piValue?.categoryCombo?.categories
+//         })
+//         ?.flat()
+//         ?.map((category) => category?.id)
+//     return [...new Set(programCategories)].filter(
+//         (id) => !categoriesWithMappings.includes(id)
+//     )
+// }
+
+const useProgramIndicatorSelectionCategories = (
     categoriesWithMappings: string[]
 ) => {
+    const programIndicatorsValue: ProgramIndicatorValue = useField(
+        'programIndicatorMappings'
+    )?.input?.value
     const programCategories = Object.values(programIndicatorsValue)
         ?.map((piValue) => {
             return piValue?.categoryCombo?.categories
@@ -144,15 +161,8 @@ export const DisaggregationCategories = () => {
 
     const [addedCategories, setAddedCategories] = useState<string[]>([])
 
-    // this could be revisited as the memoization is based on programIndicatorsValue which is not very stable
-    const programIndicatorsValue = useField('programIndicatorMappings')?.input
-        ?.value
-    const categoriesFromProgramIndicatorSelections = useMemo(() => {
-        return getCategoriesFromProgramIndicatorSelections(
-            programIndicatorsValue,
-            categoriesWithMappings
-        )
-    }, [categoriesWithMappings, programIndicatorsValue])
+    const categoriesFromProgramIndicatorSelections =
+        useProgramIndicatorSelectionCategories(categoriesWithMappings)
 
     const queryFn = useBoundResourceQueryFn()
     const query = {
@@ -225,7 +235,7 @@ export const DisaggregationCategories = () => {
             return
         }
         addSingleCategory(categoryId)
-        showNotification(i18n.t('1 category added'))
+        showNotification(i18n.t('One category added'))
     }
 
     const addCategoryCombo = (categoryComboId: string) => {
@@ -308,7 +318,9 @@ const SuggestedCategory = ({
 }: SuggestedCategoryProps) => (
     <div className={css.categoryCardSuggested}>
         <div>
-            <span className={css.categoryText}>{i18n.t('Category:')}</span>
+            <span className={css.categoryText}>
+                {i18n.t('Category:', { nsSeparator: '~:~' })}
+            </span>
             <span>&nbsp;</span>
             <span className={css.categoryName}>
                 {categoryObject?.[id]?.displayName}
@@ -354,7 +366,7 @@ const DisaggregationCategory = ({
             <div className={css.categoryCardDeleted}>
                 <div className={css.deletedCategoryText}>
                     {i18n.t(
-                        '{{categoryName}} and all mappings will be deleted on save',
+                        '{{- categoryName}} and all mappings will be deleted on save',
                         { categoryName: categoryObject?.[id]?.displayName }
                     )}
                 </div>

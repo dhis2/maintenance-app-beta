@@ -111,7 +111,7 @@ export const CategoryMapping = ({
             <CategoryMappingWrapper deleted>
                 <div className={css.deletedMappingText}>
                     {i18n.t(
-                        '{{categoryMappingName}} mapping will be deleted on save',
+                        '{{- categoryMappingName}} mapping will be deleted on save',
                         {
                             categoryMappingName:
                                 categoryMappingValue.mappingName,
