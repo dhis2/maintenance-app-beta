@@ -7,7 +7,9 @@ import { ModelSingleSelect } from '../../../components/metadataFormControls/Mode
 import { generateDhis2Id } from '../../../lib'
 import { ProgramIndicatorMappingSection } from './ProgramIndicatorMappingSection'
 
-export const ProgramDisaggregationFormFields = () => {
+export const ProgramDisaggregationFormFields = ({
+    initialProgramIndicators,
+}) => {
     const formState = useFormState()
     const array = useFieldArray('categoryMappings.cX5k9anHEHd')
 
@@ -16,8 +18,9 @@ export const ProgramDisaggregationFormFields = () => {
     return (
         <div>
             <SectionedFormSections>
-                <div>Program Disaggregation Form Fields</div>
-                <ProgramIndicatorMappingSection />
+                <ProgramIndicatorMappingSection
+                    initialProgramIndicators={initialProgramIndicators}
+                />
                 <DisaggregationCategories />
             </SectionedFormSections>
         </div>

@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, SingleSelectField, SingleSelectOption } from '@dhis2/ui'
-import React from 'react'
-import { useField } from 'react-final-form'
+import React, { useEffect } from 'react'
+import { useField, useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
     CollapsibleCard,
@@ -13,16 +13,21 @@ import {
     ModelSingleSelect,
     ModelSingleSelectField,
 } from '../../../components/metadataFormControls/ModelSingleSelect'
-import {
-    DisplayableModel,
-} from '../../../types/models'
+import { DisplayableModel } from '../../../types/models'
 import css from './ProgramIndicatorMapping.module.css'
 
-export const ProgramIndicatorMappingSection = () => {
+export const ProgramIndicatorMappingSection = ({
+    initialProgramIndicators,
+}) => {
     const programId = useParams().id
+
     const [programIndicators, setProgramIndicators] = React.useState<
         DisplayableModel[]
-    >([])
+    >(initialProgramIndicators)
+
+    useEffect(() => {
+        setProgramIndicators(initialProgramIndicators)
+    }, [initialProgramIndicators])
 
     const transformProgramsIndicatorsForSelect = (
         results: DisplayableModel[]
@@ -147,7 +152,6 @@ export const CategoryMappingSelect = ({
                 availableMappings.length >= 1 ? availableMappings[0].id : null,
         }
     )
-    console.log('*********', { availableMappings, selectedMapping })
 
     return (
         <div className={css.mappingSelectWrapper}>
@@ -156,7 +160,7 @@ export const CategoryMappingSelect = ({
                 onChange={(payload) =>
                     selectedMapping.input.onChange(payload.selected)
                 }
-                disabled={availableMappings.length > 1}
+                disabled={availableMappings.length <= 1}
                 placeholder={
                     availableMappings.length < 1
                         ? 'No mappings available'

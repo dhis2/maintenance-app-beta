@@ -116,15 +116,46 @@ export const Component = () => {
                     }
                 })
         })
-        console.log('mappingsPerCategory', categoryMappings)
+        const programIndicatorMappings =
+            programIndicatorsQuery.data?.programIndicators.reduce(
+                (acc, { id, ...rest }) => {
+                    const disaggregation = Object.fromEntries(
+                        rest.categoryCombo.categories.map((category, i) => [
+                            category.id,
+                            rest.categoryMappingIds[i],
+                        ])
+                    )
+                    acc[id] = {
+                        categoryCombo: rest.categoryCombo,
+                        disaggregation,
+                        name: rest.name,
+                        displayName: rest.displayName,
+                    }
+                    return acc
+                },
+                {}
+            )
         return {
             categoryMappings, //: Object.values(categoryMappings),
+            programIndicatorMappings,
         }
     }, [programQuery.data, programIndicatorsQuery.data])
 
+    const initialProgramIndicators = useMemo(() => {
+        if (initialValues.programIndicatorMappings) {
+            return Object.entries(initialValues.programIndicatorMappings).map(
+                ([id, value]) => ({
+                    id,
+                    name: value.name,
+                    displayName: value.displayName,
+                })
+            )
+        }
+        return []
+    }, [initialValues])
+
     return (
         <div>
-            <span>Placeholder for program disaggregations (edit){id}</span>
             <ReactFinalForm
                 initialValues={initialValues}
                 onSubmit={() => {}}
@@ -134,7 +165,11 @@ export const Component = () => {
                 {() => {
                     return (
                         <form>
-                            <ProgramDisaggregationFormFields />
+                            <ProgramDisaggregationFormFields
+                                initialProgramIndicators={
+                                    initialProgramIndicators
+                                }
+                            />
                             <SectionedFormFooter />
                         </form>
                     )
