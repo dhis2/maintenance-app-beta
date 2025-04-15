@@ -1,3 +1,10 @@
+## [0.38.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.38.1...v0.38.2) (2025-04-09)
+
+
+### Bug Fixes
+
+* hide other section ([#542](https://github.com/dhis2/maintenance-app-beta/issues/542)) ([73b60bd](https://github.com/dhis2/maintenance-app-beta/commit/73b60bd5e911a9ce8fe28b4c7946862560381bd9))
+
 ## [0.38.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.38.0...v0.38.1) (2025-04-08)
 
 
