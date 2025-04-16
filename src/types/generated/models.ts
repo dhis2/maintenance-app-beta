@@ -7155,10 +7155,13 @@ export type ProgramIndicator = {
     aggregationType: ProgramIndicator.aggregationType
     analyticsPeriodBoundaries: Array<AnalyticsPeriodBoundary>
     analyticsType: ProgramIndicator.analyticsType
+    attributeCombo: CategoryCombo
     attributeValues: Array<AttributeValue>
     code: string
     created: string
     createdBy: User
+    categoryCombo: CategoryCombo
+    categoryMappingIds: string[]
     decimals: number
     description: string
     dimensionItem: string

@@ -1,16 +1,28 @@
+import i18n from '@dhis2/d2-i18n'
+import { Button } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import React, { useMemo } from 'react'
 import { Form as ReactFinalForm } from 'react-final-form'
 import { useParams } from 'react-router-dom'
+import { z } from 'zod'
+import { SectionedFormFooter } from '../../components'
+import { LinkButton } from '../../components/LinkButton'
 import { DEFAULT_FIELD_FILTERS, useBoundResourceQueryFn } from '../../lib'
 import {
-    CategoryMapping,
+    CategoryCombo,
+    ModelCollectionResponse,
     OptionMapping,
     PickWithFieldFilters,
     Program,
+    ProgramIndicator,
 } from '../../types/generated'
 import { ProgramDisaggregationFormFields } from './form'
+import {
+    categoryMapping,
+    CategoryMappingsRecord,
+    ProgramIndicatorMappingsRecord,
+} from './form/programDisaggregationSchema'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -20,24 +32,130 @@ const fieldFilters = [
     'categoryMappings',
 ] as const
 
-export type ProgramFormValues = PickWithFieldFilters<
-    Program,
-    typeof fieldFilters
->
+const programIndicatorFieldFilters = [
+    'id',
+    'name',
+    'displayName',
+    'categoryMappingIds',
+    'attributeCombo[id, displayName, dataDimensionType, categories[id, displayName]]',
+    'categoryCombo[id, displayName, dataDimensionType, categories[id, displayName]]',
+] as const
 
-type CategoryMappingValue = {
-    categoryId: string
-    id: string
-    mappingName: string
-    options: Record<string, OptionMapping>
-    deleted: boolean
-}
-type CategoryMappingFormValues = Record<
-    string, // categoryId
-    CategoryMappingValue[]
+export type ProgramData = PickWithFieldFilters<Program, typeof fieldFilters>
+export type ProgramIndicatorData = ModelCollectionResponse<
+    PickWithFieldFilters<ProgramIndicator, typeof programIndicatorFieldFilters>,
+    'programIndicators'
 >
+export type ProgramIndicatorWithMapping = {
+    displayName: string
+    name: string
+    id: string
+}
 type ProgramDisaggregationFormValues = {
-    categoryMappings: CategoryMappingFormValues
+    categoryMappings: CategoryMappingsRecord
+    programIndicatorMappings: ProgramIndicatorMappingsRecord
+}
+
+export const apiResponseToFormValues = ({
+    program,
+    programIndicators,
+}: {
+    program: ProgramData
+    programIndicators: ProgramIndicatorData
+}) => {
+    // group categoryMappings per categoryId
+    const categoryMappings = program.categoryMappings.reduce((acc, mapping) => {
+        acc[mapping.categoryId] = [
+            ...(acc[mapping.categoryId] || []),
+            {
+                ...mapping,
+                deleted: false,
+                options: mapping.optionMappings.reduce((opts, opt) => {
+                    opts[opt.optionId] = {
+                        filter: opt.filter,
+                        optionId: opt.optionId,
+                    }
+                    return opts
+                }, {} as Record<string, { filter: string; optionId: string }>),
+            },
+        ]
+        return acc
+    }, {} as CategoryMappingsRecord)
+
+    const programIndicatorMappingsWithDataDimensionType =
+        programIndicators.programIndicators.reduce((acc, indicator) => {
+            const disAggCombo = indicator.categoryCombo
+            const attributeCombo = indicator.attributeCombo
+
+            const getMappingType = (
+                catMapping: z.infer<typeof categoryMapping>
+            ) => {
+                const inCombo = [disAggCombo, attributeCombo].find((combo) =>
+                    combo.categories.some(
+                        (cat) => cat.id === catMapping.categoryId
+                    )
+                )
+                return inCombo?.dataDimensionType
+            }
+            const mappingsList = Object.values(categoryMappings).flat()
+            const mappingByComboType = {
+                disaggregation: {},
+                attribute: {},
+            }
+
+            indicator.categoryMappingIds.forEach((categoryMappingId) => {
+                const categoryMapping = mappingsList.find(
+                    (cm) => cm.id === categoryMappingId
+                )
+                if (!categoryMapping) {
+                    return acc
+                }
+                const type = getMappingType(categoryMapping)
+                if (!type) {
+                    return acc
+                }
+                const key =
+                    type === CategoryCombo.dataDimensionType.DISAGGREGATION
+                        ? 'disaggregation'
+                        : 'attribute'
+
+                mappingByComboType[key] = {
+                    ...mappingByComboType[key],
+                    [categoryMapping.categoryId]: categoryMappingId,
+                }
+            })
+            acc[indicator.id] = {
+                ...indicator,
+                ...mappingByComboType,
+            }
+            return acc
+        }, {} as ProgramIndicatorMappingsRecord)
+
+    const programIndicatorMappings = programIndicators.programIndicators.reduce(
+        (acc, { id, ...rest }) => {
+            const disaggregation = Object.fromEntries(
+                rest.categoryCombo.categories.map((category, i) => [
+                    category.id,
+                    rest.categoryMappingIds[i],
+                ])
+            )
+            acc[id] = {
+                categoryCombo: rest.categoryCombo,
+                disaggregation,
+                attribute: {}, //for now doing everything in disaggregation
+                name: rest.name,
+                displayName: rest.displayName,
+            }
+            return acc
+        },
+        {} as ProgramIndicatorMappingsRecord
+    )
+
+    return {
+        categoryMappings,
+        programIndicatorMappings,
+        programIndicatorMappingsWithDataDimensionType,
+    }
 }
 
 export const Component = () => {
@@ -51,42 +169,50 @@ export const Component = () => {
 
     const programQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<ProgramFormValues>,
+        queryFn: queryFn<ProgramData>,
     })
 
-    const initialValues = useMemo(() => {
-        const res = programQuery.data?.categoryMappings
-        if (!res) {
-            return { categoryMappings: {} }
-        }
-        console.log('programQuery.data?.categoryMappings', res)
-        const categoryIds = res?.map((mapping) => mapping.categoryId)
-        console.log({ categoryIds })
-        const categoryMappings: CategoryMappingFormValues = {}
-        const mappingsPerCategory = categoryIds?.forEach((id) => {
-            const mappings = res.filter((mapping) => mapping.categoryId === id)
+    const programIndicatorsQuery = useQuery({
+        queryKey: [
+            {
+                resource: 'programIndicators',
+                params: {
+                    fields: programIndicatorFieldFilters.concat(),
+                    filter: [`program.id:eq:${id}`, 'categoryMappingIds:gt:0'],
+                    pageSize: 200,
+                },
+            },
+        ],
+        queryFn: queryFn<ProgramIndicatorData>,
+    })
 
-            categoryMappings[id as keyof CategoryMappingFormValues] = mappings
-                .filter((mapping) => !!mapping)
-                .map(({ categoryId, id, mappingName, optionMappings }) => {
-                    const options = optionMappings.reduce((acc, curr) => {
-                        acc[curr.optionId] = curr
-                        return acc
-                    }, {} as Record<string, OptionMapping>)
-                    return {
-                        categoryId,
-                        id,
-                        mappingName,
-                        options,
-                        deleted: false,
-                    }
-                })
-        })
-        console.log('mappingsPerCategory', categoryMappings)
-        return {
-            categoryMappings, //: Object.values(categoryMappings),
+    const initialValues: ProgramDisaggregationFormValues = useMemo(() => {
+        if (programQuery.data && programIndicatorsQuery.data) {
+            return apiResponseToFormValues({
+                program: programQuery.data,
+                programIndicators: programIndicatorsQuery.data,
+            })
         }
-    }, [programQuery.data])
+
+        return {
+            categoryMappings: {},
+            programIndicatorMappings: {},
+        }
+    }, [programQuery.data, programIndicatorsQuery.data])
+
+    const initialProgramIndicators: ProgramIndicatorWithMapping[] =
+        useMemo(() => {
+            if (initialValues.programIndicatorMappings) {
+                return Object.entries(
+                    initialValues.programIndicatorMappings
+                ).map(([id, value]) => ({
+                    id,
+                    name: value.name,
+                    displayName: value.displayName,
+                }))
+            }
+            return []
+        }, [initialValues.programIndicatorMappings])
 
     return (
         <div>
@@ -99,11 +225,26 @@ export const Component = () => {
                 {() => {
                     return (
                         <form>
-                            <ProgramDisaggregationFormFields />
+                            <ProgramDisaggregationFormFields
+                                initialProgramIndicators={
+                                    initialProgramIndicators
+                                }
+                            />
+                            <SectionedFormFooter />
                         </form>
                     )
                 }}
             </ReactFinalForm>
+            <SectionedFormFooter>
+                <SectionedFormFooter.FormActions>
+                    <Button primary type="submit" onClick={() => {}}>
+                        {i18n.t('Save and exit')}
+                    </Button>
+                    <LinkButton to={'..'}>
+                        {i18n.t('Exit without saving')}
+                    </LinkButton>
+                </SectionedFormFooter.FormActions>
+            </SectionedFormFooter>
         </div>
     )
 }
