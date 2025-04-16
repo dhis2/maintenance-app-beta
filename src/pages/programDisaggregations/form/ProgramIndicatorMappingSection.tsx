@@ -13,11 +13,14 @@ import {
     ModelSingleSelect,
     ModelSingleSelectField,
 } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { DisplayableModel } from '../../../types/models'
+import { CategoryMapping, DisplayableModel } from '../../../types/models'
+import { ProgramIndicatorWithMapping } from '../Edit'
 import css from './ProgramIndicatorMapping.module.css'
 
 export const ProgramIndicatorMappingSection = ({
     initialProgramIndicators,
+}: {
+    initialProgramIndicators: ProgramIndicatorWithMapping[]
 }) => {
     const programId = useParams().id
 
@@ -123,14 +126,16 @@ export const ProgramIndicatorMapping = ({
                 meta={categoryCombo.meta}
             />
             <div className={css.mappingList}>
-                {categoryCombo.input.value?.categories?.map((category) => (
-                    <div key={category.id}>
-                        <CategoryMappingSelect
-                            category={category}
-                            programIndicatorId={programIndicator.id}
-                        />
-                    </div>
-                ))}
+                {categoryCombo.input.value?.categories?.map(
+                    (category: DisplayableModel) => (
+                        <div key={category.id}>
+                            <CategoryMappingSelect
+                                category={category}
+                                programIndicatorId={programIndicator.id}
+                            />
+                        </div>
+                    )
+                )}
             </div>
         </div>
     )
@@ -168,7 +173,7 @@ export const CategoryMappingSelect = ({
                 }
                 selected={selectedMapping.input.value}
             >
-                {availableMappings?.map((mapping) => (
+                {availableMappings?.map((mapping: CategoryMapping) => (
                     <SingleSelectOption
                         key={mapping.id}
                         label={mapping.mappingName}
