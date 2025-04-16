@@ -21,7 +21,7 @@ jobs:
               with:
                   node-version: 20
 
-            - uses: c-hive/gha-yarn-cache@v1
+            - uses: c-hive/gha-yarn-cache@v2
             - run: yarn install --frozen-lockfile
 
             - name: Check types
