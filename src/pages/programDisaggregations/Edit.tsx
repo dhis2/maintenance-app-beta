@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button } from '@dhis2/ui'
+import { Button, CircularLoader, CenteredContent, NoticeBox } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import React, { useMemo } from 'react'
@@ -186,6 +186,9 @@ export const Component = () => {
         queryFn: queryFn<ProgramIndicatorData>,
     })
 
+    const isLoading = programQuery.isLoading || programIndicatorsQuery.isLoading
+    const isError = programQuery.isError || programIndicatorsQuery.isError
+
     const initialValues: ProgramDisaggregationFormValues = useMemo(() => {
         if (programQuery.data && programIndicatorsQuery.data) {
             return apiResponseToFormValues({
@@ -213,6 +216,31 @@ export const Component = () => {
             }
             return []
         }, [initialValues.programIndicatorMappings])
+
+    if (isLoading) {
+        return (
+            <CenteredContent>
+                <CircularLoader />
+            </CenteredContent>
+        )
+    }
+    if (isError) {
+        return (
+            <NoticeBox title={i18n.t('Error')} error>
+                {i18n.t('Could not load programs or indicators data.')}
+                <br />
+                <Button
+                    small
+                    onClick={() => {
+                        programIndicatorsQuery.refetch()
+                        programQuery.refetch()
+                    }}
+                >
+                    {i18n.t('Retry')}
+                </Button>
+            </NoticeBox>
+        )
+    }
 
     return (
         <div>

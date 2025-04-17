@@ -1,5 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, SingleSelectField, SingleSelectOption } from '@dhis2/ui'
+import {
+    Button,
+    SingleSelectField,
+    SingleSelectOption,
+} from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { useField, useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
