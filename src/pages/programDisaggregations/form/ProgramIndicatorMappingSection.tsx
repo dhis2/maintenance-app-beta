@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, SingleSelectField, SingleSelectOption } from '@dhis2/ui'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useField, useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
@@ -15,6 +15,7 @@ import {
 } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { CategoryMapping, DisplayableModel } from '../../../types/models'
 import { ProgramIndicatorWithMapping } from '../Edit'
+import { CategoryMappingsRecord } from './programDisaggregationSchema'
 import css from './ProgramIndicatorMapping.module.css'
 
 export const ProgramIndicatorMappingSection = ({
@@ -23,6 +24,7 @@ export const ProgramIndicatorMappingSection = ({
     initialProgramIndicators: ProgramIndicatorWithMapping[]
 }) => {
     const programId = useParams().id
+    const { input: piInput } = useField(`programIndicatorMappings`)
 
     const [programIndicators, setProgramIndicators] = React.useState<
         DisplayableModel[]
@@ -77,6 +79,16 @@ export const ProgramIndicatorMappingSection = ({
                                     secondary
                                     destructive
                                     onClick={() => {
+                                        const newPiMappings =
+                                            Object.fromEntries(
+                                                Object.entries(
+                                                    piInput.value
+                                                ).filter(
+                                                    ([key]) =>
+                                                        indicator.id !== key
+                                                )
+                                            )
+                                        piInput.onChange(newPiMappings)
                                         setProgramIndicators(
                                             programIndicators.filter(
                                                 (_, piIndex) =>
@@ -149,13 +161,27 @@ export const CategoryMappingSelect = ({
     programIndicatorId: string
 }) => {
     const availableMappings =
-        useField(`categoryMappings.${category.id}`)?.input?.value || []
+        useField(`categoryMappings.${category.id}`)?.input?.value ||
+        ([] as CategoryMapping[])
+
     const selectedMapping = useField(
         `programIndicatorMappings.${programIndicatorId}.disaggregation.${category.id}`,
         {
             initialValue:
-                availableMappings.length >= 1 ? availableMappings[0].id : null,
+                availableMappings.length >= 1
+                    ? availableMappings[0].id
+                    : undefined,
         }
+    )
+    const selected = useMemo(
+        () =>
+            availableMappings &&
+            availableMappings
+                .map((m: CategoryMappingsRecord) => m.id)
+                .includes(selectedMapping.input.value)
+                ? selectedMapping.input.value
+                : undefined,
+        [availableMappings, selectedMapping]
     )
 
     return (
@@ -165,13 +191,13 @@ export const CategoryMappingSelect = ({
                 onChange={(payload) =>
                     selectedMapping.input.onChange(payload.selected)
                 }
-                disabled={availableMappings.length <= 1}
+                disabled={availableMappings.length < 1}
                 placeholder={
                     availableMappings.length < 1
                         ? 'No mappings available'
                         : 'Select mapping'
                 }
-                selected={selectedMapping.input.value}
+                selected={selected}
             >
                 {availableMappings?.map((mapping: CategoryMapping) => (
                     <SingleSelectOption

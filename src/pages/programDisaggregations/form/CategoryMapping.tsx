@@ -51,6 +51,7 @@ const MappingNameModal = ({
                         onClick={() => {
                             onSave(mappingName)
                         }}
+                        primary
                     >
                         {i18n.t('Apply')}
                     </Button>
