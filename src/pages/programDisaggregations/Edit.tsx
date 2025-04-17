@@ -1,18 +1,28 @@
+import { useAlert, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
-import React, { useMemo } from 'react'
+import { pick } from 'lodash'
+import React, { useCallback, useMemo } from 'react'
 import { Form as ReactFinalForm } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import { z } from 'zod'
 import { SectionedFormFooter } from '../../components'
 import { LinkButton } from '../../components/LinkButton'
-import { DEFAULT_FIELD_FILTERS, useBoundResourceQueryFn } from '../../lib'
+import {
+    DEFAULT_FIELD_FILTERS,
+    parseErrorResponse,
+    sectionNames,
+    SECTIONS_MAP,
+    useBoundResourceQueryFn,
+    useNavigateWithSearchState,
+    usePatchModel,
+} from '../../lib'
+import { JsonPatchOperation } from '../../types'
 import {
     CategoryCombo,
     ModelCollectionResponse,
-    OptionMapping,
     PickWithFieldFilters,
     Program,
     ProgramIndicator,
@@ -52,7 +62,9 @@ export type ProgramIndicatorWithMapping = {
     id: string
 }
 type ProgramDisaggregationFormValues = {
-    categoryMappings: CategoryMappingsRecord
+    categoryMappings: CategoryMappingsRecord & {
+        deleted?: string[]
+    }
     programIndicatorMappings: ProgramIndicatorMappingsRecord
 }
 
@@ -82,8 +94,8 @@ export const apiResponseToFormValues = ({
         return acc
     }, {} as CategoryMappingsRecord)
 
-    const programIndicatorMappingsWithDataDimensionType =
-        programIndicators.programIndicators.reduce((acc, indicator) => {
+    const programIndicatorMappings = programIndicators.programIndicators.reduce(
+        (acc, indicator) => {
             const disAggCombo = indicator.categoryCombo
             const attributeCombo = indicator.attributeCombo
 
@@ -129,24 +141,6 @@ export const apiResponseToFormValues = ({
                 ...mappingByComboType,
             }
             return acc
-        }, {} as ProgramIndicatorMappingsRecord)
-
-    const programIndicatorMappings = programIndicators.programIndicators.reduce(
-        (acc, { id, ...rest }) => {
-            const disaggregation = Object.fromEntries(
-                rest.categoryCombo.categories.map((category, i) => [
-                    category.id,
-                    rest.categoryMappingIds[i],
-                ])
-            )
-            acc[id] = {
-                categoryCombo: rest.categoryCombo,
-                disaggregation,
-                attribute: {}, //for now doing everything in disaggregation
-                name: rest.name,
-                displayName: rest.displayName,
-            }
-            return acc
         },
         {} as ProgramIndicatorMappingsRecord
     )
@@ -154,8 +148,171 @@ export const apiResponseToFormValues = ({
     return {
         categoryMappings,
         programIndicatorMappings,
-        programIndicatorMappingsWithDataDimensionType,
     }
+}
+
+export const useUpdateProgramIndicatorMutation = () => {
+    const engine = useDataEngine()
+
+    const patch = useCallback(
+        async (
+            programIndicatorId: string,
+            newCategoryCombo: { id: string; displayName: string } | null,
+            newCategoryMappingsIds: string[]
+        ) => {
+            const patchOperations = {
+                type: 'json-patch',
+                resource: SECTIONS_MAP.programIndicator.namePlural,
+                id: programIndicatorId,
+                data: [
+                    {
+                        op: 'replace',
+                        path: '/categoryCombo',
+                        value: newCategoryCombo,
+                    },
+                    {
+                        op: 'replace',
+                        path: '/categoryMappingIds',
+                        value: newCategoryMappingsIds,
+                    },
+                ],
+            } as const
+
+            try {
+                const response = await engine.mutate(patchOperations)
+                return { data: response }
+            } catch (error) {
+                return { error: parseErrorResponse(error) }
+            }
+        },
+        [engine]
+    )
+
+    return patch
+}
+
+export const useOnSubmit = (
+    programId: string,
+    initialValues: ProgramDisaggregationFormValues
+) => {
+    const saveAlert = useAlert(
+        ({ message }) => message,
+        (options) => options
+    )
+    const patchPrograms = usePatchModel(
+        programId,
+        SECTIONS_MAP.program.namePlural
+    )
+    const patchProgramIndicators = useUpdateProgramIndicatorMutation()
+    const navigate = useNavigateWithSearchState()
+
+    return useMemo(
+        () => async (values: ProgramDisaggregationFormValues) => {
+            if (!values) {
+                console.error('Tried to save new object without any changes', {
+                    values,
+                })
+                saveAlert.show({
+                    message: i18n.t('Cannot save empty object'),
+                    error: true,
+                })
+                return
+            }
+            const { deleted, ...catMappings } = values.categoryMappings
+            const cleanCatMappings = Object.fromEntries(
+                Object.entries(catMappings).filter(
+                    ([key]) => !deleted || !deleted.includes(key)
+                )
+            )
+            const newCategoryMappings = Object.values(cleanCatMappings)
+                .flat()
+                .map(({ id, categoryId, mappingName, options }) => ({
+                    id,
+                    categoryId,
+                    mappingName,
+                    optionMappings:
+                        options &&
+                        Object.entries(options).map(([id, value]) => ({
+                            optionId: id,
+                            filter: value.filter,
+                        })),
+                }))
+            const programsJsonPatchOperations = [
+                {
+                    op: 'replace',
+                    path: '/categoryMappings',
+                    value: newCategoryMappings,
+                },
+            ] as JsonPatchOperation[]
+            const response = await patchPrograms(programsJsonPatchOperations)
+            if (response.error) {
+                saveAlert.show({
+                    message: i18n.t(
+                        'Error while saving disaggregation categories'
+                    ),
+                    error: true,
+                })
+                return
+            }
+
+            Object.keys(values.programIndicatorMappings).map(
+                async (programIndicatorId) => {
+                    const programIndicatorMapping =
+                        values.programIndicatorMappings[programIndicatorId]
+                    const newCategoryCombo =
+                        programIndicatorMapping.categoryCombo
+                            ? pick(programIndicatorMapping.categoryCombo, [
+                                  'id',
+                                  'displayName',
+                              ])
+                            : null
+                    const newCategoryMappingsIds =
+                        programIndicatorMapping.categoryCombo
+                            ? programIndicatorMapping.categoryCombo.categories.map(
+                                  (category) =>
+                                      programIndicatorMapping.disaggregation[
+                                          category.id
+                                      ]
+                              )
+                            : []
+
+                    const response = await patchProgramIndicators(
+                        programIndicatorId,
+                        newCategoryCombo,
+                        newCategoryMappingsIds
+                    )
+                    if (response.error) {
+                        saveAlert.show({
+                            message: i18n.t(
+                                `Error while saving mappings for program indicator with id ${programIndicatorId}`
+                            ),
+                            error: true,
+                        })
+                    }
+                }
+            )
+            const deletedPiMappings = Object.keys(
+                initialValues.programIndicatorMappings
+            ).filter((piMapping) => !values.programIndicatorMappings[piMapping])
+            deletedPiMappings.map(async (programIndicatorId) => {
+                const response = await patchProgramIndicators(
+                    programIndicatorId,
+                    null,
+                    []
+                )
+                if (response.error) {
+                    saveAlert.show({
+                        message: i18n.t(
+                            `Error while deleting mappings for program indicator with id ${programIndicatorId}`
+                        ),
+                        error: true,
+                    })
+                }
+            })
+            navigate(`/${SECTIONS_MAP.programDisaggregation.namePlural}`)
+        },
+        [saveAlert, navigate, patchPrograms]
+    )
 }
 
 export const Component = () => {
@@ -218,33 +375,32 @@ export const Component = () => {
         <div>
             <ReactFinalForm
                 initialValues={initialValues}
-                onSubmit={() => {}}
+                onSubmit={useOnSubmit(id, initialValues)}
                 mutators={{ ...arrayMutators }}
                 destroyOnUnregister={false}
             >
-                {() => {
+                {({ handleSubmit }) => {
                     return (
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <ProgramDisaggregationFormFields
                                 initialProgramIndicators={
                                     initialProgramIndicators
                                 }
                             />
-                            <SectionedFormFooter />
+                            <SectionedFormFooter>
+                                <SectionedFormFooter.FormActions>
+                                    <Button primary type="submit">
+                                        {i18n.t('Save and exit')}
+                                    </Button>
+                                    <LinkButton to={'..'}>
+                                        {i18n.t('Exit without saving')}
+                                    </LinkButton>
+                                </SectionedFormFooter.FormActions>
+                            </SectionedFormFooter>
                         </form>
                     )
                 }}
             </ReactFinalForm>
-            <SectionedFormFooter>
-                <SectionedFormFooter.FormActions>
-                    <Button primary type="submit" onClick={() => {}}>
-                        {i18n.t('Save and exit')}
-                    </Button>
-                    <LinkButton to={'..'}>
-                        {i18n.t('Exit without saving')}
-                    </LinkButton>
-                </SectionedFormFooter.FormActions>
-            </SectionedFormFooter>
         </div>
     )
 }
