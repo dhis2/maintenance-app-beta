@@ -157,6 +157,12 @@ export const CategoryMappingSelect = ({
                 availableMappings.length >= 1 ? availableMappings[0].id : null,
         }
     )
+    const scrollToElement = (id: string) => {
+        const el = document.getElementById(id)
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+    }
 
     return (
         <div className={css.mappingSelectWrapper}>
@@ -181,7 +187,13 @@ export const CategoryMappingSelect = ({
                     />
                 ))}
             </SingleSelectField>
-            <Button className={css.mappingSelectAddMappingButton} secondary>
+            <Button
+                className={css.mappingSelectAddMappingButton}
+                secondary
+                onClick={() => {
+                    scrollToElement('disaggregationCategories')
+                }}
+            >
                 {i18n.t('Add mapping')}
             </Button>
         </div>

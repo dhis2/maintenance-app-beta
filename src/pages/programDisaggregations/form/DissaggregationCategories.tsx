@@ -274,9 +274,7 @@ export const DisaggregationCategories = () => {
     }
 
     return (
-        // remove later styling, just to give proper colour
         <SectionedFormSection name="disaggregationCategories">
-            {/* <div className={css.tempContainer}> */}
             <StandardFormSectionTitle>
                 {i18n.t('Disaggregation categories')}
             </StandardFormSectionTitle>
@@ -305,7 +303,6 @@ export const DisaggregationCategories = () => {
                     />
                 ))}
             </div>
-            {/* </div> */}
         </SectionedFormSection>
     )
 }
