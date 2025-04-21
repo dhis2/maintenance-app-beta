@@ -8,6 +8,7 @@ import {
     CollapsibleCardHeader,
     CollapsibleCardTitle,
     SectionedFormSection,
+    StandardFormSectionTitle,
 } from '../../../components'
 import {
     ModelSingleSelect,
@@ -42,6 +43,9 @@ export const ProgramIndicatorMappingSection = ({
         )
     return (
         <SectionedFormSection name="programIndicatorMappings">
+            <StandardFormSectionTitle>
+                {i18n.t('Program Indicator mapping')}
+            </StandardFormSectionTitle>
             <ModelSingleSelect<DisplayableModel>
                 query={{
                     resource: 'programIndicators',
