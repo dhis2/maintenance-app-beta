@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, CircularLoader, CenteredContent, NoticeBox } from '@dhis2/ui'
+import { Button, CircularLoader, NoticeBox } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import React, { useMemo } from 'react'
@@ -12,7 +12,6 @@ import { DEFAULT_FIELD_FILTERS, useBoundResourceQueryFn } from '../../lib'
 import {
     CategoryCombo,
     ModelCollectionResponse,
-    OptionMapping,
     PickWithFieldFilters,
     Program,
     ProgramIndicator,
@@ -23,6 +22,9 @@ import {
     CategoryMappingsRecord,
     ProgramIndicatorMappingsRecord,
 } from './form/programDisaggregationSchema'
+import PiDissaggreationLayout, {
+    PiSectionedFormFooter,
+} from './layout/PiDissaggreationLayout'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -219,9 +221,17 @@ export const Component = () => {
 
     if (isLoading) {
         return (
-            <CenteredContent>
+            <div
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
                 <CircularLoader />
-            </CenteredContent>
+            </div>
         )
     }
     if (isError) {
@@ -243,7 +253,7 @@ export const Component = () => {
     }
 
     return (
-        <div>
+        <PiDissaggreationLayout>
             <ReactFinalForm
                 initialValues={initialValues}
                 onSubmit={() => {}}
@@ -263,16 +273,16 @@ export const Component = () => {
                     )
                 }}
             </ReactFinalForm>
-            <SectionedFormFooter>
-                <SectionedFormFooter.FormActions>
+            <PiSectionedFormFooter>
+                <PiSectionedFormFooter.FormActions>
                     <Button primary type="submit" onClick={() => {}}>
                         {i18n.t('Save and exit')}
                     </Button>
                     <LinkButton to={'..'}>
                         {i18n.t('Exit without saving')}
                     </LinkButton>
-                </SectionedFormFooter.FormActions>
-            </SectionedFormFooter>
-        </div>
+                </PiSectionedFormFooter.FormActions>
+            </PiSectionedFormFooter>
+        </PiDissaggreationLayout>
     )
 }

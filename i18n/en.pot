@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-04-14T18:25:44.569Z\n"
-"PO-Revision-Date: 2025-04-14T18:25:44.569Z\n"
+"POT-Creation-Date: 2025-04-20T03:53:15.975Z\n"
+"PO-Revision-Date: 2025-04-20T03:53:15.975Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -117,8 +117,8 @@ msgstr "Some fields have validation errors. Please fix them before saving."
 msgid "Something went wrong when submitting the form"
 msgstr "Something went wrong when submitting the form"
 
-msgid "Hide Error details"
-msgstr "Hide Error details"
+msgid "Hide error details"
+msgstr "Hide error details"
 
 msgid "Show error details"
 msgstr "Show error details"
@@ -2185,6 +2185,83 @@ msgstr ""
 msgid "Manage"
 msgstr "Manage"
 
+msgid "Error"
+msgstr "Error"
+
+msgid "Could not load programs or indicators data."
+msgstr "Could not load programs or indicators data."
+
+msgid "Add a category"
+msgstr "Add a category"
+
+msgid "Add categories from a category combination"
+msgstr "Add categories from a category combination"
+
+msgid "Rename category mapping"
+msgstr "Rename category mapping"
+
+msgid "Apply"
+msgstr "Apply"
+
+msgid "{{- categoryMappingName}} mapping will be deleted on save"
+msgstr "{{- categoryMappingName}} mapping will be deleted on save"
+
+msgid "Undo delete"
+msgstr "Undo delete"
+
+msgid "Mapping: "
+msgstr "Mapping: "
+
+msgid ""
+"There are no category combinations. Your system must have at least one "
+"category combination in order to disaggregate a program indicator."
+msgstr ""
+"There are no category combinations. Your system must have at least one "
+"category combination in order to disaggregate a program indicator."
+
+msgid "No new categories to add"
+msgstr "No new categories to add"
+
+msgid "One category added"
+msgstr "One category added"
+
+msgid "{{newlyAddedCount}} categories added"
+msgstr "{{newlyAddedCount}} categories added"
+
+msgid ""
+"{{newlyAddedCount}} categories added ({{alreadyAddedCount}} already in the "
+"list)"
+msgstr ""
+"{{newlyAddedCount}} categories added ({{alreadyAddedCount}} already in the "
+"list)"
+
+msgid "Disaggregation categories"
+msgstr "Disaggregation categories"
+
+msgid "Category:"
+msgstr "Category:"
+
+msgid "Suggested based on Program Indicator selections"
+msgstr "Suggested based on Program Indicator selections"
+
+msgid "Add category"
+msgstr "Add category"
+
+msgid "{{- categoryName}} and all mappings will be deleted on save"
+msgstr "{{- categoryName}} and all mappings will be deleted on save"
+
+msgid "Add mapping"
+msgstr "Add mapping"
+
+msgid "Add a program indicator"
+msgstr "Add a program indicator"
+
+msgid "Program Indicator:"
+msgstr "Program Indicator:"
+
+msgid "Remove program indicator mapping"
+msgstr "Remove program indicator mapping"
+
 msgid "Could not delete program mappings"
 msgstr "Could not delete program mappings"
 
@@ -2193,9 +2270,6 @@ msgstr "Select a Program"
 
 msgid "Programs with existing mappings"
 msgstr "Programs with existing mappings"
-
-msgid "Error"
-msgstr "Error"
 
 msgid "Could not load programs."
 msgstr "Could not load programs."
@@ -2219,62 +2293,3 @@ msgstr "Maintenance (Preview)"
 msgctxt "Application description"
 msgid "__MANIFEST_APP_DESCRIPTION"
 msgstr ""
-
-msgid "Add a category"
-msgstr "Add a category"
-
-msgid "Add categories from a category combination"
-msgstr "Add categories from a category combination"
-
-msgid "Rename category mapping"
-msgstr "Rename category mapping"
-
-msgid "Apply"
-msgstr "Apply"
-
-msgid "{{categoryMappingName}} mapping will be deleted on save"
-msgstr "{{categoryMappingName}} mapping will be deleted on save"
-
-msgid "Undo delete"
-msgstr "Undo delete"
-
-msgid "Mapping: "
-msgstr "Mapping: "
-
-msgid ""
-"There are no category combinations. Your system must have at least one "
-"category combination in order to disaggregate a program indicator."
-msgstr ""
-"There are no category combinations. Your system must have at least one "
-"category combination in order to disaggregate a program indicator."
-
-msgid "No new categories to add"
-msgstr "No new categories to add"
-
-msgid "1 category added"
-msgstr "1 category added"
-
-msgid "{{newlyAddedCount}} categories added"
-msgstr "{{newlyAddedCount}} categories added"
-
-msgid ""
-"{{newlyAddedCount}} categories added ({{alreadyAddedCount}} already in the "
-"list)"
-msgstr ""
-"{{newlyAddedCount}} categories added ({{alreadyAddedCount}} already in the "
-"list)"
-
-msgid "Disaggregation categories"
-msgstr "Disaggregation categories"
-
-msgid "Suggested based on Program Indicator selections"
-msgstr "Suggested based on Program Indicator selections"
-
-msgid "Add category"
-msgstr "Add category"
-
-msgid "{{categoryName}} and all mappings will be deleted on save"
-msgstr "{{categoryName}} and all mappings will be deleted on save"
-
-msgid "Add mapping"
-msgstr "Add mapping"

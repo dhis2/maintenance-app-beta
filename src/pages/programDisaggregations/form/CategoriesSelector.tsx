@@ -19,7 +19,7 @@ export const CategoriesSelector = ({
     addCategoryCombo: (id: string) => void
 }) => {
     return (
-        <>
+        <div className={css.selectorWrapper}>
             <div className={css.selectorContainer}>
                 <SingleSelectField
                     label={i18n.t('Add a category')}
@@ -55,6 +55,6 @@ export const CategoriesSelector = ({
                     ))}
                 </SingleSelectField>
             </div>
-        </>
+        </div>
     )
 }

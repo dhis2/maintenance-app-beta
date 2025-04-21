@@ -1,12 +1,7 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import {
-    Button,
-    IconChevronDown24,
-    IconChevronRight24,
-    IconInfo16,
-} from '@dhis2/ui'
-import { useQuery, UseQueryResult } from '@tanstack/react-query'
+import { Button, IconInfo16 } from '@dhis2/ui'
+import { useQuery } from '@tanstack/react-query'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useField, useForm, useFormState } from 'react-final-form'
 import { useFieldArray } from 'react-final-form-arrays'
@@ -14,13 +9,13 @@ import {
     CollapsibleCard,
     CollapsibleCardHeader,
     CollapsibleCardTitle,
+    SectionedFormSection,
     StandardFormSectionTitle,
 } from '../../../components'
 import { generateDhis2Id, useBoundResourceQueryFn } from '../../../lib'
 import { CategoriesSelector } from './CategoriesSelector'
 import { CategoryMapping } from './CategoryMapping'
 import css from './DissaggregationCategories.module.css'
-import { ProgramData } from '../Edit'
 
 type CategoryOption = {
     id: string
@@ -280,7 +275,8 @@ export const DisaggregationCategories = () => {
 
     return (
         // remove later styling, just to give proper colour
-        <div className={css.tempContainer}>
+        <SectionedFormSection name="disaggregationCategories">
+            {/* <div className={css.tempContainer}> */}
             <StandardFormSectionTitle>
                 {i18n.t('Disaggregation categories')}
             </StandardFormSectionTitle>
@@ -309,7 +305,8 @@ export const DisaggregationCategories = () => {
                     />
                 ))}
             </div>
-        </div>
+            {/* </div> */}
+        </SectionedFormSection>
     )
 }
 
@@ -415,7 +412,7 @@ export const DisaggregationCategory = ({
                             ])
                         }}
                     >
-                        {i18n.t('Remove')}
+                        {i18n.t('Remove category')}
                     </Button>
                 </CollapsibleCardHeader>
             }

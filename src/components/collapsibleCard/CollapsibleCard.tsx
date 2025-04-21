@@ -9,7 +9,6 @@ export type CollapsibleCardProps = {
     unMount?: boolean
     headerElement?: React.ReactNode
     style?: React.CSSProperties
-
 }
 export const CollapsibleCard = ({
     children,
