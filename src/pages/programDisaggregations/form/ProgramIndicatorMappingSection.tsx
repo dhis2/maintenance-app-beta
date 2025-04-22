@@ -160,9 +160,16 @@ export const CategoryMappingSelect = ({
     category: DisplayableModel
     programIndicatorId: string
 }) => {
-    const availableMappings =
+    const availableWithDeletedMappings =
         useField(`categoryMappings.${category.id}`)?.input?.value ||
         ([] as CategoryMapping[])
+    const deletedCategories =
+        useField('categoryMappings.deleted')?.input?.value ?? []
+    const availableMappings = deletedCategories.includes(category.id)
+        ? []
+        : availableWithDeletedMappings.filter(
+              ({ deleted }: { deleted: boolean }) => !deleted
+          )
 
     const selectedMapping = useField(
         `programIndicatorMappings.${programIndicatorId}.disaggregation.${category.id}`,
