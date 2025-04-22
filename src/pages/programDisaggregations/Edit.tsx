@@ -13,7 +13,6 @@ import { LinkButton } from '../../components/LinkButton'
 import {
     DEFAULT_FIELD_FILTERS,
     parseErrorResponse,
-    sectionNames,
     SECTIONS_MAP,
     useBoundResourceQueryFn,
     useNavigateWithSearchState,
@@ -28,11 +27,16 @@ import {
     ProgramIndicator,
 } from '../../types/generated'
 import { ProgramDisaggregationFormFields } from './form'
+import { apiResponseToFormValues } from './form/apiResponseToFormValues'
 import {
     categoryMapping,
     CategoryMappingsRecord,
     ProgramIndicatorMappingsRecord,
 } from './form/programDisaggregationSchema'
+import {
+    useUpdateProgramIndicatorMutation,
+    useUpdateProgramMutation,
+} from './form/useUpdateProgramIndicatorMutation'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -68,129 +72,6 @@ type ProgramDisaggregationFormValues = {
     programIndicatorMappings: ProgramIndicatorMappingsRecord
 }
 
-export const apiResponseToFormValues = ({
-    program,
-    programIndicators,
-}: {
-    program: ProgramData
-    programIndicators: ProgramIndicatorData
-}) => {
-    // group categoryMappings per categoryId
-    const categoryMappings = program.categoryMappings.reduce((acc, mapping) => {
-        acc[mapping.categoryId] = [
-            ...(acc[mapping.categoryId] || []),
-            {
-                ...mapping,
-                deleted: false,
-                options: mapping.optionMappings.reduce((opts, opt) => {
-                    opts[opt.optionId] = {
-                        filter: opt.filter,
-                        optionId: opt.optionId,
-                    }
-                    return opts
-                }, {} as Record<string, { filter: string; optionId: string }>),
-            },
-        ]
-        return acc
-    }, {} as CategoryMappingsRecord)
-
-    const programIndicatorMappings = programIndicators.programIndicators.reduce(
-        (acc, indicator) => {
-            const disAggCombo = indicator.categoryCombo
-            const attributeCombo = indicator.attributeCombo
-
-            const getMappingType = (
-                catMapping: z.infer<typeof categoryMapping>
-            ) => {
-                const inCombo = [disAggCombo, attributeCombo].find((combo) =>
-                    combo.categories.some(
-                        (cat) => cat.id === catMapping.categoryId
-                    )
-                )
-                return inCombo?.dataDimensionType
-            }
-            const mappingsList = Object.values(categoryMappings).flat()
-            const mappingByComboType = {
-                disaggregation: {},
-                attribute: {},
-            }
-
-            indicator.categoryMappingIds.forEach((categoryMappingId) => {
-                const categoryMapping = mappingsList.find(
-                    (cm) => cm.id === categoryMappingId
-                )
-                if (!categoryMapping) {
-                    return acc
-                }
-                const type = getMappingType(categoryMapping)
-                if (!type) {
-                    return acc
-                }
-                const key =
-                    type === CategoryCombo.dataDimensionType.DISAGGREGATION
-                        ? 'disaggregation'
-                        : 'attribute'
-
-                mappingByComboType[key] = {
-                    ...mappingByComboType[key],
-                    [categoryMapping.categoryId]: categoryMappingId,
-                }
-            })
-            acc[indicator.id] = {
-                ...indicator,
-                ...mappingByComboType,
-            }
-            return acc
-        },
-        {} as ProgramIndicatorMappingsRecord
-    )
-
-    return {
-        categoryMappings,
-        programIndicatorMappings,
-    }
-}
-
-export const useUpdateProgramIndicatorMutation = () => {
-    const engine = useDataEngine()
-
-    const patch = useCallback(
-        async (
-            programIndicatorId: string,
-            newCategoryCombo: { id: string; displayName: string } | null,
-            newCategoryMappingsIds: string[]
-        ) => {
-            const patchOperations = {
-                type: 'json-patch',
-                resource: SECTIONS_MAP.programIndicator.namePlural,
-                id: programIndicatorId,
-                data: [
-                    {
-                        op: 'replace',
-                        path: '/categoryCombo',
-                        value: newCategoryCombo,
-                    },
-                    {
-                        op: 'replace',
-                        path: '/categoryMappingIds',
-                        value: newCategoryMappingsIds,
-                    },
-                ],
-            } as const
-
-            try {
-                const response = await engine.mutate(patchOperations)
-                return { data: response }
-            } catch (error) {
-                return { error: parseErrorResponse(error) }
-            }
-        },
-        [engine]
-    )
-
-    return patch
-}
-
 export const useOnSubmit = (
     programId: string,
     initialValues: ProgramDisaggregationFormValues
@@ -199,10 +80,8 @@ export const useOnSubmit = (
         ({ message }) => message,
         (options) => options
     )
-    const patchPrograms = usePatchModel(
-        programId,
-        SECTIONS_MAP.program.namePlural
-    )
+
+    const patchPrograms = useUpdateProgramMutation(programId)
     const patchProgramIndicators = useUpdateProgramIndicatorMutation()
     const navigate = useNavigateWithSearchState()
 
@@ -218,33 +97,9 @@ export const useOnSubmit = (
                 })
                 return
             }
-            const { deleted, ...catMappings } = values.categoryMappings
-            const cleanCatMappings = Object.fromEntries(
-                Object.entries(catMappings).filter(
-                    ([key]) => !deleted || !deleted.includes(key)
-                )
-            )
-            const newCategoryMappings = Object.values(cleanCatMappings)
-                .flat()
-                .map(({ id, categoryId, mappingName, options }) => ({
-                    id,
-                    categoryId,
-                    mappingName,
-                    optionMappings:
-                        options &&
-                        Object.entries(options).map(([id, value]) => ({
-                            optionId: id,
-                            filter: value.filter,
-                        })),
-                }))
-            const programsJsonPatchOperations = [
-                {
-                    op: 'replace',
-                    path: '/categoryMappings',
-                    value: newCategoryMappings,
-                },
-            ] as JsonPatchOperation[]
-            const response = await patchPrograms(programsJsonPatchOperations)
+
+            const response = await patchPrograms(values.categoryMappings)
+
             if (response.error) {
                 saveAlert.show({
                     message: i18n.t(
@@ -255,61 +110,55 @@ export const useOnSubmit = (
                 return
             }
 
-            Object.keys(values.programIndicatorMappings).map(
-                async (programIndicatorId) => {
-                    const programIndicatorMapping =
-                        values.programIndicatorMappings[programIndicatorId]
-                    const newCategoryCombo =
-                        programIndicatorMapping.categoryCombo
-                            ? pick(programIndicatorMapping.categoryCombo, [
-                                  'id',
-                                  'displayName',
-                              ])
-                            : null
-                    const newCategoryMappingsIds =
-                        programIndicatorMapping.categoryCombo
-                            ? programIndicatorMapping.categoryCombo.categories.map(
-                                  (category) =>
-                                      programIndicatorMapping.disaggregation[
-                                          category.id
-                                      ]
-                              )
-                            : []
+            const piMappingsUpdateResponses = await Promise.all(
+                Object.keys(values.programIndicatorMappings).map(
+                    async (programIndicatorId) => {
+                        const programIndicatorMapping =
+                            values.programIndicatorMappings[programIndicatorId]
 
-                    const response = await patchProgramIndicators(
-                        programIndicatorId,
-                        newCategoryCombo,
-                        newCategoryMappingsIds
-                    )
-                    if (response.error) {
-                        saveAlert.show({
-                            message: i18n.t(
-                                `Error while saving mappings for program indicator with id ${programIndicatorId}`
-                            ),
-                            error: true,
-                        })
+                        const response = await patchProgramIndicators(
+                            programIndicatorId,
+                            programIndicatorMapping
+                        )
+
+                        return { ...response, id: programIndicatorId }
                     }
-                }
-            )
-            const deletedPiMappings = Object.keys(
-                initialValues.programIndicatorMappings
-            ).filter((piMapping) => !values.programIndicatorMappings[piMapping])
-            deletedPiMappings.map(async (programIndicatorId) => {
-                const response = await patchProgramIndicators(
-                    programIndicatorId,
-                    null,
-                    []
                 )
-                if (response.error) {
-                    saveAlert.show({
-                        message: i18n.t(
-                            `Error while deleting mappings for program indicator with id ${programIndicatorId}`
-                        ),
-                        error: true,
+            )
+
+            const piMappingsDeleteResponses = await Promise.all(
+                Object.keys(initialValues.programIndicatorMappings)
+                    .filter(
+                        (piMapping) =>
+                            !values.programIndicatorMappings[piMapping]
+                    )
+                    .map(async (programIndicatorId) => {
+                        const response = await patchProgramIndicators(
+                            programIndicatorId,
+                            null
+                        )
+                        return { ...response, id: programIndicatorId }
                     })
-                }
-            })
-            navigate(`/${SECTIONS_MAP.programDisaggregation.namePlural}`)
+            )
+
+            const piMappingsResponses = [
+                ...piMappingsUpdateResponses,
+                ...piMappingsDeleteResponses,
+            ]
+
+            const errors = piMappingsResponses.filter((res) => res.error)
+            if (errors.length > 0) {
+                saveAlert.show({
+                    message: i18n.t(
+                        `Error while updating mappings for program indicators with ids: ${errors
+                            .map((r) => r.id)
+                            .join(' - ')}`
+                    ),
+                    error: true,
+                })
+            } else {
+                navigate(`/${SECTIONS_MAP.programDisaggregation.namePlural}`)
+            }
         },
         [saveAlert, navigate, patchPrograms]
     )
