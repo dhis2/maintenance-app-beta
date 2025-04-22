@@ -1,11 +1,26 @@
 import { z } from 'zod'
-import { CategoryCombo } from '../../../types/generated'
+import { Category, CategoryCombo } from '../../../types/generated'
 import { ProgramData, ProgramIndicatorData } from '../Edit'
 import {
     categoryMapping,
     CategoryMappingsRecord,
     ProgramIndicatorMappingsRecord,
 } from './programDisaggregationSchema'
+
+const getMappingType = (
+    catMapping: z.infer<typeof categoryMapping>,
+    combos: {
+        categories: {
+            id: string
+        }[]
+        dataDimensionType: Category.dataDimensionType
+    }[]
+) => {
+    const inCombo = combos.find((combo) =>
+        combo.categories.some((cat) => cat.id === catMapping.categoryId)
+    )
+    return inCombo?.dataDimensionType
+}
 
 export const apiResponseToFormValues = ({
     program,
@@ -17,7 +32,7 @@ export const apiResponseToFormValues = ({
     // group categoryMappings per categoryId
     const categoryMappings = program.categoryMappings.reduce((acc, mapping) => {
         acc[mapping.categoryId] = [
-            ...(acc[mapping.categoryId] || []),
+            ...(acc[mapping.categoryId] ?? []),
             {
                 ...mapping,
                 deleted: false,
@@ -38,16 +53,6 @@ export const apiResponseToFormValues = ({
             const disAggCombo = indicator.categoryCombo
             const attributeCombo = indicator.attributeCombo
 
-            const getMappingType = (
-                catMapping: z.infer<typeof categoryMapping>
-            ) => {
-                const inCombo = [disAggCombo, attributeCombo].find((combo) =>
-                    combo.categories.some(
-                        (cat) => cat.id === catMapping.categoryId
-                    )
-                )
-                return inCombo?.dataDimensionType
-            }
             const mappingsList = Object.values(categoryMappings).flat()
             const mappingByComboType = {
                 disaggregation: {},
@@ -61,7 +66,10 @@ export const apiResponseToFormValues = ({
                 if (!categoryMapping) {
                     return acc
                 }
-                const type = getMappingType(categoryMapping)
+                const type = getMappingType(categoryMapping, [
+                    disAggCombo,
+                    attributeCombo,
+                ])
                 if (!type) {
                     return acc
                 }

@@ -1,26 +1,20 @@
-import { useAlert, useDataEngine } from '@dhis2/app-runtime'
+import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
-import { pick } from 'lodash'
-import React, { useCallback, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { Form as ReactFinalForm } from 'react-final-form'
 import { useParams } from 'react-router-dom'
-import { z } from 'zod'
 import { SectionedFormFooter } from '../../components'
 import { LinkButton } from '../../components/LinkButton'
 import {
     DEFAULT_FIELD_FILTERS,
-    parseErrorResponse,
     SECTIONS_MAP,
     useBoundResourceQueryFn,
     useNavigateWithSearchState,
-    usePatchModel,
 } from '../../lib'
-import { JsonPatchOperation } from '../../types'
 import {
-    CategoryCombo,
     ModelCollectionResponse,
     PickWithFieldFilters,
     Program,
@@ -29,7 +23,6 @@ import {
 import { ProgramDisaggregationFormFields } from './form'
 import { apiResponseToFormValues } from './form/apiResponseToFormValues'
 import {
-    categoryMapping,
     CategoryMappingsRecord,
     ProgramIndicatorMappingsRecord,
 } from './form/programDisaggregationSchema'
@@ -160,7 +153,13 @@ export const useOnSubmit = (
                 navigate(`/${SECTIONS_MAP.programDisaggregation.namePlural}`)
             }
         },
-        [saveAlert, navigate, patchPrograms]
+        [
+            saveAlert,
+            navigate,
+            patchPrograms,
+            initialValues.programIndicatorMappings,
+            patchProgramIndicators,
+        ]
     )
 }
 
