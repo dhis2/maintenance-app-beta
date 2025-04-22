@@ -51,6 +51,7 @@ const PiDisaggregationLayout = ({
                                     block: 'start',
                                 })
                             }
+                            setActiveTab(tab.id)
                         }
 
                         return (
