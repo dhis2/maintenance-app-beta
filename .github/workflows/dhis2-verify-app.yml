@@ -20,8 +20,8 @@ jobs:
             - uses: actions/setup-node@v3
               with:
                   node-version: 20
+                  cache: yarn
 
-            - uses: c-hive/gha-yarn-cache@v2
             - run: yarn install --frozen-lockfile
 
             - name: Check types
