@@ -20,8 +20,8 @@ jobs:
             - uses: actions/setup-node@v3
               with:
                   node-version: 20
+                  cache: 'yarn'
 
-            - uses: c-hive/gha-yarn-cache@v1
             - run: yarn install --frozen-lockfile
 
             - name: Check types
@@ -45,8 +45,8 @@ jobs:
             - uses: actions/setup-node@v3
               with:
                   node-version: 20
+                  cache: 'yarn'
 
-            - uses: c-hive/gha-yarn-cache@v1
             - run: yarn install --frozen-lockfile
 
             # Can be removed if translations aren't required for tests,
@@ -64,8 +64,8 @@ jobs:
             - uses: actions/setup-node@v3
               with:
                   node-version: 20
+                  cache: 'yarn'
 
-            - uses: c-hive/gha-yarn-cache@v1
             - run: yarn install --frozen-lockfile
 
             - name: Test
@@ -87,6 +87,7 @@ jobs:
     #         - uses: actions/setup-node@v1
     #           with:
     #               node-version: 20
+    #               cache: 'yarn'
 
     #         - name: End-to-End tests
     #           uses: cypress-io/github-action@v5
@@ -118,13 +119,13 @@ jobs:
             - uses: actions/setup-node@v3
               with:
                   node-version: 20
+                  cache: 'yarn'
 
             - uses: actions/download-artifact@v4
               with:
                   name: app-build
 
             # ensure that d2-app-scripts is available
-            - uses: c-hive/gha-yarn-cache@v1
             - run: yarn install --frozen-lockfile
 
             - uses: dhis2/action-semantic-release@master
