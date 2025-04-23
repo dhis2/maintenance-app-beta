@@ -9,7 +9,6 @@ import { useParams } from 'react-router-dom'
 import {
     DefaultSectionedFormFooter,
     DefaultSectionedFormSidebar,
-    SectionedFormFooter,
     SectionedFormLayout,
 } from '../../components'
 import {
@@ -264,7 +263,7 @@ export const Component = () => {
                 mutators={{ ...arrayMutators }}
                 destroyOnUnregister={false}
             >
-                {({ handleSubmit }) => {
+                {({ handleSubmit, submitting, dirty }) => {
                     return (
                         <>
                             {isLoading && (
@@ -300,7 +299,7 @@ export const Component = () => {
                             {!isLoading && !isError && (
                                 <SectionedFormLayout
                                     sidebar={<DefaultSectionedFormSidebar />}
-                                    footer={<DefaultSectionedFormFooter />}
+                                    footer={<DefaultSectionedFormFooter submitting={submitting} dirty={dirty} />}
                                 >
                                     <form onSubmit={handleSubmit}>
                                         <ProgramDisaggregationFormFields
@@ -308,7 +307,6 @@ export const Component = () => {
                                                 initialProgramIndicators
                                             }
                                         />
-                                        <SectionedFormFooter />
                                     </form>
                                 </SectionedFormLayout>
                             )}

@@ -6,7 +6,13 @@ import { useSectionedFormContext, useSelectedSection } from '../../lib'
 import { LinkButton } from '../LinkButton'
 import { SectionedFormFooter } from './SectionedFormFooter'
 
-export const DefaultSectionedFormFooter = () => {
+export const DefaultSectionedFormFooter = ({
+    submitting,
+    dirty,
+}: {
+    submitting?: boolean
+    dirty?: boolean
+}) => {
     const descriptor = useSectionedFormContext()
     const [selected, setSelectedSection] = useSelectedSection()
 
@@ -47,7 +53,13 @@ export const DefaultSectionedFormFooter = () => {
                 )}
             </SectionedFormFooter.SectionActions>
             <SectionedFormFooter.FormActions>
-                <Button primary type="submit" onClick={submit}>
+                <Button
+                    primary
+                    type="submit"
+                    onClick={submit}
+                    loading={submitting}
+                    disabled={!dirty || submitting}
+                >
                     {i18n.t('Save and exit')}
                 </Button>
                 <LinkButton to={'..'}>
