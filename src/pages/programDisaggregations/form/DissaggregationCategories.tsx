@@ -113,21 +113,6 @@ type ProgramIndicatorValue = Record<
     }
 >
 
-// const getCategoriesFromProgramIndicatorSelections = (
-//     programIndicatorsValue: ProgramIndicatorValue,
-//     categoriesWithMappings: string[]
-// ) => {
-//     const programCategories = Object.values(programIndicatorsValue)
-//         ?.map((piValue) => {
-//             return piValue?.categoryCombo?.categories
-//         })
-//         ?.flat()
-//         ?.map((category) => category?.id)
-//     return [...new Set(programCategories)].filter(
-//         (id) => !categoriesWithMappings.includes(id)
-//     )
-// }
-
 const useProgramIndicatorSelectionCategories = (
     categoriesWithMappings: string[]
 ) => {

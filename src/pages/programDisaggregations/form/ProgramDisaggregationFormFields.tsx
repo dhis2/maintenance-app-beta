@@ -9,9 +9,6 @@ export const ProgramDisaggregationFormFields = ({
 }: {
     initialProgramIndicators: ProgramIndicatorWithMapping[]
 }) => {
-    // const formState = useFormState()
-    // const array = useFieldArray('categoryMappings.cX5k9anHEHd')
-
     return (
         <div>
             <SectionedFormSections>
