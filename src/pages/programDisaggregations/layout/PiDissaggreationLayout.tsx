@@ -1,76 +1,52 @@
-import React, { useEffect, useState } from 'react'
+import i18n from '@dhis2/d2-i18n'
+import React from 'react'
+import { DefaultSectionedFormSidebar } from '../../../components'
+import { SectionedFormProvider } from '../../../lib'
 import styles from './PiDisaggregationLayout.module.css'
-
-const tabs = [
-    { label: 'Program indicator mapping', id: 'programIndicatorMappings' },
-    { label: 'Disaggregation categories', id: 'disaggregationCategories' },
-    // { label: 'Attribute categories', id: 'attributeCategories' },
-]
 
 const PiDisaggregationLayout = ({
     children,
 }: {
     children: React.ReactNode
 }) => {
-    const [activeTab, setActiveTab] = useState<string>(tabs[0].id)
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                const visible = entries.find((entry) => entry.isIntersecting)
-                if (visible?.target?.id) {
-                    setActiveTab(visible.target.id)
-                }
-            },
-            {
-                rootMargin: '-100px 0px -70% 0px',
-                threshold: 0.1,
-            }
-        )
-
-        tabs.forEach((tab) => {
-            const el = document.getElementById(tab.id)
-            if (el) {
-                observer.observe(el)
-            }
-        })
-
-        return () => observer.disconnect()
-    }, [])
-
     return (
         <div className={styles.layoutWrapper}>
-            <aside className={styles.sidebar}>
-                <nav className={styles.nav}>
-                    {tabs.map((tab) => {
-                        const handleClick = () => {
-                            const el = document.getElementById(tab.id)
-                            if (el) {
-                                el.scrollIntoView({
-                                    behavior: 'smooth',
-                                    block: 'start',
-                                })
-                            }
-                            setActiveTab(tab.id)
-                        }
+            <SectionedFormProvider
+                formDescriptor={{
+                    name: 'programDisaggregationForm',
+                    label: i18n.t('program_disaggregation_form'),
+                    sections: [
+                        {
+                            name: 'programIndicatorMappings',
+                            label: i18n.t('program_indicator_mappings'),
+                            fields: [
+                                {
+                                    name: 'programIndicatorMappings',
+                                    label: i18n.t('program_indicator_mappings'),
+                                },
+                            ],
+                        },
+                        {
+                            name: 'disaggregationCategories',
+                            label: i18n.t('disaggregation_categories'),
+                            fields: [
+                                {
+                                    name: 'categoryMappings',
+                                    label: i18n.t(
+                                        'disaggregation_category_mappings'
+                                    ),
+                                },
+                            ],
+                        },
+                    ],
+                }}
+            >
+                <aside className={styles.sidebar}>
+                    <DefaultSectionedFormSidebar />
+                </aside>
 
-                        return (
-                            <button
-                                key={tab.id}
-                                onClick={handleClick}
-                                className={`${styles.navItem} ${
-                                    activeTab === tab.id
-                                        ? styles.activeNavItem
-                                        : ''
-                                }`}
-                            >
-                                {tab.label}
-                            </button>
-                        )
-                    })}
-                </nav>
-            </aside>
-            <main className={styles.content}>{children}</main>
+                <main className={styles.content}>{children}</main>
+            </SectionedFormProvider>
         </div>
     )
 }
