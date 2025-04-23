@@ -8,10 +8,8 @@ import { SectionedFormFooter } from './SectionedFormFooter'
 
 export const DefaultSectionedFormFooter = ({
     submitting,
-    dirty,
 }: {
     submitting?: boolean
-    dirty?: boolean
 }) => {
     const descriptor = useSectionedFormContext()
     const [selected, setSelectedSection] = useSelectedSection()
@@ -58,7 +56,6 @@ export const DefaultSectionedFormFooter = ({
                     type="submit"
                     onClick={submit}
                     loading={submitting}
-                    disabled={!dirty || submitting}
                 >
                     {i18n.t('Save and exit')}
                 </Button>

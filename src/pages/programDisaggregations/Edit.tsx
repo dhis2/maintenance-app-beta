@@ -83,7 +83,14 @@ export const useOnSubmit = (
     const navigate = useNavigateWithSearchState()
 
     return useMemo(
-        () => async (values: ProgramDisaggregationFormValues) => {
+        () => async (values: ProgramDisaggregationFormValues, form: any) => {
+            if (!form.getState().dirty) {
+                saveAlert.show({
+                    message: i18n.t('No changes to save'),
+                    options: { warning: true },
+                })
+                return
+            }
             if (!values) {
                 console.error('Tried to save new object without any changes', {
                     values,
@@ -302,7 +309,6 @@ export const Component = () => {
                                     footer={
                                         <DefaultSectionedFormFooter
                                             submitting={submitting}
-                                            dirty={dirty}
                                         />
                                     }
                                 >
