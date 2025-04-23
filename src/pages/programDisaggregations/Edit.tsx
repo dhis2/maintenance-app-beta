@@ -299,7 +299,12 @@ export const Component = () => {
                             {!isLoading && !isError && (
                                 <SectionedFormLayout
                                     sidebar={<DefaultSectionedFormSidebar />}
-                                    footer={<DefaultSectionedFormFooter submitting={submitting} dirty={dirty} />}
+                                    footer={
+                                        <DefaultSectionedFormFooter
+                                            submitting={submitting}
+                                            dirty={dirty}
+                                        />
+                                    }
                                 >
                                     <form onSubmit={handleSubmit}>
                                         <ProgramDisaggregationFormFields
