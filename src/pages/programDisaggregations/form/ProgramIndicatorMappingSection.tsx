@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import React, { useEffect, useMemo } from 'react'
-import { useField, useFormState } from 'react-final-form'
+import { useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
     CollapsibleCard,
@@ -175,11 +175,13 @@ export const CategoryMappingSelect = ({
         `programIndicatorMappings.${programIndicatorId}.disaggregation.${category.id}`,
         {
             initialValue:
-                availableMappings.length >= 1
+                // changing to >= 1 overwrites saved values when there are multiple choices.
+                availableMappings.length === 1
                     ? availableMappings[0].id
                     : undefined,
         }
     )
+
     const selected = useMemo(
         () =>
             availableMappings &&
