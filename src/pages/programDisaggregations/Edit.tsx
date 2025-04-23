@@ -1,15 +1,20 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button } from '@dhis2/ui'
+import { Button, CircularLoader, NoticeBox } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import React, { useMemo } from 'react'
 import { Form as ReactFinalForm } from 'react-final-form'
 import { useParams } from 'react-router-dom'
-import { SectionedFormFooter } from '../../components'
-import { LinkButton } from '../../components/LinkButton'
+import {
+    DefaultSectionedFormFooter,
+    DefaultSectionedFormSidebar,
+    SectionedFormFooter,
+    SectionedFormLayout,
+} from '../../components'
 import {
     DEFAULT_FIELD_FILTERS,
+    SectionedFormProvider,
     SECTIONS_MAP,
     useBoundResourceQueryFn,
     useNavigateWithSearchState,
@@ -191,6 +196,9 @@ export const Component = () => {
         queryFn: queryFn<ProgramIndicatorData>,
     })
 
+    const isLoading = programQuery.isLoading || programIndicatorsQuery.isLoading
+    const isError = programQuery.isError || programIndicatorsQuery.isError
+
     const initialValues: ProgramDisaggregationFormValues = useMemo(() => {
         if (programQuery.data && programIndicatorsQuery.data) {
             return apiResponseToFormValues({
@@ -220,7 +228,36 @@ export const Component = () => {
         }, [initialValues.programIndicatorMappings])
 
     return (
-        <div>
+        <SectionedFormProvider
+            formDescriptor={{
+                name: 'programDisaggregationForm',
+                label: i18n.t('program_disaggregation_form'),
+                sections: [
+                    {
+                        name: 'programIndicatorMappings',
+                        label: i18n.t('Program indicator mappings'),
+                        fields: [
+                            {
+                                name: 'programIndicatorMappings',
+                                label: i18n.t('program_indicator_mappings'),
+                            },
+                        ],
+                    },
+                    {
+                        name: 'disaggregationCategories',
+                        label: i18n.t('Disaggregation categories'),
+                        fields: [
+                            {
+                                name: 'categoryMappings',
+                                label: i18n.t(
+                                    'disaggregation_category_mappings'
+                                ),
+                            },
+                        ],
+                    },
+                ],
+            }}
+        >
             <ReactFinalForm
                 initialValues={initialValues}
                 onSubmit={useOnSubmit(id, initialValues)}
@@ -229,26 +266,56 @@ export const Component = () => {
             >
                 {({ handleSubmit }) => {
                     return (
-                        <form onSubmit={handleSubmit}>
-                            <ProgramDisaggregationFormFields
-                                initialProgramIndicators={
-                                    initialProgramIndicators
-                                }
-                            />
-                            <SectionedFormFooter>
-                                <SectionedFormFooter.FormActions>
-                                    <Button primary type="submit">
-                                        {i18n.t('Save and exit')}
+                        <>
+                            {isLoading && (
+                                <div
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                    }}
+                                >
+                                    <CircularLoader />
+                                </div>
+                            )}
+                            {isError && (
+                                <NoticeBox title={i18n.t('Error')} error>
+                                    {i18n.t(
+                                        'Could not load programs or indicators data.'
+                                    )}
+                                    <br />
+                                    <Button
+                                        small
+                                        onClick={() => {
+                                            programIndicatorsQuery.refetch()
+                                            programQuery.refetch()
+                                        }}
+                                    >
+                                        {i18n.t('Retry')}
                                     </Button>
-                                    <LinkButton to={'..'}>
-                                        {i18n.t('Exit without saving')}
-                                    </LinkButton>
-                                </SectionedFormFooter.FormActions>
-                            </SectionedFormFooter>
-                        </form>
+                                </NoticeBox>
+                            )}
+                            {!isLoading && !isError && (
+                                <SectionedFormLayout
+                                    sidebar={<DefaultSectionedFormSidebar />}
+                                    footer={<DefaultSectionedFormFooter />}
+                                >
+                                    <form onSubmit={handleSubmit}>
+                                        <ProgramDisaggregationFormFields
+                                            initialProgramIndicators={
+                                                initialProgramIndicators
+                                            }
+                                        />
+                                        <SectionedFormFooter />
+                                    </form>
+                                </SectionedFormLayout>
+                            )}
+                        </>
                     )
                 }}
             </ReactFinalForm>
-        </div>
+        </SectionedFormProvider>
     )
 }

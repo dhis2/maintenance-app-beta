@@ -3,6 +3,12 @@
     padding: var(--spacers-dp16);
 }
 
+.collapsibleCardWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 .categoryCard {
     margin-block: 8px;
     padding: 8px;

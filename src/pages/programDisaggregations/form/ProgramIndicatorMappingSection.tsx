@@ -8,6 +8,7 @@ import {
     CollapsibleCardHeader,
     CollapsibleCardTitle,
     SectionedFormSection,
+    StandardFormSectionTitle,
 } from '../../../components'
 import {
     ModelSingleSelect,
@@ -44,6 +45,9 @@ export const ProgramIndicatorMappingSection = ({
         )
     return (
         <SectionedFormSection name="programIndicatorMappings">
+            <StandardFormSectionTitle>
+                {i18n.t('Program Indicator mapping')}
+            </StandardFormSectionTitle>
             <ModelSingleSelect<DisplayableModel>
                 query={{
                     resource: 'programIndicators',
@@ -181,6 +185,12 @@ export const CategoryMappingSelect = ({
                     : undefined,
         }
     )
+    const scrollToElement = (id: string) => {
+        const el = document.getElementById(id)
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+    }
 
     const selected = useMemo(
         () =>
@@ -216,7 +226,13 @@ export const CategoryMappingSelect = ({
                     />
                 ))}
             </SingleSelectField>
-            <Button className={css.mappingSelectAddMappingButton} secondary>
+            <Button
+                className={css.mappingSelectAddMappingButton}
+                secondary
+                onClick={() => {
+                    scrollToElement('disaggregationCategories')
+                }}
+            >
                 {i18n.t('Add mapping')}
             </Button>
         </div>

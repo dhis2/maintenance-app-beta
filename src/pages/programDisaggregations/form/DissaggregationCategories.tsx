@@ -1,16 +1,17 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import {
-    Button,
-    IconChevronDown24,
-    IconChevronRight24,
-    IconInfo16,
-} from '@dhis2/ui'
+import { Button, IconInfo16 } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useField, useForm, useFormState } from 'react-final-form'
 import { useFieldArray } from 'react-final-form-arrays'
-import { StandardFormSectionTitle } from '../../../components'
+import {
+    CollapsibleCard,
+    CollapsibleCardHeader,
+    CollapsibleCardTitle,
+    SectionedFormSection,
+    StandardFormSectionTitle,
+} from '../../../components'
 import { generateDhis2Id, useBoundResourceQueryFn } from '../../../lib'
 import { CategoriesSelector } from './CategoriesSelector'
 import { CategoryMapping } from './CategoryMapping'
@@ -258,8 +259,7 @@ export const DisaggregationCategories = () => {
     }
 
     return (
-        // remove later styling, just to give proper colour
-        <div className={css.tempContainer}>
+        <SectionedFormSection name="disaggregationCategories">
             <StandardFormSectionTitle>
                 {i18n.t('Disaggregation categories')}
             </StandardFormSectionTitle>
@@ -278,15 +278,17 @@ export const DisaggregationCategories = () => {
                     addCategory={addCategory}
                 />
             ))}
-            {categoriesWithMappings.map((id) => (
-                <DisaggregationCategory
-                    key={id}
-                    id={id}
-                    categoryObject={categoryObject}
-                    initiallyExpanded={addedCategories.includes(id)}
-                />
-            ))}
-        </div>
+            <div className={css.collapsibleCardWrapper}>
+                {categoriesWithMappings.map((id) => (
+                    <DisaggregationCategory
+                        key={id}
+                        id={id}
+                        categoryObject={categoryObject}
+                        initiallyExpanded={addedCategories.includes(id)}
+                    />
+                ))}
+            </div>
+        </SectionedFormSection>
     )
 }
 
@@ -328,23 +330,22 @@ const SuggestedCategory = ({
     </div>
 )
 
-const DisaggregationCategory = ({
-    id,
-    categoryObject,
-    initiallyExpanded,
-}: {
+type DisaggregationCategoryProps = {
     id: string
     categoryObject: CategoryObject
     initiallyExpanded?: boolean
-}) => {
+}
+export const DisaggregationCategory = ({
+    id,
+    categoryObject,
+    initiallyExpanded = false,
+}: DisaggregationCategoryProps) => {
     const array = useFieldArray(`categoryMappings.${id}`)
     const { input: categoryMappingsDeleted } = useField(
         'categoryMappings.deleted'
     )
-    const [isExpanded, setIsExpanded] = useState<boolean>(
-        initiallyExpanded || false
-    )
     const isDeleted = categoryMappingsDeleted.value.includes(id)
+    const categoryDisplayName = categoryObject?.[id]?.displayName
 
     if (isDeleted) {
         return (
@@ -352,7 +353,7 @@ const DisaggregationCategory = ({
                 <div className={css.deletedCategoryText}>
                     {i18n.t(
                         '{{- categoryName}} and all mappings will be deleted on save',
-                        { categoryName: categoryObject?.[id]?.displayName }
+                        { categoryName: categoryDisplayName }
                     )}
                 </div>
 
@@ -373,73 +374,60 @@ const DisaggregationCategory = ({
     }
 
     return (
-        <div className={css.categoryCard}>
-            <div className={css.categoryHeader}>
-                <div className={css.categoryTitleContainer}>
-                    <span onClick={() => setIsExpanded((prev) => !prev)}>
-                        {isExpanded ? (
-                            <IconChevronDown24 />
-                        ) : (
-                            <IconChevronRight24 />
-                        )}
-                    </span>
-                    <span className={css.categoryText}>
-                        {i18n.t('Category:')}
-                    </span>
-                    <span>&nbsp;</span>
-                    <span className={css.categoryName}>
-                        {categoryObject?.[id]?.displayName}
-                    </span>
+        <CollapsibleCard
+            initiallyExpanded={initiallyExpanded}
+            style={{ backgroundColor: 'var(--colors-grey100)' }}
+            headerElement={
+                <CollapsibleCardHeader>
+                    <CollapsibleCardTitle
+                        prefix={i18n.t('Category:')}
+                        title={categoryDisplayName}
+                    />
+                    <Button
+                        small
+                        secondary
+                        destructive
+                        onClick={() => {
+                            categoryMappingsDeleted.onChange([
+                                ...(categoryMappingsDeleted.value || []),
+                                id,
+                            ])
+                        }}
+                    >
+                        {i18n.t('Remove category')}
+                    </Button>
+                </CollapsibleCardHeader>
+            }
+        >
+            {array.fields.map((fieldName, index) => (
+                <div key={fieldName}>
+                    <CategoryMapping
+                        fieldName={fieldName}
+                        categoryOptionArray={
+                            categoryObject?.[id]?.categoryOptions ?? []
+                        }
+                        showSoftDelete={index !== 0}
+                    />
                 </div>
+            ))}
 
-                <Button
-                    small
-                    secondary
-                    destructive
-                    onClick={() => {
-                        categoryMappingsDeleted.onChange([
-                            ...(categoryMappingsDeleted.value || []),
-                            id,
-                        ])
-                    }}
-                >
-                    {i18n.t('Remove category')}
-                </Button>
-            </div>
-            {isExpanded &&
-                array.fields.map((fieldName, index) => {
-                    return (
-                        <div key={fieldName}>
-                            <CategoryMapping
-                                fieldName={fieldName}
-                                categoryOptionArray={
-                                    categoryObject?.[id]?.categoryOptions ?? []
-                                }
-                                showSoftDelete={index !== 0}
-                            />
-                        </div>
-                    )
-                })}
-
-            {isExpanded && (
-                <Button
-                    small
-                    onClick={() => {
-                        array.fields.push({
-                            categoryId: id,
-                            id: generateDhis2Id(),
-                            mappingName:
-                                'Mapping ' + ((array?.fields?.length ?? 0) + 1),
-                            options: getEmptyOptionValues(
-                                categoryObject?.[id]?.categoryOptions
-                            ),
-                            deleted: false,
-                        })
-                    }}
-                >
-                    {i18n.t('Add mapping')}
-                </Button>
-            )}
-        </div>
+            <Button
+                small
+                onClick={() => {
+                    array.fields.push({
+                        categoryId: id,
+                        id: generateDhis2Id(),
+                        mappingName:
+                            'Mapping ' + ((array?.fields?.length ?? 0) + 1),
+                        options: getEmptyOptionValues(
+                            categoryObject?.[id]?.categoryOptions
+                        ),
+                        deleted: false,
+                    })
+                }}
+            >
+                {i18n.t('Add mapping')}
+            </Button>
+        </CollapsibleCard>
     )
 }

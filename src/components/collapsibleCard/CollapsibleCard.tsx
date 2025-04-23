@@ -8,18 +8,20 @@ export type CollapsibleCardProps = {
     initiallyExpanded?: boolean
     unMount?: boolean
     headerElement?: React.ReactNode
+    style?: React.CSSProperties
 }
 export const CollapsibleCard = ({
     children,
     initiallyExpanded,
     headerElement,
+    style,
     unMount = true,
 }: React.PropsWithChildren<CollapsibleCardProps>) => {
     const [isExpanded, setIsExpanded] = React.useState(
         initiallyExpanded ?? true
     )
     return (
-        <div className={css.collapsibleCard}>
+        <div className={css.collapsibleCard} style={style}>
             <div className={css.headerWrapper}>
                 <button
                     className={cx(css.transparentButton, {
