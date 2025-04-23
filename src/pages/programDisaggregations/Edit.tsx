@@ -3,6 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import { Button, CircularLoader, NoticeBox } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
+import isEqual from 'lodash/isEqual'
 import React, { useMemo } from 'react'
 import { Form as ReactFinalForm } from 'react-final-form'
 import { useParams } from 'react-router-dom'
@@ -83,8 +84,8 @@ export const useOnSubmit = (
     const navigate = useNavigateWithSearchState()
 
     return useMemo(
-        () => async (values: ProgramDisaggregationFormValues, form: any) => {
-            if (!form.getState().dirty) {
+        () => async (values: ProgramDisaggregationFormValues) => {
+            if (isEqual(values, initialValues)) {
                 saveAlert.show({
                     message: i18n.t('No changes to save'),
                     options: { warning: true },
