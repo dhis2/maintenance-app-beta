@@ -41,6 +41,7 @@ export const programIndicatorSchema = z.object({
             ),
         })
         .optional(),
+    aggregateExportDataElement: z.string().optional(),
     // map from categoryId to categoryMapping
     disaggregation: z.record(z.string(), z.string()),
     attribute: z.record(z.string(), z.string()),

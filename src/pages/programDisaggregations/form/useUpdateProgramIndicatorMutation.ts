@@ -34,6 +34,8 @@ export const useUpdateProgramIndicatorMutation = () => {
                               ]
                       )
                     : []
+            const newAggregateExportDataElement =
+                programIndicatorMapping?.aggregateExportDataElement
 
             const patchOperations = {
                 type: 'json-patch',
@@ -49,6 +51,11 @@ export const useUpdateProgramIndicatorMutation = () => {
                         op: 'replace',
                         path: '/categoryMappingIds',
                         value: newCategoryMappingsIds,
+                    },
+                    {
+                        op: 'replace',
+                        path: '/aggregateExportDataElement',
+                        value: newAggregateExportDataElement,
                     },
                 ],
             } as const
