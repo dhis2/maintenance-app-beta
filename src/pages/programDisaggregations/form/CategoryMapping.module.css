@@ -1,0 +1,36 @@
+.mappingCard {
+    margin-block: 4px;
+    padding: 8px;
+    background-color: var(--colors-white);
+    border: 1px solid var(--colors-grey400);
+    border-radius: 4px;
+}
+
+.mappingCardDeleted {
+    margin-block: 4px;
+    padding: 12px;
+    background-color: var(--colors-red050);
+    border: 1px solid var(--colors-red200);
+    border-radius: 4px;
+}
+
+.deletedMappingText {
+    color: var(--colors-red800);
+    font-size: 15px;
+    margin-block-end: var(--spacers-dp8);
+}
+
+.mappingHeader {
+    display: flex;
+    align-items: center;
+    margin-block-end: 8px;
+}
+
+.mappingText {
+    margin-inline-end: 6px;
+}
+
+.filterInputContainer {
+    margin-block: 16px;
+    margin-inline-start: 8px;
+}

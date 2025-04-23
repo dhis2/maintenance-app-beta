@@ -1,0 +1,46 @@
+.collapsibleCard {
+    border-radius: 5px;
+    border: 1px solid var(--colors-grey400);
+    /* box-shadow: var(--elevations-e100); */
+    padding: var(--spacers-dp16);
+}
+
+.transparentButton {
+    background-color: transparent;
+    border: none;
+}
+
+.transparentButton svg {
+    transition: rotate 0.2s ease-in-out;
+}
+
+.expanded svg {
+    rotate: 180deg;
+}
+
+.headerWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titleWrapper {
+    display: inline;
+    flex-grow: 1;
+}
+
+.titleWrapper > h3 {
+    display: inline;
+    font-weight: 400;
+}
+
+.prefix {
+    font-weight: 300;
+    color: var(--colors-grey600);
+}

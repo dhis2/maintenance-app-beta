@@ -6968,12 +6968,23 @@ export type ProfileItem = {
      */
     value: Record<string, any>
 }
+export interface OptionMapping {
+    optionId: string
+    filter: string
+}
+export interface CategoryMapping {
+    id: string
+    categoryId: string
+    mappingName: string
+    optionMappings: OptionMapping[]
+}
 
 export type Program = {
     access: Access
     accessLevel: Program.accessLevel
     attributeValues: Array<AttributeValue>
     categoryCombo: CategoryCombo
+    categoryMappings: CategoryMapping[]
     code: string
     completeEventsExpiryDays: number
     created: string
@@ -7144,10 +7155,13 @@ export type ProgramIndicator = {
     aggregationType: ProgramIndicator.aggregationType
     analyticsPeriodBoundaries: Array<AnalyticsPeriodBoundary>
     analyticsType: ProgramIndicator.analyticsType
+    attributeCombo: CategoryCombo
     attributeValues: Array<AttributeValue>
     code: string
     created: string
     createdBy: User
+    categoryCombo: CategoryCombo
+    categoryMappingIds: string[]
     decimals: number
     description: string
     dimensionItem: string
@@ -7512,6 +7526,7 @@ export type ProgramSection = {
     lastUpdatedBy: User
     name: string
     program: Program
+
     /**
      * The exact type is unknown.
      * (Java type was: `org.hisp.dhis.render.DeviceRenderTypeMap<org.hisp.dhis.render.type.SectionRenderingObject>`)
