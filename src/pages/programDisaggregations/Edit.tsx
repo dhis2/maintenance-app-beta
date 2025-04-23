@@ -270,7 +270,7 @@ export const Component = () => {
                 mutators={{ ...arrayMutators }}
                 destroyOnUnregister={false}
             >
-                {({ handleSubmit, submitting, dirty }) => {
+                {({ handleSubmit, submitting }) => {
                     return (
                         <>
                             {isLoading && (
