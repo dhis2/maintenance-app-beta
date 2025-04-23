@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, SingleSelectField, SingleSelectOption } from '@dhis2/ui'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
@@ -15,6 +15,7 @@ import {
 } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { CategoryMapping, DisplayableModel } from '../../../types/models'
 import { ProgramIndicatorWithMapping } from '../Edit'
+import { CategoryMappingsRecord } from './programDisaggregationSchema'
 import css from './ProgramIndicatorMapping.module.css'
 
 export const ProgramIndicatorMappingSection = ({
@@ -159,9 +160,16 @@ export const CategoryMappingSelect = ({
     category: DisplayableModel
     programIndicatorId: string
 }) => {
-    const availableMappings =
+    const availableWithDeletedMappings =
         useField(`categoryMappings.${category.id}`)?.input?.value ||
         ([] as CategoryMapping[])
+    const deletedCategories =
+        useField('categoryMappings.deleted')?.input?.value ?? []
+    const availableMappings = deletedCategories.includes(category.id)
+        ? []
+        : availableWithDeletedMappings.filter(
+              ({ deleted }: { deleted: boolean }) => !deleted
+          )
 
     const selectedMapping = useField(
         `programIndicatorMappings.${programIndicatorId}.disaggregation.${category.id}`,
@@ -172,6 +180,17 @@ export const CategoryMappingSelect = ({
                     ? availableMappings[0].id
                     : undefined,
         }
+    )
+
+    const selected = useMemo(
+        () =>
+            availableMappings &&
+            availableMappings
+                .map((m: CategoryMappingsRecord) => m.id)
+                .includes(selectedMapping.input.value)
+                ? selectedMapping.input.value
+                : undefined,
+        [availableMappings, selectedMapping]
     )
 
     return (
@@ -187,9 +206,7 @@ export const CategoryMappingSelect = ({
                         ? 'No mappings available'
                         : 'Select mapping'
                 }
-                selected={
-                    availableMappings ? selectedMapping.input.value : undefined
-                }
+                selected={selected}
             >
                 {availableMappings?.map((mapping: CategoryMapping) => (
                     <SingleSelectOption
