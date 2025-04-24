@@ -3,13 +3,13 @@ import i18n from '@dhis2/d2-i18n'
 import { Button, CircularLoader, NoticeBox } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
+import isEqual from 'lodash/isEqual'
 import React, { useMemo } from 'react'
 import { Form as ReactFinalForm } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
     DefaultSectionedFormFooter,
     DefaultSectionedFormSidebar,
-    SectionedFormFooter,
     SectionedFormLayout,
 } from '../../components'
 import {
@@ -85,6 +85,13 @@ export const useOnSubmit = (
 
     return useMemo(
         () => async (values: ProgramDisaggregationFormValues) => {
+            if (isEqual(values, initialValues)) {
+                saveAlert.show({
+                    message: i18n.t('No changes to save'),
+                    options: { warning: true },
+                })
+                return
+            }
             if (!values) {
                 console.error('Tried to save new object without any changes', {
                     values,
@@ -264,7 +271,7 @@ export const Component = () => {
                 mutators={{ ...arrayMutators }}
                 destroyOnUnregister={false}
             >
-                {({ handleSubmit }) => {
+                {({ handleSubmit, submitting }) => {
                     return (
                         <>
                             {isLoading && (
@@ -300,7 +307,11 @@ export const Component = () => {
                             {!isLoading && !isError && (
                                 <SectionedFormLayout
                                     sidebar={<DefaultSectionedFormSidebar />}
-                                    footer={<DefaultSectionedFormFooter />}
+                                    footer={
+                                        <DefaultSectionedFormFooter
+                                            submitting={submitting}
+                                        />
+                                    }
                                 >
                                     <form onSubmit={handleSubmit}>
                                         <ProgramDisaggregationFormFields
@@ -308,7 +319,6 @@ export const Component = () => {
                                                 initialProgramIndicators
                                             }
                                         />
-                                        <SectionedFormFooter />
                                     </form>
                                 </SectionedFormLayout>
                             )}
