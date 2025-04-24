@@ -51,6 +51,7 @@ const programIndicatorFieldFilters = [
     'categoryMappingIds',
     'attributeCombo[id, displayName, dataDimensionType, categories[id, displayName]]',
     'categoryCombo[id, displayName, dataDimensionType, categories[id, displayName]]',
+    'aggregateExportDataElement',
 ] as const
 
 export type ProgramData = PickWithFieldFilters<Program, typeof fieldFilters>
