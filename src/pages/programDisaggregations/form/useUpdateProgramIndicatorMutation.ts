@@ -35,7 +35,7 @@ export const useUpdateProgramIndicatorMutation = () => {
                       )
                     : []
             const newAggregateExportDataElement =
-                programIndicatorMapping?.aggregateExportDataElement
+                programIndicatorMapping?.aggregateExportDataElement ?? null
 
             const patchOperations = {
                 type: 'json-patch',
