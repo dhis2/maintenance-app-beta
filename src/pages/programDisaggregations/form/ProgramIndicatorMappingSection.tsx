@@ -16,7 +16,10 @@ import {
 } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { CategoryMapping, DisplayableModel } from '../../../types/models'
 import { ProgramIndicatorWithMapping } from '../Edit'
-import { CategoryMappingsRecord } from './programDisaggregationSchema'
+import {
+    CategoryMappingsRecord,
+    ProgramIndicatorMappingsRecord,
+} from './programDisaggregationSchema'
 import css from './ProgramIndicatorMapping.module.css'
 
 export const ProgramIndicatorMappingSection = ({
@@ -25,7 +28,9 @@ export const ProgramIndicatorMappingSection = ({
     initialProgramIndicators: ProgramIndicatorWithMapping[]
 }) => {
     const programId = useParams().id
-    const { input: piInput } = useField(`programIndicatorMappings`)
+    const { input: piInput } = useField<ProgramIndicatorMappingsRecord>(
+        `programIndicatorMappings`
+    )
 
     const [programIndicators, setProgramIndicators] = React.useState<
         DisplayableModel[]
@@ -122,36 +127,83 @@ export const ProgramIndicatorMapping = ({
     const categoryCombo = useField(
         `programIndicatorMappings.${programIndicator.id}.categoryCombo`
     )
+    const attributeCombo = useField(
+        `programIndicatorMappings.${programIndicator.id}.attributeCombo`
+    )
     return (
         <div className={css.mappingFields}>
-            <ModelSingleSelectField
-                label="Disaggregation category combination"
-                query={{
-                    resource: 'categoryCombos',
-                    params: {
-                        filter: 'dataDimensionType:eq:DISAGGREGATION',
-                        fields: [
-                            'id',
-                            'displayName',
-                            'categories[id,displayName]',
-                        ],
-                    },
-                }}
-                showNoValueOption
-                input={categoryCombo.input}
-                meta={categoryCombo.meta}
-            />
-            <div className={css.mappingList}>
-                {categoryCombo.input.value?.categories?.map(
-                    (category: DisplayableModel) => (
-                        <div key={category.id}>
-                            <CategoryMappingSelect
-                                category={category}
-                                programIndicatorId={programIndicator.id}
-                            />
-                        </div>
-                    )
-                )}
+            <div>
+                <ModelSingleSelectField
+                    label="Disaggregation category combination"
+                    query={{
+                        resource: 'categoryCombos',
+                        params: {
+                            filter: 'dataDimensionType:eq:DISAGGREGATION',
+                            fields: [
+                                'id',
+                                'displayName',
+                                'categories[id,displayName]',
+                            ],
+                        },
+                    }}
+                    showNoValueOption
+                    input={categoryCombo.input}
+                    meta={categoryCombo.meta}
+                />
+                <div className={css.mappingList}>
+                    {categoryCombo.input.value?.categories?.map(
+                        (category: DisplayableModel) => (
+                            <div key={category.id}>
+                                <CategoryMappingSelect
+                                    category={category}
+                                    programIndicatorId={programIndicator.id}
+                                />
+                            </div>
+                        )
+                    )}
+                </div>
+            </div>
+            <div>
+                <ModelSingleSelectField
+                    label={i18n.t('Attribute category combination')}
+                    query={{
+                        resource: 'categoryCombos',
+                        params: {
+                            filter: 'dataDimensionType:eq:ATTRIBUTE',
+                            fields: [
+                                'id',
+                                'displayName',
+                                'categories[id,displayName]',
+                            ],
+                        },
+                    }}
+                    showNoValueOption
+                    input={attributeCombo.input}
+                    meta={attributeCombo.meta}
+                />
+                <div className={css.mappingList}>
+                    {attributeCombo.input.value?.categories?.map(
+                        (category: DisplayableModel) => (
+                            <div key={category.id}>
+                                <CategoryMappingSelect
+                                    category={category}
+                                    programIndicatorId={programIndicator.id}
+                                    onAddMapping={() => {
+                                        const el = document.getElementById(
+                                            'disaggregationCategories'
+                                        )
+                                        if (el) {
+                                            el.scrollIntoView({
+                                                behavior: 'smooth',
+                                                block: 'start',
+                                            })
+                                        }
+                                    }}
+                                />
+                            </div>
+                        )
+                    )}
+                </div>
             </div>
         </div>
     )
