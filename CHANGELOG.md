@@ -1,3 +1,20 @@
+# [0.39.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.38.2...v0.39.0) (2025-04-24)
+
+
+### Bug Fixes
+
+* filter out soft deleted options ([#548](https://github.com/dhis2/maintenance-app-beta/issues/548)) [skip release] ([ff0e25a](https://github.com/dhis2/maintenance-app-beta/commit/ff0e25a63e5a8d713c82bf77b61c9f10faf120cd))
+* minor cleanup ([#536](https://github.com/dhis2/maintenance-app-beta/issues/536)) [skip release] ([e39fe36](https://github.com/dhis2/maintenance-app-beta/commit/e39fe36b69f1b9166f81db39d6c4bbf73484f75f))
+
+
+### Features
+
+* category disaggregation mappings [DHIS2-19246] ([#543](https://github.com/dhis2/maintenance-app-beta/issues/543)) [skip release] ([6d3cbaa](https://github.com/dhis2/maintenance-app-beta/commit/6d3cbaab7dd6f33507ee739fb2409ff45654dc35))
+* enhance collapsible card and program disaggregation form ([#545](https://github.com/dhis2/maintenance-app-beta/issues/545)) [skip release] ([34142ce](https://github.com/dhis2/maintenance-app-beta/commit/34142ce9aa6c125422fbe284e83a05d859ee7d75))
+* pi disaggregation form ([#547](https://github.com/dhis2/maintenance-app-beta/issues/547)) [skip release] ([2458b4f](https://github.com/dhis2/maintenance-app-beta/commit/2458b4f3550e224f550fc9597c7593790f564a99))
+* update pi footer ([#549](https://github.com/dhis2/maintenance-app-beta/issues/549)) ([ac6eff9](https://github.com/dhis2/maintenance-app-beta/commit/ac6eff96eb62fdcfe1080d2901d02e0436593249))
+* **programs:** implement program selection and deletion functionality ([#540](https://github.com/dhis2/maintenance-app-beta/issues/540)) [skip release] ([7baa234](https://github.com/dhis2/maintenance-app-beta/commit/7baa2340e6e95347d4b1827d1a3a123eaf7ab2fa))
+
 ## [0.38.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.38.1...v0.38.2) (2025-04-09)
 
 ### Bug Fixes
