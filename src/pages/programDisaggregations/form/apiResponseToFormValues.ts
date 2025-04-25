@@ -47,6 +47,11 @@ export const apiResponseToFormValues = ({
         ]
         return acc
     }, {} as CategoryMappingsRecord)
+    for (const cat in categoryMappings) {
+        categoryMappings[cat].sort((a, b) =>
+            a.mappingName.localeCompare(b.mappingName)
+        )
+    }
 
     const programIndicatorMappings = programIndicators.programIndicators.reduce(
         (acc, indicator) => {
