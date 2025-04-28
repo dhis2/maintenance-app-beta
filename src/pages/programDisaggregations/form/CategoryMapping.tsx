@@ -178,11 +178,23 @@ export const CategoryMapping = ({
                     <Field
                         name={`${fieldName}.options.${opt.id}.filter`}
                         key={`${fieldName}.options.${opt.id}.filter`}
-                        label={`${categoryOptionInformation?.[opt.id]}`}
-                        component={InputFieldFF}
-                    />
+                    >
+                        {({ input, meta }) => (
+                                <InputFieldFF
+                                    label={`${categoryOptionInformation?.[opt.id]}`}
+                                    input={input}
+                                    meta={meta}
+                                    warning={isInvalidExpression(input.value)}
+                                    validationText={isInvalidExpression(input.value) ? "oh no": undefined}
+                                />
+                        )}
+                    </Field>
+
                 </div>
             ))}
         </CategoryMappingWrapper>
     )
 }
+
+
+export const isInvalidExpression = (expression: string) =>  expression === 'lalala'

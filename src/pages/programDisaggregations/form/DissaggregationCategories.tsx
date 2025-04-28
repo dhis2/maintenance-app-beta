@@ -14,7 +14,7 @@ import {
 } from '../../../components'
 import { generateDhis2Id, useBoundResourceQueryFn } from '../../../lib'
 import { CategoriesSelector } from './CategoriesSelector'
-import { CategoryMapping } from './CategoryMapping'
+import {CategoryMapping, isInvalidExpression} from './CategoryMapping'
 import css from './DissaggregationCategories.module.css'
 
 type CategoryOption = {
@@ -341,12 +341,22 @@ export const DisaggregationCategory = ({
     initiallyExpanded = false,
 }: DisaggregationCategoryProps) => {
     const array = useFieldArray(`categoryMappings.${id}`)
+
     const showSoftDelete =
         array.fields.value.filter((val) => !val.deleted).length > 1
 
     const { input: categoryMappingsDeleted } = useField(
         'categoryMappings.deleted'
     )
+
+    const someMappingInvalid = useMemo( () => {
+        return array.fields.value.some(catMappings =>
+        Object.values(catMappings.options).some(
+            optionMapping => isInvalidExpression(optionMapping.filter)
+        )
+    )}, [array])
+
+
     const isDeleted = categoryMappingsDeleted.value.includes(id)
     const categoryDisplayName = categoryObject?.[id]?.displayName
 
@@ -386,6 +396,7 @@ export const DisaggregationCategory = ({
                         prefix={i18n.t('Category:')}
                         title={categoryDisplayName}
                     />
+                    {someMappingInvalid ? "INVALID" : "VALID"}
                     <Button
                         small
                         secondary

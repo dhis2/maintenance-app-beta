@@ -24,6 +24,8 @@ import { CategoryMapping, DisplayableModel } from '../../../types/models'
 import { ProgramIndicatorWithMapping } from '../Edit'
 import { CategoryMappingsRecord } from './programDisaggregationSchema'
 import css from './ProgramIndicatorMapping.module.css'
+import {useFieldArray} from "react-final-form-arrays";
+import {isInvalidExpression} from "./CategoryMapping";
 
 export const ProgramIndicatorMappingSection = ({
     initialProgramIndicators,
@@ -217,6 +219,13 @@ export const CategoryMappingSelect = ({
         [availableMappings, selectedMapping]
     )
 
+    const hasSomeInvalidMappings = useMemo( () => {
+        return availableMappings.some(catMappings =>
+            Object.values(catMappings.options).some(
+                optionMapping => isInvalidExpression(optionMapping.filter)
+            )
+        )}, [availableMappings])
+
     return (
         <div className={css.mappingSelectWrapper}>
             <SingleSelectField
@@ -240,6 +249,7 @@ export const CategoryMappingSelect = ({
                     />
                 ))}
             </SingleSelectField>
+            {hasSomeInvalidMappings && 'WARNING'}
             <Button
                 className={css.mappingSelectAddMappingButton}
                 secondary
