@@ -341,6 +341,9 @@ export const DisaggregationCategory = ({
     initiallyExpanded = false,
 }: DisaggregationCategoryProps) => {
     const array = useFieldArray(`categoryMappings.${id}`)
+    const showSoftDelete =
+        array.fields.value.filter((val) => !val.deleted).length > 1
+
     const { input: categoryMappingsDeleted } = useField(
         'categoryMappings.deleted'
     )
@@ -399,14 +402,14 @@ export const DisaggregationCategory = ({
                 </CollapsibleCardHeader>
             }
         >
-            {array.fields.map((fieldName, index) => (
+            {array.fields.map((fieldName) => (
                 <div key={fieldName}>
                     <CategoryMapping
                         fieldName={fieldName}
                         categoryOptionArray={
                             categoryObject?.[id]?.categoryOptions ?? []
                         }
-                        showSoftDelete={index !== 0}
+                        showSoftDelete={showSoftDelete}
                     />
                 </div>
             ))}
