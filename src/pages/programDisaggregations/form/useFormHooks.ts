@@ -32,7 +32,7 @@ export const useValidateExpressionMutation = () => {
 }
 
 
-export const useValidateExpressionField = (initialValue: string = '') => {
+export const useValidateExpressionField = () => {
     const { mutateAsync: validateExpression } = useValidateExpressionMutation()
     const [validationError, setValidationError] = useState<string | undefined>(undefined)
     const [isInvalidExpression, setIsInvalidExpression] = useState(false)

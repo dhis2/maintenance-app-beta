@@ -114,7 +114,7 @@ export const ProgramIndicatorMappingSection = ({
                             </CollapsibleCardHeader>
                         }
                     >
-                        <ProgramIndicatorMapping programIndicator={indicator} />
+                        <ProgramIndicatorMapping programIndicator={indicator} invalidStates={invalidStates}/>
                     </CollapsibleCard>
                 ))}
             </div>
@@ -124,8 +124,10 @@ export const ProgramIndicatorMappingSection = ({
 
 export const ProgramIndicatorMapping = ({
     programIndicator,
+    invalidStates
 }: {
     programIndicator: DisplayableModel
+    invalidStates: Record<string, boolean>
 }) => {
     const categoryCombo = useField(
         `programIndicatorMappings.${programIndicator.id}.categoryCombo`
@@ -156,6 +158,7 @@ export const ProgramIndicatorMapping = ({
                             <CategoryMappingSelect
                                 category={category}
                                 programIndicatorId={programIndicator.id}
+                                invalidStates={invalidStates}
                             />
                         </div>
                     )
@@ -176,9 +179,11 @@ export const ProgramIndicatorMapping = ({
 export const CategoryMappingSelect = ({
     category,
     programIndicatorId,
+    invalidStates
 }: {
     category: DisplayableModel
     programIndicatorId: string
+    invalidStates: Record<string, boolean>
 }) => {
     const availableWithDeletedMappings =
         useField(`categoryMappings.${category.id}`)?.input?.value ||
@@ -219,10 +224,18 @@ export const CategoryMappingSelect = ({
         [availableMappings, selectedMapping]
     )
 
-    const hasSomeInvalidMappings =  true
+    const hasSomeInvalidMappings = useMemo(() => {
+        return availableMappings.some((mapping: { optionMappings: any[]; categoryId: any }) => {
+            return mapping.optionMappings.some((_, index) => {
+                const key = `categoryMappings.${mapping.categoryId}[${index}]`
+                return invalidStates[key] === true
+            })
+        })
+    }, [availableMappings, invalidStates])
     
     
-
+    
+    
     return (
         <div className={css.mappingSelectWrapper}>
             <SingleSelectField

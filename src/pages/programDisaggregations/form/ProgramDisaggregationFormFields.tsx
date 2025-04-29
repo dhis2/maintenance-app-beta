@@ -20,8 +20,7 @@ export const ProgramDisaggregationFormFields = ({
         },
         []
     )
-
-    console.log(invalidStates, 'invalidStates')
+    
     return (
         <div>
             <SectionedFormSections>

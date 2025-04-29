@@ -130,7 +130,13 @@ const useProgramIndicatorSelectionCategories = (
     )
 }
 
-export const DisaggregationCategories = ({invalidStates, handleValidationChange}) => {
+export const DisaggregationCategories = ({
+    invalidStates,
+    handleValidationChange,
+}: {
+    invalidStates: Record<string, boolean>
+    handleValidationChange: (id: string, isValid: boolean) => void
+}) => {
     const formApi = useForm()
 
     // this is to have a stable-ish reference instead of taking from formState (rethink)
@@ -336,6 +342,8 @@ type DisaggregationCategoryProps = {
     id: string
     categoryObject: CategoryObject
     initiallyExpanded?: boolean
+    handleValidationChange: (id: string, isValid: boolean) => void
+    invalidStates: Record<string, boolean>
 }
 export const DisaggregationCategory = ({
     id,
