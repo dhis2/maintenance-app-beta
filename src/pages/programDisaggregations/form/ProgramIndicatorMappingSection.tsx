@@ -5,7 +5,7 @@ import {
     SingleSelectField,
     SingleSelectOption,
 } from '@dhis2/ui'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Field, useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
@@ -114,7 +114,10 @@ export const ProgramIndicatorMappingSection = ({
                             </CollapsibleCardHeader>
                         }
                     >
-                        <ProgramIndicatorMapping programIndicator={indicator} invalidStates={invalidStates}/>
+                        <ProgramIndicatorMapping
+                            programIndicator={indicator}
+                            invalidStates={invalidStates}
+                        />
                     </CollapsibleCard>
                 ))}
             </div>
@@ -124,7 +127,7 @@ export const ProgramIndicatorMappingSection = ({
 
 export const ProgramIndicatorMapping = ({
     programIndicator,
-    invalidStates
+    invalidStates,
 }: {
     programIndicator: DisplayableModel
     invalidStates: Record<string, boolean>
@@ -132,6 +135,7 @@ export const ProgramIndicatorMapping = ({
     const categoryCombo = useField(
         `programIndicatorMappings.${programIndicator.id}.categoryCombo`
     )
+    console.log({programIndicator})
     return (
         <div className={css.mappingFields}>
             <ModelSingleSelectField
@@ -151,6 +155,7 @@ export const ProgramIndicatorMapping = ({
                 input={categoryCombo.input}
                 meta={categoryCombo.meta}
             />
+
             <div className={css.mappingList}>
                 {categoryCombo.input.value?.categories?.map(
                     (category: DisplayableModel) => (
@@ -179,7 +184,7 @@ export const ProgramIndicatorMapping = ({
 export const CategoryMappingSelect = ({
     category,
     programIndicatorId,
-    invalidStates
+    invalidStates,
 }: {
     category: DisplayableModel
     programIndicatorId: string
@@ -225,50 +230,45 @@ export const CategoryMappingSelect = ({
     )
 
     const hasSomeInvalidMappings = useMemo(() => {
-        return availableMappings.some((mapping: { optionMappings: any[]; categoryId: any }) => {
-            return mapping.optionMappings.some((_, index) => {
-                const key = `categoryMappings.${mapping.categoryId}[${index}]`
-                return invalidStates[key] === true
-            })
-        })
-    }, [availableMappings, invalidStates])
-    
-    
-    
-    
+        return true
+    }, [availableMappings, invalidStates, category.id])
+    console.log({category, invalidStates})
+
     return (
-        <div className={css.mappingSelectWrapper}>
-            <SingleSelectField
-                label={`Mapping: ${category.displayName}`}
-                onChange={(payload) =>
-                    selectedMapping.input.onChange(payload.selected)
-                }
-                disabled={availableMappings.length < 1}
-                placeholder={
-                    availableMappings.length < 1
-                        ? 'No mappings available'
-                        : 'Select mapping'
-                }
-                selected={selected}
-            >
-                {availableMappings?.map((mapping: CategoryMapping) => (
-                    <SingleSelectOption
-                        key={mapping.id}
-                        label={mapping.mappingName}
-                        value={mapping.id}
-                    />
-                ))}
-            </SingleSelectField>
-            {hasSomeInvalidMappings && 'WARNING'}
-            <Button
-                className={css.mappingSelectAddMappingButton}
-                secondary
-                onClick={() => {
-                    scrollToElement('disaggregationCategories')
-                }}
-            >
-                {i18n.t('Add mapping')}
-            </Button>
+        <div>
+            <div className={css.mappingSelectWrapper}>
+                <SingleSelectField
+                    label={`Mapping: ${category.displayName}`}
+                    onChange={(payload) =>
+                        selectedMapping.input.onChange(payload.selected)
+                    }
+                    disabled={availableMappings.length < 1}
+                    placeholder={
+                        availableMappings.length < 1
+                            ? 'No mappings available'
+                            : 'Select mapping'
+                    }
+                    selected={selected}
+                >
+                    {availableMappings?.map((mapping: CategoryMapping) => (
+                        <SingleSelectOption
+                            key={mapping.id}
+                            label={mapping.mappingName}
+                            value={mapping.id}
+                        />
+                    ))}
+                </SingleSelectField>
+                <Button
+                    className={css.mappingSelectAddMappingButton}
+                    secondary
+                    onClick={() => {
+                        scrollToElement('disaggregationCategories')
+                    }}
+                >
+                    {i18n.t('Add mapping')}
+                </Button>
+            </div>
+            <span className={css.warning}>{hasSomeInvalidMappings && i18n.t('There are some invalid expressions')}</span>
         </div>
     )
 }
