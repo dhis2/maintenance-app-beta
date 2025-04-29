@@ -232,7 +232,7 @@ export const CategoryMappingSelect = ({
     const hasSomeInvalidMappings = useMemo(() => {
         return true
     }, [availableMappings, invalidStates, category.id])
-    console.log({category, invalidStates})
+    console.log({availableMappings, programIndicatorId, invalidStates})
 
     return (
         <div>

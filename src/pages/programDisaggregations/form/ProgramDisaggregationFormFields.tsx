@@ -10,6 +10,7 @@ export const ProgramDisaggregationFormFields = ({
     initialProgramIndicators: ProgramIndicatorWithMapping[]
 }) => {
     const [invalidStates, setInvalidStates] = useState<Record<string, boolean>>({})
+    
 
     const handleValidationChange = useCallback(
         (fieldName: string, isInvalid: boolean) => {
@@ -20,7 +21,7 @@ export const ProgramDisaggregationFormFields = ({
         },
         []
     )
-    
+
     return (
         <div>
             <SectionedFormSections>
