@@ -1,6 +1,6 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, IconInfo16 } from '@dhis2/ui'
+import { Button, IconInfo16, IconWarningFilled16 } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useField, useForm, useFormState } from 'react-final-form'
@@ -14,7 +14,7 @@ import {
 } from '../../../components'
 import { generateDhis2Id, useBoundResourceQueryFn } from '../../../lib'
 import { CategoriesSelector } from './CategoriesSelector'
-import {CategoryMapping, isInvalidExpression} from './CategoryMapping'
+import {CategoryMapping} from './CategoryMapping'
 import css from './DissaggregationCategories.module.css'
 
 type CategoryOption = {
@@ -130,7 +130,7 @@ const useProgramIndicatorSelectionCategories = (
     )
 }
 
-export const DisaggregationCategories = () => {
+export const DisaggregationCategories = ({invalidStates, handleValidationChange}) => {
     const formApi = useForm()
 
     // this is to have a stable-ish reference instead of taking from formState (rethink)
@@ -285,6 +285,8 @@ export const DisaggregationCategories = () => {
                         id={id}
                         categoryObject={categoryObject}
                         initiallyExpanded={addedCategories.includes(id)}
+                        invalidStates={invalidStates}
+                        handleValidationChange={handleValidationChange}
                     />
                 ))}
             </div>
@@ -339,6 +341,9 @@ export const DisaggregationCategory = ({
     id,
     categoryObject,
     initiallyExpanded = false,
+    handleValidationChange,
+    invalidStates
+
 }: DisaggregationCategoryProps) => {
     const array = useFieldArray(`categoryMappings.${id}`)
 
@@ -349,12 +354,9 @@ export const DisaggregationCategory = ({
         'categoryMappings.deleted'
     )
 
-    const someMappingInvalid = useMemo( () => {
-        return array.fields.value.some(catMappings =>
-        Object.values(catMappings.options).some(
-            optionMapping => isInvalidExpression(optionMapping.filter)
-        )
-    )}, [array])
+    const someMappingInvalid = useMemo(() => {
+        return Object.values(invalidStates).some((invalid) => invalid)
+    }, [invalidStates])
 
 
     const isDeleted = categoryMappingsDeleted.value.includes(id)
@@ -395,8 +397,8 @@ export const DisaggregationCategory = ({
                     <CollapsibleCardTitle
                         prefix={i18n.t('Category:')}
                         title={categoryDisplayName}
+                        icon={someMappingInvalid ? <IconWarningFilled16 color="var(--colors-yellow600)" /> : null}
                     />
-                    {someMappingInvalid ? "INVALID" : "VALID"}
                     <Button
                         small
                         secondary
@@ -421,6 +423,7 @@ export const DisaggregationCategory = ({
                             categoryObject?.[id]?.categoryOptions ?? []
                         }
                         showSoftDelete={showSoftDelete}
+                        onValidationStateChange={handleValidationChange}
                     />
                 </div>
             ))}

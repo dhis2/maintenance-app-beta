@@ -11,9 +11,10 @@ import {
     ModalActions,
     Input,
 } from '@dhis2/ui'
-import React, { useCallback, useState, ReactNode } from 'react'
+import React, { useCallback, useState, ReactNode, useEffect } from 'react'
 import { Field, useField } from 'react-final-form'
 import css from './CategoryMapping.module.css'
+import { useValidateExpressionField } from './useFormHooks'
 
 type CategoryOption = {
     id: string
@@ -78,11 +79,13 @@ type CategoryMappingProps = {
     fieldName: string
     categoryOptionArray: CategoryOption[]
     showSoftDelete: boolean
+    onValidationStateChange?: (fieldName: string, isInvalid: boolean) => void
 }
 export const CategoryMapping = ({
     fieldName,
     categoryOptionArray,
     showSoftDelete = true,
+    onValidationStateChange
 }: CategoryMappingProps) => {
     const categoryMapping = useField(fieldName)
     const categoryMappingOnChange = categoryMapping?.input?.onChange
@@ -179,22 +182,38 @@ export const CategoryMapping = ({
                         name={`${fieldName}.options.${opt.id}.filter`}
                         key={`${fieldName}.options.${opt.id}.filter`}
                     >
-                        {({ input, meta }) => (
-                                <InputFieldFF
-                                    label={`${categoryOptionInformation?.[opt.id]}`}
-                                    input={input}
-                                    meta={meta}
-                                    warning={isInvalidExpression(input.value)}
-                                    validationText={isInvalidExpression(input.value) ? "oh no": undefined}
-                                />
-                        )}
-                    </Field>
+                        {({ input, meta }) => {
+                            const {
+                                validationError,
+                                handleChange,
+                                isInvalidExpression,
+                            } = useValidateExpressionField(input.value)
 
+                            useEffect(() => {
+                                onValidationStateChange?.(fieldName, isInvalidExpression)
+                            }, [isInvalidExpression])
+
+                            return (
+                                <InputFieldFF
+                                    label={`${
+                                        categoryOptionInformation?.[opt.id]
+                                    }`}
+                                    input={{
+                                        ...input,
+                                        onChange: (value: string) => {
+                                            input.onChange(value)
+                                            handleChange(value)
+                                        },
+                                    }}
+                                    meta={meta}
+                                    validationText={validationError}
+                                    warning={isInvalidExpression}
+                                />
+                            )
+                        }}
+                    </Field>
                 </div>
             ))}
         </CategoryMappingWrapper>
     )
 }
-
-
-export const isInvalidExpression = (expression: string) =>  expression === 'lalala'

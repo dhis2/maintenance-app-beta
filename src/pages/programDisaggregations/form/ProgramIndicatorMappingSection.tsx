@@ -5,7 +5,7 @@ import {
     SingleSelectField,
     SingleSelectOption,
 } from '@dhis2/ui'
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Field, useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
@@ -24,13 +24,13 @@ import { CategoryMapping, DisplayableModel } from '../../../types/models'
 import { ProgramIndicatorWithMapping } from '../Edit'
 import { CategoryMappingsRecord } from './programDisaggregationSchema'
 import css from './ProgramIndicatorMapping.module.css'
-import {useFieldArray} from "react-final-form-arrays";
-import {isInvalidExpression} from "./CategoryMapping";
 
 export const ProgramIndicatorMappingSection = ({
     initialProgramIndicators,
+    invalidStates,
 }: {
     initialProgramIndicators: ProgramIndicatorWithMapping[]
+    invalidStates: Record<string, boolean>
 }) => {
     const programId = useParams().id
     const { input: piInput } = useField(`programIndicatorMappings`)
@@ -219,12 +219,9 @@ export const CategoryMappingSelect = ({
         [availableMappings, selectedMapping]
     )
 
-    const hasSomeInvalidMappings = useMemo( () => {
-        return availableMappings.some(catMappings =>
-            Object.values(catMappings.options).some(
-                optionMapping => isInvalidExpression(optionMapping.filter)
-            )
-        )}, [availableMappings])
+    const hasSomeInvalidMappings =  true
+    
+    
 
     return (
         <div className={css.mappingSelectWrapper}>
