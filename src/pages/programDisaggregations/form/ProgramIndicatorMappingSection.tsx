@@ -135,7 +135,10 @@ export const ProgramIndicatorMapping = ({
                 query={{
                     resource: 'categoryCombos',
                     params: {
-                        filter: 'dataDimensionType:eq:DISAGGREGATION',
+                        filter: [
+                            'dataDimensionType:eq:DISAGGREGATION',
+                            'isDefault:eq:false',
+                        ],
                         fields: [
                             'id',
                             'displayName',
