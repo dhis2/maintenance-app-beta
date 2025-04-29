@@ -26,11 +26,9 @@ import { CategoryMappingsRecord } from './programDisaggregationSchema'
 import css from './ProgramIndicatorMapping.module.css'
 
 export const ProgramIndicatorMappingSection = ({
-    initialProgramIndicators,
-    invalidStates,
+    initialProgramIndicators
 }: {
     initialProgramIndicators: ProgramIndicatorWithMapping[]
-    invalidStates: Record<string, boolean>
 }) => {
     const programId = useParams().id
     const { input: piInput } = useField(`programIndicatorMappings`)
@@ -116,7 +114,6 @@ export const ProgramIndicatorMappingSection = ({
                     >
                         <ProgramIndicatorMapping
                             programIndicator={indicator}
-                            invalidStates={invalidStates}
                         />
                     </CollapsibleCard>
                 ))}
@@ -127,10 +124,8 @@ export const ProgramIndicatorMappingSection = ({
 
 export const ProgramIndicatorMapping = ({
     programIndicator,
-    invalidStates,
 }: {
     programIndicator: DisplayableModel
-    invalidStates: Record<string, boolean>
 }) => {
     const categoryCombo = useField(
         `programIndicatorMappings.${programIndicator.id}.categoryCombo`
@@ -163,7 +158,6 @@ export const ProgramIndicatorMapping = ({
                             <CategoryMappingSelect
                                 category={category}
                                 programIndicatorId={programIndicator.id}
-                                invalidStates={invalidStates}
                             />
                         </div>
                     )
@@ -184,11 +178,9 @@ export const ProgramIndicatorMapping = ({
 export const CategoryMappingSelect = ({
     category,
     programIndicatorId,
-    invalidStates,
 }: {
     category: DisplayableModel
     programIndicatorId: string
-    invalidStates: Record<string, boolean>
 }) => {
     const availableWithDeletedMappings =
         useField(`categoryMappings.${category.id}`)?.input?.value ||
@@ -228,11 +220,13 @@ export const CategoryMappingSelect = ({
                 : undefined,
         [availableMappings, selectedMapping]
     )
-
-    const hasSomeInvalidMappings = useMemo(() => {
-        return true
-    }, [availableMappings, invalidStates, category.id])
-    console.log({availableMappings, programIndicatorId, invalidStates})
+    
+    const hasSomeInvalidMappings = useMemo( () => {
+        return availableMappings.some(catMappings =>
+            Object.values(catMappings.options).some(
+                optionMapping => optionMapping.invalid
+            )
+        )}, [availableMappings])
 
     return (
         <div>

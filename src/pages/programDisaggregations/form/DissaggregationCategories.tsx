@@ -130,13 +130,7 @@ const useProgramIndicatorSelectionCategories = (
     )
 }
 
-export const DisaggregationCategories = ({
-    invalidStates,
-    handleValidationChange,
-}: {
-    invalidStates: Record<string, boolean>
-    handleValidationChange: (id: string, isValid: boolean) => void
-}) => {
+export const DisaggregationCategories = () => {
     const formApi = useForm()
 
     // this is to have a stable-ish reference instead of taking from formState (rethink)
@@ -291,8 +285,6 @@ export const DisaggregationCategories = ({
                         id={id}
                         categoryObject={categoryObject}
                         initiallyExpanded={addedCategories.includes(id)}
-                        invalidStates={invalidStates}
-                        handleValidationChange={handleValidationChange}
                     />
                 ))}
             </div>
@@ -342,15 +334,11 @@ type DisaggregationCategoryProps = {
     id: string
     categoryObject: CategoryObject
     initiallyExpanded?: boolean
-    handleValidationChange: (id: string, isValid: boolean) => void
-    invalidStates: Record<string, boolean>
 }
 export const DisaggregationCategory = ({
     id,
     categoryObject,
     initiallyExpanded = false,
-    handleValidationChange,
-    invalidStates
 
 }: DisaggregationCategoryProps) => {
     const array = useFieldArray(`categoryMappings.${id}`)
@@ -362,9 +350,12 @@ export const DisaggregationCategory = ({
         'categoryMappings.deleted'
     )
 
-    const someMappingInvalid = useMemo(() => {
-        return Object.values(invalidStates).some((invalid) => invalid)
-    }, [invalidStates])
+    const someMappingInvalid = useMemo( () => {
+        return array.fields.value.some(catMappings =>
+        Object.values(catMappings.options).some(
+            optionMapping => optionMapping.invalid
+        )
+    )}, [array])
 
 
     const isDeleted = categoryMappingsDeleted.value.includes(id)
@@ -431,7 +422,6 @@ export const DisaggregationCategory = ({
                             categoryObject?.[id]?.categoryOptions ?? []
                         }
                         showSoftDelete={showSoftDelete}
-                        onValidationStateChange={handleValidationChange}
                     />
                 </div>
             ))}
