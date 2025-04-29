@@ -21,7 +21,7 @@ const cleanFormState = ({
             ([categoryId]) => !deletedSet.has(categoryId)
         )
     )
-    const allCategoryMappings = new Set(
+    const categoryMappingsSet = new Set(
         Object.values(cleanedCategoryMappings).flatMap((categoryMapping) =>
             categoryMapping.map((cm) => cm.id)
         )
@@ -31,13 +31,28 @@ const cleanFormState = ({
     const cleanedProgramIndicatorMappings = Object.fromEntries(
         Object.entries(programIndicatorMappings).map(
             ([programIndicatorId, programIndicator]) => {
+                const attributeCategories = new Set(
+                    programIndicator.attributeCombo?.categories.map(
+                        (id) => id.id
+                    )
+                )
+                const disaggregationCategories = new Set(
+                    programIndicator.categoryCombo?.categories.map(
+                        (id) => id.id
+                    )
+                )
+                // remove deleted or otherwise invalid mappings
                 const disaggregationWithoutDeleted = omitBy(
                     programIndicator.disaggregation,
-                    (mappingId) => !allCategoryMappings.has(mappingId)
+                    (mappingId, categoryId) =>
+                        !categoryMappingsSet.has(mappingId) ||
+                        !disaggregationCategories.has(categoryId)
                 )
                 const attributeWithoutDeleted = omitBy(
                     programIndicator.attribute,
-                    (mappingId) => !allCategoryMappings.has(mappingId)
+                    (mappingId, categoryId) =>
+                        !categoryMappingsSet.has(mappingId) ||
+                        !attributeCategories.has(categoryId)
                 )
                 return [
                     programIndicatorId,
@@ -73,8 +88,8 @@ export const useOnSubmit = (
     return useMemo(
         () => async (values: ProgramDisaggregationFormValues) => {
             const cleanedFormState = cleanFormState(values)
-            console.log({ cleanedFormState })
-            if (!values) {
+
+            if (!cleanedFormState) {
                 console.error('Tried to save new object without any changes', {
                     values,
                 })
@@ -83,12 +98,7 @@ export const useOnSubmit = (
                     error: true,
                 })
                 return
-                //
-
-                // ["KCwr8yfcyh4", "UadoorohY9i"]//
             }
-            console.log('onsubmit')
-            // const withoutDeleted
 
             const response = await patchPrograms({
                 categoryMappings: cleanedFormState.categoryMappings,
@@ -105,7 +115,7 @@ export const useOnSubmit = (
             }
 
             const piMappingsUpdateResponses = await Promise.all(
-                Object.keys(values.programIndicatorMappings).map(
+                Object.keys(cleanedFormState.programIndicatorMappings).map(
                     async (programIndicatorId) => {
                         const programIndicatorMapping =
                             cleanedFormState.programIndicatorMappings[
@@ -126,7 +136,9 @@ export const useOnSubmit = (
                 Object.keys(initialValues.programIndicatorMappings)
                     .filter(
                         (piMapping) =>
-                            !values.programIndicatorMappings[piMapping]
+                            !cleanedFormState.programIndicatorMappings[
+                                piMapping
+                            ]
                     )
                     .map(async (programIndicatorId) => {
                         const response = await patchProgramIndicators(

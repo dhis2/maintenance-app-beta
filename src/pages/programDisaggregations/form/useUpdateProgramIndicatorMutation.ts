@@ -26,10 +26,8 @@ export const useUpdateProgramIndicatorMutation = () => {
                 : null
 
             const newCategoryMappingIds = Object.values(
-                programIndicatorMapping?.attribute ?? {}
-            ).concat(
-                Object.values(programIndicatorMapping?.disaggregation ?? {})
-            )
+                programIndicatorMapping?.disaggregation ?? {}
+            ).concat(Object.values(programIndicatorMapping?.attribute ?? {}))
 
             const patchOperations = {
                 type: 'json-patch',
