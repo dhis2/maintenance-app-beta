@@ -4,7 +4,7 @@ import { useCallback } from 'react'
 import { parseErrorResponse, SECTIONS_MAP, usePatchModel } from '../../../lib'
 import { JsonPatchOperation } from '../../../types'
 import {
-    CategoryMappingsRecord,
+    ProgramDisaggregationFormValues,
     ProgramIndicatorMappingsRecord,
 } from './programDisaggregationSchema'
 
@@ -25,15 +25,11 @@ export const useUpdateProgramIndicatorMutation = () => {
                   ])
                 : null
 
-            const newCategoryMappingsIds =
-                programIndicatorMapping?.categoryCombo
-                    ? programIndicatorMapping.categoryCombo.categories.map(
-                          (category) =>
-                              programIndicatorMapping.disaggregation[
-                                  category.id
-                              ]
-                      )
-                    : []
+            const newCategoryMappingIds = Object.values(
+                programIndicatorMapping?.attribute ?? {}
+            ).concat(
+                Object.values(programIndicatorMapping?.disaggregation ?? {})
+            )
 
             const patchOperations = {
                 type: 'json-patch',
@@ -48,7 +44,7 @@ export const useUpdateProgramIndicatorMutation = () => {
                     {
                         op: 'replace',
                         path: '/categoryMappingIds',
-                        value: newCategoryMappingsIds,
+                        value: newCategoryMappingIds,
                     },
                 ],
             } as const
@@ -68,20 +64,11 @@ export const useUpdateProgramMutation = (programId: string) => {
     const patchModel = usePatchModel(programId, SECTIONS_MAP.program.namePlural)
 
     return useCallback(
-        async (
-            categoryMappings: CategoryMappingsRecord & { deleted?: string[] }
-        ) => {
-            const { deleted, ...updatedCategoryMappings } = categoryMappings
-
-            const cleanCatMappings = Object.fromEntries(
-                Object.entries(updatedCategoryMappings).filter(
-                    ([key]) => !deleted?.includes(key)
-                )
-            )
-
-            const newCategoryMappings = Object.values(cleanCatMappings)
+        async ({
+            categoryMappings,
+        }: Pick<ProgramDisaggregationFormValues, 'categoryMappings'>) => {
+            const newCategoryMappings = Object.values(categoryMappings)
                 .flat()
-                .filter((mapping) => !mapping.deleted)
                 .map(({ id, categoryId, mappingName, options }) => ({
                     id,
                     categoryId,

@@ -53,16 +53,19 @@ export const apiResponseToFormValues = ({
             const disAggCombo = indicator.categoryCombo
             const attributeCombo = indicator.attributeCombo
 
-            const mappingsList = Object.values(categoryMappings).flat()
+            const categoryMappingsMap = new Map(
+                Object.values(categoryMappings)
+                    .flat()
+                    .map((cm) => [cm.id, cm])
+            )
             const mappingByComboType = {
                 disaggregation: {},
                 attribute: {},
             }
 
             indicator.categoryMappingIds.forEach((categoryMappingId) => {
-                const categoryMapping = mappingsList.find(
-                    (cm) => cm.id === categoryMappingId
-                )
+                const categoryMapping =
+                    categoryMappingsMap.get(categoryMappingId)
                 if (!categoryMapping) {
                     return acc
                 }

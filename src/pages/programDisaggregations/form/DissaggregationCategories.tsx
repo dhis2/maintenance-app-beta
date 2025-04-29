@@ -341,9 +341,8 @@ export const DisaggregationCategory = ({
     initiallyExpanded = false,
 }: DisaggregationCategoryProps) => {
     const array = useFieldArray(`categoryMappings.${id}`)
-    const { input: categoryMappingsDeleted } = useField(
-        'categoryMappings.deleted'
-    )
+    const { input: categoryMappingsDeleted } =
+        useField<string[]>('deletedCategories')
     const isDeleted = categoryMappingsDeleted.value.includes(id)
     const categoryDisplayName = categoryObject?.[id]?.displayName
 

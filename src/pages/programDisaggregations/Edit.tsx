@@ -27,14 +27,12 @@ import {
 } from '../../types/generated'
 import { ProgramDisaggregationFormFields } from './form'
 import { apiResponseToFormValues } from './form/apiResponseToFormValues'
-import {
-    CategoryMappingsRecord,
-    ProgramIndicatorMappingsRecord,
-} from './form/programDisaggregationSchema'
+import { ProgramDisaggregationFormValues } from './form/programDisaggregationSchema'
 import {
     useUpdateProgramIndicatorMutation,
     useUpdateProgramMutation,
 } from './form/useUpdateProgramIndicatorMutation'
+import { useOnSubmit } from './form/useOnSubmit'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -62,110 +60,6 @@ export type ProgramIndicatorWithMapping = {
     displayName: string
     name: string
     id: string
-}
-type ProgramDisaggregationFormValues = {
-    categoryMappings: CategoryMappingsRecord & {
-        deleted?: string[]
-    }
-    programIndicatorMappings: ProgramIndicatorMappingsRecord
-}
-
-export const useOnSubmit = (
-    programId: string,
-    initialValues: ProgramDisaggregationFormValues
-) => {
-    const saveAlert = useAlert(
-        ({ message }) => message,
-        (options) => options
-    )
-
-    const patchPrograms = useUpdateProgramMutation(programId)
-    const patchProgramIndicators = useUpdateProgramIndicatorMutation()
-    const navigate = useNavigateWithSearchState()
-
-    return useMemo(
-        () => async (values: ProgramDisaggregationFormValues) => {
-            if (!values) {
-                console.error('Tried to save new object without any changes', {
-                    values,
-                })
-                saveAlert.show({
-                    message: i18n.t('Cannot save empty object'),
-                    error: true,
-                })
-                return
-            }
-
-            const response = await patchPrograms(values.categoryMappings)
-
-            if (response.error) {
-                saveAlert.show({
-                    message: i18n.t(
-                        'Error while saving disaggregation categories'
-                    ),
-                    error: true,
-                })
-                return
-            }
-
-            const piMappingsUpdateResponses = await Promise.all(
-                Object.keys(values.programIndicatorMappings).map(
-                    async (programIndicatorId) => {
-                        const programIndicatorMapping =
-                            values.programIndicatorMappings[programIndicatorId]
-
-                        const response = await patchProgramIndicators(
-                            programIndicatorId,
-                            programIndicatorMapping
-                        )
-
-                        return { ...response, id: programIndicatorId }
-                    }
-                )
-            )
-
-            const piMappingsDeleteResponses = await Promise.all(
-                Object.keys(initialValues.programIndicatorMappings)
-                    .filter(
-                        (piMapping) =>
-                            !values.programIndicatorMappings[piMapping]
-                    )
-                    .map(async (programIndicatorId) => {
-                        const response = await patchProgramIndicators(
-                            programIndicatorId,
-                            null
-                        )
-                        return { ...response, id: programIndicatorId }
-                    })
-            )
-
-            const piMappingsResponses = [
-                ...piMappingsUpdateResponses,
-                ...piMappingsDeleteResponses,
-            ]
-
-            const errors = piMappingsResponses.filter((res) => res.error)
-            if (errors.length > 0) {
-                saveAlert.show({
-                    message: i18n.t(
-                        `Error while updating mappings for program indicators with ids: ${errors
-                            .map((r) => r.id)
-                            .join(' - ')}`
-                    ),
-                    error: true,
-                })
-            } else {
-                navigate(`/${SECTIONS_MAP.programDisaggregation.namePlural}`)
-            }
-        },
-        [
-            saveAlert,
-            navigate,
-            patchPrograms,
-            initialValues.programIndicatorMappings,
-            patchProgramIndicators,
-        ]
-    )
 }
 
 export const Component = () => {
@@ -201,15 +95,23 @@ export const Component = () => {
 
     const initialValues: ProgramDisaggregationFormValues = useMemo(() => {
         if (programQuery.data && programIndicatorsQuery.data) {
-            return apiResponseToFormValues({
-                program: programQuery.data,
-                programIndicators: programIndicatorsQuery.data,
-            })
+            const { programIndicatorMappings, categoryMappings } =
+                apiResponseToFormValues({
+                    program: programQuery.data,
+                    programIndicators: programIndicatorsQuery.data,
+                })
+
+            return {
+                deletedCategories: [],
+                programIndicatorMappings,
+                categoryMappings,
+            }
         }
 
         return {
             categoryMappings: {},
             programIndicatorMappings: {},
+            deletedCategories: [],
         }
     }, [programQuery.data, programIndicatorsQuery.data])
 
@@ -264,7 +166,8 @@ export const Component = () => {
                 mutators={{ ...arrayMutators }}
                 destroyOnUnregister={false}
             >
-                {({ handleSubmit }) => {
+                {({ handleSubmit, values }) => {
+                    console.log({ values })
                     return (
                         <>
                             {isLoading && (

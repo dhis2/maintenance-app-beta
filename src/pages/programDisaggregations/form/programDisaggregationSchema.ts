@@ -44,17 +44,26 @@ export const programIndicatorSchema = z.object({
     // map from categoryId to categoryMapping
     disaggregation: z.record(z.string(), z.string()),
     attribute: z.record(z.string(), z.string()),
+    id: z.string(),
     name: z.string(),
     displayName: z.string(),
 })
 const categoryMappingsRecord = z.record(z.string(), z.array(categoryMapping))
-export type CategoryMappingsRecord = z.infer<typeof categoryMappingsRecord>
 export const programIndicatorMappingsRecord = z.record(programIndicatorSchema)
+
+export const programDisaggregationSchema = z.object({
+    deletedCategories: z.array(z.string()).default([]),
+    categoryMappings: categoryMappingsRecord.default({}),
+    programIndicatorMappings: programIndicatorMappingsRecord.default({}),
+})
+
+export type CategoryMappingsRecord = z.infer<typeof categoryMappingsRecord>
 export type ProgramIndicatorMappingsRecord = z.infer<
     typeof programIndicatorMappingsRecord
 >
 
-export const schema = z.object({
-    categoryMappings: categoryMappingsRecord,
-    programIndicatorMappings: programIndicatorMappingsRecord,
-})
+export type ProgramDisaggregationFormValues = z.infer<
+    typeof programDisaggregationSchema
+>
+export type CategoryMapping = z.infer<typeof categoryMapping>
+export type ProgramIndicatorMapping = z.infer<typeof programIndicatorSchema>

@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, SingleSelectField, SingleSelectOption } from '@dhis2/ui'
-import React, { useEffect, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
@@ -14,10 +14,10 @@ import {
     ModelSingleSelect,
     ModelSingleSelectField,
 } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { CategoryMapping, DisplayableModel } from '../../../types/models'
+import { DisplayableModel } from '../../../types/models'
 import { ProgramIndicatorWithMapping } from '../Edit'
 import {
-    CategoryMappingsRecord,
+    CategoryMapping,
     ProgramIndicatorMappingsRecord,
 } from './programDisaggregationSchema'
 import css from './ProgramIndicatorMapping.module.css'
@@ -40,14 +40,15 @@ export const ProgramIndicatorMappingSection = ({
         setProgramIndicators(initialProgramIndicators)
     }, [initialProgramIndicators])
 
-    const transformProgramsIndicatorsForSelect = (
-        results: DisplayableModel[]
-    ) =>
-        results.map((result) =>
-            programIndicators.map((p) => p.id).includes(result.id)
-                ? { ...result, disabled: true }
-                : result
-        )
+    const transformProgramsIndicatorsForSelect = useCallback(
+        (results: DisplayableModel[]) =>
+            results.map((result) =>
+                programIndicators.map((p) => p.id).includes(result.id)
+                    ? { ...result, disabled: true }
+                    : result
+            ),
+        [programIndicators]
+    )
     return (
         <SectionedFormSection name="programIndicatorMappings">
             <StandardFormSectionTitle>
@@ -63,6 +64,12 @@ export const ProgramIndicatorMappingSection = ({
                 }}
                 onChange={(selected) => {
                     if (selected) {
+                        // piInput.onChange({
+                        //     ...piInput.value,
+                        //     [selected.id]: {
+                        //         ...selected,
+                        //     },
+                        // })
                         setProgramIndicators([...programIndicators, selected])
                     }
                 }}
@@ -212,20 +219,28 @@ export const ProgramIndicatorMapping = ({
 export const CategoryMappingSelect = ({
     category,
     programIndicatorId,
+    onAddMapping,
 }: {
     category: DisplayableModel
     programIndicatorId: string
+    onAddMapping?: () => void
 }) => {
-    const availableWithDeletedMappings =
-        useField(`categoryMappings.${category.id}`)?.input?.value ||
-        ([] as CategoryMapping[])
+    const availableWithDeletedMappings = useField<CategoryMapping[]>(
+        `categoryMappings.${category.id}`
+    )?.input?.value
+
     const deletedCategories =
-        useField('categoryMappings.deleted')?.input?.value ?? []
-    const availableMappings = deletedCategories.includes(category.id)
-        ? []
-        : availableWithDeletedMappings.filter(
-              ({ deleted }: { deleted: boolean }) => !deleted
-          )
+        useField<string[]>('deletedCategories')?.input?.value
+
+    const availableMappings = useMemo(
+        () =>
+            (deletedCategories ?? []).includes(category.id)
+                ? []
+                : (availableWithDeletedMappings || []).filter(
+                      ({ deleted }: { deleted: boolean }) => !deleted
+                  ),
+        [category.id, deletedCategories, availableWithDeletedMappings]
+    )
 
     const selectedMapping = useField(
         `programIndicatorMappings.${programIndicatorId}.disaggregation.${category.id}`,
@@ -237,18 +252,12 @@ export const CategoryMappingSelect = ({
                     : undefined,
         }
     )
-    const scrollToElement = (id: string) => {
-        const el = document.getElementById(id)
-        if (el) {
-            el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        }
-    }
 
     const selected = useMemo(
         () =>
             availableMappings &&
             availableMappings
-                .map((m: CategoryMappingsRecord) => m.id)
+                .map((m) => m.id)
                 .includes(selectedMapping.input.value)
                 ? selectedMapping.input.value
                 : undefined,
@@ -281,9 +290,7 @@ export const CategoryMappingSelect = ({
             <Button
                 className={css.mappingSelectAddMappingButton}
                 secondary
-                onClick={() => {
-                    scrollToElement('disaggregationCategories')
-                }}
+                onClick={() => onAddMapping?.()}
             >
                 {i18n.t('Add mapping')}
             </Button>
