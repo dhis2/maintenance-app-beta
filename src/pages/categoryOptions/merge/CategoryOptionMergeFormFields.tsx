@@ -1,7 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { NoticeBox } from '@dhis2/ui'
 import React from 'react'
-import { useFormState } from 'react-final-form'
 import { StandardFormSectionTitle } from '../../../components'
 import {
     BaseSourcesField,
@@ -14,7 +12,11 @@ import {
     ConfirmationField,
 } from '../../../components/merge'
 
-export const CategoryOptionMergeFormFields = () => {
+export const CategoryOptionMergeFormFields = ({
+    selectedIds,
+}: {
+    selectedIds: string[]
+}) => {
     return (
         <FormSections>
             <FormSection>
@@ -38,6 +40,7 @@ export const CategoryOptionMergeFormFields = () => {
                             resource: 'categoryOptions',
                             params: {
                                 fields: ['id', 'displayName', 'name'],
+                                filter: `id:in:[${selectedIds.join(',')}]`,
                             },
                         }}
                     />
@@ -50,6 +53,7 @@ export const CategoryOptionMergeFormFields = () => {
                             resource: 'categoryOptions',
                             params: {
                                 fields: ['id', 'displayName', 'name'],
+                                filter: `id:in:[${selectedIds.join(',')}]`,
                             },
                         }}
                         noMatchWithoutFilterText={i18n.t(
