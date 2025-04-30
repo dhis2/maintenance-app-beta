@@ -14,7 +14,7 @@ import {
 } from '../../../components'
 import { generateDhis2Id, useBoundResourceQueryFn } from '../../../lib'
 import { CategoriesSelector } from './CategoriesSelector'
-import {CategoryMapping} from './CategoryMapping'
+import { CategoryMapping } from './CategoryMapping'
 import css from './DissaggregationCategories.module.css'
 
 type CategoryOption = {
@@ -339,7 +339,6 @@ export const DisaggregationCategory = ({
     id,
     categoryObject,
     initiallyExpanded = false,
-
 }: DisaggregationCategoryProps) => {
     const array = useFieldArray(`categoryMappings.${id}`)
 
@@ -350,13 +349,14 @@ export const DisaggregationCategory = ({
         'categoryMappings.deleted'
     )
 
-    const someMappingInvalid = useMemo( () => {
-        return array.fields.value.some(catMappings =>
-        Object.values(catMappings.options).some(
-            optionMapping => optionMapping.invalid
+    const someMappingInvalid = useMemo(() => {
+        return array.fields.value.some((catMappings) =>
+            Object.values(catMappings.options).some(
+                (optionMapping) =>
+                    (optionMapping as { invalid: boolean }).invalid
+            )
         )
-    )}, [array])
-
+    }, [array])
 
     const isDeleted = categoryMappingsDeleted.value.includes(id)
     const categoryDisplayName = categoryObject?.[id]?.displayName
@@ -396,7 +396,11 @@ export const DisaggregationCategory = ({
                     <CollapsibleCardTitle
                         prefix={i18n.t('Category:')}
                         title={categoryDisplayName}
-                        icon={someMappingInvalid ? <IconWarningFilled16 color="var(--colors-yellow600)" /> : null}
+                        icon={
+                            someMappingInvalid ? (
+                                <IconWarningFilled16 color="var(--colors-yellow600)" />
+                            ) : null
+                        }
                     />
                     <Button
                         small

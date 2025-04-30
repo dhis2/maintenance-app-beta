@@ -178,6 +178,7 @@ export const CategoryMapping = ({
 
             {categoryOptionArray.map((opt: CategoryOption) => (
                 <CategoryMappingInput
+                    key={opt.id}
                     fieldName={fieldName}
                     opt={opt}
                     categoryOptionInformation={categoryOptionInformation}
@@ -191,6 +192,10 @@ const CategoryMappingInput = ({
     fieldName,
     opt,
     categoryOptionInformation,
+}: {
+    fieldName: string
+    opt: CategoryOption
+    categoryOptionInformation: Record<string, string>
 }) => {
     const { validationError, handleChange, isInvalidExpression } =
         useValidateExpressionField()
@@ -216,7 +221,6 @@ const CategoryMappingInput = ({
                                         const invalid = await handleChange(
                                             value
                                         )
-                                        console.log({ value, invalid })
                                         validation.input.onChange(invalid)
                                     },
                                 }}

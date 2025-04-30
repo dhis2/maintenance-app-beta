@@ -5,8 +5,8 @@
     gap: var(--spacers-dp16);
 }
 
-.warning{
-    color:  var(--colors-yellow700);
+.warning {
+    color: var(--colors-yellow700);
     font-size: 12px;
     margin-top: 4px;
 }

@@ -9,16 +9,13 @@ export const ProgramDisaggregationFormFields = ({
 }: {
     initialProgramIndicators: ProgramIndicatorWithMapping[]
 }) => {
-
     return (
         <div>
             <SectionedFormSections>
                 <ProgramIndicatorMappingSection
                     initialProgramIndicators={initialProgramIndicators}
-
                 />
-                <DisaggregationCategories
-                />
+                <DisaggregationCategories />
             </SectionedFormSections>
         </div>
     )

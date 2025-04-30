@@ -26,7 +26,7 @@ import { CategoryMappingsRecord } from './programDisaggregationSchema'
 import css from './ProgramIndicatorMapping.module.css'
 
 export const ProgramIndicatorMappingSection = ({
-    initialProgramIndicators
+    initialProgramIndicators,
 }: {
     initialProgramIndicators: ProgramIndicatorWithMapping[]
 }) => {
@@ -112,9 +112,7 @@ export const ProgramIndicatorMappingSection = ({
                             </CollapsibleCardHeader>
                         }
                     >
-                        <ProgramIndicatorMapping
-                            programIndicator={indicator}
-                        />
+                        <ProgramIndicatorMapping programIndicator={indicator} />
                     </CollapsibleCard>
                 ))}
             </div>
@@ -130,7 +128,7 @@ export const ProgramIndicatorMapping = ({
     const categoryCombo = useField(
         `programIndicatorMappings.${programIndicator.id}.categoryCombo`
     )
-    console.log({programIndicator})
+
     return (
         <div className={css.mappingFields}>
             <ModelSingleSelectField
@@ -220,13 +218,15 @@ export const CategoryMappingSelect = ({
                 : undefined,
         [availableMappings, selectedMapping]
     )
-    
-    const hasSomeInvalidMappings = useMemo( () => {
-        return availableMappings.some(catMappings =>
-            Object.values(catMappings.options).some(
-                optionMapping => optionMapping.invalid
+
+    const hasSomeInvalidMappings = useMemo(() => {
+        return availableMappings.some((catMappings: CategoryMappingsRecord) => {
+            return Object.values(catMappings.options).some(
+                (optionMapping) =>
+                    (optionMapping as unknown as { invalid: boolean }).invalid
             )
-        )}, [availableMappings])
+        })
+    }, [availableMappings])
 
     return (
         <div>
@@ -262,7 +262,10 @@ export const CategoryMappingSelect = ({
                     {i18n.t('Add mapping')}
                 </Button>
             </div>
-            <span className={css.warning}>{hasSomeInvalidMappings && i18n.t('There are some invalid expressions')}</span>
+            <span className={css.warning}>
+                {hasSomeInvalidMappings &&
+                    i18n.t('There are some invalid expressions')}
+            </span>
         </div>
     )
 }
