@@ -13,34 +13,26 @@ export const categoryMapping = z.object({
     deleted: z.boolean(),
     options: z.record(categoryOptionMapping),
 })
+const identifiable = z.object({
+    id: z.string(),
+    displayName: z.string(),
+})
+const categoryComboSchema = z
+    .object({
+        id: z.string(),
+        displayName: z.string(),
+        dataDimensionType: z.nativeEnum(CategoryCombo.dataDimensionType),
+        categories: z.array(
+            identifiable.extend({
+                categoryOptions: z.array(identifiable),
+            })
+        ),
+    })
+    .optional()
 
 export const programIndicatorSchema = z.object({
-    categoryCombo: z
-        .object({
-            id: z.string(),
-            displayName: z.string(),
-            dataDimensionType: z.nativeEnum(CategoryCombo.dataDimensionType),
-            categories: z.array(
-                z.object({
-                    id: z.string(),
-                    displayName: z.string(),
-                })
-            ),
-        })
-        .optional(),
-    attributeCombo: z
-        .object({
-            id: z.string(),
-            displayName: z.string(),
-            dataDimensionType: z.nativeEnum(CategoryCombo.dataDimensionType),
-            categories: z.array(
-                z.object({
-                    id: z.string(),
-                    displayName: z.string(),
-                })
-            ),
-        })
-        .optional(),
+    categoryCombo: categoryComboSchema.optional(),
+    attributeCombo: categoryComboSchema.optional(),
     // map from categoryId to categoryMapping
     disaggregation: z.record(z.string(), z.string()),
     attribute: z.record(z.string(), z.string()),
@@ -48,6 +40,7 @@ export const programIndicatorSchema = z.object({
     name: z.string(),
     displayName: z.string(),
 })
+
 const categoryMappingsRecord = z.record(z.string(), z.array(categoryMapping))
 export const programIndicatorMappingsRecord = z.record(programIndicatorSchema)
 
