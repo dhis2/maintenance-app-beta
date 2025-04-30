@@ -1,7 +1,6 @@
 import { useDataEngine } from '@dhis2/app-runtime'
-import i18n from '@dhis2/d2-i18n'
 import { useMutation } from '@tanstack/react-query'
-import { useCallback, useState, useRef } from 'react'
+import { useCallback, useRef } from 'react'
 
 interface ValidateExpressionRequest {
     expression: string
@@ -22,7 +21,7 @@ export const useValidateExpressionMutation = () => {
         const response = await engine.mutate({
             resource: 'programIndicators/filter/description',
             type: 'create',
-            data: expression as unknown as Record<string, unknown>,
+            data: { expression },
         })
         return response as unknown as ValidateExpressionResponse
     })
@@ -30,10 +29,6 @@ export const useValidateExpressionMutation = () => {
 
 export const useValidateExpressionField = () => {
     const { mutateAsync: validateExpression } = useValidateExpressionMutation()
-    const [validationError, setValidationError] = useState<string | undefined>(
-        undefined
-    )
-    const [isInvalidExpression, setIsInvalidExpression] = useState(false)
     const currentValueRef = useRef<string>('')
 
     const debouncedValidate = useCallback(
@@ -41,8 +36,6 @@ export const useValidateExpressionField = () => {
             currentValueRef.current = value
 
             if (!value) {
-                setValidationError(undefined)
-                setIsInvalidExpression(false)
                 return false
             }
 
@@ -55,33 +48,25 @@ export const useValidateExpressionField = () => {
                 }
 
                 if (result.status === 'ERROR') {
-                    setValidationError(i18n.t('Invalid expression'))
-                    setIsInvalidExpression(true)
                     return true
                 } else {
-                    setValidationError(undefined)
-                    setIsInvalidExpression(false)
                     return false
                 }
             } catch (error) {
                 if (currentValueRef.current !== value) {
                     return
                 }
-
-                setValidationError(i18n.t('Validation failed'))
-                setIsInvalidExpression(true)
+                return false
             }
         },
         [validateExpression]
     )
 
-    const handleChange = (value: string) => {
+    const handleValidateExpression = (value: string) => {
         return debouncedValidate(value)
     }
 
     return {
-        validationError,
-        isInvalidExpression,
-        handleChange,
+        handleValidateExpression,
     }
 }

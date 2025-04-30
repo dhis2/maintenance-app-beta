@@ -11,8 +11,8 @@ import {
     ModalActions,
     Input,
 } from '@dhis2/ui'
-import React, { useCallback, useState, ReactNode, useEffect } from 'react'
-import { Field, useField, useFormState } from 'react-final-form'
+import React, { useCallback, useState, ReactNode } from 'react'
+import { useField } from 'react-final-form'
 import css from './CategoryMapping.module.css'
 import { useValidateExpressionField } from './useFormHooks'
 
@@ -79,13 +79,11 @@ type CategoryMappingProps = {
     fieldName: string
     categoryOptionArray: CategoryOption[]
     showSoftDelete: boolean
-    onValidationStateChange?: (fieldName: string, isInvalid: boolean) => void
 }
 export const CategoryMapping = ({
     fieldName,
     categoryOptionArray,
     showSoftDelete = true,
-    onValidationStateChange,
 }: CategoryMappingProps) => {
     const categoryMapping = useField(fieldName)
     const categoryMappingOnChange = categoryMapping?.input?.onChange
@@ -197,41 +195,33 @@ const CategoryMappingInput = ({
     opt: CategoryOption
     categoryOptionInformation: Record<string, string>
 }) => {
-    const { validationError, handleChange, isInvalidExpression } =
-        useValidateExpressionField()
+    const { handleValidateExpression } = useValidateExpressionField()
     const validation = useField(`${fieldName}.options.${opt.id}.invalid`)
+    const { input, meta } = useField(
+        `${fieldName}.options.${opt.id}.filter`,
+        {}
+    )
     return (
         <div
             key={`${fieldName}.options.${opt.id}.filter_div`}
             className={css.filterInputContainer}
         >
-            <Field
-                name={`${fieldName}.options.${opt.id}.filter`}
-                key={`${fieldName}.options.${opt.id}.filter`}
-            >
-                {({ input, meta }) => {
-                    return (
-                        <>
-                            <InputFieldFF
-                                label={`${categoryOptionInformation?.[opt.id]}`}
-                                input={{
-                                    ...input,
-                                    onChange: async (value: string) => {
-                                        input.onChange(value)
-                                        const invalid = await handleChange(
-                                            value
-                                        )
-                                        validation.input.onChange(invalid)
-                                    },
-                                }}
-                                meta={meta}
-                                validationText={validationError}
-                                warning={isInvalidExpression}
-                            />
-                        </>
-                    )
+            <InputFieldFF
+                label={`${categoryOptionInformation?.[opt.id]}`}
+                input={{
+                    ...input,
+                    onChange: async (value: string) => {
+                        input.onChange(value)
+                        const invalid = await handleValidateExpression(value)
+                        validation.input.onChange(invalid)
+                    },
                 }}
-            </Field>
+                meta={meta}
+                validationText={
+                    validation.input.value && i18n.t('Invalid expression')
+                }
+                warning={validation.input.value}
+            />
         </div>
     )
 }
