@@ -1,6 +1,6 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, IconInfo16 } from '@dhis2/ui'
+import { Button, IconInfo16, IconWarningFilled16 } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo, useState } from 'react'
 import { useField, useForm, useFormState } from 'react-final-form'
@@ -314,6 +314,14 @@ export const CategoryMappingList = ({
     const { input: categoryMappingsDeleted } =
         useField<string[]>('deletedCategories')
     const isDeleted = categoryMappingsDeleted.value.includes(category.id)
+    const someMappingInvalid = useMemo(() => {
+        return array.fields.value.some((catMappings) =>
+            Object.values(catMappings.options).some(
+                (optionMapping) =>
+                    (optionMapping as { invalid: boolean }).invalid
+            )
+        )
+    }, [array])
     const categoryDisplayName = category.displayName
     const showSoftDelete =
         array.fields.value.filter((val) => !val.deleted).length > 1
@@ -353,6 +361,11 @@ export const CategoryMappingList = ({
                     <CollapsibleCardTitle
                         prefix={i18n.t('Category:')}
                         title={categoryDisplayName}
+                        icon={
+                            someMappingInvalid ? (
+                                <IconWarningFilled16 color="var(--colors-yellow600)" />
+                            ) : null
+                        }
                     />
                     <Button
                         small
@@ -370,7 +383,7 @@ export const CategoryMappingList = ({
                 </CollapsibleCardHeader>
             }
         >
-            {array.fields.map((fieldName, index) => (
+            {array.fields.map((fieldName) => (
                 <div key={fieldName}>
                     <CategoryMapping
                         fieldName={fieldName}

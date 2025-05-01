@@ -5,6 +5,12 @@
     gap: var(--spacers-dp16);
 }
 
+.warning {
+    color: var(--colors-yellow700);
+    font-size: 12px;
+    margin-top: 4px;
+}
+
 .mappingList {
     padding-inline-start: var(--spacers-dp16);
     padding-block-start: var(--spacers-dp4);

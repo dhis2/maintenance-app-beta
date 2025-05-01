@@ -47,14 +47,17 @@ export const CollapsibleCard = ({
 export const CollapsibleCardTitle = ({
     prefix,
     title,
+    icon,
 }: {
     prefix?: string
     title: string
+    icon?: React.ReactNode
 }) => {
     return (
         <span className={css.titleWrapper}>
             {prefix && <h3 className={css.prefix}>{prefix} </h3>}
             <h3>{title}</h3>
+            {icon && <span className={css.iconWrapper}>{icon}</span>}
         </span>
     )
 }

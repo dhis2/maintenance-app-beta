@@ -5,7 +5,7 @@ import {
     SingleSelectField,
     SingleSelectOption,
 } from '@dhis2/ui'
-import React, { useCallback, useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Field, useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
@@ -28,6 +28,12 @@ import {
 } from './programDisaggregationSchema'
 import css from './ProgramIndicatorMapping.module.css'
 
+type OptionMapping = {
+    filter: string
+    optionId: string
+    invalid?: boolean
+}
+
 export const ProgramIndicatorMappingSection = ({
     initialProgramIndicators,
 }: {
@@ -46,15 +52,14 @@ export const ProgramIndicatorMappingSection = ({
         setProgramIndicators(initialProgramIndicators)
     }, [initialProgramIndicators])
 
-    const transformProgramsIndicatorsForSelect = useCallback(
-        (results: DisplayableModel[]) =>
-            results.map((result) =>
-                programIndicators.map((p) => p.id).includes(result.id)
-                    ? { ...result, disabled: true }
-                    : result
-            ),
-        [programIndicators]
-    )
+    const transformProgramsIndicatorsForSelect = (
+        results: DisplayableModel[]
+    ) =>
+        results.map((result) =>
+            programIndicators.map((p) => p.id).includes(result.id)
+                ? { ...result, disabled: true }
+                : result
+        )
     return (
         <SectionedFormSection name="programIndicatorMappings">
             <StandardFormSectionTitle>
@@ -286,36 +291,50 @@ export const CategoryMappingSelect = ({
         [availableMappings, selectedMapping]
     )
 
+    const hasSomeInvalidMappings = useMemo(() => {
+        return availableMappings.some((catMappings: CategoryMapping) => {
+            return Object.values(catMappings.options).some(
+                (optionMapping: OptionMapping) => optionMapping.invalid === true
+            )
+        })
+    }, [availableMappings])
+
     return (
-        <div className={css.mappingSelectWrapper}>
-            <SingleSelectField
-                label={`Mapping: ${category.displayName}`}
-                onChange={(payload) =>
-                    selectedMapping.input.onChange(payload.selected)
-                }
-                disabled={availableMappings.length < 1}
-                placeholder={
-                    availableMappings.length < 1
-                        ? 'No mappings available'
-                        : 'Select mapping'
-                }
-                selected={selected}
-            >
-                {availableMappings?.map((mapping: CategoryMapping) => (
-                    <SingleSelectOption
-                        key={mapping.id}
-                        label={mapping.mappingName}
-                        value={mapping.id}
-                    />
-                ))}
-            </SingleSelectField>
-            <Button
-                className={css.mappingSelectAddMappingButton}
-                secondary
-                onClick={() => onAddMapping?.()}
-            >
-                {i18n.t('Add mapping')}
-            </Button>
+        <div>
+            <div className={css.mappingSelectWrapper}>
+                <SingleSelectField
+                    label={`Mapping: ${category.displayName}`}
+                    onChange={(payload) =>
+                        selectedMapping.input.onChange(payload.selected)
+                    }
+                    disabled={availableMappings.length < 1}
+                    placeholder={
+                        availableMappings.length < 1
+                            ? 'No mappings available'
+                            : 'Select mapping'
+                    }
+                    selected={selected}
+                >
+                    {availableMappings?.map((mapping: CategoryMapping) => (
+                        <SingleSelectOption
+                            key={mapping.id}
+                            label={mapping.mappingName}
+                            value={mapping.id}
+                        />
+                    ))}
+                </SingleSelectField>
+                <Button
+                    className={css.mappingSelectAddMappingButton}
+                    secondary
+                    onClick={() => onAddMapping?.()}
+                >
+                    {i18n.t('Add mapping')}
+                </Button>
+            </div>
+            <span className={css.warning}>
+                {hasSomeInvalidMappings &&
+                    i18n.t('There are some invalid expressions')}
+            </span>
         </div>
     )
 }
