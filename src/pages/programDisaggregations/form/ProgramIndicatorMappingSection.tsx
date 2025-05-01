@@ -145,7 +145,7 @@ const ProgramIndicatorCard = ({
                         destructive
                         onClick={() => {
                             programIndicatorMappingsDeleted.onChange([
-                                ...(programIndicatorMappingsDeleted.value ||
+                                ...(programIndicatorMappingsDeleted.value ??
                                     []),
                                 programIndicator.id,
                             ])
@@ -290,7 +290,7 @@ export const CategoryMappingSelect = ({
         () =>
             (deletedCategories ?? []).includes(category.id)
                 ? []
-                : (availableWithDeletedMappings || []).filter(
+                : (availableWithDeletedMappings ?? []).filter(
                       ({ deleted }: { deleted: boolean }) => !deleted
                   ),
         [category.id, deletedCategories, availableWithDeletedMappings]
