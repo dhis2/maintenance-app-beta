@@ -40,8 +40,8 @@ const programIndicatorFieldFilters = [
     'name',
     'displayName',
     'categoryMappingIds',
-    'attributeCombo[id, displayName, dataDimensionType, categories[id, displayName,dataDimensionType]]',
-    'categoryCombo[id, displayName, dataDimensionType, categories[id, displayName,dataDimensionType]]',
+    'attributeCombo[id, displayName, dataDimensionType, categories[id, displayName,dataDimensionType,categoryOptions[id, displayName]]]',
+    'categoryCombo[id, displayName, dataDimensionType, categories[id, displayName,dataDimensionType,categoryOptions[id, displayName]]]',
 ] as const
 
 export type ProgramData = PickWithFieldFilters<Program, typeof fieldFilters>
