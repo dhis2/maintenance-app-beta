@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-04-29T22:12:00.703Z\n"
-"PO-Revision-Date: 2025-04-29T22:12:00.703Z\n"
+"POT-Creation-Date: 2025-05-01T11:46:33.437Z\n"
+"PO-Revision-Date: 2025-05-01T11:46:33.437Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2185,17 +2185,14 @@ msgstr ""
 msgid "Manage"
 msgstr "Manage"
 
-msgid "No changes to save"
-msgstr "No changes to save"
-
-msgid "Error while saving disaggregation categories"
-msgstr "Error while saving disaggregation categories"
-
 msgid "Program indicator mappings"
 msgstr "Program indicator mappings"
 
 msgid "Disaggregation categories"
 msgstr "Disaggregation categories"
+
+msgid "Attribute categories"
+msgstr "Attribute categories"
 
 msgid "Error"
 msgstr "Error"
@@ -2206,8 +2203,8 @@ msgstr "Could not load programs or indicators data."
 msgid "Add a category"
 msgstr "Add a category"
 
-msgid "Add categories from a category combination"
-msgstr "Add categories from a category combination"
+msgid "Add categories from a category combo"
+msgstr "Add categories from a category combo"
 
 msgid "Rename category mapping"
 msgstr "Rename category mapping"
@@ -2224,18 +2221,11 @@ msgstr "Undo delete"
 msgid "Mapping: "
 msgstr "Mapping: "
 
-msgid ""
-"There are no category combinations. Your system must have at least one "
-"category combination in order to disaggregate a program indicator."
-msgstr ""
-"There are no category combinations. Your system must have at least one "
-"category combination in order to disaggregate a program indicator."
+msgid "Invalid expression"
+msgstr "Invalid expression"
 
 msgid "No new categories to add"
 msgstr "No new categories to add"
-
-msgid "One category added"
-msgstr "One category added"
 
 msgid "{{newlyAddedCount}} categories added"
 msgstr "{{newlyAddedCount}} categories added"
@@ -2277,17 +2267,20 @@ msgstr "Program Indicator:"
 msgid "Remove program indicator mapping"
 msgstr "Remove program indicator mapping"
 
+msgid "Attribute category combination"
+msgstr "Attribute category combination"
+
 msgid "Data element for aggregate data export"
 msgstr "Data element for aggregate data export"
 
 msgid "There are some invalid expressions"
 msgstr "There are some invalid expressions"
 
-msgid "Invalid expression"
-msgstr "Invalid expression"
+msgid "No changes to save"
+msgstr "No changes to save"
 
-msgid "Validation failed"
-msgstr "Validation failed"
+msgid "Error while saving disaggregation categories"
+msgstr "Error while saving disaggregation categories"
 
 msgid "Could not delete program mappings"
 msgstr "Could not delete program mappings"

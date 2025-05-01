@@ -53,6 +53,7 @@ export const useValidateExpressionField = () => {
                     return false
                 }
             } catch (error) {
+                console.log(error)
                 if (currentValueRef.current !== value) {
                     return
                 }

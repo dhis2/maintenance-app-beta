@@ -318,7 +318,7 @@ export const CategoryMappingSelect = ({
     const hasSomeInvalidMappings = useMemo(() => {
         return availableMappings.some((catMappings: CategoryMapping) => {
             return Object.values(catMappings.options).some(
-                (optionMapping) => optionMapping.invalid
+                (optionMapping) => !!optionMapping.invalid
             )
         })
     }, [availableMappings])
