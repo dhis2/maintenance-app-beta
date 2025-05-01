@@ -315,10 +315,9 @@ export const CategoryMappingList = ({
         useField<string[]>('deletedCategories')
     const isDeleted = categoryMappingsDeleted.value.includes(category.id)
     const someMappingInvalid = useMemo(() => {
-        return array.fields.value.some((catMappings) =>
+        return array.fields.value.some((catMappings: CategoryMappingSchema) =>
             Object.values(catMappings.options).some(
-                (optionMapping) =>
-                    (optionMapping as { invalid: boolean }).invalid
+                (optionMapping) => optionMapping.invalid
             )
         )
     }, [array])

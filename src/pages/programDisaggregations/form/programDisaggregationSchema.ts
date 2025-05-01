@@ -4,6 +4,7 @@ import { CategoryCombo } from './../../../types/generated/models'
 export const categoryOptionMapping = z.object({
     filter: z.string(),
     optionId: z.string(),
+    invalid: z.boolean().optional(),
 })
 
 const identifiable = z.object({
