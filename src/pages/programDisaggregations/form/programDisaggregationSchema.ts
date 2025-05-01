@@ -6,30 +6,33 @@ export const categoryOptionMapping = z.object({
     optionId: z.string(),
 })
 
-export const categoryMapping = z.object({
-    id: z.string(),
-    categoryId: z.string(),
-    mappingName: z.string(),
-    deleted: z.boolean(),
-    options: z.record(categoryOptionMapping),
-})
 const identifiable = z.object({
     id: z.string(),
     displayName: z.string(),
+})
+const categorySchema = identifiable.extend({
+    categoryOptions: z.array(identifiable),
+    dataDimensionType: z.nativeEnum(CategoryCombo.dataDimensionType),
 })
 const categoryComboSchema = z
     .object({
         id: z.string(),
         displayName: z.string(),
         dataDimensionType: z.nativeEnum(CategoryCombo.dataDimensionType),
-        categories: z.array(
-            identifiable.extend({
-                categoryOptions: z.array(identifiable),
-            })
-        ),
+        categories: z.array(categorySchema),
     })
     .optional()
 
+export const categoryMapping = z.object({
+    id: z.string(),
+    categoryId: z.string(),
+    mappingName: z.string(),
+    deleted: z.boolean(),
+    options: z.record(categoryOptionMapping),
+    // note this is not what you get from backend, but is populated in form-state
+    // thus optional
+    category: categorySchema.optional(),
+})
 export const programIndicatorSchema = z.object({
     categoryCombo: categoryComboSchema.optional(),
     attributeCombo: categoryComboSchema.optional(),
@@ -60,3 +63,5 @@ export type ProgramDisaggregationFormValues = z.infer<
 >
 export type CategoryMapping = z.infer<typeof categoryMapping>
 export type ProgramIndicatorMapping = z.infer<typeof programIndicatorSchema>
+
+export type ProgramIndicatorCategory = z.infer<typeof categorySchema>

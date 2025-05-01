@@ -79,11 +79,11 @@ type CategoryMappingProps = {
     categoryOptionArray: CategoryOption[]
     showSoftDelete: boolean
 }
-export const CategoryMapping = ({
+export const CategoryMapping = React.memo(function CategoryMapping({
     fieldName,
     categoryOptionArray,
     showSoftDelete = true,
-}: CategoryMappingProps) => {
+}: CategoryMappingProps) {
     const categoryMapping = useField(fieldName)
     const categoryMappingOnChange = categoryMapping?.input?.onChange
     const categoryMappingValue = categoryMapping?.input?.value
@@ -185,4 +185,4 @@ export const CategoryMapping = ({
             ))}
         </CategoryMappingWrapper>
     )
-}
+})

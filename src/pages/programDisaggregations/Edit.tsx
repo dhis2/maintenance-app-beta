@@ -157,6 +157,11 @@ export const Component = () => {
                             },
                         ],
                     },
+                    {
+                        name: 'attributeCategories',
+                        label: i18n.t('Attribute categories'),
+                        fields: [],
+                    },
                 ],
             }}
         >
@@ -165,6 +170,7 @@ export const Component = () => {
                 onSubmit={useOnSubmit(id, initialValues)}
                 mutators={{ ...arrayMutators }}
                 destroyOnUnregister={false}
+                subscription={{ values: false }}
             >
                 {({ handleSubmit, values }) => {
                     console.log({ values })
