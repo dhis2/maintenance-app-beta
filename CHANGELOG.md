@@ -1,3 +1,16 @@
+## [0.39.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.39.0...v0.39.1) (2025-05-01)
+
+
+### Bug Fixes
+
+* disaggregation attribute mappings ([#554](https://github.com/dhis2/maintenance-app-beta/issues/554)) ([a6a1909](https://github.com/dhis2/maintenance-app-beta/commit/a6a1909e1e0946e2042a99607b1ea6bd12324d1e))
+
+
+### Features
+
+* add aggregateExportDataElement [DHIS2-19334] ([#550](https://github.com/dhis2/maintenance-app-beta/issues/550)) [skip release] ([b902b14](https://github.com/dhis2/maintenance-app-beta/commit/b902b14d339addc0a068a0fbcac34b06503bac16))
+* sort initial category mappings ([#551](https://github.com/dhis2/maintenance-app-beta/issues/551)) [skip release] ([7236fb7](https://github.com/dhis2/maintenance-app-beta/commit/7236fb75d0167445cad4e8588984113bfc71f9ac))
+
 # [0.39.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.38.2...v0.39.0) (2025-04-24)
 
 

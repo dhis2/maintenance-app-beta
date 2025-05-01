@@ -1,7 +1,12 @@
-import React, { useCallback, useState } from 'react'
-import { SectionedFormSections } from '../../../components'
+import i18n from '@dhis2/d2-i18n'
+import React from 'react'
+import {
+    SectionedFormSection,
+    SectionedFormSections,
+    StandardFormSectionTitle,
+} from '../../../components'
 import { ProgramIndicatorWithMapping } from '../Edit'
-import { DisaggregationCategories } from './DissaggregationCategories'
+import { CategoryMappingSection } from './CategoryMappingSection'
 import { ProgramIndicatorMappingSection } from './ProgramIndicatorMappingSection'
 
 export const ProgramDisaggregationFormFields = ({
@@ -15,7 +20,20 @@ export const ProgramDisaggregationFormFields = ({
                 <ProgramIndicatorMappingSection
                     initialProgramIndicators={initialProgramIndicators}
                 />
-                <DisaggregationCategories />
+                <SectionedFormSection name="disaggregationCategories">
+                    <StandardFormSectionTitle>
+                        {i18n.t('Disaggregation categories')}
+                    </StandardFormSectionTitle>
+                    <CategoryMappingSection
+                        dataDimensionType={'DISAGGREGATION'}
+                    />
+                </SectionedFormSection>
+                <SectionedFormSection name="attributeCategories">
+                    <StandardFormSectionTitle>
+                        {i18n.t('Attribute categories')}
+                    </StandardFormSectionTitle>
+                    <CategoryMappingSection dataDimensionType={'ATTRIBUTE'} />
+                </SectionedFormSection>
             </SectionedFormSections>
         </div>
     )
