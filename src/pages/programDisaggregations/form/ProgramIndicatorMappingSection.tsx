@@ -5,7 +5,7 @@ import {
     SingleSelectField,
     SingleSelectOption,
 } from '@dhis2/ui'
-import React, { useEffect, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { Field, useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
@@ -20,9 +20,12 @@ import {
     ModelSingleSelect,
     ModelSingleSelectField,
 } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { CategoryMapping, DisplayableModel } from '../../../types/models'
+import { DisplayableModel } from '../../../types/models'
 import { ProgramIndicatorWithMapping } from '../Edit'
-import { CategoryMappingsRecord } from './programDisaggregationSchema'
+import {
+    CategoryMapping,
+    ProgramIndicatorMappingsRecord,
+} from './programDisaggregationSchema'
 import css from './ProgramIndicatorMapping.module.css'
 
 export const ProgramIndicatorMappingSection = ({
@@ -31,7 +34,9 @@ export const ProgramIndicatorMappingSection = ({
     initialProgramIndicators: ProgramIndicatorWithMapping[]
 }) => {
     const programId = useParams().id
-    const { input: piInput } = useField(`programIndicatorMappings`)
+    const { input: piInput } = useField<ProgramIndicatorMappingsRecord>(
+        `programIndicatorMappings`
+    )
 
     const [programIndicators, setProgramIndicators] = React.useState<
         DisplayableModel[]
@@ -41,14 +46,15 @@ export const ProgramIndicatorMappingSection = ({
         setProgramIndicators(initialProgramIndicators)
     }, [initialProgramIndicators])
 
-    const transformProgramsIndicatorsForSelect = (
-        results: DisplayableModel[]
-    ) =>
-        results.map((result) =>
-            programIndicators.map((p) => p.id).includes(result.id)
-                ? { ...result, disabled: true }
-                : result
-        )
+    const transformProgramsIndicatorsForSelect = useCallback(
+        (results: DisplayableModel[]) =>
+            results.map((result) =>
+                programIndicators.map((p) => p.id).includes(result.id)
+                    ? { ...result, disabled: true }
+                    : result
+            ),
+        [programIndicators]
+    )
     return (
         <SectionedFormSection name="programIndicatorMappings">
             <StandardFormSectionTitle>
@@ -64,6 +70,12 @@ export const ProgramIndicatorMappingSection = ({
                 }}
                 onChange={(selected) => {
                     if (selected) {
+                        // piInput.onChange({
+                        //     ...piInput.value,
+                        //     [selected.id]: {
+                        //         ...selected,
+                        //     },
+                        // })
                         setProgramIndicators([...programIndicators, selected])
                     }
                 }}
@@ -128,36 +140,94 @@ export const ProgramIndicatorMapping = ({
     const categoryCombo = useField(
         `programIndicatorMappings.${programIndicator.id}.categoryCombo`
     )
+    const attributeCombo = useField(
+        `programIndicatorMappings.${programIndicator.id}.attributeCombo`
+    )
     return (
         <div className={css.mappingFields}>
-            <ModelSingleSelectField
-                label="Disaggregation category combination"
-                query={{
-                    resource: 'categoryCombos',
-                    params: {
-                        filter: 'dataDimensionType:eq:DISAGGREGATION',
-                        fields: [
-                            'id',
-                            'displayName',
-                            'categories[id,displayName]',
-                        ],
-                    },
-                }}
-                showNoValueOption
-                input={categoryCombo.input}
-                meta={categoryCombo.meta}
-            />
-            <div className={css.mappingList}>
-                {categoryCombo.input.value?.categories?.map(
-                    (category: DisplayableModel) => (
-                        <div key={category.id}>
-                            <CategoryMappingSelect
-                                category={category}
-                                programIndicatorId={programIndicator.id}
-                            />
-                        </div>
-                    )
-                )}
+            <div>
+                <ModelSingleSelectField
+                    label="Disaggregation category combination"
+                    query={{
+                        resource: 'categoryCombos',
+                        params: {
+                            filter: 'dataDimensionType:eq:DISAGGREGATION',
+                            fields: [
+                                'id',
+                                'displayName',
+                                'categories[id,displayName]',
+                            ],
+                        },
+                    }}
+                    showNoValueOption
+                    input={categoryCombo.input}
+                    meta={categoryCombo.meta}
+                />
+                <div className={css.mappingList}>
+                    {categoryCombo.input.value?.categories?.map(
+                        (category: DisplayableModel) => (
+                            <div key={category.id}>
+                                <CategoryMappingSelect
+                                    name={`programIndicatorMappings.${programIndicator.id}.disaggregation.${category.id}`}
+                                    category={category}
+                                    onAddMapping={() => {
+                                        const el = document.getElementById(
+                                            'disaggregationCategories'
+                                        )
+                                        if (el) {
+                                            el.scrollIntoView({
+                                                behavior: 'smooth',
+                                                block: 'start',
+                                            })
+                                        }
+                                    }}
+                                />
+                            </div>
+                        )
+                    )}
+                </div>
+            </div>
+            <div>
+                <ModelSingleSelectField
+                    label={i18n.t('Attribute category combination')}
+                    query={{
+                        resource: 'categoryCombos',
+                        params: {
+                            filter: 'dataDimensionType:eq:ATTRIBUTE',
+                            fields: [
+                                'id',
+                                'displayName',
+                                'categories[id,displayName]',
+                            ],
+                        },
+                    }}
+                    showNoValueOption
+                    input={attributeCombo.input}
+                    meta={attributeCombo.meta}
+                />
+                <div className={css.mappingList}>
+                    {attributeCombo.input.value?.categories?.map(
+                        (category: DisplayableModel) => (
+                            <div key={category.id}>
+                                <CategoryMappingSelect
+                                    name={`programIndicatorMappings.${programIndicator.id}.attribute.${category.id}`}
+                                    category={category}
+                                    onAddMapping={() => {
+                                        const el = document.getElementById(
+                                            'attributeCategories'
+                                        )
+                                        if (el) {
+                                            el.scrollIntoView({
+                                                behavior: 'smooth',
+                                                block: 'start',
+                                            })
+                                        }
+                                    }}
+                                />
+                            </div>
+                        )
+                    )}
+                </div>
             </div>
             <StandardFormField>
                 <Field
@@ -172,45 +242,44 @@ export const ProgramIndicatorMapping = ({
 }
 
 export const CategoryMappingSelect = ({
+    name,
     category,
-    programIndicatorId,
+    onAddMapping,
 }: {
+    name: string
     category: DisplayableModel
-    programIndicatorId: string
+    onAddMapping?: () => void
 }) => {
-    const availableWithDeletedMappings =
-        useField(`categoryMappings.${category.id}`)?.input?.value ||
-        ([] as CategoryMapping[])
-    const deletedCategories =
-        useField('categoryMappings.deleted')?.input?.value ?? []
-    const availableMappings = deletedCategories.includes(category.id)
-        ? []
-        : availableWithDeletedMappings.filter(
-              ({ deleted }: { deleted: boolean }) => !deleted
-          )
+    const availableWithDeletedMappings = useField<CategoryMapping[]>(
+        `categoryMappings.${category.id}`
+    )?.input?.value
 
-    const selectedMapping = useField(
-        `programIndicatorMappings.${programIndicatorId}.disaggregation.${category.id}`,
-        {
-            initialValue:
-                // changing to >= 1 overwrites saved values when there are multiple choices.
-                availableMappings.length === 1
-                    ? availableMappings[0].id
-                    : undefined,
-        }
+    const deletedCategories =
+        useField<string[]>('deletedCategories')?.input?.value
+
+    const availableMappings = useMemo(
+        () =>
+            (deletedCategories ?? []).includes(category.id)
+                ? []
+                : (availableWithDeletedMappings || []).filter(
+                      ({ deleted }: { deleted: boolean }) => !deleted
+                  ),
+        [category.id, deletedCategories, availableWithDeletedMappings]
     )
-    const scrollToElement = (id: string) => {
-        const el = document.getElementById(id)
-        if (el) {
-            el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        }
-    }
+
+    const selectedMapping = useField(name, {
+        initialValue:
+            // changing to >= 1 overwrites saved values when there are multiple choices.
+            availableMappings.length === 1
+                ? availableMappings[0].id
+                : undefined,
+    })
 
     const selected = useMemo(
         () =>
             availableMappings &&
             availableMappings
-                .map((m: CategoryMappingsRecord) => m.id)
+                .map((m) => m.id)
                 .includes(selectedMapping.input.value)
                 ? selectedMapping.input.value
                 : undefined,
@@ -243,9 +312,7 @@ export const CategoryMappingSelect = ({
             <Button
                 className={css.mappingSelectAddMappingButton}
                 secondary
-                onClick={() => {
-                    scrollToElement('disaggregationCategories')
-                }}
+                onClick={() => onAddMapping?.()}
             >
                 {i18n.t('Add mapping')}
             </Button>
