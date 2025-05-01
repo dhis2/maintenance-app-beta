@@ -53,6 +53,7 @@ export const programDisaggregationSchema = z.object({
     deletedCategories: z.array(z.string()).default([]),
     categoryMappings: categoryMappingsRecord.default({}),
     programIndicatorMappings: programIndicatorMappingsRecord.default({}),
+    deletedProgramIndicatorMappings: z.array(z.string()).default([]),
 })
 
 export type CategoryMappingsRecord = z.infer<typeof categoryMappingsRecord>
