@@ -162,8 +162,19 @@ export const ProgramIndicatorMapping = ({
                         (category: DisplayableModel) => (
                             <div key={category.id}>
                                 <CategoryMappingSelect
+                                    name={`programIndicatorMappings.${programIndicator.id}.disaggregation.${category.id}`}
                                     category={category}
-                                    programIndicatorId={programIndicator.id}
+                                    onAddMapping={() => {
+                                        const el = document.getElementById(
+                                            'disaggregationCategories'
+                                        )
+                                        if (el) {
+                                            el.scrollIntoView({
+                                                behavior: 'smooth',
+                                                block: 'start',
+                                            })
+                                        }
+                                    }}
                                 />
                             </div>
                         )
@@ -193,11 +204,11 @@ export const ProgramIndicatorMapping = ({
                         (category: DisplayableModel) => (
                             <div key={category.id}>
                                 <CategoryMappingSelect
+                                    name={`programIndicatorMappings.${programIndicator.id}.attribute.${category.id}`}
                                     category={category}
-                                    programIndicatorId={programIndicator.id}
                                     onAddMapping={() => {
                                         const el = document.getElementById(
-                                            'disaggregationCategories'
+                                            'attributeCategories'
                                         )
                                         if (el) {
                                             el.scrollIntoView({
@@ -217,12 +228,12 @@ export const ProgramIndicatorMapping = ({
 }
 
 export const CategoryMappingSelect = ({
+    name,
     category,
-    programIndicatorId,
     onAddMapping,
 }: {
+    name: string
     category: DisplayableModel
-    programIndicatorId: string
     onAddMapping?: () => void
 }) => {
     const availableWithDeletedMappings = useField<CategoryMapping[]>(
@@ -242,16 +253,13 @@ export const CategoryMappingSelect = ({
         [category.id, deletedCategories, availableWithDeletedMappings]
     )
 
-    const selectedMapping = useField(
-        `programIndicatorMappings.${programIndicatorId}.disaggregation.${category.id}`,
-        {
-            initialValue:
-                // changing to >= 1 overwrites saved values when there are multiple choices.
-                availableMappings.length === 1
-                    ? availableMappings[0].id
-                    : undefined,
-        }
-    )
+    const selectedMapping = useField(name, {
+        initialValue:
+            // changing to >= 1 overwrites saved values when there are multiple choices.
+            availableMappings.length === 1
+                ? availableMappings[0].id
+                : undefined,
+    })
 
     const selected = useMemo(
         () =>

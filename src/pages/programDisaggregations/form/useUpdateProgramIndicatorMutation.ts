@@ -25,6 +25,12 @@ export const useUpdateProgramIndicatorMutation = () => {
                   ])
                 : null
 
+            const newAttributeCombo = programIndicatorMapping?.attributeCombo
+                ? pick(programIndicatorMapping.attributeCombo, [
+                      'id',
+                      'displayName',
+                  ])
+                : null
             const newCategoryMappingIds = Object.values(
                 programIndicatorMapping?.disaggregation ?? {}
             ).concat(Object.values(programIndicatorMapping?.attribute ?? {}))
@@ -38,6 +44,11 @@ export const useUpdateProgramIndicatorMutation = () => {
                         op: 'replace',
                         path: '/categoryCombo',
                         value: newCategoryCombo,
+                    },
+                    {
+                        op: 'replace',
+                        path: '/attributeCombo',
+                        value: newAttributeCombo,
                     },
                     {
                         op: 'replace',

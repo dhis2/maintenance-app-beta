@@ -216,6 +216,7 @@ export const CategoryMappingSection = ({
         diff.forEach((category) => {
             addSingleCategory(category)
         })
+
         if (diff.length === 1) {
             showNotification(
                 i18n.t('{{newlyAddedCount}} category added', {

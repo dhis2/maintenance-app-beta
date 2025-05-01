@@ -1,4 +1,3 @@
-import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button, CircularLoader, NoticeBox } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
@@ -15,9 +14,7 @@ import {
 import {
     DEFAULT_FIELD_FILTERS,
     SectionedFormProvider,
-    SECTIONS_MAP,
     useBoundResourceQueryFn,
-    useNavigateWithSearchState,
 } from '../../lib'
 import {
     ModelCollectionResponse,
@@ -28,10 +25,6 @@ import {
 import { ProgramDisaggregationFormFields } from './form'
 import { apiResponseToFormValues } from './form/apiResponseToFormValues'
 import { ProgramDisaggregationFormValues } from './form/programDisaggregationSchema'
-import {
-    useUpdateProgramIndicatorMutation,
-    useUpdateProgramMutation,
-} from './form/useUpdateProgramIndicatorMutation'
 import { useOnSubmit } from './form/useOnSubmit'
 
 const fieldFilters = [
@@ -47,8 +40,8 @@ const programIndicatorFieldFilters = [
     'name',
     'displayName',
     'categoryMappingIds',
-    'attributeCombo[id, displayName, dataDimensionType, categories[id, displayName]]',
-    'categoryCombo[id, displayName, dataDimensionType, categories[id, displayName]]',
+    'attributeCombo[id, displayName, dataDimensionType, categories[id, displayName,dataDimensionType]]',
+    'categoryCombo[id, displayName, dataDimensionType, categories[id, displayName,dataDimensionType]]',
 ] as const
 
 export type ProgramData = PickWithFieldFilters<Program, typeof fieldFilters>
@@ -170,10 +163,9 @@ export const Component = () => {
                 onSubmit={useOnSubmit(id, initialValues)}
                 mutators={{ ...arrayMutators }}
                 destroyOnUnregister={false}
-                subscription={{ values: false }}
+                subscription={{}}
             >
-                {({ handleSubmit, values }) => {
-                    console.log({ values })
+                {({ handleSubmit }) => {
                     return (
                         <>
                             {isLoading && (
