@@ -35,6 +35,9 @@ export const useUpdateProgramIndicatorMutation = () => {
                 programIndicatorMapping?.disaggregation ?? {}
             ).concat(Object.values(programIndicatorMapping?.attribute ?? {}))
 
+            const newAggregateExportDataElement =
+                programIndicatorMapping?.aggregateExportDataElement ?? null
+
             const patchOperations = {
                 type: 'json-patch',
                 resource: SECTIONS_MAP.programIndicator.namePlural,
@@ -54,6 +57,11 @@ export const useUpdateProgramIndicatorMutation = () => {
                         op: 'replace',
                         path: '/categoryMappingIds',
                         value: newCategoryMappingIds,
+                    },
+                    {
+                        op: 'replace',
+                        path: '/aggregateExportDataElement',
+                        value: newAggregateExportDataElement,
                     },
                 ],
             } as const

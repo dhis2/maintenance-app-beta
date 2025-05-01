@@ -60,7 +60,7 @@ const createNewOptionMapping = (
 
 /* Gather categories that are relevant
     categoryMappings is a complex object on the backend, and we thus cannot get all the information we need in a single request.
-    To avoid a lot of fetching of category data, we try to gather information of the categories from a combination 
+    To avoid a lot of fetching of category data, we try to gather information of the categories from a combination
     of different sources:
     1. Categories that are already mapped in the form (categoryMappings)
     2. Categories that are part of the selected categoryCombo in a program indicator mapping
@@ -68,7 +68,7 @@ const createNewOptionMapping = (
     3. Categories that are newly added to the form (in categoryMapppings - but full category is saved and available)
 
     Categories in 1 needs to be fetched, because we only have the ids in categoryMappings
-    Categories in 2 and 3 are stored in the form state when added. 
+    Categories in 2 and 3 are stored in the form state when added.
 */
 const useCategories = ({
     dataDimensionType = 'ATTRIBUTE',
@@ -315,6 +315,8 @@ export const CategoryMappingList = ({
         useField<string[]>('deletedCategories')
     const isDeleted = categoryMappingsDeleted.value.includes(category.id)
     const categoryDisplayName = category.displayName
+    const showSoftDelete =
+        array.fields.value.filter((val) => !val.deleted).length > 1
 
     if (isDeleted) {
         return (
@@ -373,7 +375,7 @@ export const CategoryMappingList = ({
                     <CategoryMapping
                         fieldName={fieldName}
                         categoryOptionArray={category.categoryOptions ?? []}
-                        showSoftDelete={index !== 0}
+                        showSoftDelete={showSoftDelete}
                     />
                 </div>
             ))}

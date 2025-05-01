@@ -1,7 +1,12 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, SingleSelectField, SingleSelectOption } from '@dhis2/ui'
+import {
+    Button,
+    InputFieldFF,
+    SingleSelectField,
+    SingleSelectOption,
+} from '@dhis2/ui'
 import React, { useCallback, useEffect, useMemo } from 'react'
-import { useField } from 'react-final-form'
+import { Field, useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
     CollapsibleCard,
@@ -9,6 +14,7 @@ import {
     CollapsibleCardTitle,
     SectionedFormSection,
     StandardFormSectionTitle,
+    StandardFormField,
 } from '../../../components'
 import {
     ModelSingleSelect,
@@ -223,6 +229,14 @@ export const ProgramIndicatorMapping = ({
                     )}
                 </div>
             </div>
+            <StandardFormField>
+                <Field
+                    name={`programIndicatorMappings.${programIndicator.id}.aggregateExportDataElement`}
+                    key={`programIndicatorMappings.${programIndicator.id}.aggregateExportDataElement`}
+                    label={i18n.t('Data element for aggregate data export')}
+                    component={InputFieldFF}
+                />
+            </StandardFormField>
         </div>
     )
 }

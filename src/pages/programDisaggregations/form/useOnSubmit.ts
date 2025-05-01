@@ -1,6 +1,7 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { omitBy } from 'lodash'
+import isEqual from 'lodash/isEqual'
 import { useMemo } from 'react'
 import { SECTIONS_MAP, useNavigateWithSearchState } from '../../../lib'
 import { ProgramDisaggregationFormValues } from './programDisaggregationSchema'
@@ -88,6 +89,13 @@ export const useOnSubmit = (
     return useMemo(
         () => async (values: ProgramDisaggregationFormValues) => {
             const cleanedFormState = cleanFormState(values)
+            if (isEqual(values, initialValues)) {
+                saveAlert.show({
+                    message: i18n.t('No changes to save'),
+                    options: { warning: true },
+                })
+                return
+            }
 
             if (!cleanedFormState) {
                 console.error('Tried to save new object without any changes', {
@@ -172,7 +180,7 @@ export const useOnSubmit = (
             saveAlert,
             navigate,
             patchPrograms,
-            initialValues.programIndicatorMappings,
+            initialValues,
             patchProgramIndicators,
         ]
     )

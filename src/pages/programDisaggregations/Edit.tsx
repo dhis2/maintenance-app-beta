@@ -8,7 +8,6 @@ import { useParams } from 'react-router-dom'
 import {
     DefaultSectionedFormFooter,
     DefaultSectionedFormSidebar,
-    SectionedFormFooter,
     SectionedFormLayout,
 } from '../../components'
 import {
@@ -42,6 +41,7 @@ const programIndicatorFieldFilters = [
     'categoryMappingIds',
     'attributeCombo[id, displayName, dataDimensionType, categories[id, displayName,dataDimensionType,categoryOptions[id, displayName]]]',
     'categoryCombo[id, displayName, dataDimensionType, categories[id, displayName,dataDimensionType,categoryOptions[id, displayName]]]',
+    'aggregateExportDataElement',
 ] as const
 
 export type ProgramData = PickWithFieldFilters<Program, typeof fieldFilters>
@@ -165,7 +165,7 @@ export const Component = () => {
                 destroyOnUnregister={false}
                 subscription={{}}
             >
-                {({ handleSubmit }) => {
+                {({ handleSubmit, submitting }) => {
                     return (
                         <>
                             {isLoading && (
@@ -201,7 +201,11 @@ export const Component = () => {
                             {!isLoading && !isError && (
                                 <SectionedFormLayout
                                     sidebar={<DefaultSectionedFormSidebar />}
-                                    footer={<DefaultSectionedFormFooter />}
+                                    footer={
+                                        <DefaultSectionedFormFooter
+                                            submitting={submitting}
+                                        />
+                                    }
                                 >
                                     <form onSubmit={handleSubmit}>
                                         <ProgramDisaggregationFormFields
@@ -209,7 +213,6 @@ export const Component = () => {
                                                 initialProgramIndicators
                                             }
                                         />
-                                        <SectionedFormFooter />
                                     </form>
                                 </SectionedFormLayout>
                             )}
