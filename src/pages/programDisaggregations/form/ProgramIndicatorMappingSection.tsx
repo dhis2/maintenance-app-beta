@@ -28,6 +28,12 @@ import {
 } from './programDisaggregationSchema'
 import css from './ProgramIndicatorMapping.module.css'
 
+type OptionMapping = {
+    filter: string;
+    optionId: string;
+    invalid?: boolean;
+};
+
 export const ProgramIndicatorMappingSection = ({
     initialProgramIndicators,
 }: {
@@ -285,14 +291,18 @@ export const CategoryMappingSelect = ({
         [availableMappings, selectedMapping]
     )
 
+
+    
     const hasSomeInvalidMappings = useMemo(() => {
         return availableMappings.some((catMappings: CategoryMapping) => {
             return Object.values(catMappings.options).some(
-                (optionMapping) =>
-                    (optionMapping as unknown as { invalid: boolean }).invalid
-            )
-        })
-    }, [availableMappings])
+                (optionMapping: OptionMapping) => optionMapping.invalid === true
+            );
+        });
+    }, [availableMappings]);
+    
+    
+    
 
     return (
         <div>
