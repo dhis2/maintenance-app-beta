@@ -190,6 +190,7 @@ export const CategoryMappingSection = ({
         categoriesWithMappingsMap,
         categoriesWithMappingsList,
         isLoading,
+        isStale,
         addedCategories,
         setCategoriesWithMappings,
     } = useCategories({
@@ -248,7 +249,7 @@ export const CategoryMappingSection = ({
                 )}
                 dimensionType={dataDimensionType}
             />
-            {isLoading && <LoadingSpinner />}
+            {isLoading && !isStale && <LoadingSpinner />}
             {suggestedCategories.map((category) => (
                 <SuggestedCategory
                     key={category.id}
