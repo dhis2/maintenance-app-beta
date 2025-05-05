@@ -22,17 +22,8 @@ import {
 } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { DisplayableModel } from '../../../types/models'
 import { ProgramIndicatorWithMapping } from '../Edit'
-import {
-    CategoryMapping,
-    ProgramIndicatorMappingsRecord,
-} from './programDisaggregationSchema'
+import { CategoryMapping } from './programDisaggregationSchema'
 import css from './ProgramIndicatorMapping.module.css'
-
-type OptionMapping = {
-    filter: string
-    optionId: string
-    invalid?: boolean
-}
 
 export const ProgramIndicatorMappingSection = ({
     initialProgramIndicators,
@@ -40,10 +31,6 @@ export const ProgramIndicatorMappingSection = ({
     initialProgramIndicators: ProgramIndicatorWithMapping[]
 }) => {
     const programId = useParams().id
-    const { input: piInput } = useField<ProgramIndicatorMappingsRecord>(
-        `programIndicatorMappings`
-    )
-
     const [programIndicators, setProgramIndicators] = React.useState<
         DisplayableModel[]
     >(initialProgramIndicators)
@@ -90,50 +77,87 @@ export const ProgramIndicatorMappingSection = ({
                 placeholder={i18n.t('Add a program indicator')}
             />
             <div className={css.collapsibleList}>
-                {programIndicators.map((indicator, index) => (
-                    <CollapsibleCard
+                {programIndicators.map((indicator) => (
+                    <ProgramIndicatorCard
+                        programIndicator={indicator}
                         key={indicator.id}
-                        headerElement={
-                            <CollapsibleCardHeader>
-                                <CollapsibleCardTitle
-                                    prefix={i18n.t('Program Indicator:', {
-                                        nsSeparator: '>',
-                                    })}
-                                    title={indicator.displayName}
-                                />
-                                <Button
-                                    small
-                                    secondary
-                                    destructive
-                                    onClick={() => {
-                                        const newPiMappings =
-                                            Object.fromEntries(
-                                                Object.entries(
-                                                    piInput.value
-                                                ).filter(
-                                                    ([key]) =>
-                                                        indicator.id !== key
-                                                )
-                                            )
-                                        piInput.onChange(newPiMappings)
-                                        setProgramIndicators(
-                                            programIndicators.filter(
-                                                (_, piIndex) =>
-                                                    index !== piIndex
-                                            )
-                                        )
-                                    }}
-                                >
-                                    {i18n.t('Remove program indicator mapping')}
-                                </Button>
-                            </CollapsibleCardHeader>
-                        }
-                    >
-                        <ProgramIndicatorMapping programIndicator={indicator} />
-                    </CollapsibleCard>
+                    />
                 ))}
             </div>
         </SectionedFormSection>
+    )
+}
+
+const ProgramIndicatorCard = ({
+    programIndicator,
+}: {
+    programIndicator: DisplayableModel
+}) => {
+    const { input: programIndicatorMappingsDeleted } = useField<string[]>(
+        'deletedProgramIndicatorMappings'
+    )
+
+    const isDeleted = programIndicatorMappingsDeleted.value.includes(
+        programIndicator.id
+    )
+
+    if (isDeleted) {
+        return (
+            <div className={css.programIndicatorCardDeleted}>
+                <div className={css.deletedProgramIndicatorText}>
+                    {i18n.t(
+                        '{{- programIndicator}} and all mappings will be deleted on save',
+                        { programIndicator: programIndicator.displayName }
+                    )}
+                </div>
+
+                <Button
+                    small
+                    onClick={() => {
+                        programIndicatorMappingsDeleted.onChange(
+                            programIndicatorMappingsDeleted.value.filter(
+                                (deletedId: string) =>
+                                    deletedId !== programIndicator.id
+                            )
+                        )
+                    }}
+                >
+                    {i18n.t('Undo delete')}
+                </Button>
+            </div>
+        )
+    }
+
+    return (
+        <CollapsibleCard
+            key={programIndicator.id}
+            headerElement={
+                <CollapsibleCardHeader>
+                    <CollapsibleCardTitle
+                        prefix={i18n.t('Program Indicator:', {
+                            nsSeparator: '>',
+                        })}
+                        title={programIndicator.displayName}
+                    />
+                    <Button
+                        small
+                        secondary
+                        destructive
+                        onClick={() => {
+                            programIndicatorMappingsDeleted.onChange([
+                                ...(programIndicatorMappingsDeleted.value ??
+                                    []),
+                                programIndicator.id,
+                            ])
+                        }}
+                    >
+                        {i18n.t('Remove program indicator mapping')}
+                    </Button>
+                </CollapsibleCardHeader>
+            }
+        >
+            <ProgramIndicatorMapping programIndicator={programIndicator} />
+        </CollapsibleCard>
     )
 }
 
@@ -266,7 +290,7 @@ export const CategoryMappingSelect = ({
         () =>
             (deletedCategories ?? []).includes(category.id)
                 ? []
-                : (availableWithDeletedMappings || []).filter(
+                : (availableWithDeletedMappings ?? []).filter(
                       ({ deleted }: { deleted: boolean }) => !deleted
                   ),
         [category.id, deletedCategories, availableWithDeletedMappings]
@@ -294,7 +318,7 @@ export const CategoryMappingSelect = ({
     const hasSomeInvalidMappings = useMemo(() => {
         return availableMappings.some((catMappings: CategoryMapping) => {
             return Object.values(catMappings.options).some(
-                (optionMapping: OptionMapping) => optionMapping.invalid === true
+                (optionMapping) => !!optionMapping.invalid
             )
         })
     }, [availableMappings])

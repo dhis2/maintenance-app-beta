@@ -96,6 +96,7 @@ export const Component = () => {
 
             return {
                 deletedCategories: [],
+                deletedProgramIndicatorMappings: [],
                 programIndicatorMappings,
                 categoryMappings,
             }
@@ -105,6 +106,7 @@ export const Component = () => {
             categoryMappings: {},
             programIndicatorMappings: {},
             deletedCategories: [],
+            deletedProgramIndicatorMappings: [],
         }
     }, [programQuery.data, programIndicatorsQuery.data])
 

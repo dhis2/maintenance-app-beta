@@ -91,7 +91,10 @@ const useCategories = ({
     )?.input?.value
 
     const initialMappedCategoryIds = useMemo(
-        () => Object.keys(initialValues.categoryMappings || {}).sort(),
+        () =>
+            Object.keys(initialValues.categoryMappings ?? {}).sort((a, b) =>
+                a.localeCompare(b)
+            ),
         [initialValues.categoryMappings]
     )
 
@@ -315,10 +318,9 @@ export const CategoryMappingList = ({
         useField<string[]>('deletedCategories')
     const isDeleted = categoryMappingsDeleted.value.includes(category.id)
     const someMappingInvalid = useMemo(() => {
-        return array.fields.value.some((catMappings) =>
+        return array.fields.value.some((catMappings: CategoryMappingSchema) =>
             Object.values(catMappings.options).some(
-                (optionMapping) =>
-                    (optionMapping as { invalid: boolean }).invalid
+                (optionMapping) => optionMapping.invalid
             )
         )
     }, [array])
@@ -373,7 +375,7 @@ export const CategoryMappingList = ({
                         destructive
                         onClick={() => {
                             categoryMappingsDeleted.onChange([
-                                ...(categoryMappingsDeleted.value || []),
+                                ...(categoryMappingsDeleted.value ?? []),
                                 category.id,
                             ])
                         }}

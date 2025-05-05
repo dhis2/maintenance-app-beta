@@ -14,12 +14,14 @@ const cleanFormState = ({
     categoryMappings,
     deletedCategories,
     programIndicatorMappings,
+    deletedProgramIndicatorMappings,
 }: ProgramDisaggregationFormValues): ProgramDisaggregationFormValues => {
-    const deletedSet = new Set(deletedCategories)
+    const deletedCategorySet = new Set(deletedCategories)
+    const deletedPISet = new Set(deletedProgramIndicatorMappings)
     // remove soft-deleted
     const cleanedCategoryMappings = Object.fromEntries(
         Object.entries(categoryMappings).filter(
-            ([categoryId]) => !deletedSet.has(categoryId)
+            ([categoryId]) => !deletedCategorySet.has(categoryId)
         )
     )
     const categoryMappingsSet = new Set(
@@ -27,11 +29,11 @@ const cleanFormState = ({
             categoryMapping.map((cm) => cm.id)
         )
     )
-
     // remove references to mappings that are deleted
     const cleanedProgramIndicatorMappings = Object.fromEntries(
-        Object.entries(programIndicatorMappings).map(
-            ([programIndicatorId, programIndicator]) => {
+        Object.entries(programIndicatorMappings)
+            .filter(([piId]) => !deletedPISet.has(piId))
+            .map(([programIndicatorId, programIndicator]) => {
                 const attributeCategories = new Set(
                     programIndicator.attributeCombo?.categories.map(
                         (id) => id.id
@@ -63,13 +65,13 @@ const cleanFormState = ({
                         attribute: attributeWithoutDeleted,
                     },
                 ]
-            }
-        )
+            })
     )
     return {
         categoryMappings: cleanedCategoryMappings,
         deletedCategories: deletedCategories,
         programIndicatorMappings: cleanedProgramIndicatorMappings,
+        deletedProgramIndicatorMappings: deletedProgramIndicatorMappings,
     }
 }
 // type ProgramDisaggregationFormValues = Zod.infer<typeof schema>

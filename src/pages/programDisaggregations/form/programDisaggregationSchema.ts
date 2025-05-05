@@ -4,6 +4,7 @@ import { CategoryCombo } from './../../../types/generated/models'
 export const categoryOptionMapping = z.object({
     filter: z.string(),
     optionId: z.string(),
+    invalid: z.boolean().optional(),
 })
 
 const identifiable = z.object({
@@ -52,6 +53,7 @@ export const programDisaggregationSchema = z.object({
     deletedCategories: z.array(z.string()).default([]),
     categoryMappings: categoryMappingsRecord.default({}),
     programIndicatorMappings: programIndicatorMappingsRecord.default({}),
+    deletedProgramIndicatorMappings: z.array(z.string()).default([]),
 })
 
 export type CategoryMappingsRecord = z.infer<typeof categoryMappingsRecord>
