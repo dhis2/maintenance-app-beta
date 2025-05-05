@@ -25,11 +25,14 @@ export const Component = () => {
         () => Array.from(location.state?.selectedModels ?? []),
         [location.state?.selectedModels]
     )
-    const initialValues = {
-        ...getDefaults(mergeFormSchema),
-        target: undefined,
-        sources: [],
-    }
+    const initialValues = useMemo(
+        () => ({
+            ...getDefaults(mergeFormSchema),
+            target: undefined,
+            sources: [],
+        }),
+        []
+    )
 
     const onSubmit = async (values: CategoryOptionMergeFormValues) => {
         try {
