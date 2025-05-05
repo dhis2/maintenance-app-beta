@@ -1,3 +1,10 @@
+# [0.41.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.40.0...v0.41.0) (2025-05-05)
+
+
+### Features
+
+* soft delete pi mappings ([#556](https://github.com/dhis2/maintenance-app-beta/issues/556)) ([2bd8ed1](https://github.com/dhis2/maintenance-app-beta/commit/2bd8ed177246e2484fd103b9723ec05d88ab9af2))
+
 # [0.40.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.39.1...v0.40.0) (2025-05-01)
 
 
