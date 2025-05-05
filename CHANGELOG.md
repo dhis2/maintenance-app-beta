@@ -1,3 +1,10 @@
+## [0.41.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.41.0...v0.41.1) (2025-05-05)
+
+
+### Bug Fixes
+
+* do not show loader if query is stale ([#557](https://github.com/dhis2/maintenance-app-beta/issues/557)) ([ca33c5d](https://github.com/dhis2/maintenance-app-beta/commit/ca33c5de13b4d0ed0057a48a6fbf8e8f3d9fb198))
+
 # [0.41.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.40.0...v0.41.0) (2025-05-05)
 
 
