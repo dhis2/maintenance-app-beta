@@ -1,3 +1,10 @@
+## [0.41.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.41.1...v0.41.2) (2025-05-06)
+
+
+### Bug Fixes
+
+* refault to empty array when field value is an empty string ([#558](https://github.com/dhis2/maintenance-app-beta/issues/558)) ([88ffeb6](https://github.com/dhis2/maintenance-app-beta/commit/88ffeb6a14c25fa5113dfdbd7b4450645983e701))
+
 ## [0.41.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.41.0...v0.41.1) (2025-05-05)
 
 
