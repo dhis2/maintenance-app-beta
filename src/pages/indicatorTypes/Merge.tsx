@@ -21,18 +21,18 @@ export const Component = () => {
     const location = useLocationWithState<{ selectedModels: Set<string> }>()
 
     const dataEngine = useDataEngine()
-    const initialValues = useMemo(() => {
-        const defaults = {
+    const selectedIds: string[] = useMemo(
+        () => Array.from(location.state?.selectedModels ?? []),
+        [location.state?.selectedModels]
+    )
+    const initialValues = useMemo(
+        () => ({
             ...getDefaults(mergeFormSchema),
             target: undefined,
-            sources: Array.from(location.state?.selectedModels || []).map(
-                (id) => ({
-                    id,
-                })
-            ),
-        }
-        return defaults
-    }, [location.state?.selectedModels])
+            sources: [],
+        }),
+        []
+    )
 
     const onSubmit = async (values: IndicatorTypeMergeFormValues) => {
         try {
@@ -83,7 +83,9 @@ export const Component = () => {
                             </MergeComplete>
                         }
                     >
-                        <IndicatorTypeMergeFormFields />
+                        <IndicatorTypeMergeFormFields
+                            selectedIds={selectedIds}
+                        />
                     </DefaultMergeFormContents>
                 </StyledMergeForm>
             )}

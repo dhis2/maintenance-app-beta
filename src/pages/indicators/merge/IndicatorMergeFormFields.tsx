@@ -12,7 +12,11 @@ import {
     ConfirmationField,
 } from '../../../components/merge'
 
-export const IndicatorMergeFormFields = () => {
+export const IndicatorMergeFormFields = ({
+    selectedIds,
+}: {
+    selectedIds: string[]
+}) => {
     return (
         <FormSections>
             <FormSection>
@@ -36,6 +40,7 @@ export const IndicatorMergeFormFields = () => {
                             resource: 'indicators',
                             params: {
                                 fields: ['id', 'displayName', 'name'],
+                                filter: `id:in:[${selectedIds.join(',')}]`,
                             },
                         }}
                     />
@@ -46,6 +51,7 @@ export const IndicatorMergeFormFields = () => {
                             resource: 'indicators',
                             params: {
                                 fields: ['id', 'displayName', 'name'],
+                                filter: `id:in:[${selectedIds.join(',')}]`,
                             },
                         }}
                         noMatchWithoutFilterText={i18n.t(
