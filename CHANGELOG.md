@@ -1,3 +1,10 @@
+# [0.42.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.41.2...v0.42.0) (2025-05-06)
+
+
+### Features
+
+* change way we pre-populate source and target in merges ([#555](https://github.com/dhis2/maintenance-app-beta/issues/555)) ([42a0173](https://github.com/dhis2/maintenance-app-beta/commit/42a0173c4cff018e9e3217cabf7b617e851edf87))
+
 ## [0.41.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.41.1...v0.41.2) (2025-05-06)
 
 
