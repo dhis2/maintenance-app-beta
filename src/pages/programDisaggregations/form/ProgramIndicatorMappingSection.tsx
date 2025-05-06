@@ -288,9 +288,9 @@ export const CategoryMappingSelect = ({
 
     const availableMappings = useMemo(
         () =>
-            (deletedCategories ?? []).includes(category.id)
+            (deletedCategories || []).includes(category.id)
                 ? []
-                : (availableWithDeletedMappings ?? []).filter(
+                : (availableWithDeletedMappings || []).filter(
                       ({ deleted }: { deleted: boolean }) => !deleted
                   ),
         [category.id, deletedCategories, availableWithDeletedMappings]

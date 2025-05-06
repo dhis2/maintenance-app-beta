@@ -376,7 +376,7 @@ export const CategoryMappingList = ({
                         destructive
                         onClick={() => {
                             categoryMappingsDeleted.onChange([
-                                ...(categoryMappingsDeleted.value ?? []),
+                                ...(categoryMappingsDeleted.value || []),
                                 category.id,
                             ])
                         }}
