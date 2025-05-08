@@ -91,7 +91,7 @@ export const Sidebar = ({
     hideSidebar?: boolean
 }) => {
     const sidebarLinks = useSidebarLinks()
-    const [collapsed, setCollapse] = useState(false)
+    const [collapsed, setCollapsed] = useState(false)
     const [filterValue, setFilterValue] = useState('')
 
     const handleFilterChange = (input: InputEventPayload) => {
@@ -117,7 +117,7 @@ export const Sidebar = ({
 
     useEffect(() => {
         if (hideSidebar !== undefined) {
-            setCollapse(hideSidebar)
+            setCollapsed(hideSidebar)
         }
     }, [hideSidebar])
 
@@ -150,7 +150,7 @@ export const Sidebar = ({
             <button
                 className={styles.collapseButton}
                 type="button"
-                onClick={() => setCollapse(!collapsed)}
+                onClick={() => setCollapsed(!collapsed)}
             >
                 <div
                     className={cx(styles.iconWrapper, {

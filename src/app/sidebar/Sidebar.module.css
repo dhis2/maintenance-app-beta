@@ -13,7 +13,6 @@
     transition: ease width, max-height, visibility, var(--animation-duration);
     position: relative;
     overflow-x: hidden;
-    /* min-width: 52px; */
 }
 
 .asideWrapper.collapsed {
