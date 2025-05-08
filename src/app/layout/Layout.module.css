@@ -8,7 +8,6 @@
 .wrapper {
     display: grid;
     grid-template-areas: 'sidebar' 'main' 'footer';
-    grid-template-rows: auto 1fr max-content;
     font-size: 14px;
     height: 100%;
     background: var(--sidenav-dark-bg);

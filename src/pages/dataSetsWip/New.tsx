@@ -2,10 +2,10 @@ import React from 'react'
 import {
     FormBase,
     SectionedFormLayout,
-    DefaultSectionedFormFooter,
     DefaultSectionedFormSidebar,
     SectionedFormErrorNotice,
 } from '../../components'
+import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
 import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { DataSetFormContents } from './form/DataSetFormContents'
 import {
@@ -14,8 +14,6 @@ import {
     dataSetValueFormatter,
 } from './form/dataSetFormSchema'
 import { DataSetFormDescriptor } from './form/formDescriptor'
-import { createPortalToFooter } from '../../app/layout'
-import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
 
 const section = SECTIONS_MAP.dataSet
 
