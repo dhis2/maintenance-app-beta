@@ -157,7 +157,7 @@ function FormContents({
     submitError?: string
 }) {
     const formErrorRef = useRef<HTMLDivElement | null>(null)
-    const form = useForm()
+    const { submit } = useForm()
 
     useEffect(() => {
         if (submitError) {
@@ -189,7 +189,7 @@ function FormContents({
                     <StandardFormActions
                         cancelLabel={i18n.t('Exit without saving')}
                         submitLabel={i18n.t('Create data element')}
-                        onSubmitClick={form.submit}
+                        onSubmitClick={submit}
                         submitting={submitting}
                         cancelTo={listPath}
                     />

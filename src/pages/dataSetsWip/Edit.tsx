@@ -4,22 +4,16 @@ import { useParams } from 'react-router-dom'
 import {
     FormBase,
     SectionedFormLayout,
-    DefaultSectionedFormFooter,
     DefaultSectionedFormSidebar,
     SectionedFormErrorNotice,
 } from '../../components'
+import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
 import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import {
-    PickWithFieldFilters,
-    DataSet,
-    IdentifiableObject,
-} from '../../types/generated'
+import { PickWithFieldFilters, DataSet } from '../../types/generated'
 import { DataSetFormContents } from './form/DataSetFormContents'
 import { validate, dataSetValueFormatter } from './form/dataSetFormSchema'
 import { DataSetFormDescriptor } from './form/formDescriptor'
-import { createPortalToFooter } from '../../app/layout'
-import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
 
 const section = SECTIONS_MAP.dataSet
 
@@ -81,11 +75,10 @@ export const Component = () => {
                     return (
                         <SectionedFormLayout
                             sidebar={<DefaultSectionedFormSidebar />}
-                            // footer={<DefaultSectionedFormFooter />}
                         >
                             <form onSubmit={handleSubmit}>
                                 <DataSetFormContents />
-                                {/* <DefaultFormFooter /> */}
+                                <DefaultFormFooter />
                             </form>
                             <SectionedFormErrorNotice />
                         </SectionedFormLayout>
