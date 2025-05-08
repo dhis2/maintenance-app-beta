@@ -91,7 +91,6 @@ export function Component() {
                         <FormContents
                             submitError={submitError}
                             submitting={submitting}
-                            onCancelClick={() => navigate(listPath)}
                         />
                     </form>
                 )}
