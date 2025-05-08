@@ -92,7 +92,7 @@ describe('Data Elements / New', () => {
         )
 
         const cancelButton = await result.findByText('Exit without saving', {
-            selector: 'button',
+            selector: 'a',
         })
 
         expect(result.queryByText('List view')).toBeNull()

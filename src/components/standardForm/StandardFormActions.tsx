@@ -1,8 +1,8 @@
 import { Button, ButtonStrip, CircularLoader } from '@dhis2/ui'
 import React from 'react'
-import classes from './StandardFormActions.module.css'
 import { To } from 'react-router-dom'
 import { LinkButton } from '../LinkButton'
+import classes from './StandardFormActions.module.css'
 
 function LoadingIcon() {
     return (
