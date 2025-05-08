@@ -1,3 +1,10 @@
+# [0.43.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.42.0...v0.43.0) (2025-05-08)
+
+
+### Features
+
+* show other section in side bar ([#559](https://github.com/dhis2/maintenance-app-beta/issues/559)) ([d1c5365](https://github.com/dhis2/maintenance-app-beta/commit/d1c5365659d8860d93f152e5953efc4b9f772b5c))
+
 # [0.42.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.41.2...v0.42.0) (2025-05-06)
 
 
