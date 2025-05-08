@@ -25,11 +25,9 @@ export const BaseLayout = ({ children, sidebar }: BaseLayoutProps) => {
 export const SidebarLayout = ({
     children,
     hideSidebar,
-    showFooter,
 }: {
     children: React.ReactNode
     hideSidebar?: boolean
-    showFooter?: boolean
 }) => {
     return (
         <BaseLayout
@@ -49,9 +47,8 @@ export const Layout = () => {
     // routes can specify a handle to hide the sidebar
     // hide the sidebar if any matched route specifies it
     const hideSidebar = matches.some((match) => match.handle?.hideSidebar)
-    const showFooter = matches.some((match) => match.handle?.showFooter)
     return (
-        <SidebarLayout hideSidebar={hideSidebar} showFooter={showFooter}>
+        <SidebarLayout hideSidebar={hideSidebar}>
             <Outlet />
         </SidebarLayout>
     )
