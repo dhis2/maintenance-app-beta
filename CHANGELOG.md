@@ -1,3 +1,10 @@
+# [0.44.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.43.0...v0.44.0) (2025-05-08)
+
+
+### Features
+
+* **sidebar:** collapsible sidebar ([#524](https://github.com/dhis2/maintenance-app-beta/issues/524)) [no release] ([6e98bf5](https://github.com/dhis2/maintenance-app-beta/commit/6e98bf55cf46b6a1a270b5a5e3a92af6288062d3))
+
 # [0.43.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.42.0...v0.43.0) (2025-05-08)
 
 
