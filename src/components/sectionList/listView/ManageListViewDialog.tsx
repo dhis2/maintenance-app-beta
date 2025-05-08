@@ -20,7 +20,7 @@ export const ManageListViewDialog = ({
     const section = useModelSectionHandleOrThrow()
 
     return (
-        <Modal onClose={onClose} position="top">
+        <Modal onClose={onClose} position="top" dataTest="manage-view-modal">
             <ModalTitle>
                 {i18n.t('Manage {{section}} view', {
                     section: section.title,

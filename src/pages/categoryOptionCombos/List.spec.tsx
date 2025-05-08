@@ -1,14 +1,55 @@
+import categoryOptionCombosSchema from '../../__mocks__/schema/categoryOptionCombosSchema.json'
+import { SECTIONS_MAP } from '../../lib'
+import {
+    testCategory,
+    testCategoryCombo,
+    testCategoryOptionCombo,
+} from '../../testUtils/builders'
 import {
     generateDefaultListFiltersTests,
     generateDefaultListItemsTests,
     generateDefaultListMultiActionsTests,
     generateDefaultListRowActionsTests,
+    generateDefaultListTests,
 } from '../defaultListTests'
+import { Component as CategoryOptionComboList } from './List'
 
-const componentName = 'Category option combo'
-generateDefaultListItemsTests({ componentName })
-generateDefaultListFiltersTests({ componentName })
-generateDefaultListMultiActionsTests({ componentName })
+const section = SECTIONS_MAP.categoryOptionCombo
+const mockSchema = categoryOptionCombosSchema
+const ComponentToTest = CategoryOptionComboList
+const generateRandomElement = testCategoryOptionCombo
+const customData = {
+    categoryCombos: (type: any, params: any) => {
+        if (type === 'read') {
+            return {
+                categoryCombos: [
+                    testCategoryCombo(),
+                    testCategoryCombo(),
+                    testCategoryCombo(),
+                ],
+                pager: { page: 1, total: 3, pageSize: 20, pageCount: 1 },
+            }
+        }
+    },
+    categoryOptions: (type: any, params: any) => {
+        if (type === 'read') {
+            return {
+                categoryOptions: [],
+                pager: { page: 1, total: 0, pageSize: 20, pageCount: 1 },
+            }
+        }
+    },
+}
+
+generateDefaultListItemsTests({
+    section,
+    mockSchema,
+    ComponentToTest,
+    generateRandomElement,
+    customData,
+})
+generateDefaultListFiltersTests({ componentName: section.name })
+generateDefaultListMultiActionsTests({ componentName: section.name })
 
 xdescribe('Category option combo additional tests', () => {
     it('should filter by category option', () => {})

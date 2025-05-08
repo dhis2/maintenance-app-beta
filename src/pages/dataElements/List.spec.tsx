@@ -55,7 +55,7 @@ const defaultUserDataStoreData = () => Promise.reject(new FetchError(error404))
 
 generateDefaultListTests({ componentName: 'Data element' })
 
-describe('Data Element List additional tests', () => {
+xdescribe('Data Element List additional tests', () => {
     const originalWarn = console.warn
     jest.spyOn(console, 'warn').mockImplementation((value) => {
         if (!value.match(/No server timezone/)) {

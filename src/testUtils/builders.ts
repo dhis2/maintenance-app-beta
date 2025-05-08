@@ -9,6 +9,10 @@ import {
 export const randomDhis2Id = () =>
     faker.helpers.fromRegExp(/[a-zA-Z]{1}[a-zA-Z0-9]{10}/)
 
+function randomValueIn<T>(list: T[]) {
+    return list[faker.number.int({ min: 0, max: list.length - 1 })]
+}
+
 export const testPager = ({
     page = faker.number.int({ min: 0, max: 5 }),
     total = faker.number.int({ min: 0, max: 50 }),
@@ -145,4 +149,71 @@ export const testProgram = ({
     name,
     displayName: name,
     categoryMappings,
+})
+
+export const testCategory = ({
+    id = randomDhis2Id(),
+    name = faker.person.fullName(),
+    code = faker.string.alphanumeric(6),
+    description = faker.company.buzzPhrase(),
+    dataDimensionType = randomValueIn(['DISAGGREGATION', 'ATTRIBUTE']),
+    dataDimension = faker.datatype.boolean(),
+    lastUpdated = faker.date.past().toUTCString(),
+    createdBy = testUser(),
+    lastUpdatedBy = testUser(),
+    access = testAccess(),
+    sharing = { public: 'rw------' },
+} = {}) => ({
+    id,
+    name,
+    displayName: name,
+    code,
+    description,
+    dataDimensionType,
+    dataDimension,
+    lastUpdated,
+    createdBy,
+    lastUpdatedBy,
+    access,
+    sharing,
+})
+
+export const testCategoryCombo = ({
+    id = randomDhis2Id(),
+    name = faker.person.fullName(),
+    dataDimensionType = randomValueIn(['DISAGGREGATION', 'ATTRIBUTE']),
+    lastUpdated = faker.date.past().toUTCString(),
+    createdBy = testUser(),
+    lastUpdatedBy = testUser(),
+    access = testAccess(),
+    sharing = { public: 'rw------' },
+} = {}) => ({
+    id,
+    name,
+    displayName: name,
+    access,
+    dataDimensionType,
+    lastUpdated,
+    createdBy,
+    lastUpdatedBy,
+    sharing,
+})
+
+export const testCategoryOptionCombo = ({
+    id = randomDhis2Id(),
+    code = faker.string.alphanumeric(6),
+    name = faker.person.fullName(),
+    lastUpdated = faker.date.past().toUTCString(),
+    createdBy = testUser(),
+    lastUpdatedBy = testUser(),
+    access = testAccess(),
+} = {}) => ({
+    id,
+    name,
+    code,
+    displayName: name,
+    access,
+    lastUpdated,
+    createdBy,
+    lastUpdatedBy,
 })
