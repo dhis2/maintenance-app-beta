@@ -16,14 +16,12 @@ export function StandardFormActions({
     cancelLabel,
     submitLabel,
     submitting,
-    onCancelClick,
     onSubmitClick,
     cancelTo,
 }: {
     cancelLabel: string
     submitLabel: string
     submitting: boolean
-    onCancelClick?: () => void
     onSubmitClick: () => void
     cancelTo?: To
 }) {
@@ -39,13 +37,7 @@ export function StandardFormActions({
                 {submitting && <LoadingIcon />}
                 {submitLabel}
             </Button>
-            <LinkButton
-                secondary
-                small
-                disabled={submitting}
-                to={cancelTo}
-                // onClick={onCancelClick}
-            >
+            <LinkButton secondary small disabled={submitting} to={cancelTo}>
                 {cancelLabel}
             </LinkButton>
         </ButtonStrip>
