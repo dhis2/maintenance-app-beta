@@ -12,7 +12,7 @@
     height: 100%;
     grid-template-areas: 'sidebar' 'main' 'footer';
     overflow: auto;
-    border: 1px solid var(--colors-grey300);
+    column-gap: var(--spacers-dp16);
 }
 .main {
     grid-area: main;
@@ -25,10 +25,8 @@
 
 .sidebar {
     grid-area: sidebar;
-    background-color: #fff;
     min-width: var(--sidebar-width);
     height: 100%;
-    border-inline-end: 1px solid var(--colors-grey300);
 }
 
 .footer {
@@ -37,6 +35,7 @@
     background: var(--colors-white);
     border-block-start: 1px solid var(--colors-grey300);
     display: flex;
+    padding-inline-start: var(--spacers-dp16);
 }
 
 @media m-medium {
