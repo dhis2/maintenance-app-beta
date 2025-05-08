@@ -1,11 +1,12 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
-import { useFormState } from 'react-final-form'
+import { useForm, useFormState } from 'react-final-form'
 import { getSectionPath, useNavigateWithSearchState } from '../../lib'
 import { ModelSection } from '../../types'
 import { StandardFormActions, StandardFormSection } from '../standardForm'
 import classes from './DefaultFormContents.module.css'
 import { DefaultFormErrorNotice } from './DefaultFormErrorNotice'
+import { DefaultFormFooter } from './DefaultFormFooter'
 
 export function DefaultEditFormContents({
     children,
@@ -14,11 +15,6 @@ export function DefaultEditFormContents({
     children: React.ReactNode
     section: ModelSection
 }) {
-    const { submitting } = useFormState({
-        subscription: { submitting: true },
-    })
-    const navigate = useNavigateWithSearchState()
-
     const listPath = `/${getSectionPath(section)}`
 
     return (
@@ -30,14 +26,7 @@ export function DefaultEditFormContents({
                     <DefaultFormErrorNotice />
                 </StandardFormSection>
             </div>
-            <div className={classes.formActions}>
-                <StandardFormActions
-                    cancelLabel={i18n.t('Cancel')}
-                    submitLabel={i18n.t('Save and close')}
-                    submitting={submitting}
-                    onCancelClick={() => navigate(listPath)}
-                />
-            </div>
+            <DefaultFormFooter cancelTo={listPath} />
         </>
     )
 }
@@ -52,7 +41,7 @@ export function DefaultNewFormContents({
     const { submitting } = useFormState({
         subscription: { submitting: true },
     })
-
+    const { submit } = useForm()
     const navigate = useNavigateWithSearchState()
 
     const listPath = `/${getSectionPath(section)}`
@@ -70,6 +59,7 @@ export function DefaultNewFormContents({
                 })}
                 submitting={submitting}
                 onCancelClick={() => navigate(listPath)}
+                onSubmitClick={submit}
             />
         </div>
     )

@@ -72,7 +72,9 @@ export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
         typeof children === 'function'
             ? children
             : ({ handleSubmit }: FormRenderProps<TInitialValues>) => (
-                  <form onSubmit={handleSubmit}>{children}</form>
+                  <form id="form" onSubmit={handleSubmit}>
+                      {children}
+                  </form>
               )
 
     return (

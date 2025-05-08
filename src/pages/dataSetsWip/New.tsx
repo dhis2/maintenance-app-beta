@@ -14,6 +14,8 @@ import {
     dataSetValueFormatter,
 } from './form/dataSetFormSchema'
 import { DataSetFormDescriptor } from './form/formDescriptor'
+import { createPortalToFooter } from '../../app/layout'
+import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
 
 const section = SECTIONS_MAP.dataSet
 
@@ -32,10 +34,10 @@ export const Component = () => {
                         <>
                             <SectionedFormLayout
                                 sidebar={<DefaultSectionedFormSidebar />}
-                                footer={<DefaultSectionedFormFooter />}
                             >
                                 <form onSubmit={handleSubmit}>
                                     <DataSetFormContents />
+                                    <DefaultFormFooter />
                                 </form>
                                 <SectionedFormErrorNotice />
                             </SectionedFormLayout>

@@ -1,6 +1,8 @@
 import { Button, ButtonStrip, CircularLoader } from '@dhis2/ui'
 import React from 'react'
 import classes from './StandardFormActions.module.css'
+import { To } from 'react-router-dom'
+import { LinkButton } from '../LinkButton'
 
 function LoadingIcon() {
     return (
@@ -15,27 +17,37 @@ export function StandardFormActions({
     submitLabel,
     submitting,
     onCancelClick,
+    onSubmitClick,
+    cancelTo,
 }: {
     cancelLabel: string
     submitLabel: string
     submitting: boolean
-    onCancelClick: () => void
+    onCancelClick?: () => void
+    onSubmitClick: () => void
+    cancelTo?: To
 }) {
     return (
         <ButtonStrip>
-            <Button primary small disabled={submitting} type="submit">
+            <Button
+                primary
+                small
+                disabled={submitting}
+                type="submit"
+                onClick={onSubmitClick}
+            >
                 {submitting && <LoadingIcon />}
                 {submitLabel}
             </Button>
-
-            <Button
+            <LinkButton
                 secondary
                 small
                 disabled={submitting}
-                onClick={onCancelClick}
+                to={cancelTo}
+                // onClick={onCancelClick}
             >
                 {cancelLabel}
-            </Button>
+            </LinkButton>
         </ButtonStrip>
     )
 }

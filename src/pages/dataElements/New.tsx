@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import { NoticeBox } from '@dhis2/ui'
 import { FORM_ERROR } from 'final-form'
 import React, { useEffect, useMemo, useRef } from 'react'
-import { Form } from 'react-final-form'
+import { Form, useForm } from 'react-final-form'
 import {
     Loader,
     StandardFormActions,
@@ -141,7 +141,6 @@ export const Component = () => {
                         <FormContents
                             submitError={submitError}
                             submitting={submitting}
-                            onCancelClick={() => navigate(listPath)}
                         />
                     </form>
                 )}
@@ -152,14 +151,13 @@ export const Component = () => {
 
 function FormContents({
     submitError,
-    onCancelClick,
     submitting,
 }: {
     submitting: boolean
-    onCancelClick: () => void
     submitError?: string
 }) {
     const formErrorRef = useRef<HTMLDivElement | null>(null)
+    const form = useForm()
 
     useEffect(() => {
         if (submitError) {
@@ -191,8 +189,9 @@ function FormContents({
                     <StandardFormActions
                         cancelLabel={i18n.t('Exit without saving')}
                         submitLabel={i18n.t('Create data element')}
+                        onSubmitClick={form.submit}
                         submitting={submitting}
-                        onCancelClick={onCancelClick}
+                        cancelTo={listPath}
                     />
                 </StandardFormSection>
             </div>

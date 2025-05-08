@@ -5,12 +5,12 @@
     flex-direction: column;
     height: 100%;
     overflow: auto;
-    --sidebar-width: 240px;
 }
 .layoutGrid {
+    --sidebar-width: 240px;
     display: grid;
     height: 100%;
-    grid-template-areas: 'sidebar' 'main' 'footer';
+    grid-template-areas: 'sidebar' 'main';
     overflow: auto;
     column-gap: var(--spacers-dp16);
 }
@@ -29,22 +29,12 @@
     height: 100%;
 }
 
-.footer {
-    grid-area: footer;
-    width: 100%;
-    background: var(--colors-white);
-    border-block-start: 1px solid var(--colors-grey300);
-    display: flex;
-    padding-inline-start: var(--spacers-dp16);
-}
-
 @media m-medium {
     .layoutGrid {
         height: 100%;
         display: grid;
         grid-template-columns: auto 1fr;
-        grid-template-rows: 1fr 68px;
-        grid-template-areas: 'sidebar main' 'footer footer';
+        grid-template-areas: 'sidebar main';
     }
     .sidebar {
         overflow: auto;
