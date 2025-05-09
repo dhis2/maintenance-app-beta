@@ -16,6 +16,11 @@ const {
     modelReference,
 } = modelFormSchemas
 
+const formTypeSchema = z
+    .enum(['DEFAULT', 'SECTION', 'CUSTOM'])
+    .default('DEFAULT')
+export type FormType = z.infer<typeof formTypeSchema>
+
 export const dataSetFormSchema = identifiable
     .merge(withAttributeValues)
     .extend({
@@ -31,6 +36,10 @@ export const dataSetFormSchema = identifiable
                 })
             )
             .default([]),
+        dataEntryForm: identifiable.extend({
+            htmlCode: z.string().optional(),
+            format: z.number().int().optional(),
+        }),
         categoryCombo: z
             .object({ id: z.string(), displayName: z.string() })
             .default({ ...DEFAULT_CATEGORY_COMBO }),
@@ -41,7 +50,7 @@ export const dataSetFormSchema = identifiable
             .int({ message: i18n.t('The number should not have decimals') })
             .optional(),
         expiryDays: z.number().optional(),
-        formType: z.enum(['DEFAULT', 'SECTION', 'CUSTOM']).default('DEFAULT'),
+        formType: formTypeSchema,
         displayOptions: z
             .string()
             .optional()
@@ -73,6 +82,13 @@ export const dataSetFormSchema = identifiable
         compulsoryFieldsCompleteOnly: z.boolean().default(false),
         workflow: z.object({ id: z.string() }).optional(),
         timelyDays: z.number().optional().default(15),
+        sections: z.array(
+            identifiable.extend({
+                displayName: z.string().optional(),
+                description: z.string().optional(),
+                dataSet: identifiable,
+            })
+        ),
         compulsoryDataElementOperands: z
             .array(
                 z.object({
@@ -84,7 +100,7 @@ export const dataSetFormSchema = identifiable
         dataInputPeriods: z
             .array(
                 z.object({
-                    period: modelReference,
+                    perid: modelReference,
                     openingDate: z.string().optional(),
                     closingDate: z.string().optional(),
                 })
