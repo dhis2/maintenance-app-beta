@@ -14,7 +14,7 @@ export const categoriesFieldFilter = [
     'dataDimensionType',
     'categoryOptions[id,displayName]',
 ] as const
-const categoryComboFieldFilter = [
+export const categoryComboFieldFilter = [
     'id',
     'displayName',
     'dataDimensionType',
