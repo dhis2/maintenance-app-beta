@@ -82,13 +82,15 @@ export const dataSetFormSchema = identifiable
         compulsoryFieldsCompleteOnly: z.boolean().default(false),
         workflow: z.object({ id: z.string() }).optional(),
         timelyDays: z.number().optional().default(15),
-        sections: z.array(
-            identifiable.extend({
-                displayName: z.string().optional(),
-                description: z.string().optional(),
-                dataSet: identifiable,
-            })
-        ),
+        sections: z
+            .array(
+                identifiable.extend({
+                    displayName: z.string().optional(),
+                    description: z.string().optional(),
+                    dataSet: identifiable,
+                })
+            )
+            .default([]),
         compulsoryDataElementOperands: z
             .array(
                 z.object({
