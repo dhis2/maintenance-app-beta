@@ -1,3 +1,10 @@
+## [0.44.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.44.0...v0.44.1) (2025-05-09)
+
+
+### Bug Fixes
+
+* fix crash when adding a suggested category combo ([#561](https://github.com/dhis2/maintenance-app-beta/issues/561)) ([d1a9675](https://github.com/dhis2/maintenance-app-beta/commit/d1a9675745c4bac3079119c48566ab1b7260db2b))
+
 # [0.44.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.43.0...v0.44.0) (2025-05-08)
 
 
