@@ -4,7 +4,7 @@ import {
 } from '../../../lib'
 import { DataSet, PickWithFieldFilters } from '../../../types/generated'
 
-const fieldFilters = [
+export const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'categoryCombo[id,displayName]',
@@ -15,6 +15,7 @@ const fieldFilters = [
     'dimensionItem',
     'displayOptions',
     'fieldCombinationRequired',
+    'formType',
     'indicators[id,displayName]',
     'name',
     'organisationUnits[id,displayName]',

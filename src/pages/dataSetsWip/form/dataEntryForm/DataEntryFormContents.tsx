@@ -7,10 +7,12 @@ import {
     HorizontalFieldGroup,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-} from '../../../components'
-import { SectionedFormSection } from '../../../components/sectionedForm'
-import { DisplayOptionsField } from './DisplayOptionsField'
-import classes from './FormFormContents.module.css'
+} from '../../../../components'
+import { SectionedFormSection } from '../../../../components/sectionedForm'
+import { DisplayOptionsField } from '../DisplayOptionsField'
+import classes from './DataEntryFormContents.module.css'
+import { useDataSetFormState } from '../formHooks'
+import { getFormType } from '../dataSetModel'
 
 const DefaultFormIcon = () => (
     <svg
@@ -94,13 +96,14 @@ const FormTypeCard = ({
     )
 }
 
-export const FormFormContents = React.memo(function FormFormContents({
+export const DataEntryFromContents = React.memo(function FormFormContents({
     name,
 }: {
     name: string
 }) {
-    const formTypeFieldName = 'formType'
-    const formValues = useFormState({ subscription: { values: true } }).values
+    const formTypeFieldName = `formType`
+    const formValues = useDataSetFormState().values
+    const formType = getFormType(formValues)
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
@@ -124,9 +127,7 @@ export const FormFormContents = React.memo(function FormFormContents({
                                 description={i18n.t(
                                     'Data elements are displayed in a standard list'
                                 )}
-                                highlighted={
-                                    formValues[formTypeFieldName] === 'DEFAULT'
-                                }
+                                highlighted={formType === 'DEFAULT'}
                             />
                         }
                         className={classes.formTypeCard}
@@ -145,15 +146,12 @@ export const FormFormContents = React.memo(function FormFormContents({
                                 description={i18n.t(
                                     'Group data into sections with additional options'
                                 )}
-                                highlighted={
-                                    formValues[formTypeFieldName] === 'SECTION'
-                                }
+                                highlighted={formType === 'SECTION'}
                             />
                         }
                         className={classes.formTypeCard}
                         type="radio"
                         value={'SECTION'}
-                        disabled
                     />
                 </Card>
                 <Card>
@@ -167,9 +165,7 @@ export const FormFormContents = React.memo(function FormFormContents({
                                 description={i18n.t(
                                     'Build and style a custom form layout'
                                 )}
-                                highlighted={
-                                    formValues[formTypeFieldName] === 'CUSTOM'
-                                }
+                                highlighted={formType === 'CUSTOM'}
                             />
                         }
                         className={classes.formTypeCard}
