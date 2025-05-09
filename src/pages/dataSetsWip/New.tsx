@@ -2,10 +2,10 @@ import React from 'react'
 import {
     FormBase,
     SectionedFormLayout,
-    DefaultSectionedFormFooter,
     DefaultSectionedFormSidebar,
     SectionedFormErrorNotice,
 } from '../../components'
+import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
 import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { DataSetFormContents } from './form/DataSetFormContents'
 import {
@@ -32,10 +32,10 @@ export const Component = () => {
                         <>
                             <SectionedFormLayout
                                 sidebar={<DefaultSectionedFormSidebar />}
-                                footer={<DefaultSectionedFormFooter />}
                             >
                                 <form onSubmit={handleSubmit}>
                                     <DataSetFormContents />
+                                    <DefaultFormFooter />
                                 </form>
                                 <SectionedFormErrorNotice />
                             </SectionedFormLayout>
