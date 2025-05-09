@@ -22,6 +22,10 @@ import {
 } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { DisplayableModel } from '../../../types/models'
 import { ProgramIndicatorWithMapping } from '../Edit'
+import {
+    categoryComboFieldFilter,
+    CategoryComboFromSelect,
+} from './CategoriesSelector'
 import { CategoryMapping } from './programDisaggregationSchema'
 import css from './ProgramIndicatorMapping.module.css'
 
@@ -175,17 +179,13 @@ export const ProgramIndicatorMapping = ({
     return (
         <div className={css.mappingFields}>
             <div>
-                <ModelSingleSelectField
+                <ModelSingleSelectField<CategoryComboFromSelect>
                     label="Disaggregation category combination"
                     query={{
                         resource: 'categoryCombos',
                         params: {
                             filter: 'dataDimensionType:eq:DISAGGREGATION',
-                            fields: [
-                                'id',
-                                'displayName',
-                                'categories[id,displayName,dataDimensionType,categoryOptions[id,displayName]]',
-                            ],
+                            fields: categoryComboFieldFilter.concat(),
                         },
                     }}
                     showNoValueOption
@@ -217,17 +217,13 @@ export const ProgramIndicatorMapping = ({
                 </div>
             </div>
             <div>
-                <ModelSingleSelectField
+                <ModelSingleSelectField<CategoryComboFromSelect>
                     label={i18n.t('Attribute category combination')}
                     query={{
                         resource: 'categoryCombos',
                         params: {
                             filter: 'dataDimensionType:eq:ATTRIBUTE',
-                            fields: [
-                                'id',
-                                'displayName',
-                                'categories[id,displayName,dataDimensionType,categoryOptions[id,displayName]]',
-                            ],
+                            fields: categoryComboFieldFilter.concat(),
                         },
                     }}
                     showNoValueOption

@@ -220,7 +220,7 @@ const CategoryMappingInput = ({
                 validationText={
                     validation.input.value && i18n.t('Invalid expression')
                 }
-                warning={validation.input.value}
+                warning={!!validation.input.value}
             />
         </div>
     )
