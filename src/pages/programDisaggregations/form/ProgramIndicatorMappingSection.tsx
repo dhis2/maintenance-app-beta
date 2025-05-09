@@ -184,7 +184,7 @@ export const ProgramIndicatorMapping = ({
                             fields: [
                                 'id',
                                 'displayName',
-                                'categories[id,displayName]',
+                                'categories[id,displayName,dataDimensionType,categoryOptions[id,displayName]]',
                             ],
                         },
                     }}
@@ -226,7 +226,7 @@ export const ProgramIndicatorMapping = ({
                             fields: [
                                 'id',
                                 'displayName',
-                                'categories[id,displayName]',
+                                'categories[id,displayName,dataDimensionType,categoryOptions[id,displayName]]',
                             ],
                         },
                     }}
