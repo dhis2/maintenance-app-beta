@@ -9,8 +9,6 @@ import {
     generateDefaultListFiltersTests,
     generateDefaultListItemsTests,
     generateDefaultListMultiActionsTests,
-    generateDefaultListRowActionsTests,
-    generateDefaultListTests,
 } from '../defaultListTests'
 import { Component as CategoryOptionComboList } from './List'
 
@@ -49,7 +47,13 @@ generateDefaultListItemsTests({
     customData,
 })
 generateDefaultListFiltersTests({ componentName: section.name })
-generateDefaultListMultiActionsTests({ componentName: section.name })
+generateDefaultListMultiActionsTests({
+    section,
+    mockSchema,
+    ComponentToTest,
+    generateRandomElement,
+    customData,
+})
 
 xdescribe('Category option combo additional tests', () => {
     it('should filter by category option', () => {})

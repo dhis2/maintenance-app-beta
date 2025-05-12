@@ -18,6 +18,7 @@ type RelevantButtonProps = Pick<
     | 'toggled'
     | 'large'
     | 'destructive'
+    | 'dataTest'
 >
 
 type LinkButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> &
@@ -45,6 +46,7 @@ export const LinkButton = ({
     preventScrollReset,
     to,
     href,
+    dataTest,
     ...anchorProps
 }: LinkButtonProps) => {
     const resolvedClassname = cx(css.linkButton, className, {
@@ -70,6 +72,7 @@ export const LinkButton = ({
                 replace={replace}
                 state={state}
                 preventScrollReset={preventScrollReset}
+                dataTest={dataTest}
             />
         )
     }
@@ -80,6 +83,7 @@ export const LinkButton = ({
             className={resolvedClassname}
             href={href}
             onClick={onClick}
+            data-test={dataTest}
         />
     )
 }
@@ -97,6 +101,7 @@ const ReactRouterLinkButton = ({
     state,
     preventScrollReset,
     target,
+    dataTest,
     ...anchorProps
 }: ReactRouterLinkButtonProps) => {
     const resolvedHref = useHref(to, { relative })
@@ -128,6 +133,7 @@ const ReactRouterLinkButton = ({
             href={resolvedHref}
             onClick={handleClick}
             target={target}
+            data-test={dataTest || 'link-button'}
         />
     )
 }

@@ -4,6 +4,7 @@ import {
     OptionMapping,
     OrganisationUnit,
     User,
+    UserGroup,
 } from '../types/generated'
 
 export const randomDhis2Id = () =>
@@ -60,6 +61,15 @@ export const testUser = ({
         displayName: name,
         username,
     } as User)
+
+export const testUserGroup = ({
+    id = randomDhis2Id(),
+    name = faker.person.fullName(),
+} = {}) => ({
+    id,
+    name,
+    displayName: name,
+})
 
 export const testOrgUnit = ({
     id = randomDhis2Id(),
@@ -162,6 +172,7 @@ export const testCategory = ({
     createdBy = testUser(),
     lastUpdatedBy = testUser(),
     access = testAccess(),
+    href = faker.internet.url(),
     sharing = { public: 'rw------' },
 } = {}) => ({
     id,
@@ -175,6 +186,7 @@ export const testCategory = ({
     createdBy,
     lastUpdatedBy,
     access,
+    href,
     sharing,
 })
 
@@ -187,6 +199,8 @@ export const testCategoryCombo = ({
     lastUpdatedBy = testUser(),
     access = testAccess(),
     sharing = { public: 'rw------' },
+    code = faker.string.alphanumeric(6),
+    href = faker.internet.url(),
 } = {}) => ({
     id,
     name,
@@ -197,6 +211,8 @@ export const testCategoryCombo = ({
     createdBy,
     lastUpdatedBy,
     sharing,
+    href,
+    code,
 })
 
 export const testCategoryOptionCombo = ({
@@ -207,6 +223,7 @@ export const testCategoryOptionCombo = ({
     createdBy = testUser(),
     lastUpdatedBy = testUser(),
     access = testAccess(),
+    href = faker.internet.url(),
 } = {}) => ({
     id,
     name,
@@ -216,4 +233,14 @@ export const testCategoryOptionCombo = ({
     lastUpdated,
     createdBy,
     lastUpdatedBy,
+    href,
+})
+
+export const testLocale = ({
+    locale = faker.string.alpha({ length: 2 }),
+    name = faker.location.country(),
+} = {}) => ({
+    locale,
+    name,
+    displayNAme: name,
 })

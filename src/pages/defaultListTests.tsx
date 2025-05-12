@@ -2,25 +2,33 @@ import { FetchError } from '@dhis2/app-runtime'
 import { faker } from '@faker-js/faker'
 import {
     render,
+    RenderResult,
     waitFor,
     waitForElementToBeRemoved,
+    within,
 } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
-import React, { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import React from 'react'
+import { getTranslateableFieldsForSchema } from '../components/sectionList/translation/TranslationForm'
 import {
     modelListViewsConfig,
     ModelPropertyConfig,
     ModelSchemas,
-    SchemaName,
-    SectionListViewConfig,
-    SectionName,
+    Schema,
     toModelPropertyDescriptor,
 } from '../lib'
 import { useSchemaStore } from '../lib/schemas/schemaStore'
 import { useCurrentUserStore } from '../lib/user/currentUserStore'
-import { testOrgUnit } from '../testUtils/builders'
+import { camelCaseToConstantCase } from '../lib/utils'
+import {
+    testAccess,
+    testLocale,
+    testOrgUnit,
+    testUser,
+    testUserGroup,
+} from '../testUtils/builders'
 import TestComponentWithRouter from '../testUtils/TestComponentWithRouter'
+import { testUtils } from '../testUtils/testUtils'
 import { ModelSection } from '../types'
 import type { OrganisationUnit } from '../types/generated'
 
@@ -28,43 +36,38 @@ type TestConfig = {
     section: ModelSection
     mockSchema: Record<any, any>
     ComponentToTest: () => React.ReactElement
-    generateRandomElement: () => Record<any, any>
+    generateRandomElement: (values?: Record<any, any>) => Record<any, any>
     customData: Record<any, any>
     componentName?: undefined
 }
-export const generateDefaultListTests = (
-    testConfigs: TestConfig | { componentName: string; section?: undefined }
-) => {
-    if (testConfigs.section !== undefined) {
-        generateDefaultListItemsTests(testConfigs)
-    }
-    generateDefaultListFiltersTests({
-        componentName:
-            testConfigs.section?.namePlural ?? testConfigs.componentName ?? '',
-    })
-    generateDefaultListRowActionsTests({
-        componentName:
-            testConfigs.section?.namePlural ?? testConfigs.componentName ?? '',
-    })
-    generateDefaultListMultiActionsTests({
-        componentName:
-            testConfigs.section?.namePlural ?? testConfigs.componentName ?? '',
-    })
-}
-
-const defaultUserDataStoreData = () => Promise.reject(new FetchError(error404))
-const originalWarn = console.warn
-jest.spyOn(console, 'warn').mockImplementation((value) => {
-    if (!value.match(/No server timezone/)) {
-        originalWarn(value)
-    }
-})
 
 const error404 = new FetchError({
     type: 'unknown',
     message: '404 not found',
     details: { httpStatusCode: 404 } as FetchError['details'],
 })
+const defaultUserDataStoreData = () => Promise.reject(new FetchError(error404))
+const originalWarn = console.warn
+
+jest.spyOn(console, 'warn').mockImplementation((value) => {
+    if (!value.match(/No server timezone/)) {
+        originalWarn(value)
+    }
+})
+
+export const generateDefaultListTests = (
+    testConfigs: TestConfig | { componentName: string; section?: undefined }
+) => {
+    if (testConfigs.section !== undefined) {
+        generateDefaultListItemsTests(testConfigs)
+        generateDefaultListRowActionsTests(testConfigs)
+        generateDefaultListMultiActionsTests(testConfigs)
+    }
+    generateDefaultListFiltersTests({
+        componentName:
+            testConfigs.section?.namePlural ?? testConfigs.componentName ?? '',
+    })
+}
 
 export const generateDefaultListItemsTests = ({
     section,
@@ -73,24 +76,7 @@ export const generateDefaultListItemsTests = ({
     generateRandomElement,
     customData,
 }: TestConfig) => {
-    function LocationWatcher({
-        onChange,
-    }: {
-        onChange: (search: string) => void
-    }) {
-        const location = useLocation()
-
-        useEffect(() => {
-            onChange(location.search)
-        }, [location.search, onChange])
-
-        return null
-    }
-
-    const renderList = async ({
-        userDataStore = defaultUserDataStoreData,
-        rootOrgUnits = [testOrgUnit()] as Partial<OrganisationUnit>[],
-    } = {}) => {
+    const renderList = async () => {
         const routeOptions = {
             handle: { section },
         }
@@ -100,7 +86,7 @@ export const generateDefaultListItemsTests = ({
         } as unknown as ModelSchemas)
 
         useCurrentUserStore.getState().setCurrentUser({
-            organisationUnits: rootOrgUnits as OrganisationUnit[],
+            organisationUnits: [testOrgUnit()] as OrganisationUnit[],
             authorities: new Set(),
             name: faker.person.fullName(),
             email: faker.internet.email(),
@@ -135,7 +121,7 @@ export const generateDefaultListItemsTests = ({
                             }
                         }
                     },
-                    userDataStore,
+                    userDataStore: defaultUserDataStoreData,
                 }}
                 routeOptions={routeOptions}
             >
@@ -148,7 +134,6 @@ export const generateDefaultListItemsTests = ({
         )
         return { screen, elements, pager }
     }
-
     describe(`${section.namePlural} default list tests`, () => {
         it('should display all the items in the first page', async () => {
             const { screen, elements } = await renderList()
@@ -158,7 +143,6 @@ export const generateDefaultListItemsTests = ({
                 expect(tableRows[index]).toHaveTextContent(element.displayName)
             })
         })
-
         it('should display the default columns', async () => {
             const { screen } = await renderList()
             const tableHeaders = screen.getAllByTestId(
@@ -180,13 +164,11 @@ export const generateDefaultListItemsTests = ({
                 }
             )
         })
-
         xit('can change the visible columns through manage view', async () => {
             const { screen } = await renderList()
             await userEvent.click(
                 await screen.findByTestId('manage-view-button')
             )
-
             await waitFor(() => {
                 const manageViewModal = screen.getByTestId('manage-view-modal')
                 expect(manageViewModal).toBeVisible()
@@ -199,53 +181,635 @@ export const generateDefaultListItemsTests = ({
     })
 }
 
+export const generateDefaultListRowActionsTests = ({
+    section,
+    mockSchema,
+    ComponentToTest,
+    generateRandomElement,
+    customData,
+}: TestConfig) => {
+    const deleteMock = jest.fn()
+    const updateTranslationsMock = jest.fn()
+
+    const renderList = async ({
+        elements = [generateRandomElement(), generateRandomElement()],
+    } = {}) => {
+        const routeOptions = {
+            handle: { section },
+        }
+
+        useSchemaStore.getState().setSchemas({
+            [section.name]: mockSchema,
+        } as unknown as ModelSchemas)
+
+        useCurrentUserStore.getState().setCurrentUser({
+            organisationUnits: [testOrgUnit()] as OrganisationUnit[],
+            authorities: new Set(),
+            name: faker.person.fullName(),
+            email: faker.internet.email(),
+            settings: {},
+        })
+
+        const pager = {
+            page: 1,
+            total: elements.length,
+            pageSize: 20,
+            pageCount: Math.ceil(elements.length / 20),
+        }
+        const locales = [testLocale(), testLocale(), testLocale()]
+
+        const screen = render(
+            <TestComponentWithRouter
+                path={`/${section.namePlural}`}
+                customData={{
+                    ...customData,
+                    [section.namePlural]: (type: any, params: any) => {
+                        if (type === 'read' && params.id !== undefined) {
+                            if (params.id.match(/translations/)) {
+                                return { translations: [] }
+                            }
+
+                            const foundElement = elements.find(
+                                (element) => element.id === params.id
+                            )
+                            return foundElement
+                        }
+                        if (type === 'read') {
+                            return {
+                                [section.namePlural]: elements,
+                                pager,
+                            }
+                        }
+                        if (type === 'delete') {
+                            const deletedIndex = elements.findIndex(
+                                (e) => e.id === params.id
+                            )
+                            elements.splice(deletedIndex, 1)
+                            deleteMock(params)
+                            return { statusCode: 204 }
+                        }
+                        if (
+                            type === 'replace' &&
+                            params.id !== undefined &&
+                            params.id.match(/translations/)
+                        ) {
+                            updateTranslationsMock(params)
+                            return { statusCode: 204 }
+                        }
+                    },
+                    sharing: {
+                        meta: {
+                            allowExternalAccess: false,
+                            allowPublicAccess: false,
+                        },
+                        object: {
+                            displayName: '',
+                            externalAccess: false,
+                            id: 'abc',
+                            name: '',
+                            publicAccess: 'rw------',
+                            userAccesses: [],
+                            userGroupAccesses: [],
+                        },
+                    },
+                    'locales/db': () => {
+                        return locales
+                    },
+                    userDataStore: defaultUserDataStoreData,
+                }}
+                routeOptions={routeOptions}
+            >
+                <ComponentToTest />
+            </TestComponentWithRouter>
+        )
+
+        await waitForElementToBeRemoved(() =>
+            screen.queryByTestId('dhis2-uicore-circularloader')
+        )
+        return { screen, elements, pager, locales }
+    }
+
+    const openActionsMenu = async (
+        tableRow: HTMLElement,
+        screen: RenderResult
+    ) => {
+        const actionButton = within(tableRow).getByTestId(
+            'row-actions-menu-button'
+        )
+        await userEvent.click(actionButton)
+        const actionsMenu = screen.getByTestId('row-actions-menu')
+        expect(actionsMenu).toBeVisible()
+        return actionsMenu
+    }
+
+    describe(`${section.namePlural} default row actions tests`, () => {
+        it('should display the default actions in the actions menu', async () => {
+            const { screen } = await renderList()
+            const tableRows = screen.getAllByTestId('section-list-row')
+            const actionsMenu = await openActionsMenu(tableRows[1], screen)
+            expect(actionsMenu).toHaveTextContent('Show details')
+            expect(actionsMenu).toHaveTextContent('Edit')
+            if (mockSchema.shareable) {
+                expect(actionsMenu).toHaveTextContent('Sharing settings')
+            } else {
+                expect(actionsMenu).not.toHaveTextContent('Sharing settings')
+            }
+            if (mockSchema.translatable) {
+                expect(actionsMenu).toHaveTextContent('Translate')
+            } else {
+                expect(actionsMenu).not.toHaveTextContent('Translate')
+            }
+            expect(actionsMenu).toHaveTextContent('Delete')
+        })
+        it('has a link to an edit page in the row actions menu', async () => {
+            const elementsWithEditAccess = generateRandomElement({
+                access: testAccess({ writeAccess: true }),
+            })
+            const elementsWithoutEditAccess = generateRandomElement({
+                access: testAccess({ writeAccess: false }),
+            })
+            const { screen, elements } = await renderList({
+                elements: [elementsWithEditAccess, elementsWithoutEditAccess],
+            })
+            const tableRows = screen.getAllByTestId('section-list-row')
+            const editableElementActionMenu = await openActionsMenu(
+                tableRows[0],
+                screen
+            )
+            expect(
+                within(editableElementActionMenu).getByText('Edit').closest('a')
+            ).toHaveAttribute(
+                'href',
+                `/${section.namePlural}/${elements[0].id}`
+            )
+            await userEvent.click(
+                within(tableRows[0]).getByTestId('row-actions-menu-button')
+            )
+            expect(editableElementActionMenu).not.toBeVisible()
+
+            const nonEditableElementActionMenu = await openActionsMenu(
+                tableRows[1],
+                screen
+            )
+            expect(
+                within(nonEditableElementActionMenu)
+                    .getByText('Edit')
+                    .closest('a')
+            ).not.toHaveAttribute('href')
+        })
+        it('has a pencil icon that links to the edit page', async () => {
+            const elementsWithEditAccess = generateRandomElement({
+                access: testAccess({ writeAccess: true }),
+            })
+            const elementsWithoutEditAccess = generateRandomElement({
+                access: testAccess({ writeAccess: false }),
+            })
+            const { screen, elements } = await renderList({
+                elements: [elementsWithEditAccess, elementsWithoutEditAccess],
+            })
+            const tableRows = screen.getAllByTestId('section-list-row')
+
+            const editableElementEditButton = within(tableRows[0]).getByTestId(
+                'row-edit-action-button'
+            )
+            const editableElementNonEditableTooltip = within(
+                tableRows[0]
+            ).queryByTestId('no-editable-tooltip-reference')
+            expect(editableElementEditButton).toBeVisible()
+            expect(editableElementEditButton.closest('a')).toHaveAttribute(
+                'href',
+                `/${section.namePlural}/${elements[0].id}`
+            )
+            expect(editableElementNonEditableTooltip).toBeNull()
+
+            const nonEditableElementEditButton = within(
+                tableRows[1]
+            ).getByTestId('row-edit-action-button')
+            const nonEditableElementNonEditableTooltip = within(
+                tableRows[1]
+            ).queryByTestId('no-editable-tooltip-reference')
+            expect(nonEditableElementEditButton).toBeVisible()
+            expect(nonEditableElementEditButton.closest('a')).toHaveAttribute(
+                'href',
+                `/${section.namePlural}/${elements[1].id}`
+            )
+            expect(nonEditableElementNonEditableTooltip).not.toBeNull()
+        })
+        it('deletes an item when pressing the delete action and updates the list', async () => {
+            const elementsWithDeleteAccess = generateRandomElement({
+                access: testAccess({ deleteAccess: true }),
+            })
+            const elementsWithoutDeleteAccess = generateRandomElement({
+                access: testAccess({ deleteAccess: false }),
+            })
+            const elements = [
+                elementsWithDeleteAccess,
+                elementsWithoutDeleteAccess,
+            ]
+            const { screen } = await renderList({
+                elements,
+            })
+            const tableRows = screen.getAllByTestId('section-list-row')
+            expect(tableRows).toHaveLength(2)
+
+            const deletableElementActionMenu = await openActionsMenu(
+                tableRows[0],
+                screen
+            )
+            screen.getByTestId('row-actions-menu')
+
+            const deleteConfirmationModal = await testUtils.openModal(
+                within(deletableElementActionMenu).getByText('Delete'),
+                'delete-confirmation-modal',
+                screen
+            )
+            await userEvent.click(
+                within(deleteConfirmationModal).getByRole('button', {
+                    name: 'Confirm deletion',
+                })
+            )
+            await waitFor(() => {
+                expect(deleteMock).toHaveBeenCalledWith(
+                    expect.objectContaining({ id: elementsWithDeleteAccess.id })
+                )
+            })
+
+            const nonDeletableElementActionMenu = await openActionsMenu(
+                tableRows[1],
+                screen
+            )
+            expect(
+                within(nonDeletableElementActionMenu)
+                    .getByText('Delete')
+                    .closest('li')
+            ).toHaveClass('disabled')
+            await userEvent.click(
+                within(nonDeletableElementActionMenu).getByText('Delete')
+            )
+            expect(screen.queryByTestId('delete-confirmation-modal')).toBeNull()
+
+            const tableRowsUpdated = screen.getAllByTestId('section-list-row')
+            expect(tableRowsUpdated).toHaveLength(1)
+        })
+        it('shows the detail panel when the show details action is clicked', async () => {
+            const element = generateRandomElement({
+                access: testAccess({ writeAccess: true }),
+            })
+            const { screen, elements } = await renderList({
+                elements: [element],
+            })
+            const tableRows = screen.getAllByTestId('section-list-row')
+
+            const actionsMenu = await openActionsMenu(tableRows[0], screen)
+            await userEvent.click(within(actionsMenu).getByText('Show details'))
+            const detailsPanel = await screen.findByTestId('details-panel')
+            expect(detailsPanel).toBeVisible()
+            expect(detailsPanel).toHaveTextContent(element.displayName!)
+            expect(detailsPanel).toHaveTextContent(element.code!)
+            expect(detailsPanel).toHaveTextContent(element.id!)
+            expect(detailsPanel).toHaveTextContent(
+                element.createdBy!.displayName!
+            )
+            expect(detailsPanel).toHaveTextContent(
+                element.lastUpdatedBy!.displayName!
+            )
+            expect(detailsPanel).toHaveTextContent(
+                element.lastUpdatedBy!.displayName!
+            )
+            expect(
+                within(detailsPanel).getByText('API URL link').closest('a')
+            ).toHaveAttribute('href', element.href)
+            const editButton = within(detailsPanel).getByTestId('link-button')
+            expect(editButton).toHaveTextContent('Edit')
+            expect(editButton).toHaveAttribute(
+                'href',
+                `/${section.namePlural}/${element.id}`
+            )
+        })
+        it('should open the sharing settings dialog when the sharing settings action is clicked', async () => {
+            if (mockSchema.shareable) {
+                const element = generateRandomElement({
+                    access: testAccess({ writeAccess: true }),
+                })
+                const { screen, elements } = await renderList({
+                    elements: [element],
+                })
+                const tableRows = screen.getAllByTestId('section-list-row')
+                const actionsMenu = await openActionsMenu(tableRows[0], screen)
+                await userEvent.click(
+                    within(actionsMenu).getByText('Sharing settings')
+                )
+                const sharingSettingModal = await screen.findByTestId(
+                    'dhis2-uicore-sharingdialog'
+                )
+                expect(sharingSettingModal).toBeVisible()
+            }
+        })
+        xit('should update the list view when the sharing settings dialog is closed', () => {})
+        it('should open a translation dialog when the translate action is clicked', async () => {
+            if (mockSchema.translatable) {
+                const element = generateRandomElement({
+                    access: testAccess({ writeAccess: true }),
+                })
+                const { screen, locales } = await renderList({
+                    elements: [element],
+                })
+                const tableRows = screen.getAllByTestId('section-list-row')
+                const actionsMenu = await openActionsMenu(tableRows[0], screen)
+                await userEvent.click(
+                    within(actionsMenu).getByText('Translate')
+                )
+                const translationModal = await testUtils.openModal(
+                    within(actionsMenu).getByText('Translate'),
+                    'translation-dialog',
+                    screen
+                )
+
+                const availableLanguages = await testUtils.openSingleSelect(
+                    'translation-dialog-locale-select',
+                    screen
+                )
+                expect(availableLanguages).toHaveLength(locales.length)
+                await userEvent.click(availableLanguages[1])
+
+                let expectedTranslations = [] as {
+                    locale: string
+                    property: string
+                    value: string
+                }[]
+                const fields = getTranslateableFieldsForSchema(
+                    mockSchema as Schema
+                )
+
+                for (const field of fields) {
+                    const inputContainerId =
+                        field === 'description'
+                            ? 'dhis2-uicore-textarea'
+                            : 'dhis2-uicore-input'
+                    const inputContainer = within(
+                        screen.getByTestId(`field-${field}-translation-content`)
+                    ).getByTestId(inputContainerId)
+                    const input = within(inputContainer).getByRole('textbox')
+                    const translation = `translated ${field}`
+                    expectedTranslations = [
+                        ...expectedTranslations,
+                        {
+                            locale: locales[1].locale,
+                            property: camelCaseToConstantCase(field),
+                            value: translation,
+                        },
+                    ]
+                    await userEvent.type(input, translation)
+                }
+                await userEvent.click(
+                    within(translationModal).getByTestId(
+                        'submit-translations-button'
+                    )
+                )
+                expect(updateTranslationsMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        id: `${element.id}/translations`,
+                        data: { translations: expectedTranslations },
+                    })
+                )
+            }
+        })
+    })
+}
+
+export const generateDefaultListMultiActionsTests = ({
+    section,
+    mockSchema,
+    ComponentToTest,
+    generateRandomElement,
+    customData,
+}: TestConfig) => {
+    const renderList = async ({
+        elements = [generateRandomElement(), generateRandomElement()],
+        sharingUsers = [testUser(), testUser()],
+        sharingUserGroups = [testUserGroup(), testUserGroup()],
+    } = {}) => {
+        const routeOptions = {
+            handle: { section },
+        }
+
+        useSchemaStore.getState().setSchemas({
+            [section.name]: mockSchema,
+        } as unknown as ModelSchemas)
+        useCurrentUserStore.getState().setCurrentUser({
+            organisationUnits: [testOrgUnit()] as OrganisationUnit[],
+            authorities: new Set(),
+            name: faker.person.fullName(),
+            email: faker.internet.email(),
+            settings: {},
+        })
+
+        const pager = {
+            page: 1,
+            total: elements.length,
+            pageSize: 20,
+            pageCount: Math.ceil(elements.length / 20),
+        }
+
+        const screen = render(
+            <TestComponentWithRouter
+                path={`/${section.namePlural}`}
+                customData={{
+                    ...customData,
+                    [section.namePlural]: (type: any, params: any) => {
+                        if (type === 'read') {
+                            return {
+                                [section.namePlural]: elements,
+                                pager,
+                            }
+                        }
+                    },
+                    'sharing/search': () => ({
+                        userGroups: sharingUserGroups,
+                        users: sharingUsers,
+                    }),
+                    userDataStore: defaultUserDataStoreData,
+                }}
+                routeOptions={routeOptions}
+            >
+                <ComponentToTest />
+            </TestComponentWithRouter>
+        )
+
+        await waitForElementToBeRemoved(() =>
+            screen.queryByTestId('dhis2-uicore-circularloader')
+        )
+        return { screen, elements, sharingUsers, sharingUserGroups }
+    }
+
+    describe(`${section.name} default multiple actions tests`, () => {
+        it('should display the multiple actions banner when 1 or more items are selected on deselect all ', async () => {
+            const { screen } = await renderList()
+            const tableRows = screen.getAllByTestId('section-list-row')
+
+            const firstRowCheckbox = within(tableRows[0]).getByTestId(
+                'section-list-row-checkbox'
+            )
+            await userEvent.click(firstRowCheckbox)
+            const toolbar = screen.getByTestId('multi-actions-toolbar')
+            expect(toolbar).toBeVisible()
+            expect(toolbar).toHaveTextContent('1 selected')
+
+            const secondRowCheckbox = within(tableRows[1]).getByTestId(
+                'section-list-row-checkbox'
+            )
+            await userEvent.click(secondRowCheckbox)
+            expect(toolbar).toBeVisible()
+            expect(toolbar).toHaveTextContent('2 selected')
+
+            await userEvent.click(within(toolbar).getByText('Deselect all'))
+            expect(firstRowCheckbox).not.toBeChecked()
+            expect(secondRowCheckbox).not.toBeChecked()
+            expect(toolbar).not.toBeVisible()
+        })
+        it('should update sharing settings for multiple items', async () => {
+            if (mockSchema.shareable) {
+                global.fetch = jest.fn(() =>
+                    Promise.resolve({
+                        ok: true,
+                        json: () => Promise.resolve({}),
+                    })
+                ) as jest.Mock
+                const sharingUsers = [
+                    testUser({ name: 'b' }),
+                    testUser({ name: 'd' }),
+                ]
+                const sharingUserGroups = [
+                    testUserGroup({ name: 'c' }),
+                    testUser({ name: 'a' }),
+                ]
+
+                const { screen, elements } = await renderList({
+                    sharingUsers,
+                    sharingUserGroups,
+                })
+                const tableRows = screen.getAllByTestId('section-list-row')
+
+                await userEvent.click(
+                    within(tableRows[0]).getByTestId(
+                        'section-list-row-checkbox'
+                    )
+                )
+                await userEvent.click(
+                    within(tableRows[1]).getByTestId(
+                        'section-list-row-checkbox'
+                    )
+                )
+                const toolbar = screen.getByTestId('multi-actions-toolbar')
+                expect(toolbar).toBeVisible()
+
+                await testUtils.openModal(
+                    within(toolbar).getByText('Update sharing'),
+                    'bulk-sharing-dialog',
+                    screen
+                )
+
+                const options = await testUtils.openSingleSelect(
+                    'sharing-search-select',
+                    screen
+                )
+                expect(options).toHaveLength(
+                    sharingUsers.length + sharingUserGroups.length
+                )
+                await userEvent.click(options[1])
+
+                const accessOptions = await testUtils.openSingleSelect(
+                    'metadata-access-select',
+                    screen
+                )
+                expect(accessOptions).toHaveLength(2)
+                expect(accessOptions[0]).toHaveTextContent('Edit and view')
+                expect(accessOptions[1]).toHaveTextContent('View only')
+                await userEvent.click(accessOptions[0])
+
+                await userEvent.click(
+                    screen.getByTestId('add-to-sharing-actions-button')
+                )
+                await userEvent.click(
+                    screen.getByTestId('update-sharing-button')
+                )
+
+                expect(global.fetch).toHaveBeenCalledWith(
+                    `http://dhis2-imaginary-test-server/api/${section.namePlural}/sharing`,
+                    expect.objectContaining({
+                        body: JSON.stringify({
+                            [section.namePlural]: [
+                                elements[0].id,
+                                elements[1].id,
+                            ],
+                            patch: [
+                                {
+                                    op: 'replace',
+                                    path: `/sharing/users/${sharingUsers[0].id}`,
+                                    value: {
+                                        access: 'rw------',
+                                        id: sharingUsers[0].id,
+                                    },
+                                },
+                            ],
+                        }),
+                    })
+                )
+            }
+        })
+        it('should download multiple items', async () => {
+            const { screen, elements } = await renderList()
+            const tableRows = screen.getAllByTestId('section-list-row')
+
+            await userEvent.click(
+                within(tableRows[0]).getByTestId('section-list-row-checkbox')
+            )
+            await userEvent.click(
+                within(tableRows[1]).getByTestId('section-list-row-checkbox')
+            )
+            const toolbar = screen.getByTestId('multi-actions-toolbar')
+            expect(toolbar).toBeVisible()
+
+            const downloadModal = await testUtils.openModal(
+                within(toolbar).getByText('Download'),
+                'download-modal',
+                screen
+            )
+            const downloadModelsSelector = within(downloadModal).getByTestId(
+                'download-models-to-include'
+            )
+            const radios = within(downloadModelsSelector).getAllByRole('radio')
+            const selectedRadio = radios.find(
+                (radio) => (radio as HTMLInputElement).checked
+            )
+            expect(selectedRadio).not.toBeNull()
+            expect(selectedRadio!.closest('label')).toHaveTextContent(
+                'Only selected (2)'
+            )
+
+            const downloadButton = within(downloadModal).getByTestId(
+                'download-dialog-link'
+            )
+            expect(downloadButton).toHaveAttribute(
+                'href',
+                `http://dhis2-imaginary-test-server/api/metadata.json.zip?${section.namePlural}=true&download=true&skipSharing=false&filter=id%3Ain%3A%5B${elements[0].id}%2C${elements[1].id}%5D`
+            )
+        })
+    })
+}
+
 export const generateDefaultListFiltersTests = ({
     componentName,
 }: {
     componentName: string
 }) => {
-    xdescribe(`${componentName} default filter tests`, () => {
-        it('can filter the results by code using the input field', () => {})
-        it('can filter the results by name using the input field', () => {})
-        it('can filter the results by id using the input field', () => {})
-        it('should show message when no items match filter', () => {})
-        it('should display the default filters', () => {})
-        it('can change the visible filters through manage view', () => {})
-        it('can remove all filters through manage view', () => {})
-    })
-}
-
-export const generateDefaultListRowActionsTests = ({
-    componentName,
-}: {
-    componentName: string
-}) => {
-    xdescribe(`${componentName} default row actions tests`, () => {
-        it('should display the default actions in the actions menu', () => {})
-        it('redirect to the edit page when clicking on the edit action', () => {})
-        it('redirects to the edit page when clicking on the pencil icon', () => {})
-        it('deletes an item when pressing the delete action and confirming', () => {})
-        it('updates the list when an item is deleted', () => {})
-        it('shows the detail panel when the show details action is clicked', () => {})
-        it('shows an edit button in the details panel', () => {})
-        it('can copy the api url in the details panel', () => {})
-        it('should open the sharing settings dialog when the sharing settings action is clicked', () => {})
-        it('should update the list view when the sharing settings dialog is closed', () => {})
-        it('should open a translation dialog when the translate action is clicked', () => {})
-        it('should successfully save a new translation', () => {})
-    })
-}
-
-export const generateDefaultListMultiActionsTests = ({
-    componentName,
-}: {
-    componentName: string
-}) => {
-    xdescribe(`${componentName} default multiple actions tests`, () => {
-        it('should display the multiple actions banner when 1 or more items are selected', () => {})
-        it('should indicate how many items were selected', () => {})
-        it('should update sharing settings for multiple items', () => {})
-        it('should download multiple items', () => {})
-        it('deselects all selected items', () => {})
+    describe(`${componentName} default filter tests`, () => {
+        xit('can filter the results by code using the input field', () => {})
+        xit('can filter the results by name using the input field', () => {})
+        xit('can filter the results by id using the input field', () => {})
+        xit('should show message when no items match filter', () => {})
+        xit('should display the default filters', () => {})
+        xit('can change the visible filters through manage view', () => {})
+        xit('can remove all filters through manage view', () => {})
     })
 }

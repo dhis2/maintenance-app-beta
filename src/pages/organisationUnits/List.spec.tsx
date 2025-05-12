@@ -591,7 +591,7 @@ describe('Organisation unit list', () => {
         const secondChildCheckBox = within(tableRows[3]).getByRole('checkbox')
         await userEvent.click(secondChildCheckBox)
 
-        const toolbar = screen.getByTestId('dhis2-uicore-tabletoolbar')
+        const toolbar = screen.getByTestId('multi-actions-toolbar')
         expect(toolbar).toBeVisible()
         expect(secondChildCheckBox).toBeChecked()
 
@@ -629,7 +629,7 @@ describe('Organisation unit list', () => {
         await userEvent.click(within(rootRow).getByRole('checkbox'))
         await userEvent.click(within(secondChildRow).getByRole('checkbox'))
 
-        const toolbar = screen.getByTestId('dhis2-uicore-tabletoolbar')
+        const toolbar = screen.getByTestId('multi-actions-toolbar')
         await userEvent.click(within(toolbar).getByText('Download'))
 
         const downloadModal = await screen.findByTestId('download-modal')
