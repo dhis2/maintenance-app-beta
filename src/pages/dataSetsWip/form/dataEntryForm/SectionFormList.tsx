@@ -8,29 +8,45 @@ import {
 } from '@dhis2/ui'
 import React from 'react'
 import { StandardFormSectionTitle } from '../../../../components'
+import { Drawer } from '../../../../components/drawer'
+import { DisplayableModel } from '../../../../types/models'
 import { DataSetFormValues } from '../dataSetFormSchema'
 import { useDataSetField } from '../formHooks'
-import css from './SectionForm.module.css'
+import {
+    EditDataSetSectionForm,
+    EditorNewDataSetSectionForm,
+} from './sectionForm/DataSetSectionForm'
+import css from './SectionFormList.module.css'
+import { set } from 'lodash'
+import { FieldArray, useFieldArray } from 'react-final-form-arrays'
 
 type Section = DataSetFormValues['sections'][number]
+
 export const SectionFormSectionsList = () => {
+    const [sectionFormOpen, setSectionFormOpen] = React.useState<
+        DisplayableModel | null | undefined
+    >(undefined)
+    // use null as open, but new model
+    const isSectionFormOpen = !!sectionFormOpen || sectionFormOpen === null
     const sections = useDataSetField('sections').input.value
-    console.log({ sections })
-    const sectionsArray = (sections || []).concat({
-        id: 'new',
-        displayName: i18n.t('New section'),
-        type: 'section',
-        description: 'Hello',
-        displayOptions: {
-            showHeader: true,
-            showLabel: true,
-            showDescription: true,
-            showHelpText: true,
-            showLegend: true,
-        },
-    })
+    const sectionFieldArray = useFieldArray<Section>('sections').fields
+    console.log({ sectionFieldArray })
+    const sectionsArray = sections || []
+
     return (
         <div className={css.sectionsList}>
+            <Drawer
+                isOpen={isSectionFormOpen}
+                onClose={() => setSectionFormOpen(undefined)}
+            >
+                {isSectionFormOpen && (
+                    <EditorNewDataSetSectionForm
+                        section={sectionFormOpen}
+                        onCancel={() => setSectionFormOpen(undefined)}
+                        onSubmitted={() => setSectionFormOpen(undefined)}
+                    />
+                )}
+            </Drawer>
             <div>
                 <StandardFormSectionTitle>
                     {i18n.t('Sections')}
@@ -40,17 +56,25 @@ export const SectionFormSectionsList = () => {
                 </p>
             </div>
             <div>
-                {sectionsArray.map((section, i) => (
+                {sectionFieldArray.value.map((section, i) => (
                     <SectionItem
                         key={section.id}
                         section={section}
                         index={i}
                         totalSections={sectionsArray.length}
+                        onClick={() => setSectionFormOpen(section)}
+                        onMoveDown={() => sectionFieldArray.move(i, i + 1)}
+                        onMoveUp={() => sectionFieldArray.move(i, i - 1)}
                     />
                 ))}
             </div>
             <div>
-                <Button secondary small icon={<IconAdd16 />}>
+                <Button
+                    secondary
+                    small
+                    icon={<IconAdd16 />}
+                    onClick={() => setSectionFormOpen(null)}
+                >
                     {i18n.t('Add section')}
                 </Button>
             </div>
@@ -62,14 +86,20 @@ export const SectionItem = ({
     section,
     index,
     totalSections,
+    onClick,
+    onMoveUp,
+    onMoveDown,
 }: {
     section: Section
     index: number
     totalSections: number
+    onClick?: () => void
+    onMoveUp?: () => void
+    onMoveDown?: () => void
 }) => {
     return (
         <div className={css.sectionItem}>
-            <div className={css.sectionIdentifiers}>
+            <div className={css.sectionIdentifiers} onClick={onClick}>
                 <div className={css.sectionName}>{section.displayName}</div>
                 {section.description && (
                     <div className={css.sectionDescription}>
@@ -82,11 +112,13 @@ export const SectionItem = ({
                     icon={<IconArrowUp16 />}
                     secondary
                     disabled={index === 0}
+                    onClick={onMoveUp}
                 />
                 <Button
                     icon={<IconArrowDown16 />}
                     secondary
                     disabled={index === totalSections - 1}
+                    onClick={onMoveDown}
                 />
                 <Button icon={<IconMore16 />} secondary />
             </div>

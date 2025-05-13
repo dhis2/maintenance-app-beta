@@ -13,7 +13,8 @@ import { DisplayOptionsField } from '../DisplayOptionsField'
 import classes from './DataEntryFormContents.module.css'
 import { useDataSetField, useDataSetFormState } from '../formHooks'
 import { getFormType } from '../dataSetModel'
-import { SectionFormSectionsList } from './SectionForm'
+import { SectionFormSectionsList } from './SectionFormList'
+import { Drawer } from '../../../../components/drawer'
 
 const DefaultFormIcon = () => (
     <svg

@@ -14,7 +14,8 @@ import { PickWithFieldFilters, DataSet } from '../../types/generated'
 import { DataSetFormContents } from './form/DataSetFormContents'
 import { validate, dataSetValueFormatter } from './form/dataSetFormSchema'
 import { DataSetFormDescriptor } from './form/formDescriptor'
-
+import arrayMutators from 'final-form-arrays'
+import { array } from 'zod'
 const section = SECTIONS_MAP.dataSet
 
 const fieldFilters = [
@@ -31,6 +32,8 @@ const fieldFilters = [
     'formType',
     'displayOptions',
     'legendSets[id,displayName]',
+    'dataEntryForm',
+    'sections[id,displayName]',
 ] as const
 type DataSetValues = PickWithFieldFilters<DataSet, typeof fieldFilters>
 
@@ -68,8 +71,9 @@ export const Component = () => {
                 valueFormatter={dataSetValueFormatter}
                 onSubmit={useOnSubmitEdit({ section, modelId })}
                 initialValues={initialValues}
-                validate={validate}
+                // validate={validate}
                 subscription={{}}
+                mutators={{ ...arrayMutators }}
             >
                 {({ handleSubmit }) => {
                     return (

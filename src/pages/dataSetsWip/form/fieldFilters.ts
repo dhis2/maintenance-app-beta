@@ -1,3 +1,4 @@
+// import { DataSetFormValues } from './dataSetFormSchema';
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     DEFAULT_FIELD_FILTERS,
@@ -11,7 +12,8 @@ export const fieldFilters = [
     'dataElementDecoration',
     'dataEntryForm[id]',
     'dataInputPeriods',
-    'dataSetElements[id,dataElement[id,displayName]]',
+    'dataSetElements[dataElement[id,displayName,categoryCombo[id,displayName]],categoryCombo[id,displayName]]',
+    //'dataSetElements[id,dataElement[id,displayName]]',
     'dimensionItem',
     'displayOptions',
     'fieldCombinationRequired',
@@ -23,10 +25,18 @@ export const fieldFilters = [
     'renderAsTabs',
     'renderHorizontally',
     'sections',
-    'style',
+    'style[color,icon',
     'skipOffline',
     'timelyDays',
     'validCommpleteOnly',
+    'organisationUnits[id,displayName,path]',
+    'compulsoryDataElementOperands[dataElement[id,displayName],id]',
+    'openFuturePeriods',
+    'expiryDays',
+    'openPeriodsAfterCoEndDate',
+    'formType',
+    'displayOptions',
+    'legendSets[id,displayName]',
 ] as const
 
 // DisplayOptions are handled by client only, and thus dont have a generated type
@@ -37,3 +47,6 @@ export type DataSetFormValues = PickWithFieldFilters<
     DataSet,
     typeof fieldFilters
 > & { displayOptions: DisplayOptions }
+const asf = {} as  DataSetFormValues
+asf.dataSetElements.map(m => m.)
+asf.compulsoryDataElementOperands?.map(m => m.)

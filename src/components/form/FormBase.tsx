@@ -27,6 +27,7 @@ type OwnProps<TValues = Record<string, unknown>> = {
     // since we're override this and just use children props
     render?: never
     component?: never
+    valueFormatter?: (values: TValues) => TValues
 }
 
 export type FormBaseProps<TValues> = FormProps<TValues> & OwnProps<TValues>

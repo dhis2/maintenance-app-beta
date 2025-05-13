@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import { omit } from 'lodash'
 import { z } from 'zod'
 import {
     DEFAULT_CATEGORY_COMBO,
@@ -84,10 +85,11 @@ export const dataSetFormSchema = identifiable
         timelyDays: z.number().optional().default(15),
         sections: z
             .array(
-                identifiable.extend({
-                    displayName: z.string().optional(),
+                z.object({
+                    id: z.string(),
+                    displayName: z.string(),
                     description: z.string().optional(),
-                    dataSet: identifiable,
+                    // dataSet: identifiable.optional(),
                 })
             )
             .default([]),
@@ -117,8 +119,9 @@ export type DataSetFormValues = typeof initialValues
 export const validate = createFormValidate(dataSetFormSchema)
 
 export const dataSetValueFormatter = (values: DataSetFormValues) => {
+    const withoutSections = omit(values, 'sections')
     return {
-        ...values,
+        ...withoutSections,
         displayOptions:
             values.displayOptions && JSON.stringify(values.displayOptions),
     }
