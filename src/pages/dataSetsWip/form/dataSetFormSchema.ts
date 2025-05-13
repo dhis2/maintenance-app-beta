@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import { omit } from 'lodash'
 import { z } from 'zod'
 import {
     DEFAULT_CATEGORY_COMBO,
@@ -16,6 +17,11 @@ const {
     modelReference,
 } = modelFormSchemas
 
+const formTypeSchema = z
+    .enum(['DEFAULT', 'SECTION', 'CUSTOM'])
+    .default('DEFAULT')
+export type FormType = z.infer<typeof formTypeSchema>
+
 export const dataSetFormSchema = identifiable
     .merge(withAttributeValues)
     .extend({
@@ -31,6 +37,10 @@ export const dataSetFormSchema = identifiable
                 })
             )
             .default([]),
+        dataEntryForm: identifiable.extend({
+            htmlCode: z.string().optional(),
+            format: z.number().int().optional(),
+        }),
         categoryCombo: z
             .object({ id: z.string(), displayName: z.string() })
             .default({ ...DEFAULT_CATEGORY_COMBO }),
@@ -41,7 +51,7 @@ export const dataSetFormSchema = identifiable
             .int({ message: i18n.t('The number should not have decimals') })
             .optional(),
         expiryDays: z.number().optional(),
-        formType: z.enum(['DEFAULT', 'SECTION', 'CUSTOM']).default('DEFAULT'),
+        formType: formTypeSchema,
         displayOptions: z
             .string()
             .optional()
@@ -73,6 +83,16 @@ export const dataSetFormSchema = identifiable
         compulsoryFieldsCompleteOnly: z.boolean().default(false),
         workflow: z.object({ id: z.string() }).optional(),
         timelyDays: z.number().optional().default(15),
+        sections: z
+            .array(
+                z.object({
+                    id: z.string(),
+                    displayName: z.string(),
+                    description: z.string().optional(),
+                    // dataSet: identifiable.optional(),
+                })
+            )
+            .default([]),
         compulsoryDataElementOperands: z
             .array(
                 z.object({
@@ -84,7 +104,7 @@ export const dataSetFormSchema = identifiable
         dataInputPeriods: z
             .array(
                 z.object({
-                    period: modelReference,
+                    perid: modelReference,
                     openingDate: z.string().optional(),
                     closingDate: z.string().optional(),
                 })
@@ -99,8 +119,9 @@ export type DataSetFormValues = typeof initialValues
 export const validate = createFormValidate(dataSetFormSchema)
 
 export const dataSetValueFormatter = (values: DataSetFormValues) => {
+    const withoutSections = omit(values, 'sections')
     return {
-        ...values,
+        ...withoutSections,
         displayOptions:
             values.displayOptions && JSON.stringify(values.displayOptions),
     }
