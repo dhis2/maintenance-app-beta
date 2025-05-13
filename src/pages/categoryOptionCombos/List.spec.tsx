@@ -39,21 +39,16 @@ const customData = {
     },
 }
 
-generateDefaultListItemsTests({
+const testConfig = {
     section,
     mockSchema,
     ComponentToTest,
     generateRandomElement,
     customData,
-})
-generateDefaultListFiltersTests({ componentName: section.name })
-generateDefaultListMultiActionsTests({
-    section,
-    mockSchema,
-    ComponentToTest,
-    generateRandomElement,
-    customData,
-})
+}
+generateDefaultListItemsTests(testConfig)
+generateDefaultListFiltersTests(testConfig)
+generateDefaultListMultiActionsTests(testConfig)
 
 xdescribe('Category option combo additional tests', () => {
     it('should filter by category option', () => {})

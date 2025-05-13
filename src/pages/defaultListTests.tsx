@@ -9,6 +9,7 @@ import {
 } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
+import { getSchemaProperty } from '../components/sectionList/modelValue/ModelValue'
 import { getTranslateableFieldsForSchema } from '../components/sectionList/translation/TranslationForm'
 import {
     modelListViewsConfig,
@@ -62,11 +63,10 @@ export const generateDefaultListTests = (
         generateDefaultListItemsTests(testConfigs)
         generateDefaultListRowActionsTests(testConfigs)
         generateDefaultListMultiActionsTests(testConfigs)
+        generateDefaultListFiltersTests(testConfigs)
+    } else {
+        it('should have a fake test as a placeholder', () => {})
     }
-    generateDefaultListFiltersTests({
-        componentName:
-            testConfigs.section?.namePlural ?? testConfigs.componentName ?? '',
-    })
 }
 
 export const generateDefaultListItemsTests = ({
@@ -76,11 +76,12 @@ export const generateDefaultListItemsTests = ({
     generateRandomElement,
     customData,
 }: TestConfig) => {
-    const renderList = async () => {
+    const getElementsMock = jest.fn()
+
+    const renderList = async ({ customTestData = {} } = {}) => {
         const routeOptions = {
             handle: { section },
         }
-
         useSchemaStore.getState().setSchemas({
             [section.name]: mockSchema,
         } as unknown as ModelSchemas)
@@ -112,16 +113,29 @@ export const generateDefaultListItemsTests = ({
             <TestComponentWithRouter
                 path={`/${section.namePlural}`}
                 customData={{
-                    ...customData,
                     [section.namePlural]: (type: any, params: any) => {
                         if (type === 'read') {
+                            getElementsMock(params)
+                            const pageSize =
+                                params?.params?.pageSize ?? pager.pageSize
                             return {
                                 [section.namePlural]: elements,
-                                pager,
+                                pager: {
+                                    ...pager,
+                                    page: params?.params?.page ?? pager.page,
+                                    pageSize:
+                                        params?.params?.pageSize ??
+                                        pager.pageSize,
+                                    pageCount: Math.ceil(
+                                        elements.length / pageSize
+                                    ),
+                                },
                             }
                         }
                     },
                     userDataStore: defaultUserDataStoreData,
+                    ...customData,
+                    ...customTestData,
                 }}
                 routeOptions={routeOptions}
             >
@@ -135,6 +149,9 @@ export const generateDefaultListItemsTests = ({
         return { screen, elements, pager }
     }
     describe(`${section.namePlural} default list tests`, () => {
+        beforeEach(() => {
+            jest.resetAllMocks()
+        })
         it('should display all the items in the first page', async () => {
             const { screen, elements } = await renderList()
             const tableRows = screen.getAllByTestId('section-list-row')
@@ -174,10 +191,136 @@ export const generateDefaultListItemsTests = ({
                 expect(manageViewModal).toBeVisible()
             })
         })
-        xit('should change the number of items that are displayed in a page when the number of items per page is changed', async () => {})
-        xit('can navigate through pages and show the corresponding items', () => {})
-        xit('can sort the results by columns using a non case sensitive manner', () => {})
-        xit('should display error when an API call fails', () => {})
+        it('should use the pagination navigator', async () => {
+            const { screen } = await renderList()
+            const pages = await testUtils.openSingleSelect(
+                'section-list-pagination-actions',
+                screen
+            )
+            await userEvent.click(pages[0])
+            expect(getElementsMock).toHaveBeenCalledTimes(2)
+            expect(getElementsMock).toHaveBeenLastCalledWith(
+                expect.objectContaining({
+                    params: expect.objectContaining({
+                        page: 1,
+                        pageSize: 5,
+                    }),
+                })
+            )
+            await userEvent.click(
+                screen.getByTestId('section-list-pagination-actions-page-next')
+            )
+            expect(getElementsMock).toHaveBeenLastCalledWith(
+                expect.objectContaining({
+                    params: expect.objectContaining({
+                        page: 2,
+                        pageSize: 5,
+                    }),
+                })
+            )
+            await userEvent.click(
+                screen.getByTestId(
+                    'section-list-pagination-actions-page-previous'
+                )
+            )
+            expect(getElementsMock).toHaveBeenLastCalledWith(
+                expect.objectContaining({
+                    params: expect.objectContaining({
+                        page: 1,
+                        pageSize: 5,
+                    }),
+                })
+            )
+        })
+        it('can sort the results by columns using a non case sensitive manner', async () => {
+            const { screen } = await renderList()
+
+            const tableHeaders = screen.getAllByTestId(
+                'dhis2-uicore-datatablecellhead'
+            )
+            const sectionName =
+                section.name as keyof typeof modelListViewsConfig
+            const configs = modelListViewsConfig[sectionName] as Record<
+                string,
+                any
+            >
+            const columnsToRender = configs?.columns?.default
+            for (const [index, column] of columnsToRender.entries()) {
+                const columnDescriptor = toModelPropertyDescriptor(column)
+                const columnProperties = getSchemaProperty(
+                    mockSchema as Schema,
+                    columnDescriptor.path
+                )
+                if (columnProperties?.sortable) {
+                    await userEvent.click(
+                        within(tableHeaders[index + 1]).getByTestId(
+                            'dhis2-uicore-tableheadercellaction'
+                        )
+                    )
+                    expect(getElementsMock).toHaveBeenLastCalledWith(
+                        expect.objectContaining({
+                            params: expect.objectContaining({
+                                order: `${columnDescriptor.path}:iasc`,
+                            }),
+                        })
+                    )
+                    await userEvent.click(
+                        within(tableHeaders[index + 1]).getByTestId(
+                            'dhis2-uicore-tableheadercellaction'
+                        )
+                    )
+                    expect(getElementsMock).toHaveBeenLastCalledWith(
+                        expect.objectContaining({
+                            params: expect.objectContaining({
+                                order: `${columnDescriptor.path}:idesc`,
+                            }),
+                        })
+                    )
+                }
+            }
+        })
+        it('should display error when an API call fails', async () => {
+            const customTestData = {
+                [section.namePlural]: (type: any) => {
+                    if (type === 'read') {
+                        return Promise.reject(new FetchError(error404))
+                    }
+                },
+            }
+
+            const { screen } = await renderList({ customTestData })
+            const tableRows = within(
+                screen.getByTestId('dhis2-uicore-tablebody')
+            ).getAllByTestId('dhis2-uicore-datatablerow')
+            expect(tableRows).toHaveLength(1)
+            const noticeBox = within(tableRows[0]).getByTestId(
+                'dhis2-uicore-noticebox'
+            )
+            expect(noticeBox).toBeVisible()
+            expect(noticeBox).toHaveTextContent(
+                'An error occurred while loading the items.'
+            )
+        })
+        it('should show message when no items found', async () => {
+            const customTestData = {
+                [section.namePlural]: (type: any) => {
+                    if (type === 'read') {
+                        return {
+                            [section.namePlural]: [],
+                        }
+                    }
+                },
+            }
+
+            const { screen } = await renderList({ customTestData })
+            const tableRows = within(
+                screen.getByTestId('dhis2-uicore-tablebody')
+            ).getAllByTestId('dhis2-uicore-datatablerow')
+            expect(tableRows).toHaveLength(1)
+            expect(tableRows[0]).toHaveTextContent(
+                "There aren't any items that match your filter."
+            )
+        })
     })
 }
 
@@ -799,16 +942,146 @@ export const generateDefaultListMultiActionsTests = ({
 }
 
 export const generateDefaultListFiltersTests = ({
-    componentName,
-}: {
-    componentName: string
-}) => {
-    describe(`${componentName} default filter tests`, () => {
-        xit('can filter the results by code using the input field', () => {})
-        xit('can filter the results by name using the input field', () => {})
-        xit('can filter the results by id using the input field', () => {})
-        xit('should show message when no items match filter', () => {})
-        xit('should display the default filters', () => {})
+    section,
+    mockSchema,
+    ComponentToTest,
+    generateRandomElement,
+    customData,
+}: TestConfig) => {
+    const getElementsMock = jest.fn()
+
+    const renderList = async () => {
+        const routeOptions = {
+            handle: { section },
+        }
+        useSchemaStore.getState().setSchemas({
+            [section.name]: mockSchema,
+        } as unknown as ModelSchemas)
+
+        useCurrentUserStore.getState().setCurrentUser({
+            organisationUnits: [testOrgUnit()] as OrganisationUnit[],
+            authorities: new Set(),
+            name: faker.person.fullName(),
+            email: faker.internet.email(),
+            settings: {},
+        })
+
+        const elements = [
+            generateRandomElement(),
+            generateRandomElement(),
+            generateRandomElement(),
+            generateRandomElement(),
+            generateRandomElement(),
+            generateRandomElement(),
+        ]
+        const pager = {
+            page: 1,
+            total: elements.length,
+            pageSize: 20,
+            pageCount: Math.ceil(elements.length / 20),
+        }
+
+        const screen = render(
+            <TestComponentWithRouter
+                path={`/${section.namePlural}`}
+                customData={{
+                    [section.namePlural]: (type: any, params: any) => {
+                        if (type === 'read') {
+                            console.log('*****PARAMS', params)
+                            getElementsMock(params)
+                            return {
+                                [section.namePlural]: elements,
+                                pager,
+                            }
+                        }
+                    },
+                    userDataStore: defaultUserDataStoreData,
+                    ...customData,
+                }}
+                routeOptions={routeOptions}
+            >
+                <ComponentToTest />
+            </TestComponentWithRouter>
+        )
+
+        await waitForElementToBeRemoved(() =>
+            screen.queryByTestId('dhis2-uicore-circularloader')
+        )
+        return { screen, elements, pager }
+    }
+
+    describe(`${section.namePlural} default filter tests`, () => {
+        beforeEach(() => {
+            jest.resetAllMocks()
+        })
+
+        it('can filter the results by identifiable using the input field', async () => {
+            const { screen, elements } = await renderList()
+            const filtersWrapper = screen.getByTestId('filters-wrapper')
+            const filterText = 'abc'
+            const identifiableFilterInput = within(
+                within(filtersWrapper).getByTestId('input-search-name')
+            ).getByRole('textbox')
+            await userEvent.type(identifiableFilterInput, filterText)
+            await waitFor(() => {
+                expect(getElementsMock).toHaveBeenCalledTimes(2)
+            })
+            expect(getElementsMock).toHaveBeenLastCalledWith(
+                expect.objectContaining({
+                    params: expect.objectContaining({
+                        filter: expect.arrayContaining([
+                            'identifiable:token:abc',
+                        ]),
+                    }),
+                })
+            )
+        })
+
+        it('can clear identifiable filter with clear all filters button', async () => {
+            const { screen, elements } = await renderList()
+            const filtersWrapper = screen.getByTestId('filters-wrapper')
+            const identifiableFilterInput = within(
+                within(filtersWrapper).getByTestId('input-search-name')
+            ).getByRole('textbox')
+            await userEvent.type(identifiableFilterInput, 'lalala')
+            await waitFor(() => {
+                expect(getElementsMock).toHaveBeenCalledTimes(2)
+            })
+
+            const clearFiltersButton = within(filtersWrapper).getByTestId(
+                'clear-all-filters-button'
+            )
+            await userEvent.click(clearFiltersButton)
+            await waitFor(() => {
+                expect(identifiableFilterInput).toHaveValue('')
+            })
+
+            expect(getElementsMock).toHaveBeenCalledTimes(3)
+            expect(getElementsMock).toHaveBeenLastCalledWith(
+                expect.objectContaining({
+                    params: expect.objectContaining({
+                        filter: expect.not.arrayContaining([
+                            'identifiable:token:abc',
+                        ]),
+                    }),
+                })
+            )
+        })
+        it('should display the default filters', async () => {
+            const { screen, elements } = await renderList()
+            const filtersWrapper = screen.getByTestId('filters-wrapper')
+            const sectionName =
+                section.name as keyof typeof modelListViewsConfig
+            const configs = modelListViewsConfig[sectionName] as Record<
+                string,
+                any
+            >
+            const filtersToRender = configs?.filters?.default
+            expect(
+                within(filtersWrapper).getByTestId('dynamic-filters')
+                    .childElementCount
+            ).toBe(filtersToRender.length)
+        })
         xit('can change the visible filters through manage view', () => {})
         xit('can remove all filters through manage view', () => {})
     })
