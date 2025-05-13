@@ -1,59 +1,106 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
-import React from 'react'
+import React, { useCallback } from 'react'
+import { ModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect'
+import {
+    Category,
+    CategoryCombo,
+    PickWithFieldFilters,
+} from '../../../types/generated'
 import css from './CategoriesSelector.module.css'
 
-type DisplayIdNameArray = { id: string; displayName: string }[]
+export const categoriesFieldFilter = [
+    'id',
+    'displayName',
+    'dataDimensionType',
+    'categoryOptions[id,displayName]',
+] as const
+export const categoryComboFieldFilter = [
+    'id',
+    'displayName',
+    'dataDimensionType',
+    'categories[id,displayName,dataDimensionType,categoryOptions[id,displayName]]',
+] as const
+export type CategoryComboFromSelect = PickWithFieldFilters<
+    CategoryCombo,
+    typeof categoryComboFieldFilter
+>
+export type CategoryFromSelect = PickWithFieldFilters<
+    Category,
+    typeof categoriesFieldFilter
+>
 
 export const CategoriesSelector = ({
-    categoryCombos,
-    categories,
     categoriesWithMappings,
-    addCategory,
-    addCategoryCombo,
+    addCategories,
+    dimensionType = 'DISAGGREGATION',
 }: {
-    categoryCombos: DisplayIdNameArray
-    categories: DisplayIdNameArray
     categoriesWithMappings: string[]
-    addCategory: (id: string) => void
-    addCategoryCombo: (id: string) => void
+    addCategories: (categories: CategoryFromSelect[]) => void
+    dimensionType?: 'DISAGGREGATION' | 'ATTRIBUTE'
 }) => {
     return (
         <div className={css.selectorWrapper}>
             <div className={css.selectorContainer}>
-                <SingleSelectField
-                    label={i18n.t('Add a category')}
-                    onChange={(e) => {
-                        addCategory(e.selected)
+                <ModelSingleSelect<CategoryFromSelect & { disabled?: boolean }>
+                    query={{
+                        resource: 'categories',
+                        params: {
+                            fields: categoriesFieldFilter.concat(),
+                            filter: [
+                                'name:neq:default',
+                                `dataDimensionType:eq:${dimensionType}`,
+                            ],
+                        },
                     }}
-                >
-                    {categories.map((category) => (
-                        <SingleSelectOption
-                            key={category.id}
-                            label={category.displayName}
-                            value={category.id}
-                            disabled={categoriesWithMappings.includes(
-                                category.id
-                            )}
-                        />
-                    ))}
-                </SingleSelectField>
+                    transform={useCallback(
+                        (categories: CategoryFromSelect[]) =>
+                            categories.map((category) => ({
+                                ...category,
+                                disabled: categoriesWithMappings.includes(
+                                    category.id
+                                ),
+                            })),
+                        [categoriesWithMappings]
+                    )}
+                    placeholder={i18n.t('Add a category')}
+                    onChange={(payload) => {
+                        if (payload) {
+                            addCategories([payload])
+                        }
+                    }}
+                />
             </div>
             <div className={css.selectorContainer}>
-                <SingleSelectField
-                    label={i18n.t('Add categories from a category combination')}
-                    onChange={(e) => {
-                        addCategoryCombo(e.selected)
+                <ModelSingleSelect<CategoryComboFromSelect>
+                    query={{
+                        resource: 'categoryCombos',
+                        params: {
+                            fields: categoryComboFieldFilter.concat(),
+                            filter: [
+                                'name:neq:default',
+                                `dataDimensionType:eq:${dimensionType}`,
+                            ],
+                        },
                     }}
-                >
-                    {categoryCombos.map((categoryCombo) => (
-                        <SingleSelectOption
-                            key={categoryCombo.id}
-                            label={categoryCombo.displayName}
-                            value={categoryCombo.id}
-                        />
-                    ))}
-                </SingleSelectField>
+                    transform={useCallback(
+                        (categoryCombos: CategoryComboFromSelect[]) =>
+                            categoryCombos.map((categoryCombo) => ({
+                                ...categoryCombo,
+                                disabled: categoryCombo.categories
+                                    .map((c) => c.id)
+                                    .every((cid) =>
+                                        categoriesWithMappings.includes(cid)
+                                    ),
+                            })),
+                        [categoriesWithMappings]
+                    )}
+                    placeholder={i18n.t('Add categories from a category combo')}
+                    onChange={(payload) => {
+                        if (payload) {
+                            addCategories(payload.categories)
+                        }
+                    }}
+                />
             </div>
         </div>
     )

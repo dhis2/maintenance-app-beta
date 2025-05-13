@@ -1,16 +1,17 @@
 import i18n from '@dhis2/d2-i18n'
-import { InputEventPayload } from '@dhis2/ui'
-import React, { useEffect, useState, PropsWithChildren } from 'react'
-import { NavLink, useLocation, matchPath } from 'react-router-dom'
+import { IconChevronLeft24, InputEventPayload } from '@dhis2/ui'
+import cx from 'classnames'
+import React, { PropsWithChildren, useEffect, useState } from 'react'
+import { matchPath, NavLink, useLocation } from 'react-router-dom'
 import { HidePreventUnmount } from '../../components'
 import styles from './Sidebar.module.css'
 import { LinkItem, ParentLink, useSidebarLinks } from './SidebarLinks'
 import {
     Sidenav,
-    SidenavItems,
-    SidenavParent,
-    SidenavLink,
     SidenavFilter,
+    SidenavItems,
+    SidenavLink,
+    SidenavParent,
 } from './sidenav'
 
 interface SidebarNavLinkProps {
@@ -82,8 +83,15 @@ const SidebarParent = ({
 const matchLabel = (label: string, filterValue: string) =>
     label.toLowerCase().includes(filterValue.toLowerCase())
 
-export const Sidebar = ({ className }: { className?: string }) => {
+export const Sidebar = ({
+    className,
+    hideSidebar,
+}: {
+    className?: string
+    hideSidebar?: boolean
+}) => {
     const sidebarLinks = useSidebarLinks()
+    const [collapsed, setCollapsed] = useState(false)
     const [filterValue, setFilterValue] = useState('')
 
     const handleFilterChange = (input: InputEventPayload) => {
@@ -107,8 +115,18 @@ export const Sidebar = ({ className }: { className?: string }) => {
 
     const noMatch = isFiltered && numberOfFilteredLinks === 0
 
+    useEffect(() => {
+        if (hideSidebar !== undefined) {
+            setCollapsed(hideSidebar)
+        }
+    }, [hideSidebar])
+
     return (
-        <aside className={className}>
+        <aside
+            className={cx(styles.asideWrapper, className, {
+                [styles.collapsed]: collapsed,
+            })}
+        >
             <Sidenav>
                 <SidenavFilter onChange={handleFilterChange} />
                 <SidenavItems>
@@ -129,6 +147,19 @@ export const Sidebar = ({ className }: { className?: string }) => {
                     ))}
                 </SidenavItems>
             </Sidenav>
+            <button
+                className={styles.collapseButton}
+                type="button"
+                onClick={() => setCollapsed(!collapsed)}
+            >
+                <div
+                    className={cx(styles.iconWrapper, {
+                        [styles.collapsed]: collapsed,
+                    })}
+                >
+                    <IconChevronLeft24 />
+                </div>
+            </button>
         </aside>
     )
 }

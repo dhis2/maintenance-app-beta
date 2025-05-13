@@ -115,7 +115,9 @@ export const useModelMultiSelectQuery = <
     return {
         selected: resolvedSelected || [],
         available: flatData,
-        isLoading: queryResult.isLoading || selectedQuery.isLoading,
+        isLoading:
+            queryResult.isLoading ||
+            (selectedQuery.isLoading && !selectedQuery.isStale),
         error: queryResult.error || selectedQuery.error,
         availableQuery: queryResult,
         selectedQuery,

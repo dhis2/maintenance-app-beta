@@ -12,8 +12,9 @@ import {
     Input,
 } from '@dhis2/ui'
 import React, { useCallback, useState, ReactNode } from 'react'
-import { Field, useField } from 'react-final-form'
+import { useField } from 'react-final-form'
 import css from './CategoryMapping.module.css'
+import { useValidateExpressionField } from './useFormHooks'
 
 type CategoryOption = {
     id: string
@@ -79,11 +80,11 @@ type CategoryMappingProps = {
     categoryOptionArray: CategoryOption[]
     showSoftDelete: boolean
 }
-export const CategoryMapping = ({
+export const CategoryMapping = React.memo(function CategoryMapping({
     fieldName,
     categoryOptionArray,
     showSoftDelete = true,
-}: CategoryMappingProps) => {
+}: CategoryMappingProps) {
     const categoryMapping = useField(fieldName)
     const categoryMappingOnChange = categoryMapping?.input?.onChange
     const categoryMappingValue = categoryMapping?.input?.value
@@ -93,6 +94,7 @@ export const CategoryMapping = ({
         },
         {} as Record<string, string>
     )
+
     const [nameModalOpen, setNameModalOpen] = useState(false)
     const closeModal = useCallback(() => {
         setNameModalOpen(false)
@@ -133,6 +135,7 @@ export const CategoryMapping = ({
             </CategoryMappingWrapper>
         )
     }
+
     return (
         <CategoryMappingWrapper>
             {nameModalOpen && (
@@ -170,19 +173,55 @@ export const CategoryMapping = ({
                     )}
                 </ButtonStrip>
             </div>
+
             {categoryOptionArray.map((opt: CategoryOption) => (
-                <div
-                    key={`${fieldName}.options.${opt.id}.filter_div`}
-                    className={css.filterInputContainer}
-                >
-                    <Field
-                        name={`${fieldName}.options.${opt.id}.filter`}
-                        key={`${fieldName}.options.${opt.id}.filter`}
-                        label={`${categoryOptionInformation?.[opt.id]}`}
-                        component={InputFieldFF}
-                    />
-                </div>
+                <CategoryMappingInput
+                    key={opt.id}
+                    fieldName={fieldName}
+                    opt={opt}
+                    categoryOptionInformation={categoryOptionInformation}
+                />
             ))}
         </CategoryMappingWrapper>
+    )
+})
+
+const CategoryMappingInput = ({
+    fieldName,
+    opt,
+    categoryOptionInformation,
+}: {
+    fieldName: string
+    opt: CategoryOption
+    categoryOptionInformation: Record<string, string>
+}) => {
+    const { handleValidateExpression } = useValidateExpressionField()
+    const validation = useField(`${fieldName}.options.${opt.id}.invalid`)
+    const { input, meta } = useField(
+        `${fieldName}.options.${opt.id}.filter`,
+        {}
+    )
+    return (
+        <div
+            key={`${fieldName}.options.${opt.id}.filter_div`}
+            className={css.filterInputContainer}
+        >
+            <InputFieldFF
+                label={`${categoryOptionInformation?.[opt.id]}`}
+                input={{
+                    ...input,
+                    onChange: async (value: string) => {
+                        input.onChange(value)
+                        const invalid = await handleValidateExpression(value)
+                        validation.input.onChange(invalid)
+                    },
+                }}
+                meta={meta}
+                validationText={
+                    validation.input.value && i18n.t('Invalid expression')
+                }
+                warning={!!validation.input.value}
+            />
+        </div>
     )
 }

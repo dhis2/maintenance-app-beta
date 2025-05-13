@@ -1,3 +1,89 @@
+## [0.44.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.44.0...v0.44.1) (2025-05-09)
+
+
+### Bug Fixes
+
+* fix crash when adding a suggested category combo ([#561](https://github.com/dhis2/maintenance-app-beta/issues/561)) ([d1a9675](https://github.com/dhis2/maintenance-app-beta/commit/d1a9675745c4bac3079119c48566ab1b7260db2b))
+
+# [0.44.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.43.0...v0.44.0) (2025-05-08)
+
+
+### Features
+
+* **sidebar:** collapsible sidebar ([#524](https://github.com/dhis2/maintenance-app-beta/issues/524)) [no release] ([6e98bf5](https://github.com/dhis2/maintenance-app-beta/commit/6e98bf55cf46b6a1a270b5a5e3a92af6288062d3))
+
+# [0.43.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.42.0...v0.43.0) (2025-05-08)
+
+
+### Features
+
+* show other section in side bar ([#559](https://github.com/dhis2/maintenance-app-beta/issues/559)) ([d1c5365](https://github.com/dhis2/maintenance-app-beta/commit/d1c5365659d8860d93f152e5953efc4b9f772b5c))
+
+# [0.42.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.41.2...v0.42.0) (2025-05-06)
+
+
+### Features
+
+* change way we pre-populate source and target in merges ([#555](https://github.com/dhis2/maintenance-app-beta/issues/555)) ([42a0173](https://github.com/dhis2/maintenance-app-beta/commit/42a0173c4cff018e9e3217cabf7b617e851edf87))
+
+## [0.41.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.41.1...v0.41.2) (2025-05-06)
+
+
+### Bug Fixes
+
+* refault to empty array when field value is an empty string ([#558](https://github.com/dhis2/maintenance-app-beta/issues/558)) ([88ffeb6](https://github.com/dhis2/maintenance-app-beta/commit/88ffeb6a14c25fa5113dfdbd7b4450645983e701))
+
+## [0.41.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.41.0...v0.41.1) (2025-05-05)
+
+
+### Bug Fixes
+
+* do not show loader if query is stale ([#557](https://github.com/dhis2/maintenance-app-beta/issues/557)) ([ca33c5d](https://github.com/dhis2/maintenance-app-beta/commit/ca33c5de13b4d0ed0057a48a6fbf8e8f3d9fb198))
+
+# [0.41.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.40.0...v0.41.0) (2025-05-05)
+
+
+### Features
+
+* soft delete pi mappings ([#556](https://github.com/dhis2/maintenance-app-beta/issues/556)) ([2bd8ed1](https://github.com/dhis2/maintenance-app-beta/commit/2bd8ed177246e2484fd103b9723ec05d88ab9af2))
+
+# [0.40.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.39.1...v0.40.0) (2025-05-01)
+
+
+### Features
+
+* add warnings ([#553](https://github.com/dhis2/maintenance-app-beta/issues/553)) ([8062588](https://github.com/dhis2/maintenance-app-beta/commit/80625881eadc1b702fb6a198d5fc5e288eeb23f1))
+
+## [0.39.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.39.0...v0.39.1) (2025-05-01)
+
+
+### Bug Fixes
+
+* disaggregation attribute mappings ([#554](https://github.com/dhis2/maintenance-app-beta/issues/554)) ([a6a1909](https://github.com/dhis2/maintenance-app-beta/commit/a6a1909e1e0946e2042a99607b1ea6bd12324d1e))
+
+
+### Features
+
+* add aggregateExportDataElement [DHIS2-19334] ([#550](https://github.com/dhis2/maintenance-app-beta/issues/550)) [skip release] ([b902b14](https://github.com/dhis2/maintenance-app-beta/commit/b902b14d339addc0a068a0fbcac34b06503bac16))
+* sort initial category mappings ([#551](https://github.com/dhis2/maintenance-app-beta/issues/551)) [skip release] ([7236fb7](https://github.com/dhis2/maintenance-app-beta/commit/7236fb75d0167445cad4e8588984113bfc71f9ac))
+
+# [0.39.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.38.2...v0.39.0) (2025-04-24)
+
+
+### Bug Fixes
+
+* filter out soft deleted options ([#548](https://github.com/dhis2/maintenance-app-beta/issues/548)) [skip release] ([ff0e25a](https://github.com/dhis2/maintenance-app-beta/commit/ff0e25a63e5a8d713c82bf77b61c9f10faf120cd))
+* minor cleanup ([#536](https://github.com/dhis2/maintenance-app-beta/issues/536)) [skip release] ([e39fe36](https://github.com/dhis2/maintenance-app-beta/commit/e39fe36b69f1b9166f81db39d6c4bbf73484f75f))
+
+
+### Features
+
+* category disaggregation mappings [DHIS2-19246] ([#543](https://github.com/dhis2/maintenance-app-beta/issues/543)) [skip release] ([6d3cbaa](https://github.com/dhis2/maintenance-app-beta/commit/6d3cbaab7dd6f33507ee739fb2409ff45654dc35))
+* enhance collapsible card and program disaggregation form ([#545](https://github.com/dhis2/maintenance-app-beta/issues/545)) [skip release] ([34142ce](https://github.com/dhis2/maintenance-app-beta/commit/34142ce9aa6c125422fbe284e83a05d859ee7d75))
+* pi disaggregation form ([#547](https://github.com/dhis2/maintenance-app-beta/issues/547)) [skip release] ([2458b4f](https://github.com/dhis2/maintenance-app-beta/commit/2458b4f3550e224f550fc9597c7593790f564a99))
+* update pi footer ([#549](https://github.com/dhis2/maintenance-app-beta/issues/549)) ([ac6eff9](https://github.com/dhis2/maintenance-app-beta/commit/ac6eff96eb62fdcfe1080d2901d02e0436593249))
+* **programs:** implement program selection and deletion functionality ([#540](https://github.com/dhis2/maintenance-app-beta/issues/540)) [skip release] ([7baa234](https://github.com/dhis2/maintenance-app-beta/commit/7baa2340e6e95347d4b1827d1a3a123eaf7ab2fa))
+
 ## [0.38.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.38.1...v0.38.2) (2025-04-09)
 
 ### Bug Fixes

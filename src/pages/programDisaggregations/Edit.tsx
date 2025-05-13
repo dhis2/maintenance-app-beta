@@ -1,4 +1,3 @@
-import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button, CircularLoader, NoticeBox } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
@@ -14,9 +13,7 @@ import {
 import {
     DEFAULT_FIELD_FILTERS,
     SectionedFormProvider,
-    SECTIONS_MAP,
     useBoundResourceQueryFn,
-    useNavigateWithSearchState,
 } from '../../lib'
 import {
     ModelCollectionResponse,
@@ -26,14 +23,8 @@ import {
 } from '../../types/generated'
 import { ProgramDisaggregationFormFields } from './form'
 import { apiResponseToFormValues } from './form/apiResponseToFormValues'
-import {
-    CategoryMappingsRecord,
-    ProgramIndicatorMappingsRecord,
-} from './form/programDisaggregationSchema'
-import {
-    useUpdateProgramIndicatorMutation,
-    useUpdateProgramMutation,
-} from './form/useUpdateProgramIndicatorMutation'
+import { ProgramDisaggregationFormValues } from './form/programDisaggregationSchema'
+import { useOnSubmit } from './form/useOnSubmit'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -48,8 +39,9 @@ const programIndicatorFieldFilters = [
     'name',
     'displayName',
     'categoryMappingIds',
-    'attributeCombo[id, displayName, dataDimensionType, categories[id, displayName]]',
-    'categoryCombo[id, displayName, dataDimensionType, categories[id, displayName]]',
+    'attributeCombo[id, displayName, dataDimensionType, categories[id, displayName,dataDimensionType,categoryOptions[id, displayName]]]',
+    'categoryCombo[id, displayName, dataDimensionType, categories[id, displayName,dataDimensionType,categoryOptions[id, displayName]]]',
+    'aggregateExportDataElement',
 ] as const
 
 export type ProgramData = PickWithFieldFilters<Program, typeof fieldFilters>
@@ -61,110 +53,6 @@ export type ProgramIndicatorWithMapping = {
     displayName: string
     name: string
     id: string
-}
-type ProgramDisaggregationFormValues = {
-    categoryMappings: CategoryMappingsRecord & {
-        deleted?: string[]
-    }
-    programIndicatorMappings: ProgramIndicatorMappingsRecord
-}
-
-export const useOnSubmit = (
-    programId: string,
-    initialValues: ProgramDisaggregationFormValues
-) => {
-    const saveAlert = useAlert(
-        ({ message }) => message,
-        (options) => options
-    )
-
-    const patchPrograms = useUpdateProgramMutation(programId)
-    const patchProgramIndicators = useUpdateProgramIndicatorMutation()
-    const navigate = useNavigateWithSearchState()
-
-    return useMemo(
-        () => async (values: ProgramDisaggregationFormValues) => {
-            if (!values) {
-                console.error('Tried to save new object without any changes', {
-                    values,
-                })
-                saveAlert.show({
-                    message: i18n.t('Cannot save empty object'),
-                    error: true,
-                })
-                return
-            }
-
-            const response = await patchPrograms(values.categoryMappings)
-
-            if (response.error) {
-                saveAlert.show({
-                    message: i18n.t(
-                        'Error while saving disaggregation categories'
-                    ),
-                    error: true,
-                })
-                return
-            }
-
-            const piMappingsUpdateResponses = await Promise.all(
-                Object.keys(values.programIndicatorMappings).map(
-                    async (programIndicatorId) => {
-                        const programIndicatorMapping =
-                            values.programIndicatorMappings[programIndicatorId]
-
-                        const response = await patchProgramIndicators(
-                            programIndicatorId,
-                            programIndicatorMapping
-                        )
-
-                        return { ...response, id: programIndicatorId }
-                    }
-                )
-            )
-
-            const piMappingsDeleteResponses = await Promise.all(
-                Object.keys(initialValues.programIndicatorMappings)
-                    .filter(
-                        (piMapping) =>
-                            !values.programIndicatorMappings[piMapping]
-                    )
-                    .map(async (programIndicatorId) => {
-                        const response = await patchProgramIndicators(
-                            programIndicatorId,
-                            null
-                        )
-                        return { ...response, id: programIndicatorId }
-                    })
-            )
-
-            const piMappingsResponses = [
-                ...piMappingsUpdateResponses,
-                ...piMappingsDeleteResponses,
-            ]
-
-            const errors = piMappingsResponses.filter((res) => res.error)
-            if (errors.length > 0) {
-                saveAlert.show({
-                    message: i18n.t(
-                        `Error while updating mappings for program indicators with ids: ${errors
-                            .map((r) => r.id)
-                            .join(' - ')}`
-                    ),
-                    error: true,
-                })
-            } else {
-                navigate(`/${SECTIONS_MAP.programDisaggregation.namePlural}`)
-            }
-        },
-        [
-            saveAlert,
-            navigate,
-            patchPrograms,
-            initialValues.programIndicatorMappings,
-            patchProgramIndicators,
-        ]
-    )
 }
 
 export const Component = () => {
@@ -200,15 +88,25 @@ export const Component = () => {
 
     const initialValues: ProgramDisaggregationFormValues = useMemo(() => {
         if (programQuery.data && programIndicatorsQuery.data) {
-            return apiResponseToFormValues({
-                program: programQuery.data,
-                programIndicators: programIndicatorsQuery.data,
-            })
+            const { programIndicatorMappings, categoryMappings } =
+                apiResponseToFormValues({
+                    program: programQuery.data,
+                    programIndicators: programIndicatorsQuery.data,
+                })
+
+            return {
+                deletedCategories: [],
+                deletedProgramIndicatorMappings: [],
+                programIndicatorMappings,
+                categoryMappings,
+            }
         }
 
         return {
             categoryMappings: {},
             programIndicatorMappings: {},
+            deletedCategories: [],
+            deletedProgramIndicatorMappings: [],
         }
     }, [programQuery.data, programIndicatorsQuery.data])
 
@@ -254,6 +152,11 @@ export const Component = () => {
                             },
                         ],
                     },
+                    {
+                        name: 'attributeCategories',
+                        label: i18n.t('Attribute categories'),
+                        fields: [],
+                    },
                 ],
             }}
         >
@@ -262,8 +165,9 @@ export const Component = () => {
                 onSubmit={useOnSubmit(id, initialValues)}
                 mutators={{ ...arrayMutators }}
                 destroyOnUnregister={false}
+                subscription={{}}
             >
-                {({ handleSubmit, submitting, dirty }) => {
+                {({ handleSubmit, submitting }) => {
                     return (
                         <>
                             {isLoading && (
@@ -302,7 +206,6 @@ export const Component = () => {
                                     footer={
                                         <DefaultSectionedFormFooter
                                             submitting={submitting}
-                                            dirty={dirty}
                                         />
                                     }
                                 >

@@ -15,7 +15,11 @@ import {
 } from '../../../components/merge'
 import { IndicatorTypeMergeFormValues } from './indicatorTypeMergeSchema'
 
-export const IndicatorTypeMergeFormFields = () => {
+export const IndicatorTypeMergeFormFields = ({
+    selectedIds,
+}: {
+    selectedIds: string[]
+}) => {
     return (
         <FormSections>
             <FormSection>
@@ -39,6 +43,7 @@ export const IndicatorTypeMergeFormFields = () => {
                             resource: 'indicatorTypes',
                             params: {
                                 fields: ['id', 'displayName', 'name', 'factor'],
+                                filter: `id:in:[${selectedIds.join(',')}]`,
                             },
                         }}
                     />
@@ -51,6 +56,7 @@ export const IndicatorTypeMergeFormFields = () => {
                             resource: 'indicatorTypes',
                             params: {
                                 fields: ['id', 'displayName', 'name', 'factor'],
+                                filter: `id:in:[${selectedIds.join(',')}]`,
                             },
                         }}
                         noMatchWithoutFilterText={i18n.t(
