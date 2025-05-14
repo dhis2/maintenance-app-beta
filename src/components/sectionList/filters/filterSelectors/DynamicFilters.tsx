@@ -49,13 +49,15 @@ export const DynamicFilters = () => {
     const filterKeys = useFilterKeys()
 
     return (
-        <span data-test="dynamic-filters">
+        <>
             {filterKeys.map((filterKey) => {
                 const FilterComponent = filterKeyToComponentMap[filterKey]
                 return FilterComponent ? (
-                    <FilterComponent key={filterKey} />
+                    <span data-test="dynamic-filter" key={filterKey}>
+                        <FilterComponent key={filterKey} />
+                    </span>
                 ) : null
             })}
-        </span>
+        </>
     )
 }

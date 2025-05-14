@@ -12,6 +12,7 @@ import React from 'react'
 import { getSchemaProperty } from '../components/sectionList/modelValue/ModelValue'
 import { getTranslateableFieldsForSchema } from '../components/sectionList/translation/TranslationForm'
 import {
+    defaultModelViewConfig,
     modelListViewsConfig,
     ModelPropertyConfig,
     ModelSchemas,
@@ -32,11 +33,12 @@ import TestComponentWithRouter from '../testUtils/TestComponentWithRouter'
 import { testUtils } from '../testUtils/testUtils'
 import { ModelSection } from '../types'
 import type { OrganisationUnit } from '../types/generated'
+import { DefaultSectionListProps } from './DefaultSectionList'
 
 type TestConfig = {
     section: ModelSection
     mockSchema: Record<any, any>
-    ComponentToTest: () => React.ReactElement
+    ComponentToTest: (props: DefaultSectionListProps) => React.ReactElement
     generateRandomElement: (values?: Record<any, any>) => Record<any, any>
     customData: Record<any, any>
     componentName?: undefined
@@ -171,7 +173,9 @@ export const generateDefaultListItemsTests = ({
                 string,
                 any
             >
-            const columnsToRender = configs?.columns?.default
+            const columnsToRender =
+                configs?.columns?.default ||
+                defaultModelViewConfig.columns.default
             expect(tableHeaders).toHaveLength(columnsToRender.length + 2)
             columnsToRender.forEach(
                 (column: ModelPropertyConfig, index: number) => {
@@ -244,7 +248,9 @@ export const generateDefaultListItemsTests = ({
                 string,
                 any
             >
-            const columnsToRender = configs?.columns?.default
+            const columnsToRender =
+                configs?.columns?.default ||
+                defaultModelViewConfig.columns.default
             for (const [index, column] of columnsToRender.entries()) {
                 const columnDescriptor = toModelPropertyDescriptor(column)
                 const columnProperties = getSchemaProperty(
@@ -466,10 +472,10 @@ export const generateDefaultListRowActionsTests = ({
         })
         it('has a link to an edit page in the row actions menu', async () => {
             const elementsWithEditAccess = generateRandomElement({
-                access: testAccess({ writeAccess: true }),
+                access: testAccess({ write: true }),
             })
             const elementsWithoutEditAccess = generateRandomElement({
-                access: testAccess({ writeAccess: false }),
+                access: testAccess({ write: false }),
             })
             const { screen, elements } = await renderList({
                 elements: [elementsWithEditAccess, elementsWithoutEditAccess],
@@ -502,10 +508,10 @@ export const generateDefaultListRowActionsTests = ({
         })
         it('has a pencil icon that links to the edit page', async () => {
             const elementsWithEditAccess = generateRandomElement({
-                access: testAccess({ writeAccess: true }),
+                access: testAccess({ write: true }),
             })
             const elementsWithoutEditAccess = generateRandomElement({
-                access: testAccess({ writeAccess: false }),
+                access: testAccess({ write: false }),
             })
             const { screen, elements } = await renderList({
                 elements: [elementsWithEditAccess, elementsWithoutEditAccess],
@@ -540,10 +546,10 @@ export const generateDefaultListRowActionsTests = ({
         })
         it('deletes an item when pressing the delete action and updates the list', async () => {
             const elementsWithDeleteAccess = generateRandomElement({
-                access: testAccess({ deleteAccess: true }),
+                access: testAccess({ delete: true }),
             })
             const elementsWithoutDeleteAccess = generateRandomElement({
-                access: testAccess({ deleteAccess: false }),
+                access: testAccess({ delete: false }),
             })
             const elements = [
                 elementsWithDeleteAccess,
@@ -596,7 +602,7 @@ export const generateDefaultListRowActionsTests = ({
         })
         it('shows the detail panel when the show details action is clicked', async () => {
             const element = generateRandomElement({
-                access: testAccess({ writeAccess: true }),
+                access: testAccess({ write: true }),
             })
             const { screen, elements } = await renderList({
                 elements: [element],
@@ -632,7 +638,7 @@ export const generateDefaultListRowActionsTests = ({
         it('should open the sharing settings dialog when the sharing settings action is clicked', async () => {
             if (mockSchema.shareable) {
                 const element = generateRandomElement({
-                    access: testAccess({ writeAccess: true }),
+                    access: testAccess({ write: true }),
                 })
                 const { screen, elements } = await renderList({
                     elements: [element],
@@ -652,7 +658,7 @@ export const generateDefaultListRowActionsTests = ({
         it('should open a translation dialog when the translate action is clicked', async () => {
             if (mockSchema.translatable) {
                 const element = generateRandomElement({
-                    access: testAccess({ writeAccess: true }),
+                    access: testAccess({ write: true }),
                 })
                 const { screen, locales } = await renderList({
                     elements: [element],
@@ -819,12 +825,12 @@ export const generateDefaultListMultiActionsTests = ({
                     })
                 ) as jest.Mock
                 const sharingUsers = [
-                    testUser({ name: 'b' }),
-                    testUser({ name: 'd' }),
+                    testUser({ displayName: 'b' }),
+                    testUser({ displayName: 'd' }),
                 ]
                 const sharingUserGroups = [
-                    testUserGroup({ name: 'c' }),
-                    testUser({ name: 'a' }),
+                    testUserGroup({ displayName: 'c' }),
+                    testUser({ displayName: 'a' }),
                 ]
 
                 const { screen, elements } = await renderList({
@@ -987,7 +993,6 @@ export const generateDefaultListFiltersTests = ({
                 customData={{
                     [section.namePlural]: (type: any, params: any) => {
                         if (type === 'read') {
-                            console.log('*****PARAMS', params)
                             getElementsMock(params)
                             return {
                                 [section.namePlural]: elements,
@@ -1077,10 +1082,15 @@ export const generateDefaultListFiltersTests = ({
                 any
             >
             const filtersToRender = configs?.filters?.default
-            expect(
-                within(filtersWrapper).getByTestId('dynamic-filters')
-                    .childElementCount
-            ).toBe(filtersToRender.length)
+            if (filtersToRender.length > 0) {
+                expect(
+                    within(filtersWrapper).getAllByTestId('dynamic-filter')
+                ).toHaveLength(filtersToRender.length)
+            } else {
+                expect(
+                    within(filtersWrapper).queryByTestId('dynamic-filter')
+                ).toBeNull()
+            }
         })
         xit('can change the visible filters through manage view', () => {})
         xit('can remove all filters through manage view', () => {})

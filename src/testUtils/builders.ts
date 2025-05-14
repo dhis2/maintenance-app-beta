@@ -1,4 +1,21 @@
+import { generateMock } from '@anatine/zod-mock'
 import { faker } from '@faker-js/faker'
+import { z } from 'zod'
+import { modelFormSchemas } from '../lib'
+import { categorySchema } from '../pages/categories/form'
+import { categoryComboSchema } from '../pages/categoryCombos/form'
+import { categoryOptionComboSchema } from '../pages/categoryOptionCombos/form'
+import { categoryOptionGroupSchema } from '../pages/categoryOptionGroups/form/categoryOptionGroupSchema'
+import { categoryOptionGroupSetSchema } from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
+import { categoryOptionSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
+import { dataElementGroupSchema } from '../pages/dataElementGroups/form'
+import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
+import { dataElementSchema } from '../pages/dataElements/form'
+import { dataSetFormSchema } from '../pages/dataSetsWip/form/dataSetFormSchema'
+import { IndicatorTypeSchema } from '../pages/indicatorTypes/form'
+import { organisationUnitGroupSchema } from '../pages/organisationUnitGroups/form'
+import { organisationUnitGroupSetSchema } from '../pages/organisationUnitGroupSets/form'
+import { organisationUnitSchema } from '../pages/organisationUnits/form'
 import {
     CategoryMapping,
     OptionMapping,
@@ -14,62 +31,227 @@ function randomValueIn<T>(list: T[]) {
     return list[faker.number.int({ min: 0, max: list.length - 1 })]
 }
 
-export const testPager = ({
-    page = faker.number.int({ min: 0, max: 5 }),
-    total = faker.number.int({ min: 0, max: 50 }),
-    pageSize = 50,
-    pageCount = faker.number.int({ min: 0, max: 5 }),
-} = {}) => ({
-    page,
-    total,
-    pageSize,
-    pageCount,
+const mockeryMapper = (keyName: string) => {
+    if (keyName === 'code') {
+        return () => faker.string.alphanumeric(6)
+    }
+    if (keyName === 'id') {
+        return () => randomDhis2Id()
+    }
+    return undefined
+}
+
+const { identifiable, referenceCollection, withAttributeValues } =
+    modelFormSchemas
+
+const UserSchema = identifiable.extend({
+    code: z.string().optional(),
+    displayName: z.string(),
+    username: z.string(),
 })
 
-export const testAccess = ({
-    deleteAccess = faker.datatype.boolean(),
-    externalizeAccess = faker.datatype.boolean(),
-    manageAccess = faker.datatype.boolean(),
-    readAccess = faker.datatype.boolean(),
-    updateAccess = faker.datatype.boolean(),
-    writeAccess = faker.datatype.boolean(),
-    readDataAcess = faker.datatype.boolean(),
-    writeDataAccess = faker.datatype.boolean(),
-} = {}) => ({
-    data: {
-        read: readDataAcess,
-        write: writeDataAccess,
-    },
-    delete: deleteAccess,
-    externalize: externalizeAccess,
-    manage: manageAccess,
-    read: readAccess,
-    update: updateAccess,
-    write: writeAccess,
+const UserGroupSchema = identifiable.extend({
+    displayName: z.string(),
 })
 
-export const testUser = ({
-    id = randomDhis2Id(),
-    code = null,
-    name = faker.person.fullName(),
-    username = faker.internet.userName(),
-} = {}) =>
-    ({
-        id,
-        code,
-        name,
-        displayName: name,
-        username,
-    } as User)
+const AccessSchema = z.object({
+    delete: z.boolean(),
+    externalize: z.boolean(),
+    manage: z.boolean(),
+    read: z.boolean(),
+    update: z.boolean(),
+    write: z.boolean(),
+    data: z.object({
+        read: z.boolean(),
+        write: z.boolean(),
+    }),
+})
 
-export const testUserGroup = ({
+const withDefaultListColumns = z.object({
+    displayName: z.string(),
+    lastUpdated: z.coerce.date(),
+    createdBy: UserSchema,
+    lastUpdatedBy: UserSchema,
+    access: AccessSchema,
+    href: z.string().url(),
+    sharing: z.object({ public: z.literal('rw------') }),
+})
+
+export const testAccess = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(AccessSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testUser = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(UserSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testUserGroup = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(UserGroupSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+const readOrganisationUnitColumns = z.object({
+    ancestors: z.array(organisationUnitSchema),
+    level: z.number().or(z.null()),
+    childCount: z.number(),
+})
+
+export const testIndicatorType = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(
+        IndicatorTypeSchema.merge(withDefaultListColumns).extend({
+            code: z.string(),
+        }),
+        { mockeryMapper }
+    ),
+    ...overwrites,
+})
+
+export const testIndicator = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(
+        identifiable.merge(withDefaultListColumns).extend({ code: z.string() }),
+        { mockeryMapper }
+    ),
+    ...overwrites,
+})
+
+export const testCategoryOption = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(
+        categoryOptionSchema._def.schema.merge(withDefaultListColumns),
+        { mockeryMapper }
+    ),
+    ...overwrites,
+})
+
+export const testCategory = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(categorySchema.merge(withDefaultListColumns), {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testCategoryCombo = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(categoryComboSchema.merge(withDefaultListColumns), {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testCategoryOptionCombo = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(categoryOptionComboSchema.merge(withDefaultListColumns), {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testCategoryOptionGroup = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(categoryOptionGroupSchema.merge(withDefaultListColumns), {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testCategoryOptionGroupSet = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(
+        categoryOptionGroupSetSchema.merge(withDefaultListColumns),
+        { mockeryMapper }
+    ),
+    ...overwrites,
+})
+
+export const testDataElementGroup = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(dataElementGroupSchema.merge(withDefaultListColumns), {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testDataElementGroupSet = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(dataElementGroupSetSchema.merge(withDefaultListColumns), {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testDataElement = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(dataElementSchema.merge(withDefaultListColumns), {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testDataSet = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(dataSetFormSchema.merge(withDefaultListColumns), {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testOrganisationUnitGroup = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(organisationUnitGroupSchema.merge(withDefaultListColumns), {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testOrganisationUnitGroupSet = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(
+        organisationUnitGroupSetSchema.merge(withDefaultListColumns),
+        { mockeryMapper }
+    ),
+    ...overwrites,
+})
+
+export const testLocale = ({
+    locale = faker.string.alpha({ length: 2 }),
+    name = faker.location.country(),
+} = {}) => ({
+    locale,
+    name,
+    displayNAme: name,
+})
+
+export const testCategoryMapping = ({
+    id = randomDhis2Id(),
+    categoryId = randomDhis2Id(),
+    mappingName = faker.company.name(),
+    optionMappings = [] as OptionMapping[],
+} = {}) => ({
+    id,
+    categoryId,
+    mappingName,
+    optionMappings,
+})
+
+export const testProgram = ({
     id = randomDhis2Id(),
     name = faker.person.fullName(),
+    categoryMappings = [] as CategoryMapping[],
 } = {}) => ({
     id,
     name,
     displayName: name,
+    categoryMappings,
 })
+
+// export const testOrgUnit =  (overwrites: Record<any,any> | undefined) => (
+//     {...generateMock((organisationUnitSchema._def.schema).merge(withDefaultListColumns).merge(readOrganisationUnitColumns), {mockeryMapper} ),
+//         parent: {
+//             id: overwrites.parentId || null,
+//         },
+//         ancestors: [],
+//         level: null,
+//         childCount: 0,
+//         ...overwrites,
+//
+//     })
 
 export const testOrgUnit = ({
     id = randomDhis2Id(),
@@ -77,8 +259,8 @@ export const testOrgUnit = ({
     name = faker.location.city(),
     created = faker.date.past().toUTCString(),
     lastUpdated = faker.date.past().toUTCString(),
-    createdBy = testUser(),
-    lastUpdatedBy = testUser(),
+    createdBy = testUser() as User,
+    lastUpdatedBy = testUser() as User,
     parentId = null as string | null,
     ancestors = [] as Partial<OrganisationUnit>[],
     level = null as number | null,
@@ -108,139 +290,3 @@ export const testOrgUnit = ({
         childCount,
         access,
     } as Partial<OrganisationUnit>)
-
-export const testIndicatorType = ({
-    id = randomDhis2Id(),
-    name = faker.word.noun(),
-    factor = faker.number.int({ min: 0, max: 10 }),
-} = {}) => ({
-    id,
-    name,
-    displayName: name,
-    factor,
-})
-
-export const testIndicator = ({
-    id = randomDhis2Id(),
-    name = faker.word.noun(),
-} = {}) => ({
-    id,
-    name,
-    displayName: name,
-})
-
-export const testCategoryOption = ({
-    id = randomDhis2Id(),
-    name = faker.word.noun(),
-} = {}) => ({
-    id,
-    name,
-    displayName: name,
-})
-
-export const testCategoryMapping = ({
-    id = randomDhis2Id(),
-    categoryId = randomDhis2Id(),
-    mappingName = faker.company.name(),
-    optionMappings = [] as OptionMapping[],
-} = {}) => ({
-    id,
-    categoryId,
-    mappingName,
-    optionMappings,
-})
-
-export const testProgram = ({
-    id = randomDhis2Id(),
-    name = faker.person.fullName(),
-    categoryMappings = [] as CategoryMapping[],
-} = {}) => ({
-    id,
-    name,
-    displayName: name,
-    categoryMappings,
-})
-
-export const testCategory = ({
-    id = randomDhis2Id(),
-    name = faker.person.fullName(),
-    code = faker.string.alphanumeric(6),
-    description = faker.company.buzzPhrase(),
-    dataDimensionType = randomValueIn(['DISAGGREGATION', 'ATTRIBUTE']),
-    dataDimension = faker.datatype.boolean(),
-    lastUpdated = faker.date.past().toUTCString(),
-    createdBy = testUser(),
-    lastUpdatedBy = testUser(),
-    access = testAccess(),
-    href = faker.internet.url(),
-    sharing = { public: 'rw------' },
-} = {}) => ({
-    id,
-    name,
-    displayName: name,
-    code,
-    description,
-    dataDimensionType,
-    dataDimension,
-    lastUpdated,
-    createdBy,
-    lastUpdatedBy,
-    access,
-    href,
-    sharing,
-})
-
-export const testCategoryCombo = ({
-    id = randomDhis2Id(),
-    name = faker.person.fullName(),
-    dataDimensionType = randomValueIn(['DISAGGREGATION', 'ATTRIBUTE']),
-    lastUpdated = faker.date.past().toUTCString(),
-    createdBy = testUser(),
-    lastUpdatedBy = testUser(),
-    access = testAccess(),
-    sharing = { public: 'rw------' },
-    code = faker.string.alphanumeric(6),
-    href = faker.internet.url(),
-} = {}) => ({
-    id,
-    name,
-    displayName: name,
-    access,
-    dataDimensionType,
-    lastUpdated,
-    createdBy,
-    lastUpdatedBy,
-    sharing,
-    href,
-    code,
-})
-
-export const testCategoryOptionCombo = ({
-    id = randomDhis2Id(),
-    code = faker.string.alphanumeric(6),
-    name = faker.person.fullName(),
-    lastUpdated = faker.date.past().toUTCString(),
-    createdBy = testUser(),
-    lastUpdatedBy = testUser(),
-    access = testAccess(),
-    href = faker.internet.url(),
-} = {}) => ({
-    id,
-    name,
-    code,
-    displayName: name,
-    access,
-    lastUpdated,
-    createdBy,
-    lastUpdatedBy,
-    href,
-})
-
-export const testLocale = ({
-    locale = faker.string.alpha({ length: 2 }),
-    name = faker.location.country(),
-} = {}) => ({
-    locale,
-    name,
-    displayNAme: name,
-})
