@@ -1,4 +1,4 @@
-import { RenderResult, waitFor, within } from '@testing-library/react'
+import { RenderResult, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 
 export const testUtils = {

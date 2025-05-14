@@ -1,7 +1,6 @@
 import categoryOptionCombosSchema from '../../__mocks__/schema/categoryOptionCombosSchema.json'
 import { SECTIONS_MAP } from '../../lib'
 import {
-    testCategory,
     testCategoryCombo,
     testCategoryOptionCombo,
 } from '../../testUtils/builders'

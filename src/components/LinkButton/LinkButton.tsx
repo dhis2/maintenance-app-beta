@@ -133,7 +133,7 @@ const ReactRouterLinkButton = ({
             href={resolvedHref}
             onClick={handleClick}
             target={target}
-            data-test={dataTest || 'link-button'}
+            data-test={dataTest ?? 'link-button'}
         />
     )
 }

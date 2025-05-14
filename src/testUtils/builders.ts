@@ -21,7 +21,6 @@ import {
     OptionMapping,
     OrganisationUnit,
     User,
-    UserGroup,
 } from '../types/generated'
 
 export const randomDhis2Id = () =>

@@ -41,7 +41,6 @@ type TestConfig = {
     ComponentToTest: (props: DefaultSectionListProps) => React.ReactElement
     generateRandomElement: (values?: Record<any, any>) => Record<any, any>
     customData: Record<any, any>
-    componentName?: undefined
 }
 
 const error404 = new FetchError({
@@ -58,9 +57,7 @@ jest.spyOn(console, 'warn').mockImplementation((value) => {
     }
 })
 
-export const generateDefaultListTests = (
-    testConfigs: TestConfig | { componentName: string; section?: undefined }
-) => {
+export const generateDefaultListTests = (testConfigs: TestConfig) => {
     if (testConfigs.section !== undefined) {
         generateDefaultListItemsTests(testConfigs)
         generateDefaultListRowActionsTests(testConfigs)
@@ -174,7 +171,7 @@ export const generateDefaultListItemsTests = ({
                 any
             >
             const columnsToRender =
-                configs?.columns?.default ||
+                configs?.columns?.default ??
                 defaultModelViewConfig.columns.default
             expect(tableHeaders).toHaveLength(columnsToRender.length + 2)
             columnsToRender.forEach(
@@ -249,7 +246,7 @@ export const generateDefaultListItemsTests = ({
                 any
             >
             const columnsToRender =
-                configs?.columns?.default ||
+                configs?.columns?.default ??
                 defaultModelViewConfig.columns.default
             for (const [index, column] of columnsToRender.entries()) {
                 const columnDescriptor = toModelPropertyDescriptor(column)
@@ -604,7 +601,7 @@ export const generateDefaultListRowActionsTests = ({
             const element = generateRandomElement({
                 access: testAccess({ write: true }),
             })
-            const { screen, elements } = await renderList({
+            const { screen } = await renderList({
                 elements: [element],
             })
             const tableRows = screen.getAllByTestId('section-list-row')
@@ -613,17 +610,17 @@ export const generateDefaultListRowActionsTests = ({
             await userEvent.click(within(actionsMenu).getByText('Show details'))
             const detailsPanel = await screen.findByTestId('details-panel')
             expect(detailsPanel).toBeVisible()
-            expect(detailsPanel).toHaveTextContent(element.displayName!)
-            expect(detailsPanel).toHaveTextContent(element.code!)
-            expect(detailsPanel).toHaveTextContent(element.id!)
+            expect(detailsPanel).toHaveTextContent(element.displayName)
+            expect(detailsPanel).toHaveTextContent(element.code)
+            expect(detailsPanel).toHaveTextContent(element.id)
             expect(detailsPanel).toHaveTextContent(
-                element.createdBy!.displayName!
+                element.createdBy!.displayName
             )
             expect(detailsPanel).toHaveTextContent(
-                element.lastUpdatedBy!.displayName!
+                element.lastUpdatedBy!.displayName
             )
             expect(detailsPanel).toHaveTextContent(
-                element.lastUpdatedBy!.displayName!
+                element.lastUpdatedBy.displayName
             )
             expect(
                 within(detailsPanel).getByText('API URL link').closest('a')
@@ -640,7 +637,7 @@ export const generateDefaultListRowActionsTests = ({
                 const element = generateRandomElement({
                     access: testAccess({ write: true }),
                 })
-                const { screen, elements } = await renderList({
+                const { screen } = await renderList({
                     elements: [element],
                 })
                 const tableRows = screen.getAllByTestId('section-list-row')
@@ -817,11 +814,12 @@ export const generateDefaultListMultiActionsTests = ({
             expect(toolbar).not.toBeVisible()
         })
         it('should update sharing settings for multiple items', async () => {
+            const resolvePromise = () => Promise.resolve({})
             if (mockSchema.shareable) {
                 global.fetch = jest.fn(() =>
                     Promise.resolve({
                         ok: true,
-                        json: () => Promise.resolve({}),
+                        json: resolvePromise,
                     })
                 ) as jest.Mock
                 const sharingUsers = [
@@ -1021,7 +1019,7 @@ export const generateDefaultListFiltersTests = ({
         })
 
         it('can filter the results by identifiable using the input field', async () => {
-            const { screen, elements } = await renderList()
+            const { screen } = await renderList()
             const filtersWrapper = screen.getByTestId('filters-wrapper')
             const filterText = 'abc'
             const identifiableFilterInput = within(
@@ -1043,7 +1041,7 @@ export const generateDefaultListFiltersTests = ({
         })
 
         it('can clear identifiable filter with clear all filters button', async () => {
-            const { screen, elements } = await renderList()
+            const { screen } = await renderList()
             const filtersWrapper = screen.getByTestId('filters-wrapper')
             const identifiableFilterInput = within(
                 within(filtersWrapper).getByTestId('input-search-name')
@@ -1073,7 +1071,7 @@ export const generateDefaultListFiltersTests = ({
             )
         })
         it('should display the default filters', async () => {
-            const { screen, elements } = await renderList()
+            const { screen } = await renderList()
             const filtersWrapper = screen.getByTestId('filters-wrapper')
             const sectionName =
                 section.name as keyof typeof modelListViewsConfig
