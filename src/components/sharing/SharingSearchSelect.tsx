@@ -115,6 +115,7 @@ export const SharingSearchSelect = ({ onChange }: SharingSearchSelectProps) => {
             loading={loading}
             showEndLoader={loading}
             error={error?.message}
+            dataTest="sharing-search-select"
         />
     )
 }

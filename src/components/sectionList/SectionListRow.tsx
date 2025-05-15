@@ -38,7 +38,7 @@ export const SectionListRow = React.memo(function SectionListRow<
     return (
         <DataTableRow
             className={cx(css.listRow, { [css.active]: active })}
-            dataTest={`section-list-row-${modelData.id}`}
+            dataTest={`section-list-row`}
             selected={selected}
         >
             <DataTableCell width="48px">

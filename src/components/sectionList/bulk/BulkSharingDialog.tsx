@@ -20,7 +20,7 @@ export const BulkSharingDialog = ({
     selectedModels,
 }: BulkSharingDialogProps) => {
     return (
-        <Modal onClose={onClose} large={true}>
+        <Modal onClose={onClose} large={true} dataTest="bulk-sharing-dialog">
             <ModalTitle>
                 {i18n.t('Update sharing for {{number}} items', {
                     number: selectedModels.size,
@@ -39,6 +39,7 @@ export const BulkSharingDialog = ({
                                     primary
                                     loading={submitting}
                                     disabled={disableSave}
+                                    dataTest="update-sharing-button"
                                 >
                                     {i18n.t('Update sharing')}
                                 </Button>

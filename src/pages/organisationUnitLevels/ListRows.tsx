@@ -94,10 +94,9 @@ export const ListRows = ({
 
     const saveNewOrgLevels = async () => {
         if (data && editingOrgUnitLevel) {
+            const { index, ...newLevel } = editingOrgUnitLevel
             const newLevels = data.map((level, index) =>
-                index === editingOrgUnitLevel.index
-                    ? editingOrgUnitLevel
-                    : level
+                index === editingOrgUnitLevel.index ? newLevel : level
             )
             const levelsHaveChanged =
                 editingOrgUnitLevel.index !== undefined &&
@@ -200,7 +199,7 @@ export const ListRows = ({
             {data?.map((model, index) => (
                 <DataTableRow
                     className={css.listRow}
-                    dataTest={`section-list-row-${model.id}`}
+                    dataTest={`section-list-row`}
                     key={model.id}
                 >
                     <DataTableCell width="48px" />

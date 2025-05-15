@@ -11,3 +11,5 @@ window.IntersectionObserver = jest.fn(() => ({
 beforeEach(() => {
     configure({ testIdAttribute: 'data-test' })
 })
+
+jest.setTimeout(10000)

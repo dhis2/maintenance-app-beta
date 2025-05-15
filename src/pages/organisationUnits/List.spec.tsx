@@ -327,7 +327,7 @@ describe('Organisation unit list', () => {
         const rootOrg = testOrgUnit({
             level: 1,
             childCount: 0,
-            access: testAccess({ deleteAccess: true }),
+            access: testAccess({ delete: true }),
         })
 
         const screen = await renderList({
@@ -353,7 +353,7 @@ describe('Organisation unit list', () => {
         const rootOrg = testOrgUnit({
             level: 1,
             childCount: 0,
-            access: testAccess({ deleteAccess: false }),
+            access: testAccess({ delete: false }),
         })
 
         const screen = await renderList({
@@ -382,7 +382,7 @@ describe('Organisation unit list', () => {
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
-            access: testAccess({ deleteAccess: true }),
+            access: testAccess({ delete: true }),
             name: 'ChildA',
         })
         const child2 = testOrgUnit({
@@ -431,7 +431,7 @@ describe('Organisation unit list', () => {
         const rootOrg = testOrgUnit({
             level: 1,
             childCount: 2,
-            access: testAccess({ deleteAccess: true }),
+            access: testAccess({ delete: true }),
             name: 'ARoot1',
         })
         const child1 = testOrgUnit({
@@ -439,7 +439,7 @@ describe('Organisation unit list', () => {
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
-            access: testAccess({ deleteAccess: true }),
+            access: testAccess({ delete: true }),
             name: 'ChildA',
         })
         const child2 = testOrgUnit({
@@ -476,7 +476,7 @@ describe('Organisation unit list', () => {
         const rootOrg = testOrgUnit({
             level: 1,
             childCount: 2,
-            access: testAccess({ deleteAccess: true }),
+            access: testAccess({ delete: true }),
             name: 'ARoot1',
         })
         const child1 = testOrgUnit({
@@ -484,7 +484,7 @@ describe('Organisation unit list', () => {
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
-            access: testAccess({ deleteAccess: true }),
+            access: testAccess({ delete: true }),
             name: 'ChildA',
         })
         const child2 = testOrgUnit({
@@ -521,7 +521,7 @@ describe('Organisation unit list', () => {
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
-            access: testAccess({ deleteAccess: true }),
+            access: testAccess({ delete: true }),
             name: 'ChildA',
         })
         const child2 = testOrgUnit({
@@ -571,7 +571,7 @@ describe('Organisation unit list', () => {
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
-            access: testAccess({ deleteAccess: true }),
+            access: testAccess({ delete: true }),
         })
         const child2 = testOrgUnit({
             level: 2,
@@ -591,7 +591,7 @@ describe('Organisation unit list', () => {
         const secondChildCheckBox = within(tableRows[3]).getByRole('checkbox')
         await userEvent.click(secondChildCheckBox)
 
-        const toolbar = screen.getByTestId('dhis2-uicore-tabletoolbar')
+        const toolbar = screen.getByTestId('multi-actions-toolbar')
         expect(toolbar).toBeVisible()
         expect(secondChildCheckBox).toBeChecked()
 
@@ -607,7 +607,7 @@ describe('Organisation unit list', () => {
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
-            access: testAccess({ deleteAccess: true }),
+            access: testAccess({ delete: true }),
         })
         const child2 = testOrgUnit({
             level: 2,
@@ -629,7 +629,7 @@ describe('Organisation unit list', () => {
         await userEvent.click(within(rootRow).getByRole('checkbox'))
         await userEvent.click(within(secondChildRow).getByRole('checkbox'))
 
-        const toolbar = screen.getByTestId('dhis2-uicore-tabletoolbar')
+        const toolbar = screen.getByTestId('multi-actions-toolbar')
         await userEvent.click(within(toolbar).getByText('Download'))
 
         const downloadModal = await screen.findByTestId('download-modal')

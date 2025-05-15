@@ -53,7 +53,9 @@ export const DynamicFilters = () => {
             {filterKeys.map((filterKey) => {
                 const FilterComponent = filterKeyToComponentMap[filterKey]
                 return FilterComponent ? (
-                    <FilterComponent key={filterKey} />
+                    <span data-test="dynamic-filter" key={filterKey}>
+                        <FilterComponent key={filterKey} />
+                    </span>
                 ) : null
             })}
         </>

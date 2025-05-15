@@ -33,7 +33,7 @@ const availableTranslateableFields = [
  * so we need to filter based on the schema.
  * This also controls the order of the rendered fields */
 
-const getTranslateableFieldsForSchema = (schema: Schema) => {
+export const getTranslateableFieldsForSchema = (schema: Schema) => {
     return availableTranslateableFields.filter(
         (field) => schema.properties[field]?.translatable
     )
@@ -128,6 +128,7 @@ export const TranslationForm = ({
                             disabled={submitting}
                             loading={submitting}
                             onClick={() => handleSubmit()}
+                            dataTest="submit-translations-button"
                         >
                             {i18n.t('Save translations')}
                         </Button>

@@ -18,7 +18,7 @@ const ModelValueError = () => {
     return <span>Error</span>
 }
 
-const getSchemaProperty = (
+export const getSchemaProperty = (
     schema: Schema,
     path: string
 ): SchemaFieldProperty | undefined => {

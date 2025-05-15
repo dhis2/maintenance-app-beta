@@ -14,10 +14,14 @@ export const FilterWrapper = () => {
     }
 
     return (
-        <div className={css.filterWrapper}>
+        <div className={css.filterWrapper} data-test="filters-wrapper">
             <IdentifiableFilter />
             <DynamicFilters />
-            <Button small onClick={handleClear}>
+            <Button
+                small
+                onClick={handleClear}
+                dataTest="clear-all-filters-button"
+            >
                 {i18n.t('Clear all filters')}
             </Button>
         </div>

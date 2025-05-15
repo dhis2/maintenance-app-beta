@@ -30,7 +30,10 @@ export const ToolbarSelected = ({
     })
 
     return (
-        <DataTableToolbar className={css.listHeaderBulk}>
+        <DataTableToolbar
+            className={css.listHeaderBulk}
+            dataTest={'multi-actions-toolbar'}
+        >
             <span>
                 {i18n.t('{{number}} selected', { number: selectedModels.size })}
             </span>

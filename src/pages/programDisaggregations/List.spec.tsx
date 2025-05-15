@@ -88,7 +88,7 @@ describe('Program Indicators list', () => {
             programsWithMappings: [programsWithMapping],
         })
         const listProgram = screen.getByTestId('program-with-mapping')
-        const editButton = within(listProgram).getByTestId('edit-program')
+        const editButton = within(listProgram).getByTestId('link-button')
         expect(editButton).toHaveTextContent('Edit')
         expect(editButton).toHaveAttribute(
             'href',

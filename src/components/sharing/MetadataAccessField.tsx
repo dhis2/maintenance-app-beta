@@ -51,14 +51,15 @@ export const MetadataAccessField = ({
             dense
             selected={valueWithOnlyMetadata}
             onChange={handleChange}
+            dataTest="metadata-access-select"
         >
             <SingleSelectOption
-                key={value}
+                key={'edit-and-view'}
                 value={'rw------'}
                 label={i18n.t('Edit and view')}
             />
             <SingleSelectOption
-                key={value}
+                key={'view-only'}
                 value={'r-------'}
                 label={i18n.t('View only')}
             />
