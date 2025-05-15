@@ -195,7 +195,7 @@ export const generateDefaultListItemsTests = ({
         it('should use the pagination navigator', async () => {
             const { screen } = await renderList()
             const pages = await testUtils.openSingleSelect(
-                'section-list-pagination-actions',
+                screen.getByTestId('section-list-pagination-actions'),
                 screen
             )
             await userEvent.click(pages[0])
@@ -672,7 +672,7 @@ export const generateDefaultListRowActionsTests = ({
                 )
 
                 const availableLanguages = await testUtils.openSingleSelect(
-                    'translation-dialog-locale-select',
+                    screen.getByTestId('translation-dialog-locale-select'),
                     screen
                 )
                 expect(availableLanguages).toHaveLength(locales.length)
@@ -857,7 +857,7 @@ export const generateDefaultListMultiActionsTests = ({
                 )
 
                 const options = await testUtils.openSingleSelect(
-                    'sharing-search-select',
+                    screen.getByTestId('sharing-search-select'),
                     screen
                 )
                 expect(options).toHaveLength(
@@ -866,7 +866,7 @@ export const generateDefaultListMultiActionsTests = ({
                 await userEvent.click(options[1])
 
                 const accessOptions = await testUtils.openSingleSelect(
-                    'metadata-access-select',
+                    screen.getByTestId('metadata-access-select'),
                     screen
                 )
                 expect(accessOptions).toHaveLength(2)

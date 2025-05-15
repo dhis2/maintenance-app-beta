@@ -13,13 +13,11 @@ export const testUtils = {
         return bulkSharingDialog
     },
     openSingleSelect: async (
-        singleSelectTestId: string,
+        triggeringDiv: HTMLElement,
         screen: RenderResult
     ) => {
         await userEvent.click(
-            within(screen.getByTestId(singleSelectTestId)).getByTestId(
-                'dhis2-uicore-select-input'
-            )
+            within(triggeringDiv).getByTestId('dhis2-uicore-select-input')
         )
         const optionsWrapper = await screen.findByTestId(
             'dhis2-uicore-select-menu-menuwrapper'

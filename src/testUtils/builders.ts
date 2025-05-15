@@ -240,6 +240,24 @@ export const testProgram = ({
     categoryMappings,
 })
 
+export const testOrgUnitLevel = ({
+    id = randomDhis2Id(),
+    name = faker.person.fullName(),
+    displayName = faker.person.fullName(),
+    access = testAccess(),
+    level = null as number | null,
+    offlineLevels = null as number | null,
+    lastUpdated = faker.date.past().toUTCString(),
+} = {}) => ({
+    id,
+    name,
+    displayName,
+    access,
+    level,
+    offlineLevels,
+    lastUpdated,
+})
+
 // export const testOrgUnit =  (overwrites: Record<any,any> | undefined) => (
 //     {...generateMock((organisationUnitSchema._def.schema).merge(withDefaultListColumns).merge(readOrganisationUnitColumns), {mockeryMapper} ),
 //         parent: {
