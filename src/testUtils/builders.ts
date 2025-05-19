@@ -12,6 +12,7 @@ import { dataElementGroupSchema } from '../pages/dataElementGroups/form'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementSchema } from '../pages/dataElements/form'
 import { dataSetFormSchema } from '../pages/dataSetsWip/form/dataSetFormSchema'
+import { IndicatorSchema } from '../pages/indicators/form/IndicatorSchema'
 import { IndicatorTypeSchema } from '../pages/indicatorTypes/form'
 import { organisationUnitGroupSchema } from '../pages/organisationUnitGroups/form'
 import { organisationUnitGroupSetSchema } from '../pages/organisationUnitGroupSets/form'
@@ -108,10 +109,9 @@ export const testIndicatorType = (overwrites: Record<any, any> = {}) => ({
 })
 
 export const testIndicator = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(
-        identifiable.merge(withDefaultListColumns).extend({ code: z.string() }),
-        { mockeryMapper }
-    ),
+    ...generateMock(IndicatorSchema.merge(withDefaultListColumns), {
+        mockeryMapper,
+    }),
     ...overwrites,
 })
 

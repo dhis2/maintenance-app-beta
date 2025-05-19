@@ -17,7 +17,7 @@ import {
     testOrgUnitLevel,
 } from '../../testUtils/builders'
 import TestComponentWithRouter from '../../testUtils/TestComponentWithRouter'
-import { testUtils } from '../../testUtils/testUtils'
+import { uiActions } from '../../testUtils/uiActions'
 import type { OrganisationUnit } from '../../types/generated'
 import { Component } from './List'
 
@@ -122,7 +122,7 @@ describe('Organisation unit list tests', () => {
         ).getByRole('textbox')
         await userEvent.clear(nameInput)
         await userEvent.type(nameInput, newName)
-        const availableOfflineLevels = await testUtils.openSingleSelect(
+        const availableOfflineLevels = await uiActions.openSingleSelect(
             within(orgUnitLevel).getByTestId('dhis2-uicore-singleselect'),
             screen
         )

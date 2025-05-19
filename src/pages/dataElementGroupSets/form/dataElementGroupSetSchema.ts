@@ -5,7 +5,6 @@ const { identifiable } = modelFormSchemas
 export const dataElementGroupSetSchema = identifiable.merge(
     z
         .object({
-            name: z.string().trim(),
             shortName: z.string().trim(),
             code: z.string().trim(),
             description: z.string().trim(),

@@ -1,7 +1,7 @@
 import { RenderResult, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 
-export const testUtils = {
+export const uiActions = {
     openModal: async (
         triggeringButton: HTMLElement,
         modalTestId: string,

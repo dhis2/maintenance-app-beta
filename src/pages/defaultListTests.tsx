@@ -30,7 +30,7 @@ import {
     testUserGroup,
 } from '../testUtils/builders'
 import TestComponentWithRouter from '../testUtils/TestComponentWithRouter'
-import { testUtils } from '../testUtils/testUtils'
+import { uiActions } from '../testUtils/uiActions'
 import { ModelSection } from '../types'
 import type { OrganisationUnit } from '../types/generated'
 import { DefaultSectionListProps } from './DefaultSectionList'
@@ -194,7 +194,7 @@ export const generateDefaultListItemsTests = ({
         })
         it('should use the pagination navigator', async () => {
             const { screen } = await renderList()
-            const pages = await testUtils.openSingleSelect(
+            const pages = await uiActions.openSingleSelect(
                 screen.getByTestId('section-list-pagination-actions'),
                 screen
             )
@@ -564,7 +564,7 @@ export const generateDefaultListRowActionsTests = ({
             )
             screen.getByTestId('row-actions-menu')
 
-            const deleteConfirmationModal = await testUtils.openModal(
+            const deleteConfirmationModal = await uiActions.openModal(
                 within(deletableElementActionMenu).getByText('Delete'),
                 'delete-confirmation-modal',
                 screen
@@ -665,13 +665,13 @@ export const generateDefaultListRowActionsTests = ({
                 await userEvent.click(
                     within(actionsMenu).getByText('Translate')
                 )
-                const translationModal = await testUtils.openModal(
+                const translationModal = await uiActions.openModal(
                     within(actionsMenu).getByText('Translate'),
                     'translation-dialog',
                     screen
                 )
 
-                const availableLanguages = await testUtils.openSingleSelect(
+                const availableLanguages = await uiActions.openSingleSelect(
                     screen.getByTestId('translation-dialog-locale-select'),
                     screen
                 )
@@ -850,13 +850,13 @@ export const generateDefaultListMultiActionsTests = ({
                 const toolbar = screen.getByTestId('multi-actions-toolbar')
                 expect(toolbar).toBeVisible()
 
-                await testUtils.openModal(
+                await uiActions.openModal(
                     within(toolbar).getByText('Update sharing'),
                     'bulk-sharing-dialog',
                     screen
                 )
 
-                const options = await testUtils.openSingleSelect(
+                const options = await uiActions.openSingleSelect(
                     screen.getByTestId('sharing-search-select'),
                     screen
                 )
@@ -865,7 +865,7 @@ export const generateDefaultListMultiActionsTests = ({
                 )
                 await userEvent.click(options[1])
 
-                const accessOptions = await testUtils.openSingleSelect(
+                const accessOptions = await uiActions.openSingleSelect(
                     screen.getByTestId('metadata-access-select'),
                     screen
                 )
@@ -917,7 +917,7 @@ export const generateDefaultListMultiActionsTests = ({
             const toolbar = screen.getByTestId('multi-actions-toolbar')
             expect(toolbar).toBeVisible()
 
-            const downloadModal = await testUtils.openModal(
+            const downloadModal = await uiActions.openModal(
                 within(toolbar).getByText('Download'),
                 'download-modal',
                 screen
