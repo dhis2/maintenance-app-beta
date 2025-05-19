@@ -199,7 +199,6 @@ const schemaSectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
                     index
                     handle={
                         {
-                            showFooter: true,
                             crumb: (matchInfo) => (
                                 <BreadcrumbItem
                                     label={i18n.t('Edit {{modelName}}', {

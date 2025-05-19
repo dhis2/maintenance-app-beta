@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import { NoticeBox } from '@dhis2/ui'
 import { FORM_ERROR } from 'final-form'
 import React, { useEffect, useMemo, useRef } from 'react'
-import { Form } from 'react-final-form'
+import { Form, useForm } from 'react-final-form'
 import { useNavigate } from 'react-router-dom'
 import {
     Loader,
@@ -91,7 +91,6 @@ export function Component() {
                         <FormContents
                             submitError={submitError}
                             submitting={submitting}
-                            onCancelClick={() => navigate(listPath)}
                         />
                     </form>
                 )}
@@ -102,15 +101,13 @@ export function Component() {
 
 function FormContents({
     submitError,
-    onCancelClick,
     submitting,
 }: {
     submitting: boolean
-    onCancelClick: () => void
     submitError?: string
 }) {
     const formErrorRef = useRef<HTMLDivElement | null>(null)
-
+    const { submit } = useForm()
     useEffect(() => {
         if (submitError) {
             formErrorRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -142,7 +139,8 @@ function FormContents({
                         cancelLabel={i18n.t('Exit without saving')}
                         submitLabel={i18n.t('Create data element group')}
                         submitting={submitting}
-                        onCancelClick={onCancelClick}
+                        onSubmitClick={submit}
+                        cancelTo={listPath}
                     />
                 </StandardFormSection>
             </div>
