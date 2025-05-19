@@ -1,1 +1,1 @@
-export { IndicatorSchema, validate } from './IndicatorTypesSchema'
+export { IndicatorTypeSchema, validate } from './IndicatorTypesSchema'

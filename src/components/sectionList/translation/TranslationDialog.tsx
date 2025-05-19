@@ -38,7 +38,12 @@ export const TranslationDialog = ({
     }, [selectedLocaleString, dbLocales])
 
     return (
-        <Modal onClose={onClose} large={true} position="middle">
+        <Modal
+            onClose={onClose}
+            large={true}
+            position="middle"
+            dataTest="translation-dialog"
+        >
             <ModalTitle>
                 {i18n.t('Translate: {{modelName}}', {
                     modelName: model.displayName,
@@ -59,6 +64,7 @@ export const TranslationDialog = ({
                             onChange={({ selected }) =>
                                 setSelectedLocaleString(selected)
                             }
+                            dataTest="translation-dialog-locale-select"
                         >
                             {dbLocalesQuery.data?.map((locale) => (
                                 <SingleSelectOption
