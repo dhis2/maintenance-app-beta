@@ -12,7 +12,6 @@ export type BreadCrumbMatchInfo = Pick<UIMatch, 'params' | 'pathname'>
 export type RouteHandle = {
     hideSidebar?: boolean
     section?: ModelSection | OverviewSection
-    showFooter?: boolean
     crumb?: (matchInfo: BreadCrumbMatchInfo) => React.ReactNode
 }
 
