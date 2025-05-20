@@ -33,6 +33,39 @@ const style = z.object({
     icon: z.string().optional(),
 })
 
+const UserSchema = identifiable.extend({
+    code: z.string().or(z.null()),
+    displayName: z.string(),
+    username: z.string(),
+})
+
+const AccessSchema = z.object({
+    delete: z.boolean(),
+    externalize: z.boolean(),
+    manage: z.boolean(),
+    read: z.boolean(),
+    update: z.boolean(),
+    write: z.boolean(),
+    data: z
+        .object({
+            read: z.boolean(),
+            write: z.boolean(),
+        })
+        .optional(),
+})
+
+const withDefaultListColumns = z.object({
+    id: z.string(),
+    displayName: z.string(),
+    created: z.coerce.date(),
+    createdBy: UserSchema,
+    href: z.string().url(),
+    lastUpdated: z.coerce.date(),
+    lastUpdatedBy: UserSchema.optional(),
+    sharing: z.object({ public: z.literal('rw------') }),
+    access: AccessSchema,
+})
+
 export const modelFormSchemas = {
     objectReference: modelReference,
     referenceCollection,
@@ -41,4 +74,5 @@ export const modelFormSchemas = {
     withAttributeValues,
     style,
     modelReference,
+    withDefaultListColumns,
 }
