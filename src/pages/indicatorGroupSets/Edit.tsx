@@ -15,6 +15,7 @@ const fieldFilters = [
     'shortName',
     'code',
     'description',
+    'compulsory',
     'indicatorGroups[id,displayName]',
 ] as const
 

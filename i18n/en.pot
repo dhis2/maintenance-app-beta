@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-05-19T14:12:16.479Z\n"
-"PO-Revision-Date: 2025-05-19T14:12:16.480Z\n"
+"POT-Creation-Date: 2025-05-21T13:04:04.845Z\n"
+"PO-Revision-Date: 2025-05-21T13:04:04.846Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -426,6 +426,12 @@ msgstr "Search by name, code or ID"
 msgid "Indicator Type"
 msgstr "Indicator Type"
 
+msgid "Indicator group"
+msgstr "Indicator group"
+
+msgid "Indicator group set"
+msgstr "Indicator group set"
+
 msgid "Public access"
 msgstr "Public access"
 
@@ -612,14 +618,8 @@ msgstr "Indicator type"
 msgid "Indicator types"
 msgstr "Indicator types"
 
-msgid "Indicator group"
-msgstr "Indicator group"
-
 msgid "Indicator groups"
 msgstr "Indicator groups"
-
-msgid "Indicator group set"
-msgstr "Indicator group set"
 
 msgid "Indicator group sets"
 msgstr "Indicator group sets"

@@ -12,6 +12,7 @@ import { useModelListView } from '../listView'
 export const useFilterKeys = () => {
     const [filters] = useSectionListFilters()
     const { filters: viewFilters } = useModelListView()
+    console.log('viewFilters', viewFilters)
     // combine filters and views, since filters in URL might not be selected for view
     // but we should show them when they have a value
     const filterKeys = useMemo(() => {

@@ -1,5 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
+import { CheckboxFieldFF } from '@dhis2/ui'
 import React from 'react'
+import { Field as FieldRFF } from 'react-final-form'
 import {
     DefaultIdentifiableFields,
     DescriptionField,
@@ -9,10 +11,8 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { SECTIONS_MAP } from '../../../lib'
 
 function IndicatorGroupSetFormFields() {
-    const section = SECTIONS_MAP.indicatorGroupSet
     return (
         <>
             <StandardFormSection>
@@ -25,11 +25,21 @@ function IndicatorGroupSetFormFields() {
                     )}
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />
-                <DescriptionField
-                    helpText={i18n.t(
-                        'Explain the purpose of this indicator group set.'
-                    )}
-                />
+                <StandardFormField>
+                    <DescriptionField
+                        helpText={i18n.t(
+                            'Explain the purpose of this indicator group set.'
+                        )}
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <FieldRFF
+                        component={CheckboxFieldFF}
+                        name="compulsory"
+                        label={i18n.t('Compulsory')}
+                        type="checkbox"
+                    />
+                </StandardFormField>
             </StandardFormSection>
 
             <StandardFormSection>
