@@ -1,3 +1,10 @@
+## [0.44.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.44.2...v0.44.3) (2025-05-21)
+
+
+### Bug Fixes
+
+* keeping and deleting sources in merge ([#566](https://github.com/dhis2/maintenance-app-beta/issues/566)) ([e388ac0](https://github.com/dhis2/maintenance-app-beta/commit/e388ac0a159db89c845c99abe35cb67d61c4a602))
+
 ## [0.44.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.44.1...v0.44.2) (2025-05-21)
 
 
