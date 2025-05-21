@@ -611,7 +611,9 @@ export const generateDefaultListRowActionsTests = ({
             const detailsPanel = await screen.findByTestId('details-panel')
             expect(detailsPanel).toBeVisible()
             expect(detailsPanel).toHaveTextContent(element.displayName)
-            expect(detailsPanel).toHaveTextContent(element.code)
+            if (element.code) {
+                expect(detailsPanel).toHaveTextContent(element.code)
+            }
             expect(detailsPanel).toHaveTextContent(element.id)
             expect(detailsPanel).toHaveTextContent(
                 element.createdBy!.displayName

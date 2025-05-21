@@ -3,10 +3,14 @@ import { z } from 'zod'
 import { getDefaults, modelFormSchemas } from '../../../lib'
 import { createFormValidate } from '../../../lib/form/validate'
 
-const { withAttributeValues, identifiable, referenceCollection } =
-    modelFormSchemas
+const {
+    withAttributeValues,
+    identifiable,
+    referenceCollection,
+    withDefaultListColumns,
+} = modelFormSchemas
 
-export const categoryOptionSchema = identifiable
+export const categoryOptionFormSchema = identifiable
     .merge(withAttributeValues)
     .extend({
         code: z.string().trim().optional(),
@@ -36,6 +40,10 @@ export const categoryOptionSchema = identifiable
         }
     )
 
-export const initialValues = getDefaults(categoryOptionSchema)
+export const categoryOptionListSchema = withDefaultListColumns.extend({
+    displayShortName: z.string(),
+})
 
-export const validate = createFormValidate(categoryOptionSchema)
+export const initialValues = getDefaults(categoryOptionFormSchema)
+
+export const validate = createFormValidate(categoryOptionFormSchema)

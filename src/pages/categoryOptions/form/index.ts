@@ -1,5 +1,6 @@
 export {
-    categoryOptionSchema as categoryOptionComboSchema,
+    categoryOptionFormSchema,
+    categoryOptionListSchema,
     validate,
 } from './categoryOptionSchema'
 export { CategoryOptionFormFields } from './CategoryOptionFormFields'
