@@ -48,7 +48,8 @@ const error404 = new FetchError({
     message: '404 not found',
     details: { httpStatusCode: 404 } as FetchError['details'],
 })
-const defaultUserDataStoreData = () => Promise.reject(new FetchError(error404))
+export const defaultUserDataStoreData = () =>
+    Promise.reject(new FetchError(error404))
 const originalWarn = console.warn
 
 jest.spyOn(console, 'warn').mockImplementation((value) => {

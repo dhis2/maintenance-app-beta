@@ -322,4 +322,17 @@ export const modelListViewsConfig = {
             overrideDefaultAvailable: true,
         },
     },
+    programIndicatorGroup: {
+        columns: {
+            available: [
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+                'favorite',
+            ],
+        },
+        filters: {
+            default: [],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
+    },
 } satisfies SectionListViewConfig<SectionName>
