@@ -1,6 +1,5 @@
 import { generateMock } from '@anatine/zod-mock'
 import { faker } from '@faker-js/faker'
-import { z } from 'zod'
 import { modelFormSchemas } from '../lib'
 import {
     AccessSchema,
@@ -22,7 +21,6 @@ import { IndicatorTypeListSchema } from '../pages/indicatorTypes/form/IndicatorT
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
-import { programIndicatorSchema } from '../pages/programDisaggregations/form/programDisaggregationSchema'
 import { ProgramIndicatorsListSchema } from '../pages/programIndicators/ProgramIndicatorsSchema'
 import {
     CategoryMapping,

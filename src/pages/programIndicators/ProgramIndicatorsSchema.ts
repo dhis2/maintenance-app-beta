@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { getDefaults, createFormValidate, modelFormSchemas } from '../../lib'
 import { UserSchema } from '../../lib/form/modelFormSchemas'
-import { DataSet, ProgramIndicator } from '../../types/generated'
+import { ProgramIndicator } from '../../types/generated'
 
 const { identifiable, withDefaultListColumns } = modelFormSchemas
 
