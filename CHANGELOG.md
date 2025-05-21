@@ -1,3 +1,15 @@
+## [0.44.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.44.1...v0.44.2) (2025-05-21)
+
+
+### Bug Fixes
+
+* sectioned sidebar style and footer refactor ([#560](https://github.com/dhis2/maintenance-app-beta/issues/560)) ([abbbe64](https://github.com/dhis2/maintenance-app-beta/commit/abbbe6450ab07fb64027a0169175f9e807ad0fc5))
+
+
+### Features
+
+* add lists schemas ([#564](https://github.com/dhis2/maintenance-app-beta/issues/564)) [skip release] ([ae4f0c2](https://github.com/dhis2/maintenance-app-beta/commit/ae4f0c2998cdd86d319a9892b622eed50f0e541b))
+
 ## [0.44.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.44.0...v0.44.1) (2025-05-09)
 
 
