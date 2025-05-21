@@ -2,6 +2,13 @@ import i18n from '@dhis2/d2-i18n'
 
 const TRANSLATED_PROPERTY: Record<string, string> = {
     aggregationType: i18n.t('Aggregation type'),
+    aggregateExportCategoryOptionCombo: i18n.t(
+        'Category option combination for aggregate data export'
+    ),
+    aggregateExportAttributeOptionCombo: i18n.t(
+        'Attribute option combination for aggregate data export'
+    ),
+    analyticsType: i18n.t('Analytics type'),
     category: i18n.t('Category'),
     categoryCombo: i18n.t('Category combination'),
     categoryOption: i18n.t('Category option'),
@@ -16,8 +23,11 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     dataDimensionType: i18n.t('Data dimension type'),
     dataSet: i18n.t('Data set'),
     description: i18n.t('Description'),
+    displayInForm: i18n.t('Display in form'),
     domainType: i18n.t('Domain type'),
+    expression: i18n.t('Expression'),
     favorite: i18n.t('Favorite'),
+    filter: i18n.t('Filter'),
     formName: i18n.t('Form name'),
     formType: i18n.t('Form type'),
     href: i18n.t('API URL'),
