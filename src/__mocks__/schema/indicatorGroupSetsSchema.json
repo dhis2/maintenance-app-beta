@@ -1,27 +1,10 @@
 {
-    "klass": "org.hisp.dhis.indicator.IndicatorGroupSet",
-    "identifiableObject": true,
-    "nameableObject": false,
-    "subscribableObject": false,
-    "embeddedObject": false,
     "singular": "indicatorGroupSet",
     "plural": "indicatorGroupSets",
-    "metadata": true,
-    "secondaryMetadata": false,
-    "namespace": "http://dhis2.org/schema/dxf/2.0",
     "name": "indicatorGroupSet",
     "displayName": "Indicator Group Set",
-    "collectionName": "indicatorGroupSets",
     "shareable": true,
     "dataShareable": false,
-    "dataWriteShareable": false,
-    "dataReadShareable": false,
-    "relativeApiEndpoint": "/indicatorGroupSets",
-    "apiEndpoint": "https://debug.dhis2.org/dev/api/indicatorGroupSets",
-    "href": "https://debug.dhis2.org/dev/api/schemas/indicatorGroupSet",
-    "persisted": true,
-    "defaultPrivate": false,
-    "implicitPrivateAuthority": false,
     "authorities": [
         {
             "type": "CREATE_PUBLIC",
@@ -36,13 +19,8 @@
             "authorities": ["F_INDICATORGROUPSET_DELETE"]
         }
     ],
-    "order": 1270,
-    "references": [
-        "org.hisp.dhis.user.User",
-        "org.hisp.dhis.indicator.IndicatorGroup"
-    ],
-    "properties": [
-        {
+    "properties": {
+        "favorites": {
             "klass": "java.util.Set",
             "propertyType": "COLLECTION",
             "itemKlass": "java.lang.String",
@@ -80,7 +58,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "lastUpdatedBy": {
             "klass": "org.hisp.dhis.user.User",
             "propertyType": "REFERENCE",
             "name": "lastUpdatedBy",
@@ -107,9 +85,9 @@
             "manyToOne": true,
             "oneToMany": false,
             "owningRole": "org.hisp.dhis.indicator.IndicatorGroupSet.lastUpdatedBy",
-            "href": "https://debug.dhis2.org/dev/api/schemas/user",
+            "href": "http://localhost:8080/api/schemas/user",
             "relativeApiEndpoint": "/users",
-            "apiEndpoint": "https://debug.dhis2.org/dev/api/users",
+            "apiEndpoint": "http://localhost:8080/api/users",
             "translatable": false,
             "gistPreferences": {
                 "included": "AUTO",
@@ -118,7 +96,7 @@
             "sortable": false,
             "propertyTransformer": true
         },
-        {
+        "access": {
             "klass": "org.hisp.dhis.security.acl.Access",
             "propertyType": "COMPLEX",
             "name": "access",
@@ -152,7 +130,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "code": {
             "klass": "java.lang.String",
             "propertyType": "IDENTIFIER",
             "name": "code",
@@ -187,7 +165,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "displayName": {
             "klass": "java.lang.String",
             "propertyType": "TEXT",
             "name": "displayName",
@@ -219,7 +197,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "created": {
             "klass": "java.util.Date",
             "propertyType": "DATE",
             "name": "created",
@@ -252,7 +230,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "attributeValues": {
             "klass": "org.hisp.dhis.attribute.AttributeValues",
             "propertyType": "COMPLEX",
             "name": "attributeValues",
@@ -285,7 +263,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "description": {
             "klass": "java.lang.String",
             "propertyType": "TEXT",
             "name": "description",
@@ -320,7 +298,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "members": {
             "klass": "java.util.List",
             "propertyType": "COLLECTION",
             "itemKlass": "org.hisp.dhis.indicator.IndicatorGroup",
@@ -353,9 +331,9 @@
             "oneToMany": false,
             "owningRole": "org.hisp.dhis.indicator.IndicatorGroupSet.members",
             "inverseRole": "org.hisp.dhis.indicator.IndicatorGroup.groupSets",
-            "href": "https://debug.dhis2.org/dev/api/schemas/indicatorGroup",
+            "href": "http://localhost:8080/api/schemas/indicatorGroup",
             "relativeApiEndpoint": "/indicatorGroups",
-            "apiEndpoint": "https://debug.dhis2.org/dev/api/indicatorGroups",
+            "apiEndpoint": "http://localhost:8080/api/indicatorGroups",
             "translatable": false,
             "gistPreferences": {
                 "included": "AUTO",
@@ -364,7 +342,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "sharing": {
             "klass": "org.hisp.dhis.user.sharing.Sharing",
             "propertyType": "COMPLEX",
             "name": "sharing",
@@ -399,7 +377,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "lastUpdated": {
             "klass": "java.util.Date",
             "propertyType": "DATE",
             "name": "lastUpdated",
@@ -432,7 +410,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "compulsory": {
             "klass": "java.lang.Boolean",
             "propertyType": "BOOLEAN",
             "name": "compulsory",
@@ -465,7 +443,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "createdBy": {
             "klass": "org.hisp.dhis.user.User",
             "propertyType": "REFERENCE",
             "name": "createdBy",
@@ -492,9 +470,9 @@
             "manyToOne": true,
             "oneToMany": false,
             "owningRole": "org.hisp.dhis.indicator.IndicatorGroupSet.createdBy",
-            "href": "https://debug.dhis2.org/dev/api/schemas/user",
+            "href": "http://localhost:8080/api/schemas/user",
             "relativeApiEndpoint": "/users",
-            "apiEndpoint": "https://debug.dhis2.org/dev/api/users",
+            "apiEndpoint": "http://localhost:8080/api/users",
             "translatable": false,
             "gistPreferences": {
                 "included": "FALSE",
@@ -503,7 +481,7 @@
             "sortable": false,
             "propertyTransformer": true
         },
-        {
+        "translations": {
             "klass": "java.util.Set",
             "propertyType": "COLLECTION",
             "itemKlass": "org.hisp.dhis.translation.Translation",
@@ -542,7 +520,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "name": {
             "klass": "java.lang.String",
             "propertyType": "TEXT",
             "name": "name",
@@ -579,7 +557,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "uid": {
             "klass": "java.lang.String",
             "propertyType": "IDENTIFIER",
             "name": "id",
@@ -614,7 +592,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "href": {
             "klass": "java.lang.String",
             "propertyType": "URL",
             "name": "href",
@@ -647,7 +625,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "shortName": {
             "klass": "java.lang.String",
             "propertyType": "TEXT",
             "name": "shortName",
@@ -681,42 +659,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
-            "klass": "org.hisp.dhis.user.User",
-            "propertyType": "REFERENCE",
-            "name": "user",
-            "fieldName": "user",
-            "persisted": false,
-            "namespace": "http://dhis2.org/schema/dxf/2.0",
-            "attribute": false,
-            "simple": false,
-            "collection": false,
-            "ordered": false,
-            "owner": false,
-            "identifiableObject": true,
-            "nameableObject": false,
-            "embeddedObject": false,
-            "analyticalObject": false,
-            "readable": true,
-            "writable": true,
-            "unique": false,
-            "required": false,
-            "manyToMany": false,
-            "oneToOne": false,
-            "manyToOne": false,
-            "oneToMany": false,
-            "href": "https://debug.dhis2.org/dev/api/schemas/user",
-            "relativeApiEndpoint": "/users",
-            "apiEndpoint": "https://debug.dhis2.org/dev/api/users",
-            "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": false,
-            "propertyTransformer": true
-        },
-        {
+        "favorite": {
             "klass": "java.lang.Boolean",
             "propertyType": "BOOLEAN",
             "name": "favorite",
@@ -747,9 +690,42 @@
             },
             "sortable": false,
             "propertyTransformer": false
+        },
+        "user": {
+            "klass": "org.hisp.dhis.user.User",
+            "propertyType": "REFERENCE",
+            "name": "user",
+            "fieldName": "user",
+            "persisted": false,
+            "namespace": "http://dhis2.org/schema/dxf/2.0",
+            "attribute": false,
+            "simple": false,
+            "collection": false,
+            "ordered": false,
+            "owner": false,
+            "identifiableObject": true,
+            "nameableObject": false,
+            "embeddedObject": false,
+            "analyticalObject": false,
+            "readable": true,
+            "writable": true,
+            "unique": false,
+            "required": false,
+            "manyToMany": false,
+            "oneToOne": false,
+            "manyToOne": false,
+            "oneToMany": false,
+            "href": "http://localhost:8080/api/schemas/user",
+            "relativeApiEndpoint": "/users",
+            "apiEndpoint": "http://localhost:8080/api/users",
+            "translatable": false,
+            "gistPreferences": {
+                "included": "AUTO",
+                "transformation": "AUTO"
+            },
+            "sortable": false,
+            "propertyTransformer": true
         }
-    ],
-    "favoritable": false,
-    "subscribable": false,
+    },
     "translatable": true
 }
