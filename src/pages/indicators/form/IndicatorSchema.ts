@@ -1,8 +1,8 @@
 import { z } from 'zod'
 import { modelFormSchemas } from '../../../lib'
 
-const { identifiable } = modelFormSchemas
+const { withDefaultListColumns } = modelFormSchemas
 
-export const IndicatorSchema = identifiable.extend({
+export const IndicatorSchema = withDefaultListColumns.extend({
     code: z.string(),
 })

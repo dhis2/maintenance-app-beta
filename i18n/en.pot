@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-05-21T13:04:04.845Z\n"
-"PO-Revision-Date: 2025-05-21T13:04:04.846Z\n"
+"POT-Creation-Date: 2025-05-22T14:27:32.371Z\n"
+"PO-Revision-Date: 2025-05-22T14:27:32.371Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -99,9 +99,6 @@ msgstr "Required"
 msgid "Please enter a GeoJSON value"
 msgstr "Please enter a GeoJSON value"
 
-msgid "Save and close"
-msgstr "Save and close"
-
 msgid "Exit without saving"
 msgstr "Exit without saving"
 
@@ -122,6 +119,9 @@ msgstr "Hide error details"
 
 msgid "Show error details"
 msgstr "Show error details"
+
+msgid "Save and close"
+msgstr "Save and close"
 
 msgid "<No value>"
 msgstr "<No value>"
@@ -536,15 +536,6 @@ msgstr "Translation updated successfully"
 
 msgid "Save translations"
 msgstr "Save translations"
-
-msgid "Go back"
-msgstr "Go back"
-
-msgid "Next section"
-msgstr "Next section"
-
-msgid "Save and exit"
-msgstr "Save and exit"
 
 msgid "Can edit and capture"
 msgstr "Can edit and capture"

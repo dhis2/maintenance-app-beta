@@ -1,4 +1,4 @@
 export {
-    organisationUnitGroupSchema,
+    organisationUnitGroupFormSchema,
     validate,
 } from './organisationUnitGroupSchema'

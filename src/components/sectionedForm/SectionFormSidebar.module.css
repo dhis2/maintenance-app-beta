@@ -5,6 +5,7 @@
 
 .listItem {
     box-shadow: 0px -1px 0px 0px var(--colors-grey300) inset;
+    border-radius: 6px;
     padding: var(--spacers-dp16);
     gap: 10px;
     display: flex;
@@ -13,11 +14,10 @@
 }
 
 .listItem:hover {
-    background-color: var(--colors-grey050);
+    background-color: var(--colors-grey300);
 }
 
 .listItem.selected {
-    background-color: var(--colors-grey100);
-    box-shadow: 4px 0px 0px 0px var(--colors-blue700) inset;
+    background-color: var(--colors-blue200);
     cursor: initial;
 }

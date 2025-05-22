@@ -3,18 +3,30 @@ import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
 
 /*  Note that this describes what we send to the server, 
     and not what is stored in the form. */
-const { identifiable, referenceCollection } = modelFormSchemas
+const { identifiable, referenceCollection, withDefaultListColumns } =
+    modelFormSchemas
 
-export const indicatorGroupSetSchema = identifiable.extend({
-    shortName: z.string().trim(),
+const indicatorGroupSetBaseSchema = z.object({
     code: z.string().trim().optional(),
-    description: z.string().trim().optional(),
-    compulsory: z.boolean().optional(),
-    indicatorGroups: referenceCollection
-        .min(1, 'At least one indicator group is required')
-        .default([]),
 })
 
-export const initialValues = getDefaults(indicatorGroupSetSchema)
+export const indicatorGroupSetFormSchema = identifiable
+    .merge(indicatorGroupSetBaseSchema)
+    .extend({
+        shortName: z.string().trim(),
+        description: z.string().trim().optional(),
+        compulsory: z.boolean().optional(),
+        indicatorGroups: referenceCollection
+            .min(1, 'At least one indicator group is required')
+            .default([]),
+    })
 
-export const validate = createFormValidate(indicatorGroupSetSchema)
+export const indicatorGroupSetListSchema = indicatorGroupSetBaseSchema
+    .merge(withDefaultListColumns)
+    .extend({
+        displayShortName: z.string(),
+    })
+
+export const initialValues = getDefaults(indicatorGroupSetFormSchema)
+
+export const validate = createFormValidate(indicatorGroupSetFormSchema)

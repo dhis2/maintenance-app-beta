@@ -3,14 +3,22 @@ import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
 
 /*  Note that this describes what we send to the server,
     and not what is stored in the form. */
-const { identifiable, referenceCollection, withAttributeValues } =
-    modelFormSchemas
+const {
+    identifiable,
+    withDefaultListColumns,
+    referenceCollection,
+    withAttributeValues,
+} = modelFormSchemas
 
-export const organisationUnitGroupSetSchema = identifiable
+const organisationUnitGroupSetBaseSchema = z.object({
+    code: z.string().trim().optional(),
+})
+
+export const organisationUnitGroupSetFormSchema = identifiable
     .merge(withAttributeValues)
+    .merge(organisationUnitGroupSetBaseSchema)
     .extend({
         shortName: z.string().trim(),
-        code: z.string().trim().optional(),
         description: z.string().trim().optional(),
         compulsory: z.boolean().optional(),
         dataDimension: z.boolean().optional().default(true),
@@ -18,6 +26,12 @@ export const organisationUnitGroupSetSchema = identifiable
         organisationUnitGroups: z.array(z.object({ id: z.string() })),
     })
 
-export const initialValues = getDefaults(organisationUnitGroupSetSchema)
+export const organisationUnitGroupSetListSchema = withDefaultListColumns
+    .merge(organisationUnitGroupSetBaseSchema)
+    .extend({
+        displayShortName: z.string(),
+    })
 
-export const validate = createFormValidate(organisationUnitGroupSetSchema)
+export const initialValues = getDefaults(organisationUnitGroupSetFormSchema)
+
+export const validate = createFormValidate(organisationUnitGroupSetFormSchema)

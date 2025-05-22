@@ -2,29 +2,30 @@ import { generateMock } from '@anatine/zod-mock'
 import { faker } from '@faker-js/faker'
 import { z } from 'zod'
 import { modelFormSchemas } from '../lib'
-import { categorySchema } from '../pages/categories/form'
-import { categoryComboSchema } from '../pages/categoryCombos/form'
-import { categoryOptionComboSchema } from '../pages/categoryOptionCombos/form'
-import { categoryOptionGroupSchema } from '../pages/categoryOptionGroups/form/categoryOptionGroupSchema'
-import { categoryOptionGroupSetSchema } from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
-import { categoryOptionSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
+import { categoryListSchema } from '../pages/categories/form'
+import { categoryComboListSchema } from '../pages/categoryCombos/form'
+import { categoryOptionComboListSchema } from '../pages/categoryOptionCombos/form'
+import { categoryOptionGroupListSchema } from '../pages/categoryOptionGroups/form/categoryOptionGroupSchema'
+import { categoryOptionGroupSetListSchema } from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
+import { categoryOptionListSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
 import { dataElementGroupSchema } from '../pages/dataElementGroups/form'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementSchema } from '../pages/dataElements/form'
-import { dataSetFormSchema } from '../pages/dataSetsWip/form/dataSetFormSchema'
-import { indicatorGroupSchema } from '../pages/indicatorGroups/form/indicatorGroupSchema'
-import { indicatorGroupSetSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
+import { dataSetListSchema } from '../pages/dataSetsWip/form/dataSetFormSchema'
+import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicatorGroupSchema'
+import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
 import { IndicatorSchema } from '../pages/indicators/form/IndicatorSchema'
-import { IndicatorTypeSchema } from '../pages/indicatorTypes/form'
-import { organisationUnitGroupSchema } from '../pages/organisationUnitGroups/form'
-import { organisationUnitGroupSetSchema } from '../pages/organisationUnitGroupSets/form'
-import { organisationUnitSchema } from '../pages/organisationUnits/form'
+import { IndicatorTypeListSchema } from '../pages/indicatorTypes/form/IndicatorTypesSchema'
+import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
+import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
+import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
 import {
     CategoryMapping,
     OptionMapping,
     OrganisationUnit,
-    User,
 } from '../types/generated'
+
+const { withDefaultListColumns } = modelFormSchemas
 
 export const randomDhis2Id = () =>
     faker.helpers.fromRegExp(/[a-zA-Z]{1}[a-zA-Z0-9]{10}/)
@@ -69,16 +70,6 @@ const AccessSchema = z.object({
     }),
 })
 
-const withDefaultListColumns = z.object({
-    displayName: z.string(),
-    lastUpdated: z.coerce.date(),
-    createdBy: UserSchema,
-    lastUpdatedBy: UserSchema,
-    access: AccessSchema,
-    href: z.string().url(),
-    sharing: z.object({ public: z.literal('rw------') }),
-})
-
 export const testAccess = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(AccessSchema, { mockeryMapper }),
     ...overwrites,
@@ -94,74 +85,60 @@ export const testUserGroup = (overwrites: Record<any, any> = {}) => ({
     ...overwrites,
 })
 
-const readOrganisationUnitColumns = z.object({
-    ancestors: z.array(organisationUnitSchema),
-    level: z.number().or(z.null()),
-    childCount: z.number(),
-})
-
 export const testIndicatorType = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(
-        IndicatorTypeSchema.merge(withDefaultListColumns).extend({
-            code: z.string(),
-        }),
-        { mockeryMapper }
-    ),
+    ...generateMock(IndicatorTypeListSchema, { mockeryMapper }),
     ...overwrites,
 })
 
 export const testIndicator = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(IndicatorSchema.merge(withDefaultListColumns), {
+    ...generateMock(IndicatorSchema, {
         mockeryMapper,
     }),
     ...overwrites,
 })
 
 export const testIndicatorGroup = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(indicatorGroupSchema.merge(withDefaultListColumns), {
+    ...generateMock(indicatorGroupListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
 })
 
 export const testIndicatorGroupSet = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(indicatorGroupSetSchema.merge(withDefaultListColumns), {
+    ...generateMock(indicatorGroupSetListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
 })
 
 export const testCategoryOption = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(
-        categoryOptionSchema._def.schema.merge(withDefaultListColumns),
-        { mockeryMapper }
-    ),
+    ...generateMock(categoryOptionListSchema, { mockeryMapper }),
     ...overwrites,
 })
 
 export const testCategory = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(categorySchema.merge(withDefaultListColumns), {
+    ...generateMock(categoryListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
 })
 
 export const testCategoryCombo = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(categoryComboSchema.merge(withDefaultListColumns), {
+    ...generateMock(categoryComboListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
 })
 
 export const testCategoryOptionCombo = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(categoryOptionComboSchema.merge(withDefaultListColumns), {
+    ...generateMock(categoryOptionComboListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
 })
 
 export const testCategoryOptionGroup = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(categoryOptionGroupSchema.merge(withDefaultListColumns), {
+    ...generateMock(categoryOptionGroupListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -170,10 +147,7 @@ export const testCategoryOptionGroup = (overwrites: Record<any, any> = {}) => ({
 export const testCategoryOptionGroupSet = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(
-        categoryOptionGroupSetSchema.merge(withDefaultListColumns),
-        { mockeryMapper }
-    ),
+    ...generateMock(categoryOptionGroupSetListSchema, { mockeryMapper }),
     ...overwrites,
 })
 
@@ -199,7 +173,7 @@ export const testDataElement = (overwrites: Record<any, any> = {}) => ({
 })
 
 export const testDataSet = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(dataSetFormSchema.merge(withDefaultListColumns), {
+    ...generateMock(dataSetListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -208,7 +182,7 @@ export const testDataSet = (overwrites: Record<any, any> = {}) => ({
 export const testOrganisationUnitGroup = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(organisationUnitGroupSchema.merge(withDefaultListColumns), {
+    ...generateMock(organisationUnitGroupListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -217,10 +191,7 @@ export const testOrganisationUnitGroup = (
 export const testOrganisationUnitGroupSet = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(
-        organisationUnitGroupSetSchema.merge(withDefaultListColumns),
-        { mockeryMapper }
-    ),
+    ...generateMock(organisationUnitGroupSetListSchema, { mockeryMapper }),
     ...overwrites,
 })
 
@@ -274,52 +245,17 @@ export const testOrgUnitLevel = ({
     lastUpdated,
 })
 
-// export const testOrgUnit =  (overwrites: Record<any,any> | undefined) => (
-//     {...generateMock((organisationUnitSchema._def.schema).merge(withDefaultListColumns).merge(readOrganisationUnitColumns), {mockeryMapper} ),
-//         parent: {
-//             id: overwrites.parentId || null,
-//         },
-//         ancestors: [],
-//         level: null,
-//         childCount: 0,
-//         ...overwrites,
-//
-//     })
-
-export const testOrgUnit = ({
-    id = randomDhis2Id(),
-    code = faker.string.alphanumeric(6),
-    name = faker.location.city(),
-    created = faker.date.past().toUTCString(),
-    lastUpdated = faker.date.past().toUTCString(),
-    createdBy = testUser() as User,
-    lastUpdatedBy = testUser() as User,
-    parentId = null as string | null,
-    ancestors = [] as Partial<OrganisationUnit>[],
-    level = null as number | null,
-    childCount = 0,
-    access = testAccess(),
-} = {}) =>
-    ({
-        code,
-        name,
-        created: created,
-        lastUpdated,
-        createdBy,
-        lastUpdatedBy,
-        sharing: {},
-        shortName: name.slice(0, 5),
-        parent: parentId
-            ? {
-                  id: parentId,
-              }
-            : undefined,
-        path: `/${id}`,
-        displayName: name,
-        href: faker.internet.url(),
-        id,
-        level: level || ancestors.length,
-        ancestors,
-        childCount,
-        access,
-    } as Partial<OrganisationUnit>)
+export const testOrgUnit = (overwrites: Record<any, any> | undefined = {}) => {
+    const mock = generateMock(organisationUnitListSchema, { mockeryMapper })
+    return {
+        ...mock,
+        parent: {
+            id: overwrites?.parentId ?? null,
+        },
+        ancestors: [],
+        level: null,
+        childCount: 0,
+        path: `/${mock.id}`,
+        ...overwrites,
+    } as unknown as Partial<OrganisationUnit>
+}

@@ -4,17 +4,26 @@ import { getDefaults, modelFormSchemas } from '../../../lib'
 import { createFormValidate } from '../../../lib/form/validate'
 import { CategoryCombo } from './../../../types/generated/models'
 
-const { identifiable, withAttributeValues, modelReference } = modelFormSchemas
+const {
+    identifiable,
+    withAttributeValues,
+    modelReference,
+    withDefaultListColumns,
+} = modelFormSchemas
 
 const GENERATED_COC_LIMIT = 50000
 
-export const categoryComboSchema = identifiable
+export const categoryComboBaseSchema = z.object({
+    code: z.string().trim().optional(),
+    dataDimensionType: z
+        .nativeEnum(CategoryCombo.dataDimensionType)
+        .default(CategoryCombo.dataDimensionType.DISAGGREGATION),
+})
+
+export const categoryComboFormSchema = identifiable
     .merge(withAttributeValues)
+    .merge(categoryComboBaseSchema)
     .extend({
-        code: z.string().trim().optional(),
-        dataDimensionType: z
-            .nativeEnum(CategoryCombo.dataDimensionType)
-            .default(CategoryCombo.dataDimensionType.DISAGGREGATION),
         skipTotal: z.boolean().default(false),
         categories: z
             .array(
@@ -42,8 +51,12 @@ export const categoryComboSchema = identifiable
             .default([]),
     })
 
-export const initialValues = getDefaults(categoryComboSchema)
+export const categoryComboListSchema = categoryComboBaseSchema.merge(
+    withDefaultListColumns
+)
+
+export const initialValues = getDefaults(categoryComboFormSchema)
 
 export type CategoryComboFormValues = typeof initialValues
 
-export const validate = createFormValidate(categoryComboSchema)
+export const validate = createFormValidate(categoryComboFormSchema)
