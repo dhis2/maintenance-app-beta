@@ -18,7 +18,7 @@ export function useIsFieldValueUnique({
 }: {
     model: string
     field: string
-    id: string
+    id?: string
 }) {
     const [HAS_FIELD_VALUE_QUERY] = useState({
         result: {

@@ -8,9 +8,11 @@ import { useValidator } from '../../../lib/models/useFieldValidators'
 export function NameField({
     schemaSection,
     helpText,
+    extraValidator,
 }: {
     helpText?: string
     schemaSection: SchemaSection
+    extraValidator?: (value?: string) => Promise<string | undefined> | undefined
 }) {
     const validator = useValidator({ schemaSection, property: 'name' })
     const { meta } = useField('name', {
@@ -19,6 +21,19 @@ export function NameField({
 
     const helpString =
         helpText || i18n.t('A name should be concise and easy to recognize.')
+
+    const validate = async (name?: string) => {
+        const error = await validator(name)
+        if (error) {
+            return error
+        }
+
+        if (extraValidator) {
+            return await extraValidator(name)
+        }
+
+        return undefined
+    }
 
     return (
         <FieldRFF<string | undefined>
@@ -32,7 +47,7 @@ export function NameField({
             })}
             name="name"
             helpText={helpString}
-            validate={(name?: string) => validator(name)}
+            validate={validate}
             validateFields={[]}
         />
     )

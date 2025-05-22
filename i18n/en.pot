@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-05-01T11:46:33.437Z\n"
-"PO-Revision-Date: 2025-05-01T11:46:33.437Z\n"
+"POT-Creation-Date: 2025-05-22T06:23:14.503Z\n"
+"PO-Revision-Date: 2025-05-22T06:23:14.504Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2260,6 +2260,9 @@ msgstr "Program Indicator mapping"
 
 msgid "Add a program indicator"
 msgstr "Add a program indicator"
+
+msgid "{{- programIndicator}} and all mappings will be deleted on save"
+msgstr "{{- programIndicator}} and all mappings will be deleted on save"
 
 msgid "Program Indicator:"
 msgstr "Program Indicator:"
