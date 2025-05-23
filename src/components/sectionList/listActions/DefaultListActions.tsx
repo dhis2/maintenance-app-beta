@@ -30,6 +30,7 @@ export const DefaultListActions = ({
             <TooltipWrapper
                 condition={!editable}
                 content={TOOLTIPS.noEditAccess}
+                dataTest="no-editable-tooltip"
             >
                 <ActionEdit disabled={!editable} modelId={model.id} />
             </TooltipWrapper>

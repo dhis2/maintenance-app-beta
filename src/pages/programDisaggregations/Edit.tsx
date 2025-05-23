@@ -6,7 +6,7 @@ import React, { useMemo } from 'react'
 import { Form as ReactFinalForm } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
-    DefaultSectionedFormFooter,
+    DefaultFormFooter,
     DefaultSectionedFormSidebar,
     SectionedFormLayout,
 } from '../../components'
@@ -203,11 +203,6 @@ export const Component = () => {
                             {!isLoading && !isError && (
                                 <SectionedFormLayout
                                     sidebar={<DefaultSectionedFormSidebar />}
-                                    footer={
-                                        <DefaultSectionedFormFooter
-                                            submitting={submitting}
-                                        />
-                                    }
                                 >
                                     <form onSubmit={handleSubmit}>
                                         <ProgramDisaggregationFormFields
@@ -215,6 +210,7 @@ export const Component = () => {
                                                 initialProgramIndicators
                                             }
                                         />
+                                        <DefaultFormFooter />
                                     </form>
                                 </SectionedFormLayout>
                             )}

@@ -56,6 +56,7 @@ const Actions = ({ onClose, selectedModels, section }: ActionsProps) => {
                     onClick={onClose}
                     href={downloadUrl}
                     download={true}
+                    dataTest="download-dialog-link"
                 >
                     {i18n.t('Download')}
                 </LinkButton>

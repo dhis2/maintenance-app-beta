@@ -2,25 +2,39 @@ import { z } from 'zod'
 import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
 import { CategoryOptionGroup } from '../../../types/generated'
 
-/*  Note that this describes what we send to the server, 
+/*  Note that this describes what we send to the server,
     and not what is stored in the form. */
-const { identifiable, referenceCollection, withAttributeValues } =
-    modelFormSchemas
+const {
+    identifiable,
+    referenceCollection,
+    withAttributeValues,
+    withDefaultListColumns,
+} = modelFormSchemas
 
-export const categoryOptionGroupSchema = identifiable
+const categoryOptionGroupBaseSchema = z.object({
+    code: z.string().trim().optional(),
+    dataDimensionType: z
+        .nativeEnum(CategoryOptionGroup.dataDimensionType)
+        .default(CategoryOptionGroup.dataDimensionType.DISAGGREGATION),
+})
+
+export const categoryOptionGroupFormSchema = identifiable
     .merge(withAttributeValues)
+    .merge(categoryOptionGroupBaseSchema)
     .extend({
         shortName: z.string().trim(),
-        code: z.string().trim().optional(),
         description: z.string().trim().optional(),
-        dataDimensionType: z
-            .nativeEnum(CategoryOptionGroup.dataDimensionType)
-            .default(CategoryOptionGroup.dataDimensionType.DISAGGREGATION),
         categoryOptions: referenceCollection
             .min(1, 'At least one category option is required')
             .default([]),
     })
 
-export const initialValues = getDefaults(categoryOptionGroupSchema)
+export const categoryOptionGroupListSchema = categoryOptionGroupBaseSchema
+    .merge(withDefaultListColumns)
+    .extend({
+        displayShortName: z.string(),
+    })
 
-export const validate = createFormValidate(categoryOptionGroupSchema)
+export const initialValues = getDefaults(categoryOptionGroupFormSchema)
+
+export const validate = createFormValidate(categoryOptionGroupFormSchema)

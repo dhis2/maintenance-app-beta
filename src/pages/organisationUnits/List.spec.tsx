@@ -99,36 +99,44 @@ describe('Organisation unit list', () => {
     })
 
     it('should show every org unit in the right order', async () => {
-        const rootOrg1 = testOrgUnit({ level: 1, childCount: 2, name: 'Root1' })
-        const rootOrg2 = testOrgUnit({ level: 2, childCount: 1, name: 'Root2' })
+        const rootOrg1 = testOrgUnit({
+            level: 1,
+            childCount: 2,
+            displayName: 'Root1',
+        })
+        const rootOrg2 = testOrgUnit({
+            level: 2,
+            childCount: 1,
+            displayName: 'Root2',
+        })
 
         const root1Level2Child1 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg1],
             parentId: rootOrg1.id,
             childCount: 1,
-            name: 'Root1Level2A',
+            displayName: 'Root1Level2A',
         })
         const root1Level2Child2 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg1],
             parentId: rootOrg1.id,
             childCount: 0,
-            name: 'Root1Level2B',
+            displayName: 'Root1Level2B',
         })
         const root1Level3Child1 = testOrgUnit({
             level: 3,
             ancestors: [rootOrg1, root1Level2Child1],
             parentId: root1Level2Child1.id,
             childCount: 0,
-            name: 'Root1Level3A',
+            displayName: 'Root1Level3A',
         })
         const root2Level3Child = testOrgUnit({
             level: 3,
             ancestors: [rootOrg2],
             parentId: rootOrg2.id,
             childCount: 0,
-            name: 'Root2Level3A',
+            displayName: 'Root2Level3A',
         })
 
         const screen = await renderList({
@@ -195,28 +203,28 @@ describe('Organisation unit list', () => {
             ancestors: [rootOrg1],
             parentId: rootOrg1.id,
             childCount: 1,
-            name: 'Root1Level2A',
+            displayName: 'Root1Level2A',
         })
         const root1Level2Child2 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg1],
             parentId: rootOrg1.id,
             childCount: 0,
-            name: 'Root1Level2B',
+            displayName: 'Root1Level2B',
         })
         const root1Level3Child1 = testOrgUnit({
             level: 3,
             ancestors: [rootOrg1, root1Level2Child1],
             parentId: root1Level2Child1.id,
             childCount: 0,
-            name: 'Root1Level3A',
+            displayName: 'Root1Level3A',
         })
         const root2Level3Child = testOrgUnit({
             level: 3,
             ancestors: [rootOrg2],
             parentId: rootOrg2.id,
             childCount: 0,
-            name: 'Root2Level3A',
+            displayName: 'Root2Level3A',
         })
 
         const screen = await renderList({
@@ -257,28 +265,28 @@ describe('Organisation unit list', () => {
             ancestors: [rootOrg1],
             parentId: rootOrg1.id,
             childCount: 1,
-            name: 'Root1Level2A',
+            displayName: 'Root1Level2A',
         })
         const root1Level2Child2 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg1],
             parentId: rootOrg1.id,
             childCount: 0,
-            name: 'Root1Level2B',
+            displayName: 'Root1Level2B',
         })
         const root1Level3Child1 = testOrgUnit({
             level: 3,
             ancestors: [rootOrg1, root1Level2Child1],
             parentId: root1Level2Child1.id,
             childCount: 0,
-            name: 'Root1Level3A',
+            displayName: 'Root1Level3A',
         })
         const root2Level3Child = testOrgUnit({
             level: 3,
             ancestors: [rootOrg2],
             parentId: rootOrg2.id,
             childCount: 0,
-            name: 'Root2Level3A',
+            displayName: 'Root2Level3A',
         })
 
         const screen = await renderList({
@@ -327,7 +335,7 @@ describe('Organisation unit list', () => {
         const rootOrg = testOrgUnit({
             level: 1,
             childCount: 0,
-            access: testAccess({ deleteAccess: true }),
+            access: testAccess({ delete: true }),
         })
 
         const screen = await renderList({
@@ -353,7 +361,7 @@ describe('Organisation unit list', () => {
         const rootOrg = testOrgUnit({
             level: 1,
             childCount: 0,
-            access: testAccess({ deleteAccess: false }),
+            access: testAccess({ delete: false }),
         })
 
         const screen = await renderList({
@@ -382,15 +390,15 @@ describe('Organisation unit list', () => {
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
-            access: testAccess({ deleteAccess: true }),
-            name: 'ChildA',
+            access: testAccess({ delete: true }),
+            displayName: 'ChildA',
         })
         const child2 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
-            name: 'ChildB',
+            displayName: 'ChildB',
         })
 
         const screen = await renderList({
@@ -431,23 +439,23 @@ describe('Organisation unit list', () => {
         const rootOrg = testOrgUnit({
             level: 1,
             childCount: 2,
-            access: testAccess({ deleteAccess: true }),
-            name: 'ARoot1',
+            access: testAccess({ delete: true }),
+            displayName: 'ARoot1',
         })
         const child1 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
-            access: testAccess({ deleteAccess: true }),
-            name: 'ChildA',
+            access: testAccess({ delete: true }),
+            displayName: 'ChildA',
         })
         const child2 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
-            name: 'ChildB',
+            displayName: 'ChildB',
         })
 
         const screen = await renderList({
@@ -476,23 +484,23 @@ describe('Organisation unit list', () => {
         const rootOrg = testOrgUnit({
             level: 1,
             childCount: 2,
-            access: testAccess({ deleteAccess: true }),
-            name: 'ARoot1',
+            access: testAccess({ delete: true }),
+            displayName: 'ARoot1',
         })
         const child1 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
-            access: testAccess({ deleteAccess: true }),
-            name: 'ChildA',
+            access: testAccess({ delete: true }),
+            displayName: 'ChildA',
         })
         const child2 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
-            name: 'ChildB',
+            displayName: 'ChildB',
         })
 
         const screen = await renderList({
@@ -521,15 +529,15 @@ describe('Organisation unit list', () => {
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
-            access: testAccess({ deleteAccess: true }),
-            name: 'ChildA',
+            access: testAccess({ delete: true }),
+            displayName: 'ChildA',
         })
         const child2 = testOrgUnit({
             level: 2,
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
-            name: 'ChildB',
+            displayName: 'ChildB',
         })
 
         const screen = await renderList({
@@ -571,7 +579,7 @@ describe('Organisation unit list', () => {
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
-            access: testAccess({ deleteAccess: true }),
+            access: testAccess({ delete: true }),
         })
         const child2 = testOrgUnit({
             level: 2,
@@ -591,7 +599,7 @@ describe('Organisation unit list', () => {
         const secondChildCheckBox = within(tableRows[3]).getByRole('checkbox')
         await userEvent.click(secondChildCheckBox)
 
-        const toolbar = screen.getByTestId('dhis2-uicore-tabletoolbar')
+        const toolbar = screen.getByTestId('multi-actions-toolbar')
         expect(toolbar).toBeVisible()
         expect(secondChildCheckBox).toBeChecked()
 
@@ -607,7 +615,7 @@ describe('Organisation unit list', () => {
             ancestors: [rootOrg],
             parentId: rootOrg.id,
             childCount: 0,
-            access: testAccess({ deleteAccess: true }),
+            access: testAccess({ delete: true }),
         })
         const child2 = testOrgUnit({
             level: 2,
@@ -629,7 +637,7 @@ describe('Organisation unit list', () => {
         await userEvent.click(within(rootRow).getByRole('checkbox'))
         await userEvent.click(within(secondChildRow).getByRole('checkbox'))
 
-        const toolbar = screen.getByTestId('dhis2-uicore-tabletoolbar')
+        const toolbar = screen.getByTestId('multi-actions-toolbar')
         await userEvent.click(within(toolbar).getByText('Download'))
 
         const downloadModal = await screen.findByTestId('download-modal')
