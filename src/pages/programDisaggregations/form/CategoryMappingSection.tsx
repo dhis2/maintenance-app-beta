@@ -52,7 +52,7 @@ const createNewOptionMapping = (
 ) => ({
     categoryId: category.id,
     id: generateDhis2Id(),
-    mappingName: name ?? 'Standard mapping',
+    mappingName: name ?? `Standard ${category.name} mapping`,
     options: getEmptyOptionValues(category.categoryOptions),
     deleted: false,
     category,
