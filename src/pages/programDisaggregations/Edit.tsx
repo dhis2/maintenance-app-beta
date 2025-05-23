@@ -209,6 +209,9 @@ export const Component = () => {
                                             initialProgramIndicators={
                                                 initialProgramIndicators
                                             }
+                                            programName={
+                                                programQuery?.data?.displayName
+                                            }
                                         />
                                         <DefaultFormFooter />
                                     </form>

@@ -31,8 +31,10 @@ import css from './ProgramIndicatorMapping.module.css'
 
 export const ProgramIndicatorMappingSection = ({
     initialProgramIndicators,
+    programName,
 }: {
     initialProgramIndicators: ProgramIndicatorWithMapping[]
+    programName?: string
 }) => {
     const programId = useParams().id
     const [programIndicators, setProgramIndicators] = React.useState<
@@ -53,6 +55,9 @@ export const ProgramIndicatorMappingSection = ({
         )
     return (
         <SectionedFormSection name="programIndicatorMappings">
+            <div className={css.programName}>
+                {i18n.t(`Program: ${programName}`, { nsSeparator: '~:~' })}
+            </div>
             <StandardFormSectionTitle>
                 {i18n.t('Program Indicator mapping')}
             </StandardFormSectionTitle>
