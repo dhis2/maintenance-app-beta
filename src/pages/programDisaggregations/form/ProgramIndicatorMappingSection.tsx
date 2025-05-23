@@ -115,7 +115,7 @@ const ProgramIndicatorCard = ({
             <div className={css.programIndicatorCardDeleted}>
                 <div className={css.deletedProgramIndicatorText}>
                     {i18n.t(
-                        '{{- programIndicator}} and all mappings will be deleted on save',
+                        'All mappings for {{- programIndicator}} will be removed on save',
                         { programIndicator: programIndicator.displayName }
                     )}
                 </div>
@@ -131,7 +131,7 @@ const ProgramIndicatorCard = ({
                         )
                     }}
                 >
-                    {i18n.t('Undo delete')}
+                    {i18n.t('Restore mappings')}
                 </Button>
             </div>
         )

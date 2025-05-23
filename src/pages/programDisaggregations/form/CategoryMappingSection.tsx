@@ -334,7 +334,7 @@ export const CategoryMappingList = ({
             <div className={css.categoryCardDeleted}>
                 <div className={css.deletedCategoryText}>
                     {i18n.t(
-                        '{{- categoryName}} and all mappings will be deleted on save',
+                        'All mappings for {{- categoryName}} will be removed on save',
                         { categoryName: categoryDisplayName }
                     )}
                 </div>
@@ -349,7 +349,7 @@ export const CategoryMappingList = ({
                         )
                     }}
                 >
-                    {i18n.t('Undo delete')}
+                    {i18n.t('Restore mappings')}
                 </Button>
             </div>
         )
@@ -381,7 +381,7 @@ export const CategoryMappingList = ({
                             ])
                         }}
                     >
-                        {i18n.t('Remove category')}
+                        {i18n.t('Remove category mappings')}
                     </Button>
                 </CollapsibleCardHeader>
             }
