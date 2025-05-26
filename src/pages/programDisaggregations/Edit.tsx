@@ -75,7 +75,7 @@ export const Component = () => {
                 resource: 'programIndicators',
                 params: {
                     fields: programIndicatorFieldFilters.concat(),
-                    filter: [`program.id:eq:${id}`, 'categoryMappingIds:gt:0'],
+                    filter: [`program.id:eq:${id}`],
                     pageSize: 200,
                 },
             },
