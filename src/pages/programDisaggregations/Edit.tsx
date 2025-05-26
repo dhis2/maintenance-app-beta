@@ -39,8 +39,8 @@ const programIndicatorFieldFilters = [
     'name',
     'displayName',
     'categoryMappingIds',
-    'attributeCombo[id, displayName, dataDimensionType, categories[id, displayName,name,dataDimensionType,categoryOptions[id, displayName]]]',
-    'categoryCombo[id, displayName, dataDimensionType, categories[id, displayName,name,dataDimensionType,categoryOptions[id, displayName]]]',
+    'attributeCombo[id, displayName, name, dataDimensionType, categories[id, displayName,name,dataDimensionType,categoryOptions[id, displayName]]]',
+    'categoryCombo[id, displayName, name, dataDimensionType, categories[id, displayName,name,dataDimensionType,categoryOptions[id, displayName]]]',
     'aggregateExportDataElement',
 ] as const
 

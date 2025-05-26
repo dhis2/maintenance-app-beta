@@ -101,6 +101,12 @@ export const apiResponseToFormValues = ({
             acc[indicator.id] = {
                 ...indicator,
                 ...mappingByComboType,
+                categoryCombo:
+                    disAggCombo.name === 'default' ? undefined : disAggCombo,
+                attributeCombo:
+                    attributeCombo.name === 'default'
+                        ? undefined
+                        : attributeCombo,
             }
             return acc
         },
