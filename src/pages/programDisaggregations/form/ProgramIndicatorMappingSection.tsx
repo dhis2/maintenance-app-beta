@@ -189,10 +189,7 @@ export const ProgramIndicatorMapping = ({
                     query={{
                         resource: 'categoryCombos',
                         params: {
-                            filters: [
-                                'dataDimensionType:eq:DISAGGREGATION',
-                                'name:neq:default',
-                            ],
+                            filter: 'dataDimensionType:eq:DISAGGREGATION',
                             fields: categoryComboFieldFilter.concat(),
                         },
                     }}
@@ -230,10 +227,7 @@ export const ProgramIndicatorMapping = ({
                     query={{
                         resource: 'categoryCombos',
                         params: {
-                            filters: [
-                                'dataDimensionType:eq:ATTRIBUTE',
-                                'name:neq:default',
-                            ],
+                            filter: 'dataDimensionType:eq:ATTRIBUTE',
                             fields: categoryComboFieldFilter.concat(),
                         },
                     }}
