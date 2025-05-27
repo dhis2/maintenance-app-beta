@@ -11,14 +11,17 @@ import { ProgramIndicatorMappingSection } from './ProgramIndicatorMappingSection
 
 export const ProgramDisaggregationFormFields = ({
     initialProgramIndicators,
+    programName,
 }: {
     initialProgramIndicators: ProgramIndicatorWithMapping[]
+    programName?: string
 }) => {
     return (
         <div>
             <SectionedFormSections>
                 <ProgramIndicatorMappingSection
                     initialProgramIndicators={initialProgramIndicators}
+                    programName={programName}
                 />
                 <SectionedFormSection name="disaggregationCategories">
                     <StandardFormSectionTitle>

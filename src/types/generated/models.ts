@@ -7151,6 +7151,7 @@ export namespace ProgramDataElementDimensionItem {
 export type ProgramIndicator = {
     access: Access
     aggregateExportAttributeOptionCombo: string
+    aggregateExportDataElement: string
     aggregateExportCategoryOptionCombo: string
     aggregationType: ProgramIndicator.aggregationType
     analyticsPeriodBoundaries: Array<AnalyticsPeriodBoundary>
