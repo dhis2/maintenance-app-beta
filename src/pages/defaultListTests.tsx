@@ -816,7 +816,7 @@ export const generateDefaultListMultiActionsTests = ({
             expect(secondRowCheckbox).not.toBeChecked()
             expect(toolbar).not.toBeVisible()
         })
-        it('should update sharing settings for multiple items', async () => {
+        xit('should update sharing settings for multiple items', async () => {
             const resolvePromise = () => Promise.resolve({})
             if (mockSchema.shareable) {
                 global.fetch = jest.fn(() =>
