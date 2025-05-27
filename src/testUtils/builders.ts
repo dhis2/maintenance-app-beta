@@ -17,6 +17,7 @@ import { IndicatorTypeListSchema } from '../pages/indicatorTypes/form/IndicatorT
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
+import { ProgramIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import {
     CategoryMapping,
     OptionMapping,
@@ -198,6 +199,13 @@ export const testCategoryMapping = ({
     categoryId,
     mappingName,
     optionMappings,
+})
+
+export const testProgramIndicatorGroup = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(ProgramIndicatorGroupListSchema, { mockeryMapper }),
+    ...overwrites,
 })
 
 export const testProgram = ({
