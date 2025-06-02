@@ -322,4 +322,32 @@ export const modelListViewsConfig = {
             overrideDefaultAvailable: true,
         },
     },
+    programIndicator: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Program name'), path: 'program.displayName' },
+                'lastUpdated',
+            ],
+            available: [
+                'expression',
+                'displayInForm',
+                'analyticsType',
+                { label: i18n.t('Description'), path: 'displayDescription' },
+                { label: i18n.t('Form name'), path: 'displayFormName' },
+                { label: i18n.t('Short name'), path: 'displayShortName' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+                { label: i18n.t('Decimals in data output'), path: 'decimals' },
+                'favorite',
+                'aggregationType',
+                'code',
+                'filter',
+                'aggregateExportCategoryOptionCombo',
+                'aggregateExportAttributeOptionCombo',
+            ],
+        },
+        filters: {
+            default: ['program'],
+        },
+    },
 } satisfies SectionListViewConfig<SectionName>

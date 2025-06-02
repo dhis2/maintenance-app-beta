@@ -20,6 +20,7 @@ import {
     DataElementFilter,
     CompulsoryFilter,
     DataDimensionFilter,
+    ProgramFilter,
 } from '.'
 
 type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
@@ -41,6 +42,7 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
     formType: FormTypeFilter,
     ignoreApproval: IgnoreApprovalFilter,
     indicatorType: IndicatorFilter,
+    program: ProgramFilter,
     publicAccess: PublicAccessFilter,
     valueType: ValueTypeSelectionFilter,
 }
