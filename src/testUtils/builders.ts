@@ -16,6 +16,8 @@ import { dataElementGroupSchema } from '../pages/dataElementGroups/form'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementSchema } from '../pages/dataElements/form'
 import { dataSetListSchema } from '../pages/dataSetsWip/form/dataSetFormSchema'
+import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicatorGroupSchema'
+import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
 import { IndicatorSchema } from '../pages/indicators/form/IndicatorSchema'
 import { IndicatorTypeListSchema } from '../pages/indicatorTypes/form/IndicatorTypesSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
@@ -72,6 +74,20 @@ export const testIndicatorType = (overwrites: Record<any, any> = {}) => ({
 
 export const testIndicator = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(IndicatorSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testIndicatorGroup = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(indicatorGroupListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testIndicatorGroupSet = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(indicatorGroupSetListSchema, {
         mockeryMapper,
     }),
     ...overwrites,

@@ -29,6 +29,8 @@ export const filterParamsSchema = z
         formType: z.array(z.nativeEnum(DataSet.formType)),
         ignoreApproval: z.boolean(),
         indicatorType: zodArrayIds,
+        indicatorGroup: zodArrayIds,
+        indicatorGroupSet: zodArrayIds,
         publicAccess: z.array(
             z.string().refine((val) => parseAccessString(val) !== null)
         ),
@@ -57,6 +59,8 @@ export const filterQueryParamType = {
     formType: CustomDelimitedArrayParam,
     ignoreApproval: BooleanParam,
     indicatorType: CustomDelimitedArrayParam,
+    indicatorGroup: CustomDelimitedArrayParam,
+    indicatorGroupSet: CustomDelimitedArrayParam,
     publicAccess: CustomDelimitedArrayParam,
     program: CustomDelimitedArrayParam,
     valueType: CustomDelimitedArrayParam,

@@ -266,6 +266,40 @@ export const modelListViewsConfig = {
             overrideDefaultAvailable: true,
         },
     },
+    indicatorGroup: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+                'favorite',
+            ],
+        },
+        filters: {
+            default: [],
+        },
+    },
+    indicatorGroupSet: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                'compulsory',
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                DESCRIPTORS.shortName,
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+                'favorite',
+            ],
+        },
+        filters: {
+            default: [],
+        },
+    },
     categoryOptionGroupSet: {
         columns: {
             default: [
