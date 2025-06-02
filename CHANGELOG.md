@@ -1,3 +1,10 @@
+# [0.45.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.44.3...v0.45.0) (2025-06-02)
+
+
+### Features
+
+* program indicator groups list and form ([#570](https://github.com/dhis2/maintenance-app-beta/issues/570)) ([9a01f57](https://github.com/dhis2/maintenance-app-beta/commit/9a01f576a263551feb8b9f49c22febfb0e775c7e))
+
 ## [0.44.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.44.2...v0.44.3) (2025-05-21)
 
 
