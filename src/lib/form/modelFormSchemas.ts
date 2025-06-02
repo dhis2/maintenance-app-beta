@@ -33,17 +33,13 @@ const style = z.object({
     icon: z.string().optional(),
 })
 
-export const UserSchema = identifiable.extend({
+const UserSchema = identifiable.extend({
     code: z.string().or(z.null()),
     displayName: z.string(),
     username: z.string(),
 })
 
-const UserGroupSchema = identifiable.extend({
-    displayName: z.string(),
-})
-
-export const AccessSchema = z.object({
+const AccessSchema = z.object({
     delete: z.boolean(),
     externalize: z.boolean(),
     manage: z.boolean(),
