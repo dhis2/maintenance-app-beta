@@ -47,6 +47,7 @@ type TestComponentWithRouterProps = React.PropsWithChildren<{
     path: string
     customData: CustomData
     routeOptions?: any
+    initialEntries?: string[]
 }>
 
 const TestComponentWithRouter = ({
@@ -54,6 +55,7 @@ const TestComponentWithRouter = ({
     customData,
     routeOptions,
     children,
+    initialEntries,
 }: TestComponentWithRouterProps) => {
     const routes = [
         {
@@ -70,7 +72,7 @@ const TestComponentWithRouter = ({
     ]
 
     const router = createMemoryRouter(routes, {
-        initialEntries: [path],
+        initialEntries: initialEntries || [path],
         initialIndex: 0,
     })
 

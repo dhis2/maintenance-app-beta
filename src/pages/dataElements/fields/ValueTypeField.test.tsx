@@ -1,8 +1,9 @@
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, within } from '@testing-library/react'
 import React from 'react'
 import { Form } from 'react-final-form'
 import { VALUE_TYPE, useSchemas, useOptionSetQuery } from '../../../lib'
 import { ValueTypeField } from './ValueTypeField'
+import resetAllMocks = jest.resetAllMocks
 
 jest.mock('../../../lib/optionSet/useOptionSetQuery', () => ({
     useOptionSetQuery: jest.fn(),
@@ -59,17 +60,12 @@ describe('<ValueTypeField />', () => {
         const label = await result.findByTestId('dhis2-uicore-select-input')
         fireEvent.click(label)
 
-        const textOption = await result.findByText('Text', {
-            selector: '[data-test="dhis2-uicore-singleselectoption"]',
-        })
+        const textOption = (await result.findByText('Text')).closest(
+            '[data-test="dhis2-uicore-singleselectoption"]'
+        )
         expect(textOption).toBeTruthy()
 
-        const multiTextOption = result.queryByText(
-            'Text with multiple values',
-            {
-                selector: '[data-test="dhis2-uicore-singleselectoption"]',
-            }
-        )
+        const multiTextOption = result.queryByText('Text with multiple values')
         expect(multiTextOption).toBeFalsy()
     })
 
@@ -99,20 +95,20 @@ describe('<ValueTypeField />', () => {
             </Form>
         )
 
-        const label = await result.findByTestId('dhis2-uicore-select-input')
-        fireEvent.click(label)
+        const alabel = await result.findByTestId('dhis2-uicore-select-input')
 
-        await result.findByText('Text', {
-            selector: '[data-test="dhis2-uicore-singleselectoption"]',
-        })
+        fireEvent.click(alabel)
 
-        const multiTextOption = result.queryByText(
-            'Text with multiple values',
-            {
-                selector: '[data-test="dhis2-uicore-singleselectoption"]',
-            }
+        const textOption = (await result.findByText('Text')).closest(
+            '[data-test="dhis2-uicore-singleselectoption"]'
         )
-        expect(multiTextOption).toBeTruthy()
+        expect(textOption).toBeVisible()
+
+        const options = result.getAllByTestId('dhis2-uicore-singleselectoption')
+        const multiTextOption = options.filter(
+            (o) => within(o).queryByText('Text with multiple values') !== null
+        )
+        expect(multiTextOption).toHaveLength(1)
     })
 
     it("should have the MULTI_TEXT option auto-selected when the option set's valueType is MULTI_TEXT", async () => {

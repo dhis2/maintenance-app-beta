@@ -57,6 +57,7 @@ export const ProgramIndicatorGroupsFormFields = () => {
                         filterPlaceholderPicked={i18n.t(
                             'Search selected indicators'
                         )}
+                        dataTest="program-indicators-transfer"
                     />
                 </StandardFormField>
             </StandardFormSection>
