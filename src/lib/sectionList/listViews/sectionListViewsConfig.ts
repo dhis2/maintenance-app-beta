@@ -273,7 +273,10 @@ export const modelListViewsConfig = {
                 DESCRIPTORS.publicAccess,
                 'lastUpdated',
             ],
-            available: [{ label: i18n.t('Owner'), path: 'user.displayName' }],
+            available: [
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+                'favorite',
+            ],
         },
         filters: {
             default: [],
@@ -290,6 +293,7 @@ export const modelListViewsConfig = {
             available: [
                 DESCRIPTORS.shortName,
                 { label: i18n.t('Owner'), path: 'user.displayName' },
+                'favorite',
             ],
         },
         filters: {

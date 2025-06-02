@@ -17,7 +17,3 @@ generateDefaultListTests({
     generateRandomElement,
     customData,
 })
-
-xdescribe('Indicator group set additional tests', () => {
-    it('an additional test', () => {})
-})
