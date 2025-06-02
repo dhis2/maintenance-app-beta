@@ -1,7 +1,11 @@
 import { generateMock } from '@anatine/zod-mock'
 import { faker } from '@faker-js/faker'
-import { z } from 'zod'
 import { modelFormSchemas } from '../lib'
+import {
+    AccessSchema,
+    UserGroupSchema,
+    UserSchema,
+} from '../lib/form/modelFormSchemas'
 import { categoryListSchema } from '../pages/categories/form'
 import { categoryComboListSchema } from '../pages/categoryCombos/form'
 import { categoryOptionComboListSchema } from '../pages/categoryOptionCombos/form'
@@ -21,6 +25,7 @@ import {
     ProgramIndicatorGroupFormSchema,
     ProgramIndicatorGroupListSchema,
 } from '../pages/programIndicatorGroups/form'
+import { ProgramIndicatorsListSchema } from '../pages/programIndicators/ProgramIndicatorsSchema'
 import {
     CategoryMapping,
     OptionMapping,
@@ -57,29 +62,6 @@ const mockeryMapper = (keyName: string) => {
 
 const { identifiable, referenceCollection, withAttributeValues } =
     modelFormSchemas
-
-const UserSchema = identifiable.extend({
-    code: z.string().optional(),
-    displayName: z.string(),
-    username: z.string(),
-})
-
-const UserGroupSchema = identifiable.extend({
-    displayName: z.string(),
-})
-
-const AccessSchema = z.object({
-    delete: z.boolean(),
-    externalize: z.boolean(),
-    manage: z.boolean(),
-    read: z.boolean(),
-    update: z.boolean(),
-    write: z.boolean(),
-    data: z.object({
-        read: z.boolean(),
-        write: z.boolean(),
-    }),
-})
 
 export const testAccess = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(AccessSchema, { mockeryMapper }),
@@ -189,6 +171,11 @@ export const testOrganisationUnitGroupSet = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(organisationUnitGroupSetListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testProgramIndicator = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(ProgramIndicatorsListSchema, { mockeryMapper }),
     ...overwrites,
 })
 

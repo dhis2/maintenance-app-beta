@@ -7,6 +7,7 @@ import { SECTIONS_MAP } from '../../lib'
 import {
     randomDhis2Id,
     testFormProgramIndicatorGroup,
+    testProgramIndicator,
     testProgramIndicatorGroup,
 } from '../../testUtils/builders'
 import { generateRenderer } from '../../testUtils/generateRenderer'
@@ -22,12 +23,6 @@ const ComponentToTest = Component
 jest.mock('use-debounce', () => ({
     useDebouncedCallback: (fn: any) => fn,
 }))
-
-// TEMPORARY until PI PR is merged
-const testProgramIndicator = () => ({
-    id: randomDhis2Id(),
-    displayName: faker.person.fullName(),
-})
 
 describe('Program indicator group edit form tests', () => {
     const updateMock = jest.fn()

@@ -39,7 +39,7 @@ export const UserSchema = identifiable.extend({
     username: z.string(),
 })
 
-const UserGroupSchema = identifiable.extend({
+export const UserGroupSchema = identifiable.extend({
     displayName: z.string(),
 })
 
