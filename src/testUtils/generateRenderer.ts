@@ -1,7 +1,6 @@
 import { FetchError } from '@dhis2/app-runtime'
 import { faker } from '@faker-js/faker'
-import { render, waitForElementToBeRemoved } from '@testing-library/react'
-import React from 'react'
+import { waitForElementToBeRemoved } from '@testing-library/react'
 import { ModelSchemas } from '../lib'
 import { useSchemaStore } from '../lib/schemas/schemaStore'
 import { useCurrentUserStore } from '../lib/user/currentUserStore'

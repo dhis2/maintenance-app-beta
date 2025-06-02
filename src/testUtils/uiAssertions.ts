@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker'
 import { RenderResult, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { randomLongString } from './builders'
@@ -49,7 +48,7 @@ const expectTransferFieldToExistWithOptions = async (
             'dhis2-uicore-transferoption'
         )
         expect(lhsOptions).toHaveLength(expected.lhs.length)
-        expected.lhs.map((option, index) => {
+        expected.lhs.forEach((option, index) => {
             expect(lhsOptions[index]).toHaveTextContent(option.displayName)
         })
     })
@@ -58,7 +57,7 @@ const expectTransferFieldToExistWithOptions = async (
         'dhis2-uicore-transferoption'
     )
     expect(rhsOptions).toHaveLength(expected.rhs.length)
-    expected.rhs.map((option, index) => {
+    expected.rhs.forEach((option, index) => {
         expect(rhsOptions[index]).toHaveTextContent(option.displayName)
     })
 }
@@ -71,7 +70,7 @@ const expectInputToErrorWhenExceedsLength = async (
     const longText = randomLongString(maxLength + 1)
     await uiActions.enterInputFieldValue(fieldName, longText, screen)
     await userEvent.click(screen.getByTestId(`formfields-${fieldName}-label`))
-    await expectFieldToHaveError(
+    expectFieldToHaveError(
         `formfields-${fieldName}`,
         `Please enter a maximum of ${maxLength} characters`,
         screen
@@ -85,7 +84,7 @@ const expectInputToErrorWhenDuplicate = async (
 ) => {
     await uiActions.enterInputFieldValue(fieldName, duplicateText, screen)
     await userEvent.click(screen.getByTestId(`formfields-${fieldName}-label`))
-    await expectFieldToHaveError(
+    expectFieldToHaveError(
         `formfields-${fieldName}`,
         `This field requires a unique value, please choose another one`,
         screen

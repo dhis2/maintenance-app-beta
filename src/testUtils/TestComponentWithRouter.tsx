@@ -72,7 +72,7 @@ const TestComponentWithRouter = ({
     ]
 
     const router = createMemoryRouter(routes, {
-        initialEntries: initialEntries || [path],
+        initialEntries: initialEntries ?? [path],
         initialIndex: 0,
     })
 

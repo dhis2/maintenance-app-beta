@@ -65,8 +65,7 @@ describe('Program indicator group edit form tests', () => {
                                     return programIndicatorGroup
                                 }
                                 if (
-                                    params?.params?.filter &&
-                                    params?.params?.filter.includes(
+                                    params?.params?.filter?.includes(
                                         matchingExistingElementFilter
                                     )
                                 ) {

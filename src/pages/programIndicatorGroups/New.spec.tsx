@@ -55,8 +55,7 @@ describe('Program indicator group add form tests', () => {
                             }
                             if (type === 'read') {
                                 if (
-                                    params?.params?.filter &&
-                                    params?.params?.filter.includes(
+                                    params?.params?.filter?.includes(
                                         matchingExistingElementFilter
                                     )
                                 ) {

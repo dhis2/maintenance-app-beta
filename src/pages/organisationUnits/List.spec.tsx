@@ -1,4 +1,3 @@
-import { FetchError } from '@dhis2/app-runtime'
 import { faker } from '@faker-js/faker'
 import {
     render,
