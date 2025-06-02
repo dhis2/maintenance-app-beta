@@ -39,6 +39,7 @@ export function useValidator({
         field: property,
         id: modelId,
     }) as Validator
+
     if (propertyDetails.propertyType !== 'INTEGER' && propertyDetails.length) {
         validators.push(checkMaxLengthFromProperty(propertyDetails))
     }
