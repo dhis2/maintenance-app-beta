@@ -50,6 +50,7 @@ const filterToQueryParamMap: FilterToQueryParamsMap = {
     publicAccess: (value) => inFilter('sharing.public', value),
     indicatorGroup: (value) => inFilter('indicatorGroups.id', value),
     indicatorGroupSet: (value) => inFilter('indicatorGroupSets.id', value),
+    program: (value) => inFilter('program.id', value),
 }
 
 const getQueryParamForFilter = (
