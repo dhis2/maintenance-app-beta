@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-05-01T11:46:33.437Z\n"
-"PO-Revision-Date: 2025-05-01T11:46:33.437Z\n"
+"POT-Creation-Date: 2025-06-04T13:06:27.111Z\n"
+"PO-Revision-Date: 2025-06-04T13:06:27.111Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -99,9 +99,6 @@ msgstr "Required"
 msgid "Please enter a GeoJSON value"
 msgstr "Please enter a GeoJSON value"
 
-msgid "Save and close"
-msgstr "Save and close"
-
 msgid "Exit without saving"
 msgstr "Exit without saving"
 
@@ -122,6 +119,9 @@ msgstr "Hide error details"
 
 msgid "Show error details"
 msgstr "Show error details"
+
+msgid "Save and close"
+msgstr "Save and close"
 
 msgid "<No value>"
 msgstr "<No value>"
@@ -525,15 +525,6 @@ msgstr "Translation updated successfully"
 
 msgid "Save translations"
 msgstr "Save translations"
-
-msgid "Go back"
-msgstr "Go back"
-
-msgid "Next section"
-msgstr "Next section"
-
-msgid "Save and exit"
-msgstr "Save and exit"
 
 msgid "Can edit and capture"
 msgstr "Can edit and capture"
@@ -2260,6 +2251,9 @@ msgstr "Program Indicator mapping"
 
 msgid "Add a program indicator"
 msgstr "Add a program indicator"
+
+msgid "{{- programIndicator}} and all mappings will be deleted on save"
+msgstr "{{- programIndicator}} and all mappings will be deleted on save"
 
 msgid "Program Indicator:"
 msgstr "Program Indicator:"
