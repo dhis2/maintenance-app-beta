@@ -8,43 +8,41 @@ import { useCallback, useState } from 'react'
 import { useBoundQueryFn } from '../../../lib'
 import { Program } from '../../../types/generated'
 
-export type ProgramWithCategoryMappingsSize = {
-    displayName: string
-    name: string
-    id: string
-    categoryMappings: number
-    programIndicators: { aggregateExportDataElement?: string }[]
-}
-
-interface ProgramsDetailedResponse {
+export const PROGRAMS_GIST_QUERY_KEY = ['programs-gist'] as const
+interface ProgramsGistResponse {
     programs: {
-        programs: ProgramWithCategoryMappingsSize[]
+        programs: Program[]
     }
 }
 
-const PROGRAMS_DETAILED_QUERY = {
-    programs: {
-        resource: 'programs',
-        params: {
-            fields: [
-                'name',
-                'displayName',
-                'id',
-                'categoryMappings~size',
-                'programIndicators[aggregateExportDataElement]',
-            ],
-            paging: false,
-        },
+const fields = ['name', 'displayName', 'id', 'categoryMappings'] as const
+
+export const PROGRAMS_SELECT_QUERY = {
+    resource: 'programs',
+    params: {
+        fields: [...fields],
     },
 }
 
 export const useProgramsWithMappingsList =
-    (): UseQueryResult<ProgramsDetailedResponse> => {
+    (): UseQueryResult<ProgramsGistResponse> => {
         const queryFn = useBoundQueryFn()
 
         return useQuery({
-            queryKey: [PROGRAMS_DETAILED_QUERY],
-            queryFn: queryFn<ProgramsDetailedResponse>,
+            queryKey: [
+                {
+                    programs: {
+                        resource: 'programs/gist',
+                        params: {
+                            fields: [...fields],
+                            filter: ['categoryMappings:!empty'],
+                            order: 'name:asc',
+                            pagSize: 200,
+                        },
+                    },
+                },
+            ],
+            queryFn: queryFn<ProgramsGistResponse>,
         })
     }
 
@@ -81,10 +79,9 @@ export const transformProgramsForSelect = (results: Program[]) =>
     )
 
 export const useProgramDeleteModal = () => {
-    const [programToDelete, setProgramToDelete] =
-        useState<ProgramWithCategoryMappingsSize | null>(null)
+    const [programToDelete, setProgramToDelete] = useState<Program | null>(null)
 
-    const open = useCallback((program: ProgramWithCategoryMappingsSize) => {
+    const open = useCallback((program: Program) => {
         setProgramToDelete(program)
     }, [])
 

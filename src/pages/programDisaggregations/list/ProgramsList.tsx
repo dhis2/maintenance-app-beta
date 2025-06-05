@@ -8,32 +8,24 @@ import {
     ModalContent,
     ModalTitle,
     NoticeBox,
-    SingleSelect,
-    SingleSelectOption,
 } from '@dhis2/ui'
 import React, { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { LinkButton } from '../../../components/LinkButton'
 import { LoadingSpinner } from '../../../components/loading/LoadingSpinner'
+import { ModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect'
 import {
+    PROGRAMS_SELECT_QUERY,
     useProgramsWithMappingsList,
     useClearMappingsMutation,
+    transformProgramsForSelect,
     useProgramDeleteModal,
-    ProgramWithCategoryMappingsSize,
 } from './ProgramListHooks'
 import classes from './ProgramsList.module.css'
 
 export const ProgramsList = () => {
     const navigate = useNavigate()
     const { data, isLoading, isError, refetch } = useProgramsWithMappingsList()
-    const programHasMappings = (p: ProgramWithCategoryMappingsSize) => {
-        return (
-            p?.categoryMappings !== 0 ||
-            p?.programIndicators?.some((pi) => pi?.aggregateExportDataElement)
-        )
-    }
-    const programsWithMappings =
-        data?.programs?.programs.filter(programHasMappings)
     const { mutateAsync: clearMappings } = useClearMappingsMutation()
     const alert = useAlert(
         ({ message }) => message,
@@ -47,10 +39,12 @@ export const ProgramsList = () => {
         isOpen: isDeleteModalOpen,
     } = useProgramDeleteModal()
 
+    const programsWithMappings = data?.programs?.programs
+
     const handleSelectChange = useCallback(
-        (id: { selected: string } | undefined) => {
-            if (id?.selected) {
-                navigate(`${id.selected}`)
+        (selected: { id: string } | undefined) => {
+            if (selected?.id) {
+                navigate(`${selected.id}`)
             }
         },
         [navigate]
@@ -76,19 +70,12 @@ export const ProgramsList = () => {
 
     return (
         <div className={classes.programsList}>
-            <SingleSelect
+            <ModelSingleSelect
+                query={PROGRAMS_SELECT_QUERY}
                 onChange={handleSelectChange}
+                transform={transformProgramsForSelect}
                 placeholder={i18n.t('Select a Program')}
-            >
-                {data?.programs?.programs?.map((program) => (
-                    <SingleSelectOption
-                        disabled={programHasMappings(program)}
-                        label={program.displayName}
-                        value={program.id}
-                        key={program.id}
-                    ></SingleSelectOption>
-                ))}
-            </SingleSelect>
+            />
 
             <h3>{i18n.t('Programs with existing mappings')}</h3>
 
@@ -159,7 +146,8 @@ export const ProgramsList = () => {
                             {i18n.t(
                                 'All mappings ({{count}}) will be removed.',
                                 {
-                                    count: programToDelete.categoryMappings,
+                                    count: programToDelete.categoryMappings
+                                        .length,
                                 }
                             )}
                         </p>

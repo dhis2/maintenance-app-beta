@@ -55,13 +55,6 @@ export const apiResponseToFormValues = ({
 
     const programIndicatorMappings = programIndicators.programIndicators.reduce(
         (acc, indicator) => {
-            if (
-                indicator.categoryMappingIds.length === 0 &&
-                !indicator.aggregateExportDataElement
-            ) {
-                // skip indicators without mappings or export data element
-                return acc
-            }
             const disAggCombo = indicator.categoryCombo
             const attributeCombo = indicator.attributeCombo
 
