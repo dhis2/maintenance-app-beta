@@ -1,7 +1,3 @@
-import { generateDefaultEditFormTests } from '../defaultFormTests'
-
-generateDefaultEditFormTests({ componentName: 'Data element group set' })
-
 xdescribe('Data element group set edit form additional tests', () => {
     it('contain all needed field prefilled', () => {})
     it('should not submit when a required values is removed ', () => {})

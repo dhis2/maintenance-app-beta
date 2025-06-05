@@ -1,7 +1,3 @@
-import { generateDefaultEditFormTests } from '../defaultFormTests'
-
-generateDefaultEditFormTests({ componentName: 'Category option group' })
-
 xdescribe('Category option group edit form additional tests', () => {
     it('contain all needed field prefilled', () => {})
     it('should not submit when a required values is removed ', () => {})

@@ -135,15 +135,15 @@ describe('<CategoryComboSelect />', () => {
 
         for (let i = 0; i < categoryCombos.length; ++i) {
             const categoryCombo = categoryCombos[i]
-            const selectOptions = await result.findByText(
-                categoryCombo.displayName,
-                { selector: '[data-test="dhis2-uicore-singleselectoption"]' }
-            )
-            expect(selectOptions).toBeTruthy()
+            const selectOption = (
+                await result.findByText(categoryCombo.displayName)
+            ).closest('[data-test="dhis2-uicore-singleselectoption"]')
+
+            expect(selectOption).toBeTruthy()
         }
-        const noneOption = await result.findByText('None', {
-            selector: '[data-test="dhis2-uicore-singleselectoption"]',
-        })
+        const noneOption = (await result.findByText('None')).closest(
+            '[data-test="dhis2-uicore-singleselectoption"]'
+        )
         expect(noneOption).toBeInTheDocument()
     })
 
@@ -162,12 +162,13 @@ describe('<CategoryComboSelect />', () => {
         const selectInput = result.getByTestId('dhis2-uicore-select-input')
         fireEvent.click(selectInput)
 
-        const noneLabel = await result.findByText('None', {
-            selector: '[data-test="dhis2-uicore-singleselectoption"]',
-        })
-        const selectedLabel = await result.findByText(/No value/, {
-            selector: '[data-test="dhis2-uicore-singleselectoption"]',
-        })
+        const noneLabel = (await result.findByText('None')).closest(
+            '[data-test="dhis2-uicore-singleselectoption"]'
+        )
+
+        const selectedLabel = (await result.findByText(/No value/)).closest(
+            '[data-test="dhis2-uicore-singleselectoption"]'
+        )
 
         expect(noneLabel).toBeInTheDocument()
         expect(selectedLabel).toBeInTheDocument()
@@ -247,10 +248,10 @@ describe('<CategoryComboSelect />', () => {
         const selectInput = result.getByTestId('dhis2-uicore-select-input')
         fireEvent.click(selectInput)
 
-        const selectedLabel = await result.findByText('Births', {
-            selector: '[data-test="dhis2-uicore-singleselectoption"]',
-        })
-        fireEvent.click(selectedLabel)
+        const selectedLabel = (await result.findByText('Births')).closest(
+            '[data-test="dhis2-uicore-singleselectoption"]'
+        )
+        fireEvent.click(selectedLabel!)
 
         expect(onChange).toHaveBeenCalledTimes(1)
         expect(onChange).toHaveBeenCalledWith({ selected: 'm2jTvAj5kkm' })

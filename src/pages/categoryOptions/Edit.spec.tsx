@@ -1,7 +1,3 @@
-import { generateDefaultEditFormTests } from '../defaultFormTests'
-
-generateDefaultEditFormTests({ componentName: 'Category option' })
-
 xdescribe('Category option edit form additional tests', () => {
     it('contain all needed field prefilled', () => {})
     it('display dates in the required format', () => {})
