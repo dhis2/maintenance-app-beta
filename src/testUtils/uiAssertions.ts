@@ -1,6 +1,5 @@
 import { RenderResult, waitFor, within } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { randomLongString } from './builders'
+import { userEvent } from '@testing-library/user-event'
 import { uiActions } from './uiActions'
 
 const expectInputFieldToExist = (
@@ -67,8 +66,6 @@ const expectInputToErrorWhenExceedsLength = async (
     maxLength: number,
     screen: RenderResult
 ) => {
-    const longText = randomLongString(maxLength + 1)
-    await uiActions.enterInputFieldValue(fieldName, longText, screen)
     await userEvent.click(screen.getByTestId(`formfields-${fieldName}-label`))
     expectFieldToHaveError(
         `formfields-${fieldName}`,

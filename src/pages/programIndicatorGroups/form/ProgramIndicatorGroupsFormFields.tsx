@@ -22,7 +22,7 @@ export const ProgramIndicatorGroupsFormFields = () => {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Set up the basic information for this Program Indicator Group.'
+                        'Set up the basic information for this program indicator group.'
                     )}
                 </StandardFormSectionDescription>
 
@@ -36,11 +36,13 @@ export const ProgramIndicatorGroupsFormFields = () => {
             </StandardFormSection>
             <StandardFormSection>
                 <StandardFormSectionTitle>
-                    <label htmlFor={'indicators'}>{i18n.t('Indicators')}</label>
+                    <label htmlFor={'programIndicators'}>
+                        {i18n.t('Program indicators')}
+                    </label>
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose the indicators to include in this program indicator group.'
+                        'Choose the program indicators to include in this program indicator group.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
@@ -49,13 +51,13 @@ export const ProgramIndicatorGroupsFormFields = () => {
                         query={{
                             resource: 'programIndicators',
                         }}
-                        leftHeader={i18n.t('Available indicators')}
-                        rightHeader={i18n.t('Selected indicators')}
+                        leftHeader={i18n.t('Available program indicators')}
+                        rightHeader={i18n.t('Selected program indicators')}
                         filterPlaceholder={i18n.t(
-                            'Search available indicators'
+                            'Search available program indicators'
                         )}
                         filterPlaceholderPicked={i18n.t(
-                            'Search selected indicators'
+                            'Search selected program indicators'
                         )}
                         dataTest="program-indicators-transfer"
                     />

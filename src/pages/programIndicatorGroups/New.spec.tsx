@@ -5,6 +5,7 @@ import schemaMock from '../../__mocks__/schema/programIndicatorGroupsSchema.json
 import { SECTIONS_MAP } from '../../lib'
 import {
     randomDhis2Id,
+    randomLongString,
     testProgramIndicatorGroup,
 } from '../../testUtils/builders'
 import { generateRenderer } from '../../testUtils/generateRenderer'
@@ -40,7 +41,7 @@ describe('Program indicator group add form tests', () => {
                 <TestComponentWithRouter
                     path={`/${section.namePlural}`}
                     customData={{
-                        programIndicators: (type: any, params: any) => {
+                        programIndicators: (type: any) => {
                             if (type === 'read') {
                                 return {
                                     pager: {},
@@ -96,7 +97,7 @@ describe('Program indicator group add form tests', () => {
             screen
         )
     })
-    it('should should return to the list view when cancelling', async () => {
+    it('should have a cancel button with a link back to the list view', async () => {
         const { screen } = await renderForm()
         const cancelButton = screen.getByTestId('form-cancel-link')
         expect(cancelButton).toBeVisible()
@@ -112,7 +113,7 @@ describe('Program indicator group add form tests', () => {
             screen
         )
     })
-    it('should submit the data and return to the list view on success', async () => {
+    it('should submit the data', async () => {
         const { screen, programIndicators } = await renderForm()
         const aName = faker.internet.userName()
         const aCode = faker.science.chemicalElement().symbol
@@ -140,12 +141,16 @@ describe('Program indicator group add form tests', () => {
     })
     it('should show an error if name field is too long', async () => {
         const { screen } = await renderForm()
+        const longText = randomLongString(231)
+        await uiActions.enterName(longText, screen)
         await uiAssertions.expectNameToErrorWhenExceedsLength(screen)
         await uiActions.submitForm(screen)
         expect(createMock).not.toHaveBeenCalled()
     })
     it('should show an error if code field is too long', async () => {
         const { screen } = await renderForm()
+        const longText = randomLongString(60)
+        await uiActions.enterCode(longText, screen)
         await uiAssertions.expectCodeToErrorWhenExceedsLength(screen)
         await uiActions.submitForm(screen)
         expect(createMock).not.toHaveBeenCalled()

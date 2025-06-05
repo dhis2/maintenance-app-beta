@@ -6,6 +6,7 @@ import { FOOTER_ID } from '../../app/layout/Layout'
 import { SECTIONS_MAP } from '../../lib'
 import {
     randomDhis2Id,
+    randomLongString,
     testFormProgramIndicatorGroup,
     testProgramIndicator,
     testProgramIndicatorGroup,
@@ -51,7 +52,7 @@ describe('Program indicator group edit form tests', () => {
                     path={`/${section.namePlural}/:id`}
                     initialEntries={[`/${section.namePlural}/${id}`]}
                     customData={{
-                        programIndicators: (type: any, params: any) => {
+                        programIndicators: (type: any) => {
                             if (type === 'read') {
                                 return {
                                     pager: {},
@@ -71,6 +72,7 @@ describe('Program indicator group edit form tests', () => {
                                 ) {
                                     return {
                                         pager: { total: 1 },
+                                        // this is mocking that the request comes back with any value
                                         programIndicatorGroups: [
                                             testProgramIndicatorGroup(),
                                         ],
@@ -128,7 +130,7 @@ describe('Program indicator group edit form tests', () => {
             screen
         )
     })
-    it('should should return to the list view when cancelling', async () => {
+    it('should have a cancel button with a link back to the list view', async () => {
         const { screen } = await renderForm()
 
         const cancelButton = screen.getByTestId('form-cancel-link')
@@ -146,7 +148,7 @@ describe('Program indicator group edit form tests', () => {
             screen
         )
     })
-    it('should submit the data and return to the list view on success', async () => {
+    it('should submit the data', async () => {
         const { screen, programIndicators, programIndicatorGroup } =
             await renderForm()
         const newCode = faker.science.chemicalElement().symbol
@@ -185,12 +187,16 @@ describe('Program indicator group edit form tests', () => {
 
     it('should show an error if name field is too long', async () => {
         const { screen } = await renderForm()
+        const longText = randomLongString(231)
+        await uiActions.enterName(longText, screen)
         await uiAssertions.expectNameToErrorWhenExceedsLength(screen)
         await uiActions.submitForm(screen)
         expect(updateMock).not.toHaveBeenCalled()
     })
     it('should show an error if code field is too long', async () => {
         const { screen } = await renderForm()
+        const longText = randomLongString(60)
+        await uiActions.enterCode(longText, screen)
         await uiAssertions.expectCodeToErrorWhenExceedsLength(screen)
         await uiActions.submitForm(screen)
         expect(updateMock).not.toHaveBeenCalled()
