@@ -32,8 +32,11 @@ export const BaseModelTransfer = <TModel extends DisplayableModel>({
     renderOption,
     ...transferProps
 }: BaseModelTransferProps<TModel>) => {
+    const safeSelected = selected || []
+    const safeAvailable = available || []
+
     const { allModelsMap, allTransferOptions } = useMemo(() => {
-        const allModels = available.concat(selected)
+        const allModels = safeAvailable.concat(safeSelected)
         const allModelsMap = new Map(allModels.map((o) => [o.id, o]))
         const allTransferOptions = Array.from(allModelsMap).map(([i, v]) =>
             toDisplayOption(v)
@@ -42,11 +45,11 @@ export const BaseModelTransfer = <TModel extends DisplayableModel>({
             allModelsMap,
             allTransferOptions,
         }
-    }, [available, selected])
+    }, [safeAvailable, safeSelected])
 
     const selectedTransferValues = useMemo(
-        () => selected.map((s) => s.id),
-        [selected]
+        () => safeSelected.map((s) => s.id),
+        [safeSelected]
     )
 
     const handleOnChange = useCallback(
@@ -55,7 +58,7 @@ export const BaseModelTransfer = <TModel extends DisplayableModel>({
             // loop through selected to keep order
             const selectedModels = selected
                 .map((id) => allModelsMap.get(id))
-                .filter((model) => !!model)
+                .filter((model) => !!model) as TModel[]
 
             onChange({
                 selected: selectedModels,
