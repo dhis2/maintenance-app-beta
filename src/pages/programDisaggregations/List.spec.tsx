@@ -13,7 +13,10 @@ import type { Program } from '../../types/generated'
 import { Component as ProgramIndicators } from './List'
 
 const deleteOrgUnitMock = jest.fn()
-const renderList = async ({ programs = [] as Partial<Program>[] }) => {
+const renderList = async ({
+    programs = [] as Partial<Program>[],
+    programsWithMappings = [] as Partial<Program>[],
+}) => {
     const routeOptions = {
         handle: { section: SECTIONS_MAP.programDisaggregation },
     }
@@ -24,20 +27,14 @@ const renderList = async ({ programs = [] as Partial<Program>[] }) => {
             customData={{
                 programs: (type: any, params: any) => {
                     if (type === 'read') {
-                        const programsWithCategoryMappingsSize = programs.map(
-                            (p) => ({
-                                ...p,
-                                categoryMappings:
-                                    p.categoryMappings?.length ?? 0,
-                            })
-                        )
-                        return { programs: programsWithCategoryMappingsSize }
+                        return { programs }
                     }
                     if (type === 'json-patch') {
                         deleteOrgUnitMock(params)
                         return { statusCode: 204 }
                     }
                 },
+                'programs/gist': () => ({ programs: programsWithMappings }),
             }}
             routeOptions={routeOptions}
         >
@@ -61,7 +58,7 @@ describe('Program Indicators list', () => {
             categoryMappings: [testCategoryMapping()],
         })
         const screen = await renderList({
-            programs: [programsWithMapping1, programsWithMapping2],
+            programsWithMappings: [programsWithMapping1, programsWithMapping2],
         })
         const listPrograms = screen.getAllByTestId('program-with-mapping')
         expect(listPrograms).toHaveLength(2)
@@ -75,7 +72,7 @@ describe('Program Indicators list', () => {
 
     it('should show a message if there is no programs with mappings', async () => {
         const screen = await renderList({
-            programs: [],
+            programsWithMappings: [],
         })
         const noProgramsMessage = screen.getByTestId(
             'no-programs-with-mappings'
@@ -88,7 +85,7 @@ describe('Program Indicators list', () => {
             categoryMappings: [testCategoryMapping()],
         })
         const screen = await renderList({
-            programs: [programsWithMapping],
+            programsWithMappings: [programsWithMapping],
         })
         const listProgram = screen.getByTestId('program-with-mapping')
         const editButton = within(listProgram).getByTestId('link-button')
@@ -104,7 +101,7 @@ describe('Program Indicators list', () => {
             categoryMappings: [testCategoryMapping()],
         })
         const screen = await renderList({
-            programs: [programsWithMapping],
+            programsWithMappings: [programsWithMapping],
         })
         const listProgram = screen.getByTestId('program-with-mapping')
         const deleteButton = within(listProgram).getByTestId(
@@ -143,7 +140,7 @@ describe('Program Indicators list', () => {
             categoryMappings: [testCategoryMapping()],
         })
         const screen = await renderList({
-            programs: [programsWithMapping],
+            programsWithMappings: [programsWithMapping],
         })
         const listProgram = screen.getByTestId('program-with-mapping')
         const deleteButton = within(listProgram).getByTestId(
