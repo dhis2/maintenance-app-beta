@@ -55,3 +55,9 @@
     font-size: 15px;
     margin-block-end: var(--spacers-dp8);
 }
+
+.programName {
+    margin-block-end: var(--spacers-dp8);
+    color: var(--colors-grey700);
+    font-size: 15px;
+}

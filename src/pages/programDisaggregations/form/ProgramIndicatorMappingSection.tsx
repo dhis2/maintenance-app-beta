@@ -31,8 +31,10 @@ import css from './ProgramIndicatorMapping.module.css'
 
 export const ProgramIndicatorMappingSection = ({
     initialProgramIndicators,
+    programName,
 }: {
     initialProgramIndicators: ProgramIndicatorWithMapping[]
+    programName?: string
 }) => {
     const programId = useParams().id
     const [programIndicators, setProgramIndicators] = React.useState<
@@ -53,6 +55,9 @@ export const ProgramIndicatorMappingSection = ({
         )
     return (
         <SectionedFormSection name="programIndicatorMappings">
+            <div className={css.programName}>
+                {i18n.t(`Program: ${programName}`, { nsSeparator: '~:~' })}
+            </div>
             <StandardFormSectionTitle>
                 {i18n.t('Program Indicator mapping')}
             </StandardFormSectionTitle>
@@ -110,7 +115,7 @@ const ProgramIndicatorCard = ({
             <div className={css.programIndicatorCardDeleted}>
                 <div className={css.deletedProgramIndicatorText}>
                     {i18n.t(
-                        '{{- programIndicator}} and all mappings will be deleted on save',
+                        'All mappings for {{- programIndicator}} will be removed on save',
                         { programIndicator: programIndicator.displayName }
                     )}
                 </div>
@@ -126,7 +131,7 @@ const ProgramIndicatorCard = ({
                         )
                     }}
                 >
-                    {i18n.t('Undo delete')}
+                    {i18n.t('Restore mappings')}
                 </Button>
             </div>
         )
