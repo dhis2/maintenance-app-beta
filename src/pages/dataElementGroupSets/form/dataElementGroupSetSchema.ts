@@ -1,14 +1,21 @@
 import { z } from 'zod'
-import { modelFormSchemas } from '../../../lib'
+import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 
-const { identifiable } = modelFormSchemas
-export const dataElementGroupSetSchema = identifiable.merge(
-    z
-        .object({
-            shortName: z.string().trim(),
-            code: z.string().trim(),
-            description: z.string().trim(),
-            dataElements: z.array(z.object({ id: z.string() })),
-        })
-        .partial()
-)
+const { identifiable, withAttributeValues } = modelFormSchemas
+
+export const dataElementGroupSetSchema = identifiable
+    .merge(withAttributeValues)
+    .extend({
+        name: z.string().trim(),
+        shortName: z.string().trim(),
+        code: z.string().trim().optional(),
+        description: z.string().trim().optional(),
+        dataElements: z.array(z.object({ id: z.string() })).default([]),
+        compulsory: z.boolean().default(false),
+        dataDimension: z.boolean().default(false),
+        dataElementGroups: z.array(z.object({ id: z.string() })).default([]),
+    })
+
+export const initialValues = getDefaults(dataElementGroupSetSchema)
+
+export const validate = createFormValidate(dataElementGroupSetSchema)
