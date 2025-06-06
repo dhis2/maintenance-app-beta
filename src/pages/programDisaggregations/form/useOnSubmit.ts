@@ -24,6 +24,14 @@ const cleanFormState = ({
             ([categoryId]) => !deletedCategorySet.has(categoryId)
         )
     )
+
+    // remove references to deleted mappings (note: you cannot delete all mappings through UI)
+    for (const cat in cleanedCategoryMappings) {
+        cleanedCategoryMappings[cat] = cleanedCategoryMappings[cat].filter(
+            (individualMapping) => !individualMapping.deleted
+        )
+    }
+
     const categoryMappingsSet = new Set(
         Object.values(cleanedCategoryMappings).flatMap((categoryMapping) =>
             categoryMapping.map((cm) => cm.id)
