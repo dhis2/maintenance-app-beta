@@ -147,7 +147,9 @@ export const CategoryMapping = React.memo(function CategoryMapping({
             )}
             <div className={css.mappingHeader}>
                 <div className={css.mappingText}>
-                    <span>{i18n.t('Mapping: ', { nsSeparator: '~:~' })}</span>
+                    <span>
+                        {i18n.t('Category mapping: ', { nsSeparator: '~:~' })}
+                    </span>
                     <span>{categoryMappingValue?.mappingName}</span>
                 </div>
 

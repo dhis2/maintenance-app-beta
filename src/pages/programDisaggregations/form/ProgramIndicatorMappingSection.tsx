@@ -15,6 +15,7 @@ import {
     SectionedFormSection,
     StandardFormSectionTitle,
     StandardFormField,
+    StandardFormSectionDescription,
 } from '../../../components'
 import {
     ModelSingleSelect,
@@ -59,8 +60,13 @@ export const ProgramIndicatorMappingSection = ({
                 {i18n.t(`Program: ${programName}`, { nsSeparator: '~:~' })}
             </div>
             <StandardFormSectionTitle>
-                {i18n.t('Program Indicator mapping')}
+                {i18n.t('Program indicator selection')}
             </StandardFormSectionTitle>
+            <StandardFormSectionDescription>
+                {i18n.t(
+                    'Choose program indicators and assign category combinations and category mappings to be used for disaggregation'
+                )}
+            </StandardFormSectionDescription>
             <ModelSingleSelect<DisplayableModel>
                 query={{
                     resource: 'programIndicators',
@@ -328,7 +334,7 @@ export const CategoryMappingSelect = ({
         <div>
             <div className={css.mappingSelectWrapper}>
                 <SingleSelectField
-                    label={`Mapping: ${category.displayName}`}
+                    label={`Category mapping: ${category.displayName}`}
                     onChange={(payload) =>
                         selectedMapping.input.onChange(payload.selected)
                     }
