@@ -96,6 +96,11 @@ export const ProgramIndicatorMappingSection = ({
                     <ProgramIndicatorCard
                         programIndicator={indicator}
                         key={indicator.id}
+                        initiallyExpanded={
+                            !initialProgramIndicators
+                                .map(({ id }) => id)
+                                .includes(indicator.id)
+                        }
                     />
                 ))}
             </div>
@@ -105,8 +110,10 @@ export const ProgramIndicatorMappingSection = ({
 
 const ProgramIndicatorCard = ({
     programIndicator,
+    initiallyExpanded = false,
 }: {
     programIndicator: DisplayableModel
+    initiallyExpanded?: boolean
 }) => {
     const { input: programIndicatorMappingsDeleted } = useField<string[]>(
         'deletedProgramIndicatorMappings'
@@ -146,6 +153,7 @@ const ProgramIndicatorCard = ({
     return (
         <CollapsibleCard
             key={programIndicator.id}
+            initiallyExpanded={initiallyExpanded}
             headerElement={
                 <CollapsibleCardHeader>
                     <CollapsibleCardTitle
