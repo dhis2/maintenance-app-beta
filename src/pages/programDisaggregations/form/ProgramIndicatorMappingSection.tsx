@@ -64,7 +64,7 @@ export const ProgramIndicatorMappingSection = ({
             </StandardFormSectionTitle>
             <StandardFormSectionDescription>
                 {i18n.t(
-                    'Choose program indicators and assign category combinations and category mappings to be used for disaggregation'
+                    'Choose program indicators and assign category combinations and category mappings to be used for disaggregation.'
                 )}
             </StandardFormSectionDescription>
             <ModelSingleSelect<DisplayableModel>
