@@ -338,11 +338,15 @@ export const CategoryMappingSelect = ({
         })
     }, [availableMappings])
 
+    const categoryMappingLabelPrefix = i18n.t(`Category mapping: `, {
+        nsSeparator: '~-~',
+    })
+
     return (
         <div>
             <div className={css.mappingSelectWrapper}>
                 <SingleSelectField
-                    label={`Category mapping: ${category.displayName}`}
+                    label={`${categoryMappingLabelPrefix} ${category.displayName}`}
                     onChange={(payload) =>
                         selectedMapping.input.onChange(payload.selected)
                     }
