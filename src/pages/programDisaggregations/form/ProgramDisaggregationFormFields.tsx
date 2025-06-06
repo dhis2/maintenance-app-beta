@@ -4,6 +4,7 @@ import {
     SectionedFormSection,
     SectionedFormSections,
     StandardFormSectionTitle,
+    StandardFormSectionDescription,
 } from '../../../components'
 import { ProgramIndicatorWithMapping } from '../Edit'
 import { CategoryMappingSection } from './CategoryMappingSection'
@@ -25,16 +26,26 @@ export const ProgramDisaggregationFormFields = ({
                 />
                 <SectionedFormSection name="disaggregationCategories">
                     <StandardFormSectionTitle>
-                        {i18n.t('Disaggregation categories')}
+                        {i18n.t('Disaggregation category mappings')}
                     </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        {i18n.t(
+                            'Define expressions to map individual data to category options.'
+                        )}
+                    </StandardFormSectionDescription>
                     <CategoryMappingSection
                         dataDimensionType={'DISAGGREGATION'}
                     />
                 </SectionedFormSection>
                 <SectionedFormSection name="attributeCategories">
                     <StandardFormSectionTitle>
-                        {i18n.t('Attribute categories')}
+                        {i18n.t('Attribute category mappings')}
                     </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        {i18n.t(
+                            'Define expressions to map individual data to category options.'
+                        )}
+                    </StandardFormSectionDescription>
                     <CategoryMappingSection dataDimensionType={'ATTRIBUTE'} />
                 </SectionedFormSection>
             </SectionedFormSections>

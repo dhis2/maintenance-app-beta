@@ -170,7 +170,10 @@ export const useOnSubmit = (
                     message: i18n.t(
                         `Error while updating mappings for program indicators with ids: ${errors
                             .map((r) => r.id)
-                            .join(' - ')}`
+                            .join(' - ')}`,
+                        {
+                            nsSeparator: '~-~',
+                        }
                     ),
                     error: true,
                 })
