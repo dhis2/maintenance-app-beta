@@ -4,4 +4,3 @@ export {
     initialValues,
     validate,
 } from './dataElementGroupSchema'
-export type { FormValues } from './types'

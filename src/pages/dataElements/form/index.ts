@@ -5,4 +5,3 @@ export {
     validate,
     dataElementValueFormatter,
 } from './dataElementSchema'
-export type { FormValues } from './types'
