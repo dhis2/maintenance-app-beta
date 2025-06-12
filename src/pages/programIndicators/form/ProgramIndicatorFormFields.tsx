@@ -29,7 +29,6 @@ export const ProgramIndicatorsFormFields = () => {
     const { input: aggregationTypeInput } = useField('aggregationType')
     const { input: analyticsTypeInput } = useField('analyticsType')
     const { input: programInput, meta: programMeta } = useField('program')
-    const { input: displayInFormInput } = useField('displayInForm')
     const programFilters = ['id,displayName'] as const
 
     const schema = useSchema(SECTIONS_MAP.programIndicator.name)
@@ -72,7 +71,7 @@ export const ProgramIndicatorsFormFields = () => {
                     </StandardFormField>
                     <StandardFormField>
                         <SingleSelectField
-                            selected={decimalsInput.value}
+                            selected={decimalsInput.value.toString()}
                             onChange={({ selected }) => {
                                 decimalsInput.onChange(selected)
                             }}
@@ -172,6 +171,13 @@ export const ProgramIndicatorsFormFields = () => {
                             'Attribute option combination for aggregate data export'
                         )}
                     />
+                    <FieldRFF
+                        component={InputFieldFF}
+                        name="aggregateExportDataElement"
+                        label={i18n.t(
+                            'Data element for aggregate data export\n'
+                        )}
+                    />
                 </SectionedFormSection>
                 <SectionedFormSection name="editExpression">
                     <StandardFormSectionTitle>
@@ -213,7 +219,7 @@ export const ProgramIndicatorsFormFields = () => {
                             component={TextAreaFieldFF}
                             inputWidth="400px"
                             name="filter"
-                            label={i18n.t('Expression')}
+                            label={i18n.t('Filter')}
                         />
                     </StandardFormField>
                 </SectionedFormSection>

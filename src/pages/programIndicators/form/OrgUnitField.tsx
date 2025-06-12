@@ -1,28 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
-import { useQuery } from '@tanstack/react-query'
-import React, { useMemo } from 'react'
-import { useField, useFormState } from 'react-final-form'
-import { useParams } from 'react-router-dom'
-import { StandardFormField } from '../../../components'
-import {
-    ModelSingleSelect,
-    ModelSingleSelectField,
-} from '../../../components/metadataFormControls/ModelSingleSelect'
-import {
-    DEFAULT_FIELD_FILTERS,
-    SECTIONS_MAP,
-    useBoundResourceQueryFn,
-    useSchema,
-} from '../../../lib'
-import { getFieldFilter } from '../../../lib/models/path'
-import {
-    PickWithFieldFilters,
-    Program,
-    ProgramIndicator,
-} from '../../../types/generated'
-import { DisplayableModel } from '../../../types/models'
-import { ProgramIndicatorValues } from '../Edit'
+import React, {useMemo} from 'react'
+import {useField, useFormState} from 'react-final-form'
+import {StandardFormField} from '../../../components'
+import {ModelSingleSelectField,} from '../../../components/metadataFormControls/ModelSingleSelect'
+import {DisplayableModel} from '../../../types/models'
 
 const PROGRAM_TYPE_WITH_REGISTRATION = 'WITH_REGISTRATION'
 const PROGRAM_TYPE_WITHOUT_REGISTRATION = 'WITHOUT_REGISTRATION'
@@ -60,11 +41,18 @@ export const OrgUnitField = () => {
     const programFilters = [
         'programStages[id,programStageDataElements[dataElement[id,displayName,valueType]]',
     ] as const
-    const { input: orgUnitFieldInput, meta: orgUnitFieldMeta } =
-        useField('analyticsType')
+    const { input: orgUnitFieldInput, meta: orgUnitFieldMeta } = useField(
+        'orgUnitField',
+        {
+            format: (value) => {
+                return { id: value }
+            },
+            parse: (value) => {
+                return value.id
+            },
+        }
+    )
     const formValues = useFormState({ subscription: { values: true } }).values
-    const queryFn = useBoundResourceQueryFn()
-    const schema = useSchema(SECTIONS_MAP.programIndicator.name)
     const programType = formValues.program?.programType
     const programId = formValues.program?.id
     const analyticsType = formValues.analyticsType
@@ -83,10 +71,12 @@ export const OrgUnitField = () => {
     }, [programType, formValues])
 
     const extractOrgUnitDataElementsFromProgramStage = (program) => {
+        if (!program.programStages) {
+            return []
+        }
         return program.programStages.flatMap(({ programStageDataElements }) =>
             programStageDataElements.reduce((acc, { dataElement }) => {
                 if (dataElement.valueType === ORG_UNIT_VALUE_TYPE) {
-                    console.log('******YUPPIIII', dataElement)
                     acc.push(dataElement)
                 }
                 return acc
@@ -95,6 +85,9 @@ export const OrgUnitField = () => {
     }
 
     const programAttributesForProgram = useMemo(() => {
+        if (!formValues.program.programTrackedEntityAttributes) {
+            return []
+        }
         return formValues.program.programTrackedEntityAttributes.reduce(
             (acc, { trackedEntityAttribute }) => {
                 if (trackedEntityAttribute.valueType === ORG_UNIT_VALUE_TYPE) {
@@ -161,7 +154,7 @@ export const OrgUnitField = () => {
                 }}
                 input={orgUnitFieldInput}
                 meta={orgUnitFieldMeta}
-                label={i18n.t('Organisationunit field')}
+                label={i18n.t('Organisation unit field')}
                 transform={getOptionsForSelect}
             />
         </StandardFormField>
