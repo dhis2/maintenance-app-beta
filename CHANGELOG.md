@@ -1,3 +1,10 @@
+## [0.47.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.0...v0.47.1) (2025-06-12)
+
+
+### Bug Fixes
+
+* upgrade multi calendar dates ([#580](https://github.com/dhis2/maintenance-app-beta/issues/580)) ([22be5ca](https://github.com/dhis2/maintenance-app-beta/commit/22be5ca3e1256b119e9a4c3ed7e1548720789413))
+
 # [0.47.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.46.0...v0.47.0) (2025-06-06)
 
 
