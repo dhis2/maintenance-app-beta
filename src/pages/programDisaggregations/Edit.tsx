@@ -128,29 +128,17 @@ export const Component = () => {
         <SectionedFormProvider
             formDescriptor={{
                 name: 'programDisaggregationForm',
-                label: i18n.t('program_disaggregation_form'),
+                label: i18n.t('Program Disaggregation Form'),
                 sections: [
                     {
                         name: 'programIndicatorMappings',
                         label: i18n.t('Program indicator mappings'),
-                        fields: [
-                            {
-                                name: 'programIndicatorMappings',
-                                label: i18n.t('program_indicator_mappings'),
-                            },
-                        ],
+                        fields: [],
                     },
                     {
                         name: 'disaggregationCategories',
                         label: i18n.t('Disaggregation categories'),
-                        fields: [
-                            {
-                                name: 'categoryMappings',
-                                label: i18n.t(
-                                    'disaggregation_category_mappings'
-                                ),
-                            },
-                        ],
+                        fields: [],
                     },
                     {
                         name: 'attributeCategories',
