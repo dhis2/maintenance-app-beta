@@ -1,0 +1,13 @@
+.analyticsPeriodBoundary {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacers-dp8);
+    align-items: center;
+}
+
+.analyticsPeriodBoundaryInputs {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacers-dp8);
+    align-items: center;
+}

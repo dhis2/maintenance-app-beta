@@ -1,16 +1,43 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
+import {
+    DefaultSectionedFormSidebar,
+    FormBase,
+    SectionedFormErrorNotice,
+    SectionedFormLayout,
+} from '../../components'
+import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
+import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
+import { ProgramIndicatorFormDescriptor } from './form/formDescriptor'
+import { ProgramIndicatorsFormFields } from './form/ProgramIndicatorFormFields'
+import { initialValues, validate } from './form/programIndicatorsFormSchema'
+
+const section = SECTIONS_MAP.programIndicator
 
 export const Component = () => {
-    const location = useLocation()
-
-    // Retrieve the programId from the location state
-    const { programId } = location.state || {}
     return (
-        <div>
-            <span>Placeholder for program disaggregations (New)</span>
-            <br />
-            <span>ProgramId: {programId}</span>
-        </div>
+        <SectionedFormProvider formDescriptor={ProgramIndicatorFormDescriptor}>
+            <FormBase
+                onSubmit={useOnSubmitNew({ section })}
+                initialValues={initialValues}
+                validate={validate}
+                subscription={{}}
+            >
+                {({ handleSubmit }) => {
+                    return (
+                        <>
+                            <SectionedFormLayout
+                                sidebar={<DefaultSectionedFormSidebar />}
+                            >
+                                <form onSubmit={handleSubmit}>
+                                    <ProgramIndicatorsFormFields />
+                                    <DefaultFormFooter />
+                                </form>
+                                <SectionedFormErrorNotice />
+                            </SectionedFormLayout>
+                        </>
+                    )
+                }}
+            </FormBase>
+        </SectionedFormProvider>
     )
 }

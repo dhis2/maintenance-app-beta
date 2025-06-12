@@ -1,28 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
-import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
 import { useField, useFormState } from 'react-final-form'
-import { useParams } from 'react-router-dom'
 import { StandardFormField } from '../../../components'
-import {
-    ModelSingleSelect,
-    ModelSingleSelectField,
-} from '../../../components/metadataFormControls/ModelSingleSelect'
-import {
-    DEFAULT_FIELD_FILTERS,
-    SECTIONS_MAP,
-    useBoundResourceQueryFn,
-    useSchema,
-} from '../../../lib'
-import { getFieldFilter } from '../../../lib/models/path'
-import {
-    PickWithFieldFilters,
-    Program,
-    ProgramIndicator,
-} from '../../../types/generated'
+import { ModelSingleSelectField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { DisplayableModel } from '../../../types/models'
-import { ProgramIndicatorValues } from '../Edit'
 
 const PROGRAM_TYPE_WITH_REGISTRATION = 'WITH_REGISTRATION'
 const PROGRAM_TYPE_WITHOUT_REGISTRATION = 'WITHOUT_REGISTRATION'
@@ -56,15 +37,33 @@ const staticOptions = {
     },
 }
 
+type DisplayableModelAndValueType = DisplayableModel & { valueType: string }
+type ProgramStagesType = {
+    programStages?: {
+        id: string
+        programStageDataElements: {
+            dataElement: DisplayableModelAndValueType
+        }[]
+    }[]
+    id: string
+}
+
 export const OrgUnitField = () => {
     const programFilters = [
-        'programStages[id,programStageDataElements[dataElement[id,displayName,valueType]]',
+        'programStages[id,programStageDataElements[dataElement[id,displayName,valueType]],id',
     ] as const
-    const { input: orgUnitFieldInput, meta: orgUnitFieldMeta } =
-        useField('analyticsType')
+    const { input: orgUnitFieldInput, meta: orgUnitFieldMeta } = useField(
+        'orgUnitField',
+        {
+            format: (value) => {
+                return { id: value }
+            },
+            parse: (value) => {
+                return value.id
+            },
+        }
+    )
     const formValues = useFormState({ subscription: { values: true } }).values
-    const queryFn = useBoundResourceQueryFn()
-    const schema = useSchema(SECTIONS_MAP.programIndicator.name)
     const programType = formValues.program?.programType
     const programId = formValues.program?.id
     const analyticsType = formValues.analyticsType
@@ -82,21 +81,43 @@ export const OrgUnitField = () => {
         return false
     }, [programType, formValues])
 
-    const extractOrgUnitDataElementsFromProgramStage = (program) => {
+    const extractOrgUnitDataElementsFromProgramStage = (
+        program: ProgramStagesType
+    ): DisplayableModel[] => {
+        if (!program.programStages) {
+            return []
+        }
+
         return program.programStages.flatMap(({ programStageDataElements }) =>
-            programStageDataElements.reduce((acc, { dataElement }) => {
-                if (dataElement.valueType === ORG_UNIT_VALUE_TYPE) {
-                    console.log('******YUPPIIII', dataElement)
-                    acc.push(dataElement)
-                }
-                return acc
-            }, [])
+            programStageDataElements.reduce(
+                (acc: DisplayableModel[], { dataElement }) => {
+                    if (dataElement.valueType === ORG_UNIT_VALUE_TYPE) {
+                        acc.push(dataElement)
+                    }
+                    return acc
+                },
+                []
+            )
         )
     }
 
-    const programAttributesForProgram = useMemo(() => {
+    const programAttributesForProgram: DisplayableModel[] = useMemo(() => {
+        if (!formValues.program.programTrackedEntityAttributes) {
+            return []
+        }
         return formValues.program.programTrackedEntityAttributes.reduce(
-            (acc, { trackedEntityAttribute }) => {
+            (
+                acc: DisplayableModel[],
+                {
+                    trackedEntityAttribute,
+                }: {
+                    trackedEntityAttribute: {
+                        id: string
+                        displayName: string
+                        valueType: string
+                    }
+                }
+            ) => {
                 if (trackedEntityAttribute.valueType === ORG_UNIT_VALUE_TYPE) {
                     acc.push({
                         id: trackedEntityAttribute.id,
@@ -109,10 +130,10 @@ export const OrgUnitField = () => {
         )
     }, [])
 
-    const getOptionsForSelect = (results: DisplayableModel[]) => {
+    const getOptionsForSelect = (values: ProgramStagesType[]) => {
         const dataElements =
-            results && results.length > 0
-                ? extractOrgUnitDataElementsFromProgramStage(results[0])
+            values && values.length > 0
+                ? extractOrgUnitDataElementsFromProgramStage(values[0])
                 : []
         if (programType === PROGRAM_TYPE_WITHOUT_REGISTRATION) {
             return [staticOptions.eventDefault, ...dataElements]
@@ -151,7 +172,7 @@ export const OrgUnitField = () => {
 
     return hasRequiredParams ? (
         <StandardFormField>
-            <ModelSingleSelectField<DisplayableModel>
+            <ModelSingleSelectField
                 query={{
                     resource: 'programs',
                     params: {
@@ -161,7 +182,7 @@ export const OrgUnitField = () => {
                 }}
                 input={orgUnitFieldInput}
                 meta={orgUnitFieldMeta}
-                label={i18n.t('Organisationunit field')}
+                label={i18n.t('Organisation unit field')}
                 transform={getOptionsForSelect}
             />
         </StandardFormField>

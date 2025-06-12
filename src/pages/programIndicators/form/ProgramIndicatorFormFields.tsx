@@ -19,9 +19,10 @@ import {
     StandardFormSectionTitle,
 } from '../../../components'
 import { ModelSingleSelectField } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { SECTIONS_MAP, useSchema } from '../../../lib'
+import { getConstantTranslation, SECTIONS_MAP, useSchema } from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
 import { ColorAndIconField } from '../../dataElements/fields'
+import { AnalyticsPeriodBoundariesField } from './AnalyticsPeriodBoundariesField'
 import { OrgUnitField } from './OrgUnitField'
 
 export const ProgramIndicatorsFormFields = () => {
@@ -29,7 +30,6 @@ export const ProgramIndicatorsFormFields = () => {
     const { input: aggregationTypeInput } = useField('aggregationType')
     const { input: analyticsTypeInput } = useField('analyticsType')
     const { input: programInput, meta: programMeta } = useField('program')
-    const { input: displayInFormInput } = useField('displayInForm')
     const programFilters = ['id,displayName'] as const
 
     const schema = useSchema(SECTIONS_MAP.programIndicator.name)
@@ -72,15 +72,16 @@ export const ProgramIndicatorsFormFields = () => {
                     </StandardFormField>
                     <StandardFormField>
                         <SingleSelectField
-                            selected={decimalsInput.value}
+                            selected={decimalsInput.value.toString()}
                             onChange={({ selected }) => {
                                 decimalsInput.onChange(selected)
+                                decimalsInput.onBlur()
                             }}
                             label={i18n.t('Decimals in data output')}
                         >
                             <SingleSelectOption
                                 label={'<No value>'}
-                                value={null}
+                                value={''}
                             />
                             {['0', '1', '2', '3', '4', '5'].map((option) => (
                                 <SingleSelectOption
@@ -96,14 +97,15 @@ export const ProgramIndicatorsFormFields = () => {
                             selected={aggregationTypeInput.value}
                             onChange={({ selected }) => {
                                 aggregationTypeInput.onChange(selected)
+                                aggregationTypeInput.onBlur()
                             }}
                             label={i18n.t('Aggregation type')}
                         >
-                            {schema.properties.aggregationType.constants.map(
+                            {schema.properties.aggregationType.constants?.map(
                                 (option) => (
                                     <SingleSelectOption
                                         key={option}
-                                        label={option}
+                                        label={getConstantTranslation(option)}
                                         value={option}
                                     />
                                 )
@@ -115,14 +117,15 @@ export const ProgramIndicatorsFormFields = () => {
                             selected={analyticsTypeInput.value}
                             onChange={({ selected }) => {
                                 analyticsTypeInput.onChange(selected)
+                                analyticsTypeInput.onBlur()
                             }}
                             label={i18n.t('Analytics type')}
                         >
-                            {schema.properties.analyticsType.constants.map(
+                            {schema.properties.analyticsType.constants?.map(
                                 (option) => (
                                     <SingleSelectOption
                                         key={option}
-                                        label={option}
+                                        label={getConstantTranslation(option)}
                                         value={option}
                                     />
                                 )
@@ -130,6 +133,7 @@ export const ProgramIndicatorsFormFields = () => {
                         </SingleSelectField>
                     </StandardFormField>
                     <OrgUnitField />
+                    <AnalyticsPeriodBoundariesField />
                     <StandardFormField>
                         <Field
                             name="displayInForm"
@@ -170,6 +174,13 @@ export const ProgramIndicatorsFormFields = () => {
                         name="aggregateExportAttributeOptionCombo"
                         label={i18n.t(
                             'Attribute option combination for aggregate data export'
+                        )}
+                    />
+                    <FieldRFF
+                        component={InputFieldFF}
+                        name="aggregateExportDataElement"
+                        label={i18n.t(
+                            'Data element for aggregate data export\n'
                         )}
                     />
                 </SectionedFormSection>
@@ -213,7 +224,7 @@ export const ProgramIndicatorsFormFields = () => {
                             component={TextAreaFieldFF}
                             inputWidth="400px"
                             name="filter"
-                            label={i18n.t('Expression')}
+                            label={i18n.t('Filter')}
                         />
                     </StandardFormField>
                 </SectionedFormSection>
