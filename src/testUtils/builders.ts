@@ -23,6 +23,10 @@ import { IndicatorTypeListSchema } from '../pages/indicatorTypes/form/IndicatorT
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
+import {
+    ProgramIndicatorGroupFormSchema,
+    ProgramIndicatorGroupListSchema,
+} from '../pages/programIndicatorGroups/form'
 import { ProgramIndicatorsListSchema } from '../pages/programIndicators/ProgramIndicatorsSchema'
 import {
     CategoryMapping,
@@ -37,6 +41,15 @@ export const randomDhis2Id = () =>
 
 function randomValueIn<T>(list: T[]) {
     return list[faker.number.int({ min: 0, max: list.length - 1 })]
+}
+
+export const randomLongString = (length: number) => {
+    const base = faker.lorem.paragraph() // Or .sentence(), .text()
+    let result = ''
+    while (result.length < length) {
+        result += base + ' '
+    }
+    return result.slice(0, length) // Trim to exact length
 }
 
 const mockeryMapper = (keyName: string) => {
@@ -201,6 +214,20 @@ export const testCategoryMapping = ({
     categoryId,
     mappingName,
     optionMappings,
+})
+
+export const testProgramIndicatorGroup = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(ProgramIndicatorGroupListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testFormProgramIndicatorGroup = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(ProgramIndicatorGroupFormSchema, { mockeryMapper }),
+    ...overwrites,
 })
 
 export const testProgram = ({

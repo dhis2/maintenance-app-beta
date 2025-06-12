@@ -15,6 +15,7 @@ import {
     SectionedFormSection,
     StandardFormSectionTitle,
     StandardFormField,
+    StandardFormSectionDescription,
 } from '../../../components'
 import {
     ModelSingleSelect,
@@ -31,8 +32,10 @@ import css from './ProgramIndicatorMapping.module.css'
 
 export const ProgramIndicatorMappingSection = ({
     initialProgramIndicators,
+    programName,
 }: {
     initialProgramIndicators: ProgramIndicatorWithMapping[]
+    programName?: string
 }) => {
     const programId = useParams().id
     const [programIndicators, setProgramIndicators] = React.useState<
@@ -53,9 +56,17 @@ export const ProgramIndicatorMappingSection = ({
         )
     return (
         <SectionedFormSection name="programIndicatorMappings">
+            <div className={css.programName}>
+                {i18n.t(`Program: ${programName}`, { nsSeparator: '~:~' })}
+            </div>
             <StandardFormSectionTitle>
-                {i18n.t('Program Indicator mapping')}
+                {i18n.t('Program indicator selection')}
             </StandardFormSectionTitle>
+            <StandardFormSectionDescription>
+                {i18n.t(
+                    'Choose program indicators and assign category combinations and category mappings to be used for disaggregation.'
+                )}
+            </StandardFormSectionDescription>
             <ModelSingleSelect<DisplayableModel>
                 query={{
                     resource: 'programIndicators',
@@ -85,6 +96,11 @@ export const ProgramIndicatorMappingSection = ({
                     <ProgramIndicatorCard
                         programIndicator={indicator}
                         key={indicator.id}
+                        initiallyExpanded={
+                            !initialProgramIndicators
+                                .map(({ id }) => id)
+                                .includes(indicator.id)
+                        }
                     />
                 ))}
             </div>
@@ -94,8 +110,10 @@ export const ProgramIndicatorMappingSection = ({
 
 const ProgramIndicatorCard = ({
     programIndicator,
+    initiallyExpanded = false,
 }: {
     programIndicator: DisplayableModel
+    initiallyExpanded?: boolean
 }) => {
     const { input: programIndicatorMappingsDeleted } = useField<string[]>(
         'deletedProgramIndicatorMappings'
@@ -110,7 +128,7 @@ const ProgramIndicatorCard = ({
             <div className={css.programIndicatorCardDeleted}>
                 <div className={css.deletedProgramIndicatorText}>
                     {i18n.t(
-                        '{{- programIndicator}} and all mappings will be deleted on save',
+                        'All mappings for {{- programIndicator}} will be removed on save',
                         { programIndicator: programIndicator.displayName }
                     )}
                 </div>
@@ -126,7 +144,7 @@ const ProgramIndicatorCard = ({
                         )
                     }}
                 >
-                    {i18n.t('Undo delete')}
+                    {i18n.t('Restore mappings')}
                 </Button>
             </div>
         )
@@ -135,6 +153,7 @@ const ProgramIndicatorCard = ({
     return (
         <CollapsibleCard
             key={programIndicator.id}
+            initiallyExpanded={initiallyExpanded}
             headerElement={
                 <CollapsibleCardHeader>
                     <CollapsibleCardTitle
@@ -319,11 +338,15 @@ export const CategoryMappingSelect = ({
         })
     }, [availableMappings])
 
+    const categoryMappingLabelPrefix = i18n.t(`Category mapping: `, {
+        nsSeparator: '~-~',
+    })
+
     return (
         <div>
             <div className={css.mappingSelectWrapper}>
                 <SingleSelectField
-                    label={`Mapping: ${category.displayName}`}
+                    label={`${categoryMappingLabelPrefix} ${category.displayName}`}
                     onChange={(payload) =>
                         selectedMapping.input.onChange(payload.selected)
                     }

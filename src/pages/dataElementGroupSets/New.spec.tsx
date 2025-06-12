@@ -1,7 +1,3 @@
-import { generateDefaultAddFormTests } from '../defaultFormTests'
-
-generateDefaultAddFormTests({ componentName: 'Data element group set' })
-
 xdescribe('Data element group set add form additional tests', () => {
     it('contain all needed field', () => {})
     it('should not submit when required values are missing', () => {})

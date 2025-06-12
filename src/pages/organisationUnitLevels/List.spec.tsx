@@ -16,19 +16,16 @@ import {
     testOrgUnit,
     testOrgUnitLevel,
 } from '../../testUtils/builders'
+import {
+    defaultUserDataStoreData,
+    error404,
+} from '../../testUtils/generateRenderer'
 import TestComponentWithRouter from '../../testUtils/TestComponentWithRouter'
 import { uiActions } from '../../testUtils/uiActions'
 import type { OrganisationUnit } from '../../types/generated'
 import { Component } from './List'
 
 describe('Organisation unit list tests', () => {
-    const error404 = new FetchError({
-        type: 'unknown',
-        message: '404 not found',
-        details: { httpStatusCode: 404 } as FetchError['details'],
-    })
-    const defaultUserDataStoreData = () =>
-        Promise.reject(new FetchError(error404))
     const originalWarn = console.warn
     jest.spyOn(console, 'warn').mockImplementation((value) => {
         if (!value.match(/No server timezone/)) {

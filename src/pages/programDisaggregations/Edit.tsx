@@ -39,8 +39,8 @@ const programIndicatorFieldFilters = [
     'name',
     'displayName',
     'categoryMappingIds',
-    'attributeCombo[id, displayName, dataDimensionType, categories[id, displayName,dataDimensionType,categoryOptions[id, displayName]]]',
-    'categoryCombo[id, displayName, dataDimensionType, categories[id, displayName,dataDimensionType,categoryOptions[id, displayName]]]',
+    'attributeCombo[id, displayName, dataDimensionType, categories[id, displayName,name,dataDimensionType,categoryOptions[id, displayName]]]',
+    'categoryCombo[id, displayName, dataDimensionType, categories[id, displayName,name,dataDimensionType,categoryOptions[id, displayName]]]',
     'aggregateExportDataElement',
 ] as const
 
@@ -196,6 +196,9 @@ export const Component = () => {
                                         <ProgramDisaggregationFormFields
                                             initialProgramIndicators={
                                                 initialProgramIndicators
+                                            }
+                                            programName={
+                                                programQuery?.data?.displayName
                                             }
                                         />
                                         <DefaultFormFooter />

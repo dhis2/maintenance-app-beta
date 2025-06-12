@@ -11,6 +11,7 @@ import css from './CategoriesSelector.module.css'
 export const categoriesFieldFilter = [
     'id',
     'displayName',
+    'name',
     'dataDimensionType',
     'categoryOptions[id,displayName]',
 ] as const
@@ -18,7 +19,7 @@ export const categoryComboFieldFilter = [
     'id',
     'displayName',
     'dataDimensionType',
-    'categories[id,displayName,dataDimensionType,categoryOptions[id,displayName]]',
+    'categories[id,displayName,name,dataDimensionType,categoryOptions[id,displayName]]',
 ] as const
 export type CategoryComboFromSelect = PickWithFieldFilters<
     CategoryCombo,

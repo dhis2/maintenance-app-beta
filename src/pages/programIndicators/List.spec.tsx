@@ -15,13 +15,11 @@ import {
     testProgram,
     testProgramIndicator,
 } from '../../testUtils/builders'
+import { defaultUserDataStoreData } from '../../testUtils/generateRenderer'
 import TestComponentWithRouter from '../../testUtils/TestComponentWithRouter'
 import { uiActions } from '../../testUtils/uiActions'
 import type { OrganisationUnit } from '../../types/generated'
-import {
-    defaultUserDataStoreData,
-    generateDefaultListTests,
-} from '../defaultListTests'
+import { generateDefaultListTests } from '../defaultListTests'
 import { Component } from './List'
 import resetAllMocks = jest.resetAllMocks
 
