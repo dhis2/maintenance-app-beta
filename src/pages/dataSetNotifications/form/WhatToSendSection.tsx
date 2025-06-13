@@ -30,6 +30,9 @@ export const WhatToSendSection: React.FC<WhatToSendSectionProps> = ({
                     name="dataSets"
                     query={{
                         resource: 'dataSets',
+                        params: {
+                            fields: 'id,name,displayName',
+                        },
                     }}
                     label={i18n.t('Select Data Sets')}
                     leftHeader={i18n.t('Available Data Sets')}

@@ -12,7 +12,10 @@ export function SubjectTemplateField({
     helpText?: string
     schemaSection: SchemaSection
 }) {
-    const validator = useValidator({ schemaSection, property: 'subjectTemplate' })
+    const validator = useValidator({
+        schemaSection,
+        property: 'subjectTemplate',
+    })
     const { meta } = useField('subjectTemplate', {
         subscription: { validating: true },
     })
@@ -42,7 +45,10 @@ export function MessageTemplateField({
     helpText?: string
     schemaSection: SchemaSection
 }) {
-    const validator = useValidator({ schemaSection, property: 'messageTemplate' })
+    const validator = useValidator({
+        schemaSection,
+        property: 'messageTemplate',
+    })
     const { meta } = useField('messageTemplate', {
         subscription: { validating: true },
     })

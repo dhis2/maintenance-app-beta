@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-06-04T21:50:58.159Z\n"
-"PO-Revision-Date: 2025-06-04T21:50:58.159Z\n"
+"POT-Creation-Date: 2025-06-13T12:11:58.947Z\n"
+"PO-Revision-Date: 2025-06-13T12:11:58.948Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1488,20 +1488,110 @@ msgstr ""
 "level means that data from lower levels will not be included in the "
 "aggregation."
 
+msgid "Edit Data Set Notification"
+msgstr "Edit Data Set Notification"
+
 msgid "What to send"
 msgstr "What to send"
 
-msgid "When to send"
-msgstr "When to send"
+msgid "When to send it"
+msgstr "When to send it"
+
+msgid "Notification trigger"
+msgstr "Notification trigger"
+
+msgid "Who to send it to"
+msgstr "Who to send it to"
+
+msgid "Recipient"
+msgstr "Recipient"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Error loading notification template or datasets"
+msgstr "Error loading notification template or datasets"
 
 msgid "Notification triggers"
 msgstr "Notification triggers"
 
-msgid "Who to send"
-msgstr "Who to send"
-
 msgid "Notification recipients"
 msgstr "Notification recipients"
+
+msgid "Enter the subject template for the notification."
+msgstr "Enter the subject template for the notification."
+
+msgid "Subject Template"
+msgstr "Subject Template"
+
+msgid "Enter the message template for the notification."
+msgstr "Enter the message template for the notification."
+
+msgid "Message Template"
+msgstr "Message Template"
+
+msgid "Select Data Sets"
+msgstr "Select Data Sets"
+
+msgid "Available Data Sets"
+msgstr "Available Data Sets"
+
+msgid "Selected Data Sets"
+msgstr "Selected Data Sets"
+
+msgid "Search data sets..."
+msgstr "Search data sets..."
+
+msgid "Filter selected data sets..."
+msgstr "Filter selected data sets..."
+
+msgid "Dataset Completion"
+msgstr "Dataset Completion"
+
+msgid "Scheduled Days"
+msgstr "Scheduled Days"
+
+msgid "Before"
+msgstr "Before"
+
+msgid "After"
+msgstr "After"
+
+msgid "Collective Summary"
+msgstr "Collective Summary"
+
+msgid "Single Notification"
+msgstr "Single Notification"
+
+msgid "Dataset Notification Trigger"
+msgstr "Dataset Notification Trigger"
+
+msgid "Send notification"
+msgstr "Send notification"
+
+msgid "days"
+msgstr "days"
+
+msgid "scheduled date"
+msgstr "scheduled date"
+
+msgid "Send notification as"
+msgstr "Send notification as"
+
+msgid "User Group"
+msgstr "User Group"
+
+msgid "Organisation Unit Contact"
+msgstr "Organisation Unit Contact"
+
+msgid "Notification Recipient"
+msgstr "Notification Recipient"
+
+msgid "User Group Recipients"
+msgstr "User Group Recipients"
+
+msgid "SMS"
+msgstr "SMS"
 
 msgid "Send complete notifications"
 msgstr "Send complete notifications"
@@ -2256,9 +2346,6 @@ msgstr "Disaggregation categories"
 
 msgid "Attribute categories"
 msgstr "Attribute categories"
-
-msgid "Error"
-msgstr "Error"
 
 msgid "Could not load programs or indicators data."
 msgstr "Could not load programs or indicators data."

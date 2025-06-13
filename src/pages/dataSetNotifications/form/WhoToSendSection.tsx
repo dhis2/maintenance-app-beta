@@ -10,31 +10,43 @@ const query = {
         resource: 'userGroups',
         params: {
             fields: 'id,displayName,name',
-            paging: false
-        }
-    }
+            paging: false,
+        },
+    },
 }
 
 export const WhoToSendSection = () => {
-    const { loading, error, data } = useDataQuery(query)
+    const { loading, data } = useDataQuery(query)
     const { input: recipientInput } = useField('notificationRecipient')
-    const isUserGroup = recipientInput.value === 'USER_GROUP' || !recipientInput.value
-    const isOrgUnitContact = recipientInput.value === 'ORGANISATION_UNIT_CONTACT'
+    const isUserGroup =
+        recipientInput.value === 'USER_GROUP' || !recipientInput.value
+    const isOrgUnitContact =
+        recipientInput.value === 'ORGANISATION_UNIT_CONTACT'
 
     const recipientOptions = [
         { label: i18n.t('User Group'), value: 'USER_GROUP' },
-        { label: i18n.t('Organisation Unit Contact'), value: 'ORGANISATION_UNIT_CONTACT' }
+        {
+            label: i18n.t('Organisation Unit Contact'),
+            value: 'ORGANISATION_UNIT_CONTACT',
+        },
     ]
 
-    const userGroupOptions = data?.userGroups?.userGroups?.map((group: any) => ({
-        label: group.displayName,
-        value: group.id
-    })) || []
+    const userGroupOptions =
+        (
+            data as {
+                userGroups?: {
+                    userGroups?: Array<{ id: string; displayName: string }>
+                }
+            }
+        )?.userGroups?.userGroups?.map((group) => ({
+            label: group.displayName,
+            value: group.id,
+        })) || []
 
     return (
         <div>
             <StandardFormField>
-                <FieldRFF<string>
+                <FieldRFF
                     component={SingleSelectFieldFF}
                     dataTest="formfields-notification-recipient"
                     label={i18n.t('Notification Recipient')}
@@ -47,11 +59,11 @@ export const WhoToSendSection = () => {
 
             {isUserGroup && (
                 <StandardFormField>
-                    <FieldRFF<string>
+                    <FieldRFF
                         component={SingleSelectFieldFF}
                         dataTest="formfields-user-group-recipient"
                         label={i18n.t('User Group Recipients')}
-                        name="userGroupRecipient"
+                        name="recipientUserGroup"
                         options={userGroupOptions}
                         loading={loading}
                         required
@@ -62,14 +74,14 @@ export const WhoToSendSection = () => {
             {isOrgUnitContact && (
                 <StandardFormField>
                     <div style={{ display: 'flex', gap: '24px' }}>
-                        <FieldRFF<boolean>
+                        <FieldRFF
                             component={CheckboxFieldFF}
                             dataTest="formfields-send-sms"
                             label={i18n.t('SMS')}
                             name="sendSms"
                             type="checkbox"
                         />
-                        <FieldRFF<boolean>
+                        <FieldRFF
                             component={CheckboxFieldFF}
                             dataTest="formfields-send-email"
                             label={i18n.t('Email')}

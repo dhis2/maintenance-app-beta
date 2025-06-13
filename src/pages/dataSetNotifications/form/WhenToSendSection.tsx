@@ -5,7 +5,7 @@ import { Field as FieldRFF, useField } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 
 export const WhenToSendSection = () => {
-    const { input: triggerInput } = useField('notificationTrigger')
+    const { input: triggerInput } = useField('dataSetNotificationTrigger')
     const isScheduledDays = triggerInput.value === 'SCHEDULED_DAYS'
 
     const triggerOptions = [
@@ -27,11 +27,11 @@ export const WhenToSendSection = () => {
     return (
         <div>
             <StandardFormField>
-                <FieldRFF<string | undefined>
+                <FieldRFF
                     component={SingleSelectFieldFF}
                     dataTest="formfields-notification-trigger"
                     label={i18n.t('Dataset Notification Trigger')}
-                    name="notificationTrigger"
+                    name="dataSetNotificationTrigger"
                     options={triggerOptions}
                     initialValue="COMPLETION"
                     required
@@ -49,17 +49,17 @@ export const WhenToSendSection = () => {
                             }}
                         >
                             <span>{i18n.t('Send notification')}</span>
-                            <FieldRFF<string>
+                            <FieldRFF
                                 component={InputFieldFF}
                                 dataTest="formfields-notification-days"
-                                name="notificationDays"
+                                name="relativeScheduledDays"
                                 type="number"
                                 min="1"
                                 inputWidth="80px"
                                 required
                             />
                             <span>{i18n.t('days')}</span>
-                            <FieldRFF<string | undefined>
+                            <FieldRFF
                                 component={SingleSelectFieldFF}
                                 dataTest="formfields-before-after"
                                 name="beforeAfter"
@@ -72,11 +72,11 @@ export const WhenToSendSection = () => {
                     </StandardFormField>
 
                     <StandardFormField>
-                        <FieldRFF<string | undefined>
+                        <FieldRFF
                             component={SingleSelectFieldFF}
                             dataTest="formfields-notification-type"
                             label={i18n.t('Send notification as')}
-                            name="notificationType"
+                            name="sendStrategy"
                             options={notificationTypeOptions}
                             initialValue="NONE"
                             required
