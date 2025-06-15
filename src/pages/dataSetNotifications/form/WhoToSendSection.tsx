@@ -1,9 +1,9 @@
-import React from 'react'
+import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF, CheckboxFieldFF } from '@dhis2/ui'
+import React from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import { StandardFormField } from '../../../components'
-import { useDataQuery } from '@dhis2/app-runtime'
 
 const query = {
     userGroups: {
@@ -46,27 +46,37 @@ export const WhoToSendSection = () => {
     return (
         <div>
             <StandardFormField>
-                <FieldRFF
-                    component={SingleSelectFieldFF}
-                    dataTest="formfields-notification-recipient"
-                    label={i18n.t('Notification Recipient')}
+                <FieldRFF<string | undefined>
                     name="notificationRecipient"
-                    options={recipientOptions}
                     initialValue="USER_GROUP"
                     required
+                    render={(props) => (
+                        <SingleSelectFieldFF
+                            {...props}
+                            inputWidth="400px"
+                            dataTest="formfields-notification-recipient"
+                            label={i18n.t('Notification Recipient')}
+                            options={recipientOptions}
+                        />
+                    )}
                 />
             </StandardFormField>
 
             {isUserGroup && (
                 <StandardFormField>
-                    <FieldRFF
-                        component={SingleSelectFieldFF}
-                        dataTest="formfields-user-group-recipient"
-                        label={i18n.t('User Group Recipients')}
+                    <FieldRFF<string | undefined>
                         name="recipientUserGroup"
-                        options={userGroupOptions}
-                        loading={loading}
                         required
+                        render={(props) => (
+                            <SingleSelectFieldFF
+                                {...props}
+                                dataTest="formfields-user-group-recipient"
+                                label={i18n.t('User Group Recipients')}
+                                inputWidth="400px"
+                                options={userGroupOptions}
+                                loading={loading}
+                            />
+                        )}
                     />
                 </StandardFormField>
             )}

@@ -1,24 +1,21 @@
-import React from 'react'
+import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { useParams } from 'react-router-dom'
-import { Form } from 'react-final-form'
-import { useDataQuery, useDataEngine } from '@dhis2/app-runtime'
-import { useQuery } from '@tanstack/react-query'
 import { Button, CircularLoader, NoticeBox } from '@dhis2/ui'
-
+import { useQuery } from '@tanstack/react-query'
+import React, { useMemo } from 'react'
+import { Form } from 'react-final-form'
+import { useParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
     DefaultSectionedFormSidebar,
     SectionedFormLayout,
 } from '../../components'
-
 import {
     SectionedFormProvider,
     SECTIONS_MAP,
     DEFAULT_FIELD_FILTERS,
     useOnSubmitEdit,
 } from '../../lib'
-
 import { DataSetNotificationsFormFields } from './form/DataSetNotificationsFormFields'
 import {
     getInitialValuesFromTemplate,
@@ -26,10 +23,20 @@ import {
     DataSetNotificationFormValues,
 } from './form/getInitialValuesFromTemplate'
 
+type Params = {
+    id: string
+}
+
+type DataSet = {
+    id: string
+    name: string
+    displayName: string
+}
+
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     'name',
-    "code",
+    'code',
     'subjectTemplate',
     'messageTemplate',
     'notificationRecipient',
@@ -42,19 +49,32 @@ const fieldFilters = [
     'deliveryChannels',
 ]
 
-const TEMPLATE_QUERY = {
-    notificationTemplate: {
-        resource: 'dataSetNotificationTemplates',
-        id: ({ id }: { id: string }) => id,
-        params: {
-            fields: fieldFilters.join(','),
+// --------------------
+// Query Helpers
+// --------------------
+
+const fetchNotificationTemplate = async (
+    engine: any,
+    id: string
+): Promise<DataSetNotificationTemplate> => {
+    const { notificationTemplate } = await engine.query({
+        notificationTemplate: {
+            resource: `dataSetNotificationTemplates/${id}`,
+            params: {
+                fields: fieldFilters.join(','),
+            },
         },
-    },
+    })
+    return notificationTemplate
 }
 
-const fetchDataSetsByIds = async (engine: any, ids: string[]) => {
-    if (!ids.length) return []
-
+const fetchDataSetsByIds = async (
+    engine: any,
+    ids: string[]
+): Promise<DataSet[]> => {
+    if (!ids.length) {
+        return []
+    }
     const { dataSets } = await engine.query({
         dataSets: {
             resource: 'dataSets',
@@ -64,28 +84,33 @@ const fetchDataSetsByIds = async (engine: any, ids: string[]) => {
             },
         },
     })
-
     return dataSets ?? []
 }
 
+// --------------------
+// Component
+// --------------------
+
 export const Component = () => {
-    const { id: templateId } = useParams<{ id: string }>()
-    const section = SECTIONS_MAP.dataSetNotificationTemplate
+    const { id: templateId } = useParams<Params>()
     const dataEngine = useDataEngine()
+    const section = SECTIONS_MAP.dataSetNotificationTemplate
 
     const {
-        data: templateResponse,
-        loading: loadingTemplate,
-        error: errorTemplate,
+        data: template,
+        isLoading: loadingTemplate,
+        isError: errorTemplate,
         refetch: refetchTemplate,
-    } = useDataQuery(TEMPLATE_QUERY, {
-        variables: { id: templateId },
-        lazy: !templateId,
+    } = useQuery({
+        queryKey: ['notificationTemplate', templateId],
+        queryFn: () => fetchNotificationTemplate(dataEngine, templateId!),
+        enabled: !!templateId,
     })
 
-    const template = templateResponse?.notificationTemplate
-    const datasetIds =
-        template?.dataSets?.map((ds: { id: string }) => ds.id) ?? []
+    const datasetIds = useMemo(
+        () => template?.dataSets?.map((ds) => ds.id) ?? [],
+        [template]
+    )
 
     const {
         data: fetchedDataSets = [],
@@ -95,48 +120,51 @@ export const Component = () => {
     } = useQuery({
         queryKey: ['datasets', datasetIds],
         queryFn: () => fetchDataSetsByIds(dataEngine, datasetIds),
-        enabled: !!template && datasetIds.length > 0,
+        enabled: datasetIds.length > 0,
     })
 
     const isLoading = loadingTemplate || loadingDataSets
     const isError = errorTemplate || errorDataSets
 
-    const onSubmit = useOnSubmitEdit<DataSetNotificationTemplate>({
+    const onSubmit = useOnSubmitEdit({
         section,
         modelId: templateId!,
     })
 
-    const formDescriptor = {
-        name: 'editDataSetNotificationForm',
-        label: i18n.t('Edit Data Set Notification'),
-        sections: [
-            {
-                name: 'whatToSend',
-                label: i18n.t('What to send'),
-                fields: [{ name: 'name', label: i18n.t('Name') }],
-            },
-            {
-                name: 'whenToSend',
-                label: i18n.t('When to send it'),
-                fields: [
-                    {
-                        name: 'dataSetNotificationTrigger',
-                        label: i18n.t('Notification trigger'),
-                    },
-                ],
-            },
-            {
-                name: 'whoToSend',
-                label: i18n.t('Who to send it to'),
-                fields: [
-                    {
-                        name: 'notificationRecipient',
-                        label: i18n.t('Recipient'),
-                    },
-                ],
-            },
-        ],
-    }
+    const formDescriptor = useMemo(
+        () => ({
+            name: 'editDataSetNotificationForm',
+            label: i18n.t('Edit Data Set Notification'),
+            sections: [
+                {
+                    name: 'whatToSend',
+                    label: i18n.t('What to send'),
+                    fields: [{ name: 'name', label: i18n.t('Name') }],
+                },
+                {
+                    name: 'whenToSend',
+                    label: i18n.t('When to send it'),
+                    fields: [
+                        {
+                            name: 'dataSetNotificationTrigger',
+                            label: i18n.t('Notification trigger'),
+                        },
+                    ],
+                },
+                {
+                    name: 'whoToSend',
+                    label: i18n.t('Who to send it to'),
+                    fields: [
+                        {
+                            name: 'notificationRecipient',
+                            label: i18n.t('Recipient'),
+                        },
+                    ],
+                },
+            ],
+        }),
+        []
+    )
 
     if (isError) {
         return (
@@ -158,27 +186,19 @@ export const Component = () => {
 
     if (isLoading || !template) {
         return (
-            <div
-                style={{
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-            >
+            <div className="dhis2-u-center" style={{ height: '100%' }}>
                 <CircularLoader />
             </div>
         )
     }
-    console.log({ fetchedDataSets, template })
+
     return (
         <SectionedFormProvider formDescriptor={formDescriptor}>
             <Form<DataSetNotificationFormValues>
                 onSubmit={onSubmit}
                 initialValues={getInitialValuesFromTemplate(
                     template,
-                    fetchedDataSets
+                    fetchedDataSets.dataSets
                 )}
             >
                 {({ handleSubmit }) => (

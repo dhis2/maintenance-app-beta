@@ -1,6 +1,6 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF, InputFieldFF } from '@dhis2/ui'
+import React from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 
@@ -27,13 +27,18 @@ export const WhenToSendSection = () => {
     return (
         <div>
             <StandardFormField>
-                <FieldRFF
-                    component={SingleSelectFieldFF}
+                <FieldRFF<string | undefined>
                     dataTest="formfields-notification-trigger"
-                    label={i18n.t('Dataset Notification Trigger')}
                     name="dataSetNotificationTrigger"
-                    options={triggerOptions}
                     initialValue="COMPLETION"
+                    render={(props) => (
+                        <SingleSelectFieldFF
+                            {...props}
+                            label={i18n.t('Dataset Notification Trigger')}
+                            inputWidth="500px"
+                            options={triggerOptions}
+                        />
+                    )}
                     required
                 />
             </StandardFormField>
@@ -59,12 +64,17 @@ export const WhenToSendSection = () => {
                                 required
                             />
                             <span>{i18n.t('days')}</span>
-                            <FieldRFF
-                                component={SingleSelectFieldFF}
+                            <FieldRFF<string | undefined>
                                 dataTest="formfields-before-after"
                                 name="beforeAfter"
-                                options={beforeAfterOptions}
                                 initialValue="BEFORE"
+                                render={(props) => (
+                                    <SingleSelectFieldFF
+                                        {...props}
+                                        options={beforeAfterOptions}
+                                        inputWidth="120px"
+                                    />
+                                )}
                                 required
                             />
                             <span>{i18n.t('scheduled date')}</span>
@@ -72,13 +82,18 @@ export const WhenToSendSection = () => {
                     </StandardFormField>
 
                     <StandardFormField>
-                        <FieldRFF
-                            component={SingleSelectFieldFF}
+                        <FieldRFF<string | undefined>
+                            inputWidth="500px"
                             dataTest="formfields-notification-type"
-                            label={i18n.t('Send notification as')}
                             name="sendStrategy"
-                            options={notificationTypeOptions}
                             initialValue="NONE"
+                            render={(props) => (
+                                <SingleSelectFieldFF
+                                    {...props}
+                                    label={i18n.t('Send notification as')}
+                                    options={notificationTypeOptions}
+                                />
+                            )}
                             required
                         />
                     </StandardFormField>

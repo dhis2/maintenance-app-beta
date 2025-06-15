@@ -1,12 +1,12 @@
-import React from 'react'
 import i18n from '@dhis2/d2-i18n'
+import React from 'react'
 import {
     SectionedFormSection,
     SectionedFormSections,
     StandardFormSectionTitle,
 } from '../../../components'
-import { WhatToSendSection } from './WhatToSendSection'
 import { SECTIONS_MAP } from '../../../lib'
+import { WhatToSendSection } from './WhatToSendSection'
 import { WhenToSendSection } from './WhenToSendSection'
 import { WhoToSendSection } from './WhoToSendSection'
 

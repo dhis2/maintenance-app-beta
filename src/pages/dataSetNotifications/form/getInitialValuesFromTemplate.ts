@@ -1,9 +1,7 @@
 export interface DataSet {
-    dataSets: {
-        id: string
-        name: string
-        displayName: string
-    }
+    id: string
+    name: string
+    displayName: string
 }
 
 export interface DataSetNotificationTemplate {
@@ -35,7 +33,7 @@ export type DataSetNotificationFormValues = Omit<
 
 export const getInitialValuesFromTemplate = (
     template: DataSetNotificationTemplate,
-    fetchedDataSets: DataSet
+    fetchedDataSets: DataSet[] | []
 ) => {
     return {
         name: template.name,
@@ -44,12 +42,12 @@ export const getInitialValuesFromTemplate = (
         messageTemplate: template.messageTemplate,
         notificationRecipient: template.notificationRecipient,
         dataSetNotificationTrigger: template.dataSetNotificationTrigger,
-        relativeScheduledDays: template.relativeScheduledDays?.toString(),
-        beforeAfter: template.beforeAfter,
+        relativeScheduledDays: template.relativeScheduledDays,
+        beforeAfter: template.beforeAfter || '',
         sendStrategy: template.sendStrategy,
         userGroupRecipient: template.recipientUserGroup?.id,
-        dataSets: fetchedDataSets.dataSets,
-        sendEmail: template.deliveryChannels?.includes('EMAIL') || false,
-        sendSms: template.deliveryChannels?.includes('SMS') || false,
+        dataSets: fetchedDataSets,
+        sendEmail: !!template.deliveryChannels?.includes('EMAIL'),
+        sendSms: !!template.deliveryChannels?.includes('SMS'),
     }
 }

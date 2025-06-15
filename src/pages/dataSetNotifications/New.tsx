@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import { CircularLoader } from '@dhis2/ui'
 import React from 'react'
 import { Form } from 'react-final-form'
 import {
@@ -9,7 +10,6 @@ import {
 import { SectionedFormProvider } from '../../lib'
 import { DataSetNotificationsFormFields } from './form/DataSetNotificationsFormFields'
 import { useOnSaveNotifications } from './form/useOnSaveNotifications'
-import { CircularLoader } from '@dhis2/ui'
 
 const section = {
     name: 'dataSetNotificationsForm',

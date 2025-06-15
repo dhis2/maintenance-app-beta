@@ -1,14 +1,13 @@
-import React from 'react'
-
 import i18n from '@dhis2/d2-i18n'
+import React from 'react'
 import {
     CodeField,
     ModelTransferField,
     NameField,
     StandardFormField,
 } from '../../../components'
-import { MessageTemplateField, SubjectTemplateField } from './TemplateFields'
 import { SchemaSection } from '../../../lib'
+import { MessageTemplateField, SubjectTemplateField } from './TemplateFields'
 
 type WhatToSendSectionProps = {
     section: SchemaSection

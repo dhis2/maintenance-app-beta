@@ -1,12 +1,12 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { useMemo } from 'react'
-import { useCreateModel } from '../../../lib/form/useCreateModel'
 import {
     getSectionPath,
     SECTIONS_MAP,
     useNavigateWithSearchState,
 } from '../../../lib'
 import { createFormError } from '../../../lib/form/createFormError'
+import { useCreateModel } from '../../../lib/form/useCreateModel'
 
 const section = SECTIONS_MAP.dataSetNotificationTemplate
 
@@ -44,8 +44,12 @@ export const useOnSaveNotifications = () => {
 
                 if (notificationRecipient === 'ORGANISATION_UNIT_CONTACT') {
                     const deliveryChannels = []
-                    if (sendSms) deliveryChannels.push('SMS')
-                    if (sendEmail) deliveryChannels.push('EMAIL')
+                    if (sendSms) {
+                        deliveryChannels.push('SMS')
+                    }
+                    if (sendEmail) {
+                        deliveryChannels.push('EMAIL')
+                    }
                     if (deliveryChannels.length) {
                         payload.deliveryChannels = deliveryChannels
                     }

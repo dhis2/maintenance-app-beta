@@ -65,6 +65,7 @@ export function MessageTemplateField({
             label={i18n.t('{{fieldLabel}} (required)', {
                 fieldLabel: i18n.t('Message Template'),
             })}
+            inputWidth="400px"
             name="messageTemplate"
             helpText={helpString}
             validate={(messageTemplate?: string) => validator(messageTemplate)}
