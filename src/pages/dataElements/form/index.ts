@@ -1,3 +1,7 @@
 export { DataElementFormFields } from './DataElementFormFields'
-export { dataElementSchema } from './dataElementSchema'
-export type { FormValues } from './types'
+export {
+    dataElementSchema,
+    initialValues,
+    validate,
+    dataElementValueFormatter,
+} from './dataElementSchema'
