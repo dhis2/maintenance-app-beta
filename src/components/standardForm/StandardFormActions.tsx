@@ -6,7 +6,10 @@ import classes from './StandardFormActions.module.css'
 
 function LoadingIcon() {
     return (
-        <span className={classes.submitButtonLoadingIcon}>
+        <span
+            className={classes.submitButtonLoadingIcon}
+            data-test="loading-icon"
+        >
             <CircularLoader small />
         </span>
     )
@@ -33,11 +36,18 @@ export function StandardFormActions({
                 disabled={submitting}
                 type="submit"
                 onClick={onSubmitClick}
+                dataTest="form-submit-button"
             >
                 {submitting && <LoadingIcon />}
                 {submitLabel}
             </Button>
-            <LinkButton secondary small disabled={submitting} to={cancelTo}>
+            <LinkButton
+                secondary
+                small
+                disabled={submitting}
+                to={cancelTo}
+                dataTest="form-cancel-link"
+            >
                 {cancelLabel}
             </LinkButton>
         </ButtonStrip>

@@ -5,8 +5,13 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+<<<<<<< DHIS2-19690/dataset-notifications-form
 "POT-Creation-Date: 2025-06-16T06:01:46.380Z\n"
 "PO-Revision-Date: 2025-06-16T06:01:46.380Z\n"
+=======
+"POT-Creation-Date: 2025-06-06T11:15:03.568Z\n"
+"PO-Revision-Date: 2025-06-06T11:15:03.568Z\n"
+>>>>>>> master
 
 msgid "schemas"
 msgstr "schemas"
@@ -2362,14 +2367,14 @@ msgstr "Rename category mapping"
 msgid "Apply"
 msgstr "Apply"
 
-msgid "{{- categoryMappingName}} mapping will be deleted on save"
-msgstr "{{- categoryMappingName}} mapping will be deleted on save"
+msgid "{{- categoryMappingName}} mapping will be removed on save"
+msgstr "{{- categoryMappingName}} mapping will be removed on save"
 
-msgid "Undo delete"
-msgstr "Undo delete"
+msgid "Restore mapping"
+msgstr "Restore mapping"
 
-msgid "Mapping: "
-msgstr "Mapping: "
+msgid "Category mapping: "
+msgstr "Category mapping: "
 
 msgid "Invalid expression"
 msgstr "Invalid expression"
@@ -2396,23 +2401,42 @@ msgstr "Suggested based on Program Indicator selections"
 msgid "Add category"
 msgstr "Add category"
 
-msgid "{{- categoryName}} and all mappings will be deleted on save"
-msgstr "{{- categoryName}} and all mappings will be deleted on save"
+msgid "All mappings for {{- categoryName}} will be removed on save"
+msgstr "All mappings for {{- categoryName}} will be removed on save"
 
-msgid "Remove category"
-msgstr "Remove category"
+msgid "Restore mappings"
+msgstr "Restore mappings"
+
+msgid "Remove category mappings"
+msgstr "Remove category mappings"
 
 msgid "Add mapping"
 msgstr "Add mapping"
 
-msgid "Program Indicator mapping"
-msgstr "Program Indicator mapping"
+msgid "Disaggregation category mappings"
+msgstr "Disaggregation category mappings"
+
+msgid "Define expressions to map individual data to category options."
+msgstr "Define expressions to map individual data to category options."
+
+msgid "Attribute category mappings"
+msgstr "Attribute category mappings"
+
+msgid "Program indicator selection"
+msgstr "Program indicator selection"
+
+msgid ""
+"Choose program indicators and assign category combinations and category "
+"mappings to be used for disaggregation."
+msgstr ""
+"Choose program indicators and assign category combinations and category "
+"mappings to be used for disaggregation."
 
 msgid "Add a program indicator"
 msgstr "Add a program indicator"
 
-msgid "{{- programIndicator}} and all mappings will be deleted on save"
-msgstr "{{- programIndicator}} and all mappings will be deleted on save"
+msgid "All mappings for {{- programIndicator}} will be removed on save"
+msgstr "All mappings for {{- programIndicator}} will be removed on save"
 
 msgid "Program Indicator:"
 msgstr "Program Indicator:"
@@ -2434,6 +2458,15 @@ msgstr "No changes to save"
 
 msgid "Error while saving disaggregation categories"
 msgstr "Error while saving disaggregation categories"
+
+msgid ""
+"Error while updating mappings for program indicators with ids: ${errors\n"
+"                            .map((r) => r.id)\n"
+"                            .join(' - ')}"
+msgstr ""
+"Error while updating mappings for program indicators with ids: ${errors\n"
+"                            .map((r) => r.id)\n"
+"                            .join(' - ')}"
 
 msgid "Could not delete program mappings"
 msgstr "Could not delete program mappings"
@@ -2458,6 +2491,24 @@ msgstr "This action cannot be undone."
 
 msgid "Are you sure you want to delete this program mapping configuration?"
 msgstr "Are you sure you want to delete this program mapping configuration?"
+
+msgid "Set up the basic information for this program indicator group."
+msgstr "Set up the basic information for this program indicator group."
+
+msgid "Choose the program indicators to include in this program indicator group."
+msgstr "Choose the program indicators to include in this program indicator group."
+
+msgid "Available program indicators"
+msgstr "Available program indicators"
+
+msgid "Selected program indicators"
+msgstr "Selected program indicators"
+
+msgid "Search available program indicators"
+msgstr "Search available program indicators"
+
+msgid "Search selected program indicators"
+msgstr "Search selected program indicators"
 
 msgctxt "form"
 msgid "data_set-notifications"
