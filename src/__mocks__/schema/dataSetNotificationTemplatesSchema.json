@@ -1,0 +1,59 @@
+{
+    "name": "dataSetNotificationTemplate",
+    "fields": [
+        {
+            "name": "id",
+            "type": "string",
+            "label": "ID"
+        },
+        {
+            "name": "displayName",
+            "type": "string",
+            "label": "Display Name"
+        },
+        {
+            "name": "notificationTrigger",
+            "type": "enum",
+            "label": "Notification Trigger",
+            "options": ["COMPLETION", "SCHEDULED_DAYS"]
+        },
+        {
+            "name": "notificationRecipient",
+            "type": "enum",
+            "label": "Recipient",
+            "options": ["ORGANISATION_UNIT_CONTACT", "USER_GROUP"]
+        },
+        {
+            "name": "deliveryChannels",
+            "type": "array",
+            "label": "Delivery Channels",
+            "options": ["SMS", "EMAIL"]
+        },
+        {
+            "name": "relativeScheduledDays",
+            "type": "number",
+            "label": "Relative Scheduled Days"
+        },
+        {
+            "name": "subjectTemplate",
+            "type": "string",
+            "label": "Subject Template"
+        },
+        {
+            "name": "messageTemplate",
+            "type": "string",
+            "label": "Message Template"
+        },
+        {
+            "name": "sendStrategy",
+            "type": "enum",
+            "label": "Send Strategy",
+            "options": ["SINGLE_NOTIFICATION", "COLLECTIVE_SUMMARY"]
+        },
+        {
+            "name": "dataSets",
+            "type": "array",
+            "label": "Associated Data Sets"
+        }
+    ]
+}

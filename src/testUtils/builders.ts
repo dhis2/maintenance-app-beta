@@ -22,6 +22,7 @@ import {
     OptionMapping,
     OrganisationUnit,
 } from '../types/generated'
+import { DataSetNotificationTemplateSchema } from '../pages/dataSetNotificationTemplates/form/DataSetNotificationTemplateSchema'
 
 const { withDefaultListColumns } = modelFormSchemas
 
@@ -158,6 +159,15 @@ export const testDataElement = (overwrites: Record<any, any> = {}) => ({
 
 export const testDataSet = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(dataSetListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testDataSetNotificationTemplate = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(DataSetNotificationTemplateSchema, {
         mockeryMapper,
     }),
     ...overwrites,
