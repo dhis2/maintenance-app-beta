@@ -11,6 +11,7 @@ import { categoryOptionListSchema } from '../pages/categoryOptions/form/category
 import { dataElementGroupSchema } from '../pages/dataElementGroups/form'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementSchema } from '../pages/dataElements/form'
+import { DataSetNotificationTemplateSchema } from '../pages/dataSetNotificationTemplates/form/DataSetNotificationTemplateSchema'
 import { dataSetListSchema } from '../pages/dataSetsWip/form/dataSetFormSchema'
 import { IndicatorSchema } from '../pages/indicators/form/IndicatorSchema'
 import { IndicatorTypeListSchema } from '../pages/indicatorTypes/form/IndicatorTypesSchema'
@@ -22,7 +23,6 @@ import {
     OptionMapping,
     OrganisationUnit,
 } from '../types/generated'
-import { DataSetNotificationTemplateSchema } from '../pages/dataSetNotificationTemplates/form/DataSetNotificationTemplateSchema'
 
 const { withDefaultListColumns } = modelFormSchemas
 
