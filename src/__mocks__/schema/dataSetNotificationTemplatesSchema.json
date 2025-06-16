@@ -1,27 +1,10 @@
 {
-    "klass": "org.hisp.dhis.dataset.notifications.DataSetNotificationTemplate",
-    "identifiableObject": true,
-    "nameableObject": false,
-    "subscribableObject": false,
-    "embeddedObject": false,
     "singular": "dataSetNotificationTemplate",
     "plural": "dataSetNotificationTemplates",
-    "metadata": true,
-    "secondaryMetadata": false,
-    "namespace": "http://dhis2.org/schema/dxf/2.0",
     "name": "dataSetNotificationTemplate",
     "displayName": "Data Set Notification Template",
-    "collectionName": "dataSetNotificationTemplates",
     "shareable": false,
     "dataShareable": false,
-    "dataWriteShareable": false,
-    "dataReadShareable": false,
-    "relativeApiEndpoint": "/dataSetNotificationTemplates",
-    "apiEndpoint": "https://debug.dhis2.org/dev/api/dataSetNotificationTemplates",
-    "href": "https://debug.dhis2.org/dev/api/schemas/dataSetNotificationTemplate",
-    "persisted": true,
-    "defaultPrivate": false,
-    "implicitPrivateAuthority": false,
     "authorities": [
         {
             "type": "CREATE_PUBLIC",
@@ -36,14 +19,8 @@
             "authorities": ["F_DATASET_DELETE"]
         }
     ],
-    "order": 1311,
-    "references": [
-        "org.hisp.dhis.user.UserGroup",
-        "org.hisp.dhis.dataset.DataSet",
-        "org.hisp.dhis.user.User"
-    ],
-    "properties": [
-        {
+    "properties": {
+        "favorites": {
             "klass": "java.util.Set",
             "propertyType": "COLLECTION",
             "itemKlass": "java.lang.String",
@@ -81,7 +58,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "access": {
             "klass": "org.hisp.dhis.security.acl.Access",
             "propertyType": "COMPLEX",
             "name": "access",
@@ -115,7 +92,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "code": {
             "klass": "java.lang.String",
             "propertyType": "IDENTIFIER",
             "name": "code",
@@ -150,7 +127,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "displayName": {
             "klass": "java.lang.String",
             "propertyType": "TEXT",
             "name": "displayName",
@@ -182,7 +159,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "lastUpdated": {
             "klass": "java.util.Date",
             "propertyType": "DATE",
             "name": "lastUpdated",
@@ -215,7 +192,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "translations": {
             "klass": "java.util.Set",
             "propertyType": "COLLECTION",
             "itemKlass": "org.hisp.dhis.translation.Translation",
@@ -254,7 +231,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "relativeScheduledDays": {
             "klass": "java.lang.Integer",
             "propertyType": "INTEGER",
             "name": "relativeScheduledDays",
@@ -289,7 +266,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "subjectTemplate": {
             "klass": "java.lang.String",
             "propertyType": "TEXT",
             "name": "subjectTemplate",
@@ -326,7 +303,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "uid": {
             "klass": "java.lang.String",
             "propertyType": "IDENTIFIER",
             "name": "id",
@@ -361,7 +338,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "href": {
             "klass": "java.lang.String",
             "propertyType": "URL",
             "name": "href",
@@ -394,7 +371,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "dataSetNotificationTrigger": {
             "klass": "org.hisp.dhis.dataset.notifications.DataSetNotificationTrigger",
             "propertyType": "CONSTANT",
             "name": "dataSetNotificationTrigger",
@@ -428,7 +405,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "sendStrategy": {
             "klass": "org.hisp.dhis.notification.SendStrategy",
             "propertyType": "CONSTANT",
             "name": "sendStrategy",
@@ -462,7 +439,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "lastUpdatedBy": {
             "klass": "org.hisp.dhis.user.User",
             "propertyType": "REFERENCE",
             "name": "lastUpdatedBy",
@@ -500,7 +477,7 @@
             "sortable": false,
             "propertyTransformer": true
         },
-        {
+        "notifyUsersInHierarchyOnly": {
             "klass": "java.lang.Boolean",
             "propertyType": "BOOLEAN",
             "name": "notifyUsersInHierarchyOnly",
@@ -533,7 +510,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "deliveryChannels": {
             "klass": "java.util.Set",
             "propertyType": "COLLECTION",
             "itemKlass": "org.hisp.dhis.common.DeliveryChannel",
@@ -572,7 +549,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "displaySubjectTemplate": {
             "klass": "java.lang.String",
             "propertyType": "TEXT",
             "name": "displaySubjectTemplate",
@@ -604,7 +581,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "created": {
             "klass": "java.util.Date",
             "propertyType": "DATE",
             "name": "created",
@@ -637,7 +614,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "attributeValues": {
             "klass": "org.hisp.dhis.attribute.AttributeValues",
             "propertyType": "COMPLEX",
             "name": "attributeValues",
@@ -670,7 +647,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "sharing": {
             "klass": "org.hisp.dhis.user.sharing.Sharing",
             "propertyType": "COMPLEX",
             "name": "sharing",
@@ -704,7 +681,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "notificationRecipient": {
             "klass": "org.hisp.dhis.dataset.notifications.DataSetNotificationRecipient",
             "propertyType": "CONSTANT",
             "name": "notificationRecipient",
@@ -738,7 +715,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "createdBy": {
             "klass": "org.hisp.dhis.user.User",
             "propertyType": "REFERENCE",
             "name": "createdBy",
@@ -773,7 +750,7 @@
             "sortable": false,
             "propertyTransformer": true
         },
-        {
+        "notifyParentOrganisationUnitOnly": {
             "klass": "java.lang.Boolean",
             "propertyType": "BOOLEAN",
             "name": "notifyParentOrganisationUnitOnly",
@@ -806,7 +783,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "name": {
             "klass": "java.lang.String",
             "propertyType": "TEXT",
             "name": "name",
@@ -843,7 +820,7 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        {
+        "dataSets": {
             "klass": "java.util.Set",
             "propertyType": "COLLECTION",
             "itemKlass": "org.hisp.dhis.dataset.DataSet",
@@ -886,7 +863,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "displayMessageTemplate": {
             "klass": "java.lang.String",
             "propertyType": "TEXT",
             "name": "displayMessageTemplate",
@@ -918,7 +895,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "recipientUserGroup": {
             "klass": "org.hisp.dhis.user.UserGroup",
             "propertyType": "REFERENCE",
             "name": "recipientUserGroup",
@@ -956,7 +933,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "user": {
             "klass": "org.hisp.dhis.user.User",
             "propertyType": "REFERENCE",
             "name": "user",
@@ -991,7 +968,7 @@
             "sortable": false,
             "propertyTransformer": true
         },
-        {
+        "favorite": {
             "klass": "java.lang.Boolean",
             "propertyType": "BOOLEAN",
             "name": "favorite",
@@ -1023,7 +1000,7 @@
             "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "messageTemplate": {
             "klass": "java.lang.String",
             "propertyType": "TEXT",
             "name": "messageTemplate",
@@ -1060,8 +1037,6 @@
             "sortable": true,
             "propertyTransformer": false
         }
-    ],
-    "favoritable": false,
-    "subscribable": false,
+    },
     "translatable": true
 }
