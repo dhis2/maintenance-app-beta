@@ -17,13 +17,11 @@ export enum NotificationTrigger {
 export enum NotificationRecipient {
     ORGANISATION_UNIT_CONTACT = 'ORGANISATION_UNIT_CONTACT',
     USER_GROUP = 'USER_GROUP',
-    // Add more if needed
 }
 
 export enum DeliveryChannel {
     SMS = 'SMS',
     EMAIL = 'EMAIL',
-    // Add more if needed
 }
 
 export enum NotificationSendStrategy {
