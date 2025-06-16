@@ -27,12 +27,6 @@ type Params = {
     id: string
 }
 
-type DataSet = {
-    id: string
-    name: string
-    displayName: string
-}
-
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     'name',
@@ -49,10 +43,6 @@ const fieldFilters = [
     'deliveryChannels',
 ]
 
-// --------------------
-// Query Helpers
-// --------------------
-
 const fetchNotificationTemplate = async (
     engine: any,
     id: string
@@ -68,10 +58,7 @@ const fetchNotificationTemplate = async (
     return notificationTemplate
 }
 
-const fetchDataSetsByIds = async (
-    engine: any,
-    ids: string[]
-): Promise<DataSet[]> => {
+const fetchDataSetsByIds = async (engine: any, ids: string[]) => {
     if (!ids.length) {
         return []
     }
@@ -86,10 +73,6 @@ const fetchDataSetsByIds = async (
     })
     return dataSets ?? []
 }
-
-// --------------------
-// Component
-// --------------------
 
 export const Component = () => {
     const { id: templateId } = useParams<Params>()
@@ -113,7 +96,7 @@ export const Component = () => {
     )
 
     const {
-        data: fetchedDataSets = [],
+        data: fetchedDataSets,
         isLoading: loadingDataSets,
         isError: errorDataSets,
         refetch: refetchDataSets,
@@ -126,10 +109,28 @@ export const Component = () => {
     const isLoading = loadingTemplate || loadingDataSets
     const isError = errorTemplate || errorDataSets
 
-    const onSubmit = useOnSubmitEdit({
-        section,
-        modelId: templateId!,
-    })
+    const onSubmit = useOnSubmitEdit({ section, modelId: templateId! })
+
+    const transformFormValues = (values: DataSetNotificationFormValues) => {
+        return {
+            ...values,
+            relativeScheduledDays: parseInt(values.relativeScheduledDays, 10),
+            deliveryChannels: [
+                ...(values.sendEmail ? ['EMAIL'] : []),
+                ...(values.sendSms ? ['SMS'] : []),
+            ],
+            recipientUserGroup: values.userGroupRecipient
+                ? { id: values.userGroupRecipient }
+                : undefined,
+        }
+    }
+
+    const handleFormSubmit = (
+        values: DataSetNotificationFormValues,
+        form: any
+    ) => {
+        return onSubmit(transformFormValues(values), form as any)
+    }
 
     const formDescriptor = useMemo(
         () => ({
@@ -186,7 +187,7 @@ export const Component = () => {
 
     if (isLoading || !template) {
         return (
-            <div className="dhis2-u-center" style={{ height: '100%' }}>
+            <div style={{ height: '100%' }}>
                 <CircularLoader />
             </div>
         )
@@ -194,8 +195,8 @@ export const Component = () => {
 
     return (
         <SectionedFormProvider formDescriptor={formDescriptor}>
-            <Form<DataSetNotificationFormValues>
-                onSubmit={onSubmit}
+            <Form
+                onSubmit={handleFormSubmit}
                 initialValues={getInitialValuesFromTemplate(
                     template,
                     fetchedDataSets.dataSets

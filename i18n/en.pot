@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-06-13T14:09:34.468Z\n"
-"PO-Revision-Date: 2025-06-13T14:09:34.468Z\n"
+"POT-Creation-Date: 2025-06-16T06:01:46.380Z\n"
+"PO-Revision-Date: 2025-06-16T06:01:46.380Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1488,17 +1488,32 @@ msgstr ""
 "level means that data from lower levels will not be included in the "
 "aggregation."
 
+msgid "Edit Data Set Notification"
+msgstr "Edit Data Set Notification"
+
 msgid "What to send"
 msgstr "What to send"
 
 msgid "When to send it"
 msgstr "When to send it"
 
-msgid "Notification triggers"
-msgstr "Notification triggers"
+msgid "Notification trigger"
+msgstr "Notification trigger"
 
 msgid "Who to send it to"
 msgstr "Who to send it to"
+
+msgid "Recipient"
+msgstr "Recipient"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Error loading notification template or datasets"
+msgstr "Error loading notification template or datasets"
+
+msgid "Notification triggers"
+msgstr "Notification triggers"
 
 msgid "Notification recipients"
 msgstr "Notification recipients"
@@ -2331,9 +2346,6 @@ msgstr "Disaggregation categories"
 
 msgid "Attribute categories"
 msgstr "Attribute categories"
-
-msgid "Error"
-msgstr "Error"
 
 msgid "Could not load programs or indicators data."
 msgstr "Could not load programs or indicators data."

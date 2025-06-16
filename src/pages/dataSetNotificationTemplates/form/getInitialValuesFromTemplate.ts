@@ -33,20 +33,24 @@ export type DataSetNotificationFormValues = Omit<
 
 export const getInitialValuesFromTemplate = (
     template: DataSetNotificationTemplate,
-    fetchedDataSets: DataSet[] | []
-) => {
+    fetchedDataSets: DataSet[]
+): DataSetNotificationFormValues => {
     return {
-        name: template.name,
+        id: template.id,
         code: template.code,
+        name: template.name,
+        displayName: template.displayName,
         subjectTemplate: template.subjectTemplate,
         messageTemplate: template.messageTemplate,
         notificationRecipient: template.notificationRecipient,
         dataSetNotificationTrigger: template.dataSetNotificationTrigger,
-        relativeScheduledDays: template.relativeScheduledDays,
+        relativeScheduledDays: String(template.relativeScheduledDays),
         beforeAfter: template.beforeAfter || '',
         sendStrategy: template.sendStrategy,
-        userGroupRecipient: template.recipientUserGroup?.id,
+        deliveryChannels: template.deliveryChannels,
         dataSets: fetchedDataSets,
+        recipientUserGroup: template.recipientUserGroup,
+        userGroupRecipient: template.recipientUserGroup?.id,
         sendEmail: !!template.deliveryChannels?.includes('EMAIL'),
         sendSms: !!template.deliveryChannels?.includes('SMS'),
     }
