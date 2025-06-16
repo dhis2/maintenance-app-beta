@@ -1,7 +1,11 @@
 import { generateMock } from '@anatine/zod-mock'
 import { faker } from '@faker-js/faker'
-import { z } from 'zod'
 import { modelFormSchemas } from '../lib'
+import {
+    AccessSchema,
+    UserGroupSchema,
+    UserSchema,
+} from '../lib/form/modelFormSchemas'
 import { categoryListSchema } from '../pages/categories/form'
 import { categoryComboListSchema } from '../pages/categoryCombos/form'
 import { categoryOptionComboListSchema } from '../pages/categoryOptionCombos/form'
@@ -13,11 +17,18 @@ import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementSchema } from '../pages/dataElements/form'
 import { DataSetNotificationTemplateSchema } from '../pages/dataSetNotificationTemplates/form/DataSetNotificationTemplateSchema'
 import { dataSetListSchema } from '../pages/dataSetsWip/form/dataSetFormSchema'
+import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicatorGroupSchema'
+import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
 import { IndicatorSchema } from '../pages/indicators/form/IndicatorSchema'
 import { IndicatorTypeListSchema } from '../pages/indicatorTypes/form/IndicatorTypesSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
+import {
+    ProgramIndicatorGroupFormSchema,
+    ProgramIndicatorGroupListSchema,
+} from '../pages/programIndicatorGroups/form'
+import { ProgramIndicatorsListSchema } from '../pages/programIndicators/ProgramIndicatorsSchema'
 import {
     CategoryMapping,
     OptionMapping,
@@ -33,6 +44,15 @@ function randomValueIn<T>(list: T[]) {
     return list[faker.number.int({ min: 0, max: list.length - 1 })]
 }
 
+export const randomLongString = (length: number) => {
+    const base = faker.lorem.paragraph() // Or .sentence(), .text()
+    let result = ''
+    while (result.length < length) {
+        result += base + ' '
+    }
+    return result.slice(0, length) // Trim to exact length
+}
+
 const mockeryMapper = (keyName: string) => {
     if (keyName === 'code') {
         return () => faker.string.alphanumeric(6)
@@ -45,29 +65,6 @@ const mockeryMapper = (keyName: string) => {
 
 const { identifiable, referenceCollection, withAttributeValues } =
     modelFormSchemas
-
-const UserSchema = identifiable.extend({
-    code: z.string().optional(),
-    displayName: z.string(),
-    username: z.string(),
-})
-
-const UserGroupSchema = identifiable.extend({
-    displayName: z.string(),
-})
-
-const AccessSchema = z.object({
-    delete: z.boolean(),
-    externalize: z.boolean(),
-    manage: z.boolean(),
-    read: z.boolean(),
-    update: z.boolean(),
-    write: z.boolean(),
-    data: z.object({
-        read: z.boolean(),
-        write: z.boolean(),
-    }),
-})
 
 export const testAccess = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(AccessSchema, { mockeryMapper }),
@@ -91,6 +88,20 @@ export const testIndicatorType = (overwrites: Record<any, any> = {}) => ({
 
 export const testIndicator = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(IndicatorSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testIndicatorGroup = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(indicatorGroupListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testIndicatorGroupSet = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(indicatorGroupSetListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -189,6 +200,11 @@ export const testOrganisationUnitGroupSet = (
     ...overwrites,
 })
 
+export const testProgramIndicator = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(ProgramIndicatorsListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
 export const testLocale = ({
     locale = faker.string.alpha({ length: 2 }),
     name = faker.location.country(),
@@ -208,6 +224,20 @@ export const testCategoryMapping = ({
     categoryId,
     mappingName,
     optionMappings,
+})
+
+export const testProgramIndicatorGroup = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(ProgramIndicatorGroupListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testFormProgramIndicatorGroup = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(ProgramIndicatorGroupFormSchema, { mockeryMapper }),
+    ...overwrites,
 })
 
 export const testProgram = ({
