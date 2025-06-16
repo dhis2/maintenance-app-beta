@@ -1,3 +1,10 @@
+## [0.47.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.1...v0.47.2) (2025-06-16)
+
+
+### Bug Fixes
+
+* remove soft deleted category mappings [DHIS2-19695] ([#576](https://github.com/dhis2/maintenance-app-beta/issues/576)) ([4778503](https://github.com/dhis2/maintenance-app-beta/commit/47785039915b2e0ef4922ea9fe0fa0d35a7c8005))
+
 ## [0.47.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.0...v0.47.1) (2025-06-12)
 
 
