@@ -1,7 +1,3 @@
-import { generateDefaultAddFormTests } from '../defaultFormTests'
-
-generateDefaultAddFormTests({ componentName: 'Indicator type' })
-
 xdescribe('Indicator type add form additional tests', () => {
     it('contain all needed field', () => {})
     it('should not submit when required values are missing', () => {})

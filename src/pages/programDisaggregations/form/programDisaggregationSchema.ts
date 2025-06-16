@@ -14,6 +14,7 @@ const identifiable = z.object({
 const categorySchema = identifiable.extend({
     categoryOptions: z.array(identifiable),
     dataDimensionType: z.nativeEnum(CategoryCombo.dataDimensionType),
+    name: z.string(),
 })
 const categoryComboSchema = z
     .object({
