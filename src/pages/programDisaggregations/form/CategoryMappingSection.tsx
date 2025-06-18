@@ -11,7 +11,11 @@ import {
     CollapsibleCardTitle,
 } from '../../../components'
 import { LoadingSpinner } from '../../../components/loading/LoadingSpinner'
-import { generateDhis2Id, useBoundResourceQueryFn } from '../../../lib'
+import {
+    generateDhis2Id,
+    useBoundResourceQueryFn,
+    DEFAULT_CATEGORY,
+} from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
 import {
     categoriesFieldFilter,
@@ -152,11 +156,23 @@ const useCategories = ({
 
         // A suggested category is a category that is part of a selected categoryCombo
         // in a program indicator mapping, but not already mapped in the form.
+
+        // keep track of categories included to avoid duplicates
+        const alreadyIncludedInSuggestedCategories: { [key: string]: boolean } =
+            {}
+
         const suggestedCategories = programIndicatorCategories.filter(
-            (category): category is ProgramIndicatorCategory =>
-                category !== undefined &&
-                !categoriesWithMappingsMap.has(category.id) &&
-                category.displayName !== 'default'
+            (category): category is ProgramIndicatorCategory => {
+                const include =
+                    category !== undefined &&
+                    !categoriesWithMappingsMap.has(category.id) &&
+                    category.id !== DEFAULT_CATEGORY.id
+                if (alreadyIncludedInSuggestedCategories[category.id]) {
+                    return false
+                }
+                alreadyIncludedInSuggestedCategories[category.id] = true
+                return include
+            }
         )
         return {
             suggestedCategories,

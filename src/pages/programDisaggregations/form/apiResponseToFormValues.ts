@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { DEFAULT_CATEGORY_COMBO } from '../../../lib'
 import { Category, CategoryCombo } from '../../../types/generated'
 import { ProgramData, ProgramIndicatorData } from '../Edit'
 import {
@@ -53,8 +54,17 @@ export const apiResponseToFormValues = ({
         )
     }
 
-    const programIndicatorMappings = programIndicators.programIndicators.reduce(
-        (acc, indicator) => {
+    const programIndicatorMappings = programIndicators.programIndicators
+        .filter(
+            (pi) =>
+                pi.categoryMappingIds.length > 0 ||
+                pi.attributeCombo?.id !== DEFAULT_CATEGORY_COMBO.id ||
+                pi.categoryCombo?.id !== DEFAULT_CATEGORY_COMBO.id ||
+                pi.aggregateExportAttributeOptionCombo ||
+                pi.aggregateExportCategoryOptionCombo ||
+                pi.aggregateExportDataElement
+        )
+        .reduce((acc, indicator) => {
             const disAggCombo = indicator.categoryCombo
             const attributeCombo = indicator.attributeCombo
 
@@ -96,9 +106,7 @@ export const apiResponseToFormValues = ({
                 ...mappingByComboType,
             }
             return acc
-        },
-        {} as ProgramIndicatorMappingsRecord
-    )
+        }, {} as ProgramIndicatorMappingsRecord)
 
     return {
         categoryMappings,
