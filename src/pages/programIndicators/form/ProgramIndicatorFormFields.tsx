@@ -30,7 +30,7 @@ export const ProgramIndicatorsFormFields = () => {
     const { input: aggregationTypeInput } = useField('aggregationType')
     const { input: analyticsTypeInput } = useField('analyticsType')
     const { input: programInput, meta: programMeta } = useField('program')
-    const programFilters = ['id,displayName'] as const
+    const programFilters = ['id,displayName,programType'] as const
 
     const schema = useSchema(SECTIONS_MAP.programIndicator.name)
     return (
@@ -164,7 +164,7 @@ export const ProgramIndicatorsFormFields = () => {
                             component={InputFieldFF}
                             name="aggregateExportDataElement"
                             label={i18n.t(
-                                'Data element for aggregate data export\n'
+                                'Data element for aggregate data export'
                             )}
                         />
                     </StandardFormField>

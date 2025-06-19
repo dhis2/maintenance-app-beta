@@ -24,6 +24,7 @@ export const fieldFilters = [
     'legendSets[id, displayName]',
     'aggregateExportCategoryOptionCombo',
     'aggregateExportAttributeOptionCombo',
+    'aggregateExportDataElement',
     'expression',
     'filter',
     'analyticsPeriodBoundaries[id,boundaryTarget,analyticsPeriodBoundaryType,offsetPeriods,offsetPeriodType,]',
