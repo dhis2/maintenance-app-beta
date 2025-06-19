@@ -35,7 +35,7 @@ const fieldFilters = [
     'relativeScheduledDays',
     'sendStrategy',
     'recipientUserGroup',
-    'dataSets[id,name,displayName]',
+    'dataSets',
     'deliveryChannels',
 ]
 
@@ -108,7 +108,6 @@ export const Component = () => {
 
     const isLoading = loadingTemplate ?? loadingDataSets
     const isError = errorTemplate ?? errorDataSets
-
     const onSubmit = useOnEditNotifications(templateId as string)
 
     const handleFormSubmit = async (values: DataSetNotificationFormValues) => {
@@ -198,7 +197,7 @@ export const Component = () => {
                 onSubmit={handleFormSubmit}
                 initialValues={getInitialValuesFromTemplate(
                     template,
-                    fetchedDataSets.dataSets
+                    fetchedDataSets?.dataSets
                 )}
                 destroyOnUnregister={true}
             >

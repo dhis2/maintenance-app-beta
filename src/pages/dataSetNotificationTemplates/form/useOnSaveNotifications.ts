@@ -24,7 +24,7 @@ export const useOnSaveNotifications = () => {
                 const payload = transformFormValues(values)
 
                 const response = await dataEngine.mutate({
-                    resource: 'dataSetNotificationTemplatefs',
+                    resource: 'dataSetNotificationTemplates',
                     type: 'create',
                     data: payload,
                 })
