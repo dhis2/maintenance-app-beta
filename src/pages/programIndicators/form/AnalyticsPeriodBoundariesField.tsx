@@ -1,9 +1,21 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, Input, SingleSelectField, SingleSelectOption } from '@dhis2/ui'
-import React, { useCallback, useMemo } from 'react'
-import { Field, useField } from 'react-final-form'
+import {
+    Button,
+    ButtonStrip,
+    Field,
+    InputField,
+    Modal,
+    ModalActions,
+    ModalContent,
+    ModalTitle,
+    SingleSelectField,
+    SingleSelectOption,
+} from '@dhis2/ui'
+import React, { useCallback, useMemo, useState } from 'react'
+import { useField } from 'react-final-form'
 import { PeriodTypeSelect } from '../../../components/metadataFormControls/PeriodTypeSelect/PeriodTypeSelect'
 import { AnalyticsPeriodBoundary } from '../../../types/generated'
+import styles from '../../dataSetsWip/form/dataInputPeriods/DataInputPeriodsSelector.module.css'
 import classes from './AnalyticsPeriodBoundaries.module.css'
 import offsetPeriodType = AnalyticsPeriodBoundary.offsetPeriodType
 
@@ -52,108 +64,242 @@ const boundaryTypes = [
 const APBItem = ({
     apb,
     onRemove,
-    onChange,
+    onEdit,
 }: {
     apb: Partial<AnalyticsPeriodBoundary>
     onRemove: () => void
-    onChange: (apb: Partial<AnalyticsPeriodBoundary>) => void
+    onEdit: (apb: Partial<AnalyticsPeriodBoundary>) => void
 }) => {
     const foundBoundaryTarget = useMemo(
         () =>
-            boundaryTargets.find((e) => e.value === apb.boundaryTarget)?.value,
+            boundaryTargets.find(
+                (target) => apb.boundaryTarget === target.value
+            ),
         [apb]
+    )
+    const foundBoundaryType = useMemo(
+        () =>
+            boundaryTypes.find(
+                (type) => apb.analyticsPeriodBoundaryType === type.value
+            ),
+        [apb]
+    )
+    return (
+        <div className={classes.analyticsPeriodBoundaryContainer}>
+            <div>
+                <div>
+                    Boundary target:{' '}
+                    {foundBoundaryTarget?.label ?? apb.boundaryTarget}
+                </div>
+                <div className={classes.analyticsPeriodBoundarySpan}>
+                    {apb.offsetPeriodType && (
+                        <div>
+                            {i18n.t('Period type:')} {apb.offsetPeriodType}
+                        </div>
+                    )}
+                    {foundBoundaryType && (
+                        <div>
+                            {i18n.t('Boundary type:')} {foundBoundaryType.label}
+                        </div>
+                    )}
+                    {apb.offsetPeriods && (
+                        <div>Offset: {apb.offsetPeriods}</div>
+                    )}
+                </div>
+            </div>
+            <ButtonStrip>
+                <Button
+                    small
+                    onClick={() => {
+                        onEdit(apb)
+                    }}
+                >
+                    {i18n.t('Edit')}
+                </Button>
+                <Button
+                    small
+                    secondary
+                    destructive
+                    onClick={() => {
+                        onRemove()
+                    }}
+                >
+                    {i18n.t('Remove')}
+                </Button>
+            </ButtonStrip>
+        </div>
+    )
+}
+const APBItemForm = ({
+    APB,
+    onFieldChange,
+}: {
+    APB: Partial<AnalyticsPeriodBoundary>
+    onFieldChange: (apb: Partial<AnalyticsPeriodBoundary>) => void
+}) => {
+    const filteredBoundaryTargets = useMemo(
+        () =>
+            boundaryTargets.filter(
+                (e) => e.value !== 'CUSTOM' && e.value === APB.boundaryTarget
+            ).length,
+        [APB]
     )
 
     const renderCustom = useMemo(
-        () => apb.boundaryTarget !== undefined && !foundBoundaryTarget,
-        [apb, foundBoundaryTarget]
+        () => APB.boundaryTarget !== null && filteredBoundaryTargets === 0,
+        [APB, filteredBoundaryTargets]
     )
 
     return (
-        <div className={classes.analyticsPeriodBoundary}>
-            <div className={classes.analyticsPeriodBoundaryInputs}>
-                <SingleSelectField
-                    selected={renderCustom ? 'CUSTOM' : foundBoundaryTarget}
-                    onChange={({ selected }) => {
-                        onChange({ ...apb, boundaryTarget: selected })
-                    }}
-                    label={i18n.t('Boundary target')}
-                >
-                    <SingleSelectOption label={'<No value>'} value={''} />
-                    {boundaryTargets.map((option) => (
-                        <SingleSelectOption key={option.value} {...option} />
-                    ))}
-                </SingleSelectField>
-                {renderCustom && (
-                    <Input
-                        placeholder={i18n.t('Custom boundary text')}
-                        onChange={(e) =>
-                            onChange({ ...apb, boundaryTarget: e.value })
-                        }
-                        value={apb.boundaryTarget}
-                    />
-                )}
-                <SingleSelectField
-                    selected={apb.analyticsPeriodBoundaryType}
-                    onChange={({ selected }) => {
-                        onChange({
-                            ...apb,
-                            analyticsPeriodBoundaryType:
-                                selected as AnalyticsPeriodBoundary.analyticsPeriodBoundaryType,
-                        })
-                    }}
-                    label={i18n.t('Analytics period boundary type')}
-                >
-                    <SingleSelectOption label={'<No value>'} value={''} />
-                    {boundaryTypes.map((option) => (
-                        <SingleSelectOption key={option.value} {...option} />
-                    ))}
-                </SingleSelectField>
-                <Input
-                    type="number"
-                    placeholder={i18n.t('Offset period by amount')}
-                    onChange={(e) =>
-                        onChange({
-                            ...apb,
-                            offsetPeriods: e.value
-                                ? parseInt(e.value)
-                                : undefined,
-                        })
-                    }
-                    value={apb.offsetPeriods?.toString()}
-                    dense
-                    min={'0'}
+        <div className={classes.analyticsPeriodBoundaryForm}>
+            <SingleSelectField
+                selected={
+                    renderCustom
+                        ? 'CUSTOM'
+                        : boundaryTargets.find(
+                              (e) => e.value === APB.boundaryTarget
+                          )?.value
+                }
+                onChange={({ selected }) => {
+                    onFieldChange({ boundaryTarget: selected })
+                }}
+                label={i18n.t('Boundary target')}
+            >
+                <SingleSelectOption label={'<No value>'} value={''} />
+                {boundaryTargets.map((option) => (
+                    <SingleSelectOption key={option.value} {...option} />
+                ))}
+            </SingleSelectField>
+            {renderCustom && (
+                <InputField
+                    label={i18n.t('Custom boundary text')}
+                    onChange={(e) => onFieldChange({ boundaryTarget: e.value })}
+                    value={APB.boundaryTarget}
                 />
+            )}
+            <SingleSelectField
+                selected={APB.analyticsPeriodBoundaryType}
+                onChange={({ selected }) => {
+                    onFieldChange({
+                        analyticsPeriodBoundaryType:
+                            selected as AnalyticsPeriodBoundary.analyticsPeriodBoundaryType,
+                    })
+                }}
+                label={i18n.t('Analytics period boundary type')}
+            >
+                <SingleSelectOption label={'<No value>'} value={''} />
+                {boundaryTypes.map((option) => (
+                    <SingleSelectOption key={option.value} {...option} />
+                ))}
+            </SingleSelectField>
+            <InputField
+                type="number"
+                label={i18n.t('Offset period by amount')}
+                onChange={(e) =>
+                    onFieldChange({
+                        offsetPeriods: e.value ? parseInt(e.value) : undefined,
+                    })
+                }
+                value={APB.offsetPeriods?.toString()}
+                dense
+                min={'0'}
+            />
+            <Field label={i18n.t('Period type')}>
                 <PeriodTypeSelect
-                    selected={apb.offsetPeriodType}
+                    selected={APB.offsetPeriodType}
                     onChange={(selected) => {
-                        onChange({
-                            ...apb,
+                        onFieldChange({
                             offsetPeriodType: selected as offsetPeriodType,
                         })
                     }}
                     noValueOption
                 />
-            </div>
-            <Button small secondary destructive onClick={onRemove}>
-                {i18n.t('Remove')}
-            </Button>
+            </Field>
         </div>
     )
 }
 
 const AnalyticsPeriodBoundariesList = ({
-    input,
+    list,
+    onEditAPB,
+    onRemoveAPB,
 }: {
-    input: {
-        value: Partial<AnalyticsPeriodBoundary>[]
-        onChange: (value: Partial<AnalyticsPeriodBoundary>[]) => void
-        onBlur: () => void
-    }
+    list: Partial<AnalyticsPeriodBoundary>[]
+    onEditAPB: (APB: Partial<AnalyticsPeriodBoundary> | null) => void
+    onRemoveAPB: (index: number) => () => void
 }) => {
+    return (
+        <>
+            {list &&
+                list.map(
+                    (apb: Partial<AnalyticsPeriodBoundary>, index: number) => (
+                        <APBItem
+                            apb={apb}
+                            key={apb.id ?? `new-apb-${index}`}
+                            onRemove={onRemoveAPB(index)}
+                            onEdit={onEditAPB}
+                        />
+                    )
+                )}
+        </>
+    )
+}
+
+const AnalyticsPeriodBoundaryModal = ({
+    closeModal,
+    onSaveAPB,
+    APB,
+}: {
+    closeModal: () => void
+    onSaveAPB: (apb: Partial<AnalyticsPeriodBoundary>) => void
+    APB: Partial<AnalyticsPeriodBoundary>
+}) => {
+    const [editedAPB, setEditedAPB] = useState(APB)
+    const onFieldChange = (changes: Partial<AnalyticsPeriodBoundary>) => {
+        setEditedAPB((previous) => ({ ...previous, ...changes }))
+    }
+
+    return (
+        <Modal onClose={closeModal}>
+            <ModalTitle>
+                {editedAPB
+                    ? i18n.t('Edit analytics period boundary')
+                    : i18n.t('Add analytics period boundary')}
+            </ModalTitle>
+            <ModalContent className={styles.modalItems}>
+                <APBItemForm APB={editedAPB} onFieldChange={onFieldChange} />
+            </ModalContent>
+            <ModalActions>
+                <ButtonStrip>
+                    <Button onClick={closeModal}>{i18n.t('Cancel')}</Button>
+                    <Button
+                        // disabled={saveIsDisabled}
+                        primary
+                        onClick={() => {
+                            onSaveAPB(editedAPB)
+                            closeModal()
+                        }}
+                    >
+                        {i18n.t('Save analytics period boundary')}
+                    </Button>
+                </ButtonStrip>
+            </ModalActions>
+        </Modal>
+    )
+}
+
+export const AnalyticsPeriodBoundariesField = () => {
+    const [modalAPB, setModalAPB] =
+        useState<Partial<AnalyticsPeriodBoundary> | null>(null)
+
+    const { input } = useField<Partial<AnalyticsPeriodBoundary>[]>(
+        'analyticsPeriodBoundaries'
+    )
     const { value, onBlur, onChange } = input
 
-    const onRemove = useCallback(
+    const closeModal = () => setModalAPB(null)
+
+    const onRemoveAPB = useCallback(
         (index: number) => () => {
             onChange(value.filter((_, i) => i !== index))
             onBlur()
@@ -161,44 +307,43 @@ const AnalyticsPeriodBoundariesList = ({
         [onChange, onBlur, value]
     )
 
-    const onItemChange = useCallback(
-        (index: number) => (editedApb: Partial<AnalyticsPeriodBoundary>) => {
-            onChange(value.map((apb, i) => (index === i ? editedApb : apb)))
+    const onSaveAPB = useCallback(
+        (editedApb: Partial<AnalyticsPeriodBoundary>) => {
+            if (editedApb.id) {
+                onChange(
+                    value.map((apb) =>
+                        apb.id === editedApb.id ? editedApb : apb
+                    )
+                )
+            } else {
+                onChange([...value, editedApb])
+            }
             onBlur()
         },
         [onChange, onBlur, value]
     )
-
     return (
         <>
-            {value &&
-                value.map((apb, index) => (
-                    <APBItem
-                        apb={apb}
-                        key={apb.id ?? `new-apb-${index}`}
-                        onRemove={onRemove(index)}
-                        onChange={onItemChange(index)}
-                    />
-                ))}
-        </>
-    )
-}
-
-export const AnalyticsPeriodBoundariesField = () => {
-    const { input } = useField<Partial<AnalyticsPeriodBoundary>[]>(
-        'analyticsPeriodBoundaries'
-    )
-    return (
-        <>
-            <AnalyticsPeriodBoundariesList input={input} />
             <Button
                 small
                 onClick={() => {
-                    input.onChange([...input.value, {}])
+                    setModalAPB({})
                 }}
             >
                 {i18n.t('Add a new boundary')}
             </Button>
+            {modalAPB && (
+                <AnalyticsPeriodBoundaryModal
+                    APB={modalAPB}
+                    closeModal={closeModal}
+                    onSaveAPB={onSaveAPB}
+                />
+            )}
+            <AnalyticsPeriodBoundariesList
+                list={value}
+                onRemoveAPB={onRemoveAPB}
+                onEditAPB={setModalAPB}
+            />
         </>
     )
 }

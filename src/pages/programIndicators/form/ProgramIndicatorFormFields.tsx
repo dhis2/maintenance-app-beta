@@ -133,7 +133,6 @@ export const ProgramIndicatorsFormFields = () => {
                         </SingleSelectField>
                     </StandardFormField>
                     <OrgUnitField />
-                    <AnalyticsPeriodBoundariesField />
                     <StandardFormField>
                         <Field
                             name="displayInForm"
@@ -143,6 +142,42 @@ export const ProgramIndicatorsFormFields = () => {
                         />
                     </StandardFormField>
                     <StandardFormField>
+                        <FieldRFF
+                            component={InputFieldFF}
+                            name="aggregateExportCategoryOptionCombo"
+                            label={i18n.t(
+                                'Category option combination for aggregate data export'
+                            )}
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <FieldRFF
+                            component={InputFieldFF}
+                            name="aggregateExportAttributeOptionCombo"
+                            label={i18n.t(
+                                'Attribute option combination for aggregate data export'
+                            )}
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <FieldRFF
+                            component={InputFieldFF}
+                            name="aggregateExportDataElement"
+                            label={i18n.t(
+                                'Data element for aggregate data export\n'
+                            )}
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <StandardFormSectionTitle>
+                            {i18n.t('Analytics period boundaries')}
+                        </StandardFormSectionTitle>
+                        <AnalyticsPeriodBoundariesField />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <StandardFormSectionTitle>
+                            {i18n.t('Legends')}
+                        </StandardFormSectionTitle>
                         <ModelTransferField
                             name="legendSets"
                             query={{
@@ -162,27 +197,6 @@ export const ProgramIndicatorsFormFields = () => {
                             maxSelections={Infinity}
                         />
                     </StandardFormField>
-                    <FieldRFF
-                        component={InputFieldFF}
-                        name="aggregateExportCategoryOptionCombo"
-                        label={i18n.t(
-                            'Category option combination for aggregate data export'
-                        )}
-                    />
-                    <FieldRFF
-                        component={InputFieldFF}
-                        name="aggregateExportAttributeOptionCombo"
-                        label={i18n.t(
-                            'Attribute option combination for aggregate data export'
-                        )}
-                    />
-                    <FieldRFF
-                        component={InputFieldFF}
-                        name="aggregateExportDataElement"
-                        label={i18n.t(
-                            'Data element for aggregate data export\n'
-                        )}
-                    />
                 </SectionedFormSection>
                 <SectionedFormSection name="editExpression">
                     <StandardFormSectionTitle>
