@@ -23,12 +23,13 @@ export interface DataSetNotificationTemplate {
 
 export type DataSetNotificationFormValues = Omit<
     DataSetNotificationTemplate,
-    'relativeScheduledDays'
+    'relativeScheduledDays' | 'recipientUserGroup'
 > & {
     relativeScheduledDays: string
     sendEmail: boolean
     sendSms: boolean
-    userGroupRecipient?: string
+    recipientUserGroup?: string
+    beforeAfter: string
 }
 
 export const getInitialValuesFromTemplate = (
@@ -45,13 +46,30 @@ export const getInitialValuesFromTemplate = (
         notificationRecipient: template.notificationRecipient,
         dataSetNotificationTrigger: template.dataSetNotificationTrigger,
         relativeScheduledDays: String(template.relativeScheduledDays),
-        beforeAfter: template.beforeAfter || '',
         sendStrategy: template.sendStrategy,
         deliveryChannels: template.deliveryChannels,
         dataSets: fetchedDataSets,
-        recipientUserGroup: template.recipientUserGroup,
-        userGroupRecipient: template.recipientUserGroup?.id,
-        sendEmail: !!template.deliveryChannels?.includes('EMAIL'),
-        sendSms: !!template.deliveryChannels?.includes('SMS'),
+        recipientUserGroup: template?.recipientUserGroup?.id,
+        beforeAfter: template.beforeAfter,
+        sendEmail: template.deliveryChannels.includes('EMAIL'),
+        sendSms: template.deliveryChannels.includes('SMS'),
+    }
+}
+
+export const transformFormValues = (
+    values: DataSetNotificationFormValues
+): DataSetNotificationTemplate => {
+    return {
+        ...values,
+        relativeScheduledDays: parseInt(values.relativeScheduledDays, 10),
+        deliveryChannels: [
+            ...(values.sendEmail ? ['EMAIL'] : []),
+            ...(values.sendSms ? ['SMS'] : []),
+        ],
+        recipientUserGroup:
+            values.recipientUserGroup && values.recipientUserGroup !== ''
+                ? { id: values.recipientUserGroup }
+                : undefined,
+        dataSets: (values.dataSets || []).map((ds) => ({ id: ds.id })),
     }
 }

@@ -9,7 +9,7 @@ export const WhenToSendSection = () => {
     const isScheduledDays = triggerInput.value === 'SCHEDULED_DAYS'
 
     const triggerOptions = [
-        { label: i18n.t('Dataset Completion'), value: 'COMPLETION' },
+        { label: i18n.t('Dataset Completion'), value: 'DATA_SET_COMPLETION' },
         { label: i18n.t('Scheduled Days'), value: 'SCHEDULED_DAYS' },
     ]
 
@@ -30,7 +30,6 @@ export const WhenToSendSection = () => {
                 <FieldRFF<string | undefined>
                     dataTest="formfields-notification-trigger"
                     name="dataSetNotificationTrigger"
-                    initialValue="COMPLETION"
                     render={(props) => (
                         <SingleSelectFieldFF
                             {...props}
@@ -86,7 +85,6 @@ export const WhenToSendSection = () => {
                             inputWidth="500px"
                             dataTest="formfields-notification-type"
                             name="sendStrategy"
-                            initialValue="NONE"
                             render={(props) => (
                                 <SingleSelectFieldFF
                                     {...props}

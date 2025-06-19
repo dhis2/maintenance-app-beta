@@ -1,7 +1,7 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF, CheckboxFieldFF } from '@dhis2/ui'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 
@@ -9,15 +9,30 @@ const query = {
     userGroups: {
         resource: 'userGroups',
         params: {
-            fields: 'id,displayName,name',
+            fields: 'id,displayName',
             paging: false,
         },
     },
 }
 
+type UserGroup = {
+    id: string
+    displayName: string
+}
+
+type QueryResult = {
+    userGroups: {
+        userGroups: UserGroup[]
+    }
+}
+
 export const WhoToSendSection = () => {
-    const { loading, data } = useDataQuery(query)
+    const { data, loading, error } = useDataQuery<QueryResult>(query)
     const { input: recipientInput } = useField('notificationRecipient')
+
+    const { input: recipientGroupInput } = useField('recipientUserGroup')
+    const selectedUserGroupId = recipientGroupInput.value
+
     const isUserGroup =
         recipientInput.value === 'USER_GROUP' || !recipientInput.value
     const isOrgUnitContact =
@@ -32,16 +47,27 @@ export const WhoToSendSection = () => {
     ]
 
     const userGroupOptions =
-        (
-            data as {
-                userGroups?: {
-                    userGroups?: Array<{ id: string; displayName: string }>
-                }
-            }
-        )?.userGroups?.userGroups?.map((group) => ({
+        data?.userGroups?.userGroups?.map((group) => ({
             label: group.displayName,
             value: group.id,
-        })) || []
+        })) ?? []
+
+    const selectedUserGroupOption = selectedUserGroupId
+        ? {
+              label: selectedUserGroupId,
+              value: selectedUserGroupId,
+          }
+        : null
+
+    const userGroupOptionsWithSelected = useMemo(() => {
+        if (
+            selectedUserGroupOption &&
+            !userGroupOptions.some((opt) => opt.value === selectedUserGroupId)
+        ) {
+            return [...userGroupOptions, selectedUserGroupOption]
+        }
+        return userGroupOptions
+    }, [userGroupOptions, selectedUserGroupOption])
 
     return (
         <div>
@@ -64,20 +90,25 @@ export const WhoToSendSection = () => {
 
             {isUserGroup && (
                 <StandardFormField>
-                    <FieldRFF<string | undefined>
-                        name="recipientUserGroup"
-                        required
-                        render={(props) => (
-                            <SingleSelectFieldFF
-                                {...props}
-                                dataTest="formfields-user-group-recipient"
-                                label={i18n.t('User Group Recipients')}
-                                inputWidth="400px"
-                                options={userGroupOptions}
-                                loading={loading}
-                            />
-                        )}
-                    />
+                    {!error && (
+                        <FieldRFF<string | undefined>
+                            name="recipientUserGroup"
+                            required={isUserGroup}
+                            render={(props) => (
+                                <SingleSelectFieldFF
+                                    {...props}
+                                    dataTest="formfields-user-group-recipient"
+                                    label={i18n.t('User Group Recipients')}
+                                    inputWidth="400px"
+                                    options={userGroupOptionsWithSelected}
+                                    loading={loading}
+                                    disabled={
+                                        loading || !userGroupOptions.length
+                                    }
+                                />
+                            )}
+                        />
+                    )}
                 </StandardFormField>
             )}
 

@@ -2,46 +2,49 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime'
 import { useQueryClient } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import {
-    useNavigateWithSearchState,
     getSectionPath,
     SECTIONS_MAP,
+    useNavigateWithSearchState,
 } from '../../../lib'
 import { createFormError } from '../../../lib/form/createFormError'
-import {
-    DataSetNotificationFormValues,
-    transformFormValues,
-} from './getInitialValuesFromTemplate'
+import { DataSetNotificationTemplate } from './getInitialValuesFromTemplate'
 
 const section = SECTIONS_MAP.dataSetNotificationTemplate
 
-export const useOnSaveNotifications = () => {
-    const dataEngine = useDataEngine()
+export const useOnEditNotifications = (templateId: string) => {
+    const engine = useDataEngine()
     const navigate = useNavigateWithSearchState()
     const queryClient = useQueryClient()
     const { show } = useAlert((msg) => msg, { success: true })
 
     return useMemo(
-        () => async (values: DataSetNotificationFormValues) => {
+        () => async (values: DataSetNotificationTemplate) => {
             try {
-                const payload = transformFormValues(values)
-
-                const response = await dataEngine.mutate({
+                const response = await engine.mutate({
                     resource: 'dataSetNotificationTemplates',
-                    type: 'create',
-                    data: payload,
+                    id: templateId,
+                    type: 'update',
+                    data: values,
+                    params: {
+                        mergeMode: 'REPLACE',
+                    },
                 })
 
                 await queryClient.invalidateQueries({
                     queryKey: [{ resource: 'dataSetNotificationTemplates' }],
                 })
 
-                show('Notification template created successfully')
+                show({
+                    message: 'Notification template Edited successfully',
+                    success: true,
+                })
+
                 navigate(`/${getSectionPath(section)}`)
-                return { data: response }
+                return response
             } catch (error) {
                 return createFormError(error)
             }
         },
-        [dataEngine, navigate, queryClient, show]
+        [engine, navigate, queryClient, templateId]
     )
 }

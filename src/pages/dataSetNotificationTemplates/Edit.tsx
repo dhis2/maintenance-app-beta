@@ -1,4 +1,4 @@
-import { useDataEngine } from '@dhis2/app-runtime'
+import { useAlert, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button, CircularLoader, NoticeBox } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
@@ -10,18 +10,15 @@ import {
     DefaultSectionedFormSidebar,
     SectionedFormLayout,
 } from '../../components'
-import {
-    SectionedFormProvider,
-    SECTIONS_MAP,
-    DEFAULT_FIELD_FILTERS,
-    useOnSubmitEdit,
-} from '../../lib'
+import { SectionedFormProvider, DEFAULT_FIELD_FILTERS } from '../../lib'
 import { DataSetNotificationsFormFields } from './form/DataSetNotificationsFormFields'
 import {
     getInitialValuesFromTemplate,
     DataSetNotificationTemplate,
     DataSetNotificationFormValues,
+    transformFormValues,
 } from './form/getInitialValuesFromTemplate'
+import { useOnEditNotifications } from './form/useOnEditNotifications'
 
 type Params = {
     id: string
@@ -36,9 +33,8 @@ const fieldFilters = [
     'notificationRecipient',
     'dataSetNotificationTrigger',
     'relativeScheduledDays',
-    'beforeAfter',
     'sendStrategy',
-    'recipientUserGroup[id]',
+    'recipientUserGroup',
     'dataSets[id,name,displayName]',
     'deliveryChannels',
 ]
@@ -77,7 +73,10 @@ const fetchDataSetsByIds = async (engine: any, ids: string[]) => {
 export const Component = () => {
     const { id: templateId } = useParams<Params>()
     const dataEngine = useDataEngine()
-    const section = SECTIONS_MAP.dataSetNotificationTemplate
+    const alert = useAlert(
+        ({ message }) => message,
+        (options) => options
+    )
 
     const {
         data: template,
@@ -109,27 +108,28 @@ export const Component = () => {
     const isLoading = loadingTemplate || loadingDataSets
     const isError = errorTemplate || errorDataSets
 
-    const onSubmit = useOnSubmitEdit({ section, modelId: templateId! })
+    const onSubmit = useOnEditNotifications(templateId!)
 
-    const transformFormValues = (values: DataSetNotificationFormValues) => {
-        return {
-            ...values,
-            relativeScheduledDays: parseInt(values.relativeScheduledDays, 10),
-            deliveryChannels: [
-                ...(values.sendEmail ? ['EMAIL'] : []),
-                ...(values.sendSms ? ['SMS'] : []),
-            ],
-            recipientUserGroup: values.userGroupRecipient
-                ? { id: values.userGroupRecipient }
-                : undefined,
+    const handleFormSubmit = async (values: DataSetNotificationFormValues) => {
+        const result = await onSubmit(transformFormValues(values))
+        if (
+            result &&
+            typeof result === 'object' &&
+            'FINAL_FORM/form-error' in result
+        ) {
+            const formError = (result as { 'FINAL_FORM/form-error': any })[
+                'FINAL_FORM/form-error'
+            ]
+
+            alert.show({
+                message: i18n.t('Error: {{message}}', {
+                    message: formError?.original?.message ?? formError.message,
+                }),
+                error: true,
+            })
+            return result
         }
-    }
-
-    const handleFormSubmit = (
-        values: DataSetNotificationFormValues,
-        form: any
-    ) => {
-        return onSubmit(transformFormValues(values), form as any)
+        return result
     }
 
     const formDescriptor = useMemo(
@@ -201,6 +201,7 @@ export const Component = () => {
                     template,
                     fetchedDataSets.dataSets
                 )}
+                destroyOnUnregister={true}
             >
                 {({ handleSubmit }) => (
                     <SectionedFormLayout
