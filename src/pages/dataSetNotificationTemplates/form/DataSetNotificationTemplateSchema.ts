@@ -1,13 +1,8 @@
 import { z } from 'zod'
 import { modelFormSchemas } from '../../../lib'
 
-const {
-    identifiable,
-    withAttributeValues,
-    referenceCollection,
-    modelReference,
-    withDefaultListColumns,
-} = modelFormSchemas
+const { identifiable, withAttributeValues, withDefaultListColumns } =
+    modelFormSchemas
 
 export enum NotificationTrigger {
     COMPLETION = 'COMPLETION',
@@ -27,7 +22,16 @@ export enum DeliveryChannel {
 export enum NotificationSendStrategy {
     SINGLE_NOTIFICATION = 'SINGLE_NOTIFICATION',
     COLLECTIVE_SUMMARY = 'COLLECTIVE_SUMMARY',
+    NONE = 'NONE',
 }
+
+const referenceCollection = z.array(
+    z.object({
+        id: z.string(),
+        name: z.string().optional(),
+        displayName: z.string().optional(),
+    })
+)
 
 export const DataSetNotificationTemplateSchema = identifiable
     .merge(withAttributeValues)
@@ -39,16 +43,13 @@ export const DataSetNotificationTemplateSchema = identifiable
         deliveryChannels: z.array(z.nativeEnum(DeliveryChannel)).default([]),
         messageTemplate: z.string().optional(),
         subjectTemplate: z.string().optional(),
-        relativeScheduledDays: z.number().optional(),
-        recipientUserGroup: modelReference.optional(),
+        relativeScheduledDays: z.string().optional(),
+        recipientUserGroup: z.string().optional(),
         dataSets: referenceCollection.default([]),
         sendStrategy: z.nativeEnum(NotificationSendStrategy).optional(),
     })
 
 export const dataSetNotificationTemplateListSchema =
     withDefaultListColumns.extend({
-        notificationTrigger: z.nativeEnum(NotificationTrigger),
-        notificationRecipient: z.nativeEnum(NotificationRecipient),
-        sendStrategy: z.nativeEnum(NotificationSendStrategy).optional(),
-        deliveryChannels: z.array(z.nativeEnum(DeliveryChannel)).default([]),
+        name: z.string(),
     })
