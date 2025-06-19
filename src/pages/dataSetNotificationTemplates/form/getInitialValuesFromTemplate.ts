@@ -14,7 +14,6 @@ export interface DataSetNotificationTemplate {
     notificationRecipient: string
     dataSetNotificationTrigger: string
     relativeScheduledDays: number
-    beforeAfter: string
     sendStrategy: string
     deliveryChannels: string[]
     recipientUserGroup?: { id: string }
@@ -29,7 +28,6 @@ export type DataSetNotificationFormValues = Omit<
     sendEmail: boolean
     sendSms: boolean
     recipientUserGroup?: string
-    beforeAfter: string
 }
 
 export const getInitialValuesFromTemplate = (
@@ -50,7 +48,6 @@ export const getInitialValuesFromTemplate = (
         deliveryChannels: template.deliveryChannels,
         dataSets: fetchedDataSets,
         recipientUserGroup: template?.recipientUserGroup?.id,
-        beforeAfter: template.beforeAfter,
         sendEmail: template.deliveryChannels.includes('EMAIL'),
         sendSms: template.deliveryChannels.includes('SMS'),
     }
