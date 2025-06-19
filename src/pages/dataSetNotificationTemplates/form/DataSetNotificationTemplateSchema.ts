@@ -51,8 +51,5 @@ export const DataSetNotificationTemplateSchema = identifiable
 
 export const dataSetNotificationTemplateListSchema =
     withDefaultListColumns.extend({
-        notificationTrigger: z.nativeEnum(NotificationTrigger),
-        notificationRecipient: z.nativeEnum(NotificationRecipient),
-        sendStrategy: z.nativeEnum(NotificationSendStrategy).optional(),
-        deliveryChannels: z.array(z.nativeEnum(DeliveryChannel)).default([]),
+        name: z.string(),
     })
