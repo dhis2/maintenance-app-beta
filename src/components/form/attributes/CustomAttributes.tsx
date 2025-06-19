@@ -40,7 +40,10 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
         }
 
         return (
-            <StandardFormField key={attribute.id}>
+            <StandardFormField
+                key={attribute.id}
+                dataTest={`attribute-${attribute.id}`}
+            >
                 <FieldRFF
                     component={SingleSelectFieldFF}
                     required={required}
@@ -54,7 +57,10 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
     }
 
     return (
-        <StandardFormField key={attribute.id}>
+        <StandardFormField
+            key={attribute.id}
+            dataTest={`attribute-${attribute.id}`}
+        >
             <FormFieldByValueType
                 valueType={attribute.valueType}
                 name={name}

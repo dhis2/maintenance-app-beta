@@ -62,8 +62,7 @@ const mockeryMapper = (keyName: string) => {
     return undefined
 }
 
-const { identifiable, referenceCollection, withAttributeValues } =
-    modelFormSchemas
+const { withAttributeValues } = modelFormSchemas
 
 export const testAccess = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(AccessSchema, { mockeryMapper }),
@@ -228,6 +227,26 @@ export const testFormProgramIndicatorGroup = (
 ) => ({
     ...generateMock(ProgramIndicatorGroupFormSchema, { mockeryMapper }),
     ...overwrites,
+})
+
+export const testCustomAttribute = ({
+    id = randomDhis2Id(),
+    displayFormName = faker.person.fullName(),
+    mandatory = faker.datatype.boolean(),
+    valueType = 'TEXT',
+} = {}) => ({
+    id,
+    displayFormName,
+    mandatory,
+    valueType,
+})
+
+export const testLegendSets = ({
+    id = randomDhis2Id(),
+    displayName = faker.person.fullName(),
+} = {}) => ({
+    id,
+    displayName,
 })
 
 export const testProgram = ({

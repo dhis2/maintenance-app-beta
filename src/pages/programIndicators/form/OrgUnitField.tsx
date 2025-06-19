@@ -171,21 +171,19 @@ export const OrgUnitField = () => {
     }
 
     return hasRequiredParams ? (
-        <StandardFormField>
-            <ModelSingleSelectField
-                query={{
-                    resource: 'programs',
-                    params: {
-                        fields: programFilters.concat(),
-                        filter: [`id:eq:${programId}`],
-                    },
-                }}
-                input={orgUnitFieldInput}
-                meta={orgUnitFieldMeta}
-                label={i18n.t('Organisation unit field')}
-                transform={getOptionsForSelect}
-            />
-        </StandardFormField>
+        <ModelSingleSelectField
+            query={{
+                resource: 'programs',
+                params: {
+                    fields: programFilters.concat(),
+                    filter: [`id:eq:${programId}`],
+                },
+            }}
+            input={orgUnitFieldInput}
+            meta={orgUnitFieldMeta}
+            label={i18n.t('Organisation unit field')}
+            transform={getOptionsForSelect}
+        />
     ) : (
         <></>
     )

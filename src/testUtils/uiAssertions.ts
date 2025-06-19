@@ -4,7 +4,7 @@ import { uiActions } from './uiActions'
 
 const expectInputFieldToExist = (
     fieldName: string,
-    value: string,
+    value: string | null,
     screen: RenderResult
 ) => {
     const field = screen.getByTestId(`formfields-${fieldName}`)
@@ -13,6 +13,39 @@ const expectInputFieldToExist = (
     expect(input).toBeVisible()
     expect(input).toHaveAttribute('name', fieldName)
     expect(input).toHaveAttribute('value', value)
+}
+
+const expectTextAreaFieldToExist = (
+    fieldName: string,
+    value: string | null,
+    screen: RenderResult
+) => {
+    const field = screen.getByTestId(`formfields-${fieldName}`)
+    expect(field).toBeVisible()
+    const input = within(field).getByRole('textbox') as HTMLInputElement
+    expect(input).toBeVisible()
+    expect(input).toHaveAttribute('name', fieldName)
+    if (value) {
+        expect(input).toHaveAttribute('value', value)
+    } else {
+        expect(input).not.toHaveAttribute('value')
+    }
+}
+
+const expectCheckboxFieldToExist = (
+    fieldName: string,
+    checked: boolean,
+    screen: RenderResult
+) => {
+    const field = screen.getByTestId(`formfields-${fieldName}`)
+    const input = within(field).getByRole('checkbox') as HTMLInputElement
+    expect(input).toHaveAttribute('name', fieldName)
+    const svg = field.querySelector('svg') as SVGSVGElement
+    if (checked) {
+        expect(svg).toHaveClass('checked')
+    } else {
+        expect(svg).not.toHaveClass('checked')
+    }
 }
 const expectFieldToHaveError = (
     fieldTestId: string,
@@ -61,6 +94,29 @@ const expectTransferFieldToExistWithOptions = async (
     })
 }
 
+const expectSelectToExistWithOption = async (
+    triggeringDiv: HTMLElement,
+    expected: { displayName: string }[],
+    screen: RenderResult
+) => {
+    const selectInput = within(triggeringDiv).getByTestId(
+        'dhis2-uicore-select-input'
+    )
+    expect(selectInput).toBeVisible()
+    await userEvent.click(selectInput)
+    const optionsWrapper = await screen.findByTestId(
+        'dhis2-uicore-select-menu-menuwrapper'
+    )
+    expect(optionsWrapper).toBeVisible()
+    const options = within(optionsWrapper).getAllByTestId(
+        'dhis2-uicore-singleselectoption'
+    )
+    expect(options).toHaveLength(expected.length)
+    expected.forEach((option, index) => {
+        expect(options[index]).toHaveTextContent(option.displayName)
+    })
+    await userEvent.click(selectInput)
+}
 const expectInputToErrorWhenExceedsLength = async (
     fieldName: string,
     maxLength: number,
@@ -87,14 +143,23 @@ const expectInputToErrorWhenDuplicate = async (
         screen
     )
 }
+const expectColorAndIconFieldToExist = (screen: RenderResult) => {
+    const field = screen.getByTestId('formfields-colorandicon')
+    expect(field).toBeVisible()
+}
 
 export const uiAssertions = {
     expectNameFieldExist: (value: string, screen: RenderResult) =>
         expectInputFieldToExist('name', value, screen),
     expectCodeFieldExist: (value: string, screen: RenderResult) =>
         expectInputFieldToExist('code', value, screen),
+    expectInputFieldToExist,
+    expectTextAreaFieldToExist,
+    expectColorAndIconFieldToExist,
     expectFieldToHaveError,
     expectTransferFieldToExistWithOptions,
+    expectSelectToExistWithOption,
+    expectCheckboxFieldToExist,
     expectInputToErrorWhenExceedsLength,
     expectNameToErrorWhenExceedsLength: (
         screen: RenderResult,

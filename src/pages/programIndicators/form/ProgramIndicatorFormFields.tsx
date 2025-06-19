@@ -9,6 +9,7 @@ import {
 import React from 'react'
 import { Field as FieldRFF, Field, useField } from 'react-final-form'
 import {
+    CustomAttributesSection,
     DefaultIdentifiableFields,
     DescriptionField,
     ModelTransferField,
@@ -24,6 +25,8 @@ import { DisplayableModel } from '../../../types/models'
 import { ColorAndIconField } from '../../dataElements/fields'
 import { AnalyticsPeriodBoundariesField } from './AnalyticsPeriodBoundariesField'
 import { OrgUnitField } from './OrgUnitField'
+
+const section = SECTIONS_MAP.programIndicator
 
 export const ProgramIndicatorsFormFields = () => {
     const { input: decimalsInput } = useField('decimals')
@@ -45,7 +48,7 @@ export const ProgramIndicatorsFormFields = () => {
                             'Set up the basic information for this program indicator.'
                         )}
                     </StandardFormSectionDescription>
-                    <StandardFormField>
+                    <StandardFormField dataTest="programs-field">
                         <ModelSingleSelectField<DisplayableModel>
                             query={{
                                 resource: 'programs',
@@ -70,7 +73,7 @@ export const ProgramIndicatorsFormFields = () => {
                             )}
                         />
                     </StandardFormField>
-                    <StandardFormField>
+                    <StandardFormField dataTest="decimals-field">
                         <SingleSelectField
                             selected={decimalsInput.value.toString()}
                             onChange={({ selected }) => {
@@ -92,7 +95,7 @@ export const ProgramIndicatorsFormFields = () => {
                             ))}
                         </SingleSelectField>
                     </StandardFormField>
-                    <StandardFormField>
+                    <StandardFormField dataTest="aggregation-type-field">
                         <SingleSelectField
                             selected={aggregationTypeInput.value}
                             onChange={({ selected }) => {
@@ -112,7 +115,7 @@ export const ProgramIndicatorsFormFields = () => {
                             )}
                         </SingleSelectField>
                     </StandardFormField>
-                    <StandardFormField>
+                    <StandardFormField dataTest="analytics-type-field">
                         <SingleSelectField
                             selected={analyticsTypeInput.value}
                             onChange={({ selected }) => {
@@ -132,17 +135,21 @@ export const ProgramIndicatorsFormFields = () => {
                             )}
                         </SingleSelectField>
                     </StandardFormField>
-                    <OrgUnitField />
+                    <StandardFormField>
+                        <OrgUnitField />
+                    </StandardFormField>
                     <StandardFormField>
                         <Field
                             name="displayInForm"
                             type="checkbox"
+                            dataTest="formfields-displayInForm"
                             component={CheckboxFieldFF}
                             label={i18n.t('Display in form')}
                         />
                     </StandardFormField>
                     <StandardFormField>
                         <FieldRFF
+                            dataTest="formfields-aggregateExportCategoryOptionCombo"
                             component={InputFieldFF}
                             name="aggregateExportCategoryOptionCombo"
                             label={i18n.t(
@@ -152,6 +159,7 @@ export const ProgramIndicatorsFormFields = () => {
                     </StandardFormField>
                     <StandardFormField>
                         <FieldRFF
+                            dataTest="formfields-aggregateExportAttributeOptionCombo"
                             component={InputFieldFF}
                             name="aggregateExportAttributeOptionCombo"
                             label={i18n.t(
@@ -161,6 +169,7 @@ export const ProgramIndicatorsFormFields = () => {
                     </StandardFormField>
                     <StandardFormField>
                         <FieldRFF
+                            dataTest="formfields-aggregateExportDataElement"
                             component={InputFieldFF}
                             name="aggregateExportDataElement"
                             label={i18n.t(
@@ -179,6 +188,7 @@ export const ProgramIndicatorsFormFields = () => {
                             {i18n.t('Legends')}
                         </StandardFormSectionTitle>
                         <ModelTransferField
+                            dataTest="legendSets-field"
                             name="legendSets"
                             query={{
                                 resource: 'legendSets',
@@ -197,6 +207,7 @@ export const ProgramIndicatorsFormFields = () => {
                             maxSelections={Infinity}
                         />
                     </StandardFormField>
+                    <CustomAttributesSection schemaSection={section} />
                 </SectionedFormSection>
                 <SectionedFormSection name="editExpression">
                     <StandardFormSectionTitle>

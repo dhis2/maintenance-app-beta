@@ -329,6 +329,7 @@ export const AnalyticsPeriodBoundariesField = () => {
                 onClick={() => {
                     setModalAPB({})
                 }}
+                dataTest="add-boundary-button"
             >
                 {i18n.t('Add a new boundary')}
             </Button>
