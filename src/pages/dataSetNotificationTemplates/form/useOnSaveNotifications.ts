@@ -25,10 +25,12 @@ export const useOnSaveNotifications = () => {
                 const payload = transformFormValues(values)
 
                 const response = await dataEngine.mutate({
-                    resource: 'dataSetNotificationTemplates',
+                    resource: 'dataSetNotificationTemplatefs',
                     type: 'create',
                     data: payload,
                 })
+
+                console.log({ response })
 
                 show('Notification template created successfully')
                 navigate(`/${getSectionPath(section)}`)

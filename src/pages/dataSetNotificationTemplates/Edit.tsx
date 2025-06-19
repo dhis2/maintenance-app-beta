@@ -127,9 +127,7 @@ export const Component = () => {
                 }),
                 error: true,
             })
-            return result
         }
-        return result
     }
 
     const formDescriptor = useMemo(

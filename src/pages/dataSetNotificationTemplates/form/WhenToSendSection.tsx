@@ -36,6 +36,7 @@ export const WhenToSendSection = () => {
                             label={i18n.t('Dataset Notification Trigger')}
                             inputWidth="500px"
                             options={triggerOptions}
+                            required
                         />
                     )}
                     required
