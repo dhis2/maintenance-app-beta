@@ -17,7 +17,6 @@ const section = SECTIONS_MAP.dataSetNotificationTemplate
 export const useOnSaveNotifications = () => {
     const dataEngine = useDataEngine()
     const navigate = useNavigateWithSearchState()
-    const queryClient = useQueryClient()
     const { show } = useAlert((msg) => msg, { success: true })
 
     return useMemo(
@@ -31,10 +30,6 @@ export const useOnSaveNotifications = () => {
                     data: payload,
                 })
 
-                await queryClient.invalidateQueries({
-                    queryKey: [{ resource: 'dataSetNotificationTemplates' }],
-                })
-
                 show('Notification template created successfully')
                 navigate(`/${getSectionPath(section)}`)
                 return { data: response }
@@ -42,6 +37,6 @@ export const useOnSaveNotifications = () => {
                 return createFormError(error)
             }
         },
-        [dataEngine, navigate, queryClient, show]
+        [dataEngine, navigate, show]
     )
 }

@@ -1,5 +1,4 @@
 import { useAlert, useDataEngine } from '@dhis2/app-runtime'
-import { useQueryClient } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import {
     getSectionPath,
@@ -14,7 +13,6 @@ const section = SECTIONS_MAP.dataSetNotificationTemplate
 export const useOnEditNotifications = (templateId: string) => {
     const engine = useDataEngine()
     const navigate = useNavigateWithSearchState()
-    const queryClient = useQueryClient()
     const { show } = useAlert((msg) => msg, { success: true })
 
     return useMemo(
@@ -30,14 +28,7 @@ export const useOnEditNotifications = (templateId: string) => {
                     },
                 })
 
-                await queryClient.invalidateQueries({
-                    queryKey: [{ resource: 'dataSetNotificationTemplates' }],
-                })
-
-                show({
-                    message: 'Notification template Edited successfully',
-                    success: true,
-                })
+                show('Notification template Edited successfully')
 
                 navigate(`/${getSectionPath(section)}`)
                 return response
@@ -45,6 +36,6 @@ export const useOnEditNotifications = (templateId: string) => {
                 return createFormError(error)
             }
         },
-        [engine, navigate, queryClient, templateId]
+        [engine, navigate, templateId]
     )
 }
