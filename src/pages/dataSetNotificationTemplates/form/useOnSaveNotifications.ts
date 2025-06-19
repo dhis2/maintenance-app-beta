@@ -1,5 +1,4 @@
 import { useAlert, useDataEngine } from '@dhis2/app-runtime'
-import { useQueryClient } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import {
     useNavigateWithSearchState,

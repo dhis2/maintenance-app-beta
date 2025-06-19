@@ -5,13 +5,15 @@ import { Field as FieldRFF, useField } from 'react-final-form'
 import { SchemaSection } from '../../../lib'
 import { useValidator } from '../../../lib/models/useFieldValidators'
 
+type SubjectTemplateFieldProps = Readonly<{
+    helpText?: string
+    schemaSection: SchemaSection
+}>
+
 export function SubjectTemplateField({
     schemaSection,
     helpText,
-}: {
-    helpText?: string
-    schemaSection: SchemaSection
-}) {
+}: SubjectTemplateFieldProps) {
     const validator = useValidator({
         schemaSection,
         property: 'subjectTemplate',
@@ -21,7 +23,7 @@ export function SubjectTemplateField({
     })
 
     const helpString =
-        helpText || i18n.t('Enter the subject template for the notification.')
+        helpText ?? i18n.t('Enter the subject template for the notification.')
 
     return (
         <FieldRFF<string | undefined>
@@ -38,13 +40,15 @@ export function SubjectTemplateField({
     )
 }
 
+type MessageTemplateFieldProps = Readonly<{
+    helpText?: string
+    schemaSection: SchemaSection
+}>
+
 export function MessageTemplateField({
     schemaSection,
     helpText,
-}: {
-    helpText?: string
-    schemaSection: SchemaSection
-}) {
+}: MessageTemplateFieldProps) {
     const validator = useValidator({
         schemaSection,
         property: 'messageTemplate',
@@ -54,7 +58,7 @@ export function MessageTemplateField({
     })
 
     const helpString =
-        helpText || i18n.t('Enter the message template for the notification.')
+        helpText ?? i18n.t('Enter the message template for the notification.')
 
     return (
         <FieldRFF<string | undefined>

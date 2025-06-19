@@ -85,7 +85,8 @@ export const Component = () => {
         refetch: refetchTemplate,
     } = useQuery({
         queryKey: ['notificationTemplate', templateId],
-        queryFn: () => fetchNotificationTemplate(dataEngine, templateId!),
+        queryFn: () =>
+            fetchNotificationTemplate(dataEngine, templateId as string),
         enabled: !!templateId,
     })
 
@@ -105,10 +106,10 @@ export const Component = () => {
         enabled: datasetIds.length > 0,
     })
 
-    const isLoading = loadingTemplate || loadingDataSets
-    const isError = errorTemplate || errorDataSets
+    const isLoading = loadingTemplate ?? loadingDataSets
+    const isError = errorTemplate ?? errorDataSets
 
-    const onSubmit = useOnEditNotifications(templateId!)
+    const onSubmit = useOnEditNotifications(templateId as string)
 
     const handleFormSubmit = async (values: DataSetNotificationFormValues) => {
         const result = await onSubmit(transformFormValues(values))

@@ -103,7 +103,7 @@ export const WhoToSendSection = () => {
                                     options={userGroupOptionsWithSelected}
                                     loading={loading}
                                     disabled={
-                                        loading || !userGroupOptions.length
+                                        loading ?? !userGroupOptions.length
                                     }
                                 />
                             )}
