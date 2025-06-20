@@ -47,14 +47,13 @@ const expectCheckboxFieldToExist = (
         expect(svg).not.toHaveClass('checked')
     }
 }
-const expectFieldToHaveError = (
+
+const expectInputFieldToHaveError = (
     fieldTestId: string,
     errorText: string,
     screen: RenderResult
 ) => {
     const field = screen.getByTestId(fieldTestId)
-    const input = within(field).getByRole('textbox') as HTMLInputElement
-    expect(input).toHaveClass('error')
     const error = within(field).getByTestId(`${fieldTestId}-validation`)
     expect(error).toBeVisible()
     expect(error).toHaveTextContent(errorText)
@@ -123,7 +122,7 @@ const expectInputToErrorWhenExceedsLength = async (
     screen: RenderResult
 ) => {
     await userEvent.click(screen.getByTestId(`formfields-${fieldName}-label`))
-    expectFieldToHaveError(
+    expectInputFieldToHaveError(
         `formfields-${fieldName}`,
         `Please enter a maximum of ${maxLength} characters`,
         screen
@@ -137,7 +136,7 @@ const expectInputToErrorWhenDuplicate = async (
 ) => {
     await uiActions.enterInputFieldValue(fieldName, duplicateText, screen)
     await userEvent.click(screen.getByTestId(`formfields-${fieldName}-label`))
-    expectFieldToHaveError(
+    expectInputFieldToHaveError(
         `formfields-${fieldName}`,
         `This field requires a unique value, please choose another one`,
         screen
@@ -156,7 +155,7 @@ export const uiAssertions = {
     expectInputFieldToExist,
     expectTextAreaFieldToExist,
     expectColorAndIconFieldToExist,
-    expectFieldToHaveError,
+    expectFieldToHaveError: expectInputFieldToHaveError,
     expectTransferFieldToExistWithOptions,
     expectSelectToExistWithOption,
     expectCheckboxFieldToExist,

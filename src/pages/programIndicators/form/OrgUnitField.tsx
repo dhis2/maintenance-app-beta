@@ -10,7 +10,7 @@ const PROGRAM_TYPE_WITHOUT_REGISTRATION = 'WITHOUT_REGISTRATION'
 const ANALYTICS_TYPE_EVENT = 'EVENT'
 const ANALYTICS_TYPE_ENROLLMENT = 'ENROLLMENT'
 const ORG_UNIT_VALUE_TYPE = 'ORGANISATION_UNIT'
-const staticOptions = {
+export const staticOptions = {
     eventDefault: {
         id: ANALYTICS_TYPE_EVENT,
         displayName: i18n.t('Event organisation unit default'),
@@ -128,7 +128,7 @@ export const OrgUnitField = () => {
             },
             []
         )
-    }, [])
+    }, [formValues.program])
 
     const getOptionsForSelect = (values: ProgramStagesType[]) => {
         const dataElements =
@@ -172,6 +172,7 @@ export const OrgUnitField = () => {
 
     return hasRequiredParams ? (
         <ModelSingleSelectField
+            dataTest="org-unit-field"
             query={{
                 resource: 'programs',
                 params: {

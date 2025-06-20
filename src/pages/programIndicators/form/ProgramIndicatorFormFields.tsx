@@ -33,7 +33,9 @@ export const ProgramIndicatorsFormFields = () => {
     const { input: aggregationTypeInput } = useField('aggregationType')
     const { input: analyticsTypeInput } = useField('analyticsType')
     const { input: programInput, meta: programMeta } = useField('program')
-    const programFilters = ['id,displayName,programType'] as const
+    const programFilters = [
+        'id,displayName,programType,programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,valueType]]',
+    ] as const
 
     const schema = useSchema(SECTIONS_MAP.programIndicator.name)
     return (
@@ -48,8 +50,9 @@ export const ProgramIndicatorsFormFields = () => {
                             'Set up the basic information for this program indicator.'
                         )}
                     </StandardFormSectionDescription>
-                    <StandardFormField dataTest="programs-field">
+                    <StandardFormField>
                         <ModelSingleSelectField<DisplayableModel>
+                            dataTest="programs-field"
                             query={{
                                 resource: 'programs',
                                 params: {
@@ -224,6 +227,7 @@ export const ProgramIndicatorsFormFields = () => {
                     </StandardFormSectionDescription>
                     <StandardFormField>
                         <FieldRFF
+                            dataTest="formfields-expression"
                             component={TextAreaFieldFF}
                             inputWidth="400px"
                             name="expression"
@@ -246,6 +250,7 @@ export const ProgramIndicatorsFormFields = () => {
                     </StandardFormSectionDescription>
                     <StandardFormField>
                         <FieldRFF
+                            dataTest="formfields-filter"
                             component={TextAreaFieldFF}
                             inputWidth="400px"
                             name="filter"

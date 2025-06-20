@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker'
-import { render } from '@testing-library/react'
+import { render, waitFor, within } from '@testing-library/react'
+import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/programIndicatorsSchema.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
@@ -17,6 +18,8 @@ import { generateRenderer } from '../../testUtils/generateRenderer'
 import TestComponentWithRouter from '../../testUtils/TestComponentWithRouter'
 import { uiActions } from '../../testUtils/uiActions'
 import { uiAssertions } from '../../testUtils/uiAssertions'
+import { Program, ProgramTrackedEntityAttribute } from '../../types/generated'
+import { staticOptions } from './form/OrgUnitField'
 import { Component } from './New'
 import resetAllMocks = jest.resetAllMocks
 
@@ -31,7 +34,13 @@ describe('Program indicator add form tests', () => {
     const createMock = jest.fn()
     const renderForm = generateRenderer(
         { section, mockSchema },
-        (routeOptions, { matchingExistingElementFilter = undefined } = {}) => {
+        (
+            routeOptions,
+            {
+                customTestData = {},
+                matchingExistingElementFilter = undefined,
+            } = {}
+        ) => {
             const attributes = [testCustomAttribute()]
             const programs = [testProgram(), testProgram(), testProgram()]
             const legendSets = [testLegendSets(), testLegendSets()]
@@ -41,13 +50,40 @@ describe('Program indicator add form tests', () => {
                     customData={{
                         attributes: () => ({ attributes }),
                         programs: () => ({ programs }),
-                        legendSets: () => ({ legendSets }),
+                        legendSets: () => ({
+                            legendSets,
+                            pager: {
+                                page: 1,
+                                total: 2,
+                                pageSize: 20,
+                                pageCount: 1,
+                            },
+                        }),
                         programIndicators: (type: any, params: any) => {
                             if (type === 'create') {
                                 createMock(params)
                                 return { statusCode: 204 }
                             }
+                            if (type === 'read') {
+                                if (
+                                    params?.params?.filter?.includes(
+                                        matchingExistingElementFilter
+                                    )
+                                ) {
+                                    return {
+                                        pager: { total: 1 },
+                                        programIndicators: [
+                                            testProgramIndicator(),
+                                        ],
+                                    }
+                                }
+                                return {
+                                    pager: { total: 0 },
+                                    programIndicators: [],
+                                }
+                            }
                         },
+                        ...customTestData,
                     }}
                     routeOptions={routeOptions}
                 >
@@ -141,50 +177,450 @@ describe('Program indicator add form tests', () => {
             ).toBeVisible()
         })
     })
-    it('should show the org unit field when...', () => {})
-    xit('should have a cancel button with a link back to the list view', async () => {
+    it('should show the org unit field when there is a program selected with type WITH_REGISTRATION and analytics type is event', async () => {
+        const programTrackedEntityAttributes = [
+            {
+                trackedEntityAttribute: {
+                    valueType: 'ORGANISATION_UNIT',
+                    displayName: 'entity attribute org unit',
+                    id: randomDhis2Id(),
+                },
+            },
+            {
+                trackedEntityAttribute: {
+                    valueType: 'TEXT',
+                    displayName: 'other entity attribute',
+                    id: randomDhis2Id(),
+                },
+            },
+        ] as unknown as ProgramTrackedEntityAttribute[]
+        const programWithRegistration = testProgram({
+            programType: 'WITH_REGISTRATION' as Program.programType,
+            programTrackedEntityAttributes,
+        })
+        const programStageDataElements = [
+            {
+                dataElement: {
+                    valueType: 'BOOLEAN',
+                    displayName: 'boolean data element',
+                    id: randomDhis2Id(),
+                },
+            },
+            {
+                dataElement: {
+                    valueType: 'ORGANISATION_UNIT',
+                    displayName: 'org unit data element',
+                    id: randomDhis2Id(),
+                },
+            },
+        ]
+        const { screen } = await renderForm({
+            customTestData: {
+                programs: (type: any, params: any) => {
+                    if (
+                        params.params.filter[0] ===
+                        `id:eq:${programWithRegistration.id}`
+                    ) {
+                        return {
+                            programs: [
+                                {
+                                    programStages: [
+                                        {
+                                            programStageDataElements,
+                                            id: randomDhis2Id(),
+                                        },
+                                    ],
+                                },
+                            ],
+                        }
+                    }
+                    return Promise.resolve({
+                        programs: [programWithRegistration, testProgram()],
+                    })
+                },
+            },
+        })
+
+        const programOptions = await uiActions.openSingleSelect(
+            screen.getByTestId('programs-field'),
+            screen
+        )
+        await userEvent.click(programOptions[0])
+
+        const analyticsOptions = await uiActions.openSingleSelect(
+            screen.getByTestId('analytics-type-field'),
+            screen
+        )
+        await userEvent.click(analyticsOptions[0])
+
+        const orgUnitField = await screen.findByTestId('org-unit-field')
+        await uiAssertions.expectSelectToExistWithOption(
+            orgUnitField,
+            [
+                staticOptions.eventDefault,
+                programTrackedEntityAttributes[0].trackedEntityAttribute,
+                programStageDataElements[1].dataElement,
+                staticOptions.registration,
+                staticOptions.enrollment,
+                staticOptions.ownerAtStart,
+                staticOptions.ownerAtEnd,
+            ],
+            screen
+        )
+    })
+    it('should show the org unit field when there is a program selected with type WITH_REGISTRATION and analytics type is enrollment', async () => {
+        const programTrackedEntityAttributes = [
+            {
+                trackedEntityAttribute: {
+                    valueType: 'ORGANISATION_UNIT',
+                    displayName: 'entity attribute org unit',
+                    id: randomDhis2Id(),
+                },
+            },
+            {
+                trackedEntityAttribute: {
+                    valueType: 'TEXT',
+                    displayName: 'other entity attribute',
+                    id: randomDhis2Id(),
+                },
+            },
+        ] as unknown as ProgramTrackedEntityAttribute[]
+        const programWithRegistration = testProgram({
+            programType: 'WITH_REGISTRATION' as Program.programType,
+            programTrackedEntityAttributes,
+        })
+        const programStageDataElements = [
+            {
+                dataElement: {
+                    valueType: 'BOOLEAN',
+                    displayName: 'boolean data element',
+                    id: randomDhis2Id(),
+                },
+            },
+            {
+                dataElement: {
+                    valueType: 'ORGANISATION_UNIT',
+                    displayName: 'org unit data element',
+                    id: randomDhis2Id(),
+                },
+            },
+        ]
+        const { screen } = await renderForm({
+            customTestData: {
+                programs: (type: any, params: any) => {
+                    if (
+                        params.params.filter[0] ===
+                        `id:eq:${programWithRegistration.id}`
+                    ) {
+                        return {
+                            programs: [
+                                {
+                                    programStages: [
+                                        {
+                                            programStageDataElements,
+                                            id: randomDhis2Id(),
+                                        },
+                                    ],
+                                },
+                            ],
+                        }
+                    }
+                    return Promise.resolve({
+                        programs: [programWithRegistration, testProgram()],
+                    })
+                },
+            },
+        })
+
+        const programOptions = await uiActions.openSingleSelect(
+            screen.getByTestId('programs-field'),
+            screen
+        )
+        await userEvent.click(programOptions[0])
+
+        const analyticsOptions = await uiActions.openSingleSelect(
+            screen.getByTestId('analytics-type-field'),
+            screen
+        )
+        await userEvent.click(analyticsOptions[1])
+
+        const orgUnitField = await screen.findByTestId('org-unit-field')
+        await uiAssertions.expectSelectToExistWithOption(
+            orgUnitField,
+            [
+                staticOptions.enrollmentDefault,
+                programTrackedEntityAttributes[0].trackedEntityAttribute,
+                staticOptions.registration,
+                staticOptions.ownerAtStart,
+                staticOptions.ownerAtEnd,
+            ],
+            screen
+        )
+    })
+    it('should show the org unit field when there is a program selected with type WITHOUT_REGISTRATION', async () => {
+        const programWithoutRegistration = testProgram({
+            programType: 'WITHOUT_REGISTRATION' as Program.programType,
+        })
+        const programStageDataElements = [
+            {
+                dataElement: {
+                    valueType: 'BOOLEAN',
+                    displayName: 'boolean data element',
+                    id: randomDhis2Id(),
+                },
+            },
+            {
+                dataElement: {
+                    valueType: 'ORGANISATION_UNIT',
+                    displayName: 'org unit data element',
+                    id: randomDhis2Id(),
+                },
+            },
+        ]
+        const { screen } = await renderForm({
+            customTestData: {
+                programs: (type: any, params: any) => {
+                    if (
+                        params.params.filter[0] ===
+                        `id:eq:${programWithoutRegistration.id}`
+                    ) {
+                        return {
+                            programs: [
+                                {
+                                    programStages: [
+                                        {
+                                            programStageDataElements,
+                                            id: randomDhis2Id(),
+                                        },
+                                    ],
+                                },
+                            ],
+                        }
+                    }
+                    return Promise.resolve({
+                        programs: [programWithoutRegistration, testProgram()],
+                    })
+                },
+            },
+        })
+
+        const programOptions = await uiActions.openSingleSelect(
+            screen.getByTestId('programs-field'),
+            screen
+        )
+        expect(programOptions).toHaveLength(2)
+        await userEvent.click(programOptions[0])
+
+        const orgUnitField = await screen.findByTestId('org-unit-field')
+        await uiAssertions.expectSelectToExistWithOption(
+            orgUnitField,
+            [
+                staticOptions.eventDefault,
+                programStageDataElements[1].dataElement,
+            ],
+            screen
+        )
+    })
+    it('should not show the org unit field when no program is selected', async () => {
+        const { screen } = await renderForm()
+
+        await waitFor(() => {
+            expect(
+                screen.queryByTestId('org-unit-field')
+            ).not.toBeInTheDocument()
+        })
+    })
+    it('should not show the org unit field when there is a program selected with type WITH_REGISTRATION but no analytics type is selected', async () => {
+        const programWithRegistration = testProgram({
+            programType: 'WITH_REGISTRATION' as Program.programType,
+        })
+        const { screen } = await renderForm({
+            customTestData: {
+                programs: (type: any, params: any) => {
+                    return Promise.resolve({
+                        programs: [programWithRegistration, testProgram()],
+                    })
+                },
+            },
+        })
+        const programOptions = await uiActions.openSingleSelect(
+            screen.getByTestId('programs-field'),
+            screen
+        )
+        await userEvent.click(programOptions[0])
+
+        await waitFor(() => {
+            expect(
+                screen.queryByTestId('org-unit-field')
+            ).not.toBeInTheDocument()
+        })
+    })
+    it('should have a cancel button with a link back to the list view', async () => {
         const { screen } = await renderForm()
         const cancelButton = screen.getByTestId('form-cancel-link')
         expect(cancelButton).toBeVisible()
+        screen.debug(cancelButton)
         expect(cancelButton).toHaveAttribute('href', `/${section.namePlural}`)
     })
-    xit('should not submit when required values are missing', async () => {
+    it('should not submit when required values are missing', async () => {
         const { screen } = await renderForm()
         await uiActions.submitForm(screen)
         expect(createMock).not.toHaveBeenCalled()
+        uiAssertions.expectFieldToHaveError(
+            'programs-field',
+            'Required',
+            screen
+        )
         uiAssertions.expectFieldToHaveError(
             'formfields-name',
             'Required',
             screen
         )
-    })
-    xit('should submit the data', async () => {
-        const { screen, programIndicators } = await renderForm()
-        const aName = faker.internet.userName()
-        const aCode = faker.science.chemicalElement().symbol
-        const selectedPiIndicator = programIndicators[1]
-        await uiActions.enterName(aName, screen)
-        await uiActions.enterCode(aCode, screen)
-        await uiActions.pickOptionInTransfer(
-            'program-indicators-transfer',
-            selectedPiIndicator.displayName,
+        uiAssertions.expectFieldToHaveError(
+            'formfields-shortName',
+            'Required',
             screen
         )
+    })
+    it('should submit the data', async () => {
+        const programWithoutRegistration = testProgram({
+            programType: 'WITHOUT_REGISTRATION' as Program.programType,
+        })
+        const aName = faker.internet.userName()
+        const aShortName = faker.internet.userName()
+        const aCode = faker.science.chemicalElement().symbol
+        const aDescription = faker.company.buzzPhrase()
+        const aCatOptionExport = faker.internet.userName()
+        const anAttOptionExport = faker.internet.userName()
+        const anAggDataExport = faker.internet.userName()
+        const anAttribute = faker.internet.userName()
+        const anExpression = faker.finance.routingNumber()
+        const aFilter = faker.finance.routingNumber()
+
+        const { screen, legendSets, attributes } = await renderForm({
+            customTestData: {
+                programs: (type: any, params: any) => {
+                    if (
+                        params.params.filter[0] ===
+                        `id:eq:${programWithoutRegistration.id}`
+                    ) {
+                        return {
+                            programs: [],
+                        }
+                    }
+                    return Promise.resolve({
+                        programs: [programWithoutRegistration, testProgram()],
+                    })
+                },
+            },
+        })
+
+        const programOptions = await uiActions.openSingleSelect(
+            screen.getByTestId('programs-field'),
+            screen
+        )
+        await userEvent.click(programOptions[0])
+        await uiActions.enterName(aName, screen)
+        await uiActions.enterInputFieldValue('shortName', aShortName, screen)
+        await uiActions.enterCode(aCode, screen)
+        // await uiActions.pickColor(screen)
+        await uiActions.enterInputFieldValue(
+            'description',
+            aDescription,
+            screen
+        )
+        const decimalsOptions = await uiActions.openSingleSelect(
+            screen.getByTestId('decimals-field'),
+            screen
+        )
+        await userEvent.click(decimalsOptions[2])
+
+        const aggregationTypeOptions = await uiActions.openSingleSelect(
+            screen.getByTestId('aggregation-type-field'),
+            screen
+        )
+        await userEvent.click(aggregationTypeOptions[0])
+
+        const analyticsOptions = await uiActions.openSingleSelect(
+            screen.getByTestId('analytics-type-field'),
+            screen
+        )
+        await userEvent.click(analyticsOptions[0])
+
+        const orgUnitOptions = await uiActions.openSingleSelect(
+            screen.getByTestId('org-unit-field'),
+            screen
+        )
+        await userEvent.click(orgUnitOptions[0])
+        await uiActions.clickOnCheckboxField('displayInForm', screen)
+        await uiActions.enterInputFieldValue(
+            'aggregateExportCategoryOptionCombo',
+            aCatOptionExport,
+            screen
+        )
+        await uiActions.enterInputFieldValue(
+            'aggregateExportAttributeOptionCombo',
+            anAttOptionExport,
+            screen
+        )
+        await uiActions.enterInputFieldValue(
+            'aggregateExportDataElement',
+            anAggDataExport,
+            screen
+        )
+        await uiActions.pickOptionInTransfer(
+            'legendSets-field',
+            legendSets[0].displayName,
+            screen
+        )
+        const attributeInput = within(
+            screen.getByTestId(`attribute-${attributes[0].id}`)
+        ).getByRole('textbox') as HTMLInputElement
+        await userEvent.type(attributeInput, anAttribute)
+        await uiActions.enterInputFieldValue(`expression`, anExpression, screen)
+        await uiActions.enterInputFieldValue(`filter`, aFilter, screen)
         await uiActions.submitForm(screen)
         expect(createMock).toHaveBeenCalledTimes(1)
+        // expect(createMock).toHaveBeenLastCalledWith('lalala')
         expect(createMock).toHaveBeenLastCalledWith(
             expect.objectContaining({
-                id: undefined,
-                data: {
+                data: expect.objectContaining({
                     id: undefined,
+                    program: expect.objectContaining({
+                        id: programWithoutRegistration.id,
+                    }),
                     name: aName,
+                    shortName: aShortName,
                     code: aCode,
-                    programIndicators: [selectedPiIndicator],
-                },
+                    description: aDescription,
+                    decimals: '1',
+                    aggregationType: 'SUM',
+                    analyticsType: 'EVENT',
+                    displayInForm: true,
+                    aggregateExportAttributeOptionCombo: anAttOptionExport,
+                    aggregateExportCategoryOptionCombo: aCatOptionExport,
+                    aggregateExportDataElement: anAggDataExport,
+                    legendSets: [
+                        expect.objectContaining({ id: legendSets[0].id }),
+                    ],
+                    attributeValues: [
+                        {
+                            attribute: expect.objectContaining({
+                                id: attributes[0].id,
+                            }),
+                            value: anAttribute,
+                        },
+                    ],
+                    expression: anExpression,
+                    filter: aFilter,
+                    style: { color: undefined, icon: undefined },
+                    analyticsPeriodBoundaries: [],
+                    orgUnitField: staticOptions.eventDefault.id,
+                }),
             })
         )
     })
-    xit('should show an error if name field is too long', async () => {
+    it('should show an error if name field is too long', async () => {
         const { screen } = await renderForm()
         const longText = randomLongString(231)
         await uiActions.enterName(longText, screen)
@@ -192,7 +628,7 @@ describe('Program indicator add form tests', () => {
         await uiActions.submitForm(screen)
         expect(createMock).not.toHaveBeenCalled()
     })
-    xit('should show an error if code field is too long', async () => {
+    it('should show an error if code field is too long', async () => {
         const { screen } = await renderForm()
         const longText = randomLongString(60)
         await uiActions.enterCode(longText, screen)
@@ -200,7 +636,20 @@ describe('Program indicator add form tests', () => {
         await uiActions.submitForm(screen)
         expect(createMock).not.toHaveBeenCalled()
     })
-    xit('should show an error if name field is a duplicate', async () => {
+    it('should show an error if description field is too long', async () => {
+        const { screen } = await renderForm()
+        const longText = randomLongString(2060)
+        await uiActions.enterInputFieldValue('description', longText, screen)
+        await uiAssertions.expectInputToErrorWhenExceedsLength(
+            'description',
+            2000,
+            screen
+        )
+        await uiActions.submitForm(screen)
+        expect(createMock).not.toHaveBeenCalled()
+    })
+
+    it('should show an error if name field is a duplicate', async () => {
         const existingName = faker.company.name()
         const { screen } = await renderForm({
             matchingExistingElementFilter: `name:ieq:${existingName}`,
@@ -209,7 +658,7 @@ describe('Program indicator add form tests', () => {
         await uiActions.submitForm(screen)
         expect(createMock).not.toHaveBeenCalled()
     })
-    xit('should show an error if code field is a duplicate', async () => {
+    it('should show an error if code field is a duplicate', async () => {
         const existingCode = faker.science.chemicalElement().symbol
         const { screen } = await renderForm({
             matchingExistingElementFilter: `code:ieq:${existingCode}`,

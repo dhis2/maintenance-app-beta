@@ -32,6 +32,8 @@ import {
     CategoryMapping,
     OptionMapping,
     OrganisationUnit,
+    Program,
+    ProgramTrackedEntityAttribute,
 } from '../types/generated'
 
 const { withDefaultListColumns } = modelFormSchemas
@@ -253,11 +255,18 @@ export const testProgram = ({
     id = randomDhis2Id(),
     name = faker.person.fullName(),
     categoryMappings = [] as CategoryMapping[],
+    programType = randomValueIn([
+        'WITH_REGISTRATION',
+        'WITHOUT_REGISTRATION',
+    ]) as Program.programType,
+    programTrackedEntityAttributes = [] as ProgramTrackedEntityAttribute[],
 } = {}) => ({
     id,
     name,
     displayName: name,
     categoryMappings,
+    programType,
+    programTrackedEntityAttributes,
 })
 
 export const testOrgUnitLevel = ({

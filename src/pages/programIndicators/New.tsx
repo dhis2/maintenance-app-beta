@@ -30,7 +30,7 @@ export const Component = () => {
                             >
                                 <form onSubmit={handleSubmit}>
                                     <ProgramIndicatorsFormFields />
-                                    <DefaultFormFooter />
+                                    <DefaultFormFooter cancelTo="/programIndicators" />
                                 </form>
                                 <SectionedFormErrorNotice />
                             </SectionedFormLayout>

@@ -62,6 +62,23 @@ const pickOptionInTransfer = async (
     await userEvent.dblClick(lhsOptionToPick)
 }
 
+const pickColor = async (screen: RenderResult) => {
+    const colorButton = screen.getByTestId('colorpicker-trigger')
+    await userEvent.click(colorButton)
+    const colors = screen.getByTestId('colors').querySelectorAll('span')
+    await userEvent.click(colors[0])
+    screen.debug(screen.getByTestId('colorpicker-trigger'))
+}
+
+const clickOnCheckboxField = async (
+    fieldName: string,
+    screen: RenderResult
+) => {
+    const field = screen.getByTestId(`formfields-${fieldName}`)
+    const input = within(field).getByRole('checkbox') as HTMLInputElement
+    await userEvent.click(input)
+}
+
 export const uiActions = {
     openModal,
     openSingleSelect,
@@ -73,4 +90,6 @@ export const uiActions = {
         await enterInputFieldValue('code', text, screen),
     pickOptionInTransfer,
     clearInputField,
+    // pickColor, Need to fix this
+    clickOnCheckboxField,
 }
