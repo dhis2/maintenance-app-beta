@@ -1,10 +1,8 @@
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     DEFAULT_FIELD_FILTERS,
-    SECTIONS_MAP,
 } from '../../../lib'
 import {
-    DataSet,
     PickWithFieldFilters,
     ProgramIndicator,
 } from '../../../types/generated'

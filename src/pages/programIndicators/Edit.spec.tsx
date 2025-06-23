@@ -146,14 +146,8 @@ describe('Program indicator edit form tests', () => {
     })
 
     it('contain all needed field', async () => {
-        const {
-            screen,
-            programs,
-            legendSets,
-            attributes,
-            programIndicator,
-            programStageDataElements,
-        } = await renderForm()
+        const { screen, programs, legendSets, attributes, programIndicator } =
+            await renderForm()
         await uiAssertions.expectSelectToExistWithOptions(
             screen.getByTestId('programs-field'),
             {

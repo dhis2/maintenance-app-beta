@@ -59,7 +59,7 @@ export function ModelSingleSelectField<
 }: ModelSingleSelectFieldProps<TModel> & RelevantRenderProps<TModel>) {
     return (
         <Field
-            dataTest={dataTest ?? `formfields-modelsingleselect-${name}`}
+            dataTest={dataTest ?? `formfields-modelsingleselect-${input.name}`}
             error={meta.invalid}
             validationText={(meta.touched && meta.error?.toString()) || ''}
             name={input.name}

@@ -1,13 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
-import { Field } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
-import { useField } from 'react-final-form'
 import { SearchableSingleSelect } from '../../../components'
 import { getConstantTranslation } from '../../../lib'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
-import { PartialLoadedDisplayableModel } from '../../../types/models'
-import { ModelSingleSelect } from '../ModelSingleSelect'
 
 export type PeriodTypes = { periodTypes: [{ name: string }] }
 
