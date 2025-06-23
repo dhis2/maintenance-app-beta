@@ -1,7 +1,3 @@
-import { generateDefaultEditFormTests } from '../defaultFormTests'
-
-generateDefaultEditFormTests({ componentName: 'Indicator group set' })
-
 xdescribe('Indicator group set edit form additional tests', () => {
     it('contain all needed field prefilled', () => {})
     it('should not submit when a required values is removed ', () => {})

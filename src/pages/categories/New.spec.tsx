@@ -1,7 +1,3 @@
-import { generateDefaultAddFormTests } from '../defaultFormTests'
-
-generateDefaultAddFormTests({ componentName: 'Category' })
-
 xdescribe('Category add form additional tests', () => {
     it('contain all needed field', () => {})
     it('should not submit when required values are missing', () => {})

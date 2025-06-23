@@ -1,4 +1,3 @@
-import { FetchError } from '@dhis2/app-runtime'
 import { faker } from '@faker-js/faker'
 import {
     render,
@@ -13,17 +12,10 @@ import { getRelativeTime, ModelSchemas, SECTIONS_MAP } from '../../lib'
 import { useSchemaStore } from '../../lib/schemas/schemaStore'
 import { useCurrentUserStore } from '../../lib/user/currentUserStore'
 import { testAccess, testOrgUnit } from '../../testUtils/builders'
+import { defaultUserDataStoreData } from '../../testUtils/generateRenderer'
 import TestComponentWithRouter from '../../testUtils/TestComponentWithRouter'
 import type { OrganisationUnit } from '../../types/generated'
 import { Component as OrgUnitsList } from './List'
-
-const error404 = new FetchError({
-    type: 'unknown',
-    message: '404 not found',
-    details: { httpStatusCode: 404 } as FetchError['details'],
-})
-
-const defaultUserDataStoreData = () => Promise.reject(new FetchError(error404))
 
 const deleteOrgUnitMock = jest.fn()
 const renderList = async ({
