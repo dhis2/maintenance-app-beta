@@ -93,26 +93,39 @@ const expectTransferFieldToExistWithOptions = async (
     })
 }
 
-const expectSelectToExistWithOption = async (
+const expectSelectToExistWithOptions = async (
     triggeringDiv: HTMLElement,
-    expected: { displayName: string }[],
+    {
+        selected = undefined,
+        options = [],
+        extraSelectedLengthToRemove = 0,
+    }: {
+        selected?: string
+        options: { displayName: string }[]
+        extraSelectedLengthToRemove?: number
+    },
     screen: RenderResult
 ) => {
     const selectInput = within(triggeringDiv).getByTestId(
         'dhis2-uicore-select-input'
     )
     expect(selectInput).toBeVisible()
+    if (selected) {
+        expect(selectInput).toHaveTextContent(selected)
+    }
     await userEvent.click(selectInput)
     const optionsWrapper = await screen.findByTestId(
         'dhis2-uicore-select-menu-menuwrapper'
     )
     expect(optionsWrapper).toBeVisible()
-    const options = within(optionsWrapper).getAllByTestId(
+    const foundOptions = within(optionsWrapper).getAllByTestId(
         'dhis2-uicore-singleselectoption'
     )
-    expect(options).toHaveLength(expected.length)
-    expected.forEach((option, index) => {
-        expect(options[index]).toHaveTextContent(option.displayName)
+    expect(foundOptions).toHaveLength(
+        options.length + extraSelectedLengthToRemove
+    )
+    options.forEach((option, index) => {
+        expect(foundOptions[index]).toHaveTextContent(option.displayName)
     })
     await userEvent.click(selectInput)
 }
@@ -157,7 +170,7 @@ export const uiAssertions = {
     expectColorAndIconFieldToExist,
     expectFieldToHaveError: expectInputFieldToHaveError,
     expectTransferFieldToExistWithOptions,
-    expectSelectToExistWithOption,
+    expectSelectToExistWithOptions,
     expectCheckboxFieldToExist,
     expectInputToErrorWhenExceedsLength,
     expectNameToErrorWhenExceedsLength: (

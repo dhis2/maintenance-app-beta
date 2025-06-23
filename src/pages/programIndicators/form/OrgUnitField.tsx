@@ -102,7 +102,7 @@ export const OrgUnitField = () => {
     }
 
     const programAttributesForProgram: DisplayableModel[] = useMemo(() => {
-        if (!formValues.program.programTrackedEntityAttributes) {
+        if (!formValues?.program?.programTrackedEntityAttributes) {
             return []
         }
         return formValues.program.programTrackedEntityAttributes.reduce(
@@ -180,6 +180,7 @@ export const OrgUnitField = () => {
                     filter: [`id:eq:${programId}`],
                 },
             }}
+            inputWidth="400px"
             input={orgUnitFieldInput}
             meta={orgUnitFieldMeta}
             label={i18n.t('Organisation unit field')}

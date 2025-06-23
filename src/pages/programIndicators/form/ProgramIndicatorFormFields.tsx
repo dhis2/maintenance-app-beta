@@ -137,7 +137,7 @@ export const ProgramIndicatorsFormFields = () => {
                             inputWidth="400px"
                             selected={decimalsInput.value.toString()}
                             onChange={({ selected }) => {
-                                decimalsInput.onChange(selected)
+                                decimalsInput.onChange(parseInt(selected))
                                 decimalsInput.onBlur()
                             }}
                             label={i18n.t('Decimals in data output')}

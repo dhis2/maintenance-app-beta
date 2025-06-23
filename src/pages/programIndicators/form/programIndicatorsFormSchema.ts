@@ -1,15 +1,51 @@
 import { z } from 'zod'
 import { getDefaults, modelFormSchemas } from '../../../lib'
+import { UserSchema } from '../../../lib/form/modelFormSchemas'
 import { createFormValidate } from '../../../lib/form/validate'
+import { ProgramIndicator } from '../../../types/generated'
 
 const {
     identifiable,
     referenceCollection,
     modelReference,
     withAttributeValues,
+    withDefaultListColumns,
 } = modelFormSchemas
 
-export const programIndicatorFormSchema = identifiable
+const ProgramIndicatorsBaseSchema = z.object({
+    program: modelReference,
+    aggregationType: z
+        .nativeEnum(ProgramIndicator.aggregationType)
+        .optional(),
+    analyticsType: z
+        .nativeEnum(ProgramIndicator.analyticsType),
+    displayInForm: z.boolean().default(false),
+    legendSets: referenceCollection.default([]),
+    aggregateExportCategoryOptionCombo: z.string().optional(),
+    aggregateExportAttributeOptionCombo: z.string().optional(),
+    expression: z.string().optional(),
+    filter: z.string().optional(),
+    orgUnitField: z.string().optional(),
+    decimals: z.number().int().lte(5).gte(0).optional(),
+})
+
+export const ProgramIndicatorsListSchema = ProgramIndicatorsBaseSchema.merge(
+    withDefaultListColumns
+)
+    .merge(withAttributeValues)
+    .extend({
+        program: modelReference,
+        displayShortName: z.string(),
+        displayDescription: z.string().optional(),
+        displayFormName: z.string().optional(),
+        user: UserSchema,
+        favorite: z.boolean(),
+        code: z.string().optional(),
+    })
+
+export const programIndicatorFormSchema = ProgramIndicatorsBaseSchema.merge(
+    identifiable
+)
     .merge(withAttributeValues)
     .extend({
         shortName: z.string().trim(),
@@ -18,18 +54,7 @@ export const programIndicatorFormSchema = identifiable
             color: z.string().optional(),
             icon: z.string().optional(),
         }),
-        description: z.string().trim().optional(),
-        program: modelReference,
-        decimals: z.string().optional(),
-        aggregationType: z.string().optional(),
-        analyticsType: z.string(),
         orgUnitField: z.string().optional(),
-        displayInForm: z.boolean().default(false),
-        legendSets: referenceCollection.default([]),
-        aggregateExportCategoryOptionCombo: z.string().optional(),
-        aggregateExportAttributeOptionCombo: z.string().optional(),
-        expression: z.string().optional(),
-        filter: z.string().optional(),
         analyticsPeriodBoundaries: z
             .array(
                 z.object({

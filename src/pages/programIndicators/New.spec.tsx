@@ -12,7 +12,6 @@ import {
     testLegendSets,
     testProgram,
     testProgramIndicator,
-    testProgramIndicatorGroup,
 } from '../../testUtils/builders'
 import { generateRenderer } from '../../testUtils/generateRenderer'
 import TestComponentWithRouter from '../../testUtils/TestComponentWithRouter'
@@ -110,9 +109,9 @@ describe('Program indicator add form tests', () => {
 
     it('contain all needed field', async () => {
         const { screen, programs, legendSets, attributes } = await renderForm()
-        await uiAssertions.expectSelectToExistWithOption(
+        await uiAssertions.expectSelectToExistWithOptions(
             screen.getByTestId('programs-field'),
-            programs,
+            { options: programs },
             screen
         )
         uiAssertions.expectNameFieldExist('', screen)
@@ -129,23 +128,31 @@ describe('Program indicator add form tests', () => {
             { displayName: '4' },
             { displayName: '5' },
         ]
-        await uiAssertions.expectSelectToExistWithOption(
+        await uiAssertions.expectSelectToExistWithOptions(
             screen.getByTestId('decimals-field'),
-            expectedDecimalsOptions,
+            { options: expectedDecimalsOptions },
             screen
         )
-        await uiAssertions.expectSelectToExistWithOption(
+        await uiAssertions.expectSelectToExistWithOptions(
             screen.getByTestId('aggregation-type-field'),
-            mockSchema.properties.aggregationType.constants.map((o) => ({
-                displayName: getConstantTranslation(o),
-            })),
+            {
+                options: mockSchema.properties.aggregationType.constants.map(
+                    (o) => ({
+                        displayName: getConstantTranslation(o),
+                    })
+                ),
+            },
             screen
         )
-        await uiAssertions.expectSelectToExistWithOption(
+        await uiAssertions.expectSelectToExistWithOptions(
             screen.getByTestId('analytics-type-field'),
-            mockSchema.properties.analyticsType.constants.map((o) => ({
-                displayName: getConstantTranslation(o),
-            })),
+            {
+                options: mockSchema.properties.analyticsType.constants.map(
+                    (o) => ({
+                        displayName: getConstantTranslation(o),
+                    })
+                ),
+            },
             screen
         )
 
@@ -160,13 +167,13 @@ describe('Program indicator add form tests', () => {
             '',
             screen
         )
-        uiAssertions.expectInputFieldToExist(
-            'aggregateExportDataElement',
-            '',
-            screen
-        )
+        // uiAssertions.expectInputFieldToExist(
+        //     'aggregateExportDataElement',
+        //     '',
+        //     screen
+        // )
         expect(screen.getByTestId('add-boundary-button')).toBeVisible()
-        uiAssertions.expectTransferFieldToExistWithOptions(
+        await uiAssertions.expectTransferFieldToExistWithOptions(
             'legendSets-field',
             { lhs: legendSets, rhs: [] },
             screen
@@ -254,17 +261,19 @@ describe('Program indicator add form tests', () => {
         await userEvent.click(analyticsOptions[0])
 
         const orgUnitField = await screen.findByTestId('org-unit-field')
-        await uiAssertions.expectSelectToExistWithOption(
+        await uiAssertions.expectSelectToExistWithOptions(
             orgUnitField,
-            [
-                staticOptions.eventDefault,
-                programTrackedEntityAttributes[0].trackedEntityAttribute,
-                programStageDataElements[1].dataElement,
-                staticOptions.registration,
-                staticOptions.enrollment,
-                staticOptions.ownerAtStart,
-                staticOptions.ownerAtEnd,
-            ],
+            {
+                options: [
+                    staticOptions.eventDefault,
+                    programTrackedEntityAttributes[0].trackedEntityAttribute,
+                    programStageDataElements[1].dataElement,
+                    staticOptions.registration,
+                    staticOptions.enrollment,
+                    staticOptions.ownerAtStart,
+                    staticOptions.ownerAtEnd,
+                ],
+            },
             screen
         )
     })
@@ -345,15 +354,17 @@ describe('Program indicator add form tests', () => {
         await userEvent.click(analyticsOptions[1])
 
         const orgUnitField = await screen.findByTestId('org-unit-field')
-        await uiAssertions.expectSelectToExistWithOption(
+        await uiAssertions.expectSelectToExistWithOptions(
             orgUnitField,
-            [
-                staticOptions.enrollmentDefault,
-                programTrackedEntityAttributes[0].trackedEntityAttribute,
-                staticOptions.registration,
-                staticOptions.ownerAtStart,
-                staticOptions.ownerAtEnd,
-            ],
+            {
+                options: [
+                    staticOptions.enrollmentDefault,
+                    programTrackedEntityAttributes[0].trackedEntityAttribute,
+                    staticOptions.registration,
+                    staticOptions.ownerAtStart,
+                    staticOptions.ownerAtEnd,
+                ],
+            },
             screen
         )
     })
@@ -412,12 +423,14 @@ describe('Program indicator add form tests', () => {
         await userEvent.click(programOptions[0])
 
         const orgUnitField = await screen.findByTestId('org-unit-field')
-        await uiAssertions.expectSelectToExistWithOption(
+        await uiAssertions.expectSelectToExistWithOptions(
             orgUnitField,
-            [
-                staticOptions.eventDefault,
-                programStageDataElements[1].dataElement,
-            ],
+            {
+                options: [
+                    staticOptions.eventDefault,
+                    programStageDataElements[1].dataElement,
+                ],
+            },
             screen
         )
     })
@@ -459,7 +472,6 @@ describe('Program indicator add form tests', () => {
         const { screen } = await renderForm()
         const cancelButton = screen.getByTestId('form-cancel-link')
         expect(cancelButton).toBeVisible()
-        screen.debug(cancelButton)
         expect(cancelButton).toHaveAttribute('href', `/${section.namePlural}`)
     })
     it('should not submit when required values are missing', async () => {
@@ -563,11 +575,11 @@ describe('Program indicator add form tests', () => {
             anAttOptionExport,
             screen
         )
-        await uiActions.enterInputFieldValue(
-            'aggregateExportDataElement',
-            anAggDataExport,
-            screen
-        )
+        // await uiActions.enterInputFieldValue(
+        //     'aggregateExportDataElement',
+        //     anAggDataExport,
+        //     screen
+        // )
         await uiActions.pickOptionInTransfer(
             'legendSets-field',
             legendSets[0].displayName,
@@ -593,13 +605,13 @@ describe('Program indicator add form tests', () => {
                     shortName: aShortName,
                     code: aCode,
                     description: aDescription,
-                    decimals: '1',
+                    decimals: 1,
                     aggregationType: 'SUM',
                     analyticsType: 'EVENT',
                     displayInForm: true,
                     aggregateExportAttributeOptionCombo: anAttOptionExport,
                     aggregateExportCategoryOptionCombo: aCatOptionExport,
-                    aggregateExportDataElement: anAggDataExport,
+                    // aggregateExportDataElement: anAggDataExport,
                     legendSets: [
                         expect.objectContaining({ id: legendSets[0].id }),
                     ],

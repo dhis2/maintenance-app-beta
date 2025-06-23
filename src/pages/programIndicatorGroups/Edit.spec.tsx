@@ -184,7 +184,6 @@ describe('Program indicator group edit form tests', () => {
         await uiActions.submitForm(screen)
         expect(updateMock).not.toHaveBeenCalled()
     })
-
     it('should show an error if name field is too long', async () => {
         const { screen } = await renderForm()
         const longText = randomLongString(231)

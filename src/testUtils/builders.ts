@@ -27,7 +27,7 @@ import {
     ProgramIndicatorGroupFormSchema,
     ProgramIndicatorGroupListSchema,
 } from '../pages/programIndicatorGroups/form'
-import { ProgramIndicatorsListSchema } from '../pages/programIndicators/ProgramIndicatorsSchema'
+import { ProgramIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
 import {
     CategoryMapping,
     OptionMapping,
