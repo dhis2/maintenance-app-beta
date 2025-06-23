@@ -7,13 +7,9 @@ export const ProgramIndicatorFormDescriptor = {
     label: i18n.t('Program Indicators Form'),
     sections: [
         {
-            name: 'setup',
-            label: i18n.t('Setup'),
+            name: 'basicInformation',
+            label: i18n.t('Basic information'),
             fields: [
-                {
-                    name: 'program',
-                    label: i18n.t('Program'),
-                },
                 {
                     name: 'name',
                     label: i18n.t('Name'),
@@ -27,16 +23,22 @@ export const ProgramIndicatorFormDescriptor = {
                     label: i18n.t('Code'),
                 },
                 {
-                    name: 'style',
-                    label: i18n.t('Color and icon'),
-                },
-                {
                     name: 'description',
                     label: i18n.t('Description'),
                 },
                 {
-                    name: 'decimals',
-                    label: i18n.t('Decimals in data output'),
+                    name: 'style',
+                    label: i18n.t('Color and icon'),
+                },
+            ],
+        },
+        {
+            name: 'configuration',
+            label: i18n.t('Configuration'),
+            fields: [
+                {
+                    name: 'program',
+                    label: i18n.t('Program'),
                 },
                 {
                     name: 'aggregationType',
@@ -51,12 +53,50 @@ export const ProgramIndicatorFormDescriptor = {
                     label: i18n.t('Organisation unit field'),
                 },
                 {
-                    name: 'displayInForm',
-                    label: i18n.t('Display in form'),
+                    name: 'decimals',
+                    label: i18n.t('Decimals in data output'),
                 },
+            ],
+        },
+        {
+            name: 'expression',
+            label: i18n.t('Expression'),
+            fields: [
                 {
-                    name: 'legendSets',
-                    label: i18n.t('Legend sets'),
+                    name: 'expression',
+                    label: i18n.t('Expression'),
+                },
+            ],
+        },
+        {
+            name: 'filter',
+            label: i18n.t('Filter'),
+            fields: [
+                {
+                    name: 'filter',
+                    label: i18n.t('Filter'),
+                },
+            ],
+        },
+        {
+            name: 'periodBoundaries',
+            label: i18n.t('Period boundaries'),
+            fields: [
+                {
+                    name: 'analyticsPeriodBoundaries',
+                    label: i18n.t('Period boundaries'),
+                },
+            ],
+        },
+        {
+            name: 'advancedOptions',
+            label: i18n.t('Advanced options'),
+            fields: [
+                {
+                    name: 'displayInForm',
+                    label: i18n.t(
+                        'Show program indicators in data entry forms'
+                    ),
                 },
                 {
                     name: 'aggregateExportCategoryOptionCombo',
@@ -70,29 +110,19 @@ export const ProgramIndicatorFormDescriptor = {
                         'Attribute option combination for aggregate data export'
                     ),
                 },
-                {
-                    name: 'aggregateExportDataElement',
-                    label: i18n.t('Data element for aggregate data export'),
-                },
+                // {
+                //     name: 'aggregateExportDataElement',
+                //     label: i18n.t('Data element for aggregate data export'),
+                // },
             ],
         },
         {
-            name: 'editExpression',
-            label: i18n.t('Edit expression'),
+            name: 'legends',
+            label: i18n.t('Legends'),
             fields: [
                 {
-                    name: 'expression',
-                    label: i18n.t('Expression'),
-                },
-            ],
-        },
-        {
-            name: 'editFilter',
-            label: i18n.t('Edit filter'),
-            fields: [
-                {
-                    name: 'filter',
-                    label: i18n.t('Filter'),
+                    name: 'legendSets',
+                    label: i18n.t('Legend sets'),
                 },
             ],
         },

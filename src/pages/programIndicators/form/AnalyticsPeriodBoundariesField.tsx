@@ -88,22 +88,24 @@ const APBItem = ({
         <div className={classes.analyticsPeriodBoundaryContainer}>
             <div>
                 <div>
-                    Boundary target:{' '}
-                    {foundBoundaryTarget?.label ?? apb.boundaryTarget}
+                    {foundBoundaryTarget?.label ??
+                        `${i18n.t('Custom')}: ${apb.boundaryTarget}`}
                 </div>
                 <div className={classes.analyticsPeriodBoundarySpan}>
                     {apb.offsetPeriodType && (
                         <div>
-                            {i18n.t('Period type:')} {apb.offsetPeriodType}
+                            {i18n.t('Period')}: {apb.offsetPeriodType}
+                        </div>
+                    )}
+                    {apb.offsetPeriods && (
+                        <div>
+                            {i18n.t('Offset')}: {apb.offsetPeriods}
                         </div>
                     )}
                     {foundBoundaryType && (
                         <div>
-                            {i18n.t('Boundary type:')} {foundBoundaryType.label}
+                            {i18n.t('Type')}: {foundBoundaryType.label}
                         </div>
-                    )}
-                    {apb.offsetPeriods && (
-                        <div>Offset: {apb.offsetPeriods}</div>
                     )}
                 </div>
             </div>
@@ -331,7 +333,7 @@ export const AnalyticsPeriodBoundariesField = () => {
                 }}
                 dataTest="add-boundary-button"
             >
-                {i18n.t('Add a new boundary')}
+                {i18n.t('Add a period boundary')}
             </Button>
             {modalAPB && (
                 <AnalyticsPeriodBoundaryModal

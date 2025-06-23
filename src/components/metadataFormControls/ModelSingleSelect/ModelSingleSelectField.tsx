@@ -1,4 +1,4 @@
-import { Field } from '@dhis2/ui'
+import { Box, Field } from '@dhis2/ui'
 import React from 'react'
 import { FieldRenderProps, useField, UseFieldConfig } from 'react-final-form'
 import {
@@ -13,6 +13,7 @@ type OwnProps<TModel extends PartialLoadedDisplayableModel> = {
     helpText?: string
     required?: boolean
     onChange?: ModelSingleSelectProps<TModel>['onChange']
+    inputWidth?: string
 }
 
 type RelevantRenderProps<TModel extends PartialLoadedDisplayableModel> = {
@@ -53,6 +54,7 @@ export function ModelSingleSelectField<
     input,
     meta,
     dataTest,
+    inputWidth,
     ...modelSingleSelectProps
 }: ModelSingleSelectFieldProps<TModel> & RelevantRenderProps<TModel>) {
     return (
@@ -65,16 +67,18 @@ export function ModelSingleSelectField<
             helpText={helpText}
             required={required}
         >
-            <ModelSingleSelect<TModel>
-                {...modelSingleSelectProps}
-                selected={input.value}
-                onChange={(selected) => {
-                    input.onChange(selected)
-                    input.onBlur()
-                    onChange?.(selected)
-                }}
-                invalid={meta.touched && !!meta.error}
-            />
+            <Box width={inputWidth} minWidth="100px">
+                <ModelSingleSelect<TModel>
+                    {...modelSingleSelectProps}
+                    selected={input.value}
+                    onChange={(selected) => {
+                        input.onChange(selected)
+                        input.onBlur()
+                        onChange?.(selected)
+                    }}
+                    invalid={meta.touched && !!meta.error}
+                />
+            </Box>
         </Field>
     )
 }
