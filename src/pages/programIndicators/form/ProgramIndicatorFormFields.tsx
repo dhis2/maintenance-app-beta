@@ -4,7 +4,6 @@ import {
     InputFieldFF,
     SingleSelectField,
     SingleSelectOption,
-    TextAreaFieldFF,
 } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF, Field, useField } from 'react-final-form'
@@ -19,6 +18,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
+import { ExpressionBuilder } from '../../../components/ExpressionBuilder/ExpressionBuilder'
 import { ModelSingleSelectField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { getConstantTranslation, SECTIONS_MAP, useSchema } from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
@@ -82,7 +82,7 @@ export const ProgramIndicatorsFormFields = () => {
                         }}
                         input={programInput}
                         meta={programMeta}
-                        label={i18n.t('Program')}
+                        label={i18n.t('Program (required)')}
                         required
                     />
                 </StandardFormField>
@@ -109,13 +109,14 @@ export const ProgramIndicatorsFormFields = () => {
                 </StandardFormField>
                 <StandardFormField dataTest="analytics-type-field">
                     <SingleSelectField
+                        required
                         selected={analyticsTypeInput.value}
                         inputWidth="400px"
                         onChange={({ selected }) => {
                             analyticsTypeInput.onChange(selected)
                             analyticsTypeInput.onBlur()
                         }}
-                        label={i18n.t('Analytics type')}
+                        label={i18n.t('Analytics type (required)')}
                     >
                         {schema.properties.analyticsType.constants?.map(
                             (option) => (
@@ -162,7 +163,7 @@ export const ProgramIndicatorsFormFields = () => {
                 <StandardFormField>
                     <FieldRFF
                         dataTest="formfields-expression"
-                        component={TextAreaFieldFF}
+                        component={ExpressionBuilder}
                         inputWidth="400px"
                         name="expression"
                     />
@@ -180,10 +181,9 @@ export const ProgramIndicatorsFormFields = () => {
                 <StandardFormField>
                     <FieldRFF
                         dataTest="formfields-filter"
-                        component={TextAreaFieldFF}
+                        component={ExpressionBuilder}
                         inputWidth="400px"
                         name="filter"
-                        label={i18n.t('Filter')}
                     />
                 </StandardFormField>
             </SectionedFormSection>
