@@ -75,7 +75,6 @@ export const WhenToSendSection = () => {
                                         inputWidth="120px"
                                     />
                                 )}
-                                required
                             />
                             <span>{i18n.t('scheduled date')}</span>
                         </div>

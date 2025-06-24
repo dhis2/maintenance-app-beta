@@ -31,8 +31,7 @@ export type DataSetNotificationFormValues = Omit<
 }
 
 export const getInitialValuesFromTemplate = (
-    template: DataSetNotificationTemplate,
-    fetchedDataSets: DataSet[]
+    template: DataSetNotificationTemplate
 ): DataSetNotificationFormValues => {
     return {
         id: template.id,
@@ -46,7 +45,7 @@ export const getInitialValuesFromTemplate = (
         relativeScheduledDays: String(template.relativeScheduledDays),
         sendStrategy: template.sendStrategy,
         deliveryChannels: template.deliveryChannels,
-        dataSets: fetchedDataSets,
+        dataSets: template.dataSets,
         recipientUserGroup: template?.recipientUserGroup?.id,
         sendEmail: template.deliveryChannels.includes('EMAIL'),
         sendSms: template.deliveryChannels.includes('SMS'),
@@ -56,17 +55,46 @@ export const getInitialValuesFromTemplate = (
 export const transformFormValues = (
     values: DataSetNotificationFormValues
 ): DataSetNotificationTemplate => {
-    return {
-        ...values,
-        relativeScheduledDays: parseInt(values.relativeScheduledDays, 10),
-        deliveryChannels: [
-            ...(values.sendEmail ? ['EMAIL'] : []),
-            ...(values.sendSms ? ['SMS'] : []),
-        ],
+    const {
+        id,
+        code,
+        name,
+        displayName,
+        subjectTemplate,
+        messageTemplate,
+        notificationRecipient,
+        dataSetNotificationTrigger,
+        relativeScheduledDays,
+        sendStrategy,
+        dataSets,
+        sendEmail,
+        sendSms,
+        recipientUserGroup,
+    } = values
+
+    const deliveryChannels = [
+        ...(sendEmail ? ['EMAIL'] : []),
+        ...(sendSms ? ['SMS'] : []),
+    ]
+
+    const payload: DataSetNotificationTemplate = {
+        id,
+        code,
+        name,
+        displayName,
+        subjectTemplate,
+        messageTemplate,
+        notificationRecipient,
+        dataSetNotificationTrigger,
+        relativeScheduledDays: parseInt(relativeScheduledDays, 10),
+        sendStrategy,
+        deliveryChannels,
         recipientUserGroup:
-            values.recipientUserGroup && values.recipientUserGroup !== ''
-                ? { id: values.recipientUserGroup }
+            recipientUserGroup && recipientUserGroup !== ''
+                ? { id: recipientUserGroup }
                 : undefined,
-        dataSets: (values.dataSets || []).map((ds) => ({ id: ds.id })),
+        dataSets: (dataSets || []).map((ds) => ({ id: ds.id })),
     }
+
+    return payload
 }

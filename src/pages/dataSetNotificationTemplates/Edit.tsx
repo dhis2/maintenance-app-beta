@@ -1,14 +1,15 @@
-import { useAlert, useDataEngine } from '@dhis2/app-runtime'
+import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, CircularLoader, NoticeBox } from '@dhis2/ui'
+import { Button, NoticeBox } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
-import { Form } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
     DefaultSectionedFormSidebar,
     SectionedFormLayout,
+    SectionedFormErrorNotice,
+    FormBase,
 } from '../../components'
 import { SectionedFormProvider, DEFAULT_FIELD_FILTERS } from '../../lib'
 import { DataSetNotificationsFormFields } from './form/DataSetNotificationsFormFields'
@@ -35,8 +36,8 @@ const fieldFilters = [
     'relativeScheduledDays',
     'sendStrategy',
     'recipientUserGroup',
-    'dataSets',
     'deliveryChannels',
+    'dataSets[id,name,displayName]', // fetch full info here
 ]
 
 const fetchNotificationTemplate = async (
@@ -54,35 +55,15 @@ const fetchNotificationTemplate = async (
     return notificationTemplate
 }
 
-const fetchDataSetsByIds = async (engine: any, ids: string[]) => {
-    if (!ids.length) {
-        return []
-    }
-    const { dataSets } = await engine.query({
-        dataSets: {
-            resource: 'dataSets',
-            params: {
-                fields: 'id,name,displayName',
-                filter: `id:in:[${ids.join(',')}]`,
-            },
-        },
-    })
-    return dataSets ?? []
-}
-
 export const Component = () => {
     const { id: templateId } = useParams<Params>()
     const dataEngine = useDataEngine()
-    const alert = useAlert(
-        ({ message }) => message,
-        (options) => options
-    )
 
     const {
         data: template,
-        isLoading: loadingTemplate,
-        isError: errorTemplate,
-        refetch: refetchTemplate,
+        isLoading,
+        isError,
+        refetch,
     } = useQuery({
         queryKey: ['notificationTemplate', templateId],
         queryFn: () =>
@@ -90,45 +71,10 @@ export const Component = () => {
         enabled: !!templateId,
     })
 
-    const datasetIds = useMemo(
-        () => template?.dataSets?.map((ds) => ds.id) ?? [],
-        [template]
-    )
-
-    const {
-        data: fetchedDataSets,
-        isLoading: loadingDataSets,
-        isError: errorDataSets,
-        refetch: refetchDataSets,
-    } = useQuery({
-        queryKey: ['datasets', datasetIds],
-        queryFn: () => fetchDataSetsByIds(dataEngine, datasetIds),
-        enabled: datasetIds.length > 0,
-    })
-
-    const isLoading = loadingTemplate ?? loadingDataSets
-    const isError = errorTemplate ?? errorDataSets
     const onSubmit = useOnEditNotifications(templateId as string)
 
-    const handleFormSubmit = async (values: DataSetNotificationFormValues) => {
-        const result = await onSubmit(transformFormValues(values))
-        if (
-            result &&
-            typeof result === 'object' &&
-            'FINAL_FORM/form-error' in result
-        ) {
-            const formError = (result as { 'FINAL_FORM/form-error': any })[
-                'FINAL_FORM/form-error'
-            ]
-
-            alert.show({
-                message: i18n.t('Error: {{message}}', {
-                    message: formError?.original?.message ?? formError.message,
-                }),
-                error: true,
-            })
-        }
-    }
+    const handleFormSubmit = async (values: DataSetNotificationFormValues) =>
+        onSubmit(transformFormValues(values))
 
     const formDescriptor = useMemo(
         () => ({
@@ -167,16 +113,10 @@ export const Component = () => {
 
     if (isError) {
         return (
-            <NoticeBox title={i18n.t('Error')} error>
-                {i18n.t('Error loading notification template or datasets')}
+            <NoticeBox error title={i18n.t('Error')}>
+                {i18n.t('Error loading notification template')}
                 <br />
-                <Button
-                    small
-                    onClick={() => {
-                        refetchTemplate()
-                        refetchDataSets()
-                    }}
-                >
+                <Button small onClick={() => refetch()}>
                     {i18n.t('Retry')}
                 </Button>
             </NoticeBox>
@@ -184,22 +124,15 @@ export const Component = () => {
     }
 
     if (isLoading || !template) {
-        return (
-            <div style={{ height: '100%' }}>
-                <CircularLoader />
-            </div>
-        )
+        return null
     }
 
     return (
         <SectionedFormProvider formDescriptor={formDescriptor}>
-            <Form
+            <FormBase<DataSetNotificationFormValues>
                 onSubmit={handleFormSubmit}
-                initialValues={getInitialValuesFromTemplate(
-                    template,
-                    fetchedDataSets?.dataSets
-                )}
-                destroyOnUnregister={true}
+                initialValues={getInitialValuesFromTemplate(template)}
+                includeAttributes={false}
             >
                 {({ handleSubmit }) => (
                     <SectionedFormLayout
@@ -207,11 +140,12 @@ export const Component = () => {
                     >
                         <form onSubmit={handleSubmit}>
                             <DataSetNotificationsFormFields />
+                            <SectionedFormErrorNotice />
                         </form>
                         <DefaultFormFooter />
                     </SectionedFormLayout>
                 )}
-            </Form>
+            </FormBase>
         </SectionedFormProvider>
     )
 }

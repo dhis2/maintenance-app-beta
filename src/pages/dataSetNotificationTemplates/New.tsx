@@ -5,6 +5,8 @@ import { Form } from 'react-final-form'
 import {
     DefaultFormFooter,
     DefaultSectionedFormSidebar,
+    FormBase,
+    SectionedFormErrorNotice,
     SectionedFormLayout,
 } from '../../components'
 import { SectionedFormProvider } from '../../lib'
@@ -48,7 +50,17 @@ export const Component = () => {
 
     return (
         <SectionedFormProvider formDescriptor={section}>
-            <Form onSubmit={onSubmit} initialValues={{}}>
+            <Form
+                onSubmit={onSubmit}
+                initialValues={{
+                    name: '',
+                    id: '',
+                    code: '',
+                    displayName: '',
+                    notificationTriggers: [],
+                    notificationRecipients: [],
+                }}
+            >
                 {({ handleSubmit, submitting }) => (
                     <>
                         <SectionedFormLayout
@@ -56,6 +68,7 @@ export const Component = () => {
                         >
                             <form onSubmit={handleSubmit}>
                                 <DataSetNotificationsFormFields />
+                                <SectionedFormErrorNotice />
                             </form>
                             <DefaultFormFooter />
                         </SectionedFormLayout>
