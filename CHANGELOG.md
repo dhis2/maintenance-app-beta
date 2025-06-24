@@ -1,3 +1,10 @@
+## [0.47.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.2...v0.47.3) (2025-06-24)
+
+
+### Bug Fixes
+
+* positive integer validation and remove attributes from indicator types ([#582](https://github.com/dhis2/maintenance-app-beta/issues/582)) ([7ceb91e](https://github.com/dhis2/maintenance-app-beta/commit/7ceb91e7074c03e169434b9fe1ea9a5b9535505b))
+
 ## [0.47.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.1...v0.47.2) (2025-06-16)
 
 
