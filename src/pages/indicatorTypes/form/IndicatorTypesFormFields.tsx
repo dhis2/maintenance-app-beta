@@ -35,8 +35,6 @@ export const IndicatorTypesFormFields = () => {
                     <FactorField />
                 </StandardFormField>
             </StandardFormSection>
-
-            <CustomAttributesSection schemaSection={section} />
         </>
     )
 }
