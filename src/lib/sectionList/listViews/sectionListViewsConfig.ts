@@ -143,6 +143,15 @@ export const modelListViewsConfig = {
             default: ['formType'],
         },
     },
+    dataSetNotificationTemplate: {
+        columns: {
+            default: ['name', 'lastUpdated'],
+            available: [DESCRIPTORS.shortName],
+        },
+        filters: {
+            default: [],
+        },
+    },
     organisationUnit: {
         columns: {
             available: [DESCRIPTORS.shortName],
