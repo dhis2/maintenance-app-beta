@@ -3,6 +3,7 @@ import { SingleSelectFieldFF } from '@dhis2/ui'
 import * as React from 'react'
 import { Field as FieldRFF, useFormState } from 'react-final-form'
 import {
+    SectionedFormSection,
     StandardFormField,
     StandardFormSection,
     StandardFormSectionDescription,
@@ -14,7 +15,7 @@ import { FormFieldByValueType } from '../../fields'
 
 const inputWidth = '440px'
 
-type ValuesWithAttributes = {
+export type ValuesWithAttributes = {
     attributeValues: AttributeValue[]
 }
 
@@ -73,8 +74,10 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
 
 export function CustomAttributesSection({
     schemaSection,
+    useSectionedLayout = false,
 }: {
     schemaSection: SchemaSection
+    useSectionedLayout?: boolean
 }) {
     const formState = useFormState<ValuesWithAttributes>({
         subscription: { initialValues: true },
@@ -83,12 +86,17 @@ export function CustomAttributesSection({
     const customAttributes = formState.initialValues.attributeValues?.map(
         (av) => av.attribute
     )
+
     if (!customAttributes || customAttributes?.length < 1) {
         return null
     }
 
+    const Wrapper = useSectionedLayout
+        ? SectionedFormSection
+        : StandardFormSection
+
     return (
-        <StandardFormSection>
+        <Wrapper name="attributes">
             <StandardFormSectionTitle>
                 {i18n.t('Attributes')}
             </StandardFormSectionTitle>
@@ -108,6 +116,6 @@ export function CustomAttributesSection({
                     />
                 )
             })}
-        </StandardFormSection>
+        </Wrapper>
     )
 }

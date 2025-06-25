@@ -15,15 +15,17 @@ const section = SECTIONS_MAP.programIndicator
 
 export const Component = () => {
     return (
-        <SectionedFormProvider formDescriptor={ProgramIndicatorFormDescriptor}>
-            <FormBase
-                onSubmit={useOnSubmitNew({ section })}
-                initialValues={initialValues}
-                validate={validate}
-                subscription={{}}
-            >
-                {({ handleSubmit }) => {
-                    return (
+        <FormBase
+            onSubmit={useOnSubmitNew({ section })}
+            initialValues={initialValues}
+            validate={validate}
+            subscription={{}}
+        >
+            {({ handleSubmit }) => {
+                return (
+                    <SectionedFormProvider
+                        formDescriptor={ProgramIndicatorFormDescriptor}
+                    >
                         <SectionedFormLayout
                             sidebar={<DefaultSectionedFormSidebar />}
                         >
@@ -33,9 +35,9 @@ export const Component = () => {
                             </form>
                             <SectionedFormErrorNotice />
                         </SectionedFormLayout>
-                    )
-                }}
-            </FormBase>
-        </SectionedFormProvider>
+                    </SectionedFormProvider>
+                )
+            }}
+        </FormBase>
     )
 }

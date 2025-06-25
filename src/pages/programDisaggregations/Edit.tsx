@@ -125,90 +125,88 @@ export const Component = () => {
         }, [initialValues.programIndicatorMappings])
 
     return (
-        <SectionedFormProvider
-            formDescriptor={{
-                name: 'programDisaggregationForm',
-                label: i18n.t('Program Disaggregation Form'),
-                sections: [
-                    {
-                        name: 'programIndicatorMappings',
-                        label: i18n.t('Program indicator mappings'),
-                        fields: [],
-                    },
-                    {
-                        name: 'disaggregationCategories',
-                        label: i18n.t('Disaggregation categories'),
-                        fields: [],
-                    },
-                    {
-                        name: 'attributeCategories',
-                        label: i18n.t('Attribute categories'),
-                        fields: [],
-                    },
-                ],
-            }}
+        <ReactFinalForm
+            initialValues={initialValues}
+            onSubmit={useOnSubmit(id, initialValues)}
+            mutators={{ ...arrayMutators }}
+            destroyOnUnregister={false}
+            subscription={{}}
         >
-            <ReactFinalForm
-                initialValues={initialValues}
-                onSubmit={useOnSubmit(id, initialValues)}
-                mutators={{ ...arrayMutators }}
-                destroyOnUnregister={false}
-                subscription={{}}
-            >
-                {({ handleSubmit, submitting }) => {
-                    return (
-                        <>
-                            {isLoading && (
-                                <div
-                                    style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
+            {({ handleSubmit }) => {
+                return (
+                    <SectionedFormProvider
+                        formDescriptor={{
+                            name: 'programDisaggregationForm',
+                            label: i18n.t('Program Disaggregation Form'),
+                            sections: [
+                                {
+                                    name: 'programIndicatorMappings',
+                                    label: i18n.t('Program indicator mappings'),
+                                    fields: [],
+                                },
+                                {
+                                    name: 'disaggregationCategories',
+                                    label: i18n.t('Disaggregation categories'),
+                                    fields: [],
+                                },
+                                {
+                                    name: 'attributeCategories',
+                                    label: i18n.t('Attribute categories'),
+                                    fields: [],
+                                },
+                            ],
+                        }}
+                    >
+                        {isLoading && (
+                            <div
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <CircularLoader />
+                            </div>
+                        )}
+                        {isError && (
+                            <NoticeBox title={i18n.t('Error')} error>
+                                {i18n.t(
+                                    'Could not load programs or indicators data.'
+                                )}
+                                <br />
+                                <Button
+                                    small
+                                    onClick={() => {
+                                        programIndicatorsQuery.refetch()
+                                        programQuery.refetch()
                                     }}
                                 >
-                                    <CircularLoader />
-                                </div>
-                            )}
-                            {isError && (
-                                <NoticeBox title={i18n.t('Error')} error>
-                                    {i18n.t(
-                                        'Could not load programs or indicators data.'
-                                    )}
-                                    <br />
-                                    <Button
-                                        small
-                                        onClick={() => {
-                                            programIndicatorsQuery.refetch()
-                                            programQuery.refetch()
-                                        }}
-                                    >
-                                        {i18n.t('Retry')}
-                                    </Button>
-                                </NoticeBox>
-                            )}
-                            {!isLoading && !isError && (
-                                <SectionedFormLayout
-                                    sidebar={<DefaultSectionedFormSidebar />}
-                                >
-                                    <form onSubmit={handleSubmit}>
-                                        <ProgramDisaggregationFormFields
-                                            initialProgramIndicators={
-                                                initialProgramIndicators
-                                            }
-                                            programName={
-                                                programQuery?.data?.displayName
-                                            }
-                                        />
-                                        <DefaultFormFooter />
-                                    </form>
-                                </SectionedFormLayout>
-                            )}
-                        </>
-                    )
-                }}
-            </ReactFinalForm>
-        </SectionedFormProvider>
+                                    {i18n.t('Retry')}
+                                </Button>
+                            </NoticeBox>
+                        )}
+                        {!isLoading && !isError && (
+                            <SectionedFormLayout
+                                sidebar={<DefaultSectionedFormSidebar />}
+                            >
+                                <form onSubmit={handleSubmit}>
+                                    <ProgramDisaggregationFormFields
+                                        initialProgramIndicators={
+                                            initialProgramIndicators
+                                        }
+                                        programName={
+                                            programQuery?.data?.displayName
+                                        }
+                                    />
+                                    <DefaultFormFooter />
+                                </form>
+                            </SectionedFormLayout>
+                        )}
+                    </SectionedFormProvider>
+                )
+            }}
+        </ReactFinalForm>
     )
 }

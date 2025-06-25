@@ -39,15 +39,17 @@ export const Component = () => {
     const modelId = useParams().id as string
 
     return (
-        <SectionedFormProvider formDescriptor={ProgramIndicatorFormDescriptor}>
-            <FormBase
-                onSubmit={useOnSubmitEdit({ section, modelId })}
-                initialValues={programIndicators.data}
-                validate={validate}
-                subscription={{}}
-            >
-                {({ handleSubmit }) => {
-                    return (
+        <FormBase
+            onSubmit={useOnSubmitEdit({ section, modelId })}
+            initialValues={programIndicators.data}
+            validate={validate}
+            subscription={{}}
+        >
+            {({ handleSubmit }) => {
+                return (
+                    <SectionedFormProvider
+                        formDescriptor={ProgramIndicatorFormDescriptor}
+                    >
                         <SectionedFormLayout
                             sidebar={<DefaultSectionedFormSidebar />}
                         >
@@ -57,9 +59,9 @@ export const Component = () => {
                             </form>
                             <SectionedFormErrorNotice />
                         </SectionedFormLayout>
-                    )
-                }}
-            </FormBase>
-        </SectionedFormProvider>
+                    </SectionedFormProvider>
+                )
+            }}
+        </FormBase>
     )
 }

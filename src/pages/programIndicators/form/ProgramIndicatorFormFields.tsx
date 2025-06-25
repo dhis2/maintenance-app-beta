@@ -253,7 +253,6 @@ export const ProgramIndicatorsFormFields = () => {
                 {/*        )}*/}
                 {/*    />*/}
                 {/*</StandardFormField>*/}
-                <CustomAttributesSection schemaSection={section} />
             </SectionedFormSection>
             <SectionedFormSection name="legends">
                 <StandardFormSectionTitle>
@@ -282,6 +281,10 @@ export const ProgramIndicatorsFormFields = () => {
                     />
                 </StandardFormField>
             </SectionedFormSection>
+            <CustomAttributesSection
+                schemaSection={section}
+                useSectionedLayout
+            />
         </SectionedFormSections>
     )
 }
