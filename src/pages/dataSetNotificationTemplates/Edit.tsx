@@ -1,4 +1,3 @@
-import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button, NoticeBox } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
@@ -11,7 +10,11 @@ import {
     SectionedFormErrorNotice,
     FormBase,
 } from '../../components'
-import { SectionedFormProvider, DEFAULT_FIELD_FILTERS } from '../../lib'
+import {
+    SectionedFormProvider,
+    DEFAULT_FIELD_FILTERS,
+    useBoundResourceQueryFn,
+} from '../../lib'
 import { DataSetNotificationsFormFields } from './form/DataSetNotificationsFormFields'
 import {
     getInitialValuesFromTemplate,
@@ -37,37 +40,28 @@ const fieldFilters = [
     'sendStrategy',
     'recipientUserGroup',
     'deliveryChannels',
-    'dataSets[id,name,displayName]', // fetch full info here
+    'dataSets[id,name,displayName]',
 ]
-
-const fetchNotificationTemplate = async (
-    engine: any,
-    id: string
-): Promise<DataSetNotificationTemplate> => {
-    const { notificationTemplate } = await engine.query({
-        notificationTemplate: {
-            resource: `dataSetNotificationTemplates/${id}`,
-            params: {
-                fields: fieldFilters.join(','),
-            },
-        },
-    })
-    return notificationTemplate
-}
 
 export const Component = () => {
     const { id: templateId } = useParams<Params>()
-    const dataEngine = useDataEngine()
+    const queryFn = useBoundResourceQueryFn()
 
     const {
         data: template,
-        isLoading,
-        isError,
-        refetch,
+        isLoading: loadingTemplate,
+        isError: errorTemplate,
+        refetch: refetchTemplate,
     } = useQuery({
-        queryKey: ['notificationTemplate', templateId],
-        queryFn: () =>
-            fetchNotificationTemplate(dataEngine, templateId as string),
+        queryKey: [
+            {
+                resource: `dataSetNotificationTemplates/${templateId}`,
+                params: {
+                    fields: fieldFilters.join(','),
+                },
+            },
+        ],
+        queryFn: queryFn<DataSetNotificationTemplate>,
         enabled: !!templateId,
     })
 
@@ -111,19 +105,19 @@ export const Component = () => {
         []
     )
 
-    if (isError) {
+    if (errorTemplate) {
         return (
             <NoticeBox error title={i18n.t('Error')}>
                 {i18n.t('Error loading notification template')}
                 <br />
-                <Button small onClick={() => refetch()}>
+                <Button small onClick={() => refetchTemplate()}>
                     {i18n.t('Retry')}
                 </Button>
             </NoticeBox>
         )
     }
 
-    if (isLoading || !template) {
+    if (loadingTemplate || !template) {
         return null
     }
 

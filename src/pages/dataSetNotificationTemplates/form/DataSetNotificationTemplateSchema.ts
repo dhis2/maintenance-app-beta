@@ -22,7 +22,6 @@ export enum DeliveryChannel {
 export enum NotificationSendStrategy {
     SINGLE_NOTIFICATION = 'SINGLE_NOTIFICATION',
     COLLECTIVE_SUMMARY = 'COLLECTIVE_SUMMARY',
-    NONE = 'NONE',
 }
 
 const referenceCollection = z.array(
@@ -44,7 +43,12 @@ export const DataSetNotificationTemplateSchema = identifiable
         messageTemplate: z.string().optional(),
         subjectTemplate: z.string().optional(),
         relativeScheduledDays: z.string().optional(),
-        recipientUserGroup: z.string().optional(),
+        recipientUserGroup: z
+            .object({
+                id: z.string(),
+                displayName: z.string().optional(),
+            })
+            .optional(),
         dataSets: referenceCollection.default([]),
         sendStrategy: z.nativeEnum(NotificationSendStrategy).optional(),
     })

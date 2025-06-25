@@ -1,38 +1,13 @@
-import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectFieldFF, CheckboxFieldFF } from '@dhis2/ui'
-import React, { useMemo } from 'react'
+import { CheckboxFieldFF, SingleSelectFieldFF } from '@dhis2/ui'
+import React from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import { StandardFormField } from '../../../components'
-
-const query = {
-    userGroups: {
-        resource: 'userGroups',
-        params: {
-            fields: 'id,displayName',
-            paging: false,
-        },
-    },
-}
-
-type UserGroup = {
-    id: string
-    displayName: string
-}
-
-type QueryResult = {
-    userGroups: {
-        userGroups: UserGroup[]
-    }
-}
+import { ModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect'
+import { PartialLoadedDisplayableModel } from '../../../types/models'
 
 export const WhoToSendSection = () => {
-    const { data, loading, error } = useDataQuery<QueryResult>(query)
     const { input: recipientInput } = useField('notificationRecipient')
-
-    const { input: recipientGroupInput } = useField('recipientUserGroup')
-    const selectedUserGroupId = recipientGroupInput.value
-
     const isUserGroup =
         recipientInput.value === 'USER_GROUP' || !recipientInput.value
     const isOrgUnitContact =
@@ -45,29 +20,6 @@ export const WhoToSendSection = () => {
             value: 'ORGANISATION_UNIT_CONTACT',
         },
     ]
-
-    const userGroupOptions =
-        data?.userGroups?.userGroups?.map((group) => ({
-            label: group.displayName,
-            value: group.id,
-        })) ?? []
-
-    const selectedUserGroupOption = selectedUserGroupId
-        ? {
-              label: selectedUserGroupId,
-              value: selectedUserGroupId,
-          }
-        : null
-
-    const userGroupOptionsWithSelected = useMemo(() => {
-        if (
-            selectedUserGroupOption &&
-            !userGroupOptions.some((opt) => opt.value === selectedUserGroupId)
-        ) {
-            return [...userGroupOptions, selectedUserGroupOption]
-        }
-        return userGroupOptions
-    }, [userGroupOptions, selectedUserGroupOption])
 
     return (
         <div>
@@ -87,28 +39,26 @@ export const WhoToSendSection = () => {
                     )}
                 />
             </StandardFormField>
-
             {isUserGroup && (
                 <StandardFormField>
-                    {!error && (
-                        <FieldRFF<string | undefined>
-                            name="recipientUserGroup"
-                            required={isUserGroup}
-                            render={(props) => (
-                                <SingleSelectFieldFF
-                                    {...props}
-                                    dataTest="formfields-user-group-recipient"
-                                    label={i18n.t('User Group Recipients')}
-                                    inputWidth="400px"
-                                    options={userGroupOptionsWithSelected}
-                                    loading={loading}
-                                    disabled={
-                                        loading ?? !userGroupOptions.length
-                                    }
-                                />
-                            )}
-                        />
-                    )}
+                    <FieldRFF<PartialLoadedDisplayableModel | undefined>
+                        name="recipientUserGroup"
+                        render={({ input }) => (
+                            <ModelSingleSelect
+                                // label={i18n.t('User Group Recipients')}
+                                selected={input.value}
+                                onChange={input.onChange}
+                                // inputWidth="400px"
+                                query={{
+                                    resource: 'userGroups',
+                                    params: {
+                                        fields: ['id', 'displayName'],
+                                        order: 'displayName:asc',
+                                    },
+                                }}
+                            />
+                        )}
+                    />
                 </StandardFormField>
             )}
 
