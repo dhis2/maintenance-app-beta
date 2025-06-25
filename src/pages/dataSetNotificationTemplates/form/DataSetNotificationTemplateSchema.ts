@@ -1,11 +1,11 @@
 import { z } from 'zod'
-import { modelFormSchemas } from '../../../lib'
+import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
 
-const { identifiable, withAttributeValues, withDefaultListColumns } =
+const { identifiable, withDefaultListColumns } =
     modelFormSchemas
 
 export enum NotificationTrigger {
-    COMPLETION = 'COMPLETION',
+    COMPLETION = 'DATA_SET_COMPLETION',
     SCHEDULED_DAYS = 'SCHEDULED_DAYS',
 }
 
@@ -26,34 +26,37 @@ export enum NotificationSendStrategy {
 
 const referenceCollection = z.array(
     z.object({
-        id: z.string(),
+        id: z.string().optional(),
         name: z.string().optional(),
         displayName: z.string().optional(),
     })
 )
 
-export const DataSetNotificationTemplateSchema = identifiable
-    .merge(withAttributeValues)
-    .extend({
-        code: z.string().optional(),
-        description: z.string().optional(),
-        notificationTrigger: z.nativeEnum(NotificationTrigger),
-        notificationRecipient: z.nativeEnum(NotificationRecipient),
-        deliveryChannels: z.array(z.nativeEnum(DeliveryChannel)).default([]),
-        messageTemplate: z.string().optional(),
-        subjectTemplate: z.string().optional(),
-        relativeScheduledDays: z.string().optional(),
-        recipientUserGroup: z
-            .object({
-                id: z.string(),
-                displayName: z.string().optional(),
-            })
-            .optional(),
-        dataSets: referenceCollection.default([]),
-        sendStrategy: z.nativeEnum(NotificationSendStrategy).optional(),
-    })
+export const DataSetNotificationTemplateSchema = identifiable.extend({
+    code: z.string().optional(),
+    description: z.string().optional(),
+    name: z.string(),
+    dataSetNotificationTrigger: z.nativeEnum(NotificationTrigger),
+    notificationRecipient: z.nativeEnum(NotificationRecipient),
+    deliveryChannels: z.array(z.nativeEnum(DeliveryChannel)).default([]),
+    messageTemplate: z.string().optional(),
+    subjectTemplate: z.string().optional(),
+    relativeScheduledDays: z.string().optional(),
+    recipientUserGroup: z
+        .object({
+            id: z.string(),
+            displayName: z.string().optional(),
+        })
+        .optional(),
+    dataSets: referenceCollection.default([]),
+    sendStrategy: z.nativeEnum(NotificationSendStrategy).optional(),
+})
 
 export const dataSetNotificationTemplateListSchema =
     withDefaultListColumns.extend({
         name: z.string(),
     })
+
+export const initialValues = getDefaults(DataSetNotificationTemplateSchema)
+
+export const validate = createFormValidate(DataSetNotificationTemplateSchema)

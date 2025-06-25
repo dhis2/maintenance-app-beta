@@ -3,13 +3,14 @@ import { CheckboxFieldFF, SingleSelectFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import { StandardFormField } from '../../../components'
-import { ModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { PartialLoadedDisplayableModel } from '../../../types/models'
+import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 
 export const WhoToSendSection = () => {
     const { input: recipientInput } = useField('notificationRecipient')
+
     const isUserGroup =
         recipientInput.value === 'USER_GROUP' || !recipientInput.value
+
     const isOrgUnitContact =
         recipientInput.value === 'ORGANISATION_UNIT_CONTACT'
 
@@ -39,26 +40,23 @@ export const WhoToSendSection = () => {
                     )}
                 />
             </StandardFormField>
+
             {isUserGroup && (
                 <StandardFormField>
-                    <FieldRFF<PartialLoadedDisplayableModel | undefined>
-                        name="recipientUserGroup"
-                        render={({ input }) => (
-                            <ModelSingleSelect
-                                // label={i18n.t('User Group Recipients')}
-                                selected={input.value}
-                                onChange={input.onChange}
-                                // inputWidth="400px"
-                                query={{
-                                    resource: 'userGroups',
-                                    params: {
-                                        fields: ['id', 'displayName'],
-                                        order: 'displayName:asc',
-                                    },
-                                }}
-                            />
-                        )}
-                    />
+                    <div style={{ width: '400px' }}>
+                        <ModelSingleSelectFormField
+                            name="recipientUserGroup"
+                            label={i18n.t('User Group Recipients')}
+                            required
+                            query={{
+                                resource: 'userGroups',
+                                params: {
+                                    fields: ['id', 'displayName'],
+                                    order: 'displayName:asc',
+                                },
+                            }}
+                        />
+                    </div>
                 </StandardFormField>
             )}
 

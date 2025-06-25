@@ -1,7 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { CircularLoader } from '@dhis2/ui'
 import React from 'react'
-import { Form } from 'react-final-form'
 import {
     DefaultFormFooter,
     DefaultSectionedFormSidebar,
@@ -11,6 +9,11 @@ import {
 } from '../../components'
 import { SectionedFormProvider } from '../../lib'
 import { DataSetNotificationsFormFields } from './form/DataSetNotificationsFormFields'
+import {
+    initialValues,
+    validate,
+} from './form/DataSetNotificationTemplateSchema'
+import { DataSetNotificationFormValues } from './form/getInitialValuesFromTemplate'
 import { useOnSaveNotifications } from './form/useOnSaveNotifications'
 
 const section = {
@@ -27,7 +30,7 @@ const section = {
             label: i18n.t('When to send it'),
             fields: [
                 {
-                    name: 'notificationTriggers',
+                    name: 'dataSetNotificationTrigger',
                     label: i18n.t('Notification triggers'),
                 },
             ],
@@ -48,46 +51,29 @@ const section = {
 export const Component = () => {
     const onSubmit = useOnSaveNotifications()
 
+    const handleFormSubmit = async (values: DataSetNotificationFormValues) =>
+        onSubmit(values)
+
     return (
         <SectionedFormProvider formDescriptor={section}>
-            <Form
-                onSubmit={onSubmit}
-                initialValues={{
-                    name: '',
-                    id: '',
-                    code: '',
-                    displayName: '',
-                    notificationTriggers: [],
-                    notificationRecipients: [],
-                }}
+            <FormBase
+                onSubmit={handleFormSubmit}
+                initialValues={initialValues}
+                validate={validate}
+                includeAttributes={false}
             >
-                {({ handleSubmit, submitting }) => (
-                    <>
-                        <SectionedFormLayout
-                            sidebar={<DefaultSectionedFormSidebar />}
-                        >
-                            <form onSubmit={handleSubmit}>
-                                <DataSetNotificationsFormFields />
-                                <SectionedFormErrorNotice />
-                            </form>
-                            <DefaultFormFooter />
-                        </SectionedFormLayout>
-                        {submitting && (
-                            <div
-                                style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                <CircularLoader />
-                            </div>
-                        )}
-                    </>
+                {({ handleSubmit }) => (
+                    <SectionedFormLayout
+                        sidebar={<DefaultSectionedFormSidebar />}
+                    >
+                        <form onSubmit={handleSubmit}>
+                            <DataSetNotificationsFormFields />
+                            <SectionedFormErrorNotice />
+                        </form>
+                        <DefaultFormFooter />
+                    </SectionedFormLayout>
                 )}
-            </Form>
+            </FormBase>
         </SectionedFormProvider>
     )
 }

@@ -33,6 +33,7 @@ export const WhenToSendSection = () => {
                     render={(props) => (
                         <SingleSelectFieldFF
                             {...props}
+                            initialValue="DATA_SET_COMPLETION"
                             label={i18n.t('Dataset Notification Trigger')}
                             inputWidth="500px"
                             options={triggerOptions}
@@ -54,15 +55,21 @@ export const WhenToSendSection = () => {
                             }}
                         >
                             <span>{i18n.t('Send notification')}</span>
-                            <FieldRFF
+                            <FieldRFF<string | undefined>
                                 component={InputFieldFF}
                                 dataTest="formfields-notification-days"
                                 name="relativeScheduledDays"
                                 type="number"
-                                min="1"
                                 inputWidth="80px"
+                                parse={(value) => {
+                                    const parsed = parseInt(value ?? '', 10)
+                                    return isNaN(parsed)
+                                        ? undefined
+                                        : String(parsed)
+                                }}
                                 required
                             />
+
                             <span>{i18n.t('days')}</span>
                             <FieldRFF<string | undefined>
                                 dataTest="formfields-before-after"
@@ -84,6 +91,7 @@ export const WhenToSendSection = () => {
                         <FieldRFF<string | undefined>
                             inputWidth="500px"
                             dataTest="formfields-notification-type"
+                            initialValue='SINGLE_NOTIFICATION'
                             name="sendStrategy"
                             render={(props) => (
                                 <SingleSelectFieldFF

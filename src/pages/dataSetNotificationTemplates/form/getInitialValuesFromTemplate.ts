@@ -1,34 +1,20 @@
-export enum NotificationTrigger {
-    COMPLETION = 'COMPLETION',
-    SCHEDULED_DAYS = 'SCHEDULED_DAYS',
-}
-
-export enum NotificationRecipient {
-    ORGANISATION_UNIT_CONTACT = 'ORGANISATION_UNIT_CONTACT',
-    USER_GROUP = 'USER_GROUP',
-}
-
-export enum DeliveryChannel {
-    SMS = 'SMS',
-    EMAIL = 'EMAIL',
-}
-
-export enum NotificationSendStrategy {
-    SINGLE_NOTIFICATION = 'SINGLE_NOTIFICATION',
-    COLLECTIVE_SUMMARY = 'COLLECTIVE_SUMMARY',
-    NONE = 'NONE',
-}
+import {
+    DeliveryChannel,
+    NotificationRecipient,
+    NotificationSendStrategy,
+    NotificationTrigger,
+} from './DataSetNotificationTemplateSchema'
 
 export interface DataSet {
-    id: string
+    id?: string
     name?: string
     displayName?: string
 }
 
 export interface DataSetNotificationTemplate {
-    id: string
+    id?: string
     code?: string
-    name: string
+    name:  string
     displayName?: string
     description?: string
     subjectTemplate?: string
@@ -38,7 +24,7 @@ export interface DataSetNotificationTemplate {
     relativeScheduledDays?: number
     sendStrategy?: NotificationSendStrategy
     deliveryChannels: DeliveryChannel[]
-    recipientUserGroup?: { id: string } | string
+    recipientUserGroup?: { id?: string }
     dataSets: DataSet[]
 }
 
@@ -68,7 +54,7 @@ export const getInitialValuesFromTemplate = (
     }
 
     return {
-        id: template.id,
+        id: template.id ,
         code: template.code,
         name: template.name,
         displayName: template.displayName,
