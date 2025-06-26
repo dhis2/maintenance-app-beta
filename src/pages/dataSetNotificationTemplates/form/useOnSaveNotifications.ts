@@ -6,10 +6,7 @@ import {
     SECTIONS_MAP,
 } from '../../../lib'
 import { createFormError } from '../../../lib/form/createFormError'
-import {
-    DataSetNotificationFormValues,
-    transformFormValues,
-} from './getInitialValuesFromTemplate'
+import { DataSetNotificationFormValues, transformFormValues } from './getValues'
 
 const section = SECTIONS_MAP.dataSetNotificationTemplate
 

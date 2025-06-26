@@ -1,8 +1,7 @@
 import { z } from 'zod'
 import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
 
-const { identifiable, withDefaultListColumns } =
-    modelFormSchemas
+const { identifiable, withDefaultListColumns } = modelFormSchemas
 
 export enum NotificationTrigger {
     COMPLETION = 'DATA_SET_COMPLETION',

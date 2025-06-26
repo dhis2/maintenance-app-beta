@@ -1,12 +1,18 @@
 import i18n from '@dhis2/d2-i18n'
-import { CheckboxFieldFF, SingleSelectFieldFF } from '@dhis2/ui'
+import { SingleSelectFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { Field as FieldRFF, useField } from 'react-final-form'
+import { useField } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
+import { DeliveryChannelsField } from './DeliveryChannelsField'
 
-export const WhoToSendSection = () => {
-    const { input: recipientInput } = useField('notificationRecipient')
+export const RecipientSection = () => {
+    const { input: recipientInput, meta: recipientMeta } = useField(
+        'notificationRecipient',
+        {
+            subscription: { value: true },
+        }
+    )
 
     const isUserGroup =
         recipientInput.value === 'USER_GROUP' || !recipientInput.value
@@ -25,19 +31,14 @@ export const WhoToSendSection = () => {
     return (
         <div>
             <StandardFormField>
-                <FieldRFF<string | undefined>
+                <SingleSelectFieldFF
+                    inputWidth="400px"
                     name="notificationRecipient"
-                    initialValue="USER_GROUP"
-                    required
-                    render={(props) => (
-                        <SingleSelectFieldFF
-                            {...props}
-                            inputWidth="400px"
-                            dataTest="formfields-notification-recipient"
-                            label={i18n.t('Notification Recipient')}
-                            options={recipientOptions}
-                        />
-                    )}
+                    dataTest="formfields-notification-recipient"
+                    label={i18n.t('Recipient type')}
+                    options={recipientOptions}
+                    input={recipientInput}
+                    meta={recipientMeta}
                 />
             </StandardFormField>
 
@@ -62,22 +63,7 @@ export const WhoToSendSection = () => {
 
             {isOrgUnitContact && (
                 <StandardFormField>
-                    <div style={{ display: 'flex', gap: '24px' }}>
-                        <FieldRFF
-                            component={CheckboxFieldFF}
-                            dataTest="formfields-send-sms"
-                            label={i18n.t('SMS')}
-                            name="sendSms"
-                            type="checkbox"
-                        />
-                        <FieldRFF
-                            component={CheckboxFieldFF}
-                            dataTest="formfields-send-email"
-                            label={i18n.t('Email')}
-                            name="sendEmail"
-                            type="checkbox"
-                        />
-                    </div>
+                    <DeliveryChannelsField />
                 </StandardFormField>
             )}
         </div>

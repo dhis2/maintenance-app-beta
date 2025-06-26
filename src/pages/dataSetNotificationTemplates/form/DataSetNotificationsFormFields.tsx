@@ -3,35 +3,64 @@ import React from 'react'
 import {
     SectionedFormSection,
     SectionedFormSections,
+    StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
 import { SECTIONS_MAP } from '../../../lib'
-import { WhatToSendSection } from './WhatToSendSection'
-import { WhenToSendSection } from './WhenToSendSection'
-import { WhoToSendSection } from './WhoToSendSection'
+import { BasicInformationSection } from './BasicInformationSection'
+import { MessageTemplateContent } from './messageContent'
+import { NotificationTimingSection } from './NotificationTimingSection'
+import { RecipientSection } from './RecipientSection'
 
 export const DataSetNotificationsFormFields = () => {
     const section = SECTIONS_MAP.dataSetNotificationTemplate
     return (
         <div>
             <SectionedFormSections>
-                <SectionedFormSection name="whatToSend">
+                <SectionedFormSection name="basicInformation">
                     <StandardFormSectionTitle>
-                        {i18n.t('What to send')}
+                        {i18n.t('Basic information')}
                     </StandardFormSectionTitle>
-                    <WhatToSendSection section={section} />
+                    <StandardFormSectionDescription>
+                        {i18n.t(
+                            'Set up the basic information for the notification template.'
+                        )}
+                    </StandardFormSectionDescription>
+                    <BasicInformationSection section={section} />
                 </SectionedFormSection>
-                <SectionedFormSection name="whenToSend">
+
+                <SectionedFormSection name="messageContent">
                     <StandardFormSectionTitle>
-                        {i18n.t('When to send it')}
+                        {i18n.t('Message content')}
                     </StandardFormSectionTitle>
-                    <WhenToSendSection />
+                    <StandardFormSectionDescription>
+                        {i18n.t(
+                            'Configure the templates for the notification content and subject.'
+                        )}
+                    </StandardFormSectionDescription>
+                    <MessageTemplateContent section={section} />
                 </SectionedFormSection>
-                <SectionedFormSection name="whoToSend">
+
+                <SectionedFormSection name="notificationTiming">
                     <StandardFormSectionTitle>
-                        {i18n.t('Who to send it to')}
+                        {i18n.t('Notification timing')}
                     </StandardFormSectionTitle>
-                    <WhoToSendSection />
+                    <StandardFormSectionDescription>
+                        {i18n.t(
+                            'Choose what triggers the notification and when it should be sent.'
+                        )}
+                    </StandardFormSectionDescription>
+                    <NotificationTimingSection />
+                </SectionedFormSection>
+
+                <SectionedFormSection name="recipient">
+                    <StandardFormSectionTitle>
+                        {i18n.t('Recipient')}
+                    </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        {i18n.t('Choose who recieves the notification.')}
+                    </StandardFormSectionDescription>
+                    <RecipientSection />
                 </SectionedFormSection>
             </SectionedFormSections>
         </div>

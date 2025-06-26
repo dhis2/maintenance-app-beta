@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, NoticeBox } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
-import React, { useMemo } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
@@ -21,7 +21,8 @@ import {
     DataSetNotificationTemplate,
     DataSetNotificationFormValues,
     transformFormValues,
-} from './form/getInitialValuesFromTemplate'
+    formDescriptor,
+} from './form/getValues'
 import { useOnEditNotifications } from './form/useOnEditNotifications'
 
 type Params = {
@@ -69,41 +70,6 @@ export const Component = () => {
 
     const handleFormSubmit = async (values: DataSetNotificationFormValues) =>
         onSubmit(transformFormValues(values))
-
-    const formDescriptor = useMemo(
-        () => ({
-            name: 'editDataSetNotificationForm',
-            label: i18n.t('Edit Data Set Notification'),
-            sections: [
-                {
-                    name: 'whatToSend',
-                    label: i18n.t('What to send'),
-                    fields: [{ name: 'name', label: i18n.t('Name') }],
-                },
-                {
-                    name: 'whenToSend',
-                    label: i18n.t('When to send it'),
-                    fields: [
-                        {
-                            name: 'dataSetNotificationTrigger',
-                            label: i18n.t('Notification trigger'),
-                        },
-                    ],
-                },
-                {
-                    name: 'whoToSend',
-                    label: i18n.t('Who to send it to'),
-                    fields: [
-                        {
-                            name: 'notificationRecipient',
-                            label: i18n.t('Recipient'),
-                        },
-                    ],
-                },
-            ],
-        }),
-        []
-    )
 
     if (errorTemplate) {
         return (

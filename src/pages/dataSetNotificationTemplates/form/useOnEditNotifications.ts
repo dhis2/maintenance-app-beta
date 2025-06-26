@@ -6,7 +6,7 @@ import {
     useNavigateWithSearchState,
 } from '../../../lib'
 import { createFormError } from '../../../lib/form/createFormError'
-import { DataSetNotificationTemplate } from './getInitialValuesFromTemplate'
+import { DataSetNotificationTemplate } from './getValues'
 
 const section = SECTIONS_MAP.dataSetNotificationTemplate
 

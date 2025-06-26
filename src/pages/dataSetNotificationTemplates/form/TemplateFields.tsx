@@ -23,7 +23,7 @@ export function SubjectTemplateField({
     })
 
     const helpString =
-        helpText ?? i18n.t('Enter the subject template for the notification.')
+        helpText ?? i18n.t('Used as the template for the subject field.')
 
     return (
         <FieldRFF<string | undefined>
@@ -31,7 +31,7 @@ export function SubjectTemplateField({
             component={InputFieldFF}
             dataTest="formfields-subject-template"
             inputWidth="400px"
-            label={i18n.t('Subject Template')}
+            label={i18n.t('Subject')}
             name="subjectTemplate"
             helpText={helpString}
             validate={(subjectTemplate?: string) => validator(subjectTemplate)}
@@ -58,7 +58,7 @@ export function MessageTemplateField({
     })
 
     const helpString =
-        helpText ?? i18n.t('Enter the message template for the notification.')
+        helpText ?? i18n.t('Used as template for the message field.')
 
     return (
         <FieldRFF<string | undefined>
@@ -67,13 +67,12 @@ export function MessageTemplateField({
             dataTest="formfields-message-template"
             required
             label={i18n.t('{{fieldLabel}} (required)', {
-                fieldLabel: i18n.t('Message Template'),
+                fieldLabel: i18n.t('Message'),
             })}
             inputWidth="400px"
             name="messageTemplate"
             helpText={helpString}
             validate={(messageTemplate?: string) => validator(messageTemplate)}
-            validateFields={[]}
         />
     )
 }

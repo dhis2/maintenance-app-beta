@@ -4,12 +4,17 @@ import React from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 
-export const WhenToSendSection = () => {
-    const { input: triggerInput } = useField('dataSetNotificationTrigger')
+export const NotificationTimingSection = () => {
+    const { input: triggerInput, meta: triggerMeta } = useField(
+        'dataSetNotificationTrigger'
+    )
     const isScheduledDays = triggerInput.value === 'SCHEDULED_DAYS'
 
     const triggerOptions = [
-        { label: i18n.t('Dataset Completion'), value: 'DATA_SET_COMPLETION' },
+        {
+            label: i18n.t('Immediately after data set completion'),
+            value: 'DATA_SET_COMPLETION',
+        },
         { label: i18n.t('Scheduled Days'), value: 'SCHEDULED_DAYS' },
     ]
 
@@ -27,20 +32,14 @@ export const WhenToSendSection = () => {
     return (
         <div>
             <StandardFormField>
-                <FieldRFF<string | undefined>
-                    dataTest="formfields-notification-trigger"
+                <SingleSelectFieldFF
                     name="dataSetNotificationTrigger"
-                    render={(props) => (
-                        <SingleSelectFieldFF
-                            {...props}
-                            initialValue="DATA_SET_COMPLETION"
-                            label={i18n.t('Dataset Notification Trigger')}
-                            inputWidth="500px"
-                            options={triggerOptions}
-                            required
-                        />
-                    )}
+                    label={i18n.t('When to send notification')}
+                    inputWidth="500px"
+                    options={triggerOptions}
                     required
+                    input={triggerInput}
+                    meta={triggerMeta}
                 />
             </StandardFormField>
 
@@ -91,7 +90,7 @@ export const WhenToSendSection = () => {
                         <FieldRFF<string | undefined>
                             inputWidth="500px"
                             dataTest="formfields-notification-type"
-                            initialValue='SINGLE_NOTIFICATION'
+                            initialValue="SINGLE_NOTIFICATION"
                             name="sendStrategy"
                             render={(props) => (
                                 <SingleSelectFieldFF
