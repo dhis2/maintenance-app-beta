@@ -94,6 +94,9 @@ export const transformFormValues = (
     }
 }
 
+/**
+ * Section data
+ */
 export const formDescriptor = {
     name: 'editDataSetNotificationForm',
     label: i18n.t('Edit Data Set Notification'),
@@ -101,16 +104,18 @@ export const formDescriptor = {
         {
             name: 'basicInformation',
             label: i18n.t('Basic information'),
-            fields: [{ name: 'name', label: i18n.t('Name') }],
+            fields: [
+                { name: 'name', label: i18n.t('Name') },
+                { name: 'code', label: i18n.t('Code') },
+                { name: 'description', label: i18n.t('Description') },
+            ],
         },
         {
             name: 'messageContent',
             label: i18n.t('Message content'),
             fields: [
-                {
-                    name: 'dataSetNotificationTrigger',
-                    label: i18n.t('Notification trigger'),
-                },
+                { name: 'subjectTemplate', label: i18n.t('Subject template') },
+                { name: 'messageTemplate', label: i18n.t('Message template') },
             ],
         },
         {
@@ -118,8 +123,16 @@ export const formDescriptor = {
             label: i18n.t('Notification timing'),
             fields: [
                 {
-                    name: 'notificationRecipient',
-                    label: i18n.t('Recipient'),
+                    name: 'dataSetNotificationTrigger',
+                    label: i18n.t('Trigger'),
+                },
+                {
+                    name: 'relativeScheduledDays',
+                    label: i18n.t('Scheduled days'),
+                },
+                {
+                    name: 'sendStrategy',
+                    label: i18n.t('Send strategy'),
                 },
             ],
         },
@@ -129,7 +142,15 @@ export const formDescriptor = {
             fields: [
                 {
                     name: 'notificationRecipient',
-                    label: i18n.t('Recipient'),
+                    label: i18n.t('Notification recipient'),
+                },
+                {
+                    name: 'recipientUserGroup',
+                    label: i18n.t('Recipient user group'),
+                },
+                {
+                    name: 'deliveryChannels',
+                    label: i18n.t('Delivery channels'),
                 },
             ],
         },
