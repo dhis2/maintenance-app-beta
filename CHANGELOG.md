@@ -1,3 +1,10 @@
+# [0.48.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.3...v0.48.0) (2025-06-26)
+
+
+### Features
+
+* warn if name is not unique ([#568](https://github.com/dhis2/maintenance-app-beta/issues/568)) ([12a5ddc](https://github.com/dhis2/maintenance-app-beta/commit/12a5ddc98922099b8201db1ecaaacfc62f9905f4))
+
 ## [0.47.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.2...v0.47.3) (2025-06-24)
 
 
