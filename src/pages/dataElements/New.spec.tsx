@@ -122,7 +122,7 @@ describe('Data Elements / New', () => {
         expect(nameRequiredError).toBeTruthy()
 
         const shortNameRequiredError = await result.findByText('Required', {
-            selector: '[data-test="formfields-shortname-validation"]',
+            selector: '[data-test="formfields-shortName-validation"]',
         })
         expect(shortNameRequiredError).toBeTruthy()
 
