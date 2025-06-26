@@ -1,55 +1,75 @@
 import { z } from 'zod'
 import { modelFormSchemas } from '../../../lib'
+import { DataSetNotificationTemplate } from '../../../types/generated'
 
-const { identifiable, withAttributeValues, withDefaultListColumns } =
-    modelFormSchemas
-
-export enum NotificationTrigger {
-    COMPLETION = 'COMPLETION',
-    SCHEDULED_DAYS = 'SCHEDULED_DAYS',
-}
-
-export enum NotificationRecipient {
-    ORGANISATION_UNIT_CONTACT = 'ORGANISATION_UNIT_CONTACT',
-    USER_GROUP = 'USER_GROUP',
-}
+const {
+    identifiable,
+    withAttributeValues,
+    withDefaultListColumns,
+    referenceCollection,
+} = modelFormSchemas
 
 export enum DeliveryChannel {
     SMS = 'SMS',
     EMAIL = 'EMAIL',
+    HTTP = 'HTTP',
 }
 
-export enum NotificationSendStrategy {
-    SINGLE_NOTIFICATION = 'SINGLE_NOTIFICATION',
-    COLLECTIVE_SUMMARY = 'COLLECTIVE_SUMMARY',
-    NONE = 'NONE',
-}
+const DataSetNotificationTemplateBaseSchema = z.object({
+    code: z.string().optional(),
+    description: z.string().optional(),
+    dataSetNotificationTrigger: z.nativeEnum(
+        DataSetNotificationTemplate.dataSetNotificationTrigger
+    ),
+    notificationRecipient: z.nativeEnum(
+        DataSetNotificationTemplate.notificationRecipient
+    ),
+    deliveryChannels: z.array(z.nativeEnum(DeliveryChannel)).default([]),
+    messageTemplate: z.string(),
+    subjectTemplate: z.string().optional(),
+    relativeScheduledDays: z.union([z.string(), z.number()]).optional(),
+    recipientUserGroup: z
+        .object({
+            id: z.string(),
+            displayName: z.string().optional(),
+        })
+        .optional(),
+    dataSets: referenceCollection.default([]),
+    sendStrategy: z
+        .nativeEnum(DataSetNotificationTemplate.sendStrategy)
+        .optional(),
+})
 
-const referenceCollection = z.array(
-    z.object({
-        id: z.string(),
-        name: z.string().optional(),
-        displayName: z.string().optional(),
-    })
-)
+export const DataSetNotificationTemplateFormSchema =
+    DataSetNotificationTemplateBaseSchema.merge(identifiable)
+        .merge(withAttributeValues)
+        .extend({
+            code: z.string().optional(),
+            description: z.string().optional(),
+            name: z.string().default(''),
+            dataSetNotificationTrigger: z.nativeEnum(
+                DataSetNotificationTemplate.dataSetNotificationTrigger
+            ),
+            notificationRecipient: z.nativeEnum(
+                DataSetNotificationTemplate.notificationRecipient
+            ),
+            deliveryChannels: z
+                .array(z.nativeEnum(DeliveryChannel))
+                .default([]),
+            messageTemplate: z.string(),
+            subjectTemplate: z.string().optional(),
+            relativeScheduledDays: z.union([z.string(), z.number()]).optional(),
+            recipientUserGroup: z
+                .object({
+                    id: z.string(),
+                    displayName: z.string().optional(),
+                })
+                .optional(),
+            dataSets: referenceCollection.default([]),
+            sendStrategy: z
+                .nativeEnum(DataSetNotificationTemplate.sendStrategy)
+                .optional(),
+        })
 
-export const DataSetNotificationTemplateSchema = identifiable
-    .merge(withAttributeValues)
-    .extend({
-        code: z.string().optional(),
-        description: z.string().optional(),
-        notificationTrigger: z.nativeEnum(NotificationTrigger),
-        notificationRecipient: z.nativeEnum(NotificationRecipient),
-        deliveryChannels: z.array(z.nativeEnum(DeliveryChannel)).default([]),
-        messageTemplate: z.string().optional(),
-        subjectTemplate: z.string().optional(),
-        relativeScheduledDays: z.string().optional(),
-        recipientUserGroup: z.string().optional(),
-        dataSets: referenceCollection.default([]),
-        sendStrategy: z.nativeEnum(NotificationSendStrategy).optional(),
-    })
-
-export const dataSetNotificationTemplateListSchema =
-    withDefaultListColumns.extend({
-        name: z.string(),
-    })
+export const DataSetNotificationTemplateListSchema =
+    DataSetNotificationTemplateBaseSchema.merge(withDefaultListColumns)

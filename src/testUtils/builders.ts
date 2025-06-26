@@ -15,7 +15,10 @@ import { categoryOptionListSchema } from '../pages/categoryOptions/form/category
 import { dataElementGroupSchema } from '../pages/dataElementGroups/form'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementSchema } from '../pages/dataElements/form'
-import { DataSetNotificationTemplateSchema } from '../pages/dataSetNotificationTemplates/form/DataSetNotificationTemplateSchema'
+import {
+    DataSetNotificationTemplateListSchema,
+    DataSetNotificationTemplateFormSchema,
+} from '../pages/dataSetNotificationTemplates/form/DataSetNotificationTemplateSchema'
 import { dataSetListSchema } from '../pages/dataSetsWip/form/dataSetFormSchema'
 import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicatorGroupSchema'
 import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
@@ -178,7 +181,7 @@ export const testDataSet = (overwrites: Record<any, any> = {}) => ({
 export const testDataSetNotificationTemplate = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(DataSetNotificationTemplateSchema, {
+    ...generateMock(DataSetNotificationTemplateListSchema, {
         mockeryMapper,
     }),
     ...overwrites,

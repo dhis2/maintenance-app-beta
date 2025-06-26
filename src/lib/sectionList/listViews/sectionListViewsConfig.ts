@@ -145,8 +145,34 @@ export const modelListViewsConfig = {
     },
     dataSetNotificationTemplate: {
         columns: {
-            default: ['name', 'lastUpdated'],
-            available: [DESCRIPTORS.shortName],
+            available: [
+                DESCRIPTORS.shortName,
+                { label: i18n.t('Message template'), path: 'messageTemplate' },
+                { label: i18n.t('Favourite'), path: 'favourite' },
+                {
+                    label: i18n.t('Data set notification trigger'),
+                    path: 'dataSetNotificationTrigger',
+                },
+                {
+                    label: i18n.t('Notification recipient'),
+                    path: 'notificationRecipient',
+                },
+                {
+                    label: i18n.t('Notify parent organisation unit only'),
+                    path: 'notifyParentOrganisationUnitOnly',
+                },
+                {
+                    label: i18n.t('Notify users in hierarchy only'),
+                    path: 'notifyUsersInHierarchyOnly',
+                },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+                {
+                    label: i18n.t('Relative scheduled days'),
+                    path: 'relativeScheduledDays',
+                },
+                { label: i18n.t('Send notification as'), path: 'sendStrategy' },
+                { label: i18n.t('Subject template'), path: 'subjectTemplate' },
+            ],
         },
         filters: {
             default: [],
