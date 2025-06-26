@@ -2,7 +2,6 @@ import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import {
     CodeField,
-    DefaultIdentifiableFields,
     DescriptionField,
     NameField,
     ShortNameField,

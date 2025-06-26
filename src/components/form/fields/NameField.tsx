@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { InputFieldFF } from '@dhis2/ui'
 import React, { useState } from 'react'
-import { Field as FieldRFF, useField, useForm } from 'react-final-form'
+import { Field as FieldRFF } from 'react-final-form'
 import { SchemaSection } from '../../../lib'
 import { useValidator } from '../../../lib/models/useFieldValidators'
 

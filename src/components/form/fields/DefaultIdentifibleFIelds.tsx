@@ -1,8 +1,5 @@
 import React from 'react'
-import {
-    useIsFieldValueUnique,
-    useSchemaSectionHandleOrThrow,
-} from '../../../lib'
+import { useSchemaSectionHandleOrThrow } from '../../../lib'
 import { StandardFormField } from '../../standardForm'
 import { CodeField } from './CodeField'
 import { NameField } from './NameField'
