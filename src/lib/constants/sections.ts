@@ -102,7 +102,7 @@ export const SCHEMA_SECTIONS = {
     },
     dataSetNotificationTemplate: {
         name: SchemaName.dataSetNotificationTemplate,
-        namePlural: 'dataSetNotifications',
+        namePlural: 'dataSetNotificationTemplates',
         title: i18n.t('Data set notification template'),
         titlePlural: i18n.t('Data set notification templates'),
         parentSectionKey: 'dataSet',

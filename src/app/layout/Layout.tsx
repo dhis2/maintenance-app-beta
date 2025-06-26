@@ -60,7 +60,14 @@ export const Layout = () => {
        - scroll position of "main" content is correct by default (rather than scroll behind the footer)
     thus we use react portal to render the footer contents within the footer div.
 */
-export const createPortalToFooter = (children: React.ReactNode) =>
-    createPortal(children, document.getElementById(FOOTER_ID) as HTMLElement)
+export const createPortalToFooter = (children: React.ReactNode) => {
+    const footerElement = document.getElementById(FOOTER_ID)
+
+    if (!footerElement) {
+        return null
+    }
+
+    return createPortal(children, footerElement)
+}
 
 export default Layout
