@@ -266,6 +266,40 @@ export const modelListViewsConfig = {
             overrideDefaultAvailable: true,
         },
     },
+    indicatorGroup: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+                'favorite',
+            ],
+        },
+        filters: {
+            default: [],
+        },
+    },
+    indicatorGroupSet: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                'compulsory',
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                DESCRIPTORS.shortName,
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+                'favorite',
+            ],
+        },
+        filters: {
+            default: [],
+        },
+    },
     categoryOptionGroupSet: {
         columns: {
             default: [
@@ -320,6 +354,47 @@ export const modelListViewsConfig = {
             available: ['ignoreApproval'],
             // categoryOptionCombo does not have publicAccess
             overrideDefaultAvailable: true,
+        },
+    },
+    programIndicatorGroup: {
+        columns: {
+            available: [
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+                'favorite',
+            ],
+        },
+        filters: {
+            default: [],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
+    },
+    programIndicator: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Program name'), path: 'program.displayName' },
+                'lastUpdated',
+            ],
+            available: [
+                'expression',
+                'displayInForm',
+                'analyticsType',
+                { label: i18n.t('Description'), path: 'displayDescription' },
+                { label: i18n.t('Form name'), path: 'displayFormName' },
+                { label: i18n.t('Short name'), path: 'displayShortName' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+                { label: i18n.t('Decimals in data output'), path: 'decimals' },
+                'favorite',
+                'aggregationType',
+                'code',
+                'filter',
+                'aggregateExportCategoryOptionCombo',
+                'aggregateExportAttributeOptionCombo',
+            ],
+        },
+        filters: {
+            default: ['program'],
         },
     },
 } satisfies SectionListViewConfig<SectionName>

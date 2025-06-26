@@ -35,7 +35,11 @@ export const ToolbarNormal = ({
                 </Link>
             )}
             {downloadButtonElement}
-            <Button small onClick={() => setManageColumnsOpen((prev) => !prev)}>
+            <Button
+                small
+                dataTest="manage-view-button"
+                onClick={() => setManageColumnsOpen((prev) => !prev)}
+            >
                 {i18n.t('Manage View')}
             </Button>
             {manageColumnsOpen && (

@@ -51,8 +51,8 @@ const actionToJsonPatchOperation = (
 }
 
 /*
-   Usage of React-Final-Form does not seem necessary because we're not using 
-   validation or initialState. And the result of the form (list of added SharingActions) are not kept in form-state. 
+   Usage of React-Final-Form does not seem necessary because we're not using
+   validation or initialState. And the result of the form (list of added SharingActions) are not kept in form-state.
    However, we still need some metastate for the form.
    */
 type FormMetaState = {
@@ -223,6 +223,7 @@ const SharingSelection = ({
                     className={css.addActionButton}
                     onClick={handleAddSharingAction}
                     disabled={!selectedSharingEntity}
+                    dataTest="add-to-sharing-actions-button"
                 >
                     {i18n.t('Add to actions')}
                 </Button>

@@ -6,7 +6,7 @@ import React, { useMemo } from 'react'
 import { Form as ReactFinalForm } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
-    DefaultSectionedFormFooter,
+    DefaultFormFooter,
     DefaultSectionedFormSidebar,
     SectionedFormLayout,
 } from '../../components'
@@ -39,8 +39,8 @@ const programIndicatorFieldFilters = [
     'name',
     'displayName',
     'categoryMappingIds',
-    'attributeCombo[id, displayName, dataDimensionType, categories[id, displayName,dataDimensionType,categoryOptions[id, displayName]]]',
-    'categoryCombo[id, displayName, dataDimensionType, categories[id, displayName,dataDimensionType,categoryOptions[id, displayName]]]',
+    'attributeCombo[id, displayName, dataDimensionType, categories[id, displayName,name,dataDimensionType,categoryOptions[id, displayName]]]',
+    'categoryCombo[id, displayName, dataDimensionType, categories[id, displayName,name,dataDimensionType,categoryOptions[id, displayName]]]',
     'aggregateExportDataElement',
 ] as const
 
@@ -203,18 +203,17 @@ export const Component = () => {
                             {!isLoading && !isError && (
                                 <SectionedFormLayout
                                     sidebar={<DefaultSectionedFormSidebar />}
-                                    footer={
-                                        <DefaultSectionedFormFooter
-                                            submitting={submitting}
-                                        />
-                                    }
                                 >
                                     <form onSubmit={handleSubmit}>
                                         <ProgramDisaggregationFormFields
                                             initialProgramIndicators={
                                                 initialProgramIndicators
                                             }
+                                            programName={
+                                                programQuery?.data?.displayName
+                                            }
                                         />
+                                        <DefaultFormFooter />
                                     </form>
                                 </SectionedFormLayout>
                             )}

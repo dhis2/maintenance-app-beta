@@ -1,3 +1,78 @@
+## [0.47.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.2...v0.47.3) (2025-06-24)
+
+
+### Bug Fixes
+
+* positive integer validation and remove attributes from indicator types ([#582](https://github.com/dhis2/maintenance-app-beta/issues/582)) ([7ceb91e](https://github.com/dhis2/maintenance-app-beta/commit/7ceb91e7074c03e169434b9fe1ea9a5b9535505b))
+
+## [0.47.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.1...v0.47.2) (2025-06-16)
+
+
+### Bug Fixes
+
+* remove soft deleted category mappings [DHIS2-19695] ([#576](https://github.com/dhis2/maintenance-app-beta/issues/576)) ([4778503](https://github.com/dhis2/maintenance-app-beta/commit/47785039915b2e0ef4922ea9fe0fa0d35a7c8005))
+
+## [0.47.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.0...v0.47.1) (2025-06-12)
+
+
+### Bug Fixes
+
+* upgrade multi calendar dates ([#580](https://github.com/dhis2/maintenance-app-beta/issues/580)) ([22be5ca](https://github.com/dhis2/maintenance-app-beta/commit/22be5ca3e1256b119e9a4c3ed7e1548720789413))
+
+# [0.47.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.46.0...v0.47.0) (2025-06-06)
+
+
+### Bug Fixes
+
+* pi disaggregations clean up [DHIS2-19651] ([#569](https://github.com/dhis2/maintenance-app-beta/issues/569)) ([9475439](https://github.com/dhis2/maintenance-app-beta/commit/94754398e0b173992c57256bcbf050a2d4ff9ea1))
+* UI clean up [DHIS2-19695] ([#575](https://github.com/dhis2/maintenance-app-beta/issues/575)) ([28aa0e3](https://github.com/dhis2/maintenance-app-beta/commit/28aa0e3f71c521751aac41b599ab4e607d08999a))
+
+
+### Features
+
+* program indicator groups ([#572](https://github.com/dhis2/maintenance-app-beta/issues/572)) ([3085974](https://github.com/dhis2/maintenance-app-beta/commit/3085974b9837871b58d84734859383df5df362bf))
+
+# [0.46.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.45.1...v0.46.0) (2025-06-02)
+
+
+### Features
+
+* add program indicator list ([#565](https://github.com/dhis2/maintenance-app-beta/issues/565)) ([70338af](https://github.com/dhis2/maintenance-app-beta/commit/70338afdf10305b26f35a3b266e8c4912536d5fe))
+* indicator groups, indicator group sets ([#567](https://github.com/dhis2/maintenance-app-beta/issues/567)) ([2bdf809](https://github.com/dhis2/maintenance-app-beta/commit/2bdf8098bbc45a351ae45db1d65e2f6f4956b67f))
+
+## [0.45.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.45.0...v0.45.1) (2025-06-02)
+
+
+### Reverts
+
+* Revert "feat: program indicator groups list and form (#570)" (#571) ([e4fd41b](https://github.com/dhis2/maintenance-app-beta/commit/e4fd41b8da96faf9d529bd477b9f171e364d965a)), closes [#570](https://github.com/dhis2/maintenance-app-beta/issues/570) [#571](https://github.com/dhis2/maintenance-app-beta/issues/571)
+
+# [0.45.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.44.3...v0.45.0) (2025-06-02)
+
+
+### Features
+
+* program indicator groups list and form ([#570](https://github.com/dhis2/maintenance-app-beta/issues/570)) ([9a01f57](https://github.com/dhis2/maintenance-app-beta/commit/9a01f576a263551feb8b9f49c22febfb0e775c7e))
+
+## [0.44.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.44.2...v0.44.3) (2025-05-21)
+
+
+### Bug Fixes
+
+* keeping and deleting sources in merge ([#566](https://github.com/dhis2/maintenance-app-beta/issues/566)) ([e388ac0](https://github.com/dhis2/maintenance-app-beta/commit/e388ac0a159db89c845c99abe35cb67d61c4a602))
+
+## [0.44.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.44.1...v0.44.2) (2025-05-21)
+
+
+### Bug Fixes
+
+* sectioned sidebar style and footer refactor ([#560](https://github.com/dhis2/maintenance-app-beta/issues/560)) ([abbbe64](https://github.com/dhis2/maintenance-app-beta/commit/abbbe6450ab07fb64027a0169175f9e807ad0fc5))
+
+
+### Features
+
+* add lists schemas ([#564](https://github.com/dhis2/maintenance-app-beta/issues/564)) [skip release] ([ae4f0c2](https://github.com/dhis2/maintenance-app-beta/commit/ae4f0c2998cdd86d319a9892b622eed50f0e541b))
+
 ## [0.44.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.44.0...v0.44.1) (2025-05-09)
 
 

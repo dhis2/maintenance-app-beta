@@ -5,8 +5,8 @@ import {
     getDefaults,
     modelFormSchemas,
 } from '../../../lib'
-import { ModelWithAttributeValues } from '../../../lib/form/createJsonPatchOperations'
 import { createFormValidate } from '../../../lib/form/validate'
+import { DataSet } from '../../../types/generated'
 
 const {
     withAttributeValues,
@@ -14,13 +14,20 @@ const {
     style,
     referenceCollection,
     modelReference,
+    withDefaultListColumns,
 } = modelFormSchemas
 
+const dataSetBaseSchema = z.object({
+    code: z.string().trim().optional(),
+    periodType: z
+        .nativeEnum(DataSet.periodType)
+        .default(DataSet.periodType.MONTHLY),
+    formType: z.nativeEnum(DataSet.formType).default(DataSet.formType.DEFAULT),
+})
 export const dataSetFormSchema = identifiable
     .merge(withAttributeValues)
+    .merge(dataSetBaseSchema)
     .extend({
-        id: z.string().optional(),
-        code: z.string().trim().optional(),
         description: z.string().trim().max(2000).optional(),
         style: style.optional(),
         dataSetElements: z
@@ -35,13 +42,11 @@ export const dataSetFormSchema = identifiable
             .object({ id: z.string(), displayName: z.string() })
             .default({ ...DEFAULT_CATEGORY_COMBO }),
         indicators: referenceCollection.default([]),
-        periodType: z.string().default('Monthly'),
         openFuturePeriods: z
             .number()
             .int({ message: i18n.t('The number should not have decimals') })
             .optional(),
         expiryDays: z.number().optional(),
-        formType: z.enum(['DEFAULT', 'SECTION', 'CUSTOM']).default('DEFAULT'),
         displayOptions: z
             .string()
             .optional()
@@ -90,6 +95,12 @@ export const dataSetFormSchema = identifiable
                 })
             )
             .default([]),
+    })
+
+export const dataSetListSchema = withDefaultListColumns
+    .merge(dataSetBaseSchema)
+    .extend({
+        displayShortName: z.string(),
     })
 
 export const initialValues = getDefaults(dataSetFormSchema)

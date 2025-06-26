@@ -5,11 +5,8 @@ import { FORM_ERROR, FormApi } from 'final-form'
 import React, { useEffect, useRef } from 'react'
 import { withTypes } from 'react-final-form'
 import { useParams } from 'react-router-dom'
-import {
-    Loader,
-    StandardFormActions,
-    StandardFormSection,
-} from '../../components'
+import { Loader, StandardFormSection } from '../../components'
+import { DefaultFormFooter } from '../../components/form/'
 import {
     SCHEMA_SECTIONS,
     getSectionPath,
@@ -182,12 +179,9 @@ export const Component = () => {
                     }}
                     initialValues={initialValues}
                 >
-                    {({ handleSubmit, submitting, submitError }) => (
+                    {({ handleSubmit, submitError }) => (
                         <form onSubmit={handleSubmit}>
-                            <FormContents
-                                submitError={submitError}
-                                submitting={submitting}
-                            />
+                            <FormContents submitError={submitError} />
                         </form>
                     )}
                 </Form>
@@ -196,15 +190,8 @@ export const Component = () => {
     )
 }
 
-function FormContents({
-    submitError,
-    submitting,
-}: {
-    submitting: boolean
-    submitError?: string
-}) {
+function FormContents({ submitError }: { submitError?: string }) {
     const formErrorRef = useRef<HTMLDivElement | null>(null)
-    const navigate = useNavigateWithSearchState()
 
     useEffect(() => {
         if (submitError) {
@@ -233,14 +220,7 @@ function FormContents({
                 <DataElementFormFields />
             </div>
 
-            <div className={classes.formActions}>
-                <StandardFormActions
-                    cancelLabel={i18n.t('Cancel')}
-                    submitLabel={i18n.t('Save and close')}
-                    submitting={submitting}
-                    onCancelClick={() => navigate(listPath)}
-                />
-            </div>
+            <DefaultFormFooter cancelTo={listPath} />
         </>
     )
 }

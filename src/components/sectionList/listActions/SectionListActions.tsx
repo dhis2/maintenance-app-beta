@@ -43,6 +43,7 @@ export const ActionEdit = ({
             secondary
             to={{ pathname: modelId }}
             state={preservedSearchState}
+            dataTest="row-edit-action-button"
         >
             <IconEdit24 color={colors.grey600} />
         </LinkButton>
@@ -91,6 +92,7 @@ export const ActionMore = ({
                 small
                 secondary
                 onClick={() => setOpen(!open)}
+                dataTest="row-actions-menu-button"
                 icon={<IconMore24 color={colors.grey600} />}
             />
             {open && (
@@ -100,6 +102,7 @@ export const ActionMore = ({
                     placement="bottom-end"
                     reference={ref}
                     onClickOutside={() => setOpen(false)}
+                    dataTest="row-actions-menu"
                 >
                     <FlyoutMenu>
                         <MenuItem

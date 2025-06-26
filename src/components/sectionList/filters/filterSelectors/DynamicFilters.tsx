@@ -9,6 +9,8 @@ import {
     CategoryOptionGroupFilter,
     DataDimensionTypeFilter,
     IndicatorFilter,
+    IndicatorGroupFilter,
+    IndicatorGroupSetFilter,
     DomainTypeSelectionFilter,
     IgnoreApprovalFilter,
     PublicAccessFilter,
@@ -20,6 +22,7 @@ import {
     DataElementFilter,
     CompulsoryFilter,
     DataDimensionFilter,
+    ProgramFilter,
 } from '.'
 
 type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
@@ -40,7 +43,10 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
     domainType: DomainTypeSelectionFilter,
     formType: FormTypeFilter,
     ignoreApproval: IgnoreApprovalFilter,
+    indicatorGroup: IndicatorGroupFilter,
+    indicatorGroupSet: IndicatorGroupSetFilter,
     indicatorType: IndicatorFilter,
+    program: ProgramFilter,
     publicAccess: PublicAccessFilter,
     valueType: ValueTypeSelectionFilter,
 }
@@ -53,7 +59,9 @@ export const DynamicFilters = () => {
             {filterKeys.map((filterKey) => {
                 const FilterComponent = filterKeyToComponentMap[filterKey]
                 return FilterComponent ? (
-                    <FilterComponent key={filterKey} />
+                    <span data-test="dynamic-filter" key={filterKey}>
+                        <FilterComponent key={filterKey} />
+                    </span>
                 ) : null
             })}
         </>

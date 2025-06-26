@@ -2,14 +2,22 @@ import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 
-const { withAttributeValues, identifiable, referenceCollection } =
-    modelFormSchemas
+const {
+    withAttributeValues,
+    withDefaultListColumns,
+    identifiable,
+    referenceCollection,
+} = modelFormSchemas
 
-export const organisationUnitSchema = identifiable
+const organisationUnitBaseSchema = z.object({
+    code: z.string().trim().optional(),
+})
+
+export const organisationUnitFormSchema = identifiable
     .merge(withAttributeValues)
+    .merge(organisationUnitBaseSchema)
     .extend({
         shortName: z.string().trim().default(''),
-        code: z.string().trim().optional(),
         description: z.string().trim().optional(),
         image: z.object({ id: z.string() }).optional(),
         phoneNumber: z
@@ -100,8 +108,16 @@ export const organisationUnitSchema = identifiable
         }
     )
 
-export const initialValues = getDefaults(organisationUnitSchema)
+export const organisationUnitListSchema = withDefaultListColumns
+    .merge(organisationUnitBaseSchema)
+    .extend({
+        displayShortName: z.string(),
+        level: z.number().or(z.null()),
+        childCount: z.number(),
+    })
+
+export const initialValues = getDefaults(organisationUnitFormSchema)
 
 export type OrganisationUnitFormValues = typeof initialValues
 
-export const validate = createFormValidate(organisationUnitSchema)
+export const validate = createFormValidate(organisationUnitFormSchema)
