@@ -1,21 +1,21 @@
 import i18n from '@dhis2/d2-i18n'
 import { InputFieldFF } from '@dhis2/ui'
-import React from 'react'
-import { Field as FieldRFF, useForm } from 'react-final-form'
+import React, { useState } from 'react'
+import { Field as FieldRFF, useField, useForm } from 'react-final-form'
 import { SchemaSection } from '../../../lib'
 import { useValidator } from '../../../lib/models/useFieldValidators'
 
 export function NameField({
     schemaSection,
     helpText,
-    extraValidator,
+    warner,
 }: {
     helpText?: string
     schemaSection: SchemaSection
-    extraValidator?: (value?: string) => Promise<string | undefined> | undefined
+    warner?: (value?: string) => Promise<string | undefined> | undefined
 }) {
     const validator = useValidator({ schemaSection, property: 'name' })
-    const form = useForm()
+    const [warning, setWarning] = useState<string | undefined>()
 
     const helpString =
         helpText || i18n.t('A name should be concise and easy to recognize.')
@@ -28,14 +28,15 @@ export function NameField({
                         ...input,
                         onChange: async (value: string) => {
                             input.onChange(value)
-
-                            if (extraValidator) {
-                                const warning = await extraValidator(value)
-                                form.change('nameWarning', warning)
+                            if (warner) {
+                                const warning = await warner(value)
+                                setWarning(warning)
                             }
                         },
                     }}
                     meta={meta}
+                    loading={meta.validating}
+                    validateFields={[]}
                     dataTest="formfields-name"
                     required
                     inputWidth="400px"
@@ -43,11 +44,8 @@ export function NameField({
                         fieldLabel: i18n.t('Name'),
                     })}
                     helpText={helpString}
-                    validationText={
-                        form.getState().values.nameWarning &&
-                        i18n.t('This name may not be unique')
-                    }
-                    warning={!!form.getState().values.nameWarning}
+                    validationText={warning}
+                    warning={!!warning}
                 />
             )}
         </FieldRFF>

@@ -11,23 +11,10 @@ import { ShortNameField } from './ShortNameField'
 export const DefaultIdentifiableFields = () => {
     const schemaSection = useSchemaSectionHandleOrThrow()
 
-    const shouldManuallyCheckNameUniqueness = schemaSection.name === 'dataSet'
-    const checkNameDuplicate = useIsFieldValueUnique({
-        model: schemaSection.namePlural,
-        field: 'name',
-    })
-
     return (
         <>
             <StandardFormField>
-                <NameField
-                    schemaSection={schemaSection}
-                    extraValidator={
-                        shouldManuallyCheckNameUniqueness
-                            ? checkNameDuplicate
-                            : undefined
-                    }
-                />
+                <NameField schemaSection={schemaSection} />
             </StandardFormField>
 
             <StandardFormField>

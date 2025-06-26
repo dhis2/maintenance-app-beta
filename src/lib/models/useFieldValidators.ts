@@ -33,7 +33,7 @@ export function useValidator({
 
     const validators = useMemo(() => [] as Validator[], [])
     const params = useParams()
-    const modelId = params.id as string
+    const modelId = params.id
     const checkIsValueTaken = useIsFieldValueUnique({
         model: schemaSection.namePlural,
         field: property,
