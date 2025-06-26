@@ -16,6 +16,7 @@ import {
     useBoundResourceQueryFn,
 } from '../../lib'
 import { DataSetNotificationsFormFields } from './form/DataSetNotificationsFormFields'
+import { validate } from './form/DataSetNotificationTemplateSchema'
 import {
     getInitialValuesFromTemplate,
     DataSetNotificationTemplate,
@@ -92,6 +93,7 @@ export const Component = () => {
             <FormBase<DataSetNotificationFormValues>
                 onSubmit={handleFormSubmit}
                 initialValues={getInitialValuesFromTemplate(template)}
+                validate={validate}
                 includeAttributes={false}
             >
                 {({ handleSubmit }) => (

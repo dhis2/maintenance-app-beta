@@ -34,13 +34,17 @@ const referenceCollection = z.array(
 export const DataSetNotificationTemplateSchema = identifiable.extend({
     code: z.string().optional(),
     description: z.string().optional(),
-    name: z.string(),
-    dataSetNotificationTrigger: z.nativeEnum(NotificationTrigger),
-    notificationRecipient: z.nativeEnum(NotificationRecipient),
+    name: z.string().default(''),
+    dataSetNotificationTrigger: z
+        .nativeEnum(NotificationTrigger)
+        .default(NotificationTrigger.COMPLETION),
+    notificationRecipient: z
+        .nativeEnum(NotificationRecipient)
+        .default(NotificationRecipient.ORGANISATION_UNIT_CONTACT),
     deliveryChannels: z.array(z.nativeEnum(DeliveryChannel)).default([]),
     messageTemplate: z.string().optional(),
     subjectTemplate: z.string().optional(),
-    relativeScheduledDays: z.string().optional(),
+    relativeScheduledDays: z.number().optional(),
     recipientUserGroup: z
         .object({
             id: z.string(),
