@@ -44,7 +44,7 @@ export const DataSetNotificationTemplateSchema = identifiable.extend({
     deliveryChannels: z.array(z.nativeEnum(DeliveryChannel)).default([]),
     messageTemplate: z.string().optional(),
     subjectTemplate: z.string().optional(),
-    relativeScheduledDays: z.string().optional(),
+    relativeScheduledDays: z.union([z.string(), z.number()]).optional(),
     recipientUserGroup: z
         .object({
             id: z.string(),
