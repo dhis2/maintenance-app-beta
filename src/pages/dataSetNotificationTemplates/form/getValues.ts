@@ -22,7 +22,7 @@ export interface DataSetNotificationTemplate {
     messageTemplate?: string
     notificationRecipient: NotificationRecipient
     dataSetNotificationTrigger: NotificationTrigger
-    relativeScheduledDays?: number
+    relativeScheduledDays?: number | string
     sendStrategy?: NotificationSendStrategy
     deliveryChannels: DeliveryChannel[]
     recipientUserGroup?: {
@@ -36,7 +36,7 @@ export type DataSetNotificationFormValues = Omit<
     DataSetNotificationTemplate,
     'relativeScheduledDays' | 'recipientUserGroup'
 > & {
-    relativeScheduledDays?: number
+    relativeScheduledDays?: number | string
     beforeAfter?: 'BEFORE' | 'AFTER'
     recipientUserGroup?: {
         id: string
@@ -54,8 +54,8 @@ export const getInitialValuesFromTemplate = (
 
     return {
         ...rest,
-        relativeScheduledDays: Math.abs(relativeScheduledDays),
-        beforeAfter: relativeScheduledDays < 0 ? 'BEFORE' : 'AFTER',
+        relativeScheduledDays: Math.abs(Number(relativeScheduledDays)),
+        beforeAfter: Number(relativeScheduledDays) < 0 ? 'BEFORE' : 'AFTER',
         recipientUserGroup: recipientUserGroup?.id
             ? {
                   id: recipientUserGroup.id,
@@ -81,8 +81,8 @@ export const transformFormValues = (
 
     const signedDays =
         beforeAfter === 'BEFORE'
-            ? -Math.abs(relativeScheduledDays)
-            : Math.abs(relativeScheduledDays)
+            ? -Math.abs(Number(relativeScheduledDays))
+            : Math.abs(Number(relativeScheduledDays))
 
     return {
         ...rest,
