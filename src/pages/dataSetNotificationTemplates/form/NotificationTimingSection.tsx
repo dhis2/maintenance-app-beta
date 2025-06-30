@@ -1,14 +1,34 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectFieldFF, InputFieldFF } from '@dhis2/ui'
+import {
+    SingleSelectFieldFF,
+    InputFieldFF,
+    SingleSelectField,
+    SingleSelectOption,
+} from '@dhis2/ui'
 import React from 'react'
-import { Field as FieldRFF, useField } from 'react-final-form'
+import { Field as FieldRFF, useField, useForm } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 
 export const NotificationTimingSection = () => {
     const { input: triggerInput, meta: triggerMeta } = useField(
         'dataSetNotificationTrigger'
     )
+    const form = useForm()
     const isScheduledDays = triggerInput.value === 'SCHEDULED_DAYS'
+
+    // Subscribe to relativeScheduledDays to determine sign
+    const { input: relativeScheduledDaysInput } = useField<
+        number | string | undefined
+    >('relativeScheduledDays')
+
+    const relativeDaysValue = Number(relativeScheduledDaysInput.value) || 0
+    const beforeAfter = relativeDaysValue < 0 ? 'BEFORE' : 'AFTER'
+
+    const handleBeforeAfterChange = (newValue: 'BEFORE' | 'AFTER') => {
+        const absValue = Math.abs(Number(relativeScheduledDaysInput.value) || 0)
+        const signed = newValue === 'BEFORE' ? -absValue : absValue
+        form.change('relativeScheduledDays', signed)
+    }
 
     const triggerOptions = [
         {
@@ -16,11 +36,6 @@ export const NotificationTimingSection = () => {
             value: 'DATA_SET_COMPLETION',
         },
         { label: i18n.t('Scheduled Days'), value: 'SCHEDULED_DAYS' },
-    ]
-
-    const beforeAfterOptions = [
-        { label: i18n.t('Before'), value: 'BEFORE' },
-        { label: i18n.t('After'), value: 'AFTER' },
     ]
 
     const notificationTypeOptions = [
@@ -70,18 +85,29 @@ export const NotificationTimingSection = () => {
                             />
 
                             <span>{i18n.t('days')}</span>
-                            <FieldRFF<string | undefined>
-                                dataTest="formfields-before-after"
-                                name="beforeAfter"
-                                initialValue="BEFORE"
-                                render={(props) => (
-                                    <SingleSelectFieldFF
-                                        {...props}
-                                        options={beforeAfterOptions}
-                                        inputWidth="120px"
-                                    />
-                                )}
-                            />
+                            <SingleSelectField
+                                selected={beforeAfter}
+                                onChange={({
+                                    selected,
+                                }: {
+                                    selected: string
+                                }) =>
+                                    handleBeforeAfterChange(
+                                        selected as 'BEFORE' | 'AFTER'
+                                    )
+                                }
+                                inputWidth="120px"
+                            >
+                                <SingleSelectOption
+                                    label={i18n.t('Before')}
+                                    value="BEFORE"
+                                />
+                                <SingleSelectOption
+                                    label={i18n.t('After')}
+                                    value="AFTER"
+                                />
+                            </SingleSelectField>
+
                             <span>{i18n.t('scheduled date')}</span>
                         </div>
                     </StandardFormField>

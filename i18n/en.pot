@@ -5,10 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-05-22T06:23:14.503Z\n"
-"PO-Revision-Date: 2025-05-22T06:23:14.504Z\n"
-"POT-Creation-Date: 2025-06-06T11:15:03.568Z\n"
-"PO-Revision-Date: 2025-06-06T11:15:03.568Z\n"
+"POT-Creation-Date: 2025-06-30T04:35:19.455Z\n"
+"PO-Revision-Date: 2025-06-30T04:35:19.455Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1490,53 +1488,14 @@ msgstr ""
 "level means that data from lower levels will not be included in the "
 "aggregation."
 
-msgid "Edit Data Set Notification"
-msgstr "Edit Data Set Notification"
-
-msgid "What to send"
-msgstr "What to send"
-
-msgid "When to send it"
-msgstr "When to send it"
-
-msgid "Notification trigger"
-msgstr "Notification trigger"
-
-msgid "Who to send it to"
-msgstr "Who to send it to"
-
-msgid "Recipient"
-msgstr "Recipient"
-
 msgid "Error"
 msgstr "Error"
 
 msgid "Error loading notification template"
 msgstr "Error loading notification template"
 
-msgid "Notification triggers"
-msgstr "Notification triggers"
-
-msgid "Notification recipients"
-msgstr "Notification recipients"
-
-msgid "SMS"
-msgstr "SMS"
-
-msgid "Enter the subject template for the notification."
-msgstr "Enter the subject template for the notification."
-
-msgid "Subject Template"
-msgstr "Subject Template"
-
-msgid "Enter the message template for the notification."
-msgstr "Enter the message template for the notification."
-
-msgid "Message Template"
-msgstr "Message Template"
-
-msgid "Select Data Sets"
-msgstr "Select Data Sets"
+msgid "Choose which data sets to send this notification for"
+msgstr "Choose which data sets to send this notification for"
 
 msgid "Available Data Sets"
 msgstr "Available Data Sets"
@@ -1550,8 +1509,32 @@ msgstr "Search data sets..."
 msgid "Filter selected data sets..."
 msgstr "Filter selected data sets..."
 
-msgid "Dataset Completion"
-msgstr "Dataset Completion"
+msgid "Set up the basic information for the notification template."
+msgstr "Set up the basic information for the notification template."
+
+msgid "Message content"
+msgstr "Message content"
+
+msgid "Configure the templates for the notification content and subject."
+msgstr "Configure the templates for the notification content and subject."
+
+msgid "Notification timing"
+msgstr "Notification timing"
+
+msgid "Choose what triggers the notification and when it should be sent."
+msgstr "Choose what triggers the notification and when it should be sent."
+
+msgid "Recipient"
+msgstr "Recipient"
+
+msgid "Choose who recieves the notification."
+msgstr "Choose who recieves the notification."
+
+msgid "SMS"
+msgstr "SMS"
+
+msgid "Immediately after data set completion"
+msgstr "Immediately after data set completion"
 
 msgid "Scheduled Days"
 msgstr "Scheduled Days"
@@ -1568,8 +1551,8 @@ msgstr "Collective Summary"
 msgid "Single Notification"
 msgstr "Single Notification"
 
-msgid "Dataset Notification Trigger"
-msgstr "Dataset Notification Trigger"
+msgid "When to send notification"
+msgstr "When to send notification"
 
 msgid "Send notification"
 msgstr "Send notification"
@@ -1589,17 +1572,53 @@ msgstr "User Group"
 msgid "Organisation Unit Contact"
 msgstr "Organisation Unit Contact"
 
-msgid "Notification Recipient"
-msgstr "Notification Recipient"
+msgid "Recipient type"
+msgstr "Recipient type"
 
 msgid "User Group Recipients"
 msgstr "User Group Recipients"
 
-msgid "Send complete notifications"
-msgstr "Send complete notifications"
+msgid "Used as the template for the subject field."
+msgstr "Used as the template for the subject field."
+
+msgid "Subject"
+msgstr "Subject"
+
+msgid "Used as template for the message field."
+msgstr "Used as template for the message field."
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Edit Data Set Notification"
+msgstr "Edit Data Set Notification"
+
+msgid "Subject template"
+msgstr "Subject template"
+
+msgid "Message template"
+msgstr "Message template"
+
+msgid "Trigger"
+msgstr "Trigger"
+
+msgid "Scheduled days"
+msgstr "Scheduled days"
+
+msgid "Send strategy"
+msgstr "Send strategy"
+
+msgid "Notification recipient"
+msgstr "Notification recipient"
 
 msgid "Recipient user group"
 msgstr "Recipient user group"
+
+msgid "Delivery channels"
+msgstr "Delivery channels"
+
+msgid "Send complete notifications"
+msgstr "Send complete notifications"
 
 msgid "Send notification to completing user"
 msgstr "Send notification to completing user"
@@ -1783,6 +1802,9 @@ msgstr "Limit data entry by period"
 
 msgid "Optionally configure when data can be entered for certain periods"
 msgstr "Optionally configure when data can be entered for certain periods"
+
+msgid "A data set with this name already exists"
+msgstr "A data set with this name already exists"
 
 msgid "Set up the basic information for this data set."
 msgstr "Set up the basic information for this data set."
@@ -2432,8 +2454,6 @@ msgstr ""
 msgid "Add a program indicator"
 msgstr "Add a program indicator"
 
-msgid "{{- programIndicator}} and all mappings will be deleted on save"
-msgstr "{{- programIndicator}} and all mappings will be deleted on save"
 msgid "All mappings for {{- programIndicator}} will be removed on save"
 msgstr "All mappings for {{- programIndicator}} will be removed on save"
 
@@ -2508,10 +2528,6 @@ msgstr "Search available program indicators"
 
 msgid "Search selected program indicators"
 msgstr "Search selected program indicators"
-
-msgctxt "form"
-msgid "data_set-notifications"
-msgstr "data_set-notifications_form"
 
 msgctxt "form"
 msgid "program_disaggregation"
