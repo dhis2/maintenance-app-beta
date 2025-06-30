@@ -213,11 +213,6 @@ msgstr "Correct confirmation code must be entered to merge"
 msgid "Merge"
 msgstr "Merge"
 
-msgid "Merging {{count}} {{model}}..."
-msgid_plural "Merging {{count}} {{model}}..."
-msgstr[0] "Merging {{count}} {{model}}..."
-msgstr[1] "Merging {{count}} {{model}}..."
-
 msgid "Merging..."
 msgstr "Merging..."
 
@@ -1196,11 +1191,6 @@ msgstr "Filter available categories"
 msgid "Filter selected categories"
 msgstr "Filter selected categories"
 
-msgid "{{count}} category option combinations will be generated."
-msgid_plural "{{count}} category option combinations will be generated."
-msgstr[0] "{{count}} category option combinations will be generated."
-msgstr[1] "{{count}} category option combinations will be generated."
-
 msgid "More than 4 Categories"
 msgstr "More than 4 Categories"
 
@@ -1371,16 +1361,6 @@ msgid ""
 msgstr ""
 "What should happen to the source category options after the merge is "
 "complete?"
-
-msgid "Keep {{ count }} source category options"
-msgid_plural "Keep {{ count }} source category options"
-msgstr[0] "Keep {{ count }} source category options"
-msgstr[1] "Keep {{ count }} source category options"
-
-msgid "Delete {{ count }} source category options"
-msgid_plural "Delete {{ count }} source category options"
-msgstr[0] "Delete {{ count }} source category options"
-msgstr[1] "Delete {{ count }} source category options"
 
 msgid "Custom attributes"
 msgstr "Custom attributes"
@@ -1906,16 +1886,6 @@ msgstr ""
 "What should happen to the source indicator types after the merge is "
 "complete?"
 
-msgid "Keep {{ count }} source indicator types"
-msgid_plural "Keep {{ count }} source indicator types"
-msgstr[0] "Keep {{ count }} source indicator types"
-msgstr[1] "Keep {{ count }} source indicator types"
-
-msgid "Delete {{ count }} source indicator types"
-msgid_plural "Delete {{ count }} source indicator types"
-msgstr[0] "Delete {{ count }} source indicator types"
-msgstr[1] "Delete {{ count }} source indicator types"
-
 msgid "Conflicting factors"
 msgstr "Conflicting factors"
 
@@ -1966,16 +1936,6 @@ msgstr "No indicators available. Remove one from source."
 
 msgid "What should happen to the source indicators after the merge is complete?"
 msgstr "What should happen to the source indicators after the merge is complete?"
-
-msgid "Keep {{ count }} source indicators"
-msgid_plural "Keep {{ count }} source indicators"
-msgstr[0] "Keep {{ count }} source indicators"
-msgstr[1] "Keep {{ count }} source indicators"
-
-msgid "Delete {{ count }} source indicators"
-msgid_plural "Delete {{ count }} source indicators"
-msgstr[0] "Delete {{ count }} source indicators"
-msgstr[1] "Delete {{ count }} source indicators"
 
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."
@@ -2426,11 +2386,6 @@ msgstr "Delete Mapping"
 msgid "This action cannot be undone."
 msgstr "This action cannot be undone."
 
-msgid "All mappings ({{count}}) will be removed."
-msgid_plural "All mappings ({{count}}) will be removed."
-msgstr[0] "All mappings ({{count}}) will be removed."
-msgstr[1] "All mappings ({{count}}) will be removed."
-
 msgid "Are you sure you want to delete this program mapping configuration?"
 msgstr "Are you sure you want to delete this program mapping configuration?"
 
@@ -2463,3 +2418,11 @@ msgstr "program_indicator_mappings"
 msgctxt "mappings"
 msgid "disaggregation_category"
 msgstr "disaggregation_category_mappings"
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Maintenance (Preview)"
+
+msgctxt "Application description"
+msgid "__MANIFEST_APP_DESCRIPTION"
+msgstr ""
