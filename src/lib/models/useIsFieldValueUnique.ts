@@ -15,10 +15,12 @@ export function useIsFieldValueUnique({
     model,
     field,
     id,
+    message,
 }: {
     model: string
     field: string
-    id: string
+    id?: string
+    message?: string
 }) {
     const [HAS_FIELD_VALUE_QUERY] = useState({
         result: {
@@ -50,8 +52,11 @@ export function useIsFieldValueUnique({
                 })) as unknown as QueryResponse
 
                 if (data.result.pager.total > 0) {
-                    return i18n.t(
-                        'This field requires a unique value, please choose another one'
+                    return (
+                        message ??
+                        i18n.t(
+                            'This field requires a unique value, please choose another one'
+                        )
                     )
                 }
             }),
