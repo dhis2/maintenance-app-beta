@@ -10,6 +10,7 @@ import {
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
 import { TooltipWrapper } from '../../../components/tooltip'
+import { DataSet } from '../../../types/generated'
 import { DisplayOptionsField } from './DisplayOptionsField'
 import classes from './FormFormContents.module.css'
 
@@ -201,7 +202,12 @@ export const FormFormContents = React.memo(function FormFormContents({
                     <StandardFormSectionTitle>
                         {i18n.t('Display options')}
                     </StandardFormSectionTitle>
-                    <DisplayOptionsField />
+                    <DisplayOptionsField
+                        withSectionsDisplayOptions={
+                            formValues[formTypeFieldName] ===
+                            DataSet.formType.SECTION
+                        }
+                    />
                 </div>
             )}
         </SectionedFormSection>
