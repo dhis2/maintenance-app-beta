@@ -1,3 +1,10 @@
+# [0.49.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.48.0...v0.49.0) (2025-06-30)
+
+
+### Features
+
+* dataset notifications list ([#573](https://github.com/dhis2/maintenance-app-beta/issues/573)) ([b86b288](https://github.com/dhis2/maintenance-app-beta/commit/b86b288511a4d78c0d875a5c169f0acebed19e9a))
+
 # [0.48.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.3...v0.48.0) (2025-06-26)
 
 
