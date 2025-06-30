@@ -1,3 +1,24 @@
+# [0.48.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.3...v0.48.0) (2025-06-26)
+
+
+### Features
+
+* warn if name is not unique ([#568](https://github.com/dhis2/maintenance-app-beta/issues/568)) ([12a5ddc](https://github.com/dhis2/maintenance-app-beta/commit/12a5ddc98922099b8201db1ecaaacfc62f9905f4))
+
+## [0.47.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.2...v0.47.3) (2025-06-24)
+
+
+### Bug Fixes
+
+* positive integer validation and remove attributes from indicator types ([#582](https://github.com/dhis2/maintenance-app-beta/issues/582)) ([7ceb91e](https://github.com/dhis2/maintenance-app-beta/commit/7ceb91e7074c03e169434b9fe1ea9a5b9535505b))
+
+## [0.47.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.1...v0.47.2) (2025-06-16)
+
+
+### Bug Fixes
+
+* remove soft deleted category mappings [DHIS2-19695] ([#576](https://github.com/dhis2/maintenance-app-beta/issues/576)) ([4778503](https://github.com/dhis2/maintenance-app-beta/commit/47785039915b2e0ef4922ea9fe0fa0d35a7c8005))
+
 ## [0.47.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.0...v0.47.1) (2025-06-12)
 
 

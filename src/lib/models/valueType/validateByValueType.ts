@@ -28,7 +28,7 @@ const VALUE_TYPE_VALIDATE = {
             : i18n.t('Please provide a negative integer')
     ),
     INTEGER_ZERO_OR_POSITIVE: composeValidators(integer, (value) =>
-        isEmpty(value) || (typeof value === 'string' && parseInt(value) < 0)
+        isEmpty(value) || (typeof value === 'string' && parseInt(value) >= 0)
             ? undefined
             : i18n.t('Please provide a 0 or positive integer')
     ),
