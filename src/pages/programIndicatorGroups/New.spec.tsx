@@ -97,16 +97,6 @@ describe('Program indicator group add form tests', () => {
         expect(cancelButton).toBeVisible()
         expect(cancelButton).toHaveAttribute('href', `/${section.namePlural}`)
     })
-    it('should not submit when required values are missing', async () => {
-        const { screen } = await renderForm()
-        await uiActions.submitForm(screen)
-        expect(createMock).not.toHaveBeenCalled()
-        uiAssertions.expectFieldToHaveError(
-            'formfields-name',
-            'Required',
-            screen
-        )
-    })
     it('should submit the data', async () => {
         const { screen, programIndicators } = await renderForm()
         const aName = faker.internet.userName()
@@ -131,6 +121,16 @@ describe('Program indicator group add form tests', () => {
                     programIndicators: [selectedPiIndicator],
                 },
             })
+        )
+    })
+    it('should not submit when required values are missing', async () => {
+        const { screen } = await renderForm()
+        await uiActions.submitForm(screen)
+        expect(createMock).not.toHaveBeenCalled()
+        uiAssertions.expectFieldToHaveError(
+            'formfields-name',
+            'Required',
+            screen
         )
     })
     it('should show an error if name field is too long', async () => {

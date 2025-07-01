@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { render, waitFor, within } from '@testing-library/react'
+import { render, RenderResult, waitFor, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/programIndicatorsSchema.json'
@@ -92,6 +92,71 @@ describe('Program indicator add form tests', () => {
             return { screen, attributes, programs, legendSets }
         }
     )
+
+    const addPeriodBoundary = async (
+        {
+            target,
+            customText,
+            type,
+            offset,
+            periodType,
+        }: {
+            target?: number
+            customText?: string
+            type?: number
+            offset?: number
+            periodType?: number
+        },
+        availablePeriodTypes = 1,
+        screen: RenderResult
+    ) => {
+        const addPeriodBoundaryButton = screen.getByTestId(
+            'add-boundary-button'
+        )
+        expect(addPeriodBoundaryButton).toBeVisible()
+        await userEvent.click(addPeriodBoundaryButton)
+        const apbModal = await screen.findByTestId(
+            'analytics-period-boundary-modal'
+        )
+        expect(apbModal).toBeVisible()
+        if (target !== undefined) {
+            const targets = await uiActions.openSingleSelect(
+                within(apbModal).getByTestId('apb-target-select'),
+                screen
+            )
+            expect(targets).toHaveLength(4)
+            await userEvent.click(targets[target])
+        }
+        if (customText !== undefined) {
+            const customTextInput = within(
+                within(apbModal).getByTestId('apb-custom-target-text-content')
+            ).getByRole('textbox')
+            await userEvent.type(customTextInput, customText)
+        }
+        if (type !== undefined) {
+            const types = await uiActions.openSingleSelect(
+                within(apbModal).getByTestId('apb-type-select'),
+                screen
+            )
+            expect(types).toHaveLength(5)
+            await userEvent.click(types[type])
+        }
+        if (offset !== undefined) {
+            const offsetInput = within(
+                within(apbModal).getByTestId('apb-offset-input')
+            ).getByRole('spinbutton')
+            await userEvent.type(offsetInput, offset.toString())
+        }
+        if (periodType !== undefined) {
+            const periodTypes = await uiActions.openSingleSelect(
+                within(apbModal).getByTestId('apb-period-type-select'),
+                screen
+            )
+            expect(periodTypes).toHaveLength(availablePeriodTypes + 1)
+            await userEvent.click(periodTypes[periodType])
+        }
+        await userEvent.click(within(apbModal).getByTestId('save-apb-button'))
+    }
 
     beforeEach(() => {
         resetAllMocks()
@@ -468,6 +533,44 @@ describe('Program indicator add form tests', () => {
             ).not.toBeInTheDocument()
         })
     })
+    it('should add  and delete period boundaries', async () => {
+        const periodTypes = ['Daily', 'Monthly', 'Yearly']
+        const { screen } = await renderForm({
+            customTestData: {
+                periodTypes: () => ({
+                    periodTypes: periodTypes.map((pt) => ({ name: pt })),
+                }),
+            },
+        })
+        await addPeriodBoundary(
+            { target: 0, periodType: 1, type: 1, offset: 5 },
+            periodTypes.length,
+            screen
+        )
+        const boundariesList = screen.getAllByTestId(
+            'analytics-period-boundary'
+        )
+        expect(boundariesList).toHaveLength(1)
+
+        const customText = 'lalala'
+        await addPeriodBoundary(
+            { target: 3, customText, periodType: 1, type: 1, offset: 5 },
+            periodTypes.length,
+            screen
+        )
+        const newBoundariesList = screen.getAllByTestId(
+            'analytics-period-boundary'
+        )
+        expect(newBoundariesList).toHaveLength(2)
+
+        await userEvent.click(
+            within(newBoundariesList[1]).getByTestId('apb-remove-button')
+        )
+        const newBoundariesList2 = screen.getAllByTestId(
+            'analytics-period-boundary'
+        )
+        expect(newBoundariesList2).toHaveLength(1)
+    })
     it('should have a cancel button with a link back to the list view', async () => {
         const { screen } = await renderForm()
         const cancelButton = screen.getByTestId('form-cancel-link')
@@ -509,6 +612,7 @@ describe('Program indicator add form tests', () => {
         const anExpression = faker.finance.routingNumber()
         const aFilter = faker.finance.routingNumber()
 
+        const periodTypes = ['Daily', 'Monthly', 'Yearly']
         const { screen, legendSets, attributes } = await renderForm({
             customTestData: {
                 programs: (type: any, params: any) => {
@@ -524,6 +628,9 @@ describe('Program indicator add form tests', () => {
                         programs: [programWithoutRegistration, testProgram()],
                     })
                 },
+                periodTypes: () => ({
+                    periodTypes: periodTypes.map((pt) => ({ name: pt })),
+                }),
             },
         })
 
@@ -564,6 +671,13 @@ describe('Program indicator add form tests', () => {
             screen
         )
         await userEvent.click(orgUnitOptions[0])
+
+        await addPeriodBoundary(
+            { target: 0, periodType: 1, type: 1, offset: 5 },
+            periodTypes.length,
+            screen
+        )
+
         await uiActions.clickOnCheckboxField('displayInForm', screen)
         await uiActions.enterInputFieldValue(
             'aggregateExportCategoryOptionCombo',
@@ -593,7 +707,6 @@ describe('Program indicator add form tests', () => {
         await uiActions.enterInputFieldValue(`filter`, aFilter, screen)
         await uiActions.submitForm(screen)
         expect(createMock).toHaveBeenCalledTimes(1)
-        // expect(createMock).toHaveBeenLastCalledWith('lalala')
         expect(createMock).toHaveBeenLastCalledWith(
             expect.objectContaining({
                 data: expect.objectContaining({
@@ -626,7 +739,15 @@ describe('Program indicator add form tests', () => {
                     expression: anExpression,
                     filter: aFilter,
                     style: { color: undefined, icon: undefined },
-                    analyticsPeriodBoundaries: [],
+                    analyticsPeriodBoundaries: [
+                        {
+                            boundaryTarget: 'INCIDENT_DATE',
+                            analyticsPeriodBoundaryType:
+                                'BEFORE_START_OF_REPORTING_PERIOD',
+                            offsetPeriodType: periodTypes[0],
+                            offsetPeriods: 5,
+                        },
+                    ],
                     orgUnitField: staticOptions.eventDefault.id,
                 }),
             })
@@ -660,7 +781,6 @@ describe('Program indicator add form tests', () => {
         await uiActions.submitForm(screen)
         expect(createMock).not.toHaveBeenCalled()
     })
-
     it('should show an error if name field is a duplicate', async () => {
         const existingName = faker.company.name()
         const { screen } = await renderForm({

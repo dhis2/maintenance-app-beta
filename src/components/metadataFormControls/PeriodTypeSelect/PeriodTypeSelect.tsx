@@ -12,11 +12,13 @@ export function PeriodTypeSelect({
     invalid,
     onChange,
     noValueOption = false,
+    dataTest,
 }: {
     selected?: string
     invalid?: boolean
     onChange: (selected: string) => void
     noValueOption?: boolean
+    dataTest?: string
 }) {
     const queryFn = useBoundResourceQueryFn()
 
@@ -59,6 +61,7 @@ export function PeriodTypeSelect({
             loading={isLoading}
             onRetryClick={refetch}
             showEndLoader={false}
+            dataTest={dataTest}
         />
     )
 }

@@ -49,6 +49,7 @@ describe('Program indicator edit form tests', () => {
             ]
             const attributes = [testCustomAttribute()]
             const legendSets = [testLegendSets(), testLegendSets()]
+            const periodTypes = ['Daily', 'Monthly', 'Yearly']
             const programIndicator = testProgramIndicator({
                 id,
                 program: programWithoutRegistration,
@@ -58,6 +59,15 @@ describe('Program indicator edit form tests', () => {
                 ],
                 orgUnitField: staticOptions.eventDefault.id,
                 style: { color: undefined, icon: undefined },
+                analyticsPeriodBoundaries: [
+                    {
+                        boundaryTarget: 'INCIDENT_DATE',
+                        analyticsPeriodBoundaryType:
+                            'BEFORE_START_OF_REPORTING_PERIOD',
+                        offsetPeriodType: periodTypes[0],
+                        offsetPeriods: 5,
+                    },
+                ],
             })
             const screen = render(
                 <TestComponentWithRouter
@@ -114,6 +124,11 @@ describe('Program indicator edit form tests', () => {
                                 }
                             }
                         },
+                        periodTypes: () => ({
+                            periodTypes: periodTypes.map((pt) => ({
+                                name: pt,
+                            })),
+                        }),
                         ...customTestData,
                     }}
                     routeOptions={routeOptions}
@@ -224,6 +239,17 @@ describe('Program indicator edit form tests', () => {
             },
             screen
         )
+
+        const boundariesList = screen.getAllByTestId(
+            'analytics-period-boundary'
+        )
+        expect(boundariesList).toHaveLength(1)
+        expect(boundariesList[0]).toHaveTextContent('Incident date')
+        expect(boundariesList[0]).toHaveTextContent('Offset: 5')
+        expect(boundariesList[0]).toHaveTextContent(
+            'Type: Before start of reporting period'
+        )
+        expect(boundariesList[0]).toHaveTextContent('Period: Daily')
 
         uiAssertions.expectCheckboxFieldToExist(
             'displayInForm',
