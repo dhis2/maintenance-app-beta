@@ -47,6 +47,3 @@ export type DataSetFormValues = PickWithFieldFilters<
     DataSet,
     typeof fieldFilters
 > & { displayOptions: DisplayOptions }
-const asf = {} as  DataSetFormValues
-asf.dataSetElements.map(m => m.)
-asf.compulsoryDataElementOperands?.map(m => m.)
