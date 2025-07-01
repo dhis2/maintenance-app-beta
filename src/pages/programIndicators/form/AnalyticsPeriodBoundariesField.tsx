@@ -335,17 +335,15 @@ export const AnalyticsPeriodBoundariesField = () => {
             {value &&
                 value.map(
                     (apb: Partial<AnalyticsPeriodBoundary>, index: number) => (
-                        <>
-                            <APBItem
-                                apb={apb}
-                                key={apb.id ?? `new-apb-${index}`}
-                                onRemove={onRemoveAPB(index)}
-                                onEdit={(value) => {
-                                    setModalAPB(value)
-                                    setAbpIndex(index)
-                                }}
-                            />
-                        </>
+                        <APBItem
+                            apb={apb}
+                            key={apb.id ?? `new-apb-${index}`}
+                            onRemove={onRemoveAPB(index)}
+                            onEdit={(value) => {
+                                setModalAPB(value)
+                                setAbpIndex(index)
+                            }}
+                        />
                     )
                 )}
         </>
