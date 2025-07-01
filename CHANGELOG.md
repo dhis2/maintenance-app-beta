@@ -1,3 +1,30 @@
+## [0.47.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.1...v0.47.2) (2025-06-16)
+
+
+### Bug Fixes
+
+* remove soft deleted category mappings [DHIS2-19695] ([#576](https://github.com/dhis2/maintenance-app-beta/issues/576)) ([4778503](https://github.com/dhis2/maintenance-app-beta/commit/47785039915b2e0ef4922ea9fe0fa0d35a7c8005))
+
+## [0.47.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.0...v0.47.1) (2025-06-12)
+
+
+### Bug Fixes
+
+* upgrade multi calendar dates ([#580](https://github.com/dhis2/maintenance-app-beta/issues/580)) ([22be5ca](https://github.com/dhis2/maintenance-app-beta/commit/22be5ca3e1256b119e9a4c3ed7e1548720789413))
+
+# [0.47.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.46.0...v0.47.0) (2025-06-06)
+
+
+### Bug Fixes
+
+* pi disaggregations clean up [DHIS2-19651] ([#569](https://github.com/dhis2/maintenance-app-beta/issues/569)) ([9475439](https://github.com/dhis2/maintenance-app-beta/commit/94754398e0b173992c57256bcbf050a2d4ff9ea1))
+* UI clean up [DHIS2-19695] ([#575](https://github.com/dhis2/maintenance-app-beta/issues/575)) ([28aa0e3](https://github.com/dhis2/maintenance-app-beta/commit/28aa0e3f71c521751aac41b599ab4e607d08999a))
+
+
+### Features
+
+* program indicator groups ([#572](https://github.com/dhis2/maintenance-app-beta/issues/572)) ([3085974](https://github.com/dhis2/maintenance-app-beta/commit/3085974b9837871b58d84734859383df5df362bf))
+
 # [0.46.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.45.1...v0.46.0) (2025-06-02)
 
 
