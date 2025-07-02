@@ -1,5 +1,7 @@
 import { z } from 'zod'
-import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
+import {  modelFormSchemas  } from '../../../lib/form/modelFormSchemas'
+import { getDefaults  } from '../../../lib/zod/getDefaults'
+import { createFormValidate  } from '../../../lib/form/validate'
 import { Category } from '../../../types/generated'
 
 /*  Note that this describes what we send to the server,
