@@ -42,8 +42,6 @@ export function StandardFormActions({
                 type="submit"
                 onClick={onSubmitClick}
                 dataTest="form-submit-button"
-                name="test"
-                value="navigate"
             >
                 {submitting && <LoadingIcon />}
                 {submitLabel}

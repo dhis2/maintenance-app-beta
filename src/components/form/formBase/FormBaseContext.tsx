@@ -1,6 +1,5 @@
 import React, {
     createContext,
-    useState,
     useContext,
     ReactNode,
     useMemo,
@@ -19,10 +18,17 @@ const FormBaseContext = createContext<FormBaseContextValue | undefined>(
 )
 
 export const useFormBaseContextValue = (): FormBaseContextValue => {
+    /*
+        we need to use a ref for this, because this is changed in an event-handler
+        and used downstream in the form submit handler.
+        If we used state, the value would not be updated in time for the submit handler.
+
+        Note that we should not read the value of this in render, and should only be used
+        in submit event handlers.
+    */
     const submitActionRef = useRef<SubmitAction>('saveAndExit')
 
     const setSubmitAction = useCallback((action: SubmitAction) => {
-        console.log('Setting submit action:', action)
         submitActionRef.current = action
     }, [])
 
