@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-06-30T04:35:19.455Z\n"
-"PO-Revision-Date: 2025-06-30T04:35:19.455Z\n"
+"POT-Creation-Date: 2025-07-02T09:41:25.652Z\n"
+"PO-Revision-Date: 2025-07-02T09:41:25.652Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -589,11 +589,11 @@ msgstr "Data element group sets"
 msgid "Data sets"
 msgstr "Data sets"
 
-msgid "Data set notification template"
-msgstr "Data set notification template"
+msgid "Data set notification"
+msgstr "Data set notification"
 
-msgid "Data set notification templates"
-msgstr "Data set notification templates"
+msgid "Data set notifications"
+msgstr "Data set notifications"
 
 msgid "Indicator"
 msgstr "Indicator"
@@ -1129,6 +1129,33 @@ msgstr "Please provide a date."
 msgid "Period type"
 msgstr "Period type"
 
+msgid "Message template"
+msgstr "Message template"
+
+msgid "Favourite"
+msgstr "Favourite"
+
+msgid "Data set notification trigger"
+msgstr "Data set notification trigger"
+
+msgid "Notification recipient"
+msgstr "Notification recipient"
+
+msgid "Notify parent organisation unit only"
+msgstr "Notify parent organisation unit only"
+
+msgid "Notify users in hierarchy only"
+msgstr "Notify users in hierarchy only"
+
+msgid "Relative scheduled days"
+msgstr "Relative scheduled days"
+
+msgid "Send notification as"
+msgstr "Send notification as"
+
+msgid "Subject template"
+msgstr "Subject template"
+
 msgid "Offline levels"
 msgstr "Offline levels"
 
@@ -1539,12 +1566,6 @@ msgstr "Immediately after data set completion"
 msgid "Scheduled Days"
 msgstr "Scheduled Days"
 
-msgid "Before"
-msgstr "Before"
-
-msgid "After"
-msgstr "After"
-
 msgid "Collective Summary"
 msgstr "Collective Summary"
 
@@ -1560,11 +1581,14 @@ msgstr "Send notification"
 msgid "days"
 msgstr "days"
 
+msgid "Before"
+msgstr "Before"
+
+msgid "After"
+msgstr "After"
+
 msgid "scheduled date"
 msgstr "scheduled date"
-
-msgid "Send notification as"
-msgstr "Send notification as"
 
 msgid "User Group"
 msgstr "User Group"
@@ -1593,12 +1617,6 @@ msgstr "Message"
 msgid "Edit Data Set Notification"
 msgstr "Edit Data Set Notification"
 
-msgid "Subject template"
-msgstr "Subject template"
-
-msgid "Message template"
-msgstr "Message template"
-
 msgid "Trigger"
 msgstr "Trigger"
 
@@ -1607,9 +1625,6 @@ msgstr "Scheduled days"
 
 msgid "Send strategy"
 msgstr "Send strategy"
-
-msgid "Notification recipient"
-msgstr "Notification recipient"
 
 msgid "Recipient user group"
 msgstr "Recipient user group"

@@ -1,45 +1,37 @@
 import i18n from '@dhis2/d2-i18n'
 import {
-    DeliveryChannel,
-    NotificationRecipient,
-    NotificationSendStrategy,
-    NotificationTrigger,
-} from './DataSetNotificationTemplateSchema'
+    DataSet,
+    DataSetNotificationTemplate,
+    UserGroup,
+} from '../../../types/generated'
 
-export interface DataSet {
-    id?: string
-    name?: string
-    displayName?: string
-}
-
-export interface DataSetNotificationTemplate {
-    id?: string
-    code?: string
-    name: string
-    displayName?: string
-    description?: string
-    subjectTemplate?: string
-    messageTemplate?: string
-    notificationRecipient: NotificationRecipient
-    dataSetNotificationTrigger: NotificationTrigger
-    relativeScheduledDays?: number | string
-    sendStrategy?: NotificationSendStrategy
-    deliveryChannels: DeliveryChannel[]
+export type DataSetNotificationFormValues = Omit<
+    DataSetNotificationTemplate,
+    | 'access'
+    | 'created'
+    | 'createdBy'
+    | 'displayMessageTemplate'
+    | 'displayName'
+    | 'displaySubjectTemplate'
+    | 'favorite'
+    | 'favorites'
+    | 'href'
+    | 'lastUpdated'
+    | 'lastUpdatedBy'
+    | 'notifyParentOrganisationUnitOnly'
+    | 'notifyUsersInHierarchyOnly'
+    | 'sharing'
+    | 'translations'
+    | 'user'
+    | 'attributeValues'
+    | 'dataSets'
+    | 'recipientUserGroup'
+> & {
     recipientUserGroup?: {
         id?: string
         displayName?: string
     }
-    dataSets: DataSet[]
-}
-
-export type DataSetNotificationFormValues = Omit<
-    DataSetNotificationTemplate,
-    'recipientUserGroup'
-> & {
-    recipientUserGroup?: {
-        id: string
-        displayName?: string
-    }
+    dataSets: Array<{ id?: string; name?: string }>
 }
 
 /**
@@ -60,6 +52,7 @@ export const getInitialValuesFromTemplate = (
                   displayName: recipientUserGroup.displayName,
               }
             : undefined,
+
         dataSets: dataSets || [],
     }
 }
@@ -67,9 +60,7 @@ export const getInitialValuesFromTemplate = (
 /**
  * Converts form values back to API payload
  */
-export const transformFormValues = (
-    values: DataSetNotificationFormValues
-): DataSetNotificationTemplate => {
+export const transformFormValues = (values: DataSetNotificationFormValues) => {
     const {
         recipientUserGroup,
         relativeScheduledDays,
@@ -80,10 +71,10 @@ export const transformFormValues = (
     return {
         ...rest,
         relativeScheduledDays: Number(relativeScheduledDays),
-        recipientUserGroup: recipientUserGroup?.id
-            ? { id: recipientUserGroup.id }
-            : undefined,
-        dataSets: dataSets.map(({ id }) => ({ id })),
+        recipientUserGroup: recipientUserGroup
+            ? ({ id: recipientUserGroup.id } as UserGroup)
+            : ({ id: '' } as UserGroup),
+        dataSets: dataSets.map(({ id }) => ({ id } as DataSet)),
     }
 }
 

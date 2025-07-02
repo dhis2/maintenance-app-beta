@@ -6,27 +6,30 @@ import {
     SectionedFormErrorNotice,
     SectionedFormLayout,
 } from '../../components'
-import { SectionedFormProvider } from '../../lib'
+import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { DataSetNotificationsFormFields } from './form/DataSetNotificationsFormFields'
 import {
     initialValues,
     validate,
 } from './form/DataSetNotificationTemplateSchema'
-import { DataSetNotificationFormValues, formDescriptor } from './form/getValues'
-import { useOnSaveNotifications } from './form/useOnSaveNotifications'
+import {
+    transformFormValues,
+    formDescriptor,
+    DataSetNotificationFormValues,
+} from './form/getValues'
 
 export const Component = () => {
-    const onSubmit = useOnSaveNotifications()
-
-    const handleFormSubmit = async (values: DataSetNotificationFormValues) =>
-        onSubmit(values)
+    const onSubmit = useOnSubmitNew<DataSetNotificationFormValues>({
+        section: SECTIONS_MAP.dataSetNotificationTemplate,
+    })
 
     return (
         <SectionedFormProvider formDescriptor={formDescriptor}>
-            <FormBase
-                onSubmit={handleFormSubmit}
-                initialValues={initialValues}
+            <FormBase<DataSetNotificationFormValues>
+                onSubmit={onSubmit}
+                initialValues={initialValues as DataSetNotificationFormValues}
                 validate={validate}
+                valueFormatter={transformFormValues}
                 includeAttributes={false}
             >
                 {({ handleSubmit }) => (
