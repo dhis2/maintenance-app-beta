@@ -3,6 +3,7 @@ import {
     CheckboxFieldFF,
     InputFieldFF,
     SingleSelectField,
+    SingleSelectFieldFF,
     SingleSelectOption,
 } from '@dhis2/ui'
 import React from 'react'
@@ -19,7 +20,10 @@ import {
     StandardFormSectionTitle,
 } from '../../../components'
 import { ExpressionBuilder } from '../../../components/ExpressionBuilder/ExpressionBuilder'
-import { ModelSingleSelectField } from '../../../components/metadataFormControls/ModelSingleSelect'
+import {
+    ModelSingleSelectField,
+    ModelSingleSelectFormField,
+} from '../../../components/metadataFormControls/ModelSingleSelect'
 import { getConstantTranslation, SECTIONS_MAP, useSchema } from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
 import { ColorAndIconField } from '../../dataElements/fields'
@@ -30,9 +34,6 @@ const section = SECTIONS_MAP.programIndicator
 
 export const ProgramIndicatorsFormFields = () => {
     const { input: decimalsInput } = useField('decimals')
-    const { input: aggregationTypeInput } = useField('aggregationType')
-    const { input: analyticsTypeInput } = useField('analyticsType')
-    const { input: programInput, meta: programMeta } = useField('program')
     const programFilters = [
         'id,displayName,programType,programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,valueType]]',
     ] as const
@@ -71,63 +72,52 @@ export const ProgramIndicatorsFormFields = () => {
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <ModelSingleSelectField<DisplayableModel>
+                    <ModelSingleSelectFormField
+                        required
                         inputWidth="400px"
                         dataTest="programs-field"
+                        name="program"
+                        label={i18n.t('Program (required)')}
                         query={{
                             resource: 'programs',
                             params: {
                                 fields: programFilters.concat(),
                             },
                         }}
-                        input={programInput}
-                        meta={programMeta}
-                        label={i18n.t('Program (required)')}
-                        required
                     />
                 </StandardFormField>
                 <StandardFormField dataTest="aggregation-type-field">
-                    <SingleSelectField
+                    <FieldRFF
+                        component={SingleSelectFieldFF}
                         inputWidth="400px"
-                        selected={aggregationTypeInput.value}
-                        onChange={({ selected }) => {
-                            aggregationTypeInput.onChange(selected)
-                            aggregationTypeInput.onBlur()
-                        }}
                         label={i18n.t('Aggregation type')}
-                    >
-                        {schema.properties.aggregationType.constants?.map(
-                            (option) => (
-                                <SingleSelectOption
-                                    key={option}
-                                    label={getConstantTranslation(option)}
-                                    value={option}
-                                />
-                            )
-                        )}
-                    </SingleSelectField>
+                        name="aggregationType"
+                        options={
+                            schema.properties.aggregationType.constants?.map(
+                                (option) => ({
+                                    value: option,
+                                    label: getConstantTranslation(option),
+                                })
+                            ) ?? []
+                        }
+                    />
                 </StandardFormField>
                 <StandardFormField dataTest="analytics-type-field">
-                    <SingleSelectField
+                    <FieldRFF
                         required
-                        selected={analyticsTypeInput.value}
+                        component={SingleSelectFieldFF}
                         inputWidth="400px"
-                        onChange={({ selected }) => {
-                            analyticsTypeInput.onChange(selected)
-                            analyticsTypeInput.onBlur()
-                        }}
                         label={i18n.t('Analytics type (required)')}
-                    >
-                        {schema.properties.analyticsType.constants?.map(
-                            (option) => (
-                                <SingleSelectOption
-                                    key={option}
-                                    label={getConstantTranslation(option)}
-                                    value={option}
-                                />
-                            )
-                        )}
-                    </SingleSelectField>
+                        name="analyticsType"
+                        options={
+                            schema.properties.analyticsType.constants?.map(
+                                (option) => ({
+                                    value: option,
+                                    label: getConstantTranslation(option),
+                                })
+                            ) ?? []
+                        }
+                    />
                 </StandardFormField>
                 <StandardFormField>
                     <OrgUnitField />
@@ -281,10 +271,7 @@ export const ProgramIndicatorsFormFields = () => {
                     />
                 </StandardFormField>
             </SectionedFormSection>
-            <CustomAttributesSection
-                schemaSection={section}
-                useSectionedLayout
-            />
+            <CustomAttributesSection schemaSection={section} sectionedLayout />
         </SectionedFormSections>
     )
 }

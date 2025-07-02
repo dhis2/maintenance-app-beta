@@ -115,13 +115,13 @@ describe('Program indicator add form tests', () => {
         )
         expect(addPeriodBoundaryButton).toBeVisible()
         await userEvent.click(addPeriodBoundaryButton)
-        const apbModal = await screen.findByTestId(
+        const periodBoundaryModal = await screen.findByTestId(
             'analytics-period-boundary-modal'
         )
-        expect(apbModal).toBeVisible()
+        expect(periodBoundaryModal).toBeVisible()
         if (target !== undefined) {
             const targets = await uiActions.openSingleSelect(
-                within(apbModal).getByTestId('apb-target-select'),
+                within(periodBoundaryModal).getByTestId('apb-target-select'),
                 screen
             )
             expect(targets).toHaveLength(4)
@@ -129,13 +129,15 @@ describe('Program indicator add form tests', () => {
         }
         if (customText !== undefined) {
             const customTextInput = within(
-                within(apbModal).getByTestId('apb-custom-target-text-content')
+                within(periodBoundaryModal).getByTestId(
+                    'apb-custom-target-text-content'
+                )
             ).getByRole('textbox')
             await userEvent.type(customTextInput, customText)
         }
         if (type !== undefined) {
             const types = await uiActions.openSingleSelect(
-                within(apbModal).getByTestId('apb-type-select'),
+                within(periodBoundaryModal).getByTestId('apb-type-select'),
                 screen
             )
             expect(types).toHaveLength(5)
@@ -143,19 +145,23 @@ describe('Program indicator add form tests', () => {
         }
         if (offset !== undefined) {
             const offsetInput = within(
-                within(apbModal).getByTestId('apb-offset-input')
+                within(periodBoundaryModal).getByTestId('apb-offset-input')
             ).getByRole('spinbutton')
             await userEvent.type(offsetInput, offset.toString())
         }
         if (periodType !== undefined) {
             const periodTypes = await uiActions.openSingleSelect(
-                within(apbModal).getByTestId('apb-period-type-select'),
+                within(periodBoundaryModal).getByTestId(
+                    'apb-period-type-select'
+                ),
                 screen
             )
             expect(periodTypes).toHaveLength(availablePeriodTypes + 1)
             await userEvent.click(periodTypes[periodType])
         }
-        await userEvent.click(within(apbModal).getByTestId('save-apb-button'))
+        await userEvent.click(
+            within(periodBoundaryModal).getByTestId('save-apb-button')
+        )
     }
 
     beforeEach(() => {

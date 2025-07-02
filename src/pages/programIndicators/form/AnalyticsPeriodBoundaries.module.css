@@ -6,10 +6,10 @@
 
 .analyticsPeriodBoundaryContainer {
     border: 1px solid var(--colors-grey400);
-    border-radius: 4px;
+    border-radius: var(--spacers-dp4);
     display: flex;
-    margin-block: 8px;
-    padding: 12px;
+    margin-block: var(--spacers-dp8);
+    padding: var(--spacers-dp12);
     align-items: center;
     justify-content: space-between;
     width: 700px;
@@ -17,10 +17,10 @@
 
 .analyticsPeriodBoundarySpan {
     display: flex;
-    margin-block-start: 4px;
+    margin-block-start: var(--spacers-dp4);
 }
 
 .analyticsPeriodBoundarySpan div {
-    margin-inline-end: 8px;
+    margin-inline-end: var(--spacers-dp8);
     color: var(--colors-grey700);
 }

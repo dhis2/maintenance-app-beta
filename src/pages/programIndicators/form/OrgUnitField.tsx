@@ -78,7 +78,7 @@ export const OrgUnitField = () => {
             return true
         }
         return false
-    }, [programType, formValues])
+    }, [programType, formValues, analyticsType])
 
     const extractOrgUnitDataElementsFromProgramStage = (
         program: ProgramStagesType

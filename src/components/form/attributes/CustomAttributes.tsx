@@ -74,10 +74,10 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
 
 export function CustomAttributesSection({
     schemaSection,
-    useSectionedLayout = false,
+    sectionedLayout = false,
 }: {
     schemaSection: SchemaSection
-    useSectionedLayout?: boolean
+    sectionedLayout?: boolean
 }) {
     const formState = useFormState<ValuesWithAttributes>({
         subscription: { initialValues: true },
@@ -91,9 +91,7 @@ export function CustomAttributesSection({
         return null
     }
 
-    const Wrapper = useSectionedLayout
-        ? SectionedFormSection
-        : StandardFormSection
+    const Wrapper = sectionedLayout ? SectionedFormSection : StandardFormSection
 
     return (
         <Wrapper name="attributes">

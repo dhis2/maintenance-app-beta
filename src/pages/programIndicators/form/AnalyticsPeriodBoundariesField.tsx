@@ -61,28 +61,29 @@ const boundaryTypes = [
     },
 ]
 
-const APBItem = ({
-    apb,
+const PeriodBoundaryItem = ({
+    periodBoundary,
     onRemove,
     onEdit,
 }: {
-    apb: Partial<AnalyticsPeriodBoundary>
+    periodBoundary: Partial<AnalyticsPeriodBoundary>
     onRemove: () => void
-    onEdit: (apb: Partial<AnalyticsPeriodBoundary>) => void
+    onEdit: (periodBoundary: Partial<AnalyticsPeriodBoundary>) => void
 }) => {
     const foundBoundaryTarget = useMemo(
         () =>
             boundaryTargets.find(
-                (target) => apb.boundaryTarget === target.value
+                (target) => periodBoundary.boundaryTarget === target.value
             ),
-        [apb]
+        [periodBoundary]
     )
     const foundBoundaryType = useMemo(
         () =>
             boundaryTypes.find(
-                (type) => apb.analyticsPeriodBoundaryType === type.value
+                (type) =>
+                    periodBoundary.analyticsPeriodBoundaryType === type.value
             ),
-        [apb]
+        [periodBoundary]
     )
     return (
         <div
@@ -92,17 +93,18 @@ const APBItem = ({
             <div>
                 <div>
                     {foundBoundaryTarget?.label ??
-                        `${i18n.t('Custom')}: ${apb.boundaryTarget}`}
+                        `${i18n.t('Custom')}: ${periodBoundary.boundaryTarget}`}
                 </div>
                 <div className={classes.analyticsPeriodBoundarySpan}>
-                    {apb.offsetPeriodType && (
+                    {periodBoundary.offsetPeriodType && (
                         <div>
-                            {i18n.t('Period')}: {apb.offsetPeriodType}
+                            {i18n.t('Period')}:{' '}
+                            {periodBoundary.offsetPeriodType}
                         </div>
                     )}
-                    {apb.offsetPeriods !== undefined && (
+                    {periodBoundary.offsetPeriods !== undefined && (
                         <div>
-                            {i18n.t('Offset')}: {apb.offsetPeriods}
+                            {i18n.t('Offset')}: {periodBoundary.offsetPeriods}
                         </div>
                     )}
                     {foundBoundaryType && (
@@ -117,7 +119,7 @@ const APBItem = ({
                     small
                     dataTest="apb-edit-button"
                     onClick={() => {
-                        onEdit(apb)
+                        onEdit(periodBoundary)
                     }}
                 >
                     {i18n.t('Edit')}
@@ -137,22 +139,26 @@ const APBItem = ({
         </div>
     )
 }
-const APBItemForm = ({
-    APB,
+const PeriodBoundaryItemForm = ({
+    periodBoundary,
     onFieldChange,
 }: {
-    APB: Partial<AnalyticsPeriodBoundary>
-    onFieldChange: (apb: Partial<AnalyticsPeriodBoundary>) => void
+    periodBoundary: Partial<AnalyticsPeriodBoundary>
+    onFieldChange: (periodBoundary: Partial<AnalyticsPeriodBoundary>) => void
 }) => {
-    const [customBoundaryTarget, setCustomBoundaryTarget] = useState(false)
-    useEffect(() => {
-        const filteredBoundaryTargets = boundaryTargets.filter(
-            (e) => e.value !== 'CUSTOM' && e.value === APB.boundaryTarget
-        ).length
-        if (APB.boundaryTarget && filteredBoundaryTargets === 0) {
-            setCustomBoundaryTarget(true)
-        }
-    }, [APB])
+    const filteredBoundaryTargets = useMemo(
+        () =>
+            boundaryTargets.filter(
+                (e) =>
+                    e.value !== 'CUSTOM' &&
+                    e.value === periodBoundary.boundaryTarget
+            ).length,
+        [periodBoundary]
+    )
+
+    const [customBoundaryTarget, setCustomBoundaryTarget] = useState(
+        periodBoundary.boundaryTarget && filteredBoundaryTargets === 0
+    )
 
     return (
         <div className={classes.analyticsPeriodBoundaryForm}>
@@ -162,7 +168,7 @@ const APBItemForm = ({
                     customBoundaryTarget
                         ? 'CUSTOM'
                         : boundaryTargets.find(
-                              (e) => e.value === APB.boundaryTarget
+                              (e) => e.value === periodBoundary.boundaryTarget
                           )?.value
                 }
                 onChange={({ selected }) => {
@@ -170,7 +176,7 @@ const APBItemForm = ({
                         setCustomBoundaryTarget(true)
                         onFieldChange({
                             boundaryTarget: '',
-                        } as unknown as Partial<AnalyticsPeriodBoundary>)
+                        })
                     } else {
                         setCustomBoundaryTarget(false)
                         onFieldChange({ boundaryTarget: selected })
@@ -187,11 +193,11 @@ const APBItemForm = ({
                     dataTest="apb-custom-target-text"
                     label={i18n.t('Custom boundary text')}
                     onChange={(e) => onFieldChange({ boundaryTarget: e.value })}
-                    value={APB.boundaryTarget}
+                    value={periodBoundary.boundaryTarget}
                 />
             )}
             <SingleSelectField
-                selected={APB.analyticsPeriodBoundaryType}
+                selected={periodBoundary.analyticsPeriodBoundaryType}
                 dataTest="apb-type-select"
                 onChange={({ selected }) => {
                     onFieldChange({
@@ -215,13 +221,13 @@ const APBItemForm = ({
                         offsetPeriods: e.value ? parseInt(e.value) : undefined,
                     })
                 }
-                value={APB.offsetPeriods?.toString()}
+                value={periodBoundary.offsetPeriods?.toString()}
                 dense
                 min={'0'}
             />
             <Field label={i18n.t('Period type')}>
                 <PeriodTypeSelect
-                    selected={APB.offsetPeriodType}
+                    selected={periodBoundary.offsetPeriodType}
                     onChange={(selected) => {
                         onFieldChange({
                             offsetPeriodType: selected as offsetPeriodType,
@@ -237,27 +243,34 @@ const APBItemForm = ({
 
 const AnalyticsPeriodBoundaryModal = ({
     closeModal,
-    onSaveAPB,
-    APB,
+    onSavePeriodBoundary,
+    periodBoundary,
 }: {
     closeModal: () => void
-    onSaveAPB: (apb: Partial<AnalyticsPeriodBoundary>) => void
-    APB: Partial<AnalyticsPeriodBoundary>
+    onSavePeriodBoundary: (
+        periodBoundary: Partial<AnalyticsPeriodBoundary>
+    ) => void
+    periodBoundary: Partial<AnalyticsPeriodBoundary>
 }) => {
-    const [editedAPB, setEditedAPB] = useState(APB)
+    const [editedPeriodBoundary, setEditedPeriodBoundary] =
+        useState(periodBoundary)
     const onFieldChange = (changes: Partial<AnalyticsPeriodBoundary>) => {
-        setEditedAPB((previous) => ({ ...previous, ...changes }))
+        setEditedPeriodBoundary((previous) => ({ ...previous, ...changes }))
     }
 
     return (
         <Modal onClose={closeModal} dataTest="analytics-period-boundary-modal">
             <ModalTitle>
-                {editedAPB
+                {editedPeriodBoundary
                     ? i18n.t('Edit analytics period boundary')
                     : i18n.t('Add analytics period boundary')}
             </ModalTitle>
             <ModalContent className={styles.modalItems}>
-                <APBItemForm APB={editedAPB} onFieldChange={onFieldChange} />
+                <PeriodBoundaryItemForm
+                    key={editedPeriodBoundary.id}
+                    periodBoundary={editedPeriodBoundary}
+                    onFieldChange={onFieldChange}
+                />
             </ModalContent>
             <ModalActions>
                 <ButtonStrip>
@@ -266,7 +279,7 @@ const AnalyticsPeriodBoundaryModal = ({
                         dataTest="save-apb-button"
                         primary
                         onClick={() => {
-                            onSaveAPB(editedAPB)
+                            onSavePeriodBoundary(editedPeriodBoundary)
                         }}
                     >
                         {i18n.t('Save analytics period boundary')}
@@ -278,7 +291,7 @@ const AnalyticsPeriodBoundaryModal = ({
 }
 
 export const AnalyticsPeriodBoundariesField = () => {
-    const [modalAPB, setModalAPB] =
+    const [modalPeriodBoundary, setModalPeriodBoundary] =
         useState<Partial<AnalyticsPeriodBoundary> | null>(null)
     const [abpIndex, setAbpIndex] = useState<number | null>(null)
 
@@ -288,11 +301,11 @@ export const AnalyticsPeriodBoundariesField = () => {
     const { value, onBlur, onChange } = input
 
     const closeModal = () => {
-        setModalAPB(null)
+        setModalPeriodBoundary(null)
         setAbpIndex(null)
     }
 
-    const onRemoveAPB = useCallback(
+    const onRemovePeriodBoundary = useCallback(
         (index: number) => () => {
             onChange(value.filter((_, i) => i !== index))
             onBlur()
@@ -300,11 +313,11 @@ export const AnalyticsPeriodBoundariesField = () => {
         [onChange, onBlur, value]
     )
 
-    const onSaveAPB = useCallback(
-        (editedApb: Partial<AnalyticsPeriodBoundary>) => {
+    const onSavePeriodBoundary = useCallback(
+        (editedPeriodBoundary: Partial<AnalyticsPeriodBoundary>) => {
             if (abpIndex !== null) {
                 const copy = [...value]
-                copy[abpIndex] = editedApb
+                copy[abpIndex] = editedPeriodBoundary
                 onChange(copy)
             }
             onBlur()
@@ -318,29 +331,32 @@ export const AnalyticsPeriodBoundariesField = () => {
             <Button
                 small
                 onClick={() => {
-                    setModalAPB({})
+                    setModalPeriodBoundary({})
                     setAbpIndex(value.length)
                 }}
                 dataTest="add-boundary-button"
             >
                 {i18n.t('Add a period boundary')}
             </Button>
-            {modalAPB && (
+            {modalPeriodBoundary && (
                 <AnalyticsPeriodBoundaryModal
-                    APB={modalAPB}
+                    periodBoundary={modalPeriodBoundary}
                     closeModal={closeModal}
-                    onSaveAPB={onSaveAPB}
+                    onSavePeriodBoundary={onSavePeriodBoundary}
                 />
             )}
             {value &&
                 value.map(
-                    (apb: Partial<AnalyticsPeriodBoundary>, index: number) => (
-                        <APBItem
-                            apb={apb}
-                            key={apb.id ?? `new-apb-${index}`}
-                            onRemove={onRemoveAPB(index)}
+                    (
+                        periodBoundary: Partial<AnalyticsPeriodBoundary>,
+                        index: number
+                    ) => (
+                        <PeriodBoundaryItem
+                            periodBoundary={periodBoundary}
+                            key={periodBoundary.id ?? `new-apb-${index}`}
+                            onRemove={onRemovePeriodBoundary(index)}
                             onEdit={(value) => {
-                                setModalAPB(value)
+                                setModalPeriodBoundary(value)
                                 setAbpIndex(index)
                             }}
                         />
