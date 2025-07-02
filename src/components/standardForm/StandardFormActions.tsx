@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip, CircularLoader } from '@dhis2/ui'
 import React from 'react'
 import { To } from 'react-router-dom'
@@ -18,14 +19,18 @@ function LoadingIcon() {
 export function StandardFormActions({
     cancelLabel,
     submitLabel,
+    saveLabel = i18n.t('Save'),
     submitting,
     onSubmitClick,
+    onSaveClick,
     cancelTo,
 }: {
     cancelLabel: string
     submitLabel: string
+    saveLabel?: string
     submitting: boolean
     onSubmitClick: () => void
+    onSaveClick?: () => void
     cancelTo?: To
 }) {
     return (
@@ -37,10 +42,24 @@ export function StandardFormActions({
                 type="submit"
                 onClick={onSubmitClick}
                 dataTest="form-submit-button"
+                name="test"
+                value="navigate"
             >
                 {submitting && <LoadingIcon />}
                 {submitLabel}
             </Button>
+            {onSaveClick && (
+                <Button
+                    primary
+                    small
+                    disabled={submitting}
+                    type="button"
+                    onClick={onSaveClick}
+                >
+                    {submitting && <LoadingIcon />}
+                    {saveLabel}
+                </Button>
+            )}
             <LinkButton
                 secondary
                 small
