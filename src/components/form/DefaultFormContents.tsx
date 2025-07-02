@@ -7,6 +7,8 @@ import { StandardFormActions, StandardFormSection } from '../standardForm'
 import classes from './DefaultFormContents.module.css'
 import { DefaultFormErrorNotice } from './DefaultFormErrorNotice'
 import { DefaultFormFooter } from './DefaultFormFooter'
+import { useFormBase } from './formBase/FormBaseContext'
+import { SubmitAction } from '../../lib/form/useOnSubmit'
 
 export function DefaultEditFormContents({
     children,
@@ -43,6 +45,15 @@ export function DefaultNewFormContents({
     })
     const { submit } = useForm()
 
+    const { setSubmitAction, submitActionRef } = useFormBase()
+
+    const handleSubmit = (type: SubmitAction) => {
+        console.log('Submitting form with action:', type)
+        setSubmitAction(type)
+        console.log({ submitActionRef })
+        submit()
+    }
+
     const listPath = `/${getSectionPath(section)}`
 
     return (
@@ -56,9 +67,10 @@ export function DefaultNewFormContents({
                 submitLabel={i18n.t('Create {{modelName}} ', {
                     modelName: section.title,
                 })}
+                onSaveClick={handleSubmit.bind(null, 'save')}
+                onSubmitClick={handleSubmit.bind(null, 'saveAndExit')}
                 submitting={submitting}
                 cancelTo={listPath}
-                onSubmitClick={submit}
             />
         </div>
     )
