@@ -4,42 +4,14 @@ import {
     DataSetNotificationTemplate,
     UserGroup,
 } from '../../../types/generated'
-
-export type DataSetNotificationFormValues = Omit<
-    DataSetNotificationTemplate,
-    | 'access'
-    | 'created'
-    | 'createdBy'
-    | 'displayMessageTemplate'
-    | 'displayName'
-    | 'displaySubjectTemplate'
-    | 'favorite'
-    | 'favorites'
-    | 'href'
-    | 'lastUpdated'
-    | 'lastUpdatedBy'
-    | 'notifyParentOrganisationUnitOnly'
-    | 'notifyUsersInHierarchyOnly'
-    | 'sharing'
-    | 'translations'
-    | 'user'
-    | 'attributeValues'
-    | 'dataSets'
-    | 'recipientUserGroup'
-> & {
-    recipientUserGroup?: {
-        id?: string
-        displayName?: string
-    }
-    dataSets: Array<{ id?: string; name?: string }>
-}
+import { DataSetNotificationFormValues } from './DataSetNotificationTemplateSchema'
 
 /**
  * Converts API template to form-friendly values
  */
 export const getInitialValuesFromTemplate = (
     template: DataSetNotificationTemplate
-): DataSetNotificationFormValues => {
+) => {
     const { recipientUserGroup, relativeScheduledDays, dataSets, ...rest } =
         template
 

@@ -9,14 +9,11 @@ import {
 import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { DataSetNotificationsFormFields } from './form/DataSetNotificationsFormFields'
 import {
+    DataSetNotificationFormValues,
     initialValues,
     validate,
 } from './form/DataSetNotificationTemplateSchema'
-import {
-    transformFormValues,
-    formDescriptor,
-    DataSetNotificationFormValues,
-} from './form/getValues'
+import { transformFormValues, formDescriptor } from './form/getValues'
 
 export const Component = () => {
     const onSubmit = useOnSubmitNew<DataSetNotificationFormValues>({

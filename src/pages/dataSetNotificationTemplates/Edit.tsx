@@ -19,10 +19,12 @@ import {
 } from '../../lib'
 import { DataSetNotificationTemplate } from '../../types/generated'
 import { DataSetNotificationsFormFields } from './form/DataSetNotificationsFormFields'
-import { validate } from './form/DataSetNotificationTemplateSchema'
+import {
+    DataSetNotificationFormValues,
+    validate,
+} from './form/DataSetNotificationTemplateSchema'
 import {
     getInitialValuesFromTemplate,
-    DataSetNotificationFormValues,
     transformFormValues,
     formDescriptor,
 } from './form/getValues'
@@ -89,7 +91,11 @@ export const Component = () => {
         <SectionedFormProvider formDescriptor={formDescriptor}>
             <FormBase<DataSetNotificationFormValues>
                 onSubmit={onSubmit}
-                initialValues={getInitialValuesFromTemplate(template)}
+                initialValues={
+                    getInitialValuesFromTemplate(
+                        template
+                    ) as unknown as DataSetNotificationFormValues
+                }
                 validate={validate}
                 valueFormatter={transformFormValues}
                 includeAttributes={false}
