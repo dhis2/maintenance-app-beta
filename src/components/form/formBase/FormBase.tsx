@@ -5,18 +5,15 @@ import {
     FormRenderProps,
     Form as ReactFinalForm,
 } from 'react-final-form'
-import { defaultValueFormatter } from '../../lib/form/'
-import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
+import { defaultValueFormatter } from '../../../lib/form/'
+import { EnhancedOnSubmit } from '../../../lib/form/useOnSubmit'
 import {
     PartialAttributeValue,
     getAllAttributeValues,
     useCustomAttributesQuery,
-} from '../../lib/models/attributes'
-import { LoadingSpinner } from '../loading/LoadingSpinner'
-import {
-    FormBaseProvider,
-    useFormBaseContextValue,
-} from './formBase/FormBaseContext'
+} from '../../../lib/models/attributes'
+import { LoadingSpinner } from '../../loading/LoadingSpinner'
+import { FormBaseProvider, useFormBaseContextValue } from './FormBaseContext'
 
 type MaybeModelWithAttributes = {
     id?: string
