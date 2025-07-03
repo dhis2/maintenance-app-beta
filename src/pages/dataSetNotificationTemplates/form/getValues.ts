@@ -43,9 +43,10 @@ export const transformFormValues = (values: DataSetNotificationFormValues) => {
     return {
         ...rest,
         relativeScheduledDays: Number(relativeScheduledDays),
-        recipientUserGroup: recipientUserGroup
-            ? ({ id: recipientUserGroup.id } as UserGroup)
-            : ({ id: '' } as UserGroup),
+         recipientUserGroup:
+            rest.notificationRecipient === 'USER_GROUP' && recipientUserGroup
+                ? ({ id: recipientUserGroup.id } as UserGroup)
+                : undefined,
         dataSets: dataSets.map(({ id }) => ({ id } as DataSet)),
     }
 }
