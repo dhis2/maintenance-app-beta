@@ -20,12 +20,8 @@ import {
     StandardFormSectionTitle,
 } from '../../../components'
 import { ExpressionBuilder } from '../../../components/ExpressionBuilder/ExpressionBuilder'
-import {
-    ModelSingleSelectField,
-    ModelSingleSelectFormField,
-} from '../../../components/metadataFormControls/ModelSingleSelect'
+import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { getConstantTranslation, SECTIONS_MAP, useSchema } from '../../../lib'
-import { DisplayableModel } from '../../../types/models'
 import { ColorAndIconField } from '../../dataElements/fields'
 import { AnalyticsPeriodBoundariesField } from './AnalyticsPeriodBoundariesField'
 import { OrgUnitField } from './OrgUnitField'

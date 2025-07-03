@@ -37,7 +37,7 @@ generateDefaultListTests({
     customData,
 })
 
-describe.only('Program indicators additional tests', () => {
+describe('Program indicators additional tests', () => {
     const getElementsMock = jest.fn()
 
     const renderList = async () => {

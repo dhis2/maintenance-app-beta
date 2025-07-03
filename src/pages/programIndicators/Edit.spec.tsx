@@ -57,7 +57,7 @@ describe('Program indicator edit form tests', () => {
                 attributeValues: [
                     { attribute: attributes[0], value: 'attribute' },
                 ],
-                orgUnitField: staticOptions.eventDefault.id,
+                orgUnitField: staticOptions.eventDefault.value,
                 style: { color: undefined, icon: undefined },
                 analyticsPeriodBoundaries: [
                     {
@@ -77,11 +77,11 @@ describe('Program indicator edit form tests', () => {
                         attributes: () => ({ attributes }),
                         programs: (_: any, params: any) => {
                             if (
-                                params.params.filter[0] ===
-                                `id:eq:${programWithoutRegistration.id}`
+                                params.params.id ===
+                                programWithoutRegistration.id
                             ) {
                                 return {
-                                    programs: [],
+                                    programStages: [],
                                 }
                             }
                             return Promise.resolve({
@@ -233,8 +233,12 @@ describe('Program indicator edit form tests', () => {
         await uiAssertions.expectSelectToExistWithOptions(
             screen.getByTestId('org-unit-field'),
             {
-                selected: staticOptions.eventDefault.displayName,
-                options: [staticOptions.eventDefault],
+                selected: staticOptions.eventDefault.label,
+                options: [
+                    {
+                        displayName: staticOptions.eventDefault.label,
+                    },
+                ],
                 extraSelectedLengthToRemove: 1,
             },
             screen

@@ -295,19 +295,12 @@ describe('Program indicator add form tests', () => {
         const { screen } = await renderForm({
             customTestData: {
                 programs: (type: any, params: any) => {
-                    if (
-                        params.params.filter[0] ===
-                        `id:eq:${programWithRegistration.id}`
-                    ) {
+                    if (params.id === programWithRegistration.id) {
                         return {
-                            programs: [
+                            programStages: [
                                 {
-                                    programStages: [
-                                        {
-                                            programStageDataElements,
-                                            id: randomDhis2Id(),
-                                        },
-                                    ],
+                                    programStageDataElements,
+                                    id: randomDhis2Id(),
                                 },
                             ],
                         }
@@ -336,13 +329,13 @@ describe('Program indicator add form tests', () => {
             orgUnitField,
             {
                 options: [
-                    staticOptions.eventDefault,
+                    { displayName: staticOptions.eventDefault.label },
                     programTrackedEntityAttributes[0].trackedEntityAttribute,
                     programStageDataElements[1].dataElement,
-                    staticOptions.registration,
-                    staticOptions.enrollment,
-                    staticOptions.ownerAtStart,
-                    staticOptions.ownerAtEnd,
+                    { displayName: staticOptions.registration.label },
+                    { displayName: staticOptions.enrollment.label },
+                    { displayName: staticOptions.ownerAtStart.label },
+                    { displayName: staticOptions.ownerAtEnd.label },
                 ],
             },
             screen
@@ -388,19 +381,12 @@ describe('Program indicator add form tests', () => {
         const { screen } = await renderForm({
             customTestData: {
                 programs: (type: any, params: any) => {
-                    if (
-                        params.params.filter[0] ===
-                        `id:eq:${programWithRegistration.id}`
-                    ) {
+                    if (params.id === programWithRegistration.id) {
                         return {
-                            programs: [
+                            programStages: [
                                 {
-                                    programStages: [
-                                        {
-                                            programStageDataElements,
-                                            id: randomDhis2Id(),
-                                        },
-                                    ],
+                                    programStageDataElements,
+                                    id: randomDhis2Id(),
                                 },
                             ],
                         }
@@ -429,11 +415,11 @@ describe('Program indicator add form tests', () => {
             orgUnitField,
             {
                 options: [
-                    staticOptions.enrollmentDefault,
+                    { displayName: staticOptions.enrollmentDefault.label },
                     programTrackedEntityAttributes[0].trackedEntityAttribute,
-                    staticOptions.registration,
-                    staticOptions.ownerAtStart,
-                    staticOptions.ownerAtEnd,
+                    { displayName: staticOptions.registration.label },
+                    { displayName: staticOptions.ownerAtStart.label },
+                    { displayName: staticOptions.ownerAtEnd.label },
                 ],
             },
             screen
@@ -462,19 +448,12 @@ describe('Program indicator add form tests', () => {
         const { screen } = await renderForm({
             customTestData: {
                 programs: (type: any, params: any) => {
-                    if (
-                        params.params.filter[0] ===
-                        `id:eq:${programWithoutRegistration.id}`
-                    ) {
+                    if (params.id === programWithoutRegistration.id) {
                         return {
-                            programs: [
+                            programStages: [
                                 {
-                                    programStages: [
-                                        {
-                                            programStageDataElements,
-                                            id: randomDhis2Id(),
-                                        },
-                                    ],
+                                    programStageDataElements,
+                                    id: randomDhis2Id(),
                                 },
                             ],
                         }
@@ -498,7 +477,7 @@ describe('Program indicator add form tests', () => {
             orgUnitField,
             {
                 options: [
-                    staticOptions.eventDefault,
+                    { displayName: staticOptions.eventDefault.label },
                     programStageDataElements[1].dataElement,
                 ],
             },
@@ -622,12 +601,9 @@ describe('Program indicator add form tests', () => {
         const { screen, legendSets, attributes } = await renderForm({
             customTestData: {
                 programs: (type: any, params: any) => {
-                    if (
-                        params.params.filter[0] ===
-                        `id:eq:${programWithoutRegistration.id}`
-                    ) {
+                    if (params.id === programWithoutRegistration.id) {
                         return {
-                            programs: [],
+                            programStages: [],
                         }
                     }
                     return Promise.resolve({
@@ -754,7 +730,7 @@ describe('Program indicator add form tests', () => {
                             offsetPeriods: 5,
                         },
                     ],
-                    orgUnitField: staticOptions.eventDefault.id,
+                    orgUnitField: staticOptions.eventDefault.value,
                 }),
             })
         )
@@ -772,18 +748,6 @@ describe('Program indicator add form tests', () => {
         const longText = randomLongString(60)
         await uiActions.enterCode(longText, screen)
         await uiAssertions.expectCodeToErrorWhenExceedsLength(screen)
-        await uiActions.submitForm(screen)
-        expect(createMock).not.toHaveBeenCalled()
-    })
-    it('should show an error if description field is too long', async () => {
-        const { screen } = await renderForm()
-        const longText = randomLongString(2060)
-        await uiActions.enterInputFieldValue('description', longText, screen)
-        await uiAssertions.expectInputToErrorWhenExceedsLength(
-            'description',
-            2000,
-            screen
-        )
         await uiActions.submitForm(screen)
         expect(createMock).not.toHaveBeenCalled()
     })

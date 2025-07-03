@@ -1,7 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useMemo } from 'react'
+import { Box, Field } from '@dhis2/ui'
+import { useQuery } from '@tanstack/react-query'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { useField, useFormState } from 'react-final-form'
-import { ModelSingleSelectField } from '../../../components/metadataFormControls/ModelSingleSelect'
+import { Option, SearchableSingleSelect } from '../../../components'
+import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
 import { DisplayableModel } from '../../../types/models'
 
 const PROGRAM_TYPE_WITH_REGISTRATION = 'WITH_REGISTRATION'
@@ -9,139 +12,103 @@ const PROGRAM_TYPE_WITHOUT_REGISTRATION = 'WITHOUT_REGISTRATION'
 const ANALYTICS_TYPE_EVENT = 'EVENT'
 const ANALYTICS_TYPE_ENROLLMENT = 'ENROLLMENT'
 const ORG_UNIT_VALUE_TYPE = 'ORGANISATION_UNIT'
+
 export const staticOptions = {
     eventDefault: {
-        id: ANALYTICS_TYPE_EVENT,
-        displayName: i18n.t('Event organisation unit default'),
+        value: ANALYTICS_TYPE_EVENT,
+        label: i18n.t('Event organisation unit default'),
     },
     enrollmentDefault: {
-        id: ANALYTICS_TYPE_ENROLLMENT,
-        displayName: i18n.t('Enrollment organisation unit default'),
+        value: ANALYTICS_TYPE_ENROLLMENT,
+        label: i18n.t('Enrollment organisation unit default'),
     },
     enrollment: {
-        id: ANALYTICS_TYPE_ENROLLMENT,
-        displayName: i18n.t('Enrollment organisation unit'),
+        value: ANALYTICS_TYPE_ENROLLMENT,
+        label: i18n.t('Enrollment organisation unit'),
     },
     ownerAtStart: {
-        id: 'OWNER_AT_START',
-        displayName: i18n.t('Owner at start organisation unit'),
+        value: 'OWNER_AT_START',
+        label: i18n.t('Owner at start organisation unit'),
     },
     ownerAtEnd: {
-        id: 'OWNER_AT_END',
-        displayName: i18n.t('Owner at end organisation unit'),
+        value: 'OWNER_AT_END',
+        label: i18n.t('Owner at end organisation unit'),
     },
     registration: {
-        id: 'REGISTRATION',
-        displayName: i18n.t('Registration organisation unit'),
+        value: 'REGISTRATION',
+        label: i18n.t('Registration organisation unit'),
     },
 }
 
 type DisplayableModelAndValueType = DisplayableModel & { valueType: string }
+
 type ProgramStagesType = {
+    id: string
     programStages?: {
         id: string
         programStageDataElements: {
             dataElement: DisplayableModelAndValueType
         }[]
     }[]
-    id: string
 }
 
-export const OrgUnitField = () => {
-    const programFilters = [
-        'programStages[id,programStageDataElements[dataElement[id,displayName,valueType]],id',
-    ] as const
-    const { input: orgUnitFieldInput, meta: orgUnitFieldMeta } = useField(
-        'orgUnitField',
-        {
-            format: (value) => {
-                return { id: value }
-            },
-            parse: (value) => {
-                return value.id
-            },
-        }
+const extractOrgUnitDataElements = (program: ProgramStagesType): Option[] => {
+    return (
+        program.programStages?.flatMap(({ programStageDataElements }) =>
+            programStageDataElements
+                .filter(
+                    ({ dataElement }) =>
+                        dataElement.valueType === ORG_UNIT_VALUE_TYPE
+                )
+                .map(({ dataElement }) => ({
+                    value: dataElement.id,
+                    label: dataElement.displayName,
+                }))
+        ) || []
     )
-    const formValues = useFormState({ subscription: { values: true } }).values
-    const programType = formValues.program?.programType
-    const programId = formValues.program?.id
-    const analyticsType = formValues.analyticsType
-    const hasRequiredParams = useMemo(() => {
-        if (!programType) {
-            return false
-        }
-        if (programType === PROGRAM_TYPE_WITHOUT_REGISTRATION) {
-            return true
-        }
-        // For tracker programs we do need and analytics type
-        if (programType === PROGRAM_TYPE_WITH_REGISTRATION && analyticsType) {
-            return true
-        }
-        return false
-    }, [programType, formValues, analyticsType])
+}
 
-    const extractOrgUnitDataElementsFromProgramStage = (
-        program: ProgramStagesType
-    ): DisplayableModel[] => {
-        if (!program.programStages) {
-            return []
+const getProgramAttributes = (program: {
+    programTrackedEntityAttributes: {
+        trackedEntityAttribute: {
+            id: string
+            displayName: string
+            valueType: string
         }
+    }[]
+}): Option[] => {
+    return (
+        program?.programTrackedEntityAttributes?.flatMap(
+            ({ trackedEntityAttribute }) =>
+                trackedEntityAttribute.valueType === ORG_UNIT_VALUE_TYPE
+                    ? [
+                          {
+                              value: trackedEntityAttribute.id,
+                              label: trackedEntityAttribute.displayName,
+                          },
+                      ]
+                    : []
+        ) || []
+    )
+}
 
-        return program.programStages.flatMap(({ programStageDataElements }) =>
-            programStageDataElements.reduce(
-                (acc: DisplayableModel[], { dataElement }) => {
-                    if (dataElement.valueType === ORG_UNIT_VALUE_TYPE) {
-                        acc.push(dataElement)
-                    }
-                    return acc
-                },
-                []
-            )
-        )
+const getOptions = ({
+    programType,
+    analyticsType,
+    programAttributesForProgram,
+    dataElements,
+}: {
+    programType: string
+    analyticsType: string
+    programAttributesForProgram: Option[]
+    dataElements: Option[]
+}): Option[] => {
+    if (programType === PROGRAM_TYPE_WITHOUT_REGISTRATION) {
+        return [staticOptions.eventDefault, ...dataElements]
     }
 
-    const programAttributesForProgram: DisplayableModel[] = useMemo(() => {
-        if (!formValues?.program?.programTrackedEntityAttributes) {
-            return []
-        }
-        return formValues.program.programTrackedEntityAttributes.reduce(
-            (
-                acc: DisplayableModel[],
-                {
-                    trackedEntityAttribute,
-                }: {
-                    trackedEntityAttribute: {
-                        id: string
-                        displayName: string
-                        valueType: string
-                    }
-                }
-            ) => {
-                if (trackedEntityAttribute.valueType === ORG_UNIT_VALUE_TYPE) {
-                    acc.push({
-                        id: trackedEntityAttribute.id,
-                        displayName: trackedEntityAttribute.displayName,
-                    })
-                }
-                return acc
-            },
-            []
-        )
-    }, [formValues.program])
-
-    const getOptionsForSelect = (values: ProgramStagesType[]) => {
-        const dataElements =
-            values && values.length > 0
-                ? extractOrgUnitDataElementsFromProgramStage(values[0])
-                : []
-        if (programType === PROGRAM_TYPE_WITHOUT_REGISTRATION) {
-            return [staticOptions.eventDefault, ...dataElements]
-        }
-
-        if (
-            programType === PROGRAM_TYPE_WITH_REGISTRATION &&
-            analyticsType === ANALYTICS_TYPE_EVENT
-        ) {
+    if (programType === PROGRAM_TYPE_WITH_REGISTRATION) {
+        if (analyticsType === ANALYTICS_TYPE_EVENT) {
             return [
                 staticOptions.eventDefault,
                 ...programAttributesForProgram,
@@ -153,10 +120,7 @@ export const OrgUnitField = () => {
             ]
         }
 
-        if (
-            programType === PROGRAM_TYPE_WITH_REGISTRATION &&
-            analyticsType === ANALYTICS_TYPE_ENROLLMENT
-        ) {
+        if (analyticsType === ANALYTICS_TYPE_ENROLLMENT) {
             return [
                 staticOptions.enrollmentDefault,
                 ...programAttributesForProgram,
@@ -165,26 +129,114 @@ export const OrgUnitField = () => {
                 staticOptions.ownerAtEnd,
             ]
         }
-
-        return []
     }
 
-    return hasRequiredParams ? (
-        <ModelSingleSelectField
-            dataTest="org-unit-field"
-            query={{
-                resource: 'programs',
-                params: {
-                    fields: programFilters.concat(),
-                    filter: [`id:eq:${programId}`],
-                },
-            }}
-            inputWidth="400px"
-            input={orgUnitFieldInput}
-            meta={orgUnitFieldMeta}
+    return []
+}
+
+export const OrgUnitField = () => {
+    const { input: orgUnitFieldInput, meta: orgUnitFieldMeta } =
+        useField('orgUnitField')
+    const formValues = useFormState({ subscription: { values: true } }).values
+    const queryFn = useBoundResourceQueryFn()
+    const previousOptionsRef = useRef<Option[]>([])
+
+    const program = formValues.program
+    const programType = program?.programType
+    const analyticsType = formValues.analyticsType
+
+    const programAttributesForProgram = useMemo(
+        () => getProgramAttributes(program),
+        [program]
+    )
+    const programStagesQuery = useMemo(
+        () => ({
+            resource: 'programs',
+            id: program?.id,
+            params: {
+                fields: [
+                    'programStages[id,programStageDataElements[dataElement[id,displayName,valueType]]]',
+                ],
+            },
+        }),
+        [program?.id]
+    )
+
+    const { data, error, isLoading, refetch } = useQuery({
+        queryKey: [programStagesQuery],
+        queryFn: queryFn<ProgramStagesType>,
+    })
+
+    const options = useMemo(() => {
+        console.log('************DATA', data)
+        if (!data) {
+            return []
+        }
+        const dataElements = extractOrgUnitDataElements(data)
+        console.log('********dtaEle', dataElements)
+        return getOptions({
+            programType,
+            analyticsType,
+            programAttributesForProgram,
+            dataElements,
+        })
+    }, [data, programType, analyticsType, programAttributesForProgram])
+
+    useEffect(() => {
+        const prev = previousOptionsRef.current
+
+        const optionsChanged =
+            prev.length !== options.length ||
+            prev.some((opt, i) => opt.value !== options[i]?.value)
+
+        if (prev.length > 0 && optionsChanged) {
+            orgUnitFieldInput.onChange(undefined)
+        }
+
+        previousOptionsRef.current = options
+    }, [options])
+
+    console.log('*******options', options)
+
+    const showField = useMemo(() => {
+        if (!programType) {
+            return false
+        }
+        if (programType === PROGRAM_TYPE_WITHOUT_REGISTRATION) {
+            return true
+        }
+        if (programType === PROGRAM_TYPE_WITH_REGISTRATION && analyticsType) {
+            return true
+        }
+        return false
+    }, [programType, analyticsType])
+
+    return showField ? (
+        <Field
+            name="orgUnitField"
             label={i18n.t('Organisation unit field')}
-            transform={getOptionsForSelect}
-        />
+            error={!!error || orgUnitFieldMeta.invalid}
+            validationText={
+                (!!error && i18n.t('Something went wrong')) ||
+                (orgUnitFieldMeta.touched &&
+                    orgUnitFieldMeta.error?.toString()) ||
+                ''
+            }
+        >
+            <Box width="400px" minWidth="100px">
+                <SearchableSingleSelect
+                    dataTest="org-unit-field"
+                    selected={orgUnitFieldInput.value}
+                    options={options}
+                    onChange={({ selected }) =>
+                        orgUnitFieldInput.onChange(selected)
+                    }
+                    loading={isLoading}
+                    showEndLoader={false}
+                    onRetryClick={refetch}
+                />
+            </Box>
+        </Field>
     ) : (
         <></>
     )
