@@ -66,7 +66,7 @@ export const DataSetNotificationTemplateFormSchema =
                 .default([]),
             messageTemplate: z.string(),
             subjectTemplate: z.string().optional(),
-            relativeScheduledDays: z.coerce.number().optional(),
+            relativeScheduledDays: z.coerce.number().default(0),
             recipientUserGroup: z
                 .object({
                     id: z.string(),
