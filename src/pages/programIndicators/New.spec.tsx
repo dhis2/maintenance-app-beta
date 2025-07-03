@@ -126,6 +126,10 @@ describe('Program indicator add form tests', () => {
             )
             expect(targets).toHaveLength(4)
             await userEvent.click(targets[target])
+            await uiActions.closeSingleSelectIfOpen(
+                screen.getByTestId('apb-target-select'),
+                screen
+            )
         }
         if (customText !== undefined) {
             const customTextInput = within(
@@ -142,6 +146,10 @@ describe('Program indicator add form tests', () => {
             )
             expect(types).toHaveLength(5)
             await userEvent.click(types[type])
+            await uiActions.closeSingleSelectIfOpen(
+                screen.getByTestId('apb-type-select'),
+                screen
+            )
         }
         if (offset !== undefined) {
             const offsetInput = within(
@@ -158,6 +166,10 @@ describe('Program indicator add form tests', () => {
             )
             expect(periodTypes).toHaveLength(availablePeriodTypes + 1)
             await userEvent.click(periodTypes[periodType])
+            await uiActions.closeSingleSelectIfOpen(
+                screen.getByTestId('apb-period-type-select'),
+                screen
+            )
         }
         await userEvent.click(
             within(periodBoundaryModal).getByTestId('save-apb-button')
@@ -317,12 +329,20 @@ describe('Program indicator add form tests', () => {
             screen
         )
         await userEvent.click(programOptions[0])
+        await uiActions.closeSingleSelectIfOpen(
+            screen.getByTestId('programs-field'),
+            screen
+        )
 
         const analyticsOptions = await uiActions.openSingleSelect(
             screen.getByTestId('analytics-type-field'),
             screen
         )
         await userEvent.click(analyticsOptions[0])
+        await uiActions.closeSingleSelectIfOpen(
+            screen.getByTestId('analytics-type-field'),
+            screen
+        )
 
         const orgUnitField = await screen.findByTestId('org-unit-field')
         await uiAssertions.expectSelectToExistWithOptions(
@@ -403,12 +423,20 @@ describe('Program indicator add form tests', () => {
             screen
         )
         await userEvent.click(programOptions[0])
+        await uiActions.closeSingleSelectIfOpen(
+            screen.getByTestId('programs-field'),
+            screen
+        )
 
         const analyticsOptions = await uiActions.openSingleSelect(
             screen.getByTestId('analytics-type-field'),
             screen
         )
         await userEvent.click(analyticsOptions[1])
+        await uiActions.closeSingleSelectIfOpen(
+            screen.getByTestId('analytics-type-field'),
+            screen
+        )
 
         const orgUnitField = await screen.findByTestId('org-unit-field')
         await uiAssertions.expectSelectToExistWithOptions(
@@ -471,6 +499,10 @@ describe('Program indicator add form tests', () => {
         )
         expect(programOptions).toHaveLength(2)
         await userEvent.click(programOptions[0])
+        await uiActions.closeSingleSelectIfOpen(
+            screen.getByTestId('programs-field'),
+            screen
+        )
 
         const orgUnitField = await screen.findByTestId('org-unit-field')
         await uiAssertions.expectSelectToExistWithOptions(
@@ -486,31 +518,6 @@ describe('Program indicator add form tests', () => {
     })
     it('should not show the org unit field when no program is selected', async () => {
         const { screen } = await renderForm()
-
-        await waitFor(() => {
-            expect(
-                screen.queryByTestId('org-unit-field')
-            ).not.toBeInTheDocument()
-        })
-    })
-    it('should not show the org unit field when there is a program selected with type WITH_REGISTRATION but no analytics type is selected', async () => {
-        const programWithRegistration = testProgram({
-            programType: 'WITH_REGISTRATION' as Program.programType,
-        })
-        const { screen } = await renderForm({
-            customTestData: {
-                programs: (type: any, params: any) => {
-                    return Promise.resolve({
-                        programs: [programWithRegistration, testProgram()],
-                    })
-                },
-            },
-        })
-        const programOptions = await uiActions.openSingleSelect(
-            screen.getByTestId('programs-field'),
-            screen
-        )
-        await userEvent.click(programOptions[0])
 
         await waitFor(() => {
             expect(
@@ -621,6 +628,11 @@ describe('Program indicator add form tests', () => {
             screen
         )
         await userEvent.click(programOptions[0])
+        await uiActions.closeSingleSelectIfOpen(
+            screen.getByTestId('programs-field'),
+            screen
+        )
+
         await uiActions.enterName(aName, screen)
         await uiActions.enterInputFieldValue('shortName', aShortName, screen)
         await uiActions.enterCode(aCode, screen)
@@ -635,24 +647,40 @@ describe('Program indicator add form tests', () => {
             screen
         )
         await userEvent.click(decimalsOptions[2])
+        await uiActions.closeSingleSelectIfOpen(
+            screen.getByTestId('decimals-field'),
+            screen
+        )
 
         const aggregationTypeOptions = await uiActions.openSingleSelect(
             screen.getByTestId('aggregation-type-field'),
             screen
         )
         await userEvent.click(aggregationTypeOptions[0])
+        await uiActions.closeSingleSelectIfOpen(
+            screen.getByTestId('aggregation-type-field'),
+            screen
+        )
 
         const analyticsOptions = await uiActions.openSingleSelect(
             screen.getByTestId('analytics-type-field'),
             screen
         )
         await userEvent.click(analyticsOptions[0])
+        await uiActions.closeSingleSelectIfOpen(
+            screen.getByTestId('analytics-type-field'),
+            screen
+        )
 
         const orgUnitOptions = await uiActions.openSingleSelect(
             screen.getByTestId('org-unit-field'),
             screen
         )
         await userEvent.click(orgUnitOptions[0])
+        await uiActions.closeSingleSelectIfOpen(
+            screen.getByTestId('org-unit-field'),
+            screen
+        )
 
         await addPeriodBoundary(
             { target: 0, periodType: 1, type: 1, offset: 5 },

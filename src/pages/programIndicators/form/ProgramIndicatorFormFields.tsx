@@ -21,9 +21,15 @@ import {
 } from '../../../components'
 import { ExpressionBuilder } from '../../../components/ExpressionBuilder/ExpressionBuilder'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { getConstantTranslation, SECTIONS_MAP, useSchema } from '../../../lib'
+import {
+    getConstantTranslation,
+    SECTIONS_MAP,
+    useSchema,
+    useSectionedFormContext,
+} from '../../../lib'
 import { ColorAndIconField } from '../../dataElements/fields'
 import { AnalyticsPeriodBoundariesField } from './AnalyticsPeriodBoundariesField'
+import { ProgramIndicatorFormDescriptor } from './formDescriptor'
 import { OrgUnitField } from './OrgUnitField'
 
 const section = SECTIONS_MAP.programIndicator
@@ -33,11 +39,15 @@ export const ProgramIndicatorsFormFields = () => {
     const programFilters = [
         'id,displayName,programType,programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,valueType]]',
     ] as const
+    const descriptor =
+        useSectionedFormContext<typeof ProgramIndicatorFormDescriptor>()
 
     const schema = useSchema(SECTIONS_MAP.programIndicator.name)
     return (
         <SectionedFormSections>
-            <SectionedFormSection name="basicInformation">
+            <SectionedFormSection
+                name={descriptor.getSection('basicInformation').name}
+            >
                 <StandardFormSectionTitle>
                     {i18n.t('Basic information')}
                 </StandardFormSectionTitle>
@@ -58,7 +68,9 @@ export const ProgramIndicatorsFormFields = () => {
                     <ColorAndIconField />
                 </StandardFormField>
             </SectionedFormSection>
-            <SectionedFormSection name="configuration">
+            <SectionedFormSection
+                name={descriptor.getSection('configuration').name}
+            >
                 <StandardFormSectionTitle>
                     {i18n.t('Configuration')}
                 </StandardFormSectionTitle>
@@ -139,7 +151,9 @@ export const ProgramIndicatorsFormFields = () => {
                     </SingleSelectField>
                 </StandardFormField>
             </SectionedFormSection>
-            <SectionedFormSection name="expression">
+            <SectionedFormSection
+                name={descriptor.getSection('expression').name}
+            >
                 <StandardFormSectionTitle>
                     {i18n.t('Expression')}
                 </StandardFormSectionTitle>
@@ -155,7 +169,7 @@ export const ProgramIndicatorsFormFields = () => {
                     />
                 </StandardFormField>
             </SectionedFormSection>
-            <SectionedFormSection name="filter">
+            <SectionedFormSection name={descriptor.getSection('filter').name}>
                 <StandardFormSectionTitle>
                     {i18n.t('Filter')}
                 </StandardFormSectionTitle>
@@ -173,7 +187,9 @@ export const ProgramIndicatorsFormFields = () => {
                     />
                 </StandardFormField>
             </SectionedFormSection>
-            <SectionedFormSection name="periodBoundaries">
+            <SectionedFormSection
+                name={descriptor.getSection('periodBoundaries').name}
+            >
                 <StandardFormSectionTitle>
                     {i18n.t('Period boundaries')}
                 </StandardFormSectionTitle>
@@ -186,7 +202,9 @@ export const ProgramIndicatorsFormFields = () => {
                     <AnalyticsPeriodBoundariesField />
                 </StandardFormField>
             </SectionedFormSection>
-            <SectionedFormSection name="advancedOptions">
+            <SectionedFormSection
+                name={descriptor.getSection('advancedOptions').name}
+            >
                 <StandardFormSectionTitle>
                     {i18n.t('Advanced options')}
                 </StandardFormSectionTitle>
@@ -240,7 +258,7 @@ export const ProgramIndicatorsFormFields = () => {
                 {/*    />*/}
                 {/*</StandardFormField>*/}
             </SectionedFormSection>
-            <SectionedFormSection name="legends">
+            <SectionedFormSection name={descriptor.getSection('legends').name}>
                 <StandardFormSectionTitle>
                     {i18n.t('Legends')}
                 </StandardFormSectionTitle>

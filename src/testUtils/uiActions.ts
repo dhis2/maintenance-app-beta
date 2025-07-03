@@ -43,6 +43,20 @@ const openSingleSelect = async (
     )
 }
 
+const closeSingleSelectIfOpen = async (
+    triggeringDiv: HTMLElement,
+    screen: RenderResult
+) => {
+    const optionsWrapper = await screen.queryByTestId(
+        'dhis2-uicore-select-menu-menuwrapper'
+    )
+    if (optionsWrapper) {
+        await userEvent.click(
+            within(triggeringDiv).getByTestId('dhis2-uicore-select-input')
+        )
+    }
+}
+
 const submitForm = async (screen: RenderResult) => {
     const submitButton = screen.getByTestId('form-submit-button')
     await userEvent.click(submitButton)
@@ -82,6 +96,7 @@ const clickOnCheckboxField = async (
 export const uiActions = {
     openModal,
     openSingleSelect,
+    closeSingleSelectIfOpen,
     submitForm,
     enterInputFieldValue,
     enterName: async (text: string, screen: RenderResult) =>

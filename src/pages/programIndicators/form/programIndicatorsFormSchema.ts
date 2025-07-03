@@ -15,7 +15,9 @@ const {
 const ProgramIndicatorsBaseSchema = z.object({
     program: modelReference,
     aggregationType: z.nativeEnum(ProgramIndicator.aggregationType).optional(),
-    analyticsType: z.nativeEnum(ProgramIndicator.analyticsType),
+    analyticsType: z
+        .nativeEnum(ProgramIndicator.analyticsType)
+        .default(ProgramIndicator.analyticsType.EVENT),
     displayInForm: z.boolean().default(false),
     legendSets: referenceCollection.default([]),
     aggregateExportCategoryOptionCombo: z.string().optional(),

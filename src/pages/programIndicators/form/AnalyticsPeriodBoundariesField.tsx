@@ -11,7 +11,7 @@ import {
     SingleSelectField,
     SingleSelectOption,
 } from '@dhis2/ui'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { useField } from 'react-final-form'
 import { PeriodTypeSelect } from '../../../components/metadataFormControls/PeriodTypeSelect/PeriodTypeSelect'
 import { AnalyticsPeriodBoundary } from '../../../types/generated'

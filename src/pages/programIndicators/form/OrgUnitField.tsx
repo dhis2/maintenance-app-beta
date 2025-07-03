@@ -168,12 +168,10 @@ export const OrgUnitField = () => {
     })
 
     const options = useMemo(() => {
-        console.log('************DATA', data)
         if (!data) {
             return []
         }
         const dataElements = extractOrgUnitDataElements(data)
-        console.log('********dtaEle', dataElements)
         return getOptions({
             programType,
             analyticsType,
@@ -195,8 +193,6 @@ export const OrgUnitField = () => {
 
         previousOptionsRef.current = options
     }, [options])
-
-    console.log('*******options', options)
 
     const showField = useMemo(() => {
         if (!programType) {
