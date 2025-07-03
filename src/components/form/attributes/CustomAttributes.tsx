@@ -3,6 +3,7 @@ import { SingleSelectFieldFF } from '@dhis2/ui'
 import * as React from 'react'
 import { Field as FieldRFF, useFormState } from 'react-final-form'
 import {
+    SectionedFormSection,
     StandardFormField,
     StandardFormSection,
     StandardFormSectionDescription,
@@ -14,7 +15,7 @@ import { FormFieldByValueType } from '../../fields'
 
 const inputWidth = '440px'
 
-type ValuesWithAttributes = {
+export type ValuesWithAttributes = {
     attributeValues: AttributeValue[]
 }
 
@@ -40,7 +41,10 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
         }
 
         return (
-            <StandardFormField key={attribute.id}>
+            <StandardFormField
+                key={attribute.id}
+                dataTest={`attribute-${attribute.id}`}
+            >
                 <FieldRFF
                     component={SingleSelectFieldFF}
                     required={required}
@@ -54,7 +58,10 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
     }
 
     return (
-        <StandardFormField key={attribute.id}>
+        <StandardFormField
+            key={attribute.id}
+            dataTest={`attribute-${attribute.id}`}
+        >
             <FormFieldByValueType
                 valueType={attribute.valueType}
                 name={name}
@@ -67,8 +74,10 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
 
 export function CustomAttributesSection({
     schemaSection,
+    sectionedLayout = false,
 }: {
     schemaSection: SchemaSection
+    sectionedLayout?: boolean
 }) {
     const formState = useFormState<ValuesWithAttributes>({
         subscription: { initialValues: true },
@@ -77,12 +86,15 @@ export function CustomAttributesSection({
     const customAttributes = formState.initialValues.attributeValues?.map(
         (av) => av.attribute
     )
+
     if (!customAttributes || customAttributes?.length < 1) {
         return null
     }
 
+    const Wrapper = sectionedLayout ? SectionedFormSection : StandardFormSection
+
     return (
-        <StandardFormSection>
+        <Wrapper name="attributes">
             <StandardFormSectionTitle>
                 {i18n.t('Attributes')}
             </StandardFormSectionTitle>
@@ -102,6 +114,6 @@ export function CustomAttributesSection({
                     />
                 )
             })}
-        </StandardFormSection>
+        </Wrapper>
     )
 }

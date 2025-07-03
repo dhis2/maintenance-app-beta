@@ -1,27 +1,22 @@
 import React from 'react'
 import {
-    FormBase,
-    SectionedFormLayout,
     DefaultSectionedFormSidebar,
+    FormBase,
     SectionedFormErrorNotice,
+    SectionedFormLayout,
 } from '../../components'
 import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
 import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
-import { DataSetFormContents } from './form/DataSetFormContents'
-import {
-    initialValues,
-    validate,
-    dataSetValueFormatter,
-} from './form/dataSetFormSchema'
-import { DataSetFormDescriptor } from './form/formDescriptor'
+import { ProgramIndicatorFormDescriptor } from './form/formDescriptor'
+import { ProgramIndicatorsFormFields } from './form/ProgramIndicatorFormFields'
+import { initialValues, validate } from './form/programIndicatorsFormSchema'
 
-const section = SECTIONS_MAP.dataSet
+const section = SECTIONS_MAP.programIndicator
 
 export const Component = () => {
     return (
         <FormBase
             onSubmit={useOnSubmitNew({ section })}
-            valueFormatter={dataSetValueFormatter}
             initialValues={initialValues}
             validate={validate}
             subscription={{}}
@@ -29,14 +24,14 @@ export const Component = () => {
             {({ handleSubmit }) => {
                 return (
                     <SectionedFormProvider
-                        formDescriptor={DataSetFormDescriptor}
+                        formDescriptor={ProgramIndicatorFormDescriptor}
                     >
                         <SectionedFormLayout
                             sidebar={<DefaultSectionedFormSidebar />}
                         >
                             <form onSubmit={handleSubmit}>
-                                <DataSetFormContents />
-                                <DefaultFormFooter />
+                                <ProgramIndicatorsFormFields />
+                                <DefaultFormFooter cancelTo="/programIndicators" />
                             </form>
                             <SectionedFormErrorNotice />
                         </SectionedFormLayout>

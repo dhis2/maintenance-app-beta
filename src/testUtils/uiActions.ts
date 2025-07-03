@@ -43,6 +43,20 @@ const openSingleSelect = async (
     )
 }
 
+const closeSingleSelectIfOpen = async (
+    triggeringDiv: HTMLElement,
+    screen: RenderResult
+) => {
+    const optionsWrapper = await screen.queryByTestId(
+        'dhis2-uicore-select-menu-menuwrapper'
+    )
+    if (optionsWrapper) {
+        await userEvent.click(
+            within(triggeringDiv).getByTestId('dhis2-uicore-select-input')
+        )
+    }
+}
+
 const submitForm = async (screen: RenderResult) => {
     const submitButton = screen.getByTestId('form-submit-button')
     await userEvent.click(submitButton)
@@ -62,9 +76,27 @@ const pickOptionInTransfer = async (
     await userEvent.dblClick(lhsOptionToPick)
 }
 
+const pickColor = async (screen: RenderResult) => {
+    const colorButton = screen.getByTestId('colorpicker-trigger')
+    await userEvent.click(colorButton)
+    const colors = screen.getByTestId('colors').querySelectorAll('span')
+    await userEvent.click(colors[0])
+    screen.debug(screen.getByTestId('colorpicker-trigger'))
+}
+
+const clickOnCheckboxField = async (
+    fieldName: string,
+    screen: RenderResult
+) => {
+    const field = screen.getByTestId(`formfields-${fieldName}`)
+    const input = within(field).getByRole('checkbox') as HTMLInputElement
+    await userEvent.click(input)
+}
+
 export const uiActions = {
     openModal,
     openSingleSelect,
+    closeSingleSelectIfOpen,
     submitForm,
     enterInputFieldValue,
     enterName: async (text: string, screen: RenderResult) =>
@@ -73,4 +105,6 @@ export const uiActions = {
         await enterInputFieldValue('code', text, screen),
     pickOptionInTransfer,
     clearInputField,
+    // pickColor, Need to fix this
+    clickOnCheckboxField,
 }
