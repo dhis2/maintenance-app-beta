@@ -4,6 +4,7 @@ import React from 'react'
 import { useField } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
+import { required } from '../../../lib'
 import { DeliveryChannelsField } from './DeliveryChannelsField'
 
 export const RecipientSection = () => {
@@ -48,7 +49,7 @@ export const RecipientSection = () => {
                         <ModelSingleSelectFormField
                             name="recipientUserGroup"
                             label={i18n.t('User Group Recipients')}
-                            required
+                            validate={required}
                             query={{
                                 resource: 'userGroups',
                                 params: {

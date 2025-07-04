@@ -23,11 +23,7 @@ import {
     DataSetNotificationFormValues,
     validate,
 } from './form/DataSetNotificationTemplateSchema'
-import {
-    getInitialValuesFromTemplate,
-    transformFormValues,
-    formDescriptor,
-} from './form/getValues'
+import { transformFormValues, formDescriptor } from './form/getValues'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -82,7 +78,6 @@ export const Component = () => {
             </NoticeBox>
         )
     }
-
     if (isLoading || !template) {
         return null
     }
@@ -91,7 +86,8 @@ export const Component = () => {
         <SectionedFormProvider formDescriptor={formDescriptor}>
             <FormBase<DataSetNotificationFormValues>
                 onSubmit={onSubmit}
-                initialValues={template}
+                initialValues={
+                    template as unknown as DataSetNotificationFormValues
                 }
                 validate={validate}
                 valueFormatter={transformFormValues}

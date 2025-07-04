@@ -1,33 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
-import {
-    DataSet,
-    DataSetNotificationTemplate,
-    UserGroup,
-} from '../../../types/generated'
+import { DataSet, UserGroup } from '../../../types/generated'
 import { DataSetNotificationFormValues } from './DataSetNotificationTemplateSchema'
-
-/**
- * Converts API template to form-friendly values
- */
-export const getInitialValuesFromTemplate = (
-    template: DataSetNotificationTemplate
-) => {
-    const { recipientUserGroup, relativeScheduledDays, dataSets, ...rest } =
-        template
-
-    return {
-        ...rest,
-        relativeScheduledDays,
-        recipientUserGroup: recipientUserGroup?.id
-            ? {
-                  id: recipientUserGroup.id,
-                  displayName: recipientUserGroup.displayName,
-              }
-            : undefined,
-
-        dataSets: dataSets || [],
-    }
-}
 
 /**
  * Converts form values back to API payload
@@ -43,7 +16,7 @@ export const transformFormValues = (values: DataSetNotificationFormValues) => {
     return {
         ...rest,
         relativeScheduledDays: Number(relativeScheduledDays),
-         recipientUserGroup:
+        recipientUserGroup:
             rest.notificationRecipient === 'USER_GROUP' && recipientUserGroup
                 ? ({ id: recipientUserGroup.id } as UserGroup)
                 : undefined,

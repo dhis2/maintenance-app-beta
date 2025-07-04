@@ -75,7 +75,7 @@ export const NotificationTimingSection = () => {
                                 name="relativeScheduledDays"
                                 type="number"
                                 inputWidth="80px"
-                     format={(value) => {
+                                format={(value) => {
                                     const parsed = Math.abs(
                                         parseInt(value ?? '', 10)
                                     )
