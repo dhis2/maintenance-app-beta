@@ -75,11 +75,22 @@ export const NotificationTimingSection = () => {
                                 name="relativeScheduledDays"
                                 type="number"
                                 inputWidth="80px"
+                     format={(value) => {
+                                    const parsed = Math.abs(
+                                        parseInt(value ?? '', 10)
+                                    )
+                                    return isNaN(parsed) ? '' : String(parsed)
+                                }}
                                 parse={(value) => {
                                     const parsed = parseInt(value ?? '', 10)
-                                    return isNaN(parsed)
-                                        ? undefined
-                                        : String(parsed)
+                                    if (isNaN(parsed)) {
+                                        return undefined
+                                    }
+                                    const signed =
+                                        beforeAfter === 'BEFORE'
+                                            ? -parsed
+                                            : parsed
+                                    return String(signed)
                                 }}
                                 required
                             />
