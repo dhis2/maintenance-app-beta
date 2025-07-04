@@ -184,8 +184,13 @@ const ProgramIndicatorCard = ({
     )
 }
 
-const addDefaultCategoryComboTransform = (results: any[]) => {
-    return [DEFAULT_CATEGORYCOMBO_SELECT_OPTION, ...results]
+const addDefaultCategoryComboTransform = (
+    results: CategoryComboFromSelect[]
+) => {
+    return [
+        DEFAULT_CATEGORYCOMBO_SELECT_OPTION as CategoryComboFromSelect,
+        ...results,
+    ]
 }
 
 export const ProgramIndicatorMapping = ({

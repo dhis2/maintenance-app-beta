@@ -158,8 +158,7 @@ const useCategories = ({
         // in a program indicator mapping, but not already mapped in the form.
 
         // keep track of categories included to avoid duplicates
-        const alreadyIncludedInSuggestedCategories: { [key: string]: boolean } =
-            {}
+        const alreadyIncludedInSuggestedCategories = new Set<string>()
 
         const suggestedCategories = programIndicatorCategories.filter(
             (category): category is ProgramIndicatorCategory => {
@@ -167,10 +166,10 @@ const useCategories = ({
                     category !== undefined &&
                     !categoriesWithMappingsMap.has(category.id) &&
                     category.id !== DEFAULT_CATEGORY.id
-                if (alreadyIncludedInSuggestedCategories[category.id]) {
+                if (alreadyIncludedInSuggestedCategories.has(category.id)) {
                     return false
                 }
-                alreadyIncludedInSuggestedCategories[category.id] = true
+                alreadyIncludedInSuggestedCategories.add(category.id)
                 return include
             }
         )

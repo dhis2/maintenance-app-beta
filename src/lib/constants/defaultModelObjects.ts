@@ -20,17 +20,15 @@ export const DEFAULT_CATEGORY = {
 export const DEFAULT_CATEGORYCOMBO_SELECT_OPTION = {
     categories: [
         {
-            name: 'default',
+            ...DEFAULT_CATEGORY,
+            displayName: 'default',
             dataDimensionType: 'DISAGGREGATION',
-
             categoryOptions: [
                 {
                     displayName: 'default',
                     id: 'xYerKDKCefk',
                 },
             ],
-            displayName: 'default',
-            id: 'GLevLNI9wkl',
         },
     ],
     dataDimensionType: 'DISAGGREGATION',
