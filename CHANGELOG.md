@@ -1,3 +1,31 @@
+# [0.50.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.49.0...v0.50.0) (2025-07-04)
+
+
+### Features
+
+* dataset notifications form ([#574](https://github.com/dhis2/maintenance-app-beta/issues/574)) ([c8de312](https://github.com/dhis2/maintenance-app-beta/commit/c8de3120bf8a6bda6f4681dc6b3ea42e4083d17e))
+
+# [0.49.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.48.0...v0.49.0) (2025-06-30)
+
+
+### Features
+
+* dataset notifications list ([#573](https://github.com/dhis2/maintenance-app-beta/issues/573)) ([b86b288](https://github.com/dhis2/maintenance-app-beta/commit/b86b288511a4d78c0d875a5c169f0acebed19e9a))
+
+# [0.48.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.3...v0.48.0) (2025-06-26)
+
+
+### Features
+
+* warn if name is not unique ([#568](https://github.com/dhis2/maintenance-app-beta/issues/568)) ([12a5ddc](https://github.com/dhis2/maintenance-app-beta/commit/12a5ddc98922099b8201db1ecaaacfc62f9905f4))
+
+## [0.47.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.2...v0.47.3) (2025-06-24)
+
+
+### Bug Fixes
+
+* positive integer validation and remove attributes from indicator types ([#582](https://github.com/dhis2/maintenance-app-beta/issues/582)) ([7ceb91e](https://github.com/dhis2/maintenance-app-beta/commit/7ceb91e7074c03e169434b9fe1ea9a5b9535505b))
+
 ## [0.47.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.47.1...v0.47.2) (2025-06-16)
 
 
