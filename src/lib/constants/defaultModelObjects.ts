@@ -10,3 +10,28 @@ export const DEFAULT_CATEGORY_COMBO = {
     isDefault: true,
     name: 'default',
 }
+
+export const DEFAULT_CATEGORY = {
+    id: 'GLevLNI9wkl',
+    isDefault: true,
+    name: 'default',
+}
+
+export const DEFAULT_CATEGORYCOMBO_SELECT_OPTION = {
+    categories: [
+        {
+            ...DEFAULT_CATEGORY,
+            displayName: 'default',
+            dataDimensionType: 'DISAGGREGATION',
+            categoryOptions: [
+                {
+                    displayName: 'default',
+                    id: 'xYerKDKCefk',
+                },
+            ],
+        },
+    ],
+    dataDimensionType: 'DISAGGREGATION',
+    displayName: i18n.t('None'),
+    id: 'bjDvmb4bfuf',
+}

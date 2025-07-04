@@ -180,14 +180,6 @@ export const SearchableSingleSelect = ({
                 />
             ))}
 
-            {hasSelectedInOptionList && selected && (
-                <SingleSelectOption
-                    className={classes.invisibleOption}
-                    value={selected}
-                    label=""
-                />
-            )}
-
             {!error && !loading && showEndLoader && (
                 <Loader
                     ref={(ref) => {
