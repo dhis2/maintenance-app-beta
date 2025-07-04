@@ -91,10 +91,7 @@ export const Component = () => {
         <SectionedFormProvider formDescriptor={formDescriptor}>
             <FormBase<DataSetNotificationFormValues>
                 onSubmit={onSubmit}
-                initialValues={
-                    getInitialValuesFromTemplate(
-                        template
-                    ) as unknown as DataSetNotificationFormValues
+                initialValues={template}
                 }
                 validate={validate}
                 valueFormatter={transformFormValues}
