@@ -1,22 +1,24 @@
 import { NoticeBox } from '@dhis2/ui'
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import {
     FormProps,
     FormRenderProps,
     Form as ReactFinalForm,
 } from 'react-final-form'
-import { defaultValueFormatter } from '../../lib/form/'
+import { defaultValueFormatter } from '../../../lib/form/'
+import { EnhancedOnSubmit } from '../../../lib/form/useOnSubmit'
 import {
     PartialAttributeValue,
     getAllAttributeValues,
     useCustomAttributesQuery,
-} from '../../lib/models/attributes'
-import { LoadingSpinner } from '../loading/LoadingSpinner'
+} from '../../../lib/models/attributes'
+import { LoadingSpinner } from '../../loading/LoadingSpinner'
+import { FormBaseProvider, useFormBaseContextValue } from './FormBaseContext'
 
 type MaybeModelWithAttributes = {
     id?: string
     name?: string
-    attributeValues?: PartialAttributeValue[] | undefined
+    attributeValues?: PartialAttributeValue[]
 }
 
 type OwnProps<TValues = Record<string, unknown>> = {
@@ -27,9 +29,12 @@ type OwnProps<TValues = Record<string, unknown>> = {
     // since we're override this and just use children props
     render?: never
     component?: never
+    valueFormatter?: (values: TValues) => TValues
+    onSubmit: EnhancedOnSubmit<TValues>
 }
 
-export type FormBaseProps<TValues> = FormProps<TValues> & OwnProps<TValues>
+export type FormBaseProps<TValues> = Omit<FormProps<TValues>, 'onSubmit'> &
+    OwnProps<TValues>
 
 export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
     initialValues,
@@ -42,6 +47,7 @@ export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
     const customAttributes = useCustomAttributesQuery({
         enabled: includeAttributes,
     })
+    const contextValue = useFormBaseContextValue()
 
     const initialValuesWithAttributes = useMemo(() => {
         if (!includeAttributes || !initialValues) {
@@ -50,11 +56,20 @@ export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
         return {
             ...initialValues,
             attributeValues: getAllAttributeValues(
-                initialValues.attributeValues || [],
-                customAttributes.data || []
+                initialValues.attributeValues ?? [],
+                customAttributes.data ?? []
             ),
         }
     }, [customAttributes.data, initialValues, includeAttributes])
+
+    const ffSubmit: FormProps<TInitialValues>['onSubmit'] = useCallback(
+        (values, form) => {
+            return onSubmit(valueFormatter(values), form, {
+                submitAction: contextValue.submitActionRef.current,
+            })
+        },
+        [onSubmit, valueFormatter, contextValue.submitActionRef]
+    )
 
     if (customAttributes.error) {
         return <NoticeBox error title="Failed to load custom attributes" />
@@ -76,16 +91,18 @@ export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
               )
 
     return (
-        <ReactFinalForm<TInitialValues>
-            validateOnBlur={true}
-            initialValues={initialValuesWithAttributes}
-            onSubmit={(values, form) => onSubmit(valueFormatter(values), form)}
-            validate={(values) =>
-                validate ? validate(valueFormatter(values)) : undefined
-            }
-            {...reactFinalFormProps}
-        >
-            {defaultRender}
-        </ReactFinalForm>
+        <FormBaseProvider value={contextValue}>
+            <ReactFinalForm<TInitialValues>
+                validateOnBlur={true}
+                initialValues={initialValuesWithAttributes}
+                onSubmit={ffSubmit}
+                validate={(values) =>
+                    validate ? validate(valueFormatter(values)) : undefined
+                }
+                {...reactFinalFormProps}
+            >
+                {defaultRender}
+            </ReactFinalForm>
+        </FormBaseProvider>
     )
 }
