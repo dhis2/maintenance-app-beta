@@ -18,7 +18,7 @@ import { FormBaseProvider, useFormBaseContextValue } from './FormBaseContext'
 type MaybeModelWithAttributes = {
     id?: string
     name?: string
-    attributeValues?: PartialAttributeValue[] | undefined
+    attributeValues?: PartialAttributeValue[]
 }
 
 type OwnProps<TValues = Record<string, unknown>> = {
@@ -56,8 +56,8 @@ export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
         return {
             ...initialValues,
             attributeValues: getAllAttributeValues(
-                initialValues.attributeValues || [],
-                customAttributes.data || []
+                initialValues.attributeValues ?? [],
+                customAttributes.data ?? []
             ),
         }
     }, [customAttributes.data, initialValues, includeAttributes])

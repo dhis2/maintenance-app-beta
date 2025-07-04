@@ -23,7 +23,7 @@ export type NavigateToFunction = (
 ) => string | undefined
 
 interface Navigateable {
-    navigateTo?: NavigateToFunction | null | undefined
+    navigateTo?: NavigateToFunction | null
 }
 
 /*
@@ -64,6 +64,7 @@ const defaultNavigateTo: NavigateToFunction = (
                     'No id or uid found in response data for navigateTo function',
                     result
                 )
+                return undefined
             }
             return `/${getSectionPath(section)}/${id}`
         }
