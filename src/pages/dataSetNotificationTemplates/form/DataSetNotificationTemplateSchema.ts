@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { modelFormSchemas } from '../../../lib'
+import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 import { DataSetNotificationTemplate } from '../../../types/generated'
 
 const {
@@ -44,21 +44,29 @@ export const DataSetNotificationTemplateFormSchema =
     DataSetNotificationTemplateBaseSchema.merge(identifiable)
         .merge(withAttributeValues)
         .extend({
-            code: z.string().optional(),
-            description: z.string().optional(),
+            code: z.string().optional().default(''),
+            description: z.string().optional().default(''),
             name: z.string().default(''),
-            dataSetNotificationTrigger: z.nativeEnum(
-                DataSetNotificationTemplate.dataSetNotificationTrigger
-            ),
-            notificationRecipient: z.nativeEnum(
-                DataSetNotificationTemplate.notificationRecipient
-            ),
+            id: z.string().default(''),
+            dataSetNotificationTrigger: z
+                .nativeEnum(
+                    DataSetNotificationTemplate.dataSetNotificationTrigger
+                )
+                .default(
+                    DataSetNotificationTemplate.dataSetNotificationTrigger
+                        .SCHEDULED_DAYS
+                ),
+            notificationRecipient: z
+                .nativeEnum(DataSetNotificationTemplate.notificationRecipient)
+                .default(
+                    DataSetNotificationTemplate.notificationRecipient.USER_GROUP
+                ),
             deliveryChannels: z
                 .array(z.nativeEnum(DeliveryChannel))
                 .default([]),
             messageTemplate: z.string(),
             subjectTemplate: z.string().optional(),
-            relativeScheduledDays: z.union([z.string(), z.number()]).optional(),
+            relativeScheduledDays: z.coerce.number().default(0),
             recipientUserGroup: z
                 .object({
                     id: z.string(),
@@ -73,3 +81,13 @@ export const DataSetNotificationTemplateFormSchema =
 
 export const DataSetNotificationTemplateListSchema =
     DataSetNotificationTemplateBaseSchema.merge(withDefaultListColumns)
+
+export const initialValues = getDefaults(DataSetNotificationTemplateFormSchema)
+
+export const validate = createFormValidate(
+    DataSetNotificationTemplateBaseSchema
+)
+
+export type DataSetNotificationFormValues = z.infer<
+    typeof DataSetNotificationTemplateFormSchema
+>
