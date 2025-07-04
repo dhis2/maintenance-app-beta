@@ -16,15 +16,15 @@ import {
 import { transformFormValues, formDescriptor } from './form/getValues'
 
 export const Component = () => {
-    const onSubmit = useOnSubmitNew<DataSetNotificationFormValues>({
-        section: SECTIONS_MAP.dataSetNotificationTemplate,
-    })
-
+ 
+export const Component = () => {
     return (
         <SectionedFormProvider formDescriptor={formDescriptor}>
-            <FormBase<DataSetNotificationFormValues>
-                onSubmit={onSubmit}
-                initialValues={initialValues as DataSetNotificationFormValues}
+            <FormBase
+                onSubmit={useOnSubmitNew({
+                    section: SECTIONS_MAP.dataSetNotificationTemplate,
+                })}
+                initialValues={initialValues}
                 validate={validate}
                 valueFormatter={transformFormValues}
                 includeAttributes={false}
