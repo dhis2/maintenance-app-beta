@@ -13,9 +13,12 @@ interface FormBaseContextValue {
     setSubmitAction: (action: SubmitAction) => void
 }
 
-const FormBaseContext = createContext<FormBaseContextValue | undefined>(
-    undefined
-)
+const defaultContext: FormBaseContextValue = {
+    submitActionRef: { current: 'saveAndExit' },
+    setSubmitAction: () => {},
+}
+
+const FormBaseContext = createContext<FormBaseContextValue>(defaultContext)
 
 export const useFormBaseContextValue = (): FormBaseContextValue => {
     /*
@@ -59,8 +62,5 @@ export const FormBaseProvider = ({
 
 export const useFormBase = () => {
     const context = useContext(FormBaseContext)
-    if (context === undefined) {
-        throw new Error('useFormBase must be used within a FormBaseProvider')
-    }
     return context
 }
