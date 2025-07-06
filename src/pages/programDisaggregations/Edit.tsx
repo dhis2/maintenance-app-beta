@@ -42,6 +42,8 @@ const programIndicatorFieldFilters = [
     'attributeCombo[id, displayName, dataDimensionType, categories[id, displayName,name,dataDimensionType,categoryOptions[id, displayName]]]',
     'categoryCombo[id, displayName, dataDimensionType, categories[id, displayName,name,dataDimensionType,categoryOptions[id, displayName]]]',
     'aggregateExportDataElement',
+    'aggregateExportCategoryOptionCombo',
+    'aggregateExportAttributeOptionCombo',
 ] as const
 
 export type ProgramData = PickWithFieldFilters<Program, typeof fieldFilters>
@@ -75,8 +77,8 @@ export const Component = () => {
                 resource: 'programIndicators',
                 params: {
                     fields: programIndicatorFieldFilters.concat(),
-                    filter: [`program.id:eq:${id}`, 'categoryMappingIds:gt:0'],
-                    pageSize: 200,
+                    filter: [`program.id:eq:${id}`],
+                    paging: false,
                 },
             },
         ],
