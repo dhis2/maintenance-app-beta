@@ -37,6 +37,7 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     lastUpdated: i18n.t('Last updated'),
     lastUpdatedBy: i18n.t('Last updated by'),
     name: i18n.t('Name'),
+    program: i18n.t('Program'),
     sharing: i18n.t('Sharing'),
     shortName: i18n.t('Short name'),
     user: i18n.t('Owner'), // user refers to the owner of the object
