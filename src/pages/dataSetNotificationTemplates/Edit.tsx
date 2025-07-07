@@ -83,17 +83,15 @@ export const Component = () => {
     }
 
     return (
-        <SectionedFormProvider formDescriptor={formDescriptor}>
-            <FormBase<DataSetNotificationFormValues>
-                onSubmit={onSubmit}
-                initialValues={
-                    template as unknown as DataSetNotificationFormValues
-                }
-                validate={validate}
-                valueFormatter={transformFormValues}
-                includeAttributes={false}
-            >
-                {({ handleSubmit }) => (
+        <FormBase<DataSetNotificationFormValues>
+            onSubmit={onSubmit}
+            initialValues={template as unknown as DataSetNotificationFormValues}
+            validate={validate}
+            valueFormatter={transformFormValues}
+            includeAttributes={false}
+        >
+            {({ handleSubmit }) => (
+                <SectionedFormProvider formDescriptor={formDescriptor}>
                     <SectionedFormLayout
                         sidebar={<DefaultSectionedFormSidebar />}
                     >
@@ -103,8 +101,8 @@ export const Component = () => {
                         </form>
                         <DefaultFormFooter />
                     </SectionedFormLayout>
-                )}
-            </FormBase>
-        </SectionedFormProvider>
+                </SectionedFormProvider>
+            )}
+        </FormBase>
     )
 }

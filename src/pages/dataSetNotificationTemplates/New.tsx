@@ -16,17 +16,17 @@ import { transformFormValues, formDescriptor } from './form/getValues'
 
 export const Component = () => {
     return (
-        <SectionedFormProvider formDescriptor={formDescriptor}>
-            <FormBase
-                onSubmit={useOnSubmitNew({
-                    section: SECTIONS_MAP.dataSetNotificationTemplate,
-                })}
-                initialValues={initialValues}
-                validate={validate}
-                valueFormatter={transformFormValues}
-                includeAttributes={false}
-            >
-                {({ handleSubmit }) => (
+        <FormBase
+            onSubmit={useOnSubmitNew({
+                section: SECTIONS_MAP.dataSetNotificationTemplate,
+            })}
+            initialValues={initialValues}
+            validate={validate}
+            valueFormatter={transformFormValues}
+            includeAttributes={false}
+        >
+            {({ handleSubmit }) => (
+                <SectionedFormProvider formDescriptor={formDescriptor}>
                     <SectionedFormLayout
                         sidebar={<DefaultSectionedFormSidebar />}
                     >
@@ -36,8 +36,8 @@ export const Component = () => {
                         </form>
                         <DefaultFormFooter />
                     </SectionedFormLayout>
-                )}
-            </FormBase>
-        </SectionedFormProvider>
+                </SectionedFormProvider>
+            )}
+        </FormBase>
     )
 }
