@@ -187,8 +187,8 @@ export const modelListViewsConfig = {
     },
     organisationUnit: {
         columns: {
-            available: [DESCRIPTORS.shortName],
-            default: [DESCRIPTORS.name, 'id', 'code', 'lastUpdated'],
+            available: [DESCRIPTORS.shortName, 'id'],
+            default: [DESCRIPTORS.name, 'code', 'lastUpdated'],
         },
         filters: {
             default: [],
@@ -218,8 +218,8 @@ export const modelListViewsConfig = {
     },
     organisationUnitGroup: {
         columns: {
-            available: [DESCRIPTORS.shortName],
-            default: [DESCRIPTORS.name, 'id', 'code', 'lastUpdated'],
+            available: [DESCRIPTORS.shortName, 'id'],
+            default: [DESCRIPTORS.name, 'code', 'lastUpdated'],
         },
         filters: {
             default: [],
@@ -228,8 +228,8 @@ export const modelListViewsConfig = {
     },
     organisationUnitGroupSet: {
         columns: {
-            available: [DESCRIPTORS.shortName],
-            default: [DESCRIPTORS.name, 'id', 'code', 'lastUpdated'],
+            available: [DESCRIPTORS.shortName, 'id'],
+            default: [DESCRIPTORS.name, 'code', 'lastUpdated'],
         },
         filters: {
             default: [],
