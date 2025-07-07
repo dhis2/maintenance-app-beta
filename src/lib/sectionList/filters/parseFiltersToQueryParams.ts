@@ -54,8 +54,17 @@ const filterToQueryParamMap: FilterToQueryParamsMap = {
     dataElement: (value) => inFilter('dataElements.id', value),
     dataElementGroupSet: (value) => inFilter('groupSets.id', value),
     publicAccess: (value) => inFilter('sharing.public', value),
+    indicator: (value) => {
+        return inFilter('indicators.id', value)
+    },
     indicatorGroup: (value) => inFilter('indicatorGroups.id', value),
-    indicatorGroupSet: (value) => inFilter('indicatorGroupSets.id', value),
+    indicatorGroupSet: (value, section) => {
+        if (section.name === SchemaName.indicatorGroup) {
+            // reference fieldname is groupSets
+            return inFilter('groupSets.id', value)
+        }
+        return inFilter('indicatorGroupSets.id', value)
+    },
     program: (value) => inFilter('program.id', value),
 }
 

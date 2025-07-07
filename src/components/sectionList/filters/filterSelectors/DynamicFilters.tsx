@@ -1,6 +1,7 @@
 import React from 'react'
 import { ConfigurableFilterKey } from '../../../../lib'
 import { useFilterKeys } from '../useFilterKeys'
+import { IndicatorFilter } from './IndicatorFilter'
 import {
     AggregationTypeFilter,
     CategoryComboFilter,
@@ -8,7 +9,7 @@ import {
     CategoryOptionFilter,
     CategoryOptionGroupFilter,
     DataDimensionTypeFilter,
-    IndicatorFilter,
+    IndicatorTypeFilter,
     IndicatorGroupFilter,
     IndicatorGroupSetFilter,
     DomainTypeSelectionFilter,
@@ -43,9 +44,10 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
     domainType: DomainTypeSelectionFilter,
     formType: FormTypeFilter,
     ignoreApproval: IgnoreApprovalFilter,
+    indicator: IndicatorFilter,
     indicatorGroup: IndicatorGroupFilter,
     indicatorGroupSet: IndicatorGroupSetFilter,
-    indicatorType: IndicatorFilter,
+    indicatorType: IndicatorTypeFilter,
     program: ProgramFilter,
     publicAccess: PublicAccessFilter,
     valueType: ValueTypeSelectionFilter,

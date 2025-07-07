@@ -314,7 +314,8 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            default: [],
+            default: ['indicator'],
+            available: ['indicatorGroupSet'],
         },
     },
     indicatorGroupSet: {
