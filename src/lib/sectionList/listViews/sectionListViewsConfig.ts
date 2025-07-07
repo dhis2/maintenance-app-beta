@@ -175,7 +175,7 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            default: [],
+            default: ['dataSet'],
         },
     },
     organisationUnit: {
