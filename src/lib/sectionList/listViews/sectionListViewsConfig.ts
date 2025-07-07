@@ -333,7 +333,7 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            default: [],
+            default: ['indicatorGroup'],
         },
     },
     categoryOptionGroupSet: {
@@ -400,7 +400,7 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            default: [],
+            default: ['programIndicator'],
             available: [],
             overrideDefaultAvailable: true,
         },
@@ -416,6 +416,7 @@ export const modelListViewsConfig = {
                 'expression',
                 'displayInForm',
                 'analyticsType',
+                'categoryCombo',
                 { label: i18n.t('Description'), path: 'displayDescription' },
                 { label: i18n.t('Form name'), path: 'displayFormName' },
                 { label: i18n.t('Short name'), path: 'displayShortName' },
@@ -430,7 +431,8 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            default: ['program'],
+            default: ['program', 'programIndicatorGroup'],
+            available: ['categoryCombo'],
         },
     },
 } satisfies SectionListViewConfig<SectionName>

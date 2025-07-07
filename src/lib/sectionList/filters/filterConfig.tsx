@@ -36,6 +36,8 @@ export const filterParamsSchema = z
             z.string().refine((val) => parseAccessString(val) !== null)
         ),
         program: zodArrayIds,
+        programIndicator: zodArrayIds,
+        programIndicatorGroup: zodArrayIds,
         valueType: z.array(z.nativeEnum(DataElement.valueType)),
     })
     .partial()
@@ -65,6 +67,8 @@ export const filterQueryParamType = {
     indicatorGroupSet: CustomDelimitedArrayParam,
     publicAccess: CustomDelimitedArrayParam,
     program: CustomDelimitedArrayParam,
+    programIndicator: CustomDelimitedArrayParam,
+    programIndicatorGroup: CustomDelimitedArrayParam,
     valueType: CustomDelimitedArrayParam,
 } as const satisfies QueryParamsConfigMap
 

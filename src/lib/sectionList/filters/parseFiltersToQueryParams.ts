@@ -1,4 +1,3 @@
-import { dataSetNotificationTrigger } from './../../../types/generated/models'
 import { ModelSection } from '../../../types'
 import { Section } from '../../constants'
 import { SchemaName } from '../../schemas'
@@ -66,6 +65,9 @@ const filterToQueryParamMap: FilterToQueryParamsMap = {
         return inFilter('indicatorGroupSets.id', value)
     },
     program: (value) => inFilter('program.id', value),
+    programIndicator: (value) => inFilter('programIndicators.id', value),
+    programIndicatorGroup: (value) =>
+        inFilter('programIndicatorGroups.id', value),
 }
 
 const getQueryParamForFilter = (

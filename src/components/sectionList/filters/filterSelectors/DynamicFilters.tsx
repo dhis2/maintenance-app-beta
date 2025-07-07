@@ -24,6 +24,8 @@ import {
     CompulsoryFilter,
     DataDimensionFilter,
     ProgramFilter,
+    ProgramIndicatorFilter,
+    ProgramIndicatorGroupFilter,
 } from '.'
 
 type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
@@ -49,6 +51,8 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
     indicatorGroupSet: IndicatorGroupSetFilter,
     indicatorType: IndicatorTypeFilter,
     program: ProgramFilter,
+    programIndicator: ProgramIndicatorFilter,
+    programIndicatorGroup: ProgramIndicatorGroupFilter,
     publicAccess: PublicAccessFilter,
     valueType: ValueTypeSelectionFilter,
 }
