@@ -12,6 +12,7 @@ import {
     getAllAttributeValues,
     useCustomAttributesQuery,
 } from '../../../lib/models/attributes'
+import { RemoveIndexSignature } from '../../../types'
 import { LoadingSpinner } from '../../loading/LoadingSpinner'
 import { FormBaseProvider, useFormBaseContextValue } from './FormBaseContext'
 
@@ -21,19 +22,23 @@ type MaybeModelWithAttributes = {
     attributeValues?: PartialAttributeValue[]
 }
 
-type OwnProps<TValues = Record<string, unknown>> = {
-    initialValues: Partial<TValues> | undefined
+/* Omit doesnt work because the original type FormProps has an index-signature
+   eg. [otherProp: string]: any;
+   We dont really want this, so remove it  */
+type FixedFormProps<TValues> = RemoveIndexSignature<FormProps<TValues>>
+
+type OwnProps<TValues = Record<string, unknown>, TFormattedValues = TValues> = {
+    initialValues: TValues | undefined
     children: FormProps<TValues>['children']
     includeAttributes?: boolean
-    // we cant remove these props due to FormProps definition, but set to never to avoid confusion
-    // since we're override this and just use children props
-    render?: never
-    component?: never
-    valueFormatter?: (values: TValues) => TValues
-    onSubmit: EnhancedOnSubmit<TValues>
+    valueFormatter?: (values: TValues) => any
+    onSubmit: EnhancedOnSubmit<TFormattedValues>
 }
 
-export type FormBaseProps<TValues> = Omit<FormProps<TValues>, 'onSubmit'> &
+export type FormBaseProps<TValues> = Omit<
+    FixedFormProps<TValues>,
+    keyof OwnProps<TValues> | 'render' | 'component'
+> &
     OwnProps<TValues>
 
 export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
