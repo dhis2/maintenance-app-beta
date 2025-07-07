@@ -33,7 +33,7 @@ export const ConfirmationField = () => {
     const fieldLabelWithCode = (
         <span>
             {i18n.t('To confirm the merge, type the confirmation code:')}
-            <span className={css.confirmationCode}>{confirmationCode}</span>
+            <div className={css.confirmationCode}>{confirmationCode}</div>
         </span>
     )
 
