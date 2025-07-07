@@ -564,7 +564,7 @@ describe('Program indicator form tests', () => {
                     matchingExistingElementFilter = undefined,
                 } = {}
             ) => {
-                const attributes = [testCustomAttribute()]
+                const attributes = [testCustomAttribute({ mandatory: false })]
                 const programs = [testProgram(), testProgram(), testProgram()]
                 const legendSets = [testLegendSets(), testLegendSets()]
                 const screen = render(
@@ -708,7 +708,7 @@ describe('Program indicator form tests', () => {
                 `/${section.namePlural}`
             )
         })
-        it('should submit the data', async () => {
+        it('should submit the basic information and configuration data', async () => {
             const programWithoutRegistration = testProgram({
                 programType: 'WITHOUT_REGISTRATION' as Program.programType,
             })
@@ -716,15 +716,9 @@ describe('Program indicator form tests', () => {
             const aShortName = faker.internet.userName()
             const aCode = faker.science.chemicalElement().symbol
             const aDescription = faker.company.buzzPhrase()
-            const aCatOptionExport = faker.internet.userName()
-            const anAttOptionExport = faker.internet.userName()
-            // const anAggDataExport = faker.internet.userName()
-            const anAttribute = faker.internet.userName()
-            const anExpression = faker.finance.routingNumber()
-            const aFilter = faker.finance.routingNumber()
 
             const periodTypes = ['Daily', 'Monthly', 'Yearly']
-            const { screen, legendSets, attributes } = await renderForm({
+            const { screen } = await renderForm({
                 customTestData: {
                     programs: (type: any, params: any) => {
                         if (params.id === programWithoutRegistration.id) {
@@ -745,16 +739,6 @@ describe('Program indicator form tests', () => {
                 },
             })
 
-            const programOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('programs-field'),
-                screen
-            )
-            await userEvent.click(programOptions[0])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('programs-field'),
-                screen
-            )
-
             await uiActions.enterName(aName, screen)
             await uiActions.enterInputFieldValue(
                 'shortName',
@@ -762,19 +746,20 @@ describe('Program indicator form tests', () => {
                 screen
             )
             await uiActions.enterCode(aCode, screen)
-            // await uiActions.pickColor(screen)
             await uiActions.enterInputFieldValue(
                 'description',
                 aDescription,
                 screen
             )
-            const decimalsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('decimals-field'),
+            // await uiActions.pickColor(screen)
+
+            const programOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('programs-field'),
                 screen
             )
-            await userEvent.click(decimalsOptions[2])
+            await userEvent.click(programOptions[0])
             await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('decimals-field'),
+                screen.getByTestId('programs-field'),
                 screen
             )
 
@@ -808,9 +793,295 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
+            const decimalsOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('decimals-field'),
+                screen
+            )
+            await userEvent.click(decimalsOptions[2])
+            await uiActions.closeSingleSelectIfOpen(
+                screen.getByTestId('decimals-field'),
+                screen
+            )
+
+            await uiActions.submitForm(screen)
+            expect(createMock).toHaveBeenCalledTimes(1)
+            expect(createMock).toHaveBeenLastCalledWith(
+                expect.objectContaining({
+                    data: expect.objectContaining({
+                        id: undefined,
+                        program: expect.objectContaining({
+                            id: programWithoutRegistration.id,
+                        }),
+                        name: aName,
+                        shortName: aShortName,
+                        code: aCode,
+                        description: aDescription,
+                        decimals: 1,
+                        aggregationType: 'SUM',
+                        analyticsType: 'EVENT',
+                        displayInForm: false,
+                        aggregateExportAttributeOptionCombo: undefined,
+                        aggregateExportCategoryOptionCombo: undefined,
+                        // aggregateExportDataElement: anAggDataExport,
+                        legendSets: [],
+                        attributeValues: [],
+                        expression: undefined,
+                        filter: undefined,
+                        style: { color: undefined, icon: undefined },
+                        analyticsPeriodBoundaries: [],
+                        orgUnitField: staticOptions.eventDefault.value,
+                    }),
+                })
+            )
+        })
+        it('should submit the expression and a filter', async () => {
+            const programWithoutRegistration = testProgram({
+                programType: 'WITHOUT_REGISTRATION' as Program.programType,
+            })
+            const aName = faker.internet.userName()
+            const aShortName = faker.internet.userName()
+            // const anAggDataExport = faker.internet.userName()
+            const anExpression = faker.finance.routingNumber()
+            const aFilter = faker.finance.routingNumber()
+
+            const periodTypes = ['Daily', 'Monthly', 'Yearly']
+            const { screen } = await renderForm({
+                customTestData: {
+                    programs: (type: any, params: any) => {
+                        if (params.id === programWithoutRegistration.id) {
+                            return {
+                                programStages: [],
+                            }
+                        }
+                        return Promise.resolve({
+                            programs: [
+                                programWithoutRegistration,
+                                testProgram(),
+                            ],
+                        })
+                    },
+                    periodTypes: () => ({
+                        periodTypes: periodTypes.map((pt) => ({ name: pt })),
+                    }),
+                },
+            })
+
+            await uiActions.enterName(aName, screen)
+            await uiActions.enterInputFieldValue(
+                'shortName',
+                aShortName,
+                screen
+            )
+            const programOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('programs-field'),
+                screen
+            )
+            await userEvent.click(programOptions[0])
+            await uiActions.closeSingleSelectIfOpen(
+                screen.getByTestId('programs-field'),
+                screen
+            )
+
+            const analyticsOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('analytics-type-field'),
+                screen
+            )
+            await userEvent.click(analyticsOptions[0])
+            await uiActions.closeSingleSelectIfOpen(
+                screen.getByTestId('analytics-type-field'),
+                screen
+            )
+            await uiActions.enterInputFieldValue(
+                `expression`,
+                anExpression,
+                screen
+            )
+            await uiActions.enterInputFieldValue(`filter`, aFilter, screen)
+
+            await uiActions.submitForm(screen)
+            expect(createMock).toHaveBeenCalledTimes(1)
+            expect(createMock).toHaveBeenLastCalledWith(
+                expect.objectContaining({
+                    data: expect.objectContaining({
+                        id: undefined,
+                        program: expect.objectContaining({
+                            id: programWithoutRegistration.id,
+                        }),
+                        name: aName,
+                        shortName: aShortName,
+                        code: undefined,
+                        decimals: undefined,
+                        aggregationType: undefined,
+                        analyticsType: 'EVENT',
+                        displayInForm: false,
+                        aggregateExportAttributeOptionCombo: undefined,
+                        aggregateExportCategoryOptionCombo: undefined,
+                        // aggregateExportDataElement: anAggDataExport,
+                        legendSets: [],
+                        attributeValues: [],
+                        expression: anExpression,
+                        filter: aFilter,
+                        style: { color: undefined, icon: undefined },
+                        analyticsPeriodBoundaries: [],
+                        orgUnitField: undefined,
+                    }),
+                })
+            )
+        })
+        it('should submit analytics period boundaries', async () => {
+            const programWithoutRegistration = testProgram({
+                programType: 'WITHOUT_REGISTRATION' as Program.programType,
+            })
+            const aName = faker.internet.userName()
+            const aShortName = faker.internet.userName()
+
+            const periodTypes = ['Daily', 'Monthly', 'Yearly']
+            const { screen } = await renderForm({
+                customTestData: {
+                    programs: (type: any, params: any) => {
+                        if (params.id === programWithoutRegistration.id) {
+                            return {
+                                programStages: [],
+                            }
+                        }
+                        return Promise.resolve({
+                            programs: [
+                                programWithoutRegistration,
+                                testProgram(),
+                            ],
+                        })
+                    },
+                    periodTypes: () => ({
+                        periodTypes: periodTypes.map((pt) => ({ name: pt })),
+                    }),
+                },
+            })
+
+            await uiActions.enterName(aName, screen)
+            await uiActions.enterInputFieldValue(
+                'shortName',
+                aShortName,
+                screen
+            )
+            const programOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('programs-field'),
+                screen
+            )
+            await userEvent.click(programOptions[0])
+            await uiActions.closeSingleSelectIfOpen(
+                screen.getByTestId('programs-field'),
+                screen
+            )
+
+            const analyticsOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('analytics-type-field'),
+                screen
+            )
+            await userEvent.click(analyticsOptions[0])
+            await uiActions.closeSingleSelectIfOpen(
+                screen.getByTestId('analytics-type-field'),
+                screen
+            )
+
             await addPeriodBoundary(
                 { target: 0, periodType: 1, type: 1, offset: 5 },
                 periodTypes.length,
+                screen
+            )
+
+            await uiActions.submitForm(screen)
+            expect(createMock).toHaveBeenCalledTimes(1)
+            expect(createMock).toHaveBeenLastCalledWith(
+                expect.objectContaining({
+                    data: expect.objectContaining({
+                        id: undefined,
+                        program: expect.objectContaining({
+                            id: programWithoutRegistration.id,
+                        }),
+                        name: aName,
+                        shortName: aShortName,
+                        code: undefined,
+                        decimals: undefined,
+                        aggregationType: undefined,
+                        analyticsType: 'EVENT',
+                        displayInForm: false,
+                        aggregateExportAttributeOptionCombo: undefined,
+                        aggregateExportCategoryOptionCombo: undefined,
+                        // aggregateExportDataElement: anAggDataExport,
+                        legendSets: [],
+                        attributeValues: [],
+                        expression: undefined,
+                        filter: undefined,
+                        style: { color: undefined, icon: undefined },
+                        analyticsPeriodBoundaries: [
+                            {
+                                boundaryTarget: 'INCIDENT_DATE',
+                                analyticsPeriodBoundaryType:
+                                    'BEFORE_START_OF_REPORTING_PERIOD',
+                                offsetPeriodType: periodTypes[0],
+                                offsetPeriods: 5,
+                            },
+                        ],
+                        orgUnitField: undefined,
+                    }),
+                })
+            )
+        })
+        it('should submit the advanced options', async () => {
+            const programWithoutRegistration = testProgram({
+                programType: 'WITHOUT_REGISTRATION' as Program.programType,
+            })
+            const aName = faker.internet.userName()
+            const aShortName = faker.internet.userName()
+            const aCatOptionExport = faker.internet.userName()
+            const anAttOptionExport = faker.internet.userName()
+            // const anAggDataExport = faker.internet.userName()
+
+            const periodTypes = ['Daily', 'Monthly', 'Yearly']
+            const { screen } = await renderForm({
+                customTestData: {
+                    programs: (type: any, params: any) => {
+                        if (params.id === programWithoutRegistration.id) {
+                            return {
+                                programStages: [],
+                            }
+                        }
+                        return Promise.resolve({
+                            programs: [
+                                programWithoutRegistration,
+                                testProgram(),
+                            ],
+                        })
+                    },
+                    periodTypes: () => ({
+                        periodTypes: periodTypes.map((pt) => ({ name: pt })),
+                    }),
+                },
+            })
+
+            await uiActions.enterName(aName, screen)
+            await uiActions.enterInputFieldValue(
+                'shortName',
+                aShortName,
+                screen
+            )
+            const programOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('programs-field'),
+                screen
+            )
+            await userEvent.click(programOptions[0])
+            await uiActions.closeSingleSelectIfOpen(
+                screen.getByTestId('programs-field'),
+                screen
+            )
+
+            const analyticsOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('analytics-type-field'),
+                screen
+            )
+            await userEvent.click(analyticsOptions[0])
+            await uiActions.closeSingleSelectIfOpen(
+                screen.getByTestId('analytics-type-field'),
                 screen
             )
 
@@ -830,21 +1101,7 @@ describe('Program indicator form tests', () => {
             //     anAggDataExport,
             //     screen
             // )
-            await uiActions.pickOptionInTransfer(
-                'legendSets-field',
-                legendSets[0].displayName,
-                screen
-            )
-            const attributeInput = within(
-                screen.getByTestId(`attribute-${attributes[0].id}`)
-            ).getByRole('textbox') as HTMLInputElement
-            await userEvent.type(attributeInput, anAttribute)
-            await uiActions.enterInputFieldValue(
-                `expression`,
-                anExpression,
-                screen
-            )
-            await uiActions.enterInputFieldValue(`filter`, aFilter, screen)
+
             await uiActions.submitForm(screen)
             expect(createMock).toHaveBeenCalledTimes(1)
             expect(createMock).toHaveBeenLastCalledWith(
@@ -856,18 +1113,196 @@ describe('Program indicator form tests', () => {
                         }),
                         name: aName,
                         shortName: aShortName,
-                        code: aCode,
-                        description: aDescription,
-                        decimals: 1,
-                        aggregationType: 'SUM',
+                        code: undefined,
+                        decimals: undefined,
+                        aggregationType: undefined,
                         analyticsType: 'EVENT',
                         displayInForm: true,
                         aggregateExportAttributeOptionCombo: anAttOptionExport,
                         aggregateExportCategoryOptionCombo: aCatOptionExport,
                         // aggregateExportDataElement: anAggDataExport,
+                        legendSets: [],
+                        attributeValues: [],
+                        expression: undefined,
+                        filter: undefined,
+                        style: { color: undefined, icon: undefined },
+                        analyticsPeriodBoundaries: [],
+                        orgUnitField: undefined,
+                    }),
+                })
+            )
+        })
+        it('should submit the legends', async () => {
+            const programWithoutRegistration = testProgram({
+                programType: 'WITHOUT_REGISTRATION' as Program.programType,
+            })
+            const aName = faker.internet.userName()
+            const aShortName = faker.internet.userName()
+
+            const periodTypes = ['Daily', 'Monthly', 'Yearly']
+            const { screen, legendSets } = await renderForm({
+                customTestData: {
+                    programs: (type: any, params: any) => {
+                        if (params.id === programWithoutRegistration.id) {
+                            return {
+                                programStages: [],
+                            }
+                        }
+                        return Promise.resolve({
+                            programs: [
+                                programWithoutRegistration,
+                                testProgram(),
+                            ],
+                        })
+                    },
+                    periodTypes: () => ({
+                        periodTypes: periodTypes.map((pt) => ({ name: pt })),
+                    }),
+                },
+            })
+
+            await uiActions.enterName(aName, screen)
+            await uiActions.enterInputFieldValue(
+                'shortName',
+                aShortName,
+                screen
+            )
+            const programOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('programs-field'),
+                screen
+            )
+            await userEvent.click(programOptions[0])
+            await uiActions.closeSingleSelectIfOpen(
+                screen.getByTestId('programs-field'),
+                screen
+            )
+
+            const analyticsOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('analytics-type-field'),
+                screen
+            )
+            await userEvent.click(analyticsOptions[0])
+            await uiActions.closeSingleSelectIfOpen(
+                screen.getByTestId('analytics-type-field'),
+                screen
+            )
+            await uiActions.pickOptionInTransfer(
+                'legendSets-field',
+                legendSets[0].displayName,
+                screen
+            )
+            await uiActions.submitForm(screen)
+            expect(createMock).toHaveBeenCalledTimes(1)
+            expect(createMock).toHaveBeenLastCalledWith(
+                expect.objectContaining({
+                    data: expect.objectContaining({
+                        id: undefined,
+                        program: expect.objectContaining({
+                            id: programWithoutRegistration.id,
+                        }),
+                        name: aName,
+                        shortName: aShortName,
+                        code: undefined,
+                        decimals: undefined,
+                        aggregationType: undefined,
+                        analyticsType: 'EVENT',
+                        displayInForm: false,
+                        aggregateExportAttributeOptionCombo: undefined,
+                        aggregateExportCategoryOptionCombo: undefined,
+                        // aggregateExportDataElement: anAggDataExport,
                         legendSets: [
                             expect.objectContaining({ id: legendSets[0].id }),
                         ],
+                        attributeValues: [],
+                        expression: undefined,
+                        filter: undefined,
+                        style: { color: undefined, icon: undefined },
+                        analyticsPeriodBoundaries: [],
+                        orgUnitField: undefined,
+                    }),
+                })
+            )
+        })
+        it('should submit the attributes', async () => {
+            const programWithoutRegistration = testProgram({
+                programType: 'WITHOUT_REGISTRATION' as Program.programType,
+            })
+            const aName = faker.internet.userName()
+            const aShortName = faker.internet.userName()
+            const anAttribute = faker.internet.userName()
+
+            const periodTypes = ['Daily', 'Monthly', 'Yearly']
+            const { screen, attributes } = await renderForm({
+                customTestData: {
+                    programs: (type: any, params: any) => {
+                        if (params.id === programWithoutRegistration.id) {
+                            return {
+                                programStages: [],
+                            }
+                        }
+                        return Promise.resolve({
+                            programs: [
+                                programWithoutRegistration,
+                                testProgram(),
+                            ],
+                        })
+                    },
+                    periodTypes: () => ({
+                        periodTypes: periodTypes.map((pt) => ({ name: pt })),
+                    }),
+                },
+            })
+
+            await uiActions.enterName(aName, screen)
+            await uiActions.enterInputFieldValue(
+                'shortName',
+                aShortName,
+                screen
+            )
+            const programOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('programs-field'),
+                screen
+            )
+            await userEvent.click(programOptions[0])
+            await uiActions.closeSingleSelectIfOpen(
+                screen.getByTestId('programs-field'),
+                screen
+            )
+
+            const analyticsOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('analytics-type-field'),
+                screen
+            )
+            await userEvent.click(analyticsOptions[0])
+            await uiActions.closeSingleSelectIfOpen(
+                screen.getByTestId('analytics-type-field'),
+                screen
+            )
+
+            const attributeInput = within(
+                screen.getByTestId(`attribute-${attributes[0].id}`)
+            ).getByRole('textbox') as HTMLInputElement
+            await userEvent.type(attributeInput, anAttribute)
+            await uiActions.submitForm(screen)
+            expect(createMock).toHaveBeenCalledTimes(1)
+            expect(createMock).toHaveBeenLastCalledWith(
+                expect.objectContaining({
+                    data: expect.objectContaining({
+                        id: undefined,
+                        program: expect.objectContaining({
+                            id: programWithoutRegistration.id,
+                        }),
+                        name: aName,
+                        shortName: aShortName,
+                        code: undefined,
+                        decimals: undefined,
+                        aggregationType: undefined,
+                        analyticsType: 'EVENT',
+                        displayInForm: false,
+                        aggregateExportAttributeOptionCombo: undefined,
+                        aggregateExportCategoryOptionCombo: undefined,
+                        // aggregateExportDataElement: anAggDataExport,
+                        legendSets: [],
                         attributeValues: [
                             {
                                 attribute: expect.objectContaining({
@@ -876,19 +1311,11 @@ describe('Program indicator form tests', () => {
                                 value: anAttribute,
                             },
                         ],
-                        expression: anExpression,
-                        filter: aFilter,
+                        expression: undefined,
+                        filter: undefined,
                         style: { color: undefined, icon: undefined },
-                        analyticsPeriodBoundaries: [
-                            {
-                                boundaryTarget: 'INCIDENT_DATE',
-                                analyticsPeriodBoundaryType:
-                                    'BEFORE_START_OF_REPORTING_PERIOD',
-                                offsetPeriodType: periodTypes[0],
-                                offsetPeriods: 5,
-                            },
-                        ],
-                        orgUnitField: staticOptions.eventDefault.value,
+                        analyticsPeriodBoundaries: [],
+                        orgUnitField: undefined,
                     }),
                 })
             )
