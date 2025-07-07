@@ -54,6 +54,7 @@ const DESCRIPTORS = {
         path: 'displayShortName',
         label: i18n.t('Short name'),
     },
+    formName: { label: i18n.t('Form name'), path: 'displayFormName' },
 } satisfies Record<string, Descriptor>
 
 // This is the default views, and can be overriden per section in modelListViewsConfig below
@@ -132,14 +133,20 @@ export const modelListViewsConfig = {
         columns: {
             default: [
                 DESCRIPTORS.name,
+
                 { label: i18n.t('Form type'), path: 'formType' },
                 { label: i18n.t('Period type'), path: 'periodType' },
                 'lastUpdated',
                 DESCRIPTORS.publicAccess,
             ],
-            available: [DESCRIPTORS.shortName],
+            available: [
+                DESCRIPTORS.shortName,
+                DESCRIPTORS.formName,
+                'categoryCombo',
+            ],
         },
         filters: {
+            available: ['categoryCombo', 'indicator'],
             default: ['formType'],
         },
     },
@@ -274,7 +281,7 @@ export const modelListViewsConfig = {
                 DESCRIPTORS.publicAccess,
                 'lastUpdated',
             ],
-            available: [DESCRIPTORS.shortName],
+            available: [DESCRIPTORS.shortName, 'indicatorGroup'],
         },
         filters: {
             default: ['indicatorType'],
@@ -418,8 +425,8 @@ export const modelListViewsConfig = {
                 'analyticsType',
                 'categoryCombo',
                 { label: i18n.t('Description'), path: 'displayDescription' },
-                { label: i18n.t('Form name'), path: 'displayFormName' },
-                { label: i18n.t('Short name'), path: 'displayShortName' },
+                DESCRIPTORS.formName,
+                DESCRIPTORS.shortName,
                 { label: i18n.t('Owner'), path: 'user.displayName' },
                 { label: i18n.t('Decimals in data output'), path: 'decimals' },
                 'favorite',
