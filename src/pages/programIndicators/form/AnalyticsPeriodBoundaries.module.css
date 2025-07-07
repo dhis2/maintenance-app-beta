@@ -1,0 +1,26 @@
+.analyticsPeriodBoundaryForm {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+}
+
+.analyticsPeriodBoundaryContainer {
+    border: 1px solid var(--colors-grey400);
+    border-radius: var(--spacers-dp4);
+    display: flex;
+    margin-block: var(--spacers-dp8);
+    padding: var(--spacers-dp12);
+    align-items: center;
+    justify-content: space-between;
+    width: 700px;
+}
+
+.analyticsPeriodBoundarySpan {
+    display: flex;
+    margin-block-start: var(--spacers-dp4);
+}
+
+.analyticsPeriodBoundarySpan div {
+    margin-inline-end: var(--spacers-dp8);
+    color: var(--colors-grey700);
+}

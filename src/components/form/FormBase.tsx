@@ -20,7 +20,7 @@ type MaybeModelWithAttributes = {
 }
 
 type OwnProps<TValues = Record<string, unknown>> = {
-    initialValues: TValues | undefined
+    initialValues: Partial<TValues> | undefined
     children: FormProps<TValues>['children']
     includeAttributes?: boolean
     // we cant remove these props due to FormProps definition, but set to never to avoid confusion

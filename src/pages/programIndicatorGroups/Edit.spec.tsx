@@ -137,17 +137,6 @@ describe('Program indicator group edit form tests', () => {
         expect(cancelButton).toBeVisible()
         expect(cancelButton).toHaveAttribute('href', `/${section.namePlural}`)
     })
-    it('should not submit when required values are missing', async () => {
-        const { screen } = await renderForm()
-        await uiActions.clearInputField('name', screen)
-        await uiActions.submitForm(screen)
-        expect(updateMock).not.toHaveBeenCalled()
-        uiAssertions.expectFieldToHaveError(
-            'formfields-name',
-            'Required',
-            screen
-        )
-    })
     it('should submit the data', async () => {
         const { screen, programIndicators, programIndicatorGroup } =
             await renderForm()
@@ -179,12 +168,22 @@ describe('Program indicator group edit form tests', () => {
             })
         )
     })
+    it('should not submit when required values are missing', async () => {
+        const { screen } = await renderForm()
+        await uiActions.clearInputField('name', screen)
+        await uiActions.submitForm(screen)
+        expect(updateMock).not.toHaveBeenCalled()
+        uiAssertions.expectFieldToHaveError(
+            'formfields-name',
+            'Required',
+            screen
+        )
+    })
     it('should do nothing and return to the list view on success when no field is changed', async () => {
         const { screen } = await renderForm()
         await uiActions.submitForm(screen)
         expect(updateMock).not.toHaveBeenCalled()
     })
-
     it('should show an error if name field is too long', async () => {
         const { screen } = await renderForm()
         const longText = randomLongString(231)

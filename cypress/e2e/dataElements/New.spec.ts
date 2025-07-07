@@ -191,7 +191,7 @@ describe('Data elements / New', () => {
             '[data-test="formfields-name-validation"]:contains("Required")'
         ).should('exist')
         cy.get(
-            '[data-test="formfields-shortname-validation"]:contains("Required")'
+            '[data-test="formfields-shortName-validation"]:contains("Required")'
         ).should('exist')
     })
 })

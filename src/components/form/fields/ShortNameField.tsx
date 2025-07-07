@@ -24,7 +24,7 @@ export function ShortNameField({
         <FieldRFF<string | undefined>
             loading={meta.validating}
             component={InputFieldFF}
-            dataTest="formfields-shortname"
+            dataTest="formfields-shortName"
             required
             inputWidth="400px"
             label={i18n.t('{{fieldLabel}} (required)', {

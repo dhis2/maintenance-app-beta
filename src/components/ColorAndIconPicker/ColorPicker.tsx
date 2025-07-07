@@ -39,7 +39,7 @@ export function ColorPicker({
             {showPicker && (
                 <Layer onBackdropClick={() => setShowPicker(false)} translucent>
                     <Popper placement="bottom-start" reference={ref}>
-                        <div className={classes.colors}>
+                        <div className={classes.colors} data-test="colors">
                             <SwatchesPicker
                                 presetColors={AVAILABLE_COLORS}
                                 color={color}

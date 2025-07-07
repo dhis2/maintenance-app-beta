@@ -4,7 +4,7 @@ import { uiActions } from './uiActions'
 
 const expectInputFieldToExist = (
     fieldName: string,
-    value: string,
+    value: string | null,
     screen: RenderResult
 ) => {
     const field = screen.getByTestId(`formfields-${fieldName}`)
@@ -14,14 +14,46 @@ const expectInputFieldToExist = (
     expect(input).toHaveAttribute('name', fieldName)
     expect(input).toHaveAttribute('value', value)
 }
-const expectFieldToHaveError = (
+
+const expectTextAreaFieldToExist = (
+    fieldName: string,
+    value: string | null,
+    screen: RenderResult
+) => {
+    const field = screen.getByTestId(`formfields-${fieldName}`)
+    expect(field).toBeVisible()
+    const input = within(field).getByRole('textbox') as HTMLInputElement
+    expect(input).toBeVisible()
+    expect(input).toHaveAttribute('name', fieldName)
+    if (value) {
+        expect(input).toHaveAttribute('value', value)
+    } else {
+        expect(input).not.toHaveAttribute('value')
+    }
+}
+
+const expectCheckboxFieldToExist = (
+    fieldName: string,
+    checked: boolean,
+    screen: RenderResult
+) => {
+    const field = screen.getByTestId(`formfields-${fieldName}`)
+    const input = within(field).getByRole('checkbox') as HTMLInputElement
+    expect(input).toHaveAttribute('name', fieldName)
+    const svg = field.querySelector('svg') as SVGSVGElement
+    if (checked) {
+        expect(svg).toHaveClass('checked')
+    } else {
+        expect(svg).not.toHaveClass('checked')
+    }
+}
+
+const expectInputFieldToHaveError = (
     fieldTestId: string,
     errorText: string,
     screen: RenderResult
 ) => {
     const field = screen.getByTestId(fieldTestId)
-    const input = within(field).getByRole('textbox') as HTMLInputElement
-    expect(input).toHaveClass('error')
     const error = within(field).getByTestId(`${fieldTestId}-validation`)
     expect(error).toBeVisible()
     expect(error).toHaveTextContent(errorText)
@@ -61,13 +93,49 @@ const expectTransferFieldToExistWithOptions = async (
     })
 }
 
+const expectSelectToExistWithOptions = async (
+    triggeringDiv: HTMLElement,
+    {
+        selected = undefined,
+        options = [],
+        extraSelectedLengthToRemove = 0,
+    }: {
+        selected?: string
+        options: { displayName: string }[]
+        extraSelectedLengthToRemove?: number
+    },
+    screen: RenderResult
+) => {
+    const selectInput = within(triggeringDiv).getByTestId(
+        'dhis2-uicore-select-input'
+    )
+    expect(selectInput).toBeVisible()
+    if (selected) {
+        expect(selectInput).toHaveTextContent(selected)
+    }
+    await userEvent.click(selectInput)
+    const optionsWrapper = await screen.findByTestId(
+        'dhis2-uicore-select-menu-menuwrapper'
+    )
+    expect(optionsWrapper).toBeVisible()
+    const foundOptions = within(optionsWrapper).getAllByTestId(
+        'dhis2-uicore-singleselectoption'
+    )
+    expect(foundOptions).toHaveLength(
+        options.length + extraSelectedLengthToRemove
+    )
+    options.forEach((option, index) => {
+        expect(foundOptions[index]).toHaveTextContent(option.displayName)
+    })
+    await userEvent.click(selectInput)
+}
 const expectInputToErrorWhenExceedsLength = async (
     fieldName: string,
     maxLength: number,
     screen: RenderResult
 ) => {
     await userEvent.click(screen.getByTestId(`formfields-${fieldName}-label`))
-    expectFieldToHaveError(
+    expectInputFieldToHaveError(
         `formfields-${fieldName}`,
         `Please enter a maximum of ${maxLength} characters`,
         screen
@@ -81,11 +149,15 @@ const expectInputToErrorWhenDuplicate = async (
 ) => {
     await uiActions.enterInputFieldValue(fieldName, duplicateText, screen)
     await userEvent.click(screen.getByTestId(`formfields-${fieldName}-label`))
-    expectFieldToHaveError(
+    expectInputFieldToHaveError(
         `formfields-${fieldName}`,
         `This field requires a unique value, please choose another one`,
         screen
     )
+}
+const expectColorAndIconFieldToExist = (screen: RenderResult) => {
+    const field = screen.getByTestId('formfields-colorandicon')
+    expect(field).toBeVisible()
 }
 
 export const uiAssertions = {
@@ -93,8 +165,13 @@ export const uiAssertions = {
         expectInputFieldToExist('name', value, screen),
     expectCodeFieldExist: (value: string, screen: RenderResult) =>
         expectInputFieldToExist('code', value, screen),
-    expectFieldToHaveError,
+    expectInputFieldToExist,
+    expectTextAreaFieldToExist,
+    expectColorAndIconFieldToExist,
+    expectFieldToHaveError: expectInputFieldToHaveError,
     expectTransferFieldToExistWithOptions,
+    expectSelectToExistWithOptions,
+    expectCheckboxFieldToExist,
     expectInputToErrorWhenExceedsLength,
     expectNameToErrorWhenExceedsLength: (
         screen: RenderResult,
