@@ -1,6 +1,6 @@
 import React from 'react'
+import { FormBase } from '../../components'
 import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
-import { FormBase } from '../../components/form/FormBase'
 import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { validate } from './form'
 import { IndicatorTypesFormFields } from './form/IndicatorTypesFormFields'
