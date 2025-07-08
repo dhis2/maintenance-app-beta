@@ -1439,14 +1439,25 @@ describe('Program indicator form tests', () => {
             }
         )
 
-        it('contain all needed field', async () => {
-            const {
-                screen,
-                programs,
-                legendSets,
-                attributes,
-                programIndicator,
-            } = await renderForm()
+        it('contain all the basic information fields', async () => {
+            const { screen, programIndicator } = await renderForm()
+            uiAssertions.expectNameFieldExist(programIndicator.name, screen)
+            uiAssertions.expectInputFieldToExist(
+                'shortName',
+                programIndicator.shortName,
+                screen
+            )
+
+            uiAssertions.expectCodeFieldExist(programIndicator.code, screen)
+            uiAssertions.expectTextAreaFieldToExist(
+                'description',
+                programIndicator.description,
+                screen
+            )
+            uiAssertions.expectColorAndIconFieldToExist(screen)
+        })
+        it('contain all the configuration field', async () => {
+            const { screen, programs, programIndicator } = await renderForm()
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('programs-field'),
                 {
@@ -1456,36 +1467,6 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            uiAssertions.expectNameFieldExist(programIndicator.name, screen)
-            uiAssertions.expectInputFieldToExist(
-                'shortName',
-                programIndicator.shortName,
-                screen
-            )
-            uiAssertions.expectCodeFieldExist(programIndicator.code, screen)
-            uiAssertions.expectColorAndIconFieldToExist(screen)
-            uiAssertions.expectTextAreaFieldToExist(
-                'description',
-                programIndicator.description,
-                screen
-            )
-            const expectedDecimalsOptions = [
-                { displayName: '<No value>' },
-                { displayName: '0' },
-                { displayName: '1' },
-                { displayName: '2' },
-                { displayName: '3' },
-                { displayName: '4' },
-                { displayName: '5' },
-            ]
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('decimals-field'),
-                {
-                    selected: programIndicator.decimals,
-                    options: expectedDecimalsOptions,
-                },
-                screen
-            )
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('aggregation-type-field'),
                 {
@@ -1501,6 +1482,7 @@ describe('Program indicator form tests', () => {
                 },
                 screen
             )
+
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('analytics-type-field'),
                 {
@@ -1528,6 +1510,40 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
+            const expectedDecimalsOptions = [
+                { displayName: '<No value>' },
+                { displayName: '0' },
+                { displayName: '1' },
+                { displayName: '2' },
+                { displayName: '3' },
+                { displayName: '4' },
+                { displayName: '5' },
+            ]
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('decimals-field'),
+                {
+                    selected: programIndicator.decimals,
+                    options: expectedDecimalsOptions,
+                },
+                screen
+            )
+        })
+        it('contain expression and filter field', async () => {
+            const { screen, programIndicator } = await renderForm()
+            uiAssertions.expectTextAreaFieldToExist(
+                'expression',
+                programIndicator.expression,
+                screen
+            )
+            uiAssertions.expectTextAreaFieldToExist(
+                'filter',
+                programIndicator.filter,
+                screen
+            )
+        })
+        it('contain the period boundaries', async () => {
+            const { screen } = await renderForm()
+
             const boundariesList = screen.getAllByTestId(
                 'analytics-period-boundary'
             )
@@ -1538,6 +1554,9 @@ describe('Program indicator form tests', () => {
                 'Type: Before start of reporting period'
             )
             expect(boundariesList[0]).toHaveTextContent('Period: Daily')
+        })
+        it('contain all the advance options fields', async () => {
+            const { screen, programIndicator } = await renderForm()
 
             uiAssertions.expectCheckboxFieldToExist(
                 'displayInForm',
@@ -1559,12 +1578,18 @@ describe('Program indicator form tests', () => {
             //     '',
             //     screen
             // )
-            expect(screen.getByTestId('add-boundary-button')).toBeVisible()
+        })
+        it('contain the legend transfer', async () => {
+            const { screen, legendSets } = await renderForm()
+
             await uiAssertions.expectTransferFieldToExistWithOptions(
                 'legendSets-field',
                 { lhs: [legendSets[1]], rhs: [legendSets[0]] },
                 screen
             )
+        })
+        it('contain all the attributes fields ', async () => {
+            const { screen, attributes, programIndicator } = await renderForm()
             attributes.forEach((attribute: { id: string }) => {
                 const attributeInput = screen.getByTestId(
                     `attribute-${attribute.id}`
