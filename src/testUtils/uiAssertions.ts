@@ -22,13 +22,13 @@ const expectTextAreaFieldToExist = (
 ) => {
     const field = screen.getByTestId(`formfields-${fieldName}`)
     expect(field).toBeVisible()
-    const input = within(field).getByRole('textbox') as HTMLInputElement
-    expect(input).toBeVisible()
-    expect(input).toHaveAttribute('name', fieldName)
+    const textArea = within(field).getByRole('textbox') as HTMLInputElement
+    expect(textArea).toBeVisible()
+    expect(textArea).toHaveAttribute('name', fieldName)
     if (value) {
-        expect(input).toHaveAttribute('value', value)
+        expect(textArea).toHaveValue(value)
     } else {
-        expect(input).not.toHaveAttribute('value')
+        expect(textArea).toHaveValue('')
     }
 }
 
