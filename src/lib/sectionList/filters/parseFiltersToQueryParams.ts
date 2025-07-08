@@ -40,17 +40,34 @@ const filterToQueryParamMap: FilterToQueryParamsMap = {
         return inFilter('categoryCombo.id', value)
     },
     categoryOptionGroup: (value) => inFilter('categoryOptionGroups.id', value),
-    dataSet: (value, section) =>
-        section.name === SchemaName.dataElement
-            ? inFilter('dataSetElements.dataSet.id', value)
-            : defaultFilter('dataSet', value),
+    dataSet: (value, section) => {
+        if (section.name === SchemaName.dataElement) {
+            return inFilter('dataSetElements.dataSet.id', value)
+        }
+        if (section.name === SchemaName.dataSetNotificationTemplate) {
+            return inFilter('dataSets.id', value)
+        }
+        return defaultFilter('dataSet', value)
+    },
     dataElementGroup: (value) => inFilter('dataElementGroups.id', value),
     dataElement: (value) => inFilter('dataElements.id', value),
     dataElementGroupSet: (value) => inFilter('groupSets.id', value),
     publicAccess: (value) => inFilter('sharing.public', value),
+    indicator: (value) => {
+        return inFilter('indicators.id', value)
+    },
     indicatorGroup: (value) => inFilter('indicatorGroups.id', value),
-    indicatorGroupSet: (value) => inFilter('indicatorGroupSets.id', value),
+    indicatorGroupSet: (value, section) => {
+        if (section.name === SchemaName.indicatorGroup) {
+            // reference fieldname is groupSets
+            return inFilter('groupSets.id', value)
+        }
+        return inFilter('indicatorGroupSets.id', value)
+    },
     program: (value) => inFilter('program.id', value),
+    programIndicator: (value) => inFilter('programIndicators.id', value),
+    programIndicatorGroup: (value) =>
+        inFilter('programIndicatorGroups.id', value),
 }
 
 const getQueryParamForFilter = (

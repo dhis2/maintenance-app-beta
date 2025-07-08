@@ -4,16 +4,16 @@ import { useSectionListFilter } from '../../../../lib'
 import { createFilterDataQuery } from './createFilterDataQuery'
 import { ModelFilterSelect } from './ModelFilter'
 
-const query = createFilterDataQuery('indicators')
+const query = createFilterDataQuery('indicatorTypes')
 
-export const IndicatorFilter = () => {
-    const [filter, setFilter] = useSectionListFilter('indicator')
+export const IndicatorTypeFilter = () => {
+    const [filter, setFilter] = useSectionListFilter('indicatorType')
 
     const selected = filter?.[0]
 
     return (
         <ModelFilterSelect
-            placeholder={i18n.t('Indicator')}
+            placeholder={i18n.t('Indicator Type')}
             query={query}
             selected={selected}
             onChange={({ selected }) =>

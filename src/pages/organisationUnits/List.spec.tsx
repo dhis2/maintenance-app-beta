@@ -145,41 +145,35 @@ describe('Organisation unit list', () => {
         expect(tableRows.length).toBe(6)
 
         expect(tableRows[0]).toHaveTextContent('Name')
-        expect(tableRows[0]).toHaveTextContent('Id')
         expect(tableRows[0]).toHaveTextContent('Code')
         expect(tableRows[0]).toHaveTextContent('Last updated')
         expect(tableRows[0]).toHaveTextContent('Actions')
 
         expect(tableRows[1]).toHaveTextContent(rootOrg1.displayName!)
-        expect(tableRows[1]).toHaveTextContent(rootOrg1.id!)
         expect(tableRows[1]).toHaveTextContent(rootOrg1.code!)
         expect(tableRows[1]).toHaveTextContent(
             getRelativeTime(new Date(rootOrg1.lastUpdated!))
         )
 
         expect(tableRows[2]).toHaveTextContent(root1Level2Child1.displayName!)
-        expect(tableRows[2]).toHaveTextContent(root1Level2Child1.id!)
         expect(tableRows[2]).toHaveTextContent(root1Level2Child1.code!)
         expect(tableRows[2]).toHaveTextContent(
             getRelativeTime(new Date(root1Level2Child1.lastUpdated!))
         )
 
         expect(tableRows[3]).toHaveTextContent(root1Level2Child2.displayName!)
-        expect(tableRows[3]).toHaveTextContent(root1Level2Child2.id!)
         expect(tableRows[3]).toHaveTextContent(root1Level2Child2.code!)
         expect(tableRows[3]).toHaveTextContent(
             getRelativeTime(new Date(root1Level2Child2.lastUpdated!))
         )
 
         expect(tableRows[4]).toHaveTextContent(rootOrg2.displayName!)
-        expect(tableRows[4]).toHaveTextContent(rootOrg2.id!)
         expect(tableRows[4]).toHaveTextContent(rootOrg2.code!)
         expect(tableRows[4]).toHaveTextContent(
             getRelativeTime(new Date(rootOrg2.lastUpdated!))
         )
 
         expect(tableRows[5]).toHaveTextContent(root2Level3Child.displayName!)
-        expect(tableRows[5]).toHaveTextContent(root2Level3Child.id!)
         expect(tableRows[5]).toHaveTextContent(root2Level3Child.code!)
         expect(tableRows[5]).toHaveTextContent(
             getRelativeTime(new Date(root2Level3Child.lastUpdated!))
