@@ -6,23 +6,31 @@ import { provider } from './pact'
 import {zodToPactMatchers} from "./zodToPactMatchers";
 import {categoryListSchema} from "../pages/categories/form/categorySchema";
 import {ZodError} from "zod";
+import {pickFromSchema} from "./pickFromSchema";
 
 
-const  withAllFields= zodToPactMatchers(categoryListSchema, true);
-const  withoutOptional = zodToPactMatchers(categoryListSchema, false);
+const fields = ['displayName','dataDimensionType','sharing[public]','lastUpdated','id','access','displayName']
+const expectedResponseSchema = pickFromSchema(categoryListSchema, fields)
+const expectedResponse= zodToPactMatchers(expectedResponseSchema, true)
 
 test.before(async () => {
     provider
         .given("a full category list exists")
-        .uponReceiving("a request for full categories")
+        .uponReceiving("a request for categories")
         .withRequest({
             method: "GET",
-            path: "/categories",
+            query: {
+                page: "1",
+                pageSize: "20",
+                filter: "name:ne:default",
+                fields: "displayName,dataDimensionType,sharing[public],lastUpdated,id,access,displayName",
+            },
+            path: "/categories"
         })
         .willRespondWith({
             status: 200,
             headers: { "Content-Type": "application/json; charset=utf-8" },
-            body: eachLike(withAllFields), // <-- includes optional fields
+            body: eachLike(expectedResponse),
         })
 
     // Slim payload with only required fields
@@ -41,7 +49,7 @@ test.before(async () => {
 
 })
 
-test('returns orders', async (t) => {
+test('returns categories', async (t) => {
     await provider.executeTest(async (mockserver) => {
         process.env.API_PORT = mockserver.port.toString()
         const categories = await fetchCategories()
