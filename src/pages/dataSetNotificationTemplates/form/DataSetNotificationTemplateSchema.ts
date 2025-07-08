@@ -2,20 +2,10 @@ import { z } from 'zod'
 import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 import { DataSetNotificationTemplate } from '../../../types/generated'
 
-const {
-    identifiable,
-    withAttributeValues,
-    withDefaultListColumns,
-    referenceCollection,
-} = modelFormSchemas
+const { identifiable, withDefaultListColumns, referenceCollection } =
+    modelFormSchemas
 
-export enum DeliveryChannel {
-    SMS = 'SMS',
-    EMAIL = 'EMAIL',
-    HTTP = 'HTTP',
-}
-
-const DataSetNotificationTemplateBaseSchema = z.object({
+const dataSetNotificationTemplateBaseSchema = z.object({
     code: z.string().optional(),
     description: z.string().optional(),
     dataSetNotificationTrigger: z.nativeEnum(
@@ -24,7 +14,7 @@ const DataSetNotificationTemplateBaseSchema = z.object({
     notificationRecipient: z.nativeEnum(
         DataSetNotificationTemplate.notificationRecipient
     ),
-    deliveryChannels: z.array(z.nativeEnum(DeliveryChannel)).default([]),
+    deliveryChannels: z.array(z.enum(['SMS', 'EMAIL', 'HTTP'])).default([]),
     messageTemplate: z.string(),
     subjectTemplate: z.string().optional(),
     relativeScheduledDays: z.union([z.string(), z.number()]).optional(),
@@ -40,54 +30,70 @@ const DataSetNotificationTemplateBaseSchema = z.object({
         .optional(),
 })
 
-export const DataSetNotificationTemplateFormSchema =
-    DataSetNotificationTemplateBaseSchema.merge(identifiable)
-        .merge(withAttributeValues)
-        .extend({
-            code: z.string().optional().default(''),
-            description: z.string().optional().default(''),
-            name: z.string().default(''),
-            id: z.string().default(''),
-            dataSetNotificationTrigger: z
-                .nativeEnum(
-                    DataSetNotificationTemplate.dataSetNotificationTrigger
-                )
-                .default(
-                    DataSetNotificationTemplate.dataSetNotificationTrigger
-                        .SCHEDULED_DAYS
-                ),
-            notificationRecipient: z
-                .nativeEnum(DataSetNotificationTemplate.notificationRecipient)
-                .default(
-                    DataSetNotificationTemplate.notificationRecipient.USER_GROUP
-                ),
-            deliveryChannels: z
-                .array(z.nativeEnum(DeliveryChannel))
-                .default([]),
-            messageTemplate: z.string(),
-            subjectTemplate: z.string().optional(),
-            relativeScheduledDays: z.coerce.number().default(0),
-            recipientUserGroup: z
-                .object({
-                    id: z.string(),
-                    displayName: z.string().optional(),
-                })
-                .optional(),
-            dataSets: referenceCollection.default([]),
-            sendStrategy: z
-                .nativeEnum(DataSetNotificationTemplate.sendStrategy)
-                .optional(),
-        })
+export const dataSetNotificationTemplateFormSchema =
+    dataSetNotificationTemplateBaseSchema.merge(identifiable).extend({
+        code: z.string().optional(),
+        description: z.string().optional(),
+        dataSetNotificationTrigger: z
+            .nativeEnum(DataSetNotificationTemplate.dataSetNotificationTrigger)
+            .default(
+                DataSetNotificationTemplate.dataSetNotificationTrigger
+                    .SCHEDULED_DAYS
+            ),
+        notificationRecipient: z
+            .nativeEnum(DataSetNotificationTemplate.notificationRecipient)
+            .default(
+                DataSetNotificationTemplate.notificationRecipient.USER_GROUP
+            ),
+        deliveryChannels: z.array(z.enum(['SMS', 'EMAIL', 'HTTP'])).default([]),
+        messageTemplate: z.string(),
+        subjectTemplate: z.string().optional(),
+        relativeScheduledDays: z.coerce.number().default(0),
+        recipientUserGroup: z
+            .object({
+                id: z.string(),
+                displayName: z.string().optional(),
+            })
+            .optional(),
+        dataSets: referenceCollection.default([]),
+        sendStrategy: z
+            .nativeEnum(DataSetNotificationTemplate.sendStrategy)
+            .optional(),
+    })
 
 export const DataSetNotificationTemplateListSchema =
-    DataSetNotificationTemplateBaseSchema.merge(withDefaultListColumns)
+    dataSetNotificationTemplateBaseSchema.merge(withDefaultListColumns)
 
-export const initialValues = getDefaults(DataSetNotificationTemplateFormSchema)
-
-export const validate = createFormValidate(
-    DataSetNotificationTemplateBaseSchema
-)
+export const initialValues = getDefaults(dataSetNotificationTemplateFormSchema)
 
 export type DataSetNotificationFormValues = z.infer<
-    typeof DataSetNotificationTemplateFormSchema
+    typeof dataSetNotificationTemplateFormSchema
 >
+
+export const validate = createFormValidate(
+    dataSetNotificationTemplateBaseSchema
+)
+
+/**
+ * Converts form values back to API payload
+ */
+export const transformFormValues = (
+    values: Partial<DataSetNotificationFormValues>
+) => {
+    const {
+        recipientUserGroup,
+        relativeScheduledDays,
+        dataSets = [],
+        ...rest
+    } = values
+
+    return {
+        ...rest,
+        relativeScheduledDays: Number(relativeScheduledDays),
+        recipientUserGroup:
+            rest.notificationRecipient === 'USER_GROUP' && recipientUserGroup
+                ? { id: recipientUserGroup.id }
+                : undefined,
+        dataSets: dataSets.map(({ id }) => ({ id })),
+    }
+}

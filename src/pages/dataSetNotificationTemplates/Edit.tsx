@@ -17,13 +17,16 @@ import {
     useOnSubmitEdit,
     SECTIONS_MAP,
 } from '../../lib'
-import { DataSetNotificationTemplate } from '../../types/generated'
+import {
+    DataSetNotificationTemplate,
+    PickWithFieldFilters,
+} from '../../types/generated'
 import { DataSetNotificationsFormFields } from './form/DataSetNotificationsFormFields'
 import {
-    DataSetNotificationFormValues,
+    transformFormValues,
     validate,
 } from './form/DataSetNotificationTemplateSchema'
-import { transformFormValues, formDescriptor } from './form/getValues'
+import { formDescriptor } from './form/formDescriptor'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -35,10 +38,15 @@ const fieldFilters = [
     'dataSetNotificationTrigger',
     'relativeScheduledDays',
     'sendStrategy',
-    'recipientUserGroup',
+    'recipientUserGroup[id,displayName]',
     'deliveryChannels',
     'dataSets[id,name,displayName]',
-]
+] as const
+
+type DataSetNotificationResult = PickWithFieldFilters<
+    DataSetNotificationTemplate,
+    typeof fieldFilters
+>
 
 export const Component = () => {
     const { id: templateId } = useParams<{ id: string }>()
@@ -46,7 +54,6 @@ export const Component = () => {
 
     const {
         data: template,
-        isLoading,
         isError,
         refetch,
     } = useQuery({
@@ -58,11 +65,11 @@ export const Component = () => {
                 },
             },
         ],
-        queryFn: queryFn<DataSetNotificationTemplate>,
+        queryFn: queryFn<DataSetNotificationResult>,
         enabled: !!templateId,
     })
 
-    const onSubmit = useOnSubmitEdit<DataSetNotificationFormValues>({
+    const onSubmit = useOnSubmitEdit({
         modelId: templateId as string,
         section: SECTIONS_MAP.dataSetNotificationTemplate,
     })
@@ -78,16 +85,13 @@ export const Component = () => {
             </NoticeBox>
         )
     }
-    if (isLoading || !template) {
-        return null
-    }
 
     return (
-        <FormBase<DataSetNotificationFormValues>
-            onSubmit={onSubmit}
-            initialValues={template as unknown as DataSetNotificationFormValues}
-            validate={validate}
+        <FormBase
             valueFormatter={transformFormValues}
+            onSubmit={onSubmit}
+            initialValues={template}
+            validate={validate}
             includeAttributes={false}
         >
             {({ handleSubmit }) => (
