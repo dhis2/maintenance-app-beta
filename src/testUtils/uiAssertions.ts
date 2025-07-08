@@ -98,11 +98,9 @@ const expectSelectToExistWithOptions = async (
     {
         selected = undefined,
         options = [],
-        extraSelectedLengthToRemove = 0,
     }: {
         selected?: string
         options: { displayName: string }[]
-        extraSelectedLengthToRemove?: number
     },
     screen: RenderResult
 ) => {
@@ -121,9 +119,7 @@ const expectSelectToExistWithOptions = async (
     const foundOptions = within(optionsWrapper).getAllByTestId(
         'dhis2-uicore-singleselectoption'
     )
-    expect(foundOptions).toHaveLength(
-        options.length + extraSelectedLengthToRemove
-    )
+    expect(foundOptions).toHaveLength(options.length)
     options.forEach((option, index) => {
         expect(foundOptions[index]).toHaveTextContent(option.displayName)
     })
