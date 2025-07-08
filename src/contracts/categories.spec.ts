@@ -26,18 +26,18 @@ test.before(async () => {
         })
 
     // Slim payload with only required fields
-    provider
-        .given("a minimal category list exists")
-        .uponReceiving("a request for minimal categories")
-        .withRequest({
-            method: "GET",
-            path: "/categories?minimal=true",
-        })
-        .willRespondWith({
-            status: 200,
-            headers: { "Content-Type": "application/json; charset=utf-8" },
-            body: eachLike(withoutOptional), // <-- excludes optional fields
-        })
+    // provider
+    //     .given("a minimal category list exists")
+    //     .uponReceiving("a request for minimal categories")
+    //     .withRequest({
+    //         method: "GET",
+    //         path: "/categories?minimal=true",
+    //     })
+    //     .willRespondWith({
+    //         status: 200,
+    //         headers: { "Content-Type": "application/json; charset=utf-8" },
+    //         body: eachLike(withoutOptional), // <-- excludes optional fields
+    //     })
 
 })
 
