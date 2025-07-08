@@ -3,6 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import { useQueryClient } from '@tanstack/react-query'
 import { FormApi, SubmissionErrors } from 'final-form'
 import { useCallback, useMemo } from 'react'
+import { To } from 'react-router-dom'
 import { ModelSection } from '../../types'
 import { IdentifiableObject } from '../../types/generated'
 import { getSectionPath, useNavigateWithSearchState } from '../routeUtils'
@@ -16,14 +17,14 @@ import { usePatchModel } from './usePatchModel'
 
 export type SubmitAction = 'save' | 'saveAndExit'
 
-export type NavigateToFunction = (
-    section: ModelSection,
-    submitAction?: SubmitAction,
+export type GetToFunction = (options: {
+    section: ModelSection
+    submitAction?: SubmitAction
     responseData?: unknown
-) => string | undefined
+}) => To | undefined
 
 interface Navigateable {
-    navigateTo?: NavigateToFunction | null
+    navigateTo?: GetToFunction | null
 }
 
 /*
@@ -38,11 +39,11 @@ export type EnhancedOnSubmit<TValues> = (
     }
 ) => SubmissionErrors | Promise<SubmissionErrors> | void
 
-const defaultNavigateTo: NavigateToFunction = (
+const defaultNavigateTo: GetToFunction = ({
     section,
     submitAction = 'saveAndExit',
-    result
-) => {
+    responseData,
+}) => {
     if (submitAction === 'saveAndExit') {
         return `/${getSectionPath(section)}`
     }
@@ -50,19 +51,20 @@ const defaultNavigateTo: NavigateToFunction = (
     if (submitAction === 'save') {
         // check if we created a model - if so navigate to that form when saving
         if (
-            result &&
-            typeof result === 'object' &&
-            'httpStatusCode' in result &&
-            result.httpStatusCode === 201 &&
-            'response' in result
+            responseData &&
+            typeof responseData === 'object' &&
+            'httpStatusCode' in responseData &&
+            responseData.httpStatusCode === 201 &&
+            'response' in responseData
         ) {
             const id =
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                (result as any).response.id || (result as any).response.uid
+                (responseData as any).response.id ||
+                (responseData as any).response.uid
             if (!id) {
                 console.error(
                     'No id or uid found in response data for navigateTo function',
-                    result
+                    responseData
                 )
                 return undefined
             }
@@ -96,7 +98,7 @@ export const useOnEditCompletedSuccessfully = (section: ModelSection) => {
             submitAction = 'saveAndExit',
         }: {
             withChanges: boolean
-            navigateTo?: NavigateToFunction | null
+            navigateTo?: GetToFunction | null
             submitAction?: SubmitAction
             response?: any
         }) => {
@@ -115,7 +117,11 @@ export const useOnEditCompletedSuccessfully = (section: ModelSection) => {
             })
 
             if (navigateTo) {
-                const navTo = navigateTo(section, submitAction, response?.data)
+                const navTo = navigateTo({
+                    section,
+                    submitAction,
+                    responseData: response?.data,
+                })
                 if (navTo) {
                     navigate(navTo)
                 }
@@ -230,11 +236,11 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
                     : options.navigateTo
 
             if (navigateTo) {
-                const navTo = navigateTo(
+                const navTo = navigateTo({
                     section,
-                    options?.submitAction,
-                    response.data
-                )
+                    submitAction: options?.submitAction,
+                    responseData: response.data,
+                })
                 if (navTo) {
                     navigate(navTo)
                 }
