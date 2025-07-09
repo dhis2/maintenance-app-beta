@@ -1,0 +1,18 @@
+.sectionsWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.sectionsWrapper > div:first-child {
+    overflow-y: auto;
+    padding-bottom: 80px;
+    flex-grow: 1;
+}
+
+.actionsInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp4);
+    color: var(--colors-grey600);
+}

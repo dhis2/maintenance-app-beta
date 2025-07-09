@@ -46,11 +46,15 @@ export type SectionFormValues = PickWithFieldFilters<
 export type DataSetSectionFormProps = {
     section?: SectionFormValues
     onCancel?: () => void
+    notAssignedDataElements: DisplayableModel[] //Partial<SectionFormValues['dataSet']>
+    availableIndicators: DisplayableModel[] //Partial<SectionFormValues['dataSet']>
 } & Pick<FormBaseProps<SectionFormValues>, 'onSubmit'>
 export const DataSetSectionForm = ({
     section,
     onSubmit,
     onCancel,
+    notAssignedDataElements,
+    availableIndicators,
 }: DataSetSectionFormProps) => {
     const dataSetId = useParams().id as string
     const initialValues = useMemo(() => {
@@ -75,7 +79,11 @@ export const DataSetSectionForm = ({
             onSubmit={onSubmit}
             valueFormatter={valueFormatter}
         >
-            <DataSetSectionFormContents onCancel={onCancel} />
+            <DataSetSectionFormContents
+                onCancel={onCancel}
+                notAssignedDataElements={notAssignedDataElements}
+                availableIndicators={availableIndicators}
+            />
             <DefaultFormErrorNotice />
         </FormBase>
     )
@@ -131,9 +139,13 @@ export const EditDataSetSectionForm = ({
 export const NewDataSetSectionForm = ({
     onCancel,
     onSubmitted: onSubmit,
+    notAssignedDataElements,
+    availableIndicators,
 }: {
     onCancel?: () => void
     onSubmitted?: (values: SectionFormValues) => void
+    notAssignedDataElements: DisplayableModel[] //Partial<SectionFormValues['dataSet']>
+    availableIndicators: DisplayableModel[] //Partial<SectionFormValues['dataSet']>
 }) => {
     const onDefaultSubmit = useOnSubmitNew({
         section: dataSetSectionSchemaSection,
@@ -154,22 +166,33 @@ export const NewDataSetSectionForm = ({
             section={undefined}
             onSubmit={onFormSubmit}
             onCancel={onCancel}
+            notAssignedDataElements={notAssignedDataElements}
+            availableIndicators={availableIndicators}
         />
     )
 }
 
 export const EditorNewDataSetSectionForm = ({
     section,
+    notAssignedDataElements,
+    availableIndicators,
     onCancel,
     onSubmitted: onSubmit,
 }: {
     section: DisplayableModel | null
+    notAssignedDataElements: DisplayableModel[] //Partial<SectionFormValues['dataSet']>
+    availableIndicators: DisplayableModel[] //Partial<SectionFormValues['dataSet']>
     onCancel?: () => void
     onSubmitted?: (values: SectionFormValues) => void
 }) => {
     if (section === null) {
         return (
-            <NewDataSetSectionForm onSubmitted={onSubmit} onCancel={onCancel} />
+            <NewDataSetSectionForm
+                onSubmitted={onSubmit}
+                onCancel={onCancel}
+                notAssignedDataElements={notAssignedDataElements}
+                availableIndicators={availableIndicators}
+            />
         )
     }
 

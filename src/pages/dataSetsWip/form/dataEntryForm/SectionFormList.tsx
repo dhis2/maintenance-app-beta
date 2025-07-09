@@ -29,9 +29,13 @@ export const SectionFormSectionsList = () => {
     // use null as open, but new model
     const isSectionFormOpen = !!sectionFormOpen || sectionFormOpen === null
     const sections = useDataSetField('sections').input.value
+    const dataElements = useDataSetField('dataSetElements').input.value
+    const availableIndicators = useDataSetField('indicators').input.value
     const sectionFieldArray = useFieldArray<Section>('sections').fields
-    console.log({ sectionFieldArray })
     const sectionsArray = sections || []
+    const notAssignedDataElements = dataElements
+        .filter((de) => !de.dataSet?.id)
+        .map((de) => de.dataElement)
 
     return (
         <div className={css.sectionsList}>
@@ -41,6 +45,8 @@ export const SectionFormSectionsList = () => {
             >
                 {isSectionFormOpen && (
                     <EditorNewDataSetSectionForm
+                        notAssignedDataElements={notAssignedDataElements}
+                        availableIndicators={availableIndicators}
                         section={sectionFormOpen}
                         onCancel={() => setSectionFormOpen(undefined)}
                         onSubmitted={() => setSectionFormOpen(undefined)}

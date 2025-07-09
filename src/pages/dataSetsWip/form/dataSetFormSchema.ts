@@ -34,6 +34,7 @@ const dataSetBaseSchema = z.object({
 export const sectionFormSchema = identifiable.extend({
     description: z.string().optional(),
     dataElements: z.array(z.object({ id: z.string() })),
+    indicators: z.array(z.object({ id: z.string() })),
 })
 
 export const dataSetFormSchema = identifiable
@@ -45,8 +46,11 @@ export const dataSetFormSchema = identifiable
         dataSetElements: z
             .array(
                 z.object({
-                    dataElement: modelReference,
+                    dataElement: modelReference.extend({
+                        displayName: z.string(),
+                    }),
                     categoryCombo: modelReference.optional(),
+                    dataSet: modelReference.optional(),
                 })
             )
             .default([]),
@@ -100,7 +104,9 @@ export const dataSetFormSchema = identifiable
         compulsoryDataElementOperands: z
             .array(
                 z.object({
-                    dataElement: modelReference,
+                    dataElement: modelReference.extend({
+                        displayName: z.string(),
+                    }),
                     categoryOptionCombo: modelReference,
                 })
             )

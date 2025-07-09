@@ -20,7 +20,7 @@ const section = SECTIONS_MAP.dataSet
 const fieldFilters = [
     ':owner',
     'organisationUnits[id,displayName,path]',
-    'dataSetElements[dataElement[id,displayName,categoryCombo[id,displayName]],categoryCombo[id,displayName]]',
+    'dataSetElements[dataElement[id,displayName,categoryCombo[id,displayName]],categoryCombo[id,displayName],dataSet]',
     'style[color,icon]',
     'indicators[id,displayName]',
     'compulsoryDataElementOperands[id,displayName,dataElement[id,displayName],categoryOptionCombo[id,displayName]]',
