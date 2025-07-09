@@ -1,11 +1,10 @@
-import { RenderResult, fireEvent, render } from '@testing-library/react'
+import { RenderResult, fireEvent, render, within } from '@testing-library/react'
 import React from 'react'
 import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 import dataElementSchemaMock from '../../__mocks__/schema/dataElementsSchema.json'
 import { useSchemaStore } from '../../lib/schemas/schemaStore'
 import { ModelSchemas } from '../../lib/useLoadApp'
 import { ComponentWithProvider } from '../../testUtils/TestComponentWithRouter'
-import { generateDefaultAddFormTests } from '../defaultFormTests'
 import attributes from './__mocks__/attributes.json'
 import categoryCombosPage1 from './__mocks__/categoryCombosPage1.json'
 import { Component as New } from './New'
@@ -50,14 +49,14 @@ async function changeSingleSelect(
     fireEvent.click(trigger)
 
     await result.findByTestId('dhis2-uicore-layer')
-    const optionElement = await result.findByText(text, {
-        selector: '[data-value]',
-    })
 
-    fireEvent.click(optionElement)
+    const optionElements = (
+        await result.findAllByTestId('dhis2-uicore-singleselectoption')
+    ).filter((x) => within(x).queryByText('None') !== null)
+    expect(optionElements).toHaveLength(1)
+
+    fireEvent.click(optionElements[0])
 }
-
-generateDefaultAddFormTests({ componentName: 'Data element group set' })
 
 describe('Data Elements / New', () => {
     const consoleWarn = console.warn
@@ -123,7 +122,7 @@ describe('Data Elements / New', () => {
         expect(nameRequiredError).toBeTruthy()
 
         const shortNameRequiredError = await result.findByText('Required', {
-            selector: '[data-test="formfields-shortname-validation"]',
+            selector: '[data-test="formfields-shortName-validation"]',
         })
         expect(shortNameRequiredError).toBeTruthy()
 

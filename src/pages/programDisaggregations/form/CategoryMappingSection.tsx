@@ -11,7 +11,11 @@ import {
     CollapsibleCardTitle,
 } from '../../../components'
 import { LoadingSpinner } from '../../../components/loading/LoadingSpinner'
-import { generateDhis2Id, useBoundResourceQueryFn } from '../../../lib'
+import {
+    generateDhis2Id,
+    useBoundResourceQueryFn,
+    DEFAULT_CATEGORY,
+} from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
 import {
     categoriesFieldFilter,
@@ -52,7 +56,7 @@ const createNewOptionMapping = (
 ) => ({
     categoryId: category.id,
     id: generateDhis2Id(),
-    mappingName: name ?? 'Standard mapping',
+    mappingName: name ?? `Standard ${category.name} mapping`,
     options: getEmptyOptionValues(category.categoryOptions),
     deleted: false,
     category,
@@ -152,11 +156,22 @@ const useCategories = ({
 
         // A suggested category is a category that is part of a selected categoryCombo
         // in a program indicator mapping, but not already mapped in the form.
+
+        // keep track of categories included to avoid duplicates
+        const alreadyIncludedInSuggestedCategories = new Set<string>()
+
         const suggestedCategories = programIndicatorCategories.filter(
-            (category): category is ProgramIndicatorCategory =>
-                category !== undefined &&
-                !categoriesWithMappingsMap.has(category.id) &&
-                category.displayName !== 'default'
+            (category): category is ProgramIndicatorCategory => {
+                const include =
+                    category !== undefined &&
+                    !categoriesWithMappingsMap.has(category.id) &&
+                    category.id !== DEFAULT_CATEGORY.id
+                if (alreadyIncludedInSuggestedCategories.has(category.id)) {
+                    return false
+                }
+                alreadyIncludedInSuggestedCategories.add(category.id)
+                return include
+            }
         )
         return {
             suggestedCategories,
@@ -334,7 +349,7 @@ export const CategoryMappingList = ({
             <div className={css.categoryCardDeleted}>
                 <div className={css.deletedCategoryText}>
                     {i18n.t(
-                        '{{- categoryName}} and all mappings will be deleted on save',
+                        'All mappings for {{- categoryName}} will be removed on save',
                         { categoryName: categoryDisplayName }
                     )}
                 </div>
@@ -349,7 +364,7 @@ export const CategoryMappingList = ({
                         )
                     }}
                 >
-                    {i18n.t('Undo delete')}
+                    {i18n.t('Restore mappings')}
                 </Button>
             </div>
         )
@@ -381,7 +396,7 @@ export const CategoryMappingList = ({
                             ])
                         }}
                     >
-                        {i18n.t('Remove category')}
+                        {i18n.t('Remove category mappings')}
                     </Button>
                 </CollapsibleCardHeader>
             }

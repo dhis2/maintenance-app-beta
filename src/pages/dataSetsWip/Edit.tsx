@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import arrayMutators from 'final-form-arrays'
 import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import {
@@ -14,8 +15,6 @@ import { PickWithFieldFilters, DataSet } from '../../types/generated'
 import { DataSetFormContents } from './form/DataSetFormContents'
 import { validate, dataSetValueFormatter } from './form/dataSetFormSchema'
 import { DataSetFormDescriptor } from './form/formDescriptor'
-import arrayMutators from 'final-form-arrays'
-import { array } from 'zod'
 const section = SECTIONS_MAP.dataSet
 
 const fieldFilters = [
@@ -66,17 +65,19 @@ export const Component = () => {
     )
 
     return (
-        <SectionedFormProvider formDescriptor={DataSetFormDescriptor}>
-            <FormBase
-                valueFormatter={dataSetValueFormatter}
-                onSubmit={useOnSubmitEdit({ section, modelId })}
-                initialValues={initialValues}
-                // validate={validate}
-                subscription={{}}
-                mutators={{ ...arrayMutators }}
-            >
-                {({ handleSubmit }) => {
-                    return (
+        <FormBase
+            valueFormatter={dataSetValueFormatter}
+            onSubmit={useOnSubmitEdit({ section, modelId })}
+            initialValues={initialValues}
+            validate={validate}
+            subscription={{}}
+            mutators={{ ...arrayMutators }}
+        >
+            {({ handleSubmit }) => {
+                return (
+                    <SectionedFormProvider
+                        formDescriptor={DataSetFormDescriptor}
+                    >
                         <SectionedFormLayout
                             sidebar={<DefaultSectionedFormSidebar />}
                         >
@@ -86,9 +87,9 @@ export const Component = () => {
                             </form>
                             <SectionedFormErrorNotice />
                         </SectionedFormLayout>
-                    )
-                }}
-            </FormBase>
-        </SectionedFormProvider>
+                    </SectionedFormProvider>
+                )
+            }}
+        </FormBase>
     )
 }

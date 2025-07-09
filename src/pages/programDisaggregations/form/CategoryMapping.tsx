@@ -114,7 +114,7 @@ export const CategoryMapping = React.memo(function CategoryMapping({
             <CategoryMappingWrapper deleted>
                 <div className={css.deletedMappingText}>
                     {i18n.t(
-                        '{{- categoryMappingName}} mapping will be deleted on save',
+                        '{{- categoryMappingName}} mapping will be removed on save',
                         {
                             categoryMappingName:
                                 categoryMappingValue.mappingName,
@@ -130,7 +130,7 @@ export const CategoryMapping = React.memo(function CategoryMapping({
                         })
                     }}
                 >
-                    {i18n.t('Undo delete')}
+                    {i18n.t('Restore mapping')}
                 </Button>
             </CategoryMappingWrapper>
         )
@@ -147,7 +147,9 @@ export const CategoryMapping = React.memo(function CategoryMapping({
             )}
             <div className={css.mappingHeader}>
                 <div className={css.mappingText}>
-                    <span>{i18n.t('Mapping: ', { nsSeparator: '~:~' })}</span>
+                    <span>
+                        {i18n.t('Category mapping: ', { nsSeparator: '~:~' })}
+                    </span>
                     <span>{categoryMappingValue?.mappingName}</span>
                 </div>
 

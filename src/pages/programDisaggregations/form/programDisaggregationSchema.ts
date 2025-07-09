@@ -14,6 +14,7 @@ const identifiable = z.object({
 const categorySchema = identifiable.extend({
     categoryOptions: z.array(identifiable),
     dataDimensionType: z.nativeEnum(CategoryCombo.dataDimensionType),
+    name: z.string(),
 })
 const categoryComboSchema = z
     .object({
@@ -44,6 +45,8 @@ export const programIndicatorSchema = z.object({
     name: z.string(),
     displayName: z.string(),
     aggregateExportDataElement: z.string().optional(),
+    aggregateExportCategoryOptionCombo: z.string().optional(),
+    aggregateExportAttributeOptionCombo: z.string().optional(),
 })
 
 const categoryMappingsRecord = z.record(z.string(), z.array(categoryMapping))

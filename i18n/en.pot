@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-05-01T11:46:33.437Z\n"
-"PO-Revision-Date: 2025-05-01T11:46:33.437Z\n"
+"POT-Creation-Date: 2025-07-04T11:13:59.060Z\n"
+"PO-Revision-Date: 2025-07-04T11:13:59.060Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -99,9 +99,6 @@ msgstr "Required"
 msgid "Please enter a GeoJSON value"
 msgstr "Please enter a GeoJSON value"
 
-msgid "Save and close"
-msgstr "Save and close"
-
 msgid "Exit without saving"
 msgstr "Exit without saving"
 
@@ -122,6 +119,9 @@ msgstr "Hide error details"
 
 msgid "Show error details"
 msgstr "Show error details"
+
+msgid "Save and close"
+msgstr "Save and close"
 
 msgid "<No value>"
 msgstr "<No value>"
@@ -421,6 +421,15 @@ msgstr "Search by name, code or ID"
 msgid "Indicator Type"
 msgstr "Indicator Type"
 
+msgid "Indicator group"
+msgstr "Indicator group"
+
+msgid "Indicator group set"
+msgstr "Indicator group set"
+
+msgid "Program"
+msgstr "Program"
+
 msgid "Public access"
 msgstr "Public access"
 
@@ -526,15 +535,6 @@ msgstr "Translation updated successfully"
 msgid "Save translations"
 msgstr "Save translations"
 
-msgid "Go back"
-msgstr "Go back"
-
-msgid "Next section"
-msgstr "Next section"
-
-msgid "Save and exit"
-msgstr "Save and exit"
-
 msgid "Can edit and capture"
 msgstr "Can edit and capture"
 
@@ -589,11 +589,11 @@ msgstr "Data element group sets"
 msgid "Data sets"
 msgstr "Data sets"
 
-msgid "Data set notification template"
-msgstr "Data set notification template"
+msgid "Data set notification"
+msgstr "Data set notification"
 
-msgid "Data set notification templates"
-msgstr "Data set notification templates"
+msgid "Data set notifications"
+msgstr "Data set notifications"
 
 msgid "Indicator"
 msgstr "Indicator"
@@ -607,14 +607,8 @@ msgstr "Indicator type"
 msgid "Indicator types"
 msgstr "Indicator types"
 
-msgid "Indicator group"
-msgstr "Indicator group"
-
 msgid "Indicator groups"
 msgstr "Indicator groups"
-
-msgid "Indicator group set"
-msgstr "Indicator group set"
 
 msgid "Indicator group sets"
 msgstr "Indicator group sets"
@@ -654,9 +648,6 @@ msgstr "Tracked entity type"
 
 msgid "Tracked entity types"
 msgstr "Tracked entity types"
-
-msgid "Program"
-msgstr "Program"
 
 msgid "Programs"
 msgstr "Programs"
@@ -1033,6 +1024,15 @@ msgstr "Yearly"
 msgid "Aggregation type"
 msgstr "Aggregation type"
 
+msgid "Category option combination for aggregate data export"
+msgstr "Category option combination for aggregate data export"
+
+msgid "Attribute option combination for aggregate data export"
+msgstr "Attribute option combination for aggregate data export"
+
+msgid "Analytics type"
+msgstr "Analytics type"
+
 msgid "Compulsory"
 msgstr "Compulsory"
 
@@ -1042,11 +1042,20 @@ msgstr "Data dimension"
 msgid "Data dimension type"
 msgstr "Data dimension type"
 
+msgid "Display in form"
+msgstr "Display in form"
+
 msgid "Domain type"
 msgstr "Domain type"
 
+msgid "Expression"
+msgstr "Expression"
+
 msgid "Favorite"
 msgstr "Favorite"
+
+msgid "Filter"
+msgstr "Filter"
 
 msgid "Form name"
 msgstr "Form name"
@@ -1120,11 +1129,44 @@ msgstr "Please provide a date."
 msgid "Period type"
 msgstr "Period type"
 
+msgid "Message template"
+msgstr "Message template"
+
+msgid "Favourite"
+msgstr "Favourite"
+
+msgid "Data set notification trigger"
+msgstr "Data set notification trigger"
+
+msgid "Notification recipient"
+msgstr "Notification recipient"
+
+msgid "Notify parent organisation unit only"
+msgstr "Notify parent organisation unit only"
+
+msgid "Notify users in hierarchy only"
+msgstr "Notify users in hierarchy only"
+
+msgid "Relative scheduled days"
+msgstr "Relative scheduled days"
+
+msgid "Send notification as"
+msgstr "Send notification as"
+
+msgid "Subject template"
+msgstr "Subject template"
+
 msgid "Offline levels"
 msgstr "Offline levels"
 
 msgid "Factor"
 msgstr "Factor"
+
+msgid "Program name"
+msgstr "Program name"
+
+msgid "Decimals in data output"
+msgstr "Decimals in data output"
 
 msgid "Basic information"
 msgstr "Basic information"
@@ -1473,11 +1515,125 @@ msgstr ""
 "level means that data from lower levels will not be included in the "
 "aggregation."
 
-msgid "Send complete notifications"
-msgstr "Send complete notifications"
+msgid "Error"
+msgstr "Error"
+
+msgid "Error loading notification template"
+msgstr "Error loading notification template"
+
+msgid "Choose which data sets to send this notification for"
+msgstr "Choose which data sets to send this notification for"
+
+msgid "Available Data Sets"
+msgstr "Available Data Sets"
+
+msgid "Selected Data Sets"
+msgstr "Selected Data Sets"
+
+msgid "Search data sets..."
+msgstr "Search data sets..."
+
+msgid "Filter selected data sets..."
+msgstr "Filter selected data sets..."
+
+msgid "Set up the basic information for the notification template."
+msgstr "Set up the basic information for the notification template."
+
+msgid "Message content"
+msgstr "Message content"
+
+msgid "Configure the templates for the notification content and subject."
+msgstr "Configure the templates for the notification content and subject."
+
+msgid "Notification timing"
+msgstr "Notification timing"
+
+msgid "Choose what triggers the notification and when it should be sent."
+msgstr "Choose what triggers the notification and when it should be sent."
+
+msgid "Recipient"
+msgstr "Recipient"
+
+msgid "Choose who recieves the notification."
+msgstr "Choose who recieves the notification."
+
+msgid "SMS"
+msgstr "SMS"
+
+msgid "Immediately after data set completion"
+msgstr "Immediately after data set completion"
+
+msgid "Scheduled Days"
+msgstr "Scheduled Days"
+
+msgid "Collective Summary"
+msgstr "Collective Summary"
+
+msgid "Single Notification"
+msgstr "Single Notification"
+
+msgid "When to send notification"
+msgstr "When to send notification"
+
+msgid "Send notification"
+msgstr "Send notification"
+
+msgid "days"
+msgstr "days"
+
+msgid "Before"
+msgstr "Before"
+
+msgid "After"
+msgstr "After"
+
+msgid "scheduled date"
+msgstr "scheduled date"
+
+msgid "User Group"
+msgstr "User Group"
+
+msgid "Organisation Unit Contact"
+msgstr "Organisation Unit Contact"
+
+msgid "Recipient type"
+msgstr "Recipient type"
+
+msgid "User Group Recipients"
+msgstr "User Group Recipients"
+
+msgid "Used as the template for the subject field."
+msgstr "Used as the template for the subject field."
+
+msgid "Subject"
+msgstr "Subject"
+
+msgid "Used as template for the message field."
+msgstr "Used as template for the message field."
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Edit Data Set Notification"
+msgstr "Edit Data Set Notification"
+
+msgid "Trigger"
+msgstr "Trigger"
+
+msgid "Scheduled days"
+msgstr "Scheduled days"
+
+msgid "Send strategy"
+msgstr "Send strategy"
 
 msgid "Recipient user group"
 msgstr "Recipient user group"
+
+msgid "Delivery channels"
+msgstr "Delivery channels"
+
+msgid "Send complete notifications"
+msgstr "Send complete notifications"
 
 msgid "Send notification to completing user"
 msgstr "Send notification to completing user"
@@ -1662,6 +1818,9 @@ msgstr "Limit data entry by period"
 msgid "Optionally configure when data can be entered for certain periods"
 msgstr "Optionally configure when data can be entered for certain periods"
 
+msgid "A data set with this name already exists"
+msgstr "A data set with this name already exists"
+
 msgid "Set up the basic information for this data set."
 msgstr "Set up the basic information for this data set."
 
@@ -1781,6 +1940,39 @@ msgstr "Display Options"
 
 msgid "Advanced"
 msgstr "Advanced"
+
+msgid "Set up the basic information for this indicator group set."
+msgstr "Set up the basic information for this indicator group set."
+
+msgid "Explain the purpose of this indicator group set."
+msgstr "Explain the purpose of this indicator group set."
+
+msgid "Choose the indicators to include in this indicator group."
+msgstr "Choose the indicators to include in this indicator group."
+
+msgid "Available indicator groups"
+msgstr "Available indicator groups"
+
+msgid "Selected indicator groups"
+msgstr "Selected indicator groups"
+
+msgid "Filter available indicator groups"
+msgstr "Filter available indicator groups"
+
+msgid "Filter selected indicator groups"
+msgstr "Filter selected indicator groups"
+
+msgid "Set up the basic information for this indicator group."
+msgstr "Set up the basic information for this indicator group."
+
+msgid "Explain the purpose of this indicator group."
+msgstr "Explain the purpose of this indicator group."
+
+msgid "Filter available indicators"
+msgstr "Filter available indicators"
+
+msgid "Filter selected indicators"
+msgstr "Filter selected indicators"
 
 msgid "Configure indicator type merge"
 msgstr "Configure indicator type merge"
@@ -2194,9 +2386,6 @@ msgstr "Disaggregation categories"
 msgid "Attribute categories"
 msgstr "Attribute categories"
 
-msgid "Error"
-msgstr "Error"
-
 msgid "Could not load programs or indicators data."
 msgstr "Could not load programs or indicators data."
 
@@ -2212,14 +2401,14 @@ msgstr "Rename category mapping"
 msgid "Apply"
 msgstr "Apply"
 
-msgid "{{- categoryMappingName}} mapping will be deleted on save"
-msgstr "{{- categoryMappingName}} mapping will be deleted on save"
+msgid "{{- categoryMappingName}} mapping will be removed on save"
+msgstr "{{- categoryMappingName}} mapping will be removed on save"
 
-msgid "Undo delete"
-msgstr "Undo delete"
+msgid "Restore mapping"
+msgstr "Restore mapping"
 
-msgid "Mapping: "
-msgstr "Mapping: "
+msgid "Category mapping: "
+msgstr "Category mapping: "
 
 msgid "Invalid expression"
 msgstr "Invalid expression"
@@ -2246,20 +2435,42 @@ msgstr "Suggested based on Program Indicator selections"
 msgid "Add category"
 msgstr "Add category"
 
-msgid "{{- categoryName}} and all mappings will be deleted on save"
-msgstr "{{- categoryName}} and all mappings will be deleted on save"
+msgid "All mappings for {{- categoryName}} will be removed on save"
+msgstr "All mappings for {{- categoryName}} will be removed on save"
 
-msgid "Remove category"
-msgstr "Remove category"
+msgid "Restore mappings"
+msgstr "Restore mappings"
+
+msgid "Remove category mappings"
+msgstr "Remove category mappings"
 
 msgid "Add mapping"
 msgstr "Add mapping"
 
-msgid "Program Indicator mapping"
-msgstr "Program Indicator mapping"
+msgid "Disaggregation category mappings"
+msgstr "Disaggregation category mappings"
+
+msgid "Define expressions to map individual data to category options."
+msgstr "Define expressions to map individual data to category options."
+
+msgid "Attribute category mappings"
+msgstr "Attribute category mappings"
+
+msgid "Program indicator selection"
+msgstr "Program indicator selection"
+
+msgid ""
+"Choose program indicators and assign category combinations and category "
+"mappings to be used for disaggregation."
+msgstr ""
+"Choose program indicators and assign category combinations and category "
+"mappings to be used for disaggregation."
 
 msgid "Add a program indicator"
 msgstr "Add a program indicator"
+
+msgid "All mappings for {{- programIndicator}} will be removed on save"
+msgstr "All mappings for {{- programIndicator}} will be removed on save"
 
 msgid "Program Indicator:"
 msgstr "Program Indicator:"
@@ -2281,6 +2492,15 @@ msgstr "No changes to save"
 
 msgid "Error while saving disaggregation categories"
 msgstr "Error while saving disaggregation categories"
+
+msgid ""
+"Error while updating mappings for program indicators with ids: ${errors\n"
+"                            .map((r) => r.id)\n"
+"                            .join(' - ')}"
+msgstr ""
+"Error while updating mappings for program indicators with ids: ${errors\n"
+"                            .map((r) => r.id)\n"
+"                            .join(' - ')}"
 
 msgid "Could not delete program mappings"
 msgstr "Could not delete program mappings"
@@ -2305,6 +2525,24 @@ msgstr "This action cannot be undone."
 
 msgid "Are you sure you want to delete this program mapping configuration?"
 msgstr "Are you sure you want to delete this program mapping configuration?"
+
+msgid "Set up the basic information for this program indicator group."
+msgstr "Set up the basic information for this program indicator group."
+
+msgid "Choose the program indicators to include in this program indicator group."
+msgstr "Choose the program indicators to include in this program indicator group."
+
+msgid "Available program indicators"
+msgstr "Available program indicators"
+
+msgid "Selected program indicators"
+msgstr "Selected program indicators"
+
+msgid "Search available program indicators"
+msgstr "Search available program indicators"
+
+msgid "Search selected program indicators"
+msgstr "Search selected program indicators"
 
 msgctxt "form"
 msgid "program_disaggregation"

@@ -16,7 +16,7 @@ import { PagedResponse } from '../types/models'
 
 type ModelListResponse = WrapQueryResponse<PagedResponse<BaseListModel, string>>
 
-type DefaultSectionListProps = {
+export type DefaultSectionListProps = {
     filters?: string[]
     ActionsComponent?: React.ComponentType<DefaultListActionProps>
 }

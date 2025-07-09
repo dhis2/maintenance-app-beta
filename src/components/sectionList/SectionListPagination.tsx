@@ -51,6 +51,7 @@ export const SectionListPagination = ({
         <DataTableRow dataTest="section-list-pagination">
             <DataTableCell colSpan="100%">
                 <Pagination
+                    dataTest="section-list-pagination-actions"
                     pageSizes={PAGE_SIZES.map((s) => s.toString())}
                     page={page}
                     pageSize={paginationParams.pageSize}

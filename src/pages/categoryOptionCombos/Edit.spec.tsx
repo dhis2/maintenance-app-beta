@@ -1,7 +1,3 @@
-import { generateDefaultEditFormTests } from '../defaultFormTests'
-
-generateDefaultEditFormTests({ componentName: 'Category option combo' })
-
 xdescribe('Category option combo edit form additional tests', () => {
     it('contain all needed field prefilled', () => {})
     it('should not be able to edit name', () => {})

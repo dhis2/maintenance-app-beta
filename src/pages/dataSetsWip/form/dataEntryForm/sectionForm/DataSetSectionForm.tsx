@@ -1,7 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import { useQuery } from '@tanstack/react-query'
 import React, { useCallback, useMemo } from 'react'
+import { useParams } from 'react-router-dom'
 import { FormBase, FormBaseProps } from '../../../../../components'
+import { DefaultFormErrorNotice } from '../../../../../components/form/DefaultFormErrorNotice'
 import { LoadingSpinner } from '../../../../../components/loading/LoadingSpinner'
 import {
     DEFAULT_FIELD_FILTERS,
@@ -11,15 +13,10 @@ import {
     useOnSubmitEdit,
     useOnSubmitNew,
 } from '../../../../../lib'
-import {
-    DataSet,
-    PickWithFieldFilters,
-    Section,
-} from '../../../../../types/generated'
+import { PickWithFieldFilters, Section } from '../../../../../types/generated'
 import { DisplayableModel } from '../../../../../types/models'
+import { initialSectionValues } from '../../dataSetFormSchema'
 import { DataSetSectionFormContents } from './DataSetSectionFormContents'
-import { DefaultFormErrorNotice } from '../../../../../components/form/DefaultFormErrorNotice'
-import { useParams } from 'react-router-dom'
 
 export const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -60,9 +57,7 @@ export const DataSetSectionForm = ({
         if (section) {
             return section
         }
-        return {
-            dataElements: [],
-        } as SectionFormValues
+        return initialSectionValues
     }, [section])
 
     const valueFormatter = useCallback(
@@ -146,12 +141,12 @@ export const NewDataSetSectionForm = ({
     })
     const onFormSubmit: OnSubmit = async (values, form) => {
         console.log('onSubmit', values)
-        const res = await onDefaultSubmit(values, form)
-        console.log({ res })
-        if (!res) {
-            onSubmit?.(values)
-        }
-        return res
+        // const res = await onDefaultSubmit(values, form)
+        // console.log({ res })
+        // if (!res) {
+        //     onSubmit?.(values)
+        // }
+        // return res
     }
 
     return (

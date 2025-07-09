@@ -1,9 +1,13 @@
+import i18n from '@dhis2/d2-i18n'
+import { startCase } from 'lodash'
 import React, { createContext, useState } from 'react'
+import { useFormState } from 'react-final-form'
+import { ValuesWithAttributes } from '../../../components/form/attributes/CustomAttributes'
 import { SectionDescriptor, SectionedFormDescriptor } from './types'
 
 /* Some of the types in this file may look complex.
     However they are here to help type-safety and autocommpletion for consumers.
-    
+
     The only thing consumers need to do is pass the type of the formdescriptor to use the context.
         useSectionedFormDescriptor<typeof FormDescriptor>()
     This helps usage in specific form components.
@@ -46,7 +50,7 @@ function createContextValue<const T extends SectionedFormDescriptor>(
         sections,
         getSection: (name: T['sections'][number]['name']) => sectionMap[name],
         getFieldLabel: (field: AllFieldNames<T>) => {
-            return fieldLabels[field]
+            return fieldLabels[field] ?? startCase(field)
         },
     }
 }
@@ -66,7 +70,35 @@ export const SectionedFormProvider = <T extends SectionedFormDescriptor>({
     formDescriptor: T
     children: React.ReactNode
 }) => {
-    const [contextValue] = useState(() => createContextValue(formDescriptor))
+    const formState = useFormState<ValuesWithAttributes>({
+        subscription: { initialValues: true },
+    })
+    const customAttributes = formState.initialValues.attributeValues?.map(
+        (av) => av.attribute
+    )
+
+    const formDescriptorMaybeWithAttributes =
+        customAttributes && customAttributes.length > 0
+            ? {
+                  ...formDescriptor,
+                  sections: [
+                      ...formDescriptor.sections,
+                      {
+                          name: 'attributes',
+                          label: i18n.t('Attributes'),
+                          fields: [
+                              {
+                                  name: 'attributeValues',
+                                  label: i18n.t('Attributes'),
+                              },
+                          ],
+                      },
+                  ],
+              }
+            : formDescriptor
+    const [contextValue] = useState(() =>
+        createContextValue(formDescriptorMaybeWithAttributes)
+    )
 
     return (
         <SectionedFormContext.Provider value={contextValue}>

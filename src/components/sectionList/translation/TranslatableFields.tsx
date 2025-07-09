@@ -61,6 +61,7 @@ const TranslatableFields: React.FC<TranslatableFieldsProps> = ({
                                     : InputFieldFF
                             }
                             label={getTranslatedProperty(fieldName)}
+                            dataTest={`field-${fieldName}-translation`}
                         />
                     ))}
                 </div>

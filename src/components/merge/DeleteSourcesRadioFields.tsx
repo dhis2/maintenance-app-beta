@@ -22,8 +22,8 @@ export const DeleteSourcesFields = ({
     // translate to a string, since radio only support string
     // note that the union with boolean in format-parameter is due to weird typings in Final Form
     const format = (value: boolean | string | undefined): string | undefined =>
-        value || value === 'keep' ? 'keep' : 'delete'
-    const parse = (value: string | undefined) => value === 'keep'
+        value || value === 'delete' ? 'delete' : 'keep'
+    const parse = (value: string | undefined) => value === 'delete'
 
     const sourcesCnt = sourcesValues.input.value.length
     return (

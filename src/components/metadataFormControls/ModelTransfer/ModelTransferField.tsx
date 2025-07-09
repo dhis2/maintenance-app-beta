@@ -23,6 +23,7 @@ type ModelTransferFieldProps = {
     | 'filterPlaceholderPicked'
     | 'maxSelections'
     | 'enableOrderChange'
+    | 'dataTest'
 >
 
 export function ModelTransferField({
@@ -37,6 +38,7 @@ export function ModelTransferField({
     filterPlaceholderPicked,
     maxSelections,
     enableOrderChange,
+    dataTest,
 }: ModelTransferFieldProps) {
     const { input, meta } = useField<DisplayableModel[]>(name, {
         multiple: true,
@@ -45,7 +47,6 @@ export function ModelTransferField({
 
     return (
         <Field
-            dataTest="formfields-modeltransfer"
             error={meta.invalid}
             validationText={(meta.touched && meta.error?.toString()) || ''}
             name={name}
@@ -67,6 +68,7 @@ export function ModelTransferField({
                 query={query}
                 maxSelections={maxSelections || 5000}
                 enableOrderChange={enableOrderChange}
+                dataTest={dataTest}
             />
         </Field>
     )

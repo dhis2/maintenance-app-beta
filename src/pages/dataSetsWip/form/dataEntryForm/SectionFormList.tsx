@@ -6,7 +6,9 @@ import {
     IconArrowUp16,
     IconMore16,
 } from '@dhis2/ui'
+import { set } from 'lodash'
 import React from 'react'
+import { FieldArray, useFieldArray } from 'react-final-form-arrays'
 import { StandardFormSectionTitle } from '../../../../components'
 import { Drawer } from '../../../../components/drawer'
 import { DisplayableModel } from '../../../../types/models'
@@ -17,8 +19,6 @@ import {
     EditorNewDataSetSectionForm,
 } from './sectionForm/DataSetSectionForm'
 import css from './SectionFormList.module.css'
-import { set } from 'lodash'
-import { FieldArray, useFieldArray } from 'react-final-form-arrays'
 
 type Section = DataSetFormValues['sections'][number]
 

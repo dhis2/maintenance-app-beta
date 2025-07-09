@@ -15,7 +15,6 @@ export const useSchemaStore = create<SchemasStore>()(
         schemas: undefined,
         getSchemas: () => {
             const schemas = get().schemas
-
             if (schemas === undefined) {
                 throw new Error('Schemas not loaded')
             }

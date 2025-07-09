@@ -1,5 +1,4 @@
-import { FormType } from './dataSetFormSchema'
-import { DataSetFormValues } from './dataSetFormSchema'
+import { FormType, DataSetFormValues } from './dataSetFormSchema'
 
 /**
  * The formType is based on the presence of dataEntryForm and sections.

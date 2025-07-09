@@ -15,11 +15,13 @@ import {
     SectionedFormSection,
     StandardFormSectionTitle,
     StandardFormField,
+    StandardFormSectionDescription,
 } from '../../../components'
 import {
     ModelSingleSelect,
     ModelSingleSelectField,
 } from '../../../components/metadataFormControls/ModelSingleSelect'
+import { DEFAULT_CATEGORYCOMBO_SELECT_OPTION } from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
 import { ProgramIndicatorWithMapping } from '../Edit'
 import {
@@ -31,8 +33,10 @@ import css from './ProgramIndicatorMapping.module.css'
 
 export const ProgramIndicatorMappingSection = ({
     initialProgramIndicators,
+    programName,
 }: {
     initialProgramIndicators: ProgramIndicatorWithMapping[]
+    programName?: string
 }) => {
     const programId = useParams().id
     const [programIndicators, setProgramIndicators] = React.useState<
@@ -53,25 +57,32 @@ export const ProgramIndicatorMappingSection = ({
         )
     return (
         <SectionedFormSection name="programIndicatorMappings">
+            <div className={css.programName}>
+                {i18n.t(`Program: ${programName}`, { nsSeparator: '~:~' })}
+            </div>
             <StandardFormSectionTitle>
-                {i18n.t('Program Indicator mapping')}
+                {i18n.t('Program indicator selection')}
             </StandardFormSectionTitle>
+            <StandardFormSectionDescription>
+                {i18n.t(
+                    'Choose program indicators and assign category combinations and category mappings to be used for disaggregation.'
+                )}
+            </StandardFormSectionDescription>
             <ModelSingleSelect<DisplayableModel>
                 query={{
                     resource: 'programIndicators',
                     params: {
-                        fields: ['id', 'name', 'displayName'],
+                        fields: [
+                            'id',
+                            'name',
+                            'displayName',
+                            'categoryCombo[id]',
+                        ],
                         filter: ['program.id:eq:' + programId],
                     },
                 }}
                 onChange={(selected) => {
                     if (selected) {
-                        // piInput.onChange({
-                        //     ...piInput.value,
-                        //     [selected.id]: {
-                        //         ...selected,
-                        //     },
-                        // })
                         setProgramIndicators([...programIndicators, selected])
                     }
                 }}
@@ -85,6 +96,11 @@ export const ProgramIndicatorMappingSection = ({
                     <ProgramIndicatorCard
                         programIndicator={indicator}
                         key={indicator.id}
+                        initiallyExpanded={
+                            !initialProgramIndicators
+                                .map(({ id }) => id)
+                                .includes(indicator.id)
+                        }
                     />
                 ))}
             </div>
@@ -94,8 +110,10 @@ export const ProgramIndicatorMappingSection = ({
 
 const ProgramIndicatorCard = ({
     programIndicator,
+    initiallyExpanded = false,
 }: {
     programIndicator: DisplayableModel
+    initiallyExpanded?: boolean
 }) => {
     const { input: programIndicatorMappingsDeleted } = useField<string[]>(
         'deletedProgramIndicatorMappings'
@@ -110,7 +128,7 @@ const ProgramIndicatorCard = ({
             <div className={css.programIndicatorCardDeleted}>
                 <div className={css.deletedProgramIndicatorText}>
                     {i18n.t(
-                        '{{- programIndicator}} and all mappings will be deleted on save',
+                        'All mappings for {{- programIndicator}} will be removed on save',
                         { programIndicator: programIndicator.displayName }
                     )}
                 </div>
@@ -126,7 +144,7 @@ const ProgramIndicatorCard = ({
                         )
                     }}
                 >
-                    {i18n.t('Undo delete')}
+                    {i18n.t('Restore mappings')}
                 </Button>
             </div>
         )
@@ -135,6 +153,7 @@ const ProgramIndicatorCard = ({
     return (
         <CollapsibleCard
             key={programIndicator.id}
+            initiallyExpanded={initiallyExpanded}
             headerElement={
                 <CollapsibleCardHeader>
                     <CollapsibleCardTitle
@@ -165,6 +184,15 @@ const ProgramIndicatorCard = ({
     )
 }
 
+const addDefaultCategoryComboTransform = (
+    results: CategoryComboFromSelect[]
+) => {
+    return [
+        DEFAULT_CATEGORYCOMBO_SELECT_OPTION as CategoryComboFromSelect,
+        ...results,
+    ]
+}
+
 export const ProgramIndicatorMapping = ({
     programIndicator,
 }: {
@@ -173,9 +201,20 @@ export const ProgramIndicatorMapping = ({
     const categoryCombo = useField(
         `programIndicatorMappings.${programIndicator.id}.categoryCombo`
     )
+    const categoryComboInput = categoryCombo.input.value
+        ? categoryCombo.input
+        : { ...categoryCombo.input, value: DEFAULT_CATEGORYCOMBO_SELECT_OPTION }
+
     const attributeCombo = useField(
         `programIndicatorMappings.${programIndicator.id}.attributeCombo`
     )
+    const attributeComboInput = attributeCombo.input.value
+        ? attributeCombo.input
+        : {
+              ...attributeCombo.input,
+              value: DEFAULT_CATEGORYCOMBO_SELECT_OPTION,
+          }
+
     return (
         <div className={css.mappingFields}>
             <div>
@@ -184,35 +223,65 @@ export const ProgramIndicatorMapping = ({
                     query={{
                         resource: 'categoryCombos',
                         params: {
-                            filter: 'dataDimensionType:eq:DISAGGREGATION',
+                            filter: [
+                                'dataDimensionType:eq:DISAGGREGATION',
+                                'name:neq:default',
+                            ],
                             fields: categoryComboFieldFilter.concat(),
                         },
                     }}
-                    showNoValueOption
-                    input={categoryCombo.input}
+                    showNoValueOption={false}
+                    transform={addDefaultCategoryComboTransform}
+                    input={categoryComboInput}
                     meta={categoryCombo.meta}
                 />
                 <div className={css.mappingList}>
-                    {categoryCombo.input.value?.categories?.map(
-                        (category: DisplayableModel) => (
-                            <div key={category.id}>
-                                <CategoryMappingSelect
-                                    name={`programIndicatorMappings.${programIndicator.id}.disaggregation.${category.id}`}
-                                    category={category}
-                                    onAddMapping={() => {
-                                        const el = document.getElementById(
-                                            'disaggregationCategories'
-                                        )
-                                        if (el) {
-                                            el.scrollIntoView({
-                                                behavior: 'smooth',
-                                                block: 'start',
-                                            })
+                    {categoryComboInput.value?.categories?.map(
+                        (category: DisplayableModel) => {
+                            if (
+                                category.id ===
+                                DEFAULT_CATEGORYCOMBO_SELECT_OPTION
+                                    .categories[0].id
+                            ) {
+                                return (
+                                    <div
+                                        key={
+                                            'aggregateExportCategoryOptionCombo_field'
                                         }
-                                    }}
-                                />
-                            </div>
-                        )
+                                    >
+                                        <StandardFormField>
+                                            <Field
+                                                name={`programIndicatorMappings.${programIndicator.id}.aggregateExportCategoryOptionCombo`}
+                                                key={`programIndicatorMappings.${programIndicator.id}.aggregateExportCategoryOptionCombo`}
+                                                label={i18n.t(
+                                                    'Category option combination for aggregate data export'
+                                                )}
+                                                component={InputFieldFF}
+                                            />
+                                        </StandardFormField>
+                                    </div>
+                                )
+                            }
+                            return (
+                                <div key={category.id}>
+                                    <CategoryMappingSelect
+                                        name={`programIndicatorMappings.${programIndicator.id}.disaggregation.${category.id}`}
+                                        category={category}
+                                        onAddMapping={() => {
+                                            const el = document.getElementById(
+                                                'disaggregationCategories'
+                                            )
+                                            if (el) {
+                                                el.scrollIntoView({
+                                                    behavior: 'smooth',
+                                                    block: 'start',
+                                                })
+                                            }
+                                        }}
+                                    />
+                                </div>
+                            )
+                        }
                     )}
                 </div>
             </div>
@@ -226,31 +295,58 @@ export const ProgramIndicatorMapping = ({
                             fields: categoryComboFieldFilter.concat(),
                         },
                     }}
-                    showNoValueOption
-                    input={attributeCombo.input}
+                    showNoValueOption={false}
+                    input={attributeComboInput}
                     meta={attributeCombo.meta}
+                    transform={addDefaultCategoryComboTransform}
                 />
                 <div className={css.mappingList}>
-                    {attributeCombo.input.value?.categories?.map(
-                        (category: DisplayableModel) => (
-                            <div key={category.id}>
-                                <CategoryMappingSelect
-                                    name={`programIndicatorMappings.${programIndicator.id}.attribute.${category.id}`}
-                                    category={category}
-                                    onAddMapping={() => {
-                                        const el = document.getElementById(
-                                            'attributeCategories'
-                                        )
-                                        if (el) {
-                                            el.scrollIntoView({
-                                                behavior: 'smooth',
-                                                block: 'start',
-                                            })
+                    {attributeComboInput.value?.categories?.map(
+                        (category: DisplayableModel) => {
+                            if (
+                                category.id ===
+                                DEFAULT_CATEGORYCOMBO_SELECT_OPTION
+                                    .categories[0].id
+                            ) {
+                                return (
+                                    <div
+                                        key={
+                                            'aggregateExportAttributeOptionCombo_field'
                                         }
-                                    }}
-                                />
-                            </div>
-                        )
+                                    >
+                                        <StandardFormField>
+                                            <Field
+                                                name={`programIndicatorMappings.${programIndicator.id}.aggregateExportAttributeOptionCombo`}
+                                                key={`programIndicatorMappings.${programIndicator.id}.aggregateExportAttributeOptionCombo`}
+                                                label={i18n.t(
+                                                    'Attribute option combination for aggregate data export'
+                                                )}
+                                                component={InputFieldFF}
+                                            />
+                                        </StandardFormField>
+                                    </div>
+                                )
+                            }
+                            return (
+                                <div key={category.id}>
+                                    <CategoryMappingSelect
+                                        name={`programIndicatorMappings.${programIndicator.id}.attribute.${category.id}`}
+                                        category={category}
+                                        onAddMapping={() => {
+                                            const el = document.getElementById(
+                                                'attributeCategories'
+                                            )
+                                            if (el) {
+                                                el.scrollIntoView({
+                                                    behavior: 'smooth',
+                                                    block: 'start',
+                                                })
+                                            }
+                                        }}
+                                    />
+                                </div>
+                            )
+                        }
                     )}
                 </div>
             </div>
@@ -319,11 +415,15 @@ export const CategoryMappingSelect = ({
         })
     }, [availableMappings])
 
+    const categoryMappingLabelPrefix = i18n.t(`Category mapping: `, {
+        nsSeparator: '~-~',
+    })
+
     return (
         <div>
             <div className={css.mappingSelectWrapper}>
                 <SingleSelectField
-                    label={`Mapping: ${category.displayName}`}
+                    label={`${categoryMappingLabelPrefix} ${category.displayName}`}
                     onChange={(payload) =>
                         selectedMapping.input.onChange(payload.selected)
                     }

@@ -8,13 +8,13 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../components'
-import { SectionedFormSection } from '../../../../components/sectionedForm'
-import { DisplayOptionsField } from '../DisplayOptionsField'
-import classes from './DataEntryFormContents.module.css'
-import { useDataSetField, useDataSetFormState } from '../formHooks'
-import { getFormType } from '../dataSetModel'
-import { SectionFormSectionsList } from './SectionFormList'
 import { Drawer } from '../../../../components/drawer'
+import { SectionedFormSection } from '../../../../components/sectionedForm'
+import { getFormType } from '../dataSetModel'
+import { DisplayOptionsField } from '../DisplayOptionsField'
+import { useDataSetField, useDataSetFormState } from '../formHooks'
+import classes from './DataEntryFormContents.module.css'
+import { SectionFormSectionsList } from './SectionFormList'
 
 const DefaultFormIcon = () => (
     <svg

@@ -68,6 +68,7 @@ export interface SearchableSingleSelectPropTypes {
     onFocus?: () => void
     searchable?: boolean
     noMatchWithoutFilterText?: string
+    dataTest?: string
 }
 
 export const SearchableSingleSelect = ({
@@ -90,6 +91,7 @@ export const SearchableSingleSelect = ({
     showEndLoader,
     searchable = true,
     noMatchWithoutFilterText,
+    dataTest,
 }: SearchableSingleSelectPropTypes) => {
     const [loadingSpinnerRef, setLoadingSpinnerRef] = useState<HTMLElement>()
 
@@ -142,6 +144,7 @@ export const SearchableSingleSelect = ({
             onBlur={onBlur}
             onFocus={onFocus}
             dense={dense}
+            dataTest={dataTest}
         >
             {searchable && (
                 <div className={classes.searchField}>
@@ -176,14 +179,6 @@ export const SearchableSingleSelect = ({
                     disabled={disabled}
                 />
             ))}
-
-            {hasSelectedInOptionList && selected && (
-                <SingleSelectOption
-                    className={classes.invisibleOption}
-                    value={selected}
-                    label=""
-                />
-            )}
 
             {!error && !loading && showEndLoader && (
                 <Loader

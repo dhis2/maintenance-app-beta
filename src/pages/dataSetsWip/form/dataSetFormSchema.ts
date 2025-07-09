@@ -6,8 +6,8 @@ import {
     getDefaults,
     modelFormSchemas,
 } from '../../../lib'
-import { ModelWithAttributeValues } from '../../../lib/form/createJsonPatchOperations'
 import { createFormValidate } from '../../../lib/form/validate'
+import { DataSet } from '../../../types/generated'
 
 const {
     withAttributeValues,
@@ -15,6 +15,7 @@ const {
     style,
     referenceCollection,
     modelReference,
+    withDefaultListColumns,
 } = modelFormSchemas
 
 const formTypeSchema = z
@@ -22,11 +23,23 @@ const formTypeSchema = z
     .default('DEFAULT')
 export type FormType = z.infer<typeof formTypeSchema>
 
+const dataSetBaseSchema = z.object({
+    code: z.string().trim().optional(),
+    periodType: z
+        .nativeEnum(DataSet.periodType)
+        .default(DataSet.periodType.MONTHLY),
+    formType: z.nativeEnum(DataSet.formType).default(DataSet.formType.DEFAULT),
+})
+
+export const sectionFormSchema = identifiable.extend({
+    description: z.string().optional(),
+    dataElements: z.array(z.object({ id: z.string() })),
+})
+
 export const dataSetFormSchema = identifiable
     .merge(withAttributeValues)
+    .merge(dataSetBaseSchema)
     .extend({
-        id: z.string().optional(),
-        code: z.string().trim().optional(),
         description: z.string().trim().max(2000).optional(),
         style: style.optional(),
         dataSetElements: z
@@ -45,13 +58,13 @@ export const dataSetFormSchema = identifiable
             .object({ id: z.string(), displayName: z.string() })
             .default({ ...DEFAULT_CATEGORY_COMBO }),
         indicators: referenceCollection.default([]),
-        periodType: z.string().default('Monthly'),
+        // periodType: z.string().default('Monthly'),
         openFuturePeriods: z
             .number()
             .int({ message: i18n.t('The number should not have decimals') })
             .optional(),
         expiryDays: z.number().optional(),
-        formType: formTypeSchema,
+        // formType: formTypeSchema,
         displayOptions: z
             .string()
             .optional()
@@ -83,16 +96,7 @@ export const dataSetFormSchema = identifiable
         compulsoryFieldsCompleteOnly: z.boolean().default(false),
         workflow: z.object({ id: z.string() }).optional(),
         timelyDays: z.number().optional().default(15),
-        sections: z
-            .array(
-                z.object({
-                    id: z.string(),
-                    displayName: z.string(),
-                    description: z.string().optional(),
-                    // dataSet: identifiable.optional(),
-                })
-            )
-            .default([]),
+        sections: z.array(sectionFormSchema).default([]),
         compulsoryDataElementOperands: z
             .array(
                 z.object({
@@ -112,7 +116,14 @@ export const dataSetFormSchema = identifiable
             .default([]),
     })
 
+export const dataSetListSchema = withDefaultListColumns
+    .merge(dataSetBaseSchema)
+    .extend({
+        displayShortName: z.string(),
+    })
+
 export const initialValues = getDefaults(dataSetFormSchema)
+export const initialSectionValues = getDefaults(sectionFormSchema)
 
 export type DataSetFormValues = typeof initialValues
 
