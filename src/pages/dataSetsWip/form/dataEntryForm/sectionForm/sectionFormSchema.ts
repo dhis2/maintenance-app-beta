@@ -9,6 +9,25 @@ export const sectionFormSchema = identifiable.extend({
         z.object({ id: z.string(), displayName: z.string() })
     ),
     indicators: z.array(z.object({ id: z.string(), displayName: z.string() })),
+    displayOptions: z
+        .string()
+        .optional()
+        .refine(
+            (val) => {
+                try {
+                    if (val !== undefined) {
+                        JSON.parse(val)
+                    }
+                    return true
+                } catch {
+                    return false
+                }
+            },
+            { message: 'Invalid JSON string' }
+        )
+        .default(
+            '{"pivotMode":"n/a","pivotedCategory":"GLevLNI9wkl","afterSectionText":"","beforeSectionText":""}'
+        ),
 })
 
 export const initialSectionValues = getDefaults(sectionFormSchema)

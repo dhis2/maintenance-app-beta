@@ -16,3 +16,12 @@
     gap: var(--spacers-dp4);
     color: var(--colors-grey600);
 }
+
+.displayModeOptions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp4);
+}
+.pivotedCategorySelector {
+    margin: var(--spacers-dp4) var(--spacers-dp16);
+}

@@ -1,6 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
 import { useQuery } from '@tanstack/react-query'
-import { FORM_ERROR } from 'final-form'
 import React, { useCallback, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { FormBase, FormBaseProps } from '../../../../../components'
@@ -14,10 +13,12 @@ import {
     useOnSubmitEdit,
     useOnSubmitNew,
 } from '../../../../../lib'
-import { PickWithFieldFilters, Section } from '../../../../../types/generated'
 import { DisplayableModel } from '../../../../../types/models'
 import { DataSetSectionFormContents } from './DataSetSectionFormContents'
-import { initialSectionValues } from './sectionFormSchema'
+import {
+    initialSectionValues,
+    SectionFormValues as SectionFormValuesFetched,
+} from './sectionFormSchema'
 
 export const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -40,10 +41,9 @@ const dataSetSectionSchemaSection = {
     parentSectionKey: 'dataSet',
 } satisfies SchemaSection
 
-export type SectionFormValues = PickWithFieldFilters<
-    Section,
-    typeof fieldFilters
-> & { dataSet: { id: string } }
+export type SectionFormValues = SectionFormValuesFetched & {
+    dataSet: { id: string }
+}
 
 export type DataSetSectionFormProps = {
     section?: SectionFormValues
@@ -61,7 +61,12 @@ export const DataSetSectionForm = ({
             if (section) {
                 return section
             }
-            return initialSectionValues
+            return {
+                ...initialSectionValues,
+                displayOptions:
+                    initialSectionValues?.displayOptions &&
+                    JSON.parse(initialSectionValues?.displayOptions),
+            }
         }, [section])
 
     const valueFormatter = useCallback(
@@ -69,6 +74,9 @@ export const DataSetSectionForm = ({
             return {
                 ...values,
                 dataSet: { id: dataSetId },
+                displayOptions:
+                    values.displayOptions &&
+                    JSON.stringify(values.displayOptions),
             } as SectionFormValues
         },
         [dataSetId]
@@ -145,10 +153,11 @@ export const NewDataSetSectionForm = ({
     })
     const onFormSubmit: OnSubmit = async (values, form) => {
         const res = await onDefaultSubmit(values, form)
-        if (res && !res[FORM_ERROR]) {
-            onSubmit?.(values)
-        }
-        return res
+        console.log('(*******', values)
+        // if (res && !res[FORM_ERROR]) {
+        //     onSubmit?.(values)
+        // }
+        // return res
     }
 
     return (

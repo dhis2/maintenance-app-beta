@@ -1,5 +1,6 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
+import { Logo } from '@dhis2/ui'
 import { useQueryClient } from '@tanstack/react-query'
 import { useCallback, useMemo } from 'react'
 import { FormProps } from 'react-final-form'
@@ -13,7 +14,6 @@ import {
 } from './createJsonPatchOperations'
 import { useCreateModel } from './useCreateModel'
 import { usePatchModel } from './usePatchModel'
-import { Logo } from '@dhis2/ui'
 import textAlign = FontStyle.textAlign
 
 type OnSubmit<TValues> = FormProps<TValues>['onSubmit']

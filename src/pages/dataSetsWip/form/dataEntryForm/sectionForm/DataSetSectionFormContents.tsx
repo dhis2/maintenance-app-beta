@@ -1,9 +1,22 @@
 import i18n from '@dhis2/d2-i18n'
-import { Field } from '@dhis2/ui'
+import {
+    CheckboxFieldFF,
+    Field,
+    RadioFieldFF,
+    SingleSelectFieldFF,
+    TextAreaFieldFF,
+} from '@dhis2/ui'
 import { IconInfo16 } from '@dhis2/ui-icons'
 import { useQuery } from '@tanstack/react-query'
+import DOMPurify from 'dompurify'
+import { uniqBy } from 'lodash'
 import React, { useMemo } from 'react'
-import { useField, useForm, useFormState } from 'react-final-form'
+import {
+    useField,
+    useForm,
+    useFormState,
+    Field as FieldRFF,
+} from 'react-final-form'
 import {
     CodeField,
     DescriptionField,
@@ -35,6 +48,7 @@ export const fieldFilters = [
     'code',
     'indicators',
     'showRowTotals',
+    'showColumnTotals',
     'displayOptions',
     'dataElements[id,displayName]',
 ]
@@ -61,11 +75,14 @@ type DataSetDataElementsType = {
         dataElement: {
             id: string
             displayName: string
+            categoryCombo: { id: string; displayName: string }[]
         }
     }[]
     sections: { dataElements: { id: string }[] }[]
     indicators: { id: string; displayName: string }[]
 }
+
+type CategoryCombosType = { categories: { id: string; displayName: string }[] }
 
 export const DataSetSectionFormContents = ({
     onCancel,
@@ -89,6 +106,22 @@ export const DataSetSectionFormContents = ({
         validateFields: [],
     })
 
+    const defaultDisplayModeField = useField(`displayOptions.pivotMode`, {
+        type: 'radio',
+        value: 'n/a',
+    })
+    const pivotDisplayModeField = useField(`displayOptions.pivotMode`, {
+        type: 'radio',
+        value: 'pivot',
+    })
+    const moveCategoriesDisplayModeField = useField(
+        `displayOptions.pivotMode`,
+        {
+            type: 'radio',
+            value: 'move_categories',
+        }
+    )
+
     const queryFn = useBoundResourceQueryFn()
     const { data, isLoading } = useQuery({
         queryFn: queryFn<DataSetDataElementsType>,
@@ -98,7 +131,7 @@ export const DataSetSectionFormContents = ({
                 id: values.dataSet.id,
                 params: {
                     fields: [
-                        'dataSetElements[dataElement[id,displayName]]',
+                        'dataSetElements[dataElement[id,displayName,categoryCombo[id,displayName]]]',
                         'indicators[id,displayName]',
                         'sections[dataElements]',
                     ].concat(),
@@ -118,6 +151,33 @@ export const DataSetSectionFormContents = ({
             .map((de) => de.dataElement)
             .filter((de) => !sectionsDataElements.includes(de.id))
     }, [data])
+
+    const availableCategoryCombos = useMemo(() => {
+        if (!data) {
+            return []
+        }
+        return uniqBy(
+            data.dataSetElements.flatMap((de) => de.dataElement.categoryCombo),
+            'id'
+        )
+    }, [data])
+
+    const { data: catComboData } = useQuery({
+        queryFn: queryFn<CategoryCombosType>,
+        queryKey: [
+            {
+                resource: 'categories',
+                params: {
+                    filter: [
+                        `categoryCombos.id:in:[${availableCategoryCombos.map(
+                            (cc) => cc.id
+                        )}]`,
+                    ],
+                    fields: 'id,displayName',
+                },
+            },
+        ] as const,
+    })
 
     return (
         <div className={styles.sectionsWrapper}>
@@ -256,6 +316,129 @@ export const DataSetSectionFormContents = ({
                     <StandardFormSectionTitle>
                         {i18n.t('Display options')}
                     </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        {i18n.t(
+                            'Customize how this section looks in the form.'
+                        )}
+                    </StandardFormSectionDescription>
+                    <StandardFormField>
+                        <FieldRFF
+                            name="showRowTotals"
+                            type="checkbox"
+                            dataTest="formfields-showRowTotals"
+                            component={CheckboxFieldFF}
+                            label={i18n.t('Row totals')}
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <FieldRFF
+                            name="showColumnTotals"
+                            type="checkbox"
+                            dataTest="formfields-showColumnTotals"
+                            component={CheckboxFieldFF}
+                            label={i18n.t('Column totals')}
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <FieldRFF
+                            name="disableDataElementAutoGroup"
+                            type="checkbox"
+                            dataTest="formfields-disableDataElementAutoGroup"
+                            component={CheckboxFieldFF}
+                            label={i18n.t(
+                                'Disable automatic grouping of data elements'
+                            )}
+                        />
+                    </StandardFormField>
+                    <div>
+                        <p>{i18n.t('Display mode')}</p>
+                        <div className={styles.displayModeOptions}>
+                            <StandardFormField>
+                                <RadioFieldFF
+                                    label={i18n.t(
+                                        'Default: data elements as rows, categories as columns'
+                                    )}
+                                    input={defaultDisplayModeField.input}
+                                    meta={defaultDisplayModeField.meta}
+                                />
+                            </StandardFormField>
+                            <StandardFormField>
+                                <RadioFieldFF
+                                    label={i18n.t(
+                                        'Pivot: categories as rows, data elements as columns'
+                                    )}
+                                    input={pivotDisplayModeField.input}
+                                    meta={pivotDisplayModeField.meta}
+                                />
+                            </StandardFormField>
+                            <StandardFormField>
+                                <RadioFieldFF
+                                    label={i18n.t(
+                                        'Move a category to rows: default mode with one category moved to rows'
+                                    )}
+                                    input={moveCategoriesDisplayModeField.input}
+                                    meta={moveCategoriesDisplayModeField.meta}
+                                />
+                            </StandardFormField>
+                        </div>
+                        {moveCategoriesDisplayModeField.input.checked &&
+                            catComboData && (
+                                <div className={styles.pivotedCategorySelector}>
+                                    <FieldRFF
+                                        required
+                                        component={SingleSelectFieldFF}
+                                        inputWidth="400px"
+                                        name="displayOptions.pivotedCategory"
+                                        label={i18n.t(
+                                            'Category to move to rows'
+                                        )}
+                                        options={catComboData.categories.map(
+                                            (cc) => ({
+                                                value: cc.id,
+                                                label: cc.displayName,
+                                            })
+                                        )}
+                                    />
+                                </div>
+                            )}
+                        <StandardFormField>
+                            <FieldRFF
+                                component={TextAreaFieldFF}
+                                inputWidth="400px"
+                                name="displayOptions.beforeSectionText"
+                                label={i18n.t(
+                                    'Content to display before a section'
+                                )}
+                                helpText={i18n.t(
+                                    'HTML links and basic styling can be included'
+                                )}
+                                format={(value) =>
+                                    typeof value === 'string'
+                                        ? DOMPurify.sanitize(value)
+                                        : value
+                                }
+                            />
+                        </StandardFormField>
+                        <StandardFormField>
+                            <FieldRFF
+                                component={TextAreaFieldFF}
+                                inputWidth="400px"
+                                name="displayOptions.afterSectionText"
+                                label={i18n.t(
+                                    'Content to display after a section'
+                                )}
+                                validateFields={[]}
+                                helpText={i18n.t(
+                                    'HTML links and basic styling can be included'
+                                )}
+                                format={(value) =>
+                                    typeof value === 'string'
+                                        ? DOMPurify.sanitize(value)
+                                        : value
+                                }
+                            />
+                        </StandardFormField>
+                    </div>
                 </SectionedFormSection>
             </SectionedFormSections>
             <div>
