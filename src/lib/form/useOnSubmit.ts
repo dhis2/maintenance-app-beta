@@ -4,7 +4,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useCallback, useMemo } from 'react'
 import { FormProps } from 'react-final-form'
 import { ModelSection } from '../../types'
-import { IdentifiableObject } from '../../types/generated'
+import { FontStyle, IdentifiableObject } from '../../types/generated'
 import { getSectionPath, useNavigateWithSearchState } from '../routeUtils'
 import { createFormError } from './createFormError'
 import {
@@ -13,6 +13,8 @@ import {
 } from './createJsonPatchOperations'
 import { useCreateModel } from './useCreateModel'
 import { usePatchModel } from './usePatchModel'
+import { Logo } from '@dhis2/ui'
+import textAlign = FontStyle.textAlign
 
 type OnSubmit<TValues> = FormProps<TValues>['onSubmit']
 

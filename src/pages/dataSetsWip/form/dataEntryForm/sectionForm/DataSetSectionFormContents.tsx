@@ -1,9 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
-import { Field, IconWarning16 } from '@dhis2/ui'
+import { Field } from '@dhis2/ui'
 import { IconInfo16 } from '@dhis2/ui-icons'
-import React, { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import React, { useMemo } from 'react'
 import { useField, useForm, useFormState } from 'react-final-form'
-import { useDebouncedCallback } from 'use-debounce'
 import {
     CodeField,
     DescriptionField,
@@ -22,6 +22,7 @@ import {
     DEFAULT_FIELD_FILTERS,
     SchemaName,
     SchemaSection,
+    useBoundResourceQueryFn,
 } from '../../../../../lib'
 import { PickWithFieldFilters, Section } from '../../../../../types/generated'
 import { DisplayableModel } from '../../../../../types/models'
@@ -53,57 +54,70 @@ export type SectionFormValues = PickWithFieldFilters<
 
 export type DataSetSectionFormProps = {
     onCancel?: () => void
-    notAssignedDataElements: DisplayableModel[] //Partial<SectionFormValues['dataSet']>
-    availableIndicators: DisplayableModel[] //Partial<SectionFormValues['dataSet']>
 }
+
+type DataSetDataElementsType = {
+    dataSetElements: {
+        dataElement: {
+            id: string
+            displayName: string
+        }
+    }[]
+    sections: { dataElements: { id: string }[] }[]
+    indicators: { id: string; displayName: string }[]
+}
+
 export const DataSetSectionFormContents = ({
     onCancel,
-    notAssignedDataElements,
-    availableIndicators,
 }: DataSetSectionFormProps) => {
     const form = useForm<SectionFormValues>()
-    const { values } = useFormState()
-    const { submitting } = useFormState({ subscription: { submitting: true } })
+    const { submitting, values } = useFormState({
+        subscription: { submitting: true, values: true },
+    })
+
     const { input: dataElementsInput, meta: dataElementsMeta } = useField<
         DisplayableModel[]
     >('dataElements', {
         multiple: true,
         validateFields: [],
     })
+
     const { input: indicatorsInput, meta: indicatorsMeta } = useField<
         DisplayableModel[]
     >('indicators', {
         multiple: true,
         validateFields: [],
     })
-    const [
-        availableDataElementsMaybeFiltered,
-        setAvailableDataElementsMaybeFiltered,
-    ] = useState(notAssignedDataElements)
-    const [
-        availableIndicatorsMaybeFiltered,
-        setAvailableIndicatorsMaybeFiltered,
-    ] = useState(availableIndicators)
 
-    const handleDataElementsFilterChange = useDebouncedCallback(({ value }) => {
-        if (value != undefined) {
-            setAvailableDataElementsMaybeFiltered(
-                notAssignedDataElements.filter((de) =>
-                    de.displayName?.toLowerCase().includes(value)
-                )
-            )
-        }
-    }, 250)
+    const queryFn = useBoundResourceQueryFn()
+    const { data, isLoading } = useQuery({
+        queryFn: queryFn<DataSetDataElementsType>,
+        queryKey: [
+            {
+                resource: 'dataSets',
+                id: values.dataSet.id,
+                params: {
+                    fields: [
+                        'dataSetElements[dataElement[id,displayName]]',
+                        'indicators[id,displayName]',
+                        'sections[dataElements]',
+                    ].concat(),
+                },
+            },
+        ] as const,
+    })
 
-    const handleIndicatorsFilterChange = useDebouncedCallback(({ value }) => {
-        if (value != undefined) {
-            setAvailableIndicatorsMaybeFiltered(
-                notAssignedDataElements.filter((de) =>
-                    de.displayName?.toLowerCase().includes(value)
-                )
-            )
+    const availableDataElements = useMemo(() => {
+        if (!data) {
+            return []
         }
-    }, 250)
+        const sectionsDataElements = data?.sections.flatMap((section) =>
+            section.dataElements?.map((de) => de.id)
+        )
+        return data.dataSetElements
+            .map((de) => de.dataElement)
+            .filter((de) => !sectionsDataElements.includes(de.id))
+    }, [data])
 
     return (
         <div className={styles.sectionsWrapper}>
@@ -154,6 +168,7 @@ export const DataSetSectionFormContents = ({
                         name="dataElements"
                     >
                         <BaseModelTransfer
+                            loading={isLoading}
                             selected={dataElementsInput.value}
                             onChange={({ selected }) => {
                                 dataElementsInput.onChange(selected)
@@ -181,8 +196,7 @@ export const DataSetSectionFormContents = ({
                             selectedWidth="500px"
                             filterable
                             filterablePicked
-                            available={availableDataElementsMaybeFiltered}
-                            onFilterChange={handleDataElementsFilterChange}
+                            available={availableDataElements}
                             maxSelections={Infinity}
                         />
                     </Field>
@@ -233,8 +247,7 @@ export const DataSetSectionFormContents = ({
                             selectedWidth="500px"
                             filterable
                             filterablePicked
-                            available={availableIndicatorsMaybeFiltered}
-                            onFilterChange={handleIndicatorsFilterChange}
+                            available={data?.indicators ?? []}
                             maxSelections={Infinity}
                         />
                     </Field>

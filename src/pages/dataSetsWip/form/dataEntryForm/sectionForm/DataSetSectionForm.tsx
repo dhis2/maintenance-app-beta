@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { useQuery } from '@tanstack/react-query'
+import { FORM_ERROR } from 'final-form'
 import React, { useCallback, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { FormBase, FormBaseProps } from '../../../../../components'
@@ -15,20 +16,21 @@ import {
 } from '../../../../../lib'
 import { PickWithFieldFilters, Section } from '../../../../../types/generated'
 import { DisplayableModel } from '../../../../../types/models'
-import { initialSectionValues } from '../../dataSetFormSchema'
 import { DataSetSectionFormContents } from './DataSetSectionFormContents'
+import { initialSectionValues } from './sectionFormSchema'
 
 export const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     'name',
     'description',
-    'shortName',
     'code',
-    'indicators',
+    'indicators[id,displayName]',
     'showRowTotals',
+    'showColumnTotals',
+    'disableDataElementAutoGroup',
     'displayOptions',
     'dataElements[id,displayName]',
-]
+] as const
 
 const dataSetSectionSchemaSection = {
     name: SchemaName.section,
@@ -41,28 +43,26 @@ const dataSetSectionSchemaSection = {
 export type SectionFormValues = PickWithFieldFilters<
     Section,
     typeof fieldFilters
->
+> & { dataSet: { id: string } }
 
 export type DataSetSectionFormProps = {
     section?: SectionFormValues
     onCancel?: () => void
-    notAssignedDataElements: DisplayableModel[] //Partial<SectionFormValues['dataSet']>
-    availableIndicators: DisplayableModel[] //Partial<SectionFormValues['dataSet']>
 } & Pick<FormBaseProps<SectionFormValues>, 'onSubmit'>
+
 export const DataSetSectionForm = ({
     section,
     onSubmit,
     onCancel,
-    notAssignedDataElements,
-    availableIndicators,
 }: DataSetSectionFormProps) => {
     const dataSetId = useParams().id as string
-    const initialValues = useMemo(() => {
-        if (section) {
-            return section
-        }
-        return initialSectionValues
-    }, [section])
+    const initialValues: Partial<SectionFormValues> | undefined =
+        useMemo(() => {
+            if (section) {
+                return section
+            }
+            return initialSectionValues
+        }, [section])
 
     const valueFormatter = useCallback(
         (values: SectionFormValues) => {
@@ -75,15 +75,11 @@ export const DataSetSectionForm = ({
     )
     return (
         <FormBase
-            initialValues={initialValues}
+            initialValues={{ ...initialValues, dataSet: { id: dataSetId } }}
             onSubmit={onSubmit}
             valueFormatter={valueFormatter}
         >
-            <DataSetSectionFormContents
-                onCancel={onCancel}
-                notAssignedDataElements={notAssignedDataElements}
-                availableIndicators={availableIndicators}
-            />
+            <DataSetSectionFormContents onCancel={onCancel} />
             <DefaultFormErrorNotice />
         </FormBase>
     )
@@ -139,26 +135,20 @@ export const EditDataSetSectionForm = ({
 export const NewDataSetSectionForm = ({
     onCancel,
     onSubmitted: onSubmit,
-    notAssignedDataElements,
-    availableIndicators,
 }: {
     onCancel?: () => void
     onSubmitted?: (values: SectionFormValues) => void
-    notAssignedDataElements: DisplayableModel[] //Partial<SectionFormValues['dataSet']>
-    availableIndicators: DisplayableModel[] //Partial<SectionFormValues['dataSet']>
 }) => {
     const onDefaultSubmit = useOnSubmitNew({
         section: dataSetSectionSchemaSection,
         navigateTo: null,
     })
     const onFormSubmit: OnSubmit = async (values, form) => {
-        console.log('onSubmit', values)
-        // const res = await onDefaultSubmit(values, form)
-        // console.log({ res })
-        // if (!res) {
-        //     onSubmit?.(values)
-        // }
-        // return res
+        const res = await onDefaultSubmit(values, form)
+        if (res && !res[FORM_ERROR]) {
+            onSubmit?.(values)
+        }
+        return res
     }
 
     return (
@@ -166,33 +156,22 @@ export const NewDataSetSectionForm = ({
             section={undefined}
             onSubmit={onFormSubmit}
             onCancel={onCancel}
-            notAssignedDataElements={notAssignedDataElements}
-            availableIndicators={availableIndicators}
         />
     )
 }
 
 export const EditorNewDataSetSectionForm = ({
     section,
-    notAssignedDataElements,
-    availableIndicators,
     onCancel,
     onSubmitted: onSubmit,
 }: {
     section: DisplayableModel | null
-    notAssignedDataElements: DisplayableModel[] //Partial<SectionFormValues['dataSet']>
-    availableIndicators: DisplayableModel[] //Partial<SectionFormValues['dataSet']>
     onCancel?: () => void
     onSubmitted?: (values: SectionFormValues) => void
 }) => {
     if (section === null) {
         return (
-            <NewDataSetSectionForm
-                onSubmitted={onSubmit}
-                onCancel={onCancel}
-                notAssignedDataElements={notAssignedDataElements}
-                availableIndicators={availableIndicators}
-            />
+            <NewDataSetSectionForm onSubmitted={onSubmit} onCancel={onCancel} />
         )
     }
 

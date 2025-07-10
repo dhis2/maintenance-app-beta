@@ -31,12 +31,6 @@ const dataSetBaseSchema = z.object({
     formType: z.nativeEnum(DataSet.formType).default(DataSet.formType.DEFAULT),
 })
 
-export const sectionFormSchema = identifiable.extend({
-    description: z.string().optional(),
-    dataElements: z.array(z.object({ id: z.string() })),
-    indicators: z.array(z.object({ id: z.string() })),
-})
-
 export const dataSetFormSchema = identifiable
     .merge(withAttributeValues)
     .merge(dataSetBaseSchema)
@@ -50,14 +44,13 @@ export const dataSetFormSchema = identifiable
                         displayName: z.string(),
                     }),
                     categoryCombo: modelReference.optional(),
-                    dataSet: modelReference.optional(),
                 })
             )
             .default([]),
-        dataEntryForm: identifiable.extend({
-            htmlCode: z.string().optional(),
-            format: z.number().int().optional(),
-        }),
+        // dataEntryForm: identifiable.extend({
+        //     htmlCode: z.string().optional(),
+        //     format: z.number().int().optional(),
+        // }),
         categoryCombo: z
             .object({ id: z.string(), displayName: z.string() })
             .default({ ...DEFAULT_CATEGORY_COMBO }),
@@ -100,7 +93,16 @@ export const dataSetFormSchema = identifiable
         compulsoryFieldsCompleteOnly: z.boolean().default(false),
         workflow: z.object({ id: z.string() }).optional(),
         timelyDays: z.number().optional().default(15),
-        sections: z.array(sectionFormSchema).default([]),
+        sections: z
+            .array(
+                z.object({
+                    id: z.string(),
+                    displayName: z.string(),
+                    description: z.string().optional(),
+                    // dataSet: identifiable.optional(),
+                })
+            )
+            .default([]),
         compulsoryDataElementOperands: z
             .array(
                 z.object({
@@ -129,7 +131,6 @@ export const dataSetListSchema = withDefaultListColumns
     })
 
 export const initialValues = getDefaults(dataSetFormSchema)
-export const initialSectionValues = getDefaults(sectionFormSchema)
 
 export type DataSetFormValues = typeof initialValues
 
