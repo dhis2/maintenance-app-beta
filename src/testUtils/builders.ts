@@ -28,11 +28,13 @@ import {
     ProgramIndicatorGroupFormSchema,
     ProgramIndicatorGroupListSchema,
 } from '../pages/programIndicatorGroups/form'
-import { ProgramIndicatorsListSchema } from '../pages/programIndicators/ProgramIndicatorsSchema'
+import { ProgramIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
 import {
     CategoryMapping,
     OptionMapping,
     OrganisationUnit,
+    Program,
+    ProgramTrackedEntityAttribute,
 } from '../types/generated'
 
 const { withDefaultListColumns } = modelFormSchemas
@@ -63,8 +65,7 @@ const mockeryMapper = (keyName: string) => {
     return undefined
 }
 
-const { identifiable, referenceCollection, withAttributeValues } =
-    modelFormSchemas
+const { withAttributeValues } = modelFormSchemas
 
 export const testAccess = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(AccessSchema, { mockeryMapper }),
@@ -240,15 +241,42 @@ export const testFormProgramIndicatorGroup = (
     ...overwrites,
 })
 
+export const testCustomAttribute = ({
+    id = randomDhis2Id(),
+    displayFormName = faker.person.fullName(),
+    mandatory = faker.datatype.boolean(),
+    valueType = 'TEXT',
+} = {}) => ({
+    id,
+    displayFormName,
+    mandatory,
+    valueType,
+})
+
+export const testLegendSets = ({
+    id = randomDhis2Id(),
+    displayName = faker.person.fullName(),
+} = {}) => ({
+    id,
+    displayName,
+})
+
 export const testProgram = ({
     id = randomDhis2Id(),
     name = faker.person.fullName(),
     categoryMappings = [] as CategoryMapping[],
+    programType = randomValueIn([
+        'WITH_REGISTRATION',
+        'WITHOUT_REGISTRATION',
+    ]) as Program.programType,
+    programTrackedEntityAttributes = [] as ProgramTrackedEntityAttribute[],
 } = {}) => ({
     id,
     name,
     displayName: name,
     categoryMappings,
+    programType,
+    programTrackedEntityAttributes,
 })
 
 export const testOrgUnitLevel = ({

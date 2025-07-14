@@ -86,6 +86,11 @@ export const FORM_TYPE = {
     SECTION_MULTIORG: i18n.t('Section Multi-org'),
 }
 
+export const ANALYTICS_TYPE = {
+    EVENT: i18n.t('Event'),
+    ENROLLMENT: i18n.t('Enrollment'),
+}
+
 const PERIOD_TYPE = {
     BiMonthly: i18n.t('BiMonthly'),
     BiWeekly: i18n.t('BiWeekly'),
@@ -111,6 +116,7 @@ const PERIOD_TYPE = {
 
 const allConstantTranslations: Record<string, string> = {
     ...AGGREGATION_TYPE,
+    ...ANALYTICS_TYPE,
     ...DOMAIN_TYPE,
     ...VALUE_TYPE,
     ...DATA_DIMENSION_TYPE,
