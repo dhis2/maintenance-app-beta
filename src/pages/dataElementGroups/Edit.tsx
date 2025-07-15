@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { FormBase } from '../../components'
-import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
+import { DefaultEditFormContents, FormBase } from '../../components'
 import {
     useOnSubmitEdit,
     useBoundResourceQueryFn,
@@ -41,9 +40,9 @@ export const Component = () => {
             initialValues={dataElementGroup.data}
             validate={validate}
         >
-            <DefaultNewFormContents section={section}>
+            <DefaultEditFormContents section={section}>
                 <DataElementGroupFormFields />
-            </DefaultNewFormContents>
+            </DefaultEditFormContents>
         </FormBase>
     )
 }
