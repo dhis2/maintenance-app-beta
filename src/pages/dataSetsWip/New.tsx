@@ -19,30 +19,30 @@ const section = SECTIONS_MAP.dataSet
 
 export const Component = () => {
     return (
-        <SectionedFormProvider formDescriptor={DataSetFormDescriptor}>
-            <FormBase
-                onSubmit={useOnSubmitNew({ section })}
-                valueFormatter={dataSetValueFormatter}
-                initialValues={initialValues}
-                validate={validate}
-                subscription={{}}
-            >
-                {({ handleSubmit }) => {
-                    return (
-                        <>
-                            <SectionedFormLayout
-                                sidebar={<DefaultSectionedFormSidebar />}
-                            >
-                                <form onSubmit={handleSubmit}>
-                                    <DataSetFormContents />
-                                    <DefaultFormFooter />
-                                </form>
-                                <SectionedFormErrorNotice />
-                            </SectionedFormLayout>
-                        </>
-                    )
-                }}
-            </FormBase>
-        </SectionedFormProvider>
+        <FormBase
+            onSubmit={useOnSubmitNew({ section })}
+            valueFormatter={dataSetValueFormatter}
+            initialValues={initialValues}
+            validate={validate}
+            subscription={{}}
+        >
+            {({ handleSubmit }) => {
+                return (
+                    <SectionedFormProvider
+                        formDescriptor={DataSetFormDescriptor}
+                    >
+                        <SectionedFormLayout
+                            sidebar={<DefaultSectionedFormSidebar />}
+                        >
+                            <form onSubmit={handleSubmit}>
+                                <DataSetFormContents />
+                                <DefaultFormFooter />
+                            </form>
+                            <SectionedFormErrorNotice />
+                        </SectionedFormLayout>
+                    </SectionedFormProvider>
+                )
+            }}
+        </FormBase>
     )
 }

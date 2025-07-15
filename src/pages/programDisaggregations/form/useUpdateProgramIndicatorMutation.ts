@@ -1,7 +1,12 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import { pick } from 'lodash'
 import { useCallback } from 'react'
-import { parseErrorResponse, SECTIONS_MAP, usePatchModel } from '../../../lib'
+import {
+    parseErrorResponse,
+    SECTIONS_MAP,
+    usePatchModel,
+    DEFAULT_CATEGORY_COMBO,
+} from '../../../lib'
 import { JsonPatchOperation } from '../../../types'
 import {
     ProgramDisaggregationFormValues,
@@ -38,6 +43,20 @@ export const useUpdateProgramIndicatorMutation = () => {
             const newAggregateExportDataElement =
                 programIndicatorMapping?.aggregateExportDataElement ?? null
 
+            const newAggregateExportCategoryOptionCombo =
+                !newCategoryCombo ||
+                newCategoryCombo?.id === DEFAULT_CATEGORY_COMBO.id
+                    ? programIndicatorMapping?.aggregateExportCategoryOptionCombo ??
+                      null
+                    : null
+
+            const newAggregateExportAttributeOptionCombo =
+                !newAttributeCombo ||
+                newAttributeCombo?.id === DEFAULT_CATEGORY_COMBO.id
+                    ? programIndicatorMapping?.aggregateExportAttributeOptionCombo ??
+                      null
+                    : null
+
             const patchOperations = {
                 type: 'json-patch',
                 resource: SECTIONS_MAP.programIndicator.namePlural,
@@ -62,6 +81,16 @@ export const useUpdateProgramIndicatorMutation = () => {
                         op: 'replace',
                         path: '/aggregateExportDataElement',
                         value: newAggregateExportDataElement,
+                    },
+                    {
+                        op: 'replace',
+                        path: '/aggregateExportCategoryOptionCombo',
+                        value: newAggregateExportCategoryOptionCombo,
+                    },
+                    {
+                        op: 'replace',
+                        path: '/aggregateExportAttributeOptionCombo',
+                        value: newAggregateExportAttributeOptionCombo,
                     },
                 ],
             } as const

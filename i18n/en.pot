@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-06-09T16:32:52.828Z\n"
-"PO-Revision-Date: 2025-06-09T16:32:52.828Z\n"
+"POT-Creation-Date: 2025-07-04T11:13:59.060Z\n"
+"PO-Revision-Date: 2025-07-04T11:13:59.060Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -210,11 +210,6 @@ msgstr "Correct confirmation code must be entered to merge"
 
 msgid "Merge"
 msgstr "Merge"
-
-msgid "Merging {{count}} {{model}}..."
-msgid_plural "Merging {{count}} {{model}}..."
-msgstr[0] "Merging {{count}} {{model}}..."
-msgstr[1] "Merging {{count}} {{model}}..."
 
 msgid "Merging..."
 msgstr "Merging..."
@@ -594,11 +589,11 @@ msgstr "Data element group sets"
 msgid "Data sets"
 msgstr "Data sets"
 
-msgid "Data set notification template"
-msgstr "Data set notification template"
+msgid "Data set notification"
+msgstr "Data set notification"
 
-msgid "Data set notification templates"
-msgstr "Data set notification templates"
+msgid "Data set notifications"
+msgstr "Data set notifications"
 
 msgid "Indicator"
 msgstr "Indicator"
@@ -1134,6 +1129,33 @@ msgstr "Please provide a date."
 msgid "Period type"
 msgstr "Period type"
 
+msgid "Message template"
+msgstr "Message template"
+
+msgid "Favourite"
+msgstr "Favourite"
+
+msgid "Data set notification trigger"
+msgstr "Data set notification trigger"
+
+msgid "Notification recipient"
+msgstr "Notification recipient"
+
+msgid "Notify parent organisation unit only"
+msgstr "Notify parent organisation unit only"
+
+msgid "Notify users in hierarchy only"
+msgstr "Notify users in hierarchy only"
+
+msgid "Relative scheduled days"
+msgstr "Relative scheduled days"
+
+msgid "Send notification as"
+msgstr "Send notification as"
+
+msgid "Subject template"
+msgstr "Subject template"
+
 msgid "Offline levels"
 msgstr "Offline levels"
 
@@ -1193,11 +1215,6 @@ msgstr "Filter available categories"
 
 msgid "Filter selected categories"
 msgstr "Filter selected categories"
-
-msgid "{{count}} category option combinations will be generated."
-msgid_plural "{{count}} category option combinations will be generated."
-msgstr[0] "{{count}} category option combinations will be generated."
-msgstr[1] "{{count}} category option combinations will be generated."
 
 msgid "More than 4 Categories"
 msgstr "More than 4 Categories"
@@ -1370,15 +1387,11 @@ msgstr ""
 "What should happen to the source category options after the merge is "
 "complete?"
 
-msgid "Keep {{ count }} source category options"
-msgid_plural "Keep {{ count }} source category options"
-msgstr[0] "Keep {{ count }} source category options"
-msgstr[1] "Keep {{ count }} source category options"
+msgid "Custom attributes"
+msgstr "Custom attributes"
 
-msgid "Delete {{ count }} source category options"
-msgid_plural "Delete {{ count }} source category options"
-msgstr[0] "Delete {{ count }} source category options"
-msgstr[1] "Delete {{ count }} source category options"
+msgid "Create data element group"
+msgstr "Create data element group"
 
 msgid "Selected data element groups"
 msgstr "Selected data element groups"
@@ -1397,6 +1410,9 @@ msgstr "Set up the information for this data element group."
 
 msgid "Explain the purpose of this data element group."
 msgstr "Explain the purpose of this data element group."
+
+msgid "Create data element"
+msgstr "Create data element"
 
 msgid "The default way to aggregate this data element in analytics."
 msgstr "The default way to aggregate this data element in analytics."
@@ -1499,11 +1515,125 @@ msgstr ""
 "level means that data from lower levels will not be included in the "
 "aggregation."
 
-msgid "Send complete notifications"
-msgstr "Send complete notifications"
+msgid "Error"
+msgstr "Error"
+
+msgid "Error loading notification template"
+msgstr "Error loading notification template"
+
+msgid "Choose which data sets to send this notification for"
+msgstr "Choose which data sets to send this notification for"
+
+msgid "Available Data Sets"
+msgstr "Available Data Sets"
+
+msgid "Selected Data Sets"
+msgstr "Selected Data Sets"
+
+msgid "Search data sets..."
+msgstr "Search data sets..."
+
+msgid "Filter selected data sets..."
+msgstr "Filter selected data sets..."
+
+msgid "Set up the basic information for the notification template."
+msgstr "Set up the basic information for the notification template."
+
+msgid "Message content"
+msgstr "Message content"
+
+msgid "Configure the templates for the notification content and subject."
+msgstr "Configure the templates for the notification content and subject."
+
+msgid "Notification timing"
+msgstr "Notification timing"
+
+msgid "Choose what triggers the notification and when it should be sent."
+msgstr "Choose what triggers the notification and when it should be sent."
+
+msgid "Recipient"
+msgstr "Recipient"
+
+msgid "Choose who recieves the notification."
+msgstr "Choose who recieves the notification."
+
+msgid "SMS"
+msgstr "SMS"
+
+msgid "Immediately after data set completion"
+msgstr "Immediately after data set completion"
+
+msgid "Scheduled Days"
+msgstr "Scheduled Days"
+
+msgid "Collective Summary"
+msgstr "Collective Summary"
+
+msgid "Single Notification"
+msgstr "Single Notification"
+
+msgid "When to send notification"
+msgstr "When to send notification"
+
+msgid "Send notification"
+msgstr "Send notification"
+
+msgid "days"
+msgstr "days"
+
+msgid "Before"
+msgstr "Before"
+
+msgid "After"
+msgstr "After"
+
+msgid "scheduled date"
+msgstr "scheduled date"
+
+msgid "User Group"
+msgstr "User Group"
+
+msgid "Organisation Unit Contact"
+msgstr "Organisation Unit Contact"
+
+msgid "Recipient type"
+msgstr "Recipient type"
+
+msgid "User Group Recipients"
+msgstr "User Group Recipients"
+
+msgid "Used as the template for the subject field."
+msgstr "Used as the template for the subject field."
+
+msgid "Subject"
+msgstr "Subject"
+
+msgid "Used as template for the message field."
+msgstr "Used as template for the message field."
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Edit Data Set Notification"
+msgstr "Edit Data Set Notification"
+
+msgid "Trigger"
+msgstr "Trigger"
+
+msgid "Scheduled days"
+msgstr "Scheduled days"
+
+msgid "Send strategy"
+msgstr "Send strategy"
 
 msgid "Recipient user group"
 msgstr "Recipient user group"
+
+msgid "Delivery channels"
+msgstr "Delivery channels"
+
+msgid "Send complete notifications"
+msgstr "Send complete notifications"
 
 msgid "Send notification to completing user"
 msgstr "Send notification to completing user"
@@ -1687,6 +1817,9 @@ msgstr "Limit data entry by period"
 
 msgid "Optionally configure when data can be entered for certain periods"
 msgstr "Optionally configure when data can be entered for certain periods"
+
+msgid "A data set with this name already exists"
+msgstr "A data set with this name already exists"
 
 msgid "Set up the basic information for this data set."
 msgstr "Set up the basic information for this data set."
@@ -1895,16 +2028,6 @@ msgstr ""
 "What should happen to the source indicator types after the merge is "
 "complete?"
 
-msgid "Keep {{ count }} source indicator types"
-msgid_plural "Keep {{ count }} source indicator types"
-msgstr[0] "Keep {{ count }} source indicator types"
-msgstr[1] "Keep {{ count }} source indicator types"
-
-msgid "Delete {{ count }} source indicator types"
-msgid_plural "Delete {{ count }} source indicator types"
-msgstr[0] "Delete {{ count }} source indicator types"
-msgstr[1] "Delete {{ count }} source indicator types"
-
 msgid "Conflicting factors"
 msgstr "Conflicting factors"
 
@@ -1955,16 +2078,6 @@ msgstr "No indicators available. Remove one from source."
 
 msgid "What should happen to the source indicators after the merge is complete?"
 msgstr "What should happen to the source indicators after the merge is complete?"
-
-msgid "Keep {{ count }} source indicators"
-msgid_plural "Keep {{ count }} source indicators"
-msgstr[0] "Keep {{ count }} source indicators"
-msgstr[1] "Keep {{ count }} source indicators"
-
-msgid "Delete {{ count }} source indicators"
-msgid_plural "Delete {{ count }} source indicators"
-msgstr[0] "Delete {{ count }} source indicators"
-msgstr[1] "Delete {{ count }} source indicators"
 
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."
@@ -2273,9 +2386,6 @@ msgstr "Disaggregation categories"
 msgid "Attribute categories"
 msgstr "Attribute categories"
 
-msgid "Error"
-msgstr "Error"
-
 msgid "Could not load programs or indicators data."
 msgstr "Could not load programs or indicators data."
 
@@ -2413,11 +2523,6 @@ msgstr "Delete Mapping"
 msgid "This action cannot be undone."
 msgstr "This action cannot be undone."
 
-msgid "All mappings ({{count}}) will be removed."
-msgid_plural "All mappings ({{count}}) will be removed."
-msgstr[0] "All mappings ({{count}}) will be removed."
-msgstr[1] "All mappings ({{count}}) will be removed."
-
 msgid "Are you sure you want to delete this program mapping configuration?"
 msgstr "Are you sure you want to delete this program mapping configuration?"
 
@@ -2450,3 +2555,11 @@ msgstr "program_indicator_mappings"
 msgctxt "mappings"
 msgid "disaggregation_category"
 msgstr "disaggregation_category_mappings"
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Maintenance (Preview)"
+
+msgctxt "Application description"
+msgid "__MANIFEST_APP_DESCRIPTION"
+msgstr ""
