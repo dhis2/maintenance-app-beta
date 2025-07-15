@@ -18,10 +18,12 @@ export const dataElementSchema = identifiable
         formName: z.string().trim().optional(),
         url: z.string().trim().optional(),
         fieldMask: z.string().trim().optional(),
-        style: z.object({
-            color: z.string().optional(),
-            icon: z.string().optional(),
-        }),
+        style: z
+            .object({
+                color: z.string().optional(),
+                icon: z.string().optional(),
+            })
+            .default({}),
         domainType: z
             .union([z.literal('AGGREGATE'), z.literal('TRACKER')])
             .default('AGGREGATE'),

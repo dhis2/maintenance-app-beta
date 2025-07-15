@@ -9,7 +9,7 @@ import {
     randomDhis2Id,
     randomLongString,
     testCustomAttribute,
-    testLegendSets,
+    testLegendSet,
     testProgram,
     testProgramIndicator,
 } from '../../testUtils/builders'
@@ -141,7 +141,7 @@ describe('Program indicator form tests', () => {
             ) => {
                 const attributes = [testCustomAttribute()]
                 const programs = [testProgram(), testProgram(), testProgram()]
-                const legendSets = [testLegendSets(), testLegendSets()]
+                const legendSets = [testLegendSet(), testLegendSet()]
                 const screen = render(
                     <TestComponentWithRouter
                         path={`/${section.namePlural}`}
@@ -566,7 +566,7 @@ describe('Program indicator form tests', () => {
             ) => {
                 const attributes = [testCustomAttribute({ mandatory: false })]
                 const programs = [testProgram(), testProgram(), testProgram()]
-                const legendSets = [testLegendSets(), testLegendSets()]
+                const legendSets = [testLegendSet(), testLegendSet()]
                 const screen = render(
                     <TestComponentWithRouter
                         path={`/${section.namePlural}`}
@@ -1341,7 +1341,7 @@ describe('Program indicator form tests', () => {
                     testProgram(),
                 ]
                 const attributes = [testCustomAttribute()]
-                const legendSets = [testLegendSets(), testLegendSets()]
+                const legendSets = [testLegendSet(), testLegendSet()]
                 const periodTypes = ['Daily', 'Monthly', 'Yearly']
                 const programIndicator = testProgramIndicator({
                     id,

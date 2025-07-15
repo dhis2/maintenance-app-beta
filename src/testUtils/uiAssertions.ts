@@ -48,6 +48,26 @@ const expectCheckboxFieldToExist = (
     }
 }
 
+const expectRadioFieldToExist = (
+    fieldName: string,
+    radios: { label: string; checked: boolean }[],
+    screen: RenderResult
+) => {
+    const field = screen.getByTestId(`formfields-${fieldName}`)
+    const radioButtons = within(field).getAllByRole('radio')
+    expect(radios).toHaveLength(radios.length)
+    radios.forEach((radio, index) => {
+        expect(
+            radioButtons[index].closest('[data-test="dhis2-uicore-radio"]')
+        ).toHaveTextContent(radio.label)
+        if (radio.checked) {
+            expect(radioButtons[index]).toBeChecked()
+        } else {
+            expect(radioButtons[index]).not.toBeChecked()
+        }
+    })
+}
+
 const expectInputFieldToHaveError = (
     fieldTestId: string,
     errorText: string,
@@ -125,6 +145,48 @@ const expectSelectToExistWithOptions = async (
     })
     await userEvent.click(selectInput)
 }
+
+const expectMultiSelectToExistWithOptions = async (
+    triggeringDiv: HTMLElement,
+    {
+        selected = [],
+        options = [],
+    }: {
+        selected: { displayName: string }[]
+        options: { displayName: string }[]
+    },
+    screen: RenderResult
+) => {
+    const selectInput = within(triggeringDiv).getByTestId(
+        'dhis2-uicore-select-input'
+    )
+    expect(selectInput).toBeVisible()
+    selected.forEach((s) =>
+        expect(selectInput).toHaveTextContent(s.displayName)
+    )
+    await userEvent.click(selectInput)
+    const optionsWrapper = await screen.findByTestId(
+        'dhis2-uicore-select-menu-menuwrapper'
+    )
+    expect(optionsWrapper).toBeVisible()
+    const foundOptions = within(optionsWrapper).getAllByTestId(
+        'dhis2-uicore-multiselectoption'
+    )
+    expect(foundOptions).toHaveLength(options.length)
+    options.forEach((option, index) => {
+        expect(foundOptions[index]).toHaveTextContent(option.displayName)
+        if (selected.map((s) => s.displayName).includes(option.displayName)) {
+            expect(
+                within(foundOptions[index]).getByRole('checkbox')
+            ).toBeChecked()
+        } else {
+            expect(
+                within(foundOptions[index]).getByRole('checkbox')
+            ).not.toBeChecked()
+        }
+    })
+    await userEvent.click(selectInput)
+}
 const expectInputToErrorWhenExceedsLength = async (
     fieldName: string,
     maxLength: number,
@@ -167,7 +229,9 @@ export const uiAssertions = {
     expectFieldToHaveError: expectInputFieldToHaveError,
     expectTransferFieldToExistWithOptions,
     expectSelectToExistWithOptions,
+    expectMultiSelectToExistWithOptions,
     expectCheckboxFieldToExist,
+    expectRadioFieldToExist,
     expectInputToErrorWhenExceedsLength,
     expectNameToErrorWhenExceedsLength: (
         screen: RenderResult,
@@ -185,4 +249,5 @@ export const uiAssertions = {
         duplicateCode: string,
         screen: RenderResult
     ) => expectInputToErrorWhenDuplicate('code', duplicateCode, screen),
+    expectInputToErrorWhenDuplicate,
 }
