@@ -23,6 +23,7 @@ const ProgramIndicatorsBaseSchema = z.object({
     legendSets: referenceCollection.default([]),
     aggregateExportCategoryOptionCombo: z.string().optional(),
     aggregateExportAttributeOptionCombo: z.string().optional(),
+    aggregateExportDataElement: z.string().optional(),
     expression: z.string().optional(),
     filter: z.string().optional(),
     orgUnitField: z.string().optional(),

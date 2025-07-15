@@ -682,11 +682,11 @@ describe('Program indicator form tests', () => {
                 '',
                 screen
             )
-            // uiAssertions.expectInputFieldToExist(
-            //     'aggregateExportDataElement',
-            //     '',
-            //     screen
-            // )
+            uiAssertions.expectInputFieldToExist(
+                'aggregateExportDataElement',
+                '',
+                screen
+            )
             expect(screen.getByTestId('add-boundary-button')).toBeVisible()
             await uiAssertions.expectTransferFieldToExistWithOptions(
                 'legendSets-field',
@@ -822,7 +822,7 @@ describe('Program indicator form tests', () => {
                         displayInForm: false,
                         aggregateExportAttributeOptionCombo: undefined,
                         aggregateExportCategoryOptionCombo: undefined,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: undefined,
                         legendSets: [],
                         attributeValues: [],
                         expression: undefined,
@@ -916,7 +916,7 @@ describe('Program indicator form tests', () => {
                         displayInForm: false,
                         aggregateExportAttributeOptionCombo: undefined,
                         aggregateExportCategoryOptionCombo: undefined,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: undefined,
                         legendSets: [],
                         attributeValues: [],
                         expression: anExpression,
@@ -1007,7 +1007,7 @@ describe('Program indicator form tests', () => {
                         displayInForm: false,
                         aggregateExportAttributeOptionCombo: undefined,
                         aggregateExportCategoryOptionCombo: undefined,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: undefined,
                         legendSets: [],
                         attributeValues: [],
                         expression: undefined,
@@ -1035,7 +1035,7 @@ describe('Program indicator form tests', () => {
             const aShortName = faker.internet.userName()
             const aCatOptionExport = faker.internet.userName()
             const anAttOptionExport = faker.internet.userName()
-            // const anAggDataExport = faker.internet.userName()
+            const anAggDataExport = faker.internet.userName()
 
             const periodTypes = ['Daily', 'Monthly', 'Yearly']
             const { screen } = await renderForm({
@@ -1096,11 +1096,11 @@ describe('Program indicator form tests', () => {
                 anAttOptionExport,
                 screen
             )
-            // await uiActions.enterInputFieldValue(
-            //     'aggregateExportDataElement',
-            //     anAggDataExport,
-            //     screen
-            // )
+            await uiActions.enterInputFieldValue(
+                'aggregateExportDataElement',
+                anAggDataExport,
+                screen
+            )
 
             await uiActions.submitForm(screen)
             expect(createMock).toHaveBeenCalledTimes(1)
@@ -1120,7 +1120,7 @@ describe('Program indicator form tests', () => {
                         displayInForm: true,
                         aggregateExportAttributeOptionCombo: anAttOptionExport,
                         aggregateExportCategoryOptionCombo: aCatOptionExport,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: anAggDataExport,
                         legendSets: [],
                         attributeValues: [],
                         expression: undefined,
@@ -1209,7 +1209,7 @@ describe('Program indicator form tests', () => {
                         displayInForm: false,
                         aggregateExportAttributeOptionCombo: undefined,
                         aggregateExportCategoryOptionCombo: undefined,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: undefined,
                         legendSets: [
                             expect.objectContaining({ id: legendSets[0].id }),
                         ],
@@ -1301,7 +1301,7 @@ describe('Program indicator form tests', () => {
                         displayInForm: false,
                         aggregateExportAttributeOptionCombo: undefined,
                         aggregateExportCategoryOptionCombo: undefined,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: undefined,
                         legendSets: [],
                         attributeValues: [
                             {
@@ -1573,11 +1573,11 @@ describe('Program indicator form tests', () => {
                 programIndicator.aggregateExportAttributeOptionCombo,
                 screen
             )
-            // uiAssertions.expectInputFieldToExist(
-            //     'aggregateExportDataElement',
-            //     '',
-            //     screen
-            // )
+            uiAssertions.expectInputFieldToExist(
+                'aggregateExportDataElement',
+                programIndicator.aggregateExportDataElement,
+                screen
+            )
         })
         it('contain the legend transfer', async () => {
             const { screen, legendSets } = await renderForm()
