@@ -10,6 +10,7 @@ const {
     modelReference,
     withAttributeValues,
     withDefaultListColumns,
+    style,
 } = modelFormSchemas
 
 const ProgramIndicatorsBaseSchema = z.object({
@@ -23,6 +24,7 @@ const ProgramIndicatorsBaseSchema = z.object({
     legendSets: referenceCollection.default([]),
     aggregateExportCategoryOptionCombo: z.string().optional(),
     aggregateExportAttributeOptionCombo: z.string().optional(),
+    aggregateExportDataElement: z.string().optional(),
     expression: z.string().optional(),
     filter: z.string().optional(),
     orgUnitField: z.string().optional(),
@@ -50,10 +52,7 @@ export const programIndicatorFormSchema = ProgramIndicatorsBaseSchema.merge(
     .extend({
         shortName: z.string().trim(),
         code: z.string().trim().optional(),
-        style: z.object({
-            color: z.string().optional(),
-            icon: z.string().optional(),
-        }),
+        style: style.optional(),
         orgUnitField: z.string().optional(),
         analyticsPeriodBoundaries: z
             .array(
