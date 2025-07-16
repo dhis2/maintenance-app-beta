@@ -10,6 +10,7 @@ const {
     modelReference,
     withAttributeValues,
     withDefaultListColumns,
+    style,
 } = modelFormSchemas
 
 const ProgramIndicatorsBaseSchema = z.object({
@@ -51,10 +52,7 @@ export const programIndicatorFormSchema = ProgramIndicatorsBaseSchema.merge(
     .extend({
         shortName: z.string().trim(),
         code: z.string().trim().optional(),
-        style: z.object({
-            color: z.string().optional(),
-            icon: z.string().optional(),
-        }),
+        style: style.optional(),
         orgUnitField: z.string().optional(),
         analyticsPeriodBoundaries: z
             .array(

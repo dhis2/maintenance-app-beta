@@ -827,7 +827,6 @@ describe('Program indicator form tests', () => {
                         attributeValues: [],
                         expression: undefined,
                         filter: undefined,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [],
                         orgUnitField: staticOptions.eventDefault.value,
                     }),
@@ -921,7 +920,6 @@ describe('Program indicator form tests', () => {
                         attributeValues: [],
                         expression: anExpression,
                         filter: aFilter,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [],
                         orgUnitField: undefined,
                     }),
@@ -1012,7 +1010,6 @@ describe('Program indicator form tests', () => {
                         attributeValues: [],
                         expression: undefined,
                         filter: undefined,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [
                             {
                                 boundaryTarget: 'INCIDENT_DATE',
@@ -1125,7 +1122,6 @@ describe('Program indicator form tests', () => {
                         attributeValues: [],
                         expression: undefined,
                         filter: undefined,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [],
                         orgUnitField: undefined,
                     }),
@@ -1216,7 +1212,6 @@ describe('Program indicator form tests', () => {
                         attributeValues: [],
                         expression: undefined,
                         filter: undefined,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [],
                         orgUnitField: undefined,
                     }),
@@ -1313,7 +1308,6 @@ describe('Program indicator form tests', () => {
                         ],
                         expression: undefined,
                         filter: undefined,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [],
                         orgUnitField: undefined,
                     }),
@@ -1351,7 +1345,6 @@ describe('Program indicator form tests', () => {
                         { attribute: attributes[0], value: 'attribute' },
                     ],
                     orgUnitField: staticOptions.eventDefault.value,
-                    style: { color: undefined, icon: undefined },
                     analyticsPeriodBoundaries: [
                         {
                             boundaryTarget: 'INCIDENT_DATE',
