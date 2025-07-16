@@ -46,20 +46,20 @@ export type SectionFormValues = SectionFormValuesFetched & {
 }
 
 export type DataSetSectionFormProps = {
-    section?: SectionFormValues
+    dataSetSection?: SectionFormValues
     onCancel?: () => void
 } & Pick<FormBaseProps<SectionFormValues>, 'onSubmit'>
 
 export const DataSetSectionForm = ({
-    section,
+    dataSetSection,
     onSubmit,
     onCancel,
 }: DataSetSectionFormProps) => {
     const dataSetId = useParams().id as string
     const initialValues: Partial<SectionFormValues> | undefined =
         useMemo(() => {
-            if (section) {
-                return section
+            if (dataSetSection) {
+                return dataSetSection
             }
             return {
                 ...initialSectionValues,
@@ -67,7 +67,7 @@ export const DataSetSectionForm = ({
                     initialSectionValues?.displayOptions &&
                     JSON.parse(initialSectionValues?.displayOptions),
             }
-        }, [section])
+        }, [dataSetSection])
 
     const valueFormatter = useCallback(
         (values: SectionFormValues) => {
@@ -133,7 +133,7 @@ export const EditDataSetSectionForm = ({
 
     return (
         <DataSetSectionForm
-            section={sectionValues.data}
+            dataSetSection={sectionValues.data}
             onSubmit={onFormSubmit}
             onCancel={onCancel}
         />
@@ -162,7 +162,7 @@ export const NewDataSetSectionForm = ({
 
     return (
         <DataSetSectionForm
-            section={undefined}
+            dataSetSection={undefined}
             onSubmit={onFormSubmit}
             onCancel={onCancel}
         />
@@ -170,15 +170,15 @@ export const NewDataSetSectionForm = ({
 }
 
 export const EditorNewDataSetSectionForm = ({
-    section,
+    dataSetSection,
     onCancel,
     onSubmitted: onSubmit,
 }: {
-    section: DisplayableModel | null
+    dataSetSection: DisplayableModel | null
     onCancel?: () => void
     onSubmitted?: (values: SectionFormValues) => void
 }) => {
-    if (section === null) {
+    if (dataSetSection === null) {
         return (
             <NewDataSetSectionForm onSubmitted={onSubmit} onCancel={onCancel} />
         )
@@ -186,7 +186,7 @@ export const EditorNewDataSetSectionForm = ({
 
     return (
         <EditDataSetSectionForm
-            section={section}
+            section={dataSetSection}
             onCancel={onCancel}
             onSubmitted={onSubmit}
         />

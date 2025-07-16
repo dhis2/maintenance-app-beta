@@ -40,7 +40,7 @@ export const SectionFormSectionsList = () => {
             >
                 {isSectionFormOpen && (
                     <EditorNewDataSetSectionForm
-                        section={sectionFormOpen}
+                        dataSetSection={sectionFormOpen}
                         onCancel={() => setSectionFormOpen(undefined)}
                         onSubmitted={() => setSectionFormOpen(undefined)}
                     />
