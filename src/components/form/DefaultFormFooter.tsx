@@ -13,7 +13,7 @@ export const DefaultFormFooter = ({ cancelTo }: { cancelTo?: To }) => {
     })
 
     return createPortalToFooter(
-        <div className={css.formActions}>
+        <FormFooterWrapper>
             <StandardFormActions
                 cancelLabel={i18n.t('Cancel')}
                 submitLabel={i18n.t('Save and close')}
@@ -21,6 +21,12 @@ export const DefaultFormFooter = ({ cancelTo }: { cancelTo?: To }) => {
                 onSubmitClick={submit}
                 cancelTo={cancelTo ?? '../'}
             />
-        </div>
+        </FormFooterWrapper>
     )
 }
+
+export const FormFooterWrapper = ({
+    children,
+}: {
+    children: React.ReactNode
+}) => <div className={css.formActions}>{children}</div>

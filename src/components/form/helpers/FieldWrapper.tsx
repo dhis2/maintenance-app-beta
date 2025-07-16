@@ -13,7 +13,7 @@ export const FieldWrapper = ({
     return (
         <Field
             error={meta.touched && meta.error}
-            validationText={meta.touched && meta.error}
+            validationText={meta.touched ? meta.error?.toString() : undefined}
             {...fieldProps}
         >
             {children}

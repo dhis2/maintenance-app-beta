@@ -1,10 +1,11 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
+import { Logo } from '@dhis2/ui'
 import { useQueryClient } from '@tanstack/react-query'
 import { useCallback, useMemo } from 'react'
 import { FormProps } from 'react-final-form'
 import { ModelSection } from '../../types'
-import { IdentifiableObject } from '../../types/generated'
+import { FontStyle, IdentifiableObject } from '../../types/generated'
 import { getSectionPath, useNavigateWithSearchState } from '../routeUtils'
 import { createFormError } from './createFormError'
 import {
@@ -13,13 +14,28 @@ import {
 } from './createJsonPatchOperations'
 import { useCreateModel } from './useCreateModel'
 import { usePatchModel } from './usePatchModel'
+import textAlign = FontStyle.textAlign
 
 type OnSubmit<TValues> = FormProps<TValues>['onSubmit']
 
-type UseOnSubmitEditOptions = {
+interface Navigateable {
+    navigateTo?:
+        | ((section: ModelSection) => string | undefined)
+        | undefined
+        | null
+}
+
+const defaultNavigate = {
+    navigateTo: (section: ModelSection) => `/${getSectionPath(section)}`,
+}
+export type UseOnSubmitEditOptions = {
     modelId: string
     section: ModelSection
-}
+} & Navigateable
+
+export type UseOnSubmitNewOptions = {
+    section: ModelSection
+} & Navigateable
 
 export const useOnEditCompletedSuccessfully = (section: ModelSection) => {
     const saveAlert = useAlert(
@@ -30,7 +46,10 @@ export const useOnEditCompletedSuccessfully = (section: ModelSection) => {
     const navigate = useNavigateWithSearchState()
 
     return useCallback(
-        ({ withChanges }: { withChanges: boolean }) => {
+        ({
+            withChanges,
+            navigateTo,
+        }: { withChanges: boolean } & Navigateable) => {
             if (withChanges) {
                 saveAlert.show({
                     message: i18n.t('Saved successfully'),
@@ -44,7 +63,12 @@ export const useOnEditCompletedSuccessfully = (section: ModelSection) => {
             queryClient.invalidateQueries({
                 queryKey: [{ resource: section.namePlural }],
             })
-            navigate(`/${getSectionPath(section)}`)
+            if (navigateTo) {
+                const path = navigateTo(section)
+                if (path) {
+                    navigate(path)
+                }
+            }
         },
         [saveAlert, queryClient, navigate, section]
     )
@@ -53,6 +77,7 @@ export const useOnEditCompletedSuccessfully = (section: ModelSection) => {
 export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
     modelId,
     section,
+    navigateTo = defaultNavigate.navigateTo,
 }: UseOnSubmitEditOptions) => {
     const patchDirtyFields = usePatchModel(modelId, section.namePlural)
     const onEditCompletedSuccessfully = useOnEditCompletedSuccessfully(section)
@@ -65,7 +90,7 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
                 originalValue: form.getState().initialValues,
             })
             if (jsonPatchOperations.length < 1) {
-                onEditCompletedSuccessfully({ withChanges: false })
+                onEditCompletedSuccessfully({ withChanges: false, navigateTo })
                 return
             }
             const response = await patchDirtyFields(jsonPatchOperations)
@@ -74,9 +99,9 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
                 const err = createFormError(response.error)
                 return err
             }
-            onEditCompletedSuccessfully({ withChanges: true })
+            onEditCompletedSuccessfully({ withChanges: true, navigateTo })
         },
-        [patchDirtyFields, onEditCompletedSuccessfully]
+        [patchDirtyFields, onEditCompletedSuccessfully, navigateTo]
     )
 }
 
@@ -98,9 +123,8 @@ export const defaultValueFormatter = <
 
 export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
     section,
-}: {
-    section: ModelSection
-}) => {
+    navigateTo = defaultNavigate.navigateTo,
+}: UseOnSubmitNewOptions) => {
     const createModel = useCreateModel(section.namePlural)
     const queryClient = useQueryClient()
     const saveAlert = useAlert(
@@ -132,9 +156,14 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
             queryClient.invalidateQueries({
                 queryKey: [{ resource: section.namePlural }],
             })
-            navigate(`/${getSectionPath(section)}`)
+            if (navigateTo) {
+                const path = navigateTo(section)
+                if (path) {
+                    navigate(path)
+                }
+            }
             return response
         },
-        [queryClient, createModel, saveAlert, navigate, section]
+        [queryClient, createModel, saveAlert, navigate, section, navigateTo]
     )
 }

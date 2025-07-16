@@ -24,6 +24,9 @@ type MaybeCollection<Model, FullModel> = FullModel extends Array<infer U>
     ? Model[] | Extract<FullModel, undefined | null>
     : Model | Extract<FullModel, undefined | null>
 
+type SplitNested<S> = S extends `${infer Nested}],${infer Rest}`
+    ? [`${Nested}]`, Rest]
+    : [S]
 type RecursivePickWithFieldFilter<
     Model,
     S extends string,

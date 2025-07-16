@@ -2,15 +2,19 @@ import i18n from '@dhis2/d2-i18n'
 import { Card, RadioFieldFF } from '@dhis2/ui'
 import cx from 'classnames'
 import React from 'react'
-import { Field, useFormState } from 'react-final-form'
+import { Field, useField, useFormState } from 'react-final-form'
 import {
     HorizontalFieldGroup,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-} from '../../../components'
-import { SectionedFormSection } from '../../../components/sectionedForm'
-import { DisplayOptionsField } from './DisplayOptionsField'
-import classes from './FormFormContents.module.css'
+} from '../../../../components'
+import { Drawer } from '../../../../components/drawer'
+import { SectionedFormSection } from '../../../../components/sectionedForm'
+import { getFormType } from '../dataSetModel'
+import { DisplayOptionsField } from '../DisplayOptionsField'
+import { useDataSetField, useDataSetFormState } from '../formHooks'
+import classes from './DataEntryFormContents.module.css'
+import { SectionFormSectionsList } from './SectionFormList'
 
 const DefaultFormIcon = () => (
     <svg
@@ -94,13 +98,15 @@ const FormTypeCard = ({
     )
 }
 
-export const FormFormContents = React.memo(function FormFormContents({
+export const DataEntryFromContents = React.memo(function FormFormContents({
     name,
 }: {
     name: string
 }) {
-    const formTypeFieldName = 'formType'
-    const formValues = useFormState({ subscription: { values: true } }).values
+    const formTypeFieldName = `formType`
+    const displayOptions = useDataSetField('displayOptions').input.value
+    const controlledFormType = useDataSetField('formType').input.value
+
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
@@ -124,9 +130,7 @@ export const FormFormContents = React.memo(function FormFormContents({
                                 description={i18n.t(
                                     'Data elements are displayed in a standard list'
                                 )}
-                                highlighted={
-                                    formValues[formTypeFieldName] === 'DEFAULT'
-                                }
+                                highlighted={controlledFormType === 'DEFAULT'}
                             />
                         }
                         className={classes.formTypeCard}
@@ -145,15 +149,12 @@ export const FormFormContents = React.memo(function FormFormContents({
                                 description={i18n.t(
                                     'Group data into sections with additional options'
                                 )}
-                                highlighted={
-                                    formValues[formTypeFieldName] === 'SECTION'
-                                }
+                                highlighted={controlledFormType === 'SECTION'}
                             />
                         }
                         className={classes.formTypeCard}
                         type="radio"
                         value={'SECTION'}
-                        disabled
                     />
                 </Card>
                 <Card>
@@ -167,9 +168,7 @@ export const FormFormContents = React.memo(function FormFormContents({
                                 description={i18n.t(
                                     'Build and style a custom form layout'
                                 )}
-                                highlighted={
-                                    formValues[formTypeFieldName] === 'CUSTOM'
-                                }
+                                highlighted={controlledFormType === 'CUSTOM'}
                             />
                         }
                         className={classes.formTypeCard}
@@ -179,7 +178,8 @@ export const FormFormContents = React.memo(function FormFormContents({
                     />
                 </Card>
             </HorizontalFieldGroup>
-            {formValues.displayOptions !== undefined && (
+            {controlledFormType === 'SECTION' && <SectionFormSectionsList />}
+            {displayOptions !== undefined && (
                 <div className={classes.displayOptions}>
                     <StandardFormSectionTitle>
                         {i18n.t('Display options')}

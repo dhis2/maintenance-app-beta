@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip, CircularLoader } from '@dhis2/ui'
 import React from 'react'
 import { To } from 'react-router-dom'
@@ -21,12 +22,14 @@ export function StandardFormActions({
     submitting,
     onSubmitClick,
     cancelTo,
+    onCancelClick,
 }: {
-    cancelLabel: string
+    cancelLabel?: string
     submitLabel: string
     submitting: boolean
     onSubmitClick: () => void
     cancelTo?: To
+    onCancelClick?: () => void
 }) {
     return (
         <ButtonStrip>
@@ -46,9 +49,10 @@ export function StandardFormActions({
                 small
                 disabled={submitting}
                 to={cancelTo}
+                onClick={onCancelClick}
                 dataTest="form-cancel-link"
             >
-                {cancelLabel}
+                {cancelLabel ?? i18n.t('Cancel')}
             </LinkButton>
         </ButtonStrip>
     )

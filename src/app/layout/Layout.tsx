@@ -56,7 +56,7 @@ export const Layout = () => {
 }
 
 /* The footer is often used as part of a form - for formActions like Save and Cancel
-    Layout wise it's easier to have the footer as part of the main layout 
+    Layout wise it's easier to have the footer as part of the main layout
        - scroll position of "main" content is correct by default (rather than scroll behind the footer)
     thus we use react portal to render the footer contents within the footer div.
 */
