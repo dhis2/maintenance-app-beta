@@ -1,10 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import {
-    SingleSelectFieldFF,
-    CheckboxFieldFF,
-    InputFieldFF,
-    TextAreaFieldFF,
-} from '@dhis2/ui'
+import { SingleSelectFieldFF, CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import {
@@ -20,7 +15,9 @@ import {
     LegendSetField,
     UrlField,
 } from '../../dataElements/fields'
+import DenominatorFields from './denominatorFields'
 import { IndicatorTypeField } from './IndicatorTypeField'
+import NumeratorFields from './numeratorFields'
 
 export const IndicatiorFormFields = () => {
     return (
@@ -66,9 +63,10 @@ export const IndicatiorFormFields = () => {
 
                 <StandardFormField>
                     <FieldRFF
+                        name="annualized"
+                        type="checkbox"
                         component={CheckboxFieldFF}
                         label={i18n.t('Annualized')}
-                        name="annualized"
                     />
                 </StandardFormField>
             </StandardFormSection>
@@ -149,26 +147,7 @@ export const IndicatiorFormFields = () => {
                     {i18n.t('Define and describe the numerator formula.')}
                 </StandardFormSectionDescription>
 
-                <StandardFormField>
-                    <FieldRFF<string | undefined>
-                        component={InputFieldFF}
-                        inputWidth="400px"
-                        required
-                        name="numeratorDescription"
-                        label={i18n.t('Numerator description')}
-                    />
-                </StandardFormField>
-
-                <StandardFormField>
-                    <FieldRFF<string | undefined>
-                        component={TextAreaFieldFF}
-                        inputWidth="400px"
-                        required
-                        name="numerator"
-                        label={i18n.t('Edit numerator')}
-                        rows={4}
-                    />
-                </StandardFormField>
+                <NumeratorFields />
             </StandardFormSection>
 
             <StandardFormSection>
@@ -180,26 +159,7 @@ export const IndicatiorFormFields = () => {
                     {i18n.t('Define and describe the denominator formula.')}
                 </StandardFormSectionDescription>
 
-                <StandardFormField>
-                    <FieldRFF<string | undefined>
-                        component={InputFieldFF}
-                        inputWidth="400px"
-                        required
-                        name="denominatorDescription"
-                        label={i18n.t('Denominator description')}
-                    />
-                </StandardFormField>
-
-                <StandardFormField>
-                    <FieldRFF<string | undefined>
-                        component={TextAreaFieldFF}
-                        inputWidth="400px"
-                        required
-                        name="denominator"
-                        label={i18n.t('Edit denominator')}
-                        rows={4}
-                    />
-                </StandardFormField>
+                <DenominatorFields />
             </StandardFormSection>
         </>
     )

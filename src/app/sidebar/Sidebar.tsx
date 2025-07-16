@@ -41,7 +41,7 @@ interface SidebarParentProps {
 
 const SidebarParent = ({
     label,
-    links = [],
+    links,
     isFiltered,
 }: SidebarParentProps) => {
     const { pathname } = useLocation()

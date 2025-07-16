@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-15T08:41:41.774Z\n"
-"PO-Revision-Date: 2025-07-15T08:41:41.775Z\n"
+"POT-Creation-Date: 2025-07-16T08:12:27.355Z\n"
+"PO-Revision-Date: 2025-07-16T08:12:27.356Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2049,6 +2049,15 @@ msgstr "The indicator merge operation is complete."
 msgid "All selected indicators were merged successfully."
 msgstr "All selected indicators were merged successfully."
 
+msgid "Numerator is required"
+msgstr "Numerator is required"
+
+msgid "Denominator is required"
+msgstr "Denominator is required"
+
+msgid "Must be a valid URL"
+msgstr "Must be a valid URL"
+
 msgid "Set up the basic information for this indicator."
 msgstr "Set up the basic information for this indicator."
 
@@ -2060,6 +2069,57 @@ msgstr "Select number of decimals"
 
 msgid "Annualized"
 msgstr "Annualized"
+
+msgid "Aggregate export category option combo"
+msgstr "Aggregate export category option combo"
+
+msgid "Aggregate export attribute option combo"
+msgstr "Aggregate export attribute option combo"
+
+msgid "Classification"
+msgstr "Classification"
+
+msgid "Input"
+msgstr "Input"
+
+msgid "Activity"
+msgstr "Activity"
+
+msgid "Output"
+msgstr "Output"
+
+msgid "Impact"
+msgstr "Impact"
+
+msgid "Select classification"
+msgstr "Select classification"
+
+msgid "PEPFAR ID"
+msgstr "PEPFAR ID"
+
+msgid "Numerator"
+msgstr "Numerator"
+
+msgid "Define and describe the numerator formula."
+msgstr "Define and describe the numerator formula."
+
+msgid "Numerator description"
+msgstr "Numerator description"
+
+msgid "Edit numerator"
+msgstr "Edit numerator"
+
+msgid "Denominator"
+msgstr "Denominator"
+
+msgid "Define and describe the denominator formula."
+msgstr "Define and describe the denominator formula."
+
+msgid "Denominator description"
+msgstr "Denominator description"
+
+msgid "Edit denominator"
+msgstr "Edit denominator"
 
 msgid ""
 "The merge operation will merge the source indicators into\n"
