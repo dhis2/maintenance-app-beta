@@ -110,10 +110,10 @@ export const ProgramIndicatorFormDescriptor = {
                         'Attribute option combination for aggregate data export'
                     ),
                 },
-                // {
-                //     name: 'aggregateExportDataElement',
-                //     label: i18n.t('Data element for aggregate data export'),
-                // },
+                {
+                    name: 'aggregateExportDataElement',
+                    label: i18n.t('Data element for aggregate data export'),
+                },
             ],
         },
         {
