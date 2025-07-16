@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-04T11:13:59.060Z\n"
-"PO-Revision-Date: 2025-07-04T11:13:59.060Z\n"
+"POT-Creation-Date: 2025-07-15T08:41:41.774Z\n"
+"PO-Revision-Date: 2025-07-15T08:41:41.775Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -255,6 +255,9 @@ msgstr "Add new"
 
 msgid "Option set"
 msgstr "Option set"
+
+msgid "Something went wrong"
+msgstr "Something went wrong"
 
 msgid "Actions"
 msgstr "Actions"
@@ -960,6 +963,12 @@ msgstr "Section"
 
 msgid "Section Multi-org"
 msgstr "Section Multi-org"
+
+msgid "Event"
+msgstr "Event"
+
+msgid "Enrollment"
+msgstr "Enrollment"
 
 msgid "BiMonthly"
 msgstr "BiMonthly"
@@ -1797,9 +1806,6 @@ msgstr "Display options"
 msgid "Configure which organisation units can collect data for this data set."
 msgstr "Configure which organisation units can collect data for this data set."
 
-msgid "Something went wrong"
-msgstr "Something went wrong"
-
 msgid "Configure data entry periods"
 msgstr "Configure data entry periods"
 
@@ -2042,6 +2048,18 @@ msgstr "The indicator merge operation is complete."
 
 msgid "All selected indicators were merged successfully."
 msgstr "All selected indicators were merged successfully."
+
+msgid "Set up the basic information for this indicator."
+msgstr "Set up the basic information for this indicator."
+
+msgid "Explain the purpose of this indicator."
+msgstr "Explain the purpose of this indicator."
+
+msgid "Select number of decimals"
+msgstr "Select number of decimals"
+
+msgid "Annualized"
+msgstr "Annualized"
 
 msgid ""
 "The merge operation will merge the source indicators into\n"
@@ -2377,6 +2395,9 @@ msgstr ""
 msgid "Manage"
 msgstr "Manage"
 
+msgid "Program Disaggregation Form"
+msgstr "Program Disaggregation Form"
+
 msgid "Program indicator mappings"
 msgstr "Program indicator mappings"
 
@@ -2544,22 +2565,129 @@ msgstr "Search available program indicators"
 msgid "Search selected program indicators"
 msgstr "Search selected program indicators"
 
-msgctxt "form"
-msgid "program_disaggregation"
-msgstr "program_disaggregation_form"
+msgid "Incident date"
+msgstr "Incident date"
 
-msgctxt "mappings"
-msgid "program_indicator"
-msgstr "program_indicator_mappings"
+msgid "Event date"
+msgstr "Event date"
 
-msgctxt "mappings"
-msgid "disaggregation_category"
-msgstr "disaggregation_category_mappings"
+msgid "Enrollment date"
+msgstr "Enrollment date"
 
-msgctxt "Application title"
-msgid "__MANIFEST_APP_TITLE"
-msgstr "Maintenance (Preview)"
+msgid "Before start of reporting period"
+msgstr "Before start of reporting period"
 
-msgctxt "Application description"
-msgid "__MANIFEST_APP_DESCRIPTION"
+msgid "Before end of reporting period"
+msgstr "Before end of reporting period"
+
+msgid "After start of reporting period"
+msgstr "After start of reporting period"
+
+msgid "After end of reporting period"
+msgstr "After end of reporting period"
+
+msgid "Offset"
+msgstr "Offset"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Boundary target"
+msgstr "Boundary target"
+
+msgid "Custom boundary text"
+msgstr "Custom boundary text"
+
+msgid "Analytics period boundary type"
+msgstr "Analytics period boundary type"
+
+msgid "Offset period by amount"
+msgstr "Offset period by amount"
+
+msgid "Edit analytics period boundary"
+msgstr "Edit analytics period boundary"
+
+msgid "Add analytics period boundary"
+msgstr "Add analytics period boundary"
+
+msgid "Save analytics period boundary"
+msgstr "Save analytics period boundary"
+
+msgid "Add a period boundary"
+msgstr "Add a period boundary"
+
+msgid "Event organisation unit default"
+msgstr "Event organisation unit default"
+
+msgid "Enrollment organisation unit default"
+msgstr "Enrollment organisation unit default"
+
+msgid "Enrollment organisation unit"
+msgstr "Enrollment organisation unit"
+
+msgid "Owner at start organisation unit"
+msgstr "Owner at start organisation unit"
+
+msgid "Owner at end organisation unit"
+msgstr "Owner at end organisation unit"
+
+msgid "Registration organisation unit"
+msgstr "Registration organisation unit"
+
+msgid "Organisation unit field"
+msgstr "Organisation unit field"
+
+msgid "Set up the basic information for this program indicator."
+msgstr "Set up the basic information for this program indicator."
+
+msgid "Explain the purpose of this program indicator."
+msgstr "Explain the purpose of this program indicator."
+
+msgid "Configuration"
+msgstr "Configuration"
+
+msgid "Choose which program and which data types this program indicator applies to."
+msgstr "Choose which program and which data types this program indicator applies to."
+
+msgid "Program (required)"
+msgstr "Program (required)"
+
+msgid "Analytics type (required)"
+msgstr "Analytics type (required)"
+
+msgid "Configure the program indicator expression."
+msgstr "Configure the program indicator expression."
+
+msgid ""
+"Configure the program indicator filter that controls what data will be "
+"evaluated bt the main expression."
 msgstr ""
+"Configure the program indicator filter that controls what data will be "
+"evaluated bt the main expression."
+
+msgid "Period boundaries"
+msgstr "Period boundaries"
+
+msgid "Set up time constraints, which determine what data will be evaluated."
+msgstr "Set up time constraints, which determine what data will be evaluated."
+
+msgid "Set up advanced properties for this program indicator."
+msgstr "Set up advanced properties for this program indicator."
+
+msgid "Show program indicators in data entry forms"
+msgstr "Show program indicators in data entry forms"
+
+msgid "Set up the program indicator legends."
+msgstr "Set up the program indicator legends."
+
+msgid "Filter available legends"
+msgstr "Filter available legends"
+
+msgid "Filter selected legends"
+msgstr "Filter selected legends"
+
+msgid "Program Indicators Form"
+msgstr "Program Indicators Form"
+
+msgid "Legend sets"
+msgstr "Legend sets"
