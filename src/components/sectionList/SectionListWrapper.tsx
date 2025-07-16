@@ -182,6 +182,7 @@ export const SectionListWrapper = ({
                     type={schema.singular as any}
                     onClose={() => onSharingDialogClose()}
                     dataSharing={schema.dataShareable}
+                    preventUsersFromRemovingMetadataWriteAccess={true}
                 />
             )}
             {translationDialogModel && (
