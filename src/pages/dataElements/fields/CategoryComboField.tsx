@@ -50,7 +50,6 @@ export function CategoryComboField() {
 
     return (
         <EditableFieldWrapper
-            dataTest="formfields-categorycombo"
             onRefresh={() => categoryComboHandle.current.refetch()}
             onAddNew={() => window.open(newCategoryComboLink, '_blank')}
         >

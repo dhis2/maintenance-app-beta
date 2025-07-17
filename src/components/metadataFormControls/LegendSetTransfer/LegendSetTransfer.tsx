@@ -126,6 +126,7 @@ export const LegendSetTransfer = forwardRef(function LegendSetSelect(
 
     return (
         <Transfer
+            dataTest="legendset-transfer"
             filterable
             filterPlaceholder={i18n.t('Filter legend sets')}
             searchTerm={searchTerm}

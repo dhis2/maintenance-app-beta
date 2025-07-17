@@ -78,7 +78,7 @@ export function ValueTypeField() {
             required
             disabled={disabled}
             component={SingleSelectFieldFF}
-            dataTest="formfields-valuetype"
+            dataTest="formfields-valueType"
             inputWidth="400px"
             name="valueType"
             label={i18n.t('{{fieldLabel}} (required)', {

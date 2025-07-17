@@ -8,7 +8,7 @@ type AggregationLevelQueryResult = {
     }
 }
 
-const CATEGORY_COMBOS_QUERY = {
+const ORG_UNIT_LEVEL_QUERY = {
     aggregationLevels: {
         resource: 'organisationUnitLevels',
         params: {
@@ -21,9 +21,8 @@ const CATEGORY_COMBOS_QUERY = {
 }
 
 export function useOptionsQuery() {
-    const queryResult = useDataQuery<AggregationLevelQueryResult>(
-        CATEGORY_COMBOS_QUERY
-    )
+    const queryResult =
+        useDataQuery<AggregationLevelQueryResult>(ORG_UNIT_LEVEL_QUERY)
     const { data } = queryResult
 
     return useMemo(() => {
