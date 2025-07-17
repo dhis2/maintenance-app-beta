@@ -14,7 +14,8 @@ import { categoryOptionGroupSetListSchema } from '../pages/categoryOptionGroupSe
 import { categoryOptionListSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
 import { dataElementGroupSchema } from '../pages/dataElementGroups/form'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
-import { dataElementSchema } from '../pages/dataElements/form'
+import { DataElementFormSchema } from '../pages/dataElements/form'
+import { DataElementListSchema } from '../pages/dataElements/form/dataElementSchema'
 import { DataSetNotificationTemplateListSchema } from '../pages/dataSetNotificationTemplates/form/DataSetNotificationTemplateSchema'
 import { dataSetListSchema } from '../pages/dataSetsWip/form/dataSetFormSchema'
 import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicatorGroupSchema'
@@ -31,6 +32,7 @@ import {
 import { ProgramIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
 import {
     CategoryMapping,
+    DataElement,
     OptionMapping,
     OrganisationUnit,
     Program,
@@ -42,7 +44,7 @@ const { withDefaultListColumns } = modelFormSchemas
 export const randomDhis2Id = () =>
     faker.helpers.fromRegExp(/[a-zA-Z]{1}[a-zA-Z0-9]{10}/)
 
-function randomValueIn<T>(list: T[]) {
+export function randomValueIn<T>(list: T[]) {
     return list[faker.number.int({ min: 0, max: list.length - 1 })]
 }
 
@@ -163,7 +165,7 @@ export const testDataElementGroupSet = (overwrites: Record<any, any> = {}) => ({
 })
 
 export const testDataElement = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(dataElementSchema.merge(withDefaultListColumns), {
+    ...generateMock(DataElementListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -316,7 +318,9 @@ export const testOrgUnit = (overwrites: Record<any, any> | undefined = {}) => {
 export const testOptionSet = ({
     id = randomDhis2Id(),
     displayName = faker.person.fullName(),
+    valueType = randomValueIn(Object.keys(DataElement.valueType)),
 } = {}) => ({
     id,
     displayName,
+    valueType,
 })

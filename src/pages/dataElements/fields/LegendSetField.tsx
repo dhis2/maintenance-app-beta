@@ -1,16 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
-import { ButtonStrip, Button, Field } from '@dhis2/ui'
+import { Button, ButtonStrip } from '@dhis2/ui'
 import React, { useRef } from 'react'
 import { useField } from 'react-final-form'
 import { useHref } from 'react-router'
-import { LegendSetTransfer } from '../../../components'
+import { ModelTransferField } from '../../../components'
 import classes from './LegendSetField.module.css'
 
-/**
- *
- * LegendSet
- *
- */
 export function LegendSetField() {
     const name = 'legendSets'
     const { input, meta } = useField(name, {
@@ -52,19 +47,21 @@ export function LegendSetField() {
     )
 
     return (
-        <Field
-            dataTest="formfields-legendsets"
-            error={!!meta.error}
-            validationText={meta.error?.toString()}
-            name={name}
-        >
-            <LegendSetTransfer
-                ref={legendSetHandle}
-                selected={input.value}
-                onChange={({ selected }) => input.onChange(selected)}
-                rightHeader={rightHeader}
-                leftFooter={leftFooter}
-            />
-        </Field>
+        <ModelTransferField
+            dataTest="legendset-transfer"
+            name="legendSets"
+            query={{
+                resource: 'legendSets',
+                params: {
+                    filter: ['name:ne:default'],
+                    fields: ['id', 'displayName'],
+                },
+            }}
+            leftHeader={i18n.t('Available legends')}
+            rightHeader={i18n.t('Selected legends')}
+            filterPlaceholder={i18n.t('Filter available legends')}
+            filterPlaceholderPicked={i18n.t('Filter selected legends')}
+            maxSelections={Infinity}
+        />
     )
 }

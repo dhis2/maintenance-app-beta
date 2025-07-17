@@ -29,6 +29,7 @@ const ProgramIndicatorsBaseSchema = z.object({
     filter: z.string().optional(),
     orgUnitField: z.string().optional(),
     decimals: z.number().int().lte(5).gte(0).optional(),
+    code: z.string().optional(),
 })
 
 export const ProgramIndicatorsListSchema = ProgramIndicatorsBaseSchema.merge(
@@ -36,22 +37,19 @@ export const ProgramIndicatorsListSchema = ProgramIndicatorsBaseSchema.merge(
 )
     .merge(withAttributeValues)
     .extend({
-        program: modelReference,
         displayShortName: z.string(),
         displayDescription: z.string().optional(),
         displayFormName: z.string().optional(),
         user: UserSchema,
         favorite: z.boolean(),
-        code: z.string().optional(),
     })
 
-export const programIndicatorFormSchema = ProgramIndicatorsBaseSchema.merge(
+export const ProgramIndicatorFormSchema = ProgramIndicatorsBaseSchema.merge(
     identifiable
 )
     .merge(withAttributeValues)
     .extend({
         shortName: z.string().trim(),
-        code: z.string().trim().optional(),
         style: style.optional(),
         orgUnitField: z.string().optional(),
         analyticsPeriodBoundaries: z
@@ -67,8 +65,8 @@ export const programIndicatorFormSchema = ProgramIndicatorsBaseSchema.merge(
             .default([]),
     })
 
-export const initialValues = getDefaults(programIndicatorFormSchema)
+export const initialValues = getDefaults(ProgramIndicatorFormSchema)
 
 export type ProgramIndicatorFormValues = typeof initialValues
 
-export const validate = createFormValidate(programIndicatorFormSchema)
+export const validate = createFormValidate(ProgramIndicatorFormSchema)

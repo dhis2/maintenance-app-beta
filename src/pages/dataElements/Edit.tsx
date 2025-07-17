@@ -19,7 +19,8 @@ const fieldFilters = [
     'categoryCombo[id,displayName]',
     'attributeValues[*]',
     'commentOptionSet[id,displayName]',
-    'optionSet[id,displayName]',
+    'optionSet[id,displayName,valueType]',
+    'legendSets[id,displayName]',
 ] as const
 
 export type DataElementFormValues = PickWithFieldFilters<
