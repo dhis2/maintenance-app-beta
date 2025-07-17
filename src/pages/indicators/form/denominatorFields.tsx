@@ -1,13 +1,12 @@
 import i18n from '@dhis2/d2-i18n'
 import { InputFieldFF, TextAreaFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { Field as FieldRFF, useField } from 'react-final-form'
+import { Field as FieldRFF } from 'react-final-form'
 import { StandardFormField } from '../../../components'
-import { useValidateIndicatorExpressionField } from './useFormHooks'
+import { useValidateIndicatorExpressionValidator } from './useFormHooks'
 
 function DenominatorFields() {
-    const { handleValidateExpression } = useValidateIndicatorExpressionField()
-    const validation = useField('denominatorInvalid', {})
+    const validateExpression = useValidateIndicatorExpressionValidator()
 
     return (
         <>
@@ -22,27 +21,19 @@ function DenominatorFields() {
             </StandardFormField>
 
             <StandardFormField>
-                <FieldRFF<string | undefined> name="denominator">
+                <FieldRFF<string | undefined>
+                    name="denominator"
+                    validate={validateExpression}
+                >
                     {({ input, meta }) => (
                         <TextAreaFieldFF
-                            input={{
-                                ...input,
-                                onChange: async (value: string) => {
-                                    input.onChange(value)
-                                    const invalid =
-                                        await handleValidateExpression(value)
-                                    validation.input.onChange(invalid)
-                                },
-                            }}
+                            input={input}
                             meta={meta}
                             inputWidth="400px"
                             required
                             label={i18n.t('Edit denominator')}
-                            validationText={
-                                validation.input.value &&
-                                i18n.t('Invalid denominator expression')
-                            }
-                            warning={!!validation.input.value}
+                            validationText={meta.error}
+                            warning={!!meta.error && meta.touched}
                             rows={4}
                         />
                     )}

@@ -50,12 +50,16 @@ export const Component = () => {
         queryKey: [query],
         queryFn: queryFn<IndicatorFormValues>,
     })
-
+    const initialValues = indicatorQuery.data
     return (
         <FormBase
-            onSubmit={useOnSubmitEdit({ section, modelId })}
-            initialValues={indicatorQuery.data}
+            onSubmit={useOnSubmitEdit({
+                modelId: modelId as string,
+                section: SECTIONS_MAP.indicator,
+            })}
+            initialValues={{ ...initialValues, url: 'https://www.google.com/' }}
             validate={validate}
+            includeAttributes={false}
         >
             <DefaultEditFormContents section={section}>
                 <IndicatiorFormFields />

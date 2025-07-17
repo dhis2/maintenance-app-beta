@@ -17,30 +17,29 @@ const indicatorBaseSchema = z.object({
     description: z.string().trim().optional(),
     numerator: z.string().min(1, i18n.t('Numerator is required')),
     denominator: z.string().min(1, i18n.t('Denominator is required')),
-    numeratorDescription: z.string().optional(),
-    denominatorDescription: z.string().optional(),
+    numeratorDescription: z.string().min(1),
+    denominatorDescription: z.string().min(1),
     annualized: z.boolean().default(false),
     decimals: z.number().int().lte(5).gte(0).optional(),
-    url: z
-        .string()
-        .trim()
-        .url({ message: i18n.t('Must be a valid URL') })
-        .optional(),
+    url: z.string().trim().url().optional(),
     aggregateExportCategoryOptionCombo: z.string().optional(),
     aggregateExportAttributeOptionCombo: z.string().optional(),
     indicatorType: z.object({
         id: z.string().refine((val) => isValidUid(val)),
     }),
     legendSets: z.array(z.object({ id: z.string() })),
-    style: z.object({
-        color: z.string().optional(),
-        icon: z.string().optional(),
-    }),
+    style: z
+        .object({
+            color: z.string().optional(),
+            icon: z.string().optional(),
+        })
+        .optional(),
     attributeValues: z.array(
         z.object({
             value: z.string().optional(),
             attribute: z.object({
                 id: z.string(),
+                name: z.string(),
             }),
         })
     ),

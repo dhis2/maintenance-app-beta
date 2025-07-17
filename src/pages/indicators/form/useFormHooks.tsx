@@ -1,17 +1,20 @@
 import { useDataEngine } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
 import { useMutation } from '@tanstack/react-query'
-import { useRef, useCallback } from 'react'
+import { useRef, useMemo } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
 
 interface ValidateExpressionRequest {
     expression: string
 }
 
 interface ValidateExpressionResponse {
+    message: string
     description?: string
     status: 'OK' | 'ERROR'
 }
 
-export const useValidateIndicatorExpressionMutation = () => {
+export const useValidateExpressionMutation = () => {
     const engine = useDataEngine()
 
     return useMutation(async ({ expression }: ValidateExpressionRequest) => {
@@ -24,41 +27,48 @@ export const useValidateIndicatorExpressionMutation = () => {
     })
 }
 
-export const useValidateIndicatorExpressionField = () => {
-    const { mutateAsync: validateExpression } =
-        useValidateIndicatorExpressionMutation()
-    const currentValueRef = useRef<string>('')
+export const useValidateIndicatorExpressionValidator = () => {
+    const { mutateAsync: validateExpression } = useValidateExpressionMutation()
+    const latestValueRef = useRef<string>('')
 
-    const debouncedValidate = useCallback(
-        async (value: string) => {
-            currentValueRef.current = value
-
-            if (!value) {
-                return false
-            }
-
+    const debouncedValidator = useDebouncedCallback(
+        async (
+            expression: string,
+            resolve: (msg: string | undefined) => void
+        ) => {
             try {
-                const result = await validateExpression({ expression: value })
+                const result = await validateExpression({ expression })
 
-                if (currentValueRef.current !== value) {
+                if (latestValueRef.current !== expression) {
+                    resolve(undefined)
                     return
                 }
 
-                return result.status === 'ERROR'
-            } catch (err) {
-                console.error(err)
-                if (currentValueRef.current !== value) {
-                    return
+                if (result.status === 'ERROR') {
+                    resolve(result.message || i18n.t('Invalid expression'))
+                } else {
+                    resolve(undefined)
                 }
-                return true
+            } catch (error) {
+                console.error('Validation failed', error)
+                resolve(i18n.t('Could not validate expression'))
             }
         },
-        [validateExpression]
+        500
     )
 
-    const handleValidateExpression = (value: string) => {
-        return debouncedValidate(value)
-    }
+    return useMemo(() => {
+        return async (value?: string): Promise<string | undefined> => {
+            const expression = value ?? ''
+            latestValueRef.current = expression
 
-    return { handleValidateExpression }
+            if (!expression.trim()) {
+                return undefined
+            }
+
+            return new Promise((resolve) => {
+                debouncedValidator(expression, resolve)
+            })
+        }
+    }, [debouncedValidator])
 }

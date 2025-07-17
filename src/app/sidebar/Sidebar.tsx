@@ -39,11 +39,7 @@ interface SidebarParentProps {
     links: LinkItem[]
 }
 
-const SidebarParent = ({
-    label,
-    links,
-    isFiltered,
-}: SidebarParentProps) => {
+const SidebarParent = ({ label, links, isFiltered }: SidebarParentProps) => {
     const { pathname } = useLocation()
     // Check if any of the children match the current path
     // If they do, parent should be open by default

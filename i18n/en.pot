@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-16T08:12:27.355Z\n"
-"PO-Revision-Date: 2025-07-16T08:12:27.356Z\n"
+"POT-Creation-Date: 2025-07-17T09:57:30.817Z\n"
+"PO-Revision-Date: 2025-07-17T09:57:30.817Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -756,6 +756,12 @@ msgstr "SQL view"
 
 msgid "SQL views"
 msgstr "SQL views"
+
+msgid "Legend"
+msgstr "Legend"
+
+msgid "Legends"
+msgstr "Legends"
 
 msgid "Programs and Tracker"
 msgstr "Programs and Tracker"
@@ -1676,9 +1682,6 @@ msgstr ""
 "Send notifications when data sets are marked complete, using the DHIS2 "
 "Messages app."
 
-msgid "Legends"
-msgstr "Legends"
-
 msgid "Choose legends that will do something (?????????)"
 msgstr "Choose legends that will do something (?????????)"
 
@@ -2055,8 +2058,11 @@ msgstr "Numerator is required"
 msgid "Denominator is required"
 msgstr "Denominator is required"
 
-msgid "Must be a valid URL"
-msgstr "Must be a valid URL"
+msgid "Denominator description"
+msgstr "Denominator description"
+
+msgid "Edit denominator"
+msgstr "Edit denominator"
 
 msgid "Set up the basic information for this indicator."
 msgstr "Set up the basic information for this indicator."
@@ -2103,23 +2109,23 @@ msgstr "Numerator"
 msgid "Define and describe the numerator formula."
 msgstr "Define and describe the numerator formula."
 
-msgid "Numerator description"
-msgstr "Numerator description"
-
-msgid "Edit numerator"
-msgstr "Edit numerator"
-
 msgid "Denominator"
 msgstr "Denominator"
 
 msgid "Define and describe the denominator formula."
 msgstr "Define and describe the denominator formula."
 
-msgid "Denominator description"
-msgstr "Denominator description"
+msgid "Numerator description"
+msgstr "Numerator description"
 
-msgid "Edit denominator"
-msgstr "Edit denominator"
+msgid "Edit numerator"
+msgstr "Edit numerator"
+
+msgid "Invalid expression"
+msgstr "Invalid expression"
+
+msgid "Could not validate expression"
+msgstr "Could not validate expression"
 
 msgid ""
 "The merge operation will merge the source indicators into\n"
@@ -2490,9 +2496,6 @@ msgstr "Restore mapping"
 
 msgid "Category mapping: "
 msgstr "Category mapping: "
-
-msgid "Invalid expression"
-msgstr "Invalid expression"
 
 msgid "No new categories to add"
 msgstr "No new categories to add"
