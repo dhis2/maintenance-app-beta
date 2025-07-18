@@ -30,7 +30,6 @@ export function AggregationLevelsField() {
 
     return (
         <EditableFieldWrapper
-            dataTest="formfields-aggregationlevels"
             onRefresh={() => aggregationLevelHandle.current.refetch()}
             onAddNew={() => window.open(newAggregationLevelLink, '_blank')}
         >

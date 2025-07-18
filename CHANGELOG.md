@@ -1,3 +1,10 @@
+# [0.52.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.51.0...v0.52.0) (2025-07-17)
+
+
+### Features
+
+* prevent users from removing sharing [DHIS2-18430] ([#593](https://github.com/dhis2/maintenance-app-beta/issues/593)) ([172fe86](https://github.com/dhis2/maintenance-app-beta/commit/172fe8630416dd15b7963553232da20c1caefbff))
+
 # [0.51.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.50.0...v0.51.0) (2025-07-08)
 
 

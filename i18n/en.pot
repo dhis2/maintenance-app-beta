@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-17T09:57:30.817Z\n"
-"PO-Revision-Date: 2025-07-17T09:57:30.817Z\n"
+"POT-Creation-Date: 2025-07-18T10:57:06.235Z\n"
+"PO-Revision-Date: 2025-07-18T10:57:06.235Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1402,12 +1402,6 @@ msgstr ""
 "What should happen to the source category options after the merge is "
 "complete?"
 
-msgid "Custom attributes"
-msgstr "Custom attributes"
-
-msgid "Create data element group"
-msgstr "Create data element group"
-
 msgid "Selected data element groups"
 msgstr "Selected data element groups"
 
@@ -1425,9 +1419,6 @@ msgstr "Set up the information for this data element group."
 
 msgid "Explain the purpose of this data element group."
 msgstr "Explain the purpose of this data element group."
-
-msgid "Create data element"
-msgstr "Create data element"
 
 msgid "The default way to aggregate this data element in analytics."
 msgstr "The default way to aggregate this data element in analytics."

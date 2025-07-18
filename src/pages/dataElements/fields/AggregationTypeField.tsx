@@ -55,7 +55,7 @@ export function AggregationTypeField() {
         <FieldRFF
             disabled={disabled}
             component={SingleSelectFieldFF}
-            dataTest="formfields-aggregationtype"
+            dataTest="formfields-aggregationType"
             required={!disabled}
             inputWidth="400px"
             name="aggregationType"

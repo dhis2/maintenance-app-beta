@@ -253,7 +253,7 @@ export const testCustomAttribute = ({
     valueType,
 })
 
-export const testLegendSets = ({
+export const testLegendSet = ({
     id = randomDhis2Id(),
     displayName = faker.person.fullName(),
 } = {}) => ({
@@ -311,3 +311,12 @@ export const testOrgUnit = (overwrites: Record<any, any> | undefined = {}) => {
         ...overwrites,
     } as unknown as Partial<OrganisationUnit>
 }
+
+// TODO: change when schema for optionset is available
+export const testOptionSet = ({
+    id = randomDhis2Id(),
+    displayName = faker.person.fullName(),
+} = {}) => ({
+    id,
+    displayName,
+})
