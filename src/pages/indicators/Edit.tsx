@@ -36,9 +36,10 @@ export type IndicatorFormValues = PickWithFieldFilters<
 > & { id: string }
 
 export const Component = () => {
+    const modelId = useParams().id as string
     const section = SECTIONS_MAP.indicator
     const queryFn = useBoundResourceQueryFn()
-    const modelId = useParams().id as string
+
     const query = {
         resource: 'indicators',
         id: modelId,
@@ -46,20 +47,27 @@ export const Component = () => {
             fields: fieldFilters.concat(),
         },
     }
+
     const indicatorQuery = useQuery({
         queryKey: [query],
         queryFn: queryFn<IndicatorFormValues>,
     })
+
+    const onSubmit = useOnSubmitEdit<IndicatorFormValues>({
+        modelId,
+        section,
+    })
+
     const initialValues = indicatorQuery.data
+
     return (
         <FormBase
-            onSubmit={useOnSubmitEdit({
-                modelId: modelId as string,
-                section: SECTIONS_MAP.indicator,
-            })}
-            initialValues={{ ...initialValues, url: 'https://www.google.com/' }}
+            onSubmit={onSubmit}
+            initialValues={initialValues}
             validate={validate}
             includeAttributes={false}
+            isLoading={indicatorQuery.isLoading}
+            isError={indicatorQuery.isError}
         >
             <DefaultEditFormContents section={section}>
                 <IndicatiorFormFields />

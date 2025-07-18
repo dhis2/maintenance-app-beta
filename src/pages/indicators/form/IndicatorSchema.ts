@@ -9,7 +9,6 @@ import {
 
 const { identifiable, withAttributeValues, withDefaultListColumns } =
     modelFormSchemas
-
 const indicatorBaseSchema = z.object({
     code: z.string().trim().optional(),
     shortName: z.string().trim(),
@@ -22,8 +21,8 @@ const indicatorBaseSchema = z.object({
     annualized: z.boolean().default(false),
     decimals: z.number().int().lte(5).gte(0).optional(),
     url: z.string().trim().url().optional(),
-    aggregateExportCategoryOptionCombo: z.string().optional(),
-    aggregateExportAttributeOptionCombo: z.string().optional(),
+    aggregateExportCategoryOptionCombo: z.string().trim().optional(),
+    aggregateExportAttributeOptionCombo: z.string().trim().optional(),
     indicatorType: z.object({
         id: z.string().refine((val) => isValidUid(val)),
     }),

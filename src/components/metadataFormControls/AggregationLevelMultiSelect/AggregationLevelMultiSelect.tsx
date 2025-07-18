@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { MultiSelect, MultiSelectField, MultiSelectOption } from '@dhis2/ui'
+import { MultiSelect, MultiSelectOption } from '@dhis2/ui'
 import React, { forwardRef, useImperativeHandle } from 'react'
 import classes from './AggregationLevelMultiSelect.module.css'
 import { useOptionsQuery } from './useOptionsQuery'
