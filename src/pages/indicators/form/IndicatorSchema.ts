@@ -1,8 +1,58 @@
+import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
-import { modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaults,
+    isValidUid,
+    modelFormSchemas,
+} from '../../../lib'
 
-const { withDefaultListColumns } = modelFormSchemas
-
-export const IndicatorSchema = withDefaultListColumns.extend({
-    code: z.string(),
+const { identifiable, withAttributeValues, withDefaultListColumns } =
+    modelFormSchemas
+const indicatorBaseSchema = z.object({
+    code: z.string().trim().optional(),
+    shortName: z.string().trim(),
+    name: z.string().trim(),
+    description: z.string().trim().optional(),
+    numerator: z.string().min(1, i18n.t('Numerator is required')),
+    denominator: z.string().min(1, i18n.t('Denominator is required')),
+    numeratorDescription: z.string().min(1),
+    denominatorDescription: z.string().min(1),
+    annualized: z.boolean().default(false),
+    decimals: z.number().int().lte(5).gte(0).optional(),
+    url: z.string().trim().url().optional(),
+    aggregateExportCategoryOptionCombo: z.string().trim().optional(),
+    aggregateExportAttributeOptionCombo: z.string().trim().optional(),
+    indicatorType: z.object({
+        id: z.string().refine((val) => isValidUid(val)),
+    }),
+    legendSets: z.array(z.object({ id: z.string() })),
+    style: z
+        .object({
+            color: z.string().optional(),
+            icon: z.string().optional(),
+        })
+        .optional(),
+    attributeValues: z.array(
+        z.object({
+            value: z.string().optional(),
+            attribute: z.object({
+                id: z.string(),
+                name: z.string(),
+            }),
+        })
+    ),
 })
+
+export const indicatorFormSchema = identifiable
+    .merge(indicatorBaseSchema)
+    .merge(withAttributeValues)
+
+export const indicatorListSchema = indicatorBaseSchema
+    .merge(withDefaultListColumns)
+    .extend({
+        displayShortName: z.string(),
+    })
+
+export const initialValues = getDefaults(indicatorFormSchema)
+export const validate = createFormValidate(indicatorFormSchema)

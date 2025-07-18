@@ -19,7 +19,7 @@ import { DataSetNotificationTemplateListSchema } from '../pages/dataSetNotificat
 import { dataSetListSchema } from '../pages/dataSetsWip/form/dataSetFormSchema'
 import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicatorGroupSchema'
 import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
-import { IndicatorSchema } from '../pages/indicators/form/IndicatorSchema'
+import { indicatorFormSchema } from '../pages/indicators/form/IndicatorSchema'
 import { IndicatorTypeListSchema } from '../pages/indicatorTypes/form/IndicatorTypesSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
@@ -88,7 +88,7 @@ export const testIndicatorType = (overwrites: Record<any, any> = {}) => ({
 })
 
 export const testIndicator = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(IndicatorSchema, {
+    ...generateMock(indicatorFormSchema, {
         mockeryMapper,
     }),
     ...overwrites,

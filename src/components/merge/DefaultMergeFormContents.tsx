@@ -10,23 +10,25 @@ import { StandardFormSectionTitle } from '../standardForm'
 import css from './MergeForm.module.css'
 import { MergeFormValuesBase } from './mergeSchemaBase'
 
-export const DefaultMergeFormContents = ({
-    children,
-    title,
-    mergeCompleteElement = <MergeComplete />,
-    mergeInProgressElement,
-}: React.PropsWithChildren<{
-    title?: React.ReactNode
-    mergeCompleteElement?: React.ReactElement
-    mergeInProgressElement?: React.ReactElement
-}>) => {
+export const DefaultMergeFormContents = (
+    props: React.PropsWithChildren<{
+        title?: React.ReactNode
+        mergeCompleteElement?: React.ReactElement
+        mergeInProgressElement?: React.ReactElement
+    }>
+) => {
+    const { children, title, mergeCompleteElement, mergeInProgressElement } =
+        props
+
     const { submitting, submitSucceeded } = useFormState<MergeFormValuesBase>({
         subscription: { submitting: true, submitSucceeded: true },
     })
     const section = useModelSectionHandleOrThrow()
 
+    const completeElement = mergeCompleteElement ?? <MergeComplete />
+
     if (submitSucceeded) {
-        return mergeCompleteElement
+        return completeElement
     }
 
     if (submitting) {
@@ -39,6 +41,7 @@ export const DefaultMergeFormContents = ({
             </>
         )
     }
+
     return (
         <>
             {title}

@@ -24,7 +24,7 @@ function computeDisplayOptions({
     // This happens only when we haven't fetched the lable for an initially
     // selected value. Don't show anything to prevent error that an option is
     // missing
-    if (!selectedOptions.length && selected.length) {
+    if (!selectedOptions?.length && selected?.length) {
         return []
     }
 
@@ -32,7 +32,13 @@ function computeDisplayOptions({
         return !options?.find((option) => option.value === selectedOption.value)
     })
 
-    return [...options, ...missingSelectedOptions]
+    // Combine and deduplicate by value
+    const merged = [...options, ...missingSelectedOptions]
+    const uniqueByValue = Array.from(
+        new Map(merged.map((opt) => [opt.value, opt])).values()
+    )
+
+    return uniqueByValue
 }
 
 interface LegendSetSelectProps {
