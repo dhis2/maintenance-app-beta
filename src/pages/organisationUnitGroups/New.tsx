@@ -11,7 +11,6 @@ const section = SECTIONS_MAP.organisationUnitGroup
 export const Component = () => {
     return (
         <FormBase
-            section={section}
             onSubmit={useOnSubmitNew({ section })}
             initialValues={initialValues}
             validate={validate}

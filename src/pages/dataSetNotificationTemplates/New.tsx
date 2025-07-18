@@ -10,9 +10,10 @@ import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { DataSetNotificationsFormFields } from './form/DataSetNotificationsFormFields'
 import {
     initialValues,
+    transformFormValues,
     validate,
 } from './form/DataSetNotificationTemplateSchema'
-import { transformFormValues, formDescriptor } from './form/getValues'
+import { formDescriptor } from './form/formDescriptor'
 
 export const Component = () => {
     return (

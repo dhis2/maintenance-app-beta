@@ -53,7 +53,6 @@ export const Component = () => {
     return (
         <FormBase
             onSubmit={useOnSubmitEdit({ section, modelId })}
-            section={section}
             initialValues={organisationUnitGroupQuery.data}
             validate={validate}
         >

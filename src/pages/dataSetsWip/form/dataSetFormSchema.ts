@@ -109,7 +109,7 @@ export type DataSetFormValues = typeof initialValues
 
 export const validate = createFormValidate(dataSetFormSchema)
 
-export const dataSetValueFormatter = (values: DataSetFormValues) => {
+export const dataSetValueFormatter = (values: Partial<DataSetFormValues>) => {
     return {
         ...values,
         displayOptions:
