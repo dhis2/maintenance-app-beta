@@ -1,7 +1,8 @@
 import {
     Button,
     ButtonProps,
-    FlyoutMenu,
+    Divider,
+    DividerProps,
     IconMore24,
     MenuItem,
     MenuItemProps,
@@ -9,6 +10,7 @@ import {
     colors,
 } from '@dhis2/ui'
 import React, { useMemo, useRef, useState } from 'react'
+import css from './MoreDropdownButton.module.css'
 
 export type MoreDropdownButtonProps = React.PropsWithChildren
 
@@ -53,7 +55,7 @@ export const MoreDropdownButton = ({ children }: MoreDropdownButtonProps) => {
                         }}
                         dataTest="dropdown-button-more-popover"
                     >
-                        <FlyoutMenu>{children}</FlyoutMenu>
+                        {children}
                     </Popover>
                 )}
             </div>
@@ -81,3 +83,7 @@ export const MoreDropdownItem = ({ onClick, ...props }: MenuItemProps) => {
 
     return <MenuItem {...props} onClick={handleClick} />
 }
+
+export const MoreDropdownDivider = (props: DividerProps) => (
+    <Divider className={css.divider} dense {...props} />
+)
