@@ -13,7 +13,6 @@ import {
 import {
     ColorAndIconField,
     LegendSetField,
-    UrlField,
 } from '../../dataElements/fields'
 import DenominatorFields from './denominatorFields'
 import { IndicatorTypeField } from './IndicatorTypeField'
