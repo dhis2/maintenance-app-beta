@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-04T11:13:59.060Z\n"
-"PO-Revision-Date: 2025-07-04T11:13:59.060Z\n"
+"POT-Creation-Date: 2025-07-17T07:18:23.719Z\n"
+"PO-Revision-Date: 2025-07-17T07:18:23.719Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -211,6 +211,11 @@ msgstr "Correct confirmation code must be entered to merge"
 msgid "Merge"
 msgstr "Merge"
 
+msgid "Merging {{count}} {{model}}..."
+msgid_plural "Merging {{count}} {{model}}..."
+msgstr[0] "Merging {{count}} {{model}}..."
+msgstr[1] "Merging {{count}} {{model}}..."
+
 msgid "Merging..."
 msgstr "Merging..."
 
@@ -255,6 +260,9 @@ msgstr "Add new"
 
 msgid "Option set"
 msgstr "Option set"
+
+msgid "Something went wrong"
+msgstr "Something went wrong"
 
 msgid "Actions"
 msgstr "Actions"
@@ -754,6 +762,12 @@ msgstr "SQL view"
 msgid "SQL views"
 msgstr "SQL views"
 
+msgid "Legend"
+msgstr "Legend"
+
+msgid "Legends"
+msgstr "Legends"
+
 msgid "Programs and Tracker"
 msgstr "Programs and Tracker"
 
@@ -960,6 +974,12 @@ msgstr "Section"
 
 msgid "Section Multi-org"
 msgstr "Section Multi-org"
+
+msgid "Event"
+msgstr "Event"
+
+msgid "Enrollment"
+msgstr "Enrollment"
 
 msgid "BiMonthly"
 msgstr "BiMonthly"
@@ -1216,6 +1236,11 @@ msgstr "Filter available categories"
 msgid "Filter selected categories"
 msgstr "Filter selected categories"
 
+msgid "{{count}} category option combinations will be generated."
+msgid_plural "{{count}} category option combinations will be generated."
+msgstr[0] "{{count}} category option combinations will be generated."
+msgstr[1] "{{count}} category option combinations will be generated."
+
 msgid "More than 4 Categories"
 msgstr "More than 4 Categories"
 
@@ -1386,6 +1411,16 @@ msgid ""
 msgstr ""
 "What should happen to the source category options after the merge is "
 "complete?"
+
+msgid "Keep {{ count }} source category options"
+msgid_plural "Keep {{ count }} source category options"
+msgstr[0] "Keep {{ count }} source category options"
+msgstr[1] "Keep {{ count }} source category options"
+
+msgid "Delete {{ count }} source category options"
+msgid_plural "Delete {{ count }} source category options"
+msgstr[0] "Delete {{ count }} source category options"
+msgstr[1] "Delete {{ count }} source category options"
 
 msgid "Custom attributes"
 msgstr "Custom attributes"
@@ -1667,9 +1702,6 @@ msgstr ""
 "Send notifications when data sets are marked complete, using the DHIS2 "
 "Messages app."
 
-msgid "Legends"
-msgstr "Legends"
-
 msgid "Choose legends that will do something (?????????)"
 msgstr "Choose legends that will do something (?????????)"
 
@@ -1796,9 +1828,6 @@ msgstr "Display options"
 
 msgid "Configure which organisation units can collect data for this data set."
 msgstr "Configure which organisation units can collect data for this data set."
-
-msgid "Something went wrong"
-msgstr "Something went wrong"
 
 msgid "Configure data entry periods"
 msgstr "Configure data entry periods"
@@ -2028,6 +2057,16 @@ msgstr ""
 "What should happen to the source indicator types after the merge is "
 "complete?"
 
+msgid "Keep {{ count }} source indicator types"
+msgid_plural "Keep {{ count }} source indicator types"
+msgstr[0] "Keep {{ count }} source indicator types"
+msgstr[1] "Keep {{ count }} source indicator types"
+
+msgid "Delete {{ count }} source indicator types"
+msgid_plural "Delete {{ count }} source indicator types"
+msgstr[0] "Delete {{ count }} source indicator types"
+msgstr[1] "Delete {{ count }} source indicator types"
+
 msgid "Conflicting factors"
 msgstr "Conflicting factors"
 
@@ -2078,6 +2117,16 @@ msgstr "No indicators available. Remove one from source."
 
 msgid "What should happen to the source indicators after the merge is complete?"
 msgstr "What should happen to the source indicators after the merge is complete?"
+
+msgid "Keep {{ count }} source indicators"
+msgid_plural "Keep {{ count }} source indicators"
+msgstr[0] "Keep {{ count }} source indicators"
+msgstr[1] "Keep {{ count }} source indicators"
+
+msgid "Delete {{ count }} source indicators"
+msgid_plural "Delete {{ count }} source indicators"
+msgstr[0] "Delete {{ count }} source indicators"
+msgstr[1] "Delete {{ count }} source indicators"
 
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."
@@ -2377,6 +2426,9 @@ msgstr ""
 msgid "Manage"
 msgstr "Manage"
 
+msgid "Program Disaggregation Form"
+msgstr "Program Disaggregation Form"
+
 msgid "Program indicator mappings"
 msgstr "Program indicator mappings"
 
@@ -2523,6 +2575,11 @@ msgstr "Delete Mapping"
 msgid "This action cannot be undone."
 msgstr "This action cannot be undone."
 
+msgid "All mappings ({{count}}) will be removed."
+msgid_plural "All mappings ({{count}}) will be removed."
+msgstr[0] "All mappings ({{count}}) will be removed."
+msgstr[1] "All mappings ({{count}}) will be removed."
+
 msgid "Are you sure you want to delete this program mapping configuration?"
 msgstr "Are you sure you want to delete this program mapping configuration?"
 
@@ -2544,22 +2601,129 @@ msgstr "Search available program indicators"
 msgid "Search selected program indicators"
 msgstr "Search selected program indicators"
 
-msgctxt "form"
-msgid "program_disaggregation"
-msgstr "program_disaggregation_form"
+msgid "Incident date"
+msgstr "Incident date"
 
-msgctxt "mappings"
-msgid "program_indicator"
-msgstr "program_indicator_mappings"
+msgid "Event date"
+msgstr "Event date"
 
-msgctxt "mappings"
-msgid "disaggregation_category"
-msgstr "disaggregation_category_mappings"
+msgid "Enrollment date"
+msgstr "Enrollment date"
 
-msgctxt "Application title"
-msgid "__MANIFEST_APP_TITLE"
-msgstr "Maintenance (Preview)"
+msgid "Before start of reporting period"
+msgstr "Before start of reporting period"
 
-msgctxt "Application description"
-msgid "__MANIFEST_APP_DESCRIPTION"
+msgid "Before end of reporting period"
+msgstr "Before end of reporting period"
+
+msgid "After start of reporting period"
+msgstr "After start of reporting period"
+
+msgid "After end of reporting period"
+msgstr "After end of reporting period"
+
+msgid "Offset"
+msgstr "Offset"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Boundary target"
+msgstr "Boundary target"
+
+msgid "Custom boundary text"
+msgstr "Custom boundary text"
+
+msgid "Analytics period boundary type"
+msgstr "Analytics period boundary type"
+
+msgid "Offset period by amount"
+msgstr "Offset period by amount"
+
+msgid "Edit analytics period boundary"
+msgstr "Edit analytics period boundary"
+
+msgid "Add analytics period boundary"
+msgstr "Add analytics period boundary"
+
+msgid "Save analytics period boundary"
+msgstr "Save analytics period boundary"
+
+msgid "Add a period boundary"
+msgstr "Add a period boundary"
+
+msgid "Event organisation unit default"
+msgstr "Event organisation unit default"
+
+msgid "Enrollment organisation unit default"
+msgstr "Enrollment organisation unit default"
+
+msgid "Enrollment organisation unit"
+msgstr "Enrollment organisation unit"
+
+msgid "Owner at start organisation unit"
+msgstr "Owner at start organisation unit"
+
+msgid "Owner at end organisation unit"
+msgstr "Owner at end organisation unit"
+
+msgid "Registration organisation unit"
+msgstr "Registration organisation unit"
+
+msgid "Organisation unit field"
+msgstr "Organisation unit field"
+
+msgid "Set up the basic information for this program indicator."
+msgstr "Set up the basic information for this program indicator."
+
+msgid "Explain the purpose of this program indicator."
+msgstr "Explain the purpose of this program indicator."
+
+msgid "Configuration"
+msgstr "Configuration"
+
+msgid "Choose which program and which data types this program indicator applies to."
+msgstr "Choose which program and which data types this program indicator applies to."
+
+msgid "Program (required)"
+msgstr "Program (required)"
+
+msgid "Analytics type (required)"
+msgstr "Analytics type (required)"
+
+msgid "Configure the program indicator expression."
+msgstr "Configure the program indicator expression."
+
+msgid ""
+"Configure the program indicator filter that controls what data will be "
+"evaluated bt the main expression."
 msgstr ""
+"Configure the program indicator filter that controls what data will be "
+"evaluated bt the main expression."
+
+msgid "Period boundaries"
+msgstr "Period boundaries"
+
+msgid "Set up time constraints, which determine what data will be evaluated."
+msgstr "Set up time constraints, which determine what data will be evaluated."
+
+msgid "Set up advanced properties for this program indicator."
+msgstr "Set up advanced properties for this program indicator."
+
+msgid "Show program indicators in data entry forms"
+msgstr "Show program indicators in data entry forms"
+
+msgid "Set up the program indicator legends."
+msgstr "Set up the program indicator legends."
+
+msgid "Filter available legends"
+msgstr "Filter available legends"
+
+msgid "Filter selected legends"
+msgstr "Filter selected legends"
+
+msgid "Program Indicators Form"
+msgstr "Program Indicators Form"
+
+msgid "Legend sets"
+msgstr "Legend sets"

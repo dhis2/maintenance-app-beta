@@ -9,6 +9,7 @@ import {
     StandardFormSectionTitle,
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
+import { CustomFormSection } from './CustomFormSection'
 import { DisplayOptionsField } from './DisplayOptionsField'
 import classes from './FormFormContents.module.css'
 
@@ -187,6 +188,7 @@ export const FormFormContents = React.memo(function FormFormContents({
                     <DisplayOptionsField />
                 </div>
             )}
+            <CustomFormSection />
         </SectionedFormSection>
     )
 })

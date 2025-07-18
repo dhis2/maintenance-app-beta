@@ -95,6 +95,13 @@ export const dataSetFormSchema = identifiable
                 })
             )
             .default([]),
+        dataEntryForm: z
+            .object({
+                id: z.string(),
+                displayName: z.string(),
+                htmlCode: z.string().optional(),
+            })
+            .optional(),
     })
 
 export const dataSetListSchema = withDefaultListColumns
