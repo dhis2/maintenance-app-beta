@@ -15,6 +15,7 @@ import { PickWithFieldFilters, DataSet } from '../../types/generated'
 import { DataSetFormContents } from './form/DataSetFormContents'
 import { validate, dataSetValueFormatter } from './form/dataSetFormSchema'
 import { DataSetFormDescriptor } from './form/formDescriptor'
+import { DrawerRoot } from '../../components/drawer/Drawer'
 const section = SECTIONS_MAP.dataSet
 
 const fieldFilters = [
@@ -85,6 +86,7 @@ export const Component = () => {
                                 <DataSetFormContents />
                                 <DefaultFormFooter />
                             </form>
+                            <DrawerRoot />
                             <SectionedFormErrorNotice />
                         </SectionedFormLayout>
                     </SectionedFormProvider>

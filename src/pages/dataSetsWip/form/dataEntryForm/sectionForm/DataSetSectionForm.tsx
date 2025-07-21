@@ -142,7 +142,7 @@ export const EditDataSetSectionForm = ({
 
 export const NewDataSetSectionForm = ({
     onCancel,
-    onSubmitted: onSubmit,
+    onSubmitted,
 }: {
     onCancel?: () => void
     onSubmitted?: (values: SectionFormValues) => void
@@ -153,7 +153,7 @@ export const NewDataSetSectionForm = ({
     })
     const onFormSubmit: OnSubmit = async (values, form) => {
         const res = await onDefaultSubmit(values, form)
-        console.log('(*******', values)
+        console.log('(*******', values, res)
         // if (res && !res[FORM_ERROR]) {
         //     onSubmit?.(values)
         // }

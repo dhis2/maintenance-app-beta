@@ -7,8 +7,8 @@ import {
     MoreDropdownButton,
     MoreDropdownItem,
     MoreDropdownDivider,
+    DrawerPortal,
 } from '../../../../components'
-import { Drawer } from '../../../../components/drawer'
 import { DisplayableModel } from '../../../../types/models'
 import { DataSetFormValues } from '../dataSetFormSchema'
 import { EditOrNewDataSetSectionForm } from './sectionForm/DataSetSectionForm'
@@ -27,7 +27,8 @@ export const SectionFormSectionsList = () => {
     const handleSubmittedSection: React.ComponentProps<
         typeof EditOrNewDataSetSectionForm
     >['onSubmitted'] = (values) => {
-        if (sectionFormOpen && sectionFormOpen.id) {
+        const isEditSection = sectionFormOpen && sectionFormOpen.id
+        if (isEditSection) {
             const index = sectionFieldArray.value.findIndex(
                 (s) => s.id === sectionFormOpen.id
             )
@@ -41,7 +42,7 @@ export const SectionFormSectionsList = () => {
     }
     return (
         <div className={css.sectionsList}>
-            <Drawer
+            <DrawerPortal
                 isOpen={isSectionFormOpen}
                 onClose={() => setSectionFormOpen(undefined)}
             >
@@ -52,7 +53,7 @@ export const SectionFormSectionsList = () => {
                         onSubmitted={handleSubmittedSection}
                     />
                 )}
-            </Drawer>
+            </DrawerPortal>
             <div>
                 <StandardFormSectionTitle>
                     {i18n.t('Sections')}
