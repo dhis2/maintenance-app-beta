@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-21T07:22:29.390Z\n"
-"PO-Revision-Date: 2025-07-21T07:22:29.391Z\n"
+"POT-Creation-Date: 2025-07-21T08:52:16.468Z\n"
+"PO-Revision-Date: 2025-07-21T08:52:16.468Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2745,3 +2745,11 @@ msgstr "Program Indicators Form"
 
 msgid "Legend sets"
 msgstr "Legend sets"
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Maintenance (Preview)"
+
+msgctxt "Application description"
+msgid "__MANIFEST_APP_DESCRIPTION"
+msgstr ""

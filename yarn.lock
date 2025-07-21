@@ -2635,12 +2635,10 @@
   resolved "https://registry.yarnpkg.com/@juggle/resize-observer/-/resize-observer-3.4.0.tgz#08d6c5e20cf7e4cc02fd181c4b0c225cd31dbb60"
   integrity sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==
 
-"@keyv/serialize@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@keyv/serialize/-/serialize-1.0.3.tgz#e0fe3710e2a379cb0490cd41e5a5ffa2bab58bf6"
-  integrity sha512-qnEovoOp5Np2JDGonIDL6Ayihw0RhnRh6vxPuHo4RDn1UOzwEo4AeIfpL6UGIrsceWrCMiVPgwRjbHu4vYFc3g==
-  dependencies:
-    buffer "^6.0.3"
+"@keyv/serialize@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@keyv/serialize/-/serialize-1.1.0.tgz#08f5d89096110fdcf778e5337362e1cd5afad70a"
+  integrity sha512-RlDgexML7Z63Q8BSaqhXdCYNBy/JQnqYIwxofUrNLGCblOMHp+xux2Q8nLMLlPpgHQPoU0Do8Z6btCpRBEqZ8g==
 
 "@ls-lint/ls-lint@^1.10.0":
   version "1.11.2"
@@ -3134,9 +3132,9 @@
   integrity sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==
 
 "@types/node@*":
-  version "24.0.14"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.0.14.tgz#6e3d4fb6d858c48c69707394e1a0e08ce1ecc1bc"
-  integrity sha512-4zXMWD91vBLGRtHK3YbIoFMia+1nqEz72coM42C5ETjnNCa/heoj7NT1G67iAfOqMmcfhuCZ4uNpyz8EjlAejw==
+  version "24.0.15"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.0.15.tgz#f34fbc973e7d64217106e0c59ed8761e6b51381e"
+  integrity sha512-oaeTSbCef7U/z7rDeJA138xpG3NuKc64/rZ2qmUFkFJmnMsAPaluIifqyWd8hSSMxyP9oie3dLAqYPblag9KgA==
   dependencies:
     undici-types "~7.8.0"
 
@@ -5657,9 +5655,9 @@ escodegen@^2.0.0:
     source-map "~0.6.1"
 
 eslint-config-prettier@^9.1.0:
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-9.1.0.tgz#31af3d94578645966c082fcb71a5846d3c94867f"
-  integrity sha512-NSWl5BFQWEPi1j4TjVNItzYV7dZXZ+wP6I6ZhrBGpChQhZRUaElihE9uRRkcbRnNb76UMKDF3r+WTmNcGPKsqw==
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-9.1.2.tgz#90deb4fa0259592df774b600dbd1d2249a78ce91"
+  integrity sha512-iI1f+D2ViGn+uvv5HuHVUamg8ll4tN+JRHGc6IJi4TP9Kl976C57fzPXgseXNs8v0iA8aSJpHsTWjDb9QJamGQ==
 
 eslint-import-resolver-node@^0.3.9:
   version "0.3.9"
@@ -6224,9 +6222,9 @@ flatted@^3.2.9, flatted@^3.3.3:
   integrity sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==
 
 flow-parser@0.*:
-  version "0.275.0"
-  resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.275.0.tgz#c7d2bd486b4d29638261cefd7d642c3b89c729bb"
-  integrity sha512-fHNwawoA2LM7FsxhU/1lTRGq9n6/Q8k861eHgN7GKtamYt9Qrxpg/ZSrev8o1WX7fQ2D3Gg3+uvYN15PmsG7Yw==
+  version "0.276.0"
+  resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.276.0.tgz#9a880f1c85674f77543215711a2e45bce9b30342"
+  integrity sha512-rHZzn3I1Hc6L+XCTHe4miH9mEW4+CozvGghVLwE5xHasf2nchq2GJonUowRihuOx6NsJO8pGD+5XdIDH1iLgNg==
 
 flush-write-stream@^1.0.2:
   version "1.1.1"
@@ -8269,11 +8267,11 @@ keyv@^4.5.3:
     json-buffer "3.0.1"
 
 keyv@^5.3.4:
-  version "5.3.4"
-  resolved "https://registry.yarnpkg.com/keyv/-/keyv-5.3.4.tgz#e0548d9449c51fc332abdd637c2b3bb2d24c9bc9"
-  integrity sha512-ypEvQvInNpUe+u+w8BIcPkQvEqXquyyibWE/1NB5T2BTzIpS5cGEV1LZskDzPSTvNAaT4+5FutvzlvnkxOSKlw==
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/keyv/-/keyv-5.4.0.tgz#64895135d5b63e8bde6889d2b53a8e4af8e387b9"
+  integrity sha512-TMckyVjEoacG5IteUpUrOBsFORtheqziVyyY2dLUwg1jwTb8u48LX4TgmtogkNl9Y9unaEJ1luj10fGyjMGFOQ==
   dependencies:
-    "@keyv/serialize" "^1.0.3"
+    "@keyv/serialize" "^1.1.0"
 
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
@@ -10870,9 +10868,9 @@ stylelint-use-logical@^2.1.2:
   integrity sha512-4ffvPNk/swH4KS3izExWuzQOuzLmi0gb0uOhvxWJ20vDA5W5xKCjcHHtLoAj1kKvTIX6eGIN5xGtaVin9PD0wg==
 
 stylelint@^16.3.1:
-  version "16.21.1"
-  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-16.21.1.tgz#1887cbea53c40ff2a0b3ff3912852ff16e1b696c"
-  integrity sha512-WCXdXnYK2tpCbebgMF0Bme3YZH/Rh/UXerj75twYo4uLULlcrLwFVdZTvTEF8idFnAcW21YUDJFyKOfaf6xJRw==
+  version "16.22.0"
+  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-16.22.0.tgz#00020f4390a8625cf7f707820c1b6b538e4b0fa3"
+  integrity sha512-SVEMTdjKNV4ollUrIY9ordZ36zHv2/PHzPjfPMau370MlL2VYXeLgSNMMiEbLGRO8RmD2R8/BVUeF2DfnfkC0w==
   dependencies:
     "@csstools/css-parser-algorithms" "^3.0.5"
     "@csstools/css-tokenizer" "^3.0.4"
