@@ -12,9 +12,8 @@ import { categoryOptionComboListSchema } from '../pages/categoryOptionCombos/for
 import { categoryOptionGroupListSchema } from '../pages/categoryOptionGroups/form/categoryOptionGroupSchema'
 import { categoryOptionGroupSetListSchema } from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
 import { categoryOptionListSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
-import { dataElementGroupSchema } from '../pages/dataElementGroups/form'
+import { DataElementGroupListSchema } from '../pages/dataElementGroups/form/dataElementGroupSchema'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
-import { DataElementFormSchema } from '../pages/dataElements/form'
 import { DataElementListSchema } from '../pages/dataElements/form/dataElementSchema'
 import { DataSetNotificationTemplateListSchema } from '../pages/dataSetNotificationTemplates/form/DataSetNotificationTemplateSchema'
 import { dataSetListSchema } from '../pages/dataSetsWip/form/dataSetFormSchema'
@@ -151,7 +150,7 @@ export const testCategoryOptionGroupSet = (
 })
 
 export const testDataElementGroup = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(dataElementGroupSchema.merge(withDefaultListColumns), {
+    ...generateMock(DataElementGroupListSchema, {
         mockeryMapper,
     }),
     ...overwrites,

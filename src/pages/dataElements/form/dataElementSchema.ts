@@ -7,12 +7,8 @@ import {
 } from '../../../lib'
 import { DataElement } from '../../../types/generated'
 
-const {
-    identifiable,
-    withAttributeValues,
-    referenceCollection,
-    withDefaultListColumns,
-} = modelFormSchemas
+const { identifiable, withAttributeValues, withDefaultListColumns } =
+    modelFormSchemas
 
 const DataElementBaseSchema = z.object({
     shortName: z.string().trim(),

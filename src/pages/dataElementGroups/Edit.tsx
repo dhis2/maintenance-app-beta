@@ -10,7 +10,10 @@ import {
 import { DataElementGroup, PickWithFieldFilters } from '../../types/generated'
 import { DataElementGroupFormFields, validate } from './form'
 
-const fieldFilters = ['*', 'attributeValues[*]'] as const
+const fieldFilters = [
+    '*',
+    'attributeValues[*], dataElements[id,displayName]',
+] as const
 
 export type DataElementGroupFormValues = PickWithFieldFilters<
     DataElementGroup,

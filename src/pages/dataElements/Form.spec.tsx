@@ -1,7 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { render, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { uniq } from 'lodash'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/dataElementsSchema.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
@@ -670,7 +669,7 @@ describe('Data elements form tests', () => {
     describe('Edit', () => {
         const renderForm = generateRenderer(
             { section, mockSchema },
-            (routeOptions) => {
+            (routeOptions, { dataElementOverwrites } = {}) => {
                 const attributes = [testCustomAttribute()]
                 const categoryCombos = [
                     testCategoryCombo(),
@@ -707,7 +706,9 @@ describe('Data elements form tests', () => {
                     attributeValues: [
                         { attribute: attributes[0], value: 'attribute' },
                     ],
+                    ...dataElementOverwrites,
                 })
+
                 const id = dataElement.id
 
                 const screen = render(
@@ -757,7 +758,7 @@ describe('Data elements form tests', () => {
                 }
             }
         )
-        it.only('contain all needed field prefilled', async () => {
+        it('contain all needed field prefilled', async () => {
             const {
                 screen,
                 dataElement,
@@ -904,12 +905,11 @@ describe('Data elements form tests', () => {
             expect(updateMock).not.toHaveBeenCalled()
         })
         it('should have multi text as a value type if data set has that value type', async () => {
-            const dataElementsWithMultiText = testDataElement({
-                valueType: 'MULTI_TEXT',
-                aggregationLevels: [],
-            })
             const { screen } = await renderForm({
-                dataElement: dataElementsWithMultiText,
+                dataElementOverwrites: {
+                    valueType: 'MULTI_TEXT',
+                    optionSet: null,
+                },
             })
 
             const valueType = within(
