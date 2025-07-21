@@ -10,10 +10,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import {
-    ColorAndIconField,
-    LegendSetField,
-} from '../../dataElements/fields'
+import { ColorAndIconField, LegendSetField } from '../../dataElements/fields'
 import DenominatorFields from './denominatorFields'
 import { IndicatorTypeField } from './IndicatorTypeField'
 import NumeratorFields from './numeratorFields'
