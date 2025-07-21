@@ -13,7 +13,11 @@ import {
 } from '../../types/generated'
 import { DataElementGroupSetFormFields, validate } from './form'
 
-const fieldFilters = ['*', 'attributeValues[*]'] as const
+const fieldFilters = [
+    '*',
+    'attributeValues[*]',
+    'dataElementGroups[id,displayName]',
+] as const
 
 export type DataElementGroupSetFormValues = PickWithFieldFilters<
     DataElementGroupSet,

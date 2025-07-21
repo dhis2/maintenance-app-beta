@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/dataElementGroups.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
-import { SECTIONS_MAP, VALUE_TYPE } from '../../lib'
+import { SECTIONS_MAP } from '../../lib'
 import {
     randomLongString,
     testCustomAttribute,
@@ -176,10 +176,7 @@ describe('Data element groups form tests', () => {
     describe('New', () => {
         const renderForm = generateRenderer(
             { section, mockSchema },
-            (
-                routeOptions,
-                { matchingExistingElementFilter = undefined } = {}
-            ) => {
+            (routeOptions) => {
                 const attributes = [testCustomAttribute({ mandatory: false })]
                 const dataElements = [
                     testDataElement(),
@@ -198,18 +195,6 @@ describe('Data element groups form tests', () => {
                                     return { statusCode: 204 }
                                 }
                                 if (type === 'read') {
-                                    if (
-                                        params?.params?.filter?.includes(
-                                            matchingExistingElementFilter
-                                        )
-                                    ) {
-                                        return {
-                                            pager: { total: 1 },
-                                            dataElementGroups: [
-                                                testDataElement(),
-                                            ],
-                                        }
-                                    }
                                     return {
                                         pager: { total: 0 },
                                         dataElementGroups: [],
@@ -310,10 +295,7 @@ describe('Data element groups form tests', () => {
     describe('Edit', () => {
         const renderForm = generateRenderer(
             { section, mockSchema },
-            (
-                routeOptions,
-                { matchingExistingElementFilter = undefined } = {}
-            ) => {
+            (routeOptions) => {
                 const attributes = [testCustomAttribute({ mandatory: false })]
                 const dataElements = [
                     testDataElement(),
