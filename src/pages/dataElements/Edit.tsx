@@ -3,6 +3,8 @@ import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { DefaultEditFormContents, FormBase } from '../../components'
 import {
+    ATTRIBUTE_VALUES_FIELD_FILTERS,
+    DEFAULT_FIELD_FILTERS,
     SECTIONS_MAP,
     useBoundResourceQueryFn,
     useOnSubmitEdit,
@@ -15,12 +17,25 @@ import {
 } from './form'
 
 const fieldFilters = [
-    '*',
+    ...DEFAULT_FIELD_FILTERS,
+    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
+    'name',
+    'shortName',
+    'code',
+    'formName',
+    'description',
+    'url',
+    'style[color,icon]',
+    'fieldMask',
+    'zeroIsSignificant',
+    'domainType',
+    'valueType',
+    'aggregationType',
     'categoryCombo[id,displayName]',
-    'attributeValues[*]',
     'commentOptionSet[id,displayName]',
     'optionSet[id,displayName,valueType]',
     'legendSets[id,displayName]',
+    'aggregationLevels',
 ] as const
 
 export type DataElementFormValues = PickWithFieldFilters<

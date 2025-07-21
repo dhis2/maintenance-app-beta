@@ -3,6 +3,8 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { DefaultEditFormContents, FormBase } from '../../components'
 import {
+    ATTRIBUTE_VALUES_FIELD_FILTERS,
+    DEFAULT_FIELD_FILTERS,
     SECTIONS_MAP,
     useBoundResourceQueryFn,
     useOnSubmitEdit,
@@ -14,8 +16,14 @@ import {
 import { DataElementGroupSetFormFields, validate } from './form'
 
 const fieldFilters = [
-    '*',
-    'attributeValues[*]',
+    ...DEFAULT_FIELD_FILTERS,
+    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
+    'name',
+    'shortName',
+    'code',
+    'description',
+    'compulsory',
+    'dataDimension',
     'dataElementGroups[id,displayName]',
 ] as const
 
