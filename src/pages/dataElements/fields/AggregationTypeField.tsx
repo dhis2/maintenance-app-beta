@@ -1,12 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF } from '@dhis2/ui'
 import React, { useEffect } from 'react'
-import {
-    Field as FieldRFF,
-    useForm,
-    useField,
-    useFormState,
-} from 'react-final-form'
+import { Field as FieldRFF, useForm, useFormState } from 'react-final-form'
 import { AGGREGATION_TYPE, required, useSchemas } from '../../../lib'
 
 export const DISABLING_VALUE_TYPES = [

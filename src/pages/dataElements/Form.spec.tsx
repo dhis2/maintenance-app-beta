@@ -290,8 +290,8 @@ describe('Data elements form tests', () => {
                 opt.textContent?.includes(
                     VALUE_TYPE[aValueType as keyof typeof VALUE_TYPE]
                 )
-            )
-            await userEvent.click(valueTypeOption!)
+            )!
+            await userEvent.click(valueTypeOption)
             await uiActions.closeSingleSelectIfOpen(
                 screen.getByTestId('formfields-valueType'),
                 screen
@@ -774,25 +774,21 @@ describe('Data elements form tests', () => {
                 dataElement.shortName,
                 screen
             )
-            uiAssertions.expectCodeFieldExist(dataElement.code!, screen)
+            uiAssertions.expectCodeFieldExist(dataElement.code, screen)
             uiAssertions.expectInputFieldToExist(
                 'formName',
-                dataElement.formName!,
+                dataElement.formName,
                 screen
             )
             uiAssertions.expectTextAreaFieldToExist(
                 'description',
-                dataElement.description!,
+                dataElement.description,
                 screen
             )
-            uiAssertions.expectInputFieldToExist(
-                'url',
-                dataElement.url!,
-                screen
-            )
+            uiAssertions.expectInputFieldToExist('url', dataElement.url, screen)
             uiAssertions.expectInputFieldToExist(
                 'fieldMask',
-                dataElement.fieldMask!,
+                dataElement.fieldMask,
                 screen
             )
             uiAssertions.expectCheckboxFieldToExist(

@@ -20,28 +20,26 @@ export function AggregationLevelsField() {
     })
 
     return (
-        <>
-            <ModelMultiSelectField
-                input={input}
-                meta={meta}
-                name="aggregationLevels"
-                label={i18n.t('Aggregation level(s)')}
-                dataTest="formfields-aggregationlevels"
-                query={{
-                    resource: 'organisationUnitLevels',
-                    params: {
-                        fields: ['displayName', 'level'],
-                        order: ['displayName'],
-                        filter: 'name:ne:default',
-                    },
-                }}
-                transform={(values) =>
-                    values.map((value) => ({
-                        ...value,
-                        id: value.level.toString(),
-                    }))
-                }
-            />
-        </>
+        <ModelMultiSelectField
+            input={input}
+            meta={meta}
+            name="aggregationLevels"
+            label={i18n.t('Aggregation level(s)')}
+            dataTest="formfields-aggregationlevels"
+            query={{
+                resource: 'organisationUnitLevels',
+                params: {
+                    fields: ['displayName', 'level'],
+                    order: ['displayName'],
+                    filter: 'name:ne:default',
+                },
+            }}
+            transform={(values) =>
+                values.map((value) => ({
+                    ...value,
+                    id: value.level.toString(),
+                }))
+            }
+        />
     )
 }
