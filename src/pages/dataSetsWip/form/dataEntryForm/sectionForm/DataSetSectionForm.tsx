@@ -169,7 +169,7 @@ export const NewDataSetSectionForm = ({
     )
 }
 
-export const EditorNewDataSetSectionForm = ({
+export const EditOrNewDataSetSectionForm = ({
     dataSetSection,
     onCancel,
     onSubmitted: onSubmit,

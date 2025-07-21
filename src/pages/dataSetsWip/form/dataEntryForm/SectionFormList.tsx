@@ -11,7 +11,7 @@ import {
 import { Drawer } from '../../../../components/drawer'
 import { DisplayableModel } from '../../../../types/models'
 import { DataSetFormValues } from '../dataSetFormSchema'
-import { EditorNewDataSetSectionForm } from './sectionForm/DataSetSectionForm'
+import { EditOrNewDataSetSectionForm } from './sectionForm/DataSetSectionForm'
 import css from './SectionFormList.module.css'
 
 type Section = DataSetFormValues['sections'][number]
@@ -24,6 +24,21 @@ export const SectionFormSectionsList = () => {
     const isSectionFormOpen = !!sectionFormOpen || sectionFormOpen === null
     const sectionFieldArray = useFieldArray<Section>('sections').fields
 
+    const handleSubmittedSection: React.ComponentProps<
+        typeof EditOrNewDataSetSectionForm
+    >['onSubmitted'] = (values) => {
+        if (sectionFormOpen && sectionFormOpen.id) {
+            const index = sectionFieldArray.value.findIndex(
+                (s) => s.id === sectionFormOpen.id
+            )
+            if (index !== -1) {
+                sectionFieldArray.update(index, values)
+            }
+        } else {
+            sectionFieldArray.push(values)
+        }
+        setSectionFormOpen(undefined)
+    }
     return (
         <div className={css.sectionsList}>
             <Drawer
@@ -31,10 +46,10 @@ export const SectionFormSectionsList = () => {
                 onClose={() => setSectionFormOpen(undefined)}
             >
                 {isSectionFormOpen && (
-                    <EditorNewDataSetSectionForm
+                    <EditOrNewDataSetSectionForm
                         dataSetSection={sectionFormOpen}
                         onCancel={() => setSectionFormOpen(undefined)}
-                        onSubmitted={() => setSectionFormOpen(undefined)}
+                        onSubmitted={handleSubmittedSection}
                     />
                 )}
             </Drawer>
