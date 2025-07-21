@@ -1,18 +1,28 @@
+import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
     Button,
+    ButtonStrip,
     Checkbox,
     CircularLoader,
     IconChevronDown16,
     IconChevronUp16,
     InputField,
+    Modal,
+    ModalContent,
+    ModalActions,
     NoticeBox,
 } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useField } from 'react-final-form'
+import { useParams } from 'react-router-dom'
 import { StandardFormSectionTitle } from '../../../components'
-import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
+import {
+    useBoundResourceQueryFn,
+    DEFAULT_CATEGORY_OPTION_COMBO,
+    parseErrorResponse,
+} from '../../../lib/index'
 import styles from './CustomFormSection.module.css'
 import { useCompulsoryDataElementOperandsQuery } from './useGetCompulsoryDataElementOperandsOptions'
 
@@ -110,7 +120,7 @@ const ElementsSelector = ({
     insertElement: ElementSelectorFunction
 }) => {
     const [selectedElementType, setSelectedElementType] =
-        useState<string>('Indicators')
+        useState<string>('dataElement')
 
     const { input: indicatorsInput } = useField('indicators')
     const indicators = indicatorsInput.value
@@ -135,7 +145,10 @@ const ElementsSelector = ({
             ) => {
                 // if operand coc is default, we use the display name of the data element, and do not add a total
                 // TO DO look up this id from constants
-                if (deo.categoryOptionCombo.id === 'HllvX50cXC0') {
+                if (
+                    deo.categoryOptionCombo.id ===
+                    DEFAULT_CATEGORY_OPTION_COMBO.id
+                ) {
                     acc.dataElements.push({
                         id: deo.id,
                         displayName: deo.dataElement.displayName,
@@ -204,7 +217,7 @@ const ElementsSelector = ({
                 />
             </SubsectionSpacer>
             {elementTypes.map((elementType) => {
-                const selected = selectedElementType === elementType.name
+                const selected = selectedElementType === elementType.type
                 const cleanedFilter = filter
                     .normalize('NFD')
                     .replace(/\p{Diacritic}/gu, '')
@@ -227,9 +240,9 @@ const ElementsSelector = ({
                             className={styles.elementTypeTitle}
                             onClick={() => {
                                 setSelectedElementType((prev) =>
-                                    prev === elementType.name
+                                    prev === elementType.type
                                         ? ''
-                                        : elementType.name
+                                        : elementType.type
                                 )
                             }}
                         >
@@ -256,9 +269,6 @@ const ElementsSelector = ({
                     </div>
                 )
             })}
-            <Button primary small>
-                {i18n.t('Save')}
-            </Button>
         </>
     )
 }
@@ -296,9 +306,89 @@ const getElementText = ({
     return ''
 }
 
+// mutations
+// if there is no id for the data set, we need to create form separately
+
+// if there is a data set id, we can post to the form endpoint
+const useUpdateForm = () => {
+    const id = useParams().id
+    const dataEngine = useDataEngine()
+
+    const update = useCallback(
+        async (data: Record<string, unknown>) => {
+            try {
+                // const options = id ? {variables: {id}} : null
+                const response = await dataEngine.mutate({
+                    resource: `dataSets/${id}/form`,
+                    type: 'create',
+                    data: data,
+                })
+                return { data: response }
+            } catch (error) {
+                return { error: parseErrorResponse(error) }
+            }
+        },
+        [dataEngine, id]
+    )
+    return update
+}
+
+// delete: we delete the form by form id
+const useDeleteForm = ({
+    id,
+    onComplete,
+}: {
+    id: string
+    onComplete: () => void
+}) => {
+    const dataEngine = useDataEngine()
+
+    const deleteForm = useCallback(async () => {
+        try {
+            // const options = id ? {variables: {id}} : null
+            const response = await dataEngine.mutate(
+                {
+                    resource: `dataEntryForms`,
+                    type: 'delete',
+                    id,
+                },
+                { onComplete }
+            )
+            return { data: response }
+        } catch (error) {
+            return { error: parseErrorResponse(error) }
+        }
+    }, [dataEngine, id])
+    return deleteForm
+}
+
+const DeleteModal = ({
+    closeModal,
+    deleteCustomForm,
+}: {
+    closeModal: () => void
+    deleteCustomForm: () => void
+}) => (
+    <Modal position="middle" onClose={closeModal}>
+        <ModalContent>
+            {i18n.t('Are you sure you want to delete this data entry form?')}
+        </ModalContent>
+        <ModalActions>
+            <ButtonStrip>
+                <Button small>{i18n.t('Cancel')}</Button>
+                <Button small destructive onClick={deleteCustomForm}>
+                    {i18n.t('Delete')}
+                </Button>
+            </ButtonStrip>
+        </ModalActions>
+    </Modal>
+)
+
 export const CustomFormSection = () => {
     const textAreaRef = useRef<HTMLTextAreaElement>(null)
     const [previewMode, togglePreviewMode] = useState<boolean>(false)
+    const [deleteConfirmationOpen, setDeleteConfirmationOpen] =
+        useState<boolean>(false)
     const { input: formInput } = useField('dataEntryForm')
 
     const insertElement = ({
@@ -330,11 +420,35 @@ export const CustomFormSection = () => {
         if (!textAreaRef.current) {
             return
         }
-        textAreaRef.current.value = formInput?.value?.htmlCode
+        textAreaRef.current.value = formInput?.value?.htmlCode ?? ''
     }, [formInput?.value?.htmlCode, textAreaRef])
+
+    const clearForm = useCallback(() => {
+        if (!textAreaRef.current) {
+            return
+        }
+        textAreaRef.current.value = ''
+        setDeleteConfirmationOpen(false)
+    }, [textAreaRef])
+
+    const updateCustomForm = useUpdateForm()
+    const deleteCustomForm = useDeleteForm({
+        id: formInput?.value?.id ?? '',
+        onComplete: clearForm,
+    })
+
+    const closeDeleteConfirmationModal = useCallback(() => {
+        setDeleteConfirmationOpen(false)
+    }, [setDeleteConfirmationOpen])
 
     return (
         <>
+            {deleteConfirmationOpen && (
+                <DeleteModal
+                    closeModal={closeDeleteConfirmationModal}
+                    deleteCustomForm={deleteCustomForm}
+                />
+            )}
             <StandardFormSectionTitle>
                 {previewMode
                     ? i18n.t('Custom form (preview mode)')
@@ -373,6 +487,31 @@ export const CustomFormSection = () => {
                     ref={textAreaRef}
                 ></textarea>
                 <ElementsSelector insertElement={insertElement} />
+                <ButtonStrip>
+                    <Button
+                        secondary
+                        small
+                        onClick={() => {
+                            setDeleteConfirmationOpen(true)
+                        }}
+                    >
+                        {i18n.t('Delete')}
+                    </Button>
+                    <Button secondary small>
+                        {i18n.t('Cancel')}
+                    </Button>
+                    <Button
+                        primary
+                        small
+                        onClick={() => {
+                            updateCustomForm({
+                                htmlCode: textAreaRef.current?.value ?? '',
+                            })
+                        }}
+                    >
+                        {i18n.t('Save')}
+                    </Button>
+                </ButtonStrip>
             </>
         </>
     )
