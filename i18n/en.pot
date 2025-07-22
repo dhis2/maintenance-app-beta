@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-22T10:10:53.077Z\n"
-"PO-Revision-Date: 2025-07-22T10:10:53.077Z\n"
+"POT-Creation-Date: 2025-07-22T11:35:26.076Z\n"
+"PO-Revision-Date: 2025-07-22T11:35:26.077Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2049,6 +2049,9 @@ msgstr "Numerator is required"
 msgid "Denominator is required"
 msgstr "Denominator is required"
 
+msgid "Select option"
+msgstr "Select option"
+
 msgid "Denominator description"
 msgstr "Denominator description"
 
@@ -2075,24 +2078,6 @@ msgstr "Aggregate export category option combo"
 
 msgid "Aggregate export attribute option combo"
 msgstr "Aggregate export attribute option combo"
-
-msgid "Classification"
-msgstr "Classification"
-
-msgid "Input"
-msgstr "Input"
-
-msgid "Activity"
-msgstr "Activity"
-
-msgid "Output"
-msgstr "Output"
-
-msgid "Impact"
-msgstr "Impact"
-
-msgid "PEPFAR ID"
-msgstr "PEPFAR ID"
 
 msgid "Numerator"
 msgstr "Numerator"
