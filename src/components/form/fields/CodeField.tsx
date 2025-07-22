@@ -5,8 +5,14 @@ import { Field as FieldRFF } from 'react-final-form'
 import { SchemaSection } from '../../../lib'
 import { useValidator } from '../../../lib/models/useFieldValidators'
 
-export function CodeField({ schemaSection }: { schemaSection: SchemaSection }) {
-    const validator = useValidator({ schemaSection, property: 'code' })
+export function CodeField({
+    schemaSection,
+    modelId,
+}: {
+    schemaSection: SchemaSection
+    modelId?: string
+}) {
+    const validator = useValidator({ schemaSection, property: 'code', modelId })
 
     return (
         <FieldRFF
