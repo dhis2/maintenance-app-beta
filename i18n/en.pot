@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-21T08:52:16.468Z\n"
-"PO-Revision-Date: 2025-07-21T08:52:16.468Z\n"
+"POT-Creation-Date: 2025-07-22T10:10:53.077Z\n"
+"PO-Revision-Date: 2025-07-22T10:10:53.077Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2061,6 +2061,9 @@ msgstr "Set up the basic information for this indicator."
 msgid "Explain the purpose of this indicator."
 msgstr "Explain the purpose of this indicator."
 
+msgid "No value"
+msgstr "No value"
+
 msgid "Select number of decimals"
 msgstr "Select number of decimals"
 
@@ -2087,9 +2090,6 @@ msgstr "Output"
 
 msgid "Impact"
 msgstr "Impact"
-
-msgid "Select classification"
-msgstr "Select classification"
 
 msgid "PEPFAR ID"
 msgstr "PEPFAR ID"
@@ -2745,11 +2745,3 @@ msgstr "Program Indicators Form"
 
 msgid "Legend sets"
 msgstr "Legend sets"
-
-msgctxt "Application title"
-msgid "__MANIFEST_APP_TITLE"
-msgstr "Maintenance (Preview)"
-
-msgctxt "Application description"
-msgid "__MANIFEST_APP_DESCRIPTION"
-msgstr ""

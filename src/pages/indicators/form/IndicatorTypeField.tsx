@@ -28,7 +28,7 @@ export const IndicatorTypeField = () => {
                         resource: 'indicatorTypes',
                         params: {
                             fields: ['id', 'displayName'],
-                            order: 'displayName:asc',
+                            order: 'displayName:iasc',
                         },
                     }}
                 />

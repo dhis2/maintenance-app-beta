@@ -7,7 +7,7 @@ import {
     modelFormSchemas,
 } from '../../../lib'
 
-const { identifiable, withAttributeValues, withDefaultListColumns } =
+const { identifiable, withAttributeValues, style, withDefaultListColumns } =
     modelFormSchemas
 const indicatorBaseSchema = z.object({
     code: z.string().trim().optional(),
@@ -19,7 +19,7 @@ const indicatorBaseSchema = z.object({
     numeratorDescription: z.string().min(1),
     denominatorDescription: z.string().min(1),
     annualized: z.boolean().default(false),
-    decimals: z.number().int().lte(5).gte(0).optional(),
+    decimals: z.coerce.number().int().lte(5).gte(0).optional(),
     url: z.string().trim().url().optional(),
     aggregateExportCategoryOptionCombo: z.string().trim().optional(),
     aggregateExportAttributeOptionCombo: z.string().trim().optional(),
@@ -27,26 +27,12 @@ const indicatorBaseSchema = z.object({
         id: z.string().refine((val) => isValidUid(val)),
     }),
     legendSets: z.array(z.object({ id: z.string() })),
-    style: z
-        .object({
-            color: z.string().optional(),
-            icon: z.string().optional(),
-        })
-        .optional(),
-    attributeValues: z.array(
-        z.object({
-            value: z.string().optional(),
-            attribute: z.object({
-                id: z.string(),
-                name: z.string(),
-            }),
-        })
-    ),
 })
 
 export const indicatorFormSchema = identifiable
     .merge(indicatorBaseSchema)
     .merge(withAttributeValues)
+    .merge(style)
 
 export const indicatorListSchema = indicatorBaseSchema
     .merge(withDefaultListColumns)

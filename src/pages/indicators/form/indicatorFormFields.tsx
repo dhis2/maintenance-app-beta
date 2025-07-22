@@ -11,6 +11,7 @@ import {
     StandardFormSectionTitle,
 } from '../../../components'
 import { ColorAndIconField, LegendSetField } from '../../dataElements/fields'
+import { AttributeValueField } from './attributeValueField'
 import DenominatorFields from './denominatorFields'
 import { IndicatorTypeField } from './IndicatorTypeField'
 import NumeratorFields from './numeratorFields'
@@ -49,10 +50,13 @@ export const IndicatiorFormFields = () => {
                         component={SingleSelectFieldFF}
                         inputWidth="400px"
                         label={i18n.t('Decimals in data output')}
-                        options={[0, 1, 2, 3, 4, 5].map((d) => ({
-                            label: d.toString(),
-                            value: d.toString(),
-                        }))}
+                        options={[
+                            { label: i18n.t('No value'), value: '' },
+                            ...[0, 1, 2, 3, 4, 5].map((d) => ({
+                                label: d.toString(),
+                                value: d.toString(),
+                            })),
+                        ]}
                         placeholder={i18n.t('Select number of decimals')}
                     />
                 </StandardFormField>
@@ -115,31 +119,7 @@ export const IndicatiorFormFields = () => {
                         )}
                     />
                 </StandardFormField>
-
-                <StandardFormField>
-                    <FieldRFF
-                        component={SingleSelectFieldFF}
-                        inputWidth="400px"
-                        name="attributeValues[0].value"
-                        label={i18n.t('Classification')}
-                        options={[
-                            { label: i18n.t('Input'), value: 'INPUT' },
-                            { label: i18n.t('Activity'), value: 'ACTIVITY' },
-                            { label: i18n.t('Output'), value: 'OUTPUT' },
-                            { label: i18n.t('Impact'), value: 'IMPACT' },
-                        ]}
-                        placeholder={i18n.t('Select classification')}
-                    />
-                </StandardFormField>
-
-                <StandardFormField>
-                    <FieldRFF<string | undefined>
-                        component={InputFieldFF}
-                        inputWidth="400px"
-                        name="attributeValues[1].value"
-                        label={i18n.t('PEPFAR ID')}
-                    />
-                </StandardFormField>
+                <AttributeValueField />
             </StandardFormSection>
 
             <StandardFormSection>

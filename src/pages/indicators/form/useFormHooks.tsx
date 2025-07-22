@@ -21,7 +21,7 @@ export const useValidateExpressionMutation = () => {
         const response = await engine.mutate({
             resource: 'indicators/expression/description',
             type: 'create',
-            data: { expression },
+            data: expression as unknown as Record<string, unknown>,
         })
         return response as unknown as ValidateExpressionResponse
     })

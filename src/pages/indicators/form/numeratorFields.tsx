@@ -1,8 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
-import { InputFieldFF, TextAreaFieldFF } from '@dhis2/ui'
+import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import { StandardFormField } from '../../../components'
+import { ExpressionField } from '../../../components/metadataFormControls/LegendSetTransfer/ExpressionField'
 import { useValidateIndicatorExpressionValidator } from './useFormHooks'
 
 function NumeratorFields() {
@@ -21,23 +22,11 @@ function NumeratorFields() {
             </StandardFormField>
 
             <StandardFormField>
-                <FieldRFF<string | undefined>
+                <ExpressionField
                     name="numerator"
+                    label={i18n.t('Edit numerator')}
                     validate={validateExpression}
-                >
-                    {({ input, meta }) => (
-                        <TextAreaFieldFF
-                            input={input}
-                            meta={meta}
-                            inputWidth="400px"
-                            required
-                            label={i18n.t('Edit numerator')}
-                            validationText={meta.error}
-                            warning={!!meta.error && meta.touched}
-                            rows={4}
-                        />
-                    )}
-                </FieldRFF>
+                />
             </StandardFormField>
         </>
     )
