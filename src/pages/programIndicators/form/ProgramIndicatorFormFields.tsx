@@ -1,12 +1,6 @@
 import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import {
-    CheckboxFieldFF,
-    InputFieldFF,
-    SingleSelectField,
-    SingleSelectFieldFF,
-    SingleSelectOption,
-} from '@dhis2/ui'
+import { CheckboxFieldFF, InputFieldFF, SingleSelectFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF, Field, useField } from 'react-final-form'
 import {
@@ -20,7 +14,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { ExpressionBuilder } from '../../../components/ExpressionBuilder/ExpressionBuilder'
+import { ExpressionBuilderField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderField'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import {
     getConstantTranslation,
@@ -36,7 +30,9 @@ import { OrgUnitField } from './OrgUnitField'
 const section = SECTIONS_MAP.programIndicator
 
 export const ProgramIndicatorsFormFields = () => {
-    const { input: decimalsInput } = useField('decimals')
+    const { input: decimalsInput, meta: decimalsMeta } = useField('decimals', {
+        format: (v) => v.toString(),
+    })
     const programFilters = [
         'id,displayName,programType,programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,valueType]]',
     ] as const
@@ -135,24 +131,20 @@ export const ProgramIndicatorsFormFields = () => {
                     <OrgUnitField />
                 </StandardFormField>
                 <StandardFormField dataTest="decimals-field">
-                    <SingleSelectField
-                        inputWidth="400px"
-                        selected={decimalsInput.value.toString()}
-                        onChange={({ selected }) => {
-                            decimalsInput.onChange(parseInt(selected))
-                            decimalsInput.onBlur()
-                        }}
+                    <SingleSelectFieldFF
+                        input={decimalsInput}
+                        meta={decimalsMeta}
                         label={i18n.t('Decimals in data output')}
-                    >
-                        <SingleSelectOption label={'<No value>'} value={''} />
-                        {['0', '1', '2', '3', '4', '5'].map((option) => (
-                            <SingleSelectOption
-                                key={option}
-                                label={option}
-                                value={option}
-                            />
-                        ))}
-                    </SingleSelectField>
+                        inputWidth="400px"
+                        options={[
+                            { label: i18n.t('<No value>'), value: '' },
+                            ...[0, 1, 2, 3, 4, 5].map((d) => ({
+                                label: d.toString(),
+                                value: d.toString(),
+                            })),
+                        ]}
+                        placeholder={i18n.t('Select number of decimals')}
+                    />
                 </StandardFormField>
             </SectionedFormSection>
             <SectionedFormSection
@@ -165,10 +157,8 @@ export const ProgramIndicatorsFormFields = () => {
                     {i18n.t('Configure the program indicator expression.')}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <FieldRFF
+                    <ExpressionBuilderField
                         dataTest="formfields-expression"
-                        component={ExpressionBuilder}
-                        inputWidth="400px"
                         name="expression"
                     />
                 </StandardFormField>
@@ -183,10 +173,8 @@ export const ProgramIndicatorsFormFields = () => {
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <FieldRFF
+                    <ExpressionBuilderField
                         dataTest="formfields-filter"
-                        component={ExpressionBuilder}
-                        inputWidth="400px"
                         name="filter"
                     />
                 </StandardFormField>

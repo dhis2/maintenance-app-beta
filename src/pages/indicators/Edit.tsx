@@ -10,7 +10,7 @@ import {
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { Indicator, PickWithFieldFilters } from '../../types/generated'
-import { IndicatiorFormFields } from './form/indicatorFormFields'
+import { IndicatiorFormFields } from './form/IndicatorFormFields'
 import { validate } from './form/IndicatorSchema'
 
 const fieldFilters = [
@@ -70,7 +70,6 @@ export const Component = () => {
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
-            includeAttributes={false}
         >
             <DefaultEditFormContents section={section}>
                 <IndicatiorFormFields />

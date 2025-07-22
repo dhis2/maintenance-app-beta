@@ -4,23 +4,26 @@ import { Field as FieldRFF } from 'react-final-form'
 
 type ExpressionFieldProps = {
     name: string
-    label: string
+    label?: string
     required?: boolean
+    dataTest?: string
     validate?: (
         value?: string
     ) => Promise<string | undefined> | string | undefined
 }
 
-export const ExpressionField = ({
+export const ExpressionBuilderField = ({
     name,
     label,
-    required = true,
+    required,
+    dataTest,
     validate,
 }: ExpressionFieldProps) => {
     return (
         <FieldRFF<string | undefined> name={name} validate={validate}>
             {({ input, meta }) => (
                 <TextAreaFieldFF
+                    dataTest={dataTest ?? 'expression-builder-field'}
                     input={input}
                     meta={meta}
                     required={required}

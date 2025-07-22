@@ -1,14 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
-import {
-    createFormValidate,
-    getDefaults,
-    isValidUid,
-    modelFormSchemas,
-} from '../../../lib'
+import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 
 const { identifiable, withAttributeValues, style, withDefaultListColumns } =
     modelFormSchemas
+
 const indicatorBaseSchema = z.object({
     code: z.string().trim().optional(),
     shortName: z.string().trim(),
@@ -19,12 +15,12 @@ const indicatorBaseSchema = z.object({
     numeratorDescription: z.string().min(1),
     denominatorDescription: z.string().min(1),
     annualized: z.boolean().default(false),
-    decimals: z.coerce.number().int().lte(5).gte(0).optional(),
+    decimals: z.number().int().lte(5).gte(0).optional(),
     url: z.string().trim().url().optional(),
     aggregateExportCategoryOptionCombo: z.string().trim().optional(),
     aggregateExportAttributeOptionCombo: z.string().trim().optional(),
     indicatorType: z.object({
-        id: z.string().refine((val) => isValidUid(val)),
+        id: z.string(),
     }),
     legendSets: z.array(z.object({ id: z.string() })),
 })

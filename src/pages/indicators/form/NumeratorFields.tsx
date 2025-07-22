@@ -3,7 +3,7 @@ import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import { StandardFormField } from '../../../components'
-import { ExpressionField } from '../../../components/metadataFormControls/LegendSetTransfer/ExpressionField'
+import { ExpressionBuilderField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderField'
 import { useValidateIndicatorExpressionValidator } from './useFormHooks'
 
 function NumeratorFields() {
@@ -22,10 +22,11 @@ function NumeratorFields() {
             </StandardFormField>
 
             <StandardFormField>
-                <ExpressionField
+                <ExpressionBuilderField
                     name="numerator"
                     label={i18n.t('Edit numerator')}
                     validate={validateExpression}
+                    required
                 />
             </StandardFormField>
         </>

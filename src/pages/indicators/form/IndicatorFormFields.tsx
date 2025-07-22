@@ -1,22 +1,28 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF, CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { Field as FieldRFF } from 'react-final-form'
+import { Field as FieldRFF, useField } from 'react-final-form'
 import {
+    CustomAttributesSection,
     DefaultIdentifiableFields,
     DescriptionField,
+    ModelTransferField,
     StandardFormField,
     StandardFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { ColorAndIconField, LegendSetField } from '../../dataElements/fields'
-import { AttributeValueField } from './attributeValueField'
-import DenominatorFields from './denominatorFields'
+import { SECTIONS_MAP } from '../../../lib'
+import { ColorAndIconField } from '../../dataElements/fields'
+import DenominatorFields from './DenominatorFields'
 import { IndicatorTypeField } from './IndicatorTypeField'
-import NumeratorFields from './numeratorFields'
+import NumeratorFields from './NumeratorFields'
 
 export const IndicatiorFormFields = () => {
+    const { input: decimalsInput, meta: decimalsMeta } = useField('decimals', {
+        format: (v) => v.toString(),
+    })
+
     return (
         <>
             <StandardFormSection>
@@ -45,13 +51,13 @@ export const IndicatiorFormFields = () => {
                 </StandardFormField>
 
                 <StandardFormField>
-                    <FieldRFF
-                        name="decimals"
-                        component={SingleSelectFieldFF}
-                        inputWidth="400px"
+                    <SingleSelectFieldFF
+                        input={decimalsInput}
+                        meta={decimalsMeta}
                         label={i18n.t('Decimals in data output')}
+                        inputWidth="400px"
                         options={[
-                            { label: i18n.t('No value'), value: '' },
+                            { label: i18n.t('<No value>'), value: '' },
                             ...[0, 1, 2, 3, 4, 5].map((d) => ({
                                 label: d.toString(),
                                 value: d.toString(),
@@ -83,7 +89,23 @@ export const IndicatiorFormFields = () => {
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
-                    <LegendSetField />
+                    <ModelTransferField
+                        dataTest="legendset-transfer"
+                        name="legendSets"
+                        query={{
+                            resource: 'legendSets',
+                            params: {
+                                filter: ['name:ne:default'],
+                                fields: ['id', 'displayName'],
+                            },
+                        }}
+                        leftHeader={i18n.t('Available legends')}
+                        rightHeader={i18n.t('Selected legends')}
+                        filterPlaceholder={i18n.t('Filter available legends')}
+                        filterPlaceholderPicked={i18n.t(
+                            'Filter selected legends'
+                        )}
+                    />
                 </StandardFormField>
             </StandardFormSection>
 
@@ -119,8 +141,8 @@ export const IndicatiorFormFields = () => {
                         )}
                     />
                 </StandardFormField>
-                <AttributeValueField />
             </StandardFormSection>
+            <CustomAttributesSection schemaSection={SECTIONS_MAP.indicator} />
 
             <StandardFormSection>
                 <StandardFormSectionTitle>
