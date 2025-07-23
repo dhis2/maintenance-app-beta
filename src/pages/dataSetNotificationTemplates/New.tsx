@@ -11,7 +11,7 @@ import { DataSetNotificationsFormFields } from './form/DataSetNotificationsFormF
 import {
     initialValues,
     validate,
-} from './form/DataSetNotificationTemplateSchema'
+} from './form/dataSetNotificationTemplateSchema'
 import { transformFormValues, formDescriptor } from './form/getValues'
 
 export const Component = () => {

@@ -6,11 +6,21 @@ import {
     useOnSubmitEdit,
     useBoundResourceQueryFn,
     SECTIONS_MAP,
+    DEFAULT_FIELD_FILTERS,
+    ATTRIBUTE_VALUES_FIELD_FILTERS,
 } from '../../lib'
 import { DataElementGroup, PickWithFieldFilters } from '../../types/generated'
 import { DataElementGroupFormFields, validate } from './form'
 
-const fieldFilters = ['*', 'attributeValues[*]'] as const
+const fieldFilters = [
+    ...DEFAULT_FIELD_FILTERS,
+    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
+    'name',
+    'shortName',
+    'code',
+    'description',
+    'dataElements[id,displayName]',
+] as const
 
 export type DataElementGroupFormValues = PickWithFieldFilters<
     DataElementGroup,

@@ -3,7 +3,7 @@ import { FormBase } from '../../components'
 import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
 import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { IndicatiorFormFields } from './form/IndicatorFormFields'
-import { initialValues, validate } from './form/IndicatorSchema'
+import { initialValues, validate } from './form/indicatorSchema'
 
 const section = SECTIONS_MAP.indicator
 

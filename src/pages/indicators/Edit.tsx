@@ -11,7 +11,7 @@ import {
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { Indicator, PickWithFieldFilters } from '../../types/generated'
 import { IndicatiorFormFields } from './form/IndicatorFormFields'
-import { validate } from './form/IndicatorSchema'
+import { validate } from './form/indicatorSchema'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,

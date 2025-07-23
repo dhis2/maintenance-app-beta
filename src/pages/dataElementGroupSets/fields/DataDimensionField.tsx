@@ -7,7 +7,7 @@ export function DataDimensionField() {
     return (
         <FieldRFF
             component={CheckboxFieldFF}
-            dataTest="dataelementsformfields-datadimension"
+            dataTest="formfields-dataDimension"
             name="dataDimension"
             label={i18n.t('Data dimension')}
             type="checkbox"

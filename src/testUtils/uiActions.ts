@@ -31,6 +31,25 @@ const openSingleSelect = async (
     triggeringDiv: HTMLElement,
     screen: RenderResult
 ) => {
+    const selectInput = within(triggeringDiv).getByTestId(
+        'dhis2-uicore-select-input'
+    )
+    expect(selectInput).toBeVisible()
+    await userEvent.click(selectInput)
+
+    const optionsWrapper = await screen.findByTestId(
+        'dhis2-uicore-select-menu-menuwrapper'
+    )
+    expect(optionsWrapper).toBeVisible()
+    return within(optionsWrapper).getAllByTestId(
+        'dhis2-uicore-singleselectoption'
+    )
+}
+
+const openMultiSelect = async (
+    triggeringDiv: HTMLElement,
+    screen: RenderResult
+) => {
     await userEvent.click(
         within(triggeringDiv).getByTestId('dhis2-uicore-select-input')
     )
@@ -39,8 +58,32 @@ const openSingleSelect = async (
     )
     expect(optionsWrapper).toBeVisible()
     return within(optionsWrapper).getAllByTestId(
-        'dhis2-uicore-singleselectoption'
+        'dhis2-uicore-multiselectoption'
     )
+}
+
+const pickOptionFromSelect = async (
+    triggeringDiv: HTMLElement,
+    optionIndex: number,
+    screen: RenderResult
+) => {
+    const options = await openSingleSelect(triggeringDiv, screen)
+    await userEvent.click(options[optionIndex])
+    await closeSingleSelectIfOpen(triggeringDiv, screen)
+}
+
+const pickOptionFromMultiSelect = async (
+    triggeringDiv: HTMLElement,
+    optionsIndexes: number[],
+    screen: RenderResult
+) => {
+    const options = await openMultiSelect(triggeringDiv, screen)
+    for (const optionIndex of optionsIndexes) {
+        await userEvent.click(
+            within(options[optionIndex]).getByRole('checkbox')
+        )
+    }
+    await closeSingleSelectIfOpen(triggeringDiv, screen)
 }
 
 const closeSingleSelectIfOpen = async (
@@ -81,7 +124,6 @@ const pickColor = async (screen: RenderResult) => {
     await userEvent.click(colorButton)
     const colors = screen.getByTestId('colors').querySelectorAll('span')
     await userEvent.click(colors[0])
-    screen.debug(screen.getByTestId('colorpicker-trigger'))
 }
 
 const clickOnCheckboxField = async (
@@ -93,10 +135,22 @@ const clickOnCheckboxField = async (
     await userEvent.click(input)
 }
 
+const pickRadioField = async (
+    fieldName: string,
+    radioLabel: string,
+    screen: RenderResult
+) => {
+    const field = screen.getByTestId(`formfields-${fieldName}`)
+    const radioButton = within(field).getByLabelText(radioLabel)
+    await userEvent.click(radioButton)
+}
+
 export const uiActions = {
     openModal,
     openSingleSelect,
     closeSingleSelectIfOpen,
+    pickOptionFromSelect,
+    pickOptionFromMultiSelect,
     submitForm,
     enterInputFieldValue,
     enterName: async (text: string, screen: RenderResult) =>
@@ -107,4 +161,5 @@ export const uiActions = {
     clearInputField,
     // pickColor, Need to fix this
     clickOnCheckboxField,
+    pickRadioField,
 }

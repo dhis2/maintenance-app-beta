@@ -1,1 +1,0 @@
-export { LegendSetTransfer } from './LegendSetTransfer'
