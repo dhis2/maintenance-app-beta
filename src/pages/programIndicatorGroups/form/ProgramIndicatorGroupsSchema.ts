@@ -19,6 +19,7 @@ export const ProgramIndicatorGroupListSchema =
     ProgramIndicatorGroupBaseSchema.merge(withDefaultListColumns).extend({
         user: UserSchema,
         favorite: z.boolean(),
+        name: z.string(),
     })
 
 export const initialValues = getDefaults(ProgramIndicatorGroupFormSchema)

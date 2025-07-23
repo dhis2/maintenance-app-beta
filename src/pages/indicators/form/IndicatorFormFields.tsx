@@ -20,7 +20,8 @@ import NumeratorFields from './NumeratorFields'
 
 export const IndicatiorFormFields = () => {
     const { input: decimalsInput, meta: decimalsMeta } = useField('decimals', {
-        format: (v) => v.toString(),
+        format: (v) => v?.toString(),
+        parse: (v) => v && parseInt(v),
     })
 
     return (
