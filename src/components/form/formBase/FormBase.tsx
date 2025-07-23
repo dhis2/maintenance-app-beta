@@ -27,19 +27,19 @@ type MaybeModelWithAttributes = {
    We dont really want this, so remove it  */
 type FixedFormProps<TValues> = RemoveIndexSignature<FormProps<TValues>>
 
-type OwnProps<TValues = Record<string, unknown>, TFormattedValues = TValues> = {
+type OwnProps<TValues, TFormattedValues = TValues> = {
     initialValues: TValues | undefined
     children: FormProps<TValues>['children']
     includeAttributes?: boolean
-    valueFormatter?: (values: TValues) => any
+    valueFormatter?: (values: NoInfer<TValues>) => TFormattedValues
     onSubmit: EnhancedOnSubmit<TFormattedValues>
 }
 
-export type FormBaseProps<TValues> = Omit<
+export type FormBaseProps<TValues, TFormattedValues = TValues> = Omit<
     FixedFormProps<TValues>,
     keyof OwnProps<TValues> | 'render' | 'component'
 > &
-    OwnProps<TValues>
+    OwnProps<TValues, TFormattedValues>
 
 export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
     initialValues,

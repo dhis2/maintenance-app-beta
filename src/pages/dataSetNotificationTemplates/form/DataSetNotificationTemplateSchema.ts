@@ -77,8 +77,10 @@ export const validate = createFormValidate(
 /**
  * Converts form values back to API payload
  */
-export const transformFormValues = (
-    values: Partial<DataSetNotificationFormValues>
+export const transformFormValues = <
+    TValues extends Partial<DataSetNotificationFormValues>
+>(
+    values: TValues
 ) => {
     const {
         recipientUserGroup,
