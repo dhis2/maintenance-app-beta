@@ -1322,6 +1322,7 @@ describe('Program indicator form tests', () => {
                 routeOptions,
                 {
                     customTestData = {},
+                    programIndicatorOverwrites = {},
                     matchingExistingElementFilter = undefined,
                     id = randomDhis2Id(),
                 } = {}
@@ -1354,6 +1355,7 @@ describe('Program indicator form tests', () => {
                             offsetPeriods: 5,
                         },
                     ],
+                    ...programIndicatorOverwrites,
                 })
                 const screen = render(
                     <TestComponentWithRouter
@@ -1384,7 +1386,7 @@ describe('Program indicator form tests', () => {
                                 },
                             }),
                             programIndicators: (type: any, params: any) => {
-                                if (type === 'create') {
+                                if (type === 'json-patch') {
                                     updateMock(params)
                                     return { statusCode: 204 }
                                 }
@@ -1594,6 +1596,32 @@ describe('Program indicator form tests', () => {
                     ).getByRole('textbox')
                 ).toHaveValue(programIndicator.attributeValues[0].value)
             })
+        })
+        it('update decimals to 0', async () => {
+            const { screen, programIndicator } = await renderForm()
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('decimals-field'),
+                1,
+                screen
+            )
+            await uiActions.submitForm(screen)
+            expect(updateMock).toHaveBeenCalledWith({
+                data: [{ op: 'replace', path: '/decimals', value: 0 }],
+                id: programIndicator.id,
+                params: undefined,
+                resource: 'programIndicators',
+            })
+        })
+        it('displays 0 decimals correctly', async () => {
+            const { screen } = await renderForm({
+                programIndicatorOverwrites: { decimals: 0 },
+            })
+            const decimals = within(
+                screen.getByTestId('decimals-field')
+            ).getByTestId('dhis2-uicore-select-input')
+            screen.debug(decimals)
+            expect(decimals).toBeVisible()
+            expect(decimals).toHaveTextContent('0')
         })
         it('should have a cancel button with a link back to the list view', async () => {
             const { screen } = await renderForm()
