@@ -18,10 +18,10 @@ import DenominatorFields from './DenominatorFields'
 import { IndicatorTypeField } from './IndicatorTypeField'
 import NumeratorFields from './NumeratorFields'
 
-export const IndicatiorFormFields = () => {
+export const IndicatorFormFields = () => {
     const { input: decimalsInput, meta: decimalsMeta } = useField('decimals', {
         format: (v) => v?.toString(),
-        parse: (v) => v && parseInt(v),
+        parse: (v) => (v !== undefined && v !== '' ? parseInt(v) : v),
     })
 
     return (

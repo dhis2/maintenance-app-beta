@@ -32,7 +32,7 @@ const section = SECTIONS_MAP.programIndicator
 export const ProgramIndicatorsFormFields = () => {
     const { input: decimalsInput, meta: decimalsMeta } = useField('decimals', {
         format: (v) => v?.toString(),
-        parse: (v) => v && parseInt(v),
+        parse: (v) => (v !== undefined && v !== '' ? parseInt(v) : v),
     })
     const programFilters = [
         'id,displayName,programType,programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,valueType]]',
