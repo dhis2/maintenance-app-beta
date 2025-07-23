@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { DataSet, UserGroup } from '../../../types/generated'
-import { DataSetNotificationFormValues } from './DataSetNotificationTemplateSchema'
+import { DataSetNotificationFormValues } from './dataSetNotificationTemplateSchema'
 
 /**
  * Converts form values back to API payload

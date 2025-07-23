@@ -1,6 +1,6 @@
 export { DataElementFormFields } from './DataElementFormFields'
 export {
-    dataElementSchema,
+    dataElementFormSchema,
     initialValues,
     validate,
     dataElementValueFormatter,

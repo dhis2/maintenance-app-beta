@@ -15,7 +15,7 @@ export enum DeliveryChannel {
     HTTP = 'HTTP',
 }
 
-const DataSetNotificationTemplateBaseSchema = z.object({
+const dataSetNotificationTemplateBaseSchema = z.object({
     code: z.string().optional(),
     description: z.string().optional(),
     dataSetNotificationTrigger: z.nativeEnum(
@@ -40,8 +40,9 @@ const DataSetNotificationTemplateBaseSchema = z.object({
         .optional(),
 })
 
-export const DataSetNotificationTemplateFormSchema =
-    DataSetNotificationTemplateBaseSchema.merge(identifiable)
+export const dataSetNotificationTemplateFormSchema =
+    dataSetNotificationTemplateBaseSchema
+        .merge(identifiable)
         .merge(withAttributeValues)
         .extend({
             code: z.string().optional().default(''),
@@ -79,15 +80,15 @@ export const DataSetNotificationTemplateFormSchema =
                 .optional(),
         })
 
-export const DataSetNotificationTemplateListSchema =
-    DataSetNotificationTemplateBaseSchema.merge(withDefaultListColumns)
+export const dataSetNotificationTemplateListSchema =
+    dataSetNotificationTemplateBaseSchema.merge(withDefaultListColumns)
 
-export const initialValues = getDefaults(DataSetNotificationTemplateFormSchema)
+export const initialValues = getDefaults(dataSetNotificationTemplateFormSchema)
 
 export const validate = createFormValidate(
-    DataSetNotificationTemplateBaseSchema
+    dataSetNotificationTemplateBaseSchema
 )
 
 export type DataSetNotificationFormValues = z.infer<
-    typeof DataSetNotificationTemplateFormSchema
+    typeof dataSetNotificationTemplateFormSchema
 >

@@ -1,61 +1,44 @@
 import i18n from '@dhis2/d2-i18n'
-import { Field } from '@dhis2/ui'
-import React, { useRef } from 'react'
+import React from 'react'
 import { useField } from 'react-final-form'
-import { useHref } from 'react-router'
-import {
-    AggregationLevelMultiSelect,
-    EditableFieldWrapper,
-} from '../../../components'
-import classes from './AggregationLevelsField.module.css'
+import { ModelMultiSelectField } from '../../../components'
 
-/**
- *
- * AggregationLevels
- *
- */
 export function AggregationLevelsField() {
-    const newAggregationLevelLink = useHref('/organisationUnitLevel/new')
     const { input, meta } = useField('aggregationLevels', {
         multiple: true,
-        format: (levels: number[]) => levels.map((level) => level.toString()),
-        parse: (levels: string[]) => levels.map((level) => parseInt(level, 10)),
-        validateFields: [],
-    })
-    const aggregationLevelHandle = useRef({
-        refetch: () => {
-            throw new Error('Not initialized')
+        format: (levels: number[]) => {
+            return levels.map((l) => ({
+                id: l.toString(),
+                displayName: l.toString(),
+                level: l,
+            }))
         },
+        parse: (levels) => {
+            return levels.map((l) => parseInt(l.id, 10))
+        },
+        validateFields: [],
     })
 
     return (
-        <EditableFieldWrapper
-            onRefresh={() => aggregationLevelHandle.current.refetch()}
-            onAddNew={() => window.open(newAggregationLevelLink, '_blank')}
-        >
-            <div className={classes.aggregationLevelsMultiSelect}>
-                <Field
-                    name="aggregationLevels"
-                    label={i18n.t('Aggregation level(s)')}
-                    validationText={meta.touched ? meta.error : undefined}
-                    error={meta.touched && !!meta.error}
-                    dataTest="formfields-aggregationlevels"
-                >
-                    <AggregationLevelMultiSelect
-                        ref={aggregationLevelHandle}
-                        invalid={meta.touched && !!meta.error}
-                        inputWidth="400px"
-                        placeholder=""
-                        selected={input.value}
-                        onChange={({ selected }) => input.onChange(selected)}
-                        onBlur={input.onBlur}
-                        onFocus={input.onFocus}
-                        onRetryClick={() =>
-                            aggregationLevelHandle.current.refetch()
-                        }
-                    />
-                </Field>
-            </div>
-        </EditableFieldWrapper>
+        <ModelMultiSelectField
+            input={input}
+            meta={meta}
+            name="aggregationLevels"
+            label={i18n.t('Aggregation level(s)')}
+            dataTest="formfields-aggregationlevels"
+            query={{
+                resource: 'organisationUnitLevels',
+                params: {
+                    fields: ['displayName', 'level'],
+                    order: ['displayName'],
+                },
+            }}
+            transform={(values) =>
+                values.map((value) => ({
+                    ...value,
+                    id: value.level.toString(),
+                }))
+            }
+        />
     )
 }
