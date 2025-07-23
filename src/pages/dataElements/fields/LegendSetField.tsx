@@ -10,7 +10,6 @@ export function LegendSetField() {
             query={{
                 resource: 'legendSets',
                 params: {
-                    filter: ['name:ne:default'],
                     fields: ['id', 'displayName'],
                 },
             }}

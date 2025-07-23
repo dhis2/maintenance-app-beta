@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { useField, useFormState } from 'react-final-form'
-import { SchemaName, useSchema, VALUE_TYPE } from '../../../lib'
+import { getConstantTranslation, SchemaName, useSchema } from '../../../lib'
 
 const valueTypeHelpText = i18n.t('The type of data that will be recorded.')
 const valueTypeDisabledHelpText = i18n.t(
@@ -29,7 +29,7 @@ export function ValueTypeField() {
         schema.properties.valueType.constants
             ?.map((constant) => ({
                 value: constant,
-                label: VALUE_TYPE[constant as keyof typeof VALUE_TYPE],
+                label: getConstantTranslation(constant),
             }))
             .filter(({ value }) => {
                 return optionSetHasMultiTextValueType || value !== 'MULTI_TEXT'

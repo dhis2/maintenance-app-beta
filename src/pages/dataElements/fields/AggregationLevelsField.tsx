@@ -31,7 +31,6 @@ export function AggregationLevelsField() {
                 params: {
                     fields: ['displayName', 'level'],
                     order: ['displayName'],
-                    filter: 'name:ne:default',
                 },
             }}
             transform={(values) =>

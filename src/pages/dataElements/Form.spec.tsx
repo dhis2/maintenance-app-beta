@@ -287,9 +287,7 @@ describe('Data elements form tests', () => {
                 screen
             )
             const valueTypeOption = valueTypeOptions.find((opt) =>
-                opt.textContent?.includes(
-                    VALUE_TYPE[aValueType as keyof typeof VALUE_TYPE]
-                )
+                opt.textContent?.includes(getConstantTranslation(aValueType))
             )!
             await userEvent.click(valueTypeOption)
             await uiActions.closeSingleSelectIfOpen(
@@ -352,7 +350,7 @@ describe('Data elements form tests', () => {
             ).getByTestId('dhis2-uicore-select-input')
             expect(valueType).toBeVisible()
             expect(valueType).toHaveTextContent(
-                VALUE_TYPE[optionSets[0].valueType as keyof typeof VALUE_TYPE]
+                getConstantTranslation(optionSets[0].valueType)
             )
 
             await uiActions.submitForm(screen)
