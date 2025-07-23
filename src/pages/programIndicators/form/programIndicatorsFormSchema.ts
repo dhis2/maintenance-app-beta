@@ -13,7 +13,7 @@ const {
     style,
 } = modelFormSchemas
 
-const ProgramIndicatorsBaseSchema = z.object({
+const programIndicatorsBaseSchema = z.object({
     program: modelReference,
     aggregationType: z.nativeEnum(ProgramIndicator.aggregationType).optional(),
     analyticsType: z
@@ -32,9 +32,8 @@ const ProgramIndicatorsBaseSchema = z.object({
     code: z.string().optional(),
 })
 
-export const ProgramIndicatorsListSchema = ProgramIndicatorsBaseSchema.merge(
-    withDefaultListColumns
-)
+export const programIndicatorsListSchema = programIndicatorsBaseSchema
+    .merge(withDefaultListColumns)
     .merge(withAttributeValues)
     .extend({
         displayShortName: z.string(),
@@ -44,9 +43,8 @@ export const ProgramIndicatorsListSchema = ProgramIndicatorsBaseSchema.merge(
         favorite: z.boolean(),
     })
 
-export const ProgramIndicatorFormSchema = ProgramIndicatorsBaseSchema.merge(
-    identifiable
-)
+export const programIndicatorFormSchema = programIndicatorsBaseSchema
+    .merge(identifiable)
     .merge(withAttributeValues)
     .extend({
         shortName: z.string().trim(),
@@ -65,8 +63,8 @@ export const ProgramIndicatorFormSchema = ProgramIndicatorsBaseSchema.merge(
             .default([]),
     })
 
-export const initialValues = getDefaults(ProgramIndicatorFormSchema)
+export const initialValues = getDefaults(programIndicatorFormSchema)
 
 export type ProgramIndicatorFormValues = typeof initialValues
 
-export const validate = createFormValidate(ProgramIndicatorFormSchema)
+export const validate = createFormValidate(programIndicatorFormSchema)

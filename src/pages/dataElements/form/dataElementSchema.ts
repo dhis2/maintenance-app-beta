@@ -10,7 +10,7 @@ import { DataElement } from '../../../types/generated'
 const { identifiable, withAttributeValues, withDefaultListColumns } =
     modelFormSchemas
 
-const DataElementBaseSchema = z.object({
+const dataElementBaseSchema = z.object({
     shortName: z.string().trim(),
     code: z.string().trim().optional(),
     description: z.string().trim().optional(),
@@ -47,22 +47,22 @@ const DataElementBaseSchema = z.object({
     aggregationLevels: z.array(z.number()).default([]),
     zeroIsSignificant: z.boolean().default(false),
 })
-export const DataElementListSchema = DataElementBaseSchema.merge(
-    withDefaultListColumns
-)
+export const dataElementListSchema = dataElementBaseSchema
+    .merge(withDefaultListColumns)
     .merge(withAttributeValues)
     .extend({
         name: z.string(),
     })
 
-export const DataElementFormSchema =
-    DataElementBaseSchema.merge(identifiable).merge(withAttributeValues)
+export const dataElementFormSchema = dataElementBaseSchema
+    .merge(identifiable)
+    .merge(withAttributeValues)
 
-export const initialValues = getDefaults(DataElementFormSchema)
+export const initialValues = getDefaults(dataElementFormSchema)
 
 export type DataElementFormValues = typeof initialValues
 
-export const validate = createFormValidate(DataElementFormSchema)
+export const validate = createFormValidate(dataElementFormSchema)
 
 export const dataElementValueFormatter = (values: DataElementFormValues) => ({
     ...values,

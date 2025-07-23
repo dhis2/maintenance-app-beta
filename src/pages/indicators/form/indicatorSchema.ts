@@ -3,6 +3,6 @@ import { modelFormSchemas } from '../../../lib'
 
 const { withDefaultListColumns } = modelFormSchemas
 
-export const IndicatorSchema = withDefaultListColumns.extend({
+export const indicatorSchema = withDefaultListColumns.extend({
     code: z.string(),
 })

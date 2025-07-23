@@ -1,6 +1,6 @@
 export { DataElementGroupFormFields } from './DataElementGroupFormFields'
 export {
-    DataElementGroupFormSchema,
+    dataElementGroupFormSchema,
     initialValues,
     validate,
 } from './dataElementGroupSchema'
