@@ -6,13 +6,9 @@ import {
     StandardFormSectionDescription,
     StandardFormField,
     CustomAttributesSection,
-} from '../../../components'
-import {
-    CodeField,
+    DefaultIdentifiableFields,
     DescriptionField,
-    NameField,
-    ShortNameField,
-} from '../../../components/form'
+} from '../../../components'
 import { SCHEMA_SECTIONS } from '../../../lib'
 import {
     AggregationLevelsField,
@@ -43,20 +39,10 @@ export function DataElementFormFields() {
                     {i18n.t('Set up the information for this data element.')}
                 </StandardFormSectionDescription>
 
-                <StandardFormField>
-                    <NameField schemaSection={section} />
-                </StandardFormField>
-
-                <StandardFormField>
-                    <ShortNameField schemaSection={section} />
-                </StandardFormField>
+                <DefaultIdentifiableFields />
 
                 <StandardFormField>
                     <FormNameField />
-                </StandardFormField>
-
-                <StandardFormField>
-                    <CodeField schemaSection={section} />
                 </StandardFormField>
 
                 <StandardFormField>

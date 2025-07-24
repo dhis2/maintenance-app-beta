@@ -25,7 +25,7 @@ import { DataSetNotificationsFormFields } from './form/DataSetNotificationsFormF
 import {
     transformFormValues,
     validate,
-} from './form/DataSetNotificationTemplateSchema'
+} from './form/dataSetNotificationTemplateSchema'
 import { formDescriptor } from './form/formDescriptor'
 
 const fieldFilters = [

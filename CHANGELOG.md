@@ -1,3 +1,30 @@
+# [0.53.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.52.0...v0.53.0) (2025-07-23)
+
+
+### Features
+
+* refactor old selectors left overs ([#595](https://github.com/dhis2/maintenance-app-beta/issues/595)) ([b5a43fd](https://github.com/dhis2/maintenance-app-beta/commit/b5a43fd7f981167580564de6c49fbc532e6f860f))
+
+# [0.52.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.51.0...v0.52.0) (2025-07-17)
+
+
+### Features
+
+* prevent users from removing sharing [DHIS2-18430] ([#593](https://github.com/dhis2/maintenance-app-beta/issues/593)) ([172fe86](https://github.com/dhis2/maintenance-app-beta/commit/172fe8630416dd15b7963553232da20c1caefbff))
+
+# [0.51.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.50.0...v0.51.0) (2025-07-08)
+
+
+### Bug Fixes
+
+* **merge:** new line for confirm code ([#587](https://github.com/dhis2/maintenance-app-beta/issues/587)) [skip release] ([642de7a](https://github.com/dhis2/maintenance-app-beta/commit/642de7a0462383c1c54f37f57605c096519ea9b4))
+
+
+### Features
+
+* add attributes to datasets ([#590](https://github.com/dhis2/maintenance-app-beta/issues/590)) ([5fe06b7](https://github.com/dhis2/maintenance-app-beta/commit/5fe06b7a2aa260abe1379b25dbbb9cabda814806))
+* program indicators form ([#581](https://github.com/dhis2/maintenance-app-beta/issues/581)) ([43151c1](https://github.com/dhis2/maintenance-app-beta/commit/43151c16eebe7b58dff56857473e72fe46cec2e7))
+
 # [0.50.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.49.0...v0.50.0) (2025-07-04)
 
 

@@ -32,8 +32,6 @@ const dataSetNotificationTemplateBaseSchema = z.object({
 
 export const dataSetNotificationTemplateFormSchema =
     dataSetNotificationTemplateBaseSchema.merge(identifiable).extend({
-        code: z.string().optional(),
-        description: z.string().optional(),
         dataSetNotificationTrigger: z
             .nativeEnum(DataSetNotificationTemplate.dataSetNotificationTrigger)
             .default(
@@ -45,20 +43,6 @@ export const dataSetNotificationTemplateFormSchema =
             .default(
                 DataSetNotificationTemplate.notificationRecipient.USER_GROUP
             ),
-        deliveryChannels: z.array(z.enum(['SMS', 'EMAIL', 'HTTP'])).default([]),
-        messageTemplate: z.string(),
-        subjectTemplate: z.string().optional(),
-        relativeScheduledDays: z.coerce.number().default(0),
-        recipientUserGroup: z
-            .object({
-                id: z.string(),
-                displayName: z.string().optional(),
-            })
-            .optional(),
-        dataSets: referenceCollection.default([]),
-        sendStrategy: z
-            .nativeEnum(DataSetNotificationTemplate.sendStrategy)
-            .optional(),
     })
 
 export const DataSetNotificationTemplateListSchema =

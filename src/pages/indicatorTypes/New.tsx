@@ -4,7 +4,7 @@ import { DefaultNewFormContents } from '../../components/form/DefaultFormContent
 import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { validate } from './form'
 import { IndicatorTypesFormFields } from './form/IndicatorTypesFormFields'
-import { initialValues } from './form/IndicatorTypesSchema'
+import { initialValues } from './form/indicatorTypesSchema'
 
 const section = SECTIONS_MAP.indicatorType
 

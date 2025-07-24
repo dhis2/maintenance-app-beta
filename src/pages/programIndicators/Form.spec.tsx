@@ -9,7 +9,7 @@ import {
     randomDhis2Id,
     randomLongString,
     testCustomAttribute,
-    testLegendSets,
+    testLegendSet,
     testProgram,
     testProgramIndicator,
 } from '../../testUtils/builders'
@@ -141,7 +141,7 @@ describe('Program indicator form tests', () => {
             ) => {
                 const attributes = [testCustomAttribute()]
                 const programs = [testProgram(), testProgram(), testProgram()]
-                const legendSets = [testLegendSets(), testLegendSets()]
+                const legendSets = [testLegendSet(), testLegendSet()]
                 const screen = render(
                     <TestComponentWithRouter
                         path={`/${section.namePlural}`}
@@ -566,7 +566,7 @@ describe('Program indicator form tests', () => {
             ) => {
                 const attributes = [testCustomAttribute({ mandatory: false })]
                 const programs = [testProgram(), testProgram(), testProgram()]
-                const legendSets = [testLegendSets(), testLegendSets()]
+                const legendSets = [testLegendSet(), testLegendSet()]
                 const screen = render(
                     <TestComponentWithRouter
                         path={`/${section.namePlural}`}
@@ -682,11 +682,11 @@ describe('Program indicator form tests', () => {
                 '',
                 screen
             )
-            // uiAssertions.expectInputFieldToExist(
-            //     'aggregateExportDataElement',
-            //     '',
-            //     screen
-            // )
+            uiAssertions.expectInputFieldToExist(
+                'aggregateExportDataElement',
+                '',
+                screen
+            )
             expect(screen.getByTestId('add-boundary-button')).toBeVisible()
             await uiAssertions.expectTransferFieldToExistWithOptions(
                 'legendSets-field',
@@ -822,12 +822,11 @@ describe('Program indicator form tests', () => {
                         displayInForm: false,
                         aggregateExportAttributeOptionCombo: undefined,
                         aggregateExportCategoryOptionCombo: undefined,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: undefined,
                         legendSets: [],
                         attributeValues: [],
                         expression: undefined,
                         filter: undefined,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [],
                         orgUnitField: staticOptions.eventDefault.value,
                     }),
@@ -916,12 +915,11 @@ describe('Program indicator form tests', () => {
                         displayInForm: false,
                         aggregateExportAttributeOptionCombo: undefined,
                         aggregateExportCategoryOptionCombo: undefined,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: undefined,
                         legendSets: [],
                         attributeValues: [],
                         expression: anExpression,
                         filter: aFilter,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [],
                         orgUnitField: undefined,
                     }),
@@ -1007,12 +1005,11 @@ describe('Program indicator form tests', () => {
                         displayInForm: false,
                         aggregateExportAttributeOptionCombo: undefined,
                         aggregateExportCategoryOptionCombo: undefined,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: undefined,
                         legendSets: [],
                         attributeValues: [],
                         expression: undefined,
                         filter: undefined,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [
                             {
                                 boundaryTarget: 'INCIDENT_DATE',
@@ -1035,7 +1032,7 @@ describe('Program indicator form tests', () => {
             const aShortName = faker.internet.userName()
             const aCatOptionExport = faker.internet.userName()
             const anAttOptionExport = faker.internet.userName()
-            // const anAggDataExport = faker.internet.userName()
+            const anAggDataExport = faker.internet.userName()
 
             const periodTypes = ['Daily', 'Monthly', 'Yearly']
             const { screen } = await renderForm({
@@ -1096,11 +1093,11 @@ describe('Program indicator form tests', () => {
                 anAttOptionExport,
                 screen
             )
-            // await uiActions.enterInputFieldValue(
-            //     'aggregateExportDataElement',
-            //     anAggDataExport,
-            //     screen
-            // )
+            await uiActions.enterInputFieldValue(
+                'aggregateExportDataElement',
+                anAggDataExport,
+                screen
+            )
 
             await uiActions.submitForm(screen)
             expect(createMock).toHaveBeenCalledTimes(1)
@@ -1120,12 +1117,11 @@ describe('Program indicator form tests', () => {
                         displayInForm: true,
                         aggregateExportAttributeOptionCombo: anAttOptionExport,
                         aggregateExportCategoryOptionCombo: aCatOptionExport,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: anAggDataExport,
                         legendSets: [],
                         attributeValues: [],
                         expression: undefined,
                         filter: undefined,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [],
                         orgUnitField: undefined,
                     }),
@@ -1209,14 +1205,13 @@ describe('Program indicator form tests', () => {
                         displayInForm: false,
                         aggregateExportAttributeOptionCombo: undefined,
                         aggregateExportCategoryOptionCombo: undefined,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: undefined,
                         legendSets: [
                             expect.objectContaining({ id: legendSets[0].id }),
                         ],
                         attributeValues: [],
                         expression: undefined,
                         filter: undefined,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [],
                         orgUnitField: undefined,
                     }),
@@ -1301,7 +1296,7 @@ describe('Program indicator form tests', () => {
                         displayInForm: false,
                         aggregateExportAttributeOptionCombo: undefined,
                         aggregateExportCategoryOptionCombo: undefined,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: undefined,
                         legendSets: [],
                         attributeValues: [
                             {
@@ -1313,7 +1308,6 @@ describe('Program indicator form tests', () => {
                         ],
                         expression: undefined,
                         filter: undefined,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [],
                         orgUnitField: undefined,
                     }),
@@ -1341,7 +1335,7 @@ describe('Program indicator form tests', () => {
                     testProgram(),
                 ]
                 const attributes = [testCustomAttribute()]
-                const legendSets = [testLegendSets(), testLegendSets()]
+                const legendSets = [testLegendSet(), testLegendSet()]
                 const periodTypes = ['Daily', 'Monthly', 'Yearly']
                 const programIndicator = testProgramIndicator({
                     id,
@@ -1351,7 +1345,6 @@ describe('Program indicator form tests', () => {
                         { attribute: attributes[0], value: 'attribute' },
                     ],
                     orgUnitField: staticOptions.eventDefault.value,
-                    style: { color: undefined, icon: undefined },
                     analyticsPeriodBoundaries: [
                         {
                             boundaryTarget: 'INCIDENT_DATE',
@@ -1439,14 +1432,25 @@ describe('Program indicator form tests', () => {
             }
         )
 
-        it('contain all needed field', async () => {
-            const {
-                screen,
-                programs,
-                legendSets,
-                attributes,
-                programIndicator,
-            } = await renderForm()
+        it('contain all the basic information fields', async () => {
+            const { screen, programIndicator } = await renderForm()
+            uiAssertions.expectNameFieldExist(programIndicator.name, screen)
+            uiAssertions.expectInputFieldToExist(
+                'shortName',
+                programIndicator.shortName,
+                screen
+            )
+
+            uiAssertions.expectCodeFieldExist(programIndicator.code, screen)
+            uiAssertions.expectTextAreaFieldToExist(
+                'description',
+                programIndicator.description,
+                screen
+            )
+            uiAssertions.expectColorAndIconFieldToExist(screen)
+        })
+        it('contain all the configuration field', async () => {
+            const { screen, programs, programIndicator } = await renderForm()
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('programs-field'),
                 {
@@ -1456,36 +1460,6 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            uiAssertions.expectNameFieldExist(programIndicator.name, screen)
-            uiAssertions.expectInputFieldToExist(
-                'shortName',
-                programIndicator.shortName,
-                screen
-            )
-            uiAssertions.expectCodeFieldExist(programIndicator.code, screen)
-            uiAssertions.expectColorAndIconFieldToExist(screen)
-            uiAssertions.expectTextAreaFieldToExist(
-                'description',
-                programIndicator.description,
-                screen
-            )
-            const expectedDecimalsOptions = [
-                { displayName: '<No value>' },
-                { displayName: '0' },
-                { displayName: '1' },
-                { displayName: '2' },
-                { displayName: '3' },
-                { displayName: '4' },
-                { displayName: '5' },
-            ]
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('decimals-field'),
-                {
-                    selected: programIndicator.decimals,
-                    options: expectedDecimalsOptions,
-                },
-                screen
-            )
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('aggregation-type-field'),
                 {
@@ -1501,6 +1475,7 @@ describe('Program indicator form tests', () => {
                 },
                 screen
             )
+
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('analytics-type-field'),
                 {
@@ -1528,6 +1503,40 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
+            const expectedDecimalsOptions = [
+                { displayName: '<No value>' },
+                { displayName: '0' },
+                { displayName: '1' },
+                { displayName: '2' },
+                { displayName: '3' },
+                { displayName: '4' },
+                { displayName: '5' },
+            ]
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('decimals-field'),
+                {
+                    selected: programIndicator.decimals,
+                    options: expectedDecimalsOptions,
+                },
+                screen
+            )
+        })
+        it('contain expression and filter field', async () => {
+            const { screen, programIndicator } = await renderForm()
+            uiAssertions.expectTextAreaFieldToExist(
+                'expression',
+                programIndicator.expression,
+                screen
+            )
+            uiAssertions.expectTextAreaFieldToExist(
+                'filter',
+                programIndicator.filter,
+                screen
+            )
+        })
+        it('contain the period boundaries', async () => {
+            const { screen } = await renderForm()
+
             const boundariesList = screen.getAllByTestId(
                 'analytics-period-boundary'
             )
@@ -1538,6 +1547,9 @@ describe('Program indicator form tests', () => {
                 'Type: Before start of reporting period'
             )
             expect(boundariesList[0]).toHaveTextContent('Period: Daily')
+        })
+        it('contain all the advance options fields', async () => {
+            const { screen, programIndicator } = await renderForm()
 
             uiAssertions.expectCheckboxFieldToExist(
                 'displayInForm',
@@ -1554,17 +1566,23 @@ describe('Program indicator form tests', () => {
                 programIndicator.aggregateExportAttributeOptionCombo,
                 screen
             )
-            // uiAssertions.expectInputFieldToExist(
-            //     'aggregateExportDataElement',
-            //     '',
-            //     screen
-            // )
-            expect(screen.getByTestId('add-boundary-button')).toBeVisible()
+            uiAssertions.expectInputFieldToExist(
+                'aggregateExportDataElement',
+                programIndicator.aggregateExportDataElement,
+                screen
+            )
+        })
+        it('contain the legend transfer', async () => {
+            const { screen, legendSets } = await renderForm()
+
             await uiAssertions.expectTransferFieldToExistWithOptions(
                 'legendSets-field',
                 { lhs: [legendSets[1]], rhs: [legendSets[0]] },
                 screen
             )
+        })
+        it('contain all the attributes fields ', async () => {
+            const { screen, attributes, programIndicator } = await renderForm()
             attributes.forEach((attribute: { id: string }) => {
                 const attributeInput = screen.getByTestId(
                     `attribute-${attribute.id}`

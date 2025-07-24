@@ -1,6 +1,6 @@
 export {
-    ProgramIndicatorGroupFormSchema,
-    ProgramIndicatorGroupListSchema,
+    programIndicatorGroupFormSchema,
+    programIndicatorGroupListSchema,
     initialValues,
     validate,
 } from './ProgramIndicatorGroupsSchema'

@@ -1,156 +1,58 @@
-import { useDataQuery } from '@dhis2/app-runtime'
-import i18n from '@dhis2/d2-i18n'
-import { FormApi } from 'final-form'
+import { useQuery } from '@tanstack/react-query'
 import React from 'react'
-import { withTypes } from 'react-final-form'
-import { useNavigate, useParams } from 'react-router-dom'
-import { Loader } from '../../components'
-import { DefaultEditFormContents } from '../../components/form'
+import { useParams } from 'react-router-dom'
+import { DefaultEditFormContents, FormBase } from '../../components'
 import {
-    SCHEMA_SECTIONS,
-    getSectionPath,
-    usePatchModel,
-    validate,
+    useOnSubmitEdit,
+    useBoundResourceQueryFn,
+    SECTIONS_MAP,
+    DEFAULT_FIELD_FILTERS,
+    ATTRIBUTE_VALUES_FIELD_FILTERS,
 } from '../../lib'
-import { createJsonPatchOperations } from '../../lib/form/createJsonPatchOperations'
-import {
-    getAllAttributeValues,
-    AttributeMetadata,
-    useCustomAttributesQuery,
-} from '../../lib/models/attributes'
-import { DataElementGroup } from '../../types/generated'
-import { DataElementGroupFormFields, dataElementGroupSchema } from './form'
-import type { FormValues } from './form'
+import { DataElementGroup, PickWithFieldFilters } from '../../types/generated'
+import { DataElementGroupFormFields, validate } from './form'
 
-type FinalFormFormApi = FormApi<FormValues>
+const fieldFilters = [
+    ...DEFAULT_FIELD_FILTERS,
+    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
+    'name',
+    'shortName',
+    'code',
+    'description',
+    'dataElements[id,displayName]',
+] as const
 
-const { Form } = withTypes<FormValues>()
-
-type DataElementGroupQueryResponse = {
-    dataElementGroup: DataElementGroup
-}
-
-const section = SCHEMA_SECTIONS.dataElementGroup
-
-const listPath = `/${getSectionPath(section)}`
-
-const query = {
-    dataElementGroup: {
-        resource: `dataElementGroups`,
-        id: ({ id }: Record<string, string>) => id,
-        params: {
-            fields: ['*', 'attributeValues[*]'],
-        },
-    },
-}
-
-function useDataElementGroupQuery(id: string) {
-    return useDataQuery<DataElementGroupQueryResponse>(query, {
-        variables: { id },
-    })
-}
-
-function computeInitialValues({
-    dataElementGroup,
-    customAttributes,
-}: {
-    dataElementGroup: DataElementGroup
-    customAttributes: AttributeMetadata[]
-}) {
-    if (!dataElementGroup) {
-        return {}
-    }
-
-    // We want to have an array in the state with all attributes, not just the
-    // ones that are set
-    const attributeValues = getAllAttributeValues(
-        dataElementGroup.attributeValues,
-        customAttributes
-    )
-
-    return {
-        id: dataElementGroup.id,
-        name: dataElementGroup.name,
-        shortName: dataElementGroup.shortName,
-        code: dataElementGroup.code,
-        dataElements: dataElementGroup.dataElements,
-        attributeValues,
-    } as FormValues
-}
+export type DataElementGroupFormValues = PickWithFieldFilters<
+    DataElementGroup,
+    typeof fieldFilters
+> & { id: string }
 
 export const Component = () => {
-    const params = useParams()
-    const dataElementGroupId = params.id as string
-    const dataElementGroupQuery = useDataElementGroupQuery(dataElementGroupId)
-    const attributesQuery = useCustomAttributesQuery()
+    const section = SECTIONS_MAP.dataElementGroup
+    const queryFn = useBoundResourceQueryFn()
+    const modelId = useParams().id as string
 
-    const dataElementGroup = dataElementGroupQuery.data?.dataElementGroup
-
-    return (
-        <Loader
-            queryResponse={dataElementGroupQuery}
-            label={i18n.t('Data element group')}
-        >
-            <Loader
-                queryResponse={attributesQuery}
-                label={i18n.t('Attributes')}
-            >
-                <DataElementGroupForm
-                    dataElementGroup={dataElementGroup as DataElementGroup}
-                    attributes={attributesQuery.data}
-                ></DataElementGroupForm>
-            </Loader>
-        </Loader>
-    )
-}
-
-function DataElementGroupForm({
-    dataElementGroup,
-    attributes,
-}: {
-    dataElementGroup: DataElementGroup
-    attributes: AttributeMetadata[]
-}) {
-    const navigate = useNavigate()
-    const patchDirtyFields = usePatchModel(
-        dataElementGroup.id,
-        section.namePlural
-    )
-
-    async function onSubmit(values: FormValues, form: FinalFormFormApi) {
-        const jsonPatchOperations = createJsonPatchOperations({
-            values,
-            dirtyFields: form.getState().dirtyFields,
-            originalValue: dataElementGroup,
-        })
-        const errors = await patchDirtyFields(jsonPatchOperations)
-
-        if (errors) {
-            return errors
-        }
-
-        navigate(listPath)
+    const query = {
+        resource: 'dataElementGroups',
+        id: modelId,
+        params: {
+            fields: fieldFilters.concat(),
+        },
     }
+    const dataElementGroup = useQuery({
+        queryKey: [query],
+        queryFn: queryFn<DataElementGroupFormValues>,
+    })
 
     return (
-        <Form
-            validateOnBlur
-            onSubmit={onSubmit}
-            validate={(values: FormValues) => {
-                return validate(dataElementGroupSchema, values)
-            }}
-            initialValues={computeInitialValues({
-                dataElementGroup,
-                customAttributes: attributes,
-            })}
+        <FormBase
+            onSubmit={useOnSubmitEdit({ modelId, section })}
+            initialValues={dataElementGroup.data}
+            validate={validate}
         >
-            {({ handleSubmit }) => (
-                <form onSubmit={handleSubmit}>
-                    <DefaultEditFormContents section={section}>
-                        <DataElementGroupFormFields />
-                    </DefaultEditFormContents>
-                </form>
-            )}
-        </Form>
+            <DefaultEditFormContents section={section}>
+                <DataElementGroupFormFields />
+            </DefaultEditFormContents>
+        </FormBase>
     )
 }

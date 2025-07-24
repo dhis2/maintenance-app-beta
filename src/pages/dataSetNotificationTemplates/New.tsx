@@ -12,7 +12,7 @@ import {
     initialValues,
     transformFormValues,
     validate,
-} from './form/DataSetNotificationTemplateSchema'
+} from './form/dataSetNotificationTemplateSchema'
 import { formDescriptor } from './form/formDescriptor'
 
 export const Component = () => {
