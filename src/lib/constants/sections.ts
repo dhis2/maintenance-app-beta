@@ -311,6 +311,13 @@ export const SCHEMA_SECTIONS = {
         titlePlural: i18n.t('SQL views'),
         parentSectionKey: 'other',
     },
+    legendSet: {
+        name: SchemaName.legendSet,
+        namePlural: 'legendSets',
+        title: i18n.t('Legend'),
+        titlePlural: i18n.t('Legends'),
+        parentSectionKey: 'other',
+    },
 } as const satisfies SchemaSectionMap
 
 export type OverviewSectionName = keyof typeof OVERVIEW_SECTIONS

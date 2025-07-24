@@ -136,7 +136,12 @@ export type DataSetFormValues = typeof initialValues
 
 export const validate = createFormValidate(dataSetFormSchema)
 
-export const dataSetValueFormatter = (values: DataSetFormValues) => {
+export const dataSetValueFormatter = <
+    // the reason for the generic is that the type between Edit (with Id) and create (without Id) is different
+    TValues extends Partial<DataSetFormValues>
+>(
+    values: TValues
+) => {
     const withoutSections = omit(values, 'sections')
     return {
         ...withoutSections,

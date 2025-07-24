@@ -1,28 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
-import { DataSet, UserGroup } from '../../../types/generated'
-import { DataSetNotificationFormValues } from './DataSetNotificationTemplateSchema'
-
-/**
- * Converts form values back to API payload
- */
-export const transformFormValues = (values: DataSetNotificationFormValues) => {
-    const {
-        recipientUserGroup,
-        relativeScheduledDays,
-        dataSets = [],
-        ...rest
-    } = values
-
-    return {
-        ...rest,
-        relativeScheduledDays: Number(relativeScheduledDays),
-        recipientUserGroup:
-            rest.notificationRecipient === 'USER_GROUP' && recipientUserGroup
-                ? ({ id: recipientUserGroup.id } as UserGroup)
-                : undefined,
-        dataSets: dataSets.map(({ id }) => ({ id } as DataSet)),
-    }
-}
+import { SectionedFormDescriptor } from '../../../lib'
+import { DataSetNotificationFormValues } from './dataSetNotificationTemplateSchema'
 
 /**
  * Section data
@@ -85,4 +63,4 @@ export const formDescriptor = {
             ],
         },
     ],
-}
+} satisfies SectionedFormDescriptor<DataSetNotificationFormValues>

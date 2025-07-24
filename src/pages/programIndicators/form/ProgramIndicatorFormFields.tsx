@@ -1,3 +1,4 @@
+import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
     CheckboxFieldFF,
@@ -41,6 +42,9 @@ export const ProgramIndicatorsFormFields = () => {
     ] as const
     const descriptor =
         useSectionedFormContext<typeof ProgramIndicatorFormDescriptor>()
+
+    const { apiVersion } = useConfig()
+    const hasPiDisaggregation = apiVersion >= 42
 
     const schema = useSchema(SECTIONS_MAP.programIndicator.name)
     return (
@@ -247,16 +251,19 @@ export const ProgramIndicatorsFormFields = () => {
                         )}
                     />
                 </StandardFormField>
-                {/*<StandardFormField>*/}
-                {/*    <FieldRFF*/}
-                {/*        dataTest="formfields-aggregateExportDataElement"*/}
-                {/*        component={InputFieldFF}*/}
-                {/*        name="aggregateExportDataElement"*/}
-                {/*        label={i18n.t(*/}
-                {/*            'Data element for aggregate data export'*/}
-                {/*        )}*/}
-                {/*    />*/}
-                {/*</StandardFormField>*/}
+                {hasPiDisaggregation && (
+                    <StandardFormField>
+                        <FieldRFF
+                            inputWidth="400px"
+                            dataTest="formfields-aggregateExportDataElement"
+                            component={InputFieldFF}
+                            name="aggregateExportDataElement"
+                            label={i18n.t(
+                                'Data element for aggregate data export'
+                            )}
+                        />
+                    </StandardFormField>
+                )}
             </SectionedFormSection>
             <SectionedFormSection name={descriptor.getSection('legends').name}>
                 <StandardFormSectionTitle>

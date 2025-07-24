@@ -19,15 +19,19 @@ function LoadingIcon() {
 export function StandardFormActions({
     cancelLabel,
     submitLabel,
+    saveLabel = i18n.t('Save'),
     submitting,
     onSubmitClick,
+    onSaveClick,
     cancelTo,
     onCancelClick,
 }: {
     cancelLabel?: string
     submitLabel: string
+    saveLabel?: string
     submitting: boolean
     onSubmitClick: () => void
+    onSaveClick?: () => void
     cancelTo?: To
     onCancelClick?: () => void
 }) {
@@ -44,6 +48,18 @@ export function StandardFormActions({
                 {submitting && <LoadingIcon />}
                 {submitLabel}
             </Button>
+            {onSaveClick && (
+                <Button
+                    primary
+                    small
+                    disabled={submitting}
+                    type="button"
+                    onClick={onSaveClick}
+                >
+                    {submitting && <LoadingIcon />}
+                    {saveLabel}
+                </Button>
+            )}
             <LinkButton
                 secondary
                 small

@@ -1,8 +1,9 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { useQueryClient } from '@tanstack/react-query'
+import { FormApi, SubmissionErrors } from 'final-form'
 import { useCallback, useMemo } from 'react'
-import { FormProps } from 'react-final-form'
+import { To } from 'react-router-dom'
 import { ModelSection } from '../../types'
 import { IdentifiableObject } from '../../types/generated'
 import { getSectionPath, useNavigateWithSearchState } from '../routeUtils'
@@ -14,26 +15,76 @@ import {
 import { useCreateModel } from './useCreateModel'
 import { usePatchModel } from './usePatchModel'
 
-type OnSubmit<TValues> = FormProps<TValues>['onSubmit']
+export type SubmitAction = 'save' | 'saveAndExit'
+
+export type GetToFunction = (options: {
+    section: ModelSection
+    submitAction?: SubmitAction
+    responseData?: unknown
+}) => To | undefined
 
 interface Navigateable {
-    navigateTo?:
-        | ((section: ModelSection) => string | undefined)
-        | undefined
-        | null
+    navigateTo?: GetToFunction | null
 }
 
-const defaultNavigate = {
-    navigateTo: (section: ModelSection) => `/${getSectionPath(section)}`,
+/*
+    Enhance FinalForms onSubmit function to include some additional options.
+    Note that compared to final-forms onSubmit the 'callback' parameter is replaced with an options object.
+*/
+export type EnhancedOnSubmit<TValues> = (
+    values: TValues,
+    form: FormApi<TValues>,
+    options?: Navigateable & {
+        submitAction?: SubmitAction
+    }
+) => SubmissionErrors | Promise<SubmissionErrors> | void
+
+const defaultNavigateTo: GetToFunction = ({
+    section,
+    submitAction = 'saveAndExit',
+    responseData,
+}) => {
+    if (submitAction === 'saveAndExit') {
+        return `/${getSectionPath(section)}`
+    }
+
+    if (submitAction === 'save') {
+        // check if we created a model - if so navigate to that form when saving
+        if (
+            responseData &&
+            typeof responseData === 'object' &&
+            'httpStatusCode' in responseData &&
+            responseData.httpStatusCode === 201 &&
+            'response' in responseData
+        ) {
+            const id =
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                (responseData as any).response.id ||
+                (responseData as any).response.uid
+            if (!id) {
+                console.error(
+                    'No id or uid found in response data for navigateTo function',
+                    responseData
+                )
+                return undefined
+            }
+            return `/${getSectionPath(section)}/${id}`
+        }
+        // if it's not a creation (eg. we edit), dont navigate anywhere
+        return undefined
+    }
+
+    return undefined
 }
+
 export type UseOnSubmitEditOptions = {
     modelId: string
     section: ModelSection
-} & Navigateable
+}
 
 export type UseOnSubmitNewOptions = {
     section: ModelSection
-} & Navigateable
+}
 
 export const useOnEditCompletedSuccessfully = (section: ModelSection) => {
     const saveAlert = useAlert(
@@ -46,8 +97,15 @@ export const useOnEditCompletedSuccessfully = (section: ModelSection) => {
     return useCallback(
         ({
             withChanges,
-            navigateTo,
-        }: { withChanges: boolean } & Navigateable) => {
+            navigateTo = defaultNavigateTo,
+            response,
+            submitAction = 'saveAndExit',
+        }: {
+            withChanges: boolean
+            navigateTo?: GetToFunction | null
+            submitAction?: SubmitAction
+            response?: any
+        }) => {
             if (withChanges) {
                 saveAlert.show({
                     message: i18n.t('Saved successfully'),
@@ -61,10 +119,15 @@ export const useOnEditCompletedSuccessfully = (section: ModelSection) => {
             queryClient.invalidateQueries({
                 queryKey: [{ resource: section.namePlural }],
             })
+
             if (navigateTo) {
-                const path = navigateTo(section)
-                if (path) {
-                    navigate(path)
+                const navTo = navigateTo({
+                    section,
+                    submitAction,
+                    responseData: response?.data,
+                })
+                if (navTo) {
+                    navigate(navTo)
                 }
             }
         },
@@ -75,20 +138,30 @@ export const useOnEditCompletedSuccessfully = (section: ModelSection) => {
 export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
     modelId,
     section,
-    navigateTo = defaultNavigate.navigateTo,
 }: UseOnSubmitEditOptions) => {
     const patchDirtyFields = usePatchModel(modelId, section.namePlural)
     const onEditCompletedSuccessfully = useOnEditCompletedSuccessfully(section)
 
-    return useMemo<OnSubmit<TFormValues>>(
-        () => async (values, form) => {
+    return useMemo<EnhancedOnSubmit<TFormValues>>(
+        () => async (values, form, options) => {
             const jsonPatchOperations = createJsonPatchOperations({
                 values,
                 dirtyFields: form.getState().dirtyFields,
                 originalValue: form.getState().initialValues,
             })
+
+            const navigateTo =
+                options?.navigateTo === undefined
+                    ? defaultNavigateTo
+                    : options.navigateTo
+
             if (jsonPatchOperations.length < 1) {
-                onEditCompletedSuccessfully({ withChanges: false, navigateTo })
+                onEditCompletedSuccessfully({
+                    withChanges: false,
+                    response: null,
+                    navigateTo,
+                    submitAction: options?.submitAction,
+                })
                 return
             }
             const response = await patchDirtyFields(jsonPatchOperations)
@@ -97,9 +170,14 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
                 const err = createFormError(response.error)
                 return err
             }
-            onEditCompletedSuccessfully({ withChanges: true, navigateTo })
+            onEditCompletedSuccessfully({
+                withChanges: true,
+                response,
+                navigateTo,
+                submitAction: options?.submitAction,
+            })
         },
-        [patchDirtyFields, onEditCompletedSuccessfully, navigateTo]
+        [patchDirtyFields, onEditCompletedSuccessfully]
     )
 }
 
@@ -121,7 +199,6 @@ export const defaultValueFormatter = <
 
 export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
     section,
-    navigateTo = defaultNavigate.navigateTo,
 }: UseOnSubmitNewOptions) => {
     const createModel = useCreateModel(section.namePlural)
     const queryClient = useQueryClient()
@@ -131,8 +208,8 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
     )
     const navigate = useNavigateWithSearchState()
 
-    return useMemo<OnSubmit<TFormValues>>(
-        () => async (values) => {
+    return useMemo<EnhancedOnSubmit<TFormValues>>(
+        () => async (values, form, options) => {
             if (!values) {
                 console.error('Tried to save new object without any changes', {
                     values,
@@ -154,15 +231,24 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
             queryClient.invalidateQueries({
                 queryKey: [{ resource: section.namePlural }],
             })
+
+            const navigateTo =
+                options?.navigateTo === undefined
+                    ? defaultNavigateTo
+                    : options.navigateTo
+
             if (navigateTo) {
-                const path = navigateTo(section)
-                if (path) {
-                    navigate(path)
+                const navTo = navigateTo({
+                    section,
+                    submitAction: options?.submitAction,
+                    responseData: response.data,
+                })
+                if (navTo) {
+                    navigate(navTo)
                 }
             }
-
             return response
         },
-        [queryClient, createModel, saveAlert, navigate, section, navigateTo]
+        [queryClient, createModel, saveAlert, navigate, section]
     )
 }

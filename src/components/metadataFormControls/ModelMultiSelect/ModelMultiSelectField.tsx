@@ -41,11 +41,12 @@ export function ModelMultiSelectField<TModel extends DisplayableModel>({
     onChange,
     input,
     meta,
+    dataTest,
     ...modelSingleSelectProps
 }: ModelMultiSelectFieldProps<TModel> & RelevantRenderProps<TModel>) {
     return (
         <Field
-            dataTest={`formfields-modelmultiselect-${name}`}
+            dataTest={dataTest ?? `formfields-modelmultiselect-${name}`}
             error={meta.invalid}
             validationText={(meta.touched && meta.error?.toString()) || ''}
             name={name}
