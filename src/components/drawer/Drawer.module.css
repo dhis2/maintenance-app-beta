@@ -1,3 +1,7 @@
+.drawerRoot {
+    position: relative;
+}
+
 .drawerOverlay {
     position: fixed;
     top: 0;
@@ -26,10 +30,6 @@
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
-}
-
-.drawer > form:first-child {
-    height: 100%;
 }
 
 .drawer.open {

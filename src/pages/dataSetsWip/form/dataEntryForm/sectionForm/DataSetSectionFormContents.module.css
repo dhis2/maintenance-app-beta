@@ -1,13 +1,11 @@
 .sectionsWrapper {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 100vh;
 }
 
 .sectionsWrapper > div:first-child {
     overflow-y: auto;
-    padding-bottom: 80px;
-    flex-grow: 1;
 }
 
 .actionsInfo {

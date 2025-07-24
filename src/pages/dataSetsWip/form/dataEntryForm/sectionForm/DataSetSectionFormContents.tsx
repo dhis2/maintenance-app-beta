@@ -1,5 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import {
+    Button,
+    ButtonStrip,
     CheckboxFieldFF,
     Field,
     RadioFieldFF,
@@ -40,6 +42,7 @@ import {
 import { PickWithFieldFilters, Section } from '../../../../../types/generated'
 import { DisplayableModel } from '../../../../../types/models'
 import styles from './DataSetSectionFormContents.module.css'
+import { LoadingSpinner } from '../../../../../components/loading/LoadingSpinner'
 
 export const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -443,12 +446,28 @@ export const DataSetSectionFormContents = ({
             </SectionedFormSections>
             <div>
                 <FormFooterWrapper>
-                    <StandardFormActions
-                        submitLabel={i18n.t('Save section')}
-                        onSubmitClick={() => form.submit()}
-                        onCancelClick={onCancel}
-                        submitting={submitting}
-                    />
+                    <ButtonStrip>
+                        <Button
+                            primary
+                            small
+                            disabled={submitting}
+                            type="submit"
+                            onClick={() => form.submit()}
+                            dataTest="form-submit-button"
+                        >
+                            {submitting && <LoadingSpinner />}
+                            {i18n.t('Save section')}
+                        </Button>
+                        <Button
+                            secondary
+                            small
+                            disabled={submitting}
+                            onClick={onCancel}
+                            dataTest="form-cancel-link"
+                        >
+                            {i18n.t('Cancel')}
+                        </Button>
+                    </ButtonStrip>
                     <div className={styles.actionsInfo}>
                         <IconInfo16 />
                         <p>
