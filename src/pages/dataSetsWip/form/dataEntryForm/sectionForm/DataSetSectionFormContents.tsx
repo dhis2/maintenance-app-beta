@@ -26,7 +26,6 @@ import {
     NameField,
     SectionedFormSection,
     SectionedFormSections,
-    StandardFormActions,
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
@@ -42,7 +41,6 @@ import {
 import { PickWithFieldFilters, Section } from '../../../../../types/generated'
 import { DisplayableModel } from '../../../../../types/models'
 import styles from './DataSetSectionFormContents.module.css'
-import { LoadingSpinner } from '../../../../../components/loading/LoadingSpinner'
 
 export const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -202,6 +200,7 @@ export const DataSetSectionFormContents = ({
                     <StandardFormField>
                         <CodeField
                             schemaSection={dataSetSectionSchemaSection}
+                            modelId={values.id}
                         />
                     </StandardFormField>
                     <StandardFormField>
@@ -451,11 +450,11 @@ export const DataSetSectionFormContents = ({
                             primary
                             small
                             disabled={submitting}
-                            type="submit"
+                            type="button"
                             onClick={() => form.submit()}
+                            loading={submitting}
                             dataTest="form-submit-button"
                         >
-                            {submitting && <LoadingSpinner />}
                             {i18n.t('Save section')}
                         </Button>
                         <Button

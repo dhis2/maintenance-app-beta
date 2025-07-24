@@ -10,15 +10,18 @@ import {
     SchemaName,
     SchemaSection,
     useBoundResourceQueryFn,
-    useOnSubmitEdit,
-    useOnSubmitNew,
+    usePatchModel,
+    createFormError,
+    createJsonPatchOperations,
+    useCreateModel,
 } from '../../../../../lib'
-import { DisplayableModel } from '../../../../../types/models'
-import { DataSetSectionFormContents } from './DataSetSectionFormContents'
 import {
-    initialSectionValues,
-    SectionFormValues as SectionFormValuesFetched,
-} from './sectionFormSchema'
+    DisplayableModel,
+    PickWithFieldFilters,
+    Section,
+} from '../../../../../types/models'
+import { DataSetSectionFormContents } from './DataSetSectionFormContents'
+import { initialSectionValues } from './sectionFormSchema'
 
 export const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -41,7 +44,10 @@ const dataSetSectionSchemaSection = {
     parentSectionKey: 'dataSet',
 } satisfies SchemaSection
 
-export type SectionFormValues = SectionFormValuesFetched & {
+export type SectionFormValues = PickWithFieldFilters<
+    Section,
+    typeof fieldFilters
+> & {
     dataSet: { id: string }
 }
 
@@ -103,16 +109,26 @@ export const EditDataSetSectionForm = ({
     onCancel?: () => void
     onSubmitted?: (values: SectionFormValues) => void
 }) => {
-    const onDefaultSubmit = useOnSubmitEdit({
-        modelId: section.id,
-        section: dataSetSectionSchemaSection,
-        navigateTo: null,
-    })
-    const onFormSubmit: OnSubmit = (values, form) => {
+    const handlePatch = usePatchModel(
+        section.id,
+        dataSetSectionSchemaSection.namePlural
+    )
+
+    const onFormSubmit: OnSubmit = async (values, form) => {
         console.log('onSubmit', values)
-        return onDefaultSubmit(values, form)
-        // onSubmit?.(values)
+        const jsonPatchOperations = createJsonPatchOperations({
+            values,
+            dirtyFields: form.getState().dirtyFields,
+            originalValue: form.getState().initialValues,
+        })
+        const response = await handlePatch(jsonPatchOperations)
+        if (response.error) {
+            return createFormError(response.error)
+        }
+        onSubmit?.(values)
+        return undefined
     }
+
     const queryFn = useBoundResourceQueryFn()
     const sectionValues = useQuery({
         queryFn: queryFn<SectionFormValues>,
@@ -145,19 +161,23 @@ export const NewDataSetSectionForm = ({
     onSubmitted,
 }: {
     onCancel?: () => void
-    onSubmitted?: (values: SectionFormValues) => void
+    onSubmitted?: (values: SectionFormValues & DisplayableModel) => void
 }) => {
-    const onDefaultSubmit = useOnSubmitNew({
-        section: dataSetSectionSchemaSection,
-        navigateTo: null,
-    })
+    const handleCreate = useCreateModel(dataSetSectionSchemaSection.namePlural)
+
     const onFormSubmit: OnSubmit = async (values, form) => {
-        const res = await onDefaultSubmit(values, form)
-        console.log('(*******', values, res)
-        // if (res && !res[FORM_ERROR]) {
-        //     onSubmit?.(values)
-        // }
-        // return res
+        const res = await handleCreate(values)
+        if (res.error) {
+            return createFormError(res.error)
+        }
+        const newId = (res.data as { id: string }).id
+
+        onSubmitted?.({
+            ...values,
+            id: newId,
+            displayName: values?.displayName || values.name,
+        })
+        return undefined
     }
 
     return (
@@ -178,6 +198,7 @@ export const EditOrNewDataSetSectionForm = ({
     onCancel?: () => void
     onSubmitted?: (values: SectionFormValues) => void
 }) => {
+    console.log({ dataSetSection })
     if (dataSetSection === null) {
         return (
             <NewDataSetSectionForm onSubmitted={onSubmit} onCancel={onCancel} />

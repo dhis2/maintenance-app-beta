@@ -8,14 +8,11 @@ import {
     MoreDropdownItem,
     MoreDropdownDivider,
     DrawerPortal,
-    createPortalToDrawer,
-    Drawer,
 } from '../../../../components'
 import { DisplayableModel } from '../../../../types/models'
 import { DataSetFormValues } from '../dataSetFormSchema'
 import { EditOrNewDataSetSectionForm } from './sectionForm/DataSetSectionForm'
 import css from './SectionFormList.module.css'
-import { FocusTrap } from 'focus-trap-react'
 
 type Section = DataSetFormValues['sections'][number]
 
@@ -49,7 +46,7 @@ export const SectionFormSectionsList = () => {
                 isOpen={isSectionFormOpen}
                 onClose={() => setSectionFormOpen(undefined)}
             >
-                {sectionFormOpen && (
+                {sectionFormOpen !== undefined && (
                     <EditOrNewDataSetSectionForm
                         dataSetSection={sectionFormOpen}
                         onCancel={() => setSectionFormOpen(undefined)}
