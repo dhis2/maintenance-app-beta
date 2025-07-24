@@ -45,7 +45,7 @@ export const dataSetNotificationTemplateFormSchema =
             ),
     })
 
-export const DataSetNotificationTemplateListSchema =
+export const dataSetNotificationTemplateListSchema =
     dataSetNotificationTemplateBaseSchema.merge(withDefaultListColumns)
 
 export const initialValues = getDefaults(dataSetNotificationTemplateFormSchema)
