@@ -41,6 +41,8 @@ export const programIndicatorsListSchema = programIndicatorsBaseSchema
         displayFormName: z.string().optional(),
         user: UserSchema,
         favorite: z.boolean(),
+        name: z.string(),
+        shortName: z.string(),
     })
 
 export const programIndicatorFormSchema = programIndicatorsBaseSchema

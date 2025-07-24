@@ -20,6 +20,7 @@ export const programIndicatorGroupListSchema = programIndicatorGroupBaseSchema
     .extend({
         user: UserSchema,
         favorite: z.boolean(),
+        name: z.string(),
     })
 
 export const initialValues = getDefaults(programIndicatorGroupFormSchema)

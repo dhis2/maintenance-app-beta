@@ -1,10 +1,6 @@
 import get from 'lodash/fp/get'
 import { JsonPatchOperation } from '../../types'
-import {
-    Attribute,
-    AttributeValue,
-    IdentifiableObject,
-} from './../../types/generated/models'
+import { Attribute, AttributeValue } from './../../types/generated/models'
 
 type PatchAttribute = {
     id: Attribute['id']
@@ -74,6 +70,6 @@ export function createJsonPatchOperations<
     return adjustedDirtyFieldsKeys.map((name) => ({
         op: get(name, originalValue) ? 'replace' : 'add',
         path: `/${name.replace(/[.]/g, '/')}`,
-        value: get(name, values) || null,
+        value: get(name, values) ?? null,
     }))
 }

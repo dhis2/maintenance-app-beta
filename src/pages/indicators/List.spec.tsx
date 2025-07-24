@@ -17,7 +17,3 @@ generateDefaultListTests({
     generateRandomElement,
     customData,
 })
-
-xdescribe('Data sets additional tests', () => {
-    it('should filter by indicator type', () => {})
-})
