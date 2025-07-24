@@ -28,6 +28,7 @@ export const SectionFormSectionsList = () => {
         typeof EditOrNewDataSetSectionForm
     >['onSubmitted'] = (values) => {
         const isEditSection = sectionFormOpen && sectionFormOpen.id
+
         if (isEditSection) {
             const index = sectionFieldArray.value.findIndex(
                 (s) => s.id === sectionFormOpen.id

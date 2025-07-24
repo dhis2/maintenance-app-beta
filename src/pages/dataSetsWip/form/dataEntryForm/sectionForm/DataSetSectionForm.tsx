@@ -49,6 +49,7 @@ export type SectionFormValues = PickWithFieldFilters<
     typeof fieldFilters
 > & {
     dataSet: { id: string }
+    displayOptions?: any
 }
 
 export type DataSetSectionFormProps = {
@@ -165,12 +166,12 @@ export const NewDataSetSectionForm = ({
 }) => {
     const handleCreate = useCreateModel(dataSetSectionSchemaSection.namePlural)
 
-    const onFormSubmit: OnSubmit = async (values, form) => {
+    const onFormSubmit: OnSubmit = async (values) => {
         const res = await handleCreate(values)
         if (res.error) {
             return createFormError(res.error)
         }
-        const newId = (res.data as { id: string }).id
+        const newId = (res.data as { response: { uid: string } }).response.uid
 
         onSubmitted?.({
             ...values,

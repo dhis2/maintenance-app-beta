@@ -33,26 +33,13 @@ import {
 } from '../../../../../components'
 import { BaseModelTransfer } from '../../../../../components/metadataFormControls/ModelTransfer/BaseModelTransfer'
 import {
-    DEFAULT_FIELD_FILTERS,
     SchemaName,
     SchemaSection,
     useBoundResourceQueryFn,
 } from '../../../../../lib'
-import { PickWithFieldFilters, Section } from '../../../../../types/generated'
 import { DisplayableModel } from '../../../../../types/models'
+import type { SectionFormValues } from './DataSetSectionForm'
 import styles from './DataSetSectionFormContents.module.css'
-
-export const fieldFilters = [
-    ...DEFAULT_FIELD_FILTERS,
-    'name',
-    'shortName',
-    'code',
-    'indicators',
-    'showRowTotals',
-    'showColumnTotals',
-    'displayOptions',
-    'dataElements[id,displayName]',
-]
 
 const dataSetSectionSchemaSection = {
     name: SchemaName.section,
@@ -61,11 +48,6 @@ const dataSetSectionSchemaSection = {
     titlePlural: i18n.t('Sections'),
     parentSectionKey: 'dataSet',
 } satisfies SchemaSection
-
-export type SectionFormValues = PickWithFieldFilters<
-    Section,
-    typeof fieldFilters
->
 
 export type DataSetSectionFormProps = {
     onCancel?: () => void
