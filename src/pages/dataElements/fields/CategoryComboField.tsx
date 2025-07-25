@@ -3,7 +3,10 @@ import React, { useEffect } from 'react'
 import { useForm, useFormState } from 'react-final-form'
 import { useHref } from 'react-router'
 import { EditableFieldWrapper } from '../../../components'
-import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
+import {
+    ModelSingleSelectFormField,
+    useRefreshModelSingleSelect,
+} from '../../../components/metadataFormControls/ModelSingleSelect'
 import { DEFAULT_CATEGORYCOMBO_SELECT_OPTION } from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
 import classes from './CategoryComboField.module.css'
@@ -27,6 +30,7 @@ export function CategoryComboField() {
     const domainTypeIsTracker = values.domainType === 'TRACKER'
     const disabled = domainTypeIsTracker
     const newCategoryComboLink = useHref('/categoryCombos/new')
+    const refresh = useRefreshModelSingleSelect({ resource: 'categoryCombos' })
 
     useEffect(() => {
         if (domainTypeIsTracker) {
@@ -36,7 +40,7 @@ export function CategoryComboField() {
 
     return (
         <EditableFieldWrapper
-            onRefresh={() => {}}
+            onRefresh={() => refresh()}
             onAddNew={() => window.open(newCategoryComboLink, '_blank')}
         >
             <div className={classes.categoryComboSelect}>

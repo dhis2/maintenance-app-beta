@@ -1,20 +1,19 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useRef } from 'react'
+import React from 'react'
 import { useHref } from 'react-router'
 import { EditableFieldWrapper } from '../../../components'
-import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
+import {
+    ModelSingleSelectFormField,
+    useRefreshModelSingleSelect,
+} from '../../../components/metadataFormControls/ModelSingleSelect'
 
 export function OptionSetField() {
     const newOptionSetLink = useHref('/optionSets/new')
-    const optionSetHandle = useRef({
-        refetch: () => {
-            throw new Error('Not initialized')
-        },
-    })
+    const refresh = useRefreshModelSingleSelect({ resource: 'optionSets' })
 
     return (
         <EditableFieldWrapper
-            onRefresh={() => optionSetHandle.current.refetch()}
+            onRefresh={() => refresh()}
             onAddNew={() => window.open(newOptionSetLink, '_blank')}
         >
             <ModelSingleSelectFormField
