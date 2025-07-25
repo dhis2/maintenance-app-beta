@@ -8,6 +8,7 @@ import {
     DefaultSectionedFormSidebar,
     SectionedFormErrorNotice,
 } from '../../components'
+import { DrawerRoot } from '../../components/drawer/Drawer'
 import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
 import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
@@ -15,7 +16,6 @@ import { PickWithFieldFilters, DataSet } from '../../types/generated'
 import { DataSetFormContents } from './form/DataSetFormContents'
 import { validate, dataSetValueFormatter } from './form/dataSetFormSchema'
 import { DataSetFormDescriptor } from './form/formDescriptor'
-import { DrawerRoot } from '../../components/drawer/Drawer'
 const section = SECTIONS_MAP.dataSet
 
 const fieldFilters = [
@@ -33,7 +33,7 @@ const fieldFilters = [
     'displayOptions',
     'legendSets[id,displayName]',
     'dataEntryForm',
-    'sections[id,displayName]',
+    'sections[id,displayName,description]',
 ] as const
 type DataSetValues = PickWithFieldFilters<DataSet, typeof fieldFilters>
 

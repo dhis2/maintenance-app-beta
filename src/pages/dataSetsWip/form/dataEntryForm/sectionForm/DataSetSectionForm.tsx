@@ -51,11 +51,13 @@ export type SectionFormValues = PickWithFieldFilters<
     dataSet: { id: string }
     displayOptions?: any
 }
+type PartialSectionFormValues = Partial<SectionFormValues>
+type SubmittedSectionFormValues = PartialSectionFormValues & DisplayableModel
 
 export type DataSetSectionFormProps = {
-    dataSetSection?: SectionFormValues
+    dataSetSection?: PartialSectionFormValues
     onCancel?: () => void
-} & Pick<FormBaseProps<SectionFormValues>, 'onSubmit'>
+} & Pick<FormBaseProps<PartialSectionFormValues>, 'onSubmit'>
 
 export const DataSetSectionForm = ({
     dataSetSection,
@@ -63,28 +65,27 @@ export const DataSetSectionForm = ({
     onCancel,
 }: DataSetSectionFormProps) => {
     const dataSetId = useParams().id as string
-    const initialValues: Partial<SectionFormValues> | undefined =
-        useMemo(() => {
-            if (dataSetSection) {
-                return dataSetSection
-            }
-            return {
-                ...initialSectionValues,
-                displayOptions:
-                    initialSectionValues?.displayOptions &&
-                    JSON.parse(initialSectionValues?.displayOptions),
-            }
-        }, [dataSetSection])
+    const initialValues: PartialSectionFormValues | undefined = useMemo(() => {
+        if (dataSetSection) {
+            return dataSetSection
+        }
+        return {
+            ...initialSectionValues,
+            displayOptions:
+                initialSectionValues?.displayOptions &&
+                JSON.parse(initialSectionValues?.displayOptions),
+        }
+    }, [dataSetSection])
 
     const valueFormatter = useCallback(
-        (values: SectionFormValues) => {
+        (values: PartialSectionFormValues) => {
             return {
                 ...values,
                 dataSet: { id: dataSetId },
                 displayOptions:
                     values.displayOptions &&
                     JSON.stringify(values.displayOptions),
-            } as SectionFormValues
+            }
         },
         [dataSetId]
     )
@@ -101,23 +102,22 @@ export const DataSetSectionForm = ({
     )
 }
 
-type OnSubmit = FormBaseProps<SectionFormValues>['onSubmit']
+type OnDataSetFormSubmit = FormBaseProps<PartialSectionFormValues>['onSubmit']
 export const EditDataSetSectionForm = ({
     section,
     onCancel,
-    onSubmitted: onSubmit,
+    onSubmitted,
 }: {
     section: DisplayableModel
     onCancel?: () => void
-    onSubmitted?: (values: SectionFormValues) => void
+    onSubmitted?: (values: SubmittedSectionFormValues) => void
 }) => {
     const handlePatch = usePatchModel(
         section.id,
         dataSetSectionSchemaSection.namePlural
     )
 
-    const onFormSubmit: OnSubmit = async (values, form) => {
-        console.log('onSubmit', values)
+    const onFormSubmit: OnDataSetFormSubmit = async (values, form) => {
         const jsonPatchOperations = createJsonPatchOperations({
             values,
             dirtyFields: form.getState().dirtyFields,
@@ -127,7 +127,17 @@ export const EditDataSetSectionForm = ({
         if (response.error) {
             return createFormError(response.error)
         }
-        onSubmit?.(values)
+        const updatedName = jsonPatchOperations.find(
+            (op) => op.path === '/name' && op.op === 'replace'
+        )?.value as string | undefined
+        const resolvedDisplayName =
+            updatedName || values?.displayName || values.name || ''
+
+        onSubmitted?.({
+            ...values,
+            id: section.id,
+            displayName: resolvedDisplayName,
+        })
         return undefined
     }
 
@@ -163,11 +173,11 @@ export const NewDataSetSectionForm = ({
     onSubmitted,
 }: {
     onCancel?: () => void
-    onSubmitted?: (values: SectionFormValues & DisplayableModel) => void
+    onSubmitted?: (values: SubmittedSectionFormValues) => void
 }) => {
     const handleCreate = useCreateModel(dataSetSectionSchemaSection.namePlural)
 
-    const onFormSubmit: OnSubmit = async (values) => {
+    const onFormSubmit: OnDataSetFormSubmit = async (values) => {
         const res = await handleCreate(values)
         if (res.error) {
             return createFormError(res.error)
@@ -177,7 +187,7 @@ export const NewDataSetSectionForm = ({
         onSubmitted?.({
             ...values,
             id: newId,
-            displayName: values?.displayName || values.name,
+            displayName: values?.displayName || values.name || '',
         })
         return undefined
     }
@@ -198,9 +208,8 @@ export const EditOrNewDataSetSectionForm = ({
 }: {
     dataSetSection: DisplayableModel | null
     onCancel?: () => void
-    onSubmitted?: (values: SectionFormValues) => void
+    onSubmitted?: (values: SubmittedSectionFormValues) => void
 }) => {
-    console.log({ dataSetSection })
     if (dataSetSection === null) {
         return (
             <NewDataSetSectionForm onSubmitted={onSubmit} onCancel={onCancel} />
