@@ -3,5 +3,4 @@ export {
     dataElementFormSchema,
     initialValues,
     validate,
-    dataElementValueFormatter,
 } from './dataElementSchema'

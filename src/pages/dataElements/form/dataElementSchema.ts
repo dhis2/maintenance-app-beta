@@ -63,13 +63,3 @@ export const initialValues = getDefaults(dataElementFormSchema)
 export type DataElementFormValues = typeof initialValues
 
 export const validate = createFormValidate(dataElementFormSchema)
-
-export const dataElementValueFormatter = (values: DataElementFormValues) => ({
-    ...values,
-    attributeValues: values.attributeValues.filter(({ value }) => !!value),
-    categoryCombo: values.categoryCombo.id ? values.categoryCombo : undefined,
-    commentOptionSet: values.commentOptionSet?.id
-        ? values.commentOptionSet
-        : undefined,
-    optionSet: values.optionSet?.id ? values.optionSet : undefined,
-})

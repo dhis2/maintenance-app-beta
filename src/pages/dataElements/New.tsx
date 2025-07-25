@@ -2,12 +2,7 @@ import React from 'react'
 import { FormBase } from '../../components'
 import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
 import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
-import {
-    DataElementFormFields,
-    dataElementValueFormatter,
-    initialValues,
-    validate,
-} from './form'
+import { DataElementFormFields, initialValues, validate } from './form'
 
 const section = SECTIONS_MAP.dataElement
 
@@ -17,7 +12,6 @@ export const Component = () => {
             onSubmit={useOnSubmitNew({ section })}
             initialValues={initialValues}
             validate={validate}
-            valueFormatter={dataElementValueFormatter}
         >
             <DefaultNewFormContents section={section}>
                 <DataElementFormFields />
