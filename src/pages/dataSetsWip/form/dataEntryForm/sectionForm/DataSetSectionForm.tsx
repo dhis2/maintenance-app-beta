@@ -93,6 +93,7 @@ export const DataSetSectionForm = ({
             initialValues={{ ...initialValues, dataSet: { id: dataSetId } }}
             onSubmit={onSubmit}
             valueFormatter={valueFormatter}
+            includeAttributes={false}
         >
             <DataSetSectionFormContents onCancel={onCancel} />
             <DefaultFormErrorNotice />
