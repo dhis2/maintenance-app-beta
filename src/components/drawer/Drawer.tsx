@@ -2,8 +2,7 @@ import cx from 'classnames'
 import { FocusTrap } from 'focus-trap-react'
 import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import css from './Drawer.module.css' // Import CSS for styling and animation
-
+import css from './Drawer.module.css'
 interface DrawerProps {
     isOpen: boolean
     children: React.ReactNode
@@ -24,20 +23,12 @@ export const Drawer: React.FC<DrawerProps> = ({
         >
             <div
                 className={cx(css.drawer, { [css.open]: isOpen })}
-                onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the drawer
+                onClick={(e) => e.stopPropagation()}
             >
                 {isOpen && (
-                    <FocusTrap
-                        active={true}
-                        focusTrapOptions={{
-                            delayInitialFocus: true,
-                            allowOutsideClick: true,
-                        }}
-                    >
-                        <DrawerContents onClose={onClose}>
-                            {children}
-                        </DrawerContents>
-                    </FocusTrap>
+                    <DrawerContents onClose={onClose}>
+                        {children}
+                    </DrawerContents>
                 )}
             </div>
         </div>
@@ -61,12 +52,19 @@ const DrawerContents = React.forwardRef<
         }
     }, [onClose])
     return (
-        <div ref={ref}>
-            {/* Span with tabIndex to trap focus in case contents in drawer is loading,
+        <FocusTrap
+            focusTrapOptions={{
+                delayInitialFocus: true,
+                allowOutsideClick: true,
+            }}
+        >
+            <div ref={ref}>
+                {/* Span with tabIndex to trap focus in case contents in drawer is loading,
             which would make the focustrap throw */}
-            <span tabIndex={0}></span>
-            {children}
-        </div>
+                <span tabIndex={0}></span>
+                {children}
+            </div>
+        </FocusTrap>
     )
 })
 
