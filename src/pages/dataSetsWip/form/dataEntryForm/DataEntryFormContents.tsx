@@ -15,6 +15,8 @@ import { DisplayOptionsField } from '../DisplayOptionsField'
 import { useDataSetField, useDataSetFormState } from '../formHooks'
 import classes from './DataEntryFormContents.module.css'
 import { SectionFormSectionsList } from './SectionFormList'
+import { TooltipWrapper } from '../../../../components/tooltip'
+import { useParams } from 'react-router-dom'
 
 const DefaultFormIcon = () => (
     <svg
@@ -98,6 +100,9 @@ const FormTypeCard = ({
     )
 }
 
+const disabledFormTypeText = i18n.t(
+    'Data set must be saved before form type can be configured.'
+)
 export const DataEntryFromContents = React.memo(function FormFormContents({
     name,
 }: {
@@ -106,6 +111,8 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
     const formTypeFieldName = `formType`
     const displayOptions = useDataSetField('displayOptions').input.value
     const controlledFormType = useDataSetField('formType').input.value
+    const modelId = useParams().id
+    const disableFormType = !modelId
 
     return (
         <SectionedFormSection name={name}>
@@ -139,43 +146,58 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                     />
                 </Card>
                 <Card>
-                    <Field<string | undefined>
-                        name={formTypeFieldName}
-                        component={RadioFieldFF}
-                        label={
-                            <FormTypeCard
-                                Icon={SectionFormIcon}
-                                label={i18n.t('Section form')}
-                                description={i18n.t(
-                                    'Group data into sections with additional options'
-                                )}
-                                highlighted={controlledFormType === 'SECTION'}
-                            />
-                        }
-                        className={classes.formTypeCard}
-                        type="radio"
-                        value={'SECTION'}
-                    />
+                    <TooltipWrapper
+                        condition={disableFormType}
+                        content={disabledFormTypeText}
+                    >
+                        <Field<string | undefined>
+                            name={formTypeFieldName}
+                            component={RadioFieldFF}
+                            label={
+                                <FormTypeCard
+                                    Icon={SectionFormIcon}
+                                    label={i18n.t('Section form')}
+                                    description={i18n.t(
+                                        'Group data into sections with additional options'
+                                    )}
+                                    highlighted={
+                                        controlledFormType === 'SECTION'
+                                    }
+                                />
+                            }
+                            disabled={disableFormType}
+                            className={classes.formTypeCard}
+                            type="radio"
+                            value={'SECTION'}
+                        />
+                    </TooltipWrapper>
                 </Card>
                 <Card>
-                    <Field<string | undefined>
-                        name={formTypeFieldName}
-                        component={RadioFieldFF}
-                        label={
-                            <FormTypeCard
-                                Icon={CustomFormIcon}
-                                label={i18n.t('Custom form')}
-                                description={i18n.t(
-                                    'Build and style a custom form layout'
-                                )}
-                                highlighted={controlledFormType === 'CUSTOM'}
-                            />
-                        }
-                        className={classes.formTypeCard}
-                        type="radio"
-                        value={'CUSTOM'}
-                        disabled
-                    />
+                    <TooltipWrapper
+                        condition={disableFormType}
+                        content={disabledFormTypeText}
+                    >
+                        <Field<string | undefined>
+                            name={formTypeFieldName}
+                            component={RadioFieldFF}
+                            label={
+                                <FormTypeCard
+                                    Icon={CustomFormIcon}
+                                    label={i18n.t('Custom form')}
+                                    description={i18n.t(
+                                        'Build and style a custom form layout'
+                                    )}
+                                    highlighted={
+                                        controlledFormType === 'CUSTOM'
+                                    }
+                                />
+                            }
+                            className={classes.formTypeCard}
+                            type="radio"
+                            value={'CUSTOM'}
+                            disabled={disableFormType}
+                        />
+                    </TooltipWrapper>
                 </Card>
             </HorizontalFieldGroup>
             {controlledFormType === 'SECTION' && <SectionFormSectionsList />}
