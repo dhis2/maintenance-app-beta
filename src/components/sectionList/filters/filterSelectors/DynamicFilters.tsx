@@ -1,6 +1,7 @@
 import React from 'react'
 import { ConfigurableFilterKey } from '../../../../lib'
 import { useFilterKeys } from '../useFilterKeys'
+import { FormNameFilter } from './TextFilters'
 import {
     AggregationTypeFilter,
     CategoryComboFilter,
@@ -42,6 +43,7 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
     dataSet: DataSetFilter,
     domainType: DomainTypeSelectionFilter,
     formType: FormTypeFilter,
+    formName: FormNameFilter,
     ignoreApproval: IgnoreApprovalFilter,
     indicatorGroup: IndicatorGroupFilter,
     indicatorGroupSet: IndicatorGroupSetFilter,

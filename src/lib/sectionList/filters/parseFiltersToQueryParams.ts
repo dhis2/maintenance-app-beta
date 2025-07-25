@@ -47,6 +47,7 @@ const filterToQueryParamMap: FilterToQueryParamsMap = {
     dataElementGroup: (value) => inFilter('dataElementGroups.id', value),
     dataElement: (value) => inFilter('dataElements.id', value),
     dataElementGroupSet: (value) => inFilter('groupSets.id', value),
+    formName: (value) => `displayFormName:like:${value}`,
     publicAccess: (value) => inFilter('sharing.public', value),
     indicatorGroup: (value) => inFilter('indicatorGroups.id', value),
     indicatorGroupSet: (value) => inFilter('indicatorGroupSets.id', value),

@@ -27,6 +27,7 @@ export const filterParamsSchema = z
         dataSet: zodArrayIds,
         domainType: z.array(z.nativeEnum(DataElement.domainType)),
         formType: z.array(z.nativeEnum(DataSet.formType)),
+        formName: z.string(),
         ignoreApproval: z.boolean(),
         indicatorType: zodArrayIds,
         indicatorGroup: zodArrayIds,
@@ -57,6 +58,7 @@ export const filterQueryParamType = {
     dataSet: CustomDelimitedArrayParam,
     domainType: CustomDelimitedArrayParam,
     formType: CustomDelimitedArrayParam,
+    formName: StringParam,
     ignoreApproval: BooleanParam,
     indicatorType: CustomDelimitedArrayParam,
     indicatorGroup: CustomDelimitedArrayParam,
@@ -101,5 +103,6 @@ export type StringFilterKey = KeysOfValue<
     ParsedFilterParams,
     string[] | string | undefined
 >
+export type TextFilterKey = KeysOfValue<ParsedFilterParams, string | undefined>
 
 export type FilterKeys = FilterKey[]

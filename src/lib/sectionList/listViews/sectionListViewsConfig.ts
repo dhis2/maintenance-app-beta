@@ -54,6 +54,10 @@ const DESCRIPTORS = {
         path: 'displayShortName',
         label: i18n.t('Short name'),
     },
+    formName: {
+        path: 'displayFormName',
+        label: i18n.t('Form name'),
+    },
 } satisfies Record<string, Descriptor>
 
 // This is the default views, and can be overriden per section in modelListViewsConfig below
@@ -96,7 +100,11 @@ const defaultAvailableColumnsNoSharing =
 export const modelListViewsConfig = {
     dataElement: {
         columns: {
-            available: [DESCRIPTORS.shortName, 'zeroIsSignificant'],
+            available: [
+                DESCRIPTORS.shortName,
+                'zeroIsSignificant',
+                DESCRIPTORS.formName,
+            ],
             default: [
                 DESCRIPTORS.name,
                 { label: i18n.t('Domain type'), path: 'domainType' },
@@ -107,7 +115,7 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            available: [],
+            available: ['formName'],
             default: ['domainType', 'valueType', 'dataSet', 'categoryCombo'],
         },
     },

@@ -21,3 +21,7 @@
     gap: 4px;
     align-items: center;
 }
+
+.textFilter {
+    width: 220px !important;
+}
