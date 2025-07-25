@@ -82,6 +82,10 @@ export type UseOnSubmitEditOptions = {
     section: ModelSection
 }
 
+export type UseOnSubmitNewOptions = {
+    section: ModelSection
+}
+
 export const useOnEditCompletedSuccessfully = (section: ModelSection) => {
     const saveAlert = useAlert(
         ({ message }) => message,
@@ -195,9 +199,7 @@ export const defaultValueFormatter = <
 
 export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
     section,
-}: {
-    section: ModelSection
-}) => {
+}: UseOnSubmitNewOptions) => {
     const createModel = useCreateModel(section.namePlural)
     const queryClient = useQueryClient()
     const saveAlert = useAlert(

@@ -24,14 +24,16 @@ export function StandardFormActions({
     onSubmitClick,
     onSaveClick,
     cancelTo,
+    onCancelClick,
 }: {
-    cancelLabel: string
+    cancelLabel?: string
     submitLabel: string
     saveLabel?: string
     submitting: boolean
     onSubmitClick: () => void
     onSaveClick?: () => void
     cancelTo?: To
+    onCancelClick?: () => void
 }) {
     return (
         <ButtonStrip>
@@ -63,9 +65,10 @@ export function StandardFormActions({
                 small
                 disabled={submitting}
                 to={cancelTo}
+                onClick={onCancelClick}
                 dataTest="form-cancel-link"
             >
-                {cancelLabel}
+                {cancelLabel ?? i18n.t('Cancel')}
             </LinkButton>
         </ButtonStrip>
     )

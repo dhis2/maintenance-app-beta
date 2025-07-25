@@ -8,7 +8,7 @@ import {
     SingleSelectOption,
 } from '@dhis2/ui'
 import React from 'react'
-import { Field as FieldRFF, Field, useField } from 'react-final-form'
+import { Field as FieldRFF, useField } from 'react-final-form'
 import {
     CustomAttributesSection,
     DefaultIdentifiableFields,
@@ -218,7 +218,7 @@ export const ProgramIndicatorsFormFields = () => {
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <Field
+                    <FieldRFF
                         inputWidth="400px"
                         name="displayInForm"
                         type="checkbox"

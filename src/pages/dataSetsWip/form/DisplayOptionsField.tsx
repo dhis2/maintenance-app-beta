@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Checkbox, InputFieldFF, RadioFieldFF } from '@dhis2/ui'
+import DOMPurify from 'dompurify'
 import React, { useState } from 'react'
 import { useField } from 'react-final-form'
 import classes from './DisplayOptionField.module.css'
@@ -14,6 +15,8 @@ export function DisplayOptionsField() {
                   })
                 : false
         },
+        format: (value) =>
+            typeof value === 'string' ? DOMPurify.sanitize(value) : value,
     })
     const subtitleField = useField(`${fieldName}.customText.subheader`, {
         validate: (value) => {
@@ -23,6 +26,8 @@ export function DisplayOptionsField() {
                   })
                 : false
         },
+        format: (value) =>
+            typeof value === 'string' ? DOMPurify.sanitize(value) : value,
     })
     const alignFieldStart = useField(`${fieldName}.customText.align`, {
         type: 'radio',

@@ -1,3 +1,4 @@
+import arrayMutators from 'final-form-arrays'
 import React from 'react'
 import {
     FormBase,
@@ -25,6 +26,7 @@ export const Component = () => {
             initialValues={initialValues}
             validate={validate}
             subscription={{}}
+            mutators={{ ...arrayMutators }}
         >
             {({ handleSubmit }) => {
                 return (

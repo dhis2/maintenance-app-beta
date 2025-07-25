@@ -1,0 +1,25 @@
+.sectionsWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.sectionsWrapper > div:first-child {
+    overflow-y: auto;
+}
+
+.actionsInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp4);
+    color: var(--colors-grey600);
+}
+
+.displayModeOptions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp4);
+}
+.pivotedCategorySelector {
+    margin: var(--spacers-dp4) var(--spacers-dp16);
+}
