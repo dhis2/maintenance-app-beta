@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import {
-    DefaultEditFormContents,
     DefaultFormFooter,
     DefaultSectionedFormSidebar,
     FormBase,
@@ -17,9 +16,6 @@ import {
     useOnSubmitEdit,
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { Indicator, PickWithFieldFilters } from '../../types/generated'
-import { ProgramIndicatorFormDescriptor } from '../programIndicators/form/formDescriptor'
-import { ProgramIndicatorsFormFields } from '../programIndicators/form/ProgramIndicatorFormFields'
 import { IndicatorFormDescriptor } from './form/formDescriptor'
 import { IndicatorFormFields } from './form/IndicatorFormFields'
 import { IndicatorFormValues, validate } from './form/indicatorSchema'
@@ -62,11 +58,6 @@ export const Component = () => {
     const indicatorQuery = useQuery({
         queryKey: [query],
         queryFn: queryFn<IndicatorFormValues>,
-    })
-
-    const onSubmit = useOnSubmitEdit<IndicatorFormValues>({
-        modelId,
-        section,
     })
 
     const initialValues = indicatorQuery.data

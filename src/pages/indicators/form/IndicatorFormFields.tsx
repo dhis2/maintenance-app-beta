@@ -10,7 +10,6 @@ import {
     SectionedFormSection,
     SectionedFormSections,
     StandardFormField,
-    StandardFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
