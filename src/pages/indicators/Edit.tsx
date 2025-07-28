@@ -1,17 +1,28 @@
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { DefaultEditFormContents, FormBase } from '../../components'
+import {
+    DefaultEditFormContents,
+    DefaultFormFooter,
+    DefaultSectionedFormSidebar,
+    FormBase,
+    SectionedFormErrorNotice,
+    SectionedFormLayout,
+} from '../../components'
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     DEFAULT_FIELD_FILTERS,
+    SectionedFormProvider,
     SECTIONS_MAP,
     useOnSubmitEdit,
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { Indicator, PickWithFieldFilters } from '../../types/generated'
+import { ProgramIndicatorFormDescriptor } from '../programIndicators/form/formDescriptor'
+import { ProgramIndicatorsFormFields } from '../programIndicators/form/ProgramIndicatorFormFields'
+import { IndicatorFormDescriptor } from './form/formDescriptor'
 import { IndicatorFormFields } from './form/IndicatorFormFields'
-import { validate } from './form/indicatorSchema'
+import { IndicatorFormValues, validate } from './form/indicatorSchema'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -30,15 +41,10 @@ const fieldFilters = [
     'url',
     'aggregateExportCategoryOptionCombo',
     'aggregateExportAttributeOptionCombo',
-    'indicatorType[id]',
-    'legendSets[id]',
+    'indicatorType[id,displayName]',
+    'legendSets[id,displayName]',
     'style[color,icon]',
 ] as const
-
-export type IndicatorFormValues = PickWithFieldFilters<
-    Indicator,
-    typeof fieldFilters
->
 
 export const Component = () => {
     const modelId = useParams().id as string
@@ -67,13 +73,28 @@ export const Component = () => {
 
     return (
         <FormBase
-            onSubmit={onSubmit}
+            onSubmit={useOnSubmitEdit({ section, modelId })}
             initialValues={initialValues}
             validate={validate}
+            subscription={{}}
         >
-            <DefaultEditFormContents section={section}>
-                <IndicatorFormFields />
-            </DefaultEditFormContents>
+            {({ handleSubmit }) => {
+                return (
+                    <SectionedFormProvider
+                        formDescriptor={IndicatorFormDescriptor}
+                    >
+                        <SectionedFormLayout
+                            sidebar={<DefaultSectionedFormSidebar />}
+                        >
+                            <form onSubmit={handleSubmit}>
+                                <IndicatorFormFields />
+                                <DefaultFormFooter cancelTo="/indicators" />
+                            </form>
+                            <SectionedFormErrorNotice />
+                        </SectionedFormLayout>
+                    </SectionedFormProvider>
+                )
+            }}
         </FormBase>
     )
 }

@@ -1,7 +1,13 @@
 import React from 'react'
-import { FormBase } from '../../components'
-import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
-import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
+import {
+    DefaultFormFooter,
+    DefaultSectionedFormSidebar,
+    FormBase,
+    SectionedFormErrorNotice,
+    SectionedFormLayout,
+} from '../../components'
+import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
+import { IndicatorFormDescriptor } from './form/formDescriptor'
 import { IndicatorFormFields } from './form/IndicatorFormFields'
 import { initialValues, validate } from './form/indicatorSchema'
 
@@ -14,9 +20,23 @@ export const Component = () => {
             initialValues={initialValues}
             validate={validate}
         >
-            <DefaultNewFormContents section={section}>
-                <IndicatorFormFields />
-            </DefaultNewFormContents>
+            {({ handleSubmit }) => {
+                return (
+                    <SectionedFormProvider
+                        formDescriptor={IndicatorFormDescriptor}
+                    >
+                        <SectionedFormLayout
+                            sidebar={<DefaultSectionedFormSidebar />}
+                        >
+                            <form onSubmit={handleSubmit}>
+                                <IndicatorFormFields />
+                                <DefaultFormFooter cancelTo="/indicators" />
+                            </form>
+                            <SectionedFormErrorNotice />
+                        </SectionedFormLayout>
+                    </SectionedFormProvider>
+                )
+            }}
         </FormBase>
     )
 }

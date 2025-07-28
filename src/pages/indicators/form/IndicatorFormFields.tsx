@@ -7,26 +7,34 @@ import {
     DefaultIdentifiableFields,
     DescriptionField,
     ModelTransferField,
+    SectionedFormSection,
+    SectionedFormSections,
     StandardFormField,
     StandardFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { SECTIONS_MAP } from '../../../lib'
+import { SECTIONS_MAP, useSectionedFormContext } from '../../../lib'
 import { ColorAndIconField } from '../../dataElements/fields'
 import DenominatorFields from './DenominatorFields'
+import { IndicatorFormDescriptor } from './formDescriptor'
 import { IndicatorTypeField } from './IndicatorTypeField'
 import NumeratorFields from './NumeratorFields'
+
+const section = SECTIONS_MAP.indicator
 
 export const IndicatorFormFields = () => {
     const { input: decimalsInput, meta: decimalsMeta } = useField('decimals', {
         format: (v) => v?.toString(),
         parse: (v) => (v !== undefined && v !== '' ? parseInt(v) : v),
     })
+    const descriptor = useSectionedFormContext<typeof IndicatorFormDescriptor>()
 
     return (
-        <>
-            <StandardFormSection>
+        <SectionedFormSections>
+            <SectionedFormSection
+                name={descriptor.getSection('basicInformation').name}
+            >
                 <StandardFormSectionTitle>
                     {i18n.t('Basic information')}
                 </StandardFormSectionTitle>
@@ -37,20 +45,68 @@ export const IndicatorFormFields = () => {
 
                 <DefaultIdentifiableFields />
 
-                <DescriptionField
-                    helpText={i18n.t('Explain the purpose of this indicator.')}
-                />
-            </StandardFormSection>
+                <StandardFormField>
+                    <DescriptionField
+                        helpText={i18n.t(
+                            'Explain the purpose of this indicator.'
+                        )}
+                    />
+                </StandardFormField>
 
-            <StandardFormSection>
+                <StandardFormField>
+                    <FieldRFF
+                        component={InputFieldFF}
+                        inputWidth="400px"
+                        name="url"
+                        label={i18n.t('Url')}
+                        helpText={i18n.t(
+                            'A web link that provides extra information.'
+                        )}
+                    />
+                </StandardFormField>
+
                 <StandardFormField>
                     <ColorAndIconField />
                 </StandardFormField>
+            </SectionedFormSection>
+            <SectionedFormSection
+                name={descriptor.getSection('expressions').name}
+            >
+                <StandardFormSectionTitle>
+                    {i18n.t('Indicator expressions')}
+                </StandardFormSectionTitle>
 
+                <StandardFormSectionDescription>
+                    {i18n.t('Configure the expressions and type of indicator.')}
+                </StandardFormSectionDescription>
                 <StandardFormField>
                     <IndicatorTypeField />
                 </StandardFormField>
+                <StandardFormField>
+                    <NumeratorFields />
+                </StandardFormField>
+                <StandardFormField>
+                    <DenominatorFields />
+                </StandardFormField>
+            </SectionedFormSection>
+            <SectionedFormSection name={descriptor.getSection('options').name}>
+                <StandardFormSectionTitle>
+                    {i18n.t('Indicator options')}
+                </StandardFormSectionTitle>
 
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Configure how this indicator is calculated and displayed.'
+                    )}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <FieldRFF
+                        name="annualized"
+                        type="checkbox"
+                        component={CheckboxFieldFF}
+                        label={i18n.t('Annualized')}
+                    />
+                </StandardFormField>
                 <StandardFormField>
                     <SingleSelectFieldFF
                         input={decimalsInput}
@@ -67,62 +123,6 @@ export const IndicatorFormFields = () => {
                         placeholder={i18n.t('Select number of decimals')}
                     />
                 </StandardFormField>
-
-                <StandardFormField>
-                    <FieldRFF
-                        name="annualized"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
-                        label={i18n.t('Annualized')}
-                    />
-                </StandardFormField>
-            </StandardFormSection>
-
-            <StandardFormSection>
-                <StandardFormSectionTitle>
-                    {i18n.t('Legend set')}
-                </StandardFormSectionTitle>
-
-                <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Visualize values for this data element in Analytics app. Multiple legends can be applied.'
-                    )}
-                </StandardFormSectionDescription>
-
-                <StandardFormField>
-                    <ModelTransferField
-                        dataTest="legendset-transfer"
-                        name="legendSets"
-                        query={{
-                            resource: 'legendSets',
-                            params: {
-                                filter: ['name:ne:default'],
-                                fields: ['id', 'displayName'],
-                            },
-                        }}
-                        leftHeader={i18n.t('Available legends')}
-                        rightHeader={i18n.t('Selected legends')}
-                        filterPlaceholder={i18n.t('Filter available legends')}
-                        filterPlaceholderPicked={i18n.t(
-                            'Filter selected legends'
-                        )}
-                    />
-                </StandardFormField>
-            </StandardFormSection>
-
-            <StandardFormSection>
-                <StandardFormField>
-                    <FieldRFF
-                        component={InputFieldFF}
-                        inputWidth="400px"
-                        name="url"
-                        label={i18n.t('Url')}
-                        helpText={i18n.t(
-                            'A web link that provides extra information.'
-                        )}
-                    />
-                </StandardFormField>
-
                 <StandardFormField>
                     <FieldRFF<string | undefined>
                         inputWidth="400px"
@@ -142,32 +142,36 @@ export const IndicatorFormFields = () => {
                         )}
                     />
                 </StandardFormField>
-            </StandardFormSection>
-            <CustomAttributesSection schemaSection={SECTIONS_MAP.indicator} />
-
-            <StandardFormSection>
+            </SectionedFormSection>
+            <SectionedFormSection name={descriptor.getSection('legends').name}>
                 <StandardFormSectionTitle>
-                    {i18n.t('Numerator')}
+                    {i18n.t('Legends')}
                 </StandardFormSectionTitle>
-
                 <StandardFormSectionDescription>
-                    {i18n.t('Define and describe the numerator formula.')}
+                    {i18n.t('Set up the program indicator legends.')}
                 </StandardFormSectionDescription>
+                <StandardFormField>
+                    <ModelTransferField
+                        dataTest="legendset-transfer"
+                        name="legendSets"
+                        query={{
+                            resource: 'legendSets',
+                            params: {
+                                filter: ['name:ne:default'],
+                                fields: ['id', 'displayName'],
+                            },
+                        }}
+                        leftHeader={i18n.t('Available legends')}
+                        rightHeader={i18n.t('Selected legends')}
+                        filterPlaceholder={i18n.t('Filter available legends')}
+                        filterPlaceholderPicked={i18n.t(
+                            'Filter selected legends'
+                        )}
+                    />
+                </StandardFormField>
+            </SectionedFormSection>
 
-                <NumeratorFields />
-            </StandardFormSection>
-
-            <StandardFormSection>
-                <StandardFormSectionTitle>
-                    {i18n.t('Denominator')}
-                </StandardFormSectionTitle>
-
-                <StandardFormSectionDescription>
-                    {i18n.t('Define and describe the denominator formula.')}
-                </StandardFormSectionDescription>
-
-                <DenominatorFields />
-            </StandardFormSection>
-        </>
+            <CustomAttributesSection schemaSection={section} sectionedLayout />
+        </SectionedFormSections>
     )
 }
