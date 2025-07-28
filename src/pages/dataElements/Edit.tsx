@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import React, { useMemo } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 import { DefaultEditFormContents, FormBase } from '../../components'
 import {
@@ -10,11 +10,7 @@ import {
     useOnSubmitEdit,
 } from '../../lib'
 import { DataElement, PickWithFieldFilters } from '../../types/generated'
-import {
-    DataElementFormFields,
-    dataElementValueFormatter,
-    validate,
-} from './form'
+import { DataElementFormFields, validate } from './form'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -59,30 +55,11 @@ export const Component = () => {
         queryKey: [query],
         queryFn: queryFn<DataElementFormValues>,
     })
-
-    const initialValues = useMemo(
-        () =>
-            dataElement.data && {
-                ...dataElement.data,
-                categoryCombo: dataElement?.data?.categoryCombo.id
-                    ? dataElement?.data?.categoryCombo
-                    : { id: '' },
-                commentOptionSet: dataElement?.data?.commentOptionSet?.id
-                    ? dataElement?.data?.commentOptionSet
-                    : { id: '' },
-                optionSet: dataElement.data?.optionSet?.id
-                    ? dataElement.data?.optionSet
-                    : { id: '' },
-            },
-        [dataElement.data]
-    )
-
     return (
         <FormBase
             onSubmit={useOnSubmitEdit({ modelId, section })}
-            initialValues={initialValues}
+            initialValues={dataElement.data}
             validate={validate}
-            valueFormatter={dataElementValueFormatter}
         >
             <DefaultEditFormContents section={section}>
                 <DataElementFormFields />

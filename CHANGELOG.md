@@ -1,3 +1,18 @@
+# [0.54.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.53.0...v0.54.0) (2025-07-25)
+
+
+### Features
+
+* actually refetch data when button pressed ([#597](https://github.com/dhis2/maintenance-app-beta/issues/597)) ([7881093](https://github.com/dhis2/maintenance-app-beta/commit/78810930863071e302a8550be5bcbe2a106ae32b))
+* add save button in forms [skip release] ([#585](https://github.com/dhis2/maintenance-app-beta/issues/585)) ([a5fa5c3](https://github.com/dhis2/maintenance-app-beta/commit/a5fa5c3b1ec4825e835e499a4f9dcd8db948111e))
+
+# [0.53.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.52.0...v0.53.0) (2025-07-23)
+
+
+### Features
+
+* refactor old selectors left overs ([#595](https://github.com/dhis2/maintenance-app-beta/issues/595)) ([b5a43fd](https://github.com/dhis2/maintenance-app-beta/commit/b5a43fd7f981167580564de6c49fbc532e6f860f))
+
 # [0.52.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.51.0...v0.52.0) (2025-07-17)
 
 
