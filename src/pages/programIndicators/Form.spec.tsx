@@ -181,6 +181,12 @@ describe('Program indicator form tests', () => {
                                     }
                                 }
                             },
+                            'programIndicators/expression/description': () => ({
+                                status: 'OK',
+                            }),
+                            'programIndicators/filter/description': () => ({
+                                status: 'OK',
+                            }),
                             ...customTestData,
                         }}
                         routeOptions={routeOptions}
@@ -553,6 +559,50 @@ describe('Program indicator form tests', () => {
             await uiActions.submitForm(screen)
             expect(createMock).not.toHaveBeenCalled()
         })
+        it('should show an error if expression field is malformed', async () => {
+            const { screen } = await renderForm({
+                customTestData: {
+                    'programIndicators/expression/description': () => ({
+                        status: 'ERROR',
+                    }),
+                },
+            })
+            const anExpression = faker.finance.routingNumber()
+            await uiActions.enterInputFieldValue(
+                `expression`,
+                anExpression,
+                screen
+            )
+            await userEvent.click(screen.getByTestId(`formfields-expression`))
+
+            uiAssertions.expectFieldToHaveError(
+                `formfields-expression`,
+                'Invalid expression',
+                screen
+            )
+            await uiActions.submitForm(screen)
+            expect(createMock).not.toHaveBeenCalled()
+        })
+        it('should show an error if filter field is malformed', async () => {
+            const { screen } = await renderForm({
+                customTestData: {
+                    'programIndicators/filter/description': () => ({
+                        status: 'ERROR',
+                    }),
+                },
+            })
+            const anExpression = faker.finance.routingNumber()
+            await uiActions.enterInputFieldValue(`filter`, anExpression, screen)
+            await userEvent.click(screen.getByTestId(`formfields-filter`))
+
+            uiAssertions.expectFieldToHaveError(
+                `formfields-filter`,
+                'Invalid expression',
+                screen
+            )
+            await uiActions.submitForm(screen)
+            expect(createMock).not.toHaveBeenCalled()
+        })
     })
     describe('New', () => {
         const renderForm = generateRenderer(
@@ -606,6 +656,12 @@ describe('Program indicator form tests', () => {
                                     }
                                 }
                             },
+                            'programIndicators/expression/description': () => ({
+                                status: 'OK',
+                            }),
+                            'programIndicators/filter/description': () => ({
+                                status: 'OK',
+                            }),
                             ...customTestData,
                         }}
                         routeOptions={routeOptions}
@@ -1417,6 +1473,12 @@ describe('Program indicator form tests', () => {
                                     name: pt,
                                 })),
                             }),
+                            'programIndicators/expression/description': () => ({
+                                status: 'OK',
+                            }),
+                            'programIndicators/filter/description': () => ({
+                                status: 'OK',
+                            }),
                             ...customTestData,
                         }}
                         routeOptions={routeOptions}
@@ -1619,7 +1681,6 @@ describe('Program indicator form tests', () => {
             const decimals = within(
                 screen.getByTestId('decimals-field')
             ).getByTestId('dhis2-uicore-select-input')
-            screen.debug(decimals)
             expect(decimals).toBeVisible()
             expect(decimals).toHaveTextContent('0')
         })

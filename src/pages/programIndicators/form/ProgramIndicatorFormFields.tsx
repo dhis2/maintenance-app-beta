@@ -42,7 +42,6 @@ export const ProgramIndicatorsFormFields = () => {
 
     const { apiVersion } = useConfig()
     const hasPiDisaggregation = apiVersion >= 42
-
     const schema = useSchema(SECTIONS_MAP.programIndicator.name)
     return (
         <SectionedFormSections>
@@ -159,6 +158,7 @@ export const ProgramIndicatorsFormFields = () => {
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <ExpressionBuilderField
+                        validationResource="programIndicators/expression/description"
                         dataTest="formfields-expression"
                         name="expression"
                     />
@@ -175,6 +175,7 @@ export const ProgramIndicatorsFormFields = () => {
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <ExpressionBuilderField
+                        validationResource="programIndicators/filter/description"
                         dataTest="formfields-filter"
                         name="filter"
                     />

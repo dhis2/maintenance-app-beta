@@ -1,15 +1,14 @@
 import { TextAreaFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
+import { useExpressionValidator } from './useExpressionValidator'
 
 type ExpressionFieldProps = {
     name: string
     label?: string
     required?: boolean
     dataTest?: string
-    validate?: (
-        value?: string
-    ) => Promise<string | undefined> | string | undefined
+    validationResource: string
 }
 
 export const ExpressionBuilderField = ({
@@ -17,8 +16,9 @@ export const ExpressionBuilderField = ({
     label,
     required,
     dataTest,
-    validate,
+    validationResource,
 }: ExpressionFieldProps) => {
+    const validate = useExpressionValidator(validationResource)
     return (
         <FieldRFF<string | undefined> name={name} validate={validate}>
             {({ input, meta }) => (
@@ -29,8 +29,6 @@ export const ExpressionBuilderField = ({
                     required={required}
                     inputWidth="400px"
                     label={label}
-                    validationText={meta.error}
-                    warning={!!meta.error && meta.touched}
                 />
             )}
         </FieldRFF>

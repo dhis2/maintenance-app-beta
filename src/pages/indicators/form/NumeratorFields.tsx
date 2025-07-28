@@ -4,11 +4,8 @@ import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 import { ExpressionBuilderField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderField'
-import { useValidateIndicatorExpressionValidator } from './useFormHooks'
 
 function NumeratorFields() {
-    const validateExpression = useValidateIndicatorExpressionValidator()
-
     return (
         <>
             <StandardFormField>
@@ -25,7 +22,7 @@ function NumeratorFields() {
                 <ExpressionBuilderField
                     name="numerator"
                     label={i18n.t('Edit numerator')}
-                    validate={validateExpression}
+                    validationResource="indicators/expression/description"
                     required
                 />
             </StandardFormField>
