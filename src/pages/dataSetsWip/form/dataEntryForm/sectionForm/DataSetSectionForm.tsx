@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query'
 import React, { useCallback, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { FormBase, FormBaseProps } from '../../../../../components'
-import { DefaultFormErrorNotice } from '../../../../../components/form/DefaultFormErrorNotice'
 import { LoadingSpinner } from '../../../../../components/loading/LoadingSpinner'
 import {
     DEFAULT_FIELD_FILTERS,
@@ -49,7 +48,7 @@ export type SectionFormValues = PickWithFieldFilters<
     typeof fieldFilters
 > & {
     dataSet: { id: string }
-    displayOptions?: any
+    displayOptions?: undefined
 }
 type PartialSectionFormValues = Partial<SectionFormValues>
 type SubmittedSectionFormValues = PartialSectionFormValues & DisplayableModel
@@ -67,7 +66,12 @@ export const DataSetSectionForm = ({
     const dataSetId = useParams().id as string
     const initialValues: PartialSectionFormValues | undefined = useMemo(() => {
         if (dataSetSection) {
-            return dataSetSection
+            return {
+                ...dataSetSection,
+                displayOptions:
+                    dataSetSection?.displayOptions &&
+                    JSON.parse(dataSetSection?.displayOptions),
+            }
         }
         return {
             ...initialSectionValues,
@@ -97,7 +101,6 @@ export const DataSetSectionForm = ({
             includeAttributes={false}
         >
             <DataSetSectionFormContents onCancel={onCancel} />
-            <DefaultFormErrorNotice />
         </FormBase>
     )
 }

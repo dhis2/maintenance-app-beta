@@ -26,7 +26,7 @@ export const sectionFormSchema = identifiable.extend({
             { message: 'Invalid JSON string' }
         )
         .default(
-            '{"pivotMode":"n/a","pivotedCategory":"GLevLNI9wkl","afterSectionText":"","beforeSectionText":""}'
+            '{"pivotMode":"n/a","afterSectionText":"","beforeSectionText":""}'
         ),
 })
 
