@@ -1,3 +1,10 @@
+## [0.56.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.56.0...v0.56.1) (2025-07-29)
+
+
+### Bug Fixes
+
+* **overview:** add overview for dataSetNotifications and Indicators ([#589](https://github.com/dhis2/maintenance-app-beta/issues/589)) ([81b35c0](https://github.com/dhis2/maintenance-app-beta/commit/81b35c007d6a0ccbdcf8f17fdd959bf372cbbe65))
+
 # [0.56.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.55.1...v0.56.0) (2025-07-29)
 
 
