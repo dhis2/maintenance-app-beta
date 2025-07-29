@@ -31,6 +31,7 @@ import {
     StandardFormSectionTitle,
     TransferHeader,
 } from '../../../../../components'
+import { DefaultFormErrorNotice } from '../../../../../components/form/DefaultFormErrorNotice'
 import { BaseModelTransfer } from '../../../../../components/metadataFormControls/ModelTransfer/BaseModelTransfer'
 import {
     SchemaName,
@@ -164,267 +165,281 @@ export const DataSetSectionFormContents = ({
 
     return (
         <div className={styles.sectionsWrapper}>
-            <SectionedFormSections>
-                <SectionedFormSection name="setup">
-                    <StandardFormSectionTitle>
-                        {i18n.t('Section setup')}
-                    </StandardFormSectionTitle>
-                    <StandardFormSectionDescription>
-                        {i18n.t(
-                            'Setup the basic information for this section.'
-                        )}
-                    </StandardFormSectionDescription>
-                    <StandardFormField>
-                        <NameField
-                            schemaSection={dataSetSectionSchemaSection}
-                        />
-                    </StandardFormField>
-                    <StandardFormField>
-                        <CodeField
-                            schemaSection={dataSetSectionSchemaSection}
-                            modelId={values.id}
-                        />
-                    </StandardFormField>
-                    <StandardFormField>
-                        <DescriptionField
-                            helpText={i18n.t(
-                                'Explain the purpose of this section, which will be shown in the data entry form.'
+            <div>
+                <SectionedFormSections>
+                    <SectionedFormSection name="setup">
+                        <StandardFormSectionTitle>
+                            {i18n.t('Section setup')}
+                        </StandardFormSectionTitle>
+                        <StandardFormSectionDescription>
+                            {i18n.t(
+                                'Setup the basic information for this section.'
                             )}
-                        />
-                    </StandardFormField>
-                </SectionedFormSection>
-                <SectionedFormSection name="sectionDataElements">
-                    <StandardFormSectionTitle>
-                        {i18n.t('Section data elements')}
-                    </StandardFormSectionTitle>
-                    <StandardFormSectionDescription>
-                        {i18n.t(
-                            'Choose what data is collected for this section.'
-                        )}
-                    </StandardFormSectionDescription>
-                    <Field
-                        error={dataElementsMeta.invalid}
-                        validationText={
-                            (dataElementsMeta.touched &&
-                                dataElementsMeta.error?.toString()) ||
-                            ''
-                        }
-                        name="dataElements"
-                    >
-                        <BaseModelTransfer
-                            loading={isLoading}
-                            selected={dataElementsInput.value}
-                            onChange={({ selected }) => {
-                                dataElementsInput.onChange(selected)
-                                dataElementsInput.onBlur()
-                            }}
-                            leftHeader={
-                                <TransferHeader>
-                                    {i18n.t('Available data elements')}
-                                </TransferHeader>
+                        </StandardFormSectionDescription>
+                        <StandardFormField>
+                            <NameField
+                                schemaSection={dataSetSectionSchemaSection}
+                            />
+                        </StandardFormField>
+                        <StandardFormField>
+                            <CodeField
+                                schemaSection={dataSetSectionSchemaSection}
+                                modelId={values.id}
+                            />
+                        </StandardFormField>
+                        <StandardFormField>
+                            <DescriptionField
+                                helpText={i18n.t(
+                                    'Explain the purpose of this section, which will be shown in the data entry form.'
+                                )}
+                            />
+                        </StandardFormField>
+                    </SectionedFormSection>
+                    <SectionedFormSection name="sectionDataElements">
+                        <StandardFormSectionTitle>
+                            {i18n.t('Section data elements')}
+                        </StandardFormSectionTitle>
+                        <StandardFormSectionDescription>
+                            {i18n.t(
+                                'Choose what data is collected for this section.'
+                            )}
+                        </StandardFormSectionDescription>
+                        <Field
+                            error={dataElementsMeta.invalid}
+                            validationText={
+                                (dataElementsMeta.touched &&
+                                    dataElementsMeta.error?.toString()) ||
+                                ''
                             }
-                            rightHeader={
-                                <TransferHeader>
-                                    {i18n.t('Selected data elements')}
-                                </TransferHeader>
+                            name="dataElements"
+                        >
+                            <BaseModelTransfer
+                                loading={isLoading}
+                                selected={dataElementsInput.value}
+                                onChange={({ selected }) => {
+                                    dataElementsInput.onChange(selected)
+                                    dataElementsInput.onBlur()
+                                }}
+                                leftHeader={
+                                    <TransferHeader>
+                                        {i18n.t('Available data elements')}
+                                    </TransferHeader>
+                                }
+                                rightHeader={
+                                    <TransferHeader>
+                                        {i18n.t('Selected data elements')}
+                                    </TransferHeader>
+                                }
+                                filterPlaceholder={i18n.t(
+                                    'Search available data elements'
+                                )}
+                                filterPlaceholderPicked={i18n.t(
+                                    'Search selected data elements'
+                                )}
+                                enableOrderChange
+                                height={'350px'}
+                                optionsWidth="500px"
+                                selectedWidth="500px"
+                                filterable
+                                filterablePicked
+                                available={availableDataElements}
+                                maxSelections={Infinity}
+                            />
+                        </Field>
+                    </SectionedFormSection>
+                    <SectionedFormSection name="sectionIndicators">
+                        <StandardFormSectionTitle>
+                            {i18n.t('Section indicators')}
+                        </StandardFormSectionTitle>
+                        <StandardFormSectionDescription>
+                            {i18n.t(
+                                'Choose what indicators are shown in this section.'
+                            )}
+                        </StandardFormSectionDescription>
+                        <Field
+                            error={indicatorsMeta.invalid}
+                            validationText={
+                                (indicatorsMeta.touched &&
+                                    indicatorsMeta.error?.toString()) ||
+                                ''
                             }
-                            filterPlaceholder={i18n.t(
-                                'Search available data elements'
+                            name="indicators"
+                        >
+                            <BaseModelTransfer
+                                selected={indicatorsInput.value}
+                                onChange={({ selected }) => {
+                                    indicatorsInput.onChange(selected)
+                                    indicatorsInput.onBlur()
+                                }}
+                                leftHeader={
+                                    <TransferHeader>
+                                        {i18n.t('Available indicators')}
+                                    </TransferHeader>
+                                }
+                                rightHeader={
+                                    <TransferHeader>
+                                        {i18n.t('Selected indicators')}
+                                    </TransferHeader>
+                                }
+                                filterPlaceholder={i18n.t(
+                                    'Search available indicators'
+                                )}
+                                filterPlaceholderPicked={i18n.t(
+                                    'Search selected indicators'
+                                )}
+                                enableOrderChange
+                                height={'350px'}
+                                optionsWidth="500px"
+                                selectedWidth="500px"
+                                filterable
+                                filterablePicked
+                                available={data?.indicators ?? []}
+                                maxSelections={Infinity}
+                            />
+                        </Field>
+                    </SectionedFormSection>
+                    <SectionedFormSection name="displayOptions">
+                        <StandardFormSectionTitle>
+                            {i18n.t('Display options')}
+                        </StandardFormSectionTitle>
+                        <StandardFormSectionDescription>
+                            {i18n.t(
+                                'Customize how this section looks in the form.'
                             )}
-                            filterPlaceholderPicked={i18n.t(
-                                'Search selected data elements'
-                            )}
-                            enableOrderChange
-                            height={'350px'}
-                            optionsWidth="500px"
-                            selectedWidth="500px"
-                            filterable
-                            filterablePicked
-                            available={availableDataElements}
-                            maxSelections={Infinity}
-                        />
-                    </Field>
-                </SectionedFormSection>
-                <SectionedFormSection name="sectionIndicators">
-                    <StandardFormSectionTitle>
-                        {i18n.t('Section indicators')}
-                    </StandardFormSectionTitle>
-                    <StandardFormSectionDescription>
-                        {i18n.t(
-                            'Choose what indicators are shown in this section.'
-                        )}
-                    </StandardFormSectionDescription>
-                    <Field
-                        error={indicatorsMeta.invalid}
-                        validationText={
-                            (indicatorsMeta.touched &&
-                                indicatorsMeta.error?.toString()) ||
-                            ''
-                        }
-                        name="indicators"
-                    >
-                        <BaseModelTransfer
-                            selected={indicatorsInput.value}
-                            onChange={({ selected }) => {
-                                indicatorsInput.onChange(selected)
-                                indicatorsInput.onBlur()
-                            }}
-                            leftHeader={
-                                <TransferHeader>
-                                    {i18n.t('Available indicators')}
-                                </TransferHeader>
-                            }
-                            rightHeader={
-                                <TransferHeader>
-                                    {i18n.t('Selected indicators')}
-                                </TransferHeader>
-                            }
-                            filterPlaceholder={i18n.t(
-                                'Search available indicators'
-                            )}
-                            filterPlaceholderPicked={i18n.t(
-                                'Search selected indicators'
-                            )}
-                            enableOrderChange
-                            height={'350px'}
-                            optionsWidth="500px"
-                            selectedWidth="500px"
-                            filterable
-                            filterablePicked
-                            available={data?.indicators ?? []}
-                            maxSelections={Infinity}
-                        />
-                    </Field>
-                </SectionedFormSection>
-                <SectionedFormSection name="displayOptions">
-                    <StandardFormSectionTitle>
-                        {i18n.t('Display options')}
-                    </StandardFormSectionTitle>
-                    <StandardFormSectionDescription>
-                        {i18n.t(
-                            'Customize how this section looks in the form.'
-                        )}
-                    </StandardFormSectionDescription>
-                    <StandardFormField>
-                        <FieldRFF
-                            name="showRowTotals"
-                            type="checkbox"
-                            dataTest="formfields-showRowTotals"
-                            component={CheckboxFieldFF}
-                            label={i18n.t('Row totals')}
-                        />
-                    </StandardFormField>
-                    <StandardFormField>
-                        <FieldRFF
-                            name="showColumnTotals"
-                            type="checkbox"
-                            dataTest="formfields-showColumnTotals"
-                            component={CheckboxFieldFF}
-                            label={i18n.t('Column totals')}
-                        />
-                    </StandardFormField>
-                    <StandardFormField>
-                        <FieldRFF
-                            name="disableDataElementAutoGroup"
-                            type="checkbox"
-                            dataTest="formfields-disableDataElementAutoGroup"
-                            component={CheckboxFieldFF}
-                            label={i18n.t(
-                                'Disable automatic grouping of data elements'
-                            )}
-                        />
-                    </StandardFormField>
-                    <div>
-                        <p>{i18n.t('Display mode')}</p>
-                        <div className={styles.displayModeOptions}>
+                        </StandardFormSectionDescription>
+                        <StandardFormField>
+                            <FieldRFF
+                                name="showRowTotals"
+                                type="checkbox"
+                                dataTest="formfields-showRowTotals"
+                                component={CheckboxFieldFF}
+                                label={i18n.t('Row totals')}
+                            />
+                        </StandardFormField>
+                        <StandardFormField>
+                            <FieldRFF
+                                name="showColumnTotals"
+                                type="checkbox"
+                                dataTest="formfields-showColumnTotals"
+                                component={CheckboxFieldFF}
+                                label={i18n.t('Column totals')}
+                            />
+                        </StandardFormField>
+                        <StandardFormField>
+                            <FieldRFF
+                                name="disableDataElementAutoGroup"
+                                type="checkbox"
+                                dataTest="formfields-disableDataElementAutoGroup"
+                                component={CheckboxFieldFF}
+                                label={i18n.t(
+                                    'Disable automatic grouping of data elements'
+                                )}
+                            />
+                        </StandardFormField>
+                        <div>
+                            <p>{i18n.t('Display mode')}</p>
+                            <div className={styles.displayModeOptions}>
+                                <StandardFormField>
+                                    <RadioFieldFF
+                                        label={i18n.t(
+                                            'Default: data elements as rows, categories as columns'
+                                        )}
+                                        input={defaultDisplayModeField.input}
+                                        meta={defaultDisplayModeField.meta}
+                                    />
+                                </StandardFormField>
+                                <StandardFormField>
+                                    <RadioFieldFF
+                                        label={i18n.t(
+                                            'Pivot: categories as rows, data elements as columns'
+                                        )}
+                                        input={pivotDisplayModeField.input}
+                                        meta={pivotDisplayModeField.meta}
+                                    />
+                                </StandardFormField>
+                                <StandardFormField>
+                                    <RadioFieldFF
+                                        label={i18n.t(
+                                            'Move a category to rows: default mode with one category moved to rows'
+                                        )}
+                                        input={
+                                            moveCategoriesDisplayModeField.input
+                                        }
+                                        meta={
+                                            moveCategoriesDisplayModeField.meta
+                                        }
+                                    />
+                                </StandardFormField>
+                            </div>
+                            {moveCategoriesDisplayModeField.input.checked &&
+                                catComboData &&
+                                data && (
+                                    <div
+                                        className={
+                                            styles.pivotedCategorySelector
+                                        }
+                                    >
+                                        <FieldRFF
+                                            required
+                                            component={SingleSelectFieldFF}
+                                            inputWidth="400px"
+                                            name="displayOptions.pivotedCategory"
+                                            label={i18n.t(
+                                                'Category to move to rows'
+                                            )}
+                                            options={catComboData.categories.map(
+                                                (cc) => ({
+                                                    value: cc.id,
+                                                    label: cc.displayName,
+                                                })
+                                            )}
+                                        />
+                                    </div>
+                                )}
                             <StandardFormField>
-                                <RadioFieldFF
+                                <FieldRFF
+                                    component={TextAreaFieldFF}
+                                    inputWidth="400px"
+                                    name="displayOptions.beforeSectionText"
                                     label={i18n.t(
-                                        'Default: data elements as rows, categories as columns'
+                                        'Content to display before a section'
                                     )}
-                                    input={defaultDisplayModeField.input}
-                                    meta={defaultDisplayModeField.meta}
+                                    helpText={i18n.t(
+                                        'HTML links and basic styling can be included'
+                                    )}
+                                    format={(value) =>
+                                        typeof value === 'string'
+                                            ? DOMPurify.sanitize(value)
+                                            : value
+                                    }
                                 />
                             </StandardFormField>
                             <StandardFormField>
-                                <RadioFieldFF
+                                <FieldRFF
+                                    component={TextAreaFieldFF}
+                                    inputWidth="400px"
+                                    name="displayOptions.afterSectionText"
                                     label={i18n.t(
-                                        'Pivot: categories as rows, data elements as columns'
+                                        'Content to display after a section'
                                     )}
-                                    input={pivotDisplayModeField.input}
-                                    meta={pivotDisplayModeField.meta}
-                                />
-                            </StandardFormField>
-                            <StandardFormField>
-                                <RadioFieldFF
-                                    label={i18n.t(
-                                        'Move a category to rows: default mode with one category moved to rows'
+                                    validateFields={[]}
+                                    helpText={i18n.t(
+                                        'HTML links and basic styling can be included'
                                     )}
-                                    input={moveCategoriesDisplayModeField.input}
-                                    meta={moveCategoriesDisplayModeField.meta}
+                                    format={(value) =>
+                                        typeof value === 'string'
+                                            ? DOMPurify.sanitize(value)
+                                            : value
+                                    }
                                 />
                             </StandardFormField>
                         </div>
-                        {moveCategoriesDisplayModeField.input.checked &&
-                            catComboData && (
-                                <div className={styles.pivotedCategorySelector}>
-                                    <FieldRFF
-                                        required
-                                        component={SingleSelectFieldFF}
-                                        inputWidth="400px"
-                                        name="displayOptions.pivotedCategory"
-                                        label={i18n.t(
-                                            'Category to move to rows'
-                                        )}
-                                        options={catComboData.categories.map(
-                                            (cc) => ({
-                                                value: cc.id,
-                                                label: cc.displayName,
-                                            })
-                                        )}
-                                    />
-                                </div>
-                            )}
-                        <StandardFormField>
-                            <FieldRFF
-                                component={TextAreaFieldFF}
-                                inputWidth="400px"
-                                name="displayOptions.beforeSectionText"
-                                label={i18n.t(
-                                    'Content to display before a section'
-                                )}
-                                helpText={i18n.t(
-                                    'HTML links and basic styling can be included'
-                                )}
-                                format={(value) =>
-                                    typeof value === 'string'
-                                        ? DOMPurify.sanitize(value)
-                                        : value
-                                }
-                            />
-                        </StandardFormField>
-                        <StandardFormField>
-                            <FieldRFF
-                                component={TextAreaFieldFF}
-                                inputWidth="400px"
-                                name="displayOptions.afterSectionText"
-                                label={i18n.t(
-                                    'Content to display after a section'
-                                )}
-                                validateFields={[]}
-                                helpText={i18n.t(
-                                    'HTML links and basic styling can be included'
-                                )}
-                                format={(value) =>
-                                    typeof value === 'string'
-                                        ? DOMPurify.sanitize(value)
-                                        : value
-                                }
-                            />
-                        </StandardFormField>
-                    </div>
-                </SectionedFormSection>
-            </SectionedFormSections>
+                    </SectionedFormSection>
+                </SectionedFormSections>
+                <div className={styles.errorNoticeWrapper}>
+                    <DefaultFormErrorNotice />
+                </div>
+            </div>
             <div>
                 <FormFooterWrapper>
                     <ButtonStrip>

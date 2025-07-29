@@ -24,7 +24,7 @@ export const fieldFilters = [
     'renderAsTabs',
     'renderHorizontally',
     'sections',
-    'style[color,icon',
+    'style[color,icon]',
     'skipOffline',
     'timelyDays',
     'validCommpleteOnly',

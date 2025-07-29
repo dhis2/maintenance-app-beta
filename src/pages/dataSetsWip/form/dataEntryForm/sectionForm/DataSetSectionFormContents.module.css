@@ -8,6 +8,10 @@
     overflow-y: auto;
 }
 
+.errorNoticeWrapper {
+    margin: var(--spacers-dp16);
+}
+
 .actionsInfo {
     display: flex;
     align-items: center;
