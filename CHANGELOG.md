@@ -1,3 +1,10 @@
+# [0.55.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.54.0...v0.55.0) (2025-07-28)
+
+
+### Features
+
+* indicator add  and edit form ([#594](https://github.com/dhis2/maintenance-app-beta/issues/594)) ([716a974](https://github.com/dhis2/maintenance-app-beta/commit/716a97407e186d46ff348c82796343f407225cb3))
+
 # [0.54.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.53.0...v0.54.0) (2025-07-25)
 
 

@@ -2,21 +2,19 @@ import i18n from '@dhis2/d2-i18n'
 import { Card, RadioFieldFF } from '@dhis2/ui'
 import cx from 'classnames'
 import React from 'react'
-import { Field, useField, useFormState } from 'react-final-form'
+import { Field } from 'react-final-form'
+import { useParams } from 'react-router-dom'
 import {
     HorizontalFieldGroup,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../components'
-import { Drawer } from '../../../../components/drawer'
 import { SectionedFormSection } from '../../../../components/sectionedForm'
-import { getFormType } from '../dataSetModel'
+import { TooltipWrapper } from '../../../../components/tooltip'
 import { DisplayOptionsField } from '../DisplayOptionsField'
-import { useDataSetField, useDataSetFormState } from '../formHooks'
+import { useDataSetField } from '../formHooks'
 import classes from './DataEntryFormContents.module.css'
 import { SectionFormSectionsList } from './SectionFormList'
-import { TooltipWrapper } from '../../../../components/tooltip'
-import { useParams } from 'react-router-dom'
 
 const DefaultFormIcon = () => (
     <svg

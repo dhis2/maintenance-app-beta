@@ -19,15 +19,12 @@ import { dataSetNotificationTemplateListSchema } from '../pages/dataSetNotificat
 import { dataSetListSchema } from '../pages/dataSetsWip/form/dataSetFormSchema'
 import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicatorGroupSchema'
 import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
-import { indicatorSchema } from '../pages/indicators/form/indicatorSchema'
+import { indicatorListSchema } from '../pages/indicators/form/indicatorSchema'
 import { indicatorTypeListSchema } from '../pages/indicatorTypes/form/indicatorTypesSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
-import {
-    programIndicatorGroupFormSchema,
-    programIndicatorGroupListSchema,
-} from '../pages/programIndicatorGroups/form'
+import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
 import {
     CategoryMapping,
@@ -89,7 +86,7 @@ export const testIndicatorType = (overwrites: Record<any, any> = {}) => ({
 })
 
 export const testIndicator = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(indicatorSchema, {
+    ...generateMock(indicatorListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -238,7 +235,7 @@ export const testProgramIndicatorGroup = (
 export const testFormProgramIndicatorGroup = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(programIndicatorGroupFormSchema, { mockeryMapper }),
+    ...generateMock(programIndicatorGroupListSchema, { mockeryMapper }),
     ...overwrites,
 })
 
