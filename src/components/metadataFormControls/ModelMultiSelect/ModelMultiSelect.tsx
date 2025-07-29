@@ -28,7 +28,7 @@ export type ModelMultiSelectProps<
 }
 
 export const ModelMultiSelect = <TModel extends PartialLoadedDisplayableModel>({
-    selected = [],
+    selected,
     query,
     transform,
     ...baseModelSingleSelectProps
@@ -59,7 +59,7 @@ export const ModelMultiSelect = <TModel extends PartialLoadedDisplayableModel>({
     // if we had to fetch selected data, update the form value
     // this basically adds the displayName to the formState
     useEffect(() => {
-        const selectedWithoutData = selected.filter(
+        const selectedWithoutData = (selected ?? []).filter(
             (s) => s.displayName === undefined
         )
         if (selectedWithoutData.length < 1) {
