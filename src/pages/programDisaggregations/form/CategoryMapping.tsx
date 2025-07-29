@@ -12,9 +12,9 @@ import {
     Input,
 } from '@dhis2/ui'
 import React, { useCallback, useState, ReactNode } from 'react'
-import { useField } from 'react-final-form'
+import { useField, Field as FieldRFF } from 'react-final-form'
+import { useExpressionValidator } from '../../../components/metadataFormControls/ExpressionBuilder/useExpressionValidator'
 import css from './CategoryMapping.module.css'
-import { useValidateExpressionField } from './useFormHooks'
 
 type CategoryOption = {
     id: string
@@ -197,33 +197,29 @@ const CategoryMappingInput = ({
     opt: CategoryOption
     categoryOptionInformation: Record<string, string>
 }) => {
-    const { handleValidateExpression } = useValidateExpressionField()
-    const validation = useField(`${fieldName}.options.${opt.id}.invalid`)
-    const { input, meta } = useField(
-        `${fieldName}.options.${opt.id}.filter`,
-        {}
+    const validate = useExpressionValidator(
+        'programIndicators/filter/description'
     )
+
     return (
         <div
             key={`${fieldName}.options.${opt.id}.filter_div`}
             className={css.filterInputContainer}
         >
-            <InputFieldFF
-                label={`${categoryOptionInformation?.[opt.id]}`}
-                input={{
-                    ...input,
-                    onChange: async (value: string) => {
-                        input.onChange(value)
-                        const invalid = await handleValidateExpression(value)
-                        validation.input.onChange(invalid)
-                    },
-                }}
-                meta={meta}
-                validationText={
-                    validation.input.value && i18n.t('Invalid expression')
-                }
-                warning={!!validation.input.value}
-            />
+            <FieldRFF<string | undefined>
+                name={`${fieldName}.options.${opt.id}.filter`}
+                validate={validate}
+            >
+                {({ input, meta }) => (
+                    <InputFieldFF
+                        label={categoryOptionInformation?.[opt.id]}
+                        input={input}
+                        meta={meta}
+                        validationText={meta.error || meta.submitError}
+                        warning={!!meta.error}
+                    />
+                )}
+            </FieldRFF>
         </div>
     )
 }

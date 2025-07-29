@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-22T11:35:26.076Z\n"
-"PO-Revision-Date: 2025-07-22T11:35:26.077Z\n"
+"POT-Creation-Date: 2025-07-29T07:45:41.115Z\n"
+"PO-Revision-Date: 2025-07-29T07:45:41.115Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -220,23 +220,29 @@ msgstr "Merge complete"
 msgid "Back to list"
 msgstr "Back to list"
 
+msgid "Sources"
+msgstr "Sources"
+
+msgid "Select models to merge"
+msgstr "Select models to merge"
+
+msgid "Target"
+msgstr "Target"
+
+msgid "Select the model to merge into"
+msgstr "Select the model to merge into"
+
+msgid "No potential targets available. Remove an item from sources."
+msgstr "No potential targets available. Remove an item from sources."
+
 msgid "At least one source is required"
 msgstr "At least one source is required"
 
-msgid "Aggregation level(s)"
-msgstr "Aggregation level(s)"
+msgid "Invalid expression"
+msgstr "Invalid expression"
 
-msgid "Category combo"
-msgstr "Category combo"
-
-msgid "Filter data element groups"
-msgstr "Filter data element groups"
-
-msgid "Filter data elements"
-msgstr "Filter data elements"
-
-msgid "Filter legend sets"
-msgstr "Filter legend sets"
+msgid "Could not validate expression"
+msgstr "Could not validate expression"
 
 msgid "Loading..."
 msgstr "Loading..."
@@ -252,9 +258,6 @@ msgstr "Refresh list"
 
 msgid "Add new"
 msgstr "Add new"
-
-msgid "Option set"
-msgstr "Option set"
 
 msgid "Something went wrong"
 msgstr "Something went wrong"
@@ -390,6 +393,9 @@ msgstr "Include user sharing settings"
 
 msgid "Clear all filters"
 msgstr "Clear all filters"
+
+msgid "Category combo"
+msgstr "Category combo"
 
 msgid "Category"
 msgstr "Category"
@@ -552,6 +558,9 @@ msgstr "Edit and view"
 
 msgid "Search for a user or group"
 msgstr "Search for a user or group"
+
+msgid "Save"
+msgstr "Save"
 
 msgid "Categories"
 msgstr "Categories"
@@ -717,6 +726,9 @@ msgstr "Constants"
 
 msgid "Attribute"
 msgstr "Attribute"
+
+msgid "Option set"
+msgstr "Option set"
 
 msgid "Option sets"
 msgstr "Option sets"
@@ -1402,8 +1414,17 @@ msgstr ""
 "What should happen to the source category options after the merge is "
 "complete?"
 
+msgid "Available data element groups"
+msgstr "Available data element groups"
+
 msgid "Selected data element groups"
 msgstr "Selected data element groups"
+
+msgid "Filter available data element groups"
+msgstr "Filter available data element groups"
+
+msgid "Filter selected element groups"
+msgstr "Filter selected element groups"
 
 msgid "Set up the information for this data element group set."
 msgstr "Set up the information for this data element group set."
@@ -1411,14 +1432,26 @@ msgstr "Set up the information for this data element group set."
 msgid "Explain the purpose of this data element group set."
 msgstr "Explain the purpose of this data element group set."
 
+msgid "Available data elements"
+msgstr "Available data elements"
+
 msgid "Selected data elements"
 msgstr "Selected data elements"
+
+msgid "Filter available data elements"
+msgstr "Filter available data elements"
+
+msgid "Filter selected elements"
+msgstr "Filter selected elements"
 
 msgid "Set up the information for this data element group."
 msgstr "Set up the information for this data element group."
 
 msgid "Explain the purpose of this data element group."
 msgstr "Explain the purpose of this data element group."
+
+msgid "Aggregation level(s)"
+msgstr "Aggregation level(s)"
 
 msgid "The default way to aggregate this data element in analytics."
 msgstr "The default way to aggregate this data element in analytics."
@@ -1454,8 +1487,17 @@ msgstr "Use a pattern to limit what information can be entered."
 msgid "e.g. 999-000-0000"
 msgstr "e.g. 999-000-0000"
 
+msgid "Available legends"
+msgstr "Available legends"
+
 msgid "Selected legends"
 msgstr "Selected legends"
+
+msgid "Filter available legends"
+msgstr "Filter available legends"
+
+msgid "Filter selected legends"
+msgstr "Filter selected legends"
 
 msgid "Option set comment"
 msgstr "Option set comment"
@@ -1676,17 +1718,11 @@ msgstr ""
 msgid "Choose legends that will do something (?????????)"
 msgstr "Choose legends that will do something (?????????)"
 
-msgid "Available legends"
-msgstr "Available legends"
-
 msgid "Search available legends"
 msgstr "Search available legends"
 
 msgid "Search selected legends"
 msgstr "Search selected legends"
-
-msgid "Available data elements"
-msgstr "Available data elements"
 
 msgid "Compulsory data elements"
 msgstr "Compulsory data elements"
@@ -2043,15 +2079,6 @@ msgstr "The indicator merge operation is complete."
 msgid "All selected indicators were merged successfully."
 msgstr "All selected indicators were merged successfully."
 
-msgid "Numerator is required"
-msgstr "Numerator is required"
-
-msgid "Denominator is required"
-msgstr "Denominator is required"
-
-msgid "Select option"
-msgstr "Select option"
-
 msgid "Denominator description"
 msgstr "Denominator description"
 
@@ -2064,14 +2091,23 @@ msgstr "Set up the basic information for this indicator."
 msgid "Explain the purpose of this indicator."
 msgstr "Explain the purpose of this indicator."
 
-msgid "No value"
-msgstr "No value"
+msgid "Indicator expressions"
+msgstr "Indicator expressions"
 
-msgid "Select number of decimals"
-msgstr "Select number of decimals"
+msgid "Configure the expressions and type of indicator."
+msgstr "Configure the expressions and type of indicator."
+
+msgid "Indicator options"
+msgstr "Indicator options"
+
+msgid "Configure how this indicator is calculated and displayed."
+msgstr "Configure how this indicator is calculated and displayed."
 
 msgid "Annualized"
 msgstr "Annualized"
+
+msgid "Select number of decimals"
+msgstr "Select number of decimals"
 
 msgid "Aggregate export category option combo"
 msgstr "Aggregate export category option combo"
@@ -2079,17 +2115,8 @@ msgstr "Aggregate export category option combo"
 msgid "Aggregate export attribute option combo"
 msgstr "Aggregate export attribute option combo"
 
-msgid "Numerator"
-msgstr "Numerator"
-
-msgid "Define and describe the numerator formula."
-msgstr "Define and describe the numerator formula."
-
-msgid "Denominator"
-msgstr "Denominator"
-
-msgid "Define and describe the denominator formula."
-msgstr "Define and describe the denominator formula."
+msgid "Set up the program indicator legends."
+msgstr "Set up the program indicator legends."
 
 msgid "Numerator description"
 msgstr "Numerator description"
@@ -2097,11 +2124,32 @@ msgstr "Numerator description"
 msgid "Edit numerator"
 msgstr "Edit numerator"
 
-msgid "Invalid expression"
-msgstr "Invalid expression"
+msgid "Indicators Form"
+msgstr "Indicators Form"
 
-msgid "Could not validate expression"
-msgstr "Could not validate expression"
+msgid "Expressions"
+msgstr "Expressions"
+
+msgid "Indicator yype"
+msgstr "Indicator yype"
+
+msgid "Numerator"
+msgstr "Numerator"
+
+msgid "Denominator"
+msgstr "Denominator"
+
+msgid "Options"
+msgstr "Options"
+
+msgid "Legend sets"
+msgstr "Legend sets"
+
+msgid "Numerator is required"
+msgstr "Numerator is required"
+
+msgid "Denominator is required"
+msgstr "Denominator is required"
 
 msgid ""
 "The merge operation will merge the source indicators into\n"
@@ -2162,9 +2210,6 @@ msgstr "Filter selected organisation unit groups"
 
 msgid "Set up the basic information for this organisational unit group."
 msgstr "Set up the basic information for this organisational unit group."
-
-msgid "Save"
-msgstr "Save"
 
 msgid "Error saving organisation unit levels"
 msgstr "Error saving organisation unit levels"
@@ -2716,17 +2761,5 @@ msgstr "Set up advanced properties for this program indicator."
 msgid "Show program indicators in data entry forms"
 msgstr "Show program indicators in data entry forms"
 
-msgid "Set up the program indicator legends."
-msgstr "Set up the program indicator legends."
-
-msgid "Filter available legends"
-msgstr "Filter available legends"
-
-msgid "Filter selected legends"
-msgstr "Filter selected legends"
-
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
-
-msgid "Legend sets"
-msgstr "Legend sets"
