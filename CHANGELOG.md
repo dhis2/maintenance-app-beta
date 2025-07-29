@@ -1,3 +1,10 @@
+## [0.55.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.55.0...v0.55.1) (2025-07-29)
+
+
+### Bug Fixes
+
+* spelling ([#599](https://github.com/dhis2/maintenance-app-beta/issues/599)) ([59d300f](https://github.com/dhis2/maintenance-app-beta/commit/59d300f4d8a5bdfe0ac2f11aec67daaf657fd104))
+
 # [0.55.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.54.0...v0.55.0) (2025-07-28)
 
 
