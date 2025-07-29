@@ -1,3 +1,15 @@
+# [0.56.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.55.1...v0.56.0) (2025-07-29)
+
+
+### Bug Fixes
+
+* **list:** miscellaneous list fixes ([#586](https://github.com/dhis2/maintenance-app-beta/issues/586)) [skip release] ([4f3c7de](https://github.com/dhis2/maintenance-app-beta/commit/4f3c7deafb36b11c7112a9b32fd2dc60a39ede4a))
+
+
+### Features
+
+* **dataset:** section forms ([#562](https://github.com/dhis2/maintenance-app-beta/issues/562)) ([474689e](https://github.com/dhis2/maintenance-app-beta/commit/474689ef306380d1180ae6a2fd9a375c6772131f))
+
 ## [0.55.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.55.0...v0.55.1) (2025-07-29)
 
 
