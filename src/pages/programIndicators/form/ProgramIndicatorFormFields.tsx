@@ -2,7 +2,7 @@ import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF, InputFieldFF, SingleSelectFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { Field as FieldRFF, Field, useField } from 'react-final-form'
+import { Field as FieldRFF, useField } from 'react-final-form'
 import {
     CustomAttributesSection,
     DefaultIdentifiableFields,
@@ -208,7 +208,7 @@ export const ProgramIndicatorsFormFields = () => {
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <Field
+                    <FieldRFF
                         inputWidth="400px"
                         name="displayInForm"
                         type="checkbox"
