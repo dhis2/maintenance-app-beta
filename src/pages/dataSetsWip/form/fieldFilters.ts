@@ -1,4 +1,3 @@
-// import { DataSetFormValues } from './dataSetFormSchema';
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     DEFAULT_FIELD_FILTERS,

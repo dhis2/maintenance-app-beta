@@ -39,14 +39,12 @@
 }
 
 .sectionName {
-    /* font-size: 16px; */
     line-height: 24px;
     font-weight: 500;
     color: var(--colors-grey800);
 }
 
 .sectionDescription {
-    /* font-size: 14px; */
     line-height: 20px;
     color: var(--colors-grey600);
 }

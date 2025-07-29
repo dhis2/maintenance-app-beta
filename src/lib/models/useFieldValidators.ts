@@ -1,9 +1,4 @@
-import {
-    createMaxNumber,
-    createMinNumber,
-    Required,
-    Validator,
-} from '@dhis2/ui'
+import { createMaxNumber, createMinNumber, Validator } from '@dhis2/ui'
 import { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { SchemaFieldProperty, SchemaSection } from '../../types'

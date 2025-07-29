@@ -47,10 +47,12 @@ export const dataSetFormSchema = identifiable
                 })
             )
             .default([]),
-        dataEntryForm: identifiable.extend({
-            htmlCode: z.string().optional(),
-            format: z.number().int().optional(),
-        }),
+        dataEntryForm: identifiable
+            .extend({
+                htmlCode: z.string().optional(),
+                format: z.number().int().optional(),
+            })
+            .optional(),
         categoryCombo: z
             .object({ id: z.string(), displayName: z.string() })
             .default({ ...DEFAULT_CATEGORY_COMBO }),
