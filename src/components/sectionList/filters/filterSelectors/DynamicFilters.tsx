@@ -1,6 +1,7 @@
 import React from 'react'
 import { ConfigurableFilterKey } from '../../../../lib'
 import { useFilterKeys } from '../useFilterKeys'
+import { IndicatorFilter } from './IndicatorFilter'
 import {
     AggregationTypeFilter,
     CategoryComboFilter,
@@ -8,7 +9,7 @@ import {
     CategoryOptionFilter,
     CategoryOptionGroupFilter,
     DataDimensionTypeFilter,
-    IndicatorFilter,
+    IndicatorTypeFilter,
     IndicatorGroupFilter,
     IndicatorGroupSetFilter,
     DomainTypeSelectionFilter,
@@ -23,6 +24,8 @@ import {
     CompulsoryFilter,
     DataDimensionFilter,
     ProgramFilter,
+    ProgramIndicatorFilter,
+    ProgramIndicatorGroupFilter,
 } from '.'
 
 type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
@@ -43,10 +46,13 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
     domainType: DomainTypeSelectionFilter,
     formType: FormTypeFilter,
     ignoreApproval: IgnoreApprovalFilter,
+    indicator: IndicatorFilter,
     indicatorGroup: IndicatorGroupFilter,
     indicatorGroupSet: IndicatorGroupSetFilter,
-    indicatorType: IndicatorFilter,
+    indicatorType: IndicatorTypeFilter,
     program: ProgramFilter,
+    programIndicator: ProgramIndicatorFilter,
+    programIndicatorGroup: ProgramIndicatorGroupFilter,
     publicAccess: PublicAccessFilter,
     valueType: ValueTypeSelectionFilter,
 }
