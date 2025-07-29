@@ -1,1 +1,0 @@
-export { DataElementGroupsTransfer } from './DataElementGroupsTransfer'

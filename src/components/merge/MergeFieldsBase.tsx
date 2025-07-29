@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { Field, IconArrowRight24 } from '@dhis2/ui'
 import React from 'react'
 import { useField } from 'react-final-form'
@@ -24,9 +25,9 @@ export const BaseSourcesField = (props: BaseSourceFieldProps) => {
     return (
         <ModelMultiSelectFormField
             name="sources"
-            label="Sources"
+            label={i18n.t('Sources')}
             maxHeight="150px"
-            placeholder={props.placeholder || 'Select models to merge'}
+            placeholder={props.placeholder || i18n.t('Select models to merge')}
             // use select to filter out the target from available sources
             transform={(availableSources) =>
                 availableSources.filter((s) => s.id !== targetValue?.id)
@@ -62,11 +63,15 @@ export const BaseTargetField = ({
                     (model) => !sourcesValues.some((s) => s.id === model.id)
                 )
             }
-            label={label || 'Target'}
-            placeholder={placeholder || 'Select the model to merge into'}
+            label={label || i18n.t('Target')}
+            placeholder={
+                placeholder || i18n.t('Select the model to merge into')
+            }
             noMatchWithoutFilterText={
                 noMatchWithoutFilterText ??
-                'No potential targets available. Remove an item from sources.'
+                i18n.t(
+                    'No potential targets available. Remove an item from sources.'
+                )
             }
         />
     )

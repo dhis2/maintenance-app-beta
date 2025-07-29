@@ -12,27 +12,27 @@ import { categoryOptionComboListSchema } from '../pages/categoryOptionCombos/for
 import { categoryOptionGroupListSchema } from '../pages/categoryOptionGroups/form/categoryOptionGroupSchema'
 import { categoryOptionGroupSetListSchema } from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
 import { categoryOptionListSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
-import { dataElementGroupSchema } from '../pages/dataElementGroups/form'
+import { dataElementGroupListSchema } from '../pages/dataElementGroups/form/dataElementGroupSchema'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
-import { dataElementSchema } from '../pages/dataElements/form'
-import { DataSetNotificationTemplateListSchema } from '../pages/dataSetNotificationTemplates/form/DataSetNotificationTemplateSchema'
+import { dataElementListSchema } from '../pages/dataElements/form/dataElementSchema'
+import { dataSetNotificationTemplateListSchema } from '../pages/dataSetNotificationTemplates/form/dataSetNotificationTemplateSchema'
 import { dataSetListSchema } from '../pages/dataSetsWip/form/dataSetFormSchema'
 import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicatorGroupSchema'
 import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
-import { IndicatorSchema } from '../pages/indicators/form/IndicatorSchema'
-import { IndicatorTypeListSchema } from '../pages/indicatorTypes/form/IndicatorTypesSchema'
+import { indicatorListSchema } from '../pages/indicators/form/indicatorSchema'
+import { indicatorTypeListSchema } from '../pages/indicatorTypes/form/indicatorTypesSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
-import {
-    ProgramIndicatorGroupFormSchema,
-    ProgramIndicatorGroupListSchema,
-} from '../pages/programIndicatorGroups/form'
-import { ProgramIndicatorsListSchema } from '../pages/programIndicators/ProgramIndicatorsSchema'
+import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
+import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
 import {
     CategoryMapping,
+    DataElement,
     OptionMapping,
     OrganisationUnit,
+    Program,
+    ProgramTrackedEntityAttribute,
 } from '../types/generated'
 
 const { withDefaultListColumns } = modelFormSchemas
@@ -40,7 +40,7 @@ const { withDefaultListColumns } = modelFormSchemas
 export const randomDhis2Id = () =>
     faker.helpers.fromRegExp(/[a-zA-Z]{1}[a-zA-Z0-9]{10}/)
 
-function randomValueIn<T>(list: T[]) {
+export function randomValueIn<T>(list: T[]) {
     return list[faker.number.int({ min: 0, max: list.length - 1 })]
 }
 
@@ -63,8 +63,7 @@ const mockeryMapper = (keyName: string) => {
     return undefined
 }
 
-const { identifiable, referenceCollection, withAttributeValues } =
-    modelFormSchemas
+const { withAttributeValues } = modelFormSchemas
 
 export const testAccess = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(AccessSchema, { mockeryMapper }),
@@ -82,12 +81,12 @@ export const testUserGroup = (overwrites: Record<any, any> = {}) => ({
 })
 
 export const testIndicatorType = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(IndicatorTypeListSchema, { mockeryMapper }),
+    ...generateMock(indicatorTypeListSchema, { mockeryMapper }),
     ...overwrites,
 })
 
 export const testIndicator = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(IndicatorSchema, {
+    ...generateMock(indicatorListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -148,7 +147,7 @@ export const testCategoryOptionGroupSet = (
 })
 
 export const testDataElementGroup = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(dataElementGroupSchema.merge(withDefaultListColumns), {
+    ...generateMock(dataElementGroupListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -162,7 +161,7 @@ export const testDataElementGroupSet = (overwrites: Record<any, any> = {}) => ({
 })
 
 export const testDataElement = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(dataElementSchema.merge(withDefaultListColumns), {
+    ...generateMock(dataElementListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -178,7 +177,7 @@ export const testDataSet = (overwrites: Record<any, any> = {}) => ({
 export const testDataSetNotificationTemplate = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(DataSetNotificationTemplateListSchema, {
+    ...generateMock(dataSetNotificationTemplateListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -201,7 +200,7 @@ export const testOrganisationUnitGroupSet = (
 })
 
 export const testProgramIndicator = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(ProgramIndicatorsListSchema, { mockeryMapper }),
+    ...generateMock(programIndicatorsListSchema, { mockeryMapper }),
     ...overwrites,
 })
 
@@ -229,26 +228,53 @@ export const testCategoryMapping = ({
 export const testProgramIndicatorGroup = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(ProgramIndicatorGroupListSchema, { mockeryMapper }),
+    ...generateMock(programIndicatorGroupListSchema, { mockeryMapper }),
     ...overwrites,
 })
 
 export const testFormProgramIndicatorGroup = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(ProgramIndicatorGroupFormSchema, { mockeryMapper }),
+    ...generateMock(programIndicatorGroupListSchema, { mockeryMapper }),
     ...overwrites,
+})
+
+export const testCustomAttribute = ({
+    id = randomDhis2Id(),
+    displayFormName = faker.person.fullName(),
+    mandatory = faker.datatype.boolean(),
+    valueType = 'TEXT',
+} = {}) => ({
+    id,
+    displayFormName,
+    mandatory,
+    valueType,
+})
+
+export const testLegendSet = ({
+    id = randomDhis2Id(),
+    displayName = faker.person.fullName(),
+} = {}) => ({
+    id,
+    displayName,
 })
 
 export const testProgram = ({
     id = randomDhis2Id(),
     name = faker.person.fullName(),
     categoryMappings = [] as CategoryMapping[],
+    programType = randomValueIn([
+        'WITH_REGISTRATION',
+        'WITHOUT_REGISTRATION',
+    ]) as Program.programType,
+    programTrackedEntityAttributes = [] as ProgramTrackedEntityAttribute[],
 } = {}) => ({
     id,
     name,
     displayName: name,
     categoryMappings,
+    programType,
+    programTrackedEntityAttributes,
 })
 
 export const testOrgUnitLevel = ({
@@ -283,3 +309,14 @@ export const testOrgUnit = (overwrites: Record<any, any> | undefined = {}) => {
         ...overwrites,
     } as unknown as Partial<OrganisationUnit>
 }
+
+// TODO: change when schema for optionset is available
+export const testOptionSet = ({
+    id = randomDhis2Id(),
+    displayName = faker.person.fullName(),
+    valueType = randomValueIn(Object.keys(DataElement.valueType)),
+} = {}) => ({
+    id,
+    displayName,
+    valueType,
+})

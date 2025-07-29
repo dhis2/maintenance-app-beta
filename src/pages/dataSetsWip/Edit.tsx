@@ -63,16 +63,18 @@ export const Component = () => {
     )
 
     return (
-        <SectionedFormProvider formDescriptor={DataSetFormDescriptor}>
-            <FormBase
-                valueFormatter={dataSetValueFormatter}
-                onSubmit={useOnSubmitEdit({ section, modelId })}
-                initialValues={initialValues}
-                validate={validate}
-                subscription={{}}
-            >
-                {({ handleSubmit }) => {
-                    return (
+        <FormBase
+            valueFormatter={dataSetValueFormatter}
+            onSubmit={useOnSubmitEdit({ section, modelId })}
+            initialValues={initialValues}
+            validate={validate}
+            subscription={{}}
+        >
+            {({ handleSubmit }) => {
+                return (
+                    <SectionedFormProvider
+                        formDescriptor={DataSetFormDescriptor}
+                    >
                         <SectionedFormLayout
                             sidebar={<DefaultSectionedFormSidebar />}
                         >
@@ -82,9 +84,9 @@ export const Component = () => {
                             </form>
                             <SectionedFormErrorNotice />
                         </SectionedFormLayout>
-                    )
-                }}
-            </FormBase>
-        </SectionedFormProvider>
+                    </SectionedFormProvider>
+                )
+            }}
+        </FormBase>
     )
 }
