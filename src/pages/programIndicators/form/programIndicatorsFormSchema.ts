@@ -13,7 +13,7 @@ const {
     style,
 } = modelFormSchemas
 
-const ProgramIndicatorsBaseSchema = z.object({
+const programIndicatorsBaseSchema = z.object({
     program: modelReference,
     aggregationType: z.nativeEnum(ProgramIndicator.aggregationType).optional(),
     analyticsType: z
@@ -29,29 +29,27 @@ const ProgramIndicatorsBaseSchema = z.object({
     filter: z.string().optional(),
     orgUnitField: z.string().optional(),
     decimals: z.number().int().lte(5).gte(0).optional(),
+    code: z.string().optional(),
 })
 
-export const ProgramIndicatorsListSchema = ProgramIndicatorsBaseSchema.merge(
-    withDefaultListColumns
-)
+export const programIndicatorsListSchema = programIndicatorsBaseSchema
+    .merge(withDefaultListColumns)
     .merge(withAttributeValues)
     .extend({
-        program: modelReference,
         displayShortName: z.string(),
         displayDescription: z.string().optional(),
         displayFormName: z.string().optional(),
         user: UserSchema,
         favorite: z.boolean(),
-        code: z.string().optional(),
+        name: z.string(),
+        shortName: z.string(),
     })
 
-export const programIndicatorFormSchema = ProgramIndicatorsBaseSchema.merge(
-    identifiable
-)
+export const programIndicatorFormSchema = programIndicatorsBaseSchema
+    .merge(identifiable)
     .merge(withAttributeValues)
     .extend({
         shortName: z.string().trim(),
-        code: z.string().trim().optional(),
         style: style.optional(),
         orgUnitField: z.string().optional(),
         analyticsPeriodBoundaries: z

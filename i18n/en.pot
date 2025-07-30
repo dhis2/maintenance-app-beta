@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-17T07:18:23.719Z\n"
-"PO-Revision-Date: 2025-07-17T07:18:23.719Z\n"
+"POT-Creation-Date: 2025-07-22T11:35:26.076Z\n"
+"PO-Revision-Date: 2025-07-22T11:35:26.077Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1412,22 +1412,6 @@ msgstr ""
 "What should happen to the source category options after the merge is "
 "complete?"
 
-msgid "Keep {{ count }} source category options"
-msgid_plural "Keep {{ count }} source category options"
-msgstr[0] "Keep {{ count }} source category options"
-msgstr[1] "Keep {{ count }} source category options"
-
-msgid "Delete {{ count }} source category options"
-msgid_plural "Delete {{ count }} source category options"
-msgstr[0] "Delete {{ count }} source category options"
-msgstr[1] "Delete {{ count }} source category options"
-
-msgid "Custom attributes"
-msgstr "Custom attributes"
-
-msgid "Create data element group"
-msgstr "Create data element group"
-
 msgid "Selected data element groups"
 msgstr "Selected data element groups"
 
@@ -1445,9 +1429,6 @@ msgstr "Set up the information for this data element group."
 
 msgid "Explain the purpose of this data element group."
 msgstr "Explain the purpose of this data element group."
-
-msgid "Create data element"
-msgstr "Create data element"
 
 msgid "The default way to aggregate this data element in analytics."
 msgstr "The default way to aggregate this data element in analytics."
@@ -2082,6 +2063,66 @@ msgstr "The indicator merge operation is complete."
 msgid "All selected indicators were merged successfully."
 msgstr "All selected indicators were merged successfully."
 
+msgid "Numerator is required"
+msgstr "Numerator is required"
+
+msgid "Denominator is required"
+msgstr "Denominator is required"
+
+msgid "Select option"
+msgstr "Select option"
+
+msgid "Denominator description"
+msgstr "Denominator description"
+
+msgid "Edit denominator"
+msgstr "Edit denominator"
+
+msgid "Set up the basic information for this indicator."
+msgstr "Set up the basic information for this indicator."
+
+msgid "Explain the purpose of this indicator."
+msgstr "Explain the purpose of this indicator."
+
+msgid "No value"
+msgstr "No value"
+
+msgid "Select number of decimals"
+msgstr "Select number of decimals"
+
+msgid "Annualized"
+msgstr "Annualized"
+
+msgid "Aggregate export category option combo"
+msgstr "Aggregate export category option combo"
+
+msgid "Aggregate export attribute option combo"
+msgstr "Aggregate export attribute option combo"
+
+msgid "Numerator"
+msgstr "Numerator"
+
+msgid "Define and describe the numerator formula."
+msgstr "Define and describe the numerator formula."
+
+msgid "Denominator"
+msgstr "Denominator"
+
+msgid "Define and describe the denominator formula."
+msgstr "Define and describe the denominator formula."
+
+msgid "Numerator description"
+msgstr "Numerator description"
+
+msgid "Edit numerator"
+msgstr "Edit numerator"
+
+msgid "Invalid expression"
+msgstr "Invalid expression"
+
+msgid "Could not validate expression"
+msgstr "Could not validate expression"
+
 msgid ""
 "The merge operation will merge the source indicators into\n"
 "                the target indicator. One or many source indicators\n"
@@ -2461,9 +2502,6 @@ msgstr "Restore mapping"
 
 msgid "Category mapping: "
 msgstr "Category mapping: "
-
-msgid "Invalid expression"
-msgstr "Invalid expression"
 
 msgid "No new categories to add"
 msgstr "No new categories to add"

@@ -24,20 +24,22 @@ export function checkMinValueFromProperty(
 export function useValidator({
     schemaSection,
     property,
+    modelId,
 }: {
     schemaSection: SchemaSection
     property: string
+    modelId?: string
 }) {
     const schema = useSchema(schemaSection.name)
     const propertyDetails = schema.properties[property]
 
     const validators = useMemo(() => [] as Validator[], [])
     const params = useParams()
-    const modelId = params.id
+    const resolvedModelId = modelId ?? params.id
     const checkIsValueTaken = useIsFieldValueUnique({
         model: schemaSection.namePlural,
         field: property,
-        id: modelId,
+        id: resolvedModelId,
     }) as Validator
 
     if (propertyDetails.propertyType !== 'INTEGER' && propertyDetails.length) {

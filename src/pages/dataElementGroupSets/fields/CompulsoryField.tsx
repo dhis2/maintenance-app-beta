@@ -7,7 +7,7 @@ export function CompulsoryField() {
     return (
         <FieldRFF
             component={CheckboxFieldFF}
-            dataTest="dataelementsformfields-compulsory"
+            dataTest="formfields-compulsory"
             name="compulsory"
             label={i18n.t('Compulsory')}
             type="checkbox"

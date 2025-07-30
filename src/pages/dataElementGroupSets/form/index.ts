@@ -1,3 +1,6 @@
 export { DataElementGroupSetFormFields } from './DataElementGroupSetFormFields'
-export { dataElementGroupSetSchema } from './dataElementGroupSetSchema'
-export type { FormValues } from './types'
+export {
+    dataElementGroupSetSchema,
+    initialValues,
+    validate,
+} from './dataElementGroupSetSchema'
