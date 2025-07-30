@@ -4,6 +4,7 @@ import { CategoryCardGroup } from './Categories'
 import { DataElementsCardGroup } from './DataElements'
 import { DataSetsCardGroup } from './DataSets'
 import { OverviewGroup } from './group'
+import { IndicatorsCardGroup } from './Indicators'
 import { OrganisationUnitsCardGroup } from './OrganisationUnits'
 
 export const AllOverview = () => {
@@ -13,6 +14,7 @@ export const AllOverview = () => {
             <CategoryCardGroup showTitle={true} />
             <DataSetsCardGroup showTitle={true} />
             <OrganisationUnitsCardGroup showTitle={true} />
+            <IndicatorsCardGroup showTitle={true} />
         </OverviewGroup>
     )
 }

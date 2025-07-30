@@ -4,7 +4,7 @@ import React from 'react'
 import { useField } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { required } from '../../../lib'
+import { getConstantTranslation, required } from '../../../lib'
 import { DeliveryChannelsField } from './DeliveryChannelsField'
 
 export const RecipientSection = () => {
@@ -22,9 +22,9 @@ export const RecipientSection = () => {
         recipientInput.value === 'ORGANISATION_UNIT_CONTACT'
 
     const recipientOptions = [
-        { label: i18n.t('User Group'), value: 'USER_GROUP' },
+        { label: getConstantTranslation('USER_GROUP'), value: 'USER_GROUP' },
         {
-            label: i18n.t('Organisation Unit Contact'),
+            label: getConstantTranslation('ORGANISATION_UNIT_CONTACT'),
             value: 'ORGANISATION_UNIT_CONTACT',
         },
     ]

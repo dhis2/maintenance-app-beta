@@ -30,6 +30,11 @@ export const DataSetsCardGroup = ({ showTitle }: { showTitle?: boolean }) => {
                     'Create, update, view and delete data sets, specify the related data elements, period type organisation units, sharing settings and workflow approval here.'
                 )}
             </SummaryCard>
+            <SummaryCard section={SECTIONS_MAP.dataSetNotificationTemplate}>
+                {i18n.t(
+                    'Create, update, view and delete data set notification templates.'
+                )}
+            </SummaryCard>
         </SummaryCardGroup>
     )
 }
