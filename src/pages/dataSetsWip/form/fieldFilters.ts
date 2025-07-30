@@ -4,17 +4,19 @@ import {
 } from '../../../lib'
 import { DataSet, PickWithFieldFilters } from '../../../types/generated'
 
-const fieldFilters = [
+export const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'categoryCombo[id,displayName]',
     'dataElementDecoration',
     'dataEntryForm[id]',
     'dataInputPeriods',
-    'dataSetElements[id,dataElement[id,displayName]]',
+    'dataSetElements[dataElement[id,displayName,categoryCombo[id,displayName]],categoryCombo[id,displayName]]',
+    //'dataSetElements[id,dataElement[id,displayName]]',
     'dimensionItem',
     'displayOptions',
     'fieldCombinationRequired',
+    'formType',
     'indicators[id,displayName]',
     'name',
     'organisationUnits[id,displayName]',
@@ -22,10 +24,18 @@ const fieldFilters = [
     'renderAsTabs',
     'renderHorizontally',
     'sections',
-    'style',
+    'style[color,icon]',
     'skipOffline',
     'timelyDays',
     'validCommpleteOnly',
+    'organisationUnits[id,displayName,path]',
+    'compulsoryDataElementOperands[dataElement[id,displayName],id]',
+    'openFuturePeriods',
+    'expiryDays',
+    'openPeriodsAfterCoEndDate',
+    'formType',
+    'displayOptions',
+    'legendSets[id,displayName]',
 ] as const
 
 // DisplayOptions are handled by client only, and thus dont have a generated type

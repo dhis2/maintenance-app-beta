@@ -54,6 +54,7 @@ const DESCRIPTORS = {
         path: 'displayShortName',
         label: i18n.t('Short name'),
     },
+    formName: { label: i18n.t('Form name'), path: 'displayFormName' },
 } satisfies Record<string, Descriptor>
 
 // This is the default views, and can be overriden per section in modelListViewsConfig below
@@ -132,14 +133,20 @@ export const modelListViewsConfig = {
         columns: {
             default: [
                 DESCRIPTORS.name,
+
                 { label: i18n.t('Form type'), path: 'formType' },
                 { label: i18n.t('Period type'), path: 'periodType' },
                 'lastUpdated',
                 DESCRIPTORS.publicAccess,
             ],
-            available: [DESCRIPTORS.shortName],
+            available: [
+                DESCRIPTORS.shortName,
+                DESCRIPTORS.formName,
+                'categoryCombo',
+            ],
         },
         filters: {
+            available: ['categoryCombo', 'indicator'],
             default: ['formType'],
         },
     },
@@ -175,13 +182,13 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            default: [],
+            default: ['dataSet'],
         },
     },
     organisationUnit: {
         columns: {
-            available: [DESCRIPTORS.shortName],
-            default: [DESCRIPTORS.name, 'id', 'code', 'lastUpdated'],
+            available: [DESCRIPTORS.shortName, 'id'],
+            default: [DESCRIPTORS.name, 'code', 'lastUpdated'],
         },
         filters: {
             default: [],
@@ -211,8 +218,8 @@ export const modelListViewsConfig = {
     },
     organisationUnitGroup: {
         columns: {
-            available: [DESCRIPTORS.shortName],
-            default: [DESCRIPTORS.name, 'id', 'code', 'lastUpdated'],
+            available: [DESCRIPTORS.shortName, 'id'],
+            default: [DESCRIPTORS.name, 'code', 'lastUpdated'],
         },
         filters: {
             default: [],
@@ -221,8 +228,8 @@ export const modelListViewsConfig = {
     },
     organisationUnitGroupSet: {
         columns: {
-            available: [DESCRIPTORS.shortName],
-            default: [DESCRIPTORS.name, 'id', 'code', 'lastUpdated'],
+            available: [DESCRIPTORS.shortName, 'id'],
+            default: [DESCRIPTORS.name, 'code', 'lastUpdated'],
         },
         filters: {
             default: [],
@@ -274,7 +281,7 @@ export const modelListViewsConfig = {
                 DESCRIPTORS.publicAccess,
                 'lastUpdated',
             ],
-            available: [DESCRIPTORS.shortName],
+            available: [DESCRIPTORS.shortName, 'indicatorGroup'],
         },
         filters: {
             default: ['indicatorType'],
@@ -314,7 +321,8 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            default: [],
+            default: ['indicator'],
+            available: ['indicatorGroupSet'],
         },
     },
     indicatorGroupSet: {
@@ -332,7 +340,7 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            default: [],
+            default: ['indicatorGroup'],
         },
     },
     categoryOptionGroupSet: {
@@ -399,7 +407,7 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            default: [],
+            default: ['programIndicator'],
             available: [],
             overrideDefaultAvailable: true,
         },
@@ -415,9 +423,10 @@ export const modelListViewsConfig = {
                 'expression',
                 'displayInForm',
                 'analyticsType',
+                'categoryCombo',
                 { label: i18n.t('Description'), path: 'displayDescription' },
-                { label: i18n.t('Form name'), path: 'displayFormName' },
-                { label: i18n.t('Short name'), path: 'displayShortName' },
+                DESCRIPTORS.formName,
+                DESCRIPTORS.shortName,
                 { label: i18n.t('Owner'), path: 'user.displayName' },
                 { label: i18n.t('Decimals in data output'), path: 'decimals' },
                 'favorite',
@@ -429,7 +438,8 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            default: ['program'],
+            default: ['program', 'programIndicatorGroup'],
+            available: ['categoryCombo'],
         },
     },
 } satisfies SectionListViewConfig<SectionName>

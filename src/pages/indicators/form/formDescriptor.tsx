@@ -42,7 +42,7 @@ export const IndicatorFormDescriptor = {
             fields: [
                 {
                     name: 'indicatorType',
-                    label: i18n.t('Indicator yype'),
+                    label: i18n.t('Indicator type'),
                 },
                 {
                     name: 'numeratorDescription',

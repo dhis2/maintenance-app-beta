@@ -1,3 +1,29 @@
+## [0.56.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.56.0...v0.56.1) (2025-07-29)
+
+
+### Bug Fixes
+
+* **overview:** add overview for dataSetNotifications and Indicators ([#589](https://github.com/dhis2/maintenance-app-beta/issues/589)) ([81b35c0](https://github.com/dhis2/maintenance-app-beta/commit/81b35c007d6a0ccbdcf8f17fdd959bf372cbbe65))
+
+# [0.56.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.55.1...v0.56.0) (2025-07-29)
+
+
+### Bug Fixes
+
+* **list:** miscellaneous list fixes ([#586](https://github.com/dhis2/maintenance-app-beta/issues/586)) [skip release] ([4f3c7de](https://github.com/dhis2/maintenance-app-beta/commit/4f3c7deafb36b11c7112a9b32fd2dc60a39ede4a))
+
+
+### Features
+
+* **dataset:** section forms ([#562](https://github.com/dhis2/maintenance-app-beta/issues/562)) ([474689e](https://github.com/dhis2/maintenance-app-beta/commit/474689ef306380d1180ae6a2fd9a375c6772131f))
+
+## [0.55.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.55.0...v0.55.1) (2025-07-29)
+
+
+### Bug Fixes
+
+* spelling ([#599](https://github.com/dhis2/maintenance-app-beta/issues/599)) ([59d300f](https://github.com/dhis2/maintenance-app-beta/commit/59d300f4d8a5bdfe0ac2f11aec67daaf657fd104))
+
 # [0.55.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.54.0...v0.55.0) (2025-07-28)
 
 

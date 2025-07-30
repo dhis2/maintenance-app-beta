@@ -1,4 +1,5 @@
 .horizontalField > div {
     display: flex;
     gap: var(--spacers-dp16);
+    height: 100%;
 }

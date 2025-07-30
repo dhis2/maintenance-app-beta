@@ -48,7 +48,7 @@ export function PeriodTypeSelect({
             })
         }
         return options
-    }, [data])
+    }, [data, noValueOption])
 
     return (
         <SearchableSingleSelect
