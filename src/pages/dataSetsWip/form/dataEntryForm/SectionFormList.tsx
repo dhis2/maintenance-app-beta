@@ -10,11 +10,11 @@ import {
     DrawerPortal,
 } from '../../../../components'
 import { DisplayableModel } from '../../../../types/models'
-import { DataSetFormValues } from '../dataSetFormSchema'
+import { DataSetValues } from '../../Edit'
 import { EditOrNewDataSetSectionForm } from './sectionForm/DataSetSectionForm'
 import css from './SectionFormList.module.css'
 
-type Section = DataSetFormValues['sections'][number]
+type Section = DataSetValues['sections'][number]
 
 export const SectionFormSectionsList = () => {
     const [sectionFormOpen, setSectionFormOpen] = React.useState<
@@ -23,6 +23,20 @@ export const SectionFormSectionsList = () => {
     // use null as open, but new model
     const isSectionFormOpen = !!sectionFormOpen || sectionFormOpen === null
     const sectionFieldArray = useFieldArray<Section>('sections').fields
+
+    const handleDeletedSection = (index: number) => {
+        sectionFieldArray.update(index, {
+            ...sectionFieldArray.value[index],
+            deleted: true,
+        })
+    }
+
+    const handleCancelDeletedSection = (index: number) => {
+        sectionFieldArray.update(index, {
+            ...sectionFieldArray.value[index],
+            deleted: false,
+        })
+    }
 
     const handleSubmittedSection: React.ComponentProps<
         typeof EditOrNewDataSetSectionForm
@@ -64,13 +78,40 @@ export const SectionFormSectionsList = () => {
                 </p>
             </div>
             <div className={css.sectionItems}>
-                {sectionFieldArray.value.map((section, i) => (
-                    <SectionItem
-                        key={section.id}
-                        section={section}
-                        onClick={() => setSectionFormOpen(section)}
-                    />
-                ))}
+                {sectionFieldArray.value.map((section, index) => {
+                    if (section.deleted) {
+                        return (
+                            <div
+                                className={css.sectionCardDeleted}
+                                key={section.id}
+                            >
+                                <div className={css.deletedSectionText}>
+                                    {i18n.t(
+                                        'Section {{sectionName}} will be removed on save',
+                                        { sectionName: section.displayName }
+                                    )}
+                                </div>
+
+                                <Button
+                                    small
+                                    onClick={() =>
+                                        handleCancelDeletedSection(index)
+                                    }
+                                >
+                                    {i18n.t('Restore section')}
+                                </Button>
+                            </div>
+                        )
+                    }
+                    return (
+                        <SectionItem
+                            key={section.id}
+                            section={section}
+                            onClick={() => setSectionFormOpen(section)}
+                            onDelete={() => handleDeletedSection(index)}
+                        />
+                    )
+                })}
             </div>
             <div>
                 <Button
@@ -89,9 +130,11 @@ export const SectionFormSectionsList = () => {
 export const SectionItem = ({
     section,
     onClick,
+    onDelete,
 }: {
     section: Section
     onClick?: () => void
+    onDelete?: () => void
 }) => {
     return (
         <div className={css.sectionItem}>
@@ -125,7 +168,11 @@ export const SectionItem = ({
                         }}
                     />
                     <MoreDropdownDivider />
-                    <MoreDropdownItem label={i18n.t('Delete')} destructive />
+                    <MoreDropdownItem
+                        label={i18n.t('Delete')}
+                        destructive
+                        onClick={onDelete}
+                    />
                 </MoreDropdownButton>
             </div>
         </div>

@@ -1,23 +1,35 @@
-import { useQuery } from '@tanstack/react-query'
+import { useDataEngine } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import {
-    FormBase,
-    SectionedFormLayout,
     DefaultSectionedFormSidebar,
+    FormBase,
     SectionedFormErrorNotice,
+    SectionedFormLayout,
 } from '../../components'
 import { DrawerRoot } from '../../components/drawer/Drawer'
 import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
-import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
+import {
+    createFormError,
+    SectionedFormProvider,
+    SECTIONS_MAP,
+    useOnSubmitEdit,
+} from '../../lib'
+import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { PickWithFieldFilters, DataSet } from '../../types/generated'
+import {
+    PickWithFieldFilters,
+    DataSet,
+    IdentifiableObject,
+} from '../../types/generated'
 import { DataSetFormContents } from './form/DataSetFormContents'
-import { validate, dataSetValueFormatter } from './form/dataSetFormSchema'
+import { validate } from './form/dataSetFormSchema'
 import { DataSetFormDescriptor } from './form/formDescriptor'
+import { dataSetValueFormatter } from './New'
 const section = SECTIONS_MAP.dataSet
-
 const fieldFilters = [
     ':owner',
     'organisationUnits[id,displayName,path]',
@@ -35,7 +47,69 @@ const fieldFilters = [
     'dataEntryForm',
     'sections[id,displayName,description]',
 ] as const
-type DataSetValues = PickWithFieldFilters<DataSet, typeof fieldFilters>
+
+type DataSetValuesFromFilters = PickWithFieldFilters<
+    DataSet,
+    typeof fieldFilters
+>
+export type DataSetValues = Omit<DataSetValuesFromFilters, 'sections'> & {
+    sections: {
+        id: string
+        displayName: string
+        description?: string
+        deleted?: boolean
+    }[]
+}
+
+export const useOnSubmitDataSetsEdit = (modelId: string) => {
+    const submitEdit: EnhancedOnSubmit<DataSetValues> = useOnSubmitEdit({
+        section,
+        modelId,
+    })
+    const dataEngine = useDataEngine()
+    const queryClient = useQueryClient()
+
+    return useMemo<EnhancedOnSubmit<DataSetValues>>(
+        () => async (values, form, options) => {
+            const sectionsToDelete = form
+                .getState()
+                .values.sections.filter((s) => s.deleted)
+
+            const deletionResults = await Promise.allSettled(
+                sectionsToDelete.map((s) =>
+                    dataEngine.mutate({
+                        resource: 'sections',
+                        id: s.id,
+                        type: 'delete',
+                    })
+                )
+            )
+
+            const failures = deletionResults.filter(
+                (deletion) => deletion.status === 'rejected'
+            )
+            if (failures.length > 0) {
+                await queryClient.invalidateQueries({
+                    queryKey: [{ resource: section.namePlural }],
+                })
+                return createFormError({
+                    message: i18n.t(
+                        'There was an deleting sections: {{sectionNames}}',
+                        {
+                            sectionNames: failures
+                                .map((_f, i) => sectionsToDelete[i].displayName)
+                                .join(', '),
+                        }
+                    ),
+                    errors: failures.map((f) => f.reason.message),
+                })
+            }
+
+            submitEdit(values, form, options)
+        },
+        [submitEdit, dataEngine, queryClient]
+    )
+}
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
@@ -64,11 +138,10 @@ export const Component = () => {
             },
         [dataSetValues.data]
     )
-
     return (
         <FormBase
             valueFormatter={dataSetValueFormatter}
-            onSubmit={useOnSubmitEdit({ section, modelId })}
+            onSubmit={useOnSubmitDataSetsEdit(modelId)}
             initialValues={initialValues}
             validate={validate}
             subscription={{}}
