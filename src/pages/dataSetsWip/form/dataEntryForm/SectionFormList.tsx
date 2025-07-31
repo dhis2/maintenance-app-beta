@@ -10,7 +10,7 @@ import {
     DrawerPortal,
 } from '../../../../components'
 import { TranslationDialog } from '../../../../components/sectionList/translation'
-import { BaseListModel, SchemaName, useSchema } from '../../../../lib'
+import { BaseListModel, SchemaName } from '../../../../lib'
 import { DisplayableModel } from '../../../../types/models'
 import { DataSetValues } from '../../Edit'
 import { EditOrNewDataSetSectionForm } from './sectionForm/DataSetSectionForm'

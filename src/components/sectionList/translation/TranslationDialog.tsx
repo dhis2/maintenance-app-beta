@@ -7,7 +7,7 @@ import {
     SingleSelectOption,
 } from '@dhis2/ui'
 import React, { useMemo } from 'react'
-import { BaseListModel, Schema, SchemaName } from '../../../lib'
+import { BaseListModel, SchemaName } from '../../../lib'
 import { Loader } from '../../loading'
 import style from './translation.module.css'
 import { TranslationForm } from './TranslationForm'

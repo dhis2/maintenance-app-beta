@@ -1,7 +1,6 @@
 import { FetchError, useDataEngine } from '@dhis2/app-runtime'
 import { useMutation, UseMutationOptions } from '@tanstack/react-query'
 import { ImportSummary } from '../../types'
-import { parseErrorResponse } from '../errors'
 
 type MutationFnArgs = {
     id: string

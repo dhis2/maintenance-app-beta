@@ -1,5 +1,4 @@
 import i18n from '@dhis2/d2-i18n'
-import { omit } from 'lodash'
 import { z } from 'zod'
 import {
     DEFAULT_CATEGORY_COMBO,
