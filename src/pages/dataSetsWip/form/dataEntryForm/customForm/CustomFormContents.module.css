@@ -51,6 +51,14 @@
     font-size: 16px;
 }
 
+.elementTypeTitleSummary {
+    list-style: none;
+    display: flex;
+    gap: var(--spacers-dp8);
+    align-items: center;
+    font-size: 16px;
+}
+
 .elementTypePrefix {
     font-weight: 700;
 }
@@ -67,7 +75,14 @@
     line-height: 1.5;
 }
 
-.elementsList > li:hover {
+.elementButton {
+    background: none;
+    border: none;
+    padding: 0;
+    display: inline;
+}
+
+.elementButton:hover {
     cursor: pointer;
     text-decoration: underline;
 }

@@ -51,18 +51,20 @@ const ElementList = ({
     return (
         <ul className={styles.elementsList}>
             {elements.map((element) => (
-                <li
-                    key={`element_${element.id}`}
-                    onClick={() => {
-                        insertElement({
-                            type,
-                            id: element.id,
-                            name: element.displayName,
-                            disabled,
-                        })
-                    }}
-                >
-                    {element.displayName}
+                <li key={`element_${element.id}`}>
+                    <button
+                        className={styles.elementButton}
+                        onClick={() => {
+                            insertElement({
+                                type,
+                                id: element.id,
+                                name: element.displayName,
+                                disabled,
+                            })
+                        }}
+                    >
+                        {element.displayName}
+                    </button>
                 </li>
             ))}
         </ul>
@@ -76,8 +78,15 @@ export const CustomFormElementsSelector = ({
     insertElement: ElementSelectorFunction
     previewMode: boolean
 }) => {
-    const [selectedElementType, setSelectedElementType] =
-        useState<string>('dataElement')
+    const [selectedElementType, setSelectedElementType] = useState<string[]>([])
+    const updateElementTypes = (elementType: string) => {
+        setSelectedElementType((prev) => {
+            const filtered = prev.filter((t) => t !== elementType)
+            return prev.includes(elementType)
+                ? filtered
+                : [...filtered, elementType]
+        })
+    }
 
     const { loading, elementTypes } = useGetCustomFormElements()
 
@@ -125,7 +134,7 @@ export const CustomFormElementsSelector = ({
                 />
             </SubsectionSpacer>
             {elementTypes.map((elementType) => {
-                const selected = selectedElementType === elementType.type
+                const selected = selectedElementType.includes(elementType.type)
                 const cleanedFilter = filter
                     .normalize('NFD')
                     .replace(/\p{Diacritic}/gu, '')
@@ -144,36 +153,30 @@ export const CustomFormElementsSelector = ({
                         className={styles.elementSelectorBlock}
                         key={`selector_${elementType.type}`}
                     >
-                        <div
-                            className={styles.elementTypeTitle}
-                            onClick={() => {
-                                setSelectedElementType((prev) =>
-                                    prev === elementType.type
-                                        ? ''
-                                        : elementType.type
-                                )
+                        <details
+                            onToggle={() => {
+                                updateElementTypes(elementType.type)
                             }}
                         >
-                            <span>
+                            <summary className={styles.elementTypeTitleSummary}>
                                 <span
                                     className={styles.elementTypePrefix}
                                 >{`${elementType.name}: `}</span>
                                 <span>{filteredElements.length}</span>
-                            </span>
-                            {selected ? (
-                                <IconChevronUp16 />
-                            ) : (
-                                <IconChevronDown16 />
-                            )}
-                        </div>
-                        {selected && (
+                                <span></span>
+                                {selected ? (
+                                    <IconChevronUp16 />
+                                ) : (
+                                    <IconChevronDown16 />
+                                )}
+                            </summary>
                             <ElementList
                                 insertElement={insertElement}
                                 elements={filteredElements}
                                 type={elementType.type}
                                 disabled={fieldsDisabled}
                             ></ElementList>
-                        )}
+                        </details>
                     </div>
                 )
             })}

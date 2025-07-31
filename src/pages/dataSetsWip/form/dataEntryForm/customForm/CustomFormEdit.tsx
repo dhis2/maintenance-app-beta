@@ -113,7 +113,7 @@ const useUpdateForm = ({
 
 export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
     const textAreaRef = useRef<HTMLTextAreaElement>(null)
-    const [previewMode, togglePreviewMode] = useState<boolean>(false)
+    const [previewMode, setPreviewMode] = useState<boolean>(false)
     const [customFormSaving, setCustomFormSaving] = useState<boolean>(false)
     const { input: formInput } = useField('dataEntryForm')
 
@@ -201,7 +201,7 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
                                     className={styles.formSectionSpacing}
                                     small
                                     onClick={() => {
-                                        togglePreviewMode((prev) => !prev)
+                                        setPreviewMode((prev) => !prev)
                                     }}
                                 >
                                     {previewMode
@@ -221,6 +221,7 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
                                                     textAreaRef.current?.value
                                                 }
                                                 className={styles.iframeStyling}
+                                                title="Preview of custom form"
                                             ></iframe>
                                         )}
                                     </SubsectionSpacer>

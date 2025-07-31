@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-30T08:51:45.173Z\n"
-"PO-Revision-Date: 2025-07-30T08:51:45.173Z\n"
+"POT-Creation-Date: 2025-07-31T13:48:07.415Z\n"
+"PO-Revision-Date: 2025-07-31T13:48:07.415Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1963,6 +1963,48 @@ msgstr "Add section"
 
 msgid "Copy ID"
 msgstr "Copy ID"
+
+msgid "Custom form saved"
+msgstr "Custom form saved"
+
+msgid "Custom form did not save: {{details}}"
+msgstr "Custom form did not save: {{details}}"
+
+msgid "Custom form (preview)"
+msgstr "Custom form (preview)"
+
+msgid "Define a custom form for this data set by editing HTML below."
+msgstr "Define a custom form for this data set by editing HTML below."
+
+msgid "Nothing to preview"
+msgstr "Nothing to preview"
+
+msgid "Save custom form"
+msgstr "Save custom form"
+
+msgid "Saving a custom form does not save other changes to the data set"
+msgstr "Saving a custom form does not save other changes to the data set"
+
+msgid "Custom form could not be deleted:{{details}}"
+msgstr "Custom form could not be deleted:{{details}}"
+
+msgid "A custom form must be added for it to be used for data entry (web)."
+msgstr "A custom form must be added for it to be used for data entry (web)."
+
+msgid "This data set uses a custom form for data entry (web)."
+msgstr "This data set uses a custom form for data entry (web)."
+
+msgid "Delete custom form"
+msgstr "Delete custom form"
+
+msgid "Create custom form"
+msgstr "Create custom form"
+
+msgid "Edit custom form"
+msgstr "Edit custom form"
+
+msgid "Elements cannot be added while previewing the form"
+msgstr "Elements cannot be added while previewing the form"
 
 msgid "Section setup"
 msgstr "Section setup"
