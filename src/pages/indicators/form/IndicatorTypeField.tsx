@@ -14,12 +14,12 @@ export const IndicatorTypeField = () => {
 
     return (
         <EditableFieldWrapper
-            dataTest="formfields-indicatortype"
             onRefresh={() => refresh()}
             onAddNew={() => window.open(newIndicatorTypeLink, '_blank')}
         >
             <div style={{ width: '400px' }}>
                 <ModelSingleSelectFormField
+                    dataTest="formfields-indicatortype"
                     name="indicatorType"
                     label={i18n.t('Indicator type')}
                     validate={required}

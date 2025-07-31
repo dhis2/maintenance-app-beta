@@ -57,6 +57,8 @@ export const IndicatorFormFields = () => {
                         component={InputFieldFF}
                         inputWidth="400px"
                         name="url"
+                        dataTest="formfields-url"
+                        type="url"
                         label={i18n.t('Url')}
                         helpText={i18n.t(
                             'A web link that provides extra information.'
@@ -102,6 +104,7 @@ export const IndicatorFormFields = () => {
                     <FieldRFF
                         name="annualized"
                         type="checkbox"
+                        dataTest="formfields-annualized"
                         component={CheckboxFieldFF}
                         label={i18n.t('Annualized')}
                     />
@@ -110,6 +113,7 @@ export const IndicatorFormFields = () => {
                     <SingleSelectFieldFF
                         input={decimalsInput}
                         meta={decimalsMeta}
+                        dataTest="decimals-field"
                         label={i18n.t('Decimals in data output')}
                         inputWidth="400px"
                         options={[
@@ -125,6 +129,7 @@ export const IndicatorFormFields = () => {
                 <StandardFormField>
                     <FieldRFF<string | undefined>
                         inputWidth="400px"
+                        dataTest="formfields-aggregateExportCategoryOptionCombo"
                         name="aggregateExportCategoryOptionCombo"
                         label={i18n.t('Aggregate export category option combo')}
                         component={InputFieldFF}
@@ -134,6 +139,7 @@ export const IndicatorFormFields = () => {
                 <StandardFormField>
                     <FieldRFF<string | undefined>
                         component={InputFieldFF}
+                        dataTest="formfields-aggregateExportAttributeOptionCombo"
                         name="aggregateExportAttributeOptionCombo"
                         inputWidth="400px"
                         label={i18n.t(
@@ -151,7 +157,7 @@ export const IndicatorFormFields = () => {
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <ModelTransferField
-                        dataTest="legendset-transfer"
+                        dataTest="legendSets-field"
                         name="legendSets"
                         query={{
                             resource: 'legendSets',

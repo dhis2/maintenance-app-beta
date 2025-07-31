@@ -14,6 +14,7 @@ function NumeratorFields() {
                     inputWidth="400px"
                     required
                     name="numeratorDescription"
+                    dataTest="formfields-numeratorDescription"
                     label={i18n.t('Numerator description')}
                 />
             </StandardFormField>
@@ -24,6 +25,7 @@ function NumeratorFields() {
                     label={i18n.t('Edit numerator')}
                     validationResource="indicators/expression/description"
                     required
+                    dataTest="formfields-numerator"
                 />
             </StandardFormField>
         </>
