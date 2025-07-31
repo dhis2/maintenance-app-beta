@@ -102,9 +102,9 @@ export const SCHEMA_SECTIONS = {
     },
     dataSetNotificationTemplate: {
         name: SchemaName.dataSetNotificationTemplate,
-        namePlural: 'dataSetNotifications',
-        title: i18n.t('Data set notification template'),
-        titlePlural: i18n.t('Data set notification templates'),
+        namePlural: 'dataSetNotificationTemplates',
+        title: i18n.t('Data set notification'),
+        titlePlural: i18n.t('Data set notifications'),
         parentSectionKey: 'dataSet',
     },
     indicator: {
@@ -309,6 +309,13 @@ export const SCHEMA_SECTIONS = {
         namePlural: 'sqlViews',
         title: i18n.t('SQL view'),
         titlePlural: i18n.t('SQL views'),
+        parentSectionKey: 'other',
+    },
+    legendSet: {
+        name: SchemaName.legendSet,
+        namePlural: 'legendSets',
+        title: i18n.t('Legend'),
+        titlePlural: i18n.t('Legends'),
         parentSectionKey: 'other',
     },
 } as const satisfies SchemaSectionMap

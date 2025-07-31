@@ -27,7 +27,7 @@ export const ComponentWithProvider = ({
         <Provider
             config={{
                 baseUrl: 'http://dhis2-imaginary-test-server',
-                apiVersion: 41,
+                apiVersion: 42,
             }}
             plugin={false}
             parentAlertsAdd={() => undefined}

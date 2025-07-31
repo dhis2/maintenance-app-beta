@@ -1,13 +1,15 @@
 import React from 'react'
+import { CustomAttributesSection } from '../../../components'
 import { SectionedFormSections } from '../../../components/sectionedForm'
 import {
+    SECTIONS_MAP,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
 import { AdvancedFormContents } from './AdvancedFormContents'
+import { DataEntryFromContents } from './dataEntryForm'
 import { DataFormContents } from './DataFormContents'
 import { DataSetFormDescriptor } from './formDescriptor'
-import { FormFormContents } from './FormFormContents'
 import { OrganisationUnitsFormContents } from './OrganisationUnitsFormContents'
 import { PeriodsContents } from './PeriodsFormContents'
 import { SetupFormContents } from './SetupFormContents'
@@ -26,9 +28,15 @@ export const DataSetFormContents = () => {
                     name={descriptor.getSection('validation').name}
                 />
                 <OrganisationUnitsFormContents name={'organisationUnits'} />
-                <FormFormContents name={descriptor.getSection('form').name} />
+                <DataEntryFromContents
+                    name={descriptor.getSection('form').name}
+                />
                 <AdvancedFormContents
                     name={descriptor.getSection('advanced').name}
+                />
+                <CustomAttributesSection
+                    schemaSection={SECTIONS_MAP.dataSet}
+                    sectionedLayout
                 />
             </SectionedFormSections>
         </>

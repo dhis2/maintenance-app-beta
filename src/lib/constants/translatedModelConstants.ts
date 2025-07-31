@@ -86,6 +86,11 @@ export const FORM_TYPE = {
     SECTION_MULTIORG: i18n.t('Section Multi-org'),
 }
 
+export const ANALYTICS_TYPE = {
+    EVENT: i18n.t('Event'),
+    ENROLLMENT: i18n.t('Enrollment'),
+}
+
 const PERIOD_TYPE = {
     BiMonthly: i18n.t('BiMonthly'),
     BiWeekly: i18n.t('BiWeekly'),
@@ -109,14 +114,33 @@ const PERIOD_TYPE = {
     Yearly: i18n.t('Yearly'),
 }
 
+const SEND_STRATEGY = {
+    COLLECTIVE_SUMMARY: i18n.t('Collective summary'),
+    SINGLE_NOTIFICATION: i18n.t('Single notification'),
+}
+
+const DATA_SET_NOTIFICATION_TRIGGER = {
+    SCHEDULED_DAYS: i18n.t('Scheduled days'),
+    DATA_SET_COMPLETION: i18n.t('Data set completion'),
+}
+
+const NOTIFICATION_RECIPIENT = {
+    ORGANISATION_UNIT_CONTACT: i18n.t('Organisation unit contact'),
+    USER_GROUP: i18n.t('User group'),
+}
+
 const allConstantTranslations: Record<string, string> = {
     ...AGGREGATION_TYPE,
+    ...ANALYTICS_TYPE,
     ...DOMAIN_TYPE,
     ...VALUE_TYPE,
     ...DATA_DIMENSION_TYPE,
     ...GEOMETRY_TYPE,
     ...FORM_TYPE,
     ...PERIOD_TYPE,
+    ...SEND_STRATEGY,
+    ...DATA_SET_NOTIFICATION_TRIGGER,
+    ...NOTIFICATION_RECIPIENT,
 }
 
 export const getConstantTranslation = (constant: string): string => {

@@ -7,3 +7,5 @@ export { Component as Categories } from './Categories'
 export { Component as DataSets } from './DataSets'
 
 export { Component as OrganisationUnits } from './OrganisationUnits'
+
+export { Component as Indicators } from './Indicators'

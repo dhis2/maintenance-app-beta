@@ -45,6 +45,8 @@ export const programIndicatorSchema = z.object({
     name: z.string(),
     displayName: z.string(),
     aggregateExportDataElement: z.string().optional(),
+    aggregateExportCategoryOptionCombo: z.string().optional(),
+    aggregateExportAttributeOptionCombo: z.string().optional(),
 })
 
 const categoryMappingsRecord = z.record(z.string(), z.array(categoryMapping))

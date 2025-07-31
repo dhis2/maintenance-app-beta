@@ -28,6 +28,7 @@ export const filterParamsSchema = z
         domainType: z.array(z.nativeEnum(DataElement.domainType)),
         formType: z.array(z.nativeEnum(DataSet.formType)),
         ignoreApproval: z.boolean(),
+        indicator: zodArrayIds,
         indicatorType: zodArrayIds,
         indicatorGroup: zodArrayIds,
         indicatorGroupSet: zodArrayIds,
@@ -35,6 +36,8 @@ export const filterParamsSchema = z
             z.string().refine((val) => parseAccessString(val) !== null)
         ),
         program: zodArrayIds,
+        programIndicator: zodArrayIds,
+        programIndicatorGroup: zodArrayIds,
         valueType: z.array(z.nativeEnum(DataElement.valueType)),
     })
     .partial()
@@ -58,11 +61,14 @@ export const filterQueryParamType = {
     domainType: CustomDelimitedArrayParam,
     formType: CustomDelimitedArrayParam,
     ignoreApproval: BooleanParam,
+    indicator: CustomDelimitedArrayParam,
     indicatorType: CustomDelimitedArrayParam,
     indicatorGroup: CustomDelimitedArrayParam,
     indicatorGroupSet: CustomDelimitedArrayParam,
     publicAccess: CustomDelimitedArrayParam,
     program: CustomDelimitedArrayParam,
+    programIndicator: CustomDelimitedArrayParam,
+    programIndicatorGroup: CustomDelimitedArrayParam,
     valueType: CustomDelimitedArrayParam,
 } as const satisfies QueryParamsConfigMap
 

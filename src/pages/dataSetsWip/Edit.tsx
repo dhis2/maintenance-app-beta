@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import arrayMutators from 'final-form-arrays'
 import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import {
@@ -7,6 +8,7 @@ import {
     DefaultSectionedFormSidebar,
     SectionedFormErrorNotice,
 } from '../../components'
+import { DrawerRoot } from '../../components/drawer/Drawer'
 import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
 import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
@@ -14,7 +16,6 @@ import { PickWithFieldFilters, DataSet } from '../../types/generated'
 import { DataSetFormContents } from './form/DataSetFormContents'
 import { validate, dataSetValueFormatter } from './form/dataSetFormSchema'
 import { DataSetFormDescriptor } from './form/formDescriptor'
-
 const section = SECTIONS_MAP.dataSet
 
 const fieldFilters = [
@@ -31,6 +32,8 @@ const fieldFilters = [
     'formType',
     'displayOptions',
     'legendSets[id,displayName]',
+    'dataEntryForm',
+    'sections[id,displayName,description]',
 ] as const
 type DataSetValues = PickWithFieldFilters<DataSet, typeof fieldFilters>
 
@@ -63,16 +66,19 @@ export const Component = () => {
     )
 
     return (
-        <SectionedFormProvider formDescriptor={DataSetFormDescriptor}>
-            <FormBase
-                valueFormatter={dataSetValueFormatter}
-                onSubmit={useOnSubmitEdit({ section, modelId })}
-                initialValues={initialValues}
-                validate={validate}
-                subscription={{}}
-            >
-                {({ handleSubmit }) => {
-                    return (
+        <FormBase
+            valueFormatter={dataSetValueFormatter}
+            onSubmit={useOnSubmitEdit({ section, modelId })}
+            initialValues={initialValues}
+            validate={validate}
+            subscription={{}}
+            mutators={{ ...arrayMutators }}
+        >
+            {({ handleSubmit }) => {
+                return (
+                    <SectionedFormProvider
+                        formDescriptor={DataSetFormDescriptor}
+                    >
                         <SectionedFormLayout
                             sidebar={<DefaultSectionedFormSidebar />}
                         >
@@ -80,11 +86,12 @@ export const Component = () => {
                                 <DataSetFormContents />
                                 <DefaultFormFooter />
                             </form>
+                            <DrawerRoot />
                             <SectionedFormErrorNotice />
                         </SectionedFormLayout>
-                    )
-                }}
-            </FormBase>
-        </SectionedFormProvider>
+                    </SectionedFormProvider>
+                )
+            }}
+        </FormBase>
     )
 }

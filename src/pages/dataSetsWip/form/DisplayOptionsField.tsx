@@ -6,8 +6,9 @@ import {
     Radio,
     RadioFieldFF,
 } from '@dhis2/ui'
+import DOMPurify from 'dompurify'
 import React, { useState } from 'react'
-import { Field, useField, useFormState } from 'react-final-form'
+import { Field, useField } from 'react-final-form'
 import classes from './DisplayOptionField.module.css'
 
 export function DisplayOptionsField({
@@ -24,6 +25,8 @@ export function DisplayOptionsField({
                   })
                 : false
         },
+        format: (value) =>
+            typeof value === 'string' ? DOMPurify.sanitize(value) : value,
     })
     const subtitleField = useField(`${fieldName}.customText.subheader`, {
         validate: (value) => {
@@ -33,6 +36,8 @@ export function DisplayOptionsField({
                   })
                 : false
         },
+        format: (value) =>
+            typeof value === 'string' ? DOMPurify.sanitize(value) : value,
     })
 
     const alignFieldStart = useField(`${fieldName}.customText.align`, {
