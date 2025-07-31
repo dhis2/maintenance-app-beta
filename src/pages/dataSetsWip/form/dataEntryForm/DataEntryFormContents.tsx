@@ -11,9 +11,9 @@ import {
 } from '../../../../components'
 import { SectionedFormSection } from '../../../../components/sectionedForm'
 import { TooltipWrapper } from '../../../../components/tooltip'
-import { CustomFormSection } from '../CustomFormSection'
 import { DisplayOptionsField } from '../DisplayOptionsField'
 import { useDataSetField } from '../formHooks'
+import { CustomFormEntry } from './CustomFormEntry'
 import classes from './DataEntryFormContents.module.css'
 import { SectionFormSectionsList } from './SectionFormList'
 
@@ -200,6 +200,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                 </Card>
             </HorizontalFieldGroup>
             {controlledFormType === 'SECTION' && <SectionFormSectionsList />}
+            {controlledFormType === 'CUSTOM' && <CustomFormEntry />}
             {displayOptions !== undefined && (
                 <div className={classes.displayOptions}>
                     <StandardFormSectionTitle>
@@ -208,7 +209,6 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                     <DisplayOptionsField />
                 </div>
             )}
-            <CustomFormSection />
         </SectionedFormSection>
     )
 })
