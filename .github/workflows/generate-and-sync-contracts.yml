@@ -1,0 +1,56 @@
+name: Generate Contracts and Sync to contracts repo
+
+on:
+    pull_request:
+        types: [opened, synchronize, reopened]
+
+jobs:
+    generate-and-sync:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 20
+                  cache: yarn
+
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Run contracts script
+              run: yarn contracts
+
+            - name: Clone contracts repo
+              run: |
+                  git config --global user.name "github-actions[bot]"
+                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+                  TOKEN=${{ secrets.GITHUB_TOKEN }}
+                  git clone https://x-access-token:$TOKEN@github.com/dhis2/dhis2-api-contracts.git
+                  cd dhis2-api-contracts
+
+                  BRANCH_NAME="auto/contracts-update-${{ github.event.pull_request.number }}-$(date +%s)"
+                  git checkout -b $BRANCH_NAME
+
+                  # Copy the generated JSON files
+                  cp -r ../contracts/* ./contracts/
+
+                  git add .
+                  git commit -m "Auto-update contracts from Mainanance app PR #${{ github.event.pull_request.number }}"
+                  git push origin $BRANCH_NAME
+
+                  echo "$BRANCH_NAME" > ../branch-name.txt
+
+            - name: Create Pull Request in contract repo
+              run: |
+                  cd dhis2-api-contracts
+                  BRANCH_NAME=$(cat ../branch-name.txt)
+                  gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+                  gh pr create \
+                    --base master \
+                    --head "$BRANCH_NAME" \
+                    --title "Auto PR: Contracts from mainanance app PR #${{ github.event.pull_request.number }}" \
+                    --body "This PR was automatically created from a pull request in mainanance app."

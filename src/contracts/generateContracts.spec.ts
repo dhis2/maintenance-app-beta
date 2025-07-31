@@ -37,6 +37,5 @@ describe('contracts', () => {
             name: 'categories',
             expectedSchema: z.array(categoryListSchema),
         })
-        // expect(1+1).toBe(2)
     })
 })
