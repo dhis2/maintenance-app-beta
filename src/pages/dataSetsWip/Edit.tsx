@@ -20,11 +20,7 @@ import {
 } from '../../lib'
 import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import {
-    PickWithFieldFilters,
-    DataSet,
-    IdentifiableObject,
-} from '../../types/generated'
+import { PickWithFieldFilters, DataSet, Access } from '../../types/generated'
 import { DataSetFormContents } from './form/DataSetFormContents'
 import { validate } from './form/dataSetFormSchema'
 import { DataSetFormDescriptor } from './form/formDescriptor'
@@ -45,7 +41,7 @@ const fieldFilters = [
     'displayOptions',
     'legendSets[id,displayName]',
     'dataEntryForm',
-    'sections[id,displayName,description]',
+    'sections[id,displayName,description,access]',
 ] as const
 
 type DataSetValuesFromFilters = PickWithFieldFilters<
@@ -58,6 +54,7 @@ export type DataSetValues = Omit<DataSetValuesFromFilters, 'sections'> & {
         displayName: string
         description?: string
         deleted?: boolean
+        access?: Access
     }[]
 }
 
