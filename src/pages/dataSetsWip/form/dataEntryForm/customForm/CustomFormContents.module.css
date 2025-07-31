@@ -107,7 +107,6 @@
 }
 
 .customFormElementsContainer {
-    /* width: calc(100%-416px); */
     width: 600px;
 }
 
@@ -118,4 +117,12 @@
 .customFormSubtitle {
     font-size: 18px;
     color: var(--colors-grey800);
+}
+
+.previewElementsWarning {
+    color: var(--colors-grey800);
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp4);
+    margin-block: var(--spacers-dp4);
 }

@@ -1,4 +1,4 @@
-import { useDataEngine } from '@dhis2/app-runtime'
+import { useDataEngine, useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
     Button,
@@ -9,12 +9,15 @@ import {
 } from '@dhis2/ui'
 import React, { useCallback, useState } from 'react'
 import { useField } from 'react-final-form'
-import { StandardFormSectionTitle, DrawerPortal } from '../../../../components'
-import { parseErrorResponse } from '../../../../lib'
-import { CustomFormContents } from './CustomFormContents'
+import {
+    StandardFormSectionTitle,
+    DrawerPortal,
+} from '../../../../../components'
+import { parseErrorResponse } from '../../../../../lib'
 import css from './CustomFormContents.module.css'
+import { CustomFormEdit } from './CustomFormEdit'
 
-// delete: we delete the form by form id
+// delete: the id here is the dataEntryForm.id (not the id of the data set)
 const useDeleteForm = ({
     id,
     onComplete,
@@ -23,23 +26,35 @@ const useDeleteForm = ({
     onComplete: () => void
 }) => {
     const dataEngine = useDataEngine()
+    const { show: showCustomFormDeleteError } = useAlert(
+        (details) =>
+            i18n.t('Custom form could not be deleted:{{details}}', {
+                details,
+                nsSeparator: '~:~',
+            }),
+        { critical: true }
+    )
 
     const deleteForm = useCallback(async () => {
         try {
-            // const options = id ? {variables: {id}} : null
             const response = await dataEngine.mutate(
                 {
                     resource: `dataEntryForms`,
                     type: 'delete',
                     id,
                 },
-                { onComplete }
+                {
+                    onComplete,
+                    onError: (e) => {
+                        showCustomFormDeleteError(e.message)
+                    },
+                }
             )
             return { data: response }
         } catch (error) {
             return { error: parseErrorResponse(error) }
         }
-    }, [dataEngine, id, onComplete])
+    }, [dataEngine, id, onComplete, showCustomFormDeleteError])
     return deleteForm
 }
 
@@ -67,7 +82,7 @@ const DeleteModal = ({
     </Modal>
 )
 
-export const CustomFormEntry = () => {
+export const CustomFormEditEntry = () => {
     const [customFormEditOpen, setCustomFormEditOpen] =
         React.useState<boolean>(false)
     const [deleteConfirmationOpen, setDeleteConfirmationOpen] =
@@ -76,26 +91,24 @@ export const CustomFormEntry = () => {
         setDeleteConfirmationOpen(false)
     }, [setDeleteConfirmationOpen])
     const { input: formInput } = useField('dataEntryForm')
+    const addMode = !formInput?.value?.id // if there is no formId, you need to add a form
+    const { input: controlledFormTypeInput } = useField('formType')
     const clearForm = () => {
-        formInput.onChange({ ...formInput.value, htmlCode: '' })
+        formInput.onChange({ ...formInput.value, htmlCode: '', id: null })
+        controlledFormTypeInput.onChange('DEFAULT')
     }
     const deleteCustomForm = useDeleteForm({
         id: formInput?.value?.id ?? '',
         onComplete: clearForm,
     })
 
-    //
-    const { input: controlledFormTypeInput } = useField('formType')
-
     return (
         <div className={css.customFormEntry}>
             {deleteConfirmationOpen && (
                 <DeleteModal
                     closeModal={closeDeleteConfirmationModal}
-                    deleteCustomForm={async () => {
-                        // TO DO: put this in separate function
-                        await deleteCustomForm()
-                        controlledFormTypeInput.onChange('DEFAULT')
+                    deleteCustomForm={() => {
+                        deleteCustomForm()
                         closeDeleteConfirmationModal()
                     }}
                 />
@@ -105,9 +118,8 @@ export const CustomFormEntry = () => {
                 onClose={() => setCustomFormEditOpen(false)}
             >
                 {customFormEditOpen && (
-                    // TO DO: need FormBase wrapper
-                    <CustomFormContents
-                        onCancel={() => setCustomFormEditOpen(false)}
+                    <CustomFormEdit
+                        closeCustomFormEdit={() => setCustomFormEditOpen(false)}
                     />
                 )}
             </DrawerPortal>
@@ -115,26 +127,37 @@ export const CustomFormEntry = () => {
                 <StandardFormSectionTitle>
                     {i18n.t('Custom form')}
                 </StandardFormSectionTitle>
-                <p className={css.description}>
-                    {i18n.t('This data set uses a custom form for data entry.')}
-                </p>
+                <div className={css.description}>
+                    {addMode
+                        ? i18n.t(
+                              'A custom form must be added for it to be used for data entry (web).'
+                          )
+                        : i18n.t(
+                              'This data set uses a custom form for data entry (web).'
+                          )}
+                </div>
             </div>
             <div>
                 <ButtonStrip>
-                    <Button
-                        secondary
-                        small
-                        destructive
-                        onClick={() => setDeleteConfirmationOpen(true)}
-                    >
-                        {i18n.t('Delete custom form')}
-                    </Button>
+                    {!addMode && (
+                        <Button
+                            secondary
+                            small
+                            destructive
+                            onClick={() => setDeleteConfirmationOpen(true)}
+                            disabled={!formInput?.value?.id}
+                        >
+                            {i18n.t('Delete custom form')}
+                        </Button>
+                    )}
                     <Button
                         secondary
                         small
                         onClick={() => setCustomFormEditOpen(true)}
                     >
-                        {i18n.t('Edit custom form')}
+                        {addMode
+                            ? i18n.t('Create custom form')
+                            : i18n.t('Edit custom form')}
                     </Button>
                 </ButtonStrip>
             </div>
