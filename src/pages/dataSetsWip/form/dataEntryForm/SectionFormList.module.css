@@ -58,3 +58,17 @@
     width: 28px;
     height: 28px;
 }
+
+.sectionCardDeleted {
+    margin-block: 8px;
+    padding: 12px;
+    background-color: var(--colors-red050);
+    border: 1px solid var(--colors-red200);
+    border-radius: 4px;
+}
+
+.deletedSectionText {
+    color: var(--colors-red800);
+    font-size: 15px;
+    margin-block-end: var(--spacers-dp8);
+}

@@ -55,6 +55,7 @@ export function StandardFormActions({
                     disabled={submitting}
                     type="button"
                     onClick={onSaveClick}
+                    dataTest="form-save-button"
                 >
                     {submitting && <LoadingIcon />}
                     {saveLabel}
