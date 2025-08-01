@@ -32,7 +32,7 @@ const fieldFilters = [
     'formType',
     'displayOptions',
     'legendSets[id,displayName]',
-    'dataEntryForm',
+    'dataEntryForm[id,displayName,htmlCode]',
     'sections[id,displayName,description]',
 ] as const
 type DataSetValues = PickWithFieldFilters<DataSet, typeof fieldFilters>

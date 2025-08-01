@@ -49,6 +49,7 @@ export const dataSetFormSchema = identifiable
             .default([]),
         dataEntryForm: identifiable
             .extend({
+                displayName: z.string().optional(),
                 htmlCode: z.string().optional(),
                 format: z.number().int().optional(),
             })
