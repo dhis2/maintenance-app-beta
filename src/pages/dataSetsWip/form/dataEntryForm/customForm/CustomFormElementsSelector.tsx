@@ -163,7 +163,6 @@ export const CustomFormElementsSelector = ({
                                     className={styles.elementTypePrefix}
                                 >{`${elementType.name}: `}</span>
                                 <span>{filteredElements.length}</span>
-                                <span></span>
                                 {selected ? (
                                     <IconChevronUp16 />
                                 ) : (

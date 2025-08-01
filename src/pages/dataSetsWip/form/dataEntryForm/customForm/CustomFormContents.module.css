@@ -91,8 +91,6 @@
     margin-block-end: var(--spacers-dp8);
 }
 
-/*  customFormsentry */
-
 .customFormEntry {
     padding: var(--spacers-dp16);
     background-color: var(--colors-grey100);

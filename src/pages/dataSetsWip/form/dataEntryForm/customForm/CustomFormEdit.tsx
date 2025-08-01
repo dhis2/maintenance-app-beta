@@ -12,25 +12,13 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../../components'
-import { parseErrorResponse, generateDhis2Id } from '../../../../../lib/index'
+import { generateDhis2Id } from '../../../../../lib/index'
 import styles from './CustomFormContents.module.css'
 import { CustomFormElementsSelector } from './CustomFormElementsSelector'
 
 export type CustomFormProps = {
     closeCustomFormEdit?: () => void
 }
-
-type ElementSelectorFunction = ({
-    id,
-    name,
-    type,
-    disabled,
-}: {
-    id: string
-    name?: string
-    type: string
-    disabled: boolean
-}) => void
 
 const SubsectionSpacer = ({ children }: { children: React.ReactNode }) => (
     <div className={styles.formSectionSpacing}>{children}</div>
@@ -103,7 +91,7 @@ const useUpdateForm = ({
                 )
                 return { data: response }
             } catch (error) {
-                return { error: parseErrorResponse(error) }
+                console.error(error)
             }
         },
         [dataEngine, id, onSuccess, onError]
@@ -176,7 +164,7 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
         },
         onError: (e) => {
             setCustomFormSaving(false)
-            show({ success: false, details: e.message })
+            show({ success: false, details: e?.message })
         },
     })
 
@@ -184,7 +172,7 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
         <div className={styles.sectionsWrapper}>
             <div>
                 <SectionedFormSections>
-                    <SectionedFormSection name="setup">
+                    <SectionedFormSection name="customFormEdit">
                         <StandardFormSectionTitle>
                             {previewMode
                                 ? i18n.t('Custom form (preview)')
@@ -221,7 +209,10 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
                                                     textAreaRef.current?.value
                                                 }
                                                 className={styles.iframeStyling}
-                                                title="Preview of custom form"
+                                                title={i18n.t(
+                                                    'Preview of custom form'
+                                                )}
+                                                sandbox="allow-same-origin"
                                             ></iframe>
                                         )}
                                     </SubsectionSpacer>

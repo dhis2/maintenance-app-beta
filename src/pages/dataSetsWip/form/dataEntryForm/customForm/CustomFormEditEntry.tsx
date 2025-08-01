@@ -13,7 +13,6 @@ import {
     StandardFormSectionTitle,
     DrawerPortal,
 } from '../../../../../components'
-import { parseErrorResponse } from '../../../../../lib'
 import css from './CustomFormContents.module.css'
 import { CustomFormEdit } from './CustomFormEdit'
 
@@ -46,13 +45,13 @@ const useDeleteForm = ({
                 {
                     onComplete,
                     onError: (e) => {
-                        showCustomFormDeleteError(e.message)
+                        showCustomFormDeleteError(e?.message)
                     },
                 }
             )
             return { data: response }
         } catch (error) {
-            return { error: parseErrorResponse(error) }
+            console.error(error)
         }
     }, [dataEngine, id, onComplete, showCustomFormDeleteError])
     return deleteForm

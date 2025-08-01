@@ -19,7 +19,7 @@ export const DEFAULT_CATEGORY = {
 
 export const DEFAULT_CATEGORY_OPTION_COMBO = {
     id: 'HllvX50cXC0',
-    name: 'deafult',
+    name: 'default',
 }
 
 export const DEFAULT_CATEGORYCOMBO_SELECT_OPTION = {
