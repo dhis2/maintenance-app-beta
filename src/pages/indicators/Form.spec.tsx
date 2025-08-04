@@ -748,7 +748,7 @@ describe('Indicators form tests', () => {
             })
         })
 
-        it('should submit the data and return to the list view on success when a field is changed', async () => {
+        it('should submit the data successfully when a field is changed', async () => {
             const { screen, indicator } = await renderForm()
             const newName = faker.internet.userName()
 
@@ -770,7 +770,7 @@ describe('Indicators form tests', () => {
             })
         })
 
-        it('should do nothing and return to the list view on success when no field is changed', async () => {
+        it('should do nothing when no field is changed', async () => {
             const { screen } = await renderForm()
             await uiActions.submitForm(screen)
             expect(updateMock).not.toHaveBeenCalled()
