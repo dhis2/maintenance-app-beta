@@ -787,7 +787,9 @@ describe('Indicators form tests', () => {
         })
 
         it('update decimals to 0', async () => {
-            const { screen, indicator } = await renderForm()
+            const { screen, indicator } = await renderForm({
+                indicatorOverwrites: { decimals: 1 },
+            })
             await uiActions.pickOptionFromSelect(
                 screen.getByTestId('decimals-field'),
                 1,
