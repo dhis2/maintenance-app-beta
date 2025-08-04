@@ -102,7 +102,7 @@ const closeSingleSelectIfOpen = async (
 }
 
 const submitForm = async (screen: RenderResult) => {
-    const submitButton = screen.getByTestId('form-submit-button')
+    const submitButton = screen.getByTestId('form-save-button')
     await userEvent.click(submitButton)
 }
 

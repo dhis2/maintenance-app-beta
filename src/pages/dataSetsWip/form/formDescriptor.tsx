@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { SectionedFormDescriptor } from '../../../lib'
-import { DataSetFormValues } from './fieldFilters'
+import { DataSetValues } from '../Edit'
 
 export const DataSetFormDescriptor = {
     name: 'DataSet',
@@ -103,4 +103,4 @@ export const DataSetFormDescriptor = {
         },
         { name: 'advanced', label: i18n.t('Advanced'), fields: [] },
     ],
-} as const satisfies SectionedFormDescriptor<DataSetFormValues>
+} as const satisfies SectionedFormDescriptor<DataSetValues>

@@ -1,5 +1,4 @@
 import i18n from '@dhis2/d2-i18n'
-import { omit } from 'lodash'
 import { z } from 'zod'
 import {
     DEFAULT_CATEGORY_COMBO,
@@ -95,16 +94,6 @@ export const dataSetFormSchema = identifiable
         compulsoryFieldsCompleteOnly: z.boolean().default(false),
         workflow: z.object({ id: z.string() }).optional(),
         timelyDays: z.number().optional().default(15),
-        sections: z
-            .array(
-                z.object({
-                    id: z.string(),
-                    displayName: z.string(),
-                    description: z.string().optional(),
-                    // dataSet: identifiable.optional(),
-                })
-            )
-            .default([]),
         compulsoryDataElementOperands: z
             .array(
                 z.object({
@@ -134,20 +123,4 @@ export const dataSetListSchema = withDefaultListColumns
 
 export const initialValues = getDefaults(dataSetFormSchema)
 
-export type DataSetFormValues = typeof initialValues
-
 export const validate = createFormValidate(dataSetFormSchema)
-
-export const dataSetValueFormatter = <
-    // the reason for the generic is that the type between Edit (with Id) and create (without Id) is different
-    TValues extends Partial<DataSetFormValues>
->(
-    values: TValues
-) => {
-    const withoutSections = omit(values, 'sections')
-    return {
-        ...withoutSections,
-        displayOptions:
-            values.displayOptions && JSON.stringify(values.displayOptions),
-    }
-}
