@@ -13,9 +13,9 @@ import classes from './DisplayOptionField.module.css'
 
 export function DisplayOptionsField({
     withSectionsDisplayOptions,
-}: {
+}: Readonly<{
     withSectionsDisplayOptions: boolean
-}) {
+}>) {
     const fieldName = 'displayOptions'
     const titleField = useField(`${fieldName}.customText.header`, {
         validate: (value) => {
