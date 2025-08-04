@@ -207,7 +207,7 @@ const expectInputToErrorWhenDuplicate = async (
 ) => {
     await uiActions.enterInputFieldValue(fieldName, duplicateText, screen)
     await userEvent.click(screen.getByTestId(`formfields-${fieldName}-label`))
-    await expectInputFieldToHaveError(
+    expectInputFieldToHaveError(
         `formfields-${fieldName}`,
         `This field requires a unique value, please choose another one`,
         screen
