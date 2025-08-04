@@ -13,6 +13,7 @@ function DenominatorFields() {
                     component={InputFieldFF}
                     inputWidth="400px"
                     required
+                    dataTest="formfields-denominatorDescription"
                     name="denominatorDescription"
                     label={i18n.t('Denominator description')}
                 />
@@ -24,6 +25,7 @@ function DenominatorFields() {
                     label={i18n.t('Edit denominator')}
                     validationResource="indicators/expression/description"
                     required
+                    dataTest="formfields-denominator"
                 />
             </StandardFormField>
         </>
