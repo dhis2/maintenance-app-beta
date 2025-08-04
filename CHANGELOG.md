@@ -1,3 +1,10 @@
+# [0.57.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.56.2...v0.57.0) (2025-08-04)
+
+
+### Features
+
+* section list delete and translate action  ([6d41b97](https://github.com/dhis2/maintenance-app-beta/commit/6d41b971968830ec3e68f58f688b760d59473829))
+
 ## [0.56.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.56.1...v0.56.2) (2025-07-31)
 
 
