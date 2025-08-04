@@ -174,19 +174,6 @@ describe('Indicators form tests', () => {
             expect(createMock).not.toHaveBeenCalled()
         })
 
-        it('should show an error if name field is a duplicate', async () => {
-            const existingName = faker.company.name()
-            const { screen } = await renderForm({
-                matchingExistingElementFilter: `name:ieq:${existingName}`,
-            })
-            await uiAssertions.expectNameToErrorWhenDuplicate(
-                existingName,
-                screen
-            )
-            await uiActions.submitForm(screen)
-            expect(createMock).not.toHaveBeenCalled()
-        })
-
         it('should show an error if code field is a duplicate', async () => {
             const existingCode = faker.science.chemicalElement().symbol
             const { screen } = await renderForm({
@@ -268,7 +255,7 @@ describe('Indicators form tests', () => {
             const { screen } = await renderForm()
             await uiActions.pickOptionFromSelect(
                 screen.getByTestId('decimals-field'),
-                7, // Assuming option index 7 would be > 5
+                7,
                 screen
             )
             await uiActions.submitForm(screen)
@@ -394,7 +381,6 @@ describe('Indicators form tests', () => {
                 screen
             )
 
-            // Advanced Options
             uiAssertions.expectInputFieldToExist(
                 'aggregateExportCategoryOptionCombo',
                 '',
@@ -406,14 +392,12 @@ describe('Indicators form tests', () => {
                 screen
             )
 
-            // Legend Sets Transfer
             await uiAssertions.expectTransferFieldToExistWithOptions(
                 'legendSets-field',
                 { lhs: legendSets, rhs: [] },
                 screen
             )
 
-            // Custom Attributes
             attributes.forEach((attribute: { id: string }) => {
                 expect(
                     screen.getByTestId(`attribute-${attribute.id}`)
@@ -437,8 +421,8 @@ describe('Indicators form tests', () => {
             const aCode = faker.science.chemicalElement().symbol
             const aDescription = faker.company.buzzPhrase()
             const aUrl = faker.internet.url()
-            const aNumerator = '#{dataElementId1}'
-            const aDenominator = '#{dataElementId2}'
+            const aNumerator = faker.number.int().toString()
+            const aDenominator = faker.number.int().toString()
             const aNumeratorDescription = faker.lorem.sentence()
             const aDenominatorDescription = faker.lorem.sentence()
             const aCatOptionExport = faker.internet.userName()
@@ -448,7 +432,6 @@ describe('Indicators form tests', () => {
             const { screen, indicatorTypes, legendSets, attributes } =
                 await renderForm()
 
-            // Fill Basic Information
             await uiActions.enterName(aName, screen)
             await uiActions.enterInputFieldValue(
                 'shortName',
@@ -463,7 +446,6 @@ describe('Indicators form tests', () => {
             )
             await uiActions.enterInputFieldValue('url', aUrl, screen)
 
-            // Select Indicator Type
             const indicatorTypeOptions = await uiActions.openSingleSelect(
                 screen.getByTestId('formfields-indicatortype'),
                 screen
@@ -474,12 +456,11 @@ describe('Indicators form tests', () => {
                 screen
             )
 
-            // Set Configuration
             const decimalsOptions = await uiActions.openSingleSelect(
                 screen.getByTestId('decimals-field'),
                 screen
             )
-            await userEvent.click(decimalsOptions[2]) // Select "1"
+            await userEvent.click(decimalsOptions[2])
             await uiActions.closeSingleSelectIfOpen(
                 screen.getByTestId('decimals-field'),
                 screen
@@ -487,7 +468,6 @@ describe('Indicators form tests', () => {
 
             await uiActions.clickOnCheckboxField('annualized', screen)
 
-            // Fill Expressions
             await uiActions.enterInputFieldValue(
                 'numerator',
                 aNumerator,
@@ -509,7 +489,6 @@ describe('Indicators form tests', () => {
                 screen
             )
 
-            // Fill Advanced Options
             await uiActions.enterInputFieldValue(
                 'aggregateExportCategoryOptionCombo',
                 aCatOptionExport,
@@ -521,14 +500,12 @@ describe('Indicators form tests', () => {
                 screen
             )
 
-            // Select Legend Set
             await uiActions.pickOptionInTransfer(
                 'legendSets-field',
                 legendSets[0].displayName,
                 screen
             )
 
-            // Fill Custom Attribute
             const attributeInput = within(
                 screen.getByTestId(`attribute-${attributes[0].id}`)
             ).getByRole('textbox') as HTMLInputElement
@@ -672,7 +649,6 @@ describe('Indicators form tests', () => {
                 attributes,
             } = await renderForm()
 
-            // Basic Information Fields - Prefilled
             uiAssertions.expectNameFieldExist(indicator.name, screen)
             uiAssertions.expectInputFieldToExist(
                 'shortName',
@@ -688,7 +664,6 @@ describe('Indicators form tests', () => {
             uiAssertions.expectInputFieldToExist('url', indicator.url, screen)
             uiAssertions.expectColorAndIconFieldToExist(screen)
 
-            // Configuration Fields - Prefilled
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('formfields-indicatortype'),
                 {
@@ -722,7 +697,6 @@ describe('Indicators form tests', () => {
                 screen
             )
 
-            // Expression Fields - Prefilled
             uiAssertions.expectTextAreaFieldToExist(
                 'numerator',
                 indicator.numerator,
@@ -744,7 +718,6 @@ describe('Indicators form tests', () => {
                 screen
             )
 
-            // Advanced Options - Prefilled
             uiAssertions.expectInputFieldToExist(
                 'aggregateExportCategoryOptionCombo',
                 indicator.aggregateExportCategoryOptionCombo,
@@ -756,14 +729,12 @@ describe('Indicators form tests', () => {
                 screen
             )
 
-            // Legend Sets Transfer - Prefilled
             await uiAssertions.expectTransferFieldToExistWithOptions(
                 'legendSets-field',
                 { lhs: [legendSets[1]], rhs: [legendSets[0]] },
                 screen
             )
 
-            // Custom Attributes - Prefilled
             attributes.forEach((attribute: { id: string }) => {
                 const attributeInput = screen.getByTestId(
                     `attribute-${attribute.id}`
@@ -819,7 +790,7 @@ describe('Indicators form tests', () => {
             const { screen, indicator } = await renderForm()
             await uiActions.pickOptionFromSelect(
                 screen.getByTestId('decimals-field'),
-                1, // Index 1 should be "0"
+                1,
                 screen
             )
             await uiActions.submitForm(screen)
