@@ -39,7 +39,7 @@ export type EnhancedOnSubmit<TValues> = (
     }
 ) => SubmissionErrors | Promise<SubmissionErrors> | void
 
-export const defaultNavigateTo: GetToFunction = ({
+const defaultNavigateTo: GetToFunction = ({
     section,
     submitAction = 'saveAndExit',
     responseData,

@@ -82,20 +82,24 @@ export const useOnSubmitDataSetsEdit = (modelId: string) => {
                 )
             )
 
-            const failures = deletionResults.filter(
-                (deletion) => deletion.status === 'rejected'
-            )
+            const failures = deletionResults
+                .map((deletion, i) => ({
+                    ...deletion,
+                    sectionName: sectionsToDelete[i].displayName,
+                }))
+                .filter((deletion) => deletion.status === 'rejected')
             if (failures.length > 0) {
                 await queryClient.invalidateQueries({
                     queryKey: [{ resource: section.namePlural }],
                 })
                 return createFormError({
                     message: i18n.t(
-                        'There was an deleting sections: {{sectionNames}}',
+                        'There was an error deleting sections: {{sectionNames}}',
                         {
                             sectionNames: failures
-                                .map((_f, i) => sectionsToDelete[i].displayName)
+                                .map((f) => f.sectionName)
                                 .join(', '),
+                            nsSeparator: '~-~',
                         }
                     ),
                     errors: failures.map((f) => f.reason.message),
