@@ -1,0 +1,17 @@
+.sectionRows {
+    margin: var(--spacers-dp16);
+}
+.sectionRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--colors-grey900);
+}
+
+.sectionRowButtons {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacers-dp8);
+}
