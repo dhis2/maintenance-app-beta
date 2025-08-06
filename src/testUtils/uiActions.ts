@@ -8,6 +8,7 @@ const enterInputFieldValue = async (
 ) => {
     const field = screen.getByTestId(`formfields-${fieldName}`)
     const input = within(field).getByRole('textbox') as HTMLInputElement
+    clearInputField(fieldName, screen)
     await userEvent.type(input, text)
 }
 const clearInputField = async (fieldName: string, screen: RenderResult) => {
@@ -101,7 +102,7 @@ const closeSingleSelectIfOpen = async (
 }
 
 const submitForm = async (screen: RenderResult) => {
-    const submitButton = screen.getByTestId('form-submit-button')
+    const submitButton = screen.getByTestId('form-save-button')
     await userEvent.click(submitButton)
 }
 

@@ -1,3 +1,17 @@
+# [0.57.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.56.2...v0.57.0) (2025-08-04)
+
+
+### Features
+
+* section list delete and translate action  ([6d41b97](https://github.com/dhis2/maintenance-app-beta/commit/6d41b971968830ec3e68f58f688b760d59473829))
+
+## [0.56.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.56.1...v0.56.2) (2025-07-31)
+
+
+### Bug Fixes
+
+* parse section display options and show error notice ([#600](https://github.com/dhis2/maintenance-app-beta/issues/600)) ([e7e0d75](https://github.com/dhis2/maintenance-app-beta/commit/e7e0d757aef4dd91219fe73cab7d79549d9b413e))
+
 ## [0.56.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.56.0...v0.56.1) (2025-07-29)
 
 
