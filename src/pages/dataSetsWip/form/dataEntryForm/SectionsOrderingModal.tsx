@@ -15,17 +15,19 @@ import React from 'react'
 import { DataSetValues } from '../../Edit'
 import css from './SectionsOrderingModal.module.css'
 
+type Section = DataSetValues['sections'][number]
+
 export const SectionsOrderingModal = ({
     onClose,
     sections,
     onReorder,
 }: {
     onClose: () => void
-    sections: DataSetValues['sections']
-    onReorder: (index: number, value: DataSetValues['sections'][number]) => void
+    sections: Section[]
+    onReorder: (index: number, value: Section) => void
 }) => {
     const [orderedSections, setOrderedSections] =
-        React.useState<DataSetValues['sections']>(sections)
+        React.useState<Section[]>(sections)
     const [isSaving, setIsSaving] = React.useState(false)
     const dataEngine = useDataEngine()
     const saveAlert = useAlert(
@@ -51,18 +53,18 @@ export const SectionsOrderingModal = ({
                 })
                 onReorder(index, section)
             }
-            setIsSaving(false)
             saveAlert.show({
                 message: i18n.t('New sections order saved successfully'),
                 success: true,
             })
             onClose()
         } catch {
-            setIsSaving(false)
             saveAlert.show({
                 message: i18n.t('Error saving new sections order.'),
                 error: true,
             })
+        } finally {
+            setIsSaving(false)
         }
     }
 
@@ -77,31 +79,31 @@ export const SectionsOrderingModal = ({
         setOrderedSections(newSections)
     }
 
+    const isUnchanged = React.useMemo(() => {
+        return orderedSections.every((s, i) => s.id === sections[i]?.id)
+    }, [orderedSections, sections])
+
     return (
         <Modal onClose={onClose} large dataTest="bulk-sharing-dialog">
             <ModalTitle>{i18n.t('Reorder form sections')}</ModalTitle>
             <ModalContent className={css.sectionRows}>
                 {orderedSections.map((section, index) => (
-                    <>
-                        <div key={section.id} className={css.sectionRow}>
+                    <React.Fragment key={section.id}>
+                        <div className={css.sectionRow}>
                             {section.displayName}
                             <div className={css.sectionRowButtons}>
                                 <Button
                                     small
                                     secondary
                                     icon={<IconArrowUp16 />}
-                                    onClick={() => {
-                                        onMove(section, -1)
-                                    }}
+                                    onClick={() => onMove(section, -1)}
                                     disabled={index === 0}
                                 />
                                 <Button
                                     small
                                     secondary
                                     icon={<IconArrowDown16 />}
-                                    onClick={() => {
-                                        onMove(section, 1)
-                                    }}
+                                    onClick={() => onMove(section, 1)}
                                     disabled={
                                         index === orderedSections.length - 1
                                     }
@@ -109,13 +111,18 @@ export const SectionsOrderingModal = ({
                             </div>
                         </div>
                         <Divider />
-                    </>
+                    </React.Fragment>
                 ))}
             </ModalContent>
             <ModalActions>
                 <ButtonStrip>
                     <Button onClick={onClose}>{i18n.t('Cancel')}</Button>
-                    <Button primary onClick={saveOrdering} loading={isSaving}>
+                    <Button
+                        primary
+                        onClick={saveOrdering}
+                        loading={isSaving}
+                        disabled={isUnchanged}
+                    >
                         {i18n.t('Save section ordering')}
                     </Button>
                 </ButtonStrip>
