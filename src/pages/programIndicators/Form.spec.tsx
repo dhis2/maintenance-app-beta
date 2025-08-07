@@ -1660,7 +1660,9 @@ describe('Program indicator form tests', () => {
             })
         })
         it('update decimals to 0', async () => {
-            const { screen, programIndicator } = await renderForm()
+            const { screen, programIndicator } = await renderForm({
+                programIndicatorOverwrites: { decimals: 1 },
+            })
             await uiActions.pickOptionFromSelect(
                 screen.getByTestId('decimals-field'),
                 1,

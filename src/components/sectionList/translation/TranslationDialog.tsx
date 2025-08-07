@@ -7,7 +7,7 @@ import {
     SingleSelectOption,
 } from '@dhis2/ui'
 import React, { useMemo } from 'react'
-import { BaseListModel } from '../../../lib'
+import { BaseListModel, SchemaName } from '../../../lib'
 import { Loader } from '../../loading'
 import style from './translation.module.css'
 import { TranslationForm } from './TranslationForm'
@@ -16,11 +16,13 @@ import { useLastSelectedLocale, useDBLocales } from './translationFormHooks'
 type TranslationDialogProps = {
     onClose: () => void
     model: BaseListModel
+    schemaName?: SchemaName
 }
 
 export const TranslationDialog = ({
     onClose,
     model,
+    schemaName,
 }: TranslationDialogProps) => {
     const dbLocalesQuery = useDBLocales()
     const dbLocales = dbLocalesQuery.data
@@ -80,6 +82,7 @@ export const TranslationDialog = ({
                         model={model}
                         selectedLocale={selectedLocale}
                         onClose={onClose}
+                        schemaName={schemaName}
                     />
                 </ModalContent>
             </Loader>
