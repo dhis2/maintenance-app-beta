@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, IconAdd16 } from '@dhis2/ui'
+import { Button, ButtonStrip, IconAdd16 } from '@dhis2/ui'
 import React, { useState } from 'react'
 import { useFieldArray } from 'react-final-form-arrays'
 import {
@@ -15,6 +15,7 @@ import { DisplayableModel } from '../../../../types/models'
 import { DataSetValues } from '../../Edit'
 import { EditOrNewDataSetSectionForm } from './sectionForm/DataSetSectionForm'
 import css from './SectionFormList.module.css'
+import { SectionsOrderingModal } from './SectionsOrderingModal'
 
 type Section = DataSetValues['sections'][number]
 
@@ -22,6 +23,8 @@ export const SectionFormSectionsList = () => {
     const [sectionFormOpen, setSectionFormOpen] = React.useState<
         DisplayableModel | null | undefined
     >(undefined)
+    const [orderSectionsFormOpen, setOrderSectionsFormOpen] =
+        React.useState(false)
     // use null as open, but new model
     const isSectionFormOpen = !!sectionFormOpen || sectionFormOpen === null
     const sectionFieldArray = useFieldArray<Section>('sections').fields
@@ -71,6 +74,13 @@ export const SectionFormSectionsList = () => {
                     />
                 )}
             </DrawerPortal>
+            {orderSectionsFormOpen && (
+                <SectionsOrderingModal
+                    onClose={() => setOrderSectionsFormOpen(false)}
+                    sections={sectionFieldArray.value}
+                    onReorder={sectionFieldArray.update}
+                />
+            )}
             <div>
                 <StandardFormSectionTitle>
                     {i18n.t('Sections')}
@@ -116,14 +126,23 @@ export const SectionFormSectionsList = () => {
                 })}
             </div>
             <div>
-                <Button
-                    secondary
-                    small
-                    icon={<IconAdd16 />}
-                    onClick={() => setSectionFormOpen(null)}
-                >
-                    {i18n.t('Add section')}
-                </Button>
+                <ButtonStrip>
+                    <Button
+                        secondary
+                        small
+                        icon={<IconAdd16 />}
+                        onClick={() => setSectionFormOpen(null)}
+                    >
+                        {i18n.t('Add section')}
+                    </Button>
+                    <Button
+                        secondary
+                        small
+                        onClick={() => setOrderSectionsFormOpen(true)}
+                    >
+                        {i18n.t('Reorder sections')}
+                    </Button>
+                </ButtonStrip>
             </div>
         </div>
     )

@@ -4,8 +4,6 @@ import {
     Checkbox,
     DataTableCell,
     DataTableRow,
-    IconArrowDown16,
-    IconArrowUp16,
     IconChevronDown16,
     IconChevronRight16,
 } from '@dhis2/ui'
