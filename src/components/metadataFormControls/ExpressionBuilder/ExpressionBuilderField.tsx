@@ -18,7 +18,7 @@ export const ExpressionBuilderField = ({
     dataTest,
     validationResource,
 }: ExpressionFieldProps) => {
-    const validate = useExpressionValidator(validationResource)
+    const [validate] = useExpressionValidator(validationResource)
     return (
         <FieldRFF<string | undefined> name={name} validate={validate}>
             {({ input, meta }) => (

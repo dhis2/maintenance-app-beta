@@ -1,7 +1,7 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import memoize from 'lodash/memoize'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
 interface ValidateExpressionResponse {
@@ -12,11 +12,13 @@ interface ValidateExpressionResponse {
 
 export const useExpressionValidator = (resource: string) => {
     const engine = useDataEngine()
+    const [description, setDescription] = useState<string | null>(null)
 
     const memoized = useMemo(
         () =>
             memoize(async (expression?: string) => {
                 if (!expression?.trim()) {
+                    setDescription(null)
                     return undefined
                 }
 
@@ -27,10 +29,15 @@ export const useExpressionValidator = (resource: string) => {
                         data: expression as unknown as Record<string, unknown>,
                     })) as unknown as ValidateExpressionResponse
 
-                    return result.status === 'ERROR'
-                        ? result.message || i18n.t('Invalid expression')
-                        : undefined
+                    if (result.status === 'ERROR') {
+                        setDescription(null)
+                        return result.message || i18n.t('Invalid expression')
+                    }
+
+                    setDescription(result.description ?? null)
+                    return undefined
                 } catch {
+                    setDescription(null)
                     return i18n.t('Could not validate expression')
                 }
             }),
@@ -42,5 +49,9 @@ export const useExpressionValidator = (resource: string) => {
         [memoized]
     )
 
-    return useDebouncedCallback(validate, 200, { leading: true })
+    const debouncedValidate = useDebouncedCallback(validate, 200, {
+        leading: true,
+    })
+
+    return [debouncedValidate, description] as const
 }
