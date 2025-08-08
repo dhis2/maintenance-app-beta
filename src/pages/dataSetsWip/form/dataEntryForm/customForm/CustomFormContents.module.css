@@ -111,7 +111,14 @@
 .customFormEditContainer {
     display: flex;
     justify-content: space-between;
-    min-height: calc(100vh - 60px);
+    min-height: calc(95vh - 60px);
+    gap: var(--spacers-dp16);
+}
+
+.customFormEditContainerWithError {
+    display: flex;
+    justify-content: space-between;
+    min-height: calc(85vh - 60px);
     gap: var(--spacers-dp16);
 }
 
@@ -138,4 +145,17 @@
     align-items: center;
     gap: var(--spacers-dp4);
     margin-block: var(--spacers-dp4);
+}
+.customFormCardDeleted {
+    margin-block: 8px;
+    padding: 12px;
+    background-color: var(--colors-red050);
+    border: 1px solid var(--colors-red200);
+    border-radius: 4px;
+}
+
+.deletedCustomFormText {
+    color: var(--colors-red800);
+    font-size: 15px;
+    margin-block-end: var(--spacers-dp8);
 }

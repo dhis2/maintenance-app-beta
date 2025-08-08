@@ -46,8 +46,9 @@ export const dataSetFormSchema = identifiable
                 })
             )
             .default([]),
-        dataEntryForm: identifiable
-            .extend({
+        dataEntryForm: z
+            .object({
+                name: z.string().optional(),
                 displayName: z.string().optional(),
                 htmlCode: z.string().optional(),
                 format: z.number().int().optional(),

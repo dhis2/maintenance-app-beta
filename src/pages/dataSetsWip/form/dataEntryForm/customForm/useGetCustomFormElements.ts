@@ -47,6 +47,15 @@ type ElementItem = {
     displayName: string
     key?: string
 }
+type DEO = {
+    id: string
+    displayName: string
+    categoryOptionCombo: { id: string }
+    dataElement: { id: string; displayName: string }
+}
+type DEOData = {
+    dataElementOperands: DEO[]
+}
 
 export const useGetCustomFormElements = () => {
     // get indicators from form state
@@ -55,11 +64,33 @@ export const useGetCustomFormElements = () => {
 
     // get data element operands from form state, and derive totals when de is disaggregated
     const { input: dseInput } = useField('dataSetElements')
-    const { data: deOperands } = useCompulsoryDataElementOperandsQuery({
-        dataSetElements: dseInput.value,
-    }) ?? {
-        data: {},
-    }
+    // const { data: deOperands } = useCompulsoryDataElementOperandsQuery({
+    //     dataSetElements: dseInput.value,
+    // }) ?? {
+    //     data: {},
+    // }
+
+    const queryFn = useBoundResourceQueryFn()
+    const { data: deoData, isLoading } = useQuery({
+        queryFn: queryFn<DEOData>,
+        queryKey: [
+            {
+                resource: 'dataElementOperands',
+                params: {
+                    fields: [
+                        'displayName',
+                        'id',
+                        'dataElement[id,displayName]',
+                        'categoryOptionCombo[id]',
+                    ].concat(),
+                    dataSet: 'kn3hQSOhy02',
+                    paging: false,
+                },
+            },
+        ] as const,
+    })
+    const deOperands = deoData?.dataElementOperands
+
     const { dataElements, totals } = useMemo(() => {
         if (!deOperands) {
             return { dataElements: [], totals: [] }

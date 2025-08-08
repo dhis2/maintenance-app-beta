@@ -103,6 +103,7 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
     const textAreaRef = useRef<HTMLTextAreaElement>(null)
     const [previewMode, setPreviewMode] = useState<boolean>(false)
     const [customFormSaving, setCustomFormSaving] = useState<boolean>(false)
+    const [customFormError, setCustomFormError] = useState<string>('')
     const { input: formInput } = useField('dataEntryForm')
 
     const insertElement = ({
@@ -137,20 +138,13 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
         textAreaRef.current.value = formInput?.value?.htmlCode ?? ''
     }, [formInput?.value?.htmlCode, textAreaRef])
 
-    const { show } = useAlert(
-        ({ details, success }) =>
-            success
-                ? i18n.t('Custom form saved')
-                : i18n.t('Custom form did not save: {{details}}', {
-                      details,
-                      nsSeparator: '~:~',
-                  }),
-        ({ success }) => (success ? { success: true } : { critical: true })
-    )
+    const { show: showSuccess } = useAlert(i18n.t('Custom form saved'), {
+        success: true,
+    })
 
     const updateCustomForm = useUpdateForm({
         onSuccess: (data) => {
-            show({ success: true })
+            showSuccess({ success: true })
             // update form state
             formInput.onChange({
                 ...formInput.value,
@@ -164,7 +158,7 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
         },
         onError: (e) => {
             setCustomFormSaving(false)
-            show({ success: false, details: e?.message })
+            setCustomFormError(e.message)
         },
     })
 
@@ -183,7 +177,13 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
                                 'Define a custom form for this data set by editing HTML below.'
                             )}
                         </StandardFormSectionDescription>
-                        <div className={styles.customFormEditContainer}>
+                        <div
+                            className={
+                                customFormError?.length > 0
+                                    ? styles.customFormEditContainerWithError
+                                    : styles.customFormEditContainer
+                            }
+                        >
                             <div className={styles.customFormInputContainer}>
                                 <Button
                                     className={styles.formSectionSpacing}
@@ -236,6 +236,18 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
                         </div>
                     </SectionedFormSection>
                 </SectionedFormSections>
+                {customFormError?.length > 0 && (
+                    <div className={styles.errorNoticeWrapper}>
+                        <NoticeBox
+                            error
+                            title={i18n.t(
+                                'Something went wrong when submitting the form'
+                            )}
+                        >
+                            {customFormError}
+                        </NoticeBox>
+                    </div>
+                )}
             </div>
             <div>
                 <FormFooterWrapper>
@@ -250,6 +262,7 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
                                 const htmlCode =
                                     textAreaRef.current?.value ?? ''
                                 setCustomFormSaving(true)
+                                setCustomFormError('')
                                 updateCustomForm({
                                     htmlCode,
                                     id: formId,
