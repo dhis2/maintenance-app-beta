@@ -85,7 +85,7 @@ const getOptions = ({
         // return categoryOptionCombos
         return categoryOptionCombos?.map((coc: CategoryOptionCombo) => ({
             id: `${dse?.dataElement?.id}.${coc?.id}`,
-            displayName: `${dse.displayName}: ${coc.displayName}`,
+            displayName: `${dse?.dataElement?.displayName}: ${coc.displayName}`,
             dataElement: {
                 id: dse?.dataElement?.id,
                 displayName: dse?.dataElement?.displayName,
