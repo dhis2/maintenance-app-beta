@@ -134,10 +134,16 @@ describe('Indicators form tests', () => {
                 'Required',
                 screen
             )
+            await userEvent.click(
+                screen.getByTestId('edit-numerator-expression-button')
+            )
             uiAssertions.expectFieldToHaveError(
                 'formfields-numerator',
                 'Required',
                 screen
+            )
+            await userEvent.click(
+                screen.getByTestId('edit-denominator-expression-button')
             )
             uiAssertions.expectFieldToHaveError(
                 'formfields-denominator',
@@ -196,11 +202,15 @@ describe('Indicators form tests', () => {
                 },
             })
             const anExpression = faker.finance.routingNumber()
+            await userEvent.click(
+                screen.getByTestId('edit-numerator-expression-button')
+            )
             await uiActions.enterInputFieldValue(
                 `numerator`,
                 anExpression,
                 screen
             )
+
             await userEvent.click(screen.getByTestId(`formfields-numerator`))
 
             uiAssertions.expectFieldToHaveError(
@@ -221,11 +231,15 @@ describe('Indicators form tests', () => {
                 },
             })
             const anExpression = faker.finance.routingNumber()
+            await userEvent.click(
+                screen.getByTestId('edit-denominator-expression-button')
+            )
             await uiActions.enterInputFieldValue(
                 `denominator`,
                 anExpression,
                 screen
             )
+
             await userEvent.click(screen.getByTestId(`formfields-denominator`))
 
             uiAssertions.expectFieldToHaveError(
@@ -332,6 +346,7 @@ describe('Indicators form tests', () => {
         )
 
         it('contain all needed field', async () => {
+            const user = userEvent.setup()
             const { screen, indicatorTypes, legendSets, attributes } =
                 await renderForm()
 
@@ -368,8 +383,16 @@ describe('Indicators form tests', () => {
             uiAssertions.expectCheckboxFieldToExist('annualized', false, screen)
 
             // Expression Fields
+            await user.click(
+                screen.getByTestId('edit-numerator-expression-button')
+            )
             uiAssertions.expectTextAreaFieldToExist('numerator', null, screen)
+
+            await user.click(
+                screen.getByTestId('edit-denominator-expression-button')
+            )
             uiAssertions.expectTextAreaFieldToExist('denominator', null, screen)
+
             uiAssertions.expectTextAreaFieldToExist(
                 'numeratorDescription',
                 null,
@@ -416,6 +439,7 @@ describe('Indicators form tests', () => {
         })
 
         it('should submit the data', async () => {
+            const user = userEvent.setup()
             const aName = faker.internet.userName()
             const aShortName = faker.internet.userName()
             const aCode = faker.science.chemicalElement().symbol
@@ -468,10 +492,16 @@ describe('Indicators form tests', () => {
 
             await uiActions.clickOnCheckboxField('annualized', screen)
 
+            await user.click(
+                screen.getByTestId('edit-numerator-expression-button')
+            )
             await uiActions.enterInputFieldValue(
                 'numerator',
                 aNumerator,
                 screen
+            )
+            await user.click(
+                screen.getByTestId('edit-denominator-expression-button')
             )
             await uiActions.enterInputFieldValue(
                 'denominator',
@@ -641,6 +671,7 @@ describe('Indicators form tests', () => {
         )
 
         it('contain all needed field prefilled', async () => {
+            const user = userEvent.setup()
             const {
                 screen,
                 indicator,
@@ -697,10 +728,18 @@ describe('Indicators form tests', () => {
                 screen
             )
 
+            await user.click(
+                screen.getByTestId('edit-numerator-expression-button')
+            )
+
             uiAssertions.expectTextAreaFieldToExist(
                 'numerator',
                 indicator.numerator,
                 screen
+            )
+
+            await user.click(
+                screen.getByTestId('edit-denominator-expression-button')
             )
             uiAssertions.expectTextAreaFieldToExist(
                 'denominator',

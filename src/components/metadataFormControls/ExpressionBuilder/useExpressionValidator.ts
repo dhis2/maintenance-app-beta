@@ -13,6 +13,7 @@ interface ValidateExpressionResponse {
 export const useExpressionValidator = (resource: string) => {
     const engine = useDataEngine()
     const [description, setDescription] = useState<string | null>(null)
+    const [validating, setValidating] = useState(false)
 
     const memoized = useMemo(
         () =>
@@ -22,6 +23,7 @@ export const useExpressionValidator = (resource: string) => {
                     return undefined
                 }
 
+                setValidating(true)
                 try {
                     const result = (await engine.mutate({
                         resource,
@@ -39,6 +41,8 @@ export const useExpressionValidator = (resource: string) => {
                 } catch {
                     setDescription(null)
                     return i18n.t('Could not validate expression')
+                } finally {
+                    setValidating(false)
                 }
             }),
         [resource, engine]
@@ -53,5 +57,5 @@ export const useExpressionValidator = (resource: string) => {
         leading: true,
     })
 
-    return [debouncedValidate, description] as const
+    return [debouncedValidate, description, validating] as const
 }

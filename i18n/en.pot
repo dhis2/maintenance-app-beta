@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-07T10:51:45.812Z\n"
-"PO-Revision-Date: 2025-08-07T10:51:45.813Z\n"
+"POT-Creation-Date: 2025-08-09T11:24:38.032Z\n"
+"PO-Revision-Date: 2025-08-09T11:24:38.032Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -126,8 +126,8 @@ msgstr "Save and close"
 msgid "<No value>"
 msgstr "<No value>"
 
-msgid "Custom Attributes"
-msgstr "Custom Attributes"
+msgid "Attributes"
+msgstr "Attributes"
 
 msgid "Set up information for the attributes assigned to {{modelName}}."
 msgstr "Set up information for the attributes assigned to {{modelName}}."
@@ -238,9 +238,6 @@ msgstr "No potential targets available. Remove an item from sources."
 msgid "At least one source is required"
 msgstr "At least one source is required"
 
-msgid "Invalid expression"
-msgstr "Invalid expression"
-
 msgid "Valid expression"
 msgstr "Valid expression"
 
@@ -249,6 +246,15 @@ msgstr "Add operators, variables, functions, and constants from right sidebar"
 
 msgid "Apply"
 msgstr "Apply"
+
+msgid "Description (required)"
+msgstr "Description (required)"
+
+msgid "Help text, where is this used?"
+msgstr "Help text, where is this used?"
+
+msgid "Invalid expression"
+msgstr "Invalid expression"
 
 msgid "Could not validate expression"
 msgstr "Could not validate expression"
@@ -735,9 +741,6 @@ msgstr "Constants"
 
 msgid "Attribute"
 msgstr "Attribute"
-
-msgid "Attributes"
-msgstr "Attributes"
 
 msgid "Option set"
 msgstr "Option set"
@@ -2173,9 +2176,6 @@ msgstr "All selected indicators were merged successfully."
 msgid "Edit denominator expression"
 msgstr "Edit denominator expression"
 
-msgid "Description (required)"
-msgstr "Description (required)"
-
 msgid "Set up the basic information for this indicator."
 msgstr "Set up the basic information for this indicator."
 
@@ -2251,6 +2251,9 @@ msgid ""
 msgstr ""
 "Map this indicator to a specific attribute option combinations when "
 "exporting aggregate data."
+
+msgid "Numerator Expression"
+msgstr "Numerator Expression"
 
 msgid "Edit numerator expression"
 msgstr "Edit numerator expression"
