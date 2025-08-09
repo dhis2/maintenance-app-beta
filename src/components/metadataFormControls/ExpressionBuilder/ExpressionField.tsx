@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, InputFieldFF, CircularLoader } from '@dhis2/ui'
+import { Button, InputFieldFF } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import { StandardFormField } from '../../standardForm'
@@ -7,13 +7,13 @@ import { ExpressionBuilderModal } from './ExpressionBuilderModal'
 import styles from './ExpressionField.module.css'
 import { useExpressionValidator } from './useExpressionValidator'
 
-type ExpressionFieldProps = {
+type ExpressionFieldProps = Readonly<{
     fieldName: string
     descriptionFieldName: string
     modalTitle: string
     editButtonText: string
     validationResource: string
-}
+}>
 
 export function ExpressionField({
     fieldName,
@@ -27,8 +27,7 @@ export function ExpressionField({
     const field = useField<string>(fieldName, { subscription: { value: true } })
     const fieldValue = field.input.value
 
-    const [validate, description, validating] =
-        useExpressionValidator(validationResource)
+    const [validate, description] = useExpressionValidator(validationResource)
 
     useEffect(() => {
         if (fieldValue) {
@@ -45,13 +44,9 @@ export function ExpressionField({
 
     return (
         <div className={styles.container}>
-            {validating ? (
-                <div className={styles.loaderBox}>
-                    <CircularLoader small />
-                </div>
-            ) : description ? (
+            {description && (
                 <div className={styles.expressionBox}>{description}</div>
-            ) : null}
+            )}
 
             <div className={styles.buttonWrapper}>
                 <Button
