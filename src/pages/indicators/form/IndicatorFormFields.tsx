@@ -42,7 +42,11 @@ export const IndicatorFormFields = () => {
                     {i18n.t('Set up the basic information for this indicator.')}
                 </StandardFormSectionDescription>
 
-                <DefaultIdentifiableFields />
+                <DefaultIdentifiableFields
+                    shortNameHelpText={i18n.t(
+                        'A short, unique name (max 50 characters). Displayed in analysis apps where space is limited, depending on user or system settings.'
+                    )}
+                />
 
                 <StandardFormField>
                     <DescriptionField
@@ -74,48 +78,50 @@ export const IndicatorFormFields = () => {
                 name={descriptor.getSection('expressions').name}
             >
                 <StandardFormSectionTitle>
-                    {i18n.t('Indicator expressions')}
+                    {i18n.t('Calculation details')}
                 </StandardFormSectionTitle>
 
                 <StandardFormSectionDescription>
-                    {i18n.t('Configure the expressions and type of indicator.')}
+                    {i18n.t(
+                        "Define how the indicator is calculated and how it's result will be displayed."
+                    )}
                 </StandardFormSectionDescription>
-                <StandardFormField>
-                    <IndicatorTypeField />
-                </StandardFormField>
+
                 <StandardFormField>
                     <NumeratorFields />
                 </StandardFormField>
                 <StandardFormField>
                     <DenominatorFields />
                 </StandardFormField>
-            </SectionedFormSection>
-            <SectionedFormSection name={descriptor.getSection('options').name}>
-                <StandardFormSectionTitle>
-                    {i18n.t('Indicator options')}
-                </StandardFormSectionTitle>
 
-                <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Configure how this indicator is calculated and displayed.'
-                    )}
-                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <IndicatorTypeField
+                        helpText={i18n.t(
+                            'Select how the indicator result should be expressed (per cent, per thousand, etc.)'
+                        )}
+                    />
+                </StandardFormField>
+
                 <StandardFormField>
                     <FieldRFF
                         name="annualized"
                         type="checkbox"
                         dataTest="formfields-annualized"
                         component={CheckboxFieldFF}
-                        label={i18n.t('Annualized')}
+                        label={i18n.t('Use annualized calculation')}
                     />
                 </StandardFormField>
+
                 <StandardFormField>
                     <SingleSelectFieldFF
                         input={decimalsInput}
                         meta={decimalsMeta}
+                        helpText={i18n.t(
+                            'Select how many decimal places to display in outputs for this indicator'
+                        )}
                         dataTest="decimals-field"
-                        label={i18n.t('Decimals in data output')}
-                        inputWidth="400px"
+                        label={i18n.t('Number of decimal places to show')}
+                        inputWidth="300px"
                         options={[
                             { label: i18n.t('<No value>'), value: '' },
                             ...[0, 1, 2, 3, 4, 5].map((d) => ({
@@ -126,34 +132,15 @@ export const IndicatorFormFields = () => {
                         placeholder={i18n.t('Select number of decimals')}
                     />
                 </StandardFormField>
-                <StandardFormField>
-                    <FieldRFF<string | undefined>
-                        inputWidth="400px"
-                        dataTest="formfields-aggregateExportCategoryOptionCombo"
-                        name="aggregateExportCategoryOptionCombo"
-                        label={i18n.t('Aggregate export category option combo')}
-                        component={InputFieldFF}
-                    />
-                </StandardFormField>
-
-                <StandardFormField>
-                    <FieldRFF<string | undefined>
-                        component={InputFieldFF}
-                        dataTest="formfields-aggregateExportAttributeOptionCombo"
-                        name="aggregateExportAttributeOptionCombo"
-                        inputWidth="400px"
-                        label={i18n.t(
-                            'Aggregate export attribute option combo'
-                        )}
-                    />
-                </StandardFormField>
             </SectionedFormSection>
             <SectionedFormSection name={descriptor.getSection('legends').name}>
                 <StandardFormSectionTitle>
                     {i18n.t('Legends')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t('Set up the program indicator legends.')}
+                    {i18n.t(
+                        'Select legends to visually categorize values for this indicator in data entry and analytics apps.'
+                    )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <ModelTransferField
@@ -166,16 +153,52 @@ export const IndicatorFormFields = () => {
                                 fields: ['id', 'displayName'],
                             },
                         }}
-                        leftHeader={i18n.t('Available legends')}
-                        rightHeader={i18n.t('Selected legends')}
-                        filterPlaceholder={i18n.t('Filter available legends')}
-                        filterPlaceholderPicked={i18n.t(
-                            'Filter selected legends'
+                        enableOrderChange={true}
+                        rightHeader={i18n.t('Chosen legends')}
+                        hideFilterInputPicked={true}
+                    />
+                </StandardFormField>
+            </SectionedFormSection>
+            <SectionedFormSection name={descriptor.getSection('options').name}>
+                <StandardFormSectionTitle>
+                    {i18n.t('Mapping Settings')}
+                </StandardFormSectionTitle>
+
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Configure how this indicator links to specific category and attribute combinations for data export.'
+                    )}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <FieldRFF<string | undefined>
+                        inputWidth="400px"
+                        dataTest="formfields-aggregateExportCategoryOptionCombo"
+                        name="aggregateExportCategoryOptionCombo"
+                        label={i18n.t(
+                            'Category option combination for aggregate data export'
+                        )}
+                        helpText={i18n.t(
+                            'Map this indicator to a specific category option combinations when exporting aggregate data.'
+                        )}
+                        component={InputFieldFF}
+                    />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <FieldRFF<string | undefined>
+                        component={InputFieldFF}
+                        dataTest="formfields-aggregateExportAttributeOptionCombo"
+                        name="aggregateExportAttributeOptionCombo"
+                        inputWidth="400px"
+                        label={i18n.t(
+                            'Attribute option combination for aggregate data export'
+                        )}
+                        helpText={i18n.t(
+                            'Map this indicator to a specific attribute option combinations when exporting aggregate data.'
                         )}
                     />
                 </StandardFormField>
             </SectionedFormSection>
-
             <CustomAttributesSection schemaSection={section} sectionedLayout />
         </SectionedFormSections>
     )

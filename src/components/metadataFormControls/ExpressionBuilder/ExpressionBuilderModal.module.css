@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    gap: 16px;
+    min-height: 300px;
+}
+
+.leftPanel {
+    flex: 1;
+}
+
+.rightPanel {
+    width: 320px;
+}
+
+.noticeBox {
+    margin-top: 8px;
+}
+.info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--color-grey-400);
+}
