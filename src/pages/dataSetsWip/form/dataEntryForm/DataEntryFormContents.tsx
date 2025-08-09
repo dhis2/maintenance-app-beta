@@ -11,6 +11,7 @@ import {
 } from '../../../../components'
 import { SectionedFormSection } from '../../../../components/sectionedForm'
 import { TooltipWrapper } from '../../../../components/tooltip'
+import { DataSet } from '../../../../types/generated'
 import { DisplayOptionsField } from '../DisplayOptionsField'
 import { useDataSetField } from '../formHooks'
 import classes from './DataEntryFormContents.module.css'
@@ -204,7 +205,11 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                     <StandardFormSectionTitle>
                         {i18n.t('Display options')}
                     </StandardFormSectionTitle>
-                    <DisplayOptionsField />
+                    <DisplayOptionsField
+                        withSectionsDisplayOptions={
+                            controlledFormType === DataSet.formType.SECTION
+                        }
+                    />
                 </div>
             )}
         </SectionedFormSection>
