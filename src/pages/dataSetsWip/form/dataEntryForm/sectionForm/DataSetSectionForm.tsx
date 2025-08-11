@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { useQuery } from '@tanstack/react-query'
+import arrayMutators from 'final-form-arrays'
 import React, { useCallback, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { FormBase, FormBaseProps } from '../../../../../components'
@@ -33,6 +34,7 @@ export const fieldFilters = [
     'disableDataElementAutoGroup',
     'displayOptions',
     'dataElements[id,displayName]',
+    'greyedFields[dataElement, categoryOptionCombo]',
 ] as const
 
 const dataSetSectionSchemaSection = {
@@ -99,6 +101,7 @@ export const DataSetSectionForm = ({
             onSubmit={onSubmit}
             valueFormatter={valueFormatter}
             includeAttributes={false}
+            mutators={{ ...arrayMutators }}
         >
             <DataSetSectionFormContents onCancel={onCancel} />
         </FormBase>
