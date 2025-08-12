@@ -13,3 +13,26 @@
 .customTextAlignOptionsAndTitle p {
     margin: var(--spacers-dp8) 0;
 }
+.renderAsTabsOptions {
+    margin: 0 var(--spacers-dp24);
+}
+
+.displayMode p {
+    margin: var(--spacers-dp4) 0;
+    font-weight: 500;
+    color: var(--colors-grey800);
+}
+
+.displayMode {
+    margin: var(--spacers-dp16) 0;
+}
+
+.renderHorizontally {
+    margin: var(--spacers-dp16) 0;
+}
+
+.renderHorizontally p {
+    color: var(--colors-grey600);
+    font-weight: initial;
+    font-size: 13px;
+}
