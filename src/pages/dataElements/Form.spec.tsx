@@ -865,15 +865,8 @@ describe('Data elements form tests', () => {
                 }
             }
         )
-        it('contain all needed field prefilled', async () => {
-            const {
-                screen,
-                dataElement,
-                categoryCombos,
-                optionSets,
-                legendSets,
-                attributes,
-            } = await renderForm()
+        it('contains the basic information field prefilled', async () => {
+            const { screen, dataElement } = await renderForm()
 
             uiAssertions.expectNameFieldExist(dataElement.name, screen)
             uiAssertions.expectInputFieldToExist(
@@ -933,6 +926,10 @@ describe('Data elements form tests', () => {
                     getConstantTranslation(dataElement.aggregationType)
                 )
             }
+        })
+        it('contains the disaggregation and option sets field prefilled', async () => {
+            const { screen, dataElement, categoryCombos, optionSets } =
+                await renderForm()
 
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('formfields-categorycombo'),
@@ -973,6 +970,10 @@ describe('Data elements form tests', () => {
                 },
                 screen
             )
+        })
+        it('contains the legend set field prefilled', async () => {
+            const { screen, legendSets } = await renderForm()
+
             await uiAssertions.expectTransferFieldToExistWithOptions(
                 'legendset-transfer',
                 {
@@ -981,6 +982,10 @@ describe('Data elements form tests', () => {
                 },
                 screen
             )
+        })
+        it('contains attributes prefilled', async () => {
+            const { screen, dataElement, attributes } = await renderForm()
+
             attributes.forEach((attribute: { id: string }) => {
                 const attributeInput = screen.getByTestId(
                     `attribute-${attribute.id}`
