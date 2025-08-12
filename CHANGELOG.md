@@ -1,3 +1,10 @@
+# [0.58.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.57.0...v0.58.0) (2025-08-12)
+
+
+### Features
+
+* sections display options ([#607](https://github.com/dhis2/maintenance-app-beta/issues/607)) ([3b8203a](https://github.com/dhis2/maintenance-app-beta/commit/3b8203a176f5f70769a8c0e36be4716da30829f7))
+
 # [0.57.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.56.2...v0.57.0) (2025-08-04)
 
 
