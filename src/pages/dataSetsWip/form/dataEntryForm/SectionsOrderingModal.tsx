@@ -39,18 +39,20 @@ export const SectionsOrderingModal = ({
         try {
             setIsSaving(true)
             for (const [index, section] of orderedSections.entries()) {
-                await dataEngine.mutate({
-                    resource: 'sections',
-                    id: section.id,
-                    type: 'json-patch',
-                    data: [
-                        {
-                            op: 'replace',
-                            path: '/sortOrder',
-                            value: index,
-                        },
-                    ],
-                })
+                if (section.id !== sections[index]?.id) {
+                    await dataEngine.mutate({
+                        resource: 'sections',
+                        id: section.id,
+                        type: 'json-patch',
+                        data: [
+                            {
+                                op: 'replace',
+                                path: '/sortOrder',
+                                value: index,
+                            },
+                        ],
+                    })
+                }
                 onReorder(index, section)
             }
             saveAlert.show({
@@ -90,7 +92,13 @@ export const SectionsOrderingModal = ({
                 {orderedSections.map((section, index) => (
                     <React.Fragment key={section.id}>
                         <div className={css.sectionRow}>
-                            {section.displayName}
+                            <text>
+                                {section.displayName}
+                                <text className={css.warningText}>
+                                    {section.deleted &&
+                                        ' ' + i18n.t('(marked for deletion)')}
+                                </text>
+                            </text>
                             <div className={css.sectionRowButtons}>
                                 <Button
                                     small

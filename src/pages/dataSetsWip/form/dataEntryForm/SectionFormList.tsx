@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip, IconAdd16 } from '@dhis2/ui'
-import React, { useState } from 'react'
+import React, { ComponentProps, useState } from 'react'
 import { useFieldArray } from 'react-final-form-arrays'
 import {
     StandardFormSectionTitle,
@@ -20,11 +20,10 @@ import { SectionsOrderingModal } from './SectionsOrderingModal'
 type Section = DataSetValues['sections'][number]
 
 export const SectionFormSectionsList = () => {
-    const [sectionFormOpen, setSectionFormOpen] = React.useState<
+    const [sectionFormOpen, setSectionFormOpen] = useState<
         DisplayableModel | null | undefined
     >(undefined)
-    const [orderSectionsFormOpen, setOrderSectionsFormOpen] =
-        React.useState(false)
+    const [orderSectionsFormOpen, setOrderSectionsFormOpen] = useState(false)
     // use null as open, but new model
     const isSectionFormOpen = !!sectionFormOpen || sectionFormOpen === null
     const sectionFieldArray = useFieldArray<Section>('sections').fields
@@ -43,7 +42,7 @@ export const SectionFormSectionsList = () => {
         })
     }
 
-    const handleSubmittedSection: React.ComponentProps<
+    const handleSubmittedSection: ComponentProps<
         typeof EditOrNewDataSetSectionForm
     >['onSubmitted'] = (values) => {
         const isEditSection = sectionFormOpen && sectionFormOpen.id
@@ -139,6 +138,7 @@ export const SectionFormSectionsList = () => {
                         secondary
                         small
                         onClick={() => setOrderSectionsFormOpen(true)}
+                        disabled={sectionFieldArray.value.length <= 1}
                     >
                         {i18n.t('Reorder sections')}
                     </Button>

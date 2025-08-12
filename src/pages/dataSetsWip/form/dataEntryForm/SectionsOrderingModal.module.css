@@ -15,3 +15,8 @@
     flex-direction: row;
     gap: var(--spacers-dp8);
 }
+
+.warningText {
+    font-size: 12px;
+    color: var(--colors-red500);
+}
