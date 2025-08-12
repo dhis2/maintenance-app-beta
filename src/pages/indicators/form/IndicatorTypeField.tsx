@@ -8,7 +8,11 @@ import {
 } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { required } from '../../../lib'
 
-export const IndicatorTypeField = () => {
+type IndicatorTypeFieldsProps = {
+    helpText?: string
+}
+
+export const IndicatorTypeField = ({ helpText }: IndicatorTypeFieldsProps) => {
     const newIndicatorTypeLink = useHref('/indicatorTypes/new')
     const refresh = useRefreshModelSingleSelect({ resource: 'indicatorTypes' })
 
@@ -21,6 +25,7 @@ export const IndicatorTypeField = () => {
                 <ModelSingleSelectFormField
                     dataTest="formfields-indicatortype"
                     name="indicatorType"
+                    helpText={helpText}
                     label={i18n.t('Indicator type')}
                     validate={required}
                     query={{

@@ -1,35 +1,15 @@
 import i18n from '@dhis2/d2-i18n'
-import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { Field as FieldRFF } from 'react-final-form'
-import { StandardFormField } from '../../../components'
-import { ExpressionBuilderField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderField'
+import { ExpressionField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionField'
 
-function DenominatorFields() {
+export default function DenominatorFields() {
     return (
-        <>
-            <StandardFormField>
-                <FieldRFF<string | undefined>
-                    component={InputFieldFF}
-                    inputWidth="400px"
-                    required
-                    dataTest="formfields-denominatorDescription"
-                    name="denominatorDescription"
-                    label={i18n.t('Denominator description')}
-                />
-            </StandardFormField>
-
-            <StandardFormField>
-                <ExpressionBuilderField
-                    name="denominator"
-                    label={i18n.t('Edit denominator')}
-                    validationResource="indicators/expression/description"
-                    required
-                    dataTest="formfields-denominator"
-                />
-            </StandardFormField>
-        </>
+        <ExpressionField
+            fieldName="denominator"
+            descriptionFieldName="denominatorDescription"
+            modalTitle={i18n.t('Denominator Expression')}
+            editButtonText={i18n.t('Edit denominator expression')}
+            validationResource="indicators/expression/description"
+        />
     )
 }
-
-export default DenominatorFields
