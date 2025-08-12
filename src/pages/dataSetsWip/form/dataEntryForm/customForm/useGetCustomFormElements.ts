@@ -6,7 +6,6 @@ import {
     useBoundResourceQueryFn,
     DEFAULT_CATEGORY_OPTION_COMBO,
 } from '../../../../../lib/index'
-import { useCompulsoryDataElementOperandsQuery } from '../../useGetCompulsoryDataElementOperandsOptions'
 
 type FlagItemResponse = { name: string; key: string; path: string }
 
@@ -61,14 +60,6 @@ export const useGetCustomFormElements = () => {
     // get indicators from form state
     const { input: indicatorsInput } = useField('indicators')
     const indicators = indicatorsInput.value
-
-    // get data element operands from form state, and derive totals when de is disaggregated
-    const { input: dseInput } = useField('dataSetElements')
-    // const { data: deOperands } = useCompulsoryDataElementOperandsQuery({
-    //     dataSetElements: dseInput.value,
-    // }) ?? {
-    //     data: {},
-    // }
 
     const queryFn = useBoundResourceQueryFn()
     const { data: deoData, isLoading } = useQuery({
@@ -155,5 +146,5 @@ export const useGetCustomFormElements = () => {
         [dataElements, totals, indicators, flags]
     )
 
-    return { loading: flagsQuery.isLoading, elementTypes }
+    return { loading: flagsQuery.isLoading ?? isLoading, elementTypes }
 }
