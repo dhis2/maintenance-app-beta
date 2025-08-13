@@ -5,6 +5,7 @@ import React from 'react'
 import schemaMock from '../../__mocks__/schema/dataElementsSchema.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
 import {
+    DEFAULT_CATEGORY_COMBO,
     DEFAULT_CATEGORYCOMBO_SELECT_OPTION,
     getConstantTranslation,
     SECTIONS_MAP,
@@ -548,15 +549,8 @@ describe('Data elements form tests', () => {
                 `/${section.namePlural}`
             )
         })
-        it('should submit the data', async () => {
-            const {
-                screen,
-                legendSets,
-                categoryCombos,
-                optionSets,
-                attributes,
-                organisationUnitLevels,
-            } = await renderForm()
+        it('should submit the basic information', async () => {
+            const { screen } = await renderForm()
             const aName = faker.animal.bird()
             const aShortName = faker.person.firstName()
             const aCode = faker.science.chemicalElement().symbol
@@ -564,7 +558,6 @@ describe('Data elements form tests', () => {
             const aDescription = faker.company.buzzPhrase()
             const aUrl = faker.internet.url()
             const aFieldMask = faker.internet.displayName()
-            const anAttribute = faker.internet.userName()
 
             await uiActions.enterName(aName, screen)
             await uiActions.enterInputFieldValue(
@@ -592,36 +585,6 @@ describe('Data elements form tests', () => {
                 1,
                 screen
             )
-            await uiActions.pickOptionFromSelect(
-                screen.getByTestId('formfields-categorycombo'),
-                1,
-                screen
-            )
-            await uiActions.pickOptionFromSelect(
-                screen.getByTestId('formfields-optionset'),
-                0,
-                screen
-            )
-            await uiActions.pickOptionFromSelect(
-                screen.getByTestId('formfields-commentoptionset'),
-                2,
-                screen
-            )
-            await uiActions.pickOptionInTransfer(
-                'legendset-transfer',
-                legendSets[1].displayName,
-                screen
-            )
-            await uiActions.pickOptionFromMultiSelect(
-                screen.getByTestId('formfields-aggregationlevels'),
-                [1, 2],
-                screen
-            )
-
-            const attributeInput = within(
-                screen.getByTestId(`attribute-${attributes[0].id}`)
-            ).getByRole('textbox') as HTMLInputElement
-            await userEvent.type(attributeInput, anAttribute)
             await uiActions.submitForm(screen)
 
             expect(createMock).toHaveBeenCalledWith(
@@ -638,12 +601,115 @@ describe('Data elements form tests', () => {
                         domainType: 'AGGREGATE',
                         valueType: 'LONG_TEXT',
                         categoryCombo: expect.objectContaining({
+                            id: DEFAULT_CATEGORY_COMBO.id,
+                        }),
+                        optionSet: undefined,
+                        commentOptionSet: undefined,
+                        legendSets: [],
+                        aggregationLevels: [],
+                        attributeValues: [],
+                    }),
+                })
+            )
+        })
+        it('should submit the disaggregation and option sets', async () => {
+            const { screen, categoryCombos, optionSets } = await renderForm()
+            const aName = faker.animal.bird()
+            const aShortName = faker.person.firstName()
+
+            await uiActions.enterName(aName, screen)
+            await uiActions.enterInputFieldValue(
+                'shortName',
+                aShortName,
+                screen
+            )
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('formfields-categorycombo'),
+                1,
+                screen
+            )
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('formfields-optionset'),
+                0,
+                screen
+            )
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('formfields-commentoptionset'),
+                2,
+                screen
+            )
+            await uiActions.submitForm(screen)
+
+            expect(createMock).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    data: expect.objectContaining({
+                        name: aName,
+                        shortName: aShortName,
+                        code: undefined,
+                        formName: undefined,
+                        description: undefined,
+                        url: undefined,
+                        fieldMask: undefined,
+                        zeroIsSignificant: false,
+                        domainType: 'AGGREGATE',
+                        valueType: 'TEXT',
+                        categoryCombo: expect.objectContaining({
                             id: categoryCombos[0].id,
                         }),
                         optionSet: undefined,
                         commentOptionSet: expect.objectContaining({
                             id: optionSets[1].id,
                         }),
+                        legendSets: [],
+                        aggregationLevels: [],
+                        attributeValues: [],
+                    }),
+                })
+            )
+        })
+        it('should submit the legend set and aggregation levels', async () => {
+            const { screen, legendSets, organisationUnitLevels } =
+                await renderForm()
+            const aName = faker.animal.bird()
+            const aShortName = faker.person.firstName()
+
+            await uiActions.enterName(aName, screen)
+            await uiActions.enterInputFieldValue(
+                'shortName',
+                aShortName,
+                screen
+            )
+            await uiActions.pickOptionInTransfer(
+                'legendset-transfer',
+                legendSets[1].displayName,
+                screen
+            )
+            await uiActions.pickOptionFromMultiSelect(
+                screen.getByTestId('formfields-aggregationlevels'),
+                [1, 2],
+                screen
+            )
+
+            await uiActions.submitForm(screen)
+
+            expect(createMock).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    data: expect.objectContaining({
+                        name: aName,
+                        shortName: aShortName,
+                        code: undefined,
+                        formName: undefined,
+                        description: undefined,
+                        url: undefined,
+                        fieldMask: undefined,
+                        zeroIsSignificant: false,
+                        domainType: 'AGGREGATE',
+                        valueType: 'TEXT',
+                        categoryCombo: expect.objectContaining({
+                            id: DEFAULT_CATEGORY_COMBO.id,
+                        }),
+                        optionSet: undefined,
+                        commentOptionSet: undefined,
                         legendSets: [
                             expect.objectContaining({ id: legendSets[1].id }),
                         ],
@@ -651,6 +717,49 @@ describe('Data elements form tests', () => {
                             organisationUnitLevels[1].level,
                             organisationUnitLevels[2].level,
                         ],
+                        attributeValues: [],
+                    }),
+                })
+            )
+        })
+        it('should submit the attributes', async () => {
+            const { screen, attributes } = await renderForm()
+            const aName = faker.animal.bird()
+            const aShortName = faker.person.firstName()
+            const anAttribute = faker.internet.userName()
+
+            await uiActions.enterName(aName, screen)
+            await uiActions.enterInputFieldValue(
+                'shortName',
+                aShortName,
+                screen
+            )
+            const attributeInput = within(
+                screen.getByTestId(`attribute-${attributes[0].id}`)
+            ).getByRole('textbox') as HTMLInputElement
+            await userEvent.type(attributeInput, anAttribute)
+            await uiActions.submitForm(screen)
+
+            expect(createMock).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    data: expect.objectContaining({
+                        name: aName,
+                        shortName: aShortName,
+                        code: undefined,
+                        formName: undefined,
+                        description: undefined,
+                        url: undefined,
+                        fieldMask: undefined,
+                        zeroIsSignificant: false,
+                        domainType: 'AGGREGATE',
+                        valueType: 'TEXT',
+                        categoryCombo: expect.objectContaining({
+                            id: DEFAULT_CATEGORY_COMBO.id,
+                        }),
+                        optionSet: undefined,
+                        commentOptionSet: undefined,
+                        legendSets: [],
+                        aggregationLevels: [],
                         attributeValues: [
                             {
                                 attribute: expect.objectContaining({
@@ -756,15 +865,8 @@ describe('Data elements form tests', () => {
                 }
             }
         )
-        it('contain all needed field prefilled', async () => {
-            const {
-                screen,
-                dataElement,
-                categoryCombos,
-                optionSets,
-                legendSets,
-                attributes,
-            } = await renderForm()
+        it('contains the basic information field prefilled', async () => {
+            const { screen, dataElement } = await renderForm()
 
             uiAssertions.expectNameFieldExist(dataElement.name, screen)
             uiAssertions.expectInputFieldToExist(
@@ -824,6 +926,10 @@ describe('Data elements form tests', () => {
                     getConstantTranslation(dataElement.aggregationType)
                 )
             }
+        })
+        it('contains the disaggregation and option sets field prefilled', async () => {
+            const { screen, dataElement, categoryCombos, optionSets } =
+                await renderForm()
 
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('formfields-categorycombo'),
@@ -864,6 +970,10 @@ describe('Data elements form tests', () => {
                 },
                 screen
             )
+        })
+        it('contains the legend set field prefilled', async () => {
+            const { screen, legendSets } = await renderForm()
+
             await uiAssertions.expectTransferFieldToExistWithOptions(
                 'legendset-transfer',
                 {
@@ -872,6 +982,10 @@ describe('Data elements form tests', () => {
                 },
                 screen
             )
+        })
+        it('contains attributes prefilled', async () => {
+            const { screen, dataElement, attributes } = await renderForm()
+
             attributes.forEach((attribute: { id: string }) => {
                 const attributeInput = screen.getByTestId(
                     `attribute-${attribute.id}`
@@ -894,7 +1008,13 @@ describe('Data elements form tests', () => {
             )
         })
         it('should do nothing and return to the list view on success when no field is changed', async () => {
-            const { screen } = await renderForm()
+            const { screen } = await renderForm({
+                dataElementOverwrites: {
+                    valueType: 'TEXT',
+                    aggregationType: 'NONE',
+                    optionSet: null,
+                },
+            })
             await uiActions.submitForm(screen)
             expect(updateMock).not.toHaveBeenCalled()
         })

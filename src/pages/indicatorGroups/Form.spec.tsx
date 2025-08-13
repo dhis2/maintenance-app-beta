@@ -1,4 +1,4 @@
-describe('Indicators form tests', () => {
+describe('Indicator groups form tests', () => {
     describe('Common', () => {
         it('should not submit when a required values is missing ', () => {})
         it('should show an error if name field is too long', () => {})

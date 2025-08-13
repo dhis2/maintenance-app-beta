@@ -40,7 +40,7 @@ const fieldFilters = [
     'formType',
     'displayOptions',
     'legendSets[id,displayName]',
-    'dataEntryForm',
+    'dataEntryForm[id,displayName,htmlCode]',
     'sections[id,displayName,description,access]',
 ] as const
 
@@ -48,7 +48,10 @@ type DataSetValuesFromFilters = PickWithFieldFilters<
     DataSet,
     typeof fieldFilters
 >
-export type DataSetValues = Omit<DataSetValuesFromFilters, 'sections'> & {
+export type DataSetValues = Omit<
+    DataSetValuesFromFilters,
+    'sections' | 'dataEntryForm'
+> & {
     sections: {
         id: string
         displayName: string
@@ -56,6 +59,25 @@ export type DataSetValues = Omit<DataSetValuesFromFilters, 'sections'> & {
         deleted?: boolean
         access?: Access
     }[]
+    dataEntryForm?: {
+        id: string
+        customHTML: string
+        deleted?: boolean
+    }
+}
+
+const getErrorMessage = (failures: string[]): string => {
+    const customFormFailure = failures.slice(-1)?.[0] === 'customForm'
+    const sectionFailures = customFormFailure
+        ? failures.length > 1
+        : failures.length > 0
+    if (customFormFailure && !sectionFailures) {
+        return 'There was an error deleting the custom form'
+    }
+    if (!customFormFailure && sectionFailures) {
+        return 'There was an error deleting sections: {{sectionNames}}'
+    }
+    return 'There was an error deleting the custom form and sections: {{sectionNames}}'
 }
 
 export const useOnSubmitDataSetsEdit = (modelId: string) => {
@@ -68,9 +90,20 @@ export const useOnSubmitDataSetsEdit = (modelId: string) => {
 
     return useMemo<EnhancedOnSubmit<DataSetValues>>(
         () => async (values, form, options) => {
-            const sectionsToDelete = form
-                .getState()
-                .values.sections.filter((s) => s.deleted)
+            const formValues = form.getState().values
+            const sectionsToDelete = formValues.sections.filter(
+                (s) => s.deleted
+            )
+
+            const customFormDeleteResult =
+                formValues?.dataEntryForm?.deleted &&
+                (await Promise.allSettled([
+                    dataEngine.mutate({
+                        resource: 'dataEntryForms',
+                        id: formValues.dataEntryForm.id,
+                        type: 'delete',
+                    }),
+                ]))
 
             const deletionResults = await Promise.allSettled(
                 sectionsToDelete.map((s) =>
@@ -86,15 +119,27 @@ export const useOnSubmitDataSetsEdit = (modelId: string) => {
                 .map((deletion, i) => ({
                     ...deletion,
                     sectionName: sectionsToDelete[i].displayName,
+                    type: 'section',
                 }))
                 .filter((deletion) => deletion.status === 'rejected')
+
+            if (
+                customFormDeleteResult &&
+                customFormDeleteResult?.[0]?.status === 'rejected'
+            ) {
+                failures.push({
+                    ...customFormDeleteResult[0],
+                    sectionName: '',
+                    type: 'customForm',
+                })
+            }
             if (failures.length > 0) {
                 await queryClient.invalidateQueries({
                     queryKey: [{ resource: section.namePlural }],
                 })
                 return createFormError({
                     message: i18n.t(
-                        'There was an error deleting sections: {{sectionNames}}',
+                        getErrorMessage(failures.map((f) => f.type)),
                         {
                             sectionNames: failures
                                 .map((f) => f.sectionName)
@@ -106,7 +151,15 @@ export const useOnSubmitDataSetsEdit = (modelId: string) => {
                 })
             }
 
-            submitEdit(values, form, options)
+            const trimmedValues = {
+                ...values,
+                dataEntryForm:
+                    customFormDeleteResult &&
+                    customFormDeleteResult?.[0]?.status !== 'rejected'
+                        ? null
+                        : values.dataEntryForm,
+            } as DataSetValues
+            submitEdit(trimmedValues, form, options)
         },
         [submitEdit, dataEngine, queryClient]
     )
