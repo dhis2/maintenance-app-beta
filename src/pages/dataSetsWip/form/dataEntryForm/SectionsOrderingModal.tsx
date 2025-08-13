@@ -11,6 +11,7 @@ import {
     ModalContent,
     ModalTitle,
 } from '@dhis2/ui'
+import cx from 'classnames'
 import React from 'react'
 import { DataSetValues } from '../../Edit'
 import css from './SectionsOrderingModal.module.css'
@@ -91,7 +92,11 @@ export const SectionsOrderingModal = ({
             <ModalContent className={css.sectionRows}>
                 {orderedSections.map((section, index) => (
                     <React.Fragment key={section.id}>
-                        <div className={css.sectionRow}>
+                        <div
+                            className={cx(css.sectionRow, {
+                                [css.sectionRowDeleted]: section.deleted,
+                            })}
+                        >
                             <text>
                                 {section.displayName}
                                 <text className={css.warningText}>
@@ -105,7 +110,7 @@ export const SectionsOrderingModal = ({
                                     secondary
                                     icon={<IconArrowUp16 />}
                                     onClick={() => onMove(section, -1)}
-                                    disabled={index === 0}
+                                    disabled={index === 0 || section.deleted}
                                 />
                                 <Button
                                     small
@@ -113,7 +118,8 @@ export const SectionsOrderingModal = ({
                                     icon={<IconArrowDown16 />}
                                     onClick={() => onMove(section, 1)}
                                     disabled={
-                                        index === orderedSections.length - 1
+                                        index === orderedSections.length - 1 ||
+                                        section.deleted
                                     }
                                 />
                             </div>
