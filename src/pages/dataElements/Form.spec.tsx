@@ -894,7 +894,13 @@ describe('Data elements form tests', () => {
             )
         })
         it('should do nothing and return to the list view on success when no field is changed', async () => {
-            const { screen } = await renderForm()
+            const { screen } = await renderForm({
+                dataElementOverwrites: {
+                    valueType: 'TEXT',
+                    aggregationType: 'NONE',
+                    optionSet: null,
+                },
+            })
             await uiActions.submitForm(screen)
             expect(updateMock).not.toHaveBeenCalled()
         })
