@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { useQuery } from '@tanstack/react-query'
 import { useCallback, useMemo } from 'react'
 import { useField } from 'react-final-form'
+import { useParams } from 'react-router-dom'
 import {
     useBoundResourceQueryFn,
     DEFAULT_CATEGORY_OPTION_COMBO,
@@ -58,6 +59,7 @@ type DEOData = {
 
 export const useGetCustomFormElements = () => {
     // get indicators from form state
+    const dataSetId = useParams().id
     const { input: indicatorsInput } = useField('indicators')
     const indicators = indicatorsInput.value
 
@@ -74,7 +76,7 @@ export const useGetCustomFormElements = () => {
                         'dataElement[id,displayName]',
                         'categoryOptionCombo[id]',
                     ].concat(),
-                    dataSet: 'kn3hQSOhy02',
+                    dataSet: dataSetId,
                     paging: false,
                 },
             },
