@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-08T11:21:58.800Z\n"
-"PO-Revision-Date: 2025-08-08T11:21:58.801Z\n"
+"POT-Creation-Date: 2025-08-14T10:47:06.559Z\n"
+"PO-Revision-Date: 2025-08-14T10:47:06.560Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -210,11 +210,6 @@ msgstr "Correct confirmation code must be entered to merge"
 
 msgid "Merge"
 msgstr "Merge"
-
-msgid "Merging {{count}} {{model}}..."
-msgid_plural "Merging {{count}} {{model}}..."
-msgstr[0] "Merging {{count}} {{model}}..."
-msgstr[1] "Merging {{count}} {{model}}..."
 
 msgid "Merging..."
 msgstr "Merging..."
@@ -728,6 +723,12 @@ msgstr "Constant"
 
 msgid "Constants"
 msgstr "Constants"
+
+msgid "Option group"
+msgstr "Option group"
+
+msgid "Option groups"
+msgstr "Option groups"
 
 msgid "Attribute"
 msgstr "Attribute"
@@ -1266,11 +1267,6 @@ msgstr "Filter available categories"
 msgid "Filter selected categories"
 msgstr "Filter selected categories"
 
-msgid "{{count}} category option combinations will be generated."
-msgid_plural "{{count}} category option combinations will be generated."
-msgstr[0] "{{count}} category option combinations will be generated."
-msgstr[1] "{{count}} category option combinations will be generated."
-
 msgid "More than 4 Categories"
 msgstr "More than 4 Categories"
 
@@ -1441,16 +1437,6 @@ msgid ""
 msgstr ""
 "What should happen to the source category options after the merge is "
 "complete?"
-
-msgid "Keep {{ count }} source category options"
-msgid_plural "Keep {{ count }} source category options"
-msgstr[0] "Keep {{ count }} source category options"
-msgstr[1] "Keep {{ count }} source category options"
-
-msgid "Delete {{ count }} source category options"
-msgid_plural "Delete {{ count }} source category options"
-msgstr[0] "Delete {{ count }} source category options"
-msgstr[1] "Delete {{ count }} source category options"
 
 msgid "Available data element groups"
 msgstr "Available data element groups"
@@ -1819,6 +1805,21 @@ msgstr "Center"
 msgid "Line end"
 msgstr "Line end"
 
+msgid "Section display mode"
+msgstr "Section display mode"
+
+msgid "Horizontal tabs"
+msgstr "Horizontal tabs"
+
+msgid "Vertical tabs"
+msgstr "Vertical tabs"
+
+msgid "Render multi-organisation unit forms vertically"
+msgstr "Render multi-organisation unit forms vertically"
+
+msgid "Only applied to section forms using multiple organisation units"
+msgstr "Only applied to section forms using multiple organisation units"
+
 msgid "Configure which organisation units can collect data for this data set."
 msgstr "Configure which organisation units can collect data for this data set."
 
@@ -1940,8 +1941,29 @@ msgstr "Restore section"
 msgid "Add section"
 msgstr "Add section"
 
+msgid "Reorder sections"
+msgstr "Reorder sections"
+
 msgid "Copy ID"
 msgstr "Copy ID"
+
+msgid "New sections order saved successfully"
+msgstr "New sections order saved successfully"
+
+msgid "Error saving new sections order."
+msgstr "Error saving new sections order."
+
+msgid "Reorder form sections"
+msgstr "Reorder form sections"
+
+msgid "(marked for deletion)"
+msgstr "(marked for deletion)"
+
+msgid "Save section ordering"
+msgstr "Save section ordering"
+
+msgid "Custom form saved"
+msgstr "Custom form saved"
 
 msgid "Custom form (preview)"
 msgstr "Custom form (preview)"
@@ -2220,16 +2242,6 @@ msgstr ""
 "What should happen to the source indicator types after the merge is "
 "complete?"
 
-msgid "Keep {{ count }} source indicator types"
-msgid_plural "Keep {{ count }} source indicator types"
-msgstr[0] "Keep {{ count }} source indicator types"
-msgstr[1] "Keep {{ count }} source indicator types"
-
-msgid "Delete {{ count }} source indicator types"
-msgid_plural "Delete {{ count }} source indicator types"
-msgstr[0] "Delete {{ count }} source indicator types"
-msgstr[1] "Delete {{ count }} source indicator types"
-
 msgid "Conflicting factors"
 msgstr "Conflicting factors"
 
@@ -2283,6 +2295,9 @@ msgstr "Aggregate export attribute option combo"
 
 msgid "Set up the program indicator legends."
 msgstr "Set up the program indicator legends."
+
+msgid "Indicator type (required)"
+msgstr "Indicator type (required)"
 
 msgid "Numerator description"
 msgstr "Numerator description"
@@ -2349,16 +2364,6 @@ msgstr "No indicators available. Remove one from source."
 
 msgid "What should happen to the source indicators after the merge is complete?"
 msgstr "What should happen to the source indicators after the merge is complete?"
-
-msgid "Keep {{ count }} source indicators"
-msgid_plural "Keep {{ count }} source indicators"
-msgstr[0] "Keep {{ count }} source indicators"
-msgstr[1] "Keep {{ count }} source indicators"
-
-msgid "Delete {{ count }} source indicators"
-msgid_plural "Delete {{ count }} source indicators"
-msgstr[0] "Delete {{ count }} source indicators"
-msgstr[1] "Delete {{ count }} source indicators"
 
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."
@@ -2848,11 +2853,6 @@ msgstr "Delete Mapping"
 
 msgid "This action cannot be undone."
 msgstr "This action cannot be undone."
-
-msgid "All mappings ({{count}}) will be removed."
-msgid_plural "All mappings ({{count}}) will be removed."
-msgstr[0] "All mappings ({{count}}) will be removed."
-msgstr[1] "All mappings ({{count}}) will be removed."
 
 msgid "Are you sure you want to delete this program mapping configuration?"
 msgstr "Are you sure you want to delete this program mapping configuration?"

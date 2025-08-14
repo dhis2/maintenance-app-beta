@@ -273,6 +273,26 @@ export const modelListViewsConfig = {
             default: ['dataDimensionType', 'categoryCombo'],
         },
     },
+    optionGroup: {
+        columns: {
+            available: [
+                DESCRIPTORS.shortName,
+                'description',
+                'favorite',
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+        },
+        filters: {
+            default: [],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
+    },
     indicator: {
         columns: {
             default: [
