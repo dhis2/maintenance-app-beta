@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-09T11:24:38.032Z\n"
-"PO-Revision-Date: 2025-08-09T11:24:38.032Z\n"
+"POT-Creation-Date: 2025-08-14T07:32:48.415Z\n"
+"PO-Revision-Date: 2025-08-14T07:32:48.415Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1817,6 +1817,21 @@ msgstr "Center"
 msgid "Line end"
 msgstr "Line end"
 
+msgid "Section display mode"
+msgstr "Section display mode"
+
+msgid "Horizontal tabs"
+msgstr "Horizontal tabs"
+
+msgid "Vertical tabs"
+msgstr "Vertical tabs"
+
+msgid "Render multi-organisation unit forms vertically"
+msgstr "Render multi-organisation unit forms vertically"
+
+msgid "Only applied to section forms using multiple organisation units"
+msgstr "Only applied to section forms using multiple organisation units"
+
 msgid "Configure which organisation units can collect data for this data set."
 msgstr "Configure which organisation units can collect data for this data set."
 
@@ -2173,6 +2188,30 @@ msgstr "The indicator merge operation is complete."
 msgid "All selected indicators were merged successfully."
 msgstr "All selected indicators were merged successfully."
 
+msgid "Filter list"
+msgstr "Filter list"
+
+msgid "Error loading data"
+msgstr "Error loading data"
+
+msgid "No results match your filter"
+msgstr "No results match your filter"
+
+msgid "No items available"
+msgstr "No items available"
+
+msgid "Previous"
+msgstr "Previous"
+
+msgid "Page {{current}} of {{total}}"
+msgstr "Page {{current}} of {{total}}"
+
+msgid "Next"
+msgstr "Next"
+
+msgid "Denominator Expression"
+msgstr "Denominator Expression"
+
 msgid "Edit denominator expression"
 msgstr "Edit denominator expression"
 
@@ -2251,6 +2290,9 @@ msgid ""
 msgstr ""
 "Map this indicator to a specific attribute option combinations when "
 "exporting aggregate data."
+
+msgid "Program variables"
+msgstr "Program variables"
 
 msgid "Numerator Expression"
 msgstr "Numerator Expression"

@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import { ExpressionField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionField'
+import NumeratorExpressionsidebar from './NumeratorExpressionsidebar'
 
 export default function DenominatorFields() {
     return (
@@ -10,6 +11,7 @@ export default function DenominatorFields() {
             modalTitle={i18n.t('Denominator Expression')}
             editButtonText={i18n.t('Edit denominator expression')}
             validationResource="indicators/expression/description"
+             sidebarComponent={NumeratorExpressionsidebar}
         />
     )
 }

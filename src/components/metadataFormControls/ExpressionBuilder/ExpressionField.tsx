@@ -13,6 +13,7 @@ type ExpressionFieldProps = Readonly<{
     modalTitle: string
     editButtonText: string
     validationResource: string
+    sidebarComponent: React.ComponentType<{ onInsert: (text: string) => void }>
 }>
 
 export function ExpressionField({
@@ -21,6 +22,7 @@ export function ExpressionField({
     modalTitle,
     editButtonText,
     validationResource,
+    sidebarComponent
 }: ExpressionFieldProps) {
     const [showExpressionBuilder, setShowExpressionBuilder] = useState(false)
 
@@ -67,6 +69,7 @@ export function ExpressionField({
                     onClose={() => setShowExpressionBuilder(false)}
                     onApply={handleExpressionApply}
                     dataTest={`formfields-${fieldName}`}
+                    sidebarComponent={sidebarComponent}
                 />
             )}
 

@@ -1,0 +1,52 @@
+.sidebar {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.programItem {
+    padding: 6px 20px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.2s;
+}
+
+.programItem:hover {
+    background-color: #f0f0f0;
+}
+
+.itemId {
+    font-weight: 500;
+    color: #1976d2;
+    margin-bottom: 2px;
+}
+
+.itemDescription {
+    color: #666;
+    font-size: 12px;
+}
+
+.emptyMessage {
+    padding: 12px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.limitMessage {
+    padding: 8px 12px;
+    text-align: center;
+    color: #666;
+    font-size: 12px;
+    border-top: 1px solid #eee;
+    background-color: #f9f9f9;
+}
+
+.errorMessage {
+    padding: 16px;
+    color: #d32f2f;
+    text-align: center;
+    font-size: 14px;
+}

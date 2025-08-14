@@ -24,6 +24,7 @@ type ExpressionFieldProps = {
     validationResource: string
     onClose?: () => void
     onApply?: (value: string, description: string) => void
+    sidebarComponent: React.ComponentType<{ onInsert: (text: string) => void }>
 }
 
 export const ExpressionBuilderModal = ({
@@ -34,10 +35,31 @@ export const ExpressionBuilderModal = ({
     validationResource,
     onClose,
     onApply,
+    sidebarComponent: SidebarComponent,
 }: ExpressionFieldProps) => {
     const [validate, description, validating] =
         useExpressionValidator(validationResource)
     const form = useForm()
+
+    const [textareaRef, setTextareaRef] = React.useState<HTMLTextAreaElement | null>(null)
+
+    const insertText = React.useCallback((text: string) => {
+        if (!textareaRef) return
+
+        const start = textareaRef.selectionStart
+        const end = textareaRef.selectionEnd
+        const currentValue = textareaRef.value
+
+        const newValue = currentValue.substring(0, start) + text + currentValue.substring(end)
+
+        form.change(fieldName, newValue)
+
+        const newCursorPos = start + text.length
+        setTimeout(() => {
+            textareaRef.setSelectionRange(newCursorPos, newCursorPos)
+            textareaRef.focus()
+        }, 0)
+    }, [textareaRef, form, fieldName])
 
     const handleApply = async () => {
         const value = form.getFieldState(fieldName)?.value ?? ''
@@ -58,7 +80,7 @@ export const ExpressionBuilderModal = ({
         <Modal onClose={onClose} large dataTest="expression-builder-modal">
             <ModalTitle>{title}</ModalTitle>
 
-            <ModalContent>
+            <ModalContent className={styles.modalBody}>
                 <div className={styles.container}>
                     <div className={styles.leftPanel}>
                         <FieldRFF<string | undefined>
@@ -81,6 +103,7 @@ export const ExpressionBuilderModal = ({
                                             required={required}
                                             rows={8}
                                             loading={validating}
+                                            inputRef={setTextareaRef}
                                         />
                                         <Box className={styles.noticeBox}>
                                             {input.value &&
@@ -103,25 +126,6 @@ export const ExpressionBuilderModal = ({
                                                 'Add operators, variables, functions, and constants from right sidebar'
                                             )}
                                         </span>
-
-                                        <ModalActions>
-                                            <ButtonStrip end>
-                                                <Button
-                                                    onClick={onClose}
-                                                    secondary
-                                                >
-                                                    {i18n.t('Cancel')}
-                                                </Button>
-                                                <Button
-                                                    onClick={handleApply}
-                                                    primary
-                                                    dataTest="apply-expression-button"
-                                                    disabled={!isValid}
-                                                >
-                                                    {i18n.t('Apply')}
-                                                </Button>
-                                            </ButtonStrip>
-                                        </ModalActions>
                                     </>
                                 )
                             }}
@@ -129,10 +133,33 @@ export const ExpressionBuilderModal = ({
                     </div>
 
                     <div className={styles.rightPanel}>
-                        {/* Right side accordion content can be added here */}
+                        <SidebarComponent onInsert={insertText} />
                     </div>
                 </div>
             </ModalContent>
+
+            <ModalActions>
+                <ButtonStrip end>
+                    <Button onClick={onClose} secondary>
+                        {i18n.t('Cancel')}
+                    </Button>
+                    <Button
+                        onClick={handleApply}
+                        primary
+                        dataTest="apply-expression-button"
+                        disabled={
+                            !(
+                                form.getFieldState(fieldName)?.touched &&
+                                !form.getFieldState(fieldName)?.error &&
+                                form.getFieldState(fieldName)?.value &&
+                                description
+                            )
+                        }
+                    >
+                        {i18n.t('Apply')}
+                    </Button>
+                </ButtonStrip>
+            </ModalActions>
         </Modal>
     )
 }
