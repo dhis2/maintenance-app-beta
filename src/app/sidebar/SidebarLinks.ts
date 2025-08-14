@@ -109,7 +109,10 @@ export const sidebarLinks = {
     },
     other: {
         label: OVERVIEW_SECTIONS.other.title,
-        links: [getSectionLinkItem(SECTIONS_MAP.programDisaggregation)],
+        links: [
+            getSectionLinkItem(SECTIONS_MAP.programDisaggregation),
+            getSectionLinkItem(SECTIONS_MAP.optionGroup),
+        ],
     },
 } satisfies SidebarLinks
 
