@@ -19,9 +19,10 @@ export const IndicatorTypeField = () => {
         >
             <div style={{ width: '400px' }}>
                 <ModelSingleSelectFormField
+                    required
                     dataTest="formfields-indicatortype"
                     name="indicatorType"
-                    label={i18n.t('Indicator type')}
+                    label={i18n.t('Indicator type (required)')}
                     validate={required}
                     query={{
                         resource: 'indicatorTypes',
