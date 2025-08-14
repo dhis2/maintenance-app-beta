@@ -1,3 +1,10 @@
+# [0.60.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.59.0...v0.60.0) (2025-08-14)
+
+
+### Features
+
+* add option group list ([#614](https://github.com/dhis2/maintenance-app-beta/issues/614)) ([3aab748](https://github.com/dhis2/maintenance-app-beta/commit/3aab74861b04111f887696cf018c5ff492cf5cdc))
+
 # [0.59.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.58.0...v0.59.0) (2025-08-13)
 
 
