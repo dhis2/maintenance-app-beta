@@ -280,7 +280,6 @@ export const modelListViewsConfig = {
                 'description',
                 'favorite',
                 { label: i18n.t('Owner'), path: 'user.displayName' },
-                'aggregationType',
             ],
             default: [
                 DESCRIPTORS.name,
