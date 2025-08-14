@@ -35,14 +35,10 @@
 }
 
 .dataElementsManageAction {
-    margin-left: 548px;
-    margin-top: var(--spacers-dp8);
+    text-align: end;
 }
 
-.dataElementsManageAction2 > button {
-    width: 100%;
-}
-.dataElementsManageAction2 > button {
+.dataElementsManageAction > button {
     margin: var(--spacers-dp8) 0;
-    width: 100%;
+    width: fit-content;
 }

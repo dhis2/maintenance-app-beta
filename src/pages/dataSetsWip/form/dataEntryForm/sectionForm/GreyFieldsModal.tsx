@@ -82,37 +82,43 @@ export const GreyFieldsModal = ({
             : catCombo
     }, [catCombo, categoryCombos])
 
-    const categoriesWithCategoriesOptions = useMemo(() => {
-        if (selectedCatComboData !== undefined) {
-            const categories = selectedCatComboData.categories.map((cat) => {
-                return {
-                    id: cat.id,
-                    displayName: cat.displayName,
-                    categoryOptions: [] as {
-                        id: string
-                        displayName: string
-                    }[],
-                }
-            })
-            selectedCatComboData?.categoryOptionCombos.forEach(
-                (catOptionCombo) => {
-                    catOptionCombo.categoryOptions.forEach((catOption) => {
-                        categories
-                            .find((cat) =>
-                                catOption.categories
-                                    .map((c) => c.id)
-                                    .includes(cat.id)
-                            )
-                            ?.categoryOptions.push({
-                                id: catOption.id,
-                                displayName: catOption.displayName,
-                            })
-                    })
-                }
+    const addCategoryOptionToCategory = (
+        categoryOption: DisplayableModel & { categories: { id: string }[] },
+        categories: (DisplayableModel & {
+            categoryOptions: DisplayableModel[]
+        })[]
+    ) => {
+        categoryOption.categories.forEach((optionCategory) => {
+            const category = categories.find(
+                (cat) => cat.id === optionCategory.id
             )
-            return categories
+            if (category) {
+                category.categoryOptions.push({
+                    id: categoryOption.id,
+                    displayName: categoryOption.displayName,
+                })
+            }
+        })
+    }
+
+    const categoriesWithCategoriesOptions = useMemo(() => {
+        if (!selectedCatComboData) {
+            return []
         }
-        return []
+
+        const categories = selectedCatComboData.categories.map((cat) => ({
+            id: cat.id,
+            displayName: cat.displayName,
+            categoryOptions: [] as { id: string; displayName: string }[],
+        }))
+
+        selectedCatComboData.categoryOptionCombos.forEach((catOptionCombo) => {
+            catOptionCombo.categoryOptions.forEach((catOption) => {
+                addCategoryOptionToCategory(catOption, categories)
+            })
+        })
+
+        return categories
     }, [selectedCatComboData])
 
     return (
@@ -137,10 +143,13 @@ export const GreyFieldsModal = ({
                         ))}
                 </SingleSelect>
                 <Table>
-                    {categoriesWithCategoriesOptions.map((cat) => (
+                    {categoriesWithCategoriesOptions.map((cat, index) => (
                         <TableHead key={cat.id}>
                             <TableCellHead key={`${cat.id}-data-elements`}>
-                                {i18n.t('Data elements')}
+                                {index ===
+                                categoriesWithCategoriesOptions.length - 1
+                                    ? i18n.t('Data elements')
+                                    : undefined}
                             </TableCellHead>
                             {cat.categoryOptions.map((catOption, index) => (
                                 <TableCellHead key={`${catOption.id}-${index}`}>

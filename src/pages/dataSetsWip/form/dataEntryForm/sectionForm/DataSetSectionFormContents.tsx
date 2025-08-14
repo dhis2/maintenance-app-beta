@@ -140,6 +140,8 @@ export const DataSetSectionFormContents = ({
 
     const [catComboFilter, setCatComboFilter] = useState<string | undefined>()
     const [greyFieldModalOpen, setGreyFieldModalOpen] = useState(false)
+    const isFilteringByCatCombo =
+        catComboFilter !== undefined && catComboFilter !== 'all'
 
     const availableDataElements = useMemo(() => {
         if (!data) {
@@ -153,27 +155,23 @@ export const DataSetSectionFormContents = ({
             .filter((de) => !otherSectionsDataElements.includes(de.id))
             .filter(
                 (de) =>
-                    catComboFilter === undefined ||
-                    catComboFilter === 'all' ||
+                    !isFilteringByCatCombo ||
                     de.categoryCombo.id === catComboFilter
             )
-    }, [data, catComboFilter, values.id])
+    }, [data, catComboFilter, values.id, isFilteringByCatCombo])
 
     const availableCategoryCombos = useMemo(() => {
         if (!data) {
             return []
         }
+        const sectionsDataElements = data.dataSetElements.filter((de) =>
+            dataElementsInput.value.map((v) => v.id).includes(de.dataElement.id)
+        )
         return uniqBy(
-            data.dataSetElements
-                .filter((de) =>
-                    dataElementsInput.value
-                        .map((v) => v.id)
-                        .includes(de.dataElement.id)
-                )
-                .flatMap((de) => de.dataElement.categoryCombo),
+            sectionsDataElements.flatMap((de) => de.dataElement.categoryCombo),
             'id'
         )
-    }, [data])
+    }, [data, dataElementsInput.value])
 
     const { data: categoriesComboData } = useQuery({
         queryFn: queryFn<CategoryCombosType>,
@@ -313,7 +311,7 @@ export const DataSetSectionFormContents = ({
                                     rightFooter={
                                         <div
                                             className={
-                                                styles.dataElementsManageAction2
+                                                styles.dataElementsManageAction
                                             }
                                         >
                                             <Button
@@ -347,11 +345,6 @@ export const DataSetSectionFormContents = ({
                                     maxSelections={Infinity}
                                 />
                             </Field>
-                            {/*<div className={styles.dataElementsManageAction}>*/}
-                            {/*    <Button small onClick={() => {setGreyFieldModalOpen(true)}}>*/}
-                            {/*        {i18n.t('Manage enabled/disabled fields')}*/}
-                            {/*    </Button>*/}
-                            {/*</div>*/}
                         </SectionedFormSection>
                         <SectionedFormSection name="sectionIndicators">
                             <StandardFormSectionTitle>
