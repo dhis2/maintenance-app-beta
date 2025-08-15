@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-14T11:40:33.060Z\n"
-"PO-Revision-Date: 2025-08-14T11:40:33.060Z\n"
+"POT-Creation-Date: 2025-08-15T10:07:42.917Z\n"
+"PO-Revision-Date: 2025-08-15T10:07:42.918Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -728,6 +728,12 @@ msgstr "Constant"
 
 msgid "Constants"
 msgstr "Constants"
+
+msgid "Option group"
+msgstr "Option group"
+
+msgid "Option groups"
+msgstr "Option groups"
 
 msgid "Attribute"
 msgstr "Attribute"
@@ -1961,8 +1967,26 @@ msgstr "Restore section"
 msgid "Add section"
 msgstr "Add section"
 
+msgid "Reorder sections"
+msgstr "Reorder sections"
+
 msgid "Copy ID"
 msgstr "Copy ID"
+
+msgid "New sections order saved successfully"
+msgstr "New sections order saved successfully"
+
+msgid "Error saving new sections order."
+msgstr "Error saving new sections order."
+
+msgid "Reorder form sections"
+msgstr "Reorder form sections"
+
+msgid "(marked for deletion)"
+msgstr "(marked for deletion)"
+
+msgid "Save section ordering"
+msgstr "Save section ordering"
 
 msgid "Custom form saved"
 msgstr "Custom form saved"
@@ -2307,6 +2331,9 @@ msgstr "Aggregate export attribute option combo"
 
 msgid "Set up the program indicator legends."
 msgstr "Set up the program indicator legends."
+
+msgid "Indicator type (required)"
+msgstr "Indicator type (required)"
 
 msgid "Numerator description"
 msgstr "Numerator description"
@@ -2730,8 +2757,8 @@ msgstr "Placeholder for other"
 msgid "Create, modify and view sets of option groups."
 msgstr "Create, modify and view sets of option groups."
 
-msgid "Disaggregate programs."
-msgstr "Disaggregate programs."
+msgid "Set disaggregation mappings for program indicators."
+msgstr "Set disaggregation mappings for program indicators."
 
 msgid "Manage"
 msgstr "Manage"

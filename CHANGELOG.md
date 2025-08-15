@@ -1,3 +1,18 @@
+# [0.60.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.59.0...v0.60.0) (2025-08-14)
+
+
+### Features
+
+* add option group list ([#614](https://github.com/dhis2/maintenance-app-beta/issues/614)) ([3aab748](https://github.com/dhis2/maintenance-app-beta/commit/3aab74861b04111f887696cf018c5ff492cf5cdc))
+
+# [0.59.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.58.0...v0.59.0) (2025-08-13)
+
+
+### Features
+
+* add reordering sections modal ([#609](https://github.com/dhis2/maintenance-app-beta/issues/609)) ([6daab39](https://github.com/dhis2/maintenance-app-beta/commit/6daab391ceba8eeb4d607b202818402fc4c83415))
+* definition and edit of custom forms [DHIS2-19090] ([#603](https://github.com/dhis2/maintenance-app-beta/issues/603)) ([6e23378](https://github.com/dhis2/maintenance-app-beta/commit/6e23378d2161283edae9b2cf1473680688403931))
+
 # [0.58.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.57.0...v0.58.0) (2025-08-12)
 
 

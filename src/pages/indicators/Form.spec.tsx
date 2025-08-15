@@ -415,7 +415,7 @@ describe('Indicators form tests', () => {
             )
         })
 
-        it('should submit the data', async () => {
+        it('should submit the basic information and expressions', async () => {
             const aName = faker.internet.userName()
             const aShortName = faker.internet.userName()
             const aCode = faker.science.chemicalElement().symbol
@@ -425,12 +425,8 @@ describe('Indicators form tests', () => {
             const aDenominator = faker.number.int().toString()
             const aNumeratorDescription = faker.lorem.sentence()
             const aDenominatorDescription = faker.lorem.sentence()
-            const aCatOptionExport = faker.internet.userName()
-            const anAttOptionExport = faker.internet.userName()
-            const anAttribute = faker.internet.userName()
 
-            const { screen, indicatorTypes, legendSets, attributes } =
-                await renderForm()
+            const { screen, indicatorTypes } = await renderForm()
 
             await uiActions.enterName(aName, screen)
             await uiActions.enterInputFieldValue(
@@ -446,28 +442,11 @@ describe('Indicators form tests', () => {
             )
             await uiActions.enterInputFieldValue('url', aUrl, screen)
 
-            const indicatorTypeOptions = await uiActions.openSingleSelect(
+            await uiActions.pickOptionFromSelect(
                 screen.getByTestId('formfields-indicatortype'),
+                0,
                 screen
             )
-            await userEvent.click(indicatorTypeOptions[0])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('formfields-indicatortype'),
-                screen
-            )
-
-            const decimalsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('decimals-field'),
-                screen
-            )
-            await userEvent.click(decimalsOptions[2])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('decimals-field'),
-                screen
-            )
-
-            await uiActions.clickOnCheckboxField('annualized', screen)
-
             await uiActions.enterInputFieldValue(
                 'numerator',
                 aNumerator,
@@ -489,6 +468,85 @@ describe('Indicators form tests', () => {
                 screen
             )
 
+            await uiActions.submitForm(screen)
+            expect(createMock).toHaveBeenCalledTimes(1)
+            expect(createMock).toHaveBeenLastCalledWith(
+                expect.objectContaining({
+                    data: expect.objectContaining({
+                        id: undefined,
+                        name: aName,
+                        shortName: aShortName,
+                        code: aCode,
+                        description: aDescription,
+                        url: aUrl,
+                        indicatorType: expect.objectContaining({
+                            id: indicatorTypes[0].id,
+                        }),
+                        decimals: undefined,
+                        annualized: false,
+                        numerator: aNumerator,
+                        denominator: aDenominator,
+                        numeratorDescription: aNumeratorDescription,
+                        denominatorDescription: aDenominatorDescription,
+                        aggregateExportCategoryOptionCombo: undefined,
+                        aggregateExportAttributeOptionCombo: undefined,
+                        legendSets: [],
+                        attributeValues: [],
+                    }),
+                })
+            )
+        })
+        it('should submit the options fields and expressions fields', async () => {
+            const aName = faker.internet.userName()
+            const aShortName = faker.internet.userName()
+            const aNumerator = faker.number.int().toString()
+            const aDenominator = faker.number.int().toString()
+            const aNumeratorDescription = faker.lorem.sentence()
+            const aDenominatorDescription = faker.lorem.sentence()
+            const aCatOptionExport = faker.internet.userName()
+            const anAttOptionExport = faker.internet.userName()
+
+            const { screen, indicatorTypes } = await renderForm()
+
+            await uiActions.enterName(aName, screen)
+            await uiActions.enterInputFieldValue(
+                'shortName',
+                aShortName,
+                screen
+            )
+
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('formfields-indicatortype'),
+                0,
+                screen
+            )
+            await uiActions.enterInputFieldValue(
+                'numerator',
+                aNumerator,
+                screen
+            )
+            await uiActions.enterInputFieldValue(
+                'denominator',
+                aDenominator,
+                screen
+            )
+            await uiActions.enterInputFieldValue(
+                'numeratorDescription',
+                aNumeratorDescription,
+                screen
+            )
+            await uiActions.enterInputFieldValue(
+                'denominatorDescription',
+                aDenominatorDescription,
+                screen
+            )
+
+            await uiActions.clickOnCheckboxField('annualized', screen)
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('decimals-field'),
+                2,
+                screen
+            )
             await uiActions.enterInputFieldValue(
                 'aggregateExportCategoryOptionCombo',
                 aCatOptionExport,
@@ -500,9 +558,154 @@ describe('Indicators form tests', () => {
                 screen
             )
 
+            await uiActions.submitForm(screen)
+            expect(createMock).toHaveBeenCalledTimes(1)
+            expect(createMock).toHaveBeenLastCalledWith(
+                expect.objectContaining({
+                    data: expect.objectContaining({
+                        id: undefined,
+                        name: aName,
+                        shortName: aShortName,
+                        code: undefined,
+                        description: undefined,
+                        url: undefined,
+                        indicatorType: expect.objectContaining({
+                            id: indicatorTypes[0].id,
+                        }),
+                        decimals: 1,
+                        annualized: true,
+                        numerator: aNumerator,
+                        denominator: aDenominator,
+                        numeratorDescription: aNumeratorDescription,
+                        denominatorDescription: aDenominatorDescription,
+                        aggregateExportCategoryOptionCombo: aCatOptionExport,
+                        aggregateExportAttributeOptionCombo: anAttOptionExport,
+                        legendSets: [],
+                        attributeValues: [],
+                    }),
+                })
+            )
+        })
+        it('should submit the legends fields and expressions fields', async () => {
+            const aName = faker.internet.userName()
+            const aShortName = faker.internet.userName()
+            const aNumerator = faker.number.int().toString()
+            const aDenominator = faker.number.int().toString()
+            const aNumeratorDescription = faker.lorem.sentence()
+            const aDenominatorDescription = faker.lorem.sentence()
+
+            const { screen, indicatorTypes, legendSets } = await renderForm()
+
+            await uiActions.enterName(aName, screen)
+            await uiActions.enterInputFieldValue(
+                'shortName',
+                aShortName,
+                screen
+            )
+
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('formfields-indicatortype'),
+                0,
+                screen
+            )
+            await uiActions.enterInputFieldValue(
+                'numerator',
+                aNumerator,
+                screen
+            )
+            await uiActions.enterInputFieldValue(
+                'denominator',
+                aDenominator,
+                screen
+            )
+            await uiActions.enterInputFieldValue(
+                'numeratorDescription',
+                aNumeratorDescription,
+                screen
+            )
+            await uiActions.enterInputFieldValue(
+                'denominatorDescription',
+                aDenominatorDescription,
+                screen
+            )
+
             await uiActions.pickOptionInTransfer(
                 'legendSets-field',
                 legendSets[0].displayName,
+                screen
+            )
+
+            await uiActions.submitForm(screen)
+            expect(createMock).toHaveBeenCalledTimes(1)
+            expect(createMock).toHaveBeenLastCalledWith(
+                expect.objectContaining({
+                    data: expect.objectContaining({
+                        id: undefined,
+                        name: aName,
+                        shortName: aShortName,
+                        code: undefined,
+                        description: undefined,
+                        url: undefined,
+                        indicatorType: expect.objectContaining({
+                            id: indicatorTypes[0].id,
+                        }),
+                        decimals: undefined,
+                        annualized: false,
+                        numerator: aNumerator,
+                        denominator: aDenominator,
+                        numeratorDescription: aNumeratorDescription,
+                        denominatorDescription: aDenominatorDescription,
+                        aggregateExportCategoryOptionCombo: undefined,
+                        aggregateExportAttributeOptionCombo: undefined,
+                        legendSets: [
+                            expect.objectContaining({ id: legendSets[0].id }),
+                        ],
+                        attributeValues: [],
+                    }),
+                })
+            )
+        })
+        it('should submit the attributes fields and expressions fields', async () => {
+            const aName = faker.internet.userName()
+            const aShortName = faker.internet.userName()
+            const aNumerator = faker.number.int().toString()
+            const aDenominator = faker.number.int().toString()
+            const aNumeratorDescription = faker.lorem.sentence()
+            const aDenominatorDescription = faker.lorem.sentence()
+            const anAttribute = faker.internet.userName()
+
+            const { screen, indicatorTypes, attributes } = await renderForm()
+
+            await uiActions.enterName(aName, screen)
+            await uiActions.enterInputFieldValue(
+                'shortName',
+                aShortName,
+                screen
+            )
+
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('formfields-indicatortype'),
+                0,
+                screen
+            )
+            await uiActions.enterInputFieldValue(
+                'numerator',
+                aNumerator,
+                screen
+            )
+            await uiActions.enterInputFieldValue(
+                'denominator',
+                aDenominator,
+                screen
+            )
+            await uiActions.enterInputFieldValue(
+                'numeratorDescription',
+                aNumeratorDescription,
+                screen
+            )
+            await uiActions.enterInputFieldValue(
+                'denominatorDescription',
+                aDenominatorDescription,
                 screen
             )
 
@@ -519,23 +722,21 @@ describe('Indicators form tests', () => {
                         id: undefined,
                         name: aName,
                         shortName: aShortName,
-                        code: aCode,
-                        description: aDescription,
-                        url: aUrl,
+                        code: undefined,
+                        description: undefined,
+                        url: undefined,
                         indicatorType: expect.objectContaining({
                             id: indicatorTypes[0].id,
                         }),
-                        decimals: 1,
-                        annualized: true,
+                        decimals: undefined,
+                        annualized: false,
                         numerator: aNumerator,
                         denominator: aDenominator,
                         numeratorDescription: aNumeratorDescription,
                         denominatorDescription: aDenominatorDescription,
-                        aggregateExportCategoryOptionCombo: aCatOptionExport,
-                        aggregateExportAttributeOptionCombo: anAttOptionExport,
-                        legendSets: [
-                            expect.objectContaining({ id: legendSets[0].id }),
-                        ],
+                        aggregateExportCategoryOptionCombo: undefined,
+                        aggregateExportAttributeOptionCombo: undefined,
+                        legendSets: [],
                         attributeValues: [
                             {
                                 attribute: expect.objectContaining({

@@ -112,6 +112,7 @@ export const sidebarLinks = {
         links: [
             getOverviewLinkItem(OVERVIEW_SECTIONS.other),
             getSectionLinkItem(SECTIONS_MAP.programDisaggregation),
+            getSectionLinkItem(SECTIONS_MAP.optionGroup),
             getSectionLinkItem(SECTIONS_MAP.optionGroupSet),
         ],
     },
