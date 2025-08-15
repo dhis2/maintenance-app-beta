@@ -462,4 +462,18 @@ export const modelListViewsConfig = {
             available: ['categoryCombo'],
         },
     },
+    optionGroupSet: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'dataDimension',
+                { label: i18n.t('Option set'), path: 'optionSet.displayName' },
+            ],
+        },
+        filters: {},
+    },
 } satisfies SectionListViewConfig<SectionName>

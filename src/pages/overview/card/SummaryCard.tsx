@@ -51,11 +51,13 @@ export const SummaryCardGroup = ({
 interface SummaryCardProps {
     children: React.ReactNode
     icon?: React.ReactNode
+    hideNew?: boolean
     section: ModelSection
 }
 
 export const SummaryCard = ({
     icon = DEFAULT_ICON,
+    hideNew = false,
     children,
     section,
 }: SummaryCardProps) => {
@@ -71,7 +73,7 @@ export const SummaryCard = ({
                     <SummaryCardContent>{children}</SummaryCardContent>
                 </div>
             </Link>
-            <SummaryCardActions section={section} />
+            <SummaryCardActions section={section} hideNew={hideNew} />
         </div>
     )
 }
@@ -82,13 +84,17 @@ export const SummaryCardContent = ({ children }: PropsWithChildren) => {
 
 interface SummaryCardActionsProps {
     section: ModelSection
+    hideNew: boolean
 }
 
-export const SummaryCardActions = ({ section }: SummaryCardActionsProps) => {
+export const SummaryCardActions = ({
+    section,
+    hideNew,
+}: SummaryCardActionsProps) => {
     const canCreate = useCanCreateModelInSection(section)
     return (
         <div className={styles.cardActions}>
-            {canCreate && (
+            {canCreate && !hideNew && (
                 <Link to={`/${getSectionNewPath(section)}`} tabIndex={-1}>
                     <Button secondary small>
                         {i18n.t('Add new')}

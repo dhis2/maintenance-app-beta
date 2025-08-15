@@ -9,3 +9,5 @@ export { Component as DataSets } from './DataSets'
 export { Component as OrganisationUnits } from './OrganisationUnits'
 
 export { Component as Indicators } from './Indicators'
+
+export { Component as Other } from './Other'

@@ -6,6 +6,7 @@ import { DataSetsCardGroup } from './DataSets'
 import { OverviewGroup } from './group'
 import { IndicatorsCardGroup } from './Indicators'
 import { OrganisationUnitsCardGroup } from './OrganisationUnits'
+import { OtherCardGroup } from './Other'
 
 export const AllOverview = () => {
     return (
@@ -15,6 +16,7 @@ export const AllOverview = () => {
             <DataSetsCardGroup showTitle={true} />
             <OrganisationUnitsCardGroup showTitle={true} />
             <IndicatorsCardGroup showTitle={true} />
+            <OtherCardGroup showTitle={true} />
         </OverviewGroup>
     )
 }

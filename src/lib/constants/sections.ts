@@ -276,6 +276,13 @@ export const SCHEMA_SECTIONS = {
         titlePlural: i18n.t('Option sets'),
         parentSectionKey: 'other',
     },
+    optionGroupSet: {
+        name: SchemaName.optionGroupSet,
+        namePlural: 'optionGroupSets',
+        title: i18n.t('Option group set'),
+        titlePlural: i18n.t('Option group sets'),
+        parentSectionKey: 'other',
+    },
     predictor: {
         name: SchemaName.predictor,
         namePlural: 'predictors',
@@ -380,7 +387,7 @@ export const OVERVIEW_SECTIONS = {
     },
     other: {
         name: 'other',
-        namePlural: 'others',
+        namePlural: 'other',
         title: i18n.t('Other'),
         titlePlural: i18n.t('Other'),
         componentName: 'Other',
