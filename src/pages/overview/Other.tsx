@@ -25,6 +25,11 @@ export const OtherCardGroup = ({ showTitle }: { showTitle?: boolean }) => {
             title={showTitle ? TITLE : undefined}
             section={OVERVIEW_SECTIONS.organisationUnit}
         >
+            <SummaryCard section={SECTIONS_MAP.optionGroup}>
+                {i18n.t(
+                    'Create a group of options from option sets that has a similar functional area or meaning.'
+                )}
+            </SummaryCard>
             <SummaryCard section={SECTIONS_MAP.optionGroupSet}>
                 {i18n.t('Create, modify and view sets of option groups.')}
             </SummaryCard>
