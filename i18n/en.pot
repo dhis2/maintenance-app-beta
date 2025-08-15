@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-14T10:47:06.559Z\n"
-"PO-Revision-Date: 2025-08-14T10:47:06.560Z\n"
+"POT-Creation-Date: 2025-08-14T22:33:04.172Z\n"
+"PO-Revision-Date: 2025-08-14T22:33:04.173Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2364,6 +2364,33 @@ msgstr "No indicators available. Remove one from source."
 
 msgid "What should happen to the source indicators after the merge is complete?"
 msgstr "What should happen to the source indicators after the merge is complete?"
+
+msgid "Set up the basic information for this option group."
+msgstr "Set up the basic information for this option group."
+
+msgid "Explain the purpose of this option group."
+msgstr "Explain the purpose of this option group."
+
+msgid "Select the options that belong to this group."
+msgstr "Select the options that belong to this group."
+
+msgid "Available options"
+msgstr "Available options"
+
+msgid "Selected options"
+msgstr "Selected options"
+
+msgid "Filter available options"
+msgstr "Filter available options"
+
+msgid "Filter selected options"
+msgstr "Filter selected options"
+
+msgid "Option Group Form"
+msgstr "Option Group Form"
+
+msgid "Option Set"
+msgstr "Option Set"
 
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."
