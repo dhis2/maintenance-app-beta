@@ -1021,7 +1021,7 @@ export const generateDefaultListFiltersTests = ({
                 any
             >
             const filtersToRender = configs?.filters?.default
-            if (filtersToRender.length > 0) {
+            if (filtersToRender?.length > 0) {
                 expect(
                     within(filtersWrapper).getAllByTestId('dynamic-filter')
                 ).toHaveLength(filtersToRender.length)

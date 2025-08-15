@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-08T11:21:58.800Z\n"
-"PO-Revision-Date: 2025-08-08T11:21:58.801Z\n"
+"POT-Creation-Date: 2025-08-14T11:40:33.060Z\n"
+"PO-Revision-Date: 2025-08-14T11:40:33.060Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -737,6 +737,12 @@ msgstr "Option set"
 
 msgid "Option sets"
 msgstr "Option sets"
+
+msgid "Option group set"
+msgstr "Option group set"
+
+msgid "Option group sets"
+msgstr "Option group sets"
 
 msgid "Predictor"
 msgstr "Predictor"
@@ -1819,6 +1825,21 @@ msgstr "Center"
 msgid "Line end"
 msgstr "Line end"
 
+msgid "Section display mode"
+msgstr "Section display mode"
+
+msgid "Horizontal tabs"
+msgstr "Horizontal tabs"
+
+msgid "Vertical tabs"
+msgstr "Vertical tabs"
+
+msgid "Render multi-organisation unit forms vertically"
+msgstr "Render multi-organisation unit forms vertically"
+
+msgid "Only applied to section forms using multiple organisation units"
+msgstr "Only applied to section forms using multiple organisation units"
+
 msgid "Configure which organisation units can collect data for this data set."
 msgstr "Configure which organisation units can collect data for this data set."
 
@@ -1942,6 +1963,9 @@ msgstr "Add section"
 
 msgid "Copy ID"
 msgstr "Copy ID"
+
+msgid "Custom form saved"
+msgstr "Custom form saved"
 
 msgid "Custom form (preview)"
 msgstr "Custom form (preview)"
@@ -2699,6 +2723,15 @@ msgstr ""
 "Organisation unit levels define hierarchical layers within the organisation "
 "structure, such as national or regional tiers, and specify the names used "
 "for each level."
+
+msgid "Placeholder for other"
+msgstr "Placeholder for other"
+
+msgid "Create, modify and view sets of option groups."
+msgstr "Create, modify and view sets of option groups."
+
+msgid "Disaggregate programs."
+msgstr "Disaggregate programs."
 
 msgid "Manage"
 msgstr "Manage"

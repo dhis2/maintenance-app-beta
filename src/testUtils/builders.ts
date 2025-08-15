@@ -21,6 +21,7 @@ import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicato
 import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
 import { indicatorListSchema } from '../pages/indicators/form/indicatorSchema'
 import { indicatorTypeListSchema } from '../pages/indicatorTypes/form/indicatorTypesSchema'
+import { optionGroupSetListSchema } from '../pages/optionGroupSets/form/optionGroupSetSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
@@ -178,6 +179,13 @@ export const testDataSetNotificationTemplate = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(dataSetNotificationTemplateListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testOptionGroupSet = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(optionGroupSetListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
