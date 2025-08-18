@@ -49,7 +49,6 @@ export const useSelectedSection = () => {
             ),
         [sections]
     )
-
     const [selected, originalHandler] = useQueryParam(
         FORM_SECTION_PARAM_KEY,
         paramConfig,
@@ -95,7 +94,6 @@ export const useSyncSelectedSectionWithScroll = () => {
         const sectionElements = sections
             .map((section) => document.getElementById(section.name))
             .filter((s) => !!s)
-
         const currentInView = new Map<string, IntersectionObserverEntry>()
         const observer = new IntersectionObserver(
             (entries) => {

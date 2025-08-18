@@ -24,6 +24,7 @@ type ModelTransferFieldProps = {
     | 'maxSelections'
     | 'enableOrderChange'
     | 'dataTest'
+    | 'disabled'
 >
 
 export function ModelTransferField({
@@ -39,6 +40,7 @@ export function ModelTransferField({
     maxSelections,
     enableOrderChange,
     dataTest,
+    disabled = false,
 }: ModelTransferFieldProps) {
     const { input, meta } = useField<DisplayableModel[]>(name, {
         multiple: true,
@@ -69,6 +71,7 @@ export function ModelTransferField({
                 maxSelections={maxSelections || 5000}
                 enableOrderChange={enableOrderChange}
                 dataTest={dataTest}
+                disabled={disabled}
             />
         </Field>
     )
