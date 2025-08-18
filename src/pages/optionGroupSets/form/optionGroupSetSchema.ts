@@ -15,10 +15,12 @@ export const optionGroupSetFormSchema = identifiable
     .extend({
         description: z.string().trim().optional(),
         dataDimension: z.boolean().default(false),
-        optionSet: z.object({
-            id: z.string(),
-            displayName: z.string(),
-        }),
+        optionSet: z
+            .object({
+                id: z.string(),
+                displayName: z.string(),
+            })
+            .optional(),
         optionGroups: referenceCollection.default([]),
     })
 

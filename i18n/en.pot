@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-15T10:07:42.917Z\n"
-"PO-Revision-Date: 2025-08-15T10:07:42.918Z\n"
+"POT-Creation-Date: 2025-08-15T13:29:37.592Z\n"
+"PO-Revision-Date: 2025-08-15T13:29:37.592Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2411,6 +2411,27 @@ msgid_plural "Delete {{ count }} source indicators"
 msgstr[0] "Delete {{ count }} source indicators"
 msgstr[1] "Delete {{ count }} source indicators"
 
+msgid "Set up the basic information for this option group set."
+msgstr "Set up the basic information for this option group set."
+
+msgid "Explain the purpose of this option group set."
+msgstr "Explain the purpose of this option group set."
+
+msgid "Choose the option groups to include in this option group set."
+msgstr "Choose the option groups to include in this option group set."
+
+msgid "Available option groups"
+msgstr "Available option groups"
+
+msgid "Selected option groups"
+msgstr "Selected option groups"
+
+msgid "Filter available option groups"
+msgstr "Filter available option groups"
+
+msgid "Filter selected option groups"
+msgstr "Filter selected option groups"
+
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."
 
@@ -2753,6 +2774,13 @@ msgstr ""
 
 msgid "Placeholder for other"
 msgstr "Placeholder for other"
+
+msgid ""
+"Create a group of options from option sets that has a similar functional "
+"area or meaning."
+msgstr ""
+"Create a group of options from option sets that has a similar functional "
+"area or meaning."
 
 msgid "Create, modify and view sets of option groups."
 msgstr "Create, modify and view sets of option groups."
