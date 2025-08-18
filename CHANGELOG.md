@@ -1,3 +1,11 @@
+## [0.60.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.60.1...v0.60.2) (2025-08-18)
+
+
+### Bug Fixes
+
+* add missing scrolling hooks ([#619](https://github.com/dhis2/maintenance-app-beta/issues/619)) ([a0a9d23](https://github.com/dhis2/maintenance-app-beta/commit/a0a9d23affdb767797bc2ae4b598fe1e73907a65))
+* change text of buttons to be consistent with other soft updates ([#618](https://github.com/dhis2/maintenance-app-beta/issues/618)) [skip release] ([e057e7e](https://github.com/dhis2/maintenance-app-beta/commit/e057e7e5c2f897af23058f17cffbdba460e0de87))
+
 ## [0.60.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.60.0...v0.60.1) (2025-08-18)
 
 
