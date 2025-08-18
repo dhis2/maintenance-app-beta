@@ -1,3 +1,10 @@
+## [0.60.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.60.0...v0.60.1) (2025-08-18)
+
+
+### Bug Fixes
+
+* default to horizontal tabs when choosing render as tabs ([#617](https://github.com/dhis2/maintenance-app-beta/issues/617)) ([2d22615](https://github.com/dhis2/maintenance-app-beta/commit/2d22615ac0444b7d032887eeefe6a03b13e733f6))
+
 # [0.60.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.59.0...v0.60.0) (2025-08-14)
 
 
