@@ -6,6 +6,7 @@ import {
     StandardFormSectionTitle,
     StandardFormSectionDescription,
 } from '../../../components'
+import { useSyncSelectedSectionWithScroll } from '../../../lib'
 import { ProgramIndicatorWithMapping } from '../Edit'
 import { CategoryMappingSection } from './CategoryMappingSection'
 import { ProgramIndicatorMappingSection } from './ProgramIndicatorMappingSection'
@@ -17,6 +18,8 @@ export const ProgramDisaggregationFormFields = ({
     initialProgramIndicators: ProgramIndicatorWithMapping[]
     programName?: string
 }) => {
+    useSyncSelectedSectionWithScroll()
+
     return (
         <div>
             <SectionedFormSections>

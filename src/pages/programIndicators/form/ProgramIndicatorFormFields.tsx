@@ -21,6 +21,7 @@ import {
     SECTIONS_MAP,
     useSchema,
     useSectionedFormContext,
+    useSyncSelectedSectionWithScroll,
 } from '../../../lib'
 import { ColorAndIconField } from '../../dataElements/fields'
 import { AnalyticsPeriodBoundariesField } from './AnalyticsPeriodBoundariesField'
@@ -34,6 +35,7 @@ export const ProgramIndicatorsFormFields = () => {
         format: (v) => v?.toString(),
         parse: (v) => (v !== undefined && v !== '' ? parseInt(v) : v),
     })
+    useSyncSelectedSectionWithScroll()
     const programFilters = [
         'id,displayName,programType,programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,valueType]]',
     ] as const

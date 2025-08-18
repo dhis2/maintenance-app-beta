@@ -6,7 +6,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { SECTIONS_MAP } from '../../../lib'
+import { SECTIONS_MAP, useSyncSelectedSectionWithScroll } from '../../../lib'
 import { BasicInformationSection } from './BasicInformationSection'
 import { MessageTemplateContent } from './messageContent'
 import { NotificationTimingSection } from './NotificationTimingSection'
@@ -14,6 +14,8 @@ import { RecipientSection } from './RecipientSection'
 
 export const DataSetNotificationsFormFields = () => {
     const section = SECTIONS_MAP.dataSetNotificationTemplate
+    useSyncSelectedSectionWithScroll()
+
     return (
         <div>
             <SectionedFormSections>
