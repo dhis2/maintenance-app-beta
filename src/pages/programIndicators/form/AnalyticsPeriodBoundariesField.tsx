@@ -282,7 +282,9 @@ const AnalyticsPeriodBoundaryModal = ({
                             onSavePeriodBoundary(editedPeriodBoundary)
                         }}
                     >
-                        {i18n.t('Save analytics period boundary')}
+                        {editedPeriodBoundary?.id
+                            ? i18n.t('Update analytics period boundary')
+                            : i18n.t('Add analytics period boundary')}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

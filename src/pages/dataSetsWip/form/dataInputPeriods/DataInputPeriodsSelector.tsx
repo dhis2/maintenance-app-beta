@@ -60,6 +60,11 @@ const DataInputPeriodModal = ({
     const [closingDate, setClosingDate] = useState<string | undefined>(
         editDIP?.closingDate?.substring(0, 10)
     )
+    const isUpdatingExistingRule =
+        selectedPeriod &&
+        input.value.find(
+            (dip: DataInputPeriod) => dip.period.id === selectedPeriod
+        )
     const { annual, periods, yearRange } = useGetPeriods({
         selectedYear,
         locale,
@@ -208,7 +213,9 @@ const DataInputPeriodModal = ({
                             closeModal()
                         }}
                     >
-                        {i18n.t('Save period entry rule')}
+                        {isUpdatingExistingRule
+                            ? i18n.t('Update period entry rule')
+                            : i18n.t('Add period entry rule')}
                     </Button>
                 </ButtonStrip>
             </ModalActions>
