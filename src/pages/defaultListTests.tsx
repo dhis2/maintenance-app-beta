@@ -696,7 +696,14 @@ export const generateDefaultListMultiActionsTests = ({
         (
             routeOptions,
             {
-                elements = [generateRandomElement(), generateRandomElement()],
+                elements = [
+                    generateRandomElement({
+                        access: testAccess({ write: true }),
+                    }),
+                    generateRandomElement({
+                        access: testAccess({ write: true }),
+                    }),
+                ],
                 sharingUsers = [testUser(), testUser()],
                 sharingUserGroups = [testUserGroup(), testUserGroup()],
             } = {}

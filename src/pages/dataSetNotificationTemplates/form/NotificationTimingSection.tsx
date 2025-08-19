@@ -8,6 +8,7 @@ import {
 import React from 'react'
 import { Field as FieldRFF, useField, useForm } from 'react-final-form'
 import { StandardFormField } from '../../../components'
+import { getConstantTranslation } from '../../../lib'
 
 export const NotificationTimingSection = () => {
     const { input: triggerInput, meta: triggerMeta } = useField(
@@ -32,16 +33,24 @@ export const NotificationTimingSection = () => {
 
     const triggerOptions = [
         {
-            label: i18n.t('Immediately after data set completion'),
+            label: getConstantTranslation('DATA_SET_COMPLETION'),
             value: 'DATA_SET_COMPLETION',
         },
-        { label: i18n.t('Scheduled Days'), value: 'SCHEDULED_DAYS' },
+        {
+            label: getConstantTranslation('SCHEDULED_DAYS'),
+            value: 'SCHEDULED_DAYS',
+        },
     ]
 
     const notificationTypeOptions = [
-        { label: i18n.t('None'), value: 'NONE' },
-        { label: i18n.t('Collective Summary'), value: 'COLLECTIVE_SUMMARY' },
-        { label: i18n.t('Single Notification'), value: 'SINGLE_NOTIFICATION' },
+        {
+            label: getConstantTranslation('COLLECTIVE_SUMMARY'),
+            value: 'COLLECTIVE_SUMMARY',
+        },
+        {
+            label: getConstantTranslation('SINGLE_NOTIFICATION'),
+            value: 'SINGLE_NOTIFICATION',
+        },
     ]
 
     return (

@@ -54,7 +54,7 @@ export function ModelSingleSelectField<
     input,
     meta,
     dataTest,
-    inputWidth,
+    inputWidth = '400px',
     ...modelSingleSelectProps
 }: ModelSingleSelectFieldProps<TModel> & RelevantRenderProps<TModel>) {
     return (

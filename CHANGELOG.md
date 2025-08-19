@@ -1,3 +1,109 @@
+## [0.60.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.60.1...v0.60.2) (2025-08-18)
+
+
+### Bug Fixes
+
+* add missing scrolling hooks ([#619](https://github.com/dhis2/maintenance-app-beta/issues/619)) ([a0a9d23](https://github.com/dhis2/maintenance-app-beta/commit/a0a9d23affdb767797bc2ae4b598fe1e73907a65))
+* change text of buttons to be consistent with other soft updates ([#618](https://github.com/dhis2/maintenance-app-beta/issues/618)) [skip release] ([e057e7e](https://github.com/dhis2/maintenance-app-beta/commit/e057e7e5c2f897af23058f17cffbdba460e0de87))
+
+## [0.60.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.60.0...v0.60.1) (2025-08-18)
+
+
+### Bug Fixes
+
+* default to horizontal tabs when choosing render as tabs ([#617](https://github.com/dhis2/maintenance-app-beta/issues/617)) ([2d22615](https://github.com/dhis2/maintenance-app-beta/commit/2d22615ac0444b7d032887eeefe6a03b13e733f6))
+
+# [0.60.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.59.0...v0.60.0) (2025-08-14)
+
+
+### Features
+
+* add option group list ([#614](https://github.com/dhis2/maintenance-app-beta/issues/614)) ([3aab748](https://github.com/dhis2/maintenance-app-beta/commit/3aab74861b04111f887696cf018c5ff492cf5cdc))
+
+# [0.59.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.58.0...v0.59.0) (2025-08-13)
+
+
+### Features
+
+* add reordering sections modal ([#609](https://github.com/dhis2/maintenance-app-beta/issues/609)) ([6daab39](https://github.com/dhis2/maintenance-app-beta/commit/6daab391ceba8eeb4d607b202818402fc4c83415))
+* definition and edit of custom forms [DHIS2-19090] ([#603](https://github.com/dhis2/maintenance-app-beta/issues/603)) ([6e23378](https://github.com/dhis2/maintenance-app-beta/commit/6e23378d2161283edae9b2cf1473680688403931))
+
+# [0.58.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.57.0...v0.58.0) (2025-08-12)
+
+
+### Features
+
+* sections display options ([#607](https://github.com/dhis2/maintenance-app-beta/issues/607)) ([3b8203a](https://github.com/dhis2/maintenance-app-beta/commit/3b8203a176f5f70769a8c0e36be4716da30829f7))
+
+# [0.57.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.56.2...v0.57.0) (2025-08-04)
+
+
+### Features
+
+* section list delete and translate action  ([6d41b97](https://github.com/dhis2/maintenance-app-beta/commit/6d41b971968830ec3e68f58f688b760d59473829))
+
+## [0.56.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.56.1...v0.56.2) (2025-07-31)
+
+
+### Bug Fixes
+
+* parse section display options and show error notice ([#600](https://github.com/dhis2/maintenance-app-beta/issues/600)) ([e7e0d75](https://github.com/dhis2/maintenance-app-beta/commit/e7e0d757aef4dd91219fe73cab7d79549d9b413e))
+
+## [0.56.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.56.0...v0.56.1) (2025-07-29)
+
+
+### Bug Fixes
+
+* **overview:** add overview for dataSetNotifications and Indicators ([#589](https://github.com/dhis2/maintenance-app-beta/issues/589)) ([81b35c0](https://github.com/dhis2/maintenance-app-beta/commit/81b35c007d6a0ccbdcf8f17fdd959bf372cbbe65))
+
+# [0.56.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.55.1...v0.56.0) (2025-07-29)
+
+
+### Bug Fixes
+
+* **list:** miscellaneous list fixes ([#586](https://github.com/dhis2/maintenance-app-beta/issues/586)) [skip release] ([4f3c7de](https://github.com/dhis2/maintenance-app-beta/commit/4f3c7deafb36b11c7112a9b32fd2dc60a39ede4a))
+
+
+### Features
+
+* **dataset:** section forms ([#562](https://github.com/dhis2/maintenance-app-beta/issues/562)) ([474689e](https://github.com/dhis2/maintenance-app-beta/commit/474689ef306380d1180ae6a2fd9a375c6772131f))
+
+## [0.55.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.55.0...v0.55.1) (2025-07-29)
+
+
+### Bug Fixes
+
+* spelling ([#599](https://github.com/dhis2/maintenance-app-beta/issues/599)) ([59d300f](https://github.com/dhis2/maintenance-app-beta/commit/59d300f4d8a5bdfe0ac2f11aec67daaf657fd104))
+
+# [0.55.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.54.0...v0.55.0) (2025-07-28)
+
+
+### Features
+
+* indicator add  and edit form ([#594](https://github.com/dhis2/maintenance-app-beta/issues/594)) ([716a974](https://github.com/dhis2/maintenance-app-beta/commit/716a97407e186d46ff348c82796343f407225cb3))
+
+# [0.54.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.53.0...v0.54.0) (2025-07-25)
+
+
+### Features
+
+* actually refetch data when button pressed ([#597](https://github.com/dhis2/maintenance-app-beta/issues/597)) ([7881093](https://github.com/dhis2/maintenance-app-beta/commit/78810930863071e302a8550be5bcbe2a106ae32b))
+* add save button in forms [skip release] ([#585](https://github.com/dhis2/maintenance-app-beta/issues/585)) ([a5fa5c3](https://github.com/dhis2/maintenance-app-beta/commit/a5fa5c3b1ec4825e835e499a4f9dcd8db948111e))
+
+# [0.53.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.52.0...v0.53.0) (2025-07-23)
+
+
+### Features
+
+* refactor old selectors left overs ([#595](https://github.com/dhis2/maintenance-app-beta/issues/595)) ([b5a43fd](https://github.com/dhis2/maintenance-app-beta/commit/b5a43fd7f981167580564de6c49fbc532e6f860f))
+
+# [0.52.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.51.0...v0.52.0) (2025-07-17)
+
+
+### Features
+
+* prevent users from removing sharing [DHIS2-18430] ([#593](https://github.com/dhis2/maintenance-app-beta/issues/593)) ([172fe86](https://github.com/dhis2/maintenance-app-beta/commit/172fe8630416dd15b7963553232da20c1caefbff))
+
 # [0.51.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.50.0...v0.51.0) (2025-07-08)
 
 

@@ -255,6 +255,13 @@ export const SCHEMA_SECTIONS = {
         titlePlural: i18n.t('Constants'),
         parentSectionKey: 'other',
     },
+    optionGroup: {
+        name: SchemaName.optionGroup,
+        namePlural: 'optionGroups',
+        title: i18n.t('Option group'),
+        titlePlural: i18n.t('Option groups'),
+        parentSectionKey: 'other',
+    },
     attribute: {
         name: SchemaName.attribute,
         namePlural: 'attributes',
@@ -309,6 +316,13 @@ export const SCHEMA_SECTIONS = {
         namePlural: 'sqlViews',
         title: i18n.t('SQL view'),
         titlePlural: i18n.t('SQL views'),
+        parentSectionKey: 'other',
+    },
+    legendSet: {
+        name: SchemaName.legendSet,
+        namePlural: 'legendSets',
+        title: i18n.t('Legend'),
+        titlePlural: i18n.t('Legends'),
         parentSectionKey: 'other',
     },
 } as const satisfies SchemaSectionMap

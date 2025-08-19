@@ -12,25 +12,24 @@ import { categoryOptionComboListSchema } from '../pages/categoryOptionCombos/for
 import { categoryOptionGroupListSchema } from '../pages/categoryOptionGroups/form/categoryOptionGroupSchema'
 import { categoryOptionGroupSetListSchema } from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
 import { categoryOptionListSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
-import { dataElementGroupSchema } from '../pages/dataElementGroups/form'
+import { dataElementGroupListSchema } from '../pages/dataElementGroups/form/dataElementGroupSchema'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
-import { dataElementSchema } from '../pages/dataElements/form'
-import { DataSetNotificationTemplateListSchema } from '../pages/dataSetNotificationTemplates/form/DataSetNotificationTemplateSchema'
+import { dataElementListSchema } from '../pages/dataElements/form/dataElementSchema'
+import { dataSetNotificationTemplateListSchema } from '../pages/dataSetNotificationTemplates/form/dataSetNotificationTemplateSchema'
 import { dataSetListSchema } from '../pages/dataSetsWip/form/dataSetFormSchema'
 import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicatorGroupSchema'
 import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
-import { IndicatorSchema } from '../pages/indicators/form/IndicatorSchema'
-import { IndicatorTypeListSchema } from '../pages/indicatorTypes/form/IndicatorTypesSchema'
+import { indicatorListSchema } from '../pages/indicators/form/indicatorSchema'
+import { indicatorTypeListSchema } from '../pages/indicatorTypes/form/indicatorTypesSchema'
+import { OptionGroupListSchema } from '../pages/optionGroups/form/OptionGroupFormSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
-import {
-    ProgramIndicatorGroupFormSchema,
-    ProgramIndicatorGroupListSchema,
-} from '../pages/programIndicatorGroups/form'
-import { ProgramIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
+import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
+import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
 import {
     CategoryMapping,
+    DataElement,
     OptionMapping,
     OrganisationUnit,
     Program,
@@ -42,7 +41,7 @@ const { withDefaultListColumns } = modelFormSchemas
 export const randomDhis2Id = () =>
     faker.helpers.fromRegExp(/[a-zA-Z]{1}[a-zA-Z0-9]{10}/)
 
-function randomValueIn<T>(list: T[]) {
+export function randomValueIn<T>(list: T[]) {
     return list[faker.number.int({ min: 0, max: list.length - 1 })]
 }
 const mockIsoDateTime = () => {
@@ -82,12 +81,19 @@ export const testUserGroup = (overwrites: Record<any, any> = {}) => ({
 })
 
 export const testIndicatorType = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(IndicatorTypeListSchema, { stringMap }),
+    ...generateMock(indicatorTypeListSchema, { stringMap }),
+    ...overwrites,
+})
+
+export const testOptionGroup = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(OptionGroupListSchema, {
+        stringMap,
+    }),
     ...overwrites,
 })
 
 export const testIndicator = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(IndicatorSchema, {
+    ...generateMock(indicatorListSchema, {
         stringMap,
     }),
     ...overwrites,
@@ -148,7 +154,7 @@ export const testCategoryOptionGroupSet = (
 })
 
 export const testDataElementGroup = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(dataElementGroupSchema.merge(withDefaultListColumns), {
+    ...generateMock(dataElementGroupListSchema, {
         stringMap,
     }),
     ...overwrites,
@@ -162,7 +168,7 @@ export const testDataElementGroupSet = (overwrites: Record<any, any> = {}) => ({
 })
 
 export const testDataElement = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(dataElementSchema.merge(withDefaultListColumns), {
+    ...generateMock(dataElementListSchema, {
         stringMap,
     }),
     ...overwrites,
@@ -178,7 +184,7 @@ export const testDataSet = (overwrites: Record<any, any> = {}) => ({
 export const testDataSetNotificationTemplate = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(DataSetNotificationTemplateListSchema, {
+    ...generateMock(dataSetNotificationTemplateListSchema, {
         stringMap,
     }),
     ...overwrites,
@@ -201,7 +207,7 @@ export const testOrganisationUnitGroupSet = (
 })
 
 export const testProgramIndicator = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(ProgramIndicatorsListSchema, { stringMap }),
+    ...generateMock(programIndicatorsListSchema, { stringMap }),
     ...overwrites,
 })
 
@@ -229,14 +235,14 @@ export const testCategoryMapping = ({
 export const testProgramIndicatorGroup = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(ProgramIndicatorGroupListSchema, { stringMap }),
+    ...generateMock(programIndicatorGroupListSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testFormProgramIndicatorGroup = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(ProgramIndicatorGroupFormSchema, { stringMap }),
+    ...generateMock(programIndicatorGroupListSchema, { stringMap }),
     ...overwrites,
 })
 
@@ -252,7 +258,7 @@ export const testCustomAttribute = ({
     valueType,
 })
 
-export const testLegendSets = ({
+export const testLegendSet = ({
     id = randomDhis2Id(),
     displayName = faker.person.fullName(),
 } = {}) => ({
@@ -310,3 +316,14 @@ export const testOrgUnit = (overwrites: Record<any, any> | undefined = {}) => {
         ...overwrites,
     } as unknown as Partial<OrganisationUnit>
 }
+
+// TODO: change when schema for optionset is available
+export const testOptionSet = ({
+    id = randomDhis2Id(),
+    displayName = faker.person.fullName(),
+    valueType = randomValueIn(Object.keys(DataElement.valueType)),
+} = {}) => ({
+    id,
+    displayName,
+    valueType,
+})

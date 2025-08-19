@@ -1,1 +1,0 @@
-export { DataElementsTransfer } from './DataElementsTransfer'

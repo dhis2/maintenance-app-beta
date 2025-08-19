@@ -30,6 +30,7 @@ export const BaseModelTransfer = <TModel extends DisplayableModel>({
     selected,
     onChange,
     renderOption,
+    maxSelections,
     ...transferProps
 }: BaseModelTransferProps<TModel>) => {
     const { allModelsMap, allTransferOptions } = useMemo(() => {
@@ -76,12 +77,13 @@ export const BaseModelTransfer = <TModel extends DisplayableModel>({
 
     return (
         <Transfer
-            maxSelections={5000}
             {...transferProps}
+            maxSelections={maxSelections || 5000}
             renderOption={renderOptionWithFullValue}
             selected={selectedTransferValues}
             options={allTransferOptions}
             onChange={handleOnChange}
+            searchTerm={''}
         />
     )
 }

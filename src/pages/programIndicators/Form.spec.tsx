@@ -9,7 +9,7 @@ import {
     randomDhis2Id,
     randomLongString,
     testCustomAttribute,
-    testLegendSets,
+    testLegendSet,
     testProgram,
     testProgramIndicator,
 } from '../../testUtils/builders'
@@ -141,7 +141,7 @@ describe('Program indicator form tests', () => {
             ) => {
                 const attributes = [testCustomAttribute()]
                 const programs = [testProgram(), testProgram(), testProgram()]
-                const legendSets = [testLegendSets(), testLegendSets()]
+                const legendSets = [testLegendSet(), testLegendSet()]
                 const screen = render(
                     <TestComponentWithRouter
                         path={`/${section.namePlural}`}
@@ -181,6 +181,12 @@ describe('Program indicator form tests', () => {
                                     }
                                 }
                             },
+                            'programIndicators/expression/description': () => ({
+                                status: 'OK',
+                            }),
+                            'programIndicators/filter/description': () => ({
+                                status: 'OK',
+                            }),
                             ...customTestData,
                         }}
                         routeOptions={routeOptions}
@@ -553,6 +559,50 @@ describe('Program indicator form tests', () => {
             await uiActions.submitForm(screen)
             expect(createMock).not.toHaveBeenCalled()
         })
+        it('should show an error if expression field is malformed', async () => {
+            const { screen } = await renderForm({
+                customTestData: {
+                    'programIndicators/expression/description': () => ({
+                        status: 'ERROR',
+                    }),
+                },
+            })
+            const anExpression = faker.finance.routingNumber()
+            await uiActions.enterInputFieldValue(
+                `expression`,
+                anExpression,
+                screen
+            )
+            await userEvent.click(screen.getByTestId(`formfields-expression`))
+
+            uiAssertions.expectFieldToHaveError(
+                `formfields-expression`,
+                'Invalid expression',
+                screen
+            )
+            await uiActions.submitForm(screen)
+            expect(createMock).not.toHaveBeenCalled()
+        })
+        it('should show an error if filter field is malformed', async () => {
+            const { screen } = await renderForm({
+                customTestData: {
+                    'programIndicators/filter/description': () => ({
+                        status: 'ERROR',
+                    }),
+                },
+            })
+            const anExpression = faker.finance.routingNumber()
+            await uiActions.enterInputFieldValue(`filter`, anExpression, screen)
+            await userEvent.click(screen.getByTestId(`formfields-filter`))
+
+            uiAssertions.expectFieldToHaveError(
+                `formfields-filter`,
+                'Invalid expression',
+                screen
+            )
+            await uiActions.submitForm(screen)
+            expect(createMock).not.toHaveBeenCalled()
+        })
     })
     describe('New', () => {
         const renderForm = generateRenderer(
@@ -566,7 +616,7 @@ describe('Program indicator form tests', () => {
             ) => {
                 const attributes = [testCustomAttribute({ mandatory: false })]
                 const programs = [testProgram(), testProgram(), testProgram()]
-                const legendSets = [testLegendSets(), testLegendSets()]
+                const legendSets = [testLegendSet(), testLegendSet()]
                 const screen = render(
                     <TestComponentWithRouter
                         path={`/${section.namePlural}`}
@@ -606,6 +656,12 @@ describe('Program indicator form tests', () => {
                                     }
                                 }
                             },
+                            'programIndicators/expression/description': () => ({
+                                status: 'OK',
+                            }),
+                            'programIndicators/filter/description': () => ({
+                                status: 'OK',
+                            }),
                             ...customTestData,
                         }}
                         routeOptions={routeOptions}
@@ -682,11 +738,11 @@ describe('Program indicator form tests', () => {
                 '',
                 screen
             )
-            // uiAssertions.expectInputFieldToExist(
-            //     'aggregateExportDataElement',
-            //     '',
-            //     screen
-            // )
+            uiAssertions.expectInputFieldToExist(
+                'aggregateExportDataElement',
+                '',
+                screen
+            )
             expect(screen.getByTestId('add-boundary-button')).toBeVisible()
             await uiAssertions.expectTransferFieldToExistWithOptions(
                 'legendSets-field',
@@ -822,12 +878,11 @@ describe('Program indicator form tests', () => {
                         displayInForm: false,
                         aggregateExportAttributeOptionCombo: undefined,
                         aggregateExportCategoryOptionCombo: undefined,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: undefined,
                         legendSets: [],
                         attributeValues: [],
                         expression: undefined,
                         filter: undefined,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [],
                         orgUnitField: staticOptions.eventDefault.value,
                     }),
@@ -916,12 +971,11 @@ describe('Program indicator form tests', () => {
                         displayInForm: false,
                         aggregateExportAttributeOptionCombo: undefined,
                         aggregateExportCategoryOptionCombo: undefined,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: undefined,
                         legendSets: [],
                         attributeValues: [],
                         expression: anExpression,
                         filter: aFilter,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [],
                         orgUnitField: undefined,
                     }),
@@ -1007,12 +1061,11 @@ describe('Program indicator form tests', () => {
                         displayInForm: false,
                         aggregateExportAttributeOptionCombo: undefined,
                         aggregateExportCategoryOptionCombo: undefined,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: undefined,
                         legendSets: [],
                         attributeValues: [],
                         expression: undefined,
                         filter: undefined,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [
                             {
                                 boundaryTarget: 'INCIDENT_DATE',
@@ -1035,7 +1088,7 @@ describe('Program indicator form tests', () => {
             const aShortName = faker.internet.userName()
             const aCatOptionExport = faker.internet.userName()
             const anAttOptionExport = faker.internet.userName()
-            // const anAggDataExport = faker.internet.userName()
+            const anAggDataExport = faker.internet.userName()
 
             const periodTypes = ['Daily', 'Monthly', 'Yearly']
             const { screen } = await renderForm({
@@ -1096,11 +1149,11 @@ describe('Program indicator form tests', () => {
                 anAttOptionExport,
                 screen
             )
-            // await uiActions.enterInputFieldValue(
-            //     'aggregateExportDataElement',
-            //     anAggDataExport,
-            //     screen
-            // )
+            await uiActions.enterInputFieldValue(
+                'aggregateExportDataElement',
+                anAggDataExport,
+                screen
+            )
 
             await uiActions.submitForm(screen)
             expect(createMock).toHaveBeenCalledTimes(1)
@@ -1120,12 +1173,11 @@ describe('Program indicator form tests', () => {
                         displayInForm: true,
                         aggregateExportAttributeOptionCombo: anAttOptionExport,
                         aggregateExportCategoryOptionCombo: aCatOptionExport,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: anAggDataExport,
                         legendSets: [],
                         attributeValues: [],
                         expression: undefined,
                         filter: undefined,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [],
                         orgUnitField: undefined,
                     }),
@@ -1209,14 +1261,13 @@ describe('Program indicator form tests', () => {
                         displayInForm: false,
                         aggregateExportAttributeOptionCombo: undefined,
                         aggregateExportCategoryOptionCombo: undefined,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: undefined,
                         legendSets: [
                             expect.objectContaining({ id: legendSets[0].id }),
                         ],
                         attributeValues: [],
                         expression: undefined,
                         filter: undefined,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [],
                         orgUnitField: undefined,
                     }),
@@ -1301,7 +1352,7 @@ describe('Program indicator form tests', () => {
                         displayInForm: false,
                         aggregateExportAttributeOptionCombo: undefined,
                         aggregateExportCategoryOptionCombo: undefined,
-                        // aggregateExportDataElement: anAggDataExport,
+                        aggregateExportDataElement: undefined,
                         legendSets: [],
                         attributeValues: [
                             {
@@ -1313,7 +1364,6 @@ describe('Program indicator form tests', () => {
                         ],
                         expression: undefined,
                         filter: undefined,
-                        style: { color: undefined, icon: undefined },
                         analyticsPeriodBoundaries: [],
                         orgUnitField: undefined,
                     }),
@@ -1328,6 +1378,7 @@ describe('Program indicator form tests', () => {
                 routeOptions,
                 {
                     customTestData = {},
+                    programIndicatorOverwrites = {},
                     matchingExistingElementFilter = undefined,
                     id = randomDhis2Id(),
                 } = {}
@@ -1341,7 +1392,7 @@ describe('Program indicator form tests', () => {
                     testProgram(),
                 ]
                 const attributes = [testCustomAttribute()]
-                const legendSets = [testLegendSets(), testLegendSets()]
+                const legendSets = [testLegendSet(), testLegendSet()]
                 const periodTypes = ['Daily', 'Monthly', 'Yearly']
                 const programIndicator = testProgramIndicator({
                     id,
@@ -1351,7 +1402,6 @@ describe('Program indicator form tests', () => {
                         { attribute: attributes[0], value: 'attribute' },
                     ],
                     orgUnitField: staticOptions.eventDefault.value,
-                    style: { color: undefined, icon: undefined },
                     analyticsPeriodBoundaries: [
                         {
                             boundaryTarget: 'INCIDENT_DATE',
@@ -1361,6 +1411,7 @@ describe('Program indicator form tests', () => {
                             offsetPeriods: 5,
                         },
                     ],
+                    ...programIndicatorOverwrites,
                 })
                 const screen = render(
                     <TestComponentWithRouter
@@ -1391,7 +1442,7 @@ describe('Program indicator form tests', () => {
                                 },
                             }),
                             programIndicators: (type: any, params: any) => {
-                                if (type === 'create') {
+                                if (type === 'json-patch') {
                                     updateMock(params)
                                     return { statusCode: 204 }
                                 }
@@ -1421,6 +1472,12 @@ describe('Program indicator form tests', () => {
                                 periodTypes: periodTypes.map((pt) => ({
                                     name: pt,
                                 })),
+                            }),
+                            'programIndicators/expression/description': () => ({
+                                status: 'OK',
+                            }),
+                            'programIndicators/filter/description': () => ({
+                                status: 'OK',
                             }),
                             ...customTestData,
                         }}
@@ -1573,11 +1630,11 @@ describe('Program indicator form tests', () => {
                 programIndicator.aggregateExportAttributeOptionCombo,
                 screen
             )
-            // uiAssertions.expectInputFieldToExist(
-            //     'aggregateExportDataElement',
-            //     '',
-            //     screen
-            // )
+            uiAssertions.expectInputFieldToExist(
+                'aggregateExportDataElement',
+                programIndicator.aggregateExportDataElement,
+                screen
+            )
         })
         it('contain the legend transfer', async () => {
             const { screen, legendSets } = await renderForm()
@@ -1601,6 +1658,33 @@ describe('Program indicator form tests', () => {
                     ).getByRole('textbox')
                 ).toHaveValue(programIndicator.attributeValues[0].value)
             })
+        })
+        it('update decimals to 0', async () => {
+            const { screen, programIndicator } = await renderForm({
+                programIndicatorOverwrites: { decimals: 1 },
+            })
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('decimals-field'),
+                1,
+                screen
+            )
+            await uiActions.submitForm(screen)
+            expect(updateMock).toHaveBeenCalledWith({
+                data: [{ op: 'replace', path: '/decimals', value: 0 }],
+                id: programIndicator.id,
+                params: undefined,
+                resource: 'programIndicators',
+            })
+        })
+        it('displays 0 decimals correctly', async () => {
+            const { screen } = await renderForm({
+                programIndicatorOverwrites: { decimals: 0 },
+            })
+            const decimals = within(
+                screen.getByTestId('decimals-field')
+            ).getByTestId('dhis2-uicore-select-input')
+            expect(decimals).toBeVisible()
+            expect(decimals).toHaveTextContent('0')
         })
         it('should have a cancel button with a link back to the list view', async () => {
             const { screen } = await renderForm()

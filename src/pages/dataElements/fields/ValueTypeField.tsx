@@ -1,93 +1,66 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectFieldFF } from '@dhis2/ui'
-import React, { useEffect, useState } from 'react'
-import { Field as FieldRFF, useForm, useFormState } from 'react-final-form'
-import {
-    VALUE_TYPE,
-    required,
-    useSchemas,
-    useOptionSetQuery,
-} from '../../../lib'
+import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
+import React, { useEffect } from 'react'
+import { useField, useFormState } from 'react-final-form'
+import { getConstantTranslation, SchemaName, useSchema } from '../../../lib'
 
-/**
- * Field rule: Unless valueType or the selected optionSet's valueType is
- *             MULTI_TEXT, filter out the MULTI_TEXT option
- * Field rule: When the selected optionSet's valueType is MULTI_TEXT, disable
- *             valueType field
- * Field rule: When the selected optionSet's valueType is MULTI_TEXT, set
- *             valueTypeField value to optionSet's valueType
- */
 const valueTypeHelpText = i18n.t('The type of data that will be recorded.')
 const valueTypeDisabledHelpText = i18n.t(
     'Disabled as the value type must match the value type of the selected option set'
 )
-const valueTypeOptionSetFields = ['id', 'valueType']
 export function ValueTypeField() {
-    const { change } = useForm()
     const { values } = useFormState({ subscription: { values: true } })
-    const disabled = !!values.optionSet.id
-    const [lazy] = useState(!values.optionSet.id)
-    const { refetch, ...optionSetQuery } = useOptionSetQuery({
-        lazy,
-        variables: {
-            id: values.optionSet.id,
-            fields: valueTypeOptionSetFields,
-        },
-    })
+    const disabled = !!values.optionSet?.id
+    const schema = useSchema(SchemaName.dataElement)
 
+    const { input } = useField('valueType')
     useEffect(() => {
-        if (values.optionSet.id) {
-            refetch({ id: values.optionSet.id })
+        if (values.optionSet?.valueType) {
+            input.onChange(values.optionSet.valueType)
+            input.onBlur()
         }
-    }, [refetch, values.optionSet.id])
+    }, [values.optionSet, input])
 
-    useEffect(() => {
-        if (
-            values.optionSet.id &&
-            !optionSetQuery.loading &&
-            !optionSetQuery.fetching &&
-            !optionSetQuery.error &&
-            optionSetQuery.data?.optionSets.valueType
-        ) {
-            change('valueType', optionSetQuery.data?.optionSets.valueType)
-        }
-    })
-
-    const schemas = useSchemas()
-    const { dataElement } = schemas
     const optionSetHasMultiTextValueType =
         values.valueType === 'MULTI_TEXT' ||
-        (values.optionSet?.id &&
-            optionSetQuery.data?.optionSets.valueType === 'MULTI_TEXT')
+        (values.optionSet?.id && values.optionSet?.valueType === 'MULTI_TEXT')
 
-    const options = dataElement.properties.valueType.constants
-        ?.map((constant) => ({
-            value: constant,
-            label: VALUE_TYPE[constant as keyof typeof VALUE_TYPE],
-        }))
-        .filter(({ value }) => {
-            return optionSetHasMultiTextValueType || value !== 'MULTI_TEXT'
-        })
+    const options =
+        schema.properties.valueType.constants
+            ?.map((constant) => ({
+                value: constant,
+                label: getConstantTranslation(constant),
+            }))
+            .filter(({ value }) => {
+                return optionSetHasMultiTextValueType || value !== 'MULTI_TEXT'
+            }) || []
 
     const helpText = disabled
         ? `${valueTypeHelpText} ${valueTypeDisabledHelpText}`
         : valueTypeHelpText
 
     return (
-        <FieldRFF
-            required
-            disabled={disabled}
-            component={SingleSelectFieldFF}
-            dataTest="formfields-valuetype"
+        <SingleSelectField
+            dataTest="formfields-valueType"
             inputWidth="400px"
-            name="valueType"
+            selected={input.value}
+            onChange={({ selected }) => {
+                input.onChange(selected)
+                input.onBlur()
+            }}
             label={i18n.t('{{fieldLabel}} (required)', {
                 fieldLabel: i18n.t('Value type'),
             })}
+            disabled={disabled}
             helpText={helpText}
-            options={options || []}
-            validateFields={[]}
-            validate={required}
-        />
+        >
+            {options.map((option) => (
+                <SingleSelectOption
+                    key={option.value}
+                    label={option.label}
+                    value={option.value}
+                />
+            ))}
+        </SingleSelectField>
     )
 }

@@ -4,7 +4,13 @@ import { Button, ButtonStrip, NoticeBox } from '@dhis2/ui'
 import { FORM_ERROR } from 'final-form'
 import React from 'react'
 import { Form } from 'react-final-form'
-import { BaseListModel, Schema, useSchemaFromHandle } from '../../../lib'
+import {
+    BaseListModel,
+    Schema,
+    SchemaName,
+    useSchema,
+    useSchemaSectionHandleOrThrow,
+} from '../../../lib'
 import { WebLocale } from '../../../types/generated'
 import { LoadingSpinner } from '../../loading/LoadingSpinner'
 import TranslatableFields from './TranslatableFields'
@@ -43,13 +49,17 @@ export const TranslationForm = ({
     model,
     selectedLocale,
     onClose,
+    schemaName,
 }: {
     model: BaseListModel
     selectedLocale?: WebLocale | undefined
     onClose: () => void
+    schemaName?: SchemaName
 }) => {
     const engine = useDataEngine()
-    const schema = useSchemaFromHandle()
+    const section = useSchemaSectionHandleOrThrow()
+    const schemaNameOrDefaultSchemaName = schemaName ?? section.name
+    const schema = useSchema(schemaNameOrDefaultSchemaName)
 
     const { show } = useAlert(
         ({ message }) => message,

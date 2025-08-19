@@ -1,0 +1,74 @@
+.sectionsList {
+    padding: var(--spacers-dp16);
+    background-color: var(--colors-grey100);
+    border-radius: 5px;
+    margin-block-start: var(--spacers-dp16);
+    max-width: 720px;
+    display: flex;
+    gap: var(--spacers-dp8);
+    flex-direction: column;
+}
+
+.description {
+    color: var(--colors-grey600);
+    padding: 0;
+    margin: 0;
+}
+
+.sectionItems {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.sectionItemClickable {
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    padding: var(--spacers-dp16);
+}
+
+.sectionItem {
+    display: flex;
+    justify-content: space-between;
+    padding-inline-end: var(--spacers-dp16);
+    background-color: var(--colors-white);
+    border-radius: 2px;
+    margin-block-start: var(--spacers-dp8);
+    align-items: center;
+    border: 1px solid var(--colors-grey300);
+}
+
+.sectionName {
+    line-height: 24px;
+    font-weight: 500;
+    color: var(--colors-grey800);
+}
+
+.sectionDescription {
+    line-height: 20px;
+    color: var(--colors-grey600);
+}
+
+.sectionActions {
+    display: flex;
+    gap: var(--spacers-dp4);
+}
+
+.sectionActions button {
+    width: 28px;
+    height: 28px;
+}
+
+.sectionCardDeleted {
+    margin-block: 8px;
+    padding: 12px;
+    background-color: var(--colors-red050);
+    border: 1px solid var(--colors-red200);
+    border-radius: 4px;
+}
+
+.deletedSectionText {
+    color: var(--colors-red800);
+    font-size: 15px;
+    margin-block-end: var(--spacers-dp8);
+}

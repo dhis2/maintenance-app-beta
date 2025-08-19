@@ -1,10 +1,21 @@
 import i18n from '@dhis2/d2-i18n'
-import { Checkbox, InputFieldFF, RadioFieldFF } from '@dhis2/ui'
+import {
+    Checkbox,
+    CheckboxFieldFF,
+    InputFieldFF,
+    Radio,
+    RadioFieldFF,
+} from '@dhis2/ui'
+import DOMPurify from 'dompurify'
 import React, { useState } from 'react'
-import { useField } from 'react-final-form'
+import { Field, useField } from 'react-final-form'
 import classes from './DisplayOptionField.module.css'
 
-export function DisplayOptionsField() {
+export function DisplayOptionsField({
+    withSectionsDisplayOptions,
+}: Readonly<{
+    withSectionsDisplayOptions: boolean
+}>) {
     const fieldName = 'displayOptions'
     const titleField = useField(`${fieldName}.customText.header`, {
         validate: (value) => {
@@ -14,6 +25,8 @@ export function DisplayOptionsField() {
                   })
                 : false
         },
+        format: (value) =>
+            typeof value === 'string' ? DOMPurify.sanitize(value) : value,
     })
     const subtitleField = useField(`${fieldName}.customText.subheader`, {
         validate: (value) => {
@@ -23,7 +36,10 @@ export function DisplayOptionsField() {
                   })
                 : false
         },
+        format: (value) =>
+            typeof value === 'string' ? DOMPurify.sanitize(value) : value,
     })
+
     const alignFieldStart = useField(`${fieldName}.customText.align`, {
         type: 'radio',
         value: 'line-start',
@@ -36,24 +52,35 @@ export function DisplayOptionsField() {
         type: 'radio',
         value: 'line-end',
     })
+    const renderAsTabs = useField(`renderAsTabs`)
+
+    const renderAsHorizonalTabs = useField(`${fieldName}.tabsDirection`, {
+        type: 'radio',
+        value: 'horizontal',
+        defaultValue: 'horizontal',
+    })
+    const renderAsVerticalTabs = useField(`${fieldName}.tabsDirection`, {
+        type: 'radio',
+        value: 'vertical',
+    })
 
     const hasAnyDisplayOptions = [titleField, subtitleField].some(
         (field) => field.input.value
     )
-    const [isChecked, setIsChecked] = useState(hasAnyDisplayOptions)
+    const [isTitlesChecked, setIsTitlesChecked] = useState(hasAnyDisplayOptions)
 
-    const onCheckboxChange = () => {
-        setIsChecked(!isChecked)
+    const onTitlesCheckboxChange = () => {
+        setIsTitlesChecked(!isTitlesChecked)
     }
 
     return (
         <>
             <Checkbox
                 label={i18n.t('Display title / subtitle')}
-                onChange={onCheckboxChange}
-                checked={isChecked}
+                onChange={onTitlesCheckboxChange}
+                checked={isTitlesChecked}
             />
-            {isChecked && (
+            {isTitlesChecked && (
                 <>
                     <div className={classes.customTextFields}>
                         <InputFieldFF
@@ -90,6 +117,60 @@ export function DisplayOptionsField() {
                         </div>
                     </div>
                 </>
+            )}
+            {withSectionsDisplayOptions && (
+                <div className={classes.displayMode}>
+                    <p>{i18n.t('Section display mode')}</p>
+                    <Radio
+                        checked={!renderAsTabs.input.value}
+                        onChange={({ checked }) => {
+                            renderAsTabs.input.onChange(!checked)
+                        }}
+                        onBlur={renderAsTabs.onBlur}
+                        label={i18n.t(
+                            'Single page: all sections shown consecutively in one form'
+                        )}
+                    />
+                    <Radio
+                        checked={!!renderAsTabs.input.value}
+                        onChange={({ checked }) => {
+                            renderAsTabs.input.onChange(checked)
+                        }}
+                        onBlur={renderAsTabs.onBlur}
+                        label={i18n.t('Tabs: show a tab for each section')}
+                    />
+                    {!!renderAsTabs.input.value && (
+                        <div className={classes.renderAsTabsOptions}>
+                            <RadioFieldFF
+                                input={renderAsHorizonalTabs.input}
+                                meta={renderAsHorizonalTabs.meta}
+                                label={i18n.t('Horizontal tabs')}
+                            />
+                            <RadioFieldFF
+                                input={renderAsVerticalTabs.input}
+                                meta={renderAsVerticalTabs.meta}
+                                label={i18n.t('Vertical tabs')}
+                            />
+                        </div>
+                    )}
+                    {withSectionsDisplayOptions && (
+                        <div className={classes.renderHorizontally}>
+                            <Field
+                                name="renderHorizontally"
+                                type="checkbox"
+                                component={CheckboxFieldFF}
+                                label={i18n.t(
+                                    'Render multi-organisation unit forms vertically'
+                                )}
+                            />
+                            <p>
+                                {i18n.t(
+                                    'Only applied to section forms using multiple organisation units'
+                                )}
+                            </p>
+                        </div>
+                    )}
+                </div>
             )}
         </>
     )
