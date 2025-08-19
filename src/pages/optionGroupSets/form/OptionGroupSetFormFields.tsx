@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { CheckboxFieldFF } from '@dhis2/ui'
+import { CheckboxFieldFF, NoticeBox } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import { useHref } from 'react-router'
@@ -18,6 +18,7 @@ import {
     ModelSingleSelectFormField,
     useRefreshModelSingleSelect,
 } from '../../../components/metadataFormControls/ModelSingleSelect'
+import styles from './OptionGroupSetFormFields.module.css'
 
 function OptionGroupSetFormFields() {
     const { input: optionSetInput } = useField('optionSet')
@@ -94,7 +95,7 @@ function OptionGroupSetFormFields() {
                     </EditableFieldWrapper>
                 </StandardFormField>
 
-                {optionSetId && (
+                {optionSetId ? (
                     <StandardFormField>
                         <ModelTransferField
                             disabled={!optionSetId}
@@ -118,6 +119,12 @@ function OptionGroupSetFormFields() {
                             )}
                         />
                     </StandardFormField>
+                ) : (
+                    <NoticeBox className={styles.noOptionSetWarning}>
+                        {i18n.t(
+                            'You must select an option set before you can select options.'
+                        )}
+                    </NoticeBox>
                 )}
             </StandardFormSection>
         </>
