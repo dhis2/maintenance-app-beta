@@ -23,7 +23,12 @@ const generateContract = ({
         responseStatus: 200,
         jsonSchema: schemaPath,
     }
-    const schema = zodToJsonSchema(expectedSchema, name)
+    const schema = zodToJsonSchema(expectedSchema, {
+        name,
+        // @ts-expect-error/rejected-must-be-true
+        rejectedAdditionalProperties: true,
+        $refStrategy: 'none',
+    })
     mkdirSync(`contracts/${name}`, { recursive: true })
     writeFileSync(contractPath, JSON.stringify(request))
     writeFileSync(schemaPath, JSON.stringify(schema.definitions))
@@ -36,6 +41,12 @@ describe('contracts', () => {
             path: 'categories',
             name: 'categories',
             expectedSchema: z.array(categoryListSchema),
+        })
+        generateContract({
+            method: 'GET',
+            path: '/categories/{id}',
+            name: 'category',
+            expectedSchema: categoryListSchema,
         })
     })
 })
