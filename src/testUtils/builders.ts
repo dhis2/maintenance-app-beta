@@ -328,3 +328,20 @@ export const testOptionSet = ({
     displayName,
     valueType,
 })
+
+export const testOption = ({
+    id = randomDhis2Id(),
+    name,
+    displayName,
+}: {
+    id?: string
+    name?: string
+    displayName?: string
+} = {}) => {
+    const optionName = name ?? faker.word.sample()
+    return {
+        id,
+        name: optionName,
+        displayName: displayName ?? optionName,
+    }
+}

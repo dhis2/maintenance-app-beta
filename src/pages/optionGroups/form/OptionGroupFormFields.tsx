@@ -5,20 +5,16 @@ import {
     DefaultIdentifiableFields,
     DescriptionField,
     ModelTransferField,
-    SectionedFormSection,
     SectionedFormSections,
     StandardFormField,
+    StandardFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { useSectionedFormContext } from '../../../lib'
 import { ColorAndIconField } from '../../dataElements/fields'
-import { OptionGroupFormDescriptor } from './formDescriptor'
 import { OptionSetField } from './OptionSetField'
 
 export const OptionGroupFormFields = () => {
-    const descriptor =
-        useSectionedFormContext<typeof OptionGroupFormDescriptor>()
     const { input: optionSetField } = useField<{ id: string } | null>(
         'optionSet'
     )
@@ -34,9 +30,7 @@ export const OptionGroupFormFields = () => {
 
     return (
         <SectionedFormSections>
-            <SectionedFormSection
-                name={descriptor.getSection('basicInformation').name}
-            >
+            <StandardFormSection>
                 <StandardFormSectionTitle>
                     {i18n.t('Basic information')}
                 </StandardFormSectionTitle>
@@ -64,12 +58,10 @@ export const OptionGroupFormFields = () => {
                         onChange={(id) => setSelectedOptionSetId(id)}
                     />
                 </StandardFormField>
-            </SectionedFormSection>
+            </StandardFormSection>
 
             {selectedOptionSetId && (
-                <SectionedFormSection
-                    name={descriptor.getSection('options').name}
-                >
+                <StandardFormSection>
                     <StandardFormSectionTitle>
                         {i18n.t('Options')}
                     </StandardFormSectionTitle>
@@ -102,7 +94,7 @@ export const OptionGroupFormFields = () => {
                             )}
                         />
                     </StandardFormField>
-                </SectionedFormSection>
+                </StandardFormSection>
             )}
         </SectionedFormSections>
     )

@@ -1,17 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import {
-    DefaultFormFooter,
-    DefaultSectionedFormSidebar,
-    FormBase,
-    SectionedFormErrorNotice,
-    SectionedFormLayout,
-} from '../../components'
-import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
+import { DefaultEditFormContents, FormBase } from '../../components'
+import { SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { fieldFilters } from './form/fieldFilters'
-import { OptionGroupFormDescriptor } from './form/formDescriptor'
 import { OptionGroupFormFields } from './form/OptionGroupFormFields'
 import { OptionGroupFormValues, validate } from './form/OptionGroupFormSchema'
 
@@ -41,21 +34,9 @@ export const Component = () => {
             validate={validate}
             includeAttributes={false}
         >
-            {({ handleSubmit }) => (
-                <SectionedFormProvider
-                    formDescriptor={OptionGroupFormDescriptor}
-                >
-                    <SectionedFormLayout
-                        sidebar={<DefaultSectionedFormSidebar />}
-                    >
-                        <form onSubmit={handleSubmit}>
-                            <OptionGroupFormFields />
-                            <DefaultFormFooter cancelTo="/optionGroups" />
-                        </form>
-                        <SectionedFormErrorNotice />
-                    </SectionedFormLayout>
-                </SectionedFormProvider>
-            )}
+            <DefaultEditFormContents section={section}>
+                <OptionGroupFormFields />
+            </DefaultEditFormContents>
         </FormBase>
     )
 }
