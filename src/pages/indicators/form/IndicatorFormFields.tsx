@@ -13,7 +13,11 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { SECTIONS_MAP, useSectionedFormContext } from '../../../lib'
+import {
+    SECTIONS_MAP,
+    useSectionedFormContext,
+    useSyncSelectedSectionWithScroll,
+} from '../../../lib'
 import { ColorAndIconField } from '../../dataElements/fields'
 import DenominatorFields from './DenominatorFields'
 import { IndicatorFormDescriptor } from './formDescriptor'
@@ -28,6 +32,7 @@ export const IndicatorFormFields = () => {
         parse: (v) => (v !== undefined && v !== '' ? parseInt(v) : v),
     })
     const descriptor = useSectionedFormContext<typeof IndicatorFormDescriptor>()
+    useSyncSelectedSectionWithScroll()
 
     return (
         <SectionedFormSections>

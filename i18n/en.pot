@@ -7,6 +7,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "POT-Creation-Date: 2025-08-20T13:47:12.847Z\n"
 "PO-Revision-Date: 2025-08-20T13:47:12.847Z\n"
+"POT-Creation-Date: 2025-08-20T07:51:18.506Z\n"
+"PO-Revision-Date: 2025-08-20T07:51:18.507Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -210,6 +212,11 @@ msgstr "Correct confirmation code must be entered to merge"
 
 msgid "Merge"
 msgstr "Merge"
+
+msgid "Merging {{count}} {{model}}..."
+msgid_plural "Merging {{count}} {{model}}..."
+msgstr[0] "Merging {{count}} {{model}}..."
+msgstr[1] "Merging {{count}} {{model}}..."
 
 msgid "Merging..."
 msgstr "Merging..."
@@ -739,6 +746,12 @@ msgstr "Option set"
 msgid "Option sets"
 msgstr "Option sets"
 
+msgid "Option group set"
+msgstr "Option group set"
+
+msgid "Option group sets"
+msgstr "Option group sets"
+
 msgid "Predictor"
 msgstr "Predictor"
 
@@ -1267,6 +1280,11 @@ msgstr "Filter available categories"
 msgid "Filter selected categories"
 msgstr "Filter selected categories"
 
+msgid "{{count}} category option combinations will be generated."
+msgid_plural "{{count}} category option combinations will be generated."
+msgstr[0] "{{count}} category option combinations will be generated."
+msgstr[1] "{{count}} category option combinations will be generated."
+
 msgid "More than 4 Categories"
 msgstr "More than 4 Categories"
 
@@ -1437,6 +1455,16 @@ msgid ""
 msgstr ""
 "What should happen to the source category options after the merge is "
 "complete?"
+
+msgid "Keep {{ count }} source category options"
+msgid_plural "Keep {{ count }} source category options"
+msgstr[0] "Keep {{ count }} source category options"
+msgstr[1] "Keep {{ count }} source category options"
+
+msgid "Delete {{ count }} source category options"
+msgid_plural "Delete {{ count }} source category options"
+msgstr[0] "Delete {{ count }} source category options"
+msgstr[1] "Delete {{ count }} source category options"
 
 msgid "Available data element groups"
 msgstr "Available data element groups"
@@ -2242,6 +2270,16 @@ msgstr ""
 "What should happen to the source indicator types after the merge is "
 "complete?"
 
+msgid "Keep {{ count }} source indicator types"
+msgid_plural "Keep {{ count }} source indicator types"
+msgstr[0] "Keep {{ count }} source indicator types"
+msgstr[1] "Keep {{ count }} source indicator types"
+
+msgid "Delete {{ count }} source indicator types"
+msgid_plural "Delete {{ count }} source indicator types"
+msgstr[0] "Delete {{ count }} source indicator types"
+msgstr[1] "Delete {{ count }} source indicator types"
+
 msgid "Conflicting factors"
 msgstr "Conflicting factors"
 
@@ -2365,26 +2403,39 @@ msgstr "No indicators available. Remove one from source."
 msgid "What should happen to the source indicators after the merge is complete?"
 msgstr "What should happen to the source indicators after the merge is complete?"
 
-msgid "Set up the basic information for this option group."
-msgstr "Set up the basic information for this option group."
+msgid "Keep {{ count }} source indicators"
+msgid_plural "Keep {{ count }} source indicators"
+msgstr[0] "Keep {{ count }} source indicators"
+msgstr[1] "Keep {{ count }} source indicators"
 
-msgid "Explain the purpose of this option group."
-msgstr "Explain the purpose of this option group."
+msgid "Delete {{ count }} source indicators"
+msgid_plural "Delete {{ count }} source indicators"
+msgstr[0] "Delete {{ count }} source indicators"
+msgstr[1] "Delete {{ count }} source indicators"
 
-msgid "Select the options that belong to this group."
-msgstr "Select the options that belong to this group."
+msgid "Set up the basic information for this option group set."
+msgstr "Set up the basic information for this option group set."
 
-msgid "Available options"
-msgstr "Available options"
+msgid "Explain the purpose of this option group set."
+msgstr "Explain the purpose of this option group set."
 
-msgid "Selected options"
-msgstr "Selected options"
+msgid "Choose the option groups to include in this option group set."
+msgstr "Choose the option groups to include in this option group set."
 
-msgid "Filter available options"
-msgstr "Filter available options"
+msgid "Available option groups"
+msgstr "Available option groups"
 
-msgid "Filter selected options"
-msgstr "Filter selected options"
+msgid "Selected option groups"
+msgstr "Selected option groups"
+
+msgid "Filter available option groups"
+msgstr "Filter available option groups"
+
+msgid "Filter selected option groups"
+msgstr "Filter selected option groups"
+
+msgid "You must select an option set before you can select options."
+msgstr "You must select an option set before you can select options."
 
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."
@@ -2726,6 +2777,22 @@ msgstr ""
 "structure, such as national or regional tiers, and specify the names used "
 "for each level."
 
+msgid "Placeholder for other"
+msgstr "Placeholder for other"
+
+msgid ""
+"Create a group of options from option sets that has a similar functional "
+"area or meaning."
+msgstr ""
+"Create a group of options from option sets that has a similar functional "
+"area or meaning."
+
+msgid "Create, modify and view sets of option groups."
+msgstr "Create, modify and view sets of option groups."
+
+msgid "Set disaggregation mappings for program indicators."
+msgstr "Set disaggregation mappings for program indicators."
+
 msgid "Manage"
 msgstr "Manage"
 
@@ -2874,6 +2941,11 @@ msgstr "Delete Mapping"
 
 msgid "This action cannot be undone."
 msgstr "This action cannot be undone."
+
+msgid "All mappings ({{count}}) will be removed."
+msgid_plural "All mappings ({{count}}) will be removed."
+msgstr[0] "All mappings ({{count}}) will be removed."
+msgstr[1] "All mappings ({{count}}) will be removed."
 
 msgid "Are you sure you want to delete this program mapping configuration?"
 msgstr "Are you sure you want to delete this program mapping configuration?"
