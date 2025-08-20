@@ -97,7 +97,7 @@ const defaultAvailableColumnsNoSharing =
 export const modelListViewsConfig = {
     dataElement: {
         columns: {
-            available: [DESCRIPTORS.shortName, 'zeroIsSignificant'],
+            available: [DESCRIPTORS.shortName, 'zeroIsSignificant', 'formName'],
             default: [
                 DESCRIPTORS.name,
                 { label: i18n.t('Domain type'), path: 'domainType' },
@@ -108,7 +108,7 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            available: [],
+            available: ['formName'],
             default: ['domainType', 'valueType', 'dataSet', 'categoryCombo'],
         },
     },
