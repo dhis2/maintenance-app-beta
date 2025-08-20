@@ -23,7 +23,7 @@ export const OtherCardGroup = ({ showTitle }: { showTitle?: boolean }) => {
     return (
         <SummaryCardGroup
             title={showTitle ? TITLE : undefined}
-            section={OVERVIEW_SECTIONS.organisationUnit}
+            section={OVERVIEW_SECTIONS.other}
         >
             <SummaryCard section={SECTIONS_MAP.optionGroup}>
                 {i18n.t(

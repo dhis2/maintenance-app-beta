@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-15T13:29:37.592Z\n"
-"PO-Revision-Date: 2025-08-15T13:29:37.592Z\n"
+"POT-Creation-Date: 2025-08-20T07:51:18.506Z\n"
+"PO-Revision-Date: 2025-08-20T07:51:18.507Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2431,6 +2431,9 @@ msgstr "Filter available option groups"
 
 msgid "Filter selected option groups"
 msgstr "Filter selected option groups"
+
+msgid "You must select an option set before you can select options."
+msgstr "You must select an option set before you can select options."
 
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."
