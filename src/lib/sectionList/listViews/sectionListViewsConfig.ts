@@ -97,7 +97,11 @@ const defaultAvailableColumnsNoSharing =
 export const modelListViewsConfig = {
     dataElement: {
         columns: {
-            available: [DESCRIPTORS.shortName, 'zeroIsSignificant', 'formName'],
+            available: [
+                DESCRIPTORS.shortName,
+                'zeroIsSignificant',
+                DESCRIPTORS.formName,
+            ],
             default: [
                 DESCRIPTORS.name,
                 { label: i18n.t('Domain type'), path: 'domainType' },
