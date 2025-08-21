@@ -35,7 +35,9 @@ export const GreyFieldsModal = ({
 }: {
     onClose: () => void
     categoryCombos: CategoryCombosType['categoryCombos'] | undefined
-    dataElements: DisplayableModel[] | undefined
+    dataElements:
+        | (DisplayableModel & { categoryCombo: { id: string } })[]
+        | undefined
     input: FieldInputProps<GreyedField[]>
 }) => {
     const [localGreyedFields, setLocalGreyedFields] = useState<GreyedField[]>(
@@ -81,6 +83,10 @@ export const GreyFieldsModal = ({
             ? categoryCombos?.find((cc) => cc.id === catCombo)
             : catCombo
     }, [catCombo, categoryCombos])
+
+    const selectedDataElements = dataElements?.filter(
+        (de) => de.categoryCombo.id === catCombo
+    )
 
     const addCategoryOptionToCategory = (
         categoryOption: DisplayableModel & { categories: { id: string }[] },
@@ -159,7 +165,7 @@ export const GreyFieldsModal = ({
                         </TableHead>
                     ))}
                     <TableBody>
-                        {dataElements?.map((de) => (
+                        {selectedDataElements?.map((de) => (
                             <TableRow key={de.id}>
                                 <TableCell>{de.displayName}</TableCell>
                                 {selectedCatComboData?.categoryOptionCombos.map(

@@ -33,7 +33,7 @@ export const fieldFilters = [
     'showColumnTotals',
     'disableDataElementAutoGroup',
     'displayOptions',
-    'dataElements[id,displayName]',
+    'dataElements[id,displayName,categoryCombo[id]]',
     'greyedFields[dataElement, categoryOptionCombo]',
 ] as const
 
@@ -50,7 +50,7 @@ export type SectionFormValues = PickWithFieldFilters<
     typeof fieldFilters
 > & {
     dataSet: { id: string }
-    displayOptions?: undefined
+    displayOptions?: string
 }
 type PartialSectionFormValues = Partial<SectionFormValues>
 type SubmittedSectionFormValues = PartialSectionFormValues & DisplayableModel

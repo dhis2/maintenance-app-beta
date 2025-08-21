@@ -87,7 +87,7 @@ export const DataSetSectionFormContents = ({
     })
 
     const { input: dataElementsInput, meta: dataElementsMeta } = useField<
-        DisplayableModel[]
+        (DisplayableModel & { categoryCombo: { id: string } })[]
     >('dataElements', {
         multiple: true,
         validateFields: [],
@@ -192,7 +192,7 @@ export const DataSetSectionFormContents = ({
                     filter: [
                         `id:in:[${sectionCategoryCombos.map((cc) => cc.id)}]`,
                     ],
-                    fields: 'id,displayName,categories[id,displayName],categoryOptionCombos[id,displayName,categoryOptions[id,displayName,categories[id]],categories[id,displayName]]',
+                    fields: 'id,displayName,categories[id,displayName],categoryOptionCombos[id,displayName,categoryOptions[id,displayName,categories[id]]]',
                 },
             },
         ] as const,
