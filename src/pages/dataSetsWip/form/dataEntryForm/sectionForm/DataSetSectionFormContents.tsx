@@ -160,7 +160,7 @@ export const DataSetSectionFormContents = ({
             )
     }, [data, catComboFilter, values.id, isFilteringByCatCombo])
 
-    const availableCategoryCombos = useMemo(() => {
+    const sectionCategoryCombos = useMemo(() => {
         if (!data) {
             return []
         }
@@ -173,6 +173,16 @@ export const DataSetSectionFormContents = ({
         )
     }, [data, dataElementsInput.value])
 
+    const availableCategoryCombos = useMemo(() => {
+        if (!data) {
+            return []
+        }
+        return uniqBy(
+            data.dataSetElements.flatMap((de) => de.dataElement.categoryCombo),
+            'id'
+        )
+    }, [data])
+
     const { data: categoriesComboData } = useQuery({
         queryFn: queryFn<CategoryCombosType>,
         queryKey: [
@@ -180,7 +190,7 @@ export const DataSetSectionFormContents = ({
                 resource: 'categoryCombos',
                 params: {
                     filter: [
-                        `id:in:[${availableCategoryCombos.map((cc) => cc.id)}]`,
+                        `id:in:[${sectionCategoryCombos.map((cc) => cc.id)}]`,
                     ],
                     fields: 'id,displayName,categories[id,displayName],categoryOptionCombos[id,displayName,categoryOptions[id,displayName,categories[id]],categories[id,displayName]]',
                 },
