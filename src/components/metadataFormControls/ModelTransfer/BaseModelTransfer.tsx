@@ -83,7 +83,6 @@ export const BaseModelTransfer = <TModel extends DisplayableModel>({
             selected={selectedTransferValues}
             options={allTransferOptions}
             onChange={handleOnChange}
-            searchTerm={''}
         />
     )
 }

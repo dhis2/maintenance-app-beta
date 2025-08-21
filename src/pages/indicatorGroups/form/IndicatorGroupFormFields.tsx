@@ -63,6 +63,7 @@ function IndicatorGroupFormFields() {
                             filterPlaceholderPicked={i18n.t(
                                 'Filter selected indicators'
                             )}
+                            filterUnassignedTo={'indicatorGroups'}
                         />
                     </StandardFormField>
                 </StandardFormField>

@@ -17,6 +17,7 @@ export function DataElementsField() {
             rightHeader={i18n.t('Selected data elements')}
             filterPlaceholder={i18n.t('Filter available data elements')}
             filterPlaceholderPicked={i18n.t('Filter selected elements')}
+            filterUnassignedTo={'dataElementGroups'}
             maxSelections={Infinity}
         />
     )

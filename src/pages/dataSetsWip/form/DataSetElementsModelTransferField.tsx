@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import {
     Button,
+    Checkbox,
     Field,
     Help,
     Modal,
@@ -82,6 +83,7 @@ export function DataSetElementsModelTransferField() {
                 filterPlaceholderPicked={i18n.t(
                     'Search selected data elements'
                 )}
+                filterUnassignedTo={'dataSetElements'}
                 query={{
                     resource: 'dataElements',
                     params: {
