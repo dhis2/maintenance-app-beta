@@ -251,6 +251,7 @@ export const modelListViewsConfig = {
                 'href',
                 'id',
                 DESCRIPTORS.publicAccess,
+                DESCRIPTORS.formName,
             ],
             default: [
                 DESCRIPTORS.name,
@@ -260,7 +261,7 @@ export const modelListViewsConfig = {
             overrideDefaultAvailable: true,
         },
         filters: {
-            default: ['category', 'categoryOptionGroup'],
+            default: ['category', 'categoryOptionGroup', 'formName'],
         },
     },
     category: {
