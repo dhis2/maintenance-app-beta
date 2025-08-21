@@ -28,15 +28,13 @@ export const FormNameFilter = () => {
     }, [filter])
 
     return (
-        <>
-            <Input
-                className={css.identifiableSelectionFilter}
-                placeholder={i18n.t('Search by form name')}
-                onChange={handleSetValue}
-                value={value}
-                dataTest="input-search-form-name"
-                dense
-            />
-        </>
+        <Input
+            className={css.identifiableSelectionFilter}
+            placeholder={i18n.t('Search by form name')}
+            onChange={handleSetValue}
+            value={value}
+            dataTest="input-search-form-name"
+            dense
+        />
     )
 }
