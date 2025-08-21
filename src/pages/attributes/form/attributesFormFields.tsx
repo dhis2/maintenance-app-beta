@@ -15,7 +15,13 @@ import { AttributeTypeComponent } from './AttributeTypeComponent'
 import { OptionSetField } from './OptionSetField'
 import { ValueTypeField } from './ValueTypeField'
 
-export const AttributeFormFields = () => {
+export const AttributeFormFields = ({
+    setOverrideSaveFields,
+    initialValues,
+}: {
+    setOverrideSaveFields?: React.Dispatch<React.SetStateAction<string[]>>
+    initialValues?: Record<string, any>
+}) => {
     const schemaSection = useSchemaSectionHandleOrThrow()
 
     return (
@@ -65,7 +71,10 @@ export const AttributeFormFields = () => {
                 </StandardFormSectionTitle>
 
                 <StandardFormField>
-                    <AttributeTypeComponent />
+                    <AttributeTypeComponent
+                        setOverrideSaveFields={setOverrideSaveFields}
+                        initialValues={initialValues}
+                    />
                 </StandardFormField>
             </StandardFormSection>
         </>

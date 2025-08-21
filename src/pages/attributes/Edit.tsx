@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { DefaultEditFormContents, FormBase } from '../../components'
 import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
@@ -41,16 +41,20 @@ export const Component = () => {
         queryKey: [query],
         queryFn: queryFn<AttributeFormValues>,
     })
+    const [overrideSaveFields, setOverrideSaveFields] = useState<string[]>([])
 
     return (
         <FormBase
-            onSubmit={useOnSubmitEdit({ section, modelId })}
+            onSubmit={useOnSubmitEdit({ section, modelId, overrideSaveFields })}
             initialValues={attributesQuery.data}
             validate={validate}
             includeAttributes={false}
         >
             <DefaultEditFormContents section={section}>
-                <AttributeFormFields />
+                <AttributeFormFields
+                    setOverrideSaveFields={setOverrideSaveFields}
+                    initialValues={attributesQuery.data ?? {}}
+                />
             </DefaultEditFormContents>
         </FormBase>
     )

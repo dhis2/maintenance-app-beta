@@ -3,5 +3,5 @@ export {
     validate,
     initialValues,
 } from './attributesSchema'
-export { AttributeFormFields } from './AttributesFormFields'
+export { AttributeFormFields } from './attributesFormFields'
 export { ATTRIBUTE_BOOLEANS } from './AttributeTypeComponent'

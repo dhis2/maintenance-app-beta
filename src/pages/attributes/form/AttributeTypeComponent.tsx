@@ -43,7 +43,13 @@ const ATTRIBUTE_TRANSLATIONS: Record<string, string> = {
 
 export const ATTRIBUTE_BOOLEANS = Object.keys(ATTRIBUTE_TRANSLATIONS)
 
-export const AttributeTypeComponent = () => {
+export const AttributeTypeComponent = ({
+    setOverrideSaveFields,
+    initialValues,
+}: {
+    setOverrideSaveFields?: React.Dispatch<React.SetStateAction<string[]>>
+    initialValues?: Record<string, any>
+}) => {
     const form = useForm()
     const [selections, setSelections] = useState<string[] | undefined>(
         undefined
@@ -51,9 +57,12 @@ export const AttributeTypeComponent = () => {
 
     // initialise selections with current form values
     useEffect(() => {
-        const values = form.getState().values
-        setSelections(ATTRIBUTE_BOOLEANS.filter((a) => values[a]))
-    }, [form])
+        if (initialValues) {
+            setSelections(ATTRIBUTE_BOOLEANS.filter((a) => initialValues[a]))
+        } else {
+            setSelections([])
+        }
+    }, [initialValues, setSelections])
 
     // do not render until selections are initialised
     if (!selections) {
@@ -67,11 +76,16 @@ export const AttributeTypeComponent = () => {
             onChange={(s) => {
                 const values = form.getState().values
                 for (const attribute of ATTRIBUTE_BOOLEANS) {
-                    if (s.selected.includes(attribute) && !values[attribute]) {
-                        form.change(attribute, true)
-                    }
-                    if (!s.selected.includes(attribute) && values[attribute]) {
-                        form.change(attribute, false)
+                    const isSelected = s.selected.includes(attribute)
+                    const currentFormValue = values[attribute]
+                    if (isSelected !== currentFormValue) {
+                        form.change(attribute, isSelected)
+                        if (setOverrideSaveFields) {
+                            setOverrideSaveFields((prev: string[]) => [
+                                ...prev.filter((a) => a !== attribute),
+                                attribute,
+                            ])
+                        }
                     }
                 }
                 setSelections(s.selected)

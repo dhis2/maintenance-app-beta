@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-20T14:20:04.636Z\n"
-"PO-Revision-Date: 2025-08-20T14:20:04.636Z\n"
+"POT-Creation-Date: 2025-08-20T14:21:29.799Z\n"
+"PO-Revision-Date: 2025-08-20T14:21:29.799Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1371,18 +1371,6 @@ msgstr "Visualization"
 msgid "Objects to which this attribute can be applied"
 msgstr "Objects to which this attribute can be applied"
 
-msgid "Basic information"
-msgstr "Basic information"
-
-msgid "Set up the basic information for this attribute."
-msgstr "Set up the basic information for this attribute."
-
-msgid "Explain the purpose of this attribute."
-msgstr "Explain the purpose of this attribute."
-
-msgid "Attribute type"
-msgstr "Attribute type"
-
 msgid "Restrict attribute values using an option set"
 msgstr "Restrict attribute values using an option set"
 
@@ -1395,6 +1383,18 @@ msgid ""
 msgstr ""
 "Disabled as the value type must match the value type of the selected option "
 "set"
+
+msgid "Basic information"
+msgstr "Basic information"
+
+msgid "Set up the basic information for this attribute."
+msgstr "Set up the basic information for this attribute."
+
+msgid "Explain the purpose of this attribute."
+msgstr "Explain the purpose of this attribute."
+
+msgid "Attribute type"
+msgstr "Attribute type"
 
 msgid "Set up the basic information for this category."
 msgstr "Set up the basic information for this category."
