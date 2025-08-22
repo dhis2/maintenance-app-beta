@@ -41,18 +41,16 @@ export const Component = () => {
         queryKey: [query],
         queryFn: queryFn<AttributeFormValues>,
     })
-    const [overrideSaveFields, setOverrideSaveFields] = useState<string[]>([])
 
     return (
         <FormBase
-            onSubmit={useOnSubmitEdit({ section, modelId, overrideSaveFields })}
+            onSubmit={useOnSubmitEdit({ section, modelId })}
             initialValues={attributesQuery.data}
             validate={validate}
             includeAttributes={false}
         >
             <DefaultEditFormContents section={section}>
                 <AttributeFormFields
-                    setOverrideSaveFields={setOverrideSaveFields}
                     initialValues={attributesQuery.data ?? {}}
                 />
             </DefaultEditFormContents>

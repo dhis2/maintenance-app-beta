@@ -80,7 +80,6 @@ const defaultNavigateTo: GetToFunction = ({
 export type UseOnSubmitEditOptions = {
     modelId: string
     section: ModelSection
-    overrideSaveFields?: string[]
 }
 
 export type UseOnSubmitNewOptions = {
@@ -139,27 +138,15 @@ export const useOnEditCompletedSuccessfully = (section: ModelSection) => {
 export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
     modelId,
     section,
-    overrideSaveFields,
 }: UseOnSubmitEditOptions) => {
     const patchDirtyFields = usePatchModel(modelId, section.namePlural)
     const onEditCompletedSuccessfully = useOnEditCompletedSuccessfully(section)
 
     return useMemo<EnhancedOnSubmit<TFormValues>>(
         () => async (values, form, options) => {
-            const originalDirtyFields = form.getState().dirtyFields
-
-            const dirtyFields = !overrideSaveFields
-                ? originalDirtyFields
-                : overrideSaveFields?.reduce((acc, cv) => {
-                      if (!originalDirtyFields[cv]) {
-                          acc[cv] = true
-                      }
-                      return acc
-                  }, originalDirtyFields)
-
             const jsonPatchOperations = createJsonPatchOperations({
                 values,
-                dirtyFields: dirtyFields,
+                dirtyFields: form.getState().dirtyFields,
                 originalValue: form.getState().initialValues,
             })
 
@@ -190,7 +177,7 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
                 submitAction: options?.submitAction,
             })
         },
-        [patchDirtyFields, onEditCompletedSuccessfully, overrideSaveFields]
+        [patchDirtyFields, onEditCompletedSuccessfully]
     )
 }
 
