@@ -1,3 +1,10 @@
+## [0.61.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.61.0...v0.61.1) (2025-08-22)
+
+
+### Bug Fixes
+
+* add warning for changing period type [DHIS2-12305] ([#620](https://github.com/dhis2/maintenance-app-beta/issues/620)) ([1903ea9](https://github.com/dhis2/maintenance-app-beta/commit/1903ea9e52683df220c01f9614d829b46b125698))
+
 # [0.61.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.60.2...v0.61.0) (2025-08-20)
 
 
