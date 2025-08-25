@@ -22,17 +22,6 @@ export type DataElementsTransferFieldProps = {
     >['meta']
 }
 
-// export type CategoryCombosType = {
-//     categoryCombos: (DisplayableModel & {
-//         categories: DisplayableModel[]
-//         categoryOptionCombos: (DisplayableModel & {
-//             categoryOptions: (DisplayableModel & {
-//                 categories: { id: string }[]
-//             })[]
-//         })[]
-//     })[]
-// }
-
 export const DataElementsTransferField = ({
     isLoading,
     dataSetElements,

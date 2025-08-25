@@ -18,16 +18,9 @@ import {
 } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo, useState } from 'react'
-import {
-    FieldInputProps,
-    useField,
-    useForm,
-    useFormState,
-} from 'react-final-form'
+import { FieldInputProps } from 'react-final-form'
 import { useBoundResourceQueryFn } from '../../../../../lib'
 import { DisplayableModel } from '../../../../../types/models'
-import type { SectionFormValues } from './DataSetSectionForm'
-import { DataSetSectionFormProps } from './DataSetSectionFormContents'
 import styles from './GreyFieldsModal.module.css'
 
 export type GreyedField = {
