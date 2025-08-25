@@ -1,3 +1,11 @@
+# [0.62.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.61.1...v0.62.0) (2025-08-25)
+
+
+### Features
+
+* add form name filter and use it in data elements ([#622](https://github.com/dhis2/maintenance-app-beta/issues/622)) ([df57ce3](https://github.com/dhis2/maintenance-app-beta/commit/df57ce329ac1be1798c17b84e3ed5c538ff300c2))
+* sections transfers fields ([#613](https://github.com/dhis2/maintenance-app-beta/issues/613)) [skip release] ([48c942a](https://github.com/dhis2/maintenance-app-beta/commit/48c942a4d696e89a4c4dac8b9af92362ff0a2285))
+
 ## [0.61.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.61.0...v0.61.1) (2025-08-22)
 
 
