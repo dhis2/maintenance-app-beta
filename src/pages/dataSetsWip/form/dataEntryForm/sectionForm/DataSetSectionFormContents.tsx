@@ -65,17 +65,6 @@ export type DataSetDataElementsType = {
     indicators: DisplayableModel[]
 }
 
-export type CategoryCombosType = {
-    categoryCombos: (DisplayableModel & {
-        categories: DisplayableModel[]
-        categoryOptionCombos: (DisplayableModel & {
-            categoryOptions: (DisplayableModel & {
-                categories: { id: string }[]
-            })[]
-        })[]
-    })[]
-}
-
 export const DataSetSectionFormContents = ({
     onCancel,
 }: DataSetSectionFormProps) => {
