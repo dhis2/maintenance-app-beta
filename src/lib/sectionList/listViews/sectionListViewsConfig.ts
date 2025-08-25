@@ -273,6 +273,26 @@ export const modelListViewsConfig = {
             default: ['dataDimensionType', 'categoryCombo'],
         },
     },
+    optionGroup: {
+        columns: {
+            available: [
+                DESCRIPTORS.shortName,
+                'description',
+                'favorite',
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+        },
+        filters: {
+            default: [],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
+    },
     indicator: {
         columns: {
             default: [
@@ -441,5 +461,19 @@ export const modelListViewsConfig = {
             default: ['program', 'programIndicatorGroup'],
             available: ['categoryCombo'],
         },
+    },
+    optionGroupSet: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'dataDimension',
+                { label: i18n.t('Option set'), path: 'optionSet.displayName' },
+            ],
+        },
+        filters: {},
     },
 } satisfies SectionListViewConfig<SectionName>

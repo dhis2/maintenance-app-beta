@@ -25,6 +25,7 @@ type ModelTransferFieldProps = {
     | 'enableOrderChange'
     | 'hideFilterInputPicked'
     | 'dataTest'
+    | 'disabled'
 >
 
 export function ModelTransferField({
@@ -41,6 +42,7 @@ export function ModelTransferField({
     enableOrderChange,
     dataTest,
     hideFilterInputPicked = false,
+    disabled = false,
 }: ModelTransferFieldProps) {
     const { input, meta } = useField<DisplayableModel[]>(name, {
         multiple: true,
@@ -72,6 +74,7 @@ export function ModelTransferField({
                 enableOrderChange={enableOrderChange}
                 dataTest={dataTest}
                 hideFilterInputPicked={hideFilterInputPicked}
+                disabled={disabled}
             />
         </Field>
     )

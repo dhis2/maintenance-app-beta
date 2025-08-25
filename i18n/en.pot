@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-09T11:24:38.032Z\n"
-"PO-Revision-Date: 2025-08-09T11:24:38.032Z\n"
+"POT-Creation-Date: 2025-08-25T12:21:51.518Z\n"
+"PO-Revision-Date: 2025-08-25T12:21:51.518Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -184,8 +184,12 @@ msgstr "Search for organisation units"
 msgid "Select organisation units"
 msgstr "Select organisation units"
 
-msgid "Often used in reports where space is limited."
-msgstr "Often used in reports where space is limited."
+msgid ""
+"A short, unique name (max 50 characters). Displayed in analysis apps where "
+"space is limited, depending on user or system settings."
+msgstr ""
+"A short, unique name (max 50 characters). Displayed in analysis apps where "
+"space is limited, depending on user or system settings."
 
 msgid "Short name"
 msgstr "Short name"
@@ -739,6 +743,12 @@ msgstr "Constant"
 msgid "Constants"
 msgstr "Constants"
 
+msgid "Option group"
+msgstr "Option group"
+
+msgid "Option groups"
+msgstr "Option groups"
+
 msgid "Attribute"
 msgstr "Attribute"
 
@@ -747,6 +757,12 @@ msgstr "Option set"
 
 msgid "Option sets"
 msgstr "Option sets"
+
+msgid "Option group set"
+msgstr "Option group set"
+
+msgid "Option group sets"
+msgstr "Option group sets"
 
 msgid "Predictor"
 msgstr "Predictor"
@@ -1692,9 +1708,6 @@ msgstr "Recipient user group"
 msgid "Delivery channels"
 msgstr "Delivery channels"
 
-msgid "There was an error deleting sections: {{sectionNames}}"
-msgstr "There was an error deleting sections: {{sectionNames}}"
-
 msgid "Send complete notifications"
 msgstr "Send complete notifications"
 
@@ -1817,6 +1830,21 @@ msgstr "Center"
 msgid "Line end"
 msgstr "Line end"
 
+msgid "Section display mode"
+msgstr "Section display mode"
+
+msgid "Horizontal tabs"
+msgstr "Horizontal tabs"
+
+msgid "Vertical tabs"
+msgstr "Vertical tabs"
+
+msgid "Render multi-organisation unit forms vertically"
+msgstr "Render multi-organisation unit forms vertically"
+
+msgid "Only applied to section forms using multiple organisation units"
+msgstr "Only applied to section forms using multiple organisation units"
+
 msgid "Configure which organisation units can collect data for this data set."
 msgstr "Configure which organisation units can collect data for this data set."
 
@@ -1938,8 +1966,89 @@ msgstr "Restore section"
 msgid "Add section"
 msgstr "Add section"
 
+msgid "Reorder sections"
+msgstr "Reorder sections"
+
 msgid "Copy ID"
 msgstr "Copy ID"
+
+msgid "New sections order saved successfully"
+msgstr "New sections order saved successfully"
+
+msgid "Error saving new sections order."
+msgstr "Error saving new sections order."
+
+msgid "Reorder form sections"
+msgstr "Reorder form sections"
+
+msgid "(marked for deletion)"
+msgstr "(marked for deletion)"
+
+msgid "Save section ordering"
+msgstr "Save section ordering"
+
+msgid "Custom form saved"
+msgstr "Custom form saved"
+
+msgid "Custom form (preview)"
+msgstr "Custom form (preview)"
+
+msgid "Define a custom form for this data set by editing HTML below."
+msgstr "Define a custom form for this data set by editing HTML below."
+
+msgid "Preview"
+msgstr "Preview"
+
+msgid "Nothing to preview"
+msgstr "Nothing to preview"
+
+msgid "Preview of custom form"
+msgstr "Preview of custom form"
+
+msgid "Save custom form"
+msgstr "Save custom form"
+
+msgid "Saving a custom form does not save other changes to the data set"
+msgstr "Saving a custom form does not save other changes to the data set"
+
+msgid "A custom form must be added for it to be used for data entry (web)."
+msgstr "A custom form must be added for it to be used for data entry (web)."
+
+msgid "This data set uses a custom form for data entry (web)."
+msgstr "This data set uses a custom form for data entry (web)."
+
+msgid "Custom form will be removed on save"
+msgstr "Custom form will be removed on save"
+
+msgid "Restore custom form"
+msgstr "Restore custom form"
+
+msgid "Delete custom form"
+msgstr "Delete custom form"
+
+msgid "Create custom form"
+msgstr "Create custom form"
+
+msgid "Edit custom form"
+msgstr "Edit custom form"
+
+msgid "Select elements"
+msgstr "Select elements"
+
+msgid "Elements cannot be added while previewing the form"
+msgstr "Elements cannot be added while previewing the form"
+
+msgid "Filter elements"
+msgstr "Filter elements"
+
+msgid "Insert grey (disabled) fields"
+msgstr "Insert grey (disabled) fields"
+
+msgid "Totals"
+msgstr "Totals"
+
+msgid "Flags"
+msgstr "Flags"
 
 msgid "Section setup"
 msgstr "Section setup"
@@ -2017,8 +2126,8 @@ msgstr "Closing date"
 msgid "Closing date must be after start date"
 msgstr "Closing date must be after start date"
 
-msgid "Save period entry rule"
-msgstr "Save period entry rule"
+msgid "Update period entry rule"
+msgstr "Update period entry rule"
 
 msgid "Opening date: {{openingDate}}"
 msgstr "Opening date: {{openingDate}}"
@@ -2173,18 +2282,14 @@ msgstr "The indicator merge operation is complete."
 msgid "All selected indicators were merged successfully."
 msgstr "All selected indicators were merged successfully."
 
+msgid "Denominator Expression"
+msgstr "Denominator Expression"
+
 msgid "Edit denominator expression"
 msgstr "Edit denominator expression"
 
 msgid "Set up the basic information for this indicator."
 msgstr "Set up the basic information for this indicator."
-
-msgid ""
-"A short, unique name (max 50 characters). Displayed in analysis apps where "
-"space is limited, depending on user or system settings."
-msgstr ""
-"A short, unique name (max 50 characters). Displayed in analysis apps where "
-"space is limited, depending on user or system settings."
 
 msgid "Explain the purpose of this indicator."
 msgstr "Explain the purpose of this indicator."
@@ -2323,6 +2428,30 @@ msgstr "No indicators available. Remove one from source."
 
 msgid "What should happen to the source indicators after the merge is complete?"
 msgstr "What should happen to the source indicators after the merge is complete?"
+
+msgid "Set up the basic information for this option group set."
+msgstr "Set up the basic information for this option group set."
+
+msgid "Explain the purpose of this option group set."
+msgstr "Explain the purpose of this option group set."
+
+msgid "Choose the option groups to include in this option group set."
+msgstr "Choose the option groups to include in this option group set."
+
+msgid "Available option groups"
+msgstr "Available option groups"
+
+msgid "Selected option groups"
+msgstr "Selected option groups"
+
+msgid "Filter available option groups"
+msgstr "Filter available option groups"
+
+msgid "Filter selected option groups"
+msgstr "Filter selected option groups"
+
+msgid "You must select an option set before you can select options."
+msgstr "You must select an option set before you can select options."
 
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."
@@ -2664,6 +2793,22 @@ msgstr ""
 "structure, such as national or regional tiers, and specify the names used "
 "for each level."
 
+msgid "Placeholder for other"
+msgstr "Placeholder for other"
+
+msgid ""
+"Create a group of options from option sets that has a similar functional "
+"area or meaning."
+msgstr ""
+"Create a group of options from option sets that has a similar functional "
+"area or meaning."
+
+msgid "Create, modify and view sets of option groups."
+msgstr "Create, modify and view sets of option groups."
+
+msgid "Set disaggregation mappings for program indicators."
+msgstr "Set disaggregation mappings for program indicators."
+
 msgid "Manage"
 msgstr "Manage"
 
@@ -2876,8 +3021,8 @@ msgstr "Edit analytics period boundary"
 msgid "Add analytics period boundary"
 msgstr "Add analytics period boundary"
 
-msgid "Save analytics period boundary"
-msgstr "Save analytics period boundary"
+msgid "Update analytics period boundary"
+msgstr "Update analytics period boundary"
 
 msgid "Add a period boundary"
 msgstr "Add a period boundary"

@@ -57,6 +57,7 @@ export function DisplayOptionsField({
     const renderAsHorizonalTabs = useField(`${fieldName}.tabsDirection`, {
         type: 'radio',
         value: 'horizontal',
+        defaultValue: 'horizontal',
     })
     const renderAsVerticalTabs = useField(`${fieldName}.tabsDirection`, {
         type: 'radio',

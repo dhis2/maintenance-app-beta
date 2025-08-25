@@ -14,16 +14,19 @@ import {
 import React from 'react'
 import { Field as FieldRFF, useForm } from 'react-final-form'
 import styles from './ExpressionBuilderModal.module.css'
-import { useExpressionValidator } from './useExpressionValidator'
 
-type ExpressionFieldProps = {
+type ExpressionBuilderModalProps = {
     fieldName: string
     title?: string
     required?: boolean
     dataTest?: string
-    validationResource: string
     onClose?: () => void
     onApply?: (value: string, description: string) => void
+    validate: (
+        value: string | undefined
+    ) => string | undefined | Promise<string | undefined>
+    expressionDescription: string
+    validating: boolean
 }
 
 export const ExpressionBuilderModal = ({
@@ -31,12 +34,12 @@ export const ExpressionBuilderModal = ({
     title,
     required,
     dataTest,
-    validationResource,
     onClose,
     onApply,
-}: ExpressionFieldProps) => {
-    const [validate, description, validating] =
-        useExpressionValidator(validationResource)
+    validate,
+    expressionDescription,
+    validating,
+}: ExpressionBuilderModalProps) => {
     const form = useForm()
 
     const handleApply = async () => {
@@ -47,8 +50,8 @@ export const ExpressionBuilderModal = ({
             form.mutators.setFieldError?.(fieldName, validationResult)
         } else {
             form.mutators.setFieldError?.(fieldName, undefined)
-            if (onApply && description) {
-                onApply(value, description)
+            if (onApply && expressionDescription) {
+                onApply(value, expressionDescription)
             }
             onClose?.()
         }
@@ -70,7 +73,7 @@ export const ExpressionBuilderModal = ({
                                     meta.touched &&
                                     !meta.error &&
                                     input.value &&
-                                    description
+                                    expressionDescription
 
                                 return (
                                     <>
@@ -84,11 +87,13 @@ export const ExpressionBuilderModal = ({
                                         />
                                         <Box className={styles.noticeBox}>
                                             {input.value &&
-                                                description &&
+                                                expressionDescription &&
                                                 !meta.error && (
                                                     <NoticeBox
                                                         valid
-                                                        title={description}
+                                                        title={
+                                                            expressionDescription
+                                                        }
                                                     >
                                                         {i18n.t(
                                                             'Valid expression'
@@ -116,7 +121,11 @@ export const ExpressionBuilderModal = ({
                                                     onClick={handleApply}
                                                     primary
                                                     dataTest="apply-expression-button"
-                                                    disabled={!isValid}
+                                                    disabled={
+                                                        !isValid ||
+                                                        validating ||
+                                                        meta.active
+                                                    }
                                                 >
                                                     {i18n.t('Apply')}
                                                 </Button>

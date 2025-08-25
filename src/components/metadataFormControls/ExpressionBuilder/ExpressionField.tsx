@@ -26,8 +26,8 @@ export function ExpressionField({
 
     const field = useField<string>(fieldName, { subscription: { value: true } })
     const fieldValue = field.input.value
-
-    const [validate, description] = useExpressionValidator(validationResource)
+    const [validate, expressionDescription, validating] =
+        useExpressionValidator(validationResource)
 
     useEffect(() => {
         if (fieldValue) {
@@ -44,8 +44,10 @@ export function ExpressionField({
 
     return (
         <div className={styles.container}>
-            {description && (
-                <div className={styles.expressionBox}>{description}</div>
+            {expressionDescription && (
+                <div className={styles.expressionBox}>
+                    {expressionDescription}
+                </div>
             )}
 
             <div className={styles.buttonWrapper}>
@@ -63,10 +65,12 @@ export function ExpressionField({
                 <ExpressionBuilderModal
                     fieldName={fieldName}
                     title={modalTitle}
-                    validationResource={validationResource}
                     onClose={() => setShowExpressionBuilder(false)}
                     onApply={handleExpressionApply}
                     dataTest={`formfields-${fieldName}`}
+                    validate={validate}
+                    expressionDescription={expressionDescription ?? ''}
+                    validating={validating}
                 />
             )}
 

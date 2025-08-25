@@ -81,7 +81,7 @@ export const IndicatorFormDescriptor = {
             ],
         },
         {
-            name: 'options',
+            name: 'mappingSettings',
             label: i18n.t('Mapping settings'),
             fields: [
                 {

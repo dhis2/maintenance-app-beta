@@ -23,6 +23,7 @@ export const IndicatorTypeField = ({ helpText }: IndicatorTypeFieldsProps) => {
         >
             <div style={{ width: '400px' }}>
                 <ModelSingleSelectFormField
+                    required
                     dataTest="formfields-indicatortype"
                     name="indicatorType"
                     helpText={helpText}

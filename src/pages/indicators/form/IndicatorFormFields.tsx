@@ -13,7 +13,11 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { SECTIONS_MAP, useSectionedFormContext } from '../../../lib'
+import {
+    SECTIONS_MAP,
+    useSectionedFormContext,
+    useSyncSelectedSectionWithScroll,
+} from '../../../lib'
 import { ColorAndIconField } from '../../dataElements/fields'
 import DenominatorFields from './DenominatorFields'
 import { IndicatorFormDescriptor } from './formDescriptor'
@@ -28,6 +32,7 @@ export const IndicatorFormFields = () => {
         parse: (v) => (v !== undefined && v !== '' ? parseInt(v) : v),
     })
     const descriptor = useSectionedFormContext<typeof IndicatorFormDescriptor>()
+    useSyncSelectedSectionWithScroll()
 
     return (
         <SectionedFormSections>
@@ -121,7 +126,7 @@ export const IndicatorFormFields = () => {
                         )}
                         dataTest="decimals-field"
                         label={i18n.t('Number of decimal places to show')}
-                        inputWidth="300px"
+                        inputWidth="400px"
                         options={[
                             { label: i18n.t('<No value>'), value: '' },
                             ...[0, 1, 2, 3, 4, 5].map((d) => ({
@@ -146,6 +151,8 @@ export const IndicatorFormFields = () => {
                     <ModelTransferField
                         dataTest="legendSets-field"
                         name="legendSets"
+                        leftHeader={i18n.t('Available legends')}
+                        rightHeader={i18n.t('Selected legends')}
                         query={{
                             resource: 'legendSets',
                             params: {
@@ -154,12 +161,12 @@ export const IndicatorFormFields = () => {
                             },
                         }}
                         enableOrderChange={true}
-                        rightHeader={i18n.t('Chosen legends')}
-                        hideFilterInputPicked={true}
                     />
                 </StandardFormField>
             </SectionedFormSection>
-            <SectionedFormSection name={descriptor.getSection('options').name}>
+            <SectionedFormSection
+                name={descriptor.getSection('mappingSettings').name}
+            >
                 <StandardFormSectionTitle>
                     {i18n.t('Mapping Settings')}
                 </StandardFormSectionTitle>
