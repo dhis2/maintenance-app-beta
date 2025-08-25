@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { useQuery } from '@tanstack/react-query'
+import arrayMutators from 'final-form-arrays'
 import React, { useCallback, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { FormBase, FormBaseProps } from '../../../../../components'
@@ -32,7 +33,8 @@ export const fieldFilters = [
     'showColumnTotals',
     'disableDataElementAutoGroup',
     'displayOptions',
-    'dataElements[id,displayName]',
+    'dataElements[id,displayName,categoryCombo[id]]',
+    'greyedFields[dataElement, categoryOptionCombo]',
 ] as const
 
 const dataSetSectionSchemaSection = {
@@ -48,7 +50,7 @@ export type SectionFormValues = PickWithFieldFilters<
     typeof fieldFilters
 > & {
     dataSet: { id: string }
-    displayOptions?: undefined
+    displayOptions?: string
 }
 type PartialSectionFormValues = Partial<SectionFormValues>
 type SubmittedSectionFormValues = PartialSectionFormValues & DisplayableModel
@@ -99,6 +101,7 @@ export const DataSetSectionForm = ({
             onSubmit={onSubmit}
             valueFormatter={valueFormatter}
             includeAttributes={false}
+            mutators={{ ...arrayMutators }}
         >
             <DataSetSectionFormContents onCancel={onCancel} />
         </FormBase>
