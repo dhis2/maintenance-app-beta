@@ -2944,6 +2944,22 @@ msgstr "Create, modify and view sets of option groups."
 msgid "Set disaggregation mappings for program indicators."
 msgstr "Set disaggregation mappings for program indicators."
 
+msgid "Placeholder for other"
+msgstr "Placeholder for other"
+
+msgid ""
+"Create a group of options from option sets that has a similar functional "
+"area or meaning."
+msgstr ""
+"Create a group of options from option sets that has a similar functional "
+"area or meaning."
+
+msgid "Create, modify and view sets of option groups."
+msgstr "Create, modify and view sets of option groups."
+
+msgid "Set disaggregation mappings for program indicators."
+msgstr "Set disaggregation mappings for program indicators."
+
 msgid "Manage"
 msgstr "Manage"
 
