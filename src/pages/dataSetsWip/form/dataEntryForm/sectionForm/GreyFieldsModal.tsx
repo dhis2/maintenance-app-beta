@@ -16,8 +16,10 @@ import {
     TableHead,
     TableRow,
 } from '@dhis2/ui'
+import { useQuery } from '@tanstack/react-query'
 import React, { useMemo, useState } from 'react'
 import { FieldInputProps } from 'react-final-form'
+import { useBoundResourceQueryFn } from '../../../../../lib'
 import { DisplayableModel } from '../../../../../types/models'
 import { CategoryCombosType } from './DataSetSectionFormContents'
 import styles from './GreyFieldsModal.module.css'
@@ -29,22 +31,38 @@ export type GreyedField = {
 
 export const GreyFieldsModal = ({
     onClose,
-    categoryCombos,
     dataElements,
+    sectionCategoryCombos,
     input,
 }: {
     onClose: () => void
-    categoryCombos: CategoryCombosType['categoryCombos'] | undefined
     dataElements:
         | (DisplayableModel & { categoryCombo: { id: string } })[]
         | undefined
+    sectionCategoryCombos: { id: string }[]
     input: FieldInputProps<GreyedField[]>
 }) => {
     const [localGreyedFields, setLocalGreyedFields] = useState<GreyedField[]>(
         input.value || []
     )
+
+    const queryFn = useBoundResourceQueryFn()
+    const { data: categoriesComboData } = useQuery({
+        queryFn: queryFn<CategoryCombosType>,
+        queryKey: [
+            {
+                resource: 'categoryCombos',
+                params: {
+                    filter: [
+                        `id:in:[${sectionCategoryCombos.map((cc) => cc.id)}]`,
+                    ],
+                    fields: 'id,displayName,categories[id,displayName,categoryOptions[id]],categoryOptionCombos[id,displayName,categoryOptions[id,displayName,categories[id]]]',
+                },
+            },
+        ] as const,
+    })
     const [catCombo, setCatCombo] = useState<string | undefined>(
-        categoryCombos?.at(0)?.id
+        categoriesComboData?.categoryCombos?.at(0)?.id
     )
 
     const isGrayedOut = (
@@ -80,9 +98,11 @@ export const GreyFieldsModal = ({
 
     const selectedCatComboData = useMemo(() => {
         return catCombo !== undefined
-            ? categoryCombos?.find((cc) => cc.id === catCombo)
+            ? categoriesComboData?.categoryCombos?.find(
+                  (cc) => cc.id === catCombo
+              )
             : catCombo
-    }, [catCombo, categoryCombos])
+    }, [catCombo, categoriesComboData?.categoryCombos])
 
     const selectedDataElements = dataElements?.filter(
         (de) => de.categoryCombo.id === catCombo
@@ -139,8 +159,8 @@ export const GreyFieldsModal = ({
                     selected={catCombo}
                     placeholder={i18n.t('Filter by category combination')}
                 >
-                    {categoryCombos &&
-                        categoryCombos.map((catCombo) => (
+                    {categoriesComboData?.categoryCombos &&
+                        categoriesComboData.categoryCombos.map((catCombo) => (
                             <SingleSelectOption
                                 key={catCombo.id}
                                 label={catCombo.displayName}
