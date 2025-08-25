@@ -1,4 +1,5 @@
 export {
+    attributeListSchema,
     attributeFormSchema,
     validate,
     initialValues,

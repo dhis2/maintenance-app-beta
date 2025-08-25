@@ -6,6 +6,7 @@ import {
     UserGroupSchema,
     UserSchema,
 } from '../lib/form/modelFormSchemas'
+import { attributeListSchema } from '../pages/attributes/form'
 import { categoryListSchema } from '../pages/categories/form'
 import { categoryComboListSchema } from '../pages/categoryCombos/form'
 import { categoryOptionComboListSchema } from '../pages/categoryOptionCombos/form'
@@ -217,6 +218,11 @@ export const testOrganisationUnitGroupSet = (
 
 export const testProgramIndicator = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(programIndicatorsListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testAttribute = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(attributeListSchema, { mockeryMapper }),
     ...overwrites,
 })
 

@@ -11,7 +11,7 @@ const valueTypeDisabledHelpText = i18n.t(
 export function ValueTypeField() {
     const { values } = useFormState({ subscription: { values: true } })
     const disabled = !!values.optionSet?.id
-    const schema = useSchema(SchemaName.dataElement)
+    const schema = useSchema(SchemaName.attribute)
 
     const { input } = useField('valueType')
     useEffect(() => {
