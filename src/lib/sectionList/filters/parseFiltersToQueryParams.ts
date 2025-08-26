@@ -30,6 +30,7 @@ const defaultFilter = (
 
 const filterToQueryParamMap: FilterToQueryParamsMap = {
     identifiable: (value) => `identifiable:token:${value}`,
+    formName: (value) => `displayFormName:ilike:${value}`,
     category: (value) => inFilter('categories.id', value),
     categoryOption: (value) => inFilter('categoryOptions.id', value),
     indicatorType: (value) => inFilter('indicatorType.id', value),
