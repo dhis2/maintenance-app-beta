@@ -13,6 +13,7 @@ type ExpressionFieldProps = Readonly<{
     modalTitle: string
     editButtonText: string
     validationResource: string
+    helpText?: string
 }>
 
 export function ExpressionField({
@@ -21,6 +22,7 @@ export function ExpressionField({
     modalTitle,
     editButtonText,
     validationResource,
+    helpText,
 }: ExpressionFieldProps) {
     const [showExpressionBuilder, setShowExpressionBuilder] = useState(false)
 
@@ -71,7 +73,9 @@ export function ExpressionField({
                     validate={validate}
                     expressionDescription={expressionDescription ?? ''}
                     validating={validating}
-                />
+                >
+                    <div />
+                </ExpressionBuilderModal>
             )}
 
             <StandardFormField>
@@ -82,7 +86,7 @@ export function ExpressionField({
                     name={descriptionFieldName}
                     dataTest={`formfields-${descriptionFieldName}`}
                     label={i18n.t('Description (required)')}
-                    helpText={i18n.t('Help text, where is this used?')}
+                    helpText={helpText}
                 />
             </StandardFormField>
         </div>

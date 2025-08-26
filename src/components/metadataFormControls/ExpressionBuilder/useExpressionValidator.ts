@@ -1,7 +1,6 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import memoize from 'lodash/memoize'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
 interface ValidateExpressionResponse {

@@ -10,6 +10,9 @@ export default function DenominatorFields() {
             modalTitle={i18n.t('Denominator Expression')}
             editButtonText={i18n.t('Edit denominator expression')}
             validationResource="indicators/expression/description"
+            helpText={i18n.t(
+                'Summarise what this denominator expression measures.'
+            )}
         />
     )
 }

@@ -10,6 +10,9 @@ export default function NumeratorFields() {
             modalTitle={i18n.t('Numerator Expression')}
             editButtonText={i18n.t('Edit numerator expression')}
             validationResource="indicators/expression/description"
+            helpText={i18n.t(
+                'Summarise what this numerator expression measures.'
+            )}
         />
     )
 }
