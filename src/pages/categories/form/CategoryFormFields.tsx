@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF, RadioFieldFF } from '@dhis2/ui'
-import {capitalize} from "lodash";
+import { capitalize } from 'lodash'
 import React from 'react'
 import { Field } from 'react-final-form'
 import {
@@ -14,13 +14,12 @@ import {
     HorizontalFieldGroup,
     ModelTransferField,
 } from '../../../components'
-import {SchemaName, SECTIONS_MAP, useSchema} from '../../../lib'
-import {getSchemaPropertyForPath} from "../../../lib/models/path";
+import { SchemaName, SECTIONS_MAP, useSchema } from '../../../lib'
+import { getSchemaPropertyForPath } from '../../../lib/models/path'
 
 export const CategoryFormFields = () => {
     const section = SECTIONS_MAP.category
     const schema = useSchema(SchemaName.category)
-
 
     return (
         <>
@@ -50,7 +49,10 @@ export const CategoryFormFields = () => {
                     <HorizontalFieldGroup
                         label={'Data dimension type (required)'}
                     >
-                        {getSchemaPropertyForPath(schema, 'dataDimensionType')?.constants?.map(dataDimansionType =>
+                        {getSchemaPropertyForPath(
+                            schema,
+                            'dataDimensionType'
+                        )?.constants?.map((dataDimansionType) => (
                             <Field<string | undefined>
                                 name="dataDimensionType"
                                 key={dataDimansionType}
@@ -59,7 +61,7 @@ export const CategoryFormFields = () => {
                                 type="radio"
                                 value={dataDimansionType}
                             />
-                        )}
+                        ))}
                     </HorizontalFieldGroup>
                 </StandardFormField>
                 <StandardFormField>

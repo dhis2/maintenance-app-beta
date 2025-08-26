@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { RadioFieldFF } from '@dhis2/ui'
-import {capitalize} from "lodash";
+import { capitalize } from 'lodash'
 import React from 'react'
 import { Field } from 'react-final-form'
 import {
@@ -14,8 +14,8 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import {SchemaName, SECTIONS_MAP, useSchema} from '../../../lib'
-import {getSchemaPropertyForPath} from "../../../lib/models/path";
+import { SchemaName, SECTIONS_MAP, useSchema } from '../../../lib'
+import { getSchemaPropertyForPath } from '../../../lib/models/path'
 
 function CategoryOptionGroupFormFields() {
     const section = SECTIONS_MAP.categoryOptionGroup
@@ -53,7 +53,10 @@ function CategoryOptionGroupFormFields() {
                     <HorizontalFieldGroup
                         label={'Data dimension type (required)'}
                     >
-                        {getSchemaPropertyForPath(schema, 'dataDimensionType')?.constants?.map(dataDimansionType =>
+                        {getSchemaPropertyForPath(
+                            schema,
+                            'dataDimensionType'
+                        )?.constants?.map((dataDimansionType) => (
                             <Field<string | undefined>
                                 name="dataDimensionType"
                                 key={dataDimansionType}
@@ -62,7 +65,7 @@ function CategoryOptionGroupFormFields() {
                                 type="radio"
                                 value={dataDimansionType}
                             />
-                        )}
+                        ))}
                     </HorizontalFieldGroup>
                 </StandardFormField>
             </StandardFormSection>
