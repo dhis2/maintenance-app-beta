@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF, RadioFieldFF } from '@dhis2/ui'
+import {capitalize} from "lodash";
 import React from 'react'
 import { Field } from 'react-final-form'
 import { useParams } from 'react-router-dom'
@@ -12,13 +13,15 @@ import {
     NameField,
     CodeField,
 } from '../../../components'
-import { SECTIONS_MAP } from '../../../lib'
+import {SchemaName, SECTIONS_MAP, useSchema} from '../../../lib'
+import {getSchemaPropertyForPath} from "../../../lib/models/path";
 import { CategoriesField } from './CategoriesField'
 
 const section = SECTIONS_MAP.categoryCombo
 
 export const CategoryComboFormFields = () => {
     const isNewForm = useParams().id === undefined
+    const schema = useSchema(SchemaName.categoryCombo)
     return (
         <>
             <StandardFormSection>
@@ -52,22 +55,17 @@ export const CategoryComboFormFields = () => {
                     <HorizontalFieldGroup
                         label={'Data dimension type (required)'}
                     >
-                        <Field<string | undefined>
-                            name="dataDimensionType"
-                            component={RadioFieldFF}
-                            label={i18n.t('Disaggregation')}
-                            type="radio"
-                            value={'DISAGGREGATION'}
-                            disabled={!isNewForm}
-                        />
-                        <Field<string | undefined>
-                            name="dataDimensionType"
-                            component={RadioFieldFF}
-                            label={i18n.t('Attribute')}
-                            type="radio"
-                            value={'ATTRIBUTE'}
-                            disabled={!isNewForm}
-                        />
+                        {getSchemaPropertyForPath(schema, 'dataDimensionType')?.constants?.map(dataDimansionType =>
+                            <Field<string | undefined>
+                                name="dataDimensionType"
+                                key={dataDimansionType}
+                                component={RadioFieldFF}
+                                label={i18n.t(capitalize(dataDimansionType))}
+                                type="radio"
+                                value={dataDimansionType}
+                                disabled={!isNewForm}
+                            />
+                        )}
                     </HorizontalFieldGroup>
                 </StandardFormField>
                 <StandardFormField>

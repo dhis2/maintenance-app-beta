@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { RadioFieldFF, CheckboxFieldFF } from '@dhis2/ui'
+import {capitalize} from "lodash";
 import React from 'react'
 import { Field } from 'react-final-form'
 import {
@@ -13,10 +14,13 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { SECTIONS_MAP } from '../../../lib'
+import {SchemaName, SECTIONS_MAP, useSchema} from '../../../lib'
+import {getSchemaPropertyForPath} from "../../../lib/models/path";
 
 function CategoryOptionGroupSetFormFields() {
     const section = SECTIONS_MAP.categoryOptionGroupSet
+    const schema = useSchema(SchemaName.categoryOptionGroupSet)
+
     return (
         <>
             <StandardFormSection>
@@ -49,20 +53,16 @@ function CategoryOptionGroupSetFormFields() {
                     <HorizontalFieldGroup
                         label={'Data dimension type (required)'}
                     >
-                        <Field<string | undefined>
-                            name="dataDimensionType"
-                            component={RadioFieldFF}
-                            label={i18n.t('Disaggregation')}
-                            type="radio"
-                            value={'DISAGGREGATION'}
-                        />
-                        <Field<string | undefined>
-                            name="dataDimensionType"
-                            component={RadioFieldFF}
-                            label={i18n.t('Attribute')}
-                            type="radio"
-                            value={'ATTRIBUTE'}
-                        />
+                        {getSchemaPropertyForPath(schema, 'dataDimensionType')?.constants?.map(dataDimansionType =>
+                            <Field<string | undefined>
+                                name="dataDimensionType"
+                                key={dataDimansionType}
+                                component={RadioFieldFF}
+                                label={i18n.t(capitalize(dataDimansionType))}
+                                type="radio"
+                                value={dataDimansionType}
+                            />
+                        )}
                     </HorizontalFieldGroup>
                 </StandardFormField>
                 <StandardFormField>
