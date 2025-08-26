@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip } from '@dhis2/ui'
+import { Button, ButtonStrip, Checkbox } from '@dhis2/ui'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import React, { useMemo, useState } from 'react'
 import { useHref } from 'react-router-dom'
@@ -28,6 +28,7 @@ export type ModelTranferProps<
 > = Omit<BaseModelTransferProps<TModel>, 'available' | 'filterable'> & {
     query: Omit<PlainResourceQuery, 'id'>
     transform?: (value: TModelData[]) => TModel[]
+    filterUnassignedTo?: string
 }
 
 export const ModelTransfer = <
@@ -42,13 +43,22 @@ export const ModelTransfer = <
     filterPlaceholder,
     filterPlaceholderPicked,
     transform,
+    filterUnassignedTo,
     ...baseModelTransferProps
 }: ModelTranferProps<TModel, TModelData>) => {
     const queryFn = useBoundResourceQueryFn()
     const [searchTerm, setSearchTerm] = useState('')
+    const [filterUnassigned, setFilterUnassigned] = useState(false)
+    const searchFilter = searchTerm
+        ? `identifiable:token:${searchTerm}`
+        : undefined
+    const unassignedFilter = filterUnassigned
+        ? `${filterUnassignedTo}:eq:0`
+        : undefined
+    const filter: string[] = [searchFilter, unassignedFilter].filter(
+        Boolean
+    ) as []
 
-    const searchFilter = `identifiable:token:${searchTerm}`
-    const filter: string[] = searchTerm ? [searchFilter] : []
     const params = query.params
 
     const queryObject = {
@@ -108,7 +118,20 @@ export const ModelTransfer = <
             filterPlaceholderPicked={
                 filterPlaceholderPicked || i18n.t('Filter selected items')
             }
-            leftHeader={<TransferHeader>{leftHeader}</TransferHeader>}
+            leftHeader={
+                <div className={css.modelTransferHeaderWithUnassignedFilter}>
+                    {leftHeader}
+                    {filterUnassignedTo && (
+                        <Checkbox
+                            label={i18n.t('Show only unassigned items')}
+                            onChange={() => {
+                                setFilterUnassigned((prevState) => !prevState)
+                            }}
+                            checked={filterUnassigned}
+                        />
+                    )}
+                </div>
+            }
             rightHeader={<TransferHeader>{rightHeader}</TransferHeader>}
             leftFooter={
                 leftFooter ?? (
