@@ -1,10 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
-import { ExpressionField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionField'
+import { ExpressionBuilderWithModalField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderWithModalField'
 
 export default function DenominatorFields() {
     return (
-        <ExpressionField
+        <ExpressionBuilderWithModalField
             fieldName="denominator"
             descriptionFieldName="denominatorDescription"
             modalTitle={i18n.t('Denominator Expression')}

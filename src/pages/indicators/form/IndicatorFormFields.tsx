@@ -47,11 +47,7 @@ export const IndicatorFormFields = () => {
                     {i18n.t('Set up the basic information for this indicator.')}
                 </StandardFormSectionDescription>
 
-                <DefaultIdentifiableFields
-                    shortNameHelpText={i18n.t(
-                        'A short, unique name (max 50 characters). Displayed in analysis apps where space is limited, depending on user or system settings.'
-                    )}
-                />
+                <DefaultIdentifiableFields />
 
                 <StandardFormField>
                     <DescriptionField
@@ -148,11 +144,17 @@ export const IndicatorFormFields = () => {
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
+                    {/*this still has the new text and not the old one*/}
+
                     <ModelTransferField
                         dataTest="legendSets-field"
                         name="legendSets"
                         leftHeader={i18n.t('Available legends')}
                         rightHeader={i18n.t('Selected legends')}
+                        filterPlaceholder={i18n.t('Filter available legends')}
+                        filterPlaceholderPicked={i18n.t(
+                            'Filter selected legends'
+                        )}
                         query={{
                             resource: 'legendSets',
                             params: {

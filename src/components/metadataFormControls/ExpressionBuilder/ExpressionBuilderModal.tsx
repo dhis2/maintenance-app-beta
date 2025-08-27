@@ -9,55 +9,41 @@ import {
     ModalContent,
     ModalTitle,
     NoticeBox,
+    TextAreaField,
     TextAreaFieldFF,
 } from '@dhis2/ui'
-import React from 'react'
-import { Field as FieldRFF, useForm } from 'react-final-form'
+import React, { useState } from 'react'
+import { FieldRenderProps, useField } from 'react-final-form'
 import styles from './ExpressionBuilderModal.module.css'
+import { useExpressionValidator } from './useExpressionValidator'
 
 type ExpressionBuilderModalProps = {
-    fieldName: string
     title?: string
     required?: boolean
     dataTest?: string
     onClose?: () => void
-    onApply?: (value: string, description: string) => void
-    validate: (
-        value: string | undefined
-    ) => string | undefined | Promise<string | undefined>
-    expressionDescription: string
-    validating: boolean
-    children?: React.ReactNode
+    validationResource: string
+    initialValue?: string
+    onApply: (expression?: string, expressionDescription?: string) => void
 }
 
 export const ExpressionBuilderModal = ({
-    fieldName,
     title,
     required,
     dataTest,
     onClose,
+    validationResource,
+    initialValue,
     onApply,
-    validate,
-    expressionDescription,
-    validating,
-    children,
 }: ExpressionBuilderModalProps) => {
-    const form = useForm()
-
-    const handleApply = async () => {
-        const value = form.getFieldState(fieldName)?.value ?? ''
-        const validationResult = await validate(value)
-
-        if (validationResult) {
-            form.mutators.setFieldError?.(fieldName, validationResult)
-        } else {
-            form.mutators.setFieldError?.(fieldName, undefined)
-            if (onApply && expressionDescription) {
-                onApply(value, expressionDescription)
-            }
-            onClose?.()
-        }
-    }
+    const [expression, setExpression] = useState(initialValue)
+    const [expressionIsOnFocus, setExpressionIsOnFocus] = useState(false)
+    const [validationError, setValidationError] = useState<string | undefined>(
+        undefined
+    )
+    const [validate, expressionDescription, validating] =
+        useExpressionValidator(validationResource)
+    const isValid = validationError === undefined
 
     return (
         <Modal onClose={onClose} large dataTest="expression-builder-modal">
@@ -66,51 +52,49 @@ export const ExpressionBuilderModal = ({
             <ModalContent>
                 <div className={styles.container}>
                     <div className={styles.leftPanel}>
-                        <FieldRFF<string | undefined>
-                            name={fieldName}
-                            validate={validate}
-                        >
-                            {({ input, meta }) => {
-                                return (
-                                    <>
-                                        <TextAreaFieldFF
-                                            dataTest={dataTest}
-                                            input={input}
-                                            meta={meta}
-                                            required={required}
-                                            rows={8}
-                                            loading={validating}
-                                        />
-                                        <Box className={styles.noticeBox}>
-                                            {input.value &&
-                                                expressionDescription &&
-                                                !meta.error && (
-                                                    <NoticeBox
-                                                        valid
-                                                        title={
-                                                            expressionDescription
-                                                        }
-                                                    >
-                                                        {i18n.t(
-                                                            'Valid expression'
-                                                        )}
-                                                    </NoticeBox>
-                                                )}
-                                        </Box>
+                        <>
+                            <TextAreaField
+                                dataTest={dataTest}
+                                value={expression}
+                                required={required}
+                                error={!!validationError}
+                                validationText={validationError}
+                                rows={8}
+                                loading={validating}
+                                onBlur={async (payload) => {
+                                    setExpressionIsOnFocus(false)
+                                    const maybeValidationError = await validate(
+                                        payload.value
+                                    )
+                                    setValidationError(maybeValidationError)
+                                }}
+                                onFocus={() => setExpressionIsOnFocus(true)}
+                                onChange={(payload) =>
+                                    setExpression(payload.value)
+                                }
+                            />
+                            <Box className={styles.noticeBox}>
+                                {isValid &&
+                                    !validating &&
+                                    !expressionIsOnFocus &&
+                                    expressionDescription && (
+                                        <NoticeBox
+                                            valid
+                                            title={expressionDescription}
+                                        >
+                                            {i18n.t('Valid expression')}
+                                        </NoticeBox>
+                                    )}
+                            </Box>
 
-                                        <span className={styles.info}>
-                                            <IconInfo16 />
-                                            {i18n.t(
-                                                'Add operators, variables, functions, and constants from right sidebar'
-                                            )}
-                                        </span>
-                                    </>
-                                )
-                            }}
-                        </FieldRFF>
+                            <span className={styles.info}>
+                                <IconInfo16 />
+                                {i18n.t(
+                                    'Add operators, variables, functions, and constants from right sidebar'
+                                )}
+                            </span>
+                        </>
                     </div>
-
-                    <div className={styles.rightPanel}>{children}</div>
                 </div>
             </ModalContent>
             <ModalActions>
@@ -119,10 +103,13 @@ export const ExpressionBuilderModal = ({
                         {i18n.t('Cancel')}
                     </Button>
                     <Button
-                        onClick={handleApply}
+                        onClick={() => {
+                            onApply(expression, expressionDescription)
+                            onClose?.()
+                        }}
                         primary
                         dataTest="apply-expression-button"
-                        disabled={!expressionDescription || validating}
+                        disabled={!isValid || validating || expressionIsOnFocus}
                     >
                         {i18n.t('Apply')}
                     </Button>
