@@ -3,7 +3,7 @@ import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 import { OptionGroup, PickWithFieldFilters } from '../../../types/generated'
 import { fieldFilters } from './fieldFilters'
 
-const { identifiable, style, withDefaultListColumns } = modelFormSchemas
+const { identifiable, withDefaultListColumns } = modelFormSchemas
 
 const optionGroupBaseSchema = z.object({
     code: z.string().trim().optional(),
