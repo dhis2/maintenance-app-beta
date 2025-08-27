@@ -13,6 +13,7 @@ type ModelTransferFieldProps = {
     name: string
     query: PlainResourceQuery
     label?: string
+    filterUnassignedTo?: string
 } & Pick<
     TransferProps,
     | 'rightHeader'
@@ -41,6 +42,7 @@ export function ModelTransferField({
     maxSelections,
     enableOrderChange,
     dataTest,
+    filterUnassignedTo,
     hideFilterInputPicked = false,
     disabled = false,
 }: ModelTransferFieldProps) {
@@ -75,6 +77,7 @@ export function ModelTransferField({
                 dataTest={dataTest}
                 hideFilterInputPicked={hideFilterInputPicked}
                 disabled={disabled}
+                filterUnassignedTo={filterUnassignedTo}
             />
         </Field>
     )
