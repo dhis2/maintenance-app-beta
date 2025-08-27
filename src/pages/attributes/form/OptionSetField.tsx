@@ -6,7 +6,6 @@ import {
     ModelSingleSelectFormField,
     useRefreshModelSingleSelect,
 } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { CheckboxConfirmationWrapper } from './CheckboxConfirmationWrapper'
 
 export const OptionSetField = () => {
     const newOptionSetLink = useHref('/optionSets/new')
@@ -14,30 +13,27 @@ export const OptionSetField = () => {
         resource: 'optionSets',
     })
     return (
-        <CheckboxConfirmationWrapper
-            fieldToReset="optionSet"
-            defaultValue={undefined}
-            label={i18n.t('Restrict attribute values using an option set')}
+        <EditableFieldWrapper
+            onRefresh={() => refreshOptionSet()}
+            onAddNew={() => window.open(newOptionSetLink, '_blank')}
         >
-            <EditableFieldWrapper
-                onRefresh={() => refreshOptionSet()}
-                onAddNew={() => window.open(newOptionSetLink, '_blank')}
-            >
-                <ModelSingleSelectFormField
-                    inputWidth="400px"
-                    name="optionSet"
-                    label={i18n.t('Option set')}
-                    query={{
-                        resource: 'optionSets',
-                        params: {
-                            fields: 'id,displayName,valueType',
-                        },
-                    }}
-                    helpText={i18n.t(
-                        'Select an option set that users can choose from when filling out this attribute'
-                    )}
-                />
-            </EditableFieldWrapper>
-        </CheckboxConfirmationWrapper>
+            <ModelSingleSelectFormField
+                inputWidth="400px"
+                name="optionSet"
+                label={i18n.t('Option set')}
+                query={{
+                    resource: 'optionSets',
+                    params: {
+                        fields: 'id,displayName,valueType',
+                        order: 'displayName:iasc',
+                    },
+                }}
+                helpText={i18n.t(
+                    'Choose from a predefined list of option sets. The option set will automatically define the value type.'
+                )}
+                clearable={true}
+                clearText={i18n.t('Remove option set')}
+            />
+        </EditableFieldWrapper>
     )
 }

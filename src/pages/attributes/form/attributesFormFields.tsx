@@ -54,7 +54,7 @@ export const AttributeFormFields = ({
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Configure how this attribute wil be colelcted, analysed, and stored.'
+                        'Configure how this attribute wil be collected, analysed, and stored.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>

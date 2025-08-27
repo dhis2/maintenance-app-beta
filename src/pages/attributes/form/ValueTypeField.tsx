@@ -5,7 +5,7 @@ import { useField, useFormState } from 'react-final-form'
 import { getConstantTranslation, SchemaName, useSchema } from '../../../lib'
 
 const valueTypeHelpText = i18n.t(
-    'Select the kind fo data this attribute will collect (e.g. text, number, date)'
+    'Select the kind of data this attribute collects. If you have chosen an Option set, this will be set automatically.'
 )
 const valueTypeDisabledHelpText = i18n.t(
     'Disabled as the value type must match the value type of the selected option set'
@@ -37,9 +37,7 @@ export function ValueTypeField() {
                 return optionSetHasMultiTextValueType || value !== 'MULTI_TEXT'
             }) || []
 
-    const helpText = disabled
-        ? `${valueTypeHelpText} ${valueTypeDisabledHelpText}`
-        : valueTypeHelpText
+    const helpText = disabled ? valueTypeDisabledHelpText : valueTypeHelpText
 
     return (
         <SingleSelectField
@@ -55,6 +53,7 @@ export function ValueTypeField() {
             })}
             disabled={disabled}
             helpText={helpText}
+            required={true}
         >
             {options.map((option) => (
                 <SingleSelectOption
