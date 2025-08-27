@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useState, useEffect } from 'react'
+import { NoticeBox } from '@dhis2/ui'
+import React from 'react'
 import { useField } from 'react-final-form'
 import {
     DefaultIdentifiableFields,
@@ -11,25 +12,21 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { ColorAndIconField } from '../../dataElements/fields'
+import styles from './OptionGroupFormFields.module.css'
 import { OptionSetField } from './OptionSetField'
 
-export const OptionGroupFormFields = () => {
+export const OptionGroupFormFields = ({
+    isEdit = false,
+}: {
+    isEdit?: boolean
+}) => {
     const { input: optionSetField } = useField<{ id: string } | null>(
         'optionSet'
     )
-    const [selectedOptionSetId, setSelectedOptionSetId] = useState<
-        string | null
-    >(optionSetField.value?.id ?? null)
-
-    useEffect(() => {
-        if (optionSetField.value?.id) {
-            setSelectedOptionSetId(optionSetField.value.id)
-        }
-    }, [optionSetField.value])
+    const optionSetId = optionSetField?.value?.id
 
     return (
-        <SectionedFormSections>
+        <>
             <StandardFormSection>
                 <StandardFormSectionTitle>
                     {i18n.t('Basic information')}
@@ -49,38 +46,28 @@ export const OptionGroupFormFields = () => {
                         )}
                     />
                 </StandardFormField>
-
-                <StandardFormField>
-                    <ColorAndIconField />
-                </StandardFormField>
-                <StandardFormField>
-                    <OptionSetField
-                        onChange={(id) => setSelectedOptionSetId(id)}
-                    />
-                </StandardFormField>
             </StandardFormSection>
 
-            {selectedOptionSetId && (
-                <StandardFormSection>
-                    <StandardFormSectionTitle>
-                        {i18n.t('Options')}
-                    </StandardFormSectionTitle>
-                    <StandardFormSectionDescription>
-                        {i18n.t(
-                            'Select the options that belong to this group.'
-                        )}
-                    </StandardFormSectionDescription>
+            <StandardFormSection>
+                <StandardFormSectionTitle>
+                    {i18n.t('Options')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t('Select the options that belong to this group.')}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <OptionSetField isEdit={isEdit} />
+                </StandardFormField>
+                {optionSetId ? (
                     <StandardFormField>
                         <ModelTransferField
-                            key={selectedOptionSetId}
+                            key={optionSetId}
                             dataTest="options-field"
                             name="options"
                             query={{
                                 resource: 'options',
                                 params: {
-                                    filter: [
-                                        `optionSet.id:eq:${selectedOptionSetId}`,
-                                    ],
+                                    filter: [`optionSet.id:eq:${optionSetId}`],
                                     fields: 'id,displayName',
                                 },
                             }}
@@ -94,8 +81,14 @@ export const OptionGroupFormFields = () => {
                             )}
                         />
                     </StandardFormField>
-                </StandardFormSection>
-            )}
-        </SectionedFormSections>
+                ) : (
+                    <NoticeBox className={styles.noOptionSetWarning}>
+                        {i18n.t(
+                            'You must select an option set before you can select options.'
+                        )}
+                    </NoticeBox>
+                )}
+            </StandardFormSection>
+        </>
     )
 }

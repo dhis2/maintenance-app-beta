@@ -136,7 +136,6 @@ describe('OptionGroups form tests', () => {
             uiAssertions.expectNameFieldExist('', screen)
             uiAssertions.expectInputFieldToExist('shortName', '', screen)
             uiAssertions.expectCodeFieldExist('', screen)
-            uiAssertions.expectColorAndIconFieldToExist(screen)
             uiAssertions.expectTextAreaFieldToExist('description', null, screen)
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('formfields-optionSet'),

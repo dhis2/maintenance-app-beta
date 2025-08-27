@@ -20,9 +20,7 @@ const optionGroupBaseSchema = z.object({
     }),
 })
 
-export const optionGroupFormSchema = identifiable
-    .merge(optionGroupBaseSchema)
-    .merge(style)
+export const optionGroupFormSchema = identifiable.merge(optionGroupBaseSchema)
 
 export const OptionGroupListSchema = optionGroupBaseSchema
     .merge(withDefaultListColumns)

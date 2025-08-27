@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
+import { useField } from 'react-final-form'
 import { useHref } from 'react-router'
 import { EditableFieldWrapper } from '../../../components'
 import {
@@ -7,13 +8,10 @@ import {
     useRefreshModelSingleSelect,
 } from '../../../components/metadataFormControls/ModelSingleSelect'
 
-export const OptionSetField = ({
-    onChange,
-}: {
-    onChange: (id: string | null) => void
-}) => {
+export const OptionSetField = ({ isEdit }: { isEdit: boolean }) => {
     const newOptionSetLink = useHref('/optionSets/new')
     const refresh = useRefreshModelSingleSelect({ resource: 'optionSets' })
+    const { input: optionsInput } = useField('options')
 
     return (
         <EditableFieldWrapper
@@ -24,6 +22,7 @@ export const OptionSetField = ({
                 <ModelSingleSelectFormField
                     dataTest="formfields-optionSet"
                     name="optionSet"
+                    disabled={isEdit}
                     label={i18n.t('Option set')}
                     query={{
                         resource: 'optionSets',
@@ -32,7 +31,9 @@ export const OptionSetField = ({
                             order: 'displayName:iasc',
                         },
                     }}
-                    onChange={(value) => onChange(value?.id ?? null)}
+                    onChange={() => {
+                        optionsInput.onChange([])
+                    }}
                 />
             </div>
         </EditableFieldWrapper>

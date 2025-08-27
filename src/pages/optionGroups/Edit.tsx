@@ -35,7 +35,7 @@ export const Component = () => {
             includeAttributes={false}
         >
             <DefaultEditFormContents section={section}>
-                <OptionGroupFormFields />
+                <OptionGroupFormFields isEdit={true} />
             </DefaultEditFormContents>
         </FormBase>
     )
