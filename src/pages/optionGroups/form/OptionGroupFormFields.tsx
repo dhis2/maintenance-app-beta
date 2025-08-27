@@ -6,7 +6,6 @@ import {
     DefaultIdentifiableFields,
     DescriptionField,
     ModelTransferField,
-    SectionedFormSections,
     StandardFormField,
     StandardFormSection,
     StandardFormSectionDescription,
