@@ -21,6 +21,7 @@ export const attributeFormSchema = identifiable
                 displayName: z.string().trim().optional(),
             })
             .optional(),
+        sortOrder: z.number().optional(),
         categoryAttribute: z.boolean().default(false),
         categoryOptionAttribute: z.boolean().default(false),
         categoryOptionComboAttribute: z.boolean().default(false),

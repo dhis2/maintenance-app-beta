@@ -7,6 +7,7 @@ import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PickWithFieldFilters } from '../../types/generated'
 import { Attribute } from '../../types/models'
 import { AttributeFormFields, ATTRIBUTE_BOOLEANS, validate } from './form'
+import { SectionedFormWrapper } from './SectionedFormWrapper'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -19,6 +20,7 @@ const fieldFilters = [
     'unique',
     'valueType',
     'optionSet',
+    'sortOrder',
 ] as const
 
 export type AttributeFormValues = PickWithFieldFilters<
@@ -43,17 +45,23 @@ export const Component = () => {
     })
 
     return (
-        <FormBase
+        // <FormBase
+        //     onSubmit={useOnSubmitEdit({ section, modelId })}
+        //     initialValues={attributesQuery.data}
+        //     validate={validate}
+        //     includeAttributes={false}
+        // >
+        <SectionedFormWrapper
             onSubmit={useOnSubmitEdit({ section, modelId })}
             initialValues={attributesQuery.data}
             validate={validate}
-            includeAttributes={false}
         >
-            <DefaultEditFormContents section={section}>
-                <AttributeFormFields
-                    initialValues={attributesQuery.data ?? {}}
-                />
-            </DefaultEditFormContents>
-        </FormBase>
+            {/* <DefaultEditFormContents section={section}> */}
+            {/* <SectionedFormWrapper> */}
+            <AttributeFormFields initialValues={attributesQuery.data ?? {}} />
+            {/* </SectionedFormWrapper>                 */}
+            {/* </DefaultEditFormContents> */}
+            {/* </FormBase> */}
+        </SectionedFormWrapper>
     )
 }

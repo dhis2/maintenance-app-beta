@@ -1,8 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
-import { CheckboxFieldFF } from '@dhis2/ui'
+import { CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import {
+    SectionedFormSection,
+    SectionedFormSections,
     StandardFormField,
     StandardFormSection,
     StandardFormSectionTitle,
@@ -10,9 +12,13 @@ import {
     DefaultIdentifiableFields,
     DescriptionField,
 } from '../../../components'
-import { useSchemaSectionHandleOrThrow } from '../../../lib'
+import {
+    useSchemaSectionHandleOrThrow,
+    useSyncSelectedSectionWithScroll,
+} from '../../../lib'
 import { AttributeTypeComponent } from './AttributeTypeComponent'
 import { OptionSetField } from './OptionSetField'
+import { SortOrderField } from './SortOrderField'
 import { ValueTypeField } from './ValueTypeField'
 
 export const AttributeFormFields = ({
@@ -21,10 +27,11 @@ export const AttributeFormFields = ({
     initialValues?: Record<string, any>
 }) => {
     const schemaSection = useSchemaSectionHandleOrThrow()
+    useSyncSelectedSectionWithScroll()
 
     return (
-        <>
-            <StandardFormSection>
+        <SectionedFormSections>
+            <SectionedFormSection name="basic">
                 <StandardFormSectionTitle>
                     {i18n.t('Basic information')}
                 </StandardFormSectionTitle>
@@ -39,11 +46,31 @@ export const AttributeFormFields = ({
                         )}
                     />
                 </StandardFormField>
+            </SectionedFormSection>
+
+            <SectionedFormSection name="data">
+                <StandardFormSectionTitle>
+                    {i18n.t('Data and options')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Configure how this attribute wil be colelcted, analysed, and stored.'
+                    )}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <OptionSetField />
+                </StandardFormField>
+                <StandardFormField>
+                    <ValueTypeField />
+                </StandardFormField>
+                <StandardFormField>
+                    <SortOrderField />
+                </StandardFormField>
                 <StandardFormField>
                     <FieldRFF
                         component={CheckboxFieldFF}
                         name="mandatory"
-                        label={i18n.t('Mandatory')}
+                        label={i18n.t('Make this a mandatory attribute')}
                         type="checkbox"
                     />
                 </StandardFormField>
@@ -51,27 +78,14 @@ export const AttributeFormFields = ({
                     <FieldRFF
                         component={CheckboxFieldFF}
                         name="unique"
-                        label={i18n.t('Unique')}
+                        label={i18n.t('No duplicate values allowed')}
                         type="checkbox"
                     />
                 </StandardFormField>
                 <StandardFormField>
-                    <ValueTypeField />
-                </StandardFormField>
-                <StandardFormField>
-                    <OptionSetField />
-                </StandardFormField>
-            </StandardFormSection>
-
-            <StandardFormSection>
-                <StandardFormSectionTitle>
-                    {i18n.t('Attribute type')}
-                </StandardFormSectionTitle>
-
-                <StandardFormField>
                     <AttributeTypeComponent initialValues={initialValues} />
                 </StandardFormField>
-            </StandardFormSection>
-        </>
+            </SectionedFormSection>
+        </SectionedFormSections>
     )
 }

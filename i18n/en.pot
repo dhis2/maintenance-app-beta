@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-20T14:21:29.799Z\n"
-"PO-Revision-Date: 2025-08-20T14:21:29.799Z\n"
+"POT-Creation-Date: 2025-08-26T14:47:52.498Z\n"
+"PO-Revision-Date: 2025-08-26T14:47:52.499Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1999,6 +1999,26 @@ msgstr "Only applied to section forms using multiple organisation units"
 msgid "Configure which organisation units can collect data for this data set."
 msgstr "Configure which organisation units can collect data for this data set."
 
+msgid "Change period type"
+msgstr "Change period type"
+
+msgid ""
+"Changing the period type will make previously entered data for this data "
+"set not appear in the data entry app. This can lead to duplicate data entry."
+msgstr ""
+"Changing the period type will make previously entered data for this data "
+"set not appear in the data entry app. This can lead to duplicate data entry."
+
+msgid ""
+"Are you sure you want to change the period type to "
+"{{preselectedPeriodType}}?"
+msgstr ""
+"Are you sure you want to change the period type to "
+"{{preselectedPeriodType}}?"
+
+msgid "Yes, change"
+msgstr "Yes, change"
+
 msgid "Configure data entry periods"
 msgstr "Configure data entry periods"
 
@@ -2930,22 +2950,6 @@ msgstr "Placeholder for other"
 
 msgid "Create, modify and view attributes."
 msgstr "Create, modify and view attributes."
-
-msgid ""
-"Create a group of options from option sets that has a similar functional "
-"area or meaning."
-msgstr ""
-"Create a group of options from option sets that has a similar functional "
-"area or meaning."
-
-msgid "Create, modify and view sets of option groups."
-msgstr "Create, modify and view sets of option groups."
-
-msgid "Set disaggregation mappings for program indicators."
-msgstr "Set disaggregation mappings for program indicators."
-
-msgid "Placeholder for other"
-msgstr "Placeholder for other"
 
 msgid ""
 "Create a group of options from option sets that has a similar functional "

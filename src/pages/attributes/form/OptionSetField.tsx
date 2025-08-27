@@ -33,10 +33,9 @@ export const OptionSetField = () => {
                             fields: 'id,displayName,valueType',
                         },
                     }}
-                    onChange={() => {
-                        // valueTypeInput.onChange('TEXT')
-                        // option groups are cleared when option set is changed
-                    }}
+                    helpText={i18n.t(
+                        'Select an option set that users can choose from when filling out this attribute'
+                    )}
                 />
             </EditableFieldWrapper>
         </CheckboxConfirmationWrapper>

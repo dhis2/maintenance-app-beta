@@ -4,7 +4,9 @@ import React, { useEffect } from 'react'
 import { useField, useFormState } from 'react-final-form'
 import { getConstantTranslation, SchemaName, useSchema } from '../../../lib'
 
-const valueTypeHelpText = i18n.t('The type of data that will be recorded.')
+const valueTypeHelpText = i18n.t(
+    'Select the kind fo data this attribute will collect (e.g. text, number, date)'
+)
 const valueTypeDisabledHelpText = i18n.t(
     'Disabled as the value type must match the value type of the selected option set'
 )
