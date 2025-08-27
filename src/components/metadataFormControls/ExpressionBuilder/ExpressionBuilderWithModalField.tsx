@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, InputFieldFF, Help } from '@dhis2/ui'
+import { Button, InputFieldFF, TextAreaFieldFF } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import { useSchemaSectionHandleOrThrow } from '../../../lib'
@@ -48,10 +48,20 @@ export function ExpressionBuilderWithModalField({
     return (
         <div className={styles.container}>
             <div className={styles.expression}>
-                <div className={styles.expressionBox}>
+                <div
+                    className={styles.expressionBox}
+                    data-test={`${fieldName}-expression-description`}
+                >
                     {descriptionToShow || i18n.t('(No Value)')}
                 </div>
-                {meta.touched && meta.error && <Help error>{meta.error}</Help>}
+                <TextAreaFieldFF
+                    dataTest={`formfields-${fieldName}`}
+                    input={input}
+                    meta={meta}
+                    inputWidth="400px"
+                    disabled
+                    className={styles.expressionHiddenInput}
+                />
             </div>
 
             <div className={styles.buttonWrapper}>
@@ -69,7 +79,6 @@ export function ExpressionBuilderWithModalField({
                 <ExpressionBuilderModal
                     title={modalTitle}
                     onClose={() => setShowExpressionBuilder(false)}
-                    dataTest={`formfields-${fieldName}`}
                     validationResource={validationResource}
                     initialValue={input.value}
                     onApply={(expression, expressionDescription) => {

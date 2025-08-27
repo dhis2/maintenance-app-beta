@@ -22,6 +22,9 @@
 .expression {
     margin-bottom: 0.5rem;
 }
+.expressionHiddenInput > :first-child {
+    display: none;
+}
 .buttonWrapper {
     margin-bottom: 1rem;
 }
