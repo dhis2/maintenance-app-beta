@@ -1,3 +1,10 @@
+# [0.63.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.62.0...v0.63.0) (2025-08-26)
+
+
+### Features
+
+* add optional orphans filter to transfers ([#623](https://github.com/dhis2/maintenance-app-beta/issues/623)) ([a6a32a0](https://github.com/dhis2/maintenance-app-beta/commit/a6a32a0532898c28b29b2803a06998eea8d0cb10))
+
 # [0.62.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.61.1...v0.62.0) (2025-08-25)
 
 

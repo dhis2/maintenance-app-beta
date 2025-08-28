@@ -10,3 +10,11 @@
     padding-block: var(--spacers-dp8);
     padding-inline: var(--spacers-dp4);
 }
+
+.modelTransferHeaderWithUnassignedFilter {
+    padding-block: var(--spacers-dp8);
+    padding-inline: var(--spacers-dp4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+}
