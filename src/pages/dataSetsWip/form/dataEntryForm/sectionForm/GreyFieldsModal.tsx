@@ -119,28 +119,55 @@ export const GreyFieldsModal = ({
     )
 
     const orderedCategoryOptionCombos = useMemo(() => {
-        return (
-            selectedCatComboData?.categoryOptionCombos.sort((a, b) => {
-                const orderings = selectedCatComboData?.categories.map(
-                    (c) => c.categoryOptions
-                )
-                for (let dim = 0; dim < orderings.length; dim++) {
-                    const aId = a.categoryOptions[dim]?.id
-                    const bId = b.categoryOptions[dim]?.id
+        if (!selectedCatComboData) {
+            return []
+        }
 
-                    const aIdx = orderings[dim].findIndex((o) => o.id === aId)
-                    const bIdx = orderings[dim].findIndex((o) => o.id === bId)
+        const orderings = selectedCatComboData.categories.map(
+            (c) => c.categoryOptions
+        )
 
-                    const diff =
-                        (aIdx === -1 ? Infinity : aIdx) -
-                        (bIdx === -1 ? Infinity : bIdx)
-                    if (diff !== 0) {
-                        return diff
+        const idToDimRank = new Map<string, { dim: number; rank: number }>()
+        orderings.forEach((opts, dim) => {
+            opts.forEach((o, rank) => {
+                idToDimRank.set(o.id, { dim, rank })
+            })
+        })
+
+        const keyFor = (
+            coc: (typeof selectedCatComboData.categoryOptionCombos)[number]
+        ) => {
+            const key = new Array(orderings.length).fill(
+                Number.POSITIVE_INFINITY
+            )
+            for (const opt of coc.categoryOptions) {
+                const info = idToDimRank.get(opt.id)
+                if (info) {
+                    // If multiple options somehow map to the same dim, keep the smallest rank
+                    if (info.rank < key[info.dim]) {
+                        key[info.dim] = info.rank
                     }
                 }
-                return 0
-            }) || []
-        )
+            }
+            return key
+        }
+
+        const keyed = selectedCatComboData.categoryOptionCombos.map((c) => ({
+            c,
+            k: keyFor(c),
+        }))
+        keyed.sort((a, b) => {
+            const len = Math.max(a.k.length, b.k.length)
+            for (let i = 0; i < len; i++) {
+                const diff = (a.k[i] ?? Infinity) - (b.k[i] ?? Infinity)
+                if (diff !== 0) {
+                    return diff
+                }
+            }
+            return a.c.displayName.localeCompare(b.c.displayName)
+        })
+
+        return keyed.map((x) => x.c)
     }, [selectedCatComboData])
 
     const addCategoryOptionToCategory = (
@@ -184,7 +211,7 @@ export const GreyFieldsModal = ({
 
     return (
         <Modal onClose={onClose} large>
-            <ModalTitle>{i18n.t('Manage grey fields')}</ModalTitle>
+            <ModalTitle>{i18n.t('Manage enabled/disabled fields')}</ModalTitle>
             <ModalContent>
                 <SingleSelect
                     dense
@@ -277,7 +304,7 @@ export const GreyFieldsModal = ({
                             onClose()
                         }}
                     >
-                        {i18n.t('Update grey fields')}
+                        {i18n.t('Update')}
                     </Button>
 
                     <Button
