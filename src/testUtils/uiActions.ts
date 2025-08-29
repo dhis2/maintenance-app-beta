@@ -4,16 +4,22 @@ import { userEvent } from '@testing-library/user-event'
 const enterInputFieldValue = async (
     fieldName: string,
     text: string,
-    screen: RenderResult
+    screen: RenderResult,
+    type?: string
 ) => {
     const field = screen.getByTestId(`formfields-${fieldName}`)
-    const input = within(field).getByRole('textbox') as HTMLInputElement
-    clearInputField(fieldName, screen)
+    const input = within(field).getByRole(type ?? 'textbox') as HTMLInputElement
+    await clearInputField(fieldName, screen, type ?? 'textbox')
     await userEvent.type(input, text)
+    await userEvent.tab()
 }
-const clearInputField = async (fieldName: string, screen: RenderResult) => {
+const clearInputField = async (
+    fieldName: string,
+    screen: RenderResult,
+    type?: string
+) => {
     const field = screen.getByTestId(`formfields-${fieldName}`)
-    const input = within(field).getByRole('textbox') as HTMLInputElement
+    const input = within(field).getByRole(type ?? 'textbox') as HTMLInputElement
     await userEvent.clear(input)
 }
 
@@ -101,6 +107,15 @@ const closeSingleSelectIfOpen = async (
     }
 }
 
+const clearSingleSelect = async (fieldName: string, screen: RenderResult) => {
+    const option = screen.getByTestId(fieldName)
+    const selectInput = within(option).getByTestId('dhis2-uicore-select-input')
+    const clearButton = within(selectInput).getByTestId(
+        'dhis2-uicore-singleselect-clear'
+    )
+    await userEvent.click(clearButton)
+}
+
 const submitForm = async (screen: RenderResult) => {
     const submitButton = screen.getByTestId('form-save-button')
     await userEvent.click(submitButton)
@@ -163,4 +178,5 @@ export const uiActions = {
     // pickColor, Need to fix this
     clickOnCheckboxField,
     pickRadioField,
+    clearSingleSelect,
 }

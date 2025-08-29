@@ -54,7 +54,7 @@ export const AttributeFormFields = ({
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Configure how this attribute wil be collected, analysed, and stored.'
+                        'Configure how this attribute wil be collected, analyzed, and stored.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
@@ -72,6 +72,7 @@ export const AttributeFormFields = ({
                         name="mandatory"
                         label={i18n.t('Make this a mandatory attribute')}
                         type="checkbox"
+                        dataTest="formfields-mandatory"
                     />
                 </StandardFormField>
                 <StandardFormField>
@@ -80,6 +81,7 @@ export const AttributeFormFields = ({
                         name="unique"
                         label={i18n.t('No duplicate values allowed')}
                         type="checkbox"
+                        dataTest="formfields-unique"
                     />
                 </StandardFormField>
                 <StandardFormField>

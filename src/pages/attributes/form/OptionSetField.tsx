@@ -33,6 +33,7 @@ export const OptionSetField = () => {
                 )}
                 clearable={true}
                 clearText={i18n.t('Remove option set')}
+                dataTest="formfields-optionSet"
             />
         </EditableFieldWrapper>
     )

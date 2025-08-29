@@ -15,6 +15,7 @@ export const SortOrderField = () => {
 
     return (
         <InputFieldFF
+            dataTest="formfields-sortOrder"
             input={input}
             meta={meta as unknown as FieldMetaState<string | undefined>}
             inputWidth="250px"

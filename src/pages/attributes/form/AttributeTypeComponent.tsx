@@ -3,7 +3,7 @@ import { MultiSelectField, MultiSelectOption } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useField, useForm } from 'react-final-form'
 
-const ATTRIBUTE_TRANSLATIONS: Record<string, string> = {
+export const ATTRIBUTE_TRANSLATIONS: Record<string, string> = {
     categoryAttribute: i18n.t('Category'),
     categoryOptionAttribute: i18n.t('Category option'),
     categoryOptionComboAttribute: i18n.t('Category option combo'),
@@ -194,6 +194,7 @@ export const AttributeTypeComponent = ({
 
     return (
         <MultiSelectField
+            dataTest="formfields-objecttypes"
             label={i18n.t('Objects to which this attribute can be applied')}
             selected={selections}
             onChange={(s) => {

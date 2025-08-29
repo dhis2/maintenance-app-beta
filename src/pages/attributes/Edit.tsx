@@ -1,8 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
-import React, { useState } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
-import { DefaultEditFormContents, FormBase } from '../../components'
-import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
+import {
+    DEFAULT_FIELD_FILTERS,
+    SECTIONS_MAP,
+    useOnSubmitEdit,
+    getSectionPath,
+} from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PickWithFieldFilters } from '../../types/generated'
 import { Attribute } from '../../types/models'
@@ -45,23 +49,13 @@ export const Component = () => {
     })
 
     return (
-        // <FormBase
-        //     onSubmit={useOnSubmitEdit({ section, modelId })}
-        //     initialValues={attributesQuery.data}
-        //     validate={validate}
-        //     includeAttributes={false}
-        // >
         <SectionedFormWrapper
             onSubmit={useOnSubmitEdit({ section, modelId })}
             initialValues={attributesQuery.data}
             validate={validate}
+            cancelTo={`/${getSectionPath(section)}`}
         >
-            {/* <DefaultEditFormContents section={section}> */}
-            {/* <SectionedFormWrapper> */}
             <AttributeFormFields initialValues={attributesQuery.data ?? {}} />
-            {/* </SectionedFormWrapper>                 */}
-            {/* </DefaultEditFormContents> */}
-            {/* </FormBase> */}
         </SectionedFormWrapper>
     )
 }

@@ -14,6 +14,7 @@ import {
     SectionedFormProvider,
     SECTIONS_MAP,
     useOnSubmitEdit,
+    getSectionPath,
 } from '../../lib'
 import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
 import { Attribute, IdentifiableObjects } from '../../types/generated'
@@ -21,7 +22,7 @@ import { Attribute, IdentifiableObjects } from '../../types/generated'
 type FormBasePropsModifed<TValues, TFormattedValues = TValues> = Omit<
     FormBaseProps<TValues, TFormattedValues>,
     'children'
-> & { children: ReactElement }
+> & { children: ReactElement; cancelTo?: string }
 
 export const AttributesFormDescriptor = {
     name: 'Attribute',
@@ -83,6 +84,7 @@ export const SectionedFormWrapper = ({
     initialValues,
     validate,
     children,
+    cancelTo,
 }: FormBasePropsModifed<Attribute>) => (
     <FormBase
         onSubmit={onSubmit}
@@ -99,7 +101,7 @@ export const SectionedFormWrapper = ({
                             <SectionedFormErrorNotice />
                         </>
                     </form>
-                    <DefaultFormFooter />
+                    <DefaultFormFooter cancelTo={cancelTo} />
                 </SectionedFormLayout>
             </SectionedFormProvider>
         )}

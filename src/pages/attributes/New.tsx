@@ -1,7 +1,5 @@
 import React from 'react'
-import { FormBase } from '../../components'
-import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
-import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
+import { SECTIONS_MAP, useOnSubmitNew, getSectionPath } from '../../lib'
 import { Attribute } from '../../types/generated'
 import { AttributeFormFields, initialValues, validate } from './form'
 import { SectionedFormWrapper } from './SectionedFormWrapper'
@@ -14,19 +12,9 @@ export const Component = () => {
             onSubmit={useOnSubmitNew({ section })}
             initialValues={initialValues as Attribute}
             validate={validate}
+            cancelTo={`/${getSectionPath(section)}`}
         >
-            {/* <FormBase
-            onSubmit={useOnSubmitNew({ section })}
-            initialValues={initialValues}
-            validate={validate}
-            includeAttributes={false}
-        > */}
-            {/* <DefaultNewFormContents section={section}> */}
-
             <AttributeFormFields />
-
-            {/* </DefaultNewFormContents> */}
-            {/* </FormBase> */}
         </SectionedFormWrapper>
     )
 }
