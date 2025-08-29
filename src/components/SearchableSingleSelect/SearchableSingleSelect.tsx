@@ -102,8 +102,7 @@ export const SearchableSingleSelect = ({
     const { liveValue: filter, setValue: setFilterValue } =
         useDebouncedState<string>({
             initialValue: '',
-            onSetDebouncedValue: (value: string) =>
-                onFilterChange && onFilterChange({ value }),
+            onSetDebouncedValue: (value: string) => onFilterChange?.({ value }),
         })
 
     useEffect(() => {
