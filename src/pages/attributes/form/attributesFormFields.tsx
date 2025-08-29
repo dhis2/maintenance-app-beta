@@ -1,12 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
-import { CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
+import { CheckboxFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import {
     SectionedFormSection,
     SectionedFormSections,
     StandardFormField,
-    StandardFormSection,
     StandardFormSectionTitle,
     StandardFormSectionDescription,
     DefaultIdentifiableFields,
@@ -26,7 +25,7 @@ export const AttributeFormFields = ({
 }: {
     initialValues?: Record<string, any>
 }) => {
-    const schemaSection = useSchemaSectionHandleOrThrow()
+    useSchemaSectionHandleOrThrow()
     useSyncSelectedSectionWithScroll()
 
     return (

@@ -8,16 +8,8 @@ import {
     SectionedFormErrorNotice,
     FormBaseProps,
 } from '../../components'
-import {
-    createFormError,
-    SectionedFormDescriptor,
-    SectionedFormProvider,
-    SECTIONS_MAP,
-    useOnSubmitEdit,
-    getSectionPath,
-} from '../../lib'
-import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
-import { Attribute, IdentifiableObjects } from '../../types/generated'
+import { SectionedFormDescriptor, SectionedFormProvider } from '../../lib'
+import { Attribute } from '../../types/generated'
 
 type FormBasePropsModifed<TValues, TFormattedValues = TValues> = Omit<
     FormBaseProps<TValues, TFormattedValues>,
@@ -96,10 +88,8 @@ export const SectionedFormWrapper = ({
             <SectionedFormProvider formDescriptor={AttributesFormDescriptor}>
                 <SectionedFormLayout sidebar={<DefaultSectionedFormSidebar />}>
                     <form onSubmit={handleSubmit}>
-                        <>
-                            {children}
-                            <SectionedFormErrorNotice />
-                        </>
+                        {children}
+                        <SectionedFormErrorNotice />
                     </form>
                     <DefaultFormFooter cancelTo={cancelTo} />
                 </SectionedFormLayout>

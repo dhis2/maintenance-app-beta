@@ -234,7 +234,7 @@ describe('Attributes form tests', () => {
             )
         })
         it('locks value type when option set is selected', async () => {
-            const { screen, optionSets, optionGroups } = await renderForm()
+            const { screen, optionSets } = await renderForm()
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('formfields-optionSet'),
                 { options: optionSets },
