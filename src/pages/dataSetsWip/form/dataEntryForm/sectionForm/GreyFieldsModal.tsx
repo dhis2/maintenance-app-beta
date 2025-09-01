@@ -16,10 +16,11 @@ import {
     TableHead,
     TableRow,
 } from '@dhis2/ui'
+import { useQuery } from '@tanstack/react-query'
 import React, { useMemo, useState } from 'react'
 import { FieldInputProps } from 'react-final-form'
+import { useBoundResourceQueryFn } from '../../../../../lib'
 import { DisplayableModel } from '../../../../../types/models'
-import { CategoryCombosType } from './DataSetSectionFormContents'
 import styles from './GreyFieldsModal.module.css'
 
 export type GreyedField = {
@@ -27,24 +28,51 @@ export type GreyedField = {
     categoryOptionCombo: { id: string }
 }
 
+export type CategoryCombosType = {
+    categoryCombos: (DisplayableModel & {
+        categories: (DisplayableModel & { categoryOptions: { id: string }[] })[]
+        categoryOptionCombos: (DisplayableModel & {
+            categoryOptions: (DisplayableModel & {
+                categories: { id: string }[]
+            })[]
+        })[]
+    })[]
+}
+
 export const GreyFieldsModal = ({
     onClose,
-    categoryCombos,
     dataElements,
+    sectionCategoryCombos,
     input,
 }: {
     onClose: () => void
-    categoryCombos: CategoryCombosType['categoryCombos'] | undefined
     dataElements:
         | (DisplayableModel & { categoryCombo: { id: string } })[]
         | undefined
+    sectionCategoryCombos: { id: string }[]
     input: FieldInputProps<GreyedField[]>
 }) => {
     const [localGreyedFields, setLocalGreyedFields] = useState<GreyedField[]>(
         input.value || []
     )
+
+    const queryFn = useBoundResourceQueryFn()
+    const { data: categoriesComboData } = useQuery({
+        queryFn: queryFn<CategoryCombosType>,
+        queryKey: [
+            {
+                resource: 'categoryCombos',
+                params: {
+                    filter: [
+                        `id:in:[${sectionCategoryCombos.map((cc) => cc.id)}]`,
+                    ],
+                    fields: 'id,displayName,categories[id,displayName,categoryOptions[id]],categoryOptionCombos[id,displayName,categoryOptions[id,displayName,categories[id]]]',
+                },
+            },
+        ] as const,
+    })
     const [catCombo, setCatCombo] = useState<string | undefined>(
-        categoryCombos?.at(0)?.id
+        categoriesComboData?.categoryCombos?.at(0)?.id
     )
 
     const isGrayedOut = (
@@ -80,13 +108,67 @@ export const GreyFieldsModal = ({
 
     const selectedCatComboData = useMemo(() => {
         return catCombo !== undefined
-            ? categoryCombos?.find((cc) => cc.id === catCombo)
-            : catCombo
-    }, [catCombo, categoryCombos])
+            ? categoriesComboData?.categoryCombos?.find(
+                  (cc) => cc.id === catCombo
+              )
+            : undefined
+    }, [catCombo, categoriesComboData?.categoryCombos])
 
     const selectedDataElements = dataElements?.filter(
         (de) => de.categoryCombo.id === catCombo
     )
+
+    const orderedCategoryOptionCombos = useMemo(() => {
+        if (!selectedCatComboData) {
+            return []
+        }
+
+        const orderings = selectedCatComboData.categories.map(
+            (c) => c.categoryOptions
+        )
+
+        const idToDimRank = new Map<string, { dim: number; rank: number }>()
+        orderings.forEach((opts, dim) => {
+            opts.forEach((o, rank) => {
+                idToDimRank.set(o.id, { dim, rank })
+            })
+        })
+
+        const keyFor = (
+            coc: (typeof selectedCatComboData.categoryOptionCombos)[number]
+        ) => {
+            const key = new Array(orderings.length).fill(
+                Number.POSITIVE_INFINITY
+            )
+            for (const opt of coc.categoryOptions) {
+                const info = idToDimRank.get(opt.id)
+                if (info) {
+                    // If multiple options somehow map to the same dim, keep the smallest rank
+                    if (info.rank < key[info.dim]) {
+                        key[info.dim] = info.rank
+                    }
+                }
+            }
+            return key
+        }
+
+        const keyed = selectedCatComboData.categoryOptionCombos.map((c) => ({
+            c,
+            k: keyFor(c),
+        }))
+        keyed.sort((a, b) => {
+            const len = Math.max(a.k.length, b.k.length)
+            for (let i = 0; i < len; i++) {
+                const diff = (a.k[i] ?? Infinity) - (b.k[i] ?? Infinity)
+                if (diff !== 0) {
+                    return diff
+                }
+            }
+            return a.c.displayName.localeCompare(b.c.displayName)
+        })
+
+        return keyed.map((x) => x.c)
+    }, [selectedCatComboData])
 
     const addCategoryOptionToCategory = (
         categoryOption: DisplayableModel & { categories: { id: string }[] },
@@ -118,18 +200,18 @@ export const GreyFieldsModal = ({
             categoryOptions: [] as { id: string; displayName: string }[],
         }))
 
-        selectedCatComboData.categoryOptionCombos.forEach((catOptionCombo) => {
+        orderedCategoryOptionCombos.forEach((catOptionCombo) => {
             catOptionCombo.categoryOptions.forEach((catOption) => {
                 addCategoryOptionToCategory(catOption, categories)
             })
         })
 
         return categories
-    }, [selectedCatComboData])
+    }, [orderedCategoryOptionCombos, selectedCatComboData])
 
     return (
         <Modal onClose={onClose} large>
-            <ModalTitle>{i18n.t('Manage grey fields')}</ModalTitle>
+            <ModalTitle>{i18n.t('Manage enabled/disabled fields')}</ModalTitle>
             <ModalContent>
                 <SingleSelect
                     dense
@@ -139,8 +221,8 @@ export const GreyFieldsModal = ({
                     selected={catCombo}
                     placeholder={i18n.t('Filter by category combination')}
                 >
-                    {categoryCombos &&
-                        categoryCombos.map((catCombo) => (
+                    {categoriesComboData?.categoryCombos &&
+                        categoriesComboData.categoryCombos.map((catCombo) => (
                             <SingleSelectOption
                                 key={catCombo.id}
                                 label={catCombo.displayName}
@@ -151,24 +233,28 @@ export const GreyFieldsModal = ({
                 <Table>
                     {categoriesWithCategoriesOptions.map((cat, index) => (
                         <TableHead key={cat.id}>
-                            <TableCellHead key={`${cat.id}-data-elements`}>
-                                {index ===
-                                categoriesWithCategoriesOptions.length - 1
-                                    ? i18n.t('Data elements')
-                                    : undefined}
-                            </TableCellHead>
-                            {cat.categoryOptions.map((catOption, index) => (
-                                <TableCellHead key={`${catOption.id}-${index}`}>
-                                    {catOption.displayName}
+                            <TableRow>
+                                <TableCellHead key={`${cat.id}-data-elements`}>
+                                    {index ===
+                                    categoriesWithCategoriesOptions.length - 1
+                                        ? i18n.t('Data elements')
+                                        : undefined}
                                 </TableCellHead>
-                            ))}
+                                {cat.categoryOptions.map((catOption, index) => (
+                                    <TableCellHead
+                                        key={`${catOption.id}-${index}`}
+                                    >
+                                        {catOption.displayName}
+                                    </TableCellHead>
+                                ))}
+                            </TableRow>
                         </TableHead>
                     ))}
                     <TableBody>
                         {selectedDataElements?.map((de) => (
                             <TableRow key={de.id}>
                                 <TableCell>{de.displayName}</TableCell>
-                                {selectedCatComboData?.categoryOptionCombos.map(
+                                {orderedCategoryOptionCombos.map(
                                     (catOptionCombo) => (
                                         <TableCell
                                             key={catOptionCombo.id}
@@ -218,7 +304,7 @@ export const GreyFieldsModal = ({
                             onClose()
                         }}
                     >
-                        {i18n.t('Update grey fields')}
+                        {i18n.t('Update')}
                     </Button>
 
                     <Button
