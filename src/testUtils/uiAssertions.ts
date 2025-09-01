@@ -118,9 +118,11 @@ const expectSelectToExistWithOptions = async (
     {
         selected = undefined,
         options = [],
+        disabled = false,
     }: {
         selected?: string
         options: { displayName: string }[]
+        disabled?: boolean
     },
     screen: RenderResult
 ) => {
@@ -130,6 +132,10 @@ const expectSelectToExistWithOptions = async (
     expect(selectInput).toBeVisible()
     if (selected) {
         expect(selectInput).toHaveTextContent(selected)
+    }
+    if (disabled) {
+        expect(selectInput.classList.contains('disabled')).toBe(true)
+        return
     }
     await userEvent.click(selectInput)
     const optionsWrapper = await screen.findByTestId(

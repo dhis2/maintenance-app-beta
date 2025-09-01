@@ -56,6 +56,7 @@ function OptionGroupSetFormFields() {
                         name="dataDimension"
                         label={i18n.t('Data dimension')}
                         type="checkbox"
+                        dataTest="formfields-dataDimension"
                     />
                 </StandardFormField>
             </StandardFormSection>
@@ -91,6 +92,7 @@ function OptionGroupSetFormFields() {
                                 optionGroupsInput.onChange([])
                                 // option groups are cleared when option set is changed
                             }}
+                            dataTest="formfields-optionSet"
                         />
                     </EditableFieldWrapper>
                 </StandardFormField>
@@ -98,6 +100,7 @@ function OptionGroupSetFormFields() {
                 {optionSetId ? (
                     <StandardFormField>
                         <ModelTransferField
+                            dataTest="optionGroups-transfer"
                             disabled={!optionSetId}
                             name="optionGroups"
                             query={{

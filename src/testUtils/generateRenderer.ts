@@ -41,7 +41,7 @@ export const generateRenderer =
 
         const { screen, ...rest } = renderer(routeOptions, renderOptions)
         await waitForElementToBeRemoved(() =>
-            screen.queryByTestId('dhis2-uicore-circularloader')
+            screen.queryAllByTestId('dhis2-uicore-circularloader')
         )
         return { screen, ...rest }
     }

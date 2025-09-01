@@ -10,6 +10,7 @@ const enterInputFieldValue = async (
     const input = within(field).getByRole('textbox') as HTMLInputElement
     await clearInputField(fieldName, screen)
     await userEvent.type(input, text)
+    await userEvent.tab()
 }
 const enterExpressionInModal = async (
     modal: HTMLElement,
