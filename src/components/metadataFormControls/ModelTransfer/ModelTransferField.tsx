@@ -24,6 +24,7 @@ type ModelTransferFieldProps = {
     | 'filterPlaceholderPicked'
     | 'maxSelections'
     | 'enableOrderChange'
+    | 'hideFilterInputPicked'
     | 'dataTest'
     | 'disabled'
 >
@@ -42,6 +43,7 @@ export function ModelTransferField({
     enableOrderChange,
     dataTest,
     filterUnassignedTo,
+    hideFilterInputPicked = false,
     disabled = false,
 }: ModelTransferFieldProps) {
     const { input, meta } = useField<DisplayableModel[]>(name, {
@@ -73,6 +75,7 @@ export function ModelTransferField({
                 maxSelections={maxSelections || 5000}
                 enableOrderChange={enableOrderChange}
                 dataTest={dataTest}
+                hideFilterInputPicked={hideFilterInputPicked}
                 disabled={disabled}
                 filterUnassignedTo={filterUnassignedTo}
             />
