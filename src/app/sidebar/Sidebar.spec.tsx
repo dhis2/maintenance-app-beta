@@ -7,6 +7,7 @@ import {
     useIsSectionAuthorizedPredicate,
     useIsSectionFeatureToggle,
 } from '../../lib'
+import { Section } from '../../types'
 import { Sidebar } from './Sidebar'
 
 const mockedUseIsSectionAuthorizedPredicate = jest.mocked(
@@ -164,8 +165,11 @@ describe('Sidebar', () => {
                 'Category combination',
                 'Category option combination',
             ]
+
+            const checkSection = (section: Section) =>
+                !unauthorizedSections.includes(section.title)
             mockedUseIsSectionAuthorizedPredicate.mockImplementation(
-                () => (section) => !unauthorizedSections.includes(section.title)
+                () => checkSection
             )
             const { queryByText, getByText } = renderSideBar()
             const expectedSubCategories = [
@@ -186,9 +190,10 @@ describe('Sidebar', () => {
         })
 
         it('should hide parent if all children are unauthorized', () => {
+            const checkSection = (section: Section) =>
+                !section.title.toLowerCase().includes('category')
             mockedUseIsSectionAuthorizedPredicate.mockImplementation(
-                () => (section) =>
-                    !section.title.toLowerCase().includes('category')
+                () => checkSection
             )
             const { queryByText } = renderSideBar()
             expect(queryByText('Categories')).toBeNull()
@@ -202,8 +207,10 @@ describe('Sidebar', () => {
                 'Category combination',
                 'Category option combination',
             ]
+            const checkSection = (section: Section) =>
+                !unauthorizedSections.includes(section.title)
             mockedUseIsSectionFeatureToggle.mockImplementation(
-                () => (section) => !unauthorizedSections.includes(section.title)
+                () => checkSection
             )
 
             const { queryByText, getByText } = renderSideBar()
@@ -225,9 +232,10 @@ describe('Sidebar', () => {
         })
 
         it('should hide parent if all children are unauthorized', () => {
+            const checkSection = (section: Section) =>
+                !section.title.toLowerCase().includes('category')
             mockedUseIsSectionFeatureToggle.mockImplementation(
-                () => (section) =>
-                    !section.title.toLowerCase().includes('category')
+                () => checkSection
             )
 
             const { queryByText } = renderSideBar()
