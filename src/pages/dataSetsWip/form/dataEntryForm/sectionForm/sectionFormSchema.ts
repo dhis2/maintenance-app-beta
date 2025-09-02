@@ -6,7 +6,11 @@ const { identifiable } = modelFormSchemas
 export const sectionFormSchema = identifiable.extend({
     description: z.string().optional(),
     dataElements: z.array(
-        z.object({ id: z.string(), displayName: z.string() })
+        z.object({
+            id: z.string(),
+            displayName: z.string(),
+            categoryCombo: z.object({ id: z.string() }),
+        })
     ),
     indicators: z.array(z.object({ id: z.string(), displayName: z.string() })),
     displayOptions: z
@@ -31,4 +35,3 @@ export const sectionFormSchema = identifiable.extend({
 })
 
 export const initialSectionValues = getDefaults(sectionFormSchema)
-export type SectionFormValues = typeof initialSectionValues
