@@ -481,4 +481,33 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    trackedEntityType: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'href',
+                'created',
+                'displayDescription',
+                'allowAuditLog',
+                'favorite',
+                'featureType',
+                DESCRIPTORS.formName,
+                'id',
+                'lastUpdatedBy.name',
+                'maxTeiCountToReturn',
+                'minAttributesRequiredToSearch',
+                'user.name',
+                DESCRIPTORS.shortName,
+            ],
+        },
+        filters: {
+            default: [],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
+    },
 } satisfies SectionListViewConfig<SectionName>
