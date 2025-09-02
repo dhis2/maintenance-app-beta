@@ -3,18 +3,25 @@ import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import { useIsSectionAuthorizedPredicate } from '../../lib'
+import {
+    useIsSectionAuthorizedPredicate,
+    useIsSectionFeatureToggle,
+} from '../../lib'
+import { Section } from '../../types'
 import { Sidebar } from './Sidebar'
 
 const mockedUseIsSectionAuthorizedPredicate = jest.mocked(
     useIsSectionAuthorizedPredicate
 )
 
+const mockedUseIsSectionFeatureToggle = jest.mocked(useIsSectionFeatureToggle)
+
 jest.mock('../../lib', () => {
     const originalModule = jest.requireActual('../../lib')
     return {
         ...originalModule,
         useIsSectionAuthorizedPredicate: jest.fn(),
+        useIsSectionFeatureToggle: jest.fn(),
         useCanCreateModelInSection: jest.fn(() => true),
     }
 })
@@ -32,6 +39,7 @@ describe('Sidebar', () => {
         mockedUseIsSectionAuthorizedPredicate.mockImplementation(
             () => () => true
         )
+        mockedUseIsSectionFeatureToggle.mockImplementation(() => () => true)
     })
     it('should display the list of top-level categories', () => {
         const { getByText } = renderSideBar()
@@ -157,8 +165,11 @@ describe('Sidebar', () => {
                 'Category combination',
                 'Category option combination',
             ]
+
+            const checkSection = (section: Section) =>
+                !unauthorizedSections.includes(section.title)
             mockedUseIsSectionAuthorizedPredicate.mockImplementation(
-                () => (section) => !unauthorizedSections.includes(section.title)
+                () => checkSection
             )
             const { queryByText, getByText } = renderSideBar()
             const expectedSubCategories = [
@@ -179,10 +190,54 @@ describe('Sidebar', () => {
         })
 
         it('should hide parent if all children are unauthorized', () => {
+            const checkSection = (section: Section) =>
+                !section.title.toLowerCase().includes('category')
             mockedUseIsSectionAuthorizedPredicate.mockImplementation(
-                () => (section) =>
-                    !section.title.toLowerCase().includes('category')
+                () => checkSection
             )
+            const { queryByText } = renderSideBar()
+            expect(queryByText('Categories')).toBeNull()
+        })
+    })
+
+    describe('version incompatible sections', () => {
+        it('should hide child links that link to non feature toggled sections', async () => {
+            const unauthorizedSections = [
+                'Category option',
+                'Category combination',
+                'Category option combination',
+            ]
+            const checkSection = (section: Section) =>
+                !unauthorizedSections.includes(section.title)
+            mockedUseIsSectionFeatureToggle.mockImplementation(
+                () => checkSection
+            )
+
+            const { queryByText, getByText } = renderSideBar()
+            const expectedSubCategories = [
+                'Overview',
+                'Category option group',
+                'Category option group set',
+            ]
+            expectedSubCategories.forEach((title) =>
+                expect(queryByText(title)).toBeNull()
+            )
+            await userEvent.click(getByText('Categories'))
+            expectedSubCategories.forEach((title) =>
+                expect(getByText(title)).not.toBeNull()
+            )
+            expect(queryByText('Category option')).toBeNull()
+            expect(queryByText('Category combination')).toBeNull()
+            expect(queryByText('Category option combination')).toBeNull()
+        })
+
+        it('should hide parent if all children are unauthorized', () => {
+            const checkSection = (section: Section) =>
+                !section.title.toLowerCase().includes('category')
+            mockedUseIsSectionFeatureToggle.mockImplementation(
+                () => checkSection
+            )
+
             const { queryByText } = renderSideBar()
             expect(queryByText('Categories')).toBeNull()
         })

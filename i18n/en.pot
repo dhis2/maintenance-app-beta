@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-25T12:21:51.518Z\n"
-"PO-Revision-Date: 2025-08-25T12:21:51.518Z\n"
+"POT-Creation-Date: 2025-09-01T13:56:27.252Z\n"
+"PO-Revision-Date: 2025-09-01T13:56:27.253Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -215,6 +215,11 @@ msgstr "Correct confirmation code must be entered to merge"
 msgid "Merge"
 msgstr "Merge"
 
+msgid "Merging {{count}} {{model}}..."
+msgid_plural "Merging {{count}} {{model}}..."
+msgstr[0] "Merging {{count}} {{model}}..."
+msgstr[1] "Merging {{count}} {{model}}..."
+
 msgid "Merging..."
 msgstr "Merging..."
 
@@ -251,11 +256,11 @@ msgstr "Add operators, variables, functions, and constants from right sidebar"
 msgid "Apply"
 msgstr "Apply"
 
+msgid "(No Value)"
+msgstr "(No Value)"
+
 msgid "Description (required)"
 msgstr "Description (required)"
-
-msgid "Help text, where is this used?"
-msgstr "Help text, where is this used?"
 
 msgid "Invalid expression"
 msgstr "Invalid expression"
@@ -271,6 +276,9 @@ msgstr "Filter available items"
 
 msgid "Filter selected items"
 msgstr "Filter selected items"
+
+msgid "Show only unassigned items"
+msgstr "Show only unassigned items"
 
 msgid "Refresh list"
 msgstr "Refresh list"
@@ -442,6 +450,9 @@ msgstr "Data element group set"
 
 msgid "Data set"
 msgstr "Data set"
+
+msgid "Search by form name"
+msgstr "Search by form name"
 
 msgid "Search by name, code or ID"
 msgstr "Search by name, code or ID"
@@ -1292,6 +1303,11 @@ msgstr "Filter available categories"
 msgid "Filter selected categories"
 msgstr "Filter selected categories"
 
+msgid "{{count}} category option combinations will be generated."
+msgid_plural "{{count}} category option combinations will be generated."
+msgstr[0] "{{count}} category option combinations will be generated."
+msgstr[1] "{{count}} category option combinations will be generated."
+
 msgid "More than 4 Categories"
 msgstr "More than 4 Categories"
 
@@ -1462,6 +1478,16 @@ msgid ""
 msgstr ""
 "What should happen to the source category options after the merge is "
 "complete?"
+
+msgid "Keep {{ count }} source category options"
+msgid_plural "Keep {{ count }} source category options"
+msgstr[0] "Keep {{ count }} source category options"
+msgstr[1] "Keep {{ count }} source category options"
+
+msgid "Delete {{ count }} source category options"
+msgid_plural "Delete {{ count }} source category options"
+msgstr[0] "Delete {{ count }} source category options"
+msgstr[1] "Delete {{ count }} source category options"
 
 msgid "Available data element groups"
 msgstr "Available data element groups"
@@ -1848,6 +1874,26 @@ msgstr "Only applied to section forms using multiple organisation units"
 msgid "Configure which organisation units can collect data for this data set."
 msgstr "Configure which organisation units can collect data for this data set."
 
+msgid "Change period type"
+msgstr "Change period type"
+
+msgid ""
+"Changing the period type will make previously entered data for this data "
+"set not appear in the data entry app. This can lead to duplicate data entry."
+msgstr ""
+"Changing the period type will make previously entered data for this data "
+"set not appear in the data entry app. This can lead to duplicate data entry."
+
+msgid ""
+"Are you sure you want to change the period type to "
+"{{preselectedPeriodType}}?"
+msgstr ""
+"Are you sure you want to change the period type to "
+"{{preselectedPeriodType}}?"
+
+msgid "Yes, change"
+msgstr "Yes, change"
+
 msgid "Configure data entry periods"
 msgstr "Configure data entry periods"
 
@@ -2069,6 +2115,15 @@ msgstr "Section data elements"
 msgid "Choose what data is collected for this section."
 msgstr "Choose what data is collected for this section."
 
+msgid "Filter by category combination"
+msgstr "Filter by category combination"
+
+msgid "<No filter>"
+msgstr "<No filter>"
+
+msgid "Manage enabled/disabled fields"
+msgstr "Manage enabled/disabled fields"
+
 msgid "Section indicators"
 msgstr "Section indicators"
 
@@ -2107,6 +2162,18 @@ msgstr "Save section"
 
 msgid "Saving a section does not save other changes to the data set"
 msgstr "Saving a section does not save other changes to the data set"
+
+msgid "Manage grey fields"
+msgstr "Manage grey fields"
+
+msgid "Disabled"
+msgstr "Disabled"
+
+msgid "Enabled"
+msgstr "Enabled"
+
+msgid "Update grey fields"
+msgstr "Update grey fields"
 
 msgid "Add period entry rule"
 msgstr "Add period entry rule"
@@ -2267,6 +2334,16 @@ msgstr ""
 "What should happen to the source indicator types after the merge is "
 "complete?"
 
+msgid "Keep {{ count }} source indicator types"
+msgid_plural "Keep {{ count }} source indicator types"
+msgstr[0] "Keep {{ count }} source indicator types"
+msgstr[1] "Keep {{ count }} source indicator types"
+
+msgid "Delete {{ count }} source indicator types"
+msgid_plural "Delete {{ count }} source indicator types"
+msgstr[0] "Delete {{ count }} source indicator types"
+msgstr[1] "Delete {{ count }} source indicator types"
+
 msgid "Conflicting factors"
 msgstr "Conflicting factors"
 
@@ -2287,6 +2364,9 @@ msgstr "Denominator Expression"
 
 msgid "Edit denominator expression"
 msgstr "Edit denominator expression"
+
+msgid "Summarise what this denominator expression measures."
+msgstr "Summarise what this denominator expression measures."
 
 msgid "Set up the basic information for this indicator."
 msgstr "Set up the basic information for this indicator."
@@ -2330,9 +2410,6 @@ msgstr ""
 "Select legends to visually categorize values for this indicator in data "
 "entry and analytics apps."
 
-msgid "Chosen legends"
-msgstr "Chosen legends"
-
 msgid "Mapping Settings"
 msgstr "Mapping Settings"
 
@@ -2362,6 +2439,9 @@ msgstr "Numerator Expression"
 
 msgid "Edit numerator expression"
 msgstr "Edit numerator expression"
+
+msgid "Summarise what this numerator expression measures."
+msgstr "Summarise what this numerator expression measures."
 
 msgid "Indicators Form"
 msgstr "Indicators Form"
@@ -2428,6 +2508,16 @@ msgstr "No indicators available. Remove one from source."
 
 msgid "What should happen to the source indicators after the merge is complete?"
 msgstr "What should happen to the source indicators after the merge is complete?"
+
+msgid "Keep {{ count }} source indicators"
+msgid_plural "Keep {{ count }} source indicators"
+msgstr[0] "Keep {{ count }} source indicators"
+msgstr[1] "Keep {{ count }} source indicators"
+
+msgid "Delete {{ count }} source indicators"
+msgid_plural "Delete {{ count }} source indicators"
+msgstr[0] "Delete {{ count }} source indicators"
+msgstr[1] "Delete {{ count }} source indicators"
 
 msgid "Set up the basic information for this option group set."
 msgstr "Set up the basic information for this option group set."
@@ -2954,6 +3044,11 @@ msgstr "Delete Mapping"
 
 msgid "This action cannot be undone."
 msgstr "This action cannot be undone."
+
+msgid "All mappings ({{count}}) will be removed."
+msgid_plural "All mappings ({{count}}) will be removed."
+msgstr[0] "All mappings ({{count}}) will be removed."
+msgstr[1] "All mappings ({{count}}) will be removed."
 
 msgid "Are you sure you want to delete this program mapping configuration?"
 msgstr "Are you sure you want to delete this program mapping configuration?"

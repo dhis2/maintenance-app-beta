@@ -431,6 +431,7 @@ export const NON_SCHEMA_SECTION = {
         title: i18n.t('Program disaggregation'),
         titlePlural: i18n.t('Program disaggregations'),
         parentSectionKey: 'other',
+        minApiVersion: 43,
         authorities: [
             {
                 type: SchemaAuthorityType.CREATE_PUBLIC,
