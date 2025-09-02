@@ -471,7 +471,6 @@ export const modelListViewsConfig = {
             ],
             available: [
                 'href',
-                'code',
                 'created',
                 'displayDescription',
                 'allowAuditLog',
