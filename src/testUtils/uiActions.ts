@@ -8,8 +8,36 @@ const enterInputFieldValue = async (
 ) => {
     const field = screen.getByTestId(`formfields-${fieldName}`)
     const input = within(field).getByRole('textbox') as HTMLInputElement
-    clearInputField(fieldName, screen)
+    await clearInputField(fieldName, screen)
     await userEvent.type(input, text)
+}
+const enterExpressionInModal = async (
+    modal: HTMLElement,
+    anExpression: string
+) => {
+    expect(modal).toBeVisible()
+    const input = within(modal).getByRole('textbox') as HTMLInputElement
+    await userEvent.type(input, anExpression)
+    await userEvent.click(
+        within(modal).getByTestId('expression-builder-modal-info')
+    )
+}
+
+const applyNewExpressionWithinModal = async (
+    fieldName: string,
+    anExpression: string,
+    screen: RenderResult
+) => {
+    await userEvent.click(
+        screen.getByTestId(`edit-${fieldName}-expression-button`)
+    )
+    const editNumeratorModal = await screen.findByTestId(
+        `expression-builder-modal`
+    )
+    await uiActions.enterExpressionInModal(editNumeratorModal, anExpression)
+    await userEvent.click(
+        within(editNumeratorModal).getByTestId('apply-expression-button')
+    )
 }
 const clearInputField = async (fieldName: string, screen: RenderResult) => {
     const field = screen.getByTestId(`formfields-${fieldName}`)
@@ -163,4 +191,6 @@ export const uiActions = {
     // pickColor, Need to fix this
     clickOnCheckboxField,
     pickRadioField,
+    enterExpressionInModal,
+    applyNewExpressionWithinModal,
 }

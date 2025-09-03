@@ -134,10 +134,16 @@ describe('Indicators form tests', () => {
                 'Required',
                 screen
             )
+            await userEvent.click(
+                screen.getByTestId('edit-numerator-expression-button')
+            )
             uiAssertions.expectFieldToHaveError(
                 'formfields-numerator',
                 'Required',
                 screen
+            )
+            await userEvent.click(
+                screen.getByTestId('edit-denominator-expression-button')
             )
             uiAssertions.expectFieldToHaveError(
                 'formfields-denominator',
@@ -196,20 +202,49 @@ describe('Indicators form tests', () => {
                 },
             })
             const anExpression = faker.finance.routingNumber()
-            await uiActions.enterInputFieldValue(
-                `numerator`,
-                anExpression,
-                screen
+            await userEvent.click(
+                screen.getByTestId('edit-numerator-expression-button')
             )
-            await userEvent.click(screen.getByTestId(`formfields-numerator`))
+            const editModal = await screen.findByTestId(
+                `expression-builder-modal`
+            )
+            await uiActions.enterExpressionInModal(editModal, anExpression)
 
-            uiAssertions.expectFieldToHaveError(
-                `formfields-numerator`,
-                'Invalid expression',
-                screen
+            const error = within(editModal).getByTestId(
+                `expression-builder-modal-input-validation`
             )
-            await uiActions.submitForm(screen)
-            expect(createMock).not.toHaveBeenCalled()
+            expect(error).toBeVisible()
+            expect(error).toHaveTextContent('Invalid expression')
+
+            expect(
+                within(editModal).getByTestId('apply-expression-button')
+            ).toBeDisabled()
+        })
+
+        it('should not change the numerator expression if cancel is pressed', async () => {
+            const { screen } = await renderForm({
+                customTestData: {
+                    'indicators/expression/description': () => ({
+                        status: 'OK',
+                    }),
+                },
+            })
+            const anExpression = faker.finance.routingNumber()
+            await userEvent.click(
+                screen.getByTestId('edit-numerator-expression-button')
+            )
+            const editModal = await screen.findByTestId(
+                `expression-builder-modal`
+            )
+            await uiActions.enterExpressionInModal(editModal, anExpression)
+
+            expect(
+                within(editModal).getByTestId('apply-expression-button')
+            ).toBeEnabled()
+            await userEvent.click(
+                within(editModal).getByTestId('cancel-expression-button')
+            )
+            uiAssertions.expectTextAreaFieldToExist('numerator', null, screen)
         })
 
         it('should show an error if denominator expression is malformed', async () => {
@@ -220,21 +255,51 @@ describe('Indicators form tests', () => {
                     }),
                 },
             })
-            const anExpression = faker.finance.routingNumber()
-            await uiActions.enterInputFieldValue(
-                `denominator`,
-                anExpression,
-                screen
-            )
-            await userEvent.click(screen.getByTestId(`formfields-denominator`))
 
-            uiAssertions.expectFieldToHaveError(
-                `formfields-denominator`,
-                'Invalid expression',
-                screen
+            const anExpression = faker.finance.routingNumber()
+            await userEvent.click(
+                screen.getByTestId('edit-numerator-expression-button')
             )
-            await uiActions.submitForm(screen)
-            expect(createMock).not.toHaveBeenCalled()
+            const editModal = await screen.findByTestId(
+                `expression-builder-modal`
+            )
+            await uiActions.enterExpressionInModal(editModal, anExpression)
+
+            const error = within(editModal).getByTestId(
+                `expression-builder-modal-input-validation`
+            )
+            expect(error).toBeVisible()
+            expect(error).toHaveTextContent('Invalid expression')
+
+            expect(
+                within(editModal).getByTestId('apply-expression-button')
+            ).toBeDisabled()
+        })
+
+        it('should not change the denominator expression if cancel is pressed', async () => {
+            const { screen } = await renderForm({
+                customTestData: {
+                    'indicators/expression/description': () => ({
+                        status: 'OK',
+                    }),
+                },
+            })
+            const anExpression = faker.finance.routingNumber()
+            await userEvent.click(
+                screen.getByTestId('edit-denominator-expression-button')
+            )
+            const editModal = await screen.findByTestId(
+                `expression-builder-modal`
+            )
+            await uiActions.enterExpressionInModal(editModal, anExpression)
+
+            expect(
+                within(editModal).getByTestId('apply-expression-button')
+            ).toBeEnabled()
+            await userEvent.click(
+                within(editModal).getByTestId('cancel-expression-button')
+            )
+            uiAssertions.expectTextAreaFieldToExist('denominator', null, screen)
         })
 
         it('should show an error if URL field is invalid', async () => {
@@ -367,7 +432,6 @@ describe('Indicators form tests', () => {
 
             uiAssertions.expectCheckboxFieldToExist('annualized', false, screen)
 
-            // Expression Fields
             uiAssertions.expectTextAreaFieldToExist('numerator', null, screen)
             uiAssertions.expectTextAreaFieldToExist('denominator', null, screen)
             uiAssertions.expectTextAreaFieldToExist(
@@ -414,7 +478,6 @@ describe('Indicators form tests', () => {
                 `/${section.namePlural}`
             )
         })
-
         it('should submit the basic information and expressions', async () => {
             const aName = faker.internet.userName()
             const aShortName = faker.internet.userName()
@@ -447,16 +510,17 @@ describe('Indicators form tests', () => {
                 0,
                 screen
             )
-            await uiActions.enterInputFieldValue(
+            await uiActions.applyNewExpressionWithinModal(
                 'numerator',
                 aNumerator,
                 screen
             )
-            await uiActions.enterInputFieldValue(
+            await uiActions.applyNewExpressionWithinModal(
                 'denominator',
                 aDenominator,
                 screen
             )
+
             await uiActions.enterInputFieldValue(
                 'numeratorDescription',
                 aNumeratorDescription,
@@ -520,16 +584,17 @@ describe('Indicators form tests', () => {
                 0,
                 screen
             )
-            await uiActions.enterInputFieldValue(
+            await uiActions.applyNewExpressionWithinModal(
                 'numerator',
                 aNumerator,
                 screen
             )
-            await uiActions.enterInputFieldValue(
+            await uiActions.applyNewExpressionWithinModal(
                 'denominator',
                 aDenominator,
                 screen
             )
+
             await uiActions.enterInputFieldValue(
                 'numeratorDescription',
                 aNumeratorDescription,
@@ -608,16 +673,17 @@ describe('Indicators form tests', () => {
                 0,
                 screen
             )
-            await uiActions.enterInputFieldValue(
+            await uiActions.applyNewExpressionWithinModal(
                 'numerator',
                 aNumerator,
                 screen
             )
-            await uiActions.enterInputFieldValue(
+            await uiActions.applyNewExpressionWithinModal(
                 'denominator',
                 aDenominator,
                 screen
             )
+
             await uiActions.enterInputFieldValue(
                 'numeratorDescription',
                 aNumeratorDescription,
@@ -688,16 +754,18 @@ describe('Indicators form tests', () => {
                 0,
                 screen
             )
-            await uiActions.enterInputFieldValue(
+
+            await uiActions.applyNewExpressionWithinModal(
                 'numerator',
                 aNumerator,
                 screen
             )
-            await uiActions.enterInputFieldValue(
+            await uiActions.applyNewExpressionWithinModal(
                 'denominator',
                 aDenominator,
                 screen
             )
+
             await uiActions.enterInputFieldValue(
                 'numeratorDescription',
                 aNumeratorDescription,
@@ -848,7 +916,14 @@ describe('Indicators form tests', () => {
                 indicatorTypes,
                 legendSets,
                 attributes,
-            } = await renderForm()
+            } = await renderForm({
+                customTestData: {
+                    'indicators/expression/description': () => ({
+                        status: 'OK',
+                        description: 'A description',
+                    }),
+                },
+            })
 
             uiAssertions.expectNameFieldExist(indicator.name, screen)
             uiAssertions.expectInputFieldToExist(
@@ -898,11 +973,20 @@ describe('Indicators form tests', () => {
                 screen
             )
 
+            expect(
+                screen.getByTestId('numerator-expression-description')
+            ).toHaveTextContent('A description')
+
             uiAssertions.expectTextAreaFieldToExist(
                 'numerator',
                 indicator.numerator,
                 screen
             )
+
+            expect(
+                screen.getByTestId('denominator-expression-description')
+            ).toHaveTextContent('A description')
+
             uiAssertions.expectTextAreaFieldToExist(
                 'denominator',
                 indicator.denominator,

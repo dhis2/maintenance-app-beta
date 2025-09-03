@@ -7,6 +7,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "POT-Creation-Date: 2025-08-27T11:13:59.823Z\n"
 "PO-Revision-Date: 2025-08-27T11:13:59.824Z\n"
+"POT-Creation-Date: 2025-08-25T12:21:51.518Z\n"
+"PO-Revision-Date: 2025-08-25T12:21:51.518Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -184,8 +186,12 @@ msgstr "Search for organisation units"
 msgid "Select organisation units"
 msgstr "Select organisation units"
 
-msgid "Often used in reports where space is limited."
-msgstr "Often used in reports where space is limited."
+msgid ""
+"A short, unique name (max 50 characters). Displayed in analysis apps where "
+"space is limited, depending on user or system settings."
+msgstr ""
+"A short, unique name (max 50 characters). Displayed in analysis apps where "
+"space is limited, depending on user or system settings."
 
 msgid "Short name"
 msgstr "Short name"
@@ -237,6 +243,21 @@ msgstr "No potential targets available. Remove an item from sources."
 
 msgid "At least one source is required"
 msgstr "At least one source is required"
+
+msgid "Valid expression"
+msgstr "Valid expression"
+
+msgid "Add operators, variables, functions, and constants from right sidebar"
+msgstr "Add operators, variables, functions, and constants from right sidebar"
+
+msgid "Apply"
+msgstr "Apply"
+
+msgid "Description (required)"
+msgstr "Description (required)"
+
+msgid "Help text, where is this used?"
+msgstr "Help text, where is this used?"
 
 msgid "Invalid expression"
 msgstr "Invalid expression"
@@ -2310,11 +2331,11 @@ msgstr "The indicator merge operation is complete."
 msgid "All selected indicators were merged successfully."
 msgstr "All selected indicators were merged successfully."
 
-msgid "Denominator description"
-msgstr "Denominator description"
+msgid "Denominator Expression"
+msgstr "Denominator Expression"
 
-msgid "Edit denominator"
-msgstr "Edit denominator"
+msgid "Edit denominator expression"
+msgstr "Edit denominator expression"
 
 msgid "Set up the basic information for this indicator."
 msgstr "Set up the basic information for this indicator."
@@ -2322,59 +2343,98 @@ msgstr "Set up the basic information for this indicator."
 msgid "Explain the purpose of this indicator."
 msgstr "Explain the purpose of this indicator."
 
-msgid "Indicator expressions"
-msgstr "Indicator expressions"
+msgid "Calculation details"
+msgstr "Calculation details"
 
-msgid "Configure the expressions and type of indicator."
-msgstr "Configure the expressions and type of indicator."
+msgid ""
+"Define how the indicator is calculated and how it's result will be "
+"displayed."
+msgstr ""
+"Define how the indicator is calculated and how it's result will be "
+"displayed."
 
-msgid "Indicator options"
-msgstr "Indicator options"
+msgid ""
+"Select how the indicator result should be expressed (per cent, per "
+"thousand, etc.)"
+msgstr ""
+"Select how the indicator result should be expressed (per cent, per "
+"thousand, etc.)"
 
-msgid "Configure how this indicator is calculated and displayed."
-msgstr "Configure how this indicator is calculated and displayed."
+msgid "Use annualized calculation"
+msgstr "Use annualized calculation"
 
-msgid "Annualized"
-msgstr "Annualized"
+msgid "Select how many decimal places to display in outputs for this indicator"
+msgstr "Select how many decimal places to display in outputs for this indicator"
+
+msgid "Number of decimal places to show"
+msgstr "Number of decimal places to show"
 
 msgid "Select number of decimals"
 msgstr "Select number of decimals"
 
-msgid "Aggregate export category option combo"
-msgstr "Aggregate export category option combo"
+msgid ""
+"Select legends to visually categorize values for this indicator in data "
+"entry and analytics apps."
+msgstr ""
+"Select legends to visually categorize values for this indicator in data "
+"entry and analytics apps."
 
-msgid "Aggregate export attribute option combo"
-msgstr "Aggregate export attribute option combo"
+msgid "Chosen legends"
+msgstr "Chosen legends"
 
-msgid "Set up the program indicator legends."
-msgstr "Set up the program indicator legends."
+msgid "Mapping Settings"
+msgstr "Mapping Settings"
 
-msgid "Indicator type (required)"
-msgstr "Indicator type (required)"
+msgid ""
+"Configure how this indicator links to specific category and attribute "
+"combinations for data export."
+msgstr ""
+"Configure how this indicator links to specific category and attribute "
+"combinations for data export."
 
-msgid "Numerator description"
-msgstr "Numerator description"
+msgid ""
+"Map this indicator to a specific category option combinations when "
+"exporting aggregate data."
+msgstr ""
+"Map this indicator to a specific category option combinations when "
+"exporting aggregate data."
 
-msgid "Edit numerator"
-msgstr "Edit numerator"
+msgid ""
+"Map this indicator to a specific attribute option combinations when "
+"exporting aggregate data."
+msgstr ""
+"Map this indicator to a specific attribute option combinations when "
+"exporting aggregate data."
+
+msgid "Numerator Expression"
+msgstr "Numerator Expression"
+
+msgid "Edit numerator expression"
+msgstr "Edit numerator expression"
 
 msgid "Indicators Form"
 msgstr "Indicators Form"
 
-msgid "Expressions"
-msgstr "Expressions"
+msgid "Numerator description"
+msgstr "Numerator description"
 
 msgid "Numerator"
 msgstr "Numerator"
 
+msgid "Denominator description"
+msgstr "Denominator description"
+
 msgid "Denominator"
 msgstr "Denominator"
 
-msgid "Options"
-msgstr "Options"
+msgid "Annualized"
+msgstr "Annualized"
 
 msgid "Legend sets"
 msgstr "Legend sets"
+
+msgid "Mapping settings"
+msgstr "Mapping settings"
 
 msgid "Numerator is required"
 msgstr "Numerator is required"
@@ -2846,9 +2906,6 @@ msgstr "Add categories from a category combo"
 msgid "Rename category mapping"
 msgstr "Rename category mapping"
 
-msgid "Apply"
-msgstr "Apply"
-
 msgid "{{- categoryMappingName}} mapping will be removed on save"
 msgstr "{{- categoryMappingName}} mapping will be removed on save"
 
@@ -3100,6 +3157,9 @@ msgstr "Set up advanced properties for this program indicator."
 
 msgid "Show program indicators in data entry forms"
 msgstr "Show program indicators in data entry forms"
+
+msgid "Set up the program indicator legends."
+msgstr "Set up the program indicator legends."
 
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"

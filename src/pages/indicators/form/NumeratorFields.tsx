@@ -1,35 +1,18 @@
 import i18n from '@dhis2/d2-i18n'
-import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { Field as FieldRFF } from 'react-final-form'
-import { StandardFormField } from '../../../components'
-import { ExpressionBuilderField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderField'
+import { ExpressionBuilderWithModalField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderWithModalField'
 
-function NumeratorFields() {
+export default function NumeratorFields() {
     return (
-        <>
-            <StandardFormField>
-                <FieldRFF<string | undefined>
-                    component={InputFieldFF}
-                    inputWidth="400px"
-                    required
-                    name="numeratorDescription"
-                    dataTest="formfields-numeratorDescription"
-                    label={i18n.t('Numerator description')}
-                />
-            </StandardFormField>
-
-            <StandardFormField>
-                <ExpressionBuilderField
-                    name="numerator"
-                    label={i18n.t('Edit numerator')}
-                    validationResource="indicators/expression/description"
-                    required
-                    dataTest="formfields-numerator"
-                />
-            </StandardFormField>
-        </>
+        <ExpressionBuilderWithModalField
+            fieldName="numerator"
+            descriptionFieldName="numeratorDescription"
+            modalTitle={i18n.t('Numerator Expression')}
+            editButtonText={i18n.t('Edit numerator expression')}
+            validationResource="indicators/expression/description"
+            helpText={i18n.t(
+                'Summarise what this numerator expression measures.'
+            )}
+        />
     )
 }
-
-export default NumeratorFields
