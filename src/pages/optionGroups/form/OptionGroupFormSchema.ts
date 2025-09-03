@@ -15,9 +15,11 @@ const optionGroupBaseSchema = z.object({
             id: z.string(),
         })
     ),
-    optionSet: z.object({
-        id: z.string(),
-    }),
+    optionSet: z
+        .object({
+            id: z.string(),
+        })
+        .optional(),
 })
 
 export const optionGroupFormSchema = identifiable.merge(optionGroupBaseSchema)

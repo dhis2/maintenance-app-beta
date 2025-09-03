@@ -12,5 +12,4 @@ export const fieldFilters = [
     'description',
     'options[id,name,displayName]',
     'optionSet[id,displayName]',
-    'style[color,icon]',
 ] as const

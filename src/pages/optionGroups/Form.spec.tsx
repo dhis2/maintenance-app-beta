@@ -84,11 +84,6 @@ describe('OptionGroups form tests', () => {
                 'Required',
                 screen
             )
-            uiAssertions.expectFieldToHaveError(
-                'formfields-optionSet',
-                'Required',
-                screen
-            )
         })
 
         it('should show error if name too long', async () => {

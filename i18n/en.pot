@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-26T15:23:06.317Z\n"
-"PO-Revision-Date: 2025-08-26T15:23:06.318Z\n"
+"POT-Creation-Date: 2025-08-27T11:13:59.823Z\n"
+"PO-Revision-Date: 2025-08-27T11:13:59.824Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -253,6 +253,9 @@ msgstr "Filter available items"
 msgid "Filter selected items"
 msgstr "Filter selected items"
 
+msgid "Show only unassigned items"
+msgstr "Show only unassigned items"
+
 msgid "Refresh list"
 msgstr "Refresh list"
 
@@ -423,6 +426,9 @@ msgstr "Data element group set"
 
 msgid "Data set"
 msgstr "Data set"
+
+msgid "Search by form name"
+msgstr "Search by form name"
 
 msgid "Search by name, code or ID"
 msgstr "Search by name, code or ID"
@@ -1829,6 +1835,26 @@ msgstr "Only applied to section forms using multiple organisation units"
 msgid "Configure which organisation units can collect data for this data set."
 msgstr "Configure which organisation units can collect data for this data set."
 
+msgid "Change period type"
+msgstr "Change period type"
+
+msgid ""
+"Changing the period type will make previously entered data for this data "
+"set not appear in the data entry app. This can lead to duplicate data entry."
+msgstr ""
+"Changing the period type will make previously entered data for this data "
+"set not appear in the data entry app. This can lead to duplicate data entry."
+
+msgid ""
+"Are you sure you want to change the period type to "
+"{{preselectedPeriodType}}?"
+msgstr ""
+"Are you sure you want to change the period type to "
+"{{preselectedPeriodType}}?"
+
+msgid "Yes, change"
+msgstr "Yes, change"
+
 msgid "Configure data entry periods"
 msgstr "Configure data entry periods"
 
@@ -2050,6 +2076,15 @@ msgstr "Section data elements"
 msgid "Choose what data is collected for this section."
 msgstr "Choose what data is collected for this section."
 
+msgid "Filter by category combination"
+msgstr "Filter by category combination"
+
+msgid "<No filter>"
+msgstr "<No filter>"
+
+msgid "Manage enabled/disabled fields"
+msgstr "Manage enabled/disabled fields"
+
 msgid "Section indicators"
 msgstr "Section indicators"
 
@@ -2088,6 +2123,18 @@ msgstr "Save section"
 
 msgid "Saving a section does not save other changes to the data set"
 msgstr "Saving a section does not save other changes to the data set"
+
+msgid "Manage grey fields"
+msgstr "Manage grey fields"
+
+msgid "Disabled"
+msgstr "Disabled"
+
+msgid "Enabled"
+msgstr "Enabled"
+
+msgid "Update grey fields"
+msgstr "Update grey fields"
 
 msgid "Add period entry rule"
 msgstr "Add period entry rule"
