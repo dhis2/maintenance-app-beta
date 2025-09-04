@@ -9,7 +9,7 @@ const enterInputFieldValue = async (
 ) => {
     const field = screen.getByTestId(`formfields-${fieldName}`)
     const input = within(field).getByRole(type ?? 'textbox') as HTMLInputElement
-    await await clearInputField(fieldName, screen, type ?? 'textbox')
+    await clearInputField(fieldName, screen, type ?? 'textbox')
     await userEvent.type(input, text)
     await userEvent.tab()
 }
