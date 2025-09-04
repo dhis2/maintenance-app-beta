@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-25T12:21:51.518Z\n"
-"PO-Revision-Date: 2025-08-25T12:21:51.518Z\n"
+"POT-Creation-Date: 2025-08-26T14:47:52.498Z\n"
+"PO-Revision-Date: 2025-08-26T14:47:52.499Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1244,8 +1244,171 @@ msgstr "Program name"
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
 
+msgid "Mandatory"
+msgstr "Mandatory"
+
+msgid "Unique"
+msgstr "Unique"
+
+msgid "Category attribute"
+msgstr "Category attribute"
+
+msgid "Category option attribute"
+msgstr "Category option attribute"
+
+msgid "Category option combo attribute"
+msgstr "Category option combo attribute"
+
+msgid "Category option group attribute"
+msgstr "Category option group attribute"
+
+msgid "Category option group set attribute"
+msgstr "Category option group set attribute"
+
+msgid "Constant attribute"
+msgstr "Constant attribute"
+
+msgid "Data element attribute"
+msgstr "Data element attribute"
+
+msgid "Data element group attribute"
+msgstr "Data element group attribute"
+
+msgid "Data element group set attribute"
+msgstr "Data element group set attribute"
+
+msgid "Data set attribute"
+msgstr "Data set attribute"
+
+msgid "Document attribute"
+msgstr "Document attribute"
+
+msgid "Event chart attribute"
+msgstr "Event chart attribute"
+
+msgid "Event report attribute"
+msgstr "Event report attribute"
+
+msgid "Indicator attribute"
+msgstr "Indicator attribute"
+
+msgid "Indicator group attribute"
+msgstr "Indicator group attribute"
+
+msgid "Legend set attribute"
+msgstr "Legend set attribute"
+
+msgid "Map attribute"
+msgstr "Map attribute"
+
+msgid "Option attribute"
+msgstr "Option attribute"
+
+msgid "Option set attribute"
+msgstr "Option set attribute"
+
+msgid "Organisation unit attribute"
+msgstr "Organisation unit attribute"
+
+msgid "Organisation unit group attribute"
+msgstr "Organisation unit group attribute"
+
+msgid "Organisation unit group set attribute"
+msgstr "Organisation unit group set attribute"
+
+msgid "Program attribute"
+msgstr "Program attribute"
+
+msgid "Program indicator attribute"
+msgstr "Program indicator attribute"
+
+msgid "Program stage attribute"
+msgstr "Program stage attribute"
+
+msgid "Relationship type attribute"
+msgstr "Relationship type attribute"
+
+msgid "Section attribute"
+msgstr "Section attribute"
+
+msgid "SQL view attribute"
+msgstr "SQL view attribute"
+
+msgid "Tracked entity attribute attribute"
+msgstr "Tracked entity attribute attribute"
+
+msgid "Tracked entity type attribute"
+msgstr "Tracked entity type attribute"
+
+msgid "User attribute"
+msgstr "User attribute"
+
+msgid "User group attribute"
+msgstr "User group attribute"
+
+msgid "Validation rule attribute"
+msgstr "Validation rule attribute"
+
+msgid "Validation rule group attribute"
+msgstr "Validation rule group attribute"
+
+msgid "Visualization attribute"
+msgstr "Visualization attribute"
+
+msgid "Category option combo"
+msgstr "Category option combo"
+
+msgid "Document"
+msgstr "Document"
+
+msgid "Event chart"
+msgstr "Event chart"
+
+msgid "Event report"
+msgstr "Event report"
+
+msgid "Legend set"
+msgstr "Legend set"
+
+msgid "Map"
+msgstr "Map"
+
+msgid "Option"
+msgstr "Option"
+
+msgid "User"
+msgstr "User"
+
+msgid "Visualization"
+msgstr "Visualization"
+
+msgid "Objects to which this attribute can be applied"
+msgstr "Objects to which this attribute can be applied"
+
+msgid "Restrict attribute values using an option set"
+msgstr "Restrict attribute values using an option set"
+
+msgid "The type of data that will be recorded."
+msgstr "The type of data that will be recorded."
+
+msgid ""
+"Disabled as the value type must match the value type of the selected option "
+"set"
+msgstr ""
+"Disabled as the value type must match the value type of the selected option "
+"set"
+
 msgid "Basic information"
 msgstr "Basic information"
+
+msgid "Set up the basic information for this attribute."
+msgstr "Set up the basic information for this attribute."
+
+msgid "Explain the purpose of this attribute."
+msgstr "Explain the purpose of this attribute."
+
+msgid "Attribute type"
+msgstr "Attribute type"
 
 msgid "Set up the basic information for this category."
 msgstr "Set up the basic information for this category."
@@ -1563,16 +1726,6 @@ msgstr "Url"
 msgid "A web link that provides extra information."
 msgstr "A web link that provides extra information."
 
-msgid "The type of data that will be recorded."
-msgstr "The type of data that will be recorded."
-
-msgid ""
-"Disabled as the value type must match the value type of the selected option "
-"set"
-msgstr ""
-"Disabled as the value type must match the value type of the selected option "
-"set"
-
 msgid "Store zero data values"
 msgstr "Store zero data values"
 
@@ -1587,9 +1740,6 @@ msgstr "Disaggregation and Option sets"
 
 msgid "Set up disaggregation and predefined options."
 msgstr "Set up disaggregation and predefined options."
-
-msgid "Legend set"
-msgstr "Legend set"
 
 msgid ""
 "Visualize values for this data element in Analytics app. Multiple legends "
@@ -1847,6 +1997,26 @@ msgstr "Only applied to section forms using multiple organisation units"
 
 msgid "Configure which organisation units can collect data for this data set."
 msgstr "Configure which organisation units can collect data for this data set."
+
+msgid "Change period type"
+msgstr "Change period type"
+
+msgid ""
+"Changing the period type will make previously entered data for this data "
+"set not appear in the data entry app. This can lead to duplicate data entry."
+msgstr ""
+"Changing the period type will make previously entered data for this data "
+"set not appear in the data entry app. This can lead to duplicate data entry."
+
+msgid ""
+"Are you sure you want to change the period type to "
+"{{preselectedPeriodType}}?"
+msgstr ""
+"Are you sure you want to change the period type to "
+"{{preselectedPeriodType}}?"
+
+msgid "Yes, change"
+msgstr "Yes, change"
 
 msgid "Configure data entry periods"
 msgstr "Configure data entry periods"
@@ -2795,6 +2965,9 @@ msgstr ""
 
 msgid "Placeholder for other"
 msgstr "Placeholder for other"
+
+msgid "Create, modify and view attributes."
+msgstr "Create, modify and view attributes."
 
 msgid ""
 "Create a group of options from option sets that has a similar functional "
