@@ -20,7 +20,10 @@ export function ShortNameField({
     })
 
     const helpString =
-        helpText || i18n.t('Often used in reports where space is limited.')
+        helpText ||
+        i18n.t(
+            'A short, unique name (max 50 characters). Displayed in analysis apps where space is limited, depending on user or system settings.'
+        )
 
     return (
         <FieldRFF<string | undefined>
