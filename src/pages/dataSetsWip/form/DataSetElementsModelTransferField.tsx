@@ -82,6 +82,7 @@ export function DataSetElementsModelTransferField() {
                 filterPlaceholderPicked={i18n.t(
                     'Search selected data elements'
                 )}
+                filterUnassignedTo={'dataSetElements'}
                 query={{
                     resource: 'dataElements',
                     params: {

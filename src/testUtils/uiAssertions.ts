@@ -5,11 +5,12 @@ import { uiActions } from './uiActions'
 const expectInputFieldToExist = (
     fieldName: string,
     value: string | null,
-    screen: RenderResult
+    screen: RenderResult,
+    role?: string
 ) => {
     const field = screen.getByTestId(`formfields-${fieldName}`)
     expect(field).toBeVisible()
-    const input = within(field).getByRole('textbox') as HTMLInputElement
+    const input = within(field).getByRole(role ?? 'textbox') as HTMLInputElement
     expect(input).toBeVisible()
     expect(input).toHaveAttribute('name', fieldName)
     expect(input).toHaveAttribute('value', value)
@@ -118,9 +119,11 @@ const expectSelectToExistWithOptions = async (
     {
         selected = undefined,
         options = [],
+        disabled = false,
     }: {
         selected?: string
         options: { displayName: string }[]
+        disabled?: boolean
     },
     screen: RenderResult
 ) => {
@@ -130,6 +133,10 @@ const expectSelectToExistWithOptions = async (
     expect(selectInput).toBeVisible()
     if (selected) {
         expect(selectInput).toHaveTextContent(selected)
+    }
+    if (disabled) {
+        expect(selectInput.classList.contains('disabled')).toBe(true)
+        return
     }
     await userEvent.click(selectInput)
     const optionsWrapper = await screen.findByTestId(

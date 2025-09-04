@@ -13,7 +13,11 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { SECTIONS_MAP, useSectionedFormContext } from '../../../lib'
+import {
+    SECTIONS_MAP,
+    useSectionedFormContext,
+    useSyncSelectedSectionWithScroll,
+} from '../../../lib'
 import { ColorAndIconField } from '../../dataElements/fields'
 import DenominatorFields from './DenominatorFields'
 import { IndicatorFormDescriptor } from './formDescriptor'
@@ -28,6 +32,7 @@ export const IndicatorFormFields = () => {
         parse: (v) => (v !== undefined && v !== '' ? parseInt(v) : v),
     })
     const descriptor = useSectionedFormContext<typeof IndicatorFormDescriptor>()
+    useSyncSelectedSectionWithScroll()
 
     return (
         <SectionedFormSections>
@@ -74,47 +79,49 @@ export const IndicatorFormFields = () => {
                 name={descriptor.getSection('expressions').name}
             >
                 <StandardFormSectionTitle>
-                    {i18n.t('Indicator expressions')}
+                    {i18n.t('Calculation details')}
                 </StandardFormSectionTitle>
 
                 <StandardFormSectionDescription>
-                    {i18n.t('Configure the expressions and type of indicator.')}
+                    {i18n.t(
+                        "Define how the indicator is calculated and how it's result will be displayed."
+                    )}
                 </StandardFormSectionDescription>
-                <StandardFormField>
-                    <IndicatorTypeField />
-                </StandardFormField>
+
                 <StandardFormField>
                     <NumeratorFields />
                 </StandardFormField>
                 <StandardFormField>
                     <DenominatorFields />
                 </StandardFormField>
-            </SectionedFormSection>
-            <SectionedFormSection name={descriptor.getSection('options').name}>
-                <StandardFormSectionTitle>
-                    {i18n.t('Indicator options')}
-                </StandardFormSectionTitle>
 
-                <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Configure how this indicator is calculated and displayed.'
-                    )}
-                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <IndicatorTypeField
+                        helpText={i18n.t(
+                            'Select how the indicator result should be expressed (per cent, per thousand, etc.)'
+                        )}
+                    />
+                </StandardFormField>
+
                 <StandardFormField>
                     <FieldRFF
                         name="annualized"
                         type="checkbox"
                         dataTest="formfields-annualized"
                         component={CheckboxFieldFF}
-                        label={i18n.t('Annualized')}
+                        label={i18n.t('Use annualized calculation')}
                     />
                 </StandardFormField>
+
                 <StandardFormField>
                     <SingleSelectFieldFF
                         input={decimalsInput}
                         meta={decimalsMeta}
+                        helpText={i18n.t(
+                            'Select how many decimal places to display in outputs for this indicator'
+                        )}
                         dataTest="decimals-field"
-                        label={i18n.t('Decimals in data output')}
+                        label={i18n.t('Number of decimal places to show')}
                         inputWidth="400px"
                         options={[
                             { label: i18n.t('<No value>'), value: '' },
@@ -126,12 +133,62 @@ export const IndicatorFormFields = () => {
                         placeholder={i18n.t('Select number of decimals')}
                     />
                 </StandardFormField>
+            </SectionedFormSection>
+            <SectionedFormSection name={descriptor.getSection('legends').name}>
+                <StandardFormSectionTitle>
+                    {i18n.t('Legends')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Select legends to visually categorize values for this indicator in data entry and analytics apps.'
+                    )}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    {/*this still has the new text and not the old one*/}
+
+                    <ModelTransferField
+                        dataTest="legendSets-field"
+                        name="legendSets"
+                        leftHeader={i18n.t('Available legends')}
+                        rightHeader={i18n.t('Selected legends')}
+                        filterPlaceholder={i18n.t('Filter available legends')}
+                        filterPlaceholderPicked={i18n.t(
+                            'Filter selected legends'
+                        )}
+                        query={{
+                            resource: 'legendSets',
+                            params: {
+                                filter: ['name:ne:default'],
+                                fields: ['id', 'displayName'],
+                            },
+                        }}
+                        enableOrderChange={true}
+                    />
+                </StandardFormField>
+            </SectionedFormSection>
+            <SectionedFormSection
+                name={descriptor.getSection('mappingSettings').name}
+            >
+                <StandardFormSectionTitle>
+                    {i18n.t('Mapping Settings')}
+                </StandardFormSectionTitle>
+
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Configure how this indicator links to specific category and attribute combinations for data export.'
+                    )}
+                </StandardFormSectionDescription>
                 <StandardFormField>
                     <FieldRFF<string | undefined>
                         inputWidth="400px"
                         dataTest="formfields-aggregateExportCategoryOptionCombo"
                         name="aggregateExportCategoryOptionCombo"
-                        label={i18n.t('Aggregate export category option combo')}
+                        label={i18n.t(
+                            'Category option combination for aggregate data export'
+                        )}
+                        helpText={i18n.t(
+                            'Map this indicator to a specific category option combinations when exporting aggregate data.'
+                        )}
                         component={InputFieldFF}
                     />
                 </StandardFormField>
@@ -143,39 +200,14 @@ export const IndicatorFormFields = () => {
                         name="aggregateExportAttributeOptionCombo"
                         inputWidth="400px"
                         label={i18n.t(
-                            'Aggregate export attribute option combo'
+                            'Attribute option combination for aggregate data export'
+                        )}
+                        helpText={i18n.t(
+                            'Map this indicator to a specific attribute option combinations when exporting aggregate data.'
                         )}
                     />
                 </StandardFormField>
             </SectionedFormSection>
-            <SectionedFormSection name={descriptor.getSection('legends').name}>
-                <StandardFormSectionTitle>
-                    {i18n.t('Legends')}
-                </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t('Set up the program indicator legends.')}
-                </StandardFormSectionDescription>
-                <StandardFormField>
-                    <ModelTransferField
-                        dataTest="legendSets-field"
-                        name="legendSets"
-                        query={{
-                            resource: 'legendSets',
-                            params: {
-                                filter: ['name:ne:default'],
-                                fields: ['id', 'displayName'],
-                            },
-                        }}
-                        leftHeader={i18n.t('Available legends')}
-                        rightHeader={i18n.t('Selected legends')}
-                        filterPlaceholder={i18n.t('Filter available legends')}
-                        filterPlaceholderPicked={i18n.t(
-                            'Filter selected legends'
-                        )}
-                    />
-                </StandardFormField>
-            </SectionedFormSection>
-
             <CustomAttributesSection schemaSection={section} sectionedLayout />
         </SectionedFormSections>
     )

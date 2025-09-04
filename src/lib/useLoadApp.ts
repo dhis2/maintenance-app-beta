@@ -120,7 +120,6 @@ export const useLoadApp = () => {
                 ])
                 const modelSchemas: ModelSchemas =
                     Object.fromEntries(schemaEntries)
-
                 const currentUserResponse = queryData.currentUser
                 const currentUser: CurrentUser = {
                     ...currentUserResponse,

@@ -38,7 +38,7 @@ export const IndicatorFormDescriptor = {
         },
         {
             name: 'expressions',
-            label: i18n.t('Expressions'),
+            label: i18n.t('Calculation details'),
             fields: [
                 {
                     name: 'indicatorType',
@@ -60,12 +60,6 @@ export const IndicatorFormDescriptor = {
                     name: 'denominator',
                     label: i18n.t('Denominator'),
                 },
-            ],
-        },
-        {
-            name: 'options',
-            label: i18n.t('Options'),
-            fields: [
                 {
                     name: 'annualized',
                     label: i18n.t('Annualized'),
@@ -74,6 +68,22 @@ export const IndicatorFormDescriptor = {
                     name: 'decimals',
                     label: i18n.t('Decimals in data output'),
                 },
+            ],
+        },
+        {
+            name: 'legends',
+            label: i18n.t('Legends'),
+            fields: [
+                {
+                    name: 'legendSets',
+                    label: i18n.t('Legend sets'),
+                },
+            ],
+        },
+        {
+            name: 'mappingSettings',
+            label: i18n.t('Mapping settings'),
+            fields: [
                 {
                     name: 'aggregateExportCategoryOptionCombo',
                     label: i18n.t(
@@ -85,16 +95,6 @@ export const IndicatorFormDescriptor = {
                     label: i18n.t(
                         'Attribute option combination for aggregate data export'
                     ),
-                },
-            ],
-        },
-        {
-            name: 'legends',
-            label: i18n.t('Legends'),
-            fields: [
-                {
-                    name: 'legendSets',
-                    label: i18n.t('Legend sets'),
                 },
             ],
         },

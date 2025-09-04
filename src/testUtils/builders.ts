@@ -6,6 +6,10 @@ import {
     UserGroupSchema,
     UserSchema,
 } from '../lib/form/modelFormSchemas'
+import {
+    attributeListSchema,
+    attributeFormSchema,
+} from '../pages/attributes/form'
 import { categoryListSchema } from '../pages/categories/form'
 import { categoryComboListSchema } from '../pages/categoryCombos/form'
 import { categoryOptionComboListSchema } from '../pages/categoryOptionCombos/form'
@@ -22,6 +26,7 @@ import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/in
 import { indicatorListSchema } from '../pages/indicators/form/indicatorSchema'
 import { indicatorTypeListSchema } from '../pages/indicatorTypes/form/indicatorTypesSchema'
 import { OptionGroupListSchema } from '../pages/optionGroups/form/OptionGroupFormSchema'
+import { optionGroupSetListSchema } from '../pages/optionGroupSets/form/optionGroupSetSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
@@ -191,6 +196,13 @@ export const testDataSetNotificationTemplate = (
     ...overwrites,
 })
 
+export const testOptionGroupSet = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(optionGroupSetListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
 export const testOrganisationUnitGroup = (
     overwrites: Record<any, any> = {}
 ) => ({
@@ -209,6 +221,16 @@ export const testOrganisationUnitGroupSet = (
 
 export const testProgramIndicator = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(programIndicatorsListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testAttributeList = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(attributeListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testAttributeForm = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(attributeFormSchema, { mockeryMapper }),
     ...overwrites,
 })
 

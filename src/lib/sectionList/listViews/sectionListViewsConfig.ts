@@ -97,7 +97,11 @@ const defaultAvailableColumnsNoSharing =
 export const modelListViewsConfig = {
     dataElement: {
         columns: {
-            available: [DESCRIPTORS.shortName, 'zeroIsSignificant'],
+            available: [
+                DESCRIPTORS.shortName,
+                'zeroIsSignificant',
+                DESCRIPTORS.formName,
+            ],
             default: [
                 DESCRIPTORS.name,
                 { label: i18n.t('Domain type'), path: 'domainType' },
@@ -108,7 +112,7 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            available: [],
+            available: ['formName'],
             default: ['domainType', 'valueType', 'dataSet', 'categoryCombo'],
         },
     },
@@ -247,6 +251,7 @@ export const modelListViewsConfig = {
                 'href',
                 'id',
                 DESCRIPTORS.publicAccess,
+                DESCRIPTORS.formName,
             ],
             default: [
                 DESCRIPTORS.name,
@@ -256,7 +261,7 @@ export const modelListViewsConfig = {
             overrideDefaultAvailable: true,
         },
         filters: {
-            default: ['category', 'categoryOptionGroup'],
+            default: ['category', 'categoryOptionGroup', 'formName'],
         },
     },
     category: {
@@ -461,5 +466,166 @@ export const modelListViewsConfig = {
             default: ['program', 'programIndicatorGroup'],
             available: ['categoryCombo'],
         },
+    },
+    optionGroupSet: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'dataDimension',
+                { label: i18n.t('Option set'), path: 'optionSet.displayName' },
+            ],
+        },
+        filters: {},
+    },
+    attribute: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { path: 'valueType', label: i18n.t('Value type') },
+                { path: 'mandatory', label: i18n.t('Mandatory') },
+                { path: 'unique', label: i18n.t('Unique') },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+                { label: i18n.t('Option set'), path: 'optionSet.displayName' },
+            ],
+            available: [
+                {
+                    label: i18n.t('Category attribute'),
+                    path: 'categoryAttribute',
+                },
+                {
+                    label: i18n.t('Category option attribute'),
+                    path: 'categoryOptionAttribute',
+                },
+                {
+                    label: i18n.t('Category option combo attribute'),
+                    path: 'categoryOptionComboAttribute',
+                },
+                {
+                    label: i18n.t('Category option group attribute'),
+                    path: 'categoryOptionGroupAttribute',
+                },
+                {
+                    label: i18n.t('Category option group set attribute'),
+                    path: 'categoryOptionGroupSetAttribute',
+                },
+                {
+                    label: i18n.t('Constant attribute'),
+                    path: 'constantAttribute',
+                },
+                {
+                    label: i18n.t('Data element attribute'),
+                    path: 'dataElementAttribute',
+                },
+                {
+                    label: i18n.t('Data element group attribute'),
+                    path: 'dataElementGroupAttribute',
+                },
+                {
+                    label: i18n.t('Data element group set attribute'),
+                    path: 'dataElementGroupSetAttribute',
+                },
+                {
+                    label: i18n.t('Data set attribute'),
+                    path: 'dataSetAttribute',
+                },
+                {
+                    label: i18n.t('Document attribute'),
+                    path: 'documentAttribute',
+                },
+                {
+                    label: i18n.t('Event chart attribute'),
+                    path: 'eventChartAttribute',
+                },
+                {
+                    label: i18n.t('Event report attribute'),
+                    path: 'eventReportAttribute',
+                },
+                {
+                    label: i18n.t('Indicator attribute'),
+                    path: 'indicatorAttribute',
+                },
+                {
+                    label: i18n.t('Indicator group attribute'),
+                    path: 'indicatorGroupAttribute',
+                },
+                {
+                    label: i18n.t('Legend set attribute'),
+                    path: 'legendSetAttribute',
+                },
+                { label: i18n.t('Map attribute'), path: 'mapAttribute' },
+                { label: i18n.t('Option attribute'), path: 'optionAttribute' },
+                {
+                    label: i18n.t('Option set attribute'),
+                    path: 'optionSetAttribute',
+                },
+                {
+                    label: i18n.t('Organisation unit attribute'),
+                    path: 'organisationUnitAttribute',
+                },
+                {
+                    label: i18n.t('Organisation unit group attribute'),
+                    path: 'organisationUnitGroupAttribute',
+                },
+                {
+                    label: i18n.t('Organisation unit group set attribute'),
+                    path: 'organisationUnitGroupSetAttribute',
+                },
+                {
+                    label: i18n.t('Program attribute'),
+                    path: 'programAttribute',
+                },
+                {
+                    label: i18n.t('Program indicator attribute'),
+                    path: 'programIndicatorAttribute',
+                },
+                {
+                    label: i18n.t('Program stage attribute'),
+                    path: 'programStageAttribute',
+                },
+                {
+                    label: i18n.t('Relationship type attribute'),
+                    path: 'relationshipTypeAttribute',
+                },
+                {
+                    label: i18n.t('Section attribute'),
+                    path: 'sectionAttribute',
+                },
+                {
+                    label: i18n.t('SQL view attribute'),
+                    path: 'sqlViewAttribute',
+                },
+                {
+                    label: i18n.t('Tracked entity attribute attribute'),
+                    path: 'trackedEntityAttributeAttribute',
+                },
+                {
+                    label: i18n.t('Tracked entity type attribute'),
+                    path: 'trackedEntityTypeAttribute',
+                },
+                { label: i18n.t('User attribute'), path: 'userAttribute' },
+                {
+                    label: i18n.t('User group attribute'),
+                    path: 'userGroupAttribute',
+                },
+                {
+                    label: i18n.t('Validation rule attribute'),
+                    path: 'validationRuleAttribute',
+                },
+                {
+                    label: i18n.t('Validation rule group attribute'),
+                    path: 'validationRuleGroupAttribute',
+                },
+                {
+                    label: i18n.t('Visualization attribute'),
+                    path: 'visualizationAttribute',
+                },
+            ],
+        },
+        filters: {},
     },
 } satisfies SectionListViewConfig<SectionName>
