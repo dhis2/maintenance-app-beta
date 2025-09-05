@@ -628,4 +628,23 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    validationNotificationTemplate: {
+        columns: {
+            available: [
+                {
+                    label: i18n.t('Notify users in hierarchy only'),
+                    path: 'notifyUsersInHierarchyOnly',
+                },
+                {
+                    label: i18n.t('Send notification as'),
+                    path: 'sendStrategy',
+                },
+            ],
+            default: [DESCRIPTORS.name, 'code', 'lastUpdated'],
+        },
+        filters: {
+            default: [],
+            overrideDefaultAvailable: true,
+        },
+    },
 } satisfies SectionListViewConfig<SectionName>
