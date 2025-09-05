@@ -5,6 +5,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2025-08-27T11:13:59.823Z\n"
+"PO-Revision-Date: 2025-08-27T11:13:59.824Z\n"
+"POT-Creation-Date: 2025-08-25T12:21:51.518Z\n"
+"PO-Revision-Date: 2025-08-25T12:21:51.518Z\n"
 "POT-Creation-Date: 2025-08-26T14:47:52.498Z\n"
 "PO-Revision-Date: 2025-08-26T14:47:52.499Z\n"
 
@@ -272,6 +276,9 @@ msgstr "Filter available items"
 msgid "Filter selected items"
 msgstr "Filter selected items"
 
+msgid "Show only unassigned items"
+msgstr "Show only unassigned items"
+
 msgid "Refresh list"
 msgstr "Refresh list"
 
@@ -442,6 +449,9 @@ msgstr "Data element group set"
 
 msgid "Data set"
 msgstr "Data set"
+
+msgid "Search by form name"
+msgstr "Search by form name"
 
 msgid "Search by name, code or ID"
 msgstr "Search by name, code or ID"
@@ -2239,6 +2249,15 @@ msgstr "Section data elements"
 msgid "Choose what data is collected for this section."
 msgstr "Choose what data is collected for this section."
 
+msgid "Filter by category combination"
+msgstr "Filter by category combination"
+
+msgid "<No filter>"
+msgstr "<No filter>"
+
+msgid "Manage enabled/disabled fields"
+msgstr "Manage enabled/disabled fields"
+
 msgid "Section indicators"
 msgstr "Section indicators"
 
@@ -2277,6 +2296,18 @@ msgstr "Save section"
 
 msgid "Saving a section does not save other changes to the data set"
 msgstr "Saving a section does not save other changes to the data set"
+
+msgid "Manage grey fields"
+msgstr "Manage grey fields"
+
+msgid "Disabled"
+msgstr "Disabled"
+
+msgid "Enabled"
+msgstr "Enabled"
+
+msgid "Update grey fields"
+msgstr "Update grey fields"
 
 msgid "Add period entry rule"
 msgstr "Add period entry rule"
@@ -2622,6 +2653,27 @@ msgstr "Filter selected option groups"
 
 msgid "You must select an option set before you can select options."
 msgstr "You must select an option set before you can select options."
+
+msgid "Set up the basic information for this option group."
+msgstr "Set up the basic information for this option group."
+
+msgid "Explain the purpose of this option group."
+msgstr "Explain the purpose of this option group."
+
+msgid "Select the options that belong to this group."
+msgstr "Select the options that belong to this group."
+
+msgid "Available options"
+msgstr "Available options"
+
+msgid "Selected options"
+msgstr "Selected options"
+
+msgid "Filter available options"
+msgstr "Filter available options"
+
+msgid "Filter selected options"
+msgstr "Filter selected options"
 
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."
