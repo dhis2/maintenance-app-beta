@@ -114,6 +114,7 @@ export const sidebarLinks = {
             getSectionLinkItem(SECTIONS_MAP.attribute),
             getSectionLinkItem(SECTIONS_MAP.optionGroup),
             getSectionLinkItem(SECTIONS_MAP.optionGroupSet),
+            getSectionLinkItem(SECTIONS_MAP.constant),
             getSectionLinkItem(SECTIONS_MAP.programDisaggregation),
         ],
     },
