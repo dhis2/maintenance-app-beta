@@ -7,6 +7,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "POT-Creation-Date: 2025-09-04T14:58:58.085Z\n"
 "PO-Revision-Date: 2025-09-04T14:58:58.086Z\n"
+"POT-Creation-Date: 2025-08-27T11:13:59.823Z\n"
+"PO-Revision-Date: 2025-08-27T11:13:59.824Z\n"
+"POT-Creation-Date: 2025-08-25T12:21:51.518Z\n"
+"PO-Revision-Date: 2025-08-25T12:21:51.518Z\n"
+"POT-Creation-Date: 2025-08-26T14:47:52.498Z\n"
+"PO-Revision-Date: 2025-08-26T14:47:52.499Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2684,6 +2690,27 @@ msgstr "Filter selected option groups"
 
 msgid "You must select an option set before you can select options."
 msgstr "You must select an option set before you can select options."
+
+msgid "Set up the basic information for this option group."
+msgstr "Set up the basic information for this option group."
+
+msgid "Explain the purpose of this option group."
+msgstr "Explain the purpose of this option group."
+
+msgid "Select the options that belong to this group."
+msgstr "Select the options that belong to this group."
+
+msgid "Available options"
+msgstr "Available options"
+
+msgid "Selected options"
+msgstr "Selected options"
+
+msgid "Filter available options"
+msgstr "Filter available options"
+
+msgid "Filter selected options"
+msgstr "Filter selected options"
 
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."

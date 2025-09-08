@@ -485,15 +485,14 @@ export const modelListViewsConfig = {
         columns: {
             default: [
                 DESCRIPTORS.name,
-                { label: i18n.t('value'), path: 'value' },
+                { label: i18n.t('Value'), path: 'value' },
                 'lastUpdated',
             ],
             available: [
-                'code',
                 'description',
                 DESCRIPTORS.formName,
                 DESCRIPTORS.shortName,
-                { label: i18n.t('Favourite'), path: 'favourite' },
+                { label: i18n.t('Favorite'), path: 'favorite' },
                 { label: i18n.t('Owner'), path: 'user.displayName' },
             ],
         },
