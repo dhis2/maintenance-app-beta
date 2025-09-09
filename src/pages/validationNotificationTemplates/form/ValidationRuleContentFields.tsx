@@ -5,7 +5,7 @@ import { Field as FieldRFF, useField } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 import styles from './ValidationRuleContentFields.module.css'
 
-const VALIDATION_RULE_VARIABLES = {
+export const VALIDATION_RULE_VARIABLES = {
     rule_name: i18n.t('Rule name'),
     rule_description: i18n.t('Rule description'),
     operator: i18n.t('Operator'),
@@ -52,7 +52,10 @@ export const ValidationRuleContentFields = () => {
                 <StandardFormField>
                     <FieldRFF name="subjectTemplate">
                         {({ input, meta }) => (
-                            <div className={styles.validationRuleField}>
+                            <div
+                                className={styles.validationRuleField}
+                                data-test="formfields-subjectTemplate"
+                            >
                                 <div
                                     className={styles.validationRuleFieldLabel}
                                 >
@@ -79,7 +82,10 @@ export const ValidationRuleContentFields = () => {
                 <StandardFormField>
                     <FieldRFF name="messageTemplate">
                         {({ input, meta }) => (
-                            <div className={styles.validationRuleField}>
+                            <div
+                                className={styles.validationRuleField}
+                                data-test="formfields-messageTemplate"
+                            >
                                 <div
                                     className={styles.validationRuleFieldLabel}
                                 >
@@ -112,6 +118,7 @@ export const ValidationRuleContentFields = () => {
                 {Object.keys(VALIDATION_RULE_VARIABLES).map((v) => (
                     <div key={v} className={styles.variableButton}>
                         <Button
+                            dataTest={`validationRule_button_${v}`}
                             small
                             onClick={() => {
                                 insertElement({

@@ -59,6 +59,7 @@ export const ValidationNotificationTemplateFormFields = ({
                 </StandardFormField>
                 <StandardFormField>
                     <ModelTransferField
+                        dataTest="validationRules-transfer"
                         name="validationRules"
                         query={{
                             resource: 'validationRules',
@@ -94,6 +95,7 @@ export const ValidationNotificationTemplateFormFields = ({
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <ModelTransferField
+                        dataTest="recipientUserGroups-transfer"
                         name="recipientUserGroups"
                         query={{
                             resource: 'userGroups',
@@ -111,7 +113,7 @@ export const ValidationNotificationTemplateFormFields = ({
                 <StandardFormField>
                     <FieldRFF<string | undefined>
                         inputWidth="500px"
-                        dataTest="formfields-notification-type"
+                        dataTest="formfields-notificationType"
                         name="sendStrategy"
                         render={(props) => (
                             <SingleSelectFieldFF
