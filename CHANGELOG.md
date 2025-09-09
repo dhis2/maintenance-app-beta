@@ -1,3 +1,13 @@
+# [0.64.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.63.0...v0.64.0) (2025-09-07)
+
+
+### Features
+
+* add attributes list/edit/new [DHIS2-19842] [DHIS2-19843] ([#625](https://github.com/dhis2/maintenance-app-beta/issues/625)) ([59e45ea](https://github.com/dhis2/maintenance-app-beta/commit/59e45ea690331f656d259dc5cf9bd3d6c2496923))
+* add option group forms ([#615](https://github.com/dhis2/maintenance-app-beta/issues/615)) ([d05ce66](https://github.com/dhis2/maintenance-app-beta/commit/d05ce66775144fa6c1c173901356132ca6aa25cd))
+* enhance DefaultSectionedFormFooter with loading and dirty state handling ([f007b3e](https://github.com/dhis2/maintenance-app-beta/commit/f007b3e99c208504cbd15e26d41ce4ce31eadc82))
+* enhance DefaultSectionedFormFooter with loading and dirty state handling ([1d13590](https://github.com/dhis2/maintenance-app-beta/commit/1d13590145a8042c24e1b326666ac5062202f6c0))
+
 # [0.63.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.62.0...v0.63.0) (2025-08-26)
 
 
