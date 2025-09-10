@@ -16,7 +16,6 @@ import {
     useSchemaSectionHandleOrThrow,
     useSyncSelectedSectionWithScroll,
     getConstantTranslation,
-    SECTIONS_MAP,
 } from '../../../lib'
 import { ValidationRuleContentFields } from './ValidationRuleContentFields'
 
