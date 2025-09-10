@@ -6,12 +6,17 @@ import {
     UserGroupSchema,
     UserSchema,
 } from '../lib/form/modelFormSchemas'
+import {
+    attributeListSchema,
+    attributeFormSchema,
+} from '../pages/attributes/form'
 import { categoryListSchema } from '../pages/categories/form'
 import { categoryComboListSchema } from '../pages/categoryCombos/form'
 import { categoryOptionComboListSchema } from '../pages/categoryOptionCombos/form'
 import { categoryOptionGroupListSchema } from '../pages/categoryOptionGroups/form/categoryOptionGroupSchema'
 import { categoryOptionGroupSetListSchema } from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
 import { categoryOptionListSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
+import { ConstantsListSchema } from '../pages/constants/form/ConstantFormSchema'
 import { dataElementGroupListSchema } from '../pages/dataElementGroups/form/dataElementGroupSchema'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementListSchema } from '../pages/dataElements/form/dataElementSchema'
@@ -89,6 +94,13 @@ export const testIndicatorType = (overwrites: Record<any, any> = {}) => ({
 
 export const testOptionGroup = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(OptionGroupListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testConstants = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(ConstantsListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -220,6 +232,16 @@ export const testProgramIndicator = (overwrites: Record<any, any> = {}) => ({
     ...overwrites,
 })
 
+export const testAttributeList = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(attributeListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testAttributeForm = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(attributeFormSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
 export const testLocale = ({
     locale = faker.string.alpha({ length: 2 }),
     name = faker.location.country(),
@@ -336,3 +358,20 @@ export const testOptionSet = ({
     displayName,
     valueType,
 })
+
+export const testOption = ({
+    id = randomDhis2Id(),
+    name,
+    displayName,
+}: {
+    id?: string
+    name?: string
+    displayName?: string
+} = {}) => {
+    const optionName = name ?? faker.word.sample()
+    return {
+        id,
+        name: optionName,
+        displayName: displayName ?? optionName,
+    }
+}

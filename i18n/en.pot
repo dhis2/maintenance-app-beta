@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-01T13:56:27.252Z\n"
-"PO-Revision-Date: 2025-09-01T13:56:27.253Z\n"
+"POT-Creation-Date: 2025-09-10T08:00:57.421Z\n"
+"PO-Revision-Date: 2025-09-10T08:00:57.421Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1255,8 +1255,200 @@ msgstr "Program name"
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
 
+msgid "Value"
+msgstr "Value"
+
+msgid "Mandatory"
+msgstr "Mandatory"
+
+msgid "Unique"
+msgstr "Unique"
+
+msgid "Category attribute"
+msgstr "Category attribute"
+
+msgid "Category option attribute"
+msgstr "Category option attribute"
+
+msgid "Category option combo attribute"
+msgstr "Category option combo attribute"
+
+msgid "Category option group attribute"
+msgstr "Category option group attribute"
+
+msgid "Category option group set attribute"
+msgstr "Category option group set attribute"
+
+msgid "Constant attribute"
+msgstr "Constant attribute"
+
+msgid "Data element attribute"
+msgstr "Data element attribute"
+
+msgid "Data element group attribute"
+msgstr "Data element group attribute"
+
+msgid "Data element group set attribute"
+msgstr "Data element group set attribute"
+
+msgid "Data set attribute"
+msgstr "Data set attribute"
+
+msgid "Document attribute"
+msgstr "Document attribute"
+
+msgid "Event chart attribute"
+msgstr "Event chart attribute"
+
+msgid "Event report attribute"
+msgstr "Event report attribute"
+
+msgid "Indicator attribute"
+msgstr "Indicator attribute"
+
+msgid "Indicator group attribute"
+msgstr "Indicator group attribute"
+
+msgid "Legend set attribute"
+msgstr "Legend set attribute"
+
+msgid "Map attribute"
+msgstr "Map attribute"
+
+msgid "Option attribute"
+msgstr "Option attribute"
+
+msgid "Option set attribute"
+msgstr "Option set attribute"
+
+msgid "Organisation unit attribute"
+msgstr "Organisation unit attribute"
+
+msgid "Organisation unit group attribute"
+msgstr "Organisation unit group attribute"
+
+msgid "Organisation unit group set attribute"
+msgstr "Organisation unit group set attribute"
+
+msgid "Program attribute"
+msgstr "Program attribute"
+
+msgid "Program indicator attribute"
+msgstr "Program indicator attribute"
+
+msgid "Program stage attribute"
+msgstr "Program stage attribute"
+
+msgid "Relationship type attribute"
+msgstr "Relationship type attribute"
+
+msgid "Section attribute"
+msgstr "Section attribute"
+
+msgid "SQL view attribute"
+msgstr "SQL view attribute"
+
+msgid "Tracked entity attribute attribute"
+msgstr "Tracked entity attribute attribute"
+
+msgid "Tracked entity type attribute"
+msgstr "Tracked entity type attribute"
+
+msgid "User attribute"
+msgstr "User attribute"
+
+msgid "User group attribute"
+msgstr "User group attribute"
+
+msgid "Validation rule attribute"
+msgstr "Validation rule attribute"
+
+msgid "Validation rule group attribute"
+msgstr "Validation rule group attribute"
+
+msgid "Visualization attribute"
+msgstr "Visualization attribute"
+
 msgid "Basic information"
 msgstr "Basic information"
+
+msgid "Data and options"
+msgstr "Data and options"
+
+msgid "Sort order"
+msgstr "Sort order"
+
+msgid "Category option combo"
+msgstr "Category option combo"
+
+msgid "Document"
+msgstr "Document"
+
+msgid "Event chart"
+msgstr "Event chart"
+
+msgid "Event report"
+msgstr "Event report"
+
+msgid "Legend set"
+msgstr "Legend set"
+
+msgid "Map"
+msgstr "Map"
+
+msgid "Option"
+msgstr "Option"
+
+msgid "User"
+msgstr "User"
+
+msgid "Visualization"
+msgstr "Visualization"
+
+msgid "Objects to which this attribute can be applied"
+msgstr "Objects to which this attribute can be applied"
+
+msgid ""
+"Choose from a predefined list of option sets. The option set will "
+"automatically define the value type."
+msgstr ""
+"Choose from a predefined list of option sets. The option set will "
+"automatically define the value type."
+
+msgid "Remove option set"
+msgstr "Remove option set"
+
+msgid "Enter a number to decide where this attribute appears in list and forms"
+msgstr "Enter a number to decide where this attribute appears in list and forms"
+
+msgid ""
+"Select the kind of data this attribute collects. If you have chosen an "
+"option set, this will be set automatically."
+msgstr ""
+"Select the kind of data this attribute collects. If you have chosen an "
+"option set, this will be set automatically."
+
+msgid ""
+"Disabled as the value type must match the value type of the selected option "
+"set"
+msgstr ""
+"Disabled as the value type must match the value type of the selected option "
+"set"
+
+msgid "Set up the basic information for this attribute."
+msgstr "Set up the basic information for this attribute."
+
+msgid "Explain the purpose of this attribute."
+msgstr "Explain the purpose of this attribute."
+
+msgid "Configure how this attribute wil be collected, analyzed, and stored."
+msgstr "Configure how this attribute wil be collected, analyzed, and stored."
+
+msgid "Make this a mandatory attribute"
+msgstr "Make this a mandatory attribute"
+
+msgid "No duplicate values allowed"
+msgstr "No duplicate values allowed"
 
 msgid "Set up the basic information for this category."
 msgstr "Set up the basic information for this category."
@@ -1592,13 +1784,6 @@ msgstr "A web link that provides extra information."
 msgid "The type of data that will be recorded."
 msgstr "The type of data that will be recorded."
 
-msgid ""
-"Disabled as the value type must match the value type of the selected option "
-"set"
-msgstr ""
-"Disabled as the value type must match the value type of the selected option "
-"set"
-
 msgid "Store zero data values"
 msgstr "Store zero data values"
 
@@ -1613,9 +1798,6 @@ msgstr "Disaggregation and Option sets"
 
 msgid "Set up disaggregation and predefined options."
 msgstr "Set up disaggregation and predefined options."
-
-msgid "Legend set"
-msgstr "Legend set"
 
 msgid ""
 "Visualize values for this data element in Analytics app. Multiple legends "
@@ -1858,6 +2040,12 @@ msgstr "Line end"
 
 msgid "Section display mode"
 msgstr "Section display mode"
+
+msgid "Single page: all sections shown consecutively in one form"
+msgstr "Single page: all sections shown consecutively in one form"
+
+msgid "Tabs: show a tab for each section"
+msgstr "Tabs: show a tab for each section"
 
 msgid "Horizontal tabs"
 msgstr "Horizontal tabs"
@@ -2144,6 +2332,15 @@ msgstr "Disable automatic grouping of data elements"
 
 msgid "Display mode"
 msgstr "Display mode"
+
+msgid "Default: data elements as rows, categories as columns"
+msgstr "Default: data elements as rows, categories as columns"
+
+msgid "Pivot: categories as rows, data elements as columns"
+msgstr "Pivot: categories as rows, data elements as columns"
+
+msgid "Move a category to rows: default mode with one category moved to rows"
+msgstr "Move a category to rows: default mode with one category moved to rows"
 
 msgid "Category to move to rows"
 msgstr "Category to move to rows"
@@ -2543,6 +2740,30 @@ msgstr "Filter selected option groups"
 msgid "You must select an option set before you can select options."
 msgstr "You must select an option set before you can select options."
 
+msgid "Set up the basic information for this option group."
+msgstr "Set up the basic information for this option group."
+
+msgid "Explain the purpose of this option group."
+msgstr "Explain the purpose of this option group."
+
+msgid "Options"
+msgstr "Options"
+
+msgid "Select the options that belong to this group."
+msgstr "Select the options that belong to this group."
+
+msgid "Available options"
+msgstr "Available options"
+
+msgid "Selected options"
+msgstr "Selected options"
+
+msgid "Filter available options"
+msgstr "Filter available options"
+
+msgid "Filter selected options"
+msgstr "Filter selected options"
+
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."
 
@@ -2885,6 +3106,9 @@ msgstr ""
 
 msgid "Placeholder for other"
 msgstr "Placeholder for other"
+
+msgid "Create, modify and view attributes."
+msgstr "Create, modify and view attributes."
 
 msgid ""
 "Create a group of options from option sets that has a similar functional "
