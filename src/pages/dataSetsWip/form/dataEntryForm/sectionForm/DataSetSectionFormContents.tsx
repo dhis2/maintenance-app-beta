@@ -451,7 +451,8 @@ export const DataSetSectionFormContents = ({
                                     <StandardFormField>
                                         <RadioFieldFF
                                             label={i18n.t(
-                                                'Default: data elements as rows, categories as columns'
+                                                'Default: data elements as rows, categories as columns',
+                                                { nsSeparator: '~:~' }
                                             )}
                                             input={
                                                 defaultDisplayModeField.input
@@ -462,7 +463,8 @@ export const DataSetSectionFormContents = ({
                                     <StandardFormField>
                                         <RadioFieldFF
                                             label={i18n.t(
-                                                'Pivot: categories as rows, data elements as columns'
+                                                'Pivot: categories as rows, data elements as columns',
+                                                { nsSeparator: '~:~' }
                                             )}
                                             input={pivotDisplayModeField.input}
                                             meta={pivotDisplayModeField.meta}
@@ -471,7 +473,8 @@ export const DataSetSectionFormContents = ({
                                     <StandardFormField>
                                         <RadioFieldFF
                                             label={i18n.t(
-                                                'Move a category to rows: default mode with one category moved to rows'
+                                                'Move a category to rows: default mode with one category moved to rows',
+                                                { nsSeparator: '~:~' }
                                             )}
                                             input={
                                                 moveCategoriesDisplayModeField.input
