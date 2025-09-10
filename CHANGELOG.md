@@ -1,3 +1,10 @@
+## [0.66.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.66.0...v0.66.1) (2025-09-10)
+
+
+### Bug Fixes
+
+* program indicator disaggregation min version ([#636](https://github.com/dhis2/maintenance-app-beta/issues/636)) ([0a06f28](https://github.com/dhis2/maintenance-app-beta/commit/0a06f289b0ce63b7e4633b020466c791ed220128))
+
 # [0.66.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.65.0...v0.66.0) (2025-09-10)
 
 
