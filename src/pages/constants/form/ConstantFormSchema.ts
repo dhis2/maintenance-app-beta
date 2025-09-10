@@ -1,5 +1,7 @@
 import { z } from 'zod'
 import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import { Constant, PickWithFieldFilters } from '../../../types/generated'
+import { fieldFilters } from './fieldFilters'
 const { identifiable, withDefaultListColumns } = modelFormSchemas
 
 const constantBaseSchema = z.object({
@@ -20,3 +22,7 @@ export const ConstantsListSchema = constantBaseSchema
 
 export const initialValues = getDefaults(constantFormSchema)
 export const validate = createFormValidate(constantFormSchema)
+export type ConstantFormValues = PickWithFieldFilters<
+    Constant,
+    typeof fieldFilters
+>

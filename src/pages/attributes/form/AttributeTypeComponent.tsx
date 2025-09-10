@@ -194,6 +194,7 @@ export const AttributeTypeComponent = ({
 
     return (
         <MultiSelectField
+            filterable={true}
             dataTest="formfields-objecttypes"
             label={i18n.t('Objects to which this attribute can be applied')}
             selected={selections}

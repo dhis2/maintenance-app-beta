@@ -3,6 +3,7 @@ import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import {
+    CustomAttributesSection,
     DefaultIdentifiableFields,
     DescriptionField,
     StandardFormField,
@@ -10,8 +11,10 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
+import { SECTIONS_MAP } from '../../../lib'
 
 function ConstantFormFields() {
+    const section = SECTIONS_MAP.constant
     return (
         <>
             <StandardFormSection>
@@ -41,6 +44,7 @@ function ConstantFormFields() {
                         label={i18n.t('Value')}
                     />
                 </StandardFormField>
+                <CustomAttributesSection schemaSection={section} />
             </StandardFormSection>
         </>
     )
