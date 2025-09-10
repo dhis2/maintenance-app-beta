@@ -1,3 +1,10 @@
+# [0.66.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.65.0...v0.66.0) (2025-09-10)
+
+
+### Features
+
+* add version feature toggle for sections [DHIS2-19678] ([#628](https://github.com/dhis2/maintenance-app-beta/issues/628)) ([9557561](https://github.com/dhis2/maintenance-app-beta/commit/955756112599c820ced440650708336acbe42c12))
+
 # [0.65.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.64.0...v0.65.0) (2025-09-10)
 
 
