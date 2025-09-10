@@ -38,7 +38,6 @@ export const ValidationNotificationTemplateFormFields = ({
 }) => {
     const schemaSection = useSchemaSectionHandleOrThrow()
     useSyncSelectedSectionWithScroll()
-    const section = SECTIONS_MAP.validationNotificationTemplate
 
     return (
         <SectionedFormSections>

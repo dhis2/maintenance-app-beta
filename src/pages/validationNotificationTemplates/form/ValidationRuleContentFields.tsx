@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, InputFieldFF } from '@dhis2/ui'
+import { Button } from '@dhis2/ui'
 import React, { useRef, useState } from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import { StandardFormField } from '../../../components'

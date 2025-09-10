@@ -8,7 +8,6 @@ import { SECTIONS_MAP, generateDhis2Id } from '../../lib'
 import {
     randomLongString,
     testAttributeForm,
-    testOptionSet,
     testUserGroup,
     testValidationRule,
     testValidationNotificationTemplateForm,
