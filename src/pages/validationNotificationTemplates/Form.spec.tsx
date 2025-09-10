@@ -55,7 +55,6 @@ describe('Validation Notifcation form tests', () => {
                 routeOptions,
                 { matchingExistingElementFilter = undefined } = {}
             ) => {
-                // const optionSets = [testOptionSet(), testOptionSet()]
                 const userGroups = [testUserGroup(), testUserGroup()]
                 const validationRules = [
                     testValidationRule(),
@@ -65,7 +64,6 @@ describe('Validation Notifcation form tests', () => {
                     <TestComponentWithRouter
                         path={`/${section.namePlural}`}
                         customData={{
-                            // optionSets: () => ({ optionSets }),
                             validationRules: () => ({ validationRules }),
                             userGroups: () => ({ userGroups }),
                             validationNotificationTemplates: (
@@ -200,7 +198,7 @@ describe('Validation Notifcation form tests', () => {
                 screen
             )
 
-            // // then check that it inserts at the last cursor position
+            // then check that it inserts at the last cursor position
             const field = screen.getByTestId('formfields-messageTemplate')
             const input = within(field).getByRole('textbox') as HTMLInputElement
             const randomText2 = randomLongString(10)
@@ -279,7 +277,6 @@ describe('Validation Notifcation form tests', () => {
                 routeOptions,
                 { matchingExistingElementFilter = undefined } = {}
             ) => {
-                // const optionSets = [testOptionSet(), testOptionSet()]
                 const userGroups = [testUserGroup(), testUserGroup()]
                 const validationRules = [
                     testValidationRule(),
@@ -289,7 +286,6 @@ describe('Validation Notifcation form tests', () => {
                     <TestComponentWithRouter
                         path={`/${section.namePlural}`}
                         customData={{
-                            // optionSets: () => ({ optionSets }),
                             validationRules: () => ({
                                 validationRules,
                                 pager: {},
@@ -486,7 +482,6 @@ describe('Validation Notifcation form tests', () => {
                         path={`/${section.namePlural}/:id`}
                         initialEntries={[`/${section.namePlural}/${id}`]}
                         customData={{
-                            // optionSets: () => ({ optionSets }),
                             validationRules: () => ({
                                 validationRules,
                                 pager: {},

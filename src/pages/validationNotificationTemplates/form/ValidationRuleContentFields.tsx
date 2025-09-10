@@ -35,7 +35,6 @@ const insertElement = ({
         const startText = elementRef.current?.value.slice(0, cursorStartIndex)
         const endText = elementRef.current?.value.slice(cursorStartIndex)
         const newText = `${startText}${elementText}${endText}`
-        // elementRef.current.value = newText
         input.onChange(newText)
     }
 }
