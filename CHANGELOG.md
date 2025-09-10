@@ -1,3 +1,16 @@
+# [0.65.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.64.0...v0.65.0) (2025-09-10)
+
+
+### Bug Fixes
+
+* make attribute object selections filterable ([#632](https://github.com/dhis2/maintenance-app-beta/issues/632)) ([936e770](https://github.com/dhis2/maintenance-app-beta/commit/936e770918ad90e295273261d6cafe60343eb25f))
+* ns separator and indicator form timeouts ([#634](https://github.com/dhis2/maintenance-app-beta/issues/634)) ([f945fe4](https://github.com/dhis2/maintenance-app-beta/commit/f945fe473288b9221a60154c9eaf83d94451fb01))
+
+
+### Features
+
+* add constant schema and related components for constants list ([#629](https://github.com/dhis2/maintenance-app-beta/issues/629)) ([e39b194](https://github.com/dhis2/maintenance-app-beta/commit/e39b19462256535e84a63e47a7cf748198cac2e8))
+
 # [0.64.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.63.0...v0.64.0) (2025-09-07)
 
 
