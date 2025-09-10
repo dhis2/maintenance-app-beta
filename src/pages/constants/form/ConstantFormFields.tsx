@@ -16,37 +16,33 @@ import { SECTIONS_MAP } from '../../../lib'
 function ConstantFormFields() {
     const section = SECTIONS_MAP.constant
     return (
-        <>
-            <StandardFormSection>
-                <StandardFormSectionTitle>
-                    {i18n.t('Basic information')}
-                </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t('Set up the basic information for this constant.')}
-                </StandardFormSectionDescription>
+        <StandardFormSection>
+            <StandardFormSectionTitle>
+                {i18n.t('Basic information')}
+            </StandardFormSectionTitle>
+            <StandardFormSectionDescription>
+                {i18n.t('Set up the basic information for this constant.')}
+            </StandardFormSectionDescription>
 
-                <DefaultIdentifiableFields />
-                <StandardFormField>
-                    <DescriptionField
-                        helpText={i18n.t(
-                            'Explain the purpose of this constant.'
-                        )}
-                    />
-                </StandardFormField>
-                <StandardFormField>
-                    <FieldRFF
-                        component={InputFieldFF}
-                        dataTest="formfields-value"
-                        inputWidth="400px"
-                        name="value"
-                        required
-                        type="number"
-                        label={i18n.t('Value')}
-                    />
-                </StandardFormField>
-                <CustomAttributesSection schemaSection={section} />
-            </StandardFormSection>
-        </>
+            <DefaultIdentifiableFields />
+            <StandardFormField>
+                <DescriptionField
+                    helpText={i18n.t('Explain the purpose of this constant.')}
+                />
+            </StandardFormField>
+            <StandardFormField>
+                <FieldRFF
+                    component={InputFieldFF}
+                    dataTest="formfields-value"
+                    inputWidth="400px"
+                    name="value"
+                    required
+                    type="number"
+                    label={i18n.t('Value')}
+                />
+            </StandardFormField>
+            <CustomAttributesSection schemaSection={section} />
+        </StandardFormSection>
     )
 }
 
