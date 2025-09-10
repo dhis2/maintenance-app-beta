@@ -34,6 +34,10 @@ import { organisationUnitListSchema } from '../pages/organisationUnits/form/orga
 import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
 import {
+    validationNotificationTemplateListSchema,
+    validationNotificationTemplateFormSchema,
+} from '../pages/validationNotificationTemplates/form'
+import {
     CategoryMapping,
     DataElement,
     OptionMapping,
@@ -277,6 +281,24 @@ export const testFormProgramIndicatorGroup = (
     ...overwrites,
 })
 
+export const testValidationNotificationTemplate = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(validationNotificationTemplateListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testValidationNotificationTemplateForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(validationNotificationTemplateFormSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
 export const testCustomAttribute = ({
     id = randomDhis2Id(),
     displayFormName = faker.person.fullName(),
@@ -375,3 +397,12 @@ export const testOption = ({
         displayName: displayName ?? optionName,
     }
 }
+
+// TODO: change when schema for validationRule is available
+export const testValidationRule = ({
+    id = randomDhis2Id(),
+    displayName = faker.person.fullName(),
+} = {}) => ({
+    id,
+    displayName,
+})

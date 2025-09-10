@@ -742,11 +742,8 @@ msgstr "Validation rule group"
 msgid "Validation rule groups"
 msgstr "Validation rule groups"
 
-msgid "Validation notification template"
-msgstr "Validation notification template"
-
-msgid "Validation notification templates"
-msgstr "Validation notification templates"
+msgid "Validation notification"
+msgstr "Validation notification"
 
 msgid "Constant"
 msgstr "Constant"
@@ -3123,6 +3120,12 @@ msgstr "Create, modify and view sets of option groups."
 msgid "Set disaggregation mappings for program indicators."
 msgstr "Set disaggregation mappings for program indicators."
 
+msgid "This is some text for validations"
+msgstr "This is some text for validations"
+
+msgid "Sends a notification when a validation rule failed."
+msgstr "Sends a notification when a validation rule failed."
+
 msgid "Manage"
 msgstr "Manage"
 
@@ -3412,3 +3415,81 @@ msgstr "Set up the program indicator legends."
 
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
+
+msgid "Recipients"
+msgstr "Recipients"
+
+msgid "Recipient user groups"
+msgstr "Recipient user groups"
+
+msgid "Notify users in hiearchy only"
+msgstr "Notify users in hiearchy only"
+
+msgid "Set up the basic information for this validation notification."
+msgstr "Set up the basic information for this validation notification."
+
+msgid "Available validation rules"
+msgstr "Available validation rules"
+
+msgid "Selected validation rules"
+msgstr "Selected validation rules"
+
+msgid "Filter available validation rules"
+msgstr "Filter available validation rules"
+
+msgid "Filter selected validation rules"
+msgstr "Filter selected validation rules"
+
+msgid "What should this notification send?"
+msgstr "What should this notification send?"
+
+msgid "Available user groups"
+msgstr "Available user groups"
+
+msgid "Selected user groups"
+msgstr "Selected user groups"
+
+msgid "Filter available user groups"
+msgstr "Filter available user groups"
+
+msgid "Filter selected user groups"
+msgstr "Filter selected user groups"
+
+msgid "Rule name"
+msgstr "Rule name"
+
+msgid "Rule description"
+msgstr "Rule description"
+
+msgid "Operator"
+msgstr "Operator"
+
+msgid "Importance"
+msgstr "Importance"
+
+msgid "Left side description"
+msgstr "Left side description"
+
+msgid "Right side description"
+msgstr "Right side description"
+
+msgid "Left side value"
+msgstr "Left side value"
+
+msgid "Right side value"
+msgstr "Right side value"
+
+msgid "Organisation unit name"
+msgstr "Organisation unit name"
+
+msgid "Current date"
+msgstr "Current date"
+
+msgid "Message subject"
+msgstr "Message subject"
+
+msgid "Message body"
+msgstr "Message body"
+
+msgid "Insert a variable:"
+msgstr "Insert a variable:"
