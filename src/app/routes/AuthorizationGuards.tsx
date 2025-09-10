@@ -6,11 +6,21 @@ import {
     getMergeAuthority,
     useCanMergeModelInSection,
     useIsSectionAuthorizedPredicate,
+    useIsSectionFeatureToggle,
 } from '../../lib/sections'
 
 export const SectionAuthorizedGuard = () => {
     const section = useSectionHandle()
     const isSectionAllowed = useIsSectionAuthorizedPredicate()
+    const isSectionFeatureToggled = useIsSectionFeatureToggle()
+
+    if (section && !isSectionFeatureToggled(section)) {
+        throw new Error(
+            i18n.t(
+                'This page is not enabled for for the software version you are using'
+            )
+        )
+    }
 
     if (section && !isSectionAllowed(section)) {
         throw new Error(

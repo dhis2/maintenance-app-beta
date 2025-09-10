@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-05T14:46:17.049Z\n"
-"PO-Revision-Date: 2025-09-05T14:46:17.049Z\n"
+"POT-Creation-Date: 2025-09-10T08:00:57.421Z\n"
+"PO-Revision-Date: 2025-09-10T08:00:57.421Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1252,6 +1252,9 @@ msgstr "Program name"
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
 
+msgid "Value"
+msgstr "Value"
+
 msgid "Mandatory"
 msgstr "Mandatory"
 
@@ -2035,6 +2038,12 @@ msgstr "Line end"
 msgid "Section display mode"
 msgstr "Section display mode"
 
+msgid "Single page: all sections shown consecutively in one form"
+msgstr "Single page: all sections shown consecutively in one form"
+
+msgid "Tabs: show a tab for each section"
+msgstr "Tabs: show a tab for each section"
+
 msgid "Horizontal tabs"
 msgstr "Horizontal tabs"
 
@@ -2320,6 +2329,15 @@ msgstr "Disable automatic grouping of data elements"
 
 msgid "Display mode"
 msgstr "Display mode"
+
+msgid "Default: data elements as rows, categories as columns"
+msgstr "Default: data elements as rows, categories as columns"
+
+msgid "Pivot: categories as rows, data elements as columns"
+msgstr "Pivot: categories as rows, data elements as columns"
+
+msgid "Move a category to rows: default mode with one category moved to rows"
+msgstr "Move a category to rows: default mode with one category moved to rows"
 
 msgid "Category to move to rows"
 msgstr "Category to move to rows"
@@ -2718,6 +2736,30 @@ msgstr "Filter selected option groups"
 
 msgid "You must select an option set before you can select options."
 msgstr "You must select an option set before you can select options."
+
+msgid "Set up the basic information for this option group."
+msgstr "Set up the basic information for this option group."
+
+msgid "Explain the purpose of this option group."
+msgstr "Explain the purpose of this option group."
+
+msgid "Options"
+msgstr "Options"
+
+msgid "Select the options that belong to this group."
+msgstr "Select the options that belong to this group."
+
+msgid "Available options"
+msgstr "Available options"
+
+msgid "Selected options"
+msgstr "Selected options"
+
+msgid "Filter available options"
+msgstr "Filter available options"
+
+msgid "Filter selected options"
+msgstr "Filter selected options"
 
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."

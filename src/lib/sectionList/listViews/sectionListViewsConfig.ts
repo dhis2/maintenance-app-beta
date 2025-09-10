@@ -481,6 +481,23 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    constant: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Value'), path: 'value' },
+                'lastUpdated',
+            ],
+            available: [
+                'description',
+                DESCRIPTORS.formName,
+                DESCRIPTORS.shortName,
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+        },
+        filters: {},
+    },
     attribute: {
         columns: {
             default: [

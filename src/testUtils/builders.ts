@@ -16,6 +16,7 @@ import { categoryOptionComboListSchema } from '../pages/categoryOptionCombos/for
 import { categoryOptionGroupListSchema } from '../pages/categoryOptionGroups/form/categoryOptionGroupSchema'
 import { categoryOptionGroupSetListSchema } from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
 import { categoryOptionListSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
+import { ConstantsListSchema } from '../pages/constants/form/ConstantFormSchema'
 import { dataElementGroupListSchema } from '../pages/dataElementGroups/form/dataElementGroupSchema'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementListSchema } from '../pages/dataElements/form/dataElementSchema'
@@ -97,6 +98,13 @@ export const testIndicatorType = (overwrites: Record<any, any> = {}) => ({
 
 export const testOptionGroup = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(OptionGroupListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testConstants = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(ConstantsListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -372,6 +380,23 @@ export const testOptionSet = ({
     displayName,
     valueType,
 })
+
+export const testOption = ({
+    id = randomDhis2Id(),
+    name,
+    displayName,
+}: {
+    id?: string
+    name?: string
+    displayName?: string
+} = {}) => {
+    const optionName = name ?? faker.word.sample()
+    return {
+        id,
+        name: optionName,
+        displayName: displayName ?? optionName,
+    }
+}
 
 // TODO: change when schema for validationRule is available
 export const testValidationRule = ({

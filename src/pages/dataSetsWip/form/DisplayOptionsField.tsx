@@ -128,7 +128,8 @@ export function DisplayOptionsField({
                         }}
                         onBlur={renderAsTabs.onBlur}
                         label={i18n.t(
-                            'Single page: all sections shown consecutively in one form'
+                            'Single page: all sections shown consecutively in one form',
+                            { nsSeparator: '~:~' }
                         )}
                     />
                     <Radio
@@ -137,7 +138,9 @@ export function DisplayOptionsField({
                             renderAsTabs.input.onChange(checked)
                         }}
                         onBlur={renderAsTabs.onBlur}
-                        label={i18n.t('Tabs: show a tab for each section')}
+                        label={i18n.t('Tabs: show a tab for each section', {
+                            nsSeparator: '~:~',
+                        })}
                     />
                     {!!renderAsTabs.input.value && (
                         <div className={classes.renderAsTabsOptions}>

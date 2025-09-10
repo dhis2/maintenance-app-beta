@@ -1,18 +1,17 @@
 import { z } from 'zod'
-import { modelFormSchemas } from '../../../lib'
+import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import { OptionGroup, PickWithFieldFilters } from '../../../types/generated'
+import { fieldFilters } from './fieldFilters'
 
-const { withDefaultListColumns } = modelFormSchemas
+const { identifiable, withDefaultListColumns } = modelFormSchemas
 
 const optionGroupBaseSchema = z.object({
     code: z.string().trim().optional(),
     shortName: z.string().trim(),
     name: z.string().trim(),
     description: z.string().trim().optional(),
-    legendSets: z.array(z.object({ id: z.string() })),
     options: z.array(
         z.object({
-            name: z.string(),
-            displayName: z.string(),
             id: z.string(),
         })
     ),
@@ -23,8 +22,18 @@ const optionGroupBaseSchema = z.object({
         .optional(),
 })
 
+export const optionGroupFormSchema = identifiable.merge(optionGroupBaseSchema)
+
 export const OptionGroupListSchema = optionGroupBaseSchema
     .merge(withDefaultListColumns)
     .extend({
         displayShortName: z.string(),
     })
+
+export const initialValues = getDefaults(optionGroupFormSchema)
+export const validate = createFormValidate(optionGroupFormSchema)
+
+export type OptionGroupFormValues = PickWithFieldFilters<
+    OptionGroup,
+    typeof fieldFilters
+>

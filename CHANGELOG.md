@@ -1,3 +1,40 @@
+## [0.66.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.66.0...v0.66.1) (2025-09-10)
+
+
+### Bug Fixes
+
+* program indicator disaggregation min version ([#636](https://github.com/dhis2/maintenance-app-beta/issues/636)) ([0a06f28](https://github.com/dhis2/maintenance-app-beta/commit/0a06f289b0ce63b7e4633b020466c791ed220128))
+
+# [0.66.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.65.0...v0.66.0) (2025-09-10)
+
+
+### Features
+
+* add version feature toggle for sections [DHIS2-19678] ([#628](https://github.com/dhis2/maintenance-app-beta/issues/628)) ([9557561](https://github.com/dhis2/maintenance-app-beta/commit/955756112599c820ced440650708336acbe42c12))
+
+# [0.65.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.64.0...v0.65.0) (2025-09-10)
+
+
+### Bug Fixes
+
+* make attribute object selections filterable ([#632](https://github.com/dhis2/maintenance-app-beta/issues/632)) ([936e770](https://github.com/dhis2/maintenance-app-beta/commit/936e770918ad90e295273261d6cafe60343eb25f))
+* ns separator and indicator form timeouts ([#634](https://github.com/dhis2/maintenance-app-beta/issues/634)) ([f945fe4](https://github.com/dhis2/maintenance-app-beta/commit/f945fe473288b9221a60154c9eaf83d94451fb01))
+
+
+### Features
+
+* add constant schema and related components for constants list ([#629](https://github.com/dhis2/maintenance-app-beta/issues/629)) ([e39b194](https://github.com/dhis2/maintenance-app-beta/commit/e39b19462256535e84a63e47a7cf748198cac2e8))
+
+# [0.64.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.63.0...v0.64.0) (2025-09-07)
+
+
+### Features
+
+* add attributes list/edit/new [DHIS2-19842] [DHIS2-19843] ([#625](https://github.com/dhis2/maintenance-app-beta/issues/625)) ([59e45ea](https://github.com/dhis2/maintenance-app-beta/commit/59e45ea690331f656d259dc5cf9bd3d6c2496923))
+* add option group forms ([#615](https://github.com/dhis2/maintenance-app-beta/issues/615)) ([d05ce66](https://github.com/dhis2/maintenance-app-beta/commit/d05ce66775144fa6c1c173901356132ca6aa25cd))
+* enhance DefaultSectionedFormFooter with loading and dirty state handling ([f007b3e](https://github.com/dhis2/maintenance-app-beta/commit/f007b3e99c208504cbd15e26d41ce4ce31eadc82))
+* enhance DefaultSectionedFormFooter with loading and dirty state handling ([1d13590](https://github.com/dhis2/maintenance-app-beta/commit/1d13590145a8042c24e1b326666ac5062202f6c0))
+
 # [0.63.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.62.0...v0.63.0) (2025-08-26)
 
 
