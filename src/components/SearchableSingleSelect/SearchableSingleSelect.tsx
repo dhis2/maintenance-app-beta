@@ -69,6 +69,8 @@ export interface SearchableSingleSelectPropTypes {
     searchable?: boolean
     noMatchWithoutFilterText?: string
     dataTest?: string
+    clearable?: boolean
+    clearText?: string
 }
 
 export const SearchableSingleSelect = ({
@@ -92,14 +94,15 @@ export const SearchableSingleSelect = ({
     searchable = true,
     noMatchWithoutFilterText,
     dataTest,
+    clearable,
+    clearText,
 }: SearchableSingleSelectPropTypes) => {
     const [loadingSpinnerRef, setLoadingSpinnerRef] = useState<HTMLElement>()
 
     const { liveValue: filter, setValue: setFilterValue } =
         useDebouncedState<string>({
             initialValue: '',
-            onSetDebouncedValue: (value: string) =>
-                onFilterChange && onFilterChange({ value }),
+            onSetDebouncedValue: (value: string) => onFilterChange?.({ value }),
         })
 
     useEffect(() => {
@@ -145,6 +148,8 @@ export const SearchableSingleSelect = ({
             onFocus={onFocus}
             dense={dense}
             dataTest={dataTest}
+            clearable={clearable}
+            clearText={clearText}
         >
             {searchable && (
                 <div className={classes.searchField}>

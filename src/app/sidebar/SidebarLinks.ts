@@ -7,6 +7,7 @@ import {
     getOverviewPath,
     getSectionPath,
     useIsSectionAuthorizedPredicate,
+    useIsSectionFeatureToggle,
 } from '../../lib'
 
 export interface LinkItem {
@@ -111,22 +112,27 @@ export const sidebarLinks = {
         label: OVERVIEW_SECTIONS.other.title,
         links: [
             getOverviewLinkItem(OVERVIEW_SECTIONS.other),
-            getSectionLinkItem(SECTIONS_MAP.programDisaggregation),
+            getSectionLinkItem(SECTIONS_MAP.attribute),
             getSectionLinkItem(SECTIONS_MAP.optionGroup),
             getSectionLinkItem(SECTIONS_MAP.optionGroupSet),
+            getSectionLinkItem(SECTIONS_MAP.constant),
+            getSectionLinkItem(SECTIONS_MAP.programDisaggregation),
         ],
     },
 } satisfies SidebarLinks
 
 export const useSidebarLinks = (): ParentLink[] => {
     const isSectionAuthorized = useIsSectionAuthorizedPredicate()
+    const isSectionFeatureToggled = useIsSectionFeatureToggle()
 
     return useMemo(() => {
         const authorizedSidebarLinks: ParentLink[] = Object.values(sidebarLinks)
             .map(({ label, links }) => ({
                 label,
-                links: links.filter(({ section }) =>
-                    isSectionAuthorized(section)
+                links: links.filter(
+                    ({ section }) =>
+                        isSectionAuthorized(section) &&
+                        isSectionFeatureToggled(section)
                 ),
             }))
             .filter(({ links }) => links.length > 0)

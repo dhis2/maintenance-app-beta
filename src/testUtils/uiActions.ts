@@ -4,16 +4,50 @@ import { userEvent } from '@testing-library/user-event'
 const enterInputFieldValue = async (
     fieldName: string,
     text: string,
-    screen: RenderResult
+    screen: RenderResult,
+    type?: string
 ) => {
     const field = screen.getByTestId(`formfields-${fieldName}`)
-    const input = within(field).getByRole('textbox') as HTMLInputElement
-    clearInputField(fieldName, screen)
+    const input = within(field).getByRole(type ?? 'textbox') as HTMLInputElement
+    await clearInputField(fieldName, screen, type ?? 'textbox')
     await userEvent.type(input, text)
+    await userEvent.tab()
 }
-const clearInputField = async (fieldName: string, screen: RenderResult) => {
+const enterExpressionInModal = async (
+    modal: HTMLElement,
+    anExpression: string
+) => {
+    expect(modal).toBeVisible()
+    const input = within(modal).getByRole('textbox') as HTMLInputElement
+    await userEvent.type(input, anExpression)
+    await userEvent.click(
+        within(modal).getByTestId('expression-builder-modal-info')
+    )
+}
+
+const applyNewExpressionWithinModal = async (
+    fieldName: string,
+    anExpression: string,
+    screen: RenderResult
+) => {
+    await userEvent.click(
+        screen.getByTestId(`edit-${fieldName}-expression-button`)
+    )
+    const editNumeratorModal = await screen.findByTestId(
+        `expression-builder-modal`
+    )
+    await uiActions.enterExpressionInModal(editNumeratorModal, anExpression)
+    await userEvent.click(
+        within(editNumeratorModal).getByTestId('apply-expression-button')
+    )
+}
+const clearInputField = async (
+    fieldName: string,
+    screen: RenderResult,
+    type?: string
+) => {
     const field = screen.getByTestId(`formfields-${fieldName}`)
-    const input = within(field).getByRole('textbox') as HTMLInputElement
+    const input = within(field).getByRole(type ?? 'textbox') as HTMLInputElement
     await userEvent.clear(input)
 }
 
@@ -101,6 +135,15 @@ const closeSingleSelectIfOpen = async (
     }
 }
 
+const clearSingleSelect = async (fieldName: string, screen: RenderResult) => {
+    const option = screen.getByTestId(fieldName)
+    const selectInput = within(option).getByTestId('dhis2-uicore-select-input')
+    const clearButton = within(selectInput).getByTestId(
+        'dhis2-uicore-singleselect-clear'
+    )
+    await userEvent.click(clearButton)
+}
+
 const submitForm = async (screen: RenderResult) => {
     const submitButton = screen.getByTestId('form-save-button')
     await userEvent.click(submitButton)
@@ -163,4 +206,7 @@ export const uiActions = {
     // pickColor, Need to fix this
     clickOnCheckboxField,
     pickRadioField,
+    enterExpressionInModal,
+    applyNewExpressionWithinModal,
+    clearSingleSelect,
 }
