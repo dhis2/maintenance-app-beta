@@ -57,8 +57,6 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     minAttributesRequiredToSearch: i18n.t(
         'Minimum number of attributes required to search'
     ),
-    'lastUpdatedBy.name': i18n.t('Last updated by'),
-    'user.name': i18n.t('Owner'),
 }
 
 const camelCaseToSentenceCase = (camelCase: string) =>
