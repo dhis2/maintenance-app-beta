@@ -5,11 +5,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-10T08:00:57.421Z\n"
-"PO-Revision-Date: 2025-09-10T08:00:57.421Z\n"
+"POT-Creation-Date: 2025-09-11T08:51:22.254Z\n"
+"PO-Revision-Date: 2025-09-11T08:51:22.254Z\n"
 
 msgid "schemas"
 msgstr "schemas"
+
+msgid "This page is not enabled for for the software version you are using"
+msgstr "This page is not enabled for for the software version you are using"
 
 msgid "You do not have the authority to view this page."
 msgstr "You do not have the authority to view this page."
@@ -1164,6 +1167,18 @@ msgstr "Value type"
 
 msgid "Zero is significant"
 msgstr "Zero is significant"
+
+msgid "Enable tracked entity instance audit log"
+msgstr "Enable tracked entity instance audit log"
+
+msgid "Feature type"
+msgstr "Feature type"
+
+msgid "Maximum number of tracked entity instances to return in search"
+msgstr "Maximum number of tracked entity instances to return in search"
+
+msgid "Minimum number of attributes required to search"
+msgstr "Minimum number of attributes required to search"
 
 msgid "This field requires a unique value, please choose another one"
 msgstr "This field requires a unique value, please choose another one"

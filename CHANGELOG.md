@@ -1,3 +1,10 @@
+# [0.67.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.66.1...v0.67.0) (2025-09-11)
+
+
+### Features
+
+* add tracked entity type list ([#627](https://github.com/dhis2/maintenance-app-beta/issues/627)) ([36c51b0](https://github.com/dhis2/maintenance-app-beta/commit/36c51b04efa025f66583ae3fad8005cbb3d125ba))
+
 ## [0.66.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.66.0...v0.66.1) (2025-09-10)
 
 
