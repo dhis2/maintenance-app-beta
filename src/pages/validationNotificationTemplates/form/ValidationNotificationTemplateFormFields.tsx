@@ -70,6 +70,7 @@ export const ValidationNotificationTemplateFormFields = ({
                         filterPlaceholderPicked={i18n.t(
                             'Filter selected validation rules'
                         )}
+                        maxSelections={Infinity}
                     />
                 </StandardFormField>
             </SectionedFormSection>
@@ -106,6 +107,7 @@ export const ValidationNotificationTemplateFormFields = ({
                         filterPlaceholderPicked={i18n.t(
                             'Filter selected user groups'
                         )}
+                        maxSelections={Infinity}
                     />
                 </StandardFormField>
                 <StandardFormField>

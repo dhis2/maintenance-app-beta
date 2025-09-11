@@ -10,7 +10,9 @@ export const ValidationsOverview = () => {
     return (
         <OverviewGroup title={TITLE}>
             <OverviewGroupSummary>
-                {i18n.t('This is some text for validations')}
+                {i18n.t(
+                    'Validations can ensure data accuracy by automatically checking if entered data meets predefined criteria'
+                )}
             </OverviewGroupSummary>
             <ValidationsCardGroup />
         </OverviewGroup>

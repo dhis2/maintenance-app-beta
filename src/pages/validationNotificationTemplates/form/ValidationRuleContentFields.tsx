@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
-import React, { useRef, useState } from 'react'
-import { Field as FieldRFF, useField } from 'react-final-form'
+import React, { useRef, useState, RefObject } from 'react'
+import { Field as FieldRFF, useField, FieldInputProps } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 import styles from './ValidationRuleContentFields.module.css'
 
@@ -25,8 +25,8 @@ const insertElement = ({
     input,
 }: {
     id: string
-    elementRef: any
-    input: any
+    elementRef: RefObject<HTMLInputElement | HTMLTextAreaElement>
+    input: FieldInputProps<string>
 }) => {
     if (elementRef.current) {
         const elementText = `V{${id}}`
@@ -36,6 +36,7 @@ const insertElement = ({
         const endText = elementRef.current?.value.slice(cursorStartIndex)
         const newText = `${startText}${elementText}${endText}`
         input.onChange(newText)
+        elementRef.current?.focus()
     }
 }
 
