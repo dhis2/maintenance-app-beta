@@ -22,6 +22,12 @@ const insertElement = ({
         const endText = elementRef.current?.value.slice(cursorStartIndex)
         const newText = `${startText}${elementText}${endText}`
         input.onChange(newText)
+
+        // force focus then blur to trigger rerun of validations
+        elementRef.current?.focus()
+        elementRef.current?.blur()
+
+        // then focus
         elementRef.current?.focus()
     }
 }
