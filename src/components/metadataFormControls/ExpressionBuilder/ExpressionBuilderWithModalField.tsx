@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, Label, TextAreaFieldFF } from '@dhis2/ui'
+import { Button, TextAreaFieldFF } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useField } from 'react-final-form'
 import { useSchemaSectionHandleOrThrow } from '../../../lib'
