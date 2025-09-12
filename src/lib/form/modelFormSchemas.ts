@@ -58,13 +58,20 @@ export const AccessSchema = z.object({
         .optional(),
 })
 
+const dateTimeString = z
+    .string()
+    .regex(
+        /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}$/,
+        'Invalid date-time format, expected YYYY-MM-DDTHH:mm:ss.sss'
+    )
+
 const withDefaultListColumns = z.object({
     id: z.string(),
     displayName: z.string(),
-    created: z.coerce.date(),
+    created: dateTimeString,
     createdBy: UserSchema,
     href: z.string().url(),
-    lastUpdated: z.coerce.date(),
+    lastUpdated: dateTimeString,
     lastUpdatedBy: UserSchema.optional(),
     sharing: z.object({ public: z.literal('rw------') }),
     access: AccessSchema,
