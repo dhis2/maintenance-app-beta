@@ -17,7 +17,7 @@ import TestComponentWithRouter from '../../testUtils/TestComponentWithRouter'
 import { uiActions } from '../../testUtils/uiActions'
 import { uiAssertions } from '../../testUtils/uiAssertions'
 import { Component as Edit } from './Edit'
-import { VALIDATION_RULE_VARIABLES } from './form/ValidationRuleContentFields'
+import { VALIDATION_RULE_VARIABLES } from './form/ValidationNotificationTemplateFormFields'
 import { Component as New } from './New'
 import resetAllMocks = jest.resetAllMocks
 

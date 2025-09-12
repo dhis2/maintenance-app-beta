@@ -5,11 +5,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-10T08:00:57.421Z\n"
-"PO-Revision-Date: 2025-09-10T08:00:57.421Z\n"
+"POT-Creation-Date: 2025-09-11T17:04:20.278Z\n"
+"PO-Revision-Date: 2025-09-11T17:04:20.278Z\n"
 
 msgid "schemas"
 msgstr "schemas"
+
+msgid "This page is not enabled for for the software version you are using"
+msgstr "This page is not enabled for for the software version you are using"
 
 msgid "You do not have the authority to view this page."
 msgstr "You do not have the authority to view this page."
@@ -83,6 +86,15 @@ msgstr "Remove icon"
 
 msgid "Cancel"
 msgstr "Cancel"
+
+msgid "Message subject"
+msgstr "Message subject"
+
+msgid "Message body"
+msgstr "Message body"
+
+msgid "Insert a variable:"
+msgstr "Insert a variable:"
 
 msgid "Clear all"
 msgstr "Clear all"
@@ -3120,8 +3132,12 @@ msgstr "Create, modify and view sets of option groups."
 msgid "Set disaggregation mappings for program indicators."
 msgstr "Set disaggregation mappings for program indicators."
 
-msgid "This is some text for validations"
-msgstr "This is some text for validations"
+msgid ""
+"Validations can ensure data accuracy by automatically checking if entered "
+"data meets predefined criteria"
+msgstr ""
+"Validations can ensure data accuracy by automatically checking if entered "
+"data meets predefined criteria"
 
 msgid "Sends a notification when a validation rule failed."
 msgstr "Sends a notification when a validation rule failed."
@@ -3425,36 +3441,6 @@ msgstr "Recipient user groups"
 msgid "Notify users in hiearchy only"
 msgstr "Notify users in hiearchy only"
 
-msgid "Set up the basic information for this validation notification."
-msgstr "Set up the basic information for this validation notification."
-
-msgid "Available validation rules"
-msgstr "Available validation rules"
-
-msgid "Selected validation rules"
-msgstr "Selected validation rules"
-
-msgid "Filter available validation rules"
-msgstr "Filter available validation rules"
-
-msgid "Filter selected validation rules"
-msgstr "Filter selected validation rules"
-
-msgid "What should this notification send?"
-msgstr "What should this notification send?"
-
-msgid "Available user groups"
-msgstr "Available user groups"
-
-msgid "Selected user groups"
-msgstr "Selected user groups"
-
-msgid "Filter available user groups"
-msgstr "Filter available user groups"
-
-msgid "Filter selected user groups"
-msgstr "Filter selected user groups"
-
 msgid "Rule name"
 msgstr "Rule name"
 
@@ -3485,11 +3471,32 @@ msgstr "Organisation unit name"
 msgid "Current date"
 msgstr "Current date"
 
-msgid "Message subject"
-msgstr "Message subject"
+msgid "Set up the basic information for this validation notification."
+msgstr "Set up the basic information for this validation notification."
 
-msgid "Message body"
-msgstr "Message body"
+msgid "Available validation rules"
+msgstr "Available validation rules"
 
-msgid "Insert a variable:"
-msgstr "Insert a variable:"
+msgid "Selected validation rules"
+msgstr "Selected validation rules"
+
+msgid "Filter available validation rules"
+msgstr "Filter available validation rules"
+
+msgid "Filter selected validation rules"
+msgstr "Filter selected validation rules"
+
+msgid "What should this notification send?"
+msgstr "What should this notification send?"
+
+msgid "Available user groups"
+msgstr "Available user groups"
+
+msgid "Selected user groups"
+msgstr "Selected user groups"
+
+msgid "Filter available user groups"
+msgstr "Filter available user groups"
+
+msgid "Filter selected user groups"
+msgstr "Filter selected user groups"

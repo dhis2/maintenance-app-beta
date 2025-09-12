@@ -37,6 +37,23 @@
     margin-top: 2px;
 }
 
+.inputError {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    gap: var(--spacers-dp8);
+    margin-top: 2px;
+}
+
+.inputError:not(:focus) {
+    border-color: var(--colors-red500) !important;
+}
+
+.validationRuleField {
+    display: flex;
+    align-items: center;
+}
+
 .validationRuleField > input,
 textarea {
     box-sizing: border-box;
@@ -51,7 +68,8 @@ textarea {
     padding: 11px 12px;
 
     outline: 0;
-    border: 1px solid var(--colors-grey500);
+    border: 1px solid;
+    border-color: var(--colors-grey500);
     border-radius: 3px;
     box-shadow: inset 0 0 1px 0 rgba(48, 54, 60, 0.1);
     text-overflow: ellipsis;
@@ -110,4 +128,18 @@ textarea.disabled {
     border-color: var(--colors-grey500);
     color: var(--theme-disabled);
     cursor: not-allowed;
+}
+
+.errorStyling {
+    margin-block-start: 4px;
+    margin-block-end: 0px;
+    margin-inline: 0px;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--theme-error);
+}
+
+.errorIcon {
+    margin-inline-start: var(--spacers-dp8);
+    display: inline-block;
 }

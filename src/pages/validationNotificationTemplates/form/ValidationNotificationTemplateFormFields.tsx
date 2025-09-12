@@ -11,13 +11,13 @@ import {
     NameField,
     CodeField,
     ModelTransferField,
+    MessageFields,
 } from '../../../components'
 import {
     useSchemaSectionHandleOrThrow,
     useSyncSelectedSectionWithScroll,
     getConstantTranslation,
 } from '../../../lib'
-import { ValidationRuleContentFields } from './ValidationRuleContentFields'
 
 const notificationTypeOptions = [
     {
@@ -29,6 +29,20 @@ const notificationTypeOptions = [
         value: 'SINGLE_NOTIFICATION',
     },
 ]
+
+export const VALIDATION_RULE_VARIABLES = {
+    rule_name: i18n.t('Rule name'),
+    rule_description: i18n.t('Rule description'),
+    operator: i18n.t('Operator'),
+    importance: i18n.t('Importance'),
+    left_side_description: i18n.t('Left side description'),
+    right_side_description: i18n.t('Right side description'),
+    left_side_value: i18n.t('Left side value'),
+    right_side_value: i18n.t('Right side value'),
+    org_unit_name: i18n.t('Organisation unit name'),
+    period: i18n.t('Period'),
+    current_date: i18n.t('Current date'),
+} as Record<string, string>
 
 export const ValidationNotificationTemplateFormFields = ({
     initialValues,
@@ -82,7 +96,7 @@ export const ValidationNotificationTemplateFormFields = ({
                 <StandardFormSectionDescription>
                     {i18n.t('What should this notification send?')}
                 </StandardFormSectionDescription>
-                <ValidationRuleContentFields />
+                <MessageFields messageVariables={VALIDATION_RULE_VARIABLES} />
             </SectionedFormSection>
 
             <SectionedFormSection name="recipient">
