@@ -1,10 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, InputFieldFF, TextAreaFieldFF } from '@dhis2/ui'
+import { Button, Label, TextAreaFieldFF } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
-import { Field as FieldRFF, useField } from 'react-final-form'
+import { useField } from 'react-final-form'
 import { useSchemaSectionHandleOrThrow } from '../../../lib'
 import { useValidator } from '../../../lib/models/useFieldValidators'
-import { StandardFormField } from '../../standardForm'
 import { ExpressionBuilderModal } from './ExpressionBuilderModal'
 import styles from './ExpressionField.module.css'
 import { useExpressionValidator } from './useExpressionValidator'
@@ -23,30 +22,30 @@ export function ExpressionBuilderWithModalField({
     modalTitle,
     editButtonText,
     validationResource,
-    descriptionFieldName,
-    helpText,
 }: ExpressionFieldProps) {
     const [showExpressionBuilder, setShowExpressionBuilder] = useState(false)
 
-    const [initialValidate, initialDescription] =
+    const [initialExpressionValidation, initialExpressionDescription] =
         useExpressionValidator(validationResource)
     const [expressionDescription, setExpressionDescription] = useState<
         string | undefined
     >(undefined)
-    const descriptionToShow = expressionDescription ?? initialDescription
+    const descriptionToShow =
+        expressionDescription ?? initialExpressionDescription
     const schemaSection = useSchemaSectionHandleOrThrow()
-    const validate = useValidator({ schemaSection, property: fieldName })
-
-    const { input, meta } = useField<string>(fieldName, { validate })
+    const schemaValidate = useValidator({ schemaSection, property: fieldName })
+    const { input, meta } = useField<string>(fieldName, {
+        validate: schemaValidate,
+    })
 
     useEffect(() => {
         if (input.value) {
-            initialValidate(input.value)
+            initialExpressionValidation(input.value)
         }
     })
 
     return (
-        <div className={styles.container}>
+        <div>
             <div className={styles.expression}>
                 <div
                     className={styles.expressionBox}
@@ -89,20 +88,6 @@ export function ExpressionBuilderWithModalField({
                         }
                     }}
                 />
-            )}
-
-            {descriptionFieldName && (
-                <StandardFormField>
-                    <FieldRFF<string | undefined>
-                        component={InputFieldFF}
-                        inputWidth="400px"
-                        required
-                        name={descriptionFieldName}
-                        dataTest={`formfields-${descriptionFieldName}`}
-                        label={i18n.t('Description (required)')}
-                        helpText={helpText}
-                    />
-                </StandardFormField>
             )}
         </div>
     )
