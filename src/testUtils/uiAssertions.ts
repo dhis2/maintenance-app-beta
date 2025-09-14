@@ -10,7 +10,15 @@ const expectInputFieldToExist = (
 ) => {
     const field = screen.getByTestId(`formfields-${fieldName}`)
     expect(field).toBeVisible()
-    const input = within(field).getByRole(role ?? 'textbox') as HTMLInputElement
+
+    // Default role is textbox, but fall back to spinbutton for number inputs
+    let input: HTMLInputElement
+    try {
+        input = within(field).getByRole(role ?? 'textbox') as HTMLInputElement
+    } catch {
+        input = within(field).getByRole('spinbutton') as HTMLInputElement
+    }
+
     expect(input).toBeVisible()
     expect(input).toHaveAttribute('name', fieldName)
     expect(input).toHaveAttribute('value', value)

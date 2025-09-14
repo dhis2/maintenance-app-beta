@@ -3,16 +3,29 @@ import { userEvent } from '@testing-library/user-event'
 
 const enterInputFieldValue = async (
     fieldName: string,
-    text: string,
+    text: string | number,
     screen: RenderResult,
-    type?: string
+    role?: string
 ) => {
     const field = screen.getByTestId(`formfields-${fieldName}`)
-    const input = within(field).getByRole(type ?? 'textbox') as HTMLInputElement
-    await clearInputField(fieldName, screen, type ?? 'textbox')
-    await userEvent.type(input, text)
+
+    let input: HTMLInputElement
+    try {
+        input = within(field).getByRole(role ?? 'textbox') as HTMLInputElement
+    } catch {
+        input = within(field).getByRole('spinbutton') as HTMLInputElement
+    }
+
+    await userEvent.clear(input)
+    await userEvent.type(input, String(text))
     await userEvent.tab()
+
+    // convert back if it's a number field
+    if (input.type === 'number') {
+        expect(input).toHaveValue(Number(text))
+    }
 }
+
 const enterExpressionInModal = async (
     modal: HTMLElement,
     anExpression: string
