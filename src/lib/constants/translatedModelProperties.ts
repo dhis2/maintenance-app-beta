@@ -48,6 +48,15 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     user: i18n.t('Owner'), // user refers to the owner of the object
     valueType: i18n.t('Value type'),
     zeroIsSignificant: i18n.t('Zero is significant'),
+    displayDescription: i18n.t('Description'),
+    allowAuditLog: i18n.t('Enable tracked entity instance audit log'),
+    featureType: i18n.t('Feature type'),
+    maxTeiCountToReturn: i18n.t(
+        'Maximum number of tracked entity instances to return in search'
+    ),
+    minAttributesRequiredToSearch: i18n.t(
+        'Minimum number of attributes required to search'
+    ),
 }
 
 const camelCaseToSentenceCase = (camelCase: string) =>

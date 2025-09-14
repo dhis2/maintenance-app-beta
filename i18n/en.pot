@@ -7,6 +7,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "POT-Creation-Date: 2025-09-11T08:32:15.792Z\n"
 "PO-Revision-Date: 2025-09-11T08:32:15.793Z\n"
+"POT-Creation-Date: 2025-09-11T08:51:22.254Z\n"
+"PO-Revision-Date: 2025-09-11T08:51:22.254Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1162,6 +1164,18 @@ msgstr "Value type"
 
 msgid "Zero is significant"
 msgstr "Zero is significant"
+
+msgid "Enable tracked entity instance audit log"
+msgstr "Enable tracked entity instance audit log"
+
+msgid "Feature type"
+msgstr "Feature type"
+
+msgid "Maximum number of tracked entity instances to return in search"
+msgstr "Maximum number of tracked entity instances to return in search"
+
+msgid "Minimum number of attributes required to search"
+msgstr "Minimum number of attributes required to search"
 
 msgid "This field requires a unique value, please choose another one"
 msgstr "This field requires a unique value, please choose another one"
