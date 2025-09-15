@@ -33,6 +33,7 @@ import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGro
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
 import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
+import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form/TrackedEntityTypeFormSchema'
 import { validationRuleGroupsListSchema } from '../pages/validationRuleGroups/form/validationRuleGroupsSchema'
 import {
     CategoryMapping,
@@ -275,6 +276,11 @@ export const testFormProgramIndicatorGroup = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(programIndicatorGroupListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testTrackedEntityType = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(trackedEntityTypeListSchema, { mockeryMapper }),
     ...overwrites,
 })
 

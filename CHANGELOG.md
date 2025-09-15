@@ -1,3 +1,24 @@
+# [0.67.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.66.1...v0.67.0) (2025-09-11)
+
+
+### Features
+
+* add tracked entity type list ([#627](https://github.com/dhis2/maintenance-app-beta/issues/627)) ([36c51b0](https://github.com/dhis2/maintenance-app-beta/commit/36c51b04efa025f66583ae3fad8005cbb3d125ba))
+
+## [0.66.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.66.0...v0.66.1) (2025-09-10)
+
+
+### Bug Fixes
+
+* program indicator disaggregation min version ([#636](https://github.com/dhis2/maintenance-app-beta/issues/636)) ([0a06f28](https://github.com/dhis2/maintenance-app-beta/commit/0a06f289b0ce63b7e4633b020466c791ed220128))
+
+# [0.66.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.65.0...v0.66.0) (2025-09-10)
+
+
+### Features
+
+* add version feature toggle for sections [DHIS2-19678] ([#628](https://github.com/dhis2/maintenance-app-beta/issues/628)) ([9557561](https://github.com/dhis2/maintenance-app-beta/commit/955756112599c820ced440650708336acbe42c12))
+
 # [0.65.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.64.0...v0.65.0) (2025-09-10)
 
 

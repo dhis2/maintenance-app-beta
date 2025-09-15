@@ -481,6 +481,31 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    trackedEntityType: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'displayDescription',
+                'allowAuditLog',
+                'favorite',
+                'featureType',
+                DESCRIPTORS.formName,
+                'maxTeiCountToReturn',
+                'minAttributesRequiredToSearch',
+                DESCRIPTORS.shortName,
+                'user',
+            ],
+        },
+        filters: {
+            default: [],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
+    },
     constant: {
         columns: {
             default: [
