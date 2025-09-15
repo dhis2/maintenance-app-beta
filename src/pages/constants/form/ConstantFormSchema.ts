@@ -2,7 +2,8 @@ import { z } from 'zod'
 import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 import { Constant, PickWithFieldFilters } from '../../../types/generated'
 import { fieldFilters } from './fieldFilters'
-const { identifiable, withDefaultListColumns } = modelFormSchemas
+const { identifiable, withDefaultListColumns, withAttributeValues } =
+    modelFormSchemas
 
 const constantBaseSchema = z.object({
     code: z.string().trim().optional(),
@@ -16,6 +17,7 @@ export const constantFormSchema = identifiable.merge(constantBaseSchema)
 
 export const ConstantsListSchema = constantBaseSchema
     .merge(withDefaultListColumns)
+    .merge(withAttributeValues)
     .extend({
         displayShortName: z.string(),
     })
