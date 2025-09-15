@@ -6,10 +6,8 @@ const { identifiable, withDefaultListColumns, withAttributeValues } =
 
 const validationRuleGroupsBaseSchema = z.object({
     code: z.string().trim().optional(),
-    //shortName: z.string().trim(),
     name: z.string().trim(),
     description: z.string().trim().optional(),
-    //value: z.number(),
     /*validationRules: z
         .array(
             z.object({
@@ -20,11 +18,8 @@ const validationRuleGroupsBaseSchema = z.object({
         .default([]),*/
 })
 
-export const validationRuleGroupsListSchema = validationRuleGroupsBaseSchema
-    .merge(withDefaultListColumns)
-    .extend({
-        displayShortName: z.string(),
-    })
+export const validationRuleGroupsListSchema =
+    validationRuleGroupsBaseSchema.merge(withDefaultListColumns)
 
 export const validationRuleGroupsFormSchema = identifiable
     .merge(validationRuleGroupsBaseSchema)
