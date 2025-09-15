@@ -670,4 +670,18 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    validationRuleGroup: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+        },
+        filters: {},
+    },
 } satisfies SectionListViewConfig<SectionName>
