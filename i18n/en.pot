@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-11T17:04:20.278Z\n"
-"PO-Revision-Date: 2025-09-11T17:04:20.278Z\n"
+"POT-Creation-Date: 2025-09-15T11:18:22.916Z\n"
+"PO-Revision-Date: 2025-09-15T11:18:22.916Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -89,6 +89,9 @@ msgstr "Cancel"
 
 msgid "Message subject"
 msgstr "Message subject"
+
+msgid "Message body (required) *"
+msgstr "Message body (required) *"
 
 msgid "Message body"
 msgstr "Message body"
@@ -1850,6 +1853,30 @@ msgstr "Search data sets..."
 msgid "Filter selected data sets..."
 msgstr "Filter selected data sets..."
 
+msgid "Data set name"
+msgstr "Data set name"
+
+msgid "Current date"
+msgstr "Current date"
+
+msgid "Data set description"
+msgstr "Data set description"
+
+msgid "Complete registration organisation unit"
+msgstr "Complete registration organisation unit"
+
+msgid "Complete registration period"
+msgstr "Complete registration period"
+
+msgid "Complete registration user"
+msgstr "Complete registration user"
+
+msgid "Complete registration time"
+msgstr "Complete registration time"
+
+msgid "Complete registration att opt combo"
+msgstr "Complete registration att opt combo"
+
 msgid "Set up the basic information for the notification template."
 msgstr "Set up the basic information for the notification template."
 
@@ -1909,6 +1936,9 @@ msgstr "Used as template for the message field."
 
 msgid "Message"
 msgstr "Message"
+
+msgid "Please enter a maximum of {{upperBound}} characters"
+msgstr "Please enter a maximum of {{upperBound}} characters"
 
 msgid "Edit Data Set Notification"
 msgstr "Edit Data Set Notification"
@@ -3133,11 +3163,15 @@ msgid "Set disaggregation mappings for program indicators."
 msgstr "Set disaggregation mappings for program indicators."
 
 msgid ""
-"Validations can ensure data accuracy by automatically checking if entered "
-"data meets predefined criteria"
+"Validations are used to provide important feedback during data entry to "
+"enhance data quality. Validation rules define expected criteria for "
+"specific data elements and display warnings at three levels of importance "
+"if these criteria are not met."
 msgstr ""
-"Validations can ensure data accuracy by automatically checking if entered "
-"data meets predefined criteria"
+"Validations are used to provide important feedback during data entry to "
+"enhance data quality. Validation rules define expected criteria for "
+"specific data elements and display warnings at three levels of importance "
+"if these criteria are not met."
 
 msgid "Sends a notification when a validation rule failed."
 msgstr "Sends a notification when a validation rule failed."
@@ -3467,9 +3501,6 @@ msgstr "Right side value"
 
 msgid "Organisation unit name"
 msgstr "Organisation unit name"
-
-msgid "Current date"
-msgstr "Current date"
 
 msgid "Set up the basic information for this validation notification."
 msgstr "Set up the basic information for this validation notification."

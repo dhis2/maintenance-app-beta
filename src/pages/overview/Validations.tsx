@@ -11,7 +11,7 @@ export const ValidationsOverview = () => {
         <OverviewGroup title={TITLE}>
             <OverviewGroupSummary>
                 {i18n.t(
-                    'Validations can ensure data accuracy by automatically checking if entered data meets predefined criteria'
+                    'Validations are used to provide important feedback during data entry to enhance data quality. Validation rules define expected criteria for specific data elements and display warnings at three levels of importance if these criteria are not met.'
                 )}
             </OverviewGroupSummary>
             <ValidationsCardGroup />
