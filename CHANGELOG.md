@@ -1,3 +1,10 @@
+# [0.69.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.68.0...v0.69.0) (2025-09-16)
+
+
+### Features
+
+* validation notification templates [DHIS2-19842] [DHIS2-19843] ([#631](https://github.com/dhis2/maintenance-app-beta/issues/631)) ([de75348](https://github.com/dhis2/maintenance-app-beta/commit/de753487bcd40e22d461af68bc032a3da62d06f2))
+
 # [0.68.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.67.0...v0.68.0) (2025-09-15)
 
 
