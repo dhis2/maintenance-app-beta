@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-15T11:18:22.916Z\n"
-"PO-Revision-Date: 2025-09-15T11:18:22.916Z\n"
+"POT-Creation-Date: 2025-09-16T13:42:48.350Z\n"
+"PO-Revision-Date: 2025-09-16T13:42:48.350Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1177,6 +1177,18 @@ msgstr "Value type"
 msgid "Zero is significant"
 msgstr "Zero is significant"
 
+msgid "Enable tracked entity instance audit log"
+msgstr "Enable tracked entity instance audit log"
+
+msgid "Feature type"
+msgstr "Feature type"
+
+msgid "Maximum number of tracked entity instances to return in search"
+msgstr "Maximum number of tracked entity instances to return in search"
+
+msgid "Minimum number of attributes required to search"
+msgstr "Minimum number of attributes required to search"
+
 msgid "This field requires a unique value, please choose another one"
 msgstr "This field requires a unique value, please choose another one"
 
@@ -2323,6 +2335,15 @@ msgstr "Totals"
 msgid "Flags"
 msgstr "Flags"
 
+msgid "Filter by category combination"
+msgstr "Filter by category combination"
+
+msgid "<No filter>"
+msgstr "<No filter>"
+
+msgid "Manage enabled/disabled fields"
+msgstr "Manage enabled/disabled fields"
+
 msgid "Section setup"
 msgstr "Section setup"
 
@@ -2341,15 +2362,6 @@ msgstr "Section data elements"
 
 msgid "Choose what data is collected for this section."
 msgstr "Choose what data is collected for this section."
-
-msgid "Filter by category combination"
-msgstr "Filter by category combination"
-
-msgid "<No filter>"
-msgstr "<No filter>"
-
-msgid "Manage enabled/disabled fields"
-msgstr "Manage enabled/disabled fields"
 
 msgid "Section indicators"
 msgstr "Section indicators"
@@ -2399,17 +2411,14 @@ msgstr "Save section"
 msgid "Saving a section does not save other changes to the data set"
 msgstr "Saving a section does not save other changes to the data set"
 
-msgid "Manage grey fields"
-msgstr "Manage grey fields"
-
 msgid "Disabled"
 msgstr "Disabled"
 
 msgid "Enabled"
 msgstr "Enabled"
 
-msgid "Update grey fields"
-msgstr "Update grey fields"
+msgid "Update"
+msgstr "Update"
 
 msgid "Add period entry rule"
 msgstr "Add period entry rule"

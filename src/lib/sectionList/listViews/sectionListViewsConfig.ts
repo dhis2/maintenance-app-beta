@@ -481,6 +481,31 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    trackedEntityType: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'displayDescription',
+                'allowAuditLog',
+                'favorite',
+                'featureType',
+                DESCRIPTORS.formName,
+                'maxTeiCountToReturn',
+                'minAttributesRequiredToSearch',
+                DESCRIPTORS.shortName,
+                'user',
+            ],
+        },
+        filters: {
+            default: [],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
+    },
     constant: {
         columns: {
             default: [
@@ -641,6 +666,20 @@ export const modelListViewsConfig = {
                     label: i18n.t('Visualization attribute'),
                     path: 'visualizationAttribute',
                 },
+            ],
+        },
+        filters: {},
+    },
+    validationRuleGroup: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
             ],
         },
         filters: {},

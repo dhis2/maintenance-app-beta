@@ -33,10 +33,12 @@ import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGro
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
 import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
+import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form/TrackedEntityTypeFormSchema'
 import {
     validationNotificationTemplateListSchema,
     validationNotificationTemplateFormSchema,
 } from '../pages/validationNotificationTemplates/form'
+import { validationRuleGroupsListSchema } from '../pages/validationRuleGroups/form/validationRuleGroupsSchema'
 import {
     CategoryMapping,
     DataElement,
@@ -281,6 +283,11 @@ export const testFormProgramIndicatorGroup = (
     ...overwrites,
 })
 
+export const testTrackedEntityType = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(trackedEntityTypeListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
 export const testValidationNotificationTemplate = (
     overwrites: Record<any, any> = {}
 ) => ({
@@ -369,6 +376,13 @@ export const testOrgUnit = (overwrites: Record<any, any> | undefined = {}) => {
         ...overwrites,
     } as unknown as Partial<OrganisationUnit>
 }
+
+export const testValidationRuleGroups = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(validationRuleGroupsListSchema, { mockeryMapper }),
+    ...overwrites,
+})
 
 // TODO: change when schema for optionset is available
 export const testOptionSet = ({
