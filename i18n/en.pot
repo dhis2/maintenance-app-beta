@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-11T08:51:22.254Z\n"
-"PO-Revision-Date: 2025-09-11T08:51:22.254Z\n"
+"POT-Creation-Date: 2025-09-16T13:42:48.350Z\n"
+"PO-Revision-Date: 2025-09-16T13:42:48.350Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -86,6 +86,18 @@ msgstr "Remove icon"
 
 msgid "Cancel"
 msgstr "Cancel"
+
+msgid "Message subject"
+msgstr "Message subject"
+
+msgid "Message body (required) *"
+msgstr "Message body (required) *"
+
+msgid "Message body"
+msgstr "Message body"
+
+msgid "Insert a variable:"
+msgstr "Insert a variable:"
 
 msgid "Clear all"
 msgstr "Clear all"
@@ -745,11 +757,8 @@ msgstr "Validation rule group"
 msgid "Validation rule groups"
 msgstr "Validation rule groups"
 
-msgid "Validation notification template"
-msgstr "Validation notification template"
-
-msgid "Validation notification templates"
-msgstr "Validation notification templates"
+msgid "Validation notification"
+msgstr "Validation notification"
 
 msgid "Constant"
 msgstr "Constant"
@@ -1856,6 +1865,30 @@ msgstr "Search data sets..."
 msgid "Filter selected data sets..."
 msgstr "Filter selected data sets..."
 
+msgid "Data set name"
+msgstr "Data set name"
+
+msgid "Current date"
+msgstr "Current date"
+
+msgid "Data set description"
+msgstr "Data set description"
+
+msgid "Complete registration organisation unit"
+msgstr "Complete registration organisation unit"
+
+msgid "Complete registration period"
+msgstr "Complete registration period"
+
+msgid "Complete registration user"
+msgstr "Complete registration user"
+
+msgid "Complete registration time"
+msgstr "Complete registration time"
+
+msgid "Complete registration att opt combo"
+msgstr "Complete registration att opt combo"
+
 msgid "Set up the basic information for the notification template."
 msgstr "Set up the basic information for the notification template."
 
@@ -1915,6 +1948,9 @@ msgstr "Used as template for the message field."
 
 msgid "Message"
 msgstr "Message"
+
+msgid "Please enter a maximum of {{upperBound}} characters"
+msgstr "Please enter a maximum of {{upperBound}} characters"
 
 msgid "Edit Data Set Notification"
 msgstr "Edit Data Set Notification"
@@ -2299,6 +2335,15 @@ msgstr "Totals"
 msgid "Flags"
 msgstr "Flags"
 
+msgid "Filter by category combination"
+msgstr "Filter by category combination"
+
+msgid "<No filter>"
+msgstr "<No filter>"
+
+msgid "Manage enabled/disabled fields"
+msgstr "Manage enabled/disabled fields"
+
 msgid "Section setup"
 msgstr "Section setup"
 
@@ -2317,15 +2362,6 @@ msgstr "Section data elements"
 
 msgid "Choose what data is collected for this section."
 msgstr "Choose what data is collected for this section."
-
-msgid "Filter by category combination"
-msgstr "Filter by category combination"
-
-msgid "<No filter>"
-msgstr "<No filter>"
-
-msgid "Manage enabled/disabled fields"
-msgstr "Manage enabled/disabled fields"
 
 msgid "Section indicators"
 msgstr "Section indicators"
@@ -2375,17 +2411,14 @@ msgstr "Save section"
 msgid "Saving a section does not save other changes to the data set"
 msgstr "Saving a section does not save other changes to the data set"
 
-msgid "Manage grey fields"
-msgstr "Manage grey fields"
-
 msgid "Disabled"
 msgstr "Disabled"
 
 msgid "Enabled"
 msgstr "Enabled"
 
-msgid "Update grey fields"
-msgstr "Update grey fields"
+msgid "Update"
+msgstr "Update"
 
 msgid "Add period entry rule"
 msgstr "Add period entry rule"
@@ -3138,6 +3171,20 @@ msgstr "Create, modify and view sets of option groups."
 msgid "Set disaggregation mappings for program indicators."
 msgstr "Set disaggregation mappings for program indicators."
 
+msgid ""
+"Validations are used to provide important feedback during data entry to "
+"enhance data quality. Validation rules define expected criteria for "
+"specific data elements and display warnings at three levels of importance "
+"if these criteria are not met."
+msgstr ""
+"Validations are used to provide important feedback during data entry to "
+"enhance data quality. Validation rules define expected criteria for "
+"specific data elements and display warnings at three levels of importance "
+"if these criteria are not met."
+
+msgid "Sends a notification when a validation rule failed."
+msgstr "Sends a notification when a validation rule failed."
+
 msgid "Manage"
 msgstr "Manage"
 
@@ -3427,3 +3474,69 @@ msgstr "Set up the program indicator legends."
 
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
+
+msgid "Recipients"
+msgstr "Recipients"
+
+msgid "Recipient user groups"
+msgstr "Recipient user groups"
+
+msgid "Notify users in hiearchy only"
+msgstr "Notify users in hiearchy only"
+
+msgid "Rule name"
+msgstr "Rule name"
+
+msgid "Rule description"
+msgstr "Rule description"
+
+msgid "Operator"
+msgstr "Operator"
+
+msgid "Importance"
+msgstr "Importance"
+
+msgid "Left side description"
+msgstr "Left side description"
+
+msgid "Right side description"
+msgstr "Right side description"
+
+msgid "Left side value"
+msgstr "Left side value"
+
+msgid "Right side value"
+msgstr "Right side value"
+
+msgid "Organisation unit name"
+msgstr "Organisation unit name"
+
+msgid "Set up the basic information for this validation notification."
+msgstr "Set up the basic information for this validation notification."
+
+msgid "Available validation rules"
+msgstr "Available validation rules"
+
+msgid "Selected validation rules"
+msgstr "Selected validation rules"
+
+msgid "Filter available validation rules"
+msgstr "Filter available validation rules"
+
+msgid "Filter selected validation rules"
+msgstr "Filter selected validation rules"
+
+msgid "What should this notification send?"
+msgstr "What should this notification send?"
+
+msgid "Available user groups"
+msgstr "Available user groups"
+
+msgid "Selected user groups"
+msgstr "Selected user groups"
+
+msgid "Filter available user groups"
+msgstr "Filter available user groups"
+
+msgid "Filter selected user groups"
+msgstr "Filter selected user groups"
