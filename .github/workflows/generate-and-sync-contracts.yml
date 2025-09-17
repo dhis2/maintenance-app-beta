@@ -50,7 +50,7 @@ jobs:
                   BRANCH_NAME=$(cat ../branch-name.txt)
                   gh auth login --with-token <<< "${{ secrets.CONTRACTS_PAT }}"
                   gh pr create \
-                    --base master \
+                    --base main \
                     --head "$BRANCH_NAME" \
                     --title "Auto PR: Contracts from mainanance app PR #${{ github.event.pull_request.number }}" \
                     --body "This PR was automatically created from a pull request in mainanance app."
