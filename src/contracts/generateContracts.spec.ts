@@ -1,5 +1,5 @@
 import { writeFileSync, mkdirSync } from 'fs'
-import { z, ZodSchema } from 'zod'
+import { ZodSchema } from 'zod'
 import zodToJsonSchema from 'zod-to-json-schema'
 import { categoryListSchema } from '../pages/categories/form'
 

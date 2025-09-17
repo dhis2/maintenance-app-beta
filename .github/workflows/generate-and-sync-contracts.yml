@@ -23,13 +23,23 @@ jobs:
             - name: Run contracts script
               run: yarn contracts
 
-            - name: Clone contracts repo
+            # Detect whether contracts/ has changes
+            - name: Check for contract changes
+              id: diff
+              run: |
+                  if git diff --quiet HEAD -- contracts; then
+                    echo "changed=false" >> $GITHUB_OUTPUT
+                  else
+                    echo "changed=true" >> $GITHUB_OUTPUT
+                  fi
+
+            - name: Clone contracts repo and push branch
+              if: steps.diff.outputs.changed == 'true'
               run: |
                   git config --global user.name "github-actions[bot]"
                   git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
                   git clone https://x-access-token:${{ secrets.CONTRACTS_PAT }}@github.com/dhis2/dhis2-api-contracts.git
-
                   cd dhis2-api-contracts
 
                   BRANCH_NAME="auto/contracts-update-${{ github.event.pull_request.number }}-$(date +%s)"
@@ -39,12 +49,18 @@ jobs:
                   cp -r ../contracts/* ./contracts/maintenance-app
 
                   git add .
-                  git commit -m "Auto-update contracts from Mainanance app PR #${{ github.event.pull_request.number }}"
+                  if git diff --cached --quiet; then
+                    echo "No changes to commit after copy."
+                    exit 0
+                  fi
+
+                  git commit -m "Auto-update contracts from Maintenance app PR #${{ github.event.pull_request.number }}"
                   git push origin $BRANCH_NAME
 
                   echo "$BRANCH_NAME" > ../branch-name.txt
 
             - name: Create Pull Request in contract repo
+              if: steps.diff.outputs.changed == 'true'
               run: |
                   cd dhis2-api-contracts
                   BRANCH_NAME=$(cat ../branch-name.txt)
@@ -52,6 +68,6 @@ jobs:
                   gh pr create \
                     --base main \
                     --head "$BRANCH_NAME" \
-                    --title "Auto PR: Contracts from mainanance app PR #${{ github.event.pull_request.number }}" \
-                    --body "This PR was automatically created from a pull request in mainanance app." \
+                    --title "Auto PR: Contracts from maintenance app PR #${{ github.event.pull_request.number }}" \
+                    --body "This PR was automatically created from a pull request in maintenance app." \
                     --reviewer dhis2/platform-backend
