@@ -1,11 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
-import { Card, RadioFieldFF } from '@dhis2/ui'
-import cx from 'classnames'
-import React from 'react'
-import { Field } from 'react-final-form'
+import { NoticeBox, Tab, TabBar } from '@dhis2/ui'
+import { IconInfo16 } from '@dhis2/ui-icons'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import {
-    HorizontalFieldGroup,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../components'
@@ -17,102 +15,34 @@ import { useDataSetField } from '../formHooks'
 import { CustomFormEditEntry } from './customForm/CustomFormEditEntry'
 import classes from './DataEntryFormContents.module.css'
 import { SectionFormSectionsList } from './SectionFormList'
-
-const DefaultFormIcon = () => (
-    <svg
-        width="32"
-        height="32"
-        viewBox="0 0 32 32"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-    >
-        <path d="M10 6H22V8H10V6ZM10 10H22V12H10V10ZM10 24H16V26H10V24ZM10 14H16V16H10V14Z" />
-        <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M24 4H8V28H24V4ZM6 2V30H26V2H6Z"
-        />
-    </svg>
-)
-
-const SectionFormIcon = () => (
-    <svg
-        width="32"
-        height="32"
-        viewBox="0 0 32 32"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-    >
-        <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M28 4H4V8H28V4ZM2 2V10H30V2H2Z"
-        />
-        <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M28 14H4V18H28V14ZM2 12V20H30V12H2Z"
-        />
-        <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M28 24H4V28H28V24ZM2 22V30H30V22H2Z"
-        />
-    </svg>
-)
-
-const CustomFormIcon = () => (
-    <svg
-        width="32"
-        height="32"
-        viewBox="0 0 32 32"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-    >
-        <path d="M31 16L24 23L22.59 21.59L28.17 16L22.59 10.41L24 9L31 16ZM1 16L8 9L9.41 10.41L3.83 16L9.41 21.59L8 23L1 16Z" />
-        <path d="M12.4199 25.4835L17.6403 6.0008L19.5722 6.51843L14.3518 26.0012L12.4199 25.4835Z" />
-    </svg>
-)
-
-const FormTypeCard = ({
-    Icon,
-    label,
-    description,
-    highlighted,
-}: {
-    Icon: React.ComponentType
-    label: string
-    description: string
-    highlighted?: boolean
-}) => {
-    return (
-        <div
-            className={cx(classes.formTypeCardContent, {
-                [classes.formTypeCardContentHighlihghted]: highlighted,
-            })}
-        >
-            {<Icon />}
-            <div className={classes.formTypeTitle}>
-                <h4>{label}</h4>
-                <p>{description}</p>
-            </div>
-        </div>
-    )
-}
+import formType = DataSet.formType
 
 const disabledFormTypeText = i18n.t(
-    'Data set must be saved before form type can be configured.'
+    'Data set must be saved before this form type can be configured.'
 )
 export const DataEntryFromContents = React.memo(function FormFormContents({
     name,
 }: {
     name: string
 }) {
-    const formTypeFieldName = `formType`
     const displayOptions = useDataSetField('displayOptions').input.value
-    const controlledFormType = useDataSetField('formType').input.value
+    const sections = useDataSetField('sections').input.value
+    const dataEntryForm = useDataSetField('dataEntryForm').input.value
+    const dataSetElements = useDataSetField('dataSetElements').input.value
     const modelId = useParams().id
-    const disableFormType = !modelId
+    const isCreatingNewDataSet = !modelId
+    const [selectedFormType, setSelectedFormType] = useState<DataSet.formType>(
+        formType.DEFAULT
+    )
+    const webFormType = dataEntryForm
+        ? i18n.t('Custom form')
+        : sections && sections.length > 0
+        ? i18n.t('Section form')
+        : i18n.t('Basic form')
+    const androidFormType =
+        sections && sections.length > 0
+            ? i18n.t('Section form')
+            : i18n.t('Basic form')
 
     return (
         <SectionedFormSection name={name}>
@@ -125,95 +55,121 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                 )}
             </StandardFormSectionDescription>
 
-            <HorizontalFieldGroup className={classes.formTypeCards}>
-                <Card>
-                    <Field<string | undefined>
-                        name={formTypeFieldName}
-                        component={RadioFieldFF}
-                        label={
-                            <FormTypeCard
-                                Icon={DefaultFormIcon}
-                                label={i18n.t('Default form')}
-                                description={i18n.t(
-                                    'Data elements are displayed in a standard list'
-                                )}
-                                highlighted={controlledFormType === 'DEFAULT'}
-                            />
+            {!isCreatingNewDataSet && dataSetElements.length > 0 && (
+                <NoticeBox
+                    title={i18n.t('Based on your current setup,')}
+                    className={classes.formTypeInfo}
+                >
+                    {i18n.t(
+                        'Web will display {{webFormType}}  |  Android will display {{androidFormType}}',
+                        {
+                            webFormType,
+                            androidFormType,
                         }
-                        className={classes.formTypeCard}
-                        type="radio"
-                        value={'DEFAULT'}
-                    />
-                </Card>
-                <Card>
-                    <TooltipWrapper
-                        condition={disableFormType}
-                        content={disabledFormTypeText}
-                    >
-                        <Field<string | undefined>
-                            name={formTypeFieldName}
-                            component={RadioFieldFF}
-                            label={
-                                <FormTypeCard
-                                    Icon={SectionFormIcon}
-                                    label={i18n.t('Section form')}
-                                    description={i18n.t(
-                                        'Group data into sections with additional options'
-                                    )}
-                                    highlighted={
-                                        controlledFormType === 'SECTION'
-                                    }
-                                />
-                            }
-                            disabled={disableFormType}
-                            className={classes.formTypeCard}
-                            type="radio"
-                            value={'SECTION'}
-                        />
-                    </TooltipWrapper>
-                </Card>
-                <Card>
-                    <TooltipWrapper
-                        condition={disableFormType}
-                        content={disabledFormTypeText}
-                    >
-                        <Field<string | undefined>
-                            name={formTypeFieldName}
-                            component={RadioFieldFF}
-                            label={
-                                <FormTypeCard
-                                    Icon={CustomFormIcon}
-                                    label={i18n.t('Custom form')}
-                                    description={i18n.t(
-                                        'Build and style a custom form layout'
-                                    )}
-                                    highlighted={
-                                        controlledFormType === 'CUSTOM'
-                                    }
-                                />
-                            }
-                            className={classes.formTypeCard}
-                            type="radio"
-                            value={'CUSTOM'}
-                            disabled={disableFormType}
-                        />
-                    </TooltipWrapper>
-                </Card>
-            </HorizontalFieldGroup>
-            {controlledFormType === 'SECTION' && <SectionFormSectionsList />}
-            {controlledFormType === 'CUSTOM' && <CustomFormEditEntry />}
-            {displayOptions !== undefined && (
-                <div className={classes.displayOptions}>
-                    <StandardFormSectionTitle>
-                        {i18n.t('Display options')}
-                    </StandardFormSectionTitle>
-                    <DisplayOptionsField
-                        withSectionsDisplayOptions={
-                            controlledFormType === DataSet.formType.SECTION
-                        }
-                    />
-                </div>
+                    )}
+                </NoticeBox>
             )}
+            <div className={classes.formTypeTabsContainer}>
+                <TabBar fixed>
+                    <Tab
+                        onClick={(_, event) => {
+                            event.preventDefault()
+                            setSelectedFormType(formType.DEFAULT)
+                        }}
+                        selected={selectedFormType === formType.DEFAULT}
+                    >
+                        <div className={classes.formTypeTab}>
+                            {i18n.t('Basic form')}
+                            <TooltipWrapper
+                                condition
+                                className={classes.infoTooltipWrapper}
+                                content={i18n.t(
+                                    'Basic forms display an auto-generated list of attributes. \n' +
+                                        'They will be displayed only if no Section or Custom form is created.'
+                                )}
+                            >
+                                <IconInfo16 />
+                            </TooltipWrapper>
+                        </div>
+                    </Tab>
+                    <TooltipWrapper
+                        condition={isCreatingNewDataSet}
+                        content={disabledFormTypeText}
+                    >
+                        <Tab
+                            onClick={(_, event) => {
+                                event.preventDefault()
+                                setSelectedFormType(formType.SECTION)
+                            }}
+                            disabled={isCreatingNewDataSet}
+                            selected={selectedFormType === formType.SECTION}
+                        >
+                            <div className={classes.formTypeTab}>
+                                {i18n.t('Section form')}
+                                <TooltipWrapper
+                                    condition={!isCreatingNewDataSet}
+                                    className={classes.infoTooltipWrapper}
+                                    content={i18n.t(
+                                        'Section forms let you create sections to organize data items for easier entry. If a Section form is created, it will be shown instead of the Basic form.'
+                                    )}
+                                >
+                                    <IconInfo16 />
+                                </TooltipWrapper>
+                            </div>
+                        </Tab>
+                    </TooltipWrapper>
+                    <TooltipWrapper
+                        condition={isCreatingNewDataSet}
+                        content={disabledFormTypeText}
+                    >
+                        <Tab
+                            onClick={(_, event) => {
+                                event.preventDefault()
+                                setSelectedFormType(formType.CUSTOM)
+                            }}
+                            disabled={isCreatingNewDataSet}
+                            selected={selectedFormType === formType.CUSTOM}
+                        >
+                            <div className={classes.formTypeTab}>
+                                {i18n.t('Custom form')}
+                                <TooltipWrapper
+                                    condition={!isCreatingNewDataSet}
+                                    className={classes.infoTooltipWrapper}
+                                    content={i18n.t(
+                                        'Custom forms let you design a fully customized layout for data entry. \n' +
+                                            '\n' +
+                                            'On Web, Custom forms (if created) will always be shown.\n' +
+                                            'Android does not support Custom forms; \n' +
+                                            'instead, the Section form will be shown (if created), else the Basic form.'
+                                    )}
+                                >
+                                    <IconInfo16 />
+                                </TooltipWrapper>
+                            </div>
+                        </Tab>
+                    </TooltipWrapper>
+                </TabBar>
+            </div>
+            <div className={classes.formTypeTabsContent}>
+                {selectedFormType === formType.SECTION && (
+                    <SectionFormSectionsList />
+                )}
+                {selectedFormType === formType.CUSTOM && (
+                    <CustomFormEditEntry />
+                )}
+                {displayOptions !== undefined && (
+                    <div className={classes.displayOptions}>
+                        <StandardFormSectionTitle>
+                            {i18n.t('Display options')}
+                        </StandardFormSectionTitle>
+                        <DisplayOptionsField
+                            withSectionsDisplayOptions={
+                                selectedFormType === DataSet.formType.SECTION
+                            }
+                        />
+                    </div>
+                )}
+            </div>
         </SectionedFormSection>
     )
 })

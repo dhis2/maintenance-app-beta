@@ -12,6 +12,7 @@ import React, { useState } from 'react'
 import { useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import { PeriodTypeSelect } from '../../../components/metadataFormControls/PeriodTypeSelect/PeriodTypeSelect'
+import classes from './PeriodTypeField.module.css'
 
 const PeriodTypeChangeWarningModal = ({
     onClose,
@@ -72,9 +73,10 @@ export function PeriodTypeField() {
             <Field
                 required
                 name="periodType"
-                label={i18n.t('Period type')}
+                label={i18n.t('Period type (required)')}
                 error={meta.touched && !!meta.error}
                 validationText={meta.touched ? meta.error : undefined}
+                className={classes.periodTypeSelect}
             >
                 <PeriodTypeSelect
                     selected={input.value}

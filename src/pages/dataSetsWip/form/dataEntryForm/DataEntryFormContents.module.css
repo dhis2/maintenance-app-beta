@@ -1,49 +1,35 @@
-.formTypeCard {
-    padding: var(--spacers-dp8) var(--spacers-dp16);
-    gap: 8px;
+.displayOptions {
+    display: block;
+    margin-top: var(--spacers-dp32);
+    margin-bottom: var(--spacers-dp32);
 }
 
-.formTypeCardContent {
+.formTypeTab {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: var(--spacers-dp16);
-}
-
-.formTypeCardContent svg {
-    min-width: 40px;
-    max-width: 40px;
-    fill: var(--colors-grey600);
-}
-
-.formTypeCardContentHighlihghted svg {
-    fill: var(--colors-teal700);
-}
-
-.formTypeTitle {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     gap: var(--spacers-dp4);
-    justify-content: flex-start;
 }
 
-.formTypeTitle * {
-    margin: 0px;
+.formTypeTab > * {
+    display: inline-flex;
+    align-items: center;
 }
 
-.formTypeTitle p {
-    color: var(--colors-grey800);
+.formTypeInfo {
+    margin-bottom: var(--spacers-dp24);
 }
 
-.formTypeCards {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    max-width: 1000px;
-    align-items: stretch;
+.formTypeTabsContainer {
+    max-width: 740px;
 }
 
-.displayOptions {
-    margin: var(--spacers-dp32) 0;
+.formTypeTabsContent {
+    max-width: 740px;
+    align-items: center;
+}
+
+.formTypeTabsContent > * {
+    margin-left: auto;
+    margin-right: auto;
 }
