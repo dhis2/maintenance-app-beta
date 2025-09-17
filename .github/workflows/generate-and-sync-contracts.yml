@@ -53,5 +53,5 @@ jobs:
                     --base main \
                     --head "$BRANCH_NAME" \
                     --title "Auto PR: Contracts from mainanance app PR #${{ github.event.pull_request.number }}" \
-                    --body "This PR was automatically created from a pull request in mainanance app."
-                    --assignee "dhis2/platform-backend"
+                    --body "This PR was automatically created from a pull request in mainanance app." \
+                    --reviewer dhis2/platform-backend
