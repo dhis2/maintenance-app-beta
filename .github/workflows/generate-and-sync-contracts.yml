@@ -36,10 +36,10 @@ jobs:
             - name: Clone contracts repo and push branch
               if: steps.diff.outputs.changed == 'true'
               run: |
-                  git config --global user.name "github-actions[bot]"
-                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
+                  git config --global user.name "dhis2-bot"
+                  git config --global user.email "dhis2-bot@users.noreply.github.com"
 
-                  git clone https://x-access-token:${{ secrets.CONTRACTS_PAT }}@github.com/dhis2/dhis2-api-contracts.git
+                  git clone https://x-access-token:${{ secrets.DHIS2_BOT_GITHUB_TOKEN }}@github.com/dhis2/dhis2-api-contracts.git
                   cd dhis2-api-contracts
 
                   BRANCH_NAME="auto/contracts-update-${{ github.event.pull_request.number }}-$(date +%s)"
@@ -64,7 +64,7 @@ jobs:
               run: |
                   cd dhis2-api-contracts
                   BRANCH_NAME=$(cat ../branch-name.txt)
-                  gh auth login --with-token <<< "${{ secrets.CONTRACTS_PAT }}"
+                  gh auth login --with-token <<< "${{ secrets.DHIS2_BOT_GITHUB_TOKEN }}"
                   gh pr create \
                     --base main \
                     --head "$BRANCH_NAME" \
