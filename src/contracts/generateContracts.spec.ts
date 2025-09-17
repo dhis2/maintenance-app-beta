@@ -27,7 +27,7 @@ const generateContract = ({
         name,
         // @ts-expect-error/rejected-must-be-true
         rejectedAdditionalProperties: true,
-        $refStrategy: 'none',
+        // $refStrategy: 'none',
     })
     mkdirSync(`contracts/${name}`, { recursive: true })
     writeFileSync(contractPath, JSON.stringify(request))
@@ -38,15 +38,10 @@ describe('contracts', () => {
     it('should generate all contracts', () => {
         generateContract({
             method: 'GET',
-            path: 'categories',
-            name: 'categories',
-            expectedSchema: z.array(categoryListSchema),
-        })
-        generateContract({
-            method: 'GET',
             path: '/categories/{id}',
             name: 'category',
             expectedSchema: categoryListSchema,
         })
     })
 })
+

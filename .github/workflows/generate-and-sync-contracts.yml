@@ -28,15 +28,15 @@ jobs:
                   git config --global user.name "github-actions[bot]"
                   git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-                  TOKEN=${{ secrets.GITHUB_TOKEN }}
-                  git clone https://x-access-token:$TOKEN@github.com/dhis2/dhis2-api-contracts.git
+                  git clone https://x-access-token:${{ secrets.CONTRACTS_PAT }}@github.com/dhis2/dhis2-api-contracts.git
+
                   cd dhis2-api-contracts
 
                   BRANCH_NAME="auto/contracts-update-${{ github.event.pull_request.number }}-$(date +%s)"
                   git checkout -b $BRANCH_NAME
 
                   # Copy the generated JSON files
-                  cp -r ../contracts/* ./contracts/
+                  cp -r ../contracts/* ./contracts/maintenance-app
 
                   git add .
                   git commit -m "Auto-update contracts from Mainanance app PR #${{ github.event.pull_request.number }}"
@@ -48,7 +48,7 @@ jobs:
               run: |
                   cd dhis2-api-contracts
                   BRANCH_NAME=$(cat ../branch-name.txt)
-                  gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+                  gh auth login --with-token <<< "${{ secrets.CONTRACTS_PAT }}"
                   gh pr create \
                     --base master \
                     --head "$BRANCH_NAME" \

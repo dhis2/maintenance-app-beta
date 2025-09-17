@@ -73,6 +73,7 @@ const withDefaultListColumns = z.object({
     href: z.string().url(),
     lastUpdated: dateTimeString,
     lastUpdatedBy: UserSchema.optional(),
+    // todo: change this to accept all possible
     sharing: z.object({ public: z.literal('rw------') }),
     access: AccessSchema,
 })
