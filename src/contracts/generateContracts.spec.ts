@@ -31,7 +31,7 @@ const generateContract = ({
     })
     mkdirSync(`contracts/${name}`, { recursive: true })
     writeFileSync(contractPath, JSON.stringify(request))
-    writeFileSync(schemaPath, JSON.stringify(schema.definitions))
+    writeFileSync(schemaPath, JSON.stringify(schema.definitions?.[name]))
 }
 
 describe('contracts', () => {

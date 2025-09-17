@@ -46,7 +46,7 @@ jobs:
                   git checkout -b $BRANCH_NAME
 
                   # Copy the generated JSON files
-                  cp -r ../contracts/* ./contracts/maintenance-app
+                  cp -r ../contracts ./contracts/maintenance-app
 
                   git add .
                   if git diff --cached --quiet; then
