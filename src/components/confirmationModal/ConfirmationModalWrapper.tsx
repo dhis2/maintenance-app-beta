@@ -40,9 +40,8 @@ const ConfirmationModal = ({
                         {i18n.t(
                             'Are you sure you want to change {{objectName}} to {{- unconfirmedSelectionLabel}}?',
                             {
-                                unconfirmedSelectionLabel: JSON.stringify(
-                                    unconfirmedSelectionLabel
-                                ),
+                                unconfirmedSelectionLabel:
+                                    unconfirmedSelectionLabel,
                                 objectName:
                                     objectName || i18n.t('this element'),
                             }
@@ -80,9 +79,7 @@ export const ConfirmationModalWrapper = ({
 }) => {
     const id = useParams()?.id
     const isEdit = !!id
-    const [unconfirmedSelection, setUnconfirmedSelection] = useState<
-        string | null
-    >(null)
+    const [unconfirmedSelection, setUnconfirmedSelection] = useState<any>(null)
     return (
         <ConfirmationModal
             onClose={() => {
