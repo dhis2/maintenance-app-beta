@@ -1,3 +1,10 @@
+# [0.70.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.69.0...v0.70.0) (2025-09-18)
+
+
+### Features
+
+* refactor expression modal to be more general and use for pi ([#637](https://github.com/dhis2/maintenance-app-beta/issues/637)) ([594bddd](https://github.com/dhis2/maintenance-app-beta/commit/594bddd566e7f6af920c3cfeba0a1276a08b1a00))
+
 # [0.69.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.68.0...v0.69.0) (2025-09-16)
 
 
