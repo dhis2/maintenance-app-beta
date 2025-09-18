@@ -38,7 +38,7 @@ function ConstantFormFields() {
                     name="value"
                     required
                     type="number"
-                    label={i18n.t('Value')}
+                    label={i18n.t('Value (required)')}
                 />
             </StandardFormField>
             <CustomAttributesSection schemaSection={section} />

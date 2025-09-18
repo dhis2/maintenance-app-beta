@@ -5,10 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-11T08:32:15.792Z\n"
-"PO-Revision-Date: 2025-09-11T08:32:15.793Z\n"
-"POT-Creation-Date: 2025-09-11T08:51:22.254Z\n"
-"PO-Revision-Date: 2025-09-11T08:51:22.254Z\n"
+"POT-Creation-Date: 2025-09-18T07:36:54.965Z\n"
+"PO-Revision-Date: 2025-09-18T07:36:54.966Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2287,6 +2285,15 @@ msgstr "Totals"
 msgid "Flags"
 msgstr "Flags"
 
+msgid "Filter by category combination"
+msgstr "Filter by category combination"
+
+msgid "<No filter>"
+msgstr "<No filter>"
+
+msgid "Manage enabled/disabled fields"
+msgstr "Manage enabled/disabled fields"
+
 msgid "Section setup"
 msgstr "Section setup"
 
@@ -2305,15 +2312,6 @@ msgstr "Section data elements"
 
 msgid "Choose what data is collected for this section."
 msgstr "Choose what data is collected for this section."
-
-msgid "Filter by category combination"
-msgstr "Filter by category combination"
-
-msgid "<No filter>"
-msgstr "<No filter>"
-
-msgid "Manage enabled/disabled fields"
-msgstr "Manage enabled/disabled fields"
 
 msgid "Section indicators"
 msgstr "Section indicators"
@@ -2363,17 +2361,14 @@ msgstr "Save section"
 msgid "Saving a section does not save other changes to the data set"
 msgstr "Saving a section does not save other changes to the data set"
 
-msgid "Manage grey fields"
-msgstr "Manage grey fields"
-
 msgid "Disabled"
 msgstr "Disabled"
 
 msgid "Enabled"
 msgstr "Enabled"
 
-msgid "Update grey fields"
-msgstr "Update grey fields"
+msgid "Update"
+msgstr "Update"
 
 msgid "Add period entry rule"
 msgstr "Add period entry rule"
