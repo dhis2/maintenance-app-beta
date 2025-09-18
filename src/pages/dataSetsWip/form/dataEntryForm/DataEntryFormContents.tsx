@@ -34,15 +34,12 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
     const [selectedFormType, setSelectedFormType] = useState<DataSet.formType>(
         formType.DEFAULT
     )
-    const webFormType = dataEntryForm
-        ? i18n.t('Custom form')
-        : sections && sections.length > 0
-        ? i18n.t('Section form')
-        : i18n.t('Basic form')
     const androidFormType =
         sections && sections.length > 0
             ? i18n.t('Section form')
             : i18n.t('Basic form')
+
+    const webFormType = dataEntryForm ? i18n.t('Custom form') : androidFormType
 
     return (
         <SectionedFormSection name={name}>
