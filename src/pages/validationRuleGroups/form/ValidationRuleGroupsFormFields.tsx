@@ -1,16 +1,20 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import {
-    DefaultIdentifiableFields,
+    CodeField,
     DescriptionField,
     ModelTransferField,
+    NameField,
     StandardFormField,
     StandardFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
+import { useSchemaSectionHandleOrThrow } from '../../../lib'
 
 function ValidationRuleGroupsFormFields() {
+    const schemaSection = useSchemaSectionHandleOrThrow()
+
     return (
         <>
             <StandardFormSection>
@@ -23,7 +27,12 @@ function ValidationRuleGroupsFormFields() {
                     )}
                 </StandardFormSectionDescription>
 
-                <DefaultIdentifiableFields />
+                <StandardFormField>
+                    <NameField schemaSection={schemaSection} />
+                </StandardFormField>
+                <StandardFormField>
+                    <CodeField schemaSection={schemaSection} />
+                </StandardFormField>
                 <StandardFormField>
                     <DescriptionField
                         helpText={i18n.t(
@@ -32,8 +41,7 @@ function ValidationRuleGroupsFormFields() {
                     />
                 </StandardFormField>
 
-                {/*Validation rule*/}
-                {/*<StandardFormField>
+                <StandardFormField>
                     <ModelTransferField
                         dataTest="validationRules-transfer"
                         name="validationRules"
@@ -49,7 +57,7 @@ function ValidationRuleGroupsFormFields() {
                             'Filter selected validation rules'
                         )}
                     />
-                </StandardFormField>*/}
+                </StandardFormField>
             </StandardFormSection>
         </>
     )

@@ -5,11 +5,9 @@ import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import ValidationRuleGroupsFormFields from './form/ValidationRuleGroupsFormFields'
 import { initialValues, validate } from './form/validationRuleGroupsSchema'
 
-const section = SECTIONS_MAP.constant
+const section = SECTIONS_MAP.validationRuleGroup
 
 export const Component = () => {
-    console.log({ initialValues })
-
     return (
         <FormBase
             onSubmit={useOnSubmitNew({ section })}
