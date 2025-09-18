@@ -20,24 +20,22 @@ export function PeriodTypeField() {
         />
     )
     return (
-        <>
-            <Field
-                required
-                name="periodType"
-                label={i18n.t('Period type')}
-                error={meta.touched && !!meta.error}
-                validationText={meta.touched ? meta.error : undefined}
-            >
-                <ConfirmationModalWrapper
-                    onChange={input.onChange}
-                    renderComponent={renderComponent}
-                    modalTitle={i18n.t('Change period type')}
-                    modalMessage={i18n.t(
-                        'Changing the period type will make previously entered data for this data set not appear in the data entry app. This can lead to duplicate data entry.'
-                    )}
-                    objectName={i18n.t('period type')}
-                />
-            </Field>
-        </>
+        <Field
+            required
+            name="periodType"
+            label={i18n.t('Period type')}
+            error={meta.touched && !!meta.error}
+            validationText={meta.touched ? meta.error : undefined}
+        >
+            <ConfirmationModalWrapper
+                onChange={input.onChange}
+                renderComponent={renderComponent}
+                modalTitle={i18n.t('Change period type')}
+                modalMessage={i18n.t(
+                    'Changing the period type will make previously entered data for this data set not appear in the data entry app. This can lead to duplicate data entry.'
+                )}
+                objectName={i18n.t('period type')}
+            />
+        </Field>
     )
 }
