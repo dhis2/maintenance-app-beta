@@ -772,6 +772,44 @@ describe('Data elements form tests', () => {
                 })
             )
         })
+        it('should let user select value type without showing warning modal', async () => {
+            const { screen } = await renderForm()
+
+            const warningText =
+                'Changing the value type may cause problems when generating analytics tables if there is existing data for this data element.'
+
+            expect(screen.queryByText(warningText)).toBeNull()
+
+            // value type is text by default
+            const valueType = within(
+                screen.getByTestId('formfields-valueType')
+            ).getByTestId('dhis2-uicore-select-input')
+            expect(valueType).toBeVisible()
+            expect(valueType).toHaveTextContent(VALUE_TYPE.TEXT)
+
+            // Click a new value type
+            const aValueType =
+                DISABLING_VALUE_TYPES[
+                    Math.floor(Math.random() * DISABLING_VALUE_TYPES.length)
+                ]
+
+            const valueTypeOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('formfields-valueType'),
+                screen
+            )
+            const valueTypeOption = valueTypeOptions.find((opt) =>
+                opt.textContent?.includes(getConstantTranslation(aValueType))
+            )!
+            await userEvent.click(valueTypeOption)
+
+            // no warning should be shown
+            expect(screen.queryByText(warningText)).toBeNull()
+
+            // value type should be updated and warning should be removed
+            expect(valueType).toHaveTextContent(
+                getConstantTranslation(aValueType)
+            )
+        })
     })
     describe('Edit', () => {
         const renderForm = generateRenderer(
@@ -1031,6 +1069,96 @@ describe('Data elements form tests', () => {
             ).getByTestId('dhis2-uicore-select-input')
             expect(valueType).toBeVisible()
             expect(valueType).toHaveTextContent(VALUE_TYPE.MULTI_TEXT)
+        })
+        it('should require clicking through warning modal to change value type', async () => {
+            const { screen } = await renderForm({
+                dataElementOverwrites: {
+                    valueType: 'LONG_TEXT',
+                    optionSet: null,
+                },
+            })
+            const warningText =
+                'Changing the value type may cause problems when generating analytics tables if there is existing data for this data element.'
+
+            expect(screen.queryByText(warningText)).toBeNull()
+
+            const valueType = within(
+                screen.getByTestId('formfields-valueType')
+            ).getByTestId('dhis2-uicore-select-input')
+            expect(valueType).toBeVisible()
+            expect(valueType).toHaveTextContent(VALUE_TYPE.LONG_TEXT)
+
+            // Click a new value type
+            const aValueType =
+                DISABLING_VALUE_TYPES[
+                    Math.floor(Math.random() * DISABLING_VALUE_TYPES.length)
+                ]
+
+            const valueTypeOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('formfields-valueType'),
+                screen
+            )
+            const valueTypeOption = valueTypeOptions.find((opt) =>
+                opt.textContent?.includes(getConstantTranslation(aValueType))
+            )!
+            await userEvent.click(valueTypeOption)
+
+            expect(screen.getByText(warningText)).toBeInTheDocument()
+
+            // click confirm
+            await userEvent.click(
+                screen.getByTestId('confirmationModal-confirm')
+            )
+
+            // value type should be updated and warning should be removed
+            expect(valueType).toHaveTextContent(
+                getConstantTranslation(aValueType)
+            )
+            expect(screen.queryByText(warningText)).toBeNull()
+        })
+        it('should revert to original value type if warning modal is cancelled', async () => {
+            const { screen } = await renderForm({
+                dataElementOverwrites: {
+                    valueType: 'LONG_TEXT',
+                    optionSet: null,
+                },
+            })
+            const warningText =
+                'Changing the value type may cause problems when generating analytics tables if there is existing data for this data element.'
+
+            expect(screen.queryByText(warningText)).toBeNull()
+
+            const valueType = within(
+                screen.getByTestId('formfields-valueType')
+            ).getByTestId('dhis2-uicore-select-input')
+            expect(valueType).toBeVisible()
+            expect(valueType).toHaveTextContent(VALUE_TYPE.LONG_TEXT)
+
+            // Click a new value type
+            const aValueType =
+                DISABLING_VALUE_TYPES[
+                    Math.floor(Math.random() * DISABLING_VALUE_TYPES.length)
+                ]
+
+            const valueTypeOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('formfields-valueType'),
+                screen
+            )
+            const valueTypeOption = valueTypeOptions.find((opt) =>
+                opt.textContent?.includes(getConstantTranslation(aValueType))
+            )!
+            await userEvent.click(valueTypeOption)
+
+            expect(screen.getByText(warningText)).toBeInTheDocument()
+
+            // click confirm
+            await userEvent.click(
+                screen.getByTestId('confirmationModal-cancel')
+            )
+
+            // value type should NOT be updated and warning should be removed
+            expect(valueType).toHaveTextContent(VALUE_TYPE.LONG_TEXT)
+            expect(screen.queryByText(warningText)).toBeNull()
         })
     })
 })

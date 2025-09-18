@@ -50,8 +50,17 @@ const ConfirmationModal = ({
                 </ModalContent>
                 <ModalActions>
                     <ButtonStrip>
-                        <Button onClick={onClose}>{i18n.t('Cancel')}</Button>
-                        <Button destructive onClick={confirmSelection}>
+                        <Button
+                            dataTest="confirmationModal-cancel"
+                            onClick={onClose}
+                        >
+                            {i18n.t('Cancel')}
+                        </Button>
+                        <Button
+                            dataTest="confirmationModal-confirm"
+                            destructive
+                            onClick={confirmSelection}
+                        >
                             {i18n.t('Yes, change')}
                         </Button>
                     </ButtonStrip>
