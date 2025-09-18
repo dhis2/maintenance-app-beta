@@ -58,6 +58,7 @@ const UserGroupSelect = () => {
     return (
         <div className={styles.userGroupSelect}>
             <ModelMultiSelectField
+                dataTest="formfields-recipientUserGroups"
                 input={input}
                 meta={meta}
                 name="recipientUserGroups"
@@ -142,23 +143,7 @@ export const ValidationNotificationTemplateFormFields = ({
                     {i18n.t('Choose who recieves the notification.')}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    {/* <UserGroupSelect /> */}
-                    <ModelTransferField
-                        dataTest="recipientUserGroups-transfer"
-                        name="recipientUserGroups"
-                        query={{
-                            resource: 'userGroups',
-                        }}
-                        leftHeader={i18n.t('Available user groups')}
-                        rightHeader={i18n.t('Selected user groups')}
-                        filterPlaceholder={i18n.t(
-                            'Filter available user groups'
-                        )}
-                        filterPlaceholderPicked={i18n.t(
-                            'Filter selected user groups'
-                        )}
-                        maxSelections={Infinity}
-                    />
+                    <UserGroupSelect />
                 </StandardFormField>
                 <StandardFormField>
                     <FieldRFF<string | undefined>
