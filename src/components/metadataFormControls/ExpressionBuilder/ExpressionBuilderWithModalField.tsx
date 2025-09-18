@@ -25,13 +25,12 @@ export function ExpressionBuilderWithModalField({
 }: ExpressionFieldProps) {
     const [showExpressionBuilder, setShowExpressionBuilder] = useState(false)
 
-    const [initialExpressionValidation, initialExpressionDescription] =
+    const [initialExpressionValidation] =
         useExpressionValidator(validationResource)
     const [expressionDescription, setExpressionDescription] = useState<
         string | undefined
     >(undefined)
-    const descriptionToShow =
-        expressionDescription ?? initialExpressionDescription
+    const descriptionToShow = expressionDescription
     const schemaSection = useSchemaSectionHandleOrThrow()
     const schemaValidate = useValidator({ schemaSection, property: fieldName })
     const { input, meta } = useField<string>(fieldName, {
@@ -39,9 +38,16 @@ export function ExpressionBuilderWithModalField({
     })
 
     useEffect(() => {
-        if (input.value) {
-            initialExpressionValidation(input.value)
-        }
+        ;(async () => {
+            if (input.value && initialExpressionValidation !== undefined) {
+                const initialValidation = await initialExpressionValidation(
+                    input.value
+                )
+                setExpressionDescription(
+                    initialValidation?.expressionDescription
+                )
+            }
+        })()
     })
 
     return (
