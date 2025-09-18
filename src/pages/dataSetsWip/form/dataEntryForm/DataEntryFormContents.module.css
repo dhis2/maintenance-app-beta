@@ -2,6 +2,8 @@
     display: block;
     margin-top: var(--spacers-dp32);
     margin-bottom: var(--spacers-dp32);
+    max-width: 720px;
+    padding: var(--spacers-dp16);
 }
 
 .formTypeTab {
