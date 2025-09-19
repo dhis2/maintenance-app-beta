@@ -1,3 +1,10 @@
+# [0.71.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.70.0...v0.71.0) (2025-09-19)
+
+
+### Features
+
+* add constant forms ([#630](https://github.com/dhis2/maintenance-app-beta/issues/630)) ([226e5d5](https://github.com/dhis2/maintenance-app-beta/commit/226e5d53a925dae5efd876a487488e7c2e5bfecf))
+
 # [0.70.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.69.0...v0.70.0) (2025-09-18)
 
 
