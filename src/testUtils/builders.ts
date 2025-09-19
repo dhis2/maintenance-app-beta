@@ -105,7 +105,7 @@ export const testOptionGroup = (overwrites: Record<any, any> = {}) => ({
     ...overwrites,
 })
 
-export const testConstants = (overwrites: Record<any, any> = {}) => ({
+export const testConstant = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(ConstantsListSchema, {
         mockeryMapper,
     }),
