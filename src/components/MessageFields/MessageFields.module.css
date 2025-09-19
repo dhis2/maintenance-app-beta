@@ -4,8 +4,13 @@
     gap: var(--spacers-dp32);
 }
 
+.validationRuleFieldsContainer {
+    min-width: 300px;
+    width: 700px;
+}
+
 .validationRuleVariablesContainer {
-    width: 400px;
+    min-width: 400px;
     height: 400px;
     overflow-y: auto;
     border: 1px solid var(--colors-grey500);
@@ -66,14 +71,13 @@ textarea {
     background-color: var(--colors-white);
 
     padding: 11px 12px;
-
+    width: 100%;
     outline: 0;
     border: 1px solid;
     border-color: var(--colors-grey500);
     border-radius: 3px;
     box-shadow: inset 0 0 1px 0 rgba(48, 54, 60, 0.1);
     text-overflow: ellipsis;
-    width: 700px;
 }
 
 .validationRuleField > input {
@@ -142,4 +146,11 @@ textarea.disabled {
 .errorIcon {
     margin-inline-start: var(--spacers-dp8);
     display: inline-block;
+}
+
+.fieldHelpText {
+    font-size: 12px;
+    line-height: 14px;
+    margin-block: 4px;
+    color: var(--colors-grey700);
 }

@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF, SingleSelectFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { Field as FieldRFF } from 'react-final-form'
+import { Field as FieldRFF, useField } from 'react-final-form'
 import {
     SectionedFormSection,
     SectionedFormSections,
@@ -11,6 +11,7 @@ import {
     NameField,
     CodeField,
     ModelTransferField,
+    ModelMultiSelectField,
     MessageFields,
 } from '../../../components'
 import {
@@ -18,6 +19,7 @@ import {
     useSyncSelectedSectionWithScroll,
     getConstantTranslation,
 } from '../../../lib'
+import styles from './ValidationNotificationTemplateFormFields.module.css'
 
 const notificationTypeOptions = [
     {
@@ -44,6 +46,30 @@ export const VALIDATION_RULE_VARIABLES = {
     current_date: i18n.t('Current date'),
 } as Record<string, string>
 
+const UserGroupSelect = () => {
+    const USER_GROUPS_QUERY = {
+        resource: 'userGroups',
+        params: {
+            fields: ['displayName', 'id'],
+            order: 'displayName',
+        },
+    }
+    const { input, meta } = useField('recipientUserGroups')
+    return (
+        <div className={styles.userGroupSelect}>
+            <ModelMultiSelectField
+                dataTest="formfields-recipientUserGroups"
+                input={input}
+                meta={meta}
+                name="recipientUserGroups"
+                label={i18n.t('User group recipients')}
+                query={USER_GROUPS_QUERY}
+                filterable={true}
+            />
+        </div>
+    )
+}
+
 export const ValidationNotificationTemplateFormFields = ({
     initialValues,
 }: {
@@ -69,6 +95,14 @@ export const ValidationNotificationTemplateFormFields = ({
                 <StandardFormField>
                     <CodeField schemaSection={schemaSection} />
                 </StandardFormField>
+                <StandardFormSectionTitle>
+                    {i18n.t('Validation rules')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Select validation rules to trigger this notification.'
+                    )}
+                </StandardFormSectionDescription>
                 <StandardFormField>
                     <ModelTransferField
                         dataTest="validationRules-transfer"
@@ -89,12 +123,14 @@ export const ValidationNotificationTemplateFormFields = ({
                 </StandardFormField>
             </SectionedFormSection>
 
-            <SectionedFormSection name="messageContent">
+            <SectionedFormSection name="notificationDetails">
                 <StandardFormSectionTitle>
-                    {i18n.t('Message content')}
+                    {i18n.t('Notification details')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t('What should this notification send?')}
+                    {i18n.t(
+                        'Configure the templates for the notification message content.'
+                    )}
                 </StandardFormSectionDescription>
                 <MessageFields messageVariables={VALIDATION_RULE_VARIABLES} />
             </SectionedFormSection>
@@ -107,28 +143,14 @@ export const ValidationNotificationTemplateFormFields = ({
                     {i18n.t('Choose who recieves the notification.')}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <ModelTransferField
-                        dataTest="recipientUserGroups-transfer"
-                        name="recipientUserGroups"
-                        query={{
-                            resource: 'userGroups',
-                        }}
-                        leftHeader={i18n.t('Available user groups')}
-                        rightHeader={i18n.t('Selected user groups')}
-                        filterPlaceholder={i18n.t(
-                            'Filter available user groups'
-                        )}
-                        filterPlaceholderPicked={i18n.t(
-                            'Filter selected user groups'
-                        )}
-                        maxSelections={Infinity}
-                    />
+                    <UserGroupSelect />
                 </StandardFormField>
                 <StandardFormField>
                     <FieldRFF<string | undefined>
                         inputWidth="500px"
                         dataTest="formfields-notificationType"
                         name="sendStrategy"
+                        placeholder={i18n.t('Choose notification')}
                         render={(props) => (
                             <SingleSelectFieldFF
                                 {...props}

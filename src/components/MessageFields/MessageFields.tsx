@@ -48,7 +48,7 @@ export const MessageFields = ({
     const [subjectTemplateSelected, setSubjectTemplateSelected] = useState(true)
     return (
         <div className={styles.validationRuleContentContainer}>
-            <div>
+            <div className={styles.validationRuleFieldsContainer}>
                 <StandardFormField>
                     <FieldRFF name="subjectTemplate">
                         {({ input, meta }) => {
@@ -77,6 +77,7 @@ export const MessageFields = ({
                                             onFocus={() => {
                                                 setSubjectTemplateSelected(true)
                                             }}
+                                            aria-describedby="subjectTemplate-help"
                                         />
                                         {showError && (
                                             <div className={styles.errorIcon}>
@@ -95,6 +96,12 @@ export const MessageFields = ({
                             )
                         }}
                     </FieldRFF>
+                    <p
+                        id="subjectTemplate-help"
+                        className={styles.fieldHelpText}
+                    >
+                        {i18n.t('Used as the template for the subject field.')}
+                    </p>
                 </StandardFormField>
                 <StandardFormField>
                     <FieldRFF name="messageTemplate">
@@ -130,6 +137,7 @@ export const MessageFields = ({
                                             onChange={(e) => {
                                                 input.onChange(e)
                                             }}
+                                            aria-describedby="messageTemplate-help"
                                         />
                                         {showError && (
                                             <div className={styles.errorIcon}>
@@ -148,6 +156,12 @@ export const MessageFields = ({
                             )
                         }}
                     </FieldRFF>
+                    <p
+                        id="messageTemplate-help"
+                        className={styles.fieldHelpText}
+                    >
+                        {i18n.t('Used as the template for the message field.')}
+                    </p>
                 </StandardFormField>
             </div>
 
