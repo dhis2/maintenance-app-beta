@@ -176,7 +176,12 @@ describe('Constants form tests', () => {
             uiAssertions.expectInputFieldToExist('shortName', '', screen)
             uiAssertions.expectCodeFieldExist('', screen)
             uiAssertions.expectTextAreaFieldToExist('description', '', screen)
-            uiAssertions.expectInputFieldToExist('value', '', screen)
+            uiAssertions.expectInputFieldToExist(
+                'value',
+                '',
+                screen,
+                'spinbutton'
+            )
         })
 
         it('submits correctly filled data', async () => {
@@ -199,8 +204,9 @@ describe('Constants form tests', () => {
                 aDescription,
                 screen
             )
-            await uiActions.enterInputFieldValue('value', `${aValue}`, screen)
-
+            await uiActions.enterInputFieldValue('value', `${aValue}`, screen, {
+                type: 'spinbutton',
+            })
             await uiActions.submitForm(screen)
 
             expect(createMock).toHaveBeenCalledWith(
@@ -279,7 +285,8 @@ describe('Constants form tests', () => {
             uiAssertions.expectInputFieldToExist(
                 'value',
                 String(constant.value),
-                screen
+                screen,
+                'spinbutton'
             )
         })
 

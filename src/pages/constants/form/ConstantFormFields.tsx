@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { Field as FieldRFF } from 'react-final-form'
+import { useField } from 'react-final-form'
 import {
     CustomAttributesSection,
     DefaultIdentifiableFields,
@@ -11,10 +11,20 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { SECTIONS_MAP } from '../../../lib'
+import { SECTIONS_MAP, useSchemaSectionHandleOrThrow } from '../../../lib'
+import { useValidator } from '../../../lib/models/useFieldValidators'
 
 function ConstantFormFields() {
     const section = SECTIONS_MAP.constant
+    const schemaSection = useSchemaSectionHandleOrThrow()
+    const validate = useValidator({ schemaSection, property: 'value' })
+
+    const { input, meta } = useField('value', {
+        validate,
+        type: 'number',
+        format: (value) => (value != null ? String(value) : ''),
+    })
+
     return (
         <StandardFormSection>
             <StandardFormSectionTitle>
@@ -25,22 +35,28 @@ function ConstantFormFields() {
             </StandardFormSectionDescription>
 
             <DefaultIdentifiableFields />
+
             <StandardFormField>
                 <DescriptionField
                     helpText={i18n.t('Explain the purpose of this constant.')}
                 />
             </StandardFormField>
+
             <StandardFormField>
-                <FieldRFF
-                    component={InputFieldFF}
-                    dataTest="formfields-value"
+                <InputFieldFF
+                    input={input}
+                    meta={meta}
                     inputWidth="400px"
-                    name="value"
-                    required
+                    dataTest="formfields-value"
                     type="number"
                     label={i18n.t('Value (required)')}
+                    required
+                    helpText={i18n.t(
+                        'Enter the numeric value to be used as the constant.'
+                    )}
                 />
             </StandardFormField>
+
             <CustomAttributesSection schemaSection={section} />
         </StandardFormSection>
     )

@@ -35,6 +35,11 @@ import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
 import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form/TrackedEntityTypeFormSchema'
 import {
+    validationNotificationTemplateListSchema,
+    validationNotificationTemplateFormSchema,
+} from '../pages/validationNotificationTemplates/form'
+import { validationRuleGroupsListSchema } from '../pages/validationRuleGroups/form/validationRuleGroupsSchema'
+import {
     CategoryMapping,
     DataElement,
     OptionMapping,
@@ -283,6 +288,24 @@ export const testTrackedEntityType = (overwrites: Record<any, any> = {}) => ({
     ...overwrites,
 })
 
+export const testValidationNotificationTemplate = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(validationNotificationTemplateListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testValidationNotificationTemplateForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(validationNotificationTemplateFormSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
 export const testCustomAttribute = ({
     id = randomDhis2Id(),
     displayFormName = faker.person.fullName(),
@@ -354,6 +377,13 @@ export const testOrgUnit = (overwrites: Record<any, any> | undefined = {}) => {
     } as unknown as Partial<OrganisationUnit>
 }
 
+export const testValidationRuleGroups = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(validationRuleGroupsListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
 // TODO: change when schema for optionset is available
 export const testOptionSet = ({
     id = randomDhis2Id(),
@@ -381,3 +411,12 @@ export const testOption = ({
         displayName: displayName ?? optionName,
     }
 }
+
+// TODO: change when schema for validationRule is available
+export const testValidationRule = ({
+    id = randomDhis2Id(),
+    displayName = faker.person.fullName(),
+} = {}) => ({
+    id,
+    displayName,
+})

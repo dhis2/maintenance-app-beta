@@ -1,31 +1,23 @@
 import { RenderResult, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 
+type inputFieldValueTypeOptions = { type?: string; supressTab?: boolean }
 const enterInputFieldValue = async (
     fieldName: string,
-    text: string | number,
+    text: string,
     screen: RenderResult,
-    role?: string
+    options?: inputFieldValueTypeOptions
 ) => {
+    const { type, supressTab } = options ?? {}
     const field = screen.getByTestId(`formfields-${fieldName}`)
+    const input = within(field).getByRole(type ?? 'textbox') as HTMLInputElement
+    await clearInputField(fieldName, screen, type ?? 'textbox')
+    await userEvent.type(input, text)
 
-    let input: HTMLInputElement
-    try {
-        input = within(field).getByRole(role ?? 'textbox') as HTMLInputElement
-    } catch {
-        input = within(field).getByRole('spinbutton') as HTMLInputElement
-    }
-
-    await userEvent.clear(input)
-    await userEvent.type(input, String(text))
-    await userEvent.tab()
-
-    // convert back if it's a number field
-    if (input.type === 'number') {
-        expect(input).toHaveValue(Number(text))
+    if (!supressTab) {
+        await userEvent.tab()
     }
 }
-
 const enterExpressionInModal = async (
     modal: HTMLElement,
     anExpression: string
@@ -202,6 +194,11 @@ const pickRadioField = async (
     await userEvent.click(radioButton)
 }
 
+export const clickButton = async (testId: string, screen: RenderResult) => {
+    const button = screen.getByTestId(testId)
+    await userEvent.click(button)
+}
+
 export const uiActions = {
     openModal,
     openSingleSelect,
@@ -222,4 +219,5 @@ export const uiActions = {
     enterExpressionInModal,
     applyNewExpressionWithinModal,
     clearSingleSelect,
+    clickButton,
 }

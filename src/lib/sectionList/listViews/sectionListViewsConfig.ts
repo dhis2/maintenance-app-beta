@@ -670,4 +670,37 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    validationRuleGroup: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+        },
+        filters: {},
+    },
+    validationNotificationTemplate: {
+        columns: {
+            available: [
+                {
+                    label: i18n.t('Notify users in hierarchy only'),
+                    path: 'notifyUsersInHierarchyOnly',
+                },
+                {
+                    label: i18n.t('Send notification as'),
+                    path: 'sendStrategy',
+                },
+            ],
+            default: [DESCRIPTORS.name, 'code', 'lastUpdated'],
+        },
+        filters: {
+            default: [],
+            overrideDefaultAvailable: true,
+        },
+    },
 } satisfies SectionListViewConfig<SectionName>

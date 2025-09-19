@@ -312,7 +312,7 @@ describe('Attributes form tests', () => {
                 'sortOrder',
                 String(aSortOrder),
                 screen,
-                'spinbutton'
+                { type: 'spinbutton' }
             )
             await uiActions.pickOptionFromSelect(
                 screen.getByTestId('formfields-optionSet'),
