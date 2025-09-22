@@ -244,8 +244,8 @@ export const SCHEMA_SECTIONS = {
     validationNotificationTemplate: {
         name: SchemaName.validationNotificationTemplate,
         namePlural: 'validationNotificationTemplates',
-        title: i18n.t('Validation notification template'),
-        titlePlural: i18n.t('Validation notification templates'),
+        title: i18n.t('Validation notification'),
+        titlePlural: i18n.t('Validation notification'),
         parentSectionKey: 'validation',
     },
     constant: {

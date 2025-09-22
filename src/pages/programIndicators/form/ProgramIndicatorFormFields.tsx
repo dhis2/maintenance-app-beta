@@ -14,7 +14,8 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { ExpressionBuilderField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderField'
+import { ExpressionBuilderWithModalField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderWithModalField'
+import { PaddedContainer } from '../../../components/metadataFormControls/ExpressionBuilder/PaddedContainer'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import {
     getConstantTranslation,
@@ -159,11 +160,14 @@ export const ProgramIndicatorsFormFields = () => {
                     {i18n.t('Configure the program indicator expression.')}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <ExpressionBuilderField
-                        validationResource="programIndicators/expression/description"
-                        dataTest="formfields-expression"
-                        name="expression"
-                    />
+                    <PaddedContainer>
+                        <ExpressionBuilderWithModalField
+                            validationResource="programIndicators/expression/description"
+                            fieldName="expression"
+                            modalTitle={i18n.t('Expression')}
+                            editButtonText={i18n.t('Edit expression')}
+                        />
+                    </PaddedContainer>
                 </StandardFormField>
             </SectionedFormSection>
             <SectionedFormSection name={descriptor.getSection('filter').name}>
@@ -176,11 +180,14 @@ export const ProgramIndicatorsFormFields = () => {
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <ExpressionBuilderField
-                        validationResource="programIndicators/filter/description"
-                        dataTest="formfields-filter"
-                        name="filter"
-                    />
+                    <PaddedContainer>
+                        <ExpressionBuilderWithModalField
+                            validationResource="programIndicators/filter/description"
+                            fieldName="filter"
+                            modalTitle={i18n.t('Filter')}
+                            editButtonText={i18n.t('Edit filter')}
+                        />
+                    </PaddedContainer>
                 </StandardFormField>
             </SectionedFormSection>
             <SectionedFormSection

@@ -10,39 +10,48 @@ interface ValidateExpressionResponse {
     status: 'OK' | 'ERROR'
 }
 
+type ValidationResult = {
+    error?: string
+    expressionDescription?: string
+}
 export const useExpressionValidator = (resource: string) => {
     const engine = useDataEngine()
-    const [expressionDescription, setExpressionDescription] = useState<
-        string | undefined
-    >(undefined)
     const [validating, setValidating] = useState(false)
 
     const memoized = useMemo(
         () =>
             memoize(async (expression?: string) => {
                 if (!expression?.trim()) {
-                    setExpressionDescription('')
-                    return undefined
+                    return {
+                        error: undefined,
+                        expressionDescription: '',
+                    } as ValidationResult
                 }
 
                 setValidating(true)
                 try {
-                    const result = (await engine.mutate({
+                    const result = await (engine.mutate({
                         resource,
                         type: 'create',
                         data: expression as unknown as Record<string, unknown>,
-                    })) as unknown as ValidateExpressionResponse
+                    }) as unknown as Promise<ValidateExpressionResponse>)
 
                     if (result.status === 'ERROR') {
-                        setExpressionDescription(undefined)
-                        return result.message || i18n.t('Invalid expression')
+                        return {
+                            error:
+                                result.message || i18n.t('Invalid expression'),
+                            expressionDescription: undefined,
+                        } as ValidationResult
                     }
-
-                    setExpressionDescription(result.description)
-                    return undefined
+                    return {
+                        error: undefined,
+                        expressionDescription: result.description,
+                    } as ValidationResult
                 } catch {
-                    setExpressionDescription(undefined)
-                    return i18n.t('Could not validate expression')
+                    return {
+                        error: i18n.t('Could not validate expression'),
+                        expressionDescription: undefined,
+                    } as ValidationResult
                 } finally {
                     setValidating(false)
                 }
@@ -59,5 +68,5 @@ export const useExpressionValidator = (resource: string) => {
         leading: true,
     })
 
-    return [debouncedValidate, expressionDescription, validating] as const
+    return [debouncedValidate, validating] as const
 }

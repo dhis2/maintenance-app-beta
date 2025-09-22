@@ -1,17 +1,22 @@
 import { RenderResult, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 
+type inputFieldValueTypeOptions = { type?: string; supressTab?: boolean }
 const enterInputFieldValue = async (
     fieldName: string,
     text: string,
     screen: RenderResult,
-    type?: string
+    options?: inputFieldValueTypeOptions
 ) => {
+    const { type, supressTab } = options ?? {}
     const field = screen.getByTestId(`formfields-${fieldName}`)
     const input = within(field).getByRole(type ?? 'textbox') as HTMLInputElement
     await clearInputField(fieldName, screen, type ?? 'textbox')
     await userEvent.type(input, text)
-    await userEvent.tab()
+
+    if (!supressTab) {
+        await userEvent.tab()
+    }
 }
 const enterExpressionInModal = async (
     modal: HTMLElement,
@@ -189,6 +194,11 @@ const pickRadioField = async (
     await userEvent.click(radioButton)
 }
 
+export const clickButton = async (testId: string, screen: RenderResult) => {
+    const button = screen.getByTestId(testId)
+    await userEvent.click(button)
+}
+
 export const uiActions = {
     openModal,
     openSingleSelect,
@@ -209,4 +219,5 @@ export const uiActions = {
     enterExpressionInModal,
     applyNewExpressionWithinModal,
     clearSingleSelect,
+    clickButton,
 }

@@ -1,3 +1,44 @@
+# [0.72.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.71.0...v0.72.0) (2025-09-22)
+
+
+### Features
+
+* make form type into tabs ([#638](https://github.com/dhis2/maintenance-app-beta/issues/638)) ([43b9d0c](https://github.com/dhis2/maintenance-app-beta/commit/43b9d0c7406f1d66dc0393b01cc8d19b24c405cc))
+
+# [0.71.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.70.0...v0.71.0) (2025-09-19)
+
+
+### Features
+
+* add constant forms ([#630](https://github.com/dhis2/maintenance-app-beta/issues/630)) ([226e5d5](https://github.com/dhis2/maintenance-app-beta/commit/226e5d53a925dae5efd876a487488e7c2e5bfecf))
+
+# [0.70.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.69.0...v0.70.0) (2025-09-18)
+
+
+### Features
+
+* refactor expression modal to be more general and use for pi ([#637](https://github.com/dhis2/maintenance-app-beta/issues/637)) ([594bddd](https://github.com/dhis2/maintenance-app-beta/commit/594bddd566e7f6af920c3cfeba0a1276a08b1a00))
+
+# [0.69.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.68.0...v0.69.0) (2025-09-16)
+
+
+### Features
+
+* validation notification templates [DHIS2-19842] [DHIS2-19843] ([#631](https://github.com/dhis2/maintenance-app-beta/issues/631)) ([de75348](https://github.com/dhis2/maintenance-app-beta/commit/de753487bcd40e22d461af68bc032a3da62d06f2))
+
+# [0.68.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.67.0...v0.68.0) (2025-09-15)
+
+
+### Bug Fixes
+
+* validation rule group schema ([5af6c8d](https://github.com/dhis2/maintenance-app-beta/commit/5af6c8d6ccfefc35387450ca497fa2b16bcbf20c))
+
+
+### Features
+
+* add validation rule group schema and components for list ([4212817](https://github.com/dhis2/maintenance-app-beta/commit/4212817b0c85ffac24b0d635730ca74b678b2c43))
+* add validation rule group schema and components for list ([56dc15f](https://github.com/dhis2/maintenance-app-beta/commit/56dc15f1f983036ab95d283708013c6990430868))
+
 # [0.67.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.66.1...v0.67.0) (2025-09-11)
 
 

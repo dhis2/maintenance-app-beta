@@ -37,8 +37,10 @@ export const ExpressionBuilderModal = ({
     const [validationError, setValidationError] = useState<string | undefined>(
         undefined
     )
-    const [validate, expressionDescription, validating] =
-        useExpressionValidator(validationResource)
+    const [expressionDescription, setExpressionDescription] = useState<
+        string | undefined
+    >(undefined)
+    const [validate, validating] = useExpressionValidator(validationResource)
     const isValid = validationError === undefined
 
     return (
@@ -58,27 +60,30 @@ export const ExpressionBuilderModal = ({
                             loading={validating}
                             onBlur={async (payload) => {
                                 setExpressionIsOnFocus(false)
-                                const maybeValidationError = await validate(
+                                const validationResult = await validate(
                                     payload.value
                                 )
-                                setValidationError(maybeValidationError)
+                                setValidationError(validationResult?.error)
+                                setExpressionDescription(
+                                    validationResult?.expressionDescription
+                                )
                             }}
                             onFocus={() => setExpressionIsOnFocus(true)}
                             onChange={(payload) => setExpression(payload.value)}
                         />
-                        <Box className={styles.noticeBox}>
-                            {isValid &&
-                                !validating &&
-                                !expressionIsOnFocus &&
-                                expressionDescription && (
+                        {isValid &&
+                            !validating &&
+                            !expressionIsOnFocus &&
+                            expressionDescription && (
+                                <Box className={styles.noticeBox}>
                                     <NoticeBox
                                         valid
                                         title={expressionDescription}
                                     >
                                         {i18n.t('Valid expression')}
                                     </NoticeBox>
-                                )}
-                        </Box>
+                                </Box>
+                            )}
 
                         <span
                             className={styles.info}
