@@ -30,7 +30,7 @@ jest.mock('use-debounce', () => ({
     useDebouncedCallback: (fn: any) => fn,
 }))
 
-describe('Validation Notifcation form tests', () => {
+describe('Validation Notification form tests', () => {
     const createMock = jest.fn()
     const updateMock = jest.fn()
     beforeEach(() => {

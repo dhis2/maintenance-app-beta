@@ -26,8 +26,13 @@ export function useIsFieldValueUnique({
         result: {
             resource: model,
             params: (variables: Record<string, string>) => {
+                const equalOperation = !isNaN(Number(variables.value.trim()))
+                    ? 'eq'
+                    : 'ieq'
                 const filter = [
-                    `${variables.field}:ieq:${variables.value.trim()}`,
+                    `${
+                        variables.field
+                    }:${equalOperation}:${variables.value.trim()}`,
                 ]
 
                 if (variables.id) {
@@ -60,7 +65,7 @@ export function useIsFieldValueUnique({
                     )
                 }
             }),
-        [field, engine, id, HAS_FIELD_VALUE_QUERY]
+        [field, engine, id, HAS_FIELD_VALUE_QUERY, message]
     )
 
     // Doing it this way to prevent extra arguments to be passed.
