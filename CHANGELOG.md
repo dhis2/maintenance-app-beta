@@ -1,3 +1,10 @@
+# [0.72.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.71.0...v0.72.0) (2025-09-22)
+
+
+### Features
+
+* make form type into tabs ([#638](https://github.com/dhis2/maintenance-app-beta/issues/638)) ([43b9d0c](https://github.com/dhis2/maintenance-app-beta/commit/43b9d0c7406f1d66dc0393b01cc8d19b24c405cc))
+
 # [0.71.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.70.0...v0.71.0) (2025-09-19)
 
 
