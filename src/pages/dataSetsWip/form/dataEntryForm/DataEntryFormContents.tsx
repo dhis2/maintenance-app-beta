@@ -54,7 +54,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
 
             {!isCreatingNewDataSet && dataSetElements.length > 0 && (
                 <NoticeBox
-                    title={i18n.t('Based on your current setup,')}
+                    title={i18n.t('Form type based on your current setup')}
                     className={classes.formTypeInfo}
                 >
                     {i18n.t(
@@ -66,7 +66,12 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                     )}
                 </NoticeBox>
             )}
-            <div className={classes.formTypeTabsContainer}>
+            <div
+                className={classes.formTypeTabsContainer}
+                onClick={(e) => {
+                    e.preventDefault()
+                }}
+            >
                 <TabBar fixed>
                     <Tab
                         onClick={(_, event) => {
@@ -81,7 +86,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                                 condition
                                 className={classes.infoTooltipWrapper}
                                 content={i18n.t(
-                                    'Basic forms display an auto-generated list of attributes. \n' +
+                                    'Basic forms display an auto-generated list of data elements. \n' +
                                         'They will be displayed only if no Section or Custom form is created.'
                                 )}
                             >
@@ -89,17 +94,17 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                             </TooltipWrapper>
                         </div>
                     </Tab>
-                    <TooltipWrapper
-                        condition={isCreatingNewDataSet}
-                        content={disabledFormTypeText}
+                    <Tab
+                        onClick={(_, event) => {
+                            event.preventDefault()
+                            setSelectedFormType(formType.SECTION)
+                        }}
+                        disabled={isCreatingNewDataSet}
+                        selected={selectedFormType === formType.SECTION}
                     >
-                        <Tab
-                            onClick={(_, event) => {
-                                event.preventDefault()
-                                setSelectedFormType(formType.SECTION)
-                            }}
-                            disabled={isCreatingNewDataSet}
-                            selected={selectedFormType === formType.SECTION}
+                        <TooltipWrapper
+                            condition={isCreatingNewDataSet}
+                            content={disabledFormTypeText}
                         >
                             <div className={classes.formTypeTab}>
                                 {i18n.t('Section form')}
@@ -113,21 +118,27 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                                     <IconInfo16 />
                                 </TooltipWrapper>
                             </div>
-                        </Tab>
-                    </TooltipWrapper>
-                    <TooltipWrapper
-                        condition={isCreatingNewDataSet}
-                        content={disabledFormTypeText}
+                        </TooltipWrapper>
+                    </Tab>
+
+                    <Tab
+                        onClick={(_, event) => {
+                            event.preventDefault()
+                            setSelectedFormType(formType.CUSTOM)
+                        }}
+                        disabled={isCreatingNewDataSet}
+                        selected={selectedFormType === formType.CUSTOM}
                     >
-                        <Tab
-                            onClick={(_, event) => {
-                                event.preventDefault()
-                                setSelectedFormType(formType.CUSTOM)
-                            }}
-                            disabled={isCreatingNewDataSet}
-                            selected={selectedFormType === formType.CUSTOM}
+                        <TooltipWrapper
+                            condition={isCreatingNewDataSet}
+                            content={disabledFormTypeText}
                         >
-                            <div className={classes.formTypeTab}>
+                            <div
+                                className={classes.formTypeTab}
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                }}
+                            >
                                 {i18n.t('Custom form')}
                                 <TooltipWrapper
                                     condition={!isCreatingNewDataSet}
@@ -143,8 +154,8 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                                     <IconInfo16 />
                                 </TooltipWrapper>
                             </div>
-                        </Tab>
-                    </TooltipWrapper>
+                        </TooltipWrapper>
+                    </Tab>
                 </TabBar>
             </div>
             <div className={classes.formTypeTabsContent}>
