@@ -77,7 +77,20 @@ const expectInputFieldToHaveError = (
     const field = screen.getByTestId(fieldTestId)
     const error = within(field).getByTestId(`${fieldTestId}-validation`)
     expect(error).toBeVisible()
+    expect(error).toHaveClass('error')
     expect(error).toHaveTextContent(errorText)
+}
+
+const expectInputFieldToHaveWarning = (
+    fieldTestId: string,
+    warningText: string,
+    screen: RenderResult
+) => {
+    const field = screen.getByTestId(fieldTestId)
+    const warning = within(field).getByTestId(`${fieldTestId}-validation`)
+    expect(warning).toBeVisible()
+    expect(warning).toHaveClass('warning')
+    expect(warning).toHaveTextContent(warningText)
 }
 
 const expectTransferFieldToExistWithOptions = async (
@@ -220,6 +233,7 @@ const expectInputToErrorWhenDuplicate = async (
         screen
     )
 }
+
 const expectColorAndIconFieldToExist = (screen: RenderResult) => {
     const field = screen.getByTestId('formfields-colorandicon')
     expect(field).toBeVisible()
@@ -234,6 +248,7 @@ export const uiAssertions = {
     expectTextAreaFieldToExist,
     expectColorAndIconFieldToExist,
     expectFieldToHaveError: expectInputFieldToHaveError,
+    expectInputFieldToHaveWarning,
     expectTransferFieldToExistWithOptions,
     expectSelectToExistWithOptions,
     expectMultiSelectToExistWithOptions,
