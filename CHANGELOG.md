@@ -1,3 +1,10 @@
+## [0.72.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.72.2...v0.72.3) (2025-09-23)
+
+
+### Bug Fixes
+
+* add tx configuration ([#644](https://github.com/dhis2/maintenance-app-beta/issues/644)) ([0f67045](https://github.com/dhis2/maintenance-app-beta/commit/0f67045a9ff7ea82bb4b68bc4890c3cebb469e51))
+
 ## [0.72.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.72.1...v0.72.2) (2025-09-23)
 
 
