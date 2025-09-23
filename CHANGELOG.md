@@ -1,3 +1,10 @@
+## [0.72.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.72.0...v0.72.1) (2025-09-23)
+
+
+### Bug Fixes
+
+* validation notification template cleanup [DHIS2-20151] ([#640](https://github.com/dhis2/maintenance-app-beta/issues/640)) ([4a28a25](https://github.com/dhis2/maintenance-app-beta/commit/4a28a256d1025af55dc036ceeb70492fe16b40c0))
+
 # [0.72.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.71.0...v0.72.0) (2025-09-22)
 
 
