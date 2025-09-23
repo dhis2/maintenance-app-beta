@@ -1,3 +1,10 @@
+## [0.72.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.72.1...v0.72.2) (2025-09-23)
+
+
+### Bug Fixes
+
+* restrict aggregation with additional value types [DHIS2-19549] ([#641](https://github.com/dhis2/maintenance-app-beta/issues/641)) ([9b213a4](https://github.com/dhis2/maintenance-app-beta/commit/9b213a4fedca9ac62a1291e07adfcda127fd0af0))
+
 ## [0.72.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.72.0...v0.72.1) (2025-09-23)
 
 
