@@ -1073,7 +1073,7 @@ describe('Data elements form tests', () => {
         it('should require clicking through warning modal to change value type', async () => {
             const { screen } = await renderForm({
                 dataElementOverwrites: {
-                    valueType: 'LONG_TEXT',
+                    valueType: 'NUMBER',
                     optionSet: null,
                 },
             })
@@ -1086,7 +1086,7 @@ describe('Data elements form tests', () => {
                 screen.getByTestId('formfields-valueType')
             ).getByTestId('dhis2-uicore-select-input')
             expect(valueType).toBeVisible()
-            expect(valueType).toHaveTextContent(VALUE_TYPE.LONG_TEXT)
+            expect(valueType).toHaveTextContent(VALUE_TYPE.NUMBER)
 
             // Click a new value type
             const aValueType =
@@ -1119,7 +1119,7 @@ describe('Data elements form tests', () => {
         it('should revert to original value type if warning modal is cancelled', async () => {
             const { screen } = await renderForm({
                 dataElementOverwrites: {
-                    valueType: 'LONG_TEXT',
+                    valueType: 'NUMBER',
                     optionSet: null,
                 },
             })
@@ -1132,7 +1132,7 @@ describe('Data elements form tests', () => {
                 screen.getByTestId('formfields-valueType')
             ).getByTestId('dhis2-uicore-select-input')
             expect(valueType).toBeVisible()
-            expect(valueType).toHaveTextContent(VALUE_TYPE.LONG_TEXT)
+            expect(valueType).toHaveTextContent(VALUE_TYPE.NUMBER)
 
             // Click a new value type
             const aValueType =
@@ -1157,7 +1157,7 @@ describe('Data elements form tests', () => {
             )
 
             // value type should NOT be updated and warning should be removed
-            expect(valueType).toHaveTextContent(VALUE_TYPE.LONG_TEXT)
+            expect(valueType).toHaveTextContent(VALUE_TYPE.NUMBER)
             expect(screen.queryByText(warningText)).toBeNull()
         })
     })
