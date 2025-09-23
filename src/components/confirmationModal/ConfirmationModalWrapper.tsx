@@ -108,7 +108,7 @@ export const ConfirmationModalWrapper = ({
             objectName={objectName}
         >
             {renderComponent({
-                onChange: !isEdit ? onChange : setUnconfirmedSelection,
+                onChange: isEdit ? setUnconfirmedSelection : onChange,
             })}
         </ConfirmationModal>
     )
