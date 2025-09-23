@@ -39,8 +39,8 @@ export const ValidationNotificationTemplateFormDescriptor = {
             ],
         },
         {
-            name: 'messageContent',
-            label: i18n.t('Message content'),
+            name: 'notificationDetails',
+            label: i18n.t('Notification details'),
             fields: [
                 {
                     name: 'subjectTemplate',

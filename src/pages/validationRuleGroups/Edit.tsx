@@ -20,6 +20,9 @@ const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
+    'code',
+    'description',
+    'validationRules[id,displayName]',
 ] as const
 
 export type ValidationRuleGroupFormValues = PickWithFieldFilters<
