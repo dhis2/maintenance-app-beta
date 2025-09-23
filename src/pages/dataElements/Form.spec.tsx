@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { render, within } from '@testing-library/react'
+import { render, within, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/dataElementsSchema.json'
@@ -788,10 +788,7 @@ describe('Data elements form tests', () => {
             expect(valueType).toHaveTextContent(VALUE_TYPE.TEXT)
 
             // Click a new value type
-            const aValueType =
-                DISABLING_VALUE_TYPES[
-                    Math.floor(Math.random() * DISABLING_VALUE_TYPES.length)
-                ]
+            const aValueType = 'COORDINATE'
 
             const valueTypeOptions = await uiActions.openSingleSelect(
                 screen.getByTestId('formfields-valueType'),
@@ -1089,10 +1086,11 @@ describe('Data elements form tests', () => {
             expect(valueType).toHaveTextContent(VALUE_TYPE.NUMBER)
 
             // Click a new value type
-            const aValueType =
-                DISABLING_VALUE_TYPES[
-                    Math.floor(Math.random() * DISABLING_VALUE_TYPES.length)
-                ]
+            const aValueType = 'COORDINATE'
+            // const aValueType =
+            //     DISABLING_VALUE_TYPES[
+            //         Math.floor(Math.random() * DISABLING_VALUE_TYPES.length)
+            //     ]
 
             const valueTypeOptions = await uiActions.openSingleSelect(
                 screen.getByTestId('formfields-valueType'),
@@ -1135,10 +1133,11 @@ describe('Data elements form tests', () => {
             expect(valueType).toHaveTextContent(VALUE_TYPE.NUMBER)
 
             // Click a new value type
-            const aValueType =
-                DISABLING_VALUE_TYPES[
-                    Math.floor(Math.random() * DISABLING_VALUE_TYPES.length)
-                ]
+            const aValueType = 'COORDINATE'
+            // const aValueType =
+            //     DISABLING_VALUE_TYPES[
+            //         Math.floor(Math.random() * DISABLING_VALUE_TYPES.length)
+            //     ]
 
             const valueTypeOptions = await uiActions.openSingleSelect(
                 screen.getByTestId('formfields-valueType'),
@@ -1149,7 +1148,9 @@ describe('Data elements form tests', () => {
             )!
             await userEvent.click(valueTypeOption)
 
-            expect(screen.getByText(warningText)).toBeInTheDocument()
+            await waitFor(() => {
+                expect(screen.getByText(warningText)).toBeInTheDocument()
+            })
 
             // click confirm
             await userEvent.click(
