@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import {
     useBoundResourceQueryFn,
     DEFAULT_CATEGORY_OPTION_COMBO,
-} from '../../../../../lib/index'
+} from '../../../../../lib'
 
 type FlagItemResponse = { name: string; key: string; path: string }
 
