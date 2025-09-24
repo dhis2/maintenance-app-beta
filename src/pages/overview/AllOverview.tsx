@@ -7,12 +7,14 @@ import { OverviewGroup } from './group'
 import { IndicatorsCardGroup } from './Indicators'
 import { OrganisationUnitsCardGroup } from './OrganisationUnits'
 import { OtherCardGroup } from './Other'
+import { ProgramsAndTrackersCardGroup } from './ProgramsAndTracker'
 import { ValidationsCardGroup } from './Validations'
 
 export const AllOverview = () => {
     return (
         <OverviewGroup title={i18n.t('Metadata management')}>
             <CategoryCardGroup showTitle={true} />
+            <ProgramsAndTrackersCardGroup showTitle={true} />
             <DataElementsCardGroup showTitle={true} />
             <DataSetsCardGroup showTitle={true} />
             <IndicatorsCardGroup showTitle={true} />

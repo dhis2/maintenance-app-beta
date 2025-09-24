@@ -36,6 +36,11 @@ export const OtherCardGroup = ({ showTitle }: { showTitle?: boolean }) => {
             <SummaryCard section={SECTIONS_MAP.optionGroupSet}>
                 {i18n.t('Create, modify and view sets of option groups.')}
             </SummaryCard>
+            <SummaryCard section={SECTIONS_MAP.constant}>
+                {i18n.t(
+                    'Create constants which can be included in expressions of indicator and validation rules.'
+                )}
+            </SummaryCard>
             <SummaryCard
                 section={SECTIONS_MAP.programDisaggregation}
                 hideNew={true}
