@@ -1,3 +1,10 @@
+# [0.73.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.72.3...v0.73.0) (2025-09-24)
+
+
+### Features
+
+* move data sets to actual route ([#646](https://github.com/dhis2/maintenance-app-beta/issues/646)) ([39e9701](https://github.com/dhis2/maintenance-app-beta/commit/39e97018715eb9dff73f397c32f984d643eddc3b))
+
 ## [0.72.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.72.2...v0.72.3) (2025-09-23)
 
 
