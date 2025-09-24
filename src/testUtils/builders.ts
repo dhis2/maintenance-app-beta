@@ -21,7 +21,7 @@ import { dataElementGroupListSchema } from '../pages/dataElementGroups/form/data
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementListSchema } from '../pages/dataElements/form/dataElementSchema'
 import { dataSetNotificationTemplateListSchema } from '../pages/dataSetNotificationTemplates/form/dataSetNotificationTemplateSchema'
-import { dataSetListSchema } from '../pages/dataSetsWip/form/dataSetFormSchema'
+import { dataSetListSchema } from '../pages/dataSets/form/dataSetFormSchema'
 import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicatorGroupSchema'
 import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
 import { indicatorListSchema } from '../pages/indicators/form/indicatorSchema'
