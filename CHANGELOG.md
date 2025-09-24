@@ -1,3 +1,31 @@
+## [0.72.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.72.2...v0.72.3) (2025-09-23)
+
+
+### Bug Fixes
+
+* add tx configuration ([#644](https://github.com/dhis2/maintenance-app-beta/issues/644)) ([0f67045](https://github.com/dhis2/maintenance-app-beta/commit/0f67045a9ff7ea82bb4b68bc4890c3cebb469e51))
+
+## [0.72.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.72.1...v0.72.2) (2025-09-23)
+
+
+### Bug Fixes
+
+* restrict aggregation with additional value types [DHIS2-19549] ([#641](https://github.com/dhis2/maintenance-app-beta/issues/641)) ([9b213a4](https://github.com/dhis2/maintenance-app-beta/commit/9b213a4fedca9ac62a1291e07adfcda127fd0af0))
+
+## [0.72.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.72.0...v0.72.1) (2025-09-23)
+
+
+### Bug Fixes
+
+* validation notification template cleanup [DHIS2-20151] ([#640](https://github.com/dhis2/maintenance-app-beta/issues/640)) ([4a28a25](https://github.com/dhis2/maintenance-app-beta/commit/4a28a256d1025af55dc036ceeb70492fe16b40c0))
+
+# [0.72.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.71.0...v0.72.0) (2025-09-22)
+
+
+### Features
+
+* make form type into tabs ([#638](https://github.com/dhis2/maintenance-app-beta/issues/638)) ([43b9d0c](https://github.com/dhis2/maintenance-app-beta/commit/43b9d0c7406f1d66dc0393b01cc8d19b24c405cc))
+
 # [0.71.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.70.0...v0.71.0) (2025-09-19)
 
 

@@ -12,9 +12,9 @@ export const indicatorTypeFormSchema = identifiable.merge(
     indicatorTypeBaseSchema
 )
 
-export const indicatorTypeListSchema = indicatorTypeBaseSchema.merge(
-    withDefaultListColumns
-)
+export const indicatorTypeListSchema = indicatorTypeBaseSchema
+    .merge(withDefaultListColumns)
+    .extend({ name: z.string() })
 
 export const initialValues = getDefaults(indicatorTypeFormSchema)
 
