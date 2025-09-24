@@ -26,9 +26,9 @@ export function useIsFieldValueUnique({
         result: {
             resource: model,
             params: (variables: Record<string, string>) => {
-                const equalOperation = !isNaN(Number(variables.value.trim()))
-                    ? 'eq'
-                    : 'ieq'
+                const equalOperation = Number.isNaN(variables.value.trim())
+                    ? 'ieq'
+                    : 'eq'
                 const filter = [
                     `${
                         variables.field
