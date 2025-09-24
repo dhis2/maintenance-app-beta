@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-19T09:43:03.099Z\n"
-"PO-Revision-Date: 2025-09-19T09:43:03.099Z\n"
+"POT-Creation-Date: 2025-09-24T09:03:13.124Z\n"
+"PO-Revision-Date: 2025-09-24T09:03:13.124Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -90,11 +90,17 @@ msgstr "Cancel"
 msgid "Message subject"
 msgstr "Message subject"
 
+msgid "Used as the template for the subject field."
+msgstr "Used as the template for the subject field."
+
 msgid "Message body (required) *"
 msgstr "Message body (required) *"
 
 msgid "Message body"
 msgstr "Message body"
+
+msgid "Used as the template for the message field."
+msgstr "Used as the template for the message field."
 
 msgid "Insert a variable:"
 msgstr "Insert a variable:"
@@ -230,6 +236,11 @@ msgstr "Correct confirmation code must be entered to merge"
 msgid "Merge"
 msgstr "Merge"
 
+msgid "Merging {{count}} {{model}}..."
+msgid_plural "Merging {{count}} {{model}}..."
+msgstr[0] "Merging {{count}} {{model}}..."
+msgstr[1] "Merging {{count}} {{model}}..."
+
 msgid "Merging..."
 msgstr "Merging..."
 
@@ -268,9 +279,6 @@ msgstr "Apply"
 
 msgid "(No Value)"
 msgstr "(No Value)"
-
-msgid "Description (required)"
-msgstr "Description (required)"
 
 msgid "Invalid expression"
 msgstr "Invalid expression"
@@ -1514,6 +1522,11 @@ msgstr "Filter available categories"
 msgid "Filter selected categories"
 msgstr "Filter selected categories"
 
+msgid "{{count}} category option combinations will be generated."
+msgid_plural "{{count}} category option combinations will be generated."
+msgstr[0] "{{count}} category option combinations will be generated."
+msgstr[1] "{{count}} category option combinations will be generated."
+
 msgid "More than 4 Categories"
 msgstr "More than 4 Categories"
 
@@ -1684,6 +1697,16 @@ msgid ""
 msgstr ""
 "What should happen to the source category options after the merge is "
 "complete?"
+
+msgid "Keep {{ count }} source category options"
+msgid_plural "Keep {{ count }} source category options"
+msgstr[0] "Keep {{ count }} source category options"
+msgstr[1] "Keep {{ count }} source category options"
+
+msgid "Delete {{ count }} source category options"
+msgid_plural "Delete {{ count }} source category options"
+msgstr[0] "Delete {{ count }} source category options"
+msgstr[1] "Delete {{ count }} source category options"
 
 msgid "Set up the basic information for this constant."
 msgstr "Set up the basic information for this constant."
@@ -1929,9 +1952,6 @@ msgstr "Recipient type"
 msgid "User Group Recipients"
 msgstr "User Group Recipients"
 
-msgid "Used as the template for the subject field."
-msgstr "Used as the template for the subject field."
-
 msgid "Subject"
 msgstr "Subject"
 
@@ -2125,6 +2145,9 @@ msgstr ""
 msgid "Yes, change"
 msgstr "Yes, change"
 
+msgid "Period type (required)"
+msgstr "Period type (required)"
+
 msgid "Configure data entry periods"
 msgstr "Configure data entry periods"
 
@@ -2194,8 +2217,17 @@ msgstr ""
 "Optionally configure which data elements must have a value to complete this "
 "data set."
 
-msgid "Data set must be saved before form type can be configured."
-msgstr "Data set must be saved before form type can be configured."
+msgid "Data set must be saved before this form type can be configured."
+msgstr "Data set must be saved before this form type can be configured."
+
+msgid "Section form"
+msgstr "Section form"
+
+msgid "Basic form"
+msgstr "Basic form"
+
+msgid "Custom form"
+msgstr "Custom form"
 
 msgid "Data entry form"
 msgstr "Data entry form"
@@ -2207,23 +2239,24 @@ msgstr ""
 "Choose and configure how the data entry form looks and works for this data "
 "set."
 
-msgid "Default form"
-msgstr "Default form"
+msgid "Form type based on your current setup"
+msgstr "Form type based on your current setup"
 
-msgid "Data elements are displayed in a standard list"
-msgstr "Data elements are displayed in a standard list"
+msgid ""
+"Web will display {{webFormType}}  |  Android will display "
+"{{androidFormType}}"
+msgstr ""
+"Web will display {{webFormType}}  |  Android will display "
+"{{androidFormType}}"
 
-msgid "Section form"
-msgstr "Section form"
-
-msgid "Group data into sections with additional options"
-msgstr "Group data into sections with additional options"
-
-msgid "Custom form"
-msgstr "Custom form"
-
-msgid "Build and style a custom form layout"
-msgstr "Build and style a custom form layout"
+msgid ""
+"Section forms let you create sections to organize data items for easier "
+"entry. If a Section form is created, it will be shown instead of the Basic "
+"form."
+msgstr ""
+"Section forms let you create sections to organize data items for easier "
+"entry. If a Section form is created, it will be shown instead of the Basic "
+"form."
 
 msgid "Display options"
 msgstr "Display options"
@@ -2571,6 +2604,16 @@ msgstr ""
 "What should happen to the source indicator types after the merge is "
 "complete?"
 
+msgid "Keep {{ count }} source indicator types"
+msgid_plural "Keep {{ count }} source indicator types"
+msgstr[0] "Keep {{ count }} source indicator types"
+msgstr[1] "Keep {{ count }} source indicator types"
+
+msgid "Delete {{ count }} source indicator types"
+msgid_plural "Delete {{ count }} source indicator types"
+msgstr[0] "Delete {{ count }} source indicator types"
+msgstr[1] "Delete {{ count }} source indicator types"
+
 msgid "Conflicting factors"
 msgstr "Conflicting factors"
 
@@ -2591,6 +2634,9 @@ msgstr "Denominator Expression"
 
 msgid "Edit denominator expression"
 msgstr "Edit denominator expression"
+
+msgid "Description (required)"
+msgstr "Description (required)"
 
 msgid "Summarise what this denominator expression measures."
 msgstr "Summarise what this denominator expression measures."
@@ -2735,6 +2781,16 @@ msgstr "No indicators available. Remove one from source."
 
 msgid "What should happen to the source indicators after the merge is complete?"
 msgstr "What should happen to the source indicators after the merge is complete?"
+
+msgid "Keep {{ count }} source indicators"
+msgid_plural "Keep {{ count }} source indicators"
+msgstr[0] "Keep {{ count }} source indicators"
+msgstr[1] "Keep {{ count }} source indicators"
+
+msgid "Delete {{ count }} source indicators"
+msgid_plural "Delete {{ count }} source indicators"
+msgstr[0] "Delete {{ count }} source indicators"
+msgstr[1] "Delete {{ count }} source indicators"
 
 msgid "Set up the basic information for this option group set."
 msgstr "Set up the basic information for this option group set."
@@ -3303,6 +3359,11 @@ msgstr "Delete Mapping"
 msgid "This action cannot be undone."
 msgstr "This action cannot be undone."
 
+msgid "All mappings ({{count}}) will be removed."
+msgid_plural "All mappings ({{count}}) will be removed."
+msgstr[0] "All mappings ({{count}}) will be removed."
+msgstr[1] "All mappings ({{count}}) will be removed."
+
 msgid "Are you sure you want to delete this program mapping configuration?"
 msgstr "Are you sure you want to delete this program mapping configuration?"
 
@@ -3417,12 +3478,18 @@ msgstr "Analytics type (required)"
 msgid "Configure the program indicator expression."
 msgstr "Configure the program indicator expression."
 
+msgid "Edit expression"
+msgstr "Edit expression"
+
 msgid ""
 "Configure the program indicator filter that controls what data will be "
 "evaluated bt the main expression."
 msgstr ""
 "Configure the program indicator filter that controls what data will be "
 "evaluated bt the main expression."
+
+msgid "Edit filter"
+msgstr "Edit filter"
 
 msgid "Period boundaries"
 msgstr "Period boundaries"
@@ -3441,6 +3508,9 @@ msgstr "Set up the program indicator legends."
 
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
+
+msgid "Notification details"
+msgstr "Notification details"
 
 msgid "Recipients"
 msgstr "Recipients"
@@ -3478,8 +3548,14 @@ msgstr "Right side value"
 msgid "Organisation unit name"
 msgstr "Organisation unit name"
 
+msgid "User group recipients"
+msgstr "User group recipients"
+
 msgid "Set up the basic information for this validation notification."
 msgstr "Set up the basic information for this validation notification."
+
+msgid "Select validation rules to trigger this notification."
+msgstr "Select validation rules to trigger this notification."
 
 msgid "Available validation rules"
 msgstr "Available validation rules"
@@ -3493,17 +3569,14 @@ msgstr "Filter available validation rules"
 msgid "Filter selected validation rules"
 msgstr "Filter selected validation rules"
 
-msgid "What should this notification send?"
-msgstr "What should this notification send?"
+msgid "Configure the templates for the notification message content."
+msgstr "Configure the templates for the notification message content."
 
-msgid "Available user groups"
-msgstr "Available user groups"
+msgid "Choose notification"
+msgstr "Choose notification"
 
-msgid "Selected user groups"
-msgstr "Selected user groups"
+msgid "Set up the basic information for this validation rule group."
+msgstr "Set up the basic information for this validation rule group."
 
-msgid "Filter available user groups"
-msgstr "Filter available user groups"
-
-msgid "Filter selected user groups"
-msgstr "Filter selected user groups"
+msgid "Explain the purpose of this validation rule group."
+msgstr "Explain the purpose of this validation rule group."
