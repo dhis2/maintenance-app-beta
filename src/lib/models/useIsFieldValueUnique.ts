@@ -76,5 +76,5 @@ export function useIsFieldValueUnique({
         [memoized]
     )
 
-    return useDebouncedCallback(validate, 200, { leading: true })
+    return useDebouncedCallback(validate, 50, { leading: true })
 }
