@@ -38,7 +38,10 @@ import {
     validationNotificationTemplateListSchema,
     validationNotificationTemplateFormSchema,
 } from '../pages/validationNotificationTemplates/form'
-import { validationRuleGroupsListSchema } from '../pages/validationRuleGroups/form/validationRuleGroupsSchema'
+import {
+    validationRuleGroupsFormSchema,
+    validationRuleGroupsListSchema,
+} from '../pages/validationRuleGroups/form/validationRuleGroupsSchema'
 import {
     CategoryMapping,
     DataElement,
@@ -381,6 +384,15 @@ export const testValidationRuleGroups = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(validationRuleGroupsListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testValidationRuleGroupsForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(validationRuleGroupsFormSchema, {
+        mockeryMapper,
+    }),
     ...overwrites,
 })
 
