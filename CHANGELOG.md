@@ -1,3 +1,10 @@
+## [0.73.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.73.0...v0.73.1) (2025-09-25)
+
+
+### Bug Fixes
+
+* add notifyUsersInHierarchyOnly [DHIS2-1878] ([#643](https://github.com/dhis2/maintenance-app-beta/issues/643)) ([2543c93](https://github.com/dhis2/maintenance-app-beta/commit/2543c93a28a7485513a4e6618ed85177a6cf36bf))
+
 # [0.73.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.72.3...v0.73.0) (2025-09-24)
 
 
