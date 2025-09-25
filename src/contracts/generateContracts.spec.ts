@@ -15,7 +15,7 @@ const generateContract = ({
     expectedSchema: ZodSchema<any>
 }) => {
     const contractPath = `contracts/${name}/contract.json`
-    const schemaPath = `contracts/${name}/json-schema.json`
+    const schemaPath = `contracts/maintenance-app/${name}/contract.json`
     const request = {
         name,
         httpMethod: method,
@@ -30,8 +30,11 @@ const generateContract = ({
         // $refStrategy: 'none',
     })
     mkdirSync(`contracts/${name}`, { recursive: true })
-    writeFileSync(contractPath, JSON.stringify(request))
-    writeFileSync(schemaPath, JSON.stringify(schema.definitions?.[name]))
+    writeFileSync(contractPath, JSON.stringify(request, null, 2))
+    writeFileSync(
+        `contracts/${name}/json-schema.json`,
+        JSON.stringify(schema.definitions?.[name], null, 2)
+    )
 }
 
 describe('contracts', () => {

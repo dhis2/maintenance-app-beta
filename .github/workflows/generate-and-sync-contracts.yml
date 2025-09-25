@@ -42,10 +42,14 @@ jobs:
                   git clone https://x-access-token:${{ secrets.CONTRACTS_PAT }}@github.com/dhis2/dhis2-api-contracts.git
                   cd dhis2-api-contracts
 
-                  BRANCH_NAME="auto/contracts-update-${{ github.event.pull_request.number }}-$(date +%s)"
-                  git checkout -b $BRANCH_NAME
-
-                  # Copy the generated JSON files
+                  BRANCH_NAME="auto/contracts-update-${{ github.event.pull_request.number }}"
+                  if git ls-remote --exit-code --heads origin "$BRANCH_NAME" > /dev/null; then
+                    echo "Branch $BRANCH_NAME exists, checking it out"
+                    git checkout "$BRANCH_NAME"
+                  else
+                    echo "Branch $BRANCH_NAME does not exist, creating it"
+                    git checkout -b "$BRANCH_NAME"
+                  fi
                   cp -r ../contracts ./contracts/maintenance-app
 
                   git add .
