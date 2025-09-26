@@ -14,12 +14,12 @@ export const AllOverview = () => {
     return (
         <OverviewGroup title={i18n.t('Metadata management')}>
             <CategoryCardGroup showTitle={true} />
-            <ProgramsAndTrackersCardGroup showTitle={true} />
             <DataElementsCardGroup showTitle={true} />
             <DataSetsCardGroup showTitle={true} />
             <IndicatorsCardGroup showTitle={true} />
             <OrganisationUnitsCardGroup showTitle={true} />
             <ValidationsCardGroup showTitle={true} />
+            <ProgramsAndTrackersCardGroup showTitle={true} />
             <OtherCardGroup showTitle={true} />
         </OverviewGroup>
     )

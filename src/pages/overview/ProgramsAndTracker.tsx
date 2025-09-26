@@ -11,7 +11,7 @@ export const ProgramsAndTrackerOverview = () => {
         <OverviewGroup title={TITLE}>
             <OverviewGroupSummary>
                 {i18n.t(
-                    'Programs and Tracker allow you to capture and analyze event-based data.'
+                    'Programs and Tracker are used to collect, manage, and analyze event-based and longitudinal data. They allow you to define program stages, track entities such as people or items over time, and apply rules and relationships to support flexible data capture and analysis.'
                 )}
             </OverviewGroupSummary>
             <ProgramsAndTrackersCardGroup />
