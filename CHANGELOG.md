@@ -1,3 +1,10 @@
+# [0.75.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.74.0...v0.75.0) (2025-09-26)
+
+
+### Features
+
+* Add overview page ([#650](https://github.com/dhis2/maintenance-app-beta/issues/650)) ([0e8f5b8](https://github.com/dhis2/maintenance-app-beta/commit/0e8f5b8b0049807d02f6190c269d504b6638fbd5))
+
 # [0.74.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.73.1...v0.74.0) (2025-09-26)
 
 
