@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-24T09:03:13.124Z\n"
-"PO-Revision-Date: 2025-09-24T09:03:13.124Z\n"
+"POT-Creation-Date: 2025-09-26T11:27:11.901Z\n"
+"PO-Revision-Date: 2025-09-26T11:27:11.901Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1192,9 +1192,6 @@ msgstr "Maximum number of tracked entity instances to return in search"
 msgid "Minimum number of attributes required to search"
 msgstr "Minimum number of attributes required to search"
 
-msgid "This field requires a unique value, please choose another one"
-msgstr "This field requires a unique value, please choose another one"
-
 msgid "Unknown error"
 msgstr "Unknown error"
 
@@ -1215,6 +1212,9 @@ msgstr "Cannot save empty object"
 
 msgid "Created successfully"
 msgstr "Created successfully"
+
+msgid "This field requires a unique value, please choose another one"
+msgstr "This field requires a unique value, please choose another one"
 
 msgid "Please provide a positive integer"
 msgstr "Please provide a positive integer"
@@ -2014,8 +2014,12 @@ msgstr ""
 "Send notifications when data sets are marked complete, using the DHIS2 "
 "Messages app."
 
-msgid "Choose legends that will do something (?????????)"
-msgstr "Choose legends that will do something (?????????)"
+msgid ""
+"Select legends to visually categorize values for this data set in Data "
+"entry and Analytics apps."
+msgstr ""
+"Select legends to visually categorize values for this data set in Data "
+"entry and Analytics apps."
 
 msgid "Search available legends"
 msgstr "Search available legends"
@@ -2558,6 +2562,9 @@ msgstr "The indicator types merge operation is complete."
 
 msgid "All selected indicator types were merged successfully."
 msgstr "All selected indicator types were merged successfully."
+
+msgid "An indicator type with this factor already exists"
+msgstr "An indicator type with this factor already exists"
 
 msgid "Set up the basic information for this Indicator Type."
 msgstr "Set up the basic information for this Indicator Type."
@@ -3580,3 +3587,9 @@ msgstr "Set up the basic information for this validation rule group."
 
 msgid "Explain the purpose of this validation rule group."
 msgstr "Explain the purpose of this validation rule group."
+
+msgid "Validation Rules"
+msgstr "Validation Rules"
+
+msgid "Choose the validation rules to include in this validation rule group."
+msgstr "Choose the validation rules to include in this validation rule group."
