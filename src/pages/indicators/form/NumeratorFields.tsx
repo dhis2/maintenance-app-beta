@@ -3,33 +3,31 @@ import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import { StandardFormField } from '../../../components'
-import { ExpressionBuilderField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderField'
+import { ExpressionBuilderWithModalField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderWithModalField'
+import { PaddedContainer } from '../../../components/metadataFormControls/ExpressionBuilder/PaddedContainer'
 
-function NumeratorFields() {
+export default function NumeratorFields() {
     return (
-        <>
+        <PaddedContainer>
+            <ExpressionBuilderWithModalField
+                fieldName="numerator"
+                modalTitle={i18n.t('Numerator Expression')}
+                editButtonText={i18n.t('Edit numerator expression')}
+                validationResource="indicators/expression/description"
+            />
             <StandardFormField>
                 <FieldRFF<string | undefined>
                     component={InputFieldFF}
                     inputWidth="400px"
                     required
                     name="numeratorDescription"
-                    dataTest="formfields-numeratorDescription"
-                    label={i18n.t('Numerator description')}
+                    dataTest={`formfields-numeratorDescription`}
+                    label={i18n.t('Description (required)')}
+                    helpText={i18n.t(
+                        'Summarise what this numerator expression measures.'
+                    )}
                 />
             </StandardFormField>
-
-            <StandardFormField>
-                <ExpressionBuilderField
-                    name="numerator"
-                    label={i18n.t('Edit numerator')}
-                    validationResource="indicators/expression/description"
-                    required
-                    dataTest="formfields-numerator"
-                />
-            </StandardFormField>
-        </>
+        </PaddedContainer>
     )
 }
-
-export default NumeratorFields

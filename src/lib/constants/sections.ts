@@ -94,7 +94,6 @@ export const SCHEMA_SECTIONS = {
     // @ts-expect-error temporary route for testing
     dataSetWIP: {
         name: SchemaName.dataSet,
-        routeName: 'dataSetsWip',
         namePlural: 'dataSets',
         title: i18n.t('Data set'),
         titlePlural: i18n.t('Data sets'),
@@ -244,8 +243,8 @@ export const SCHEMA_SECTIONS = {
     validationNotificationTemplate: {
         name: SchemaName.validationNotificationTemplate,
         namePlural: 'validationNotificationTemplates',
-        title: i18n.t('Validation notification template'),
-        titlePlural: i18n.t('Validation notification templates'),
+        title: i18n.t('Validation notification'),
+        titlePlural: i18n.t('Validation notification'),
         parentSectionKey: 'validation',
     },
     constant: {
@@ -330,6 +329,34 @@ export const SCHEMA_SECTIONS = {
         namePlural: 'legendSets',
         title: i18n.t('Legend'),
         titlePlural: i18n.t('Legends'),
+        parentSectionKey: 'other',
+    },
+    analyticsTableHook: {
+        name: SchemaName.analyticsTableHook,
+        namePlural: 'analyticsTableHooks',
+        title: i18n.t('Analytics table hook'),
+        titlePlural: i18n.t('Analytics table hooks'),
+        parentSectionKey: 'other',
+    },
+    icon: {
+        name: SchemaName.icon,
+        namePlural: 'icons',
+        title: i18n.t('Icon'),
+        titlePlural: i18n.t('Icons'),
+        parentSectionKey: 'other',
+    },
+    legend: {
+        name: SchemaName.legend,
+        namePlural: 'legends',
+        title: i18n.t('Legend'),
+        titlePlural: i18n.t('Legends'),
+        parentSectionKey: 'other',
+    },
+    predictorGroup: {
+        name: SchemaName.predictorGroup,
+        namePlural: 'predictorGroups',
+        title: i18n.t('Predictor group'),
+        titlePlural: i18n.t('Predictor groups'),
         parentSectionKey: 'other',
     },
 } as const satisfies SchemaSectionMap
@@ -431,6 +458,7 @@ export const NON_SCHEMA_SECTION = {
         title: i18n.t('Program disaggregation'),
         titlePlural: i18n.t('Program disaggregations'),
         parentSectionKey: 'other',
+        minApiVersion: 42,
         authorities: [
             {
                 type: SchemaAuthorityType.CREATE_PUBLIC,

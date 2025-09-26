@@ -3,33 +3,31 @@ import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import { StandardFormField } from '../../../components'
-import { ExpressionBuilderField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderField'
+import { ExpressionBuilderWithModalField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderWithModalField'
+import { PaddedContainer } from '../../../components/metadataFormControls/ExpressionBuilder/PaddedContainer'
 
-function DenominatorFields() {
+export default function DenominatorFields() {
     return (
-        <>
+        <PaddedContainer>
+            <ExpressionBuilderWithModalField
+                fieldName="denominator"
+                modalTitle={i18n.t('Denominator Expression')}
+                editButtonText={i18n.t('Edit denominator expression')}
+                validationResource="indicators/expression/description"
+            />
             <StandardFormField>
                 <FieldRFF<string | undefined>
                     component={InputFieldFF}
                     inputWidth="400px"
                     required
-                    dataTest="formfields-denominatorDescription"
                     name="denominatorDescription"
-                    label={i18n.t('Denominator description')}
+                    dataTest={`formfields-denominatorDescription`}
+                    label={i18n.t('Description (required)')}
+                    helpText={i18n.t(
+                        'Summarise what this denominator expression measures.'
+                    )}
                 />
             </StandardFormField>
-
-            <StandardFormField>
-                <ExpressionBuilderField
-                    name="denominator"
-                    label={i18n.t('Edit denominator')}
-                    validationResource="indicators/expression/description"
-                    required
-                    dataTest="formfields-denominator"
-                />
-            </StandardFormField>
-        </>
+        </PaddedContainer>
     )
 }
-
-export default DenominatorFields
