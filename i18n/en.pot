@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-19T09:43:03.099Z\n"
-"PO-Revision-Date: 2025-09-19T09:43:03.099Z\n"
+"POT-Creation-Date: 2025-09-24T08:07:48.274Z\n"
+"PO-Revision-Date: 2025-09-24T08:07:48.274Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -90,11 +90,17 @@ msgstr "Cancel"
 msgid "Message subject"
 msgstr "Message subject"
 
+msgid "Used as the template for the subject field."
+msgstr "Used as the template for the subject field."
+
 msgid "Message body (required) *"
 msgstr "Message body (required) *"
 
 msgid "Message body"
 msgstr "Message body"
+
+msgid "Used as the template for the message field."
+msgstr "Used as the template for the message field."
 
 msgid "Insert a variable:"
 msgstr "Insert a variable:"
@@ -268,9 +274,6 @@ msgstr "Apply"
 
 msgid "(No Value)"
 msgstr "(No Value)"
-
-msgid "Description (required)"
-msgstr "Description (required)"
 
 msgid "Invalid expression"
 msgstr "Invalid expression"
@@ -1929,9 +1932,6 @@ msgstr "Recipient type"
 msgid "User Group Recipients"
 msgstr "User Group Recipients"
 
-msgid "Used as the template for the subject field."
-msgstr "Used as the template for the subject field."
-
 msgid "Subject"
 msgstr "Subject"
 
@@ -2125,6 +2125,9 @@ msgstr ""
 msgid "Yes, change"
 msgstr "Yes, change"
 
+msgid "Period type (required)"
+msgstr "Period type (required)"
+
 msgid "Configure data entry periods"
 msgstr "Configure data entry periods"
 
@@ -2194,8 +2197,17 @@ msgstr ""
 "Optionally configure which data elements must have a value to complete this "
 "data set."
 
-msgid "Data set must be saved before form type can be configured."
-msgstr "Data set must be saved before form type can be configured."
+msgid "Data set must be saved before this form type can be configured."
+msgstr "Data set must be saved before this form type can be configured."
+
+msgid "Section form"
+msgstr "Section form"
+
+msgid "Basic form"
+msgstr "Basic form"
+
+msgid "Custom form"
+msgstr "Custom form"
 
 msgid "Data entry form"
 msgstr "Data entry form"
@@ -2207,23 +2219,24 @@ msgstr ""
 "Choose and configure how the data entry form looks and works for this data "
 "set."
 
-msgid "Default form"
-msgstr "Default form"
+msgid "Form type based on your current setup"
+msgstr "Form type based on your current setup"
 
-msgid "Data elements are displayed in a standard list"
-msgstr "Data elements are displayed in a standard list"
+msgid ""
+"Web will display {{webFormType}}  |  Android will display "
+"{{androidFormType}}"
+msgstr ""
+"Web will display {{webFormType}}  |  Android will display "
+"{{androidFormType}}"
 
-msgid "Section form"
-msgstr "Section form"
-
-msgid "Group data into sections with additional options"
-msgstr "Group data into sections with additional options"
-
-msgid "Custom form"
-msgstr "Custom form"
-
-msgid "Build and style a custom form layout"
-msgstr "Build and style a custom form layout"
+msgid ""
+"Section forms let you create sections to organize data items for easier "
+"entry. If a Section form is created, it will be shown instead of the Basic "
+"form."
+msgstr ""
+"Section forms let you create sections to organize data items for easier "
+"entry. If a Section form is created, it will be shown instead of the Basic "
+"form."
 
 msgid "Display options"
 msgstr "Display options"
@@ -2591,6 +2604,9 @@ msgstr "Denominator Expression"
 
 msgid "Edit denominator expression"
 msgstr "Edit denominator expression"
+
+msgid "Description (required)"
+msgstr "Description (required)"
 
 msgid "Summarise what this denominator expression measures."
 msgstr "Summarise what this denominator expression measures."
@@ -3140,8 +3156,68 @@ msgstr ""
 msgid "Create, modify and view sets of option groups."
 msgstr "Create, modify and view sets of option groups."
 
+msgid ""
+"Create constants which can be included in expressions of indicator and "
+"validation rules."
+msgstr ""
+"Create constants which can be included in expressions of indicator and "
+"validation rules."
+
 msgid "Set disaggregation mappings for program indicators."
 msgstr "Set disaggregation mappings for program indicators."
+
+msgid ""
+"Programs and Trackers are used to collect, track, and analyze data across "
+"repeated events or individual cases. Use programs to define workflows and "
+"rules, and trackers to follow entities such as people, households, or "
+"facilities over time."
+msgstr ""
+"Programs and Trackers are used to collect, track, and analyze data across "
+"repeated events or individual cases. Use programs to define workflows and "
+"rules, and trackers to follow entities such as people, households, or "
+"facilities over time."
+
+msgid ""
+"Define workflows for data collection, including program stages, rules, and "
+"enrollment logic."
+msgstr ""
+"Define workflows for data collection, including program stages, rules, and "
+"enrollment logic."
+
+msgid ""
+"Specify phases or steps of a program where data is collected, e.g. "
+"registration, follow-up visits, or lab results."
+msgstr ""
+"Specify phases or steps of a program where data is collected, e.g. "
+"registration, follow-up visits, or lab results."
+
+msgid ""
+"Represent individuals, households, or facilities tracked over time with "
+"enrollments in programs."
+msgstr ""
+"Represent individuals, households, or facilities tracked over time with "
+"enrollments in programs."
+
+msgid ""
+"Define attributes (such as name, age, ID) that uniquely identify and "
+"describe tracked entities."
+msgstr ""
+"Define attributes (such as name, age, ID) that uniquely identify and "
+"describe tracked entities."
+
+msgid ""
+"Define how tracked entities or program instances are related, e.g. "
+"mother–child, patient–facility."
+msgstr ""
+"Define how tracked entities or program instances are related, e.g. "
+"mother–child, patient–facility."
+
+msgid ""
+"Automate logic and validation inside a program, such as hiding fields, "
+"showing warnings, or assigning values."
+msgstr ""
+"Automate logic and validation inside a program, such as hiding fields, "
+"showing warnings, or assigning values."
 
 msgid ""
 "Validations are used to provide important feedback during data entry to "
@@ -3417,12 +3493,18 @@ msgstr "Analytics type (required)"
 msgid "Configure the program indicator expression."
 msgstr "Configure the program indicator expression."
 
+msgid "Edit expression"
+msgstr "Edit expression"
+
 msgid ""
 "Configure the program indicator filter that controls what data will be "
 "evaluated bt the main expression."
 msgstr ""
 "Configure the program indicator filter that controls what data will be "
 "evaluated bt the main expression."
+
+msgid "Edit filter"
+msgstr "Edit filter"
 
 msgid "Period boundaries"
 msgstr "Period boundaries"
@@ -3441,6 +3523,9 @@ msgstr "Set up the program indicator legends."
 
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
+
+msgid "Notification details"
+msgstr "Notification details"
 
 msgid "Recipients"
 msgstr "Recipients"
@@ -3478,8 +3563,14 @@ msgstr "Right side value"
 msgid "Organisation unit name"
 msgstr "Organisation unit name"
 
+msgid "User group recipients"
+msgstr "User group recipients"
+
 msgid "Set up the basic information for this validation notification."
 msgstr "Set up the basic information for this validation notification."
+
+msgid "Select validation rules to trigger this notification."
+msgstr "Select validation rules to trigger this notification."
 
 msgid "Available validation rules"
 msgstr "Available validation rules"
@@ -3493,17 +3584,8 @@ msgstr "Filter available validation rules"
 msgid "Filter selected validation rules"
 msgstr "Filter selected validation rules"
 
-msgid "What should this notification send?"
-msgstr "What should this notification send?"
+msgid "Configure the templates for the notification message content."
+msgstr "Configure the templates for the notification message content."
 
-msgid "Available user groups"
-msgstr "Available user groups"
-
-msgid "Selected user groups"
-msgstr "Selected user groups"
-
-msgid "Filter available user groups"
-msgstr "Filter available user groups"
-
-msgid "Filter selected user groups"
-msgstr "Filter selected user groups"
+msgid "Choose notification"
+msgstr "Choose notification"
