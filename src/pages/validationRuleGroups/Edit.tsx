@@ -2,12 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { DefaultEditFormContents, FormBase } from '../../components'
-import {
-    ATTRIBUTE_VALUES_FIELD_FILTERS,
-    DEFAULT_FIELD_FILTERS,
-    SECTIONS_MAP,
-    useOnSubmitEdit,
-} from '../../lib'
+import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import {
     PickWithFieldFilters,
@@ -18,7 +13,6 @@ import { validate } from './form/validationRuleGroupsSchema'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
-    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
     'code',
     'description',
