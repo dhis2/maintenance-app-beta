@@ -37,6 +37,7 @@ const dataSetNotificationTemplateBaseSchema = z.object({
     sendStrategy: z
         .nativeEnum(DataSetNotificationTemplate.sendStrategy)
         .optional(),
+    notifyUsersInHierarchyOnly: z.boolean().optional(),
 })
 
 export const dataSetNotificationTemplateFormSchema =
@@ -78,6 +79,7 @@ export const transformFormValues = <
     const {
         recipientUserGroup,
         relativeScheduledDays,
+        notifyUsersInHierarchyOnly,
         dataSets = [],
         ...rest
     } = values
@@ -88,6 +90,10 @@ export const transformFormValues = <
         recipientUserGroup:
             rest.notificationRecipient === 'USER_GROUP' && recipientUserGroup
                 ? { id: recipientUserGroup.id }
+                : undefined,
+        notifyUsersInHierarchyOnly:
+            rest.notificationRecipient === 'USER_GROUP' && recipientUserGroup
+                ? Boolean(notifyUsersInHierarchyOnly)
                 : undefined,
         dataSets: dataSets.map(({ id }) => ({ id })),
     }

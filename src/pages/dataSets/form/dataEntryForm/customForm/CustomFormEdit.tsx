@@ -12,7 +12,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../../components'
-import { generateDhis2Id } from '../../../../../lib/index'
+import { generateDhis2Id } from '../../../../../lib'
 import styles from './CustomFormContents.module.css'
 import { CustomFormElementsSelector } from './CustomFormElementsSelector'
 

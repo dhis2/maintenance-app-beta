@@ -15,7 +15,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 import { useField } from 'react-final-form'
 import { PeriodTypeSelect } from '../../../components/metadataFormControls/PeriodTypeSelect/PeriodTypeSelect'
 import { AnalyticsPeriodBoundary } from '../../../types/generated'
-import styles from '../../dataSetsWip/form/dataInputPeriods/DataInputPeriodsSelector.module.css'
+import styles from '../../dataSets/form/dataInputPeriods/DataInputPeriodsSelector.module.css'
 import classes from './AnalyticsPeriodBoundaries.module.css'
 import offsetPeriodType = AnalyticsPeriodBoundary.offsetPeriodType
 

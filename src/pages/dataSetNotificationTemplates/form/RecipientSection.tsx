@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectFieldFF } from '@dhis2/ui'
+import { CheckboxFieldFF, SingleSelectFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { useField } from 'react-final-form'
+import { useField, Field as FieldRFF } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { getConstantTranslation, required } from '../../../lib'
@@ -44,22 +44,33 @@ export const RecipientSection = () => {
             </StandardFormField>
 
             {isUserGroup && (
-                <StandardFormField>
-                    <div style={{ width: '400px' }}>
-                        <ModelSingleSelectFormField
-                            name="recipientUserGroup"
-                            label={i18n.t('User Group Recipients')}
-                            validate={required}
-                            query={{
-                                resource: 'userGroups',
-                                params: {
-                                    fields: ['id', 'displayName'],
-                                    order: 'displayName:asc',
-                                },
-                            }}
+                <>
+                    <StandardFormField>
+                        <div style={{ width: '400px' }}>
+                            <ModelSingleSelectFormField
+                                name="recipientUserGroup"
+                                label={i18n.t('User Group Recipients')}
+                                validate={required}
+                                query={{
+                                    resource: 'userGroups',
+                                    params: {
+                                        fields: ['id', 'displayName'],
+                                        order: 'displayName:asc',
+                                    },
+                                }}
+                            />
+                        </div>
+                    </StandardFormField>
+                    <StandardFormField>
+                        <FieldRFF
+                            component={CheckboxFieldFF}
+                            name="notifyUsersInHierarchyOnly"
+                            label={i18n.t('Notify users in hierarchy only')}
+                            type="checkbox"
+                            dataTest="formfields-notifyUsersInHierarchyOnly"
                         />
-                    </div>
-                </StandardFormField>
+                    </StandardFormField>
+                </>
             )}
 
             {isOrgUnitContact && (
