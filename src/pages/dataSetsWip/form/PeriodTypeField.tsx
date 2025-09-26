@@ -34,7 +34,15 @@ export function PeriodTypeField() {
                 modalMessage={i18n.t(
                     'Changing the period type will make previously entered data for this data set not appear in the data entry app. This can lead to duplicate data entry.'
                 )}
-                objectName={i18n.t('period type')}
+                modalMessageSelectionSpecificConfirmation={(selection) =>
+                    i18n.t(
+                        'Are you sure you want to change the {{objectType}} to {{newObjectTypeValue}}?',
+                        {
+                            objectType: i18n.t('period type'),
+                            newObjectTypeValue: selection,
+                        }
+                    )
+                }
             />
         </Field>
     )

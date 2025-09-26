@@ -819,11 +819,11 @@ describe('Data elements form tests', () => {
                     testCategoryCombo(),
                     testCategoryCombo(),
                 ].filter((cc) => cc !== undefined)
-                const optionSets = [
-                    testOptionSet(),
-                    testOptionSet(),
-                    testOptionSet(),
-                ].filter((cc) => cc !== undefined)
+                const optionSets =
+                    dataElementOverwrites?.optionSets ??
+                    [testOptionSet(), testOptionSet(), testOptionSet()].filter(
+                        (cc) => cc !== undefined
+                    )
 
                 const legendSets = [
                     testLegendSet(),
@@ -1159,6 +1159,110 @@ describe('Data elements form tests', () => {
 
             // value type should NOT be updated and warning should be removed
             expect(valueType).toHaveTextContent(VALUE_TYPE.NUMBER)
+            expect(screen.queryByText(warningText)).toBeNull()
+        })
+        it.skip('should require clicking through warning modal to change option set if that changes value type', async () => {
+            const optionSets = [
+                testOptionSet(),
+                testOptionSet(),
+                testOptionSet(),
+            ]
+
+            // ensure that the value types for options are different
+            if (optionSets[0].valueType === optionSets[2].valueType) {
+                optionSets[2].valueType = 'NUMBER'
+                optionSets[0].valueType = 'COORDINATE'
+            }
+            const { screen } = await renderForm({
+                dataElementOverwrites: {
+                    optionSets,
+                },
+            })
+            const warningText =
+                'Updating the option set will change the value type which may cause problems when generating analytics tables if there is existing data for this data element.'
+
+            expect(screen.queryByText(warningText)).toBeNull()
+
+            // Click a new option set (first from list, as None is in index 0)
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('formfields-optionset'),
+                1,
+                screen
+            )
+
+            expect(screen.getByText(warningText)).toBeInTheDocument()
+
+            // click confirm
+            await userEvent.click(
+                screen.getByTestId('confirmationModal-confirm')
+            )
+
+            // option set should be updated and warning should be removed
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('formfields-optionset'),
+                {
+                    selected: optionSets[0].displayName,
+                    options: [
+                        { displayName: '<No value>' },
+                        ...optionSets.map((cc: DisplayableModel) => ({
+                            displayName: cc.displayName,
+                        })),
+                    ],
+                },
+                screen
+            )
+            expect(screen.queryByText(warningText)).toBeNull()
+        })
+        it('should not change option set without confirmation if it does not change value type', async () => {
+            const optionSets = [
+                testOptionSet(),
+                testOptionSet(),
+                testOptionSet(),
+            ]
+
+            // ensure that the value types for options are different
+            if (optionSets[0].valueType === optionSets[2].valueType) {
+                optionSets[2].valueType = 'NUMBER'
+                optionSets[0].valueType = 'COORDINATE'
+            }
+            const { screen } = await renderForm({
+                dataElementOverwrites: {
+                    optionSets,
+                },
+            })
+            const warningText =
+                'Updating the option set will change the value type which may cause problems when generating analytics tables if there is existing data for this data element.'
+
+            expect(screen.queryByText(warningText)).toBeNull()
+
+            // Click a new option set (first from list, as None is in index 0)
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('formfields-optionset'),
+                1,
+                screen
+            )
+
+            expect(screen.getByText(warningText)).toBeInTheDocument()
+
+            // click confirm
+            await userEvent.click(
+                screen.getByTestId('confirmationModal-cancel')
+            )
+
+            // option set should be updated and warning should be removed
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('formfields-optionset'),
+                {
+                    selected: optionSets[2].displayName,
+                    options: [
+                        { displayName: '<No value>' },
+                        ...optionSets.map((cc: DisplayableModel) => ({
+                            displayName: cc.displayName,
+                        })),
+                    ],
+                },
+                screen
+            )
             expect(screen.queryByText(warningText)).toBeNull()
         })
     })

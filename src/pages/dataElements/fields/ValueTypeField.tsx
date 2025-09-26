@@ -72,16 +72,21 @@ export function ValueTypeField() {
                 input.onBlur()
             }}
             renderComponent={renderComponent}
-            mapUnconfirmedSelection={(selection) =>
-                selection?.selected
-                    ? getConstantTranslation(selection.selected)
-                    : selection
-            }
             modalTitle={i18n.t('Change value type')}
             modalMessage={i18n.t(
                 'Changing the value type may cause problems when generating analytics tables if there is existing data for this data element.'
             )}
-            objectName={i18n.t('value type')}
+            modalMessageSelectionSpecificConfirmation={(selection) =>
+                i18n.t(
+                    'Are you sure you want to change the {{objectType}} to {{newObjectTypeValue}}?',
+                    {
+                        objectType: i18n.t('value type'),
+                        newObjectTypeValue: selection?.selected
+                            ? getConstantTranslation(selection.selected)
+                            : i18n.t('undefined'),
+                    }
+                )
+            }
         />
     )
 }

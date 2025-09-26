@@ -14,6 +14,7 @@ type OwnProps<TModel extends PartialLoadedDisplayableModel> = {
     required?: boolean
     onChange?: ModelSingleSelectProps<TModel>['onChange']
     inputWidth?: string
+    fullyOverrideOnChange?: boolean
 }
 
 type RelevantRenderProps<TModel extends PartialLoadedDisplayableModel> = {
@@ -55,6 +56,7 @@ export function ModelSingleSelectField<
     meta,
     dataTest,
     inputWidth = '400px',
+    fullyOverrideOnChange = false,
     ...modelSingleSelectProps
 }: ModelSingleSelectFieldProps<TModel> & RelevantRenderProps<TModel>) {
     return (
@@ -72,7 +74,9 @@ export function ModelSingleSelectField<
                     {...modelSingleSelectProps}
                     selected={input.value}
                     onChange={(selected) => {
-                        input.onChange(selected)
+                        if (!fullyOverrideOnChange) {
+                            input.onChange(selected)
+                        }
                         input.onBlur()
                         onChange?.(selected)
                     }}

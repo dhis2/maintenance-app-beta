@@ -13,22 +13,22 @@ import { useParams } from 'react-router-dom'
 const ConfirmationModal = ({
     onClose,
     confirmSelection,
-    unconfirmedSelectionLabel,
+    unconfirmedSelectionPending,
     modalTitle,
     modalMessage,
-    objectName,
+    modalMessageSelectionSpecificConfirmation,
     children,
 }: {
     onClose: () => void
     confirmSelection: () => void
-    unconfirmedSelectionLabel: string | null
+    unconfirmedSelectionPending: boolean
     modalTitle?: string
     modalMessage?: string
-    objectName?: string
+    modalMessageSelectionSpecificConfirmation?: string
     children?: React.ReactNode
 }) => (
     <>
-        {unconfirmedSelectionLabel && (
+        {unconfirmedSelectionPending && (
             <Modal onClose={onClose} position="middle">
                 <ModalTitle>
                     {modalTitle || i18n.t('Change this field')}
@@ -37,15 +37,8 @@ const ConfirmationModal = ({
                     {modalMessage && <p>{modalMessage}</p>}
 
                     <p>
-                        {i18n.t(
-                            'Are you sure you want to change {{objectName}} to {{- unconfirmedSelectionLabel}}?',
-                            {
-                                unconfirmedSelectionLabel:
-                                    unconfirmedSelectionLabel,
-                                objectName:
-                                    objectName || i18n.t('this element'),
-                            }
-                        )}
+                        {modalMessageSelectionSpecificConfirmation ??
+                            i18n.t('Are you sure you want to change this?')}
                     </p>
                 </ModalContent>
                 <ModalActions>
@@ -74,21 +67,28 @@ const ConfirmationModal = ({
 export const ConfirmationModalWrapper = ({
     onChange,
     renderComponent,
-    mapUnconfirmedSelection,
+    skipConfirmationLogic,
     modalTitle,
     modalMessage,
-    objectName,
+    modalMessageSelectionSpecificConfirmation,
 }: {
     onChange: (event: any) => void
     renderComponent: (onChange: any) => React.JSX.Element
-    mapUnconfirmedSelection?: (selection: any) => string
+    skipConfirmationLogic?: (selection: any) => boolean
     modalTitle?: string
     modalMessage?: string
-    objectName?: string
+    modalMessageSelectionSpecificConfirmation?: (selection: any) => string
 }) => {
     const id = useParams()?.id
     const isEdit = !!id
     const [unconfirmedSelection, setUnconfirmedSelection] = useState<any>(null)
+    const setUnconfirmedSelectionWithLogic = (selection: any) => {
+        if (skipConfirmationLogic?.(selection)) {
+            onChange(selection)
+        } else {
+            setUnconfirmedSelection(selection)
+        }
+    }
     return (
         <ConfirmationModal
             onClose={() => {
@@ -98,17 +98,20 @@ export const ConfirmationModalWrapper = ({
                 onChange(unconfirmedSelection)
                 setUnconfirmedSelection(null)
             }}
-            unconfirmedSelectionLabel={
-                mapUnconfirmedSelection
-                    ? mapUnconfirmedSelection(unconfirmedSelection)
-                    : unconfirmedSelection
-            }
+            unconfirmedSelectionPending={!!unconfirmedSelection}
             modalTitle={modalTitle}
             modalMessage={modalMessage}
-            objectName={objectName}
+            modalMessageSelectionSpecificConfirmation={
+                unconfirmedSelection &&
+                modalMessageSelectionSpecificConfirmation
+                    ? modalMessageSelectionSpecificConfirmation(
+                          unconfirmedSelection
+                      )
+                    : undefined
+            }
         >
             {renderComponent({
-                onChange: isEdit ? setUnconfirmedSelection : onChange,
+                onChange: isEdit ? setUnconfirmedSelectionWithLogic : onChange,
             })}
         </ConfirmationModal>
     )
