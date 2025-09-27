@@ -832,6 +832,24 @@ msgstr "Legend"
 msgid "Legends"
 msgstr "Legends"
 
+msgid "Analytics table hook"
+msgstr "Analytics table hook"
+
+msgid "Analytics table hooks"
+msgstr "Analytics table hooks"
+
+msgid "Icon"
+msgstr "Icon"
+
+msgid "Icons"
+msgstr "Icons"
+
+msgid "Predictor group"
+msgstr "Predictor group"
+
+msgid "Predictor groups"
+msgstr "Predictor groups"
+
 msgid "Programs and Tracker"
 msgstr "Programs and Tracker"
 
@@ -1192,9 +1210,6 @@ msgstr "Maximum number of tracked entity instances to return in search"
 msgid "Minimum number of attributes required to search"
 msgstr "Minimum number of attributes required to search"
 
-msgid "This field requires a unique value, please choose another one"
-msgstr "This field requires a unique value, please choose another one"
-
 msgid "Unknown error"
 msgstr "Unknown error"
 
@@ -1215,6 +1230,9 @@ msgstr "Cannot save empty object"
 
 msgid "Created successfully"
 msgstr "Created successfully"
+
+msgid "This field requires a unique value, please choose another one"
+msgstr "This field requires a unique value, please choose another one"
 
 msgid "Please provide a positive integer"
 msgstr "Please provide a positive integer"
@@ -2014,8 +2032,12 @@ msgstr ""
 "Send notifications when data sets are marked complete, using the DHIS2 "
 "Messages app."
 
-msgid "Choose legends that will do something (?????????)"
-msgstr "Choose legends that will do something (?????????)"
+msgid ""
+"Select legends to visually categorize values for this data set in Data "
+"entry and Analytics apps."
+msgstr ""
+"Select legends to visually categorize values for this data set in Data "
+"entry and Analytics apps."
 
 msgid "Search available legends"
 msgstr "Search available legends"
@@ -2558,6 +2580,9 @@ msgstr "The indicator types merge operation is complete."
 
 msgid "All selected indicator types were merged successfully."
 msgstr "All selected indicator types were merged successfully."
+
+msgid "An indicator type with this factor already exists"
+msgstr "An indicator type with this factor already exists"
 
 msgid "Set up the basic information for this Indicator Type."
 msgstr "Set up the basic information for this Indicator Type."
@@ -3183,8 +3208,44 @@ msgstr ""
 msgid "Placeholder for other"
 msgstr "Placeholder for other"
 
+msgid "Configure hooks in SQL that run during the analytics process."
+msgstr "Configure hooks in SQL that run during the analytics process."
+
 msgid "Create, modify and view attributes."
 msgstr "Create, modify and view attributes."
+
+msgid ""
+"Create constants which can be included in expressions of indicator and "
+"validation rules."
+msgstr ""
+"Create constants which can be included in expressions of indicator and "
+"validation rules."
+
+msgid "Configure data approval levels for use in data approval workflows."
+msgstr "Configure data approval levels for use in data approval workflows."
+
+msgid "Configure data approval workflows."
+msgstr "Configure data approval workflows."
+
+msgid "Configure external map layers for use in GIS."
+msgstr "Configure external map layers for use in GIS."
+
+msgid "Upload, modify and view icons which can be assigned to other metadata."
+msgstr "Upload, modify and view icons which can be assigned to other metadata."
+
+msgid ""
+"Create, modify and view predefined legends for maps and other "
+"visualisations."
+msgstr ""
+"Create, modify and view predefined legends for maps and other "
+"visualisations."
+
+msgid ""
+"Create and manage locales for database content. A locale is a combination "
+"of language and country."
+msgstr ""
+"Create and manage locales for database content. A locale is a combination "
+"of language and country."
 
 msgid ""
 "Create a group of options from option sets that has a similar functional "
@@ -3196,8 +3257,84 @@ msgstr ""
 msgid "Create, modify and view sets of option groups."
 msgstr "Create, modify and view sets of option groups."
 
+msgid ""
+"Create option sets which can be included in data elements and produce "
+"drop-down lists in data entry forms."
+msgstr ""
+"Create option sets which can be included in data elements and produce "
+"drop-down lists in data entry forms."
+
+msgid "Create predictors which can be used to predict future data values."
+msgstr "Create predictors which can be used to predict future data values."
+
+msgid "Create predictor groups that contain several related predictors."
+msgstr "Create predictor groups that contain several related predictors."
+
+msgid ""
+"Manage analytics to be emailed to specific user groups on a daily, weekly "
+"or monthly basis."
+msgstr ""
+"Manage analytics to be emailed to specific user groups on a daily, weekly "
+"or monthly basis."
+
+msgid ""
+"Create SQL database views, typically based on resource tables, to provide "
+"convenient views for third-party tools."
+msgstr ""
+"Create SQL database views, typically based on resource tables, to provide "
+"convenient views for third-party tools."
+
 msgid "Set disaggregation mappings for program indicators."
 msgstr "Set disaggregation mappings for program indicators."
+
+msgid ""
+"Programs and Tracker are used to collect, manage, and analyze event-based "
+"and longitudinal data. They allow you to define program stages, track "
+"entities such as people or items over time, and apply rules and "
+"relationships to support flexible data capture and analysis."
+msgstr ""
+"Programs and Tracker are used to collect, manage, and analyze event-based "
+"and longitudinal data. They allow you to define program stages, track "
+"entities such as people or items over time, and apply rules and "
+"relationships to support flexible data capture and analysis."
+
+msgid ""
+"Create, modify and view programs. A program has program stages and defines "
+"which actions should be taken at each stage."
+msgstr ""
+"Create, modify and view programs. A program has program stages and defines "
+"which actions should be taken at each stage."
+
+msgid ""
+"Create, modify and view tracked entity attributes. An attribute can be used "
+"to register extra information for a tracked entity."
+msgstr ""
+"Create, modify and view tracked entity attributes. An attribute can be used "
+"to register extra information for a tracked entity."
+
+msgid ""
+"Create, modify and view relationship types. A relationship is typically "
+"wife and husband or mother and child."
+msgstr ""
+"Create, modify and view relationship types. A relationship is typically "
+"wife and husband or mother and child."
+
+msgid ""
+"Define types of entities which can be tracked through the system, which can "
+"be anything from persons to commodities."
+msgstr ""
+"Define types of entities which can be tracked through the system, which can "
+"be anything from persons to commodities."
+
+msgid ""
+"Program rules allow you to create and control dynamic behavior of the user "
+"interface in the Tracker Capture and Event Capture apps."
+msgstr ""
+"Program rules allow you to create and control dynamic behavior of the user "
+"interface in the Tracker Capture and Event Capture apps."
+
+msgid "Variables you use to create program rule expressions."
+msgstr "Variables you use to create program rule expressions."
 
 msgid ""
 "Validations are used to provide important feedback during data entry to "

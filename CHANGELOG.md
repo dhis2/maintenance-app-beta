@@ -1,3 +1,31 @@
+# [0.75.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.74.0...v0.75.0) (2025-09-26)
+
+
+### Features
+
+* Add overview page ([#650](https://github.com/dhis2/maintenance-app-beta/issues/650)) ([0e8f5b8](https://github.com/dhis2/maintenance-app-beta/commit/0e8f5b8b0049807d02f6190c269d504b6638fbd5))
+
+# [0.74.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.73.1...v0.74.0) (2025-09-26)
+
+
+### Features
+
+* add overview page ([#647](https://github.com/dhis2/maintenance-app-beta/issues/647)) ([a2e6b21](https://github.com/dhis2/maintenance-app-beta/commit/a2e6b21cf5d27ff74298c78245725794b7a34cc0))
+
+## [0.73.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.73.0...v0.73.1) (2025-09-25)
+
+
+### Bug Fixes
+
+* add notifyUsersInHierarchyOnly [DHIS2-1878] ([#643](https://github.com/dhis2/maintenance-app-beta/issues/643)) ([2543c93](https://github.com/dhis2/maintenance-app-beta/commit/2543c93a28a7485513a4e6618ed85177a6cf36bf))
+
+# [0.73.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.72.3...v0.73.0) (2025-09-24)
+
+
+### Features
+
+* move data sets to actual route ([#646](https://github.com/dhis2/maintenance-app-beta/issues/646)) ([39e9701](https://github.com/dhis2/maintenance-app-beta/commit/39e97018715eb9dff73f397c32f984d643eddc3b))
+
 ## [0.72.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.72.2...v0.72.3) (2025-09-23)
 
 

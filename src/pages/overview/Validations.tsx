@@ -29,6 +29,11 @@ export const ValidationsCardGroup = ({
             title={showTitle ? TITLE : undefined}
             section={OVERVIEW_SECTIONS.validation}
         >
+            <SummaryCard section={SECTIONS_MAP.validationRule}>
+                {i18n.t(
+                    'Add, modify, view and delete validation rules. Anomalies can be discovered by running validation rules against the data.'
+                )}
+            </SummaryCard>
             <SummaryCard section={SECTIONS_MAP.validationRuleGroup}>
                 {i18n.t(
                     'Add, modify, view and delete validation rule groups. Provides the ability to group and run validation rules together.'
