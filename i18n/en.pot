@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-26T13:03:20.924Z\n"
-"PO-Revision-Date: 2025-09-26T13:03:20.924Z\n"
+"POT-Creation-Date: 2025-09-27T11:41:52.979Z\n"
+"PO-Revision-Date: 2025-09-27T11:41:52.979Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -3347,6 +3347,20 @@ msgstr ""
 "specific data elements and display warnings at three levels of importance "
 "if these criteria are not met."
 
+msgid ""
+"Add, modify, view and delete validation rules. Anomalies can be discovered "
+"by running validation rules against the data."
+msgstr ""
+"Add, modify, view and delete validation rules. Anomalies can be discovered "
+"by running validation rules against the data."
+
+msgid ""
+"Add, modify, view and delete validation rule groups. Provides the ability "
+"to group and run validation rules together."
+msgstr ""
+"Add, modify, view and delete validation rule groups. Provides the ability "
+"to group and run validation rules together."
+
 msgid "Sends a notification when a validation rule failed."
 msgstr "Sends a notification when a validation rule failed."
 
@@ -3711,3 +3725,15 @@ msgstr "Configure the templates for the notification message content."
 
 msgid "Choose notification"
 msgstr "Choose notification"
+
+msgid "Set up the basic information for this validation rule group."
+msgstr "Set up the basic information for this validation rule group."
+
+msgid "Explain the purpose of this validation rule group."
+msgstr "Explain the purpose of this validation rule group."
+
+msgid "Validation Rules"
+msgstr "Validation Rules"
+
+msgid "Choose the validation rules to include in this validation rule group."
+msgstr "Choose the validation rules to include in this validation rule group."
