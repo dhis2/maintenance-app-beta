@@ -1,3 +1,20 @@
+# [0.76.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.75.0...v0.76.0) (2025-09-27)
+
+
+### Bug Fixes
+
+* remove fragment ([50577d6](https://github.com/dhis2/maintenance-app-beta/commit/50577d615c748c3d4c3869895df82808754d572c))
+
+
+### Features
+
+* add card on the validations overview page ([210a8d7](https://github.com/dhis2/maintenance-app-beta/commit/210a8d761ca860beb9c05c451283ae5b160db048))
+* add orphan filter ([30df23f](https://github.com/dhis2/maintenance-app-beta/commit/30df23f3f0e30c04ce254e82f14d587e283fd048))
+* form test ([163e802](https://github.com/dhis2/maintenance-app-beta/commit/163e802954493a28a5c0290d8e5ea46c4480f0c6))
+* regenerate en.pot ([ce88b1a](https://github.com/dhis2/maintenance-app-beta/commit/ce88b1a795b7219c95bcd769b36eed6e9710f4c2))
+* validation rule group edit ([991900a](https://github.com/dhis2/maintenance-app-beta/commit/991900a84e3ccf49e3604fcb0cb429539c931271))
+* validation rule group new ([2858138](https://github.com/dhis2/maintenance-app-beta/commit/28581380be104cdc3e427af8905a383538f8ff29))
+
 # [0.75.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.74.0...v0.75.0) (2025-09-26)
 
 
