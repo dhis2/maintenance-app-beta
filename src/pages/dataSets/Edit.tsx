@@ -167,20 +167,19 @@ export const useOnSubmitDataSetsEdit = (modelId: string) => {
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
-    const id = useParams().id
+    const modelId = useParams().id as string
     const dataSetValues = useQuery({
         queryFn: queryFn<DataSetValues>,
         queryKey: [
             {
                 resource: 'dataSets',
-                id,
+                id: modelId,
                 params: {
                     fields: fieldFilters.concat(),
                 },
             },
         ] as const,
     })
-    const modelId = useParams().id as string
 
     const initialValues = useMemo(
         () =>
