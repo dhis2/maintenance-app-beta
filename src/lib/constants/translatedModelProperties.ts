@@ -8,6 +8,9 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     aggregateExportAttributeOptionCombo: i18n.t(
         'Attribute option combination for aggregate data export'
     ),
+    aggregateExportDataElement: i18n.t(
+        'Data element for aggregate data export'
+    ),
     analyticsType: i18n.t('Analytics type'),
     category: i18n.t('Category'),
     categoryCombo: i18n.t('Category combination'),
