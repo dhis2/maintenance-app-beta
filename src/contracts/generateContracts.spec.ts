@@ -15,13 +15,13 @@ const generateContract = ({
     expectedSchema: ZodSchema<any>
 }) => {
     const contractPath = `contracts/${name}/contract.json`
-    const schemaPath = `contracts/maintenance-app/${name}/contract.json`
+    const schemaPath = `contracts/${name}/json-schema.json`
     const request = {
         name,
         httpMethod: method,
         requestUrl: path,
         responseStatus: 200,
-        jsonSchema: schemaPath,
+        jsonSchema: `contracts/maintenance-app/${name}/json-schema.json`,
     }
     const schema = zodToJsonSchema(expectedSchema, {
         name,
@@ -32,7 +32,7 @@ const generateContract = ({
     mkdirSync(`contracts/${name}`, { recursive: true })
     writeFileSync(contractPath, JSON.stringify(request, null, 2))
     writeFileSync(
-        `contracts/${name}/json-schema.json`,
+        schemaPath,
         JSON.stringify(schema.definitions?.[name], null, 2)
     )
 }
