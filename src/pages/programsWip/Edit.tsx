@@ -17,8 +17,6 @@ import {
     useOnSubmitEdit,
 } from '../../lib'
 import { PickWithFieldFilters, Program } from '../../types/generated'
-import { DataSetValues } from '../dataSets/Edit'
-import { dataSetValueFormatter } from '../dataSets/New'
 import { ProgramFormDescriptor } from './form/formDescriptor'
 import { ProgramFormContents } from './form/ProgramFormContents'
 
@@ -36,7 +34,7 @@ export const Component = () => {
     const modelId = useParams().id as string
 
     const program = useQuery({
-        queryFn: queryFn<DataSetValues>,
+        queryFn: queryFn<ProgramsFromFilters>,
         queryKey: [
             {
                 resource: 'programs',
@@ -50,7 +48,6 @@ export const Component = () => {
 
     return (
         <FormBase
-            valueFormatter={dataSetValueFormatter}
             onSubmit={useOnSubmitEdit({ section, modelId })}
             initialValues={program.data}
             subscription={{}}

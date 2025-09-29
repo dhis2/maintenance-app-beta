@@ -13,7 +13,7 @@ export const ProgramFormDescriptor = {
         },
         {
             name: 'enrollmentSettings',
-            label: i18n.t('Enrollment: Settings'),
+            label: i18n.t('Enrollment: Settings', { nsSeparator: '~:~' }),
             fields: [
                 {
                     name: 'trackedEntityType',
@@ -23,7 +23,7 @@ export const ProgramFormDescriptor = {
         },
         {
             name: 'enrollmentData',
-            label: i18n.t('Enrollment: Data'),
+            label: i18n.t('Enrollment: Data', { nsSeparator: '~:~' }),
             fields: [
                 {
                     name: 'programTrackedEntityAttributes',
@@ -33,7 +33,7 @@ export const ProgramFormDescriptor = {
         },
         {
             name: 'enrollmentForm',
-            label: i18n.t('Enrollment: Form'),
+            label: i18n.t('Enrollment: Form', { nsSeparator: '~:~' }),
             fields: [{ name: 'dataEntryForm', label: i18n.t('Custom form') }],
         },
     ],

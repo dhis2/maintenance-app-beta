@@ -179,7 +179,7 @@ export const SCHEMA_SECTIONS = {
     programWIP: {
         name: SchemaName.program,
         routeName: 'programsWip',
-        namePlural: 'dataSets',
+        namePlural: 'programs',
         title: i18n.t('Program'),
         titlePlural: i18n.t('Programs'),
         parentSectionKey: 'programsAndTracker',
