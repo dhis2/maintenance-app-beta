@@ -50,7 +50,8 @@ jobs:
                     echo "Branch $BRANCH_NAME does not exist, creating it"
                     git checkout -b "$BRANCH_NAME"
                   fi
-                  cp -r ../contracts ./contracts/maintenance-app
+                  mkdir -p ./contracts/maintenance-app
+                  cp -r ../contracts/* ./contracts/maintenance-app/
 
                   git add .
                   if git diff --cached --quiet; then
