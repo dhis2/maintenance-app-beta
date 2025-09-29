@@ -69,9 +69,15 @@ jobs:
                   cd dhis2-api-contracts
                   BRANCH_NAME=$(cat ../branch-name.txt)
                   gh auth login --with-token <<< "${{ secrets.CONTRACTS_PAT }}"
-                  gh pr create \
-                    --base main \
-                    --head "$BRANCH_NAME" \
-                    --title "Auto PR: Contracts from maintenance app PR #${{ github.event.pull_request.number }}" \
-                    --body "This PR was automatically created from a pull request in maintenance app." \
-                    --reviewer dhis2/platform-backend
+
+                  # Check if a PR already exists for this branch
+                  if gh pr list --head "$BRANCH_NAME" --base main --json number --jq '.[0].number' | grep -q .; then
+                    echo "PR already exists for branch $BRANCH_NAME, skipping creation."
+                  else
+                    gh pr create \
+                      --base main \
+                      --head "$BRANCH_NAME" \
+                      --title "Auto PR: Contracts from maintenance app PR #${{ github.event.pull_request.number }}" \
+                      --body "This PR was automatically created from a pull request in maintenance app." \
+                      --reviewer dhis2/platform-backend
+                  fi
