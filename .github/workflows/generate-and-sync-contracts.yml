@@ -61,13 +61,11 @@ jobs:
                   git commit -m "Auto-update contracts from Maintenance app PR #${{ github.event.pull_request.number }}"
                   git push origin $BRANCH_NAME
 
-                  echo "$BRANCH_NAME" > ../branch-name.txt
-
             - name: Create Pull Request in contract repo
               if: steps.diff.outputs.changed == 'true'
               run: |
                   cd dhis2-api-contracts
-                  BRANCH_NAME=$(cat ../branch-name.txt)
+                  BRANCH_NAME="auto/contracts-update-${{ github.event.pull_request.number }}"
                   gh auth login --with-token <<< "${{ secrets.CONTRACTS_PAT }}"
 
                   # Check if a PR already exists for this branch
