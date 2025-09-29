@@ -1,3 +1,10 @@
+# [0.77.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.76.0...v0.77.0) (2025-09-29)
+
+
+### Features
+
+* scaffolding for programs ([#648](https://github.com/dhis2/maintenance-app-beta/issues/648)) ([22a0fd9](https://github.com/dhis2/maintenance-app-beta/commit/22a0fd92890880865990c4b704b5a5b904d75d5d))
+
 # [0.76.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.75.0...v0.76.0) (2025-09-27)
 
 
