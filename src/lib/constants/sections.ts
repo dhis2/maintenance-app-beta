@@ -91,14 +91,6 @@ export const SCHEMA_SECTIONS = {
         titlePlural: i18n.t('Data sets'),
         parentSectionKey: 'dataSet',
     },
-    // @ts-expect-error temporary route for testing
-    dataSetWIP: {
-        name: SchemaName.dataSet,
-        namePlural: 'dataSets',
-        title: i18n.t('Data set'),
-        titlePlural: i18n.t('Data sets'),
-        parentSectionKey: 'dataSet',
-    },
     dataSetNotificationTemplate: {
         name: SchemaName.dataSetNotificationTemplate,
         namePlural: 'dataSetNotificationTemplates',
@@ -178,6 +170,15 @@ export const SCHEMA_SECTIONS = {
     },
     program: {
         name: SchemaName.program,
+        namePlural: 'programs',
+        title: i18n.t('Program'),
+        titlePlural: i18n.t('Programs'),
+        parentSectionKey: 'programsAndTracker',
+    },
+    // @ts-expect-error temporary route for testing
+    programWIP: {
+        name: SchemaName.program,
+        routeName: 'programsWip',
         namePlural: 'programs',
         title: i18n.t('Program'),
         titlePlural: i18n.t('Programs'),
