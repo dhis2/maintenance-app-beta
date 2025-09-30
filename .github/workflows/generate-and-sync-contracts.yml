@@ -9,14 +9,13 @@ on:
                 description: 'Which job to run (default: all)'
                 required: false
                 default: 'all'
-            branch_name:
-                description: 'Branch name to check dependent PR for'
-                required: false
 
 jobs:
     generate-and-sync:
         if: github.event_name == 'pull_request' || github.event.inputs.job == 'all'
         runs-on: ubuntu-latest
+        outputs:
+            pr_branch_name: ${{ steps.create_pr.outputs.branch_name }}
         steps:
             - name: Checkout Repo
               uses: actions/checkout@v2
@@ -73,13 +72,14 @@ jobs:
                   git push origin $BRANCH_NAME
 
             - name: Create Pull Request in contract repo
+              id: create_pr
               if: steps.diff.outputs.changed == 'true'
               run: |
                   cd dhis2-api-contracts
                   BRANCH_NAME="auto/contracts-update-${{ github.event.pull_request.number }}"
                   gh auth login --with-token <<< "${{ secrets.CONTRACTS_PAT }}"
 
-                  # Check if a PR already exists for this branch
+                  # Check if a PR already exists
                   if gh pr list --head "$BRANCH_NAME" --base main --json number --jq '.[0].number' | grep -q .; then
                     echo "PR already exists for branch $BRANCH_NAME, skipping creation."
                   else
@@ -90,7 +90,11 @@ jobs:
                       --body "This PR was automatically created from a pull request in maintenance app." \
                       --reviewer dhis2/platform-backend
 
+                  # Output the branch name safely for downstream jobs
+                  echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+
     check-dependent-pr:
+        needs: generate-and-sync
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.job == 'check-only'
         runs-on: ubuntu-latest
         steps:
@@ -102,20 +106,10 @@ jobs:
             - name: Authenticate GitHub CLI
               run: echo "${{ secrets.CONTRACTS_PAT }}" | gh auth login --with-token
 
-            - name: Resolve branch name
-              id: resolve
-              run: |
-                  if [ -n "${{ github.event.inputs.branch_name }}" ]; then
-                    echo "branch=${{ github.event.inputs.branch_name }}" >> $GITHUB_OUTPUT
-                  elif [ -n "${{ github.head_ref }}" ]; then
-                    echo "branch=${{ github.head_ref }}" >> $GITHUB_OUTPUT
-                  else
-                    echo "::error::Could not determine branch name"
-                    exit 1
-
             - name: Verify dependent PR merged
               run: |
-                  BRANCH_NAME="${{ steps.resolve.outputs.branch }}"
+                  # Get the branch name from the previous job output
+                  BRANCH_NAME="${{ needs.generate-and-sync.outputs.pr_branch_name }}"
                   DEP_PR=$(echo "$BRANCH_NAME" | grep -oE '[0-9]+$')
                   DEP_REPO="org/maintenance-app"
 
