@@ -27,7 +27,7 @@ const generateContract = ({
         name,
         // @ts-expect-error/rejected-must-be-true
         rejectedAdditionalProperties: true,
-        // $refStrategy: 'none',
+        $refStrategy: 'none',
     })
     mkdirSync(`contracts/${name}`, { recursive: true })
     writeFileSync(contractPath, JSON.stringify(request, null, 2))
