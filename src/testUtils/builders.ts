@@ -21,13 +21,16 @@ import { dataElementGroupListSchema } from '../pages/dataElementGroups/form/data
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementListSchema } from '../pages/dataElements/form/dataElementSchema'
 import { dataSetNotificationTemplateListSchema } from '../pages/dataSetNotificationTemplates/form/dataSetNotificationTemplateSchema'
-import { dataSetListSchema } from '../pages/dataSetsWip/form/dataSetFormSchema'
+import { dataSetListSchema } from '../pages/dataSets/form/dataSetFormSchema'
 import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicatorGroupSchema'
 import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
 import { indicatorListSchema } from '../pages/indicators/form/indicatorSchema'
 import { indicatorTypeListSchema } from '../pages/indicatorTypes/form/indicatorTypesSchema'
 import { OptionGroupListSchema } from '../pages/optionGroups/form/OptionGroupFormSchema'
-import { optionGroupSetListSchema } from '../pages/optionGroupSets/form/optionGroupSetSchema'
+import {
+    optionGroupSetFormSchema,
+    optionGroupSetListSchema,
+} from '../pages/optionGroupSets/form/optionGroupSetSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
@@ -38,7 +41,10 @@ import {
     validationNotificationTemplateListSchema,
     validationNotificationTemplateFormSchema,
 } from '../pages/validationNotificationTemplates/form'
-import { validationRuleGroupsListSchema } from '../pages/validationRuleGroups/form/validationRuleGroupsSchema'
+import {
+    validationRuleGroupsFormSchema,
+    validationRuleGroupsListSchema,
+} from '../pages/validationRuleGroups/form/validationRuleGroupsSchema'
 import {
     CategoryMapping,
     DataElement,
@@ -211,6 +217,13 @@ export const testDataSetNotificationTemplate = (
 })
 
 export const testOptionGroupSet = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(optionGroupSetFormSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testOptionGroupSetList = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(optionGroupSetListSchema, {
         mockeryMapper,
     }),
@@ -381,6 +394,15 @@ export const testValidationRuleGroups = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(validationRuleGroupsListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testValidationRuleGroupsForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(validationRuleGroupsFormSchema, {
+        mockeryMapper,
+    }),
     ...overwrites,
 })
 

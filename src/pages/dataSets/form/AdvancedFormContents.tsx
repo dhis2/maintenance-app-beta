@@ -124,7 +124,9 @@ export const AdvancedFormContents = React.memo(function AdvancedFormContents({
                 {i18n.t('Legends')}
             </StandardFormSectionTitle>
             <StandardFormSectionDescription>
-                {i18n.t('Choose legends that will do something (?????????)')}
+                {i18n.t(
+                    'Select legends to visually categorize values for this data set in Data entry and Analytics apps.'
+                )}
             </StandardFormSectionDescription>
             <StandardFormField>
                 <ModelTransferField

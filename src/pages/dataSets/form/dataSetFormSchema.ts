@@ -17,11 +17,6 @@ const {
     withDefaultListColumns,
 } = modelFormSchemas
 
-const formTypeSchema = z
-    .enum(['DEFAULT', 'SECTION', 'CUSTOM'])
-    .default('DEFAULT')
-export type FormType = z.infer<typeof formTypeSchema>
-
 const dataSetBaseSchema = z.object({
     code: z.string().trim().optional(),
     periodType: z
