@@ -32,7 +32,6 @@ jobs:
             - name: Run contracts script
               run: yarn contracts
 
-            # Detect whether contracts/ has changes
             - name: Check for contract changes
               id: diff
               run: |
@@ -90,6 +89,7 @@ jobs:
                       --title "Auto PR: Contracts from maintenance app PR #${{ github.event.pull_request.number }}" \
                       --body "This PR was automatically created from a pull request in maintenance app." \
                       --reviewer dhis2/platform-backend
+                  fi
 
                   # Output the branch name safely for downstream jobs
                   echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
