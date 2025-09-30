@@ -112,7 +112,7 @@ export const testOptionGroup = (overwrites: Record<any, any> = {}) => ({
 
 export const testConstant = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(ConstantsListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
@@ -217,14 +217,14 @@ export const testDataSetNotificationTemplate = (
 
 export const testOptionGroupSet = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(optionGroupSetFormSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testOptionGroupSetList = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(optionGroupSetListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
@@ -251,12 +251,12 @@ export const testProgramIndicator = (overwrites: Record<any, any> = {}) => ({
 })
 
 export const testAttributeList = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(attributeListSchema, { mockeryMapper }),
+    ...generateMock(attributeListSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testAttributeForm = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(attributeFormSchema, { mockeryMapper }),
+    ...generateMock(attributeFormSchema, { stringMap }),
     ...overwrites,
 })
 
@@ -296,7 +296,7 @@ export const testFormProgramIndicatorGroup = (
 })
 
 export const testTrackedEntityType = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(trackedEntityTypeListSchema, { mockeryMapper }),
+    ...generateMock(trackedEntityTypeListSchema, { stringMap }),
     ...overwrites,
 })
 
@@ -304,7 +304,7 @@ export const testValidationNotificationTemplate = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(validationNotificationTemplateListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
@@ -313,7 +313,7 @@ export const testValidationNotificationTemplateForm = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(validationNotificationTemplateFormSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
@@ -392,7 +392,7 @@ export const testOrgUnit = (overwrites: Record<any, any> | undefined = {}) => {
 export const testValidationRuleGroups = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(validationRuleGroupsListSchema, { mockeryMapper }),
+    ...generateMock(validationRuleGroupsListSchema, { stringMap }),
     ...overwrites,
 })
 
@@ -400,7 +400,7 @@ export const testValidationRuleGroupsForm = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(validationRuleGroupsFormSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
