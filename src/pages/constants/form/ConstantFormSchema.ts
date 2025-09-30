@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 import { Constant, PickWithFieldFilters } from '../../../types/generated'
@@ -10,7 +11,9 @@ const constantBaseSchema = z.object({
     shortName: z.string().trim(),
     name: z.string().trim(),
     description: z.string().trim().optional(),
-    value: z.coerce.number(),
+    value: z.coerce.number({
+        invalid_type_error: i18n.t('Please enter a number'),
+    }),
 })
 
 export const constantFormSchema = identifiable.merge(constantBaseSchema)
