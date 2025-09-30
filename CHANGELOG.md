@@ -1,3 +1,10 @@
+## [0.77.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.77.0...v0.77.1) (2025-09-30)
+
+
+### Bug Fixes
+
+* constant form update ([#652](https://github.com/dhis2/maintenance-app-beta/issues/652)) ([f30706c](https://github.com/dhis2/maintenance-app-beta/commit/f30706c2dbd6f7603eab252b6e454858a8ad3acf))
+
 # [0.77.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.76.0...v0.77.0) (2025-09-29)
 
 
