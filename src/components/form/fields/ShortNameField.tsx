@@ -8,9 +8,11 @@ import { useValidator } from '../../../lib/models/useFieldValidators'
 export function ShortNameField({
     helpText,
     schemaSection,
+    isRequired = true,
 }: {
     helpText?: string
     schemaSection: SchemaSection
+    isRequired?: boolean
 }) {
     const validator = useValidator({ schemaSection, property: 'shortName' })
     const { meta } = useField('shortName', {
@@ -18,18 +20,25 @@ export function ShortNameField({
     })
 
     const helpString =
-        helpText || i18n.t('Often used in reports where space is limited.')
+        helpText ||
+        i18n.t(
+            'A short, unique name (max 50 characters). Displayed in analysis apps where space is limited, depending on user or system settings.'
+        )
 
     return (
         <FieldRFF<string | undefined>
             loading={meta.validating}
             component={InputFieldFF}
             dataTest="formfields-shortName"
-            required
+            required={isRequired}
             inputWidth="400px"
-            label={i18n.t('{{fieldLabel}} (required)', {
-                fieldLabel: i18n.t('Short name'),
-            })}
+            label={
+                isRequired
+                    ? i18n.t('{{fieldLabel}} (required)', {
+                          fieldLabel: i18n.t('Short name'),
+                      })
+                    : i18n.t('Short name')
+            }
             name="shortName"
             helpText={helpString}
             validate={(name?: string) => validator(name)}

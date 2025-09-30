@@ -12,6 +12,7 @@ const zodArrayIds = z.array(z.string().refine((val) => isValidUid(val)))
 export const filterParamsSchema = z
     .object({
         [IDENTIFIABLE_FILTER_KEY]: z.string(),
+        formName: z.string(),
 
         aggregationType: z.array(z.nativeEnum(DataElement.aggregationType)),
         category: zodArrayIds,
@@ -46,6 +47,7 @@ export const filterParamsSchema = z
 Mapping each filter to a config object that handles encoding/decoding */
 export const filterQueryParamType = {
     [IDENTIFIABLE_FILTER_KEY]: StringParam,
+    formName: StringParam,
     aggregationType: CustomDelimitedArrayParam,
     category: CustomDelimitedArrayParam,
     categoryCombo: CustomDelimitedArrayParam,

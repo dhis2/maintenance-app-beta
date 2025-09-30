@@ -5,12 +5,23 @@ import {
     SectionedFormSections,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
+    MessageFields,
 } from '../../../components'
 import { SECTIONS_MAP, useSyncSelectedSectionWithScroll } from '../../../lib'
 import { BasicInformationSection } from './BasicInformationSection'
-import { MessageTemplateContent } from './messageContent'
 import { NotificationTimingSection } from './NotificationTimingSection'
 import { RecipientSection } from './RecipientSection'
+
+const DATA_SET_VARIABLES = {
+    data_set_name: i18n.t('Data set name'),
+    current_date: i18n.t('Current date'),
+    data_description: i18n.t('Data set description'),
+    registration_ou: i18n.t('Complete registration organisation unit'),
+    registration_period: i18n.t('Complete registration period'),
+    registration_user: i18n.t('Complete registration user'),
+    registration_time: i18n.t('Complete registration time'),
+    att_opt_combo: i18n.t('Complete registration att opt combo'),
+} as Record<string, string>
 
 export const DataSetNotificationsFormFields = () => {
     const section = SECTIONS_MAP.dataSetNotificationTemplate
@@ -40,7 +51,10 @@ export const DataSetNotificationsFormFields = () => {
                             'Configure the templates for the notification content and subject.'
                         )}
                     </StandardFormSectionDescription>
-                    <MessageTemplateContent section={section} />
+                    <MessageFields
+                        messageVariables={DATA_SET_VARIABLES}
+                        messageTemplateRequired={true}
+                    />
                 </SectionedFormSection>
 
                 <SectionedFormSection name="notificationTiming">

@@ -1,7 +1,7 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import memoize from 'lodash/memoize'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
 interface ValidateExpressionResponse {
@@ -10,28 +10,50 @@ interface ValidateExpressionResponse {
     status: 'OK' | 'ERROR'
 }
 
+type ValidationResult = {
+    error?: string
+    expressionDescription?: string
+}
 export const useExpressionValidator = (resource: string) => {
     const engine = useDataEngine()
+    const [validating, setValidating] = useState(false)
 
     const memoized = useMemo(
         () =>
             memoize(async (expression?: string) => {
                 if (!expression?.trim()) {
-                    return undefined
+                    return {
+                        error: undefined,
+                        expressionDescription: '',
+                    } as ValidationResult
                 }
 
+                setValidating(true)
                 try {
-                    const result = (await engine.mutate({
+                    const result = await (engine.mutate({
                         resource,
                         type: 'create',
                         data: expression as unknown as Record<string, unknown>,
-                    })) as unknown as ValidateExpressionResponse
+                    }) as unknown as Promise<ValidateExpressionResponse>)
 
-                    return result.status === 'ERROR'
-                        ? result.message || i18n.t('Invalid expression')
-                        : undefined
+                    if (result.status === 'ERROR') {
+                        return {
+                            error:
+                                result.message || i18n.t('Invalid expression'),
+                            expressionDescription: undefined,
+                        } as ValidationResult
+                    }
+                    return {
+                        error: undefined,
+                        expressionDescription: result.description,
+                    } as ValidationResult
                 } catch {
-                    return i18n.t('Could not validate expression')
+                    return {
+                        error: i18n.t('Could not validate expression'),
+                        expressionDescription: undefined,
+                    } as ValidationResult
+                } finally {
+                    setValidating(false)
                 }
             }),
         [resource, engine]
@@ -42,5 +64,9 @@ export const useExpressionValidator = (resource: string) => {
         [memoized]
     )
 
-    return useDebouncedCallback(validate, 200, { leading: true })
+    const debouncedValidate = useDebouncedCallback(validate, 200, {
+        leading: true,
+    })
+
+    return [debouncedValidate, validating] as const
 }

@@ -7,6 +7,7 @@ import {
     getOverviewPath,
     getSectionPath,
     useIsSectionAuthorizedPredicate,
+    useIsSectionFeatureToggle,
 } from '../../lib'
 
 export interface LinkItem {
@@ -110,21 +111,40 @@ export const sidebarLinks = {
     other: {
         label: OVERVIEW_SECTIONS.other.title,
         links: [
-            getSectionLinkItem(SECTIONS_MAP.programDisaggregation),
+            getOverviewLinkItem(OVERVIEW_SECTIONS.other),
+            getSectionLinkItem(SECTIONS_MAP.analyticsTableHook),
+            getSectionLinkItem(SECTIONS_MAP.attribute),
+            getSectionLinkItem(SECTIONS_MAP.constant),
+            getSectionLinkItem(SECTIONS_MAP.dataApprovalLevel),
+            getSectionLinkItem(SECTIONS_MAP.dataApprovalWorkflow),
+            getSectionLinkItem(SECTIONS_MAP.externalMapLayer),
+            getSectionLinkItem(SECTIONS_MAP.icon),
+            getSectionLinkItem(SECTIONS_MAP.legend),
+            getSectionLinkItem(SECTIONS_MAP.locale),
             getSectionLinkItem(SECTIONS_MAP.optionGroup),
+            getSectionLinkItem(SECTIONS_MAP.optionGroupSet),
+            getSectionLinkItem(SECTIONS_MAP.optionSet),
+            getSectionLinkItem(SECTIONS_MAP.predictor),
+            getSectionLinkItem(SECTIONS_MAP.predictorGroup),
+            getSectionLinkItem(SECTIONS_MAP.pushAnalysis),
+            getSectionLinkItem(SECTIONS_MAP.sqlView),
+            getSectionLinkItem(SECTIONS_MAP.programDisaggregation),
         ],
     },
 } satisfies SidebarLinks
 
 export const useSidebarLinks = (): ParentLink[] => {
     const isSectionAuthorized = useIsSectionAuthorizedPredicate()
+    const isSectionFeatureToggled = useIsSectionFeatureToggle()
 
     return useMemo(() => {
         const authorizedSidebarLinks: ParentLink[] = Object.values(sidebarLinks)
             .map(({ label, links }) => ({
                 label,
-                links: links.filter(({ section }) =>
-                    isSectionAuthorized(section)
+                links: links.filter(
+                    ({ section }) =>
+                        isSectionAuthorized(section) &&
+                        isSectionFeatureToggled(section)
                 ),
             }))
             .filter(({ links }) => links.length > 0)

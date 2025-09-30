@@ -5,11 +5,12 @@ import { uiActions } from './uiActions'
 const expectInputFieldToExist = (
     fieldName: string,
     value: string | null,
-    screen: RenderResult
+    screen: RenderResult,
+    role?: string
 ) => {
     const field = screen.getByTestId(`formfields-${fieldName}`)
     expect(field).toBeVisible()
-    const input = within(field).getByRole('textbox') as HTMLInputElement
+    const input = within(field).getByRole(role ?? 'textbox') as HTMLInputElement
     expect(input).toBeVisible()
     expect(input).toHaveAttribute('name', fieldName)
     expect(input).toHaveAttribute('value', value)
@@ -76,7 +77,20 @@ const expectInputFieldToHaveError = (
     const field = screen.getByTestId(fieldTestId)
     const error = within(field).getByTestId(`${fieldTestId}-validation`)
     expect(error).toBeVisible()
+    expect(error).toHaveClass('error')
     expect(error).toHaveTextContent(errorText)
+}
+
+const expectInputFieldToHaveWarning = (
+    fieldTestId: string,
+    warningText: string,
+    screen: RenderResult
+) => {
+    const field = screen.getByTestId(fieldTestId)
+    const warning = within(field).getByTestId(`${fieldTestId}-validation`)
+    expect(warning).toBeVisible()
+    expect(warning).toHaveClass('warning')
+    expect(warning).toHaveTextContent(warningText)
 }
 
 const expectTransferFieldToExistWithOptions = async (
@@ -118,9 +132,11 @@ const expectSelectToExistWithOptions = async (
     {
         selected = undefined,
         options = [],
+        disabled = false,
     }: {
         selected?: string
         options: { displayName: string }[]
+        disabled?: boolean
     },
     screen: RenderResult
 ) => {
@@ -130,6 +146,10 @@ const expectSelectToExistWithOptions = async (
     expect(selectInput).toBeVisible()
     if (selected) {
         expect(selectInput).toHaveTextContent(selected)
+    }
+    if (disabled) {
+        expect(selectInput.classList.contains('disabled')).toBe(true)
+        return
     }
     await userEvent.click(selectInput)
     const optionsWrapper = await screen.findByTestId(
@@ -213,6 +233,7 @@ const expectInputToErrorWhenDuplicate = async (
         screen
     )
 }
+
 const expectColorAndIconFieldToExist = (screen: RenderResult) => {
     const field = screen.getByTestId('formfields-colorandicon')
     expect(field).toBeVisible()
@@ -227,6 +248,7 @@ export const uiAssertions = {
     expectTextAreaFieldToExist,
     expectColorAndIconFieldToExist,
     expectFieldToHaveError: expectInputFieldToHaveError,
+    expectInputFieldToHaveWarning,
     expectTransferFieldToExistWithOptions,
     expectSelectToExistWithOptions,
     expectMultiSelectToExistWithOptions,
