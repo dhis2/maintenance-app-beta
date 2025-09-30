@@ -11,18 +11,13 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { SECTIONS_MAP, useSchemaSectionHandleOrThrow } from '../../../lib'
-import { useValidator } from '../../../lib/models/useFieldValidators'
+import { SECTIONS_MAP } from '../../../lib'
 
 function ConstantFormFields() {
     const section = SECTIONS_MAP.constant
-    const schemaSection = useSchemaSectionHandleOrThrow()
-    const validate = useValidator({ schemaSection, property: 'value' })
-
     const { input, meta } = useField('value', {
-        validate,
         type: 'number',
-        format: (value) => (value != null ? String(value) : ''),
+        format: (value) => value?.toString(),
     })
 
     return (

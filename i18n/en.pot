@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-19T09:43:03.099Z\n"
-"PO-Revision-Date: 2025-09-19T09:43:03.099Z\n"
+"POT-Creation-Date: 2025-09-30T05:15:36.166Z\n"
+"PO-Revision-Date: 2025-09-30T05:15:36.166Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1696,6 +1696,9 @@ msgstr "Value (required)"
 
 msgid "Enter the numeric value to be used as the constant."
 msgstr "Enter the numeric value to be used as the constant."
+
+msgid "Please enter a number"
+msgstr "Please enter a number"
 
 msgid "Available data element groups"
 msgstr "Available data element groups"
