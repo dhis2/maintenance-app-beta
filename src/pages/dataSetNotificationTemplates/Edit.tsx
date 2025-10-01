@@ -41,6 +41,7 @@ const fieldFilters = [
     'recipientUserGroup[id,displayName]',
     'deliveryChannels',
     'dataSets[id,name,displayName]',
+    'notifyUsersInHierarchyOnly',
 ] as const
 
 type DataSetNotificationResult = PickWithFieldFilters<
