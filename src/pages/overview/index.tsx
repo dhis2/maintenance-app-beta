@@ -10,4 +10,8 @@ export { Component as OrganisationUnits } from './OrganisationUnits'
 
 export { Component as Indicators } from './Indicators'
 
+export { Component as Validations } from './Validations'
+
 export { Component as Other } from './Other'
+
+export { Component as ProgramsAndTracker } from './ProgramsAndTracker'

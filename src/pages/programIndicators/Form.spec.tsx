@@ -568,20 +568,23 @@ describe('Program indicator form tests', () => {
                 },
             })
             const anExpression = faker.finance.routingNumber()
-            await uiActions.enterInputFieldValue(
-                `expression`,
-                anExpression,
-                screen
+            await userEvent.click(
+                screen.getByTestId('edit-expression-expression-button')
             )
-            await userEvent.click(screen.getByTestId(`formfields-expression`))
+            const editModal = await screen.findByTestId(
+                `expression-builder-modal`
+            )
+            await uiActions.enterExpressionInModal(editModal, anExpression)
 
-            uiAssertions.expectFieldToHaveError(
-                `formfields-expression`,
-                'Invalid expression',
-                screen
+            const error = within(editModal).getByTestId(
+                `expression-builder-modal-input-validation`
             )
-            await uiActions.submitForm(screen)
-            expect(createMock).not.toHaveBeenCalled()
+            expect(error).toBeVisible()
+            expect(error).toHaveTextContent('Invalid expression')
+
+            expect(
+                within(editModal).getByTestId('apply-expression-button')
+            ).toBeDisabled()
         })
         it('should show an error if filter field is malformed', async () => {
             const { screen } = await renderForm({
@@ -592,16 +595,23 @@ describe('Program indicator form tests', () => {
                 },
             })
             const anExpression = faker.finance.routingNumber()
-            await uiActions.enterInputFieldValue(`filter`, anExpression, screen)
-            await userEvent.click(screen.getByTestId(`formfields-filter`))
-
-            uiAssertions.expectFieldToHaveError(
-                `formfields-filter`,
-                'Invalid expression',
-                screen
+            await userEvent.click(
+                screen.getByTestId('edit-filter-expression-button')
             )
-            await uiActions.submitForm(screen)
-            expect(createMock).not.toHaveBeenCalled()
+            const editModal = await screen.findByTestId(
+                `expression-builder-modal`
+            )
+            await uiActions.enterExpressionInModal(editModal, anExpression)
+
+            const error = within(editModal).getByTestId(
+                `expression-builder-modal-input-validation`
+            )
+            expect(error).toBeVisible()
+            expect(error).toHaveTextContent('Invalid expression')
+
+            expect(
+                within(editModal).getByTestId('apply-expression-button')
+            ).toBeDisabled()
         })
     })
     describe('New', () => {
@@ -946,12 +956,16 @@ describe('Program indicator form tests', () => {
                 screen.getByTestId('analytics-type-field'),
                 screen
             )
-            await uiActions.enterInputFieldValue(
-                `expression`,
+            await uiActions.applyNewExpressionWithinModal(
+                'expression',
                 anExpression,
                 screen
             )
-            await uiActions.enterInputFieldValue(`filter`, aFilter, screen)
+            await uiActions.applyNewExpressionWithinModal(
+                'filter',
+                aFilter,
+                screen
+            )
 
             await uiActions.submitForm(screen)
             expect(createMock).toHaveBeenCalledTimes(1)

@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 import { DataSetNotificationTemplate } from '../../../types/generated'
@@ -16,7 +17,15 @@ const dataSetNotificationTemplateBaseSchema = z.object({
     ),
     deliveryChannels: z.array(z.enum(['SMS', 'EMAIL', 'HTTP'])).default([]),
     messageTemplate: z.string(),
-    subjectTemplate: z.string().optional(),
+    subjectTemplate: z
+        .string()
+        .max(100, {
+            message: i18n.t(
+                'Please enter a maximum of {{upperBound}} characters',
+                { upperBound: '100' }
+            ),
+        })
+        .optional(),
     relativeScheduledDays: z.union([z.string(), z.number()]).optional(),
     recipientUserGroup: z
         .object({
@@ -28,6 +37,7 @@ const dataSetNotificationTemplateBaseSchema = z.object({
     sendStrategy: z
         .nativeEnum(DataSetNotificationTemplate.sendStrategy)
         .optional(),
+    notifyUsersInHierarchyOnly: z.boolean().optional(),
 })
 
 export const dataSetNotificationTemplateFormSchema =
@@ -69,6 +79,7 @@ export const transformFormValues = <
     const {
         recipientUserGroup,
         relativeScheduledDays,
+        notifyUsersInHierarchyOnly,
         dataSets = [],
         ...rest
     } = values
@@ -79,6 +90,10 @@ export const transformFormValues = <
         recipientUserGroup:
             rest.notificationRecipient === 'USER_GROUP' && recipientUserGroup
                 ? { id: recipientUserGroup.id }
+                : undefined,
+        notifyUsersInHierarchyOnly:
+            rest.notificationRecipient === 'USER_GROUP' && recipientUserGroup
+                ? Boolean(notifyUsersInHierarchyOnly)
                 : undefined,
         dataSets: dataSets.map(({ id }) => ({ id })),
     }

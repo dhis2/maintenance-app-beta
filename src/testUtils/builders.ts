@@ -6,29 +6,45 @@ import {
     UserGroupSchema,
     UserSchema,
 } from '../lib/form/modelFormSchemas'
+import {
+    attributeListSchema,
+    attributeFormSchema,
+} from '../pages/attributes/form'
 import { categoryListSchema } from '../pages/categories/form'
 import { categoryComboListSchema } from '../pages/categoryCombos/form'
 import { categoryOptionComboListSchema } from '../pages/categoryOptionCombos/form'
 import { categoryOptionGroupListSchema } from '../pages/categoryOptionGroups/form/categoryOptionGroupSchema'
 import { categoryOptionGroupSetListSchema } from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
 import { categoryOptionListSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
+import { ConstantsListSchema } from '../pages/constants/form/ConstantFormSchema'
 import { dataElementGroupListSchema } from '../pages/dataElementGroups/form/dataElementGroupSchema'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementListSchema } from '../pages/dataElements/form/dataElementSchema'
 import { dataSetNotificationTemplateListSchema } from '../pages/dataSetNotificationTemplates/form/dataSetNotificationTemplateSchema'
-import { dataSetListSchema } from '../pages/dataSetsWip/form/dataSetFormSchema'
+import { dataSetListSchema } from '../pages/dataSets/form/dataSetFormSchema'
 import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicatorGroupSchema'
 import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
 import { indicatorListSchema } from '../pages/indicators/form/indicatorSchema'
 import { indicatorTypeListSchema } from '../pages/indicatorTypes/form/indicatorTypesSchema'
 import { OptionGroupListSchema } from '../pages/optionGroups/form/OptionGroupFormSchema'
-import { optionGroupSetListSchema } from '../pages/optionGroupSets/form/optionGroupSetSchema'
+import {
+    optionGroupSetFormSchema,
+    optionGroupSetListSchema,
+} from '../pages/optionGroupSets/form/optionGroupSetSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
 import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
 import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form'
+import {
+    validationNotificationTemplateListSchema,
+    validationNotificationTemplateFormSchema,
+} from '../pages/validationNotificationTemplates/form'
+import {
+    validationRuleGroupsFormSchema,
+    validationRuleGroupsListSchema,
+} from '../pages/validationRuleGroups/form/validationRuleGroupsSchema'
 import {
     CategoryMapping,
     DataElement,
@@ -90,6 +106,13 @@ export const testIndicatorType = (overwrites: Record<any, any> = {}) => ({
 
 export const testOptionGroup = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(OptionGroupListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testConstant = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(ConstantsListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -194,6 +217,13 @@ export const testDataSetNotificationTemplate = (
 })
 
 export const testOptionGroupSet = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(optionGroupSetFormSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testOptionGroupSetList = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(optionGroupSetListSchema, {
         mockeryMapper,
     }),
@@ -218,6 +248,16 @@ export const testOrganisationUnitGroupSet = (
 
 export const testProgramIndicator = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(programIndicatorsListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testAttributeList = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(attributeListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testAttributeForm = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(attributeFormSchema, { mockeryMapper }),
     ...overwrites,
 })
 
@@ -258,6 +298,24 @@ export const testFormProgramIndicatorGroup = (
 
 export const testTrackedEntityType = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(trackedEntityTypeListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testValidationNotificationTemplate = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(validationNotificationTemplateListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testValidationNotificationTemplateForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(validationNotificationTemplateFormSchema, {
+        mockeryMapper,
+    }),
     ...overwrites,
 })
 
@@ -332,6 +390,22 @@ export const testOrgUnit = (overwrites: Record<any, any> | undefined = {}) => {
     } as unknown as Partial<OrganisationUnit>
 }
 
+export const testValidationRuleGroups = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(validationRuleGroupsListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testValidationRuleGroupsForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(validationRuleGroupsFormSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
 // TODO: change when schema for optionset is available
 export const testOptionSet = ({
     id = randomDhis2Id(),
@@ -341,4 +415,30 @@ export const testOptionSet = ({
     id,
     displayName,
     valueType,
+})
+
+export const testOption = ({
+    id = randomDhis2Id(),
+    name,
+    displayName,
+}: {
+    id?: string
+    name?: string
+    displayName?: string
+} = {}) => {
+    const optionName = name ?? faker.word.sample()
+    return {
+        id,
+        name: optionName,
+        displayName: displayName ?? optionName,
+    }
+}
+
+// TODO: change when schema for validationRule is available
+export const testValidationRule = ({
+    id = randomDhis2Id(),
+    displayName = faker.person.fullName(),
+} = {}) => ({
+    id,
+    displayName,
 })

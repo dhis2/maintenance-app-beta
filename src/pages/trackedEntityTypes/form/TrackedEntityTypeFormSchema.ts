@@ -5,10 +5,12 @@ const { identifiable, withDefaultListColumns, withAttributeValues } =
     modelFormSchemas
 
 const trackedEntityTypeBaseSchema = z.object({
+    name: z.string().trim(),
     shortName: z
         .string()
         .trim()
         .max(50, 'Please enter a maximum of 50 characters'),
+    code: z.string().trim().optional(),
     description: z.string().trim().optional(),
     formName: z.string().trim().optional(),
     style: z

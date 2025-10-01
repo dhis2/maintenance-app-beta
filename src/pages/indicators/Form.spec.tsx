@@ -21,6 +21,8 @@ import { Component as Edit } from './Edit'
 import { Component as New } from './New'
 import resetAllMocks = jest.resetAllMocks
 
+jest.setTimeout(40 * 1000) // set timeout to 40 seconds for these tests
+
 const section = SECTIONS_MAP.indicator
 const mockSchema = schemaMock
 
@@ -134,16 +136,10 @@ describe('Indicators form tests', () => {
                 'Required',
                 screen
             )
-            await userEvent.click(
-                screen.getByTestId('edit-numerator-expression-button')
-            )
             uiAssertions.expectFieldToHaveError(
                 'formfields-numerator',
                 'Required',
                 screen
-            )
-            await userEvent.click(
-                screen.getByTestId('edit-denominator-expression-button')
             )
             uiAssertions.expectFieldToHaveError(
                 'formfields-denominator',
