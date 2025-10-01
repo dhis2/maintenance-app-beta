@@ -28,7 +28,7 @@ import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGro
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
 import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
-import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form/TrackedEntityTypeFormSchema'
+import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form'
 import {
     CategoryMapping,
     DataElement,

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-02T07:50:19.234Z\n"
-"PO-Revision-Date: 2025-09-02T07:50:19.234Z\n"
+"POT-Creation-Date: 2025-10-01T15:14:19.972Z\n"
+"PO-Revision-Date: 2025-10-01T15:14:19.972Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -134,6 +134,16 @@ msgstr "Set up information for the attributes assigned to {{modelName}}."
 
 msgid "Code"
 msgstr "Code"
+
+msgid "Color and icon"
+msgstr "Color and icon"
+
+msgid ""
+"A color and icon are helpful for identifying items in information-dense "
+"screens."
+msgstr ""
+"A color and icon are helpful for identifying items in information-dense "
+"screens."
 
 msgid "Description"
 msgstr "Description"
@@ -1548,9 +1558,6 @@ msgstr "Disabled for the selected value type."
 
 msgid "Choose how this data element is disaggregated."
 msgstr "Choose how this data element is disaggregated."
-
-msgid "Color and icon"
-msgstr "Color and icon"
 
 msgid ""
 "A color and icon are helpful for identifying data elements in "
@@ -3200,3 +3207,56 @@ msgstr "Set up the program indicator legends."
 
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
+
+msgid "No attributes selected. Please select attributes in the transfer above."
+msgstr "No attributes selected. Please select attributes in the transfer above."
+
+msgid "Configure attributes"
+msgstr "Configure attributes"
+
+msgid ""
+"Choose which attributes to display, which are required, and which are "
+"searchable"
+msgstr ""
+"Choose which attributes to display, which are required, and which are "
+"searchable"
+
+msgid "Searchable"
+msgstr "Searchable"
+
+msgid "Mandatory"
+msgstr "Mandatory"
+
+msgid "Display in list"
+msgstr "Display in list"
+
+msgid "Available tracked entity attributes"
+msgstr "Available tracked entity attributes"
+
+msgid "Selected tracked entity attributes"
+msgstr "Selected tracked entity attributes"
+
+msgid "Search available attributes"
+msgstr "Search available attributes"
+
+msgid "Search selected attributes"
+msgstr "Search selected attributes"
+
+msgid "Maximum number of tracked entity instances to return when searching"
+msgstr "Maximum number of tracked entity instances to return when searching"
+
+msgid "Set up the basic information for this tracked entity type."
+msgstr "Set up the basic information for this tracked entity type."
+
+msgid ""
+"A color and icon are helpful for identifying tracked entity types in "
+"information-dense screens."
+msgstr ""
+"A color and icon are helpful for identifying tracked entity types in "
+"information-dense screens."
+
+msgid "Explain the purpose of this tracked entity type."
+msgstr "Explain the purpose of this tracked entity type."
+
+msgid "Choose and configure what data can be collected for this tracked entity type"
+msgstr "Choose and configure what data can be collected for this tracked entity type"
