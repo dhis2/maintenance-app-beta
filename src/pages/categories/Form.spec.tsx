@@ -91,7 +91,7 @@ describe('Categories form tests', () => {
             }
         )
 
-        /*it('should not submit when a required values is missing ', async () => {
+        it('should not submit when a required values is missing ', async () => {
             const { screen } = await renderForm()
             await uiActions.submitForm(screen)
             expect(createMock).not.toHaveBeenCalled()
@@ -197,7 +197,7 @@ describe('Categories form tests', () => {
             )
             await uiActions.submitForm(screen)
             expect(createMock).not.toHaveBeenCalled()
-        })*/
+        })
 
         it('not show an add all button for category options', async () => {
             const { screen } = await renderForm()
@@ -208,15 +208,191 @@ describe('Categories form tests', () => {
         })
     })
 
-    /*describe('New', () => {
-        it('contain all needed field', () => {})
-        it('should have a cancel button with a link back to the list view', () => {})
-        it('should submit the data', () => {})
+    describe('New', () => {
+        const renderForm = generateRenderer(
+            { section, mockSchema },
+            (
+                routeOptions,
+                { matchingExistingElementFilter = undefined } = {}
+            ) => {
+                const categoryOptions = [
+                    testCategoryOption(),
+                    testCategoryOption(),
+                ]
+                const screen = render(
+                    <TestComponentWithRouter
+                        path={`/${section.namePlural}`}
+                        customData={{
+                            categoryOptions: () => ({
+                                categoryOptions,
+                                pager: {},
+                            }),
+                            categories: (type: any, params: any) => {
+                                if (type === 'create') {
+                                    createMock(params)
+                                    return { statusCode: 204 }
+                                }
+                                if (type === 'read') {
+                                    if (
+                                        params?.params?.filter?.includes(
+                                            matchingExistingElementFilter
+                                        )
+                                    ) {
+                                        return {
+                                            pager: { total: 1 },
+                                            categories: [testCategoryForm()],
+                                        }
+                                    }
+                                    return {
+                                        pager: { total: 0 },
+                                        categories: [],
+                                    }
+                                }
+                            },
+                        }}
+                        routeOptions={routeOptions}
+                    >
+                        <New />
+                    </TestComponentWithRouter>
+                )
+                return { screen, categoryOptions }
+            }
+        )
+
+        it('contain all needed field', async () => {
+            const { screen } = await renderForm()
+            uiAssertions.expectNameFieldExist('', screen)
+            uiAssertions.expectInputFieldToExist('shortName', '', screen)
+        })
+
+        it('should have a cancel button with a link back to the list view', async () => {
+            const { screen } = await renderForm()
+            const cancelButton = screen.getByTestId('form-cancel-link')
+            expect(cancelButton).toBeVisible()
+            expect(cancelButton).toHaveAttribute(
+                'href',
+                `/${section.namePlural}`
+            )
+        })
+
+        it('should submit the data', async () => {
+            const { screen, categoryOptions } = await renderForm()
+            const aName = faker.person.firstName()
+            const aShortName = faker.person.lastName()
+
+            await uiActions.enterName(aName, screen)
+            await uiActions.enterInputFieldValue(
+                aShortName,
+                'shortName',
+                screen
+            )
+            await uiActions.pickOptionInTransfer(
+                'category-transfer',
+                categoryOptions[1].displayName,
+                screen
+            )
+
+            await uiActions.submitForm(screen)
+
+            expect(createMock).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    data: expect.objectContaining({
+                        name: aName,
+                        shortName: aShortName,
+                        categoryOptions: [
+                            expect.objectContaining({
+                                id: categoryOptions[0].id,
+                            }),
+                        ],
+                    }),
+                })
+            )
+        })
     })
 
     describe('Edit', () => {
-        it('contain all needed field prefilled', () => {})
-        it('should submit the data and return to the list view on success when a field is changed', () => {})
-        it('should do nothing and return to the list view on success when no field is changed', () => {})
-    })*/
+        const renderForm = generateRenderer(
+            { section, mockSchema },
+            (routeOptions) => {
+                const categoryOptions = [
+                    testCategoryOption(),
+                    testCategoryOption(),
+                ]
+                const categories = testCategoryForm()
+                categories.categoryOptions = [categoryOptions[0]]
+                const id = categories.id
+
+                const screen = render(
+                    <TestComponentWithRouter
+                        path={`/${section.namePlural}/:id`}
+                        initialEntries={[`/${section.namePlural}/${id}`]}
+                        customData={{
+                            categoryOptions: () => ({
+                                categoryOptions,
+                                pager: {},
+                            }),
+                            categories: (type: any, params: any) => {
+                                if (type === 'update') {
+                                    updateMock(params)
+                                    return { statusCode: 204 }
+                                }
+                                if (type === 'read' && params?.id) {
+                                    return { ...categories }
+                                }
+                                return {
+                                    pager: { total: 0 },
+                                    categories: [],
+                                }
+                            },
+                        }}
+                        routeOptions={routeOptions}
+                    >
+                        <Edit />
+                    </TestComponentWithRouter>
+                )
+                return { screen, categoryOptions, categories }
+            }
+        )
+
+        it('contain all needed field prefilled', async () => {
+            const { screen, categories } = await renderForm()
+
+            uiAssertions.expectNameFieldExist(categories.name, screen)
+            uiAssertions.expectInputFieldToExist(
+                'shortName',
+                categories.shortName,
+                screen
+            )
+        })
+
+        it('should submit the data and return to the list view on success when a field is changed', async () => {
+            const { screen, categories } = await renderForm()
+            const aCode = faker.string.alpha(5)
+
+            uiAssertions.expectNameFieldExist(categories.name, screen)
+            uiAssertions.expectInputFieldToExist(
+                'shortName',
+                categories.shortName,
+                screen
+            )
+
+            await uiActions.submitForm(screen)
+
+            expect(createMock).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    data: expect.objectContaining({
+                        name: categories.name,
+                        shortName: categories.shortName,
+                        code: aCode,
+                    }),
+                })
+            )
+        })
+
+        it('should do nothing and return to the list view on success when no field is changed', async () => {
+            const { screen } = await renderForm()
+            await uiActions.submitForm(screen)
+            expect(updateMock).not.toHaveBeenCalled()
+        })
+    })
 })
