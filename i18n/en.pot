@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-27T11:41:52.979Z\n"
-"PO-Revision-Date: 2025-09-27T11:41:52.979Z\n"
+"POT-Creation-Date: 2025-09-29T11:06:32.356Z\n"
+"PO-Revision-Date: 2025-09-29T11:06:32.356Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -3659,6 +3659,15 @@ msgstr "Set up the program indicator legends."
 
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
+
+msgid "Enrollment: Settings"
+msgstr "Enrollment: Settings"
+
+msgid "Enrollment: Data"
+msgstr "Enrollment: Data"
+
+msgid "Enrollment: Form"
+msgstr "Enrollment: Form"
 
 msgid "Notification details"
 msgstr "Notification details"
