@@ -35,6 +35,13 @@ export function AttributesTransferField() {
                 displayInList: teta.displayInList,
                 trackedEntityAttribute: teta.trackedEntityAttribute,
             })) || [],
+        parse: (value) =>
+            value?.map((item) => ({
+                mandatory: item.mandatory,
+                searchable: item.searchable,
+                displayInList: item.displayInList,
+                trackedEntityAttribute: item.trackedEntityAttribute,
+            })) || [],
         multiple: true,
         validateFields: [],
     })
