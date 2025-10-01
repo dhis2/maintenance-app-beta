@@ -5,10 +5,12 @@ import { useField } from 'react-final-form'
 import { ColorAndIconPicker } from '../../ColorAndIconPicker'
 
 type ColorAndIconFieldProps = {
-    helpText?: string
+    readonly helpText?: string
 }
 
-export function ColorAndIconField({ helpText }: ColorAndIconFieldProps) {
+export function ColorAndIconField({
+    helpText,
+}: Readonly<ColorAndIconFieldProps>) {
     const { input: colorInput } = useField('style.color', {
         validateFields: [],
     })

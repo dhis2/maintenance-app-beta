@@ -246,11 +246,11 @@ describe('Tracked entity types form tests', () => {
                 screen.getByTestId('formfields-attributes-transfer')
             ).toBeVisible()
 
-            attributes.forEach((attribute: { id: string }) => {
+            for (const attribute of attributes) {
                 expect(
                     screen.getByTestId(`attribute-${attribute.id}`)
                 ).toBeVisible()
-            })
+            }
         })
 
         it('should have a cancel button with a link back to the list view', async () => {
@@ -539,7 +539,7 @@ describe('Tracked entity types form tests', () => {
         it('contains attributes prefilled', async () => {
             const { screen, trackedEntityType, attributes } = await renderForm()
 
-            attributes.forEach((attribute: { id: string }) => {
+            for (const attribute of attributes) {
                 const attributeInput = screen.getByTestId(
                     `attribute-${attribute.id}`
                 )
@@ -549,7 +549,7 @@ describe('Tracked entity types form tests', () => {
                         within(attributeInput).getByTestId('dhis2-uicore-input')
                     ).getByRole('textbox')
                 ).toHaveValue(trackedEntityType.attributeValues[0].value)
-            })
+            }
         })
 
         it('should have a cancel button with a link back to the list view', async () => {

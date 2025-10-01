@@ -15,11 +15,11 @@ export function MaxTeiCountField() {
             label={i18n.t(
                 'Maximum number of tracked entity instances to return when searching'
             )}
-            format={(value: unknown) =>
-                (value as number | string | undefined)?.toString() || ''
-            }
+            format={(value: unknown) => value?.toString()}
             parse={(value: unknown) =>
-                value ? parseInt(String(value), 10) : 0
+                value !== undefined && value !== ''
+                    ? Number.parseInt(value as string, 10)
+                    : value
             }
         />
     )
