@@ -5,10 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-30T05:15:36.166Z\n"
-"PO-Revision-Date: 2025-09-30T05:15:36.166Z\n"
-"POT-Creation-Date: 2025-09-27T11:41:52.979Z\n"
-"PO-Revision-Date: 2025-09-27T11:41:52.979Z\n"
+"POT-Creation-Date: 2025-10-02T11:14:26.980Z\n"
+"PO-Revision-Date: 2025-10-02T11:14:26.981Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -448,6 +446,9 @@ msgstr "Category option"
 msgid "Category option group"
 msgstr "Category option group"
 
+msgid "Category option group set"
+msgstr "Category option group set"
+
 msgid "Type to filter options"
 msgstr "Type to filter options"
 
@@ -484,6 +485,12 @@ msgstr "Indicator group set"
 msgid "Indicator Type"
 msgstr "Indicator Type"
 
+msgid "Organisation unit group"
+msgstr "Organisation unit group"
+
+msgid "Organisation unit group set"
+msgstr "Organisation unit group set"
+
 msgid "Program"
 msgstr "Program"
 
@@ -495,6 +502,9 @@ msgstr "Program indicator group"
 
 msgid "Public access"
 msgstr "Public access"
+
+msgid "Validation rule group"
+msgstr "Validation rule group"
 
 msgid "Delete"
 msgstr "Delete"
@@ -637,9 +647,6 @@ msgstr "Category option combinations"
 msgid "Category option groups"
 msgstr "Category option groups"
 
-msgid "Category option group set"
-msgstr "Category option group set"
-
 msgid "Category option group sets"
 msgstr "Category option group sets"
 
@@ -682,14 +689,8 @@ msgstr "Organisation unit"
 msgid "Organisation units"
 msgstr "Organisation units"
 
-msgid "Organisation unit group"
-msgstr "Organisation unit group"
-
 msgid "Organisation unit groups"
 msgstr "Organisation unit groups"
-
-msgid "Organisation unit group set"
-msgstr "Organisation unit group set"
 
 msgid "Organisation unit group sets"
 msgstr "Organisation unit group sets"
@@ -750,9 +751,6 @@ msgstr "Validation rule"
 
 msgid "Validation rules"
 msgstr "Validation rules"
-
-msgid "Validation rule group"
-msgstr "Validation rule group"
 
 msgid "Validation rule groups"
 msgstr "Validation rule groups"
@@ -1722,18 +1720,6 @@ msgstr "Enter the numeric value to be used as the constant."
 
 msgid "Please enter a number"
 msgstr "Please enter a number"
-
-msgid "Set up the basic information for this constant."
-msgstr "Set up the basic information for this constant."
-
-msgid "Explain the purpose of this constant."
-msgstr "Explain the purpose of this constant."
-
-msgid "Value (required)"
-msgstr "Value (required)"
-
-msgid "Enter the numeric value to be used as the constant."
-msgstr "Enter the numeric value to be used as the constant."
 
 msgid "Available data element groups"
 msgstr "Available data element groups"
@@ -3631,6 +3617,15 @@ msgstr "Set up the program indicator legends."
 
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
+
+msgid "Enrollment: Settings"
+msgstr "Enrollment: Settings"
+
+msgid "Enrollment: Data"
+msgstr "Enrollment: Data"
+
+msgid "Enrollment: Form"
+msgstr "Enrollment: Form"
 
 msgid "Notification details"
 msgstr "Notification details"
