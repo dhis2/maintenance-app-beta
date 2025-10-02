@@ -201,7 +201,7 @@ export const modelListViewsConfig = {
             default: [DESCRIPTORS.name, 'code', 'lastUpdated'],
         },
         filters: {
-            default: ['organisationUnitGroup'],
+            default: [],
             overrideDefaultAvailable: true,
         },
     },
@@ -675,6 +675,14 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {},
+    },
+    validationRule: {
+        columns: {
+            available: [],
+        },
+        filters: {
+            default: ['validationRuleGroup'],
+        },
     },
     validationRuleGroup: {
         columns: {

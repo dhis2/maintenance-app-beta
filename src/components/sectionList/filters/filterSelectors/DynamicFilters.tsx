@@ -30,6 +30,7 @@ import {
     ProgramIndicatorGroupFilter,
     OrganisationUnitGroupFilter,
     OrganisationUnitGroupSetFilter,
+    ValidationRuleGroupFilter,
 } from '.'
 
 type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
@@ -63,11 +64,11 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
     programIndicatorGroup: ProgramIndicatorGroupFilter,
     publicAccess: PublicAccessFilter,
     valueType: ValueTypeSelectionFilter,
+    validationRuleGroup: ValidationRuleGroupFilter,
 }
 
 export const DynamicFilters = () => {
     const filterKeys = useFilterKeys()
-    console.log(filterKeys)
 
     return (
         <>
