@@ -19,6 +19,7 @@ export const filterParamsSchema = z
         categoryCombo: zodArrayIds,
         categoryOption: zodArrayIds,
         categoryOptionGroup: zodArrayIds,
+        categoryOptionGroupSet: zodArrayIds,
         compulsory: z.boolean(),
         dataDimension: z.boolean(),
         dataDimensionType: z.nativeEnum(Category.dataDimensionType),
@@ -33,12 +34,15 @@ export const filterParamsSchema = z
         indicatorType: zodArrayIds,
         indicatorGroup: zodArrayIds,
         indicatorGroupSet: zodArrayIds,
+        organisationUnitGroup: zodArrayIds,
+        organisationUnitGroupSet: zodArrayIds,
         publicAccess: z.array(
             z.string().refine((val) => parseAccessString(val) !== null)
         ),
         program: zodArrayIds,
         programIndicator: zodArrayIds,
         programIndicatorGroup: zodArrayIds,
+        validationRuleGroup: zodArrayIds,
         valueType: z.array(z.nativeEnum(DataElement.valueType)),
     })
     .partial()
@@ -53,6 +57,7 @@ export const filterQueryParamType = {
     categoryCombo: CustomDelimitedArrayParam,
     categoryOption: CustomDelimitedArrayParam,
     categoryOptionGroup: CustomDelimitedArrayParam,
+    categoryOptionGroupSet: CustomDelimitedArrayParam,
     compulsory: BooleanParam,
     dataDimension: BooleanParam,
     dataDimensionType: StringParam,
@@ -67,10 +72,13 @@ export const filterQueryParamType = {
     indicatorType: CustomDelimitedArrayParam,
     indicatorGroup: CustomDelimitedArrayParam,
     indicatorGroupSet: CustomDelimitedArrayParam,
+    organisationUnitGroup: CustomDelimitedArrayParam,
+    organisationUnitGroupSet: CustomDelimitedArrayParam,
     publicAccess: CustomDelimitedArrayParam,
     program: CustomDelimitedArrayParam,
     programIndicator: CustomDelimitedArrayParam,
     programIndicatorGroup: CustomDelimitedArrayParam,
+    validationRuleGroup: CustomDelimitedArrayParam,
     valueType: CustomDelimitedArrayParam,
 } as const satisfies QueryParamsConfigMap
 
