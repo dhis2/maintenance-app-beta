@@ -1,3 +1,10 @@
+## [0.77.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.77.2...v0.77.3) (2025-10-03)
+
+
+### Bug Fixes
+
+* warn when changing data element value type [DHIS2-18151] ([#639](https://github.com/dhis2/maintenance-app-beta/issues/639)) ([e47284c](https://github.com/dhis2/maintenance-app-beta/commit/e47284c8d66175bd5fada7fd8d3ac79695eb2795))
+
 ## [0.77.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.77.1...v0.77.2) (2025-10-03)
 
 
