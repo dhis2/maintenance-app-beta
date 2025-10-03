@@ -6,6 +6,7 @@ export { validate, createFormValidate } from './validate'
 export {
     useOnSubmitEdit,
     useOnSubmitNew,
+    useOnEditCompletedSuccessfully,
     defaultValueFormatter,
 } from './useOnSubmit'
 export { modelFormSchemas } from './modelFormSchemas'
