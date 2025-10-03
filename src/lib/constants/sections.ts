@@ -91,15 +91,6 @@ export const SCHEMA_SECTIONS = {
         titlePlural: i18n.t('Data sets'),
         parentSectionKey: 'dataSet',
     },
-    // @ts-expect-error temporary route for testing
-    dataSetWIP: {
-        name: SchemaName.dataSet,
-        routeName: 'dataSetsWip',
-        namePlural: 'dataSets',
-        title: i18n.t('Data set'),
-        titlePlural: i18n.t('Data sets'),
-        parentSectionKey: 'dataSet',
-    },
     dataSetNotificationTemplate: {
         name: SchemaName.dataSetNotificationTemplate,
         namePlural: 'dataSetNotificationTemplates',
@@ -179,6 +170,15 @@ export const SCHEMA_SECTIONS = {
     },
     program: {
         name: SchemaName.program,
+        namePlural: 'programs',
+        title: i18n.t('Program'),
+        titlePlural: i18n.t('Programs'),
+        parentSectionKey: 'programsAndTracker',
+    },
+    // @ts-expect-error temporary route for testing
+    programWIP: {
+        name: SchemaName.program,
+        routeName: 'programsWip',
         namePlural: 'programs',
         title: i18n.t('Program'),
         titlePlural: i18n.t('Programs'),
@@ -330,6 +330,34 @@ export const SCHEMA_SECTIONS = {
         namePlural: 'legendSets',
         title: i18n.t('Legend'),
         titlePlural: i18n.t('Legends'),
+        parentSectionKey: 'other',
+    },
+    analyticsTableHook: {
+        name: SchemaName.analyticsTableHook,
+        namePlural: 'analyticsTableHooks',
+        title: i18n.t('Analytics table hook'),
+        titlePlural: i18n.t('Analytics table hooks'),
+        parentSectionKey: 'other',
+    },
+    icon: {
+        name: SchemaName.icon,
+        namePlural: 'icons',
+        title: i18n.t('Icon'),
+        titlePlural: i18n.t('Icons'),
+        parentSectionKey: 'other',
+    },
+    legend: {
+        name: SchemaName.legend,
+        namePlural: 'legends',
+        title: i18n.t('Legend'),
+        titlePlural: i18n.t('Legends'),
+        parentSectionKey: 'other',
+    },
+    predictorGroup: {
+        name: SchemaName.predictorGroup,
+        namePlural: 'predictorGroups',
+        title: i18n.t('Predictor group'),
+        titlePlural: i18n.t('Predictor groups'),
         parentSectionKey: 'other',
     },
 } as const satisfies SchemaSectionMap

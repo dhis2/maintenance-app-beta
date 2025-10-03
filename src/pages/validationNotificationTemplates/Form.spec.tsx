@@ -30,7 +30,7 @@ jest.mock('use-debounce', () => ({
     useDebouncedCallback: (fn: any) => fn,
 }))
 
-describe('Validation Notifcation form tests', () => {
+describe('Validation Notification form tests', () => {
     const createMock = jest.fn()
     const updateMock = jest.fn()
     beforeEach(() => {
@@ -347,11 +347,11 @@ describe('Validation Notifcation form tests', () => {
                 screen
             )
 
-            await uiAssertions.expectTransferFieldToExistWithOptions(
-                'recipientUserGroups-transfer',
+            await uiAssertions.expectMultiSelectToExistWithOptions(
+                screen.getByTestId('formfields-recipientUserGroups'),
                 {
-                    lhs: userGroups,
-                    rhs: [],
+                    selected: [],
+                    options: userGroups,
                 },
                 screen
             )
@@ -420,11 +420,14 @@ describe('Validation Notifcation form tests', () => {
                 notificationOptionIndex,
                 screen
             )
-            await uiActions.pickOptionInTransfer(
-                'recipientUserGroups-transfer',
-                userGroups[1].displayName,
+
+            const userGroupToSelectIndices = [1]
+            await uiActions.pickOptionFromMultiSelect(
+                screen.getByTestId('formfields-recipientUserGroups'),
+                userGroupToSelectIndices,
                 screen
             )
+
             await uiActions.clickOnCheckboxField(
                 'notifyUsersInHierarchyOnly',
                 screen
@@ -555,14 +558,15 @@ describe('Validation Notifcation form tests', () => {
                 screen
             )
 
-            await uiAssertions.expectTransferFieldToExistWithOptions(
-                'recipientUserGroups-transfer',
+            await uiAssertions.expectMultiSelectToExistWithOptions(
+                screen.getByTestId('formfields-recipientUserGroups'),
                 {
-                    lhs: [userGroups[1]],
-                    rhs: [userGroups[0]],
+                    selected: [userGroups[0]],
+                    options: userGroups,
                 },
                 screen
             )
+
             const notificationTypeOptions = [
                 { displayName: 'Collective summary' },
                 { displayName: 'Single notification' },

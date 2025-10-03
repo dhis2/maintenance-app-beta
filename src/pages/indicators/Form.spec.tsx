@@ -136,16 +136,10 @@ describe('Indicators form tests', () => {
                 'Required',
                 screen
             )
-            await userEvent.click(
-                screen.getByTestId('edit-numerator-expression-button')
-            )
             uiAssertions.expectFieldToHaveError(
                 'formfields-numerator',
                 'Required',
                 screen
-            )
-            await userEvent.click(
-                screen.getByTestId('edit-denominator-expression-button')
             )
             uiAssertions.expectFieldToHaveError(
                 'formfields-denominator',

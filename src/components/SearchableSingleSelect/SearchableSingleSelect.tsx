@@ -163,6 +163,7 @@ export const SearchableSingleSelect = ({
                             }
                             placeholder={i18n.t('Filter options')}
                             type="search"
+                            width={'400px'}
                         />
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import { z } from 'zod'
-import { modelFormSchemas } from '../../../lib'
+import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 
-const { withDefaultListColumns } = modelFormSchemas
+const { withDefaultListColumns, identifiable } = modelFormSchemas
 
 const validationRuleGroupsBaseSchema = z.object({
     code: z.string().trim().optional(),
@@ -11,3 +11,19 @@ const validationRuleGroupsBaseSchema = z.object({
 
 export const validationRuleGroupsListSchema =
     validationRuleGroupsBaseSchema.merge(withDefaultListColumns)
+
+export const validationRuleGroupsFormSchema = validationRuleGroupsBaseSchema
+    .merge(identifiable)
+    .extend({
+        validationRules: z
+            .array(
+                z.object({
+                    id: z.string().optional(),
+                })
+            )
+            .optional()
+            .default([]),
+    })
+
+export const initialValues = getDefaults(validationRuleGroupsFormSchema)
+export const validate = createFormValidate(validationRuleGroupsFormSchema)

@@ -15,6 +15,15 @@ export const DISABLING_VALUE_TYPES = [
     'USERNAME',
     'FILE_RESOURCE',
     'COORDINATE',
+    'DATE',
+    'DATETIME',
+    'TIME',
+    'ORGANISATION_UNIT',
+    'REFERENCE',
+    'AGE',
+    'URL',
+    'IMAGE',
+    'GEOJSON',
 ]
 
 /**

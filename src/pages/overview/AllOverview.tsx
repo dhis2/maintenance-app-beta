@@ -7,6 +7,7 @@ import { OverviewGroup } from './group'
 import { IndicatorsCardGroup } from './Indicators'
 import { OrganisationUnitsCardGroup } from './OrganisationUnits'
 import { OtherCardGroup } from './Other'
+import { ProgramsAndTrackersCardGroup } from './ProgramsAndTracker'
 import { ValidationsCardGroup } from './Validations'
 
 export const AllOverview = () => {
@@ -18,6 +19,7 @@ export const AllOverview = () => {
             <IndicatorsCardGroup showTitle={true} />
             <OrganisationUnitsCardGroup showTitle={true} />
             <ValidationsCardGroup showTitle={true} />
+            <ProgramsAndTrackersCardGroup showTitle={true} />
             <OtherCardGroup showTitle={true} />
         </OverviewGroup>
     )

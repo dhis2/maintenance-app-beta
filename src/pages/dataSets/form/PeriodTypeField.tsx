@@ -4,6 +4,7 @@ import React from 'react'
 import { useField } from 'react-final-form'
 import { ConfirmationModalWrapper } from '../../../components'
 import { PeriodTypeSelect } from '../../../components/metadataFormControls/PeriodTypeSelect/PeriodTypeSelect'
+import classes from './PeriodTypeField.module.css'
 
 export function PeriodTypeField() {
     const { input, meta } = useField('periodType')
@@ -26,6 +27,7 @@ export function PeriodTypeField() {
             label={i18n.t('Period type')}
             error={meta.touched && !!meta.error}
             validationText={meta.touched ? meta.error : undefined}
+            className={classes.periodTypeSelect}
         >
             <ConfirmationModalWrapper
                 onChange={input.onChange}
