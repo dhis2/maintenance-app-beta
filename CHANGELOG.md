@@ -1,3 +1,10 @@
+## [0.77.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.77.1...v0.77.2) (2025-10-03)
+
+
+### Bug Fixes
+
+* add property for edit ([#655](https://github.com/dhis2/maintenance-app-beta/issues/655)) ([48daf96](https://github.com/dhis2/maintenance-app-beta/commit/48daf96b3eac760f725cf674b5b2b9f835f3483c))
+
 ## [0.77.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.77.0...v0.77.1) (2025-09-30)
 
 
