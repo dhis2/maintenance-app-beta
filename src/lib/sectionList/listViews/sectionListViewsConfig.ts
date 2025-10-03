@@ -460,6 +460,7 @@ export const modelListViewsConfig = {
                 'filter',
                 'aggregateExportCategoryOptionCombo',
                 'aggregateExportAttributeOptionCombo',
+                'aggregateExportDataElement',
             ],
         },
         filters: {
