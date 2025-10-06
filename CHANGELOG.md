@@ -1,3 +1,10 @@
+# [0.78.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.77.3...v0.78.0) (2025-10-06)
+
+
+### Features
+
+* add default group filters [DHIS2-20191] ([#658](https://github.com/dhis2/maintenance-app-beta/issues/658)) ([1d46aff](https://github.com/dhis2/maintenance-app-beta/commit/1d46aff84599254ad334e75f6ca656e701c2f9d1))
+
 ## [0.77.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.77.2...v0.77.3) (2025-10-03)
 
 
