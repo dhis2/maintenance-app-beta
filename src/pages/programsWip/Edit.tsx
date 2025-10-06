@@ -20,7 +20,11 @@ import { PickWithFieldFilters, Program } from '../../types/generated'
 import { ProgramFormDescriptor } from './form/formDescriptor'
 import { ProgramFormContents } from './form/ProgramFormContents'
 
-const fieldFilters = [] as const
+const fieldFilters = [
+    'dataEntryForm',
+    'programSections',
+    'programTrackedEntityAttributes',
+] as const
 
 export type ProgramsFromFilters = PickWithFieldFilters<
     Program,
