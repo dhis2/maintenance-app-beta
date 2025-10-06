@@ -113,7 +113,13 @@ export const modelListViewsConfig = {
         },
         filters: {
             available: ['formName'],
-            default: ['domainType', 'valueType', 'dataSet', 'categoryCombo'],
+            default: [
+                'domainType',
+                'valueType',
+                'dataSet',
+                'categoryCombo',
+                'dataElementGroup',
+            ],
         },
     },
     dataElementGroup: {
@@ -226,7 +232,7 @@ export const modelListViewsConfig = {
             default: [DESCRIPTORS.name, 'code', 'lastUpdated'],
         },
         filters: {
-            default: [],
+            default: ['organisationUnitGroupSet'],
             overrideDefaultAvailable: true,
         },
     },
@@ -306,10 +312,10 @@ export const modelListViewsConfig = {
                 DESCRIPTORS.publicAccess,
                 'lastUpdated',
             ],
-            available: [DESCRIPTORS.shortName, 'indicatorGroup'],
+            available: [DESCRIPTORS.shortName],
         },
         filters: {
-            default: ['indicatorType'],
+            default: ['indicatorType', 'indicatorGroup'],
         },
     },
     indicatorType: {
@@ -339,6 +345,7 @@ export const modelListViewsConfig = {
                 DESCRIPTORS.name,
                 DESCRIPTORS.publicAccess,
                 'lastUpdated',
+                'indicatorGroupSet',
             ],
             available: [
                 { label: i18n.t('Owner'), path: 'user.displayName' },
@@ -346,8 +353,7 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            default: ['indicator'],
-            available: ['indicatorGroupSet'],
+            default: ['indicator', 'indicatorGroupSet'],
         },
     },
     indicatorGroupSet: {
@@ -393,7 +399,7 @@ export const modelListViewsConfig = {
             available: [DESCRIPTORS.shortName],
         },
         filters: {
-            default: ['dataDimensionType'],
+            default: ['dataDimensionType', 'categoryOptionGroupSet'],
         },
     },
     categoryCombo: {
@@ -669,6 +675,14 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {},
+    },
+    validationRule: {
+        columns: {
+            available: [],
+        },
+        filters: {
+            default: ['validationRuleGroup'],
+        },
     },
     validationRuleGroup: {
         columns: {
