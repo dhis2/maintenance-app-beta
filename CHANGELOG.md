@@ -1,3 +1,10 @@
+## [0.78.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.78.0...v0.78.1) (2025-10-07)
+
+
+### Bug Fixes
+
+* add aggregateExportDataElement into list ([#651](https://github.com/dhis2/maintenance-app-beta/issues/651)) ([5ef694a](https://github.com/dhis2/maintenance-app-beta/commit/5ef694ae076cdd65c0306c8b245d009317645cd3))
+
 # [0.78.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.77.3...v0.78.0) (2025-10-06)
 
 
