@@ -530,6 +530,35 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    dataApprovalLevel: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Level'), path: 'level' },
+                {
+                    label: i18n.t('Organisation unit level'),
+                    path: 'orgUnitLevel',
+                },
+                {
+                    label: i18n.t('Category option group set'),
+                    path: 'categoryOptionGroupSet',
+                },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'description',
+                'code',
+                'id',
+                'created',
+                'lastUpdatedBy',
+                DESCRIPTORS.name,
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+        },
+        filters: {},
+    },
     attribute: {
         columns: {
             default: [
