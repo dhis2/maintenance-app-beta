@@ -529,6 +529,35 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    analyticsTableHook: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+                { label: i18n.t('SQL'), path: 'sql' },
+                {
+                    label: i18n.t('Which analytics table'),
+                    path: 'analyticsTableType',
+                },
+                {
+                    label: i18n.t('Which resource table'),
+                    path: 'resourceTableType',
+                },
+                {
+                    label: i18n.t(
+                        'After population of which temporary tables should the SQL script be invoked?'
+                    ),
+                    path: 'phase',
+                },
+            ],
+        },
+        filters: {},
+    },
     attribute: {
         columns: {
             default: [
