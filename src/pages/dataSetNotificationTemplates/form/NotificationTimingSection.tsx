@@ -93,7 +93,7 @@ export const NotificationTimingSection = () => {
                                 parse={(value) => {
                                     const parsed = parseInt(value ?? '', 10)
                                     if (isNaN(parsed)) {
-                                        return undefined
+                                        return '0'
                                     }
                                     const signed =
                                         beforeAfter === 'BEFORE'
@@ -101,7 +101,6 @@ export const NotificationTimingSection = () => {
                                             : parsed
                                     return String(signed)
                                 }}
-                                required
                             />
 
                             <span>{i18n.t('days')}</span>

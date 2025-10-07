@@ -26,7 +26,7 @@ const dataSetNotificationTemplateBaseSchema = z.object({
             ),
         })
         .optional(),
-    relativeScheduledDays: z.union([z.string(), z.number()]).optional(),
+    relativeScheduledDays: z.number().int().optional(),
     recipientUserGroup: z
         .object({
             id: z.string(),
@@ -86,7 +86,10 @@ export const transformFormValues = <
 
     return {
         ...rest,
-        relativeScheduledDays: Number(relativeScheduledDays),
+        relativeScheduledDays:
+            rest.dataSetNotificationTrigger === 'SCHEDULED_DAYS'
+                ? Number(relativeScheduledDays)
+                : undefined,
         recipientUserGroup:
             rest.notificationRecipient === 'USER_GROUP' && recipientUserGroup
                 ? { id: recipientUserGroup.id }
