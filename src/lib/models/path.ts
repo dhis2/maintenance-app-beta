@@ -84,3 +84,12 @@ export const getFieldFilter = (schema: Schema, path: string) => {
 
     return getFieldFilterFromPath(path)
 }
+
+export const formatEnumValue = (value: string): string => {
+    if (!value || typeof value !== 'string') {
+        return value
+    }
+
+    const spaced = value.replace(/_/g, ' ').toLowerCase()
+    return spaced.replace(/\b\w/g, (char) => char.toUpperCase())
+}

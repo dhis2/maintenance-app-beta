@@ -6,6 +6,7 @@ import {
     getIn,
     stringToPathArray,
 } from '../../../lib'
+import { formatEnumValue } from '../../../lib/models/path'
 import { ModelValueRenderer } from './ModelValueRenderer'
 
 type ModelValueProps = {
@@ -48,7 +49,7 @@ export const ModelValue = ({ schema, path, sectionModel }: ModelValueProps) => {
         <ErrorBoundary FallbackComponent={ModelValueError}>
             <ModelValueRenderer
                 path={path}
-                value={value}
+                value={formatEnumValue(value)}
                 schemaProperty={schemaProperty}
             />
         </ErrorBoundary>
