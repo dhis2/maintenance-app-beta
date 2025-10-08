@@ -1,3 +1,11 @@
+# [0.79.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.78.1...v0.79.0) (2025-10-08)
+
+
+### Features
+
+* add programs form type scaffholding ([#659](https://github.com/dhis2/maintenance-app-beta/issues/659)) [skip release] ([fa4cb4e](https://github.com/dhis2/maintenance-app-beta/commit/fa4cb4ecfc7a127de055915f015835d97ab990da))
+* program details fields ([#662](https://github.com/dhis2/maintenance-app-beta/issues/662)) ([f327bb2](https://github.com/dhis2/maintenance-app-beta/commit/f327bb2500428caba8f02477dc1c7414e45ea6df))
+
 ## [0.78.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.78.0...v0.78.1) (2025-10-07)
 
 
