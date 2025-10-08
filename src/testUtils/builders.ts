@@ -17,6 +17,7 @@ import { categoryOptionGroupListSchema } from '../pages/categoryOptionGroups/for
 import { categoryOptionGroupSetListSchema } from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
 import { categoryOptionListSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
 import { ConstantsListSchema } from '../pages/constants/form/ConstantFormSchema'
+import { dataApprovalLevelListSchema } from '../pages/dataApprovalLevels/form/dataApprovalLevelsSchema'
 import { dataElementGroupListSchema } from '../pages/dataElementGroups/form/dataElementGroupSchema'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementListSchema } from '../pages/dataElements/form/dataElementSchema'
@@ -253,6 +254,13 @@ export const testProgramIndicator = (overwrites: Record<any, any> = {}) => ({
 
 export const testAttributeList = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(attributeListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testdataApprovalLevelList = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(dataApprovalLevelListSchema, { mockeryMapper }),
     ...overwrites,
 })
 
