@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-10-02T11:14:26.980Z\n"
-"PO-Revision-Date: 2025-10-02T11:14:26.981Z\n"
+"POT-Creation-Date: 2025-10-07T19:30:33.719Z\n"
+"PO-Revision-Date: 2025-10-07T19:30:33.719Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -113,6 +113,15 @@ msgstr "Filter options"
 
 msgid "Retry"
 msgstr "Retry"
+
+msgid "Change this field"
+msgstr "Change this field"
+
+msgid "Are you sure you want to change this?"
+msgstr "Are you sure you want to change this?"
+
+msgid "Yes, change"
+msgstr "Yes, change"
 
 msgid "Required"
 msgstr "Required"
@@ -1145,6 +1154,9 @@ msgstr "Category option combination for aggregate data export"
 msgid "Attribute option combination for aggregate data export"
 msgstr "Attribute option combination for aggregate data export"
 
+msgid "Data element for aggregate data export"
+msgstr "Data element for aggregate data export"
+
 msgid "Analytics type"
 msgstr "Analytics type"
 
@@ -1815,6 +1827,28 @@ msgstr "Choose a set of predefined comments for data entry."
 msgid "Choose a set of predefined options for data entry."
 msgstr "Choose a set of predefined options for data entry."
 
+msgid "Option set update will change value type"
+msgstr "Option set update will change value type"
+
+msgid ""
+"Updating the option set will change the value type which may cause problems "
+"when generating analytics tables if there is existing data for this data "
+"element."
+msgstr ""
+"Updating the option set will change the value type which may cause problems "
+"when generating analytics tables if there is existing data for this data "
+"element."
+
+msgid ""
+"Are you sure you want to change the option set to {{optionSet}} which will "
+"change the value type from {{currentValueType}} to {{newValueType}}?"
+msgstr ""
+"Are you sure you want to change the option set to {{optionSet}} which will "
+"change the value type from {{currentValueType}} to {{newValueType}}?"
+
+msgid "this option set"
+msgstr "this option set"
+
 msgid "Url"
 msgstr "Url"
 
@@ -1823,6 +1857,29 @@ msgstr "A web link that provides extra information."
 
 msgid "The type of data that will be recorded."
 msgstr "The type of data that will be recorded."
+
+msgid "Change value type"
+msgstr "Change value type"
+
+msgid ""
+"Changing the value type may cause problems when generating analytics tables "
+"if there is existing data for this data element."
+msgstr ""
+"Changing the value type may cause problems when generating analytics tables "
+"if there is existing data for this data element."
+
+msgid ""
+"Are you sure you want to change the {{objectType}} to "
+"{{newObjectTypeValue}}?"
+msgstr ""
+"Are you sure you want to change the {{objectType}} to "
+"{{newObjectTypeValue}}?"
+
+msgid "value type"
+msgstr "value type"
+
+msgid "undefined"
+msgstr "undefined"
 
 msgid "Store zero data values"
 msgstr "Store zero data values"
@@ -2140,18 +2197,8 @@ msgstr ""
 "Changing the period type will make previously entered data for this data "
 "set not appear in the data entry app. This can lead to duplicate data entry."
 
-msgid ""
-"Are you sure you want to change the period type to "
-"{{preselectedPeriodType}}?"
-msgstr ""
-"Are you sure you want to change the period type to "
-"{{preselectedPeriodType}}?"
-
-msgid "Yes, change"
-msgstr "Yes, change"
-
-msgid "Period type (required)"
-msgstr "Period type (required)"
+msgid "period type"
+msgstr "period type"
 
 msgid "Configure data entry periods"
 msgstr "Configure data entry periods"
@@ -3430,9 +3477,6 @@ msgstr "Remove program indicator mapping"
 
 msgid "Attribute category combination"
 msgstr "Attribute category combination"
-
-msgid "Data element for aggregate data export"
-msgstr "Data element for aggregate data export"
 
 msgid "There are some invalid expressions"
 msgstr "There are some invalid expressions"
