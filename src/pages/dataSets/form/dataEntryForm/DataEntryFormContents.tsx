@@ -31,7 +31,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
     const dataSetElements = useDataSetField('dataSetElements').input.value
     const modelId = useParams().id
     const isCreatingNewDataSet = !modelId
-    const [selectedFormType, setSelectedFormType] = useState<DataSet.formType>(
+    const [selectedFormType, setSelectedFormType] = useState<formType>(
         formType.DEFAULT
     )
     const androidFormType =
