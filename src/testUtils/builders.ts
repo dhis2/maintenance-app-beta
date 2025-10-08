@@ -6,6 +6,7 @@ import {
     UserGroupSchema,
     UserSchema,
 } from '../lib/form/modelFormSchemas'
+import { analyticsTableHookListSchema } from '../pages/analyticsTableHooks/form/analyticsTableHooksSchema'
 import {
     attributeListSchema,
     attributeFormSchema,
@@ -253,6 +254,13 @@ export const testProgramIndicator = (overwrites: Record<any, any> = {}) => ({
 
 export const testAttributeList = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(attributeListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testanalyticsTableHookList = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(analyticsTableHookListSchema, { mockeryMapper }),
     ...overwrites,
 })
 
