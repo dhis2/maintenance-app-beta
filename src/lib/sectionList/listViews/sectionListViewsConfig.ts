@@ -537,6 +537,7 @@ export const modelListViewsConfig = {
                 'lastUpdated',
             ],
             available: [
+                'href',
                 { label: i18n.t('Favorite'), path: 'favorite' },
                 { label: i18n.t('Owner'), path: 'user.displayName' },
                 { label: i18n.t('SQL'), path: 'sql' },

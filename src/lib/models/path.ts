@@ -89,7 +89,6 @@ export const formatEnumValue = (value: string): string => {
     if (!value || typeof value !== 'string') {
         return value
     }
-
-    const spaced = value.replace(/_/g, ' ').toLowerCase()
+    const spaced = value.replaceAll('_', ' ').toLowerCase()
     return spaced.replace(/\b\w/g, (char) => char.toUpperCase())
 }
