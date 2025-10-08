@@ -72,12 +72,16 @@ const expectRadioFieldToExist = (
 const expectInputFieldToHaveError = (
     fieldTestId: string,
     errorText: string,
-    screen: RenderResult
+    screen: RenderResult,
+    options?: { skipClassCheck?: boolean }
 ) => {
     const field = screen.getByTestId(fieldTestId)
     const error = within(field).getByTestId(`${fieldTestId}-validation`)
     expect(error).toBeVisible()
-    expect(error).toHaveClass('error')
+    if (!options?.skipClassCheck) {
+        expect(error).toHaveClass('error')
+    }
+
     expect(error).toHaveTextContent(errorText)
 }
 
@@ -210,13 +214,15 @@ const expectMultiSelectToExistWithOptions = async (
 const expectInputToErrorWhenExceedsLength = async (
     fieldName: string,
     maxLength: number,
-    screen: RenderResult
+    screen: RenderResult,
+    options?: { skipClassCheck: boolean }
 ) => {
     await userEvent.click(screen.getByTestId(`formfields-${fieldName}-label`))
     expectInputFieldToHaveError(
         `formfields-${fieldName}`,
         `Please enter a maximum of ${maxLength} characters`,
-        screen
+        screen,
+        options
     )
 }
 
