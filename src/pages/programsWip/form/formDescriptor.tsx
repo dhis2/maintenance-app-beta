@@ -8,7 +8,7 @@ export const ProgramFormDescriptor = {
     sections: [
         {
             name: 'setup',
-            label: i18n.t('Setup'),
+            label: i18n.t('Program Details'),
             fields: [{ name: 'name', label: i18n.t('Name') }],
         },
         {

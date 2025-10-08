@@ -17,10 +17,20 @@ import {
     useOnSubmitEdit,
 } from '../../lib'
 import { PickWithFieldFilters, Program } from '../../types/generated'
+import { validate } from './form'
 import { ProgramFormDescriptor } from './form/formDescriptor'
 import { ProgramFormContents } from './form/ProgramFormContents'
 
 const fieldFilters = [
+    'name',
+    'shortName',
+    'code',
+    'description',
+    'version',
+    'featureType',
+    'relatedProgram[id,displayName]',
+    'categoryCombo[id,displayName]',
+    'lastUpdated',
     'dataEntryForm',
     'programSections',
     'programTrackedEntityAttributes',
@@ -56,6 +66,7 @@ export const Component = () => {
             initialValues={program.data}
             subscription={{}}
             mutators={{ ...arrayMutators }}
+            validate={validate}
         >
             {({ handleSubmit }) => {
                 return (
