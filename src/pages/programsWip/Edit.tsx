@@ -31,6 +31,9 @@ const fieldFilters = [
     'relatedProgram[id,displayName]',
     'categoryCombo[id,displayName]',
     'lastUpdated',
+    'dataEntryForm',
+    'programSections',
+    'programTrackedEntityAttributes',
 ] as const
 
 export type ProgramsFromFilters = PickWithFieldFilters<
