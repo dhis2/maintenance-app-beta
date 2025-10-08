@@ -549,6 +549,7 @@ export const modelListViewsConfig = {
             available: [
                 'description',
                 'code',
+                'href',
                 'id',
                 'created',
                 'lastUpdatedBy',
