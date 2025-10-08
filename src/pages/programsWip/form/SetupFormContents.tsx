@@ -10,6 +10,8 @@ import {
     EditableFieldWrapper,
     SectionedFormSection,
     StandardFormField,
+    StandardFormSectionDescription,
+    StandardFormSectionTitle,
 } from '../../../components'
 import { defaultDateTimeFormatter } from '../../../components/date'
 import {
@@ -75,6 +77,12 @@ export const SetupFormContents = React.memo(function SetupFormContents({
 
     return (
         <SectionedFormSection name={name}>
+            <StandardFormSectionTitle>
+                {i18n.t('Program Details')}
+            </StandardFormSectionTitle>
+            <StandardFormSectionDescription>
+                {i18n.t('Set up the basic information for this program.')}
+            </StandardFormSectionDescription>
             <DefaultIdentifiableFields />
             <StandardFormField>
                 <DescriptionField />
