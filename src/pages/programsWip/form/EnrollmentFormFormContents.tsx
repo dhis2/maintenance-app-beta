@@ -8,10 +8,13 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
+import { SectionFormSectionsList } from '../../../components/formCreators/SectionFormList'
 import { TooltipWrapper } from '../../../components/tooltip'
+import { SchemaName } from '../../../types'
 import { DataSet } from '../../../types/generated'
 import { ProgramsFromFilters } from '../Edit'
 import classes from './EnrollmentFormFormContent.module.css'
+import { EditOrNewEnrollmentSectionForm } from './sectionForm/EntrollmentSectionForm'
 import formType = DataSet.formType
 
 const disabledFormTypeText = i18n.t(
@@ -163,7 +166,13 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                 </TabBar>
             </div>
             <div className={classes.formTypeTabsContent}>
-                {selectedFormType === formType.SECTION && <>TODO</>}
+                {selectedFormType === formType.SECTION && (
+                    <SectionFormSectionsList
+                        sectionsFieldName={'programSections'}
+                        SectionFormComponent={EditOrNewEnrollmentSectionForm}
+                        schemaName={SchemaName.programSection}
+                    />
+                )}
                 {selectedFormType === formType.CUSTOM && <>TODO</>}
             </div>
         </SectionedFormSection>

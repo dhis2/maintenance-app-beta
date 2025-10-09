@@ -7,14 +7,16 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../components'
+import { SectionFormSectionsList } from '../../../../components/formCreators/SectionFormList'
 import { SectionedFormSection } from '../../../../components/sectionedForm'
 import { TooltipWrapper } from '../../../../components/tooltip'
+import { SchemaName } from '../../../../types'
 import { DataSet } from '../../../../types/generated'
 import { DisplayOptionsField } from '../DisplayOptionsField'
 import { useDataSetField } from '../formHooks'
 import { CustomFormEditEntry } from './customForm/CustomFormEditEntry'
 import classes from './DataEntryFormContents.module.css'
-import { SectionFormSectionsList } from './SectionFormList'
+import { EditOrNewDataSetSectionForm } from './sectionForm'
 import formType = DataSet.formType
 
 const disabledFormTypeText = i18n.t(
@@ -160,7 +162,11 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
             </div>
             <div className={classes.formTypeTabsContent}>
                 {selectedFormType === formType.SECTION && (
-                    <SectionFormSectionsList />
+                    <SectionFormSectionsList
+                        sectionsFieldName={'sections'}
+                        SectionFormComponent={EditOrNewDataSetSectionForm}
+                        schemaName={SchemaName.section}
+                    />
                 )}
                 {selectedFormType === formType.CUSTOM && (
                     <CustomFormEditEntry />

@@ -12,6 +12,7 @@ import {
 } from '../../components'
 import { DrawerRoot } from '../../components/drawer/Drawer'
 import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
+import { Section } from '../../components/formCreators/SectionFormList'
 import {
     createFormError,
     SectionedFormProvider,
@@ -20,7 +21,7 @@ import {
 } from '../../lib'
 import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { PickWithFieldFilters, DataSet, Access } from '../../types/generated'
+import { PickWithFieldFilters, DataSet } from '../../types/generated'
 import { DataSetFormContents } from './form/DataSetFormContents'
 import { validate } from './form/dataSetFormSchema'
 import { DataSetFormDescriptor } from './form/formDescriptor'
@@ -52,13 +53,7 @@ export type DataSetValues = Omit<
     DataSetValuesFromFilters,
     'sections' | 'dataEntryForm'
 > & {
-    sections: {
-        id: string
-        displayName: string
-        description?: string
-        deleted?: boolean
-        access?: Access
-    }[]
+    sections: Section[]
     dataEntryForm?: {
         id: string
         customHTML: string

@@ -3,8 +3,8 @@ import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import React, { useCallback, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
-import { FormBase, FormBaseProps } from '../../../../../components'
-import { LoadingSpinner } from '../../../../../components/loading/LoadingSpinner'
+import { FormBase, FormBaseProps } from '../../../../components'
+import { LoadingSpinner } from '../../../../components/loading/LoadingSpinner'
 import {
     DEFAULT_FIELD_FILTERS,
     SchemaName,
@@ -14,102 +14,82 @@ import {
     createFormError,
     createJsonPatchOperations,
     useCreateModel,
-} from '../../../../../lib'
+} from '../../../../lib'
 import {
     DisplayableModel,
     PickWithFieldFilters,
     Section,
-} from '../../../../../types/models'
-import { DataSetSectionFormContents } from './DataSetSectionFormContents'
+} from '../../../../types/models'
+import { EnrollmentSectionFormContents } from './EnrollmentSectionFormContents'
 import { initialSectionValues } from './sectionFormSchema'
 
 export const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     'name',
     'description',
-    'code',
-    'indicators[id,displayName]',
-    'showRowTotals',
-    'showColumnTotals',
-    'disableDataElementAutoGroup',
-    'displayOptions',
-    'dataElements[id,displayName,categoryCombo[id]]',
-    'greyedFields[dataElement, categoryOptionCombo]',
 ] as const
 
-const dataSetSectionSchemaSection = {
-    name: SchemaName.section,
-    namePlural: 'sections',
+export const enrollmentSectionSchemaSection = {
+    name: SchemaName.programSection,
+    namePlural: 'programSections',
     title: i18n.t('Section'),
     titlePlural: i18n.t('Sections'),
-    parentSectionKey: 'dataSet',
+    parentSectionKey: 'programsAndTracker',
 } satisfies SchemaSection
 
 export type SectionFormValues = PickWithFieldFilters<
     Section,
     typeof fieldFilters
 > & {
-    dataSet: { id: string }
-    displayOptions?: string
+    program: { id: string }
 }
+
 type PartialSectionFormValues = Partial<SectionFormValues>
 type SubmittedSectionFormValues = PartialSectionFormValues & DisplayableModel
 
-export type DataSetSectionFormProps = {
-    dataSetSection?: PartialSectionFormValues
+export type EnrollmentSectionFormProps = {
+    enrollmentSection?: PartialSectionFormValues
     onCancel?: () => void
 } & Pick<FormBaseProps<PartialSectionFormValues>, 'onSubmit'>
 
-export const DataSetSectionForm = ({
-    dataSetSection,
+export const EnrollmentSectionForm = ({
+    enrollmentSection,
     onSubmit,
     onCancel,
-}: DataSetSectionFormProps) => {
-    const dataSetId = useParams().id as string
+}: EnrollmentSectionFormProps) => {
+    const programId = useParams().id as string
+
     const initialValues: PartialSectionFormValues | undefined = useMemo(() => {
-        if (dataSetSection) {
-            return {
-                ...dataSetSection,
-                displayOptions:
-                    dataSetSection?.displayOptions &&
-                    JSON.parse(dataSetSection?.displayOptions),
-            }
+        if (enrollmentSection) {
+            return enrollmentSection
         }
-        return {
-            ...initialSectionValues,
-            displayOptions:
-                initialSectionValues?.displayOptions &&
-                JSON.parse(initialSectionValues?.displayOptions),
-        }
-    }, [dataSetSection])
+        return initialSectionValues
+    }, [enrollmentSection])
 
     const valueFormatter = useCallback(
         (values: PartialSectionFormValues) => {
             return {
                 ...values,
-                dataSet: { id: dataSetId },
-                displayOptions:
-                    values.displayOptions &&
-                    JSON.stringify(values.displayOptions),
+                program: { id: programId },
             }
         },
-        [dataSetId]
+        [programId]
     )
     return (
         <FormBase
-            initialValues={{ ...initialValues, dataSet: { id: dataSetId } }}
+            initialValues={{ ...initialValues, program: { id: programId } }}
             onSubmit={onSubmit}
             valueFormatter={valueFormatter}
             includeAttributes={false}
             mutators={{ ...arrayMutators }}
         >
-            <DataSetSectionFormContents onCancel={onCancel} />
+            <EnrollmentSectionFormContents onCancel={onCancel} />
         </FormBase>
     )
 }
 
 type OnDataSetFormSubmit = FormBaseProps<PartialSectionFormValues>['onSubmit']
-export const EditDataSetSectionForm = ({
+export const EditEnrollmentSectionForm = ({
     section,
     onCancel,
     onSubmitted,
@@ -120,7 +100,7 @@ export const EditDataSetSectionForm = ({
 }) => {
     const handlePatch = usePatchModel(
         section.id,
-        dataSetSectionSchemaSection.namePlural
+        enrollmentSectionSchemaSection.namePlural
     )
 
     const onFormSubmit: OnDataSetFormSubmit = async (values, form) => {
@@ -152,7 +132,7 @@ export const EditDataSetSectionForm = ({
         queryFn: queryFn<SectionFormValues>,
         queryKey: [
             {
-                resource: 'sections',
+                resource: 'programSections',
                 id: section.id,
                 params: {
                     fields: fieldFilters.concat(),
@@ -166,22 +146,24 @@ export const EditDataSetSectionForm = ({
     }
 
     return (
-        <DataSetSectionForm
-            dataSetSection={sectionValues.data}
+        <EnrollmentSectionForm
+            enrollmentSection={sectionValues.data}
             onSubmit={onFormSubmit}
             onCancel={onCancel}
         />
     )
 }
 
-export const NewDataSetSectionForm = ({
+export const NewEnrollmentSectionForm = ({
     onCancel,
     onSubmitted,
 }: {
     onCancel: () => void
     onSubmitted: (values: SubmittedSectionFormValues) => void
 }) => {
-    const handleCreate = useCreateModel(dataSetSectionSchemaSection.namePlural)
+    const handleCreate = useCreateModel(
+        enrollmentSectionSchemaSection.namePlural
+    )
 
     const onFormSubmit: OnDataSetFormSubmit = async (values) => {
         const res = await handleCreate(values)
@@ -199,15 +181,15 @@ export const NewDataSetSectionForm = ({
     }
 
     return (
-        <DataSetSectionForm
-            dataSetSection={undefined}
+        <EnrollmentSectionForm
+            enrollmentSection={undefined}
             onSubmit={onFormSubmit}
             onCancel={onCancel}
         />
     )
 }
 
-export const EditOrNewDataSetSectionForm = ({
+export const EditOrNewEnrollmentSectionForm = ({
     section,
     onCancel,
     onSubmitted: onSubmit,
@@ -221,12 +203,15 @@ export const EditOrNewDataSetSectionForm = ({
     }
     if (section === null) {
         return (
-            <NewDataSetSectionForm onSubmitted={onSubmit} onCancel={onCancel} />
+            <NewEnrollmentSectionForm
+                onSubmitted={onSubmit}
+                onCancel={onCancel}
+            />
         )
     }
 
     return (
-        <EditDataSetSectionForm
+        <EditEnrollmentSectionForm
             section={section}
             onCancel={onCancel}
             onSubmitted={onSubmit}
