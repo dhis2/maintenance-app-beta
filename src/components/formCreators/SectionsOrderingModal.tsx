@@ -20,10 +20,12 @@ export const SectionsOrderingModal = ({
     onClose,
     sections,
     onReorder,
+    sectionsFieldName,
 }: {
     onClose: () => void
     sections: Section[]
     onReorder: (index: number, value: Section) => void
+    sectionsFieldName: string
 }) => {
     const [orderedSections, setOrderedSections] =
         React.useState<Section[]>(sections)
@@ -40,7 +42,7 @@ export const SectionsOrderingModal = ({
             for (const [index, section] of orderedSections.entries()) {
                 if (section.id !== sections[index]?.id) {
                     await dataEngine.mutate({
-                        resource: 'sections',
+                        resource: sectionsFieldName,
                         id: section.id,
                         type: 'json-patch',
                         data: [

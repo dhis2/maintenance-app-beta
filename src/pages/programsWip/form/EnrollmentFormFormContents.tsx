@@ -171,6 +171,7 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                         sectionsFieldName={'programSections'}
                         SectionFormComponent={EditOrNewEnrollmentSectionForm}
                         schemaName={SchemaName.programSection}
+                        otherProps={{ sectionsLength: sections.length }}
                     />
                 )}
                 {selectedFormType === formType.CUSTOM && <>TODO</>}

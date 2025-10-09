@@ -23,20 +23,27 @@ export type Section = {
     access?: Access
 }
 
-type SectionFormComponent<TValues extends Section> = React.ComponentType<{
-    onSubmitted: (values: TValues) => void
-    onCancel: () => void
-    section: DisplayableModel | null | undefined
-}>
+type SectionFormComponent<
+    TValues extends Section,
+    TExtraProps
+> = React.ComponentType<
+    {
+        onSubmitted: (values: TValues) => void
+        onCancel: () => void
+        section: DisplayableModel | null | undefined
+    } & TExtraProps
+>
 
-export function SectionFormSectionsList<TValues extends Section>({
+export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
     sectionsFieldName,
     schemaName,
     SectionFormComponent,
+    otherProps,
 }: {
     sectionsFieldName: string
     schemaName: SchemaName
-    SectionFormComponent: SectionFormComponent<TValues>
+    SectionFormComponent: SectionFormComponent<TValues, TExtraProps>
+    otherProps?: TExtraProps
 }) {
     const [sectionFormOpen, setSectionFormOpen] = useState<
         DisplayableModel | null | undefined
@@ -84,6 +91,7 @@ export function SectionFormSectionsList<TValues extends Section>({
             >
                 {sectionFormOpen !== undefined && (
                     <SectionFormComponent
+                        {...(otherProps || ({} as TExtraProps))}
                         section={sectionFormOpen as DisplayableModel | null}
                         onCancel={() => setSectionFormOpen(undefined)}
                         onSubmitted={handleSubmittedSection}
@@ -96,6 +104,7 @@ export function SectionFormSectionsList<TValues extends Section>({
                     onClose={() => setOrderSectionsFormOpen(false)}
                     sections={sectionFieldArray.value}
                     onReorder={sectionFieldArray.update}
+                    sectionsFieldName={sectionsFieldName}
                 />
             )}
 

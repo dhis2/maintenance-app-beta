@@ -50,12 +50,14 @@ type SubmittedSectionFormValues = PartialSectionFormValues & DisplayableModel
 export type EnrollmentSectionFormProps = {
     enrollmentSection?: PartialSectionFormValues
     onCancel?: () => void
+    sortOrder?: number
 } & Pick<FormBaseProps<PartialSectionFormValues>, 'onSubmit'>
 
 export const EnrollmentSectionForm = ({
     enrollmentSection,
     onSubmit,
     onCancel,
+    sortOrder,
 }: EnrollmentSectionFormProps) => {
     const programId = useParams().id as string
 
@@ -63,8 +65,8 @@ export const EnrollmentSectionForm = ({
         if (enrollmentSection) {
             return enrollmentSection
         }
-        return initialSectionValues
-    }, [enrollmentSection])
+        return { ...initialSectionValues, sortOrder }
+    }, [enrollmentSection, sortOrder])
 
     const valueFormatter = useCallback(
         (values: PartialSectionFormValues) => {
@@ -157,9 +159,11 @@ export const EditEnrollmentSectionForm = ({
 export const NewEnrollmentSectionForm = ({
     onCancel,
     onSubmitted,
+    sortOrder,
 }: {
     onCancel: () => void
     onSubmitted: (values: SubmittedSectionFormValues) => void
+    sortOrder: number
 }) => {
     const handleCreate = useCreateModel(
         enrollmentSectionSchemaSection.namePlural
@@ -185,6 +189,7 @@ export const NewEnrollmentSectionForm = ({
             enrollmentSection={undefined}
             onSubmit={onFormSubmit}
             onCancel={onCancel}
+            sortOrder={sortOrder}
         />
     )
 }
@@ -193,10 +198,12 @@ export const EditOrNewEnrollmentSectionForm = ({
     section,
     onCancel,
     onSubmitted: onSubmit,
+    sectionsLength,
 }: {
     section: DisplayableModel | null | undefined
     onCancel: () => void
     onSubmitted: (values: SubmittedSectionFormValues) => void
+    sectionsLength: number
 }) => {
     if (section === undefined) {
         return
@@ -206,6 +213,7 @@ export const EditOrNewEnrollmentSectionForm = ({
             <NewEnrollmentSectionForm
                 onSubmitted={onSubmit}
                 onCancel={onCancel}
+                sortOrder={sectionsLength}
             />
         )
     }
