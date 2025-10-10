@@ -12,7 +12,7 @@ import { BasicInformationSection } from './BasicInformationSection'
 import { NotificationTimingSection } from './NotificationTimingSection'
 import { RecipientSection } from './RecipientSection'
 
-const DATA_SET_VARIABLES = {
+export const DATA_SET_VARIABLES = {
     data_set_name: i18n.t('Data set name'),
     current_date: i18n.t('Current date'),
     data_description: i18n.t('Data set description'),

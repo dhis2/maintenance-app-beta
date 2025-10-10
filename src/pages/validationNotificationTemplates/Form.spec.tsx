@@ -121,7 +121,7 @@ describe('Validation Notification form tests', () => {
             await uiActions.submitForm(screen)
             expect(createMock).not.toHaveBeenCalled()
         })
-        it('enters variables into message subject', async () => {
+        it('enters variables into subject template', async () => {
             const { screen } = await renderForm()
             const randomText = randomLongString(10)
 
@@ -172,7 +172,7 @@ describe('Validation Notification form tests', () => {
                 screen
             )
         })
-        it('enters variables into message subject', async () => {
+        it('enters variables into message template', async () => {
             const { screen } = await renderForm()
             const randomText = randomLongString(10)
 
@@ -493,8 +493,8 @@ describe('Validation Notification form tests', () => {
                                 type: any,
                                 params: any
                             ) => {
-                                if (type === 'create') {
-                                    createMock(params)
+                                if (type === 'json-patch') {
+                                    updateMock(params)
                                     return { statusCode: 204 }
                                 }
                                 if (type === 'read') {

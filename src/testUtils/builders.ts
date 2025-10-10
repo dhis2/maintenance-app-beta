@@ -20,7 +20,10 @@ import { ConstantsListSchema } from '../pages/constants/form/ConstantFormSchema'
 import { dataElementGroupListSchema } from '../pages/dataElementGroups/form/dataElementGroupSchema'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementListSchema } from '../pages/dataElements/form/dataElementSchema'
-import { dataSetNotificationTemplateListSchema } from '../pages/dataSetNotificationTemplates/form/dataSetNotificationTemplateSchema'
+import {
+    dataSetNotificationTemplateListSchema,
+    dataSetNotificationTemplateFormSchema,
+} from '../pages/dataSetNotificationTemplates/form/dataSetNotificationTemplateSchema'
 import { dataSetListSchema } from '../pages/dataSets/form/dataSetFormSchema'
 import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicatorGroupSchema'
 import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
@@ -211,6 +214,15 @@ export const testDataSetNotificationTemplate = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(dataSetNotificationTemplateListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testDataSetNotificationTemplateForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(dataSetNotificationTemplateFormSchema, {
         mockeryMapper,
     }),
     ...overwrites,

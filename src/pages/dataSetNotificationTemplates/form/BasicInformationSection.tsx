@@ -25,6 +25,7 @@ export const BasicInformationSection: React.FC<
         <StandardFormField>
             <ModelTransferField
                 name="dataSets"
+                dataTest="formfields-dataSets"
                 query={{ resource: 'dataSets' }}
                 label={i18n.t(
                     'Choose which data sets to send this notification for'

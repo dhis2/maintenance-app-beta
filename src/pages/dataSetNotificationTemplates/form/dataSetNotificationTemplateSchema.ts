@@ -9,12 +9,12 @@ const { identifiable, withDefaultListColumns, referenceCollection } =
 const dataSetNotificationTemplateBaseSchema = z.object({
     code: z.string().optional(),
     description: z.string().optional(),
-    dataSetNotificationTrigger: z.nativeEnum(
-        DataSetNotificationTemplate.dataSetNotificationTrigger
-    ),
-    notificationRecipient: z.nativeEnum(
-        DataSetNotificationTemplate.notificationRecipient
-    ),
+    dataSetNotificationTrigger: z
+        .nativeEnum(DataSetNotificationTemplate.dataSetNotificationTrigger)
+        .optional(),
+    notificationRecipient: z
+        .nativeEnum(DataSetNotificationTemplate.notificationRecipient)
+        .optional(),
     deliveryChannels: z.array(z.enum(['SMS', 'EMAIL', 'HTTP'])).default([]),
     messageTemplate: z.string(),
     subjectTemplate: z
@@ -26,13 +26,14 @@ const dataSetNotificationTemplateBaseSchema = z.object({
             ),
         })
         .optional(),
-    relativeScheduledDays: z.union([z.string(), z.number()]).optional(),
+    relativeScheduledDays: z.number().int().optional(),
     recipientUserGroup: z
         .object({
-            id: z.string(),
+            id: z.string().optional(),
             displayName: z.string().optional(),
         })
-        .optional(),
+        .optional()
+        .default({}),
     dataSets: referenceCollection.default([]),
     sendStrategy: z
         .nativeEnum(DataSetNotificationTemplate.sendStrategy)
@@ -86,9 +87,14 @@ export const transformFormValues = <
 
     return {
         ...rest,
-        relativeScheduledDays: Number(relativeScheduledDays),
+        relativeScheduledDays:
+            rest.dataSetNotificationTrigger === 'SCHEDULED_DAYS' &&
+            relativeScheduledDays
+                ? Number(relativeScheduledDays)
+                : undefined,
         recipientUserGroup:
-            rest.notificationRecipient === 'USER_GROUP' && recipientUserGroup
+            rest.notificationRecipient === 'USER_GROUP' &&
+            recipientUserGroup?.id
                 ? { id: recipientUserGroup.id }
                 : undefined,
         notifyUsersInHierarchyOnly:

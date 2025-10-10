@@ -55,13 +55,14 @@ export const MessageFields = ({
                             const showError = meta.error && meta.touched
                             return (
                                 <div data-test="formfields-subjectTemplate">
-                                    <div
+                                    <label
                                         className={
                                             styles.validationRuleFieldLabel
                                         }
+                                        data-test="formfields-subjectTemplate-label"
                                     >
                                         {i18n.t('Message subject')}
-                                    </div>
+                                    </label>
                                     <div className={styles.validationRuleField}>
                                         <input
                                             className={
@@ -87,8 +88,19 @@ export const MessageFields = ({
                                             </div>
                                         )}
                                     </div>
+                                    <p
+                                        id="subjectTemplate-help"
+                                        className={styles.fieldHelpText}
+                                    >
+                                        {i18n.t(
+                                            'Used as the template for the subject field.'
+                                        )}
+                                    </p>
                                     {showError && (
-                                        <div className={styles.errorStyling}>
+                                        <div
+                                            className={styles.errorStyling}
+                                            data-test="formfields-subjectTemplate-validation"
+                                        >
                                             {meta.error}
                                         </div>
                                     )}
@@ -96,12 +108,6 @@ export const MessageFields = ({
                             )
                         }}
                     </FieldRFF>
-                    <p
-                        id="subjectTemplate-help"
-                        className={styles.fieldHelpText}
-                    >
-                        {i18n.t('Used as the template for the subject field.')}
-                    </p>
                 </StandardFormField>
                 <StandardFormField>
                     <FieldRFF name="messageTemplate">
@@ -147,8 +153,19 @@ export const MessageFields = ({
                                             </div>
                                         )}
                                     </div>
+                                    <p
+                                        id="messageTemplate-help"
+                                        className={styles.fieldHelpText}
+                                    >
+                                        {i18n.t(
+                                            'Used as the template for the message field.'
+                                        )}
+                                    </p>
                                     {showError && (
-                                        <div className={styles.errorStyling}>
+                                        <div
+                                            className={styles.errorStyling}
+                                            data-test="formfields-messageTemplate-validation"
+                                        >
                                             {meta.error}
                                         </div>
                                     )}
@@ -156,12 +173,6 @@ export const MessageFields = ({
                             )
                         }}
                     </FieldRFF>
-                    <p
-                        id="messageTemplate-help"
-                        className={styles.fieldHelpText}
-                    >
-                        {i18n.t('Used as the template for the message field.')}
-                    </p>
                 </StandardFormField>
             </div>
 
