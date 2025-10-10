@@ -6,13 +6,9 @@ import schemaMock from '../../__mocks__/schema/dataSetNotificationTemplatesSchem
 import { FOOTER_ID } from '../../app/layout/Layout'
 import { SECTIONS_MAP } from '../../lib'
 import {
-    randomDhis2Id,
     randomLongString,
     testDataSet,
     testUserGroup,
-    testOptionGroup,
-    testOptionSet,
-    testOption,
     testDataSetNotificationTemplateForm as testDataSetNotificationTemplate,
 } from '../../testUtils/builders'
 import { generateRenderer } from '../../testUtils/generateRenderer'
@@ -20,12 +16,8 @@ import TestComponentWithRouter from '../../testUtils/TestComponentWithRouter'
 import { uiActions } from '../../testUtils/uiActions'
 import { uiAssertions } from '../../testUtils/uiAssertions'
 import { Component as Edit } from './Edit'
-// import { VALIDATION_RULE_VARIABLES } from './form/ValidationNotificationTemplateFormFields'
 import { DATA_SET_VARIABLES } from './form/DataSetNotificationsFormFields'
-import {
-    notificationTypeOptions,
-    triggerOptions,
-} from './form/NotificationTimingSection'
+import { triggerOptions } from './form/NotificationTimingSection'
 import { recipientOptions } from './form/RecipientSection'
 import { Component as New } from './New'
 
@@ -283,7 +275,7 @@ describe('DataSetNotificationTemplate form tests', () => {
                     screen,
                     { type: 'spinbutton' }
                 )
-                await uiAssertions.expectInputFieldToExist(
+                uiAssertions.expectInputFieldToExist(
                     'relativeScheduledDays',
                     outputNumber,
                     screen,
@@ -388,7 +380,7 @@ describe('DataSetNotificationTemplate form tests', () => {
                 },
                 screen
             )
-            await uiAssertions.expectCheckboxFieldToExist(
+            uiAssertions.expectCheckboxFieldToExist(
                 'notifyUsersInHierarchyOnly',
                 false,
                 screen
@@ -421,16 +413,8 @@ describe('DataSetNotificationTemplate form tests', () => {
             expect(
                 screen.queryByTestId('formfields-notifyUsersInHierarchyOnly')
             ).toBe(null)
-            await uiAssertions.expectCheckboxFieldToExist(
-                'sendEmail',
-                false,
-                screen
-            )
-            await uiAssertions.expectCheckboxFieldToExist(
-                'sendSms',
-                false,
-                screen
-            )
+            uiAssertions.expectCheckboxFieldToExist('sendEmail', false, screen)
+            uiAssertions.expectCheckboxFieldToExist('sendSms', false, screen)
         })
     })
 
