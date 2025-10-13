@@ -12,7 +12,7 @@ import { SectionFormSectionsList } from '../../../components/formCreators/Sectio
 import { TooltipWrapper } from '../../../components/tooltip'
 import { SchemaName } from '../../../types'
 import { DataSet } from '../../../types/generated'
-import { ProgramsFromFilters } from '../Edit'
+import { ProgramValues } from '../Edit'
 import classes from './EnrollmentFormFormContent.module.css'
 import { EditOrNewEnrollmentSectionForm } from './sectionForm/EntrollmentSectionForm'
 import formType = DataSet.formType
@@ -21,10 +21,10 @@ const disabledFormTypeText = i18n.t(
     'Program must be saved before this form type can be configured.'
 )
 
-const useProgramField = <T extends keyof ProgramsFromFilters>(
+const useProgramField = <T extends keyof ProgramValues>(
     name: T,
-    options?: UseFieldConfig<ProgramsFromFilters[T], ProgramsFromFilters[T]>
-) => useField<ProgramsFromFilters[T]>(name, options)
+    options?: UseFieldConfig<ProgramValues[T], ProgramValues[T]>
+) => useField<ProgramValues[T]>(name, options)
 
 export const EnrollmentFormFormContents = React.memo(function FormFormContents({
     name,
