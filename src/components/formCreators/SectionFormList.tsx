@@ -39,12 +39,12 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
     schemaName,
     SectionFormComponent,
     otherProps,
-}: {
+}: Readonly<{
     sectionsFieldName: string
     schemaName: SchemaName
     SectionFormComponent: SectionFormComponent<TValues, TExtraProps>
     otherProps?: TExtraProps
-}) {
+}>) {
     const [sectionFormOpen, setSectionFormOpen] = useState<
         DisplayableModel | null | undefined
     >(undefined)
@@ -91,7 +91,7 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
             >
                 {sectionFormOpen !== undefined && (
                     <SectionFormComponent
-                        {...(otherProps || ({} as TExtraProps))}
+                        {...(otherProps ?? ({} as TExtraProps))}
                         section={sectionFormOpen as DisplayableModel | null}
                         onCancel={() => setSectionFormOpen(undefined)}
                         onSubmitted={handleSubmittedSection}

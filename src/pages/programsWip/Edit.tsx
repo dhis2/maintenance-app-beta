@@ -28,7 +28,6 @@ import {
     PickWithFieldFilters,
     Program,
 } from '../../types/generated'
-import { DataSetValues } from '../dataSets/Edit'
 import { validate } from './form'
 import { ProgramFormDescriptor } from './form/formDescriptor'
 import { ProgramFormContents } from './form/ProgramFormContents'

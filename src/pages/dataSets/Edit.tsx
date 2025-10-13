@@ -1,8 +1,6 @@
 import { useDataEngine } from '@dhis2/app-runtime'
-import i18n from '@dhis2/d2-i18n'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
-import { omit } from 'lodash'
 import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import {
