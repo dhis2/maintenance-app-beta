@@ -27,6 +27,8 @@ export const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     'name',
     'description',
+    'renderType[MOBILE[type],DESKTOP[type]]',
+    'trackedEntityAttributes[id,displayName]',
 ] as const
 
 export const enrollmentSectionSchemaSection = {
