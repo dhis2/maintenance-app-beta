@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { IconInfo16, NoticeBox, Tab, TabBar } from '@dhis2/ui'
 import React, { PropsWithChildren } from 'react'
 import { useParams } from 'react-router-dom'
+import { useSchemaFromHandle, useSectionHandle } from '../../lib'
 import { TooltipWrapper } from '../tooltip'
 import classes from './TabbedFormTypePicker.module.css'
 
@@ -34,6 +35,17 @@ export const TabbedFormTypePicker = React.memo(function FormFormContents({
     const isCreatingNew = !modelId
     const androidFormType =
         sectionsLength > 0 ? i18n.t('Section form') : i18n.t('Basic form')
+    const section = useSectionHandle()
+
+    const basicFormHelpMessages = {
+        dataSet: 'Basic forms display an auto-generated list of data elements.',
+        program: 'Basic forms display an auto-generated list of attributes.',
+    }
+
+    const basicFormHelpText =
+        basicFormHelpMessages[
+            section?.name as keyof typeof basicFormHelpMessages
+        ] ?? i18n.t('Basic forms display an auto-generated list.')
 
     const webFormType = hasDataEntryForm
         ? i18n.t('Custom form')
@@ -75,7 +87,7 @@ export const TabbedFormTypePicker = React.memo(function FormFormContents({
                                 condition
                                 className={classes.infoTooltipWrapper}
                                 content={i18n.t(
-                                    'Basic forms display an auto-generated list of attributes. \n' +
+                                    `${basicFormHelpText} \n` +
                                         'They will be displayed only if no Section or Custom form is created.'
                                 )}
                             >
