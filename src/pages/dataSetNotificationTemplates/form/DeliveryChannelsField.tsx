@@ -30,12 +30,14 @@ export const DeliveryChannelsField = () => {
         <HorizontalFieldGroup>
             <CheckboxField
                 name="sendSms"
+                dataTest="formfields-sendSms"
                 label={i18n.t('SMS')}
                 checked={isSms}
                 onChange={createHandleOnChange('SMS')}
             />
             <CheckboxField
                 name="sendEmail"
+                dataTest="formfields-sendEmail"
                 label={i18n.t('Email')}
                 checked={isEmail}
                 onChange={createHandleOnChange('EMAIL')}
