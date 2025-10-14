@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import { IconInfo16, NoticeBox, Tab, TabBar } from '@dhis2/ui'
-import React, { PropsWithChildren } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
-import { useSchemaFromHandle, useSectionHandle } from '../../lib'
+import { useSectionHandle } from '../../lib'
 import { TooltipWrapper } from '../tooltip'
 import classes from './TabbedFormTypePicker.module.css'
 
