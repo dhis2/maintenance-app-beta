@@ -1,3 +1,10 @@
+## [0.79.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.79.0...v0.79.1) (2025-10-14)
+
+
+### Bug Fixes
+
+* clean up data set notifications [DHIS2-20275] ([#664](https://github.com/dhis2/maintenance-app-beta/issues/664)) ([8e7171f](https://github.com/dhis2/maintenance-app-beta/commit/8e7171fb6ff163b124e338ce90da8e733163b893))
+
 # [0.79.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.78.1...v0.79.0) (2025-10-08)
 
 
