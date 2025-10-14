@@ -13,19 +13,19 @@ import {
 } from '@dhis2/ui'
 import cx from 'classnames'
 import React from 'react'
-import { DataSetValues } from '../../Edit'
+import { Section } from './SectionFormList'
 import css from './SectionsOrderingModal.module.css'
-
-type Section = DataSetValues['sections'][number]
 
 export const SectionsOrderingModal = ({
     onClose,
     sections,
     onReorder,
+    sectionsFieldName,
 }: {
     onClose: () => void
     sections: Section[]
     onReorder: (index: number, value: Section) => void
+    sectionsFieldName: string
 }) => {
     const [orderedSections, setOrderedSections] =
         React.useState<Section[]>(sections)
@@ -42,7 +42,7 @@ export const SectionsOrderingModal = ({
             for (const [index, section] of orderedSections.entries()) {
                 if (section.id !== sections[index]?.id) {
                     await dataEngine.mutate({
-                        resource: 'sections',
+                        resource: sectionsFieldName,
                         id: section.id,
                         type: 'json-patch',
                         data: [
@@ -71,10 +71,7 @@ export const SectionsOrderingModal = ({
         }
     }
 
-    const onMove = (
-        section: DataSetValues['sections'][number],
-        moveIndexBy: number
-    ) => {
+    const onMove = (section: Section, moveIndexBy: number) => {
         const newSections = [...orderedSections]
         const index = newSections.findIndex((s) => s.id === section.id)
         newSections.splice(index, 1)

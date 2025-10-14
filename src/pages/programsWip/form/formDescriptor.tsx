@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { SectionedFormDescriptor } from '../../../lib'
-import { ProgramsFromFilters } from '../Edit'
+import { ProgramValues } from '../Edit'
 
 export const ProgramFormDescriptor = {
     name: 'Program',
@@ -37,4 +37,4 @@ export const ProgramFormDescriptor = {
             fields: [{ name: 'dataEntryForm', label: i18n.t('Custom form') }],
         },
     ],
-} as const satisfies SectionedFormDescriptor<ProgramsFromFilters>
+} as const satisfies SectionedFormDescriptor<ProgramValues>
