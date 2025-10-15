@@ -530,6 +530,24 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    legendSet: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'code',
+                'id',
+                'href',
+                'lastUpdatedBy',
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+        },
+        filters: {},
+    },
     attribute: {
         columns: {
             default: [

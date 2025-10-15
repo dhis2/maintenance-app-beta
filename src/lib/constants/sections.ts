@@ -346,13 +346,6 @@ export const SCHEMA_SECTIONS = {
         titlePlural: i18n.t('Icons'),
         parentSectionKey: 'other',
     },
-    legend: {
-        name: SchemaName.legend,
-        namePlural: 'legends',
-        title: i18n.t('Legend'),
-        titlePlural: i18n.t('Legends'),
-        parentSectionKey: 'other',
-    },
     predictorGroup: {
         name: SchemaName.predictorGroup,
         namePlural: 'predictorGroups',
