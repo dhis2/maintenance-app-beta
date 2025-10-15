@@ -34,6 +34,7 @@ import {
     optionGroupSetFormSchema,
     optionGroupSetListSchema,
 } from '../pages/optionGroupSets/form/optionGroupSetSchema'
+import { optionSetListSchema } from '../pages/optionSets/form/optionSetSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
@@ -230,6 +231,13 @@ export const testDataSetNotificationTemplateForm = (
 
 export const testOptionGroupSet = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(optionGroupSetFormSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testOptionSets = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(optionSetListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
