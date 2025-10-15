@@ -11,6 +11,7 @@ import {
     Schema,
     toModelPropertyDescriptor,
 } from '../lib'
+import { formatEnumValue } from '../lib/models/path'
 import { camelCaseToConstantCase } from '../lib/utils'
 import {
     testAccess,
@@ -129,7 +130,9 @@ export const generateDefaultListItemsTests = ({
             const tableRows = screen.getAllByTestId('section-list-row')
             expect(tableRows.length).toBe(elements.length)
             elements.forEach((element: Record<any, any>, index: number) => {
-                expect(tableRows[index]).toHaveTextContent(element.displayName)
+                expect(tableRows[index]).toHaveTextContent(
+                    formatEnumValue(element.displayName)
+                )
             })
         })
         it('should display the default columns', async () => {
