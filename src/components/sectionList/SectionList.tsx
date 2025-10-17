@@ -30,9 +30,13 @@ export const SectionList = ({
         <DataTable className={css.list}>
             <TableHead>
                 <DataTableRow>
-                    <DataTableColumnHeader width={'48px'}>
+                    <DataTableColumnHeader
+                        className={css.listHeaderCheckbox}
+                        width={'32px'}
+                    >
                         {onSelectAll && (
                             <Checkbox
+                                dense
                                 dataTest="section-list-selectall"
                                 checked={allSelected}
                                 onChange={({
