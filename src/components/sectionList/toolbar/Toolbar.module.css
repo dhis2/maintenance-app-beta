@@ -7,6 +7,11 @@
     height: 48px;
     padding: var(--spacers-dp8);
     gap: var(--spacers-dp8);
+    /* Removing default border that offsets LinkButton by 1px, recreating with inset shadow */
+    border: none !important;
+    box-shadow: inset 1px 0 0 0 var(--colors-grey300),
+        inset -1px 0 0 0 var(--colors-grey300),
+        inset 0 1px 0 0 var(--colors-grey300);
 }
 
 .listHeaderNormal a {
