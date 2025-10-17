@@ -30,6 +30,21 @@
 }
 
 .colors {
-    width: 110px;
-    height: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+    background: white;
+    padding: var(--spacers-dp8);
+    border-radius: 3px;
+    border: 1px solid var(--colors-grey400);
+    box-shadow: var(--elevations-e300);
+}
+/* Hide the box-shadow in CompactPicker */
+.colors > div > div {
+    box-shadow: none !important;
+}
+
+/* Hide the hex/RGB input fields in CompactPicker */
+.colors :global(.compact-picker) > div:last-child {
+    display: none !important;
 }
