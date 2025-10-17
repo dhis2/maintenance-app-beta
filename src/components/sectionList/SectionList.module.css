@@ -49,12 +49,18 @@
 }
 
 .listRow td {
-    padding-top: var(--spacers-dp8);
-    padding-bottom: var(--spacers-dp8);
+    padding-top: var(--spacers-dp4);
+    padding-bottom: var(--spacers-dp4);
 }
 
 .listRow.active td {
     background-color: var(--colors-grey200);
+}
+
+.listRow td.listRowCheckbox,
+.list th.listHeaderCheckbox {
+    padding-inline-start: var(--spacers-dp8);
+    padding-inline-end: 0;
 }
 
 .listActions {
