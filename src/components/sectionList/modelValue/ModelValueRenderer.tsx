@@ -3,6 +3,7 @@ import { SchemaFieldProperty, SchemaFieldPropertyType } from '../../../lib'
 import { BooleanValue } from './BooleanValue'
 import { ConstantValue } from './ConstantValue'
 import { DateValue } from './DateValue'
+import { ImageValue } from './ImageValue'
 import { ModelReference, isModelReference } from './ModelReference'
 import { PublicAccessValue } from './PublicAccess'
 import { TextValue } from './TextValue'
@@ -44,6 +45,10 @@ export const ModelValueRenderer = ({
 
     if (typeof value === 'boolean') {
         return <BooleanValue value={value} />
+    }
+
+    if (typeof value === 'string' && value.includes('/api/icons/')) {
+        return <ImageValue value={value} />
     }
 
     if (value !== null && value !== undefined && hasToStringMethod(value)) {

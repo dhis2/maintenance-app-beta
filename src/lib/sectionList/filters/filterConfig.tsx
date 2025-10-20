@@ -43,6 +43,7 @@ export const filterParamsSchema = z
         programIndicator: zodArrayIds,
         programIndicatorGroup: zodArrayIds,
         validationRuleGroup: zodArrayIds,
+        key: z.string(),
         valueType: z.array(z.nativeEnum(DataElement.valueType)),
     })
     .partial()
@@ -80,6 +81,7 @@ export const filterQueryParamType = {
     programIndicatorGroup: CustomDelimitedArrayParam,
     validationRuleGroup: CustomDelimitedArrayParam,
     valueType: CustomDelimitedArrayParam,
+    key: StringParam,
 } as const satisfies QueryParamsConfigMap
 
 export const validFilterKeys = Object.keys(filterQueryParamType)
