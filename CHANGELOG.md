@@ -1,3 +1,10 @@
+## [0.79.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.79.2...v0.79.3) (2025-10-20)
+
+
+### Bug Fixes
+
+* remove current program from related program selector ([#671](https://github.com/dhis2/maintenance-app-beta/issues/671)) ([222687c](https://github.com/dhis2/maintenance-app-beta/commit/222687c345a4bed6a3cc118b8efa9079bad2373e))
+
 ## [0.79.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.79.1...v0.79.2) (2025-10-20)
 
 
