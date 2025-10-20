@@ -22,6 +22,7 @@ import { ProgramFormDescriptor } from './form/formDescriptor'
 import { ProgramFormContents } from './form/ProgramFormContents'
 
 const fieldFilters = [
+    'id',
     'name',
     'shortName',
     'code',
