@@ -40,7 +40,7 @@ const RenderingOptionsSingleSelect = ({
 }) => {
     const queryFn = useBoundResourceQueryFn()
 
-    const { data: renderingOptionsData } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: [
             {
                 resource: 'staticConfiguration/renderingOptions',
@@ -52,7 +52,7 @@ const RenderingOptionsSingleSelect = ({
         queryFn: queryFn<RenderingOptionsResponse>,
     })
 
-    return renderingOptionsData ? (
+    return (
         <FieldRFF<string | undefined>
             inputWidth="100px"
             defaultValue={'DEFAULT'}
@@ -61,8 +61,9 @@ const RenderingOptionsSingleSelect = ({
                 <SingleSelectFieldFF
                     {...props}
                     inputWidth={'150px'}
+                    loading={isLoading}
                     options={
-                        renderingOptionsData
+                        data
                             ?.find((ro) => ro.valueType === attribute.valueType)
                             ?.renderingTypes.map((rt) => ({
                                 value: rt,
@@ -77,7 +78,7 @@ const RenderingOptionsSingleSelect = ({
                 />
             )}
         />
-    ) : undefined
+    )
 }
 
 export const EnrollmentDataFormContents = React.memo(
