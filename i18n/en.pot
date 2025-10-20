@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-10-10T10:57:27.529Z\n"
-"PO-Revision-Date: 2025-10-10T10:57:27.529Z\n"
+"POT-Creation-Date: 2025-10-20T10:36:33.591Z\n"
+"PO-Revision-Date: 2025-10-20T10:36:33.591Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -215,11 +215,11 @@ msgid "Select organisation units"
 msgstr "Select organisation units"
 
 msgid ""
-"A short, unique name (max 50 characters). Displayed in analysis apps where "
-"space is limited, depending on user or system settings."
+"A short, unique name. Displayed in analysis apps where space is limited, "
+"depending on user or system settings."
 msgstr ""
-"A short, unique name (max 50 characters). Displayed in analysis apps where "
-"space is limited, depending on user or system settings."
+"A short, unique name. Displayed in analysis apps where space is limited, "
+"depending on user or system settings."
 
 msgid "Short name"
 msgstr "Short name"
@@ -3665,14 +3665,87 @@ msgstr "Set up the program indicator legends."
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
 
+msgid "Program must be saved before this form type can be configured."
+msgstr "Program must be saved before this form type can be configured."
+
+msgid "Enrollment: Form"
+msgstr "Enrollment: Form"
+
+msgid ""
+"Choose and configure the type of form that will be used to collect "
+"information during enrollment."
+msgstr ""
+"Choose and configure the type of form that will be used to collect "
+"information during enrollment."
+
+msgid "Configure settings related to enrollment in this program."
+msgstr "Configure settings related to enrollment in this program."
+
+msgid "Tracked Entity type (required)"
+msgstr "Tracked Entity type (required)"
+
+msgid "Choose what this program will be tracking."
+msgstr "Choose what this program will be tracking."
+
+msgid "Could not load tracked entity types"
+msgstr "Could not load tracked entity types"
+
+msgid "Tracked entity type is required"
+msgstr "Tracked entity type is required"
+
+msgid "Multiple enrollments"
+msgstr "Multiple enrollments"
+
+msgid "Only allow one enrollment"
+msgstr "Only allow one enrollment"
+
+msgid "Allow multiple enrollments"
+msgstr "Allow multiple enrollments"
+
+msgid "Applies to the entire lifetime of a tracked entity."
+msgstr "Applies to the entire lifetime of a tracked entity."
+
+msgid "Allow enrollment dates in the future"
+msgstr "Allow enrollment dates in the future"
+
+msgid "Collect an incident date"
+msgstr "Collect an incident date"
+
+msgid "Allow incident dates in the future"
+msgstr "Allow incident dates in the future"
+
+msgid "Collect data for the first stage during enrollment"
+msgstr "Collect data for the first stage during enrollment"
+
+msgid "Only integers are allowed"
+msgstr "Only integers are allowed"
+
+msgid "Should not be lower than previous version"
+msgstr "Should not be lower than previous version"
+
+msgid "Program Details"
+msgstr "Program Details"
+
+msgid "Set up the basic information for this program."
+msgstr "Set up the basic information for this program."
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Last updated:  {{date}}"
+msgstr "Last updated:  {{date}}"
+
+msgid "Related program"
+msgstr "Related program"
+
+msgid "Choose how this program is disaggregated."
+msgstr "Choose how this program is disaggregated."
+
 msgid "Enrollment: Settings"
 msgstr "Enrollment: Settings"
 
 msgid "Enrollment: Data"
 msgstr "Enrollment: Data"
-
-msgid "Enrollment: Form"
-msgstr "Enrollment: Form"
 
 msgid "Notification details"
 msgstr "Notification details"
