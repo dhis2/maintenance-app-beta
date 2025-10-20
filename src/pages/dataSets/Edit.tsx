@@ -12,11 +12,9 @@ import {
 import { DrawerRoot } from '../../components/drawer/Drawer'
 import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
 import { Section } from '../../components/formCreators/SectionFormList'
+import { useHandleOnSubmitEditFormDeletions } from '../../components/sectionedForm/useHandleOnSubmitEditFormDeletions'
 import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
-import {
-    EnhancedOnSubmit,
-    useHandleOnSubmitEditFormDeletions,
-} from '../../lib/form/useOnSubmit'
+import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PickWithFieldFilters, DataSet } from '../../types/generated'
 import { DataSetFormContents } from './form/DataSetFormContents'

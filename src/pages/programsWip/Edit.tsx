@@ -13,16 +13,14 @@ import {
     SectionedFormLayout,
 } from '../../components'
 import { Section } from '../../components/formCreators/SectionFormList'
+import { useHandleOnSubmitEditFormDeletions } from '../../components/sectionedForm/useHandleOnSubmitEditFormDeletions'
 import {
     SectionedFormProvider,
     SECTIONS_MAP,
     useBoundResourceQueryFn,
     useOnSubmitEdit,
 } from '../../lib'
-import {
-    EnhancedOnSubmit,
-    useHandleOnSubmitEditFormDeletions,
-} from '../../lib/form/useOnSubmit'
+import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
 import {
     DataEntryForm,
     PickWithFieldFilters,

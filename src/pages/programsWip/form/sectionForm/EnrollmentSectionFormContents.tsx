@@ -93,7 +93,7 @@ export const EnrollmentSectionFormContents = ({
             return []
         }
         const otherSectionsAttributes = data.programSections
-            .filter((section) => section.id !== values.sectionId)
+            .filter((section) => section.id !== values.id)
             .flatMap((section) =>
                 section.trackedEntityAttributes?.map((tea) => tea.id)
             )
@@ -101,7 +101,7 @@ export const EnrollmentSectionFormContents = ({
         return data.programTrackedEntityAttributes
             .map((tea) => tea.trackedEntityAttribute)
             .filter((tea) => !otherSectionsAttributes.includes(tea.id))
-    }, [data, values.sectionId])
+    }, [data, values.id])
 
     return (
         <div className={styles.sectionsWrapper}>
