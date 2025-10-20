@@ -33,7 +33,7 @@ const fieldFilters = [
     'lastUpdated',
     'dataEntryForm',
     'programSections',
-    'programTrackedEntityAttributes',
+    'programTrackedEntityAttributes[id,displayName,valueType,renderType,allowFutureDate,mandatory,searchable,displayInList,trackedEntityAttribute[id,displayName]]',
 ] as const
 
 export type ProgramsFromFilters = PickWithFieldFilters<

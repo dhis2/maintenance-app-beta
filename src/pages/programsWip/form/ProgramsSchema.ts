@@ -15,6 +15,23 @@ const programBaseSchema = z.object({
     featureType: z.enum(['NONE', 'POINT', 'POLYGON']).optional(),
     relatedProgram: modelReference.optional(),
     categoryCombo: modelReference,
+    programTrackedEntityAttributes: z
+        .array(
+            z.object({
+                trackedEntityAttribute: modelReference,
+                allowFutureDate: z.boolean().default(false),
+                mandatory: z.boolean().default(false),
+                searchable: z.boolean().default(false),
+                displayInList: z.boolean().default(false),
+                renderType: z
+                    .object({
+                        MOBILE: z.object({ type: z.string() }).optional(),
+                        DESKTOP: z.object({ type: z.string() }).optional(),
+                    })
+                    .optional(),
+            })
+        )
+        .default([]),
 })
 
 export const programFormSchema = identifiable.merge(programBaseSchema).extend({
