@@ -1,0 +1,14 @@
+.radioGroup {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 24px;
+    margin: 10px 0;
+}
+.enrollmentOptionLabel {
+    font-size: 16px;
+    font-weight: 400;
+}
+.selectIncidentDatesInFuture {
+    margin-left: 25px;
+}

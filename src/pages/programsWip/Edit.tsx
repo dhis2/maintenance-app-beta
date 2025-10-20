@@ -35,6 +35,12 @@ const fieldFilters = [
     'dataEntryForm',
     'programSections',
     'programTrackedEntityAttributes',
+    'trackedEntityType[id,displayName]',
+    'onlyEnrollOnce',
+    'selectEnrollmentDatesInFuture',
+    'displayIncidentDate',
+    'selectIncidentDatesInFuture',
+    'useFirstStageDuringRegistration',
 ] as const
 
 export type ProgramsFromFilters = PickWithFieldFilters<
