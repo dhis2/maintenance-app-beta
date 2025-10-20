@@ -1,3 +1,10 @@
+## [0.79.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.79.1...v0.79.2) (2025-10-20)
+
+
+### Bug Fixes
+
+* issue with form rerendering and emptying values ([#669](https://github.com/dhis2/maintenance-app-beta/issues/669)) ([533846c](https://github.com/dhis2/maintenance-app-beta/commit/533846c0e85d23746344e9414ae5fc6b239d6221))
+
 ## [0.79.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.79.0...v0.79.1) (2025-10-14)
 
 
