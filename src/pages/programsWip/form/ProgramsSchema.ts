@@ -15,6 +15,13 @@ const programBaseSchema = z.object({
     featureType: z.enum(['NONE', 'POINT', 'POLYGON']).optional(),
     relatedProgram: modelReference.optional(),
     categoryCombo: modelReference,
+    dataEntryForm: z
+        .object({
+            name: z.string().optional(),
+            displayName: z.string().optional(),
+            htmlCode: z.string().optional(),
+        })
+        .optional(),
 })
 
 export const programFormSchema = identifiable.merge(programBaseSchema).extend({

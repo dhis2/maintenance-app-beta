@@ -7,12 +7,12 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../components'
+import { CustomFormEditEntry } from '../../../../components/customForm/CustomFormEditEntry'
 import { SectionedFormSection } from '../../../../components/sectionedForm'
 import { TooltipWrapper } from '../../../../components/tooltip'
 import { DataSet } from '../../../../types/generated'
 import { DisplayOptionsField } from '../DisplayOptionsField'
 import { useDataSetField } from '../formHooks'
-import { CustomFormEditEntry } from './customForm/CustomFormEditEntry'
 import classes from './DataEntryFormContents.module.css'
 import { SectionFormSectionsList } from './SectionFormList'
 import formType = DataSet.formType

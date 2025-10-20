@@ -31,7 +31,7 @@ const fieldFilters = [
     'relatedProgram[id,displayName]',
     'categoryCombo[id,displayName]',
     'lastUpdated',
-    'dataEntryForm',
+    'dataEntryForm[id,displayName,htmlCode]',
     'programSections',
     'programTrackedEntityAttributes',
 ] as const

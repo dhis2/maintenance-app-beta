@@ -8,6 +8,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
+import { CustomFormEditEntry } from '../../../components/customForm/CustomFormEditEntry'
 import { TooltipWrapper } from '../../../components/tooltip'
 import { DataSet } from '../../../types/generated'
 import { ProgramsFromFilters } from '../Edit'
@@ -164,7 +165,9 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
             </div>
             <div className={classes.formTypeTabsContent}>
                 {selectedFormType === formType.SECTION && <>TODO</>}
-                {selectedFormType === formType.CUSTOM && <>TODO</>}
+                {selectedFormType === formType.CUSTOM && (
+                    <CustomFormEditEntry />
+                )}
             </div>
         </SectionedFormSection>
     )
