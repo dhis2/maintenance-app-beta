@@ -18,11 +18,9 @@ export const Component = () => {
     return (
         <FormBase
             onSubmit={useOnSubmitNew({ section })}
-            initialValues={{
-                ...initialValues,
-                programType: 'WITH_REGISTRATION',
-            }}
+            initialValues={initialValues}
             validate={validate}
+            subscription={{}}
             mutators={{ ...arrayMutators }}
         >
             {({ handleSubmit }) => {
