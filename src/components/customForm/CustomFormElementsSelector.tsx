@@ -8,8 +8,12 @@ import {
     InputField,
 } from '@dhis2/ui'
 import React, { useState } from 'react'
+import { useSectionHandle } from '../../lib'
 import styles from './CustomFormContents.module.css'
-import { useGetCustomFormElements } from './useGetCustomFormElements'
+import {
+    useDataSetCustomFormElements,
+    useProgramsCustomFormElements,
+} from './useGetCustomFormElements'
 
 export type CustomFormProps = {
     closeCustomFormEdit?: () => void
@@ -71,12 +75,85 @@ const ElementList = ({
     )
 }
 
-export const CustomFormElementsSelector = ({
+type ElementTypes = {
+    name: string
+    elements: { id: string; displayName: string; key?: string }[]
+    type: string
+}[]
+
+export const CustomFormElementsSelectorJunction = ({
     insertElement,
     previewMode,
 }: {
     insertElement: ElementSelectorFunction
     previewMode: boolean
+}) => {
+    const section = useSectionHandle()
+    const isProgramCustomForm = section?.name === 'dataSet' ? false : true
+    if (isProgramCustomForm) {
+        return (
+            <CustomFormElementsSelectorPrograms
+                insertElement={insertElement}
+                previewMode={previewMode}
+            />
+        )
+    }
+    return (
+        <CustomFormElementsSelectorDataSet
+            insertElement={insertElement}
+            previewMode={previewMode}
+        />
+    )
+}
+
+const CustomFormElementsSelectorDataSet = ({
+    insertElement,
+    previewMode,
+}: {
+    insertElement: ElementSelectorFunction
+    previewMode: boolean
+}) => {
+    const { loading, elementTypes } = useDataSetCustomFormElements()
+    if (loading) {
+        return <CircularLoader />
+    }
+    return (
+        <CustomFormElementsSelector
+            insertElement={insertElement}
+            previewMode={previewMode}
+            elementTypes={elementTypes}
+        />
+    )
+}
+
+const CustomFormElementsSelectorPrograms = ({
+    insertElement,
+    previewMode,
+}: {
+    insertElement: ElementSelectorFunction
+    previewMode: boolean
+}) => {
+    const { loading, elementTypes } = useProgramsCustomFormElements()
+    if (loading) {
+        return <CircularLoader />
+    }
+    return (
+        <CustomFormElementsSelector
+            insertElement={insertElement}
+            previewMode={previewMode}
+            elementTypes={elementTypes as ElementTypes}
+        />
+    )
+}
+
+const CustomFormElementsSelector = ({
+    insertElement,
+    previewMode,
+    elementTypes,
+}: {
+    insertElement: ElementSelectorFunction
+    previewMode: boolean
+    elementTypes: ElementTypes
 }) => {
     const [selectedElementType, setSelectedElementType] = useState<string[]>([])
     const updateElementTypes = (elementType: string) => {
@@ -87,15 +164,15 @@ export const CustomFormElementsSelector = ({
                 : [...filtered, elementType]
         })
     }
+    const section = useSectionHandle()
+    const isProgramCustomForm = section?.name === 'dataSet' ? false : true
 
-    const { loading, elementTypes } = useGetCustomFormElements()
+    // const { loading, elementTypes } =
+    //     useGetCustomFormElements(isProgramCustomForm)
 
     const [fieldsDisabled, setFieldsDisabled] = useState<boolean>(false)
     const [filter, setFilter] = useState<string>('')
 
-    if (loading) {
-        return <CircularLoader />
-    }
     return (
         <>
             <SubsectionSpacer>
@@ -125,13 +202,15 @@ export const CustomFormElementsSelector = ({
             </SubsectionSpacer>
 
             <SubsectionSpacer>
-                <Checkbox
-                    checked={fieldsDisabled}
-                    onChange={() => {
-                        setFieldsDisabled((prev) => !prev)
-                    }}
-                    label={i18n.t('Insert grey (disabled) fields')}
-                />
+                {!isProgramCustomForm && (
+                    <Checkbox
+                        checked={fieldsDisabled}
+                        onChange={() => {
+                            setFieldsDisabled((prev) => !prev)
+                        }}
+                        label={i18n.t('Insert grey (disabled) fields')}
+                    />
+                )}
             </SubsectionSpacer>
             {elementTypes.map((elementType) => {
                 const selected = selectedElementType.includes(elementType.type)

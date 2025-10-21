@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-10-10T10:57:27.529Z\n"
-"PO-Revision-Date: 2025-10-10T10:57:27.529Z\n"
+"POT-Creation-Date: 2025-10-17T12:40:33.497Z\n"
+"PO-Revision-Date: 2025-10-17T12:40:33.497Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -123,6 +123,84 @@ msgstr "Are you sure you want to change this?"
 msgid "Yes, change"
 msgstr "Yes, change"
 
+msgid "Custom form saved"
+msgstr "Custom form saved"
+
+msgid "Custom form (preview)"
+msgstr "Custom form (preview)"
+
+msgid "Custom form"
+msgstr "Custom form"
+
+msgid "Define a custom form for this data set by editing HTML below."
+msgstr "Define a custom form for this data set by editing HTML below."
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Preview"
+msgstr "Preview"
+
+msgid "Nothing to preview"
+msgstr "Nothing to preview"
+
+msgid "Preview of custom form"
+msgstr "Preview of custom form"
+
+msgid "Something went wrong when submitting the form"
+msgstr "Something went wrong when submitting the form"
+
+msgid "Save custom form"
+msgstr "Save custom form"
+
+msgid "Saving a custom form does not save other changes to the data set"
+msgstr "Saving a custom form does not save other changes to the data set"
+
+msgid "A custom form must be added for it to be used for data entry (web)."
+msgstr "A custom form must be added for it to be used for data entry (web)."
+
+msgid "This data set uses a custom form for data entry (web)."
+msgstr "This data set uses a custom form for data entry (web)."
+
+msgid "Custom form will be removed on save"
+msgstr "Custom form will be removed on save"
+
+msgid "Restore custom form"
+msgstr "Restore custom form"
+
+msgid "Delete custom form"
+msgstr "Delete custom form"
+
+msgid "Create custom form"
+msgstr "Create custom form"
+
+msgid "Edit custom form"
+msgstr "Edit custom form"
+
+msgid "Select elements"
+msgstr "Select elements"
+
+msgid "Elements cannot be added while previewing the form"
+msgstr "Elements cannot be added while previewing the form"
+
+msgid "Filter elements"
+msgstr "Filter elements"
+
+msgid "Insert grey (disabled) fields"
+msgstr "Insert grey (disabled) fields"
+
+msgid "Data elements"
+msgstr "Data elements"
+
+msgid "Totals"
+msgstr "Totals"
+
+msgid "Indicators"
+msgstr "Indicators"
+
+msgid "Flags"
+msgstr "Flags"
+
 msgid "Required"
 msgstr "Required"
 
@@ -140,9 +218,6 @@ msgstr "Validation errors"
 
 msgid "Some fields have validation errors. Please fix them before saving."
 msgstr "Some fields have validation errors. Please fix them before saving."
-
-msgid "Something went wrong when submitting the form"
-msgstr "Something went wrong when submitting the form"
 
 msgid "Hide error details"
 msgstr "Hide error details"
@@ -215,11 +290,11 @@ msgid "Select organisation units"
 msgstr "Select organisation units"
 
 msgid ""
-"A short, unique name (max 50 characters). Displayed in analysis apps where "
-"space is limited, depending on user or system settings."
+"A short, unique name. Displayed in analysis apps where space is limited, "
+"depending on user or system settings."
 msgstr ""
-"A short, unique name (max 50 characters). Displayed in analysis apps where "
-"space is limited, depending on user or system settings."
+"A short, unique name. Displayed in analysis apps where space is limited, "
+"depending on user or system settings."
 
 msgid "Short name"
 msgstr "Short name"
@@ -394,9 +469,6 @@ msgstr "API URL link"
 
 msgid "Copy"
 msgstr "Copy"
-
-msgid "Edit"
-msgstr "Edit"
 
 msgid "Details"
 msgstr "Details"
@@ -659,9 +731,6 @@ msgstr "Category option groups"
 msgid "Category option group sets"
 msgstr "Category option group sets"
 
-msgid "Data elements"
-msgstr "Data elements"
-
 msgid "Data element groups"
 msgstr "Data element groups"
 
@@ -676,9 +745,6 @@ msgstr "Data set notification"
 
 msgid "Data set notifications"
 msgstr "Data set notifications"
-
-msgid "Indicators"
-msgstr "Indicators"
 
 msgid "Indicator type"
 msgstr "Indicator type"
@@ -2281,9 +2347,6 @@ msgstr "Section form"
 msgid "Basic form"
 msgstr "Basic form"
 
-msgid "Custom form"
-msgstr "Custom form"
-
 msgid "Data entry form"
 msgstr "Data entry form"
 
@@ -2351,69 +2414,6 @@ msgstr "(marked for deletion)"
 
 msgid "Save section ordering"
 msgstr "Save section ordering"
-
-msgid "Custom form saved"
-msgstr "Custom form saved"
-
-msgid "Custom form (preview)"
-msgstr "Custom form (preview)"
-
-msgid "Define a custom form for this data set by editing HTML below."
-msgstr "Define a custom form for this data set by editing HTML below."
-
-msgid "Preview"
-msgstr "Preview"
-
-msgid "Nothing to preview"
-msgstr "Nothing to preview"
-
-msgid "Preview of custom form"
-msgstr "Preview of custom form"
-
-msgid "Save custom form"
-msgstr "Save custom form"
-
-msgid "Saving a custom form does not save other changes to the data set"
-msgstr "Saving a custom form does not save other changes to the data set"
-
-msgid "A custom form must be added for it to be used for data entry (web)."
-msgstr "A custom form must be added for it to be used for data entry (web)."
-
-msgid "This data set uses a custom form for data entry (web)."
-msgstr "This data set uses a custom form for data entry (web)."
-
-msgid "Custom form will be removed on save"
-msgstr "Custom form will be removed on save"
-
-msgid "Restore custom form"
-msgstr "Restore custom form"
-
-msgid "Delete custom form"
-msgstr "Delete custom form"
-
-msgid "Create custom form"
-msgstr "Create custom form"
-
-msgid "Edit custom form"
-msgstr "Edit custom form"
-
-msgid "Select elements"
-msgstr "Select elements"
-
-msgid "Elements cannot be added while previewing the form"
-msgstr "Elements cannot be added while previewing the form"
-
-msgid "Filter elements"
-msgstr "Filter elements"
-
-msgid "Insert grey (disabled) fields"
-msgstr "Insert grey (disabled) fields"
-
-msgid "Totals"
-msgstr "Totals"
-
-msgid "Flags"
-msgstr "Flags"
 
 msgid "Filter by category combination"
 msgstr "Filter by category combination"
@@ -3665,14 +3665,48 @@ msgstr "Set up the program indicator legends."
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
 
+msgid "Program must be saved before this form type can be configured."
+msgstr "Program must be saved before this form type can be configured."
+
+msgid "Enrollment: Form"
+msgstr "Enrollment: Form"
+
+msgid ""
+"Choose and configure the type of form that will be used to collect "
+"information during enrollment."
+msgstr ""
+"Choose and configure the type of form that will be used to collect "
+"information during enrollment."
+
+msgid "Only integers are allowed"
+msgstr "Only integers are allowed"
+
+msgid "Should not be lower than previous version"
+msgstr "Should not be lower than previous version"
+
+msgid "Program Details"
+msgstr "Program Details"
+
+msgid "Set up the basic information for this program."
+msgstr "Set up the basic information for this program."
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Last updated:  {{date}}"
+msgstr "Last updated:  {{date}}"
+
+msgid "Related program"
+msgstr "Related program"
+
+msgid "Choose how this program is disaggregated."
+msgstr "Choose how this program is disaggregated."
+
 msgid "Enrollment: Settings"
 msgstr "Enrollment: Settings"
 
 msgid "Enrollment: Data"
 msgstr "Enrollment: Data"
-
-msgid "Enrollment: Form"
-msgstr "Enrollment: Form"
 
 msgid "Notification details"
 msgstr "Notification details"

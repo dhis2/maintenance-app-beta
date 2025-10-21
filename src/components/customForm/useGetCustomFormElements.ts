@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import {
     useBoundResourceQueryFn,
     DEFAULT_CATEGORY_OPTION_COMBO,
-} from '../../../../../lib'
+} from '../../lib'
 
 type FlagItemResponse = { name: string; key: string; path: string }
 
@@ -56,8 +56,56 @@ type DEO = {
 type DEOData = {
     dataElementOperands: DEO[]
 }
+type ProgramAttributeData = {
+    programTrackedEntityAttributes: {
+        trackedEntityAttribute: { id: string; displayName: string }
+    }[]
+}
 
-export const useGetCustomFormElements = () => {
+export const useProgramsCustomFormElements = () => {
+    const programId = useParams().id
+    const queryFn = useBoundResourceQueryFn()
+    const { data: attributesData, isLoading } = useQuery({
+        queryFn: queryFn<ProgramAttributeData>,
+        queryKey: [
+            {
+                resource: 'programs',
+                id: programId,
+                params: {
+                    fields: [
+                        'programTrackedEntityAttributes[trackedEntityAttribute[id,displayName~name]]',
+                    ].concat(),
+                },
+            },
+        ] as const,
+    })
+
+    const elementTypes = useMemo(() => {
+        const attributes = attributesData?.programTrackedEntityAttributes.map(
+            (ptea) => ptea.trackedEntityAttribute
+        )
+        const programElements: ElementItem[] = [
+            { id: 'enrollmentDate', displayName: i18n.t('Date of enrollment') },
+            { id: 'incidentDate', displayName: i18n.t('Date of incident') },
+        ]
+        return [
+            {
+                name: i18n.t('Attributes'),
+                elements: attributes,
+                type: 'attribute',
+            },
+            {
+                name: i18n.t('Program'),
+                elements: programElements,
+                type: 'program',
+            },
+        ]
+    }, [attributesData])
+
+    return { loading: isLoading, elementTypes }
+}
+
+export const useDataSetCustomFormElements = () => {
     // get indicators from form state
     const dataSetId = useParams().id
     const { input: indicatorsInput } = useField('indicators')

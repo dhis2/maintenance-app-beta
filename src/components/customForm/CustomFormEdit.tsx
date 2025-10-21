@@ -11,10 +11,10 @@ import {
     SectionedFormSections,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-} from '../../../../../components'
-import { generateDhis2Id } from '../../../../../lib'
+} from '..'
+import { generateDhis2Id, useSectionHandle } from '../../lib'
 import styles from './CustomFormContents.module.css'
-import { CustomFormElementsSelector } from './CustomFormElementsSelector'
+import { CustomFormElementsSelectorJunction } from './CustomFormElementsSelector'
 
 export type CustomFormProps = {
     closeCustomFormEdit?: () => void
@@ -54,25 +54,36 @@ const getElementText = ({
     if (type === 'flag') {
         return `<p><img src="../dhis-web-commons/flags/${id}.png" /></p>`
     }
+    if (type === 'attribute') {
+        return `<p><input attributeid="${id}" title="${name}" value="[ ${name} ]" /></p>`
+    }
+    if (type === 'program') {
+        return `<p><input programid="${id}" title="${name}" value="[ ${name} ]" /></p>`
+    }
     return ''
 }
 
 type CustomFormDataPayload = {
     id: string
     htmlCode: string
+    name?: string
 }
 // when there is a data set id, we can post to the form endpoint
 const useUpdateForm = ({
     onSuccess,
     onError,
+    isDataSetUpdate,
+    isNewFormForProgram,
 }: {
     onSuccess: (data: CustomFormDataPayload) => void
     onError: (e: Error) => void
+    isDataSetUpdate: boolean
+    isNewFormForProgram: boolean
 }) => {
     const id = useParams().id
     const dataEngine = useDataEngine()
 
-    const update = useCallback(
+    const updateDataSet = useCallback(
         async (data: CustomFormDataPayload) => {
             try {
                 const response = await dataEngine.mutate(
@@ -96,7 +107,91 @@ const useUpdateForm = ({
         },
         [dataEngine, id, onSuccess, onError]
     )
-    return update
+
+    const updateProgram = useCallback(
+        async (data: CustomFormDataPayload) => {
+            try {
+                const response = await dataEngine.mutate(
+                    {
+                        resource: `dataEntryForms`,
+                        id: data.id,
+                        type: 'json-patch',
+                        data: [
+                            {
+                                op: 'replace',
+                                path: '/htmlCode',
+                                value: data.htmlCode,
+                            },
+                        ],
+                    },
+                    {
+                        onComplete: () => {
+                            // the response from this post is empty, so we use the data we passed if it was successful
+                            onSuccess(data)
+                        },
+                        onError,
+                    }
+                )
+                return { data: response }
+            } catch (error) {
+                console.error(error)
+            }
+        },
+        [dataEngine, onSuccess, onError]
+    )
+
+    const createProgram = useCallback(
+        async (data: CustomFormDataPayload) => {
+            try {
+                const response = await dataEngine.mutate(
+                    {
+                        resource: `dataEntryForms`,
+                        type: 'create',
+                        data: data,
+                    },
+                    {
+                        onComplete: () => {
+                            // the response from this post is empty, so we use the data we passed if it was successful
+                            // onSuccess(data)
+                        },
+                        onError,
+                    }
+                )
+                await dataEngine.mutate(
+                    {
+                        resource: `programs`,
+                        id: id as string,
+                        type: 'json-patch',
+                        data: [
+                            {
+                                op: 'replace',
+                                path: '/dataEntryForm',
+                                value: { id: data.id },
+                            },
+                        ],
+                    },
+                    {
+                        onComplete: () => {
+                            // the response from this post is empty, so we use the data we passed if it was successful
+                            onSuccess(data)
+                        },
+                    }
+                )
+                return { data: response }
+            } catch (error) {
+                console.error(error)
+            }
+        },
+        [dataEngine, id, onSuccess, onError]
+    )
+    if (isDataSetUpdate) {
+        return updateDataSet
+    }
+    if (isNewFormForProgram) {
+        return createProgram
+    }
+
+    return updateProgram
 }
 
 export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
@@ -105,6 +200,14 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
     const [customFormSaving, setCustomFormSaving] = useState<boolean>(false)
     const [customFormError, setCustomFormError] = useState<string>('')
     const { input: formInput } = useField('dataEntryForm')
+    const { input: nameInput } = useField('name')
+    const section = useSectionHandle()
+    const customFormTarget =
+        section?.name === 'dataSet'
+            ? i18n.t('data set')
+            : i18n.t('program enrollment')
+    const isNewFormForProgram =
+        section?.name === 'program' && !formInput?.value?.id
 
     const insertElement = ({
         id,
@@ -160,6 +263,8 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
             setCustomFormSaving(false)
             setCustomFormError(e.message)
         },
+        isDataSetUpdate: Boolean(section?.name === 'dataSet'),
+        isNewFormForProgram,
     })
 
     return (
@@ -174,7 +279,8 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
                         </StandardFormSectionTitle>
                         <StandardFormSectionDescription>
                             {i18n.t(
-                                'Define a custom form for this data set by editing HTML below.'
+                                `Define a custom form for this {{customFormTarget}} by editing HTML below.`,
+                                { customFormTarget }
                             )}
                         </StandardFormSectionDescription>
                         <div
@@ -228,7 +334,7 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
                                 ></textarea>
                             </div>
                             <div className={styles.customFormElementsContainer}>
-                                <CustomFormElementsSelector
+                                <CustomFormElementsSelectorJunction
                                     insertElement={insertElement}
                                     previewMode={previewMode}
                                 />
@@ -263,10 +369,18 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
                                     textAreaRef.current?.value ?? ''
                                 setCustomFormSaving(true)
                                 setCustomFormError('')
-                                updateCustomForm({
-                                    htmlCode,
-                                    id: formId,
-                                })
+                                updateCustomForm(
+                                    isNewFormForProgram
+                                        ? {
+                                              htmlCode,
+                                              id: formId,
+                                              name: nameInput?.value,
+                                          }
+                                        : {
+                                              htmlCode,
+                                              id: formId,
+                                          }
+                                )
                             }}
                             dataTest="form-submit-button"
                             disabled={customFormSaving}
@@ -287,7 +401,8 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
                         <IconInfo16 />
                         <p>
                             {i18n.t(
-                                'Saving a custom form does not save other changes to the data set'
+                                `Saving a custom form does not save other changes to the {{customFormTarget}}`,
+                                { customFormTarget }
                             )}
                         </p>
                     </div>
