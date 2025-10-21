@@ -12,7 +12,7 @@ import {
 } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
-import { Field as FieldRFF, useField } from 'react-final-form'
+import { Field as FieldRFF, FieldRenderProps, useField } from 'react-final-form'
 import {
     ModelTransfer,
     SectionedFormSection,
@@ -52,31 +52,61 @@ const RenderingOptionsSingleSelect = ({
         queryFn: queryFn<RenderingOptionsResponse>,
     })
 
+    const optionsFromData =
+        data
+            ?.find((ro) => ro.valueType === attribute.valueType)
+            ?.renderingTypes.map((rt) => ({
+                value: rt,
+                label: getConstantTranslation(rt),
+            })) ?? []
+
     return (
         <FieldRFF<string | undefined>
             inputWidth="100px"
             defaultValue={'DEFAULT'}
             name={`programTrackedEntityAttributes[${index}].renderType.${device}.type`}
-            render={(props) => (
-                <SingleSelectFieldFF
-                    {...props}
-                    inputWidth={'150px'}
-                    loading={isLoading}
-                    options={
-                        data
-                            ?.find((ro) => ro.valueType === attribute.valueType)
-                            ?.renderingTypes.map((rt) => ({
-                                value: rt,
-                                label: getConstantTranslation(rt),
-                            })) ?? [
-                            {
-                                value: 'DEFAULT',
-                                label: getConstantTranslation('DEFAULT'),
-                            },
-                        ]
-                    }
-                />
-            )}
+            render={(props: FieldRenderProps<string | undefined>) => {
+                const selectedOptions =
+                    props.input.value &&
+                    (!data ||
+                        data.length === 0 ||
+                        !optionsFromData.find(
+                            (o) => o.value === props.input.value
+                        ))
+                        ? [
+                              {
+                                  value: props.input.value,
+                                  label: getConstantTranslation(
+                                      props.input.value
+                                  ),
+                              },
+                          ]
+                        : []
+
+                const defaultOptions =
+                    (optionsFromData && optionsFromData.length > 0) ||
+                    selectedOptions.length
+                        ? []
+                        : [
+                              {
+                                  value: 'DEFAULT',
+                                  label: getConstantTranslation('DEFAULT'),
+                              },
+                          ]
+
+                return (
+                    <SingleSelectFieldFF
+                        {...props}
+                        inputWidth={'150px'}
+                        loading={isLoading}
+                        options={[
+                            ...defaultOptions,
+                            ...selectedOptions,
+                            ...optionsFromData,
+                        ]}
+                    />
+                )
+            }}
         />
     )
 }
@@ -123,6 +153,12 @@ export const EnrollmentDataFormContents = React.memo(
                             onChange={({ selected }) => {
                                 input.onChange(
                                     selected.map((s) => {
+                                        const defaultRenderType = {
+                                            MOBILE: { type: 'DEFAULT' },
+                                            DESKTOP: {
+                                                type: 'DEFAULT',
+                                            },
+                                        }
                                         const alreadySelectedAttribute =
                                             input.value.find(
                                                 (a) =>
@@ -130,25 +166,26 @@ export const EnrollmentDataFormContents = React.memo(
                                                         .id === s.id
                                             )
 
-                                        return (
-                                            alreadySelectedAttribute || {
-                                                trackedEntityAttribute: {
-                                                    id: s.id,
-                                                    displayName: s.displayName,
-                                                },
-                                                valueType: s.valueType,
-                                                allowFutureDate: false,
-                                                mandatory: false,
-                                                searchable: false,
-                                                displayInList: false,
-                                                renderType: {
-                                                    MOBILE: { type: 'DEFAULT' },
-                                                    DESKTOP: {
-                                                        type: 'DEFAULT',
-                                                    },
-                                                },
-                                            }
-                                        )
+                                        return alreadySelectedAttribute
+                                            ? {
+                                                  ...alreadySelectedAttribute,
+                                                  renderType:
+                                                      alreadySelectedAttribute.renderType ??
+                                                      defaultRenderType,
+                                              }
+                                            : {
+                                                  trackedEntityAttribute: {
+                                                      id: s.id,
+                                                      displayName:
+                                                          s.displayName,
+                                                  },
+                                                  valueType: s.valueType,
+                                                  allowFutureDate: false,
+                                                  mandatory: false,
+                                                  searchable: false,
+                                                  displayInList: false,
+                                                  renderType: defaultRenderType,
+                                              }
                                     })
                                 )
                                 input.onBlur()
