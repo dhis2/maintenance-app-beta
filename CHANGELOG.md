@@ -1,3 +1,10 @@
+# [0.80.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.79.3...v0.80.0) (2025-10-21)
+
+
+### Features
+
+* add option set schema and related tests ([#667](https://github.com/dhis2/maintenance-app-beta/issues/667)) ([121e12e](https://github.com/dhis2/maintenance-app-beta/commit/121e12e701183b634c70791ed76a782307f5eee4))
+
 ## [0.79.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.79.2...v0.79.3) (2025-10-20)
 
 
