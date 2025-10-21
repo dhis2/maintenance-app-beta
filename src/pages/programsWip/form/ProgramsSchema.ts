@@ -27,6 +27,7 @@ const programBaseSchema = z.object({
 export const programFormSchema = identifiable.merge(programBaseSchema).extend({
     name: z.string(),
     shortName: z.string(),
+    programType: z.enum(['WITH_REGISTRATION']).default('WITH_REGISTRATION'),
 })
 
 export const programListSchema = programBaseSchema.merge(withDefaultListColumns)
