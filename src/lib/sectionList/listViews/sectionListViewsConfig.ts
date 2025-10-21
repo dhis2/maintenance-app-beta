@@ -530,6 +530,22 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    icon: {
+        columns: {
+            default: [
+                { label: i18n.t('Key'), path: 'key' },
+                { label: i18n.t('Icon'), path: 'href' },
+            ],
+            available: [
+                'href',
+                { label: i18n.t('Custom'), path: 'custom' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+        },
+        filters: {
+            default: ['key'],
+        },
+    },
     attribute: {
         columns: {
             default: [
