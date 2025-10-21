@@ -70,7 +70,7 @@ const RenderingOptionsSingleSelect = ({
                     props.input.value &&
                     (!data ||
                         data.length === 0 ||
-                        !optionsFromData.find(
+                        !optionsFromData.some(
                             (o) => o.value === props.input.value
                         ))
                         ? [
