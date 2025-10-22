@@ -567,6 +567,26 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    dataApprovalWorkflow: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Period type'), path: 'periodType' },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'code',
+                'id',
+                'href',
+                'created',
+                'lastUpdatedBy',
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+        },
+        filters: {},
+    },
     attribute: {
         columns: {
             default: [
