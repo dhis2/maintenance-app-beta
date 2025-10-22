@@ -1,3 +1,12 @@
+# [0.81.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.80.0...v0.81.0) (2025-10-22)
+
+
+### Features
+
+* add data approval level components and schema ([#661](https://github.com/dhis2/maintenance-app-beta/issues/661)) ([6697be5](https://github.com/dhis2/maintenance-app-beta/commit/6697be5b6df62b0b0199685f4d78ec57e4aa242c))
+* add data approval workflow schema and related tests ([#663](https://github.com/dhis2/maintenance-app-beta/issues/663)) ([8b93a21](https://github.com/dhis2/maintenance-app-beta/commit/8b93a212f5b7813f5f0145fec7cd92953e1fedb1))
+* add legend set functionality and related schemas ([#666](https://github.com/dhis2/maintenance-app-beta/issues/666)) ([29e28e8](https://github.com/dhis2/maintenance-app-beta/commit/29e28e869735056a91333cff5f281b6dc72c0449))
+
 # [0.80.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.79.3...v0.80.0) (2025-10-21)
 
 
