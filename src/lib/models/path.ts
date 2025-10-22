@@ -90,5 +90,5 @@ export const formatEnumValue = (value: string): string => {
         return value
     }
     const spaced = value.replaceAll('_', ' ').toLowerCase()
-    return spaced.replace(/\b\w/g, (char) => char.toUpperCase())
+    return spaced.replaceAll(/\b\w/g, (char) => char.toUpperCase())
 }

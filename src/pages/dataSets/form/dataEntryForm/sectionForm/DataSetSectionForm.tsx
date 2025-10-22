@@ -115,8 +115,8 @@ export const EditDataSetSectionForm = ({
     onSubmitted,
 }: {
     section: DisplayableModel
-    onCancel?: () => void
-    onSubmitted?: (values: SubmittedSectionFormValues) => void
+    onCancel: () => void
+    onSubmitted: (values: SubmittedSectionFormValues) => void
 }) => {
     const handlePatch = usePatchModel(
         section.id,
@@ -178,8 +178,8 @@ export const NewDataSetSectionForm = ({
     onCancel,
     onSubmitted,
 }: {
-    onCancel?: () => void
-    onSubmitted?: (values: SubmittedSectionFormValues) => void
+    onCancel: () => void
+    onSubmitted: (values: SubmittedSectionFormValues) => void
 }) => {
     const handleCreate = useCreateModel(dataSetSectionSchemaSection.namePlural)
 
@@ -208,15 +208,18 @@ export const NewDataSetSectionForm = ({
 }
 
 export const EditOrNewDataSetSectionForm = ({
-    dataSetSection,
+    section,
     onCancel,
     onSubmitted: onSubmit,
 }: {
-    dataSetSection: DisplayableModel | null
-    onCancel?: () => void
-    onSubmitted?: (values: SubmittedSectionFormValues) => void
+    section: DisplayableModel | null | undefined
+    onCancel: () => void
+    onSubmitted: (values: SubmittedSectionFormValues) => void
 }) => {
-    if (dataSetSection === null) {
+    if (section === undefined) {
+        return
+    }
+    if (section === null) {
         return (
             <NewDataSetSectionForm onSubmitted={onSubmit} onCancel={onCancel} />
         )
@@ -224,7 +227,7 @@ export const EditOrNewDataSetSectionForm = ({
 
     return (
         <EditDataSetSectionForm
-            section={dataSetSection}
+            section={section}
             onCancel={onCancel}
             onSubmitted={onSubmit}
         />

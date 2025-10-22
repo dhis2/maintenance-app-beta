@@ -7,6 +7,14 @@ import { ModelSingleSelectFormField } from '../../../components/metadataFormCont
 import { getConstantTranslation, required } from '../../../lib'
 import { DeliveryChannelsField } from './DeliveryChannelsField'
 
+export const recipientOptions = [
+    { label: getConstantTranslation('USER_GROUP'), value: 'USER_GROUP' },
+    {
+        label: getConstantTranslation('ORGANISATION_UNIT_CONTACT'),
+        value: 'ORGANISATION_UNIT_CONTACT',
+    },
+]
+
 export const RecipientSection = () => {
     const { input: recipientInput, meta: recipientMeta } = useField(
         'notificationRecipient',
@@ -20,14 +28,6 @@ export const RecipientSection = () => {
 
     const isOrgUnitContact =
         recipientInput.value === 'ORGANISATION_UNIT_CONTACT'
-
-    const recipientOptions = [
-        { label: getConstantTranslation('USER_GROUP'), value: 'USER_GROUP' },
-        {
-            label: getConstantTranslation('ORGANISATION_UNIT_CONTACT'),
-            value: 'ORGANISATION_UNIT_CONTACT',
-        },
-    ]
 
     return (
         <div>
@@ -49,7 +49,8 @@ export const RecipientSection = () => {
                         <div style={{ width: '400px' }}>
                             <ModelSingleSelectFormField
                                 name="recipientUserGroup"
-                                label={i18n.t('User Group Recipients')}
+                                dataTest="formfields-recipientUserGroup"
+                                label={i18n.t('User Group Recipient')}
                                 validate={required}
                                 query={{
                                     resource: 'userGroups',

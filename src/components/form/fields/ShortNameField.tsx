@@ -22,7 +22,7 @@ export function ShortNameField({
     const helpString =
         helpText ||
         i18n.t(
-            'A short, unique name (max 50 characters). Displayed in analysis apps where space is limited, depending on user or system settings.'
+            'A short, unique name. Displayed in analysis apps where space is limited, depending on user or system settings.'
         )
 
     return (

@@ -466,6 +466,7 @@ export const modelListViewsConfig = {
                 'filter',
                 'aggregateExportCategoryOptionCombo',
                 'aggregateExportAttributeOptionCombo',
+                'aggregateExportDataElement',
             ],
         },
         filters: {
@@ -523,6 +524,93 @@ export const modelListViewsConfig = {
                 'description',
                 DESCRIPTORS.formName,
                 DESCRIPTORS.shortName,
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+        },
+        filters: {},
+    },
+    optionSet: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                { path: 'valueType', label: i18n.t('Value type') },
+                'lastUpdated',
+            ],
+            available: [
+                'href',
+                'code',
+                'id',
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Version'), path: 'version' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+        },
+        filters: {},
+    },
+    legendSet: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'code',
+                'id',
+                'href',
+                'lastUpdatedBy',
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+        },
+        filters: {},
+    },
+    dataApprovalWorkflow: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Period type'), path: 'periodType' },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'code',
+                'id',
+                'href',
+                'created',
+                'lastUpdatedBy',
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+        },
+        filters: {},
+    },
+    dataApprovalLevel: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Level'), path: 'level' },
+                {
+                    label: i18n.t('Organisation unit level'),
+                    path: 'orgUnitLevel',
+                },
+                {
+                    label: i18n.t('Category option group set'),
+                    path: 'categoryOptionGroupSet',
+                },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'description',
+                'code',
+                'href',
+                'id',
+                'created',
+                'lastUpdatedBy',
+                DESCRIPTORS.name,
                 { label: i18n.t('Favorite'), path: 'favorite' },
                 { label: i18n.t('Owner'), path: 'user.displayName' },
             ],
