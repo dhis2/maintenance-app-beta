@@ -530,6 +530,43 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    optionSet: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                { path: 'valueType', label: i18n.t('Value type') },
+                'lastUpdated',
+            ],
+            available: [
+                'href',
+                'code',
+                'id',
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Version'), path: 'version' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+        },
+        filters: {},
+    },
+    legendSet: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'code',
+                'id',
+                'href',
+                'lastUpdatedBy',
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+        },
+        filters: {},
+    },
     dataApprovalWorkflow: {
         columns: {
             default: [

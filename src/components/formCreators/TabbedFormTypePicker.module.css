@@ -1,0 +1,37 @@
+.displayOptions {
+    display: block;
+    margin-top: var(--spacers-dp32);
+    margin-bottom: var(--spacers-dp32);
+    max-width: 720px;
+    padding: var(--spacers-dp16);
+}
+
+.formTypeTab {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacers-dp4);
+}
+
+.formTypeTab > * {
+    display: inline-flex;
+    align-items: center;
+}
+
+.formTypeInfo {
+    margin-bottom: var(--spacers-dp24);
+}
+
+.formTypeTabsContainer {
+    max-width: 740px;
+}
+
+.formTypeTabsContent {
+    max-width: 740px;
+    align-items: center;
+}
+
+.formTypeTabsContent > * {
+    margin-left: auto;
+    margin-right: auto;
+}
