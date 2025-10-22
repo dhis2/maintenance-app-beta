@@ -87,6 +87,7 @@ export const CategoryFormFields = () => {
                 <StandardFormField>
                     <StandardFormField>
                         <ModelTransferField
+                            dataTest="category-transfer"
                             name="categoryOptions"
                             query={{
                                 resource: 'categoryOptions',
