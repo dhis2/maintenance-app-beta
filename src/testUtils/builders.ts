@@ -29,6 +29,7 @@ import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicato
 import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
 import { indicatorListSchema } from '../pages/indicators/form/indicatorSchema'
 import { indicatorTypeListSchema } from '../pages/indicatorTypes/form/indicatorTypesSchema'
+import { legendSetListSchema } from '../pages/legendSets/form/legendSetListSchema'
 import { OptionGroupListSchema } from '../pages/optionGroups/form/OptionGroupFormSchema'
 import {
     optionGroupSetFormSchema,
@@ -124,6 +125,13 @@ export const testConstant = (overwrites: Record<any, any> = {}) => ({
 
 export const testIndicator = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(indicatorListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testLegendSets = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(legendSetListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
