@@ -20,6 +20,7 @@ export const Component = () => {
             onSubmit={useOnSubmitNew({ section })}
             initialValues={initialValues}
             validate={validate}
+            subscription={{}}
             mutators={{ ...arrayMutators }}
         >
             {({ handleSubmit }) => {

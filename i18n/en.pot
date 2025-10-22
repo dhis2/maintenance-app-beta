@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-10-02T11:14:26.980Z\n"
-"PO-Revision-Date: 2025-10-02T11:14:26.981Z\n"
+"POT-Creation-Date: 2025-10-22T08:42:29.806Z\n"
+"PO-Revision-Date: 2025-10-22T08:42:29.806Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -114,6 +114,15 @@ msgstr "Filter options"
 msgid "Retry"
 msgstr "Retry"
 
+msgid "Change this field"
+msgstr "Change this field"
+
+msgid "Are you sure you want to change this?"
+msgstr "Are you sure you want to change this?"
+
+msgid "Yes, change"
+msgstr "Yes, change"
+
 msgid "Required"
 msgstr "Required"
 
@@ -206,14 +215,93 @@ msgid "Select organisation units"
 msgstr "Select organisation units"
 
 msgid ""
-"A short, unique name (max 50 characters). Displayed in analysis apps where "
-"space is limited, depending on user or system settings."
+"A short, unique name. Displayed in analysis apps where space is limited, "
+"depending on user or system settings."
 msgstr ""
-"A short, unique name (max 50 characters). Displayed in analysis apps where "
-"space is limited, depending on user or system settings."
+"A short, unique name. Displayed in analysis apps where space is limited, "
+"depending on user or system settings."
 
 msgid "Short name"
 msgstr "Short name"
+
+msgid "Sections"
+msgstr "Sections"
+
+msgid "Configure data and options for form sections."
+msgstr "Configure data and options for form sections."
+
+msgid "Section {{sectionName}} will be removed on save"
+msgstr "Section {{sectionName}} will be removed on save"
+
+msgid "Restore section"
+msgstr "Restore section"
+
+msgid "Add section"
+msgstr "Add section"
+
+msgid "Reorder sections"
+msgstr "Reorder sections"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Translate"
+msgstr "Translate"
+
+msgid "Copy ID"
+msgstr "Copy ID"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "New sections order saved successfully"
+msgstr "New sections order saved successfully"
+
+msgid "Error saving new sections order."
+msgstr "Error saving new sections order."
+
+msgid "Reorder form sections"
+msgstr "Reorder form sections"
+
+msgid "(marked for deletion)"
+msgstr "(marked for deletion)"
+
+msgid "Save section ordering"
+msgstr "Save section ordering"
+
+msgid "You need to save before this form type can be configured."
+msgstr "You need to save before this form type can be configured."
+
+msgid "Section form"
+msgstr "Section form"
+
+msgid "Basic form"
+msgstr "Basic form"
+
+msgid "Basic forms display an auto-generated list."
+msgstr "Basic forms display an auto-generated list."
+
+msgid "Custom form"
+msgstr "Custom form"
+
+msgid "Form type based on your current setup"
+msgstr "Form type based on your current setup"
+
+msgid ""
+"Web will display {{webFormType}}  |  Android will display "
+"{{androidFormType}}"
+msgstr ""
+"Web will display {{webFormType}}  |  Android will display "
+"{{androidFormType}}"
+
+msgid ""
+"Section forms let you create sections to organize data items for easier "
+"entry. If a Section form is created, it will be shown instead of the Basic "
+"form."
+msgstr ""
+"Section forms let you create sections to organize data items for easier "
+"entry. If a Section form is created, it will be shown instead of the Basic "
+"form."
 
 msgid "Failed to load {{label}}"
 msgstr "Failed to load {{label}}"
@@ -386,9 +474,6 @@ msgstr "API URL link"
 msgid "Copy"
 msgstr "Copy"
 
-msgid "Edit"
-msgstr "Edit"
-
 msgid "Details"
 msgstr "Details"
 
@@ -506,9 +591,6 @@ msgstr "Public access"
 msgid "Validation rule group"
 msgstr "Validation rule group"
 
-msgid "Delete"
-msgstr "Delete"
-
 msgid "Successfully deleted {{modelType}} \"{{displayName}}\""
 msgstr "Successfully deleted {{modelType}} \"{{displayName}}\""
 
@@ -532,9 +614,6 @@ msgstr "Show details"
 
 msgid "Sharing settings"
 msgstr "Sharing settings"
-
-msgid "Translate"
-msgstr "Translate"
 
 msgid "At least one column must be selected"
 msgstr "At least one column must be selected"
@@ -1145,6 +1224,9 @@ msgstr "Category option combination for aggregate data export"
 msgid "Attribute option combination for aggregate data export"
 msgstr "Attribute option combination for aggregate data export"
 
+msgid "Data element for aggregate data export"
+msgstr "Data element for aggregate data export"
+
 msgid "Analytics type"
 msgstr "Analytics type"
 
@@ -1297,6 +1379,9 @@ msgstr "Decimals in data output"
 
 msgid "Value"
 msgstr "Value"
+
+msgid "Version"
+msgstr "Version"
 
 msgid "Mandatory"
 msgstr "Mandatory"
@@ -1815,6 +1900,28 @@ msgstr "Choose a set of predefined comments for data entry."
 msgid "Choose a set of predefined options for data entry."
 msgstr "Choose a set of predefined options for data entry."
 
+msgid "Option set update will change value type"
+msgstr "Option set update will change value type"
+
+msgid ""
+"Updating the option set will change the value type which may cause problems "
+"when generating analytics tables if there is existing data for this data "
+"element."
+msgstr ""
+"Updating the option set will change the value type which may cause problems "
+"when generating analytics tables if there is existing data for this data "
+"element."
+
+msgid ""
+"Are you sure you want to change the option set to {{optionSet}} which will "
+"change the value type from {{currentValueType}} to {{newValueType}}?"
+msgstr ""
+"Are you sure you want to change the option set to {{optionSet}} which will "
+"change the value type from {{currentValueType}} to {{newValueType}}?"
+
+msgid "this option set"
+msgstr "this option set"
+
 msgid "Url"
 msgstr "Url"
 
@@ -1823,6 +1930,29 @@ msgstr "A web link that provides extra information."
 
 msgid "The type of data that will be recorded."
 msgstr "The type of data that will be recorded."
+
+msgid "Change value type"
+msgstr "Change value type"
+
+msgid ""
+"Changing the value type may cause problems when generating analytics tables "
+"if there is existing data for this data element."
+msgstr ""
+"Changing the value type may cause problems when generating analytics tables "
+"if there is existing data for this data element."
+
+msgid ""
+"Are you sure you want to change the {{objectType}} to "
+"{{newObjectTypeValue}}?"
+msgstr ""
+"Are you sure you want to change the {{objectType}} to "
+"{{newObjectTypeValue}}?"
+
+msgid "value type"
+msgstr "value type"
+
+msgid "undefined"
+msgstr "undefined"
 
 msgid "Store zero data values"
 msgstr "Store zero data values"
@@ -1932,11 +2062,8 @@ msgstr "SMS"
 msgid "When to send notification"
 msgstr "When to send notification"
 
-msgid "Send notification"
-msgstr "Send notification"
-
-msgid "days"
-msgstr "days"
+msgid "Send before or after scheduled date"
+msgstr "Send before or after scheduled date"
 
 msgid "Before"
 msgstr "Before"
@@ -1944,14 +2071,20 @@ msgstr "Before"
 msgid "After"
 msgstr "After"
 
-msgid "scheduled date"
-msgstr "scheduled date"
+msgid "Number of days {{beforeOrAfter}} scheduled date to send notification"
+msgstr "Number of days {{beforeOrAfter}} scheduled date to send notification"
+
+msgid "before"
+msgstr "before"
+
+msgid "after"
+msgstr "after"
 
 msgid "Recipient type"
 msgstr "Recipient type"
 
-msgid "User Group Recipients"
-msgstr "User Group Recipients"
+msgid "User Group Recipient"
+msgstr "User Group Recipient"
 
 msgid "Subject"
 msgstr "Subject"
@@ -2140,18 +2273,8 @@ msgstr ""
 "Changing the period type will make previously entered data for this data "
 "set not appear in the data entry app. This can lead to duplicate data entry."
 
-msgid ""
-"Are you sure you want to change the period type to "
-"{{preselectedPeriodType}}?"
-msgstr ""
-"Are you sure you want to change the period type to "
-"{{preselectedPeriodType}}?"
-
-msgid "Yes, change"
-msgstr "Yes, change"
-
-msgid "Period type (required)"
-msgstr "Period type (required)"
+msgid "period type"
+msgstr "period type"
 
 msgid "Configure data entry periods"
 msgstr "Configure data entry periods"
@@ -2222,18 +2345,6 @@ msgstr ""
 "Optionally configure which data elements must have a value to complete this "
 "data set."
 
-msgid "Data set must be saved before this form type can be configured."
-msgstr "Data set must be saved before this form type can be configured."
-
-msgid "Section form"
-msgstr "Section form"
-
-msgid "Basic form"
-msgstr "Basic form"
-
-msgid "Custom form"
-msgstr "Custom form"
-
 msgid "Data entry form"
 msgstr "Data entry form"
 
@@ -2244,63 +2355,8 @@ msgstr ""
 "Choose and configure how the data entry form looks and works for this data "
 "set."
 
-msgid "Form type based on your current setup"
-msgstr "Form type based on your current setup"
-
-msgid ""
-"Web will display {{webFormType}}  |  Android will display "
-"{{androidFormType}}"
-msgstr ""
-"Web will display {{webFormType}}  |  Android will display "
-"{{androidFormType}}"
-
-msgid ""
-"Section forms let you create sections to organize data items for easier "
-"entry. If a Section form is created, it will be shown instead of the Basic "
-"form."
-msgstr ""
-"Section forms let you create sections to organize data items for easier "
-"entry. If a Section form is created, it will be shown instead of the Basic "
-"form."
-
 msgid "Display options"
 msgstr "Display options"
-
-msgid "Sections"
-msgstr "Sections"
-
-msgid "Configure data and options for form sections."
-msgstr "Configure data and options for form sections."
-
-msgid "Section {{sectionName}} will be removed on save"
-msgstr "Section {{sectionName}} will be removed on save"
-
-msgid "Restore section"
-msgstr "Restore section"
-
-msgid "Add section"
-msgstr "Add section"
-
-msgid "Reorder sections"
-msgstr "Reorder sections"
-
-msgid "Copy ID"
-msgstr "Copy ID"
-
-msgid "New sections order saved successfully"
-msgstr "New sections order saved successfully"
-
-msgid "Error saving new sections order."
-msgstr "Error saving new sections order."
-
-msgid "Reorder form sections"
-msgstr "Reorder form sections"
-
-msgid "(marked for deletion)"
-msgstr "(marked for deletion)"
-
-msgid "Save section ordering"
-msgstr "Save section ordering"
 
 msgid "Custom form saved"
 msgstr "Custom form saved"
@@ -3431,9 +3487,6 @@ msgstr "Remove program indicator mapping"
 msgid "Attribute category combination"
 msgstr "Attribute category combination"
 
-msgid "Data element for aggregate data export"
-msgstr "Data element for aggregate data export"
-
 msgid "There are some invalid expressions"
 msgstr "There are some invalid expressions"
 
@@ -3618,14 +3671,78 @@ msgstr "Set up the program indicator legends."
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
 
+msgid "Enrollment: Form"
+msgstr "Enrollment: Form"
+
+msgid ""
+"Choose and configure the type of form that will be used to collect "
+"information during enrollment."
+msgstr ""
+"Choose and configure the type of form that will be used to collect "
+"information during enrollment."
+
+msgid "Only integers are allowed"
+msgstr "Only integers are allowed"
+
+msgid "Should not be lower than previous version"
+msgstr "Should not be lower than previous version"
+
+msgid "Program Details"
+msgstr "Program Details"
+
+msgid "Set up the basic information for this program."
+msgstr "Set up the basic information for this program."
+
+msgid "Last updated:  {{date}}"
+msgstr "Last updated:  {{date}}"
+
+msgid "Related program"
+msgstr "Related program"
+
+msgid "Choose how this program is disaggregated."
+msgstr "Choose how this program is disaggregated."
+
 msgid "Enrollment: Settings"
 msgstr "Enrollment: Settings"
 
 msgid "Enrollment: Data"
 msgstr "Enrollment: Data"
 
-msgid "Enrollment: Form"
-msgstr "Enrollment: Form"
+msgid "Listing"
+msgstr "Listing"
+
+msgid "Sequential"
+msgstr "Sequential"
+
+msgid "Matrix"
+msgstr "Matrix"
+
+msgid "Explain the purpose of this section."
+msgstr "Explain the purpose of this section."
+
+msgid "Desktop display"
+msgstr "Desktop display"
+
+msgid "Mobile display"
+msgstr "Mobile display"
+
+msgid "Section attributes"
+msgstr "Section attributes"
+
+msgid "Available attributes"
+msgstr "Available attributes"
+
+msgid "Selected attributes"
+msgstr "Selected attributes"
+
+msgid "Search available attributes"
+msgstr "Search available attributes"
+
+msgid "Search selected attributes"
+msgstr "Search selected attributes"
+
+msgid "Saving a section does not save other changes to the program"
+msgstr "Saving a section does not save other changes to the program"
 
 msgid "Notification details"
 msgstr "Notification details"

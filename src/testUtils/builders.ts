@@ -18,20 +18,26 @@ import { categoryOptionGroupSetListSchema } from '../pages/categoryOptionGroupSe
 import { categoryOptionListSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
 import { ConstantsListSchema } from '../pages/constants/form/ConstantFormSchema'
 import { dataApprovalLevelListSchema } from '../pages/dataApprovalLevels/form/dataApprovalLevelsSchema'
+import { dataApprovalWorkflowListSchema } from '../pages/dataApprovalWorkflows/form/dataApprovalWorkflowSchema'
 import { dataElementGroupListSchema } from '../pages/dataElementGroups/form/dataElementGroupSchema'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementListSchema } from '../pages/dataElements/form/dataElementSchema'
-import { dataSetNotificationTemplateListSchema } from '../pages/dataSetNotificationTemplates/form/dataSetNotificationTemplateSchema'
+import {
+    dataSetNotificationTemplateListSchema,
+    dataSetNotificationTemplateFormSchema,
+} from '../pages/dataSetNotificationTemplates/form/dataSetNotificationTemplateSchema'
 import { dataSetListSchema } from '../pages/dataSets/form/dataSetFormSchema'
 import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicatorGroupSchema'
 import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
 import { indicatorListSchema } from '../pages/indicators/form/indicatorSchema'
 import { indicatorTypeListSchema } from '../pages/indicatorTypes/form/indicatorTypesSchema'
+import { legendSetListSchema } from '../pages/legendSets/form/legendSetListSchema'
 import { OptionGroupListSchema } from '../pages/optionGroups/form/OptionGroupFormSchema'
 import {
     optionGroupSetFormSchema,
     optionGroupSetListSchema,
 } from '../pages/optionGroupSets/form/optionGroupSetSchema'
+import { optionSetListSchema } from '../pages/optionSets/form/optionSetSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
@@ -121,6 +127,13 @@ export const testConstant = (overwrites: Record<any, any> = {}) => ({
 
 export const testIndicator = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(indicatorListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testLegendSets = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(legendSetListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -217,8 +230,24 @@ export const testDataSetNotificationTemplate = (
     ...overwrites,
 })
 
+export const testDataSetNotificationTemplateForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(dataSetNotificationTemplateFormSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
 export const testOptionGroupSet = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(optionGroupSetFormSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testOptionSets = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(optionSetListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -261,6 +290,13 @@ export const testdataApprovalLevelList = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(dataApprovalLevelListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testDataApprovalWorkflowList = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(dataApprovalWorkflowListSchema, { mockeryMapper }),
     ...overwrites,
 })
 
