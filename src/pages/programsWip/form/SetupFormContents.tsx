@@ -132,6 +132,7 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                         params: {
                             fields: ['id', 'displayName'],
                             order: ['displayName'],
+                            filter: ['id:ne:' + values.id],
                         },
                     }}
                 />
