@@ -89,7 +89,7 @@ export const CustomFormElementsSelectorJunction = ({
     previewMode: boolean
 }) => {
     const section = useSectionHandle()
-    const isProgramCustomForm = section?.name === 'dataSet' ? false : true
+    const isProgramCustomForm = section?.name === 'dataSet'
     if (isProgramCustomForm) {
         return (
             <CustomFormElementsSelectorPrograms
@@ -165,10 +165,7 @@ const CustomFormElementsSelector = ({
         })
     }
     const section = useSectionHandle()
-    const isProgramCustomForm = section?.name === 'dataSet' ? false : true
-
-    // const { loading, elementTypes } =
-    //     useGetCustomFormElements(isProgramCustomForm)
+    const isProgramCustomForm = section?.name === 'dataSet'
 
     const [fieldsDisabled, setFieldsDisabled] = useState<boolean>(false)
     const [filter, setFilter] = useState<string>('')
@@ -216,13 +213,13 @@ const CustomFormElementsSelector = ({
                 const selected = selectedElementType.includes(elementType.type)
                 const cleanedFilter = filter
                     .normalize('NFD')
-                    .replace(/\p{Diacritic}/gu, '')
+                    .replaceAll(/\p{Diacritic}/gu, '')
                     .toLowerCase()
                 const filteredElements = elementType.elements.filter(
                     (e: ElementItem) =>
                         e.displayName
                             .normalize('NFD')
-                            .replace(/\p{Diacritic}/gu, '')
+                            .replaceAll(/\p{Diacritic}/gu, '')
                             .toLowerCase()
                             .includes(cleanedFilter)
                 )

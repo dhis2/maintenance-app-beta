@@ -150,10 +150,6 @@ const useUpdateForm = ({
                         data: data,
                     },
                     {
-                        onComplete: () => {
-                            // the response from this post is empty, so we use the data we passed if it was successful
-                            // onSuccess(data)
-                        },
                         onError,
                     }
                 )
@@ -172,7 +168,7 @@ const useUpdateForm = ({
                     },
                     {
                         onComplete: () => {
-                            // the response from this post is empty, so we use the data we passed if it was successful
+                            // use the data we passed if form was saved and associated to program
                             onSuccess(data)
                         },
                     }
