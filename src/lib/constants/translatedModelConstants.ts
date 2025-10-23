@@ -129,6 +129,28 @@ const NOTIFICATION_RECIPIENT = {
     USER_GROUP: i18n.t('User group'),
 }
 
+const RENDERING_TYPE = {
+    DEFAULT: i18n.t('Default'),
+    DROPDOWN: i18n.t('Dropdown'),
+    VERTICAL_RADIOBUTTONS: i18n.t('Vertical radiobuttons'),
+    HORIZONTAL_RADIOBUTTONS: i18n.t('Horizontal radiobuttons'),
+    VERTICAL_CHECKBOXES: i18n.t('Vertical checkboxes'),
+    HORIZONTAL_CHECKBOXES: i18n.t('Horizontal checkboxes'),
+    SHARED_HEADER_RADIOBUTTONS: i18n.t('Shared header radiobuttons'),
+    ICONS_AS_BUTTONS: i18n.t('Icons as buttons'),
+    SPINNER: i18n.t('Spinner'),
+    ICON: i18n.t('Icon'),
+    TOGGLE: i18n.t('Toggle'),
+    VALUE: i18n.t('Value'),
+    SLIDER: i18n.t('Slider'),
+    LINEAR_SCALE: i18n.t('Linear scale'),
+    AUTOCOMPLETE: i18n.t('Autocomplete'),
+    QR_CODE: i18n.t('Qr code'),
+    BAR_CODE: i18n.t('Bar code'),
+    GS1_DATAMATRIX: i18n.t('Gs1 datamatrix'),
+    CANVAS: i18n.t('Canvas'),
+}
+
 const allConstantTranslations: Record<string, string> = {
     ...AGGREGATION_TYPE,
     ...ANALYTICS_TYPE,
@@ -138,6 +160,7 @@ const allConstantTranslations: Record<string, string> = {
     ...GEOMETRY_TYPE,
     ...FORM_TYPE,
     ...PERIOD_TYPE,
+    ...RENDERING_TYPE,
     ...SEND_STRATEGY,
     ...DATA_SET_NOTIFICATION_TRIGGER,
     ...NOTIFICATION_RECIPIENT,
