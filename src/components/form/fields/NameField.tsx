@@ -8,13 +8,15 @@ import { useValidator } from '../../../lib/models/useFieldValidators'
 export function NameField({
     schemaSection,
     helpText,
+    modelId,
     warner,
 }: {
     helpText?: string
     schemaSection: SchemaSection
+    modelId?: string
     warner?: (value?: string) => Promise<string | undefined> | undefined
 }) {
-    const validator = useValidator({ schemaSection, property: 'name' })
+    const validator = useValidator({ schemaSection, property: 'name', modelId })
     const [warning, setWarning] = useState<string | undefined>()
 
     const helpString =
