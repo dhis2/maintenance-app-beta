@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-10-20T10:36:33.591Z\n"
-"PO-Revision-Date: 2025-10-20T10:36:33.591Z\n"
+"POT-Creation-Date: 2025-10-23T12:03:11.676Z\n"
+"PO-Revision-Date: 2025-10-23T12:03:11.676Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -3681,17 +3681,8 @@ msgstr ""
 msgid "Configure settings related to enrollment in this program."
 msgstr "Configure settings related to enrollment in this program."
 
-msgid "Tracked Entity type (required)"
-msgstr "Tracked Entity type (required)"
-
-msgid "Choose what this program will be tracking."
-msgstr "Choose what this program will be tracking."
-
-msgid "Could not load tracked entity types"
-msgstr "Could not load tracked entity types"
-
-msgid "Tracked entity type is required"
-msgstr "Tracked entity type is required"
+msgid "Choose what this program will be tracking"
+msgstr "Choose what this program will be tracking"
 
 msgid "Multiple enrollments"
 msgstr "Multiple enrollments"

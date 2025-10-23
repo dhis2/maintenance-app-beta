@@ -1,10 +1,8 @@
-import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { CheckboxFieldFF, Box, Radio } from '@dhis2/ui'
+import { CheckboxFieldFF, Radio } from '@dhis2/ui'
 import React, { useEffect } from 'react'
-import { Field, useField, useForm, useFormState } from 'react-final-form'
+import { Field, useField, useFormState } from 'react-final-form'
 import {
-    SearchableSingleSelect,
     SectionedFormSection,
     StandardFormField,
     StandardFormSectionDescription,
@@ -13,26 +11,10 @@ import {
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import styles from './EnrollmentSettingsFormContents.module.css'
 
-const trackedEntityTypesQuery = {
-    trackedEntityTypes: {
-        resource: 'trackedEntityTypes',
-        params: {
-            fields: 'id,displayName,name',
-            paging: false,
-        },
-    },
-}
-
 type TrackedEntityType = {
     id: string
     displayName: string
     name: string
-}
-
-type QueryResult = {
-    trackedEntityTypes?: {
-        trackedEntityTypes: TrackedEntityType[]
-    }
 }
 
 export const EnrollmentSettingsFormContents = React.memo(
@@ -81,6 +63,7 @@ export const EnrollmentSettingsFormContents = React.memo(
                         helpText={i18n.t(
                             'Choose what this program will be tracking'
                         )}
+                        clearable={true}
                         query={{
                             resource: 'trackedEntityTypes',
                             params: {
