@@ -89,7 +89,7 @@ export const CustomFormElementsSelectorJunction = ({
     previewMode: boolean
 }) => {
     const section = useSectionHandle()
-    const isProgramCustomForm = section?.name === 'dataSet'
+    const isProgramCustomForm = section?.name !== 'dataSet'
     if (isProgramCustomForm) {
         return (
             <CustomFormElementsSelectorPrograms
@@ -165,7 +165,7 @@ const CustomFormElementsSelector = ({
         })
     }
     const section = useSectionHandle()
-    const isProgramCustomForm = section?.name === 'dataSet'
+    const isProgramCustomForm = section?.name !== 'dataSet'
 
     const [fieldsDisabled, setFieldsDisabled] = useState<boolean>(false)
     const [filter, setFilter] = useState<string>('')
