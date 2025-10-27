@@ -104,7 +104,7 @@ export const dataSetFormSchema = identifiable
         dataInputPeriods: z
             .array(
                 z.object({
-                    perid: modelReference,
+                    period: modelReference,
                     openingDate: z.string().optional(),
                     closingDate: z.string().optional(),
                 })
