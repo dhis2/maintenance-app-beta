@@ -29,12 +29,16 @@ export const ModelValueRenderer = ({
     }
 
     if (path === 'programType') {
-        const label =
-            value === 'WITH_REGISTRATION'
-                ? i18n.t('Tracker program')
-                : value === 'WITHOUT_REGISTRATION'
-                ? i18n.t('Event program')
-                : i18n.t('No value')
+        let label: string
+
+        if (value === 'WITH_REGISTRATION') {
+            label = i18n.t('Tracker program')
+        } else if (value === 'WITHOUT_REGISTRATION') {
+            label = i18n.t('Event program')
+        } else {
+            label = i18n.t('No value')
+        }
+
         return <TextValue value={label} />
     }
 
