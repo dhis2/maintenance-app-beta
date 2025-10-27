@@ -617,6 +617,175 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    program: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Program Type'), path: 'programType' },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                {
+                    label: i18n.t('Display enrollment label'),
+                    path: 'displayEnrollmentLabel',
+                },
+                {
+                    label: i18n.t('Display event label'),
+                    path: 'displayEventLabel',
+                },
+                {
+                    label: i18n.t('Display follow-up label'),
+                    path: 'displayFollowupLabel',
+                },
+                {
+                    label: i18n.t('Display note label'),
+                    path: 'displayNoteLabel',
+                },
+                {
+                    label: i18n.t('Display org unit label'),
+                    path: 'displayOrgUnitLabel',
+                },
+                {
+                    label: i18n.t('Display program stage label'),
+                    path: 'displayProgramStageLabel',
+                },
+                {
+                    label: i18n.t('Display relationship label'),
+                    path: 'displayRelationshipLabel',
+                },
+                {
+                    label: i18n.t('Display tracked entity attribute label'),
+                    path: 'displayTrackedEntityAttributeLabel',
+                },
+                { label: i18n.t('Access level'), path: 'accessLevel' },
+                {
+                    label: i18n.t('Allow future enrollment dates'),
+                    path: 'allowFutureEnrollmentDates',
+                },
+                {
+                    label: i18n.t('Allow future incident dates'),
+                    path: 'allowFutureIncidentDates',
+                },
+                { label: i18n.t('API URL'), path: 'href' },
+                { label: i18n.t('Code'), path: 'code' },
+                {
+                    label: i18n.t('Completed events expiry days'),
+                    path: 'completedEventsExpiryDays',
+                },
+                { label: i18n.t('Created'), path: 'created' },
+                {
+                    label: i18n.t('Custom label for enrollment'),
+                    path: 'displayCustomEnrollmentLabel',
+                },
+                {
+                    label: i18n.t('Custom label for enrollment date'),
+                    path: 'displayCustomEnrollmentDateLabel',
+                },
+                {
+                    label: i18n.t('Custom label for event'),
+                    path: 'displayCustomEventLabel',
+                },
+                {
+                    label: i18n.t('Custom label for follow-up'),
+                    path: 'displayCustomFollowupLabel',
+                },
+                {
+                    label: i18n.t('Custom label for incident date'),
+                    path: 'displayCustomIncidentDateLabel',
+                },
+                {
+                    label: i18n.t('Custom label for note'),
+                    path: 'displayCustomNoteLabel',
+                },
+                {
+                    label: i18n.t('Custom label for program stage'),
+                    path: 'displayCustomProgramStageLabel',
+                },
+                {
+                    label: i18n.t('Custom label for registering unit'),
+                    path: 'displayCustomRegisteringUnitLabel',
+                },
+                {
+                    label: i18n.t('Custom label for relationship'),
+                    path: 'displayCustomRelationshipLabel',
+                },
+                {
+                    label: i18n.t('Custom label for tracked entity attribute'),
+                    path: 'displayCustomTrackedEntityAttributeLabel',
+                },
+                { label: i18n.t('Description'), path: 'description' },
+                {
+                    label: i18n.t('Display enrollment date label'),
+                    path: 'displayEnrollmentDateLabel',
+                },
+                {
+                    label: i18n.t('Display front page list'),
+                    path: 'displayFrontPageList',
+                },
+                {
+                    label: i18n.t('Display incident date label'),
+                    path: 'displayIncidentDateLabel',
+                },
+                { label: i18n.t('Expiry days'), path: 'expiryDays' },
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Feature type'), path: 'featureType' },
+                {
+                    label: i18n.t('First stage appears on registration page'),
+                    path: 'firstStageDuringRegistration',
+                },
+                { label: i18n.t('Form name'), path: 'formName' },
+                { label: i18n.t('Id'), path: 'id' },
+                {
+                    label: i18n.t('Ignore overdue events'),
+                    path: 'ignoreOverdueEvents',
+                },
+                {
+                    label: i18n.t('Last updated by'),
+                    path: 'lastUpdatedBy.displayName',
+                },
+                {
+                    label: i18n.t(
+                        'Maximum number of tracked entity instances to return in search'
+                    ),
+                    path: 'maxTeiCountToReturn',
+                },
+                {
+                    label: i18n.t(
+                        'Minimum number of attributes required to search'
+                    ),
+                    path: 'minAttributesRequiredToSearch',
+                },
+                {
+                    label: i18n.t(
+                        'Only enroll once (per tracked entity instance lifetime)'
+                    ),
+                    path: 'onlyEnrollOnce',
+                },
+                {
+                    label: i18n.t('Open days after category option end date'),
+                    path: 'openDaysAfterCoEndDate',
+                },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+                { label: i18n.t('Short name'), path: 'shortName' },
+                {
+                    label: i18n.t('Show incident date'),
+                    path: 'showIncidentDate',
+                },
+                { label: i18n.t('Skip offline'), path: 'skipOffline' },
+                { label: i18n.t('Version'), path: 'version' },
+                {
+                    label: i18n.t('Without registration'),
+                    path: 'withoutRegistration',
+                },
+            ],
+        },
+        filters: {
+            default: ['programType'],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
+    },
     attribute: {
         columns: {
             default: [
