@@ -5,10 +5,12 @@ import React from 'react'
 import { useField, useFormState } from 'react-final-form'
 import { useHref } from 'react-router'
 import {
-    DefaultIdentifiableFields,
+    CodeField,
     DescriptionField,
     EditableFieldWrapper,
+    NameField,
     SectionedFormSection,
+    ShortNameField,
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
@@ -18,7 +20,11 @@ import {
     ModelSingleSelectFormField,
     useRefreshModelSingleSelect,
 } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { DEFAULT_CATEGORYCOMBO_SELECT_OPTION } from '../../../lib'
+import {
+    DEFAULT_CATEGORYCOMBO_SELECT_OPTION,
+    useIsFieldValueUnique,
+    useSchemaSectionHandleOrThrow,
+} from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
 import classes from '../../dataElements/fields/CategoryComboField.module.css'
 
@@ -74,6 +80,12 @@ export const SetupFormContents = React.memo(function SetupFormContents({
     })
     const newCategoryComboLink = useHref('/categoryCombos/new')
     const { fromServerDate } = useTimeZoneConversion()
+    const schemaSection = useSchemaSectionHandleOrThrow()
+    const checkNameDuplicate = useIsFieldValueUnique({
+        model: schemaSection.namePlural,
+        field: 'name',
+        message: i18n.t('A program with this name already exists'),
+    })
 
     return (
         <SectionedFormSection name={name}>
@@ -83,7 +95,20 @@ export const SetupFormContents = React.memo(function SetupFormContents({
             <StandardFormSectionDescription>
                 {i18n.t('Set up the basic information for this program.')}
             </StandardFormSectionDescription>
-            <DefaultIdentifiableFields />
+            <StandardFormField>
+                <NameField
+                    schemaSection={schemaSection}
+                    warner={checkNameDuplicate}
+                />
+            </StandardFormField>
+
+            <StandardFormField>
+                <ShortNameField schemaSection={schemaSection} isRequired />
+            </StandardFormField>
+
+            <StandardFormField>
+                <CodeField schemaSection={schemaSection} />
+            </StandardFormField>
             <StandardFormField>
                 <DescriptionField />
             </StandardFormField>
