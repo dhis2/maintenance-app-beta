@@ -2,11 +2,18 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelect, SingleSelectOption } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useSectionListFilter } from '../../../../lib'
+import { Program } from '../../../../types/generated/models'
 import css from './Filters.module.css'
 
 const PROGRAM_TYPES = [
-    { value: 'WITH_REGISTRATION', label: i18n.t('Tracker program') },
-    { value: 'WITHOUT_REGISTRATION', label: i18n.t('Event program') },
+    {
+        value: Program.programType.WITH_REGISTRATION,
+        label: i18n.t('Tracker program'),
+    },
+    {
+        value: Program.programType.WITHOUT_REGISTRATION,
+        label: i18n.t('Event program'),
+    },
 ]
 
 export const ProgramTypeFilter = () => {
