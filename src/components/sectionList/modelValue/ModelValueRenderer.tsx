@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import { SchemaFieldProperty, SchemaFieldPropertyType } from '../../../lib'
 import { BooleanValue } from './BooleanValue'
@@ -25,6 +26,20 @@ export const ModelValueRenderer = ({
 
     if (path === 'sharing.public' && typeof value === 'string') {
         return <PublicAccessValue value={value} />
+    }
+
+    if (path === 'programType') {
+        let label: string
+
+        if (value === 'WITH_REGISTRATION') {
+            label = i18n.t('Tracker program')
+        } else if (value === 'WITHOUT_REGISTRATION') {
+            label = i18n.t('Event program')
+        } else {
+            label = i18n.t('No value')
+        }
+
+        return <TextValue value={label} />
     }
 
     if (schemaProperty.propertyType === 'CONSTANT') {

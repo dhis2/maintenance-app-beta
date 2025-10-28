@@ -1,3 +1,17 @@
+# [0.84.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.83.0...v0.84.0) (2025-10-28)
+
+
+### Features
+
+* programs list view ([#675](https://github.com/dhis2/maintenance-app-beta/issues/675)) ([b1c7d94](https://github.com/dhis2/maintenance-app-beta/commit/b1c7d941de8cd4026cc09b3f32a148c70e46814e))
+
+# [0.83.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.82.0...v0.83.0) (2025-10-28)
+
+
+### Features
+
+* add enrollment data section with fields ([#668](https://github.com/dhis2/maintenance-app-beta/issues/668)) ([561fc00](https://github.com/dhis2/maintenance-app-beta/commit/561fc009e43ec071088fca9dd28ce9852eab9612))
+
 # [0.82.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.81.1...v0.82.0) (2025-10-27)
 
 

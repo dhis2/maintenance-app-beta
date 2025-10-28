@@ -3,6 +3,7 @@ import { ConfigurableFilterKey } from '../../../../lib'
 import { useFilterKeys } from '../useFilterKeys'
 import { FormNameFilter } from './FormNameFilter'
 import { IndicatorFilter } from './IndicatorFilter'
+import { ProgramTypeFilter } from './ProgramTypeFilter'
 import {
     AggregationTypeFilter,
     CategoryComboFilter,
@@ -60,6 +61,7 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
     organisationUnitGroup: OrganisationUnitGroupFilter,
     organisationUnitGroupSet: OrganisationUnitGroupSetFilter,
     program: ProgramFilter,
+    programType: ProgramTypeFilter,
     programIndicator: ProgramIndicatorFilter,
     programIndicatorGroup: ProgramIndicatorGroupFilter,
     publicAccess: PublicAccessFilter,

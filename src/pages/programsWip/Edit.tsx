@@ -50,6 +50,7 @@ const fieldFilters = [
     'selectIncidentDatesInFuture',
     'useFirstStageDuringRegistration',
     'programSections[id,displayName,description,access,sortOrder]',
+    'programTrackedEntityAttributes[id,displayName,valueType,renderType,allowFutureDate,mandatory,searchable,displayInList,trackedEntityAttribute[id,displayName]]',
 ] as const
 
 export type ProgramsFromFilters = PickWithFieldFilters<

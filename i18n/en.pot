@@ -9,6 +9,8 @@ msgstr ""
 "PO-Revision-Date: 2025-10-23T12:03:11.676Z\n"
 "POT-Creation-Date: 2025-10-22T08:42:29.806Z\n"
 "PO-Revision-Date: 2025-10-22T08:42:29.806Z\n"
+"POT-Creation-Date: 2025-10-27T07:25:14.089Z\n"
+"PO-Revision-Date: 2025-10-27T07:25:14.089Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -587,6 +589,18 @@ msgstr "Program indicator"
 msgid "Program indicator group"
 msgstr "Program indicator group"
 
+msgid "Tracker program"
+msgstr "Tracker program"
+
+msgid "Event program"
+msgstr "Event program"
+
+msgid "Select program type"
+msgstr "Select program type"
+
+msgid "All program types"
+msgstr "All program types"
+
 msgid "Public access"
 msgstr "Public access"
 
@@ -652,6 +666,9 @@ msgstr "Update view"
 
 msgid "None"
 msgstr "None"
+
+msgid "No value"
+msgstr "No value"
 
 msgid "Public can edit"
 msgstr "Public can edit"
@@ -1384,6 +1401,108 @@ msgstr "Value"
 
 msgid "Version"
 msgstr "Version"
+
+msgid "Program Type"
+msgstr "Program Type"
+
+msgid "Display enrollment label"
+msgstr "Display enrollment label"
+
+msgid "Display event label"
+msgstr "Display event label"
+
+msgid "Display follow-up label"
+msgstr "Display follow-up label"
+
+msgid "Display note label"
+msgstr "Display note label"
+
+msgid "Display org unit label"
+msgstr "Display org unit label"
+
+msgid "Display program stage label"
+msgstr "Display program stage label"
+
+msgid "Display relationship label"
+msgstr "Display relationship label"
+
+msgid "Display tracked entity attribute label"
+msgstr "Display tracked entity attribute label"
+
+msgid "Access level"
+msgstr "Access level"
+
+msgid "Allow future enrollment dates"
+msgstr "Allow future enrollment dates"
+
+msgid "Allow future incident dates"
+msgstr "Allow future incident dates"
+
+msgid "Completed events expiry days"
+msgstr "Completed events expiry days"
+
+msgid "Custom label for enrollment"
+msgstr "Custom label for enrollment"
+
+msgid "Custom label for enrollment date"
+msgstr "Custom label for enrollment date"
+
+msgid "Custom label for event"
+msgstr "Custom label for event"
+
+msgid "Custom label for follow-up"
+msgstr "Custom label for follow-up"
+
+msgid "Custom label for incident date"
+msgstr "Custom label for incident date"
+
+msgid "Custom label for note"
+msgstr "Custom label for note"
+
+msgid "Custom label for program stage"
+msgstr "Custom label for program stage"
+
+msgid "Custom label for registering unit"
+msgstr "Custom label for registering unit"
+
+msgid "Custom label for relationship"
+msgstr "Custom label for relationship"
+
+msgid "Custom label for tracked entity attribute"
+msgstr "Custom label for tracked entity attribute"
+
+msgid "Display enrollment date label"
+msgstr "Display enrollment date label"
+
+msgid "Display front page list"
+msgstr "Display front page list"
+
+msgid "Display incident date label"
+msgstr "Display incident date label"
+
+msgid "Expiry days"
+msgstr "Expiry days"
+
+msgid "First stage appears on registration page"
+msgstr "First stage appears on registration page"
+
+msgid "Ignore overdue events"
+msgstr "Ignore overdue events"
+
+msgid "Only enroll once (per tracked entity instance lifetime)"
+msgstr "Only enroll once (per tracked entity instance lifetime)"
+
+msgid "Open days after category option end date"
+msgstr "Open days after category option end date"
+
+msgid "Show incident date"
+msgstr "Show incident date"
+
+msgid "Skip offline"
+msgstr "Skip offline"
+
+msgid "Without registration"
+msgstr "Without registration"
 
 msgid "Mandatory"
 msgstr "Mandatory"
