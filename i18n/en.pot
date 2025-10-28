@@ -123,6 +123,102 @@ msgstr "Are you sure you want to change this?"
 msgid "Yes, change"
 msgstr "Yes, change"
 
+msgid "data set"
+msgstr "data set"
+
+msgid "program enrollment"
+msgstr "program enrollment"
+
+msgid "Custom form saved"
+msgstr "Custom form saved"
+
+msgid "Custom form (preview)"
+msgstr "Custom form (preview)"
+
+msgid "Custom form"
+msgstr "Custom form"
+
+msgid "Define a custom form for this {{customFormTarget}} by editing HTML below."
+msgstr "Define a custom form for this {{customFormTarget}} by editing HTML below."
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Preview"
+msgstr "Preview"
+
+msgid "Nothing to preview"
+msgstr "Nothing to preview"
+
+msgid "Preview of custom form"
+msgstr "Preview of custom form"
+
+msgid "Something went wrong when submitting the form"
+msgstr "Something went wrong when submitting the form"
+
+msgid "Save custom form"
+msgstr "Save custom form"
+
+msgid "Saving a custom form does not save other changes to the {{customFormTarget}}"
+msgstr "Saving a custom form does not save other changes to the {{customFormTarget}}"
+
+msgid "A custom form must be added for it to be used for data entry (web)."
+msgstr "A custom form must be added for it to be used for data entry (web)."
+
+msgid "This data set uses a custom form for data entry (web)."
+msgstr "This data set uses a custom form for data entry (web)."
+
+msgid "Custom form will be removed on save"
+msgstr "Custom form will be removed on save"
+
+msgid "Restore custom form"
+msgstr "Restore custom form"
+
+msgid "Delete custom form"
+msgstr "Delete custom form"
+
+msgid "Create custom form"
+msgstr "Create custom form"
+
+msgid "Edit custom form"
+msgstr "Edit custom form"
+
+msgid "Select elements"
+msgstr "Select elements"
+
+msgid "Elements cannot be added while previewing the form"
+msgstr "Elements cannot be added while previewing the form"
+
+msgid "Filter elements"
+msgstr "Filter elements"
+
+msgid "Insert grey (disabled) fields"
+msgstr "Insert grey (disabled) fields"
+
+msgid "Date of enrollment"
+msgstr "Date of enrollment"
+
+msgid "Date of incident"
+msgstr "Date of incident"
+
+msgid "Attributes"
+msgstr "Attributes"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "Data elements"
+msgstr "Data elements"
+
+msgid "Totals"
+msgstr "Totals"
+
+msgid "Indicators"
+msgstr "Indicators"
+
+msgid "Flags"
+msgstr "Flags"
+
 msgid "Required"
 msgstr "Required"
 
@@ -141,9 +237,6 @@ msgstr "Validation errors"
 msgid "Some fields have validation errors. Please fix them before saving."
 msgstr "Some fields have validation errors. Please fix them before saving."
 
-msgid "Something went wrong when submitting the form"
-msgstr "Something went wrong when submitting the form"
-
 msgid "Hide error details"
 msgstr "Hide error details"
 
@@ -155,9 +248,6 @@ msgstr "Save and close"
 
 msgid "<No value>"
 msgstr "<No value>"
-
-msgid "Attributes"
-msgstr "Attributes"
 
 msgid "Set up information for the attributes assigned to {{modelName}}."
 msgstr "Set up information for the attributes assigned to {{modelName}}."
@@ -242,9 +332,6 @@ msgstr "Add section"
 msgid "Reorder sections"
 msgstr "Reorder sections"
 
-msgid "Edit"
-msgstr "Edit"
-
 msgid "Translate"
 msgstr "Translate"
 
@@ -280,9 +367,6 @@ msgstr "Basic form"
 
 msgid "Basic forms display an auto-generated list."
 msgstr "Basic forms display an auto-generated list."
-
-msgid "Custom form"
-msgstr "Custom form"
 
 msgid "Form type based on your current setup"
 msgstr "Form type based on your current setup"
@@ -576,9 +660,6 @@ msgstr "Organisation unit group"
 msgid "Organisation unit group set"
 msgstr "Organisation unit group set"
 
-msgid "Program"
-msgstr "Program"
-
 msgid "Program indicator"
 msgstr "Program indicator"
 
@@ -744,9 +825,6 @@ msgstr "Category option groups"
 msgid "Category option group sets"
 msgstr "Category option group sets"
 
-msgid "Data elements"
-msgstr "Data elements"
-
 msgid "Data element groups"
 msgstr "Data element groups"
 
@@ -761,9 +839,6 @@ msgstr "Data set notification"
 
 msgid "Data set notifications"
 msgstr "Data set notifications"
-
-msgid "Indicators"
-msgstr "Indicators"
 
 msgid "Indicator type"
 msgstr "Indicator type"
@@ -3809,6 +3884,9 @@ msgstr "Program Details"
 
 msgid "Set up the basic information for this program."
 msgstr "Set up the basic information for this program."
+
+msgid "Version"
+msgstr "Version"
 
 msgid "Last updated:  {{date}}"
 msgstr "Last updated:  {{date}}"
