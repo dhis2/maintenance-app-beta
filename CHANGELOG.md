@@ -1,3 +1,17 @@
+# [0.82.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.81.1...v0.82.0) (2025-10-27)
+
+
+### Features
+
+* warn if program name is a duplicate ([#676](https://github.com/dhis2/maintenance-app-beta/issues/676)) ([0cf39b3](https://github.com/dhis2/maintenance-app-beta/commit/0cf39b3e1c05989897d263762550346ac7618967))
+
+## [0.81.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.81.0...v0.81.1) (2025-10-27)
+
+
+### Bug Fixes
+
+* small fixes ([#674](https://github.com/dhis2/maintenance-app-beta/issues/674)) ([38183e3](https://github.com/dhis2/maintenance-app-beta/commit/38183e3f79fd74bb9fc6c2a928826caf170829d0))
+
 # [0.81.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.80.0...v0.81.0) (2025-10-22)
 
 
