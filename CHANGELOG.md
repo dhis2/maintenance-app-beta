@@ -1,3 +1,47 @@
+# [0.82.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.81.1...v0.82.0) (2025-10-27)
+
+
+### Features
+
+* warn if program name is a duplicate ([#676](https://github.com/dhis2/maintenance-app-beta/issues/676)) ([0cf39b3](https://github.com/dhis2/maintenance-app-beta/commit/0cf39b3e1c05989897d263762550346ac7618967))
+
+## [0.81.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.81.0...v0.81.1) (2025-10-27)
+
+
+### Bug Fixes
+
+* small fixes ([#674](https://github.com/dhis2/maintenance-app-beta/issues/674)) ([38183e3](https://github.com/dhis2/maintenance-app-beta/commit/38183e3f79fd74bb9fc6c2a928826caf170829d0))
+
+# [0.81.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.80.0...v0.81.0) (2025-10-22)
+
+
+### Features
+
+* add data approval level components and schema ([#661](https://github.com/dhis2/maintenance-app-beta/issues/661)) ([6697be5](https://github.com/dhis2/maintenance-app-beta/commit/6697be5b6df62b0b0199685f4d78ec57e4aa242c))
+* add data approval workflow schema and related tests ([#663](https://github.com/dhis2/maintenance-app-beta/issues/663)) ([8b93a21](https://github.com/dhis2/maintenance-app-beta/commit/8b93a212f5b7813f5f0145fec7cd92953e1fedb1))
+* add legend set functionality and related schemas ([#666](https://github.com/dhis2/maintenance-app-beta/issues/666)) ([29e28e8](https://github.com/dhis2/maintenance-app-beta/commit/29e28e869735056a91333cff5f281b6dc72c0449))
+
+# [0.80.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.79.3...v0.80.0) (2025-10-21)
+
+
+### Features
+
+* add option set schema and related tests ([#667](https://github.com/dhis2/maintenance-app-beta/issues/667)) ([121e12e](https://github.com/dhis2/maintenance-app-beta/commit/121e12e701183b634c70791ed76a782307f5eee4))
+
+## [0.79.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.79.2...v0.79.3) (2025-10-20)
+
+
+### Bug Fixes
+
+* remove current program from related program selector ([#671](https://github.com/dhis2/maintenance-app-beta/issues/671)) ([222687c](https://github.com/dhis2/maintenance-app-beta/commit/222687c345a4bed6a3cc118b8efa9079bad2373e))
+
+## [0.79.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.79.1...v0.79.2) (2025-10-20)
+
+
+### Bug Fixes
+
+* issue with form rerendering and emptying values ([#669](https://github.com/dhis2/maintenance-app-beta/issues/669)) ([533846c](https://github.com/dhis2/maintenance-app-beta/commit/533846c0e85d23746344e9414ae5fc6b239d6221))
+
 ## [0.79.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.79.0...v0.79.1) (2025-10-14)
 
 

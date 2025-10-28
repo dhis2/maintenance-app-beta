@@ -1,6 +1,8 @@
-import { useQuery } from '@tanstack/react-query'
+import { useDataEngine } from '@dhis2/app-runtime'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
-import React from 'react'
+import { omit } from 'lodash'
+import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
@@ -10,18 +12,26 @@ import {
     SectionedFormErrorNotice,
     SectionedFormLayout,
 } from '../../components'
+import { Section } from '../../components/formCreators/SectionFormList'
+import { useHandleOnSubmitEditFormDeletions } from '../../components/sectionedForm/useHandleOnSubmitEditFormDeletions'
 import {
     SectionedFormProvider,
     SECTIONS_MAP,
     useBoundResourceQueryFn,
     useOnSubmitEdit,
 } from '../../lib'
-import { PickWithFieldFilters, Program } from '../../types/generated'
+import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
+import {
+    DataEntryForm,
+    PickWithFieldFilters,
+    Program,
+} from '../../types/generated'
 import { validate } from './form'
 import { ProgramFormDescriptor } from './form/formDescriptor'
 import { ProgramFormContents } from './form/ProgramFormContents'
 
 const fieldFilters = [
+    'id',
     'name',
     'shortName',
     'code',
@@ -32,7 +42,6 @@ const fieldFilters = [
     'categoryCombo[id,displayName]',
     'lastUpdated',
     'dataEntryForm',
-    'programSections',
     'programTrackedEntityAttributes',
     'trackedEntityType[id,displayName]',
     'onlyEnrollOnce',
@@ -40,6 +49,7 @@ const fieldFilters = [
     'displayIncidentDate',
     'selectIncidentDatesInFuture',
     'useFirstStageDuringRegistration',
+    'programSections[id,displayName,description,access,sortOrder]',
 ] as const
 
 export type ProgramsFromFilters = PickWithFieldFilters<
@@ -47,14 +57,69 @@ export type ProgramsFromFilters = PickWithFieldFilters<
     typeof fieldFilters
 >
 
+export type ProgramValues = Omit<ProgramsFromFilters, 'sections'> & {
+    sections: Section[]
+}
+
 const section = SECTIONS_MAP.program
+
+export const programValueFormatter = <TValues extends Partial<ProgramValues>>(
+    values: TValues
+) => {
+    return omit(values, 'programSections')
+}
+
+export const useOnSubmitProgramEdit = (modelId: string) => {
+    const submitEdit: EnhancedOnSubmit<ProgramValues> = useOnSubmitEdit({
+        section,
+        modelId,
+    })
+    const dataEngine = useDataEngine()
+    const queryClient = useQueryClient()
+
+    const handleDeletions = useHandleOnSubmitEditFormDeletions(
+        section,
+        'programSections',
+        dataEngine,
+        queryClient
+    )
+
+    return useMemo<EnhancedOnSubmit<ProgramValues>>(
+        () => async (values, form, options) => {
+            const formValues = form.getState().values
+            const sections: Array<Section> = formValues.programSections
+            const dataEntryForm: DataEntryForm = formValues.dataEntryForm
+
+            const { customFormDeleteResult, error } = await handleDeletions(
+                sections,
+                dataEntryForm
+            )
+
+            if (error) {
+                return error
+            }
+            const trimmedValues = {
+                ...values,
+                programSections: sections.filter((section) => !section.deleted),
+                dataEntryForm:
+                    customFormDeleteResult &&
+                    customFormDeleteResult?.[0]?.status !== 'rejected'
+                        ? null
+                        : values.dataEntryForm,
+            } as ProgramValues
+
+            submitEdit(trimmedValues, form, options)
+        },
+        [submitEdit, handleDeletions]
+    )
+}
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const modelId = useParams().id as string
 
     const program = useQuery({
-        queryFn: queryFn<ProgramsFromFilters>,
+        queryFn: queryFn<ProgramValues>,
         queryKey: [
             {
                 resource: 'programs',
@@ -68,7 +133,7 @@ export const Component = () => {
 
     return (
         <FormBase
-            onSubmit={useOnSubmitEdit({ section, modelId })}
+            onSubmit={useOnSubmitProgramEdit(modelId)}
             initialValues={program.data}
             subscription={{}}
             mutators={{ ...arrayMutators }}
