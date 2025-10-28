@@ -78,7 +78,7 @@ export const EnrollmentSettingsFormContents = React.memo(
                             name="onlyEnrollOnce"
                             type="radio"
                             value="true"
-                            format={(x) => (x !== undefined ? x.toString() : x)}
+                            format={(x) => (x === undefined ? x : x.toString())}
                         >
                             {({ input }) => (
                                 <Radio
@@ -94,7 +94,7 @@ export const EnrollmentSettingsFormContents = React.memo(
                             name="onlyEnrollOnce"
                             type="radio"
                             value="false"
-                            format={(x) => (x !== undefined ? x.toString() : x)}
+                            format={(x) => (x === undefined ? x : x.toString())}
                         >
                             {({ input }) => (
                                 <Radio
