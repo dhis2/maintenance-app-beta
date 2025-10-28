@@ -1,3 +1,10 @@
+# [0.85.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.84.0...v0.85.0) (2025-10-28)
+
+
+### Features
+
+* program enrollment custom forms [DHIS2-20170] ([#673](https://github.com/dhis2/maintenance-app-beta/issues/673)) ([97632b8](https://github.com/dhis2/maintenance-app-beta/commit/97632b8e2f6df3e06c90e3e68914c223cbb6d13e))
+
 # [0.84.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.83.0...v0.84.0) (2025-10-28)
 
 
