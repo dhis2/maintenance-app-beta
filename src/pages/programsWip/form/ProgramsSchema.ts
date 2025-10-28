@@ -17,9 +17,12 @@ const programBaseSchema = z.object({
     categoryCombo: modelReference,
     trackedEntityType: object({
         id: z.string(),
-        displayName: z.string(),
+        displayName: z.string().optional(),
     }),
-    onlyEnrollOnce: z.boolean().optional(),
+    onlyEnrollOnce: z
+        .enum(['true', 'false'])
+        .transform((val) => val === 'true')
+        .default('true'),
     selectEnrollmentDatesInFuture: z.boolean().optional(),
     displayIncidentDate: z.boolean().optional(),
     selectIncidentDatesInFuture: z.boolean().optional(),

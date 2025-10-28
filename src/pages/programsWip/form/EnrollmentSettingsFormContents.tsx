@@ -11,29 +11,25 @@ import {
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import styles from './EnrollmentSettingsFormContents.module.css'
 
-type TrackedEntityType = {
-    id: string
-    displayName: string
-    name: string
-}
-
 export const EnrollmentSettingsFormContents = React.memo(
     function EnrollmentSettingsFormContents({ name }: { name: string }) {
         const { values } = useFormState()
 
-        const { input: displayIncidentDateInput } = useField(
-            'displayIncidentDate',
-            {
-                subscription: { value: true },
-            }
-        )
+        const {
+            input: displayIncidentDateInput,
+            meta: displayIncidentDateMate,
+        } = useField('displayIncidentDate', {
+            subscription: { value: true },
+            type: 'checkbox',
+        })
 
-        const { input: selectIncidentDatesInput } = useField(
-            'selectIncidentDatesInFuture',
-            {
-                subscription: { value: true },
-            }
-        )
+        const {
+            input: selectIncidentDatesInput,
+            meta: selectIncidentDatesMeta,
+        } = useField('selectIncidentDatesInFuture', {
+            subscription: { value: true },
+            type: 'checkbox',
+        })
 
         useEffect(() => {
             if (
@@ -63,7 +59,6 @@ export const EnrollmentSettingsFormContents = React.memo(
                         helpText={i18n.t(
                             'Choose what this program will be tracking'
                         )}
-                        clearable={true}
                         query={{
                             resource: 'trackedEntityTypes',
                             params: {
@@ -83,7 +78,7 @@ export const EnrollmentSettingsFormContents = React.memo(
                             name="onlyEnrollOnce"
                             type="radio"
                             value="true"
-                            checked
+                            format={(x) => (x !== undefined ? x.toString() : x)}
                         >
                             {({ input }) => (
                                 <Radio
@@ -95,7 +90,12 @@ export const EnrollmentSettingsFormContents = React.memo(
                             )}
                         </Field>
 
-                        <Field name="onlyEnrollOnce" type="radio" value="false">
+                        <Field
+                            name="onlyEnrollOnce"
+                            type="radio"
+                            value="false"
+                            format={(x) => (x !== undefined ? x.toString() : x)}
+                        >
                             {({ input }) => (
                                 <Radio
                                     checked={input.checked}
@@ -124,22 +124,20 @@ export const EnrollmentSettingsFormContents = React.memo(
                 </StandardFormField>
 
                 <StandardFormField>
-                    <Field
-                        name="displayIncidentDate"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
+                    <CheckboxFieldFF
+                        input={displayIncidentDateInput}
+                        meta={displayIncidentDateMate}
                         label={i18n.t('Collect an incident date')}
                     />
                 </StandardFormField>
 
                 <StandardFormField>
                     <div className={styles.selectIncidentDatesInFuture}>
-                        <Field
-                            name="selectIncidentDatesInFuture"
-                            type="checkbox"
-                            component={CheckboxFieldFF}
-                            label={i18n.t('Allow incident dates in the future')}
+                        <CheckboxFieldFF
+                            input={selectIncidentDatesInput}
+                            meta={selectIncidentDatesMeta}
                             disabled={!values.displayIncidentDate}
+                            label={i18n.t('Allow incident dates in the future')}
                         />
                     </div>
                 </StandardFormField>
