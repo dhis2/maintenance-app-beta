@@ -72,13 +72,13 @@ type CustomFormDataPayload = {
 const useUpdateForm = ({
     onSuccess,
     onError,
-    isDataSetUpdate,
-    isNewFormForProgram,
+    parentSchema,
+    operationType,
 }: {
     onSuccess: (data: CustomFormDataPayload) => void
     onError: (e: Error) => void
-    isDataSetUpdate: boolean
-    isNewFormForProgram: boolean
+    parentSchema: 'dataSet' | 'program'
+    operationType: 'create' | 'update'
 }) => {
     const id = useParams().id
     const dataEngine = useDataEngine()
@@ -180,10 +180,10 @@ const useUpdateForm = ({
         },
         [dataEngine, id, onSuccess, onError]
     )
-    if (isDataSetUpdate) {
+    if (parentSchema === 'dataSet') {
         return updateDataSet
     }
-    if (isNewFormForProgram) {
+    if (operationType === 'create') {
         return createProgram
     }
 
@@ -202,8 +202,7 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
         section?.name === 'dataSet'
             ? i18n.t('data set')
             : i18n.t('program enrollment')
-    const isNewFormForProgram =
-        section?.name === 'program' && !formInput?.value?.id
+    const operationType = formInput?.value?.id ? 'update' : 'create'
 
     const insertElement = ({
         id,
@@ -259,8 +258,8 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
             setCustomFormSaving(false)
             setCustomFormError(e.message)
         },
-        isDataSetUpdate: Boolean(section?.name === 'dataSet'),
-        isNewFormForProgram,
+        parentSchema: section?.name === 'dataSet' ? 'dataSet' : 'program',
+        operationType,
     })
 
     return (
@@ -366,7 +365,7 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
                                 setCustomFormSaving(true)
                                 setCustomFormError('')
                                 updateCustomForm(
-                                    isNewFormForProgram
+                                    operationType === 'create'
                                         ? {
                                               htmlCode,
                                               id: formId,

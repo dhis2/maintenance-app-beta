@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-10-17T12:40:33.497Z\n"
-"PO-Revision-Date: 2025-10-17T12:40:33.497Z\n"
+"POT-Creation-Date: 2025-10-21T12:39:35.344Z\n"
+"PO-Revision-Date: 2025-10-21T12:39:35.344Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -123,6 +123,12 @@ msgstr "Are you sure you want to change this?"
 msgid "Yes, change"
 msgstr "Yes, change"
 
+msgid "data set"
+msgstr "data set"
+
+msgid "program enrollment"
+msgstr "program enrollment"
+
 msgid "Custom form saved"
 msgstr "Custom form saved"
 
@@ -132,8 +138,8 @@ msgstr "Custom form (preview)"
 msgid "Custom form"
 msgstr "Custom form"
 
-msgid "Define a custom form for this data set by editing HTML below."
-msgstr "Define a custom form for this data set by editing HTML below."
+msgid "Define a custom form for this {{customFormTarget}} by editing HTML below."
+msgstr "Define a custom form for this {{customFormTarget}} by editing HTML below."
 
 msgid "Edit"
 msgstr "Edit"
@@ -153,8 +159,8 @@ msgstr "Something went wrong when submitting the form"
 msgid "Save custom form"
 msgstr "Save custom form"
 
-msgid "Saving a custom form does not save other changes to the data set"
-msgstr "Saving a custom form does not save other changes to the data set"
+msgid "Saving a custom form does not save other changes to the {{customFormTarget}}"
+msgstr "Saving a custom form does not save other changes to the {{customFormTarget}}"
 
 msgid "A custom form must be added for it to be used for data entry (web)."
 msgstr "A custom form must be added for it to be used for data entry (web)."
@@ -188,6 +194,18 @@ msgstr "Filter elements"
 
 msgid "Insert grey (disabled) fields"
 msgstr "Insert grey (disabled) fields"
+
+msgid "Date of enrollment"
+msgstr "Date of enrollment"
+
+msgid "Date of incident"
+msgstr "Date of incident"
+
+msgid "Attributes"
+msgstr "Attributes"
+
+msgid "Program"
+msgstr "Program"
 
 msgid "Data elements"
 msgstr "Data elements"
@@ -230,9 +248,6 @@ msgstr "Save and close"
 
 msgid "<No value>"
 msgstr "<No value>"
-
-msgid "Attributes"
-msgstr "Attributes"
 
 msgid "Set up information for the attributes assigned to {{modelName}}."
 msgstr "Set up information for the attributes assigned to {{modelName}}."
@@ -298,6 +313,79 @@ msgstr ""
 
 msgid "Short name"
 msgstr "Short name"
+
+msgid "Sections"
+msgstr "Sections"
+
+msgid "Configure data and options for form sections."
+msgstr "Configure data and options for form sections."
+
+msgid "Section {{sectionName}} will be removed on save"
+msgstr "Section {{sectionName}} will be removed on save"
+
+msgid "Restore section"
+msgstr "Restore section"
+
+msgid "Add section"
+msgstr "Add section"
+
+msgid "Reorder sections"
+msgstr "Reorder sections"
+
+msgid "Translate"
+msgstr "Translate"
+
+msgid "Copy ID"
+msgstr "Copy ID"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "New sections order saved successfully"
+msgstr "New sections order saved successfully"
+
+msgid "Error saving new sections order."
+msgstr "Error saving new sections order."
+
+msgid "Reorder form sections"
+msgstr "Reorder form sections"
+
+msgid "(marked for deletion)"
+msgstr "(marked for deletion)"
+
+msgid "Save section ordering"
+msgstr "Save section ordering"
+
+msgid "You need to save before this form type can be configured."
+msgstr "You need to save before this form type can be configured."
+
+msgid "Section form"
+msgstr "Section form"
+
+msgid "Basic form"
+msgstr "Basic form"
+
+msgid "Basic forms display an auto-generated list."
+msgstr "Basic forms display an auto-generated list."
+
+msgid "Form type based on your current setup"
+msgstr "Form type based on your current setup"
+
+msgid ""
+"Web will display {{webFormType}}  |  Android will display "
+"{{androidFormType}}"
+msgstr ""
+"Web will display {{webFormType}}  |  Android will display "
+"{{androidFormType}}"
+
+msgid ""
+"Section forms let you create sections to organize data items for easier "
+"entry. If a Section form is created, it will be shown instead of the Basic "
+"form."
+msgstr ""
+"Section forms let you create sections to organize data items for easier "
+"entry. If a Section form is created, it will be shown instead of the Basic "
+"form."
 
 msgid "Failed to load {{label}}"
 msgstr "Failed to load {{label}}"
@@ -572,9 +660,6 @@ msgstr "Organisation unit group"
 msgid "Organisation unit group set"
 msgstr "Organisation unit group set"
 
-msgid "Program"
-msgstr "Program"
-
 msgid "Program indicator"
 msgstr "Program indicator"
 
@@ -586,9 +671,6 @@ msgstr "Public access"
 
 msgid "Validation rule group"
 msgstr "Validation rule group"
-
-msgid "Delete"
-msgstr "Delete"
 
 msgid "Successfully deleted {{modelType}} \"{{displayName}}\""
 msgstr "Successfully deleted {{modelType}} \"{{displayName}}\""
@@ -613,9 +695,6 @@ msgstr "Show details"
 
 msgid "Sharing settings"
 msgstr "Sharing settings"
-
-msgid "Translate"
-msgstr "Translate"
 
 msgid "At least one column must be selected"
 msgstr "At least one column must be selected"
@@ -2338,15 +2417,6 @@ msgstr ""
 "Optionally configure which data elements must have a value to complete this "
 "data set."
 
-msgid "Data set must be saved before this form type can be configured."
-msgstr "Data set must be saved before this form type can be configured."
-
-msgid "Section form"
-msgstr "Section form"
-
-msgid "Basic form"
-msgstr "Basic form"
-
 msgid "Data entry form"
 msgstr "Data entry form"
 
@@ -2357,63 +2427,8 @@ msgstr ""
 "Choose and configure how the data entry form looks and works for this data "
 "set."
 
-msgid "Form type based on your current setup"
-msgstr "Form type based on your current setup"
-
-msgid ""
-"Web will display {{webFormType}}  |  Android will display "
-"{{androidFormType}}"
-msgstr ""
-"Web will display {{webFormType}}  |  Android will display "
-"{{androidFormType}}"
-
-msgid ""
-"Section forms let you create sections to organize data items for easier "
-"entry. If a Section form is created, it will be shown instead of the Basic "
-"form."
-msgstr ""
-"Section forms let you create sections to organize data items for easier "
-"entry. If a Section form is created, it will be shown instead of the Basic "
-"form."
-
 msgid "Display options"
 msgstr "Display options"
-
-msgid "Sections"
-msgstr "Sections"
-
-msgid "Configure data and options for form sections."
-msgstr "Configure data and options for form sections."
-
-msgid "Section {{sectionName}} will be removed on save"
-msgstr "Section {{sectionName}} will be removed on save"
-
-msgid "Restore section"
-msgstr "Restore section"
-
-msgid "Add section"
-msgstr "Add section"
-
-msgid "Reorder sections"
-msgstr "Reorder sections"
-
-msgid "Copy ID"
-msgstr "Copy ID"
-
-msgid "New sections order saved successfully"
-msgstr "New sections order saved successfully"
-
-msgid "Error saving new sections order."
-msgstr "Error saving new sections order."
-
-msgid "Reorder form sections"
-msgstr "Reorder form sections"
-
-msgid "(marked for deletion)"
-msgstr "(marked for deletion)"
-
-msgid "Save section ordering"
-msgstr "Save section ordering"
 
 msgid "Filter by category combination"
 msgstr "Filter by category combination"
@@ -3665,9 +3680,6 @@ msgstr "Set up the program indicator legends."
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
 
-msgid "Program must be saved before this form type can be configured."
-msgstr "Program must be saved before this form type can be configured."
-
 msgid "Enrollment: Form"
 msgstr "Enrollment: Form"
 
@@ -3707,6 +3719,42 @@ msgstr "Enrollment: Settings"
 
 msgid "Enrollment: Data"
 msgstr "Enrollment: Data"
+
+msgid "Listing"
+msgstr "Listing"
+
+msgid "Sequential"
+msgstr "Sequential"
+
+msgid "Matrix"
+msgstr "Matrix"
+
+msgid "Explain the purpose of this section."
+msgstr "Explain the purpose of this section."
+
+msgid "Desktop display"
+msgstr "Desktop display"
+
+msgid "Mobile display"
+msgstr "Mobile display"
+
+msgid "Section attributes"
+msgstr "Section attributes"
+
+msgid "Available attributes"
+msgstr "Available attributes"
+
+msgid "Selected attributes"
+msgstr "Selected attributes"
+
+msgid "Search available attributes"
+msgstr "Search available attributes"
+
+msgid "Search selected attributes"
+msgstr "Search selected attributes"
+
+msgid "Saving a section does not save other changes to the program"
+msgstr "Saving a section does not save other changes to the program"
 
 msgid "Notification details"
 msgstr "Notification details"
