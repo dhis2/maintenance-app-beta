@@ -31,6 +31,7 @@ const complexKeys = [
     'style',
     'dataSetElements',
     'displayOptions',
+    'programTrackedEntityAttributes',
 ] as const
 export const sanitizeDirtyValueKeys = (dirtyKeys: string[]) => {
     const complexChanges = complexKeys.filter((complexKey) =>
