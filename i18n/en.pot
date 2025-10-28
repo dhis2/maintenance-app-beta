@@ -5,6 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2025-10-07T06:51:39.435Z\n"
+"PO-Revision-Date: 2025-10-07T06:51:39.435Z\n"
 "POT-Creation-Date: 2025-10-22T08:42:29.806Z\n"
 "PO-Revision-Date: 2025-10-22T08:42:29.806Z\n"
 
@@ -1380,6 +1382,17 @@ msgstr "Decimals in data output"
 msgid "Value"
 msgstr "Value"
 
+msgid "SQL"
+msgstr "SQL"
+
+msgid "Which analytics table"
+msgstr "Which analytics table"
+
+msgid "Which resource table"
+msgstr "Which resource table"
+
+msgid "After population of which temporary tables should the SQL script be invoked?"
+msgstr "After population of which temporary tables should the SQL script be invoked?"
 msgid "Version"
 msgstr "Version"
 
