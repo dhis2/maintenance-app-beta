@@ -40,6 +40,7 @@ export const filterParamsSchema = z
             z.string().refine((val) => parseAccessString(val) !== null)
         ),
         program: zodArrayIds,
+        programType: z.string(),
         programIndicator: zodArrayIds,
         programIndicatorGroup: zodArrayIds,
         validationRuleGroup: zodArrayIds,
@@ -76,6 +77,7 @@ export const filterQueryParamType = {
     organisationUnitGroupSet: CustomDelimitedArrayParam,
     publicAccess: CustomDelimitedArrayParam,
     program: CustomDelimitedArrayParam,
+    programType: StringParam,
     programIndicator: CustomDelimitedArrayParam,
     programIndicatorGroup: CustomDelimitedArrayParam,
     validationRuleGroup: CustomDelimitedArrayParam,

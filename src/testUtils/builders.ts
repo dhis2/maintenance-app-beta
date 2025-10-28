@@ -43,6 +43,7 @@ import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGro
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
 import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
+import { programListSchema } from '../pages/programsWip/form'
 import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form/TrackedEntityTypeFormSchema'
 import {
     validationNotificationTemplateListSchema,
@@ -239,6 +240,13 @@ export const testDataSetNotificationTemplateForm = (
     ...overwrites,
 })
 
+export const testPrograms = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(programListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
 export const testOptionGroupSet = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(optionGroupSetFormSchema, {
         mockeryMapper,
@@ -375,14 +383,6 @@ export const testCustomAttribute = ({
     valueType,
 })
 
-export const testLegendSet = ({
-    id = randomDhis2Id(),
-    displayName = faker.person.fullName(),
-} = {}) => ({
-    id,
-    displayName,
-})
-
 export const testProgram = ({
     id = randomDhis2Id(),
     name = faker.person.fullName(),
@@ -399,6 +399,14 @@ export const testProgram = ({
     categoryMappings,
     programType,
     programTrackedEntityAttributes,
+})
+
+export const testLegendSet = ({
+    id = randomDhis2Id(),
+    displayName = faker.person.fullName(),
+} = {}) => ({
+    id,
+    displayName,
 })
 
 export const testOrgUnitLevel = ({
