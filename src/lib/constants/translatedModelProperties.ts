@@ -59,6 +59,7 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     displayDescription: i18n.t('Description'),
     allowAuditLog: i18n.t('Enable tracked entity instance audit log'),
     featureType: i18n.t('Feature type'),
+    programType: i18n.t('Program type'),
     maxTeiCountToReturn: i18n.t(
         'Maximum number of tracked entity instances to return in search'
     ),
