@@ -152,6 +152,7 @@ export const DataSetSectionFormContents = ({
                         <StandardFormField>
                             <NameField
                                 schemaSection={dataSetSectionSchemaSection}
+                                modelId={values.id}
                             />
                         </StandardFormField>
                         <StandardFormField>

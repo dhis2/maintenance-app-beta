@@ -530,6 +530,129 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    optionSet: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                { path: 'valueType', label: i18n.t('Value type') },
+                'lastUpdated',
+            ],
+            available: [
+                'href',
+                'code',
+                'id',
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Version'), path: 'version' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+        },
+        filters: {},
+    },
+    legendSet: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'code',
+                'id',
+                'href',
+                'lastUpdatedBy',
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+        },
+        filters: {},
+    },
+    dataApprovalWorkflow: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Period type'), path: 'periodType' },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'code',
+                'id',
+                'href',
+                'created',
+                'lastUpdatedBy',
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+        },
+        filters: {},
+    },
+    dataApprovalLevel: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Level'), path: 'level' },
+                {
+                    label: i18n.t('Organisation unit level'),
+                    path: 'orgUnitLevel',
+                },
+                {
+                    label: i18n.t('Category option group set'),
+                    path: 'categoryOptionGroupSet',
+                },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'description',
+                'code',
+                'href',
+                'id',
+                'created',
+                'lastUpdatedBy',
+                DESCRIPTORS.name,
+                { label: i18n.t('Favorite'), path: 'favorite' },
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+            ],
+        },
+        filters: {},
+    },
+    program: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Program Type'), path: 'programType' },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                { label: i18n.t('Access level'), path: 'accessLevel' },
+                'code',
+                {
+                    label: i18n.t('Completed events expiry days'),
+                    path: 'completedEventsExpiryDays',
+                },
+                'created',
+                'description',
+                {
+                    label: i18n.t('Display front page list'),
+                    path: 'displayFrontPageList',
+                },
+                'favorite',
+                { label: i18n.t('Form name'), path: 'formName' },
+                'id',
+                'lastUpdated',
+                { label: i18n.t('Owner'), path: 'user.displayName' },
+                { label: i18n.t('Short name'), path: 'shortName' },
+                { label: i18n.t('Version'), path: 'version' },
+            ],
+        },
+        filters: {
+            default: ['programType'],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
+    },
     attribute: {
         columns: {
             default: [

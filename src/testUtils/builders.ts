@@ -17,6 +17,8 @@ import { categoryOptionGroupListSchema } from '../pages/categoryOptionGroups/for
 import { categoryOptionGroupSetListSchema } from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
 import { categoryOptionListSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
 import { ConstantsListSchema } from '../pages/constants/form/ConstantFormSchema'
+import { dataApprovalLevelListSchema } from '../pages/dataApprovalLevels/form/dataApprovalLevelsSchema'
+import { dataApprovalWorkflowListSchema } from '../pages/dataApprovalWorkflows/form/dataApprovalWorkflowSchema'
 import { dataElementGroupListSchema } from '../pages/dataElementGroups/form/dataElementGroupSchema'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementListSchema } from '../pages/dataElements/form/dataElementSchema'
@@ -29,16 +31,19 @@ import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicato
 import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
 import { indicatorListSchema } from '../pages/indicators/form/indicatorSchema'
 import { indicatorTypeListSchema } from '../pages/indicatorTypes/form/indicatorTypesSchema'
+import { legendSetListSchema } from '../pages/legendSets/form/legendSetListSchema'
 import { OptionGroupListSchema } from '../pages/optionGroups/form/OptionGroupFormSchema'
 import {
     optionGroupSetFormSchema,
     optionGroupSetListSchema,
 } from '../pages/optionGroupSets/form/optionGroupSetSchema'
+import { optionSetListSchema } from '../pages/optionSets/form/optionSetSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
 import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
+import { programListSchema } from '../pages/programsWip/form'
 import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form/TrackedEntityTypeFormSchema'
 import {
     validationNotificationTemplateListSchema,
@@ -123,6 +128,13 @@ export const testConstant = (overwrites: Record<any, any> = {}) => ({
 
 export const testIndicator = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(indicatorListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testLegendSets = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(legendSetListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -228,8 +240,22 @@ export const testDataSetNotificationTemplateForm = (
     ...overwrites,
 })
 
+export const testPrograms = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(programListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
 export const testOptionGroupSet = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(optionGroupSetFormSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testOptionSets = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(optionSetListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -265,6 +291,20 @@ export const testProgramIndicator = (overwrites: Record<any, any> = {}) => ({
 
 export const testAttributeList = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(attributeListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testdataApprovalLevelList = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(dataApprovalLevelListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testDataApprovalWorkflowList = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(dataApprovalWorkflowListSchema, { mockeryMapper }),
     ...overwrites,
 })
 
@@ -343,14 +383,6 @@ export const testCustomAttribute = ({
     valueType,
 })
 
-export const testLegendSet = ({
-    id = randomDhis2Id(),
-    displayName = faker.person.fullName(),
-} = {}) => ({
-    id,
-    displayName,
-})
-
 export const testProgram = ({
     id = randomDhis2Id(),
     name = faker.person.fullName(),
@@ -367,6 +399,14 @@ export const testProgram = ({
     categoryMappings,
     programType,
     programTrackedEntityAttributes,
+})
+
+export const testLegendSet = ({
+    id = randomDhis2Id(),
+    displayName = faker.person.fullName(),
+} = {}) => ({
+    id,
+    displayName,
 })
 
 export const testOrgUnitLevel = ({
