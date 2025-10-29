@@ -1,3 +1,10 @@
+# [0.86.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.85.0...v0.86.0) (2025-10-29)
+
+
+### Features
+
+* enhance enrollment settings with new fields and validation ([#672](https://github.com/dhis2/maintenance-app-beta/issues/672)) ([a80e16e](https://github.com/dhis2/maintenance-app-beta/commit/a80e16e3b85bbcbb19e5bc9cd352e5f00ce961ec))
+
 # [0.85.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.84.0...v0.85.0) (2025-10-28)
 
 
