@@ -6,6 +6,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
+import { CustomFormEditEntry } from '../../../components/customForm/CustomFormEditEntry'
 import { SectionFormSectionsList } from '../../../components/formCreators/SectionFormList'
 import {
     FormType,
@@ -58,7 +59,9 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                         otherProps={{ sectionsLength: sections.length }}
                     />
                 )}
-                {selectedFormType === FormType.CUSTOM && <>TODO</>}
+                {selectedFormType === FormType.CUSTOM && (
+                    <CustomFormEditEntry />
+                )}
             </TabbedFormTypePicker>
         </SectionedFormSection>
     )

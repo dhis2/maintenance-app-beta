@@ -44,6 +44,13 @@ const programBaseSchema = z.object({
             })
         )
         .default([]),
+    dataEntryForm: z
+        .object({
+            name: z.string().optional(),
+            displayName: z.string().optional(),
+            htmlCode: z.string().optional(),
+        })
+        .optional(),
 })
 
 export const programFormSchema = identifiable.merge(programBaseSchema).extend({
