@@ -12,7 +12,6 @@ const {
 } = modelFormSchemas
 
 const categoryBaseSchema = z.object({
-    code: z.string().trim().optional(),
     dataDimensionType: z
         .nativeEnum(Category.dataDimensionType)
         .default(Category.dataDimensionType.DISAGGREGATION),

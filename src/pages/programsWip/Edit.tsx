@@ -21,11 +21,7 @@ import {
     useOnSubmitEdit,
 } from '../../lib'
 import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
-import {
-    DataEntryForm,
-    PickWithFieldFilters,
-    Program,
-} from '../../types/generated'
+import { PickWithFieldFilters, Program } from '../../types/generated'
 import { validate } from './form'
 import { ProgramFormDescriptor } from './form/formDescriptor'
 import { ProgramFormContents } from './form/ProgramFormContents'
@@ -43,7 +39,15 @@ const fieldFilters = [
     'lastUpdated',
     'dataEntryForm',
     'programTrackedEntityAttributes',
+    'trackedEntityType[id,displayName]',
+    'onlyEnrollOnce',
+    'selectEnrollmentDatesInFuture',
+    'displayIncidentDate',
+    'selectIncidentDatesInFuture',
+    'useFirstStageDuringRegistration',
+    'dataEntryForm[id,displayName,htmlCode]',
     'programSections[id,displayName,description,access,sortOrder]',
+    'programTrackedEntityAttributes[id,displayName,valueType,renderType,allowFutureDate,mandatory,searchable,displayInList,trackedEntityAttribute[id,displayName]]',
 ] as const
 
 export type ProgramsFromFilters = PickWithFieldFilters<
@@ -53,6 +57,12 @@ export type ProgramsFromFilters = PickWithFieldFilters<
 
 export type ProgramValues = Omit<ProgramsFromFilters, 'sections'> & {
     sections: Section[]
+}
+
+type DataEntryForm = {
+    id: string
+    displayName: string
+    htmlCode: string
 }
 
 const section = SECTIONS_MAP.program

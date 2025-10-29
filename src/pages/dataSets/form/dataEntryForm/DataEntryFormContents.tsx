@@ -5,6 +5,7 @@ import {
     StandardFormSectionTitle,
     SectionedFormSection,
 } from '../../../../components'
+import { CustomFormEditEntry } from '../../../../components/customForm/CustomFormEditEntry'
 import { SectionFormSectionsList } from '../../../../components/formCreators/SectionFormList'
 import {
     FormType,
@@ -13,7 +14,6 @@ import {
 import { SchemaName } from '../../../../types'
 import { DisplayOptionsField } from '../DisplayOptionsField'
 import { useDataSetField } from '../formHooks'
-import { CustomFormEditEntry } from './customForm/CustomFormEditEntry'
 import classes from './DataEntryFormContents.module.css'
 import { EditOrNewDataSetSectionForm } from './sectionForm'
 

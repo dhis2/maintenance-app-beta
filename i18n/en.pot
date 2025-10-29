@@ -123,6 +123,102 @@ msgstr "Are you sure you want to change this?"
 msgid "Yes, change"
 msgstr "Yes, change"
 
+msgid "data set"
+msgstr "data set"
+
+msgid "program enrollment"
+msgstr "program enrollment"
+
+msgid "Custom form saved"
+msgstr "Custom form saved"
+
+msgid "Custom form (preview)"
+msgstr "Custom form (preview)"
+
+msgid "Custom form"
+msgstr "Custom form"
+
+msgid "Define a custom form for this {{customFormTarget}} by editing HTML below."
+msgstr "Define a custom form for this {{customFormTarget}} by editing HTML below."
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Preview"
+msgstr "Preview"
+
+msgid "Nothing to preview"
+msgstr "Nothing to preview"
+
+msgid "Preview of custom form"
+msgstr "Preview of custom form"
+
+msgid "Something went wrong when submitting the form"
+msgstr "Something went wrong when submitting the form"
+
+msgid "Save custom form"
+msgstr "Save custom form"
+
+msgid "Saving a custom form does not save other changes to the {{customFormTarget}}"
+msgstr "Saving a custom form does not save other changes to the {{customFormTarget}}"
+
+msgid "A custom form must be added for it to be used for data entry (web)."
+msgstr "A custom form must be added for it to be used for data entry (web)."
+
+msgid "This data set uses a custom form for data entry (web)."
+msgstr "This data set uses a custom form for data entry (web)."
+
+msgid "Custom form will be removed on save"
+msgstr "Custom form will be removed on save"
+
+msgid "Restore custom form"
+msgstr "Restore custom form"
+
+msgid "Delete custom form"
+msgstr "Delete custom form"
+
+msgid "Create custom form"
+msgstr "Create custom form"
+
+msgid "Edit custom form"
+msgstr "Edit custom form"
+
+msgid "Select elements"
+msgstr "Select elements"
+
+msgid "Elements cannot be added while previewing the form"
+msgstr "Elements cannot be added while previewing the form"
+
+msgid "Filter elements"
+msgstr "Filter elements"
+
+msgid "Insert grey (disabled) fields"
+msgstr "Insert grey (disabled) fields"
+
+msgid "Date of enrollment"
+msgstr "Date of enrollment"
+
+msgid "Date of incident"
+msgstr "Date of incident"
+
+msgid "Attributes"
+msgstr "Attributes"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "Data elements"
+msgstr "Data elements"
+
+msgid "Totals"
+msgstr "Totals"
+
+msgid "Indicators"
+msgstr "Indicators"
+
+msgid "Flags"
+msgstr "Flags"
+
 msgid "Required"
 msgstr "Required"
 
@@ -141,9 +237,6 @@ msgstr "Validation errors"
 msgid "Some fields have validation errors. Please fix them before saving."
 msgstr "Some fields have validation errors. Please fix them before saving."
 
-msgid "Something went wrong when submitting the form"
-msgstr "Something went wrong when submitting the form"
-
 msgid "Hide error details"
 msgstr "Hide error details"
 
@@ -155,9 +248,6 @@ msgstr "Save and close"
 
 msgid "<No value>"
 msgstr "<No value>"
-
-msgid "Attributes"
-msgstr "Attributes"
 
 msgid "Set up information for the attributes assigned to {{modelName}}."
 msgstr "Set up information for the attributes assigned to {{modelName}}."
@@ -242,9 +332,6 @@ msgstr "Add section"
 msgid "Reorder sections"
 msgstr "Reorder sections"
 
-msgid "Edit"
-msgstr "Edit"
-
 msgid "Translate"
 msgstr "Translate"
 
@@ -280,9 +367,6 @@ msgstr "Basic form"
 
 msgid "Basic forms display an auto-generated list."
 msgstr "Basic forms display an auto-generated list."
-
-msgid "Custom form"
-msgstr "Custom form"
 
 msgid "Form type based on your current setup"
 msgstr "Form type based on your current setup"
@@ -576,14 +660,23 @@ msgstr "Organisation unit group"
 msgid "Organisation unit group set"
 msgstr "Organisation unit group set"
 
-msgid "Program"
-msgstr "Program"
-
 msgid "Program indicator"
 msgstr "Program indicator"
 
 msgid "Program indicator group"
 msgstr "Program indicator group"
+
+msgid "Tracker program"
+msgstr "Tracker program"
+
+msgid "Event program"
+msgstr "Event program"
+
+msgid "Select program type"
+msgstr "Select program type"
+
+msgid "All program types"
+msgstr "All program types"
 
 msgid "Public access"
 msgstr "Public access"
@@ -650,6 +743,9 @@ msgstr "Update view"
 
 msgid "None"
 msgstr "None"
+
+msgid "No value"
+msgstr "No value"
 
 msgid "Public can edit"
 msgstr "Public can edit"
@@ -729,9 +825,6 @@ msgstr "Category option groups"
 msgid "Category option group sets"
 msgstr "Category option group sets"
 
-msgid "Data elements"
-msgstr "Data elements"
-
 msgid "Data element groups"
 msgstr "Data element groups"
 
@@ -746,9 +839,6 @@ msgstr "Data set notification"
 
 msgid "Data set notifications"
 msgstr "Data set notifications"
-
-msgid "Indicators"
-msgstr "Indicators"
 
 msgid "Indicator type"
 msgstr "Indicator type"
@@ -1391,6 +1481,108 @@ msgstr "Value"
 
 msgid "Version"
 msgstr "Version"
+
+msgid "Program Type"
+msgstr "Program Type"
+
+msgid "Display enrollment label"
+msgstr "Display enrollment label"
+
+msgid "Display event label"
+msgstr "Display event label"
+
+msgid "Display follow-up label"
+msgstr "Display follow-up label"
+
+msgid "Display note label"
+msgstr "Display note label"
+
+msgid "Display org unit label"
+msgstr "Display org unit label"
+
+msgid "Display program stage label"
+msgstr "Display program stage label"
+
+msgid "Display relationship label"
+msgstr "Display relationship label"
+
+msgid "Display tracked entity attribute label"
+msgstr "Display tracked entity attribute label"
+
+msgid "Access level"
+msgstr "Access level"
+
+msgid "Allow future enrollment dates"
+msgstr "Allow future enrollment dates"
+
+msgid "Allow future incident dates"
+msgstr "Allow future incident dates"
+
+msgid "Completed events expiry days"
+msgstr "Completed events expiry days"
+
+msgid "Custom label for enrollment"
+msgstr "Custom label for enrollment"
+
+msgid "Custom label for enrollment date"
+msgstr "Custom label for enrollment date"
+
+msgid "Custom label for event"
+msgstr "Custom label for event"
+
+msgid "Custom label for follow-up"
+msgstr "Custom label for follow-up"
+
+msgid "Custom label for incident date"
+msgstr "Custom label for incident date"
+
+msgid "Custom label for note"
+msgstr "Custom label for note"
+
+msgid "Custom label for program stage"
+msgstr "Custom label for program stage"
+
+msgid "Custom label for registering unit"
+msgstr "Custom label for registering unit"
+
+msgid "Custom label for relationship"
+msgstr "Custom label for relationship"
+
+msgid "Custom label for tracked entity attribute"
+msgstr "Custom label for tracked entity attribute"
+
+msgid "Display enrollment date label"
+msgstr "Display enrollment date label"
+
+msgid "Display front page list"
+msgstr "Display front page list"
+
+msgid "Display incident date label"
+msgstr "Display incident date label"
+
+msgid "Expiry days"
+msgstr "Expiry days"
+
+msgid "First stage appears on registration page"
+msgstr "First stage appears on registration page"
+
+msgid "Ignore overdue events"
+msgstr "Ignore overdue events"
+
+msgid "Only enroll once (per tracked entity instance lifetime)"
+msgstr "Only enroll once (per tracked entity instance lifetime)"
+
+msgid "Open days after category option end date"
+msgstr "Open days after category option end date"
+
+msgid "Show incident date"
+msgstr "Show incident date"
+
+msgid "Skip offline"
+msgstr "Skip offline"
+
+msgid "Without registration"
+msgstr "Without registration"
 
 msgid "Mandatory"
 msgstr "Mandatory"
@@ -3677,6 +3869,9 @@ msgstr "Set up the program indicator legends."
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
 
+msgid "Program must be saved before this form type can be configured."
+msgstr "Program must be saved before this form type can be configured."
+
 msgid "Enrollment: Form"
 msgstr "Enrollment: Form"
 
@@ -3686,6 +3881,36 @@ msgid ""
 msgstr ""
 "Choose and configure the type of form that will be used to collect "
 "information during enrollment."
+
+msgid "Configure settings related to enrollment in this program."
+msgstr "Configure settings related to enrollment in this program."
+
+msgid "Choose what this program will be tracking"
+msgstr "Choose what this program will be tracking"
+
+msgid "Multiple enrollments"
+msgstr "Multiple enrollments"
+
+msgid "Only allow one enrollment"
+msgstr "Only allow one enrollment"
+
+msgid "Allow multiple enrollments"
+msgstr "Allow multiple enrollments"
+
+msgid "Applies to the entire lifetime of a tracked entity."
+msgstr "Applies to the entire lifetime of a tracked entity."
+
+msgid "Allow enrollment dates in the future"
+msgstr "Allow enrollment dates in the future"
+
+msgid "Collect an incident date"
+msgstr "Collect an incident date"
+
+msgid "Allow incident dates in the future"
+msgstr "Allow incident dates in the future"
+
+msgid "Collect data for the first stage during enrollment"
+msgstr "Collect data for the first stage during enrollment"
 
 msgid "Only integers are allowed"
 msgstr "Only integers are allowed"
@@ -3701,6 +3926,9 @@ msgstr "Program Details"
 
 msgid "Set up the basic information for this program."
 msgstr "Set up the basic information for this program."
+
+msgid "Version"
+msgstr "Version"
 
 msgid "Last updated:  {{date}}"
 msgstr "Last updated:  {{date}}"
