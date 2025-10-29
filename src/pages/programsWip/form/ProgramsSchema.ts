@@ -19,10 +19,7 @@ const programBaseSchema = z.object({
         id: z.string(),
         displayName: z.string().optional(),
     }),
-    onlyEnrollOnce: z
-        .enum(['true', 'false'])
-        .transform((val) => val === 'true')
-        .default('true'),
+    onlyEnrollOnce: z.boolean().default(true),
     selectEnrollmentDatesInFuture: z.boolean().optional(),
     displayIncidentDate: z.boolean().optional(),
     selectIncidentDatesInFuture: z.boolean().optional(),

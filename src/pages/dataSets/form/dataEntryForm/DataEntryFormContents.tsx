@@ -1,5 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useState } from 'react'
+import { Button } from '@dhis2/ui'
+import React, { useEffect, useMemo, useState } from 'react'
+import { createSearchParams, Link, useSearchParams } from 'react-router-dom'
 import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
@@ -11,6 +13,7 @@ import {
     FormType,
     TabbedFormTypePicker,
 } from '../../../../components/formCreators/TabbedFormTypePicker'
+import { FORM_SECTION_PARAM_KEY, scrollToSection } from '../../../../lib'
 import { SchemaName } from '../../../../types'
 import { DisplayOptionsField } from '../DisplayOptionsField'
 import { useDataSetField } from '../formHooks'
@@ -29,6 +32,23 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
     const [selectedFormType, setSelectedFormType] = useState<FormType>(
         FormType.DEFAULT
     )
+    const [searchParams] = useSearchParams()
+    const toDataSearchParam = useMemo(
+        () =>
+            createSearchParams({
+                ...searchParams,
+                [FORM_SECTION_PARAM_KEY]: 'data',
+            }).toString(),
+        [searchParams]
+    )
+
+    useEffect(() => {
+        if (dataEntryForm) {
+            setSelectedFormType(FormType.CUSTOM)
+        } else if (sections.length > 0) {
+            setSelectedFormType(FormType.SECTION)
+        }
+    }, [dataEntryForm, sections])
 
     return (
         <SectionedFormSection name={name}>
@@ -47,6 +67,29 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                 onFormTypeChange={setSelectedFormType}
                 selectedFormType={selectedFormType}
             >
+                {selectedFormType === FormType.DEFAULT && (
+                    <div className={classes.basicFormDetails}>
+                        <StandardFormSectionTitle>
+                            {i18n.t('Basic form')}
+                        </StandardFormSectionTitle>
+                        <div className={classes.basicFormDescription}>
+                            {i18n.t(
+                                'This form displays an auto-generated list of the data elements defined for this data set.'
+                            )}
+                        </div>
+                        <Link
+                            to={{ search: toDataSearchParam }}
+                            replace
+                            onClick={() => {
+                                scrollToSection('data')
+                            }}
+                        >
+                            <Button secondary small>
+                                {i18n.t('Edit the data elements')}
+                            </Button>
+                        </Link>
+                    </div>
+                )}
                 {selectedFormType === FormType.SECTION && (
                     <SectionFormSectionsList
                         sectionsFieldName={'sections'}
