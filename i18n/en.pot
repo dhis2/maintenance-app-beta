@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-10-22T08:42:29.806Z\n"
-"PO-Revision-Date: 2025-10-22T08:42:29.806Z\n"
+"POT-Creation-Date: 2025-10-28T13:17:50.015Z\n"
+"PO-Revision-Date: 2025-10-28T13:17:50.015Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1377,6 +1377,15 @@ msgstr "Program name"
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
 
+msgid "Unique"
+msgstr "Unique"
+
+msgid "Display in list"
+msgstr "Display in list"
+
+msgid "Trigram indexable"
+msgstr "Trigram indexable"
+
 msgid "Value"
 msgstr "Value"
 
@@ -1385,9 +1394,6 @@ msgstr "Version"
 
 msgid "Mandatory"
 msgstr "Mandatory"
-
-msgid "Unique"
-msgstr "Unique"
 
 msgid "Category attribute"
 msgstr "Category attribute"
@@ -3686,6 +3692,9 @@ msgstr "Only integers are allowed"
 
 msgid "Should not be lower than previous version"
 msgstr "Should not be lower than previous version"
+
+msgid "A program with this name already exists"
+msgstr "A program with this name already exists"
 
 msgid "Program Details"
 msgstr "Program Details"
