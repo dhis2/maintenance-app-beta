@@ -1,7 +1,8 @@
 import { z } from 'zod'
 import { modelFormSchemas } from '../../../lib'
 
-const { withDefaultListColumns, withAttributeValues } = modelFormSchemas
+const { withDefaultListColumns, withAttributeValues, modelReference } =
+    modelFormSchemas
 
 const trackedEntityAttributeBaseSchema = z.object({
     name: z.string().trim(),
@@ -17,11 +18,7 @@ const trackedEntityAttributeBaseSchema = z.object({
         .default({}),
     valueType: z.string().trim(),
     aggregationType: z.string().trim().optional(),
-    optionSet: z
-        .object({
-            id: z.string(),
-        })
-        .optional(),
+    optionSet: modelReference.optional(),
     unique: z.boolean().optional(),
     displayInListNoProgram: z.boolean().optional(),
     trigramIndexable: z.boolean().optional(),
@@ -29,9 +26,7 @@ const trackedEntityAttributeBaseSchema = z.object({
         .array(
             z.object({
                 value: z.string(),
-                attribute: z.object({
-                    id: z.string(),
-                }),
+                attribute: modelReference,
             })
         )
         .default([]),

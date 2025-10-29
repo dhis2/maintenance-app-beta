@@ -537,8 +537,8 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {
-            default: ['valueType', 'formName'],
-            available: ['aggregationType'],
+            default: ['valueType'],
+            available: ['aggregationType', 'formName'],
         },
     },
     constant: {
