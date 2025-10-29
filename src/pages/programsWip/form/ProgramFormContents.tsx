@@ -15,7 +15,9 @@ export const ProgramFormContents = () => {
     useSyncSelectedSectionWithScroll()
     return (
         <SectionedFormSections>
-            <SetupFormContents name={descriptor.getSection('setup').name} />
+            <SetupFormContents
+                name={descriptor.getSection('enrollmentDetails').name}
+            />
             <EnrollmentSettingsFormContents
                 name={descriptor.getSection('enrollmentSettings').name}
             />
