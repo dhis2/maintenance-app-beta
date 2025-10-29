@@ -38,7 +38,7 @@ export const EnrollmentSettingsFormContents = React.memo(
             ) {
                 selectIncidentDatesInput.onChange(false)
             }
-        }, [displayIncidentDateInput.value])
+        }, [displayIncidentDateInput.value, selectIncidentDatesInput])
 
         return (
             <SectionedFormSection name={name}>
@@ -74,32 +74,22 @@ export const EnrollmentSettingsFormContents = React.memo(
                         {i18n.t('Multiple enrollments')}
                     </span>
                     <div className={styles.radioGroup}>
-                        <Field
-                            name="onlyEnrollOnce"
-                            type="radio"
-                            value="true"
-                            format={(x) => (x === undefined ? x : x.toString())}
-                        >
+                        <Field name="onlyEnrollOnce" type="radio" value={true}>
                             {({ input }) => (
                                 <Radio
                                     checked={input.checked}
-                                    onChange={() => input.onChange('true')}
+                                    onChange={() => input.onChange(true)}
                                     label={i18n.t('Only allow one enrollment')}
                                     value="true"
                                 />
                             )}
                         </Field>
 
-                        <Field
-                            name="onlyEnrollOnce"
-                            type="radio"
-                            value="false"
-                            format={(x) => (x === undefined ? x : x.toString())}
-                        >
+                        <Field name="onlyEnrollOnce" type="radio" value={false}>
                             {({ input }) => (
                                 <Radio
                                     checked={input.checked}
-                                    onChange={() => input.onChange('false')}
+                                    onChange={() => input.onChange(false)}
                                     label={i18n.t('Allow multiple enrollments')}
                                     value="false"
                                 />

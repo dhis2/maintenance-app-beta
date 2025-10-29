@@ -1,6 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useState } from 'react'
+import { Button } from '@dhis2/ui'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useField, UseFieldConfig } from 'react-final-form'
+import { createSearchParams, Link, useSearchParams } from 'react-router-dom'
 import {
     SectionedFormSection,
     StandardFormSectionDescription,
@@ -12,8 +14,10 @@ import {
     FormType,
     TabbedFormTypePicker,
 } from '../../../components/formCreators/TabbedFormTypePicker'
+import { FORM_SECTION_PARAM_KEY, scrollToSection } from '../../../lib'
 import { SchemaName } from '../../../types'
 import { ProgramValues } from '../Edit'
+import styles from './EnrollmentFormFormContents.module.css'
 import { EditOrNewEnrollmentSectionForm } from './sectionForm/EntrollmentSectionForm'
 
 const useProgramField = <T extends keyof ProgramValues>(
@@ -34,6 +38,24 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
     const [selectedFormType, setSelectedFormType] = useState<FormType>(
         FormType.DEFAULT
     )
+    const [searchParams] = useSearchParams()
+    const toEnrollmentDataSearchParam = useMemo(
+        () =>
+            createSearchParams({
+                ...searchParams,
+                [FORM_SECTION_PARAM_KEY]: 'enrollmentData',
+            }).toString(),
+        [searchParams]
+    )
+
+    useEffect(() => {
+        if (dataEntryForm) {
+            setSelectedFormType(FormType.CUSTOM)
+        } else if (sections.length > 0) {
+            setSelectedFormType(FormType.SECTION)
+        }
+    }, [dataEntryForm, sections])
+
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
@@ -51,6 +73,31 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                 onFormTypeChange={setSelectedFormType}
                 selectedFormType={selectedFormType}
             >
+                {selectedFormType === FormType.DEFAULT && (
+                    <div className={styles.basicFormDetails}>
+                        <StandardFormSectionTitle>
+                            {i18n.t('Basic form')}
+                        </StandardFormSectionTitle>
+                        <div className={styles.basicFormDescription}>
+                            {i18n.t(
+                                'This form displays an auto-generated list of the tracked entity attributes defined for this program.'
+                            )}
+                        </div>
+                        <Link
+                            to={{ search: toEnrollmentDataSearchParam }}
+                            replace
+                            onClick={() => {
+                                scrollToSection('enrollmentData')
+                            }}
+                        >
+                            <Button secondary small>
+                                {i18n.t(
+                                    'Edit or rearrange the tracked entity attributes'
+                                )}
+                            </Button>
+                        </Link>
+                    </div>
+                )}
                 {selectedFormType === FormType.SECTION && (
                     <SectionFormSectionsList
                         sectionsFieldName={'programSections'}
