@@ -5,6 +5,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2025-10-23T12:03:11.676Z\n"
+"PO-Revision-Date: 2025-10-23T12:03:11.676Z\n"
+"POT-Creation-Date: 2025-10-22T08:42:29.806Z\n"
+"PO-Revision-Date: 2025-10-22T08:42:29.806Z\n"
 "POT-Creation-Date: 2025-10-27T07:25:14.089Z\n"
 "PO-Revision-Date: 2025-10-27T07:25:14.089Z\n"
 
@@ -3863,6 +3867,9 @@ msgstr "Set up the program indicator legends."
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
 
+msgid "Program must be saved before this form type can be configured."
+msgstr "Program must be saved before this form type can be configured."
+
 msgid "Enrollment: Form"
 msgstr "Enrollment: Form"
 
@@ -3872,6 +3879,36 @@ msgid ""
 msgstr ""
 "Choose and configure the type of form that will be used to collect "
 "information during enrollment."
+
+msgid "Configure settings related to enrollment in this program."
+msgstr "Configure settings related to enrollment in this program."
+
+msgid "Choose what this program will be tracking"
+msgstr "Choose what this program will be tracking"
+
+msgid "Multiple enrollments"
+msgstr "Multiple enrollments"
+
+msgid "Only allow one enrollment"
+msgstr "Only allow one enrollment"
+
+msgid "Allow multiple enrollments"
+msgstr "Allow multiple enrollments"
+
+msgid "Applies to the entire lifetime of a tracked entity."
+msgstr "Applies to the entire lifetime of a tracked entity."
+
+msgid "Allow enrollment dates in the future"
+msgstr "Allow enrollment dates in the future"
+
+msgid "Collect an incident date"
+msgstr "Collect an incident date"
+
+msgid "Allow incident dates in the future"
+msgstr "Allow incident dates in the future"
+
+msgid "Collect data for the first stage during enrollment"
+msgstr "Collect data for the first stage during enrollment"
 
 msgid "Only integers are allowed"
 msgstr "Only integers are allowed"
