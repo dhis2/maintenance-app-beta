@@ -1,3 +1,10 @@
+## [0.86.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.86.0...v0.86.1) (2025-10-29)
+
+
+### Bug Fixes
+
+* only enroll once to work on edits and add some text to basic form so does not look weird ([#679](https://github.com/dhis2/maintenance-app-beta/issues/679)) ([829670e](https://github.com/dhis2/maintenance-app-beta/commit/829670e83c2390649ad269610766e258638a6d75))
+
 # [0.86.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.85.0...v0.86.0) (2025-10-29)
 
 
