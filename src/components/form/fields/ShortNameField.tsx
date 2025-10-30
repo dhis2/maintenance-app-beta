@@ -23,7 +23,7 @@ export function ShortNameField({
         model: schemaSection.namePlural,
         field: 'shortName',
         message: i18n.t(
-            'This name/short name is already in use. Consider updating the name to avoid a duplication.'
+            'This short name is already in use. Consider updating the name to avoid a duplication.'
         ),
     })
     const uniquenessWarner = propertyDetails.unique
