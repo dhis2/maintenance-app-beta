@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import { useQueryClient } from '@tanstack/react-query'
 import { FormApi, SubmissionErrors } from 'final-form'
 import { useCallback, useMemo } from 'react'
-import { To } from 'react-router-dom'
+import { To, useSearchParams } from 'react-router-dom'
 import { ModelSection } from '../../types'
 import { IdentifiableObject } from '../../types/generated'
 import { getSectionPath, useNavigateWithSearchState } from '../routeUtils'
@@ -21,6 +21,7 @@ export type GetToFunction = (options: {
     section: ModelSection
     submitAction?: SubmitAction
     responseData?: unknown
+    searchParams?: URLSearchParams
 }) => To | undefined
 
 interface Navigateable {
@@ -43,7 +44,13 @@ const defaultNavigateTo: GetToFunction = ({
     section,
     submitAction = 'saveAndExit',
     responseData,
+    searchParams,
 }) => {
+    const currentSearch =
+        searchParams && searchParams.toString()
+            ? `?${searchParams.toString()}`
+            : ''
+
     if (submitAction === 'saveAndExit') {
         return `/${getSectionPath(section)}`
     }
@@ -68,7 +75,11 @@ const defaultNavigateTo: GetToFunction = ({
                 )
                 return undefined
             }
-            return `/${getSectionPath(section)}/${id}`
+
+            return {
+                pathname: `/${getSectionPath(section)}/${id}`,
+                search: currentSearch,
+            }
         }
         // if it's not a creation (eg. we edit), dont navigate anywhere
         return undefined
@@ -207,6 +218,7 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
         (options) => options
     )
     const navigate = useNavigateWithSearchState()
+    const [searchParams] = useSearchParams()
 
     return useMemo<EnhancedOnSubmit<TFormValues>>(
         () => async (values, form, options) => {
@@ -242,6 +254,7 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
                     section,
                     submitAction: options?.submitAction,
                     responseData: response.data,
+                    searchParams,
                 })
                 if (navTo) {
                     navigate(navTo)
@@ -249,6 +262,6 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
             }
             return response
         },
-        [queryClient, createModel, saveAlert, navigate, section]
+        [queryClient, createModel, saveAlert, navigate, section, searchParams]
     )
 }
