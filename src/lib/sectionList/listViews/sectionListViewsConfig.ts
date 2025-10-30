@@ -513,6 +513,34 @@ export const modelListViewsConfig = {
             overrideDefaultAvailable: true,
         },
     },
+    trackedEntityAttribute: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.formName,
+                'valueType',
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'aggregationType',
+                { label: i18n.t('Option set'), path: 'optionSet.displayName' },
+                { label: i18n.t('Unique'), path: 'unique' },
+                {
+                    label: i18n.t('Display in list'),
+                    path: 'displayInListNoProgram',
+                },
+                {
+                    label: i18n.t('Trigram indexable'),
+                    path: 'trigramIndexable',
+                },
+            ],
+        },
+        filters: {
+            default: ['valueType'],
+            available: ['aggregationType', 'formName'],
+        },
+    },
     constant: {
         columns: {
             default: [
