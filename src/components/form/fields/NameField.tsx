@@ -23,7 +23,7 @@ export function NameField({
         model: schemaSection.namePlural,
         field: 'name',
         message: i18n.t(
-            'This name already exists. You may still proceed to save and continue.'
+            'This name is already in use. Consider updating the name to avoid a duplication.'
         ),
     })
     const uniquenessWarner = propertyDetails.unique
