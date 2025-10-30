@@ -5,12 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-10-23T12:03:11.676Z\n"
-"PO-Revision-Date: 2025-10-23T12:03:11.676Z\n"
-"POT-Creation-Date: 2025-10-22T08:42:29.806Z\n"
-"PO-Revision-Date: 2025-10-22T08:42:29.806Z\n"
-"POT-Creation-Date: 2025-10-27T07:25:14.089Z\n"
-"PO-Revision-Date: 2025-10-27T07:25:14.089Z\n"
+"POT-Creation-Date: 2025-10-29T11:35:55.025Z\n"
+"PO-Revision-Date: 2025-10-29T11:35:55.025Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1309,6 +1305,57 @@ msgstr "Organisation unit contact"
 msgid "User group"
 msgstr "User group"
 
+msgid "Dropdown"
+msgstr "Dropdown"
+
+msgid "Vertical radiobuttons"
+msgstr "Vertical radiobuttons"
+
+msgid "Horizontal radiobuttons"
+msgstr "Horizontal radiobuttons"
+
+msgid "Vertical checkboxes"
+msgstr "Vertical checkboxes"
+
+msgid "Horizontal checkboxes"
+msgstr "Horizontal checkboxes"
+
+msgid "Shared header radiobuttons"
+msgstr "Shared header radiobuttons"
+
+msgid "Icons as buttons"
+msgstr "Icons as buttons"
+
+msgid "Spinner"
+msgstr "Spinner"
+
+msgid "Toggle"
+msgstr "Toggle"
+
+msgid "Value"
+msgstr "Value"
+
+msgid "Slider"
+msgstr "Slider"
+
+msgid "Linear scale"
+msgstr "Linear scale"
+
+msgid "Autocomplete"
+msgstr "Autocomplete"
+
+msgid "Qr code"
+msgstr "Qr code"
+
+msgid "Bar code"
+msgstr "Bar code"
+
+msgid "Gs1 datamatrix"
+msgstr "Gs1 datamatrix"
+
+msgid "Canvas"
+msgstr "Canvas"
+
 msgid "Aggregation type"
 msgstr "Aggregation type"
 
@@ -1374,6 +1421,9 @@ msgstr "Enable tracked entity instance audit log"
 
 msgid "Feature type"
 msgstr "Feature type"
+
+msgid "Program type"
+msgstr "Program type"
 
 msgid "Maximum number of tracked entity instances to return in search"
 msgstr "Maximum number of tracked entity instances to return in search"
@@ -1471,8 +1521,14 @@ msgstr "Program name"
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
 
-msgid "Value"
-msgstr "Value"
+msgid "Unique"
+msgstr "Unique"
+
+msgid "Display in list"
+msgstr "Display in list"
+
+msgid "Trigram indexable"
+msgstr "Trigram indexable"
 
 msgid "Version"
 msgstr "Version"
@@ -1480,110 +1536,17 @@ msgstr "Version"
 msgid "Program Type"
 msgstr "Program Type"
 
-msgid "Display enrollment label"
-msgstr "Display enrollment label"
-
-msgid "Display event label"
-msgstr "Display event label"
-
-msgid "Display follow-up label"
-msgstr "Display follow-up label"
-
-msgid "Display note label"
-msgstr "Display note label"
-
-msgid "Display org unit label"
-msgstr "Display org unit label"
-
-msgid "Display program stage label"
-msgstr "Display program stage label"
-
-msgid "Display relationship label"
-msgstr "Display relationship label"
-
-msgid "Display tracked entity attribute label"
-msgstr "Display tracked entity attribute label"
-
 msgid "Access level"
 msgstr "Access level"
-
-msgid "Allow future enrollment dates"
-msgstr "Allow future enrollment dates"
-
-msgid "Allow future incident dates"
-msgstr "Allow future incident dates"
 
 msgid "Completed events expiry days"
 msgstr "Completed events expiry days"
 
-msgid "Custom label for enrollment"
-msgstr "Custom label for enrollment"
-
-msgid "Custom label for enrollment date"
-msgstr "Custom label for enrollment date"
-
-msgid "Custom label for event"
-msgstr "Custom label for event"
-
-msgid "Custom label for follow-up"
-msgstr "Custom label for follow-up"
-
-msgid "Custom label for incident date"
-msgstr "Custom label for incident date"
-
-msgid "Custom label for note"
-msgstr "Custom label for note"
-
-msgid "Custom label for program stage"
-msgstr "Custom label for program stage"
-
-msgid "Custom label for registering unit"
-msgstr "Custom label for registering unit"
-
-msgid "Custom label for relationship"
-msgstr "Custom label for relationship"
-
-msgid "Custom label for tracked entity attribute"
-msgstr "Custom label for tracked entity attribute"
-
-msgid "Display enrollment date label"
-msgstr "Display enrollment date label"
-
 msgid "Display front page list"
 msgstr "Display front page list"
 
-msgid "Display incident date label"
-msgstr "Display incident date label"
-
-msgid "Expiry days"
-msgstr "Expiry days"
-
-msgid "First stage appears on registration page"
-msgstr "First stage appears on registration page"
-
-msgid "Ignore overdue events"
-msgstr "Ignore overdue events"
-
-msgid "Only enroll once (per tracked entity instance lifetime)"
-msgstr "Only enroll once (per tracked entity instance lifetime)"
-
-msgid "Open days after category option end date"
-msgstr "Open days after category option end date"
-
-msgid "Show incident date"
-msgstr "Show incident date"
-
-msgid "Skip offline"
-msgstr "Skip offline"
-
-msgid "Without registration"
-msgstr "Without registration"
-
 msgid "Mandatory"
 msgstr "Mandatory"
-
-msgid "Unique"
-msgstr "Unique"
 
 msgid "Category attribute"
 msgstr "Category attribute"
@@ -2553,69 +2516,6 @@ msgstr ""
 
 msgid "Display options"
 msgstr "Display options"
-
-msgid "Custom form saved"
-msgstr "Custom form saved"
-
-msgid "Custom form (preview)"
-msgstr "Custom form (preview)"
-
-msgid "Define a custom form for this data set by editing HTML below."
-msgstr "Define a custom form for this data set by editing HTML below."
-
-msgid "Preview"
-msgstr "Preview"
-
-msgid "Nothing to preview"
-msgstr "Nothing to preview"
-
-msgid "Preview of custom form"
-msgstr "Preview of custom form"
-
-msgid "Save custom form"
-msgstr "Save custom form"
-
-msgid "Saving a custom form does not save other changes to the data set"
-msgstr "Saving a custom form does not save other changes to the data set"
-
-msgid "A custom form must be added for it to be used for data entry (web)."
-msgstr "A custom form must be added for it to be used for data entry (web)."
-
-msgid "This data set uses a custom form for data entry (web)."
-msgstr "This data set uses a custom form for data entry (web)."
-
-msgid "Custom form will be removed on save"
-msgstr "Custom form will be removed on save"
-
-msgid "Restore custom form"
-msgstr "Restore custom form"
-
-msgid "Delete custom form"
-msgstr "Delete custom form"
-
-msgid "Create custom form"
-msgstr "Create custom form"
-
-msgid "Edit custom form"
-msgstr "Edit custom form"
-
-msgid "Select elements"
-msgstr "Select elements"
-
-msgid "Elements cannot be added while previewing the form"
-msgstr "Elements cannot be added while previewing the form"
-
-msgid "Filter elements"
-msgstr "Filter elements"
-
-msgid "Insert grey (disabled) fields"
-msgstr "Insert grey (disabled) fields"
-
-msgid "Totals"
-msgstr "Totals"
-
-msgid "Flags"
-msgstr "Flags"
 
 msgid "Filter by category combination"
 msgstr "Filter by category combination"
@@ -3867,8 +3767,41 @@ msgstr "Set up the program indicator legends."
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
 
-msgid "Program must be saved before this form type can be configured."
-msgstr "Program must be saved before this form type can be configured."
+msgid "Enrollment: Data"
+msgstr "Enrollment: Data"
+
+msgid "Choose the information to collect during enrollment."
+msgstr "Choose the information to collect during enrollment."
+
+msgid "Available attributes"
+msgstr "Available attributes"
+
+msgid "Selected attributes"
+msgstr "Selected attributes"
+
+msgid "Filter available attributes"
+msgstr "Filter available attributes"
+
+msgid "Filter attributes"
+msgstr "Filter attributes"
+
+msgid "Configure data items"
+msgstr "Configure data items"
+
+msgid "Attributes can be collected in different ways with different options."
+msgstr "Attributes can be collected in different ways with different options."
+
+msgid "Allow future dates"
+msgstr "Allow future dates"
+
+msgid "Searchable"
+msgstr "Searchable"
+
+msgid "Desktop Display"
+msgstr "Desktop Display"
+
+msgid "Mobile Display"
+msgstr "Mobile Display"
 
 msgid "Enrollment: Form"
 msgstr "Enrollment: Form"
@@ -3916,14 +3849,14 @@ msgstr "Only integers are allowed"
 msgid "Should not be lower than previous version"
 msgstr "Should not be lower than previous version"
 
+msgid "A program with this name already exists"
+msgstr "A program with this name already exists"
+
 msgid "Program Details"
 msgstr "Program Details"
 
 msgid "Set up the basic information for this program."
 msgstr "Set up the basic information for this program."
-
-msgid "Version"
-msgstr "Version"
 
 msgid "Last updated:  {{date}}"
 msgstr "Last updated:  {{date}}"
@@ -3936,9 +3869,6 @@ msgstr "Choose how this program is disaggregated."
 
 msgid "Enrollment: Settings"
 msgstr "Enrollment: Settings"
-
-msgid "Enrollment: Data"
-msgstr "Enrollment: Data"
 
 msgid "Listing"
 msgstr "Listing"
@@ -3960,12 +3890,6 @@ msgstr "Mobile display"
 
 msgid "Section attributes"
 msgstr "Section attributes"
-
-msgid "Available attributes"
-msgstr "Available attributes"
-
-msgid "Selected attributes"
-msgstr "Selected attributes"
 
 msgid "Search available attributes"
 msgstr "Search available attributes"

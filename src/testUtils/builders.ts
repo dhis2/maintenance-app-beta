@@ -44,6 +44,7 @@ import { organisationUnitListSchema } from '../pages/organisationUnits/form/orga
 import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
 import { programListSchema } from '../pages/programsWip/form'
+import { trackedEntityAttributeListSchema } from '../pages/trackedEntityAttributes/form/TrackedEntityAttributeFormSchema'
 import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form/TrackedEntityTypeFormSchema'
 import {
     validationNotificationTemplateListSchema,
@@ -350,6 +351,13 @@ export const testFormProgramIndicatorGroup = (
 
 export const testTrackedEntityType = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(trackedEntityTypeListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testTrackedEntityAttribute = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(trackedEntityAttributeListSchema, { mockeryMapper }),
     ...overwrites,
 })
 
