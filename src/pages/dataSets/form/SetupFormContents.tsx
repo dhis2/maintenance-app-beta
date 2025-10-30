@@ -10,10 +10,7 @@ import {
     StandardFormSectionTitle,
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
-import {
-    useIsFieldValueUnique,
-    useSchemaSectionHandleOrThrow,
-} from '../../../lib'
+import { useSchemaSectionHandleOrThrow } from '../../../lib'
 import { ColorAndIconField } from '../../dataElements/fields'
 
 export const SetupFormContents = React.memo(function SetupFormContents({
@@ -22,11 +19,6 @@ export const SetupFormContents = React.memo(function SetupFormContents({
     name: string
 }) {
     const schemaSection = useSchemaSectionHandleOrThrow()
-    const checkNameDuplicate = useIsFieldValueUnique({
-        model: schemaSection.namePlural,
-        field: 'name',
-        message: i18n.t('A data set with this name already exists'),
-    })
 
     return (
         <SectionedFormSection name={name}>

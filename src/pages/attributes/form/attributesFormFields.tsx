@@ -8,7 +8,6 @@ import {
     StandardFormField,
     StandardFormSectionTitle,
     StandardFormSectionDescription,
-    DefaultIdentifiableFields,
     DescriptionField,
     NameField,
     ShortNameField,

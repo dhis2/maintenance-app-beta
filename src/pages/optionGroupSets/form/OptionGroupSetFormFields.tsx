@@ -6,7 +6,6 @@ import { useHref } from 'react-router'
 import { useParams } from 'react-router-dom'
 import {
     CodeField,
-    DefaultIdentifiableFields,
     DescriptionField,
     EditableFieldWrapper,
     ModelTransferField,
