@@ -22,7 +22,6 @@ import {
 } from '../../../components/metadataFormControls/ModelSingleSelect'
 import {
     DEFAULT_CATEGORYCOMBO_SELECT_OPTION,
-    useIsFieldValueUnique,
     useSchemaSectionHandleOrThrow,
 } from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
@@ -81,11 +80,6 @@ export const SetupFormContents = React.memo(function SetupFormContents({
     const newCategoryComboLink = useHref('/categoryCombos/new')
     const { fromServerDate } = useTimeZoneConversion()
     const schemaSection = useSchemaSectionHandleOrThrow()
-    const checkNameDuplicate = useIsFieldValueUnique({
-        model: schemaSection.namePlural,
-        field: 'name',
-        message: i18n.t('A program with this name already exists'),
-    })
 
     return (
         <SectionedFormSection name={name}>
@@ -96,14 +90,11 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                 {i18n.t('Set up the basic information for this program.')}
             </StandardFormSectionDescription>
             <StandardFormField>
-                <NameField
-                    schemaSection={schemaSection}
-                    warner={checkNameDuplicate}
-                />
+                <NameField schemaSection={schemaSection} />
             </StandardFormField>
 
             <StandardFormField>
-                <ShortNameField schemaSection={schemaSection} isRequired />
+                <ShortNameField schemaSection={schemaSection} />
             </StandardFormField>
 
             <StandardFormField>

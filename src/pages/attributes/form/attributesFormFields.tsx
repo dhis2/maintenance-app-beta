@@ -8,8 +8,10 @@ import {
     StandardFormField,
     StandardFormSectionTitle,
     StandardFormSectionDescription,
-    DefaultIdentifiableFields,
     DescriptionField,
+    NameField,
+    ShortNameField,
+    CodeField,
 } from '../../../components'
 import {
     useSchemaSectionHandleOrThrow,
@@ -27,6 +29,7 @@ export const AttributeFormFields = ({
 }) => {
     useSchemaSectionHandleOrThrow()
     useSyncSelectedSectionWithScroll()
+    const schemaSection = useSchemaSectionHandleOrThrow()
 
     return (
         <SectionedFormSections>
@@ -37,7 +40,20 @@ export const AttributeFormFields = ({
                 <StandardFormSectionDescription>
                     {i18n.t('Set up the basic information for this attribute.')}
                 </StandardFormSectionDescription>
-                <DefaultIdentifiableFields shortNameIsRequired={false} />
+                <StandardFormField>
+                    <NameField schemaSection={schemaSection} />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <ShortNameField
+                        schemaSection={schemaSection}
+                        isRequired={false}
+                    />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <CodeField schemaSection={schemaSection} />
+                </StandardFormField>
                 <StandardFormField>
                     <DescriptionField
                         helpText={i18n.t(
