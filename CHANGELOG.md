@@ -1,3 +1,15 @@
+# [0.87.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.86.1...v0.87.0) (2025-10-30)
+
+
+### Bug Fixes
+
+* review ([a68a4c5](https://github.com/dhis2/maintenance-app-beta/commit/a68a4c59caecae22c1494473daadc6a1b83e6767))
+
+
+### Features
+
+* add tracked entity attribute schema and list view configuration ([c75b782](https://github.com/dhis2/maintenance-app-beta/commit/c75b78222bc5eec78f131df3dbe9bbc73b4320a8))
+
 ## [0.86.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.86.0...v0.86.1) (2025-10-29)
 
 
