@@ -1,6 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
 import { object, z } from 'zod'
-import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
+import {
+    getDefaults,
+    createFormValidate,
+    modelFormSchemas,
+    DEFAULT_CATEGORY_COMBO,
+} from '../../../lib'
 
 const { identifiable, withDefaultListColumns, modelReference } =
     modelFormSchemas
@@ -14,7 +19,7 @@ const programBaseSchema = z.object({
         .optional(),
     featureType: z.enum(['NONE', 'POINT', 'POLYGON']).optional(),
     relatedProgram: modelReference.optional(),
-    categoryCombo: modelReference,
+    categoryCombo: modelReference.default({ ...DEFAULT_CATEGORY_COMBO }),
     trackedEntityType: object({
         id: z.string(),
         displayName: z.string().optional(),
