@@ -1,3 +1,10 @@
+## [0.87.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.87.1...v0.87.2) (2025-10-30)
+
+
+### Bug Fixes
+
+* warning text ([#682](https://github.com/dhis2/maintenance-app-beta/issues/682)) ([d8f6fe4](https://github.com/dhis2/maintenance-app-beta/commit/d8f6fe4c8b7b8349aafa15b84d7cb041866203ae))
+
 ## [0.87.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.87.0...v0.87.1) (2025-10-30)
 
 
