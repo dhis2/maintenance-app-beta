@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import { InputFieldFF } from '@dhis2/ui'
-import React from 'react'
+import React, { useState } from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
-import { SchemaSection } from '../../../lib'
+import { SchemaSection, useIsFieldValueUnique, useSchema } from '../../../lib'
 import { useValidator } from '../../../lib/models/useFieldValidators'
 
 export function ShortNameField({
@@ -18,6 +18,20 @@ export function ShortNameField({
     const { meta } = useField('shortName', {
         subscription: { validating: true },
     })
+    const schema = useSchema(schemaSection.name)
+    const propertyDetails = schema.properties['shortName']
+    const [warning, setWarning] = useState<string | undefined>()
+
+    const checkShortNameDuplicate = useIsFieldValueUnique({
+        model: schemaSection.namePlural,
+        field: 'shortName',
+        message: i18n.t(
+            'This short name already exists. You may still proceed to save and continue.'
+        ),
+    })
+    const uniquenessWarner = propertyDetails.unique
+        ? undefined
+        : checkShortNameDuplicate
 
     const helpString =
         helpText ||
@@ -26,23 +40,37 @@ export function ShortNameField({
         )
 
     return (
-        <FieldRFF<string | undefined>
-            loading={meta.validating}
-            component={InputFieldFF}
-            dataTest="formfields-shortName"
-            required={isRequired}
-            inputWidth="400px"
-            label={
-                isRequired
-                    ? i18n.t('{{fieldLabel}} (required)', {
-                          fieldLabel: i18n.t('Short name'),
-                      })
-                    : i18n.t('Short name')
-            }
-            name="shortName"
-            helpText={helpString}
-            validate={(name?: string) => validator(name)}
-            validateFields={[]}
-        />
+        <FieldRFF name="shortName" validate={validator}>
+            {({ input, meta }) => (
+                <InputFieldFF
+                    input={{
+                        ...input,
+                        onChange: async (value: string) => {
+                            input.onChange(value)
+                            if (uniquenessWarner) {
+                                const warning = await uniquenessWarner(value)
+                                setWarning(warning)
+                            }
+                        },
+                    }}
+                    meta={meta}
+                    loading={meta.validating}
+                    validateFields={[]}
+                    dataTest="formfields-shortName"
+                    required={isRequired}
+                    inputWidth="400px"
+                    label={
+                        isRequired
+                            ? i18n.t('{{fieldLabel}} (required)', {
+                                  fieldLabel: i18n.t('Short name'),
+                              })
+                            : i18n.t('Short name')
+                    }
+                    helpText={helpString}
+                    validationText={warning}
+                    warning={!!warning}
+                />
+            )}
+        </FieldRFF>
     )
 }

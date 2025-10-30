@@ -37,10 +37,7 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                 {i18n.t('Set up the basic information for this data set.')}
             </StandardFormSectionDescription>
             <StandardFormField>
-                <NameField
-                    schemaSection={schemaSection}
-                    warner={checkNameDuplicate}
-                />
+                <NameField schemaSection={schemaSection} />
             </StandardFormField>
 
             <StandardFormField>

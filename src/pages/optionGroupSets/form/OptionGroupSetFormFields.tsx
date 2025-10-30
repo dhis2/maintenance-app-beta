@@ -5,10 +5,13 @@ import { Field as FieldRFF, useField } from 'react-final-form'
 import { useHref } from 'react-router'
 import { useParams } from 'react-router-dom'
 import {
+    CodeField,
     DefaultIdentifiableFields,
     DescriptionField,
     EditableFieldWrapper,
     ModelTransferField,
+    NameField,
+    ShortNameField,
     StandardFormField,
     StandardFormSection,
     StandardFormSectionDescription,
@@ -18,6 +21,7 @@ import {
     ModelSingleSelectFormField,
     useRefreshModelSingleSelect,
 } from '../../../components/metadataFormControls/ModelSingleSelect'
+import { useSchemaSectionHandleOrThrow } from '../../../lib'
 import styles from './OptionGroupSetFormFields.module.css'
 
 function OptionGroupSetFormFields() {
@@ -30,6 +34,7 @@ function OptionGroupSetFormFields() {
     const refreshOptionSet = useRefreshModelSingleSelect({
         resource: 'optionSets',
     })
+    const schemaSection = useSchemaSectionHandleOrThrow()
 
     return (
         <>
@@ -42,7 +47,20 @@ function OptionGroupSetFormFields() {
                         'Set up the basic information for this option group set.'
                     )}
                 </StandardFormSectionDescription>
-                <DefaultIdentifiableFields shortNameIsRequired={false} />
+                <StandardFormField>
+                    <NameField schemaSection={schemaSection} />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <ShortNameField
+                        schemaSection={schemaSection}
+                        isRequired={false}
+                    />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <CodeField schemaSection={schemaSection} />
+                </StandardFormField>
                 <StandardFormField>
                     <DescriptionField
                         helpText={i18n.t(

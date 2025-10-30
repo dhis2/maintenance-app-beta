@@ -2,22 +2,33 @@ import i18n from '@dhis2/d2-i18n'
 import { InputFieldFF } from '@dhis2/ui'
 import React, { useState } from 'react'
 import { Field as FieldRFF } from 'react-final-form'
-import { SchemaSection } from '../../../lib'
+import { SchemaSection, useIsFieldValueUnique, useSchema } from '../../../lib'
 import { useValidator } from '../../../lib/models/useFieldValidators'
 
 export function NameField({
     schemaSection,
     helpText,
     modelId,
-    warner,
 }: {
     helpText?: string
     schemaSection: SchemaSection
     modelId?: string
-    warner?: (value?: string) => Promise<string | undefined> | undefined
 }) {
     const validator = useValidator({ schemaSection, property: 'name', modelId })
+    const schema = useSchema(schemaSection.name)
+    const propertyDetails = schema.properties['name']
     const [warning, setWarning] = useState<string | undefined>()
+
+    const checkNameDuplicate = useIsFieldValueUnique({
+        model: schemaSection.namePlural,
+        field: 'name',
+        message: i18n.t(
+            'This name already exists. You may still proceed to save and continue.'
+        ),
+    })
+    const uniquenessWarner = propertyDetails.unique
+        ? undefined
+        : checkNameDuplicate
 
     const helpString =
         helpText || i18n.t('A name should be concise and easy to recognize.')
@@ -30,8 +41,8 @@ export function NameField({
                         ...input,
                         onChange: async (value: string) => {
                             input.onChange(value)
-                            if (warner) {
-                                const warning = await warner(value)
+                            if (uniquenessWarner) {
+                                const warning = await uniquenessWarner(value)
                                 setWarning(warning)
                             }
                         },
