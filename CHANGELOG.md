@@ -1,3 +1,10 @@
+## [0.87.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.87.0...v0.87.1) (2025-10-30)
+
+
+### Bug Fixes
+
+* mantain search arams when saving ([#681](https://github.com/dhis2/maintenance-app-beta/issues/681)) ([2e0a610](https://github.com/dhis2/maintenance-app-beta/commit/2e0a6107d7424bdfe7c43a39e2819f4e195f99b1))
+
 # [0.87.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.86.1...v0.87.0) (2025-10-30)
 
 
