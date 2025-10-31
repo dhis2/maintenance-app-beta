@@ -12,8 +12,8 @@ import {
     NameField,
     ShortNameField,
     CodeField,
+    ValueTypeField,
 } from '../../../components'
-import { ValueTypeField } from '../../../components/form/fields/ValueTypeField'
 import {
     useSchemaSectionHandleOrThrow,
     useSyncSelectedSectionWithScroll,

@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF } from '@dhis2/ui'
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Field as FieldRFF, useField, useForm } from 'react-final-form'
 import {
     AGGREGATION_TYPE,
@@ -42,16 +42,17 @@ export function AggregationTypeField() {
     const { change } = useForm()
     const fieldName = 'aggregationType'
     const valueTypeField = useField('valueType')
+    const aggregationTypeField = useField(fieldName)
     const valueType = valueTypeField.input.value
     const disabled = DISABLING_VALUE_TYPES.includes(
         valueType as (typeof DISABLING_VALUE_TYPES)[number]
     )
 
     useEffect(() => {
-        if (disabled) {
+        if (disabled && aggregationTypeField.input.value !== 'NONE') {
             change(fieldName, 'NONE')
         }
-    }, [change, disabled, fieldName])
+    }, [change, disabled, fieldName, aggregationTypeField.input.value])
 
     const schemaSection = useSchemaSectionHandleOrThrow()
     const schema = useSchema(schemaSection.name)
@@ -66,17 +67,13 @@ export function AggregationTypeField() {
         ? `${aggregationTypeHelpText} ${aggregationTypeDisabledHelpText}`
         : aggregationTypeHelpText
 
-    // Use different input width based on schema section
-    const inputWidth =
-        schemaSection.name === 'trackedEntityAttribute' ? '600px' : '400px'
-
     return (
         <FieldRFF
             disabled={disabled}
             component={SingleSelectFieldFF}
             dataTest="formfields-aggregationType"
             required={!disabled}
-            inputWidth={inputWidth}
+            inputWidth="400px"
             name={fieldName}
             label={
                 disabled

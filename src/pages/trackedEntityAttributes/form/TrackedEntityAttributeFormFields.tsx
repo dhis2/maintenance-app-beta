@@ -61,11 +61,9 @@ export const TrackedEntityAttributeFormFields = ({
     const isGenerated = generatedInput.value
     const encryptionEnabled = systemInfo?.encryption === true
 
-    // Determine if tracked entity type field should be shown
     const showTrackedEntityType =
         valueType === TrackedEntityAttribute.valueType.TRACKER_ASSOCIATE
 
-    // Determine if unique can be enabled
     const uniqueDisabled =
         valueType === TrackedEntityAttribute.valueType.TRACKER_ASSOCIATE ||
         valueType === TrackedEntityAttribute.valueType.USERNAME
