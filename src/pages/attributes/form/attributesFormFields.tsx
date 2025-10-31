@@ -13,6 +13,7 @@ import {
     ShortNameField,
     CodeField,
 } from '../../../components'
+import { ValueTypeField } from '../../../components/form/fields/ValueTypeField'
 import {
     useSchemaSectionHandleOrThrow,
     useSyncSelectedSectionWithScroll,
@@ -20,7 +21,6 @@ import {
 import { AttributeTypeComponent } from './AttributeTypeComponent'
 import { OptionSetField } from './OptionSetField'
 import { SortOrderField } from './SortOrderField'
-import { ValueTypeField } from './ValueTypeField'
 
 export const AttributeFormFields = ({
     initialValues,

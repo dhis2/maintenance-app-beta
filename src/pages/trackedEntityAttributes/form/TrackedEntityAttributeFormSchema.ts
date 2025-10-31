@@ -1,34 +1,44 @@
 import { z } from 'zod'
-import { modelFormSchemas } from '../../../lib'
+import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    PickWithFieldFilters,
+    TrackedEntityAttribute,
+} from '../../../types/generated'
+import { fieldFilters } from './fieldFilters'
 
-const { withDefaultListColumns, withAttributeValues, modelReference } =
+const { identifiable, withDefaultListColumns, withAttributeValues } =
     modelFormSchemas
 
 const trackedEntityAttributeBaseSchema = z.object({
-    name: z.string().trim(),
     shortName: z.string().trim(),
     code: z.string().trim().optional(),
     description: z.string().trim().optional(),
     formName: z.string().trim().optional(),
-    style: z
-        .object({
-            color: z.string().optional(),
-            icon: z.string().optional(),
-        })
-        .default({}),
-    valueType: z.string().trim(),
-    aggregationType: z.string().trim().optional(),
-    optionSet: modelReference.optional(),
-    unique: z.boolean().optional(),
-    displayInListNoProgram: z.boolean().optional(),
-    trigramIndexable: z.boolean().optional(),
-    attributeValues: z
-        .array(
-            z.object({
-                value: z.string(),
-                attribute: modelReference,
-            })
-        )
+    optionSet: z
+        .object({ id: z.string(), displayName: z.string().optional() })
+        .optional(),
+    valueType: z
+        .nativeEnum(TrackedEntityAttribute.valueType)
+        .default(TrackedEntityAttribute.valueType.TEXT),
+    trackedEntityType: z
+        .object({ id: z.string(), displayName: z.string().optional() })
+        .optional(),
+    unique: z.boolean().default(false),
+    orgunitScope: z.boolean().default(false),
+    generated: z.boolean().default(false),
+    pattern: z.string().trim().optional(),
+    fieldMask: z.string().trim().optional(),
+    confidential: z.boolean().default(false),
+    inherit: z.boolean().default(false),
+    displayInListNoProgram: z.boolean().default(false),
+    skipSynchronization: z.boolean().default(false),
+    // TODO: Uncomment when version control is implemented (v43+)
+    // trigramIndexable: z.boolean().default(false),
+    aggregationType: z
+        .nativeEnum(TrackedEntityAttribute.aggregationType)
+        .default(TrackedEntityAttribute.aggregationType.NONE),
+    legendSets: z
+        .array(z.object({ id: z.string(), displayName: z.string().optional() }))
         .default([]),
 })
 
@@ -38,3 +48,16 @@ export const trackedEntityAttributeListSchema = trackedEntityAttributeBaseSchema
     .extend({
         displayShortName: z.string(),
     })
+
+export const trackedEntityAttributeFormSchema = trackedEntityAttributeBaseSchema
+    .merge(identifiable)
+    .merge(withAttributeValues)
+
+export const initialValues = getDefaults(trackedEntityAttributeFormSchema)
+
+export type TrackedEntityAttributeFormValues = PickWithFieldFilters<
+    TrackedEntityAttribute,
+    typeof fieldFilters
+>
+
+export const validate = createFormValidate(trackedEntityAttributeFormSchema)
