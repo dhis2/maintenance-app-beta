@@ -1,3 +1,4 @@
+export { AggregationTypeField } from './AggregationTypeField'
 export { ConfidentialField } from './ConfidentialField'
 export { FieldMaskField } from './FieldMaskField'
 export { FormNameField } from './FormNameField'

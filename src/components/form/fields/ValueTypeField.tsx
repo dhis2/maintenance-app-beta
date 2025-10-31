@@ -90,7 +90,7 @@ export function ValueTypeField() {
                 renderComponent={renderComponent}
                 modalTitle={i18n.t('Change value type')}
                 modalMessage={i18n.t(
-                    'Changing the value type may cause problems with existing data.'
+                    'Changing the value type may cause problems with existing data when generating analytics.'
                 )}
                 modalMessageSelectionSpecificConfirmation={(selection) =>
                     i18n.t(

@@ -1,7 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import {
-    AggregationTypeField,
     StandardFormSection,
     StandardFormSectionTitle,
     StandardFormSectionDescription,
@@ -13,6 +12,7 @@ import {
 import { SCHEMA_SECTIONS } from '../../../lib'
 import {
     AggregationLevelsField,
+    AggregationTypeField,
     CategoryComboField,
     ColorAndIconField,
     DomainField,

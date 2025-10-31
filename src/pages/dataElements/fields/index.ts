@@ -1,4 +1,5 @@
 export { AggregationLevelsField } from './AggregationLevelsField'
+export { AggregationTypeField } from './AggregationTypeField'
 export { CategoryComboField } from './CategoryComboField'
 export { ColorAndIconField } from './ColorAndIconField'
 export { DomainField } from './DomainField'

@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import {
-    AggregationTypeField,
     CodeField,
     DescriptionField,
     ModelTransferField,
@@ -19,6 +18,7 @@ import {
 import { SECTIONS_MAP, useBoundResourceQueryFn } from '../../../lib'
 import { TrackedEntityAttribute } from '../../../types/generated'
 import {
+    AggregationTypeField,
     ConfidentialField,
     FieldMaskField,
     FormNameField,

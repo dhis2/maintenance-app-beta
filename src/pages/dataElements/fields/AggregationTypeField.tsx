@@ -1,13 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF } from '@dhis2/ui'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { Field as FieldRFF, useField, useForm } from 'react-final-form'
-import {
-    AGGREGATION_TYPE,
-    required,
-    useSchema,
-    useSchemaSectionHandleOrThrow,
-} from '../../../lib'
+import { AGGREGATION_TYPE, required } from '../../../lib'
 
 export const DISABLING_VALUE_TYPES = [
     'TEXT',
@@ -54,14 +49,10 @@ export function AggregationTypeField() {
         }
     }, [change, disabled, fieldName, aggregationTypeField.input.value])
 
-    const schemaSection = useSchemaSectionHandleOrThrow()
-    const schema = useSchema(schemaSection.name)
-
-    const options =
-        schema.properties.aggregationType.constants?.map((constant) => ({
-            value: constant,
-            label: AGGREGATION_TYPE[constant as keyof typeof AGGREGATION_TYPE],
-        })) || []
+    const options = Object.entries(AGGREGATION_TYPE).map(([value, label]) => ({
+        value,
+        label,
+    }))
 
     const helpText = disabled
         ? `${aggregationTypeHelpText} ${aggregationTypeDisabledHelpText}`

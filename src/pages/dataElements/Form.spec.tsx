@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/dataElementsSchema.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
-import { DISABLING_VALUE_TYPES } from '../../components/form/fields/AggregationTypeField'
 import {
     DEFAULT_CATEGORY_COMBO,
     DEFAULT_CATEGORYCOMBO_SELECT_OPTION,
@@ -28,6 +27,7 @@ import { uiActions } from '../../testUtils/uiActions'
 import { uiAssertions } from '../../testUtils/uiAssertions'
 import { DisplayableModel } from '../../types/models'
 import { Component as Edit } from './Edit'
+import { DISABLING_VALUE_TYPES } from './fields/AggregationTypeField'
 import { Component as New } from './New'
 import resetAllMocks = jest.resetAllMocks
 
@@ -776,7 +776,7 @@ describe('Data elements form tests', () => {
             const { screen } = await renderForm()
 
             const warningText =
-                'Changing the value type may cause problems when generating analytics tables if there is existing data for this data element.'
+                'Changing the value type may cause problems with existing data when generating analytics.'
 
             expect(screen.queryByText(warningText)).toBeNull()
 
@@ -1079,7 +1079,7 @@ describe('Data elements form tests', () => {
                 },
             })
             const warningText =
-                'Changing the value type may cause problems when generating analytics tables if there is existing data for this data element.'
+                'Changing the value type may cause problems with existing data when generating analytics.'
 
             expect(screen.queryByText(warningText)).toBeNull()
 
@@ -1126,7 +1126,7 @@ describe('Data elements form tests', () => {
                 },
             })
             const warningText =
-                'Changing the value type may cause problems when generating analytics tables if there is existing data for this data element.'
+                'Changing the value type may cause problems with existing data when generating analytics.'
 
             expect(screen.queryByText(warningText)).toBeNull()
 
