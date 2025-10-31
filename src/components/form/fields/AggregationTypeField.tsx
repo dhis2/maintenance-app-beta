@@ -50,8 +50,6 @@ export function AggregationTypeField() {
 
     useEffect(() => {
         const currentValue = aggregationTypeField.input.value
-        // Only change if disabled AND current value exists AND is not already 'NONE'
-        // This prevents marking form as dirty on initial mount when value is undefined
         if (disabled && currentValue && currentValue !== 'NONE') {
             change(fieldName, 'NONE')
         }
