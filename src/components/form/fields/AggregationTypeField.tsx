@@ -2,7 +2,12 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { Field as FieldRFF, useField, useForm } from 'react-final-form'
-import { AGGREGATION_TYPE, required, useSchemas } from '../../../lib'
+import {
+    AGGREGATION_TYPE,
+    required,
+    useSchema,
+    useSchemaSectionHandleOrThrow,
+} from '../../../lib'
 
 export const DISABLING_VALUE_TYPES = [
     'TEXT',
@@ -24,25 +29,23 @@ export const DISABLING_VALUE_TYPES = [
     'URL',
     'IMAGE',
     'GEOJSON',
-]
+] as const
 
-/**
- * Field rule: When value type has a certain value,
- *             disable aggregationType field
- * Field rule: When value type is disabled, set value to ''
- */
 const aggregationTypeHelpText = i18n.t(
-    'The default way to aggregate this data element in analytics.'
+    'The default way to aggregate in analytics.'
 )
 const aggregationTypeDisabledHelpText = i18n.t(
     'Disabled for the selected value type.'
 )
+
 export function AggregationTypeField() {
     const { change } = useForm()
     const fieldName = 'aggregationType'
     const valueTypeField = useField('valueType')
     const valueType = valueTypeField.input.value
-    const disabled = DISABLING_VALUE_TYPES.includes(valueType)
+    const disabled = DISABLING_VALUE_TYPES.includes(
+        valueType as (typeof DISABLING_VALUE_TYPES)[number]
+    )
 
     useEffect(() => {
         if (disabled) {
@@ -50,15 +53,17 @@ export function AggregationTypeField() {
         }
     }, [change, disabled])
 
-    const { dataElement } = useSchemas()
+    const schemaSection = useSchemaSectionHandleOrThrow()
+    const schema = useSchema(schemaSection.name)
+
     const options =
-        dataElement.properties.aggregationType.constants?.map((constant) => ({
+        schema.properties.aggregationType.constants?.map((constant) => ({
             value: constant,
             label: AGGREGATION_TYPE[constant as keyof typeof AGGREGATION_TYPE],
         })) || []
 
     const helpText = disabled
-        ? `${aggregationTypeHelpText} ${aggregationTypeDisabledHelpText}`
+        ? aggregationTypeDisabledHelpText
         : aggregationTypeHelpText
 
     return (
@@ -67,7 +72,7 @@ export function AggregationTypeField() {
             component={SingleSelectFieldFF}
             dataTest="formfields-aggregationType"
             required={!disabled}
-            inputWidth="400px"
+            inputWidth={'400px'}
             name={fieldName}
             label={
                 disabled

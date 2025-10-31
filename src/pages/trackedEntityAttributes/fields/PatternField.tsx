@@ -18,9 +18,9 @@ export function PatternField() {
             dataTest="formfields-pattern"
             name="pattern"
             label={i18n.t('Pattern for automatically generated values')}
-            placeholder={i18n.t(
+            placeholder={
                 'e.g. ORG_UNIT_CODE(...) + "-" + CURRENT_DATE(yyyyww) + "-" + SEQUENTIAL(#####)'
-            )}
+            }
             helpText={i18n.t('Pattern must use the DHIS2 TextPattern syntax.')}
             validateFields={[]}
             validate={validate}

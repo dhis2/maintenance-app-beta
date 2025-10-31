@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import { Form } from 'react-final-form'
+import { AggregationTypeField } from '../../../components/form/fields/AggregationTypeField'
 import { AGGREGATION_TYPE, useSchemas } from '../../../lib'
-import { AggregationTypeField } from './AggregationTypeField'
 
 const aggregationTypes = Object.keys(AGGREGATION_TYPE)
 

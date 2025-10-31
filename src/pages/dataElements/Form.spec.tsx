@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/dataElementsSchema.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
+import { DISABLING_VALUE_TYPES } from '../../components/form/fields/AggregationTypeField'
 import {
     DEFAULT_CATEGORY_COMBO,
     DEFAULT_CATEGORYCOMBO_SELECT_OPTION,
@@ -27,7 +28,6 @@ import { uiActions } from '../../testUtils/uiActions'
 import { uiAssertions } from '../../testUtils/uiAssertions'
 import { DisplayableModel } from '../../types/models'
 import { Component as Edit } from './Edit'
-import { DISABLING_VALUE_TYPES } from './fields/AggregationTypeField'
 import { Component as New } from './New'
 import resetAllMocks = jest.resetAllMocks
 
@@ -270,7 +270,7 @@ describe('Data elements form tests', () => {
             const { screen } = await renderForm()
             const aName = faker.animal.bird()
             const aShortName = faker.person.firstName()
-            const aValueType = randomValueIn(DISABLING_VALUE_TYPES)
+            const aValueType = randomValueIn([...DISABLING_VALUE_TYPES])
 
             await uiActions.enterName(aName, screen)
             await uiActions.enterInputFieldValue(
@@ -954,7 +954,11 @@ describe('Data elements form tests', () => {
                 screen.getByTestId('formfields-aggregationType')
             ).getByTestId('dhis2-uicore-select-input')
             expect(aggregationType).toBeVisible()
-            if (DISABLING_VALUE_TYPES.includes(dataElement.valueType)) {
+            if (
+                DISABLING_VALUE_TYPES.includes(
+                    dataElement.valueType as (typeof DISABLING_VALUE_TYPES)[number]
+                )
+            ) {
                 expect(aggregationType).toHaveTextContent('None')
             } else {
                 expect(aggregationType).toHaveTextContent(
