@@ -12,6 +12,7 @@ import {
     NameField,
     ShortNameField,
     CodeField,
+    ValueTypeField,
 } from '../../../components'
 import {
     useSchemaSectionHandleOrThrow,
@@ -20,7 +21,6 @@ import {
 import { AttributeTypeComponent } from './AttributeTypeComponent'
 import { OptionSetField } from './OptionSetField'
 import { SortOrderField } from './SortOrderField'
-import { ValueTypeField } from './ValueTypeField'
 
 export const AttributeFormFields = ({
     initialValues,
