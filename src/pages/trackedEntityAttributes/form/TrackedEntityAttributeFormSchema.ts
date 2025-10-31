@@ -6,7 +6,7 @@ import {
 } from '../../../types/generated'
 import { fieldFilters } from './fieldFilters'
 
-const { identifiable, withDefaultListColumns, withAttributeValues } =
+const { modelReference, withDefaultListColumns, withAttributeValues } =
     modelFormSchemas
 
 const trackedEntityAttributeBaseSchema = z.object({
@@ -14,14 +14,14 @@ const trackedEntityAttributeBaseSchema = z.object({
     code: z.string().trim().optional(),
     description: z.string().trim().optional(),
     formName: z.string().trim().optional(),
-    optionSet: z
-        .object({ id: z.string(), displayName: z.string().optional() })
+    optionSet: modelReference
+        .extend({ displayName: z.string().optional() })
         .optional(),
     valueType: z
         .nativeEnum(TrackedEntityAttribute.valueType)
         .default(TrackedEntityAttribute.valueType.TEXT),
-    trackedEntityType: z
-        .object({ id: z.string(), displayName: z.string().optional() })
+    trackedEntityType: modelReference
+        .extend({ displayName: z.string().optional() })
         .optional(),
     unique: z.boolean().default(false),
     orgunitScope: z.boolean().default(false),
@@ -38,7 +38,7 @@ const trackedEntityAttributeBaseSchema = z.object({
         .nativeEnum(TrackedEntityAttribute.aggregationType)
         .default(TrackedEntityAttribute.aggregationType.NONE),
     legendSets: z
-        .array(z.object({ id: z.string(), displayName: z.string().optional() }))
+        .array(modelReference.extend({ displayName: z.string().optional() }))
         .default([]),
 })
 
@@ -50,7 +50,9 @@ export const trackedEntityAttributeListSchema = trackedEntityAttributeBaseSchema
     })
 
 export const trackedEntityAttributeFormSchema = trackedEntityAttributeBaseSchema
-    .merge(identifiable)
+    .extend({
+        name: z.string().trim(),
+    })
     .merge(withAttributeValues)
 
 export const initialValues = getDefaults(trackedEntityAttributeFormSchema)
