@@ -51,7 +51,7 @@ export function AggregationTypeField() {
         if (disabled) {
             change(fieldName, 'NONE')
         }
-    }, [change, disabled])
+    }, [change, disabled, fieldName])
 
     const schemaSection = useSchemaSectionHandleOrThrow()
     const schema = useSchema(schemaSection.name)
@@ -63,8 +63,12 @@ export function AggregationTypeField() {
         })) || []
 
     const helpText = disabled
-        ? aggregationTypeDisabledHelpText
+        ? `${aggregationTypeHelpText} ${aggregationTypeDisabledHelpText}`
         : aggregationTypeHelpText
+
+    // Use different input width based on schema section
+    const inputWidth =
+        schemaSection.name === 'trackedEntityAttribute' ? '600px' : '400px'
 
     return (
         <FieldRFF
@@ -72,7 +76,7 @@ export function AggregationTypeField() {
             component={SingleSelectFieldFF}
             dataTest="formfields-aggregationType"
             required={!disabled}
-            inputWidth={'400px'}
+            inputWidth={inputWidth}
             name={fieldName}
             label={
                 disabled
