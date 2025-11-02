@@ -35,3 +35,20 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.basicFormDetails {
+    padding: var(--spacers-dp16);
+    background-color: var(--colors-grey100);
+    border-radius: 5px;
+    margin-block-start: var(--spacers-dp16);
+    max-width: 720px;
+    display: flex;
+    gap: var(--spacers-dp8);
+    flex-direction: column;
+}
+
+.basicFormDescription {
+    color: var(--colors-grey600);
+    padding: 0;
+    margin: 0;
+}

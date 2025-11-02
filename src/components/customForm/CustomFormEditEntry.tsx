@@ -2,10 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip } from '@dhis2/ui'
 import React from 'react'
 import { useField } from 'react-final-form'
-import {
-    StandardFormSectionTitle,
-    DrawerPortal,
-} from '../../../../../components'
+import { StandardFormSectionTitle, DrawerPortal } from '..'
 import css from './CustomFormContents.module.css'
 import { CustomFormEdit } from './CustomFormEdit'
 

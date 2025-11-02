@@ -41,6 +41,7 @@ const filterToQueryParamMap: FilterToQueryParamsMap = {
         return inFilter('categoryCombo.id', value)
     },
     categoryOptionGroup: (value) => inFilter('categoryOptionGroups.id', value),
+    categoryOptionGroupSet: (value) => inFilter('groupSets.id', value),
     dataSet: (value, section) => {
         if (section.name === SchemaName.dataElement) {
             return inFilter('dataSetElements.dataSet.id', value)
@@ -69,6 +70,10 @@ const filterToQueryParamMap: FilterToQueryParamsMap = {
     programIndicator: (value) => inFilter('programIndicators.id', value),
     programIndicatorGroup: (value) =>
         inFilter('programIndicatorGroups.id', value),
+    organisationUnitGroup: (value) =>
+        inFilter('organisationUnitGroups.id', value),
+    organisationUnitGroupSet: (value) => inFilter('groupSets.id', value),
+    validationRuleGroup: (value) => inFilter('validationGroups.id', value),
 }
 
 const getQueryParamForFilter = (

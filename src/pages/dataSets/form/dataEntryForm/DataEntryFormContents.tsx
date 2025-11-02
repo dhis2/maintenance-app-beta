@@ -1,25 +1,25 @@
 import i18n from '@dhis2/d2-i18n'
-import { NoticeBox, Tab, TabBar } from '@dhis2/ui'
-import { IconInfo16 } from '@dhis2/ui-icons'
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Button } from '@dhis2/ui'
+import React, { useEffect, useMemo, useState } from 'react'
+import { createSearchParams, Link, useSearchParams } from 'react-router-dom'
 import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
+    SectionedFormSection,
 } from '../../../../components'
-import { SectionedFormSection } from '../../../../components/sectionedForm'
-import { TooltipWrapper } from '../../../../components/tooltip'
-import { DataSet } from '../../../../types/generated'
+import { CustomFormEditEntry } from '../../../../components/customForm/CustomFormEditEntry'
+import { SectionFormSectionsList } from '../../../../components/formCreators/SectionFormList'
+import {
+    FormType,
+    TabbedFormTypePicker,
+} from '../../../../components/formCreators/TabbedFormTypePicker'
+import { FORM_SECTION_PARAM_KEY, scrollToSection } from '../../../../lib'
+import { SchemaName } from '../../../../types'
 import { DisplayOptionsField } from '../DisplayOptionsField'
 import { useDataSetField } from '../formHooks'
-import { CustomFormEditEntry } from './customForm/CustomFormEditEntry'
 import classes from './DataEntryFormContents.module.css'
-import { SectionFormSectionsList } from './SectionFormList'
-import formType = DataSet.formType
+import { EditOrNewDataSetSectionForm } from './sectionForm'
 
-const disabledFormTypeText = i18n.t(
-    'Data set must be saved before this form type can be configured.'
-)
 export const DataEntryFromContents = React.memo(function FormFormContents({
     name,
 }: {
@@ -29,17 +29,26 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
     const sections = useDataSetField('sections').input.value
     const dataEntryForm = useDataSetField('dataEntryForm').input.value
     const dataSetElements = useDataSetField('dataSetElements').input.value
-    const modelId = useParams().id
-    const isCreatingNewDataSet = !modelId
-    const [selectedFormType, setSelectedFormType] = useState<DataSet.formType>(
-        formType.DEFAULT
+    const [selectedFormType, setSelectedFormType] = useState<FormType>(
+        FormType.DEFAULT
     )
-    const androidFormType =
-        sections && sections.length > 0
-            ? i18n.t('Section form')
-            : i18n.t('Basic form')
+    const [searchParams] = useSearchParams()
+    const toDataSearchParam = useMemo(
+        () =>
+            createSearchParams({
+                ...searchParams,
+                [FORM_SECTION_PARAM_KEY]: 'data',
+            }).toString(),
+        [searchParams]
+    )
 
-    const webFormType = dataEntryForm ? i18n.t('Custom form') : androidFormType
+    useEffect(() => {
+        if (dataEntryForm) {
+            setSelectedFormType(FormType.CUSTOM)
+        } else if (sections.length > 0) {
+            setSelectedFormType(FormType.SECTION)
+        }
+    }, [dataEntryForm, sections])
 
     return (
         <SectionedFormSection name={name}>
@@ -51,118 +60,44 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                     'Choose and configure how the data entry form looks and works for this data set.'
                 )}
             </StandardFormSectionDescription>
-
-            {!isCreatingNewDataSet && dataSetElements.length > 0 && (
-                <NoticeBox
-                    title={i18n.t('Form type based on your current setup')}
-                    className={classes.formTypeInfo}
-                >
-                    {i18n.t(
-                        'Web will display {{webFormType}}  |  Android will display {{androidFormType}}',
-                        {
-                            webFormType,
-                            androidFormType,
-                        }
-                    )}
-                </NoticeBox>
-            )}
-            <div
-                className={classes.formTypeTabsContainer}
-                onClick={(e) => {
-                    e.preventDefault()
-                }}
+            <TabbedFormTypePicker
+                sectionsLength={sections.length}
+                hasDataEntryForm={!!dataEntryForm}
+                hasDataToDisplay={dataSetElements.length > 0}
+                onFormTypeChange={setSelectedFormType}
+                selectedFormType={selectedFormType}
             >
-                <TabBar fixed>
-                    <Tab
-                        onClick={(_, event) => {
-                            event.preventDefault()
-                            setSelectedFormType(formType.DEFAULT)
-                        }}
-                        selected={selectedFormType === formType.DEFAULT}
-                    >
-                        <div className={classes.formTypeTab}>
+                {selectedFormType === FormType.DEFAULT && (
+                    <div className={classes.basicFormDetails}>
+                        <StandardFormSectionTitle>
                             {i18n.t('Basic form')}
-                            <TooltipWrapper
-                                condition
-                                className={classes.infoTooltipWrapper}
-                                content={i18n.t(
-                                    'Basic forms display an auto-generated list of data elements. \n' +
-                                        'They will be displayed only if no Section or Custom form is created.'
-                                )}
-                            >
-                                <IconInfo16 />
-                            </TooltipWrapper>
+                        </StandardFormSectionTitle>
+                        <div className={classes.basicFormDescription}>
+                            {i18n.t(
+                                'This form displays an auto-generated list of the data elements defined for this data set.'
+                            )}
                         </div>
-                    </Tab>
-                    <Tab
-                        onClick={(_, event) => {
-                            event.preventDefault()
-                            setSelectedFormType(formType.SECTION)
-                        }}
-                        disabled={isCreatingNewDataSet}
-                        selected={selectedFormType === formType.SECTION}
-                    >
-                        <TooltipWrapper
-                            condition={isCreatingNewDataSet}
-                            content={disabledFormTypeText}
+                        <Link
+                            to={{ search: toDataSearchParam }}
+                            replace
+                            onClick={() => {
+                                scrollToSection('data')
+                            }}
                         >
-                            <div className={classes.formTypeTab}>
-                                {i18n.t('Section form')}
-                                <TooltipWrapper
-                                    condition={!isCreatingNewDataSet}
-                                    className={classes.infoTooltipWrapper}
-                                    content={i18n.t(
-                                        'Section forms let you create sections to organize data items for easier entry. If a Section form is created, it will be shown instead of the Basic form.'
-                                    )}
-                                >
-                                    <IconInfo16 />
-                                </TooltipWrapper>
-                            </div>
-                        </TooltipWrapper>
-                    </Tab>
-
-                    <Tab
-                        onClick={(_, event) => {
-                            event.preventDefault()
-                            setSelectedFormType(formType.CUSTOM)
-                        }}
-                        disabled={isCreatingNewDataSet}
-                        selected={selectedFormType === formType.CUSTOM}
-                    >
-                        <TooltipWrapper
-                            condition={isCreatingNewDataSet}
-                            content={disabledFormTypeText}
-                        >
-                            <div
-                                className={classes.formTypeTab}
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                }}
-                            >
-                                {i18n.t('Custom form')}
-                                <TooltipWrapper
-                                    condition={!isCreatingNewDataSet}
-                                    className={classes.infoTooltipWrapper}
-                                    content={i18n.t(
-                                        'Custom forms let you design a fully customized layout for data entry. \n' +
-                                            '\n' +
-                                            'On Web, Custom forms (if created) will always be shown.\n' +
-                                            'Android does not support Custom forms; \n' +
-                                            'instead, the Section form will be shown (if created), else the Basic form.'
-                                    )}
-                                >
-                                    <IconInfo16 />
-                                </TooltipWrapper>
-                            </div>
-                        </TooltipWrapper>
-                    </Tab>
-                </TabBar>
-            </div>
-            <div className={classes.formTypeTabsContent}>
-                {selectedFormType === formType.SECTION && (
-                    <SectionFormSectionsList />
+                            <Button secondary small>
+                                {i18n.t('Edit the data elements')}
+                            </Button>
+                        </Link>
+                    </div>
                 )}
-                {selectedFormType === formType.CUSTOM && (
+                {selectedFormType === FormType.SECTION && (
+                    <SectionFormSectionsList
+                        sectionsFieldName={'sections'}
+                        SectionFormComponent={EditOrNewDataSetSectionForm}
+                        schemaName={SchemaName.section}
+                    />
+                )}
+                {selectedFormType === FormType.CUSTOM && (
                     <CustomFormEditEntry />
                 )}
                 {displayOptions !== undefined && (
@@ -172,12 +107,12 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                         </StandardFormSectionTitle>
                         <DisplayOptionsField
                             withSectionsDisplayOptions={
-                                selectedFormType === DataSet.formType.SECTION
+                                selectedFormType === FormType.SECTION
                             }
                         />
                     </div>
                 )}
-            </div>
+            </TabbedFormTypePicker>
         </SectionedFormSection>
     )
 })
