@@ -10,7 +10,10 @@ import {
     attributeListSchema,
     attributeFormSchema,
 } from '../pages/attributes/form'
-import { categoryListSchema } from '../pages/categories/form'
+import {
+    categoryFormSchema,
+    categoryListSchema,
+} from '../pages/categories/form'
 import { categoryComboListSchema } from '../pages/categoryCombos/form'
 import { categoryOptionComboListSchema } from '../pages/categoryOptionCombos/form'
 import { categoryOptionGroupListSchema } from '../pages/categoryOptionGroups/form/categoryOptionGroupSchema'
@@ -162,6 +165,13 @@ export const testCategoryOption = (overwrites: Record<any, any> = {}) => ({
 
 export const testCategory = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(categoryListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testCategoryForm = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(categoryFormSchema, {
         mockeryMapper,
     }),
     ...overwrites,
