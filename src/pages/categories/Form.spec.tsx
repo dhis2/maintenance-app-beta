@@ -1,13 +1,13 @@
-import { faker } from '@faker-js/faker'
 import { render } from '@testing-library/react'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/categoriesSchema.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
 import { SECTIONS_MAP } from '../../lib'
 import {
-    randomDhis2Id,
     randomLongString,
     testCategoryForm,
+    testCategoryOption,
+    testCustomAttribute,
 } from '../../testUtils/builders'
 import { generateRenderer } from '../../testUtils/generateRenderer'
 import TestComponentWithRouter from '../../testUtils/TestComponentWithRouter'
@@ -22,13 +22,6 @@ const mockSchema = schemaMock
 jest.mock('use-debounce', () => ({
     useDebouncedCallback: (fn: any) => fn,
 }))
-
-const testCategoryOption = (overwrites: Record<any, any> = {}) => ({
-    id: randomDhis2Id(),
-    displayName: faker.person.firstName(),
-    valueType: 'TEXT',
-    ...overwrites,
-})
 
 describe('Categories form tests', () => {
     const createMock = jest.fn()
@@ -54,6 +47,7 @@ describe('Categories form tests', () => {
                 routeOptions,
                 { matchingExistingElementFilter = undefined } = {}
             ) => {
+                const attributes = [testCustomAttribute({ mandatory: false })]
                 const categoryOptions = [
                     testCategoryOption(),
                     testCategoryOption(),
@@ -63,6 +57,7 @@ describe('Categories form tests', () => {
                     <TestComponentWithRouter
                         path={`/${section.namePlural}`}
                         customData={{
+                            attributes: () => ({ attributes }),
                             categoryOptions: () => ({ categoryOptions }),
                             categories: (type: any, params: any) => {
                                 if (type === 'create') {
