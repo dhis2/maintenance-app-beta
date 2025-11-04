@@ -1,10 +1,10 @@
+import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF } from '@dhis2/ui'
-import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import {
-    AggregationTypeField,
+    AggregationTypeFieldByValueType,
     CodeField,
     DescriptionField,
     ModelTransferField,
@@ -16,7 +16,7 @@ import {
     StandardFormSectionTitle,
     ValueTypeField,
 } from '../../../components'
-import { SECTIONS_MAP, useBoundResourceQueryFn } from '../../../lib'
+import { SECTIONS_MAP } from '../../../lib'
 import { TrackedEntityAttribute } from '../../../types/generated'
 import {
     ConfidentialField,
@@ -46,20 +46,12 @@ export const TrackedEntityAttributeFormFields = ({
     const { input: orgunitScopeInput } = useField('orgunitScope')
     const { input: generatedInput } = useField('generated')
 
-    const queryFn = useBoundResourceQueryFn()
-    const systemInfoQuery = useQuery({
-        queryKey: [
-            { resource: 'system/info', params: { fields: 'encryption' } },
-        ] as const,
-        queryFn: queryFn<{ encryption: boolean }>,
-    })
-    const systemInfo = systemInfoQuery.data
-
+    const config = useConfig()
     const valueType = valueTypeInput.value
     const isUnique = uniqueInput.value
     const isOrgunitScope = orgunitScopeInput.value
     const isGenerated = generatedInput.value
-    const encryptionEnabled = systemInfo?.encryption === true
+    const encryptionEnabled = config.systemInfo?.encryption === true
 
     const showTrackedEntityType =
         valueType === TrackedEntityAttribute.valueType.TRACKER_ASSOCIATE
@@ -235,7 +227,7 @@ export const TrackedEntityAttributeFormFields = ({
                 </StandardFormField> */}
 
                 <StandardFormField>
-                    <AggregationTypeField />
+                    <AggregationTypeFieldByValueType />
                 </StandardFormField>
             </SectionedFormSection>
 

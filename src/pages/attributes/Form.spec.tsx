@@ -26,6 +26,13 @@ jest.mock('use-debounce', () => ({
     useDebouncedCallback: (fn: any) => fn,
 }))
 
+/* const VALUE_TYPES_OPTIONS =
+    mockSchema.properties.valueType.constants
+        ?.filter((constant) => constant !== 'MULTI_TEXT')
+        .map((constant) => ({
+            value: constant,
+            displayName: getConstantTranslation(constant),
+        })) ?? [] */
 const VALUE_TYPES_OPTIONS =
     mockSchema.properties.valueType.constants?.map((constant) => ({
         value: constant,
@@ -278,7 +285,7 @@ describe('Attributes form tests', () => {
 
             expect(
                 screen.getByText(
-                    'Disabled as the value type must match the value type of the selected option set'
+                    'Disabled as the value type must match the value type of the selected option set.'
                 )
             ).toBeInTheDocument()
 

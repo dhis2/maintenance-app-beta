@@ -66,7 +66,7 @@ export function ValueTypeField() {
             })}
             disabled={disabled}
             helpText={combinedHelpText}
-            required={!isEdit}
+            required={true}
         >
             {options.map((option: { value: string; label: string }) => (
                 <SingleSelectOption
@@ -90,7 +90,7 @@ export function ValueTypeField() {
                 renderComponent={renderComponent}
                 modalTitle={i18n.t('Change value type')}
                 modalMessage={i18n.t(
-                    'Changing the value type may cause problems with existing data when generating analytics.'
+                    'Changing the value type may cause issues when generating analytics tables if data already exists.'
                 )}
                 modalMessageSelectionSpecificConfirmation={(selection) =>
                     i18n.t(

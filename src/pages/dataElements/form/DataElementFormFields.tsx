@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import {
-    AggregationTypeField,
+    AggregationTypeFieldByValueType,
     StandardFormSection,
     StandardFormSectionTitle,
     StandardFormSectionDescription,
@@ -9,6 +9,7 @@ import {
     CustomAttributesSection,
     DefaultIdentifiableFields,
     DescriptionField,
+    ValueTypeField,
 } from '../../../components'
 import { SCHEMA_SECTIONS } from '../../../lib'
 import {
@@ -22,7 +23,6 @@ import {
     OptionSetCommentField,
     OptionSetField,
     UrlField,
-    ValueTypeField,
     ZeroIsSignificantField,
 } from '../fields'
 
@@ -78,7 +78,7 @@ export function DataElementFormFields() {
                 </StandardFormField>
 
                 <StandardFormField>
-                    <AggregationTypeField />
+                    <AggregationTypeFieldByValueType />
                 </StandardFormField>
             </StandardFormSection>
 

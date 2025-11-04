@@ -38,7 +38,7 @@ const aggregationTypeDisabledHelpText = i18n.t(
     'Disabled for the selected value type.'
 )
 
-export function AggregationTypeField() {
+export function AggregationTypeFieldByValueType() {
     const { change } = useForm()
     const fieldName = 'aggregationType'
     const valueTypeField = useField('valueType')

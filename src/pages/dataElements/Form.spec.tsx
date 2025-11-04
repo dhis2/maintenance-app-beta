@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/dataElementsSchema.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
-import { DISABLING_VALUE_TYPES } from '../../components/form/fields/AggregationTypeField'
+import { DISABLING_VALUE_TYPES } from '../../components/form/fields/AggregationTypeFieldByValueType'
 import {
     DEFAULT_CATEGORY_COMBO,
     DEFAULT_CATEGORYCOMBO_SELECT_OPTION,
