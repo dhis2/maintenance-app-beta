@@ -31,6 +31,7 @@ const complexKeys = [
     'style',
     'dataSetElements',
     'displayOptions',
+    'trackedEntityTypeAttributes',
     'programTrackedEntityAttributes',
 ] as const
 export const sanitizeDirtyValueKeys = (dirtyKeys: string[]) => {
