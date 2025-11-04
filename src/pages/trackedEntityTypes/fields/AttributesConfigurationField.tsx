@@ -1,8 +1,19 @@
 import i18n from '@dhis2/d2-i18n'
-import { Checkbox, Field } from '@dhis2/ui'
+import {
+    Checkbox,
+    DataTable,
+    DataTableCell,
+    DataTableColumnHeader,
+    DataTableRow,
+    TableBody,
+    TableHead,
+} from '@dhis2/ui'
 import React from 'react'
 import { useField } from 'react-final-form'
-import css from './AttributesConfigurationField.module.css'
+import {
+    StandardFormSectionTitle,
+    StandardFormSectionDescription,
+} from '../../../components'
 
 type TrackedEntityTypeAttribute = {
     mandatory: boolean
@@ -23,7 +34,7 @@ export function AttributesConfigurationField() {
 
     if (attributes.length === 0) {
         return (
-            <div className={css.emptyMessage}>
+            <div style={{ padding: '16px', textAlign: 'center' }}>
                 {i18n.t(
                     'No attributes selected. Please select attributes in the transfer above.'
                 )}
@@ -46,26 +57,42 @@ export function AttributesConfigurationField() {
     }
 
     return (
-        <Field
-            dataTest="formfields-attributes-configuration"
-            label={i18n.t('Configure attributes')}
-            helpText={i18n.t(
-                'Choose which attributes to display, which are required, and which are searchable'
-            )}
-        >
-            <div className={css.attributesContainer}>
-                {attributes.map((attr, index) => (
-                    <div
-                        key={attr.trackedEntityAttribute.id}
-                        className={css.attributeCard}
-                    >
-                        <div className={css.attributeContent}>
-                            <span className={css.attributeName}>
+        <>
+            <StandardFormSectionTitle>
+                {i18n.t('Configure attributes')}
+            </StandardFormSectionTitle>
+
+            <StandardFormSectionDescription>
+                {i18n.t(
+                    'Choose which attributes to display, which are required, and which are searchable'
+                )}
+            </StandardFormSectionDescription>
+
+            <DataTable data-test="formfields-attributes-configuration">
+                <TableHead>
+                    <DataTableRow>
+                        <DataTableColumnHeader>
+                            {i18n.t('Attribute name')}
+                        </DataTableColumnHeader>
+                        <DataTableColumnHeader>
+                            {i18n.t('Searchable')}
+                        </DataTableColumnHeader>
+                        <DataTableColumnHeader>
+                            {i18n.t('Mandatory')}
+                        </DataTableColumnHeader>
+                        <DataTableColumnHeader>
+                            {i18n.t('Display in list')}
+                        </DataTableColumnHeader>
+                    </DataTableRow>
+                </TableHead>
+                <TableBody>
+                    {attributes.map((attr, index) => (
+                        <DataTableRow key={attr.trackedEntityAttribute.id}>
+                            <DataTableCell>
                                 {attr.trackedEntityAttribute.displayName}
-                            </span>
-                            <div className={css.checkboxGroup}>
+                            </DataTableCell>
+                            <DataTableCell>
                                 <Checkbox
-                                    label={i18n.t('Searchable')}
                                     checked={attr.searchable}
                                     onChange={({ checked }) =>
                                         updateAttribute(
@@ -75,8 +102,9 @@ export function AttributesConfigurationField() {
                                         )
                                     }
                                 />
+                            </DataTableCell>
+                            <DataTableCell>
                                 <Checkbox
-                                    label={i18n.t('Mandatory')}
                                     checked={attr.mandatory}
                                     onChange={({ checked }) =>
                                         updateAttribute(
@@ -86,8 +114,9 @@ export function AttributesConfigurationField() {
                                         )
                                     }
                                 />
+                            </DataTableCell>
+                            <DataTableCell>
                                 <Checkbox
-                                    label={i18n.t('Display in list')}
                                     checked={attr.displayInList}
                                     onChange={({ checked }) =>
                                         updateAttribute(
@@ -97,11 +126,11 @@ export function AttributesConfigurationField() {
                                         )
                                     }
                                 />
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </Field>
+                            </DataTableCell>
+                        </DataTableRow>
+                    ))}
+                </TableBody>
+            </DataTable>
+        </>
     )
 }

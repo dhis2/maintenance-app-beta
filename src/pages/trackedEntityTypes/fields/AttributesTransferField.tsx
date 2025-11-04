@@ -85,7 +85,7 @@ export function AttributesTransferField() {
                         order: 'displayName:asc',
                     },
                 }}
-                maxSelections={200}
+                maxSelections={Infinity}
             />
         </Field>
     )

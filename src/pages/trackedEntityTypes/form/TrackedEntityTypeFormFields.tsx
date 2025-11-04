@@ -7,7 +7,6 @@ import {
     SectionedFormSections,
     SectionedFormSection,
     CustomAttributesSection,
-    ColorAndIconField,
     DescriptionField,
     NameField,
     ShortNameField,
@@ -18,6 +17,7 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
+import { ColorAndIconField } from '../../dataElements/fields'
 import {
     AttributesTransferField,
     AttributesConfigurationField,
@@ -57,11 +57,7 @@ export function TrackedEntityTypeFormFields() {
                 </StandardFormField>
 
                 <StandardFormField>
-                    <ColorAndIconField
-                        helpText={i18n.t(
-                            'A color and icon are helpful for identifying tracked entity types in information-dense screens.'
-                        )}
-                    />
+                    <ColorAndIconField />
                 </StandardFormField>
 
                 <StandardFormField>
@@ -105,12 +101,12 @@ export function TrackedEntityTypeFormFields() {
                 <StandardFormField>
                     <AttributesConfigurationField />
                 </StandardFormField>
-
-                <CustomAttributesSection
-                    schemaSection={SECTIONS_MAP.trackedEntityType}
-                    sectionedLayout
-                />
             </SectionedFormSection>
+
+            <CustomAttributesSection
+                schemaSection={SECTIONS_MAP.trackedEntityType}
+                sectionedLayout
+            />
         </SectionedFormSections>
     )
 }

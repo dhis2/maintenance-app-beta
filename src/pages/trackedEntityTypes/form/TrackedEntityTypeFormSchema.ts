@@ -1,8 +1,12 @@
 import { z } from 'zod'
 import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 
-const { identifiable, withDefaultListColumns, withAttributeValues } =
-    modelFormSchemas
+const {
+    identifiable,
+    withDefaultListColumns,
+    withAttributeValues,
+    modelReference,
+} = modelFormSchemas
 
 const trackedEntityTypeBaseSchema = z.object({
     name: z.string().trim(),
@@ -41,8 +45,7 @@ const trackedEntityTypeBaseSchema = z.object({
                 mandatory: z.boolean().default(false),
                 searchable: z.boolean().default(false),
                 displayInList: z.boolean().default(false),
-                trackedEntityAttribute: z.object({
-                    id: z.string(),
+                trackedEntityAttribute: modelReference.extend({
                     displayName: z.string(),
                 }),
             })
