@@ -776,7 +776,7 @@ describe('Data elements form tests', () => {
             const { screen } = await renderForm()
 
             const warningText =
-                'Changing the value type may cause problems with existing data when generating analytics.'
+                'Changing the value type may cause issues when generating analytics tables if data already exists.'
 
             expect(screen.queryByText(warningText)).toBeNull()
 
@@ -1079,7 +1079,7 @@ describe('Data elements form tests', () => {
                 },
             })
             const warningText =
-                'Changing the value type may cause problems with existing data when generating analytics.'
+                'Changing the value type may cause issues when generating analytics tables if data already exists.'
 
             expect(screen.queryByText(warningText)).toBeNull()
 
@@ -1126,7 +1126,7 @@ describe('Data elements form tests', () => {
                 },
             })
             const warningText =
-                'Changing the value type may cause problems with existing data when generating analytics.'
+                'Changing the value type may cause issues when generating analytics tables if data already exists.'
 
             expect(screen.queryByText(warningText)).toBeNull()
 

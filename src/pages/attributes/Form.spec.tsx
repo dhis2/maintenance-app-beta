@@ -274,7 +274,11 @@ describe('Attributes form tests', () => {
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('formfields-valueType'),
                 {
-                    options: VALUE_TYPES_OPTIONS,
+                    options: VALUE_TYPES_OPTIONS.filter(
+                        (o) =>
+                            o.value !== 'MULTI_TEXT' ||
+                            optionSets?.[1]?.valueType === 'MULTI_TEXT'
+                    ),
                     selected: getConstantTranslation(
                         optionSets?.[1]?.valueType
                     ),
@@ -296,7 +300,9 @@ describe('Attributes form tests', () => {
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('formfields-valueType'),
                 {
-                    options: VALUE_TYPES_OPTIONS,
+                    options: VALUE_TYPES_OPTIONS.filter(
+                        (o) => o.value !== 'MULTI_TEXT'
+                    ),
                     selected: getConstantTranslation(
                         optionSets?.[1]?.valueType
                     ),
