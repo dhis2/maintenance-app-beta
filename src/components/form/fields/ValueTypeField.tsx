@@ -48,7 +48,7 @@ export function ValueTypeField() {
             }) || []
 
     const combinedHelpText = disabled
-        ? `${valueTypeHelpText} ${valueTypeDisabledHelpText}`
+        ? valueTypeDisabledHelpText
         : valueTypeHelpText
 
     const renderComponent = ({

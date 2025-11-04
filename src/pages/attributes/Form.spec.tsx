@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/attributeSchema.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
-import { SECTIONS_MAP, getConstantTranslation } from '../../lib'
+import { SECTIONS_MAP, VALUE_TYPE, getConstantTranslation } from '../../lib'
 import {
     randomLongString,
     testAttributeForm,
@@ -220,7 +220,14 @@ describe('Attributes form tests', () => {
             )
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('formfields-valueType'),
-                { options: VALUE_TYPES_OPTIONS },
+                {
+                    selected: 'Text',
+                    options: mockSchema.properties.valueType.constants
+                        .filter((o) => o !== 'MULTI_TEXT')
+                        .map((o) => ({
+                            displayName: getConstantTranslation(o),
+                        })),
+                },
                 screen
             )
 
@@ -232,6 +239,17 @@ describe('Attributes form tests', () => {
                 },
                 screen
             )
+        })
+        it('should not have multi text as a value type by default', async () => {
+            const { screen } = await renderForm()
+            const valueTypeOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('formfields-valueType'),
+                screen
+            )
+            const multiTextOptions = valueTypeOptions.filter((opt) =>
+                opt.textContent?.includes(VALUE_TYPE.MULTI_TEXT)
+            )
+            expect(multiTextOptions).toHaveLength(0)
         })
         it('locks value type when option set is selected', async () => {
             const { screen, optionSets } = await renderForm()
