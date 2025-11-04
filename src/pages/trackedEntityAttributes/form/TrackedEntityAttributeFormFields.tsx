@@ -51,8 +51,7 @@ export const TrackedEntityAttributeFormFields = ({
     const isUnique = uniqueInput.value
     const isOrgunitScope = orgunitScopeInput.value
     const isGenerated = generatedInput.value
-    const encryptionEnabled = systemInfo?.encryption === true
-
+    const encryptionEnabled = (systemInfo as any)?.encryption
     const showTrackedEntityType =
         valueType === TrackedEntityAttribute.valueType.TRACKER_ASSOCIATE
 
