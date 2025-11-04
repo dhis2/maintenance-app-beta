@@ -399,15 +399,18 @@ describe('Attributes form tests', () => {
                     testOptionSet(),
                     testOptionSet(),
                 ]
-                const attribute = testAttribute()
-                attribute.optionSet = {
-                    id: optionSets[1].id,
-                    displayName: optionSets[1].displayName,
-                }
-                attribute.valueType =
-                    VALUE_TYPES_OPTIONS[
-                        Math.floor(Math.random() * VALUE_TYPES_OPTIONS.length)
-                    ]?.value
+                const attribute = testAttribute({
+                    optionSet: {
+                        id: optionSets[1].id,
+                        displayName: optionSets[1].displayName,
+                    },
+                    valueType:
+                        VALUE_TYPES_OPTIONS[
+                            Math.floor(
+                                Math.random() * VALUE_TYPES_OPTIONS.length
+                            )
+                        ]?.value,
+                })
 
                 const id = attribute.id
                 const screen = render(
