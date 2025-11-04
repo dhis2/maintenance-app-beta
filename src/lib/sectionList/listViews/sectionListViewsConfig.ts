@@ -489,7 +489,6 @@ export const modelListViewsConfig = {
                 'maxTeiCountToReturn',
                 'minAttributesRequiredToSearch',
                 DESCRIPTORS.shortName,
-                'user',
             ],
         },
         filters: {
