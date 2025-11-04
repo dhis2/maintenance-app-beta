@@ -70,5 +70,10 @@ export const ProgramFormDescriptor = {
             label: i18n.t('Enrollment: Form', { nsSeparator: '~:~' }),
             fields: [{ name: 'dataEntryForm', label: i18n.t('Custom form') }],
         },
+        {
+            name: 'programStages',
+            label: i18n.t('Program Stages'),
+            fields: [],
+        },
     ],
 } as const satisfies SectionedFormDescriptor<ProgramValues>
