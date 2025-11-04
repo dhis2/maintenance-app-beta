@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { useField, useFormState } from 'react-final-form'
+import { ConfirmationModalWrapper } from '../../../components'
 import { getConstantTranslation, SchemaName, useSchema } from '../../../lib'
 
 const valueTypeHelpText = i18n.t('The type of data that will be recorded.')
@@ -39,15 +40,16 @@ export function ValueTypeField() {
         ? `${valueTypeHelpText} ${valueTypeDisabledHelpText}`
         : valueTypeHelpText
 
-    return (
+    const renderComponent = ({
+        onChange,
+    }: {
+        onChange: (event: any) => void
+    }) => (
         <SingleSelectField
             dataTest="formfields-valueType"
             inputWidth="400px"
             selected={input.value}
-            onChange={({ selected }) => {
-                input.onChange(selected)
-                input.onBlur()
-            }}
+            onChange={onChange}
             label={i18n.t('{{fieldLabel}} (required)', {
                 fieldLabel: i18n.t('Value type'),
             })}
@@ -62,5 +64,29 @@ export function ValueTypeField() {
                 />
             ))}
         </SingleSelectField>
+    )
+    return (
+        <ConfirmationModalWrapper
+            onChange={({ selected }) => {
+                input.onChange(selected)
+                input.onBlur()
+            }}
+            renderComponent={renderComponent}
+            modalTitle={i18n.t('Change value type')}
+            modalMessage={i18n.t(
+                'Changing the value type may cause problems when generating analytics tables if there is existing data for this data element.'
+            )}
+            modalMessageSelectionSpecificConfirmation={(selection) =>
+                i18n.t(
+                    'Are you sure you want to change the {{objectType}} to {{newObjectTypeValue}}?',
+                    {
+                        objectType: i18n.t('value type'),
+                        newObjectTypeValue: selection?.selected
+                            ? getConstantTranslation(selection.selected)
+                            : i18n.t('undefined'),
+                    }
+                )
+            }
+        />
     )
 }

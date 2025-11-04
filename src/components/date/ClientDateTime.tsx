@@ -4,10 +4,13 @@ import { selectedLocale } from '../../lib'
 
 type DateTimeFormatOptions = Intl.DateTimeFormatOptions
 
-const defaultDateTimeFormatter = new Intl.DateTimeFormat(selectedLocale, {
-    dateStyle: 'medium',
-    timeStyle: 'medium',
-})
+export const defaultDateTimeFormatter = new Intl.DateTimeFormat(
+    selectedLocale,
+    {
+        dateStyle: 'medium',
+        timeStyle: 'medium',
+    }
+)
 
 type ClientDateTimeProps = {
     value?: string

@@ -3,12 +3,14 @@ import { ConfigurableFilterKey } from '../../../../lib'
 import { useFilterKeys } from '../useFilterKeys'
 import { FormNameFilter } from './FormNameFilter'
 import { IndicatorFilter } from './IndicatorFilter'
+import { ProgramTypeFilter } from './ProgramTypeFilter'
 import {
     AggregationTypeFilter,
     CategoryComboFilter,
     Categoryfilter,
     CategoryOptionFilter,
     CategoryOptionGroupFilter,
+    CategoryOptionGroupSetFilter,
     DataDimensionTypeFilter,
     IndicatorTypeFilter,
     IndicatorGroupFilter,
@@ -27,6 +29,9 @@ import {
     ProgramFilter,
     ProgramIndicatorFilter,
     ProgramIndicatorGroupFilter,
+    OrganisationUnitGroupFilter,
+    OrganisationUnitGroupSetFilter,
+    ValidationRuleGroupFilter,
 } from '.'
 
 type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
@@ -37,6 +42,7 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
     categoryCombo: CategoryComboFilter,
     categoryOption: CategoryOptionFilter,
     categoryOptionGroup: CategoryOptionGroupFilter,
+    categoryOptionGroupSet: CategoryOptionGroupSetFilter,
     compulsory: CompulsoryFilter,
     dataDimension: DataDimensionFilter,
     dataDimensionType: DataDimensionTypeFilter,
@@ -52,11 +58,15 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
     indicatorGroup: IndicatorGroupFilter,
     indicatorGroupSet: IndicatorGroupSetFilter,
     indicatorType: IndicatorTypeFilter,
+    organisationUnitGroup: OrganisationUnitGroupFilter,
+    organisationUnitGroupSet: OrganisationUnitGroupSetFilter,
     program: ProgramFilter,
+    programType: ProgramTypeFilter,
     programIndicator: ProgramIndicatorFilter,
     programIndicatorGroup: ProgramIndicatorGroupFilter,
     publicAccess: PublicAccessFilter,
     valueType: ValueTypeSelectionFilter,
+    validationRuleGroup: ValidationRuleGroupFilter,
 }
 
 export const DynamicFilters = () => {
