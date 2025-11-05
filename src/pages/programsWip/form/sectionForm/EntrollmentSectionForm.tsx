@@ -199,7 +199,7 @@ export const NewEnrollmentSectionForm = ({
 export const EditOrNewEnrollmentSectionForm = ({
     section,
     onCancel,
-    onSubmitted: onSubmit,
+    onSubmitted,
     sectionsLength,
 }: {
     section: DisplayableModel | null | undefined
@@ -213,7 +213,7 @@ export const EditOrNewEnrollmentSectionForm = ({
     if (section === null) {
         return (
             <NewEnrollmentSectionForm
-                onSubmitted={onSubmit}
+                onSubmitted={onSubmitted}
                 onCancel={onCancel}
                 sortOrder={sectionsLength}
             />
@@ -224,7 +224,7 @@ export const EditOrNewEnrollmentSectionForm = ({
         <EditEnrollmentSectionForm
             section={section}
             onCancel={onCancel}
-            onSubmitted={onSubmit}
+            onSubmitted={onSubmitted}
         />
     )
 }
