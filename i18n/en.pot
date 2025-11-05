@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-04T11:48:55.401Z\n"
-"PO-Revision-Date: 2025-11-04T11:48:55.401Z\n"
+"POT-Creation-Date: 2025-11-04T10:03:06.141Z\n"
+"PO-Revision-Date: 2025-11-04T10:03:06.141Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -252,6 +252,18 @@ msgstr "<No value>"
 msgid "Set up information for the attributes assigned to {{modelName}}."
 msgstr "Set up information for the attributes assigned to {{modelName}}."
 
+msgid "The default way to aggregate in analytics."
+msgstr "The default way to aggregate in analytics."
+
+msgid "Disabled for the selected value type."
+msgstr "Disabled for the selected value type."
+
+msgid "Aggregation type"
+msgstr "Aggregation type"
+
+msgid "{{fieldLabel}} (required)"
+msgstr "{{fieldLabel}} (required)"
+
 msgid "Code"
 msgstr "Code"
 
@@ -267,9 +279,6 @@ msgstr ""
 
 msgid "A name should be concise and easy to recognize."
 msgstr "A name should be concise and easy to recognize."
-
-msgid "{{fieldLabel}} (required)"
-msgstr "{{fieldLabel}} (required)"
 
 msgid "Name"
 msgstr "Name"
@@ -327,6 +336,46 @@ msgstr ""
 
 msgid "Short name"
 msgstr "Short name"
+
+msgid ""
+"Select the kind of data this attribute collects. If you have chosen an "
+"Option set, this will be set automatically."
+msgstr ""
+"Select the kind of data this attribute collects. If you have chosen an "
+"Option set, this will be set automatically."
+
+msgid ""
+"Disabled as the value type must match the value type of the selected option "
+"set."
+msgstr ""
+"Disabled as the value type must match the value type of the selected option "
+"set."
+
+msgid "Value type"
+msgstr "Value type"
+
+msgid "Change value type"
+msgstr "Change value type"
+
+msgid ""
+"Changing the value type may cause issues when generating analytics tables "
+"if data already exists."
+msgstr ""
+"Changing the value type may cause issues when generating analytics tables "
+"if data already exists."
+
+msgid ""
+"Are you sure you want to change the {{objectType}} to "
+"{{newObjectTypeValue}}?"
+msgstr ""
+"Are you sure you want to change the {{objectType}} to "
+"{{newObjectTypeValue}}?"
+
+msgid "value type"
+msgstr "value type"
+
+msgid "undefined"
+msgstr "undefined"
 
 msgid "Sections"
 msgstr "Sections"
@@ -1370,9 +1419,6 @@ msgstr "Gs1 datamatrix"
 msgid "Canvas"
 msgstr "Canvas"
 
-msgid "Aggregation type"
-msgstr "Aggregation type"
-
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
 
@@ -1423,9 +1469,6 @@ msgstr "Sharing"
 
 msgid "Owner"
 msgstr "Owner"
-
-msgid "Value type"
-msgstr "Value type"
 
 msgid "Zero is significant"
 msgstr "Zero is significant"
@@ -1719,20 +1762,6 @@ msgstr "Remove option set"
 msgid "Enter a number to decide where this attribute appears in list and forms"
 msgstr "Enter a number to decide where this attribute appears in list and forms"
 
-msgid ""
-"Select the kind of data this attribute collects. If you have chosen an "
-"option set, this will be set automatically."
-msgstr ""
-"Select the kind of data this attribute collects. If you have chosen an "
-"option set, this will be set automatically."
-
-msgid ""
-"Disabled as the value type must match the value type of the selected option "
-"set"
-msgstr ""
-"Disabled as the value type must match the value type of the selected option "
-"set"
-
 msgid "Set up the basic information for this attribute."
 msgstr "Set up the basic information for this attribute."
 
@@ -2018,12 +2047,6 @@ msgstr "Explain the purpose of this data element group."
 msgid "Aggregation level(s)"
 msgstr "Aggregation level(s)"
 
-msgid "The default way to aggregate this data element in analytics."
-msgstr "The default way to aggregate this data element in analytics."
-
-msgid "Disabled for the selected value type."
-msgstr "Disabled for the selected value type."
-
 msgid "Choose how this data element is disaggregated."
 msgstr "Choose how this data element is disaggregated."
 
@@ -2100,32 +2123,6 @@ msgstr "Url"
 
 msgid "A web link that provides extra information."
 msgstr "A web link that provides extra information."
-
-msgid "The type of data that will be recorded."
-msgstr "The type of data that will be recorded."
-
-msgid "Change value type"
-msgstr "Change value type"
-
-msgid ""
-"Changing the value type may cause problems when generating analytics tables "
-"if there is existing data for this data element."
-msgstr ""
-"Changing the value type may cause problems when generating analytics tables "
-"if there is existing data for this data element."
-
-msgid ""
-"Are you sure you want to change the {{objectType}} to "
-"{{newObjectTypeValue}}?"
-msgstr ""
-"Are you sure you want to change the {{objectType}} to "
-"{{newObjectTypeValue}}?"
-
-msgid "value type"
-msgstr "value type"
-
-msgid "undefined"
-msgstr "undefined"
 
 msgid "Store zero data values"
 msgstr "Store zero data values"
