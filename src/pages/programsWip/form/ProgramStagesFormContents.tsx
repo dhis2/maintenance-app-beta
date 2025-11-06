@@ -1,8 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, InputFieldFF, Logo } from '@dhis2/ui'
+import { Button, InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF, useFormState } from 'react-final-form'
 import { useFieldArray } from 'react-final-form-arrays'
+import { createSearchParams, useSearchParams } from 'react-router-dom'
 import {
     DrawerPortal,
     SectionedFormSection,
@@ -10,6 +11,7 @@ import {
     StandardFormSectionTitle,
 } from '../../../components'
 import { ListInFormItem } from '../../../components/formCreators/SectionFormList'
+import { FORM_SUBSECTION_PARAM_KEY } from '../../../lib'
 import { SchemaName } from '../../../types'
 import { Access, DisplayableModel } from '../../../types/models'
 import {
@@ -34,6 +36,7 @@ export const ProgramStagesFormContents = React.memo(
         >()
         const isStageFormOpen = !!stageFormOpen || stageFormOpen === null
         const { values } = useFormState({ subscription: { values: true } })
+        const [searchParams, setSearchParams] = useSearchParams()
 
         const handleSubmittedStage = (
             values: SubmittedStageFormValues,
@@ -60,18 +63,24 @@ export const ProgramStagesFormContents = React.memo(
                 stagesFieldArray.push(values)
             }
         }
+        const onCloseStageForm = () => {
+            const next = createSearchParams(searchParams)
+            next.delete(FORM_SUBSECTION_PARAM_KEY)
+            setSearchParams(next, { replace: true })
+            setStageFormOpen(undefined)
+        }
 
         return (
             <>
                 <DrawerPortal
                     isOpen={isStageFormOpen}
-                    onClose={() => setStageFormOpen(undefined)}
+                    onClose={onCloseStageForm}
                 >
                     {stageFormOpen !== undefined && (
                         <div>
                             <EditOrNewStageForm
                                 stage={stageFormOpen}
-                                onCancel={() => setStageFormOpen(undefined)}
+                                onCancel={onCloseStageForm}
                                 onSubmitted={handleSubmittedStage}
                             />
                         </div>

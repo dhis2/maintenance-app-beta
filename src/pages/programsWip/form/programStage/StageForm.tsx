@@ -1,5 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { Button, ButtonStrip } from '@dhis2/ui'
+import { IconInfo16 } from '@dhis2/ui-icons'
+import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import React, { useCallback, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
@@ -7,24 +9,30 @@ import {
     FormBase,
     FormBaseProps,
     FormFooterWrapper,
+    SectionedFormErrorNotice,
+    SectionedFormLayout,
 } from '../../../../components'
+import { DrawerSectionedFormSidebar } from '../../../../components/drawer/DrawerSectionedFormSidebar'
 import { LoadingSpinner } from '../../../../components/loading/LoadingSpinner'
 import {
+    createFormError,
+    createJsonPatchOperations,
     DEFAULT_FIELD_FILTERS,
     SchemaName,
     SchemaSection,
+    SectionedFormProvider,
     useBoundResourceQueryFn,
-    usePatchModel,
-    createFormError,
-    createJsonPatchOperations,
     useCreateModel,
+    usePatchModel,
 } from '../../../../lib'
 import {
     DisplayableModel,
     PickWithFieldFilters,
     ProgramStage,
 } from '../../../../types/models'
+import styles from './StageForm.module.css'
 import { StageFormContents } from './StageFormContents'
+import { StageFormDescriptor } from './stageFormDescriptor'
 import { initialStageValue } from './stageSchema'
 
 export const fieldFilters = [
@@ -100,11 +108,67 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
             includeAttributes={false}
             mutators={{ ...arrayMutators }}
         >
-            <h1>STAGE: {stage?.displayName ?? 'NEW'}</h1>
-            <StageFormContents
-                onCancel={onCancel}
-                setCloseOnSubmit={setCloseOnSubmit}
-            />
+            {({ handleSubmit, form }) => {
+                return (
+                    <SectionedFormProvider formDescriptor={StageFormDescriptor}>
+                        <SectionedFormLayout
+                            sidebar={
+                                <DrawerSectionedFormSidebar
+                                    onCancel={onCancel}
+                                />
+                            }
+                        >
+                            <form onSubmit={handleSubmit}>
+                                <div className={styles.sectionsWrapper}>
+                                    <StageFormContents isSubsection />
+                                    <FormFooterWrapper>
+                                        <ButtonStrip>
+                                            <Button
+                                                primary
+                                                small
+                                                type="button"
+                                                onClick={() => {
+                                                    setCloseOnSubmit(true)
+                                                    form.submit()
+                                                }}
+                                            >
+                                                {i18n.t('Save and close')}
+                                            </Button>
+                                            <Button
+                                                primary
+                                                small
+                                                type="button"
+                                                onClick={() => {
+                                                    setCloseOnSubmit(false)
+                                                    form.submit()
+                                                }}
+                                            >
+                                                {i18n.t('Save ')}
+                                            </Button>
+                                            <Button
+                                                secondary
+                                                small
+                                                onClick={onCancel}
+                                            >
+                                                {i18n.t('Cancel')}
+                                            </Button>
+                                        </ButtonStrip>
+                                        <div className={styles.actionsInfo}>
+                                            <IconInfo16 />
+                                            <p>
+                                                {i18n.t(
+                                                    'Saving a stage does not save other changes to the program'
+                                                )}
+                                            </p>
+                                        </div>
+                                    </FormFooterWrapper>
+                                </div>
+                            </form>
+                            <SectionedFormErrorNotice />
+                        </SectionedFormLayout>
+                    </SectionedFormProvider>
+                )
+            }}
         </FormBase>
     )
 }
