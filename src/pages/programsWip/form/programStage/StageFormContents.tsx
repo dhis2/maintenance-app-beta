@@ -16,7 +16,7 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../../lib'
-import { ProgramStageSectionForm } from './programStageSection/ProgramStageSectionForm'
+import { EditOrNowStageSectionForm } from './programStageSection/ProgramStageSectionForm'
 import { stageSchemaSection } from './StageForm'
 import { StageFormDescriptor } from './stageFormDescriptor'
 
@@ -88,10 +88,17 @@ export const StageFormContents = ({
                 </StandardFormSectionDescription>
                 <DrawerPortal
                     isOpen={sectionsFormOpen}
+                    level={isSubsection ? 'secondary' : 'primary'}
                     onClose={() => setSectionsFormOpen(false)}
                 >
-                    <ProgramStageSectionForm
+                    <EditOrNowStageSectionForm
+                        stageId={values.id}
                         onCancel={() => setSectionsFormOpen(false)}
+                        onSubmitted={() => {}}
+                        section={null}
+                        sectionsLength={
+                            values.programStageSections?.length || 0
+                        }
                     />
                 </DrawerPortal>
                 <Button

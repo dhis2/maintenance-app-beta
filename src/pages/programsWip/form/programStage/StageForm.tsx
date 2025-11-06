@@ -39,6 +39,7 @@ export const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     'name',
     'description',
+    'programStageSections[id,displayName]',
 ] as const
 
 export const stageSchemaSection = {
