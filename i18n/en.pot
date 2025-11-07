@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-10-27T07:25:14.089Z\n"
-"PO-Revision-Date: 2025-10-27T07:25:14.089Z\n"
+"POT-Creation-Date: 2025-11-04T10:03:06.141Z\n"
+"PO-Revision-Date: 2025-11-04T10:03:06.141Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -123,6 +123,102 @@ msgstr "Are you sure you want to change this?"
 msgid "Yes, change"
 msgstr "Yes, change"
 
+msgid "data set"
+msgstr "data set"
+
+msgid "program enrollment"
+msgstr "program enrollment"
+
+msgid "Custom form saved"
+msgstr "Custom form saved"
+
+msgid "Custom form (preview)"
+msgstr "Custom form (preview)"
+
+msgid "Custom form"
+msgstr "Custom form"
+
+msgid "Define a custom form for this {{customFormTarget}} by editing HTML below."
+msgstr "Define a custom form for this {{customFormTarget}} by editing HTML below."
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Preview"
+msgstr "Preview"
+
+msgid "Nothing to preview"
+msgstr "Nothing to preview"
+
+msgid "Preview of custom form"
+msgstr "Preview of custom form"
+
+msgid "Something went wrong when submitting the form"
+msgstr "Something went wrong when submitting the form"
+
+msgid "Save custom form"
+msgstr "Save custom form"
+
+msgid "Saving a custom form does not save other changes to the {{customFormTarget}}"
+msgstr "Saving a custom form does not save other changes to the {{customFormTarget}}"
+
+msgid "A custom form must be added for it to be used for data entry (web)."
+msgstr "A custom form must be added for it to be used for data entry (web)."
+
+msgid "This data set uses a custom form for data entry (web)."
+msgstr "This data set uses a custom form for data entry (web)."
+
+msgid "Custom form will be removed on save"
+msgstr "Custom form will be removed on save"
+
+msgid "Restore custom form"
+msgstr "Restore custom form"
+
+msgid "Delete custom form"
+msgstr "Delete custom form"
+
+msgid "Create custom form"
+msgstr "Create custom form"
+
+msgid "Edit custom form"
+msgstr "Edit custom form"
+
+msgid "Select elements"
+msgstr "Select elements"
+
+msgid "Elements cannot be added while previewing the form"
+msgstr "Elements cannot be added while previewing the form"
+
+msgid "Filter elements"
+msgstr "Filter elements"
+
+msgid "Insert grey (disabled) fields"
+msgstr "Insert grey (disabled) fields"
+
+msgid "Date of enrollment"
+msgstr "Date of enrollment"
+
+msgid "Date of incident"
+msgstr "Date of incident"
+
+msgid "Attributes"
+msgstr "Attributes"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "Data elements"
+msgstr "Data elements"
+
+msgid "Totals"
+msgstr "Totals"
+
+msgid "Indicators"
+msgstr "Indicators"
+
+msgid "Flags"
+msgstr "Flags"
+
 msgid "Required"
 msgstr "Required"
 
@@ -141,9 +237,6 @@ msgstr "Validation errors"
 msgid "Some fields have validation errors. Please fix them before saving."
 msgstr "Some fields have validation errors. Please fix them before saving."
 
-msgid "Something went wrong when submitting the form"
-msgstr "Something went wrong when submitting the form"
-
 msgid "Hide error details"
 msgstr "Hide error details"
 
@@ -156,11 +249,20 @@ msgstr "Save and close"
 msgid "<No value>"
 msgstr "<No value>"
 
-msgid "Attributes"
-msgstr "Attributes"
-
 msgid "Set up information for the attributes assigned to {{modelName}}."
 msgstr "Set up information for the attributes assigned to {{modelName}}."
+
+msgid "The default way to aggregate in analytics."
+msgstr "The default way to aggregate in analytics."
+
+msgid "Disabled for the selected value type."
+msgstr "Disabled for the selected value type."
+
+msgid "Aggregation type"
+msgstr "Aggregation type"
+
+msgid "{{fieldLabel}} (required)"
+msgstr "{{fieldLabel}} (required)"
 
 msgid "Code"
 msgstr "Code"
@@ -168,11 +270,15 @@ msgstr "Code"
 msgid "Description"
 msgstr "Description"
 
+msgid ""
+"This name is already in use. Consider updating the name to avoid a "
+"duplication."
+msgstr ""
+"This name is already in use. Consider updating the name to avoid a "
+"duplication."
+
 msgid "A name should be concise and easy to recognize."
 msgstr "A name should be concise and easy to recognize."
-
-msgid "{{fieldLabel}} (required)"
-msgstr "{{fieldLabel}} (required)"
 
 msgid "Name"
 msgstr "Name"
@@ -215,6 +321,13 @@ msgid "Select organisation units"
 msgstr "Select organisation units"
 
 msgid ""
+"This short name is already in use. Consider updating the name to avoid a "
+"duplication."
+msgstr ""
+"This short name is already in use. Consider updating the name to avoid a "
+"duplication."
+
+msgid ""
 "A short, unique name. Displayed in analysis apps where space is limited, "
 "depending on user or system settings."
 msgstr ""
@@ -223,6 +336,46 @@ msgstr ""
 
 msgid "Short name"
 msgstr "Short name"
+
+msgid ""
+"Select the kind of data this attribute collects. If you have chosen an "
+"Option set, this will be set automatically."
+msgstr ""
+"Select the kind of data this attribute collects. If you have chosen an "
+"Option set, this will be set automatically."
+
+msgid ""
+"Disabled as the value type must match the value type of the selected option "
+"set."
+msgstr ""
+"Disabled as the value type must match the value type of the selected option "
+"set."
+
+msgid "Value type"
+msgstr "Value type"
+
+msgid "Change value type"
+msgstr "Change value type"
+
+msgid ""
+"Changing the value type may cause issues when generating analytics tables "
+"if data already exists."
+msgstr ""
+"Changing the value type may cause issues when generating analytics tables "
+"if data already exists."
+
+msgid ""
+"Are you sure you want to change the {{objectType}} to "
+"{{newObjectTypeValue}}?"
+msgstr ""
+"Are you sure you want to change the {{objectType}} to "
+"{{newObjectTypeValue}}?"
+
+msgid "value type"
+msgstr "value type"
+
+msgid "undefined"
+msgstr "undefined"
 
 msgid "Sections"
 msgstr "Sections"
@@ -241,9 +394,6 @@ msgstr "Add section"
 
 msgid "Reorder sections"
 msgstr "Reorder sections"
-
-msgid "Edit"
-msgstr "Edit"
 
 msgid "Translate"
 msgstr "Translate"
@@ -280,9 +430,6 @@ msgstr "Basic form"
 
 msgid "Basic forms display an auto-generated list."
 msgstr "Basic forms display an auto-generated list."
-
-msgid "Custom form"
-msgstr "Custom form"
 
 msgid "Form type based on your current setup"
 msgstr "Form type based on your current setup"
@@ -576,9 +723,6 @@ msgstr "Organisation unit group"
 msgid "Organisation unit group set"
 msgstr "Organisation unit group set"
 
-msgid "Program"
-msgstr "Program"
-
 msgid "Program indicator"
 msgstr "Program indicator"
 
@@ -744,9 +888,6 @@ msgstr "Category option groups"
 msgid "Category option group sets"
 msgstr "Category option group sets"
 
-msgid "Data elements"
-msgstr "Data elements"
-
 msgid "Data element groups"
 msgstr "Data element groups"
 
@@ -761,9 +902,6 @@ msgstr "Data set notification"
 
 msgid "Data set notifications"
 msgstr "Data set notifications"
-
-msgid "Indicators"
-msgstr "Indicators"
 
 msgid "Indicator type"
 msgstr "Indicator type"
@@ -1230,8 +1368,56 @@ msgstr "Organisation unit contact"
 msgid "User group"
 msgstr "User group"
 
-msgid "Aggregation type"
-msgstr "Aggregation type"
+msgid "Dropdown"
+msgstr "Dropdown"
+
+msgid "Vertical radiobuttons"
+msgstr "Vertical radiobuttons"
+
+msgid "Horizontal radiobuttons"
+msgstr "Horizontal radiobuttons"
+
+msgid "Vertical checkboxes"
+msgstr "Vertical checkboxes"
+
+msgid "Horizontal checkboxes"
+msgstr "Horizontal checkboxes"
+
+msgid "Shared header radiobuttons"
+msgstr "Shared header radiobuttons"
+
+msgid "Icons as buttons"
+msgstr "Icons as buttons"
+
+msgid "Spinner"
+msgstr "Spinner"
+
+msgid "Toggle"
+msgstr "Toggle"
+
+msgid "Value"
+msgstr "Value"
+
+msgid "Slider"
+msgstr "Slider"
+
+msgid "Linear scale"
+msgstr "Linear scale"
+
+msgid "Autocomplete"
+msgstr "Autocomplete"
+
+msgid "Qr code"
+msgstr "Qr code"
+
+msgid "Bar code"
+msgstr "Bar code"
+
+msgid "Gs1 datamatrix"
+msgstr "Gs1 datamatrix"
+
+msgid "Canvas"
+msgstr "Canvas"
 
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
@@ -1284,9 +1470,6 @@ msgstr "Sharing"
 msgid "Owner"
 msgstr "Owner"
 
-msgid "Value type"
-msgstr "Value type"
-
 msgid "Zero is significant"
 msgstr "Zero is significant"
 
@@ -1295,6 +1478,9 @@ msgstr "Enable tracked entity instance audit log"
 
 msgid "Feature type"
 msgstr "Feature type"
+
+msgid "Program type"
+msgstr "Program type"
 
 msgid "Maximum number of tracked entity instances to return in search"
 msgstr "Maximum number of tracked entity instances to return in search"
@@ -1392,8 +1578,14 @@ msgstr "Program name"
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
 
-msgid "Value"
-msgstr "Value"
+msgid "Unique"
+msgstr "Unique"
+
+msgid "Display in list"
+msgstr "Display in list"
+
+msgid "Trigram indexable"
+msgstr "Trigram indexable"
 
 msgid "Version"
 msgstr "Version"
@@ -1401,110 +1593,17 @@ msgstr "Version"
 msgid "Program Type"
 msgstr "Program Type"
 
-msgid "Display enrollment label"
-msgstr "Display enrollment label"
-
-msgid "Display event label"
-msgstr "Display event label"
-
-msgid "Display follow-up label"
-msgstr "Display follow-up label"
-
-msgid "Display note label"
-msgstr "Display note label"
-
-msgid "Display org unit label"
-msgstr "Display org unit label"
-
-msgid "Display program stage label"
-msgstr "Display program stage label"
-
-msgid "Display relationship label"
-msgstr "Display relationship label"
-
-msgid "Display tracked entity attribute label"
-msgstr "Display tracked entity attribute label"
-
 msgid "Access level"
 msgstr "Access level"
-
-msgid "Allow future enrollment dates"
-msgstr "Allow future enrollment dates"
-
-msgid "Allow future incident dates"
-msgstr "Allow future incident dates"
 
 msgid "Completed events expiry days"
 msgstr "Completed events expiry days"
 
-msgid "Custom label for enrollment"
-msgstr "Custom label for enrollment"
-
-msgid "Custom label for enrollment date"
-msgstr "Custom label for enrollment date"
-
-msgid "Custom label for event"
-msgstr "Custom label for event"
-
-msgid "Custom label for follow-up"
-msgstr "Custom label for follow-up"
-
-msgid "Custom label for incident date"
-msgstr "Custom label for incident date"
-
-msgid "Custom label for note"
-msgstr "Custom label for note"
-
-msgid "Custom label for program stage"
-msgstr "Custom label for program stage"
-
-msgid "Custom label for registering unit"
-msgstr "Custom label for registering unit"
-
-msgid "Custom label for relationship"
-msgstr "Custom label for relationship"
-
-msgid "Custom label for tracked entity attribute"
-msgstr "Custom label for tracked entity attribute"
-
-msgid "Display enrollment date label"
-msgstr "Display enrollment date label"
-
 msgid "Display front page list"
 msgstr "Display front page list"
 
-msgid "Display incident date label"
-msgstr "Display incident date label"
-
-msgid "Expiry days"
-msgstr "Expiry days"
-
-msgid "First stage appears on registration page"
-msgstr "First stage appears on registration page"
-
-msgid "Ignore overdue events"
-msgstr "Ignore overdue events"
-
-msgid "Only enroll once (per tracked entity instance lifetime)"
-msgstr "Only enroll once (per tracked entity instance lifetime)"
-
-msgid "Open days after category option end date"
-msgstr "Open days after category option end date"
-
-msgid "Show incident date"
-msgstr "Show incident date"
-
-msgid "Skip offline"
-msgstr "Skip offline"
-
-msgid "Without registration"
-msgstr "Without registration"
-
 msgid "Mandatory"
 msgstr "Mandatory"
-
-msgid "Unique"
-msgstr "Unique"
 
 msgid "Category attribute"
 msgstr "Category attribute"
@@ -1662,20 +1761,6 @@ msgstr "Remove option set"
 
 msgid "Enter a number to decide where this attribute appears in list and forms"
 msgstr "Enter a number to decide where this attribute appears in list and forms"
-
-msgid ""
-"Select the kind of data this attribute collects. If you have chosen an "
-"option set, this will be set automatically."
-msgstr ""
-"Select the kind of data this attribute collects. If you have chosen an "
-"option set, this will be set automatically."
-
-msgid ""
-"Disabled as the value type must match the value type of the selected option "
-"set"
-msgstr ""
-"Disabled as the value type must match the value type of the selected option "
-"set"
 
 msgid "Set up the basic information for this attribute."
 msgstr "Set up the basic information for this attribute."
@@ -1962,12 +2047,6 @@ msgstr "Explain the purpose of this data element group."
 msgid "Aggregation level(s)"
 msgstr "Aggregation level(s)"
 
-msgid "The default way to aggregate this data element in analytics."
-msgstr "The default way to aggregate this data element in analytics."
-
-msgid "Disabled for the selected value type."
-msgstr "Disabled for the selected value type."
-
 msgid "Choose how this data element is disaggregated."
 msgstr "Choose how this data element is disaggregated."
 
@@ -2044,32 +2123,6 @@ msgstr "Url"
 
 msgid "A web link that provides extra information."
 msgstr "A web link that provides extra information."
-
-msgid "The type of data that will be recorded."
-msgstr "The type of data that will be recorded."
-
-msgid "Change value type"
-msgstr "Change value type"
-
-msgid ""
-"Changing the value type may cause problems when generating analytics tables "
-"if there is existing data for this data element."
-msgstr ""
-"Changing the value type may cause problems when generating analytics tables "
-"if there is existing data for this data element."
-
-msgid ""
-"Are you sure you want to change the {{objectType}} to "
-"{{newObjectTypeValue}}?"
-msgstr ""
-"Are you sure you want to change the {{objectType}} to "
-"{{newObjectTypeValue}}?"
-
-msgid "value type"
-msgstr "value type"
-
-msgid "undefined"
-msgstr "undefined"
 
 msgid "Store zero data values"
 msgstr "Store zero data values"
@@ -2296,11 +2349,15 @@ msgstr "Configure data elements"
 msgid "Choose what data is collected for this data set."
 msgstr "Choose what data is collected for this data set."
 
-msgid "Data set disaggregation"
-msgstr "Data set disaggregation"
+msgid "Data set attribution"
+msgstr "Data set attribution"
 
-msgid "Choose an optional category combination to disaggregate the entire data set."
-msgstr "Choose an optional category combination to disaggregate the entire data set."
+msgid ""
+"Choose an optional attribute category combination to assign a data "
+"dimension for the entire data set."
+msgstr ""
+"Choose an optional attribute category combination to assign a data "
+"dimension for the entire data set."
 
 msgid "Choose indicators to calculate and show in the data entry form."
 msgstr "Choose indicators to calculate and show in the data entry form."
@@ -2405,14 +2462,18 @@ msgstr "Allow data entry for future periods"
 msgid "Close data entry a certain number of days after period end (expiry days)"
 msgstr "Close data entry a certain number of days after period end (expiry days)"
 
+msgid ""
+"Close data entry after \"{{categoryComboName}}\" category option end date "
+"(if category option exist and has end date)"
+msgstr ""
+"Close data entry after \"{{categoryComboName}}\" category option end date "
+"(if category option exist and has end date)"
+
 msgid "Limit data entry by period"
 msgstr "Limit data entry by period"
 
 msgid "Optionally configure when data can be entered for certain periods"
 msgstr "Optionally configure when data can be entered for certain periods"
-
-msgid "A data set with this name already exists"
-msgstr "A data set with this name already exists"
 
 msgid "Set up the basic information for this data set."
 msgstr "Set up the basic information for this data set."
@@ -2472,71 +2533,18 @@ msgstr ""
 "Choose and configure how the data entry form looks and works for this data "
 "set."
 
+msgid ""
+"This form displays an auto-generated list of the data elements defined for "
+"this data set."
+msgstr ""
+"This form displays an auto-generated list of the data elements defined for "
+"this data set."
+
+msgid "Edit the data elements"
+msgstr "Edit the data elements"
+
 msgid "Display options"
 msgstr "Display options"
-
-msgid "Custom form saved"
-msgstr "Custom form saved"
-
-msgid "Custom form (preview)"
-msgstr "Custom form (preview)"
-
-msgid "Define a custom form for this data set by editing HTML below."
-msgstr "Define a custom form for this data set by editing HTML below."
-
-msgid "Preview"
-msgstr "Preview"
-
-msgid "Nothing to preview"
-msgstr "Nothing to preview"
-
-msgid "Preview of custom form"
-msgstr "Preview of custom form"
-
-msgid "Save custom form"
-msgstr "Save custom form"
-
-msgid "Saving a custom form does not save other changes to the data set"
-msgstr "Saving a custom form does not save other changes to the data set"
-
-msgid "A custom form must be added for it to be used for data entry (web)."
-msgstr "A custom form must be added for it to be used for data entry (web)."
-
-msgid "This data set uses a custom form for data entry (web)."
-msgstr "This data set uses a custom form for data entry (web)."
-
-msgid "Custom form will be removed on save"
-msgstr "Custom form will be removed on save"
-
-msgid "Restore custom form"
-msgstr "Restore custom form"
-
-msgid "Delete custom form"
-msgstr "Delete custom form"
-
-msgid "Create custom form"
-msgstr "Create custom form"
-
-msgid "Edit custom form"
-msgstr "Edit custom form"
-
-msgid "Select elements"
-msgstr "Select elements"
-
-msgid "Elements cannot be added while previewing the form"
-msgstr "Elements cannot be added while previewing the form"
-
-msgid "Filter elements"
-msgstr "Filter elements"
-
-msgid "Insert grey (disabled) fields"
-msgstr "Insert grey (disabled) fields"
-
-msgid "Totals"
-msgstr "Totals"
-
-msgid "Flags"
-msgstr "Flags"
 
 msgid "Filter by category combination"
 msgstr "Filter by category combination"
@@ -3788,6 +3796,42 @@ msgstr "Set up the program indicator legends."
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
 
+msgid "Enrollment: Data"
+msgstr "Enrollment: Data"
+
+msgid "Choose the information to collect during enrollment."
+msgstr "Choose the information to collect during enrollment."
+
+msgid "Available attributes"
+msgstr "Available attributes"
+
+msgid "Selected attributes"
+msgstr "Selected attributes"
+
+msgid "Filter available attributes"
+msgstr "Filter available attributes"
+
+msgid "Filter attributes"
+msgstr "Filter attributes"
+
+msgid "Configure data items"
+msgstr "Configure data items"
+
+msgid "Attributes can be collected in different ways with different options."
+msgstr "Attributes can be collected in different ways with different options."
+
+msgid "Allow future dates"
+msgstr "Allow future dates"
+
+msgid "Searchable"
+msgstr "Searchable"
+
+msgid "Desktop Display"
+msgstr "Desktop Display"
+
+msgid "Mobile Display"
+msgstr "Mobile Display"
+
 msgid "Enrollment: Form"
 msgstr "Enrollment: Form"
 
@@ -3797,6 +3841,46 @@ msgid ""
 msgstr ""
 "Choose and configure the type of form that will be used to collect "
 "information during enrollment."
+
+msgid ""
+"This form displays an auto-generated list of the tracked entity attributes "
+"defined for this program."
+msgstr ""
+"This form displays an auto-generated list of the tracked entity attributes "
+"defined for this program."
+
+msgid "Edit or rearrange the tracked entity attributes"
+msgstr "Edit or rearrange the tracked entity attributes"
+
+msgid "Configure settings related to enrollment in this program."
+msgstr "Configure settings related to enrollment in this program."
+
+msgid "Choose what this program will be tracking"
+msgstr "Choose what this program will be tracking"
+
+msgid "Multiple enrollments"
+msgstr "Multiple enrollments"
+
+msgid "Only allow one enrollment"
+msgstr "Only allow one enrollment"
+
+msgid "Allow multiple enrollments"
+msgstr "Allow multiple enrollments"
+
+msgid "Applies to the entire lifetime of a tracked entity."
+msgstr "Applies to the entire lifetime of a tracked entity."
+
+msgid "Allow enrollment dates in the future"
+msgstr "Allow enrollment dates in the future"
+
+msgid "Collect an incident date"
+msgstr "Collect an incident date"
+
+msgid "Allow incident dates in the future"
+msgstr "Allow incident dates in the future"
+
+msgid "Collect data for the first stage during enrollment"
+msgstr "Collect data for the first stage during enrollment"
 
 msgid "Only integers are allowed"
 msgstr "Only integers are allowed"
@@ -3822,9 +3906,6 @@ msgstr "Choose how this program is disaggregated."
 msgid "Enrollment: Settings"
 msgstr "Enrollment: Settings"
 
-msgid "Enrollment: Data"
-msgstr "Enrollment: Data"
-
 msgid "Listing"
 msgstr "Listing"
 
@@ -3846,12 +3927,6 @@ msgstr "Mobile display"
 msgid "Section attributes"
 msgstr "Section attributes"
 
-msgid "Available attributes"
-msgstr "Available attributes"
-
-msgid "Selected attributes"
-msgstr "Selected attributes"
-
 msgid "Search available attributes"
 msgstr "Search available attributes"
 
@@ -3860,6 +3935,40 @@ msgstr "Search selected attributes"
 
 msgid "Saving a section does not save other changes to the program"
 msgstr "Saving a section does not save other changes to the program"
+
+msgid "No attributes selected. Please select attributes in the transfer above."
+msgstr "No attributes selected. Please select attributes in the transfer above."
+
+msgid "Configure attributes"
+msgstr "Configure attributes"
+
+msgid ""
+"Choose which attributes to display, which are required, and which are "
+"searchable"
+msgstr ""
+"Choose which attributes to display, which are required, and which are "
+"searchable"
+
+msgid "Attribute name"
+msgstr "Attribute name"
+
+msgid "Available tracked entity attributes"
+msgstr "Available tracked entity attributes"
+
+msgid "Selected tracked entity attributes"
+msgstr "Selected tracked entity attributes"
+
+msgid "Maximum number of tracked entity instances to return when searching"
+msgstr "Maximum number of tracked entity instances to return when searching"
+
+msgid "Set up the basic information for this tracked entity type."
+msgstr "Set up the basic information for this tracked entity type."
+
+msgid "Explain the purpose of this tracked entity type."
+msgstr "Explain the purpose of this tracked entity type."
+
+msgid "Choose and configure what data can be collected for this tracked entity type"
+msgstr "Choose and configure what data can be collected for this tracked entity type"
 
 msgid "Notification details"
 msgstr "Notification details"

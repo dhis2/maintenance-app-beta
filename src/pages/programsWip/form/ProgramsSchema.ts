@@ -1,6 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
-import { z } from 'zod'
-import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
+import { object, z } from 'zod'
+import {
+    getDefaults,
+    createFormValidate,
+    modelFormSchemas,
+    DEFAULT_CATEGORY_COMBO,
+} from '../../../lib'
 
 const { identifiable, withDefaultListColumns, modelReference } =
     modelFormSchemas
@@ -14,7 +19,16 @@ const programBaseSchema = z.object({
         .optional(),
     featureType: z.enum(['NONE', 'POINT', 'POLYGON']).optional(),
     relatedProgram: modelReference.optional(),
-    categoryCombo: modelReference,
+    categoryCombo: modelReference.default({ ...DEFAULT_CATEGORY_COMBO }),
+    trackedEntityType: object({
+        id: z.string(),
+        displayName: z.string().optional(),
+    }),
+    onlyEnrollOnce: z.boolean().default(true),
+    selectEnrollmentDatesInFuture: z.boolean().optional(),
+    displayIncidentDate: z.boolean().optional(),
+    selectIncidentDatesInFuture: z.boolean().optional(),
+    useFirstStageDuringRegistration: z.boolean().optional(),
     programTrackedEntityAttributes: z
         .array(
             z.object({
@@ -32,6 +46,13 @@ const programBaseSchema = z.object({
             })
         )
         .default([]),
+    dataEntryForm: z
+        .object({
+            name: z.string().optional(),
+            displayName: z.string().optional(),
+            htmlCode: z.string().optional(),
+        })
+        .optional(),
 })
 
 export const programFormSchema = identifiable.merge(programBaseSchema).extend({

@@ -1,3 +1,84 @@
+# [0.89.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.88.0...v0.89.0) (2025-11-05)
+
+
+### Bug Fixes
+
+* delete dublicate ([3dd15bf](https://github.com/dhis2/maintenance-app-beta/commit/3dd15bf7e94d8d55a560afd2967b0e83d6379dc9))
+* failing test ([adc69b2](https://github.com/dhis2/maintenance-app-beta/commit/adc69b2096ac8f07d8271394279b2e010ca09572))
+* failing tests ([b7be315](https://github.com/dhis2/maintenance-app-beta/commit/b7be31502d160eafea11be233b0c6b6f12d834e4))
+* review ([494b9df](https://github.com/dhis2/maintenance-app-beta/commit/494b9df9ffb9b542190b8dc415b2260b1c57103b))
+* set type to any ([ddeec23](https://github.com/dhis2/maintenance-app-beta/commit/ddeec2383cb04b3560073007e3fdd35fd2851305))
+* temp ([721dc95](https://github.com/dhis2/maintenance-app-beta/commit/721dc95d480da46278001ee3f1bf5f9722738f6e))
+* test ([db0c51e](https://github.com/dhis2/maintenance-app-beta/commit/db0c51e0d73e3aab795fadd5fdb75e0f3e16b3d6))
+* update attribute schema and improve test setup ([b6cab8f](https://github.com/dhis2/maintenance-app-beta/commit/b6cab8f142396b6f392e1959c835d61fa5f4c212))
+* use modal reference ([aae9fe8](https://github.com/dhis2/maintenance-app-beta/commit/aae9fe81820a39ada6e6776c65ab26bd37cad1a9))
+
+
+### Features
+
+* add common aggregation type field ([2dc1d4c](https://github.com/dhis2/maintenance-app-beta/commit/2dc1d4cd00be1abbc3b18c2a1d3e64d972b1b013))
+* broken test ([696b0a6](https://github.com/dhis2/maintenance-app-beta/commit/696b0a68465c58f7ff6017920741abdd9d82c4d3))
+* clean up ([43e0e67](https://github.com/dhis2/maintenance-app-beta/commit/43e0e6792583e472255989017988dca6ee4823fc))
+* create generic aggregation field ([42b8cd0](https://github.com/dhis2/maintenance-app-beta/commit/42b8cd05190cf06c45d306f928a3cc8cf1e5d6cc))
+* create generic aggregation field ([850a8fc](https://github.com/dhis2/maintenance-app-beta/commit/850a8fcc8180d559a0568bbaa5dedb67a7e809a1))
+* implement tracked entity attribute form with validation and field management ([09c464d](https://github.com/dhis2/maintenance-app-beta/commit/09c464d0c06f7c002bde426e57d2963aa0178a5e))
+* temp ([e32aaac](https://github.com/dhis2/maintenance-app-beta/commit/e32aaac69b670a6a941381367cd6baf45e890e81))
+* temp ([a981654](https://github.com/dhis2/maintenance-app-beta/commit/a98165478951f0c7dd255643cbb498b1949dd673))
+
+# [0.88.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.87.2...v0.88.0) (2025-11-04)
+
+
+### Features
+
+* add tracked entity type forms ([#657](https://github.com/dhis2/maintenance-app-beta/issues/657)) ([999f7f7](https://github.com/dhis2/maintenance-app-beta/commit/999f7f74f107c1e9b25a8983e50ea4b8065410fc))
+
+## [0.87.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.87.1...v0.87.2) (2025-10-30)
+
+
+### Bug Fixes
+
+* warning text ([#682](https://github.com/dhis2/maintenance-app-beta/issues/682)) ([d8f6fe4](https://github.com/dhis2/maintenance-app-beta/commit/d8f6fe4c8b7b8349aafa15b84d7cb041866203ae))
+
+## [0.87.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.87.0...v0.87.1) (2025-10-30)
+
+
+### Bug Fixes
+
+* mantain search arams when saving ([#681](https://github.com/dhis2/maintenance-app-beta/issues/681)) ([2e0a610](https://github.com/dhis2/maintenance-app-beta/commit/2e0a6107d7424bdfe7c43a39e2819f4e195f99b1))
+
+# [0.87.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.86.1...v0.87.0) (2025-10-30)
+
+
+### Bug Fixes
+
+* review ([a68a4c5](https://github.com/dhis2/maintenance-app-beta/commit/a68a4c59caecae22c1494473daadc6a1b83e6767))
+
+
+### Features
+
+* add tracked entity attribute schema and list view configuration ([c75b782](https://github.com/dhis2/maintenance-app-beta/commit/c75b78222bc5eec78f131df3dbe9bbc73b4320a8))
+
+## [0.86.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.86.0...v0.86.1) (2025-10-29)
+
+
+### Bug Fixes
+
+* only enroll once to work on edits and add some text to basic form so does not look weird ([#679](https://github.com/dhis2/maintenance-app-beta/issues/679)) ([829670e](https://github.com/dhis2/maintenance-app-beta/commit/829670e83c2390649ad269610766e258638a6d75))
+
+# [0.86.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.85.0...v0.86.0) (2025-10-29)
+
+
+### Features
+
+* enhance enrollment settings with new fields and validation ([#672](https://github.com/dhis2/maintenance-app-beta/issues/672)) ([a80e16e](https://github.com/dhis2/maintenance-app-beta/commit/a80e16e3b85bbcbb19e5bc9cd352e5f00ce961ec))
+
+# [0.85.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.84.0...v0.85.0) (2025-10-28)
+
+
+### Features
+
+* program enrollment custom forms [DHIS2-20170] ([#673](https://github.com/dhis2/maintenance-app-beta/issues/673)) ([97632b8](https://github.com/dhis2/maintenance-app-beta/commit/97632b8e2f6df3e06c90e3e68914c223cbb6d13e))
+
 # [0.84.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.83.0...v0.84.0) (2025-10-28)
 
 
