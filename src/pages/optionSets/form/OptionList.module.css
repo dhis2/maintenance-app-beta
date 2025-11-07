@@ -1,0 +1,36 @@
+.deletedOption {
+    display: flex;
+    color: var(--colors-red800);
+    align-items: center;
+    gap: var(--spacers-dp8);
+}
+
+.deletedRow td {
+    color: var(--colors-red800) !important;
+    background-color: var(--colors-red050) !important;
+}
+
+.sortButtons {
+    margin-block-end: var(--spacers-dp16);
+}
+
+.actionButtons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.wideButton {
+    width: 35px;
+}
+
+.identifiableSelectionFilter {
+    width: 320px !important;
+    margin-block-end: var(--spacers-dp16);
+}
+
+.optionsLoadingDiv {
+    display: flex;
+    justify-content: center;
+    width: 100% !important;
+    padding: var(--spacers-dp16);
+}
