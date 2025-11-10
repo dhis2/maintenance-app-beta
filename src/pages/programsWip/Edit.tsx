@@ -48,18 +48,16 @@ const fieldFilters = [
     'dataEntryForm[id,displayName,htmlCode]',
     'programSections[id,displayName,description,access,sortOrder]',
     'programTrackedEntityAttributes[id,displayName,valueType,renderType,allowFutureDate,mandatory,searchable,displayInList,trackedEntityAttribute[id,displayName]]',
-    // Customization fields
-    // TODO: Verify backend field names match these assumptions
     'style[color,icon]',
-    'labelProgramStage',
-    'labelEvent',
-    'labelEnrollmentDate',
-    'labelIncidentDate',
-    'labelEnrollment',
-    'labelFollowUp',
-    'labelRegisteringUnit',
-    'labelRelationship',
-    'labelNote',
+    'programStageLabel',
+    'eventLabel',
+    'enrollmentDateLabel',
+    'incidentDateLabel',
+    'enrollmentLabel',
+    'followUpLabel',
+    'orgUnitLabel',
+    'relationshipLabel',
+    'noteLabel',
     'displayFrontPageList',
 ] as const
 

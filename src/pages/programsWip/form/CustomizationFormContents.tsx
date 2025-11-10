@@ -12,65 +12,63 @@ import { ColorAndIconField } from '../../dataElements/fields'
 
 export const CustomizationFormContents = React.memo(
     function CustomizationFormContents({ name }: { name: string }) {
-        // Custom label fields - field names are assumptions based on common patterns
-        // TODO: Verify backend field names match these assumptions
         const customLabelFields = [
             {
-                name: 'labelProgramStage',
+                name: 'programStageLabel',
                 label: i18n.t('Custom label for "Program stage"'),
                 helpText: i18n.t(
                     'Example use: See all data in this program stage'
                 ),
             },
             {
-                name: 'labelEvent',
+                name: 'eventLabel',
                 label: i18n.t('Custom label for "Event"'),
                 helpText: i18n.t('Example use: Schedule a new event'),
             },
             {
-                name: 'labelEnrollmentDate',
+                name: 'enrollmentDateLabel',
                 label: i18n.t('Custom label for "Enrollment date"'),
                 helpText: i18n.t(
                     'Used as the default registration date for enrollments'
                 ),
             },
             {
-                name: 'labelIncidentDate',
+                name: 'incidentDateLabel',
                 label: i18n.t('Custom label for "Incident date"'),
                 helpText: i18n.t(
                     'Used as an additional registration date for enrollments'
                 ),
             },
             {
-                name: 'labelEnrollment',
+                name: 'enrollmentLabel',
                 label: i18n.t('Custom label for "Enrollment"'),
                 helpText: i18n.t(
                     'Example use: See all data in this enrollment'
                 ),
             },
             {
-                name: 'labelFollowUp',
+                name: 'followUpLabel',
                 label: i18n.t('Custom label for "Follow-up"'),
                 helpText: i18n.t(
                     'Used to customize the label for follow-up events or activities'
                 ),
             },
             {
-                name: 'labelRegisteringUnit',
+                name: 'orgUnitLabel',
                 label: i18n.t('Custom label for "Registering unit"'),
                 helpText: i18n.t(
                     'Used to customize the label for the organisation unit that registers the enrollment or event'
                 ),
             },
             {
-                name: 'labelRelationship',
+                name: 'relationshipLabel',
                 label: i18n.t('Custom label for "Relationship"'),
                 helpText: i18n.t(
                     'Used to customize the label for relationships between tracked entities'
                 ),
             },
             {
-                name: 'labelNote',
+                name: 'noteLabel',
                 label: i18n.t('Custom label for "Note"'),
                 helpText: i18n.t(
                     'Used to customize the label for notes or comments added to enrollments or events'

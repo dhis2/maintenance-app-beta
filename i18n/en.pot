@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-07T13:16:57.574Z\n"
-"PO-Revision-Date: 2025-11-07T13:16:57.574Z\n"
+"POT-Creation-Date: 2025-11-10T15:04:08.073Z\n"
+"PO-Revision-Date: 2025-11-10T15:04:08.073Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2027,8 +2027,8 @@ msgstr "Disabled for the selected value type."
 msgid "Choose how this data element is disaggregated."
 msgstr "Choose how this data element is disaggregated."
 
-msgid "Color and icon"
-msgstr "Color and icon"
+msgid "Visual configuration"
+msgstr "Visual configuration"
 
 msgid ""
 "A color and icon are helpful for identifying data elements in "
@@ -3794,18 +3794,6 @@ msgstr "Custom label for \"Program stage\""
 msgid "Custom label for \"Event\""
 msgstr "Custom label for \"Event\""
 
-msgid "Custom label for \"Report date\""
-msgstr "Custom label for \"Report date\""
-
-msgid "Used as the default registration date for events"
-msgstr "Used as the default registration date for events"
-
-msgid "Custom label for \"Due date\""
-msgstr "Custom label for \"Due date\""
-
-msgid "Used as the default date for checking for overdue events"
-msgstr "Used as the default date for checking for overdue events"
-
 msgid "Custom label for \"Enrollment date\""
 msgstr "Custom label for \"Enrollment date\""
 
@@ -3824,26 +3812,34 @@ msgstr "Custom label for \"Enrollment\""
 msgid "Custom label for \"Follow-up\""
 msgstr "Custom label for \"Follow-up\""
 
-msgid "Custom label for follow-up functionality"
-msgstr "Custom label for follow-up functionality"
+msgid "Used to customize the label for follow-up events or activities"
+msgstr "Used to customize the label for follow-up events or activities"
 
 msgid "Custom label for \"Registering unit\""
 msgstr "Custom label for \"Registering unit\""
 
-msgid "Custom label for registering unit"
-msgstr "Custom label for registering unit"
+msgid ""
+"Used to customize the label for the organisation unit that registers the "
+"enrollment or event"
+msgstr ""
+"Used to customize the label for the organisation unit that registers the "
+"enrollment or event"
 
 msgid "Custom label for \"Relationship\""
 msgstr "Custom label for \"Relationship\""
 
-msgid "Custom label for relationship"
-msgstr "Custom label for relationship"
+msgid "Used to customize the label for relationships between tracked entities"
+msgstr "Used to customize the label for relationships between tracked entities"
 
 msgid "Custom label for \"Note\""
 msgstr "Custom label for \"Note\""
 
-msgid "Custom label for note"
-msgstr "Custom label for note"
+msgid ""
+"Used to customize the label for notes or comments added to enrollments or "
+"events"
+msgstr ""
+"Used to customize the label for notes or comments added to enrollments or "
+"events"
 
 msgid "Customization"
 msgstr "Customization"
