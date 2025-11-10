@@ -103,7 +103,7 @@ export const Component = () => {
 
     return (
         <FormBase
-            initialValues={initialValues}
+            initialValues={initialValues as typeof initialValues & { id?: string }}
             onSubmit={onSubmit}
             validate={validate}
             includeAttributes={false}
