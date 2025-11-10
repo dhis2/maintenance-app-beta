@@ -136,7 +136,7 @@ export const CustomizationFormContents = React.memo(
                         inputWidth="400px"
                         label={i18n.t('Custom label for "Note"')}
                         helpText={i18n.t(
-                            'Used to customize the label for notes or comments added to enrollments or events'
+                            'Used to customize the label for notes added to enrollments or events'
                         )}
                         dataTest="formfields-noteLabel"
                     />
