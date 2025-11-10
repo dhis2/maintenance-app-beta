@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-10-29T11:35:55.025Z\n"
-"PO-Revision-Date: 2025-10-29T11:35:55.025Z\n"
+"POT-Creation-Date: 2025-11-07T13:16:57.574Z\n"
+"PO-Revision-Date: 2025-11-07T13:16:57.574Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -258,6 +258,13 @@ msgstr "Code"
 msgid "Description"
 msgstr "Description"
 
+msgid ""
+"This name is already in use. Consider updating the name to avoid a "
+"duplication."
+msgstr ""
+"This name is already in use. Consider updating the name to avoid a "
+"duplication."
+
 msgid "A name should be concise and easy to recognize."
 msgstr "A name should be concise and easy to recognize."
 
@@ -303,6 +310,13 @@ msgstr "Search for organisation units"
 
 msgid "Select organisation units"
 msgstr "Select organisation units"
+
+msgid ""
+"This short name is already in use. Consider updating the name to avoid a "
+"duplication."
+msgstr ""
+"This short name is already in use. Consider updating the name to avoid a "
+"duplication."
 
 msgid ""
 "A short, unique name. Displayed in analysis apps where space is limited, "
@@ -2453,9 +2467,6 @@ msgstr "Limit data entry by period"
 msgid "Optionally configure when data can be entered for certain periods"
 msgstr "Optionally configure when data can be entered for certain periods"
 
-msgid "A data set with this name already exists"
-msgstr "A data set with this name already exists"
-
 msgid "Set up the basic information for this data set."
 msgstr "Set up the basic information for this data set."
 
@@ -2513,6 +2524,16 @@ msgid ""
 msgstr ""
 "Choose and configure how the data entry form looks and works for this data "
 "set."
+
+msgid ""
+"This form displays an auto-generated list of the data elements defined for "
+"this data set."
+msgstr ""
+"This form displays an auto-generated list of the data elements defined for "
+"this data set."
+
+msgid "Edit the data elements"
+msgstr "Edit the data elements"
 
 msgid "Display options"
 msgstr "Display options"
@@ -3767,6 +3788,72 @@ msgstr "Set up the program indicator legends."
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
 
+msgid "Custom label for \"Program stage\""
+msgstr "Custom label for \"Program stage\""
+
+msgid "Custom label for \"Event\""
+msgstr "Custom label for \"Event\""
+
+msgid "Custom label for \"Report date\""
+msgstr "Custom label for \"Report date\""
+
+msgid "Used as the default registration date for events"
+msgstr "Used as the default registration date for events"
+
+msgid "Custom label for \"Due date\""
+msgstr "Custom label for \"Due date\""
+
+msgid "Used as the default date for checking for overdue events"
+msgstr "Used as the default date for checking for overdue events"
+
+msgid "Custom label for \"Enrollment date\""
+msgstr "Custom label for \"Enrollment date\""
+
+msgid "Used as the default registration date for enrollments"
+msgstr "Used as the default registration date for enrollments"
+
+msgid "Custom label for \"Incident date\""
+msgstr "Custom label for \"Incident date\""
+
+msgid "Used as an additional registration date for enrollments"
+msgstr "Used as an additional registration date for enrollments"
+
+msgid "Custom label for \"Enrollment\""
+msgstr "Custom label for \"Enrollment\""
+
+msgid "Custom label for \"Follow-up\""
+msgstr "Custom label for \"Follow-up\""
+
+msgid "Custom label for follow-up functionality"
+msgstr "Custom label for follow-up functionality"
+
+msgid "Custom label for \"Registering unit\""
+msgstr "Custom label for \"Registering unit\""
+
+msgid "Custom label for registering unit"
+msgstr "Custom label for registering unit"
+
+msgid "Custom label for \"Relationship\""
+msgstr "Custom label for \"Relationship\""
+
+msgid "Custom label for relationship"
+msgstr "Custom label for relationship"
+
+msgid "Custom label for \"Note\""
+msgstr "Custom label for \"Note\""
+
+msgid "Custom label for note"
+msgstr "Custom label for note"
+
+msgid "Customization"
+msgstr "Customization"
+
+msgid "Customize the program's visuals, labels, and display settings."
+msgstr "Customize the program's visuals, labels, and display settings."
+
+msgid "Display enrolled TEs in the front page list"
+msgstr "Display enrolled TEs in the front page list"
+
 msgid "Enrollment: Data"
 msgstr "Enrollment: Data"
 
@@ -3813,6 +3900,16 @@ msgstr ""
 "Choose and configure the type of form that will be used to collect "
 "information during enrollment."
 
+msgid ""
+"This form displays an auto-generated list of the tracked entity attributes "
+"defined for this program."
+msgstr ""
+"This form displays an auto-generated list of the tracked entity attributes "
+"defined for this program."
+
+msgid "Edit or rearrange the tracked entity attributes"
+msgstr "Edit or rearrange the tracked entity attributes"
+
 msgid "Configure settings related to enrollment in this program."
 msgstr "Configure settings related to enrollment in this program."
 
@@ -3848,9 +3945,6 @@ msgstr "Only integers are allowed"
 
 msgid "Should not be lower than previous version"
 msgstr "Should not be lower than previous version"
-
-msgid "A program with this name already exists"
-msgstr "A program with this name already exists"
 
 msgid "Program Details"
 msgstr "Program Details"

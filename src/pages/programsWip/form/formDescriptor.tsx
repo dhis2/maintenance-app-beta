@@ -70,5 +70,54 @@ export const ProgramFormDescriptor = {
             label: i18n.t('Enrollment: Form', { nsSeparator: '~:~' }),
             fields: [{ name: 'dataEntryForm', label: i18n.t('Custom form') }],
         },
+        {
+            name: 'customization',
+            label: i18n.t('Customization'),
+            fields: [
+                {
+                    name: 'style',
+                    label: i18n.t('Visual configuration'),
+                },
+                {
+                    name: 'labelProgramStage',
+                    label: i18n.t('Custom label for "Program stage"'),
+                },
+                {
+                    name: 'labelEvent',
+                    label: i18n.t('Custom label for "Event"'),
+                },
+                {
+                    name: 'labelEnrollmentDate',
+                    label: i18n.t('Custom label for "Enrollment date"'),
+                },
+                {
+                    name: 'labelIncidentDate',
+                    label: i18n.t('Custom label for "Incident date"'),
+                },
+                {
+                    name: 'labelEnrollment',
+                    label: i18n.t('Custom label for "Enrollment"'),
+                },
+                {
+                    name: 'labelFollowUp',
+                    label: i18n.t('Custom label for "Follow-up"'),
+                },
+                {
+                    name: 'labelRegisteringUnit',
+                    label: i18n.t('Custom label for "Registering unit"'),
+                },
+                {
+                    name: 'labelRelationship',
+                    label: i18n.t('Custom label for "Relationship"'),
+                },
+                { name: 'labelNote', label: i18n.t('Custom label for "Note"') },
+                {
+                    name: 'displayFrontPageList',
+                    label: i18n.t(
+                        'Display enrolled TEs in the front page list'
+                    ),
+                },
+            ],
+        },
     ],
 } as const satisfies SectionedFormDescriptor<ProgramValues>

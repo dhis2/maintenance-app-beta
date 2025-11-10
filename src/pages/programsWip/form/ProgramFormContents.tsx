@@ -4,6 +4,7 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
+import { CustomizationFormContents } from './CustomizationFormContents'
 import { EnrollmentDataFormContents } from './EnrollmentDataFormContents'
 import { EnrollmentFormFormContents } from './EnrollmentFormFormContents'
 import { EnrollmentSettingsFormContents } from './EnrollmentSettingsFormContents'
@@ -26,6 +27,9 @@ export const ProgramFormContents = () => {
             />
             <EnrollmentFormFormContents
                 name={descriptor.getSection('enrollmentForm').name}
+            />
+            <CustomizationFormContents
+                name={descriptor.getSection('customization').name}
             />
         </SectionedFormSections>
     )
