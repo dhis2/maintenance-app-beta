@@ -11,7 +11,7 @@ type LanguagesResponse = Record<string, string>
 export function LanguageField() {
     const queryFn = useBoundResourceQueryFn()
     const {
-        input: { value, onChange },
+        input: { value, onChange, onBlur },
         meta: { error, touched },
     } = useField<string | undefined>('language')
 
@@ -36,6 +36,8 @@ export function LanguageField() {
 
     const handleChange = ({ selected }: { selected: string }) => {
         onChange(selected)
+        // Manually trigger blur to ensure validation runs
+        onBlur()
     }
     
 
@@ -52,6 +54,7 @@ export function LanguageField() {
                 invalid={touched && !!error}
                 error={queryError ? i18n.t('Failed to load languages') : error}
                 onChange={handleChange}
+                onBlur={onBlur}
                 options={options}
                 loading={isLoading}
                 onRetryClick={refetch}

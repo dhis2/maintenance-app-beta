@@ -98,25 +98,6 @@ const useOnSubmitLocale = (): EnhancedOnSubmit<
     )
 }
 
-// Identity formatter - returns values as-is (no transformation)
-const identityFormatter = <T,>(values: T): T => {
-    return values
-}
-
-// Custom validation that works with raw form values
-// FormBase applies valueFormatter before validation, so we need to handle that
-const localeValidate = (formattedValues: unknown) => {
-    // If values are undefined or not an object, skip validation
-    if (!formattedValues || typeof formattedValues !== 'object') {
-        console.warn('Validation received undefined or invalid values:', formattedValues)
-        return undefined
-    }
-    // Validate the formatted values (which should be the same as raw values with identity formatter)
-    return validate(formattedValues)
-}
-
-console.log('initialValues',initialValues)
-
 export const Component = () => {
     const onSubmit = useOnSubmitLocale()
 
@@ -125,7 +106,6 @@ export const Component = () => {
             initialValues={initialValues}
             onSubmit={onSubmit}
             validate={validate}
-            valueFormatter={identityFormatter}
             includeAttributes={false}
         >
             <DefaultNewFormContents section={section}>

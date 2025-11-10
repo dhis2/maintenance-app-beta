@@ -11,7 +11,7 @@ type CountriesResponse = Record<string, string>
 export function CountryField() {
     const queryFn = useBoundResourceQueryFn()
     const {
-        input: { value, onChange },
+        input: { value, onChange, onBlur },
         meta: { error, touched },
     } = useField<string | undefined>('country')
 
@@ -36,6 +36,8 @@ export function CountryField() {
 
     const handleChange = ({ selected }: { selected: string }) => {
         onChange(selected)
+        // Manually trigger blur to ensure validation runs
+        onBlur()
     }
 
     return (
@@ -51,6 +53,7 @@ export function CountryField() {
                 invalid={touched && !!error}
                 error={queryError ? i18n.t('Failed to load countries') : error}
                 onChange={handleChange}
+                onBlur={onBlur}
                 options={options}
                 loading={isLoading}
                 onRetryClick={refetch}
