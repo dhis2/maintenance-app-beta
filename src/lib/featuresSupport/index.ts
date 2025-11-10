@@ -1,3 +1,3 @@
 export { FEATURES } from './support'
-export { useFeature } from './useFeature'
+export { useFeatureAvailable } from './useFeatureAvailable'
 export { hasAPISupportForFeature } from './support'

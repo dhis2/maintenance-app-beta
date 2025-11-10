@@ -2,7 +2,7 @@ import { useConfig } from '@dhis2/app-runtime'
 import { useMemo } from 'react'
 import { hasAPISupportForFeature } from './support'
 
-export const useFeature = (featureName: string): boolean => {
+export const useFeatureAvailable = (featureName: string): boolean => {
     const { serverVersion: { minor: minorVersion } = { minor: 0 } } =
         useConfig()
     return useMemo(
