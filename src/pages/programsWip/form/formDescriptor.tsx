@@ -79,24 +79,24 @@ export const ProgramFormDescriptor = {
                     label: i18n.t('Visual configuration'),
                 },
                 {
-                    name: 'programStageLabel',
-                    label: i18n.t('Custom label for "Program stage"'),
-                },
-                {
-                    name: 'eventLabel',
-                    label: i18n.t('Custom label for "Event"'),
+                    name: 'incidentDateLabel',
+                    label: i18n.t('Custom label for "Incident date"'),
                 },
                 {
                     name: 'enrollmentDateLabel',
                     label: i18n.t('Custom label for "Enrollment date"'),
                 },
                 {
-                    name: 'incidentDateLabel',
-                    label: i18n.t('Custom label for "Incident date"'),
-                },
-                {
                     name: 'enrollmentLabel',
                     label: i18n.t('Custom label for "Enrollment"'),
+                },
+                {
+                    name: 'eventLabel',
+                    label: i18n.t('Custom label for "Event"'),
+                },
+                {
+                    name: 'programStageLabel',
+                    label: i18n.t('Custom label for "Program stage"'),
                 },
                 {
                     name: 'followUpLabel',

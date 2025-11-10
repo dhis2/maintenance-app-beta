@@ -12,70 +12,6 @@ import { ColorAndIconField } from '../../dataElements/fields'
 
 export const CustomizationFormContents = React.memo(
     function CustomizationFormContents({ name }: { name: string }) {
-        const customLabelFields = [
-            {
-                name: 'programStageLabel',
-                label: i18n.t('Custom label for "Program stage"'),
-                helpText: i18n.t(
-                    'Example use: See all data in this program stage'
-                ),
-            },
-            {
-                name: 'eventLabel',
-                label: i18n.t('Custom label for "Event"'),
-                helpText: i18n.t('Example use: Schedule a new event'),
-            },
-            {
-                name: 'enrollmentDateLabel',
-                label: i18n.t('Custom label for "Enrollment date"'),
-                helpText: i18n.t(
-                    'Used as the default registration date for enrollments'
-                ),
-            },
-            {
-                name: 'incidentDateLabel',
-                label: i18n.t('Custom label for "Incident date"'),
-                helpText: i18n.t(
-                    'Used as an additional registration date for enrollments'
-                ),
-            },
-            {
-                name: 'enrollmentLabel',
-                label: i18n.t('Custom label for "Enrollment"'),
-                helpText: i18n.t(
-                    'Example use: See all data in this enrollment'
-                ),
-            },
-            {
-                name: 'followUpLabel',
-                label: i18n.t('Custom label for "Follow-up"'),
-                helpText: i18n.t(
-                    'Used to customize the label for follow-up events or activities'
-                ),
-            },
-            {
-                name: 'orgUnitLabel',
-                label: i18n.t('Custom label for "Registering unit"'),
-                helpText: i18n.t(
-                    'Used to customize the label for the organisation unit that registers the enrollment or event'
-                ),
-            },
-            {
-                name: 'relationshipLabel',
-                label: i18n.t('Custom label for "Relationship"'),
-                helpText: i18n.t(
-                    'Used to customize the label for relationships between tracked entities'
-                ),
-            },
-            {
-                name: 'noteLabel',
-                label: i18n.t('Custom label for "Note"'),
-                helpText: i18n.t(
-                    'Used to customize the label for notes or comments added to enrollments or events'
-                ),
-            },
-        ]
-
         return (
             <SectionedFormSection name={name}>
                 <StandardFormSectionTitle>
@@ -87,26 +23,125 @@ export const CustomizationFormContents = React.memo(
                     )}
                 </StandardFormSectionDescription>
 
-                {/* Visual Configuration Section */}
                 <StandardFormField>
                     <ColorAndIconField />
                 </StandardFormField>
 
-                {/* Custom Label Fields Section */}
-                {customLabelFields.map((field) => (
-                    <StandardFormField key={field.name}>
-                        <Field
-                            component={InputFieldFF}
-                            name={field.name}
-                            inputWidth="400px"
-                            label={field.label}
-                            helpText={field.helpText}
-                            dataTest={`formfields-${field.name}`}
-                        />
-                    </StandardFormField>
-                ))}
+                <StandardFormField>
+                    <Field
+                        component={InputFieldFF}
+                        name="incidentDateLabel"
+                        inputWidth="400px"
+                        label={i18n.t('Custom label for "Incident date"')}
+                        helpText={i18n.t(
+                            'Used as an additional registration date for enrollments'
+                        )}
+                        dataTest="formfields-incidentDateLabel"
+                    />
+                </StandardFormField>
 
-                {/* Display Front Page List Checkbox */}
+                <StandardFormField>
+                    <Field
+                        component={InputFieldFF}
+                        name="enrollmentDateLabel"
+                        inputWidth="400px"
+                        label={i18n.t('Custom label for "Enrollment date"')}
+                        helpText={i18n.t(
+                            'Used as the default registration date for enrollments'
+                        )}
+                        dataTest="formfields-enrollmentDateLabel"
+                    />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <Field
+                        component={InputFieldFF}
+                        name="enrollmentLabel"
+                        inputWidth="400px"
+                        label={i18n.t('Custom label for "Enrollment"')}
+                        helpText={i18n.t(
+                            'Example use: See all data in this enrollment'
+                        )}
+                        dataTest="formfields-enrollmentLabel"
+                    />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <Field
+                        component={InputFieldFF}
+                        name="eventLabel"
+                        inputWidth="400px"
+                        label={i18n.t('Custom label for "Event"')}
+                        helpText={i18n.t('Example use: Schedule a new event')}
+                        dataTest="formfields-eventLabel"
+                    />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <Field
+                        component={InputFieldFF}
+                        name="programStageLabel"
+                        inputWidth="400px"
+                        label={i18n.t('Custom label for "Program stage"')}
+                        helpText={i18n.t(
+                            'Example use: See all data in this program stage'
+                        )}
+                        dataTest="formfields-programStageLabel"
+                    />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <Field
+                        component={InputFieldFF}
+                        name="followUpLabel"
+                        inputWidth="400px"
+                        label={i18n.t('Custom label for "Follow-up"')}
+                        helpText={i18n.t(
+                            'Used to customize the label for follow-up events or activities'
+                        )}
+                        dataTest="formfields-followUpLabel"
+                    />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <Field
+                        component={InputFieldFF}
+                        name="orgUnitLabel"
+                        inputWidth="400px"
+                        label={i18n.t('Custom label for "Registering unit"')}
+                        helpText={i18n.t(
+                            'Used to customize the label for the organisation unit that registers the enrollment or event'
+                        )}
+                        dataTest="formfields-orgUnitLabel"
+                    />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <Field
+                        component={InputFieldFF}
+                        name="relationshipLabel"
+                        inputWidth="400px"
+                        label={i18n.t('Custom label for "Relationship"')}
+                        helpText={i18n.t(
+                            'Used to customize the label for relationships between tracked entities'
+                        )}
+                        dataTest="formfields-relationshipLabel"
+                    />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <Field
+                        component={InputFieldFF}
+                        name="noteLabel"
+                        inputWidth="400px"
+                        label={i18n.t('Custom label for "Note"')}
+                        helpText={i18n.t(
+                            'Used to customize the label for notes or comments added to enrollments or events'
+                        )}
+                        dataTest="formfields-noteLabel"
+                    />
+                </StandardFormField>
+
                 <StandardFormField>
                     <Field
                         name="displayFrontPageList"
