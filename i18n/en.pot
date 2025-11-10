@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-04T10:03:06.141Z\n"
-"PO-Revision-Date: 2025-11-04T10:03:06.141Z\n"
+"POT-Creation-Date: 2025-11-10T16:58:45.255Z\n"
+"PO-Revision-Date: 2025-11-10T16:58:45.255Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -3935,6 +3935,179 @@ msgstr "Search selected attributes"
 
 msgid "Saving a section does not save other changes to the program"
 msgstr "Saving a section does not save other changes to the program"
+
+msgid "Make this attribute confidential"
+msgstr "Make this attribute confidential"
+
+msgid ""
+"Confidential tracker entity attributes are hidden from search and only "
+"supported when system encryption is enabled."
+msgstr ""
+"Confidential tracker entity attributes are hidden from search and only "
+"supported when system encryption is enabled."
+
+msgid "Format for data entry"
+msgstr "Format for data entry"
+
+msgid ""
+"Provide a formatting hint or example. This will only be shown in Android "
+"Capture app."
+msgstr ""
+"Provide a formatting hint or example. This will only be shown in Android "
+"Capture app."
+
+msgid "Will be shown everywhere a user sees a tracked entity attribute."
+msgstr "Will be shown everywhere a user sees a tracked entity attribute."
+
+msgid "Inherit data values from other tracked entities"
+msgstr "Inherit data values from other tracked entities"
+
+msgid "Data values are inherited from tracked entities linked by a relationship."
+msgstr "Data values are inherited from tracked entities linked by a relationship."
+
+msgid ""
+"Choose from a predefined list of Option sets. The Option set will "
+"automatically define the Value type."
+msgstr ""
+"Choose from a predefined list of Option sets. The Option set will "
+"automatically define the Value type."
+
+msgid "Pattern for automatically generated values"
+msgstr "Pattern for automatically generated values"
+
+msgid "Pattern must use the DHIS2 TextPattern syntax."
+msgstr "Pattern must use the DHIS2 TextPattern syntax."
+
+msgid "EQ / Equals"
+msgstr "EQ / Equals"
+
+msgid "SW / Starts with"
+msgstr "SW / Starts with"
+
+msgid "EW / Ends with"
+msgstr "EW / Ends with"
+
+msgid "LIKE / Contains"
+msgstr "LIKE / Contains"
+
+msgid "This attribute is currently not trigram indexed in the database"
+msgstr "This attribute is currently not trigram indexed in the database"
+
+msgid "This attribute is currently trigram indexed in the database"
+msgstr "This attribute is currently trigram indexed in the database"
+
+msgid "Preferred search operator"
+msgstr "Preferred search operator"
+
+msgid ""
+"Apps will try to use this recommended operator to improve performance, but "
+"can still use others if needed."
+msgstr ""
+"Apps will try to use this recommended operator to improve performance, but "
+"can still use others if needed."
+
+msgid "Blocked search operators"
+msgstr "Blocked search operators"
+
+msgid ""
+"Searches with blocked search operators will return no results. This "
+"prevents inefficient searches."
+msgstr ""
+"Searches with blocked search operators will return no results. This "
+"prevents inefficient searches."
+
+msgid "Minimum characters to search"
+msgstr "Minimum characters to search"
+
+msgid "Set the minimum characters required to start a search."
+msgstr "Set the minimum characters required to start a search."
+
+msgid "Mark for trigram indexing"
+msgstr "Mark for trigram indexing"
+
+msgid "Only relevant when using LIKE or EW based searches"
+msgstr "Only relevant when using LIKE or EW based searches"
+
+msgid "Tracked entity"
+msgstr "Tracked entity"
+
+msgid "Across entire system"
+msgstr "Across entire system"
+
+msgid "Per organisation unit"
+msgstr "Per organisation unit"
+
+msgid "Set up the basic information for this tracked entity attribute."
+msgstr "Set up the basic information for this tracked entity attribute."
+
+msgid ""
+"Shown as help text when collecting data, use to provide more context and "
+"information"
+msgstr ""
+"Shown as help text when collecting data, use to provide more context and "
+"information"
+
+msgid "Data collection"
+msgstr "Data collection"
+
+msgid "Configure how this tracked entity attribute's data is collected."
+msgstr "Configure how this tracked entity attribute's data is collected."
+
+msgid "Data value must be unique"
+msgstr "Data value must be unique"
+
+msgid "Automatically generate values"
+msgstr "Automatically generate values"
+
+msgid "Data handling"
+msgstr "Data handling"
+
+msgid ""
+"Configure how this tracker entity attribute's values are displayed, "
+"inherited, or synchronized across the system."
+msgstr ""
+"Configure how this tracker entity attribute's values are displayed, "
+"inherited, or synchronized across the system."
+
+msgid "Show in lists and search results even when a program is not selected"
+msgstr "Show in lists and search results even when a program is not selected"
+
+msgid "Do not synchronize this attribute and it's values"
+msgstr "Do not synchronize this attribute and it's values"
+
+msgid "Search performance"
+msgstr "Search performance"
+
+msgid "Adjust how this attribute is searched to balance performance and accuracy."
+msgstr "Adjust how this attribute is searched to balance performance and accuracy."
+
+msgid ""
+"Legends assigned to this tracker entity attribute are used in data analysis "
+"apps."
+msgstr ""
+"Legends assigned to this tracker entity attribute are used in data analysis "
+"apps."
+
+msgid "Tracked Entity Attribute"
+msgstr "Tracked Entity Attribute"
+
+msgid "Organisation unit scope"
+msgstr "Organisation unit scope"
+
+msgid "Generated"
+msgstr "Generated"
+
+msgid "Pattern"
+msgstr "Pattern"
+
+msgid "Confidential"
+msgstr "Confidential"
+
+msgid "Inherit"
+msgstr "Inherit"
+
+msgid "Skip synchronization"
+msgstr "Skip synchronization"
 
 msgid "No attributes selected. Please select attributes in the transfer above."
 msgstr "No attributes selected. Please select attributes in the transfer above."

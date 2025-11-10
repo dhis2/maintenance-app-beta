@@ -109,14 +109,13 @@ export const TrackedEntityAttributeFormDescriptor = {
                     label: i18n.t('Blocked search operators'),
                 },
                 {
-                    name: 'minimumCharactersToSearch',
+                    name: 'minCharactersToSearch',
                     label: i18n.t('Minimum characters to search'),
                 },
-                // TODO: Uncomment when version control is implemented (v43+)
-                // {
-                //     name: 'trigramIndexable',
-                //     label: i18n.t('Mark for trigram indexing'),
-                // },
+                {
+                    name: 'trigramIndexable',
+                    label: i18n.t('Mark for trigram indexing'),
+                },
             ],
         },
         {

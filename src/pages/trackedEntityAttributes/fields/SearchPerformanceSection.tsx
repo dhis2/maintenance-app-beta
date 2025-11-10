@@ -2,7 +2,6 @@ import i18n from '@dhis2/d2-i18n'
 import { Box, Field, InputFieldFF, CheckboxFieldFF, NoticeBox } from '@dhis2/ui'
 import React, { useMemo } from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
-import { useParams } from 'react-router-dom'
 import { StandardFormField } from '../../../components'
 import { SearchableMultiSelect } from '../../../components/SearchableMultiSelect'
 import { SearchableSingleSelect } from '../../../components/SearchableSingleSelect'
@@ -38,13 +37,10 @@ export function SearchPerformanceSection() {
         'trigramIndexed',
         { subscription: {} }
     )
-    const params = useParams()
-    const isNew = !params.id
 
     const blockedOperators = blockedOperatorsInput.value || []
-    const isEwBlocked = blockedOperators.includes('EW')
-    const isLikeBlocked = blockedOperators.includes('LIKE')
-    const bothEwAndLikeBlocked = isEwBlocked && isLikeBlocked
+    const bothEwAndLikeBlocked =
+        blockedOperators.includes('EW') && blockedOperators.includes('LIKE')
 
     // Disable and uncheck trigramIndexable if both EW and LIKE are blocked
     React.useEffect(() => {
@@ -57,32 +53,20 @@ export function SearchPerformanceSection() {
         }
     }, [bothEwAndLikeBlocked, trigramIndexableInput])
 
-    const trigramIndexableDisabled = bothEwAndLikeBlocked
-
     // Determine infobox message
     const infoboxMessage = useMemo(() => {
         if (!ENABLE_TRIGRAM_INDEXING || !trigramIndexableInput.value) {
             return null
         }
 
-        if (isNew) {
-            return i18n.t(
-                'This attribute is currently not trigram indexed in the database'
-            )
-        }
-
-        // For edit mode, check trigramIndexed from backend
-        const trigramIndexed = trigramIndexedInput.value
-        if (trigramIndexed === true) {
-            return i18n.t(
-                'This attribute is currently trigram indexed in the database'
-            )
-        } else {
-            return i18n.t(
-                'This attribute is currently not trigram indexed in the database'
-            )
-        }
-    }, [trigramIndexableInput.value, isNew, trigramIndexedInput.value])
+        return trigramIndexedInput.value === true
+            ? i18n.t(
+                  'This attribute is currently trigram indexed in the database'
+              )
+            : i18n.t(
+                  'This attribute is currently not trigram indexed in the database'
+              )
+    }, [trigramIndexableInput.value, trigramIndexedInput.value])
 
     return (
         <>
@@ -179,8 +163,8 @@ export function SearchPerformanceSection() {
                 <FieldRFF
                     component={InputFieldFF}
                     inputWidth="200px"
-                    name="minimumCharactersToSearch"
-                    dataTest="formfields-minimumCharactersToSearch"
+                    name="minCharactersToSearch"
+                    dataTest="formfields-minCharactersToSearch"
                     type="number"
                     min="0"
                     label={i18n.t('Minimum characters to search')}
@@ -212,7 +196,7 @@ export function SearchPerformanceSection() {
                                 'Only relevant when using LIKE or EW based searches'
                             )}
                             type="checkbox"
-                            disabled={trigramIndexableDisabled}
+                            disabled={bothEwAndLikeBlocked}
                             validateFields={[]}
                         />
                     </StandardFormField>
