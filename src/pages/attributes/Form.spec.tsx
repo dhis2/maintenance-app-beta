@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/attributeSchema.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
-import { SECTIONS_MAP, getConstantTranslation } from '../../lib'
+import { SECTIONS_MAP, VALUE_TYPE, getConstantTranslation } from '../../lib'
 import {
     randomLongString,
     testAttributeForm,
@@ -26,6 +26,13 @@ jest.mock('use-debounce', () => ({
     useDebouncedCallback: (fn: any) => fn,
 }))
 
+/* const VALUE_TYPES_OPTIONS =
+    mockSchema.properties.valueType.constants
+        ?.filter((constant) => constant !== 'MULTI_TEXT')
+        .map((constant) => ({
+            value: constant,
+            displayName: getConstantTranslation(constant),
+        })) ?? [] */
 const VALUE_TYPES_OPTIONS =
     mockSchema.properties.valueType.constants?.map((constant) => ({
         value: constant,
@@ -220,7 +227,14 @@ describe('Attributes form tests', () => {
             )
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('formfields-valueType'),
-                { options: VALUE_TYPES_OPTIONS },
+                {
+                    selected: 'Text',
+                    options: mockSchema.properties.valueType.constants
+                        .filter((o) => o !== 'MULTI_TEXT')
+                        .map((o) => ({
+                            displayName: getConstantTranslation(o),
+                        })),
+                },
                 screen
             )
 
@@ -232,6 +246,17 @@ describe('Attributes form tests', () => {
                 },
                 screen
             )
+        })
+        it('should not have multi text as a value type by default', async () => {
+            const { screen } = await renderForm()
+            const valueTypeOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('formfields-valueType'),
+                screen
+            )
+            const multiTextOptions = valueTypeOptions.filter((opt) =>
+                opt.textContent?.includes(VALUE_TYPE.MULTI_TEXT)
+            )
+            expect(multiTextOptions).toHaveLength(0)
         })
         it('locks value type when option set is selected', async () => {
             const { screen, optionSets } = await renderForm()
@@ -249,7 +274,11 @@ describe('Attributes form tests', () => {
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('formfields-valueType'),
                 {
-                    options: VALUE_TYPES_OPTIONS,
+                    options: VALUE_TYPES_OPTIONS.filter(
+                        (o) =>
+                            o.value !== 'MULTI_TEXT' ||
+                            optionSets?.[1]?.valueType === 'MULTI_TEXT'
+                    ),
                     selected: getConstantTranslation(
                         optionSets?.[1]?.valueType
                     ),
@@ -260,7 +289,7 @@ describe('Attributes form tests', () => {
 
             expect(
                 screen.getByText(
-                    'Disabled as the value type must match the value type of the selected option set'
+                    'Disabled as the value type must match the value type of the selected option set.'
                 )
             ).toBeInTheDocument()
 
@@ -271,7 +300,9 @@ describe('Attributes form tests', () => {
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('formfields-valueType'),
                 {
-                    options: VALUE_TYPES_OPTIONS,
+                    options: VALUE_TYPES_OPTIONS.filter(
+                        (o) => o.value !== 'MULTI_TEXT'
+                    ),
                     selected: getConstantTranslation(
                         optionSets?.[1]?.valueType
                     ),
@@ -368,15 +399,18 @@ describe('Attributes form tests', () => {
                     testOptionSet(),
                     testOptionSet(),
                 ]
-                const attribute = testAttribute()
-                attribute.optionSet = {
-                    id: optionSets[1].id,
-                    displayName: optionSets[1].displayName,
-                }
-                attribute.valueType =
-                    VALUE_TYPES_OPTIONS[
-                        Math.floor(Math.random() * VALUE_TYPES_OPTIONS.length)
-                    ]?.value
+                const attribute = testAttribute({
+                    optionSet: {
+                        id: optionSets[1].id,
+                        displayName: optionSets[1].displayName,
+                    },
+                    valueType:
+                        VALUE_TYPES_OPTIONS[
+                            Math.floor(
+                                Math.random() * VALUE_TYPES_OPTIONS.length
+                            )
+                        ]?.value,
+                })
 
                 const id = attribute.id
                 const screen = render(

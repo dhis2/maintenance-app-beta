@@ -45,7 +45,7 @@ import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
 import { programListSchema } from '../pages/programsWip/form'
 import { trackedEntityAttributeListSchema } from '../pages/trackedEntityAttributes/form/TrackedEntityAttributeFormSchema'
-import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form/TrackedEntityTypeFormSchema'
+import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form'
 import {
     validationNotificationTemplateListSchema,
     validationNotificationTemplateFormSchema,
