@@ -25,6 +25,7 @@ import {
     InheritField,
     OptionSetField,
     PatternField,
+    SearchPerformanceSection,
     TrackedEntityTypeField,
     UniqueRadioFields,
 } from '../fields'
@@ -33,11 +34,13 @@ export const TrackedEntityAttributeFormFields = ({
     basicSectionName,
     dataCollectionSectionName,
     dataHandlingSectionName,
+    searchPerformanceSectionName,
     legendsSectionName,
 }: {
     basicSectionName: string
     dataCollectionSectionName: string
     dataHandlingSectionName: string
+    searchPerformanceSectionName: string
     legendsSectionName: string
 }) => {
     const section = SECTIONS_MAP.trackedEntityAttribute
@@ -210,24 +213,22 @@ export const TrackedEntityAttributeFormFields = ({
                     />
                 </StandardFormField>
 
-                {/* TODO: Uncomment when version control is implemented (v43+) */}
-                {/* <StandardFormField>
-                    <FieldRFF
-                        component={CheckboxFieldFF}
-                        dataTest="formfields-trigramIndexable"
-                        name="trigramIndexable"
-                        label={i18n.t('Enable trigram indexing')}
-                        type="checkbox"
-                        helpText={i18n.t(
-                            'Improves search performance for this attribute. Available in DHIS2 v43 and above.'
-                        )}
-                        validateFields={[]}
-                    />
-                </StandardFormField> */}
-
                 <StandardFormField>
                     <AggregationTypeFieldByValueType />
                 </StandardFormField>
+            </SectionedFormSection>
+
+            <SectionedFormSection name={searchPerformanceSectionName}>
+                <StandardFormSectionTitle>
+                    {i18n.t('Search performance')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Adjust how this attribute is searched to balance performance and accuracy.'
+                    )}
+                </StandardFormSectionDescription>
+
+                <SearchPerformanceSection />
             </SectionedFormSection>
 
             <SectionedFormSection name={legendsSectionName}>

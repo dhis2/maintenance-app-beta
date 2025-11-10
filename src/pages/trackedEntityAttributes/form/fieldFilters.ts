@@ -25,6 +25,10 @@ export const fieldFilters = [
     'skipSynchronization',
     // TODO: Uncomment when version control is implemented (v43+)
     // 'trigramIndexable',
+    // 'trigramIndexed',
+    'preferredSearchOperator',
+    'blockedSearchOperators',
+    'minimumCharactersToSearch',
     'aggregationType',
     'legendSets[id,displayName]',
 ] as const

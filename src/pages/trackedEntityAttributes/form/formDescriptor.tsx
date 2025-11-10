@@ -90,15 +90,33 @@ export const TrackedEntityAttributeFormDescriptor = {
                     name: 'skipSynchronization',
                     label: i18n.t('Skip synchronization'),
                 },
-                // TODO: Uncomment when version control is implemented (v43+)
-                // {
-                //     name: 'trigramIndexable',
-                //     label: i18n.t('Trigram indexable'),
-                // },
                 {
                     name: 'aggregationType',
                     label: i18n.t('Aggregation type'),
                 },
+            ],
+        },
+        {
+            name: 'searchPerformance',
+            label: i18n.t('Search performance'),
+            fields: [
+                {
+                    name: 'preferredSearchOperator',
+                    label: i18n.t('Preferred search operator'),
+                },
+                {
+                    name: 'blockedSearchOperators',
+                    label: i18n.t('Blocked search operators'),
+                },
+                {
+                    name: 'minimumCharactersToSearch',
+                    label: i18n.t('Minimum characters to search'),
+                },
+                // TODO: Uncomment when version control is implemented (v43+)
+                // {
+                //     name: 'trigramIndexable',
+                //     label: i18n.t('Mark for trigram indexing'),
+                // },
             ],
         },
         {
