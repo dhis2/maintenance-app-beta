@@ -101,8 +101,9 @@ export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
                 validateOnBlur={true}
                 initialValues={initialValuesWithAttributes}
                 onSubmit={ffSubmit}
-                validate={(values) =>
-                    validate ? validate(valueFormatter(values)) : undefined
+                validate={(values) => {
+                    return validate ? validate(valueFormatter(values)) : undefined
+                }
                 }
                 {...reactFinalFormProps}
             >
