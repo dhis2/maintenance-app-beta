@@ -11,8 +11,8 @@ import {
     useNavigateWithSearchState,
 } from '../../lib'
 import { createFormError } from '../../lib/form/createFormError'
-import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
 import { ModelWithAttributeValues } from '../../lib/form/createJsonPatchOperations'
+import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
 import { LocaleFormFields } from './form/LocaleFormFields'
 import { initialValues, validate } from './form/LocaleSchema'
 
@@ -103,15 +103,16 @@ export const Component = () => {
 
     return (
         <FormBase
-            initialValues={initialValues as typeof initialValues & { id?: string }}
+            initialValues={
+                initialValues as typeof initialValues & { id?: string }
+            }
             onSubmit={onSubmit}
             validate={validate}
             includeAttributes={false}
         >
-            <DefaultNewFormContents section={section}>
+            <DefaultNewFormContents section={section} showSaveButton={false}>
                 <LocaleFormFields />
             </DefaultNewFormContents>
         </FormBase>
     )
 }
-

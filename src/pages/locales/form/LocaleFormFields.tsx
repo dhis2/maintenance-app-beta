@@ -8,26 +8,23 @@ import {
     StandardFormSectionTitle,
     StandardFormSectionDescription,
 } from '../../../components'
-import { LanguageField } from './LanguageField'
 import { CountryField } from './CountryField'
+import { LanguageField } from './LanguageField'
 
 export const LocaleFormFields = () => {
     return (
         <>
             <StandardFormSection>
                 <NoticeBox warning>
-                    {i18n.t("Locale can't be edited after it's created.")}
+                    {i18n.t(
+                        'Locale will not be editable after it has been created.'
+                    )}
                 </NoticeBox>
             </StandardFormSection>
             <StandardFormSection>
                 <StandardFormSectionTitle>
                     {i18n.t('Basic information')}
                 </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Set up the basic information for this locale.'
-                    )}
-                </StandardFormSectionDescription>
 
                 <StandardFormField>
                     <LanguageField />
@@ -40,4 +37,3 @@ export const LocaleFormFields = () => {
         </>
     )
 }
-

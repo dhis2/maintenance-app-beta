@@ -36,9 +36,11 @@ export function DefaultEditFormContents({
 export function DefaultNewFormContents({
     section,
     children,
+    showSaveButton = true,
 }: {
     children: React.ReactNode
     section: ModelSection
+    showSaveButton?: boolean
 }) {
     const { submitting } = useFormState({
         subscription: { submitting: true },
@@ -65,7 +67,9 @@ export function DefaultNewFormContents({
                 submitLabel={i18n.t('Create {{modelName}} ', {
                     modelName: section.title,
                 })}
-                onSaveClick={handleSubmit.bind(null, 'save')}
+                onSaveClick={
+                    showSaveButton ? handleSubmit.bind(null, 'save') : undefined
+                }
                 onSubmitClick={handleSubmit.bind(null, 'saveAndExit')}
                 submitting={submitting}
                 cancelTo={listPath}

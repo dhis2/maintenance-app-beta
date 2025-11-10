@@ -1,6 +1,1 @@
-export {
-    localeFormSchema,
-    initialValues,
-    validate,
-} from './LocaleSchema'
-
+export { localeFormSchema, initialValues, validate } from './LocaleSchema'

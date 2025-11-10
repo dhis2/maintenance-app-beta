@@ -5,6 +5,7 @@ import React, { useMemo } from 'react'
 import { useField } from 'react-final-form'
 import { Option, SearchableSingleSelect } from '../../../components'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
+import classes from './CountryField.module.css'
 
 type CountriesResponse = Record<string, string>
 
@@ -19,7 +20,12 @@ export function CountryField() {
         resource: 'locales/countries',
     }
 
-    const { error: queryError, data, isLoading, refetch } = useQuery({
+    const {
+        error: queryError,
+        data,
+        isLoading,
+        refetch,
+    } = useQuery({
         queryKey: [COUNTRIES_QUERY],
         queryFn: queryFn<CountriesResponse>,
     })
@@ -48,22 +54,27 @@ export function CountryField() {
             error={touched && !!error}
             validationText={(touched && error?.toString()) || ''}
         >
-            <SearchableSingleSelect
-                selected={value || ''}
-                invalid={touched && !!error}
-                error={queryError ? i18n.t('Failed to load countries') : error}
-                onChange={handleChange}
-                onBlur={onBlur}
-                options={options}
-                loading={isLoading}
-                onRetryClick={refetch}
-                showEndLoader={false}
-                placeholder={i18n.t('Select a country')}
-                clearable
-                clearText={i18n.t('<No value>')}
-                dataTest="locale-country-field"
-            />
+            <div className={classes.selectContainer}>
+                <SearchableSingleSelect
+                    selected={value || ''}
+                    invalid={touched && !!error}
+                    error={
+                        queryError
+                            ? i18n.t('Failed to load countries')
+                            : undefined
+                    }
+                    onChange={handleChange}
+                    onBlur={onBlur}
+                    options={options}
+                    loading={isLoading}
+                    onRetryClick={refetch}
+                    showEndLoader={false}
+                    placeholder={i18n.t('Select a country')}
+                    clearable
+                    clearText={i18n.t('<No value>')}
+                    dataTest="locale-country-field"
+                />
+            </div>
         </Field>
     )
 }
-

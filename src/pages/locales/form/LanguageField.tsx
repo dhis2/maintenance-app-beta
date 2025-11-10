@@ -5,6 +5,7 @@ import React, { useMemo } from 'react'
 import { useField } from 'react-final-form'
 import { Option, SearchableSingleSelect } from '../../../components'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
+import classes from './LanguageField.module.css'
 
 type LanguagesResponse = Record<string, string>
 
@@ -19,7 +20,12 @@ export function LanguageField() {
         resource: 'locales/languages',
     }
 
-    const { error: queryError, data, isLoading, refetch } = useQuery({
+    const {
+        error: queryError,
+        data,
+        isLoading,
+        refetch,
+    } = useQuery({
         queryKey: [LANGUAGES_QUERY],
         queryFn: queryFn<LanguagesResponse>,
     })
@@ -39,7 +45,6 @@ export function LanguageField() {
         // Manually trigger blur to ensure validation runs
         onBlur()
     }
-    
 
     return (
         <Field
@@ -49,22 +54,27 @@ export function LanguageField() {
             error={touched && !!error}
             validationText={(touched && error?.toString()) || ''}
         >
-            <SearchableSingleSelect
-                selected={value}
-                invalid={touched && !!error}
-                error={queryError ? i18n.t('Failed to load languages') : error}
-                onChange={handleChange}
-                onBlur={onBlur}
-                options={options}
-                loading={isLoading}
-                onRetryClick={refetch}
-                showEndLoader={false}
-                placeholder={i18n.t('Select a language')}
-                clearable
-                clearText={i18n.t('<No value>')}
-                dataTest="locale-language-field"
-            />
+            <div className={classes.selectContainer}>
+                <SearchableSingleSelect
+                    selected={value}
+                    invalid={touched && !!error}
+                    error={
+                        queryError
+                            ? i18n.t('Failed to load languages')
+                            : undefined
+                    }
+                    onChange={handleChange}
+                    onBlur={onBlur}
+                    options={options}
+                    loading={isLoading}
+                    onRetryClick={refetch}
+                    showEndLoader={false}
+                    placeholder={i18n.t('Select a language')}
+                    clearable
+                    clearText={i18n.t('<No value>')}
+                    dataTest="locale-language-field"
+                />
+            </div>
         </Field>
     )
 }
-

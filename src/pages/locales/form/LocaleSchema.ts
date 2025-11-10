@@ -26,4 +26,3 @@ export const localeFormSchema = localeBaseSchema
 export const initialValues = getDefaults(localeFormSchema)
 
 export const validate = createFormValidate(localeFormSchema)
-
