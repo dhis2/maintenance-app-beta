@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, InputFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { Field as FieldRFF, useFormState } from 'react-final-form'
+import { Field as FieldRFF } from 'react-final-form'
 import { useFieldArray } from 'react-final-form-arrays'
 import { createSearchParams, useSearchParams } from 'react-router-dom'
 import {
@@ -35,7 +35,6 @@ export const ProgramStagesFormContents = React.memo(
             DisplayableModel | null | undefined
         >()
         const isStageFormOpen = !!stageFormOpen || stageFormOpen === null
-        const { values } = useFormState({ subscription: { values: true } })
         const [searchParams, setSearchParams] = useSearchParams()
 
         const handleSubmittedStage = (
@@ -100,8 +99,6 @@ export const ProgramStagesFormContents = React.memo(
                         label={i18n.t('Test input program')}
                         validateFields={[]}
                     />
-                    <div>FORM VALUES: {values && values.testProgram}</div>
-                    <br />
                     <Button
                         onClick={() => {
                             setStageFormOpen(null)

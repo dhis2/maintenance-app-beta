@@ -1,12 +1,7 @@
 import { Button } from '@dhis2/ui'
 import cx from 'classnames'
 import React, { useMemo } from 'react'
-import {
-    createSearchParams,
-    Link,
-    useLocation,
-    useSearchParams,
-} from 'react-router-dom'
+import { createSearchParams, Link, useSearchParams } from 'react-router-dom'
 import {
     FORM_SUBSECTION_PARAM_KEY,
     scrollToSection,
