@@ -553,7 +553,6 @@ export const modelListViewsConfig = {
                 'href',
                 'code',
                 'id',
-                { label: i18n.t('Favorite'), path: 'favorite' },
                 { label: i18n.t('Version'), path: 'version' },
             ],
         },
