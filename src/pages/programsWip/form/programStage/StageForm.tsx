@@ -3,7 +3,8 @@ import { Button, ButtonStrip } from '@dhis2/ui'
 import { IconInfo16 } from '@dhis2/ui-icons'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
-import React, { useCallback, useMemo } from 'react'
+import isEqual from 'lodash/isEqual'
+import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import {
     FormBase,
@@ -82,18 +83,9 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
         if (stage) {
             return stage
         }
-        return initialStageValue
-    }, [stage])
+        return { ...initialStageValue, program: { id: programId } }
+    }, [stage, programId])
 
-    const valueFormatter = useCallback(
-        (values: PartialStageFormValues) => {
-            return {
-                ...values,
-                program: { id: programId },
-            }
-        },
-        [programId]
-    )
     const closeOnSubmitRef = React.useRef(false)
     const setCloseOnSubmit = (value: boolean) => {
         closeOnSubmitRef.current = value
@@ -101,11 +93,11 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
 
     return (
         <FormBase
-            initialValues={{ ...initialValues, program: { id: programId } }}
+            initialValuesEqual={isEqual}
+            initialValues={initialValues}
             onSubmit={(values, form, options) =>
                 onSubmit(values, form, options, closeOnSubmitRef.current)
             }
-            valueFormatter={valueFormatter}
             includeAttributes={false}
             mutators={{ ...arrayMutators }}
         >
@@ -209,7 +201,6 @@ export const EditStageForm = ({
         c,
         closeOnSubmit?: boolean
     ) => {
-        stageValues.remove()
         const jsonPatchOperations = createJsonPatchOperations({
             values,
             dirtyFields: form.getState().dirtyFields,
@@ -307,6 +298,7 @@ export const EditOrNewStageForm = ({
     if (stage === undefined) {
         return
     }
+
     if (stage === null) {
         return <NewStageForm onSubmitted={onSubmitted} onCancel={onCancel} />
     }

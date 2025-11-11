@@ -53,6 +53,7 @@ const programBaseSchema = z.object({
             htmlCode: z.string().optional(),
         })
         .optional(),
+    programStages: z.array(modelReference).default([]),
 })
 
 export const programFormSchema = identifiable.merge(programBaseSchema).extend({
