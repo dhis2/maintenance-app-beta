@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-10T15:04:08.073Z\n"
-"PO-Revision-Date: 2025-11-10T15:04:08.073Z\n"
+"POT-Creation-Date: 2025-11-11T08:46:13.477Z\n"
+"PO-Revision-Date: 2025-11-11T08:46:13.477Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -3796,17 +3796,11 @@ msgstr "Set up the program indicator legends."
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
 
-msgid "Custom label for \"Program stage\""
-msgstr "Custom label for \"Program stage\""
+msgid "Customization"
+msgstr "Customization"
 
-msgid "Custom label for \"Event\""
-msgstr "Custom label for \"Event\""
-
-msgid "Custom label for \"Enrollment date\""
-msgstr "Custom label for \"Enrollment date\""
-
-msgid "Used as the default registration date for enrollments"
-msgstr "Used as the default registration date for enrollments"
+msgid "Customize the program's visuals, labels, and display settings."
+msgstr "Customize the program's visuals, labels, and display settings."
 
 msgid "Custom label for \"Incident date\""
 msgstr "Custom label for \"Incident date\""
@@ -3814,8 +3808,20 @@ msgstr "Custom label for \"Incident date\""
 msgid "Used as an additional registration date for enrollments"
 msgstr "Used as an additional registration date for enrollments"
 
+msgid "Custom label for \"Enrollment date\""
+msgstr "Custom label for \"Enrollment date\""
+
+msgid "Used as the default registration date for enrollments"
+msgstr "Used as the default registration date for enrollments"
+
 msgid "Custom label for \"Enrollment\""
 msgstr "Custom label for \"Enrollment\""
+
+msgid "Custom label for \"Event\""
+msgstr "Custom label for \"Event\""
+
+msgid "Custom label for \"Program stage\""
+msgstr "Custom label for \"Program stage\""
 
 msgid "Custom label for \"Follow-up\""
 msgstr "Custom label for \"Follow-up\""
@@ -3842,18 +3848,8 @@ msgstr "Used to customize the label for relationships between tracked entities"
 msgid "Custom label for \"Note\""
 msgstr "Custom label for \"Note\""
 
-msgid ""
-"Used to customize the label for notes or comments added to enrollments or "
-"events"
-msgstr ""
-"Used to customize the label for notes or comments added to enrollments or "
-"events"
-
-msgid "Customization"
-msgstr "Customization"
-
-msgid "Customize the program's visuals, labels, and display settings."
-msgstr "Customize the program's visuals, labels, and display settings."
+msgid "Used to customize the label for notes added to enrollments or events"
+msgstr "Used to customize the label for notes added to enrollments or events"
 
 msgid "Display enrolled TEs in the front page list"
 msgstr "Display enrolled TEs in the front page list"
@@ -3944,6 +3940,16 @@ msgstr "Allow incident dates in the future"
 msgid "Collect data for the first stage during enrollment"
 msgstr "Collect data for the first stage during enrollment"
 
+msgid "Program Customization"
+msgstr "Program Customization"
+
+msgid ""
+"Used to customize the label for notes or comments added to enrollments or "
+"events"
+msgstr ""
+"Used to customize the label for notes or comments added to enrollments or "
+"events"
+
 msgid "Only integers are allowed"
 msgstr "Only integers are allowed"
 
@@ -3998,6 +4004,133 @@ msgstr "Search selected attributes"
 msgid "Saving a section does not save other changes to the program"
 msgstr "Saving a section does not save other changes to the program"
 
+msgid "Make this attribute confidential"
+msgstr "Make this attribute confidential"
+
+msgid ""
+"Confidential tracker entity attributes are hidden from search and only "
+"supported when system encryption is enabled."
+msgstr ""
+"Confidential tracker entity attributes are hidden from search and only "
+"supported when system encryption is enabled."
+
+msgid "Format for data entry"
+msgstr "Format for data entry"
+
+msgid ""
+"Provide a formatting hint or example. This will only be shown in Android "
+"Capture app."
+msgstr ""
+"Provide a formatting hint or example. This will only be shown in Android "
+"Capture app."
+
+msgid "Will be shown everywhere a user sees a tracked entity attribute."
+msgstr "Will be shown everywhere a user sees a tracked entity attribute."
+
+msgid "Inherit data values from other tracked entities"
+msgstr "Inherit data values from other tracked entities"
+
+msgid "Data values are inherited from tracked entities linked by a relationship."
+msgstr "Data values are inherited from tracked entities linked by a relationship."
+
+msgid ""
+"Choose from a predefined list of Option sets. The Option set will "
+"automatically define the Value type."
+msgstr ""
+"Choose from a predefined list of Option sets. The Option set will "
+"automatically define the Value type."
+
+msgid "Pattern for automatically generated values"
+msgstr "Pattern for automatically generated values"
+
+msgid "Pattern must use the DHIS2 TextPattern syntax."
+msgstr "Pattern must use the DHIS2 TextPattern syntax."
+
+msgid "Tracked entity"
+msgstr "Tracked entity"
+
+msgid "Across entire system"
+msgstr "Across entire system"
+
+msgid "Per organisation unit"
+msgstr "Per organisation unit"
+
+msgid "Set up the basic information for this tracked entity attribute."
+msgstr "Set up the basic information for this tracked entity attribute."
+
+msgid ""
+"Shown as help text when collecting data, use to provide more context and "
+"information"
+msgstr ""
+"Shown as help text when collecting data, use to provide more context and "
+"information"
+
+msgid "Data collection"
+msgstr "Data collection"
+
+msgid "Configure how this tracked entity attribute's data is collected."
+msgstr "Configure how this tracked entity attribute's data is collected."
+
+msgid "Data value must be unique"
+msgstr "Data value must be unique"
+
+msgid "Automatically generate values"
+msgstr "Automatically generate values"
+
+msgid "Data handling"
+msgstr "Data handling"
+
+msgid ""
+"Configure how this tracker entity attribute's values are displayed, "
+"inherited, or synchronized across the system."
+msgstr ""
+"Configure how this tracker entity attribute's values are displayed, "
+"inherited, or synchronized across the system."
+
+msgid "Show in lists and search results even when a program is not selected"
+msgstr "Show in lists and search results even when a program is not selected"
+
+msgid "Do not synchronize this attribute and it's values"
+msgstr "Do not synchronize this attribute and it's values"
+
+msgid "Enable trigram indexing"
+msgstr "Enable trigram indexing"
+
+msgid ""
+"Improves search performance for this attribute. Available in DHIS2 v43 and "
+"above."
+msgstr ""
+"Improves search performance for this attribute. Available in DHIS2 v43 and "
+"above."
+
+msgid ""
+"Legends assigned to this tracker entity attribute are used in data analysis "
+"apps."
+msgstr ""
+"Legends assigned to this tracker entity attribute are used in data analysis "
+"apps."
+
+msgid "Tracked Entity Attribute"
+msgstr "Tracked Entity Attribute"
+
+msgid "Organisation unit scope"
+msgstr "Organisation unit scope"
+
+msgid "Generated"
+msgstr "Generated"
+
+msgid "Pattern"
+msgstr "Pattern"
+
+msgid "Confidential"
+msgstr "Confidential"
+
+msgid "Inherit"
+msgstr "Inherit"
+
+msgid "Skip synchronization"
+msgstr "Skip synchronization"
+
 msgid "No attributes selected. Please select attributes in the transfer above."
 msgstr "No attributes selected. Please select attributes in the transfer above."
 
@@ -4031,6 +4164,9 @@ msgstr "Explain the purpose of this tracked entity type."
 
 msgid "Choose and configure what data can be collected for this tracked entity type"
 msgstr "Choose and configure what data can be collected for this tracked entity type"
+
+msgid "Color and icon"
+msgstr "Color and icon"
 
 msgid "Notification details"
 msgstr "Notification details"
