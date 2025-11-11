@@ -16,6 +16,7 @@ import {
     useOnSubmitEdit,
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
+import { PlainResourceQuery } from '../../types'
 import { OptionSetFormDescriptor } from './form/formDescriptor'
 import { OptionSetFormContents } from './form/OptionSetFormContents'
 import { OptionSetFormValues, validate } from './form/optionSetSchema'
@@ -35,14 +36,14 @@ export const Component = () => {
     const section = SECTIONS_MAP.optionSet
     const queryFn = useBoundResourceQueryFn()
 
-    const query = {
-        resource: 'optionSets',
-        id: modelId,
-        params: { fields: fieldFilters },
-    }
-
     const optionSetQuery = useQuery({
-        queryKey: [query] as const,
+        queryKey: [
+            {
+                resource: 'optionSets',
+                id: modelId,
+                params: { fields: fieldFilters.concat() },
+            } satisfies PlainResourceQuery,
+        ],
         queryFn: queryFn<OptionSetFormValues>,
     })
     const initialValues = optionSetQuery.data
