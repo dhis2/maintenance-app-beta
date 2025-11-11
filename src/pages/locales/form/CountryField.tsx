@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Field } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useField } from 'react-final-form'
 import { Option, SearchableSingleSelect } from '../../../components'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
@@ -30,6 +30,10 @@ export function CountryField() {
         queryFn: queryFn<CountriesResponse>,
     })
 
+    const [maybeFilteredOptions, setMaybeFilteredOptions] = useState<
+        { value: string; label: string }[]
+    >([])
+
     const options = useMemo<Option[]>(() => {
         if (!data) {
             return []
@@ -39,6 +43,18 @@ export function CountryField() {
             label: name,
         }))
     }, [data])
+
+    useEffect(() => {
+        setMaybeFilteredOptions(options)
+    }, [options])
+
+    const handleFilterChange = ({ value }: { value: string }) => {
+        setMaybeFilteredOptions(
+            options.filter((o) =>
+                o.label.toLowerCase().includes(value.toLowerCase())
+            )
+        )
+    }
 
     const handleChange = ({ selected }: { selected: string }) => {
         onChange(selected)
@@ -65,8 +81,9 @@ export function CountryField() {
                     }
                     onChange={handleChange}
                     onBlur={onBlur}
-                    options={options}
+                    options={maybeFilteredOptions}
                     loading={isLoading}
+                    onFilterChange={handleFilterChange}
                     onRetryClick={refetch}
                     showEndLoader={false}
                     placeholder={i18n.t('Select a country')}

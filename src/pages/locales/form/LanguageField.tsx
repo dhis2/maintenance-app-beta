@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Field } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useField } from 'react-final-form'
 import { Option, SearchableSingleSelect } from '../../../components'
 import { useBoundResourceQueryFn } from '../../../lib/query/useBoundQueryFn'
@@ -29,6 +29,9 @@ export function LanguageField() {
         queryKey: [LANGUAGES_QUERY],
         queryFn: queryFn<LanguagesResponse>,
     })
+    const [maybeFilteredOptions, setMaybeFilteredOptions] = useState<
+        { value: string; label: string }[]
+    >([])
 
     const options = useMemo<Option[]>(() => {
         if (!data) {
@@ -40,9 +43,20 @@ export function LanguageField() {
         }))
     }, [data])
 
+    useEffect(() => {
+        setMaybeFilteredOptions(options)
+    }, [options])
+
+    const handleFilterChange = ({ value }: { value: string }) => {
+        setMaybeFilteredOptions(
+            options.filter((o) =>
+                o.label.toLowerCase().includes(value.toLowerCase())
+            )
+        )
+    }
+
     const handleChange = ({ selected }: { selected: string }) => {
         onChange(selected)
-        // Manually trigger blur to ensure validation runs
         onBlur()
     }
 
@@ -63,9 +77,10 @@ export function LanguageField() {
                             ? i18n.t('Failed to load languages')
                             : undefined
                     }
+                    onFilterChange={handleFilterChange}
                     onChange={handleChange}
                     onBlur={onBlur}
-                    options={options}
+                    options={maybeFilteredOptions}
                     loading={isLoading}
                     onRetryClick={refetch}
                     showEndLoader={false}

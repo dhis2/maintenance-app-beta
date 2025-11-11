@@ -52,7 +52,6 @@ export function PeriodTypeSelect({
 
     return (
         <SearchableSingleSelect
-            clearable={true}
             selected={selected}
             invalid={invalid}
             error={error ? i18n.t('Something went wrong') : undefined}

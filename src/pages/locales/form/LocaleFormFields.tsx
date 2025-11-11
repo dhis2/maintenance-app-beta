@@ -1,12 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
-import { NoticeBox, TextAreaFieldFF } from '@dhis2/ui'
+import { NoticeBox } from '@dhis2/ui'
 import React from 'react'
-import { Field as FieldRFF } from 'react-final-form'
 import {
     StandardFormField,
     StandardFormSection,
     StandardFormSectionTitle,
-    StandardFormSectionDescription,
 } from '../../../components'
 import { CountryField } from './CountryField'
 import { LanguageField } from './LanguageField'

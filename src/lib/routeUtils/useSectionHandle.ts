@@ -23,8 +23,8 @@ export const useModelSectionHandleOrThrow = (): ModelSection => {
 export const useSchemaSectionHandleOrThrow = (): SchemaSection => {
     const section = useSectionHandle()
 
-    if (!section) {
+    if (!section || !isSchemaSection(section)) {
         throw new Error('Could not find schema section handle')
     }
-    return section as SchemaSection
+    return section
 }

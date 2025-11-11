@@ -2,9 +2,14 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { useQueryClient } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { FormBase } from '../../components'
-import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
+import {
+    FormBase,
+    StandardFormActions,
+    StandardFormSection,
+    useFormBase,
+} from '../../components'
+import classes from '../../components/form/DefaultFormContents.module.css'
+import { DefaultFormErrorNotice } from '../../components/form/DefaultFormErrorNotice'
 import {
     getSectionPath,
     SECTIONS_MAP,
@@ -28,10 +33,9 @@ const useOnSubmitLocale = (): EnhancedOnSubmit<
         (options) => options
     )
     const navigate = useNavigateWithSearchState()
-    const [searchParams] = useSearchParams()
 
     return useMemo(
-        () => async (values, form, options) => {
+        () => async (values) => {
             if (!values) {
                 console.error('Tried to save new object without any changes', {
                     values,
@@ -45,16 +49,8 @@ const useOnSubmitLocale = (): EnhancedOnSubmit<
 
             const { language, country } = values
 
-            if (!language || !country) {
-                saveAlert.show({
-                    message: i18n.t('Language and country are required'),
-                    error: true,
-                })
-                return
-            }
-
             try {
-                const response = await dataEngine.mutate({
+                await dataEngine.mutate({
                     resource: 'locales/dbLocales',
                     type: 'create',
                     params: {
@@ -73,33 +69,21 @@ const useOnSubmitLocale = (): EnhancedOnSubmit<
                     queryKey: [{ resource: section.namePlural }],
                 })
 
-                const navigateTo = options?.navigateTo
-                if (navigateTo) {
-                    const navTo = navigateTo({
-                        section,
-                        submitAction: options?.submitAction,
-                        responseData: response,
-                        searchParams,
-                    })
-                    if (navTo) {
-                        navigate(navTo)
-                    }
-                } else {
-                    // Default navigation
-                    navigate(`/${getSectionPath(section)}`)
-                }
+                navigate(`/${getSectionPath(section)}`)
 
                 return
             } catch (error) {
                 return createFormError(error)
             }
         },
-        [dataEngine, queryClient, saveAlert, navigate, searchParams]
+        [dataEngine, queryClient, saveAlert, navigate]
     )
 }
 
 export const Component = () => {
     const onSubmit = useOnSubmitLocale()
+    const { setSubmitAction } = useFormBase()
+    const listPath = `/${getSectionPath(section)}`
 
     return (
         <FormBase
@@ -110,9 +94,29 @@ export const Component = () => {
             validate={validate}
             includeAttributes={false}
         >
-            <DefaultNewFormContents section={section} showSaveButton={false}>
-                <LocaleFormFields />
-            </DefaultNewFormContents>
+            {({ handleSubmit, submitting }) => {
+                return (
+                    <div className={classes.form}>
+                        <LocaleFormFields />
+                        <StandardFormSection>
+                            <DefaultFormErrorNotice />
+                        </StandardFormSection>
+                        <StandardFormActions
+                            cancelLabel={i18n.t('Exit without saving')}
+                            submitLabel={i18n.t('Create {{modelName}} ', {
+                                modelName: section.title,
+                            })}
+                            onSaveClick={undefined}
+                            onSubmitClick={() => {
+                                setSubmitAction('saveAndExit')
+                                handleSubmit()
+                            }}
+                            submitting={submitting}
+                            cancelTo={listPath}
+                        />
+                    </div>
+                )
+            }}
         </FormBase>
     )
 }
