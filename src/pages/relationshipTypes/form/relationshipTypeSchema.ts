@@ -1,6 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    PickWithFieldFilters,
+    RelationshipType,
+} from '../../../types/generated'
+import { fieldFilters } from './fieldFilters'
 
 const { identifiable, withAttributeValues } = modelFormSchemas
 
@@ -22,17 +27,17 @@ const relationshipTypeBaseSchema = z.object({
 export const relationshipTypeFormSchema = relationshipTypeBaseSchema
     .merge(identifiable)
     .merge(withAttributeValues)
-    .superRefine((data, ctx) => {
-        if (data.bidirectional && !data.toFromName?.trim()) {
-            ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: i18n.t(
-                    'Relationship name seen from receiving entity is required when bidirectional is checked'
-                ),
-                path: ['toFromName'],
-            })
-        }
+    .refine((data) => !data.bidirectional || !!data.toFromName?.trim(), {
+        message: i18n.t(
+            'Relationship name seen from receiving entity is required when bidirectional is checked'
+        ),
+        path: ['toFromName'],
     })
+
+export type RelationshipTypeFormValues = PickWithFieldFilters<
+    RelationshipType,
+    typeof fieldFilters
+>
 
 export const initialRelationshipTypeValues = getDefaults(
     relationshipTypeFormSchema

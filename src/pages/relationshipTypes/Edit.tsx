@@ -9,35 +9,18 @@ import {
     SectionedFormLayout,
 } from '../../components'
 import {
-    DEFAULT_FIELD_FILTERS,
-    ATTRIBUTE_VALUES_FIELD_FILTERS,
     SectionedFormProvider,
     SECTIONS_MAP,
     useOnSubmitEdit,
     useBoundResourceQueryFn,
 } from '../../lib'
-import { PickWithFieldFilters, RelationshipType } from '../../types/generated'
 import {
     RelationshipTypeFormDescriptor,
     RelationshipTypeFormFields,
+    RelationshipTypeFormValues,
+    fieldFilters,
     validateRelationshipType,
 } from './form'
-
-const fieldFilters = [
-    ...DEFAULT_FIELD_FILTERS,
-    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
-    'name',
-    'code',
-    'description',
-    'bidirectional',
-    'fromToName',
-    'toFromName',
-] as const
-
-export type RelationshipTypeFormValues = PickWithFieldFilters<
-    RelationshipType,
-    typeof fieldFilters
-> & { id: string }
 
 export const Component = () => {
     const section = SECTIONS_MAP.relationshipType
@@ -58,7 +41,10 @@ export const Component = () => {
 
     return (
         <FormBase
-            onSubmit={useOnSubmitEdit({ modelId, section })}
+            onSubmit={useOnSubmitEdit<RelationshipTypeFormValues>({
+                modelId,
+                section,
+            })}
             initialValues={relationshipType.data}
             validate={validateRelationshipType}
             subscription={{}}

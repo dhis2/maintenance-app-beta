@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-04T10:03:06.141Z\n"
-"PO-Revision-Date: 2025-11-04T10:03:06.141Z\n"
+"POT-Creation-Date: 2025-11-11T09:29:51.597Z\n"
+"PO-Revision-Date: 2025-11-11T09:29:51.597Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -3935,6 +3935,180 @@ msgstr "Search selected attributes"
 
 msgid "Saving a section does not save other changes to the program"
 msgstr "Saving a section does not save other changes to the program"
+
+msgid "Set up the basic information for this relationship type."
+msgstr "Set up the basic information for this relationship type."
+
+msgid "Will be shown everywhere a user sees a tracked entity type."
+msgstr "Will be shown everywhere a user sees a tracked entity type."
+
+msgid "Provide a helpful description of what this relationship is used for."
+msgstr "Provide a helpful description of what this relationship is used for."
+
+msgid "Relationship name seen from initiating side (required)"
+msgstr "Relationship name seen from initiating side (required)"
+
+msgid "Relationship name seen from receiving side (required)"
+msgstr "Relationship name seen from receiving side (required)"
+
+msgid "Relationship sides"
+msgstr "Relationship sides"
+
+msgid ""
+"Choose and configure which objects can be used as the initiating and "
+"receiving sides of the relationship."
+msgstr ""
+"Choose and configure which objects can be used as the initiating and "
+"receiving sides of the relationship."
+
+msgid "Bidirectional"
+msgstr "Bidirectional"
+
+msgid "Relationship name seen from initiating entity"
+msgstr "Relationship name seen from initiating entity"
+
+msgid "Relationship name seen from receiving entity"
+msgstr "Relationship name seen from receiving entity"
+
+msgid "Name is required"
+msgstr "Name is required"
+
+msgid "Relationship name seen from initiating entity is required"
+msgstr "Relationship name seen from initiating entity is required"
+
+msgid ""
+"Relationship name seen from receiving entity is required when bidirectional "
+"is checked"
+msgstr ""
+"Relationship name seen from receiving entity is required when bidirectional "
+"is checked"
+
+msgid "Make this attribute confidential"
+msgstr "Make this attribute confidential"
+
+msgid ""
+"Confidential tracker entity attributes are hidden from search and only "
+"supported when system encryption is enabled."
+msgstr ""
+"Confidential tracker entity attributes are hidden from search and only "
+"supported when system encryption is enabled."
+
+msgid "Format for data entry"
+msgstr "Format for data entry"
+
+msgid ""
+"Provide a formatting hint or example. This will only be shown in Android "
+"Capture app."
+msgstr ""
+"Provide a formatting hint or example. This will only be shown in Android "
+"Capture app."
+
+msgid "Will be shown everywhere a user sees a tracked entity attribute."
+msgstr "Will be shown everywhere a user sees a tracked entity attribute."
+
+msgid "Inherit data values from other tracked entities"
+msgstr "Inherit data values from other tracked entities"
+
+msgid "Data values are inherited from tracked entities linked by a relationship."
+msgstr "Data values are inherited from tracked entities linked by a relationship."
+
+msgid ""
+"Choose from a predefined list of Option sets. The Option set will "
+"automatically define the Value type."
+msgstr ""
+"Choose from a predefined list of Option sets. The Option set will "
+"automatically define the Value type."
+
+msgid "Pattern for automatically generated values"
+msgstr "Pattern for automatically generated values"
+
+msgid "Pattern must use the DHIS2 TextPattern syntax."
+msgstr "Pattern must use the DHIS2 TextPattern syntax."
+
+msgid "Tracked entity"
+msgstr "Tracked entity"
+
+msgid "Across entire system"
+msgstr "Across entire system"
+
+msgid "Per organisation unit"
+msgstr "Per organisation unit"
+
+msgid "Set up the basic information for this tracked entity attribute."
+msgstr "Set up the basic information for this tracked entity attribute."
+
+msgid ""
+"Shown as help text when collecting data, use to provide more context and "
+"information"
+msgstr ""
+"Shown as help text when collecting data, use to provide more context and "
+"information"
+
+msgid "Data collection"
+msgstr "Data collection"
+
+msgid "Configure how this tracked entity attribute's data is collected."
+msgstr "Configure how this tracked entity attribute's data is collected."
+
+msgid "Data value must be unique"
+msgstr "Data value must be unique"
+
+msgid "Automatically generate values"
+msgstr "Automatically generate values"
+
+msgid "Data handling"
+msgstr "Data handling"
+
+msgid ""
+"Configure how this tracker entity attribute's values are displayed, "
+"inherited, or synchronized across the system."
+msgstr ""
+"Configure how this tracker entity attribute's values are displayed, "
+"inherited, or synchronized across the system."
+
+msgid "Show in lists and search results even when a program is not selected"
+msgstr "Show in lists and search results even when a program is not selected"
+
+msgid "Do not synchronize this attribute and it's values"
+msgstr "Do not synchronize this attribute and it's values"
+
+msgid "Enable trigram indexing"
+msgstr "Enable trigram indexing"
+
+msgid ""
+"Improves search performance for this attribute. Available in DHIS2 v43 and "
+"above."
+msgstr ""
+"Improves search performance for this attribute. Available in DHIS2 v43 and "
+"above."
+
+msgid ""
+"Legends assigned to this tracker entity attribute are used in data analysis "
+"apps."
+msgstr ""
+"Legends assigned to this tracker entity attribute are used in data analysis "
+"apps."
+
+msgid "Tracked Entity Attribute"
+msgstr "Tracked Entity Attribute"
+
+msgid "Organisation unit scope"
+msgstr "Organisation unit scope"
+
+msgid "Generated"
+msgstr "Generated"
+
+msgid "Pattern"
+msgstr "Pattern"
+
+msgid "Confidential"
+msgstr "Confidential"
+
+msgid "Inherit"
+msgstr "Inherit"
+
+msgid "Skip synchronization"
+msgstr "Skip synchronization"
 
 msgid "No attributes selected. Please select attributes in the transfer above."
 msgstr "No attributes selected. Please select attributes in the transfer above."
