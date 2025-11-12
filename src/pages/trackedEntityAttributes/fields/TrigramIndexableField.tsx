@@ -1,13 +1,14 @@
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF, NoticeBox } from '@dhis2/ui'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 import { TooltipWrapper } from '../../../components/tooltip'
 
 export function TrigramIndexableField() {
     const { input: blockedOperatorsInput } = useField<string[]>(
-        'blockedSearchOperators'
+        'blockedSearchOperators',
+        { subscription: { value: true } }
     )
     const { input: trigramIndexableInput } = useField<boolean>(
         'trigramIndexable',
@@ -18,16 +19,21 @@ export function TrigramIndexableField() {
         { subscription: { value: true } }
     )
 
-    const blockedOperators = blockedOperatorsInput.value || []
-    const bothEwAndLikeBlocked =
-        blockedOperators.includes('EW') && blockedOperators.includes('LIKE')
+    const bothEwAndLikeBlocked = useMemo(() => {
+        const blockedOperators = blockedOperatorsInput.value || []
+        return (
+            blockedOperators.includes('EW') && blockedOperators.includes('LIKE')
+        )
+    }, [blockedOperatorsInput.value])
 
     // Disable and uncheck trigramIndexable if both EW and LIKE are blocked
-    React.useEffect(() => {
+    useEffect(() => {
         if (bothEwAndLikeBlocked && trigramIndexableInput.value) {
             trigramIndexableInput.onChange(false)
         }
-    }, [bothEwAndLikeBlocked, trigramIndexableInput])
+        // trigramIndexableInput is excluded from deps because it's not a stable reference
+        /* eslint-disable react-hooks/exhaustive-deps */
+    }, [bothEwAndLikeBlocked, trigramIndexableInput.value])
 
     // Determine infobox message
     const infoboxMessage = useMemo(() => {

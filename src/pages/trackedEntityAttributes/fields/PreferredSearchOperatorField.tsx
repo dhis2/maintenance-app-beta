@@ -19,6 +19,21 @@ export function PreferredSearchOperatorField() {
         { subscription: { value: true } }
     )
 
+    // Mark blocked operators as disabled
+    const availableOptions = React.useMemo(() => {
+        const blockedOperators = blockedOperatorsInput.value || []
+        return PREFERRED_SEARCH_OPERATOR_OPTIONS.map((option) => {
+            const isBlocked = blockedOperators.includes(option.value)
+            return {
+                ...option,
+                disabled: isBlocked,
+                label: isBlocked
+                    ? `${option.label} ${i18n.t('(blocked)')}`
+                    : option.label,
+            }
+        })
+    }, [blockedOperatorsInput.value])
+
     // Clear preferred operator if it becomes blocked
     useEffect(() => {
         const blockedOperators = blockedOperatorsInput.value || []
@@ -28,7 +43,9 @@ export function PreferredSearchOperatorField() {
         ) {
             preferredOperatorInput.onChange(undefined)
         }
-    }, [blockedOperatorsInput.value, preferredOperatorInput])
+        // preferredOperatorInput is excluded from deps because it's not a stable reference
+        /* eslint-disable react-hooks/exhaustive-deps */
+    }, [blockedOperatorsInput.value, preferredOperatorInput.value])
 
     return (
         <Field
@@ -50,7 +67,7 @@ export function PreferredSearchOperatorField() {
                 <SearchableSingleSelect
                     dataTest="formfields-preferredSearchOperator"
                     selected={preferredOperatorInput.value || ''}
-                    options={PREFERRED_SEARCH_OPERATOR_OPTIONS}
+                    options={availableOptions}
                     onChange={({ selected }: { selected: string }) => {
                         preferredOperatorInput.onChange(selected || undefined)
                     }}

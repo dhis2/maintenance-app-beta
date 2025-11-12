@@ -13,6 +13,25 @@ const BLOCKED_SEARCH_OPERATOR_OPTIONS = [
 export function BlockedSearchOperatorsField() {
     const { input: blockedOperatorsInput, meta: blockedOperatorsMeta } =
         useField<string[]>('blockedSearchOperators')
+    const { input: preferredOperatorInput } = useField<string | undefined>(
+        'preferredSearchOperator',
+        { subscription: { value: true } }
+    )
+
+    // Mark preferred operator as disabled
+    const availableOptions = React.useMemo(() => {
+        const preferredOperator = preferredOperatorInput.value
+        return BLOCKED_SEARCH_OPERATOR_OPTIONS.map((option) => {
+            const isPreferred = option.value === preferredOperator
+            return {
+                ...option,
+                disabled: isPreferred,
+                label: isPreferred
+                    ? `${option.label} ${i18n.t('(preferred)')}`
+                    : option.label,
+            }
+        })
+    }, [preferredOperatorInput.value])
 
     return (
         <Field
@@ -32,7 +51,7 @@ export function BlockedSearchOperatorsField() {
                 <SearchableMultiSelect
                     dataTest="formfields-blockedSearchOperators"
                     selected={blockedOperatorsInput.value || []}
-                    options={BLOCKED_SEARCH_OPERATOR_OPTIONS}
+                    options={availableOptions}
                     onChange={({ selected }) => {
                         blockedOperatorsInput.onChange(selected)
                         blockedOperatorsInput.onBlur()
