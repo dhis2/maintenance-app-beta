@@ -1,3 +1,18 @@
+# [0.90.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.89.1...v0.90.0) (2025-11-12)
+
+
+### Features
+
+* add overrideDefaultAvailable option to modelListViewsConfig ([#686](https://github.com/dhis2/maintenance-app-beta/issues/686)) ([aaf4f56](https://github.com/dhis2/maintenance-app-beta/commit/aaf4f56f25d1e17a15c5bc27bc7f98642392aeae))
+* locale form [DHIS2-20342] ([#690](https://github.com/dhis2/maintenance-app-beta/issues/690)) ([bedf34e](https://github.com/dhis2/maintenance-app-beta/commit/bedf34e899aa0645297f92bf137f6c27400db98e))
+
+## [0.89.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.89.0...v0.89.1) (2025-11-11)
+
+
+### Bug Fixes
+
+* remove 'Favorite' column from modelListViewsConfig ([#687](https://github.com/dhis2/maintenance-app-beta/issues/687)) ([48f8567](https://github.com/dhis2/maintenance-app-beta/commit/48f8567b02f4502fc967d28ccada361358f07e14))
+
 # [0.89.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.88.0...v0.89.0) (2025-11-05)
 
 
