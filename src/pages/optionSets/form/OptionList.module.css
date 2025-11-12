@@ -34,3 +34,7 @@
     width: 100% !important;
     padding: var(--spacers-dp16);
 }
+
+.sortDisabledWarning {
+    margin-block: var(--spacers-dp16);
+}

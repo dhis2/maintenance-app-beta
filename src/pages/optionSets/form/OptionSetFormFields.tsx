@@ -19,7 +19,7 @@ import {
     CircularLoader,
 } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState, useEffect } from 'react'
 import { useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
@@ -35,7 +35,11 @@ import {
 } from '../../../types/generated'
 import css from './OptionList.module.css'
 
-const OptionListNewOrEdit = () => {
+const OptionListNewOrEdit = ({
+    manuallyDeleted,
+}: {
+    manuallyDeleted: string
+}) => {
     const modelId = useParams().id as string
     // options cannot be added until option set is saved
     if (!modelId) {
@@ -45,7 +49,12 @@ const OptionListNewOrEdit = () => {
             </NoticeBox>
         )
     }
-    return <OptionsListSizeCheck modelId={modelId} />
+    return (
+        <OptionsListSizeCheck
+            modelId={modelId}
+            manuallyDeleted={manuallyDeleted}
+        />
+    )
     // if edit mode, check count of options
 }
 
@@ -56,7 +65,13 @@ const ErrorNotice = () => (
 )
 
 // check if there are 50 or fewer option
-const OptionsListSizeCheck = ({ modelId }: { modelId: string }) => {
+const OptionsListSizeCheck = ({
+    modelId,
+    manuallyDeleted,
+}: {
+    modelId: string
+    manuallyDeleted: string
+}) => {
     const engine = useDataEngine()
     const query = {
         result: {
@@ -80,9 +95,11 @@ const OptionsListSizeCheck = ({ modelId }: { modelId: string }) => {
     }
     if (data?.result?.options > 50) {
         return (
-            <OptionsListUnSortable
+            <OptionsListUnSortableSetup
                 modelId={modelId}
                 optionsCount={data.result.options}
+                initialOptions={[]}
+                manuallyDeleted={manuallyDeleted}
             />
         )
     }
@@ -123,7 +140,7 @@ const OptionsListSortable = ({ modelId }: { modelId: string }) => {
         </>
     )
 }
-type Option = { id: string; deleted?: boolean }
+export type Option = { id: string; deleted?: boolean }
 type OptionDetail = BaseListModel & { name: string; code: string }
 type OptionsDetails = Record<string, OptionDetail>
 
@@ -131,16 +148,18 @@ const FilterAndSort = ({
     filterValue,
     setFilterValue,
     sortOptions,
+    disableSort = false,
 }: {
     filterValue: string | undefined
     setFilterValue: (s: string | undefined) => void
     sortOptions: (property: string, desc: boolean) => void
+    disableSort?: boolean
 }) => (
     <>
         <div>
             <Input
                 className={css.identifiableSelectionFilter}
-                placeholder={i18n.t('Search by name, code or ID')}
+                placeholder={i18n.t('Search by name or code')}
                 onChange={(e) => setFilterValue(e.value)}
                 value={filterValue}
                 dense
@@ -149,30 +168,34 @@ const FilterAndSort = ({
         <div className={css.sortButtons}>
             <ButtonStrip>
                 <Button>{i18n.t('Add option')}</Button>
-                <Button
-                    disabled={!!filterValue}
-                    onClick={() => sortOptions('name', false)}
-                >
-                    {i18n.t('Sort by name (A-Z)')}
-                </Button>
-                <Button
-                    disabled={!!filterValue}
-                    onClick={() => sortOptions('name', true)}
-                >
-                    {i18n.t('Sort by name (Z-A)')}
-                </Button>
-                <Button
-                    disabled={!!filterValue}
-                    onClick={() => sortOptions('code', false)}
-                >
-                    {i18n.t('Sort by code (asc)')}
-                </Button>
-                <Button
-                    disabled={!!filterValue}
-                    onClick={() => sortOptions('code', true)}
-                >
-                    {i18n.t('Sort by code (desc)')}
-                </Button>
+                {!disableSort && (
+                    <ButtonStrip>
+                        <Button
+                            disabled={!!filterValue}
+                            onClick={() => sortOptions('name', false)}
+                        >
+                            {i18n.t('Sort by name (A-Z)')}
+                        </Button>
+                        <Button
+                            disabled={!!filterValue}
+                            onClick={() => sortOptions('name', true)}
+                        >
+                            {i18n.t('Sort by name (Z-A)')}
+                        </Button>
+                        <Button
+                            disabled={!!filterValue}
+                            onClick={() => sortOptions('code', false)}
+                        >
+                            {i18n.t('Sort by code (asc)')}
+                        </Button>
+                        <Button
+                            disabled={!!filterValue}
+                            onClick={() => sortOptions('code', true)}
+                        >
+                            {i18n.t('Sort by code (desc)')}
+                        </Button>
+                    </ButtonStrip>
+                )}
             </ButtonStrip>
         </div>
     </>
@@ -281,7 +304,7 @@ const FilterWarning = ({
     filter: string | undefined
     hiddenRowsCount: number
 }) => {
-    if (!filter) {
+    if (!filter || isNaN(hiddenRowsCount)) {
         return null
     }
     return (
@@ -337,24 +360,26 @@ const OptionRow = ({
                     </div>
                 ) : (
                     <ButtonStrip>
-                        <Button
-                            small
-                            className={css.wideButton}
-                            secondary
-                            icon={<IconArrowUp16 />}
-                            onClick={() => onMove(optionDetail.id, -1)}
-                            disabled={index === 0 || disableManualSort}
-                        />
-                        <Button
-                            small
-                            className={css.wideButton}
-                            secondary
-                            icon={<IconArrowDown16 />}
-                            onClick={() => onMove(optionDetail.id, 1)}
-                            disabled={
-                                index === totalLength - 1 || disableManualSort
-                            }
-                        />
+                        {!disableManualSort && (
+                            <ButtonStrip>
+                                <Button
+                                    small
+                                    className={css.wideButton}
+                                    secondary
+                                    icon={<IconArrowUp16 />}
+                                    onClick={() => onMove(optionDetail.id, -1)}
+                                    disabled={index === 0}
+                                />
+                                <Button
+                                    small
+                                    className={css.wideButton}
+                                    secondary
+                                    icon={<IconArrowDown16 />}
+                                    onClick={() => onMove(optionDetail.id, 1)}
+                                    disabled={index === totalLength - 1}
+                                />
+                            </ButtonStrip>
+                        )}
                         <Button
                             small
                             className={css.wideButton}
@@ -428,7 +453,6 @@ const OptionsTable = ({
         ? optionsInput.value.filter((o: Option) => {
               const lowerCaseFilter = filter.toLowerCase()
               if (
-                  o.id.toLowerCase().includes(lowerCaseFilter) ||
                   optionsDetails[o.id].code
                       .toLowerCase()
                       .includes(lowerCaseFilter) ||
@@ -448,6 +472,10 @@ const OptionsTable = ({
         (pageCount - 1) * pageSize,
         pageCount * pageSize
     )
+
+    if (optionsInput.value.length === 0) {
+        return <NoticeBox>{i18n.t('No options have been added yet')}</NoticeBox>
+    }
 
     return (
         <>
@@ -509,12 +537,37 @@ const OptionsTable = ({
     )
 }
 
-const OptionsListUnSortable = ({
+const OptionsListUnSortableSetup = ({
     modelId,
     optionsCount,
+    initialOptions,
+    manuallyDeleted,
 }: {
     modelId: string
     optionsCount: number
+    initialOptions: Option[]
+    manuallyDeleted: string
+}) => {
+    useField('options', {
+        initialValue: initialOptions,
+    })
+    return (
+        <OptionsListUnSortable
+            modelId={modelId}
+            optionsCount={optionsCount}
+            manuallyDeleted={manuallyDeleted}
+        />
+    )
+}
+
+const OptionsListUnSortable = ({
+    modelId,
+    optionsCount,
+    manuallyDeleted,
+}: {
+    modelId: string
+    optionsCount: number
+    manuallyDeleted: string
 }) => {
     const engine = useDataEngine()
     const [pageCount, setPageCount] = useState<number>(1)
@@ -570,6 +623,10 @@ const OptionsListUnSortable = ({
               ]
             : [`optionSet.id:eq:${modelId}`]
 
+    if (manuallyDeleted.length) {
+        filters.push(`id:neq:${manuallyDeleted}`)
+    }
+
     const query = {
         result: {
             resource: 'options',
@@ -604,11 +661,19 @@ const OptionsListUnSortable = ({
                 filterValue={filterValue}
                 setFilterValue={setFilterValue}
                 sortOptions={sortOptions}
+                disableSort={true}
             />
             <FilterWarning
                 filter={filterValue}
                 hiddenRowsCount={optionsCount - totalLength}
             />
+            <div className={css.sortDisabledWarning}>
+                <NoticeBox>
+                    {i18n.t(
+                        'Sort functionality is not available with more than 50 options'
+                    )}
+                </NoticeBox>
+            </div>
             <DataTable>
                 <TableHeadLayout />
                 {!data ? (
@@ -676,10 +741,14 @@ const OptionsListUnSortable = ({
     )
 }
 
-const OptionSetFormFields = () => {
+const OptionSetFormFields = ({
+    manuallyDeleted,
+}: {
+    manuallyDeleted: string
+}) => {
     return (
         <>
-            <OptionListNewOrEdit />
+            <OptionListNewOrEdit manuallyDeleted={manuallyDeleted} />
         </>
     )
 }

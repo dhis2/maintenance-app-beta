@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-04T11:48:55.401Z\n"
-"PO-Revision-Date: 2025-11-04T11:48:55.401Z\n"
+"POT-Creation-Date: 2025-11-12T08:38:38.323Z\n"
+"PO-Revision-Date: 2025-11-12T08:38:38.323Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -796,6 +796,9 @@ msgstr "Translation updated successfully"
 
 msgid "Save translations"
 msgstr "Save translations"
+
+msgid "There was an error deleting options: {{optionIds}}"
+msgstr "There was an error deleting options: {{optionIds}}"
 
 msgid "Can edit and capture"
 msgstr "Can edit and capture"
@@ -3011,6 +3014,40 @@ msgstr "Filter available options"
 
 msgid "Filter selected options"
 msgstr "Filter selected options"
+
+msgid "Option set must be saved before options can be added"
+msgstr "Option set must be saved before options can be added"
+
+msgid "Something went wrong when loading options"
+msgstr "Something went wrong when loading options"
+
+msgid "Add option"
+msgstr "Add option"
+
+msgid "Sort by name (A-Z)"
+msgstr "Sort by name (A-Z)"
+
+msgid "Sort by name (Z-A)"
+msgstr "Sort by name (Z-A)"
+
+msgid "Sort by code (asc)"
+msgstr "Sort by code (asc)"
+
+msgid "Sort by code (desc)"
+msgstr "Sort by code (desc)"
+
+msgid ""
+"{{hiddenRowsCount}} rows are hidden due to filter. Sorting is disabled "
+"while filter is defined."
+msgstr ""
+"{{hiddenRowsCount}} rows are hidden due to filter. Sorting is disabled "
+"while filter is defined."
+
+msgid "Will be removed on save"
+msgstr "Will be removed on save"
+
+msgid "Restore option"
+msgstr "Restore option"
 
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."
