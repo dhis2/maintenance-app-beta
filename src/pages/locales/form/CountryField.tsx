@@ -65,6 +65,7 @@ export function CountryField() {
     return (
         <Field
             name="country"
+            dataTest="formfields-country"
             label={i18n.t('Country')}
             required
             error={touched && !!error}

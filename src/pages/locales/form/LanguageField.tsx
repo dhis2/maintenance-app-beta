@@ -63,6 +63,7 @@ export function LanguageField() {
     return (
         <Field
             name="language"
+            dataTest="formfields-language"
             label={i18n.t('Language')}
             required
             error={touched && !!error}
