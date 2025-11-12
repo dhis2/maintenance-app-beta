@@ -3,13 +3,13 @@ import { CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field } from 'react-final-form'
 import {
+    ColorAndIconField,
     SectionedFormSection,
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
 import { useSchemaSectionHandleOrThrow, useValidator } from '../../../lib'
-import { ColorAndIconField } from '../../dataElements/fields'
 
 export const ProgramCustomizationFormContents = React.memo(
     function ProgramCustomizationFormContents({ name }: { name: string }) {
