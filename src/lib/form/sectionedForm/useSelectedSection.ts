@@ -54,10 +54,10 @@ export const useSelectedSection = (
     )
     const [selected, originalHandler] = useQueryParam(
         sectionParamKey,
-        paramConfig
-        // {
-        //     removeDefaultsFromUrl: true,
-        // }
+        paramConfig,
+        {
+            removeDefaultsFromUrl: true,
+        }
     )
     // wrap handler to provide ability to scroll to section
     const setHandler: UseSelectedSectionSetHandler = useCallback(
