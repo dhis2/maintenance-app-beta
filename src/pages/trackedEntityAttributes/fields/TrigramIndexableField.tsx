@@ -24,7 +24,7 @@ export function TrigramIndexableField() {
             blockedOperatorsInput.value?.includes('EW') &&
             blockedOperatorsInput.value?.includes('LIKE')
         )
-    }, [blockedOperatorsInput])
+    }, [blockedOperatorsInput.value])
 
     useEffect(() => {
         if (bothEwAndLikeBlocked && trigramIndexableInput.value) {
