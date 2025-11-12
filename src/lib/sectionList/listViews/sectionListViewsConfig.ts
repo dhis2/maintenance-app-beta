@@ -553,7 +553,6 @@ export const modelListViewsConfig = {
                 'href',
                 'code',
                 'id',
-                { label: i18n.t('Favorite'), path: 'favorite' },
                 { label: i18n.t('Version'), path: 'version' },
             ],
         },
@@ -652,6 +651,7 @@ export const modelListViewsConfig = {
                 { label: i18n.t('Short name'), path: 'shortName' },
                 { label: i18n.t('Version'), path: 'version' },
             ],
+            overrideDefaultAvailable: true,
         },
         filters: {
             default: ['programType'],

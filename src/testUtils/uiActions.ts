@@ -154,6 +154,11 @@ const submitForm = async (screen: RenderResult) => {
     await userEvent.click(submitButton)
 }
 
+const submitAndCloseForm = async (screen: RenderResult) => {
+    const submitButton = screen.getByTestId('form-submit-button')
+    await userEvent.click(submitButton)
+}
+
 const pickOptionInTransfer = async (
     transferTestId: string,
     optionText: string,
@@ -206,6 +211,7 @@ export const uiActions = {
     pickOptionFromSelect,
     pickOptionFromMultiSelect,
     submitForm,
+    submitAndCloseForm,
     enterInputFieldValue,
     enterName: async (text: string, screen: RenderResult) =>
         await enterInputFieldValue('name', text, screen),

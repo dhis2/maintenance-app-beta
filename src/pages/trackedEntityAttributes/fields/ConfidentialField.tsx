@@ -5,9 +5,9 @@ import { Field as FieldRFF } from 'react-final-form'
 
 export function ConfidentialField({
     encryptionEnabled,
-}: {
+}: Readonly<{
     encryptionEnabled: boolean
-}) {
+}>) {
     return (
         <FieldRFF
             component={CheckboxFieldFF}
