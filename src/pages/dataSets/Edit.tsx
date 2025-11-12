@@ -94,7 +94,7 @@ export const useOnSubmitDataSetsEdit = (modelId: string) => {
                         : values.dataEntryForm,
             } as DataSetValues
 
-            submitEdit(trimmedValues, form, options)
+            return submitEdit(trimmedValues, form, options)
         },
         [submitEdit, handleDeletions]
     )

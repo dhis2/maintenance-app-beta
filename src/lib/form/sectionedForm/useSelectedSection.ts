@@ -25,6 +25,7 @@ const defaultSetHandlerOptions: UseSelectedSectionSetHandlerOptions = {
 }
 
 export const FORM_SECTION_PARAM_KEY = 'section'
+export const FORM_SUBSECTION_PARAM_KEY = 'subsection'
 
 export const scrollToSection = (
     section: string,
@@ -38,7 +39,9 @@ export const scrollToSection = (
     )
 }
 
-export const useSelectedSection = () => {
+export const useSelectedSection = (
+    sectionParamKey = FORM_SECTION_PARAM_KEY
+) => {
     const { sections } = useSectionedFormContext()
 
     const paramConfig = useMemo(
@@ -50,11 +53,11 @@ export const useSelectedSection = () => {
         [sections]
     )
     const [selected, originalHandler] = useQueryParam(
-        FORM_SECTION_PARAM_KEY,
-        paramConfig,
-        {
-            removeDefaultsFromUrl: true,
-        }
+        sectionParamKey,
+        paramConfig
+        // {
+        //     removeDefaultsFromUrl: true,
+        // }
     )
     // wrap handler to provide ability to scroll to section
     const setHandler: UseSelectedSectionSetHandler = useCallback(
@@ -77,9 +80,11 @@ export const useSelectedSection = () => {
  * Update the selected section (in searchParams) based on the section that is in view
  * This keeps the selected section in sync with the section that is in view.
  */
-export const useSyncSelectedSectionWithScroll = () => {
+export const useSyncSelectedSectionWithScroll = (
+    sectionParamKey = FORM_SECTION_PARAM_KEY
+) => {
     const { sections } = useSectionedFormContext()
-    const [selectedSection, setSection] = useSelectedSection()
+    const [selectedSection, setSection] = useSelectedSection(sectionParamKey)
 
     useEffect(() => {
         const elem = document.getElementById(selectedSection)
