@@ -26,13 +26,6 @@ jest.mock('use-debounce', () => ({
     useDebouncedCallback: (fn: any) => fn,
 }))
 
-/* const VALUE_TYPES_OPTIONS =
-    mockSchema.properties.valueType.constants
-        ?.filter((constant) => constant !== 'MULTI_TEXT')
-        .map((constant) => ({
-            value: constant,
-            displayName: getConstantTranslation(constant),
-        })) ?? [] */
 const VALUE_TYPES_OPTIONS =
     mockSchema.properties.valueType.constants?.map((constant) => ({
         value: constant,
