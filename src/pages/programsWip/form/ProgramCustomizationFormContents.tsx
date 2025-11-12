@@ -8,10 +8,49 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
+import { useSchemaSectionHandleOrThrow, useValidator } from '../../../lib'
 import { ColorAndIconField } from '../../dataElements/fields'
 
 export const ProgramCustomizationFormContents = React.memo(
     function ProgramCustomizationFormContents({ name }: { name: string }) {
+        const schemaSection = useSchemaSectionHandleOrThrow()
+        const incidentDateLabelValidator = useValidator({
+            schemaSection,
+            property: 'incidentDateLabel',
+        })
+        const enrollmentDateLabelValidator = useValidator({
+            schemaSection,
+            property: 'enrollmentDateLabel',
+        })
+        const enrollmentLabelValidator = useValidator({
+            schemaSection,
+            property: 'enrollmentLabel',
+        })
+        const eventLabelValidator = useValidator({
+            schemaSection,
+            property: 'eventLabel',
+        })
+        const programStageLabelValidator = useValidator({
+            schemaSection,
+            property: 'programStageLabel',
+        })
+        const followUpLabelValidator = useValidator({
+            schemaSection,
+            property: 'followUpLabel',
+        })
+        const orgUnitLabelValidator = useValidator({
+            schemaSection,
+            property: 'orgUnitLabel',
+        })
+        const relationshipLabelValidator = useValidator({
+            schemaSection,
+            property: 'relationshipLabel',
+        })
+        const noteLabelValidator = useValidator({
+            schemaSection,
+            property: 'noteLabel',
+        })
+
         return (
             <SectionedFormSection name={name}>
                 <StandardFormSectionTitle>
@@ -37,6 +76,7 @@ export const ProgramCustomizationFormContents = React.memo(
                             'Used as an additional registration date for enrollments'
                         )}
                         dataTest="formfields-incidentDateLabel"
+                        validate={incidentDateLabelValidator}
                     />
                 </StandardFormField>
 
@@ -50,6 +90,7 @@ export const ProgramCustomizationFormContents = React.memo(
                             'Used as the default registration date for enrollments'
                         )}
                         dataTest="formfields-enrollmentDateLabel"
+                        validate={enrollmentDateLabelValidator}
                     />
                 </StandardFormField>
 
@@ -63,6 +104,7 @@ export const ProgramCustomizationFormContents = React.memo(
                             'Example use: See all data in this enrollment'
                         )}
                         dataTest="formfields-enrollmentLabel"
+                        validate={enrollmentLabelValidator}
                     />
                 </StandardFormField>
 
@@ -74,6 +116,7 @@ export const ProgramCustomizationFormContents = React.memo(
                         label={i18n.t('Custom label for "Event"')}
                         helpText={i18n.t('Example use: Schedule a new event')}
                         dataTest="formfields-eventLabel"
+                        validate={eventLabelValidator}
                     />
                 </StandardFormField>
 
@@ -87,6 +130,7 @@ export const ProgramCustomizationFormContents = React.memo(
                             'Example use: See all data in this program stage'
                         )}
                         dataTest="formfields-programStageLabel"
+                        validate={programStageLabelValidator}
                     />
                 </StandardFormField>
 
@@ -100,6 +144,7 @@ export const ProgramCustomizationFormContents = React.memo(
                             'Used to customize the label for follow-up events or activities'
                         )}
                         dataTest="formfields-followUpLabel"
+                        validate={followUpLabelValidator}
                     />
                 </StandardFormField>
 
@@ -113,6 +158,7 @@ export const ProgramCustomizationFormContents = React.memo(
                             'Used to customize the label for the organisation unit that registers the enrollment or event'
                         )}
                         dataTest="formfields-orgUnitLabel"
+                        validate={orgUnitLabelValidator}
                     />
                 </StandardFormField>
 
@@ -126,6 +172,7 @@ export const ProgramCustomizationFormContents = React.memo(
                             'Used to customize the label for relationships between tracked entities'
                         )}
                         dataTest="formfields-relationshipLabel"
+                        validate={relationshipLabelValidator}
                     />
                 </StandardFormField>
 
@@ -139,6 +186,7 @@ export const ProgramCustomizationFormContents = React.memo(
                             'Used to customize the label for notes or comments added to enrollments or events'
                         )}
                         dataTest="formfields-noteLabel"
+                        validate={noteLabelValidator}
                     />
                 </StandardFormField>
 

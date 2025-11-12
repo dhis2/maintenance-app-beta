@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import memoize from 'lodash/memoize'
 import { useCallback, useMemo, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
-import { Pager } from '../../types/generated'
+import { Pager } from '../../../types/generated'
 
 interface QueryResponse {
     result: {
