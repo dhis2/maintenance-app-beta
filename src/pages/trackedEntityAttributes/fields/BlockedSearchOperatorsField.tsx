@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Box, Field } from '@dhis2/ui'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useField } from 'react-final-form'
 import { SearchableMultiSelect } from '../../../components/SearchableMultiSelect'
 
@@ -18,8 +18,7 @@ export function BlockedSearchOperatorsField() {
         { subscription: { value: true } }
     )
 
-    // Mark preferred operator as disabled
-    const availableOptions = React.useMemo(() => {
+    const availableOptions = useMemo(() => {
         const preferredOperator = preferredOperatorInput.value
         return BLOCKED_SEARCH_OPERATOR_OPTIONS.map((option) => {
             const isPreferred = option.value === preferredOperator
@@ -27,7 +26,7 @@ export function BlockedSearchOperatorsField() {
                 ...option,
                 disabled: isPreferred,
                 label: isPreferred
-                    ? `${option.label} ${i18n.t('(preferred)')}`
+                    ? `${option.label} ${i18n.t('(preferred operator)')}`
                     : option.label,
             }
         })
@@ -47,7 +46,7 @@ export function BlockedSearchOperatorsField() {
                     : ''
             }
         >
-            <Box width="400px" minWidth="100px">
+            <Box width="400px">
                 <SearchableMultiSelect
                     dataTest="formfields-blockedSearchOperators"
                     selected={blockedOperatorsInput.value || []}
@@ -58,8 +57,6 @@ export function BlockedSearchOperatorsField() {
                     }}
                     onBlur={() => blockedOperatorsInput.onBlur()}
                     onFocus={() => blockedOperatorsInput.onFocus()}
-                    loading={false}
-                    showEndLoader={false}
                     onRetryClick={() => {}}
                     onFilterChange={() => {}}
                     error={

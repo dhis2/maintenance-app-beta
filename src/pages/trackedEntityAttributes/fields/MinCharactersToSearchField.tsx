@@ -1,11 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
 import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { Field as FieldRFF } from 'react-final-form'
+import { Field } from 'react-final-form'
 
 export function MinCharactersToSearchField() {
     return (
-        <FieldRFF
+        <Field
             component={InputFieldFF}
             inputWidth="200px"
             name="minCharactersToSearch"
@@ -16,13 +16,11 @@ export function MinCharactersToSearchField() {
             helpText={i18n.t(
                 'Set the minimum characters required to start a search.'
             )}
-            format={(value: unknown) =>
-                value !== undefined && value !== null ? value.toString() : ''
-            }
+            format={(value: unknown) => value?.toString()}
             parse={(value: unknown) =>
-                value !== undefined && value !== '' && value !== null
+                value !== undefined && value !== ''
                     ? Number.parseInt(value as string, 10)
-                    : 0
+                    : value
             }
         />
     )

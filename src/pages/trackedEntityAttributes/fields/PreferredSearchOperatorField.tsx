@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Box, Field } from '@dhis2/ui'
-import React, { useEffect } from 'react'
+import React, { useMemo } from 'react'
 import { useField } from 'react-final-form'
 import { SearchableSingleSelect } from '../../../components'
 
@@ -19,8 +19,7 @@ export function PreferredSearchOperatorField() {
         { subscription: { value: true } }
     )
 
-    // Mark blocked operators as disabled
-    const availableOptions = React.useMemo(() => {
+    const availableOptions = useMemo(() => {
         const blockedOperators = blockedOperatorsInput.value || []
         return PREFERRED_SEARCH_OPERATOR_OPTIONS.map((option) => {
             const isBlocked = blockedOperators.includes(option.value)
@@ -28,24 +27,11 @@ export function PreferredSearchOperatorField() {
                 ...option,
                 disabled: isBlocked,
                 label: isBlocked
-                    ? `${option.label} ${i18n.t('(blocked)')}`
+                    ? `${option.label} ${i18n.t('(blocked operator)')}`
                     : option.label,
             }
         })
     }, [blockedOperatorsInput.value])
-
-    // Clear preferred operator if it becomes blocked
-    useEffect(() => {
-        const blockedOperators = blockedOperatorsInput.value || []
-        if (
-            preferredOperatorInput.value &&
-            blockedOperators.includes(preferredOperatorInput.value)
-        ) {
-            preferredOperatorInput.onChange(undefined)
-        }
-        // preferredOperatorInput is excluded from deps because it's not a stable reference
-        /* eslint-disable react-hooks/exhaustive-deps */
-    }, [blockedOperatorsInput.value, preferredOperatorInput.value])
 
     return (
         <Field
@@ -63,7 +49,7 @@ export function PreferredSearchOperatorField() {
                     : ''
             }
         >
-            <Box width="400px" minWidth="100px">
+            <Box width="400px" minWidth="200px">
                 <SearchableSingleSelect
                     dataTest="formfields-preferredSearchOperator"
                     selected={preferredOperatorInput.value || ''}
@@ -76,13 +62,11 @@ export function PreferredSearchOperatorField() {
                     loading={false}
                     showEndLoader={false}
                     onRetryClick={() => {}}
-                    onFilterChange={() => {}}
                     invalid={
                         preferredOperatorMeta.touched &&
                         !!preferredOperatorMeta.error
                     }
                     clearable
-                    clearText={i18n.t('<No value>')}
                 />
             </Box>
         </Field>

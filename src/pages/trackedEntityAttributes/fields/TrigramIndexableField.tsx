@@ -20,13 +20,12 @@ export function TrigramIndexableField() {
     )
 
     const bothEwAndLikeBlocked = useMemo(() => {
-        const blockedOperators = blockedOperatorsInput.value || []
         return (
-            blockedOperators.includes('EW') && blockedOperators.includes('LIKE')
+            blockedOperatorsInput.value?.includes('EW') &&
+            blockedOperatorsInput.value?.includes('LIKE')
         )
-    }, [blockedOperatorsInput.value])
+    }, [blockedOperatorsInput])
 
-    // Disable and uncheck trigramIndexable if both EW and LIKE are blocked
     useEffect(() => {
         if (bothEwAndLikeBlocked && trigramIndexableInput.value) {
             trigramIndexableInput.onChange(false)
@@ -35,19 +34,20 @@ export function TrigramIndexableField() {
         /* eslint-disable react-hooks/exhaustive-deps */
     }, [bothEwAndLikeBlocked, trigramIndexableInput.value])
 
-    // Determine infobox message
     const infoboxMessage = useMemo(() => {
         if (!trigramIndexableInput.value) {
             return null
         }
 
-        return trigramIndexedInput.value === true
-            ? i18n.t(
-                  'This attribute is currently trigram indexed in the database'
-              )
-            : i18n.t(
-                  'This attribute is currently not trigram indexed in the database'
-              )
+        if (trigramIndexedInput.value === true) {
+            return i18n.t(
+                'This attribute is currently trigram indexed in the database'
+            )
+        } else {
+            return i18n.t(
+                'This attribute is currently not trigram indexed in the database'
+            )
+        }
     }, [trigramIndexableInput.value, trigramIndexedInput.value])
 
     return (
