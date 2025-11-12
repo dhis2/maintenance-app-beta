@@ -19,16 +19,22 @@ import {
 import { SECTIONS_MAP } from '../../../lib'
 import { TrackedEntityAttribute } from '../../../types/generated'
 import {
+    BlockedSearchOperatorsField,
     ConfidentialField,
     FieldMaskField,
     FormNameField,
     InheritField,
+    MinCharactersToSearchField,
     OptionSetField,
     PatternField,
-    SearchPerformanceSection,
+    PreferredSearchOperatorField,
     TrackedEntityTypeField,
+    TrigramIndexableField,
     UniqueRadioFields,
 } from '../fields'
+
+// TODO: Replace with version control
+const isTrigramIndexableAvailable = true
 
 export const TrackedEntityAttributeFormFields = ({
     basicSectionName,
@@ -228,7 +234,19 @@ export const TrackedEntityAttributeFormFields = ({
                     )}
                 </StandardFormSectionDescription>
 
-                <SearchPerformanceSection />
+                <StandardFormField>
+                    <PreferredSearchOperatorField />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <BlockedSearchOperatorsField />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <MinCharactersToSearchField />
+                </StandardFormField>
+
+                {isTrigramIndexableAvailable && <TrigramIndexableField />}
             </SectionedFormSection>
 
             <SectionedFormSection name={legendsSectionName}>
