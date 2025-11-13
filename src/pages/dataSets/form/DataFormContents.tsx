@@ -27,11 +27,11 @@ export const DataFormContents = React.memo(function DataFormContents({
                 <DataSetElementsModelTransferField />
             </StandardFormField>
             <StandardFormSectionTitle>
-                {i18n.t('Data set disaggregation')}
+                {i18n.t('Data set attribution')}
             </StandardFormSectionTitle>
             <StandardFormSectionDescription>
                 {i18n.t(
-                    'Choose an optional category combination to disaggregate the entire data set.'
+                    'Choose an optional attribute category combination to assign a data dimension for the entire data set.'
                 )}
             </StandardFormSectionDescription>
             <StandardFormField>

@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import {
+    CheckboxField,
     CheckboxFieldFF,
     Field,
     SingleSelectFieldFF,
@@ -149,6 +150,7 @@ export const EnrollmentDataFormContents = React.memo(
                                     attribute.trackedEntityAttribute
                                         .displayName,
                                 valueType: attribute.valueType,
+                                unique: attribute.trackedEntityAttribute.unique,
                             }))}
                             onChange={({ selected }) => {
                                 input.onChange(
@@ -180,6 +182,7 @@ export const EnrollmentDataFormContents = React.memo(
                                                           s.displayName,
                                                   },
                                                   valueType: s.valueType,
+                                                  unique: s.unique,
                                                   allowFutureDate: false,
                                                   mandatory: false,
                                                   searchable: false,
@@ -202,7 +205,12 @@ export const EnrollmentDataFormContents = React.memo(
                             query={{
                                 resource: 'trackedEntityAttributes',
                                 params: {
-                                    fields: ['id', 'displayName', 'valueType'],
+                                    fields: [
+                                        'id',
+                                        'displayName',
+                                        'valueType',
+                                        'unique',
+                                    ],
                                 },
                             }}
                         />
@@ -274,11 +282,26 @@ export const EnrollmentDataFormContents = React.memo(
                                             />
                                         </TableCell>
                                         <TableCell>
-                                            <FieldRFF
-                                                component={CheckboxFieldFF}
-                                                name={`programTrackedEntityAttributes[${index}].searchable`}
-                                                type="checkbox"
-                                            />
+                                            {attribute.trackedEntityAttribute
+                                                .unique ? (
+                                                <CheckboxField
+                                                    name="searchable"
+                                                    checked
+                                                    disabled
+                                                />
+                                            ) : (
+                                                <FieldRFF
+                                                    component={CheckboxFieldFF}
+                                                    name={`programTrackedEntityAttributes[${index}].searchable`}
+                                                    type="checkbox"
+                                                    disabled={
+                                                        attribute
+                                                            .trackedEntityAttribute
+                                                            .unique
+                                                    }
+                                                    checked={true}
+                                                />
+                                            )}
                                         </TableCell>
                                         <TableCell>
                                             <FieldRFF

@@ -20,17 +20,18 @@ export const generateRenderer =
         {
             section,
             mockSchema,
-        }: { section: ModelSection; mockSchema: Record<any, any> },
+        }: { section: ModelSection; mockSchema?: Record<any, any> },
         renderer: (routeOptions?: any, renderOptions?: Record<any, any>) => any
     ) =>
     async (renderOptions?: Record<any, any>) => {
         const routeOptions = {
             handle: { section },
         }
-        useSchemaStore.getState().setSchemas({
-            [section.name]: mockSchema,
-        } as unknown as ModelSchemas)
-
+        if (mockSchema !== undefined) {
+            useSchemaStore.getState().setSchemas({
+                [section.name]: mockSchema,
+            } as unknown as ModelSchemas)
+        }
         useCurrentUserStore.getState().setCurrentUser({
             organisationUnits: [testOrgUnit()] as OrganisationUnit[],
             authorities: new Set(),
@@ -40,8 +41,10 @@ export const generateRenderer =
         })
 
         const { screen, ...rest } = renderer(routeOptions, renderOptions)
-        await waitForElementToBeRemoved(() =>
-            screen.queryAllByTestId('dhis2-uicore-circularloader')
-        )
+        if (mockSchema !== undefined) {
+            await waitForElementToBeRemoved(() =>
+                screen.queryAllByTestId('dhis2-uicore-circularloader')
+            )
+        }
         return { screen, ...rest }
     }

@@ -55,6 +55,7 @@ const DESCRIPTORS = {
         label: i18n.t('Short name'),
     },
     formName: { label: i18n.t('Form name'), path: 'displayFormName' },
+    owner: { label: i18n.t('Owner'), path: 'user.displayName' },
 } satisfies Record<string, Descriptor>
 
 // This is the default views, and can be overriden per section in modelListViewsConfig below
@@ -70,6 +71,7 @@ export const defaultModelViewConfig = {
             'lastUpdatedBy',
             'lastUpdated',
             DESCRIPTORS.publicAccess,
+            DESCRIPTORS.owner,
         ],
         default: [DESCRIPTORS.name, DESCRIPTORS.publicAccess, 'lastUpdated'],
     },
@@ -182,7 +184,6 @@ export const modelListViewsConfig = {
                     label: i18n.t('Notify users in hierarchy only'),
                     path: 'notifyUsersInHierarchyOnly',
                 },
-                { label: i18n.t('Owner'), path: 'user.displayName' },
                 {
                     label: i18n.t('Relative scheduled days'),
                     path: 'relativeScheduledDays',
@@ -286,12 +287,7 @@ export const modelListViewsConfig = {
     },
     optionGroup: {
         columns: {
-            available: [
-                DESCRIPTORS.shortName,
-                'description',
-                'favorite',
-                { label: i18n.t('Owner'), path: 'user.displayName' },
-            ],
+            available: [DESCRIPTORS.shortName, 'description', 'favorite'],
             default: [
                 DESCRIPTORS.name,
                 DESCRIPTORS.publicAccess,
@@ -347,10 +343,7 @@ export const modelListViewsConfig = {
                 'lastUpdated',
                 'indicatorGroupSet',
             ],
-            available: [
-                { label: i18n.t('Owner'), path: 'user.displayName' },
-                'favorite',
-            ],
+            available: ['favorite'],
         },
         filters: {
             default: ['indicator', 'indicatorGroupSet'],
@@ -364,11 +357,7 @@ export const modelListViewsConfig = {
                 DESCRIPTORS.publicAccess,
                 'lastUpdated',
             ],
-            available: [
-                DESCRIPTORS.shortName,
-                { label: i18n.t('Owner'), path: 'user.displayName' },
-                'favorite',
-            ],
+            available: [DESCRIPTORS.shortName, 'favorite'],
         },
         filters: {
             default: ['indicatorGroup'],
@@ -432,10 +421,7 @@ export const modelListViewsConfig = {
     },
     programIndicatorGroup: {
         columns: {
-            available: [
-                { label: i18n.t('Owner'), path: 'user.displayName' },
-                'favorite',
-            ],
+            available: ['favorite'],
         },
         filters: {
             default: ['programIndicator'],
@@ -458,7 +444,6 @@ export const modelListViewsConfig = {
                 { label: i18n.t('Description'), path: 'displayDescription' },
                 DESCRIPTORS.formName,
                 DESCRIPTORS.shortName,
-                { label: i18n.t('Owner'), path: 'user.displayName' },
                 { label: i18n.t('Decimals in data output'), path: 'decimals' },
                 'favorite',
                 'aggregationType',
@@ -504,7 +489,6 @@ export const modelListViewsConfig = {
                 'maxTeiCountToReturn',
                 'minAttributesRequiredToSearch',
                 DESCRIPTORS.shortName,
-                'user',
             ],
         },
         filters: {
@@ -553,7 +537,6 @@ export const modelListViewsConfig = {
                 DESCRIPTORS.formName,
                 DESCRIPTORS.shortName,
                 { label: i18n.t('Favorite'), path: 'favorite' },
-                { label: i18n.t('Owner'), path: 'user.displayName' },
             ],
         },
         filters: {},
@@ -570,9 +553,7 @@ export const modelListViewsConfig = {
                 'href',
                 'code',
                 'id',
-                { label: i18n.t('Favorite'), path: 'favorite' },
                 { label: i18n.t('Version'), path: 'version' },
-                { label: i18n.t('Owner'), path: 'user.displayName' },
             ],
         },
         filters: {},
@@ -590,7 +571,6 @@ export const modelListViewsConfig = {
                 'href',
                 'lastUpdatedBy',
                 { label: i18n.t('Favorite'), path: 'favorite' },
-                { label: i18n.t('Owner'), path: 'user.displayName' },
             ],
         },
         filters: {},
@@ -610,7 +590,6 @@ export const modelListViewsConfig = {
                 'created',
                 'lastUpdatedBy',
                 { label: i18n.t('Favorite'), path: 'favorite' },
-                { label: i18n.t('Owner'), path: 'user.displayName' },
             ],
         },
         filters: {},
@@ -640,7 +619,6 @@ export const modelListViewsConfig = {
                 'lastUpdatedBy',
                 DESCRIPTORS.name,
                 { label: i18n.t('Favorite'), path: 'favorite' },
-                { label: i18n.t('Owner'), path: 'user.displayName' },
             ],
         },
         filters: {},
@@ -670,10 +648,10 @@ export const modelListViewsConfig = {
                 { label: i18n.t('Form name'), path: 'formName' },
                 'id',
                 'lastUpdated',
-                { label: i18n.t('Owner'), path: 'user.displayName' },
                 { label: i18n.t('Short name'), path: 'shortName' },
                 { label: i18n.t('Version'), path: 'version' },
             ],
+            overrideDefaultAvailable: true,
         },
         filters: {
             default: ['programType'],
@@ -843,10 +821,7 @@ export const modelListViewsConfig = {
                 DESCRIPTORS.publicAccess,
                 'lastUpdated',
             ],
-            available: [
-                { label: i18n.t('Favorite'), path: 'favorite' },
-                { label: i18n.t('Owner'), path: 'user.displayName' },
-            ],
+            available: [{ label: i18n.t('Favorite'), path: 'favorite' }],
         },
         filters: {},
     },

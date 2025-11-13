@@ -1,7 +1,7 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import { useMemo } from 'react'
 import { Attribute, PickWithFieldFilters } from '../../../types/generated'
-import { useSchemaSectionHandleOrThrow } from '../../routeUtils'
+import { useSectionHandle } from '../../routeUtils'
 
 const attributeFields = [
     'id',
@@ -39,13 +39,13 @@ type UseCustomAttributesQueryOptions = {
 export function useCustomAttributesQuery({
     enabled = true,
 }: UseCustomAttributesQueryOptions = {}) {
-    const schemaSection = useSchemaSectionHandleOrThrow()
+    const schemaSection = useSectionHandle()
 
     const customAttributes = useDataQuery<QueryResponse>(
         CUSTOM_ATTRIBUTES_QUERY,
         {
             lazy: !enabled,
-            variables: { modelName: schemaSection.name },
+            variables: { modelName: schemaSection?.name },
         }
     )
 
