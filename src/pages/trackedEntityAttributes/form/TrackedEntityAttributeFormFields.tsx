@@ -33,7 +33,7 @@ import {
     UniqueRadioFields,
 } from '../fields'
 
-// TODO: Replace with version control
+// Replace with version control
 const isTrigramIndexableAvailable = true
 
 export const TrackedEntityAttributeFormFields = ({
