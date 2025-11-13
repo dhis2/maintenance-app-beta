@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import React, { useEffect, useMemo } from 'react'
-import { useField, useFormState } from 'react-final-form'
+import { useField, useFormState, useForm } from 'react-final-form'
 import { useHref } from 'react-router'
 import { StandardFormField, EditableFieldWrapper } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
@@ -28,6 +28,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
     const { input: dataElementsInput } = useField(
         `${prefix}Constraint.dataElements`
     )
+    const form = useForm()
     const newProgramLink = useHref('/programs/new')
     const refresh = useRefreshModelSingleSelect({ resource: 'programs' })
 
@@ -98,12 +99,11 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
         if (!visible && programInput.value) {
             programInput.onChange(undefined)
             // Also clear validation state when field becomes hidden
-            const form = programInput.meta.form
             if (form) {
                 form.mutators?.setFieldTouched?.(programName, false)
             }
         }
-    }, [visible, programInput, programName])
+    }, [visible, programInput, form, programName])
 
     if (!visible) {
         return null

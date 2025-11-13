@@ -1,10 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
-import { useQuery } from '@tanstack/react-query'
 import React, { useEffect, useMemo } from 'react'
 import { useFormState, useForm } from 'react-final-form'
 import { StandardFormField, ModelTransferField } from '../../../components'
-import { useBoundResourceQueryFn } from '../../../lib'
-import { DisplayableModel } from '../../../types/models'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
 export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
@@ -21,35 +18,29 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
         !!program?.id &&
         !!programStage?.id
 
-    const queryFn = useBoundResourceQueryFn()
-
-    const programStageQuery = useMemo(
-        () => ({
-            resource: 'programStages',
-            id: programStage?.id,
-            params: {
-                fields: [
-                    'programStageDataElements[dataElement[id,displayName]]',
-                ],
-            },
-        }),
-        [programStage?.id]
-    )
-
-    const { data } = useQuery({
-        queryKey: [programStageQuery] as const,
-        queryFn: queryFn<{
-            programStageDataElements?: Array<{ dataElement: DisplayableModel }>
-        }>,
-        enabled: visible && !!programStage?.id,
-    })
-
-    const availableDataElements = useMemo(() => {
-        if (!data?.programStageDataElements) {
-            return []
+    const query = useMemo(() => {
+        if (!visible || !programStage?.id) {
+            return {
+                resource: 'dataElements',
+                params: {
+                    filter: [],
+                    fields: ['id', 'displayName'],
+                    order: 'displayName:iasc',
+                },
+            }
         }
-        return data.programStageDataElements.map((psde) => psde.dataElement)
-    }, [data])
+
+        return {
+            resource: 'dataElements',
+            params: {
+                filter: [
+                    `programStageDataElements.programStage.id:eq:${programStage.id}`,
+                ],
+                fields: ['id', 'displayName'],
+                order: 'displayName:iasc',
+            },
+        }
+    }, [visible, programStage?.id])
 
     const form = useForm()
 
@@ -67,8 +58,6 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
         return null
     }
 
-    const dataElementIds = availableDataElements.map((de) => de.id).join(',')
-
     return (
         <StandardFormField>
             <div style={{ marginBottom: '8px' }}>
@@ -78,16 +67,7 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
             </div>
             <ModelTransferField
                 name={dataElementsName}
-                query={{
-                    resource: 'dataElements',
-                    params: {
-                        fields: ['id', 'displayName'],
-                        ...(dataElementIds
-                            ? { filter: [`id:in:[${dataElementIds}]`] }
-                            : {}),
-                        order: 'displayName:iasc',
-                    },
-                }}
+                query={query}
                 leftHeader={i18n.t('Available data elements')}
                 rightHeader={i18n.t('Selected data elements')}
                 filterPlaceholder={i18n.t('Search available data elements')}
