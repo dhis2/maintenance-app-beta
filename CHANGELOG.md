@@ -1,3 +1,10 @@
+# [0.92.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.91.1...v0.92.0) (2025-11-13)
+
+
+### Features
+
+* use org unit tree w selectors in category option ([#698](https://github.com/dhis2/maintenance-app-beta/issues/698)) ([33e3c34](https://github.com/dhis2/maintenance-app-beta/commit/33e3c34391d019966a163505f69fe72472f0f984))
+
 ## [0.91.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.91.0...v0.91.1) (2025-11-13)
 
 
