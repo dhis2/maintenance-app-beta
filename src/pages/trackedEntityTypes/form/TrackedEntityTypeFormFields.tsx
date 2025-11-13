@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import {
+    ColorAndIconField,
     StandardFormField,
     StandardFormSectionTitle,
     StandardFormSectionDescription,
@@ -17,7 +18,6 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
-import { ColorAndIconField } from '../../dataElements/fields'
 import {
     AttributesTransferField,
     AttributesConfigurationField,
