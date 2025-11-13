@@ -81,7 +81,7 @@ export function AttributesTransferField() {
                 query={{
                     resource: 'trackedEntityAttributes',
                     params: {
-                        fields: ['id', 'displayName', 'valueType'],
+                        fields: ['id', 'displayName', 'valueType', 'unique'],
                         order: 'displayName:asc',
                     },
                 }}

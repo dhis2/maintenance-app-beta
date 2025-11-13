@@ -1,12 +1,12 @@
 import i18n from '@dhis2/d2-i18n'
 import {
     Checkbox,
-    DataTable,
-    DataTableCell,
-    DataTableColumnHeader,
-    DataTableRow,
+    Table,
     TableBody,
+    TableCell,
+    TableCellHead,
     TableHead,
+    TableRow,
 } from '@dhis2/ui'
 import React from 'react'
 import { useField } from 'react-final-form'
@@ -22,6 +22,7 @@ type TrackedEntityTypeAttribute = {
     trackedEntityAttribute: {
         id: string
         displayName: string
+        unique: boolean
     }
 }
 
@@ -68,42 +69,24 @@ export function AttributesConfigurationField() {
                 )}
             </StandardFormSectionDescription>
 
-            <DataTable data-test="formfields-attributes-configuration">
+            <Table data-test="formfields-attributes-configuration">
                 <TableHead>
-                    <DataTableRow>
-                        <DataTableColumnHeader>
-                            {i18n.t('Attribute name')}
-                        </DataTableColumnHeader>
-                        <DataTableColumnHeader>
-                            {i18n.t('Searchable')}
-                        </DataTableColumnHeader>
-                        <DataTableColumnHeader>
-                            {i18n.t('Mandatory')}
-                        </DataTableColumnHeader>
-                        <DataTableColumnHeader>
+                    <TableRow>
+                        <TableCellHead>{i18n.t('Name')}</TableCellHead>
+                        <TableCellHead>{i18n.t('Required')}</TableCellHead>
+                        <TableCellHead>{i18n.t('Searchable')}</TableCellHead>
+                        <TableCellHead>
                             {i18n.t('Display in list')}
-                        </DataTableColumnHeader>
-                    </DataTableRow>
+                        </TableCellHead>
+                    </TableRow>
                 </TableHead>
                 <TableBody>
                     {attributes.map((attr, index) => (
-                        <DataTableRow key={attr.trackedEntityAttribute.id}>
-                            <DataTableCell>
+                        <TableRow key={attr.trackedEntityAttribute.id}>
+                            <TableCell>
                                 {attr.trackedEntityAttribute.displayName}
-                            </DataTableCell>
-                            <DataTableCell>
-                                <Checkbox
-                                    checked={attr.searchable}
-                                    onChange={({ checked }) =>
-                                        updateAttribute(
-                                            index,
-                                            'searchable',
-                                            checked
-                                        )
-                                    }
-                                />
-                            </DataTableCell>
-                            <DataTableCell>
+                            </TableCell>
+                            <TableCell>
                                 <Checkbox
                                     checked={attr.mandatory}
                                     onChange={({ checked }) =>
@@ -114,8 +97,26 @@ export function AttributesConfigurationField() {
                                         )
                                     }
                                 />
-                            </DataTableCell>
-                            <DataTableCell>
+                            </TableCell>
+                            <TableCell>
+                                <Checkbox
+                                    checked={
+                                        attr.searchable ||
+                                        attr.trackedEntityAttribute.unique
+                                    }
+                                    onChange={({ checked }) =>
+                                        updateAttribute(
+                                            index,
+                                            'searchable',
+                                            checked
+                                        )
+                                    }
+                                    disabled={
+                                        attr.trackedEntityAttribute.unique
+                                    }
+                                />
+                            </TableCell>
+                            <TableCell>
                                 <Checkbox
                                     checked={attr.displayInList}
                                     onChange={({ checked }) =>
@@ -126,11 +127,11 @@ export function AttributesConfigurationField() {
                                         )
                                     }
                                 />
-                            </DataTableCell>
-                        </DataTableRow>
+                            </TableCell>
+                        </TableRow>
                     ))}
                 </TableBody>
-            </DataTable>
+            </Table>
         </>
     )
 }
