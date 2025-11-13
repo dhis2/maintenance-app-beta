@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
-import React from 'react'
-import { Field, useFormState } from 'react-final-form'
+import React, { useEffect } from 'react'
+import { Field, useFormState, useForm } from 'react-final-form'
 import {
     StandardFormField,
     StandardFormSectionTitle,
@@ -30,6 +30,16 @@ export function RelationshipTypeFormFields() {
         subscription: { values: true },
     }).values
     const bidirectional = formValues.bidirectional
+    const form = useForm()
+
+    useEffect(() => {
+        if (!bidirectional && form) {
+            const toFromNameValue = form.getFieldState('toFromName')?.value
+            if (toFromNameValue) {
+                form.change('toFromName', undefined)
+            }
+        }
+    }, [bidirectional, form])
 
     return (
         <SectionedFormSections>
@@ -83,7 +93,7 @@ export function RelationshipTypeFormFields() {
                         component={InputFieldFF}
                         name="fromToName"
                         label={i18n.t(
-                            'Relationship name seen from initiating side (required)'
+                            'Relationship name seen from initiating entity'
                         )}
                         required
                         inputWidth="400px"
@@ -97,7 +107,7 @@ export function RelationshipTypeFormFields() {
                             component={InputFieldFF}
                             name="toFromName"
                             label={i18n.t(
-                                'Relationship name seen from receiving side (required)'
+                                'Relationship name seen from receiving entity'
                             )}
                             required
                             inputWidth="400px"
