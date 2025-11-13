@@ -1,3 +1,10 @@
+# [0.91.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.90.0...v0.91.0) (2025-11-13)
+
+
+### Features
+
+* implement option set form with validation and initial value ([#688](https://github.com/dhis2/maintenance-app-beta/issues/688)) ([c732558](https://github.com/dhis2/maintenance-app-beta/commit/c732558c0dc9fa6fb4e0f4660413ebff70121cec))
+
 # [0.90.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.89.1...v0.90.0) (2025-11-12)
 
 
