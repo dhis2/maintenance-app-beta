@@ -57,23 +57,6 @@ export const trackedEntityAttributeFormSchema = trackedEntityAttributeBaseSchema
         name: z.string().trim(),
     })
     .merge(withAttributeValues)
-    .refine(
-        (data) => {
-            if (
-                data.preferredSearchOperator &&
-                data.blockedSearchOperators.includes(
-                    data.preferredSearchOperator as 'SW' | 'EW' | 'LIKE'
-                )
-            ) {
-                return false
-            }
-            return true
-        },
-        {
-            message: 'The preferred search operator cannot be blocked',
-            path: ['preferredSearchOperator'],
-        }
-    )
 
 export const initialValues = getDefaults(trackedEntityAttributeFormSchema)
 
