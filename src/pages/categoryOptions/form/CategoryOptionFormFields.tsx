@@ -6,7 +6,7 @@ import {
     CustomAttributesSection,
     DefaultIdentifiableFields,
     DescriptionField,
-    OrganisationUnitField,
+    OrganisationUnitTreeWithToolbarFormField,
     StandardFormField,
     StandardFormSection,
     StandardFormSectionDescription,
@@ -66,7 +66,7 @@ export const CategoryOptionFormFields = () => {
                 </StandardFormField>
 
                 <StandardFormField>
-                    <OrganisationUnitField />
+                    <OrganisationUnitTreeWithToolbarFormField />
                 </StandardFormField>
             </StandardFormSection>
 

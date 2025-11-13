@@ -8,6 +8,7 @@ import {
     url,
     Validator,
 } from '@dhis2/ui'
+import { VALUE_TYPE } from '../../constants'
 import { ValueType } from './types'
 
 const isEmpty = (value: unknown) =>
@@ -99,3 +100,9 @@ export const getInititalValueForValueType = (type: ValueType) => {
     }
     return ''
 }
+
+export const getValueTypeOptions = (): { value: ValueType; label: string }[] =>
+    Object.entries(VALUE_TYPE).map(([value, label]) => ({
+        value: value as ValueType,
+        label,
+    }))

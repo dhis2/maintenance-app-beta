@@ -33,7 +33,7 @@ import css from './OptionList.module.css'
 
 const MAXIMUM_OPTIONS = 500
 
-const OptionListNewOrEdit = ({
+export const OptionListNewOrEdit = ({
     manuallyDeleted,
 }: {
     manuallyDeleted: string
@@ -739,17 +739,3 @@ const OptionsListUnSortable = ({
         </>
     )
 }
-
-const OptionSetFormFields = ({
-    manuallyDeleted,
-}: {
-    manuallyDeleted: string
-}) => {
-    return (
-        <>
-            <OptionListNewOrEdit manuallyDeleted={manuallyDeleted} />
-        </>
-    )
-}
-
-export default OptionSetFormFields

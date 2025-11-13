@@ -34,7 +34,7 @@ const fieldFilters = [
     'minAttributesRequiredToSearch',
     'maxTeiCountToReturn',
     'featureType',
-    'trackedEntityTypeAttributes[trackedEntityAttribute[id,displayName],mandatory,searchable,displayInList]',
+    'trackedEntityTypeAttributes[trackedEntityAttribute[id,displayName,unique],mandatory,searchable,displayInList]',
 ] as const
 
 export type TrackedEntityTypeFormValues = PickWithFieldFilters<
