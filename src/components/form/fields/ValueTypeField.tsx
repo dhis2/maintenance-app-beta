@@ -19,9 +19,9 @@ const valueTypeDisabledHelpText = i18n.t(
 
 export function ValueTypeField({
     disabled: externallyDisabled = false,
-}: {
+}: Readonly<{
     disabled?: boolean
-}) {
+}>) {
     const { values } = useFormState({ subscription: { values: true } })
     const disabled = !!values.optionSet?.id || externallyDisabled
     const schemaSection = useSchemaSectionHandleOrThrow()
