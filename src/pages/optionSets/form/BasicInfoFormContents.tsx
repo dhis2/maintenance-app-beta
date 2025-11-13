@@ -1,7 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { useField, useFormState } from 'react-final-form'
+import { useFormState } from 'react-final-form'
 import {
     SectionedFormSection,
     StandardFormSectionTitle,
@@ -10,25 +9,21 @@ import {
     NameField,
     CodeField,
     DescriptionField,
+    ValueTypeField,
 } from '../../../components'
-import {
-    getValueTypeOptions,
-    useSchemaSectionHandleOrThrow,
-} from '../../../lib'
+import { useSchemaSectionHandleOrThrow } from '../../../lib'
 
 export const BasicInfoFormContents = React.memo(
     function OptionSetSetupFormContents({ name }: { name: string }) {
         const schemaSection = useSchemaSectionHandleOrThrow()
         const { values } = useFormState({ subscription: { values: true } })
-        const { input: valueTypeInput, meta: valueTypeMeta } =
-            useField('valueType')
 
         const isEdit = Boolean(values.id)
 
         return (
             <SectionedFormSection name={name}>
                 <StandardFormSectionTitle>
-                    {i18n.t('Option Set Details')}
+                    {i18n.t('Basic Information')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
@@ -49,16 +44,7 @@ export const BasicInfoFormContents = React.memo(
                 </StandardFormField>
 
                 <StandardFormField>
-                    <SingleSelectFieldFF
-                        label={i18n.t('Value type')}
-                        name="valueType"
-                        options={getValueTypeOptions()}
-                        input={valueTypeInput}
-                        meta={valueTypeMeta}
-                        inputWidth="400px"
-                        disabled={isEdit}
-                        dataTest="formfields-valuetype"
-                    />
+                    <ValueTypeField disabled={isEdit} />
                 </StandardFormField>
             </SectionedFormSection>
         )

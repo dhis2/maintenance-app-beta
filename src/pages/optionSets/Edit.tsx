@@ -26,6 +26,7 @@ const fieldFilters = [
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
     'displayName',
+    'description',
     'code',
     'valueType',
     'options[id,code,displayName,sortOrder,style]',

@@ -1,6 +1,10 @@
 import React from 'react'
-import { SectionedFormSections } from '../../../components'
 import {
+    CustomAttributesSection,
+    SectionedFormSections,
+} from '../../../components'
+import {
+    SECTIONS_MAP,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
@@ -15,6 +19,10 @@ export const OptionSetFormContents = () => {
         <SectionedFormSections>
             <BasicInfoFormContents
                 name={descriptor.getSection('basicInfo').name}
+            />
+            <CustomAttributesSection
+                schemaSection={SECTIONS_MAP.optionSet}
+                sectionedLayout
             />
         </SectionedFormSections>
     )

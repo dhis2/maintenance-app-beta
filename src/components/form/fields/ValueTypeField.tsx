@@ -17,9 +17,13 @@ const valueTypeDisabledHelpText = i18n.t(
     'Disabled as the value type must match the value type of the selected option set.'
 )
 
-export function ValueTypeField() {
+export function ValueTypeField({
+    disabled: externallyDisabled = false,
+}: {
+    disabled?: boolean
+}) {
     const { values } = useFormState({ subscription: { values: true } })
-    const disabled = !!values.optionSet?.id
+    const disabled = !!values.optionSet?.id || externallyDisabled
     const schemaSection = useSchemaSectionHandleOrThrow()
     const schema = useSchema(schemaSection.name)
     const isEdit = !!useParams().id
@@ -83,7 +87,7 @@ export function ValueTypeField() {
         input.onBlur()
     }
 
-    if (isEdit) {
+    if (isEdit && !externallyDisabled) {
         return (
             <ConfirmationModalWrapper
                 onChange={handleChange}
