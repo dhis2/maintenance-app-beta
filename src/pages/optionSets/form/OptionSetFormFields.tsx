@@ -19,7 +19,7 @@ import {
     CircularLoader,
 } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
-import React, { useCallback, useMemo, useState, useEffect } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
@@ -29,11 +29,9 @@ import {
 } from '../../../components'
 import { TranslationDialog } from '../../../components/sectionList/translation'
 import { SchemaName, BaseListModel } from '../../../lib'
-import {
-    PickWithFieldFilters,
-    Option as OptionGenerated,
-} from '../../../types/generated'
 import css from './OptionList.module.css'
+
+const MAXIMUM_OPTIONS = 500
 
 const OptionListNewOrEdit = ({
     manuallyDeleted,
@@ -64,7 +62,7 @@ const ErrorNotice = () => (
     </NoticeBox>
 )
 
-// check if there are 50 or fewer option
+// check if there are MAXIMUM_OPTIONS or fewer option
 const OptionsListSizeCheck = ({
     modelId,
     manuallyDeleted,
@@ -93,7 +91,7 @@ const OptionsListSizeCheck = ({
     if (!data) {
         return null
     }
-    if (data?.result?.options > 50) {
+    if (data?.result?.options > MAXIMUM_OPTIONS) {
         return (
             <OptionsListUnSortableSetup
                 modelId={modelId}
@@ -470,7 +468,7 @@ const OptionsTable = ({
 
     const displayOptions = filteredOptions.splice(
         (pageCount - 1) * pageSize,
-        pageCount * pageSize
+        pageSize
     )
 
     if (optionsInput.value.length === 0) {
@@ -670,7 +668,8 @@ const OptionsListUnSortable = ({
             <div className={css.sortDisabledWarning}>
                 <NoticeBox>
                     {i18n.t(
-                        'Sort functionality is not available with more than 50 options'
+                        'Sort functionality is not available with more than {{maximumNumberOfOptions}} options',
+                        { maximumNumberOfOptions: MAXIMUM_OPTIONS }
                     )}
                 </NoticeBox>
             </div>
