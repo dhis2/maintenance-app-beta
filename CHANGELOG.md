@@ -1,3 +1,10 @@
+## [0.91.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.91.0...v0.91.1) (2025-11-13)
+
+
+### Bug Fixes
+
+* attributes fixes ([#696](https://github.com/dhis2/maintenance-app-beta/issues/696)) ([3feae74](https://github.com/dhis2/maintenance-app-beta/commit/3feae743e8d613b54ef23e1861bb5a59b94d4db5))
+
 # [0.91.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.90.0...v0.91.0) (2025-11-13)
 
 
