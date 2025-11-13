@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-11T09:29:51.597Z\n"
-"PO-Revision-Date: 2025-11-11T09:29:51.597Z\n"
+"POT-Creation-Date: 2025-11-13T16:49:25.671Z\n"
+"PO-Revision-Date: 2025-11-13T16:49:25.671Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -3936,6 +3936,15 @@ msgstr "Search selected attributes"
 msgid "Saving a section does not save other changes to the program"
 msgstr "Saving a section does not save other changes to the program"
 
+msgid "Data elements to display in list"
+msgstr "Data elements to display in list"
+
+msgid "Available tracked entity attributes"
+msgstr "Available tracked entity attributes"
+
+msgid "Selected tracked entity attributes"
+msgstr "Selected tracked entity attributes"
+
 msgid "Set up the basic information for this relationship type."
 msgstr "Set up the basic information for this relationship type."
 
@@ -4125,12 +4134,6 @@ msgstr ""
 
 msgid "Attribute name"
 msgstr "Attribute name"
-
-msgid "Available tracked entity attributes"
-msgstr "Available tracked entity attributes"
-
-msgid "Selected tracked entity attributes"
-msgstr "Selected tracked entity attributes"
 
 msgid "Maximum number of tracked entity instances to return when searching"
 msgstr "Maximum number of tracked entity instances to return when searching"

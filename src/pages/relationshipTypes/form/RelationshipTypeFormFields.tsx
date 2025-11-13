@@ -4,7 +4,6 @@ import React from 'react'
 import { Field, useFormState } from 'react-final-form'
 import {
     StandardFormField,
-    StandardFormSection,
     StandardFormSectionTitle,
     StandardFormSectionDescription,
     SectionedFormSections,
@@ -19,6 +18,7 @@ import {
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
 import { RelationshipTypeFormDescriptor } from './formDescriptor'
+import { RelationshipSideFields } from './RelationshipSidesFields'
 
 export function RelationshipTypeFormFields() {
     const schemaSection = useSchemaSectionHandleOrThrow()
@@ -110,16 +110,20 @@ export function RelationshipTypeFormFields() {
             <SectionedFormSection
                 name={descriptor.getSection('relationshipSides').name}
             >
-                <StandardFormSection>
-                    <StandardFormSectionTitle>
-                        {i18n.t('Relationship sides')}
-                    </StandardFormSectionTitle>
-                    <StandardFormSectionDescription>
-                        {i18n.t(
-                            'Choose and configure which objects can be used as the initiating and receiving sides of the relationship.'
-                        )}
-                    </StandardFormSectionDescription>
-                </StandardFormSection>
+                <StandardFormSectionTitle>
+                    {i18n.t('Relationship sides')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Choose and configure which objects can be used as the initiating and receiving sides of the relationship.'
+                    )}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <RelationshipSideFields prefix="from" />
+                </StandardFormField>
+                <StandardFormField>
+                    <RelationshipSideFields prefix="to" />
+                </StandardFormField>
             </SectionedFormSection>
         </SectionedFormSections>
     )
