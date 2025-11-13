@@ -16,6 +16,9 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
     const program = formValues[`${prefix}Constraint`]?.program
 
     const { input: programStageInput } = useField(programStageName)
+    const { input: dataElementsInput } = useField(
+        `${prefix}Constraint.dataElements`
+    )
 
     const visible = constraint === 'PROGRAM_STAGE_INSTANCE' && !!program?.id
 
@@ -53,17 +56,11 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
                     validate={required}
                     onChange={() => {
                         // Clear data elements when program stage changes
-                        const form = programStageInput.meta.form
-                        if (form) {
-                            const dataElementsName = `${prefix}Constraint.dataElements`
-                            const dataElementsValue =
-                                form.getFieldState(dataElementsName)?.value
-                            if (
-                                Array.isArray(dataElementsValue) &&
-                                dataElementsValue.length
-                            ) {
-                                form.change(dataElementsName, [])
-                            }
+                        if (
+                            Array.isArray(dataElementsInput.value) &&
+                            dataElementsInput.value.length
+                        ) {
+                            dataElementsInput.onChange([])
                         }
                     }}
                 />

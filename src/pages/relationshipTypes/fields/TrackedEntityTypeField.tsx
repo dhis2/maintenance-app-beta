@@ -19,6 +19,16 @@ export const TrackedEntityTypeField = ({
         | undefined
 
     const { input: trackedEntityTypeInput } = useField(trackedEntityTypeName)
+    const { input: programInput } = useField(`${prefix}Constraint.program`)
+    const { input: programStageInput } = useField(
+        `${prefix}Constraint.programStage`
+    )
+    const { input: attributesInput } = useField(
+        `${prefix}Constraint.trackedEntityAttributes`
+    )
+    const { input: dataElementsInput } = useField(
+        `${prefix}Constraint.dataElements`
+    )
     const newTrackedEntityTypeLink = useHref('/trackedEntityTypes/new')
     const refresh = useRefreshModelSingleSelect({
         resource: 'trackedEntityTypes',
@@ -60,40 +70,23 @@ export const TrackedEntityTypeField = ({
                         }
                         onChange={() => {
                             // Clear dependent fields when tracked entity type changes
-                            const form = trackedEntityTypeInput.meta.form
-                            if (form) {
-                                const programName = `${prefix}Constraint.program`
-                                const programStageName = `${prefix}Constraint.programStage`
-                                const attributesName = `${prefix}Constraint.trackedEntityAttributes`
-                                const dataElementsName = `${prefix}Constraint.dataElements`
-
-                                const programValue =
-                                    form.getFieldState(programName)?.value
-                                const programStageValue =
-                                    form.getFieldState(programStageName)?.value
-                                const attributesValue =
-                                    form.getFieldState(attributesName)?.value
-                                const dataElementsValue =
-                                    form.getFieldState(dataElementsName)?.value
-
-                                if (programValue) {
-                                    form.change(programName, undefined)
-                                }
-                                if (programStageValue) {
-                                    form.change(programStageName, undefined)
-                                }
-                                if (
-                                    Array.isArray(attributesValue) &&
-                                    attributesValue.length
-                                ) {
-                                    form.change(attributesName, [])
-                                }
-                                if (
-                                    Array.isArray(dataElementsValue) &&
-                                    dataElementsValue.length
-                                ) {
-                                    form.change(dataElementsName, [])
-                                }
+                            if (programInput.value) {
+                                programInput.onChange(undefined)
+                            }
+                            if (programStageInput.value) {
+                                programStageInput.onChange(undefined)
+                            }
+                            if (
+                                Array.isArray(attributesInput.value) &&
+                                attributesInput.value.length
+                            ) {
+                                attributesInput.onChange([])
+                            }
+                            if (
+                                Array.isArray(dataElementsInput.value) &&
+                                dataElementsInput.value.length
+                            ) {
+                                dataElementsInput.onChange([])
                             }
                         }}
                     />

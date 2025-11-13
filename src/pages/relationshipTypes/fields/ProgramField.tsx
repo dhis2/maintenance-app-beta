@@ -19,6 +19,15 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
         formValues[`${prefix}Constraint`]?.trackedEntityType
 
     const { input: programInput } = useField(programName)
+    const { input: programStageInput } = useField(
+        `${prefix}Constraint.programStage`
+    )
+    const { input: attributesInput } = useField(
+        `${prefix}Constraint.trackedEntityAttributes`
+    )
+    const { input: dataElementsInput } = useField(
+        `${prefix}Constraint.dataElements`
+    )
     const newProgramLink = useHref('/programs/new')
     const refresh = useRefreshModelSingleSelect({ resource: 'programs' })
 
@@ -37,6 +46,18 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
         }
         return false
     }, [constraint, trackedEntityType])
+
+    // Determine if program should be required based on constraint and visibility
+    const isRequired = useMemo(() => {
+        if (!visible) {
+            return false
+        }
+        return (
+            constraint === 'PROGRAM_INSTANCE' ||
+            constraint === 'PROGRAM_STAGE_INSTANCE' ||
+            (constraint === 'TRACKED_ENTITY_INSTANCE' && !!trackedEntityType)
+        )
+    }, [visible, constraint, trackedEntityType])
 
     // Build program query with conditional filtering
     const programQuery = useMemo(() => {
@@ -76,8 +97,13 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
     useEffect(() => {
         if (!visible && programInput.value) {
             programInput.onChange(undefined)
+            // Also clear validation state when field becomes hidden
+            const form = programInput.meta.form
+            if (form) {
+                form.mutators?.setFieldTouched?.(programName, false)
+            }
         }
-    }, [visible, programInput])
+    }, [visible, programInput, programName])
 
     if (!visible) {
         return null
@@ -94,44 +120,33 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                         name={programName}
                         label={i18n.t('Program')}
                         query={programQuery}
-                        validate={
-                            constraint === 'PROGRAM_INSTANCE' ||
-                            constraint === 'PROGRAM_STAGE_INSTANCE' ||
-                            (constraint === 'TRACKED_ENTITY_INSTANCE' &&
-                                !!trackedEntityType)
-                                ? required
-                                : undefined
-                        }
+                        validate={(value) => {
+                            // Only validate if field is visible and required
+                            if (!visible) {
+                                return undefined
+                            }
+                            if (isRequired) {
+                                return required(value)
+                            }
+                            return undefined
+                        }}
+                        validateFields={[]}
                         onChange={() => {
                             // Clear dependent fields when program changes
-                            const form = programInput.meta.form
-                            if (form) {
-                                const programStageName = `${prefix}Constraint.programStage`
-                                const attributesName = `${prefix}Constraint.trackedEntityAttributes`
-                                const dataElementsName = `${prefix}Constraint.dataElements`
-
-                                const programStageValue =
-                                    form.getFieldState(programStageName)?.value
-                                const attributesValue =
-                                    form.getFieldState(attributesName)?.value
-                                const dataElementsValue =
-                                    form.getFieldState(dataElementsName)?.value
-
-                                if (programStageValue) {
-                                    form.change(programStageName, undefined)
-                                }
-                                if (
-                                    Array.isArray(attributesValue) &&
-                                    attributesValue.length
-                                ) {
-                                    form.change(attributesName, [])
-                                }
-                                if (
-                                    Array.isArray(dataElementsValue) &&
-                                    dataElementsValue.length
-                                ) {
-                                    form.change(dataElementsName, [])
-                                }
+                            if (programStageInput.value) {
+                                programStageInput.onChange(undefined)
+                            }
+                            if (
+                                Array.isArray(attributesInput.value) &&
+                                attributesInput.value.length
+                            ) {
+                                attributesInput.onChange([])
+                            }
+                            if (
+                                Array.isArray(dataElementsInput.value) &&
+                                dataElementsInput.value.length
+                            ) {
+                                dataElementsInput.onChange([])
                             }
                         }}
                     />
