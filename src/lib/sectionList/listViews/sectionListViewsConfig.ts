@@ -473,6 +473,29 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    relationshipType: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'bidirectional',
+                'favorite',
+                'displayFromToName',
+                'displayToFromName',
+                'fromToName',
+                'toFromName',
+                'referral',
+            ],
+        },
+        filters: {
+            default: [],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
+    },
     trackedEntityType: {
         columns: {
             default: [

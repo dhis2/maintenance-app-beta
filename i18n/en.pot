@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-04T11:48:55.401Z\n"
-"PO-Revision-Date: 2025-11-04T11:48:55.401Z\n"
+"POT-Creation-Date: 2025-11-04T14:49:25.125Z\n"
+"PO-Revision-Date: 2025-11-04T14:49:25.125Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1385,6 +1385,9 @@ msgstr "Data element for aggregate data export"
 msgid "Analytics type"
 msgstr "Analytics type"
 
+msgid "Bidirectional"
+msgstr "Bidirectional"
+
 msgid "Compulsory"
 msgstr "Compulsory"
 
@@ -1394,8 +1397,14 @@ msgstr "Data dimension"
 msgid "Data dimension type"
 msgstr "Data dimension type"
 
+msgid "Name seen from initiating entity"
+msgstr "Name seen from initiating entity"
+
 msgid "Display in form"
 msgstr "Display in form"
+
+msgid "Name seen from receiving entity"
+msgstr "Name seen from receiving entity"
 
 msgid "Domain type"
 msgstr "Domain type"
@@ -1415,11 +1424,20 @@ msgstr "Form name"
 msgid "Form type"
 msgstr "Form type"
 
+msgid "Relationship name seen from initiating entity"
+msgstr "Relationship name seen from initiating entity"
+
 msgid "Ignore data approval"
 msgstr "Ignore data approval"
 
+msgid "Referral"
+msgstr "Referral"
+
 msgid "Sharing"
 msgstr "Sharing"
+
+msgid "Relationship name seen from receiving entity"
+msgstr "Relationship name seen from receiving entity"
 
 msgid "Owner"
 msgstr "Owner"

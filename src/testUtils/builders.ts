@@ -44,6 +44,7 @@ import { organisationUnitListSchema } from '../pages/organisationUnits/form/orga
 import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
 import { programListSchema } from '../pages/programsWip/form'
+import { relationshipTypeListSchema } from '../pages/relationshipTypes/form/RelationshipTypeFormSchema'
 import { trackedEntityAttributeListSchema } from '../pages/trackedEntityAttributes/form/TrackedEntityAttributeFormSchema'
 import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form'
 import {
@@ -92,6 +93,18 @@ const mockeryMapper = (keyName: string) => {
 }
 
 const { withAttributeValues } = modelFormSchemas
+
+export const formatSchemaProperties = (schema: Record<any, any>) => {
+    if (Array.isArray(schema.properties)) {
+        return {
+            ...schema,
+            properties: Object.fromEntries(
+                schema.properties.map((prop: any) => [prop.fieldName, prop])
+            ),
+        }
+    }
+    return schema
+}
 
 export const testAccess = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(AccessSchema, { mockeryMapper }),
@@ -346,6 +359,11 @@ export const testFormProgramIndicatorGroup = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(programIndicatorGroupListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testRelationshipType = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(relationshipTypeListSchema, { mockeryMapper }),
     ...overwrites,
 })
 
