@@ -41,12 +41,6 @@ export type RelationshipTypeFormValues = PickWithFieldFilters<
 
 export const initialRelationshipTypeValues = {
     ...getDefaults(relationshipTypeFormSchema),
-    fromConstraint: {
-        relationshipEntity: 'PROGRAM_STAGE_INSTANCE' as const,
-    },
-    toConstraint: {
-        relationshipEntity: 'PROGRAM_STAGE_INSTANCE' as const,
-    },
 }
 
 export const validateRelationshipType = createFormValidate(

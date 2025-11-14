@@ -1,7 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
+import { Field } from '@dhis2/ui'
 import React, { useEffect, useMemo } from 'react'
-import { useFormState, useForm } from 'react-final-form'
-import { StandardFormField, ModelTransferField } from '../../../components'
+import { useField, useFormState } from 'react-final-form'
+import { StandardFormField } from '../../../components'
+import { BaseModelTransfer } from '../../../components/metadataFormControls/ModelTransfer/BaseModelTransfer'
+import { DisplayableModel } from '../../../types/models'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
 export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
@@ -13,46 +16,52 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
     const program = formValues[`${prefix}Constraint`]?.program
     const programStage = formValues[`${prefix}Constraint`]?.programStage
 
-    const visible =
-        constraint === 'PROGRAM_STAGE_INSTANCE' &&
-        !!program?.id &&
-        !!programStage?.id
-
-    const query = useMemo(() => {
-        if (!visible || !programStage?.id) {
-            return {
-                resource: 'dataElements',
-                params: {
-                    filter: [],
-                    fields: ['id', 'displayName'],
-                    order: 'displayName:iasc',
-                },
-            }
+    // Using useField to get direct access to the field for clearing values
+    // Assumption: Following the pattern from ProgramField.tsx and ProgramStageField.tsx
+    const { input: dataElementsInput, meta } = useField<DisplayableModel[]>(
+        dataElementsName,
+        {
+            multiple: true,
+            validateFields: [],
         }
+    )
 
-        return {
-            resource: 'dataElements',
-            params: {
-                filter: [
-                    `programStageDataElements.programStage.id:eq:${programStage.id}`,
-                ],
-                fields: ['id', 'displayName'],
-                order: 'displayName:iasc',
-            },
+    // Field is only visible when constraint is PROGRAM_STAGE_INSTANCE
+    // and both program and programStage are selected
+    const visible = useMemo(() => {
+        return (
+            constraint === 'PROGRAM_STAGE_INSTANCE' &&
+            !!program?.id &&
+            !!programStage?.id
+        )
+    }, [constraint, program?.id, programStage?.id])
+
+    // Extract data elements from programStage.programStageDataElements
+    // Assumption: programStage is fetched with fields: id,displayName,programStageDataElements[id,dataElement[id,displayName]]
+    // so we can extract data elements directly without additional API calls
+    const availableDataElements = useMemo<DisplayableModel[]>(() => {
+        if (!programStage?.programStageDataElements) {
+            return []
         }
-    }, [visible, programStage?.id])
+        return programStage.programStageDataElements
+            .map((psde: { dataElement: DisplayableModel }) => psde.dataElement)
+            .filter((de: DisplayableModel | undefined) => !!de)
+    }, [programStage?.programStageDataElements])
 
-    const form = useForm()
-
+    // Clear data elements when field becomes hidden
+    // Assumption: Following the pattern from ProgramField.tsx and ProgramStageField.tsx
+    // which use input.onChange() instead of form.change()
     useEffect(() => {
-        if (!visible && form) {
-            const dataElementsValue =
-                form.getFieldState(dataElementsName)?.value
-            if (dataElementsValue !== undefined && dataElementsValue !== null) {
-                form.change(dataElementsName, [])
+        if (!visible && dataElementsInput.value) {
+            // Clear array field when visibility changes to false
+            if (
+                Array.isArray(dataElementsInput.value) &&
+                dataElementsInput.value.length > 0
+            ) {
+                dataElementsInput.onChange([])
             }
         }
-    }, [visible, dataElementsName, form])
+    }, [visible, dataElementsInput])
 
     if (!visible) {
         return null
@@ -60,24 +69,34 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
 
     return (
         <StandardFormField>
-            <div style={{ marginBottom: '8px' }}>
-                {i18n.t(
-                    'Choose which data elements are shown when viewing the relationship'
-                )}
-            </div>
-            <ModelTransferField
+            <Field
+                error={meta.invalid}
+                validationText={(meta.touched && meta.error?.toString()) || ''}
                 name={dataElementsName}
-                query={query}
-                leftHeader={i18n.t('Available data elements')}
-                rightHeader={i18n.t('Selected data elements')}
-                filterPlaceholder={i18n.t('Search available data elements')}
-                filterPlaceholderPicked={i18n.t(
-                    'Search selected data elements'
-                )}
-                enableOrderChange
-                optionsWidth="45%"
-                selectedWidth="45%"
-            />
+            >
+                <div style={{ marginBottom: '8px' }}>
+                    {i18n.t(
+                        'Choose which data elements are shown when viewing the relationship'
+                    )}
+                </div>
+                <BaseModelTransfer<DisplayableModel>
+                    available={availableDataElements}
+                    selected={dataElementsInput.value || []}
+                    onChange={({ selected }) => {
+                        dataElementsInput.onChange(selected)
+                        dataElementsInput.onBlur()
+                    }}
+                    leftHeader={i18n.t('Available data elements')}
+                    rightHeader={i18n.t('Selected data elements')}
+                    filterPlaceholder={i18n.t('Search available data elements')}
+                    filterPlaceholderPicked={i18n.t(
+                        'Search selected data elements'
+                    )}
+                    enableOrderChange
+                    optionsWidth="45%"
+                    selectedWidth="45%"
+                />
+            </Field>
         </StandardFormField>
     )
 }

@@ -1,7 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
+import { Field } from '@dhis2/ui'
 import React, { useEffect, useMemo } from 'react'
-import { useFormState, useForm } from 'react-final-form'
-import { StandardFormField, ModelTransferField } from '../../../components'
+import { useField, useFormState } from 'react-final-form'
+import { StandardFormField } from '../../../components'
+import { BaseModelTransfer } from '../../../components/metadataFormControls/ModelTransfer/BaseModelTransfer'
+import { DisplayableModel } from '../../../types/models'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
 export const TrackedEntityAttributesField = ({
@@ -15,6 +18,14 @@ export const TrackedEntityAttributesField = ({
     const trackedEntityType =
         formValues[`${prefix}Constraint`]?.trackedEntityType
     const program = formValues[`${prefix}Constraint`]?.program
+
+    const { input: attributesInput, meta } = useField<DisplayableModel[]>(
+        attributesName,
+        {
+            multiple: true,
+            validateFields: [],
+        }
+    )
 
     const visible = useMemo(() => {
         if (!constraint) {
@@ -30,87 +41,95 @@ export const TrackedEntityAttributesField = ({
             return true
         }
         return false
-    }, [constraint, trackedEntityType, program])
+    }, [constraint, trackedEntityType?.id, program?.id])
 
-    const query = useMemo(() => {
-        if (!visible) {
-            // Return a query with empty filter array when not visible
-            return {
-                resource: 'trackedEntityAttributes',
-                params: {
-                    filter: [],
-                    fields: ['id', 'displayName'],
-                    order: 'displayName:iasc',
-                },
-            }
+    // Extract available attributes from trackedEntityType.trackedEntityTypeAttributes or program.programTrackedEntityAttributes
+    // This data is already fetched in TrackedEntityTypeField/ProgramField, so no extra API call needed
+    const availableAttributes = useMemo<DisplayableModel[]>(() => {
+        if (
+            constraint === 'TRACKED_ENTITY_INSTANCE' &&
+            trackedEntityType?.trackedEntityTypeAttributes
+        ) {
+            return trackedEntityType.trackedEntityTypeAttributes
+                .map(
+                    (teta: { trackedEntityAttribute?: DisplayableModel }) =>
+                        teta.trackedEntityAttribute
+                )
+                .filter(
+                    (
+                        attr: DisplayableModel | undefined
+                    ): attr is DisplayableModel => !!attr
+                )
         }
-
-        if (constraint === 'PROGRAM_INSTANCE' && program?.id) {
-            return {
-                resource: 'trackedEntityAttributes',
-                params: {
-                    filter: [
-                        `programTrackedEntityAttributes.program.id:eq:${program.id}`,
-                    ],
-                    fields: ['id', 'displayName'],
-                    order: 'displayName:iasc',
-                },
-            }
+        if (
+            constraint === 'PROGRAM_INSTANCE' &&
+            program?.programTrackedEntityAttributes
+        ) {
+            return program.programTrackedEntityAttributes
+                .map(
+                    (ptea: { trackedEntityAttribute?: DisplayableModel }) =>
+                        ptea.trackedEntityAttribute
+                )
+                .filter(
+                    (
+                        attr: DisplayableModel | undefined
+                    ): attr is DisplayableModel => !!attr
+                )
         }
-
-        if (constraint === 'TRACKED_ENTITY_INSTANCE' && trackedEntityType?.id) {
-            return {
-                resource: 'trackedEntityAttributes',
-                params: {
-                    filter: [
-                        `trackedEntityTypeAttributes.trackedEntityType.id:eq:${trackedEntityType.id}`,
-                    ],
-                    fields: ['id', 'displayName'],
-                    order: 'displayName:iasc',
-                },
-            }
-        }
-
-        // Return a query with empty filter array if no constraint matches
-        return {
-            resource: 'trackedEntityAttributes',
-            params: {
-                filter: [],
-                fields: ['id', 'displayName'],
-                order: 'displayName:iasc',
-            },
-        }
-    }, [visible, constraint, program?.id, trackedEntityType?.id])
-
-    const form = useForm()
+        return []
+    }, [
+        constraint,
+        trackedEntityType?.trackedEntityTypeAttributes,
+        program?.programTrackedEntityAttributes,
+    ])
 
     useEffect(() => {
-        if (!visible && form) {
-            const attributesValue = form.getFieldState(attributesName)?.value
-            if (attributesValue !== undefined && attributesValue !== null) {
-                form.change(attributesName, [])
+        if (!visible && attributesInput.value) {
+            if (
+                Array.isArray(attributesInput.value) &&
+                attributesInput.value.length > 0
+            ) {
+                attributesInput.onChange([])
             }
         }
-    }, [visible, attributesName, form])
+    }, [visible, attributesInput])
 
     if (!visible) {
         return null
     }
 
+    // Use BaseModelTransfer with available data for both TRACKED_ENTITY_INSTANCE and PROGRAM_INSTANCE
+    // Data is already fetched in TrackedEntityTypeField/ProgramField, so no extra API calls needed
+    if (availableAttributes.length === 0) {
+        return null
+    }
+
     return (
         <StandardFormField>
-            <ModelTransferField
+            <Field
+                error={meta.invalid}
+                validationText={(meta.touched && meta.error?.toString()) || ''}
                 name={attributesName}
                 label={i18n.t('Tracked entity attributes')}
-                query={query}
-                leftHeader={i18n.t('Available tracked entity attributes')}
-                rightHeader={i18n.t('Selected tracked entity attributes')}
-                filterPlaceholder={i18n.t('Search available attributes')}
-                filterPlaceholderPicked={i18n.t('Search selected attributes')}
-                enableOrderChange
-                optionsWidth="45%"
-                selectedWidth="45%"
-            />
+            >
+                <BaseModelTransfer<DisplayableModel>
+                    available={availableAttributes}
+                    selected={attributesInput.value || []}
+                    onChange={({ selected }) => {
+                        attributesInput.onChange(selected)
+                        attributesInput.onBlur()
+                    }}
+                    leftHeader={i18n.t('Available tracked entity attributes')}
+                    rightHeader={i18n.t('Selected tracked entity attributes')}
+                    filterPlaceholder={i18n.t('Search available attributes')}
+                    filterPlaceholderPicked={i18n.t(
+                        'Search selected attributes'
+                    )}
+                    enableOrderChange
+                    optionsWidth="45%"
+                    selectedWidth="45%"
+                />
+            </Field>
         </StandardFormField>
     )
 }

@@ -22,19 +22,27 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
 
     const visible = constraint === 'PROGRAM_STAGE_INSTANCE' && !!program?.id
 
+    // Build program stage query with programStageDataElements
+    // Only compute query when field is visible and program is selected
+    // Use program.id directly in dependencies to avoid query changes during constraint transitions
     const programStageQuery = useMemo(() => {
-        if (!program?.id) {
+        if (constraint !== 'PROGRAM_STAGE_INSTANCE' || !program?.id) {
             return null
         }
         return {
             resource: 'programStages',
             params: {
-                fields: ['id', 'displayName'],
+                fields: [
+                    'id',
+                    'displayName',
+                    'programStageDataElements[id,dataElement[id,displayName]]',
+                ],
                 filter: [`program.id:eq:${program.id}`],
                 order: 'displayName:iasc',
+                paging: false,
             },
         }
-    }, [program?.id])
+    }, [constraint, program?.id])
 
     useEffect(() => {
         if (!visible && programStageInput.value) {

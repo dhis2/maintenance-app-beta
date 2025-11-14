@@ -61,13 +61,19 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
     }, [visible, constraint, trackedEntityType])
 
     // Build program query with conditional filtering
+    // Only compute query when field is visible
     const programQuery = useMemo(() => {
+        if (!visible) {
+            return null
+        }
+
         const baseQuery: {
             resource: string
             params: {
                 fields: string[]
                 order: string
                 filter?: string[]
+                paging?: boolean
             }
         } = {
             resource: 'programs',
@@ -82,6 +88,44 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
             },
         }
 
+        // When constraint is TRACKED_ENTITY_INSTANCE, include programTrackedEntityAttributes
+        // This matches the correct data flow where programs are fetched with their attributes
+        if (constraint === 'TRACKED_ENTITY_INSTANCE' && trackedEntityType?.id) {
+            baseQuery.params.fields = [
+                'id',
+                'displayName',
+                'programType',
+                'trackedEntityType',
+                'programTrackedEntityAttributes[id,trackedEntityAttribute[id,displayName,valueType]]',
+                'programStages[id]',
+            ]
+            baseQuery.params.paging = false
+        }
+
+        // When constraint is PROGRAM_INSTANCE, include programTrackedEntityAttributes
+        // This matches the correct data flow where programs are fetched with their attributes
+        if (constraint === 'PROGRAM_INSTANCE') {
+            baseQuery.params.fields = [
+                'id',
+                'displayName',
+                'programType',
+                'programTrackedEntityAttributes[id,trackedEntityAttribute[id,displayName,valueType]]',
+                'programStages[id]',
+            ]
+            baseQuery.params.paging = false
+        }
+
+        // When constraint is PROGRAM_STAGE_INSTANCE, include programStages with programStageDataElements
+        if (constraint === 'PROGRAM_STAGE_INSTANCE') {
+            baseQuery.params.fields = [
+                'id',
+                'displayName',
+                'programType',
+                'programStages[id,programStageDataElements[dataElement[id,displayName]]]',
+            ]
+            baseQuery.params.paging = false
+        }
+
         if (constraint === 'TRACKED_ENTITY_INSTANCE' && trackedEntityType?.id) {
             baseQuery.params.filter = [
                 `programType:eq:WITH_REGISTRATION`,
@@ -93,7 +137,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
         // For PROGRAM_STAGE_INSTANCE, no WITH_REGISTRATION filter (include programs with stages)
 
         return baseQuery
-    }, [constraint, trackedEntityType])
+    }, [visible, constraint, trackedEntityType?.id])
 
     useEffect(() => {
         if (!visible && programInput.value) {
@@ -105,7 +149,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
         }
     }, [visible, programInput, form, programName])
 
-    if (!visible) {
+    if (!visible || !programQuery) {
         return null
     }
 

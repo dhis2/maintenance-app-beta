@@ -16,7 +16,7 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
         validate: required,
     })
 
-    const options: ButtonOption<ConstraintValue>[] = [
+    const options: ButtonOption[] = [
         {
             value: 'PROGRAM_STAGE_INSTANCE',
             label: i18n.t('Event'),
@@ -39,17 +39,14 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
                     meta.touched && meta.error ? meta.error.toString() : ''
                 }
             >
-                <ButtonGroup
-                    options={options}
-                    selected={input.value}
-                    onChange={(value) => {
-                        input.onChange(value)
-                    }}
-                    onBlur={() => {
-                        input.onBlur()
-                    }}
-                    dataTest={`${prefix}-constraint-selector`}
-                />
+                <div onBlur={input.onBlur}>
+                    <ButtonGroup
+                        options={options}
+                        selected={input.value}
+                        onChange={input.onChange}
+                        dataTest={`${prefix}-constraint-selector`}
+                    />
+                </div>
             </Field>
         </StandardFormField>
     )

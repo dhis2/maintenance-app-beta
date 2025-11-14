@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useField, useFormState } from 'react-final-form'
 import { useHref } from 'react-router'
 import { StandardFormField, EditableFieldWrapper } from '../../../components'
@@ -36,13 +36,35 @@ export const TrackedEntityTypeField = ({
 
     const visible = constraint === 'TRACKED_ENTITY_INSTANCE'
 
+    // Only compute query when field is visible
+    // Fetch trackedEntityTypes with trackedEntityTypeAttributes in one call
+    // This matches the correct data flow where all TET data is fetched upfront
+    const trackedEntityTypeQuery = useMemo(() => {
+        if (!visible) {
+            return null
+        }
+        return {
+            resource: 'trackedEntityTypes',
+            params: {
+                fields: [
+                    'id',
+                    'displayName',
+                    'name',
+                    'trackedEntityTypeAttributes[trackedEntityAttribute[id,displayName]]',
+                ],
+                order: 'displayName:iasc',
+                paging: false,
+            },
+        }
+    }, [visible])
+
     useEffect(() => {
         if (!visible && trackedEntityTypeInput.value) {
             trackedEntityTypeInput.onChange(undefined)
         }
     }, [visible, trackedEntityTypeInput])
 
-    if (!visible) {
+    if (!visible || !trackedEntityTypeQuery) {
         return null
     }
 
@@ -56,13 +78,7 @@ export const TrackedEntityTypeField = ({
                     <ModelSingleSelectFormField<DisplayableModel>
                         name={trackedEntityTypeName}
                         label={i18n.t('Tracked entity type')}
-                        query={{
-                            resource: 'trackedEntityTypes',
-                            params: {
-                                fields: ['id', 'displayName'],
-                                order: 'displayName:iasc',
-                            },
-                        }}
+                        query={trackedEntityTypeQuery}
                         validate={
                             constraint === 'TRACKED_ENTITY_INSTANCE'
                                 ? required

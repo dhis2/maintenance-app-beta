@@ -1,55 +1,43 @@
+import cx from 'classnames'
 import React from 'react'
 import css from './ButtonGroup.module.css'
 
-export type ButtonOption<T extends string = string> = {
-    value: T
+export type ButtonOption = {
+    value: string
     label: string
-    disabled?: boolean
 }
 
-export type ButtonGroupProps<T extends string = string> = {
-    options: ButtonOption<T>[]
-    selected?: T
-    onChange: (value: T) => void
-    className?: string
+export type ButtonGroupProps = {
+    options: ButtonOption[]
+    selected?: string
+    onChange: (value: string) => void
     dataTest?: string
-    onBlur?: () => void
 }
 
-export function ButtonGroup<T extends string = string>({
+export function ButtonGroup({
     options,
     selected,
     onChange,
-    onBlur,
-    className,
     dataTest,
-}: ButtonGroupProps<T>) {
+}: ButtonGroupProps) {
     return (
-        <div
-            className={`${css.buttonGroup} ${className || ''}`}
-            data-test={dataTest}
-            role="tablist"
-        >
+        <div className={css.buttonGroup} data-test={dataTest}>
             {options.map((option) => {
-                const isSelected = selected && option.value === selected
-                const isDisabled = option.disabled
+                const isSelected = selected === option.value
 
                 return (
                     <button
                         key={option.value}
                         type="button"
-                        role="tab"
-                        aria-selected={isSelected}
-                        aria-disabled={isDisabled}
-                        disabled={isDisabled}
-                        className={`${css.buttonOption} ${
-                            isSelected ? css.buttonOptionSelected : ''
-                        } ${isDisabled ? css.buttonOptionDisabled : ''}`}
-                        onBlur={onBlur}
+                        className={cx(css.buttonOption, {
+                            [css.buttonOptionSelected]: isSelected,
+                        })}
                         onClick={() => onChange(option.value)}
-                        data-test={`${dataTest || 'button-group'}-option-${
-                            option.value
-                        }`}
+                        data-test={
+                            dataTest
+                                ? `${dataTest}-option-${option.value}`
+                                : undefined
+                        }
                     >
                         {option.label}
                     </button>
