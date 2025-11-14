@@ -2,17 +2,17 @@ import cx from 'classnames'
 import React from 'react'
 import css from './ButtonGroup.module.css'
 
-export type ButtonOption = {
+export type ButtonOption = Readonly<{
     value: string
     label: string
-}
+}>
 
-export type ButtonGroupProps = {
+export type ButtonGroupProps = Readonly<{
     options: ButtonOption[]
     selected?: string
     onChange: (value: string) => void
     dataTest?: string
-}
+}>
 
 export function ButtonGroup({
     options,

@@ -39,14 +39,15 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
                     meta.touched && meta.error ? meta.error.toString() : ''
                 }
             >
-                <div onBlur={input.onBlur}>
-                    <ButtonGroup
-                        options={options}
-                        selected={input.value}
-                        onChange={input.onChange}
-                        dataTest={`${prefix}-constraint-selector`}
-                    />
-                </div>
+                <ButtonGroup
+                    options={options}
+                    selected={input.value}
+                    onChange={(value) => {
+                        input.onChange(value)
+                        input.onBlur()
+                    }}
+                    dataTest={`${prefix}-constraint-selector`}
+                />
             </Field>
         </StandardFormField>
     )
