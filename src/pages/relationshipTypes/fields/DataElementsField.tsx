@@ -72,12 +72,10 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
                 error={meta.invalid}
                 validationText={(meta.touched && meta.error?.toString()) || ''}
                 name={dataElementsName}
+                helpText={i18n.t(
+                    'Choose which data elements are shown when viewing the relationship'
+                )}
             >
-                <div style={{ marginBottom: '8px' }}>
-                    {i18n.t(
-                        'Choose which data elements are shown when viewing the relationship'
-                    )}
-                </div>
                 <BaseModelTransfer<DisplayableModel>
                     available={availableDataElements}
                     selected={dataElementsInput.value || []}

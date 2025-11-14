@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useEffect, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { useField, useFormState, useForm } from 'react-final-form'
 import { useHref } from 'react-router'
 import { StandardFormField, EditableFieldWrapper } from '../../../components'
@@ -45,7 +45,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
         const isProgramStageInstance = constraint === 'PROGRAM_STAGE_INSTANCE'
 
         let fields = ['id', 'displayName', 'programType', 'trackedEntityType']
-        const filters: string[] = []
+        let filters: string[] = []
 
         if (isTrackedEntityInstance) {
             fields = [
@@ -56,8 +56,10 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                 'programTrackedEntityAttributes[id,trackedEntityAttribute[id,displayName,valueType]]',
                 'programStages[id]',
             ]
-            filters.push('programType:eq:WITH_REGISTRATION')
-            filters.push(`trackedEntityType.id:eq:${trackedEntityType.id}`)
+            filters = [
+                'programType:eq:WITH_REGISTRATION',
+                `trackedEntityType.id:eq:${trackedEntityType.id}`,
+            ]
         } else if (isProgramInstance) {
             fields = [
                 'id',
@@ -66,7 +68,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                 'programTrackedEntityAttributes[id,trackedEntityAttribute[id,displayName,valueType]]',
                 'programStages[id]',
             ]
-            filters.push('programType:eq:WITH_REGISTRATION')
+            filters = ['programType:eq:WITH_REGISTRATION']
         } else if (isProgramStageInstance) {
             fields = [
                 'id',
@@ -95,13 +97,13 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
         }
     }, [visible, programInput])
 
-    const clearDependentFields = () => {
+    const clearDependentFields = useCallback(() => {
         form.batch(() => {
             form.change(`${prefix}Constraint.programStage`, undefined)
             form.change(`${prefix}Constraint.trackedEntityAttributes`, [])
             form.change(`${prefix}Constraint.dataElements`, [])
         })
-    }
+    }, [form, prefix])
 
     if (!visible || !programQuery) {
         return null

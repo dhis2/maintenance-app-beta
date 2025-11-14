@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useEffect, useMemo } from 'react'
-import { useField, useFormState } from 'react-final-form'
+import React, { useCallback, useEffect, useMemo } from 'react'
+import { useField, useFormState, useForm } from 'react-final-form'
 import { useHref } from 'react-router'
 import { StandardFormField, EditableFieldWrapper } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
@@ -18,16 +18,7 @@ export const TrackedEntityTypeField = ({
         | undefined
 
     const { input: trackedEntityTypeInput } = useField(trackedEntityTypeName)
-    const { input: programInput } = useField(`${prefix}Constraint.program`)
-    const { input: programStageInput } = useField(
-        `${prefix}Constraint.programStage`
-    )
-    const { input: attributesInput } = useField(
-        `${prefix}Constraint.trackedEntityAttributes`
-    )
-    const { input: dataElementsInput } = useField(
-        `${prefix}Constraint.dataElements`
-    )
+    const form = useForm()
     const newTrackedEntityTypeLink = useHref('/trackedEntityTypes/new')
     const refresh = useRefreshModelSingleSelect({
         resource: 'trackedEntityTypes',
@@ -35,9 +26,6 @@ export const TrackedEntityTypeField = ({
 
     const visible = constraint === 'TRACKED_ENTITY_INSTANCE'
 
-    // Only compute query when field is visible
-    // Fetch trackedEntityTypes with trackedEntityTypeAttributes in one call
-    // This matches the correct data flow where all TET data is fetched upfront
     const trackedEntityTypeQuery = useMemo(() => {
         if (!visible) {
             return null
@@ -63,6 +51,13 @@ export const TrackedEntityTypeField = ({
         }
     }, [visible, trackedEntityTypeInput])
 
+    const clearDependentFields = useCallback(() => {
+        form.batch(() => {
+            form.change(`${prefix}Constraint.program`, undefined)
+            form.change(`${prefix}Constraint.trackedEntityAttributes`, [])
+        })
+    }, [form, prefix])
+
     if (!visible || !trackedEntityTypeQuery) {
         return null
     }
@@ -79,27 +74,7 @@ export const TrackedEntityTypeField = ({
                     query={trackedEntityTypeQuery}
                     required={constraint === 'TRACKED_ENTITY_INSTANCE'}
                     inputWidth="330px"
-                    onChange={() => {
-                        // Clear dependent fields when tracked entity type changes
-                        if (programInput.value) {
-                            programInput.onChange(undefined)
-                        }
-                        if (programStageInput.value) {
-                            programStageInput.onChange(undefined)
-                        }
-                        if (
-                            Array.isArray(attributesInput.value) &&
-                            attributesInput.value.length
-                        ) {
-                            attributesInput.onChange([])
-                        }
-                        if (
-                            Array.isArray(dataElementsInput.value) &&
-                            dataElementsInput.value.length
-                        ) {
-                            dataElementsInput.onChange([])
-                        }
-                    }}
+                    onChange={clearDependentFields}
                 />
             </EditableFieldWrapper>
         </StandardFormField>

@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useEffect, useMemo } from 'react'
-import { useField, useFormState } from 'react-final-form'
+import React, { useCallback, useEffect, useMemo } from 'react'
+import { useField, useFormState, useForm } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { DisplayableModel } from '../../../types/models'
@@ -15,9 +15,7 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
     const program = formValues[`${prefix}Constraint`]?.program
 
     const { input: programStageInput } = useField(programStageName)
-    const { input: dataElementsInput } = useField(
-        `${prefix}Constraint.dataElements`
-    )
+    const form = useForm()
 
     const visible = constraint === 'PROGRAM_STAGE_INSTANCE' && !!program?.id
 
@@ -46,6 +44,12 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
         }
     }, [visible, programStageInput])
 
+    const clearDependentFields = useCallback(() => {
+        form.batch(() => {
+            form.change(`${prefix}Constraint.dataElements`, [])
+        })
+    }, [form, prefix])
+
     if (!visible || !programStageQuery) {
         return null
     }
@@ -58,14 +62,7 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
                 query={programStageQuery}
                 required
                 inputWidth="330px"
-                onChange={() => {
-                    if (
-                        Array.isArray(dataElementsInput.value) &&
-                        dataElementsInput.value.length
-                    ) {
-                        dataElementsInput.onChange([])
-                    }
-                }}
+                onChange={clearDependentFields}
             />
         </StandardFormField>
     )

@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Field } from '@dhis2/ui'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useField, useForm } from 'react-final-form'
 import {
     StandardFormField,
@@ -32,7 +32,7 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
     })
     const form = useForm()
 
-    const clearDependentFields = () => {
+    const clearDependentFields = useCallback(() => {
         form.batch(() => {
             form.change(`${prefix}Constraint.trackedEntityType`, undefined)
             form.change(`${prefix}Constraint.program`, undefined)
@@ -40,7 +40,7 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
             form.change(`${prefix}Constraint.trackedEntityAttributes`, [])
             form.change(`${prefix}Constraint.dataElements`, [])
         })
-    }
+    }, [form, prefix])
 
     return (
         <StandardFormField>
