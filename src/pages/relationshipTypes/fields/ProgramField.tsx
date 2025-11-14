@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import React, { useEffect, useMemo } from 'react'
-import { useField, useFormState } from 'react-final-form'
+import { useField, useFormState, useForm } from 'react-final-form'
 import { useHref } from 'react-router'
 import { StandardFormField, EditableFieldWrapper } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
@@ -18,15 +18,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
         formValues[`${prefix}Constraint`]?.trackedEntityType
 
     const { input: programInput } = useField(programName)
-    const { input: programStageInput } = useField(
-        `${prefix}Constraint.programStage`
-    )
-    const { input: attributesInput } = useField(
-        `${prefix}Constraint.trackedEntityAttributes`
-    )
-    const { input: dataElementsInput } = useField(
-        `${prefix}Constraint.dataElements`
-    )
+    const form = useForm()
     const newProgramLink = useHref('/programs/new')
     const refresh = useRefreshModelSingleSelect({ resource: 'programs' })
 
@@ -103,6 +95,14 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
         }
     }, [visible, programInput])
 
+    const clearDependentFields = () => {
+        form.batch(() => {
+            form.change(`${prefix}Constraint.programStage`, undefined)
+            form.change(`${prefix}Constraint.trackedEntityAttributes`, [])
+            form.change(`${prefix}Constraint.dataElements`, [])
+        })
+    }
+
     if (!visible || !programQuery) {
         return null
     }
@@ -120,21 +120,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                     required={isRequired}
                     inputWidth="330px"
                     onChange={() => {
-                        if (programStageInput.value) {
-                            programStageInput.onChange(undefined)
-                        }
-                        if (
-                            Array.isArray(attributesInput.value) &&
-                            attributesInput.value.length
-                        ) {
-                            attributesInput.onChange([])
-                        }
-                        if (
-                            Array.isArray(dataElementsInput.value) &&
-                            dataElementsInput.value.length
-                        ) {
-                            dataElementsInput.onChange([])
-                        }
+                        clearDependentFields()
                     }}
                 />
             </EditableFieldWrapper>
