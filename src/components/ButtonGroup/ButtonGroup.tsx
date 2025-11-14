@@ -1,34 +1,36 @@
 import React from 'react'
-import css from './SegmentControl.module.css'
+import css from './ButtonGroup.module.css'
 
-export type SegmentOption<T extends string = string> = {
+export type ButtonOption<T extends string = string> = {
     value: T
     label: string
     disabled?: boolean
 }
 
-export type SegmentControlProps<T extends string = string> = {
-    options: SegmentOption<T>[]
+export type ButtonGroupProps<T extends string = string> = {
+    options: ButtonOption<T>[]
     selected?: T
     onChange: (value: T) => void
     className?: string
     dataTest?: string
+    onBlur?: () => void
 }
 
-export function SegmentControl<T extends string = string>({
+export function ButtonGroup<T extends string = string>({
     options,
     selected,
     onChange,
+    onBlur,
     className,
     dataTest,
-}: SegmentControlProps<T>) {
+}: ButtonGroupProps<T>) {
     return (
         <div
-            className={`${css.segmentControl} ${className || ''}`}
+            className={`${css.buttonGroup} ${className || ''}`}
             data-test={dataTest}
             role="tablist"
         >
-            {options.map((option, index) => {
+            {options.map((option) => {
                 const isSelected = selected && option.value === selected
                 const isDisabled = option.disabled
 
@@ -40,15 +42,12 @@ export function SegmentControl<T extends string = string>({
                         aria-selected={isSelected}
                         aria-disabled={isDisabled}
                         disabled={isDisabled}
-                        className={`${css.segmentOption} ${
-                            isSelected ? css.segmentOptionSelected : ''
-                        } ${isDisabled ? css.segmentOptionDisabled : ''}`}
-                        onClick={() => {
-                            if (!isDisabled) {
-                                onChange(option.value)
-                            }
-                        }}
-                        data-test={`${dataTest || 'segment-control'}-option-${
+                        className={`${css.buttonOption} ${
+                            isSelected ? css.buttonOptionSelected : ''
+                        } ${isDisabled ? css.buttonOptionDisabled : ''}`}
+                        onBlur={onBlur}
+                        onClick={() => onChange(option.value)}
+                        data-test={`${dataTest || 'button-group'}-option-${
                             option.value
                         }`}
                     >

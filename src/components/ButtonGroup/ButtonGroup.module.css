@@ -1,4 +1,4 @@
-.segmentControl {
+.buttonGroup {
     display: inline-flex;
     background-color: var(--colors-grey300);
     border-radius: 8px;
@@ -7,7 +7,7 @@
     align-items: center;
 }
 
-.segmentOption {
+.buttonOption {
     flex: 1 1 auto;
     padding: 4px 12px;
     background-color: transparent;
@@ -24,23 +24,23 @@
     text-align: center;
 }
 
-.segmentOption:hover:not(.segmentOptionDisabled):not(.segmentOptionSelected) {
+.buttonOption:hover:not(.buttonOptionDisabled):not(.buttonOptionSelected) {
     background-color: var(--colors-grey400);
 }
 
-.segmentOptionSelected {
+.buttonOptionSelected {
     background-color: var(--colors-white);
     color: var(--colors-grey900);
     font-weight: 400;
     border-radius: 8px;
 }
 
-.segmentOptionDisabled {
+.buttonOptionDisabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
 
-.segmentOption:focus-visible {
+.buttonOption:focus-visible {
     outline: 2px solid var(--theme-focus);
     outline-offset: -2px;
 }

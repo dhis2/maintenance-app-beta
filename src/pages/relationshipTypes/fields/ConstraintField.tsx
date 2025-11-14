@@ -4,8 +4,8 @@ import React from 'react'
 import { useField } from 'react-final-form'
 import {
     StandardFormField,
-    SegmentControl,
-    SegmentOption,
+    ButtonGroup,
+    ButtonOption,
 } from '../../../components'
 import { required } from '../../../lib'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
@@ -16,7 +16,7 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
         validate: required,
     })
 
-    const options: SegmentOption<ConstraintValue>[] = [
+    const options: ButtonOption<ConstraintValue>[] = [
         {
             value: 'PROGRAM_STAGE_INSTANCE',
             label: i18n.t('Event'),
@@ -39,11 +39,13 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
                     meta.touched && meta.error ? meta.error.toString() : ''
                 }
             >
-                <SegmentControl
+                <ButtonGroup
                     options={options}
                     selected={input.value}
                     onChange={(value) => {
                         input.onChange(value)
+                    }}
+                    onBlur={() => {
                         input.onBlur()
                     }}
                     dataTest={`${prefix}-constraint-selector`}
