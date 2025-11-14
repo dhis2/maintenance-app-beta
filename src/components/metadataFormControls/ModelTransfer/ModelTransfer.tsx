@@ -150,7 +150,7 @@ export const TransferHeader = ({ children }: { children: React.ReactNode }) => {
     return <>{children}</>
 }
 
-const DefaultTransferLeftFooter = ({
+export const DefaultTransferLeftFooter = ({
     onRefreshClick,
     newLink,
 }: {

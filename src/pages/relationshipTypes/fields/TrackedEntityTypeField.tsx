@@ -74,39 +74,39 @@ export const TrackedEntityTypeField = ({
                 onRefresh={() => refresh()}
                 onAddNew={() => window.open(newTrackedEntityTypeLink, '_blank')}
             >
-                <div style={{ width: '400px' }}>
-                    <ModelSingleSelectFormField<DisplayableModel>
-                        name={trackedEntityTypeName}
-                        label={i18n.t('Tracked entity type')}
-                        query={trackedEntityTypeQuery}
-                        validate={
-                            constraint === 'TRACKED_ENTITY_INSTANCE'
-                                ? required
-                                : undefined
+                <ModelSingleSelectFormField<DisplayableModel>
+                    name={trackedEntityTypeName}
+                    label={i18n.t('Tracked entity type')}
+                    query={trackedEntityTypeQuery}
+                    required={constraint === 'TRACKED_ENTITY_INSTANCE'}
+                    inputWidth="330px"
+                    validate={
+                        constraint === 'TRACKED_ENTITY_INSTANCE'
+                            ? required
+                            : undefined
+                    }
+                    onChange={() => {
+                        // Clear dependent fields when tracked entity type changes
+                        if (programInput.value) {
+                            programInput.onChange(undefined)
                         }
-                        onChange={() => {
-                            // Clear dependent fields when tracked entity type changes
-                            if (programInput.value) {
-                                programInput.onChange(undefined)
-                            }
-                            if (programStageInput.value) {
-                                programStageInput.onChange(undefined)
-                            }
-                            if (
-                                Array.isArray(attributesInput.value) &&
-                                attributesInput.value.length
-                            ) {
-                                attributesInput.onChange([])
-                            }
-                            if (
-                                Array.isArray(dataElementsInput.value) &&
-                                dataElementsInput.value.length
-                            ) {
-                                dataElementsInput.onChange([])
-                            }
-                        }}
-                    />
-                </div>
+                        if (programStageInput.value) {
+                            programStageInput.onChange(undefined)
+                        }
+                        if (
+                            Array.isArray(attributesInput.value) &&
+                            attributesInput.value.length
+                        ) {
+                            attributesInput.onChange([])
+                        }
+                        if (
+                            Array.isArray(dataElementsInput.value) &&
+                            dataElementsInput.value.length
+                        ) {
+                            dataElementsInput.onChange([])
+                        }
+                    }}
+                />
             </EditableFieldWrapper>
         </StandardFormField>
     )

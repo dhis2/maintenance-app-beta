@@ -2,8 +2,11 @@ import i18n from '@dhis2/d2-i18n'
 import { Field } from '@dhis2/ui'
 import React, { useEffect, useMemo } from 'react'
 import { useField, useFormState } from 'react-final-form'
+import { useHref } from 'react-router'
 import { StandardFormField } from '../../../components'
+import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
 import { BaseModelTransfer } from '../../../components/metadataFormControls/ModelTransfer/BaseModelTransfer'
+import { DefaultTransferLeftFooter } from '../../../components/metadataFormControls/ModelTransfer/ModelTransfer'
 import { DisplayableModel } from '../../../types/models'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
@@ -18,6 +21,17 @@ export const TrackedEntityAttributesField = ({
     const trackedEntityType =
         formValues[`${prefix}Constraint`]?.trackedEntityType
     const program = formValues[`${prefix}Constraint`]?.program
+
+    const newTrackedEntityAttributeLink = useHref(
+        '/trackedEntityAttributes/new'
+    )
+    // Refresh parent resource since attributes come from trackedEntityType or program
+    const refreshTrackedEntityType = useRefreshModelSingleSelect({
+        resource: 'trackedEntityTypes',
+    })
+    const refreshProgram = useRefreshModelSingleSelect({
+        resource: 'programs',
+    })
 
     const { input: attributesInput, meta } = useField<DisplayableModel[]>(
         attributesName,
@@ -104,6 +118,14 @@ export const TrackedEntityAttributesField = ({
         return null
     }
 
+    const handleRefresh = () => {
+        if (constraint === 'TRACKED_ENTITY_INSTANCE' && trackedEntityType?.id) {
+            refreshTrackedEntityType()
+        } else if (constraint === 'PROGRAM_INSTANCE' && program?.id) {
+            refreshProgram()
+        }
+    }
+
     return (
         <StandardFormField>
             <Field
@@ -121,6 +143,12 @@ export const TrackedEntityAttributesField = ({
                     }}
                     leftHeader={i18n.t('Available tracked entity attributes')}
                     rightHeader={i18n.t('Selected tracked entity attributes')}
+                    leftFooter={
+                        <DefaultTransferLeftFooter
+                            onRefreshClick={handleRefresh}
+                            newLink={newTrackedEntityAttributeLink}
+                        />
+                    }
                     filterPlaceholder={i18n.t('Search available attributes')}
                     filterPlaceholderPicked={i18n.t(
                         'Search selected attributes'

@@ -56,23 +56,23 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
 
     return (
         <StandardFormField>
-            <div style={{ width: '400px' }}>
-                <ModelSingleSelectFormField<DisplayableModel>
-                    name={programStageName}
-                    label={i18n.t('Program stage')}
-                    query={programStageQuery}
-                    validate={required}
-                    onChange={() => {
-                        // Clear data elements when program stage changes
-                        if (
-                            Array.isArray(dataElementsInput.value) &&
-                            dataElementsInput.value.length
-                        ) {
-                            dataElementsInput.onChange([])
-                        }
-                    }}
-                />
-            </div>
+            <ModelSingleSelectFormField<DisplayableModel>
+                name={programStageName}
+                label={i18n.t('Program stage')}
+                query={programStageQuery}
+                required
+                validate={required}
+                inputWidth="330px"
+                onChange={() => {
+                    // Clear data elements when program stage changes
+                    if (
+                        Array.isArray(dataElementsInput.value) &&
+                        dataElementsInput.value.length
+                    ) {
+                        dataElementsInput.onChange([])
+                    }
+                }}
+            />
         </StandardFormField>
     )
 }

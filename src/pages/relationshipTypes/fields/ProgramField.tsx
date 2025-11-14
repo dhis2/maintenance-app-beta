@@ -48,17 +48,18 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
         return false
     }, [constraint, trackedEntityType])
 
-    // Determine if program should be required based on constraint and visibility
+    // Determine if program should be required based on constraint
+    // Required for: PROGRAM_INSTANCE, PROGRAM_STAGE_INSTANCE
+    // Not required for: TRACKED_ENTITY_INSTANCE (visible but optional)
     const isRequired = useMemo(() => {
         if (!visible) {
             return false
         }
         return (
             constraint === 'PROGRAM_INSTANCE' ||
-            constraint === 'PROGRAM_STAGE_INSTANCE' ||
-            (constraint === 'TRACKED_ENTITY_INSTANCE' && !!trackedEntityType)
+            constraint === 'PROGRAM_STAGE_INSTANCE'
         )
-    }, [visible, constraint, trackedEntityType])
+    }, [visible, constraint])
 
     // Build program query with conditional filtering
     // Only compute query when field is visible
@@ -159,42 +160,31 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                 onRefresh={() => refresh()}
                 onAddNew={() => window.open(newProgramLink, '_blank')}
             >
-                <div style={{ width: '400px' }}>
-                    <ModelSingleSelectFormField<DisplayableModel>
-                        name={programName}
-                        label={i18n.t('Program')}
-                        query={programQuery}
-                        validate={(value) => {
-                            // Only validate if field is visible and required
-                            if (!visible) {
-                                return undefined
-                            }
-                            if (isRequired) {
-                                return required(value)
-                            }
-                            return undefined
-                        }}
-                        validateFields={[]}
-                        onChange={() => {
-                            // Clear dependent fields when program changes
-                            if (programStageInput.value) {
-                                programStageInput.onChange(undefined)
-                            }
-                            if (
-                                Array.isArray(attributesInput.value) &&
-                                attributesInput.value.length
-                            ) {
-                                attributesInput.onChange([])
-                            }
-                            if (
-                                Array.isArray(dataElementsInput.value) &&
-                                dataElementsInput.value.length
-                            ) {
-                                dataElementsInput.onChange([])
-                            }
-                        }}
-                    />
-                </div>
+                <ModelSingleSelectFormField<DisplayableModel>
+                    name={programName}
+                    label={i18n.t('Program')}
+                    query={programQuery}
+                    required={isRequired}
+                    inputWidth="330px"
+                    onChange={() => {
+                        // Clear dependent fields when program changes
+                        if (programStageInput.value) {
+                            programStageInput.onChange(undefined)
+                        }
+                        if (
+                            Array.isArray(attributesInput.value) &&
+                            attributesInput.value.length
+                        ) {
+                            attributesInput.onChange([])
+                        }
+                        if (
+                            Array.isArray(dataElementsInput.value) &&
+                            dataElementsInput.value.length
+                        ) {
+                            dataElementsInput.onChange([])
+                        }
+                    }}
+                />
             </EditableFieldWrapper>
         </StandardFormField>
     )

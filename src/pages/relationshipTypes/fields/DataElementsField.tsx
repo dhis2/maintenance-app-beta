@@ -2,8 +2,11 @@ import i18n from '@dhis2/d2-i18n'
 import { Field } from '@dhis2/ui'
 import React, { useEffect, useMemo } from 'react'
 import { useField, useFormState } from 'react-final-form'
+import { useHref } from 'react-router'
 import { StandardFormField } from '../../../components'
+import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
 import { BaseModelTransfer } from '../../../components/metadataFormControls/ModelTransfer/BaseModelTransfer'
+import { DefaultTransferLeftFooter } from '../../../components/metadataFormControls/ModelTransfer/ModelTransfer'
 import { DisplayableModel } from '../../../types/models'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
@@ -15,6 +18,12 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
         | undefined
     const program = formValues[`${prefix}Constraint`]?.program
     const programStage = formValues[`${prefix}Constraint`]?.programStage
+
+    const newDataElementLink = useHref('/dataElements/new')
+    // Refresh programStage since data elements come from programStage.programStageDataElements
+    const refreshProgramStage = useRefreshModelSingleSelect({
+        resource: 'programStages',
+    })
 
     // Using useField to get direct access to the field for clearing values
     // Assumption: Following the pattern from ProgramField.tsx and ProgramStageField.tsx
@@ -37,8 +46,7 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
     }, [constraint, program?.id, programStage?.id])
 
     // Extract data elements from programStage.programStageDataElements
-    // Assumption: programStage is fetched with fields: id,displayName,programStageDataElements[id,dataElement[id,displayName]]
-    // so we can extract data elements directly without additional API calls
+    // Data is already fetched in ProgramStageField, so no extra API call needed
     const availableDataElements = useMemo<DisplayableModel[]>(() => {
         if (!programStage?.programStageDataElements) {
             return []
@@ -88,6 +96,12 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
                     }}
                     leftHeader={i18n.t('Available data elements')}
                     rightHeader={i18n.t('Selected data elements')}
+                    leftFooter={
+                        <DefaultTransferLeftFooter
+                            onRefreshClick={() => refreshProgramStage()}
+                            newLink={newDataElementLink}
+                        />
+                    }
                     filterPlaceholder={i18n.t('Search available data elements')}
                     filterPlaceholderPicked={i18n.t(
                         'Search selected data elements'
