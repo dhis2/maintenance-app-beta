@@ -24,7 +24,7 @@
     text-align: center;
 }
 
-.buttonOption:hover:not(.buttonOptionDisabled):not(.buttonOptionSelected) {
+.buttonOption:hover:not(.buttonOptionSelected) {
     background-color: var(--colors-grey400);
 }
 
@@ -33,11 +33,6 @@
     color: var(--colors-grey900);
     font-weight: 400;
     border-radius: 8px;
-}
-
-.buttonOptionDisabled {
-    opacity: 0.5;
-    cursor: not-allowed;
 }
 
 .buttonOption:focus-visible {

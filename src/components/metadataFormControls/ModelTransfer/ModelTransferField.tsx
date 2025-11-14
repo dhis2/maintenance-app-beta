@@ -29,6 +29,7 @@ type ModelTransferFieldProps = {
     | 'disabled'
     | 'optionsWidth'
     | 'selectedWidth'
+    | 'height'
 >
 
 export function ModelTransferField({
@@ -49,6 +50,7 @@ export function ModelTransferField({
     disabled = false,
     optionsWidth,
     selectedWidth,
+    height,
 }: ModelTransferFieldProps) {
     const { input, meta } = useField<DisplayableModel[]>(name, {
         multiple: true,
@@ -64,7 +66,7 @@ export function ModelTransferField({
             className={css.moduleTransferField}
         >
             <ModelTransfer
-                selected={input.value || []}
+                selected={input.value}
                 onChange={({ selected }) => {
                     input.onChange(selected)
                     input.onBlur()
@@ -84,6 +86,7 @@ export function ModelTransferField({
                 filterUnassignedTo={filterUnassignedTo}
                 optionsWidth={optionsWidth}
                 selectedWidth={selectedWidth}
+                height={height}
             />
         </Field>
     )

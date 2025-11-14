@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-13T16:49:25.671Z\n"
-"PO-Revision-Date: 2025-11-13T16:49:25.671Z\n"
+"POT-Creation-Date: 2025-11-14T18:26:53.895Z\n"
+"PO-Revision-Date: 2025-11-14T18:26:53.895Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -86,6 +86,12 @@ msgstr "Remove icon"
 
 msgid "Cancel"
 msgstr "Cancel"
+
+msgid "Refresh"
+msgstr "Refresh"
+
+msgid "Add new"
+msgstr "Add new"
 
 msgid "Message subject"
 msgstr "Message subject"
@@ -530,9 +536,6 @@ msgstr "Show only unassigned items"
 
 msgid "Refresh list"
 msgstr "Refresh list"
-
-msgid "Add new"
-msgstr "Add new"
 
 msgid "Something went wrong"
 msgstr "Something went wrong"
@@ -3936,8 +3939,11 @@ msgstr "Search selected attributes"
 msgid "Saving a section does not save other changes to the program"
 msgstr "Saving a section does not save other changes to the program"
 
-msgid "Data elements to display in list"
-msgstr "Data elements to display in list"
+msgid "Tracked entity"
+msgstr "Tracked entity"
+
+msgid "Choose which data elements are shown when viewing the relationship"
+msgstr "Choose which data elements are shown when viewing the relationship"
 
 msgid "Available tracked entity attributes"
 msgstr "Available tracked entity attributes"
@@ -3948,17 +3954,17 @@ msgstr "Selected tracked entity attributes"
 msgid "Set up the basic information for this relationship type."
 msgstr "Set up the basic information for this relationship type."
 
-msgid "Will be shown everywhere a user sees a tracked entity type."
-msgstr "Will be shown everywhere a user sees a tracked entity type."
+msgid "Will be shown everywhere a user sees a relationship type."
+msgstr "Will be shown everywhere a user sees a relationship type."
 
 msgid "Provide a helpful description of what this relationship is used for."
 msgstr "Provide a helpful description of what this relationship is used for."
 
-msgid "Relationship name seen from initiating side (required)"
-msgstr "Relationship name seen from initiating side (required)"
+msgid "Relationship name seen from initiating entity"
+msgstr "Relationship name seen from initiating entity"
 
-msgid "Relationship name seen from receiving side (required)"
-msgstr "Relationship name seen from receiving side (required)"
+msgid "Relationship name seen from receiving entity"
+msgstr "Relationship name seen from receiving entity"
 
 msgid "Relationship sides"
 msgstr "Relationship sides"
@@ -3973,11 +3979,11 @@ msgstr ""
 msgid "Bidirectional"
 msgstr "Bidirectional"
 
-msgid "Relationship name seen from initiating entity"
-msgstr "Relationship name seen from initiating entity"
+msgid "Initiating side constraint"
+msgstr "Initiating side constraint"
 
-msgid "Relationship name seen from receiving entity"
-msgstr "Relationship name seen from receiving entity"
+msgid "Receiving side constraint"
+msgstr "Receiving side constraint"
 
 msgid "Name is required"
 msgstr "Name is required"
@@ -4033,9 +4039,6 @@ msgstr "Pattern for automatically generated values"
 
 msgid "Pattern must use the DHIS2 TextPattern syntax."
 msgstr "Pattern must use the DHIS2 TextPattern syntax."
-
-msgid "Tracked entity"
-msgstr "Tracked entity"
 
 msgid "Across entire system"
 msgstr "Across entire system"

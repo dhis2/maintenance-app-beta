@@ -58,7 +58,7 @@ export function RelationshipTypeFormFields() {
                     <NameField
                         schemaSection={schemaSection}
                         helpText={i18n.t(
-                            'Will be shown everywhere a user sees a tracked entity type.'
+                            'Will be shown everywhere a user sees a relationship type.'
                         )}
                     />
                 </StandardFormField>

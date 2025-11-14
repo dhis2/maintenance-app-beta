@@ -6,7 +6,10 @@ import { useHref } from 'react-router'
 import { StandardFormField } from '../../../components'
 import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
 import { BaseModelTransfer } from '../../../components/metadataFormControls/ModelTransfer/BaseModelTransfer'
-import { DefaultTransferLeftFooter } from '../../../components/metadataFormControls/ModelTransfer/ModelTransfer'
+import {
+    DefaultTransferLeftFooter,
+    TransferHeader,
+} from '../../../components/metadataFormControls/ModelTransfer/ModelTransfer'
 import { DisplayableModel } from '../../../types/models'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
@@ -20,13 +23,10 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
     const programStage = formValues[`${prefix}Constraint`]?.programStage
 
     const newDataElementLink = useHref('/dataElements/new')
-    // Refresh programStage since data elements come from programStage.programStageDataElements
     const refreshProgramStage = useRefreshModelSingleSelect({
         resource: 'programStages',
     })
 
-    // Using useField to get direct access to the field for clearing values
-    // Assumption: Following the pattern from ProgramField.tsx and ProgramStageField.tsx
     const { input: dataElementsInput, meta } = useField<DisplayableModel[]>(
         dataElementsName,
         {
@@ -35,43 +35,34 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
         }
     )
 
-    // Field is only visible when constraint is PROGRAM_STAGE_INSTANCE
-    // and both program and programStage are selected
-    const visible = useMemo(() => {
-        return (
-            constraint === 'PROGRAM_STAGE_INSTANCE' &&
-            !!program?.id &&
-            !!programStage?.id
-        )
-    }, [constraint, program?.id, programStage?.id])
+    const visible =
+        constraint === 'PROGRAM_STAGE_INSTANCE' &&
+        !!program?.id &&
+        !!programStage?.id
 
-    // Extract data elements from programStage.programStageDataElements
-    // Data is already fetched in ProgramStageField, so no extra API call needed
     const availableDataElements = useMemo<DisplayableModel[]>(() => {
         if (!programStage?.programStageDataElements) {
             return []
         }
         return programStage.programStageDataElements
-            .map((psde: { dataElement: DisplayableModel }) => psde.dataElement)
-            .filter((de: DisplayableModel | undefined) => !!de)
+            .map((psde: { dataElement?: DisplayableModel }) => psde.dataElement)
+            .filter(
+                (de: DisplayableModel | undefined): de is DisplayableModel =>
+                    !!de
+            )
     }, [programStage?.programStageDataElements])
 
-    // Clear data elements when field becomes hidden
-    // Assumption: Following the pattern from ProgramField.tsx and ProgramStageField.tsx
-    // which use input.onChange() instead of form.change()
     useEffect(() => {
-        if (!visible && dataElementsInput.value) {
-            // Clear array field when visibility changes to false
-            if (
-                Array.isArray(dataElementsInput.value) &&
-                dataElementsInput.value.length > 0
-            ) {
-                dataElementsInput.onChange([])
-            }
+        if (
+            !visible &&
+            Array.isArray(dataElementsInput.value) &&
+            dataElementsInput.value.length > 0
+        ) {
+            dataElementsInput.onChange([])
         }
     }, [visible, dataElementsInput])
 
-    if (!visible) {
+    if (!visible || availableDataElements.length === 0) {
         return null
     }
 
@@ -94,8 +85,16 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
                         dataElementsInput.onChange(selected)
                         dataElementsInput.onBlur()
                     }}
-                    leftHeader={i18n.t('Available data elements')}
-                    rightHeader={i18n.t('Selected data elements')}
+                    leftHeader={
+                        <TransferHeader>
+                            {i18n.t('Available data elements')}
+                        </TransferHeader>
+                    }
+                    rightHeader={
+                        <TransferHeader>
+                            {i18n.t('Selected data elements')}
+                        </TransferHeader>
+                    }
                     leftFooter={
                         <DefaultTransferLeftFooter
                             onRefreshClick={() => refreshProgramStage()}
@@ -106,6 +105,8 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
                     filterPlaceholderPicked={i18n.t(
                         'Search selected data elements'
                     )}
+                    filterable
+                    filterablePicked
                     enableOrderChange
                     optionsWidth="45%"
                     selectedWidth="45%"

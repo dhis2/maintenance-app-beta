@@ -45,7 +45,16 @@ export const RelationshipTypeFormDescriptor = {
         {
             name: 'relationshipSides',
             label: i18n.t('Relationship sides'),
-            fields: [],
+            fields: [
+                {
+                    name: 'fromConstraint',
+                    label: i18n.t('Initiating side constraint'),
+                },
+                {
+                    name: 'toConstraint',
+                    label: i18n.t('Receiving side constraint'),
+                },
+            ],
         },
     ],
 } as const satisfies SectionedFormDescriptor<RelationshipTypeValues>

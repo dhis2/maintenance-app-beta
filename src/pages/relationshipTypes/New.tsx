@@ -8,7 +8,7 @@ import {
 } from '../../components'
 import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import {
-    initialRelationshipTypeValues,
+    initialValues,
     validateRelationshipType,
     RelationshipTypeFormDescriptor,
     RelationshipTypeFormFields,
@@ -20,7 +20,7 @@ export const Component = () => {
     return (
         <FormBase
             onSubmit={useOnSubmitNew({ section })}
-            initialValues={initialRelationshipTypeValues}
+            initialValues={initialValues}
             validate={validateRelationshipType}
         >
             {({ handleSubmit }) => {

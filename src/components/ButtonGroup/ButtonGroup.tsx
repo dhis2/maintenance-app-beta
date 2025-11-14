@@ -11,15 +11,15 @@ export type ButtonGroupProps = Readonly<{
     options: ButtonOption[]
     selected?: string
     onChange: (value: string) => void
-    dataTest?: string
+    dataTest: string
 }>
 
-export function ButtonGroup({
+export const ButtonGroup = ({
     options,
     selected,
     onChange,
     dataTest,
-}: ButtonGroupProps) {
+}: ButtonGroupProps) => {
     return (
         <div className={css.buttonGroup} data-test={dataTest}>
             {options.map((option) => {
@@ -33,11 +33,7 @@ export function ButtonGroup({
                             [css.buttonOptionSelected]: isSelected,
                         })}
                         onClick={() => onChange(option.value)}
-                        data-test={
-                            dataTest
-                                ? `${dataTest}-option-${option.value}`
-                                : undefined
-                        }
+                        data-test={`${dataTest}-option-${option.value}`}
                     >
                         {option.label}
                     </button>

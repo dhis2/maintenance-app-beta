@@ -39,9 +39,7 @@ export type RelationshipTypeFormValues = PickWithFieldFilters<
     typeof fieldFilters
 >
 
-export const initialRelationshipTypeValues = {
-    ...getDefaults(relationshipTypeFormSchema),
-}
+export const initialValues = getDefaults(relationshipTypeFormSchema)
 
 export const validateRelationshipType = createFormValidate(
     relationshipTypeFormSchema

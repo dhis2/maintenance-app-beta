@@ -3,7 +3,6 @@ import React, { useEffect, useMemo } from 'react'
 import { useField, useFormState } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { required } from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
@@ -22,11 +21,8 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
 
     const visible = constraint === 'PROGRAM_STAGE_INSTANCE' && !!program?.id
 
-    // Build program stage query with programStageDataElements
-    // Only compute query when field is visible and program is selected
-    // Use program.id directly in dependencies to avoid query changes during constraint transitions
     const programStageQuery = useMemo(() => {
-        if (constraint !== 'PROGRAM_STAGE_INSTANCE' || !program?.id) {
+        if (!visible) {
             return null
         }
         return {
@@ -42,7 +38,7 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
                 paging: false,
             },
         }
-    }, [constraint, program?.id])
+    }, [visible, program?.id])
 
     useEffect(() => {
         if (!visible && programStageInput.value) {
@@ -61,10 +57,8 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
                 label={i18n.t('Program stage')}
                 query={programStageQuery}
                 required
-                validate={required}
                 inputWidth="330px"
                 onChange={() => {
-                    // Clear data elements when program stage changes
                     if (
                         Array.isArray(dataElementsInput.value) &&
                         dataElementsInput.value.length

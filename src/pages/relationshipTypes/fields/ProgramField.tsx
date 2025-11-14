@@ -1,11 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
 import React, { useEffect, useMemo } from 'react'
-import { useField, useFormState, useForm } from 'react-final-form'
+import { useField, useFormState } from 'react-final-form'
 import { useHref } from 'react-router'
 import { StandardFormField, EditableFieldWrapper } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
-import { required } from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
@@ -28,71 +27,36 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
     const { input: dataElementsInput } = useField(
         `${prefix}Constraint.dataElements`
     )
-    const form = useForm()
     const newProgramLink = useHref('/programs/new')
     const refresh = useRefreshModelSingleSelect({ resource: 'programs' })
 
-    const visible = useMemo(() => {
-        if (!constraint) {
-            return false
-        }
-        if (
-            constraint === 'PROGRAM_INSTANCE' ||
-            constraint === 'PROGRAM_STAGE_INSTANCE'
-        ) {
-            return true
-        }
-        if (constraint === 'TRACKED_ENTITY_INSTANCE' && trackedEntityType?.id) {
-            return true
-        }
-        return false
-    }, [constraint, trackedEntityType])
+    const visible =
+        !!constraint &&
+        (constraint === 'PROGRAM_INSTANCE' ||
+            constraint === 'PROGRAM_STAGE_INSTANCE' ||
+            (constraint === 'TRACKED_ENTITY_INSTANCE' &&
+                !!trackedEntityType?.id))
 
-    // Determine if program should be required based on constraint
-    // Required for: PROGRAM_INSTANCE, PROGRAM_STAGE_INSTANCE
-    // Not required for: TRACKED_ENTITY_INSTANCE (visible but optional)
-    const isRequired = useMemo(() => {
-        if (!visible) {
-            return false
-        }
-        return (
-            constraint === 'PROGRAM_INSTANCE' ||
-            constraint === 'PROGRAM_STAGE_INSTANCE'
-        )
-    }, [visible, constraint])
+    const isRequired =
+        visible &&
+        (constraint === 'PROGRAM_INSTANCE' ||
+            constraint === 'PROGRAM_STAGE_INSTANCE')
 
-    // Build program query with conditional filtering
-    // Only compute query when field is visible
     const programQuery = useMemo(() => {
         if (!visible) {
             return null
         }
 
-        const baseQuery: {
-            resource: string
-            params: {
-                fields: string[]
-                order: string
-                filter?: string[]
-                paging?: boolean
-            }
-        } = {
-            resource: 'programs',
-            params: {
-                fields: [
-                    'id',
-                    'displayName',
-                    'programType',
-                    'trackedEntityType',
-                ],
-                order: 'displayName:iasc',
-            },
-        }
+        const isTrackedEntityInstance =
+            constraint === 'TRACKED_ENTITY_INSTANCE' && trackedEntityType?.id
+        const isProgramInstance = constraint === 'PROGRAM_INSTANCE'
+        const isProgramStageInstance = constraint === 'PROGRAM_STAGE_INSTANCE'
 
-        // When constraint is TRACKED_ENTITY_INSTANCE, include programTrackedEntityAttributes
-        // This matches the correct data flow where programs are fetched with their attributes
-        if (constraint === 'TRACKED_ENTITY_INSTANCE' && trackedEntityType?.id) {
-            baseQuery.params.fields = [
+        let fields = ['id', 'displayName', 'programType', 'trackedEntityType']
+        const filters: string[] = []
+
+        if (isTrackedEntityInstance) {
+            fields = [
                 'id',
                 'displayName',
                 'programType',
@@ -100,55 +64,44 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                 'programTrackedEntityAttributes[id,trackedEntityAttribute[id,displayName,valueType]]',
                 'programStages[id]',
             ]
-            baseQuery.params.paging = false
-        }
-
-        // When constraint is PROGRAM_INSTANCE, include programTrackedEntityAttributes
-        // This matches the correct data flow where programs are fetched with their attributes
-        if (constraint === 'PROGRAM_INSTANCE') {
-            baseQuery.params.fields = [
+            filters.push('programType:eq:WITH_REGISTRATION')
+            filters.push(`trackedEntityType.id:eq:${trackedEntityType.id}`)
+        } else if (isProgramInstance) {
+            fields = [
                 'id',
                 'displayName',
                 'programType',
                 'programTrackedEntityAttributes[id,trackedEntityAttribute[id,displayName,valueType]]',
                 'programStages[id]',
             ]
-            baseQuery.params.paging = false
-        }
-
-        // When constraint is PROGRAM_STAGE_INSTANCE, include programStages with programStageDataElements
-        if (constraint === 'PROGRAM_STAGE_INSTANCE') {
-            baseQuery.params.fields = [
+            filters.push('programType:eq:WITH_REGISTRATION')
+        } else if (isProgramStageInstance) {
+            fields = [
                 'id',
                 'displayName',
                 'programType',
                 'programStages[id,programStageDataElements[dataElement[id,displayName]]]',
             ]
-            baseQuery.params.paging = false
         }
 
-        if (constraint === 'TRACKED_ENTITY_INSTANCE' && trackedEntityType?.id) {
-            baseQuery.params.filter = [
-                `programType:eq:WITH_REGISTRATION`,
-                `trackedEntityType.id:eq:${trackedEntityType.id}`,
-            ]
-        } else if (constraint === 'PROGRAM_INSTANCE') {
-            baseQuery.params.filter = [`programType:eq:WITH_REGISTRATION`]
+        return {
+            resource: 'programs',
+            params: {
+                fields,
+                order: 'displayName:iasc',
+                ...(filters.length > 0 && { filter: filters }),
+                ...((isTrackedEntityInstance ||
+                    isProgramInstance ||
+                    isProgramStageInstance) && { paging: false }),
+            },
         }
-        // For PROGRAM_STAGE_INSTANCE, no WITH_REGISTRATION filter (include programs with stages)
-
-        return baseQuery
     }, [visible, constraint, trackedEntityType?.id])
 
     useEffect(() => {
         if (!visible && programInput.value) {
             programInput.onChange(undefined)
-            // Also clear validation state when field becomes hidden
-            if (form) {
-                form.mutators?.setFieldTouched?.(programName, false)
-            }
         }
-    }, [visible, programInput, form, programName])
+    }, [visible, programInput])
 
     if (!visible || !programQuery) {
         return null
@@ -167,7 +120,6 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                     required={isRequired}
                     inputWidth="330px"
                     onChange={() => {
-                        // Clear dependent fields when program changes
                         if (programStageInput.value) {
                             programStageInput.onChange(undefined)
                         }

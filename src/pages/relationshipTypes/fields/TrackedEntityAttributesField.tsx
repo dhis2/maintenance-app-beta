@@ -6,7 +6,10 @@ import { useHref } from 'react-router'
 import { StandardFormField } from '../../../components'
 import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
 import { BaseModelTransfer } from '../../../components/metadataFormControls/ModelTransfer/BaseModelTransfer'
-import { DefaultTransferLeftFooter } from '../../../components/metadataFormControls/ModelTransfer/ModelTransfer'
+import {
+    DefaultTransferLeftFooter,
+    TransferHeader,
+} from '../../../components/metadataFormControls/ModelTransfer/ModelTransfer'
 import { DisplayableModel } from '../../../types/models'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
@@ -25,7 +28,6 @@ export const TrackedEntityAttributesField = ({
     const newTrackedEntityAttributeLink = useHref(
         '/trackedEntityAttributes/new'
     )
-    // Refresh parent resource since attributes come from trackedEntityType or program
     const refreshTrackedEntityType = useRefreshModelSingleSelect({
         resource: 'trackedEntityTypes',
     })
@@ -42,23 +44,16 @@ export const TrackedEntityAttributesField = ({
     )
 
     const visible = useMemo(() => {
-        if (!constraint) {
+        if (!constraint || constraint === 'PROGRAM_STAGE_INSTANCE') {
             return false
         }
-        if (constraint === 'PROGRAM_STAGE_INSTANCE') {
-            return false
-        }
-        if (constraint === 'TRACKED_ENTITY_INSTANCE' && trackedEntityType?.id) {
-            return true
-        }
-        if (constraint === 'PROGRAM_INSTANCE' && program?.id) {
-            return true
-        }
-        return false
+        return (
+            (constraint === 'TRACKED_ENTITY_INSTANCE' &&
+                !!trackedEntityType?.id) ||
+            (constraint === 'PROGRAM_INSTANCE' && !!program?.id)
+        )
     }, [constraint, trackedEntityType?.id, program?.id])
 
-    // Extract available attributes from trackedEntityType.trackedEntityTypeAttributes or program.programTrackedEntityAttributes
-    // This data is already fetched in TrackedEntityTypeField/ProgramField, so no extra API call needed
     const availableAttributes = useMemo<DisplayableModel[]>(() => {
         if (
             constraint === 'TRACKED_ENTITY_INSTANCE' &&
@@ -98,32 +93,17 @@ export const TrackedEntityAttributesField = ({
     ])
 
     useEffect(() => {
-        if (!visible && attributesInput.value) {
-            if (
-                Array.isArray(attributesInput.value) &&
-                attributesInput.value.length > 0
-            ) {
-                attributesInput.onChange([])
-            }
+        if (
+            !visible &&
+            Array.isArray(attributesInput.value) &&
+            attributesInput.value.length > 0
+        ) {
+            attributesInput.onChange([])
         }
     }, [visible, attributesInput])
 
-    if (!visible) {
+    if (!visible || availableAttributes.length === 0) {
         return null
-    }
-
-    // Use BaseModelTransfer with available data for both TRACKED_ENTITY_INSTANCE and PROGRAM_INSTANCE
-    // Data is already fetched in TrackedEntityTypeField/ProgramField, so no extra API calls needed
-    if (availableAttributes.length === 0) {
-        return null
-    }
-
-    const handleRefresh = () => {
-        if (constraint === 'TRACKED_ENTITY_INSTANCE' && trackedEntityType?.id) {
-            refreshTrackedEntityType()
-        } else if (constraint === 'PROGRAM_INSTANCE' && program?.id) {
-            refreshProgram()
-        }
     }
 
     return (
@@ -141,11 +121,31 @@ export const TrackedEntityAttributesField = ({
                         attributesInput.onChange(selected)
                         attributesInput.onBlur()
                     }}
-                    leftHeader={i18n.t('Available tracked entity attributes')}
-                    rightHeader={i18n.t('Selected tracked entity attributes')}
+                    leftHeader={
+                        <TransferHeader>
+                            {i18n.t('Available tracked entity attributes')}
+                        </TransferHeader>
+                    }
+                    rightHeader={
+                        <TransferHeader>
+                            {i18n.t('Selected tracked entity attributes')}
+                        </TransferHeader>
+                    }
                     leftFooter={
                         <DefaultTransferLeftFooter
-                            onRefreshClick={handleRefresh}
+                            onRefreshClick={() => {
+                                if (
+                                    constraint === 'TRACKED_ENTITY_INSTANCE' &&
+                                    trackedEntityType?.id
+                                ) {
+                                    refreshTrackedEntityType()
+                                } else if (
+                                    constraint === 'PROGRAM_INSTANCE' &&
+                                    program?.id
+                                ) {
+                                    refreshProgram()
+                                }
+                            }}
                             newLink={newTrackedEntityAttributeLink}
                         />
                     }
@@ -153,6 +153,8 @@ export const TrackedEntityAttributesField = ({
                     filterPlaceholderPicked={i18n.t(
                         'Search selected attributes'
                     )}
+                    filterable
+                    filterablePicked
                     enableOrderChange
                     optionsWidth="45%"
                     selectedWidth="45%"
