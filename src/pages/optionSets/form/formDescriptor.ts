@@ -15,5 +15,10 @@ export const OptionSetFormDescriptor = {
                 { name: 'valueType', label: i18n.t('Value type') },
             ],
         },
+        {
+            name: 'options',
+            label: i18n.t('Options'),
+            fields: [{ name: 'options', label: i18n.t('Options') }],
+        },
     ],
 } as const satisfies SectionedFormDescriptor

@@ -10,8 +10,13 @@ import {
 } from '../../../lib'
 import { BasicInfoFormContents } from './BasicInfoFormContents'
 import { OptionSetFormDescriptor } from './formDescriptor'
+import { OptionsListFormContents } from './OptionsListFormContents'
 
-export const OptionSetFormContents = () => {
+export const OptionSetFormContents = ({
+    manuallyDeleted,
+}: {
+    manuallyDeleted?: string
+}) => {
     const descriptor = useSectionedFormContext<typeof OptionSetFormDescriptor>()
     useSyncSelectedSectionWithScroll()
 
@@ -19,6 +24,10 @@ export const OptionSetFormContents = () => {
         <SectionedFormSections>
             <BasicInfoFormContents
                 name={descriptor.getSection('basicInfo').name}
+            />
+            <OptionsListFormContents
+                name={descriptor.getSection('options').name}
+                manuallyDeleted={manuallyDeleted ?? ''}
             />
             <CustomAttributesSection
                 schemaSection={SECTIONS_MAP.optionSet}

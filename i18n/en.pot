@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-13T06:46:39.628Z\n"
-"PO-Revision-Date: 2025-11-13T06:46:39.628Z\n"
+"POT-Creation-Date: 2025-11-13T17:31:51.776Z\n"
+"PO-Revision-Date: 2025-11-13T17:31:51.776Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -855,6 +855,9 @@ msgstr "Translation updated successfully"
 
 msgid "Save translations"
 msgstr "Save translations"
+
+msgid "There was an error deleting options: {{optionIds}}"
+msgstr "There was an error deleting options: {{optionIds}}"
 
 msgid "Can edit and capture"
 msgstr "Can edit and capture"
@@ -3036,6 +3039,53 @@ msgstr "Basic Information"
 msgid "Set up the basic information for this option set."
 msgstr "Set up the basic information for this option set."
 
+msgid "Option set must be saved before options can be added"
+msgstr "Option set must be saved before options can be added"
+
+msgid "Something went wrong when loading options"
+msgstr "Something went wrong when loading options"
+
+msgid "Search by name or code"
+msgstr "Search by name or code"
+
+msgid "Add option"
+msgstr "Add option"
+
+msgid "Sort by name (A-Z)"
+msgstr "Sort by name (A-Z)"
+
+msgid "Sort by name (Z-A)"
+msgstr "Sort by name (Z-A)"
+
+msgid "Sort by code (asc)"
+msgstr "Sort by code (asc)"
+
+msgid "Sort by code (desc)"
+msgstr "Sort by code (desc)"
+
+msgid ""
+"{{hiddenRowsCount}} rows are hidden due to filter. Sorting is disabled "
+"while filter is defined."
+msgstr ""
+"{{hiddenRowsCount}} rows are hidden due to filter. Sorting is disabled "
+"while filter is defined."
+
+msgid "Will be removed on save"
+msgstr "Will be removed on save"
+
+msgid "Restore option"
+msgstr "Restore option"
+
+msgid "No options have been added yet"
+msgstr "No options have been added yet"
+
+msgid ""
+"Sort functionality is not available with more than "
+"{{maximumNumberOfOptions}} options"
+msgstr ""
+"Sort functionality is not available with more than "
+"{{maximumNumberOfOptions}} options"
+
 msgid "Option Set"
 msgstr "Option Set"
 
@@ -4167,9 +4217,6 @@ msgid ""
 msgstr ""
 "Choose which attributes to display, which are required, and which are "
 "searchable"
-
-msgid "Attribute name"
-msgstr "Attribute name"
 
 msgid "Available tracked entity attributes"
 msgstr "Available tracked entity attributes"

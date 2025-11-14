@@ -68,8 +68,21 @@ export function createJsonPatchOperations<
 
     const dirtyFieldsKeys = Object.keys(dirtyFields)
     const adjustedDirtyFieldsKeys = sanitizeDirtyValueKeys(dirtyFieldsKeys)
+    // remove cases where original and new values are equal
+    const filteredDirtyFieldsKeys = adjustedDirtyFieldsKeys.filter((name) => {
+        const priorValue = get(name, originalValue)
+        const newValue = get(name, values)
+        // for arrays just remove cases where both are length 0
+        if (Array.isArray(priorValue) && Array.isArray(newValue)) {
+            if (priorValue.length === 0 && newValue.length === 0) {
+                return false
+            }
+            return true
+        }
+        return priorValue !== newValue
+    })
 
-    return adjustedDirtyFieldsKeys.map((name) => ({
+    return filteredDirtyFieldsKeys.map((name) => ({
         op: get(name, originalValue) ? 'replace' : 'add',
         path: `/${name.replace(/[.]/g, '/')}`,
         value: get(name, values) ?? null,
