@@ -1,6 +1,5 @@
 export { AggregationLevelsField } from './AggregationLevelsField'
 export { CategoryComboField } from './CategoryComboField'
-export { ColorAndIconField } from './ColorAndIconField'
 export { DomainField } from './DomainField'
 export { FieldMaskField } from './FieldMaskField'
 export { FormNameField } from './FormNameField'

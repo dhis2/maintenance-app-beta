@@ -3,6 +3,7 @@ import { SingleSelectFieldFF, CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import {
+    ColorAndIconField,
     CustomAttributesSection,
     DefaultIdentifiableFields,
     DescriptionField,
@@ -18,7 +19,6 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
-import { ColorAndIconField } from '../../dataElements/fields'
 import DenominatorFields from './DenominatorFields'
 import { IndicatorFormDescriptor } from './formDescriptor'
 import { IndicatorTypeField } from './IndicatorTypeField'

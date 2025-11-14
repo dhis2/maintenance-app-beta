@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-14T18:26:53.895Z\n"
-"PO-Revision-Date: 2025-11-14T18:26:53.895Z\n"
+"POT-Creation-Date: 2025-11-14T18:57:22.711Z\n"
+"PO-Revision-Date: 2025-11-14T18:57:22.711Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -272,6 +272,16 @@ msgstr "{{fieldLabel}} (required)"
 
 msgid "Code"
 msgstr "Code"
+
+msgid "Visual configuration"
+msgstr "Visual configuration"
+
+msgid ""
+"A color and icon are helpful for identifying data elements in "
+"information-dense screens."
+msgstr ""
+"A color and icon are helpful for identifying data elements in "
+"information-dense screens."
 
 msgid "Description"
 msgstr "Description"
@@ -2053,16 +2063,6 @@ msgstr "Aggregation level(s)"
 msgid "Choose how this data element is disaggregated."
 msgstr "Choose how this data element is disaggregated."
 
-msgid "Color and icon"
-msgstr "Color and icon"
-
-msgid ""
-"A color and icon are helpful for identifying data elements in "
-"information-dense screens."
-msgstr ""
-"A color and icon are helpful for identifying data elements in "
-"information-dense screens."
-
 msgid "Domain"
 msgstr "Domain"
 
@@ -2964,6 +2964,27 @@ msgstr "No indicators available. Remove one from source."
 msgid "What should happen to the source indicators after the merge is complete?"
 msgstr "What should happen to the source indicators after the merge is complete?"
 
+msgid "Country"
+msgstr "Country"
+
+msgid "Failed to load countries"
+msgstr "Failed to load countries"
+
+msgid "Select a country"
+msgstr "Select a country"
+
+msgid "Language"
+msgstr "Language"
+
+msgid "Failed to load languages"
+msgstr "Failed to load languages"
+
+msgid "Select a language"
+msgstr "Select a language"
+
+msgid "Locale will not be editable after it has been created."
+msgstr "Locale will not be editable after it has been created."
+
 msgid "Set up the basic information for this option group set."
 msgstr "Set up the basic information for this option group set."
 
@@ -3011,6 +3032,15 @@ msgstr "Filter available options"
 
 msgid "Filter selected options"
 msgstr "Filter selected options"
+
+msgid "Basic Information"
+msgstr "Basic Information"
+
+msgid "Set up the basic information for this option set."
+msgstr "Set up the basic information for this option set."
+
+msgid "Option Set"
+msgstr "Option Set"
 
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."
@@ -3885,6 +3915,77 @@ msgstr "Allow incident dates in the future"
 msgid "Collect data for the first stage during enrollment"
 msgstr "Collect data for the first stage during enrollment"
 
+msgid "Program Customization"
+msgstr "Program Customization"
+
+msgid "Customize the program's visuals, labels, and display settings."
+msgstr "Customize the program's visuals, labels, and display settings."
+
+msgid "Custom label for \"Incident date\""
+msgstr "Custom label for \"Incident date\""
+
+msgid "Used as an additional registration date for enrollments"
+msgstr "Used as an additional registration date for enrollments"
+
+msgid "Custom label for \"Enrollment date\""
+msgstr "Custom label for \"Enrollment date\""
+
+msgid "Used as the default registration date for enrollments"
+msgstr "Used as the default registration date for enrollments"
+
+msgid "Custom label for \"Enrollment\""
+msgstr "Custom label for \"Enrollment\""
+
+msgid "Example use: See all data in this enrollment"
+msgstr "Example use: See all data in this enrollment"
+
+msgid "Custom label for \"Event\""
+msgstr "Custom label for \"Event\""
+
+msgid "Example use: Schedule a new event"
+msgstr "Example use: Schedule a new event"
+
+msgid "Custom label for \"Program stage\""
+msgstr "Custom label for \"Program stage\""
+
+msgid "Example use: See all data in this program stage"
+msgstr "Example use: See all data in this program stage"
+
+msgid "Custom label for \"Follow-up\""
+msgstr "Custom label for \"Follow-up\""
+
+msgid "Used to customize the label for follow-up events or activities"
+msgstr "Used to customize the label for follow-up events or activities"
+
+msgid "Custom label for \"Registering unit\""
+msgstr "Custom label for \"Registering unit\""
+
+msgid ""
+"Used to customize the label for the organisation unit that registers the "
+"enrollment or event"
+msgstr ""
+"Used to customize the label for the organisation unit that registers the "
+"enrollment or event"
+
+msgid "Custom label for \"Relationship\""
+msgstr "Custom label for \"Relationship\""
+
+msgid "Used to customize the label for relationships between tracked entities"
+msgstr "Used to customize the label for relationships between tracked entities"
+
+msgid "Custom label for \"Note\""
+msgstr "Custom label for \"Note\""
+
+msgid ""
+"Used to customize the label for notes or comments added to enrollments or "
+"events"
+msgstr ""
+"Used to customize the label for notes or comments added to enrollments or "
+"events"
+
+msgid "Display enrolled TEs in the front page list"
+msgstr "Display enrolled TEs in the front page list"
+
 msgid "Only integers are allowed"
 msgstr "Only integers are allowed"
 
@@ -3959,6 +4060,9 @@ msgstr "Will be shown everywhere a user sees a relationship type."
 
 msgid "Provide a helpful description of what this relationship is used for."
 msgstr "Provide a helpful description of what this relationship is used for."
+
+msgid "Bidirectional: relationship can be created from both sides"
+msgstr "Bidirectional: relationship can be created from both sides"
 
 msgid "Relationship name seen from initiating entity"
 msgstr "Relationship name seen from initiating entity"
@@ -4135,9 +4239,6 @@ msgstr ""
 "Choose which attributes to display, which are required, and which are "
 "searchable"
 
-msgid "Attribute name"
-msgstr "Attribute name"
-
 msgid "Maximum number of tracked entity instances to return when searching"
 msgstr "Maximum number of tracked entity instances to return when searching"
 
@@ -4149,6 +4250,9 @@ msgstr "Explain the purpose of this tracked entity type."
 
 msgid "Choose and configure what data can be collected for this tracked entity type"
 msgstr "Choose and configure what data can be collected for this tracked entity type"
+
+msgid "Color and icon"
+msgstr "Color and icon"
 
 msgid "Notification details"
 msgstr "Notification details"

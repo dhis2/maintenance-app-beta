@@ -8,6 +8,7 @@ export function validate<FormValues>(
     values: FormValues
 ) {
     const zodResult = zodSchema.safeParse(values)
+
     if (zodResult.success !== false) {
         return undefined
     }

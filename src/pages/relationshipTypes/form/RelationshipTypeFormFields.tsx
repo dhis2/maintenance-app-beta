@@ -81,7 +81,8 @@ export function RelationshipTypeFormFields() {
                         dataTest="formfields-bidirectional"
                         name="bidirectional"
                         label={i18n.t(
-                            'Bidirectional: relationship can be created from both sides'
+                            'Bidirectional: relationship can be created from both sides',
+                            { nsSeparator: '~:~' }
                         )}
                         type="checkbox"
                         validateFields={[]}
