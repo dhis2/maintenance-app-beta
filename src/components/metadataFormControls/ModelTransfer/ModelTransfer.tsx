@@ -102,10 +102,8 @@ export const ModelTransfer = <
 
     return (
         <BaseModelTransfer
+            {...baseModelTransferProps}
             enableOrderChange
-            height={baseModelTransferProps.height || '350px'}
-            optionsWidth={baseModelTransferProps.optionsWidth || '500px'}
-            selectedWidth={baseModelTransferProps.selectedWidth || '500px'}
             filterable
             filterablePicked
             onEndReached={queryResult.fetchNextPage}
@@ -141,7 +139,6 @@ export const ModelTransfer = <
                     />
                 )
             }
-            {...baseModelTransferProps}
         />
     )
 }
