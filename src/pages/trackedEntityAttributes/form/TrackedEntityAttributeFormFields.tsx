@@ -19,25 +19,34 @@ import {
 import { SECTIONS_MAP } from '../../../lib'
 import { TrackedEntityAttribute } from '../../../types/generated'
 import {
+    BlockedSearchOperatorsField,
     ConfidentialField,
     FieldMaskField,
     FormNameField,
     InheritField,
+    MinCharactersToSearchField,
     OptionSetField,
     PatternField,
+    PreferredSearchOperatorField,
     TrackedEntityTypeField,
+    TrigramIndexableField,
     UniqueRadioFields,
 } from '../fields'
+
+// Replace with version control
+const isTrigramIndexableAvailable = true
 
 export const TrackedEntityAttributeFormFields = ({
     basicSectionName,
     dataCollectionSectionName,
     dataHandlingSectionName,
+    searchPerformanceSectionName,
     legendsSectionName,
 }: {
     basicSectionName: string
     dataCollectionSectionName: string
     dataHandlingSectionName: string
+    searchPerformanceSectionName: string
     legendsSectionName: string
 }) => {
     const section = SECTIONS_MAP.trackedEntityAttribute
@@ -210,24 +219,34 @@ export const TrackedEntityAttributeFormFields = ({
                     />
                 </StandardFormField>
 
-                {/* TODO: Uncomment when version control is implemented (v43+) */}
-                {/* <StandardFormField>
-                    <FieldRFF
-                        component={CheckboxFieldFF}
-                        dataTest="formfields-trigramIndexable"
-                        name="trigramIndexable"
-                        label={i18n.t('Enable trigram indexing')}
-                        type="checkbox"
-                        helpText={i18n.t(
-                            'Improves search performance for this attribute. Available in DHIS2 v43 and above.'
-                        )}
-                        validateFields={[]}
-                    />
-                </StandardFormField> */}
-
                 <StandardFormField>
                     <AggregationTypeFieldByValueType />
                 </StandardFormField>
+            </SectionedFormSection>
+
+            <SectionedFormSection name={searchPerformanceSectionName}>
+                <StandardFormSectionTitle>
+                    {i18n.t('Search performance')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Adjust how this attribute is searched to balance performance and accuracy.'
+                    )}
+                </StandardFormSectionDescription>
+
+                <StandardFormField>
+                    <PreferredSearchOperatorField />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <BlockedSearchOperatorsField />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <MinCharactersToSearchField />
+                </StandardFormField>
+
+                {isTrigramIndexableAvailable && <TrigramIndexableField />}
             </SectionedFormSection>
 
             <SectionedFormSection name={legendsSectionName}>

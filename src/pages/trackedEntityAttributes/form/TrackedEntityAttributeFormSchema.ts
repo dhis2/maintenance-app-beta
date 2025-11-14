@@ -32,8 +32,11 @@ const trackedEntityAttributeBaseSchema = z.object({
     inherit: z.boolean().default(false),
     displayInListNoProgram: z.boolean().default(false),
     skipSynchronization: z.boolean().default(false),
-    // TODO: Uncomment when version control is implemented (v43+)
-    // trigramIndexable: z.boolean().default(false),
+    trigramIndexable: z.boolean().default(false),
+    trigramIndexed: z.boolean().optional(),
+    preferredSearchOperator: z.enum(['EQ', 'SW', 'EW', 'LIKE']).optional(),
+    blockedSearchOperators: z.array(z.enum(['SW', 'EW', 'LIKE'])).default([]),
+    minCharactersToSearch: z.number().int().min(0).default(0),
     aggregationType: z
         .nativeEnum(TrackedEntityAttribute.aggregationType)
         .default(TrackedEntityAttribute.aggregationType.NONE),

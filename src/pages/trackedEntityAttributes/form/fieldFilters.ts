@@ -23,8 +23,11 @@ export const fieldFilters = [
     'inherit',
     'displayInListNoProgram',
     'skipSynchronization',
-    // TODO: Uncomment when version control is implemented (v43+)
-    // 'trigramIndexable',
+    'trigramIndexable',
+    'trigramIndexed',
+    'preferredSearchOperator',
+    'blockedSearchOperators',
+    'minCharactersToSearch',
     'aggregationType',
     'legendSets[id,displayName]',
 ] as const

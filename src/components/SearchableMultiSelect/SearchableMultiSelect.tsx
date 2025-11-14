@@ -13,6 +13,7 @@ import classes from './SearchableMultiSelect.module.css'
 export interface Option {
     value: string
     label: string
+    disabled?: boolean
 }
 
 type OwnProps = {
@@ -102,8 +103,13 @@ export const SearchableMultiSelect = ({
                 </div>
             </div>
 
-            {options.map(({ value, label }) => (
-                <MultiSelectOption key={value} value={value} label={label} />
+            {options.map(({ value, label, disabled }) => (
+                <MultiSelectOption
+                    key={value}
+                    value={value}
+                    label={label}
+                    disabled={disabled}
+                />
             ))}
 
             {!error && !loading && showEndLoader && (
