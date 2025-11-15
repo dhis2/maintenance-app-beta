@@ -71,7 +71,7 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
         [dataElementsInput]
     )
 
-    if (!visible || availableDataElements.length === 0) {
+    if (!visible) {
         return null
     }
 

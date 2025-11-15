@@ -111,7 +111,7 @@ export const TrackedEntityAttributesField = ({
         [attributesInput]
     )
 
-    if (!visible || availableAttributes.length === 0) {
+    if (!visible) {
         return null
     }
 
