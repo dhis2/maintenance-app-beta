@@ -51,12 +51,13 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
                 <ButtonGroup
                     options={CONSTRAINT_OPTIONS}
                     selected={input.value}
-                    onChange={(value) => {
+                    onChange={(value: string) => {
                         const previousValue = input.value
-                        input.onChange(value)
+                        const constraintValue = value as ConstraintValue
+                        input.onChange(constraintValue)
                         input.onBlur()
 
-                        if (previousValue !== value) {
+                        if (previousValue !== constraintValue) {
                             clearDependentFields()
                         }
                     }}

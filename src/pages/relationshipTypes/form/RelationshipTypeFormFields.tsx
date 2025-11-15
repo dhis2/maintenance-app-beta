@@ -33,7 +33,7 @@ export function RelationshipTypeFormFields() {
     const form = useForm()
 
     useEffect(() => {
-        if (!bidirectional && form) {
+        if (!bidirectional) {
             const toFromNameValue = form.getFieldState('toFromName')?.value
             if (toFromNameValue) {
                 form.change('toFromName', undefined)

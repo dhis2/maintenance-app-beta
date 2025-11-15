@@ -42,7 +42,8 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
         if (!visible && programStageInput.value) {
             programStageInput.onChange(undefined)
         }
-    }, [visible, programStageInput])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [visible, programStageInput.value])
 
     const clearDependentFields = useCallback(() => {
         form.batch(() => {

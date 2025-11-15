@@ -95,7 +95,8 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
         if (!visible && programInput.value) {
             programInput.onChange(undefined)
         }
-    }, [visible, programInput])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [visible, programInput.value])
 
     const clearDependentFields = useCallback(() => {
         form.batch(() => {
@@ -121,9 +122,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                     query={programQuery}
                     required={isRequired}
                     inputWidth="330px"
-                    onChange={() => {
-                        clearDependentFields()
-                    }}
+                    onChange={clearDependentFields}
                 />
             </EditableFieldWrapper>
         </StandardFormField>

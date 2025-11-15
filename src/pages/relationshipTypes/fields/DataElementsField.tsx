@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Field } from '@dhis2/ui'
-import React, { useEffect, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { useField, useFormState } from 'react-final-form'
 import { useHref } from 'react-router'
 import { StandardFormField } from '../../../components'
@@ -60,7 +60,16 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
         ) {
             dataElementsInput.onChange([])
         }
-    }, [visible, dataElementsInput])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [visible, dataElementsInput.value])
+
+    const handleChange = useCallback(
+        ({ selected }: { selected: DisplayableModel[] }) => {
+            dataElementsInput.onChange(selected)
+            dataElementsInput.onBlur()
+        },
+        [dataElementsInput]
+    )
 
     if (!visible || availableDataElements.length === 0) {
         return null
@@ -79,10 +88,7 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
                 <BaseModelTransfer<DisplayableModel>
                     available={availableDataElements}
                     selected={dataElementsInput.value || []}
-                    onChange={({ selected }) => {
-                        dataElementsInput.onChange(selected)
-                        dataElementsInput.onBlur()
-                    }}
+                    onChange={handleChange}
                     leftHeader={
                         <TransferHeader>
                             {i18n.t('Available data elements')}

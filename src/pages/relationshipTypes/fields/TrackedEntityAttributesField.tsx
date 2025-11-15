@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Field } from '@dhis2/ui'
-import React, { useEffect, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { useField, useFormState } from 'react-final-form'
 import { useHref } from 'react-router'
 import { StandardFormField } from '../../../components'
@@ -100,7 +100,16 @@ export const TrackedEntityAttributesField = ({
         ) {
             attributesInput.onChange([])
         }
-    }, [visible, attributesInput])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [visible, attributesInput.value])
+
+    const handleChange = useCallback(
+        ({ selected }: { selected: DisplayableModel[] }) => {
+            attributesInput.onChange(selected)
+            attributesInput.onBlur()
+        },
+        [attributesInput]
+    )
 
     if (!visible || availableAttributes.length === 0) {
         return null
@@ -117,10 +126,7 @@ export const TrackedEntityAttributesField = ({
                 <BaseModelTransfer<DisplayableModel>
                     available={availableAttributes}
                     selected={attributesInput.value || []}
-                    onChange={({ selected }) => {
-                        attributesInput.onChange(selected)
-                        attributesInput.onBlur()
-                    }}
+                    onChange={handleChange}
                     leftHeader={
                         <TransferHeader>
                             {i18n.t('Available tracked entity attributes')}

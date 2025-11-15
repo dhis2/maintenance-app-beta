@@ -49,7 +49,8 @@ export const TrackedEntityTypeField = ({
         if (!visible && trackedEntityTypeInput.value) {
             trackedEntityTypeInput.onChange(undefined)
         }
-    }, [visible, trackedEntityTypeInput])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [visible, trackedEntityTypeInput.value])
 
     const clearDependentFields = useCallback(() => {
         form.batch(() => {
