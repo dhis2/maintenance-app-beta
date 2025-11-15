@@ -78,6 +78,9 @@ export const BaseModelTransfer = <TModel extends DisplayableModel>({
     return (
         <Transfer
             {...transferProps}
+            height={transferProps.height}
+            optionsWidth={transferProps.optionsWidth}
+            selectedWidth={transferProps.selectedWidth}
             maxSelections={maxSelections || 5000}
             renderOption={renderOptionWithFullValue}
             selected={selectedTransferValues}

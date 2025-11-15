@@ -43,7 +43,7 @@ export const EnrollmentSettingsFormContents = React.memo(
         return (
             <SectionedFormSection name={name}>
                 <StandardFormSectionTitle>
-                    {i18n.t('Enrollment: Settings')}
+                    {i18n.t('Enrollment: Settings', { nsSeparator: '~:~' })}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
