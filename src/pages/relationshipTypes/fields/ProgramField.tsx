@@ -123,6 +123,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                     required={isRequired}
                     inputWidth="330px"
                     onChange={clearDependentFields}
+                    showNoValueOption={!isRequired}
                 />
             </EditableFieldWrapper>
         </StandardFormField>
