@@ -20,7 +20,6 @@ import {
     RelationshipTypeFormValues,
     fieldFilters,
     validateRelationshipType,
-    transformRelationshipTypeForApi,
 } from './form'
 
 export const Component = () => {
@@ -42,14 +41,10 @@ export const Component = () => {
 
     return (
         <FormBase
-            onSubmit={useOnSubmitEdit<RelationshipTypeFormValues>({
-                modelId,
-                section,
-            })}
+            onSubmit={useOnSubmitEdit({section, modelId})}
             initialValues={relationshipType.data}
             validate={validateRelationshipType}
             subscription={{}}
-            valueFormatter={transformRelationshipTypeForApi}
         >
             {({ handleSubmit }) => {
                 return (
