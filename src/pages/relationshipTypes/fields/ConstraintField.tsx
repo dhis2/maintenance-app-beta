@@ -37,8 +37,8 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
             form.change(`${prefix}Constraint.trackedEntityType`, undefined)
             form.change(`${prefix}Constraint.program`, undefined)
             form.change(`${prefix}Constraint.programStage`, undefined)
-            form.change(`${prefix}Constraint.trackedEntityAttributes`, [])
-            form.change(`${prefix}Constraint.dataElements`, [])
+            form.change(`${prefix}Constraint.trackerDataView.attributes`, [])
+            form.change(`${prefix}Constraint.trackerDataView.dataElements`, [])
         })
     }, [form, prefix])
 

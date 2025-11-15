@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useMemo } from 'react'
 import { useField, useFormState, useForm } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
+import { required } from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
@@ -47,7 +48,7 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
 
     const clearDependentFields = useCallback(() => {
         form.batch(() => {
-            form.change(`${prefix}Constraint.dataElements`, [])
+            form.change(`${prefix}Constraint.trackerDataView.dataElements`, [])
         })
     }, [form, prefix])
 
@@ -62,6 +63,7 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
                 label={i18n.t('Program stage')}
                 query={programStageQuery}
                 required
+                validate={required}
                 inputWidth="330px"
                 onChange={clearDependentFields}
             />

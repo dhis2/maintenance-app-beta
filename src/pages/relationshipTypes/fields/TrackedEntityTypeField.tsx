@@ -5,6 +5,7 @@ import { useHref } from 'react-router'
 import { StandardFormField, EditableFieldWrapper } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
+import { required } from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
@@ -55,7 +56,9 @@ export const TrackedEntityTypeField = ({
     const clearDependentFields = useCallback(() => {
         form.batch(() => {
             form.change(`${prefix}Constraint.program`, undefined)
-            form.change(`${prefix}Constraint.trackedEntityAttributes`, [])
+            form.change(`${prefix}Constraint.programStage`, undefined)
+            form.change(`${prefix}Constraint.trackerDataView.attributes`, [])
+            form.change(`${prefix}Constraint.trackerDataView.dataElements`, [])
         })
     }, [form, prefix])
 
@@ -74,6 +77,7 @@ export const TrackedEntityTypeField = ({
                     label={i18n.t('Tracked entity type')}
                     query={trackedEntityTypeQuery}
                     required={constraint === 'TRACKED_ENTITY_INSTANCE'}
+                    validate={required}
                     inputWidth="330px"
                     onChange={clearDependentFields}
                 />

@@ -5,6 +5,7 @@ import { useHref } from 'react-router'
 import { StandardFormField, EditableFieldWrapper } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
+import { required } from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
@@ -104,10 +105,13 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                 form.batch(() => {
                     form.change(`${prefix}Constraint.programStage`, undefined)
                     form.change(
-                        `${prefix}Constraint.trackedEntityAttributes`,
+                        `${prefix}Constraint.trackerDataView.attributes`,
                         []
                     )
-                    form.change(`${prefix}Constraint.dataElements`, [])
+                    form.change(
+                        `${prefix}Constraint.trackerDataView.dataElements`,
+                        []
+                    )
                 })
                 return
             }
@@ -133,8 +137,14 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                 } else {
                     form.change(`${prefix}Constraint.programStage`, undefined)
                 }
-                form.change(`${prefix}Constraint.trackedEntityAttributes`, [])
-                form.change(`${prefix}Constraint.dataElements`, [])
+                form.change(
+                    `${prefix}Constraint.trackerDataView.attributes`,
+                    []
+                )
+                form.change(
+                    `${prefix}Constraint.trackerDataView.dataElements`,
+                    []
+                )
             })
         },
         [form, prefix, constraint]
@@ -155,6 +165,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                     label={i18n.t('Program')}
                     query={programQuery}
                     required={isRequired}
+                    validate={required}
                     inputWidth="330px"
                     onChange={clearDependentFields}
                     showNoValueOption={!isRequired}

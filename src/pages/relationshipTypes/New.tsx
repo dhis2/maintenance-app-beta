@@ -13,7 +13,6 @@ import {
     RelationshipTypeFormDescriptor,
     RelationshipTypeFormFields,
     transformRelationshipTypeForApi,
-    RelationshipTypeFormValues,
 } from './form'
 
 const section = SECTIONS_MAP.relationshipType
