@@ -12,6 +12,8 @@ import {
     validateRelationshipType,
     RelationshipTypeFormDescriptor,
     RelationshipTypeFormFields,
+    transformRelationshipTypeForApi,
+    RelationshipTypeFormValues,
 } from './form'
 
 const section = SECTIONS_MAP.relationshipType
@@ -22,6 +24,7 @@ export const Component = () => {
             onSubmit={useOnSubmitNew({ section })}
             initialValues={initialValues}
             validate={validateRelationshipType}
+            valueFormatter={transformRelationshipTypeForApi}
         >
             {({ handleSubmit }) => {
                 return (

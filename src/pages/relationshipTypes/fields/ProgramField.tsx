@@ -98,13 +98,47 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [visible, programInput.value])
 
-    const clearDependentFields = useCallback(() => {
-        form.batch(() => {
-            form.change(`${prefix}Constraint.programStage`, undefined)
-            form.change(`${prefix}Constraint.trackedEntityAttributes`, [])
-            form.change(`${prefix}Constraint.dataElements`, [])
-        })
-    }, [form, prefix])
+    const clearDependentFields = useCallback(
+        (selectedProgram: DisplayableModel | undefined) => {
+            if (!selectedProgram) {
+                form.batch(() => {
+                    form.change(`${prefix}Constraint.programStage`, undefined)
+                    form.change(
+                        `${prefix}Constraint.trackedEntityAttributes`,
+                        []
+                    )
+                    form.change(`${prefix}Constraint.dataElements`, [])
+                })
+                return
+            }
+
+            const program = selectedProgram as DisplayableModel & {
+                programType?: string
+                programStages?: DisplayableModel[]
+            }
+
+            form.batch(() => {
+                // For event programs (WITHOUT_REGISTRATION), automatically set the first programStage
+                // This matches maintenance-app behavior (line 280-287 in relationshipType.js)
+                if (
+                    program?.programType === 'WITHOUT_REGISTRATION' &&
+                    program?.programStages &&
+                    program.programStages.length > 0 &&
+                    constraint === 'PROGRAM_STAGE_INSTANCE'
+                ) {
+                    form.change(
+                        `${prefix}Constraint.programStage`,
+                        program.programStages[0]
+                    )
+                } else {
+                    form.change(`${prefix}Constraint.programStage`, undefined)
+                }
+                form.change(`${prefix}Constraint.trackedEntityAttributes`, [])
+                form.change(`${prefix}Constraint.dataElements`, [])
+            })
+        },
+        [form, prefix, constraint]
+    )
 
     if (!visible || !programQuery) {
         return null

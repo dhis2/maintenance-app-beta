@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Field } from '@dhis2/ui'
-import React, { useCallback, useEffect, useMemo, useRef } from 'react'
-import { useField, useFormState, useForm } from 'react-final-form'
+import React, { useMemo } from 'react'
+import { useField, useFormState } from 'react-final-form'
 import { useHref } from 'react-router'
 import { StandardFormField } from '../../../components'
 import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
@@ -14,7 +14,6 @@ import { DisplayableModel } from '../../../types/models'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
 export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
-    const dataElementsName = `${prefix}Constraint.dataElements`
     const formValues = useFormState({ subscription: { values: true } }).values
     const constraint = formValues[`${prefix}Constraint`]?.relationshipEntity as
         | ConstraintValue
@@ -27,109 +26,54 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
         resource: 'programStages',
     })
 
-    const form = useForm()
-    const hasInitializedRef = useRef(false)
+    // For event programs (WITHOUT_REGISTRATION), use the first programStage from the program
+    // This matches maintenance-app behavior (line 502-507 in relationshipType.js)
+    const effectiveProgramStage = useMemo(() => {
+        if (
+            program?.programType === 'WITHOUT_REGISTRATION' &&
+            program?.programStages &&
+            program.programStages.length > 0
+        ) {
+            return program.programStages[0]
+        }
+        return programStage
+    }, [program?.programType, program?.programStages, programStage])
 
     const visible =
         constraint === 'PROGRAM_STAGE_INSTANCE' &&
         !!program?.id &&
-        !!programStage?.id
+        !!effectiveProgramStage?.id
 
     const availableDataElements = useMemo<DisplayableModel[]>(() => {
-        if (!programStage?.programStageDataElements) {
-            return []
-        }
-        return programStage.programStageDataElements
-            .map((psde: { dataElement?: DisplayableModel }) => psde.dataElement)
-            .filter(
-                (de: DisplayableModel | undefined): de is DisplayableModel =>
-                    !!de
-            )
-    }, [programStage?.programStageDataElements])
+        return (
+            effectiveProgramStage?.programStageDataElements
+                ?.map(
+                    (psde: { dataElement?: DisplayableModel }) =>
+                        psde.dataElement
+                )
+                .filter(
+                    (
+                        de: DisplayableModel | undefined
+                    ): de is DisplayableModel => !!de
+                ) || []
+        )
+    }, [effectiveProgramStage?.programStageDataElements])
 
-    const { input: dataElementsInput, meta } = useField<DisplayableModel[]>(
-        dataElementsName,
-        {
-            multiple: true,
-            validateFields: [],
-        }
-    )
-
-    // Sync initial values from trackerDataView.dataElements when component becomes visible and data elements are available
-    useEffect(() => {
-        if (!visible || availableDataElements.length === 0) {
-            hasInitializedRef.current = false
-            return
-        }
-
-        // Only initialize once per visibility cycle
-        if (hasInitializedRef.current) {
-            return
-        }
-
-        const constraintData = formValues[`${prefix}Constraint`] as
-            | { trackerDataView?: { dataElements?: string[] } }
-            | undefined
-        const dataElementIdsFromApi =
-            constraintData?.trackerDataView?.dataElements || []
-
-        // Only update if we have IDs from API
-        if (dataElementIdsFromApi.length > 0) {
-            const dataElementsFromApi = availableDataElements.filter((de) =>
-                dataElementIdsFromApi.includes(de.id)
-            )
-            if (dataElementsFromApi.length > 0) {
-                dataElementsInput.onChange(dataElementsFromApi)
-                hasInitializedRef.current = true
-            }
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [visible, availableDataElements.length])
-
-    useEffect(() => {
-        if (
-            !visible &&
-            Array.isArray(dataElementsInput.value) &&
-            dataElementsInput.value.length > 0
-        ) {
-            dataElementsInput.onChange([])
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [visible, dataElementsInput.value])
-
-    const handleChange = useCallback(
-        ({ selected }: { selected: DisplayableModel[] }) => {
-            // Extract IDs from selected data elements (like maintenance-app does)
-            const dataElementIds = selected.map((de) => de?.id || de)
-
-            // Update trackerDataView.dataElements directly with array of IDs
-            // This matches how maintenance-app does it (line 324-333 in relationshipType.js)
-            const constraintPath = `${prefix}Constraint`
-            const currentConstraint = (formValues[constraintPath] || {}) as {
-                trackerDataView?: {
-                    attributes?: string[]
-                    dataElements?: string[]
-                }
-                [key: string]: unknown
-            }
-            const currentTrackerDataView =
-                currentConstraint.trackerDataView || {}
-
-            // Update the constraint's trackerDataView.dataElements
-            form.change(constraintPath, {
-                ...currentConstraint,
-                trackerDataView: {
-                    ...currentTrackerDataView,
-                    dataElements: dataElementIds,
-                },
-            })
-
-            // Also update the local field for UI display
-            dataElementsInput.onChange(selected)
-            dataElementsInput.onBlur()
-        },
-        [dataElementsInput, prefix, formValues, form]
-    )
+    const trackerDataViewPath = `${prefix}Constraint.trackerDataView.dataElements`
+    const { input: dataElementsInput, meta } = useField<
+        string[],
+        HTMLElement,
+        DisplayableModel[]
+    >(trackerDataViewPath, {
+        format: (value) =>
+            Array.isArray(value)
+                ? availableDataElements.filter((de) => value.includes(de.id))
+                : [],
+        parse: (value) =>
+            Array.isArray(value) ? value.map((de) => de.id) : [],
+        multiple: true,
+        validateFields: [],
+    })
 
     if (!visible) {
         return null
@@ -140,7 +84,7 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
             <Field
                 error={meta.invalid}
                 validationText={(meta.touched && meta.error?.toString()) || ''}
-                name={dataElementsName}
+                name={trackerDataViewPath}
                 helpText={i18n.t(
                     'Choose which data elements are shown when viewing the relationship'
                 )}
@@ -148,7 +92,10 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
                 <BaseModelTransfer<DisplayableModel>
                     available={availableDataElements}
                     selected={dataElementsInput.value || []}
-                    onChange={handleChange}
+                    onChange={({ selected }) => {
+                        dataElementsInput.onChange(selected)
+                        dataElementsInput.onBlur()
+                    }}
                     leftHeader={
                         <TransferHeader>
                             {i18n.t('Available data elements')}
