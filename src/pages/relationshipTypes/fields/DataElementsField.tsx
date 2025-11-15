@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Field } from '@dhis2/ui'
-import React, { useCallback, useEffect, useMemo } from 'react'
-import { useField, useFormState } from 'react-final-form'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
+import { useField, useFormState, useForm } from 'react-final-form'
 import { useHref } from 'react-router'
 import { StandardFormField } from '../../../components'
 import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
@@ -27,13 +27,8 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
         resource: 'programStages',
     })
 
-    const { input: dataElementsInput, meta } = useField<DisplayableModel[]>(
-        dataElementsName,
-        {
-            multiple: true,
-            validateFields: [],
-        }
-    )
+    const form = useForm()
+    const hasInitializedRef = useRef(false)
 
     const visible =
         constraint === 'PROGRAM_STAGE_INSTANCE' &&
@@ -52,6 +47,45 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
             )
     }, [programStage?.programStageDataElements])
 
+    const { input: dataElementsInput, meta } = useField<DisplayableModel[]>(
+        dataElementsName,
+        {
+            multiple: true,
+            validateFields: [],
+        }
+    )
+
+    // Sync initial values from trackerDataView.dataElements when component becomes visible and data elements are available
+    useEffect(() => {
+        if (!visible || availableDataElements.length === 0) {
+            hasInitializedRef.current = false
+            return
+        }
+
+        // Only initialize once per visibility cycle
+        if (hasInitializedRef.current) {
+            return
+        }
+
+        const constraintData = formValues[`${prefix}Constraint`] as
+            | { trackerDataView?: { dataElements?: string[] } }
+            | undefined
+        const dataElementIdsFromApi =
+            constraintData?.trackerDataView?.dataElements || []
+
+        // Only update if we have IDs from API
+        if (dataElementIdsFromApi.length > 0) {
+            const dataElementsFromApi = availableDataElements.filter((de) =>
+                dataElementIdsFromApi.includes(de.id)
+            )
+            if (dataElementsFromApi.length > 0) {
+                dataElementsInput.onChange(dataElementsFromApi)
+                hasInitializedRef.current = true
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [visible, availableDataElements.length])
+
     useEffect(() => {
         if (
             !visible &&
@@ -65,10 +99,36 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
 
     const handleChange = useCallback(
         ({ selected }: { selected: DisplayableModel[] }) => {
+            // Extract IDs from selected data elements (like maintenance-app does)
+            const dataElementIds = selected.map((de) => de?.id || de)
+
+            // Update trackerDataView.dataElements directly with array of IDs
+            // This matches how maintenance-app does it (line 324-333 in relationshipType.js)
+            const constraintPath = `${prefix}Constraint`
+            const currentConstraint = (formValues[constraintPath] || {}) as {
+                trackerDataView?: {
+                    attributes?: string[]
+                    dataElements?: string[]
+                }
+                [key: string]: unknown
+            }
+            const currentTrackerDataView =
+                currentConstraint.trackerDataView || {}
+
+            // Update the constraint's trackerDataView.dataElements
+            form.change(constraintPath, {
+                ...currentConstraint,
+                trackerDataView: {
+                    ...currentTrackerDataView,
+                    dataElements: dataElementIds,
+                },
+            })
+
+            // Also update the local field for UI display
             dataElementsInput.onChange(selected)
             dataElementsInput.onBlur()
         },
-        [dataElementsInput]
+        [dataElementsInput, prefix, formValues, form]
     )
 
     if (!visible) {

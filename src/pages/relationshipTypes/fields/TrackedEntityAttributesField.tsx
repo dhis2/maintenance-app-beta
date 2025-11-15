@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Field } from '@dhis2/ui'
-import React, { useCallback, useEffect, useMemo } from 'react'
-import { useField, useFormState } from 'react-final-form'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
+import { useField, useFormState, useForm } from 'react-final-form'
 import { useHref } from 'react-router'
 import { StandardFormField } from '../../../components'
 import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
@@ -35,13 +35,8 @@ export const TrackedEntityAttributesField = ({
         resource: 'programs',
     })
 
-    const { input: attributesInput, meta } = useField<DisplayableModel[]>(
-        attributesName,
-        {
-            multiple: true,
-            validateFields: [],
-        }
-    )
+    const form = useForm()
+    const hasInitializedRef = useRef(false)
 
     const visible = useMemo(() => {
         if (!constraint || constraint === 'PROGRAM_STAGE_INSTANCE') {
@@ -92,6 +87,45 @@ export const TrackedEntityAttributesField = ({
         program?.programTrackedEntityAttributes,
     ])
 
+    const { input: attributesInput, meta } = useField<DisplayableModel[]>(
+        attributesName,
+        {
+            multiple: true,
+            validateFields: [],
+        }
+    )
+
+    // Sync initial values from trackerDataView.attributes when component becomes visible and attributes are available
+    useEffect(() => {
+        if (!visible || availableAttributes.length === 0) {
+            hasInitializedRef.current = false
+            return
+        }
+
+        // Only initialize once per visibility cycle
+        if (hasInitializedRef.current) {
+            return
+        }
+
+        const constraintData = formValues[`${prefix}Constraint`] as
+            | { trackerDataView?: { attributes?: string[] } }
+            | undefined
+        const attributeIdsFromApi =
+            constraintData?.trackerDataView?.attributes || []
+
+        // Only update if we have IDs from API
+        if (attributeIdsFromApi.length > 0) {
+            const attributesFromApi = availableAttributes.filter((attr) =>
+                attributeIdsFromApi.includes(attr.id)
+            )
+            if (attributesFromApi.length > 0) {
+                attributesInput.onChange(attributesFromApi)
+                hasInitializedRef.current = true
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [visible, availableAttributes.length])
+
     useEffect(() => {
         if (
             !visible &&
@@ -105,10 +139,36 @@ export const TrackedEntityAttributesField = ({
 
     const handleChange = useCallback(
         ({ selected }: { selected: DisplayableModel[] }) => {
+            // Extract IDs from selected attributes (like maintenance-app does)
+            const attributeIds = selected.map((attr) => attr?.id || attr)
+
+            // Update trackerDataView.attributes directly with array of IDs
+            // This matches how maintenance-app does it (line 313-322 in relationshipType.js)
+            const constraintPath = `${prefix}Constraint`
+            const currentConstraint = (formValues[constraintPath] || {}) as {
+                trackerDataView?: {
+                    attributes?: string[]
+                    dataElements?: string[]
+                }
+                [key: string]: unknown
+            }
+            const currentTrackerDataView =
+                currentConstraint.trackerDataView || {}
+
+            // Update the constraint's trackerDataView.attributes
+            form.change(constraintPath, {
+                ...currentConstraint,
+                trackerDataView: {
+                    ...currentTrackerDataView,
+                    attributes: attributeIds,
+                },
+            })
+
+            // Also update the local field for UI display
             attributesInput.onChange(selected)
             attributesInput.onBlur()
         },
-        [attributesInput]
+        [attributesInput, prefix, formValues, form]
     )
 
     if (!visible) {
