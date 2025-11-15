@@ -1,22 +1,33 @@
 import i18n from '@dhis2/d2-i18n'
 import React, { useCallback, useEffect, useMemo } from 'react'
-import { useField, useFormState, useForm } from 'react-final-form'
+import { useField, useForm } from 'react-final-form'
 import { useHref } from 'react-router'
 import { StandardFormField, EditableFieldWrapper } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
 import { required } from '../../../lib'
+import { TrackedEntityType } from '../../../types/generated'
 import { DisplayableModel } from '../../../types/models'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
 export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
+    const constraintFieldName = `${prefix}Constraint.relationshipEntity`
+    const trackedEntityTypeFieldName = `${prefix}Constraint.trackedEntityType`
     const programName = `${prefix}Constraint.program`
-    const formValues = useFormState({ subscription: { values: true } }).values
-    const constraint = formValues[`${prefix}Constraint`]?.relationshipEntity as
-        | ConstraintValue
-        | undefined
-    const trackedEntityType =
-        formValues[`${prefix}Constraint`]?.trackedEntityType
+    const programStagePath = `${prefix}Constraint.programStage`
+    const attributesPath = `${prefix}Constraint.trackerDataView.attributes`
+    const dataElementsPath = `${prefix}Constraint.trackerDataView.dataElements`
+
+    const {
+        input: { value: constraint },
+    } = useField<ConstraintValue | undefined>(constraintFieldName, {
+        subscription: { value: true },
+    })
+    const {
+        input: { value: trackedEntityType },
+    } = useField<TrackedEntityType | undefined>(trackedEntityTypeFieldName, {
+        subscription: { value: true },
+    })
 
     const { input: programInput } = useField(programName)
     const form = useForm()
@@ -42,38 +53,34 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
         const isProgramInstance = constraint === 'PROGRAM_INSTANCE'
         const isProgramStageInstance = constraint === 'PROGRAM_STAGE_INSTANCE'
 
-        let fields = ['id', 'displayName', 'programType', 'trackedEntityType']
+        const baseFields = ['id', 'displayName', 'programType']
+        const programAttributesField =
+            'programTrackedEntityAttributes[id,trackedEntityAttribute[id,displayName,valueType]]'
+        const programStagesField = 'programStages[id]'
+        const programStagesWithDataElementsField =
+            'programStages[id,programStageDataElements[dataElement[id,displayName]]]'
+
+        let fields: string[] = []
         let filters: string[] = []
 
         if (isTrackedEntityInstance) {
             fields = [
-                'id',
-                'displayName',
-                'programType',
+                ...baseFields,
                 'trackedEntityType',
-                'programTrackedEntityAttributes[id,trackedEntityAttribute[id,displayName,valueType]]',
-                'programStages[id]',
+                programAttributesField,
+                programStagesField,
             ]
             filters = [
                 'programType:eq:WITH_REGISTRATION',
                 `trackedEntityType.id:eq:${trackedEntityType.id}`,
             ]
         } else if (isProgramInstance) {
-            fields = [
-                'id',
-                'displayName',
-                'programType',
-                'programTrackedEntityAttributes[id,trackedEntityAttribute[id,displayName,valueType]]',
-                'programStages[id]',
-            ]
+            fields = [...baseFields, programAttributesField, programStagesField]
             filters = ['programType:eq:WITH_REGISTRATION']
         } else if (isProgramStageInstance) {
-            fields = [
-                'id',
-                'displayName',
-                'programType',
-                'programStages[id,programStageDataElements[dataElement[id,displayName]]]',
-            ]
+            fields = [...baseFields, programStagesWithDataElementsField]
+        } else {
+            fields = [...baseFields, 'trackedEntityType']
         }
 
         return {
@@ -82,9 +89,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                 fields,
                 order: 'displayName:iasc',
                 ...(filters.length > 0 && { filter: filters }),
-                ...((isTrackedEntityInstance ||
-                    isProgramInstance ||
-                    isProgramStageInstance) && { paging: false }),
+                paging: false,
             },
         }
     }, [visible, constraint, trackedEntityType?.id])
@@ -100,15 +105,9 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
         (selectedProgram: DisplayableModel | undefined) => {
             if (!selectedProgram) {
                 form.batch(() => {
-                    form.change(`${prefix}Constraint.programStage`, undefined)
-                    form.change(
-                        `${prefix}Constraint.trackerDataView.attributes`,
-                        []
-                    )
-                    form.change(
-                        `${prefix}Constraint.trackerDataView.dataElements`,
-                        []
-                    )
+                    form.change(programStagePath, undefined)
+                    form.change(attributesPath, [])
+                    form.change(dataElementsPath, [])
                 })
                 return
             }
@@ -118,33 +117,23 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                 programStages?: DisplayableModel[]
             }
 
+            const shouldAutoSetProgramStage =
+                constraint === 'PROGRAM_STAGE_INSTANCE' &&
+                program?.programType === 'WITHOUT_REGISTRATION' &&
+                program?.programStages &&
+                program.programStages.length > 0
+
+            const programStageToSet = shouldAutoSetProgramStage
+                ? program.programStages![0]
+                : undefined
+
             form.batch(() => {
-                // For event programs (WITHOUT_REGISTRATION), automatically set the first programStage
-                // This matches maintenance-app behavior (line 280-287 in relationshipType.js)
-                if (
-                    program?.programType === 'WITHOUT_REGISTRATION' &&
-                    program?.programStages &&
-                    program.programStages.length > 0 &&
-                    constraint === 'PROGRAM_STAGE_INSTANCE'
-                ) {
-                    form.change(
-                        `${prefix}Constraint.programStage`,
-                        program.programStages[0]
-                    )
-                } else {
-                    form.change(`${prefix}Constraint.programStage`, undefined)
-                }
-                form.change(
-                    `${prefix}Constraint.trackerDataView.attributes`,
-                    []
-                )
-                form.change(
-                    `${prefix}Constraint.trackerDataView.dataElements`,
-                    []
-                )
+                form.change(programStagePath, programStageToSet)
+                form.change(attributesPath, [])
+                form.change(dataElementsPath, [])
             })
         },
-        [form, prefix, constraint]
+        [form, programStagePath, attributesPath, dataElementsPath, constraint]
     )
 
     if (!visible || !programQuery) {

@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Field } from '@dhis2/ui'
 import React, { useMemo } from 'react'
-import { useField, useFormState } from 'react-final-form'
+import { useField } from 'react-final-form'
 import { useHref } from 'react-router'
 import { StandardFormField } from '../../../components'
 import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
@@ -10,31 +10,53 @@ import {
     DefaultTransferLeftFooter,
     TransferHeader,
 } from '../../../components/metadataFormControls/ModelTransfer/ModelTransfer'
+import { Program } from '../../../types/generated'
 import { DisplayableModel } from '../../../types/models'
-import { ConstraintValue, RelationshipSideFieldsProps } from './types'
+import {
+    ConstraintValue,
+    RelationshipSideFieldsProps,
+    ProgramStageWithDataElements,
+} from './types'
 
 export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
-    const formValues = useFormState({ subscription: { values: true } }).values
-    const constraint = formValues[`${prefix}Constraint`]?.relationshipEntity as
-        | ConstraintValue
-        | undefined
-    const program = formValues[`${prefix}Constraint`]?.program
-    const programStage = formValues[`${prefix}Constraint`]?.programStage
+    const constraintFieldName = `${prefix}Constraint.relationshipEntity`
+    const programFieldName = `${prefix}Constraint.program`
+    const programStageFieldName = `${prefix}Constraint.programStage`
+    const trackerDataViewPath = `${prefix}Constraint.trackerDataView.dataElements`
+
+    const {
+        input: { value: constraint },
+    } = useField<ConstraintValue | undefined>(constraintFieldName, {
+        subscription: { value: true },
+    })
+    const {
+        input: { value: program },
+    } = useField<Program | undefined>(programFieldName, {
+        subscription: { value: true },
+    })
+    const {
+        input: { value: programStage },
+    } = useField<ProgramStageWithDataElements | undefined>(
+        programStageFieldName,
+        {
+            subscription: { value: true },
+        }
+    )
 
     const newDataElementLink = useHref('/dataElements/new')
     const refreshProgramStage = useRefreshModelSingleSelect({
         resource: 'programStages',
     })
 
-    // For event programs (WITHOUT_REGISTRATION), use the first programStage from the program
-    // This matches maintenance-app behavior (line 502-507 in relationshipType.js)
-    const effectiveProgramStage = useMemo(() => {
+    const effectiveProgramStage = useMemo<
+        ProgramStageWithDataElements | undefined
+    >(() => {
         if (
             program?.programType === 'WITHOUT_REGISTRATION' &&
             program?.programStages &&
             program.programStages.length > 0
         ) {
-            return program.programStages[0]
+            return program.programStages[0] as ProgramStageWithDataElements
         }
         return programStage
     }, [program?.programType, program?.programStages, programStage])
@@ -47,19 +69,11 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
     const availableDataElements = useMemo<DisplayableModel[]>(() => {
         return (
             effectiveProgramStage?.programStageDataElements
-                ?.map(
-                    (psde: { dataElement?: DisplayableModel }) =>
-                        psde.dataElement
-                )
-                .filter(
-                    (
-                        de: DisplayableModel | undefined
-                    ): de is DisplayableModel => !!de
-                ) || []
+                ?.map((psde) => psde.dataElement)
+                .filter((de): de is DisplayableModel => !!de) || []
         )
-    }, [effectiveProgramStage?.programStageDataElements])
+    }, [effectiveProgramStage])
 
-    const trackerDataViewPath = `${prefix}Constraint.trackerDataView.dataElements`
     const { input: dataElementsInput, meta } = useField<
         string[],
         HTMLElement,

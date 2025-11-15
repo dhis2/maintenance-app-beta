@@ -1,19 +1,28 @@
 import i18n from '@dhis2/d2-i18n'
 import React, { useCallback, useEffect, useMemo } from 'react'
-import { useField, useFormState, useForm } from 'react-final-form'
+import { useField, useForm } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { required } from '../../../lib'
+import { Program } from '../../../types/generated'
 import { DisplayableModel } from '../../../types/models'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
 export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
     const programStageName = `${prefix}Constraint.programStage`
-    const formValues = useFormState({ subscription: { values: true } }).values
-    const constraint = formValues[`${prefix}Constraint`]?.relationshipEntity as
-        | ConstraintValue
-        | undefined
-    const program = formValues[`${prefix}Constraint`]?.program
+    const constraintFieldName = `${prefix}Constraint.relationshipEntity`
+    const programFieldName = `${prefix}Constraint.program`
+
+    const {
+        input: { value: constraint },
+    } = useField<ConstraintValue | undefined>(constraintFieldName, {
+        subscription: { value: true },
+    })
+    const {
+        input: { value: program },
+    } = useField<Program | undefined>(programFieldName, {
+        subscription: { value: true },
+    })
 
     const { input: programStageInput } = useField(programStageName)
     const form = useForm()

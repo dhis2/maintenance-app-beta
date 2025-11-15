@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
 import React, { useEffect } from 'react'
-import { Field, useFormState, useForm } from 'react-final-form'
+import { Field, useField, useForm } from 'react-final-form'
 import {
     StandardFormField,
     StandardFormSectionTitle,
@@ -26,10 +26,12 @@ export function RelationshipTypeFormFields() {
         useSectionedFormContext<typeof RelationshipTypeFormDescriptor>()
     useSyncSelectedSectionWithScroll()
 
-    const formValues = useFormState<{ bidirectional?: boolean }>({
-        subscription: { values: true },
-    }).values
-    const bidirectional = formValues.bidirectional
+    const {
+        input: { value: bidirectional },
+    } = useField('bidirectional', {
+        subscription: { value: true },
+        type: 'checkbox',
+    })
     const form = useForm()
 
     useEffect(() => {

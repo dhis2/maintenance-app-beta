@@ -26,21 +26,37 @@ const CONSTRAINT_OPTIONS: ButtonOption[] = [
 ]
 
 export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
-    const name = `${prefix}Constraint.relationshipEntity`
-    const { input, meta } = useField<ConstraintValue | undefined>(name, {
-        validate: required,
-    })
+    const constraintFieldName = `${prefix}Constraint.relationshipEntity`
+    const trackedEntityTypePath = `${prefix}Constraint.trackedEntityType`
+    const programPath = `${prefix}Constraint.program`
+    const programStagePath = `${prefix}Constraint.programStage`
+    const attributesPath = `${prefix}Constraint.trackerDataView.attributes`
+    const dataElementsPath = `${prefix}Constraint.trackerDataView.dataElements`
+
+    const { input, meta } = useField<ConstraintValue | undefined>(
+        constraintFieldName,
+        {
+            validate: required,
+        }
+    )
     const form = useForm()
 
     const clearDependentFields = useCallback(() => {
         form.batch(() => {
-            form.change(`${prefix}Constraint.trackedEntityType`, undefined)
-            form.change(`${prefix}Constraint.program`, undefined)
-            form.change(`${prefix}Constraint.programStage`, undefined)
-            form.change(`${prefix}Constraint.trackerDataView.attributes`, [])
-            form.change(`${prefix}Constraint.trackerDataView.dataElements`, [])
+            form.change(trackedEntityTypePath, undefined)
+            form.change(programPath, undefined)
+            form.change(programStagePath, undefined)
+            form.change(attributesPath, [])
+            form.change(dataElementsPath, [])
         })
-    }, [form, prefix])
+    }, [
+        form,
+        trackedEntityTypePath,
+        programPath,
+        programStagePath,
+        attributesPath,
+        dataElementsPath,
+    ])
 
     return (
         <StandardFormField>

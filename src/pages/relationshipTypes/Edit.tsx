@@ -41,7 +41,7 @@ export const Component = () => {
 
     return (
         <FormBase
-            onSubmit={useOnSubmitEdit({section, modelId})}
+            onSubmit={useOnSubmitEdit({ section, modelId })}
             initialValues={relationshipType.data}
             validate={validateRelationshipType}
             subscription={{}}

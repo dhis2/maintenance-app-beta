@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import React, { useCallback, useEffect, useMemo } from 'react'
-import { useField, useFormState, useForm } from 'react-final-form'
+import { useField, useForm } from 'react-final-form'
 import { useHref } from 'react-router'
 import { StandardFormField, EditableFieldWrapper } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
@@ -13,10 +13,12 @@ export const TrackedEntityTypeField = ({
     prefix,
 }: RelationshipSideFieldsProps) => {
     const trackedEntityTypeName = `${prefix}Constraint.trackedEntityType`
-    const formValues = useFormState({ subscription: { values: true } }).values
-    const constraint = formValues[`${prefix}Constraint`]?.relationshipEntity as
-        | ConstraintValue
-        | undefined
+    const constraintFieldName = `${prefix}Constraint.relationshipEntity`
+    const {
+        input: { value: constraint },
+    } = useField<ConstraintValue | undefined>(constraintFieldName, {
+        subscription: { value: true },
+    })
 
     const { input: trackedEntityTypeInput } = useField(trackedEntityTypeName)
     const form = useForm()
@@ -76,7 +78,7 @@ export const TrackedEntityTypeField = ({
                     name={trackedEntityTypeName}
                     label={i18n.t('Tracked entity type')}
                     query={trackedEntityTypeQuery}
-                    required={constraint === 'TRACKED_ENTITY_INSTANCE'}
+                    required
                     validate={required}
                     inputWidth="330px"
                     onChange={clearDependentFields}

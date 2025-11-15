@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Field } from '@dhis2/ui'
 import React, { useMemo } from 'react'
-import { useField, useFormState } from 'react-final-form'
+import { useField } from 'react-final-form'
 import { useHref } from 'react-router'
 import { StandardFormField } from '../../../components'
 import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
@@ -11,19 +11,32 @@ import {
     TransferHeader,
 } from '../../../components/metadataFormControls/ModelTransfer/ModelTransfer'
 import { uniqueBy } from '../../../lib/utils'
+import { Program, TrackedEntityType } from '../../../types/generated'
 import { DisplayableModel } from '../../../types/models'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
 export const TrackedEntityAttributesField = ({
     prefix,
 }: RelationshipSideFieldsProps) => {
-    const formValues = useFormState({ subscription: { values: true } }).values
-    const constraint = formValues[`${prefix}Constraint`]?.relationshipEntity as
-        | ConstraintValue
-        | undefined
-    const trackedEntityType =
-        formValues[`${prefix}Constraint`]?.trackedEntityType
-    const program = formValues[`${prefix}Constraint`]?.program
+    const constraintFieldName = `${prefix}Constraint.relationshipEntity`
+    const trackedEntityTypeFieldName = `${prefix}Constraint.trackedEntityType`
+    const programFieldName = `${prefix}Constraint.program`
+
+    const {
+        input: { value: constraint },
+    } = useField<ConstraintValue | undefined>(constraintFieldName, {
+        subscription: { value: true },
+    })
+    const {
+        input: { value: trackedEntityType },
+    } = useField<TrackedEntityType | undefined>(trackedEntityTypeFieldName, {
+        subscription: { value: true },
+    })
+    const {
+        input: { value: program },
+    } = useField<Program | undefined>(programFieldName, {
+        subscription: { value: true },
+    })
 
     const newTrackedEntityAttributeLink = useHref(
         '/trackedEntityAttributes/new'
