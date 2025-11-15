@@ -30,10 +30,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
             (constraint === 'TRACKED_ENTITY_INSTANCE' &&
                 !!trackedEntityType?.id))
 
-    const isRequired =
-        visible &&
-        (constraint === 'PROGRAM_INSTANCE' ||
-            constraint === 'PROGRAM_STAGE_INSTANCE')
+    const isRequired = constraint !== 'TRACKED_ENTITY_INSTANCE'
 
     const programQuery = useMemo(() => {
         if (!visible) {
@@ -165,7 +162,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                     label={i18n.t('Program')}
                     query={programQuery}
                     required={isRequired}
-                    validate={required}
+                    validate={isRequired ? required : undefined}
                     inputWidth="330px"
                     onChange={clearDependentFields}
                     showNoValueOption={!isRequired}
