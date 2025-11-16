@@ -96,7 +96,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
             programInput.onChange(undefined)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [visible, programInput.value])
+    }, [visible])
 
     const clearDependentFields = useCallback(
         (selectedProgram: Program | undefined) => {
@@ -114,13 +114,13 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
 
             const shouldAutoSetProgramStage =
                 constraint === 'PROGRAM_STAGE_INSTANCE' &&
-                selectedProgram.programType === 'WITHOUT_REGISTRATION' &&
-                selectedProgram.programStages &&
+                selectedProgram?.programType === 'WITHOUT_REGISTRATION' &&
+                selectedProgram?.programStages &&
                 Array.isArray(selectedProgram.programStages) &&
                 selectedProgram.programStages.length > 0
 
             const programStageToSet = shouldAutoSetProgramStage
-                ? { id: selectedProgram.programStages[0].id }
+                ? { id: selectedProgram.programStages![0].id }
                 : undefined
 
             form.batch(() => {

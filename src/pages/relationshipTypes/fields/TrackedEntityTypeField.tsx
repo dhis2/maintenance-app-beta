@@ -67,7 +67,7 @@ export const TrackedEntityTypeField = ({
             trackedEntityTypeInput.onChange(undefined)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [visible, trackedEntityTypeInput.value])
+    }, [visible])
 
     if (!visible || !trackedEntityTypeQuery) {
         return null

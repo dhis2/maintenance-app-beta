@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { render, within } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import { FOOTER_ID } from '../../app/layout/Layout'
@@ -187,7 +187,7 @@ describe('Relationship types form tests', () => {
             expect(createMock).not.toHaveBeenCalled()
             uiAssertions.expectFieldToHaveError(
                 'formfields-toFromName',
-                'Required',
+                'Relationship name seen from receiving entity is required when bidirectional is checked',
                 screen
             )
         })
@@ -301,6 +301,17 @@ describe('Relationship types form tests', () => {
                 screen
             )
 
+            // Set constraint values (required fields)
+            const fromConstraintButton = screen.getByTestId(
+                'from-constraint-selector-option-TRACKED_ENTITY_INSTANCE'
+            )
+            await userEvent.click(fromConstraintButton)
+
+            const toConstraintButton = screen.getByTestId(
+                'to-constraint-selector-option-TRACKED_ENTITY_INSTANCE'
+            )
+            await userEvent.click(toConstraintButton)
+
             await uiActions.submitForm(screen)
 
             expect(createMock).toHaveBeenCalledWith(
@@ -313,10 +324,10 @@ describe('Relationship types form tests', () => {
                         fromToName: fromToName,
                         toFromName: undefined,
                         fromConstraint: expect.objectContaining({
-                            relationshipEntity: undefined,
+                            relationshipEntity: 'TRACKED_ENTITY_INSTANCE',
                         }),
                         toConstraint: expect.objectContaining({
-                            relationshipEntity: undefined,
+                            relationshipEntity: 'TRACKED_ENTITY_INSTANCE',
                         }),
                         attributeValues: [],
                     }),
@@ -343,6 +354,17 @@ describe('Relationship types form tests', () => {
                 screen
             )
 
+            // Set constraint values (required fields)
+            const fromConstraintButton = screen.getByTestId(
+                'from-constraint-selector-option-TRACKED_ENTITY_INSTANCE'
+            )
+            await userEvent.click(fromConstraintButton)
+
+            const toConstraintButton = screen.getByTestId(
+                'to-constraint-selector-option-TRACKED_ENTITY_INSTANCE'
+            )
+            await userEvent.click(toConstraintButton)
+
             await uiActions.submitForm(screen)
 
             expect(createMock).toHaveBeenCalledWith(
@@ -352,6 +374,12 @@ describe('Relationship types form tests', () => {
                         bidirectional: true,
                         fromToName: fromToName,
                         toFromName: toFromName,
+                        fromConstraint: expect.objectContaining({
+                            relationshipEntity: 'TRACKED_ENTITY_INSTANCE',
+                        }),
+                        toConstraint: expect.objectContaining({
+                            relationshipEntity: 'TRACKED_ENTITY_INSTANCE',
+                        }),
                     }),
                 })
             )
@@ -479,7 +507,7 @@ describe('Relationship types form tests', () => {
         })
 
         it('should submit when bidirectional is toggled', async () => {
-            const { screen, relationshipType } = await renderForm()
+            const { screen } = await renderForm()
             const toFromName = faker.lorem.words(3)
 
             await uiActions.clickOnCheckboxField('bidirectional', screen)

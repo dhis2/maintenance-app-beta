@@ -59,7 +59,7 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
             programStageInput.onChange(undefined)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [visible, programStageInput.value, constraint])
+    }, [visible, constraint])
 
     const clearDependentFields = useCallback(() => {
         const trackerDataViewPath = `${prefix}Constraint.trackerDataView`
