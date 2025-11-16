@@ -94,6 +94,7 @@ export function RelationshipTypeFormFields() {
                 <StandardFormField>
                     <Field
                         component={InputFieldFF}
+                        dataTest="formfields-fromToName"
                         name="fromToName"
                         label={i18n.t(
                             'Relationship name seen from initiating entity'
@@ -108,6 +109,7 @@ export function RelationshipTypeFormFields() {
                     <StandardFormField>
                         <Field
                             component={InputFieldFF}
+                            dataTest="formfields-toFromName"
                             name="toFromName"
                             label={i18n.t(
                                 'Relationship name seen from receiving entity'
