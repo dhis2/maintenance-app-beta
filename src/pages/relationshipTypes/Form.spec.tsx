@@ -1,7 +1,8 @@
 import { faker } from '@faker-js/faker'
-import { render, waitForElementToBeRemoved } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
+import schemaMock from '../../__mocks__/schema/relationshipTypes.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
 import { SECTIONS_MAP } from '../../lib'
 import {
@@ -20,6 +21,7 @@ import { Component as New } from './New'
 import resetAllMocks = jest.resetAllMocks
 
 const section = SECTIONS_MAP.relationshipType
+const mockSchema = schemaMock
 
 jest.mock('use-debounce', () => ({
     useDebouncedCallback: (fn: any) => fn,
@@ -77,8 +79,8 @@ describe('Relationship types form tests', () => {
 
     describe('Common', () => {
         const renderForm = generateRenderer(
-            { section, mockSchema: undefined },
-            async (
+            { section, mockSchema },
+            (
                 routeOptions,
                 { matchingExistingElementFilter = undefined } = {}
             ) => {
@@ -127,10 +129,6 @@ describe('Relationship types form tests', () => {
                     >
                         <New />
                     </TestComponentWithRouter>
-                )
-                // Wait for form to finish loading
-                await waitForElementToBeRemoved(() =>
-                    screen.queryAllByTestId('dhis2-uicore-circularloader')
                 )
                 return { screen, attributes, trackedEntityTypes, programs }
             }
@@ -392,8 +390,8 @@ describe('Relationship types form tests', () => {
 
     describe('Edit', () => {
         const renderForm = generateRenderer(
-            { section, mockSchema: undefined },
-            async (
+            { section, mockSchema },
+            (
                 routeOptions,
                 { relationshipTypeOverwrites = {}, id = randomDhis2Id() } = {}
             ) => {
@@ -439,10 +437,6 @@ describe('Relationship types form tests', () => {
                     >
                         <Edit />
                     </TestComponentWithRouter>
-                )
-                // Wait for form to finish loading
-                await waitForElementToBeRemoved(() =>
-                    screen.queryAllByTestId('dhis2-uicore-circularloader')
                 )
                 return {
                     screen,

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-16T16:41:07.417Z\n"
-"PO-Revision-Date: 2025-11-16T16:41:07.417Z\n"
+"POT-Creation-Date: 2025-11-16T17:58:33.705Z\n"
+"PO-Revision-Date: 2025-11-16T17:58:33.705Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -4042,6 +4042,9 @@ msgstr "Saving a section does not save other changes to the program"
 
 msgid "Tracked entity"
 msgstr "Tracked entity"
+
+msgid "Relationship entity constraint"
+msgstr "Relationship entity constraint"
 
 msgid "Choose which data elements are shown when viewing the relationship"
 msgstr "Choose which data elements are shown when viewing the relationship"
