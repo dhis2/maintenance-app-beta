@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-14T18:57:22.711Z\n"
-"PO-Revision-Date: 2025-11-14T18:57:22.711Z\n"
+"POT-Creation-Date: 2025-11-16T16:41:07.417Z\n"
+"PO-Revision-Date: 2025-11-16T16:41:07.417Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -3885,6 +3885,9 @@ msgstr ""
 msgid "Edit or rearrange the tracked entity attributes"
 msgstr "Edit or rearrange the tracked entity attributes"
 
+msgid "Enrollment: Settings"
+msgstr "Enrollment: Settings"
+
 msgid "Configure settings related to enrollment in this program."
 msgstr "Configure settings related to enrollment in this program."
 
@@ -4007,9 +4010,6 @@ msgstr "Related program"
 msgid "Choose how this program is disaggregated."
 msgstr "Choose how this program is disaggregated."
 
-msgid "Enrollment: Settings"
-msgstr "Enrollment: Settings"
-
 msgid "Listing"
 msgstr "Listing"
 
@@ -4045,6 +4045,13 @@ msgstr "Tracked entity"
 
 msgid "Choose which data elements are shown when viewing the relationship"
 msgstr "Choose which data elements are shown when viewing the relationship"
+
+msgid ""
+"Choose which tracked entity attributes are shown when viewing the "
+"relationship"
+msgstr ""
+"Choose which tracked entity attributes are shown when viewing the "
+"relationship"
 
 msgid "Available tracked entity attributes"
 msgstr "Available tracked entity attributes"

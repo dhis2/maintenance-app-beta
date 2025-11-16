@@ -112,17 +112,15 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                 return
             }
 
-            const program = selectedProgram
-
             const shouldAutoSetProgramStage =
                 constraint === 'PROGRAM_STAGE_INSTANCE' &&
-                program?.programType === 'WITHOUT_REGISTRATION' &&
-                program?.programStages &&
-                Array.isArray(program.programStages) &&
-                program.programStages.length > 0
+                selectedProgram.programType === 'WITHOUT_REGISTRATION' &&
+                selectedProgram.programStages &&
+                Array.isArray(selectedProgram.programStages) &&
+                selectedProgram.programStages.length > 0
 
             const programStageToSet = shouldAutoSetProgramStage
-                ? { id: program.programStages![0].id }
+                ? { id: selectedProgram.programStages[0].id }
                 : undefined
 
             form.batch(() => {

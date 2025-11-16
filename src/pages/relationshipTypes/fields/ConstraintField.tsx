@@ -71,6 +71,7 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
                         }
                     }}
                     dataTest={`${prefix}-constraint-selector`}
+                    ariaLabel={i18n.t('Relationship entity constraint')}
                 />
             </Field>
         </StandardFormField>

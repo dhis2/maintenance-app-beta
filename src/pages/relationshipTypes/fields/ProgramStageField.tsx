@@ -4,7 +4,7 @@ import { useField, useForm } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { required } from '../../../lib'
-import { Program, ProgramStage } from '../../../types/generated'
+import type { Program, ProgramStage } from '../../../types/generated'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
 export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
@@ -52,8 +52,8 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
 
     useEffect(() => {
         if (
-            constraint !== 'PROGRAM_STAGE_INSTANCE' &&
             !visible &&
+            constraint !== 'PROGRAM_STAGE_INSTANCE' &&
             programStageInput.value
         ) {
             programStageInput.onChange(undefined)

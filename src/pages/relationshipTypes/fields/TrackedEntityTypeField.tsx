@@ -6,7 +6,7 @@ import { StandardFormField, EditableFieldWrapper } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
 import { required } from '../../../lib'
-import { TrackedEntityType } from '../../../types/generated'
+import type { TrackedEntityType } from '../../../types/generated'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
 export const TrackedEntityTypeField = ({

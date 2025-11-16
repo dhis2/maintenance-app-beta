@@ -12,6 +12,7 @@ export type ButtonGroupProps = Readonly<{
     selected?: string
     onChange: (value: string) => void
     dataTest: string
+    ariaLabel?: string
 }>
 
 export const ButtonGroup = ({
@@ -19,9 +20,15 @@ export const ButtonGroup = ({
     selected,
     onChange,
     dataTest,
+    ariaLabel,
 }: ButtonGroupProps) => {
     return (
-        <div className={css.buttonGroup} data-test={dataTest}>
+        <div
+            className={css.buttonGroup}
+            role="group"
+            aria-label={ariaLabel}
+            data-test={dataTest}
+        >
             {options.map((option) => {
                 const isSelected = selected === option.value
 
@@ -33,6 +40,7 @@ export const ButtonGroup = ({
                             [css.buttonOptionSelected]: isSelected,
                         })}
                         onClick={() => onChange(option.value)}
+                        aria-pressed={isSelected}
                         data-test={`${dataTest}-option-${option.value}`}
                     >
                         {option.label}
