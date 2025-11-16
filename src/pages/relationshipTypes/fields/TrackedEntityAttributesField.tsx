@@ -112,6 +112,9 @@ export const TrackedEntityAttributesField = ({
                 validationText={(meta.touched && meta.error?.toString()) || ''}
                 name={trackerDataViewPath}
                 label={i18n.t('Tracked entity attributes')}
+                helpText={i18n.t(
+                    'Choose which tracked entity attributes are shown when viewing the relationship'
+                )}
             >
                 <BaseModelTransfer<DisplayableModel>
                     available={availableAttributes}

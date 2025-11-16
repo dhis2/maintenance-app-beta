@@ -30,8 +30,6 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
     const trackedEntityTypePath = `${prefix}Constraint.trackedEntityType`
     const programPath = `${prefix}Constraint.program`
     const programStagePath = `${prefix}Constraint.programStage`
-    const attributesPath = `${prefix}Constraint.trackerDataView.attributes`
-    const dataElementsPath = `${prefix}Constraint.trackerDataView.dataElements`
 
     const { input, meta } = useField<ConstraintValue | undefined>(
         constraintFieldName,
@@ -42,20 +40,19 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
     const form = useForm()
 
     const clearDependentFields = useCallback(() => {
+        const trackerDataViewPath = `${prefix}Constraint.trackerDataView`
         form.batch(() => {
             form.change(trackedEntityTypePath, undefined)
             form.change(programPath, undefined)
             form.change(programStagePath, undefined)
-            form.change(attributesPath, [])
-            form.change(dataElementsPath, [])
+            form.change(trackerDataViewPath, { attributes: [], dataElements: [] })
         })
     }, [
         form,
+        prefix,
         trackedEntityTypePath,
         programPath,
         programStagePath,
-        attributesPath,
-        dataElementsPath,
     ])
 
     return (

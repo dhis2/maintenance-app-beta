@@ -56,11 +56,11 @@ export const TrackedEntityTypeField = ({
     }, [visible, trackedEntityTypeInput.value])
 
     const clearDependentFields = useCallback(() => {
+        const trackerDataViewPath = `${prefix}Constraint.trackerDataView`
         form.batch(() => {
             form.change(`${prefix}Constraint.program`, undefined)
             form.change(`${prefix}Constraint.programStage`, undefined)
-            form.change(`${prefix}Constraint.trackerDataView.attributes`, [])
-            form.change(`${prefix}Constraint.trackerDataView.dataElements`, [])
+            form.change(trackerDataViewPath, { attributes: [], dataElements: [] })
         })
     }, [form, prefix])
 

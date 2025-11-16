@@ -15,8 +15,6 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
     const trackedEntityTypeFieldName = `${prefix}Constraint.trackedEntityType`
     const programName = `${prefix}Constraint.program`
     const programStagePath = `${prefix}Constraint.programStage`
-    const attributesPath = `${prefix}Constraint.trackerDataView.attributes`
-    const dataElementsPath = `${prefix}Constraint.trackerDataView.dataElements`
 
     const {
         input: { value: constraint },
@@ -103,11 +101,11 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
 
     const clearDependentFields = useCallback(
         (selectedProgram: DisplayableModel | undefined) => {
+            const trackerDataViewPath = `${prefix}Constraint.trackerDataView`
             if (!selectedProgram) {
                 form.batch(() => {
                     form.change(programStagePath, undefined)
-                    form.change(attributesPath, [])
-                    form.change(dataElementsPath, [])
+                    form.change(trackerDataViewPath, { attributes: [], dataElements: [] })
                 })
                 return
             }
@@ -116,24 +114,24 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                 programType?: string
                 programStages?: DisplayableModel[]
             }
-
+            
             const shouldAutoSetProgramStage =
                 constraint === 'PROGRAM_STAGE_INSTANCE' &&
                 program?.programType === 'WITHOUT_REGISTRATION' &&
                 program?.programStages &&
+                Array.isArray(program.programStages) &&
                 program.programStages.length > 0
 
             const programStageToSet = shouldAutoSetProgramStage
-                ? program.programStages![0]
+                ? { id: program.programStages![0].id }
                 : undefined
 
             form.batch(() => {
                 form.change(programStagePath, programStageToSet)
-                form.change(attributesPath, [])
-                form.change(dataElementsPath, [])
+                form.change(trackerDataViewPath, { attributes: [], dataElements: [] })
             })
         },
-        [form, programStagePath, attributesPath, dataElementsPath, constraint]
+        [form, prefix, programStagePath, constraint]
     )
 
     if (!visible || !programQuery) {

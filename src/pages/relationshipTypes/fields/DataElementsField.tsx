@@ -99,6 +99,7 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
                 error={meta.invalid}
                 validationText={(meta.touched && meta.error?.toString()) || ''}
                 name={trackerDataViewPath}
+                label={i18n.t('Data elements')}
                 helpText={i18n.t(
                     'Choose which data elements are shown when viewing the relationship'
                 )}

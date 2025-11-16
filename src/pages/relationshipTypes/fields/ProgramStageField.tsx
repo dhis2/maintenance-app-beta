@@ -27,7 +27,10 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
     const { input: programStageInput } = useField(programStageName)
     const form = useForm()
 
-    const visible = constraint === 'PROGRAM_STAGE_INSTANCE' && !!program?.id
+    const visible =
+        constraint === 'PROGRAM_STAGE_INSTANCE' &&
+        !!program?.id &&
+        program.programType !== 'WITHOUT_REGISTRATION'
 
     const programStageQuery = useMemo(() => {
         if (!visible) {
@@ -49,15 +52,28 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
     }, [visible, program?.id])
 
     useEffect(() => {
-        if (!visible && programStageInput.value) {
+        // Only clear programStage if constraint is not PROGRAM_STAGE_INSTANCE
+        // For PROGRAM_STAGE_INSTANCE, programStage must always be set
+        // (either manually for tracker programs, or automatically for event programs)
+        if (
+            constraint !== 'PROGRAM_STAGE_INSTANCE' &&
+            !visible &&
+            programStageInput.value
+        ) {
             programStageInput.onChange(undefined)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [visible, programStageInput.value])
+    }, [visible, programStageInput.value, constraint])
 
     const clearDependentFields = useCallback(() => {
+        const trackerDataViewPath = `${prefix}Constraint.trackerDataView`
+        const currentTrackerDataView = form.getFieldState(trackerDataViewPath)?.value
+        const currentAttributes = currentTrackerDataView?.attributes || []
         form.batch(() => {
-            form.change(`${prefix}Constraint.trackerDataView.dataElements`, [])
+            form.change(trackerDataViewPath, {
+                attributes: currentAttributes,
+                dataElements: [],
+            })
         })
     }, [form, prefix])
 
