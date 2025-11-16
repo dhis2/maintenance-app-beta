@@ -21,6 +21,7 @@ export const TrackedEntityAttributesField = ({
     const constraintFieldName = `${prefix}Constraint.relationshipEntity`
     const trackedEntityTypeFieldName = `${prefix}Constraint.trackedEntityType`
     const programFieldName = `${prefix}Constraint.program`
+    const trackerDataViewPath = `${prefix}Constraint.trackerDataView.attributes`
 
     const {
         input: { value: constraint },
@@ -52,8 +53,6 @@ export const TrackedEntityAttributesField = ({
         if (!constraint || constraint === 'PROGRAM_STAGE_INSTANCE') {
             return false
         }
-        // Show if we have either trackedEntityType or program (or both)
-        // This matches maintenance-app behavior where both can contribute attributes
         return (
             (constraint === 'TRACKED_ENTITY_INSTANCE' &&
                 (!!trackedEntityType?.id || !!program?.id)) ||
@@ -85,7 +84,6 @@ export const TrackedEntityAttributesField = ({
         program?.programTrackedEntityAttributes,
     ])
 
-    const trackerDataViewPath = `${prefix}Constraint.trackerDataView.attributes`
     const { input: attributesInput, meta } = useField<
         string[],
         HTMLElement,

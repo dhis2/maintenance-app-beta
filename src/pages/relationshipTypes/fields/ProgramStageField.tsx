@@ -4,8 +4,7 @@ import { useField, useForm } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { required } from '../../../lib'
-import { Program } from '../../../types/generated'
-import { DisplayableModel } from '../../../types/models'
+import { Program, ProgramStage } from '../../../types/generated'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
 export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
@@ -52,9 +51,6 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
     }, [visible, program?.id])
 
     useEffect(() => {
-        // Only clear programStage if constraint is not PROGRAM_STAGE_INSTANCE
-        // For PROGRAM_STAGE_INSTANCE, programStage must always be set
-        // (either manually for tracker programs, or automatically for event programs)
         if (
             constraint !== 'PROGRAM_STAGE_INSTANCE' &&
             !visible &&
@@ -84,7 +80,7 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
 
     return (
         <StandardFormField>
-            <ModelSingleSelectFormField<DisplayableModel>
+            <ModelSingleSelectFormField<ProgramStage>
                 name={programStageName}
                 label={i18n.t('Program stage')}
                 query={programStageQuery}

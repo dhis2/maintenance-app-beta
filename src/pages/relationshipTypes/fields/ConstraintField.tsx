@@ -27,20 +27,19 @@ const CONSTRAINT_OPTIONS: ButtonOption[] = [
 
 export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
     const constraintFieldName = `${prefix}Constraint.relationshipEntity`
-    const trackedEntityTypePath = `${prefix}Constraint.trackedEntityType`
-    const programPath = `${prefix}Constraint.program`
-    const programStagePath = `${prefix}Constraint.programStage`
 
     const { input, meta } = useField<ConstraintValue | undefined>(
         constraintFieldName,
-        {
-            validate: required,
-        }
+        { validate: required }
     )
     const form = useForm()
 
     const clearDependentFields = useCallback(() => {
         const trackerDataViewPath = `${prefix}Constraint.trackerDataView`
+        const trackedEntityTypePath = `${prefix}Constraint.trackedEntityType`
+        const programPath = `${prefix}Constraint.program`
+        const programStagePath = `${prefix}Constraint.programStage`
+
         form.batch(() => {
             form.change(trackedEntityTypePath, undefined)
             form.change(programPath, undefined)
@@ -50,7 +49,7 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
                 dataElements: [],
             })
         })
-    }, [form, prefix, trackedEntityTypePath, programPath, programStagePath])
+    }, [form, prefix])
 
     return (
         <StandardFormField>

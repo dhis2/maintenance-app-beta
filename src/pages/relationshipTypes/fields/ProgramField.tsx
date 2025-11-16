@@ -6,8 +6,7 @@ import { StandardFormField, EditableFieldWrapper } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
 import { required } from '../../../lib'
-import { TrackedEntityType } from '../../../types/generated'
-import { DisplayableModel } from '../../../types/models'
+import { Program, TrackedEntityType } from '../../../types/generated'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
 
 export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
@@ -100,7 +99,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
     }, [visible, programInput.value])
 
     const clearDependentFields = useCallback(
-        (selectedProgram: DisplayableModel | undefined) => {
+        (selectedProgram: Program | undefined) => {
             const trackerDataViewPath = `${prefix}Constraint.trackerDataView`
             if (!selectedProgram) {
                 form.batch(() => {
@@ -113,10 +112,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                 return
             }
 
-            const program = selectedProgram as DisplayableModel & {
-                programType?: string
-                programStages?: DisplayableModel[]
-            }
+            const program = selectedProgram
 
             const shouldAutoSetProgramStage =
                 constraint === 'PROGRAM_STAGE_INSTANCE' &&
@@ -150,7 +146,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                 onRefresh={() => refresh()}
                 onAddNew={() => window.open(newProgramLink, '_blank')}
             >
-                <ModelSingleSelectFormField<DisplayableModel>
+                <ModelSingleSelectFormField<Program>
                     name={programName}
                     label={i18n.t('Program')}
                     query={programQuery}
