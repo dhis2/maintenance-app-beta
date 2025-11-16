@@ -105,7 +105,10 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
             if (!selectedProgram) {
                 form.batch(() => {
                     form.change(programStagePath, undefined)
-                    form.change(trackerDataViewPath, { attributes: [], dataElements: [] })
+                    form.change(trackerDataViewPath, {
+                        attributes: [],
+                        dataElements: [],
+                    })
                 })
                 return
             }
@@ -114,7 +117,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                 programType?: string
                 programStages?: DisplayableModel[]
             }
-            
+
             const shouldAutoSetProgramStage =
                 constraint === 'PROGRAM_STAGE_INSTANCE' &&
                 program?.programType === 'WITHOUT_REGISTRATION' &&
@@ -128,7 +131,10 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
 
             form.batch(() => {
                 form.change(programStagePath, programStageToSet)
-                form.change(trackerDataViewPath, { attributes: [], dataElements: [] })
+                form.change(trackerDataViewPath, {
+                    attributes: [],
+                    dataElements: [],
+                })
             })
         },
         [form, prefix, programStagePath, constraint]

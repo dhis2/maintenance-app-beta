@@ -60,7 +60,10 @@ export const TrackedEntityTypeField = ({
         form.batch(() => {
             form.change(`${prefix}Constraint.program`, undefined)
             form.change(`${prefix}Constraint.programStage`, undefined)
-            form.change(trackerDataViewPath, { attributes: [], dataElements: [] })
+            form.change(trackerDataViewPath, {
+                attributes: [],
+                dataElements: [],
+            })
         })
     }, [form, prefix])
 

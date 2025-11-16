@@ -45,15 +45,12 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
             form.change(trackedEntityTypePath, undefined)
             form.change(programPath, undefined)
             form.change(programStagePath, undefined)
-            form.change(trackerDataViewPath, { attributes: [], dataElements: [] })
+            form.change(trackerDataViewPath, {
+                attributes: [],
+                dataElements: [],
+            })
         })
-    }, [
-        form,
-        prefix,
-        trackedEntityTypePath,
-        programPath,
-        programStagePath,
-    ])
+    }, [form, prefix, trackedEntityTypePath, programPath, programStagePath])
 
     return (
         <StandardFormField>

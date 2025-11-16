@@ -67,7 +67,8 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
 
     const clearDependentFields = useCallback(() => {
         const trackerDataViewPath = `${prefix}Constraint.trackerDataView`
-        const currentTrackerDataView = form.getFieldState(trackerDataViewPath)?.value
+        const currentTrackerDataView =
+            form.getFieldState(trackerDataViewPath)?.value
         const currentAttributes = currentTrackerDataView?.attributes || []
         form.batch(() => {
             form.change(trackerDataViewPath, {
