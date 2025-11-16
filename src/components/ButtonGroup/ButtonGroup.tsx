@@ -23,9 +23,8 @@ export const ButtonGroup = ({
     ariaLabel,
 }: ButtonGroupProps) => {
     return (
-        <div
+        <fieldset
             className={css.buttonGroup}
-            role="group"
             aria-label={ariaLabel}
             data-test={dataTest}
         >
@@ -46,7 +45,7 @@ export const ButtonGroup = ({
                         {option.label}
                     </button>
                 )
-            })}
-        </div>
+                })}
+        </fieldset>
     )
 }

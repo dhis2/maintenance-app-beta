@@ -120,7 +120,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                 selectedProgram.programStages.length > 0
 
             const programStageToSet = shouldAutoSetProgramStage
-                ? { id: selectedProgram.programStages![0].id }
+                ? { id: selectedProgram.programStages[0].id }
                 : undefined
 
             form.batch(() => {
