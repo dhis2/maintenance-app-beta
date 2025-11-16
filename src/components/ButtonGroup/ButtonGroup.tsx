@@ -45,7 +45,7 @@ export const ButtonGroup = ({
                         {option.label}
                     </button>
                 )
-                })}
+            })}
         </fieldset>
     )
 }
