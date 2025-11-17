@@ -4,7 +4,6 @@ export const FEATURES = Object.freeze({
 } as const)
 
 const MINOR_VERSION_SUPPORT = Object.freeze({
-    [FEATURES.trigramIndexable]: 43,
     [FEATURES.searchPerformance]: 43,
 } as Record<string, number>)
 
