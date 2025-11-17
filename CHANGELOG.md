@@ -1,3 +1,10 @@
+# [0.93.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.92.0...v0.93.0) (2025-11-13)
+
+
+### Features
+
+* [DHIS2-20335] Programs customisation section ([#689](https://github.com/dhis2/maintenance-app-beta/issues/689)) ([12d2159](https://github.com/dhis2/maintenance-app-beta/commit/12d21594e8cb6d7d250c7efe8676f678306dae9e))
+
 # [0.92.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.91.1...v0.92.0) (2025-11-13)
 
 

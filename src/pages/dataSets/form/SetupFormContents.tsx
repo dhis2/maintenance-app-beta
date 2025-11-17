@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import {
+    ColorAndIconField,
     CodeField,
     DescriptionField,
     NameField,
@@ -11,7 +12,6 @@ import {
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
 import { useSchemaSectionHandleOrThrow } from '../../../lib'
-import { ColorAndIconField } from '../../dataElements/fields'
 
 export const SetupFormContents = React.memo(function SetupFormContents({
     name,

@@ -48,6 +48,17 @@ const fieldFilters = [
     'dataEntryForm[id,displayName,htmlCode]',
     'programSections[id,displayName,description,access,sortOrder]',
     'programTrackedEntityAttributes[id,displayName,valueType,renderType,allowFutureDate,mandatory,searchable,displayInList,trackedEntityAttribute[id,displayName,unique]]',
+    'style[color,icon]',
+    'programStageLabel',
+    'eventLabel',
+    'enrollmentDateLabel',
+    'incidentDateLabel',
+    'enrollmentLabel',
+    'followUpLabel',
+    'orgUnitLabel',
+    'relationshipLabel',
+    'noteLabel',
+    'displayFrontPageList',
 ] as const
 
 export type ProgramsFromFilters = PickWithFieldFilters<
