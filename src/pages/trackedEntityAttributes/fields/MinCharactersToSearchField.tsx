@@ -17,11 +17,12 @@ export function MinCharactersToSearchField() {
                 'Set the minimum characters required to start a search.'
             )}
             format={(value: unknown) => value?.toString()}
-            parse={(value: unknown) =>
-                value !== undefined && value !== ''
-                    ? Number.parseInt(value as string, 10)
-                    : value
-            }
+            parse={(value: unknown) => {
+                if (value === undefined || value === '') {
+                    return 0
+                }
+                return Number.parseInt(value as string, 10)
+            }}
         />
     )
 }
