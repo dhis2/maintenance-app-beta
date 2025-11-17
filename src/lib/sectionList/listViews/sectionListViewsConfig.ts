@@ -475,11 +475,6 @@ export const modelListViewsConfig = {
     },
     relationshipType: {
         columns: {
-            default: [
-                DESCRIPTORS.name,
-                DESCRIPTORS.publicAccess,
-                'lastUpdated',
-            ],
             available: [
                 'bidirectional',
                 'favorite',
