@@ -1,4 +1,4 @@
-import { FetchError } from '@dhis2/app-runtime'
+import { FetchError, useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
     Button,
@@ -60,10 +60,21 @@ export const ManageListView = ({
     )
     const section = useModelSectionHandleOrThrow()
     const { saveView } = useMutateModelListViews()
+    const minorVersion = useConfig().serverVersion?.minor ?? 0
 
     const { defaultColumns, defaultFilters, columnsConfig, filtersConfig } =
         useMemo(() => {
-            const columnsConfig = getColumnsForSection(section.name)
+            const rawColumnsConfig = getColumnsForSection(section.name)
+            const columnsConfig = {
+                available: rawColumnsConfig.available.filter(
+                    (col) =>
+                        !(col.minApiVersion && minorVersion < col.minApiVersion)
+                ),
+                default: rawColumnsConfig.default.filter(
+                    (col) =>
+                        !(col.minApiVersion && minorVersion < col.minApiVersion)
+                ),
+            }
             const filtersConfig = getFiltersForSection(section.name)
 
             const defaultColumns = columnsConfig.default.map(toPath)
@@ -74,7 +85,7 @@ export const ManageListView = ({
                 columnsConfig,
                 filtersConfig,
             }
-        }, [section.name])
+        }, [section.name, minorVersion])
     const hasAvailableFilters = filtersConfig.available.length > 0
 
     const handleSave = async (values: FormValues) => {
