@@ -16,7 +16,7 @@ import {
     StandardFormSectionTitle,
     ValueTypeField,
 } from '../../../components'
-import { SECTIONS_MAP } from '../../../lib'
+import { FEATURES, SECTIONS_MAP, useFeatureAvailable } from '../../../lib'
 import { TrackedEntityAttribute } from '../../../types/generated'
 import {
     BlockedSearchOperatorsField,
@@ -32,9 +32,6 @@ import {
     TrigramIndexableField,
     UniqueRadioFields,
 } from '../fields'
-
-// Replace with version control
-const isTrigramIndexableAvailable = true
 
 export const TrackedEntityAttributeFormFields = ({
     basicSectionName,
@@ -67,6 +64,10 @@ export const TrackedEntityAttributeFormFields = ({
     const uniqueDisabled =
         valueType === TrackedEntityAttribute.valueType.TRACKER_ASSOCIATE ||
         valueType === TrackedEntityAttribute.valueType.USERNAME
+
+    const isTrigramIndexableAvailable = useFeatureAvailable(
+        FEATURES.trigramIndexable
+    )
 
     return (
         <>
