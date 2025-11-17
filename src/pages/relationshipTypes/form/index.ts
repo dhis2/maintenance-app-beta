@@ -1,0 +1,1 @@
+export { relationshipTypeListSchema } from './RelationshipTypeFormSchema'
