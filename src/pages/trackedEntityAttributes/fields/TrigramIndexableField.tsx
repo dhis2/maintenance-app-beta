@@ -30,7 +30,6 @@ export function TrigramIndexableField() {
         if (bothEwAndLikeBlocked && trigramIndexableInput.value) {
             trigramIndexableInput.onChange(false)
         }
-        // trigramIndexableInput is excluded from deps because it's not a stable reference
         /* eslint-disable react-hooks/exhaustive-deps */
     }, [bothEwAndLikeBlocked, trigramIndexableInput.value])
 

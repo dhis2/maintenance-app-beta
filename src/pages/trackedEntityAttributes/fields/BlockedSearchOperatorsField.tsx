@@ -5,9 +5,18 @@ import { useField } from 'react-final-form'
 import { SearchableMultiSelect } from '../../../components/SearchableMultiSelect'
 
 const BLOCKED_SEARCH_OPERATOR_OPTIONS = [
-    { value: 'SW', label: i18n.t('SW / Starts with') },
-    { value: 'EW', label: i18n.t('EW / Ends with') },
-    { value: 'LIKE', label: i18n.t('LIKE / Contains') },
+    {
+        value: 'SW',
+        label: i18n.t('SW | Starts with'),
+    },
+    {
+        value: 'EW',
+        label: i18n.t('EW | Ends with'),
+    },
+    {
+        value: 'LIKE',
+        label: i18n.t('LIKE | Contains'),
+    },
 ]
 
 export function BlockedSearchOperatorsField() {
@@ -26,7 +35,9 @@ export function BlockedSearchOperatorsField() {
                 ...option,
                 disabled: isPreferred,
                 label: isPreferred
-                    ? `${option.label} ${i18n.t('(preferred operator)')}`
+                    ? i18n.t('{{optionLabel}} (preferred operator)', {
+                          optionLabel: option.label,
+                      })
                     : option.label,
             }
         })

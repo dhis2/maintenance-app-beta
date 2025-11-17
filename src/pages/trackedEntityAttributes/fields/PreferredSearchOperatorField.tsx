@@ -5,10 +5,22 @@ import { useField } from 'react-final-form'
 import { SearchableSingleSelect } from '../../../components'
 
 const PREFERRED_SEARCH_OPERATOR_OPTIONS = [
-    { value: 'EQ', label: i18n.t('EQ / Equals') },
-    { value: 'SW', label: i18n.t('SW / Starts with') },
-    { value: 'EW', label: i18n.t('EW / Ends with') },
-    { value: 'LIKE', label: i18n.t('LIKE / Contains') },
+    {
+        value: 'EQ',
+        label: i18n.t('EQ | Equals'),
+    },
+    {
+        value: 'SW',
+        label: i18n.t('SW | Starts with'),
+    },
+    {
+        value: 'EW',
+        label: i18n.t('EW | Ends with'),
+    },
+    {
+        value: 'LIKE',
+        label: i18n.t('LIKE | Contains'),
+    },
 ]
 
 export function PreferredSearchOperatorField() {
@@ -27,7 +39,9 @@ export function PreferredSearchOperatorField() {
                 ...option,
                 disabled: isBlocked,
                 label: isBlocked
-                    ? `${option.label} ${i18n.t('(blocked operator)')}`
+                    ? i18n.t('{{optionLabel}} (blocked operator)', {
+                          optionLabel: option.label,
+                      })
                     : option.label,
             }
         })
