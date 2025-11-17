@@ -8,6 +8,7 @@ import { EnrollmentDataFormContents } from './EnrollmentDataFormContents'
 import { EnrollmentFormFormContents } from './EnrollmentFormFormContents'
 import { EnrollmentSettingsFormContents } from './EnrollmentSettingsFormContents'
 import { ProgramFormDescriptor } from './formDescriptor'
+import { ProgramCustomizationFormContents } from './ProgramCustomizationFormContents'
 import { SetupFormContents } from './SetupFormContents'
 
 export const ProgramFormContents = () => {
@@ -17,6 +18,9 @@ export const ProgramFormContents = () => {
         <SectionedFormSections>
             <SetupFormContents
                 name={descriptor.getSection('enrollmentDetails').name}
+            />
+            <ProgramCustomizationFormContents
+                name={descriptor.getSection('programCustomization').name}
             />
             <EnrollmentSettingsFormContents
                 name={descriptor.getSection('enrollmentSettings').name}
