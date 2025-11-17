@@ -14,10 +14,19 @@ import {
     categoryFormSchema,
     categoryListSchema,
 } from '../pages/categories/form'
-import { categoryComboListSchema } from '../pages/categoryCombos/form'
+import {
+    categoryComboFormSchema,
+    categoryComboListSchema,
+} from '../pages/categoryCombos/form'
 import { categoryOptionComboListSchema } from '../pages/categoryOptionCombos/form'
-import { categoryOptionGroupListSchema } from '../pages/categoryOptionGroups/form/categoryOptionGroupSchema'
-import { categoryOptionGroupSetListSchema } from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
+import {
+    categoryOptionGroupFormSchema,
+    categoryOptionGroupListSchema,
+} from '../pages/categoryOptionGroups/form/categoryOptionGroupSchema'
+import {
+    categoryOptionGroupSetFormSchema,
+    categoryOptionGroupSetListSchema,
+} from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
 import { categoryOptionListSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
 import { ConstantsListSchema } from '../pages/constants/form/ConstantFormSchema'
 import { dataApprovalLevelListSchema } from '../pages/dataApprovalLevels/form/dataApprovalLevelsSchema'
@@ -184,6 +193,13 @@ export const testCategoryCombo = (overwrites: Record<any, any> = {}) => ({
     ...overwrites,
 })
 
+export const testCategoryComboForm = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(categoryComboFormSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
 export const testCategoryOptionCombo = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(categoryOptionComboListSchema, {
         mockeryMapper,
@@ -198,10 +214,28 @@ export const testCategoryOptionGroup = (overwrites: Record<any, any> = {}) => ({
     ...overwrites,
 })
 
+export const testCategoryOptionGroupForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(categoryOptionGroupFormSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
 export const testCategoryOptionGroupSet = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(categoryOptionGroupSetListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testCategoryOptionGroupSetForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(categoryOptionGroupSetFormSchema, {
+        mockeryMapper,
+    }),
     ...overwrites,
 })
 
