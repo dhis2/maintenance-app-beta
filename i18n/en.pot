@@ -1444,6 +1444,9 @@ msgstr "Data element for aggregate data export"
 msgid "Analytics type"
 msgstr "Analytics type"
 
+msgid "Bidirectional"
+msgstr "Bidirectional"
+
 msgid "Compulsory"
 msgstr "Compulsory"
 
@@ -1453,8 +1456,14 @@ msgstr "Data dimension"
 msgid "Data dimension type"
 msgstr "Data dimension type"
 
+msgid "Name seen from initiating entity"
+msgstr "Name seen from initiating entity"
+
 msgid "Display in form"
 msgstr "Display in form"
+
+msgid "Name seen from receiving entity"
+msgstr "Name seen from receiving entity"
 
 msgid "Domain type"
 msgstr "Domain type"
@@ -1474,11 +1483,20 @@ msgstr "Form name"
 msgid "Form type"
 msgstr "Form type"
 
+msgid "Relationship name seen from initiating entity"
+msgstr "Relationship name seen from initiating entity"
+
 msgid "Ignore data approval"
 msgstr "Ignore data approval"
 
+msgid "Referral"
+msgstr "Referral"
+
 msgid "Sharing"
 msgstr "Sharing"
+
+msgid "Relationship name seen from receiving entity"
+msgstr "Relationship name seen from receiving entity"
 
 msgid "Owner"
 msgstr "Owner"
@@ -4248,6 +4266,12 @@ msgid ""
 msgstr ""
 "Choose which attributes to display, which are required, and which are "
 "searchable"
+
+msgid "Available tracked entity attributes"
+msgstr "Available tracked entity attributes"
+
+msgid "Selected tracked entity attributes"
+msgstr "Selected tracked entity attributes"
 
 msgid "Maximum number of tracked entity instances to return when searching"
 msgstr "Maximum number of tracked entity instances to return when searching"

@@ -6,3 +6,4 @@ export {
 } from './relationshipTypeSchema'
 export { RelationshipTypeFormDescriptor } from './formDescriptor'
 export { RelationshipTypeFormFields } from './RelationshipTypeFormFields'
+export { relationshipTypeListSchema } from './RelationshipTypeFormSchema'
