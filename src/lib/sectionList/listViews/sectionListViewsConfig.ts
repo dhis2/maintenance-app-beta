@@ -473,6 +473,24 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    relationshipType: {
+        columns: {
+            available: [
+                'bidirectional',
+                'favorite',
+                'displayFromToName',
+                'displayToFromName',
+                'fromToName',
+                'toFromName',
+                'referral',
+            ],
+        },
+        filters: {
+            default: [],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
+    },
     trackedEntityType: {
         columns: {
             default: [
