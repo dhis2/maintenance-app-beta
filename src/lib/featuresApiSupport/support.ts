@@ -1,9 +1,11 @@
 export const FEATURES = Object.freeze({
     trigramIndexable: 'trigramIndexable',
+    searchPerformance: 'searchPerformance',
 } as const)
 
 const MINOR_VERSION_SUPPORT = Object.freeze({
     [FEATURES.trigramIndexable]: 43,
+    [FEATURES.searchPerformance]: 43,
 } as Record<string, number>)
 
 export const hasAPISupportForFeature = (

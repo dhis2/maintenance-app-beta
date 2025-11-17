@@ -65,8 +65,8 @@ export const TrackedEntityAttributeFormFields = ({
         valueType === TrackedEntityAttribute.valueType.TRACKER_ASSOCIATE ||
         valueType === TrackedEntityAttribute.valueType.USERNAME
 
-    const isTrigramIndexableAvailable = useFeatureAvailable(
-        FEATURES.trigramIndexable
+    const isSearchPerformanceSectionAvailable = useFeatureAvailable(
+        FEATURES.searchPerformance
     )
 
     return (
@@ -225,30 +225,32 @@ export const TrackedEntityAttributeFormFields = ({
                 </StandardFormField>
             </SectionedFormSection>
 
-            <SectionedFormSection name={searchPerformanceSectionName}>
-                <StandardFormSectionTitle>
-                    {i18n.t('Search performance')}
-                </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Adjust how this attribute is searched to balance performance and accuracy.'
-                    )}
-                </StandardFormSectionDescription>
+            {isSearchPerformanceSectionAvailable && (
+                <SectionedFormSection name={searchPerformanceSectionName}>
+                    <StandardFormSectionTitle>
+                        {i18n.t('Search performance')}
+                    </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        {i18n.t(
+                            'Adjust how this attribute is searched to balance performance and accuracy.'
+                        )}
+                    </StandardFormSectionDescription>
 
-                <StandardFormField>
-                    <PreferredSearchOperatorField />
-                </StandardFormField>
+                    <StandardFormField>
+                        <PreferredSearchOperatorField />
+                    </StandardFormField>
 
-                <StandardFormField>
-                    <BlockedSearchOperatorsField />
-                </StandardFormField>
+                    <StandardFormField>
+                        <BlockedSearchOperatorsField />
+                    </StandardFormField>
 
-                <StandardFormField>
-                    <MinCharactersToSearchField />
-                </StandardFormField>
+                    <StandardFormField>
+                        <MinCharactersToSearchField />
+                    </StandardFormField>
 
-                {isTrigramIndexableAvailable && <TrigramIndexableField />}
-            </SectionedFormSection>
+                    <TrigramIndexableField />
+                </SectionedFormSection>
+            )}
 
             <SectionedFormSection name={legendsSectionName}>
                 <StandardFormSectionTitle>
