@@ -1,5 +1,4 @@
 export const FEATURES = Object.freeze({
-    trigramIndexable: 'trigramIndexable',
     searchPerformance: 'searchPerformance',
 } as const)
 
