@@ -267,6 +267,16 @@ msgstr "{{fieldLabel}} (required)"
 msgid "Code"
 msgstr "Code"
 
+msgid "Visual configuration"
+msgstr "Visual configuration"
+
+msgid ""
+"A color and icon are helpful for identifying data elements in "
+"information-dense screens."
+msgstr ""
+"A color and icon are helpful for identifying data elements in "
+"information-dense screens."
+
 msgid "Description"
 msgstr "Description"
 
@@ -2049,16 +2059,6 @@ msgstr "Aggregation level(s)"
 
 msgid "Choose how this data element is disaggregated."
 msgstr "Choose how this data element is disaggregated."
-
-msgid "Color and icon"
-msgstr "Color and icon"
-
-msgid ""
-"A color and icon are helpful for identifying data elements in "
-"information-dense screens."
-msgstr ""
-"A color and icon are helpful for identifying data elements in "
-"information-dense screens."
 
 msgid "Domain"
 msgstr "Domain"
@@ -3912,6 +3912,68 @@ msgstr "Allow incident dates in the future"
 msgid "Collect data for the first stage during enrollment"
 msgstr "Collect data for the first stage during enrollment"
 
+msgid "Program Customization"
+msgstr "Program Customization"
+
+msgid "Customize the program's visuals, labels, and display settings."
+msgstr "Customize the program's visuals, labels, and display settings."
+
+msgid "Custom label for \"Incident date\""
+msgstr "Custom label for \"Incident date\""
+
+msgid "Used as an additional registration date for enrollments"
+msgstr "Used as an additional registration date for enrollments"
+
+msgid "Custom label for \"Enrollment date\""
+msgstr "Custom label for \"Enrollment date\""
+
+msgid "Used as the default registration date for enrollments"
+msgstr "Used as the default registration date for enrollments"
+
+msgid "Custom label for \"Enrollment\""
+msgstr "Custom label for \"Enrollment\""
+
+msgid "Custom label for \"Event\""
+msgstr "Custom label for \"Event\""
+
+msgid "Custom label for \"Program stage\""
+msgstr "Custom label for \"Program stage\""
+
+msgid "Custom label for \"Follow-up\""
+msgstr "Custom label for \"Follow-up\""
+
+msgid "Used to customize the label for follow-up events or activities"
+msgstr "Used to customize the label for follow-up events or activities"
+
+msgid "Custom label for \"Registering unit\""
+msgstr "Custom label for \"Registering unit\""
+
+msgid ""
+"Used to customize the label for the organisation unit that registers the "
+"enrollment or event"
+msgstr ""
+"Used to customize the label for the organisation unit that registers the "
+"enrollment or event"
+
+msgid "Custom label for \"Relationship\""
+msgstr "Custom label for \"Relationship\""
+
+msgid "Used to customize the label for relationships between tracked entities"
+msgstr "Used to customize the label for relationships between tracked entities"
+
+msgid "Custom label for \"Note\""
+msgstr "Custom label for \"Note\""
+
+msgid ""
+"Used to customize the label for notes or comments added to enrollments or "
+"events"
+msgstr ""
+"Used to customize the label for notes or comments added to enrollments or "
+"events"
+
+msgid "Display enrolled TEs in the front page list"
+msgstr "Display enrolled TEs in the front page list"
+
 msgid "Only integers are allowed"
 msgstr "Only integers are allowed"
 
@@ -4181,6 +4243,9 @@ msgstr "Explain the purpose of this tracked entity type."
 
 msgid "Choose and configure what data can be collected for this tracked entity type"
 msgstr "Choose and configure what data can be collected for this tracked entity type"
+
+msgid "Color and icon"
+msgstr "Color and icon"
 
 msgid "Notification details"
 msgstr "Notification details"
