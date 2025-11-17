@@ -171,9 +171,9 @@ describe('Category combos form tests', () => {
             ) => {
                 const attributes = [testCustomAttribute({ mandatory: false })]
                 const categories = [
-                    testCategory(),
-                    testCategory(),
-                    testCategory(),
+                    testCategory({ categoryOptionsSize: 3 }),
+                    testCategory({ categoryOptionsSize: 5 }),
+                    testCategory({ categoryOptionsSize: 4 }),
                 ]
 
                 const screen = render(
@@ -242,7 +242,7 @@ describe('Category combos form tests', () => {
             )
         })
 
-        /*it('should submit the data', async () => {
+        it('should submit the data', async () => {
             const { screen, categories } = await renderForm()
             const aName = faker.person.firstName()
 
@@ -263,18 +263,19 @@ describe('Category combos form tests', () => {
                             categories: [
                                 expect.objectContaining({
                                     id: categories[0].id,
-                                    categoryOptionsSize: 3,
-                                    displayName: categories[0].displayName
+                                    categoryOptionsSize:
+                                        categories[0].categoryOptionsSize,
+                                    displayName: categories[0].displayName,
                                 }),
                             ],
                             attributeValues: [],
-                            dataDimensionType: "DISAGGREGATION",
+                            dataDimensionType: 'DISAGGREGATION',
                             skipTotal: false,
                         }),
                     })
                 )
             )
-        })*/
+        })
     })
 
     describe('Edit', () => {
@@ -289,15 +290,19 @@ describe('Category combos form tests', () => {
             ) => {
                 const attributes = [testCustomAttribute({ mandatory: false })]
                 const categories = [testCategory(), testCategory()]
-                const categoryCombo = testCategoryComboForm()
-                categoryCombo.categories = [
-                    {
-                        id: categories[0].id,
-                        displayName: categories[0].displayName,
-                        categoryOptionsSize: faker.number.int(),
-                    },
-                ]
-                categoryCombo.id = id
+                const categoryCombo = testCategoryComboForm({
+                    id: id,
+                    categories: [
+                        {
+                            id: categories[0].id,
+                            displayName: categories[0].displayName,
+                            categoryOptionsSize: faker.number.int({
+                                min: 1,
+                                max: 50,
+                            }),
+                        },
+                    ],
+                })
 
                 const screen = render(
                     <TestComponentWithRouter
@@ -346,14 +351,12 @@ describe('Category combos form tests', () => {
             )
         })
 
-        /*it('should submit the data and return to the list view on success when a field is changed', async () => {
+        it('should submit the data and return to the list view on success when a field is changed', async () => {
             const { screen, categoryCombo } = await renderForm()
 
             const newCode = faker.word.words()
             await uiActions.enterCode(newCode, screen)
             await uiActions.submitForm(screen)
-
-            console.log('updateMock calls:', updateMock.mock.calls)
 
             await waitFor(() =>
                 expect(updateMock).toHaveBeenCalledWith(
@@ -361,11 +364,11 @@ describe('Category combos form tests', () => {
                         id: categoryCombo.id,
                         data: [
                             { op: 'replace', path: '/code', value: newCode },
-                        ]
+                        ],
                     })
                 )
             )
-        })*/
+        })
 
         it('should do nothing and return to the list view on success when no field is changed', async () => {
             const { screen } = await renderForm()
