@@ -1,5 +1,8 @@
 import React from 'react'
-import { useSectionedFormContext, useSelectedSection } from '../../lib'
+import {
+    useSectionedFormContext,
+    useSelectedSectionFromQueryParams,
+} from '../../lib'
 import {
     SectionedFormSidebar,
     SectionedFormSidebarItem,
@@ -8,7 +11,7 @@ import {
 export const DefaultSectionedFormSidebar = () => {
     const { sections } = useSectionedFormContext()
 
-    const [selected] = useSelectedSection()
+    const [selected] = useSelectedSectionFromQueryParams()
 
     const items = sections.map((section) => (
         <SectionedFormSidebarItem

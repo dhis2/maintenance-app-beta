@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import {
     useQueryParam,
     createEnumParam,
@@ -25,7 +25,6 @@ const defaultSetHandlerOptions: UseSelectedSectionSetHandlerOptions = {
 }
 
 export const FORM_SECTION_PARAM_KEY = 'section'
-export const FORM_SUBSECTION_PARAM_KEY = 'subsection'
 
 export const scrollToSection = (
     section: string,
@@ -39,9 +38,7 @@ export const scrollToSection = (
     )
 }
 
-export const useSelectedSection = (
-    sectionParamKey = FORM_SECTION_PARAM_KEY
-) => {
+export const useSelectedSectionFromQueryParams = () => {
     const { sections } = useSectionedFormContext()
 
     const paramConfig = useMemo(
@@ -53,7 +50,7 @@ export const useSelectedSection = (
         [sections]
     )
     const [selected, originalHandler] = useQueryParam(
-        sectionParamKey,
+        FORM_SECTION_PARAM_KEY,
         paramConfig,
         {
             removeDefaultsFromUrl: true,
@@ -81,10 +78,10 @@ export const useSelectedSection = (
  * This keeps the selected section in sync with the section that is in view.
  */
 export const useSyncSelectedSectionWithScroll = (
-    sectionParamKey = FORM_SECTION_PARAM_KEY
+    setSelectedSection?: (name: string) => void
 ) => {
     const { sections } = useSectionedFormContext()
-    const [selectedSection, setSection] = useSelectedSection(sectionParamKey)
+    const [selectedSection, setSection] = useSelectedSectionFromQueryParams()
 
     useEffect(() => {
         const elem = document.getElementById(selectedSection)
@@ -113,7 +110,11 @@ export const useSyncSelectedSectionWithScroll = (
                     currentInView.has(s.name)
                 )
                 if (firstVisible) {
-                    setSection(firstVisible.name)
+                    if (setSelectedSection) {
+                        setSelectedSection(firstVisible.name)
+                    } else {
+                        setSection(firstVisible.name)
+                    }
                 }
             },
             { threshold: 0.5 }
@@ -125,5 +126,5 @@ export const useSyncSelectedSectionWithScroll = (
         return () => {
             observer.disconnect()
         }
-    }, [sections, setSection])
+    }, [sections, setSection, setSelectedSection])
 }

@@ -90,6 +90,9 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
     const setCloseOnSubmit = (value: boolean) => {
         closeOnSubmitRef.current = value
     }
+    const [selectedSection, setSelectedSection] = React.useState<
+        string | undefined
+    >()
 
     return (
         <FormBase
@@ -108,12 +111,16 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
                             sidebar={
                                 <DrawerSectionedFormSidebar
                                     onCancel={onCancel}
+                                    selectedSection={selectedSection}
                                 />
                             }
                         >
                             <form onSubmit={handleSubmit}>
                                 <div className={styles.sectionsWrapper}>
-                                    <StageFormContents isSubsection />
+                                    <StageFormContents
+                                        isSubsection
+                                        setSelectedSection={setSelectedSection}
+                                    />
                                     <FormFooterWrapper>
                                         <ButtonStrip>
                                             <Button

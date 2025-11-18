@@ -11,8 +11,6 @@ import {
     StandardFormSectionTitle,
 } from '../../../../components'
 import {
-    FORM_SECTION_PARAM_KEY,
-    FORM_SUBSECTION_PARAM_KEY,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../../lib'
@@ -22,15 +20,15 @@ import { StageFormDescriptor } from './stageFormDescriptor'
 
 export const StageFormContents = ({
     isSubsection,
+    setSelectedSection,
 }: {
     isSubsection: boolean
+    setSelectedSection: (name: string) => void
 }) => {
     const [sectionsFormOpen, setSectionsFormOpen] = React.useState(false)
     const { values } = useFormState({ subscription: { values: true } })
     const descriptor = useSectionedFormContext<typeof StageFormDescriptor>()
-    useSyncSelectedSectionWithScroll(
-        isSubsection ? FORM_SUBSECTION_PARAM_KEY : FORM_SECTION_PARAM_KEY
-    )
+    useSyncSelectedSectionWithScroll(setSelectedSection)
 
     return (
         <SectionedFormSections>

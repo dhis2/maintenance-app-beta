@@ -2,27 +2,22 @@ import { Button } from '@dhis2/ui'
 import cx from 'classnames'
 import React, { useMemo } from 'react'
 import { createSearchParams, Link, useSearchParams } from 'react-router-dom'
-import {
-    FORM_SUBSECTION_PARAM_KEY,
-    scrollToSection,
-    useSectionedFormContext,
-    useSelectedSection,
-} from '../../lib'
+import { scrollToSection, useSectionedFormContext } from '../../lib'
 import css from '../sectionedForm/SectionFormSidebar.module.css'
 
 export const DrawerSectionedFormSidebar = ({
     onCancel,
+    selectedSection,
 }: {
     onCancel?: () => void
+    selectedSection?: string
 }) => {
     const { sections } = useSectionedFormContext()
-
-    const [selected] = useSelectedSection(FORM_SUBSECTION_PARAM_KEY)
 
     const items = sections.map((section) => (
         <DrawerSectionedFormSidebarItem
             key={section.name}
-            active={selected === section.name}
+            active={selectedSection === section.name}
             sectionName={section.name}
         >
             {section.label}
@@ -56,9 +51,8 @@ export const DrawerSectionedFormSidebarItem = ({
         const paramsObject = Object.fromEntries(searchParams.entries())
         return createSearchParams({
             ...paramsObject,
-            [FORM_SUBSECTION_PARAM_KEY]: sectionName,
         }).toString()
-    }, [searchParams, sectionName])
+    }, [searchParams])
 
     return (
         <Link

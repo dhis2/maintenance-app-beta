@@ -3,7 +3,6 @@ import { Button, InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import { useFieldArray } from 'react-final-form-arrays'
-import { createSearchParams, useSearchParams } from 'react-router-dom'
 import {
     DrawerPortal,
     SectionedFormSection,
@@ -11,7 +10,6 @@ import {
     StandardFormSectionTitle,
 } from '../../../components'
 import { ListInFormItem } from '../../../components/formCreators/SectionFormList'
-import { FORM_SUBSECTION_PARAM_KEY } from '../../../lib'
 import { SchemaName } from '../../../types'
 import { Access, DisplayableModel } from '../../../types/models'
 import {
@@ -35,7 +33,6 @@ export const ProgramStagesFormContents = React.memo(
             DisplayableModel | null | undefined
         >()
         const isStageFormOpen = !!stageFormOpen || stageFormOpen === null
-        const [searchParams, setSearchParams] = useSearchParams()
 
         const handleSubmittedStage = (
             values: SubmittedStageFormValues,
@@ -63,9 +60,6 @@ export const ProgramStagesFormContents = React.memo(
             }
         }
         const onCloseStageForm = () => {
-            const next = createSearchParams(searchParams)
-            next.delete(FORM_SUBSECTION_PARAM_KEY)
-            setSearchParams(next, { replace: true })
             setStageFormOpen(undefined)
         }
 
