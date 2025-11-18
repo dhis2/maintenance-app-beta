@@ -4046,6 +4046,28 @@ msgstr "Search selected attributes"
 msgid "Saving a section does not save other changes to the program"
 msgstr "Saving a section does not save other changes to the program"
 
+msgid "SW | Starts with"
+msgstr "SW | Starts with"
+
+msgid "EW | Ends with"
+msgstr "EW | Ends with"
+
+msgid "LIKE | Contains"
+msgstr "LIKE | Contains"
+
+msgid "{{optionLabel}} (preferred operator)"
+msgstr "{{optionLabel}} (preferred operator)"
+
+msgid "Blocked search operators"
+msgstr "Blocked search operators"
+
+msgid ""
+"Searches with blocked search operators will return no results. This "
+"prevents inefficient searches."
+msgstr ""
+"Searches with blocked search operators will return no results. This "
+"prevents inefficient searches."
+
 msgid "Make this attribute confidential"
 msgstr "Make this attribute confidential"
 
@@ -4075,6 +4097,12 @@ msgstr "Inherit data values from other tracked entities"
 msgid "Data values are inherited from tracked entities linked by a relationship."
 msgstr "Data values are inherited from tracked entities linked by a relationship."
 
+msgid "Minimum characters to search"
+msgstr "Minimum characters to search"
+
+msgid "Set the minimum characters required to start a search."
+msgstr "Set the minimum characters required to start a search."
+
 msgid ""
 "Choose from a predefined list of Option sets. The Option set will "
 "automatically define the Value type."
@@ -4088,8 +4116,39 @@ msgstr "Pattern for automatically generated values"
 msgid "Pattern must use the DHIS2 TextPattern syntax."
 msgstr "Pattern must use the DHIS2 TextPattern syntax."
 
+msgid "EQ | Equals"
+msgstr "EQ | Equals"
+
+msgid "{{optionLabel}} (blocked operator)"
+msgstr "{{optionLabel}} (blocked operator)"
+
+msgid "Preferred search operator"
+msgstr "Preferred search operator"
+
+msgid ""
+"Apps will try to use this recommended operator to improve performance, but "
+"can still use others if needed."
+msgstr ""
+"Apps will try to use this recommended operator to improve performance, but "
+"can still use others if needed."
+
 msgid "Tracked entity"
 msgstr "Tracked entity"
+
+msgid "This attribute is currently trigram indexed in the database"
+msgstr "This attribute is currently trigram indexed in the database"
+
+msgid "This attribute is currently not trigram indexed in the database"
+msgstr "This attribute is currently not trigram indexed in the database"
+
+msgid "Not available when both EW and LIKE are blocked"
+msgstr "Not available when both EW and LIKE are blocked"
+
+msgid "Mark for trigram indexing"
+msgstr "Mark for trigram indexing"
+
+msgid "Only relevant when using LIKE or EW based searches"
+msgstr "Only relevant when using LIKE or EW based searches"
 
 msgid "Across entire system"
 msgstr "Across entire system"
@@ -4135,15 +4194,11 @@ msgstr "Show in lists and search results even when a program is not selected"
 msgid "Do not synchronize this attribute and it's values"
 msgstr "Do not synchronize this attribute and it's values"
 
-msgid "Enable trigram indexing"
-msgstr "Enable trigram indexing"
+msgid "Search performance"
+msgstr "Search performance"
 
-msgid ""
-"Improves search performance for this attribute. Available in DHIS2 v43 and "
-"above."
-msgstr ""
-"Improves search performance for this attribute. Available in DHIS2 v43 and "
-"above."
+msgid "Adjust how this attribute is searched to balance performance and accuracy."
+msgstr "Adjust how this attribute is searched to balance performance and accuracy."
 
 msgid ""
 "Legends assigned to this tracker entity attribute are used in data analysis "
