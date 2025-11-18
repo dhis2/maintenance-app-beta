@@ -1,3 +1,10 @@
+# [0.95.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.94.0...v0.95.0) (2025-11-18)
+
+
+### Features
+
+* [DHIS2-20414] TEA Search performance Section ([#691](https://github.com/dhis2/maintenance-app-beta/issues/691)) ([fc06e4f](https://github.com/dhis2/maintenance-app-beta/commit/fc06e4fe19d7923ec26b127a31900765b75fceef))
+
 # [0.94.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.93.0...v0.94.0) (2025-11-17)
 
 
