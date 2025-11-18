@@ -535,33 +535,3 @@ export const isNonSchemaSection = (
 ): section is NonSchemaSection => {
     return (NON_SCHEMA_SECTION as SectionMap)[section.name] !== undefined
 }
-
-export const NON_SCHEMA_ACCESS: Access = {
-    read: true,
-    write: false,
-    update: false,
-    delete: true,
-    externalize: false,
-    manage: false,
-}
-
-export const makeFakeSchemaField = (name: string): SchemaFieldProperty => ({
-    name,
-    fieldName: name,
-    propertyType: SchemaFieldPropertyType.TEXT,
-    klass: 'java.lang.String',
-    simple: true,
-    collection: false,
-    persisted: false,
-    required: false,
-    unique: false,
-    translatable: false,
-    readable: true,
-    writable: false,
-    attribute: false,
-    identifiableObject: false,
-    embeddedObject: false,
-    owner: true,
-    sortable: true,
-    length: 255,
-})

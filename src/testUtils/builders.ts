@@ -62,6 +62,7 @@ import {
     Program,
     ProgramTrackedEntityAttribute,
 } from '../types/generated'
+import { localeFormSchema } from '../pages/locales/form'
 
 const { withDefaultListColumns } = modelFormSchemas
 
@@ -273,6 +274,15 @@ export const testOrganisationUnitGroup = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(organisationUnitGroupListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testLocales = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(localeFormSchema, {
         mockeryMapper,
     }),
     ...overwrites,
