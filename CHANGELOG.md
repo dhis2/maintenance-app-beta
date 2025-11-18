@@ -1,3 +1,10 @@
+# [0.96.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.95.0...v0.96.0) (2025-11-18)
+
+
+### Features
+
+* program stages scaffolding  ([0d7853d](https://github.com/dhis2/maintenance-app-beta/commit/0d7853d12b6dde4199c4eac43bdd28f7032c29a1))
+
 # [0.95.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.94.0...v0.95.0) (2025-11-18)
 
 
