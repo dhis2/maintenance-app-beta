@@ -59,6 +59,7 @@ const fieldFilters = [
     'relationshipLabel',
     'noteLabel',
     'displayFrontPageList',
+    'programStages[id,displayName,access,description, program[id]]',
 ] as const
 
 export type ProgramsFromFilters = PickWithFieldFilters<
@@ -123,7 +124,7 @@ export const useOnSubmitProgramEdit = (modelId: string) => {
                         : values.dataEntryForm,
             } as ProgramValues
 
-            submitEdit(trimmedValues, form, options)
+            return submitEdit(trimmedValues, form, options)
         },
         [submitEdit, handleDeletions]
     )

@@ -69,6 +69,7 @@ const programBaseSchema = z.object({
     relationshipLabel: z.string().optional(),
     noteLabel: z.string().optional(),
     displayFrontPageList: z.boolean().optional(),
+    programStages: z.array(modelReference).default([]),
 })
 
 export const programFormSchema = identifiable.merge(programBaseSchema).extend({

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import {
     useQueryParam,
     createEnumParam,
@@ -38,7 +38,7 @@ export const scrollToSection = (
     )
 }
 
-export const useSelectedSection = () => {
+export const useSelectedSectionFromQueryParams = () => {
     const { sections } = useSectionedFormContext()
 
     const paramConfig = useMemo(
@@ -77,9 +77,11 @@ export const useSelectedSection = () => {
  * Update the selected section (in searchParams) based on the section that is in view
  * This keeps the selected section in sync with the section that is in view.
  */
-export const useSyncSelectedSectionWithScroll = () => {
+export const useSyncSelectedSectionWithScroll = (
+    setSelectedSection?: (name: string) => void
+) => {
     const { sections } = useSectionedFormContext()
-    const [selectedSection, setSection] = useSelectedSection()
+    const [selectedSection, setSection] = useSelectedSectionFromQueryParams()
 
     useEffect(() => {
         const elem = document.getElementById(selectedSection)
@@ -108,7 +110,11 @@ export const useSyncSelectedSectionWithScroll = () => {
                     currentInView.has(s.name)
                 )
                 if (firstVisible) {
-                    setSection(firstVisible.name)
+                    if (setSelectedSection) {
+                        setSelectedSection(firstVisible.name)
+                    } else {
+                        setSection(firstVisible.name)
+                    }
                 }
             },
             { threshold: 0.5 }
@@ -120,5 +126,5 @@ export const useSyncSelectedSectionWithScroll = () => {
         return () => {
             observer.disconnect()
         }
-    }, [sections, setSection])
+    }, [sections, setSection, setSelectedSection])
 }

@@ -1,4 +1,4 @@
-export * from './useSelectedSection'
+export * from './useSelectedSectionFromQueryParams'
 export {
     useSectionedFormContext,
     SectionedFormProvider,
