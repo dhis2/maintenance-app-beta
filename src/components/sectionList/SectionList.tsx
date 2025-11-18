@@ -26,6 +26,7 @@ export const SectionList = ({
     children,
     onSelectAll,
 }: PropsWithChildren<SectionListProps>) => {
+    console.log('Rendering SectionList', allSelected)
     return (
         <DataTable className={css.list}>
             <TableHead>

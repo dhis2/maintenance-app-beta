@@ -1,4 +1,5 @@
-import type { OverviewSectionName } from '../lib'
+import type { OverviewSectionName, SchemaFieldProperty } from '../lib'
+import { Access } from './generated'
 import { SchemaAuthorities, SchemaName } from './schemaBase'
 
 export interface SectionBase {
@@ -9,6 +10,8 @@ export interface SectionBase {
     routeName?: string
     minApiVersion?: number
     maxApiVersion?: number
+    fieldGenerator?: (name: string) => SchemaFieldProperty
+    accessGenerator?: () => Access
 }
 
 // SchemaSection is a section that can be mapped directly to a schema by the name

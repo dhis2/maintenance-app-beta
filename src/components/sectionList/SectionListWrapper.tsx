@@ -132,7 +132,11 @@ export const SectionListWrapper = ({
         ]
     )
 
-    const isAllSelected = data ? checkAllSelected(data) : false
+    const isAllSelected = data
+        ? data.some((model) => canEditModel(model))
+            ? checkAllSelected(data)
+            : false
+        : false
     return (
         <div>
             <SectionListTitle />

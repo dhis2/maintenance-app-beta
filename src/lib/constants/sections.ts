@@ -9,7 +9,10 @@ import {
     OverviewSectionMap,
     OverviewSection,
     NonSchemaSection,
+    SchemaFieldPropertyType,
+    SchemaFieldProperty,
 } from '../../types'
+import { Access } from '../../types/generated'
 
 // for convenience so types can be imported with the map below
 export type {
@@ -415,6 +418,40 @@ export const OVERVIEW_SECTIONS = {
     },
 } as const satisfies OverviewSectionMap
 
+type AccessGenerator = () => Access
+
+export const DEFAULT_ACCESS: AccessGenerator = () => ({
+    read: true,
+    write: false,
+    update: false,
+    delete: true,
+    externalize: false,
+    manage: false,
+})
+
+type FieldGenerator = (columnName: string) => SchemaFieldProperty
+
+export const DEFAULT_FIELD_GENERATOR: FieldGenerator = (name) => ({
+    name,
+    fieldName: name,
+    propertyType: SchemaFieldPropertyType.TEXT,
+    klass: 'java.lang.String',
+    simple: true,
+    collection: false,
+    persisted: false,
+    required: false,
+    unique: false,
+    translatable: false,
+    readable: true,
+    writable: false,
+    attribute: false,
+    identifiableObject: false,
+    embeddedObject: false,
+    owner: true,
+    sortable: true,
+    length: 255,
+})
+
 export const NON_SCHEMA_SECTION = {
     locale: {
         name: 'locale',
@@ -425,26 +462,22 @@ export const NON_SCHEMA_SECTION = {
         authorities: [
             {
                 type: SchemaAuthorityType.CREATE_PUBLIC,
-                authorities: [
-                    'F_PROGRAM_PUBLIC_ADD',
-                    'F_PROGRAM_INDICATOR_PUBLIC_ADD',
-                ],
+                authorities: ['F_LOCALE_ADD'],
             },
             {
                 type: SchemaAuthorityType.CREATE_PRIVATE,
-                authorities: [
-                    'F_PROGRAM_PRIVATE_ADD',
-                    'F_PROGRAM_INDICATOR_PRIVATE_ADD',
-                ],
+                authorities: ['F_LOCALE_ADD'],
             },
             {
                 type: SchemaAuthorityType.DELETE,
-                authorities: [
-                    'F_PROGRAM_PUBLIC_ADD',
-                    'F_PROGRAM_INDICATOR_PUBLIC_ADD',
-                ],
+                authorities: ['F_LOCALE_DELETE'],
             },
         ],
+
+        fieldGenerator: (name) => ({
+            ...DEFAULT_FIELD_GENERATOR(name),
+        }),
+        accessGenerator: () => DEFAULT_ACCESS(),
     },
     programDisaggregation: {
         name: 'programDisaggregation',
@@ -502,3 +535,33 @@ export const isNonSchemaSection = (
 ): section is NonSchemaSection => {
     return (NON_SCHEMA_SECTION as SectionMap)[section.name] !== undefined
 }
+
+export const NON_SCHEMA_ACCESS: Access = {
+    read: true,
+    write: false,
+    update: false,
+    delete: true,
+    externalize: false,
+    manage: false,
+}
+
+export const makeFakeSchemaField = (name: string): SchemaFieldProperty => ({
+    name,
+    fieldName: name,
+    propertyType: SchemaFieldPropertyType.TEXT,
+    klass: 'java.lang.String',
+    simple: true,
+    collection: false,
+    persisted: false,
+    required: false,
+    unique: false,
+    translatable: false,
+    readable: true,
+    writable: false,
+    attribute: false,
+    identifiableObject: false,
+    embeddedObject: false,
+    owner: true,
+    sortable: true,
+    length: 255,
+})

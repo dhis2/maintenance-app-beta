@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-13T06:46:39.628Z\n"
-"PO-Revision-Date: 2025-11-13T06:46:39.628Z\n"
+"POT-Creation-Date: 2025-11-17T19:07:04.304Z\n"
+"PO-Revision-Date: 2025-11-17T19:07:04.304Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -606,6 +606,9 @@ msgstr "Update sharing for {{number}} items"
 
 msgid "Update sharing"
 msgstr "Update sharing"
+
+msgid "No details available"
+msgstr "No details available"
 
 msgid "Created by"
 msgstr "Created by"
@@ -4167,9 +4170,6 @@ msgid ""
 msgstr ""
 "Choose which attributes to display, which are required, and which are "
 "searchable"
-
-msgid "Attribute name"
-msgstr "Attribute name"
 
 msgid "Available tracked entity attributes"
 msgstr "Available tracked entity attributes"

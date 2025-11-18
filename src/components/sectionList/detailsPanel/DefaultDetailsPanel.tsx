@@ -1,7 +1,12 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import React, { useRef } from 'react'
-import { canEditModel, Schema, useSchemaFromHandle } from '../../../lib'
+import {
+    canEditModel,
+    isNonSchemaSection,
+    Schema,
+    useSchemaFromHandle,
+} from '../../../lib'
 import { Query, WrapQueryResponse } from '../../../types'
 import { BaseIdentifiableObject } from '../../../types/models'
 import { ClientDateTime } from '../../date'
@@ -46,7 +51,6 @@ const createDefaultDetailsQuery = (
     },
 })
 
-// fields that are not in BaseIdentifiableObject
 type ExtraFields = {
     displayShortName?: string
 }
@@ -58,7 +62,7 @@ type DetailsResponse = Pick<
 
 export const DefaultDetailsPanelContent = ({ modelId }: DetailsPanelProps) => {
     const schema = useSchemaFromHandle()
-    // used to prevent changing query after initial render
+
     const queryRef = useRef(
         createDefaultDetailsQuery(schema.plural, modelId, schema.properties)
     )
@@ -66,20 +70,31 @@ export const DefaultDetailsPanelContent = ({ modelId }: DetailsPanelProps) => {
     const detailsQueryResponse = useDataQuery<
         WrapQueryResponse<DetailsResponse, 'result'>
     >(queryRef.current)
+
+    const rawData = detailsQueryResponse.data?.result
+
+    const detailsData: DetailsResponse | undefined = isNonSchemaSection({
+        name: schema.name,
+    } as any)
+        ? Array.isArray(rawData)
+            ? rawData[0]
+            : rawData
+        : (rawData as DetailsResponse)
+
     return (
         <Loader queryResponse={detailsQueryResponse}>
-            <DetailsContent
-                data={
-                    detailsQueryResponse.data
-                        ?.result as NonNullable<DetailsResponse>
-                }
-            />
+            {detailsData ? (
+                <DetailsContent data={detailsData} />
+            ) : (
+                <div>{i18n.t('No details available')}</div>
+            )}
         </Loader>
     )
 }
 
 const DetailsContent = ({ data }: { data: DetailsResponse }) => {
-    const canEdit = canEditModel(data)
+    const canEdit = data.access ? canEditModel(data) : false
+
     return (
         <DetailsPanelContent displayName={data.displayName}>
             <DetailsPanelButtons modelId={data.id} editable={canEdit} />
@@ -97,17 +112,18 @@ const DetailsContent = ({ data }: { data: DetailsResponse }) => {
                     <ClientDateTime value={data?.created} />
                 </DetailItem>
                 <DetailItem label={i18n.t('Last updated by')}>
-                    {data.lastUpdatedBy
-                        ? data.lastUpdatedBy?.displayName
-                        : data.createdBy?.displayName}
+                    {data.lastUpdatedBy?.displayName ??
+                        data.createdBy?.displayName}
                 </DetailItem>
                 <DetailItem label={i18n.t('Last updated')}>
                     <ClientDateTime value={data.lastUpdated} />
                 </DetailItem>
                 <DetailItem label={i18n.t('Id')}>{data.id}</DetailItem>
-                <DetailItem label={i18n.t('API URL')}>
-                    <ApiUrlValue value={data.href} />
-                </DetailItem>
+                {data.href && (
+                    <DetailItem label={i18n.t('API URL')}>
+                        <ApiUrlValue value={data.href} />
+                    </DetailItem>
+                )}
             </DetailsList>
         </DetailsPanelContent>
     )
