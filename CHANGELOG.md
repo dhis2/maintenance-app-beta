@@ -1,3 +1,94 @@
+# [0.95.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.94.0...v0.95.0) (2025-11-18)
+
+
+### Features
+
+* [DHIS2-20414] TEA Search performance Section ([#691](https://github.com/dhis2/maintenance-app-beta/issues/691)) ([fc06e4f](https://github.com/dhis2/maintenance-app-beta/commit/fc06e4fe19d7923ec26b127a31900765b75fceef))
+
+# [0.94.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.93.0...v0.94.0) (2025-11-17)
+
+
+### Features
+
+* relationship type list ([#699](https://github.com/dhis2/maintenance-app-beta/issues/699)) ([a22cc6d](https://github.com/dhis2/maintenance-app-beta/commit/a22cc6d8b4214342a310a562fc73f338dfdba10c))
+
+# [0.93.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.92.0...v0.93.0) (2025-11-13)
+
+
+### Features
+
+* [DHIS2-20335] Programs customisation section ([#689](https://github.com/dhis2/maintenance-app-beta/issues/689)) ([12d2159](https://github.com/dhis2/maintenance-app-beta/commit/12d21594e8cb6d7d250c7efe8676f678306dae9e))
+
+# [0.92.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.91.1...v0.92.0) (2025-11-13)
+
+
+### Features
+
+* use org unit tree w selectors in category option ([#698](https://github.com/dhis2/maintenance-app-beta/issues/698)) ([33e3c34](https://github.com/dhis2/maintenance-app-beta/commit/33e3c34391d019966a163505f69fe72472f0f984))
+
+## [0.91.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.91.0...v0.91.1) (2025-11-13)
+
+
+### Bug Fixes
+
+* attributes fixes ([#696](https://github.com/dhis2/maintenance-app-beta/issues/696)) ([3feae74](https://github.com/dhis2/maintenance-app-beta/commit/3feae743e8d613b54ef23e1861bb5a59b94d4db5))
+
+# [0.91.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.90.0...v0.91.0) (2025-11-13)
+
+
+### Features
+
+* implement option set form with validation and initial value ([#688](https://github.com/dhis2/maintenance-app-beta/issues/688)) ([c732558](https://github.com/dhis2/maintenance-app-beta/commit/c732558c0dc9fa6fb4e0f4660413ebff70121cec))
+
+# [0.90.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.89.1...v0.90.0) (2025-11-12)
+
+
+### Features
+
+* add overrideDefaultAvailable option to modelListViewsConfig ([#686](https://github.com/dhis2/maintenance-app-beta/issues/686)) ([aaf4f56](https://github.com/dhis2/maintenance-app-beta/commit/aaf4f56f25d1e17a15c5bc27bc7f98642392aeae))
+* locale form [DHIS2-20342] ([#690](https://github.com/dhis2/maintenance-app-beta/issues/690)) ([bedf34e](https://github.com/dhis2/maintenance-app-beta/commit/bedf34e899aa0645297f92bf137f6c27400db98e))
+
+## [0.89.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.89.0...v0.89.1) (2025-11-11)
+
+
+### Bug Fixes
+
+* remove 'Favorite' column from modelListViewsConfig ([#687](https://github.com/dhis2/maintenance-app-beta/issues/687)) ([48f8567](https://github.com/dhis2/maintenance-app-beta/commit/48f8567b02f4502fc967d28ccada361358f07e14))
+
+# [0.89.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.88.0...v0.89.0) (2025-11-05)
+
+
+### Bug Fixes
+
+* delete dublicate ([3dd15bf](https://github.com/dhis2/maintenance-app-beta/commit/3dd15bf7e94d8d55a560afd2967b0e83d6379dc9))
+* failing test ([adc69b2](https://github.com/dhis2/maintenance-app-beta/commit/adc69b2096ac8f07d8271394279b2e010ca09572))
+* failing tests ([b7be315](https://github.com/dhis2/maintenance-app-beta/commit/b7be31502d160eafea11be233b0c6b6f12d834e4))
+* review ([494b9df](https://github.com/dhis2/maintenance-app-beta/commit/494b9df9ffb9b542190b8dc415b2260b1c57103b))
+* set type to any ([ddeec23](https://github.com/dhis2/maintenance-app-beta/commit/ddeec2383cb04b3560073007e3fdd35fd2851305))
+* temp ([721dc95](https://github.com/dhis2/maintenance-app-beta/commit/721dc95d480da46278001ee3f1bf5f9722738f6e))
+* test ([db0c51e](https://github.com/dhis2/maintenance-app-beta/commit/db0c51e0d73e3aab795fadd5fdb75e0f3e16b3d6))
+* update attribute schema and improve test setup ([b6cab8f](https://github.com/dhis2/maintenance-app-beta/commit/b6cab8f142396b6f392e1959c835d61fa5f4c212))
+* use modal reference ([aae9fe8](https://github.com/dhis2/maintenance-app-beta/commit/aae9fe81820a39ada6e6776c65ab26bd37cad1a9))
+
+
+### Features
+
+* add common aggregation type field ([2dc1d4c](https://github.com/dhis2/maintenance-app-beta/commit/2dc1d4cd00be1abbc3b18c2a1d3e64d972b1b013))
+* broken test ([696b0a6](https://github.com/dhis2/maintenance-app-beta/commit/696b0a68465c58f7ff6017920741abdd9d82c4d3))
+* clean up ([43e0e67](https://github.com/dhis2/maintenance-app-beta/commit/43e0e6792583e472255989017988dca6ee4823fc))
+* create generic aggregation field ([42b8cd0](https://github.com/dhis2/maintenance-app-beta/commit/42b8cd05190cf06c45d306f928a3cc8cf1e5d6cc))
+* create generic aggregation field ([850a8fc](https://github.com/dhis2/maintenance-app-beta/commit/850a8fcc8180d559a0568bbaa5dedb67a7e809a1))
+* implement tracked entity attribute form with validation and field management ([09c464d](https://github.com/dhis2/maintenance-app-beta/commit/09c464d0c06f7c002bde426e57d2963aa0178a5e))
+* temp ([e32aaac](https://github.com/dhis2/maintenance-app-beta/commit/e32aaac69b670a6a941381367cd6baf45e890e81))
+* temp ([a981654](https://github.com/dhis2/maintenance-app-beta/commit/a98165478951f0c7dd255643cbb498b1949dd673))
+
+# [0.88.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.87.2...v0.88.0) (2025-11-04)
+
+
+### Features
+
+* add tracked entity type forms ([#657](https://github.com/dhis2/maintenance-app-beta/issues/657)) ([999f7f7](https://github.com/dhis2/maintenance-app-beta/commit/999f7f74f107c1e9b25a8983e50ea4b8065410fc))
+
 ## [0.87.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.87.1...v0.87.2) (2025-10-30)
 
 

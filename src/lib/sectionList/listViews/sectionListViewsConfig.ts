@@ -473,6 +473,24 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    relationshipType: {
+        columns: {
+            available: [
+                'bidirectional',
+                'favorite',
+                'displayFromToName',
+                'displayToFromName',
+                'fromToName',
+                'toFromName',
+                'referral',
+            ],
+        },
+        filters: {
+            default: [],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
+    },
     trackedEntityType: {
         columns: {
             default: [
@@ -489,7 +507,6 @@ export const modelListViewsConfig = {
                 'maxTeiCountToReturn',
                 'minAttributesRequiredToSearch',
                 DESCRIPTORS.shortName,
-                'user',
             ],
         },
         filters: {
@@ -554,7 +571,6 @@ export const modelListViewsConfig = {
                 'href',
                 'code',
                 'id',
-                { label: i18n.t('Favorite'), path: 'favorite' },
                 { label: i18n.t('Version'), path: 'version' },
             ],
         },
@@ -653,6 +669,7 @@ export const modelListViewsConfig = {
                 { label: i18n.t('Short name'), path: 'shortName' },
                 { label: i18n.t('Version'), path: 'version' },
             ],
+            overrideDefaultAvailable: true,
         },
         filters: {
             default: ['programType'],

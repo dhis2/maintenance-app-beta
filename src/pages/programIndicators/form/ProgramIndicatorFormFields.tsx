@@ -4,6 +4,7 @@ import { CheckboxFieldFF, InputFieldFF, SingleSelectFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import {
+    ColorAndIconField,
     CustomAttributesSection,
     DefaultIdentifiableFields,
     DescriptionField,
@@ -24,7 +25,6 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
-import { ColorAndIconField } from '../../dataElements/fields'
 import { AnalyticsPeriodBoundariesField } from './AnalyticsPeriodBoundariesField'
 import { ProgramIndicatorFormDescriptor } from './formDescriptor'
 import { OrgUnitField } from './OrgUnitField'

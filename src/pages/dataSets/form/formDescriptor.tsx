@@ -28,7 +28,7 @@ export const DataSetFormDescriptor = {
                 },
                 {
                     name: 'style',
-                    label: i18n.t('Color and icon'),
+                    label: i18n.t('Visual configuration'),
                 },
             ],
         },
