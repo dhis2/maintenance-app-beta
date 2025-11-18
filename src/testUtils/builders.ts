@@ -94,18 +94,6 @@ const mockeryMapper = (keyName: string) => {
 
 const { withAttributeValues } = modelFormSchemas
 
-export const formatSchemaProperties = (schema: Record<any, any>) => {
-    if (Array.isArray(schema.properties)) {
-        return {
-            ...schema,
-            properties: Object.fromEntries(
-                schema.properties.map((prop: any) => [prop.fieldName, prop])
-            ),
-        }
-    }
-    return schema
-}
-
 export const testAccess = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(AccessSchema, { mockeryMapper }),
     ...overwrites,

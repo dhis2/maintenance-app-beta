@@ -30,7 +30,6 @@ export function RelationshipTypeFormFields() {
         input: { value: bidirectional },
     } = useField('bidirectional', {
         subscription: { value: true },
-        type: 'checkbox',
     })
     const form = useForm()
 

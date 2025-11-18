@@ -87,6 +87,7 @@ export const TrackedEntityTypeField = ({
                     validate={required}
                     inputWidth="330px"
                     onChange={clearDependentFields}
+                    dataTest={`${prefix}-tracked-entity-type-selector`}
                 />
             </EditableFieldWrapper>
         </StandardFormField>

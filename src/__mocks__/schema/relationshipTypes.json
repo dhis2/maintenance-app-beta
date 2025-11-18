@@ -14,13 +14,10 @@
             "type": "CREATE_PRIVATE",
             "authorities": ["F_RELATIONSHIPTYPE_PRIVATE_ADD"]
         },
-        {
-            "type": "DELETE",
-            "authorities": ["F_RELATIONSHIPTYPE_DELETE"]
-        }
+        { "type": "DELETE", "authorities": ["F_RELATIONSHIPTYPE_DELETE"] }
     ],
-    "properties": [
-        {
+    "properties": {
+        "favorites": {
             "klass": "java.util.Set",
             "propertyType": "COLLECTION",
             "itemKlass": "java.lang.String",
@@ -51,14 +48,10 @@
             "manyToOne": false,
             "oneToMany": false,
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": false,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "bidirectional": {
             "klass": "java.lang.Boolean",
             "propertyType": "BOOLEAN",
             "name": "bidirectional",
@@ -84,14 +77,10 @@
             "manyToOne": false,
             "oneToMany": false,
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": true,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "access": {
             "klass": "org.hisp.dhis.security.acl.Access",
             "propertyType": "COMPLEX",
             "name": "access",
@@ -122,10 +111,9 @@
                 "included": "FALSE",
                 "transformation": "AUTO"
             },
-            "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "code": {
             "klass": "java.lang.String",
             "propertyType": "IDENTIFIER",
             "name": "code",
@@ -153,14 +141,10 @@
             "manyToOne": false,
             "oneToMany": false,
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": true,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "displayName": {
             "klass": "java.lang.String",
             "propertyType": "TEXT",
             "name": "displayName",
@@ -185,14 +169,10 @@
             "manyToOne": false,
             "oneToMany": false,
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": true,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "description": {
             "klass": "java.lang.String",
             "propertyType": "TEXT",
             "name": "description",
@@ -220,14 +200,10 @@
             "manyToOne": false,
             "oneToMany": false,
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": true,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "fromToName": {
             "klass": "java.lang.String",
             "propertyType": "TEXT",
             "name": "fromToName",
@@ -257,14 +233,10 @@
             "translatable": true,
             "translationKey": "RELATIONSHIP_FROM_TO_NAME",
             "i18nTranslationKey": "from_to_name",
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": true,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "lastUpdated": {
             "klass": "java.util.Date",
             "propertyType": "DATE",
             "name": "lastUpdated",
@@ -290,14 +262,10 @@
             "manyToOne": false,
             "oneToMany": false,
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": true,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "displayFromToName": {
             "klass": "java.lang.String",
             "propertyType": "TEXT",
             "name": "displayFromToName",
@@ -322,14 +290,10 @@
             "manyToOne": false,
             "oneToMany": false,
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": false,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "translations": {
             "klass": "java.util.Set",
             "propertyType": "COLLECTION",
             "itemKlass": "org.hisp.dhis.translation.Translation",
@@ -365,10 +329,9 @@
                 "included": "FALSE",
                 "transformation": "AUTO"
             },
-            "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "toConstraint": {
             "klass": "org.hisp.dhis.relationship.RelationshipConstraint",
             "propertyType": "COMPLEX",
             "name": "toConstraint",
@@ -398,14 +361,10 @@
             "oneToMany": false,
             "owningRole": "org.hisp.dhis.relationship.RelationshipType.toConstraint",
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": false,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "uid": {
             "klass": "java.lang.String",
             "propertyType": "IDENTIFIER",
             "name": "id",
@@ -433,14 +392,10 @@
             "manyToOne": false,
             "oneToMany": false,
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": true,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "href": {
             "klass": "java.lang.String",
             "propertyType": "URL",
             "name": "href",
@@ -466,14 +421,10 @@
             "manyToOne": false,
             "oneToMany": false,
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": false,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "lastUpdatedBy": {
             "klass": "org.hisp.dhis.user.User",
             "propertyType": "REFERENCE",
             "name": "lastUpdatedBy",
@@ -504,14 +455,10 @@
             "relativeApiEndpoint": "/users",
             "apiEndpoint": "http://localhost:8080/api/users",
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": false,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": true
         },
-        {
+        "created": {
             "klass": "java.util.Date",
             "propertyType": "DATE",
             "name": "created",
@@ -537,27 +484,28 @@
             "manyToOne": false,
             "oneToMany": false,
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": true,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
-            "klass": "org.hisp.dhis.attribute.AttributeValues",
-            "propertyType": "COMPLEX",
-            "name": "attributeValues",
+        "attributeValues": {
+            "klass": "java.util.Set",
+            "propertyType": "COLLECTION",
+            "itemKlass": "org.hisp.dhis.attribute.AttributeValue",
+            "itemPropertyType": "COMPLEX",
+            "name": "attributeValue",
             "fieldName": "attributeValues",
             "persisted": true,
+            "collectionName": "attributeValues",
+            "collectionWrapping": true,
+            "namespace": "http://dhis2.org/schema/dxf/2.0",
             "attribute": false,
             "simple": false,
-            "collection": false,
+            "collection": true,
             "ordered": false,
             "owner": true,
             "identifiableObject": false,
             "nameableObject": false,
-            "embeddedObject": false,
+            "embeddedObject": true,
             "analyticalObject": false,
             "readable": true,
             "writable": true,
@@ -571,14 +519,10 @@
             "manyToOne": false,
             "oneToMany": false,
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": false,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "toFromName": {
             "klass": "java.lang.String",
             "propertyType": "TEXT",
             "name": "toFromName",
@@ -608,14 +552,10 @@
             "translatable": true,
             "translationKey": "RELATIONSHIP_TO_FROM_NAME",
             "i18nTranslationKey": "to_from_name",
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": true,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "sharing": {
             "klass": "org.hisp.dhis.user.sharing.Sharing",
             "propertyType": "COMPLEX",
             "name": "sharing",
@@ -647,10 +587,9 @@
                 "included": "FALSE",
                 "transformation": "AUTO"
             },
-            "sortable": false,
             "propertyTransformer": false
         },
-        {
+        "fromConstraint": {
             "klass": "org.hisp.dhis.relationship.RelationshipConstraint",
             "propertyType": "COMPLEX",
             "name": "fromConstraint",
@@ -680,14 +619,10 @@
             "oneToMany": false,
             "owningRole": "org.hisp.dhis.relationship.RelationshipType.fromConstraint",
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": false,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "displayToFromName": {
             "klass": "java.lang.String",
             "propertyType": "TEXT",
             "name": "displayToFromName",
@@ -712,14 +647,10 @@
             "manyToOne": false,
             "oneToMany": false,
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": false,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "referral": {
             "klass": "java.lang.Boolean",
             "propertyType": "BOOLEAN",
             "name": "referral",
@@ -745,14 +676,10 @@
             "manyToOne": false,
             "oneToMany": false,
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": true,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "createdBy": {
             "klass": "org.hisp.dhis.user.User",
             "propertyType": "REFERENCE",
             "name": "createdBy",
@@ -787,10 +714,9 @@
                 "included": "FALSE",
                 "transformation": "AUTO"
             },
-            "sortable": false,
             "propertyTransformer": true
         },
-        {
+        "name": {
             "klass": "java.lang.String",
             "propertyType": "TEXT",
             "name": "name",
@@ -820,14 +746,10 @@
             "translatable": true,
             "translationKey": "NAME",
             "i18nTranslationKey": "name",
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": true,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "favorite": {
             "klass": "java.lang.Boolean",
             "propertyType": "BOOLEAN",
             "name": "favorite",
@@ -852,14 +774,10 @@
             "manyToOne": false,
             "oneToMany": false,
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": false,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": false
         },
-        {
+        "user": {
             "klass": "org.hisp.dhis.user.User",
             "propertyType": "REFERENCE",
             "name": "user",
@@ -887,13 +805,9 @@
             "relativeApiEndpoint": "/users",
             "apiEndpoint": "http://localhost:8080/api/users",
             "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": false,
+            "gistPreferences": { "included": "AUTO", "transformation": "AUTO" },
             "propertyTransformer": true
         }
-    ],
+    },
     "translatable": true
 }
