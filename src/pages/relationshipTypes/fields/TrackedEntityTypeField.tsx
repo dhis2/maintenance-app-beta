@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useCallback, useEffect, useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useField, useForm } from 'react-final-form'
 import { useHref } from 'react-router'
 import { StandardFormField, EditableFieldWrapper } from '../../../components'
@@ -20,7 +20,6 @@ export const TrackedEntityTypeField = ({
         subscription: { value: true },
     })
 
-    const { input: trackedEntityTypeInput } = useField(trackedEntityTypeName)
     const form = useForm()
     const newTrackedEntityTypeLink = useHref('/trackedEntityTypes/new')
     const refresh = useRefreshModelSingleSelect({
@@ -61,13 +60,6 @@ export const TrackedEntityTypeField = ({
             })
         })
     }, [form, prefix])
-
-    useEffect(() => {
-        if (!visible && trackedEntityTypeInput.value) {
-            trackedEntityTypeInput.onChange(undefined)
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [visible])
 
     if (!visible || !trackedEntityTypeQuery) {
         return null

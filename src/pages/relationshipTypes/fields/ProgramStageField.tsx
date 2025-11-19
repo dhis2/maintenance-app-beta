@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useCallback, useEffect, useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useField, useForm } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
@@ -23,7 +23,6 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
         subscription: { value: true },
     })
 
-    const { input: programStageInput } = useField(programStageName)
     const form = useForm()
 
     const visible =
@@ -49,17 +48,6 @@ export const ProgramStageField = ({ prefix }: RelationshipSideFieldsProps) => {
             },
         }
     }, [visible, program?.id])
-
-    useEffect(() => {
-        if (
-            !visible &&
-            constraint !== 'PROGRAM_STAGE_INSTANCE' &&
-            programStageInput.value
-        ) {
-            programStageInput.onChange(undefined)
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [visible, constraint])
 
     const clearDependentFields = useCallback(() => {
         const trackerDataViewPath = `${prefix}Constraint.trackerDataView`

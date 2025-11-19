@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useCallback, useEffect, useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useField, useForm } from 'react-final-form'
 import { useHref } from 'react-router'
 import { StandardFormField, EditableFieldWrapper } from '../../../components'
@@ -26,7 +26,6 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
         subscription: { value: true },
     })
 
-    const { input: programInput } = useField(programName)
     const form = useForm()
     const newProgramLink = useHref('/programs/new')
     const refresh = useRefreshModelSingleSelect({ resource: 'programs' })
@@ -90,13 +89,6 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
             },
         }
     }, [visible, constraint, trackedEntityType?.id])
-
-    useEffect(() => {
-        if (!visible && programInput.value) {
-            programInput.onChange(undefined)
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [visible])
 
     const clearDependentFields = useCallback(
         (selectedProgram: Program | undefined) => {

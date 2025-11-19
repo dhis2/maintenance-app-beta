@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Field } from '@dhis2/ui'
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { useField, useForm } from 'react-final-form'
 import {
     StandardFormField,
@@ -33,6 +33,7 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
         { validate: required }
     )
     const form = useForm()
+    const previousConstraintRef = useRef<ConstraintValue | undefined>(undefined)
 
     const clearDependentFields = useCallback(() => {
         const trackerDataViewPath = `${prefix}Constraint.trackerDataView`
@@ -51,6 +52,17 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
         })
     }, [form, prefix])
 
+    useEffect(() => {
+        const previousConstraint = previousConstraintRef.current
+        if (
+            previousConstraint !== undefined &&
+            previousConstraint !== input.value
+        ) {
+            clearDependentFields()
+        }
+        previousConstraintRef.current = input.value
+    }, [input.value, clearDependentFields])
+
     return (
         <StandardFormField>
             <Field
@@ -62,14 +74,9 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
                     options={CONSTRAINT_OPTIONS}
                     selected={input.value}
                     onChange={(value: string) => {
-                        const previousValue = input.value
                         const constraintValue = value as ConstraintValue
                         input.onChange(constraintValue)
                         input.onBlur()
-
-                        if (previousValue !== constraintValue) {
-                            clearDependentFields()
-                        }
                     }}
                     prefix={prefix}
                     ariaLabel={i18n.t('Relationship entity constraint')}

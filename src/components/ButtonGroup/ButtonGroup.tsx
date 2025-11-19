@@ -11,7 +11,6 @@ export type ButtonGroupProps = Readonly<{
     options: ButtonOption[]
     selected?: string
     onChange: (value: string) => void
-    dataTest: string
     ariaLabel?: string
     prefix?: string
 }>
