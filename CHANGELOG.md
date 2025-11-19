@@ -1,3 +1,10 @@
+# [0.98.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.97.0...v0.98.0) (2025-11-19)
+
+
+### Features
+
+* [DHIS2-20338] Relationship types form ([#695](https://github.com/dhis2/maintenance-app-beta/issues/695)) ([0f7057b](https://github.com/dhis2/maintenance-app-beta/commit/0f7057bbb0316018a135666bfdbbc976d8964a12))
+
 # [0.97.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.96.0...v0.97.0) (2025-11-19)
 
 
