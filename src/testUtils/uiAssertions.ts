@@ -245,6 +245,22 @@ const expectColorAndIconFieldToExist = (screen: RenderResult) => {
     expect(field).toBeVisible()
 }
 
+const expectButtonGroupToExistWithOptions = (
+    buttonGroupTestId: string,
+    options: { value: string; label: string }[],
+    screen: RenderResult
+) => {
+    const buttonGroup = screen.getByTestId(buttonGroupTestId)
+    expect(buttonGroup).toBeVisible()
+    options.forEach((option) => {
+        const button = within(buttonGroup).getByTestId(
+            `${buttonGroupTestId}-option-${option.value}`
+        )
+        expect(button).toBeVisible()
+        expect(button).toHaveTextContent(option.label)
+    })
+}
+
 export const uiAssertions = {
     expectNameFieldExist: (value: string, screen: RenderResult) =>
         expectInputFieldToExist('name', value, screen),
@@ -260,6 +276,7 @@ export const uiAssertions = {
     expectMultiSelectToExistWithOptions,
     expectCheckboxFieldToExist,
     expectRadioFieldToExist,
+    expectButtonGroupToExistWithOptions,
     expectInputToErrorWhenExceedsLength,
     expectNameToErrorWhenExceedsLength: (
         screen: RenderResult,

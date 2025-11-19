@@ -204,6 +204,18 @@ export const clickButton = async (testId: string, screen: RenderResult) => {
     await userEvent.click(button)
 }
 
+const clickButtonGroupOption = async (
+    buttonGroupTestId: string,
+    optionValue: string,
+    screen: RenderResult
+) => {
+    const buttonGroup = screen.getByTestId(buttonGroupTestId)
+    const button = within(buttonGroup).getByTestId(
+        `${buttonGroupTestId}-option-${optionValue}`
+    )
+    await userEvent.click(button)
+}
+
 export const uiActions = {
     openModal,
     openSingleSelect,
@@ -226,4 +238,5 @@ export const uiActions = {
     applyNewExpressionWithinModal,
     clearSingleSelect,
     clickButton,
+    clickButtonGroupOption,
 }

@@ -5,8 +5,10 @@
 
 .actions {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
+    padding-top: 8px;
+    align-items: center;
 
-    /* 19px height of label text + 2px margin-top of input */
-    padding-top: 21px;
+    white-space: nowrap;
 }
