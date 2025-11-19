@@ -1,3 +1,10 @@
+# [0.97.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.96.0...v0.97.0) (2025-11-19)
+
+
+### Features
+
+* add version based filtering for columns in managelistview ([#701](https://github.com/dhis2/maintenance-app-beta/issues/701)) ([72e4a62](https://github.com/dhis2/maintenance-app-beta/commit/72e4a62eb7fb7d80321826695fc751bd62cb9726))
+
 # [0.96.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.95.0...v0.96.0) (2025-11-18)
 
 
