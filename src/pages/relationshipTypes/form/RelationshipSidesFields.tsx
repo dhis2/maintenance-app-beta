@@ -26,9 +26,11 @@ export const RelationshipSideFields = ({
             </StandardFormSubsectionTitle>
 
             <ConstraintField prefix={prefix} />
-            <TrackedEntityTypeField prefix={prefix} />
-            <ProgramField prefix={prefix} />
-            <ProgramStageField prefix={prefix} />
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
+                <TrackedEntityTypeField prefix={prefix} />
+                <ProgramField prefix={prefix} />
+                <ProgramStageField prefix={prefix} />
+            </div>
             <TrackedEntityAttributesField prefix={prefix} />
             <DataElementsField prefix={prefix} />
         </PaddedContainer>

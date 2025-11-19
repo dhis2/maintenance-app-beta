@@ -96,7 +96,7 @@ export function RelationshipTypeFormFields() {
                         dataTest="formfields-fromToName"
                         name="fromToName"
                         label={i18n.t(
-                            'Relationship name seen from initiating entity'
+                            'Relationship name seen from initiating entity (required)'
                         )}
                         required
                         inputWidth="400px"
@@ -111,7 +111,7 @@ export function RelationshipTypeFormFields() {
                             dataTest="formfields-toFromName"
                             name="toFromName"
                             label={i18n.t(
-                                'Relationship name seen from receiving entity'
+                                'Relationship name seen from receiving entity (required)'
                             )}
                             required
                             inputWidth="400px"

@@ -91,7 +91,11 @@ export const TrackedEntityAttributesField = ({
     >(trackerDataViewPath, {
         format: (value) =>
             Array.isArray(value)
-                ? availableAttributes.filter((attr) => value.includes(attr.id))
+                ? value
+                      .map((id) =>
+                          availableAttributes.find((attr) => attr.id === id)
+                      )
+                      .filter((attr): attr is DisplayableModel => !!attr)
                 : [],
         parse: (value) =>
             Array.isArray(value) ? value.map((attr) => attr.id) : [],
@@ -158,6 +162,7 @@ export const TrackedEntityAttributesField = ({
                     enableOrderChange
                     optionsWidth="45%"
                     selectedWidth="45%"
+                    maxSelections={Infinity}
                 />
             </Field>
         </StandardFormField>

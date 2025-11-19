@@ -103,6 +103,9 @@ export const ModelTransfer = <
     return (
         <BaseModelTransfer
             {...baseModelTransferProps}
+            height={baseModelTransferProps.height ?? '350px'}
+            optionsWidth={baseModelTransferProps.optionsWidth ?? '500px'}
+            selectedWidth={baseModelTransferProps.selectedWidth ?? '500px'}
             enableOrderChange
             filterable
             filterablePicked

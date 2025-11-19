@@ -81,7 +81,11 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
     >(trackerDataViewPath, {
         format: (value) =>
             Array.isArray(value)
-                ? availableDataElements.filter((de) => value.includes(de.id))
+                ? value
+                      .map((id) =>
+                          availableDataElements.find((de) => de.id === id)
+                      )
+                      .filter((de): de is DisplayableModel => !!de)
                 : [],
         parse: (value) =>
             Array.isArray(value) ? value.map((de) => de.id) : [],
@@ -136,6 +140,7 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
                     enableOrderChange
                     optionsWidth="45%"
                     selectedWidth="45%"
+                    maxSelections={Infinity}
                 />
             </Field>
         </StandardFormField>
