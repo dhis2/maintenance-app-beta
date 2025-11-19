@@ -153,6 +153,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                     inputWidth="330px"
                     onChange={clearDependentFields}
                     showNoValueOption={!isRequired}
+                    dataTest={`${prefix}-program-selector`}
                 />
             </EditableFieldWrapper>
         </StandardFormField>

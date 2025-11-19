@@ -13,21 +13,18 @@ export type ButtonGroupProps = Readonly<{
     onChange: (value: string) => void
     dataTest: string
     ariaLabel?: string
+    prefix?: string
 }>
 
 export const ButtonGroup = ({
     options,
     selected,
     onChange,
-    dataTest,
     ariaLabel,
+    prefix,
 }: ButtonGroupProps) => {
     return (
-        <fieldset
-            className={css.buttonGroup}
-            aria-label={ariaLabel}
-            data-test={dataTest}
-        >
+        <fieldset className={css.buttonGroup} aria-label={ariaLabel}>
             {options.map((option) => {
                 const isSelected = selected === option.value
 
@@ -40,7 +37,7 @@ export const ButtonGroup = ({
                         })}
                         onClick={() => onChange(option.value)}
                         aria-pressed={isSelected}
-                        data-test={`${dataTest}-option-${option.value}`}
+                        data-test={`${prefix}-constraint-field-option-${option.value}`}
                     >
                         {option.label}
                     </button>

@@ -10,7 +10,6 @@ import {
     testCustomAttribute,
     testProgram,
     testRelationshipType,
-    testTrackedEntityType,
 } from '../../testUtils/builders'
 import { generateRenderer } from '../../testUtils/generateRenderer'
 import TestComponentWithRouter from '../../testUtils/TestComponentWithRouter'
@@ -53,19 +52,11 @@ describe('Relationship types form tests', () => {
                 { matchingExistingElementFilter = undefined } = {}
             ) => {
                 const attributes = [testCustomAttribute({ mandatory: false })]
-
                 const screen = render(
                     <TestComponentWithRouter
                         path={`/${section.namePlural}`}
                         customData={{
                             attributes: () => ({ attributes }),
-                            programs: () => ({
-                                pager: { total: 0 },
-                                programs: [],
-                            }),
-                            trackedEntityTypes: () => ({
-                                trackedEntityTypes: [],
-                            }),
                             relationshipTypes: (type: any, params: any) => {
                                 if (type === 'create') {
                                     createMock(params)
@@ -97,7 +88,7 @@ describe('Relationship types form tests', () => {
                     </TestComponentWithRouter>
                 )
 
-                return { screen, attributes }
+                return { screen }
             }
         )
 
@@ -112,6 +103,16 @@ describe('Relationship types form tests', () => {
             )
             uiAssertions.expectFieldToHaveError(
                 'formfields-fromToName',
+                'Required',
+                screen
+            )
+            uiAssertions.expectFieldToHaveError(
+                'from-constraint-field',
+                'Required',
+                screen
+            )
+            uiAssertions.expectFieldToHaveError(
+                'to-constraint-field',
                 'Required',
                 screen
             )
@@ -137,24 +138,6 @@ describe('Relationship types form tests', () => {
             )
             await uiActions.submitForm(screen)
             expect(createMock).not.toHaveBeenCalled()
-        })
-
-        it('should show an error if fromToName field is too long', async () => {
-            const { screen } = await renderForm()
-            const longFromToName = randomLongString(256)
-            await uiActions.enterName('Test Name', screen)
-            await uiActions.enterInputFieldValue(
-                'fromToName',
-                longFromToName,
-                screen
-            )
-            await uiActions.submitForm(screen)
-            expect(createMock).not.toHaveBeenCalled()
-            const field = screen.getByTestId('formfields-fromToName')
-            const validation = field.querySelector('[data-test*="validation"]')
-            if (validation) {
-                expect(validation).toBeInTheDocument()
-            }
         })
 
         it('should show an error if name field is a duplicate', async () => {
@@ -223,6 +206,24 @@ describe('Relationship types form tests', () => {
             )
         })
 
+        it('should show an error if fromToName field is too long', async () => {
+            const { screen } = await renderForm()
+            const longFromToName = randomLongString(256)
+            await uiActions.enterName('Test Name', screen)
+            await uiActions.enterInputFieldValue(
+                'fromToName',
+                longFromToName,
+                screen
+            )
+            await uiActions.submitForm(screen)
+            expect(createMock).not.toHaveBeenCalled()
+            const field = screen.getByTestId('formfields-fromToName')
+            const validation = field.querySelector('[data-test*="validation"]')
+            if (validation) {
+                expect(validation).toBeInTheDocument()
+            }
+        })
+
         it('should show toFromName field only when bidirectional is checked', async () => {
             const { screen } = await renderForm()
 
@@ -239,36 +240,19 @@ describe('Relationship types form tests', () => {
         })
     })
 
-    describe('New', () => {
+    describe('New Relationship type form', () => {
         const renderForm = generateRenderer(
             { section, mockSchema },
             (routeOptions) => {
-            const attributes = [testCustomAttribute({ mandatory: false })]
-            const trackedEntityTypes = [testTrackedEntityType(), testTrackedEntityType()]
-            const programs = [testProgram(), testProgram()]
-            const programStages = [
-                {
-                    id: 'ps1',
-                    displayName: 'Program Stage 1',
-                    program: { id: programs[0].id },
-                },
-                {
-                    id: 'ps2',
-                    displayName: 'Program Stage 2',
-                    program: { id: programs[0].id },
-                },
-            ]
+                const attributes = [testCustomAttribute({ mandatory: false })]
+                const programs = [testProgram(), testProgram()]
 
-            const screen = render(
+                const screen = render(
                     <TestComponentWithRouter
                         path={`/${section.namePlural}`}
                         customData={{
                             attributes: () => ({ attributes }),
-                            trackedEntityTypes: () => {
-                                return {
-                                    trackedEntityTypes,
-                                }
-                            },
+                            programs: () => ({ programs }),
                             relationshipTypes: (type: any, params: any) => {
                                 if (type === 'create') {
                                     createMock(params)
@@ -287,7 +271,7 @@ describe('Relationship types form tests', () => {
                         <New />
                     </TestComponentWithRouter>
                 )
-                return { screen, attributes, trackedEntityTypes }
+                return { screen, attributes, programs }
             }
         )
 
@@ -303,27 +287,46 @@ describe('Relationship types form tests', () => {
                 screen
             )
             uiAssertions.expectInputFieldToExist('fromToName', '', screen)
-
-            expect(
-                screen.getByText('Initiating side (From)')
-            ).toBeInTheDocument()
-            expect(
-                screen.getByText('Receiving side (To)')
-            ).toBeInTheDocument()
-        })
-
-        it('should have a cancel button with a link back to the list view', async () => {
-            const { screen } = await renderForm()
-            const cancelButton = screen.getByTestId('form-cancel-link')
-            expect(cancelButton).toBeVisible()
-            expect(cancelButton).toHaveAttribute(
-                'href',
-                `/${section.namePlural}`
+            uiAssertions.expectButtonGroupToExistWithOptions(
+                'from-constraint-field',
+                [
+                    {
+                        value: 'PROGRAM_STAGE_INSTANCE',
+                        label: 'Event',
+                    },
+                    {
+                        value: 'PROGRAM_INSTANCE',
+                        label: 'Enrollment',
+                    },
+                    {
+                        value: 'TRACKED_ENTITY_INSTANCE',
+                        label: 'Tracked entity',
+                    },
+                ],
+                screen
+            )
+            uiAssertions.expectButtonGroupToExistWithOptions(
+                'to-constraint-field',
+                [
+                    {
+                        value: 'PROGRAM_STAGE_INSTANCE',
+                        label: 'Event',
+                    },
+                    {
+                        value: 'PROGRAM_INSTANCE',
+                        label: 'Enrollment',
+                    },
+                    {
+                        value: 'TRACKED_ENTITY_INSTANCE',
+                        label: 'Tracked entity',
+                    },
+                ],
+                screen
             )
         })
 
         it('should submit the data', async () => {
-            const { screen, trackedEntityTypes } = await renderForm()
+            const { screen, programs } = await renderForm()
             const aName = faker.company.name()
             const aCode = faker.string.alpha(5)
             const aDescription = faker.lorem.sentence()
@@ -341,19 +344,27 @@ describe('Relationship types form tests', () => {
                 aFromToName,
                 screen
             )
-            
-            const fromTrackedEntityButton = await screen.findByTestId('from-constraint-selector-option-TRACKED_ENTITY_INSTANCE')
-            await userEvent.click(fromTrackedEntityButton)
 
-            const fromTrackedEntityTypeField = await screen.findByTestId('from-tracked-entity-type-selector', {}, { timeout: 3000 })
-            await uiActions.pickOptionFromSelect(fromTrackedEntityTypeField, 0, screen)
-            
-            const toTrackedEntityButton = screen.getByTestId('to-constraint-selector-option-TRACKED_ENTITY_INSTANCE')
-            await userEvent.click(toTrackedEntityButton)
-            
-            const toTrackedEntityTypeField = await screen.findByTestId('to-tracked-entity-type-selector', {}, { timeout: 3000 })
-            await uiActions.pickOptionFromSelect(toTrackedEntityTypeField, 0, screen)
-            
+            await uiActions.clickButtonGroupOption(
+                'from-constraint-field',
+                'PROGRAM_INSTANCE',
+                screen
+            )
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('from-program-selector'),
+                0,
+                screen
+            )
+            await uiActions.clickButtonGroupOption(
+                'to-constraint-field',
+                'PROGRAM_INSTANCE',
+                screen
+            )
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('to-program-selector'),
+                0,
+                screen
+            )
             await uiActions.submitForm(screen)
 
             expect(createMock).toHaveBeenCalledWith(
@@ -365,15 +376,15 @@ describe('Relationship types form tests', () => {
                         fromToName: aFromToName,
                         bidirectional: false,
                         fromConstraint: expect.objectContaining({
-                            relationshipEntity: 'TRACKED_ENTITY_INSTANCE',
-                            trackedEntityType: expect.objectContaining({
-                                id: trackedEntityTypes[0].id,
+                            relationshipEntity: 'PROGRAM_INSTANCE',
+                            program: expect.objectContaining({
+                                id: programs[0].id,
                             }),
                         }),
                         toConstraint: expect.objectContaining({
-                            relationshipEntity: 'TRACKED_ENTITY_INSTANCE',
-                            trackedEntityType: expect.objectContaining({
-                                id: trackedEntityTypes[0].id,
+                            relationshipEntity: 'PROGRAM_INSTANCE',
+                            program: expect.objectContaining({
+                                id: programs[0].id,
                             }),
                         }),
                     }),
@@ -386,20 +397,18 @@ describe('Relationship types form tests', () => {
         const renderForm = generateRenderer(
             { section, mockSchema },
             (routeOptions) => {
-            const attributes = [testCustomAttribute({ mandatory: false })]
-            const trackedEntityTypes = [testTrackedEntityType(), testTrackedEntityType()]
-            const relationshipType = testRelationshipType()
-            const id = relationshipType.id
+                const attributes = [testCustomAttribute({ mandatory: false })]
+                const programs = [testProgram(), testProgram()]
+                const relationshipType = testRelationshipType()
+                const id = relationshipType.id
 
-            const screen = render(
+                const screen = render(
                     <TestComponentWithRouter
                         path={`/${section.namePlural}/:id`}
                         initialEntries={[`/${section.namePlural}/${id}`]}
                         customData={{
                             attributes: () => ({ attributes }),
-                            trackedEntityTypes: () => ({
-                                trackedEntityTypes,
-                            }),
+                            programs: () => ({ programs }),
                             relationshipTypes: (type: any, params: any) => {
                                 if (type === 'json-patch') {
                                     updateMock(params)
@@ -419,7 +428,7 @@ describe('Relationship types form tests', () => {
                         <Edit />
                     </TestComponentWithRouter>
                 )
-                return { screen, relationshipType, trackedEntityTypes }
+                return { screen, relationshipType, programs }
             }
         )
 
@@ -453,46 +462,20 @@ describe('Relationship types form tests', () => {
             }
         })
 
-        it('should submit the data and return to the list view on success when a field is changed', async () => {
-            const { screen, relationshipType, trackedEntityTypes } = await renderForm()
-            const newName = faker.company.name()
-
-       
-            const fromTrackedEntityButton = screen.getByTestId('from-constraint-selector-option-TRACKED_ENTITY_INSTANCE')
-            await userEvent.click(fromTrackedEntityButton)
-            
-            const fromTrackedEntityTypeField = await screen.findByTestId('from-tracked-entity-type-selector', {}, { timeout: 1000 })
-            await uiActions.pickOptionFromSelect(fromTrackedEntityTypeField, 0, screen)
-            
-            const toTrackedEntityButton = screen.getByTestId('to-constraint-selector-option-TRACKED_ENTITY_INSTANCE')
-            await userEvent.click(toTrackedEntityButton)
-            
-            const toTrackedEntityTypeField = await screen.findByTestId('to-tracked-entity-type-selector', {}, { timeout: 1000 })
-            await uiActions.pickOptionFromSelect(toTrackedEntityTypeField, 0, screen)
-
-            await uiActions.enterName(newName, screen)
-            await uiActions.submitForm(screen)
-
-            expect(updateMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.arrayContaining([
-                        expect.objectContaining({
-                            op: 'replace',
-                            path: '/name',
-                            value: newName,
-                        }),
-                    ]),
-                    id: relationshipType.id,
-                    resource: 'relationshipTypes',
-                })
-            )
-        })
-
         it('should do nothing and return to the list view on success when no field is changed', async () => {
             const { screen } = await renderForm()
             await uiActions.submitForm(screen)
             expect(updateMock).not.toHaveBeenCalled()
         })
+
+        it('should have a cancel button with a link back to the list view', async () => {
+            const { screen } = await renderForm()
+            const cancelButton = screen.getByTestId('form-cancel-link')
+            expect(cancelButton).toBeVisible()
+            expect(cancelButton).toHaveAttribute(
+                'href',
+                `/${section.namePlural}`
+            )
+        })
     })
 })
-

@@ -56,6 +56,7 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
             <Field
                 error={meta.touched && meta.invalid}
                 validationText={(meta.touched && meta.error?.toString()) || ''}
+                dataTest={`${prefix}-constraint-field`}
             >
                 <ButtonGroup
                     options={CONSTRAINT_OPTIONS}
@@ -70,7 +71,7 @@ export const ConstraintField = ({ prefix }: RelationshipSideFieldsProps) => {
                             clearDependentFields()
                         }
                     }}
-                    dataTest={`${prefix}-constraint-selector`}
+                    prefix={prefix}
                     ariaLabel={i18n.t('Relationship entity constraint')}
                 />
             </Field>
