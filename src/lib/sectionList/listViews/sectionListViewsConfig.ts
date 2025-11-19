@@ -5,6 +5,7 @@ import type { ConfigurableFilterKey } from '../filters'
 export interface ModelPropertyDescriptor {
     label: string
     path: string
+    minApiVersion?: number
 }
 
 export interface FilterDescriptor {
@@ -535,6 +536,7 @@ export const modelListViewsConfig = {
                 {
                     label: i18n.t('Trigram indexable'),
                     path: 'trigramIndexable',
+                    minApiVersion: 43,
                 },
             ],
         },
