@@ -1,3 +1,24 @@
+# [0.97.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.96.0...v0.97.0) (2025-11-19)
+
+
+### Features
+
+* add version based filtering for columns in managelistview ([#701](https://github.com/dhis2/maintenance-app-beta/issues/701)) ([72e4a62](https://github.com/dhis2/maintenance-app-beta/commit/72e4a62eb7fb7d80321826695fc751bd62cb9726))
+
+# [0.96.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.95.0...v0.96.0) (2025-11-18)
+
+
+### Features
+
+* program stages scaffolding  ([0d7853d](https://github.com/dhis2/maintenance-app-beta/commit/0d7853d12b6dde4199c4eac43bdd28f7032c29a1))
+
+# [0.95.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.94.0...v0.95.0) (2025-11-18)
+
+
+### Features
+
+* [DHIS2-20414] TEA Search performance Section ([#691](https://github.com/dhis2/maintenance-app-beta/issues/691)) ([fc06e4f](https://github.com/dhis2/maintenance-app-beta/commit/fc06e4fe19d7923ec26b127a31900765b75fceef))
+
 # [0.94.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.93.0...v0.94.0) (2025-11-17)
 
 
