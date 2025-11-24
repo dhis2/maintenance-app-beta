@@ -108,12 +108,13 @@ export const useOnSubmitOptionsSetsEdit = (
 
             // update form state to remove deleted options
             form.change('options', nonDeletedOptions)
+            const stringCompare = (a: string, b: string) => a.localeCompare(b)
             setManuallyDeleted((prev: string) => {
                 if (prev.length === 0) {
                     return deletedOptionIds.join(';')
                 }
                 return [...prev.split(';'), ...deletedOptionIds]
-                    .sort((a, b) => a.localeCompare(b))
+                    .sort(stringCompare)
                     .join(';')
             })
 
