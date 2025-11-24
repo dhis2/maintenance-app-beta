@@ -1,6 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
-import { useFormState } from 'react-final-form'
 import {
     SectionedFormSection,
     StandardFormSectionTitle,
@@ -17,7 +16,7 @@ export const OptionsListFormContents = React.memo(
         name: string
         manuallyDeleted: string
     }) {
-        const schemaSection = useSchemaSectionHandleOrThrow()
+        useSchemaSectionHandleOrThrow()
 
         return (
             <SectionedFormSection name={name}>

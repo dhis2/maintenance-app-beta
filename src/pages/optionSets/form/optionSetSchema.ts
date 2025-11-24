@@ -11,6 +11,7 @@ export const optionSetBaseSchema = z.object({
     displayName: z.string().trim().optional(),
     valueType: z.string(),
     code: z.string().trim().optional(),
+    options: z.object({ id: z.string() }).array().optional(),
 })
 
 export const optionSetListSchema = identifiable

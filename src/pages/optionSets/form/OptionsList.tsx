@@ -130,12 +130,10 @@ const OptionsListSortable = ({ modelId }: { modelId: string }) => {
     const options = data?.result?.options ?? []
 
     return (
-        <>
-            <OptionsListTable
-                modelId={modelId}
-                options={options}
-            ></OptionsListTable>
-        </>
+        <OptionsListTable
+            modelId={modelId}
+            options={options}
+        ></OptionsListTable>
     )
 }
 export type Option = { id: string; deleted?: boolean }
@@ -302,7 +300,7 @@ const FilterWarning = ({
     filter: string | undefined
     hiddenRowsCount: number
 }) => {
-    if (!filter || isNaN(hiddenRowsCount)) {
+    if (!filter || Number.isNaN(hiddenRowsCount)) {
         return null
     }
     return (
@@ -675,13 +673,7 @@ const OptionsListUnSortable = ({
             </div>
             <DataTable>
                 <TableHeadLayout />
-                {!data ? (
-                    <DataTableCell colSpan="100%">
-                        <div className={css.optionsLoadingDiv}>
-                            <CircularLoader small />
-                        </div>
-                    </DataTableCell>
-                ) : (
+                {data ? (
                     <TableBody>
                         {options?.map((option: OptionDetail, index: number) => (
                             <OptionRow
@@ -706,6 +698,12 @@ const OptionsListUnSortable = ({
                             />
                         ))}
                     </TableBody>
+                ) : (
+                    <DataTableCell colSpan="100%">
+                        <div className={css.optionsLoadingDiv}>
+                            <CircularLoader small />
+                        </div>
+                    </DataTableCell>
                 )}
 
                 <TableFoot>
