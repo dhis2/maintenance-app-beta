@@ -1,3 +1,18 @@
+# [0.99.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.98.0...v0.99.0) (2025-11-24)
+
+
+### Features
+
+* test category ([43d3a69](https://github.com/dhis2/maintenance-app-beta/commit/43d3a69e097c20113223e4861b6cd4de97f9b83e))
+* test category ([5cf9be8](https://github.com/dhis2/maintenance-app-beta/commit/5cf9be89ed69fc9d4227cfab4b134cb1291fb2fd))
+* test category ([d6cd70f](https://github.com/dhis2/maintenance-app-beta/commit/d6cd70f75658955be4e75a62a5886e2f7a388a80))
+* test category builders ([1637fc3](https://github.com/dhis2/maintenance-app-beta/commit/1637fc356a7afbdb7bfd461dfa43029c2bdaad0d))
+* test category combo edit ([82518c3](https://github.com/dhis2/maintenance-app-beta/commit/82518c334acd6192a9e0289fd4814b207cbee8ba))
+* test category combo new and edit ([5f6f06e](https://github.com/dhis2/maintenance-app-beta/commit/5f6f06ed2ff3916c2bf33281dd070263ff193b49))
+* test category new and edit ([61c3e45](https://github.com/dhis2/maintenance-app-beta/commit/61c3e45e0c23afae23dcb6e7f29987ea1444e8e6))
+* test category option group ([f9a357b](https://github.com/dhis2/maintenance-app-beta/commit/f9a357b83981cc476d3ceb013c74efb9d7988fb3))
+* test category option group set ([aa2ae9a](https://github.com/dhis2/maintenance-app-beta/commit/aa2ae9af1d465551e308e08ce148b6f489b11d3e))
+
 # [0.98.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.97.0...v0.98.0) (2025-11-19)
 
 
