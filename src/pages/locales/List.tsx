@@ -2,8 +2,13 @@ import { FetchError, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Input, InputEventPayload } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
-import React, { useCallback, useEffect, useState } from 'react'
-import { SectionList, SectionListRow, SelectedColumn } from '../../components'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import {
+    DefaultSectionListMessage,
+    SectionList,
+    SectionListRow,
+    SelectedColumn,
+} from '../../components'
 import { ClientDateTime } from '../../components/date'
 import {
     DetailItem,
@@ -14,11 +19,6 @@ import {
 import { useModelListView } from '../../components/sectionList/listView'
 import { ModelValueRenderer } from '../../components/sectionList/modelValue/ModelValueRenderer'
 import css from '../../components/sectionList/SectionList.module.css'
-import { SectionListLoader } from '../../components/sectionList/SectionListLoader'
-import {
-    SectionListEmpty,
-    SectionListError,
-} from '../../components/sectionList/SectionListMessages'
 import { SectionListTitle } from '../../components/sectionList/SectionListTitle'
 import { Toolbar } from '../../components/sectionList/toolbar'
 import { useSelectedModels } from '../../components/sectionList/useSelectedModels'
@@ -56,20 +56,23 @@ export const Component = () => {
         },
     })
 
-    const raw = data?.result
-    const localesList = Array.isArray(raw)
-        ? raw.map((item: LocaleModel) => ({
-              ...item,
-              access: {
-                  read: true,
-                  write: true,
-                  update: false,
-                  delete: true,
-                  externalize: false,
-                  manage: false,
-              },
-          }))
-        : []
+    const localesList = useMemo(
+        () =>
+            Array.isArray(data?.result)
+                ? data?.result.map((item: LocaleModel) => ({
+                      ...item,
+                      access: {
+                          read: true,
+                          write: true,
+                          update: false,
+                          delete: true,
+                          externalize: false,
+                          manage: false,
+                      },
+                  }))
+                : [],
+        [data?.result]
+    )
 
     const [filteredData, setFilteredData] = useState<
         ModelCollection<LocaleModel> | undefined
@@ -113,20 +116,6 @@ export const Component = () => {
     )
 
     const isAllSelected = localesList ? checkAllSelected(localesList) : false
-
-    const SectionListMessage = () => {
-        if (error as FetchError) {
-            console.log((error as FetchError).details || error)
-            return <SectionListError />
-        }
-        if (!localesList) {
-            return <SectionListLoader />
-        }
-        if (localesList.length < 1) {
-            return <SectionListEmpty />
-        }
-        return null
-    }
 
     const [detailsRow, setDetailsRow] = useState<LocaleModel | undefined>()
 
@@ -182,7 +171,10 @@ every item when interacting with a row */
                     onSelectAll={handleSelectAll}
                     allSelected={isAllSelected}
                 >
-                    <SectionListMessage />
+                    <DefaultSectionListMessage
+                        error={error as FetchError | undefined}
+                        data={filteredData}
+                    />
                     {filteredData?.map((model) => (
                         <SectionListRow
                             key={model.id}

@@ -17,7 +17,6 @@ import {
     BaseListModel,
     useDeleteModelMutation,
     useModelSectionHandleOrThrow,
-    useSchemaSectionHandleOrThrow,
 } from '../../../lib'
 import classes from './DeleteAction.module.css'
 

@@ -1,5 +1,4 @@
-import type { OverviewSectionName, SchemaFieldProperty } from '../lib'
-import { Access } from './generated'
+import type { OverviewSectionName } from '../lib'
 import { SchemaAuthorities, SchemaName } from './schemaBase'
 
 export interface SectionBase {

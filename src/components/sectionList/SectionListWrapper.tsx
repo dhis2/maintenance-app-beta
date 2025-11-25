@@ -28,7 +28,25 @@ type SectionListWrapperProps = {
     refetch: () => void
     ActionsComponent?: React.ComponentType<DefaultListActionProps>
 }
-
+export const DefaultSectionListMessage = ({
+    error,
+    data,
+}: {
+    error?: FetchError
+    data?: ModelCollection
+}) => {
+    if (error) {
+        console.log(error.details || error)
+        return <SectionListError />
+    }
+    if (!data) {
+        return <SectionListLoader />
+    }
+    if (data.length < 1) {
+        return <SectionListEmpty />
+    }
+    return null
+}
 export const SectionListWrapper = ({
     data,
     error,
@@ -50,20 +68,6 @@ export const SectionListWrapper = ({
     const onSharingDialogClose = () => {
         setSharingDialogId(undefined)
         refetch()
-    }
-
-    const SectionListMessage = () => {
-        if (error) {
-            console.log(error.details || error)
-            return <SectionListError />
-        }
-        if (!data) {
-            return <SectionListLoader />
-        }
-        if (data.length < 1) {
-            return <SectionListEmpty />
-        }
-        return null
     }
 
     const handleSelectAll = useCallback(
@@ -148,7 +152,7 @@ export const SectionListWrapper = ({
                     onSelectAll={handleSelectAll}
                     allSelected={isAllSelected}
                 >
-                    <SectionListMessage />
+                    <DefaultSectionListMessage data={data} error={error} />
                     {data?.map((model) => (
                         <SectionListRow
                             key={model.id}

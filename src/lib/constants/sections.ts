@@ -9,10 +9,7 @@ import {
     OverviewSectionMap,
     OverviewSection,
     NonSchemaSection,
-    SchemaFieldPropertyType,
-    SchemaFieldProperty,
 } from '../../types'
-import { Access } from '../../types/generated'
 
 // for convenience so types can be imported with the map below
 export type {
