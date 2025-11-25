@@ -49,7 +49,7 @@ export type OptionSetFormValuesExpanded = OptionSetFormValues & {
 
 export const useOnSubmitOptionsSetsEdit = (
     modelId: string,
-    setManuallyDeleted: any
+    setManuallyDeleted: React.Dispatch<React.SetStateAction<string>>
 ) => {
     const submitEdit: EnhancedOnSubmit<OptionSetFormValuesExpanded> =
         useOnSubmitEdit({
@@ -109,7 +109,7 @@ export const useOnSubmitOptionsSetsEdit = (
             // update form state to remove deleted options
             form.change('options', nonDeletedOptions)
             const stringCompare = (a: string, b: string) => a.localeCompare(b)
-            setManuallyDeleted((prev: string) => {
+            setManuallyDeleted((prev) => {
                 if (prev.length === 0) {
                     return deletedOptionIds.join(';')
                 }

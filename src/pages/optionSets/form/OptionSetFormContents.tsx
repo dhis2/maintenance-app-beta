@@ -10,7 +10,7 @@ import {
 } from '../../../lib'
 import { BasicInfoFormContents } from './BasicInfoFormContents'
 import { OptionSetFormDescriptor } from './formDescriptor'
-import { OptionsListFormContents } from './OptionsListFormContents'
+import { OptionsListFormContents } from './optionsList/OptionsListFormContents'
 
 export const OptionSetFormContents = ({
     manuallyDeleted,

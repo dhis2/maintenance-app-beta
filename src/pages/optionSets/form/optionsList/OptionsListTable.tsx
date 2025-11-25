@@ -1,7 +1,6 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
-    Input,
     ButtonStrip,
     Button,
     DataTable,
@@ -15,102 +14,41 @@ import {
     IconArrowUp16,
     IconArrowDown16,
     IconEdit16,
+    Input,
     NoticeBox,
-    CircularLoader,
 } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useCallback, useMemo, useState } from 'react'
 import { useField } from 'react-final-form'
-import { useParams } from 'react-router-dom'
 import {
     MoreDropdownButton,
     MoreDropdownItem,
     MoreDropdownDivider,
-} from '../../../components'
-import { TranslationDialog } from '../../../components/sectionList/translation'
-import { SchemaName, BaseListModel } from '../../../lib'
+} from '../../../../components'
+import { TranslationDialog } from '../../../../components/sectionList/translation'
+import { SchemaName } from '../../../../lib'
 import css from './OptionList.module.css'
+import { Option, OptionDetail, OptionsDetails } from './optionsConstants'
+import { OptionsErrorNotice } from './OptionsErrorNotice'
 
-const MAXIMUM_OPTIONS = 500
-
-export const OptionListNewOrEdit = ({
-    manuallyDeleted,
-}: {
-    manuallyDeleted: string
-}) => {
-    const modelId = useParams().id as string
-    // options cannot be added until option set is saved
-    if (!modelId) {
-        return (
-            <NoticeBox>
-                {i18n.t('Option set must be saved before options can be added')}
-            </NoticeBox>
-        )
-    }
-    return (
-        <OptionsListSizeCheck
-            modelId={modelId}
-            manuallyDeleted={manuallyDeleted}
-        />
-    )
-    // if edit mode, check count of options
-}
-
-const ErrorNotice = () => (
-    <NoticeBox error>
-        {i18n.t('Something went wrong when loading options')}
-    </NoticeBox>
-)
-
-// check if there are MAXIMUM_OPTIONS or fewer option
-const OptionsListSizeCheck = ({
+export const OptionsListTable = ({
     modelId,
-    manuallyDeleted,
+    options,
 }: {
     modelId: string
-    manuallyDeleted: string
+    options: { id: string }[]
 }) => {
-    const engine = useDataEngine()
-    const query = {
-        result: {
-            resource: `optionSets/${modelId}`,
-            params: {
-                fields: 'options~size',
-            },
-        },
-    }
-    const { error, data } = useQuery({
-        queryKey: [query],
-        queryFn: ({ queryKey: [query], signal }) => {
-            return engine.query(query, { signal }) as any
-        },
+    const { input: optionsInput } = useField('options', {
+        initialValue: options,
     })
-    if (error) {
-        return <ErrorNotice />
-    }
-    if (!data) {
-        return null
-    }
-    if (data?.result?.options > MAXIMUM_OPTIONS) {
-        return (
-            <OptionsListUnSortableSetup
-                modelId={modelId}
-                optionsCount={data.result.options}
-                initialOptions={[]}
-                manuallyDeleted={manuallyDeleted}
-            />
-        )
-    }
-    return <OptionsListSortable modelId={modelId} />
-}
+    const [filterValue, setFilterValue] = useState<string | undefined>()
 
-const OptionsListSortable = ({ modelId }: { modelId: string }) => {
     const engine = useDataEngine()
     const query = {
         result: {
             resource: `optionSets/${modelId}`,
             params: {
-                fields: 'options[id]',
+                fields: 'options[id,name,code,displayName,access]',
             },
         },
     }
@@ -121,26 +59,76 @@ const OptionsListSortable = ({ modelId }: { modelId: string }) => {
             return engine.query(query, { signal }) as any
         },
     })
+    const optionsDetails = useMemo(
+        () =>
+            data?.result?.options?.reduce(
+                (acc: OptionsDetails, cv: OptionDetail) => {
+                    acc[cv.id] = cv
+                    return acc
+                },
+                {} as OptionsDetails
+            ),
+        [data]
+    )
+
+    const sortOptions = useCallback(
+        (property: string, desc: boolean) => {
+            const newOptionsOrder = [...optionsInput.value]
+            if (desc) {
+                newOptionsOrder.sort((a, b) =>
+                    optionsDetails[b.id][property].localeCompare(
+                        optionsDetails[a.id][property],
+                        undefined,
+                        { numeric: true, sensitivity: 'base' }
+                    )
+                )
+            } else {
+                newOptionsOrder.sort((a, b) =>
+                    optionsDetails[a.id][property].localeCompare(
+                        optionsDetails[b.id][property],
+                        undefined,
+                        { numeric: true, sensitivity: 'base' }
+                    )
+                )
+            }
+            optionsInput.onChange(newOptionsOrder)
+        },
+        [optionsInput, optionsDetails]
+    )
+
     if (error) {
-        return <ErrorNotice />
+        return <OptionsErrorNotice />
     }
     if (!data) {
         return null
     }
-    const options = data?.result?.options ?? []
 
     return (
-        <OptionsListTable
-            modelId={modelId}
-            options={options}
-        ></OptionsListTable>
+        <>
+            <FilterAndSort
+                filterValue={filterValue}
+                setFilterValue={setFilterValue}
+                sortOptions={sortOptions}
+            />
+            <OptionsTable
+                optionsDetails={optionsDetails}
+                filter={filterValue ?? ''}
+            />
+        </>
     )
 }
-export type Option = { id: string; deleted?: boolean }
-type OptionDetail = BaseListModel & { name: string; code: string }
-type OptionsDetails = Record<string, OptionDetail>
 
-const FilterAndSort = ({
+export const TableHeadLayout = () => (
+    <TableHead>
+        <DataTableRow>
+            <DataTableColumnHeader>{i18n.t('Name')}</DataTableColumnHeader>
+            <DataTableColumnHeader>{i18n.t('Code')}</DataTableColumnHeader>
+            <DataTableColumnHeader> </DataTableColumnHeader>
+        </DataTableRow>
+    </TableHead>
+)
+
+export const FilterAndSort = ({
     filterValue,
     setFilterValue,
     sortOptions,
@@ -197,103 +185,7 @@ const FilterAndSort = ({
     </>
 )
 
-const OptionsListTable = ({
-    modelId,
-    options,
-}: {
-    modelId: string
-    options: { id: string }[]
-}) => {
-    const { input: optionsInput } = useField('options', {
-        initialValue: options,
-    })
-    const [filterValue, setFilterValue] = useState<string | undefined>()
-    const engine = useDataEngine()
-    const query = {
-        result: {
-            resource: `optionSets/${modelId}`,
-            params: {
-                fields: 'options[id,name,code,displayName,access]',
-            },
-        },
-    }
-
-    const { error, data } = useQuery({
-        queryKey: [query],
-        queryFn: ({ queryKey: [query], signal }) => {
-            return engine.query(query, { signal }) as any
-        },
-    })
-    const optionsDetails = useMemo(
-        () =>
-            data?.result?.options?.reduce(
-                (acc: OptionsDetails, cv: OptionDetail) => {
-                    acc[cv.id] = cv
-                    return acc
-                },
-                {} as OptionsDetails
-            ),
-        [data]
-    )
-
-    const sortOptions = useCallback(
-        (property: string, desc: boolean) => {
-            const newOptionsOrder = [...optionsInput.value]
-            if (desc) {
-                newOptionsOrder.sort((a, b) =>
-                    optionsDetails[b.id][property].localeCompare(
-                        optionsDetails[a.id][property],
-                        undefined,
-                        { numeric: true, sensitivity: 'base' }
-                    )
-                )
-            } else {
-                newOptionsOrder.sort((a, b) =>
-                    optionsDetails[a.id][property].localeCompare(
-                        optionsDetails[b.id][property],
-                        undefined,
-                        { numeric: true, sensitivity: 'base' }
-                    )
-                )
-            }
-            optionsInput.onChange(newOptionsOrder)
-        },
-        [optionsInput, optionsDetails]
-    )
-
-    if (error) {
-        return <ErrorNotice />
-    }
-    if (!data) {
-        return null
-    }
-
-    return (
-        <>
-            <FilterAndSort
-                filterValue={filterValue}
-                setFilterValue={setFilterValue}
-                sortOptions={sortOptions}
-            />
-            <OptionsTable
-                optionsDetails={optionsDetails}
-                filter={filterValue ?? ''}
-            />
-        </>
-    )
-}
-
-const TableHeadLayout = () => (
-    <TableHead>
-        <DataTableRow>
-            <DataTableColumnHeader>{i18n.t('Name')}</DataTableColumnHeader>
-            <DataTableColumnHeader>{i18n.t('Code')}</DataTableColumnHeader>
-            <DataTableColumnHeader> </DataTableColumnHeader>
-        </DataTableRow>
-    </TableHead>
-)
-
-const FilterWarning = ({
+export const FilterWarning = ({
     filter,
     hiddenRowsCount,
 }: {
@@ -315,7 +207,7 @@ const FilterWarning = ({
     )
 }
 
-const OptionRow = ({
+export const OptionRow = ({
     deleted,
     optionDetail,
     disableManualSort,
@@ -525,211 +417,6 @@ const OptionsTable = ({
                     model={optionsDetails[translationDialogModelID]}
                     onClose={() => {
                         setTranslationDialogModelID(undefined)
-                    }}
-                    schemaName={SchemaName.option}
-                />
-            )}
-        </>
-    )
-}
-
-const OptionsListUnSortableSetup = ({
-    modelId,
-    optionsCount,
-    initialOptions,
-    manuallyDeleted,
-}: {
-    modelId: string
-    optionsCount: number
-    initialOptions: Option[]
-    manuallyDeleted: string
-}) => {
-    useField('options', {
-        initialValue: initialOptions,
-    })
-    return (
-        <OptionsListUnSortable
-            modelId={modelId}
-            optionsCount={optionsCount}
-            manuallyDeleted={manuallyDeleted}
-        />
-    )
-}
-
-const OptionsListUnSortable = ({
-    modelId,
-    optionsCount,
-    manuallyDeleted,
-}: {
-    modelId: string
-    optionsCount: number
-    manuallyDeleted: string
-}) => {
-    const engine = useDataEngine()
-    const [pageCount, setPageCount] = useState<number>(1)
-    const [pageSize, setPageSize] = useState<number>(10)
-    const [filterValue, setFilterValue] = useState<string | undefined>()
-    const [sortOrdering, setSortOrdering] = useState<string | undefined>()
-
-    const { input: optionsInput } = useField('options')
-
-    const [translationDialogModel, setTranslationDialogModel] = useState<
-        OptionDetail | undefined
-    >()
-
-    // in this case, we will only keep track of deleted options
-
-    const onDelete = useCallback(
-        (id: string) => {
-            const newOptions = [...optionsInput.value]
-            newOptions.push({ id, deleted: true })
-            optionsInput.onChange(newOptions)
-        },
-        [optionsInput]
-    )
-
-    const undoDelete = useCallback(
-        (id: string) => {
-            const newOptions = [...optionsInput.value].filter(
-                (option) => option.id !== id
-            )
-            optionsInput.onChange(newOptions)
-        },
-        [optionsInput]
-    )
-
-    const sortOptions = useCallback(
-        (property: string, desc: boolean) => {
-            if (property) {
-                if (desc === true) {
-                    setSortOrdering(`${property}:desc`)
-                } else {
-                    setSortOrdering(`${property}:asc`)
-                }
-            }
-        },
-        [setSortOrdering]
-    )
-
-    const filters =
-        filterValue && filterValue.length >= 2
-            ? [
-                  `optionSet.id:eq:${modelId}`,
-                  `identifiable:token:${filterValue}`,
-              ]
-            : [`optionSet.id:eq:${modelId}`]
-
-    if (manuallyDeleted.length) {
-        filters.push(`id:neq:${manuallyDeleted}`)
-    }
-
-    const query = {
-        result: {
-            resource: 'options',
-            params: {
-                fields: ['id', 'name', 'code', 'displayName', 'access'],
-                pageSize,
-                page: pageCount,
-                filters,
-                order: sortOrdering,
-            },
-        },
-    }
-
-    const { error, data } = useQuery({
-        queryKey: [query],
-        queryFn: ({ queryKey: [query], signal }) => {
-            return engine.query(query, { signal }) as any
-        },
-    })
-
-    if (error) {
-        return <ErrorNotice />
-    }
-
-    const options = data?.result.options
-    const totalLength = data?.result?.pager?.total
-    const totalPageCount = data?.result?.pager?.pageCount
-
-    return (
-        <>
-            <FilterAndSort
-                filterValue={filterValue}
-                setFilterValue={setFilterValue}
-                sortOptions={sortOptions}
-                disableSort={true}
-            />
-            <FilterWarning
-                filter={filterValue}
-                hiddenRowsCount={optionsCount - totalLength}
-            />
-            <div className={css.sortDisabledWarning}>
-                <NoticeBox>
-                    {i18n.t(
-                        'Sort functionality is not available with more than {{maximumNumberOfOptions}} options',
-                        { maximumNumberOfOptions: MAXIMUM_OPTIONS }
-                    )}
-                </NoticeBox>
-            </div>
-            <DataTable>
-                <TableHeadLayout />
-                {data ? (
-                    <TableBody>
-                        {options?.map((option: OptionDetail, index: number) => (
-                            <OptionRow
-                                key={option.id}
-                                deleted={
-                                    optionsInput.value
-                                        ? optionsInput.value
-                                              .map((opt: Option) => opt.id)
-                                              .includes(option.id)
-                                        : false
-                                }
-                                optionDetail={option}
-                                disableManualSort={true}
-                                totalLength={totalLength}
-                                index={index + pageSize * (pageCount - 1)}
-                                undoDelete={undoDelete}
-                                onDelete={onDelete}
-                                onMove={() => {}}
-                                setTranslationDialogModelID={() => {
-                                    setTranslationDialogModel(option)
-                                }}
-                            />
-                        ))}
-                    </TableBody>
-                ) : (
-                    <DataTableCell colSpan="100%">
-                        <div className={css.optionsLoadingDiv}>
-                            <CircularLoader small />
-                        </div>
-                    </DataTableCell>
-                )}
-
-                <TableFoot>
-                    <DataTableRow>
-                        <DataTableCell colSpan="100%">
-                            <Pagination
-                                page={pageCount}
-                                pageSize={pageSize}
-                                pageCount={totalPageCount}
-                                total={totalLength}
-                                onPageSizeChange={(v) => {
-                                    setPageSize(v)
-                                }}
-                                onPageChange={(v) => {
-                                    setPageCount(v)
-                                }}
-                            />
-                        </DataTableCell>
-                    </DataTableRow>
-                </TableFoot>
-            </DataTable>
-            {translationDialogModel && (
-                <TranslationDialog
-                    model={translationDialogModel}
-                    onClose={() => {
-                        setTranslationDialogModel(undefined)
                     }}
                     schemaName={SchemaName.option}
                 />

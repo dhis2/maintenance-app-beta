@@ -4,9 +4,9 @@ import {
     SectionedFormSection,
     StandardFormSectionTitle,
     StandardFormSectionDescription,
-} from '../../../components'
-import { useSchemaSectionHandleOrThrow } from '../../../lib'
-import { OptionListNewOrEdit } from './OptionsList'
+} from '../../../../components'
+import { useSchemaSectionHandleOrThrow } from '../../../../lib'
+import { OptionListNewOrEdit } from './OptionsListNewOrEdit'
 
 export const OptionsListFormContents = React.memo(
     function OptionSetSetupFormContents({
