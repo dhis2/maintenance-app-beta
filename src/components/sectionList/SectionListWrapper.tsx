@@ -2,8 +2,8 @@ import { FetchError } from '@dhis2/app-runtime'
 import { SharingDialog } from '@dhis2/ui'
 import React, { useCallback, useState } from 'react'
 import { BaseListModel, canEditModel, useSchemaFromHandle } from '../../lib'
-import { Pager, ModelCollection } from '../../types/models'
-import { DetailsPanel, DefaultDetailsPanelContent } from './detailsPanel'
+import { ModelCollection, Pager } from '../../types/models'
+import { DefaultDetailsPanelContent, DetailsPanel } from './detailsPanel'
 import { FilterWrapper } from './filters/FilterWrapper'
 import { DefaultListActions } from './listActions'
 import { DefaultListActionProps } from './listActions/DefaultListActions'
@@ -132,11 +132,8 @@ export const SectionListWrapper = ({
         ]
     )
 
-    const isAllSelected = data
-        ? data.some((model) => canEditModel(model))
-            ? checkAllSelected(data)
-            : false
-        : false
+    const isAllSelected = data ? checkAllSelected(data) : false
+
     return (
         <div>
             <SectionListTitle />

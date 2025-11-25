@@ -9,8 +9,6 @@ import {
     useParamsForDataQuery,
     BaseListModel,
     DEFAULT_FIELD_FILTERS,
-    isNonSchemaSection,
-    DEFAULT_ACCESS,
 } from '../lib'
 import { getFieldFilter } from '../lib/models/path'
 import { WrapQueryResponse } from '../types'
@@ -52,20 +50,7 @@ export const DefaultSectionList = ({
             return engine.query(query, { signal }) as Promise<ModelListResponse>
         },
     })
-
-    const isNonSchema = isNonSchemaSection({ name: schema.name } as any)
-
-    const raw = data?.result
-
-    const modelList = isNonSchema
-        ? Array.isArray(raw)
-            ? raw.map((item: BaseListModel) => ({
-                  ...item,
-                  access: (schema as any).access ?? DEFAULT_ACCESS(),
-                  sharing: { public: 'rw------' },
-              }))
-            : []
-        : raw?.[schema.plural]
+    const modelList = data?.result[modelListName]
 
     return (
         <div>

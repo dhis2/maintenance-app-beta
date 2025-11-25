@@ -1,8 +1,10 @@
 import { useCallback } from 'react'
 import { useQueryParam, StringParam } from 'use-query-params'
 import { z } from 'zod'
+import { isSchemaSection } from '../constants'
 import { getSchemaPropertyForPath } from '../models/path'
-import { useSchemaFromHandle } from '../schemas'
+import { useSchemaSectionHandleOrThrow } from '../routeUtils'
+import { useSchema, useSchemaFromHandle } from '../schemas'
 import { Schema } from '../useLoadApp'
 
 const SortQueryParam = StringParam

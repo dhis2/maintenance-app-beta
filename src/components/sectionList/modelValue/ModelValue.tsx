@@ -49,7 +49,7 @@ export const ModelValue = ({ schema, path, sectionModel }: ModelValueProps) => {
             <ModelValueRenderer
                 path={path}
                 value={value}
-                schemaProperty={schemaProperty}
+                propertyType={schemaProperty.propertyType}
             />
         </ErrorBoundary>
     )

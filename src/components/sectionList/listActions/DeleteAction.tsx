@@ -16,7 +16,7 @@ import React, { useState } from 'react'
 import {
     BaseListModel,
     useDeleteModelMutation,
-    useSchemaFromHandle,
+    useModelSectionHandleOrThrow,
     useSchemaSectionHandleOrThrow,
 } from '../../../lib'
 import classes from './DeleteAction.module.css'
@@ -73,38 +73,32 @@ function ConfirmationDialog({
     onCancel: () => void
     onDeleteSuccess: () => void
 }) {
-    const section = useSchemaFromHandle()
+    const section = useModelSectionHandleOrThrow()
 
-    if (!section) {
-        throw new Error('DeleteAction used outside a schema section')
-    }
-    const resource = section.plural
-
-    const { show: showDeletionSuccess } = useAlert(
-        () =>
-            i18n.t('Successfully deleted {{modelType}} "{{displayName}}"', {
-                displayName: model.displayName,
-                modelType: section.name,
-            }),
-        { success: true }
-    )
-
-    const deleteModelMutation = useDeleteModelMutation(resource, {
+    const deleteModelMutation = useDeleteModelMutation(section.namePlural, {
         onSuccess: () => {
             showDeletionSuccess()
             onDeleteSuccess()
         },
     })
 
+    const { show: showDeletionSuccess } = useAlert(
+        () =>
+            i18n.t('Successfully deleted {{modelType}} "{{displayName}}"', {
+                displayName: model.displayName,
+                modelType: section.title,
+            }),
+        { success: true }
+    )
+
     const errorReports =
         deleteModelMutation.error?.details?.response?.errorReports
-
     return (
         <Modal dataTest="delete-confirmation-modal">
             <ModalTitle>
                 {i18n.t(
                     'Are you sure that you want to delete this {{modelType}}?',
-                    { modelType: section.name }
+                    { modelType: section.title }
                 )}
             </ModalTitle>
 
@@ -114,7 +108,7 @@ function ConfirmationDialog({
                         error
                         title={i18n.t(
                             'Something went wrong deleting the {{modelType}}',
-                            { modelType: section.name }
+                            { modelType: section.title }
                         )}
                     >
                         <div>
@@ -122,7 +116,7 @@ function ConfirmationDialog({
                                 'Failed to delete {{modelType}} "{{displayName}}"! {{messages}}',
                                 {
                                     displayName: model.displayName,
-                                    modelType: section.name,
+                                    modelType: section.title,
                                 }
                             )}
                         </div>
