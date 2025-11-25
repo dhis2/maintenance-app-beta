@@ -16,11 +16,7 @@ import { useField } from 'react-final-form'
 import { TranslationDialog } from '../../../../components/sectionList/translation'
 import { SchemaName } from '../../../../lib'
 import css from './OptionList.module.css'
-import {
-    Option,
-    OptionDetail,
-    MAXIMUM_OPTIONS,
-} from './optionsConstants'
+import { Option, OptionDetail, MAXIMUM_OPTIONS } from './optionsConstants'
 import { OptionsErrorNotice } from './OptionsErrorNotice'
 import {
     FilterAndSort,
