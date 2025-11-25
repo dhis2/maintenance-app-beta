@@ -24,6 +24,9 @@ export const TrackedEntityAttributeFormContents = () => {
                 dataHandlingSectionName={
                     descriptor.getSection('dataHandling').name
                 }
+                searchPerformanceSectionName={
+                    descriptor.getSection('searchPerformance').name
+                }
                 legendsSectionName={descriptor.getSection('legends').name}
             />
             <CustomAttributesSection

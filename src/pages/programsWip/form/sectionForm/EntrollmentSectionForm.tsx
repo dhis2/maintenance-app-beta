@@ -92,7 +92,7 @@ export const EnrollmentSectionForm = ({
     )
 }
 
-type OnDataSetFormSubmit = FormBaseProps<PartialSectionFormValues>['onSubmit']
+type OnFormSubmit = FormBaseProps<PartialSectionFormValues>['onSubmit']
 export const EditEnrollmentSectionForm = ({
     section,
     onCancel,
@@ -107,7 +107,7 @@ export const EditEnrollmentSectionForm = ({
         enrollmentSectionSchemaSection.namePlural
     )
 
-    const onFormSubmit: OnDataSetFormSubmit = async (values, form) => {
+    const onFormSubmit: OnFormSubmit = async (values, form) => {
         const jsonPatchOperations = createJsonPatchOperations({
             values,
             dirtyFields: form.getState().dirtyFields,
@@ -171,7 +171,7 @@ export const NewEnrollmentSectionForm = ({
         enrollmentSectionSchemaSection.namePlural
     )
 
-    const onFormSubmit: OnDataSetFormSubmit = async (values) => {
+    const onFormSubmit: OnFormSubmit = async (values) => {
         const res = await handleCreate(values)
         if (res.error) {
             return createFormError(res.error)
@@ -199,7 +199,7 @@ export const NewEnrollmentSectionForm = ({
 export const EditOrNewEnrollmentSectionForm = ({
     section,
     onCancel,
-    onSubmitted: onSubmit,
+    onSubmitted,
     sectionsLength,
 }: {
     section: DisplayableModel | null | undefined
@@ -213,7 +213,7 @@ export const EditOrNewEnrollmentSectionForm = ({
     if (section === null) {
         return (
             <NewEnrollmentSectionForm
-                onSubmitted={onSubmit}
+                onSubmitted={onSubmitted}
                 onCancel={onCancel}
                 sortOrder={sectionsLength}
             />
@@ -224,7 +224,7 @@ export const EditOrNewEnrollmentSectionForm = ({
         <EditEnrollmentSectionForm
             section={section}
             onCancel={onCancel}
-            onSubmitted={onSubmit}
+            onSubmitted={onSubmitted}
         />
     )
 }

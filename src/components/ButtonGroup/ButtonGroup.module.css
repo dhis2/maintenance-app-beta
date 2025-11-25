@@ -1,0 +1,42 @@
+.buttonGroup {
+    display: inline-flex;
+    background-color: var(--colors-grey300);
+    border: none;
+    border-radius: 6px;
+    padding: 2px;
+    gap: 1px;
+    align-items: center;
+}
+
+.buttonOption {
+    flex: 1 1 auto;
+    padding: 4px 12px;
+    background-color: transparent;
+    border: none;
+    border-radius: 6px;
+    color: var(--colors-grey800);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+    outline: none;
+    text-align: center;
+}
+
+.buttonOption:hover:not(.buttonOptionSelected) {
+    background-color: var(--colors-grey400);
+}
+
+.buttonOptionSelected {
+    background-color: var(--colors-white);
+    color: var(--colors-grey900);
+    font-weight: 400;
+    border-radius: 8px;
+}
+
+.buttonOption:focus-visible {
+    outline: 2px solid var(--theme-focus);
+    outline-offset: -2px;
+}

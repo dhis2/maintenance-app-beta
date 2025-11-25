@@ -145,9 +145,9 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
                     }
 
                     return (
-                        <SectionItem
+                        <ListInFormItem
                             key={section.id}
-                            section={section}
+                            item={section}
                             schemaName={schemaName}
                             onClick={() => setSectionFormOpen(section)}
                             onDelete={() => handleDeletedSection(index)}
@@ -180,13 +180,21 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
     )
 }
 
-export const SectionItem = ({
-    section,
+export type ListItem = {
+    id: string
+    displayName: string
+    description?: string
+    deleted?: boolean
+    access?: Access
+}
+
+export const ListInFormItem = ({
+    item,
     schemaName,
     onClick,
     onDelete,
 }: {
-    section: Section
+    item: ListItem
     schemaName: SchemaName
     onClick?: () => void
     onDelete?: () => void
@@ -196,8 +204,8 @@ export const SectionItem = ({
     >(undefined)
 
     const openTranslationDialog = () => {
-        if (section.access !== undefined) {
-            setTranslationDialogModel(section as BaseListModel)
+        if (item.access !== undefined) {
+            setTranslationDialogModel(item as BaseListModel)
         }
     }
 
@@ -214,11 +222,11 @@ export const SectionItem = ({
                 >
                     <div className={css.sectionIdentifiers}>
                         <div className={css.sectionName}>
-                            {section.displayName}
+                            {item.displayName}
                         </div>
-                        {section.description && (
+                        {item.description && (
                             <div className={css.sectionDescription}>
-                                {section.description}
+                                {item.description}
                             </div>
                         )}
                     </div>
@@ -229,7 +237,7 @@ export const SectionItem = ({
                             label={i18n.t('Edit')}
                             onClick={onClick}
                         />
-                        {section.access !== undefined && (
+                        {item.access !== undefined && (
                             <MoreDropdownItem
                                 label={i18n.t('Translate')}
                                 onClick={openTranslationDialog}
@@ -238,7 +246,7 @@ export const SectionItem = ({
                         <MoreDropdownItem
                             label={i18n.t('Copy ID')}
                             onClick={() => {
-                                navigator.clipboard.writeText(section.id)
+                                navigator.clipboard.writeText(item.id)
                             }}
                         />
                         <MoreDropdownDivider />

@@ -101,7 +101,8 @@ export const ProgramCustomizationFormContents = React.memo(
                         inputWidth="400px"
                         label={i18n.t('Custom label for "Enrollment"')}
                         helpText={i18n.t(
-                            'Example use: See all data in this enrollment'
+                            'Example use: See all data in this enrollment',
+                            { nsSeparator: '~:~' }
                         )}
                         dataTest="formfields-enrollmentLabel"
                         validate={enrollmentLabelValidator}
@@ -114,7 +115,9 @@ export const ProgramCustomizationFormContents = React.memo(
                         name="eventLabel"
                         inputWidth="400px"
                         label={i18n.t('Custom label for "Event"')}
-                        helpText={i18n.t('Example use: Schedule a new event')}
+                        helpText={i18n.t('Example use: Schedule a new event', {
+                            nsSeparator: '~:~',
+                        })}
                         dataTest="formfields-eventLabel"
                         validate={eventLabelValidator}
                     />
@@ -127,7 +130,8 @@ export const ProgramCustomizationFormContents = React.memo(
                         inputWidth="400px"
                         label={i18n.t('Custom label for "Program stage"')}
                         helpText={i18n.t(
-                            'Example use: See all data in this program stage'
+                            'Example use: See all data in this program stage',
+                            { nsSeparator: '~:~' }
                         )}
                         dataTest="formfields-programStageLabel"
                         validate={programStageLabelValidator}
