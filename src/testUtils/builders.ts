@@ -44,7 +44,7 @@ import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/in
 import { indicatorListSchema } from '../pages/indicators/form/indicatorSchema'
 import { indicatorTypeListSchema } from '../pages/indicatorTypes/form/indicatorTypesSchema'
 import { legendSetListSchema } from '../pages/legendSets/form/legendSetListSchema'
-import { localeFormSchema } from '../pages/locales/form'
+import { localeListSchema } from '../pages/locales/form'
 import { OptionGroupListSchema } from '../pages/optionGroups/form/OptionGroupFormSchema'
 import {
     optionGroupSetFormSchema,
@@ -325,7 +325,7 @@ export const testOrganisationUnitGroup = (
 })
 
 export const testLocales = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(localeFormSchema, {
+    ...generateMock(localeListSchema, {
         mockeryMapper,
     }),
     ...overwrites,

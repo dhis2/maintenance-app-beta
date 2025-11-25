@@ -210,7 +210,10 @@ export const modelListViewsConfig = {
     locale: {
         columns: {
             available: ['created', 'id', 'lastUpdated'],
-            default: ['name', { label: i18n.t('Locale'), path: 'locale' }],
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Locale'), path: 'locale' },
+            ],
             overrideDefaultAvailable: true,
         },
         filters: { default: [], overrideDefaultAvailable: true },

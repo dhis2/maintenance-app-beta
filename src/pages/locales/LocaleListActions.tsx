@@ -39,6 +39,7 @@ export const LocaleListActions = ({
                     small
                     secondary
                     onClick={() => setOpen(!open)}
+                    dataTest="row-actions-menu-button"
                     icon={<IconMore24 color={colors.grey600} />}
                 />
                 {open && (
@@ -48,6 +49,7 @@ export const LocaleListActions = ({
                         placement="bottom-end"
                         reference={ref}
                         onClickOutside={() => setOpen(false)}
+                        dataTest="row-actions-menu"
                     >
                         <FlyoutMenu>
                             <MenuItem

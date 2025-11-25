@@ -1,6 +1,6 @@
 import { FetchError, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Input, InputEventPayload } from '@dhis2/ui'
+import { Button, Input, InputEventPayload } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
@@ -18,7 +18,6 @@ import {
 } from '../../components/sectionList/detailsPanel'
 import { useModelListView } from '../../components/sectionList/listView'
 import { ModelValueRenderer } from '../../components/sectionList/modelValue/ModelValueRenderer'
-import css from '../../components/sectionList/SectionList.module.css'
 import { SectionListTitle } from '../../components/sectionList/SectionListTitle'
 import { Toolbar } from '../../components/sectionList/toolbar'
 import { useSelectedModels } from '../../components/sectionList/useSelectedModels'
@@ -29,6 +28,7 @@ import {
     useNonSchemaSectionHandleOrThrow,
 } from '../../lib'
 import { ModelCollection, PagedResponse, WrapQueryResponse } from '../../types'
+import css from './LocaleList.module.css'
 import { LocaleListActions } from './LocaleListActions'
 
 export type LocaleModel = BaseListModel & {
@@ -70,7 +70,7 @@ export const Component = () => {
                           manage: false,
                       },
                   }))
-                : [],
+                : undefined,
         [data?.result]
     )
 
@@ -153,14 +153,23 @@ every item when interacting with a row */
     return (
         <div>
             <SectionListTitle />
-            <Input
-                className={css.identifiableSelectionFilter}
-                placeholder={i18n.t('Search by name, code or ID')}
-                onChange={handleSetFilter}
-                value={filter}
-                dataTest="input-search-name"
-                dense
-            />
+            <div className={css.filterWrapper}>
+                <Input
+                    className={css.identifiableSelectionFilter}
+                    placeholder={i18n.t('Search by name, code or ID')}
+                    onChange={handleSetFilter}
+                    value={filter}
+                    dataTest="input-search-name"
+                    dense
+                />
+                <Button
+                    small
+                    onClick={() => setFilter('')}
+                    dataTest="clear-all-filters-button"
+                >
+                    {i18n.t('Clear all filters')}
+                </Button>
+            </div>
             <div className={css.listDetailsWrapper}>
                 <Toolbar
                     selectedModels={selectedModels}
