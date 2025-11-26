@@ -28,13 +28,10 @@
     margin-block-end: var(--spacers-dp16);
 }
 
-.optionsLoadingDiv {
-    display: flex;
-    justify-content: center;
-    width: 100% !important;
-    padding: var(--spacers-dp16);
-}
-
 .sortDisabledWarning {
     margin-block: var(--spacers-dp16);
+}
+
+.noOptionsWarning {
+    margin-block-end: var(--spacers-dp16);
 }

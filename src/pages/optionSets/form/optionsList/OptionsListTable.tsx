@@ -1,4 +1,3 @@
-import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
     ButtonStrip,
@@ -17,8 +16,7 @@ import {
     Input,
     NoticeBox,
 } from '@dhis2/ui'
-import { useQuery } from '@tanstack/react-query'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useField } from 'react-final-form'
 import {
     MoreDropdownButton,
@@ -26,99 +24,18 @@ import {
     MoreDropdownDivider,
 } from '../../../../components'
 import { TranslationDialog } from '../../../../components/sectionList/translation'
-import { SchemaName } from '../../../../lib'
+import { BaseListModel, SchemaName } from '../../../../lib'
 import css from './OptionList.module.css'
-import { Option, OptionDetail, OptionsDetails } from './optionsConstants'
-import { OptionsErrorNotice } from './OptionsErrorNotice'
 
-export const OptionsListTable = ({
-    modelId,
-    options,
-}: {
-    modelId: string
-    options: { id: string }[]
-}) => {
-    const { input: optionsInput } = useField('options', {
-        initialValue: options,
-    })
-    const [filterValue, setFilterValue] = useState<string | undefined>()
-
-    const engine = useDataEngine()
-    const query = {
-        result: {
-            resource: `optionSets/${modelId}`,
-            params: {
-                fields: 'options[id,name,code,displayName,access]',
-            },
-        },
-    }
-
-    const { error, data } = useQuery({
-        queryKey: [query],
-        queryFn: ({ queryKey: [query], signal }) => {
-            return engine.query(query, { signal }) as any
-        },
-    })
-    const optionsDetails = useMemo(
-        () =>
-            data?.result?.options?.reduce(
-                (acc: OptionsDetails, cv: OptionDetail) => {
-                    acc[cv.id] = cv
-                    return acc
-                },
-                {} as OptionsDetails
-            ),
-        [data]
-    )
-
-    const sortOptions = useCallback(
-        (property: string, desc: boolean) => {
-            const newOptionsOrder = [...optionsInput.value]
-            if (desc) {
-                newOptionsOrder.sort((a, b) =>
-                    optionsDetails[b.id][property].localeCompare(
-                        optionsDetails[a.id][property],
-                        undefined,
-                        { numeric: true, sensitivity: 'base' }
-                    )
-                )
-            } else {
-                newOptionsOrder.sort((a, b) =>
-                    optionsDetails[a.id][property].localeCompare(
-                        optionsDetails[b.id][property],
-                        undefined,
-                        { numeric: true, sensitivity: 'base' }
-                    )
-                )
-            }
-            optionsInput.onChange(newOptionsOrder)
-        },
-        [optionsInput, optionsDetails]
-    )
-
-    if (error) {
-        return <OptionsErrorNotice />
-    }
-    if (!data) {
-        return null
-    }
-
-    return (
-        <>
-            <FilterAndSort
-                filterValue={filterValue}
-                setFilterValue={setFilterValue}
-                sortOptions={sortOptions}
-            />
-            <OptionsTable
-                optionsDetails={optionsDetails}
-                filter={filterValue ?? ''}
-            />
-        </>
-    )
+type OptionDetail = BaseListModel & {
+    name: string
+    code: string
+    deleted?: boolean
 }
 
-export const TableHeadLayout = () => (
+const SUGGESTED_MAXIMUM_OPTIONS = 500
+
+const TableHeadLayout = () => (
     <TableHead>
         <DataTableRow>
             <DataTableColumnHeader>{i18n.t('Name')}</DataTableColumnHeader>
@@ -128,23 +45,28 @@ export const TableHeadLayout = () => (
     </TableHead>
 )
 
-export const FilterAndSort = ({
+const FilterAndSort = ({
     filterValue,
     setFilterValue,
+    setPageCount,
     sortOptions,
-    disableSort = false,
+    showEditWarning = false,
 }: {
     filterValue: string | undefined
     setFilterValue: (s: string | undefined) => void
+    setPageCount: (n: number) => void
     sortOptions: (property: string, desc: boolean) => void
-    disableSort?: boolean
+    showEditWarning?: boolean
 }) => (
     <>
         <div>
             <Input
                 className={css.identifiableSelectionFilter}
                 placeholder={i18n.t('Search by name or code')}
-                onChange={(e) => setFilterValue(e.value)}
+                onChange={(e) => {
+                    setFilterValue(e.value)
+                    setPageCount(1)
+                }}
                 value={filterValue}
                 dense
             />
@@ -152,40 +74,47 @@ export const FilterAndSort = ({
         <div className={css.sortButtons}>
             <ButtonStrip>
                 <Button>{i18n.t('Add option')}</Button>
-                {!disableSort && (
-                    <ButtonStrip>
-                        <Button
-                            disabled={!!filterValue}
-                            onClick={() => sortOptions('name', false)}
-                        >
-                            {i18n.t('Sort by name (A-Z)')}
-                        </Button>
-                        <Button
-                            disabled={!!filterValue}
-                            onClick={() => sortOptions('name', true)}
-                        >
-                            {i18n.t('Sort by name (Z-A)')}
-                        </Button>
-                        <Button
-                            disabled={!!filterValue}
-                            onClick={() => sortOptions('code', false)}
-                        >
-                            {i18n.t('Sort by code (asc)')}
-                        </Button>
-                        <Button
-                            disabled={!!filterValue}
-                            onClick={() => sortOptions('code', true)}
-                        >
-                            {i18n.t('Sort by code (desc)')}
-                        </Button>
-                    </ButtonStrip>
-                )}
+
+                <Button
+                    disabled={!!filterValue}
+                    onClick={() => sortOptions('name', false)}
+                >
+                    {i18n.t('Sort by name (A-Z)')}
+                </Button>
+                <Button
+                    disabled={!!filterValue}
+                    onClick={() => sortOptions('name', true)}
+                >
+                    {i18n.t('Sort by name (Z-A)')}
+                </Button>
+                <Button
+                    disabled={!!filterValue}
+                    onClick={() => sortOptions('code', false)}
+                >
+                    {i18n.t('Sort by code (asc)')}
+                </Button>
+                <Button
+                    disabled={!!filterValue}
+                    onClick={() => sortOptions('code', true)}
+                >
+                    {i18n.t('Sort by code (desc)')}
+                </Button>
             </ButtonStrip>
         </div>
+        {showEditWarning && (
+            <div className={css.sortDisabledWarning}>
+                <NoticeBox>
+                    {i18n.t(
+                        'Editing options may be slow with more than {{maximumNumberOfOptions}} options',
+                        { maximumNumberOfOptions: SUGGESTED_MAXIMUM_OPTIONS }
+                    )}
+                </NoticeBox>
+            </div>
+        )}
     </>
 )
 
-export const FilterWarning = ({
+const FilterWarning = ({
     filter,
     hiddenRowsCount,
 }: {
@@ -207,10 +136,9 @@ export const FilterWarning = ({
     )
 }
 
-export const OptionRow = ({
+const OptionRow = ({
     deleted,
-    optionDetail,
-    disableManualSort,
+    option,
     totalLength,
     index,
     undoDelete,
@@ -219,8 +147,7 @@ export const OptionRow = ({
     setTranslationDialogModelID,
 }: {
     deleted: boolean
-    optionDetail: OptionDetail
-    disableManualSort: boolean
+    option: OptionDetail
     totalLength: number
     index: number
     undoDelete: (id: string) => void
@@ -228,46 +155,37 @@ export const OptionRow = ({
     onMove: (id: string, moveIndexBy: number) => void
     setTranslationDialogModelID: (id: string) => void
 }) => (
-    <DataTableRow
-        className={deleted ? css.deletedRow : ''}
-        key={optionDetail.id}
-    >
-        <DataTableCell>{optionDetail?.name}</DataTableCell>
-        <DataTableCell>{optionDetail?.code}</DataTableCell>
+    <DataTableRow className={deleted ? css.deletedRow : ''} key={option.id}>
+        <DataTableCell>{option?.name}</DataTableCell>
+        <DataTableCell>{option?.code}</DataTableCell>
         <DataTableCell>
             <div className={css.actionButtons}>
                 {deleted ? (
                     <div className={css.deletedOption}>
                         <span>{i18n.t('Will be removed on save')}</span>
-                        <Button
-                            small
-                            onClick={() => undoDelete(optionDetail.id)}
-                        >
+                        <Button small onClick={() => undoDelete(option.id)}>
                             {i18n.t('Restore option')}
                         </Button>
                     </div>
                 ) : (
                     <ButtonStrip>
-                        {!disableManualSort && (
-                            <ButtonStrip>
-                                <Button
-                                    small
-                                    className={css.wideButton}
-                                    secondary
-                                    icon={<IconArrowUp16 />}
-                                    onClick={() => onMove(optionDetail.id, -1)}
-                                    disabled={index === 0}
-                                />
-                                <Button
-                                    small
-                                    className={css.wideButton}
-                                    secondary
-                                    icon={<IconArrowDown16 />}
-                                    onClick={() => onMove(optionDetail.id, 1)}
-                                    disabled={index === totalLength - 1}
-                                />
-                            </ButtonStrip>
-                        )}
+                        <Button
+                            small
+                            className={css.wideButton}
+                            secondary
+                            icon={<IconArrowUp16 />}
+                            onClick={() => onMove(option.id, -1)}
+                            disabled={index === 0}
+                        />
+                        <Button
+                            small
+                            className={css.wideButton}
+                            secondary
+                            icon={<IconArrowDown16 />}
+                            onClick={() => onMove(option.id, 1)}
+                            disabled={index === totalLength - 1}
+                        />
+
                         <Button
                             small
                             className={css.wideButton}
@@ -276,13 +194,11 @@ export const OptionRow = ({
                         />
                         <MoreDropdownButton>
                             <MoreDropdownItem label={i18n.t('Edit')} />
-                            {optionDetail.access !== undefined && (
+                            {option.access !== undefined && (
                                 <MoreDropdownItem
                                     label={i18n.t('Translate')}
                                     onClick={() => {
-                                        setTranslationDialogModelID(
-                                            optionDetail.id
-                                        )
+                                        setTranslationDialogModelID(option.id)
                                     }}
                                 />
                             )}
@@ -290,7 +206,7 @@ export const OptionRow = ({
                             <MoreDropdownItem
                                 label={i18n.t('Delete')}
                                 destructive
-                                onClick={() => onDelete(optionDetail.id)}
+                                onClick={() => onDelete(option.id)}
                             />
                         </MoreDropdownButton>
                     </ButtonStrip>
@@ -300,26 +216,46 @@ export const OptionRow = ({
     </DataTableRow>
 )
 
-const OptionsTable = ({
-    optionsDetails,
-    filter,
-}: {
-    optionsDetails: OptionsDetails
-    filter: string
-}) => {
-    const { input: optionsInput } = useField('options')
+export const OptionsListTable = () => {
     const [pageSize, setPageSize] = useState<number>(10)
     const [pageCount, setPageCount] = useState<number>(1)
+    const { input: optionsInput } = useField('options')
+    const [filter, setFilterValue] = useState<string | undefined>()
 
     const [translationDialogModelID, setTranslationDialogModelID] = useState<
         string | undefined
     >()
 
+    const sortOptions = useCallback(
+        (property: string, desc: boolean) => {
+            const newOptionsOrder = [...optionsInput.value]
+            if (desc) {
+                newOptionsOrder.sort((a, b) =>
+                    b[property].localeCompare(a[property], undefined, {
+                        numeric: true,
+                        sensitivity: 'base',
+                    })
+                )
+            } else {
+                newOptionsOrder.sort((a, b) =>
+                    a[property].localeCompare(b[property], undefined, {
+                        numeric: true,
+                        sensitivity: 'base',
+                    })
+                )
+            }
+            optionsInput.onChange(newOptionsOrder)
+            setPageCount(1)
+        },
+        [optionsInput, setPageCount]
+    )
+
     const onMove = (id: string, moveIndexBy: number) => {
         const newOptionsOrder = [...optionsInput.value]
         const index = newOptionsOrder.findIndex((s) => s.id === id)
+        const movedItem = newOptionsOrder[index]
         newOptionsOrder.splice(index, 1)
-        newOptionsOrder.splice(index + moveIndexBy, 0, { id })
+        newOptionsOrder.splice(index + moveIndexBy, 0, movedItem)
         optionsInput.onChange(newOptionsOrder)
     }
 
@@ -338,15 +274,11 @@ const OptionsTable = ({
     }
 
     const filteredOptions = filter
-        ? optionsInput.value.filter((o: Option) => {
+        ? optionsInput.value.filter((o: OptionDetail) => {
               const lowerCaseFilter = filter.toLowerCase()
               if (
-                  optionsDetails[o.id].code
-                      .toLowerCase()
-                      .includes(lowerCaseFilter) ||
-                  optionsDetails[o.id].name
-                      .toLowerCase()
-                      .includes(lowerCaseFilter)
+                  o.code.toLowerCase().includes(lowerCaseFilter) ||
+                  o.name.toLowerCase().includes(lowerCaseFilter)
               ) {
                   return true
               }
@@ -362,65 +294,89 @@ const OptionsTable = ({
     )
 
     if (optionsInput.value.length === 0) {
-        return <NoticeBox>{i18n.t('No options have been added yet')}</NoticeBox>
+        return (
+            <>
+                <NoticeBox className={css.noOptionsWarning}>
+                    {i18n.t('No options have been added yet')}
+                </NoticeBox>
+                <div className={css.sortButtons}>
+                    <ButtonStrip>
+                        <Button>{i18n.t('Add option')}</Button>
+                    </ButtonStrip>
+                </div>
+            </>
+        )
     }
 
     return (
         <>
-            <FilterWarning
-                filter={filter}
-                hiddenRowsCount={
-                    optionsInput.value.length - filteredOptions.length
+            <FilterAndSort
+                filterValue={filter}
+                setFilterValue={setFilterValue}
+                setPageCount={setPageCount}
+                sortOptions={sortOptions}
+                showEditWarning={
+                    optionsInput?.value?.length > SUGGESTED_MAXIMUM_OPTIONS
                 }
             />
-            <DataTable>
-                <TableHeadLayout />
-                <TableBody>
-                    {displayOptions?.map((option: Option, index: number) => (
-                        <OptionRow
-                            key={option.id}
-                            deleted={!!option.deleted}
-                            optionDetail={optionsDetails[option.id]}
-                            disableManualSort={!!filter}
-                            totalLength={totalLength}
-                            index={index + pageSize * (pageCount - 1)}
-                            undoDelete={undoDelete}
-                            onDelete={onDelete}
-                            onMove={onMove}
-                            setTranslationDialogModelID={
-                                setTranslationDialogModelID
-                            }
-                        />
-                    ))}
-                </TableBody>
-                <TableFoot>
-                    <DataTableRow>
-                        <DataTableCell colSpan="100%">
-                            <Pagination
-                                page={pageCount}
-                                pageSize={pageSize}
-                                pageCount={totalPageCount}
-                                total={totalLength}
-                                onPageSizeChange={(v) => {
-                                    setPageSize(v)
-                                }}
-                                onPageChange={(v) => {
-                                    setPageCount(v)
-                                }}
-                            />
-                        </DataTableCell>
-                    </DataTableRow>
-                </TableFoot>
-            </DataTable>
-            {translationDialogModelID && (
-                <TranslationDialog
-                    model={optionsDetails[translationDialogModelID]}
-                    onClose={() => {
-                        setTranslationDialogModelID(undefined)
-                    }}
-                    schemaName={SchemaName.option}
+            <div>
+                <FilterWarning
+                    filter={filter}
+                    hiddenRowsCount={optionsInput.value.length - totalLength}
                 />
-            )}
+                <DataTable>
+                    <TableHeadLayout />
+                    <TableBody>
+                        {displayOptions?.map(
+                            (option: OptionDetail, index: number) => (
+                                <OptionRow
+                                    key={option.id}
+                                    deleted={!!option.deleted}
+                                    option={option}
+                                    totalLength={totalLength}
+                                    index={index + pageSize * (pageCount - 1)}
+                                    undoDelete={undoDelete}
+                                    onDelete={onDelete}
+                                    onMove={onMove}
+                                    setTranslationDialogModelID={
+                                        setTranslationDialogModelID
+                                    }
+                                />
+                            )
+                        )}
+                    </TableBody>
+                    <TableFoot>
+                        <DataTableRow>
+                            <DataTableCell colSpan="100%">
+                                <Pagination
+                                    page={pageCount}
+                                    pageSize={pageSize}
+                                    pageCount={totalPageCount}
+                                    total={totalLength}
+                                    onPageSizeChange={(v) => {
+                                        setPageSize(v)
+                                    }}
+                                    onPageChange={(v) => {
+                                        setPageCount(v)
+                                    }}
+                                />
+                            </DataTableCell>
+                        </DataTableRow>
+                    </TableFoot>
+                </DataTable>
+                {translationDialogModelID && (
+                    <TranslationDialog
+                        model={optionsInput.value.find(
+                            (o: OptionDetail) =>
+                                o.id === translationDialogModelID
+                        )}
+                        onClose={() => {
+                            setTranslationDialogModelID(undefined)
+                        }}
+                        schemaName={SchemaName.option}
+                    />
+                )}
+            </div>
         </>
     )
 }

@@ -34,6 +34,7 @@ const fieldFilters = [
     'description',
     'code',
     'valueType',
+    'options[id,name,code,access]',
 ] as const
 
 const section = SECTIONS_MAP.optionSet
@@ -47,10 +48,7 @@ export type OptionSetFormValuesExpanded = OptionSetFormValues & {
     options?: { id: string }[]
 }
 
-export const useOnSubmitOptionsSetsEdit = (
-    modelId: string,
-    setManuallyDeleted: React.Dispatch<React.SetStateAction<string>>
-) => {
+export const useOnSubmitOptionsSetsEdit = (modelId: string) => {
     const submitEdit: EnhancedOnSubmit<OptionSetFormValuesExpanded> =
         useOnSubmitEdit({
             section,
@@ -77,12 +75,6 @@ export const useOnSubmitOptionsSetsEdit = (
             const nonDeletedOptions = (options ?? []).filter(
                 (option: { id: string; deleted?: boolean }) => !option?.deleted
             )
-            const deletedOptionIds = (options ?? [])
-                .filter(
-                    (option: { id: string; deleted?: boolean }) =>
-                        option?.deleted
-                )
-                .map((o) => o.id)
 
             if (error) {
                 return error
@@ -93,32 +85,10 @@ export const useOnSubmitOptionsSetsEdit = (
                 options: nonDeletedOptions.length > 0 ? nonDeletedOptions : [],
             } as OptionSetFormValuesExpanded
 
-            // if only options is dirty, and there are no non-deleted options, force submitEdit to mark changes
-            const dirtyFields = form.getState()?.dirtyFields
-            const onlyOptionsDirty =
-                Object.keys(dirtyFields).length === 1 && dirtyFields?.options
-
-            const submitPromise =
-                onlyOptionsDirty && nonDeletedOptions.length === 0
-                    ? submitEdit(trimmedValues, form, {
-                          ...submitOptions,
-                          treatAsWithChanges: true,
-                      })
-                    : submitEdit(trimmedValues, form, submitOptions)
-
             // update form state to remove deleted options
             form.change('options', nonDeletedOptions)
-            const stringCompare = (a: string, b: string) => a.localeCompare(b)
-            setManuallyDeleted((prev) => {
-                if (prev.length === 0) {
-                    return deletedOptionIds.join(';')
-                }
-                return [...prev.split(';'), ...deletedOptionIds]
-                    .sort(stringCompare)
-                    .join(';')
-            })
 
-            return submitPromise
+            return submitEdit(trimmedValues, form, submitOptions)
         },
         [submitEdit, handleDeletions]
     )
@@ -139,15 +109,11 @@ export const Component = () => {
         queryFn: queryFn<OptionSetFormValues>,
     })
     const initialValues = optionSetQuery.data
-    const [manuallyDeleted, setManuallyDeleted] = useState<string>('')
 
     return (
         <FormBase
             onSubmit={
-                useOnSubmitOptionsSetsEdit(
-                    modelId,
-                    setManuallyDeleted
-                ) as EnhancedOnSubmit<any>
+                useOnSubmitOptionsSetsEdit(modelId) as EnhancedOnSubmit<any>
             }
             initialValues={initialValues}
             validate={validate}
@@ -159,9 +125,7 @@ export const Component = () => {
                         sidebar={<DefaultSectionedFormSidebar />}
                     >
                         <form onSubmit={handleSubmit}>
-                            <OptionSetFormContents
-                                manuallyDeleted={manuallyDeleted}
-                            />
+                            <OptionSetFormContents />
                             <DefaultFormFooter cancelTo="/optionSets" />
                         </form>
                         <SectionedFormErrorNotice />

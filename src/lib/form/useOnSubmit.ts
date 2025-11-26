@@ -37,7 +37,6 @@ export type EnhancedOnSubmit<TValues> = (
     form: FormApi<TValues>,
     options?: Navigateable & {
         submitAction?: SubmitAction
-        treatAsWithChanges?: boolean
     }
 ) => SubmissionErrors | Promise<SubmissionErrors> | void
 
@@ -166,18 +165,6 @@ export const useOnSubmitEdit = <TFormValues extends IdentifiableObject>({
                 options?.navigateTo === undefined
                     ? defaultNavigateTo
                     : options.navigateTo
-
-            // this forces a success alert even for forms with no changes
-            // when changes are outside normal form field handling
-            if (options?.treatAsWithChanges) {
-                onEditCompletedSuccessfully({
-                    withChanges: true,
-                    response: null,
-                    navigateTo,
-                    submitAction: options?.submitAction,
-                })
-                return
-            }
 
             if (jsonPatchOperations.length < 1) {
                 onEditCompletedSuccessfully({
