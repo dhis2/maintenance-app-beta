@@ -9,7 +9,6 @@ import {
     SectionedFormErrorNotice,
     SectionedFormLayout,
 } from '../../components'
-import { useHandleOnSubmitEditOptionSetsDeletions } from '../../components/sectionedForm/useHandleOnSubmitEditOptionSetsDeletions'
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     DEFAULT_FIELD_FILTERS,
@@ -25,6 +24,7 @@ import { OptionSet } from '../../types/models'
 import { OptionSetFormDescriptor } from './form/formDescriptor'
 import { OptionSetFormContents } from './form/OptionSetFormContents'
 import { validate } from './form/optionSetSchema'
+import { useHandleOnSubmitEditOptionSetsDeletions } from './form/optionsList/useHandleOnSubmitEditOptionSetsDeletions'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,

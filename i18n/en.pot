@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-24T14:12:56.751Z\n"
-"PO-Revision-Date: 2025-11-24T14:12:56.751Z\n"
+"POT-Creation-Date: 2025-11-26T08:27:35.724Z\n"
+"PO-Revision-Date: 2025-11-26T08:27:35.724Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -845,9 +845,6 @@ msgstr "Translation updated successfully"
 
 msgid "Save translations"
 msgstr "Save translations"
-
-msgid "There was an error deleting options: {{optionIds}}"
-msgstr "There was an error deleting options: {{optionIds}}"
 
 msgid "Can edit and capture"
 msgstr "Can edit and capture"
@@ -3039,11 +3036,17 @@ msgstr "Basic Information"
 msgid "Set up the basic information for this option set."
 msgstr "Set up the basic information for this option set."
 
-msgid "Option set must be saved before options can be added"
-msgstr "Option set must be saved before options can be added"
+msgid "Option Set"
+msgstr "Option Set"
 
 msgid "Something went wrong when loading options"
 msgstr "Something went wrong when loading options"
+
+msgid "Define options for this option set."
+msgstr "Define options for this option set."
+
+msgid "Option set must be saved before options can be added"
+msgstr "Option set must be saved before options can be added"
 
 msgid "Search by name or code"
 msgstr "Search by name or code"
@@ -3086,11 +3089,8 @@ msgstr ""
 "Sort functionality is not available with more than "
 "{{maximumNumberOfOptions}} options"
 
-msgid "Define options for this option set."
-msgstr "Define options for this option set."
-
-msgid "Option Set"
-msgstr "Option Set"
+msgid "There was an error deleting options: {{optionIds}}"
+msgstr "There was an error deleting options: {{optionIds}}"
 
 msgid "Set up the basic information for this organisational unit group set."
 msgstr "Set up the basic information for this organisational unit group set."

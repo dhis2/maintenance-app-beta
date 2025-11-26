@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import { QueryClient } from '@tanstack/react-query'
 import { useMemo } from 'react'
-import { createFormError } from '../../lib'
-import { DataEngine, ModelSection } from '../../types'
+import { createFormError } from '../../../../lib'
+import { DataEngine, ModelSection } from '../../../../types'
 
 /* eslint-disable max-params */
 export const useHandleOnSubmitEditOptionSetsDeletions = (
