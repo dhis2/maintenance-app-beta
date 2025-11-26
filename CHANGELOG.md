@@ -1,3 +1,10 @@
+## [0.99.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.99.0...v0.99.1) (2025-11-26)
+
+
+### Bug Fixes
+
+* bidirectional bug in relationship type form ([#704](https://github.com/dhis2/maintenance-app-beta/issues/704)) ([0fd6c9a](https://github.com/dhis2/maintenance-app-beta/commit/0fd6c9a40f182989c04b346c667cd1909873e225))
+
 # [0.99.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.98.0...v0.99.0) (2025-11-24)
 
 
