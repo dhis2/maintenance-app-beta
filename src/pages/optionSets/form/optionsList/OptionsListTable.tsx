@@ -47,13 +47,13 @@ const TableHeadLayout = () => (
 
 const FilterAndSort = ({
     filterValue,
-    setFilterValue,
+    setFilter,
     setPageCount,
     sortOptions,
     showEditWarning = false,
 }: {
     filterValue: string | undefined
-    setFilterValue: (s: string | undefined) => void
+    setFilter: (s: string | undefined) => void
     setPageCount: (n: number) => void
     sortOptions: (property: string, desc: boolean) => void
     showEditWarning?: boolean
@@ -64,7 +64,7 @@ const FilterAndSort = ({
                 className={css.identifiableSelectionFilter}
                 placeholder={i18n.t('Search by name or code')}
                 onChange={(e) => {
-                    setFilterValue(e.value)
+                    setFilter(e.value)
                     setPageCount(1)
                 }}
                 value={filterValue}
@@ -220,7 +220,7 @@ export const OptionsListTable = () => {
     const [pageSize, setPageSize] = useState<number>(10)
     const [pageCount, setPageCount] = useState<number>(1)
     const { input: optionsInput } = useField('options')
-    const [filter, setFilterValue] = useState<string | undefined>()
+    const [filter, setFilter] = useState<string | undefined>()
 
     const [translationDialogModelID, setTranslationDialogModelID] = useState<
         string | undefined
@@ -312,7 +312,7 @@ export const OptionsListTable = () => {
         <>
             <FilterAndSort
                 filterValue={filter}
-                setFilterValue={setFilterValue}
+                setFilter={setFilter}
                 setPageCount={setPageCount}
                 sortOptions={sortOptions}
                 showEditWarning={

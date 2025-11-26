@@ -1,6 +1,6 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
@@ -85,8 +85,10 @@ export const useOnSubmitOptionsSetsEdit = (modelId: string) => {
                 options: nonDeletedOptions.length > 0 ? nonDeletedOptions : [],
             } as OptionSetFormValuesExpanded
 
-            // update form state to remove deleted options
-            form.change('options', nonDeletedOptions)
+            // if options have been deleted, update form state to remove deleted options
+            if (options?.length !== nonDeletedOptions.length) {
+                form.change('options', nonDeletedOptions)
+            }
 
             return submitEdit(trimmedValues, form, submitOptions)
         },
