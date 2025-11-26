@@ -35,10 +35,8 @@ export function RelationshipTypeFormFields() {
 
     useEffect(() => {
         if (!bidirectional) {
-            const toFromNameValue = form.getFieldState('toFromName')?.value
-            if (toFromNameValue) {
-                form.change('toFromName', undefined)
-            }
+            form.change('toFromName', undefined)
+            form.resetFieldState?.('toFromName')
         }
     }, [bidirectional, form])
 
@@ -104,7 +102,7 @@ export function RelationshipTypeFormFields() {
                     />
                 </StandardFormField>
 
-                {bidirectional && (
+                <div hidden={!bidirectional}>
                     <StandardFormField>
                         <Field
                             component={InputFieldFF}
@@ -113,12 +111,12 @@ export function RelationshipTypeFormFields() {
                             label={i18n.t(
                                 'Relationship name seen from receiving entity (required)'
                             )}
-                            required
+                            required={bidirectional}
                             inputWidth="400px"
                             validateFields={[]}
                         />
                     </StandardFormField>
-                )}
+                </div>
             </SectionedFormSection>
 
             <SectionedFormSection

@@ -226,16 +226,15 @@ describe('Relationship types form tests', () => {
         it('should show toFromName field only when bidirectional is checked', async () => {
             const { screen } = await renderForm()
 
-            expect(
-                screen.queryByTestId('formfields-toFromName')
-            ).not.toBeInTheDocument()
+            const hiddenField = screen.queryByTestId('formfields-toFromName')
+            expect(hiddenField).not.toBeVisible()
 
             await uiActions.clickOnCheckboxField('bidirectional', screen)
 
             const toFromNameField = await screen.findByTestId(
                 'formfields-toFromName'
             )
-            expect(toFromNameField).toBeInTheDocument()
+            expect(toFromNameField).toBeVisible()
         })
     })
 
