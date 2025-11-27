@@ -10,6 +10,7 @@ import {
 } from '../../../lib'
 import { BasicInfoFormContents } from './BasicInfoFormContents'
 import { OptionSetFormDescriptor } from './formDescriptor'
+import { OptionsListFormContents } from './optionsList/OptionsListFormContents'
 
 export const OptionSetFormContents = () => {
     const descriptor = useSectionedFormContext<typeof OptionSetFormDescriptor>()
@@ -19,6 +20,9 @@ export const OptionSetFormContents = () => {
         <SectionedFormSections>
             <BasicInfoFormContents
                 name={descriptor.getSection('basicInfo').name}
+            />
+            <OptionsListFormContents
+                name={descriptor.getSection('options').name}
             />
             <CustomAttributesSection
                 schemaSection={SECTIONS_MAP.optionSet}

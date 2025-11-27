@@ -1,5 +1,6 @@
-import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import { useDataEngine } from '@dhis2/app-runtime'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
@@ -15,11 +16,15 @@ import {
     SECTIONS_MAP,
     useOnSubmitEdit,
 } from '../../lib'
+import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PlainResourceQuery } from '../../types'
+import { PickWithFieldFilters } from '../../types/generated'
+import { OptionSet } from '../../types/models'
 import { OptionSetFormDescriptor } from './form/formDescriptor'
 import { OptionSetFormContents } from './form/OptionSetFormContents'
-import { OptionSetFormValues, validate } from './form/optionSetSchema'
+import { validate } from './form/optionSetSchema'
+import { useHandleOnSubmitEditOptionSetsDeletions } from './form/optionsList/useHandleOnSubmitEditOptionSetsDeletions'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -29,12 +34,70 @@ const fieldFilters = [
     'description',
     'code',
     'valueType',
-    'options[id,code,displayName,sortOrder,style]',
+    'options[id,name,code,access]',
 ] as const
+
+const section = SECTIONS_MAP.optionSet
+
+export type OptionSetFormValues = PickWithFieldFilters<
+    OptionSet,
+    typeof fieldFilters
+>
+
+export type OptionSetFormValuesExpanded = OptionSetFormValues & {
+    options?: { id: string }[]
+}
+
+export const useOnSubmitOptionsSetsEdit = (modelId: string) => {
+    const submitEdit: EnhancedOnSubmit<OptionSetFormValuesExpanded> =
+        useOnSubmitEdit({
+            section,
+            modelId,
+        })
+    const dataEngine = useDataEngine()
+    const queryClient = useQueryClient()
+
+    const handleDeletions = useHandleOnSubmitEditOptionSetsDeletions(
+        section,
+        'options',
+        dataEngine,
+        queryClient,
+        modelId
+    )
+
+    return useMemo<EnhancedOnSubmit<OptionSetFormValuesExpanded>>(
+        () => async (values, form, submitOptions) => {
+            const formValues = form.getState().values
+            const { options, ...otherValues } = formValues
+
+            const { error } = await handleDeletions(options ?? [])
+
+            const nonDeletedOptions = (options ?? []).filter(
+                (option: { id: string; deleted?: boolean }) => !option?.deleted
+            )
+
+            if (error) {
+                return error
+            }
+            // any options that have not been deleted should be posted to update sort order
+            const trimmedValues = {
+                ...otherValues,
+                options: nonDeletedOptions.length > 0 ? nonDeletedOptions : [],
+            } as OptionSetFormValuesExpanded
+
+            // if options have been deleted, update form state to remove deleted options
+            if (options?.length !== nonDeletedOptions.length) {
+                form.change('options', nonDeletedOptions)
+            }
+
+            return submitEdit(trimmedValues, form, submitOptions)
+        },
+        [submitEdit, handleDeletions]
+    )
+}
 
 export const Component = () => {
     const modelId = useParams().id as string
-    const section = SECTIONS_MAP.optionSet
     const queryFn = useBoundResourceQueryFn()
 
     const optionSetQuery = useQuery({
@@ -51,7 +114,9 @@ export const Component = () => {
 
     return (
         <FormBase
-            onSubmit={useOnSubmitEdit({ section, modelId })}
+            onSubmit={
+                useOnSubmitOptionsSetsEdit(modelId) as EnhancedOnSubmit<any>
+            }
             initialValues={initialValues}
             validate={validate}
             subscription={{}}
