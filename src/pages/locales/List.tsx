@@ -2,11 +2,11 @@ import { FetchError, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button, Input, InputEventPayload } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
+import { memoize } from 'lodash'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
     DefaultSectionListMessage,
     SectionList,
-    SectionListRow,
     SelectedColumn,
 } from '../../components'
 import { ClientDateTime } from '../../components/date'
@@ -30,10 +30,14 @@ import {
 import { ModelCollection, PagedResponse, WrapQueryResponse } from '../../types'
 import css from './LocaleList.module.css'
 import { LocaleListActions } from './LocaleListActions'
+import { LocaleListRow } from './LocaleListRow'
 
-export type LocaleModel = BaseListModel & {
+export type LocaleModel = {
+    id: string
+    displayName: string
     lastUpdated?: string
     created?: string
+    locale: string
 }
 
 type ModelListResponse = WrapQueryResponse<PagedResponse<LocaleModel, string>>
@@ -57,20 +61,7 @@ export const Component = () => {
     })
 
     const localesList = useMemo(
-        () =>
-            Array.isArray(data?.result)
-                ? data?.result.map((item: LocaleModel) => ({
-                      ...item,
-                      access: {
-                          read: true,
-                          write: true,
-                          update: false,
-                          delete: true,
-                          externalize: false,
-                          manage: false,
-                      },
-                  }))
-                : undefined,
+        () => (Array.isArray(data?.result) ? data?.result : undefined),
         [data?.result]
     )
 
@@ -89,13 +80,25 @@ export const Component = () => {
                     d.displayName
                         .toLowerCase()
                         .includes(filter.toLowerCase()) ||
-                    d.id.toLowerCase().includes(filter.toLowerCase())
+                    d.id.toLowerCase().includes(filter.toLowerCase()) ||
+                    d.locale.toLowerCase().includes(filter.toLowerCase())
             )
         )
     }, [filter, localesList])
 
-    const { selectedModels, checkAllSelected, add, remove, toggle, clearAll } =
+    const { selectedModels, add, remove, toggle, clearAll } =
         useSelectedModels()
+
+    const checkAllSelected = useMemo(
+        () =>
+            memoize((data: BaseListModel[]) => {
+                if (!data) {
+                    return false
+                }
+                return data.every((model) => selectedModels.has(model.id))
+            }),
+        [selectedModels]
+    )
 
     const handleSelectAll = useCallback(
         (checked: boolean) => {
@@ -132,9 +135,9 @@ export const Component = () => {
 every item when interacting with a row */
     const renderColumnValue: (
         { path }: SelectedColumn,
-        model: BaseListModel
+        model: LocaleModel
     ) => React.JSX.Element = useCallback(
-        ({ path }: SelectedColumn, model: BaseListModel) => {
+        ({ path }: SelectedColumn, model: LocaleModel) => {
             return (
                 <ModelValueRenderer
                     path={path}
@@ -185,7 +188,7 @@ every item when interacting with a row */
                         data={filteredData}
                     />
                     {filteredData?.map((model) => (
-                        <SectionListRow
+                        <LocaleListRow
                             key={model.id}
                             modelData={model}
                             selectedColumns={headerColumns}

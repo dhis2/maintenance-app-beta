@@ -128,7 +128,8 @@ const OrganisationUnitActionMore = ({
                             content={TOOLTIPS.noDeleteAccess}
                         >
                             <DeleteAction
-                                model={model}
+                                modelId={model.id}
+                                modelDisplayName={model.displayName}
                                 disabled={!deletable}
                                 onDeleteSuccess={() => {
                                     onDeleteSuccess()

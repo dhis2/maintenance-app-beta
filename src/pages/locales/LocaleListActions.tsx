@@ -13,13 +13,27 @@ import { ListActions } from '../../components/sectionList/listActions'
 import { DeleteAction } from '../../components/sectionList/listActions/DeleteAction'
 import css from '../../components/sectionList/listActions/SectionListActions.module.css'
 import { TooltipWrapper } from '../../components/tooltip'
-import { canDeleteModel, TOOLTIPS } from '../../lib'
+import {
+    hasAuthorityForOperation,
+    NON_SCHEMA_SECTION,
+    SchemaAuthorityType,
+    TOOLTIPS,
+    useCurrentUserAuthorities,
+} from '../../lib'
 import { LocaleModel } from './List'
 
 type LocaleActionsProps = {
     model: LocaleModel
     onShowDetailsClick: (model: LocaleModel) => void
     onDeleteSuccess: (model: LocaleModel) => void
+}
+export const useCanDeleteLocale = () => {
+    const userAuthorities = useCurrentUserAuthorities()
+    return hasAuthorityForOperation(
+        SchemaAuthorityType.DELETE,
+        NON_SCHEMA_SECTION['locale'].authorities,
+        userAuthorities
+    )
 }
 
 export const LocaleListActions = ({
@@ -30,8 +44,7 @@ export const LocaleListActions = ({
     const [open, setOpen] = useState(false)
     const ref = useRef(null)
 
-    const deletable = canDeleteModel(model)
-
+    const deletable = useCanDeleteLocale()
     return (
         <ListActions>
             <div ref={ref}>
@@ -66,7 +79,8 @@ export const LocaleListActions = ({
                                 content={TOOLTIPS.noDeleteAccess}
                             >
                                 <DeleteAction
-                                    model={model}
+                                    modelId={model.id}
+                                    modelDisplayName={model.displayName}
                                     disabled={!deletable}
                                     onDeleteSuccess={() => {
                                         onDeleteSuccess(model)
