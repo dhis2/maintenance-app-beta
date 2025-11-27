@@ -36,7 +36,6 @@ export const DefaultSectionListMessage = ({
     data?: ModelCollection
 }) => {
     if (error) {
-        console.log(error.details || error)
         return <SectionListError />
     }
     if (!data) {
