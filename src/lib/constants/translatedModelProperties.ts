@@ -16,6 +16,7 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     category: i18n.t('Category'),
     categoryCombo: i18n.t('Category combination'),
     categoryOption: i18n.t('Category option'),
+    categoryOptionGroup: i18n.t('Category option group'),
     categoryOptionGroupSet: i18n.t('Category option group set'),
     code: i18n.t('Code'),
     compulsory: i18n.t('Compulsory'),
