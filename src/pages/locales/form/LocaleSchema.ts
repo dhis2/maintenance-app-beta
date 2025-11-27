@@ -7,6 +7,14 @@ const localeBaseSchema = z.object({
 })
 
 export const localeFormSchema = localeBaseSchema
+export const localeListSchema = localeBaseSchema.extend({
+    lastUpdated: z.coerce.date(),
+    created: z.coerce.date(),
+    locale: z.string().min(2).max(2),
+    id: z.string(),
+    displayName: z.string(),
+    name: z.string(),
+})
 
 export const initialValues = getDefaults(localeFormSchema)
 

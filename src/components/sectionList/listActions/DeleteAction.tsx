@@ -14,20 +14,21 @@ import {
 } from '@dhis2/ui'
 import React, { useState } from 'react'
 import {
-    BaseListModel,
     useDeleteModelMutation,
-    useSchemaSectionHandleOrThrow,
+    useModelSectionHandleOrThrow,
 } from '../../../lib'
 import classes from './DeleteAction.module.css'
 
 export function DeleteAction({
     disabled,
-    model,
+    modelId,
+    modelDisplayName,
     onCancel,
     onDeleteSuccess,
 }: {
     disabled: boolean
-    model: BaseListModel
+    modelId: string
+    modelDisplayName: string
     onCancel: () => void
     onDeleteSuccess: () => void
 }) {
@@ -45,6 +46,7 @@ export function DeleteAction({
         <>
             <MenuItem
                 dense
+                dataTest={'delete-action'}
                 destructive
                 disabled={disabled}
                 label={i18n.t('Delete')}
@@ -54,7 +56,8 @@ export function DeleteAction({
 
             {showConfirmationDialog && (
                 <ConfirmationDialog
-                    model={model}
+                    modelId={modelId}
+                    modelDisplayName={modelDisplayName}
                     onDeleteSuccess={deleteAndClose}
                     onCancel={closeAndCancel}
                 />
@@ -64,15 +67,17 @@ export function DeleteAction({
 }
 
 function ConfirmationDialog({
-    model,
+    modelId,
+    modelDisplayName,
     onCancel,
     onDeleteSuccess,
 }: {
-    model: BaseListModel
+    modelId: string
+    modelDisplayName: string
     onCancel: () => void
     onDeleteSuccess: () => void
 }) {
-    const section = useSchemaSectionHandleOrThrow()
+    const section = useModelSectionHandleOrThrow()
 
     const deleteModelMutation = useDeleteModelMutation(section.namePlural, {
         onSuccess: () => {
@@ -84,7 +89,7 @@ function ConfirmationDialog({
     const { show: showDeletionSuccess } = useAlert(
         () =>
             i18n.t('Successfully deleted {{modelType}} "{{displayName}}"', {
-                displayName: model.displayName,
+                displayName: modelDisplayName,
                 modelType: section.title,
             }),
         { success: true }
@@ -114,7 +119,7 @@ function ConfirmationDialog({
                             {i18n.t(
                                 'Failed to delete {{modelType}} "{{displayName}}"! {{messages}}',
                                 {
-                                    displayName: model.displayName,
+                                    displayName: modelDisplayName,
                                     modelType: section.title,
                                 }
                             )}
@@ -138,8 +143,8 @@ function ConfirmationDialog({
                         destructive
                         onClick={() =>
                             deleteModelMutation.mutate({
-                                id: model.id,
-                                displayName: model.displayName,
+                                id: modelId,
+                                displayName: modelDisplayName,
                             })
                         }
                     >

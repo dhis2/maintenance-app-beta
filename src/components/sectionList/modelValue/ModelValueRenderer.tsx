@@ -9,7 +9,7 @@ import { PublicAccessValue } from './PublicAccess'
 import { TextValue } from './TextValue'
 
 export type ValueDetails = {
-    schemaProperty: SchemaFieldProperty
+    propertyType: SchemaFieldProperty['propertyType']
     value: unknown
     path: string
 }
@@ -17,7 +17,7 @@ export type ValueDetails = {
 export const ModelValueRenderer = ({
     path,
     value,
-    schemaProperty,
+    propertyType,
 }: ValueDetails) => {
     const hasToStringMethod = (
         value: unknown
@@ -42,16 +42,16 @@ export const ModelValueRenderer = ({
         return <TextValue value={label} />
     }
 
-    if (schemaProperty.propertyType === 'CONSTANT') {
+    if (propertyType === 'CONSTANT') {
         return <ConstantValue value={value as string} />
     }
 
-    if (schemaProperty.propertyType === 'DATE') {
+    if (propertyType === 'DATE') {
         return <DateValue value={value as string} />
     }
 
     if (
-        schemaProperty.propertyType === SchemaFieldPropertyType.REFERENCE &&
+        propertyType === SchemaFieldPropertyType.REFERENCE &&
         isModelReference(value)
     ) {
         return <ModelReference value={value} />

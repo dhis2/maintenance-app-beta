@@ -207,6 +207,17 @@ export const modelListViewsConfig = {
             overrideDefaultAvailable: true,
         },
     },
+    locale: {
+        columns: {
+            available: ['created', 'id', 'lastUpdated'],
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Locale'), path: 'locale' },
+            ],
+            overrideDefaultAvailable: true,
+        },
+        filters: { default: [], overrideDefaultAvailable: true },
+    },
     organisationUnitLevel: {
         columns: {
             available: [

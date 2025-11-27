@@ -216,6 +216,17 @@ const clickButtonGroupOption = async (
     await userEvent.click(button)
 }
 
+export const openListElementActionsMenu = async (
+    tableRow: HTMLElement,
+    screen: RenderResult
+) => {
+    const actionButton = within(tableRow).getByTestId('row-actions-menu-button')
+    await userEvent.click(actionButton)
+    const actionsMenu = screen.getByTestId('row-actions-menu')
+    expect(actionsMenu).toBeVisible()
+    return actionsMenu
+}
+
 export const uiActions = {
     openModal,
     openSingleSelect,
@@ -239,4 +250,5 @@ export const uiActions = {
     clearSingleSelect,
     clickButton,
     clickButtonGroupOption,
+    openListElementActionsMenu,
 }

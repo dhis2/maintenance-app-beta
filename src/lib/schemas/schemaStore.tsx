@@ -37,3 +37,11 @@ export function useSchema(schemaName: SchemaName): Schema {
         return state.getSchema(schemaName)
     })
 }
+
+export function useSchemaOrUndefined(
+    schemaName?: SchemaName
+): Schema | undefined {
+    return useSchemaStore((state) => {
+        return schemaName ? state.getSchema(schemaName) : undefined
+    })
+}
