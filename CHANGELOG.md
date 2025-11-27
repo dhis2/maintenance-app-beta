@@ -1,3 +1,67 @@
+## [0.99.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.99.0...v0.99.1) (2025-11-26)
+
+
+### Bug Fixes
+
+* bidirectional bug in relationship type form ([#704](https://github.com/dhis2/maintenance-app-beta/issues/704)) ([0fd6c9a](https://github.com/dhis2/maintenance-app-beta/commit/0fd6c9a40f182989c04b346c667cd1909873e225))
+
+# [0.99.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.98.0...v0.99.0) (2025-11-24)
+
+
+### Features
+
+* test category ([43d3a69](https://github.com/dhis2/maintenance-app-beta/commit/43d3a69e097c20113223e4861b6cd4de97f9b83e))
+* test category ([5cf9be8](https://github.com/dhis2/maintenance-app-beta/commit/5cf9be89ed69fc9d4227cfab4b134cb1291fb2fd))
+* test category ([d6cd70f](https://github.com/dhis2/maintenance-app-beta/commit/d6cd70f75658955be4e75a62a5886e2f7a388a80))
+* test category builders ([1637fc3](https://github.com/dhis2/maintenance-app-beta/commit/1637fc356a7afbdb7bfd461dfa43029c2bdaad0d))
+* test category combo edit ([82518c3](https://github.com/dhis2/maintenance-app-beta/commit/82518c334acd6192a9e0289fd4814b207cbee8ba))
+* test category combo new and edit ([5f6f06e](https://github.com/dhis2/maintenance-app-beta/commit/5f6f06ed2ff3916c2bf33281dd070263ff193b49))
+* test category new and edit ([61c3e45](https://github.com/dhis2/maintenance-app-beta/commit/61c3e45e0c23afae23dcb6e7f29987ea1444e8e6))
+* test category option group ([f9a357b](https://github.com/dhis2/maintenance-app-beta/commit/f9a357b83981cc476d3ceb013c74efb9d7988fb3))
+* test category option group set ([aa2ae9a](https://github.com/dhis2/maintenance-app-beta/commit/aa2ae9af1d465551e308e08ce148b6f489b11d3e))
+
+# [0.98.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.97.0...v0.98.0) (2025-11-19)
+
+
+### Features
+
+* [DHIS2-20338] Relationship types form ([#695](https://github.com/dhis2/maintenance-app-beta/issues/695)) ([0f7057b](https://github.com/dhis2/maintenance-app-beta/commit/0f7057bbb0316018a135666bfdbbc976d8964a12))
+
+# [0.97.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.96.0...v0.97.0) (2025-11-19)
+
+
+### Features
+
+* add version based filtering for columns in managelistview ([#701](https://github.com/dhis2/maintenance-app-beta/issues/701)) ([72e4a62](https://github.com/dhis2/maintenance-app-beta/commit/72e4a62eb7fb7d80321826695fc751bd62cb9726))
+
+# [0.96.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.95.0...v0.96.0) (2025-11-18)
+
+
+### Features
+
+* program stages scaffolding  ([0d7853d](https://github.com/dhis2/maintenance-app-beta/commit/0d7853d12b6dde4199c4eac43bdd28f7032c29a1))
+
+# [0.95.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.94.0...v0.95.0) (2025-11-18)
+
+
+### Features
+
+* [DHIS2-20414] TEA Search performance Section ([#691](https://github.com/dhis2/maintenance-app-beta/issues/691)) ([fc06e4f](https://github.com/dhis2/maintenance-app-beta/commit/fc06e4fe19d7923ec26b127a31900765b75fceef))
+
+# [0.94.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.93.0...v0.94.0) (2025-11-17)
+
+
+### Features
+
+* relationship type list ([#699](https://github.com/dhis2/maintenance-app-beta/issues/699)) ([a22cc6d](https://github.com/dhis2/maintenance-app-beta/commit/a22cc6d8b4214342a310a562fc73f338dfdba10c))
+
+# [0.93.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.92.0...v0.93.0) (2025-11-13)
+
+
+### Features
+
+* [DHIS2-20335] Programs customisation section ([#689](https://github.com/dhis2/maintenance-app-beta/issues/689)) ([12d2159](https://github.com/dhis2/maintenance-app-beta/commit/12d21594e8cb6d7d250c7efe8676f678306dae9e))
+
 # [0.92.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.91.1...v0.92.0) (2025-11-13)
 
 

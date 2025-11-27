@@ -10,11 +10,23 @@ import {
     attributeListSchema,
     attributeFormSchema,
 } from '../pages/attributes/form'
-import { categoryListSchema } from '../pages/categories/form'
-import { categoryComboListSchema } from '../pages/categoryCombos/form'
+import {
+    categoryFormSchema,
+    categoryListSchema,
+} from '../pages/categories/form'
+import {
+    categoryComboFormSchema,
+    categoryComboListSchema,
+} from '../pages/categoryCombos/form'
 import { categoryOptionComboListSchema } from '../pages/categoryOptionCombos/form'
-import { categoryOptionGroupListSchema } from '../pages/categoryOptionGroups/form/categoryOptionGroupSchema'
-import { categoryOptionGroupSetListSchema } from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
+import {
+    categoryOptionGroupFormSchema,
+    categoryOptionGroupListSchema,
+} from '../pages/categoryOptionGroups/form/categoryOptionGroupSchema'
+import {
+    categoryOptionGroupSetFormSchema,
+    categoryOptionGroupSetListSchema,
+} from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
 import { categoryOptionListSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
 import { ConstantsListSchema } from '../pages/constants/form/ConstantFormSchema'
 import { dataApprovalLevelListSchema } from '../pages/dataApprovalLevels/form/dataApprovalLevelsSchema'
@@ -44,6 +56,7 @@ import { organisationUnitListSchema } from '../pages/organisationUnits/form/orga
 import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
 import { programListSchema } from '../pages/programsWip/form'
+import { relationshipTypeListSchema } from '../pages/relationshipTypes/form/RelationshipTypeFormSchema'
 import { trackedEntityAttributeListSchema } from '../pages/trackedEntityAttributes/form/TrackedEntityAttributeFormSchema'
 import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form'
 import {
@@ -167,8 +180,22 @@ export const testCategory = (overwrites: Record<any, any> = {}) => ({
     ...overwrites,
 })
 
+export const testCategoryForm = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(categoryFormSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
 export const testCategoryCombo = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(categoryComboListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testCategoryComboForm = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(categoryComboFormSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -188,10 +215,28 @@ export const testCategoryOptionGroup = (overwrites: Record<any, any> = {}) => ({
     ...overwrites,
 })
 
+export const testCategoryOptionGroupForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(categoryOptionGroupFormSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
 export const testCategoryOptionGroupSet = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(categoryOptionGroupSetListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testCategoryOptionGroupSetForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(categoryOptionGroupSetFormSchema, {
+        mockeryMapper,
+    }),
     ...overwrites,
 })
 
@@ -346,6 +391,11 @@ export const testFormProgramIndicatorGroup = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(programIndicatorGroupListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testRelationshipType = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(relationshipTypeListSchema, { mockeryMapper }),
     ...overwrites,
 })
 

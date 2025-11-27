@@ -87,6 +87,12 @@ msgstr "Remove icon"
 msgid "Cancel"
 msgstr "Cancel"
 
+msgid "Refresh"
+msgstr "Refresh"
+
+msgid "Add new"
+msgstr "Add new"
+
 msgid "Message subject"
 msgstr "Message subject"
 
@@ -266,6 +272,16 @@ msgstr "{{fieldLabel}} (required)"
 
 msgid "Code"
 msgstr "Code"
+
+msgid "Visual configuration"
+msgstr "Visual configuration"
+
+msgid ""
+"A color and icon are helpful for identifying data elements in "
+"information-dense screens."
+msgstr ""
+"A color and icon are helpful for identifying data elements in "
+"information-dense screens."
 
 msgid "Description"
 msgstr "Description"
@@ -530,9 +546,6 @@ msgstr "Show only unassigned items"
 
 msgid "Refresh list"
 msgstr "Refresh list"
-
-msgid "Add new"
-msgstr "Add new"
 
 msgid "Something went wrong"
 msgstr "Something went wrong"
@@ -1431,6 +1444,9 @@ msgstr "Data element for aggregate data export"
 msgid "Analytics type"
 msgstr "Analytics type"
 
+msgid "Bidirectional"
+msgstr "Bidirectional"
+
 msgid "Compulsory"
 msgstr "Compulsory"
 
@@ -1440,8 +1456,14 @@ msgstr "Data dimension"
 msgid "Data dimension type"
 msgstr "Data dimension type"
 
+msgid "Name seen from initiating entity"
+msgstr "Name seen from initiating entity"
+
 msgid "Display in form"
 msgstr "Display in form"
+
+msgid "Name seen from receiving entity"
+msgstr "Name seen from receiving entity"
 
 msgid "Domain type"
 msgstr "Domain type"
@@ -1461,11 +1483,20 @@ msgstr "Form name"
 msgid "Form type"
 msgstr "Form type"
 
+msgid "Relationship name seen from initiating entity"
+msgstr "Relationship name seen from initiating entity"
+
 msgid "Ignore data approval"
 msgstr "Ignore data approval"
 
+msgid "Referral"
+msgstr "Referral"
+
 msgid "Sharing"
 msgstr "Sharing"
+
+msgid "Relationship name seen from receiving entity"
+msgstr "Relationship name seen from receiving entity"
 
 msgid "Owner"
 msgstr "Owner"
@@ -2049,16 +2080,6 @@ msgstr "Aggregation level(s)"
 
 msgid "Choose how this data element is disaggregated."
 msgstr "Choose how this data element is disaggregated."
-
-msgid "Color and icon"
-msgstr "Color and icon"
-
-msgid ""
-"A color and icon are helpful for identifying data elements in "
-"information-dense screens."
-msgstr ""
-"A color and icon are helpful for identifying data elements in "
-"information-dense screens."
 
 msgid "Domain"
 msgstr "Domain"
@@ -3928,6 +3949,9 @@ msgstr ""
 msgid "Edit or rearrange the tracked entity attributes"
 msgstr "Edit or rearrange the tracked entity attributes"
 
+msgid "Enrollment: Settings"
+msgstr "Enrollment: Settings"
+
 msgid "Configure settings related to enrollment in this program."
 msgstr "Configure settings related to enrollment in this program."
 
@@ -3958,6 +3982,89 @@ msgstr "Allow incident dates in the future"
 msgid "Collect data for the first stage during enrollment"
 msgstr "Collect data for the first stage during enrollment"
 
+msgid "Program Customization"
+msgstr "Program Customization"
+
+msgid "Customize the program's visuals, labels, and display settings."
+msgstr "Customize the program's visuals, labels, and display settings."
+
+msgid "Custom label for \"Incident date\""
+msgstr "Custom label for \"Incident date\""
+
+msgid "Used as an additional registration date for enrollments"
+msgstr "Used as an additional registration date for enrollments"
+
+msgid "Custom label for \"Enrollment date\""
+msgstr "Custom label for \"Enrollment date\""
+
+msgid "Used as the default registration date for enrollments"
+msgstr "Used as the default registration date for enrollments"
+
+msgid "Custom label for \"Enrollment\""
+msgstr "Custom label for \"Enrollment\""
+
+msgid "Example use: See all data in this enrollment"
+msgstr "Example use: See all data in this enrollment"
+
+msgid "Custom label for \"Event\""
+msgstr "Custom label for \"Event\""
+
+msgid "Example use: Schedule a new event"
+msgstr "Example use: Schedule a new event"
+
+msgid "Custom label for \"Program stage\""
+msgstr "Custom label for \"Program stage\""
+
+msgid "Example use: See all data in this program stage"
+msgstr "Example use: See all data in this program stage"
+
+msgid "Custom label for \"Follow-up\""
+msgstr "Custom label for \"Follow-up\""
+
+msgid "Used to customize the label for follow-up events or activities"
+msgstr "Used to customize the label for follow-up events or activities"
+
+msgid "Custom label for \"Registering unit\""
+msgstr "Custom label for \"Registering unit\""
+
+msgid ""
+"Used to customize the label for the organisation unit that registers the "
+"enrollment or event"
+msgstr ""
+"Used to customize the label for the organisation unit that registers the "
+"enrollment or event"
+
+msgid "Custom label for \"Relationship\""
+msgstr "Custom label for \"Relationship\""
+
+msgid "Used to customize the label for relationships between tracked entities"
+msgstr "Used to customize the label for relationships between tracked entities"
+
+msgid "Custom label for \"Note\""
+msgstr "Custom label for \"Note\""
+
+msgid ""
+"Used to customize the label for notes or comments added to enrollments or "
+"events"
+msgstr ""
+"Used to customize the label for notes or comments added to enrollments or "
+"events"
+
+msgid "Display enrolled TEs in the front page list"
+msgstr "Display enrolled TEs in the front page list"
+
+msgid "Program Stages"
+msgstr "Program Stages"
+
+msgid "Set up stages in this program."
+msgstr "Set up stages in this program."
+
+msgid "Test input program"
+msgstr "Test input program"
+
+msgid "Add a program stage"
+msgstr "Add a program stage"
+
 msgid "Only integers are allowed"
 msgstr "Only integers are allowed"
 
@@ -3979,8 +4086,47 @@ msgstr "Related program"
 msgid "Choose how this program is disaggregated."
 msgstr "Choose how this program is disaggregated."
 
-msgid "Enrollment: Settings"
-msgstr "Enrollment: Settings"
+msgid "Stage"
+msgstr "Stage"
+
+msgid "Stages"
+msgstr "Stages"
+
+msgid "Save "
+msgstr "Save "
+
+msgid "Saving a stage does not save other changes to the program"
+msgstr "Saving a stage does not save other changes to the program"
+
+msgid "Configure the basic information for this program stage."
+msgstr "Configure the basic information for this program stage."
+
+msgid "Event Repetition"
+msgstr "Event Repetition"
+
+msgid "Define the frequency of events within this stage."
+msgstr "Define the frequency of events within this stage."
+
+msgid "Program Stage: Data"
+msgstr "Program Stage: Data"
+
+msgid "Choose the information to collect in this program stage. "
+msgstr "Choose the information to collect in this program stage. "
+
+msgid "Program stage form"
+msgstr "Program stage form"
+
+msgid "Configure the form for data collection for events in this program stage."
+msgstr "Configure the form for data collection for events in this program stage."
+
+msgid "Stage section"
+msgstr "Stage section"
+
+msgid "Stage sections"
+msgstr "Stage sections"
+
+msgid "Saving a section does not save other changes to the program stage"
+msgstr "Saving a section does not save other changes to the program stage"
 
 msgid "Listing"
 msgstr "Listing"
@@ -4000,6 +4146,18 @@ msgstr "Desktop display"
 msgid "Mobile display"
 msgstr "Mobile display"
 
+msgid "Stage: Setup"
+msgstr "Stage: Setup"
+
+msgid "Stage: Creation and Scheduling"
+msgstr "Stage: Creation and Scheduling"
+
+msgid "Stage: Data"
+msgstr "Stage: Data"
+
+msgid "Stage: Form"
+msgstr "Stage: Form"
+
 msgid "Section attributes"
 msgstr "Section attributes"
 
@@ -4011,6 +4169,97 @@ msgstr "Search selected attributes"
 
 msgid "Saving a section does not save other changes to the program"
 msgstr "Saving a section does not save other changes to the program"
+
+msgid "Tracked entity"
+msgstr "Tracked entity"
+
+msgid "Relationship entity constraint"
+msgstr "Relationship entity constraint"
+
+msgid "Choose which data elements are shown when viewing the relationship"
+msgstr "Choose which data elements are shown when viewing the relationship"
+
+msgid ""
+"Choose which tracked entity attributes are shown when viewing the "
+"relationship"
+msgstr ""
+"Choose which tracked entity attributes are shown when viewing the "
+"relationship"
+
+msgid "Available tracked entity attributes"
+msgstr "Available tracked entity attributes"
+
+msgid "Selected tracked entity attributes"
+msgstr "Selected tracked entity attributes"
+
+msgid "Set up the basic information for this relationship type."
+msgstr "Set up the basic information for this relationship type."
+
+msgid "Will be shown everywhere a user sees a relationship type."
+msgstr "Will be shown everywhere a user sees a relationship type."
+
+msgid "Provide a helpful description of what this relationship is used for."
+msgstr "Provide a helpful description of what this relationship is used for."
+
+msgid "Bidirectional: relationship can be created from both sides"
+msgstr "Bidirectional: relationship can be created from both sides"
+
+msgid "Relationship name seen from initiating entity (required)"
+msgstr "Relationship name seen from initiating entity (required)"
+
+msgid "Relationship name seen from receiving entity (required)"
+msgstr "Relationship name seen from receiving entity (required)"
+
+msgid "Relationship sides"
+msgstr "Relationship sides"
+
+msgid ""
+"Choose and configure which objects can be used as the initiating and "
+"receiving sides of the relationship."
+msgstr ""
+"Choose and configure which objects can be used as the initiating and "
+"receiving sides of the relationship."
+
+msgid "Initiating side constraint"
+msgstr "Initiating side constraint"
+
+msgid "Receiving side constraint"
+msgstr "Receiving side constraint"
+
+msgid "Name is required"
+msgstr "Name is required"
+
+msgid "Relationship name seen from initiating entity is required"
+msgstr "Relationship name seen from initiating entity is required"
+
+msgid ""
+"Relationship name seen from receiving entity is required when bidirectional "
+"is checked"
+msgstr ""
+"Relationship name seen from receiving entity is required when bidirectional "
+"is checked"
+
+msgid "SW | Starts with"
+msgstr "SW | Starts with"
+
+msgid "EW | Ends with"
+msgstr "EW | Ends with"
+
+msgid "LIKE | Contains"
+msgstr "LIKE | Contains"
+
+msgid "{{optionLabel}} (preferred operator)"
+msgstr "{{optionLabel}} (preferred operator)"
+
+msgid "Blocked search operators"
+msgstr "Blocked search operators"
+
+msgid ""
+"Searches with blocked search operators will return no results. This "
+"prevents inefficient searches."
+msgstr ""
+"Searches with blocked search operators will return no results. This "
+"prevents inefficient searches."
 
 msgid "Make this attribute confidential"
 msgstr "Make this attribute confidential"
@@ -4041,6 +4290,12 @@ msgstr "Inherit data values from other tracked entities"
 msgid "Data values are inherited from tracked entities linked by a relationship."
 msgstr "Data values are inherited from tracked entities linked by a relationship."
 
+msgid "Minimum characters to search"
+msgstr "Minimum characters to search"
+
+msgid "Set the minimum characters required to start a search."
+msgstr "Set the minimum characters required to start a search."
+
 msgid ""
 "Choose from a predefined list of Option sets. The Option set will "
 "automatically define the Value type."
@@ -4054,8 +4309,36 @@ msgstr "Pattern for automatically generated values"
 msgid "Pattern must use the DHIS2 TextPattern syntax."
 msgstr "Pattern must use the DHIS2 TextPattern syntax."
 
-msgid "Tracked entity"
-msgstr "Tracked entity"
+msgid "EQ | Equals"
+msgstr "EQ | Equals"
+
+msgid "{{optionLabel}} (blocked operator)"
+msgstr "{{optionLabel}} (blocked operator)"
+
+msgid "Preferred search operator"
+msgstr "Preferred search operator"
+
+msgid ""
+"Apps will try to use this recommended operator to improve performance, but "
+"can still use others if needed."
+msgstr ""
+"Apps will try to use this recommended operator to improve performance, but "
+"can still use others if needed."
+
+msgid "This attribute is currently trigram indexed in the database"
+msgstr "This attribute is currently trigram indexed in the database"
+
+msgid "This attribute is currently not trigram indexed in the database"
+msgstr "This attribute is currently not trigram indexed in the database"
+
+msgid "Not available when both EW and LIKE are blocked"
+msgstr "Not available when both EW and LIKE are blocked"
+
+msgid "Mark for trigram indexing"
+msgstr "Mark for trigram indexing"
+
+msgid "Only relevant when using LIKE or EW based searches"
+msgstr "Only relevant when using LIKE or EW based searches"
 
 msgid "Across entire system"
 msgstr "Across entire system"
@@ -4101,15 +4384,11 @@ msgstr "Show in lists and search results even when a program is not selected"
 msgid "Do not synchronize this attribute and it's values"
 msgstr "Do not synchronize this attribute and it's values"
 
-msgid "Enable trigram indexing"
-msgstr "Enable trigram indexing"
+msgid "Search performance"
+msgstr "Search performance"
 
-msgid ""
-"Improves search performance for this attribute. Available in DHIS2 v43 and "
-"above."
-msgstr ""
-"Improves search performance for this attribute. Available in DHIS2 v43 and "
-"above."
+msgid "Adjust how this attribute is searched to balance performance and accuracy."
+msgstr "Adjust how this attribute is searched to balance performance and accuracy."
 
 msgid ""
 "Legends assigned to this tracker entity attribute are used in data analysis "
@@ -4169,6 +4448,9 @@ msgstr "Explain the purpose of this tracked entity type."
 
 msgid "Choose and configure what data can be collected for this tracked entity type"
 msgstr "Choose and configure what data can be collected for this tracked entity type"
+
+msgid "Color and icon"
+msgstr "Color and icon"
 
 msgid "Notification details"
 msgstr "Notification details"

@@ -24,6 +24,55 @@ export const ProgramFormDescriptor = {
             ],
         },
         {
+            name: 'programCustomization',
+            label: i18n.t('Program Customization'),
+            fields: [
+                {
+                    name: 'style',
+                    label: i18n.t('Visual configuration'),
+                },
+                {
+                    name: 'incidentDateLabel',
+                    label: i18n.t('Custom label for "Incident date"'),
+                },
+                {
+                    name: 'enrollmentDateLabel',
+                    label: i18n.t('Custom label for "Enrollment date"'),
+                },
+                {
+                    name: 'enrollmentLabel',
+                    label: i18n.t('Custom label for "Enrollment"'),
+                },
+                {
+                    name: 'eventLabel',
+                    label: i18n.t('Custom label for "Event"'),
+                },
+                {
+                    name: 'programStageLabel',
+                    label: i18n.t('Custom label for "Program stage"'),
+                },
+                {
+                    name: 'followUpLabel',
+                    label: i18n.t('Custom label for "Follow-up"'),
+                },
+                {
+                    name: 'orgUnitLabel',
+                    label: i18n.t('Custom label for "Registering unit"'),
+                },
+                {
+                    name: 'relationshipLabel',
+                    label: i18n.t('Custom label for "Relationship"'),
+                },
+                { name: 'noteLabel', label: i18n.t('Custom label for "Note"') },
+                {
+                    name: 'displayFrontPageList',
+                    label: i18n.t(
+                        'Display enrolled TEs in the front page list'
+                    ),
+                },
+            ],
+        },
+        {
             name: 'enrollmentSettings',
             label: i18n.t('Enrollment: Settings', { nsSeparator: '~:~' }),
             fields: [
@@ -69,6 +118,11 @@ export const ProgramFormDescriptor = {
             name: 'enrollmentForm',
             label: i18n.t('Enrollment: Form', { nsSeparator: '~:~' }),
             fields: [{ name: 'dataEntryForm', label: i18n.t('Custom form') }],
+        },
+        {
+            name: 'programStages',
+            label: i18n.t('Program Stages'),
+            fields: [],
         },
     ],
 } as const satisfies SectionedFormDescriptor<ProgramValues>

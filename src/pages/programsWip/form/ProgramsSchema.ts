@@ -53,6 +53,23 @@ const programBaseSchema = z.object({
             htmlCode: z.string().optional(),
         })
         .optional(),
+    style: z
+        .object({
+            color: z.string().optional(),
+            icon: z.string().optional(),
+        })
+        .optional(),
+    programStageLabel: z.string().optional(),
+    eventLabel: z.string().optional(),
+    enrollmentDateLabel: z.string().optional(),
+    incidentDateLabel: z.string().optional(),
+    enrollmentLabel: z.string().optional(),
+    followUpLabel: z.string().optional(),
+    orgUnitLabel: z.string().optional(),
+    relationshipLabel: z.string().optional(),
+    noteLabel: z.string().optional(),
+    displayFrontPageList: z.boolean().optional(),
+    programStages: z.array(modelReference).default([]),
 })
 
 export const programFormSchema = identifiable.merge(programBaseSchema).extend({

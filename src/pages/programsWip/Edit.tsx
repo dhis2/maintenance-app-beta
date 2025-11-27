@@ -48,6 +48,18 @@ const fieldFilters = [
     'dataEntryForm[id,displayName,htmlCode]',
     'programSections[id,displayName,description,access,sortOrder]',
     'programTrackedEntityAttributes[id,displayName,valueType,renderType,allowFutureDate,mandatory,searchable,displayInList,trackedEntityAttribute[id,displayName,unique]]',
+    'style[color,icon]',
+    'programStageLabel',
+    'eventLabel',
+    'enrollmentDateLabel',
+    'incidentDateLabel',
+    'enrollmentLabel',
+    'followUpLabel',
+    'orgUnitLabel',
+    'relationshipLabel',
+    'noteLabel',
+    'displayFrontPageList',
+    'programStages[id,displayName,access,description, program[id]]',
 ] as const
 
 export type ProgramsFromFilters = PickWithFieldFilters<
@@ -112,7 +124,7 @@ export const useOnSubmitProgramEdit = (modelId: string) => {
                         : values.dataEntryForm,
             } as ProgramValues
 
-            submitEdit(trimmedValues, form, options)
+            return submitEdit(trimmedValues, form, options)
         },
         [submitEdit, handleDeletions]
     )

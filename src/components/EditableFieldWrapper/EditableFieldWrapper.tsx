@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import React from 'react'
 import classes from './EditableFieldWrapper.module.css'
@@ -19,10 +20,10 @@ export function EditableFieldWrapper({
 
             <div className={classes.actions}>
                 <Button small onClick={(_, e) => onRefresh(e)}>
-                    Refresh
+                    {i18n.t('Refresh')}
                 </Button>
                 <Button small onClick={(_, e) => onAddNew(e)}>
-                    Add new
+                    {i18n.t('Add new')}
                 </Button>
             </div>
         </div>
