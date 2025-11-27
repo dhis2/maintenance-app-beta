@@ -1,4 +1,5 @@
 import { FetchError } from '@dhis2/app-runtime'
+import { faker } from '@faker-js/faker'
 import { render, waitFor, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
@@ -10,7 +11,8 @@ import {
     SECTIONS_MAP,
     toModelPropertyDescriptor,
 } from '../../lib'
-import { testLocales } from '../../testUtils/builders'
+import { useCurrentUserStore } from '../../lib/user/currentUserStore'
+import { testLocales, testOrgUnit } from '../../testUtils/builders'
 import {
     defaultUserDataStoreData,
     error404,
@@ -18,6 +20,7 @@ import {
 } from '../../testUtils/generateRenderer'
 import TestComponentWithRouter from '../../testUtils/TestComponentWithRouter'
 import { uiActions } from '../../testUtils/uiActions'
+import type { OrganisationUnit } from '../../types/generated'
 import { Component } from './List'
 
 const section = SECTIONS_MAP.locale
@@ -32,7 +35,6 @@ jest.spyOn(console, 'warn').mockImplementation((value) => {
 describe('Locales list tests', () => {
     const getElementsMock = jest.fn()
     const deleteMock = jest.fn()
-
     const renderList = generateRenderer(
         { section, mockSchema: schemaMock },
         (routeOptions, { customTestData = {} } = {}) => {
@@ -155,8 +157,26 @@ describe('Locales list tests', () => {
         expect(actionsMenu).toHaveTextContent('Delete')
     })
 
+    it('can not delete an item when has no permisison', async () => {
+        const { screen } = await renderList()
+        const tableRows = screen.getAllByTestId('section-list-row')
+        const actionMenu = await uiActions.openListElementActionsMenu(
+            tableRows[0],
+            screen
+        )
+        const deleteActionLink = within(actionMenu).getByTestId('delete-action')
+        expect(deleteActionLink).toHaveClass('disabled')
+    })
+
     it('deletes an item when pressing the delete action and updates the list', async () => {
         const { screen, elements } = await renderList()
+        useCurrentUserStore.getState().setCurrentUser({
+            organisationUnits: [testOrgUnit()] as OrganisationUnit[],
+            authorities: new Set<string>().add('F_LOCALE_DELETE'),
+            name: faker.person.fullName(),
+            email: faker.internet.email(),
+            settings: {},
+        })
         const tableRows = screen.getAllByTestId('section-list-row')
         const firstElementToDeleteId = elements[0].id
         const deletableElementActionMenu =

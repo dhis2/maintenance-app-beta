@@ -46,6 +46,7 @@ export function DeleteAction({
         <>
             <MenuItem
                 dense
+                dataTest={'delete-action'}
                 destructive
                 disabled={disabled}
                 label={i18n.t('Delete')}
