@@ -1,3 +1,10 @@
+# [0.101.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.100.0...v0.101.0) (2025-11-27)
+
+
+### Features
+
+* locale list ([95fb244](https://github.com/dhis2/maintenance-app-beta/commit/95fb244bbbfcece145cdf58c1486e3f0e311fa90))
+
 # [0.100.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.99.1...v0.100.0) (2025-11-27)
 
 
