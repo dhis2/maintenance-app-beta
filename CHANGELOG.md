@@ -1,3 +1,10 @@
+# [0.100.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.99.1...v0.100.0) (2025-11-27)
+
+
+### Features
+
+* simplified options list [DHIS2-20384] ([#705](https://github.com/dhis2/maintenance-app-beta/issues/705)) ([8a788e2](https://github.com/dhis2/maintenance-app-beta/commit/8a788e26a3105d0077fe1f1c49373fc225ba9e55))
+
 ## [0.99.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.99.0...v0.99.1) (2025-11-26)
 
 
