@@ -27,10 +27,15 @@ import { TranslationDialog } from '../../../../components/sectionList/translatio
 import { BaseListModel, SchemaName } from '../../../../lib'
 import css from './OptionList.module.css'
 
-type OptionDetail = BaseListModel & {
+export type OptionDetail = BaseListModel & {
     name: string
     code: string
     deleted?: boolean
+}
+
+export type DrawerState = {
+    id: string | undefined
+    open: boolean
 }
 
 const SUGGESTED_MAXIMUM_OPTIONS = 500
@@ -50,12 +55,14 @@ const FilterAndSort = ({
     setFilter,
     setPageCount,
     sortOptions,
+    setOptionsDrawerState,
     showEditWarning = false,
 }: {
     filterValue: string | undefined
     setFilter: (s: string | undefined) => void
     setPageCount: (n: number) => void
     sortOptions: (property: string, desc: boolean) => void
+    setOptionsDrawerState: (s: DrawerState) => void
     showEditWarning?: boolean
 }) => (
     <>
@@ -73,7 +80,13 @@ const FilterAndSort = ({
         </div>
         <div className={css.sortButtons}>
             <ButtonStrip>
-                <Button>{i18n.t('Add option')}</Button>
+                <Button
+                    onClick={() => {
+                        setOptionsDrawerState({ open: true, id: undefined })
+                    }}
+                >
+                    {i18n.t('Add option')}
+                </Button>
 
                 <Button
                     disabled={!!filterValue}
@@ -144,6 +157,7 @@ const OptionRow = ({
     undoDelete,
     onDelete,
     onMove,
+    setOptionsDrawerState,
     setTranslationDialogModelID,
 }: {
     deleted: boolean
@@ -153,6 +167,7 @@ const OptionRow = ({
     undoDelete: (id: string) => void
     onDelete: (id: string) => void
     onMove: (id: string, moveIndexBy: number) => void
+    setOptionsDrawerState: (s: DrawerState) => void
     setTranslationDialogModelID: (id: string) => void
 }) => (
     <DataTableRow className={deleted ? css.deletedRow : ''} key={option.id}>
@@ -191,9 +206,23 @@ const OptionRow = ({
                             className={css.wideButton}
                             secondary
                             icon={<IconEdit16 />}
+                            onClick={() => {
+                                setOptionsDrawerState({
+                                    open: true,
+                                    id: option.id,
+                                })
+                            }}
                         />
                         <MoreDropdownButton>
-                            <MoreDropdownItem label={i18n.t('Edit')} />
+                            <MoreDropdownItem
+                                label={i18n.t('Edit')}
+                                onClick={() => {
+                                    setOptionsDrawerState({
+                                        open: true,
+                                        id: option.id,
+                                    })
+                                }}
+                            />
                             {option.access !== undefined && (
                                 <MoreDropdownItem
                                     label={i18n.t('Translate')}
@@ -216,7 +245,11 @@ const OptionRow = ({
     </DataTableRow>
 )
 
-export const OptionsListTable = () => {
+export const OptionsListTable = ({
+    setOptionsDrawerState,
+}: {
+    setOptionsDrawerState: (s: DrawerState) => void
+}) => {
     const [pageSize, setPageSize] = useState<number>(10)
     const [pageCount, setPageCount] = useState<number>(1)
     const { input: optionsInput } = useField('options')
@@ -301,7 +334,16 @@ export const OptionsListTable = () => {
                 </NoticeBox>
                 <div className={css.sortButtons}>
                     <ButtonStrip>
-                        <Button>{i18n.t('Add option')}</Button>
+                        <Button
+                            onClick={() => {
+                                setOptionsDrawerState({
+                                    open: true,
+                                    id: undefined,
+                                })
+                            }}
+                        >
+                            {i18n.t('Add option')}
+                        </Button>
                     </ButtonStrip>
                 </div>
             </>
@@ -315,6 +357,7 @@ export const OptionsListTable = () => {
                 setFilter={setFilter}
                 setPageCount={setPageCount}
                 sortOptions={sortOptions}
+                setOptionsDrawerState={setOptionsDrawerState}
                 showEditWarning={
                     optionsInput?.value?.length > SUGGESTED_MAXIMUM_OPTIONS
                 }
@@ -338,6 +381,9 @@ export const OptionsListTable = () => {
                                     undoDelete={undoDelete}
                                     onDelete={onDelete}
                                     onMove={onMove}
+                                    setOptionsDrawerState={
+                                        setOptionsDrawerState
+                                    }
                                     setTranslationDialogModelID={
                                         setTranslationDialogModelID
                                     }
