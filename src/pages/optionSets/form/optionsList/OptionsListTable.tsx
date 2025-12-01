@@ -24,10 +24,11 @@ import {
     MoreDropdownDivider,
 } from '../../../../components'
 import { TranslationDialog } from '../../../../components/sectionList/translation'
-import { BaseListModel, SchemaName } from '../../../../lib'
+import { SchemaName } from '../../../../lib'
 import css from './OptionList.module.css'
 
-export type OptionDetail = BaseListModel & {
+export type OptionDetail = {
+    id: string
     name: string
     code: string
     deleted?: boolean
@@ -223,14 +224,14 @@ const OptionRow = ({
                                     })
                                 }}
                             />
-                            {option.access !== undefined && (
-                                <MoreDropdownItem
-                                    label={i18n.t('Translate')}
-                                    onClick={() => {
-                                        setTranslationDialogModelID(option.id)
-                                    }}
-                                />
-                            )}
+
+                            <MoreDropdownItem
+                                label={i18n.t('Translate')}
+                                onClick={() => {
+                                    setTranslationDialogModelID(option.id)
+                                }}
+                            />
+
                             <MoreDropdownDivider />
                             <MoreDropdownItem
                                 label={i18n.t('Delete')}

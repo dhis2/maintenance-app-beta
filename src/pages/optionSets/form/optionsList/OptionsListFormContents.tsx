@@ -1,3 +1,4 @@
+import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { NoticeBox } from '@dhis2/ui'
 import React, { useState } from 'react'
@@ -16,6 +17,11 @@ import { OptionsListTable, DrawerState, OptionDetail } from './OptionsListTable'
 const OptionListNewOrEdit = () => {
     const modelId = useParams().id as string
     const { input: optionsInput } = useField<OptionDetail[]>('options')
+    const { show } = useAlert(
+        ({ isNew }) =>
+            isNew ? i18n.t('Option created') : i18n.t('Option updated'),
+        { success: true }
+    )
     const [optionsDrawerState, setOptionsDrawerState] = useState<DrawerState>({
         open: false,
         id: undefined,
@@ -24,10 +30,15 @@ const OptionListNewOrEdit = () => {
         const newOptions = [...optionsInput.value]
 
         const index = newOptions.findIndex((o) => o.id === values.id)
-        newOptions.splice(index, 1)
-        newOptions.splice(index, 0, values as OptionDetail)
+        if (index === -1) {
+            newOptions.push(values as OptionDetail)
+        } else {
+            newOptions.splice(index, 1)
+            newOptions.splice(index, 0, values as OptionDetail)
+        }
 
         optionsInput.onChange(newOptions)
+        show({ isNew: index === -1 })
         setOptionsDrawerState({ open: false, id: undefined })
     }
     // options cannot be added until option set is saved
