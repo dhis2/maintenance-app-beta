@@ -115,10 +115,9 @@ export const ProgramIndicatorsFormFields = () => {
                 </StandardFormField>
                 <StandardFormField dataTest="analytics-type-field">
                     <FieldRFF
-                        required
                         component={SingleSelectFieldFF}
                         inputWidth="400px"
-                        label={i18n.t('Analytics type (required)')}
+                        label={i18n.t('Analytics type')}
                         name="analyticsType"
                         options={
                             schema.properties.analyticsType.constants?.map(
