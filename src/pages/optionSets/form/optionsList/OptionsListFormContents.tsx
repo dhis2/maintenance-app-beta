@@ -57,18 +57,16 @@ const OptionListNewOrEdit = () => {
                     setOptionsDrawerState({ open: false, id: undefined })
                 }}
             >
-                <>
-                    <EditOrNewOptionForm
-                        onSubmitted={onSubmitted}
-                        option={optionsDrawerState?.id}
-                        onCancel={() => {
-                            setOptionsDrawerState({
-                                open: false,
-                                id: undefined,
-                            })
-                        }}
-                    />
-                </>
+                <EditOrNewOptionForm
+                    onSubmitted={onSubmitted}
+                    option={optionsDrawerState?.id}
+                    onCancel={() => {
+                        setOptionsDrawerState({
+                            open: false,
+                            id: undefined,
+                        })
+                    }}
+                />
             </DrawerPortal>
             <OptionsListTable setOptionsDrawerState={setOptionsDrawerState} />
         </>
@@ -80,17 +78,15 @@ export const OptionsListFormContents = React.memo(
         useSchemaSectionHandleOrThrow()
 
         return (
-            <>
-                <SectionedFormSection name={name}>
-                    <StandardFormSectionTitle>
-                        {i18n.t('Options')}
-                    </StandardFormSectionTitle>
-                    <StandardFormSectionDescription>
-                        {i18n.t('Define options for this option set')}
-                    </StandardFormSectionDescription>
-                    <OptionListNewOrEdit />
-                </SectionedFormSection>
-            </>
+            <SectionedFormSection name={name}>
+                <StandardFormSectionTitle>
+                    {i18n.t('Options')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t('Define options for this option set')}
+                </StandardFormSectionDescription>
+                <OptionListNewOrEdit />
+            </SectionedFormSection>
         )
     }
 )

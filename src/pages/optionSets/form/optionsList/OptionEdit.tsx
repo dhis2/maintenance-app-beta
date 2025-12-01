@@ -150,7 +150,7 @@ export type OptionFormValues = PickWithFieldFilters<
 export type SubmittedOptionFormValues = Partial<OptionFormValues>
 
 type OptionFormProps = {
-    option?: SubmittedOptionFormValues | undefined
+    option?: SubmittedOptionFormValues
     onSubmit: FormBaseProps<SubmittedOptionFormValues>['onSubmit']
     onCancel: (s: DrawerState) => void
 }
@@ -159,10 +159,7 @@ export const OptionForm = ({ option, onSubmit, onCancel }: OptionFormProps) => {
     const optionSetId = useParams().id as string
 
     const initialValues: SubmittedOptionFormValues | undefined = useMemo(
-        () =>
-            option
-                ? option
-                : (initialOptionValues as SubmittedOptionFormValues),
+        () => option ?? (initialOptionValues as SubmittedOptionFormValues),
         [option]
     )
 
