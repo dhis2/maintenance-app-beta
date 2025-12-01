@@ -218,7 +218,7 @@ export const EnrollmentDataFormContents = React.memo(
                 </StandardFormSection>
                 <StandardFormSection>
                     <StandardFormSectionTitle>
-                        {i18n.t('Configure data items')}
+                        {i18n.t('Configure attributes')}
                     </StandardFormSectionTitle>
                     <StandardFormSectionDescription>
                         {i18n.t(
