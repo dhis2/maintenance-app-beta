@@ -23,8 +23,6 @@ const OptionListNewOrEdit = () => {
     const onSubmitted = (values: SubmittedOptionFormValues) => {
         const newOptions = [...optionsInput.value]
 
-        // Convert SubmittedOptionFormValues to OptionDetail
-
         const index = newOptions.findIndex((o) => o.id === values.id)
         newOptions.splice(index, 1)
         newOptions.splice(index, 0, values as OptionDetail)

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-28T11:52:10.112Z\n"
-"PO-Revision-Date: 2025-11-28T11:52:10.112Z\n"
+"POT-Creation-Date: 2025-12-01T13:30:06.689Z\n"
+"PO-Revision-Date: 2025-12-01T13:30:06.690Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -269,6 +269,9 @@ msgstr "Aggregation type"
 
 msgid "{{fieldLabel}} (required)"
 msgstr "{{fieldLabel}} (required)"
+
+msgid "Code (required)"
+msgstr "Code (required)"
 
 msgid "Code"
 msgstr "Code"
@@ -3057,14 +3060,26 @@ msgstr "Basic Information"
 msgid "Set up the basic information for this option set."
 msgstr "Set up the basic information for this option set."
 
+msgid "Value type cannot be edited after an option set has been created."
+msgstr "Value type cannot be edited after an option set has been created."
+
 msgid "Option Set"
 msgstr "Option Set"
+
+msgid "Set up the information for this option."
+msgstr "Set up the information for this option."
+
+msgid "Save option"
+msgstr "Save option"
+
+msgid "Saving an option does not save other changes to the option set"
+msgstr "Saving an option does not save other changes to the option set"
 
 msgid "Option set must be saved before options can be added"
 msgstr "Option set must be saved before options can be added"
 
-msgid "Define options for this option set."
-msgstr "Define options for this option set."
+msgid "Define options for this option set"
+msgstr "Define options for this option set"
 
 msgid "Search by name or code"
 msgstr "Search by name or code"
