@@ -16,6 +16,7 @@ import {
     StandardFormSectionTitle,
     FormBase,
     FormBaseProps,
+    CustomAttributesSection,
 } from '../../../../components'
 import {
     NameField,
@@ -31,12 +32,10 @@ import {
     createFormError,
     createJsonPatchOperations,
     useCreateModel,
+    ATTRIBUTE_VALUES_FIELD_FILTERS,
 } from '../../../../lib'
-import {
-    DisplayableModel,
-    PickWithFieldFilters,
-    Section,
-} from '../../../../types/models'
+import { Option } from '../../../../types/generated'
+import { PickWithFieldFilters } from '../../../../types/models'
 import styles from './OptionList.module.css'
 import { initialOptionValues } from './optionSchema'
 import { DrawerState } from './OptionsListTable'
@@ -49,6 +48,10 @@ export const OptionFormContents = ({
     const { submitting, values } = useFormState({
         subscription: { submitting: true, values: true },
     })
+
+    const handleCancel = () => {
+        onCancel({ open: false, id: undefined })
+    }
 
     return (
         <div className={styles.sectionsWrapper}>
@@ -71,12 +74,16 @@ export const OptionFormContents = ({
                             <CodeField
                                 schemaSection={optionSchemaSection}
                                 modelId={values.id}
+                                required={true}
                             />
                         </StandardFormField>
                         <StandardFormField>
                             <ColorAndIconField />
                         </StandardFormField>
                     </SectionedFormSection>
+                    <CustomAttributesSection
+                        schemaSection={optionSchemaSection}
+                    />
                 </SectionedFormSections>
                 <SectionedFormErrorNotice />
             </div>
@@ -96,7 +103,7 @@ export const OptionFormContents = ({
                         <Button
                             secondary
                             small
-                            onClick={onCancel}
+                            onClick={handleCancel}
                             dataTest="form-cancel-link"
                             disabled={submitting}
                         >
@@ -117,7 +124,13 @@ export const OptionFormContents = ({
     )
 }
 
-export const fieldFilters = ['name', 'code', 'style[color,icon]'] as const
+export const fieldFilters = [
+    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
+    'name',
+    'code',
+    'style[color,icon]',
+    'id',
+] as const
 
 const optionSchemaSection = {
     name: SchemaName.option,
@@ -127,26 +140,34 @@ const optionSchemaSection = {
     parentSectionKey: 'other',
 } satisfies SchemaSection
 
-export type SectionFormValues = PickWithFieldFilters<
-    Section,
+export type OptionFormValues = PickWithFieldFilters<
+    Option,
     typeof fieldFilters
 > & {
-    dataSet: { id: string }
-    displayOptions?: string
+    optionSet?: { id: string }
 }
-type PartialSectionFormValues = Partial<SectionFormValues>
-type SubmittedSectionFormValues = PartialSectionFormValues & DisplayableModel
 
-export const OptionForm = ({ option, onSubmit, onCancel }: any) => {
+export type SubmittedOptionFormValues = Partial<OptionFormValues>
+
+type OptionFormProps = {
+    option?: SubmittedOptionFormValues | undefined
+    onSubmit: FormBaseProps<SubmittedOptionFormValues>['onSubmit']
+    onCancel: (s: DrawerState) => void
+}
+
+export const OptionForm = ({ option, onSubmit, onCancel }: OptionFormProps) => {
     const optionSetId = useParams().id as string
 
-    const initialValues: any | undefined = useMemo(
-        () => (option ? option : initialOptionValues),
+    const initialValues: SubmittedOptionFormValues | undefined = useMemo(
+        () =>
+            option
+                ? option
+                : (initialOptionValues as SubmittedOptionFormValues),
         [option]
     )
 
     const valueFormatter = useCallback(
-        (values: PartialSectionFormValues) => {
+        (values: SubmittedOptionFormValues) => {
             return {
                 ...values,
                 optionSet: { id: optionSetId },
@@ -156,10 +177,11 @@ export const OptionForm = ({ option, onSubmit, onCancel }: any) => {
     )
     return (
         <FormBase
+            modelName={optionSchemaSection.name}
             initialValues={{ ...initialValues, optionSet: { id: optionSetId } }}
             onSubmit={onSubmit}
             valueFormatter={valueFormatter}
-            includeAttributes={false}
+            includeAttributes={true}
             mutators={{ ...arrayMutators }}
         >
             <OptionFormContents onCancel={onCancel} />
@@ -167,7 +189,7 @@ export const OptionForm = ({ option, onSubmit, onCancel }: any) => {
     )
 }
 
-type OnDataSetFormSubmit = FormBaseProps<PartialSectionFormValues>['onSubmit']
+type OnOptionFormSubmit = FormBaseProps<SubmittedOptionFormValues>['onSubmit']
 export const EditOptionForm = ({
     option,
     onCancel,
@@ -175,11 +197,14 @@ export const EditOptionForm = ({
 }: {
     option: string | undefined
     onCancel: () => void
-    onSubmitted: (values: SubmittedSectionFormValues) => void
+    onSubmitted: (values: SubmittedOptionFormValues) => void
 }) => {
-    const handlePatch = usePatchModel(option, optionSchemaSection.namePlural)
+    const handlePatch = usePatchModel(
+        option ?? '',
+        optionSchemaSection.namePlural
+    )
 
-    const onFormSubmit: OnDataSetFormSubmit = async (values, form) => {
+    const onFormSubmit: OnOptionFormSubmit = async (values, form) => {
         const jsonPatchOperations = createJsonPatchOperations({
             values,
             dirtyFields: form.getState().dirtyFields,
@@ -190,16 +215,13 @@ export const EditOptionForm = ({
             return createFormError(response.error)
         }
 
-        onSubmitted?.({
-            ...values,
-            id: option,
-        })
+        onSubmitted?.(values)
         return undefined
     }
 
     const queryFn = useBoundResourceQueryFn()
     const optionValues = useQuery({
-        queryFn: queryFn<SectionFormValues>,
+        queryFn: queryFn<OptionFormValues>,
         queryKey: [
             {
                 resource: 'options',
@@ -210,6 +232,10 @@ export const EditOptionForm = ({
             },
         ],
     })
+
+    if (!option) {
+        return null
+    }
 
     if (optionValues.isLoading) {
         return <LoadingSpinner />
@@ -229,11 +255,11 @@ export const NewOptionForm = ({
     onSubmitted,
 }: {
     onCancel: () => void
-    onSubmitted: (values: SubmittedSectionFormValues) => void
+    onSubmitted: (values: SubmittedOptionFormValues) => void
 }) => {
     const handleCreate = useCreateModel(optionSchemaSection.namePlural)
 
-    const onFormSubmit: OnDataSetFormSubmit = async (values) => {
+    const onFormSubmit: OnOptionFormSubmit = async (values) => {
         const res = await handleCreate(values)
         if (res.error) {
             return createFormError(res.error)
@@ -263,16 +289,20 @@ export const EditOrNewOptionForm = ({
 }: {
     option: string | undefined
     onCancel: (s: DrawerState) => void
-    onSubmitted: (values: any) => void
+    onSubmitted: (values: SubmittedOptionFormValues) => void
 }) => {
+    const handleCancel = () => {
+        onCancel({ open: false, id: undefined })
+    }
+
     if (option === undefined) {
-        return <NewOptionForm onSubmitted={onSubmit} onCancel={onCancel} />
+        return <NewOptionForm onSubmitted={onSubmit} onCancel={handleCancel} />
     }
 
     return (
         <EditOptionForm
             option={option}
-            onCancel={onCancel}
+            onCancel={handleCancel}
             onSubmitted={onSubmit}
         />
     )

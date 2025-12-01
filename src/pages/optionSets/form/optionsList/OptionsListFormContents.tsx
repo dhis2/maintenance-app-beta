@@ -10,7 +10,7 @@ import {
     DrawerPortal,
 } from '../../../../components'
 import { useSchemaSectionHandleOrThrow } from '../../../../lib'
-import { EditOrNewOptionForm } from './OptionEdit'
+import { EditOrNewOptionForm, SubmittedOptionFormValues } from './OptionEdit'
 import { OptionsListTable, DrawerState, OptionDetail } from './OptionsListTable'
 
 const OptionListNewOrEdit = () => {
@@ -20,11 +20,15 @@ const OptionListNewOrEdit = () => {
         open: false,
         id: undefined,
     })
-    const onSubmitted = (values: OptionDetail) => {
+    const onSubmitted = (values: SubmittedOptionFormValues) => {
         const newOptions = [...optionsInput.value]
+
+        // Convert SubmittedOptionFormValues to OptionDetail
+
         const index = newOptions.findIndex((o) => o.id === values.id)
         newOptions.splice(index, 1)
-        newOptions.splice(index, 0, { ...values })
+        newOptions.splice(index, 0, values as OptionDetail)
+
         optionsInput.onChange(newOptions)
         setOptionsDrawerState({ open: false, id: undefined })
     }
