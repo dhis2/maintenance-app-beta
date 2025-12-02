@@ -1,3 +1,12 @@
+## [0.101.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.101.0...v0.101.1) (2025-12-02)
+
+
+### Bug Fixes
+
+* approval workflow, filter translation and change of text ([#706](https://github.com/dhis2/maintenance-app-beta/issues/706)) ([5b6959c](https://github.com/dhis2/maintenance-app-beta/commit/5b6959c88a6055f94293acc0f7e2506a2c6aba3e))
+* remove required from label when defaulting to something ([#708](https://github.com/dhis2/maintenance-app-beta/issues/708)) ([674a82c](https://github.com/dhis2/maintenance-app-beta/commit/674a82c1893593704d059088f01490fc79d699a3))
+* try upgrading checkout action ([#707](https://github.com/dhis2/maintenance-app-beta/issues/707)) [skip release] ([2950283](https://github.com/dhis2/maintenance-app-beta/commit/295028379b3018f1a919018ef06dfec9da53b2c1))
+
 # [0.101.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.100.0...v0.101.0) (2025-11-27)
 
 
