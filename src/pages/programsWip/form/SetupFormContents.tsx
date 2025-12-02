@@ -161,12 +161,9 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                     <div className={classes.categoryComboSelect}>
                         <ModelSingleSelectFormField
                             inputWidth={'400px'}
-                            required
                             name="categoryCombo"
                             dataTest="formfields-categorycombo"
-                            label={i18n.t('{{fieldLabel}} (required)', {
-                                fieldLabel: i18n.t('Category combination'),
-                            })}
+                            label={i18n.t('Category combination')}
                             helpText={i18n.t(
                                 'Choose how this program is disaggregated.'
                             )}

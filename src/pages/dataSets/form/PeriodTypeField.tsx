@@ -22,7 +22,6 @@ export function PeriodTypeField() {
     )
     return (
         <Field
-            required
             name="periodType"
             label={i18n.t('Period type')}
             error={meta.touched && !!meta.error}

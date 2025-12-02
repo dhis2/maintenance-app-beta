@@ -73,16 +73,9 @@ export function AggregationTypeFieldByValueType() {
             disabled={disabled}
             component={SingleSelectFieldFF}
             dataTest="formfields-aggregationType"
-            required={!disabled}
             inputWidth={'400px'}
             name={fieldName}
-            label={
-                disabled
-                    ? i18n.t('Aggregation type')
-                    : i18n.t('{{fieldLabel}} (required)', {
-                          fieldLabel: i18n.t('Aggregation type'),
-                      })
-            }
+            label={i18n.t('Aggregation type')}
             helpText={helpText}
             options={options}
             validateFields={[]}
