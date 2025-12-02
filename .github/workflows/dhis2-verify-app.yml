@@ -16,7 +16,7 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v4
             - uses: actions/setup-node@v3
               with:
                   node-version: 20
@@ -41,7 +41,7 @@ jobs:
     lint:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v4
             - uses: actions/setup-node@v3
               with:
                   node-version: 20
@@ -60,7 +60,7 @@ jobs:
     test:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v4
             - uses: actions/setup-node@v3
               with:
                   node-version: 20
@@ -111,7 +111,7 @@ jobs:
         needs: [build, lint, test]
         if: "!github.event.push.repository.fork && github.actor != 'dependabot[bot]'"
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v4
               with:
                   token: ${{ secrets.DHIS2_BOT_GITHUB_TOKEN }}
 
