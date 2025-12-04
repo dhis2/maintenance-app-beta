@@ -9,6 +9,7 @@ import {
     SectionedFormErrorNotice,
     SectionedFormLayout,
 } from '../../components'
+import { DrawerRoot } from '../../components/drawer/Drawer'
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     DEFAULT_FIELD_FILTERS,
@@ -130,6 +131,7 @@ export const Component = () => {
                             <OptionSetFormContents />
                             <DefaultFormFooter cancelTo="/optionSets" />
                         </form>
+                        <DrawerRoot />
                         <SectionedFormErrorNotice />
                     </SectionedFormLayout>
                 </SectionedFormProvider>

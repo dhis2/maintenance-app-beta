@@ -8,9 +8,11 @@ import { useValidator } from '../../../lib/models/useFieldValidators'
 export function CodeField({
     schemaSection,
     modelId,
+    required = false,
 }: {
     schemaSection: SchemaSection
     modelId?: string
+    required?: boolean
 }) {
     const validator = useValidator({ schemaSection, property: 'code', modelId })
 
@@ -20,9 +22,10 @@ export function CodeField({
             dataTest="formfields-code"
             inputWidth="150px"
             name="code"
-            label={i18n.t('Code')}
+            label={required ? i18n.t('Code (required)') : i18n.t('Code')}
             validateFields={[]}
             validate={(code?: string) => validator(code)}
+            required={required}
         />
     )
 }
