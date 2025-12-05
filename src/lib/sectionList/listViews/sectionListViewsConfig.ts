@@ -91,11 +91,11 @@ const defaultAvailableColumnsNoSharing =
     )
 
 /* this is the default views (eg. which columns and filters) to show in the List-page for each section
-	Note: by default, the available columns are merged with columnsDefault.available above.
-	If it's needed to override this for a section, set overrideDefaultAvailable to true
-	and list all available columns in the available array below.
-	Default-list will NOT be merged with columnsDefault.default - list all explicitly.
-	elements in the default array implies they are also available, no need to list them in both. */
+    Note: by default, the available columns are merged with columnsDefault.available above.
+    If it's needed to override this for a section, set overrideDefaultAvailable to true
+    and list all available columns in the available array below.
+    Default-list will NOT be merged with columnsDefault.default - list all explicitly.
+    elements in the default array implies they are also available, no need to list them in both. */
 
 export const modelListViewsConfig = {
     dataElement: {
@@ -839,10 +839,26 @@ export const modelListViewsConfig = {
     },
     validationRule: {
         columns: {
-            available: [],
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Importance'), path: 'importance' },
+                { label: i18n.t('Period type'), path: 'periodType' },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'description',
+                DESCRIPTORS.formName,
+                'instruction',
+                { label: i18n.t('Operator'), path: 'operator' },
+                {
+                    label: i18n.t('Skip this rule during form validation'),
+                    path: 'skipFormValidation',
+                },
+            ],
         },
         filters: {
-            default: ['validationRuleGroup'],
+            default: [],
         },
     },
     validationRuleGroup: {

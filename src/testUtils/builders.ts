@@ -68,6 +68,7 @@ import {
     validationRuleGroupsFormSchema,
     validationRuleGroupsListSchema,
 } from '../pages/validationRuleGroups/form/validationRuleGroupsSchema'
+import { validationRuleListSchema } from '../pages/validationRules/form/validationRuleSchema'
 import {
     CategoryMapping,
     DataElement,
@@ -552,11 +553,7 @@ export const testOption = ({
     }
 }
 
-// TODO: change when schema for validationRule is available
-export const testValidationRule = ({
-    id = randomDhis2Id(),
-    displayName = faker.person.fullName(),
-} = {}) => ({
-    id,
-    displayName,
+export const testValidationRule = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(validationRuleListSchema, { mockeryMapper }),
+    ...overwrites,
 })
