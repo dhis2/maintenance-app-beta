@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectFieldFF } from '@dhis2/ui'
+import { SingleSelectFieldFF, MultiSelectFieldFF } from '@dhis2/ui'
 import * as React from 'react'
 import { Field as FieldRFF, useFormState } from 'react-final-form'
 import {
@@ -36,8 +36,34 @@ function CustomAttribute({ attribute, index }: CustomAttributeProps) {
             })
         )
 
-        if (!required) {
+        if (!required && attribute.valueType !== 'MULTI_TEXT') {
             options.unshift({ value: '', label: i18n.t('<No value>') })
+        }
+
+        if (attribute.valueType === 'MULTI_TEXT') {
+            return (
+                <StandardFormField
+                    key={attribute.id}
+                    dataTest={`attribute-${attribute.id}`}
+                >
+                    <FieldRFF
+                        component={MultiSelectFieldFF as React.FC<never>}
+                        required={required}
+                        inputWidth={inputWidth}
+                        label={attribute.displayFormName}
+                        name={name}
+                        options={options}
+                        parse={(value: string[]) =>
+                            // Transform from array to comma-separated string for API
+                            value?.length > 0 ? value.join(', ') : ''
+                        }
+                        format={(value: string) =>
+                            // Transform from comma-separated string to array for display
+                            value ? value.split(', ') : []
+                        }
+                    />
+                </StandardFormField>
+            )
         }
 
         return (
