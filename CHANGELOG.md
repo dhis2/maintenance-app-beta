@@ -1,3 +1,10 @@
+## [0.101.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.101.1...v0.101.2) (2025-12-08)
+
+
+### Bug Fixes
+
+* modeltransfer to not overwrite given props ([#714](https://github.com/dhis2/maintenance-app-beta/issues/714)) ([efd82d9](https://github.com/dhis2/maintenance-app-beta/commit/efd82d96d1e5aeda8f28f76c28df69c36dc45688))
+
 ## [0.101.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.101.0...v0.101.1) (2025-12-02)
 
 
