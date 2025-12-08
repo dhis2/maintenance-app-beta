@@ -19,6 +19,7 @@ import { FormBaseProvider, useFormBaseContextValue } from './FormBaseContext'
 type MaybeModelWithAttributes = {
     id?: string
     name?: string
+    modelName?: string
     attributeValues?: PartialAttributeValue[]
 }
 
@@ -30,6 +31,7 @@ type FixedFormProps<TValues> = RemoveIndexSignature<FormProps<TValues>>
 type OwnProps<TValues, TFormattedValues = TValues> = {
     initialValues: TValues | undefined
     children: FormProps<TValues>['children']
+    modelName?: string
     includeAttributes?: boolean
     valueFormatter?: (values: NoInfer<TValues>) => TFormattedValues
     onSubmit: EnhancedOnSubmit<TFormattedValues>
@@ -47,10 +49,12 @@ export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
     validate,
     valueFormatter = defaultValueFormatter,
     includeAttributes = true,
+    modelName,
     ...reactFinalFormProps
 }: FormBaseProps<TInitialValues>) {
     const customAttributes = useCustomAttributesQuery({
         enabled: includeAttributes,
+        modelName: modelName,
     })
     const contextValue = useFormBaseContextValue()
 

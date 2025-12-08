@@ -19,8 +19,10 @@ const valueTypeDisabledHelpText = i18n.t(
 
 export function ValueTypeField({
     disabled: externallyDisabled = false,
+    disabledText,
 }: Readonly<{
     disabled?: boolean
+    disabledText?: string
 }>) {
     const { values } = useFormState({ subscription: { values: true } })
     const disabled = !!values.optionSet?.id || externallyDisabled
@@ -52,7 +54,7 @@ export function ValueTypeField({
             }) || []
 
     const combinedHelpText = disabled
-        ? valueTypeDisabledHelpText
+        ? disabledText ?? valueTypeDisabledHelpText
         : valueTypeHelpText
 
     const renderComponent = ({

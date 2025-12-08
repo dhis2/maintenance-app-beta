@@ -44,7 +44,12 @@ export const BasicInfoFormContents = React.memo(
                 </StandardFormField>
 
                 <StandardFormField>
-                    <ValueTypeField disabled={isEdit} />
+                    <ValueTypeField
+                        disabled={isEdit}
+                        disabledText={i18n.t(
+                            'Value type cannot be edited after an option set has been created.'
+                        )}
+                    />
                 </StandardFormField>
             </SectionedFormSection>
         )

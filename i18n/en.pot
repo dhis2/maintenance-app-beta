@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-26T13:01:11.331Z\n"
-"PO-Revision-Date: 2025-11-26T13:01:11.331Z\n"
+"POT-Creation-Date: 2025-12-01T13:30:06.689Z\n"
+"PO-Revision-Date: 2025-12-01T13:30:06.690Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -269,6 +269,9 @@ msgstr "Aggregation type"
 
 msgid "{{fieldLabel}} (required)"
 msgstr "{{fieldLabel}} (required)"
+
+msgid "Code (required)"
+msgstr "Code (required)"
 
 msgid "Code"
 msgstr "Code"
@@ -3057,17 +3060,26 @@ msgstr "Basic Information"
 msgid "Set up the basic information for this option set."
 msgstr "Set up the basic information for this option set."
 
+msgid "Value type cannot be edited after an option set has been created."
+msgstr "Value type cannot be edited after an option set has been created."
+
 msgid "Option Set"
 msgstr "Option Set"
 
-msgid "Something went wrong when loading options"
-msgstr "Something went wrong when loading options"
+msgid "Set up the information for this option."
+msgstr "Set up the information for this option."
 
-msgid "Define options for this option set."
-msgstr "Define options for this option set."
+msgid "Save option"
+msgstr "Save option"
+
+msgid "Saving an option does not save other changes to the option set"
+msgstr "Saving an option does not save other changes to the option set"
 
 msgid "Option set must be saved before options can be added"
 msgstr "Option set must be saved before options can be added"
+
+msgid "Define options for this option set"
+msgstr "Define options for this option set"
 
 msgid "Search by name or code"
 msgstr "Search by name or code"
@@ -3086,6 +3098,13 @@ msgstr "Sort by code (asc)"
 
 msgid "Sort by code (desc)"
 msgstr "Sort by code (desc)"
+
+msgid ""
+"Editing options may be slow with more than {{maximumNumberOfOptions}} "
+"options"
+msgstr ""
+"Editing options may be slow with more than {{maximumNumberOfOptions}} "
+"options"
 
 msgid ""
 "{{hiddenRowsCount}} rows are hidden due to filter. Sorting is disabled "
@@ -4430,12 +4449,6 @@ msgid ""
 msgstr ""
 "Choose which attributes to display, which are required, and which are "
 "searchable"
-
-msgid "Available tracked entity attributes"
-msgstr "Available tracked entity attributes"
-
-msgid "Selected tracked entity attributes"
-msgstr "Selected tracked entity attributes"
 
 msgid "Maximum number of tracked entity instances to return when searching"
 msgstr "Maximum number of tracked entity instances to return when searching"
