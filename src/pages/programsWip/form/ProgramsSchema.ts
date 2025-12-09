@@ -10,6 +10,30 @@ import {
 const { identifiable, withDefaultListColumns, modelReference } =
     modelFormSchemas
 
+const sharingSettingsSchema = z.object({
+    owner: z.string().optional(),
+    external: z.boolean().default(false),
+    public: z.string().optional(),
+    userGroups: z
+        .record(
+            z.object({
+                id: z.string(),
+                access: z.string(),
+                displayName: z.string().optional(),
+            })
+        )
+        .default({}),
+    users: z
+        .record(
+            z.object({
+                id: z.string(),
+                access: z.string(),
+                displayName: z.string().optional(),
+            })
+        )
+        .default({}),
+})
+
 const programBaseSchema = z.object({
     code: z.string().optional(),
     description: z.string().optional(),
@@ -70,6 +94,8 @@ const programBaseSchema = z.object({
     noteLabel: z.string().optional(),
     displayFrontPageList: z.boolean().optional(),
     programStages: z.array(modelReference).default([]),
+    organisationUnits: z.array(modelReference).default([]),
+    sharing: sharingSettingsSchema.optional(),
 })
 
 export const programFormSchema = identifiable.merge(programBaseSchema).extend({

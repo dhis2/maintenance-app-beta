@@ -1,0 +1,51 @@
+.container {
+    border: 1px solid var(--colors-grey400);
+    border-radius: 4px;
+    padding: 16px;
+    background-color: var(--colors-white);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--colors-grey900);
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 8px;
+}
+
+.accessTable {
+    margin-top: 12px;
+}
+
+.accessRow {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--colors-grey200);
+}
+
+.accessRow:last-child {
+    border-bottom: none;
+}
+
+.accessLabel {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--colors-grey700);
+}
+
+.accessValue {
+    font-size: 14px;
+    color: var(--colors-grey900);
+}
