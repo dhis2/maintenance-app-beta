@@ -10,14 +10,10 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import {
-    useSchemaSectionHandleOrThrow,
-    useSyncSelectedSectionWithScroll,
-} from '../../../lib'
+import { useSchemaSectionHandleOrThrow } from '../../../lib'
 
-function ValidationRuleGroupsFormFields() {
+export function ValidationRuleGroupsFormFields() {
     const schemaSection = useSchemaSectionHandleOrThrow()
-    useSyncSelectedSectionWithScroll()
 
     return (
         <>
@@ -78,5 +74,3 @@ function ValidationRuleGroupsFormFields() {
         </>
     )
 }
-
-export default ValidationRuleGroupsFormFields

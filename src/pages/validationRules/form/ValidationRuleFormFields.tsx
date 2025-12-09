@@ -1,19 +1,17 @@
 import i18n from '@dhis2/d2-i18n'
 import {
     CheckboxFieldFF,
-    Field as FieldUI,
     RadioFieldFF,
     SingleSelectFieldFF,
     TextAreaFieldFF,
 } from '@dhis2/ui'
 import React from 'react'
-import { Field, useField } from 'react-final-form'
+import { Field } from 'react-final-form'
 import {
     CodeField,
     CustomAttributesSection,
     DescriptionField,
     HorizontalFieldGroup,
-    ModelMultiSelectField,
     NameField,
     SectionedFormSection,
     SectionedFormSections,
@@ -22,9 +20,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { ExpressionBuilderWithModalField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderWithModalField'
 import { PaddedContainer } from '../../../components/metadataFormControls/ExpressionBuilder/PaddedContainer'
-import { PeriodTypeSelect } from '../../../components/metadataFormControls/PeriodTypeSelect/PeriodTypeSelect'
 import {
     getConstantTranslation,
     useSchema,
@@ -33,6 +29,9 @@ import {
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
 import { ValidationRuleFormDescriptor } from './formDescriptor'
+import { MissingValueStrategyField } from './MissingValueStrategyField'
+import { OrganisationUnitLevelsField } from './OrganisationUnitLevelsField'
+import { PeriodTypeField } from './PeriodTypeField'
 import css from './ValidationRuleFormFields.module.css'
 
 const ValidationRuleFormFields = () => {
@@ -205,7 +204,7 @@ const ValidationRuleFormFields = () => {
                 </StandardFormField>
 
                 <StandardFormField>
-                    <PeriodTypeFieldWrapper />
+                    <PeriodTypeField />
                 </StandardFormField>
 
                 <StandardFormField>
@@ -256,110 +255,6 @@ const ValidationRuleFormFields = () => {
             </SectionedFormSection>
             <CustomAttributesSection schemaSection={schemaSection} />
         </SectionedFormSections>
-    )
-}
-
-// Helper component for PeriodType field
-const PeriodTypeFieldWrapper = () => {
-    const { input, meta } = useField('periodType')
-
-    return (
-        <div className={css.fieldContainer}>
-            <FieldUI
-                name="periodType"
-                label={i18n.t('Period type (required)')}
-                required
-                error={meta.touched && !!meta.error}
-                validationText={meta.touched ? meta.error : undefined}
-            >
-                <PeriodTypeSelect
-                    selected={input.value}
-                    invalid={meta.touched && !!meta.error}
-                    onChange={(selected: string) => input.onChange(selected)}
-                />
-            </FieldUI>
-        </div>
-    )
-}
-
-// Helper component for Missing Value Strategy field
-function MissingValueStrategyField({
-    side,
-}: Readonly<{ side: 'leftSide' | 'rightSide' }>) {
-    const neverSkipField = useField(`${side}.missingValueStrategy`, {
-        type: 'radio',
-        value: 'NEVER_SKIP',
-    })
-    const skipIfAnyField = useField(`${side}.missingValueStrategy`, {
-        type: 'radio',
-        value: 'SKIP_IF_ANY_VALUE_MISSING',
-    })
-    const skipIfAllField = useField(`${side}.missingValueStrategy`, {
-        type: 'radio',
-        value: 'SKIP_IF_ALL_VALUES_MISSING',
-    })
-
-    return (
-        <HorizontalFieldGroup label={i18n.t('Missing value strategy')}>
-            <RadioFieldFF
-                label={i18n.t('Never skip')}
-                input={neverSkipField.input}
-                meta={neverSkipField.meta}
-            />
-            <RadioFieldFF
-                label={i18n.t('Skip if any value is missing')}
-                input={skipIfAnyField.input}
-                meta={skipIfAnyField.meta}
-            />
-            <RadioFieldFF
-                label={i18n.t('Skip if all values are missing')}
-                input={skipIfAllField.input}
-                meta={skipIfAllField.meta}
-            />
-        </HorizontalFieldGroup>
-    )
-}
-
-// Helper component for Organisation Unit Levels field
-const OrganisationUnitLevelsField = () => {
-    const { input, meta } = useField('organisationUnitLevels', {
-        multiple: true,
-        format: (levels: number[]) => {
-            return levels?.map((l) => ({
-                id: l.toString(),
-                displayName: l.toString(),
-                level: l,
-            }))
-        },
-        parse: (levels) => {
-            return levels?.map((l: any) => parseInt(l.id, 10))
-        },
-        validateFields: [],
-    })
-
-    return (
-        <div className={css.fieldContainer}>
-            <ModelMultiSelectField
-                input={input}
-                meta={meta}
-                name="organisationUnitLevels"
-                label={i18n.t('Organisation unit levels to run validation for')}
-                dataTest="formfields-organisationunitlevels"
-                query={{
-                    resource: 'organisationUnitLevels',
-                    params: {
-                        fields: ['displayName', 'level'],
-                        order: ['displayName'],
-                    },
-                }}
-                transform={(values: any[]) =>
-                    values.map((value) => ({
-                        ...value,
-                        id: value.level.toString(),
-                    }))
-                }
-            />
-        </div>
     )
 }
 

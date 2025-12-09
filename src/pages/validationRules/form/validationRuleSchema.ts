@@ -5,39 +5,30 @@ import { Expression, ValidationRule } from '../../../types/generated'
 const { withDefaultListColumns, identifiable, withAttributeValues } =
     modelFormSchemas
 
-// Expression is a reference type, not a nested object in the API
-// leftSide and rightSide are Expression references with their own IDs
 const validationRuleBaseSchema = z.object({
     code: z.string().trim().optional(),
     name: z.string().trim().min(1),
     shortName: z.string().trim().optional(),
     description: z.string().trim().optional(),
-    // leftSide and rightSide are Expression objects, not nested in the validation rule
-    leftSide: z
-        .object({
-            expression: z.string().optional(),
-            description: z.string().optional(),
-            missingValueStrategy: z
-                .nativeEnum(Expression.missingValueStrategy)
-                .optional()
-                .default(Expression.missingValueStrategy.NEVER_SKIP),
-            slidingWindow: z.boolean().optional().default(false),
-        })
-        .optional(),
+    leftSide: z.object({
+        expression: z.string().optional(),
+        description: z.string().optional(),
+        missingValueStrategy: z
+            .nativeEnum(Expression.missingValueStrategy)
+            .default(Expression.missingValueStrategy.NEVER_SKIP),
+        slidingWindow: z.boolean().optional().default(false),
+    }),
     operator: z
         .nativeEnum(ValidationRule.operator)
         .default(ValidationRule.operator.NOT_EQUAL_TO),
-    rightSide: z
-        .object({
-            expression: z.string().optional(),
-            description: z.string().optional(),
-            missingValueStrategy: z
-                .nativeEnum(Expression.missingValueStrategy)
-                .optional()
-                .default(Expression.missingValueStrategy.NEVER_SKIP),
-            slidingWindow: z.boolean().optional().default(false),
-        })
-        .optional(),
+    rightSide: z.object({
+        expression: z.string().optional(),
+        description: z.string().optional(),
+        missingValueStrategy: z
+            .nativeEnum(Expression.missingValueStrategy)
+            .default(Expression.missingValueStrategy.NEVER_SKIP),
+        slidingWindow: z.boolean().optional().default(false),
+    }),
     instruction: z.string().trim().optional(),
     periodType: z
         .nativeEnum(ValidationRule.periodType)
