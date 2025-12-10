@@ -114,6 +114,23 @@ const PERIOD_TYPE = {
     Yearly: i18n.t('Yearly'),
 }
 
+const OPERATOR = {
+    equal_to: i18n.t('Equal to'),
+    not_equal_to: i18n.t('Not equal to'),
+    greater_than: i18n.t('Greater than'),
+    greater_than_or_equal_to: i18n.t('Greater than or equal to'),
+    less_than: i18n.t('Less than'),
+    less_than_or_equal_to: i18n.t('Less than or equal to'),
+    compulsory_pair: i18n.t('Compulsory pair'),
+    exclusive_pair: i18n.t('Exclusive pair'),
+}
+
+const IMPORTANCE = {
+    HIGH: i18n.t('High'),
+    MEDIUM: i18n.t('Medium'),
+    LOW: i18n.t('Low'),
+}
+
 const SEND_STRATEGY = {
     COLLECTIVE_SUMMARY: i18n.t('Collective summary'),
     SINGLE_NOTIFICATION: i18n.t('Single notification'),
@@ -160,6 +177,8 @@ const allConstantTranslations: Record<string, string> = {
     ...GEOMETRY_TYPE,
     ...FORM_TYPE,
     ...PERIOD_TYPE,
+    ...OPERATOR,
+    ...IMPORTANCE,
     ...RENDERING_TYPE,
     ...SEND_STRATEGY,
     ...DATA_SET_NOTIFICATION_TRIGGER,
