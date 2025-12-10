@@ -1,15 +1,13 @@
-import { useDataEngine, useAlert } from '@dhis2/app-runtime'
+import { useAlert, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { SharingDialog } from '@dhis2/ui'
 import { useQueryClient } from '@tanstack/react-query'
 import React, { useCallback, useMemo, useState } from 'react'
 import { useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
-import {
-    areSharingPropertiesSimilar,
-    type SharingSettings,
-} from '../../../../lib'
-import { ProgramValues } from '../../Edit'
+import type { SharingSettings } from '../../../../lib'
+import { areSharingPropertiesSimilar } from '../../../../lib'
+import type { ProgramValues } from '../../Edit'
 import css from './RoleAccessSummary.module.css'
 import { RoleAccessSummaryBox } from './RoleAccessSummaryBox'
 
@@ -86,8 +84,6 @@ export const RoleAccessSummary = () => {
 
             const programSharing = programSharingResponse.sharing?.object
 
-            // Apply program sharing (including metadata) to all stages
-            // This ensures metadata is consistent across all stages
             const mutations = programStages.map((stage) =>
                 dataEngine.mutate({
                     resource: `sharing?type=programStage&id=${stage.id}`,
@@ -151,8 +147,6 @@ export const RoleAccessSummary = () => {
                     return
                 }
 
-                // Apply program sharing (including metadata) to this stage
-                // This ensures metadata is consistent with the program
                 await dataEngine.mutate({
                     resource: `sharing?type=programStage&id=${stageId}`,
                     type: 'update',

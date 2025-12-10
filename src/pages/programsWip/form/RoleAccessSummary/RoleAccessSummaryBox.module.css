@@ -49,12 +49,15 @@
     grid-template-columns: 1fr 200px 200px;
     gap: 16px;
     padding: 8px 0;
-    border-bottom: 1px solid var(--colors-grey300);
     align-items: center;
 }
 
+.accessHeaderRow {
+    border-bottom: 1px solid var(--colors-grey300);
+}
+
 .accessRow {
-    border-bottom-color: var(--colors-grey200);
+    border-bottom: 1px solid var(--colors-grey200);
 }
 
 .accessRow:last-child {

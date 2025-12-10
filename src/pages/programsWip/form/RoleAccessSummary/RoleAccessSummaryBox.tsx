@@ -5,11 +5,8 @@ import {
     InlineWarning,
     StandardFormSubsectionTitle,
 } from '../../../../components'
-import {
-    ParsedAccessPart,
-    parseAccessString,
-    SharingSettings,
-} from '../../../../lib'
+import type { ParsedAccessPart, SharingSettings } from '../../../../lib'
+import { parseAccessString } from '../../../../lib'
 import css from './RoleAccessSummaryBox.module.css'
 
 const getDataAccessLabel = (access: ParsedAccessPart | null): string => {
@@ -109,18 +106,20 @@ export const RoleAccessSummaryBox = ({
                         {i18n.t('Public (All users)')}
                     </div>
                     <div
-                        className={`${css.accessData} ${
-                            publicAccessParsed?.data.read ? '' : css.noAccess
-                        }`}
+                        className={
+                            publicAccessParsed?.data.read
+                                ? css.accessData
+                                : `${css.accessData} ${css.noAccess}`
+                        }
                     >
                         {getDataAccessLabel(publicAccessParsed?.data || null)}
                     </div>
                     <div
-                        className={`${css.accessMetadata} ${
+                        className={
                             publicAccessParsed?.metadata.read
-                                ? ''
-                                : css.noAccess
-                        }`}
+                                ? css.accessMetadata
+                                : `${css.accessMetadata} ${css.noAccess}`
+                        }
                     >
                         {getMetadataAccessLabel(
                             publicAccessParsed?.metadata || null
@@ -131,9 +130,11 @@ export const RoleAccessSummaryBox = ({
                 <div className={css.accessRow}>
                     <div className={css.accessLabel}>{i18n.t('External')}</div>
                     <div
-                        className={`${css.accessData} ${
-                            isExternal ? '' : css.noAccess
-                        }`}
+                        className={
+                            isExternal
+                                ? css.accessData
+                                : `${css.accessData} ${css.noAccess}`
+                        }
                     >
                         {isExternal
                             ? i18n.t('Has access')
@@ -154,16 +155,20 @@ export const RoleAccessSummaryBox = ({
                                 {entity.displayName || entity.id}
                             </div>
                             <div
-                                className={`${css.accessData} ${
-                                    parsed?.data.read ? '' : css.noAccess
-                                }`}
+                                className={
+                                    parsed?.data.read
+                                        ? css.accessData
+                                        : `${css.accessData} ${css.noAccess}`
+                                }
                             >
                                 {getDataAccessLabel(parsed?.data || null)}
                             </div>
                             <div
-                                className={`${css.accessMetadata} ${
-                                    parsed?.metadata.read ? '' : css.noAccess
-                                }`}
+                                className={
+                                    parsed?.metadata.read
+                                        ? css.accessMetadata
+                                        : `${css.accessMetadata} ${css.noAccess}`
+                                }
                             >
                                 {getMetadataAccessLabel(
                                     parsed?.metadata || null
