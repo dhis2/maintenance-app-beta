@@ -92,15 +92,6 @@ export const RoleAccessBox = ({
             </div>
 
             <div className={css.accessTable}>
-                <div className={css.accessHeaderRow}>
-                    <div className={css.accessLabel}></div>
-                    <div className={css.accessHeader}>
-                        {i18n.t('Data access')}
-                    </div>
-                    <div className={css.accessHeader}>
-                        {i18n.t('Metadata access')}
-                    </div>
-                </div>
                 <div className={css.accessRow}>
                     <div className={css.accessLabel}>
                         {i18n.t('Public (All users)')}
@@ -136,12 +127,12 @@ export const RoleAccessBox = ({
                                 : `${css.accessData} ${css.noAccess}`
                         }
                     >
-                        {isExternal
-                            ? i18n.t('Has access')
-                            : i18n.t('No access')}
+                        {getDataAccessLabel(
+                            isExternal ? { read: true, write: true } : null
+                        )}
                     </div>
                     <div className={`${css.accessMetadata} ${css.noAccess}`}>
-                        {i18n.t('No access')}
+                        {getMetadataAccessLabel(null)}
                     </div>
                 </div>
 

@@ -214,8 +214,7 @@ export const RoleAccess = () => {
                 queryKey: [{ resource: 'programs', id: programId }],
             })
         }
-        handleCloseModal()
-    }, [programId, queryClient, handleCloseModal])
+    }, [programId, queryClient])
 
     const programSharing = values.sharing
 
