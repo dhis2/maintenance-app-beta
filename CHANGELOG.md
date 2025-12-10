@@ -1,3 +1,10 @@
+# [0.102.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.101.2...v0.102.0) (2025-12-10)
+
+
+### Features
+
+* validation rules form [DHIS2-20473] ([#715](https://github.com/dhis2/maintenance-app-beta/issues/715)) ([628e2bd](https://github.com/dhis2/maintenance-app-beta/commit/628e2bdb28c6d42c87375bf2dfc360d24922a417))
+
 ## [0.101.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.101.1...v0.101.2) (2025-12-08)
 
 
