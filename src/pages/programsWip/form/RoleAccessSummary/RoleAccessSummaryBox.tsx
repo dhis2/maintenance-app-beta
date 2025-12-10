@@ -110,16 +110,16 @@ export const RoleAccessSummaryBox = ({
                     </div>
                     <div
                         className={`${css.accessData} ${
-                            !publicAccessParsed?.data.read ? css.noAccess : ''
+                            publicAccessParsed?.data.read ? '' : css.noAccess
                         }`}
                     >
                         {getDataAccessLabel(publicAccessParsed?.data || null)}
                     </div>
                     <div
                         className={`${css.accessMetadata} ${
-                            !publicAccessParsed?.metadata.read
-                                ? css.noAccess
-                                : ''
+                            publicAccessParsed?.metadata.read
+                                ? ''
+                                : css.noAccess
                         }`}
                     >
                         {getMetadataAccessLabel(
@@ -132,7 +132,7 @@ export const RoleAccessSummaryBox = ({
                     <div className={css.accessLabel}>{i18n.t('External')}</div>
                     <div
                         className={`${css.accessData} ${
-                            !isExternal ? css.noAccess : ''
+                            isExternal ? '' : css.noAccess
                         }`}
                     >
                         {isExternal
@@ -155,14 +155,14 @@ export const RoleAccessSummaryBox = ({
                             </div>
                             <div
                                 className={`${css.accessData} ${
-                                    !parsed?.data.read ? css.noAccess : ''
+                                    parsed?.data.read ? '' : css.noAccess
                                 }`}
                             >
                                 {getDataAccessLabel(parsed?.data || null)}
                             </div>
                             <div
                                 className={`${css.accessMetadata} ${
-                                    !parsed?.metadata.read ? css.noAccess : ''
+                                    parsed?.metadata.read ? '' : css.noAccess
                                 }`}
                             >
                                 {getMetadataAccessLabel(
