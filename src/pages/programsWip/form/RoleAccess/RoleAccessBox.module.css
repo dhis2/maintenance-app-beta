@@ -4,12 +4,13 @@
     padding: 16px;
     background-color: var(--colors-white);
     max-width: 850px;
+    min-width: 620px;
 }
 
 .header {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     gap: 12px;
     margin-bottom: 16px;
@@ -19,14 +20,19 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    flex: 0 1 auto;
+    flex: 1 1 auto;
     min-width: 0;
+    flex-wrap: wrap;
+    max-width: 100%;
 }
 
 .titleContainer h3 {
     margin: 0;
-    flex-shrink: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
     min-width: 0;
+    line-height: 1.4;
+    max-width: 100%;
 }
 
 .titleContainer > *:last-child {
@@ -37,6 +43,7 @@
     display: flex;
     gap: 8px;
     margin-left: auto;
+    flex-shrink: 0;
 }
 
 .accessTable {
