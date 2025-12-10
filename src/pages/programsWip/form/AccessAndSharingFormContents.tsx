@@ -7,7 +7,7 @@ import {
     StandardFormSectionTitle,
 } from '../../../components'
 import { SectionedFormSection } from '../../../components/sectionedForm'
-import { RoleAccessSummary } from './RoleAccessSummary'
+import { RoleAccessSummary } from './RoleAccessSummary/RoleAccessSummary'
 
 export const AccessAndSharingFormContents = React.memo(
     function AccessAndSharingFormContents({ name }: { name: string }) {

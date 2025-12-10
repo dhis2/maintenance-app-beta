@@ -5,8 +5,11 @@ import { useQueryClient } from '@tanstack/react-query'
 import React, { useCallback, useMemo, useState } from 'react'
 import { useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
-import { areSharingPropertiesSimilar, type SharingSettings } from '../../../lib'
-import { ProgramValues } from '../Edit'
+import {
+    areSharingPropertiesSimilar,
+    type SharingSettings,
+} from '../../../../lib'
+import { ProgramValues } from '../../Edit'
 import css from './RoleAccessSummary.module.css'
 import { RoleAccessSummaryBox } from './RoleAccessSummaryBox'
 

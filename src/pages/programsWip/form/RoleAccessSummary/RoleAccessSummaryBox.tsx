@@ -1,12 +1,15 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import React from 'react'
-import { InlineWarning, StandardFormSubsectionTitle } from '../../../components'
+import {
+    InlineWarning,
+    StandardFormSubsectionTitle,
+} from '../../../../components'
 import {
     ParsedAccessPart,
     parseAccessString,
     SharingSettings,
-} from '../../../lib'
+} from '../../../../lib'
 import css from './RoleAccessSummaryBox.module.css'
 
 const getDataAccessLabel = (access: ParsedAccessPart | null): string => {
