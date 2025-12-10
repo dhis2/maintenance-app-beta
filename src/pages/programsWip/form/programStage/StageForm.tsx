@@ -40,6 +40,14 @@ export const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     'name',
     'description',
+    'style',
+    'enableUserAssignment',
+    'featureType',
+    'preGenerateUID',
+    'executionDateLabel',
+    'dueDateLabel',
+    'formName',
+    'eventLabel',
     'programStageSections[id,displayName]',
 ] as const
 
@@ -74,16 +82,33 @@ export type StageFormProps = {
     stage?: PartialStageFormValues
     onCancel?: () => void
     onSubmit: OnSubmitWithClose
+    existingStages?: Array<{ id: string; name?: string; displayName?: string }>
 }
 
-export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
+export const StageForm = ({
+    stage,
+    onSubmit,
+    onCancel,
+    existingStages,
+}: StageFormProps) => {
     const programId = useParams().id as string
 
     const initialValues: PartialStageFormValues | undefined = useMemo(() => {
         if (stage) {
-            return stage
+            return {
+                ...stage,
+                featureType: stage.featureType,
+            }
         }
-        return { ...initialStageValue, program: { id: programId } }
+        const values = { ...initialStageValue, program: { id: programId } }
+        const normalizedFeatureType =
+            (values.featureType as string | undefined) === ''
+                ? undefined
+                : values.featureType
+        return {
+            ...values,
+            featureType: normalizedFeatureType,
+        } as PartialStageFormValues
     }, [stage, programId])
 
     const closeOnSubmitRef = React.useRef(false)
@@ -120,6 +145,7 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
                                     <StageFormContents
                                         isSubsection
                                         setSelectedSection={setSelectedSection}
+                                        existingStages={existingStages}
                                     />
                                     <FormFooterWrapper>
                                         <ButtonStrip>
@@ -177,6 +203,7 @@ export const EditStageForm = ({
     stage,
     onCancel,
     onSubmitted,
+    existingStages,
 }: {
     stage: DisplayableModel
     onCancel: () => void
@@ -184,6 +211,7 @@ export const EditStageForm = ({
         values: SubmittedStageFormValues,
         closeOnSubmit: boolean
     ) => void
+    existingStages?: Array<{ id: string; name?: string; displayName?: string }>
 }) => {
     const handlePatch = usePatchModel(stage.id, stageSchemaSection.namePlural)
 
@@ -244,6 +272,7 @@ export const EditStageForm = ({
             stage={stageValues.data}
             onSubmit={onFormSubmit}
             onCancel={onCancel}
+            existingStages={existingStages}
         />
     )
 }
@@ -251,12 +280,14 @@ export const EditStageForm = ({
 export const NewStageForm = ({
     onCancel,
     onSubmitted,
+    existingStages,
 }: {
     onCancel: () => void
     onSubmitted: (
         values: SubmittedStageFormValues,
         closeOnSubmit: boolean
     ) => void
+    existingStages?: Array<{ id: string; name?: string; displayName?: string }>
 }) => {
     const handleCreate = useCreateModel(stageSchemaSection.namePlural)
     const onFormSubmit: OnSubmitWithClose = async (
@@ -286,6 +317,7 @@ export const NewStageForm = ({
             stage={undefined}
             onSubmit={onFormSubmit}
             onCancel={onCancel}
+            existingStages={existingStages}
         />
     )
 }
@@ -294,6 +326,7 @@ export const EditOrNewStageForm = ({
     stage,
     onCancel,
     onSubmitted,
+    existingStages,
 }: {
     stage: DisplayableModel | null | undefined
     onCancel: () => void
@@ -301,13 +334,20 @@ export const EditOrNewStageForm = ({
         values: SubmittedStageFormValues,
         closeOnSubmit: boolean
     ) => void
+    existingStages?: Array<{ id: string; name?: string; displayName?: string }>
 }) => {
     if (stage === undefined) {
         return
     }
 
     if (stage === null) {
-        return <NewStageForm onSubmitted={onSubmitted} onCancel={onCancel} />
+        return (
+            <NewStageForm
+                onSubmitted={onSubmitted}
+                onCancel={onCancel}
+                existingStages={existingStages}
+            />
+        )
     }
 
     return (
@@ -315,6 +355,7 @@ export const EditOrNewStageForm = ({
             stage={stage}
             onCancel={onCancel}
             onSubmitted={onSubmitted}
+            existingStages={existingStages}
         />
     )
 }

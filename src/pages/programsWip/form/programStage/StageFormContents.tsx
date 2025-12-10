@@ -1,34 +1,114 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button } from '@dhis2/ui'
-import React from 'react'
-import { useFormState } from 'react-final-form'
 import {
+    Button,
+    CheckboxFieldFF,
+    InputFieldFF,
+    SingleSelectFieldFF,
+} from '@dhis2/ui'
+import React from 'react'
+import { Field, useFormState } from 'react-final-form'
+import {
+    ColorAndIconField,
+    DescriptionField,
     DrawerPortal,
-    NameField,
     SectionedFormSection,
     SectionedFormSections,
+    StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
+    StandardFormSubsectionTitle,
 } from '../../../../components'
 import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
+    useValidator,
 } from '../../../../lib'
 import { EditOrNowStageSectionForm } from './programStageSection/ProgramStageSectionForm'
 import { stageSchemaSection } from './StageForm'
 import { StageFormDescriptor } from './stageFormDescriptor'
 
+const featureTypes = [
+    {
+        value: '',
+        label: i18n.t('<No value>'),
+    },
+    {
+        value: 'NONE',
+        label: i18n.t('None'),
+    },
+    {
+        value: 'POINT',
+        label: i18n.t('Point'),
+    },
+    {
+        value: 'POLYGON',
+        label: i18n.t('Polygon'),
+    },
+]
+
 export const StageFormContents = ({
     isSubsection,
     setSelectedSection,
+    existingStages,
 }: {
     isSubsection: boolean
     setSelectedSection: (name: string) => void
+    existingStages?: Array<{ id: string; name?: string; displayName?: string }>
 }) => {
     const [sectionsFormOpen, setSectionsFormOpen] = React.useState(false)
     const { values } = useFormState({ subscription: { values: true } })
     const descriptor = useSectionedFormContext<typeof StageFormDescriptor>()
     useSyncSelectedSectionWithScroll(setSelectedSection)
+
+    const executionDateLabelValidator = useValidator({
+        schemaSection: stageSchemaSection,
+        property: 'executionDateLabel',
+    })
+    const dueDateLabelValidator = useValidator({
+        schemaSection: stageSchemaSection,
+        property: 'dueDateLabel',
+    })
+    const formNameValidator = useValidator({
+        schemaSection: stageSchemaSection,
+        property: 'formName',
+    })
+    const eventLabelValidator = useValidator({
+        schemaSection: stageSchemaSection,
+        property: 'eventLabel',
+    })
+
+    const nameValidator = useValidator({
+        schemaSection: stageSchemaSection,
+        property: 'name',
+    })
+
+    const [nameWarning, setNameWarning] = React.useState<string | undefined>()
+
+    const checkDuplicateName = React.useCallback(
+        (value: string) => {
+            if (existingStages && value) {
+                const currentStageId = values.id
+                const isDuplicate = existingStages.some(
+                    (stage) =>
+                        stage.id !== currentStageId &&
+                        (stage.name === value || stage.displayName === value)
+                )
+
+                if (isDuplicate) {
+                    setNameWarning(
+                        i18n.t(
+                            'A stage with this name already exists in this program'
+                        )
+                    )
+                } else {
+                    setNameWarning(undefined)
+                }
+            } else {
+                setNameWarning(undefined)
+            }
+        },
+        [existingStages, values.id]
+    )
 
     return (
         <SectionedFormSections>
@@ -43,9 +123,119 @@ export const StageFormContents = ({
                         'Configure the basic information for this program stage.'
                     )}
                 </StandardFormSectionDescription>
-                <NameField schemaSection={stageSchemaSection} />
-                <div>FORM VALUES: {values && JSON.stringify(values)}</div>
-                <div style={{ minHeight: 600 }} />
+                <StandardFormField>
+                    <Field name="name" validate={nameValidator}>
+                        {({ input, meta }) => (
+                            <InputFieldFF
+                                input={{
+                                    ...input,
+                                    onChange: (value: string) => {
+                                        input.onChange(value)
+                                        checkDuplicateName(value)
+                                    },
+                                }}
+                                meta={meta}
+                                validateFields={[]}
+                                dataTest="formfields-name"
+                                required
+                                inputWidth="400px"
+                                label={i18n.t('Name')}
+                                validationText={nameWarning}
+                                warning={!!nameWarning}
+                            />
+                        )}
+                    </Field>
+                </StandardFormField>
+                <StandardFormField>
+                    <DescriptionField />
+                </StandardFormField>
+                <StandardFormField>
+                    <ColorAndIconField />
+                </StandardFormField>
+
+                <StandardFormSubsectionTitle>
+                    {i18n.t('Configuration options')}
+                </StandardFormSubsectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Set up more advanced options for this program stage.'
+                    )}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <Field
+                        name="enableUserAssignment"
+                        type="checkbox"
+                        component={CheckboxFieldFF}
+                        label={i18n.t('Allow user assignment of events')}
+                        dataTest="formfields-enableUserAssignment"
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <Field
+                        component={SingleSelectFieldFF}
+                        name="featureType"
+                        label={i18n.t('Feature type')}
+                        inputWidth="400px"
+                        options={featureTypes}
+                        dataTest="formfields-featureType"
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <Field
+                        name="preGenerateUID"
+                        type="checkbox"
+                        component={CheckboxFieldFF}
+                        label={i18n.t('Pre-generate event UID')}
+                        dataTest="formfields-preGenerateUID"
+                    />
+                </StandardFormField>
+
+                <StandardFormSubsectionTitle>
+                    {i18n.t('Custom terminology')}
+                </StandardFormSubsectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t('Customise the wording of labels for this stage.')}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <Field
+                        component={InputFieldFF}
+                        name="executionDateLabel"
+                        inputWidth="400px"
+                        label={i18n.t('Custom label for report date')}
+                        dataTest="formfields-executionDateLabel"
+                        validate={executionDateLabelValidator}
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <Field
+                        component={InputFieldFF}
+                        name="dueDateLabel"
+                        inputWidth="400px"
+                        label={i18n.t('Custom label for due date')}
+                        dataTest="formfields-dueDateLabel"
+                        validate={dueDateLabelValidator}
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <Field
+                        component={InputFieldFF}
+                        name="formName"
+                        inputWidth="400px"
+                        label={i18n.t('Custom label for program stage')}
+                        dataTest="formfields-formName"
+                        validate={formNameValidator}
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <Field
+                        component={InputFieldFF}
+                        name="eventLabel"
+                        inputWidth="400px"
+                        label={i18n.t('Custom label for event')}
+                        dataTest="formfields-eventLabel"
+                        validate={eventLabelValidator}
+                    />
+                </StandardFormField>
             </SectionedFormSection>
             <SectionedFormSection
                 name={descriptor.getSection('stageCreationAndScheduling').name}

@@ -34,6 +34,12 @@ export const ProgramStagesFormContents = React.memo(
         >()
         const isStageFormOpen = !!stageFormOpen || stageFormOpen === null
 
+        const existingStages = stagesFieldArray.value.map((stage) => ({
+            id: stage.id,
+            name: stage.displayName,
+            displayName: stage.displayName,
+        }))
+
         const handleSubmittedStage = (
             values: SubmittedStageFormValues,
             closeOnSubmit: boolean = true
@@ -75,6 +81,7 @@ export const ProgramStagesFormContents = React.memo(
                                 stage={stageFormOpen}
                                 onCancel={onCloseStageForm}
                                 onSubmitted={handleSubmittedStage}
+                                existingStages={existingStages}
                             />
                         </div>
                     )}
