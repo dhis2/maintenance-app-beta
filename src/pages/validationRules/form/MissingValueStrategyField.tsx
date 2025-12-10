@@ -21,7 +21,10 @@ export function MissingValueStrategyField({
     })
 
     return (
-        <HorizontalFieldGroup label={i18n.t('Missing value strategy')}>
+        <HorizontalFieldGroup
+            label={i18n.t('Missing value strategy')}
+            dataTest={`formfields-missingValueStategy-${side}`}
+        >
             <RadioFieldFF
                 label={i18n.t('Never skip')}
                 input={neverSkipField.input}

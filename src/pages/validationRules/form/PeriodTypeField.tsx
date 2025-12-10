@@ -11,9 +11,9 @@ export const PeriodTypeField = () => {
     return (
         <div className={css.fieldContainer}>
             <FieldUI
+                dataTest="formfields-periodtype"
                 name="periodType"
-                label={i18n.t('Period type (required)')}
-                required
+                label={i18n.t('Period type')}
                 error={meta.touched && !!meta.error}
                 validationText={meta.touched ? meta.error : undefined}
             >

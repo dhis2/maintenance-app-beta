@@ -113,7 +113,7 @@ const ValidationRuleFormFields = () => {
                 <div className={css.expressionContainer}>
                     <PaddedContainer>
                         <div className={css.subtitle}>
-                            {i18n.t('Left side expression (required)')}
+                            {i18n.t('Left side expression')}
                         </div>
                         <StandardFormField>
                             <p>
@@ -134,6 +134,7 @@ const ValidationRuleFormFields = () => {
                         <StandardFormField>
                             <Field
                                 name="leftSide.slidingWindow"
+                                dataTest="formfields-leftSide.slidingWindow"
                                 type="checkbox"
                                 component={CheckboxFieldFF}
                                 label={i18n.t(
@@ -148,17 +149,17 @@ const ValidationRuleFormFields = () => {
                     <Field
                         component={SingleSelectFieldFF}
                         inputWidth="400px"
-                        label={i18n.t('Comparison operator (required)')}
+                        label={i18n.t('Comparison operator')}
                         name="operator"
-                        required
                         options={operatorOptions}
+                        dataTest="formfields-operator"
                     />
                 </StandardFormField>
 
                 <div className={css.expressionContainer}>
                     <PaddedContainer>
                         <div className={css.subtitle}>
-                            {i18n.t('Right side expression (required)')}
+                            {i18n.t('Right side expression')}
                         </div>
                         <StandardFormField>
                             <p>
@@ -186,6 +187,7 @@ const ValidationRuleFormFields = () => {
                                 label={i18n.t(
                                     'Sliding window: validation checks against relative period'
                                 )}
+                                dataTest="formfields-rightSide.slidingWindow"
                             />
                         </StandardFormField>
                     </PaddedContainer>
@@ -200,6 +202,7 @@ const ValidationRuleFormFields = () => {
                         helpText={i18n.t(
                             'Instructions are shown when validating data in Data Entry and Android apps.'
                         )}
+                        dataTest="formfields-instruction"
                     />
                 </StandardFormField>
 
@@ -209,6 +212,7 @@ const ValidationRuleFormFields = () => {
 
                 <StandardFormField>
                     <HorizontalFieldGroup
+                        dataTest={'formfields-importance'}
                         label={i18n.t('Importance')}
                         helpText={i18n.t(
                             'Changes the appearance of the validation rule output during Data Entry.'
@@ -240,6 +244,7 @@ const ValidationRuleFormFields = () => {
 
                 <StandardFormField>
                     <Field
+                        dataTest="formfields-skipFormValidation"
                         name="skipFormValidation"
                         type="checkbox"
                         component={CheckboxFieldFF}
