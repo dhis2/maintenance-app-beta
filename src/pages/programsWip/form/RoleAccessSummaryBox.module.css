@@ -3,6 +3,7 @@
     border-radius: 4px;
     padding: 16px;
     background-color: var(--colors-white);
+    max-width: 800px;
 }
 
 .header {
@@ -12,11 +13,15 @@
     margin-bottom: 16px;
 }
 
-.title {
-    font-size: 14px;
-    font-weight: 600;
+.titleContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.titleContainer h3 {
     margin: 0;
-    color: var(--colors-grey900);
 }
 
 .buttonGroup {
@@ -28,11 +33,28 @@
     margin-top: 12px;
 }
 
+.accessHeaderRow {
+    display: grid;
+    grid-template-columns: 1fr 200px 200px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--colors-grey300);
+    gap: 16px;
+}
+
+.accessHeader {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--colors-grey700);
+    text-align: left;
+}
+
 .accessRow {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 200px 200px;
     padding: 8px 0;
     border-bottom: 1px solid var(--colors-grey200);
+    gap: 16px;
+    align-items: center;
 }
 
 .accessRow:last-child {
@@ -45,7 +67,18 @@
     color: var(--colors-grey700);
 }
 
-.accessValue {
+.accessData {
     font-size: 14px;
     color: var(--colors-grey900);
+    text-align: left;
+}
+
+.accessMetadata {
+    font-size: 14px;
+    color: var(--colors-grey900);
+    text-align: left;
+}
+
+.noAccess {
+    color: var(--colors-grey600);
 }

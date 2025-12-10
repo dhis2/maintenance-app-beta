@@ -5,19 +5,10 @@ import { useQueryClient } from '@tanstack/react-query'
 import React, { useCallback, useMemo, useState } from 'react'
 import { useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
+import { areSharingPropertiesSimilar, type SharingSettings } from '../../../lib'
 import { ProgramValues } from '../Edit'
+import css from './RoleAccessSummary.module.css'
 import { RoleAccessSummaryBox } from './RoleAccessSummaryBox'
-
-type SharingSettings = {
-    owner?: string
-    external: boolean
-    public?: string
-    userGroups: Record<
-        string,
-        { id: string; access: string; displayName?: string }
-    >
-    users: Record<string, { id: string; access: string; displayName?: string }>
-}
 
 type ProgramStageWithSharing = {
     id: string
@@ -92,15 +83,12 @@ export const RoleAccessSummary = () => {
 
             const programSharing = programSharingResponse.sharing?.object
 
+            // Apply program sharing (including metadata) to all stages
+            // This ensures metadata is consistent across all stages
             const mutations = programStages.map((stage) =>
                 dataEngine.mutate({
-                    resource: 'sharing',
+                    resource: `sharing?type=programStage&id=${stage.id}`,
                     type: 'update',
-                    id: stage.id,
-                    params: {
-                        type: 'programStage',
-                        id: stage.id,
-                    },
                     data: {
                         meta: {
                             allowPublicAccess: true,
@@ -112,7 +100,7 @@ export const RoleAccessSummary = () => {
                             displayName: stage.displayName,
                         },
                     },
-                })
+                } as any)
             )
 
             await Promise.all(mutations)
@@ -160,14 +148,11 @@ export const RoleAccessSummary = () => {
                     return
                 }
 
+                // Apply program sharing (including metadata) to this stage
+                // This ensures metadata is consistent with the program
                 await dataEngine.mutate({
-                    resource: 'sharing',
+                    resource: `sharing?type=programStage&id=${stageId}`,
                     type: 'update',
-                    id: stageId,
-                    params: {
-                        type: 'programStage',
-                        id: stageId,
-                    },
                     data: {
                         meta: {
                             allowPublicAccess: true,
@@ -179,7 +164,7 @@ export const RoleAccessSummary = () => {
                             displayName: stage.displayName,
                         },
                     },
-                })
+                } as any)
 
                 showSuccess()
 
@@ -239,13 +224,7 @@ export const RoleAccessSummary = () => {
 
     return (
         <>
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '16px',
-                }}
-            >
+            <div className={css.container}>
                 <RoleAccessSummaryBox
                     title={i18n.t('Program: {{name}}', {
                         name: values.name || i18n.t('Untitled'),
@@ -257,11 +236,10 @@ export const RoleAccessSummary = () => {
                 />
 
                 {programStages.map((stage) => {
-                    const hasAccessDifference =
-                        stage.sharing &&
-                        programSharing &&
-                        JSON.stringify(stage.sharing) !==
-                            JSON.stringify(programSharing)
+                    const isDifferentFromProgram = !areSharingPropertiesSimilar(
+                        stage.sharing,
+                        programSharing
+                    )
 
                     return (
                         <RoleAccessSummaryBox
@@ -271,7 +249,7 @@ export const RoleAccessSummary = () => {
                             })}
                             type="stage"
                             sharing={stage.sharing}
-                            hasAccessDifference={hasAccessDifference}
+                            isDifferentFromProgram={isDifferentFromProgram}
                             onApplyProgramAccessRules={() =>
                                 handleApplyProgramAccessRules(stage.id)
                             }

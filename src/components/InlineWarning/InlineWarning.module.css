@@ -1,0 +1,20 @@
+.warning {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacers-dp4);
+    color: var(--colors-grey800);
+}
+
+.warningBadge {
+    background-color: #ffecb3;
+    padding: 6px 12px;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    color: #6f3205;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
