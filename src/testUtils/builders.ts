@@ -509,9 +509,7 @@ export const testOrgUnit = (overwrites: Record<any, any> | undefined = {}) => {
     } as unknown as Partial<OrganisationUnit>
 }
 
-export const testValidationRuleGroups = (
-    overwrites: Record<any, any> = {}
-) => ({
+export const testValidationRuleGroup = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(validationRuleGroupsListSchema, { mockeryMapper }),
     ...overwrites,
 })
@@ -520,6 +518,13 @@ export const testValidationRuleGroupsForm = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(validationRuleGroupsFormSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testValidationRule = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(validationRuleListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
@@ -552,8 +557,3 @@ export const testOption = ({
         displayName: displayName ?? optionName,
     }
 }
-
-export const testValidationRule = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(validationRuleListSchema, { mockeryMapper }),
-    ...overwrites,
-})
