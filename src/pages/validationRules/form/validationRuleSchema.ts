@@ -1,47 +1,52 @@
 import { z } from 'zod'
-import { modelFormSchemas } from '../../../lib'
+import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 import { Expression, ValidationRule } from '../../../types/generated'
 
-const { withDefaultListColumns, withAttributeValues, referenceCollection } =
+const { withDefaultListColumns, identifiable, withAttributeValues } =
     modelFormSchemas
 
-const expressionSchema = z.object({
-    expression: z.string(),
-    description: z.string(),
-    displayDescription: z.string().optional(),
-    missingValueStrategy: z
-        .nativeEnum(Expression.missingValueStrategy)
-        .optional()
-        .or(z.string().optional()),
-    slidingWindow: z.boolean().optional(),
-})
-
 const validationRuleBaseSchema = z.object({
-    name: z.string().trim(),
+    code: z.string().trim().optional(),
+    name: z.string().trim().min(1),
+    shortName: z.string().trim().optional(),
     description: z.string().trim().optional(),
+    leftSide: z.object({
+        expression: z.string().optional(),
+        description: z.string().optional(),
+        missingValueStrategy: z
+            .nativeEnum(Expression.missingValueStrategy)
+            .default(Expression.missingValueStrategy.NEVER_SKIP),
+        slidingWindow: z.boolean().optional().default(false),
+    }),
+    operator: z
+        .nativeEnum(ValidationRule.operator)
+        .default(ValidationRule.operator.NOT_EQUAL_TO),
+    rightSide: z.object({
+        expression: z.string().optional(),
+        description: z.string().optional(),
+        missingValueStrategy: z
+            .nativeEnum(Expression.missingValueStrategy)
+            .default(Expression.missingValueStrategy.NEVER_SKIP),
+        slidingWindow: z.boolean().optional().default(false),
+    }),
     instruction: z.string().trim().optional(),
+    periodType: z
+        .nativeEnum(ValidationRule.periodType)
+        .default(ValidationRule.periodType.MONTHLY),
     importance: z
         .nativeEnum(ValidationRule.importance)
-        .default(ValidationRule.importance.MEDIUM)
-        .optional(),
-    operator: z.nativeEnum(ValidationRule.operator).optional(),
-    periodType: z.nativeEnum(ValidationRule.periodType).optional(),
-    leftSide: expressionSchema.optional(),
-    rightSide: expressionSchema.optional(),
-    skipFormValidation: z.boolean().default(false).optional(),
-    organisationUnitLevels: z.array(z.number()).default([]).optional(),
-    validationRuleGroups: referenceCollection.default([]).optional(),
-    legendSets: referenceCollection.default([]).optional(),
-    notificationTemplates: referenceCollection.default([]).optional(),
+        .default(ValidationRule.importance.MEDIUM),
+    skipFormValidation: z.boolean().optional().default(false),
+    organisationUnitLevels: z.array(z.number()).optional().default([]),
 })
 
 export const validationRuleListSchema = validationRuleBaseSchema
-    .merge(withDefaultListColumns)
     .merge(withAttributeValues)
-    .extend({
-        importance: z.nativeEnum(ValidationRule.importance),
-        displayDescription: z.string().optional(),
-        displayInstruction: z.string().optional(),
-        displayFormName: z.string().optional(),
-        dimensionItem: z.string().optional(),
-    })
+    .merge(withDefaultListColumns)
+
+export const validationRuleFormSchema = validationRuleBaseSchema
+    .merge(identifiable)
+    .merge(withAttributeValues)
+
+export const initialValues = getDefaults(validationRuleFormSchema)
+export const validate = createFormValidate(validationRuleFormSchema)

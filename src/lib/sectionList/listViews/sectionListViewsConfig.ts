@@ -849,7 +849,7 @@ export const modelListViewsConfig = {
             available: [
                 'description',
                 DESCRIPTORS.formName,
-                'instruction',
+                { label: i18n.t('Instruction'), path: 'instruction' },
                 { label: i18n.t('Operator'), path: 'operator' },
                 {
                     label: i18n.t('Skip this rule during form validation'),
