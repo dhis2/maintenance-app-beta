@@ -8,8 +8,8 @@ import { useParams } from 'react-router-dom'
 import type { SharingSettings } from '../../../../lib'
 import { areSharingPropertiesSimilar } from '../../../../lib'
 import type { ProgramValues } from '../../Edit'
-import css from './RoleAccessSummary.module.css'
-import { RoleAccessSummaryBox } from './RoleAccessSummaryBox'
+import css from './RoleAccess.module.css'
+import { RoleAccessBox } from './RoleAccessBox'
 
 type ProgramStageWithSharing = {
     id: string
@@ -29,7 +29,7 @@ type ModalState = {
     entityId?: string
 }
 
-export const RoleAccessSummary = () => {
+export const RoleAccess = () => {
     const formState = useFormState<ProgramValues>()
     const values = formState.values
     const { id: programId } = useParams()
@@ -222,7 +222,7 @@ export const RoleAccessSummary = () => {
     return (
         <>
             <div className={css.container}>
-                <RoleAccessSummaryBox
+                <RoleAccessBox
                     title={i18n.t('Program: {{name}}', {
                         name: values.name || i18n.t('Untitled'),
                     })}
@@ -239,7 +239,7 @@ export const RoleAccessSummary = () => {
                     )
 
                     return (
-                        <RoleAccessSummaryBox
+                        <RoleAccessBox
                             key={stage.id}
                             title={i18n.t('Stage: {{name}}', {
                                 name: stage.displayName,

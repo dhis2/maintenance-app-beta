@@ -7,7 +7,7 @@ import {
 } from '../../../../components'
 import type { ParsedAccessPart, SharingSettings } from '../../../../lib'
 import { parseAccessString } from '../../../../lib'
-import css from './RoleAccessSummaryBox.module.css'
+import css from './RoleAccessBox.module.css'
 
 const getDataAccessLabel = (access: ParsedAccessPart | null): string => {
     if (access?.write) {
@@ -29,7 +29,7 @@ const getMetadataAccessLabel = (access: ParsedAccessPart | null): string => {
     return i18n.t('No metadata access')
 }
 
-type RoleAccessSummaryBoxProps = {
+type RoleAccessBoxProps = {
     title: string
     type: 'program' | 'stage'
     sharing?: SharingSettings
@@ -39,7 +39,7 @@ type RoleAccessSummaryBoxProps = {
     onEditAccess: () => void
 }
 
-export const RoleAccessSummaryBox = ({
+export const RoleAccessBox = ({
     title,
     type,
     sharing,
@@ -47,7 +47,7 @@ export const RoleAccessSummaryBox = ({
     onApplyToAllStages,
     onApplyProgramAccessRules,
     onEditAccess,
-}: RoleAccessSummaryBoxProps) => {
+}: RoleAccessBoxProps) => {
     const publicAccessParsed = sharing?.public
         ? parseAccessString(sharing.public)
         : null

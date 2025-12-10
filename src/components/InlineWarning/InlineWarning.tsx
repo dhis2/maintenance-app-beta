@@ -11,12 +11,12 @@ type InlineWarningProps = {
 export const InlineWarning = React.memo(function InlineWarning({
     message,
     className,
-    iconColor = '#6f3205',
+    iconColor,
 }: InlineWarningProps) {
     return (
-        <span className={`${css.warningBadge} ${className || ''}`}>
+        <span className={`${css.warningBadge} ${className}`}>
             <IconWarningFilled16 color={iconColor} />
-            <span className={css.warningText}>{message}</span>
+            <span>{message}</span>
         </span>
     )
 })
