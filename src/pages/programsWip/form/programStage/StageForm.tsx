@@ -46,7 +46,7 @@ export const fieldFilters = [
     'preGenerateUID',
     'executionDateLabel',
     'dueDateLabel',
-    'formName',
+    'programStageLabel',
     'eventLabel',
     'programStageSections[id,displayName]',
 ] as const
@@ -95,19 +95,11 @@ export const StageForm = ({
 
     const initialValues: PartialStageFormValues | undefined = useMemo(() => {
         if (stage) {
-            return {
-                ...stage,
-                featureType: stage.featureType,
-            }
+            return stage
         }
-        const values = { ...initialStageValue, program: { id: programId } }
-        const normalizedFeatureType =
-            (values.featureType as string | undefined) === ''
-                ? undefined
-                : values.featureType
         return {
-            ...values,
-            featureType: normalizedFeatureType,
+            ...initialStageValue,
+            program: { id: programId },
         } as PartialStageFormValues
     }, [stage, programId])
 
@@ -337,7 +329,7 @@ export const EditOrNewStageForm = ({
     existingStages?: Array<{ id: string; name?: string; displayName?: string }>
 }) => {
     if (stage === undefined) {
-        return
+        return null
     }
 
     if (stage === null) {

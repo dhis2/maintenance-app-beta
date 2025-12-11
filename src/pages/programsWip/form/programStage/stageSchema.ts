@@ -12,11 +12,11 @@ export const stageSchema = identifiable.extend({
         })
         .optional(),
     enableUserAssignment: z.boolean().optional(),
-    featureType: z.enum(['NONE', 'POINT', 'POLYGON', '']).optional(),
+    featureType: z.enum(['NONE', 'POINT', 'POLYGON']).optional(),
     preGenerateUID: z.boolean().optional(),
     executionDateLabel: z.string().optional(),
     dueDateLabel: z.string().optional(),
-    formName: z.string().optional(),
+    programStageLabel: z.string().optional(),
     eventLabel: z.string().optional(),
     program: modelReference,
 })

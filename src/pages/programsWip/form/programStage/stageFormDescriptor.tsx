@@ -31,7 +31,7 @@ export const StageFormDescriptor = {
                     label: i18n.t('Custom label for due date'),
                 },
                 {
-                    name: 'formName',
+                    name: 'programStageLabel',
                     label: i18n.t('Custom label for program stage'),
                 },
                 {

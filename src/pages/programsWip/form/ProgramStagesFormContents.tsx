@@ -1,7 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, InputFieldFF } from '@dhis2/ui'
+import { Button } from '@dhis2/ui'
 import React from 'react'
-import { Field as FieldRFF } from 'react-final-form'
 import { useFieldArray } from 'react-final-form-arrays'
 import {
     DrawerPortal,
@@ -44,17 +43,9 @@ export const ProgramStagesFormContents = React.memo(
             values: SubmittedStageFormValues,
             closeOnSubmit: boolean = true
         ) => {
-            const isEditSection = stageFormOpen && stageFormOpen.id
+            const isEditMode = stageFormOpen && stageFormOpen.id
 
-            if (closeOnSubmit) {
-                setStageFormOpen(undefined)
-            } else if (!isEditSection) {
-                setStageFormOpen({
-                    id: values.id,
-                    displayName: values.displayName,
-                })
-            }
-            if (isEditSection) {
+            if (isEditMode) {
                 const index = stagesFieldArray.value.findIndex(
                     (s) => s.id === stageFormOpen.id
                 )
@@ -64,26 +55,31 @@ export const ProgramStagesFormContents = React.memo(
             } else {
                 stagesFieldArray.push(values)
             }
+
+            if (closeOnSubmit) {
+                setStageFormOpen(undefined)
+            } else if (!isEditMode) {
+                setStageFormOpen({
+                    id: values.id,
+                    displayName: values.displayName,
+                })
+            }
         }
-        const onCloseStageForm = () => {
-            setStageFormOpen(undefined)
-        }
+        const handleCloseStageForm = () => setStageFormOpen(undefined)
 
         return (
             <>
                 <DrawerPortal
                     isOpen={isStageFormOpen}
-                    onClose={onCloseStageForm}
+                    onClose={handleCloseStageForm}
                 >
                     {stageFormOpen !== undefined && (
-                        <div>
-                            <EditOrNewStageForm
-                                stage={stageFormOpen}
-                                onCancel={onCloseStageForm}
-                                onSubmitted={handleSubmittedStage}
-                                existingStages={existingStages}
-                            />
-                        </div>
+                        <EditOrNewStageForm
+                            stage={stageFormOpen}
+                            onCancel={handleCloseStageForm}
+                            onSubmitted={handleSubmittedStage}
+                            existingStages={existingStages}
+                        />
                     )}
                 </DrawerPortal>
                 <SectionedFormSection name={name}>
@@ -93,18 +89,7 @@ export const ProgramStagesFormContents = React.memo(
                     <StandardFormSectionDescription>
                         {i18n.t('Set up stages in this program.')}
                     </StandardFormSectionDescription>
-                    <FieldRFF
-                        component={InputFieldFF}
-                        inputWidth="400px"
-                        name="testProgram"
-                        label={i18n.t('Test input program')}
-                        validateFields={[]}
-                    />
-                    <Button
-                        onClick={() => {
-                            setStageFormOpen(null)
-                        }}
-                    >
+                    <Button onClick={() => setStageFormOpen(null)}>
                         {i18n.t('Add a program stage')}
                     </Button>
 
@@ -113,9 +98,7 @@ export const ProgramStagesFormContents = React.memo(
                             key={stage.id}
                             item={stage}
                             schemaName={SchemaName.programStage}
-                            onClick={() => {
-                                setStageFormOpen(stage)
-                            }}
+                            onClick={() => setStageFormOpen(stage)}
                             onDelete={() => {}}
                         />
                     ))}

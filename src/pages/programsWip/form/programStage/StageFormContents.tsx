@@ -29,10 +29,6 @@ import { StageFormDescriptor } from './stageFormDescriptor'
 
 const featureTypes = [
     {
-        value: '',
-        label: i18n.t('<No value>'),
-    },
-    {
         value: 'NONE',
         label: i18n.t('None'),
     },
@@ -60,6 +56,10 @@ export const StageFormContents = ({
     const descriptor = useSectionedFormContext<typeof StageFormDescriptor>()
     useSyncSelectedSectionWithScroll(setSelectedSection)
 
+    const nameValidator = useValidator({
+        schemaSection: stageSchemaSection,
+        property: 'name',
+    })
     const executionDateLabelValidator = useValidator({
         schemaSection: stageSchemaSection,
         property: 'executionDateLabel',
@@ -68,44 +68,32 @@ export const StageFormContents = ({
         schemaSection: stageSchemaSection,
         property: 'dueDateLabel',
     })
-    const formNameValidator = useValidator({
+    const programStageLabelValidator = useValidator({
         schemaSection: stageSchemaSection,
-        property: 'formName',
+        property: 'programStageLabel',
     })
     const eventLabelValidator = useValidator({
         schemaSection: stageSchemaSection,
         property: 'eventLabel',
     })
 
-    const nameValidator = useValidator({
-        schemaSection: stageSchemaSection,
-        property: 'name',
-    })
-
-    const [nameWarning, setNameWarning] = React.useState<string | undefined>()
-
     const checkDuplicateName = React.useCallback(
-        (value: string) => {
-            if (existingStages && value) {
-                const currentStageId = values.id
-                const isDuplicate = existingStages.some(
-                    (stage) =>
-                        stage.id !== currentStageId &&
-                        (stage.name === value || stage.displayName === value)
-                )
-
-                if (isDuplicate) {
-                    setNameWarning(
-                        i18n.t(
-                            'A stage with this name already exists in this program'
-                        )
-                    )
-                } else {
-                    setNameWarning(undefined)
-                }
-            } else {
-                setNameWarning(undefined)
+        (value: string | undefined) => {
+            if (!existingStages || !value) {
+                return undefined
             }
+
+            const isDuplicate = existingStages.some(
+                (stage) =>
+                    stage.id !== values.id &&
+                    (stage.name === value || stage.displayName === value)
+            )
+
+            return isDuplicate
+                ? i18n.t(
+                      'A stage with this name already exists in this program'
+                  )
+                : undefined
         },
         [existingStages, values.id]
     )
@@ -125,25 +113,24 @@ export const StageFormContents = ({
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <Field name="name" validate={nameValidator}>
-                        {({ input, meta }) => (
-                            <InputFieldFF
-                                input={{
-                                    ...input,
-                                    onChange: (value: string) => {
-                                        input.onChange(value)
-                                        checkDuplicateName(value)
-                                    },
-                                }}
-                                meta={meta}
-                                validateFields={[]}
-                                dataTest="formfields-name"
-                                required
-                                inputWidth="400px"
-                                label={i18n.t('Name')}
-                                validationText={nameWarning}
-                                warning={!!nameWarning}
-                            />
-                        )}
+                        {({ input, meta }) => {
+                            const duplicateWarning = checkDuplicateName(
+                                input.value
+                            )
+                            return (
+                                <InputFieldFF
+                                    input={input}
+                                    meta={meta}
+                                    validateFields={[]}
+                                    dataTest="formfields-name"
+                                    required
+                                    inputWidth="400px"
+                                    label={i18n.t('Name')}
+                                    validationText={duplicateWarning}
+                                    warning={!!duplicateWarning}
+                                />
+                            )
+                        }}
                     </Field>
                 </StandardFormField>
                 <StandardFormField>
@@ -178,6 +165,8 @@ export const StageFormContents = ({
                         inputWidth="400px"
                         options={featureTypes}
                         dataTest="formfields-featureType"
+                        clearable
+                        clearText={i18n.t('<No value>')}
                     />
                 </StandardFormField>
                 <StandardFormField>
@@ -219,11 +208,11 @@ export const StageFormContents = ({
                 <StandardFormField>
                     <Field
                         component={InputFieldFF}
-                        name="formName"
+                        name="programStageLabel"
                         inputWidth="400px"
                         label={i18n.t('Custom label for program stage')}
-                        dataTest="formfields-formName"
-                        validate={formNameValidator}
+                        dataTest="formfields-programStageLabel"
+                        validate={programStageLabelValidator}
                     />
                 </StandardFormField>
                 <StandardFormField>
