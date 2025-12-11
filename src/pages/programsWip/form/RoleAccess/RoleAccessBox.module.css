@@ -9,61 +9,44 @@
 
 .header {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 16px;
+    gap: var(--spacers-dp12);
+    margin-bottom: var(--spacers-dp16);
 }
 
 .titleContainer {
     display: flex;
     align-items: center;
     gap: 8px;
-    flex: 1 1 auto;
-    min-width: 0;
+    flex: 1;
     flex-wrap: wrap;
-    max-width: 100%;
 }
 
-.titleContainer h3 {
+.title {
     margin: 0;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    min-width: 0;
-    line-height: 1.4;
-    max-width: 100%;
-}
-
-.titleContainer > *:last-child {
-    flex-shrink: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--colors-grey800);
 }
 
 .buttonGroup {
     display: flex;
-    gap: 8px;
-    margin-left: auto;
+    gap: var(--spacers-dp8);
     flex-shrink: 0;
+    align-items: flex-start;
 }
 
 .accessTable {
-    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
 }
 
-.accessHeaderRow,
 .accessRow {
     display: grid;
-    grid-template-columns: 1fr 200px 200px;
-    gap: 16px;
-    padding: 8px 0;
-    align-items: center;
-}
-
-.accessHeaderRow {
-    border-bottom: 1px solid var(--colors-grey300);
-}
-
-.accessRow {
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--spacers-dp16);
+    padding: var(--spacers-dp8) 0;
     border-bottom: 1px solid var(--colors-grey200);
 }
 
@@ -71,26 +54,17 @@
     border-bottom: none;
 }
 
-.accessHeader {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--colors-grey700);
-    text-align: left;
-}
-
 .accessLabel {
     font-size: 14px;
-    font-weight: 500;
     color: var(--colors-grey700);
 }
 
-.accessData,
+.accessData {
+    font-size: 14px;
+    color: var(--colors-grey900);
+}
+
 .accessMetadata {
     font-size: 14px;
     color: var(--colors-grey900);
-    text-align: left;
-}
-
-.noAccess {
-    color: var(--colors-grey600);
 }

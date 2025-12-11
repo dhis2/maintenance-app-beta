@@ -12,7 +12,7 @@ const { identifiable, withDefaultListColumns, modelReference } =
 
 const sharingSettingsSchema = z.object({
     owner: z.string().optional(),
-    external: z.boolean().default(false),
+    external: z.boolean(),
     public: z.string().optional(),
     userGroups: z
         .record(
@@ -22,7 +22,7 @@ const sharingSettingsSchema = z.object({
                 displayName: z.string().optional(),
             })
         )
-        .default({}),
+        .optional(),
     users: z
         .record(
             z.object({
@@ -31,7 +31,7 @@ const sharingSettingsSchema = z.object({
                 displayName: z.string().optional(),
             })
         )
-        .default({}),
+        .optional(),
 })
 
 const programBaseSchema = z.object({

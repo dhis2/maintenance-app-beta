@@ -1,32 +1,26 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
-import React from 'react'
-import {
-    InlineWarning,
-    StandardFormSubsectionTitle,
-} from '../../../../components'
+import React, { useMemo } from 'react'
+import { InlineWarning } from '../../../../components'
 import type { ParsedAccessPart, SharingSettings } from '../../../../lib'
 import { parseAccessString } from '../../../../lib'
 import css from './RoleAccessBox.module.css'
 
-const getDataAccessLabel = (access: ParsedAccessPart | null): string => {
-    if (access?.write) {
-        return i18n.t('Data read and write')
+const getAccessLabel = (
+    access: ParsedAccessPart | undefined,
+    type: 'data' | 'metadata'
+): string => {
+    if (!access?.read) {
+        return i18n.t('No {{type}} access', { type })
     }
-    if (access?.read) {
-        return i18n.t('Data read')
+    if (access.write) {
+        return i18n.t('{{type}} read and write', {
+            type: type.charAt(0).toUpperCase() + type.slice(1),
+        })
     }
-    return i18n.t('No data access')
-}
-
-const getMetadataAccessLabel = (access: ParsedAccessPart | null): string => {
-    if (access?.write) {
-        return i18n.t('Metadata read and write')
-    }
-    if (access?.read) {
-        return i18n.t('Metadata read')
-    }
-    return i18n.t('No metadata access')
+    return i18n.t('{{type}} read', {
+        type: type.charAt(0).toUpperCase() + type.slice(1),
+    })
 }
 
 type RoleAccessBoxProps = {
@@ -48,16 +42,19 @@ export const RoleAccessBox = ({
     onApplyProgramAccessRules,
     onEditAccess,
 }: RoleAccessBoxProps) => {
-    const publicAccessParsed = sharing?.public
+    const publicAccess = sharing?.public
         ? parseAccessString(sharing.public)
-        : null
-    const isExternal = sharing?.external || false
+        : undefined
 
-    const allUserGroupsAndUsers = React.useMemo(() => {
-        const userGroups = sharing?.userGroups
+    const sharingEntities = useMemo(() => {
+        if (!sharing) {
+            return []
+        }
+
+        const userGroups = sharing.userGroups
             ? Object.values(sharing.userGroups)
             : []
-        const users = sharing?.users ? Object.values(sharing.users) : []
+        const users = sharing.users ? Object.values(sharing.users) : []
         return [...userGroups, ...users]
     }, [sharing])
 
@@ -65,9 +62,7 @@ export const RoleAccessBox = ({
         <div className={css.container}>
             <div className={css.header}>
                 <div className={css.titleContainer}>
-                    <StandardFormSubsectionTitle>
-                        {title}
-                    </StandardFormSubsectionTitle>
+                    <h3 className={css.title}>{title}</h3>
                     {isDifferentFromProgram && (
                         <InlineWarning
                             message={i18n.t('Differs from program access')}
@@ -82,11 +77,13 @@ export const RoleAccessBox = ({
                     )}
                     {type === 'stage' && onApplyProgramAccessRules && (
                         <Button small onClick={onApplyProgramAccessRules}>
-                            {i18n.t('Apply program access rules')}
+                            {i18n.t('Revert to program access')}
                         </Button>
                     )}
                     <Button small onClick={onEditAccess}>
-                        {i18n.t('Edit access')}
+                        {type === 'stage'
+                            ? i18n.t('Edit data access')
+                            : i18n.t('Edit access')}
                     </Button>
                 </div>
             </div>
@@ -96,74 +93,47 @@ export const RoleAccessBox = ({
                     <div className={css.accessLabel}>
                         {i18n.t('Public (All users)')}
                     </div>
-                    <div
-                        className={
-                            publicAccessParsed?.data.read
-                                ? css.accessData
-                                : `${css.accessData} ${css.noAccess}`
-                        }
-                    >
-                        {getDataAccessLabel(publicAccessParsed?.data || null)}
+                    <div className={css.accessData}>
+                        {getAccessLabel(publicAccess?.data, 'data')}
                     </div>
-                    <div
-                        className={
-                            publicAccessParsed?.metadata.read
-                                ? css.accessMetadata
-                                : `${css.accessMetadata} ${css.noAccess}`
-                        }
-                    >
-                        {getMetadataAccessLabel(
-                            publicAccessParsed?.metadata || null
-                        )}
+                    <div className={css.accessMetadata}>
+                        {type === 'program'
+                            ? getAccessLabel(publicAccess?.metadata, 'metadata')
+                            : null}
                     </div>
                 </div>
 
                 <div className={css.accessRow}>
                     <div className={css.accessLabel}>{i18n.t('External')}</div>
-                    <div
-                        className={
-                            isExternal
-                                ? css.accessData
-                                : `${css.accessData} ${css.noAccess}`
-                        }
-                    >
-                        {getDataAccessLabel(
-                            isExternal ? { read: true, write: true } : null
-                        )}
+                    <div className={css.accessData}>
+                        {sharing?.external
+                            ? i18n.t('Data read and write')
+                            : i18n.t('No data access')}
                     </div>
-                    <div className={`${css.accessMetadata} ${css.noAccess}`}>
-                        {getMetadataAccessLabel(null)}
+                    <div className={css.accessMetadata}>
+                        {type === 'program'
+                            ? i18n.t('No metadata access')
+                            : null}
                     </div>
                 </div>
 
-                {allUserGroupsAndUsers.map((entity) => {
-                    const parsed = entity.access
-                        ? parseAccessString(entity.access)
-                        : null
+                {sharingEntities.map((entity) => {
+                    const parsed = parseAccessString(entity.access)
                     return (
                         <div key={entity.id} className={css.accessRow}>
                             <div className={css.accessLabel}>
                                 {entity.displayName || entity.id}
                             </div>
-                            <div
-                                className={
-                                    parsed?.data.read
-                                        ? css.accessData
-                                        : `${css.accessData} ${css.noAccess}`
-                                }
-                            >
-                                {getDataAccessLabel(parsed?.data || null)}
+                            <div className={css.accessData}>
+                                {getAccessLabel(parsed?.data, 'data')}
                             </div>
-                            <div
-                                className={
-                                    parsed?.metadata.read
-                                        ? css.accessMetadata
-                                        : `${css.accessMetadata} ${css.noAccess}`
-                                }
-                            >
-                                {getMetadataAccessLabel(
-                                    parsed?.metadata || null
-                                )}
+                            <div className={css.accessMetadata}>
+                                {type === 'program'
+                                    ? getAccessLabel(
+                                          parsed?.metadata,
+                                          'metadata'
+                                      )
+                                    : null}
                             </div>
                         </div>
                     )

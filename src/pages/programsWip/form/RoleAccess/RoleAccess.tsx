@@ -14,20 +14,18 @@ import { RoleAccessBox } from './RoleAccessBox'
 type ProgramStageWithSharing = {
     id: string
     displayName: string
-    access?: {
-        data?: { write: boolean; read: boolean }
-        manage: boolean
-        read: boolean
-        write: boolean
-    }
     sharing?: SharingSettings
 }
 
-type ModalState = {
-    isOpen: boolean
-    entityType: 'program' | 'programStage' | null
-    entityId?: string
-}
+type ModalState =
+    | {
+          isOpen: boolean
+          entityType: 'program' | 'programStage'
+          entityId: string
+      }
+    | {
+          isOpen: false
+      }
 
 export const RoleAccess = () => {
     const formState = useFormState<ProgramValues>()
@@ -45,75 +43,57 @@ export const RoleAccess = () => {
 
     const [modalState, setModalState] = useState<ModalState>({
         isOpen: false,
-        entityType: null,
-        entityId: undefined,
     })
 
-    const programStages: ProgramStageWithSharing[] = useMemo(() => {
-        const stages = values.programStages as
-            | ProgramStageWithSharing[]
-            | undefined
-        if (!stages) {
-            return []
-        }
-        return stages.map(
-            (stage): ProgramStageWithSharing => ({
-                id: stage.id,
-                displayName: stage.displayName || '',
-                access: stage.access,
-                sharing: stage.sharing,
-            })
-        )
-    }, [values.programStages])
+    const programStages = useMemo(
+        () => (values.programStages || []) as ProgramStageWithSharing[],
+        [values.programStages]
+    )
 
     const handleApplyToAllStages = useCallback(async () => {
-        if (!programId || programStages.length === 0) {
+        if (!programId) {
             return
         }
 
         try {
-            const programSharingResponse = (await dataEngine.query({
+            const { sharing } = (await dataEngine.query({
                 sharing: {
                     resource: 'sharing',
-                    params: {
-                        type: 'program',
-                        id: programId,
-                    },
+                    params: { type: 'program', id: programId },
                 },
-            })) as { sharing?: { object: SharingSettings } }
+            })) as { sharing: { object: SharingSettings } }
 
-            const programSharing = programSharingResponse.sharing?.object
-
-            const mutations = programStages.map((stage) =>
-                dataEngine.mutate({
-                    resource: `sharing?type=programStage&id=${stage.id}`,
-                    type: 'update',
-                    data: {
-                        meta: {
-                            allowPublicAccess: true,
-                            allowExternalAccess: true,
+            await Promise.all(
+                programStages.map((stage) =>
+                    dataEngine.mutate({
+                        resource: `sharing?type=programStage&id=${stage.id}`,
+                        type: 'update',
+                        id: stage.id,
+                        data: {
+                            meta: {
+                                allowPublicAccess: true,
+                                allowExternalAccess: true,
+                            },
+                            object: {
+                                ...sharing.object,
+                                id: stage.id,
+                                displayName: stage.displayName,
+                            },
                         },
-                        object: {
-                            ...programSharing,
-                            id: stage.id,
-                            displayName: stage.displayName,
-                        },
-                    },
-                } as any)
+                    })
+                )
             )
 
-            await Promise.all(mutations)
             showSuccess()
-
             queryClient.invalidateQueries({
                 queryKey: [{ resource: 'programs', id: programId }],
             })
         } catch (error) {
-            const errorMessage =
+            showError(
                 error instanceof Error
                     ? error.message
                     : i18n.t('Failed to apply access to all stages')
-            showError(errorMessage)
+            )
         }
     }, [
         programId,
@@ -130,50 +110,46 @@ export const RoleAccess = () => {
                 return
             }
 
+            const stage = programStages.find((s) => s.id === stageId)
+            if (!stage) {
+                return
+            }
+
             try {
-                const programSharingResponse = (await dataEngine.query({
+                const { sharing } = (await dataEngine.query({
                     sharing: {
                         resource: 'sharing',
-                        params: {
-                            type: 'program',
-                            id: programId,
-                        },
+                        params: { type: 'program', id: programId },
                     },
-                })) as { sharing?: { object: SharingSettings } }
-
-                const programSharing = programSharingResponse.sharing?.object
-                const stage = programStages.find((s) => s.id === stageId)
-                if (!stage) {
-                    return
-                }
+                })) as { sharing: { object: SharingSettings } }
 
                 await dataEngine.mutate({
                     resource: `sharing?type=programStage&id=${stageId}`,
                     type: 'update',
+                    id: stageId,
                     data: {
                         meta: {
                             allowPublicAccess: true,
                             allowExternalAccess: true,
                         },
                         object: {
-                            ...programSharing,
+                            ...sharing.object,
                             id: stageId,
                             displayName: stage.displayName,
                         },
                     },
-                } as any)
+                })
 
                 showSuccess()
-
                 queryClient.invalidateQueries({
                     queryKey: [{ resource: 'programs', id: programId }],
                 })
             } catch (error) {
-                const errorMessage =
+                showError(
                     error instanceof Error
                         ? error.message
                         : i18n.t('Failed to apply program access rules')
-                showError(errorMessage)
+                )
             }
         },
         [
@@ -188,35 +164,24 @@ export const RoleAccess = () => {
 
     const handleEditAccess = useCallback(
         (type: 'program' | 'stage', stageId?: string) => {
-            const entityType = type === 'program' ? 'program' : 'programStage'
-            const entityId = type === 'program' ? values.id : stageId
-
             setModalState({
                 isOpen: true,
-                entityType,
-                entityId,
+                entityType: type === 'program' ? 'program' : 'programStage',
+                entityId: type === 'program' ? values.id : stageId!,
             })
         },
-        [values]
+        [values.id]
     )
 
     const handleCloseModal = useCallback(() => {
-        setModalState({
-            isOpen: false,
-            entityType: null,
-            entityId: undefined,
-        })
+        setModalState({ isOpen: false })
     }, [])
 
     const handleSaveSharing = useCallback(() => {
-        if (programId) {
-            queryClient.invalidateQueries({
-                queryKey: [{ resource: 'programs', id: programId }],
-            })
-        }
+        queryClient.invalidateQueries({
+            queryKey: [{ resource: 'programs', id: programId }],
+        })
     }, [programId, queryClient])
-
-    const programSharing = values.sharing
 
     return (
         <>
@@ -226,48 +191,42 @@ export const RoleAccess = () => {
                         name: values.name || i18n.t('Untitled'),
                     })}
                     type="program"
-                    sharing={programSharing}
+                    sharing={values.sharing}
                     onApplyToAllStages={handleApplyToAllStages}
                     onEditAccess={() => handleEditAccess('program')}
                 />
 
-                {programStages.map((stage) => {
-                    const isDifferentFromProgram = !areSharingPropertiesSimilar(
-                        stage.sharing,
-                        programSharing
-                    )
-
-                    return (
-                        <RoleAccessBox
-                            key={stage.id}
-                            title={i18n.t('Stage: {{name}}', {
-                                name: stage.displayName,
-                            })}
-                            type="stage"
-                            sharing={stage.sharing}
-                            isDifferentFromProgram={isDifferentFromProgram}
-                            onApplyProgramAccessRules={() =>
-                                handleApplyProgramAccessRules(stage.id)
-                            }
-                            onEditAccess={() =>
-                                handleEditAccess('stage', stage.id)
-                            }
-                        />
-                    )
-                })}
+                {programStages.map((stage) => (
+                    <RoleAccessBox
+                        key={stage.id}
+                        title={i18n.t('Stage: {{name}}', {
+                            name: stage.displayName,
+                        })}
+                        type="stage"
+                        sharing={stage.sharing}
+                        isDifferentFromProgram={
+                            !areSharingPropertiesSimilar(
+                                stage.sharing,
+                                values.sharing
+                            )
+                        }
+                        onApplyProgramAccessRules={() =>
+                            handleApplyProgramAccessRules(stage.id)
+                        }
+                        onEditAccess={() => handleEditAccess('stage', stage.id)}
+                    />
+                ))}
             </div>
 
-            {modalState.isOpen &&
-                modalState.entityType &&
-                modalState.entityId && (
-                    <SharingDialog
-                        type={modalState.entityType}
-                        id={modalState.entityId}
-                        onClose={handleCloseModal}
-                        onSave={handleSaveSharing}
-                        dataSharing={true}
-                    />
-                )}
+            {modalState.isOpen && (
+                <SharingDialog
+                    type={modalState.entityType}
+                    id={modalState.entityId}
+                    onClose={handleCloseModal}
+                    onSave={handleSaveSharing}
+                    dataSharing={true}
+                />
+            )}
         </>
     )
 }

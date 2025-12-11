@@ -4,19 +4,13 @@ import css from './InlineWarning.module.css'
 
 type InlineWarningProps = {
     message: string
-    className?: string
-    iconColor?: string
 }
 
-export const InlineWarning = React.memo(function InlineWarning({
-    message,
-    className,
-    iconColor,
-}: InlineWarningProps) {
+export const InlineWarning = ({ message }: InlineWarningProps) => {
     return (
-        <span className={`${css.warningBadge} ${className}`}>
-            <IconWarningFilled16 color={iconColor} />
+        <span className={css.warning}>
+            <IconWarningFilled16 />
             <span>{message}</span>
         </span>
     )
-})
+}

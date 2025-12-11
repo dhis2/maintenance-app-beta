@@ -63,46 +63,48 @@ export type SharingSettings = {
     owner?: string
     external: boolean
     public?: string
-    userGroups: Record<
+    userGroups?: Record<
         string,
         { id: string; access: string; displayName?: string }
     >
-    users: Record<string, { id: string; access: string; displayName?: string }>
+    users?: Record<string, { id: string; access: string; displayName?: string }>
 }
 
-const sortSharingObjectPart = (
-    sharingObjectPart:
-        | Record<string, { id: string; access: string; displayName?: string }>
-        | undefined
-) => {
-    if (!sharingObjectPart) {
-        return sharingObjectPart
+const normalizeSharingEntities = (
+    entities?: Record<
+        string,
+        { id: string; access: string; displayName?: string }
+    >
+): Array<{ id: string; access: string }> => {
+    if (!entities) {
+        return []
     }
-
-    return Object.values(sharingObjectPart).sort((a, b) =>
-        a.id < b.id ? -1 : 1
-    )
+    return Object.values(entities)
+        .map(({ id, access }) => ({ id, access }))
+        .sort((a, b) => a.id.localeCompare(b.id))
 }
 
 export const areSharingPropertiesSimilar = (
-    sharingA: SharingSettings | undefined,
-    sharingB: SharingSettings | undefined
+    sharingA?: SharingSettings,
+    sharingB?: SharingSettings
 ): boolean => {
-    if (!sharingA || !sharingB || sharingA.public !== sharingB.public) {
+    if (!sharingA || !sharingB) {
+        return false
+    }
+    if (sharingA.public !== sharingB.public) {
+        return false
+    }
+    if (sharingA.external !== sharingB.external) {
         return false
     }
 
-    if (!!sharingA.external !== !!sharingB.external) {
+    const usersA = normalizeSharingEntities(sharingA.users)
+    const usersB = normalizeSharingEntities(sharingB.users)
+    if (JSON.stringify(usersA) !== JSON.stringify(usersB)) {
         return false
     }
 
-    const sortedUsersA = sortSharingObjectPart(sharingA.users)
-    const sortedUsersB = sortSharingObjectPart(sharingB.users)
-    if (JSON.stringify(sortedUsersA) !== JSON.stringify(sortedUsersB)) {
-        return false
-    }
-
-    const sortedGroupsA = sortSharingObjectPart(sharingA.userGroups)
-    const sortedGroupsB = sortSharingObjectPart(sharingB.userGroups)
-    return JSON.stringify(sortedGroupsA) === JSON.stringify(sortedGroupsB)
+    const groupsA = normalizeSharingEntities(sharingA.userGroups)
+    const groupsB = normalizeSharingEntities(sharingB.userGroups)
+    return JSON.stringify(groupsA) === JSON.stringify(groupsB)
 }

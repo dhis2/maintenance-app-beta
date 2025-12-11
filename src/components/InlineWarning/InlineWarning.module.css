@@ -1,13 +1,12 @@
-.warningBadge {
-    background-color: #ffecb3;
-    padding: 6px 12px;
-    border-radius: 5px;
+.warning {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    white-space: nowrap;
+    gap: var(--spacers-dp4);
+    padding: var(--spacers-dp4) var(--spacers-dp8);
+    background-color: #ffecb3;
+    border-radius: 4px;
     color: #6f3205;
-    font-weight: 400;
+    white-space: nowrap;
     font-size: 14px;
     line-height: 20px;
 }
