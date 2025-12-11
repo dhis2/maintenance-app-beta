@@ -23,24 +23,10 @@ import {
     useSyncSelectedSectionWithScroll,
     useValidator,
 } from '../../../../lib'
+import { featureTypeOptions } from '../constants'
 import { EditOrNowStageSectionForm } from './programStageSection/ProgramStageSectionForm'
 import { stageSchemaSection } from './StageForm'
 import { StageFormDescriptor } from './stageFormDescriptor'
-
-const featureTypes = [
-    {
-        value: 'NONE',
-        label: i18n.t('None'),
-    },
-    {
-        value: 'POINT',
-        label: i18n.t('Point'),
-    },
-    {
-        value: 'POLYGON',
-        label: i18n.t('Polygon'),
-    },
-]
 
 export const StageFormContents = ({
     isSubsection,
@@ -163,10 +149,8 @@ export const StageFormContents = ({
                         name="featureType"
                         label={i18n.t('Feature type')}
                         inputWidth="400px"
-                        options={featureTypes}
+                        options={featureTypeOptions}
                         dataTest="formfields-featureType"
-                        clearable
-                        clearText={i18n.t('<No value>')}
                     />
                 </StandardFormField>
                 <StandardFormField>

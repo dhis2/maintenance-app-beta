@@ -26,25 +26,7 @@ import {
 } from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
 import classes from '../../dataElements/fields/CategoryComboField.module.css'
-
-const featureTypes = [
-    {
-        value: '',
-        label: i18n.t('<No value>'),
-    },
-    {
-        value: 'NONE',
-        label: i18n.t('None'),
-    },
-    {
-        value: 'POINT',
-        label: i18n.t('Point'),
-    },
-    {
-        value: 'POLYGON',
-        label: i18n.t('Polygon'),
-    },
-]
+import { featureTypeOptions } from './constants'
 const CATEGORY_COMBOS_QUERY = {
     resource: 'categoryCombos',
     params: {
@@ -131,7 +113,7 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                     name="featureType"
                     label={i18n.t('Feature type')}
                     inputWidth="400px"
-                    options={featureTypes}
+                    options={featureTypeOptions}
                     input={featureTypeInput}
                     meta={featureTypeMeta}
                 />
