@@ -6,14 +6,26 @@ import type { ParsedAccessPart, SharingSettings } from '../../../../lib'
 import { parseAccessString } from '../../../../lib'
 import css from './RoleAccessBox.module.css'
 
-const getAccessLabel = (access: ParsedAccessPart | undefined): string => {
+const getAccessLabel = (
+    access: ParsedAccessPart | undefined,
+    type: 'data' | 'metadata'
+): string => {
     if (!access?.read) {
-        return i18n.t('No access')
+        if (type === 'data') {
+            return i18n.t('No data access')
+        }
+        return i18n.t('No metadata access')
     }
     if (access.write) {
-        return i18n.t('Read and write')
+        if (type === 'data') {
+            return i18n.t('Data read and write')
+        }
+        return i18n.t('Metadata read and write')
     }
-    return i18n.t('Read only')
+    if (type === 'data') {
+        return i18n.t('Data read')
+    }
+    return i18n.t('Metadata read')
 }
 
 type RoleAccessBoxProps = {
@@ -87,23 +99,27 @@ export const RoleAccessBox = ({
                         {i18n.t('Public (All users)')}
                     </div>
                     <div className={css.accessData}>
-                        {getAccessLabel(publicAccess?.data)}
+                        {getAccessLabel(publicAccess?.data, 'data')}
                     </div>
                     <div className={css.accessMetadata}>
                         {type === 'program' &&
-                            getAccessLabel(publicAccess?.metadata)}
+                            getAccessLabel(publicAccess?.metadata, 'metadata')}
                     </div>
                 </div>
 
                 <div className={css.accessRow}>
                     <div className={css.accessLabel}>{i18n.t('External')}</div>
                     <div className={css.accessData}>
-                        {sharing?.external
-                            ? i18n.t('Read and write')
-                            : i18n.t('No access')}
+                        {getAccessLabel(
+                            sharing?.external
+                                ? { read: true, write: true }
+                                : undefined,
+                            'data'
+                        )}
                     </div>
                     <div className={css.accessMetadata}>
-                        {type === 'program' && i18n.t('No access')}
+                        {type === 'program' &&
+                            getAccessLabel(undefined, 'metadata')}
                     </div>
                 </div>
 
@@ -115,11 +131,14 @@ export const RoleAccessBox = ({
                                 {entity.displayName || entity.id}
                             </div>
                             <div className={css.accessData}>
-                                {getAccessLabel(parsed?.data)}
+                                {getAccessLabel(parsed?.data, 'data')}
                             </div>
                             <div className={css.accessMetadata}>
                                 {type === 'program' &&
-                                    getAccessLabel(parsed?.metadata)}
+                                    getAccessLabel(
+                                        parsed?.metadata,
+                                        'metadata'
+                                    )}
                             </div>
                         </div>
                     )
