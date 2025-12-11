@@ -32,6 +32,7 @@ const DefaultList = ({
             elements={elements}
             insertElement={insertElement}
             postQuerySearch={true}
+            onRetryClick={() => {}}
         ></ExpressionListInner>
     )
 }
@@ -246,9 +247,9 @@ const ProgramJunction = ({
             <ExpressionList
                 query={programIndicatorsQuery}
                 insertElement={insertElementFormatted}
-                transform={(p) => {
+                transform={(p: any) => {
                     return p?.[0]?.programTrackedEntityAttributes?.map(
-                        (tea) => ({
+                        (tea: any) => ({
                             displayName: tea.displayName,
                             id: tea.trackedEntityAttribute.id,
                         })

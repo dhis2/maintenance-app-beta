@@ -25,11 +25,22 @@ const ValidationBox = ({
     validating: boolean
 }) => {
     if (!response || validating) {
-        return null
+        // the button here does not do anything, but will cause the input to blur (and validate) if clicked
+        return (
+            <NoticeBox title={i18n.t('Expression not yet validated')}>
+                <Button small loading={validating}>
+                    {i18n.t('Validate')}
+                </Button>
+            </NoticeBox>
+        )
     }
     if (response?.error) {
         return (
-            <NoticeBox warning title={i18n.t('Invalid expression')}></NoticeBox>
+            <NoticeBox warning title={i18n.t('Invalid expression')}>
+                <Button small loading={validating}>
+                    {i18n.t('Rerun validate')}
+                </Button>
+            </NoticeBox>
         )
     }
     return (
@@ -75,36 +86,25 @@ export const ExpressionBuilder = ({
                 <div className={styles.expressionBuilderContentContainer}>
                     <div className={styles.expressionBuilderEntryContainer}>
                         <StandardFormField>
-                            <FieldRFF name={fieldName}>
-                                {({ input }) => {
-                                    return (
-                                        <div data-test="formfields-expressionBuilder">
-                                            <div
-                                                className={
-                                                    styles.expressionField
-                                                }
-                                            >
-                                                <textarea
-                                                    ref={expressionRef}
-                                                    defaultValue={initialValue}
-                                                    onBlur={async (e) => {
-                                                        const currentText =
-                                                            expressionRef
-                                                                ?.current?.value
-                                                        input.onChange(
-                                                            currentText
-                                                        )
-                                                        await hackValidate(
-                                                            currentText ?? ''
-                                                        )
-                                                    }}
-                                                    aria-describedby="messageTemplate-help"
-                                                />
-                                            </div>
-                                        </div>
-                                    )
-                                }}
-                            </FieldRFF>
+                            <div data-test="formfields-expressionBuilder">
+                                <div className={styles.expressionField}>
+                                    <textarea
+                                        ref={expressionRef}
+                                        defaultValue={initialValue}
+                                        onChange={() => {
+                                            setValidationResponse(null)
+                                        }}
+                                        onBlur={async (e) => {
+                                            const currentText =
+                                                expressionRef?.current?.value
+                                            await hackValidate(
+                                                currentText ?? ''
+                                            )
+                                        }}
+                                        aria-describedby="messageTemplate-help"
+                                    />
+                                </div>
+                            </div>
                         </StandardFormField>
                         <ValidationBox
                             response={validationResponse}
@@ -144,7 +144,11 @@ export const ExpressionBuilder = ({
                         }}
                         primary
                         dataTest="apply-expression-button"
-                        disabled={validationResponse?.error || validating}
+                        disabled={
+                            !validationResponse ||
+                            validationResponse?.error ||
+                            validating
+                        }
                     >
                         {i18n.t('Apply')}
                     </Button>

@@ -1,17 +1,19 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, TextAreaFieldFF } from '@dhis2/ui'
+import { Button } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useField } from 'react-final-form'
-import { useSchemaSectionHandleOrThrow } from '../../lib'
-import { useValidator } from '../../lib/models/useFieldValidators'
+// import { useSchemaSectionHandleOrThrow } from '../../lib'
+// import { useValidator } from '../../lib/models/useFieldValidators'
+import { useParams } from 'react-router-dom'
 import { ExpressionBuilder } from './ExpressionBuilder'
 import styles from './ExpressionBuilder.module.css'
 import { useExpressionValidator } from './useExpressionValidator'
 
 type ExpressionBuilderEntryProps = Readonly<{
     fieldName: string
-    modalTitle: string
+    title: string
     editButtonText: string
+    setUpButtonText: string
     validationResource: string
     descriptionFieldName?: string
     helpText?: string
@@ -21,6 +23,7 @@ export const ExpressionBuilderEntry = ({
     fieldName,
     title,
     editButtonText,
+    setUpButtonText,
     validationResource,
 }: ExpressionBuilderEntryProps) => {
     const [showExpressionBuilder, setShowExpressionBuilder] = useState(false)
@@ -31,15 +34,18 @@ export const ExpressionBuilderEntry = ({
         string | undefined
     >(undefined)
     const descriptionToShow = expressionDescription
-    const schemaSection = useSchemaSectionHandleOrThrow()
+    // const schemaSection = useSchemaSectionHandleOrThrow()
     // const schemaValidate = useValidator({ schemaSection, property: fieldName })
+    const params = useParams()
+    const isEdit = !!params?.id
+
     const schemaValidate = () => {}
-    const { input, meta } = useField<string>(fieldName, {
+    const { input } = useField<string>(fieldName, {
         validate: schemaValidate,
     })
 
     useEffect(() => {
-        ;(async () => {
+        const performInitialValidation = async () => {
             if (input.value && initialExpressionValidation !== undefined) {
                 const initialValidation = await initialExpressionValidation(
                     input.value
@@ -48,26 +54,21 @@ export const ExpressionBuilderEntry = ({
                     initialValidation?.expressionDescription
                 )
             }
-        })()
-    })
+        }
+        performInitialValidation()
+    }, [input.value, initialExpressionValidation])
 
     return (
         <div>
             <div className={styles.expression}>
-                <div
-                    className={styles.expressionBox}
-                    data-test={`${fieldName}-expression-description`}
-                >
-                    {descriptionToShow || i18n.t('(No Value)')}
-                </div>
-                <TextAreaFieldFF
-                    dataTest={`formfields-${fieldName}`}
-                    input={input}
-                    meta={meta}
-                    inputWidth="400px"
-                    disabled
-                    className={styles.expressionHiddenInput}
-                />
+                {(isEdit || descriptionToShow) && (
+                    <div
+                        className={styles.expressionBox}
+                        data-test={`${fieldName}-expression-description`}
+                    >
+                        {descriptionToShow || i18n.t('(No Value)')}
+                    </div>
+                )}
             </div>
 
             <div className={styles.buttonWrapper}>
@@ -77,7 +78,9 @@ export const ExpressionBuilderEntry = ({
                     onClick={() => setShowExpressionBuilder(true)}
                     dataTest={`edit-${fieldName}-expression-button`}
                 >
-                    {editButtonText}
+                    {isEdit || descriptionToShow
+                        ? editButtonText
+                        : setUpButtonText}
                 </Button>
             </div>
 

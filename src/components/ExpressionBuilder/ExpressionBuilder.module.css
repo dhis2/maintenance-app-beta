@@ -243,3 +243,29 @@ textarea::placeholder {
     padding-inline: var(--spacers-dp24);
     text-align: center;
 }
+
+.expressionBox {
+    background-color: #f4f4f4;
+    font-family: monospace;
+    font-size: 14px;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    display: inline-block;
+    white-space: pre-wrap;
+    max-width: 100%;
+    word-break: break-word;
+}
+
+.expression {
+    margin-bottom: 0.5rem;
+}
+.expressionHiddenInput > :first-child {
+    display: none;
+}
+.buttonWrapper {
+    margin-bottom: 1rem;
+}
+
+.descriptionField {
+    margin-top: 1rem;
+}

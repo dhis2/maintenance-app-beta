@@ -24,10 +24,10 @@ const insertElementNonClosure = ({
         elementRef.current.value = newText
 
         // run validation and force focus
-        validate(newText)
+        // validate(newText)
         elementRef.current?.focus()
-        elementRef.current?.blur()
-        elementRef.current?.focus()
+        // elementRef.current?.blur()
+        // elementRef.current?.focus()
 
         // need to set cursor index to match where element was added (not working)
         // elementRef.current.selectionStart = cursorStartIndex
