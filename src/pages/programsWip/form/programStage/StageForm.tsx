@@ -31,6 +31,7 @@ import {
     PickWithFieldFilters,
     ProgramStage,
 } from '../../../../types/models'
+import { ProgramStageListItem } from '../ProgramStagesFormContents'
 import styles from './StageForm.module.css'
 import { StageFormContents } from './StageFormContents'
 import { StageFormDescriptor } from './stageFormDescriptor'
@@ -82,7 +83,7 @@ export type StageFormProps = {
     stage?: PartialStageFormValues
     onCancel?: () => void
     onSubmit: OnSubmitWithClose
-    existingStages?: Array<{ id: string; name?: string; displayName?: string }>
+    existingStages?: ProgramStageListItem[]
 }
 
 export const StageForm = ({
@@ -203,7 +204,7 @@ export const EditStageForm = ({
         values: SubmittedStageFormValues,
         closeOnSubmit: boolean
     ) => void
-    existingStages?: Array<{ id: string; name?: string; displayName?: string }>
+    existingStages?: ProgramStageListItem[]
 }) => {
     const handlePatch = usePatchModel(stage.id, stageSchemaSection.namePlural)
 
@@ -279,7 +280,7 @@ export const NewStageForm = ({
         values: SubmittedStageFormValues,
         closeOnSubmit: boolean
     ) => void
-    existingStages?: Array<{ id: string; name?: string; displayName?: string }>
+    existingStages?: ProgramStageListItem[]
 }) => {
     const handleCreate = useCreateModel(stageSchemaSection.namePlural)
     const onFormSubmit: OnSubmitWithClose = async (
@@ -326,7 +327,7 @@ export const EditOrNewStageForm = ({
         values: SubmittedStageFormValues,
         closeOnSubmit: boolean
     ) => void
-    existingStages?: Array<{ id: string; name?: string; displayName?: string }>
+    existingStages?: ProgramStageListItem[]
 }) => {
     if (stage === undefined) {
         return null

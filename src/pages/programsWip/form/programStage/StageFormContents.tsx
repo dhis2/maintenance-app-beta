@@ -5,7 +5,7 @@ import {
     InputFieldFF,
     SingleSelectFieldFF,
 } from '@dhis2/ui'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Field, useFormState } from 'react-final-form'
 import {
     ColorAndIconField,
@@ -24,6 +24,7 @@ import {
     useValidator,
 } from '../../../../lib'
 import { featureTypeOptions } from '../constants'
+import { ProgramStageListItem } from '../ProgramStagesFormContents'
 import { EditOrNowStageSectionForm } from './programStageSection/ProgramStageSectionForm'
 import { stageSchemaSection } from './StageForm'
 import { StageFormDescriptor } from './stageFormDescriptor'
@@ -35,7 +36,7 @@ export const StageFormContents = ({
 }: {
     isSubsection: boolean
     setSelectedSection: (name: string) => void
-    existingStages?: Array<{ id: string; name?: string; displayName?: string }>
+    existingStages?: ProgramStageListItem[]
 }) => {
     const [sectionsFormOpen, setSectionsFormOpen] = React.useState(false)
     const { values } = useFormState({ subscription: { values: true } })
@@ -63,16 +64,14 @@ export const StageFormContents = ({
         property: 'eventLabel',
     })
 
-    const checkDuplicateName = React.useCallback(
+    const checkDuplicateName = useCallback(
         (value: string | undefined) => {
             if (!existingStages || !value) {
                 return undefined
             }
 
             const isDuplicate = existingStages.some(
-                (stage) =>
-                    stage.id !== values.id &&
-                    (stage.name === value || stage.displayName === value)
+                (stage) => stage.id !== values.id && stage.displayName === value
             )
 
             return isDuplicate

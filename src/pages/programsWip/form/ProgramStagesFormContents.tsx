@@ -23,6 +23,7 @@ export type ProgramStageListItem = {
     description?: string
     deleted?: boolean
     access?: Access
+    program?: { id: string }
 }
 
 export const ProgramStagesFormContents = React.memo(
@@ -33,12 +34,7 @@ export const ProgramStagesFormContents = React.memo(
             DisplayableModel | null | undefined
         >()
         const isStageFormOpen = !!stageFormOpen || stageFormOpen === null
-
-        const existingStages = stagesFieldArray.value.map((stage) => ({
-            id: stage.id,
-            name: stage.displayName,
-            displayName: stage.displayName,
-        }))
+        const existingStages = stagesFieldArray.value
 
         const handleSubmittedStage = (
             values: SubmittedStageFormValues,
