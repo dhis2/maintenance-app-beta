@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-08T10:55:32.263Z\n"
-"PO-Revision-Date: 2025-12-08T10:55:32.263Z\n"
+"POT-Creation-Date: 2025-12-10T15:44:56.031Z\n"
+"PO-Revision-Date: 2025-12-10T15:44:56.031Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -93,6 +93,27 @@ msgstr "Refresh"
 msgid "Add new"
 msgstr "Add new"
 
+msgid "Invalid expression"
+msgstr "Invalid expression"
+
+msgid "Valid expression"
+msgstr "Valid expression"
+
+msgid "Add operators, variables, functions, and constants from the right sidebar"
+msgstr "Add operators, variables, functions, and constants from the right sidebar"
+
+msgid "Apply"
+msgstr "Apply"
+
+msgid "Filter elements"
+msgstr "Filter elements"
+
+msgid "No matches"
+msgstr "No matches"
+
+msgid "Retry"
+msgstr "Retry"
+
 msgid "Operators"
 msgstr "Operators"
 
@@ -114,20 +135,8 @@ msgstr "Data elements"
 msgid "Constants"
 msgstr "Constants"
 
-msgid "Add operators, variables, functions, and constants from the right sidebar"
-msgstr "Add operators, variables, functions, and constants from the right sidebar"
-
-msgid "Apply"
-msgstr "Apply"
-
-msgid "Filter elements"
-msgstr "Filter elements"
-
-msgid "No matches"
-msgstr "No matches"
-
-msgid "Retry"
-msgstr "Retry"
+msgid "Could not validate expression"
+msgstr "Could not validate expression"
 
 msgid "Message subject"
 msgstr "Message subject"
@@ -541,20 +550,11 @@ msgstr "No potential targets available. Remove an item from sources."
 msgid "At least one source is required"
 msgstr "At least one source is required"
 
-msgid "Valid expression"
-msgstr "Valid expression"
-
 msgid "Add operators, variables, functions, and constants from right sidebar"
 msgstr "Add operators, variables, functions, and constants from right sidebar"
 
 msgid "(No Value)"
 msgstr "(No Value)"
-
-msgid "Invalid expression"
-msgstr "Invalid expression"
-
-msgid "Could not validate expression"
-msgstr "Could not validate expression"
 
 msgid "Loading..."
 msgstr "Loading..."
@@ -4539,3 +4539,11 @@ msgstr "Validation Rules"
 
 msgid "Choose the validation rules to include in this validation rule group."
 msgstr "Choose the validation rules to include in this validation rule group."
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Maintenance (Preview)"
+
+msgctxt "Application description"
+msgid "__MANIFEST_APP_DESCRIPTION"
+msgstr ""

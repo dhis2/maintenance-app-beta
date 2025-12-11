@@ -16,7 +16,22 @@ import { PagedResponse } from '../../types/generated'
 import { PartialLoadedDisplayableModel } from '../../types/models'
 import styles from './ExpressionBuilder.module.css'
 
-const ExpressionListInner = ({
+type OnFilterChange = ({ value }: { value: string }) => void
+interface ElementListProps {
+    insertElement?: (s: string) => void
+    onFilterChange?: OnFilterChange
+    onEndReached?: () => void
+    onRetryClick: () => void
+    elements: InsertElement[]
+    showEndLoader?: boolean
+    loading?: boolean
+    error?: string
+    postQuerySearch?: boolean
+}
+
+const noop = () => {}
+
+export const ExpressionListInner = ({
     error,
     loading,
     onEndReached,
@@ -24,16 +39,22 @@ const ExpressionListInner = ({
     onRetryClick,
     elements,
     showEndLoader,
-    searchable = true,
     insertElement,
+    postQuerySearch = false,
 }: ElementListProps) => {
     const [loadingSpinnerRef, setLoadingSpinnerRef] = useState<HTMLElement>()
 
     const { liveValue: filter, setValue: setFilterValue } =
         useDebouncedState<string>({
             initialValue: '',
-            onSetDebouncedValue: (value: string) => onFilterChange?.({ value }),
+            onSetDebouncedValue: (value: string) =>
+                postQuerySearch ? noop : onFilterChange?.({ value }),
         })
+
+    const postQueryFilter = postQuerySearch
+        ? (o: { id: string; displayName: string }) =>
+              o.displayName.includes(filter)
+        : () => true
 
     useEffect(() => {
         // We don't want to wait for intersections when loading as that can
@@ -55,36 +76,36 @@ const ExpressionListInner = ({
         }
     }, [loadingSpinnerRef, loading, onEndReached])
 
+    if (!elements) {
+        return null
+    }
+
     return (
         <div className={styles.expressionListContainer}>
-            {searchable && (
-                <div className={styles.searchField}>
-                    <div className={styles.searchInput}>
-                        <Input
-                            dense
-                            initialFocus
-                            value={filter}
-                            onChange={({ value }) =>
-                                setFilterValue(value ?? '')
-                            }
-                            placeholder={i18n.t('Filter elements')}
-                            type="search"
-                        />
-                    </div>
+            <div className={styles.searchField}>
+                <div className={styles.searchInput}>
+                    <Input
+                        dense
+                        initialFocus
+                        value={filter}
+                        onChange={({ value }) => setFilterValue(value ?? '')}
+                        placeholder={i18n.t('Filter list')}
+                        type="search"
+                    />
                 </div>
-            )}
+            </div>
 
             {elements.length === 0 && (
                 <div className={styles.noMatchBlock}>
                     {i18n.t('No matches')}
                 </div>
             )}
-
             <ul className={styles.elementList}>
-                {elements.map(({ id, displayName }) => (
+                {elements.filter(postQueryFilter).map(({ id, displayName }) => (
                     <li
                         key={id}
-                        onClick={() => {
+                        onClick={(e) => {
+                            e.preventDefault()
                             insertElement?.(id)
                         }}
                     >
@@ -124,12 +145,14 @@ export type ExpressionListProps<TModel> = {
     query: Omit<PlainResourceQuery, 'id'>
     transform?: (value: TModel[]) => TModel[]
     insertElement?: (s: string) => void
+    postQuerySearch?: boolean
 }
 
 export const ExpressionList = <TModel extends PartialLoadedDisplayableModel>({
     query,
     transform,
     insertElement,
+    postQuerySearch = false,
 }: ExpressionListProps<TModel>) => {
     const queryFn = useBoundResourceQueryFn()
     const [searchTerm, setSearchTerm] = useState('')
@@ -176,7 +199,7 @@ export const ExpressionList = <TModel extends PartialLoadedDisplayableModel>({
 
     const resolvedAvailable = useMemo(() => {
         const data = transform ? transform(allDataMap) : allDataMap
-        return data.filter(
+        return data?.filter(
             (item) => !!item.id && !!item.displayName
         ) as InsertElement[]
     }, [allDataMap, transform])
@@ -215,6 +238,7 @@ export const ExpressionList = <TModel extends PartialLoadedDisplayableModel>({
             onEndReached={onEndReached}
             loading={queryResult.isLoading}
             error={queryResult.error?.toString()}
+            postQuerySearch={postQuerySearch}
         />
     )
 }
@@ -253,17 +277,4 @@ function Error({
             </div>
         </div>
     )
-}
-
-type OnFilterChange = ({ value }: { value: string }) => void
-interface ElementListProps {
-    insertElement?: (s: string) => void
-    onFilterChange?: OnFilterChange
-    onEndReached?: () => void
-    onRetryClick: () => void
-    elements: InsertElement[]
-    showEndLoader: boolean
-    loading: boolean
-    error?: string
-    searchable?: boolean
 }

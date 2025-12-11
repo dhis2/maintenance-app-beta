@@ -1,8 +1,10 @@
+import i18n from '@dhis2/d2-i18n'
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { DefaultEditFormContents, FormBase } from '../../components'
-import { ExpressionBuilder } from '../../components/ExpressionBuilder'
+// import { ExpressionBuilder } from '../../components/ExpressionBuilder'
+import { ExpressionBuilderEntry } from '../../components/ExpressionBuilder'
 import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PickWithFieldFilters, ValidationRule } from '../../types/generated'
@@ -54,8 +56,12 @@ export const Component = () => {
         >
             <DefaultEditFormContents section={section}>
                 <>
-                    <pre>{JSON.stringify(initialValues, null, 4)}</pre>
-                    <ExpressionBuilder />
+                    <ExpressionBuilderEntry
+                        fieldName='leftSide.expression'                        
+                        title={i18n.t('Edit numerator expression')}
+                        editButtonText={i18n.t('Edit this')}
+                        validationResource='validationRules/expression/description'
+                    />
                 </>
             </DefaultEditFormContents>
         </FormBase>
