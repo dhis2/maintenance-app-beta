@@ -11,8 +11,10 @@ import {
     NameField,
     CodeField,
     DescriptionField,
+    CustomAttributesSection,
 } from '../../../components'
 import {
+    SCHEMA_SECTIONS,
     useSchemaSectionHandleOrThrow,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
@@ -137,6 +139,10 @@ export function RelationshipTypeFormFields() {
                     <RelationshipSideFields prefix="to" />
                 </StandardFormField>
             </SectionedFormSection>
+            <CustomAttributesSection
+                schemaSection={SCHEMA_SECTIONS.relationshipType}
+                sectionedLayout
+            />
         </SectionedFormSections>
     )
 }

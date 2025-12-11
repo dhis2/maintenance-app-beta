@@ -48,7 +48,6 @@ export const Component = () => {
             onSubmit={useOnSubmitEdit({ section, modelId })}
             initialValues={initialValues}
             validate={validate}
-            includeAttributes={false}
         >
             <DefaultEditFormContents section={section}>
                 <ValidationRuleGroupsFormFields />
