@@ -126,6 +126,7 @@ export const useDataSetCustomFormElements = () => {
                     ].concat(),
                     dataSet: dataSetId,
                     paging: false,
+                    order: 'displayName',
                 },
             },
         ] as const,
@@ -149,7 +150,8 @@ export const useDataSetCustomFormElements = () => {
                     DEFAULT_CATEGORY_OPTION_COMBO.id
                 ) {
                     acc.dataElements.push({
-                        id: deo.id,
+                        // this is to ensure consistent de.coc id format
+                        id: `${deo.dataElement.id}.${deo.categoryOptionCombo.id}`,
                         displayName: deo.dataElement.displayName,
                         key: deo.id,
                     })
