@@ -6,21 +6,14 @@ import type { ParsedAccessPart, SharingSettings } from '../../../../lib'
 import { parseAccessString } from '../../../../lib'
 import css from './RoleAccessBox.module.css'
 
-const getAccessLabel = (
-    access: ParsedAccessPart | undefined,
-    type: 'data' | 'metadata'
-): string => {
+const getAccessLabel = (access: ParsedAccessPart | undefined): string => {
     if (!access?.read) {
-        return i18n.t('No {{type}} access', { type })
+        return i18n.t('No access')
     }
     if (access.write) {
-        return i18n.t('{{type}} read and write', {
-            type: type.charAt(0).toUpperCase() + type.slice(1),
-        })
+        return i18n.t('Read and write')
     }
-    return i18n.t('{{type}} read', {
-        type: type.charAt(0).toUpperCase() + type.slice(1),
-    })
+    return i18n.t('Read only')
 }
 
 type RoleAccessBoxProps = {
@@ -94,12 +87,11 @@ export const RoleAccessBox = ({
                         {i18n.t('Public (All users)')}
                     </div>
                     <div className={css.accessData}>
-                        {getAccessLabel(publicAccess?.data, 'data')}
+                        {getAccessLabel(publicAccess?.data)}
                     </div>
                     <div className={css.accessMetadata}>
-                        {type === 'program'
-                            ? getAccessLabel(publicAccess?.metadata, 'metadata')
-                            : null}
+                        {type === 'program' &&
+                            getAccessLabel(publicAccess?.metadata)}
                     </div>
                 </div>
 
@@ -107,13 +99,11 @@ export const RoleAccessBox = ({
                     <div className={css.accessLabel}>{i18n.t('External')}</div>
                     <div className={css.accessData}>
                         {sharing?.external
-                            ? i18n.t('Data read and write')
-                            : i18n.t('No data access')}
+                            ? i18n.t('Read and write')
+                            : i18n.t('No access')}
                     </div>
                     <div className={css.accessMetadata}>
-                        {type === 'program'
-                            ? i18n.t('No metadata access')
-                            : null}
+                        {type === 'program' && i18n.t('No access')}
                     </div>
                 </div>
 
@@ -125,15 +115,11 @@ export const RoleAccessBox = ({
                                 {entity.displayName || entity.id}
                             </div>
                             <div className={css.accessData}>
-                                {getAccessLabel(parsed?.data, 'data')}
+                                {getAccessLabel(parsed?.data)}
                             </div>
                             <div className={css.accessMetadata}>
-                                {type === 'program'
-                                    ? getAccessLabel(
-                                          parsed?.metadata,
-                                          'metadata'
-                                      )
-                                    : null}
+                                {type === 'program' &&
+                                    getAccessLabel(parsed?.metadata)}
                             </div>
                         </div>
                     )

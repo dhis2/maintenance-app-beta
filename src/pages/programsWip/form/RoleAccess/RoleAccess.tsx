@@ -17,19 +17,13 @@ type ProgramStageWithSharing = {
     sharing?: SharingSettings
 }
 
-type ModalState =
-    | {
-          isOpen: boolean
-          entityType: 'program' | 'programStage'
-          entityId: string
-      }
-    | {
-          isOpen: false
-      }
+type SharingDialogState = {
+    type: 'program' | 'programStage'
+    id: string
+} | null
 
 export const RoleAccess = () => {
-    const formState = useFormState<ProgramValues>()
-    const values = formState.values
+    const { values } = useFormState<ProgramValues>()
     const { id: programId } = useParams()
     const dataEngine = useDataEngine()
     const queryClient = useQueryClient()
@@ -41,9 +35,7 @@ export const RoleAccess = () => {
         critical: true,
     })
 
-    const [modalState, setModalState] = useState<ModalState>({
-        isOpen: false,
-    })
+    const [sharingDialog, setSharingDialog] = useState<SharingDialogState>(null)
 
     const programStages = useMemo(
         () => (values.programStages || []) as ProgramStageWithSharing[],
@@ -66,9 +58,9 @@ export const RoleAccess = () => {
             await Promise.all(
                 programStages.map((stage) =>
                     dataEngine.mutate({
-                        resource: `sharing?type=programStage&id=${stage.id}`,
+                        resource: 'sharing',
                         type: 'update',
-                        id: stage.id,
+                        params: { type: 'programStage', id: stage.id },
                         data: {
                             meta: {
                                 allowPublicAccess: true,
@@ -80,7 +72,7 @@ export const RoleAccess = () => {
                                 displayName: stage.displayName,
                             },
                         },
-                    })
+                    } as any)
                 )
             )
 
@@ -124,9 +116,9 @@ export const RoleAccess = () => {
                 })) as { sharing: { object: SharingSettings } }
 
                 await dataEngine.mutate({
-                    resource: `sharing?type=programStage&id=${stageId}`,
+                    resource: 'sharing',
                     type: 'update',
-                    id: stageId,
+                    params: { type: 'programStage', id: stageId },
                     data: {
                         meta: {
                             allowPublicAccess: true,
@@ -138,7 +130,7 @@ export const RoleAccess = () => {
                             displayName: stage.displayName,
                         },
                     },
-                })
+                } as any)
 
                 showSuccess()
                 queryClient.invalidateQueries({
@@ -162,25 +154,12 @@ export const RoleAccess = () => {
         ]
     )
 
-    const handleEditAccess = useCallback(
-        (type: 'program' | 'stage', stageId?: string) => {
-            setModalState({
-                isOpen: true,
-                entityType: type === 'program' ? 'program' : 'programStage',
-                entityId: type === 'program' ? values.id : stageId!,
-            })
-        },
-        [values.id]
-    )
-
-    const handleCloseModal = useCallback(() => {
-        setModalState({ isOpen: false })
-    }, [])
-
     const handleSaveSharing = useCallback(() => {
-        queryClient.invalidateQueries({
-            queryKey: [{ resource: 'programs', id: programId }],
-        })
+        if (programId) {
+            queryClient.invalidateQueries({
+                queryKey: [{ resource: 'programs', id: programId }],
+            })
+        }
     }, [programId, queryClient])
 
     return (
@@ -193,7 +172,9 @@ export const RoleAccess = () => {
                     type="program"
                     sharing={values.sharing}
                     onApplyToAllStages={handleApplyToAllStages}
-                    onEditAccess={() => handleEditAccess('program')}
+                    onEditAccess={() =>
+                        setSharingDialog({ type: 'program', id: values.id })
+                    }
                 />
 
                 {programStages.map((stage) => (
@@ -213,18 +194,23 @@ export const RoleAccess = () => {
                         onApplyProgramAccessRules={() =>
                             handleApplyProgramAccessRules(stage.id)
                         }
-                        onEditAccess={() => handleEditAccess('stage', stage.id)}
+                        onEditAccess={() =>
+                            setSharingDialog({
+                                type: 'programStage',
+                                id: stage.id,
+                            })
+                        }
                     />
                 ))}
             </div>
 
-            {modalState.isOpen && (
+            {sharingDialog && (
                 <SharingDialog
-                    type={modalState.entityType}
-                    id={modalState.entityId}
-                    onClose={handleCloseModal}
+                    type={sharingDialog.type}
+                    id={sharingDialog.id}
+                    onClose={() => setSharingDialog(null)}
                     onSave={handleSaveSharing}
-                    dataSharing={true}
+                    dataSharing
                 />
             )}
         </>
