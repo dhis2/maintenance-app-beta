@@ -120,6 +120,18 @@ export const EnrollmentDataFormContents = React.memo(
             multiple: true,
             validateFields: [],
         })
+
+        const trackedEntityTypeField = useField<
+            ProgramsFromFilters['trackedEntityType']
+        >('trackedEntityType', {
+            subscription: { value: true },
+        })
+
+        const tetaIds =
+            trackedEntityTypeField.input.value?.trackedEntityTypeAttributes.map(
+                (teta) => teta.trackedEntityAttribute.id
+            )
+
         const programHasDateAttributes = input.value.some(
             (attribute) => attribute.valueType === 'DATE'
         )
@@ -211,6 +223,10 @@ export const EnrollmentDataFormContents = React.memo(
                                         'valueType',
                                         'unique',
                                     ],
+                                    filter:
+                                        tetaIds.length > 0
+                                            ? [`id:!in:[${tetaIds.join(',')}]`]
+                                            : undefined,
                                 },
                             }}
                         />

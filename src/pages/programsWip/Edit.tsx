@@ -39,7 +39,7 @@ const fieldFilters = [
     'lastUpdated',
     'dataEntryForm',
     'programTrackedEntityAttributes',
-    'trackedEntityType[id,displayName]',
+    'trackedEntityType[id,displayName,trackedEntityTypeAttributes[trackedEntityAttribute[id]]]',
     'onlyEnrollOnce',
     'selectEnrollmentDatesInFuture',
     'displayIncidentDate',
