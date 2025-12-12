@@ -211,6 +211,7 @@ export const RoleAccess = () => {
                     onClose={() => setSharingDialog(null)}
                     onSave={handleSaveSharing}
                     dataSharing
+                    metadataSharing={sharingDialog.type !== 'programStage'}
                 />
             )}
         </>
