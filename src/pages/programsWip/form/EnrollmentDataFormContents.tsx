@@ -12,7 +12,7 @@ import {
     TableRow,
 } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Field as FieldRFF, FieldRenderProps, useField } from 'react-final-form'
 import {
     ModelTransfer,
@@ -127,10 +127,28 @@ export const EnrollmentDataFormContents = React.memo(
             subscription: { value: true },
         })
 
-        const tetaIds =
-            trackedEntityTypeField.input.value?.trackedEntityTypeAttributes.map(
-                (teta) => teta.trackedEntityAttribute.id
+        const tetas =
+            trackedEntityTypeField.input.value?.trackedEntityTypeAttributes ||
+            []
+        const tetaIds = tetas.map((teta: any) => teta.trackedEntityAttribute.id)
+        const previousTetaIds = useRef<string[]>([])
+
+        useEffect(() => {
+            if (!trackedEntityTypeField.input.value?.id) {
+                return
+            }
+
+            const ptea = input.value.filter(
+                (attr) =>
+                    !previousTetaIds.current.includes(
+                        attr.trackedEntityAttribute.id
+                    )
             )
+
+            input.onChange([...tetas, ...ptea])
+            previousTetaIds.current = tetaIds
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [trackedEntityTypeField.input.value?.id, tetaIds.join(',')])
 
         const programHasDateAttributes = input.value.some(
             (attribute) => attribute.valueType === 'DATE'
@@ -156,17 +174,31 @@ export const EnrollmentDataFormContents = React.memo(
                         className={css.moduleTransferField}
                     >
                         <ModelTransfer
-                            selected={input.value.map((attribute) => ({
-                                id: attribute.trackedEntityAttribute.id,
-                                displayName:
-                                    attribute.trackedEntityAttribute
-                                        .displayName,
-                                valueType: attribute.valueType,
-                                unique: attribute.trackedEntityAttribute.unique,
-                            }))}
+                            selected={input.value.map((attribute) => {
+                                const tea = attribute.trackedEntityAttribute
+                                const isTETA = tetaIds?.includes(tea.id)
+                                return {
+                                    ...tea,
+                                    ...(isTETA && {
+                                        displayName: `${tea.displayName} (Tracked entity type attribute)`,
+                                    }),
+                                }
+                            })}
                             onChange={({ selected }) => {
-                                input.onChange(
-                                    selected.map((s) => {
+                                const tetaAttributes = input.value.filter(
+                                    (attr) =>
+                                        tetaIds?.includes(
+                                            attr.trackedEntityAttribute.id
+                                        )
+                                )
+
+                                const pteaSelected = selected.filter(
+                                    (s) => !tetaIds?.includes(s.id)
+                                )
+
+                                input.onChange([
+                                    ...tetaAttributes,
+                                    ...pteaSelected.map((s) => {
                                         const defaultRenderType = {
                                             MOBILE: { type: 'DEFAULT' },
                                             DESKTOP: {
@@ -201,8 +233,8 @@ export const EnrollmentDataFormContents = React.memo(
                                                   displayInList: false,
                                                   renderType: defaultRenderType,
                                               }
-                                    })
-                                )
+                                    }),
+                                ])
                                 input.onBlur()
                             }}
                             leftHeader={i18n.t('Available attributes')}
