@@ -301,13 +301,20 @@ export const EnrollmentDataFormContents = React.memo(
                         </TableHead>
                         <TableBody>
                             {input.value.map((attribute, index) => {
+                                const isTETA = tetaIds?.includes(
+                                    attribute.trackedEntityAttribute.id
+                                )
                                 return (
                                     <TableRow key={attribute.id}>
                                         <TableCell>
-                                            {
+                                            {`${
                                                 attribute.trackedEntityAttribute
                                                     .displayName
-                                            }
+                                            } ${
+                                                isTETA
+                                                    ? ' (Tracked entity type attribute)'
+                                                    : ''
+                                            }`}
                                         </TableCell>
                                         {programHasDateAttributes && (
                                             <TableCell>
