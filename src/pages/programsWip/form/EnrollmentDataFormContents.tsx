@@ -12,7 +12,7 @@ import {
     TableRow,
 } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { Field as FieldRFF, FieldRenderProps, useField } from 'react-final-form'
 import {
     ModelTransfer,
@@ -139,34 +139,53 @@ export const EnrollmentDataFormContents = React.memo(
         const tetas =
             trackedEntityTypeField.input.value?.trackedEntityTypeAttributes ||
             []
-        const tetaIds = tetas.map(
-            (teta: ProgramTrackedEntityAttribute) =>
-                teta.trackedEntityAttribute.id
+        const tetaIds = new Set(
+            tetas.map(
+                (teta: ProgramTrackedEntityAttribute) =>
+                    teta.trackedEntityAttribute.id
+            )
         )
+        const tetaIdsString = Array.from(tetaIds).join(',')
         const tetaMap = new Map<string, ProgramTrackedEntityAttribute>(
             tetas.map((teta: ProgramTrackedEntityAttribute) => [
                 teta.trackedEntityAttribute.id,
                 teta,
             ])
         )
-        const previousTetaIds = useRef<string[]>([])
 
         useEffect(() => {
             if (!trackedEntityTypeField.input.value?.id) {
                 return
             }
 
-            const ptea = input.value.filter(
-                (attr) =>
-                    !previousTetaIds.current.includes(
-                        attr.trackedEntityAttribute.id
-                    )
+            const existingProgramAttributesMap = new Map(
+                input.value.map((programAttribute) => [
+                    programAttribute.trackedEntityAttribute.id,
+                    programAttribute,
+                ])
             )
 
-            input.onChange([...tetas, ...ptea])
-            previousTetaIds.current = tetaIds
+            const matchedTetaAttributes = tetas.map(
+                (tetaAttribute: ProgramTrackedEntityAttribute) => {
+                    const existingProgramAttribute =
+                        existingProgramAttributesMap.get(
+                            tetaAttribute.trackedEntityAttribute.id
+                        )
+                    return existingProgramAttribute ?? tetaAttribute
+                }
+            )
+
+            const programTrackedEntityAttributes = input.value.filter(
+                (programAttribute) =>
+                    !tetaIds.has(programAttribute.trackedEntityAttribute.id)
+            )
+
+            input.onChange([
+                ...matchedTetaAttributes,
+                ...programTrackedEntityAttributes,
+            ])
             // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [trackedEntityTypeField.input.value?.id, tetaIds.join(',')])
+        }, [trackedEntityTypeField.input.value?.id, tetaIdsString])
 
         const programHasDateAttributes = input.value.some(
             (attribute) => attribute.valueType === 'DATE'
@@ -273,10 +292,9 @@ export const EnrollmentDataFormContents = React.memo(
                                         'valueType',
                                         'unique',
                                     ],
-                                    filter:
-                                        tetaIds.length > 0
-                                            ? [`id:!in:[${tetaIds.join(',')}]`]
-                                            : undefined,
+                                    filter: tetaIdsString
+                                        ? [`id:!in:[${tetaIdsString}]`]
+                                        : undefined,
                                 },
                             }}
                         />
@@ -327,7 +345,7 @@ export const EnrollmentDataFormContents = React.memo(
                                 const isTetaFieldEnabled = (
                                     field: keyof ProgramTrackedEntityAttribute
                                 ) => {
-                                    return !teta || teta[field] !== true
+                                    return teta?.[field] !== true
                                 }
                                 return (
                                     <TableRow key={attribute.id}>
