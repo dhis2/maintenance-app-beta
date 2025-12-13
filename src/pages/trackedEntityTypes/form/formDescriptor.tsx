@@ -25,6 +25,10 @@ export const TrackedEntityTypeFormDescriptor = {
                     label: i18n.t('Description'),
                 },
                 {
+                    name: 'featureType',
+                    label: i18n.t('Feature type'),
+                },
+                {
                     name: 'style',
                     label: i18n.t('Color and icon'),
                 },

@@ -30,7 +30,7 @@ const trackedEntityTypeBaseSchema = z.object({
             0,
             'Minimum number of attributes required to search must be 0 or greater'
         )
-        .default(1),
+        .default(0),
     maxTeiCountToReturn: z
         .number()
         .min(
@@ -38,7 +38,7 @@ const trackedEntityTypeBaseSchema = z.object({
             'Maximum number of tracked entity instances to return must be 0 or greater'
         )
         .default(0),
-    featureType: z.string().trim().optional(),
+    featureType: z.enum(['NONE', 'POINT', 'POLYGON']).optional(),
     trackedEntityTypeAttributes: z
         .array(
             z.object({
