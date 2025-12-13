@@ -1,16 +1,12 @@
 import i18n from '@dhis2/d2-i18n'
-import {
-    Button,
-    CheckboxFieldFF,
-    InputFieldFF,
-    SingleSelectFieldFF,
-} from '@dhis2/ui'
+import { Button, CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
 import React, { useCallback } from 'react'
 import { Field, useFormState } from 'react-final-form'
 import {
     ColorAndIconField,
     DescriptionField,
     DrawerPortal,
+    FeatureTypeField,
     SectionedFormSection,
     SectionedFormSections,
     StandardFormField,
@@ -23,7 +19,6 @@ import {
     useSyncSelectedSectionWithScroll,
     useValidator,
 } from '../../../../lib'
-import { featureTypeOptions } from '../constants'
 import { ProgramStageListItem } from '../ProgramStagesFormContents'
 import { EditOrNowStageSectionForm } from './programStageSection/ProgramStageSectionForm'
 import { stageSchemaSection } from './StageForm'
@@ -143,14 +138,7 @@ export const StageFormContents = ({
                     />
                 </StandardFormField>
                 <StandardFormField>
-                    <Field
-                        component={SingleSelectFieldFF}
-                        name="featureType"
-                        label={i18n.t('Feature type')}
-                        inputWidth="400px"
-                        options={featureTypeOptions}
-                        dataTest="formfields-featureType"
-                    />
+                    <FeatureTypeField />
                 </StandardFormField>
                 <StandardFormField>
                     <Field
