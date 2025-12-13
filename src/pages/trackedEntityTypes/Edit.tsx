@@ -1,5 +1,6 @@
+import { useAlert } from '@dhis2/app-runtime'
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
@@ -16,6 +17,7 @@ import {
     useOnSubmitEdit,
     useBoundResourceQueryFn,
 } from '../../lib'
+import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
 import { PickWithFieldFilters, TrackedEntityType } from '../../types/generated'
 import {
     TrackedEntityTypeFormDescriptor,
@@ -42,10 +44,20 @@ export type TrackedEntityTypeFormValues = PickWithFieldFilters<
     typeof fieldFilters
 > & { id: string }
 
+type Program = {
+    id: string
+    displayName: string
+}
+
 export const Component = () => {
     const section = SECTIONS_MAP.trackedEntityType
     const queryFn = useBoundResourceQueryFn()
     const modelId = useParams().id as string
+    const submitEdit = useOnSubmitEdit({ modelId, section })
+    const saveAlert = useAlert(
+        ({ message }) => message,
+        (options) => options
+    )
 
     const query = {
         resource: 'trackedEntityTypes',
@@ -58,9 +70,53 @@ export const Component = () => {
         queryKey: [query],
         queryFn: queryFn<TrackedEntityTypeFormValues>,
     })
+
+    const programsQuery = useQuery({
+        queryKey: [
+            {
+                resource: 'programs',
+                params: {
+                    fields: 'id,displayName',
+                    filter: `trackedEntityType.id:eq:${modelId}`,
+                    paging: false,
+                },
+            },
+        ] as const,
+        queryFn: queryFn<{ programs?: Program[] }>,
+        enabled: !!modelId,
+    })
+
+    const onSubmit = useMemo<EnhancedOnSubmit<TrackedEntityTypeFormValues>>(
+        () => async (values, form, options) => {
+            const dirtyFields = form.getState().dirtyFields
+
+            const hasAttributeChanges = Object.keys(dirtyFields).some((key) =>
+                key.startsWith('trackedEntityTypeAttributes')
+            )
+
+            if (!hasAttributeChanges) {
+                return submitEdit(values, form as any, options)
+            }
+
+            const programs = programsQuery.data?.programs || []
+            if (programs.length) {
+                const programNames = programs
+                    .map((p: Program) => p.displayName)
+                    .join(', ')
+                saveAlert.show({
+                    message: `After changing the tracked entity type attributes, you may need to update these programs: ${programNames}`,
+                    warning: true,
+                })
+            }
+
+            return submitEdit(values, form as any, options)
+        },
+        [submitEdit, saveAlert, programsQuery.data]
+    )
+
     return (
         <FormBase
-            onSubmit={useOnSubmitEdit({ modelId, section })}
+            onSubmit={onSubmit}
             initialValues={trackedEntityType.data}
             validate={validateTrackedEntityType}
         >
