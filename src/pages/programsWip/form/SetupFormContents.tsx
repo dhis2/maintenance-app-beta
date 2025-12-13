@@ -1,6 +1,6 @@
 import { useTimeZoneConversion } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { InputFieldFF, SingleSelectFieldFF } from '@dhis2/ui'
+import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { useField, useFormState } from 'react-final-form'
 import { useHref } from 'react-router'
@@ -8,6 +8,7 @@ import {
     CodeField,
     DescriptionField,
     EditableFieldWrapper,
+    FeatureTypeField,
     NameField,
     SectionedFormSection,
     ShortNameField,
@@ -27,24 +28,6 @@ import {
 import { DisplayableModel } from '../../../types/models'
 import classes from '../../dataElements/fields/CategoryComboField.module.css'
 
-const featureTypes = [
-    {
-        value: '',
-        label: i18n.t('<No value>'),
-    },
-    {
-        value: 'NONE',
-        label: i18n.t('None'),
-    },
-    {
-        value: 'POINT',
-        label: i18n.t('Point'),
-    },
-    {
-        value: 'POLYGON',
-        label: i18n.t('Polygon'),
-    },
-]
 const CATEGORY_COMBOS_QUERY = {
     resource: 'categoryCombos',
     params: {
@@ -71,8 +54,6 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                 : undefined,
     })
 
-    const { input: featureTypeInput, meta: featureTypeMeta } =
-        useField('featureType')
     const { values } = useFormState({ subscription: { values: true } })
     const refreshCategoryCombos = useRefreshModelSingleSelect({
         resource: 'categoryCombos',
@@ -127,14 +108,7 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                 />
             </StandardFormField>
             <StandardFormField>
-                <SingleSelectFieldFF
-                    name="featureType"
-                    label={i18n.t('Feature type')}
-                    inputWidth="400px"
-                    options={featureTypes}
-                    input={featureTypeInput}
-                    meta={featureTypeMeta}
-                />
+                <FeatureTypeField />
             </StandardFormField>
             <StandardFormField>
                 <ModelSingleSelectFormField
