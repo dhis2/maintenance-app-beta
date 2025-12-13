@@ -140,10 +140,10 @@ export const EnrollmentDataFormContents = React.memo(
             trackedEntityTypeField.input.value?.trackedEntityTypeAttributes ||
             []
         const tetaIds = new Set(
-            tetas.map(
+            trackedEntityTypeField.input.value?.trackedEntityTypeAttributes?.map(
                 (teta: ProgramTrackedEntityAttribute) =>
                     teta.trackedEntityAttribute.id
-            )
+            ) ?? []
         )
         const tetaIdsString = Array.from(tetaIds).join(',')
         const tetaMap = new Map<string, ProgramTrackedEntityAttribute>(
@@ -395,9 +395,7 @@ export const EnrollmentDataFormContents = React.memo(
                                                         'mandatory'
                                                     )
                                                 }
-                                                content={i18n.t(
-                                                    'This setting is inherited from the tracked entity type and cannot be changed'
-                                                )}
+                                                content={TETA_INHERITED_TOOLTIP}
                                             >
                                                 <FieldRFF
                                                     component={CheckboxFieldFF}
@@ -444,7 +442,6 @@ export const EnrollmentDataFormContents = React.memo(
                                                                 'searchable'
                                                             )
                                                         }
-                                                        checked={true}
                                                     />
                                                 </TooltipWrapper>
                                             )}
@@ -456,9 +453,7 @@ export const EnrollmentDataFormContents = React.memo(
                                                         'displayInList'
                                                     )
                                                 }
-                                                content={i18n.t(
-                                                    'This setting is inherited from the tracked entity type and cannot be changed'
-                                                )}
+                                                content={TETA_INHERITED_TOOLTIP}
                                             >
                                                 <FieldRFF
                                                     component={CheckboxFieldFF}

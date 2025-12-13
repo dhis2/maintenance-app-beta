@@ -53,7 +53,10 @@ export const Component = () => {
     const section = SECTIONS_MAP.trackedEntityType
     const queryFn = useBoundResourceQueryFn()
     const modelId = useParams().id as string
-    const submitEdit = useOnSubmitEdit({ modelId, section })
+    const submitEdit = useOnSubmitEdit<TrackedEntityTypeFormValues>({
+        modelId,
+        section,
+    })
     const saveAlert = useAlert(
         ({ message }) => message,
         (options) => options
@@ -95,7 +98,7 @@ export const Component = () => {
             )
 
             if (!hasAttributeChanges) {
-                return submitEdit(values, form as any, options)
+                return submitEdit(values, form, options)
             }
 
             const programs = programsQuery.data?.programs || []
@@ -109,7 +112,7 @@ export const Component = () => {
                 })
             }
 
-            return submitEdit(values, form as any, options)
+            return submitEdit(values, form, options)
         },
         [submitEdit, saveAlert, programsQuery.data]
     )
