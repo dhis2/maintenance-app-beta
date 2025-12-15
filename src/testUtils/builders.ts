@@ -74,6 +74,7 @@ import {
     DataElement,
     OptionMapping,
     OrganisationUnit,
+    Predictor,
     Program,
     ProgramTrackedEntityAttribute,
 } from '../types/generated'
@@ -557,3 +558,36 @@ export const testOption = ({
         displayName: displayName ?? optionName,
     }
 }
+
+export const testPredictorList = ({
+    id = randomDhis2Id(),
+    displayName = faker.company.buzzPhrase(),
+    output = {
+        id: randomDhis2Id(),
+        displayName: faker.commerce.productName(),
+    },
+    outputCombo = {
+        id: randomDhis2Id(),
+        displayName: faker.commerce.productName(),
+    },
+    periodType = 'Monthly' as Predictor['periodType'],
+    lastUpdated = faker.date.past().toISOString(),
+    access = testAccess({ write: true, delete: true }),
+} = {}) => ({
+    id,
+    displayName,
+    name: displayName,
+    shortName: displayName,
+    output,
+    outputCombo,
+    periodType,
+    access,
+    lastUpdated,
+    organisationUnitLevels: [],
+    organisationUnitDescendants:
+        'ALL' as Predictor['organisationUnitDescendants'],
+    predictorGroups: [],
+    sequentialSampleCount: 0,
+    annualSampleCount: 0,
+    sequentialSkipCount: 0,
+})
