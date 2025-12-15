@@ -35,17 +35,18 @@ interface QueryResponse {
 
 type UseCustomAttributesQueryOptions = {
     enabled?: boolean
+    modelName?: string
 }
 export function useCustomAttributesQuery({
     enabled = true,
+    modelName,
 }: UseCustomAttributesQueryOptions = {}) {
     const schemaSection = useSectionHandle()
-
     const customAttributes = useDataQuery<QueryResponse>(
         CUSTOM_ATTRIBUTES_QUERY,
         {
             lazy: !enabled,
-            variables: { modelName: schemaSection?.name },
+            variables: { modelName: modelName ?? schemaSection?.name },
         }
     )
 

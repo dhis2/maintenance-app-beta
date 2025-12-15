@@ -267,6 +267,9 @@ msgstr "Disabled for the selected value type."
 msgid "Aggregation type"
 msgstr "Aggregation type"
 
+msgid "Code (required)"
+msgstr "Code (required)"
+
 msgid "Code"
 msgstr "Code"
 
@@ -3057,14 +3060,23 @@ msgstr "Basic Information"
 msgid "Set up the basic information for this option set."
 msgstr "Set up the basic information for this option set."
 
+msgid "Value type cannot be edited after an option set has been created."
+msgstr "Value type cannot be edited after an option set has been created."
+
 msgid "Option Set"
 msgstr "Option Set"
 
-msgid "Option set must be saved before options can be added"
-msgstr "Option set must be saved before options can be added"
+msgid "Set up the information for this option."
+msgstr "Set up the information for this option."
 
-msgid "Define options for this option set."
-msgstr "Define options for this option set."
+msgid "Save option"
+msgstr "Save option"
+
+msgid "Saving an option does not save other changes to the option set"
+msgstr "Saving an option does not save other changes to the option set"
+
+msgid "Define options for this option set"
+msgstr "Define options for this option set"
 
 msgid "Search by name or code"
 msgstr "Search by name or code"
