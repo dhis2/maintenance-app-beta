@@ -8,7 +8,7 @@ import {
     PickWithFieldFilters,
     ValidationRuleGroup,
 } from '../../types/generated'
-import ValidationRuleGroupsFormFields from './form/ValidationRuleGroupsFormFields'
+import { ValidationRuleGroupsFormFields } from './form/ValidationRuleGroupsFormFields'
 import { validate } from './form/validationRuleGroupsSchema'
 
 const fieldFilters = [

@@ -67,12 +67,9 @@ export function ValueTypeField({
             inputWidth="400px"
             selected={input.value}
             onChange={onChange}
-            label={i18n.t('{{fieldLabel}} (required)', {
-                fieldLabel: i18n.t('Value type'),
-            })}
+            label={i18n.t('Value type')}
             disabled={disabled}
             helpText={combinedHelpText}
-            required={true}
         >
             {options.map((option: { value: string; label: string }) => (
                 <SingleSelectOption

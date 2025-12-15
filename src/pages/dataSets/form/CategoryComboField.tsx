@@ -28,11 +28,8 @@ const addDefaultCategoryComboTransform = <TCatCombo extends DisplayableModel>(
 export function CategoryComboField() {
     return (
         <ModelSingleSelectFormField
-            required
             name="categoryCombo"
-            label={i18n.t('{{fieldLabel}} (required)', {
-                fieldLabel: i18n.t('Category combination'),
-            })}
+            label={i18n.t('Category combination')}
             query={CATEGORY_COMBOS_QUERY}
             transform={addDefaultCategoryComboTransform}
         />

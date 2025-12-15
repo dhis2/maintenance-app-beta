@@ -1,3 +1,26 @@
+# [0.102.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.101.2...v0.102.0) (2025-12-10)
+
+
+### Features
+
+* validation rules form [DHIS2-20473] ([#715](https://github.com/dhis2/maintenance-app-beta/issues/715)) ([628e2bd](https://github.com/dhis2/maintenance-app-beta/commit/628e2bdb28c6d42c87375bf2dfc360d24922a417))
+
+## [0.101.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.101.1...v0.101.2) (2025-12-08)
+
+
+### Bug Fixes
+
+* modeltransfer to not overwrite given props ([#714](https://github.com/dhis2/maintenance-app-beta/issues/714)) ([efd82d9](https://github.com/dhis2/maintenance-app-beta/commit/efd82d96d1e5aeda8f28f76c28df69c36dc45688))
+
+## [0.101.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.101.0...v0.101.1) (2025-12-02)
+
+
+### Bug Fixes
+
+* approval workflow, filter translation and change of text ([#706](https://github.com/dhis2/maintenance-app-beta/issues/706)) ([5b6959c](https://github.com/dhis2/maintenance-app-beta/commit/5b6959c88a6055f94293acc0f7e2506a2c6aba3e))
+* remove required from label when defaulting to something ([#708](https://github.com/dhis2/maintenance-app-beta/issues/708)) ([674a82c](https://github.com/dhis2/maintenance-app-beta/commit/674a82c1893593704d059088f01490fc79d699a3))
+* try upgrading checkout action ([#707](https://github.com/dhis2/maintenance-app-beta/issues/707)) [skip release] ([2950283](https://github.com/dhis2/maintenance-app-beta/commit/295028379b3018f1a919018ef06dfec9da53b2c1))
+
 # [0.101.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.100.0...v0.101.0) (2025-11-27)
 
 
