@@ -1,3 +1,10 @@
+# [0.103.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.102.1...v0.103.0) (2025-12-15)
+
+
+### Features
+
+* add and edit options [DHIS2-20383] ([#709](https://github.com/dhis2/maintenance-app-beta/issues/709)) ([614a7c9](https://github.com/dhis2/maintenance-app-beta/commit/614a7c94fa5dda37593cab8e459bb4df4cd509de))
+
 ## [0.102.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.102.0...v0.102.1) (2025-12-15)
 
 
