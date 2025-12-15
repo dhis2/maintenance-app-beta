@@ -1,3 +1,31 @@
+# [0.103.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.102.1...v0.103.0) (2025-12-15)
+
+
+### Features
+
+* add and edit options [DHIS2-20383] ([#709](https://github.com/dhis2/maintenance-app-beta/issues/709)) ([614a7c9](https://github.com/dhis2/maintenance-app-beta/commit/614a7c94fa5dda37593cab8e459bb4df4cd509de))
+
+## [0.102.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.102.0...v0.102.1) (2025-12-15)
+
+
+### Bug Fixes
+
+* de operands with default coc ([#711](https://github.com/dhis2/maintenance-app-beta/issues/711)) ([ac28a6f](https://github.com/dhis2/maintenance-app-beta/commit/ac28a6f7049fca041643cb0537de163e50e1adf1))
+
+# [0.102.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.101.2...v0.102.0) (2025-12-10)
+
+
+### Features
+
+* validation rules form [DHIS2-20473] ([#715](https://github.com/dhis2/maintenance-app-beta/issues/715)) ([628e2bd](https://github.com/dhis2/maintenance-app-beta/commit/628e2bdb28c6d42c87375bf2dfc360d24922a417))
+
+## [0.101.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.101.1...v0.101.2) (2025-12-08)
+
+
+### Bug Fixes
+
+* modeltransfer to not overwrite given props ([#714](https://github.com/dhis2/maintenance-app-beta/issues/714)) ([efd82d9](https://github.com/dhis2/maintenance-app-beta/commit/efd82d96d1e5aeda8f28f76c28df69c36dc45688))
+
 ## [0.101.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.101.0...v0.101.1) (2025-12-02)
 
 

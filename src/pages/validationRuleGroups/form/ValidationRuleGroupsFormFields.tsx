@@ -12,7 +12,7 @@ import {
 } from '../../../components'
 import { useSchemaSectionHandleOrThrow } from '../../../lib'
 
-function ValidationRuleGroupsFormFields() {
+export function ValidationRuleGroupsFormFields() {
     const schemaSection = useSchemaSectionHandleOrThrow()
 
     return (
@@ -74,5 +74,3 @@ function ValidationRuleGroupsFormFields() {
         </>
     )
 }
-
-export default ValidationRuleGroupsFormFields

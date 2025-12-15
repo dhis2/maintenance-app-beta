@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-26T13:01:11.331Z\n"
-"PO-Revision-Date: 2025-11-26T13:01:11.331Z\n"
+"POT-Creation-Date: 2025-12-08T12:27:17.991Z\n"
+"PO-Revision-Date: 2025-12-08T12:27:17.991Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -267,8 +267,8 @@ msgstr "Disabled for the selected value type."
 msgid "Aggregation type"
 msgstr "Aggregation type"
 
-msgid "{{fieldLabel}} (required)"
-msgstr "{{fieldLabel}} (required)"
+msgid "Code (required)"
+msgstr "Code (required)"
 
 msgid "Code"
 msgstr "Code"
@@ -295,6 +295,9 @@ msgstr ""
 
 msgid "A name should be concise and easy to recognize."
 msgstr "A name should be concise and easy to recognize."
+
+msgid "{{fieldLabel}} (required)"
+msgstr "{{fieldLabel}} (required)"
 
 msgid "Name"
 msgstr "Name"
@@ -2982,8 +2985,8 @@ msgstr "No indicators available. Remove one from source."
 msgid "What should happen to the source indicators after the merge is complete?"
 msgstr "What should happen to the source indicators after the merge is complete?"
 
-msgid "Country"
-msgstr "Country"
+msgid "Country (required)"
+msgstr "Country (required)"
 
 msgid "Failed to load countries"
 msgstr "Failed to load countries"
@@ -2991,8 +2994,8 @@ msgstr "Failed to load countries"
 msgid "Select a country"
 msgstr "Select a country"
 
-msgid "Language"
-msgstr "Language"
+msgid "Language (required)"
+msgstr "Language (required)"
 
 msgid "Failed to load languages"
 msgstr "Failed to load languages"
@@ -3057,17 +3060,23 @@ msgstr "Basic Information"
 msgid "Set up the basic information for this option set."
 msgstr "Set up the basic information for this option set."
 
+msgid "Value type cannot be edited after an option set has been created."
+msgstr "Value type cannot be edited after an option set has been created."
+
 msgid "Option Set"
 msgstr "Option Set"
 
-msgid "Something went wrong when loading options"
-msgstr "Something went wrong when loading options"
+msgid "Set up the information for this option."
+msgstr "Set up the information for this option."
 
-msgid "Define options for this option set."
-msgstr "Define options for this option set."
+msgid "Save option"
+msgstr "Save option"
 
-msgid "Option set must be saved before options can be added"
-msgstr "Option set must be saved before options can be added"
+msgid "Saving an option does not save other changes to the option set"
+msgstr "Saving an option does not save other changes to the option set"
+
+msgid "Define options for this option set"
+msgstr "Define options for this option set"
 
 msgid "Search by name or code"
 msgstr "Search by name or code"
@@ -3086,6 +3095,13 @@ msgstr "Sort by code (asc)"
 
 msgid "Sort by code (desc)"
 msgstr "Sort by code (desc)"
+
+msgid ""
+"Editing options may be slow with more than {{maximumNumberOfOptions}} "
+"options"
+msgstr ""
+"Editing options may be slow with more than {{maximumNumberOfOptions}} "
+"options"
 
 msgid ""
 "{{hiddenRowsCount}} rows are hidden due to filter. Sorting is disabled "
@@ -3856,9 +3872,6 @@ msgstr "Choose which program and which data types this program indicator applies
 msgid "Program (required)"
 msgstr "Program (required)"
 
-msgid "Analytics type (required)"
-msgstr "Analytics type (required)"
-
 msgid "Configure the program indicator expression."
 msgstr "Configure the program indicator expression."
 
@@ -3911,8 +3924,8 @@ msgstr "Filter available attributes"
 msgid "Filter attributes"
 msgstr "Filter attributes"
 
-msgid "Configure data items"
-msgstr "Configure data items"
+msgid "Configure attributes"
+msgstr "Configure attributes"
 
 msgid "Attributes can be collected in different ways with different options."
 msgstr "Attributes can be collected in different ways with different options."
@@ -4421,21 +4434,12 @@ msgstr "Skip synchronization"
 msgid "No attributes selected. Please select attributes in the transfer above."
 msgstr "No attributes selected. Please select attributes in the transfer above."
 
-msgid "Configure attributes"
-msgstr "Configure attributes"
-
 msgid ""
 "Choose which attributes to display, which are required, and which are "
 "searchable"
 msgstr ""
 "Choose which attributes to display, which are required, and which are "
 "searchable"
-
-msgid "Available tracked entity attributes"
-msgstr "Available tracked entity attributes"
-
-msgid "Selected tracked entity attributes"
-msgstr "Selected tracked entity attributes"
 
 msgid "Maximum number of tracked entity instances to return when searching"
 msgstr "Maximum number of tracked entity instances to return when searching"
