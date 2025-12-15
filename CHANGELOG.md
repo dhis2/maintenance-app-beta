@@ -1,3 +1,10 @@
+## [0.103.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.103.0...v0.103.1) (2025-12-15)
+
+
+### Bug Fixes
+
+* handle multi-select attributes ([#712](https://github.com/dhis2/maintenance-app-beta/issues/712)) ([9d69a9a](https://github.com/dhis2/maintenance-app-beta/commit/9d69a9aa8072f66552995952e6ce5f493282d0a5))
+
 # [0.103.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.102.1...v0.103.0) (2025-12-15)
 
 
