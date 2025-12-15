@@ -1,3 +1,10 @@
+## [0.102.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.102.0...v0.102.1) (2025-12-15)
+
+
+### Bug Fixes
+
+* de operands with default coc ([#711](https://github.com/dhis2/maintenance-app-beta/issues/711)) ([ac28a6f](https://github.com/dhis2/maintenance-app-beta/commit/ac28a6f7049fca041643cb0537de163e50e1adf1))
+
 # [0.102.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.101.2...v0.102.0) (2025-12-10)
 
 
