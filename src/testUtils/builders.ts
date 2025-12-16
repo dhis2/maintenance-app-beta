@@ -75,7 +75,6 @@ import {
     DataElement,
     OptionMapping,
     OrganisationUnit,
-    Predictor,
     Program,
     ProgramTrackedEntityAttribute,
 } from '../types/generated'
