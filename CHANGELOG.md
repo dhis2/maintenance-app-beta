@@ -1,3 +1,10 @@
+# [0.104.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.103.1...v0.104.0) (2025-12-16)
+
+
+### Features
+
+* add list view ([#723](https://github.com/dhis2/maintenance-app-beta/issues/723)) ([941e5bf](https://github.com/dhis2/maintenance-app-beta/commit/941e5bf80e11e0597bf09835b4919ffba30721b9))
+
 ## [0.103.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.103.0...v0.103.1) (2025-12-15)
 
 
