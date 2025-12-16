@@ -36,6 +36,7 @@ import {
     useSchemaFromHandle,
     selectedLocale,
     useSystemSetting,
+    parseErrorResponse,
 } from '../../lib'
 import { canEditModel, canDeleteModel } from '../../lib/models/access'
 
@@ -61,15 +62,9 @@ const RunNowModal = ({
     const calendar = useSystemSetting('keyCalendar')
     const locale = selectedLocale
 
-    const { show: showSuccess } = useAlert(
-        ({ message }) =>
-            message || i18n.t('Predictor run started successfully'),
-        () => ({ success: true })
-    )
-
-    const { show: showError } = useAlert(
-        ({ message }) => message || i18n.t('Failed to run predictor'),
-        () => ({ critical: true })
+    const alert = useAlert(
+        ({ message }) => message,
+        (options) => options
     )
 
     const handleRunNow = async () => {
@@ -89,18 +84,17 @@ const RunNowModal = ({
                 },
             })
 
-            showSuccess({
+            alert.show({
                 message:
-                    (response as any)?.message ||
+                    (response as any).message ||
                     i18n.t('Predictor run started successfully'),
+                options: { success: true },
             })
             onClose()
-        } catch (error: any) {
-            showError({
-                message:
-                    error?.message ||
-                    error?.details?.message ||
-                    i18n.t('Failed to run predictor'),
+        } catch (error: unknown) {
+            alert.show({
+                message: parseErrorResponse(error).message,
+                error: true,
             })
         } finally {
             setIsLoading(false)
@@ -150,6 +144,7 @@ const RunNowModal = ({
                     <Button
                         primary
                         disabled={isRunNowDisabled}
+                        loading={isLoading}
                         onClick={handleRunNow}
                         dataTest="run-now-button"
                     >

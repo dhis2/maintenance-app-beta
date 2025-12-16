@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { modelFormSchemas } from '../../../lib'
-import { Predictor } from '../../../types/generated'
+import { Predictor } from '../../../types/generated/models'
 
 const { withDefaultListColumns, withAttributeValues, modelReference } =
     modelFormSchemas
