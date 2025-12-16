@@ -26,6 +26,7 @@ import {
     ActionEdit,
     ListActions,
 } from '../../components/sectionList/listActions'
+import { DeleteAction } from '../../components/sectionList/listActions/DeleteAction'
 import css from '../../components/sectionList/listActions/SectionListActions.module.css'
 import { TooltipWrapper } from '../../components/tooltip'
 import {
@@ -36,13 +37,14 @@ import {
     selectedLocale,
     useSystemSetting,
 } from '../../lib'
-import { canEditModel } from '../../lib/models/access'
+import { canEditModel, canDeleteModel } from '../../lib/models/access'
 
 type PredictorListActionsProps = {
     model: BaseListModel
     onShowDetailsClick: (model: BaseListModel) => void
     onOpenSharingClick: (id: string) => void
     onOpenTranslationClick: (model: BaseListModel) => void
+    onDeleteSuccess: (model: BaseListModel) => void
 }
 
 const RunNowModal = ({
@@ -164,6 +166,7 @@ export const PredictorListActions = ({
     onShowDetailsClick,
     onOpenSharingClick,
     onOpenTranslationClick,
+    onDeleteSuccess,
 }: PredictorListActionsProps) => {
     const schema = useSchemaFromHandle()
     const [open, setOpen] = useState(false)
@@ -173,6 +176,7 @@ export const PredictorListActions = ({
     const preservedSearchState = useLocationSearchState()
 
     const editable = canEditModel(model)
+    const deletable = canDeleteModel(model)
     const shareable = schema.shareable
 
     const handleEditClick = useLinkClickHandler(
@@ -190,6 +194,7 @@ export const PredictorListActions = ({
                 <TooltipWrapper
                     condition={!editable}
                     content={TOOLTIPS.noEditAccess}
+                    dataTest="no-editable-tooltip"
                 >
                     <ActionEdit disabled={!editable} modelId={model.id} />
                 </TooltipWrapper>
@@ -199,6 +204,7 @@ export const PredictorListActions = ({
                         secondary
                         onClick={() => setOpen(!open)}
                         icon={<IconMore24 color={colors.grey600} />}
+                        dataTest="row-actions-menu-button"
                     />
                     {open && (
                         <Popover
@@ -207,6 +213,7 @@ export const PredictorListActions = ({
                             placement="bottom-end"
                             reference={ref}
                             onClickOutside={() => setOpen(false)}
+                            dataTest="row-actions-menu"
                         >
                             <FlyoutMenu>
                                 <MenuItem
@@ -275,6 +282,21 @@ export const PredictorListActions = ({
                                         }}
                                     />
                                 )}
+                                <TooltipWrapper
+                                    condition={!deletable}
+                                    content={TOOLTIPS.noDeleteAccess}
+                                >
+                                    <DeleteAction
+                                        modelId={model.id}
+                                        modelDisplayName={model.displayName}
+                                        disabled={!deletable}
+                                        onDeleteSuccess={() => {
+                                            onDeleteSuccess(model)
+                                            setOpen(false)
+                                        }}
+                                        onCancel={() => setOpen(false)}
+                                    />
+                                </TooltipWrapper>
                             </FlyoutMenu>
                         </Popover>
                     )}

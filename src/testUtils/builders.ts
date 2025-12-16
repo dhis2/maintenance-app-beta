@@ -54,6 +54,7 @@ import { optionSetListSchema } from '../pages/optionSets/form/optionSetSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
+import { predictorListSchema } from '../pages/predictors/form/predictorSchema'
 import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
 import { programListSchema } from '../pages/programsWip/form'
@@ -559,35 +560,9 @@ export const testOption = ({
     }
 }
 
-export const testPredictorList = ({
-    id = randomDhis2Id(),
-    displayName = faker.company.buzzPhrase(),
-    output = {
-        id: randomDhis2Id(),
-        displayName: faker.commerce.productName(),
-    },
-    outputCombo = {
-        id: randomDhis2Id(),
-        displayName: faker.commerce.productName(),
-    },
-    periodType = 'Monthly' as Predictor['periodType'],
-    lastUpdated = faker.date.past().toISOString(),
-    access = testAccess({ write: true, delete: true }),
-} = {}) => ({
-    id,
-    displayName,
-    name: displayName,
-    shortName: displayName,
-    output,
-    outputCombo,
-    periodType,
-    access,
-    lastUpdated,
-    organisationUnitLevels: [],
-    organisationUnitDescendants:
-        'ALL' as Predictor['organisationUnitDescendants'],
-    predictorGroups: [],
-    sequentialSampleCount: 0,
-    annualSampleCount: 0,
-    sequentialSkipCount: 0,
+export const testPredictorList = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(predictorListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
 })
