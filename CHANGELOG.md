@@ -1,3 +1,31 @@
+# [0.104.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.103.1...v0.104.0) (2025-12-16)
+
+
+### Features
+
+* add list view ([#723](https://github.com/dhis2/maintenance-app-beta/issues/723)) ([941e5bf](https://github.com/dhis2/maintenance-app-beta/commit/941e5bf80e11e0597bf09835b4919ffba30721b9))
+
+## [0.103.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.103.0...v0.103.1) (2025-12-15)
+
+
+### Bug Fixes
+
+* handle multi-select attributes ([#712](https://github.com/dhis2/maintenance-app-beta/issues/712)) ([9d69a9a](https://github.com/dhis2/maintenance-app-beta/commit/9d69a9aa8072f66552995952e6ce5f493282d0a5))
+
+# [0.103.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.102.1...v0.103.0) (2025-12-15)
+
+
+### Features
+
+* add and edit options [DHIS2-20383] ([#709](https://github.com/dhis2/maintenance-app-beta/issues/709)) ([614a7c9](https://github.com/dhis2/maintenance-app-beta/commit/614a7c94fa5dda37593cab8e459bb4df4cd509de))
+
+## [0.102.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.102.0...v0.102.1) (2025-12-15)
+
+
+### Bug Fixes
+
+* de operands with default coc ([#711](https://github.com/dhis2/maintenance-app-beta/issues/711)) ([ac28a6f](https://github.com/dhis2/maintenance-app-beta/commit/ac28a6f7049fca041643cb0537de163e50e1adf1))
+
 # [0.102.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.101.2...v0.102.0) (2025-12-10)
 
 
