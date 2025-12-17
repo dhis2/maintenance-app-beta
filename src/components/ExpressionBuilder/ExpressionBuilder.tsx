@@ -9,26 +9,48 @@ import {
     ModalTitle,
     ModalActions,
 } from '@dhis2/ui'
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import { StandardFormField } from '../standardForm'
 import styles from './ExpressionBuilder.module.css'
-import { useExpressionValidator } from './useExpressionValidator'
+import {
+    useExpressionValidator,
+    ValidationResult,
+} from './useExpressionValidator'
 import { VariableSelectionBox } from './VariableSelectionBox'
 // import { useExpressionValidator } from '../metadataFormControls/ExpressionBuilder/useExpressionValidator'
 
 const ValidationBox = ({
     response,
     validating,
+    validatedValue,
+    validate,
+    isEmpty,
 }: {
-    response: any
+    response: ValidationResult | null
     validating: boolean
+    isEmpty: boolean
+    validatedValue: string | null
+    validate: () => void
 }) => {
+    if (isEmpty) {
+        return (
+            <NoticeBox
+                error
+                title={i18n.t('Expression cannot be empty')}
+            ></NoticeBox>
+        )
+    }
     if (!response || validating) {
         // the button here does not do anything, but will cause the input to blur (and validate) if clicked
         return (
             <NoticeBox title={i18n.t('Expression not yet validated')}>
-                <Button small loading={validating}>
+                <Button
+                    disabled={validating}
+                    small
+                    loading={validating}
+                    onClick={validate}
+                >
                     {i18n.t('Validate')}
                 </Button>
             </NoticeBox>
@@ -37,9 +59,7 @@ const ValidationBox = ({
     if (response?.error) {
         return (
             <NoticeBox warning title={i18n.t('Invalid expression')}>
-                <Button small loading={validating}>
-                    {i18n.t('Rerun validate')}
-                </Button>
+                <p>{validatedValue}</p>
             </NoticeBox>
         )
     }
@@ -66,94 +86,148 @@ export const ExpressionBuilder = ({
     const { input: expressionInput } = useField(fieldName)
     const expressionRef = useRef<HTMLTextAreaElement>(null)
 
-    const [validate, validating] = useExpressionValidator(validationResource)
-    const [validationResponse, setValidationResponse] = useState<any>(null)
+    const [validate, validating, validatedValue] =
+        useExpressionValidator(validationResource)
+    const [validationResponse, setValidationResponse] =
+        useState<ValidationResult | null>(null)
+    const [isEmpty, setIsEmpty] = useState<boolean>(false)
+    const [initiallyValidated, setInitiallyValidated] = useState<boolean>(false)
 
-    const hackValidate = useCallback(async (validationString: string) => {
-        if (validationString.trim() === '') {
-            setValidationResponse(null)
-            return
+    const validateCurrentState = useCallback(async () => {
+        const currentText = expressionRef?.current?.value
+        if (currentText === '') {
+            setIsEmpty(true)
+            return false
         }
-        const result = await validate(validationString)
-        setValidationResponse(result)
+        setIsEmpty(false)
+        const result = await validate(currentText)
+        setValidationResponse(result ?? null)
+        return !result?.error
     }, [])
 
-    return (
-        <Modal onClose={onClose} large dataTest="expression-builder-modal">
-            <ModalTitle>{title}</ModalTitle>
+    const clearValidationState = useCallback(() => {
+        setIsEmpty(false)
+        setValidationResponse(null)
+    }, [setIsEmpty, setValidationResponse])
 
-            <ModalContent>
-                <div className={styles.expressionBuilderContentContainer}>
-                    <div className={styles.expressionBuilderEntryContainer}>
-                        <StandardFormField>
-                            <div data-test="formfields-expressionBuilder">
-                                <div className={styles.expressionField}>
+    useEffect(() => {
+        const performInitialValidation = async (s: string) => {
+            if (s.trim() === '') {
+                setIsEmpty(true)
+            } else {
+                const result = await validate(s)
+                setValidationResponse(result ?? null)
+            }
+            setInitiallyValidated(true)
+        }
+        performInitialValidation(initialValue)
+    }, [
+        initialValue,
+        setIsEmpty,
+        setValidationResponse,
+        setInitiallyValidated,
+        validate,
+    ])
+
+    return (
+        <Modal onClose={onClose} fluid dataTest="expression-builder-modal">
+            <div className={styles.expressionBuilderModalDimensions}>
+                <ModalTitle>{title}</ModalTitle>
+
+                <ModalContent>
+                    <div className={styles.expressionBuilderContentContainer}>
+                        <div className={styles.expressionBuilderEntryContainer}>
+                            <div className={styles.expressionField}>
+                                <StandardFormField>
                                     <textarea
                                         ref={expressionRef}
                                         defaultValue={initialValue}
-                                        onChange={() => {
-                                            setValidationResponse(null)
-                                        }}
-                                        onBlur={async (e) => {
-                                            const currentText =
-                                                expressionRef?.current?.value
-                                            await hackValidate(
-                                                currentText ?? ''
-                                            )
+                                        onChange={(e) => {
+                                            if (
+                                                e?.target?.value.trim() === ''
+                                            ) {
+                                                setIsEmpty(true)
+                                            } else {
+                                                if (
+                                                    isEmpty ||
+                                                    validationResponse !== null
+                                                ) {
+                                                    setIsEmpty(false)
+                                                    setValidationResponse(null)
+                                                }
+                                            }
                                         }}
                                         aria-describedby="messageTemplate-help"
                                     />
+                                </StandardFormField>
+                            </div>
+                            <div>
+                                {initiallyValidated && (
+                                    <ValidationBox
+                                        response={validationResponse}
+                                        validating={validating}
+                                        validatedValue={validatedValue}
+                                        validate={validateCurrentState}
+                                        isEmpty={isEmpty}
+                                    />
+                                )}
+
+                                <div className={styles.fieldHelpText}>
+                                    <IconInfo16 />
+                                    <div id="messageTemplate-help">
+                                        {i18n.t(
+                                            'Add operators, variables, functions, and constants from the right sidebar'
+                                        )}
+                                    </div>
                                 </div>
                             </div>
-                        </StandardFormField>
-                        <ValidationBox
-                            response={validationResponse}
-                            validating={validating}
-                        />
-                        <div className={styles.fieldHelpText}>
-                            <IconInfo16 />
-                            <div id="messageTemplate-help">
-                                {i18n.t(
-                                    'Add operators, variables, functions, and constants from the right sidebar'
-                                )}
-                            </div>
                         </div>
+                        <VariableSelectionBox
+                            elementRef={expressionRef}
+                            input={expressionInput}
+                            clearValidationState={clearValidationState}
+                        />
                     </div>
-                    <VariableSelectionBox
-                        elementRef={expressionRef}
-                        input={expressionInput}
-                        validate={hackValidate}
-                    />
-                </div>
-            </ModalContent>
-            <ModalActions>
-                <ButtonStrip end>
-                    <Button
-                        onClick={onClose}
-                        secondary
-                        dataTest="cancel-expression-button"
-                    >
-                        {i18n.t('Cancel')}
-                    </Button>
-                    <Button
-                        onClick={() => {
-                            expressionInput.onChange(
-                                expressionRef?.current?.value ?? ''
-                            )
-                            onClose?.()
-                        }}
-                        primary
-                        dataTest="apply-expression-button"
-                        disabled={
-                            !validationResponse ||
-                            validationResponse?.error ||
-                            validating
-                        }
-                    >
-                        {i18n.t('Apply')}
-                    </Button>
-                </ButtonStrip>
-            </ModalActions>
+                </ModalContent>
+                <ModalActions>
+                    <ButtonStrip end>
+                        <Button
+                            onClick={onClose}
+                            secondary
+                            dataTest="cancel-expression-button"
+                        >
+                            {i18n.t('Cancel')}
+                        </Button>
+                        <Button
+                            onClick={async () => {
+                                let proceed = validationResponse !== null
+                                if (validationResponse === null || isEmpty) {
+                                    proceed = await validateCurrentState()
+                                }
+                                if (!proceed) {
+                                    // if invalid, the ValidationBox will display warning
+                                    return
+                                } else {
+                                    expressionInput.onChange(
+                                        expressionRef?.current?.value ?? ''
+                                    )
+                                    onClose?.()
+                                }
+                            }}
+                            primary
+                            dataTest="apply-expression-button"
+                            disabled={
+                                validating ||
+                                isEmpty ||
+                                !initiallyValidated ||
+                                !!validationResponse?.error
+                            }
+                        >
+                            {i18n.t('Apply')}
+                        </Button>
+                    </ButtonStrip>
+                </ModalActions>
+            </div>
         </Modal>
     )
 }

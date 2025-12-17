@@ -10,13 +10,14 @@ interface ValidateExpressionResponse {
     status: 'OK' | 'ERROR'
 }
 
-type ValidationResult = {
+export type ValidationResult = {
     error?: string
     expressionDescription?: string
 }
 export const useExpressionValidator = (resource: string) => {
     const { baseUrl } = useConfig()
     const [validating, setValidating] = useState(false)
+    const [validatedValue, setValidatedValue] = useState<string | null>(null)
 
     const memoized = useMemo(
         () =>
@@ -62,6 +63,7 @@ export const useExpressionValidator = (resource: string) => {
                     } as ValidationResult
                 } finally {
                     setValidating(false)
+                    setValidatedValue(expression)
                 }
             }),
         [resource, baseUrl]
@@ -76,5 +78,5 @@ export const useExpressionValidator = (resource: string) => {
         leading: true,
     })
 
-    return [debouncedValidate, validating] as const
+    return [debouncedValidate, validating, validatedValue] as const
 }

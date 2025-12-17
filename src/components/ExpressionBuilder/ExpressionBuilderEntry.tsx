@@ -2,9 +2,14 @@ import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useField } from 'react-final-form'
-// import { useSchemaSectionHandleOrThrow } from '../../lib'
-// import { useValidator } from '../../lib/models/useFieldValidators'
 import { useParams } from 'react-router-dom'
+import {
+    SchemaName,
+    SchemaSection,
+    useSchema,
+    useSchemaSectionHandleOrThrow,
+} from '../../lib'
+import { useValidator } from '../../lib/models/useFieldValidators'
 import { ExpressionBuilder } from './ExpressionBuilder'
 import styles from './ExpressionBuilder.module.css'
 import { useExpressionValidator } from './useExpressionValidator'
@@ -34,12 +39,18 @@ export const ExpressionBuilderEntry = ({
         string | undefined
     >(undefined)
     const descriptionToShow = expressionDescription
-    // const schemaSection = useSchemaSectionHandleOrThrow()
-    // const schemaValidate = useValidator({ schemaSection, property: fieldName })
+    const schema = {
+        name: 'expression' as SchemaName,
+        namePlural: 'expressions',
+    } as SchemaSection
+    const schemaValidate = useValidator({
+        schemaSection: schema,
+        property: 'expression',
+    })
     const params = useParams()
     const isEdit = !!params?.id
 
-    const schemaValidate = () => {}
+    // const schemaValidate = () => {}
     const { input } = useField<string>(fieldName, {
         validate: schemaValidate,
     })

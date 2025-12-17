@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelect, SingleSelectOption } from '@dhis2/ui'
 import React, { useCallback, useState } from 'react'
+import { SchemaName, useSchema, getConstantTranslation } from '../../lib'
 import { ModelSingleSelect } from '../metadataFormControls/ModelSingleSelect'
 import styles from './ExpressionBuilder.module.css'
 import { ExpressionList, ExpressionListInner } from './ExpressionList'
@@ -18,6 +19,17 @@ export type ElementType = {
         elements: Element[]
         insertElement: InsertElementType
     }>
+}
+type BasicIdentifiable = {
+    id: string
+    displayName: string
+}
+type ProgramTEA = BasicIdentifiable & {
+    trackedEntityAttribute: { id: string }
+}
+
+type ProgramWithTEA = {
+    programTrackedEntityAttributes: ProgramTEA[]
 }
 
 const DefaultList = ({
@@ -42,6 +54,8 @@ const DATA_ELEMENTS_QUERY = {
     params: {
         fields: ['id', 'displayName'],
         order: ['displayName'],
+        totals: true,
+        filters: ['dataElement.domainType:eq:AGGREGATE'],
     },
 }
 
@@ -118,20 +132,6 @@ const ConstantsList = ({
     )
 }
 
-const reportingTypes = [
-    { value: 'REPORTING_RATE', label: i18n.t('Reporting rate') },
-    {
-        value: 'REPORTING_RATE_ON_TIME',
-        label: i18n.t('Reporting rate on time'),
-    },
-    { value: 'ACTUAL_REPORTS', label: i18n.t('Actual reports') },
-    {
-        value: 'ACTUAL_REPORTS_ON_TIME',
-        label: i18n.t('Actual reports on time'),
-    },
-    { value: 'EXPECTED REPORTS', label: i18n.t('Expected reports') },
-]
-
 const DATA_SETS_QUERY = {
     resource: 'dataSets',
     params: {
@@ -145,18 +145,23 @@ const DataSetsList = ({
 }: {
     insertElement: InsertElementType
 }) => {
-    const [reportingType, setReportingType] = useState<string>(
-        reportingTypes[0].value
-    )
+    const schema = useSchema('reportingRate' as SchemaName)
+    const reportingTypes =
+        schema?.properties?.metric?.constants?.map((constant) => ({
+            value: constant,
+            label: getConstantTranslation(constant),
+        })) || null
+    const [reportingType, setReportingType] = useState<string>('REPORTING_RATE')
     const insertElementFormatted = useCallback(
         (s: string) => {
             insertElement(`R{${s}.${reportingType}}`)
         },
         [insertElement]
     )
+    if (!reportingTypes) {
+        return null
+    }
     return (
-        // {options.map((option: { value: string; label: string }) => (
-
         <>
             <div className={styles.preliminarySelect}>
                 <SingleSelect
@@ -234,7 +239,7 @@ const ProgramJunction = ({
     }
     // program tracked entity attributes (have to be retrieved from program info)
     if (programElementType === 'A') {
-        const programIndicatorsQuery = {
+        const programTEAQuery = {
             resource: 'programs',
             params: {
                 filters: [`id:eq:${programId}`],
@@ -245,15 +250,16 @@ const ProgramJunction = ({
         }
         return (
             <ExpressionList
-                query={programIndicatorsQuery}
+                query={programTEAQuery}
                 insertElement={insertElementFormatted}
-                transform={(p: any) => {
-                    return p?.[0]?.programTrackedEntityAttributes?.map(
-                        (tea: any) => ({
-                            displayName: tea.displayName,
-                            id: tea.trackedEntityAttribute.id,
-                        })
-                    )
+                transform={(p) => {
+                    const program = p[0] as unknown as ProgramWithTEA
+                    const attributes =
+                        program?.programTrackedEntityAttributes ?? []
+                    return attributes.map((tea) => ({
+                        displayName: tea.displayName,
+                        id: tea.trackedEntityAttribute.id,
+                    }))
                 }}
                 postQuerySearch={true}
             />
@@ -272,7 +278,7 @@ const ProgramsList = ({
 }: {
     insertElement: InsertElementType
 }) => {
-    const [program, setProgram] = useState<any>()
+    const [program, setProgram] = useState<BasicIdentifiable>()
     const programId = program?.id
     const [programElementType, setProgramElementType] = useState<string>(
         programElementTypes[0]?.value
@@ -316,7 +322,7 @@ const ProgramsList = ({
                     </SingleSelect>
                 </div>
             </div>
-            {!program || !programElementType ? null : (
+            {!programElementType || !programId ? null : (
                 <ProgramJunction
                     programElementType={programElementType}
                     programId={programId}

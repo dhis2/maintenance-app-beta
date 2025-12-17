@@ -10,11 +10,11 @@ import {
 const insertElementNonClosure = ({
     elementText,
     elementRef,
-    validate,
+    clearValidationState,
 }: {
     elementText: string
     elementRef: RefObject<HTMLInputElement | HTMLTextAreaElement>
-    validate: (s: string) => void
+    clearValidationState: () => void
 }) => {
     if (elementRef.current) {
         const cursorStartIndex = elementRef.current?.selectionStart ?? 0
@@ -23,13 +23,10 @@ const insertElementNonClosure = ({
         const newText = `${startText}${elementText}${endText}`
         elementRef.current.value = newText
 
-        // run validation and force focus
-        // validate(newText)
-        elementRef.current?.focus()
-        // elementRef.current?.blur()
-        // elementRef.current?.focus()
+        // clear validation state to ensure revalidation
+        clearValidationState()
 
-        // need to set cursor index to match where element was added (not working)
+        // should set cursor index to match where element was added (not working)
         // elementRef.current.selectionStart = cursorStartIndex
     }
 }
@@ -37,28 +34,33 @@ const insertElementNonClosure = ({
 export const VariableSelectionBox = ({
     elementRef,
     input,
-    validate,
+    clearValidationState,
 }: {
     elementRef: RefObject<HTMLInputElement | HTMLTextAreaElement>
     input: FieldInputProps<string>
-    validate: (s: string) => void
+    clearValidationState: () => void
 }) => {
     const elementTypes = validationRuleElementTypes
-    const [selectedElementType, setSelectedElementType] = useState<string[]>([])
-    const updateElementTypes = (elementType: string) => {
-        setSelectedElementType((prev) => {
-            const filtered = prev.filter((t) => t !== elementType)
-            return prev.includes(elementType)
-                ? filtered
-                : [...filtered, elementType]
-        })
-    }
+    const [selectedElementType, setSelectedElementType] = useState<
+        string | undefined
+    >()
+    const updateElementType = useCallback(
+        (elementType: string) => {
+            setSelectedElementType((prev) => {
+                if (prev === elementType) {
+                    return undefined
+                }
+                return elementType
+            })
+        },
+        [setSelectedElementType]
+    )
     const insertElementClosure = useCallback(
         (insertText: string) => {
             insertElementNonClosure({
                 elementText: insertText,
                 elementRef: elementRef,
-                validate: validate,
+                clearValidationState: clearValidationState,
             })
         },
         [elementRef, input]
@@ -67,7 +69,6 @@ export const VariableSelectionBox = ({
     return (
         <div className={styles.validationRuleVariablesContainer}>
             {elementTypes.map((elementType: ElementType) => {
-                const selected = selectedElementType.includes(elementType.type)
                 const ElementListContainer = elementType.component
 
                 return (
@@ -76,13 +77,13 @@ export const VariableSelectionBox = ({
                         key={`selector_${elementType.type}`}
                     >
                         <details
-                            onToggle={() => {
-                                updateElementTypes(elementType.type)
+                            onClick={() => {
+                                updateElementType(elementType.type)
                             }}
-                            name={elementType.type}
+                            name="variableSelectionMenu"
                         >
                             <summary className={styles.elementTypeTitleSummary}>
-                                {selected ? (
+                                {elementType.type === selectedElementType ? (
                                     <IconChevronDown16 />
                                 ) : (
                                     <IconChevronRight16 />
@@ -92,6 +93,7 @@ export const VariableSelectionBox = ({
                                     {elementType.name}
                                 </span>
                             </summary>
+
                             <div className={styles.elementListContainer}>
                                 <ElementListContainer
                                     elements={elementType.elements ?? []}

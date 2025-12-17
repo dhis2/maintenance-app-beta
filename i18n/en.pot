@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-11T15:21:51.536Z\n"
-"PO-Revision-Date: 2025-12-11T15:21:51.536Z\n"
+"POT-Creation-Date: 2025-12-15T15:41:41.426Z\n"
+"PO-Revision-Date: 2025-12-15T15:41:41.426Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -93,8 +93,17 @@ msgstr "Refresh"
 msgid "Add new"
 msgstr "Add new"
 
+msgid "Expression not yet validated"
+msgstr "Expression not yet validated"
+
+msgid "Validate"
+msgstr "Validate"
+
 msgid "Invalid expression"
 msgstr "Invalid expression"
+
+msgid "Rerun validate"
+msgstr "Rerun validate"
 
 msgid "Valid expression"
 msgstr "Valid expression"
@@ -4663,11 +4672,17 @@ msgstr "Configure the expressions and how they are compared."
 msgid "Left side expression"
 msgstr "Left side expression"
 
+msgid "Set up numerator expression"
+msgstr "Set up numerator expression"
+
 msgid "Comparison operator"
 msgstr "Comparison operator"
 
 msgid "Right side expression"
 msgstr "Right side expression"
+
+msgid "Set up denominator expression"
+msgstr "Set up denominator expression"
 
 msgid "Instruction to show"
 msgstr "Instruction to show"
@@ -4701,6 +4716,3 @@ msgstr "Right side sliding window"
 
 msgid "Skip form validation"
 msgstr "Skip form validation"
-
-msgid "Edit this"
-msgstr "Edit this"
