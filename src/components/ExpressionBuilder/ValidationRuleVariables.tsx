@@ -156,7 +156,7 @@ const DataSetsList = ({
         (s: string) => {
             insertElement(`R{${s}.${reportingType}}`)
         },
-        [insertElement]
+        [insertElement, reportingType]
     )
     if (!reportingTypes) {
         return null

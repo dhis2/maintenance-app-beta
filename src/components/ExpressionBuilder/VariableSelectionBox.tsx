@@ -33,11 +33,9 @@ const insertElementNonClosure = ({
 
 export const VariableSelectionBox = ({
     elementRef,
-    input,
     clearValidationState,
 }: {
     elementRef: RefObject<HTMLInputElement | HTMLTextAreaElement>
-    input: FieldInputProps<string>
     clearValidationState: () => void
 }) => {
     const elementTypes = validationRuleElementTypes
@@ -63,7 +61,7 @@ export const VariableSelectionBox = ({
                 clearValidationState: clearValidationState,
             })
         },
-        [elementRef, input]
+        [elementRef, clearValidationState]
     )
 
     return (

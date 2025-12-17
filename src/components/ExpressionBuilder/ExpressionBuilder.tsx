@@ -10,7 +10,7 @@ import {
     ModalActions,
 } from '@dhis2/ui'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { Field as FieldRFF, useField } from 'react-final-form'
+import { useField } from 'react-final-form'
 import { StandardFormField } from '../standardForm'
 import styles from './ExpressionBuilder.module.css'
 import {
@@ -103,7 +103,7 @@ export const ExpressionBuilder = ({
         const result = await validate(currentText)
         setValidationResponse(result ?? null)
         return !result?.error
-    }, [])
+    }, [validate])
 
     const clearValidationState = useCallback(() => {
         setIsEmpty(false)
@@ -148,13 +148,8 @@ export const ExpressionBuilder = ({
                                             ) {
                                                 setIsEmpty(true)
                                             } else {
-                                                if (
-                                                    isEmpty ||
-                                                    validationResponse !== null
-                                                ) {
-                                                    setIsEmpty(false)
-                                                    setValidationResponse(null)
-                                                }
+                                                setValidationResponse(null)
+                                                setIsEmpty(false)
                                             }
                                         }}
                                         aria-describedby="messageTemplate-help"
@@ -184,7 +179,6 @@ export const ExpressionBuilder = ({
                         </div>
                         <VariableSelectionBox
                             elementRef={expressionRef}
-                            input={expressionInput}
                             clearValidationState={clearValidationState}
                         />
                     </div>
@@ -204,14 +198,14 @@ export const ExpressionBuilder = ({
                                 if (validationResponse === null || isEmpty) {
                                     proceed = await validateCurrentState()
                                 }
-                                if (!proceed) {
-                                    // if invalid, the ValidationBox will display warning
-                                    return
-                                } else {
+                                if (proceed) {
                                     expressionInput.onChange(
                                         expressionRef?.current?.value ?? ''
                                     )
                                     onClose?.()
+                                } else {
+                                    // if invalid, the ValidationBox will display warning
+                                    return
                                 }
                             }}
                             primary

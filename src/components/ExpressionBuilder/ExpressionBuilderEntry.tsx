@@ -3,12 +3,7 @@ import { Button } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
-import {
-    SchemaName,
-    SchemaSection,
-    useSchema,
-    useSchemaSectionHandleOrThrow,
-} from '../../lib'
+import { SchemaName, SchemaSection } from '../../lib'
 import { useValidator } from '../../lib/models/useFieldValidators'
 import { ExpressionBuilder } from './ExpressionBuilder'
 import styles from './ExpressionBuilder.module.css'
@@ -50,7 +45,6 @@ export const ExpressionBuilderEntry = ({
     const params = useParams()
     const isEdit = !!params?.id
 
-    // const schemaValidate = () => {}
     const { input } = useField<string>(fieldName, {
         validate: schemaValidate,
     })

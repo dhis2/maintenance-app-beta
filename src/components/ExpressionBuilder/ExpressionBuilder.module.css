@@ -130,7 +130,6 @@ textarea::placeholder {
     gap: var(--spacers-dp8);
     align-items: center;
     font-size: 16px;
-    display: block;
 }
 
 .elementTypeTitleSummary {
@@ -156,7 +155,7 @@ textarea::placeholder {
     padding-inline: var(--spacers-dp16);
 }
 
-.elementList li {
+.elementList div {
     text-decoration: none;
     margin-block-end: var(--spacers-dp8);
     font-size: 13px;

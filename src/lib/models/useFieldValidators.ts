@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { SchemaSection } from '../../types'
 import { composeAsyncValidators, required } from '../form'
-import { SchemaName, useSchema } from '../schemas'
+import { useSchema } from '../schemas'
 import {
     checkMaxLengthFromProperty,
     checkMaxValueFromProperty,

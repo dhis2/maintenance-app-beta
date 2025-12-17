@@ -102,15 +102,19 @@ export const ExpressionListInner = ({
             )}
             <ul className={styles.elementList}>
                 {elements.filter(postQueryFilter).map(({ id, displayName }) => (
-                    <li
-                        key={id}
-                        onClick={(e) => {
-                            e.preventDefault()
+                    <div
+                        key={`variable_${id}`}
+                        onClick={() => {
                             insertElement?.(id)
+                        }}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                insertElement?.(id)
+                            }
                         }}
                     >
                         {displayName}
-                    </li>
+                    </div>
                 ))}
             </ul>
 
@@ -126,7 +130,7 @@ export const ExpressionListInner = ({
 
             {!error && loading && <Loader />}
 
-            {error && <Error msg={error} onRetryClick={onRetryClick} />}
+            {error && <ErrorMessage msg={error} onRetryClick={onRetryClick} />}
         </div>
     )
 }
@@ -192,7 +196,7 @@ export const ExpressionList = <TModel extends PartialLoadedDisplayableModel>({
     const allDataMap = useMemo(() => {
         const flatData =
             queryResult.data?.pages.flatMap(
-                (page) => (page as any)[modelName] as TModel[]
+                (page) => page[modelName] as TModel[]
             ) ?? []
         return flatData
     }, [queryResult.data, modelName])
@@ -256,13 +260,13 @@ const Loader = forwardRef<HTMLDivElement, object>(function Loader(_, ref) {
     )
 })
 
-function Error({
+const ErrorMessage = ({
     msg,
     onRetryClick,
 }: {
     msg: string
     onRetryClick: () => void
-}) {
+}) => {
     return (
         <div className={styles.error}>
             <div className={styles.errorInnerWrapper}>
