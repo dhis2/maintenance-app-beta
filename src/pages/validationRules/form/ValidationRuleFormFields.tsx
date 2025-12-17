@@ -24,6 +24,8 @@ import { ExpressionBuilderEntry } from '../../../components/ExpressionBuilder'
 import { PaddedContainer } from '../../../components/metadataFormControls/ExpressionBuilder/PaddedContainer'
 import {
     getConstantTranslation,
+    SchemaName,
+    SchemaSection,
     useSchema,
     useSchemaSectionHandleOrThrow,
     useSectionedFormContext,
@@ -63,6 +65,11 @@ const ValidationRuleFormFields = () => {
             value: constant,
             label: getConstantTranslation(constant),
         })) || []
+
+    const expressionSchemaSection = {
+        name: 'expression' as SchemaName,
+        namePlural: 'expressions',
+    } as SchemaSection
 
     return (
         <SectionedFormSections>
@@ -127,6 +134,8 @@ const ValidationRuleFormFields = () => {
                                     'Set up numerator expression'
                                 )}
                                 validationResource="validationRules/expression/description"
+                                validateSchemaSection={expressionSchemaSection}
+                                validateProperty="expression"
                             />
                         </StandardFormField>
 
@@ -175,6 +184,8 @@ const ValidationRuleFormFields = () => {
                                     'Set up denominator expression'
                                 )}
                                 validationResource="validationRules/expression/description"
+                                validateSchemaSection={expressionSchemaSection}
+                                validateProperty="expression"
                             />
                         </StandardFormField>
 

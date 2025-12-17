@@ -3,7 +3,7 @@ import { Button } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
-import { SchemaName, SchemaSection } from '../../lib'
+import { SchemaSection, useSchemaSectionHandleOrThrow } from '../../lib'
 import { useValidator } from '../../lib/models/useFieldValidators'
 import { ExpressionBuilder } from './ExpressionBuilder'
 import styles from './ExpressionBuilder.module.css'
@@ -17,6 +17,8 @@ type ExpressionBuilderEntryProps = Readonly<{
     validationResource: string
     descriptionFieldName?: string
     helpText?: string
+    validateSchemaSection: SchemaSection
+    validateProperty?: string
 }>
 
 export const ExpressionBuilderEntry = ({
@@ -25,6 +27,8 @@ export const ExpressionBuilderEntry = ({
     editButtonText,
     setUpButtonText,
     validationResource,
+    validateSchemaSection,
+    validateProperty,
 }: ExpressionBuilderEntryProps) => {
     const [showExpressionBuilder, setShowExpressionBuilder] = useState(false)
 
@@ -34,13 +38,11 @@ export const ExpressionBuilderEntry = ({
         string | undefined
     >(undefined)
     const descriptionToShow = expressionDescription
-    const schema = {
-        name: 'expression' as SchemaName,
-        namePlural: 'expressions',
-    } as SchemaSection
+    const schema = useSchemaSectionHandleOrThrow()
+
     const schemaValidate = useValidator({
-        schemaSection: schema,
-        property: 'expression',
+        schemaSection: validateSchemaSection ?? schema,
+        property: validateProperty ?? fieldName,
     })
     const params = useParams()
     const isEdit = !!params?.id
