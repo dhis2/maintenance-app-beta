@@ -102,19 +102,20 @@ export const ExpressionListInner = ({
             )}
             <ul className={styles.elementList}>
                 {elements.filter(postQueryFilter).map(({ id, displayName }) => (
-                    <div
+                    <li
                         key={`variable_${id}`}
-                        onClick={() => {
-                            insertElement?.(id)
-                        }}
+                        tabIndex={0}
+                        role="button"
+                        onClick={() => insertElement?.(id)}
                         onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault()
                                 insertElement?.(id)
                             }
                         }}
                     >
                         {displayName}
-                    </div>
+                    </li>
                 ))}
             </ul>
 

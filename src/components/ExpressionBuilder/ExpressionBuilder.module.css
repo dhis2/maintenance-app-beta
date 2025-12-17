@@ -155,7 +155,7 @@ textarea::placeholder {
     padding-inline: var(--spacers-dp16);
 }
 
-.elementList div {
+.elementList li {
     text-decoration: none;
     margin-block-end: var(--spacers-dp8);
     font-size: 13px;

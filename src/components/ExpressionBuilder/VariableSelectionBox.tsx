@@ -1,6 +1,5 @@
 import { IconChevronDown16, IconChevronRight16 } from '@dhis2/ui'
 import React, { useCallback, useState, RefObject } from 'react'
-import { FieldInputProps } from 'react-final-form'
 import styles from './ExpressionBuilder.module.css'
 import {
     ElementType,
@@ -26,8 +25,10 @@ const insertElementNonClosure = ({
         // clear validation state to ensure revalidation
         clearValidationState()
 
-        // should set cursor index to match where element was added (not working)
-        // elementRef.current.selectionStart = cursorStartIndex
+        // should focus element and set cursor index (at end of insertion)
+        elementRef?.current?.focus()
+        const newIndex = cursorStartIndex + (elementText?.length ?? 0)
+        elementRef?.current?.setSelectionRange(newIndex, newIndex)
     }
 }
 
@@ -38,7 +39,7 @@ export const VariableSelectionBox = ({
     elementRef: RefObject<HTMLInputElement | HTMLTextAreaElement>
     clearValidationState: () => void
 }) => {
-    const elementTypes = validationRuleElementTypes
+    const elementTypes = validationRuleElementTypes // to update with logic based on the ExpressionBuilder context
     const [selectedElementType, setSelectedElementType] = useState<
         string | undefined
     >()
