@@ -296,6 +296,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Push analysis'),
         titlePlural: i18n.t('Push analyses'),
         parentSectionKey: 'other',
+        maxApiVersion: 42,
     },
     externalMapLayer: {
         name: SchemaName.externalMapLayer,
