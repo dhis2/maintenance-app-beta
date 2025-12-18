@@ -1,3 +1,10 @@
+## [0.104.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.104.0...v0.104.1) (2025-12-18)
+
+
+### Bug Fixes
+
+* remove pushAnalysis from v43 [DHIS2-20682] ([#724](https://github.com/dhis2/maintenance-app-beta/issues/724)) ([832bbd0](https://github.com/dhis2/maintenance-app-beta/commit/832bbd04cc5bdbdbe4aec0ff828cae825062dac5))
+
 # [0.104.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.103.1...v0.104.0) (2025-12-16)
 
 

@@ -43,7 +43,7 @@ describe.skip('Validation Rule form tests', () => {
         }
     })
 
-    describe('Common', () => {
+    describe.skip('Common', () => {
         const renderForm = generateRenderer(
             { section, mockSchema },
             (
