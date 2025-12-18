@@ -1,4 +1,4 @@
-import { useConfig } from '@dhis2/app-runtime'
+import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import memoize from 'lodash/memoize'
 import { useCallback, useMemo, useState } from 'react'
@@ -15,7 +15,7 @@ export type ValidationResult = {
     expressionDescription?: string
 }
 export const useExpressionValidator = (resource: string) => {
-    const { baseUrl } = useConfig()
+    const engine = useDataEngine()
     const [validating, setValidating] = useState(false)
     const [validatedValue, setValidatedValue] = useState<string | null>(null)
 
@@ -31,19 +31,11 @@ export const useExpressionValidator = (resource: string) => {
 
                 setValidating(true)
                 try {
-                    // Use fetch directly to send the expression as raw text body
-                    // The data engine JSON-stringifies the data, but the API expects raw text
-                    const response = await fetch(`${baseUrl}/api/${resource}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'text/plain',
-                        },
-                        body: expression,
-                        credentials: 'include',
-                    })
-
-                    const result =
-                        (await response.json()) as ValidateExpressionResponse
+                    const result = await (engine.mutate({
+                        resource,
+                        type: 'create',
+                        data: expression as unknown as Record<string, unknown>,
+                    }) as unknown as Promise<ValidateExpressionResponse>)
 
                     if (result.status === 'ERROR') {
                         return {
@@ -62,11 +54,11 @@ export const useExpressionValidator = (resource: string) => {
                         expressionDescription: undefined,
                     } as ValidationResult
                 } finally {
-                    setValidating(false)
                     setValidatedValue(expression)
+                    setValidating(false)
                 }
             }),
-        [resource, baseUrl]
+        [resource, engine]
     )
 
     const validate = useCallback(

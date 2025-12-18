@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-15T15:41:41.426Z\n"
-"PO-Revision-Date: 2025-12-15T15:41:41.426Z\n"
+"POT-Creation-Date: 2025-12-18T14:52:06.811Z\n"
+"PO-Revision-Date: 2025-12-18T14:52:06.811Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -93,6 +93,9 @@ msgstr "Refresh"
 msgid "Add new"
 msgstr "Add new"
 
+msgid "Expression cannot be empty"
+msgstr "Expression cannot be empty"
+
 msgid "Expression not yet validated"
 msgstr "Expression not yet validated"
 
@@ -101,9 +104,6 @@ msgstr "Validate"
 
 msgid "Invalid expression"
 msgstr "Invalid expression"
-
-msgid "Rerun validate"
-msgstr "Rerun validate"
 
 msgid "Valid expression"
 msgstr "Valid expression"
@@ -125,21 +125,6 @@ msgstr "No matches"
 
 msgid "Retry"
 msgstr "Retry"
-
-msgid "Reporting rate"
-msgstr "Reporting rate"
-
-msgid "Reporting rate on time"
-msgstr "Reporting rate on time"
-
-msgid "Actual reports"
-msgstr "Actual reports"
-
-msgid "Actual reports on time"
-msgstr "Actual reports on time"
-
-msgid "Expected reports"
-msgstr "Expected reports"
 
 msgid "Data elements"
 msgstr "Data elements"
@@ -1558,6 +1543,21 @@ msgstr "Gs1 datamatrix"
 msgid "Canvas"
 msgstr "Canvas"
 
+msgid "Reporting rate"
+msgstr "Reporting rate"
+
+msgid "Reporting rate on time"
+msgstr "Reporting rate on time"
+
+msgid "Actual reports"
+msgstr "Actual reports"
+
+msgid "Actual reports on time"
+msgstr "Actual reports on time"
+
+msgid "Expected reports"
+msgstr "Expected reports"
+
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
 
@@ -1866,6 +1866,18 @@ msgstr "Validation rule group attribute"
 
 msgid "Visualization attribute"
 msgstr "Visualization attribute"
+
+msgid "Importance"
+msgstr "Importance"
+
+msgid "Instruction"
+msgstr "Instruction"
+
+msgid "Operator"
+msgstr "Operator"
+
+msgid "Skip this rule during form validation"
+msgstr "Skip this rule during form validation"
 
 msgid "Basic information"
 msgstr "Basic information"
@@ -3197,6 +3209,15 @@ msgstr "Save option"
 
 msgid "Saving an option does not save other changes to the option set"
 msgstr "Saving an option does not save other changes to the option set"
+
+msgid "Option created"
+msgstr "Option created"
+
+msgid "Option updated"
+msgstr "Option updated"
+
+msgid "Option set must be saved before options can be added"
+msgstr "Option set must be saved before options can be added"
 
 msgid "Define options for this option set"
 msgstr "Define options for this option set"
@@ -4593,12 +4614,6 @@ msgstr "Rule name"
 
 msgid "Rule description"
 msgstr "Rule description"
-
-msgid "Operator"
-msgstr "Operator"
-
-msgid "Importance"
-msgstr "Importance"
 
 msgid "Left side description"
 msgstr "Left side description"
