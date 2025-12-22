@@ -220,6 +220,20 @@ describe('Tracked entity types form tests', () => {
             uiAssertions.expectInputFieldToExist('shortName', '', screen)
             uiAssertions.expectColorAndIconFieldToExist(screen)
             uiAssertions.expectTextAreaFieldToExist('description', null, screen)
+
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('formfields-featureType'),
+                {
+                    options: [
+                        { displayName: '<No value>' },
+                        { displayName: 'None' },
+                        { displayName: 'Point' },
+                        { displayName: 'Polygon' },
+                    ],
+                },
+                screen
+            )
+
             uiAssertions.expectCheckboxFieldToExist(
                 'allowAuditLog',
                 false,
@@ -232,7 +246,7 @@ describe('Tracked entity types form tests', () => {
             expect(minAttributesInput).toBeVisible()
             expect(
                 within(minAttributesInput).getByRole('spinbutton')
-            ).toHaveValue(1)
+            ).toHaveValue(0)
 
             const maxTeiCountInput = screen.getByTestId(
                 'formfields-maxteicount'
@@ -291,7 +305,8 @@ describe('Tracked entity types form tests', () => {
                         shortName: aShortName,
                         description: aDescription,
                         allowAuditLog: true,
-                        minAttributesRequiredToSearch: 1,
+                        featureType: undefined,
+                        minAttributesRequiredToSearch: 0,
                         maxTeiCountToReturn: 0,
                         style: {},
                         trackedEntityTypeAttributes: [],
@@ -517,6 +532,18 @@ describe('Tracked entity types form tests', () => {
             uiAssertions.expectTextAreaFieldToExist(
                 'description',
                 trackedEntityType.description,
+                screen
+            )
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('formfields-featureType'),
+                {
+                    options: [
+                        { displayName: '<No value>' },
+                        { displayName: 'None' },
+                        { displayName: 'Point' },
+                        { displayName: 'Polygon' },
+                    ],
+                },
                 screen
             )
             uiAssertions.expectCheckboxFieldToExist(
