@@ -1,3 +1,10 @@
+## [0.104.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.104.1...v0.104.2) (2025-12-22)
+
+
+### Bug Fixes
+
+* add attributes where missing ([#718](https://github.com/dhis2/maintenance-app-beta/issues/718)) ([e05cdf0](https://github.com/dhis2/maintenance-app-beta/commit/e05cdf019e1fc444090095ff0d281ed27780e6c7))
+
 ## [0.104.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.104.0...v0.104.1) (2025-12-18)
 
 
