@@ -62,6 +62,7 @@ export type SystemSettings = {
     keyApplicationNotification: string
     keyLastSuccessfulAnalyticsTablesUpdate: string
     keyUiLocale: string
+    keyDbLocale: string
     keyEmailPort: number
     keyRespectMetaDataStartEndDatesInAnalyticsTableExport: boolean
     keyCalendar: string

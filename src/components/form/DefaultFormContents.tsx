@@ -1,7 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
+import { NoticeBox } from '@dhis2/ui'
 import React from 'react'
 import { useForm, useFormState } from 'react-final-form'
-import { getSectionPath } from '../../lib'
+import { getSectionPath, useCurrentUser, useSystemSettings } from '../../lib'
 import { SubmitAction } from '../../lib/form/useOnSubmit'
 import { ModelSection } from '../../types'
 import { StandardFormActions, StandardFormSection } from '../standardForm'
@@ -18,10 +19,31 @@ export function DefaultEditFormContents({
     section: ModelSection
 }) {
     const listPath = `/${getSectionPath(section)}`
+    const { initialValues } = useFormState({
+        subscription: { initialValues: true },
+    })
+    const userSettings = useCurrentUser()
+    const systemSettings = useSystemSettings()
 
     return (
         <>
             <div className={classes.form}>
+                {userSettings.settings.keyDbLocale !==
+                    systemSettings.keyDbLocale && (
+                    <NoticeBox
+                        title={
+                            initialValues.displayName !== initialValues.name
+                                ? i18n.t('Name: {{displayName}} (Translated)', {
+                                      displayName: initialValues.displayName,
+                                  })
+                                : undefined
+                        }
+                    >
+                        {i18n.t(
+                            'Translatable fields appear in the default language in this form, not in your selected database language.'
+                        )}
+                    </NoticeBox>
+                )}
                 {children}
 
                 <StandardFormSection>
