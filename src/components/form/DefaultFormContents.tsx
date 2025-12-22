@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { NoticeBox } from '@dhis2/ui'
 import React from 'react'
 import { useForm, useFormState } from 'react-final-form'
-import { getSectionPath, useCurrentUser } from '../../lib'
+import { getSectionPath, useCurrentUser, useSystemSettings } from '../../lib'
 import { SubmitAction } from '../../lib/form/useOnSubmit'
 import { ModelSection } from '../../types'
 import { StandardFormActions, StandardFormSection } from '../standardForm'
@@ -23,11 +23,13 @@ export function DefaultEditFormContents({
         subscription: { initialValues: true },
     })
     const userSettings = useCurrentUser()
+    const systemSettings = useSystemSettings()
+
     return (
         <>
             <div className={classes.form}>
                 {userSettings.settings.keyDbLocale !==
-                    userSettings.settings.keyUiLocale && (
+                    systemSettings.keyDbLocale && (
                     <NoticeBox
                         title={
                             initialValues.displayName !== initialValues.name
