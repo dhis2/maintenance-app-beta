@@ -1,3 +1,10 @@
+# [0.105.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.104.2...v0.105.0) (2025-12-22)
+
+
+### Features
+
+* add noticeBox to top of edit form if db language is different ([#710](https://github.com/dhis2/maintenance-app-beta/issues/710)) ([bf37329](https://github.com/dhis2/maintenance-app-beta/commit/bf37329dc269aacdcd9e41f8c64990a79fb8725e))
+
 ## [0.104.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.104.1...v0.104.2) (2025-12-22)
 
 
