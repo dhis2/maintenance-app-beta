@@ -110,8 +110,16 @@ export const ExpressionBuilder = ({
         setValidationResponse(null)
     }, [setIsEmpty, setValidationResponse])
 
-    useEffect(() => {
-        const performInitialValidation = async (s: string) => {
+    const performInitialValidation = useCallback(
+        async (s: string) => {
+            if (
+                !validate ||
+                !setValidationResponse ||
+                !setIsEmpty ||
+                !setInitiallyValidated
+            ) {
+                return
+            }
             if (s.trim() === '') {
                 setIsEmpty(true)
             } else {
@@ -119,15 +127,13 @@ export const ExpressionBuilder = ({
                 setValidationResponse(result ?? null)
             }
             setInitiallyValidated(true)
-        }
+        },
+        [setIsEmpty, setValidationResponse, setInitiallyValidated, validate]
+    )
+
+    useEffect(() => {
         performInitialValidation(initialValue)
-    }, [
-        initialValue,
-        setIsEmpty,
-        setValidationResponse,
-        setInitiallyValidated,
-        validate,
-    ])
+    }, [initialValue, performInitialValidation])
 
     return (
         <Modal onClose={onClose} fluid dataTest="expression-builder-modal">

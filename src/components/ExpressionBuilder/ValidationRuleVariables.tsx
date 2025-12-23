@@ -296,7 +296,13 @@ const ProgramsList = ({
 
     return (
         <>
-            <div className={styles.preliminarySelect}>
+            <div
+                className={
+                    !programElementType || !programId
+                        ? styles.preliminarySelectNoProgram
+                        : styles.preliminarySelect
+                }
+            >
                 <ModelSingleSelect
                     query={PROGRAMS_SELECT_QUERY}
                     onChange={(program) => {

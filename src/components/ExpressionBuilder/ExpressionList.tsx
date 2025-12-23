@@ -81,7 +81,13 @@ export const ExpressionListInner = ({
     }
 
     return (
-        <div className={styles.expressionListContainer}>
+        <div
+            className={styles.expressionListContainer}
+            onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+            }}
+        >
             <div className={styles.searchField}>
                 <div className={styles.searchInput}>
                     <Input
@@ -106,10 +112,11 @@ export const ExpressionListInner = ({
                         key={`variable_${id}`}
                         tabIndex={0}
                         role="button"
-                        onClick={() => insertElement?.(id)}
+                        onClick={() => {
+                            insertElement?.(id)
+                        }}
                         onKeyDown={(e) => {
                             if (e.key === 'Enter' || e.key === ' ') {
-                                e.preventDefault()
                                 insertElement?.(id)
                             }
                         }}

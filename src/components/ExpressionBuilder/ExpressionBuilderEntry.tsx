@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button } from '@dhis2/ui'
+import { Button, TextAreaFieldFF } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
@@ -47,7 +47,7 @@ export const ExpressionBuilderEntry = ({
     const params = useParams()
     const isEdit = !!params?.id
 
-    const { input } = useField<string>(fieldName, {
+    const { input, meta } = useField<string>(fieldName, {
         validate: schemaValidate,
     })
 
@@ -58,7 +58,8 @@ export const ExpressionBuilderEntry = ({
                     input.value
                 )
                 setExpressionDescription(
-                    initialValidation?.expressionDescription
+                    initialValidation?.expressionDescription ??
+                        i18n.t('Invalid expression')
                 )
             }
         }
@@ -76,13 +77,23 @@ export const ExpressionBuilderEntry = ({
                         {descriptionToShow || i18n.t('(No Value)')}
                     </div>
                 )}
+                <TextAreaFieldFF
+                    dataTest={`formfields-${fieldName}`}
+                    input={input}
+                    meta={meta}
+                    inputWidth="400px"
+                    disabled
+                    className={styles.expressionHiddenInput}
+                />
             </div>
 
             <div className={styles.buttonWrapper}>
                 <Button
                     small
                     secondary
-                    onClick={() => setShowExpressionBuilder(true)}
+                    onClick={() => {
+                        setShowExpressionBuilder(true)
+                    }}
                     dataTest={`edit-${fieldName}-expression-button`}
                 >
                     {isEdit || descriptionToShow
