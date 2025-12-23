@@ -2,8 +2,8 @@ import i18n from '@dhis2/d2-i18n'
 import { Button, TextAreaFieldFF } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useField } from 'react-final-form'
-import { useSchemaSectionHandleOrThrow } from '../../../lib'
-import { useValidator } from '../../../lib/models/useFieldValidators'
+// import { useSchemaSectionHandleOrThrow } from '../../../lib'
+// import { useValidator } from '../../../lib/models/useFieldValidators'
 import { ExpressionBuilderModal } from './ExpressionBuilderModal'
 import styles from './ExpressionField.module.css'
 import { useExpressionValidator } from './useExpressionValidator'
@@ -31,8 +31,9 @@ export function ExpressionBuilderWithModalField({
         string | undefined
     >(undefined)
     const descriptionToShow = expressionDescription
-    const schemaSection = useSchemaSectionHandleOrThrow()
-    const schemaValidate = useValidator({ schemaSection, property: fieldName })
+    // const schemaSection = useSchemaSectionHandleOrThrow()
+    // const schemaValidate = useValidator({ schemaSection, property: fieldName })
+    const schemaValidate = () => {}
     const { input, meta } = useField<string>(fieldName, {
         validate: schemaValidate,
     })
