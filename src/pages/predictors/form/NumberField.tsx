@@ -13,15 +13,14 @@ export const NumberField = ({
     label: string
     helpText?: string
     required?: boolean
-    defaultValue?: number | undefined
+    defaultValue?: number
 }) => {
+    const fallbackValue = required ? defaultValue : undefined
     const { input, meta } = useField(fieldName, {
         parse: (value?: string) =>
             value === undefined || value === ''
-                ? required
-                    ? defaultValue
-                    : undefined
-                : parseFloat(value),
+                ? fallbackValue
+                : Number.parseFloat(value),
         type: 'number',
         format: (value) => value?.toString(),
     })

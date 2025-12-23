@@ -33,23 +33,64 @@ export const PredictorFormDescriptor = {
             label: i18n.t('Output definition'),
             fields: [
                 {
-                    name: 'generator.expression',
-                    label: i18n.t('Left side expression'),
+                    name: 'output',
+                    label: i18n.t('Output data element'),
                 },
                 {
-                    name: 'generator.missingValueStrategy',
-                    label: i18n.t('Left side missing value strategy'),
+                    name: 'outputCombo',
+                    label: i18n.t('Output category combo'),
                 },
                 {
-                    name: 'generator.slidingWindow',
-                    label: i18n.t('Left side sliding window'),
+                    name: 'periodType',
+                    label: i18n.t('Period type'),
+                },
+                {
+                    name: 'organisationUnitLevels',
+                    label: i18n.t('Organisation unit levels'),
+                },
+                {
+                    name: 'organisationUnitDescendants',
+                    label: i18n.t('Organisation unit descendants'),
                 },
             ],
         },
         {
             name: 'predictionLogic',
             label: i18n.t('Prediction logic'),
-            fields: [],
+            fields: [
+                {
+                    name: 'generator.expression',
+                    label: i18n.t('Generator expression'),
+                },
+                {
+                    name: 'generator.description',
+                    label: i18n.t('Generator description'),
+                },
+                {
+                    name: 'generator.missingValueStrategy',
+                    label: i18n.t('Generator missing value strategy'),
+                },
+                {
+                    name: 'sampleSkipTest.expression',
+                    label: i18n.t('Generator expression'),
+                },
+                {
+                    name: 'sampleSkipTest.description',
+                    label: i18n.t('Generator description'),
+                },
+                {
+                    name: 'sequentialSampleCount',
+                    label: i18n.t('Sequential sample count'),
+                },
+                {
+                    name: 'annualSampleCount',
+                    label: i18n.t('Annual sample count'),
+                },
+                {
+                    name: 'sequentialSkipCount',
+                    label: i18n.t('Sequential skip count'),
+                },
+            ],
         },
     ],
 } as const satisfies SectionedFormDescriptor<PredictorFormValues>
