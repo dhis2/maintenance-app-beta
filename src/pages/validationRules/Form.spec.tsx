@@ -434,7 +434,7 @@ describe.skip('Validation Rule form tests', () => {
         })
     })
 
-    describe('Edit Validation Rule form', () => {
+    describe.skip('Edit Validation Rule form', () => {
         const renderForm = generateRenderer(
             { section, mockSchema },
             (routeOptions) => {
