@@ -8,7 +8,7 @@ import {
     PickWithFieldFilters,
     ValidationRuleGroup,
 } from '../../types/generated'
-import ValidationRuleGroupsFormFields from './form/ValidationRuleGroupsFormFields'
+import { ValidationRuleGroupsFormFields } from './form/ValidationRuleGroupsFormFields'
 import { validate } from './form/validationRuleGroupsSchema'
 
 const fieldFilters = [
@@ -48,7 +48,6 @@ export const Component = () => {
             onSubmit={useOnSubmitEdit({ section, modelId })}
             initialValues={initialValues}
             validate={validate}
-            includeAttributes={false}
         >
             <DefaultEditFormContents section={section}>
                 <ValidationRuleGroupsFormFields />

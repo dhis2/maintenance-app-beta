@@ -1,6 +1,10 @@
 import React from 'react'
-import { SectionedFormSections } from '../../../components'
 import {
+    CustomAttributesSection,
+    SectionedFormSections,
+} from '../../../components'
+import {
+    SCHEMA_SECTIONS,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
@@ -38,6 +42,10 @@ export const ProgramFormContents = () => {
             />
             <AccessAndSharingFormContents
                 name={descriptor.getSection('accessAndSharing').name}
+            />
+            <CustomAttributesSection
+                schemaSection={SCHEMA_SECTIONS.program}
+                sectionedLayout
             />
         </SectionedFormSections>
     )

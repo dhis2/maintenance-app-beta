@@ -143,8 +143,8 @@ export const useSidebarLinks = (): ParentLink[] => {
                 label,
                 links: links.filter(
                     ({ section }) =>
-                        isSectionAuthorized(section) &&
-                        isSectionFeatureToggled(section)
+                        isSectionFeatureToggled(section) &&
+                        isSectionAuthorized(section)
                 ),
             }))
             .filter(({ links }) => links.length > 0)

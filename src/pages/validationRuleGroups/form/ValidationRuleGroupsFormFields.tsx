@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import {
     CodeField,
+    CustomAttributesSection,
     DescriptionField,
     ModelTransferField,
     NameField,
@@ -10,9 +11,9 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { useSchemaSectionHandleOrThrow } from '../../../lib'
+import { SCHEMA_SECTIONS, useSchemaSectionHandleOrThrow } from '../../../lib'
 
-function ValidationRuleGroupsFormFields() {
+export function ValidationRuleGroupsFormFields() {
     const schemaSection = useSchemaSectionHandleOrThrow()
 
     return (
@@ -71,8 +72,7 @@ function ValidationRuleGroupsFormFields() {
                     />
                 </StandardFormField>
             </StandardFormSection>
+            <CustomAttributesSection schemaSection={SCHEMA_SECTIONS.program} />
         </>
     )
 }
-
-export default ValidationRuleGroupsFormFields
