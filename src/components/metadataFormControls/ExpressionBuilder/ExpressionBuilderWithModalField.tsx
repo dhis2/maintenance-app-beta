@@ -32,7 +32,8 @@ export function ExpressionBuilderWithModalField({
     >(undefined)
     const descriptionToShow = expressionDescription
     const schemaSection = useSchemaSectionHandleOrThrow()
-    const schemaValidate = useValidator({ schemaSection, property: fieldName })
+    // const schemaValidate = useValidator({ schemaSection, property: fieldName })
+    const schemaValidate = () => {}
     const { input, meta } = useField<string>(fieldName, {
         validate: schemaValidate,
     })
