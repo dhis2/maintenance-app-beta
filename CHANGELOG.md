@@ -1,3 +1,10 @@
+# [0.106.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.105.0...v0.106.0) (2026-01-04)
+
+
+### Features
+
+* [DHIS2-20426] Improvements for TET add and edit form ([#721](https://github.com/dhis2/maintenance-app-beta/issues/721)) ([0b0e501](https://github.com/dhis2/maintenance-app-beta/commit/0b0e5016fc4c4342784c95bf59c9605f320416d2))
+
 # [0.105.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.104.2...v0.105.0) (2025-12-22)
 
 
