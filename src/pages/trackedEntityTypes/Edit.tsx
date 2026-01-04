@@ -1,4 +1,5 @@
 import { useAlert } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
@@ -24,7 +25,6 @@ import {
     TrackedEntityTypeFormFields,
     validateTrackedEntityType,
 } from './form'
-
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
@@ -107,7 +107,10 @@ export const Component = () => {
                     .map((p: Program) => p.displayName)
                     .join(', ')
                 saveAlert.show({
-                    message: `After changing the tracked entity type attributes, you may need to update these programs: ${programNames}`,
+                    message: i18n.t(
+                        'After changing the tracked entity type attributes, you may need to update these programs: {{programNames}}',
+                        { programNames }
+                    ),
                     warning: true,
                 })
             }
