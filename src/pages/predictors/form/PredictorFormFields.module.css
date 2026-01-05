@@ -1,0 +1,13 @@
+.fieldContainer {
+    width: 400px;
+}
+
+.subtitle {
+    font-weight: 400;
+    font-size: 16px;
+    margin-block-end: var(--spacers-dp8);
+}
+
+.paddedContainerContainer {
+    margin-block-end: var(--spacers-dp16);
+}
