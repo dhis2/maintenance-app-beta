@@ -132,14 +132,15 @@ export const EnrollmentDataFormContents = React.memo(
             subscription: { value: true },
         })
 
+        // Get TETAs (Tracked Entity Type Attributes) from the tracked entity type
         const tetas =
             trackedEntityTypeField.input.value?.trackedEntityTypeAttributes ||
             []
         const tetaIds = new Set(
-            trackedEntityTypeField.input.value?.trackedEntityTypeAttributes?.map(
+            tetas.map(
                 (teta: ProgramTrackedEntityAttribute) =>
                     teta.trackedEntityAttribute.id
-            ) ?? []
+            )
         )
         const tetaIdsString = Array.from(tetaIds).join(',')
         const tetaMap = new Map<string, ProgramTrackedEntityAttribute>(
@@ -149,9 +150,15 @@ export const EnrollmentDataFormContents = React.memo(
             ])
         )
 
+        // Sync TETAs with program attributes when tracked entity type changes
         useEffect(() => {
             if (!trackedEntityTypeField.input.value?.id) {
                 return
+            }
+
+            const defaultRenderType = {
+                MOBILE: { type: 'DEFAULT' },
+                DESKTOP: { type: 'DEFAULT' },
             }
 
             const existingProgramAttributesMap = new Map(
@@ -161,34 +168,37 @@ export const EnrollmentDataFormContents = React.memo(
                 ])
             )
 
-            const matchedTetaAttributes = tetas.map(
-                (tetaAttribute: ProgramTrackedEntityAttribute) => {
-                    const existingProgramAttribute =
-                        existingProgramAttributesMap.get(
-                            tetaAttribute.trackedEntityAttribute.id
-                        )
-                    if (existingProgramAttribute && tetaAttribute.mandatory) {
-                        return {
-                            ...existingProgramAttribute,
-                            mandatory: true,
+            // Convert TETAs to PETA structure, preserving existing PETA values if they exist
+            const convertedTetas = tetas.map(
+                (teta: ProgramTrackedEntityAttribute) => {
+                    const existing = existingProgramAttributesMap.get(
+                        teta.trackedEntityAttribute.id
+                    )
+                    return (
+                        existing || {
+                            trackedEntityAttribute: teta.trackedEntityAttribute,
+                            valueType: teta.trackedEntityAttribute.valueType,
+                            unique: teta.trackedEntityAttribute.unique,
+                            allowFutureDate: false,
+                            mandatory: teta.mandatory || false,
+                            searchable: false,
+                            displayInList: false,
+                            renderType: defaultRenderType,
                         }
-                    }
-                    return existingProgramAttribute ?? tetaAttribute
+                    )
                 }
             )
 
-            const programTrackedEntityAttributes = input.value.filter(
+            // Keep only PETAs (non-TETAs) from existing program attributes
+            const petas = input.value.filter(
                 (programAttribute) =>
                     !tetaIds.has(programAttribute.trackedEntityAttribute.id)
             )
 
-            input.onChange([
-                ...matchedTetaAttributes,
-                ...programTrackedEntityAttributes,
-            ])
+            // Merge: TETAs first, then PETAs
+            input.onChange([...convertedTetas, ...petas])
             // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [trackedEntityTypeField.input.value?.id, tetaIdsString])
-
         const programHasDateAttributes = input.value.some(
             (attribute) => attribute.valueType === 'DATE'
         )
@@ -229,11 +239,37 @@ export const EnrollmentDataFormContents = React.memo(
                                     DESKTOP: { type: 'DEFAULT' },
                                 }
 
+                                // Create map of existing attributes to preserve configurations
+                                const existingAttributesMap = new Map(
+                                    input.value.map((attr) => [
+                                        attr.trackedEntityAttribute.id,
+                                        attr,
+                                    ])
+                                )
+
+                                // Track original indices of TETAs for re-insertion at correct position
+                                const tetaOriginalIndices = new Map<
+                                    string,
+                                    number
+                                >(
+                                    input.value
+                                        .map(
+                                            (attr, index) =>
+                                                [
+                                                    attr.trackedEntityAttribute
+                                                        .id,
+                                                    index,
+                                                ] as [string, number]
+                                        )
+                                        .filter(([id]) => tetaIds.has(id))
+                                )
+
                                 const selectedIds = new Set(
                                     selected.map((s) => s.id)
                                 )
 
-                                const missingTETAs = input.value.filter(
+                                // TETAs that user didn't include in selection (must be re-added at original position)
+                                const missingTetas = input.value.filter(
                                     (attr) =>
                                         tetaIds.has(
                                             attr.trackedEntityAttribute.id
@@ -243,23 +279,11 @@ export const EnrollmentDataFormContents = React.memo(
                                         )
                                 )
 
-                                const tetaOriginalIndices = new Map(
-                                    missingTETAs.map((teta) => [
-                                        teta.trackedEntityAttribute.id,
-                                        input.value.findIndex(
-                                            (a) =>
-                                                a.trackedEntityAttribute.id ===
-                                                teta.trackedEntityAttribute.id
-                                        ),
-                                    ])
-                                )
-
+                                // Process selected attributes in user's chosen order
                                 const selectedAttributes = selected.map((s) => {
-                                    const existing = input.value.find(
-                                        (a) =>
-                                            a.trackedEntityAttribute.id === s.id
+                                    const existing = existingAttributesMap.get(
+                                        s.id
                                     )
-
                                     return (
                                         existing || {
                                             trackedEntityAttribute: {
@@ -269,7 +293,10 @@ export const EnrollmentDataFormContents = React.memo(
                                             valueType: s.valueType,
                                             unique: s.unique,
                                             allowFutureDate: false,
-                                            mandatory: false,
+                                            mandatory: tetaIds.has(s.id)
+                                                ? tetaMap.get(s.id)
+                                                      ?.mandatory || false
+                                                : false,
                                             searchable: false,
                                             displayInList: false,
                                             renderType: defaultRenderType,
@@ -278,13 +305,24 @@ export const EnrollmentDataFormContents = React.memo(
                                 })
 
                                 const result = [...selectedAttributes]
-                                missingTETAs.forEach((teta) => {
+                                missingTetas.forEach((teta) => {
                                     const originalIndex =
                                         tetaOriginalIndices.get(
                                             teta.trackedEntityAttribute.id
                                         )
-                                    if (originalIndex) {
-                                        result.splice(originalIndex, 0, teta)
+                                    if (originalIndex !== undefined) {
+                                        // Ensure TETA has renderType when re-inserted
+                                        const tetaWithDefaults = {
+                                            ...teta,
+                                            renderType:
+                                                teta.renderType ||
+                                                defaultRenderType,
+                                        }
+                                        result.splice(
+                                            originalIndex,
+                                            0,
+                                            tetaWithDefaults
+                                        )
                                     }
                                 })
 
@@ -390,7 +428,7 @@ export const EnrollmentDataFormContents = React.memo(
                                             <TooltipWrapper
                                                 condition={isMandatoryDisabled}
                                                 content={i18n.t(
-                                                    'This attribute is marked as mandatory at the tracked entity type level and cannot be changed here'
+                                                    'This attribute is marked as required at the tracked entity type level'
                                                 )}
                                             >
                                                 <FieldRFF

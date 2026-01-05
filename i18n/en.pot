@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-04T18:54:30.975Z\n"
-"PO-Revision-Date: 2026-01-04T18:54:30.975Z\n"
+"POT-Creation-Date: 2026-01-05T14:03:48.980Z\n"
+"PO-Revision-Date: 2026-01-05T14:03:48.980Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -3927,9 +3927,6 @@ msgstr "Set up the program indicator legends."
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
 
-msgid "This setting is inherited from the tracked entity type and cannot be changed"
-msgstr "This setting is inherited from the tracked entity type and cannot be changed"
-
 msgid "Enrollment: Data"
 msgstr "Enrollment: Data"
 
@@ -3945,8 +3942,8 @@ msgstr "Selected attributes"
 msgid "Filter available attributes"
 msgstr "Filter available attributes"
 
-msgid "Filter attributes"
-msgstr "Filter attributes"
+msgid "Filter selected attributes"
+msgstr "Filter selected attributes"
 
 msgid "Configure attributes"
 msgstr "Configure attributes"
@@ -3965,6 +3962,12 @@ msgstr "Desktop Display"
 
 msgid "Mobile Display"
 msgstr "Mobile Display"
+
+msgid "This attribute is marked asrequired at the tracked entity type level"
+msgstr "This attribute is marked asrequired at the tracked entity type level"
+
+msgid "Unique attributes are always searchable"
+msgstr "Unique attributes are always searchable"
 
 msgid "Enrollment: Form"
 msgstr "Enrollment: Form"
