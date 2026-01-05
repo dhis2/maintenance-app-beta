@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-23T12:59:10.572Z\n"
-"PO-Revision-Date: 2025-12-23T12:59:10.572Z\n"
+"POT-Creation-Date: 2026-01-05T11:46:16.708Z\n"
+"PO-Revision-Date: 2026-01-05T11:46:16.709Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -93,6 +93,111 @@ msgstr "Refresh"
 msgid "Add new"
 msgstr "Add new"
 
+msgid "Expression cannot be empty"
+msgstr "Expression cannot be empty"
+
+msgid "Expression not yet validated"
+msgstr "Expression not yet validated"
+
+msgid "Validate"
+msgstr "Validate"
+
+msgid "Invalid expression"
+msgstr "Invalid expression"
+
+msgid "Valid expression"
+msgstr "Valid expression"
+
+msgid "Add operators, variables, functions, and constants from the right sidebar"
+msgstr "Add operators, variables, functions, and constants from the right sidebar"
+
+msgid "Apply"
+msgstr "Apply"
+
+msgid "(No Value)"
+msgstr "(No Value)"
+
+msgid "Filter list"
+msgstr "Filter list"
+
+msgid "No matches"
+msgstr "No matches"
+
+msgid "Retry"
+msgstr "Retry"
+
+msgid "Data elements"
+msgstr "Data elements"
+
+msgid "Program tracked entity attributes"
+msgstr "Program tracked entity attributes"
+
+msgid "Indicators"
+msgstr "Indicators"
+
+msgid "Select a Program"
+msgstr "Select a Program"
+
+msgid "Operators"
+msgstr "Operators"
+
+msgid "+ (add)"
+msgstr "+ (add)"
+
+msgid "- (subtract)"
+msgstr "- (subtract)"
+
+msgid "* (multiply)"
+msgstr "* (multiply)"
+
+msgid "/ (divide)"
+msgstr "/ (divide)"
+
+msgid "% (percent)"
+msgstr "% (percent)"
+
+msgid "("
+msgstr "("
+
+msgid ")"
+msgstr ")"
+
+msgid "days"
+msgstr "days"
+
+msgid "if("
+msgstr "if("
+
+msgid "isNull("
+msgstr "isNull("
+
+msgid "isNotNull("
+msgstr "isNotNull("
+
+msgid "firstNotNull("
+msgstr "firstNotNull("
+
+msgid "greatest("
+msgstr "greatest("
+
+msgid "least("
+msgstr "least("
+
+msgid "Program data"
+msgstr "Program data"
+
+msgid "Org unit counts"
+msgstr "Org unit counts"
+
+msgid "Constants"
+msgstr "Constants"
+
+msgid "Reporting rates"
+msgstr "Reporting rates"
+
+msgid "Could not validate expression"
+msgstr "Could not validate expression"
+
 msgid "Message subject"
 msgstr "Message subject"
 
@@ -116,9 +221,6 @@ msgstr "Clear all"
 
 msgid "Filter options"
 msgstr "Filter options"
-
-msgid "Retry"
-msgstr "Retry"
 
 msgid "Change this field"
 msgstr "Change this field"
@@ -213,14 +315,8 @@ msgstr "Attributes"
 msgid "Program"
 msgstr "Program"
 
-msgid "Data elements"
-msgstr "Data elements"
-
 msgid "Totals"
 msgstr "Totals"
-
-msgid "Indicators"
-msgstr "Indicators"
 
 msgid "Flags"
 msgstr "Flags"
@@ -230,6 +326,9 @@ msgstr "Required"
 
 msgid "Please enter a GeoJSON value"
 msgstr "Please enter a GeoJSON value"
+
+msgid "Name: {{displayName}} (Translated)"
+msgstr "Name: {{displayName}} (Translated)"
 
 msgid ""
 "Translatable fields appear in the default language in this form, not in "
@@ -292,6 +391,9 @@ msgstr ""
 
 msgid "Description"
 msgstr "Description"
+
+msgid "Feature type"
+msgstr "Feature type"
 
 msgid ""
 "This name is already in use. Consider updating the name to avoid a "
@@ -524,23 +626,8 @@ msgstr "No potential targets available. Remove an item from sources."
 msgid "At least one source is required"
 msgstr "At least one source is required"
 
-msgid "Valid expression"
-msgstr "Valid expression"
-
 msgid "Add operators, variables, functions, and constants from right sidebar"
 msgstr "Add operators, variables, functions, and constants from right sidebar"
-
-msgid "Apply"
-msgstr "Apply"
-
-msgid "(No Value)"
-msgstr "(No Value)"
-
-msgid "Invalid expression"
-msgstr "Invalid expression"
-
-msgid "Could not validate expression"
-msgstr "Could not validate expression"
 
 msgid "Loading..."
 msgstr "Loading..."
@@ -706,9 +793,6 @@ msgstr "Category option group set"
 
 msgid "Type to filter options"
 msgstr "Type to filter options"
-
-msgid "No matches"
-msgstr "No matches"
 
 msgid "Data element"
 msgstr "Data element"
@@ -1015,9 +1099,6 @@ msgstr "Validation notification"
 
 msgid "Constant"
 msgstr "Constant"
-
-msgid "Constants"
-msgstr "Constants"
 
 msgid "Option group"
 msgstr "Option group"
@@ -1475,6 +1556,36 @@ msgstr "Gs1 datamatrix"
 msgid "Canvas"
 msgstr "Canvas"
 
+msgid "Reporting rate"
+msgstr "Reporting rate"
+
+msgid "Reporting rate on time"
+msgstr "Reporting rate on time"
+
+msgid "Actual reports"
+msgstr "Actual reports"
+
+msgid "Actual reports on time"
+msgstr "Actual reports on time"
+
+msgid "Expected reports"
+msgstr "Expected reports"
+
+msgid "At selected level(s) only"
+msgstr "At selected level(s) only"
+
+msgid "At selected level(s) and all levels below"
+msgstr "At selected level(s) and all levels below"
+
+msgid "Skip if any value is missing"
+msgstr "Skip if any value is missing"
+
+msgid "Skip if all values are missing"
+msgstr "Skip if all values are missing"
+
+msgid "Never skip"
+msgstr "Never skip"
+
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
 
@@ -1549,9 +1660,6 @@ msgstr "Zero is significant"
 
 msgid "Enable tracked entity instance audit log"
 msgstr "Enable tracked entity instance audit log"
-
-msgid "Feature type"
-msgstr "Feature type"
 
 msgid "Program type"
 msgstr "Program type"
@@ -3757,14 +3865,20 @@ msgstr "Edit sample skip test expression"
 msgid "Predictor Form"
 msgstr "Predictor Form"
 
-msgid "Left side expression"
-msgstr "Left side expression"
+msgid "Output category combo"
+msgstr "Output category combo"
 
-msgid "Left side missing value strategy"
-msgstr "Left side missing value strategy"
+msgid "Organisation unit descendants"
+msgstr "Organisation unit descendants"
 
-msgid "Left side sliding window"
-msgstr "Left side sliding window"
+msgid "Generator expression"
+msgstr "Generator expression"
+
+msgid "Generator description"
+msgstr "Generator description"
+
+msgid "Generator missing value strategy"
+msgstr "Generator missing value strategy"
 
 msgid "Program Disaggregation Form"
 msgstr "Program Disaggregation Form"
@@ -3887,9 +4001,6 @@ msgstr ""
 
 msgid "Could not delete program mappings"
 msgstr "Could not delete program mappings"
-
-msgid "Select a Program"
-msgstr "Select a Program"
 
 msgid "Programs with existing mappings"
 msgstr "Programs with existing mappings"
@@ -4670,15 +4781,6 @@ msgstr "Validation Rules"
 msgid "Choose the validation rules to include in this validation rule group."
 msgstr "Choose the validation rules to include in this validation rule group."
 
-msgid "Never skip"
-msgstr "Never skip"
-
-msgid "Skip if any value is missing"
-msgstr "Skip if any value is missing"
-
-msgid "Skip if all values are missing"
-msgstr "Skip if all values are missing"
-
 msgid "Organisation unit levels to run validation for"
 msgstr "Organisation unit levels to run validation for"
 
@@ -4694,8 +4796,14 @@ msgstr "Expressions and output"
 msgid "Configure the expressions and how they are compared."
 msgstr "Configure the expressions and how they are compared."
 
-msgid "Edit left side expression"
-msgstr "Edit left side expression"
+msgid "Left side expression"
+msgstr "Left side expression"
+
+msgid "Set up numerator expression"
+msgstr "Set up numerator expression"
+
+msgid "Sliding window: validation checks against relative period"
+msgstr "Sliding window: validation checks against relative period"
 
 msgid "Comparison operator"
 msgstr "Comparison operator"
@@ -4703,8 +4811,8 @@ msgstr "Comparison operator"
 msgid "Right side expression"
 msgstr "Right side expression"
 
-msgid "Edit right side expression"
-msgstr "Edit right side expression"
+msgid "Set up denominator expression"
+msgstr "Set up denominator expression"
 
 msgid "Instruction to show"
 msgstr "Instruction to show"
@@ -4723,6 +4831,12 @@ msgstr "Skip this rule during form validation in Data Entry App"
 
 msgid "Validation Rules Form"
 msgstr "Validation Rules Form"
+
+msgid "Left side missing value strategy"
+msgstr "Left side missing value strategy"
+
+msgid "Left side sliding window"
+msgstr "Left side sliding window"
 
 msgid "Right side missing value strategy"
 msgstr "Right side missing value strategy"

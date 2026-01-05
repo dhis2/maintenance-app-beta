@@ -20,9 +20,12 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
+import { ExpressionBuilderEntry } from '../../../components/ExpressionBuilder'
 import { PaddedContainer } from '../../../components/metadataFormControls/ExpressionBuilder/PaddedContainer'
 import {
     getConstantTranslation,
+    SchemaName,
+    SchemaSection,
     useSchema,
     useSchemaSectionHandleOrThrow,
     useSectionedFormContext,
@@ -62,6 +65,11 @@ const ValidationRuleFormFields = () => {
             value: constant,
             label: getConstantTranslation(constant),
         })) || []
+
+    const expressionSchemaSection = {
+        name: 'expression' as SchemaName,
+        namePlural: 'expressions',
+    } as SchemaSection
 
     return (
         <SectionedFormSections>
@@ -116,15 +124,19 @@ const ValidationRuleFormFields = () => {
                             {i18n.t('Left side expression')}
                         </div>
                         <StandardFormField>
-                            <p>
-                                Placeholder for expression builder (left side)
-                            </p>
-                            {/* <ExpressionBuilderWithModalField
-                            fieldName="leftSide.expression"
-                            modalTitle={i18n.t('Edit left side expression')}
-                            editButtonText={i18n.t('Edit left side expression')}
-                            validationResource="validationRules/expression/description"
-                        /> */}
+                            <ExpressionBuilderEntry
+                                fieldName="leftSide.expression"
+                                title={i18n.t('Edit numerator expression')}
+                                editButtonText={i18n.t(
+                                    'Edit numerator expression'
+                                )}
+                                setUpButtonText={i18n.t(
+                                    'Set up numerator expression'
+                                )}
+                                validationResource="validationRules/expression/description"
+                                validateSchemaSection={expressionSchemaSection}
+                                validateProperty="expression"
+                            />
                         </StandardFormField>
 
                         <StandardFormField>
@@ -138,7 +150,8 @@ const ValidationRuleFormFields = () => {
                                 type="checkbox"
                                 component={CheckboxFieldFF}
                                 label={i18n.t(
-                                    'Sliding window: validation checks against relative period'
+                                    'Sliding window: validation checks against relative period',
+                                    { nsSeparator: '~:~' }
                                 )}
                             />
                         </StandardFormField>
@@ -162,17 +175,19 @@ const ValidationRuleFormFields = () => {
                             {i18n.t('Right side expression')}
                         </div>
                         <StandardFormField>
-                            <p>
-                                Placeholder for expression builder (right side)
-                            </p>
-                            {/* <ExpressionBuilderWithModalField
-                            fieldName="rightSide.expression"
-                            modalTitle={i18n.t('Edit right side expression')}
-                            editButtonText={i18n.t(
-                                'Edit right side expression'
-                            )}
-                            validationResource="rightSide"
-                        /> */}
+                            <ExpressionBuilderEntry
+                                fieldName="rightSide.expression"
+                                title={i18n.t('Edit denominator expression')}
+                                editButtonText={i18n.t(
+                                    'Edit denominator expression'
+                                )}
+                                setUpButtonText={i18n.t(
+                                    'Set up denominator expression'
+                                )}
+                                validationResource="validationRules/expression/description"
+                                validateSchemaSection={expressionSchemaSection}
+                                validateProperty="expression"
+                            />
                         </StandardFormField>
 
                         <StandardFormField>
@@ -185,7 +200,8 @@ const ValidationRuleFormFields = () => {
                                 type="checkbox"
                                 component={CheckboxFieldFF}
                                 label={i18n.t(
-                                    'Sliding window: validation checks against relative period'
+                                    'Sliding window: validation checks against relative period',
+                                    { nsSeparator: '~:~' }
                                 )}
                                 dataTest="formfields-rightSide.slidingWindow"
                             />

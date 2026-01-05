@@ -35,6 +35,7 @@ export function DefaultEditFormContents({
                             initialValues.displayName !== initialValues.name
                                 ? i18n.t('Name: {{displayName}} (Translated)', {
                                       displayName: initialValues.displayName,
+                                      nsSeparator: '~:~',
                                   })
                                 : undefined
                         }

@@ -168,6 +168,14 @@ const RENDERING_TYPE = {
     CANVAS: i18n.t('Canvas'),
 }
 
+const REPORTING_RATE = {
+    REPORTING_RATE: i18n.t('Reporting rate'),
+    REPORTING_RATE_ON_TIME: i18n.t('Reporting rate on time'),
+    ACTUAL_REPORTS: i18n.t('Actual reports'),
+    ACTUAL_REPORTS_ON_TIME: i18n.t('Actual reports on time'),
+    EXPECTED_REPORTS: i18n.t('Expected reports'),
+}
+
 const PREDICTOR_ORG_UNIT_SOURCE = {
     SELECTED: i18n.t('At selected level(s) only'),
     DESCENDANTS: i18n.t('At selected level(s) and all levels below'),
@@ -194,6 +202,7 @@ const allConstantTranslations: Record<string, string> = {
     ...SEND_STRATEGY,
     ...DATA_SET_NOTIFICATION_TRIGGER,
     ...NOTIFICATION_RECIPIENT,
+    ...REPORTING_RATE,
     ...PREDICTOR_ORG_UNIT_SOURCE,
     ...MISSING_VALUE_STRATEGY,
 }
