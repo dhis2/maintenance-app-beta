@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-08T12:27:17.991Z\n"
-"PO-Revision-Date: 2025-12-08T12:27:17.991Z\n"
+"POT-Creation-Date: 2025-12-23T12:59:10.572Z\n"
+"PO-Revision-Date: 2025-12-23T12:59:10.572Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -230,6 +230,13 @@ msgstr "Required"
 
 msgid "Please enter a GeoJSON value"
 msgstr "Please enter a GeoJSON value"
+
+msgid ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
+msgstr ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
 
 msgid "Exit without saving"
 msgstr "Exit without saving"
@@ -1366,6 +1373,39 @@ msgstr "WeeklyWednesday"
 msgid "Yearly"
 msgstr "Yearly"
 
+msgid "Equal to"
+msgstr "Equal to"
+
+msgid "Not equal to"
+msgstr "Not equal to"
+
+msgid "Greater than"
+msgstr "Greater than"
+
+msgid "Greater than or equal to"
+msgstr "Greater than or equal to"
+
+msgid "Less than"
+msgstr "Less than"
+
+msgid "Less than or equal to"
+msgstr "Less than or equal to"
+
+msgid "Compulsory pair"
+msgstr "Compulsory pair"
+
+msgid "Exclusive pair"
+msgstr "Exclusive pair"
+
+msgid "High"
+msgstr "High"
+
+msgid "Medium"
+msgstr "Medium"
+
+msgid "Low"
+msgstr "Low"
+
 msgid "Collective summary"
 msgstr "Collective summary"
 
@@ -1743,6 +1783,18 @@ msgstr "Validation rule group attribute"
 
 msgid "Visualization attribute"
 msgstr "Visualization attribute"
+
+msgid "Importance"
+msgstr "Importance"
+
+msgid "Instruction"
+msgstr "Instruction"
+
+msgid "Operator"
+msgstr "Operator"
+
+msgid "Skip this rule during form validation"
+msgstr "Skip this rule during form validation"
 
 msgid "Basic information"
 msgstr "Basic information"
@@ -3075,6 +3127,15 @@ msgstr "Save option"
 msgid "Saving an option does not save other changes to the option set"
 msgstr "Saving an option does not save other changes to the option set"
 
+msgid "Option created"
+msgstr "Option created"
+
+msgid "Option updated"
+msgstr "Option updated"
+
+msgid "Option set must be saved before options can be added"
+msgstr "Option set must be saved before options can be added"
+
 msgid "Define options for this option set"
 msgstr "Define options for this option set"
 
@@ -3623,6 +3684,87 @@ msgstr "Sends a notification when a validation rule failed."
 
 msgid "Manage"
 msgstr "Manage"
+
+msgid "Summarize what this {{metadataObjectName}} measures."
+msgstr "Summarize what this {{metadataObjectName}} measures."
+
+msgid "Missing value strategy"
+msgstr "Missing value strategy"
+
+msgid "Output data element"
+msgstr "Output data element"
+
+msgid "Predict according to input category option combo"
+msgstr "Predict according to input category option combo"
+
+msgid "Output category option combo"
+msgstr "Output category option combo"
+
+msgid "Set up the basic information for this predictor."
+msgstr "Set up the basic information for this predictor."
+
+msgid "Output definition"
+msgstr "Output definition"
+
+msgid "Define where predictions will be output"
+msgstr "Define where predictions will be output"
+
+msgid "Available organisation unit levels"
+msgstr "Available organisation unit levels"
+
+msgid "Selected organisation unit levels"
+msgstr "Selected organisation unit levels"
+
+msgid "Filter available organisation unit levels"
+msgstr "Filter available organisation unit levels"
+
+msgid "Filter selected organisation unit levels options"
+msgstr "Filter selected organisation unit levels options"
+
+msgid "Organisation units providing data"
+msgstr "Organisation units providing data"
+
+msgid "Prediction logic"
+msgstr "Prediction logic"
+
+msgid "Define how predictions will be calculated"
+msgstr "Define how predictions will be calculated"
+
+msgid "Sequential sample count"
+msgstr "Sequential sample count"
+
+msgid "Annual sample count"
+msgstr "Annual sample count"
+
+msgid "Sequential skip count"
+msgstr "Sequential skip count"
+
+msgid "Generator"
+msgstr "Generator"
+
+msgid "Label placeholder"
+msgstr "Label placeholder"
+
+msgid "Edit generator expression"
+msgstr "Edit generator expression"
+
+msgid "Sample skip test"
+msgstr "Sample skip test"
+
+msgid "Edit sample skip test expression"
+msgstr "Edit sample skip test expression"
+
+msgid "Predictor Form"
+msgstr "Predictor Form"
+
+msgid "Left side expression"
+msgstr "Left side expression"
+
+msgid "Left side missing value strategy"
+msgstr "Left side missing value strategy"
+
+msgid "Left side sliding window"
+msgstr "Left side sliding window"
 
 msgid "Program Disaggregation Form"
 msgstr "Program Disaggregation Form"
@@ -4474,12 +4616,6 @@ msgstr "Rule name"
 msgid "Rule description"
 msgstr "Rule description"
 
-msgid "Operator"
-msgstr "Operator"
-
-msgid "Importance"
-msgstr "Importance"
-
 msgid "Left side description"
 msgstr "Left side description"
 
@@ -4533,3 +4669,66 @@ msgstr "Validation Rules"
 
 msgid "Choose the validation rules to include in this validation rule group."
 msgstr "Choose the validation rules to include in this validation rule group."
+
+msgid "Never skip"
+msgstr "Never skip"
+
+msgid "Skip if any value is missing"
+msgstr "Skip if any value is missing"
+
+msgid "Skip if all values are missing"
+msgstr "Skip if all values are missing"
+
+msgid "Organisation unit levels to run validation for"
+msgstr "Organisation unit levels to run validation for"
+
+msgid "Set up the basic information for this validation rule."
+msgstr "Set up the basic information for this validation rule."
+
+msgid "Explain the purpose of this validation rule."
+msgstr "Explain the purpose of this validation rule."
+
+msgid "Expressions and output"
+msgstr "Expressions and output"
+
+msgid "Configure the expressions and how they are compared."
+msgstr "Configure the expressions and how they are compared."
+
+msgid "Edit left side expression"
+msgstr "Edit left side expression"
+
+msgid "Comparison operator"
+msgstr "Comparison operator"
+
+msgid "Right side expression"
+msgstr "Right side expression"
+
+msgid "Edit right side expression"
+msgstr "Edit right side expression"
+
+msgid "Instruction to show"
+msgstr "Instruction to show"
+
+msgid "Instructions are shown when validating data in Data Entry and Android apps."
+msgstr "Instructions are shown when validating data in Data Entry and Android apps."
+
+msgid "Changes the appearance of the validation rule output during Data Entry."
+msgstr "Changes the appearance of the validation rule output during Data Entry."
+
+msgid "Configure how, when, and where this validation rule runs."
+msgstr "Configure how, when, and where this validation rule runs."
+
+msgid "Skip this rule during form validation in Data Entry App"
+msgstr "Skip this rule during form validation in Data Entry App"
+
+msgid "Validation Rules Form"
+msgstr "Validation Rules Form"
+
+msgid "Right side missing value strategy"
+msgstr "Right side missing value strategy"
+
+msgid "Right side sliding window"
+msgstr "Right side sliding window"
+
+msgid "Skip form validation"
+msgstr "Skip form validation"

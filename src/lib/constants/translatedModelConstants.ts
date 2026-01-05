@@ -168,6 +168,17 @@ const RENDERING_TYPE = {
     CANVAS: i18n.t('Canvas'),
 }
 
+const PREDICTOR_ORG_UNIT_SOURCE = {
+    SELECTED: i18n.t('At selected level(s) only'),
+    DESCENDANTS: i18n.t('At selected level(s) and all levels below'),
+}
+
+const MISSING_VALUE_STRATEGY = {
+    SKIP_IF_ANY_VALUE_MISSING: i18n.t('Skip if any value is missing'),
+    SKIP_IF_ALL_VALUES_MISSING: i18n.t('Skip if all values are missing'),
+    NEVER_SKIP: i18n.t('Never skip'),
+}
+
 const allConstantTranslations: Record<string, string> = {
     ...AGGREGATION_TYPE,
     ...ANALYTICS_TYPE,
@@ -183,6 +194,8 @@ const allConstantTranslations: Record<string, string> = {
     ...SEND_STRATEGY,
     ...DATA_SET_NOTIFICATION_TRIGGER,
     ...NOTIFICATION_RECIPIENT,
+    ...PREDICTOR_ORG_UNIT_SOURCE,
+    ...MISSING_VALUE_STRATEGY,
 }
 
 export const getConstantTranslation = (constant: string): string => {
