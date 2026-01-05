@@ -108,8 +108,11 @@ export const Component = () => {
                     .join(', ')
                 saveAlert.show({
                     message: i18n.t(
-                        'After changing the tracked entity type attributes, you may need to update these programs: {{programNames}}',
-                        { programNames }
+                        'After changing the tracked entity type attributes, you may need to update the following program(s): {{programNames}}.',
+                        {
+                            programNames,
+                            interpolation: { escapeValue: false },
+                        }
                     ),
                     warning: true,
                 })

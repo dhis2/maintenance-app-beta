@@ -224,56 +224,71 @@ export const EnrollmentDataFormContents = React.memo(
                                 }
                             })}
                             onChange={({ selected }) => {
-                                const tetaAttributes = input.value.filter(
+                                const defaultRenderType = {
+                                    MOBILE: { type: 'DEFAULT' },
+                                    DESKTOP: { type: 'DEFAULT' },
+                                }
+
+                                const selectedIds = new Set(
+                                    selected.map((s) => s.id)
+                                )
+
+                                const missingTETAs = input.value.filter(
                                     (attr) =>
-                                        tetaMap.has(
+                                        tetaIds.has(
+                                            attr.trackedEntityAttribute.id
+                                        ) &&
+                                        !selectedIds.has(
                                             attr.trackedEntityAttribute.id
                                         )
                                 )
 
-                                const pteaSelected = selected.filter(
-                                    (s) => !tetaMap.has(s.id)
+                                const tetaOriginalIndices = new Map(
+                                    missingTETAs.map((teta) => [
+                                        teta.trackedEntityAttribute.id,
+                                        input.value.findIndex(
+                                            (a) =>
+                                                a.trackedEntityAttribute.id ===
+                                                teta.trackedEntityAttribute.id
+                                        ),
+                                    ])
                                 )
 
-                                input.onChange([
-                                    ...tetaAttributes,
-                                    ...pteaSelected.map((s) => {
-                                        const defaultRenderType = {
-                                            MOBILE: { type: 'DEFAULT' },
-                                            DESKTOP: {
-                                                type: 'DEFAULT',
-                                            },
-                                        }
-                                        const alreadySelectedAttribute =
-                                            input.value.find(
-                                                (a) =>
-                                                    a.trackedEntityAttribute
-                                                        .id === s.id
-                                            )
+                                const selectedAttributes = selected.map((s) => {
+                                    const existing = input.value.find(
+                                        (a) =>
+                                            a.trackedEntityAttribute.id === s.id
+                                    )
 
-                                        return alreadySelectedAttribute
-                                            ? {
-                                                  ...alreadySelectedAttribute,
-                                                  renderType:
-                                                      alreadySelectedAttribute.renderType ??
-                                                      defaultRenderType,
-                                              }
-                                            : {
-                                                  trackedEntityAttribute: {
-                                                      id: s.id,
-                                                      displayName:
-                                                          s.displayName,
-                                                  },
-                                                  valueType: s.valueType,
-                                                  unique: s.unique,
-                                                  allowFutureDate: false,
-                                                  mandatory: false,
-                                                  searchable: false,
-                                                  displayInList: false,
-                                                  renderType: defaultRenderType,
-                                              }
-                                    }),
-                                ])
+                                    return (
+                                        existing || {
+                                            trackedEntityAttribute: {
+                                                id: s.id,
+                                                displayName: s.displayName,
+                                            },
+                                            valueType: s.valueType,
+                                            unique: s.unique,
+                                            allowFutureDate: false,
+                                            mandatory: false,
+                                            searchable: false,
+                                            displayInList: false,
+                                            renderType: defaultRenderType,
+                                        }
+                                    )
+                                })
+
+                                const result = [...selectedAttributes]
+                                missingTETAs.forEach((teta) => {
+                                    const originalIndex =
+                                        tetaOriginalIndices.get(
+                                            teta.trackedEntityAttribute.id
+                                        )
+                                    if (originalIndex) {
+                                        result.splice(originalIndex, 0, teta)
+                                    }
+                                })
+
+                                input.onChange(result)
                                 input.onBlur()
                             }}
                             leftHeader={i18n.t('Available attributes')}
@@ -282,7 +297,7 @@ export const EnrollmentDataFormContents = React.memo(
                                 'Filter available attributes'
                             )}
                             filterPlaceholderPicked={i18n.t(
-                                'Filter attributes'
+                                'Filter selected attributes'
                             )}
                             maxSelections={Infinity}
                             query={{
