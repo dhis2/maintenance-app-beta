@@ -32,10 +32,6 @@ type RenderingOptionsResponse = {
     valueType: string
 }[]
 
-const TETA_INHERITED_TOOLTIP = i18n.t(
-    'This setting is inherited from the tracked entity type and cannot be changed'
-)
-
 const RenderingOptionsSingleSelect = ({
     attribute,
     index,
@@ -171,6 +167,12 @@ export const EnrollmentDataFormContents = React.memo(
                         existingProgramAttributesMap.get(
                             tetaAttribute.trackedEntityAttribute.id
                         )
+                    if (existingProgramAttribute && tetaAttribute.mandatory) {
+                        return {
+                            ...existingProgramAttribute,
+                            mandatory: true,
+                        }
+                    }
                     return existingProgramAttribute ?? tetaAttribute
                 }
             )
@@ -341,12 +343,9 @@ export const EnrollmentDataFormContents = React.memo(
                                     attribute.trackedEntityAttribute.id
                                 )
                                 const isTETA = !!teta
+                                const isMandatoryDisabled =
+                                    teta?.mandatory === true
 
-                                const isTetaFieldEnabled = (
-                                    field: keyof ProgramTrackedEntityAttribute
-                                ) => {
-                                    return teta?.[field] !== true
-                                }
                                 return (
                                     <TableRow key={attribute.id}>
                                         <TableCell>
@@ -361,50 +360,30 @@ export const EnrollmentDataFormContents = React.memo(
                                         </TableCell>
                                         {programHasDateAttributes && (
                                             <TableCell>
-                                                <TooltipWrapper
-                                                    condition={
-                                                        !isTetaFieldEnabled(
-                                                            'allowFutureDate'
-                                                        )
+                                                <FieldRFF
+                                                    component={CheckboxFieldFF}
+                                                    name={`programTrackedEntityAttributes[${index}].allowFutureDate`}
+                                                    type="checkbox"
+                                                    disabled={
+                                                        attribute?.valueType !==
+                                                        'DATE'
                                                     }
-                                                    content={
-                                                        TETA_INHERITED_TOOLTIP
-                                                    }
-                                                >
-                                                    <FieldRFF
-                                                        component={
-                                                            CheckboxFieldFF
-                                                        }
-                                                        name={`programTrackedEntityAttributes[${index}].allowFutureDate`}
-                                                        type="checkbox"
-                                                        disabled={
-                                                            attribute?.valueType !==
-                                                                'DATE' ||
-                                                            !isTetaFieldEnabled(
-                                                                'allowFutureDate'
-                                                            )
-                                                        }
-                                                    />
-                                                </TooltipWrapper>
+                                                />
                                             </TableCell>
                                         )}
                                         <TableCell>
                                             <TooltipWrapper
-                                                condition={
-                                                    !isTetaFieldEnabled(
-                                                        'mandatory'
-                                                    )
-                                                }
-                                                content={TETA_INHERITED_TOOLTIP}
+                                                condition={isMandatoryDisabled}
+                                                content={i18n.t(
+                                                    'This attribute is marked as mandatory at the tracked entity type level and cannot be changed here'
+                                                )}
                                             >
                                                 <FieldRFF
                                                     component={CheckboxFieldFF}
                                                     name={`programTrackedEntityAttributes[${index}].mandatory`}
                                                     type="checkbox"
                                                     disabled={
-                                                        !isTetaFieldEnabled(
-                                                            'mandatory'
-                                                        )
+                                                        isMandatoryDisabled
                                                     }
                                                 />
                                             </TooltipWrapper>
@@ -412,98 +391,51 @@ export const EnrollmentDataFormContents = React.memo(
                                         <TableCell>
                                             {attribute.trackedEntityAttribute
                                                 .unique ? (
-                                                <CheckboxField
-                                                    name="searchable"
-                                                    checked
-                                                    disabled
-                                                />
-                                            ) : (
                                                 <TooltipWrapper
-                                                    condition={
-                                                        !isTetaFieldEnabled(
-                                                            'searchable'
-                                                        )
-                                                    }
-                                                    content={
-                                                        TETA_INHERITED_TOOLTIP
-                                                    }
+                                                    condition={true}
+                                                    content={i18n.t(
+                                                        'Unique attributes are always searchable'
+                                                    )}
                                                 >
-                                                    <FieldRFF
-                                                        component={
-                                                            CheckboxFieldFF
-                                                        }
-                                                        name={`programTrackedEntityAttributes[${index}].searchable`}
-                                                        type="checkbox"
-                                                        disabled={
-                                                            attribute
-                                                                .trackedEntityAttribute
-                                                                .unique ||
-                                                            !isTetaFieldEnabled(
-                                                                'searchable'
-                                                            )
-                                                        }
+                                                    <CheckboxField
+                                                        name="searchable"
+                                                        checked
+                                                        disabled
                                                     />
                                                 </TooltipWrapper>
+                                            ) : (
+                                                <FieldRFF
+                                                    component={CheckboxFieldFF}
+                                                    name={`programTrackedEntityAttributes[${index}].searchable`}
+                                                    type="checkbox"
+                                                    disabled={
+                                                        attribute
+                                                            .trackedEntityAttribute
+                                                            .unique
+                                                    }
+                                                />
                                             )}
                                         </TableCell>
                                         <TableCell>
-                                            <TooltipWrapper
-                                                condition={
-                                                    !isTetaFieldEnabled(
-                                                        'displayInList'
-                                                    )
-                                                }
-                                                content={TETA_INHERITED_TOOLTIP}
-                                            >
-                                                <FieldRFF
-                                                    component={CheckboxFieldFF}
-                                                    name={`programTrackedEntityAttributes[${index}].displayInList`}
-                                                    type="checkbox"
-                                                    disabled={
-                                                        !isTetaFieldEnabled(
-                                                            'displayInList'
-                                                        )
-                                                    }
-                                                />
-                                            </TooltipWrapper>
+                                            <FieldRFF
+                                                component={CheckboxFieldFF}
+                                                name={`programTrackedEntityAttributes[${index}].displayInList`}
+                                                type="checkbox"
+                                            />
                                         </TableCell>
                                         <TableCell>
-                                            <TooltipWrapper
-                                                condition={
-                                                    !!teta?.renderType?.DESKTOP
-                                                        ?.type
-                                                }
-                                                content={TETA_INHERITED_TOOLTIP}
-                                            >
-                                                <RenderingOptionsSingleSelect
-                                                    attribute={attribute}
-                                                    index={index}
-                                                    device="DESKTOP"
-                                                    disabled={
-                                                        !!teta?.renderType
-                                                            ?.DESKTOP?.type
-                                                    }
-                                                />
-                                            </TooltipWrapper>
+                                            <RenderingOptionsSingleSelect
+                                                attribute={attribute}
+                                                index={index}
+                                                device="DESKTOP"
+                                            />
                                         </TableCell>
                                         <TableCell>
-                                            <TooltipWrapper
-                                                condition={
-                                                    !!teta?.renderType?.MOBILE
-                                                        ?.type
-                                                }
-                                                content={TETA_INHERITED_TOOLTIP}
-                                            >
-                                                <RenderingOptionsSingleSelect
-                                                    attribute={attribute}
-                                                    index={index}
-                                                    device="MOBILE"
-                                                    disabled={
-                                                        !!teta?.renderType
-                                                            ?.MOBILE?.type
-                                                    }
-                                                />
-                                            </TooltipWrapper>
+                                            <RenderingOptionsSingleSelect
+                                                attribute={attribute}
+                                                index={index}
+                                                device="MOBILE"
+                                            />
                                         </TableCell>
                                     </TableRow>
                                 )
