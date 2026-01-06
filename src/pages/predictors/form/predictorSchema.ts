@@ -50,8 +50,8 @@ export const predictorFormSchema = predictorBaseSchema
         }),
         sampleSkipTest: z
             .object({
-                expression: z.string(),
-                description: z.string(),
+                expression: z.string().optional(),
+                description: z.string().optional(),
                 missingValueStrategy: z
                     .nativeEnum(Expression.missingValueStrategy)
                     .default(Expression.missingValueStrategy.NEVER_SKIP)

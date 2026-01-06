@@ -143,22 +143,17 @@ export const PredictorFormFields = () => {
                     />
                 </StandardFormField>
                 <ExpressionFields
-                    fieldName={'generator'}
-                    expressionName={i18n.t('Generator')}
-                    expressionLabel={i18n.t('Label placeholder')}
-                    expressionEditText={i18n.t('Edit generator expression')}
-                    validationResource="predictors/expression/description"
+                    fieldName="generator"
+                    objectName={i18n.t('generator')}
+                    validationResource={'predictors/expression/description'}
                     showMissingValueStrategy={true}
                 />
                 <ExpressionFields
-                    fieldName={'sampleSkipTest'}
-                    expressionName={i18n.t('Sample skip test')}
-                    expressionLabel={i18n.t('Label placeholder')}
-                    expressionEditText={i18n.t(
-                        'Edit sample skip test expression'
-                    )}
-                    validationResource="predictors/expression/description"
+                    fieldName="sampleSkipTest"
+                    objectName={i18n.t('sample skip test')}
+                    validationResource={'predictors/expression/description'}
                     showMissingValueStrategy={false}
+                    clearable={true}
                 />
             </SectionedFormSection>
         </SectionedFormSections>

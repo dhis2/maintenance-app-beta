@@ -11,3 +11,7 @@
 .paddedContainerContainer {
     margin-block-end: var(--spacers-dp16);
 }
+
+.expressionContainer {
+    margin-block-end: var(--spacers-dp16);
+}

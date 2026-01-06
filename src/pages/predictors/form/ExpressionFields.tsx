@@ -1,39 +1,63 @@
 import i18n from '@dhis2/d2-i18n'
-import { InputFieldFF, SingleSelectFieldFF } from '@dhis2/ui'
+import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
-import { StandardFormField } from '../../../components'
-import { ExpressionBuilderWithModalField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderWithModalField'
+import {
+    StandardFormField,
+    ExpressionBuilderEntry,
+    MissingValueStrategyField,
+} from '../../../components'
 import { PaddedContainer } from '../../../components/metadataFormControls/ExpressionBuilder/PaddedContainer'
-import { getConstantTranslation, SchemaName, useSchema } from '../../../lib'
+import { SchemaName, SchemaSection } from '../../../lib'
 import css from './PredictorFormFields.module.css'
+
+const expressionSchemaSection = {
+    name: 'expression' as SchemaName,
+    namePlural: 'expressions',
+} as SchemaSection
 
 export const ExpressionFields = ({
     fieldName,
-    expressionName,
-    expressionLabel,
-    expressionEditText,
+    objectName,
     validationResource,
     showMissingValueStrategy,
+    clearable = false,
 }: {
     fieldName: string
-    expressionName: string
-    expressionLabel: string
-    expressionEditText: string
+    objectName: string
     validationResource: string
     showMissingValueStrategy: boolean
+    clearable?: boolean
 }) => {
-    const expressionSchema = useSchema('expression' as SchemaName)
     return (
-        <div className={css.paddedContainerContainer}>
+        <div className={css.expressionContainer}>
             <PaddedContainer>
-                <div className={css.subtitle}>{expressionName}</div>
-                <ExpressionBuilderWithModalField
-                    fieldName={`${fieldName}.expression`}
-                    modalTitle={expressionLabel}
-                    editButtonText={expressionEditText}
-                    validationResource={validationResource}
-                />
+                <div className={css.subtitle}>
+                    {objectName
+                        ? objectName.charAt(0).toUpperCase() +
+                          objectName.slice(1)
+                        : ''}
+                </div>
+                <StandardFormField>
+                    <ExpressionBuilderEntry
+                        fieldName={`${fieldName}.expression`}
+                        title={i18n.t('Edit {{objectName}} expression', {
+                            objectName,
+                        })}
+                        editButtonText={i18n.t(
+                            'Edit {{objectName}} expression',
+                            { objectName }
+                        )}
+                        setUpButtonText={i18n.t(
+                            'Set up {{objectName}} expression',
+                            { objectName }
+                        )}
+                        validationResource={validationResource}
+                        validateSchemaSection={expressionSchemaSection}
+                        validateProperty="expression"
+                        clearable={clearable}
+                    />
+                </StandardFormField>
                 <StandardFormField>
                     <FieldRFF<string | undefined>
                         component={InputFieldFF}
@@ -42,26 +66,15 @@ export const ExpressionFields = ({
                         dataTest={`formfields-denominatorDescription`}
                         label={i18n.t('Description')}
                         helpText={i18n.t(
-                            'Summarize what this {{metadataObjectName}} measures.',
-                            { metadataObjectName: expressionName.toLowerCase() }
+                            'Summarize what this {{objectName}} measures.',
+                            { objectName }
                         )}
+                        // required={true}
                     />
                 </StandardFormField>
                 {showMissingValueStrategy && (
                     <StandardFormField>
-                        <FieldRFF
-                            component={SingleSelectFieldFF}
-                            inputWidth="400px"
-                            clearable
-                            name={`${fieldName}.missingValueStrategy`}
-                            label={i18n.t('Missing value strategy')}
-                            options={expressionSchema?.properties?.missingValueStrategy?.constants?.map(
-                                (opt) => ({
-                                    value: opt,
-                                    label: getConstantTranslation(opt),
-                                })
-                            )}
-                        />
+                        <MissingValueStrategyField objectName="generator" />
                     </StandardFormField>
                 )}
             </PaddedContainer>

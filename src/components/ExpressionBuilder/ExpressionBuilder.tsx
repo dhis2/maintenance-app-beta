@@ -208,6 +208,7 @@ export const ExpressionBuilder = ({
                                     expressionInput.onChange(
                                         expressionRef?.current?.value ?? ''
                                     )
+                                    expressionInput.onBlur()
                                     onClose?.()
                                 } else {
                                     // if invalid, the ValidationBox will display warning

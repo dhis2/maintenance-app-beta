@@ -2,20 +2,20 @@ import i18n from '@dhis2/d2-i18n'
 import { RadioFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { useField } from 'react-final-form'
-import { HorizontalFieldGroup } from '../../../components'
+import { HorizontalFieldGroup } from '..'
 
 export function MissingValueStrategyField({
-    side,
-}: Readonly<{ side: 'leftSide' | 'rightSide' }>) {
-    const neverSkipField = useField(`${side}.missingValueStrategy`, {
+    objectName,
+}: Readonly<{ objectName: 'leftSide' | 'rightSide' | 'generator' }>) {
+    const neverSkipField = useField(`${objectName}.missingValueStrategy`, {
         type: 'radio',
         value: 'NEVER_SKIP',
     })
-    const skipIfAnyField = useField(`${side}.missingValueStrategy`, {
+    const skipIfAnyField = useField(`${objectName}.missingValueStrategy`, {
         type: 'radio',
         value: 'SKIP_IF_ANY_VALUE_MISSING',
     })
-    const skipIfAllField = useField(`${side}.missingValueStrategy`, {
+    const skipIfAllField = useField(`${objectName}.missingValueStrategy`, {
         type: 'radio',
         value: 'SKIP_IF_ALL_VALUES_MISSING',
     })
@@ -23,7 +23,7 @@ export function MissingValueStrategyField({
     return (
         <HorizontalFieldGroup
             label={i18n.t('Missing value strategy')}
-            dataTest={`formfields-missingValueStategy-${side}`}
+            dataTest={`formfields-missingValueStategy-${objectName}`}
         >
             <RadioFieldFF
                 label={i18n.t('Never skip')}

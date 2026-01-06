@@ -7,10 +7,7 @@ import {
     ModelSingleSelectFormField,
     useRefreshModelSingleSelect,
 } from '../../../components/metadataFormControls/ModelSingleSelect'
-import {
-    DEFAULT_CATEGORY_COMBO,
-    DEFAULT_CATEGORY_OPTION_COMBO,
-} from '../../../lib'
+import { DEFAULT_CATEGORY_OPTION_COMBO } from '../../../lib'
 
 type OutputResponse = {
     id: string
@@ -69,7 +66,7 @@ export const OperatorFields = () => {
                         <ModelSingleSelectFormField
                             inputWidth="400px"
                             showNoValueOption={{
-                                value: DEFAULT_CATEGORY_COMBO.id,
+                                value: DEFAULT_CATEGORY_OPTION_COMBO.id,
                                 label: i18n.t(
                                     'Predict according to input category option combo'
                                 ),

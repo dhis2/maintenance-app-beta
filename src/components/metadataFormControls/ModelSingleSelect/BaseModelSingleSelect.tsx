@@ -48,11 +48,19 @@ export const BaseModelSingleSelect = <
             ([, value]) => toDisplayOption(value)
         )
         if (showNoValueOption) {
-            allSingleSelectOptions.unshift({
-                value: '',
-                label: i18n.t('<No value>'),
-                disabled: undefined,
-            })
+            if (typeof showNoValueOption === 'object') {
+                allSingleSelectOptions.unshift({
+                    value: '',
+                    label: showNoValueOption.label,
+                    disabled: undefined,
+                })
+            } else {
+                allSingleSelectOptions.unshift({
+                    value: '',
+                    label: i18n.t('<No value>'),
+                    disabled: undefined,
+                })
+            }
         }
 
         return {

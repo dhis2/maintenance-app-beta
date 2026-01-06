@@ -28,7 +28,7 @@ const fieldFilters = [
     'description',
     'periodType',
     'output',
-    'outputCombo',
+    'outputCombo[id,displayName,categoryCombo[id,displayName,isDefault]]',
     'organisationUnitDescendants',
     'sequentialSampleCount',
     'annualSampleCount',

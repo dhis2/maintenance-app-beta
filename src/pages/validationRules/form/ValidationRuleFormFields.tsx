@@ -11,6 +11,7 @@ import {
     CodeField,
     CustomAttributesSection,
     DescriptionField,
+    ExpressionBuilderEntry,
     HorizontalFieldGroup,
     NameField,
     SectionedFormSection,
@@ -19,8 +20,8 @@ import {
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
+    MissingValueStrategyField,
 } from '../../../components'
-import { ExpressionBuilderEntry } from '../../../components/ExpressionBuilder'
 import { PaddedContainer } from '../../../components/metadataFormControls/ExpressionBuilder/PaddedContainer'
 import {
     getConstantTranslation,
@@ -32,7 +33,6 @@ import {
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
 import { ValidationRuleFormDescriptor } from './formDescriptor'
-import { MissingValueStrategyField } from './MissingValueStrategyField'
 import { OrganisationUnitLevelsField } from './OrganisationUnitLevelsField'
 import { PeriodTypeField } from './PeriodTypeField'
 import css from './ValidationRuleFormFields.module.css'
@@ -140,7 +140,7 @@ const ValidationRuleFormFields = () => {
                         </StandardFormField>
 
                         <StandardFormField>
-                            <MissingValueStrategyField side="leftSide" />
+                            <MissingValueStrategyField objectName="leftSide" />
                         </StandardFormField>
 
                         <StandardFormField>
@@ -191,7 +191,7 @@ const ValidationRuleFormFields = () => {
                         </StandardFormField>
 
                         <StandardFormField>
-                            <MissingValueStrategyField side="rightSide" />
+                            <MissingValueStrategyField objectName="rightSide" />
                         </StandardFormField>
 
                         <StandardFormField>
