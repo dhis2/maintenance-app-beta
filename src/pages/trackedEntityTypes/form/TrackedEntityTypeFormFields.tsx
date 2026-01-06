@@ -9,6 +9,7 @@ import {
     SectionedFormSection,
     CustomAttributesSection,
     DescriptionField,
+    FeatureTypeField,
     NameField,
     ShortNameField,
 } from '../../../components'
@@ -66,6 +67,10 @@ export function TrackedEntityTypeFormFields() {
                             'Explain the purpose of this tracked entity type.'
                         )}
                     />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <FeatureTypeField />
                 </StandardFormField>
 
                 <StandardFormField>

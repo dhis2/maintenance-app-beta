@@ -1,6 +1,6 @@
 {
     "name": "maintenance-app",
-    "version": "0.102.0",
+    "version": "0.106.0",
     "description": "",
     "license": "BSD-3-Clause",
     "private": true,
@@ -38,7 +38,7 @@
         "whatwg-fetch": "^3.6.17"
     },
     "dependencies": {
-        "@dhis2/app-runtime": "^3.12.0",
+        "@dhis2/app-runtime": "3.14.7",
         "@dhis2/multi-calendar-dates": "^2.1.2",
         "@dhis2/ui": "^10.8.1",
         "@tanstack/react-query": "4",
@@ -61,6 +61,7 @@
         "zustand": "^4.4.0"
     },
     "resolutions": {
-        "@dhis2/ui": "^10.8.1"
+        "@dhis2/ui": "^10.8.1",
+        "@dhis2/app-runtime": "3.14.7"
     }
 }

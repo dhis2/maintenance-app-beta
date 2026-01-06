@@ -91,7 +91,7 @@ const RunNowModal = ({
                 options: { success: true },
             })
             onClose()
-        } catch (error: unknown) {
+        } catch (error) {
             alert.show({
                 message: parseErrorResponse(error).message,
                 error: true,
@@ -117,7 +117,6 @@ const RunNowModal = ({
                         format="YYYY-MM-DD"
                         calendar={calendar as CalendarInputProps['calendar']}
                         locale={locale}
-                        timeZone="utc"
                         clearable
                     />
                 </div>
@@ -131,7 +130,6 @@ const RunNowModal = ({
                         format="YYYY-MM-DD"
                         calendar={calendar as CalendarInputProps['calendar']}
                         locale={locale}
-                        timeZone="utc"
                         clearable
                     />
                 </div>

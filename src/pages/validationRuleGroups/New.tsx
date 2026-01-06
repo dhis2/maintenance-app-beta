@@ -13,7 +13,6 @@ export const Component = () => {
             onSubmit={useOnSubmitNew({ section })}
             initialValues={initialValues}
             validate={validate}
-            includeAttributes={false}
         >
             <DefaultNewFormContents section={section}>
                 <ValidationRuleGroupsFormFields />

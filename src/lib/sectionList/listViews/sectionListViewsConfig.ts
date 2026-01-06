@@ -839,10 +839,26 @@ export const modelListViewsConfig = {
     },
     validationRule: {
         columns: {
-            available: [],
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Importance'), path: 'importance' },
+                { label: i18n.t('Period type'), path: 'periodType' },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'description',
+                DESCRIPTORS.formName,
+                { label: i18n.t('Instruction'), path: 'instruction' },
+                { label: i18n.t('Operator'), path: 'operator' },
+                {
+                    label: i18n.t('Skip this rule during form validation'),
+                    path: 'skipFormValidation',
+                },
+            ],
         },
         filters: {
-            default: ['validationRuleGroup'],
+            default: [],
         },
     },
     validationRuleGroup: {
