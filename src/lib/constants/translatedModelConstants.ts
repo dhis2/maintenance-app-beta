@@ -176,6 +176,11 @@ const REPORTING_RATE = {
     EXPECTED_REPORTS: i18n.t('Expected reports'),
 }
 
+const ORGANISATION_UNIT_DESCENDANTS = {
+    DESCENDANTS: i18n.t('Descendants'),
+    SELECTED: i18n.t('Selected'),
+}
+
 const allConstantTranslations: Record<string, string> = {
     ...AGGREGATION_TYPE,
     ...ANALYTICS_TYPE,
@@ -192,6 +197,7 @@ const allConstantTranslations: Record<string, string> = {
     ...DATA_SET_NOTIFICATION_TRIGGER,
     ...NOTIFICATION_RECIPIENT,
     ...REPORTING_RATE,
+    ...ORGANISATION_UNIT_DESCENDANTS,
 }
 
 export const getConstantTranslation = (constant: string): string => {
