@@ -1,6 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
 import {
-    CheckboxField,
     CheckboxFieldFF,
     Field,
     SingleSelectFieldFF,
@@ -448,21 +447,16 @@ export const EnrollmentDataFormContents = React.memo(
                                             </TooltipWrapper>
                                         </TableCell>
                                         <TableCell>
-                                            {attribute.trackedEntityAttribute
-                                                .unique ? (
-                                                <TooltipWrapper
-                                                    condition={true}
-                                                    content={i18n.t(
-                                                        'Unique attributes are always searchable'
-                                                    )}
-                                                >
-                                                    <CheckboxField
-                                                        name="searchable"
-                                                        checked
-                                                        disabled
-                                                    />
-                                                </TooltipWrapper>
-                                            ) : (
+                                            <TooltipWrapper
+                                                condition={
+                                                    attribute
+                                                        .trackedEntityAttribute
+                                                        .unique
+                                                }
+                                                content={i18n.t(
+                                                    'Unique attributes are always searchable'
+                                                )}
+                                            >
                                                 <FieldRFF
                                                     component={CheckboxFieldFF}
                                                     name={`programTrackedEntityAttributes[${index}].searchable`}
@@ -472,8 +466,15 @@ export const EnrollmentDataFormContents = React.memo(
                                                             .trackedEntityAttribute
                                                             .unique
                                                     }
+                                                    format={(value) =>
+                                                        attribute
+                                                            .trackedEntityAttribute
+                                                            .unique
+                                                            ? true
+                                                            : value
+                                                    }
                                                 />
-                                            )}
+                                            </TooltipWrapper>
                                         </TableCell>
                                         <TableCell>
                                             <FieldRFF
