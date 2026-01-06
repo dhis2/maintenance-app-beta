@@ -1,10 +1,10 @@
 import { FetchError } from '@dhis2/app-runtime'
 import { faker } from '@faker-js/faker'
 import { waitForElementToBeRemoved } from '@testing-library/react'
-import { ModelSchemas } from '../lib'
+import { ModelSchemas, useSystemSettingsStore } from '../lib'
 import { useSchemaStore } from '../lib/schemas/schemaStore'
 import { useCurrentUserStore } from '../lib/user/currentUserStore'
-import { ModelSection } from '../types'
+import { ModelSection, SystemSettings } from '../types'
 import type { OrganisationUnit } from '../types/generated'
 import { testOrgUnit } from './builders'
 export const error404 = new FetchError({
@@ -39,6 +39,9 @@ export const generateRenderer =
             email: faker.internet.email(),
             settings: {},
         })
+        useSystemSettingsStore
+            .getState()
+            .setSystemSettings({} as SystemSettings)
 
         const { screen, ...rest } = renderer(routeOptions, renderOptions)
         if (mockSchema !== undefined) {

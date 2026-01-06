@@ -3,6 +3,7 @@ import { Button } from '@dhis2/ui'
 import React from 'react'
 import { useFormState } from 'react-final-form'
 import {
+    CustomAttributesSection,
     DrawerPortal,
     NameField,
     SectionedFormSection,
@@ -11,6 +12,7 @@ import {
     StandardFormSectionTitle,
 } from '../../../../components'
 import {
+    SCHEMA_SECTIONS,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../../lib'
@@ -109,6 +111,10 @@ export const StageFormContents = ({
                 </Button>
                 <div style={{ minHeight: 600 }} />
             </SectionedFormSection>
+            <CustomAttributesSection
+                schemaSection={SCHEMA_SECTIONS.programStage}
+                sectionedLayout
+            />
         </SectionedFormSections>
     )
 }
