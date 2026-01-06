@@ -203,6 +203,7 @@ export const EnrollmentDataFormContents = React.memo(
             previousTetaIdsRef.current = tetaIds
 
             input.onChange([...convertedTetas, ...petas])
+            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [trackedEntityTypeField.input.value?.id, tetaIdsString])
 
         const programHasDateAttributes = input.value.some(
@@ -269,16 +270,6 @@ export const EnrollmentDataFormContents = React.memo(
                                     selected.map((s) => s.id)
                                 )
 
-                                const missingTetas = input.value.filter(
-                                    (attr) =>
-                                        tetaIds.has(
-                                            attr.trackedEntityAttribute.id
-                                        ) &&
-                                        !selectedIds.has(
-                                            attr.trackedEntityAttribute.id
-                                        )
-                                )
-
                                 const selectedAttributes = selected.map((s) => {
                                     const existing = existingAttributesMap.get(
                                         s.id
@@ -286,6 +277,7 @@ export const EnrollmentDataFormContents = React.memo(
                                     if (existing) {
                                         return existing
                                     }
+
                                     return {
                                         trackedEntityAttribute: {
                                             id: s.id,
@@ -294,37 +286,46 @@ export const EnrollmentDataFormContents = React.memo(
                                         valueType: s.valueType,
                                         unique: s.unique,
                                         allowFutureDate: false,
-                                        mandatory: tetaIds.has(s.id)
-                                            ? tetaMap.get(s.id)?.mandatory ||
-                                              false
-                                            : false,
+                                        mandatory: false,
                                         searchable: false,
                                         displayInList: false,
                                         renderType: defaultRenderType,
                                     }
                                 })
 
+                                // temperary functionality to re-insert TETAs that user tried to remove
+                                // Should be removed if transfer arrow buttons gets conditionally disabling
+                                const missingTetas = input.value
+                                    .filter(
+                                        (attr) =>
+                                            tetaIds.has(
+                                                attr.trackedEntityAttribute.id
+                                            ) &&
+                                            !selectedIds.has(
+                                                attr.trackedEntityAttribute.id
+                                            )
+                                    )
+                                    .map((teta) => ({
+                                        teta: {
+                                            ...teta,
+                                            renderType:
+                                                teta.renderType ||
+                                                defaultRenderType,
+                                        },
+                                        index:
+                                            tetaOriginalIndices.get(
+                                                teta.trackedEntityAttribute.id
+                                            ) ?? Infinity,
+                                    }))
+                                    .sort((a, b) => a.index - b.index)
+
                                 const result = [...selectedAttributes]
-                                missingTetas.forEach((teta) => {
-                                    const originalIndex =
-                                        tetaOriginalIndices.get(
-                                            teta.trackedEntityAttribute.id
-                                        )
-                                    if (originalIndex !== undefined) {
-                                        result.splice(
-                                            Math.min(
-                                                originalIndex,
-                                                result.length
-                                            ),
-                                            0,
-                                            {
-                                                ...teta,
-                                                renderType:
-                                                    teta.renderType ||
-                                                    defaultRenderType,
-                                            }
-                                        )
-                                    }
+                                missingTetas.forEach(({ teta, index }) => {
+                                    result.splice(
+                                        Math.min(index, result.length),
+                                        0,
+                                        teta
+                                    )
                                 })
 
                                 input.onChange(result)
