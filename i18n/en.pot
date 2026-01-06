@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-05T14:03:48.980Z\n"
-"PO-Revision-Date: 2026-01-05T14:03:48.980Z\n"
+"POT-Creation-Date: 2026-01-06T16:12:18.454Z\n"
+"PO-Revision-Date: 2026-01-06T16:12:18.454Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -231,6 +231,13 @@ msgstr "Required"
 msgid "Please enter a GeoJSON value"
 msgstr "Please enter a GeoJSON value"
 
+msgid ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
+msgstr ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
+
 msgid "Exit without saving"
 msgstr "Exit without saving"
 
@@ -285,6 +292,9 @@ msgstr ""
 
 msgid "Description"
 msgstr "Description"
+
+msgid "Feature type"
+msgstr "Feature type"
 
 msgid ""
 "This name is already in use. Consider updating the name to avoid a "
@@ -1543,9 +1553,6 @@ msgstr "Zero is significant"
 msgid "Enable tracked entity instance audit log"
 msgstr "Enable tracked entity instance audit log"
 
-msgid "Feature type"
-msgstr "Feature type"
-
 msgid "Program type"
 msgstr "Program type"
 
@@ -1776,6 +1783,18 @@ msgstr "Validation rule group attribute"
 
 msgid "Visualization attribute"
 msgstr "Visualization attribute"
+
+msgid "Importance"
+msgstr "Importance"
+
+msgid "Instruction"
+msgstr "Instruction"
+
+msgid "Operator"
+msgstr "Operator"
+
+msgid "Skip this rule during form validation"
+msgstr "Skip this rule during form validation"
 
 msgid "Basic information"
 msgstr "Basic information"
@@ -3108,6 +3127,15 @@ msgstr "Save option"
 msgid "Saving an option does not save other changes to the option set"
 msgstr "Saving an option does not save other changes to the option set"
 
+msgid "Option created"
+msgstr "Option created"
+
+msgid "Option updated"
+msgstr "Option updated"
+
+msgid "Option set must be saved before options can be added"
+msgstr "Option set must be saved before options can be added"
+
 msgid "Define options for this option set"
 msgstr "Define options for this option set"
 
@@ -3975,8 +4003,8 @@ msgstr "Desktop Display"
 msgid "Mobile Display"
 msgstr "Mobile Display"
 
-msgid "This attribute is marked asrequired at the tracked entity type level"
-msgstr "This attribute is marked asrequired at the tracked entity type level"
+msgid "This attribute is marked as required at the tracked entity type level"
+msgstr "This attribute is marked as required at the tracked entity type level"
 
 msgid "Unique attributes are always searchable"
 msgstr "Unique attributes are always searchable"
@@ -4512,12 +4540,6 @@ msgstr "Rule name"
 
 msgid "Rule description"
 msgstr "Rule description"
-
-msgid "Operator"
-msgstr "Operator"
-
-msgid "Importance"
-msgstr "Importance"
 
 msgid "Left side description"
 msgstr "Left side description"
