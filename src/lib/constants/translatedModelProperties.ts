@@ -55,6 +55,7 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     program: i18n.t('Program'),
     programIndicator: i18n.t('Program indicator'),
     programIndicatorGroup: i18n.t('Program indicator group'),
+    programRuleVariableSourceType: i18n.t('Source type'),
     referral: i18n.t('Referral'),
     sharing: i18n.t('Sharing'),
     shortName: i18n.t('Short name'),

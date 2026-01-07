@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-07T10:21:21.509Z\n"
-"PO-Revision-Date: 2026-01-07T10:21:21.509Z\n"
+"POT-Creation-Date: 2026-01-07T12:53:40.872Z\n"
+"PO-Revision-Date: 2026-01-07T12:53:40.872Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -833,6 +833,30 @@ msgstr "Program indicator"
 msgid "Program indicator group"
 msgstr "Program indicator group"
 
+msgid "Data element in newest event in program stage"
+msgstr "Data element in newest event in program stage"
+
+msgid "Data element in newest event in program"
+msgstr "Data element in newest event in program"
+
+msgid "Data element from current event"
+msgstr "Data element from current event"
+
+msgid "Data element from previous event"
+msgstr "Data element from previous event"
+
+msgid "Calculated value"
+msgstr "Calculated value"
+
+msgid "Tracked entity attribute"
+msgstr "Tracked entity attribute"
+
+msgid "Select source type"
+msgstr "Select source type"
+
+msgid "All source types"
+msgstr "All source types"
+
 msgid "Tracker program"
 msgstr "Tracker program"
 
@@ -1036,9 +1060,6 @@ msgstr "Organisation unit level"
 
 msgid "Organisation unit levels"
 msgstr "Organisation unit levels"
-
-msgid "Tracked entity attribute"
-msgstr "Tracked entity attribute"
 
 msgid "Tracked entity attributes"
 msgstr "Tracked entity attributes"
@@ -1568,6 +1589,12 @@ msgstr "Actual reports on time"
 msgid "Expected reports"
 msgstr "Expected reports"
 
+msgid "Descendants"
+msgstr "Descendants"
+
+msgid "Selected"
+msgstr "Selected"
+
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
 
@@ -1742,6 +1769,12 @@ msgstr "Program name"
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
 
+msgid "Source type"
+msgstr "Source type"
+
+msgid "Use code for option set"
+msgstr "Use code for option set"
+
 msgid "Unique"
 msgstr "Unique"
 
@@ -1885,6 +1918,24 @@ msgstr "Operator"
 
 msgid "Skip this rule during form validation"
 msgstr "Skip this rule during form validation"
+
+msgid "Output"
+msgstr "Output"
+
+msgid "Output option combo"
+msgstr "Output option combo"
+
+msgid "Sequential sample count"
+msgstr "Sequential sample count"
+
+msgid "Annual sample count"
+msgstr "Annual sample count"
+
+msgid "Sequential skip count"
+msgstr "Sequential skip count"
+
+msgid "Organisation unit providing data"
+msgstr "Organisation unit providing data"
 
 msgid "Basic information"
 msgstr "Basic information"
@@ -3775,6 +3826,21 @@ msgstr "Sends a notification when a validation rule failed."
 msgid "Manage"
 msgstr "Manage"
 
+msgid "Predictor run started successfully"
+msgstr "Predictor run started successfully"
+
+msgid "Run predictor"
+msgstr "Run predictor"
+
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
+
+msgid "Run now"
+msgstr "Run now"
+
 msgid "Program Disaggregation Form"
 msgstr "Program Disaggregation Form"
 
@@ -4745,8 +4811,8 @@ msgstr "Configure the expressions and how they are compared."
 msgid "Left side expression"
 msgstr "Left side expression"
 
-msgid "Edit left side expression"
-msgstr "Edit left side expression"
+msgid "Set up numerator expression"
+msgstr "Set up numerator expression"
 
 msgid "Comparison operator"
 msgstr "Comparison operator"

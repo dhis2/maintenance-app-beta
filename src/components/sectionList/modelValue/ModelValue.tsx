@@ -26,6 +26,9 @@ export const getSchemaProperty = (
         if (part === 'id') {
             return 'uid' // fieldName for 'id' is "uid" in schema.properties
         }
+        if (part === 'programRuleVariableSourceType') {
+            return 'sourceType' // fieldName for 'programRuleVariableSourceType' is "sourceType" in schema.properties
+        }
         return part
     })
     const rootPath = pathParts[0]

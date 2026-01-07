@@ -471,6 +471,30 @@ export const modelListViewsConfig = {
             available: ['categoryCombo'],
         },
     },
+    programRuleVariable: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                'program',
+                'programRuleVariableSourceType',
+                'lastUpdated',
+            ],
+            available: [
+                'createdBy',
+                'dataElement',
+                'lastUpdatedBy',
+                'programStage',
+                'trackedEntityAttribute',
+                'useCodeForOptionSet',
+                'valueType',
+            ],
+        },
+        filters: {
+            default: ['program', 'programRuleVariableSourceType'],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
+    },
     optionGroupSet: {
         columns: {
             default: [
