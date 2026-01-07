@@ -168,7 +168,12 @@ export const EnrollmentDataFormContents = React.memo(
                         teta.trackedEntityAttribute.id
                     )
 
-                    if (existing && !previousTetaIdsRef.current.has(teta.trackedEntityAttribute.id)) {
+                    if (
+                        existing &&
+                        !previousTetaIdsRef.current.has(
+                            teta.trackedEntityAttribute.id
+                        )
+                    ) {
                         return existing
                     }
 
