@@ -480,14 +480,13 @@ export const modelListViewsConfig = {
                 'lastUpdated',
             ],
             available: [
-                'createdBy',
-                'dataElement',
-                'lastUpdatedBy',
-                'programStage',
-                'trackedEntityAttribute',
                 'useCodeForOptionSet',
+                'dataElement',
+                'trackedEntityAttribute',
+                'programStage',
                 'valueType',
             ],
+            overrideDefaultAvailable: true,
         },
         filters: {
             default: ['program', 'programRuleVariableSourceType'],
