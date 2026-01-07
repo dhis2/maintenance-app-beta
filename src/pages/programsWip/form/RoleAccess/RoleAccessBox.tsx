@@ -58,8 +58,28 @@ export const RoleAccessBox = ({
 
         const userGroups = sharing.userGroups
             ? Object.values(sharing.userGroups)
+                  .map((group) => ({
+                      ...group,
+                      type: 'group' as const,
+                  }))
+                  .sort((a, b) =>
+                      (a.displayName || a.id).localeCompare(
+                          b.displayName || b.id
+                      )
+                  )
             : []
-        const users = sharing.users ? Object.values(sharing.users) : []
+        const users = sharing.users
+            ? Object.values(sharing.users)
+                  .map((user) => ({
+                      ...user,
+                      type: 'user' as const,
+                  }))
+                  .sort((a, b) =>
+                      (a.displayName || a.id).localeCompare(
+                          b.displayName || b.id
+                      )
+                  )
+            : []
         return [...userGroups, ...users]
     }, [sharing])
 
@@ -76,12 +96,16 @@ export const RoleAccessBox = ({
                 </div>
                 <div className={css.buttonGroup}>
                     {type === 'program' && onApplyToAllStages && (
-                        <Button small secondary onClick={onApplyToAllStages}>
+                        <Button small onClick={onApplyToAllStages}>
                             {i18n.t('Apply to all stages')}
                         </Button>
                     )}
                     {type === 'stage' && onApplyProgramAccessRules && (
-                        <Button small onClick={onApplyProgramAccessRules}>
+                        <Button
+                            small
+                            onClick={onApplyProgramAccessRules}
+                            disabled={!isDifferentFromProgram}
+                        >
                             {i18n.t('Revert to program access')}
                         </Button>
                     )}
@@ -98,10 +122,18 @@ export const RoleAccessBox = ({
                     <div className={css.accessLabel}>
                         {i18n.t('Public (All users)')}
                     </div>
-                    <div className={css.accessData}>
+                    <div
+                        className={`${css.accessData} ${
+                            !publicAccess?.data?.read ? css.noAccess : ''
+                        }`}
+                    >
                         {getAccessLabel(publicAccess?.data, 'data')}
                     </div>
-                    <div className={css.accessMetadata}>
+                    <div
+                        className={`${css.accessMetadata} ${
+                            !publicAccess?.metadata?.read ? css.noAccess : ''
+                        }`}
+                    >
                         {type === 'program' &&
                             getAccessLabel(publicAccess?.metadata, 'metadata')}
                     </div>
@@ -109,7 +141,11 @@ export const RoleAccessBox = ({
 
                 <div className={css.accessRow}>
                     <div className={css.accessLabel}>{i18n.t('External')}</div>
-                    <div className={css.accessData}>
+                    <div
+                        className={`${css.accessData} ${
+                            !sharing?.external ? css.noAccess : ''
+                        }`}
+                    >
                         {getAccessLabel(
                             sharing?.external
                                 ? { read: true, write: true }
@@ -117,7 +153,7 @@ export const RoleAccessBox = ({
                             'data'
                         )}
                     </div>
-                    <div className={css.accessMetadata}>
+                    <div className={`${css.accessMetadata} ${css.noAccess}`}>
                         {type === 'program' &&
                             getAccessLabel(undefined, 'metadata')}
                     </div>
@@ -125,15 +161,31 @@ export const RoleAccessBox = ({
 
                 {sharingEntities.map((entity) => {
                     const parsed = parseAccessString(entity.access)
+                    const prefix =
+                        entity.type === 'group'
+                            ? i18n.t('Group')
+                            : i18n.t('User')
                     return (
                         <div key={entity.id} className={css.accessRow}>
                             <div className={css.accessLabel}>
-                                {entity.displayName || entity.id}
+                                {i18n.t('{{prefix}}: {{name}}', {
+                                    prefix,
+                                    name: entity.displayName,
+                                    interpolation: { escapeValue: false },
+                                })}
                             </div>
-                            <div className={css.accessData}>
+                            <div
+                                className={`${css.accessData} ${
+                                    !parsed?.data?.read ? css.noAccess : ''
+                                }`}
+                            >
                                 {getAccessLabel(parsed?.data, 'data')}
                             </div>
-                            <div className={css.accessMetadata}>
+                            <div
+                                className={`${css.accessMetadata} ${
+                                    !parsed?.metadata?.read ? css.noAccess : ''
+                                }`}
+                            >
                                 {type === 'program' &&
                                     getAccessLabel(
                                         parsed?.metadata,

@@ -5,6 +5,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import React, { useCallback, useMemo, useState } from 'react'
 import { useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
+import { useDebouncedCallback } from 'use-debounce'
 import type { SharingSettings } from '../../../../lib'
 import { areSharingPropertiesSimilar } from '../../../../lib'
 import type { ProgramValues } from '../../Edit'
@@ -56,8 +57,9 @@ export const RoleAccess = () => {
             })) as { sharing: { object: SharingSettings } }
 
             await Promise.all(
-                programStages.map((stage) =>
-                    dataEngine.mutate({
+                programStages.map((stage) => {
+                    // @ts-expect-error id passes as a param instead of in data.object, so type doesn't match
+                    return dataEngine.mutate({
                         resource: 'sharing',
                         type: 'update',
                         params: { type: 'programStage', id: stage.id },
@@ -72,8 +74,8 @@ export const RoleAccess = () => {
                                 displayName: stage.displayName,
                             },
                         },
-                    } as any)
-                )
+                    })
+                })
             )
 
             showSuccess()
@@ -96,7 +98,7 @@ export const RoleAccess = () => {
         showError,
     ])
 
-    const handleApplyProgramAccessRules = useCallback(
+    const handleApplyProgramAccessRules = useDebouncedCallback(
         async (stageId: string) => {
             if (!programId) {
                 return
@@ -115,6 +117,7 @@ export const RoleAccess = () => {
                     },
                 })) as { sharing: { object: SharingSettings } }
 
+                // @ts-expect-error id passes as a param instead of in data.object, so type doesn't match
                 await dataEngine.mutate({
                     resource: 'sharing',
                     type: 'update',
@@ -130,7 +133,7 @@ export const RoleAccess = () => {
                             displayName: stage.displayName,
                         },
                     },
-                } as any)
+                })
 
                 showSuccess()
                 queryClient.invalidateQueries({
@@ -144,14 +147,7 @@ export const RoleAccess = () => {
                 )
             }
         },
-        [
-            programId,
-            programStages,
-            dataEngine,
-            queryClient,
-            showSuccess,
-            showError,
-        ]
+        250
     )
 
     const handleSaveSharing = useCallback(() => {
@@ -208,10 +204,11 @@ export const RoleAccess = () => {
                 <SharingDialog
                     type={sharingDialog.type}
                     id={sharingDialog.id}
-                    onClose={() => setSharingDialog(null)}
-                    onSave={handleSaveSharing}
+                    onClose={() => {
+                        setSharingDialog(null)
+                        handleSaveSharing()
+                    }}
                     dataSharing
-                    metadataSharing={sharingDialog.type !== 'programStage'}
                 />
             )}
         </>

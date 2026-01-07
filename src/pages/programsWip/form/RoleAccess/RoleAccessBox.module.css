@@ -57,6 +57,7 @@
 .accessLabel {
     font-size: 14px;
     color: var(--colors-grey700);
+    font-weight: bold;
 }
 
 .accessData {
@@ -67,4 +68,8 @@
 .accessMetadata {
     font-size: 14px;
     color: var(--colors-grey900);
+}
+
+.noAccess {
+    color: var(--colors-grey600);
 }
