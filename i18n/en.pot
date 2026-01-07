@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-18T14:52:06.811Z\n"
-"PO-Revision-Date: 2025-12-18T14:52:06.811Z\n"
+"POT-Creation-Date: 2026-01-07T10:21:21.509Z\n"
+"PO-Revision-Date: 2026-01-07T10:21:21.509Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -327,6 +327,13 @@ msgstr "Required"
 msgid "Please enter a GeoJSON value"
 msgstr "Please enter a GeoJSON value"
 
+msgid ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
+msgstr ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
+
 msgid "Exit without saving"
 msgstr "Exit without saving"
 
@@ -381,6 +388,9 @@ msgstr ""
 
 msgid "Description"
 msgstr "Description"
+
+msgid "Feature type"
+msgstr "Feature type"
 
 msgid ""
 "This name is already in use. Consider updating the name to avoid a "
@@ -1632,9 +1642,6 @@ msgstr "Zero is significant"
 
 msgid "Enable tracked entity instance audit log"
 msgstr "Enable tracked entity instance audit log"
-
-msgid "Feature type"
-msgstr "Feature type"
 
 msgid "Program type"
 msgstr "Program type"
@@ -4252,8 +4259,41 @@ msgstr "Save "
 msgid "Saving a stage does not save other changes to the program"
 msgstr "Saving a stage does not save other changes to the program"
 
+msgid "A stage with this name already exists in this program"
+msgstr "A stage with this name already exists in this program"
+
 msgid "Configure the basic information for this program stage."
 msgstr "Configure the basic information for this program stage."
+
+msgid "Configuration options"
+msgstr "Configuration options"
+
+msgid "Set up more advanced options for this program stage."
+msgstr "Set up more advanced options for this program stage."
+
+msgid "Allow user assignment of events"
+msgstr "Allow user assignment of events"
+
+msgid "Pre-generate event UID"
+msgstr "Pre-generate event UID"
+
+msgid "Custom terminology"
+msgstr "Custom terminology"
+
+msgid "Customise the wording of labels for this stage."
+msgstr "Customise the wording of labels for this stage."
+
+msgid "Custom label for report date"
+msgstr "Custom label for report date"
+
+msgid "Custom label for due date"
+msgstr "Custom label for due date"
+
+msgid "Custom label for program stage"
+msgstr "Custom label for program stage"
+
+msgid "Custom label for event"
+msgstr "Custom label for event"
 
 msgid "Event Repetition"
 msgstr "Event Repetition"
@@ -4302,6 +4342,12 @@ msgstr "Mobile display"
 
 msgid "Stage: Setup"
 msgstr "Stage: Setup"
+
+msgid "Stage: Configuration"
+msgstr "Stage: Configuration"
+
+msgid "Stage: Terminology"
+msgstr "Stage: Terminology"
 
 msgid "Stage: Creation and Scheduling"
 msgstr "Stage: Creation and Scheduling"
@@ -4699,8 +4745,8 @@ msgstr "Configure the expressions and how they are compared."
 msgid "Left side expression"
 msgstr "Left side expression"
 
-msgid "Set up numerator expression"
-msgstr "Set up numerator expression"
+msgid "Edit left side expression"
+msgstr "Edit left side expression"
 
 msgid "Comparison operator"
 msgstr "Comparison operator"
