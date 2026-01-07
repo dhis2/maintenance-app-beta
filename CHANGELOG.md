@@ -1,3 +1,18 @@
+# [0.107.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.106.0...v0.107.0) (2026-01-06)
+
+
+### Features
+
+* expression builder (for validation rules) [DHIS2-20474] ([#719](https://github.com/dhis2/maintenance-app-beta/issues/719)) ([dc289f6](https://github.com/dhis2/maintenance-app-beta/commit/dc289f63a88e2fd90d4bf5b9d38b246b347d4c74))
+* implement predictor list with run now functionality [DHIS2-20615] ([#727](https://github.com/dhis2/maintenance-app-beta/issues/727)) ([4debe45](https://github.com/dhis2/maintenance-app-beta/commit/4debe451f3790a7029574ee1066fa6ae2ce0a24a))
+
+# [0.106.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.105.0...v0.106.0) (2026-01-04)
+
+
+### Features
+
+* [DHIS2-20426] Improvements for TET add and edit form ([#721](https://github.com/dhis2/maintenance-app-beta/issues/721)) ([0b0e501](https://github.com/dhis2/maintenance-app-beta/commit/0b0e5016fc4c4342784c95bf59c9605f320416d2))
+
 # [0.105.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.104.2...v0.105.0) (2025-12-22)
 
 

@@ -93,6 +93,111 @@ msgstr "Refresh"
 msgid "Add new"
 msgstr "Add new"
 
+msgid "Expression cannot be empty"
+msgstr "Expression cannot be empty"
+
+msgid "Expression not yet validated"
+msgstr "Expression not yet validated"
+
+msgid "Validate"
+msgstr "Validate"
+
+msgid "Invalid expression"
+msgstr "Invalid expression"
+
+msgid "Valid expression"
+msgstr "Valid expression"
+
+msgid "Add operators, variables, functions, and constants from the right sidebar"
+msgstr "Add operators, variables, functions, and constants from the right sidebar"
+
+msgid "Apply"
+msgstr "Apply"
+
+msgid "(No Value)"
+msgstr "(No Value)"
+
+msgid "Filter list"
+msgstr "Filter list"
+
+msgid "No matches"
+msgstr "No matches"
+
+msgid "Retry"
+msgstr "Retry"
+
+msgid "Data elements"
+msgstr "Data elements"
+
+msgid "Program tracked entity attributes"
+msgstr "Program tracked entity attributes"
+
+msgid "Indicators"
+msgstr "Indicators"
+
+msgid "Select a Program"
+msgstr "Select a Program"
+
+msgid "Operators"
+msgstr "Operators"
+
+msgid "+ (add)"
+msgstr "+ (add)"
+
+msgid "- (subtract)"
+msgstr "- (subtract)"
+
+msgid "* (multiply)"
+msgstr "* (multiply)"
+
+msgid "/ (divide)"
+msgstr "/ (divide)"
+
+msgid "% (percent)"
+msgstr "% (percent)"
+
+msgid "("
+msgstr "("
+
+msgid ")"
+msgstr ")"
+
+msgid "days"
+msgstr "days"
+
+msgid "if("
+msgstr "if("
+
+msgid "isNull("
+msgstr "isNull("
+
+msgid "isNotNull("
+msgstr "isNotNull("
+
+msgid "firstNotNull("
+msgstr "firstNotNull("
+
+msgid "greatest("
+msgstr "greatest("
+
+msgid "least("
+msgstr "least("
+
+msgid "Program data"
+msgstr "Program data"
+
+msgid "Org unit counts"
+msgstr "Org unit counts"
+
+msgid "Constants"
+msgstr "Constants"
+
+msgid "Reporting rates"
+msgstr "Reporting rates"
+
+msgid "Could not validate expression"
+msgstr "Could not validate expression"
+
 msgid "Message subject"
 msgstr "Message subject"
 
@@ -116,9 +221,6 @@ msgstr "Clear all"
 
 msgid "Filter options"
 msgstr "Filter options"
-
-msgid "Retry"
-msgstr "Retry"
 
 msgid "Change this field"
 msgstr "Change this field"
@@ -213,14 +315,8 @@ msgstr "Attributes"
 msgid "Program"
 msgstr "Program"
 
-msgid "Data elements"
-msgstr "Data elements"
-
 msgid "Totals"
 msgstr "Totals"
-
-msgid "Indicators"
-msgstr "Indicators"
 
 msgid "Flags"
 msgstr "Flags"
@@ -527,23 +623,8 @@ msgstr "No potential targets available. Remove an item from sources."
 msgid "At least one source is required"
 msgstr "At least one source is required"
 
-msgid "Valid expression"
-msgstr "Valid expression"
-
 msgid "Add operators, variables, functions, and constants from right sidebar"
 msgstr "Add operators, variables, functions, and constants from right sidebar"
-
-msgid "Apply"
-msgstr "Apply"
-
-msgid "(No Value)"
-msgstr "(No Value)"
-
-msgid "Invalid expression"
-msgstr "Invalid expression"
-
-msgid "Could not validate expression"
-msgstr "Could not validate expression"
 
 msgid "Loading..."
 msgstr "Loading..."
@@ -709,9 +790,6 @@ msgstr "Category option group set"
 
 msgid "Type to filter options"
 msgstr "Type to filter options"
-
-msgid "No matches"
-msgstr "No matches"
 
 msgid "Data element"
 msgstr "Data element"
@@ -1018,9 +1096,6 @@ msgstr "Validation notification"
 
 msgid "Constant"
 msgstr "Constant"
-
-msgid "Constants"
-msgstr "Constants"
 
 msgid "Option group"
 msgstr "Option group"
@@ -1477,6 +1552,21 @@ msgstr "Gs1 datamatrix"
 
 msgid "Canvas"
 msgstr "Canvas"
+
+msgid "Reporting rate"
+msgstr "Reporting rate"
+
+msgid "Reporting rate on time"
+msgstr "Reporting rate on time"
+
+msgid "Actual reports"
+msgstr "Actual reports"
+
+msgid "Actual reports on time"
+msgstr "Actual reports on time"
+
+msgid "Expected reports"
+msgstr "Expected reports"
 
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
@@ -3807,9 +3897,6 @@ msgstr ""
 msgid "Could not delete program mappings"
 msgstr "Could not delete program mappings"
 
-msgid "Select a Program"
-msgstr "Select a Program"
-
 msgid "Programs with existing mappings"
 msgstr "Programs with existing mappings"
 
@@ -4667,8 +4754,8 @@ msgstr "Comparison operator"
 msgid "Right side expression"
 msgstr "Right side expression"
 
-msgid "Edit right side expression"
-msgstr "Edit right side expression"
+msgid "Set up denominator expression"
+msgstr "Set up denominator expression"
 
 msgid "Instruction to show"
 msgstr "Instruction to show"
