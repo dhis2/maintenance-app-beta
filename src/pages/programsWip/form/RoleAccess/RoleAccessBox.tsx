@@ -124,14 +124,14 @@ export const RoleAccessBox = ({
                     </div>
                     <div
                         className={`${css.accessData} ${
-                            !publicAccess?.data?.read ? css.noAccess : ''
+                            publicAccess?.data?.read ? '' : css.noAccess
                         }`}
                     >
                         {getAccessLabel(publicAccess?.data, 'data')}
                     </div>
                     <div
                         className={`${css.accessMetadata} ${
-                            !publicAccess?.metadata?.read ? css.noAccess : ''
+                            publicAccess?.metadata?.read ? '' : css.noAccess
                         }`}
                     >
                         {type === 'program' &&
@@ -143,7 +143,7 @@ export const RoleAccessBox = ({
                     <div className={css.accessLabel}>{i18n.t('External')}</div>
                     <div
                         className={`${css.accessData} ${
-                            !sharing?.external ? css.noAccess : ''
+                            sharing?.external ? '' : css.noAccess
                         }`}
                     >
                         {getAccessLabel(
@@ -176,14 +176,14 @@ export const RoleAccessBox = ({
                             </div>
                             <div
                                 className={`${css.accessData} ${
-                                    !parsed?.data?.read ? css.noAccess : ''
+                                    parsed?.data?.read ? '' : css.noAccess
                                 }`}
                             >
                                 {getAccessLabel(parsed?.data, 'data')}
                             </div>
                             <div
                                 className={`${css.accessMetadata} ${
-                                    !parsed?.metadata?.read ? css.noAccess : ''
+                                    parsed?.metadata?.read ? '' : css.noAccess
                                 }`}
                             >
                                 {type === 'program' &&
