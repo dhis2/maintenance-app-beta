@@ -32,6 +32,7 @@ import {
     OrganisationUnitGroupFilter,
     OrganisationUnitGroupSetFilter,
     ValidationRuleGroupFilter,
+    ProgramRuleVariableSourceTypeFilter,
 } from '.'
 
 type FilterKeyToComponentMap = Partial<Record<ConfigurableFilterKey, React.FC>>
@@ -64,6 +65,7 @@ const filterKeyToComponentMap: FilterKeyToComponentMap = {
     programType: ProgramTypeFilter,
     programIndicator: ProgramIndicatorFilter,
     programIndicatorGroup: ProgramIndicatorGroupFilter,
+    programRuleVariableSourceType: ProgramRuleVariableSourceTypeFilter,
     publicAccess: PublicAccessFilter,
     valueType: ValueTypeSelectionFilter,
     validationRuleGroup: ValidationRuleGroupFilter,
