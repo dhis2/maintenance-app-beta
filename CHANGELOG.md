@@ -1,3 +1,10 @@
+# [0.108.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.107.0...v0.108.0) (2026-01-07)
+
+
+### Features
+
+* [DHIS2-20480] create program stage set up ([#717](https://github.com/dhis2/maintenance-app-beta/issues/717)) ([73733fe](https://github.com/dhis2/maintenance-app-beta/commit/73733fef8b04df2fbf24b6952021092c7fda8d65))
+
 # [0.107.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.106.0...v0.107.0) (2026-01-06)
 
 
