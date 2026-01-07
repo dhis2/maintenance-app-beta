@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-05T12:18:44.483Z\n"
-"PO-Revision-Date: 2026-01-05T12:18:44.483Z\n"
+"POT-Creation-Date: 2026-01-07T08:35:11.764Z\n"
+"PO-Revision-Date: 2026-01-07T08:35:11.764Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -117,6 +117,9 @@ msgstr "Apply"
 msgid "(No Value)"
 msgstr "(No Value)"
 
+msgid "Clear expression"
+msgstr "Clear expression"
+
 msgid "Filter list"
 msgstr "Filter list"
 
@@ -125,6 +128,18 @@ msgstr "No matches"
 
 msgid "Retry"
 msgstr "Retry"
+
+msgid "Missing value strategy"
+msgstr "Missing value strategy"
+
+msgid "Never skip"
+msgstr "Never skip"
+
+msgid "Skip if any value is missing"
+msgstr "Skip if any value is missing"
+
+msgid "Skip if all values are missing"
+msgstr "Skip if all values are missing"
 
 msgid "Data elements"
 msgstr "Data elements"
@@ -1576,15 +1591,6 @@ msgstr "At selected level(s) only"
 
 msgid "At selected level(s) and all levels below"
 msgstr "At selected level(s) and all levels below"
-
-msgid "Skip if any value is missing"
-msgstr "Skip if any value is missing"
-
-msgid "Skip if all values are missing"
-msgstr "Skip if all values are missing"
-
-msgid "Never skip"
-msgstr "Never skip"
 
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
@@ -3793,11 +3799,14 @@ msgstr "Sends a notification when a validation rule failed."
 msgid "Manage"
 msgstr "Manage"
 
-msgid "Summarize what this {{metadataObjectName}} measures."
-msgstr "Summarize what this {{metadataObjectName}} measures."
+msgid "Edit {{objectName}} expression"
+msgstr "Edit {{objectName}} expression"
 
-msgid "Missing value strategy"
-msgstr "Missing value strategy"
+msgid "Set up {{objectName}} expression"
+msgstr "Set up {{objectName}} expression"
+
+msgid "Summarize what this {{objectName}} measures."
+msgstr "Summarize what this {{objectName}} measures."
 
 msgid "Output data element"
 msgstr "Output data element"
@@ -3847,23 +3856,11 @@ msgstr "Annual sample count"
 msgid "Sequential skip count"
 msgstr "Sequential skip count"
 
-msgid "Edit generator expression"
-msgstr "Edit generator expression"
+msgid "generator"
+msgstr "generator"
 
-msgid "Set up generator expression"
-msgstr "Set up generator expression"
-
-msgid "Generator"
-msgstr "Generator"
-
-msgid "Label placeholder"
-msgstr "Label placeholder"
-
-msgid "Sample skip test"
-msgstr "Sample skip test"
-
-msgid "Edit sample skip test expression"
-msgstr "Edit sample skip test expression"
+msgid "sample skip test"
+msgstr "sample skip test"
 
 msgid "Predictor Form"
 msgstr "Predictor Form"

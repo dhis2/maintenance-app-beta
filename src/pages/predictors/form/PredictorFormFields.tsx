@@ -151,7 +151,7 @@ export const PredictorFormFields = () => {
                 <ExpressionFields
                     fieldName="sampleSkipTest"
                     objectName={i18n.t('sample skip test')}
-                    validationResource={'predictors/expression/description'}
+                    validationResource={'predictors/skipTest/description'}
                     showMissingValueStrategy={false}
                     clearable={true}
                 />
