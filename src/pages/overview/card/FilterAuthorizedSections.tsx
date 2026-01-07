@@ -28,8 +28,8 @@ export const FilterAuthorizedSections = ({
                 }
                 if (
                     child &&
-                    isSectionAuthorized(child.props.section) &&
-                    isSectionFeatureToggled(child.props.section)
+                    isSectionFeatureToggled(child.props.section) &&
+                    isSectionAuthorized(child.props.section)
                 ) {
                     return child
                 }

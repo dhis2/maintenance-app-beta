@@ -5,6 +5,7 @@ import { Field, useFormState } from 'react-final-form'
 import {
     ColorAndIconField,
     DescriptionField,
+    CustomAttributesSection,
     DrawerPortal,
     FeatureTypeField,
     SectionedFormSection,
@@ -14,6 +15,7 @@ import {
     StandardFormSectionTitle,
 } from '../../../../components'
 import {
+    SCHEMA_SECTIONS,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
     useValidator,
@@ -266,6 +268,10 @@ export const StageFormContents = ({
                 </Button>
                 <div style={{ minHeight: 600 }} />
             </SectionedFormSection>
+            <CustomAttributesSection
+                schemaSection={SCHEMA_SECTIONS.programStage}
+                sectionedLayout
+            />
         </SectionedFormSections>
     )
 }

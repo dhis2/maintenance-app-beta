@@ -16,14 +16,17 @@ import {
 import { DrawerSectionedFormSidebar } from '../../../../components/drawer/DrawerSectionedFormSidebar'
 import { LoadingSpinner } from '../../../../components/loading/LoadingSpinner'
 import {
+    ATTRIBUTE_VALUES_FIELD_FILTERS,
     createFormError,
     createJsonPatchOperations,
     DEFAULT_FIELD_FILTERS,
+    getAllAttributeValues,
     SchemaName,
     SchemaSection,
     SectionedFormProvider,
     useBoundResourceQueryFn,
     useCreateModel,
+    useCustomAttributesQuery,
     usePatchModel,
 } from '../../../../lib'
 import {
@@ -39,9 +42,10 @@ import { initialStageValue } from './stageSchema'
 
 export const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
+    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
     'description',
-    'style',
+    'style[color,icon]',
     'enableUserAssignment',
     'featureType',
     'preGenerateUID',
@@ -93,16 +97,21 @@ export const StageForm = ({
     existingStages,
 }: StageFormProps) => {
     const programId = useParams().id as string
-
+    const customAttributes = useCustomAttributesQuery({
+        enabled: true,
+    })
     const initialValues: PartialStageFormValues | undefined = useMemo(() => {
-        if (stage) {
-            return stage
-        }
-        return {
+        const initialValues = stage ?? {
             ...initialStageValue,
             program: { id: programId },
-        } as PartialStageFormValues
-    }, [stage, programId])
+        }
+
+        const attributeValues = getAllAttributeValues(
+            initialValues?.attributeValues ?? [],
+            customAttributes.data ?? []
+        )
+        return { ...initialValues, attributeValues } as PartialStageFormValues
+    }, [stage, programId, customAttributes])
 
     const closeOnSubmitRef = React.useRef(false)
     const setCloseOnSubmit = (value: boolean) => {

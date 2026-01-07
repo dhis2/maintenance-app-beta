@@ -1,16 +1,12 @@
 import { z } from 'zod'
 import { getDefaults, modelFormSchemas } from '../../../../lib'
 
-const { identifiable, modelReference, withAttributeValues } = modelFormSchemas
+const { identifiable, modelReference, withAttributeValues, style } =
+    modelFormSchemas
 
 export const stageSchema = identifiable.merge(withAttributeValues).extend({
     description: z.string().optional(),
-    style: z
-        .object({
-            color: z.string().optional(),
-            icon: z.string().optional(),
-        })
-        .optional(),
+    style: style.optional(),
     enableUserAssignment: z.boolean().optional(),
     featureType: z.enum(['NONE', 'POINT', 'POLYGON']).optional(),
     preGenerateUID: z.boolean().optional(),
