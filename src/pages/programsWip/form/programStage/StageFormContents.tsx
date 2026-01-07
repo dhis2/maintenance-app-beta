@@ -12,7 +12,6 @@ import {
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-    StandardFormSubsectionTitle,
 } from '../../../../components'
 import {
     useSectionedFormContext,
@@ -66,7 +65,9 @@ export const StageFormContents = ({
             }
 
             const isDuplicate = existingStages.some(
-                (stage) => stage.id !== values.id && stage.displayName === value
+                (stage) =>
+                    stage.id !== values.id &&
+                    stage.displayName.toLowerCase() === value.toLowerCase()
             )
 
             return isDuplicate
@@ -119,10 +120,13 @@ export const StageFormContents = ({
                 <StandardFormField>
                     <ColorAndIconField />
                 </StandardFormField>
-
-                <StandardFormSubsectionTitle>
+            </SectionedFormSection>
+            <SectionedFormSection
+                name={descriptor.getSection('stageConfiguration').name}
+            >
+                <StandardFormSectionTitle>
                     {i18n.t('Configuration options')}
-                </StandardFormSubsectionTitle>
+                </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
                         'Set up more advanced options for this program stage.'
@@ -149,10 +153,13 @@ export const StageFormContents = ({
                         dataTest="formfields-preGenerateUID"
                     />
                 </StandardFormField>
-
-                <StandardFormSubsectionTitle>
+            </SectionedFormSection>
+            <SectionedFormSection
+                name={descriptor.getSection('stageTerminology').name}
+            >
+                <StandardFormSectionTitle>
                     {i18n.t('Custom terminology')}
-                </StandardFormSubsectionTitle>
+                </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t('Customise the wording of labels for this stage.')}
                 </StandardFormSectionDescription>

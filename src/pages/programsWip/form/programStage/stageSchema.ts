@@ -1,9 +1,9 @@
 import { z } from 'zod'
 import { getDefaults, modelFormSchemas } from '../../../../lib'
 
-const { identifiable, modelReference } = modelFormSchemas
+const { identifiable, modelReference, withAttributeValues } = modelFormSchemas
 
-export const stageSchema = identifiable.extend({
+export const stageSchema = identifiable.merge(withAttributeValues).extend({
     description: z.string().optional(),
     style: z
         .object({

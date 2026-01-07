@@ -13,6 +13,12 @@ export const StageFormDescriptor = {
                 { name: 'name', label: i18n.t('Name') },
                 { name: 'description', label: i18n.t('Description') },
                 { name: 'style', label: i18n.t('Visual configuration') },
+            ],
+        },
+        {
+            name: 'stageConfiguration',
+            label: i18n.t('Stage: Configuration', { nsSeparator: '~:~' }),
+            fields: [
                 {
                     name: 'enableUserAssignment',
                     label: i18n.t('Allow user assignment of events'),
@@ -22,6 +28,12 @@ export const StageFormDescriptor = {
                     name: 'preGenerateUID',
                     label: i18n.t('Pre-generate event UID'),
                 },
+            ],
+        },
+        {
+            name: 'stageTerminology',
+            label: i18n.t('Stage: Terminology', { nsSeparator: '~:~' }),
+            fields: [
                 {
                     name: 'executionDateLabel',
                     label: i18n.t('Custom label for report date'),
