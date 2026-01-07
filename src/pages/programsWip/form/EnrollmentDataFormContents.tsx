@@ -168,7 +168,7 @@ export const EnrollmentDataFormContents = React.memo(
                         teta.trackedEntityAttribute.id
                     )
 
-                    if (existing) {
+                    if (existing && !previousTetaIdsRef.current.has(teta.trackedEntityAttribute.id)) {
                         return existing
                     }
 
@@ -292,7 +292,7 @@ export const EnrollmentDataFormContents = React.memo(
                                     }
                                 })
 
-                                // temperary functionality to re-insert TETAs that user tried to remove
+                                // Temperary functionoutality to re-insert TETAs that the user tried to remove
                                 // Should be removed if transfer arrow buttons gets conditionally disabling
                                 const missingTetas = input.value
                                     .filter(
@@ -437,11 +437,6 @@ export const EnrollmentDataFormContents = React.memo(
                                                     type="checkbox"
                                                     disabled={
                                                         isMandatoryDisabled
-                                                    }
-                                                    format={(value) =>
-                                                        isMandatoryDisabled
-                                                            ? true
-                                                            : value
                                                     }
                                                 />
                                             </TooltipWrapper>
