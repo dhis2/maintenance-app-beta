@@ -1,4 +1,5 @@
 import React from 'react'
+import { TranslatedFieldsNoticeBox } from '../form/TranslatedFieldsNoticeBox'
 import css from './SectionForm.module.css'
 
 export type SectionedFormSectionProps = {
@@ -13,6 +14,7 @@ export const SectionedFormSections = ({
 }: React.PropsWithChildren<{ hidden?: boolean }>) => {
     return (
         <div className={css.sections} id="sections" hidden={hidden}>
+            <TranslatedFieldsNoticeBox />
             {children}
         </div>
     )
