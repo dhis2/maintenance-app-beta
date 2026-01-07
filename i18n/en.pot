@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-07T09:31:11.264Z\n"
-"PO-Revision-Date: 2026-01-07T09:31:11.264Z\n"
+"POT-Creation-Date: 2026-01-07T10:21:21.509Z\n"
+"PO-Revision-Date: 2026-01-07T10:21:21.509Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -230,6 +230,13 @@ msgstr "Required"
 
 msgid "Please enter a GeoJSON value"
 msgstr "Please enter a GeoJSON value"
+
+msgid ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
+msgstr ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
 
 msgid "Exit without saving"
 msgstr "Exit without saving"
@@ -1777,6 +1784,18 @@ msgstr "Validation rule group attribute"
 msgid "Visualization attribute"
 msgstr "Visualization attribute"
 
+msgid "Importance"
+msgstr "Importance"
+
+msgid "Instruction"
+msgstr "Instruction"
+
+msgid "Operator"
+msgstr "Operator"
+
+msgid "Skip this rule during form validation"
+msgstr "Skip this rule during form validation"
+
 msgid "Basic information"
 msgstr "Basic information"
 
@@ -3108,6 +3127,15 @@ msgstr "Save option"
 msgid "Saving an option does not save other changes to the option set"
 msgstr "Saving an option does not save other changes to the option set"
 
+msgid "Option created"
+msgstr "Option created"
+
+msgid "Option updated"
+msgstr "Option updated"
+
+msgid "Option set must be saved before options can be added"
+msgstr "Option set must be saved before options can be added"
+
 msgid "Define options for this option set"
 msgstr "Define options for this option set"
 
@@ -4228,6 +4256,12 @@ msgstr "Mobile display"
 msgid "Stage: Setup"
 msgstr "Stage: Setup"
 
+msgid "Stage: Configuration"
+msgstr "Stage: Configuration"
+
+msgid "Stage: Terminology"
+msgstr "Stage: Terminology"
+
 msgid "Stage: Creation and Scheduling"
 msgstr "Stage: Creation and Scheduling"
 
@@ -4539,12 +4573,6 @@ msgstr "Rule name"
 
 msgid "Rule description"
 msgstr "Rule description"
-
-msgid "Operator"
-msgstr "Operator"
-
-msgid "Importance"
-msgstr "Importance"
 
 msgid "Left side description"
 msgstr "Left side description"
