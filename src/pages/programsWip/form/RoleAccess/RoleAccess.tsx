@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import { SharingDialog } from '@dhis2/ui'
 import { useQueryClient } from '@tanstack/react-query'
 import React, { useCallback, useMemo, useState } from 'react'
-import { useFormState } from 'react-final-form'
+import { useForm, useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import { useDebouncedCallback } from 'use-debounce'
 import type { SharingSettings } from '../../../../lib'
@@ -25,6 +25,7 @@ type SharingDialogState = {
 
 export const RoleAccess = () => {
     const { values } = useFormState<ProgramValues>()
+    const form = useForm<ProgramValues>()
     const { id: programId } = useParams()
     const dataEngine = useDataEngine()
     const queryClient = useQueryClient()
@@ -156,7 +157,7 @@ export const RoleAccess = () => {
                 queryKey: [{ resource: 'programs', id: programId }],
             })
         }
-    }, [programId, queryClient])
+    }, [programId, dataEngine, queryClient, form, values.programStages])
 
     return (
         <>
@@ -209,6 +210,7 @@ export const RoleAccess = () => {
                         handleSaveSharing()
                     }}
                     dataSharing
+                    metadataSharing={sharingDialog.type !== 'programStage'}
                 />
             )}
         </>
