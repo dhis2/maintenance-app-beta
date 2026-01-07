@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-08T12:27:17.991Z\n"
-"PO-Revision-Date: 2025-12-08T12:27:17.991Z\n"
+"POT-Creation-Date: 2026-01-07T10:21:21.509Z\n"
+"PO-Revision-Date: 2026-01-07T10:21:21.509Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -93,6 +93,111 @@ msgstr "Refresh"
 msgid "Add new"
 msgstr "Add new"
 
+msgid "Expression cannot be empty"
+msgstr "Expression cannot be empty"
+
+msgid "Expression not yet validated"
+msgstr "Expression not yet validated"
+
+msgid "Validate"
+msgstr "Validate"
+
+msgid "Invalid expression"
+msgstr "Invalid expression"
+
+msgid "Valid expression"
+msgstr "Valid expression"
+
+msgid "Add operators, variables, functions, and constants from the right sidebar"
+msgstr "Add operators, variables, functions, and constants from the right sidebar"
+
+msgid "Apply"
+msgstr "Apply"
+
+msgid "(No Value)"
+msgstr "(No Value)"
+
+msgid "Filter list"
+msgstr "Filter list"
+
+msgid "No matches"
+msgstr "No matches"
+
+msgid "Retry"
+msgstr "Retry"
+
+msgid "Data elements"
+msgstr "Data elements"
+
+msgid "Program tracked entity attributes"
+msgstr "Program tracked entity attributes"
+
+msgid "Indicators"
+msgstr "Indicators"
+
+msgid "Select a Program"
+msgstr "Select a Program"
+
+msgid "Operators"
+msgstr "Operators"
+
+msgid "+ (add)"
+msgstr "+ (add)"
+
+msgid "- (subtract)"
+msgstr "- (subtract)"
+
+msgid "* (multiply)"
+msgstr "* (multiply)"
+
+msgid "/ (divide)"
+msgstr "/ (divide)"
+
+msgid "% (percent)"
+msgstr "% (percent)"
+
+msgid "("
+msgstr "("
+
+msgid ")"
+msgstr ")"
+
+msgid "days"
+msgstr "days"
+
+msgid "if("
+msgstr "if("
+
+msgid "isNull("
+msgstr "isNull("
+
+msgid "isNotNull("
+msgstr "isNotNull("
+
+msgid "firstNotNull("
+msgstr "firstNotNull("
+
+msgid "greatest("
+msgstr "greatest("
+
+msgid "least("
+msgstr "least("
+
+msgid "Program data"
+msgstr "Program data"
+
+msgid "Org unit counts"
+msgstr "Org unit counts"
+
+msgid "Constants"
+msgstr "Constants"
+
+msgid "Reporting rates"
+msgstr "Reporting rates"
+
+msgid "Could not validate expression"
+msgstr "Could not validate expression"
+
 msgid "Message subject"
 msgstr "Message subject"
 
@@ -116,9 +221,6 @@ msgstr "Clear all"
 
 msgid "Filter options"
 msgstr "Filter options"
-
-msgid "Retry"
-msgstr "Retry"
 
 msgid "Change this field"
 msgstr "Change this field"
@@ -213,14 +315,8 @@ msgstr "Attributes"
 msgid "Program"
 msgstr "Program"
 
-msgid "Data elements"
-msgstr "Data elements"
-
 msgid "Totals"
 msgstr "Totals"
-
-msgid "Indicators"
-msgstr "Indicators"
 
 msgid "Flags"
 msgstr "Flags"
@@ -230,6 +326,13 @@ msgstr "Required"
 
 msgid "Please enter a GeoJSON value"
 msgstr "Please enter a GeoJSON value"
+
+msgid ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
+msgstr ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
 
 msgid "Exit without saving"
 msgstr "Exit without saving"
@@ -285,6 +388,9 @@ msgstr ""
 
 msgid "Description"
 msgstr "Description"
+
+msgid "Feature type"
+msgstr "Feature type"
 
 msgid ""
 "This name is already in use. Consider updating the name to avoid a "
@@ -517,23 +623,8 @@ msgstr "No potential targets available. Remove an item from sources."
 msgid "At least one source is required"
 msgstr "At least one source is required"
 
-msgid "Valid expression"
-msgstr "Valid expression"
-
 msgid "Add operators, variables, functions, and constants from right sidebar"
 msgstr "Add operators, variables, functions, and constants from right sidebar"
-
-msgid "Apply"
-msgstr "Apply"
-
-msgid "(No Value)"
-msgstr "(No Value)"
-
-msgid "Invalid expression"
-msgstr "Invalid expression"
-
-msgid "Could not validate expression"
-msgstr "Could not validate expression"
 
 msgid "Loading..."
 msgstr "Loading..."
@@ -699,9 +790,6 @@ msgstr "Category option group set"
 
 msgid "Type to filter options"
 msgstr "Type to filter options"
-
-msgid "No matches"
-msgstr "No matches"
 
 msgid "Data element"
 msgstr "Data element"
@@ -1008,9 +1096,6 @@ msgstr "Validation notification"
 
 msgid "Constant"
 msgstr "Constant"
-
-msgid "Constants"
-msgstr "Constants"
 
 msgid "Option group"
 msgstr "Option group"
@@ -1366,6 +1451,39 @@ msgstr "WeeklyWednesday"
 msgid "Yearly"
 msgstr "Yearly"
 
+msgid "Equal to"
+msgstr "Equal to"
+
+msgid "Not equal to"
+msgstr "Not equal to"
+
+msgid "Greater than"
+msgstr "Greater than"
+
+msgid "Greater than or equal to"
+msgstr "Greater than or equal to"
+
+msgid "Less than"
+msgstr "Less than"
+
+msgid "Less than or equal to"
+msgstr "Less than or equal to"
+
+msgid "Compulsory pair"
+msgstr "Compulsory pair"
+
+msgid "Exclusive pair"
+msgstr "Exclusive pair"
+
+msgid "High"
+msgstr "High"
+
+msgid "Medium"
+msgstr "Medium"
+
+msgid "Low"
+msgstr "Low"
+
 msgid "Collective summary"
 msgstr "Collective summary"
 
@@ -1434,6 +1552,21 @@ msgstr "Gs1 datamatrix"
 
 msgid "Canvas"
 msgstr "Canvas"
+
+msgid "Reporting rate"
+msgstr "Reporting rate"
+
+msgid "Reporting rate on time"
+msgstr "Reporting rate on time"
+
+msgid "Actual reports"
+msgstr "Actual reports"
+
+msgid "Actual reports on time"
+msgstr "Actual reports on time"
+
+msgid "Expected reports"
+msgstr "Expected reports"
 
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
@@ -1509,9 +1642,6 @@ msgstr "Zero is significant"
 
 msgid "Enable tracked entity instance audit log"
 msgstr "Enable tracked entity instance audit log"
-
-msgid "Feature type"
-msgstr "Feature type"
 
 msgid "Program type"
 msgstr "Program type"
@@ -1743,6 +1873,18 @@ msgstr "Validation rule group attribute"
 
 msgid "Visualization attribute"
 msgstr "Visualization attribute"
+
+msgid "Importance"
+msgstr "Importance"
+
+msgid "Instruction"
+msgstr "Instruction"
+
+msgid "Operator"
+msgstr "Operator"
+
+msgid "Skip this rule during form validation"
+msgstr "Skip this rule during form validation"
 
 msgid "Basic information"
 msgstr "Basic information"
@@ -3075,6 +3217,15 @@ msgstr "Save option"
 msgid "Saving an option does not save other changes to the option set"
 msgstr "Saving an option does not save other changes to the option set"
 
+msgid "Option created"
+msgstr "Option created"
+
+msgid "Option updated"
+msgstr "Option updated"
+
+msgid "Option set must be saved before options can be added"
+msgstr "Option set must be saved before options can be added"
+
 msgid "Define options for this option set"
 msgstr "Define options for this option set"
 
@@ -3746,9 +3897,6 @@ msgstr ""
 msgid "Could not delete program mappings"
 msgstr "Could not delete program mappings"
 
-msgid "Select a Program"
-msgstr "Select a Program"
-
 msgid "Programs with existing mappings"
 msgstr "Programs with existing mappings"
 
@@ -4111,8 +4259,41 @@ msgstr "Save "
 msgid "Saving a stage does not save other changes to the program"
 msgstr "Saving a stage does not save other changes to the program"
 
+msgid "A stage with this name already exists in this program"
+msgstr "A stage with this name already exists in this program"
+
 msgid "Configure the basic information for this program stage."
 msgstr "Configure the basic information for this program stage."
+
+msgid "Configuration options"
+msgstr "Configuration options"
+
+msgid "Set up more advanced options for this program stage."
+msgstr "Set up more advanced options for this program stage."
+
+msgid "Allow user assignment of events"
+msgstr "Allow user assignment of events"
+
+msgid "Pre-generate event UID"
+msgstr "Pre-generate event UID"
+
+msgid "Custom terminology"
+msgstr "Custom terminology"
+
+msgid "Customise the wording of labels for this stage."
+msgstr "Customise the wording of labels for this stage."
+
+msgid "Custom label for report date"
+msgstr "Custom label for report date"
+
+msgid "Custom label for due date"
+msgstr "Custom label for due date"
+
+msgid "Custom label for program stage"
+msgstr "Custom label for program stage"
+
+msgid "Custom label for event"
+msgstr "Custom label for event"
 
 msgid "Event Repetition"
 msgstr "Event Repetition"
@@ -4161,6 +4342,12 @@ msgstr "Mobile display"
 
 msgid "Stage: Setup"
 msgstr "Stage: Setup"
+
+msgid "Stage: Configuration"
+msgstr "Stage: Configuration"
+
+msgid "Stage: Terminology"
+msgstr "Stage: Terminology"
 
 msgid "Stage: Creation and Scheduling"
 msgstr "Stage: Creation and Scheduling"
@@ -4474,12 +4661,6 @@ msgstr "Rule name"
 msgid "Rule description"
 msgstr "Rule description"
 
-msgid "Operator"
-msgstr "Operator"
-
-msgid "Importance"
-msgstr "Importance"
-
 msgid "Left side description"
 msgstr "Left side description"
 
@@ -4533,3 +4714,78 @@ msgstr "Validation Rules"
 
 msgid "Choose the validation rules to include in this validation rule group."
 msgstr "Choose the validation rules to include in this validation rule group."
+
+msgid "Missing value strategy"
+msgstr "Missing value strategy"
+
+msgid "Never skip"
+msgstr "Never skip"
+
+msgid "Skip if any value is missing"
+msgstr "Skip if any value is missing"
+
+msgid "Skip if all values are missing"
+msgstr "Skip if all values are missing"
+
+msgid "Organisation unit levels to run validation for"
+msgstr "Organisation unit levels to run validation for"
+
+msgid "Set up the basic information for this validation rule."
+msgstr "Set up the basic information for this validation rule."
+
+msgid "Explain the purpose of this validation rule."
+msgstr "Explain the purpose of this validation rule."
+
+msgid "Expressions and output"
+msgstr "Expressions and output"
+
+msgid "Configure the expressions and how they are compared."
+msgstr "Configure the expressions and how they are compared."
+
+msgid "Left side expression"
+msgstr "Left side expression"
+
+msgid "Edit left side expression"
+msgstr "Edit left side expression"
+
+msgid "Comparison operator"
+msgstr "Comparison operator"
+
+msgid "Right side expression"
+msgstr "Right side expression"
+
+msgid "Set up denominator expression"
+msgstr "Set up denominator expression"
+
+msgid "Instruction to show"
+msgstr "Instruction to show"
+
+msgid "Instructions are shown when validating data in Data Entry and Android apps."
+msgstr "Instructions are shown when validating data in Data Entry and Android apps."
+
+msgid "Changes the appearance of the validation rule output during Data Entry."
+msgstr "Changes the appearance of the validation rule output during Data Entry."
+
+msgid "Configure how, when, and where this validation rule runs."
+msgstr "Configure how, when, and where this validation rule runs."
+
+msgid "Skip this rule during form validation in Data Entry App"
+msgstr "Skip this rule during form validation in Data Entry App"
+
+msgid "Validation Rules Form"
+msgstr "Validation Rules Form"
+
+msgid "Left side missing value strategy"
+msgstr "Left side missing value strategy"
+
+msgid "Left side sliding window"
+msgstr "Left side sliding window"
+
+msgid "Right side missing value strategy"
+msgstr "Right side missing value strategy"
+
+msgid "Right side sliding window"
+msgstr "Right side sliding window"
+
+msgid "Skip form validation"
+msgstr "Skip form validation"
