@@ -25,12 +25,6 @@ export const OrganisationUnitLevelsField = () => {
                         order: ['displayName'],
                     },
                 }}
-                // transform={(values) =>
-                //     values.map((value) => ({
-                //         ...value,
-                //         id: value.level.toString(),
-                //     }))
-                // }
             />
         </div>
     )
