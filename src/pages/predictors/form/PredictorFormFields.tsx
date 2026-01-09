@@ -12,7 +12,6 @@ import {
     ShortNameField,
     CodeField,
     DescriptionField,
-    ModelTransferField,
 } from '../../../components'
 import {
     useSectionedFormContext,
@@ -25,8 +24,8 @@ import { ExpressionFields } from './ExpressionFields'
 import { PredictorFormDescriptor } from './formDescriptor'
 import { NumberField } from './NumberField'
 import { OperatorFields } from './OperatorFields'
+import { OrganisationUnitLevelsField } from './OrganisationUnitLevelsField'
 import { PeriodTypeField } from './PeriodTypeField'
-import css from './PredictorFormFields.module.css'
 
 export const PredictorFormFields = () => {
     const schemaSection = useSchemaSectionHandleOrThrow()
@@ -60,42 +59,14 @@ export const PredictorFormFields = () => {
                 </StandardFormField>
             </SectionedFormSection>
             <SectionedFormSection
-                name={descriptor?.getSection('outputDefinition')?.name ?? ''}
+                name={descriptor?.getSection('predictionLogic')?.name ?? ''}
             >
                 <StandardFormSectionTitle>
-                    {i18n.t('Output definition')}
+                    {i18n.t('Predictor logic')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t('Define where predictions will be output')}
+                    {i18n.t('Define how predictions will be calculated')}
                 </StandardFormSectionDescription>
-                <OperatorFields />
-                <StandardFormField>
-                    <PeriodTypeField />
-                </StandardFormField>
-                <div className={css.subtitle}>
-                    {i18n.t('Organisation unit levels')}
-                </div>
-                <StandardFormField>
-                    <ModelTransferField
-                        name="organisationUnitLevels"
-                        query={{
-                            resource: 'organisationUnitLevels',
-                        }}
-                        leftHeader={i18n.t(
-                            'Available organisation unit levels'
-                        )}
-                        rightHeader={i18n.t(
-                            'Selected organisation unit levels'
-                        )}
-                        filterPlaceholder={i18n.t(
-                            'Filter available organisation unit levels'
-                        )}
-                        filterPlaceholderPicked={i18n.t(
-                            'Filter selected organisation unit levels options'
-                        )}
-                        maxSelections={Infinity}
-                    />
-                </StandardFormField>
                 <StandardFormField>
                     <FieldRFF
                         required
@@ -111,16 +82,6 @@ export const PredictorFormFields = () => {
                         )}
                     />
                 </StandardFormField>
-            </SectionedFormSection>
-            <SectionedFormSection
-                name={descriptor?.getSection('predictionLogic')?.name ?? ''}
-            >
-                <StandardFormSectionTitle>
-                    {i18n.t('Prediction logic')}
-                </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t('Define how predictions will be calculated')}
-                </StandardFormSectionDescription>
                 <StandardFormField>
                     <NumberField
                         fieldName="sequentialSampleCount"
@@ -155,6 +116,23 @@ export const PredictorFormFields = () => {
                     showMissingValueStrategy={false}
                     clearable={true}
                 />
+            </SectionedFormSection>
+            <SectionedFormSection
+                name={descriptor?.getSection('outputDefinition')?.name ?? ''}
+            >
+                <StandardFormSectionTitle>
+                    {i18n.t('Output definition')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t('Define where predictions will be output')}
+                </StandardFormSectionDescription>
+                <OperatorFields />
+                <StandardFormField>
+                    <PeriodTypeField />
+                </StandardFormField>
+                <StandardFormField>
+                    <OrganisationUnitLevelsField />
+                </StandardFormField>
             </SectionedFormSection>
         </SectionedFormSections>
     )

@@ -29,35 +29,13 @@ export const PredictorFormDescriptor = {
             ],
         },
         {
-            name: 'outputDefinition',
-            label: i18n.t('Output definition'),
+            name: 'predictionLogic',
+            label: i18n.t('Predictor logic'),
             fields: [
-                {
-                    name: 'output',
-                    label: i18n.t('Output data element'),
-                },
-                {
-                    name: 'outputCombo',
-                    label: i18n.t('Output category combo'),
-                },
-                {
-                    name: 'periodType',
-                    label: i18n.t('Period type'),
-                },
-                {
-                    name: 'organisationUnitLevels',
-                    label: i18n.t('Organisation unit levels'),
-                },
                 {
                     name: 'organisationUnitDescendants',
                     label: i18n.t('Organisation unit descendants'),
                 },
-            ],
-        },
-        {
-            name: 'predictionLogic',
-            label: i18n.t('Prediction logic'),
-            fields: [
                 {
                     name: 'generator.expression',
                     label: i18n.t('Generator expression'),
@@ -89,6 +67,28 @@ export const PredictorFormDescriptor = {
                 {
                     name: 'sequentialSkipCount',
                     label: i18n.t('Sequential skip count'),
+                },
+            ],
+        },
+        {
+            name: 'outputDefinition',
+            label: i18n.t('Output definition'),
+            fields: [
+                {
+                    name: 'output',
+                    label: i18n.t('Output data element'),
+                },
+                {
+                    name: 'outputCombo',
+                    label: i18n.t('Output category combo'),
+                },
+                {
+                    name: 'periodType',
+                    label: i18n.t('Period type'),
+                },
+                {
+                    name: 'organisationUnitLevels',
+                    label: i18n.t('Organisation unit levels'),
                 },
             ],
         },

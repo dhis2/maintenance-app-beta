@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-07T08:35:11.764Z\n"
-"PO-Revision-Date: 2026-01-07T08:35:11.764Z\n"
+"POT-Creation-Date: 2026-01-09T12:27:17.687Z\n"
+"PO-Revision-Date: 2026-01-09T12:27:17.687Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -3820,27 +3820,6 @@ msgstr "Output category option combo"
 msgid "Set up the basic information for this predictor."
 msgstr "Set up the basic information for this predictor."
 
-msgid "Output definition"
-msgstr "Output definition"
-
-msgid "Define where predictions will be output"
-msgstr "Define where predictions will be output"
-
-msgid "Available organisation unit levels"
-msgstr "Available organisation unit levels"
-
-msgid "Selected organisation unit levels"
-msgstr "Selected organisation unit levels"
-
-msgid "Filter available organisation unit levels"
-msgstr "Filter available organisation unit levels"
-
-msgid "Filter selected organisation unit levels options"
-msgstr "Filter selected organisation unit levels options"
-
-msgid "Organisation units providing data"
-msgstr "Organisation units providing data"
-
 msgid "Prediction logic"
 msgstr "Prediction logic"
 
@@ -3862,14 +3841,29 @@ msgstr "generator"
 msgid "sample skip test"
 msgstr "sample skip test"
 
+msgid "Output definition"
+msgstr "Output definition"
+
+msgid "Define where predictions will be output"
+msgstr "Define where predictions will be output"
+
+msgid "Available organisation unit levels"
+msgstr "Available organisation unit levels"
+
+msgid "Selected organisation unit levels"
+msgstr "Selected organisation unit levels"
+
+msgid "Filter available organisation unit levels"
+msgstr "Filter available organisation unit levels"
+
+msgid "Filter selected organisation unit levels options"
+msgstr "Filter selected organisation unit levels options"
+
+msgid "Organisation units providing data"
+msgstr "Organisation units providing data"
+
 msgid "Predictor Form"
 msgstr "Predictor Form"
-
-msgid "Output category combo"
-msgstr "Output category combo"
-
-msgid "Organisation unit descendants"
-msgstr "Organisation unit descendants"
 
 msgid "Generator expression"
 msgstr "Generator expression"
@@ -3879,6 +3873,12 @@ msgstr "Generator description"
 
 msgid "Generator missing value strategy"
 msgstr "Generator missing value strategy"
+
+msgid "Output category combo"
+msgstr "Output category combo"
+
+msgid "Organisation unit descendants"
+msgstr "Organisation unit descendants"
 
 msgid "Program Disaggregation Form"
 msgstr "Program Disaggregation Form"
