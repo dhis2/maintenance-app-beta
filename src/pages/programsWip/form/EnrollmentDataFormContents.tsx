@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import {
     CheckboxFieldFF,
+    colors,
     Field,
     SingleSelectFieldFF,
     Table,
@@ -9,6 +10,7 @@ import {
     TableCellHead,
     TableHead,
     TableRow,
+    TransferOption,
 } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useEffect, useRef } from 'react'
@@ -21,7 +23,10 @@ import {
     StandardFormSectionTitle,
 } from '../../../components'
 import css from '../../../components/metadataFormControls/ModelTransfer/ModelTransfer.module.css'
-import { TooltipWrapper } from '../../../components/tooltip'
+import {
+    InfoIconWithTooltip,
+    TooltipWrapper,
+} from '../../../components/tooltip'
 import { getConstantTranslation, useBoundResourceQueryFn } from '../../../lib'
 import { ProgramTrackedEntityAttribute } from '../../../types/generated'
 import { ProgramsFromFilters } from '../Edit'
@@ -236,15 +241,33 @@ export const EnrollmentDataFormContents = React.memo(
                         <ModelTransfer
                             selected={input.value.map((attribute) => {
                                 const tea = attribute.trackedEntityAttribute
-                                const isTeta = tetaMap.has(tea.id)
-
-                                return {
-                                    ...tea,
-                                    displayName: isTeta
-                                        ? `${tea.displayName} (Tracked entity type attribute)`
-                                        : tea.displayName,
-                                }
+                                return tea
                             })}
+                            renderOption={({ value, ...rest }) => {
+                                const tea = value
+                                const isTeta = tetaMap.has(tea.id)
+                                const tetDisplayName =
+                                    trackedEntityTypeField.input.value
+                                        ?.displayName
+
+                                return (
+                                    <TransferOption
+                                        {...rest}
+                                        label={
+                                            isTeta && tetDisplayName ? (
+                                                <span>
+                                                    {tea.displayName}
+                                                    {' · '}
+                                                    {`${tetDisplayName} attribute`}
+                                                </span>
+                                            ) : (
+                                                tea.displayName
+                                            )
+                                        }
+                                        value={tea.id}
+                                    />
+                                )
+                            }}
                             onChange={({ selected }) => {
                                 const existingAttributesMap = new Map(
                                     input.value.map((attr) => [
@@ -404,17 +427,33 @@ export const EnrollmentDataFormContents = React.memo(
                                 const isMandatoryDisabled =
                                     teta?.mandatory === true
 
+                                const tetDisplayName =
+                                    trackedEntityTypeField.input.value
+                                        ?.displayName
+
                                 return (
                                     <TableRow key={attribute.id || attributeId}>
                                         <TableCell>
-                                            {`${
-                                                attribute.trackedEntityAttribute
-                                                    .displayName
-                                            } ${
-                                                teta
-                                                    ? ' (Tracked entity type attribute)'
-                                                    : ''
-                                            }`}
+                                            <span
+                                                style={{
+                                                    display: 'flex',
+                                                    gap: '6px',
+                                                }}
+                                            >
+                                                {
+                                                    attribute
+                                                        .trackedEntityAttribute
+                                                        .displayName
+                                                }
+                                                {teta && tetDisplayName && (
+                                                    <InfoIconWithTooltip
+                                                        content={i18n.t(
+                                                            'This attribute is defined at the tracked entity type level'
+                                                        )}
+                                                        text={`${tetDisplayName} attribute`}
+                                                    />
+                                                )}
+                                            </span>
                                         </TableCell>
                                         {programHasDateAttributes && (
                                             <TableCell>
