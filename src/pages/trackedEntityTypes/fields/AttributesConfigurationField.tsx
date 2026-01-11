@@ -14,6 +14,7 @@ import {
     StandardFormSectionTitle,
     StandardFormSectionDescription,
 } from '../../../components'
+import { TooltipWrapper } from '../../../components/tooltip'
 
 type TrackedEntityTypeAttribute = {
     mandatory: boolean
@@ -99,22 +100,31 @@ export function AttributesConfigurationField() {
                                 />
                             </TableCell>
                             <TableCell>
-                                <Checkbox
-                                    checked={
-                                        attr.searchable ||
+                                <TooltipWrapper
+                                    condition={
                                         attr.trackedEntityAttribute.unique
                                     }
-                                    onChange={({ checked }) =>
-                                        updateAttribute(
-                                            index,
-                                            'searchable',
-                                            checked
-                                        )
-                                    }
-                                    disabled={
-                                        attr.trackedEntityAttribute.unique
-                                    }
-                                />
+                                    content={i18n.t(
+                                        'Unique attributes are always searchable'
+                                    )}
+                                >
+                                    <Checkbox
+                                        checked={
+                                            attr.searchable ||
+                                            attr.trackedEntityAttribute.unique
+                                        }
+                                        onChange={({ checked }) =>
+                                            updateAttribute(
+                                                index,
+                                                'searchable',
+                                                checked
+                                            )
+                                        }
+                                        disabled={
+                                            attr.trackedEntityAttribute.unique
+                                        }
+                                    />
+                                </TooltipWrapper>
                             </TableCell>
                             <TableCell>
                                 <Checkbox
