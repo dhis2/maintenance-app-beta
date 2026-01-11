@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-07T12:53:40.872Z\n"
-"PO-Revision-Date: 2026-01-07T12:53:40.872Z\n"
+"POT-Creation-Date: 2026-01-07T15:52:13.513Z\n"
+"PO-Revision-Date: 2026-01-07T15:52:13.513Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1652,6 +1652,9 @@ msgstr "Relationship name seen from initiating entity"
 msgid "Ignore data approval"
 msgstr "Ignore data approval"
 
+msgid "Source type"
+msgstr "Source type"
+
 msgid "Referral"
 msgstr "Referral"
 
@@ -1660,6 +1663,9 @@ msgstr "Sharing"
 
 msgid "Relationship name seen from receiving entity"
 msgstr "Relationship name seen from receiving entity"
+
+msgid "Use code for option set"
+msgstr "Use code for option set"
 
 msgid "Owner"
 msgstr "Owner"
@@ -1768,12 +1774,6 @@ msgstr "Program name"
 
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
-
-msgid "Source type"
-msgstr "Source type"
-
-msgid "Use code for option set"
-msgstr "Use code for option set"
 
 msgid "Unique"
 msgstr "Unique"
@@ -4119,6 +4119,42 @@ msgstr "Set up the program indicator legends."
 
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
+
+msgid "Data element from the newest event in program stage"
+msgstr "Data element from the newest event in program stage"
+
+msgid "Data element from the newest event in program"
+msgstr "Data element from the newest event in program"
+
+msgid "Data element in current event"
+msgstr "Data element in current event"
+
+msgid "Data element from the previous event"
+msgstr "Data element from the previous event"
+
+msgid "Set up the basic information for this program rule variable."
+msgstr "Set up the basic information for this program rule variable."
+
+msgid "Program cannot be changed after creation"
+msgstr "Program cannot be changed after creation"
+
+msgid "Configure the source and data elements for this program rule variable."
+msgstr "Configure the source and data elements for this program rule variable."
+
+msgid "Select data element"
+msgstr "Select data element"
+
+msgid "Select tracked entity attribute"
+msgstr "Select tracked entity attribute"
+
+msgid "Select value type"
+msgstr "Select value type"
+
+msgid "Program Rule Variable"
+msgstr "Program Rule Variable"
+
+msgid "Name can only contain letters, numbers, space, dash, dot and underscore"
+msgstr "Name can only contain letters, numbers, space, dash, dot and underscore"
 
 msgid "Enrollment: Data"
 msgstr "Enrollment: Data"

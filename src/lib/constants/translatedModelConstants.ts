@@ -181,7 +181,7 @@ const ORGANISATION_UNIT_DESCENDANTS = {
     SELECTED: i18n.t('Selected'),
 }
 
-const PROGRAM_RULE_VARIABLE_SOURCE_TYPE = {
+export const PROGRAM_RULE_VARIABLE_SOURCE_TYPE = {
     DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE: i18n.t(
         'Data element in newest event in program stage'
     ),
