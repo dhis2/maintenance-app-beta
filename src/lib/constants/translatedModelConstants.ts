@@ -181,6 +181,11 @@ const ORGANISATION_UNIT_DESCENDANTS = {
     SELECTED: i18n.t('Selected'),
 }
 
+const VALIDATION_STRATEGY = {
+    ON_COMPLETE: i18n.t('On complete'),
+    ON_UPDATE_AND_INSERT: i18n.t('On update and insert'),
+}
+
 const allConstantTranslations: Record<string, string> = {
     ...AGGREGATION_TYPE,
     ...ANALYTICS_TYPE,
@@ -198,6 +203,7 @@ const allConstantTranslations: Record<string, string> = {
     ...NOTIFICATION_RECIPIENT,
     ...REPORTING_RATE,
     ...ORGANISATION_UNIT_DESCENDANTS,
+    ...VALIDATION_STRATEGY,
 }
 
 export const getConstantTranslation = (constant: string): string => {
