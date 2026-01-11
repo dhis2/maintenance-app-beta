@@ -48,6 +48,7 @@ export const fieldFilters = [
     'style[color,icon]',
     'enableUserAssignment',
     'featureType',
+    'validationStrategy',
     'preGenerateUID',
     'executionDateLabel',
     'dueDateLabel',

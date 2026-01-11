@@ -9,6 +9,9 @@ export const stageSchema = identifiable.merge(withAttributeValues).extend({
     style: style.optional(),
     enableUserAssignment: z.boolean().optional(),
     featureType: z.enum(['NONE', 'POINT', 'POLYGON']).optional(),
+    validationStrategy: z
+        .enum(['ON_COMPLETE', 'ON_UPDATE_AND_INSERT'])
+        .default('ON_COMPLETE'),
     preGenerateUID: z.boolean().optional(),
     executionDateLabel: z.string().optional(),
     dueDateLabel: z.string().optional(),

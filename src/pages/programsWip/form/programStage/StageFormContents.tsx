@@ -21,6 +21,7 @@ import {
     useValidator,
 } from '../../../../lib'
 import { ProgramStageListItem } from '../ProgramStagesFormContents'
+import { ValidationStrategyField } from './fields'
 import { EditOrNowStageSectionForm } from './programStageSection/ProgramStageSectionForm'
 import { stageSchemaSection } from './StageForm'
 import { StageFormDescriptor } from './stageFormDescriptor'
@@ -145,6 +146,9 @@ export const StageFormContents = ({
                 </StandardFormField>
                 <StandardFormField>
                     <FeatureTypeField />
+                </StandardFormField>
+                <StandardFormField>
+                    <ValidationStrategyField />
                 </StandardFormField>
                 <StandardFormField>
                     <Field
