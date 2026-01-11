@@ -3,7 +3,9 @@ import React from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import { ModelSingleSelectField } from '../../../components/metadataFormControls/ModelSingleSelect'
 
-export function ProgramStageField({ onChange }: { onChange?: () => void }) {
+export function ProgramStageField({
+    onChange,
+}: Readonly<{ onChange?: () => void }>) {
     const { input: programInput } = useField('program')
     const program = programInput.value
 

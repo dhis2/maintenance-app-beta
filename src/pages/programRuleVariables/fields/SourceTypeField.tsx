@@ -41,7 +41,9 @@ const SOURCE_TYPE_OPTIONS = [
     },
 ]
 
-export function SourceTypeField({ onChange }: { onChange?: () => void }) {
+export function SourceTypeField({
+    onChange,
+}: Readonly<{ onChange?: () => void }>) {
     return (
         <FieldRFF
             name="programRuleVariableSourceType"
