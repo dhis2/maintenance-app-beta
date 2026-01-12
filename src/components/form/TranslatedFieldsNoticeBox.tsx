@@ -16,6 +16,7 @@ export function TranslatedFieldsNoticeBox() {
         initialValues.id && (
             <NoticeBox
                 title={
+                    initialValues.displayName &&
                     initialValues.displayName !== initialValues.name
                         ? i18n.t('Name: {{displayName}} (Translated)', {
                               displayName: initialValues.displayName,
