@@ -45,7 +45,7 @@ export const useSelectedSectionFromQueryParams = () => {
         () =>
             withDefault(
                 createEnumParam(sections.map((s) => s.name)),
-                sections[0].name
+                undefined
             ),
         [sections]
     )
@@ -84,7 +84,7 @@ export const useSyncSelectedSectionWithScroll = (
     const [selectedSection, setSection] = useSelectedSectionFromQueryParams()
 
     useEffect(() => {
-        const elem = document.getElementById(selectedSection)
+        const elem = selectedSection && document.getElementById(selectedSection)
         if (elem) {
             scrollToSection(selectedSection, { behavior: 'instant' })
         }
