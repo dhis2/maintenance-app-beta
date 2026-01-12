@@ -18,7 +18,7 @@ export function TranslatedFieldsNoticeBox() {
                 title={
                     initialValues.displayName &&
                     initialValues.displayName !== initialValues.name
-                        ? i18n.t('Name: {{displayName}} (Translated)', {
+                        ? i18n.t('Name: {{- displayName}} (Translated)', {
                               displayName: initialValues.displayName,
                           })
                         : undefined
