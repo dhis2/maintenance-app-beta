@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
-import React, { useCallback } from 'react'
+import React, { useMemo } from 'react'
 import { Field, useFormState } from 'react-final-form'
 import {
     ColorAndIconField,
@@ -15,12 +15,15 @@ import {
     StandardFormSectionTitle,
 } from '../../../../components'
 import {
+    FEATURES,
     SCHEMA_SECTIONS,
+    useFeatureAvailable,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
     useValidator,
+    composeAsyncValidators,
+    useIsFieldValueUnique,
 } from '../../../../lib'
-import { ProgramStageListItem } from '../ProgramStagesFormContents'
 import { ValidationStrategyField } from './fields'
 import { EditOrNowStageSectionForm } from './programStageSection/ProgramStageSectionForm'
 import { stageSchemaSection } from './StageForm'
@@ -29,21 +32,41 @@ import { StageFormDescriptor } from './stageFormDescriptor'
 export const StageFormContents = ({
     isSubsection,
     setSelectedSection,
-    existingStages,
 }: {
     isSubsection: boolean
     setSelectedSection: (name: string) => void
-    existingStages?: ProgramStageListItem[]
 }) => {
     const [sectionsFormOpen, setSectionsFormOpen] = React.useState(false)
     const { values } = useFormState({ subscription: { values: true } })
     const descriptor = useSectionedFormContext<typeof StageFormDescriptor>()
     useSyncSelectedSectionWithScroll(setSelectedSection)
+    const showValidationStrategy = useFeatureAvailable(
+        FEATURES.validationStrategy
+    )
 
-    const nameValidator = useValidator({
+    const checkDuplicateName = useIsFieldValueUnique({
+        model: 'programStages',
+        field: 'name',
+        id: values.id,
+        message: i18n.t(
+            'A stage with this name already exists. Please choose another name.'
+        ),
+    })
+
+    const baseNameValidator = useValidator({
         schemaSection: stageSchemaSection,
         property: 'name',
     })
+
+    const nameValidator = useMemo(
+        () =>
+            composeAsyncValidators<string>([
+                baseNameValidator,
+                checkDuplicateName,
+            ]),
+        [baseNameValidator, checkDuplicateName]
+    )
+
     const executionDateLabelValidator = useValidator({
         schemaSection: stageSchemaSection,
         property: 'executionDateLabel',
@@ -61,27 +84,6 @@ export const StageFormContents = ({
         property: 'eventLabel',
     })
 
-    const checkDuplicateName = useCallback(
-        (value: string | undefined) => {
-            if (!existingStages || !value) {
-                return undefined
-            }
-
-            const isDuplicate = existingStages.some(
-                (stage) =>
-                    stage.id !== values.id &&
-                    stage.displayName.toLowerCase() === value.toLowerCase()
-            )
-
-            return isDuplicate
-                ? i18n.t(
-                      'A stage with this name already exists in this program'
-                  )
-                : undefined
-        },
-        [existingStages, values.id]
-    )
-
     return (
         <SectionedFormSections>
             <SectionedFormSection
@@ -96,26 +98,16 @@ export const StageFormContents = ({
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <Field name="name" validate={nameValidator}>
-                        {({ input, meta }) => {
-                            const duplicateWarning = checkDuplicateName(
-                                input.value
-                            )
-                            return (
-                                <InputFieldFF
-                                    input={input}
-                                    meta={meta}
-                                    validateFields={[]}
-                                    dataTest="formfields-name"
-                                    required
-                                    inputWidth="400px"
-                                    label={i18n.t('Name')}
-                                    validationText={duplicateWarning}
-                                    warning={!!duplicateWarning}
-                                />
-                            )
-                        }}
-                    </Field>
+                    <Field
+                        name="name"
+                        component={InputFieldFF}
+                        validate={nameValidator}
+                        validateFields={[]}
+                        dataTest="formfields-name"
+                        required
+                        inputWidth="400px"
+                        label={i18n.t('Name')}
+                    />
                 </StandardFormField>
                 <StandardFormField>
                     <DescriptionField />
@@ -147,9 +139,11 @@ export const StageFormContents = ({
                 <StandardFormField>
                     <FeatureTypeField />
                 </StandardFormField>
-                <StandardFormField>
-                    <ValidationStrategyField />
-                </StandardFormField>
+                {showValidationStrategy && (
+                    <StandardFormField>
+                        <ValidationStrategyField />
+                    </StandardFormField>
+                )}
                 <StandardFormField>
                     <Field
                         name="preGenerateUID"

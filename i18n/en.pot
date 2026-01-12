@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-07T10:21:21.509Z\n"
-"PO-Revision-Date: 2026-01-07T10:21:21.509Z\n"
+"POT-Creation-Date: 2026-01-12T10:13:23.305Z\n"
+"PO-Revision-Date: 2026-01-12T10:13:23.305Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1568,6 +1568,18 @@ msgstr "Actual reports on time"
 msgid "Expected reports"
 msgstr "Expected reports"
 
+msgid "Descendants"
+msgstr "Descendants"
+
+msgid "Selected"
+msgstr "Selected"
+
+msgid "On complete"
+msgstr "On complete"
+
+msgid "On update and insert"
+msgstr "On update and insert"
+
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
 
@@ -1885,6 +1897,24 @@ msgstr "Operator"
 
 msgid "Skip this rule during form validation"
 msgstr "Skip this rule during form validation"
+
+msgid "Output"
+msgstr "Output"
+
+msgid "Output option combo"
+msgstr "Output option combo"
+
+msgid "Sequential sample count"
+msgstr "Sequential sample count"
+
+msgid "Annual sample count"
+msgstr "Annual sample count"
+
+msgid "Sequential skip count"
+msgstr "Sequential skip count"
+
+msgid "Organisation unit providing data"
+msgstr "Organisation unit providing data"
 
 msgid "Basic information"
 msgstr "Basic information"
@@ -3775,6 +3805,21 @@ msgstr "Sends a notification when a validation rule failed."
 msgid "Manage"
 msgstr "Manage"
 
+msgid "Predictor run started successfully"
+msgstr "Predictor run started successfully"
+
+msgid "Run predictor"
+msgstr "Run predictor"
+
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
+
+msgid "Run now"
+msgstr "Run now"
+
 msgid "Program Disaggregation Form"
 msgstr "Program Disaggregation Form"
 
@@ -4259,8 +4304,8 @@ msgstr "Save "
 msgid "Saving a stage does not save other changes to the program"
 msgstr "Saving a stage does not save other changes to the program"
 
-msgid "A stage with this name already exists in this program"
-msgstr "A stage with this name already exists in this program"
+msgid "A stage with this name already exists. Please choose another name."
+msgstr "A stage with this name already exists. Please choose another name."
 
 msgid "Configure the basic information for this program stage."
 msgstr "Configure the basic information for this program stage."
@@ -4312,6 +4357,9 @@ msgstr "Program stage form"
 
 msgid "Configure the form for data collection for events in this program stage."
 msgstr "Configure the form for data collection for events in this program stage."
+
+msgid "Validation strategy"
+msgstr "Validation strategy"
 
 msgid "Stage section"
 msgstr "Stage section"
@@ -4745,8 +4793,8 @@ msgstr "Configure the expressions and how they are compared."
 msgid "Left side expression"
 msgstr "Left side expression"
 
-msgid "Edit left side expression"
-msgstr "Edit left side expression"
+msgid "Set up numerator expression"
+msgstr "Set up numerator expression"
 
 msgid "Comparison operator"
 msgstr "Comparison operator"
