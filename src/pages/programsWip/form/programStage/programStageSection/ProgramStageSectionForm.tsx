@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import React, { useMemo } from 'react'
 import {
+    DrawerPortal,
     FormBase,
     FormBaseProps,
     FormFooterWrapper,
@@ -243,7 +244,7 @@ export const NewStageSectionForm = ({
     )
 }
 
-export const EditOrNowStageSectionForm = ({
+export const EditOrNewStageSectionForm = ({
     section,
     stageId,
     onCancel,

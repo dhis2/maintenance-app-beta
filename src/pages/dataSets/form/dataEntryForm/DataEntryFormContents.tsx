@@ -95,6 +95,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                         sectionsFieldName={'sections'}
                         SectionFormComponent={EditOrNewDataSetSectionForm}
                         schemaName={SchemaName.section}
+                        level={'primary'}
                     />
                 )}
                 {selectedFormType === FormType.CUSTOM && (
