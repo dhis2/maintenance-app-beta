@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
-import React, { useCallback } from 'react'
+import { CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
+import React, { useCallback, useState } from 'react'
 import { Field, useFormState } from 'react-final-form'
 import {
     ColorAndIconField,
@@ -14,14 +14,22 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../components'
+import { CustomFormEditEntry } from '../../../../components/customForm/CustomFormEditEntry'
+import { SectionFormSectionsList } from '../../../../components/formCreators/SectionFormList'
+import {
+    FormType,
+    TabbedFormTypePicker,
+} from '../../../../components/formCreators/TabbedFormTypePicker'
 import {
     SCHEMA_SECTIONS,
+    SchemaName,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
     useValidator,
 } from '../../../../lib'
+import styles from '../EnrollmentFormFormContents.module.css'
 import { ProgramStageListItem } from '../ProgramStagesFormContents'
-import { EditOrNowStageSectionForm } from './programStageSection/ProgramStageSectionForm'
+import { EditOrNewStageSectionForm } from './programStageSection/ProgramStageSectionForm'
 import { stageSchemaSection } from './StageForm'
 import { StageFormDescriptor } from './stageFormDescriptor'
 
@@ -38,6 +46,9 @@ export const StageFormContents = ({
     const { values } = useFormState({ subscription: { values: true } })
     const descriptor = useSectionedFormContext<typeof StageFormDescriptor>()
     useSyncSelectedSectionWithScroll(setSelectedSection)
+    const [selectedFormType, setSelectedFormType] = useState<FormType>(
+        FormType.DEFAULT
+    )
 
     const nameValidator = useValidator({
         schemaSection: stageSchemaSection,
@@ -243,12 +254,65 @@ export const StageFormContents = ({
                         'Configure the form for data collection for events in this program stage.'
                     )}
                 </StandardFormSectionDescription>
+                <TabbedFormTypePicker
+                    sectionsLength={values.programStageSections?.length}
+                    hasDataEntryForm={
+                        !!values.programStageSections.dataEntryForm
+                    }
+                    hasDataToDisplay={
+                        values.programStageDataElement?.length > 0
+                    }
+                    onFormTypeChange={setSelectedFormType}
+                    selectedFormType={selectedFormType}
+                >
+                    {selectedFormType === FormType.DEFAULT && (
+                        <div className={styles.basicFormDetails}>
+                            <StandardFormSectionTitle>
+                                {i18n.t('Basic form')}
+                            </StandardFormSectionTitle>
+                            <div className={styles.basicFormDescription}>
+                                {i18n.t(
+                                    'This form displays an auto-generated list of the data elements defined for this program stage.'
+                                )}
+                            </div>
+                            {/*<Link*/}
+                            {/*    to={{ search: toEnrollmentDataSearchParam }}*/}
+                            {/*    replace*/}
+                            {/*    onClick={() => {*/}
+                            {/*        scrollToSection('enrollmentData')*/}
+                            {/*    }}*/}
+                            {/*>*/}
+                            {/*    <Button secondary small>*/}
+                            {/*        {i18n.t(*/}
+                            {/*            'Edit or rearrange the tracked entity attributes'*/}
+                            {/*        )}*/}
+                            {/*    </Button>*/}
+                            {/*</Link>*/}
+                        </div>
+                    )}
+                    {selectedFormType === FormType.SECTION && (
+                        <SectionFormSectionsList
+                            sectionsFieldName={'programStageSections'}
+                            SectionFormComponent={EditOrNewStageSectionForm}
+                            schemaName={SchemaName.programStageSection}
+                            level={isSubsection ? 'secondary' : 'primary'}
+                            otherProps={{
+                                sectionsLength:
+                                    values.programStageSections?.length,
+                                stageId: values.id,
+                            }}
+                        />
+                    )}
+                    {selectedFormType === FormType.CUSTOM && (
+                        <CustomFormEditEntry />
+                    )}
+                </TabbedFormTypePicker>
                 <DrawerPortal
                     isOpen={sectionsFormOpen}
                     level={isSubsection ? 'secondary' : 'primary'}
                     onClose={() => setSectionsFormOpen(false)}
                 >
-                    <EditOrNowStageSectionForm
+                    <EditOrNewStageSectionForm
                         stageId={values.id}
                         onCancel={() => setSectionsFormOpen(false)}
                         onSubmitted={() => {}}
@@ -258,15 +322,6 @@ export const StageFormContents = ({
                         }
                     />
                 </DrawerPortal>
-                <Button
-                    disabled={values.id === undefined}
-                    onClick={() => {
-                        setSectionsFormOpen(true)
-                    }}
-                >
-                    Create a section
-                </Button>
-                <div style={{ minHeight: 600 }} />
             </SectionedFormSection>
             <CustomAttributesSection
                 schemaSection={SCHEMA_SECTIONS.programStage}

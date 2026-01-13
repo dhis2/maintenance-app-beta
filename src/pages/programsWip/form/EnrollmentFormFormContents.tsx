@@ -103,6 +103,7 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                         sectionsFieldName={'programSections'}
                         SectionFormComponent={EditOrNewEnrollmentSectionForm}
                         schemaName={SchemaName.programSection}
+                        level={'primary'}
                         otherProps={{ sectionsLength: sections.length }}
                     />
                 )}
