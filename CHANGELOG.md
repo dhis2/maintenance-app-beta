@@ -1,3 +1,10 @@
+# [0.109.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.108.1...v0.109.0) (2026-01-14)
+
+
+### Features
+
+* [DHIS2-20618] Program rule variable list ([#728](https://github.com/dhis2/maintenance-app-beta/issues/728)) ([8d23fb7](https://github.com/dhis2/maintenance-app-beta/commit/8d23fb7323c6677698d731324a79252e03957a24))
+
 ## [0.108.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.108.0...v0.108.1) (2026-01-12)
 
 
