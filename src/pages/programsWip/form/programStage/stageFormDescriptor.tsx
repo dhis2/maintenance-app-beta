@@ -25,6 +25,10 @@ export const StageFormDescriptor = {
                 },
                 { name: 'featureType', label: i18n.t('Feature type') },
                 {
+                    name: 'validationStrategy',
+                    label: i18n.t('Validation strategy'),
+                },
+                {
                     name: 'preGenerateUID',
                     label: i18n.t('Pre-generate event UID'),
                 },

@@ -1595,6 +1595,12 @@ msgstr "Descendants"
 msgid "Selected"
 msgstr "Selected"
 
+msgid "Descendants"
+msgstr "Descendants"
+
+msgid "Selected"
+msgstr "Selected"
+
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
 
@@ -4325,8 +4331,8 @@ msgstr "Save "
 msgid "Saving a stage does not save other changes to the program"
 msgstr "Saving a stage does not save other changes to the program"
 
-msgid "A stage with this name already exists in this program"
-msgstr "A stage with this name already exists in this program"
+msgid "A stage with this name already exists. Please choose another name."
+msgstr "A stage with this name already exists. Please choose another name."
 
 msgid "Configure the basic information for this program stage."
 msgstr "Configure the basic information for this program stage."
@@ -4378,6 +4384,9 @@ msgstr "Program stage form"
 
 msgid "Configure the form for data collection for events in this program stage."
 msgstr "Configure the form for data collection for events in this program stage."
+
+msgid "Validation strategy"
+msgstr "Validation strategy"
 
 msgid "Stage section"
 msgstr "Stage section"
