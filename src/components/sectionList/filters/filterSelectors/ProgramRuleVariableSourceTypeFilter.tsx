@@ -1,10 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelect, SingleSelectOption } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
-import {
-    PROGRAM_RULE_VARIABLE_SOURCE_TYPE,
-    useSectionListFilter,
-} from '../../../../lib'
+import { getConstantTranslation, useSectionListFilter } from '../../../../lib'
 import { ProgramRuleVariable } from '../../../../types/generated/models'
 import css from './Filters.module.css'
 
@@ -12,31 +9,47 @@ const SOURCE_TYPES = [
     {
         value: ProgramRuleVariable.programRuleVariableSourceType
             .DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE,
-        label: PROGRAM_RULE_VARIABLE_SOURCE_TYPE.DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE,
+        label: getConstantTranslation(
+            ProgramRuleVariable.programRuleVariableSourceType
+                .DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE
+        ),
     },
     {
         value: ProgramRuleVariable.programRuleVariableSourceType
             .DATAELEMENT_NEWEST_EVENT_PROGRAM,
-        label: PROGRAM_RULE_VARIABLE_SOURCE_TYPE.DATAELEMENT_NEWEST_EVENT_PROGRAM,
+        label: getConstantTranslation(
+            ProgramRuleVariable.programRuleVariableSourceType
+                .DATAELEMENT_NEWEST_EVENT_PROGRAM
+        ),
     },
     {
         value: ProgramRuleVariable.programRuleVariableSourceType
             .DATAELEMENT_CURRENT_EVENT,
-        label: PROGRAM_RULE_VARIABLE_SOURCE_TYPE.DATAELEMENT_CURRENT_EVENT,
+        label: getConstantTranslation(
+            ProgramRuleVariable.programRuleVariableSourceType
+                .DATAELEMENT_CURRENT_EVENT
+        ),
     },
     {
         value: ProgramRuleVariable.programRuleVariableSourceType
             .DATAELEMENT_PREVIOUS_EVENT,
-        label: PROGRAM_RULE_VARIABLE_SOURCE_TYPE.DATAELEMENT_PREVIOUS_EVENT,
+        label: getConstantTranslation(
+            ProgramRuleVariable.programRuleVariableSourceType
+                .DATAELEMENT_PREVIOUS_EVENT
+        ),
     },
     {
         value: ProgramRuleVariable.programRuleVariableSourceType
             .CALCULATED_VALUE,
-        label: PROGRAM_RULE_VARIABLE_SOURCE_TYPE.CALCULATED_VALUE,
+        label: getConstantTranslation(
+            ProgramRuleVariable.programRuleVariableSourceType.CALCULATED_VALUE
+        ),
     },
     {
         value: ProgramRuleVariable.programRuleVariableSourceType.TEI_ATTRIBUTE,
-        label: PROGRAM_RULE_VARIABLE_SOURCE_TYPE.TEI_ATTRIBUTE,
+        label: getConstantTranslation(
+            ProgramRuleVariable.programRuleVariableSourceType.TEI_ATTRIBUTE
+        ),
     },
 ]
 

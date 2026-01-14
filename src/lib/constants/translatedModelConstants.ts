@@ -181,7 +181,12 @@ const ORGANISATION_UNIT_DESCENDANTS = {
     SELECTED: i18n.t('Selected'),
 }
 
-export const PROGRAM_RULE_VARIABLE_SOURCE_TYPE = {
+const VALIDATION_STRATEGY = {
+    ON_COMPLETE: i18n.t('On complete'),
+    ON_UPDATE_AND_INSERT: i18n.t('On update and insert'),
+}
+
+const PROGRAM_RULE_VARIABLE_SOURCE_TYPE = {
     DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE: i18n.t(
         'Data element in newest event in program stage'
     ),
@@ -211,6 +216,7 @@ const allConstantTranslations: Record<string, string> = {
     ...NOTIFICATION_RECIPIENT,
     ...REPORTING_RATE,
     ...ORGANISATION_UNIT_DESCENDANTS,
+    ...VALIDATION_STRATEGY,
     ...PROGRAM_RULE_VARIABLE_SOURCE_TYPE,
 }
 

@@ -124,5 +124,19 @@ export const ProgramFormDescriptor = {
             label: i18n.t('Program Stages'),
             fields: [],
         },
+        {
+            name: 'accessAndSharing',
+            label: i18n.t('Access and Sharing'),
+            fields: [
+                {
+                    name: 'organisationUnits',
+                    label: i18n.t('Organisation units'),
+                },
+                {
+                    name: 'sharing',
+                    label: i18n.t('Role access'),
+                },
+            ],
+        },
     ],
 } as const satisfies SectionedFormDescriptor<ProgramValues>

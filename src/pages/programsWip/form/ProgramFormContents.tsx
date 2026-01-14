@@ -8,6 +8,7 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
+import { AccessAndSharingFormContents } from './AccessAndSharingFormContents'
 import { EnrollmentDataFormContents } from './EnrollmentDataFormContents'
 import { EnrollmentFormFormContents } from './EnrollmentFormFormContents'
 import { EnrollmentSettingsFormContents } from './EnrollmentSettingsFormContents'
@@ -38,6 +39,9 @@ export const ProgramFormContents = () => {
             />
             <ProgramStagesFormContents
                 name={descriptor.getSection('programStages').name}
+            />
+            <AccessAndSharingFormContents
+                name={descriptor.getSection('accessAndSharing').name}
             />
             <CustomAttributesSection
                 schemaSection={SCHEMA_SECTIONS.program}
