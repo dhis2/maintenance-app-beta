@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelect, SingleSelectOption } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
-import { useSectionListFilter } from '../../../../lib'
+import { getConstantTranslation, useSectionListFilter } from '../../../../lib'
 import { ProgramRuleVariable } from '../../../../types/generated/models'
 import css from './Filters.module.css'
 
@@ -9,31 +9,47 @@ const SOURCE_TYPES = [
     {
         value: ProgramRuleVariable.programRuleVariableSourceType
             .DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE,
-        label: i18n.t('Data element in newest event in program stage'),
+        label: getConstantTranslation(
+            ProgramRuleVariable.programRuleVariableSourceType
+                .DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE
+        ),
     },
     {
         value: ProgramRuleVariable.programRuleVariableSourceType
             .DATAELEMENT_NEWEST_EVENT_PROGRAM,
-        label: i18n.t('Data element in newest event in program'),
+        label: getConstantTranslation(
+            ProgramRuleVariable.programRuleVariableSourceType
+                .DATAELEMENT_NEWEST_EVENT_PROGRAM
+        ),
     },
     {
         value: ProgramRuleVariable.programRuleVariableSourceType
             .DATAELEMENT_CURRENT_EVENT,
-        label: i18n.t('Data element from current event'),
+        label: getConstantTranslation(
+            ProgramRuleVariable.programRuleVariableSourceType
+                .DATAELEMENT_CURRENT_EVENT
+        ),
     },
     {
         value: ProgramRuleVariable.programRuleVariableSourceType
             .DATAELEMENT_PREVIOUS_EVENT,
-        label: i18n.t('Data element from previous event'),
+        label: getConstantTranslation(
+            ProgramRuleVariable.programRuleVariableSourceType
+                .DATAELEMENT_PREVIOUS_EVENT
+        ),
     },
     {
         value: ProgramRuleVariable.programRuleVariableSourceType
             .CALCULATED_VALUE,
-        label: i18n.t('Calculated value'),
+        label: getConstantTranslation(
+            ProgramRuleVariable.programRuleVariableSourceType.CALCULATED_VALUE
+        ),
     },
     {
         value: ProgramRuleVariable.programRuleVariableSourceType.TEI_ATTRIBUTE,
-        label: i18n.t('Tracked entity attribute'),
+        label: getConstantTranslation(
+            ProgramRuleVariable.programRuleVariableSourceType.TEI_ATTRIBUTE
+        ),
     },
 ]
 
