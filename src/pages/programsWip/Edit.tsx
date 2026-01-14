@@ -60,7 +60,9 @@ const fieldFilters = [
     'relationshipLabel',
     'noteLabel',
     'displayFrontPageList',
-    'programStages[id,displayName,access,description, program[id]]',
+    'programStages[id,displayName,access,description,program[id],sharing]',
+    'organisationUnits[id,displayName,path]',
+    'sharing',
 ] as const
 
 export type ProgramsFromFilters = PickWithFieldFilters<
