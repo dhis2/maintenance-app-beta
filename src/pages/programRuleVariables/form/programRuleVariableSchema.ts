@@ -18,10 +18,10 @@ const programRuleVariableBaseSchema = z.object({
                 'Name can only contain letters, numbers, space, dash, dot and underscore'
             ),
         }),
-    program: modelReference.extend({ displayName: z.string() }),
-    programRuleVariableSourceType: z
-        .nativeEnum(ProgramRuleVariable.programRuleVariableSourceType)
-        .optional(),
+    program: modelReference,
+    programRuleVariableSourceType: z.nativeEnum(
+        ProgramRuleVariable.programRuleVariableSourceType
+    ),
     valueType: z.nativeEnum(ProgramRuleVariable.valueType).optional(),
     dataElement: modelReference
         .extend({ displayName: z.string().optional() })

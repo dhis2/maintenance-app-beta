@@ -39,10 +39,12 @@ export const ProgramRuleVariableFormFields = () => {
     useSyncSelectedSectionWithScroll()
     const form = useForm()
     const { values } = useFormState({ subscription: { values: true } })
-    const { input: sourceTypeInput } = useField('programRuleVariableSourceType')
     const { input: programStageInput } = useField('programStage')
 
     const isEdit = Boolean(values.id)
+
+    const sourceType = values.programRuleVariableSourceType
+    const programStage = programStageInput.value
 
     const clearProgramDependentFields = useCallback(() => {
         form.batch(() => {
@@ -64,8 +66,6 @@ export const ProgramRuleVariableFormFields = () => {
     const clearProgramStageDataElement = useCallback(() => {
         form.change('dataElement', undefined)
     }, [form])
-    const sourceType = sourceTypeInput.value
-    const programStage = programStageInput.value
 
     const {
         DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE,
@@ -102,8 +102,24 @@ export const ProgramRuleVariableFormFields = () => {
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
-                    <NameField schemaSection={section} />
+                    <NameField
+                        schemaSection={section}
+                        helpText={i18n.t(
+                            'Variable name cannot contain the words: and, or, not.'
+                        )}
+                    />
                 </StandardFormField>
+            </SectionedFormSection>
+
+            <SectionedFormSection
+                name={descriptor.getSection('configuration').name}
+            >
+                <StandardFormSectionTitle>
+                    {i18n.t('Configuration')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t('Configure how this variable works.')}
+                </StandardFormSectionDescription>
 
                 <StandardFormField>
                     <ModelSingleSelectFormField
@@ -130,29 +146,6 @@ export const ProgramRuleVariableFormFields = () => {
                         }
                     />
                 </StandardFormField>
-
-                <StandardFormField>
-                    <FieldRFF
-                        name="useCodeForOptionSet"
-                        type="checkbox"
-                        dataTest="useCodeForOptionSet-field"
-                        component={CheckboxFieldFF}
-                        label={i18n.t('Use code for option set')}
-                    />
-                </StandardFormField>
-            </SectionedFormSection>
-
-            <SectionedFormSection
-                name={descriptor.getSection('configuration').name}
-            >
-                <StandardFormSectionTitle>
-                    {i18n.t('Configuration')}
-                </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Configure the source and data elements for this program rule variable.'
-                    )}
-                </StandardFormSectionDescription>
 
                 <StandardFormField dataTest="sourceType-field">
                     <SourceTypeField
@@ -185,6 +178,17 @@ export const ProgramRuleVariableFormFields = () => {
                         <ValueTypeField />
                     </StandardFormField>
                 )}
+                <StandardFormField>
+                    <FieldRFF
+                        name="useCodeForOptionSet"
+                        type="checkbox"
+                        dataTest="useCodeForOptionSet-field"
+                        component={CheckboxFieldFF}
+                        label={i18n.t(
+                            'Show option set code instead of display name (when selection is linked to an option set).'
+                        )}
+                    />
+                </StandardFormField>
             </SectionedFormSection>
         </SectionedFormSections>
     )

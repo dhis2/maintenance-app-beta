@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectFieldFF } from '@dhis2/ui'
+import { FieldGroup, RadioFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { Field as FieldRFF } from 'react-final-form'
+import { Field, useField } from 'react-final-form'
 import { getConstantTranslation } from '../../../lib'
 import { ProgramRuleVariable } from '../../../types/generated'
 
@@ -52,28 +52,37 @@ const SOURCE_TYPES = [
         ),
     },
 ]
+
 export function SourceTypeField({
     onChange,
 }: Readonly<{ onChange?: () => void }>) {
+    const { meta } = useField('programRuleVariableSourceType', {
+        subscription: { error: true, touched: true },
+    })
+
+    const error = meta.error && meta.touched
+
     return (
-        <FieldRFF
-            name="programRuleVariableSourceType"
-            render={({ input, meta }) => (
-                <SingleSelectFieldFF
-                    input={{
-                        ...input,
-                        onChange: (value) => {
-                            input.onChange(value)
-                            onChange?.()
-                        },
+        <FieldGroup
+            label={i18n.t('Source type (required)')}
+            required
+            error={!!error}
+            validationText={error ? meta.error : undefined}
+            dataTest="sourceType-field"
+        >
+            {SOURCE_TYPES.map((option) => (
+                <Field<string | undefined>
+                    key={option.value}
+                    name="programRuleVariableSourceType"
+                    component={RadioFieldFF}
+                    label={option.label}
+                    type="radio"
+                    value={option.value}
+                    onChange={() => {
+                        onChange?.()
                     }}
-                    meta={meta}
-                    inputWidth="400px"
-                    label={i18n.t('Source type')}
-                    options={SOURCE_TYPES}
-                    placeholder={i18n.t('Select source type')}
                 />
-            )}
-        />
+            ))}
+        </FieldGroup>
     )
 }

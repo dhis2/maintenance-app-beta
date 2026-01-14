@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-07T15:52:13.513Z\n"
-"PO-Revision-Date: 2026-01-07T15:52:13.513Z\n"
+"POT-Creation-Date: 2026-01-14T16:56:00.235Z\n"
+"PO-Revision-Date: 2026-01-14T16:56:00.235Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -327,13 +327,6 @@ msgstr "Required"
 msgid "Please enter a GeoJSON value"
 msgstr "Please enter a GeoJSON value"
 
-msgid ""
-"Translatable fields appear in the default language in this form, not in "
-"your selected database language."
-msgstr ""
-"Translatable fields appear in the default language in this form, not in "
-"your selected database language."
-
 msgid "Exit without saving"
 msgstr "Exit without saving"
 
@@ -354,6 +347,13 @@ msgstr "Show error details"
 
 msgid "Save and close"
 msgstr "Save and close"
+
+msgid ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
+msgstr ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
 
 msgid "<No value>"
 msgstr "<No value>"
@@ -833,24 +833,6 @@ msgstr "Program indicator"
 msgid "Program indicator group"
 msgstr "Program indicator group"
 
-msgid "Data element in newest event in program stage"
-msgstr "Data element in newest event in program stage"
-
-msgid "Data element in newest event in program"
-msgstr "Data element in newest event in program"
-
-msgid "Data element from current event"
-msgstr "Data element from current event"
-
-msgid "Data element from previous event"
-msgstr "Data element from previous event"
-
-msgid "Calculated value"
-msgstr "Calculated value"
-
-msgid "Tracked entity attribute"
-msgstr "Tracked entity attribute"
-
 msgid "Select source type"
 msgstr "Select source type"
 
@@ -1060,6 +1042,9 @@ msgstr "Organisation unit level"
 
 msgid "Organisation unit levels"
 msgstr "Organisation unit levels"
+
+msgid "Tracked entity attribute"
+msgstr "Tracked entity attribute"
 
 msgid "Tracked entity attributes"
 msgstr "Tracked entity attributes"
@@ -1595,6 +1580,27 @@ msgstr "Descendants"
 msgid "Selected"
 msgstr "Selected"
 
+msgid "On complete"
+msgstr "On complete"
+
+msgid "On update and insert"
+msgstr "On update and insert"
+
+msgid "Data element in newest event in program stage"
+msgstr "Data element in newest event in program stage"
+
+msgid "Data element in newest event in program"
+msgstr "Data element in newest event in program"
+
+msgid "Data element from current event"
+msgstr "Data element from current event"
+
+msgid "Data element from previous event"
+msgstr "Data element from previous event"
+
+msgid "Calculated value"
+msgstr "Calculated value"
+
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
 
@@ -1774,12 +1780,6 @@ msgstr "Program name"
 
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
-
-msgid "Source type"
-msgstr "Source type"
-
-msgid "Use code for option set"
-msgstr "Use code for option set"
 
 msgid "Unique"
 msgstr "Unique"
@@ -4126,17 +4126,11 @@ msgstr "Set up the program indicator legends."
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
 
-msgid "Data element from the newest event in program stage"
-msgstr "Data element from the newest event in program stage"
+msgid "Select data element"
+msgstr "Select data element"
 
-msgid "Data element from the newest event in program"
-msgstr "Data element from the newest event in program"
-
-msgid "Data element in current event"
-msgstr "Data element in current event"
-
-msgid "Data element from the previous event"
-msgstr "Data element from the previous event"
+msgid "Select tracked entity attribute"
+msgstr "Select tracked entity attribute"
 
 msgid "Set up the basic information for this program rule variable."
 msgstr "Set up the basic information for this program rule variable."
@@ -4147,20 +4141,26 @@ msgstr "Program cannot be changed after creation"
 msgid "Configure the source and data elements for this program rule variable."
 msgstr "Configure the source and data elements for this program rule variable."
 
-msgid "Select data element"
-msgstr "Select data element"
-
-msgid "Select tracked entity attribute"
-msgstr "Select tracked entity attribute"
-
-msgid "Select value type"
-msgstr "Select value type"
-
 msgid "Program Rule Variable"
 msgstr "Program Rule Variable"
 
+msgid "Name is required"
+msgstr "Name is required"
+
 msgid "Name can only contain letters, numbers, space, dash, dot and underscore"
 msgstr "Name can only contain letters, numbers, space, dash, dot and underscore"
+
+msgid "Organisation unit access"
+msgstr "Organisation unit access"
+
+msgid "Set up which organisation units can collect data using this program."
+msgstr "Set up which organisation units can collect data using this program."
+
+msgid "Role access"
+msgstr "Role access"
+
+msgid "Set up which user roles can access this program and program stages."
+msgstr "Set up which user roles can access this program and program stages."
 
 msgid "Enrollment: Data"
 msgstr "Enrollment: Data"
@@ -4590,9 +4590,6 @@ msgstr "Initiating side constraint"
 
 msgid "Receiving side constraint"
 msgstr "Receiving side constraint"
-
-msgid "Name is required"
-msgstr "Name is required"
 
 msgid "Relationship name seen from initiating entity is required"
 msgstr "Relationship name seen from initiating entity is required"
