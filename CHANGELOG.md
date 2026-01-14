@@ -1,3 +1,10 @@
+## [0.108.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.108.0...v0.108.1) (2026-01-12)
+
+
+### Bug Fixes
+
+* add translated notice box also to sectioned forms ([#726](https://github.com/dhis2/maintenance-app-beta/issues/726)) ([c8a1056](https://github.com/dhis2/maintenance-app-beta/commit/c8a1056bd1583988d59dbfde90d1dc5a2abcfd3a))
+
 # [0.108.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.107.0...v0.108.0) (2026-01-07)
 
 

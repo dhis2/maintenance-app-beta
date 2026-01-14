@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-12T10:13:23.305Z\n"
-"PO-Revision-Date: 2026-01-12T10:13:23.305Z\n"
+"POT-Creation-Date: 2026-01-07T12:53:40.872Z\n"
+"PO-Revision-Date: 2026-01-07T12:53:40.872Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -833,6 +833,30 @@ msgstr "Program indicator"
 msgid "Program indicator group"
 msgstr "Program indicator group"
 
+msgid "Data element in newest event in program stage"
+msgstr "Data element in newest event in program stage"
+
+msgid "Data element in newest event in program"
+msgstr "Data element in newest event in program"
+
+msgid "Data element from current event"
+msgstr "Data element from current event"
+
+msgid "Data element from previous event"
+msgstr "Data element from previous event"
+
+msgid "Calculated value"
+msgstr "Calculated value"
+
+msgid "Tracked entity attribute"
+msgstr "Tracked entity attribute"
+
+msgid "Select source type"
+msgstr "Select source type"
+
+msgid "All source types"
+msgstr "All source types"
+
 msgid "Tracker program"
 msgstr "Tracker program"
 
@@ -1036,9 +1060,6 @@ msgstr "Organisation unit level"
 
 msgid "Organisation unit levels"
 msgstr "Organisation unit levels"
-
-msgid "Tracked entity attribute"
-msgstr "Tracked entity attribute"
 
 msgid "Tracked entity attributes"
 msgstr "Tracked entity attributes"
@@ -1574,11 +1595,11 @@ msgstr "Descendants"
 msgid "Selected"
 msgstr "Selected"
 
-msgid "On complete"
-msgstr "On complete"
+msgid "Descendants"
+msgstr "Descendants"
 
-msgid "On update and insert"
-msgstr "On update and insert"
+msgid "Selected"
+msgstr "Selected"
 
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
@@ -1753,6 +1774,12 @@ msgstr "Program name"
 
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
+
+msgid "Source type"
+msgstr "Source type"
+
+msgid "Use code for option set"
+msgstr "Use code for option set"
 
 msgid "Unique"
 msgstr "Unique"
