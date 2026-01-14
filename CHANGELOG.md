@@ -1,3 +1,10 @@
+# [0.110.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.109.1...v0.110.0) (2026-01-14)
+
+
+### Features
+
+* [DHIS2-20479] Program access and sharing ([#716](https://github.com/dhis2/maintenance-app-beta/issues/716)) ([994cf5a](https://github.com/dhis2/maintenance-app-beta/commit/994cf5a106b807ff18eb3805f0500b8fe3ebd3fc))
+
 ## [0.109.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.109.0...v0.109.1) (2026-01-14)
 
 
