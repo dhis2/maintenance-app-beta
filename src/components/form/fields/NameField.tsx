@@ -1,20 +1,36 @@
 import i18n from '@dhis2/d2-i18n'
 import { InputFieldFF } from '@dhis2/ui'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import { SchemaSection, useIsFieldValueUnique, useSchema } from '../../../lib'
+import {
+    composeAsyncValidators,
+    FormFieldValidator,
+} from '../../../lib/form/composeAsyncValidators'
 import { useValidator } from '../../../lib/models/useFieldValidators'
 
 export function NameField({
     schemaSection,
     helpText,
     modelId,
+    customValidator,
 }: {
     helpText?: string
     schemaSection: SchemaSection
     modelId?: string
+    customValidator?: FormFieldValidator<string>
 }) {
-    const validator = useValidator({ schemaSection, property: 'name', modelId })
+    const baseValidator = useValidator({
+        schemaSection,
+        property: 'name',
+        modelId,
+    })
+    const validator = useMemo(() => {
+        if (customValidator) {
+            return composeAsyncValidators([baseValidator, customValidator])
+        }
+        return baseValidator
+    }, [baseValidator, customValidator])
     const schema = useSchema(schemaSection.name)
     const propertyDetails = schema.properties['name']
     const [warning, setWarning] = useState<string | undefined>()

@@ -22,6 +22,10 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
+import {
+    composeAsyncValidators,
+    FormFieldValidator,
+} from '../../../lib/form/composeAsyncValidators'
 import { ProgramRuleVariable } from '../../../types/generated'
 import {
     DataElementField,
@@ -32,6 +36,42 @@ import {
 import { ProgramRuleVariableFormDescriptor } from './formDescriptor'
 
 const section = SECTIONS_MAP.programRuleVariable
+
+const NAME_PATTERN = /^[a-zA-Z0-9\s\-._]+$/
+const FORBIDDEN_WORDS = ['and', 'or', 'not']
+const FORBIDDEN_WORDS_PATTERN = new RegExp(
+    `\\b(${FORBIDDEN_WORDS.join('|')})\\b`,
+    'i'
+)
+
+const namePatternValidator: FormFieldValidator<string> = (value) => {
+    if (!value) {
+        return undefined
+    }
+    if (!NAME_PATTERN.test(value)) {
+        return i18n.t(
+            'Name can only contain letters, numbers, space, dash, dot and underscore'
+        )
+    }
+    return undefined
+}
+
+const forbiddenWordsValidator: FormFieldValidator<string> = (value) => {
+    if (!value) {
+        return undefined
+    }
+    if (FORBIDDEN_WORDS_PATTERN.test(value)) {
+        return i18n.t(
+            'Program rule variable name contains forbidden words: and, or, not.'
+        )
+    }
+    return undefined
+}
+
+const nameValidator = composeAsyncValidators([
+    forbiddenWordsValidator,
+    namePatternValidator,
+])
 
 export const ProgramRuleVariableFormFields = () => {
     const descriptor =
@@ -107,6 +147,7 @@ export const ProgramRuleVariableFormFields = () => {
                         helpText={i18n.t(
                             'Variable name cannot contain the words: and, or, not.'
                         )}
+                        customValidator={nameValidator}
                     />
                 </StandardFormField>
             </SectionedFormSection>

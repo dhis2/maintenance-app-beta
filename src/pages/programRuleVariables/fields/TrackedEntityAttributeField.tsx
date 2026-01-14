@@ -39,7 +39,7 @@ export function TrackedEntityAttributeField() {
         enabled: !!program?.id,
     })
 
-    const options = useMemo(() => {
+    const trackedEntityAttributes = useMemo(() => {
         if (!programData?.programTrackedEntityAttributes) {
             return []
         }
@@ -48,6 +48,14 @@ export function TrackedEntityAttributeField() {
         )
     }, [programData])
 
+    const options = [
+        { label: i18n.t('<No value>'), value: '' },
+        ...trackedEntityAttributes.map((tea) => ({
+            value: tea.id,
+            label: tea.displayName,
+        })),
+    ]
+
     if (!program?.id) {
         return null
     }
@@ -55,6 +63,10 @@ export function TrackedEntityAttributeField() {
     return (
         <FieldRFF
             name="trackedEntityAttribute"
+            format={(value) => (value?.id ? value.id : '')}
+            parse={(value) =>
+                value && value !== '' ? { id: value } : undefined
+            }
             render={({ input, meta }) => (
                 <SingleSelectFieldFF
                     input={input}
@@ -62,11 +74,7 @@ export function TrackedEntityAttributeField() {
                     inputWidth="400px"
                     dataTest="trackedEntityAttribute-field"
                     label={i18n.t('Tracked entity attribute')}
-                    options={options.map((tea) => ({
-                        value: tea.id,
-                        label: tea.displayName,
-                    }))}
-                    placeholder={i18n.t('Select tracked entity attribute')}
+                    options={options}
                     loading={!programData}
                 />
             )}

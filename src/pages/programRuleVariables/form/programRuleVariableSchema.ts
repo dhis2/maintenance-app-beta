@@ -1,4 +1,3 @@
-import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 import { ProgramRuleVariable } from '../../../types/generated'
@@ -6,18 +5,7 @@ import { ProgramRuleVariable } from '../../../types/generated'
 const { modelReference, withDefaultListColumns, identifiable } =
     modelFormSchemas
 
-const NAME_PATTERN = /^[a-zA-Z0-9\s\-._]+$/
-
 const programRuleVariableBaseSchema = z.object({
-    name: z
-        .string()
-        .trim()
-        .min(1, i18n.t('Name is required'))
-        .regex(NAME_PATTERN, {
-            message: i18n.t(
-                'Name can only contain letters, numbers, space, dash, dot and underscore'
-            ),
-        }),
     program: modelReference,
     programRuleVariableSourceType: z.nativeEnum(
         ProgramRuleVariable.programRuleVariableSourceType

@@ -31,6 +31,7 @@ export function ProgramStageField({
                             paging: false,
                         },
                     }}
+                    showNoValueOption
                     onChange={onChange}
                 />
             )}

@@ -76,6 +76,14 @@ export function DataElementField() {
         )
     }, [programData, sourceType, programStage?.id])
 
+    const options = [
+        { label: i18n.t('<No value>'), value: '' },
+        ...dataElementOptions.map((de) => ({
+            value: de.id,
+            label: de.displayName,
+        })),
+    ]
+
     if (!program?.id) {
         return null
     }
@@ -83,6 +91,10 @@ export function DataElementField() {
     return (
         <FieldRFF
             name="dataElement"
+            format={(value) => (value?.id ? value.id : '')}
+            parse={(value) =>
+                value && value !== '' ? { id: value } : undefined
+            }
             render={({ input, meta }) => (
                 <SingleSelectFieldFF
                     input={input}
@@ -90,11 +102,7 @@ export function DataElementField() {
                     inputWidth="400px"
                     dataTest="dataElement-field"
                     label={i18n.t('Data element')}
-                    options={dataElementOptions.map((de) => ({
-                        value: de.id,
-                        label: de.displayName,
-                    }))}
-                    placeholder={i18n.t('Select data element')}
+                    options={options}
                     loading={!programData}
                 />
             )}
