@@ -34,7 +34,6 @@ import {
     PickWithFieldFilters,
     ProgramStage,
 } from '../../../../types/models'
-import { ProgramStageListItem } from '../ProgramStagesFormContents'
 import styles from './StageForm.module.css'
 import { StageFormContents } from './StageFormContents'
 import { StageFormDescriptor } from './stageFormDescriptor'
@@ -48,6 +47,7 @@ export const fieldFilters = [
     'style[color,icon]',
     'enableUserAssignment',
     'featureType',
+    'validationStrategy',
     'preGenerateUID',
     'executionDateLabel',
     'dueDateLabel',
@@ -87,15 +87,9 @@ export type StageFormProps = {
     stage?: PartialStageFormValues
     onCancel?: () => void
     onSubmit: OnSubmitWithClose
-    existingStages?: ProgramStageListItem[]
 }
 
-export const StageForm = ({
-    stage,
-    onSubmit,
-    onCancel,
-    existingStages,
-}: StageFormProps) => {
+export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
     const programId = useParams().id as string
     const customAttributes = useCustomAttributesQuery({
         enabled: true,
@@ -147,7 +141,6 @@ export const StageForm = ({
                                     <StageFormContents
                                         isSubsection
                                         setSelectedSection={setSelectedSection}
-                                        existingStages={existingStages}
                                     />
                                     <FormFooterWrapper>
                                         <ButtonStrip>
@@ -205,7 +198,6 @@ export const EditStageForm = ({
     stage,
     onCancel,
     onSubmitted,
-    existingStages,
 }: {
     stage: DisplayableModel
     onCancel: () => void
@@ -213,7 +205,6 @@ export const EditStageForm = ({
         values: SubmittedStageFormValues,
         closeOnSubmit: boolean
     ) => void
-    existingStages?: ProgramStageListItem[]
 }) => {
     const handlePatch = usePatchModel(stage.id, stageSchemaSection.namePlural)
 
@@ -274,7 +265,6 @@ export const EditStageForm = ({
             stage={stageValues.data}
             onSubmit={onFormSubmit}
             onCancel={onCancel}
-            existingStages={existingStages}
         />
     )
 }
@@ -282,14 +272,12 @@ export const EditStageForm = ({
 export const NewStageForm = ({
     onCancel,
     onSubmitted,
-    existingStages,
 }: {
     onCancel: () => void
     onSubmitted: (
         values: SubmittedStageFormValues,
         closeOnSubmit: boolean
     ) => void
-    existingStages?: ProgramStageListItem[]
 }) => {
     const handleCreate = useCreateModel(stageSchemaSection.namePlural)
     const onFormSubmit: OnSubmitWithClose = async (
@@ -319,7 +307,6 @@ export const NewStageForm = ({
             stage={undefined}
             onSubmit={onFormSubmit}
             onCancel={onCancel}
-            existingStages={existingStages}
         />
     )
 }
@@ -328,7 +315,6 @@ export const EditOrNewStageForm = ({
     stage,
     onCancel,
     onSubmitted,
-    existingStages,
 }: {
     stage: DisplayableModel | null | undefined
     onCancel: () => void
@@ -336,20 +322,13 @@ export const EditOrNewStageForm = ({
         values: SubmittedStageFormValues,
         closeOnSubmit: boolean
     ) => void
-    existingStages?: ProgramStageListItem[]
 }) => {
     if (stage === undefined) {
         return null
     }
 
     if (stage === null) {
-        return (
-            <NewStageForm
-                onSubmitted={onSubmitted}
-                onCancel={onCancel}
-                existingStages={existingStages}
-            />
-        )
+        return <NewStageForm onSubmitted={onSubmitted} onCancel={onCancel} />
     }
 
     return (
@@ -357,7 +336,6 @@ export const EditOrNewStageForm = ({
             stage={stage}
             onCancel={onCancel}
             onSubmitted={onSubmitted}
-            existingStages={existingStages}
         />
     )
 }

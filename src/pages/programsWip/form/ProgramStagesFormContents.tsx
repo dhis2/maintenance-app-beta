@@ -34,7 +34,6 @@ export const ProgramStagesFormContents = React.memo(
             DisplayableModel | null | undefined
         >()
         const isStageFormOpen = !!stageFormOpen || stageFormOpen === null
-        const existingStages = stagesFieldArray.value
 
         const handleSubmittedStage = (
             values: SubmittedStageFormValues,
@@ -77,7 +76,6 @@ export const ProgramStagesFormContents = React.memo(
                                 stage={stageFormOpen}
                                 onCancel={onCloseStageForm}
                                 onSubmitted={handleSubmittedStage}
-                                existingStages={existingStages}
                             />
                         </div>
                     )}

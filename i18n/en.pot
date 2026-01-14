@@ -833,6 +833,30 @@ msgstr "Program indicator"
 msgid "Program indicator group"
 msgstr "Program indicator group"
 
+msgid "Data element in newest event in program stage"
+msgstr "Data element in newest event in program stage"
+
+msgid "Data element in newest event in program"
+msgstr "Data element in newest event in program"
+
+msgid "Data element from current event"
+msgstr "Data element from current event"
+
+msgid "Data element from previous event"
+msgstr "Data element from previous event"
+
+msgid "Calculated value"
+msgstr "Calculated value"
+
+msgid "Tracked entity attribute"
+msgstr "Tracked entity attribute"
+
+msgid "Select source type"
+msgstr "Select source type"
+
+msgid "All source types"
+msgstr "All source types"
+
 msgid "Tracker program"
 msgstr "Tracker program"
 
@@ -1036,9 +1060,6 @@ msgstr "Organisation unit level"
 
 msgid "Organisation unit levels"
 msgstr "Organisation unit levels"
-
-msgid "Tracked entity attribute"
-msgstr "Tracked entity attribute"
 
 msgid "Tracked entity attributes"
 msgstr "Tracked entity attributes"
@@ -1747,6 +1768,12 @@ msgstr "Program name"
 
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
+
+msgid "Source type"
+msgstr "Source type"
+
+msgid "Use code for option set"
+msgstr "Use code for option set"
 
 msgid "Unique"
 msgstr "Unique"
@@ -4364,8 +4391,8 @@ msgstr "Save "
 msgid "Saving a stage does not save other changes to the program"
 msgstr "Saving a stage does not save other changes to the program"
 
-msgid "A stage with this name already exists in this program"
-msgstr "A stage with this name already exists in this program"
+msgid "A stage with this name already exists. Please choose another name."
+msgstr "A stage with this name already exists. Please choose another name."
 
 msgid "Configure the basic information for this program stage."
 msgstr "Configure the basic information for this program stage."
@@ -4417,6 +4444,9 @@ msgstr "Program stage form"
 
 msgid "Configure the form for data collection for events in this program stage."
 msgstr "Configure the form for data collection for events in this program stage."
+
+msgid "Validation strategy"
+msgstr "Validation strategy"
 
 msgid "Stage section"
 msgstr "Stage section"

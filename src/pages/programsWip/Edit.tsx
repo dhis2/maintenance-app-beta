@@ -15,6 +15,7 @@ import {
 import { Section } from '../../components/formCreators/SectionFormList'
 import { useHandleOnSubmitEditFormDeletions } from '../../components/sectionedForm/useHandleOnSubmitEditFormDeletions'
 import {
+    DEFAULT_FIELD_FILTERS,
     SectionedFormProvider,
     SECTIONS_MAP,
     useBoundResourceQueryFn,
@@ -27,7 +28,7 @@ import { ProgramFormDescriptor } from './form/formDescriptor'
 import { ProgramFormContents } from './form/ProgramFormContents'
 
 const fieldFilters = [
-    'id',
+    ...DEFAULT_FIELD_FILTERS,
     'name',
     'shortName',
     'code',
