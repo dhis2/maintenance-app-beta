@@ -264,7 +264,7 @@ export const StageFormContents = ({
                                 return undefined
                             }
                             const num = Number(value)
-                            return isNaN(num) ? undefined : num
+                            return Number.isNaN(num) ? undefined : num
                         }}
                     />
                 </StandardFormField>
@@ -341,7 +341,7 @@ export const StageFormContents = ({
                                 return 0
                             }
                             const num = Number(value)
-                            return isNaN(num) ? 0 : num
+                            return Number.isNaN(num) ? 0 : num
                         }}
                         helpText={i18n.t(
                             'Days to add to the enrollment or incident date. 0 means same day, positive numbers schedule that many days after.'
