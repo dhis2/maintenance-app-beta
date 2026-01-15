@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import React, { useMemo } from 'react'
 import {
-    DrawerPortal,
     FormBase,
     FormBaseProps,
     FormFooterWrapper,
@@ -36,6 +35,8 @@ export const fieldFilters = [
     'name',
     'description',
     'renderType[MOBILE[type],DESKTOP[type]]',
+    'dataElements[id,displayName]',
+    'programStage[id]',
 ] as const
 
 export const stageSectionSchemaSection = {

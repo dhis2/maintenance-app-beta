@@ -55,7 +55,7 @@ export const fieldFilters = [
     'eventLabel',
     'programStageSections[id,displayName]',
     'dataEntryForm[id,displayName,htmlCode]',
-    'programStageDataElement[id,displayName]',
+    'programStageDataElements[id,dataElement[id,displayName]]',
 ] as const
 
 export const stageSchemaSection = {
