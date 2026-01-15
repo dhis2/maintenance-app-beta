@@ -1,115 +1,36 @@
 import i18n from '@dhis2/d2-i18n'
 import {
-    CheckboxField,
     CheckboxFieldFF,
     Field,
-    SingleSelectFieldFF,
     Table,
     TableBody,
     TableCell,
     TableCellHead,
     TableHead,
     TableRow,
+    TransferOption,
 } from '@dhis2/ui'
-import { useQuery } from '@tanstack/react-query'
-import React from 'react'
-import { Field as FieldRFF, FieldRenderProps, useField } from 'react-final-form'
+import React, { useEffect, useRef } from 'react'
+import { Field as FieldRFF, useField } from 'react-final-form'
 import {
     ModelTransfer,
+    RenderingOptionsSelect,
     SectionedFormSection,
     StandardFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
 import css from '../../../components/metadataFormControls/ModelTransfer/ModelTransfer.module.css'
-import { getConstantTranslation, useBoundResourceQueryFn } from '../../../lib'
+import {
+    InfoIconWithTooltip,
+    TooltipWrapper,
+} from '../../../components/tooltip'
+import { ProgramTrackedEntityAttribute } from '../../../types/generated'
 import { ProgramsFromFilters } from '../Edit'
 
-type RenderingOptionsResponse = {
-    renderingTypes: string[]
-    valueType: string
-}[]
-
-const RenderingOptionsSingleSelect = ({
-    attribute,
-    index,
-    device,
-}: {
-    attribute: ProgramsFromFilters['programTrackedEntityAttributes'][0]
-    index: number
-    device: 'MOBILE' | 'DESKTOP'
-}) => {
-    const queryFn = useBoundResourceQueryFn()
-
-    const { data, isLoading } = useQuery({
-        queryKey: [
-            {
-                resource: 'staticConfiguration/renderingOptions',
-                params: {
-                    fields: ['renderingTypes'],
-                },
-            },
-        ],
-        queryFn: queryFn<RenderingOptionsResponse>,
-    })
-
-    const optionsFromData =
-        data
-            ?.find((ro) => ro.valueType === attribute.valueType)
-            ?.renderingTypes.map((rt) => ({
-                value: rt,
-                label: getConstantTranslation(rt),
-            })) ?? []
-
-    return (
-        <FieldRFF<string | undefined>
-            inputWidth="100px"
-            defaultValue={'DEFAULT'}
-            name={`programTrackedEntityAttributes[${index}].renderType.${device}.type`}
-            render={(props: FieldRenderProps<string | undefined>) => {
-                const selectedOptions =
-                    props.input.value &&
-                    (!data ||
-                        data.length === 0 ||
-                        !optionsFromData.some(
-                            (o) => o.value === props.input.value
-                        ))
-                        ? [
-                              {
-                                  value: props.input.value,
-                                  label: getConstantTranslation(
-                                      props.input.value
-                                  ),
-                              },
-                          ]
-                        : []
-
-                const defaultOptions =
-                    (optionsFromData && optionsFromData.length > 0) ||
-                    selectedOptions.length
-                        ? []
-                        : [
-                              {
-                                  value: 'DEFAULT',
-                                  label: getConstantTranslation('DEFAULT'),
-                              },
-                          ]
-
-                return (
-                    <SingleSelectFieldFF
-                        {...props}
-                        inputWidth={'150px'}
-                        loading={isLoading}
-                        options={[
-                            ...defaultOptions,
-                            ...selectedOptions,
-                            ...optionsFromData,
-                        ]}
-                    />
-                )
-            }}
-        />
-    )
+const defaultRenderType = {
+    MOBILE: { type: 'DEFAULT' },
+    DESKTOP: { type: 'DEFAULT' },
 }
 
 export const EnrollmentDataFormContents = React.memo(
@@ -120,6 +41,90 @@ export const EnrollmentDataFormContents = React.memo(
             multiple: true,
             validateFields: [],
         })
+
+        const trackedEntityTypeField = useField<
+            ProgramsFromFilters['trackedEntityType']
+        >('trackedEntityType', {
+            subscription: { value: true },
+        })
+
+        const previousTetaIdsRef = useRef<Set<string>>(new Set())
+
+        const tetas =
+            trackedEntityTypeField.input.value?.trackedEntityTypeAttributes ||
+            []
+
+        const tetaMap = new Map<string, ProgramTrackedEntityAttribute>(
+            tetas.map((teta: ProgramTrackedEntityAttribute) => [
+                teta.trackedEntityAttribute.id,
+                teta,
+            ])
+        )
+
+        const tetaIds = new Set(tetaMap.keys())
+
+        const tetaIdsString = Array.from(tetaIds).join(',')
+
+        useEffect(() => {
+            if (!trackedEntityTypeField.input.value?.id) {
+                return
+            }
+
+            const existingProgramAttributesMap = new Map(
+                input.value.map((programAttribute) => [
+                    programAttribute.trackedEntityAttribute.id,
+                    programAttribute,
+                ])
+            )
+
+            const convertedTetas = tetas.map(
+                (teta: ProgramTrackedEntityAttribute) => {
+                    const existing = existingProgramAttributesMap.get(
+                        teta.trackedEntityAttribute.id
+                    )
+
+                    if (
+                        existing &&
+                        !previousTetaIdsRef.current.has(
+                            teta.trackedEntityAttribute.id
+                        )
+                    ) {
+                        return existing
+                    }
+
+                    return {
+                        trackedEntityAttribute: teta.trackedEntityAttribute,
+                        valueType: teta.trackedEntityAttribute.valueType,
+                        unique: teta.trackedEntityAttribute.unique,
+                        allowFutureDate: false,
+                        mandatory: teta.mandatory,
+                        searchable: teta.searchable,
+                        displayInList: teta.displayInList,
+                        renderType: defaultRenderType,
+                    }
+                }
+            )
+
+            const petas = input.value.filter((programAttribute) => {
+                const attrId = programAttribute.trackedEntityAttribute.id
+
+                if (tetaIds.has(attrId)) {
+                    return false
+                }
+
+                if (previousTetaIdsRef.current.has(attrId)) {
+                    return false
+                }
+
+                return true
+            })
+
+            previousTetaIdsRef.current = tetaIds
+
+            input.onChange([...convertedTetas, ...petas])
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [trackedEntityTypeField.input.value?.id, tetaIdsString])
+
         const programHasDateAttributes = input.value.some(
             (attribute) => attribute.valueType === 'DATE'
         )
@@ -144,53 +149,123 @@ export const EnrollmentDataFormContents = React.memo(
                         className={css.moduleTransferField}
                     >
                         <ModelTransfer
-                            selected={input.value.map((attribute) => ({
-                                id: attribute.trackedEntityAttribute.id,
-                                displayName:
-                                    attribute.trackedEntityAttribute
-                                        .displayName,
-                                valueType: attribute.valueType,
-                                unique: attribute.trackedEntityAttribute.unique,
-                            }))}
-                            onChange={({ selected }) => {
-                                input.onChange(
-                                    selected.map((s) => {
-                                        const defaultRenderType = {
-                                            MOBILE: { type: 'DEFAULT' },
-                                            DESKTOP: {
-                                                type: 'DEFAULT',
-                                            },
-                                        }
-                                        const alreadySelectedAttribute =
-                                            input.value.find(
-                                                (a) =>
-                                                    a.trackedEntityAttribute
-                                                        .id === s.id
-                                            )
+                            selected={input.value.map((attribute) => {
+                                const tea = attribute.trackedEntityAttribute
+                                return tea
+                            })}
+                            renderOption={({ value, ...rest }) => {
+                                const tea = value
+                                const isTeta = tetaMap.has(tea.id)
+                                const tetDisplayName =
+                                    trackedEntityTypeField.input.value
+                                        ?.displayName
 
-                                        return alreadySelectedAttribute
-                                            ? {
-                                                  ...alreadySelectedAttribute,
-                                                  renderType:
-                                                      alreadySelectedAttribute.renderType ??
-                                                      defaultRenderType,
-                                              }
-                                            : {
-                                                  trackedEntityAttribute: {
-                                                      id: s.id,
-                                                      displayName:
-                                                          s.displayName,
-                                                  },
-                                                  valueType: s.valueType,
-                                                  unique: s.unique,
-                                                  allowFutureDate: false,
-                                                  mandatory: false,
-                                                  searchable: false,
-                                                  displayInList: false,
-                                                  renderType: defaultRenderType,
-                                              }
-                                    })
+                                return (
+                                    <TransferOption
+                                        {...rest}
+                                        label={
+                                            isTeta && tetDisplayName ? (
+                                                <span>
+                                                    {tea.displayName}
+                                                    {' · '}
+                                                    {`${tetDisplayName} attribute`}
+                                                </span>
+                                            ) : (
+                                                tea.displayName
+                                            )
+                                        }
+                                        value={tea.id}
+                                    />
                                 )
+                            }}
+                            onChange={({ selected }) => {
+                                const existingAttributesMap = new Map(
+                                    input.value.map((attr) => [
+                                        attr.trackedEntityAttribute.id,
+                                        attr,
+                                    ])
+                                )
+
+                                const tetaOriginalIndices = new Map<
+                                    string,
+                                    number
+                                >()
+                                input.value.forEach((attr, index) => {
+                                    if (
+                                        tetaIds.has(
+                                            attr.trackedEntityAttribute.id
+                                        )
+                                    ) {
+                                        tetaOriginalIndices.set(
+                                            attr.trackedEntityAttribute.id,
+                                            index
+                                        )
+                                    }
+                                })
+
+                                const selectedIds = new Set(
+                                    selected.map((s) => s.id)
+                                )
+
+                                const selectedAttributes = selected.map((s) => {
+                                    const existing = existingAttributesMap.get(
+                                        s.id
+                                    )
+                                    if (existing) {
+                                        return existing
+                                    }
+
+                                    return {
+                                        trackedEntityAttribute: {
+                                            id: s.id,
+                                            displayName: s.displayName,
+                                        },
+                                        valueType: s.valueType,
+                                        unique: s.unique,
+                                        allowFutureDate: false,
+                                        mandatory: false,
+                                        searchable: false,
+                                        displayInList: false,
+                                        renderType: defaultRenderType,
+                                    }
+                                })
+
+                                // Temperary functionoutality to re-insert TETAs that the user tried to remove
+                                // Should be removed if transfer arrow buttons gets conditionally disabling
+                                const missingTetas = input.value
+                                    .filter(
+                                        (attr) =>
+                                            tetaIds.has(
+                                                attr.trackedEntityAttribute.id
+                                            ) &&
+                                            !selectedIds.has(
+                                                attr.trackedEntityAttribute.id
+                                            )
+                                    )
+                                    .map((teta) => ({
+                                        teta: {
+                                            ...teta,
+                                            renderType:
+                                                teta.renderType ||
+                                                defaultRenderType,
+                                        },
+                                        index:
+                                            tetaOriginalIndices.get(
+                                                teta.trackedEntityAttribute.id
+                                            ) ?? Infinity,
+                                    }))
+                                    .sort((a, b) => a.index - b.index)
+
+                                const result = [...selectedAttributes]
+                                missingTetas.forEach(({ teta, index }) => {
+                                    result.splice(
+                                        Math.min(index, result.length),
+                                        0,
+                                        teta
+                                    )
+                                })
+
+                                input.onChange(result)
                                 input.onBlur()
                             }}
                             leftHeader={i18n.t('Available attributes')}
@@ -199,7 +274,7 @@ export const EnrollmentDataFormContents = React.memo(
                                 'Filter available attributes'
                             )}
                             filterPlaceholderPicked={i18n.t(
-                                'Filter attributes'
+                                'Filter selected attributes'
                             )}
                             maxSelections={Infinity}
                             query={{
@@ -211,6 +286,9 @@ export const EnrollmentDataFormContents = React.memo(
                                         'valueType',
                                         'unique',
                                     ],
+                                    filter: tetaIdsString
+                                        ? [`id:!in:[${tetaIdsString}]`]
+                                        : undefined,
                                 },
                             }}
                         />
@@ -253,13 +331,39 @@ export const EnrollmentDataFormContents = React.memo(
                         </TableHead>
                         <TableBody>
                             {input.value.map((attribute, index) => {
+                                const attributeId =
+                                    attribute.trackedEntityAttribute.id
+                                const teta = tetaMap.get(attributeId)
+                                const isMandatoryDisabled =
+                                    teta?.mandatory === true
+
+                                const tetDisplayName =
+                                    trackedEntityTypeField.input.value
+                                        ?.displayName
+
                                 return (
-                                    <TableRow key={attribute.id}>
+                                    <TableRow key={attribute.id || attributeId}>
                                         <TableCell>
-                                            {
-                                                attribute.trackedEntityAttribute
-                                                    .displayName
-                                            }
+                                            <span
+                                                style={{
+                                                    display: 'flex',
+                                                    gap: '6px',
+                                                }}
+                                            >
+                                                {
+                                                    attribute
+                                                        .trackedEntityAttribute
+                                                        .displayName
+                                                }
+                                                {teta && tetDisplayName && (
+                                                    <InfoIconWithTooltip
+                                                        content={i18n.t(
+                                                            'This attribute is defined at the tracked entity type level'
+                                                        )}
+                                                        text={`${tetDisplayName} attribute`}
+                                                    />
+                                                )}
+                                            </span>
                                         </TableCell>
                                         {programHasDateAttributes && (
                                             <TableCell>
@@ -275,21 +379,33 @@ export const EnrollmentDataFormContents = React.memo(
                                             </TableCell>
                                         )}
                                         <TableCell>
-                                            <FieldRFF
-                                                component={CheckboxFieldFF}
-                                                name={`programTrackedEntityAttributes[${index}].mandatory`}
-                                                type="checkbox"
-                                            />
+                                            <TooltipWrapper
+                                                condition={isMandatoryDisabled}
+                                                content={i18n.t(
+                                                    'This attribute is marked as required at the tracked entity type level'
+                                                )}
+                                            >
+                                                <FieldRFF
+                                                    component={CheckboxFieldFF}
+                                                    name={`programTrackedEntityAttributes[${index}].mandatory`}
+                                                    type="checkbox"
+                                                    disabled={
+                                                        isMandatoryDisabled
+                                                    }
+                                                />
+                                            </TooltipWrapper>
                                         </TableCell>
                                         <TableCell>
-                                            {attribute.trackedEntityAttribute
-                                                .unique ? (
-                                                <CheckboxField
-                                                    name="searchable"
-                                                    checked
-                                                    disabled
-                                                />
-                                            ) : (
+                                            <TooltipWrapper
+                                                condition={
+                                                    attribute
+                                                        .trackedEntityAttribute
+                                                        .unique
+                                                }
+                                                content={i18n.t(
+                                                    'Unique attributes are always searchable'
+                                                )}
+                                            >
                                                 <FieldRFF
                                                     component={CheckboxFieldFF}
                                                     name={`programTrackedEntityAttributes[${index}].searchable`}
@@ -299,9 +415,15 @@ export const EnrollmentDataFormContents = React.memo(
                                                             .trackedEntityAttribute
                                                             .unique
                                                     }
-                                                    checked={true}
+                                                    format={(value) =>
+                                                        attribute
+                                                            .trackedEntityAttribute
+                                                            .unique
+                                                            ? true
+                                                            : value
+                                                    }
                                                 />
-                                            )}
+                                            </TooltipWrapper>
                                         </TableCell>
                                         <TableCell>
                                             <FieldRFF
@@ -311,17 +433,19 @@ export const EnrollmentDataFormContents = React.memo(
                                             />
                                         </TableCell>
                                         <TableCell>
-                                            <RenderingOptionsSingleSelect
-                                                attribute={attribute}
+                                            <RenderingOptionsSelect
+                                                fieldName="programTrackedEntityAttributes"
                                                 index={index}
                                                 device="DESKTOP"
+                                                valueType={attribute.valueType}
                                             />
                                         </TableCell>
                                         <TableCell>
-                                            <RenderingOptionsSingleSelect
-                                                attribute={attribute}
+                                            <RenderingOptionsSelect
+                                                fieldName="programTrackedEntityAttributes"
                                                 index={index}
                                                 device="MOBILE"
+                                                valueType={attribute.valueType}
                                             />
                                         </TableCell>
                                     </TableRow>
