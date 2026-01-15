@@ -6,7 +6,6 @@ import {
     ColorAndIconField,
     DescriptionField,
     CustomAttributesSection,
-    DrawerPortal,
     FeatureTypeField,
     SectionedFormSection,
     SectionedFormSections,
@@ -42,7 +41,6 @@ export const StageFormContents = ({
     setSelectedSection: (name: string) => void
     existingStages?: ProgramStageListItem[]
 }) => {
-    const [sectionsFormOpen, setSectionsFormOpen] = React.useState(false)
     const { values } = useFormState({ subscription: { values: true } })
     const descriptor = useSectionedFormContext<typeof StageFormDescriptor>()
     useSyncSelectedSectionWithScroll(setSelectedSection)
@@ -257,7 +255,7 @@ export const StageFormContents = ({
                 <TabbedFormTypePicker
                     sectionsLength={values.programStageSections?.length}
                     hasDataEntryForm={
-                        !!values.programStageSections.dataEntryForm
+                        !!values.programStageSections?.dataEntryForm
                     }
                     hasDataToDisplay={
                         values.programStageDataElement?.length > 0
@@ -304,24 +302,11 @@ export const StageFormContents = ({
                         />
                     )}
                     {selectedFormType === FormType.CUSTOM && (
-                        <CustomFormEditEntry />
+                        <CustomFormEditEntry
+                            level={isSubsection ? 'secondary' : 'primary'}
+                        />
                     )}
                 </TabbedFormTypePicker>
-                <DrawerPortal
-                    isOpen={sectionsFormOpen}
-                    level={isSubsection ? 'secondary' : 'primary'}
-                    onClose={() => setSectionsFormOpen(false)}
-                >
-                    <EditOrNewStageSectionForm
-                        stageId={values.id}
-                        onCancel={() => setSectionsFormOpen(false)}
-                        onSubmitted={() => {}}
-                        section={null}
-                        sectionsLength={
-                            values.programStageSections?.length || 0
-                        }
-                    />
-                </DrawerPortal>
             </SectionedFormSection>
             <CustomAttributesSection
                 schemaSection={SCHEMA_SECTIONS.programStage}

@@ -99,7 +99,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                     />
                 )}
                 {selectedFormType === FormType.CUSTOM && (
-                    <CustomFormEditEntry />
+                    <CustomFormEditEntry level={'primary'} />
                 )}
                 {displayOptions !== undefined && (
                     <div className={classes.displayOptions}>

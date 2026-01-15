@@ -108,7 +108,7 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                     />
                 )}
                 {selectedFormType === FormType.CUSTOM && (
-                    <CustomFormEditEntry />
+                    <CustomFormEditEntry level={'primary'} />
                 )}
             </TabbedFormTypePicker>
         </SectionedFormSection>

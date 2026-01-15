@@ -6,7 +6,11 @@ import { StandardFormSectionTitle, DrawerPortal } from '..'
 import css from './CustomFormContents.module.css'
 import { CustomFormEdit } from './CustomFormEdit'
 
-export const CustomFormEditEntry = () => {
+export const CustomFormEditEntry = ({
+    level,
+}: {
+    level: 'primary' | 'secondary'
+}) => {
     const [customFormEditOpen, setCustomFormEditOpen] =
         React.useState<boolean>(false)
 
@@ -22,6 +26,7 @@ export const CustomFormEditEntry = () => {
             <DrawerPortal
                 isOpen={customFormEditOpen}
                 onClose={() => setCustomFormEditOpen(false)}
+                level={level}
             >
                 {customFormEditOpen && (
                     <CustomFormEdit
