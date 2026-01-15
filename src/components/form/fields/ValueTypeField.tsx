@@ -43,17 +43,15 @@ export function ValueTypeField({
         values.valueType === 'MULTI_TEXT' ||
         (values.optionSet?.id && values.optionSet?.valueType === 'MULTI_TEXT')
 
-    const options = [
-        { label: i18n.t('<No value>'), value: '' },
-        ...(schema.properties.valueType.constants
+    const options =
+        schema.properties.valueType.constants
             ?.map((constant: string) => ({
                 value: constant,
                 label: getConstantTranslation(constant),
             }))
             .filter(({ value }: { value: string }) => {
                 return optionSetHasMultiTextValueType || value !== 'MULTI_TEXT'
-            }) || []),
-    ]
+            }) || []
 
     const combinedHelpText = disabled
         ? disabledText ?? valueTypeDisabledHelpText
