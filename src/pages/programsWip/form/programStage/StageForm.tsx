@@ -54,6 +54,18 @@ export const fieldFilters = [
     'programStageLabel',
     'eventLabel',
     'programStageSections[id,displayName]',
+    'repeatable',
+    'standardInterval',
+    'generatedByEnrollmentDate',
+    'autoGenerateEvent',
+    'openAfterEnrollment',
+    'reportDateToUse',
+    'minDaysFromStart',
+    'hideDueDate',
+    'periodType',
+    'nextScheduleDate[id,displayName,valueType]',
+    'allowGenerateNextVisit',
+    'remindCompleted',
 ] as const
 
 export const stageSchemaSection = {
