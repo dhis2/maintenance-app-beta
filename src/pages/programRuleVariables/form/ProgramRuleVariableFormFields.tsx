@@ -39,10 +39,14 @@ const section = SECTIONS_MAP.programRuleVariable
 
 const NAME_PATTERN = /^[a-zA-Z0-9\s\-._]+$/
 const FORBIDDEN_WORDS = ['and', 'or', 'not']
-const FORBIDDEN_WORDS_PATTERN = new RegExp(
-    `\\b(${FORBIDDEN_WORDS.join('|')})\\b`,
-    'i'
-)
+
+const containsForbiddenWord = (value: string): boolean => {
+    const words = value.toLowerCase().match(/\b\w+\b/g) || []
+    const forbiddenWordsLower = FORBIDDEN_WORDS.map((word) =>
+        word.toLowerCase()
+    )
+    return words.some((word) => forbiddenWordsLower.includes(word))
+}
 
 const namePatternValidator: FormFieldValidator<string> = (value) => {
     if (!value) {
@@ -60,7 +64,7 @@ const forbiddenWordsValidator: FormFieldValidator<string> = (value) => {
     if (!value) {
         return undefined
     }
-    if (FORBIDDEN_WORDS_PATTERN.test(value)) {
+    if (containsForbiddenWord(value)) {
         return i18n.t(
             'Program rule variable name contains forbidden words: and, or, not.'
         )

@@ -22,11 +22,13 @@ export function DataElementField() {
     const { input: programInput } = useField('program')
     const { input: sourceTypeInput } = useField('programRuleVariableSourceType')
     const { input: programStageInput } = useField('programStage')
+    const { input: dataElementInput } = useField('dataElement')
     const queryFn = useBoundResourceQueryFn()
 
     const program = programInput.value
     const sourceType = sourceTypeInput.value
     const programStage = programStageInput.value
+    const currentDataElement = dataElementInput.value
 
     const programQuery = useMemo(
         () => ({
@@ -76,13 +78,25 @@ export function DataElementField() {
         )
     }, [programData, sourceType, programStage?.id])
 
-    const options = [
-        { label: i18n.t('<No value>'), value: '' },
-        ...dataElementOptions.map((de) => ({
-            value: de.id,
-            label: de.displayName,
-        })),
-    ]
+    const options = useMemo(() => {
+        const optionMap = new Map(dataElementOptions.map((de) => [de.id, de]))
+
+        if (currentDataElement?.id && !optionMap.has(currentDataElement.id)) {
+            optionMap.set(currentDataElement.id, {
+                id: currentDataElement.id,
+                displayName:
+                    currentDataElement.displayName || currentDataElement.id,
+            })
+        }
+
+        return [
+            { label: i18n.t('<No value>'), value: '' },
+            ...Array.from(optionMap.values()).map((de) => ({
+                value: de.id,
+                label: de.displayName,
+            })),
+        ]
+    }, [dataElementOptions, currentDataElement])
 
     if (!program?.id) {
         return null

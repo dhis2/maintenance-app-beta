@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-14T16:56:00.235Z\n"
-"PO-Revision-Date: 2026-01-14T16:56:00.235Z\n"
+"POT-Creation-Date: 2026-01-15T14:33:17.582Z\n"
+"PO-Revision-Date: 2026-01-15T14:33:17.582Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -4126,29 +4126,30 @@ msgstr "Set up the program indicator legends."
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
 
-msgid "Select data element"
-msgstr "Select data element"
+msgid "Source type (required)"
+msgstr "Source type (required)"
 
-msgid "Select tracked entity attribute"
-msgstr "Select tracked entity attribute"
+msgid "Name can only contain letters, numbers, space, dash, dot and underscore"
+msgstr "Name can only contain letters, numbers, space, dash, dot and underscore"
 
 msgid "Set up the basic information for this program rule variable."
 msgstr "Set up the basic information for this program rule variable."
 
+msgid "Configure how this variable works."
+msgstr "Configure how this variable works."
+
 msgid "Program cannot be changed after creation"
 msgstr "Program cannot be changed after creation"
 
-msgid "Configure the source and data elements for this program rule variable."
-msgstr "Configure the source and data elements for this program rule variable."
+msgid ""
+"Show option set code instead of display name (when selection is linked to "
+"an option set)."
+msgstr ""
+"Show option set code instead of display name (when selection is linked to "
+"an option set)."
 
 msgid "Program Rule Variable"
 msgstr "Program Rule Variable"
-
-msgid "Name is required"
-msgstr "Name is required"
-
-msgid "Name can only contain letters, numbers, space, dash, dot and underscore"
-msgstr "Name can only contain letters, numbers, space, dash, dot and underscore"
 
 msgid "Organisation unit access"
 msgstr "Organisation unit access"
@@ -4590,6 +4591,9 @@ msgstr "Initiating side constraint"
 
 msgid "Receiving side constraint"
 msgstr "Receiving side constraint"
+
+msgid "Name is required"
+msgstr "Name is required"
 
 msgid "Relationship name seen from initiating entity is required"
 msgstr "Relationship name seen from initiating entity is required"

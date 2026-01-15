@@ -16,9 +16,13 @@ type Program = {
 
 export function TrackedEntityAttributeField() {
     const { input: programInput } = useField('program')
+    const { input: trackedEntityAttributeInput } = useField(
+        'trackedEntityAttribute'
+    )
     const queryFn = useBoundResourceQueryFn()
 
     const program = programInput.value
+    const currentTrackedEntityAttribute = trackedEntityAttributeInput.value
 
     const programQuery = useMemo(
         () => ({
@@ -48,13 +52,31 @@ export function TrackedEntityAttributeField() {
         )
     }, [programData])
 
-    const options = [
-        { label: i18n.t('<No value>'), value: '' },
-        ...trackedEntityAttributes.map((tea) => ({
-            value: tea.id,
-            label: tea.displayName,
-        })),
-    ]
+    const options = useMemo(() => {
+        const attributeMap = new Map(
+            trackedEntityAttributes.map((tea) => [tea.id, tea])
+        )
+
+        if (
+            currentTrackedEntityAttribute?.id &&
+            !attributeMap.has(currentTrackedEntityAttribute.id)
+        ) {
+            attributeMap.set(currentTrackedEntityAttribute.id, {
+                id: currentTrackedEntityAttribute.id,
+                displayName:
+                    currentTrackedEntityAttribute.displayName ||
+                    currentTrackedEntityAttribute.id,
+            })
+        }
+
+        return [
+            { label: i18n.t('<No value>'), value: '' },
+            ...Array.from(attributeMap.values()).map((tea) => ({
+                value: tea.id,
+                label: tea.displayName,
+            })),
+        ]
+    }, [trackedEntityAttributes, currentTrackedEntityAttribute])
 
     if (!program?.id) {
         return null
