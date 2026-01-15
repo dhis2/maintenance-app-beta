@@ -42,10 +42,10 @@ const FORBIDDEN_WORDS = ['and', 'or', 'not']
 
 const containsForbiddenWord = (value: string): boolean => {
     const words = value.toLowerCase().match(/\b\w+\b/g) || []
-    const forbiddenWordsLower = FORBIDDEN_WORDS.map((word) =>
-        word.toLowerCase()
+    const forbiddenWordsLower = new Set(
+        FORBIDDEN_WORDS.map((word) => word.toLowerCase())
     )
-    return words.some((word) => forbiddenWordsLower.includes(word))
+    return words.some((word) => forbiddenWordsLower.has(word))
 }
 
 const namePatternValidator: FormFieldValidator<string> = (value) => {
