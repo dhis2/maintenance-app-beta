@@ -2,7 +2,6 @@ import i18n from '@dhis2/d2-i18n'
 import {
     CheckboxFieldFF,
     Field,
-    SingleSelectFieldFF,
     Table,
     TableBody,
     TableCell,
@@ -11,11 +10,11 @@ import {
     TableRow,
     TransferOption,
 } from '@dhis2/ui'
-import { useQuery } from '@tanstack/react-query'
 import React, { useEffect, useRef } from 'react'
-import { Field as FieldRFF, FieldRenderProps, useField } from 'react-final-form'
+import { Field as FieldRFF, useField } from 'react-final-form'
 import {
     ModelTransfer,
+    RenderingOptionsSelect,
     SectionedFormSection,
     StandardFormSection,
     StandardFormSectionDescription,
@@ -26,96 +25,8 @@ import {
     InfoIconWithTooltip,
     TooltipWrapper,
 } from '../../../components/tooltip'
-import { getConstantTranslation, useBoundResourceQueryFn } from '../../../lib'
 import { ProgramTrackedEntityAttribute } from '../../../types/generated'
 import { ProgramsFromFilters } from '../Edit'
-
-type RenderingOptionsResponse = {
-    renderingTypes: string[]
-    valueType: string
-}[]
-
-const RenderingOptionsSingleSelect = ({
-    attribute,
-    index,
-    device,
-}: {
-    attribute: ProgramsFromFilters['programTrackedEntityAttributes'][0]
-    index: number
-    device: 'MOBILE' | 'DESKTOP'
-}) => {
-    const queryFn = useBoundResourceQueryFn()
-
-    const { data, isLoading } = useQuery({
-        queryKey: [
-            {
-                resource: 'staticConfiguration/renderingOptions',
-                params: {
-                    fields: ['renderingTypes'],
-                },
-            },
-        ],
-        queryFn: queryFn<RenderingOptionsResponse>,
-    })
-
-    const optionsFromData =
-        data
-            ?.find((ro) => ro.valueType === attribute.valueType)
-            ?.renderingTypes.map((rt) => ({
-                value: rt,
-                label: getConstantTranslation(rt),
-            })) ?? []
-
-    return (
-        <FieldRFF<string | undefined>
-            inputWidth="100px"
-            defaultValue={'DEFAULT'}
-            name={`programTrackedEntityAttributes[${index}].renderType.${device}.type`}
-            render={(props: FieldRenderProps<string | undefined>) => {
-                const selectedOptions =
-                    props.input.value &&
-                    (!data ||
-                        data.length === 0 ||
-                        !optionsFromData.some(
-                            (o) => o.value === props.input.value
-                        ))
-                        ? [
-                              {
-                                  value: props.input.value,
-                                  label: getConstantTranslation(
-                                      props.input.value
-                                  ),
-                              },
-                          ]
-                        : []
-
-                const defaultOptions =
-                    (optionsFromData && optionsFromData.length > 0) ||
-                    selectedOptions.length
-                        ? []
-                        : [
-                              {
-                                  value: 'DEFAULT',
-                                  label: getConstantTranslation('DEFAULT'),
-                              },
-                          ]
-
-                return (
-                    <SingleSelectFieldFF
-                        {...props}
-                        inputWidth={'150px'}
-                        loading={isLoading}
-                        options={[
-                            ...defaultOptions,
-                            ...selectedOptions,
-                            ...optionsFromData,
-                        ]}
-                    />
-                )
-            }}
-        />
-    )
-}
 
 const defaultRenderType = {
     MOBILE: { type: 'DEFAULT' },
@@ -522,17 +433,19 @@ export const EnrollmentDataFormContents = React.memo(
                                             />
                                         </TableCell>
                                         <TableCell>
-                                            <RenderingOptionsSingleSelect
-                                                attribute={attribute}
+                                            <RenderingOptionsSelect
+                                                fieldName="programTrackedEntityAttributes"
                                                 index={index}
                                                 device="DESKTOP"
+                                                valueType={attribute.valueType}
                                             />
                                         </TableCell>
                                         <TableCell>
-                                            <RenderingOptionsSingleSelect
-                                                attribute={attribute}
+                                            <RenderingOptionsSelect
+                                                fieldName="programTrackedEntityAttributes"
                                                 index={index}
                                                 device="MOBILE"
+                                                valueType={attribute.valueType}
                                             />
                                         </TableCell>
                                     </TableRow>

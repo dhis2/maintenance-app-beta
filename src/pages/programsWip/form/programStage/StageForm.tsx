@@ -45,6 +45,7 @@ export const fieldFilters = [
     'name',
     'description',
     'programStageSections[id,displayName]',
+    'programStageDataElements[id,dataElement[id,displayName,valueType],compulsory,displayInReports,allowFutureDate,skipAnalytics,skipSynchronization,renderType]',
 ] as const
 
 export const stageSchemaSection = {
