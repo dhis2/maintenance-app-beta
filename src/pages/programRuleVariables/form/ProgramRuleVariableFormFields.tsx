@@ -192,7 +192,7 @@ export const ProgramRuleVariableFormFields = () => {
                     />
                 </StandardFormField>
 
-                <StandardFormField dataTest="sourceType-field">
+                <StandardFormField>
                     <SourceTypeField
                         onChange={clearSourceTypeDependentFields}
                     />
