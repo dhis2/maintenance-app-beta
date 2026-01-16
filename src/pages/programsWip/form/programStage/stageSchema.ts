@@ -1,8 +1,13 @@
 import { z } from 'zod'
 import { getDefaults, modelFormSchemas } from '../../../../lib'
 
-const { identifiable, modelReference, withAttributeValues, style } =
-    modelFormSchemas
+const {
+    identifiable,
+    modelReference,
+    withAttributeValues,
+    style,
+    withDefaultListColumns,
+} = modelFormSchemas
 
 export const stageSchema = identifiable.merge(withAttributeValues).extend({
     description: z.string().optional(),
@@ -19,5 +24,7 @@ export const stageSchema = identifiable.merge(withAttributeValues).extend({
     eventLabel: z.string().optional(),
     program: modelReference,
 })
+
+export const stageListSchema = stageSchema.merge(withDefaultListColumns)
 
 export const initialStageValue = getDefaults(stageSchema)

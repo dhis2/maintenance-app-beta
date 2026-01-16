@@ -58,7 +58,7 @@ import { predictorListSchema } from '../pages/predictors/form/predictorSchema'
 import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
 import { programRuleVariableListSchema } from '../pages/programRuleVariables/form/programRuleVariableSchema'
-import { programListSchema } from '../pages/programsWip/form'
+import { programListSchema, stageListSchema } from '../pages/programsWip/form'
 import { relationshipTypeListSchema } from '../pages/relationshipTypes/form/RelationshipTypeFormSchema'
 import { trackedEntityAttributeListSchema } from '../pages/trackedEntityAttributes/form/TrackedEntityAttributeFormSchema'
 import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form'
@@ -481,6 +481,13 @@ export const testLegendSet = ({
 } = {}) => ({
     id,
     displayName,
+})
+
+export const testProgramStage = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(stageListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
 })
 
 export const testOrgUnitLevel = ({
