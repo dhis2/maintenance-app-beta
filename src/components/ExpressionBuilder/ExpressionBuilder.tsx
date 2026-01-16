@@ -13,6 +13,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useField } from 'react-final-form'
 import { StandardFormField } from '../standardForm'
 import styles from './ExpressionBuilder.module.css'
+import { ExpressionBuilderType } from './types'
 import {
     useExpressionValidator,
     ValidationResult,
@@ -26,15 +27,17 @@ const ValidationBox = ({
     validatedValue,
     validate,
     isEmpty,
+    clearable,
 }: {
     response: ValidationResult | null
     validating: boolean
     isEmpty: boolean
     validatedValue: string | null
     validate: () => void
+    clearable: boolean
 }) => {
     if (isEmpty) {
-        return (
+        return clearable ? null : (
             <NoticeBox
                 error
                 title={i18n.t('Expression cannot be empty')}
@@ -76,12 +79,20 @@ export const ExpressionBuilder = ({
     onClose,
     title,
     initialValue,
+    programId,
+    type,
+    clearable,
+    clearExpression,
 }: {
     fieldName: string
     validationResource: string
     onClose: () => void
     title: string
     initialValue: string
+    programId?: string
+    type: ExpressionBuilderType
+    clearable: boolean
+    clearExpression?: () => void
 }) => {
     const { input: expressionInput } = useField(fieldName)
     const expressionRef = useRef<HTMLTextAreaElement>(null)
@@ -170,6 +181,7 @@ export const ExpressionBuilder = ({
                                         validatedValue={validatedValue}
                                         validate={validateCurrentState}
                                         isEmpty={isEmpty}
+                                        clearable={clearable}
                                     />
                                 )}
 
@@ -186,6 +198,8 @@ export const ExpressionBuilder = ({
                         <VariableSelectionBox
                             elementRef={expressionRef}
                             clearValidationState={clearValidationState}
+                            programId={programId}
+                            type={type}
                         />
                     </div>
                 </ModalContent>
@@ -200,6 +214,11 @@ export const ExpressionBuilder = ({
                         </Button>
                         <Button
                             onClick={async () => {
+                                if (isEmpty && clearable && clearExpression) {
+                                    clearExpression()
+                                    onClose?.()
+                                    return
+                                }
                                 let proceed = validationResponse !== null
                                 if (validationResponse === null || isEmpty) {
                                     proceed = await validateCurrentState()
@@ -219,7 +238,7 @@ export const ExpressionBuilder = ({
                             dataTest="apply-expression-button"
                             disabled={
                                 validating ||
-                                isEmpty ||
+                                (isEmpty && !clearable) ||
                                 !initiallyValidated ||
                                 !!validationResponse?.error
                             }

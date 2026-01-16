@@ -290,3 +290,7 @@ textarea::placeholder {
 .descriptionField {
     margin-top: 1rem;
 }
+
+.programNotSelectedWarning {
+    margin: var(--spacers-dp8);
+}

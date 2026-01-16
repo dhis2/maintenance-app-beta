@@ -13,6 +13,10 @@ import {
 } from '@dhis2/ui'
 import React, { useCallback, useState, ReactNode } from 'react'
 import { useField } from 'react-final-form'
+// import { ExpressionBuilder } from '../../../components'
+import { useParams } from 'react-router'
+import { ExpressionBuilderEntry } from '../../../components'
+import { SchemaSection, SchemaName } from '../../../types'
 import css from './CategoryMapping.module.css'
 import { useValidateExpressionField } from './useFormHooks'
 
@@ -198,10 +202,34 @@ const CategoryMappingInput = ({
     categoryOptionInformation: Record<string, string>
 }) => {
     const { handleValidateExpression } = useValidateExpressionField()
+    const programId = useParams()?.id
     const validation = useField(`${fieldName}.options.${opt.id}.invalid`)
     const { input, meta } = useField(
         `${fieldName}.options.${opt.id}.filter`,
         {}
+    )
+    const expressionSchemaSection = {
+        name: 'expression' as SchemaName,
+        namePlural: 'expressions',
+    } as SchemaSection
+    return (
+        <div>
+            <p className={css.categorySubtitle}>{`${
+                categoryOptionInformation?.[opt.id]
+            }`}</p>
+            <ExpressionBuilderEntry
+                fieldName={`${fieldName}.options.${opt.id}.filter`}
+                title={i18n.t('Edit filter')}
+                editButtonText={i18n.t('Edit filter')}
+                setUpButtonText={i18n.t('Set up filter')}
+                validationResource="programIndicators/filter/description"
+                clearable={true}
+                programId={programId}
+                type="programIndicator"
+                validateSchemaSection={expressionSchemaSection}
+                validateProperty="expression"
+            />
+        </div>
     )
     return (
         <div

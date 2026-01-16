@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-09T12:27:17.687Z\n"
-"PO-Revision-Date: 2026-01-09T12:27:17.687Z\n"
+"POT-Creation-Date: 2026-01-19T11:52:30.625Z\n"
+"PO-Revision-Date: 2026-01-19T11:52:30.625Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -141,6 +141,9 @@ msgstr "Skip if any value is missing"
 msgid "Skip if all values are missing"
 msgstr "Skip if all values are missing"
 
+msgid "Program has not been selected"
+msgstr "Program has not been selected"
+
 msgid "Data elements"
 msgstr "Data elements"
 
@@ -153,8 +156,8 @@ msgstr "Indicators"
 msgid "Select a Program"
 msgstr "Select a Program"
 
-msgid "Operators"
-msgstr "Operators"
+msgid "Select a Program stage"
+msgstr "Select a Program stage"
 
 msgid "+ (add)"
 msgstr "+ (add)"
@@ -198,6 +201,9 @@ msgstr "greatest("
 msgid "least("
 msgstr "least("
 
+msgid "Operators"
+msgstr "Operators"
+
 msgid "Program data"
 msgstr "Program data"
 
@@ -209,6 +215,48 @@ msgstr "Constants"
 
 msgid "Reporting rates"
 msgstr "Reporting rates"
+
+msgid "Analytics period end"
+msgstr "Analytics period end"
+
+msgid "Analytics period start"
+msgstr "Analytics period start"
+
+msgid "Completed date"
+msgstr "Completed date"
+
+msgid "Creation date"
+msgstr "Creation date"
+
+msgid "Current date"
+msgstr "Current date"
+
+msgid "Due date"
+msgstr "Due date"
+
+msgid "Event date"
+msgstr "Event date"
+
+msgid "Program stage id"
+msgstr "Program stage id"
+
+msgid "Program stage name"
+msgstr "Program stage name"
+
+msgid "Sync date"
+msgstr "Sync date"
+
+msgid "Value count"
+msgstr "Value count"
+
+msgid "Zero or positive value count"
+msgstr "Zero or positive value count"
+
+msgid "Program stage data"
+msgstr "Program stage data"
+
+msgid "Variables"
+msgstr "Variables"
 
 msgid "Could not validate expression"
 msgstr "Could not validate expression"
@@ -2432,9 +2480,6 @@ msgstr "Filter selected data sets..."
 msgid "Data set name"
 msgstr "Data set name"
 
-msgid "Current date"
-msgstr "Current date"
-
 msgid "Data set description"
 msgstr "Data set description"
 
@@ -3084,6 +3129,12 @@ msgstr ""
 "Define how the indicator is calculated and how it's result will be "
 "displayed."
 
+msgid "Numerator"
+msgstr "Numerator"
+
+msgid "Denominator"
+msgstr "Denominator"
+
 msgid ""
 "Select how the indicator result should be expressed (per cent, per "
 "thousand, etc.)"
@@ -3134,14 +3185,14 @@ msgstr ""
 "Map this indicator to a specific attribute option combinations when "
 "exporting aggregate data."
 
-msgid "Numerator Expression"
-msgstr "Numerator Expression"
+msgid "Edit {{objectName}} expression"
+msgstr "Edit {{objectName}} expression"
 
-msgid "Edit numerator expression"
-msgstr "Edit numerator expression"
+msgid "Set up {{objectName}} expression"
+msgstr "Set up {{objectName}} expression"
 
-msgid "Summarise what this numerator expression measures."
-msgstr "Summarise what this numerator expression measures."
+msgid "Summarize what this {{objectName}} measures."
+msgstr "Summarize what this {{objectName}} measures."
 
 msgid "Indicators Form"
 msgstr "Indicators Form"
@@ -3149,14 +3200,8 @@ msgstr "Indicators Form"
 msgid "Numerator description"
 msgstr "Numerator description"
 
-msgid "Numerator"
-msgstr "Numerator"
-
 msgid "Denominator description"
 msgstr "Denominator description"
-
-msgid "Denominator"
-msgstr "Denominator"
 
 msgid "Annualized"
 msgstr "Annualized"
@@ -3857,15 +3902,6 @@ msgstr "Sends a notification when a validation rule failed."
 msgid "Manage"
 msgstr "Manage"
 
-msgid "Edit {{objectName}} expression"
-msgstr "Edit {{objectName}} expression"
-
-msgid "Set up {{objectName}} expression"
-msgstr "Set up {{objectName}} expression"
-
-msgid "Summarize what this {{objectName}} measures."
-msgstr "Summarize what this {{objectName}} measures."
-
 msgid "Output data element"
 msgstr "Output data element"
 
@@ -3878,11 +3914,14 @@ msgstr "Output category option combo"
 msgid "Set up the basic information for this predictor."
 msgstr "Set up the basic information for this predictor."
 
-msgid "Prediction logic"
-msgstr "Prediction logic"
+msgid "Predictor logic"
+msgstr "Predictor logic"
 
 msgid "Define how predictions will be calculated"
 msgstr "Define how predictions will be calculated"
+
+msgid "Organisation units providing data"
+msgstr "Organisation units providing data"
 
 msgid "Sequential sample count"
 msgstr "Sequential sample count"
@@ -3905,23 +3944,11 @@ msgstr "Output definition"
 msgid "Define where predictions will be output"
 msgstr "Define where predictions will be output"
 
-msgid "Available organisation unit levels"
-msgstr "Available organisation unit levels"
-
-msgid "Selected organisation unit levels"
-msgstr "Selected organisation unit levels"
-
-msgid "Filter available organisation unit levels"
-msgstr "Filter available organisation unit levels"
-
-msgid "Filter selected organisation unit levels options"
-msgstr "Filter selected organisation unit levels options"
-
-msgid "Organisation units providing data"
-msgstr "Organisation units providing data"
-
 msgid "Predictor Form"
 msgstr "Predictor Form"
+
+msgid "Organisation unit descendants"
+msgstr "Organisation unit descendants"
 
 msgid "Generator expression"
 msgstr "Generator expression"
@@ -3934,9 +3961,6 @@ msgstr "Generator missing value strategy"
 
 msgid "Output category combo"
 msgstr "Output category combo"
-
-msgid "Organisation unit descendants"
-msgstr "Organisation unit descendants"
 
 msgid "Predictor run started successfully"
 msgstr "Predictor run started successfully"
@@ -3985,6 +4009,12 @@ msgstr "Restore mapping"
 
 msgid "Category mapping: "
 msgstr "Category mapping: "
+
+msgid "Edit filter"
+msgstr "Edit filter"
+
+msgid "Set up filter"
+msgstr "Set up filter"
 
 msgid "No new categories to add"
 msgstr "No new categories to add"
@@ -4114,9 +4144,6 @@ msgstr "Search selected program indicators"
 msgid "Incident date"
 msgstr "Incident date"
 
-msgid "Event date"
-msgstr "Event date"
-
 msgid "Enrollment date"
 msgstr "Enrollment date"
 
@@ -4204,15 +4231,15 @@ msgstr "Configure the program indicator expression."
 msgid "Edit expression"
 msgstr "Edit expression"
 
+msgid "Set up expression"
+msgstr "Set up expression"
+
 msgid ""
 "Configure the program indicator filter that controls what data will be "
 "evaluated bt the main expression."
 msgstr ""
 "Configure the program indicator filter that controls what data will be "
 "evaluated bt the main expression."
-
-msgid "Edit filter"
-msgstr "Edit filter"
 
 msgid "Period boundaries"
 msgstr "Period boundaries"
@@ -4988,6 +5015,9 @@ msgstr "Configure the expressions and how they are compared."
 
 msgid "Left side expression"
 msgstr "Left side expression"
+
+msgid "Edit numerator expression"
+msgstr "Edit numerator expression"
 
 msgid "Set up numerator expression"
 msgstr "Set up numerator expression"
