@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-18T14:52:06.811Z\n"
-"PO-Revision-Date: 2025-12-18T14:52:06.811Z\n"
+"POT-Creation-Date: 2026-01-19T13:32:53.858Z\n"
+"PO-Revision-Date: 2026-01-19T13:32:53.858Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1568,6 +1568,12 @@ msgstr "Actual reports on time"
 msgid "Expected reports"
 msgstr "Expected reports"
 
+msgid "Descendants"
+msgstr "Descendants"
+
+msgid "Selected"
+msgstr "Selected"
+
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
 
@@ -1885,6 +1891,24 @@ msgstr "Operator"
 
 msgid "Skip this rule during form validation"
 msgstr "Skip this rule during form validation"
+
+msgid "Output"
+msgstr "Output"
+
+msgid "Output option combo"
+msgstr "Output option combo"
+
+msgid "Sequential sample count"
+msgstr "Sequential sample count"
+
+msgid "Annual sample count"
+msgstr "Annual sample count"
+
+msgid "Sequential skip count"
+msgstr "Sequential skip count"
+
+msgid "Organisation unit providing data"
+msgstr "Organisation unit providing data"
 
 msgid "Basic information"
 msgstr "Basic information"
@@ -3775,6 +3799,21 @@ msgstr "Sends a notification when a validation rule failed."
 msgid "Manage"
 msgstr "Manage"
 
+msgid "Predictor run started successfully"
+msgstr "Predictor run started successfully"
+
+msgid "Run predictor"
+msgstr "Run predictor"
+
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
+
+msgid "Run now"
+msgstr "Run now"
+
 msgid "Program Disaggregation Form"
 msgstr "Program Disaggregation Form"
 
@@ -4089,6 +4128,9 @@ msgstr "Desktop Display"
 
 msgid "Mobile Display"
 msgstr "Mobile Display"
+
+msgid "This attribute is defined at the tracked entity type level"
+msgstr "This attribute is defined at the tracked entity type level"
 
 msgid "This attribute is marked as required at the tracked entity type level"
 msgstr "This attribute is marked as required at the tracked entity type level"
@@ -4712,8 +4754,8 @@ msgstr "Configure the expressions and how they are compared."
 msgid "Left side expression"
 msgstr "Left side expression"
 
-msgid "Edit left side expression"
-msgstr "Edit left side expression"
+msgid "Set up numerator expression"
+msgstr "Set up numerator expression"
 
 msgid "Comparison operator"
 msgstr "Comparison operator"
@@ -4721,8 +4763,8 @@ msgstr "Comparison operator"
 msgid "Right side expression"
 msgstr "Right side expression"
 
-msgid "Edit right side expression"
-msgstr "Edit right side expression"
+msgid "Set up denominator expression"
+msgstr "Set up denominator expression"
 
 msgid "Instruction to show"
 msgstr "Instruction to show"

@@ -240,7 +240,10 @@ export const EnrollmentDataFormContents = React.memo(
                         <ModelTransfer
                             selected={input.value.map((attribute) => {
                                 const tea = attribute.trackedEntityAttribute
-                                return tea
+                                return {
+                                    ...tea,
+                                    disabled: tetaIds.has(tea.id),
+                                }
                             })}
                             renderOption={({ value, ...rest }) => {
                                 const tea = value
@@ -275,27 +278,6 @@ export const EnrollmentDataFormContents = React.memo(
                                     ])
                                 )
 
-                                const tetaOriginalIndices = new Map<
-                                    string,
-                                    number
-                                >()
-                                input.value.forEach((attr, index) => {
-                                    if (
-                                        tetaIds.has(
-                                            attr.trackedEntityAttribute.id
-                                        )
-                                    ) {
-                                        tetaOriginalIndices.set(
-                                            attr.trackedEntityAttribute.id,
-                                            index
-                                        )
-                                    }
-                                })
-
-                                const selectedIds = new Set(
-                                    selected.map((s) => s.id)
-                                )
-
                                 const selectedAttributes = selected.map((s) => {
                                     const existing = existingAttributesMap.get(
                                         s.id
@@ -319,42 +301,7 @@ export const EnrollmentDataFormContents = React.memo(
                                     }
                                 })
 
-                                // Temperary functionoutality to re-insert TETAs that the user tried to remove
-                                // Should be removed if transfer arrow buttons gets conditionally disabling
-                                const missingTetas = input.value
-                                    .filter(
-                                        (attr) =>
-                                            tetaIds.has(
-                                                attr.trackedEntityAttribute.id
-                                            ) &&
-                                            !selectedIds.has(
-                                                attr.trackedEntityAttribute.id
-                                            )
-                                    )
-                                    .map((teta) => ({
-                                        teta: {
-                                            ...teta,
-                                            renderType:
-                                                teta.renderType ||
-                                                defaultRenderType,
-                                        },
-                                        index:
-                                            tetaOriginalIndices.get(
-                                                teta.trackedEntityAttribute.id
-                                            ) ?? Infinity,
-                                    }))
-                                    .sort((a, b) => a.index - b.index)
-
-                                const result = [...selectedAttributes]
-                                missingTetas.forEach(({ teta, index }) => {
-                                    result.splice(
-                                        Math.min(index, result.length),
-                                        0,
-                                        teta
-                                    )
-                                })
-
-                                input.onChange(result)
+                                input.onChange(selectedAttributes)
                                 input.onBlur()
                             }}
                             leftHeader={i18n.t('Available attributes')}
