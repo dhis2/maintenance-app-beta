@@ -23,6 +23,7 @@ export type ProgramStageListItem = {
     description?: string
     deleted?: boolean
     access?: Access
+    program?: { id: string }
 }
 
 export const ProgramStagesFormContents = React.memo(
