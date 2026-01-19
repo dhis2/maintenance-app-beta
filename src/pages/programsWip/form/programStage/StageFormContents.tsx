@@ -14,6 +14,7 @@ import {
     StandardFormSectionTitle,
 } from '../../../../components'
 import { CustomFormEditEntry } from '../../../../components/customForm/CustomFormEditEntry'
+import { useProgramsStageSectionCustomFormElements } from '../../../../components/customForm/useGetCustomFormElements'
 import { SectionFormSectionsList } from '../../../../components/formCreators/SectionFormList'
 import {
     FormType,
@@ -88,6 +89,10 @@ export const StageFormContents = ({
                 : undefined
         },
         [existingStages, values.id]
+    )
+
+    const { loading, elementTypes } = useProgramsStageSectionCustomFormElements(
+        values.id
     )
 
     return (
@@ -304,6 +309,8 @@ export const StageFormContents = ({
                     {selectedFormType === FormType.CUSTOM && (
                         <CustomFormEditEntry
                             level={isSubsection ? 'secondary' : 'primary'}
+                            loading={loading}
+                            elementTypes={elementTypes}
                         />
                     )}
                 </TabbedFormTypePicker>

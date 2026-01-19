@@ -5,11 +5,16 @@ import { useField } from 'react-final-form'
 import { StandardFormSectionTitle, DrawerPortal } from '..'
 import css from './CustomFormContents.module.css'
 import { CustomFormEdit } from './CustomFormEdit'
+import { ElementTypes } from './CustomFormElementsSelector'
 
 export const CustomFormEditEntry = ({
     level,
+    loading,
+    elementTypes,
 }: {
     level: 'primary' | 'secondary'
+    loading: boolean
+    elementTypes: ElementTypes
 }) => {
     const [customFormEditOpen, setCustomFormEditOpen] =
         React.useState<boolean>(false)
@@ -31,6 +36,8 @@ export const CustomFormEditEntry = ({
                 {customFormEditOpen && (
                     <CustomFormEdit
                         closeCustomFormEdit={() => setCustomFormEditOpen(false)}
+                        loading={loading}
+                        elementTypes={elementTypes}
                     />
                 )}
             </DrawerPortal>

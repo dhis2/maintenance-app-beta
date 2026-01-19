@@ -14,10 +14,15 @@ import {
 } from '..'
 import { generateDhis2Id, useSectionHandle } from '../../lib'
 import styles from './CustomFormContents.module.css'
-import { CustomFormElementsSelectorJunction } from './CustomFormElementsSelector'
+import {
+    LoadingCustomFormElementsSelector,
+    ElementTypes,
+} from './CustomFormElementsSelector'
 
 export type CustomFormProps = {
     closeCustomFormEdit?: () => void
+    loading: boolean
+    elementTypes: ElementTypes
 }
 
 const SubsectionSpacer = ({ children }: { children: React.ReactNode }) => (
@@ -36,10 +41,12 @@ const getElementText = ({
     disabled?: boolean
 }): string => {
     if (type === 'dataElement') {
-        const [de, coc] = id.split('.')
+        const [de, parent] = id.split('.')
+        const formattedId =
+            parent === undefined ? `${de}-val` : `${de}-${parent}-val`
         return `<p><input ${
             disabled ? 'disabled="disabled"' : ''
-        } id="${de}-${coc}-val" name="entryfield" title="${name}" value="[ ${name} ]" /></p>`
+        } id="${formattedId}" name="entryfield" title="${name}" value="[ ${name} ]" /></p>`
     }
     if (type === 'total') {
         return `<p><input dataelementid="${id}" ${
@@ -190,7 +197,11 @@ const useUpdateForm = ({
     return updateProgram
 }
 
-export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
+export const CustomFormEdit = ({
+    closeCustomFormEdit,
+    loading,
+    elementTypes,
+}: CustomFormProps) => {
     const textAreaRef = useRef<HTMLTextAreaElement>(null)
     const [previewMode, setPreviewMode] = useState<boolean>(false)
     const [customFormSaving, setCustomFormSaving] = useState<boolean>(false)
@@ -329,9 +340,11 @@ export const CustomFormEdit = ({ closeCustomFormEdit }: CustomFormProps) => {
                                 ></textarea>
                             </div>
                             <div className={styles.customFormElementsContainer}>
-                                <CustomFormElementsSelectorJunction
+                                <LoadingCustomFormElementsSelector
                                     insertElement={insertElement}
                                     previewMode={previewMode}
+                                    loading={loading}
+                                    elementTypes={elementTypes}
                                 />
                             </div>
                         </div>

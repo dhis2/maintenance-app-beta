@@ -7,6 +7,8 @@ import {
     useBoundResourceQueryFn,
     DEFAULT_CATEGORY_OPTION_COMBO,
 } from '../../lib'
+import { ProgramStateSectionDataElements } from '../../pages/programsWip/form/programStage/programStageSection/ProgramStageSectionFormContents'
+import { ElementTypes } from './CustomFormElementsSelector'
 
 type FlagItemResponse = { name: string; key: string; path: string }
 
@@ -99,7 +101,7 @@ export const useProgramsCustomFormElements = () => {
                 elements: programElements,
                 type: 'program',
             },
-        ]
+        ] as ElementTypes
     }, [attributesData])
 
     return { loading: isLoading, elementTypes }
@@ -178,7 +180,7 @@ export const useDataSetCustomFormElements = () => {
 
     // get flags
     const flagsQuery = useGetFlags()
-    const flags = flagsQuery.data || []
+    const flags = useMemo(() => flagsQuery.data || [], [flagsQuery])
 
     const elementTypes = useMemo(
         () => [
@@ -196,6 +198,54 @@ export const useDataSetCustomFormElements = () => {
             { name: i18n.t('Flags'), elements: flags, type: 'flag' },
         ],
         [dataElements, totals, indicators, flags]
+    )
+
+    return { loading: flagsQuery.isLoading ?? isLoading, elementTypes }
+}
+
+export const useProgramsStageSectionCustomFormElements = (stageId: string) => {
+    const queryFn = useBoundResourceQueryFn()
+    const { data: deData, isLoading } = useQuery({
+        queryFn: queryFn<ProgramStateSectionDataElements>,
+        queryKey: [
+            {
+                resource: 'programStages',
+                id: stageId,
+                params: {
+                    fields: [
+                        'programStageDataElements[id,dataElement[id,displayName,categoryCombo[id]]]',
+                    ].concat(),
+                },
+            },
+        ] as const,
+    })
+
+    const dataElements = useMemo(() => {
+        if (!deData) {
+            return []
+        }
+        return deData.programStageDataElements
+            .map((de) => ({
+                id: `${stageId}-${de.dataElement.id}`,
+                displayName: de.dataElement.displayName,
+            }))
+            .sort((de1, de2) => de1.displayName.localeCompare(de2.displayName))
+    }, [deData, stageId])
+
+    // get flags
+    const flagsQuery = useGetFlags()
+    const flags = useMemo(() => flagsQuery.data || [], [flagsQuery])
+
+    const elementTypes = useMemo(
+        () => [
+            {
+                name: i18n.t('Data elements'),
+                elements: dataElements,
+                type: 'dataElement',
+            },
+            { name: i18n.t('Flags'), elements: flags, type: 'flag' },
+        ],
+        [dataElements, flags]
     )
 
     return { loading: flagsQuery.isLoading ?? isLoading, elementTypes }

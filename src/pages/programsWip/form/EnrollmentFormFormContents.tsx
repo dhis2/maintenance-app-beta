@@ -9,6 +9,7 @@ import {
     StandardFormSectionTitle,
 } from '../../../components'
 import { CustomFormEditEntry } from '../../../components/customForm/CustomFormEditEntry'
+import { useProgramsCustomFormElements } from '../../../components/customForm/useGetCustomFormElements'
 import { SectionFormSectionsList } from '../../../components/formCreators/SectionFormList'
 import {
     FormType,
@@ -55,6 +56,7 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
             setSelectedFormType(FormType.SECTION)
         }
     }, [dataEntryForm, sections])
+    const { loading, elementTypes } = useProgramsCustomFormElements()
 
     return (
         <SectionedFormSection name={name}>
@@ -108,7 +110,11 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                     />
                 )}
                 {selectedFormType === FormType.CUSTOM && (
-                    <CustomFormEditEntry level={'primary'} />
+                    <CustomFormEditEntry
+                        level={'primary'}
+                        loading={loading}
+                        elementTypes={elementTypes}
+                    />
                 )}
             </TabbedFormTypePicker>
         </SectionedFormSection>

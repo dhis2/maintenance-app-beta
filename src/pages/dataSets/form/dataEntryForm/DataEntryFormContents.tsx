@@ -8,6 +8,7 @@ import {
     SectionedFormSection,
 } from '../../../../components'
 import { CustomFormEditEntry } from '../../../../components/customForm/CustomFormEditEntry'
+import { useDataSetCustomFormElements } from '../../../../components/customForm/useGetCustomFormElements'
 import { SectionFormSectionsList } from '../../../../components/formCreators/SectionFormList'
 import {
     FormType,
@@ -49,6 +50,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
             setSelectedFormType(FormType.SECTION)
         }
     }, [dataEntryForm, sections])
+    const { loading, elementTypes } = useDataSetCustomFormElements()
 
     return (
         <SectionedFormSection name={name}>
@@ -99,7 +101,11 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                     />
                 )}
                 {selectedFormType === FormType.CUSTOM && (
-                    <CustomFormEditEntry level={'primary'} />
+                    <CustomFormEditEntry
+                        level={'primary'}
+                        loading={loading}
+                        elementTypes={elementTypes}
+                    />
                 )}
                 {displayOptions !== undefined && (
                     <div className={classes.displayOptions}>
