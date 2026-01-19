@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF } from '@dhis2/ui'
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import {
     Field as FieldRFF,
     useField,
@@ -131,6 +131,17 @@ export const ProgramRuleVariableFormFields = () => {
         sourceType === DATAELEMENT_CURRENT_EVENT ||
         sourceType === DATAELEMENT_PREVIOUS_EVENT
 
+    useEffect(() => {
+        if (
+            sourceType ===
+                ProgramRuleVariable.programRuleVariableSourceType
+                    .CALCULATED_VALUE &&
+            !values.valueType
+        ) {
+            form.change('valueType', ProgramRuleVariable.valueType.TEXT)
+        }
+    }, [sourceType, values.valueType, form])
+
     return (
         <SectionedFormSections>
             <SectionedFormSection
@@ -220,7 +231,7 @@ export const ProgramRuleVariableFormFields = () => {
 
                 {shouldShowValueType && (
                     <StandardFormField dataTest="valueType-field">
-                        <ValueTypeField />
+                        <ValueTypeField required />
                     </StandardFormField>
                 )}
                 <StandardFormField>

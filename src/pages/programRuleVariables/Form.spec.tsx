@@ -17,10 +17,7 @@ import { generateRenderer } from '../../testUtils/generateRenderer'
 import TestComponentWithRouter from '../../testUtils/TestComponentWithRouter'
 import { uiActions } from '../../testUtils/uiActions'
 import { uiAssertions } from '../../testUtils/uiAssertions'
-import {
-    ProgramRuleVariable,
-    ProgramTrackedEntityAttribute,
-} from '../../types/generated'
+import { ProgramRuleVariable } from '../../types/generated'
 import { Component as Edit } from './Edit'
 import { Component as New } from './New'
 import resetAllMocks = jest.resetAllMocks
@@ -545,6 +542,11 @@ describe('Program rule variables form tests', () => {
                     .DATAELEMENT_CURRENT_EVENT,
                 screen
             )
+
+            await waitFor(() => {
+                expect(screen.getByTestId('dataElement-field')).toBeVisible()
+            })
+
             await uiActions.pickOptionFromSelect(
                 screen.getByTestId('dataElement-field'),
                 1,
