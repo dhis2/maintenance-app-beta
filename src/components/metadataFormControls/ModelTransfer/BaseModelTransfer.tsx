@@ -5,6 +5,7 @@ import { DisplayableModel } from '../../../types/models'
 const toDisplayOption = (model: DisplayableModel) => ({
     value: model.id,
     label: model.displayName,
+    disabled: model.disabled,
 })
 
 type RenderOptionWithFullValue<TModel> = (

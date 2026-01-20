@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-07T12:30:11.656Z\n"
-"PO-Revision-Date: 2026-01-07T12:30:11.656Z\n"
+"POT-Creation-Date: 2026-01-19T13:32:53.858Z\n"
+"PO-Revision-Date: 2026-01-19T13:32:53.858Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -4147,8 +4147,8 @@ msgstr "Selected attributes"
 msgid "Filter available attributes"
 msgstr "Filter available attributes"
 
-msgid "Filter attributes"
-msgstr "Filter attributes"
+msgid "Filter selected attributes"
+msgstr "Filter selected attributes"
 
 msgid "Configure attributes"
 msgstr "Configure attributes"
@@ -4167,6 +4167,15 @@ msgstr "Desktop Display"
 
 msgid "Mobile Display"
 msgstr "Mobile Display"
+
+msgid "This attribute is defined at the tracked entity type level"
+msgstr "This attribute is defined at the tracked entity type level"
+
+msgid "This attribute is marked as required at the tracked entity type level"
+msgstr "This attribute is marked as required at the tracked entity type level"
+
+msgid "Unique attributes are always searchable"
+msgstr "Unique attributes are always searchable"
 
 msgid "Enrollment: Form"
 msgstr "Enrollment: Form"
