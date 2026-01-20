@@ -83,7 +83,7 @@ export const useProgramsCustomFormElements = () => {
     })
 
     const elementTypes = useMemo(() => {
-        const attributes = attributesData?.programTrackedEntityAttributes.map(
+        const attributes = attributesData?.programTrackedEntityAttributes?.map(
             (ptea) => ptea.trackedEntityAttribute
         )
         const programElements: ElementItem[] = [
@@ -225,7 +225,7 @@ export const useProgramsStageSectionCustomFormElements = (stageId: string) => {
             return []
         }
         return deData.programStageDataElements
-            .map((de) => ({
+            ?.map((de) => ({
                 id: `${stageId}-${de.dataElement.id}`,
                 displayName: de.dataElement.displayName,
             }))

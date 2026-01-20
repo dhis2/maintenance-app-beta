@@ -1,7 +1,12 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import React, { useEffect, useMemo, useState } from 'react'
-import { createSearchParams, Link, useSearchParams } from 'react-router-dom'
+import {
+    createSearchParams,
+    Link,
+    useParams,
+    useSearchParams,
+} from 'react-router-dom'
 import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
@@ -33,6 +38,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
     const [selectedFormType, setSelectedFormType] = useState<FormType>(
         FormType.DEFAULT
     )
+    const modelId = useParams().id
     const [searchParams] = useSearchParams()
     const toDataSearchParam = useMemo(
         () =>
@@ -68,6 +74,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                 hasDataToDisplay={dataSetElements.length > 0}
                 onFormTypeChange={setSelectedFormType}
                 selectedFormType={selectedFormType}
+                modelId={modelId}
             >
                 {selectedFormType === FormType.DEFAULT && (
                     <div className={classes.basicFormDetails}>

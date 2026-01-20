@@ -2,7 +2,12 @@ import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useField, UseFieldConfig } from 'react-final-form'
-import { createSearchParams, Link, useSearchParams } from 'react-router-dom'
+import {
+    createSearchParams,
+    Link,
+    useParams,
+    useSearchParams,
+} from 'react-router-dom'
 import {
     SectionedFormSection,
     StandardFormSectionDescription,
@@ -57,6 +62,7 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
         }
     }, [dataEntryForm, sections])
     const { loading, elementTypes } = useProgramsCustomFormElements()
+    const modelId = useParams().id
 
     return (
         <SectionedFormSection name={name}>
@@ -74,6 +80,7 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                 hasDataToDisplay={trackedEntityAttributes.length > 0}
                 onFormTypeChange={setSelectedFormType}
                 selectedFormType={selectedFormType}
+                modelId={modelId}
             >
                 {selectedFormType === FormType.DEFAULT && (
                     <div className={styles.basicFormDetails}>

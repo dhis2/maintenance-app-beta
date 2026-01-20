@@ -40,17 +40,17 @@ export const ProgramStagesFormContents = React.memo(
             values: SubmittedStageFormValues,
             closeOnSubmit: boolean = true
         ) => {
-            const isEditSection = stageFormOpen && stageFormOpen.id
+            const isEditStage = stageFormOpen && stageFormOpen.id
 
             if (closeOnSubmit) {
                 setStageFormOpen(undefined)
-            } else if (!isEditSection) {
+            } else if (!isEditStage) {
                 setStageFormOpen({
                     id: values.id,
                     displayName: values.displayName,
                 })
             }
-            if (isEditSection) {
+            if (isEditStage) {
                 const index = stagesFieldArray.value.findIndex(
                     (s) => s.id === stageFormOpen.id
                 )

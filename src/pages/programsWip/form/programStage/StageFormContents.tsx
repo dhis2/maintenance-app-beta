@@ -267,6 +267,7 @@ export const StageFormContents = ({
                     }
                     onFormTypeChange={setSelectedFormType}
                     selectedFormType={selectedFormType}
+                    modelId={values.id}
                 >
                     {selectedFormType === FormType.DEFAULT && (
                         <div className={styles.basicFormDetails}>
