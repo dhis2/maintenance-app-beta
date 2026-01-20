@@ -64,6 +64,7 @@ export const fieldFilters = [
     'hideDueDate',
     'periodType',
     'nextScheduleDate[id,displayName,valueType]',
+    'programStageDataElements[dataElement[id,displayName,valueType]]',
     'allowGenerateNextVisit',
     'remindCompleted',
 ] as const

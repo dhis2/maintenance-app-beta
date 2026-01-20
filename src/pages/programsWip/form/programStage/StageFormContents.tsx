@@ -1,17 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
-import {
-    Box,
-    Button,
-    CheckboxFieldFF,
-    Field as UIField,
-    InputFieldFF,
-    SingleSelectFieldFF,
-    composeValidators,
-    createMinNumber,
-    number,
-} from '@dhis2/ui'
-import React, { useMemo } from 'react'
-import { Field, useFormState } from 'react-final-form'
+import { Button } from '@dhis2/ui'
+import React from 'react'
+import { useFormState } from 'react-final-form'
 import {
     ColorAndIconField,
     DescriptionField,
@@ -24,22 +14,36 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../components'
-import { ModelSingleSelectFormField } from '../../../../components/metadataFormControls/ModelSingleSelect'
-import { PeriodTypeSelect } from '../../../../components/metadataFormControls/PeriodTypeSelect/PeriodTypeSelect'
 import {
     FEATURES,
     SCHEMA_SECTIONS,
-    required,
     useFeatureAvailable,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
-    useValidator,
-    composeAsyncValidators,
-    useIsFieldValueUnique,
 } from '../../../../lib'
-import { ValidationStrategyField } from './fields'
+import {
+    ValidationStrategyField,
+    StageNameField,
+    EnableUserAssignmentField,
+    PreGenerateUidField,
+    RepeatableField,
+    GeneratedByEnrollmentDateField,
+    AutoGenerateEventField,
+    OpenAfterEnrollmentField,
+    HideDueDateField,
+    AllowGenerateNextVisitField,
+    RemindCompletedField,
+    ExecutionDateLabelField,
+    DueDateLabelField,
+    ProgramStageLabelField,
+    EventLabelField,
+    StandardIntervalField,
+    MinDaysFromStartField,
+    ReportDateToUseField,
+    NextScheduleDateField,
+    PeriodTypeField,
+} from './fields'
 import { EditOrNowStageSectionForm } from './programStageSection/ProgramStageSectionForm'
-import { stageSchemaSection } from './StageForm'
 import { StageFormDescriptor } from './stageFormDescriptor'
 
 export const StageFormContents = ({
@@ -57,55 +61,7 @@ export const StageFormContents = ({
         FEATURES.validationStrategy
     )
 
-    const checkDuplicateName = useIsFieldValueUnique({
-        model: 'programStages',
-        field: 'name',
-        id: values.id,
-        message: i18n.t(
-            'A stage with this name already exists. Please choose another name.'
-        ),
-    })
-
-    const baseNameValidator = useValidator({
-        schemaSection: stageSchemaSection,
-        property: 'name',
-    })
-
-    const nameValidator = useMemo(
-        () =>
-            composeAsyncValidators<string>([
-                baseNameValidator,
-                checkDuplicateName,
-            ]),
-        [baseNameValidator, checkDuplicateName]
-    )
-
-    const executionDateLabelValidator = useValidator({
-        schemaSection: stageSchemaSection,
-        property: 'executionDateLabel',
-    })
-    const dueDateLabelValidator = useValidator({
-        schemaSection: stageSchemaSection,
-        property: 'dueDateLabel',
-    })
-    const programStageLabelValidator = useValidator({
-        schemaSection: stageSchemaSection,
-        property: 'programStageLabel',
-    })
-    const eventLabelValidator = useValidator({
-        schemaSection: stageSchemaSection,
-        property: 'eventLabel',
-    })
-
-    const minDaysFromStartValidator = useMemo(
-        () => composeValidators(required, number, createMinNumber(0)),
-        []
-    )
-
-    const standardIntervalValidator = useMemo(() => number, [])
-
     const autoGenerateEvent = values?.autoGenerateEvent ?? false
-    const openAfterEnrollment = values?.openAfterEnrollment ?? false
 
     return (
         <SectionedFormSections>
@@ -121,16 +77,7 @@ export const StageFormContents = ({
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <Field
-                        name="name"
-                        component={InputFieldFF}
-                        validate={nameValidator}
-                        validateFields={[]}
-                        dataTest="formfields-name"
-                        required
-                        inputWidth="400px"
-                        label={i18n.t('Name')}
-                    />
+                    <StageNameField />
                 </StandardFormField>
                 <StandardFormField>
                     <DescriptionField />
@@ -151,13 +98,7 @@ export const StageFormContents = ({
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <Field
-                        name="enableUserAssignment"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
-                        label={i18n.t('Allow user assignment of events')}
-                        dataTest="formfields-enableUserAssignment"
-                    />
+                    <EnableUserAssignmentField />
                 </StandardFormField>
                 <StandardFormField>
                     <FeatureTypeField />
@@ -168,13 +109,7 @@ export const StageFormContents = ({
                     </StandardFormField>
                 )}
                 <StandardFormField>
-                    <Field
-                        name="preGenerateUID"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
-                        label={i18n.t('Pre-generate event UID')}
-                        dataTest="formfields-preGenerateUID"
-                    />
+                    <PreGenerateUidField />
                 </StandardFormField>
             </SectionedFormSection>
             <SectionedFormSection
@@ -187,260 +122,86 @@ export const StageFormContents = ({
                     {i18n.t('Customise the wording of labels for this stage.')}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <Field
-                        component={InputFieldFF}
-                        name="executionDateLabel"
-                        inputWidth="400px"
-                        label={i18n.t('Custom label for report date')}
-                        dataTest="formfields-executionDateLabel"
-                        validate={executionDateLabelValidator}
-                    />
+                    <ExecutionDateLabelField />
                 </StandardFormField>
                 <StandardFormField>
-                    <Field
-                        component={InputFieldFF}
-                        name="dueDateLabel"
-                        inputWidth="400px"
-                        label={i18n.t('Custom label for due date')}
-                        dataTest="formfields-dueDateLabel"
-                        validate={dueDateLabelValidator}
-                    />
+                    <DueDateLabelField />
                 </StandardFormField>
                 <StandardFormField>
-                    <Field
-                        component={InputFieldFF}
-                        name="programStageLabel"
-                        inputWidth="400px"
-                        label={i18n.t('Custom label for program stage')}
-                        dataTest="formfields-programStageLabel"
-                        validate={programStageLabelValidator}
-                    />
+                    <ProgramStageLabelField />
                 </StandardFormField>
                 <StandardFormField>
-                    <Field
-                        component={InputFieldFF}
-                        name="eventLabel"
-                        inputWidth="400px"
-                        label={i18n.t('Custom label for event')}
-                        dataTest="formfields-eventLabel"
-                        validate={eventLabelValidator}
-                    />
+                    <EventLabelField />
                 </StandardFormField>
             </SectionedFormSection>
             <SectionedFormSection
                 name={descriptor.getSection('stageCreationAndScheduling').name}
             >
                 <StandardFormSectionTitle>
-                    {i18n.t('Periods and scheduling')}
+                    {i18n.t('Event repetition')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Configure scheduling for events in this program stage.'
+                        'Define the frequency of events within this stage.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <Field
-                        name="repeatable"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
-                        label={i18n.t(
-                            'Allow multiple events in this stage (repeatable stage)'
-                        )}
-                        dataTest="formfields-repeatable"
-                    />
+                    <RepeatableField />
                 </StandardFormField>
                 <StandardFormField>
-                    <Field
-                        name="standardInterval"
-                        component={InputFieldFF}
-                        type="number"
-                        inputWidth="400px"
-                        label={i18n.t('Standard interval days')}
-                        dataTest="formfields-standardInterval"
-                        validate={standardIntervalValidator}
-                        format={(value: unknown) => value?.toString() ?? ''}
-                        parse={(value: unknown) => {
-                            if (value === undefined || value === '') {
-                                return undefined
-                            }
-                            const num = Number(value)
-                            return Number.isNaN(num) ? undefined : num
-                        }}
-                    />
+                    <StandardIntervalField />
+                </StandardFormField>
+
+                <StandardFormSectionTitle>
+                    {i18n.t('Event scheduling')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Configure how and when events in this stage are scheduled.'
+                    )}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <GeneratedByEnrollmentDateField />
                 </StandardFormField>
                 <StandardFormField>
-                    <Field
-                        name="generatedByEnrollmentDate"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
-                        label={i18n.t(
-                            'Generate events based on enrollment date'
-                        )}
-                        dataTest="formfields-generatedByEnrollmentDate"
-                    />
-                </StandardFormField>
-                <StandardFormField>
-                    <Field
-                        name="autoGenerateEvent"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
-                        label={i18n.t('Auto-generate an event in this stage')}
-                        dataTest="formfields-autoGenerateEvent"
-                    />
+                    <AutoGenerateEventField />
                 </StandardFormField>
                 {autoGenerateEvent && (
                     <StandardFormField>
-                        <Field
-                            name="openAfterEnrollment"
-                            type="checkbox"
-                            component={CheckboxFieldFF}
-                            label={i18n.t(
-                                'Open data entry form after enrollment'
-                            )}
-                            dataTest="formfields-openAfterEnrollment"
-                        />
+                        <OpenAfterEnrollmentField />
                     </StandardFormField>
                 )}
                 {autoGenerateEvent && (
                     <StandardFormField>
-                        <Field
-                            name="reportDateToUse"
-                            component={SingleSelectFieldFF}
-                            inputWidth="400px"
-                            label={i18n.t('Report date to use')}
-                            dataTest="formfields-reportDateToUse"
-                            disabled={!openAfterEnrollment}
-                            options={[
-                                { label: i18n.t('<No value>'), value: '' },
-                                {
-                                    label: i18n.t('Incident date'),
-                                    value: 'incidentDate',
-                                },
-                                {
-                                    label: i18n.t('Enrollment date'),
-                                    value: 'enrollmentDate',
-                                },
-                            ]}
-                        />
+                        <ReportDateToUseField />
                     </StandardFormField>
                 )}
                 <StandardFormField>
-                    <Field
-                        name="minDaysFromStart"
-                        component={InputFieldFF}
-                        type="number"
-                        inputWidth="400px"
-                        min="0"
-                        required
-                        label={i18n.t('Scheduled days from start (required)')}
-                        dataTest="formfields-minDaysFromStart"
-                        validate={minDaysFromStartValidator}
-                        format={(value: unknown) => value?.toString() ?? '0'}
-                        parse={(value: unknown) => {
-                            if (value === undefined || value === '') {
-                                return 0
-                            }
-                            const num = Number(value)
-                            return Number.isNaN(num) ? 0 : num
-                        }}
-                        helpText={i18n.t(
-                            'Days to add to the enrollment or incident date. 0 means same day, positive numbers schedule that many days after.'
-                        )}
-                    />
+                    <MinDaysFromStartField />
                 </StandardFormField>
                 <StandardFormField>
-                    <Field
-                        name="hideDueDate"
-                        render={({ input, meta }) => {
-                            // Invert the value: hideDueDate=false means show due date (checked)
-                            const showDueDate = input.value === false
-                            return (
-                                <CheckboxFieldFF
-                                    input={{
-                                        ...input,
-                                        checked: showDueDate,
-                                        onChange: () => {
-                                            // Toggle the inverted value: if currently showing (hideDueDate=false),
-                                            // clicking should hide (hideDueDate=true), and vice versa
-                                            input.onChange(!showDueDate)
-                                        },
-                                    }}
-                                    meta={meta}
-                                    label={i18n.t('Show due date')}
-                                    dataTest="formfields-hideDueDate"
-                                />
-                            )
-                        }}
-                    />
+                    <HideDueDateField />
                 </StandardFormField>
                 <StandardFormField>
-                    <Field
-                        name="periodType"
-                        render={({ input, meta }) => (
-                            <UIField
-                                name="periodType"
-                                label={i18n.t('Period type')}
-                                error={meta.touched && !!meta.error}
-                                validationText={
-                                    meta.touched ? meta.error : undefined
-                                }
-                            >
-                                <Box width="400px" minWidth="100px">
-                                    <PeriodTypeSelect
-                                        selected={input.value}
-                                        invalid={meta.touched && !!meta.error}
-                                        onChange={input.onChange}
-                                        noValueOption
-                                        dataTest="formfields-periodType"
-                                    />
-                                </Box>
-                            </UIField>
-                        )}
-                    />
+                    <PeriodTypeField />
                 </StandardFormField>
                 <StandardFormField>
-                    <ModelSingleSelectFormField
-                        name="nextScheduleDate"
-                        label={i18n.t('Default next scheduled date')}
-                        dataTest="formfields-nextScheduleDate"
-                        inputWidth="400px"
-                        query={{
-                            resource: 'dataElements',
-                            params: {
-                                fields: ['id', 'displayName', 'valueType'],
-                                filter: 'valueType:eq:DATE',
-                                paging: false,
-                            },
-                        }}
-                        clearable
-                        clearText={i18n.t('<No value>')}
-                        format={(value: any) => (value?.id ? value.id : '')}
-                        parse={(value: any) =>
-                            value && value !== '' ? { id: value } : undefined
-                        }
-                    />
+                    <NextScheduleDateField />
+                </StandardFormField>
+
+                <StandardFormSectionTitle>
+                    {i18n.t('Completion options')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Decide what should happen after a user completes this event.'
+                    )}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <AllowGenerateNextVisitField />
                 </StandardFormField>
                 <StandardFormField>
-                    <Field
-                        name="allowGenerateNextVisit"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
-                        label={i18n.t(
-                            'On event completion, show a prompt to create a new event'
-                        )}
-                        dataTest="formfields-allowGenerateNextVisit"
-                    />
-                </StandardFormField>
-                <StandardFormField>
-                    <Field
-                        name="remindCompleted"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
-                        label={i18n.t(
-                            'On event completion, ask user to complete program'
-                        )}
-                        dataTest="formfields-remindCompleted"
-                    />
+                    <RemindCompletedField />
                 </StandardFormField>
             </SectionedFormSection>
             <SectionedFormSection
