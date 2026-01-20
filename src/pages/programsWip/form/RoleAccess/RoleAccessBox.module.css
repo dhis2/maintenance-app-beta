@@ -1,0 +1,75 @@
+.container {
+    border: 1px solid var(--colors-grey400);
+    border-radius: 4px;
+    padding: var(--spacers-dp16);
+    background-color: var(--colors-white);
+    max-width: 850px;
+    min-width: 620px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--spacers-dp12);
+    margin-bottom: var(--spacers-dp16);
+}
+
+.titleContainer {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp8);
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--colors-grey800);
+}
+
+.buttonGroup {
+    display: flex;
+    gap: var(--spacers-dp8);
+    flex-shrink: 0;
+    align-items: flex-start;
+}
+
+.accessTable {
+    display: flex;
+    flex-direction: column;
+}
+
+.accessRow {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--spacers-dp16);
+    padding: var(--spacers-dp8) 0;
+    border-bottom: 1px solid var(--colors-grey200);
+}
+
+.accessRow:last-child {
+    border-bottom: none;
+}
+
+.accessLabel {
+    font-size: 14px;
+    color: var(--colors-grey700);
+    font-weight: bold;
+}
+
+.accessData {
+    font-size: 14px;
+    color: var(--colors-grey900);
+}
+
+.accessMetadata {
+    font-size: 14px;
+    color: var(--colors-grey900);
+}
+
+.noAccess {
+    color: var(--colors-grey600);
+}

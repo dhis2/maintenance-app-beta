@@ -1,3 +1,38 @@
+# [0.110.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.109.1...v0.110.0) (2026-01-14)
+
+
+### Features
+
+* [DHIS2-20479] Program access and sharing ([#716](https://github.com/dhis2/maintenance-app-beta/issues/716)) ([994cf5a](https://github.com/dhis2/maintenance-app-beta/commit/994cf5a106b807ff18eb3805f0500b8fe3ebd3fc))
+
+## [0.109.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.109.0...v0.109.1) (2026-01-14)
+
+
+### Bug Fixes
+
+* add validation strategy field to program stage form and fix bug ([#730](https://github.com/dhis2/maintenance-app-beta/issues/730)) ([f41505a](https://github.com/dhis2/maintenance-app-beta/commit/f41505a3acc2c9504472141b7c09d6555d830360))
+
+# [0.109.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.108.1...v0.109.0) (2026-01-14)
+
+
+### Features
+
+* [DHIS2-20618] Program rule variable list ([#728](https://github.com/dhis2/maintenance-app-beta/issues/728)) ([8d23fb7](https://github.com/dhis2/maintenance-app-beta/commit/8d23fb7323c6677698d731324a79252e03957a24))
+
+## [0.108.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.108.0...v0.108.1) (2026-01-12)
+
+
+### Bug Fixes
+
+* add translated notice box also to sectioned forms ([#726](https://github.com/dhis2/maintenance-app-beta/issues/726)) ([c8a1056](https://github.com/dhis2/maintenance-app-beta/commit/c8a1056bd1583988d59dbfde90d1dc5a2abcfd3a))
+
+# [0.108.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.107.0...v0.108.0) (2026-01-07)
+
+
+### Features
+
+* [DHIS2-20480] create program stage set up ([#717](https://github.com/dhis2/maintenance-app-beta/issues/717)) ([73733fe](https://github.com/dhis2/maintenance-app-beta/commit/73733fef8b04df2fbf24b6952021092c7fda8d65))
+
 # [0.107.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.106.0...v0.107.0) (2026-01-06)
 
 

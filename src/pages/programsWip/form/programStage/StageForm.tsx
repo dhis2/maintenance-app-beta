@@ -44,6 +44,15 @@ export const fieldFilters = [
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
     'description',
+    'style[color,icon]',
+    'enableUserAssignment',
+    'featureType',
+    'validationStrategy',
+    'preGenerateUID',
+    'executionDateLabel',
+    'dueDateLabel',
+    'programStageLabel',
+    'eventLabel',
     'programStageSections[id,displayName]',
     'programStageDataElements[id,dataElement[id,displayName,valueType],compulsory,displayInReports,allowFutureDate,skipAnalytics,skipSynchronization,renderType]',
 ] as const
@@ -96,7 +105,7 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
             initialValues?.attributeValues ?? [],
             customAttributes.data ?? []
         )
-        return { ...initialValues, attributeValues }
+        return { ...initialValues, attributeValues } as PartialStageFormValues
     }, [stage, programId, customAttributes])
 
     const closeOnSubmitRef = React.useRef(false)
@@ -316,7 +325,7 @@ export const EditOrNewStageForm = ({
     ) => void
 }) => {
     if (stage === undefined) {
-        return
+        return null
     }
 
     if (stage === null) {

@@ -1,0 +1,1 @@
+export { InlineWarning } from './InlineWarning'

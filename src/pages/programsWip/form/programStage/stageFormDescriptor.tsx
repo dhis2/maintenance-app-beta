@@ -9,7 +9,52 @@ export const StageFormDescriptor = {
         {
             name: 'stageSetup',
             label: i18n.t('Stage: Setup', { nsSeparator: '~:~' }),
-            fields: [{ name: 'name', label: i18n.t('Name') }],
+            fields: [
+                { name: 'name', label: i18n.t('Name') },
+                { name: 'description', label: i18n.t('Description') },
+                { name: 'style', label: i18n.t('Visual configuration') },
+            ],
+        },
+        {
+            name: 'stageConfiguration',
+            label: i18n.t('Stage: Configuration', { nsSeparator: '~:~' }),
+            fields: [
+                {
+                    name: 'enableUserAssignment',
+                    label: i18n.t('Allow user assignment of events'),
+                },
+                { name: 'featureType', label: i18n.t('Feature type') },
+                {
+                    name: 'validationStrategy',
+                    label: i18n.t('Validation strategy'),
+                },
+                {
+                    name: 'preGenerateUID',
+                    label: i18n.t('Pre-generate event UID'),
+                },
+            ],
+        },
+        {
+            name: 'stageTerminology',
+            label: i18n.t('Stage: Terminology', { nsSeparator: '~:~' }),
+            fields: [
+                {
+                    name: 'executionDateLabel',
+                    label: i18n.t('Custom label for report date'),
+                },
+                {
+                    name: 'dueDateLabel',
+                    label: i18n.t('Custom label for due date'),
+                },
+                {
+                    name: 'programStageLabel',
+                    label: i18n.t('Custom label for program stage'),
+                },
+                {
+                    name: 'eventLabel',
+                    label: i18n.t('Custom label for event'),
+                },
+            ],
         },
         {
             name: 'stageCreationAndScheduling',
