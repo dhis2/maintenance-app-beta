@@ -9,7 +9,7 @@ export function HideDueDateField() {
             name="hideDueDate"
             type="checkbox"
             component={CheckboxFieldFF}
-            label={i18n.t('Hide due date')}
+            label={i18n.t('Show scheduled date')}
             dataTest="formfields-hideDueDate"
             validateFields={[]}
         />

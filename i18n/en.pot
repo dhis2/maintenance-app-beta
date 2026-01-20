@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-20T09:51:34.163Z\n"
-"PO-Revision-Date: 2026-01-20T09:51:34.163Z\n"
+"POT-Creation-Date: 2026-01-20T15:00:22.316Z\n"
+"PO-Revision-Date: 2026-01-20T15:00:22.316Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -4488,14 +4488,14 @@ msgstr "Custom label for report date"
 msgid "Generate events based on enrollment date"
 msgstr "Generate events based on enrollment date"
 
-msgid "Hide due date"
-msgstr "Hide due date"
+msgid "Show scheduled date"
+msgstr "Show scheduled date"
 
 msgid "Scheduled days from start (required)"
 msgstr "Scheduled days from start (required)"
 
-msgid "Days to add to the enrollment or incident date. 0 means same day."
-msgstr "Days to add to the enrollment or incident date. 0 means same day."
+msgid "Days to add to the enrollment or incident date. 0 means same day. "
+msgstr "Days to add to the enrollment or incident date. 0 means same day. "
 
 msgid "Default next scheduled date"
 msgstr "Default next scheduled date"
@@ -4509,8 +4509,8 @@ msgstr "Pre-generate event UID"
 msgid "Custom label for program stage"
 msgstr "Custom label for program stage"
 
-msgid "On event completion, ask user to complete program"
-msgstr "On event completion, ask user to complete program"
+msgid "On event completion, ask user to complete enrollment"
+msgstr "On event completion, ask user to complete enrollment"
 
 msgid "Allow multiple events in this stage (repeatable stage)"
 msgstr "Allow multiple events in this stage (repeatable stage)"
@@ -4571,9 +4571,6 @@ msgstr "Stage: Creation and Scheduling"
 
 msgid "Scheduled days from start"
 msgstr "Scheduled days from start"
-
-msgid "Show due date"
-msgstr "Show due date"
 
 msgid "Stage: Data"
 msgstr "Stage: Data"

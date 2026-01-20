@@ -94,7 +94,7 @@ export const StageFormDescriptor = {
                 },
                 {
                     name: 'hideDueDate',
-                    label: i18n.t('Show due date'),
+                    label: i18n.t('Show scheduled date'),
                 },
                 {
                     name: 'periodType',
@@ -113,7 +113,7 @@ export const StageFormDescriptor = {
                 {
                     name: 'remindCompleted',
                     label: i18n.t(
-                        'On event completion, ask user to complete program'
+                        'On event completion, ask user to complete enrollment'
                     ),
                 },
             ],
