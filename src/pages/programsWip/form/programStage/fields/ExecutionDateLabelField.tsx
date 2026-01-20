@@ -19,7 +19,6 @@ export function ExecutionDateLabelField() {
             label={i18n.t('Custom label for report date')}
             dataTest="formfields-executionDateLabel"
             validate={validator}
-            validateFields={[]}
         />
     )
 }

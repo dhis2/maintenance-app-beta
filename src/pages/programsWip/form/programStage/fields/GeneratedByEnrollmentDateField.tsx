@@ -11,7 +11,6 @@ export function GeneratedByEnrollmentDateField() {
             component={CheckboxFieldFF}
             label={i18n.t('Generate events based on enrollment date')}
             dataTest="formfields-generatedByEnrollmentDate"
-            validateFields={[]}
         />
     )
 }

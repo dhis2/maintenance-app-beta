@@ -8,10 +8,11 @@ export function HideDueDateField() {
         <FieldRFF
             name="hideDueDate"
             type="checkbox"
-            component={CheckboxFieldFF}
+            component={CheckboxFieldFF as any}
             label={i18n.t('Show scheduled date')}
             dataTest="formfields-hideDueDate"
-            validateFields={[]}
+            format={(value: boolean | undefined) => !value}
+            parse={(value: boolean | undefined) => !value}
         />
     )
 }

@@ -19,7 +19,6 @@ export function EventLabelField() {
             label={i18n.t('Custom label for event')}
             dataTest="formfields-eventLabel"
             validate={validator}
-            validateFields={[]}
         />
     )
 }

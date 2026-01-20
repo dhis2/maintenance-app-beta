@@ -16,7 +16,7 @@ export function MinDaysFromStartField() {
             helpText={i18n.t(
                 'Days to add to the enrollment or incident date. 0 means same day. '
             )}
-            format={(value: unknown) => (value ?? 0).toString()}
+            format={(value: unknown) => String(value ?? 0)}
             parse={(value: unknown) => {
                 if (value === undefined || value === '') {
                     return 0

@@ -11,7 +11,6 @@ export function EnableUserAssignmentField() {
             component={CheckboxFieldFF}
             label={i18n.t('Allow user assignment of events')}
             dataTest="formfields-enableUserAssignment"
-            validateFields={[]}
         />
     )
 }

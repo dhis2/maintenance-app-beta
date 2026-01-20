@@ -13,7 +13,6 @@ export function RepeatableField() {
                 'Allow multiple events in this stage (repeatable stage)'
             )}
             dataTest="formfields-repeatable"
-            validateFields={[]}
         />
     )
 }

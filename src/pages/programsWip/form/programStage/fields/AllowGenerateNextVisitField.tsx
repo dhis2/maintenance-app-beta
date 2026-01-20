@@ -13,7 +13,6 @@ export function AllowGenerateNextVisitField() {
                 'On event completion, show a prompt to create a new event'
             )}
             dataTest="formfields-allowGenerateNextVisit"
-            validateFields={[]}
         />
     )
 }

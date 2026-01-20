@@ -19,7 +19,6 @@ export function DueDateLabelField() {
             label={i18n.t('Custom label for due date')}
             dataTest="formfields-dueDateLabel"
             validate={validator}
-            validateFields={[]}
         />
     )
 }

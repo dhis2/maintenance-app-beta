@@ -11,7 +11,6 @@ export function AutoGenerateEventField() {
             component={CheckboxFieldFF}
             label={i18n.t('Auto-generate an event in this stage')}
             dataTest="formfields-autoGenerateEvent"
-            validateFields={[]}
         />
     )
 }
