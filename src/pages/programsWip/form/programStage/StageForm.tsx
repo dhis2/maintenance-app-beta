@@ -153,10 +153,10 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
                                                     form.submit()
                                                 }}
                                             >
-                                                {i18n.t('Save and close')}
+                                                {i18n.t('Save stage and close')}
                                             </Button>
                                             <Button
-                                                primary
+                                                secondary
                                                 small
                                                 type="button"
                                                 onClick={() => {
@@ -164,7 +164,7 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
                                                     form.submit()
                                                 }}
                                             >
-                                                {i18n.t('Save ')}
+                                                {i18n.t('Save stage')}
                                             </Button>
                                             <Button
                                                 secondary
