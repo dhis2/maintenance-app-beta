@@ -27,6 +27,15 @@ jest.mock('use-debounce', () => ({
     useDebouncedCallback: (fn: any) => fn,
 }))
 
+const waitForLoadingToComplete = async (field: HTMLElement) => {
+    await waitFor(() => {
+        const loadingIndicator = field.querySelector(
+            '[data-test="dhis2-uicore-circularloader"]'
+        )
+        expect(loadingIndicator).not.toBeInTheDocument()
+    })
+}
+
 describe('Program Rule Variable form tests', () => {
     const createMock = jest.fn()
     const updateMock = jest.fn()
@@ -661,12 +670,7 @@ describe('Program Rule Variable form tests', () => {
                 const dataElementField = await screen.findByTestId(
                     'dataElement-field'
                 )
-                await waitFor(() => {
-                    const loadingIndicator = dataElementField.querySelector(
-                        '[data-test="dhis2-uicore-circularloader"]'
-                    )
-                    expect(loadingIndicator).not.toBeInTheDocument()
-                })
+                await waitForLoadingToComplete(dataElementField)
                 await new Promise((resolve) => setTimeout(resolve, 300))
                 await uiActions.pickOptionFromSelect(
                     dataElementField,
@@ -676,23 +680,24 @@ describe('Program Rule Variable form tests', () => {
 
                 await uiActions.submitForm(screen)
 
-                expect(createMock).toHaveBeenCalledWith(
-                    expect.objectContaining({
-                        data: expect.objectContaining({
-                            name: aName,
-                            program: expect.objectContaining({
-                                id: programs[0].id,
-                            }),
-                            programRuleVariableSourceType:
-                                ProgramRuleVariable
-                                    .programRuleVariableSourceType
-                                    .DATAELEMENT_CURRENT_EVENT,
-                            dataElement: expect.objectContaining({
-                                id: dataElements[0].id,
-                            }),
-                        }),
-                    })
-                )
+                const expectedProgram = expect.objectContaining({
+                    id: programs[0].id,
+                })
+                const expectedDataElement = expect.objectContaining({
+                    id: dataElements[0].id,
+                })
+                const expectedData = {
+                    name: aName,
+                    program: expectedProgram,
+                    programRuleVariableSourceType:
+                        ProgramRuleVariable.programRuleVariableSourceType
+                            .DATAELEMENT_CURRENT_EVENT,
+                    dataElement: expectedDataElement,
+                }
+                const expectedCall = expect.objectContaining({
+                    data: expect.objectContaining(expectedData),
+                })
+                expect(createMock).toHaveBeenCalledWith(expectedCall)
             })
 
             it('should submit form with CALCULATED_VALUE source type', async () => {
@@ -714,21 +719,21 @@ describe('Program Rule Variable form tests', () => {
 
                 await uiActions.submitForm(screen)
 
-                expect(createMock).toHaveBeenCalledWith(
-                    expect.objectContaining({
-                        data: expect.objectContaining({
-                            name: aName,
-                            program: expect.objectContaining({
-                                id: programs[0].id,
-                            }),
-                            programRuleVariableSourceType:
-                                ProgramRuleVariable
-                                    .programRuleVariableSourceType
-                                    .CALCULATED_VALUE,
-                            valueType: ProgramRuleVariable.valueType.TEXT,
-                        }),
-                    })
-                )
+                const expectedProgram = expect.objectContaining({
+                    id: programs[0].id,
+                })
+                const expectedData = {
+                    name: aName,
+                    program: expectedProgram,
+                    programRuleVariableSourceType:
+                        ProgramRuleVariable.programRuleVariableSourceType
+                            .CALCULATED_VALUE,
+                    valueType: ProgramRuleVariable.valueType.TEXT,
+                }
+                const expectedCall = expect.objectContaining({
+                    data: expect.objectContaining(expectedData),
+                })
+                expect(createMock).toHaveBeenCalledWith(expectedCall)
             })
 
             it('should submit form with TEI_ATTRIBUTE source type', async () => {
@@ -751,13 +756,7 @@ describe('Program Rule Variable form tests', () => {
                 const trackedEntityAttributeField = await screen.findByTestId(
                     'trackedEntityAttribute-field'
                 )
-                await waitFor(() => {
-                    const loadingIndicator =
-                        trackedEntityAttributeField.querySelector(
-                            '[data-test="dhis2-uicore-circularloader"]'
-                        )
-                    expect(loadingIndicator).not.toBeInTheDocument()
-                })
+                await waitForLoadingToComplete(trackedEntityAttributeField)
                 await new Promise((resolve) => setTimeout(resolve, 300))
                 await uiActions.pickOptionFromSelect(
                     trackedEntityAttributeField,
@@ -767,23 +766,24 @@ describe('Program Rule Variable form tests', () => {
 
                 await uiActions.submitForm(screen)
 
-                expect(createMock).toHaveBeenCalledWith(
-                    expect.objectContaining({
-                        data: expect.objectContaining({
-                            name: aName,
-                            program: expect.objectContaining({
-                                id: programs[0].id,
-                            }),
-                            programRuleVariableSourceType:
-                                ProgramRuleVariable
-                                    .programRuleVariableSourceType
-                                    .TEI_ATTRIBUTE,
-                            trackedEntityAttribute: expect.objectContaining({
-                                id: 'attr1',
-                            }),
-                        }),
-                    })
-                )
+                const expectedProgram = expect.objectContaining({
+                    id: programs[0].id,
+                })
+                const expectedTrackedEntityAttribute = expect.objectContaining({
+                    id: 'attr1',
+                })
+                const expectedData = {
+                    name: aName,
+                    program: expectedProgram,
+                    programRuleVariableSourceType:
+                        ProgramRuleVariable.programRuleVariableSourceType
+                            .TEI_ATTRIBUTE,
+                    trackedEntityAttribute: expectedTrackedEntityAttribute,
+                }
+                const expectedCall = expect.objectContaining({
+                    data: expect.objectContaining(expectedData),
+                })
+                expect(createMock).toHaveBeenCalledWith(expectedCall)
             })
         })
 
