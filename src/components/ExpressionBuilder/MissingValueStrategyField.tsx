@@ -5,17 +5,17 @@ import { useField } from 'react-final-form'
 import { HorizontalFieldGroup } from '..'
 
 export function MissingValueStrategyField({
-    objectName,
-}: Readonly<{ objectName: 'leftSide' | 'rightSide' | 'generator' }>) {
-    const neverSkipField = useField(`${objectName}.missingValueStrategy`, {
+    fieldName,
+}: Readonly<{ fieldName: 'leftSide' | 'rightSide' | 'generator' }>) {
+    const neverSkipField = useField(`${fieldName}.missingValueStrategy`, {
         type: 'radio',
         value: 'NEVER_SKIP',
     })
-    const skipIfAnyField = useField(`${objectName}.missingValueStrategy`, {
+    const skipIfAnyField = useField(`${fieldName}.missingValueStrategy`, {
         type: 'radio',
         value: 'SKIP_IF_ANY_VALUE_MISSING',
     })
-    const skipIfAllField = useField(`${objectName}.missingValueStrategy`, {
+    const skipIfAllField = useField(`${fieldName}.missingValueStrategy`, {
         type: 'radio',
         value: 'SKIP_IF_ALL_VALUES_MISSING',
     })
@@ -23,7 +23,7 @@ export function MissingValueStrategyField({
     return (
         <HorizontalFieldGroup
             label={i18n.t('Missing value strategy')}
-            dataTest={`formfields-missingValueStategy-${objectName}`}
+            dataTest={`formfields-missingValueStategy-${fieldName}`}
         >
             <RadioFieldFF
                 label={i18n.t('Never skip')}

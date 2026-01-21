@@ -140,7 +140,7 @@ const ValidationRuleFormFields = () => {
                         </StandardFormField>
 
                         <StandardFormField>
-                            <MissingValueStrategyField objectName="leftSide" />
+                            <MissingValueStrategyField fieldName="leftSide" />
                         </StandardFormField>
 
                         <StandardFormField>
@@ -191,7 +191,7 @@ const ValidationRuleFormFields = () => {
                         </StandardFormField>
 
                         <StandardFormField>
-                            <MissingValueStrategyField objectName="rightSide" />
+                            <MissingValueStrategyField fieldName="rightSide" />
                         </StandardFormField>
 
                         <StandardFormField>

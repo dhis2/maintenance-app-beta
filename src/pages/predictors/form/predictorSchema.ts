@@ -24,7 +24,7 @@ const predictorBaseSchema = z.object({
     organisationUnitLevels: z.array(modelReference).default([]),
     organisationUnitDescendants: z
         .nativeEnum(Predictor.organisationUnitDescendants)
-        .default(Predictor.organisationUnitDescendants.DESCENDANTS),
+        .default(Predictor.organisationUnitDescendants.SELECTED),
     sequentialSampleCount: z.number().int().default(0),
     annualSampleCount: z.number().int().min(0).max(10).default(0),
     sequentialSkipCount: z.number().int().optional(),

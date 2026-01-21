@@ -85,14 +85,14 @@ export const PredictorFormFields = () => {
                 <StandardFormField>
                     <NumberField
                         fieldName="sequentialSampleCount"
-                        label={i18n.t('Sequential sample count')}
+                        label={i18n.t('Sequential sample count (required)')}
                         required={true}
                     />
                 </StandardFormField>
                 <StandardFormField>
                     <NumberField
                         fieldName="annualSampleCount"
-                        label={i18n.t('Annual sample count')}
+                        label={i18n.t('Annual sample count (required)')}
                         required={true}
                     />
                 </StandardFormField>
@@ -115,6 +115,7 @@ export const PredictorFormFields = () => {
                     validationResource={'predictors/skipTest/description'}
                     showMissingValueStrategy={false}
                     clearable={true}
+                    required={false}
                 />
             </SectionedFormSection>
             <SectionedFormSection

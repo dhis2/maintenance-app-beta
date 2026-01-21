@@ -22,12 +22,14 @@ export const ExpressionFields = ({
     validationResource,
     showMissingValueStrategy,
     clearable = false,
+    required = true,
 }: {
     fieldName: string
     objectName: string
     validationResource: string
     showMissingValueStrategy: boolean
     clearable?: boolean
+    required?: boolean
 }) => {
     return (
         <div className={css.expressionContainer}>
@@ -69,12 +71,12 @@ export const ExpressionFields = ({
                             'Summarize what this {{objectName}} measures.',
                             { objectName }
                         )}
-                        // required={true}
+                        required={required}
                     />
                 </StandardFormField>
                 {showMissingValueStrategy && (
                     <StandardFormField>
-                        <MissingValueStrategyField objectName="generator" />
+                        <MissingValueStrategyField fieldName="generator" />
                     </StandardFormField>
                 )}
             </PaddedContainer>

@@ -36,7 +36,7 @@ export const OperatorFields = () => {
                     <ModelSingleSelectFormField
                         inputWidth="400px"
                         name="output"
-                        label={i18n.t('Output data element')}
+                        label={i18n.t('Output data element (required)')}
                         query={{
                             resource: 'dataElements',
                             params: {
