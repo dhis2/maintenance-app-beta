@@ -32,6 +32,7 @@ export const ComponentWithProvider = ({
             plugin={false}
             parentAlertsAdd={() => undefined}
             showAlertsInPlugin={true}
+            userInfo={undefined} // we are not using app-runtime's useCurrentUserInfo hook
         >
             <CustomDataProvider
                 data={dataForCustomProvider as any}

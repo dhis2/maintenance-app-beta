@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, TextAreaFieldFF } from '@dhis2/ui'
+import { Button, ButtonStrip, TextAreaFieldFF } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
@@ -19,6 +19,7 @@ type ExpressionBuilderEntryProps = Readonly<{
     helpText?: string
     validateSchemaSection: SchemaSection
     validateProperty?: string
+    clearable?: boolean
 }>
 
 export const ExpressionBuilderEntry = ({
@@ -29,6 +30,7 @@ export const ExpressionBuilderEntry = ({
     validationResource,
     validateSchemaSection,
     validateProperty,
+    clearable = false,
 }: ExpressionBuilderEntryProps) => {
     const [showExpressionBuilder, setShowExpressionBuilder] = useState(false)
 
@@ -88,18 +90,32 @@ export const ExpressionBuilderEntry = ({
             </div>
 
             <div className={styles.buttonWrapper}>
-                <Button
-                    small
-                    secondary
-                    onClick={() => {
-                        setShowExpressionBuilder(true)
-                    }}
-                    dataTest={`edit-${fieldName}-expression-button`}
-                >
-                    {isEdit || descriptionToShow
-                        ? editButtonText
-                        : setUpButtonText}
-                </Button>
+                <ButtonStrip>
+                    <Button
+                        small
+                        secondary
+                        onClick={() => {
+                            setShowExpressionBuilder(true)
+                        }}
+                        dataTest={`edit-${fieldName}-expression-button`}
+                    >
+                        {isEdit || descriptionToShow
+                            ? editButtonText
+                            : setUpButtonText}
+                    </Button>
+                    {clearable && descriptionToShow && (
+                        <Button
+                            small
+                            secondary
+                            onClick={() => {
+                                input.onChange('')
+                                setExpressionDescription(undefined)
+                            }}
+                        >
+                            {i18n.t('Clear expression')}
+                        </Button>
+                    )}
+                </ButtonStrip>
             </div>
 
             {showExpressionBuilder && (
