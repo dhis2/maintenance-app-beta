@@ -36,6 +36,9 @@ const waitForLoadingToComplete = async (field: HTMLElement) => {
     })
 }
 
+const waitForOptionsToPopulate = () =>
+    new Promise((resolve) => setTimeout(resolve, 300))
+
 describe('Program Rule Variable form tests', () => {
     const createMock = jest.fn()
     const updateMock = jest.fn()
@@ -671,7 +674,7 @@ describe('Program Rule Variable form tests', () => {
                     'dataElement-field'
                 )
                 await waitForLoadingToComplete(dataElementField)
-                await new Promise((resolve) => setTimeout(resolve, 300))
+                await waitForOptionsToPopulate()
                 await uiActions.pickOptionFromSelect(
                     dataElementField,
                     0,
@@ -757,7 +760,7 @@ describe('Program Rule Variable form tests', () => {
                     'trackedEntityAttribute-field'
                 )
                 await waitForLoadingToComplete(trackedEntityAttributeField)
-                await new Promise((resolve) => setTimeout(resolve, 300))
+                await waitForOptionsToPopulate()
                 await uiActions.pickOptionFromSelect(
                     trackedEntityAttributeField,
                     0,
