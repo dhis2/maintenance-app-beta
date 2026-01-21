@@ -1,13 +1,17 @@
+import { IconCross24 } from '@dhis2/ui'
 import cx from 'classnames'
 import { FocusTrap } from 'focus-trap-react'
 import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import css from './Drawer.module.css'
+
 interface DrawerProps {
     isOpen: boolean
     children: React.ReactNode
     onClose: () => void
     level?: 'primary' | 'secondary'
+    title?: string
+    footer?: React.ReactNode
 }
 
 const DRAWER_PORTAL_ID = 'drawer-portal'
@@ -17,6 +21,8 @@ export const Drawer: React.FC<DrawerProps> = ({
     children,
     onClose,
     level = 'primary',
+    title,
+    footer,
 }) => {
     return (
         <div
@@ -32,7 +38,11 @@ export const Drawer: React.FC<DrawerProps> = ({
                 onClick={(e) => e.stopPropagation()}
             >
                 {isOpen && (
-                    <DrawerContents onClose={onClose}>
+                    <DrawerContents
+                        onClose={onClose}
+                        title={title}
+                        footer={footer}
+                    >
                         {children}
                     </DrawerContents>
                 )}
@@ -43,8 +53,13 @@ export const Drawer: React.FC<DrawerProps> = ({
 
 const DrawerContents = React.forwardRef<
     HTMLDivElement,
-    { children: React.ReactNode; onClose: () => void }
->(function DrawerContents({ children, onClose }, ref) {
+    {
+        children: React.ReactNode
+        onClose: () => void
+        title?: string
+        footer?: React.ReactNode
+    }
+>(function DrawerContents({ children, onClose, title, footer }, ref) {
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === 'Escape') {
@@ -64,11 +79,25 @@ const DrawerContents = React.forwardRef<
                 allowOutsideClick: true,
             }}
         >
-            <div ref={ref}>
+            <div ref={ref} className={css.drawerContents}>
                 {/* Span with tabIndex to trap focus in case contents in drawer is loading,
             which would make the focustrap throw */}
                 <span tabIndex={0}></span>
-                {children}
+                {title && (
+                    <div className={css.drawerTitleBar}>
+                        <h2 className={css.drawerTitle}>{title}</h2>
+                        <button
+                            className={css.drawerCloseButton}
+                            onClick={onClose}
+                            aria-label="Close"
+                            type="button"
+                        >
+                            <IconCross24 />
+                        </button>
+                    </div>
+                )}
+                <div className={css.drawerBody}>{children}</div>
+                {footer && <div className={css.drawerFooter}>{footer}</div>}
             </div>
         </FocusTrap>
     )

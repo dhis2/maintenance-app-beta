@@ -131,7 +131,6 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
                         <SectionedFormLayout
                             sidebar={
                                 <DrawerSectionedFormSidebar
-                                    onCancel={onCancel}
                                     selectedSection={selectedSection}
                                 />
                             }
