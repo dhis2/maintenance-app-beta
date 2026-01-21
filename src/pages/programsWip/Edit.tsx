@@ -15,6 +15,7 @@ import {
 import { Section } from '../../components/formCreators/SectionFormList'
 import { useHandleOnSubmitEditFormDeletions } from '../../components/sectionedForm/useHandleOnSubmitEditFormDeletions'
 import {
+    DEFAULT_FIELD_FILTERS,
     SectionedFormProvider,
     SECTIONS_MAP,
     useBoundResourceQueryFn,
@@ -27,7 +28,7 @@ import { ProgramFormDescriptor } from './form/formDescriptor'
 import { ProgramFormContents } from './form/ProgramFormContents'
 
 const fieldFilters = [
-    'id',
+    ...DEFAULT_FIELD_FILTERS,
     'name',
     'shortName',
     'code',
@@ -39,7 +40,7 @@ const fieldFilters = [
     'lastUpdated',
     'dataEntryForm',
     'programTrackedEntityAttributes',
-    'trackedEntityType[id,displayName]',
+    'trackedEntityType[id,displayName,name,trackedEntityTypeAttributes[trackedEntityAttribute[id,displayName,unique,valueType],mandatory,searchable,displayInList]]',
     'onlyEnrollOnce',
     'selectEnrollmentDatesInFuture',
     'displayIncidentDate',
@@ -59,7 +60,9 @@ const fieldFilters = [
     'relationshipLabel',
     'noteLabel',
     'displayFrontPageList',
-    'programStages[id,displayName,access,description, program[id]]',
+    'programStages[id,displayName,access,description,program[id],sharing]',
+    'organisationUnits[id,displayName,path]',
+    'sharing',
 ] as const
 
 export type ProgramsFromFilters = PickWithFieldFilters<

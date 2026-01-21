@@ -352,6 +352,13 @@ msgstr ""
 "Translatable fields appear in the default language in this form, not in "
 "your selected database language."
 
+msgid ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
+msgstr ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
+
 msgid "Exit without saving"
 msgstr "Exit without saving"
 
@@ -851,6 +858,30 @@ msgstr "Program indicator"
 msgid "Program indicator group"
 msgstr "Program indicator group"
 
+msgid "Data element in newest event in program stage"
+msgstr "Data element in newest event in program stage"
+
+msgid "Data element in newest event in program"
+msgstr "Data element in newest event in program"
+
+msgid "Data element from current event"
+msgstr "Data element from current event"
+
+msgid "Data element from previous event"
+msgstr "Data element from previous event"
+
+msgid "Calculated value"
+msgstr "Calculated value"
+
+msgid "Tracked entity attribute"
+msgstr "Tracked entity attribute"
+
+msgid "Select source type"
+msgstr "Select source type"
+
+msgid "All source types"
+msgstr "All source types"
+
 msgid "Tracker program"
 msgstr "Tracker program"
 
@@ -1054,9 +1085,6 @@ msgstr "Organisation unit level"
 
 msgid "Organisation unit levels"
 msgstr "Organisation unit levels"
-
-msgid "Tracked entity attribute"
-msgstr "Tracked entity attribute"
 
 msgid "Tracked entity attributes"
 msgstr "Tracked entity attributes"
@@ -1592,6 +1620,12 @@ msgstr "At selected level(s) only"
 msgid "At selected level(s) and all levels below"
 msgstr "At selected level(s) and all levels below"
 
+msgid "Descendants"
+msgstr "Descendants"
+
+msgid "Selected"
+msgstr "Selected"
+
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
 
@@ -1766,6 +1800,12 @@ msgstr "Program name"
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
 
+msgid "Source type"
+msgstr "Source type"
+
+msgid "Use code for option set"
+msgstr "Use code for option set"
+
 msgid "Unique"
 msgstr "Unique"
 
@@ -1909,6 +1949,24 @@ msgstr "Operator"
 
 msgid "Skip this rule during form validation"
 msgstr "Skip this rule during form validation"
+
+msgid "Output"
+msgstr "Output"
+
+msgid "Output option combo"
+msgstr "Output option combo"
+
+msgid "Sequential sample count"
+msgstr "Sequential sample count"
+
+msgid "Annual sample count"
+msgstr "Annual sample count"
+
+msgid "Sequential skip count"
+msgstr "Sequential skip count"
+
+msgid "Organisation unit providing data"
+msgstr "Organisation unit providing data"
 
 msgid "Basic information"
 msgstr "Basic information"
@@ -3880,6 +3938,21 @@ msgstr "Output category combo"
 msgid "Organisation unit descendants"
 msgstr "Organisation unit descendants"
 
+msgid "Predictor run started successfully"
+msgstr "Predictor run started successfully"
+
+msgid "Run predictor"
+msgstr "Run predictor"
+
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
+
+msgid "Run now"
+msgstr "Run now"
+
 msgid "Program Disaggregation Form"
 msgstr "Program Disaggregation Form"
 
@@ -4159,6 +4232,18 @@ msgstr "Set up the program indicator legends."
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
 
+msgid "Organisation unit access"
+msgstr "Organisation unit access"
+
+msgid "Set up which organisation units can collect data using this program."
+msgstr "Set up which organisation units can collect data using this program."
+
+msgid "Role access"
+msgstr "Role access"
+
+msgid "Set up which user roles can access this program and program stages."
+msgstr "Set up which user roles can access this program and program stages."
+
 msgid "Enrollment: Data"
 msgstr "Enrollment: Data"
 
@@ -4174,8 +4259,8 @@ msgstr "Selected attributes"
 msgid "Filter available attributes"
 msgstr "Filter available attributes"
 
-msgid "Filter attributes"
-msgstr "Filter attributes"
+msgid "Filter selected attributes"
+msgstr "Filter selected attributes"
 
 msgid "Configure attributes"
 msgstr "Configure attributes"
@@ -4194,6 +4279,15 @@ msgstr "Desktop Display"
 
 msgid "Mobile Display"
 msgstr "Mobile Display"
+
+msgid "This attribute is defined at the tracked entity type level"
+msgstr "This attribute is defined at the tracked entity type level"
+
+msgid "This attribute is marked as required at the tracked entity type level"
+msgstr "This attribute is marked as required at the tracked entity type level"
+
+msgid "Unique attributes are always searchable"
+msgstr "Unique attributes are always searchable"
 
 msgid "Enrollment: Form"
 msgstr "Enrollment: Form"
@@ -4334,6 +4428,57 @@ msgstr "Add a program stage"
 msgid "Only integers are allowed"
 msgstr "Only integers are allowed"
 
+msgid "Access updated successfully"
+msgstr "Access updated successfully"
+
+msgid "Failed to apply access to all stages"
+msgstr "Failed to apply access to all stages"
+
+msgid "Failed to apply program access rules"
+msgstr "Failed to apply program access rules"
+
+msgid "Untitled"
+msgstr "Untitled"
+
+msgid "No data access"
+msgstr "No data access"
+
+msgid "No metadata access"
+msgstr "No metadata access"
+
+msgid "Data read and write"
+msgstr "Data read and write"
+
+msgid "Metadata read and write"
+msgstr "Metadata read and write"
+
+msgid "Data read"
+msgstr "Data read"
+
+msgid "Metadata read"
+msgstr "Metadata read"
+
+msgid "Differs from program access"
+msgstr "Differs from program access"
+
+msgid "Apply to all stages"
+msgstr "Apply to all stages"
+
+msgid "Revert to program access"
+msgstr "Revert to program access"
+
+msgid "Edit data access"
+msgstr "Edit data access"
+
+msgid "Edit access"
+msgstr "Edit access"
+
+msgid "Public (All users)"
+msgstr "Public (All users)"
+
+msgid "External"
+msgstr "External"
+
 msgid "Should not be lower than previous version"
 msgstr "Should not be lower than previous version"
 
@@ -4352,6 +4497,9 @@ msgstr "Related program"
 msgid "Choose how this program is disaggregated."
 msgstr "Choose how this program is disaggregated."
 
+msgid "Access and Sharing"
+msgstr "Access and Sharing"
+
 msgid "Stage"
 msgstr "Stage"
 
@@ -4364,8 +4512,41 @@ msgstr "Save "
 msgid "Saving a stage does not save other changes to the program"
 msgstr "Saving a stage does not save other changes to the program"
 
+msgid "A stage with this name already exists. Please choose another name."
+msgstr "A stage with this name already exists. Please choose another name."
+
 msgid "Configure the basic information for this program stage."
 msgstr "Configure the basic information for this program stage."
+
+msgid "Configuration options"
+msgstr "Configuration options"
+
+msgid "Set up more advanced options for this program stage."
+msgstr "Set up more advanced options for this program stage."
+
+msgid "Allow user assignment of events"
+msgstr "Allow user assignment of events"
+
+msgid "Pre-generate event UID"
+msgstr "Pre-generate event UID"
+
+msgid "Custom terminology"
+msgstr "Custom terminology"
+
+msgid "Customise the wording of labels for this stage."
+msgstr "Customise the wording of labels for this stage."
+
+msgid "Custom label for report date"
+msgstr "Custom label for report date"
+
+msgid "Custom label for due date"
+msgstr "Custom label for due date"
+
+msgid "Custom label for program stage"
+msgstr "Custom label for program stage"
+
+msgid "Custom label for event"
+msgstr "Custom label for event"
 
 msgid "Event Repetition"
 msgstr "Event Repetition"
@@ -4384,6 +4565,9 @@ msgstr "Program stage form"
 
 msgid "Configure the form for data collection for events in this program stage."
 msgstr "Configure the form for data collection for events in this program stage."
+
+msgid "Validation strategy"
+msgstr "Validation strategy"
 
 msgid "Stage section"
 msgstr "Stage section"
@@ -4414,6 +4598,12 @@ msgstr "Mobile display"
 
 msgid "Stage: Setup"
 msgstr "Stage: Setup"
+
+msgid "Stage: Configuration"
+msgstr "Stage: Configuration"
+
+msgid "Stage: Terminology"
+msgstr "Stage: Terminology"
 
 msgid "Stage: Creation and Scheduling"
 msgstr "Stage: Creation and Scheduling"

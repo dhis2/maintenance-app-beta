@@ -13,7 +13,12 @@ import { DrawerRoot } from '../../components/drawer/Drawer'
 import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
 import { Section } from '../../components/formCreators/SectionFormList'
 import { useHandleOnSubmitEditFormDeletions } from '../../components/sectionedForm/useHandleOnSubmitEditFormDeletions'
-import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
+import {
+    DEFAULT_FIELD_FILTERS,
+    SectionedFormProvider,
+    SECTIONS_MAP,
+    useOnSubmitEdit,
+} from '../../lib'
 import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PickWithFieldFilters, DataSet } from '../../types/generated'
@@ -23,6 +28,7 @@ import { DataSetFormDescriptor } from './form/formDescriptor'
 import { dataSetValueFormatter } from './New'
 const section = SECTIONS_MAP.dataSet
 const fieldFilters = [
+    ...DEFAULT_FIELD_FILTERS,
     ':owner',
     'organisationUnits[id,displayName,path]',
     'dataSetElements[dataElement[id,displayName,categoryCombo[id,displayName]],categoryCombo[id,displayName]]',

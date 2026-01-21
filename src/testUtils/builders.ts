@@ -54,8 +54,10 @@ import { optionSetListSchema } from '../pages/optionSets/form/optionSetSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
+import { predictorListSchema } from '../pages/predictors/form/predictorSchema'
 import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
+import { programRuleVariableListSchema } from '../pages/programRuleVariables/form/programRuleVariableSchema'
 import { programListSchema } from '../pages/programsWip/form'
 import { relationshipTypeListSchema } from '../pages/relationshipTypes/form/RelationshipTypeFormSchema'
 import { trackedEntityAttributeListSchema } from '../pages/trackedEntityAttributes/form/TrackedEntityAttributeFormSchema'
@@ -344,6 +346,11 @@ export const testProgramIndicator = (overwrites: Record<any, any> = {}) => ({
     ...overwrites,
 })
 
+export const testProgramRuleVariable = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(programRuleVariableListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
 export const testAttributeList = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(attributeListSchema, { mockeryMapper }),
     ...overwrites,
@@ -525,6 +532,13 @@ export const testValidationRuleGroupsForm = (
 
 export const testValidationRule = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(validationRuleListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testPredictorList = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(predictorListSchema, {
         mockeryMapper,
     }),
     ...overwrites,

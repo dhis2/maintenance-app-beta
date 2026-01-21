@@ -471,6 +471,29 @@ export const modelListViewsConfig = {
             available: ['categoryCombo'],
         },
     },
+    programRuleVariable: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                'program',
+                'programRuleVariableSourceType',
+                'lastUpdated',
+            ],
+            available: [
+                'useCodeForOptionSet',
+                'dataElement',
+                'trackedEntityAttribute',
+                'programStage',
+                'valueType',
+            ],
+            overrideDefaultAvailable: true,
+        },
+        filters: {
+            default: ['program', 'programRuleVariableSourceType'],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
+    },
     optionGroupSet: {
         columns: {
             default: [
@@ -888,6 +911,56 @@ export const modelListViewsConfig = {
         },
         filters: {
             default: [],
+            overrideDefaultAvailable: true,
+        },
+    },
+    predictor: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Output'), path: 'output.displayName' },
+                { label: i18n.t('Period type'), path: 'periodType' },
+                'lastUpdated',
+            ],
+            available: [
+                DESCRIPTORS.shortName,
+                'code',
+                'id',
+                'href',
+                'created',
+                'createdBy',
+                'lastUpdatedBy',
+                'description',
+                DESCRIPTORS.publicAccess,
+                DESCRIPTORS.owner,
+                {
+                    label: i18n.t('Output option combo'),
+                    path: 'outputCombo.displayName',
+                },
+                { label: i18n.t('Predictor groups'), path: 'predictorGroups' },
+                {
+                    label: i18n.t('Sequential sample count'),
+                    path: 'sequentialSampleCount',
+                },
+                {
+                    label: i18n.t('Annual sample count'),
+                    path: 'annualSampleCount',
+                },
+                {
+                    label: i18n.t('Sequential skip count'),
+                    path: 'sequentialSkipCount',
+                },
+                {
+                    label: i18n.t('Organisation unit providing data'),
+                    path: 'organisationUnitDescendants',
+                },
+                { label: i18n.t('Favourite'), path: 'favourite' },
+            ],
+            overrideDefaultAvailable: true,
+        },
+        filters: {
+            default: [],
+            available: [],
             overrideDefaultAvailable: true,
         },
     },

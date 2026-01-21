@@ -5,6 +5,7 @@ export * from './systemSettings'
 export type DisplayableModel = {
     id: string
     displayName: string
+    disabled?: boolean
 }
 
 export type PartialLoadedDisplayableModel = {
