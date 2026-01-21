@@ -1,9 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectFieldFF } from '@dhis2/ui'
+import { Box, Field } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
-import { useBoundResourceQueryFn } from '../../../lib'
+import { BaseModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/BaseModelSingleSelect'
+import { required, useBoundResourceQueryFn } from '../../../lib'
 
 type Program = {
     programTrackedEntityAttributes?: Array<{
@@ -16,12 +17,12 @@ type Program = {
 
 export function TrackedEntityAttributeField() {
     const { input: programInput } = useField('program')
-    const { input: trackedEntityAttributeInput } = useField(
-        'trackedEntityAttribute'
-    )
     const queryFn = useBoundResourceQueryFn()
 
     const program = programInput.value
+    const { input: trackedEntityAttributeInput } = useField(
+        'trackedEntityAttribute'
+    )
     const currentTrackedEntityAttribute = trackedEntityAttributeInput.value
 
     const programQuery = useMemo(
@@ -52,7 +53,7 @@ export function TrackedEntityAttributeField() {
         )
     }, [programData])
 
-    const options = useMemo(() => {
+    const availableTrackedEntityAttributes = useMemo(() => {
         const attributeMap = new Map(
             trackedEntityAttributes.map((tea) => [tea.id, tea])
         )
@@ -69,13 +70,7 @@ export function TrackedEntityAttributeField() {
             })
         }
 
-        return [
-            { label: i18n.t('<No value>'), value: '' },
-            ...Array.from(attributeMap.values()).map((tea) => ({
-                value: tea.id,
-                label: tea.displayName,
-            })),
-        ]
+        return Array.from(attributeMap.values())
     }, [trackedEntityAttributes, currentTrackedEntityAttribute])
 
     if (!program?.id) {
@@ -85,20 +80,33 @@ export function TrackedEntityAttributeField() {
     return (
         <FieldRFF
             name="trackedEntityAttribute"
-            format={(value) => (value?.id ? value.id : '')}
-            parse={(value) =>
-                value && value !== '' ? { id: value } : undefined
-            }
+            validate={required}
             render={({ input, meta }) => (
-                <SingleSelectFieldFF
-                    input={input}
-                    meta={meta}
-                    inputWidth="400px"
+                <Field
                     dataTest="trackedEntityAttribute-field"
+                    error={meta.invalid}
+                    validationText={
+                        (meta.touched && meta.error?.toString()) || ''
+                    }
+                    name={input.name}
                     label={i18n.t('Tracked entity attribute')}
-                    options={options}
-                    loading={!programData}
-                />
+                    required
+                >
+                    <Box width="400px" minWidth="100px">
+                        <BaseModelSingleSelect
+                            available={availableTrackedEntityAttributes}
+                            selected={input.value}
+                            onChange={(selected) => {
+                                input.onChange(selected)
+                                input.onBlur()
+                            }}
+                            invalid={meta.touched && !!meta.error}
+                            loading={!programData}
+                            onRetryClick={() => {}}
+                            showEndLoader={false}
+                        />
+                    </Box>
+                </Field>
             )}
         />
     )
