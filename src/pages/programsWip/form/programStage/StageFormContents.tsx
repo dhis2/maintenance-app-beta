@@ -1,6 +1,6 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
+import { Button, CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Field, useFormState } from 'react-final-form'
 import {
@@ -25,6 +25,7 @@ import {
 import {
     SCHEMA_SECTIONS,
     SchemaName,
+    scrollToSection,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
     useValidator,
@@ -345,7 +346,7 @@ export const StageFormContents = ({
                         'Choose the information to collect in this program stage. '
                     )}
                 </StandardFormSectionDescription>
-                <div style={{ minHeight: 600 }} />
+                <div style={{ minHeight: 800 }} />
             </SectionedFormSection>
             <SectionedFormSection
                 name={descriptor.getSection('stageForm').name}
@@ -380,19 +381,19 @@ export const StageFormContents = ({
                                     'This form displays an auto-generated list of the data elements defined for this program stage.'
                                 )}
                             </div>
-                            {/*<Link*/}
-                            {/*    to={{ search: toEnrollmentDataSearchParam }}*/}
-                            {/*    replace*/}
-                            {/*    onClick={() => {*/}
-                            {/*        scrollToSection('enrollmentData')*/}
-                            {/*    }}*/}
-                            {/*>*/}
-                            {/*    <Button secondary small>*/}
-                            {/*        {i18n.t(*/}
-                            {/*            'Edit or rearrange the tracked entity attributes'*/}
-                            {/*        )}*/}
-                            {/*    </Button>*/}
-                            {/*</Link>*/}
+                            <div>
+                                <Button
+                                    secondary
+                                    small
+                                    onClick={() => {
+                                        scrollToSection('stageData')
+                                    }}
+                                >
+                                    {i18n.t(
+                                        'Edit or rearrange the data elements'
+                                    )}
+                                </Button>
+                            </div>
                         </div>
                     )}
                     {selectedFormType === FormType.SECTION && (
