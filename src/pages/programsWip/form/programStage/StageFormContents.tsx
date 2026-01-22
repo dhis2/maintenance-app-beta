@@ -1,7 +1,7 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Field, useFormState } from 'react-final-form'
 import {
     ColorAndIconField,
@@ -50,6 +50,14 @@ export const StageFormContents = ({
     const [selectedFormType, setSelectedFormType] = useState<FormType>(
         FormType.DEFAULT
     )
+
+    useEffect(() => {
+        if (values.dataEntryForm) {
+            setSelectedFormType(FormType.CUSTOM)
+        } else if (values.programStageSections.length > 0) {
+            setSelectedFormType(FormType.SECTION)
+        }
+    }, [values.dataEntryForm, values.programStageSections])
 
     const nameValidator = useValidator({
         schemaSection: stageSchemaSection,

@@ -160,11 +160,16 @@ export const StageForm = ({
                         >
                             <form onSubmit={handleSubmit}>
                                 <div className={styles.sectionsWrapper}>
-                                    <StageFormContents
-                                        isSubsection
-                                        setSelectedSection={setSelectedSection}
-                                        existingStages={existingStages}
-                                    />
+                                    <div>
+                                        <StageFormContents
+                                            isSubsection
+                                            setSelectedSection={
+                                                setSelectedSection
+                                            }
+                                            existingStages={existingStages}
+                                        />
+                                        <SectionedFormErrorNotice />
+                                    </div>
                                     <FormFooterWrapper>
                                         <ButtonStrip>
                                             <Button
@@ -271,6 +276,7 @@ export const EditStageForm = ({
             sections,
             dataEntryForm
         )
+
         if (error) {
             return error
         }
