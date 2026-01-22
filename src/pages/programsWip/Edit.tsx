@@ -40,7 +40,7 @@ const fieldFilters = [
     'lastUpdated',
     'dataEntryForm',
     'programTrackedEntityAttributes',
-    'trackedEntityType[id,displayName]',
+    'trackedEntityType[id,displayName,name,trackedEntityTypeAttributes[trackedEntityAttribute[id,displayName,unique,valueType],mandatory,searchable,displayInList]]',
     'onlyEnrollOnce',
     'selectEnrollmentDatesInFuture',
     'displayIncidentDate',
@@ -60,7 +60,9 @@ const fieldFilters = [
     'relationshipLabel',
     'noteLabel',
     'displayFrontPageList',
-    'programStages[id,displayName,access,description, program[id]]',
+    'programStages[id,displayName,access,description,program[id],sharing]',
+    'organisationUnits[id,displayName,path]',
+    'sharing',
 ] as const
 
 export type ProgramsFromFilters = PickWithFieldFilters<

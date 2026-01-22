@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-07T10:21:21.509Z\n"
-"PO-Revision-Date: 2026-01-07T10:21:21.509Z\n"
+"POT-Creation-Date: 2026-01-09T12:27:17.687Z\n"
+"PO-Revision-Date: 2026-01-09T12:27:17.687Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -117,6 +117,9 @@ msgstr "Apply"
 msgid "(No Value)"
 msgstr "(No Value)"
 
+msgid "Clear expression"
+msgstr "Clear expression"
+
 msgid "Filter list"
 msgstr "Filter list"
 
@@ -125,6 +128,18 @@ msgstr "No matches"
 
 msgid "Retry"
 msgstr "Retry"
+
+msgid "Missing value strategy"
+msgstr "Missing value strategy"
+
+msgid "Never skip"
+msgstr "Never skip"
+
+msgid "Skip if any value is missing"
+msgstr "Skip if any value is missing"
+
+msgid "Skip if all values are missing"
+msgstr "Skip if all values are missing"
 
 msgid "Data elements"
 msgstr "Data elements"
@@ -326,6 +341,16 @@ msgstr "Required"
 
 msgid "Please enter a GeoJSON value"
 msgstr "Please enter a GeoJSON value"
+
+msgid "Name: {{displayName}} (Translated)"
+msgstr "Name: {{displayName}} (Translated)"
+
+msgid ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
+msgstr ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
 
 msgid ""
 "Translatable fields appear in the default language in this form, not in "
@@ -833,6 +858,30 @@ msgstr "Program indicator"
 msgid "Program indicator group"
 msgstr "Program indicator group"
 
+msgid "Data element in newest event in program stage"
+msgstr "Data element in newest event in program stage"
+
+msgid "Data element in newest event in program"
+msgstr "Data element in newest event in program"
+
+msgid "Data element from current event"
+msgstr "Data element from current event"
+
+msgid "Data element from previous event"
+msgstr "Data element from previous event"
+
+msgid "Calculated value"
+msgstr "Calculated value"
+
+msgid "Tracked entity attribute"
+msgstr "Tracked entity attribute"
+
+msgid "Select source type"
+msgstr "Select source type"
+
+msgid "All source types"
+msgstr "All source types"
+
 msgid "Tracker program"
 msgstr "Tracker program"
 
@@ -1036,9 +1085,6 @@ msgstr "Organisation unit level"
 
 msgid "Organisation unit levels"
 msgstr "Organisation unit levels"
-
-msgid "Tracked entity attribute"
-msgstr "Tracked entity attribute"
 
 msgid "Tracked entity attributes"
 msgstr "Tracked entity attributes"
@@ -1568,6 +1614,18 @@ msgstr "Actual reports on time"
 msgid "Expected reports"
 msgstr "Expected reports"
 
+msgid "At selected level(s) only"
+msgstr "At selected level(s) only"
+
+msgid "At selected level(s) and all levels below"
+msgstr "At selected level(s) and all levels below"
+
+msgid "Descendants"
+msgstr "Descendants"
+
+msgid "Selected"
+msgstr "Selected"
+
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
 
@@ -1742,6 +1800,12 @@ msgstr "Program name"
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
 
+msgid "Source type"
+msgstr "Source type"
+
+msgid "Use code for option set"
+msgstr "Use code for option set"
+
 msgid "Unique"
 msgstr "Unique"
 
@@ -1885,6 +1949,24 @@ msgstr "Operator"
 
 msgid "Skip this rule during form validation"
 msgstr "Skip this rule during form validation"
+
+msgid "Output"
+msgstr "Output"
+
+msgid "Output option combo"
+msgstr "Output option combo"
+
+msgid "Sequential sample count"
+msgstr "Sequential sample count"
+
+msgid "Annual sample count"
+msgstr "Annual sample count"
+
+msgid "Sequential skip count"
+msgstr "Sequential skip count"
+
+msgid "Organisation unit providing data"
+msgstr "Organisation unit providing data"
 
 msgid "Basic information"
 msgstr "Basic information"
@@ -3775,6 +3857,102 @@ msgstr "Sends a notification when a validation rule failed."
 msgid "Manage"
 msgstr "Manage"
 
+msgid "Edit {{objectName}} expression"
+msgstr "Edit {{objectName}} expression"
+
+msgid "Set up {{objectName}} expression"
+msgstr "Set up {{objectName}} expression"
+
+msgid "Summarize what this {{objectName}} measures."
+msgstr "Summarize what this {{objectName}} measures."
+
+msgid "Output data element"
+msgstr "Output data element"
+
+msgid "Predict according to input category option combo"
+msgstr "Predict according to input category option combo"
+
+msgid "Output category option combo"
+msgstr "Output category option combo"
+
+msgid "Set up the basic information for this predictor."
+msgstr "Set up the basic information for this predictor."
+
+msgid "Prediction logic"
+msgstr "Prediction logic"
+
+msgid "Define how predictions will be calculated"
+msgstr "Define how predictions will be calculated"
+
+msgid "Sequential sample count"
+msgstr "Sequential sample count"
+
+msgid "Annual sample count"
+msgstr "Annual sample count"
+
+msgid "Sequential skip count"
+msgstr "Sequential skip count"
+
+msgid "generator"
+msgstr "generator"
+
+msgid "sample skip test"
+msgstr "sample skip test"
+
+msgid "Output definition"
+msgstr "Output definition"
+
+msgid "Define where predictions will be output"
+msgstr "Define where predictions will be output"
+
+msgid "Available organisation unit levels"
+msgstr "Available organisation unit levels"
+
+msgid "Selected organisation unit levels"
+msgstr "Selected organisation unit levels"
+
+msgid "Filter available organisation unit levels"
+msgstr "Filter available organisation unit levels"
+
+msgid "Filter selected organisation unit levels options"
+msgstr "Filter selected organisation unit levels options"
+
+msgid "Organisation units providing data"
+msgstr "Organisation units providing data"
+
+msgid "Predictor Form"
+msgstr "Predictor Form"
+
+msgid "Generator expression"
+msgstr "Generator expression"
+
+msgid "Generator description"
+msgstr "Generator description"
+
+msgid "Generator missing value strategy"
+msgstr "Generator missing value strategy"
+
+msgid "Output category combo"
+msgstr "Output category combo"
+
+msgid "Organisation unit descendants"
+msgstr "Organisation unit descendants"
+
+msgid "Predictor run started successfully"
+msgstr "Predictor run started successfully"
+
+msgid "Run predictor"
+msgstr "Run predictor"
+
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
+
+msgid "Run now"
+msgstr "Run now"
+
 msgid "Program Disaggregation Form"
 msgstr "Program Disaggregation Form"
 
@@ -4054,6 +4232,18 @@ msgstr "Set up the program indicator legends."
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
 
+msgid "Organisation unit access"
+msgstr "Organisation unit access"
+
+msgid "Set up which organisation units can collect data using this program."
+msgstr "Set up which organisation units can collect data using this program."
+
+msgid "Role access"
+msgstr "Role access"
+
+msgid "Set up which user roles can access this program and program stages."
+msgstr "Set up which user roles can access this program and program stages."
+
 msgid "Enrollment: Data"
 msgstr "Enrollment: Data"
 
@@ -4069,8 +4259,8 @@ msgstr "Selected attributes"
 msgid "Filter available attributes"
 msgstr "Filter available attributes"
 
-msgid "Filter attributes"
-msgstr "Filter attributes"
+msgid "Filter selected attributes"
+msgstr "Filter selected attributes"
 
 msgid "Configure attributes"
 msgstr "Configure attributes"
@@ -4089,6 +4279,15 @@ msgstr "Desktop Display"
 
 msgid "Mobile Display"
 msgstr "Mobile Display"
+
+msgid "This attribute is defined at the tracked entity type level"
+msgstr "This attribute is defined at the tracked entity type level"
+
+msgid "This attribute is marked as required at the tracked entity type level"
+msgstr "This attribute is marked as required at the tracked entity type level"
+
+msgid "Unique attributes are always searchable"
+msgstr "Unique attributes are always searchable"
 
 msgid "Enrollment: Form"
 msgstr "Enrollment: Form"
@@ -4229,6 +4428,57 @@ msgstr "Add a program stage"
 msgid "Only integers are allowed"
 msgstr "Only integers are allowed"
 
+msgid "Access updated successfully"
+msgstr "Access updated successfully"
+
+msgid "Failed to apply access to all stages"
+msgstr "Failed to apply access to all stages"
+
+msgid "Failed to apply program access rules"
+msgstr "Failed to apply program access rules"
+
+msgid "Untitled"
+msgstr "Untitled"
+
+msgid "No data access"
+msgstr "No data access"
+
+msgid "No metadata access"
+msgstr "No metadata access"
+
+msgid "Data read and write"
+msgstr "Data read and write"
+
+msgid "Metadata read and write"
+msgstr "Metadata read and write"
+
+msgid "Data read"
+msgstr "Data read"
+
+msgid "Metadata read"
+msgstr "Metadata read"
+
+msgid "Differs from program access"
+msgstr "Differs from program access"
+
+msgid "Apply to all stages"
+msgstr "Apply to all stages"
+
+msgid "Revert to program access"
+msgstr "Revert to program access"
+
+msgid "Edit data access"
+msgstr "Edit data access"
+
+msgid "Edit access"
+msgstr "Edit access"
+
+msgid "Public (All users)"
+msgstr "Public (All users)"
+
+msgid "External"
+msgstr "External"
+
 msgid "Should not be lower than previous version"
 msgstr "Should not be lower than previous version"
 
@@ -4247,6 +4497,9 @@ msgstr "Related program"
 msgid "Choose how this program is disaggregated."
 msgstr "Choose how this program is disaggregated."
 
+msgid "Access and Sharing"
+msgstr "Access and Sharing"
+
 msgid "Stage"
 msgstr "Stage"
 
@@ -4259,8 +4512,8 @@ msgstr "Save "
 msgid "Saving a stage does not save other changes to the program"
 msgstr "Saving a stage does not save other changes to the program"
 
-msgid "A stage with this name already exists in this program"
-msgstr "A stage with this name already exists in this program"
+msgid "A stage with this name already exists. Please choose another name."
+msgstr "A stage with this name already exists. Please choose another name."
 
 msgid "Configure the basic information for this program stage."
 msgstr "Configure the basic information for this program stage."
@@ -4312,6 +4565,9 @@ msgstr "Program stage form"
 
 msgid "Configure the form for data collection for events in this program stage."
 msgstr "Configure the form for data collection for events in this program stage."
+
+msgid "Validation strategy"
+msgstr "Validation strategy"
 
 msgid "Stage section"
 msgstr "Stage section"
@@ -4715,18 +4971,6 @@ msgstr "Validation Rules"
 msgid "Choose the validation rules to include in this validation rule group."
 msgstr "Choose the validation rules to include in this validation rule group."
 
-msgid "Missing value strategy"
-msgstr "Missing value strategy"
-
-msgid "Never skip"
-msgstr "Never skip"
-
-msgid "Skip if any value is missing"
-msgstr "Skip if any value is missing"
-
-msgid "Skip if all values are missing"
-msgstr "Skip if all values are missing"
-
 msgid "Organisation unit levels to run validation for"
 msgstr "Organisation unit levels to run validation for"
 
@@ -4745,8 +4989,11 @@ msgstr "Configure the expressions and how they are compared."
 msgid "Left side expression"
 msgstr "Left side expression"
 
-msgid "Edit left side expression"
-msgstr "Edit left side expression"
+msgid "Set up numerator expression"
+msgstr "Set up numerator expression"
+
+msgid "Sliding window: validation checks against relative period"
+msgstr "Sliding window: validation checks against relative period"
 
 msgid "Comparison operator"
 msgstr "Comparison operator"

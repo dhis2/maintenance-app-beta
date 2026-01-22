@@ -176,9 +176,33 @@ const REPORTING_RATE = {
     EXPECTED_REPORTS: i18n.t('Expected reports'),
 }
 
-const ORGANISATION_UNIT_DESCENDANTS = {
-    DESCENDANTS: i18n.t('Descendants'),
-    SELECTED: i18n.t('Selected'),
+const PREDICTOR_ORG_UNIT_SOURCE = {
+    SELECTED: i18n.t('At selected level(s) only'),
+    DESCENDANTS: i18n.t('At selected level(s) and all levels below'),
+}
+
+const MISSING_VALUE_STRATEGY = {
+    SKIP_IF_ANY_VALUE_MISSING: i18n.t('Skip if any value is missing'),
+    SKIP_IF_ALL_VALUES_MISSING: i18n.t('Skip if all values are missing'),
+    NEVER_SKIP: i18n.t('Never skip'),
+}
+
+const VALIDATION_STRATEGY = {
+    ON_COMPLETE: i18n.t('On complete'),
+    ON_UPDATE_AND_INSERT: i18n.t('On update and insert'),
+}
+
+const PROGRAM_RULE_VARIABLE_SOURCE_TYPE = {
+    DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE: i18n.t(
+        'Data element in newest event in program stage'
+    ),
+    DATAELEMENT_NEWEST_EVENT_PROGRAM: i18n.t(
+        'Data element in newest event in program'
+    ),
+    DATAELEMENT_CURRENT_EVENT: i18n.t('Data element from current event'),
+    DATAELEMENT_PREVIOUS_EVENT: i18n.t('Data element from previous event'),
+    CALCULATED_VALUE: i18n.t('Calculated value'),
+    TEI_ATTRIBUTE: i18n.t('Tracked entity attribute'),
 }
 
 const allConstantTranslations: Record<string, string> = {
@@ -197,7 +221,10 @@ const allConstantTranslations: Record<string, string> = {
     ...DATA_SET_NOTIFICATION_TRIGGER,
     ...NOTIFICATION_RECIPIENT,
     ...REPORTING_RATE,
-    ...ORGANISATION_UNIT_DESCENDANTS,
+    ...PREDICTOR_ORG_UNIT_SOURCE,
+    ...MISSING_VALUE_STRATEGY,
+    ...VALIDATION_STRATEGY,
+    ...PROGRAM_RULE_VARIABLE_SOURCE_TYPE,
 }
 
 export const getConstantTranslation = (constant: string): string => {

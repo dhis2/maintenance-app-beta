@@ -57,6 +57,7 @@ import { organisationUnitListSchema } from '../pages/organisationUnits/form/orga
 import { predictorListSchema } from '../pages/predictors/form/predictorSchema'
 import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
+import { programRuleVariableListSchema } from '../pages/programRuleVariables/form/programRuleVariableSchema'
 import { programListSchema } from '../pages/programsWip/form'
 import { relationshipTypeListSchema } from '../pages/relationshipTypes/form/RelationshipTypeFormSchema'
 import { trackedEntityAttributeListSchema } from '../pages/trackedEntityAttributes/form/TrackedEntityAttributeFormSchema'
@@ -342,6 +343,11 @@ export const testOrganisationUnitGroupSet = (
 
 export const testProgramIndicator = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(programIndicatorsListSchema, { mockeryMapper }),
+    ...overwrites,
+})
+
+export const testProgramRuleVariable = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(programRuleVariableListSchema, { mockeryMapper }),
     ...overwrites,
 })
 
