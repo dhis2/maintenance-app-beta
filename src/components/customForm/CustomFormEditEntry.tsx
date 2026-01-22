@@ -4,17 +4,26 @@ import React from 'react'
 import { useField } from 'react-final-form'
 import { StandardFormSectionTitle, DrawerPortal } from '..'
 import css from './CustomFormContents.module.css'
-import { CustomFormEdit } from './CustomFormEdit'
+import { CustomFormDataPayload, CustomFormEdit } from './CustomFormEdit'
 import { ElementTypes } from './CustomFormElementsSelector'
 
 export const CustomFormEditEntry = ({
     level,
     loading,
     elementTypes,
+    updateCustomForm,
+    customFormTarget,
 }: {
     level: 'primary' | 'secondary'
     loading: boolean
     elementTypes: ElementTypes
+    updateCustomForm: (
+        data: CustomFormDataPayload,
+        onSuccess: (data: CustomFormDataPayload) => void,
+        onError: (e: Error) => void,
+        existingFormId: string | undefined
+    ) => Promise<unknown>
+    customFormTarget: string
 }) => {
     const [customFormEditOpen, setCustomFormEditOpen] =
         React.useState<boolean>(false)
@@ -38,6 +47,8 @@ export const CustomFormEditEntry = ({
                         closeCustomFormEdit={() => setCustomFormEditOpen(false)}
                         loading={loading}
                         elementTypes={elementTypes}
+                        updateCustomForm={updateCustomForm}
+                        customFormTarget={customFormTarget}
                     />
                 )}
             </DrawerPortal>

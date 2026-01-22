@@ -1,3 +1,4 @@
+import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
 import React, { useCallback, useState } from 'react'
@@ -13,6 +14,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../components'
+import { CustomFormDataPayload } from '../../../../components/customForm/CustomFormEdit'
 import { CustomFormEditEntry } from '../../../../components/customForm/CustomFormEditEntry'
 import { useProgramsStageSectionCustomFormElements } from '../../../../components/customForm/useGetCustomFormElements'
 import { SectionFormSectionsList } from '../../../../components/formCreators/SectionFormList'
@@ -90,10 +92,101 @@ export const StageFormContents = ({
         },
         [existingStages, values.id]
     )
+    const dataEngine = useDataEngine()
 
     const { loading, elementTypes } = useProgramsStageSectionCustomFormElements(
         values.id
     )
+    const createProgramStageCustomForm = useCallback(
+        async (
+            data: CustomFormDataPayload,
+            onSuccess: (data: CustomFormDataPayload) => void,
+            onError: (e: Error) => void
+        ) => {
+            try {
+                const response = await dataEngine.mutate(
+                    {
+                        resource: `dataEntryForms`,
+                        type: 'create',
+                        data: data,
+                    },
+                    {
+                        onError,
+                    }
+                )
+                await dataEngine.mutate(
+                    {
+                        resource: `programStages`,
+                        id: values.id as string,
+                        type: 'json-patch',
+                        data: [
+                            {
+                                op: 'replace',
+                                path: '/dataEntryForm',
+                                value: { id: data.id },
+                            },
+                        ],
+                    },
+                    {
+                        onComplete: () => {
+                            // use the data we passed if form was saved and associated to program
+                            onSuccess(data)
+                        },
+                    }
+                )
+                return { data: response }
+            } catch (error) {
+                console.error(error)
+            }
+        },
+        [dataEngine, values.id]
+    )
+
+    const updateProgramStageCustomForm = useCallback(
+        async (
+            data: CustomFormDataPayload,
+            onSuccess: (data: CustomFormDataPayload) => void,
+            onError: (e: Error) => void
+        ) => {
+            try {
+                const response = await dataEngine.mutate(
+                    {
+                        resource: `dataEntryForms`,
+                        id: data.id,
+                        type: 'json-patch',
+                        data: [
+                            {
+                                op: 'replace',
+                                path: '/htmlCode',
+                                value: data.htmlCode,
+                            },
+                        ],
+                    },
+                    {
+                        onComplete: () => {
+                            // the response from this post is empty, so we use the data we passed if it was successful
+                            onSuccess(data)
+                        },
+                        onError,
+                    }
+                )
+                return { data: response }
+            } catch (error) {
+                console.error(error)
+            }
+        },
+        [dataEngine]
+    )
+
+    const updateOrCreateCustomForm = (
+        data: CustomFormDataPayload,
+        onSuccess: (data: CustomFormDataPayload) => void,
+        onError: (e: Error) => void,
+        existingFormId: string | undefined
+    ) =>
+        existingFormId
+            ? updateProgramStageCustomForm(data, onSuccess, onError)
+            : createProgramStageCustomForm(data, onSuccess, onError)
 
     return (
         <SectionedFormSections>
@@ -312,6 +405,8 @@ export const StageFormContents = ({
                             level={isSubsection ? 'secondary' : 'primary'}
                             loading={loading}
                             elementTypes={elementTypes}
+                            updateCustomForm={updateOrCreateCustomForm}
+                            customFormTarget="program stage"
                         />
                     )}
                 </TabbedFormTypePicker>

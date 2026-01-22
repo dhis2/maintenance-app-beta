@@ -1,6 +1,7 @@
+import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
     createSearchParams,
     Link,
@@ -12,6 +13,7 @@ import {
     StandardFormSectionTitle,
     SectionedFormSection,
 } from '../../../../components'
+import { CustomFormDataPayload } from '../../../../components/customForm/CustomFormEdit'
 import { CustomFormEditEntry } from '../../../../components/customForm/CustomFormEditEntry'
 import { useDataSetCustomFormElements } from '../../../../components/customForm/useGetCustomFormElements'
 import { SectionFormSectionsList } from '../../../../components/formCreators/SectionFormList'
@@ -56,7 +58,37 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
             setSelectedFormType(FormType.SECTION)
         }
     }, [dataEntryForm, sections])
+    const dataEngine = useDataEngine()
+
     const { loading, elementTypes } = useDataSetCustomFormElements()
+    const updateDataSetCustomForm = useCallback(
+        async (
+            data: CustomFormDataPayload,
+            onSuccess: (data: CustomFormDataPayload) => void,
+            onError: (e: Error) => void
+        ) => {
+            try {
+                const response = await dataEngine.mutate(
+                    {
+                        resource: `dataSets/${modelId}/form`,
+                        type: 'create',
+                        data: data,
+                    },
+                    {
+                        onComplete: () => {
+                            // the response from this post is empty, so we use the data we passed if it was successful
+                            onSuccess(data)
+                        },
+                        onError,
+                    }
+                )
+                return { data: response }
+            } catch (error) {
+                console.error(error)
+            }
+        },
+        [dataEngine, modelId]
+    )
 
     return (
         <SectionedFormSection name={name}>
@@ -112,6 +144,8 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                         level={'primary'}
                         loading={loading}
                         elementTypes={elementTypes}
+                        updateCustomForm={updateDataSetCustomForm}
+                        customFormTarget="data set"
                     />
                 )}
                 {displayOptions !== undefined && (

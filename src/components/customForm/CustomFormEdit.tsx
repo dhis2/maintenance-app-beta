@@ -1,10 +1,9 @@
-import { useAlert, useDataEngine } from '@dhis2/app-runtime'
+import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip, NoticeBox } from '@dhis2/ui'
 import { IconInfo16 } from '@dhis2/ui-icons'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useField } from 'react-final-form'
-import { useParams } from 'react-router-dom'
 import {
     FormFooterWrapper,
     SectionedFormSection,
@@ -12,7 +11,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '..'
-import { generateDhis2Id, useSectionHandle } from '../../lib'
+import { generateDhis2Id } from '../../lib'
 import styles from './CustomFormContents.module.css'
 import {
     LoadingCustomFormElementsSelector,
@@ -23,6 +22,13 @@ export type CustomFormProps = {
     closeCustomFormEdit?: () => void
     loading: boolean
     elementTypes: ElementTypes
+    updateCustomForm: (
+        data: CustomFormDataPayload,
+        onSuccess: (data: CustomFormDataPayload) => void,
+        onError: (e: Error) => void,
+        existingFormId: string | undefined
+    ) => Promise<unknown>
+    customFormTarget: string
 }
 
 const SubsectionSpacer = ({ children }: { children: React.ReactNode }) => (
@@ -70,137 +76,18 @@ const getElementText = ({
     return ''
 }
 
-type CustomFormDataPayload = {
+export type CustomFormDataPayload = {
     id: string
     htmlCode: string
     name?: string
-}
-// when there is a data set id, we can post to the form endpoint
-const useUpdateForm = ({
-    onSuccess,
-    onError,
-    parentSchema,
-    operationType,
-}: {
-    onSuccess: (data: CustomFormDataPayload) => void
-    onError: (e: Error) => void
-    parentSchema: 'dataSet' | 'program'
-    operationType: 'create' | 'update'
-}) => {
-    const id = useParams().id
-    const dataEngine = useDataEngine()
-
-    const updateDataSet = useCallback(
-        async (data: CustomFormDataPayload) => {
-            try {
-                const response = await dataEngine.mutate(
-                    {
-                        resource: `dataSets/${id}/form`,
-                        type: 'create',
-                        data: data,
-                    },
-                    {
-                        onComplete: () => {
-                            // the response from this post is empty, so we use the data we passed if it was successful
-                            onSuccess(data)
-                        },
-                        onError,
-                    }
-                )
-                return { data: response }
-            } catch (error) {
-                console.error(error)
-            }
-        },
-        [dataEngine, id, onSuccess, onError]
-    )
-
-    const updateProgram = useCallback(
-        async (data: CustomFormDataPayload) => {
-            try {
-                const response = await dataEngine.mutate(
-                    {
-                        resource: `dataEntryForms`,
-                        id: data.id,
-                        type: 'json-patch',
-                        data: [
-                            {
-                                op: 'replace',
-                                path: '/htmlCode',
-                                value: data.htmlCode,
-                            },
-                        ],
-                    },
-                    {
-                        onComplete: () => {
-                            // the response from this post is empty, so we use the data we passed if it was successful
-                            onSuccess(data)
-                        },
-                        onError,
-                    }
-                )
-                return { data: response }
-            } catch (error) {
-                console.error(error)
-            }
-        },
-        [dataEngine, onSuccess, onError]
-    )
-
-    const createProgram = useCallback(
-        async (data: CustomFormDataPayload) => {
-            try {
-                const response = await dataEngine.mutate(
-                    {
-                        resource: `dataEntryForms`,
-                        type: 'create',
-                        data: data,
-                    },
-                    {
-                        onError,
-                    }
-                )
-                await dataEngine.mutate(
-                    {
-                        resource: `programs`,
-                        id: id as string,
-                        type: 'json-patch',
-                        data: [
-                            {
-                                op: 'replace',
-                                path: '/dataEntryForm',
-                                value: { id: data.id },
-                            },
-                        ],
-                    },
-                    {
-                        onComplete: () => {
-                            // use the data we passed if form was saved and associated to program
-                            onSuccess(data)
-                        },
-                    }
-                )
-                return { data: response }
-            } catch (error) {
-                console.error(error)
-            }
-        },
-        [dataEngine, id, onSuccess, onError]
-    )
-    if (parentSchema === 'dataSet') {
-        return updateDataSet
-    }
-    if (operationType === 'create') {
-        return createProgram
-    }
-
-    return updateProgram
 }
 
 export const CustomFormEdit = ({
     closeCustomFormEdit,
     loading,
     elementTypes,
+    updateCustomForm,
+    customFormTarget,
 }: CustomFormProps) => {
     const textAreaRef = useRef<HTMLTextAreaElement>(null)
     const [previewMode, setPreviewMode] = useState<boolean>(false)
@@ -208,12 +95,6 @@ export const CustomFormEdit = ({
     const [customFormError, setCustomFormError] = useState<string>('')
     const { input: formInput } = useField('dataEntryForm')
     const { input: nameInput } = useField('name')
-    const section = useSectionHandle()
-    const customFormTarget =
-        section?.name === 'dataSet'
-            ? i18n.t('data set')
-            : i18n.t('program enrollment')
-    const operationType = formInput?.value?.id ? 'update' : 'create'
 
     const insertElement = ({
         id,
@@ -251,27 +132,24 @@ export const CustomFormEdit = ({
         success: true,
     })
 
-    const updateCustomForm = useUpdateForm({
-        onSuccess: (data) => {
-            showSuccess({ success: true })
-            // update form state
-            formInput.onChange({
-                ...formInput.value,
-                ...data,
-            })
+    const onSuccess = (data: CustomFormDataPayload) => {
+        showSuccess({ success: true })
+        // update form state
+        formInput.onChange({
+            ...formInput.value,
+            ...data,
+        })
 
-            // close module
-            if (closeCustomFormEdit) {
-                closeCustomFormEdit()
-            }
-        },
-        onError: (e) => {
-            setCustomFormSaving(false)
-            setCustomFormError(e.message)
-        },
-        parentSchema: section?.name === 'dataSet' ? 'dataSet' : 'program',
-        operationType,
-    })
+        // close module
+        if (closeCustomFormEdit) {
+            closeCustomFormEdit()
+        }
+    }
+
+    const onError = (e: Error) => {
+        setCustomFormSaving(false)
+        setCustomFormError(e.message)
+    }
 
     return (
         <div className={styles.sectionsWrapper}>
@@ -370,6 +248,8 @@ export const CustomFormEdit = ({
                             primary
                             small
                             type="button"
+                            dataTest="form-submit-button"
+                            disabled={customFormSaving}
                             onClick={() => {
                                 const formId =
                                     formInput?.value?.id ?? generateDhis2Id()
@@ -377,21 +257,24 @@ export const CustomFormEdit = ({
                                     textAreaRef.current?.value ?? ''
                                 setCustomFormSaving(true)
                                 setCustomFormError('')
+
+                                const data = formInput?.value?.id
+                                    ? {
+                                          htmlCode,
+                                          id: formId,
+                                      }
+                                    : {
+                                          htmlCode,
+                                          id: formId,
+                                          name: nameInput?.value,
+                                      }
                                 updateCustomForm(
-                                    operationType === 'create'
-                                        ? {
-                                              htmlCode,
-                                              id: formId,
-                                              name: nameInput?.value,
-                                          }
-                                        : {
-                                              htmlCode,
-                                              id: formId,
-                                          }
+                                    data,
+                                    onSuccess,
+                                    onError,
+                                    formInput?.value?.id
                                 )
                             }}
-                            dataTest="form-submit-button"
-                            disabled={customFormSaving}
                         >
                             {i18n.t('Save custom form')}
                         </Button>
