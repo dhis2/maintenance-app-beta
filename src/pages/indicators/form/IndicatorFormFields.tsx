@@ -21,7 +21,7 @@ import {
 } from '../../../lib'
 import { IndicatorFormDescriptor } from './formDescriptor'
 import { IndicatorTypeField } from './IndicatorTypeField'
-import NumeratorDenominatorFields from './NumeratorDenominatorFields'
+import { NumeratorDenominatorFields } from './NumeratorDenominatorFields'
 
 const section = SECTIONS_MAP.indicator
 

@@ -451,7 +451,7 @@ const ProgramStageList = ({
                     selected={programStage}
                 />
             </div>
-            {!programStageId ? null : (
+            {programStageId ? (
                 <ExpressionList
                     query={programStageDataElementsQuery}
                     insertElement={insertElementFormatted}
@@ -468,7 +468,7 @@ const ProgramStageList = ({
                     }}
                     postQuerySearch={true}
                 />
-            )}
+            ) : null}
         </>
     )
 }
@@ -534,9 +534,9 @@ const PROGRAM_INDICATOR_OPERATOR_ELEMENTS = [
     { id: '<=', displayName: i18n.t('<= (less than or equal to)') },
     { id: '==', displayName: i18n.t('== (equals)') },
     { id: '!=', displayName: i18n.t('== (does not equal)') },
-    { id: '!', displayName: i18n.t('NOT') },
-    { id: '&&', displayName: i18n.t('AND') },
-    { id: '||', displayName: i18n.t('OR') },
+    { id: '!', displayName: i18n.t('! (not)') },
+    { id: '&&', displayName: i18n.t('&& (and)') },
+    { id: '||', displayName: i18n.t('|| (or)') },
     { id: 'days', displayName: i18n.t('days') },
     { id: 'if(', displayName: i18n.t('if(') },
     { id: 'isNull(', displayName: i18n.t('isNull(') },

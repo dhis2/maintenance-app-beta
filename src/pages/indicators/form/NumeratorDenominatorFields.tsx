@@ -6,7 +6,7 @@ import { StandardFormField, ExpressionBuilderEntry } from '../../../components'
 import { PaddedContainer } from '../../../components/ExpressionBuilder/PaddedContainer'
 import css from './NumeratorDenominatorFields.module.css'
 
-export default function NumeratorDenominatorFields({
+export const NumeratorDenominatorFields = ({
     fieldName,
     objectName,
     validationResource,
@@ -14,7 +14,7 @@ export default function NumeratorDenominatorFields({
     fieldName: string
     objectName: string
     validationResource: string
-}) {
+}) => {
     return (
         <div className={css.expressionContainer}>
             <PaddedContainer>
