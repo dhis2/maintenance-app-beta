@@ -9,6 +9,7 @@ const attributeFields = [
     'displayFormName',
     'valueType',
     'optionSet[options[id,displayName,name,code]]',
+    'sortOrder',
 ] as const
 
 export type AttributeMetadata = PickWithFieldFilters<
