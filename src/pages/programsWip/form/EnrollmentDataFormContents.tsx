@@ -11,8 +11,7 @@ import {
     TransferOption,
 } from '@dhis2/ui'
 import React, { useEffect, useRef } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import { Field as FieldRFF, FieldRenderProps, useField } from 'react-final-form'
+import { Field as FieldRFF, useField } from 'react-final-form'
 import {
     ModelTransfer,
     RenderingOptionsSelect,
@@ -26,14 +25,8 @@ import {
     InfoIconWithTooltip,
     TooltipWrapper,
 } from '../../../components/tooltip'
-import { getConstantTranslation, useBoundResourceQueryFn } from '../../../lib'
 import { ProgramTrackedEntityAttribute } from '../../../types/generated'
 import { ProgramsFromFilters } from '../Edit'
-
-const defaultRenderType = {
-    MOBILE: { type: 'DEFAULT' },
-    DESKTOP: { type: 'DEFAULT' },
-}
 
 const defaultRenderType = {
     MOBILE: { type: 'DEFAULT' },
