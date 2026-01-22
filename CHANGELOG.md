@@ -1,3 +1,17 @@
+# [0.112.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.111.0...v0.112.0) (2026-01-21)
+
+
+### Features
+
+* predictors form [DHIS2-20616] ([#725](https://github.com/dhis2/maintenance-app-beta/issues/725)) ([8cec70e](https://github.com/dhis2/maintenance-app-beta/commit/8cec70e3460563e770d7b1d69cf57a79c16cffb4))
+
+# [0.111.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.110.0...v0.111.0) (2026-01-20)
+
+
+### Features
+
+* [DHIS2-20632] Program tracked entity attributes ([#720](https://github.com/dhis2/maintenance-app-beta/issues/720)) ([a492eca](https://github.com/dhis2/maintenance-app-beta/commit/a492eca7bb19ecb3ed26d6c00f7fc4d94295acd9))
+
 # [0.110.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.109.1...v0.110.0) (2026-01-14)
 
 

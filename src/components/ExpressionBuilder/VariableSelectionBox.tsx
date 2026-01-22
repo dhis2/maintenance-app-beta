@@ -1,10 +1,7 @@
 import { IconChevronDown16, IconChevronRight16 } from '@dhis2/ui'
 import React, { useCallback, useState, RefObject } from 'react'
 import styles from './ExpressionBuilder.module.css'
-import {
-    ElementType,
-    validationRuleElementTypes,
-} from './ValidationRuleVariables'
+import { ElementType, defaultElementTypes } from './ValidationRuleVariables'
 
 const insertElementNonClosure = ({
     elementText,
@@ -39,7 +36,7 @@ export const VariableSelectionBox = ({
     elementRef: RefObject<HTMLInputElement | HTMLTextAreaElement>
     clearValidationState: () => void
 }) => {
-    const elementTypes = validationRuleElementTypes // to update with logic based on the ExpressionBuilder context
+    const elementTypes = defaultElementTypes // to update with logic based on the ExpressionBuilder context
     const [selectedElementType, setSelectedElementType] = useState<
         string | undefined
     >()
