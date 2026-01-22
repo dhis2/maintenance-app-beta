@@ -6,6 +6,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useField } from 'react-final-form'
 import {
     FormFooterWrapper,
+    SectionedFormErrorNotice,
     SectionedFormSection,
     SectionedFormSections,
     StandardFormSectionDescription,
@@ -228,6 +229,7 @@ export const CustomFormEdit = ({
                         </div>
                     </SectionedFormSection>
                 </SectionedFormSections>
+                <SectionedFormErrorNotice />
                 {customFormError?.length > 0 && (
                     <div className={styles.errorNoticeWrapper}>
                         <NoticeBox

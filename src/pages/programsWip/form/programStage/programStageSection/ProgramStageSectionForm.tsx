@@ -8,6 +8,7 @@ import {
     FormBase,
     FormBaseProps,
     FormFooterWrapper,
+    SectionedFormErrorNotice,
 } from '../../../../../components'
 import { DefaultFormErrorNotice } from '../../../../../components/form/DefaultFormErrorNotice'
 import { LoadingSpinner } from '../../../../../components/loading/LoadingSpinner'
@@ -94,7 +95,10 @@ export const StageSectionForm = ({
                 return (
                     <div>
                         <div className={styles.sectionsWrapper}>
-                            <ProgramStageSectionFormContents />
+                            <div>
+                                <ProgramStageSectionFormContents />
+                                <SectionedFormErrorNotice />
+                            </div>
                             <FormFooterWrapper>
                                 <ButtonStrip>
                                     <Button

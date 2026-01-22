@@ -13,6 +13,7 @@ import {
     DescriptionField,
     FormFooterWrapper,
     NameField,
+    SectionedFormErrorNotice,
     SectionedFormSection,
     SectionedFormSections,
     StandardFormField,
@@ -215,9 +216,7 @@ export const EnrollmentSectionFormContents = ({
                         </StandardFormField>
                     </SectionedFormSection>
                 </SectionedFormSections>
-                <div className={styles.errorNoticeWrapper}>
-                    <DefaultFormErrorNotice />
-                </div>
+                <SectionedFormErrorNotice />
             </div>
             <div>
                 <FormFooterWrapper>
