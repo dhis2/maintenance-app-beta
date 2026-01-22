@@ -4502,8 +4502,8 @@ msgstr "Differs from program access"
 msgid "Apply to all stages"
 msgstr "Apply to all stages"
 
-msgid "Revert to program access"
-msgstr "Revert to program access"
+msgid "Apply program access rules"
+msgstr "Apply program access rules"
 
 msgid "Edit data access"
 msgstr "Edit data access"
