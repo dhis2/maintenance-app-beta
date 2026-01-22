@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-15T14:33:17.582Z\n"
-"PO-Revision-Date: 2026-01-15T14:33:17.582Z\n"
+"POT-Creation-Date: 2026-01-22T15:07:48.523Z\n"
+"PO-Revision-Date: 2026-01-22T15:07:48.523Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -341,23 +341,6 @@ msgstr "Required"
 
 msgid "Please enter a GeoJSON value"
 msgstr "Please enter a GeoJSON value"
-
-msgid "Name: {{displayName}} (Translated)"
-msgstr "Name: {{displayName}} (Translated)"
-
-msgid ""
-"Translatable fields appear in the default language in this form, not in "
-"your selected database language."
-msgstr ""
-"Translatable fields appear in the default language in this form, not in "
-"your selected database language."
-
-msgid ""
-"Translatable fields appear in the default language in this form, not in "
-"your selected database language."
-msgstr ""
-"Translatable fields appear in the default language in this form, not in "
-"your selected database language."
 
 msgid "Exit without saving"
 msgstr "Exit without saving"
@@ -1611,12 +1594,6 @@ msgstr "At selected level(s) only"
 
 msgid "At selected level(s) and all levels below"
 msgstr "At selected level(s) and all levels below"
-
-msgid "Descendants"
-msgstr "Descendants"
-
-msgid "Selected"
-msgstr "Selected"
 
 msgid "On complete"
 msgstr "On complete"
@@ -3870,87 +3847,6 @@ msgstr "Sends a notification when a validation rule failed."
 msgid "Manage"
 msgstr "Manage"
 
-msgid "Edit {{objectName}} expression"
-msgstr "Edit {{objectName}} expression"
-
-msgid "Set up {{objectName}} expression"
-msgstr "Set up {{objectName}} expression"
-
-msgid "Summarize what this {{objectName}} measures."
-msgstr "Summarize what this {{objectName}} measures."
-
-msgid "Output data element"
-msgstr "Output data element"
-
-msgid "Predict according to input category option combo"
-msgstr "Predict according to input category option combo"
-
-msgid "Output category option combo"
-msgstr "Output category option combo"
-
-msgid "Set up the basic information for this predictor."
-msgstr "Set up the basic information for this predictor."
-
-msgid "Prediction logic"
-msgstr "Prediction logic"
-
-msgid "Define how predictions will be calculated"
-msgstr "Define how predictions will be calculated"
-
-msgid "Sequential sample count"
-msgstr "Sequential sample count"
-
-msgid "Annual sample count"
-msgstr "Annual sample count"
-
-msgid "Sequential skip count"
-msgstr "Sequential skip count"
-
-msgid "generator"
-msgstr "generator"
-
-msgid "sample skip test"
-msgstr "sample skip test"
-
-msgid "Output definition"
-msgstr "Output definition"
-
-msgid "Define where predictions will be output"
-msgstr "Define where predictions will be output"
-
-msgid "Available organisation unit levels"
-msgstr "Available organisation unit levels"
-
-msgid "Selected organisation unit levels"
-msgstr "Selected organisation unit levels"
-
-msgid "Filter available organisation unit levels"
-msgstr "Filter available organisation unit levels"
-
-msgid "Filter selected organisation unit levels options"
-msgstr "Filter selected organisation unit levels options"
-
-msgid "Organisation units providing data"
-msgstr "Organisation units providing data"
-
-msgid "Predictor Form"
-msgstr "Predictor Form"
-
-msgid "Generator expression"
-msgstr "Generator expression"
-
-msgid "Generator description"
-msgstr "Generator description"
-
-msgid "Generator missing value strategy"
-msgstr "Generator missing value strategy"
-
-msgid "Output category combo"
-msgstr "Output category combo"
-
-msgid "Organisation unit descendants"
-msgstr "Organisation unit descendants"
-
 msgid "Predictor run started successfully"
 msgstr "Predictor run started successfully"
 
@@ -3965,6 +3861,75 @@ msgstr "End date"
 
 msgid "Run now"
 msgstr "Run now"
+
+msgid "Edit {{objectName}} expression"
+msgstr "Edit {{objectName}} expression"
+
+msgid "Set up {{objectName}} expression"
+msgstr "Set up {{objectName}} expression"
+
+msgid "Summarize what this {{objectName}} measures."
+msgstr "Summarize what this {{objectName}} measures."
+
+msgid "Output data element (required)"
+msgstr "Output data element (required)"
+
+msgid "Predict according to input category option combo"
+msgstr "Predict according to input category option combo"
+
+msgid "Output category option combo"
+msgstr "Output category option combo"
+
+msgid "Set up the basic information for this predictor."
+msgstr "Set up the basic information for this predictor."
+
+msgid "Predictor logic"
+msgstr "Predictor logic"
+
+msgid "Define how predictions will be calculated"
+msgstr "Define how predictions will be calculated"
+
+msgid "Organisation units providing data"
+msgstr "Organisation units providing data"
+
+msgid "Sequential sample count (required)"
+msgstr "Sequential sample count (required)"
+
+msgid "Annual sample count (required)"
+msgstr "Annual sample count (required)"
+
+msgid "generator"
+msgstr "generator"
+
+msgid "sample skip test"
+msgstr "sample skip test"
+
+msgid "Output definition"
+msgstr "Output definition"
+
+msgid "Define where predictions will be output"
+msgstr "Define where predictions will be output"
+
+msgid "Predictor Form"
+msgstr "Predictor Form"
+
+msgid "Organisation unit descendants"
+msgstr "Organisation unit descendants"
+
+msgid "Generator expression"
+msgstr "Generator expression"
+
+msgid "Generator description"
+msgstr "Generator description"
+
+msgid "Generator missing value strategy"
+msgstr "Generator missing value strategy"
+
+msgid "Output data element"
+msgstr "Output data element"
+
+msgid "Output category combo"
+msgstr "Output category combo"
 
 msgid "Program Disaggregation Form"
 msgstr "Program Disaggregation Form"
