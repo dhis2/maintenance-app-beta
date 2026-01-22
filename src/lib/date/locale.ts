@@ -1,7 +1,17 @@
 import i18n from '@dhis2/d2-i18n'
 
-// our locales use _ instead of - for locales
-const language = i18n.language?.replace('_', '-') || 'en'
+const toBCP47 = (locale) => {
+  if (!locale) return locale;
+  const parts = locale.split('_');
+  if (parts.length === 3) {
+    const [lang, region, script] = parts;
+    return `${lang}-${script}-${region}`;
+  }
+
+  return locale.replace(/_/g, '-');
+};
+
+const language = toBCP47(i18n.language) || 'en';
 
 export const [selectedLocale] = Intl.DateTimeFormat.supportedLocalesOf([
     language,
