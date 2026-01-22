@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { render, waitFor } from '@testing-library/react'
+import { render, waitFor, type RenderResult } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/programRuleVariablesSchema.json'
@@ -36,8 +36,30 @@ const waitForLoadingToComplete = async (field: HTMLElement) => {
     })
 }
 
-const waitForOptionsToPopulate = () =>
-    new Promise((resolve) => setTimeout(resolve, 300))
+const waitForOptionsToPopulate = async (
+    field: HTMLElement,
+    screen: RenderResult
+) => {
+    const selectInput = field.querySelector(
+        '[data-test="dhis2-uicore-select-input"]'
+    )
+    if (!selectInput) {
+        return
+    }
+
+    await userEvent.click(selectInput)
+    await waitFor(() => {
+        const optionsWrapper = screen.queryByTestId(
+            'dhis2-uicore-select-menu-menuwrapper'
+        )
+        expect(optionsWrapper).toBeInTheDocument()
+        const options = optionsWrapper?.querySelectorAll(
+            '[data-test="dhis2-uicore-singleselectoption"]'
+        )
+        expect(options?.length).toBeGreaterThan(0)
+    })
+    await userEvent.click(selectInput)
+}
 
 describe('Program Rule Variable form tests', () => {
     const createMock = jest.fn()
@@ -674,7 +696,7 @@ describe('Program Rule Variable form tests', () => {
                     'dataElement-field'
                 )
                 await waitForLoadingToComplete(dataElementField)
-                await waitForOptionsToPopulate()
+                await waitForOptionsToPopulate(dataElementField, screen)
                 await uiActions.pickOptionFromSelect(
                     dataElementField,
                     0,
@@ -760,7 +782,10 @@ describe('Program Rule Variable form tests', () => {
                     'trackedEntityAttribute-field'
                 )
                 await waitForLoadingToComplete(trackedEntityAttributeField)
-                await waitForOptionsToPopulate()
+                await waitForOptionsToPopulate(
+                    trackedEntityAttributeField,
+                    screen
+                )
                 await uiActions.pickOptionFromSelect(
                     trackedEntityAttributeField,
                     0,
