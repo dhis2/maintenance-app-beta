@@ -7,7 +7,7 @@ import {
     ExpressionBuilderEntry,
     MissingValueStrategyField,
 } from '../../../components'
-import { PaddedContainer } from '../../../components/metadataFormControls/ExpressionBuilder/PaddedContainer'
+import { PaddedContainer } from '../../../components/ExpressionBuilder/PaddedContainer'
 import { SchemaName, SchemaSection } from '../../../lib'
 import css from './PredictorFormFields.module.css'
 

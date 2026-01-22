@@ -19,7 +19,6 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
-import DenominatorFields from './DenominatorFields'
 import { IndicatorFormDescriptor } from './formDescriptor'
 import { IndicatorTypeField } from './IndicatorTypeField'
 import NumeratorDenominatorFields from './NumeratorDenominatorFields'

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-19T11:52:30.625Z\n"
-"PO-Revision-Date: 2026-01-19T11:52:30.625Z\n"
+"POT-Creation-Date: 2026-01-21T14:51:34.367Z\n"
+"PO-Revision-Date: 2026-01-21T14:51:34.367Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -201,8 +201,113 @@ msgstr "greatest("
 msgid "least("
 msgstr "least("
 
-msgid "Operators"
-msgstr "Operators"
+msgid "log("
+msgstr "log("
+
+msgid "log10("
+msgstr "log10("
+
+msgid "> (greater than)"
+msgstr "> (greater than)"
+
+msgid ">= (greater than or equal to)"
+msgstr ">= (greater than or equal to)"
+
+msgid "< (less than)"
+msgstr "< (less than)"
+
+msgid "<= (less than or equal to)"
+msgstr "<= (less than or equal to)"
+
+msgid "== (equals)"
+msgstr "== (equals)"
+
+msgid "== (does not equal)"
+msgstr "== (does not equal)"
+
+msgid "NOT"
+msgstr "NOT"
+
+msgid "AND"
+msgstr "AND"
+
+msgid "OR"
+msgstr "OR"
+
+msgid ".periodOffset("
+msgstr ".periodOffset("
+
+msgid "avg("
+msgstr "avg("
+
+msgid "count("
+msgstr "count("
+
+msgid "max("
+msgstr "max("
+
+msgid "median("
+msgstr "median("
+
+msgid "min("
+msgstr "min("
+
+msgid "percentileCont("
+msgstr "percentileCont("
+
+msgid "stddev("
+msgstr "stddev("
+
+msgid "stddevPop("
+msgstr "stddevPop("
+
+msgid "stddevSamp("
+msgstr "stddevSamp("
+
+msgid "sum("
+msgstr "sum("
+
+msgid "contains("
+msgstr "contains("
+
+msgid "containsItems("
+msgstr "containsItems("
+
+msgid "is("
+msgstr "is("
+
+msgid "firstNonNull("
+msgstr "firstNonNull("
+
+msgid "normDistCum("
+msgstr "normDistCum("
+
+msgid "normDistDen("
+msgstr "normDistDen("
+
+msgid "null"
+msgstr "null"
+
+msgid "orgUnit.ancestor("
+msgstr "orgUnit.ancestor("
+
+msgid "orgUnit.dataSet("
+msgstr "orgUnit.dataSet("
+
+msgid "orgUnit.group("
+msgstr "orgUnit.group("
+
+msgid "orgUnit.program("
+msgstr "orgUnit.program("
+
+msgid "removeZeros("
+msgstr "removeZeros("
+
+msgid ".maxDate("
+msgstr ".maxDate("
+
+msgid ".minDate("
+msgstr ".minDate("
 
 msgid "Program data"
 msgstr "Program data"
@@ -215,6 +320,9 @@ msgstr "Constants"
 
 msgid "Reporting rates"
 msgstr "Reporting rates"
+
+msgid "Operators"
+msgstr "Operators"
 
 msgid "Analytics period end"
 msgstr "Analytics period end"
@@ -252,11 +360,14 @@ msgstr "Value count"
 msgid "Zero or positive value count"
 msgstr "Zero or positive value count"
 
+msgid "Variables"
+msgstr "Variables"
+
 msgid "Program stage data"
 msgstr "Program stage data"
 
-msgid "Variables"
-msgstr "Variables"
+msgid "Attributes"
+msgstr "Attributes"
 
 msgid "Could not validate expression"
 msgstr "Could not validate expression"
@@ -372,9 +483,6 @@ msgstr "Date of enrollment"
 msgid "Date of incident"
 msgstr "Date of incident"
 
-msgid "Attributes"
-msgstr "Attributes"
-
 msgid "Program"
 msgstr "Program"
 
@@ -389,23 +497,6 @@ msgstr "Required"
 
 msgid "Please enter a GeoJSON value"
 msgstr "Please enter a GeoJSON value"
-
-msgid "Name: {{displayName}} (Translated)"
-msgstr "Name: {{displayName}} (Translated)"
-
-msgid ""
-"Translatable fields appear in the default language in this form, not in "
-"your selected database language."
-msgstr ""
-"Translatable fields appear in the default language in this form, not in "
-"your selected database language."
-
-msgid ""
-"Translatable fields appear in the default language in this form, not in "
-"your selected database language."
-msgstr ""
-"Translatable fields appear in the default language in this form, not in "
-"your selected database language."
 
 msgid "Exit without saving"
 msgstr "Exit without saving"
@@ -427,6 +518,13 @@ msgstr "Show error details"
 
 msgid "Save and close"
 msgstr "Save and close"
+
+msgid ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
+msgstr ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
 
 msgid "<No value>"
 msgstr "<No value>"
@@ -906,24 +1004,6 @@ msgstr "Program indicator"
 msgid "Program indicator group"
 msgstr "Program indicator group"
 
-msgid "Data element in newest event in program stage"
-msgstr "Data element in newest event in program stage"
-
-msgid "Data element in newest event in program"
-msgstr "Data element in newest event in program"
-
-msgid "Data element from current event"
-msgstr "Data element from current event"
-
-msgid "Data element from previous event"
-msgstr "Data element from previous event"
-
-msgid "Calculated value"
-msgstr "Calculated value"
-
-msgid "Tracked entity attribute"
-msgstr "Tracked entity attribute"
-
 msgid "Select source type"
 msgstr "Select source type"
 
@@ -1133,6 +1213,9 @@ msgstr "Organisation unit level"
 
 msgid "Organisation unit levels"
 msgstr "Organisation unit levels"
+
+msgid "Tracked entity attribute"
+msgstr "Tracked entity attribute"
 
 msgid "Tracked entity attributes"
 msgstr "Tracked entity attributes"
@@ -1668,11 +1751,26 @@ msgstr "At selected level(s) only"
 msgid "At selected level(s) and all levels below"
 msgstr "At selected level(s) and all levels below"
 
-msgid "Descendants"
-msgstr "Descendants"
+msgid "On complete"
+msgstr "On complete"
 
-msgid "Selected"
-msgstr "Selected"
+msgid "On update and insert"
+msgstr "On update and insert"
+
+msgid "Data element in newest event in program stage"
+msgstr "Data element in newest event in program stage"
+
+msgid "Data element in newest event in program"
+msgstr "Data element in newest event in program"
+
+msgid "Data element from current event"
+msgstr "Data element from current event"
+
+msgid "Data element from previous event"
+msgstr "Data element from previous event"
+
+msgid "Calculated value"
+msgstr "Calculated value"
 
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
@@ -1731,6 +1829,9 @@ msgstr "Relationship name seen from initiating entity"
 msgid "Ignore data approval"
 msgstr "Ignore data approval"
 
+msgid "Source type"
+msgstr "Source type"
+
 msgid "Referral"
 msgstr "Referral"
 
@@ -1739,6 +1840,9 @@ msgstr "Sharing"
 
 msgid "Relationship name seen from receiving entity"
 msgstr "Relationship name seen from receiving entity"
+
+msgid "Use code for option set"
+msgstr "Use code for option set"
 
 msgid "Owner"
 msgstr "Owner"
@@ -1847,12 +1951,6 @@ msgstr "Program name"
 
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
-
-msgid "Source type"
-msgstr "Source type"
-
-msgid "Use code for option set"
-msgstr "Use code for option set"
 
 msgid "Unique"
 msgstr "Unique"
@@ -3902,8 +4000,23 @@ msgstr "Sends a notification when a validation rule failed."
 msgid "Manage"
 msgstr "Manage"
 
-msgid "Output data element"
-msgstr "Output data element"
+msgid "Predictor run started successfully"
+msgstr "Predictor run started successfully"
+
+msgid "Run predictor"
+msgstr "Run predictor"
+
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
+
+msgid "Run now"
+msgstr "Run now"
+
+msgid "Output data element (required)"
+msgstr "Output data element (required)"
 
 msgid "Predict according to input category option combo"
 msgstr "Predict according to input category option combo"
@@ -3923,14 +4036,11 @@ msgstr "Define how predictions will be calculated"
 msgid "Organisation units providing data"
 msgstr "Organisation units providing data"
 
-msgid "Sequential sample count"
-msgstr "Sequential sample count"
+msgid "Sequential sample count (required)"
+msgstr "Sequential sample count (required)"
 
-msgid "Annual sample count"
-msgstr "Annual sample count"
-
-msgid "Sequential skip count"
-msgstr "Sequential skip count"
+msgid "Annual sample count (required)"
+msgstr "Annual sample count (required)"
 
 msgid "generator"
 msgstr "generator"
@@ -3959,23 +4069,11 @@ msgstr "Generator description"
 msgid "Generator missing value strategy"
 msgstr "Generator missing value strategy"
 
+msgid "Output data element"
+msgstr "Output data element"
+
 msgid "Output category combo"
 msgstr "Output category combo"
-
-msgid "Predictor run started successfully"
-msgstr "Predictor run started successfully"
-
-msgid "Run predictor"
-msgstr "Run predictor"
-
-msgid "Start date"
-msgstr "Start date"
-
-msgid "End date"
-msgstr "End date"
-
-msgid "Run now"
-msgstr "Run now"
 
 msgid "Program Disaggregation Form"
 msgstr "Program Disaggregation Form"

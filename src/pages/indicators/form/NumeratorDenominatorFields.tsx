@@ -3,7 +3,7 @@ import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 import { StandardFormField, ExpressionBuilderEntry } from '../../../components'
-import { PaddedContainer } from '../../../components/metadataFormControls/ExpressionBuilder/PaddedContainer'
+import { PaddedContainer } from '../../../components/ExpressionBuilder/PaddedContainer'
 import css from './NumeratorDenominatorFields.module.css'
 
 export default function NumeratorDenominatorFields({
@@ -15,9 +15,6 @@ export default function NumeratorDenominatorFields({
     objectName: string
     validationResource: string
 }) {
-    // const fieldName = 'numerator'
-    // const objectName = i18n.t('Numerator')
-    // const validationResource = 'indicators/expression/description'
     return (
         <div className={css.expressionContainer}>
             <PaddedContainer>

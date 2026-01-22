@@ -16,8 +16,7 @@ import {
     StandardFormSectionTitle,
     ExpressionBuilderEntry,
 } from '../../../components'
-import { ExpressionBuilderWithModalField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderWithModalField'
-import { PaddedContainer } from '../../../components/metadataFormControls/ExpressionBuilder/PaddedContainer'
+import { PaddedContainer } from '../../../components/ExpressionBuilder/PaddedContainer'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import {
     getConstantTranslation,

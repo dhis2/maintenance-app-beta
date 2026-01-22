@@ -104,7 +104,7 @@ export const ExpressionListInner = ({
                         value={filter}
                         onChange={({ value }) => setFilterValue(value ?? '')}
                         placeholder={i18n.t('Filter list')}
-                        type="search"
+                        clearable
                     />
                 </div>
             </div>

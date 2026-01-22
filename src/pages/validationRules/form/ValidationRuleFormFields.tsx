@@ -22,7 +22,7 @@ import {
     StandardFormSectionTitle,
     MissingValueStrategyField,
 } from '../../../components'
-import { PaddedContainer } from '../../../components/metadataFormControls/ExpressionBuilder/PaddedContainer'
+import { PaddedContainer } from '../../../components/ExpressionBuilder/PaddedContainer'
 import {
     getConstantTranslation,
     SchemaName,
