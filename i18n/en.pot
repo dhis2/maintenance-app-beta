@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-19T13:32:53.858Z\n"
-"PO-Revision-Date: 2026-01-19T13:32:53.858Z\n"
+"POT-Creation-Date: 2026-01-22T15:14:05.449Z\n"
+"PO-Revision-Date: 2026-01-22T15:14:05.449Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -327,13 +327,6 @@ msgstr "Required"
 msgid "Please enter a GeoJSON value"
 msgstr "Please enter a GeoJSON value"
 
-msgid ""
-"Translatable fields appear in the default language in this form, not in "
-"your selected database language."
-msgstr ""
-"Translatable fields appear in the default language in this form, not in "
-"your selected database language."
-
 msgid "Exit without saving"
 msgstr "Exit without saving"
 
@@ -354,6 +347,13 @@ msgstr "Show error details"
 
 msgid "Save and close"
 msgstr "Save and close"
+
+msgid ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
+msgstr ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
 
 msgid "<No value>"
 msgstr "<No value>"
@@ -833,24 +833,6 @@ msgstr "Program indicator"
 msgid "Program indicator group"
 msgstr "Program indicator group"
 
-msgid "Data element in newest event in program stage"
-msgstr "Data element in newest event in program stage"
-
-msgid "Data element in newest event in program"
-msgstr "Data element in newest event in program"
-
-msgid "Data element from current event"
-msgstr "Data element from current event"
-
-msgid "Data element from previous event"
-msgstr "Data element from previous event"
-
-msgid "Calculated value"
-msgstr "Calculated value"
-
-msgid "Tracked entity attribute"
-msgstr "Tracked entity attribute"
-
 msgid "Select source type"
 msgstr "Select source type"
 
@@ -1060,6 +1042,9 @@ msgstr "Organisation unit level"
 
 msgid "Organisation unit levels"
 msgstr "Organisation unit levels"
+
+msgid "Tracked entity attribute"
+msgstr "Tracked entity attribute"
 
 msgid "Tracked entity attributes"
 msgstr "Tracked entity attributes"
@@ -1595,6 +1580,27 @@ msgstr "Descendants"
 msgid "Selected"
 msgstr "Selected"
 
+msgid "On complete"
+msgstr "On complete"
+
+msgid "On update and insert"
+msgstr "On update and insert"
+
+msgid "Data element in newest event in program stage"
+msgstr "Data element in newest event in program stage"
+
+msgid "Data element in newest event in program"
+msgstr "Data element in newest event in program"
+
+msgid "Data element from current event"
+msgstr "Data element from current event"
+
+msgid "Data element from previous event"
+msgstr "Data element from previous event"
+
+msgid "Calculated value"
+msgstr "Calculated value"
+
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
 
@@ -1652,6 +1658,9 @@ msgstr "Relationship name seen from initiating entity"
 msgid "Ignore data approval"
 msgstr "Ignore data approval"
 
+msgid "Source type"
+msgstr "Source type"
+
 msgid "Referral"
 msgstr "Referral"
 
@@ -1660,6 +1669,9 @@ msgstr "Sharing"
 
 msgid "Relationship name seen from receiving entity"
 msgstr "Relationship name seen from receiving entity"
+
+msgid "Use code for option set"
+msgstr "Use code for option set"
 
 msgid "Owner"
 msgstr "Owner"
@@ -1768,12 +1780,6 @@ msgstr "Program name"
 
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
-
-msgid "Source type"
-msgstr "Source type"
-
-msgid "Use code for option set"
-msgstr "Use code for option set"
 
 msgid "Unique"
 msgstr "Unique"
@@ -4168,6 +4174,9 @@ msgstr "Desktop Display"
 msgid "Mobile Display"
 msgstr "Mobile Display"
 
+msgid "This attribute is defined at the tracked entity type level"
+msgstr "This attribute is defined at the tracked entity type level"
+
 msgid "This attribute is marked as required at the tracked entity type level"
 msgstr "This attribute is marked as required at the tracked entity type level"
 
@@ -4385,6 +4394,36 @@ msgstr "Choose how this program is disaggregated."
 msgid "Access and Sharing"
 msgstr "Access and Sharing"
 
+msgid "Program stage data"
+msgstr "Program stage data"
+
+msgid "Configure data collection for events in this program stage."
+msgstr "Configure data collection for events in this program stage."
+
+msgid "Chosen data elements"
+msgstr "Chosen data elements"
+
+msgid "Filter chosen data elements"
+msgstr "Filter chosen data elements"
+
+msgid "Configure data items"
+msgstr "Configure data items"
+
+msgid "Data elements can be collected in different ways with different options."
+msgstr "Data elements can be collected in different ways with different options."
+
+msgid "Display in reports"
+msgstr "Display in reports"
+
+msgid "Future date"
+msgstr "Future date"
+
+msgid "Skip in analytics"
+msgstr "Skip in analytics"
+
+msgid "Skip sync"
+msgstr "Skip sync"
+
 msgid "Stage"
 msgstr "Stage"
 
@@ -4438,12 +4477,6 @@ msgstr "Event Repetition"
 
 msgid "Define the frequency of events within this stage."
 msgstr "Define the frequency of events within this stage."
-
-msgid "Program Stage: Data"
-msgstr "Program Stage: Data"
-
-msgid "Choose the information to collect in this program stage. "
-msgstr "Choose the information to collect in this program stage. "
 
 msgid "Program stage form"
 msgstr "Program stage form"
@@ -4886,8 +4919,8 @@ msgstr "Configure the expressions and how they are compared."
 msgid "Left side expression"
 msgstr "Left side expression"
 
-msgid "Edit left side expression"
-msgstr "Edit left side expression"
+msgid "Set up numerator expression"
+msgstr "Set up numerator expression"
 
 msgid "Comparison operator"
 msgstr "Comparison operator"
@@ -4895,8 +4928,8 @@ msgstr "Comparison operator"
 msgid "Right side expression"
 msgstr "Right side expression"
 
-msgid "Edit right side expression"
-msgstr "Edit right side expression"
+msgid "Set up denominator expression"
+msgstr "Set up denominator expression"
 
 msgid "Instruction to show"
 msgstr "Instruction to show"
