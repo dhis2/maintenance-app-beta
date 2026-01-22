@@ -1,28 +1,19 @@
 import i18n from '@dhis2/d2-i18n'
 import {
-    Button,
-    ButtonStrip,
     CheckboxFieldFF,
     Field,
     RadioFieldFF,
     SingleSelectFieldFF,
     TextAreaFieldFF,
 } from '@dhis2/ui'
-import { IconInfo16 } from '@dhis2/ui-icons'
 import { useQuery } from '@tanstack/react-query'
 import DOMPurify from 'dompurify'
 import { uniqBy } from 'lodash'
 import React, { useMemo } from 'react'
-import {
-    Field as FieldRFF,
-    useField,
-    useForm,
-    useFormState,
-} from 'react-final-form'
+import { Field as FieldRFF, useField, useFormState } from 'react-final-form'
 import {
     CodeField,
     DescriptionField,
-    FormFooterWrapper,
     NameField,
     SectionedFormErrorNotice,
     SectionedFormSection,
@@ -40,7 +31,6 @@ import {
 } from '../../../../../lib'
 import { DisplayableModel } from '../../../../../types/models'
 import { DataElementsTransferField } from './DataElementsTransferField'
-import type { SectionFormValues } from './DataSetSectionForm'
 import styles from './DataSetSectionFormContents.module.css'
 
 const dataSetSectionSchemaSection = {
@@ -50,10 +40,6 @@ const dataSetSectionSchemaSection = {
     titlePlural: i18n.t('Sections'),
     parentSectionKey: 'dataSet',
 } satisfies SchemaSection
-
-export type DataSetSectionFormProps = {
-    onCancel?: () => void
-}
 
 export type DataSetDataElementsType = {
     dataSetElements: {
@@ -65,12 +51,9 @@ export type DataSetDataElementsType = {
     indicators: DisplayableModel[]
 }
 
-export const DataSetSectionFormContents = ({
-    onCancel,
-}: DataSetSectionFormProps) => {
-    const form = useForm<SectionFormValues>()
-    const { submitting, values } = useFormState({
-        subscription: { submitting: true, values: true },
+export const DataSetSectionFormContents = () => {
+    const { values } = useFormState({
+        subscription: { values: true },
     })
 
     const { input: dataElementsInput, meta: dataElementsMeta } = useField<
@@ -380,40 +363,6 @@ export const DataSetSectionFormContents = ({
                     </SectionedFormSection>
                 </SectionedFormSections>
                 <SectionedFormErrorNotice />
-            </div>
-            <div>
-                <FormFooterWrapper>
-                    <ButtonStrip>
-                        <Button
-                            primary
-                            small
-                            disabled={submitting}
-                            type="button"
-                            onClick={() => form.submit()}
-                            loading={submitting}
-                            dataTest="form-submit-button"
-                        >
-                            {i18n.t('Save section')}
-                        </Button>
-                        <Button
-                            secondary
-                            small
-                            disabled={submitting}
-                            onClick={onCancel}
-                            dataTest="form-cancel-link"
-                        >
-                            {i18n.t('Cancel')}
-                        </Button>
-                    </ButtonStrip>
-                    <div className={styles.actionsInfo}>
-                        <IconInfo16 />
-                        <p>
-                            {i18n.t(
-                                'Saving a section does not save other changes to the data set'
-                            )}
-                        </p>
-                    </div>
-                </FormFooterWrapper>
             </div>
         </div>
     )

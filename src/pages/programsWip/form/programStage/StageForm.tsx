@@ -1,15 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip } from '@dhis2/ui'
-import { IconInfo16 } from '@dhis2/ui-icons'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import isEqual from 'lodash/isEqual'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
+import { useForm } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
     FormBase,
     FormBaseProps,
-    FormFooterWrapper,
     SectionedFormErrorNotice,
     SectionedFormLayout,
 } from '../../../../components'
@@ -83,13 +81,47 @@ type OnSubmitWithClose = (
     closeOnSubmit?: boolean
 ) => ReturnType<BaseOnSubmit>
 
-export type StageFormProps = {
-    stage?: PartialStageFormValues
-    onCancel?: () => void
-    onSubmit: OnSubmitWithClose
+export type StageFormActions = {
+    saveAndClose: () => void
+    save: () => void
 }
 
-export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
+export type StageFormProps = {
+    stage?: PartialStageFormValues
+    onSubmit: OnSubmitWithClose
+    onActionsReady?: (actions: StageFormActions) => void
+}
+
+const StageFormActionsHandler = ({
+    onActionsReady,
+    closeOnSubmitRef,
+}: {
+    onActionsReady?: (actions: StageFormActions) => void
+    closeOnSubmitRef: React.MutableRefObject<boolean>
+}) => {
+    const form = useForm()
+
+    useEffect(() => {
+        onActionsReady?.({
+            saveAndClose: () => {
+                closeOnSubmitRef.current = true
+                form.submit()
+            },
+            save: () => {
+                closeOnSubmitRef.current = false
+                form.submit()
+            },
+        })
+    }, [onActionsReady, closeOnSubmitRef, form])
+
+    return null
+}
+
+export const StageForm = ({
+    stage,
+    onSubmit,
+    onActionsReady,
+}: StageFormProps) => {
     const programId = useParams().id as string
     const customAttributes = useCustomAttributesQuery({
         enabled: true,
@@ -108,9 +140,6 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
     }, [stage, programId, customAttributes])
 
     const closeOnSubmitRef = React.useRef(false)
-    const setCloseOnSubmit = (value: boolean) => {
-        closeOnSubmitRef.current = value
-    }
     const [selectedSection, setSelectedSection] = React.useState<
         string | undefined
     >()
@@ -125,9 +154,13 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
             includeAttributes={false}
             mutators={{ ...arrayMutators }}
         >
-            {({ handleSubmit, form }) => {
+            {({ handleSubmit }) => {
                 return (
                     <SectionedFormProvider formDescriptor={StageFormDescriptor}>
+                        <StageFormActionsHandler
+                            onActionsReady={onActionsReady}
+                            closeOnSubmitRef={closeOnSubmitRef}
+                        />
                         <SectionedFormLayout
                             sidebar={
                                 <DrawerSectionedFormSidebar
@@ -141,47 +174,6 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
                                         isSubsection
                                         setSelectedSection={setSelectedSection}
                                     />
-                                    <FormFooterWrapper>
-                                        <ButtonStrip>
-                                            <Button
-                                                primary
-                                                small
-                                                type="button"
-                                                onClick={() => {
-                                                    setCloseOnSubmit(true)
-                                                    form.submit()
-                                                }}
-                                            >
-                                                {i18n.t('Save stage and close')}
-                                            </Button>
-                                            <Button
-                                                secondary
-                                                small
-                                                type="button"
-                                                onClick={() => {
-                                                    setCloseOnSubmit(false)
-                                                    form.submit()
-                                                }}
-                                            >
-                                                {i18n.t('Save stage')}
-                                            </Button>
-                                            <Button
-                                                secondary
-                                                small
-                                                onClick={onCancel}
-                                            >
-                                                {i18n.t('Cancel')}
-                                            </Button>
-                                        </ButtonStrip>
-                                        <div className={styles.actionsInfo}>
-                                            <IconInfo16 />
-                                            <p>
-                                                {i18n.t(
-                                                    'Saving a stage does not save other changes to the program'
-                                                )}
-                                            </p>
-                                        </div>
-                                    </FormFooterWrapper>
                                 </div>
                             </form>
                             <SectionedFormErrorNotice />
@@ -197,6 +189,7 @@ export const EditStageForm = ({
     stage,
     onCancel,
     onSubmitted,
+    onActionsReady,
 }: {
     stage: DisplayableModel
     onCancel: () => void
@@ -204,6 +197,7 @@ export const EditStageForm = ({
         values: SubmittedStageFormValues,
         closeOnSubmit: boolean
     ) => void
+    onActionsReady?: (actions: StageFormActions) => void
 }) => {
     const handlePatch = usePatchModel(stage.id, stageSchemaSection.namePlural)
 
@@ -263,7 +257,7 @@ export const EditStageForm = ({
         <StageForm
             stage={stageValues.data}
             onSubmit={onFormSubmit}
-            onCancel={onCancel}
+            onActionsReady={onActionsReady}
         />
     )
 }
@@ -271,12 +265,14 @@ export const EditStageForm = ({
 export const NewStageForm = ({
     onCancel,
     onSubmitted,
+    onActionsReady,
 }: {
     onCancel: () => void
     onSubmitted: (
         values: SubmittedStageFormValues,
         closeOnSubmit: boolean
     ) => void
+    onActionsReady?: (actions: StageFormActions) => void
 }) => {
     const handleCreate = useCreateModel(stageSchemaSection.namePlural)
     const onFormSubmit: OnSubmitWithClose = async (
@@ -305,7 +301,7 @@ export const NewStageForm = ({
         <StageForm
             stage={undefined}
             onSubmit={onFormSubmit}
-            onCancel={onCancel}
+            onActionsReady={onActionsReady}
         />
     )
 }
@@ -314,6 +310,7 @@ export const EditOrNewStageForm = ({
     stage,
     onCancel,
     onSubmitted,
+    onActionsReady,
 }: {
     stage: DisplayableModel | null | undefined
     onCancel: () => void
@@ -321,13 +318,20 @@ export const EditOrNewStageForm = ({
         values: SubmittedStageFormValues,
         closeOnSubmit: boolean
     ) => void
+    onActionsReady?: (actions: StageFormActions) => void
 }) => {
     if (stage === undefined) {
         return null
     }
 
     if (stage === null) {
-        return <NewStageForm onSubmitted={onSubmitted} onCancel={onCancel} />
+        return (
+            <NewStageForm
+                onSubmitted={onSubmitted}
+                onCancel={onCancel}
+                onActionsReady={onActionsReady}
+            />
+        )
     }
 
     return (
@@ -335,6 +339,7 @@ export const EditOrNewStageForm = ({
             stage={stage}
             onCancel={onCancel}
             onSubmitted={onSubmitted}
+            onActionsReady={onActionsReady}
         />
     )
 }
