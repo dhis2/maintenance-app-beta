@@ -1,3 +1,4 @@
+import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip } from '@dhis2/ui'
 import { IconInfo16 } from '@dhis2/ui-icons'
@@ -157,6 +158,9 @@ export const EditStageSectionForm = ({
         section.id,
         stageSectionSchemaSection.namePlural
     )
+    const { show: showSuccess } = useAlert(i18n.t('Stage section form saved'), {
+        success: true,
+    })
 
     const onFormSubmit: OnFormSubmit = async (values, form) => {
         const jsonPatchOperations = createJsonPatchOperations({
@@ -168,6 +172,8 @@ export const EditStageSectionForm = ({
         if (response.error) {
             return createFormError(response.error)
         }
+        showSuccess({ success: true })
+
         const updatedName = jsonPatchOperations.find(
             (op) => op.path === '/name' && op.op === 'replace'
         )?.value as string | undefined
@@ -222,12 +228,16 @@ export const NewStageSectionForm = ({
     sortOrder: number
 }) => {
     const handleCreate = useCreateModel(stageSectionSchemaSection.namePlural)
+    const { show: showSuccess } = useAlert(i18n.t('Stage section form saved'), {
+        success: true,
+    })
 
     const onFormSubmit: OnFormSubmit = async (values) => {
         const res = await handleCreate(values)
         if (res.error) {
             return createFormError(res.error)
         }
+        showSuccess({ success: true })
         const newId = (res.data as { response: { uid: string } }).response.uid
 
         onSubmitted?.({

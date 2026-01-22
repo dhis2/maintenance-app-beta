@@ -21,7 +21,6 @@ import {
     StandardFormSectionTitle,
     TransferHeader,
 } from '../../../../components'
-import { DefaultFormErrorNotice } from '../../../../components/form/DefaultFormErrorNotice'
 import { BaseModelTransfer } from '../../../../components/metadataFormControls/ModelTransfer/BaseModelTransfer'
 import { useBoundResourceQueryFn } from '../../../../lib'
 import { DisplayableModel } from '../../../../types/models'
