@@ -1,3 +1,10 @@
+# [0.113.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.112.0...v0.113.0) (2026-01-26)
+
+
+### Features
+
+* improve program stages form design ([#734](https://github.com/dhis2/maintenance-app-beta/issues/734)) ([5e63cbb](https://github.com/dhis2/maintenance-app-beta/commit/5e63cbb403eeef0c68b41651ba75245c45a8d281))
+
 # [0.112.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.111.0...v0.112.0) (2026-01-21)
 
 
