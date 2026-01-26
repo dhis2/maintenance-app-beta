@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-09T12:27:17.687Z\n"
-"PO-Revision-Date: 2026-01-09T12:27:17.687Z\n"
+"POT-Creation-Date: 2026-01-26T08:13:02.327Z\n"
+"PO-Revision-Date: 2026-01-26T08:13:02.327Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -342,23 +342,6 @@ msgstr "Required"
 msgid "Please enter a GeoJSON value"
 msgstr "Please enter a GeoJSON value"
 
-msgid "Name: {{displayName}} (Translated)"
-msgstr "Name: {{displayName}} (Translated)"
-
-msgid ""
-"Translatable fields appear in the default language in this form, not in "
-"your selected database language."
-msgstr ""
-"Translatable fields appear in the default language in this form, not in "
-"your selected database language."
-
-msgid ""
-"Translatable fields appear in the default language in this form, not in "
-"your selected database language."
-msgstr ""
-"Translatable fields appear in the default language in this form, not in "
-"your selected database language."
-
 msgid "Exit without saving"
 msgstr "Exit without saving"
 
@@ -379,6 +362,13 @@ msgstr "Show error details"
 
 msgid "Save and close"
 msgstr "Save and close"
+
+msgid ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
+msgstr ""
+"Translatable fields appear in the default language in this form, not in "
+"your selected database language."
 
 msgid "<No value>"
 msgstr "<No value>"
@@ -858,24 +848,6 @@ msgstr "Program indicator"
 msgid "Program indicator group"
 msgstr "Program indicator group"
 
-msgid "Data element in newest event in program stage"
-msgstr "Data element in newest event in program stage"
-
-msgid "Data element in newest event in program"
-msgstr "Data element in newest event in program"
-
-msgid "Data element from current event"
-msgstr "Data element from current event"
-
-msgid "Data element from previous event"
-msgstr "Data element from previous event"
-
-msgid "Calculated value"
-msgstr "Calculated value"
-
-msgid "Tracked entity attribute"
-msgstr "Tracked entity attribute"
-
 msgid "Select source type"
 msgstr "Select source type"
 
@@ -1085,6 +1057,9 @@ msgstr "Organisation unit level"
 
 msgid "Organisation unit levels"
 msgstr "Organisation unit levels"
+
+msgid "Tracked entity attribute"
+msgstr "Tracked entity attribute"
 
 msgid "Tracked entity attributes"
 msgstr "Tracked entity attributes"
@@ -1620,11 +1595,26 @@ msgstr "At selected level(s) only"
 msgid "At selected level(s) and all levels below"
 msgstr "At selected level(s) and all levels below"
 
-msgid "Descendants"
-msgstr "Descendants"
+msgid "On complete"
+msgstr "On complete"
 
-msgid "Selected"
-msgstr "Selected"
+msgid "On update and insert"
+msgstr "On update and insert"
+
+msgid "Data element in newest event in program stage"
+msgstr "Data element in newest event in program stage"
+
+msgid "Data element in newest event in program"
+msgstr "Data element in newest event in program"
+
+msgid "Data element from current event"
+msgstr "Data element from current event"
+
+msgid "Data element from previous event"
+msgstr "Data element from previous event"
+
+msgid "Calculated value"
+msgstr "Calculated value"
 
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
@@ -1683,6 +1673,9 @@ msgstr "Relationship name seen from initiating entity"
 msgid "Ignore data approval"
 msgstr "Ignore data approval"
 
+msgid "Source type"
+msgstr "Source type"
+
 msgid "Referral"
 msgstr "Referral"
 
@@ -1691,6 +1684,9 @@ msgstr "Sharing"
 
 msgid "Relationship name seen from receiving entity"
 msgstr "Relationship name seen from receiving entity"
+
+msgid "Use code for option set"
+msgstr "Use code for option set"
 
 msgid "Owner"
 msgstr "Owner"
@@ -1799,12 +1795,6 @@ msgstr "Program name"
 
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
-
-msgid "Source type"
-msgstr "Source type"
-
-msgid "Use code for option set"
-msgstr "Use code for option set"
 
 msgid "Unique"
 msgstr "Unique"
@@ -3857,86 +3847,20 @@ msgstr "Sends a notification when a validation rule failed."
 msgid "Manage"
 msgstr "Manage"
 
-msgid "Edit {{objectName}} expression"
-msgstr "Edit {{objectName}} expression"
+msgid "Choose the predictors to include in this predictor group."
+msgstr "Choose the predictors to include in this predictor group."
 
-msgid "Set up {{objectName}} expression"
-msgstr "Set up {{objectName}} expression"
+msgid "Available predictors"
+msgstr "Available predictors"
 
-msgid "Summarize what this {{objectName}} measures."
-msgstr "Summarize what this {{objectName}} measures."
+msgid "Selected predictors"
+msgstr "Selected predictors"
 
-msgid "Output data element"
-msgstr "Output data element"
+msgid "Filter available predictors"
+msgstr "Filter available predictors"
 
-msgid "Predict according to input category option combo"
-msgstr "Predict according to input category option combo"
-
-msgid "Output category option combo"
-msgstr "Output category option combo"
-
-msgid "Set up the basic information for this predictor."
-msgstr "Set up the basic information for this predictor."
-
-msgid "Prediction logic"
-msgstr "Prediction logic"
-
-msgid "Define how predictions will be calculated"
-msgstr "Define how predictions will be calculated"
-
-msgid "Sequential sample count"
-msgstr "Sequential sample count"
-
-msgid "Annual sample count"
-msgstr "Annual sample count"
-
-msgid "Sequential skip count"
-msgstr "Sequential skip count"
-
-msgid "generator"
-msgstr "generator"
-
-msgid "sample skip test"
-msgstr "sample skip test"
-
-msgid "Output definition"
-msgstr "Output definition"
-
-msgid "Define where predictions will be output"
-msgstr "Define where predictions will be output"
-
-msgid "Available organisation unit levels"
-msgstr "Available organisation unit levels"
-
-msgid "Selected organisation unit levels"
-msgstr "Selected organisation unit levels"
-
-msgid "Filter available organisation unit levels"
-msgstr "Filter available organisation unit levels"
-
-msgid "Filter selected organisation unit levels options"
-msgstr "Filter selected organisation unit levels options"
-
-msgid "Organisation units providing data"
-msgstr "Organisation units providing data"
-
-msgid "Predictor Form"
-msgstr "Predictor Form"
-
-msgid "Generator expression"
-msgstr "Generator expression"
-
-msgid "Generator description"
-msgstr "Generator description"
-
-msgid "Generator missing value strategy"
-msgstr "Generator missing value strategy"
-
-msgid "Output category combo"
-msgstr "Output category combo"
-
-msgid "Organisation unit descendants"
-msgstr "Organisation unit descendants"
+msgid "Filter selected predictors"
+msgstr "Filter selected predictors"
 
 msgid "Predictor run started successfully"
 msgstr "Predictor run started successfully"
@@ -3952,6 +3876,75 @@ msgstr "End date"
 
 msgid "Run now"
 msgstr "Run now"
+
+msgid "Edit {{objectName}} expression"
+msgstr "Edit {{objectName}} expression"
+
+msgid "Set up {{objectName}} expression"
+msgstr "Set up {{objectName}} expression"
+
+msgid "Summarize what this {{objectName}} measures."
+msgstr "Summarize what this {{objectName}} measures."
+
+msgid "Output data element (required)"
+msgstr "Output data element (required)"
+
+msgid "Predict according to input category option combo"
+msgstr "Predict according to input category option combo"
+
+msgid "Output category option combo"
+msgstr "Output category option combo"
+
+msgid "Set up the basic information for this predictor."
+msgstr "Set up the basic information for this predictor."
+
+msgid "Predictor logic"
+msgstr "Predictor logic"
+
+msgid "Define how predictions will be calculated"
+msgstr "Define how predictions will be calculated"
+
+msgid "Organisation units providing data"
+msgstr "Organisation units providing data"
+
+msgid "Sequential sample count (required)"
+msgstr "Sequential sample count (required)"
+
+msgid "Annual sample count (required)"
+msgstr "Annual sample count (required)"
+
+msgid "generator"
+msgstr "generator"
+
+msgid "sample skip test"
+msgstr "sample skip test"
+
+msgid "Output definition"
+msgstr "Output definition"
+
+msgid "Define where predictions will be output"
+msgstr "Define where predictions will be output"
+
+msgid "Predictor Form"
+msgstr "Predictor Form"
+
+msgid "Organisation unit descendants"
+msgstr "Organisation unit descendants"
+
+msgid "Generator expression"
+msgstr "Generator expression"
+
+msgid "Generator description"
+msgstr "Generator description"
+
+msgid "Generator missing value strategy"
+msgstr "Generator missing value strategy"
+
+msgid "Output data element"
+msgstr "Output data element"
+
+msgid "Output category combo"
+msgstr "Output category combo"
 
 msgid "Program Disaggregation Form"
 msgstr "Program Disaggregation Form"

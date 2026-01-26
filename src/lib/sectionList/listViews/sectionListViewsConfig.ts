@@ -964,4 +964,15 @@ export const modelListViewsConfig = {
             overrideDefaultAvailable: true,
         },
     },
+    predictorGroup: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: ['description'],
+        },
+        filters: {},
+    },
 } satisfies SectionListViewConfig<SectionName>
