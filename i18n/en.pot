@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-20T08:26:05.482Z\n"
-"PO-Revision-Date: 2026-01-20T08:26:05.482Z\n"
+"POT-Creation-Date: 2026-01-23T15:57:17.220Z\n"
+"PO-Revision-Date: 2026-01-23T15:57:17.220Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -117,6 +117,9 @@ msgstr "Apply"
 msgid "(No Value)"
 msgstr "(No Value)"
 
+msgid "Clear expression"
+msgstr "Clear expression"
+
 msgid "Filter list"
 msgstr "Filter list"
 
@@ -125,6 +128,18 @@ msgstr "No matches"
 
 msgid "Retry"
 msgstr "Retry"
+
+msgid "Missing value strategy"
+msgstr "Missing value strategy"
+
+msgid "Never skip"
+msgstr "Never skip"
+
+msgid "Skip if any value is missing"
+msgstr "Skip if any value is missing"
+
+msgid "Skip if all values are missing"
+msgstr "Skip if all values are missing"
 
 msgid "Data elements"
 msgstr "Data elements"
@@ -1574,11 +1589,11 @@ msgstr "Actual reports on time"
 msgid "Expected reports"
 msgstr "Expected reports"
 
-msgid "Descendants"
-msgstr "Descendants"
+msgid "At selected level(s) only"
+msgstr "At selected level(s) only"
 
-msgid "Selected"
-msgstr "Selected"
+msgid "At selected level(s) and all levels below"
+msgstr "At selected level(s) and all levels below"
 
 msgid "On complete"
 msgstr "On complete"
@@ -3847,6 +3862,75 @@ msgstr "End date"
 msgid "Run now"
 msgstr "Run now"
 
+msgid "Edit {{objectName}} expression"
+msgstr "Edit {{objectName}} expression"
+
+msgid "Set up {{objectName}} expression"
+msgstr "Set up {{objectName}} expression"
+
+msgid "Summarize what this {{objectName}} measures."
+msgstr "Summarize what this {{objectName}} measures."
+
+msgid "Output data element (required)"
+msgstr "Output data element (required)"
+
+msgid "Predict according to input category option combo"
+msgstr "Predict according to input category option combo"
+
+msgid "Output category option combo"
+msgstr "Output category option combo"
+
+msgid "Set up the basic information for this predictor."
+msgstr "Set up the basic information for this predictor."
+
+msgid "Predictor logic"
+msgstr "Predictor logic"
+
+msgid "Define how predictions will be calculated"
+msgstr "Define how predictions will be calculated"
+
+msgid "Organisation units providing data"
+msgstr "Organisation units providing data"
+
+msgid "Sequential sample count (required)"
+msgstr "Sequential sample count (required)"
+
+msgid "Annual sample count (required)"
+msgstr "Annual sample count (required)"
+
+msgid "generator"
+msgstr "generator"
+
+msgid "sample skip test"
+msgstr "sample skip test"
+
+msgid "Output definition"
+msgstr "Output definition"
+
+msgid "Define where predictions will be output"
+msgstr "Define where predictions will be output"
+
+msgid "Predictor Form"
+msgstr "Predictor Form"
+
+msgid "Organisation unit descendants"
+msgstr "Organisation unit descendants"
+
+msgid "Generator expression"
+msgstr "Generator expression"
+
+msgid "Generator description"
+msgstr "Generator description"
+
+msgid "Generator missing value strategy"
+msgstr "Generator missing value strategy"
+
+msgid "Output data element"
+msgstr "Output data element"
+
+msgid "Output category combo"
+msgstr "Output category combo"
+
 msgid "Program Disaggregation Form"
 msgstr "Program Disaggregation Form"
 
@@ -4153,8 +4237,8 @@ msgstr "Selected attributes"
 msgid "Filter available attributes"
 msgstr "Filter available attributes"
 
-msgid "Filter attributes"
-msgstr "Filter attributes"
+msgid "Filter selected attributes"
+msgstr "Filter selected attributes"
 
 msgid "Configure attributes"
 msgstr "Configure attributes"
@@ -4173,6 +4257,15 @@ msgstr "Desktop Display"
 
 msgid "Mobile Display"
 msgstr "Mobile Display"
+
+msgid "This attribute is defined at the tracked entity type level"
+msgstr "This attribute is defined at the tracked entity type level"
+
+msgid "This attribute is marked as required at the tracked entity type level"
+msgstr "This attribute is marked as required at the tracked entity type level"
+
+msgid "Unique attributes are always searchable"
+msgstr "Unique attributes are always searchable"
 
 msgid "Enrollment: Form"
 msgstr "Enrollment: Form"
@@ -4859,18 +4952,6 @@ msgstr "Validation Rules"
 msgid "Choose the validation rules to include in this validation rule group."
 msgstr "Choose the validation rules to include in this validation rule group."
 
-msgid "Missing value strategy"
-msgstr "Missing value strategy"
-
-msgid "Never skip"
-msgstr "Never skip"
-
-msgid "Skip if any value is missing"
-msgstr "Skip if any value is missing"
-
-msgid "Skip if all values are missing"
-msgstr "Skip if all values are missing"
-
 msgid "Organisation unit levels to run validation for"
 msgstr "Organisation unit levels to run validation for"
 
@@ -4891,6 +4972,9 @@ msgstr "Left side expression"
 
 msgid "Set up numerator expression"
 msgstr "Set up numerator expression"
+
+msgid "Sliding window: validation checks against relative period"
+msgstr "Sliding window: validation checks against relative period"
 
 msgid "Comparison operator"
 msgstr "Comparison operator"

@@ -62,7 +62,7 @@ export const EnrollmentSettingsFormContents = React.memo(
                         query={{
                             resource: 'trackedEntityTypes',
                             params: {
-                                fields: 'id,displayName,name',
+                                fields: 'id,displayName,name,trackedEntityTypeAttributes[trackedEntityAttribute[id,displayName,unique,valueType],mandatory,searchable,displayInList]',
                                 paging: false,
                             },
                         }}
