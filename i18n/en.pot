@@ -3847,6 +3847,21 @@ msgstr "Sends a notification when a validation rule failed."
 msgid "Manage"
 msgstr "Manage"
 
+msgid "Predictor run started successfully"
+msgstr "Predictor run started successfully"
+
+msgid "Run predictor"
+msgstr "Run predictor"
+
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
+
+msgid "Run now"
+msgstr "Run now"
+
 msgid "Choose the predictors to include in this predictor group."
 msgstr "Choose the predictors to include in this predictor group."
 
@@ -4499,8 +4514,11 @@ msgstr "Stage"
 msgid "Stages"
 msgstr "Stages"
 
-msgid "Save "
-msgstr "Save "
+msgid "Save stage and close"
+msgstr "Save stage and close"
+
+msgid "Save stage"
+msgstr "Save stage"
 
 msgid "Saving a stage does not save other changes to the program"
 msgstr "Saving a stage does not save other changes to the program"
@@ -4568,8 +4586,8 @@ msgstr "Stage section"
 msgid "Stage sections"
 msgstr "Stage sections"
 
-msgid "Saving a section does not save other changes to the program stage"
-msgstr "Saving a section does not save other changes to the program stage"
+msgid "Saving a section does not save other changes to the stage or program"
+msgstr "Saving a section does not save other changes to the stage or program"
 
 msgid "Listing"
 msgstr "Listing"
