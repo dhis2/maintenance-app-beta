@@ -59,6 +59,7 @@ export const PredictorGroupFormFields = () => {
                         filterPlaceholderPicked={i18n.t(
                             'Filter selected predictors'
                         )}
+                        maxSelections={Infinity}
                     />
                 </StandardFormField>
             </StandardFormSection>
