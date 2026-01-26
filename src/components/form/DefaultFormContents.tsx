@@ -8,8 +8,8 @@ import { DefaultFormFooter } from './DefaultFormFooter'
 import { TranslatedFieldsNoticeBox } from './TranslatedFieldsNoticeBox'
 
 type DefaultFormContentsProps = {
-    children: React.ReactNode
-    section: ModelSection
+    readonly children: React.ReactNode
+    readonly section: ModelSection
 }
 
 function DefaultFormContents({
@@ -17,7 +17,7 @@ function DefaultFormContents({
     section,
     showTranslatedFieldsNotice = false,
 }: DefaultFormContentsProps & {
-    showTranslatedFieldsNotice?: boolean
+    readonly showTranslatedFieldsNotice?: boolean
 }) {
     const listPath = `/${getSectionPath(section)}`
 
@@ -35,10 +35,14 @@ function DefaultFormContents({
     )
 }
 
-export function DefaultEditFormContents(props: DefaultFormContentsProps) {
+export function DefaultEditFormContents(
+    props: Readonly<DefaultFormContentsProps>
+) {
     return <DefaultFormContents {...props} showTranslatedFieldsNotice={true} />
 }
 
-export function DefaultNewFormContents(props: DefaultFormContentsProps) {
+export function DefaultNewFormContents(
+    props: Readonly<DefaultFormContentsProps>
+) {
     return <DefaultFormContents {...props} showTranslatedFieldsNotice={false} />
 }
