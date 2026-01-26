@@ -8,20 +8,18 @@ const { identifiable, referenceCollection, withDefaultListColumns } =
 
 const predictorGroupBaseSchema = z.object({
     code: z.string().trim().optional(),
+    description: z.string().trim().optional(),
 })
 
 export const predictorGroupFormSchema = identifiable
     .merge(predictorGroupBaseSchema)
     .extend({
-        description: z.string().trim().optional(),
         predictors: referenceCollection.default([]),
     })
 
-export const predictorGroupListSchema = predictorGroupBaseSchema
-    .merge(withDefaultListColumns)
-    .extend({
-        displayShortName: z.string(),
-    })
+export const predictorGroupListSchema = predictorGroupBaseSchema.merge(
+    withDefaultListColumns
+)
 
 export const initialValues = getDefaults(predictorGroupFormSchema)
 
