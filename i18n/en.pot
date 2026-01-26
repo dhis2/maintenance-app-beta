@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-23T15:57:17.220Z\n"
-"PO-Revision-Date: 2026-01-23T15:57:17.220Z\n"
+"POT-Creation-Date: 2026-01-26T08:13:02.327Z\n"
+"PO-Revision-Date: 2026-01-26T08:13:02.327Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -3846,6 +3846,36 @@ msgstr "Sends a notification when a validation rule failed."
 
 msgid "Manage"
 msgstr "Manage"
+
+msgid "Predictor run started successfully"
+msgstr "Predictor run started successfully"
+
+msgid "Run predictor"
+msgstr "Run predictor"
+
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
+
+msgid "Run now"
+msgstr "Run now"
+
+msgid "Choose the predictors to include in this predictor group."
+msgstr "Choose the predictors to include in this predictor group."
+
+msgid "Available predictors"
+msgstr "Available predictors"
+
+msgid "Selected predictors"
+msgstr "Selected predictors"
+
+msgid "Filter available predictors"
+msgstr "Filter available predictors"
+
+msgid "Filter selected predictors"
+msgstr "Filter selected predictors"
 
 msgid "Predictor run started successfully"
 msgstr "Predictor run started successfully"

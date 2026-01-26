@@ -54,6 +54,7 @@ import { optionSetListSchema } from '../pages/optionSets/form/optionSetSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
+import { predictorGroupListSchema } from '../pages/predictorGroups/form/predictorGroupSchema'
 import { predictorListSchema } from '../pages/predictors/form/predictorSchema'
 import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
@@ -539,6 +540,13 @@ export const testValidationRule = (overwrites: Record<any, any> = {}) => ({
 
 export const testPredictorList = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(predictorListSchema, {
+        mockeryMapper,
+    }),
+    ...overwrites,
+})
+
+export const testPredictorGroup = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(predictorGroupListSchema, {
         mockeryMapper,
     }),
     ...overwrites,
