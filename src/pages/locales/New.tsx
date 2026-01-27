@@ -24,7 +24,11 @@ import { initialValues, validate } from './form/LocaleSchema'
 const section = SECTIONS_MAP.locale
 
 const useOnSubmitLocale = (): EnhancedOnSubmit<
-    ModelWithAttributeValues & { language?: string; country?: string }
+    ModelWithAttributeValues & {
+        language?: string
+        country?: string
+        script?: string
+    }
 > => {
     const dataEngine = useDataEngine()
     const queryClient = useQueryClient()
@@ -47,7 +51,7 @@ const useOnSubmitLocale = (): EnhancedOnSubmit<
                 return
             }
 
-            const { language, country } = values
+            const { language, country, script } = values
 
             try {
                 await dataEngine.mutate({
@@ -56,6 +60,7 @@ const useOnSubmitLocale = (): EnhancedOnSubmit<
                     params: {
                         country,
                         language,
+                        script,
                     },
                     data: {},
                 })
