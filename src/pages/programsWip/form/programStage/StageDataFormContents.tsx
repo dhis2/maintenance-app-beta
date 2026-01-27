@@ -37,6 +37,9 @@ type ProgramStageDataElementFormValue = {
     }
 }
 
+const getValueType = (psde: ProgramStageDataElementFormValue): string =>
+    psde.valueType ?? psde.dataElement?.valueType
+
 const defaultRenderType = {
     MOBILE: { type: 'DEFAULT' },
     DESKTOP: { type: 'DEFAULT' },
@@ -56,7 +59,7 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
     )
 
     const stageHasDateDataElements = input.value.some(
-        (dataElement) => dataElement.valueType === 'DATE'
+        (psde) => getValueType(psde) === 'DATE'
     )
 
     return (
@@ -120,14 +123,15 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                             input.onBlur()
                         }}
                         leftHeader={i18n.t('Available data elements')}
-                        rightHeader={i18n.t('Chosen data elements')}
+                        rightHeader={i18n.t('Selected data elements')}
                         filterPlaceholder={i18n.t(
                             'Filter available data elements'
                         )}
                         filterPlaceholderPicked={i18n.t(
-                            'Filter chosen data elements'
+                            'Filter selected data elements'
                         )}
                         maxSelections={Infinity}
+                        enableOrderChange={false}
                         query={{
                             resource: 'dataElements',
                             params: {
@@ -175,7 +179,8 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                     <TableBody>
                         {input.value.map((dataElement, index) => {
                             const dataElementId = dataElement.dataElement.id
-                            const isDateType = dataElement.valueType === 'DATE'
+                            const isDateType =
+                                getValueType(dataElement) === 'DATE'
                             const rowKey = dataElement.id || dataElementId
 
                             return (
