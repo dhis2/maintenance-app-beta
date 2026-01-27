@@ -360,11 +360,9 @@ export const StageFormContents = ({
                 </StandardFormSectionDescription>
                 <TabbedFormTypePicker
                     sectionsLength={values.programStageSections?.length}
-                    hasDataEntryForm={
-                        !!values.programStageSections?.dataEntryForm
-                    }
+                    hasDataEntryForm={!!values.dataEntryForm}
                     hasDataToDisplay={
-                        values.programStageDataElement?.length > 0
+                        values.programStageDataElements?.length > 0
                     }
                     onFormTypeChange={setSelectedFormType}
                     selectedFormType={selectedFormType}
