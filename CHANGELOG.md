@@ -1,3 +1,10 @@
+## [0.113.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.113.0...v0.113.1) (2026-01-27)
+
+
+### Bug Fixes
+
+* keep whitespaces in expression builder validator ([#742](https://github.com/dhis2/maintenance-app-beta/issues/742)) ([063f1e6](https://github.com/dhis2/maintenance-app-beta/commit/063f1e6e0b14c8e3f5a5f7b197d1a7ede3b83a55))
+
 # [0.113.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.112.0...v0.113.0) (2026-01-26)
 
 
