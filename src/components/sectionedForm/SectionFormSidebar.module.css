@@ -5,7 +5,7 @@
 
 .sidebarSecondary {
     background-color: var(--colors-grey200);
-    padding: var(--spacers-dp16) 0;
+    padding: var(--spacers-dp16) var(--spacers-dp8);
 }
 
 .listItem {
