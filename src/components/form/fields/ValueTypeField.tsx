@@ -69,7 +69,7 @@ export function ValueTypeField({
             inputWidth="400px"
             selected={input.value}
             onChange={onChange}
-            label={i18n.t('Value type')}
+            label={i18n.t('Value type (required)')}
             required={required}
             disabled={disabled}
             helpText={combinedHelpText}

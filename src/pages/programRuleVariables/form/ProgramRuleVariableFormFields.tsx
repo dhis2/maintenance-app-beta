@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF } from '@dhis2/ui'
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import {
     Field as FieldRFF,
     useField,
@@ -8,7 +8,6 @@ import {
     useFormState,
 } from 'react-final-form'
 import {
-    NameField,
     SectionedFormSection,
     SectionedFormSections,
     StandardFormField,
@@ -17,65 +16,24 @@ import {
     ValueTypeField,
 } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
+import { PROGRAM_RULE_VARIABLE_CONSTANTS } from '../../../constants/programRuleVariable'
 import {
-    SECTIONS_MAP,
+    useClearFormFields,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
-import {
-    composeAsyncValidators,
-    FormFieldValidator,
-} from '../../../lib/form/composeAsyncValidators'
 import { ProgramRuleVariable } from '../../../types/generated'
 import {
     DataElementField,
+    ProgramRuleVariableNameField,
     ProgramStageField,
     SourceTypeField,
     TrackedEntityAttributeField,
 } from '../fields'
 import { ProgramRuleVariableFormDescriptor } from './formDescriptor'
+import { useProgramRuleVariableFieldVisibility } from './useProgramRuleVariableFieldVisibility'
 
-const section = SECTIONS_MAP.programRuleVariable
-
-const NAME_PATTERN = /^[a-zA-Z0-9\s\-._]+$/
-const FORBIDDEN_WORDS = ['and', 'or', 'not']
-
-const containsForbiddenWord = (value: string): boolean => {
-    const words = value.toLowerCase().match(/\b\w+\b/g) || []
-    const forbiddenWordsLower = new Set(
-        FORBIDDEN_WORDS.map((word) => word.toLowerCase())
-    )
-    return words.some((word) => forbiddenWordsLower.has(word))
-}
-
-const namePatternValidator: FormFieldValidator<string> = (value) => {
-    if (!value) {
-        return undefined
-    }
-    if (!NAME_PATTERN.test(value)) {
-        return i18n.t(
-            'Name can only contain letters, numbers, space, dash, dot and underscore'
-        )
-    }
-    return undefined
-}
-
-const forbiddenWordsValidator: FormFieldValidator<string> = (value) => {
-    if (!value) {
-        return undefined
-    }
-    if (containsForbiddenWord(value)) {
-        return i18n.t(
-            'Program rule variable name contains forbidden words: and, or, not.'
-        )
-    }
-    return undefined
-}
-
-const nameValidator = composeAsyncValidators([
-    forbiddenWordsValidator,
-    namePatternValidator,
-])
+const { FIELD_WIDTH } = PROGRAM_RULE_VARIABLE_CONSTANTS
 
 export const ProgramRuleVariableFormFields = () => {
     const descriptor =
@@ -90,46 +48,27 @@ export const ProgramRuleVariableFormFields = () => {
     const sourceType = values.programRuleVariableSourceType
     const programStage = programStageInput.value
 
-    const clearProgramDependentFields = useCallback(() => {
-        form.batch(() => {
-            form.change('programStage', undefined)
-            form.change('dataElement', undefined)
-            form.change('trackedEntityAttribute', undefined)
-        })
-    }, [form])
-
-    const clearSourceTypeDependentFields = useCallback(() => {
-        form.batch(() => {
-            form.change('programStage', undefined)
-            form.change('dataElement', undefined)
-            form.change('trackedEntityAttribute', undefined)
-            form.change('valueType', undefined)
-        })
-    }, [form])
-
-    const clearProgramStageDataElement = useCallback(() => {
-        form.change('dataElement', undefined)
-    }, [form])
+    const clearProgramDependentFields = useClearFormFields(
+        form,
+        'programStage',
+        'dataElement',
+        'trackedEntityAttribute'
+    )
+    const clearSourceTypeDependentFields = useClearFormFields(
+        form,
+        'programStage',
+        'dataElement',
+        'trackedEntityAttribute',
+        'valueType'
+    )
+    const clearProgramStageDataElement = useClearFormFields(form, 'dataElement')
 
     const {
-        DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE,
-        DATAELEMENT_NEWEST_EVENT_PROGRAM,
-        DATAELEMENT_CURRENT_EVENT,
-        DATAELEMENT_PREVIOUS_EVENT,
-        TEI_ATTRIBUTE,
-        CALCULATED_VALUE,
-    } = ProgramRuleVariable.programRuleVariableSourceType
-
-    const shouldShowProgramStage =
-        sourceType === DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE
-    const shouldShowTrackedEntityAttribute = sourceType === TEI_ATTRIBUTE
-    const shouldShowValueType = sourceType === CALCULATED_VALUE
-    const shouldShowDataElements =
-        (sourceType === DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE &&
-            !!programStage?.id) ||
-        sourceType === DATAELEMENT_NEWEST_EVENT_PROGRAM ||
-        sourceType === DATAELEMENT_CURRENT_EVENT ||
-        sourceType === DATAELEMENT_PREVIOUS_EVENT
+        shouldShowProgramStage,
+        shouldShowTrackedEntityAttribute,
+        shouldShowValueType,
+        shouldShowDataElements,
+    } = useProgramRuleVariableFieldVisibility(sourceType, programStage)
 
     useEffect(() => {
         if (
@@ -157,13 +96,7 @@ export const ProgramRuleVariableFormFields = () => {
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
-                    <NameField
-                        schemaSection={section}
-                        helpText={i18n.t(
-                            'Variable name cannot contain the words: and, or, not.'
-                        )}
-                        customValidator={nameValidator}
-                    />
+                    <ProgramRuleVariableNameField />
                 </StandardFormField>
             </SectionedFormSection>
 
@@ -180,7 +113,7 @@ export const ProgramRuleVariableFormFields = () => {
                 <StandardFormField>
                     <ModelSingleSelectFormField
                         required
-                        inputWidth="400px"
+                        inputWidth={FIELD_WIDTH}
                         dataTest="program-field"
                         name="program"
                         label={i18n.t('Program (required)')}

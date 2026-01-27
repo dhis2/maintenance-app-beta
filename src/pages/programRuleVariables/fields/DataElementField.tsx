@@ -1,9 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import { Box, Field } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
-import React, { useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
-import { BaseModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/BaseModelSingleSelect'
+import { Option, SearchableSingleSelect } from '../../../components'
 import { required, useBoundResourceQueryFn } from '../../../lib'
 import { ProgramRuleVariable } from '../../../types/generated'
 
@@ -93,6 +93,32 @@ export function DataElementField() {
         return Array.from(elementMap.values())
     }, [dataElementOptions, currentDataElement])
 
+    const options = useMemo<Option[]>(
+        () =>
+            availableDataElements.map((de) => ({
+                value: de.id,
+                label: de.displayName || de.id,
+            })),
+        [availableDataElements]
+    )
+
+    const [filteredOptions, setFilteredOptions] = useState<Option[]>(options)
+
+    useEffect(() => {
+        setFilteredOptions(options)
+    }, [options])
+
+    const handleFilterChange = useCallback(
+        ({ value }: { value: string }) => {
+            setFilteredOptions(
+                options.filter((o) =>
+                    o.label.toLowerCase().includes(value.toLowerCase())
+                )
+            )
+        },
+        [options]
+    )
+
     if (!program?.id) {
         return null
     }
@@ -113,13 +139,17 @@ export function DataElementField() {
                     required
                 >
                     <Box width="400px" minWidth="100px">
-                        <BaseModelSingleSelect
-                            available={availableDataElements}
-                            selected={input.value}
-                            onChange={(selected) => {
-                                input.onChange(selected)
+                        <SearchableSingleSelect
+                            options={filteredOptions}
+                            selected={input.value?.id}
+                            onChange={({ selected }) => {
+                                const chosen = availableDataElements.find(
+                                    (de) => de.id === selected
+                                )
+                                input.onChange(chosen)
                                 input.onBlur()
                             }}
+                            onFilterChange={handleFilterChange}
                             invalid={meta.touched && !!meta.error}
                             loading={!programData}
                             onRetryClick={() => {}}

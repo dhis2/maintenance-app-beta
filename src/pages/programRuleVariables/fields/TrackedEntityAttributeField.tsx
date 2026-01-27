@@ -1,9 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import { Box, Field } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
-import { BaseModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/BaseModelSingleSelect'
+import { SearchableSingleSelect } from '../../../components'
 import { required, useBoundResourceQueryFn } from '../../../lib'
 
 type Program = {
@@ -38,7 +38,7 @@ export function TrackedEntityAttributeField() {
         [program?.id]
     )
 
-    const { data: programData } = useQuery({
+    const { data: programData, refetch } = useQuery({
         queryKey: [programQuery],
         queryFn: queryFn<Program>,
         enabled: !!program?.id,
@@ -73,6 +73,37 @@ export function TrackedEntityAttributeField() {
         return Array.from(attributeMap.values())
     }, [trackedEntityAttributes, currentTrackedEntityAttribute])
 
+    const options = useMemo(
+        () =>
+            availableTrackedEntityAttributes.map((tea) => ({
+                value: tea.id,
+                label: tea.displayName || tea.id,
+            })),
+        [availableTrackedEntityAttributes]
+    )
+
+    const attributeById = useMemo(
+        () =>
+            new Map(
+                availableTrackedEntityAttributes.map((tea) => [tea.id, tea])
+            ),
+        [availableTrackedEntityAttributes]
+    )
+
+    const handleChange = useCallback(
+        (selectedId: string) => {
+            const selected = selectedId
+                ? attributeById.get(selectedId) ?? {
+                      id: selectedId,
+                      displayName: selectedId,
+                  }
+                : undefined
+            trackedEntityAttributeInput.onChange(selected)
+            trackedEntityAttributeInput.onBlur()
+        },
+        [attributeById, trackedEntityAttributeInput]
+    )
+
     if (!program?.id) {
         return null
     }
@@ -93,16 +124,13 @@ export function TrackedEntityAttributeField() {
                     required
                 >
                     <Box width="400px" minWidth="100px">
-                        <BaseModelSingleSelect
-                            available={availableTrackedEntityAttributes}
-                            selected={input.value}
-                            onChange={(selected) => {
-                                input.onChange(selected)
-                                input.onBlur()
-                            }}
+                        <SearchableSingleSelect
+                            options={options}
+                            selected={input.value?.id}
+                            onChange={({ selected }) => handleChange(selected)}
                             invalid={meta.touched && !!meta.error}
                             loading={!programData}
-                            onRetryClick={() => {}}
+                            onRetryClick={() => refetch()}
                             showEndLoader={false}
                         />
                     </Box>
