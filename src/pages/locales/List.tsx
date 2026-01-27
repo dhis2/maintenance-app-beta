@@ -2,7 +2,6 @@ import { FetchError, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button, Input, InputEventPayload } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
-import { memoize } from 'lodash'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
     DefaultSectionListMessage,
@@ -22,7 +21,6 @@ import { SectionListTitle } from '../../components/sectionList/SectionListTitle'
 import { Toolbar } from '../../components/sectionList/toolbar'
 import { useSelectedModels } from '../../components/sectionList/useSelectedModels'
 import {
-    BaseListModel,
     getIn,
     SchemaFieldPropertyType,
     useNonSchemaSectionHandleOrThrow,
@@ -86,39 +84,7 @@ export const Component = () => {
         )
     }, [filter, localesList])
 
-    const { selectedModels, add, remove, toggle, clearAll } =
-        useSelectedModels()
-
-    const checkAllSelected = useMemo(
-        () =>
-            memoize((data: BaseListModel[]) => {
-                if (!data) {
-                    return false
-                }
-                return data.every((model) => selectedModels.has(model.id))
-            }),
-        [selectedModels]
-    )
-
-    const handleSelectAll = useCallback(
-        (checked: boolean) => {
-            if (!localesList) {
-                return
-            }
-            if (checked) {
-                add(localesList.map((model) => model.id))
-            } else {
-                remove(
-                    localesList
-                        .filter((model) => model.id)
-                        .map((model) => model.id)
-                )
-            }
-        },
-        [localesList, add, remove]
-    )
-
-    const isAllSelected = localesList ? checkAllSelected(localesList) : false
+    const { remove } = useSelectedModels()
 
     const [detailsRow, setDetailsRow] = useState<LocaleModel | undefined>()
 
@@ -175,14 +141,11 @@ every item when interacting with a row */
             </div>
             <div className={css.listDetailsWrapper}>
                 <Toolbar
-                    selectedModels={selectedModels}
-                    onDeselectAll={clearAll}
+                    selectedModels={new Set()}
+                    onDeselectAll={() => {}}
+                    downloadable={false}
                 />
-                <SectionList
-                    headerColumns={headerColumns}
-                    onSelectAll={handleSelectAll}
-                    allSelected={isAllSelected}
-                >
+                <SectionList headerColumns={headerColumns}>
                     <DefaultSectionListMessage
                         error={error as FetchError | undefined}
                         data={filteredData}
@@ -192,9 +155,7 @@ every item when interacting with a row */
                             key={model.id}
                             modelData={model}
                             selectedColumns={headerColumns}
-                            onSelect={toggle}
                             onClick={handleDetailsClick}
-                            selected={selectedModels.has(model.id)}
                             active={model.id === detailsRow?.id}
                             renderColumnValue={renderColumnValue}
                             renderActions={() => (

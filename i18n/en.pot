@@ -3988,17 +3988,11 @@ msgstr "Manage"
 msgid "Predictor run started successfully"
 msgstr "Predictor run started successfully"
 
-msgid "Run predictor"
-msgstr "Run predictor"
+msgid "Set up {{objectName}} expression"
+msgstr "Set up {{objectName}} expression"
 
-msgid "Start date"
-msgstr "Start date"
-
-msgid "End date"
-msgstr "End date"
-
-msgid "Run now"
-msgstr "Run now"
+msgid "Summarize what this {{objectName}} measures."
+msgstr "Summarize what this {{objectName}} measures."
 
 msgid "Output data element (required)"
 msgstr "Output data element (required)"

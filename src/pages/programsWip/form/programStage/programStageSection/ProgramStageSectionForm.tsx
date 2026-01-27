@@ -120,7 +120,7 @@ export const StageSectionForm = ({
                                     <IconInfo16 />
                                     <p>
                                         {i18n.t(
-                                            'Saving a section does not save other changes to the program stage'
+                                            'Saving a section does not save other changes to the stage or program'
                                         )}
                                     </p>
                                 </div>
