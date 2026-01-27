@@ -7,6 +7,11 @@
     height: 48px;
     padding: var(--spacers-dp8);
     gap: var(--spacers-dp8);
+    /* Removing default border that offsets LinkButton by 1px, recreating with inset shadow */
+    border: none !important;
+    box-shadow: inset 1px 0 0 0 var(--colors-grey300),
+        inset -1px 0 0 0 var(--colors-grey300),
+        inset 0 1px 0 0 var(--colors-grey300);
 }
 
 .listHeaderNormal a {
@@ -14,7 +19,8 @@
 }
 
 .listHeaderBulk {
-    background-color: var(--colors-green050);
+    background-color: var(--colors-teal050);
+    color: var(--colors-teal900);
     width: 100%;
     height: 24px;
     display: flex;
@@ -22,5 +28,5 @@
     height: 48px;
     padding: var(--spacers-dp8);
     gap: var(--spacers-dp8);
-    border: 2px solid var(--colors-green800) !important;
+    border: 2px solid var(--colors-teal800) !important;
 }

@@ -105,7 +105,7 @@ describe('IconPicker', () => {
         const newIcon = await screen.findByTitle(newIconKey.key)
         await userEvent.click(newIcon)
 
-        const selectButton = await screen.findByText('Select')
+        const selectButton = await screen.findByText('Choose icon')
         await userEvent.click(selectButton)
 
         expect(mockOnIconPick).toHaveBeenCalledWith({ icon: newIconKey.key })
