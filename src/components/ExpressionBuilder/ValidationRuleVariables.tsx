@@ -300,7 +300,7 @@ const ProgramJunction = ({
         const programIndicatorsQuery = {
             resource: 'programIndicators',
             params: {
-                filter: [`program.id:eq:${programId}`],
+                filters: [`program.id:eq:${programId}`],
             },
         }
         return (
@@ -533,7 +533,7 @@ const PROGRAM_INDICATOR_OPERATOR_ELEMENTS = [
     { id: '<', displayName: i18n.t('< (less than)') },
     { id: '<=', displayName: i18n.t('<= (less than or equal to)') },
     { id: '==', displayName: i18n.t('== (equals)') },
-    { id: '!=', displayName: i18n.t('== (does not equal)') },
+    { id: '!=', displayName: i18n.t('!= (does not equal)') },
     { id: '!', displayName: i18n.t('! (not)') },
     { id: '&&', displayName: i18n.t('&& (and)') },
     { id: '||', displayName: i18n.t('|| (or)') },

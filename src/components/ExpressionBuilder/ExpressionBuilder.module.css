@@ -303,3 +303,7 @@ textarea::placeholder {
     border-radius: 4px;
     border-left: 5px solid var(--colors-grey400);
 }
+
+.validExpressionDescription {
+    white-space: 'pre-line';
+}

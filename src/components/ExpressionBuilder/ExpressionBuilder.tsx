@@ -68,7 +68,9 @@ const ValidationBox = ({
     }
     return (
         <NoticeBox valid title={i18n.t('Valid expression')}>
-            <div>{response?.expressionDescription}</div>
+            <div className={styles.validExpressionDescription}>
+                {response?.expressionDescription}
+            </div>
         </NoticeBox>
     )
 }

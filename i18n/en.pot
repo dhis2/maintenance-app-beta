@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-21T14:51:34.367Z\n"
-"PO-Revision-Date: 2026-01-21T14:51:34.367Z\n"
+"POT-Creation-Date: 2026-01-27T14:33:30.741Z\n"
+"PO-Revision-Date: 2026-01-27T14:33:30.741Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -222,17 +222,17 @@ msgstr "<= (less than or equal to)"
 msgid "== (equals)"
 msgstr "== (equals)"
 
-msgid "== (does not equal)"
-msgstr "== (does not equal)"
+msgid "!= (does not equal)"
+msgstr "!= (does not equal)"
 
-msgid "NOT"
-msgstr "NOT"
+msgid "! (not)"
+msgstr "! (not)"
 
-msgid "AND"
-msgstr "AND"
+msgid "&& (and)"
+msgstr "&& (and)"
 
-msgid "OR"
-msgstr "OR"
+msgid "|| (or)"
+msgstr "|| (or)"
 
 msgid ".periodOffset("
 msgstr ".periodOffset("
@@ -793,9 +793,6 @@ msgstr "No potential targets available. Remove an item from sources."
 
 msgid "At least one source is required"
 msgstr "At least one source is required"
-
-msgid "Add operators, variables, functions, and constants from right sidebar"
-msgstr "Add operators, variables, functions, and constants from right sidebar"
 
 msgid "Loading..."
 msgstr "Loading..."
@@ -3199,18 +3196,6 @@ msgstr "The indicator merge operation is complete."
 msgid "All selected indicators were merged successfully."
 msgstr "All selected indicators were merged successfully."
 
-msgid "Denominator Expression"
-msgstr "Denominator Expression"
-
-msgid "Edit denominator expression"
-msgstr "Edit denominator expression"
-
-msgid "Description (required)"
-msgstr "Description (required)"
-
-msgid "Summarise what this denominator expression measures."
-msgstr "Summarise what this denominator expression measures."
-
 msgid "Set up the basic information for this indicator."
 msgstr "Set up the basic information for this indicator."
 
@@ -5128,6 +5113,9 @@ msgstr "Comparison operator"
 
 msgid "Right side expression"
 msgstr "Right side expression"
+
+msgid "Edit denominator expression"
+msgstr "Edit denominator expression"
 
 msgid "Set up denominator expression"
 msgstr "Set up denominator expression"
