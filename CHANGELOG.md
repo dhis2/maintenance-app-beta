@@ -1,3 +1,10 @@
+## [0.113.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.113.1...v0.113.2) (2026-01-27)
+
+
+### Bug Fixes
+
+* remove locales download ([#744](https://github.com/dhis2/maintenance-app-beta/issues/744)) ([017e26e](https://github.com/dhis2/maintenance-app-beta/commit/017e26e00c069d5b31cec93313f138369baaa373))
+
 ## [0.113.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.113.0...v0.113.1) (2026-01-27)
 
 
