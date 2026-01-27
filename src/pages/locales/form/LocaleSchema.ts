@@ -24,7 +24,7 @@ export const localeFormSchema = localeBaseSchema.refine(
     },
     {
         message: 'Country is required when Script is provided',
-        path: ['country'], // This will attach the error to the country field
+        path: ['country'],
     }
 )
 
