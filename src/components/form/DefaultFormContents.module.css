@@ -2,20 +2,14 @@
     background: var(--colors-white);
     border: 1px solid var(--colors-grey300);
     padding: var(--spacers-dp16);
-    padding-bottom: calc(
-        var(--spacers-dp32) + 60px
-    ); /* Extra padding for fixed footer */
+    padding-bottom: var(--spacers-dp32);
     display: flex;
     flex-direction: column;
     gap: var(--spacers-dp16);
 }
 
 .formActions {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100vw;
+    width: 100%;
     padding: var(--spacers-dp8) var(--spacers-dp16);
     box-shadow: 0px 0px 1px 0px rgba(33, 41, 52, 0.1),
         0px -4px 6px -1px rgba(33, 41, 52, 0.1),
@@ -24,5 +18,4 @@
     display: flex;
     align-items: center;
     gap: var(--spacers-dp16);
-    z-index: 100;
 }
