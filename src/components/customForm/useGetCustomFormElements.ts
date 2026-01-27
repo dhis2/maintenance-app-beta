@@ -67,7 +67,11 @@ type ProgramAttributeData = {
 export const useProgramsCustomFormElements = () => {
     const programId = useParams().id
     const queryFn = useBoundResourceQueryFn()
-    const { data: attributesData, isLoading } = useQuery({
+    const {
+        data: attributesData,
+        refetch,
+        isLoading,
+    } = useQuery({
         queryFn: queryFn<ProgramAttributeData>,
         queryKey: [
             {
@@ -104,7 +108,7 @@ export const useProgramsCustomFormElements = () => {
         ] as ElementTypes
     }, [attributesData])
 
-    return { loading: isLoading, elementTypes }
+    return { loading: isLoading, refetch, elementTypes }
 }
 
 export const useDataSetCustomFormElements = () => {
@@ -114,7 +118,11 @@ export const useDataSetCustomFormElements = () => {
     const indicators = indicatorsInput.value
 
     const queryFn = useBoundResourceQueryFn()
-    const { data: deoData, isLoading } = useQuery({
+    const {
+        data: deoData,
+        isLoading,
+        refetch,
+    } = useQuery({
         queryFn: queryFn<DEOData>,
         queryKey: [
             {
@@ -200,12 +208,16 @@ export const useDataSetCustomFormElements = () => {
         [dataElements, totals, indicators, flags]
     )
 
-    return { loading: flagsQuery.isLoading ?? isLoading, elementTypes }
+    return { loading: flagsQuery.isLoading ?? isLoading, refetch, elementTypes }
 }
 
 export const useProgramsStageSectionCustomFormElements = (stageId: string) => {
     const queryFn = useBoundResourceQueryFn()
-    const { data: deData, isLoading } = useQuery({
+    const {
+        data: deData,
+        isLoading,
+        refetch,
+    } = useQuery({
         queryFn: queryFn<ProgramStateSectionDataElements>,
         queryKey: [
             {
@@ -248,5 +260,5 @@ export const useProgramsStageSectionCustomFormElements = (stageId: string) => {
         [dataElements, flags]
     )
 
-    return { loading: flagsQuery.isLoading ?? isLoading, elementTypes }
+    return { loading: flagsQuery.isLoading ?? isLoading, refetch, elementTypes }
 }

@@ -60,7 +60,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
     }, [dataEntryForm, sections])
     const dataEngine = useDataEngine()
 
-    const { loading, elementTypes } = useDataSetCustomFormElements()
+    const { loading, elementTypes, refetch } = useDataSetCustomFormElements()
     const updateDataSetCustomForm = useCallback(
         async (
             data: CustomFormDataPayload,
@@ -144,6 +144,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                         level={'primary'}
                         loading={loading}
                         elementTypes={elementTypes}
+                        refetch={refetch}
                         updateCustomForm={updateDataSetCustomForm}
                         customFormTarget="data set"
                     />

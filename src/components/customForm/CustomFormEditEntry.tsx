@@ -10,12 +10,14 @@ import { ElementTypes } from './CustomFormElementsSelector'
 export const CustomFormEditEntry = ({
     level,
     loading,
+    refetch,
     elementTypes,
     updateCustomForm,
     customFormTarget,
 }: {
     level: 'primary' | 'secondary'
     loading: boolean
+    refetch: () => void
     elementTypes: ElementTypes
     updateCustomForm: (
         data: CustomFormDataPayload,
@@ -46,6 +48,7 @@ export const CustomFormEditEntry = ({
                     <CustomFormEdit
                         closeCustomFormEdit={() => setCustomFormEditOpen(false)}
                         loading={loading}
+                        refetch={refetch}
                         elementTypes={elementTypes}
                         updateCustomForm={updateCustomForm}
                         customFormTarget={customFormTarget}

@@ -22,6 +22,7 @@ import {
 export type CustomFormProps = {
     closeCustomFormEdit?: () => void
     loading: boolean
+    refetch: () => void
     elementTypes: ElementTypes
     updateCustomForm: (
         data: CustomFormDataPayload,
@@ -86,6 +87,7 @@ export type CustomFormDataPayload = {
 export const CustomFormEdit = ({
     closeCustomFormEdit,
     loading,
+    refetch,
     elementTypes,
     updateCustomForm,
     customFormTarget,
@@ -121,6 +123,10 @@ export const CustomFormEdit = ({
             textAreaRef.current.value = newText
         }
     }
+
+    useEffect(() => {
+        refetch()
+    }, [refetch])
 
     useEffect(() => {
         if (!textAreaRef.current) {

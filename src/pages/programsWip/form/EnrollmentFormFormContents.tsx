@@ -66,7 +66,7 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
     const dataEngine = useDataEngine()
 
     const modelId = useParams().id
-    const { loading, elementTypes } = useProgramsCustomFormElements()
+    const { loading, elementTypes, refetch } = useProgramsCustomFormElements()
     const createProgramCustomForm = useCallback(
         async (
             data: CustomFormDataPayload,
@@ -214,6 +214,7 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                     <CustomFormEditEntry
                         level={'primary'}
                         loading={loading}
+                        refetch={refetch}
                         elementTypes={elementTypes}
                         updateCustomForm={updateOrCreateCustomForm}
                         customFormTarget="program enrollment"

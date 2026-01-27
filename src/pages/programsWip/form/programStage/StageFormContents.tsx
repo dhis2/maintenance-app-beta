@@ -107,9 +107,8 @@ export const StageFormContents = ({
 
     const dataEngine = useDataEngine()
 
-    const { loading, elementTypes } = useProgramsStageSectionCustomFormElements(
-        values.id
-    )
+    const { loading, elementTypes, refetch } =
+        useProgramsStageSectionCustomFormElements(values.id)
     const createProgramStageCustomForm = useCallback(
         async (
             data: CustomFormDataPayload,
@@ -410,6 +409,7 @@ export const StageFormContents = ({
                         <CustomFormEditEntry
                             level={isSubsection ? 'secondary' : 'primary'}
                             loading={loading}
+                            refetch={refetch}
                             elementTypes={elementTypes}
                             updateCustomForm={updateOrCreateCustomForm}
                             customFormTarget="program stage"
