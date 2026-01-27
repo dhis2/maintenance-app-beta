@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, InputFieldFF } from '@dhis2/ui'
+import { Button, IconAdd16, NoticeBox } from '@dhis2/ui'
 import React from 'react'
-import { Field as FieldRFF } from 'react-final-form'
 import { useFieldArray } from 'react-final-form-arrays'
+import { useParams } from 'react-router-dom'
 import {
     DrawerPortal,
     SectionedFormSection,
@@ -16,6 +16,7 @@ import {
     EditOrNewStageForm,
     SubmittedStageFormValues,
 } from './programStage/StageForm'
+import css from './ProgramStagesForm.module.css'
 
 export type ProgramStageListItem = {
     id: string
@@ -28,93 +29,155 @@ export type ProgramStageListItem = {
 
 export const ProgramStagesFormContents = React.memo(
     function ProgramStagesContent({ name }: { name: string }) {
-        const stagesFieldArray =
-            useFieldArray<ProgramStageListItem>('programStages').fields
-        const [stageFormOpen, setStageFormOpen] = React.useState<
-            DisplayableModel | null | undefined
-        >()
-        const isStageFormOpen = !!stageFormOpen || stageFormOpen === null
-
-        const handleSubmittedStage = (
-            values: SubmittedStageFormValues,
-            closeOnSubmit: boolean = true
-        ) => {
-            const isEditSection = stageFormOpen && stageFormOpen.id
-
-            if (closeOnSubmit) {
-                setStageFormOpen(undefined)
-            } else if (!isEditSection) {
-                setStageFormOpen({
-                    id: values.id,
-                    displayName: values.displayName,
-                })
-            }
-            if (isEditSection) {
-                const index = stagesFieldArray.value.findIndex(
-                    (s) => s.id === stageFormOpen.id
-                )
-                if (index !== -1) {
-                    stagesFieldArray.update(index, values)
-                }
-            } else {
-                stagesFieldArray.push(values)
-            }
-        }
-        const onCloseStageForm = () => {
-            setStageFormOpen(undefined)
-        }
-
         return (
-            <>
-                <DrawerPortal
-                    isOpen={isStageFormOpen}
-                    onClose={onCloseStageForm}
-                >
-                    {stageFormOpen !== undefined && (
-                        <div>
-                            <EditOrNewStageForm
-                                stage={stageFormOpen}
-                                onCancel={onCloseStageForm}
-                                onSubmitted={handleSubmittedStage}
+            <SectionedFormSection name={name}>
+                <StandardFormSectionTitle>
+                    {i18n.t('Program Stages')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t('Set up stages in this program.')}
+                </StandardFormSectionDescription>
+                <ProgramStageListNewOrEdit />
+            </SectionedFormSection>
+        )
+    }
+)
+
+const ProgramStageListNewOrEdit = () => {
+    const modelId = useParams().id as string
+    const stagesFieldArray =
+        useFieldArray<ProgramStageListItem>('programStages').fields
+    const [stageFormOpen, setStageFormOpen] = React.useState<
+        DisplayableModel | null | undefined
+    >()
+    const isStageFormOpen = !!stageFormOpen || stageFormOpen === null
+
+    const handleDeletedStage = (index: number) => {
+        stagesFieldArray.update(index, {
+            ...stagesFieldArray.value[index],
+            deleted: true,
+        })
+    }
+
+    const handleCancelDeletedStage = (index: number) => {
+        stagesFieldArray.update(index, {
+            ...stagesFieldArray.value[index],
+            deleted: false,
+        })
+    }
+
+    const handleSubmittedStage = (
+        values: SubmittedStageFormValues,
+        closeOnSubmit: boolean = true
+    ) => {
+        const isEditSection = stageFormOpen && stageFormOpen.id
+
+        if (closeOnSubmit) {
+            setStageFormOpen(undefined)
+        } else if (!isEditSection) {
+            setStageFormOpen({
+                id: values.id,
+                displayName: values.displayName,
+            })
+        }
+        if (isEditSection) {
+            const index = stagesFieldArray.value.findIndex(
+                (s) => s.id === stageFormOpen.id
+            )
+            if (index !== -1) {
+                stagesFieldArray.update(index, values)
+            }
+        } else {
+            stagesFieldArray.push(values)
+        }
+    }
+
+    const onCloseStageForm = () => {
+        setStageFormOpen(undefined)
+    }
+
+    // program stages cannot be added until program is saved
+    if (!modelId) {
+        return (
+            <NoticeBox className={css.formTypeInfo}>
+                {i18n.t('Program must be saved before stages can be added')}
+            </NoticeBox>
+        )
+    }
+
+    return (
+        <>
+            <DrawerPortal isOpen={isStageFormOpen} onClose={onCloseStageForm}>
+                {stageFormOpen !== undefined && (
+                    <div>
+                        <EditOrNewStageForm
+                            stage={stageFormOpen}
+                            onCancel={onCloseStageForm}
+                            onSubmitted={handleSubmittedStage}
+                        />
+                    </div>
+                )}
+            </DrawerPortal>
+
+            <div className={css.listWrapper}>
+                {stagesFieldArray.value.length === 0 && (
+                    <NoticeBox className={css.formTypeInfo}>
+                        {i18n.t('No program stages have been added yet')}
+                    </NoticeBox>
+                )}
+
+                <div className={css.sectionItems}>
+                    {stagesFieldArray.value.map((stage, index) => {
+                        if (stage.deleted) {
+                            return (
+                                <div
+                                    className={css.stageCardDeleted}
+                                    key={stage.id}
+                                >
+                                    <div className={css.deletedStageText}>
+                                        {i18n.t(
+                                            'Stage {{stageName}} will be removed on save',
+                                            { stageName: stage.displayName }
+                                        )}
+                                    </div>
+
+                                    <Button
+                                        small
+                                        onClick={() =>
+                                            handleCancelDeletedStage(index)
+                                        }
+                                    >
+                                        {i18n.t('Restore stage')}
+                                    </Button>
+                                </div>
+                            )
+                        }
+
+                        return (
+                            <ListInFormItem
+                                key={stage.id}
+                                item={stage}
+                                schemaName={SchemaName.programStage}
+                                onClick={() => setStageFormOpen(stage)}
+                                onDelete={() => handleDeletedStage(index)}
                             />
-                        </div>
-                    )}
-                </DrawerPortal>
-                <SectionedFormSection name={name}>
-                    <StandardFormSectionTitle>
-                        {i18n.t('Program Stages')}
-                    </StandardFormSectionTitle>
-                    <StandardFormSectionDescription>
-                        {i18n.t('Set up stages in this program.')}
-                    </StandardFormSectionDescription>
-                    <FieldRFF
-                        component={InputFieldFF}
-                        inputWidth="400px"
-                        name="testProgram"
-                        label={i18n.t('Test input program')}
-                        validateFields={[]}
-                    />
+                        )
+                    })}
+                </div>
+
+                <div>
                     <Button
+                        secondary
+                        small
+                        icon={<IconAdd16 />}
                         onClick={() => {
                             setStageFormOpen(null)
                         }}
                     >
                         {i18n.t('Add a program stage')}
                     </Button>
-
-                    {stagesFieldArray.value.map((stage) => (
-                        <ListInFormItem
-                            key={stage.id}
-                            item={stage}
-                            schemaName={SchemaName.programStage}
-                            onClick={() => {
-                                setStageFormOpen(stage)
-                            }}
-                            onDelete={() => {}}
-                        />
-                    ))}
-                </SectionedFormSection>
-            </>
-        )
-    }
-)
+                </div>
+            </div>
+        </>
+    )
+}
