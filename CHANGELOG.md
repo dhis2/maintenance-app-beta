@@ -1,3 +1,10 @@
+# [0.114.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.113.2...v0.114.0) (2026-01-27)
+
+
+### Features
+
+* add program rules list ([#738](https://github.com/dhis2/maintenance-app-beta/issues/738)) ([cb3e8ca](https://github.com/dhis2/maintenance-app-beta/commit/cb3e8caecf1fc1f958edcfa29f19a4bb85a3451c))
+
 ## [0.113.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.113.1...v0.113.2) (2026-01-27)
 
 
