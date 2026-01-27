@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip, CircularLoader } from '@dhis2/ui'
+import { Button, ButtonStrip } from '@dhis2/ui'
 import React from 'react'
 import { To } from 'react-router-dom'
 import { LinkButton } from '../LinkButton'
