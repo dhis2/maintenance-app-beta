@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-23T15:57:17.220Z\n"
-"PO-Revision-Date: 2026-01-23T15:57:17.220Z\n"
+"POT-Creation-Date: 2026-01-27T12:15:36.295Z\n"
+"PO-Revision-Date: 2026-01-27T12:15:36.295Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -3199,8 +3199,8 @@ msgstr "No indicators available. Remove one from source."
 msgid "What should happen to the source indicators after the merge is complete?"
 msgstr "What should happen to the source indicators after the merge is complete?"
 
-msgid "Country (required)"
-msgstr "Country (required)"
+msgid "Country"
+msgstr "Country"
 
 msgid "Failed to load countries"
 msgstr "Failed to load countries"
@@ -3219,6 +3219,15 @@ msgstr "Select a language"
 
 msgid "Locale will not be editable after it has been created."
 msgstr "Locale will not be editable after it has been created."
+
+msgid "Script"
+msgstr "Script"
+
+msgid "Four-letter script code in title case (e.g., Latn, Cyrl, Arab)"
+msgstr "Four-letter script code in title case (e.g., Latn, Cyrl, Arab)"
+
+msgid "e.g., Latn"
+msgstr "e.g., Latn"
 
 msgid "Set up the basic information for this option group set."
 msgstr "Set up the basic information for this option group set."

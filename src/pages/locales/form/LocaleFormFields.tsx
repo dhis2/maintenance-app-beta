@@ -8,6 +8,7 @@ import {
 } from '../../../components'
 import { CountryField } from './CountryField'
 import { LanguageField } from './LanguageField'
+import { ScriptField } from './ScriptField'
 
 export const LocaleFormFields = () => {
     return (
@@ -30,6 +31,10 @@ export const LocaleFormFields = () => {
 
                 <StandardFormField>
                     <CountryField />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <ScriptField />
                 </StandardFormField>
             </StandardFormSection>
         </>
