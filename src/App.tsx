@@ -1,4 +1,5 @@
 import React from 'react'
+import './locales'
 import { AppWrapper, ConfiguredRouter } from './app/index'
 
 // @TODO: Find a solution for these!
