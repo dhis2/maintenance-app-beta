@@ -53,6 +53,7 @@ const ValidationBox = ({
                     small
                     loading={validating}
                     onClick={validate}
+                    dataTest="expression-builder-modal-validate-button"
                 >
                     {i18n.t('Validate')}
                 </Button>
@@ -61,7 +62,11 @@ const ValidationBox = ({
     }
     if (response?.error) {
         return (
-            <NoticeBox warning title={i18n.t('Invalid expression')}>
+            <NoticeBox
+                dataTest="expression-builder-modal-input-validation"
+                warning
+                title={i18n.t('Invalid expression')}
+            >
                 <p>{validatedValue}</p>
             </NoticeBox>
         )
@@ -157,7 +162,7 @@ export const ExpressionBuilder = ({
                     <div className={styles.expressionBuilderContentContainer}>
                         <div className={styles.expressionBuilderEntryContainer}>
                             <div className={styles.expressionField}>
-                                <StandardFormField>
+                                <StandardFormField dataTest="expression-entry-textfield">
                                     <textarea
                                         ref={expressionRef}
                                         defaultValue={initialValue}
