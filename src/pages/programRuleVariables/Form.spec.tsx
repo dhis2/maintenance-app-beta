@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker'
 import { render, waitFor, type RenderResult } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
