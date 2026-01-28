@@ -1,3 +1,10 @@
+# [0.116.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.115.0...v0.116.0) (2026-01-28)
+
+
+### Features
+
+* [DHIS2-20537] Program stage data ([#733](https://github.com/dhis2/maintenance-app-beta/issues/733)) ([ff5212b](https://github.com/dhis2/maintenance-app-beta/commit/ff5212b6ffdde64b867b115f4826cd435c7b0a77))
+
 # [0.115.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.114.0...v0.115.0) (2026-01-28)
 
 
