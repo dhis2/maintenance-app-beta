@@ -1610,6 +1610,27 @@ msgstr "Data element from previous event"
 msgid "Calculated value"
 msgstr "Calculated value"
 
+msgid "On complete"
+msgstr "On complete"
+
+msgid "On update and insert"
+msgstr "On update and insert"
+
+msgid "Data element in newest event in program stage"
+msgstr "Data element in newest event in program stage"
+
+msgid "Data element in newest event in program"
+msgstr "Data element in newest event in program"
+
+msgid "Data element from current event"
+msgstr "Data element from current event"
+
+msgid "Data element from previous event"
+msgstr "Data element from previous event"
+
+msgid "Calculated value"
+msgstr "Calculated value"
+
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
 
@@ -4487,6 +4508,36 @@ msgstr "Choose how this program is disaggregated."
 msgid "Access and Sharing"
 msgstr "Access and Sharing"
 
+msgid "Program stage data"
+msgstr "Program stage data"
+
+msgid "Configure data collection for events in this program stage."
+msgstr "Configure data collection for events in this program stage."
+
+msgid "Chosen data elements"
+msgstr "Chosen data elements"
+
+msgid "Filter chosen data elements"
+msgstr "Filter chosen data elements"
+
+msgid "Configure data items"
+msgstr "Configure data items"
+
+msgid "Data elements can be collected in different ways with different options."
+msgstr "Data elements can be collected in different ways with different options."
+
+msgid "Display in reports"
+msgstr "Display in reports"
+
+msgid "Future date"
+msgstr "Future date"
+
+msgid "Skip in analytics"
+msgstr "Skip in analytics"
+
+msgid "Skip sync"
+msgstr "Skip sync"
+
 msgid "Stage"
 msgstr "Stage"
 
@@ -4543,12 +4594,6 @@ msgstr "Event Repetition"
 
 msgid "Define the frequency of events within this stage."
 msgstr "Define the frequency of events within this stage."
-
-msgid "Program Stage: Data"
-msgstr "Program Stage: Data"
-
-msgid "Choose the information to collect in this program stage. "
-msgstr "Choose the information to collect in this program stage. "
 
 msgid "Program stage form"
 msgstr "Program stage form"

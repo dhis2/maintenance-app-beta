@@ -26,6 +26,7 @@ import {
 } from '../../../../lib'
 import { ValidationStrategyField } from './fields'
 import { EditOrNowStageSectionForm } from './programStageSection/ProgramStageSectionForm'
+import { StageDataFormContents } from './StageDataFormContents'
 import { stageSchemaSection } from './StageForm'
 import { StageFormDescriptor } from './stageFormDescriptor'
 
@@ -220,15 +221,9 @@ export const StageFormContents = ({
             <SectionedFormSection
                 name={descriptor.getSection('stageData').name}
             >
-                <StandardFormSectionTitle>
-                    {i18n.t('Program Stage: Data', { nsSeparator: '~:~' })}
-                </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Choose the information to collect in this program stage. '
-                    )}
-                </StandardFormSectionDescription>
-                <div style={{ minHeight: 600 }} />
+                <StageDataFormContents
+                    name={descriptor.getSection('stageData').name}
+                />
             </SectionedFormSection>
             <SectionedFormSection
                 name={descriptor.getSection('stageForm').name}
