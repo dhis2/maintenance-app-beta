@@ -13,6 +13,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useField } from 'react-final-form'
 import { StandardFormField } from '../standardForm'
 import styles from './ExpressionBuilder.module.css'
+import { ExpressionBuilderType } from './types'
 import {
     useExpressionValidator,
     ValidationResult,
@@ -26,15 +27,17 @@ const ValidationBox = ({
     validatedValue,
     validate,
     isEmpty,
+    clearable,
 }: {
     response: ValidationResult | null
     validating: boolean
     isEmpty: boolean
     validatedValue: string | null
     validate: () => void
+    clearable: boolean
 }) => {
     if (isEmpty) {
-        return (
+        return clearable ? null : (
             <NoticeBox
                 error
                 title={i18n.t('Expression cannot be empty')}
@@ -50,6 +53,7 @@ const ValidationBox = ({
                     small
                     loading={validating}
                     onClick={validate}
+                    dataTest="expression-builder-modal-validate-button"
                 >
                     {i18n.t('Validate')}
                 </Button>
@@ -58,14 +62,18 @@ const ValidationBox = ({
     }
     if (response?.error) {
         return (
-            <NoticeBox warning title={i18n.t('Invalid expression')}>
+            <NoticeBox
+                dataTest="expression-builder-modal-input-validation"
+                warning
+                title={i18n.t('Invalid expression')}
+            >
                 <p>{validatedValue}</p>
             </NoticeBox>
         )
     }
     return (
         <NoticeBox valid title={i18n.t('Valid expression')}>
-            <div style={{ whiteSpace: 'pre-line' }}>
+            <div className={styles.validExpressionDescription}>
                 {response?.expressionDescription}
             </div>
         </NoticeBox>
@@ -78,12 +86,20 @@ export const ExpressionBuilder = ({
     onClose,
     title,
     initialValue,
+    programId,
+    type,
+    clearable,
+    clearExpression,
 }: {
     fieldName: string
     validationResource: string
     onClose: () => void
     title: string
     initialValue: string
+    programId?: string
+    type: ExpressionBuilderType
+    clearable: boolean
+    clearExpression?: () => void
 }) => {
     const { input: expressionInput } = useField(fieldName)
     const expressionRef = useRef<HTMLTextAreaElement>(null)
@@ -146,7 +162,7 @@ export const ExpressionBuilder = ({
                     <div className={styles.expressionBuilderContentContainer}>
                         <div className={styles.expressionBuilderEntryContainer}>
                             <div className={styles.expressionField}>
-                                <StandardFormField>
+                                <StandardFormField dataTest="expression-entry-textfield">
                                     <textarea
                                         ref={expressionRef}
                                         defaultValue={initialValue}
@@ -172,6 +188,7 @@ export const ExpressionBuilder = ({
                                         validatedValue={validatedValue}
                                         validate={validateCurrentState}
                                         isEmpty={isEmpty}
+                                        clearable={clearable}
                                     />
                                 )}
 
@@ -188,6 +205,8 @@ export const ExpressionBuilder = ({
                         <VariableSelectionBox
                             elementRef={expressionRef}
                             clearValidationState={clearValidationState}
+                            programId={programId}
+                            type={type}
                         />
                     </div>
                 </ModalContent>
@@ -202,6 +221,11 @@ export const ExpressionBuilder = ({
                         </Button>
                         <Button
                             onClick={async () => {
+                                if (isEmpty && clearable && clearExpression) {
+                                    clearExpression()
+                                    onClose?.()
+                                    return
+                                }
                                 let proceed = validationResponse !== null
                                 if (validationResponse === null || isEmpty) {
                                     proceed = await validateCurrentState()
@@ -221,7 +245,7 @@ export const ExpressionBuilder = ({
                             dataTest="apply-expression-button"
                             disabled={
                                 validating ||
-                                isEmpty ||
+                                (isEmpty && !clearable) ||
                                 !initiallyValidated ||
                                 !!validationResponse?.error
                             }

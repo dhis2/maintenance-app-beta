@@ -574,7 +574,11 @@ describe('Program indicator form tests', () => {
             const editModal = await screen.findByTestId(
                 `expression-builder-modal`
             )
-            await uiActions.enterExpressionInModal(editModal, anExpression)
+            await uiActions.enterExpressionInModal(
+                editModal,
+                anExpression,
+                screen
+            )
 
             const error = within(editModal).getByTestId(
                 `expression-builder-modal-input-validation`
@@ -601,7 +605,11 @@ describe('Program indicator form tests', () => {
             const editModal = await screen.findByTestId(
                 `expression-builder-modal`
             )
-            await uiActions.enterExpressionInModal(editModal, anExpression)
+            await uiActions.enterExpressionInModal(
+                editModal,
+                anExpression,
+                screen
+            )
 
             const error = within(editModal).getByTestId(
                 `expression-builder-modal-input-validation`

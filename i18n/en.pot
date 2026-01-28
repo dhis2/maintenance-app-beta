@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-27T14:55:05.888Z\n"
-"PO-Revision-Date: 2026-01-27T14:55:05.888Z\n"
+"POT-Creation-Date: 2026-01-27T14:33:30.741Z\n"
+"PO-Revision-Date: 2026-01-27T14:33:30.741Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -141,6 +141,9 @@ msgstr "Skip if any value is missing"
 msgid "Skip if all values are missing"
 msgstr "Skip if all values are missing"
 
+msgid "Program has not been selected"
+msgstr "Program has not been selected"
+
 msgid "Data elements"
 msgstr "Data elements"
 
@@ -153,8 +156,8 @@ msgstr "Indicators"
 msgid "Select a Program"
 msgstr "Select a Program"
 
-msgid "Operators"
-msgstr "Operators"
+msgid "Select a Program stage"
+msgstr "Select a Program stage"
 
 msgid "+ (add)"
 msgstr "+ (add)"
@@ -198,6 +201,114 @@ msgstr "greatest("
 msgid "least("
 msgstr "least("
 
+msgid "log("
+msgstr "log("
+
+msgid "log10("
+msgstr "log10("
+
+msgid "> (greater than)"
+msgstr "> (greater than)"
+
+msgid ">= (greater than or equal to)"
+msgstr ">= (greater than or equal to)"
+
+msgid "< (less than)"
+msgstr "< (less than)"
+
+msgid "<= (less than or equal to)"
+msgstr "<= (less than or equal to)"
+
+msgid "== (equals)"
+msgstr "== (equals)"
+
+msgid "!= (does not equal)"
+msgstr "!= (does not equal)"
+
+msgid "! (not)"
+msgstr "! (not)"
+
+msgid "&& (and)"
+msgstr "&& (and)"
+
+msgid "|| (or)"
+msgstr "|| (or)"
+
+msgid ".periodOffset("
+msgstr ".periodOffset("
+
+msgid "avg("
+msgstr "avg("
+
+msgid "count("
+msgstr "count("
+
+msgid "max("
+msgstr "max("
+
+msgid "median("
+msgstr "median("
+
+msgid "min("
+msgstr "min("
+
+msgid "percentileCont("
+msgstr "percentileCont("
+
+msgid "stddev("
+msgstr "stddev("
+
+msgid "stddevPop("
+msgstr "stddevPop("
+
+msgid "stddevSamp("
+msgstr "stddevSamp("
+
+msgid "sum("
+msgstr "sum("
+
+msgid "contains("
+msgstr "contains("
+
+msgid "containsItems("
+msgstr "containsItems("
+
+msgid "is("
+msgstr "is("
+
+msgid "firstNonNull("
+msgstr "firstNonNull("
+
+msgid "normDistCum("
+msgstr "normDistCum("
+
+msgid "normDistDen("
+msgstr "normDistDen("
+
+msgid "null"
+msgstr "null"
+
+msgid "orgUnit.ancestor("
+msgstr "orgUnit.ancestor("
+
+msgid "orgUnit.dataSet("
+msgstr "orgUnit.dataSet("
+
+msgid "orgUnit.group("
+msgstr "orgUnit.group("
+
+msgid "orgUnit.program("
+msgstr "orgUnit.program("
+
+msgid "removeZeros("
+msgstr "removeZeros("
+
+msgid ".maxDate("
+msgstr ".maxDate("
+
+msgid ".minDate("
+msgstr ".minDate("
+
 msgid "Program data"
 msgstr "Program data"
 
@@ -209,6 +320,54 @@ msgstr "Constants"
 
 msgid "Reporting rates"
 msgstr "Reporting rates"
+
+msgid "Operators"
+msgstr "Operators"
+
+msgid "Analytics period end"
+msgstr "Analytics period end"
+
+msgid "Analytics period start"
+msgstr "Analytics period start"
+
+msgid "Completed date"
+msgstr "Completed date"
+
+msgid "Creation date"
+msgstr "Creation date"
+
+msgid "Current date"
+msgstr "Current date"
+
+msgid "Due date"
+msgstr "Due date"
+
+msgid "Event date"
+msgstr "Event date"
+
+msgid "Program stage id"
+msgstr "Program stage id"
+
+msgid "Program stage name"
+msgstr "Program stage name"
+
+msgid "Sync date"
+msgstr "Sync date"
+
+msgid "Value count"
+msgstr "Value count"
+
+msgid "Zero or positive value count"
+msgstr "Zero or positive value count"
+
+msgid "Variables"
+msgstr "Variables"
+
+msgid "Program stage data"
+msgstr "Program stage data"
+
+msgid "Attributes"
+msgstr "Attributes"
 
 msgid "Could not validate expression"
 msgstr "Could not validate expression"
@@ -323,9 +482,6 @@ msgstr "Date of enrollment"
 
 msgid "Date of incident"
 msgstr "Date of incident"
-
-msgid "Attributes"
-msgstr "Attributes"
 
 msgid "Program"
 msgstr "Program"
@@ -631,9 +787,6 @@ msgstr "No potential targets available. Remove an item from sources."
 
 msgid "At least one source is required"
 msgstr "At least one source is required"
-
-msgid "Add operators, variables, functions, and constants from right sidebar"
-msgstr "Add operators, variables, functions, and constants from right sidebar"
 
 msgid "Loading..."
 msgstr "Loading..."
@@ -2437,9 +2590,6 @@ msgstr "Filter selected data sets..."
 msgid "Data set name"
 msgstr "Data set name"
 
-msgid "Current date"
-msgstr "Current date"
-
 msgid "Data set description"
 msgstr "Data set description"
 
@@ -3061,18 +3211,6 @@ msgstr "The indicator merge operation is complete."
 msgid "All selected indicators were merged successfully."
 msgstr "All selected indicators were merged successfully."
 
-msgid "Denominator Expression"
-msgstr "Denominator Expression"
-
-msgid "Edit denominator expression"
-msgstr "Edit denominator expression"
-
-msgid "Description (required)"
-msgstr "Description (required)"
-
-msgid "Summarise what this denominator expression measures."
-msgstr "Summarise what this denominator expression measures."
-
 msgid "Set up the basic information for this indicator."
 msgstr "Set up the basic information for this indicator."
 
@@ -3088,6 +3226,12 @@ msgid ""
 msgstr ""
 "Define how the indicator is calculated and how it's result will be "
 "displayed."
+
+msgid "Numerator"
+msgstr "Numerator"
+
+msgid "Denominator"
+msgstr "Denominator"
 
 msgid ""
 "Select how the indicator result should be expressed (per cent, per "
@@ -3139,14 +3283,14 @@ msgstr ""
 "Map this indicator to a specific attribute option combinations when "
 "exporting aggregate data."
 
-msgid "Numerator Expression"
-msgstr "Numerator Expression"
+msgid "Edit {{objectName}} expression"
+msgstr "Edit {{objectName}} expression"
 
-msgid "Edit numerator expression"
-msgstr "Edit numerator expression"
+msgid "Set up {{objectName}} expression"
+msgstr "Set up {{objectName}} expression"
 
-msgid "Summarise what this numerator expression measures."
-msgstr "Summarise what this numerator expression measures."
+msgid "Summarize what this {{objectName}} measures."
+msgstr "Summarize what this {{objectName}} measures."
 
 msgid "Indicators Form"
 msgstr "Indicators Form"
@@ -3154,14 +3298,8 @@ msgstr "Indicators Form"
 msgid "Numerator description"
 msgstr "Numerator description"
 
-msgid "Numerator"
-msgstr "Numerator"
-
 msgid "Denominator description"
 msgstr "Denominator description"
-
-msgid "Denominator"
-msgstr "Denominator"
 
 msgid "Annualized"
 msgstr "Annualized"
@@ -3871,21 +4009,6 @@ msgstr "Manage"
 msgid "Predictor run started successfully"
 msgstr "Predictor run started successfully"
 
-msgid "Run predictor"
-msgstr "Run predictor"
-
-msgid "Start date"
-msgstr "Start date"
-
-msgid "End date"
-msgstr "End date"
-
-msgid "Run now"
-msgstr "Run now"
-
-msgid "Edit {{objectName}} expression"
-msgstr "Edit {{objectName}} expression"
-
 msgid "Set up {{objectName}} expression"
 msgstr "Set up {{objectName}} expression"
 
@@ -3984,6 +4107,12 @@ msgstr "Restore mapping"
 
 msgid "Category mapping: "
 msgstr "Category mapping: "
+
+msgid "Edit filter"
+msgstr "Edit filter"
+
+msgid "Set up filter"
+msgstr "Set up filter"
 
 msgid "No new categories to add"
 msgstr "No new categories to add"
@@ -4113,9 +4242,6 @@ msgstr "Search selected program indicators"
 msgid "Incident date"
 msgstr "Incident date"
 
-msgid "Event date"
-msgstr "Event date"
-
 msgid "Enrollment date"
 msgstr "Enrollment date"
 
@@ -4203,15 +4329,15 @@ msgstr "Configure the program indicator expression."
 msgid "Edit expression"
 msgstr "Edit expression"
 
+msgid "Set up expression"
+msgstr "Set up expression"
+
 msgid ""
 "Configure the program indicator filter that controls what data will be "
 "evaluated bt the main expression."
 msgstr ""
 "Configure the program indicator filter that controls what data will be "
 "evaluated bt the main expression."
-
-msgid "Edit filter"
-msgstr "Edit filter"
 
 msgid "Period boundaries"
 msgstr "Period boundaries"
@@ -4544,11 +4670,8 @@ msgstr "Stage"
 msgid "Stages"
 msgstr "Stages"
 
-msgid "Save stage and close"
-msgstr "Save stage and close"
-
-msgid "Save stage"
-msgstr "Save stage"
+msgid "Save "
+msgstr "Save "
 
 msgid "Saving a stage does not save other changes to the program"
 msgstr "Saving a stage does not save other changes to the program"
@@ -4610,8 +4733,8 @@ msgstr "Stage section"
 msgid "Stage sections"
 msgstr "Stage sections"
 
-msgid "Saving a section does not save other changes to the stage or program"
-msgstr "Saving a section does not save other changes to the stage or program"
+msgid "Saving a section does not save other changes to the program stage"
+msgstr "Saving a section does not save other changes to the program stage"
 
 msgid "Listing"
 msgstr "Listing"
@@ -5024,6 +5147,9 @@ msgstr "Configure the expressions and how they are compared."
 msgid "Left side expression"
 msgstr "Left side expression"
 
+msgid "Edit numerator expression"
+msgstr "Edit numerator expression"
+
 msgid "Set up numerator expression"
 msgstr "Set up numerator expression"
 
@@ -5035,6 +5161,9 @@ msgstr "Comparison operator"
 
 msgid "Right side expression"
 msgstr "Right side expression"
+
+msgid "Edit denominator expression"
+msgstr "Edit denominator expression"
 
 msgid "Set up denominator expression"
 msgstr "Set up denominator expression"
