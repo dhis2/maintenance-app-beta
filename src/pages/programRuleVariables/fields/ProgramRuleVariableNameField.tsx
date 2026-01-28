@@ -10,7 +10,8 @@ import {
     FormFieldValidator,
 } from '../../../lib/form/composeAsyncValidators'
 
-const { NAME_PATTERN, FORBIDDEN_WORDS } = PROGRAM_RULE_VARIABLE_CONSTANTS
+const { NAME_PATTERN, FORBIDDEN_WORDS, MAX_NAME_LENGTH } =
+    PROGRAM_RULE_VARIABLE_CONSTANTS
 
 type ProgramRuleVariableFormValues = {
     name?: string
@@ -46,6 +47,18 @@ const forbiddenWordsValidator: FormFieldValidator<string> = (value) => {
         return i18n.t(
             'Program rule variable name contains forbidden words: and, or, not.'
         )
+    }
+    return undefined
+}
+
+const maxLengthValidator: FormFieldValidator<string> = (value) => {
+    if (!value) {
+        return undefined
+    }
+    if (value.length > MAX_NAME_LENGTH) {
+        return i18n.t('Please enter a maximum of {{max}} characters', {
+            max: MAX_NAME_LENGTH,
+        })
     }
     return undefined
 }
@@ -103,6 +116,7 @@ export function ProgramRuleVariableNameField() {
                     string,
                     ProgramRuleVariableFormValues
                 >,
+                maxLengthValidator,
                 forbiddenWordsValidator,
                 namePatternValidator,
                 duplicateNameWithinProgramValidator,

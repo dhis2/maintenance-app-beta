@@ -272,17 +272,19 @@ describe('Program Rule Variable form tests', () => {
             })
 
             it('should show an error if name field is a duplicate', async () => {
-                const existingName = faker.company.name()
+                const existingName = 'ExistingVariableForDuplicateTest'
                 const { screen } = await renderForm({
                     matchingExistingElementFilter: `name:ieq:${existingName}`,
                 })
+                const programField = screen.getByTestId('program-field')
+                await uiActions.pickOptionFromSelect(programField, 0, screen)
                 await uiActions.enterName(existingName, screen)
                 await userEvent.click(
                     screen.getByTestId('formfields-name-label')
                 )
                 uiAssertions.expectFieldToHaveError(
                     'formfields-name',
-                    'This name is already in use. Consider updating the name to avoid a duplication.',
+                    'A variable with this name already exists in this program.',
                     screen,
                     { skipClassCheck: true }
                 )
