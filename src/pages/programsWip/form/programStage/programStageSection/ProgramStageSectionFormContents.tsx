@@ -1,7 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectFieldFF } from '@dhis2/ui'
-import React from 'react'
-import { Field as FieldRFF } from 'react-final-form'
+import { Field, SingleSelectFieldFF } from '@dhis2/ui'
+import { useQuery } from '@tanstack/react-query'
+import React, { useMemo } from 'react'
+import { Field as FieldRFF, useField, useFormState } from 'react-final-form'
 import {
     DescriptionField,
     NameField,
@@ -10,7 +11,11 @@ import {
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
+    TransferHeader,
 } from '../../../../../components'
+import { BaseModelTransfer } from '../../../../../components/metadataFormControls/ModelTransfer/BaseModelTransfer'
+import { useBoundResourceQueryFn } from '../../../../../lib'
+import { DisplayableModel } from '../../../../../types/models'
 import { stageSectionSchemaSection } from './ProgramStageSectionForm'
 
 const displayOptions = [
@@ -28,7 +33,53 @@ const displayOptions = [
     },
 ]
 
+export type ProgramStateSectionDataElements = {
+    programStageDataElements: {
+        id: string
+        dataElement: { id: string; displayName: string }
+    }[]
+    programStageSections: { dataElements: { id: string }[]; id: string }[]
+}
+
 export const ProgramStageSectionFormContents = () => {
+    const queryFn = useBoundResourceQueryFn()
+    const { values } = useFormState({ subscription: { values: true } })
+
+    const { data, isLoading } = useQuery({
+        queryFn: queryFn<ProgramStateSectionDataElements>,
+        queryKey: [
+            {
+                resource: 'programStages',
+                id: values.programStage.id,
+                params: {
+                    fields: [
+                        'programStageDataElements[id,dataElement[id,displayName]]',
+                        'programStageSections[dataElements[id,displayName], id]',
+                    ].concat(),
+                },
+            },
+        ] as const,
+    })
+
+    const { input: dataElementsInput, meta: dataElementsMeta } = useField<
+        DisplayableModel[]
+    >('dataElements', {
+        multiple: true,
+        validateFields: [],
+    })
+    const availableDataElements = useMemo(() => {
+        if (!data?.programStageSections || !data?.programStageDataElements) {
+            return []
+        }
+        const otherSectionsDataElements = data.programStageSections
+            .filter((section) => section.id !== values.id)
+            .flatMap((section) => section.dataElements?.map((de) => de.id))
+
+        return data.programStageDataElements
+            .map((de) => de.dataElement)
+            .filter((de) => !otherSectionsDataElements.includes(de.id))
+    }, [data, values.id])
+
     return (
         <SectionedFormSections>
             <SectionedFormSection name="setup">
@@ -75,6 +126,61 @@ export const ProgramStageSectionFormContents = () => {
                         )}
                         required
                     />
+                </StandardFormField>
+            </SectionedFormSection>
+            <SectionedFormSection name="sectionDataElements">
+                <StandardFormSectionTitle>
+                    {i18n.t('Section data elements')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t('Choose what data is collected for this section.')}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <Field
+                        error={dataElementsMeta.invalid}
+                        validationText={
+                            (dataElementsMeta.touched &&
+                                dataElementsMeta.error?.toString()) ||
+                            ''
+                        }
+                        name="attributes"
+                    >
+                        <BaseModelTransfer
+                            loading={isLoading}
+                            selected={dataElementsInput.value || []}
+                            onChange={({ selected }) => {
+                                dataElementsInput.onChange(selected)
+                                dataElementsInput.onBlur()
+                            }}
+                            leftHeader={
+                                <TransferHeader>
+                                    {i18n.t('Available data elements')}
+                                </TransferHeader>
+                            }
+                            rightHeader={
+                                <TransferHeader>
+                                    {i18n.t('Selected data elements')}
+                                </TransferHeader>
+                            }
+                            filterPlaceholder={i18n.t(
+                                'Search available data elements'
+                            )}
+                            filterPlaceholderPicked={i18n.t(
+                                'Search selected data elements'
+                            )}
+                            enableOrderChange
+                            height={'350px'}
+                            optionsWidth="500px"
+                            selectedWidth="500px"
+                            filterable
+                            filterablePicked
+                            available={[
+                                ...availableDataElements,
+                                ...dataElementsInput.value,
+                            ]}
+                            maxSelections={Infinity}
+                        />
+                    </Field>
                 </StandardFormField>
             </SectionedFormSection>
         </SectionedFormSections>
