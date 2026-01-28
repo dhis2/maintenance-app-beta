@@ -498,12 +498,6 @@ msgstr "Required"
 msgid "Please enter a GeoJSON value"
 msgstr "Please enter a GeoJSON value"
 
-msgid "Exit without saving"
-msgstr "Exit without saving"
-
-msgid "Create {{modelName}} "
-msgstr "Create {{modelName}} "
-
 msgid "Validation errors"
 msgstr "Validation errors"
 
@@ -1747,6 +1741,27 @@ msgstr "At selected level(s) only"
 
 msgid "At selected level(s) and all levels below"
 msgstr "At selected level(s) and all levels below"
+
+msgid "On complete"
+msgstr "On complete"
+
+msgid "On update and insert"
+msgstr "On update and insert"
+
+msgid "Data element in newest event in program stage"
+msgstr "Data element in newest event in program stage"
+
+msgid "Data element in newest event in program"
+msgstr "Data element in newest event in program"
+
+msgid "Data element from current event"
+msgstr "Data element from current event"
+
+msgid "Data element from previous event"
+msgstr "Data element from previous event"
+
+msgid "Calculated value"
+msgstr "Calculated value"
 
 msgid "On complete"
 msgstr "On complete"
@@ -3337,6 +3352,12 @@ msgstr "No indicators available. Remove one from source."
 msgid "What should happen to the source indicators after the merge is complete?"
 msgstr "What should happen to the source indicators after the merge is complete?"
 
+msgid "Exit without saving"
+msgstr "Exit without saving"
+
+msgid "Create {{modelName}} "
+msgstr "Create {{modelName}} "
+
 msgid "Country (required)"
 msgstr "Country (required)"
 
@@ -4523,8 +4544,17 @@ msgstr "Program Stages"
 msgid "Set up stages in this program."
 msgstr "Set up stages in this program."
 
-msgid "Test input program"
-msgstr "Test input program"
+msgid "Program must be saved before stages can be added"
+msgstr "Program must be saved before stages can be added"
+
+msgid "No program stages have been added yet"
+msgstr "No program stages have been added yet"
+
+msgid "Stage {{stageName}} will be removed on save"
+msgstr "Stage {{stageName}} will be removed on save"
+
+msgid "Restore stage"
+msgstr "Restore stage"
 
 msgid "Add a program stage"
 msgstr "Add a program stage"
@@ -4604,6 +4634,36 @@ msgstr "Choose how this program is disaggregated."
 msgid "Access and Sharing"
 msgstr "Access and Sharing"
 
+msgid "Program stage data"
+msgstr "Program stage data"
+
+msgid "Configure data collection for events in this program stage."
+msgstr "Configure data collection for events in this program stage."
+
+msgid "Chosen data elements"
+msgstr "Chosen data elements"
+
+msgid "Filter chosen data elements"
+msgstr "Filter chosen data elements"
+
+msgid "Configure data items"
+msgstr "Configure data items"
+
+msgid "Data elements can be collected in different ways with different options."
+msgstr "Data elements can be collected in different ways with different options."
+
+msgid "Display in reports"
+msgstr "Display in reports"
+
+msgid "Future date"
+msgstr "Future date"
+
+msgid "Skip in analytics"
+msgstr "Skip in analytics"
+
+msgid "Skip sync"
+msgstr "Skip sync"
+
 msgid "Stage"
 msgstr "Stage"
 
@@ -4657,12 +4717,6 @@ msgstr "Event Repetition"
 
 msgid "Define the frequency of events within this stage."
 msgstr "Define the frequency of events within this stage."
-
-msgid "Program Stage: Data"
-msgstr "Program Stage: Data"
-
-msgid "Choose the information to collect in this program stage. "
-msgstr "Choose the information to collect in this program stage. "
 
 msgid "Program stage form"
 msgstr "Program stage form"
