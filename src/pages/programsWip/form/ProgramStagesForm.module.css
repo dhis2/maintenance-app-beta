@@ -1,0 +1,29 @@
+.sectionItems {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.listWrapper {
+    display: flex;
+    gap: var(--spacers-dp8);
+    flex-direction: column;
+    max-width: 720px;
+}
+
+.formTypeInfo {
+    margin-bottom: var(--spacers-dp24);
+}
+
+.stageCardDeleted {
+    margin-block: 8px;
+    padding: 12px;
+    background-color: var(--colors-red050);
+    border: 1px solid var(--colors-red200);
+    border-radius: 4px;
+}
+
+.deletedStageText {
+    color: var(--colors-red800);
+    font-size: 15px;
+    margin-block-end: var(--spacers-dp8);
+}
