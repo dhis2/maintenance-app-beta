@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-23T15:57:17.220Z\n"
-"PO-Revision-Date: 2026-01-23T15:57:17.220Z\n"
+"POT-Creation-Date: 2026-01-27T14:55:05.888Z\n"
+"PO-Revision-Date: 2026-01-27T14:55:05.888Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -341,12 +341,6 @@ msgstr "Required"
 
 msgid "Please enter a GeoJSON value"
 msgstr "Please enter a GeoJSON value"
-
-msgid "Exit without saving"
-msgstr "Exit without saving"
-
-msgid "Create {{modelName}} "
-msgstr "Create {{modelName}} "
 
 msgid "Validation errors"
 msgstr "Validation errors"
@@ -3199,6 +3193,12 @@ msgstr "No indicators available. Remove one from source."
 msgid "What should happen to the source indicators after the merge is complete?"
 msgstr "What should happen to the source indicators after the merge is complete?"
 
+msgid "Exit without saving"
+msgstr "Exit without saving"
+
+msgid "Create {{modelName}} "
+msgstr "Create {{modelName}} "
+
 msgid "Country (required)"
 msgstr "Country (required)"
 
@@ -4397,8 +4397,17 @@ msgstr "Program Stages"
 msgid "Set up stages in this program."
 msgstr "Set up stages in this program."
 
-msgid "Test input program"
-msgstr "Test input program"
+msgid "Program must be saved before stages can be added"
+msgstr "Program must be saved before stages can be added"
+
+msgid "No program stages have been added yet"
+msgstr "No program stages have been added yet"
+
+msgid "Stage {{stageName}} will be removed on save"
+msgstr "Stage {{stageName}} will be removed on save"
+
+msgid "Restore stage"
+msgstr "Restore stage"
 
 msgid "Add a program stage"
 msgstr "Add a program stage"

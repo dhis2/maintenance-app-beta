@@ -494,6 +494,22 @@ export const modelListViewsConfig = {
             overrideDefaultAvailable: true,
         },
     },
+    programRule: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Program name'), path: 'program.displayName' },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: ['description', 'priority', 'condition', 'programStage'],
+        },
+        filters: {
+            default: ['program'],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
+    },
     optionGroupSet: {
         columns: {
             default: [
