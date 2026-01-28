@@ -1,3 +1,10 @@
+# [0.115.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.114.0...v0.115.0) (2026-01-28)
+
+
+### Features
+
+* adjust program stage list ([8141f52](https://github.com/dhis2/maintenance-app-beta/commit/8141f52206c5113921d7b970bb61705633ea266d))
+
 # [0.114.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.113.2...v0.114.0) (2026-01-27)
 
 
