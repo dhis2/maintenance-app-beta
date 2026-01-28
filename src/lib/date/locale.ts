@@ -11,7 +11,7 @@ const toBcp47 = (locale?: string) => {
         return `${lang}-${script}-${country}`
     }
 
-    return String(locale).replace(/_/g, '-')
+    return String(locale).replaceAll('_', '-')
 }
 
 // our locales use _ instead of - for locales
