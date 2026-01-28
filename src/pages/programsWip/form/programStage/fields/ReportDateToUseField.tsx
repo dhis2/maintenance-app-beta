@@ -10,23 +10,29 @@ export function ReportDateToUseField() {
     return (
         <FieldRFF
             name="reportDateToUse"
-            component={SingleSelectFieldFF}
-            inputWidth="400px"
-            label={i18n.t('Report date to use')}
-            dataTest="formfields-reportDateToUse"
-            disabled={!openAfterEnrollment}
-            validateFields={[]}
-            options={[
-                { label: i18n.t('<No value>'), value: '' },
-                {
-                    label: i18n.t('Incident date'),
-                    value: 'incidentDate',
-                },
-                {
-                    label: i18n.t('Enrollment date'),
-                    value: 'enrollmentDate',
-                },
-            ]}
+            format={(value: string | undefined) => value ?? ''}
+            parse={(value: string) => (value === '' ? undefined : value)}
+            render={({ input, meta }) => (
+                <SingleSelectFieldFF
+                    input={input}
+                    meta={meta}
+                    inputWidth="400px"
+                    label={i18n.t('Report date to use')}
+                    dataTest="formfields-reportDateToUse"
+                    disabled={!openAfterEnrollment}
+                    options={[
+                        { label: i18n.t('<No value>'), value: '' },
+                        {
+                            label: i18n.t('Incident date'),
+                            value: 'incidentDate',
+                        },
+                        {
+                            label: i18n.t('Enrollment date'),
+                            value: 'enrollmentDate',
+                        },
+                    ]}
+                />
+            )}
         />
     )
 }
