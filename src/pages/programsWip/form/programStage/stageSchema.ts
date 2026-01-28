@@ -6,6 +6,7 @@ const {
     modelReference,
     withAttributeValues,
     style,
+    withDefaultListColumns,
     referenceCollection,
 } = modelFormSchemas
 
@@ -25,5 +26,7 @@ export const stageSchema = identifiable.merge(withAttributeValues).extend({
     program: modelReference,
     programStageDataElements: referenceCollection.default([]),
 })
+
+export const stageListSchema = stageSchema.merge(withDefaultListColumns)
 
 export const initialStageValue = getDefaults(stageSchema)

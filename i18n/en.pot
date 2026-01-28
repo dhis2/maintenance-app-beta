@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-27T14:33:30.741Z\n"
-"PO-Revision-Date: 2026-01-27T14:33:30.741Z\n"
+"POT-Creation-Date: 2026-01-28T12:39:48.057Z\n"
+"PO-Revision-Date: 2026-01-28T12:39:48.057Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -405,12 +405,6 @@ msgstr "Are you sure you want to change this?"
 msgid "Yes, change"
 msgstr "Yes, change"
 
-msgid "data set"
-msgstr "data set"
-
-msgid "program enrollment"
-msgstr "program enrollment"
-
 msgid "Custom form saved"
 msgstr "Custom form saved"
 
@@ -641,8 +635,8 @@ msgstr ""
 "Disabled as the value type must match the value type of the selected option "
 "set."
 
-msgid "Value type"
-msgstr "Value type"
+msgid "Value type (required)"
+msgstr "Value type (required)"
 
 msgid "Change value type"
 msgstr "Change value type"
@@ -1763,27 +1757,6 @@ msgstr "Data element from previous event"
 msgid "Calculated value"
 msgstr "Calculated value"
 
-msgid "On complete"
-msgstr "On complete"
-
-msgid "On update and insert"
-msgstr "On update and insert"
-
-msgid "Data element in newest event in program stage"
-msgstr "Data element in newest event in program stage"
-
-msgid "Data element in newest event in program"
-msgstr "Data element in newest event in program"
-
-msgid "Data element from current event"
-msgstr "Data element from current event"
-
-msgid "Data element from previous event"
-msgstr "Data element from previous event"
-
-msgid "Calculated value"
-msgstr "Calculated value"
-
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
 
@@ -1844,6 +1817,12 @@ msgstr "Ignore data approval"
 msgid "Source type"
 msgstr "Source type"
 
+msgid "Priority"
+msgstr "Priority"
+
+msgid "Condition"
+msgstr "Condition"
+
 msgid "Referral"
 msgstr "Referral"
 
@@ -1858,6 +1837,9 @@ msgstr "Use code for option set"
 
 msgid "Owner"
 msgstr "Owner"
+
+msgid "Value type"
+msgstr "Value type"
 
 msgid "Zero is significant"
 msgstr "Zero is significant"
@@ -2958,6 +2940,9 @@ msgstr "<No filter>"
 msgid "Manage enabled/disabled fields"
 msgstr "Manage enabled/disabled fields"
 
+msgid "Data set section form saved"
+msgstr "Data set section form saved"
+
 msgid "Section setup"
 msgstr "Section setup"
 
@@ -4009,11 +3994,17 @@ msgstr "Manage"
 msgid "Predictor run started successfully"
 msgstr "Predictor run started successfully"
 
-msgid "Set up {{objectName}} expression"
-msgstr "Set up {{objectName}} expression"
+msgid "Run predictor"
+msgstr "Run predictor"
 
-msgid "Summarize what this {{objectName}} measures."
-msgstr "Summarize what this {{objectName}} measures."
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
+
+msgid "Run now"
+msgstr "Run now"
 
 msgid "Output data element (required)"
 msgstr "Output data element (required)"
@@ -4357,6 +4348,40 @@ msgstr "Set up the program indicator legends."
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
 
+msgid "Name can only contain letters, numbers, space, dash, dot and underscore"
+msgstr "Name can only contain letters, numbers, space, dash, dot and underscore"
+
+msgid "Please enter a maximum of {{max}} characters"
+msgstr "Please enter a maximum of {{max}} characters"
+
+msgid "A variable with this name already exists in this program."
+msgstr "A variable with this name already exists in this program."
+
+msgid "Source type (required)"
+msgstr "Source type (required)"
+
+msgid "Set up the basic information for this program rule variable."
+msgstr "Set up the basic information for this program rule variable."
+
+msgid "Configure how this variable works."
+msgstr "Configure how this variable works."
+
+msgid "Program cannot be changed after creation"
+msgstr "Program cannot be changed after creation"
+
+msgid ""
+"Show option set code instead of display name (when selection is linked to "
+"an option set)."
+msgstr ""
+"Show option set code instead of display name (when selection is linked to "
+"an option set)."
+
+msgid "Program Rule Variable"
+msgstr "Program Rule Variable"
+
+msgid "There was an error deleting stages: {{stagesNames}}"
+msgstr "There was an error deleting stages: {{stagesNames}}"
+
 msgid "Organisation unit access"
 msgstr "Organisation unit access"
 
@@ -4598,8 +4623,8 @@ msgstr "Differs from program access"
 msgid "Apply to all stages"
 msgstr "Apply to all stages"
 
-msgid "Revert to program access"
-msgstr "Revert to program access"
+msgid "Apply program access rules"
+msgstr "Apply program access rules"
 
 msgid "Edit data access"
 msgstr "Edit data access"
@@ -4634,17 +4659,11 @@ msgstr "Choose how this program is disaggregated."
 msgid "Access and Sharing"
 msgstr "Access and Sharing"
 
-msgid "Program stage data"
-msgstr "Program stage data"
-
 msgid "Configure data collection for events in this program stage."
 msgstr "Configure data collection for events in this program stage."
 
-msgid "Chosen data elements"
-msgstr "Chosen data elements"
-
-msgid "Filter chosen data elements"
-msgstr "Filter chosen data elements"
+msgid "Filter selected data elements"
+msgstr "Filter selected data elements"
 
 msgid "Configure data items"
 msgstr "Configure data items"
@@ -4670,11 +4689,17 @@ msgstr "Stage"
 msgid "Stages"
 msgstr "Stages"
 
-msgid "Save "
-msgstr "Save "
+msgid "Save stage and close"
+msgstr "Save stage and close"
+
+msgid "Save stage"
+msgstr "Save stage"
 
 msgid "Saving a stage does not save other changes to the program"
 msgstr "Saving a stage does not save other changes to the program"
+
+msgid "Stage form saved"
+msgstr "Stage form saved"
 
 msgid "A stage with this name already exists. Please choose another name."
 msgstr "A stage with this name already exists. Please choose another name."
@@ -4724,6 +4749,16 @@ msgstr "Program stage form"
 msgid "Configure the form for data collection for events in this program stage."
 msgstr "Configure the form for data collection for events in this program stage."
 
+msgid ""
+"This form displays an auto-generated list of the data elements defined for "
+"this program stage."
+msgstr ""
+"This form displays an auto-generated list of the data elements defined for "
+"this program stage."
+
+msgid "Edit or rearrange the data elements"
+msgstr "Edit or rearrange the data elements"
+
 msgid "Validation strategy"
 msgstr "Validation strategy"
 
@@ -4733,8 +4768,11 @@ msgstr "Stage section"
 msgid "Stage sections"
 msgstr "Stage sections"
 
-msgid "Saving a section does not save other changes to the program stage"
-msgstr "Saving a section does not save other changes to the program stage"
+msgid "Saving a section does not save other changes to the stage or program"
+msgstr "Saving a section does not save other changes to the stage or program"
+
+msgid "Stage section form saved"
+msgstr "Stage section form saved"
 
 msgid "Listing"
 msgstr "Listing"
@@ -4783,6 +4821,9 @@ msgstr "Search selected attributes"
 
 msgid "Saving a section does not save other changes to the program"
 msgstr "Saving a section does not save other changes to the program"
+
+msgid "Enrollment section form saved"
+msgstr "Enrollment section form saved"
 
 msgid "Tracked entity"
 msgstr "Tracked entity"
