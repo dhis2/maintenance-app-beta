@@ -1,3 +1,66 @@
+# [0.118.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.117.1...v0.118.0) (2026-01-28)
+
+
+### Features
+
+* reuse expression builder [DHIS2-20737] ([#735](https://github.com/dhis2/maintenance-app-beta/issues/735)) ([31fa406](https://github.com/dhis2/maintenance-app-beta/commit/31fa406b2fd44d5b12502c6776299e1fcfd470e0))
+
+## [0.117.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.117.0...v0.117.1) (2026-01-28)
+
+
+### Bug Fixes
+
+* program add new stage bug ([69f1294](https://github.com/dhis2/maintenance-app-beta/commit/69f1294c456fb42ede2cee328893f813068edea3))
+
+# [0.117.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.116.0...v0.117.0) (2026-01-28)
+
+
+### Features
+
+* program stage forms ([d3c2ecf](https://github.com/dhis2/maintenance-app-beta/commit/d3c2ecfc4eab82ca59a0eef24cc7349c496956b4))
+
+# [0.116.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.115.0...v0.116.0) (2026-01-28)
+
+
+### Features
+
+* [DHIS2-20537] Program stage data ([#733](https://github.com/dhis2/maintenance-app-beta/issues/733)) ([ff5212b](https://github.com/dhis2/maintenance-app-beta/commit/ff5212b6ffdde64b867b115f4826cd435c7b0a77))
+
+# [0.115.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.114.0...v0.115.0) (2026-01-28)
+
+
+### Features
+
+* adjust program stage list ([8141f52](https://github.com/dhis2/maintenance-app-beta/commit/8141f52206c5113921d7b970bb61705633ea266d))
+
+# [0.114.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.113.2...v0.114.0) (2026-01-27)
+
+
+### Features
+
+* add program rules list ([#738](https://github.com/dhis2/maintenance-app-beta/issues/738)) ([cb3e8ca](https://github.com/dhis2/maintenance-app-beta/commit/cb3e8caecf1fc1f958edcfa29f19a4bb85a3451c))
+
+## [0.113.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.113.1...v0.113.2) (2026-01-27)
+
+
+### Bug Fixes
+
+* remove locales download ([#744](https://github.com/dhis2/maintenance-app-beta/issues/744)) ([017e26e](https://github.com/dhis2/maintenance-app-beta/commit/017e26e00c069d5b31cec93313f138369baaa373))
+
+## [0.113.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.113.0...v0.113.1) (2026-01-27)
+
+
+### Bug Fixes
+
+* keep whitespaces in expression builder validator ([#742](https://github.com/dhis2/maintenance-app-beta/issues/742)) ([063f1e6](https://github.com/dhis2/maintenance-app-beta/commit/063f1e6e0b14c8e3f5a5f7b197d1a7ede3b83a55))
+
+# [0.113.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.112.0...v0.113.0) (2026-01-26)
+
+
+### Features
+
+* improve program stages form design ([#734](https://github.com/dhis2/maintenance-app-beta/issues/734)) ([5e63cbb](https://github.com/dhis2/maintenance-app-beta/commit/5e63cbb403eeef0c68b41651ba75245c45a8d281))
+
 # [0.112.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.111.0...v0.112.0) (2026-01-21)
 
 

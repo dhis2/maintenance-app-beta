@@ -14,9 +14,9 @@ import {
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
+    ExpressionBuilderEntry,
 } from '../../../components'
-import { ExpressionBuilderWithModalField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderWithModalField'
-import { PaddedContainer } from '../../../components/metadataFormControls/ExpressionBuilder/PaddedContainer'
+import { PaddedContainer } from '../../../components/ExpressionBuilder/PaddedContainer'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import {
     getConstantTranslation,
@@ -36,6 +36,7 @@ export const ProgramIndicatorsFormFields = () => {
         format: (v) => v?.toString(),
         parse: (v) => (v !== undefined && v !== '' ? parseInt(v) : v),
     })
+    const { input: programInput } = useField('program')
     useSyncSelectedSectionWithScroll()
     const programFilters = [
         'id,displayName,programType,programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,valueType]]',
@@ -46,6 +47,7 @@ export const ProgramIndicatorsFormFields = () => {
     const { apiVersion } = useConfig()
     const hasPiDisaggregation = apiVersion >= 42
     const schema = useSchema(SECTIONS_MAP.programIndicator.name)
+
     return (
         <SectionedFormSections>
             <SectionedFormSection
@@ -160,11 +162,15 @@ export const ProgramIndicatorsFormFields = () => {
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <PaddedContainer>
-                        <ExpressionBuilderWithModalField
-                            validationResource="programIndicators/expression/description"
+                        <ExpressionBuilderEntry
                             fieldName="expression"
-                            modalTitle={i18n.t('Expression')}
+                            title={i18n.t('Edit expression')}
                             editButtonText={i18n.t('Edit expression')}
+                            setUpButtonText={i18n.t('Set up expression')}
+                            validationResource="programIndicators/expression/description"
+                            clearable={true}
+                            programId={programInput?.value?.id}
+                            type="programIndicator"
                         />
                     </PaddedContainer>
                 </StandardFormField>
@@ -180,11 +186,15 @@ export const ProgramIndicatorsFormFields = () => {
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <PaddedContainer>
-                        <ExpressionBuilderWithModalField
-                            validationResource="programIndicators/filter/description"
+                        <ExpressionBuilderEntry
                             fieldName="filter"
-                            modalTitle={i18n.t('Filter')}
+                            title={i18n.t('Edit filter')}
                             editButtonText={i18n.t('Edit filter')}
+                            setUpButtonText={i18n.t('Set up filter')}
+                            validationResource="programIndicators/filter/description"
+                            clearable={true}
+                            programId={programInput?.value?.id}
+                            type="programIndicator"
                         />
                     </PaddedContainer>
                 </StandardFormField>

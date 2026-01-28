@@ -20,13 +20,14 @@ const enterInputFieldValue = async (
 }
 const enterExpressionInModal = async (
     modal: HTMLElement,
-    anExpression: string
+    anExpression: string,
+    screen: RenderResult
 ) => {
     expect(modal).toBeVisible()
-    const input = within(modal).getByRole('textbox') as HTMLInputElement
+    const input = within(modal).getAllByRole('textbox')[0] as HTMLInputElement
     await userEvent.type(input, anExpression)
     await userEvent.click(
-        within(modal).getByTestId('expression-builder-modal-info')
+        screen.getByTestId('expression-builder-modal-validate-button')
     )
 }
 
@@ -41,7 +42,14 @@ const applyNewExpressionWithinModal = async (
     const editNumeratorModal = await screen.findByTestId(
         `expression-builder-modal`
     )
-    await uiActions.enterExpressionInModal(editNumeratorModal, anExpression)
+    const expressionTextBox = await screen.findByTestId(
+        'expression-entry-textfield'
+    )
+    await uiActions.enterExpressionInModal(
+        expressionTextBox,
+        anExpression,
+        screen
+    )
     await userEvent.click(
         within(editNumeratorModal).getByTestId('apply-expression-button')
     )

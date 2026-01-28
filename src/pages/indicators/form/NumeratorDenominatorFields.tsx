@@ -2,34 +2,18 @@ import i18n from '@dhis2/d2-i18n'
 import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
-import {
-    StandardFormField,
-    ExpressionBuilderEntry,
-    MissingValueStrategyField,
-} from '../../../components'
+import { StandardFormField, ExpressionBuilderEntry } from '../../../components'
 import { PaddedContainer } from '../../../components/ExpressionBuilder/PaddedContainer'
-import { SchemaName, SchemaSection } from '../../../lib'
-import css from './PredictorFormFields.module.css'
+import css from './NumeratorDenominatorFields.module.css'
 
-const expressionSchemaSection = {
-    name: 'expression' as SchemaName,
-    namePlural: 'expressions',
-} as SchemaSection
-
-export const ExpressionFields = ({
+export const NumeratorDenominatorFields = ({
     fieldName,
     objectName,
     validationResource,
-    showMissingValueStrategy,
-    clearable = false,
-    required = true,
 }: {
     fieldName: string
     objectName: string
     validationResource: string
-    showMissingValueStrategy: boolean
-    clearable?: boolean
-    required?: boolean
 }) => {
     return (
         <div className={css.expressionContainer}>
@@ -42,7 +26,7 @@ export const ExpressionFields = ({
                 </div>
                 <StandardFormField>
                     <ExpressionBuilderEntry
-                        fieldName={`${fieldName}.expression`}
+                        fieldName={fieldName}
                         title={i18n.t('Edit {{objectName}} expression', {
                             objectName,
                         })}
@@ -55,31 +39,22 @@ export const ExpressionFields = ({
                             { objectName }
                         )}
                         validationResource={validationResource}
-                        validateSchemaSection={expressionSchemaSection}
-                        validateProperty="expression"
-                        clearable={clearable}
-                        type="predictor"
+                        type="indicator"
                     />
                 </StandardFormField>
                 <StandardFormField>
                     <FieldRFF<string | undefined>
                         component={InputFieldFF}
                         inputWidth="400px"
-                        name={`${fieldName}.description`}
-                        dataTest={`formfields-denominatorDescription`}
+                        name={`${fieldName}Description`}
+                        dataTest={`formfields-${fieldName}Description`}
                         label={i18n.t('Description')}
                         helpText={i18n.t(
                             'Summarize what this {{objectName}} measures.',
                             { objectName }
                         )}
-                        required={required}
                     />
                 </StandardFormField>
-                {showMissingValueStrategy && (
-                    <StandardFormField>
-                        <MissingValueStrategyField fieldName="generator" />
-                    </StandardFormField>
-                )}
             </PaddedContainer>
         </div>
     )

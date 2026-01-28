@@ -1,3 +1,4 @@
+import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
@@ -106,6 +107,12 @@ export const EditEnrollmentSectionForm = ({
         section.id,
         enrollmentSectionSchemaSection.namePlural
     )
+    const { show: showSuccess } = useAlert(
+        i18n.t('Enrollment section form saved'),
+        {
+            success: true,
+        }
+    )
 
     const onFormSubmit: OnFormSubmit = async (values, form) => {
         const jsonPatchOperations = createJsonPatchOperations({
@@ -117,6 +124,8 @@ export const EditEnrollmentSectionForm = ({
         if (response.error) {
             return createFormError(response.error)
         }
+        showSuccess({ success: true })
+
         const updatedName = jsonPatchOperations.find(
             (op) => op.path === '/name' && op.op === 'replace'
         )?.value as string | undefined
@@ -170,12 +179,21 @@ export const NewEnrollmentSectionForm = ({
     const handleCreate = useCreateModel(
         enrollmentSectionSchemaSection.namePlural
     )
+    const { show: showSuccess } = useAlert(
+        i18n.t('Enrollment section form saved'),
+        {
+            success: true,
+        }
+    )
 
     const onFormSubmit: OnFormSubmit = async (values) => {
         const res = await handleCreate(values)
         if (res.error) {
             return createFormError(res.error)
         }
+
+        showSuccess({ success: true })
+
         const newId = (res.data as { response: { uid: string } }).response.uid
 
         onSubmitted?.({

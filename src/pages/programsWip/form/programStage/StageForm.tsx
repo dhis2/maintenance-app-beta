@@ -1,7 +1,8 @@
+import { useAlert, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip } from '@dhis2/ui'
 import { IconInfo16 } from '@dhis2/ui-icons'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import isEqual from 'lodash/isEqual'
 import React, { useMemo } from 'react'
@@ -14,7 +15,9 @@ import {
     SectionedFormLayout,
 } from '../../../../components'
 import { DrawerSectionedFormSidebar } from '../../../../components/drawer/DrawerSectionedFormSidebar'
+import { Section } from '../../../../components/formCreators/SectionFormList'
 import { LoadingSpinner } from '../../../../components/loading/LoadingSpinner'
+import { useHandleOnSubmitEditFormDeletions } from '../../../../components/sectionedForm/useHandleOnSubmitEditFormDeletions'
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     createFormError,
@@ -24,6 +27,7 @@ import {
     SchemaName,
     SchemaSection,
     SectionedFormProvider,
+    SECTIONS_MAP,
     useBoundResourceQueryFn,
     useCreateModel,
     useCustomAttributesQuery,
@@ -54,6 +58,8 @@ export const fieldFilters = [
     'programStageLabel',
     'eventLabel',
     'programStageSections[id,displayName]',
+    'programStageDataElements[id,dataElement[id,displayName,valueType],compulsory,displayInReports,allowFutureDate,skipAnalytics,skipSynchronization,renderType,sortOrder]',
+    'dataEntryForm[id,displayName,htmlCode]',
 ] as const
 
 export const stageSchemaSection = {
@@ -64,11 +70,21 @@ export const stageSchemaSection = {
     parentSectionKey: 'programsAndTracker',
 } satisfies SchemaSection
 
-export type StageFormValues = PickWithFieldFilters<
+export type StageFormValuesFromFilters = PickWithFieldFilters<
     ProgramStage,
     typeof fieldFilters
 > & {
     program: { id: string }
+}
+
+export type StageFormValues = Omit<
+    StageFormValuesFromFilters,
+    'programStageSections' | 'dataEntryForm'
+> & {
+    programStageSections: Section[]
+    dataEntryForm: StageFormValuesFromFilters['dataEntryForm'] & {
+        deleted?: boolean
+    }
 }
 
 type PartialStageFormValues = Partial<StageFormValues>
@@ -131,17 +147,21 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
                         <SectionedFormLayout
                             sidebar={
                                 <DrawerSectionedFormSidebar
-                                    onCancel={onCancel}
                                     selectedSection={selectedSection}
                                 />
                             }
                         >
                             <form onSubmit={handleSubmit}>
                                 <div className={styles.sectionsWrapper}>
-                                    <StageFormContents
-                                        isSubsection
-                                        setSelectedSection={setSelectedSection}
-                                    />
+                                    <div>
+                                        <StageFormContents
+                                            isSubsection
+                                            setSelectedSection={
+                                                setSelectedSection
+                                            }
+                                        />
+                                        <SectionedFormErrorNotice />
+                                    </div>
                                     <FormFooterWrapper>
                                         <ButtonStrip>
                                             <Button
@@ -153,10 +173,10 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
                                                     form.submit()
                                                 }}
                                             >
-                                                {i18n.t('Save and close')}
+                                                {i18n.t('Save stage and close')}
                                             </Button>
                                             <Button
-                                                primary
+                                                secondary
                                                 small
                                                 type="button"
                                                 onClick={() => {
@@ -164,7 +184,7 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
                                                     form.submit()
                                                 }}
                                             >
-                                                {i18n.t('Save ')}
+                                                {i18n.t('Save stage')}
                                             </Button>
                                             <Button
                                                 secondary
@@ -209,6 +229,11 @@ export const EditStageForm = ({
     const handlePatch = usePatchModel(stage.id, stageSchemaSection.namePlural)
 
     const queryFn = useBoundResourceQueryFn()
+    const dataEngine = useDataEngine()
+    const queryClient = useQueryClient()
+    const { show: showSuccess } = useAlert(i18n.t('Stage form saved'), {
+        success: true,
+    })
 
     const stageValues = useQuery({
         queryFn: queryFn<StageFormValues>,
@@ -223,20 +248,63 @@ export const EditStageForm = ({
         ],
     })
 
+    const handleDeletions = useHandleOnSubmitEditFormDeletions(
+        SECTIONS_MAP.programStage,
+        'programStageSections',
+        dataEngine,
+        queryClient
+    )
+
     const onFormSubmit: OnSubmitWithClose = async (
         values,
         form,
         c,
         closeOnSubmit?: boolean
     ) => {
+        const formValues = form.getState().values
+        const sections = formValues.programStageSections ?? []
+        const dataEntryForm = formValues.dataEntryForm
+
+        const { customFormDeleteResult, error } = await handleDeletions(
+            sections,
+            dataEntryForm
+        )
+
+        if (error) {
+            return error
+        }
+        const nonDeletedProgramStageSections = sections.filter(
+            (section) => !section.deleted
+        )
+        const trimmedValues = {
+            ...values,
+            programStageSections: nonDeletedProgramStageSections,
+            dataEntryForm:
+                customFormDeleteResult &&
+                customFormDeleteResult?.[0]?.status !== 'rejected'
+                    ? null
+                    : values.dataEntryForm,
+        } as Partial<StageFormValues>
+
         const jsonPatchOperations = createJsonPatchOperations({
-            values,
+            values: trimmedValues,
             dirtyFields: form.getState().dirtyFields,
             originalValue: form.getState().initialValues,
         })
         const response = await handlePatch(jsonPatchOperations)
         if (response.error) {
             return createFormError(response.error)
+        }
+
+        showSuccess({ success: true })
+        if (
+            nonDeletedProgramStageSections.length !==
+            formValues.programStageSections?.length
+        ) {
+            form.change('programStageSections', nonDeletedProgramStageSections)
+        }
+        if (formValues.dataEntryForm?.deleted) {
+            form.change('dataEntryForm', undefined)
         }
 
         const updatedName = jsonPatchOperations.find(
@@ -247,7 +315,7 @@ export const EditStageForm = ({
 
         onSubmitted?.(
             {
-                ...values,
+                ...trimmedValues,
                 id: stage.id,
                 displayName: resolvedDisplayName,
             },

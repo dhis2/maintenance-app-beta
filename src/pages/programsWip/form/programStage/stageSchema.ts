@@ -7,6 +7,7 @@ const {
     withAttributeValues,
     style,
     withDefaultListColumns,
+    referenceCollection,
 } = modelFormSchemas
 
 export const stageSchema = identifiable.merge(withAttributeValues).extend({
@@ -23,6 +24,7 @@ export const stageSchema = identifiable.merge(withAttributeValues).extend({
     programStageLabel: z.string().optional(),
     eventLabel: z.string().optional(),
     program: modelReference,
+    programStageDataElements: referenceCollection.default([]),
 })
 
 export const stageListSchema = stageSchema.merge(withDefaultListColumns)
