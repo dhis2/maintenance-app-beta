@@ -1,3 +1,10 @@
+# [0.117.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.116.0...v0.117.0) (2026-01-28)
+
+
+### Features
+
+* program stage forms ([d3c2ecf](https://github.com/dhis2/maintenance-app-beta/commit/d3c2ecfc4eab82ca59a0eef24cc7349c496956b4))
+
 # [0.116.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.115.0...v0.116.0) (2026-01-28)
 
 
