@@ -60,7 +60,7 @@ export const StageFormContents = ({
     useEffect(() => {
         if (values.dataEntryForm) {
             setSelectedFormType(FormType.CUSTOM)
-        } else if (values.programStageSections.length > 0) {
+        } else if (values.programStageSections?.length > 0) {
             setSelectedFormType(FormType.SECTION)
         }
     }, [values.dataEntryForm, values.programStageSections])

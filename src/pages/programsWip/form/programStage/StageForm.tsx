@@ -1,4 +1,4 @@
-import { useDataEngine } from '@dhis2/app-runtime'
+import { useAlert, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip } from '@dhis2/ui'
 import { IconInfo16 } from '@dhis2/ui-icons'
@@ -231,6 +231,9 @@ export const EditStageForm = ({
     const queryFn = useBoundResourceQueryFn()
     const dataEngine = useDataEngine()
     const queryClient = useQueryClient()
+    const { show: showSuccess } = useAlert(i18n.t('Stage form saved'), {
+        success: true,
+    })
 
     const stageValues = useQuery({
         queryFn: queryFn<StageFormValues>,
@@ -293,6 +296,7 @@ export const EditStageForm = ({
             return createFormError(response.error)
         }
 
+        showSuccess({ success: true })
         if (
             nonDeletedProgramStageSections.length !==
             formValues.programStageSections?.length
