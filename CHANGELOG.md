@@ -1,3 +1,10 @@
+# [0.118.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.117.1...v0.118.0) (2026-01-28)
+
+
+### Features
+
+* reuse expression builder [DHIS2-20737] ([#735](https://github.com/dhis2/maintenance-app-beta/issues/735)) ([31fa406](https://github.com/dhis2/maintenance-app-beta/commit/31fa406b2fd44d5b12502c6776299e1fcfd470e0))
+
 ## [0.117.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.117.0...v0.117.1) (2026-01-28)
 
 
