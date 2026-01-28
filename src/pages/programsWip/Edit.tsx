@@ -1,4 +1,5 @@
 import { useDataEngine } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import { omit } from 'lodash'
@@ -15,6 +16,7 @@ import {
 import { Section } from '../../components/formCreators/SectionFormList'
 import { useHandleOnSubmitEditFormDeletions } from '../../components/sectionedForm/useHandleOnSubmitEditFormDeletions'
 import {
+    createFormError,
     DEFAULT_FIELD_FILTERS,
     SectionedFormProvider,
     SECTIONS_MAP,
@@ -26,6 +28,7 @@ import { PickWithFieldFilters, Program } from '../../types/generated'
 import { validate } from './form'
 import { ProgramFormDescriptor } from './form/formDescriptor'
 import { ProgramFormContents } from './form/ProgramFormContents'
+import { ProgramStageListItem } from './form/ProgramStagesFormContents'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -72,6 +75,8 @@ export type ProgramsFromFilters = PickWithFieldFilters<
 
 export type ProgramValues = Omit<ProgramsFromFilters, 'sections'> & {
     sections: Section[]
+    programStages: ProgramStageListItem[]
+    dataEntryForm: DataEntryForm | null
 }
 
 type DataEntryForm = {
@@ -96,7 +101,7 @@ export const useOnSubmitProgramEdit = (modelId: string) => {
     const dataEngine = useDataEngine()
     const queryClient = useQueryClient()
 
-    const handleDeletions = useHandleOnSubmitEditFormDeletions(
+    const handleFormDeletions = useHandleOnSubmitEditFormDeletions(
         section,
         'programSections',
         dataEngine,
@@ -108,8 +113,44 @@ export const useOnSubmitProgramEdit = (modelId: string) => {
             const formValues = form.getState().values
             const sections: Array<Section> = formValues.programSections
             const dataEntryForm: DataEntryForm = formValues.dataEntryForm
+            const stages: ProgramStageListItem[] = formValues.programStages
 
-            const { customFormDeleteResult, error } = await handleDeletions(
+            const stagesToDelete = stages.filter((stage) => stage.deleted)
+            const stagesDeletionResults = await Promise.allSettled(
+                stagesToDelete.map((s) =>
+                    dataEngine.mutate({
+                        resource: 'programStages',
+                        id: s.id,
+                        type: 'delete',
+                    })
+                )
+            )
+
+            const stagesDeletionFailures = stagesDeletionResults
+                .map((deletion, i) => ({
+                    ...deletion,
+                    stageName: stagesToDelete[i].displayName,
+                }))
+                .filter((deletion) => deletion.status === 'rejected')
+
+            if (stagesDeletionFailures.length > 0) {
+                await queryClient.invalidateQueries({
+                    queryKey: [{ resource: 'programStages' }],
+                })
+                return createFormError({
+                    message: i18n.t(
+                        'There was an error deleting stages: {{stagesNames}}',
+                        {
+                            stagesNames: stagesDeletionFailures
+                                .map((f) => f.stageName)
+                                .join(', '),
+                            nsSeparator: '~-~',
+                        }
+                    ),
+                })
+            }
+
+            const { customFormDeleteResult, error } = await handleFormDeletions(
                 sections,
                 dataEntryForm
             )
@@ -120,6 +161,7 @@ export const useOnSubmitProgramEdit = (modelId: string) => {
             const trimmedValues = {
                 ...values,
                 programSections: sections.filter((section) => !section.deleted),
+                programStages: stages.filter((stage) => !stage.deleted),
                 dataEntryForm:
                     customFormDeleteResult &&
                     customFormDeleteResult?.[0]?.status !== 'rejected'
@@ -129,7 +171,7 @@ export const useOnSubmitProgramEdit = (modelId: string) => {
 
             return submitEdit(trimmedValues, form, options)
         },
-        [submitEdit, handleDeletions]
+        [submitEdit, handleFormDeletions, dataEngine, queryClient]
     )
 }
 
