@@ -339,7 +339,7 @@ const ProgramsList = ({
     )
 }
 
-export const validationRuleElementTypes: ElementType[] = [
+export const defaultElementTypes: ElementType[] = [
     {
         type: 'operator',
         name: i18n.t('Operators'),
