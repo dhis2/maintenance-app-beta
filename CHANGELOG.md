@@ -1,3 +1,10 @@
+## [0.117.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.117.0...v0.117.1) (2026-01-28)
+
+
+### Bug Fixes
+
+* program add new stage bug ([69f1294](https://github.com/dhis2/maintenance-app-beta/commit/69f1294c456fb42ede2cee328893f813068edea3))
+
 # [0.117.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.116.0...v0.117.0) (2026-01-28)
 
 
