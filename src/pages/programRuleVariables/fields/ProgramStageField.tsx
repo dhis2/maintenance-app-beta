@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import { ModelSingleSelectField } from '../../../components/metadataFormControls/ModelSingleSelect'
+import { required } from '../../../lib'
 
 export function ProgramStageField({
     onChange,
@@ -16,6 +17,7 @@ export function ProgramStageField({
     return (
         <FieldRFF
             name="programStage"
+            validate={required}
             render={({ input, meta }) => (
                 <ModelSingleSelectField
                     input={input}
@@ -23,6 +25,7 @@ export function ProgramStageField({
                     inputWidth="400px"
                     dataTest="programStage-field"
                     label={i18n.t('Program stage')}
+                    required
                     query={{
                         resource: 'programStages',
                         params: {
@@ -31,7 +34,6 @@ export function ProgramStageField({
                             paging: false,
                         },
                     }}
-                    showNoValueOption
                     onChange={onChange}
                 />
             )}

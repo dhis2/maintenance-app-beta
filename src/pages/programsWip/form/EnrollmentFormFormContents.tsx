@@ -1,14 +1,22 @@
+import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useField, UseFieldConfig } from 'react-final-form'
-import { createSearchParams, Link, useSearchParams } from 'react-router-dom'
+import {
+    createSearchParams,
+    Link,
+    useParams,
+    useSearchParams,
+} from 'react-router-dom'
 import {
     SectionedFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
+import { CustomFormDataPayload } from '../../../components/customForm/CustomFormEdit'
 import { CustomFormEditEntry } from '../../../components/customForm/CustomFormEditEntry'
+import { useProgramsCustomFormElements } from '../../../components/customForm/useGetCustomFormElements'
 import { SectionFormSectionsList } from '../../../components/formCreators/SectionFormList'
 import {
     FormType,
@@ -55,6 +63,100 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
             setSelectedFormType(FormType.SECTION)
         }
     }, [dataEntryForm, sections])
+    const dataEngine = useDataEngine()
+
+    const modelId = useParams().id
+    const { loading, elementTypes, refetch } = useProgramsCustomFormElements()
+    const createProgramCustomForm = useCallback(
+        async (
+            data: CustomFormDataPayload,
+            onSuccess: (data: CustomFormDataPayload) => void,
+            onError: (e: Error) => void
+        ) => {
+            try {
+                const response = await dataEngine.mutate(
+                    {
+                        resource: `dataEntryForms`,
+                        type: 'create',
+                        data: data,
+                    },
+                    {
+                        onError,
+                    }
+                )
+                await dataEngine.mutate(
+                    {
+                        resource: `programs`,
+                        id: modelId as string,
+                        type: 'json-patch',
+                        data: [
+                            {
+                                op: 'replace',
+                                path: '/dataEntryForm',
+                                value: { id: data.id },
+                            },
+                        ],
+                    },
+                    {
+                        onComplete: () => {
+                            // use the data we passed if form was saved and associated to program
+                            onSuccess(data)
+                        },
+                    }
+                )
+                return { data: response }
+            } catch (error) {
+                console.error(error)
+            }
+        },
+        [dataEngine, modelId]
+    )
+
+    const updateProgramCustomForm = useCallback(
+        async (
+            data: CustomFormDataPayload,
+            onSuccess: (data: CustomFormDataPayload) => void,
+            onError: (e: Error) => void
+        ) => {
+            try {
+                const response = await dataEngine.mutate(
+                    {
+                        resource: `dataEntryForms`,
+                        id: data.id,
+                        type: 'json-patch',
+                        data: [
+                            {
+                                op: 'replace',
+                                path: '/htmlCode',
+                                value: data.htmlCode,
+                            },
+                        ],
+                    },
+                    {
+                        onComplete: () => {
+                            // the response from this post is empty, so we use the data we passed if it was successful
+                            onSuccess(data)
+                        },
+                        onError,
+                    }
+                )
+                return { data: response }
+            } catch (error) {
+                console.error(error)
+            }
+        },
+        [dataEngine]
+    )
+
+    const updateOrCreateCustomForm = (
+        data: CustomFormDataPayload,
+        onSuccess: (data: CustomFormDataPayload) => void,
+        onError: (e: Error) => void,
+        existingFormId: string | undefined
+    ) =>
+        existingFormId
+            ? updateProgramCustomForm(data, onSuccess, onError)
+            : createProgramCustomForm(data, onSuccess, onError)
 
     return (
         <SectionedFormSection name={name}>
@@ -72,6 +174,7 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                 hasDataToDisplay={trackedEntityAttributes.length > 0}
                 onFormTypeChange={setSelectedFormType}
                 selectedFormType={selectedFormType}
+                modelId={modelId}
             >
                 {selectedFormType === FormType.DEFAULT && (
                     <div className={styles.basicFormDetails}>
@@ -103,11 +206,19 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                         sectionsFieldName={'programSections'}
                         SectionFormComponent={EditOrNewEnrollmentSectionForm}
                         schemaName={SchemaName.programSection}
+                        level={'primary'}
                         otherProps={{ sectionsLength: sections.length }}
                     />
                 )}
                 {selectedFormType === FormType.CUSTOM && (
-                    <CustomFormEditEntry />
+                    <CustomFormEditEntry
+                        level={'primary'}
+                        loading={loading}
+                        refetch={refetch}
+                        elementTypes={elementTypes}
+                        updateCustomForm={updateOrCreateCustomForm}
+                        customFormTarget="program enrollment"
+                    />
                 )}
             </TabbedFormTypePicker>
         </SectionedFormSection>

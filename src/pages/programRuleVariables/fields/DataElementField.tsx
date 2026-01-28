@@ -1,9 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectFieldFF } from '@dhis2/ui'
+import { Box, Field } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
-import React, { useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
-import { useBoundResourceQueryFn } from '../../../lib'
+import { Option, SearchableSingleSelect } from '../../../components'
+import { required, useBoundResourceQueryFn } from '../../../lib'
 import { ProgramRuleVariable } from '../../../types/generated'
 
 type Program = {
@@ -22,12 +23,12 @@ export function DataElementField() {
     const { input: programInput } = useField('program')
     const { input: sourceTypeInput } = useField('programRuleVariableSourceType')
     const { input: programStageInput } = useField('programStage')
-    const { input: dataElementInput } = useField('dataElement')
     const queryFn = useBoundResourceQueryFn()
 
     const program = programInput.value
     const sourceType = sourceTypeInput.value
     const programStage = programStageInput.value
+    const { input: dataElementInput } = useField('dataElement')
     const currentDataElement = dataElementInput.value
 
     const programQuery = useMemo(
@@ -78,11 +79,11 @@ export function DataElementField() {
         )
     }, [programData, sourceType, programStage?.id])
 
-    const options = useMemo(() => {
-        const optionMap = new Map(dataElementOptions.map((de) => [de.id, de]))
+    const availableDataElements = useMemo(() => {
+        const elementMap = new Map(dataElementOptions.map((de) => [de.id, de]))
 
-        if (currentDataElement?.id && !optionMap.has(currentDataElement.id)) {
-            optionMap.set(currentDataElement.id, {
+        if (currentDataElement?.id && !elementMap.has(currentDataElement.id)) {
+            elementMap.set(currentDataElement.id, {
                 id: currentDataElement.id,
                 displayName:
                     currentDataElement.displayName || currentDataElement.id,
@@ -91,12 +92,38 @@ export function DataElementField() {
 
         return [
             { label: i18n.t('<No value>'), value: '' },
-            ...Array.from(optionMap.values()).map((de) => ({
+            ...Array.from(elementMap.values()).map((de) => ({
                 value: de.id,
                 label: de.displayName,
             })),
         ]
     }, [dataElementOptions, currentDataElement])
+
+    const options = useMemo<Option[]>(
+        () =>
+            availableDataElements.map((de) => ({
+                value: de.value,
+                label: de.label,
+            })),
+        [availableDataElements]
+    )
+
+    const [filteredOptions, setFilteredOptions] = useState<Option[]>(options)
+
+    useEffect(() => {
+        setFilteredOptions(options)
+    }, [options])
+
+    const handleFilterChange = useCallback(
+        ({ value }: { value: string }) => {
+            setFilteredOptions(
+                options.filter((o) =>
+                    o.label.toLowerCase().includes(value.toLowerCase())
+                )
+            )
+        },
+        [options]
+    )
 
     if (!program?.id) {
         return null
@@ -105,20 +132,37 @@ export function DataElementField() {
     return (
         <FieldRFF
             name="dataElement"
-            format={(value) => (value?.id ? value.id : '')}
-            parse={(value) =>
-                value && value !== '' ? { id: value } : undefined
-            }
+            validate={required}
             render={({ input, meta }) => (
-                <SingleSelectFieldFF
-                    input={input}
-                    meta={meta}
-                    inputWidth="400px"
+                <Field
                     dataTest="dataElement-field"
+                    error={meta.invalid}
+                    validationText={
+                        (meta.touched && meta.error?.toString()) || ''
+                    }
+                    name={input.name}
                     label={i18n.t('Data element')}
-                    options={options}
-                    loading={!programData}
-                />
+                    required
+                >
+                    <Box width="400px" minWidth="100px">
+                        <SearchableSingleSelect
+                            options={filteredOptions}
+                            selected={input.value?.id}
+                            onChange={({ selected }) => {
+                                const chosen = availableDataElements.find(
+                                    (de) => de.value === selected
+                                )
+                                input.onChange(chosen)
+                                input.onBlur()
+                            }}
+                            onFilterChange={handleFilterChange}
+                            invalid={meta.touched && !!meta.error}
+                            loading={!programData}
+                            onRetryClick={() => {}}
+                            showEndLoader={false}
+                        />
+                    </Box>
+                </Field>
             )}
         />
     )

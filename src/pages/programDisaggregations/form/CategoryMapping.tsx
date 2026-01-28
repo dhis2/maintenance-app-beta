@@ -4,7 +4,6 @@ import {
     ButtonStrip,
     IconDelete16,
     IconEdit16,
-    InputFieldFF,
     Modal,
     ModalTitle,
     ModalContent,
@@ -13,8 +12,10 @@ import {
 } from '@dhis2/ui'
 import React, { useCallback, useState, ReactNode } from 'react'
 import { useField } from 'react-final-form'
+import { useParams } from 'react-router'
+import { ExpressionBuilderEntry } from '../../../components'
+import { SchemaSection, SchemaName } from '../../../types'
 import css from './CategoryMapping.module.css'
-import { useValidateExpressionField } from './useFormHooks'
 
 type CategoryOption = {
     id: string
@@ -197,32 +198,27 @@ const CategoryMappingInput = ({
     opt: CategoryOption
     categoryOptionInformation: Record<string, string>
 }) => {
-    const { handleValidateExpression } = useValidateExpressionField()
-    const validation = useField(`${fieldName}.options.${opt.id}.invalid`)
-    const { input, meta } = useField(
-        `${fieldName}.options.${opt.id}.filter`,
-        {}
-    )
+    const programId = useParams()?.id
+    const expressionSchemaSection = {
+        name: 'expression' as SchemaName,
+        namePlural: 'expressions',
+    } as SchemaSection
     return (
-        <div
-            key={`${fieldName}.options.${opt.id}.filter_div`}
-            className={css.filterInputContainer}
-        >
-            <InputFieldFF
-                label={`${categoryOptionInformation?.[opt.id]}`}
-                input={{
-                    ...input,
-                    onChange: async (value: string) => {
-                        input.onChange(value)
-                        const invalid = await handleValidateExpression(value)
-                        validation.input.onChange(invalid)
-                    },
-                }}
-                meta={meta}
-                validationText={
-                    validation.input.value && i18n.t('Invalid expression')
-                }
-                warning={!!validation.input.value}
+        <div>
+            <p className={css.categorySubtitle}>{`${
+                categoryOptionInformation?.[opt.id]
+            }`}</p>
+            <ExpressionBuilderEntry
+                fieldName={`${fieldName}.options.${opt.id}.filter`}
+                title={i18n.t('Edit filter')}
+                editButtonText={i18n.t('Edit filter')}
+                setUpButtonText={i18n.t('Set up filter')}
+                validationResource="programIndicators/filter/description"
+                clearable={true}
+                programId={programId}
+                type="programIndicator"
+                validateSchemaSection={expressionSchemaSection}
+                validateProperty="expression"
             />
         </div>
     )

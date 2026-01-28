@@ -290,3 +290,20 @@ textarea::placeholder {
 .descriptionField {
     margin-top: 1rem;
 }
+
+.programNotSelectedWarning {
+    margin: var(--spacers-dp8);
+}
+
+.paddedContainerContainer {
+    min-width: fit-content;
+    max-width: 70%;
+    padding: 1rem;
+    border: 1px solid var(--colors-grey400);
+    border-radius: 4px;
+    border-left: 5px solid var(--colors-grey400);
+}
+
+.validExpressionDescription {
+    white-space: 'pre-line';
+}

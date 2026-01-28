@@ -12,7 +12,7 @@ const { identifiable, withDefaultListColumns, modelReference } =
 
 const sharingSettingsSchema = z.object({
     owner: z.string().optional(),
-    external: z.boolean(),
+    external: z.boolean().optional(),
     public: z.string().optional(),
     userGroups: z
         .record(

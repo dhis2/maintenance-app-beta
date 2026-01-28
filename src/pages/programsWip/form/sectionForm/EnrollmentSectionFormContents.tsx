@@ -13,6 +13,7 @@ import {
     DescriptionField,
     FormFooterWrapper,
     NameField,
+    SectionedFormErrorNotice,
     SectionedFormSection,
     SectionedFormSections,
     StandardFormField,
@@ -20,7 +21,6 @@ import {
     StandardFormSectionTitle,
     TransferHeader,
 } from '../../../../components'
-import { DefaultFormErrorNotice } from '../../../../components/form/DefaultFormErrorNotice'
 import { BaseModelTransfer } from '../../../../components/metadataFormControls/ModelTransfer/BaseModelTransfer'
 import { useBoundResourceQueryFn } from '../../../../lib'
 import { DisplayableModel } from '../../../../types/models'
@@ -215,9 +215,7 @@ export const EnrollmentSectionFormContents = ({
                         </StandardFormField>
                     </SectionedFormSection>
                 </SectionedFormSections>
-                <div className={styles.errorNoticeWrapper}>
-                    <DefaultFormErrorNotice />
-                </div>
+                <SectionedFormErrorNotice />
             </div>
             <div>
                 <FormFooterWrapper>

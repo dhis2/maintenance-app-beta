@@ -1,12 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip, TextAreaFieldFF } from '@dhis2/ui'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
-import { SchemaSection, useSchemaSectionHandleOrThrow } from '../../lib'
+import { SchemaSection, useSectionHandle } from '../../lib'
 import { useValidator } from '../../lib/models/useFieldValidators'
 import { ExpressionBuilder } from './ExpressionBuilder'
 import styles from './ExpressionBuilder.module.css'
+import { ExpressionBuilderType } from './types'
 import { useExpressionValidator } from './useExpressionValidator'
 
 type ExpressionBuilderEntryProps = Readonly<{
@@ -17,9 +18,11 @@ type ExpressionBuilderEntryProps = Readonly<{
     validationResource: string
     descriptionFieldName?: string
     helpText?: string
-    validateSchemaSection: SchemaSection
+    validateSchemaSection?: SchemaSection
     validateProperty?: string
     clearable?: boolean
+    programId?: string
+    type?: ExpressionBuilderType
 }>
 
 export const ExpressionBuilderEntry = ({
@@ -31,6 +34,8 @@ export const ExpressionBuilderEntry = ({
     validateSchemaSection,
     validateProperty,
     clearable = false,
+    programId,
+    type = 'default',
 }: ExpressionBuilderEntryProps) => {
     const [showExpressionBuilder, setShowExpressionBuilder] = useState(false)
 
@@ -40,7 +45,7 @@ export const ExpressionBuilderEntry = ({
         string | undefined
     >(undefined)
     const descriptionToShow = expressionDescription
-    const schema = useSchemaSectionHandleOrThrow()
+    const schema = useSectionHandle() as SchemaSection
 
     const schemaValidate = useValidator({
         schemaSection: validateSchemaSection ?? schema,
@@ -52,6 +57,12 @@ export const ExpressionBuilderEntry = ({
     const { input, meta } = useField<string>(fieldName, {
         validate: schemaValidate,
     })
+
+    const clearExpression = useCallback(() => {
+        input.onChange('')
+        setExpressionDescription(undefined)
+        input?.onBlur()
+    }, [setExpressionDescription, input])
 
     useEffect(() => {
         const performInitialValidation = async () => {
@@ -104,14 +115,7 @@ export const ExpressionBuilderEntry = ({
                             : setUpButtonText}
                     </Button>
                     {clearable && descriptionToShow && (
-                        <Button
-                            small
-                            secondary
-                            onClick={() => {
-                                input.onChange('')
-                                setExpressionDescription(undefined)
-                            }}
-                        >
+                        <Button small secondary onClick={clearExpression}>
                             {i18n.t('Clear expression')}
                         </Button>
                     )}
@@ -125,6 +129,10 @@ export const ExpressionBuilderEntry = ({
                     initialValue={input.value}
                     fieldName={fieldName}
                     validationResource={validationResource}
+                    programId={programId}
+                    type={type}
+                    clearable={clearable}
+                    clearExpression={clearExpression}
                 />
             )}
         </div>

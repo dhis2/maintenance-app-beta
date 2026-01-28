@@ -37,11 +37,13 @@ type SectionFormComponent<
 export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
     sectionsFieldName,
     schemaName,
+    level,
     SectionFormComponent,
     otherProps,
 }: Readonly<{
     sectionsFieldName: string
     schemaName: SchemaName
+    level: 'primary' | 'secondary'
     SectionFormComponent: SectionFormComponent<TValues, TExtraProps>
     otherProps?: TExtraProps
 }>) {
@@ -87,6 +89,7 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
         <div className={css.sectionsList}>
             <DrawerPortal
                 isOpen={isSectionFormOpen}
+                level={level}
                 onClose={() => setSectionFormOpen(undefined)}
             >
                 {sectionFormOpen !== undefined && (
