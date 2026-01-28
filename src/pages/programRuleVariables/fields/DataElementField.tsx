@@ -90,20 +90,14 @@ export function DataElementField() {
             })
         }
 
-        return [
-            { label: i18n.t('<No value>'), value: '' },
-            ...Array.from(elementMap.values()).map((de) => ({
-                value: de.id,
-                label: de.displayName,
-            })),
-        ]
+        return Array.from(elementMap.values())
     }, [dataElementOptions, currentDataElement])
 
     const options = useMemo<Option[]>(
         () =>
             availableDataElements.map((de) => ({
-                value: de.value,
-                label: de.label,
+                value: de.id,
+                label: de.displayName || de.id,
             })),
         [availableDataElements]
     )
@@ -150,7 +144,7 @@ export function DataElementField() {
                             selected={input.value?.id}
                             onChange={({ selected }) => {
                                 const chosen = availableDataElements.find(
-                                    (de) => de.value === selected
+                                    (de) => de.id === selected
                                 )
                                 input.onChange(chosen)
                                 input.onBlur()

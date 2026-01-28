@@ -341,7 +341,7 @@ export const StageFormContents = ({
                 name={descriptor.getSection('stageCreationAndScheduling').name}
             >
                 <StandardFormSectionTitle>
-                    {i18n.t('Event Repetition')}
+                    {i18n.t('Event repetition')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(

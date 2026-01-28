@@ -70,20 +70,14 @@ export function TrackedEntityAttributeField() {
             })
         }
 
-        return [
-            { label: i18n.t('<No value>'), value: '' },
-            ...Array.from(attributeMap.values()).map((tea) => ({
-                value: tea.id,
-                label: tea.displayName,
-            })),
-        ]
+        return Array.from(attributeMap.values())
     }, [trackedEntityAttributes, currentTrackedEntityAttribute])
 
     const options = useMemo(
         () =>
             availableTrackedEntityAttributes.map((tea) => ({
-                value: tea.value,
-                label: tea.label,
+                value: tea.id,
+                label: tea.displayName || tea.id,
             })),
         [availableTrackedEntityAttributes]
     )
@@ -91,7 +85,7 @@ export function TrackedEntityAttributeField() {
     const attributeById = useMemo(
         () =>
             new Map(
-                availableTrackedEntityAttributes.map((tea) => [tea.value, tea])
+                availableTrackedEntityAttributes.map((tea) => [tea.id, tea])
             ),
         [availableTrackedEntityAttributes]
     )
