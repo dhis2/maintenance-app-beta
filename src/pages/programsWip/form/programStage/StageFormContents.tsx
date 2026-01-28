@@ -35,7 +35,21 @@ import {
     useIsFieldValueUnique,
 } from '../../../../lib'
 import styles from '../EnrollmentFormFormContents.module.css'
-import { ValidationStrategyField } from './fields'
+import {
+    AllowGenerateNextVisitField,
+    AutoGenerateEventField,
+    GeneratedByEnrollmentDateField,
+    HideDueDateField,
+    MinDaysFromStartField,
+    NextScheduleDateField,
+    OpenAfterEnrollmentField,
+    PeriodTypeField,
+    RemindCompletedField,
+    RepeatableField,
+    ReportDateToUseField,
+    StandardIntervalField,
+    ValidationStrategyField,
+} from './fields'
 import { EditOrNewStageSectionForm } from './programStageSection/ProgramStageSectionForm'
 import { StageDataFormContents } from './StageDataFormContents'
 import { stageSchemaSection } from './StageForm'
@@ -65,6 +79,8 @@ export const StageFormContents = ({
             setSelectedFormType(FormType.SECTION)
         }
     }, [values.dataEntryForm, values.programStageSections])
+
+    const autoGenerateEvent = values?.autoGenerateEvent ?? false
 
     const checkDuplicateName = useIsFieldValueUnique({
         model: 'programStages',
@@ -325,14 +341,71 @@ export const StageFormContents = ({
                 name={descriptor.getSection('stageCreationAndScheduling').name}
             >
                 <StandardFormSectionTitle>
-                    {i18n.t('Event Repetition')}
+                    {i18n.t('Event repetition')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
                         'Define the frequency of events within this stage.'
                     )}
                 </StandardFormSectionDescription>
-                <div style={{ minHeight: 600 }} />
+                <StandardFormField>
+                    <RepeatableField />
+                </StandardFormField>
+                <StandardFormField>
+                    <StandardIntervalField />
+                </StandardFormField>
+
+                <StandardFormSectionTitle>
+                    {i18n.t('Event scheduling')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Configure how and when events in this stage are scheduled.'
+                    )}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <GeneratedByEnrollmentDateField />
+                </StandardFormField>
+                <StandardFormField>
+                    <AutoGenerateEventField />
+                </StandardFormField>
+                {autoGenerateEvent && (
+                    <StandardFormField>
+                        <OpenAfterEnrollmentField />
+                    </StandardFormField>
+                )}
+                {autoGenerateEvent && (
+                    <StandardFormField>
+                        <ReportDateToUseField />
+                    </StandardFormField>
+                )}
+                <StandardFormField>
+                    <MinDaysFromStartField />
+                </StandardFormField>
+                <StandardFormField>
+                    <HideDueDateField />
+                </StandardFormField>
+                <StandardFormField>
+                    <PeriodTypeField />
+                </StandardFormField>
+                <StandardFormField>
+                    <NextScheduleDateField />
+                </StandardFormField>
+
+                <StandardFormSectionTitle>
+                    {i18n.t('Completion options')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Decide what should happen after a user completes this event.'
+                    )}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <AllowGenerateNextVisitField />
+                </StandardFormField>
+                <StandardFormField>
+                    <RemindCompletedField />
+                </StandardFormField>
             </SectionedFormSection>
             <SectionedFormSection
                 name={descriptor.getSection('stageData').name}
