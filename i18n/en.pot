@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-28T12:39:48.057Z\n"
-"PO-Revision-Date: 2026-01-28T12:39:48.057Z\n"
+"POT-Creation-Date: 2026-01-29T07:55:18.087Z\n"
+"PO-Revision-Date: 2026-01-29T07:55:18.088Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -4638,9 +4638,6 @@ msgstr "Public (All users)"
 msgid "External"
 msgstr "External"
 
-msgid "Should not be lower than previous version"
-msgstr "Should not be lower than previous version"
-
 msgid "Program Details"
 msgstr "Program Details"
 
@@ -4649,6 +4646,9 @@ msgstr "Set up the basic information for this program."
 
 msgid "Last updated:  {{date}}"
 msgstr "Last updated:  {{date}}"
+
+msgid "Increase version"
+msgstr "Increase version"
 
 msgid "Related program"
 msgstr "Related program"

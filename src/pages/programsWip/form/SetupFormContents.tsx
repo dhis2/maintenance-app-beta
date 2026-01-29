@@ -1,6 +1,6 @@
 import { useTimeZoneConversion } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { InputFieldFF } from '@dhis2/ui'
+import { Button, Field, IconAdd16, InputField } from '@dhis2/ui'
 import React from 'react'
 import { useField, useFormState } from 'react-final-form'
 import { useHref } from 'react-router'
@@ -45,14 +45,13 @@ export const SetupFormContents = React.memo(function SetupFormContents({
 }: {
     name: string
 }) {
-    const { input: versionInput, meta: versionMeta } = useField('version', {
-        type: 'number',
+    const { input: versionInput } = useField('version', {
         format: (value) => value?.toString(),
-        validate: (value) =>
-            value < versionMeta.initial
-                ? i18n.t('Should not be lower than previous version')
-                : undefined,
+        parse: (value) =>
+            value !== undefined && value !== '' ? Number(value) : undefined,
     })
+    const version = versionInput.value != null ? Number(versionInput.value) : 0
+    const incrementVersion = () => versionInput.onChange(version + 1)
 
     const { values } = useFormState({ subscription: { values: true } })
     const refreshCategoryCombos = useRefreshModelSingleSelect({
@@ -85,27 +84,41 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                 <DescriptionField />
             </StandardFormField>
             <StandardFormField>
-                <InputFieldFF
-                    input={versionInput}
-                    meta={versionMeta}
-                    inputWidth="100px"
-                    dataTest="formfields-version"
+                <Field
                     label={i18n.t('Version')}
                     helpText={
                         values.lastUpdated
-                            ? i18n.t(
-                                  'Last updated:  {{date}}',
-
-                                  {
-                                      date: defaultDateTimeFormatter.format(
-                                          fromServerDate(values.lastUpdated)
-                                      ),
-                                      nsSeparator: '~:~',
-                                  }
-                              )
+                            ? i18n.t('Last updated:  {{date}}', {
+                                  date: defaultDateTimeFormatter.format(
+                                      fromServerDate(values.lastUpdated)
+                                  ),
+                                  nsSeparator: '~:~',
+                              })
                             : undefined
                     }
-                />
+                >
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                        }}
+                    >
+                        <InputField
+                            value={String(version)}
+                            disabled
+                            inputWidth="100px"
+                            dataTest="formfields-version"
+                        />
+                        <Button
+                            small
+                            icon={<IconAdd16 />}
+                            onClick={incrementVersion}
+                            dataTest="formfields-version-increment"
+                            title={i18n.t('Increase version')}
+                        />
+                    </div>
+                </Field>
             </StandardFormField>
             <StandardFormField>
                 <FeatureTypeField />
