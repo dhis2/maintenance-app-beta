@@ -1,3 +1,10 @@
+# [0.120.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.119.0...v0.120.0) (2026-01-29)
+
+
+### Features
+
+* show initiating and receiving entity type in relationship type list ([ec317fc](https://github.com/dhis2/maintenance-app-beta/commit/ec317fc7bfba074781dba0fd1d94e74db4685790))
+
 # [0.119.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.118.0...v0.119.0) (2026-01-28)
 
 
