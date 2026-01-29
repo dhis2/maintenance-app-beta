@@ -1,0 +1,309 @@
+.expressionBuilderModalDimensions {
+    width: 80vw !important;
+    min-height: 75vh;
+}
+
+.expressionBuilderContentContainer {
+    display: flex;
+    justify-content: flex-start;
+    gap: var(--spacers-dp16);
+    overflow-y: auto;
+}
+
+.expressionBuilderEntryContainer {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 65vh;
+    min-height: 0;
+    min-width: 0;
+}
+
+.validationRuleVariablesContainer {
+    width: 400px;
+    height: 65vh;
+    overflow-y: auto;
+    border: 1px solid var(--colors-grey500);
+    background-color: var(--colors-grey100);
+}
+
+.expressionFieldLabel {
+    font-size: 14px;
+    line-height: 19px;
+    display: block;
+    padding: 0px;
+}
+
+.variableButton {
+    margin-block-end: var(--spacers-dp8);
+}
+
+.input {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    gap: var(--spacers-dp8);
+    margin-top: 2px;
+}
+
+.inputError {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    gap: var(--spacers-dp8);
+    margin-top: 2px;
+}
+
+.inputError:not(:focus) {
+    border-color: var(--colors-red500) !important;
+}
+
+.expressionField {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    min-width: 0;
+}
+
+.expressionField > * {
+    flex: 1;
+    min-width: 0;
+}
+
+.expressionField > input,
+textarea {
+    box-sizing: border-box;
+
+    font-size: 14px;
+    line-height: 16px;
+    user-select: text;
+
+    color: var(--colors-grey900);
+    background-color: var(--colors-white);
+
+    padding: 11px 12px;
+    outline: 0;
+    border: 1px solid;
+    border-color: var(--colors-grey500);
+    border-radius: 3px;
+    box-shadow: inset 0 0 1px 0 rgba(48, 54, 60, 0.1);
+    text-overflow: ellipsis;
+}
+
+.expressionField textarea {
+    resize: none;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+}
+
+.expressionField > input:focus,
+textarea:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--theme-focus);
+    border-color: var(--theme-focus);
+}
+
+.expressionField > input::placeholder,
+textarea::placeholder {
+    color: var(--colors-grey600);
+    opacity: 1;
+}
+
+.fieldHelpText {
+    font-size: 14px;
+    line-height: 14px;
+    margin-block-start: var(--spacers-dp16);
+    color: var(--colors-grey700);
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp4);
+}
+
+.elementSelectorBlock {
+    margin-block-end: var(--spacers-dp8);
+}
+
+.elementTypeTitle {
+    display: flex;
+    gap: var(--spacers-dp8);
+    align-items: center;
+    font-size: 16px;
+}
+
+.elementTypeTitleSummary {
+    list-style: none;
+    display: flex;
+    gap: var(--spacers-dp8);
+    padding-inline: var(--spacers-dp4);
+    padding-block-start: var(--spacers-dp4);
+    align-items: center;
+    font-size: 16px;
+    padding-block-end: var(--spacers-dp4);
+}
+
+.elementTypePrefix {
+    font-weight: 500;
+}
+
+.elementListContainer {
+    background-color: white;
+    padding-block-end: var(--spacers-dp8);
+}
+
+.elementList {
+    list-style-type: none;
+    padding-inline: var(--spacers-dp16);
+}
+
+.elementList li {
+    text-decoration: none;
+    margin-block-end: var(--spacers-dp8);
+    font-size: 13px;
+}
+
+/* expression list */
+.expressionListContainer {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.invisibleOption {
+    display: none;
+}
+
+.loader {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    overflow: hidden;
+}
+
+.error {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    padding: var(--spacers-dp12) 16px;
+}
+
+.errorInnerWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.loadingErrorLabel {
+    color: var(--theme-error);
+}
+
+.errorRetryButton {
+    background: none;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.searchField {
+    display: flex;
+    gap: var(--spacers-dp8);
+    position: sticky;
+    top: 0;
+    padding: var(--spacers-dp16);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    background: var(--colors-white);
+}
+
+.searchInput {
+    flex-grow: 1;
+}
+
+.preliminarySelect {
+    display: flex;
+    padding-inline: var(--spacers-dp16);
+    padding-block-start: var(--spacers-dp8);
+    background: var(--colors-white);
+    gap: var(--spacers-dp4);
+}
+
+.preliminarySelectNoProgram {
+    display: flex;
+    padding-inline: var(--spacers-dp16);
+    padding-block-start: var(--spacers-dp8);
+    padding-block-end: var(--spacers-dp16);
+    background: var(--colors-white);
+    gap: var(--spacers-dp4);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.clearButton {
+    font-size: 14px;
+    flex-grow: 0;
+    background: none;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.clearButton:hover {
+    color: var(--theme-valid);
+    text-decoration: none;
+}
+
+.noMatchBlock {
+    color: var(--colors-grey700);
+    font-size: 13px;
+    line-height: 16px;
+    padding-block: var(--spacers-dp8);
+    padding-inline: var(--spacers-dp24);
+    text-align: center;
+}
+
+.expressionBox {
+    background-color: #f4f4f4;
+    font-family: monospace;
+    font-size: 14px;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    display: inline-block;
+    white-space: pre-wrap;
+    max-width: 100%;
+    word-break: break-word;
+}
+
+.expression {
+    margin-bottom: 0.5rem;
+}
+.expressionHiddenInput > :first-child {
+    display: none;
+}
+.buttonWrapper {
+    margin-bottom: 1rem;
+}
+
+.descriptionField {
+    margin-top: 1rem;
+}
+
+.programNotSelectedWarning {
+    margin: var(--spacers-dp8);
+}
+
+.paddedContainerContainer {
+    min-width: fit-content;
+    max-width: 70%;
+    padding: 1rem;
+    border: 1px solid var(--colors-grey400);
+    border-radius: 4px;
+    border-left: 5px solid var(--colors-grey400);
+}
+
+.validExpressionDescription {
+    white-space: 'pre-line';
+}

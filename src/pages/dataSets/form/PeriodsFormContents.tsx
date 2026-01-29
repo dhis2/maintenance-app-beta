@@ -54,7 +54,11 @@ export const PeriodsContents = React.memo(function PeriodsContents({
                     <ToggledNumberInput
                         name="openPeriodsAfterCoEndDate"
                         label={i18n.t(
-                            `Close data entry after ${formValues?.categoryCombo.displayName?.toLowerCase()} category option end date (if category option exist and has end date)`
+                            'Close data entry after "{{categoryComboName}}" category option end date (if category option exist and has end date)',
+                            {
+                                categoryComboName:
+                                    formValues?.categoryCombo.displayName,
+                            }
                         )}
                         uncheckedValue={0.0}
                     />

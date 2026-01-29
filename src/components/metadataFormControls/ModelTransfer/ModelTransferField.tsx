@@ -27,6 +27,9 @@ type ModelTransferFieldProps = {
     | 'hideFilterInputPicked'
     | 'dataTest'
     | 'disabled'
+    | 'optionsWidth'
+    | 'selectedWidth'
+    | 'height'
 >
 
 export function ModelTransferField({
@@ -45,6 +48,9 @@ export function ModelTransferField({
     filterUnassignedTo,
     hideFilterInputPicked = false,
     disabled = false,
+    optionsWidth,
+    selectedWidth,
+    height,
 }: ModelTransferFieldProps) {
     const { input, meta } = useField<DisplayableModel[]>(name, {
         multiple: true,
@@ -78,6 +84,9 @@ export function ModelTransferField({
                 hideFilterInputPicked={hideFilterInputPicked}
                 disabled={disabled}
                 filterUnassignedTo={filterUnassignedTo}
+                optionsWidth={optionsWidth}
+                selectedWidth={selectedWidth}
+                height={height}
             />
         </Field>
     )

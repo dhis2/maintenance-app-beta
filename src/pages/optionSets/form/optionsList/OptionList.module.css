@@ -1,0 +1,56 @@
+.deletedOption {
+    display: flex;
+    color: var(--colors-red800);
+    align-items: center;
+    gap: var(--spacers-dp8);
+}
+
+.deletedRow td {
+    color: var(--colors-red800) !important;
+    background-color: var(--colors-red050) !important;
+}
+
+.sortButtons {
+    margin-block-end: var(--spacers-dp16);
+}
+
+.actionButtons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.wideButton {
+    width: 35px;
+}
+
+.identifiableSelectionFilter {
+    width: 320px !important;
+    margin-block-end: var(--spacers-dp16);
+}
+
+.sortDisabledWarning {
+    margin-block: var(--spacers-dp16);
+}
+
+.noOptionsWarning {
+    margin-block-end: var(--spacers-dp16);
+}
+
+.sectionsWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-between;
+}
+
+.sectionsWrapper > div:first-child {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.actionsInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp4);
+    color: var(--colors-grey600);
+}

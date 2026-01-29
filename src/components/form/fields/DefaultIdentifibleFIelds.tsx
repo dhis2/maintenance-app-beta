@@ -5,12 +5,7 @@ import { CodeField } from './CodeField'
 import { NameField } from './NameField'
 import { ShortNameField } from './ShortNameField'
 
-type DefaultIdentifiableFieldsProps = {
-    shortNameIsRequired?: boolean
-}
-export const DefaultIdentifiableFields = ({
-    shortNameIsRequired = true,
-}: DefaultIdentifiableFieldsProps) => {
+export const DefaultIdentifiableFields = () => {
     const schemaSection = useSchemaSectionHandleOrThrow()
 
     return (
@@ -20,10 +15,7 @@ export const DefaultIdentifiableFields = ({
             </StandardFormField>
 
             <StandardFormField>
-                <ShortNameField
-                    schemaSection={schemaSection}
-                    isRequired={shortNameIsRequired}
-                />
+                <ShortNameField schemaSection={schemaSection} />
             </StandardFormField>
 
             <StandardFormField>

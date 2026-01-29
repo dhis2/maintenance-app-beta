@@ -1,12 +1,20 @@
 import React from 'react'
-import { SectionedFormSections } from '../../../components'
 import {
+    CustomAttributesSection,
+    SectionedFormSections,
+} from '../../../components'
+import {
+    SCHEMA_SECTIONS,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
+import { AccessAndSharingFormContents } from './AccessAndSharingFormContents'
 import { EnrollmentDataFormContents } from './EnrollmentDataFormContents'
+import { EnrollmentFormFormContents } from './EnrollmentFormFormContents'
 import { EnrollmentSettingsFormContents } from './EnrollmentSettingsFormContents'
 import { ProgramFormDescriptor } from './formDescriptor'
+import { ProgramCustomizationFormContents } from './ProgramCustomizationFormContents'
+import { ProgramStagesFormContents } from './ProgramStagesFormContents'
 import { SetupFormContents } from './SetupFormContents'
 
 export const ProgramFormContents = () => {
@@ -14,15 +22,30 @@ export const ProgramFormContents = () => {
     useSyncSelectedSectionWithScroll()
     return (
         <SectionedFormSections>
-            <SetupFormContents name={descriptor.getSection('setup').name} />
+            <SetupFormContents
+                name={descriptor.getSection('enrollmentDetails').name}
+            />
+            <ProgramCustomizationFormContents
+                name={descriptor.getSection('programCustomization').name}
+            />
             <EnrollmentSettingsFormContents
                 name={descriptor.getSection('enrollmentSettings').name}
             />
             <EnrollmentDataFormContents
                 name={descriptor.getSection('enrollmentData').name}
             />
-            <EnrollmentDataFormContents
+            <EnrollmentFormFormContents
                 name={descriptor.getSection('enrollmentForm').name}
+            />
+            <ProgramStagesFormContents
+                name={descriptor.getSection('programStages').name}
+            />
+            <AccessAndSharingFormContents
+                name={descriptor.getSection('accessAndSharing').name}
+            />
+            <CustomAttributesSection
+                schemaSection={SCHEMA_SECTIONS.program}
+                sectionedLayout
             />
         </SectionedFormSections>
     )

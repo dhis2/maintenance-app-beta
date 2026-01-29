@@ -1,5 +1,5 @@
 import { FetchError } from '@dhis2/app-runtime'
-import { render, RenderResult, waitFor, within } from '@testing-library/react'
+import { render, waitFor, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import { getSchemaProperty } from '../components/sectionList/modelValue/ModelValue'
@@ -394,24 +394,14 @@ export const generateDefaultListRowActionsTests = ({
         }
     )
 
-    const openActionsMenu = async (
-        tableRow: HTMLElement,
-        screen: RenderResult
-    ) => {
-        const actionButton = within(tableRow).getByTestId(
-            'row-actions-menu-button'
-        )
-        await userEvent.click(actionButton)
-        const actionsMenu = screen.getByTestId('row-actions-menu')
-        expect(actionsMenu).toBeVisible()
-        return actionsMenu
-    }
-
     describe(`${section.namePlural} default row actions tests`, () => {
         it('should display the default actions in the actions menu', async () => {
             const { screen } = await renderList()
             const tableRows = screen.getAllByTestId('section-list-row')
-            const actionsMenu = await openActionsMenu(tableRows[1], screen)
+            const actionsMenu = await uiActions.openListElementActionsMenu(
+                tableRows[1],
+                screen
+            )
             expect(actionsMenu).toHaveTextContent('Show details')
             expect(actionsMenu).toHaveTextContent('Edit')
             if (mockSchema.shareable) {
@@ -437,10 +427,8 @@ export const generateDefaultListRowActionsTests = ({
                 elements: [elementsWithEditAccess, elementsWithoutEditAccess],
             })
             const tableRows = screen.getAllByTestId('section-list-row')
-            const editableElementActionMenu = await openActionsMenu(
-                tableRows[0],
-                screen
-            )
+            const editableElementActionMenu =
+                await uiActions.openListElementActionsMenu(tableRows[0], screen)
             expect(
                 within(editableElementActionMenu).getByText('Edit').closest('a')
             ).toHaveAttribute(
@@ -452,10 +440,8 @@ export const generateDefaultListRowActionsTests = ({
             )
             expect(editableElementActionMenu).not.toBeVisible()
 
-            const nonEditableElementActionMenu = await openActionsMenu(
-                tableRows[1],
-                screen
-            )
+            const nonEditableElementActionMenu =
+                await uiActions.openListElementActionsMenu(tableRows[1], screen)
             expect(
                 within(nonEditableElementActionMenu)
                     .getByText('Edit')
@@ -517,10 +503,8 @@ export const generateDefaultListRowActionsTests = ({
             const tableRows = screen.getAllByTestId('section-list-row')
             expect(tableRows).toHaveLength(2)
 
-            const deletableElementActionMenu = await openActionsMenu(
-                tableRows[0],
-                screen
-            )
+            const deletableElementActionMenu =
+                await uiActions.openListElementActionsMenu(tableRows[0], screen)
             screen.getByTestId('row-actions-menu')
 
             const deleteConfirmationModal = await uiActions.openModal(
@@ -539,10 +523,8 @@ export const generateDefaultListRowActionsTests = ({
                 )
             })
 
-            const nonDeletableElementActionMenu = await openActionsMenu(
-                tableRows[1],
-                screen
-            )
+            const nonDeletableElementActionMenu =
+                await uiActions.openListElementActionsMenu(tableRows[1], screen)
             expect(
                 within(nonDeletableElementActionMenu)
                     .getByText('Delete')
@@ -565,7 +547,10 @@ export const generateDefaultListRowActionsTests = ({
             })
             const tableRows = screen.getAllByTestId('section-list-row')
 
-            const actionsMenu = await openActionsMenu(tableRows[0], screen)
+            const actionsMenu = await uiActions.openListElementActionsMenu(
+                tableRows[0],
+                screen
+            )
             await userEvent.click(within(actionsMenu).getByText('Show details'))
             const detailsPanel = await screen.findByTestId('details-panel')
             expect(detailsPanel).toBeVisible()
@@ -602,7 +587,10 @@ export const generateDefaultListRowActionsTests = ({
                     elements: [element],
                 })
                 const tableRows = screen.getAllByTestId('section-list-row')
-                const actionsMenu = await openActionsMenu(tableRows[0], screen)
+                const actionsMenu = await uiActions.openListElementActionsMenu(
+                    tableRows[0],
+                    screen
+                )
                 await userEvent.click(
                     within(actionsMenu).getByText('Sharing settings')
                 )
@@ -622,7 +610,10 @@ export const generateDefaultListRowActionsTests = ({
                     elements: [element],
                 })
                 const tableRows = screen.getAllByTestId('section-list-row')
-                const actionsMenu = await openActionsMenu(tableRows[0], screen)
+                const actionsMenu = await uiActions.openListElementActionsMenu(
+                    tableRows[0],
+                    screen
+                )
                 await userEvent.click(
                     within(actionsMenu).getByText('Translate')
                 )

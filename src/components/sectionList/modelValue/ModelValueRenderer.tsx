@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import { SchemaFieldProperty, SchemaFieldPropertyType } from '../../../lib'
 import { BooleanValue } from './BooleanValue'
@@ -8,7 +9,7 @@ import { PublicAccessValue } from './PublicAccess'
 import { TextValue } from './TextValue'
 
 export type ValueDetails = {
-    schemaProperty: SchemaFieldProperty
+    propertyType: SchemaFieldProperty['propertyType']
     value: unknown
     path: string
 }
@@ -16,7 +17,7 @@ export type ValueDetails = {
 export const ModelValueRenderer = ({
     path,
     value,
-    schemaProperty,
+    propertyType,
 }: ValueDetails) => {
     const hasToStringMethod = (
         value: unknown
@@ -27,16 +28,47 @@ export const ModelValueRenderer = ({
         return <PublicAccessValue value={value} />
     }
 
-    if (schemaProperty.propertyType === 'CONSTANT') {
+    if (path === 'programType') {
+        let label: string
+
+        if (value === 'WITH_REGISTRATION') {
+            label = i18n.t('Tracker program')
+        } else if (value === 'WITHOUT_REGISTRATION') {
+            label = i18n.t('Event program')
+        } else {
+            label = i18n.t('No value')
+        }
+
+        return <TextValue value={label} />
+    }
+
+    if (
+        path === 'fromConstraint.relationshipEntity' ||
+        path === 'toConstraint.relationshipEntity'
+    ) {
+        let label = (value as string).toString()
+
+        if (value === 'PROGRAM_STAGE_INSTANCE') {
+            label = i18n.t('Event')
+        } else if (value === 'PROGRAM_INSTANCE') {
+            label = i18n.t('Enrollment')
+        } else if (value === 'TRACKED_ENTITY_INSTANCE') {
+            label = i18n.t('Tracked entity')
+        }
+
+        return <TextValue value={label} />
+    }
+
+    if (propertyType === 'CONSTANT') {
         return <ConstantValue value={value as string} />
     }
 
-    if (schemaProperty.propertyType === 'DATE') {
+    if (propertyType === 'DATE') {
         return <DateValue value={value as string} />
     }
 
     if (
-        schemaProperty.propertyType === SchemaFieldPropertyType.REFERENCE &&
+        propertyType === SchemaFieldPropertyType.REFERENCE &&
         isModelReference(value)
     ) {
         return <ModelReference value={value} />

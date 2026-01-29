@@ -72,12 +72,16 @@ const expectRadioFieldToExist = (
 const expectInputFieldToHaveError = (
     fieldTestId: string,
     errorText: string,
-    screen: RenderResult
+    screen: RenderResult,
+    options?: { skipClassCheck?: boolean }
 ) => {
     const field = screen.getByTestId(fieldTestId)
     const error = within(field).getByTestId(`${fieldTestId}-validation`)
     expect(error).toBeVisible()
-    expect(error).toHaveClass('error')
+    if (!options?.skipClassCheck) {
+        expect(error).toHaveClass('error')
+    }
+
     expect(error).toHaveTextContent(errorText)
 }
 
@@ -210,13 +214,15 @@ const expectMultiSelectToExistWithOptions = async (
 const expectInputToErrorWhenExceedsLength = async (
     fieldName: string,
     maxLength: number,
-    screen: RenderResult
+    screen: RenderResult,
+    options?: { skipClassCheck: boolean }
 ) => {
     await userEvent.click(screen.getByTestId(`formfields-${fieldName}-label`))
     expectInputFieldToHaveError(
         `formfields-${fieldName}`,
         `Please enter a maximum of ${maxLength} characters`,
-        screen
+        screen,
+        options
     )
 }
 
@@ -239,6 +245,22 @@ const expectColorAndIconFieldToExist = (screen: RenderResult) => {
     expect(field).toBeVisible()
 }
 
+const expectButtonGroupToExistWithOptions = (
+    buttonGroupTestId: string,
+    options: { value: string; label: string }[],
+    screen: RenderResult
+) => {
+    const buttonGroup = screen.getByTestId(buttonGroupTestId)
+    expect(buttonGroup).toBeVisible()
+    options.forEach((option) => {
+        const button = within(buttonGroup).getByTestId(
+            `${buttonGroupTestId}-option-${option.value}`
+        )
+        expect(button).toBeVisible()
+        expect(button).toHaveTextContent(option.label)
+    })
+}
+
 export const uiAssertions = {
     expectNameFieldExist: (value: string, screen: RenderResult) =>
         expectInputFieldToExist('name', value, screen),
@@ -254,6 +276,7 @@ export const uiAssertions = {
     expectMultiSelectToExistWithOptions,
     expectCheckboxFieldToExist,
     expectRadioFieldToExist,
+    expectButtonGroupToExistWithOptions,
     expectInputToErrorWhenExceedsLength,
     expectNameToErrorWhenExceedsLength: (
         screen: RenderResult,

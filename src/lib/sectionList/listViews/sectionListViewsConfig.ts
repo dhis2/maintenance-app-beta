@@ -5,6 +5,7 @@ import type { ConfigurableFilterKey } from '../filters'
 export interface ModelPropertyDescriptor {
     label: string
     path: string
+    minApiVersion?: number
 }
 
 export interface FilterDescriptor {
@@ -55,6 +56,7 @@ const DESCRIPTORS = {
         label: i18n.t('Short name'),
     },
     formName: { label: i18n.t('Form name'), path: 'displayFormName' },
+    owner: { label: i18n.t('Owner'), path: 'user.displayName' },
 } satisfies Record<string, Descriptor>
 
 // This is the default views, and can be overriden per section in modelListViewsConfig below
@@ -70,6 +72,7 @@ export const defaultModelViewConfig = {
             'lastUpdatedBy',
             'lastUpdated',
             DESCRIPTORS.publicAccess,
+            DESCRIPTORS.owner,
         ],
         default: [DESCRIPTORS.name, DESCRIPTORS.publicAccess, 'lastUpdated'],
     },
@@ -113,7 +116,13 @@ export const modelListViewsConfig = {
         },
         filters: {
             available: ['formName'],
-            default: ['domainType', 'valueType', 'dataSet', 'categoryCombo'],
+            default: [
+                'domainType',
+                'valueType',
+                'dataSet',
+                'categoryCombo',
+                'dataElementGroup',
+            ],
         },
     },
     dataElementGroup: {
@@ -176,7 +185,6 @@ export const modelListViewsConfig = {
                     label: i18n.t('Notify users in hierarchy only'),
                     path: 'notifyUsersInHierarchyOnly',
                 },
-                { label: i18n.t('Owner'), path: 'user.displayName' },
                 {
                     label: i18n.t('Relative scheduled days'),
                     path: 'relativeScheduledDays',
@@ -198,6 +206,17 @@ export const modelListViewsConfig = {
             default: [],
             overrideDefaultAvailable: true,
         },
+    },
+    locale: {
+        columns: {
+            available: ['created', 'id', 'lastUpdated'],
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Locale'), path: 'locale' },
+            ],
+            overrideDefaultAvailable: true,
+        },
+        filters: { default: [], overrideDefaultAvailable: true },
     },
     organisationUnitLevel: {
         columns: {
@@ -226,7 +245,7 @@ export const modelListViewsConfig = {
             default: [DESCRIPTORS.name, 'code', 'lastUpdated'],
         },
         filters: {
-            default: [],
+            default: ['organisationUnitGroupSet'],
             overrideDefaultAvailable: true,
         },
     },
@@ -280,12 +299,7 @@ export const modelListViewsConfig = {
     },
     optionGroup: {
         columns: {
-            available: [
-                DESCRIPTORS.shortName,
-                'description',
-                'favorite',
-                { label: i18n.t('Owner'), path: 'user.displayName' },
-            ],
+            available: [DESCRIPTORS.shortName, 'description', 'favorite'],
             default: [
                 DESCRIPTORS.name,
                 DESCRIPTORS.publicAccess,
@@ -306,10 +320,10 @@ export const modelListViewsConfig = {
                 DESCRIPTORS.publicAccess,
                 'lastUpdated',
             ],
-            available: [DESCRIPTORS.shortName, 'indicatorGroup'],
+            available: [DESCRIPTORS.shortName],
         },
         filters: {
-            default: ['indicatorType'],
+            default: ['indicatorType', 'indicatorGroup'],
         },
     },
     indicatorType: {
@@ -339,15 +353,12 @@ export const modelListViewsConfig = {
                 DESCRIPTORS.name,
                 DESCRIPTORS.publicAccess,
                 'lastUpdated',
+                'indicatorGroupSet',
             ],
-            available: [
-                { label: i18n.t('Owner'), path: 'user.displayName' },
-                'favorite',
-            ],
+            available: ['favorite'],
         },
         filters: {
-            default: ['indicator'],
-            available: ['indicatorGroupSet'],
+            default: ['indicator', 'indicatorGroupSet'],
         },
     },
     indicatorGroupSet: {
@@ -358,11 +369,7 @@ export const modelListViewsConfig = {
                 DESCRIPTORS.publicAccess,
                 'lastUpdated',
             ],
-            available: [
-                DESCRIPTORS.shortName,
-                { label: i18n.t('Owner'), path: 'user.displayName' },
-                'favorite',
-            ],
+            available: [DESCRIPTORS.shortName, 'favorite'],
         },
         filters: {
             default: ['indicatorGroup'],
@@ -393,7 +400,7 @@ export const modelListViewsConfig = {
             available: [DESCRIPTORS.shortName],
         },
         filters: {
-            default: ['dataDimensionType'],
+            default: ['dataDimensionType', 'categoryOptionGroupSet'],
         },
     },
     categoryCombo: {
@@ -426,10 +433,7 @@ export const modelListViewsConfig = {
     },
     programIndicatorGroup: {
         columns: {
-            available: [
-                { label: i18n.t('Owner'), path: 'user.displayName' },
-                'favorite',
-            ],
+            available: ['favorite'],
         },
         filters: {
             default: ['programIndicator'],
@@ -452,7 +456,6 @@ export const modelListViewsConfig = {
                 { label: i18n.t('Description'), path: 'displayDescription' },
                 DESCRIPTORS.formName,
                 DESCRIPTORS.shortName,
-                { label: i18n.t('Owner'), path: 'user.displayName' },
                 { label: i18n.t('Decimals in data output'), path: 'decimals' },
                 'favorite',
                 'aggregationType',
@@ -460,11 +463,51 @@ export const modelListViewsConfig = {
                 'filter',
                 'aggregateExportCategoryOptionCombo',
                 'aggregateExportAttributeOptionCombo',
+                'aggregateExportDataElement',
             ],
         },
         filters: {
             default: ['program', 'programIndicatorGroup'],
             available: ['categoryCombo'],
+        },
+    },
+    programRuleVariable: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                'program',
+                'programRuleVariableSourceType',
+                'lastUpdated',
+            ],
+            available: [
+                'useCodeForOptionSet',
+                'dataElement',
+                'trackedEntityAttribute',
+                'programStage',
+                'valueType',
+            ],
+            overrideDefaultAvailable: true,
+        },
+        filters: {
+            default: ['program', 'programRuleVariableSourceType'],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
+    },
+    programRule: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Program name'), path: 'program.displayName' },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: ['description', 'priority', 'condition', 'programStage'],
+        },
+        filters: {
+            default: ['program'],
+            available: [],
+            overrideDefaultAvailable: true,
         },
     },
     optionGroupSet: {
@@ -480,6 +523,32 @@ export const modelListViewsConfig = {
             ],
         },
         filters: {},
+    },
+    relationshipType: {
+        columns: {
+            available: [
+                'bidirectional',
+                'favorite',
+                'displayFromToName',
+                'displayToFromName',
+                'fromToName',
+                'toFromName',
+                'referral',
+                {
+                    label: i18n.t('Initiating entity type'),
+                    path: 'fromConstraint.relationshipEntity',
+                },
+                {
+                    label: i18n.t('Receiving entity type'),
+                    path: 'toConstraint.relationshipEntity',
+                },
+            ],
+        },
+        filters: {
+            default: [],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
     },
     trackedEntityType: {
         columns: {
@@ -497,13 +566,41 @@ export const modelListViewsConfig = {
                 'maxTeiCountToReturn',
                 'minAttributesRequiredToSearch',
                 DESCRIPTORS.shortName,
-                'user',
             ],
         },
         filters: {
             default: [],
             available: [],
             overrideDefaultAvailable: true,
+        },
+    },
+    trackedEntityAttribute: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.formName,
+                'valueType',
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'aggregationType',
+                { label: i18n.t('Option set'), path: 'optionSet.displayName' },
+                { label: i18n.t('Unique'), path: 'unique' },
+                {
+                    label: i18n.t('Display in list'),
+                    path: 'displayInListNoProgram',
+                },
+                {
+                    label: i18n.t('Trigram indexable'),
+                    path: 'trigramIndexable',
+                    minApiVersion: 43,
+                },
+            ],
+        },
+        filters: {
+            default: ['valueType'],
+            available: ['aggregationType', 'formName'],
         },
     },
     constant: {
@@ -518,10 +615,127 @@ export const modelListViewsConfig = {
                 DESCRIPTORS.formName,
                 DESCRIPTORS.shortName,
                 { label: i18n.t('Favorite'), path: 'favorite' },
-                { label: i18n.t('Owner'), path: 'user.displayName' },
             ],
         },
         filters: {},
+    },
+    optionSet: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                { path: 'valueType', label: i18n.t('Value type') },
+                'lastUpdated',
+            ],
+            available: [
+                'href',
+                'code',
+                'id',
+                { label: i18n.t('Version'), path: 'version' },
+            ],
+        },
+        filters: {},
+    },
+    legendSet: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'code',
+                'id',
+                'href',
+                'lastUpdatedBy',
+                { label: i18n.t('Favorite'), path: 'favorite' },
+            ],
+        },
+        filters: {},
+    },
+    dataApprovalWorkflow: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Period type'), path: 'periodType' },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'code',
+                'id',
+                'href',
+                'created',
+                'lastUpdatedBy',
+                { label: i18n.t('Favorite'), path: 'favorite' },
+            ],
+        },
+        filters: {},
+    },
+    dataApprovalLevel: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Level'), path: 'level' },
+                {
+                    label: i18n.t('Organisation unit level'),
+                    path: 'orgUnitLevel',
+                },
+                {
+                    label: i18n.t('Category option group set'),
+                    path: 'categoryOptionGroupSet',
+                },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'description',
+                'code',
+                'href',
+                'id',
+                'created',
+                'lastUpdatedBy',
+                DESCRIPTORS.name,
+                { label: i18n.t('Favorite'), path: 'favorite' },
+            ],
+        },
+        filters: {},
+    },
+    program: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Program Type'), path: 'programType' },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                { label: i18n.t('Access level'), path: 'accessLevel' },
+                'code',
+                {
+                    label: i18n.t('Completed events expiry days'),
+                    path: 'completedEventsExpiryDays',
+                },
+                'created',
+                'description',
+                {
+                    label: i18n.t('Display front page list'),
+                    path: 'displayFrontPageList',
+                },
+                'favorite',
+                { label: i18n.t('Form name'), path: 'formName' },
+                'id',
+                'lastUpdated',
+                { label: i18n.t('Short name'), path: 'shortName' },
+                { label: i18n.t('Version'), path: 'version' },
+            ],
+            overrideDefaultAvailable: true,
+        },
+        filters: {
+            default: ['programType'],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
     },
     attribute: {
         columns: {
@@ -670,6 +884,30 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    validationRule: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Importance'), path: 'importance' },
+                { label: i18n.t('Period type'), path: 'periodType' },
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: [
+                'description',
+                DESCRIPTORS.formName,
+                { label: i18n.t('Instruction'), path: 'instruction' },
+                { label: i18n.t('Operator'), path: 'operator' },
+                {
+                    label: i18n.t('Skip this rule during form validation'),
+                    path: 'skipFormValidation',
+                },
+            ],
+        },
+        filters: {
+            default: [],
+        },
+    },
     validationRuleGroup: {
         columns: {
             default: [
@@ -677,10 +915,7 @@ export const modelListViewsConfig = {
                 DESCRIPTORS.publicAccess,
                 'lastUpdated',
             ],
-            available: [
-                { label: i18n.t('Favorite'), path: 'favorite' },
-                { label: i18n.t('Owner'), path: 'user.displayName' },
-            ],
+            available: [{ label: i18n.t('Favorite'), path: 'favorite' }],
         },
         filters: {},
     },
@@ -700,6 +935,56 @@ export const modelListViewsConfig = {
         },
         filters: {
             default: [],
+            overrideDefaultAvailable: true,
+        },
+    },
+    predictor: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('Output'), path: 'output.displayName' },
+                { label: i18n.t('Period type'), path: 'periodType' },
+                'lastUpdated',
+            ],
+            available: [
+                DESCRIPTORS.shortName,
+                'code',
+                'id',
+                'href',
+                'created',
+                'createdBy',
+                'lastUpdatedBy',
+                'description',
+                DESCRIPTORS.publicAccess,
+                DESCRIPTORS.owner,
+                {
+                    label: i18n.t('Output option combo'),
+                    path: 'outputCombo.displayName',
+                },
+                { label: i18n.t('Predictor groups'), path: 'predictorGroups' },
+                {
+                    label: i18n.t('Sequential sample count'),
+                    path: 'sequentialSampleCount',
+                },
+                {
+                    label: i18n.t('Annual sample count'),
+                    path: 'annualSampleCount',
+                },
+                {
+                    label: i18n.t('Sequential skip count'),
+                    path: 'sequentialSkipCount',
+                },
+                {
+                    label: i18n.t('Organisation unit providing data'),
+                    path: 'organisationUnitDescendants',
+                },
+                { label: i18n.t('Favourite'), path: 'favourite' },
+            ],
+            overrideDefaultAvailable: true,
+        },
+        filters: {
+            default: [],
+            available: [],
             overrideDefaultAvailable: true,
         },
     },

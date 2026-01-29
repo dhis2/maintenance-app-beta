@@ -1,11 +1,19 @@
 import { z } from 'zod'
-import { modelFormSchemas } from '../../../lib'
+import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 
-const { withDefaultListColumns, withAttributeValues } = modelFormSchemas
+const {
+    identifiable,
+    withDefaultListColumns,
+    withAttributeValues,
+    modelReference,
+} = modelFormSchemas
 
 const trackedEntityTypeBaseSchema = z.object({
     name: z.string().trim(),
-    shortName: z.string().trim(),
+    shortName: z
+        .string()
+        .trim()
+        .max(50, 'Please enter a maximum of 50 characters'),
     code: z.string().trim().optional(),
     description: z.string().trim().optional(),
     formName: z.string().trim().optional(),
@@ -15,25 +23,51 @@ const trackedEntityTypeBaseSchema = z.object({
             icon: z.string().optional(),
         })
         .default({}),
-    allowAuditLog: z.boolean().optional(),
-    minAttributesRequiredToSearch: z.number().optional(),
-    maxTeiCountToReturn: z.number().optional(),
-    featureType: z.string().trim().optional(),
-    attributeValues: z
+    allowAuditLog: z.boolean().default(false),
+    minAttributesRequiredToSearch: z
+        .number()
+        .min(
+            0,
+            'Minimum number of attributes required to search must be 0 or greater'
+        )
+        .default(0),
+    maxTeiCountToReturn: z
+        .number()
+        .min(
+            0,
+            'Maximum number of tracked entity instances to return must be 0 or greater'
+        )
+        .default(0),
+    featureType: z.enum(['NONE', 'POINT', 'POLYGON']).optional(),
+    trackedEntityTypeAttributes: z
         .array(
             z.object({
-                value: z.string(),
-                attribute: z.object({
-                    id: z.string(),
+                mandatory: z.boolean().default(false),
+                searchable: z.boolean().default(false),
+                displayInList: z.boolean().default(false),
+                trackedEntityAttribute: modelReference.extend({
+                    displayName: z.string(),
                 }),
             })
         )
         .default([]),
 })
 
+export const trackedEntityTypeFormSchema = trackedEntityTypeBaseSchema
+    .merge(identifiable)
+    .merge(withAttributeValues)
+
 export const trackedEntityTypeListSchema = trackedEntityTypeBaseSchema
     .merge(withDefaultListColumns)
     .merge(withAttributeValues)
     .extend({
+        name: z.string(),
         displayShortName: z.string(),
     })
+
+export const initialTrackedEntityTypeValues = getDefaults(
+    trackedEntityTypeFormSchema
+)
+export const validateTrackedEntityType = createFormValidate(
+    trackedEntityTypeFormSchema
+)

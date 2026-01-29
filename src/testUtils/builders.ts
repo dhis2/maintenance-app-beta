@@ -10,33 +10,59 @@ import {
     attributeListSchema,
     attributeFormSchema,
 } from '../pages/attributes/form'
-import { categoryListSchema } from '../pages/categories/form'
-import { categoryComboListSchema } from '../pages/categoryCombos/form'
+import {
+    categoryFormSchema,
+    categoryListSchema,
+} from '../pages/categories/form'
+import {
+    categoryComboFormSchema,
+    categoryComboListSchema,
+} from '../pages/categoryCombos/form'
 import { categoryOptionComboListSchema } from '../pages/categoryOptionCombos/form'
-import { categoryOptionGroupListSchema } from '../pages/categoryOptionGroups/form/categoryOptionGroupSchema'
-import { categoryOptionGroupSetListSchema } from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
+import {
+    categoryOptionGroupFormSchema,
+    categoryOptionGroupListSchema,
+} from '../pages/categoryOptionGroups/form/categoryOptionGroupSchema'
+import {
+    categoryOptionGroupSetFormSchema,
+    categoryOptionGroupSetListSchema,
+} from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
 import { categoryOptionListSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
 import { ConstantsListSchema } from '../pages/constants/form/ConstantFormSchema'
+import { dataApprovalLevelListSchema } from '../pages/dataApprovalLevels/form/dataApprovalLevelsSchema'
+import { dataApprovalWorkflowListSchema } from '../pages/dataApprovalWorkflows/form/dataApprovalWorkflowSchema'
 import { dataElementGroupListSchema } from '../pages/dataElementGroups/form/dataElementGroupSchema'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementListSchema } from '../pages/dataElements/form/dataElementSchema'
-import { dataSetNotificationTemplateListSchema } from '../pages/dataSetNotificationTemplates/form/dataSetNotificationTemplateSchema'
+import {
+    dataSetNotificationTemplateListSchema,
+    dataSetNotificationTemplateFormSchema,
+} from '../pages/dataSetNotificationTemplates/form/dataSetNotificationTemplateSchema'
 import { dataSetListSchema } from '../pages/dataSets/form/dataSetFormSchema'
 import { indicatorGroupListSchema } from '../pages/indicatorGroups/form/indicatorGroupSchema'
 import { indicatorGroupSetListSchema } from '../pages/indicatorGroupSets/form/indicatorGroupSetSchema'
 import { indicatorListSchema } from '../pages/indicators/form/indicatorSchema'
 import { indicatorTypeListSchema } from '../pages/indicatorTypes/form/indicatorTypesSchema'
+import { legendSetListSchema } from '../pages/legendSets/form/legendSetListSchema'
+import { localeListSchema } from '../pages/locales/form'
 import { OptionGroupListSchema } from '../pages/optionGroups/form/OptionGroupFormSchema'
 import {
     optionGroupSetFormSchema,
     optionGroupSetListSchema,
 } from '../pages/optionGroupSets/form/optionGroupSetSchema'
+import { optionSetListSchema } from '../pages/optionSets/form/optionSetSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
+import { predictorListSchema } from '../pages/predictors/form/predictorSchema'
 import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
-import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form/TrackedEntityTypeFormSchema'
+import { programRuleListSchema } from '../pages/programRules/form/programRuleSchema'
+import { programRuleVariableListSchema } from '../pages/programRuleVariables/form/programRuleVariableSchema'
+import { programListSchema } from '../pages/programsWip/form'
+import { relationshipTypeListSchema } from '../pages/relationshipTypes/form/RelationshipTypeFormSchema'
+import { trackedEntityAttributeListSchema } from '../pages/trackedEntityAttributes/form/TrackedEntityAttributeFormSchema'
+import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form'
 import {
     validationNotificationTemplateListSchema,
     validationNotificationTemplateFormSchema,
@@ -45,6 +71,7 @@ import {
     validationRuleGroupsFormSchema,
     validationRuleGroupsListSchema,
 } from '../pages/validationRuleGroups/form/validationRuleGroupsSchema'
+import { validationRuleListSchema } from '../pages/validationRules/form/validationRuleSchema'
 import {
     CategoryMapping,
     DataElement,
@@ -124,6 +151,13 @@ export const testIndicator = (overwrites: Record<any, any> = {}) => ({
     ...overwrites,
 })
 
+export const testLegendSets = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(legendSetListSchema, {
+        stringMap,
+    }),
+    ...overwrites,
+})
+
 export const testIndicatorGroup = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(indicatorGroupListSchema, {
         stringMap,
@@ -150,8 +184,22 @@ export const testCategory = (overwrites: Record<any, any> = {}) => ({
     ...overwrites,
 })
 
+export const testCategoryForm = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(categoryFormSchema, {
+        stringMap,
+    }),
+    ...overwrites,
+})
+
 export const testCategoryCombo = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(categoryComboListSchema, {
+        stringMap,
+    }),
+    ...overwrites,
+})
+
+export const testCategoryComboForm = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(categoryComboFormSchema, {
         stringMap,
     }),
     ...overwrites,
@@ -171,10 +219,28 @@ export const testCategoryOptionGroup = (overwrites: Record<any, any> = {}) => ({
     ...overwrites,
 })
 
+export const testCategoryOptionGroupForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(categoryOptionGroupFormSchema, {
+        stringMap,
+    }),
+    ...overwrites,
+})
+
 export const testCategoryOptionGroupSet = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(categoryOptionGroupSetListSchema, { stringMap }),
+    ...overwrites,
+})
+
+export const testCategoryOptionGroupSetForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(categoryOptionGroupSetFormSchema, {
+        stringMap,
+    }),
     ...overwrites,
 })
 
@@ -215,8 +281,31 @@ export const testDataSetNotificationTemplate = (
     ...overwrites,
 })
 
+export const testDataSetNotificationTemplateForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(dataSetNotificationTemplateFormSchema, {
+        stringMap,
+    }),
+    ...overwrites,
+})
+
+export const testPrograms = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(programListSchema, {
+        stringMap,
+    }),
+    ...overwrites,
+})
+
 export const testOptionGroupSet = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(optionGroupSetFormSchema, {
+        stringMap,
+    }),
+    ...overwrites,
+})
+
+export const testOptionSets = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(optionSetListSchema, {
         stringMap,
     }),
     ...overwrites,
@@ -238,6 +327,13 @@ export const testOrganisationUnitGroup = (
     ...overwrites,
 })
 
+export const testLocales = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(localeListSchema, {
+        stringMap,
+    }),
+    ...overwrites,
+})
+
 export const testOrganisationUnitGroupSet = (
     overwrites: Record<any, any> = {}
 ) => ({
@@ -250,8 +346,32 @@ export const testProgramIndicator = (overwrites: Record<any, any> = {}) => ({
     ...overwrites,
 })
 
+export const testProgramRuleVariable = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(programRuleVariableListSchema, { stringMap }),
+    ...overwrites,
+})
+
+export const testProgramRule = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(programRuleListSchema, { stringMap }),
+    ...overwrites,
+})
+
 export const testAttributeList = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(attributeListSchema, { stringMap }),
+    ...overwrites,
+})
+
+export const testdataApprovalLevelList = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(dataApprovalLevelListSchema, { stringMap }),
+    ...overwrites,
+})
+
+export const testDataApprovalWorkflowList = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(dataApprovalWorkflowListSchema, { stringMap }),
     ...overwrites,
 })
 
@@ -295,8 +415,20 @@ export const testFormProgramIndicatorGroup = (
     ...overwrites,
 })
 
+export const testRelationshipType = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(relationshipTypeListSchema, { stringMap }),
+    ...overwrites,
+})
+
 export const testTrackedEntityType = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(trackedEntityTypeListSchema, { stringMap }),
+    ...overwrites,
+})
+
+export const testTrackedEntityAttribute = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(trackedEntityAttributeListSchema, { stringMap }),
     ...overwrites,
 })
 
@@ -330,14 +462,6 @@ export const testCustomAttribute = ({
     valueType,
 })
 
-export const testLegendSet = ({
-    id = randomDhis2Id(),
-    displayName = faker.person.fullName(),
-} = {}) => ({
-    id,
-    displayName,
-})
-
 export const testProgram = ({
     id = randomDhis2Id(),
     name = faker.person.fullName(),
@@ -354,6 +478,14 @@ export const testProgram = ({
     categoryMappings,
     programType,
     programTrackedEntityAttributes,
+})
+
+export const testLegendSet = ({
+    id = randomDhis2Id(),
+    displayName = faker.person.fullName(),
+} = {}) => ({
+    id,
+    displayName,
 })
 
 export const testOrgUnitLevel = ({
@@ -389,9 +521,7 @@ export const testOrgUnit = (overwrites: Record<any, any> | undefined = {}) => {
     } as unknown as Partial<OrganisationUnit>
 }
 
-export const testValidationRuleGroups = (
-    overwrites: Record<any, any> = {}
-) => ({
+export const testValidationRuleGroup = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(validationRuleGroupsListSchema, { stringMap }),
     ...overwrites,
 })
@@ -400,6 +530,20 @@ export const testValidationRuleGroupsForm = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(validationRuleGroupsFormSchema, {
+        stringMap,
+    }),
+    ...overwrites,
+})
+
+export const testValidationRule = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(validationRuleListSchema, {
+        stringMap,
+    }),
+    ...overwrites,
+})
+
+export const testPredictorList = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(predictorListSchema, {
         stringMap,
     }),
     ...overwrites,
@@ -432,12 +576,3 @@ export const testOption = ({
         displayName: displayName ?? optionName,
     }
 }
-
-// TODO: change when schema for validationRule is available
-export const testValidationRule = ({
-    id = randomDhis2Id(),
-    displayName = faker.person.fullName(),
-} = {}) => ({
-    id,
-    displayName,
-})

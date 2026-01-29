@@ -54,7 +54,7 @@ export const OtherCardGroup = ({ showTitle }: { showTitle?: boolean }) => {
                     'Upload, modify and view icons which can be assigned to other metadata.'
                 )}
             </SummaryCard>
-            <SummaryCard section={SECTIONS_MAP.legend}>
+            <SummaryCard section={SECTIONS_MAP.legendSet}>
                 {i18n.t(
                     'Create, modify and view predefined legends for maps and other visualisations.'
                 )}

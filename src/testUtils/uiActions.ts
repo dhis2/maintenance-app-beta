@@ -20,13 +20,14 @@ const enterInputFieldValue = async (
 }
 const enterExpressionInModal = async (
     modal: HTMLElement,
-    anExpression: string
+    anExpression: string,
+    screen: RenderResult
 ) => {
     expect(modal).toBeVisible()
-    const input = within(modal).getByRole('textbox') as HTMLInputElement
+    const input = within(modal).getAllByRole('textbox')[0] as HTMLInputElement
     await userEvent.type(input, anExpression)
     await userEvent.click(
-        within(modal).getByTestId('expression-builder-modal-info')
+        screen.getByTestId('expression-builder-modal-validate-button')
     )
 }
 
@@ -41,7 +42,14 @@ const applyNewExpressionWithinModal = async (
     const editNumeratorModal = await screen.findByTestId(
         `expression-builder-modal`
     )
-    await uiActions.enterExpressionInModal(editNumeratorModal, anExpression)
+    const expressionTextBox = await screen.findByTestId(
+        'expression-entry-textfield'
+    )
+    await uiActions.enterExpressionInModal(
+        expressionTextBox,
+        anExpression,
+        screen
+    )
     await userEvent.click(
         within(editNumeratorModal).getByTestId('apply-expression-button')
     )
@@ -154,6 +162,11 @@ const submitForm = async (screen: RenderResult) => {
     await userEvent.click(submitButton)
 }
 
+const submitAndCloseForm = async (screen: RenderResult) => {
+    const submitButton = screen.getByTestId('form-submit-button')
+    await userEvent.click(submitButton)
+}
+
 const pickOptionInTransfer = async (
     transferTestId: string,
     optionText: string,
@@ -199,6 +212,29 @@ export const clickButton = async (testId: string, screen: RenderResult) => {
     await userEvent.click(button)
 }
 
+const clickButtonGroupOption = async (
+    buttonGroupTestId: string,
+    optionValue: string,
+    screen: RenderResult
+) => {
+    const buttonGroup = screen.getByTestId(buttonGroupTestId)
+    const button = within(buttonGroup).getByTestId(
+        `${buttonGroupTestId}-option-${optionValue}`
+    )
+    await userEvent.click(button)
+}
+
+export const openListElementActionsMenu = async (
+    tableRow: HTMLElement,
+    screen: RenderResult
+) => {
+    const actionButton = within(tableRow).getByTestId('row-actions-menu-button')
+    await userEvent.click(actionButton)
+    const actionsMenu = screen.getByTestId('row-actions-menu')
+    expect(actionsMenu).toBeVisible()
+    return actionsMenu
+}
+
 export const uiActions = {
     openModal,
     openSingleSelect,
@@ -206,6 +242,7 @@ export const uiActions = {
     pickOptionFromSelect,
     pickOptionFromMultiSelect,
     submitForm,
+    submitAndCloseForm,
     enterInputFieldValue,
     enterName: async (text: string, screen: RenderResult) =>
         await enterInputFieldValue('name', text, screen),
@@ -220,4 +257,6 @@ export const uiActions = {
     applyNewExpressionWithinModal,
     clearSingleSelect,
     clickButton,
+    clickButtonGroupOption,
+    openListElementActionsMenu,
 }

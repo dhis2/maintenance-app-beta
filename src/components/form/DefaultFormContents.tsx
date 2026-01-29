@@ -1,29 +1,31 @@
-import i18n from '@dhis2/d2-i18n'
 import React from 'react'
-import { useForm, useFormState } from 'react-final-form'
 import { getSectionPath } from '../../lib'
-import { SubmitAction } from '../../lib/form/useOnSubmit'
 import { ModelSection } from '../../types'
-import { StandardFormActions, StandardFormSection } from '../standardForm'
+import { StandardFormSection } from '../standardForm'
 import classes from './DefaultFormContents.module.css'
 import { DefaultFormErrorNotice } from './DefaultFormErrorNotice'
 import { DefaultFormFooter } from './DefaultFormFooter'
-import { useFormBase } from './formBase/FormBaseContext'
+import { TranslatedFieldsNoticeBox } from './TranslatedFieldsNoticeBox'
 
-export function DefaultEditFormContents({
+type DefaultFormContentsProps = {
+    readonly children: React.ReactNode
+    readonly section: ModelSection
+}
+
+function DefaultFormContents({
     children,
     section,
-}: {
-    children: React.ReactNode
-    section: ModelSection
+    showTranslatedFieldsNotice = false,
+}: DefaultFormContentsProps & {
+    readonly showTranslatedFieldsNotice?: boolean
 }) {
     const listPath = `/${getSectionPath(section)}`
 
     return (
         <>
             <div className={classes.form}>
+                {showTranslatedFieldsNotice && <TranslatedFieldsNoticeBox />}
                 {children}
-
                 <StandardFormSection>
                     <DefaultFormErrorNotice />
                 </StandardFormSection>
@@ -33,43 +35,14 @@ export function DefaultEditFormContents({
     )
 }
 
-export function DefaultNewFormContents({
-    section,
-    children,
-}: {
-    children: React.ReactNode
-    section: ModelSection
-}) {
-    const { submitting } = useFormState({
-        subscription: { submitting: true },
-    })
-    const { submit } = useForm()
+export function DefaultEditFormContents(
+    props: Readonly<DefaultFormContentsProps>
+) {
+    return <DefaultFormContents {...props} showTranslatedFieldsNotice={true} />
+}
 
-    const { setSubmitAction } = useFormBase()
-
-    const handleSubmit = (type: SubmitAction) => {
-        setSubmitAction(type)
-        submit()
-    }
-
-    const listPath = `/${getSectionPath(section)}`
-
-    return (
-        <div className={classes.form}>
-            {children}
-            <StandardFormSection>
-                <DefaultFormErrorNotice />
-            </StandardFormSection>
-            <StandardFormActions
-                cancelLabel={i18n.t('Exit without saving')}
-                submitLabel={i18n.t('Create {{modelName}} ', {
-                    modelName: section.title,
-                })}
-                onSaveClick={handleSubmit.bind(null, 'save')}
-                onSubmitClick={handleSubmit.bind(null, 'saveAndExit')}
-                submitting={submitting}
-                cancelTo={listPath}
-            />
-        </div>
-    )
+export function DefaultNewFormContents(
+    props: Readonly<DefaultFormContentsProps>
+) {
+    return <DefaultFormContents {...props} showTranslatedFieldsNotice={false} />
 }

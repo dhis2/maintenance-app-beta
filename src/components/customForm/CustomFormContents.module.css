@@ -1,0 +1,165 @@
+.sectionsWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.sectionsWrapper > div:first-child {
+    overflow-y: auto;
+}
+
+.errorNoticeWrapper {
+    margin: var(--spacers-dp16);
+    margin-top: auto;
+    position: sticky;
+    inset-block-end: 0;
+    z-index: 1;
+}
+
+.actionsInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp4);
+    color: var(--colors-grey600);
+}
+
+.iframeStyling {
+    height: auto;
+    min-height: 400px;
+    width: 100%;
+    border: 1px;
+    border-color: var(--colors-grey700);
+    border-style: solid;
+    resize: vertical;
+    overflow: auto;
+}
+
+.textAreaStyling {
+    width: 100%;
+    height: 400px;
+    resize: vertical;
+}
+
+.textAreaHidden {
+    display: none;
+}
+
+.elementSelectorBlock {
+    margin-block-end: var(--spacers-dp8);
+}
+
+.elementTypeTitle {
+    display: flex;
+    gap: var(--spacers-dp8);
+    align-items: center;
+    font-size: 16px;
+}
+
+.elementTypeTitleSummary {
+    list-style: none;
+    display: flex;
+    gap: var(--spacers-dp8);
+    align-items: center;
+    font-size: 16px;
+}
+
+.elementTypePrefix {
+    font-weight: 700;
+}
+
+.elementsList {
+    list-style-type: none;
+    margin-block: 8px;
+    padding-inline: 24px;
+    padding-block: 0px;
+}
+
+.elementsList > li {
+    list-style-type: none;
+    line-height: 1.5;
+}
+
+.elementButton {
+    background: none;
+    border: none;
+    padding: 0;
+    display: inline;
+}
+
+.elementButton:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.formSectionSpacing {
+    margin-block-end: var(--spacers-dp8);
+}
+
+.customFormEntry {
+    padding: var(--spacers-dp16);
+    background-color: var(--colors-grey100);
+    border-radius: 5px;
+    margin-block-start: var(--spacers-dp16);
+    max-width: 720px;
+    display: flex;
+    gap: var(--spacers-dp8);
+    flex-direction: column;
+}
+
+.description {
+    color: var(--colors-grey600);
+    padding: 0;
+    margin: 0;
+}
+
+.customFormEditContainer {
+    display: flex;
+    justify-content: space-between;
+    min-height: calc(95vh - 60px);
+    gap: var(--spacers-dp16);
+}
+
+.customFormEditContainerWithError {
+    display: flex;
+    justify-content: space-between;
+    min-height: calc(85vh - 60px);
+    gap: var(--spacers-dp16);
+}
+
+.customFormInputContainer {
+    flex-basis: 80%;
+}
+
+.customFormElementsContainer {
+    width: 600px;
+}
+
+.elementFilter {
+    width: 400px;
+}
+
+.customFormSubtitle {
+    font-size: 18px;
+    color: var(--colors-grey800);
+}
+
+.previewElementsWarning {
+    color: var(--colors-grey800);
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp4);
+    margin-block: var(--spacers-dp4);
+}
+.customFormCardDeleted {
+    margin-block: 8px;
+    padding: 12px;
+    background-color: var(--colors-red050);
+    border: 1px solid var(--colors-red200);
+    border-radius: 4px;
+}
+
+.deletedCustomFormText {
+    color: var(--colors-red800);
+    font-size: 15px;
+    margin-block-end: var(--spacers-dp8);
+}

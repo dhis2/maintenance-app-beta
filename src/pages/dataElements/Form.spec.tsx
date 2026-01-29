@@ -1,9 +1,10 @@
 import { faker } from '@faker-js/faker'
-import { render, within } from '@testing-library/react'
+import { render, within, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/dataElementsSchema.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
+import { DISABLING_VALUE_TYPES } from '../../components/form/fields/AggregationTypeFieldByValueType'
 import {
     DEFAULT_CATEGORY_COMBO,
     DEFAULT_CATEGORYCOMBO_SELECT_OPTION,
@@ -27,7 +28,6 @@ import { uiActions } from '../../testUtils/uiActions'
 import { uiAssertions } from '../../testUtils/uiAssertions'
 import { DisplayableModel } from '../../types/models'
 import { Component as Edit } from './Edit'
-import { DISABLING_VALUE_TYPES } from './fields/AggregationTypeField'
 import { Component as New } from './New'
 import resetAllMocks = jest.resetAllMocks
 
@@ -270,7 +270,7 @@ describe('Data elements form tests', () => {
             const { screen } = await renderForm()
             const aName = faker.animal.bird()
             const aShortName = faker.person.firstName()
-            const aValueType = randomValueIn(DISABLING_VALUE_TYPES)
+            const aValueType = randomValueIn([...DISABLING_VALUE_TYPES])
 
             await uiActions.enterName(aName, screen)
             await uiActions.enterInputFieldValue(
@@ -772,6 +772,41 @@ describe('Data elements form tests', () => {
                 })
             )
         })
+        it('should let user select value type without showing warning modal', async () => {
+            const { screen } = await renderForm()
+
+            const warningText =
+                'Changing the value type may cause issues when generating analytics tables if data already exists.'
+
+            expect(screen.queryByText(warningText)).toBeNull()
+
+            // value type is text by default
+            const valueType = within(
+                screen.getByTestId('formfields-valueType')
+            ).getByTestId('dhis2-uicore-select-input')
+            expect(valueType).toBeVisible()
+            expect(valueType).toHaveTextContent(VALUE_TYPE.TEXT)
+
+            // Click a new value type
+            const aValueType = 'COORDINATE'
+
+            const valueTypeOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('formfields-valueType'),
+                screen
+            )
+            const valueTypeOption = valueTypeOptions.find((opt) =>
+                opt.textContent?.includes(getConstantTranslation(aValueType))
+            )!
+            await userEvent.click(valueTypeOption)
+
+            // no warning should be shown
+            expect(screen.queryByText(warningText)).toBeNull()
+
+            // value type should be updated and warning should be removed
+            expect(valueType).toHaveTextContent(
+                getConstantTranslation(aValueType)
+            )
+        })
     })
     describe('Edit', () => {
         const renderForm = generateRenderer(
@@ -784,11 +819,11 @@ describe('Data elements form tests', () => {
                     testCategoryCombo(),
                     testCategoryCombo(),
                 ].filter((cc) => cc !== undefined)
-                const optionSets = [
-                    testOptionSet(),
-                    testOptionSet(),
-                    testOptionSet(),
-                ].filter((cc) => cc !== undefined)
+                const optionSets =
+                    dataElementOverwrites?.optionSets ??
+                    [testOptionSet(), testOptionSet(), testOptionSet()].filter(
+                        (cc) => cc !== undefined
+                    )
 
                 const legendSets = [
                     testLegendSet(),
@@ -919,7 +954,11 @@ describe('Data elements form tests', () => {
                 screen.getByTestId('formfields-aggregationType')
             ).getByTestId('dhis2-uicore-select-input')
             expect(aggregationType).toBeVisible()
-            if (DISABLING_VALUE_TYPES.includes(dataElement.valueType)) {
+            if (
+                DISABLING_VALUE_TYPES.includes(
+                    dataElement.valueType as (typeof DISABLING_VALUE_TYPES)[number]
+                )
+            ) {
                 expect(aggregationType).toHaveTextContent('None')
             } else {
                 expect(aggregationType).toHaveTextContent(
@@ -1031,6 +1070,204 @@ describe('Data elements form tests', () => {
             ).getByTestId('dhis2-uicore-select-input')
             expect(valueType).toBeVisible()
             expect(valueType).toHaveTextContent(VALUE_TYPE.MULTI_TEXT)
+        })
+        it('should require clicking through warning modal to change value type', async () => {
+            const { screen } = await renderForm({
+                dataElementOverwrites: {
+                    valueType: 'NUMBER',
+                    optionSet: null,
+                },
+            })
+            const warningText =
+                'Changing the value type may cause issues when generating analytics tables if data already exists.'
+
+            expect(screen.queryByText(warningText)).toBeNull()
+
+            const valueType = within(
+                screen.getByTestId('formfields-valueType')
+            ).getByTestId('dhis2-uicore-select-input')
+            expect(valueType).toBeVisible()
+            expect(valueType).toHaveTextContent(VALUE_TYPE.NUMBER)
+
+            // Click a new value type
+            const aValueType = 'COORDINATE'
+            // const aValueType =
+            //     DISABLING_VALUE_TYPES[
+            //         Math.floor(Math.random() * DISABLING_VALUE_TYPES.length)
+            //     ]
+
+            const valueTypeOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('formfields-valueType'),
+                screen
+            )
+            const valueTypeOption = valueTypeOptions.find((opt) =>
+                opt.textContent?.includes(getConstantTranslation(aValueType))
+            )!
+            await userEvent.click(valueTypeOption)
+
+            expect(screen.getByText(warningText)).toBeInTheDocument()
+
+            // click confirm
+            await userEvent.click(
+                screen.getByTestId('confirmationModal-confirm')
+            )
+
+            // value type should be updated and warning should be removed
+            expect(valueType).toHaveTextContent(
+                getConstantTranslation(aValueType)
+            )
+            expect(screen.queryByText(warningText)).toBeNull()
+        })
+        it('should revert to original value type if warning modal is cancelled', async () => {
+            const { screen } = await renderForm({
+                dataElementOverwrites: {
+                    valueType: 'NUMBER',
+                    optionSet: null,
+                },
+            })
+            const warningText =
+                'Changing the value type may cause issues when generating analytics tables if data already exists.'
+
+            expect(screen.queryByText(warningText)).toBeNull()
+
+            const valueType = within(
+                screen.getByTestId('formfields-valueType')
+            ).getByTestId('dhis2-uicore-select-input')
+            expect(valueType).toBeVisible()
+            expect(valueType).toHaveTextContent(VALUE_TYPE.NUMBER)
+
+            // Click a new value type
+            const aValueType = 'COORDINATE'
+            // const aValueType =
+            //     DISABLING_VALUE_TYPES[
+            //         Math.floor(Math.random() * DISABLING_VALUE_TYPES.length)
+            //     ]
+
+            const valueTypeOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('formfields-valueType'),
+                screen
+            )
+            const valueTypeOption = valueTypeOptions.find((opt) =>
+                opt.textContent?.includes(getConstantTranslation(aValueType))
+            )!
+            await userEvent.click(valueTypeOption)
+
+            await waitFor(() => {
+                expect(screen.getByText(warningText)).toBeInTheDocument()
+            })
+
+            // click confirm
+            await userEvent.click(
+                screen.getByTestId('confirmationModal-cancel')
+            )
+
+            // value type should NOT be updated and warning should be removed
+            expect(valueType).toHaveTextContent(VALUE_TYPE.NUMBER)
+            expect(screen.queryByText(warningText)).toBeNull()
+        })
+        it.skip('should require clicking through warning modal to change option set if that changes value type', async () => {
+            const optionSets = [
+                testOptionSet(),
+                testOptionSet(),
+                testOptionSet(),
+            ]
+
+            // ensure that the value types for options are different
+            if (optionSets[0].valueType === optionSets[2].valueType) {
+                optionSets[2].valueType = 'NUMBER'
+                optionSets[0].valueType = 'COORDINATE'
+            }
+            const { screen } = await renderForm({
+                dataElementOverwrites: {
+                    optionSets,
+                },
+            })
+            const warningText =
+                'Updating the option set will change the value type which may cause problems when generating analytics tables if there is existing data for this data element.'
+
+            expect(screen.queryByText(warningText)).toBeNull()
+
+            // Click a new option set (first from list, as None is in index 0)
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('formfields-optionset'),
+                1,
+                screen
+            )
+
+            expect(screen.getByText(warningText)).toBeInTheDocument()
+
+            // click confirm
+            await userEvent.click(
+                screen.getByTestId('confirmationModal-confirm')
+            )
+
+            // option set should be updated and warning should be removed
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('formfields-optionset'),
+                {
+                    selected: optionSets[0].displayName,
+                    options: [
+                        { displayName: '<No value>' },
+                        ...optionSets.map((cc: DisplayableModel) => ({
+                            displayName: cc.displayName,
+                        })),
+                    ],
+                },
+                screen
+            )
+            expect(screen.queryByText(warningText)).toBeNull()
+        })
+        it('should not change option set without confirmation if it does not change value type', async () => {
+            const optionSets = [
+                testOptionSet(),
+                testOptionSet(),
+                testOptionSet(),
+            ]
+
+            // ensure that the value types for options are different
+            if (optionSets[0].valueType === optionSets[2].valueType) {
+                optionSets[2].valueType = 'NUMBER'
+                optionSets[0].valueType = 'COORDINATE'
+            }
+            const { screen } = await renderForm({
+                dataElementOverwrites: {
+                    optionSets,
+                },
+            })
+            const warningText =
+                'Updating the option set will change the value type which may cause problems when generating analytics tables if there is existing data for this data element.'
+
+            expect(screen.queryByText(warningText)).toBeNull()
+
+            // Click a new option set (first from list, as None is in index 0)
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('formfields-optionset'),
+                1,
+                screen
+            )
+
+            expect(screen.getByText(warningText)).toBeInTheDocument()
+
+            // click confirm
+            await userEvent.click(
+                screen.getByTestId('confirmationModal-cancel')
+            )
+
+            // option set should be updated and warning should be removed
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('formfields-optionset'),
+                {
+                    selected: optionSets[2].displayName,
+                    options: [
+                        { displayName: '<No value>' },
+                        ...optionSets.map((cc: DisplayableModel) => ({
+                            displayName: cc.displayName,
+                        })),
+                    ],
+                },
+                screen
+            )
+            expect(screen.queryByText(warningText)).toBeNull()
         })
     })
 })

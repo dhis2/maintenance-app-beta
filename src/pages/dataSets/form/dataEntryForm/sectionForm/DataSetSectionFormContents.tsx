@@ -24,6 +24,7 @@ import {
     DescriptionField,
     FormFooterWrapper,
     NameField,
+    SectionedFormErrorNotice,
     SectionedFormSection,
     SectionedFormSections,
     StandardFormField,
@@ -31,7 +32,6 @@ import {
     StandardFormSectionTitle,
     TransferHeader,
 } from '../../../../../components'
-import { DefaultFormErrorNotice } from '../../../../../components/form/DefaultFormErrorNotice'
 import { BaseModelTransfer } from '../../../../../components/metadataFormControls/ModelTransfer/BaseModelTransfer'
 import {
     SchemaName,
@@ -152,6 +152,7 @@ export const DataSetSectionFormContents = ({
                         <StandardFormField>
                             <NameField
                                 schemaSection={dataSetSectionSchemaSection}
+                                modelId={values.id}
                             />
                         </StandardFormField>
                         <StandardFormField>
@@ -378,9 +379,7 @@ export const DataSetSectionFormContents = ({
                         </div>
                     </SectionedFormSection>
                 </SectionedFormSections>
-                <div className={styles.errorNoticeWrapper}>
-                    <DefaultFormErrorNotice />
-                </div>
+                <SectionedFormErrorNotice />
             </div>
             <div>
                 <FormFooterWrapper>

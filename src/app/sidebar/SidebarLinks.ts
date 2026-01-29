@@ -119,7 +119,7 @@ export const sidebarLinks = {
             getSectionLinkItem(SECTIONS_MAP.dataApprovalWorkflow),
             getSectionLinkItem(SECTIONS_MAP.externalMapLayer),
             getSectionLinkItem(SECTIONS_MAP.icon),
-            getSectionLinkItem(SECTIONS_MAP.legend),
+            getSectionLinkItem(SECTIONS_MAP.legendSet),
             getSectionLinkItem(SECTIONS_MAP.locale),
             getSectionLinkItem(SECTIONS_MAP.optionGroup),
             getSectionLinkItem(SECTIONS_MAP.optionGroupSet),
@@ -143,8 +143,8 @@ export const useSidebarLinks = (): ParentLink[] => {
                 label,
                 links: links.filter(
                     ({ section }) =>
-                        isSectionAuthorized(section) &&
-                        isSectionFeatureToggled(section)
+                        isSectionFeatureToggled(section) &&
+                        isSectionAuthorized(section)
                 ),
             }))
             .filter(({ links }) => links.length > 0)

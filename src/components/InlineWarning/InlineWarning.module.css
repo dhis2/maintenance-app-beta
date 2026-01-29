@@ -1,0 +1,11 @@
+.warning {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacers-dp4);
+    padding: var(--spacers-dp4) var(--spacers-dp8);
+    background-color: #ffecb3;
+    border-radius: 4px;
+    color: #6f3205;
+    white-space: nowrap;
+    font-size: 14px;
+}

@@ -3,6 +3,11 @@
     height: 100%;
 }
 
+.sidebarSecondary {
+    background-color: var(--colors-grey200);
+    padding: var(--spacers-dp16) var(--spacers-dp8);
+}
+
 .listItem {
     box-shadow: 0px -1px 0px 0px var(--colors-grey300) inset;
     border-radius: 6px;

@@ -296,6 +296,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Push analysis'),
         titlePlural: i18n.t('Push analyses'),
         parentSectionKey: 'other',
+        maxApiVersion: 42,
     },
     externalMapLayer: {
         name: SchemaName.externalMapLayer,
@@ -344,13 +345,6 @@ export const SCHEMA_SECTIONS = {
         namePlural: 'icons',
         title: i18n.t('Icon'),
         titlePlural: i18n.t('Icons'),
-        parentSectionKey: 'other',
-    },
-    legend: {
-        name: SchemaName.legend,
-        namePlural: 'legends',
-        title: i18n.t('Legend'),
-        titlePlural: i18n.t('Legends'),
         parentSectionKey: 'other',
     },
     predictorGroup: {
@@ -425,31 +419,23 @@ export const OVERVIEW_SECTIONS = {
 export const NON_SCHEMA_SECTION = {
     locale: {
         name: 'locale',
-        namePlural: 'locales',
+        namePlural: 'locales/dbLocales',
+        routeName: 'locales',
         title: i18n.t('Locale'),
         titlePlural: i18n.t('Locales'),
         parentSectionKey: 'other',
         authorities: [
             {
                 type: SchemaAuthorityType.CREATE_PUBLIC,
-                authorities: [
-                    'F_PROGRAM_PUBLIC_ADD',
-                    'F_PROGRAM_INDICATOR_PUBLIC_ADD',
-                ],
+                authorities: ['F_LOCALE_ADD'],
             },
             {
                 type: SchemaAuthorityType.CREATE_PRIVATE,
-                authorities: [
-                    'F_PROGRAM_PRIVATE_ADD',
-                    'F_PROGRAM_INDICATOR_PRIVATE_ADD',
-                ],
+                authorities: ['F_LOCALE_ADD'],
             },
             {
                 type: SchemaAuthorityType.DELETE,
-                authorities: [
-                    'F_PROGRAM_PUBLIC_ADD',
-                    'F_PROGRAM_INDICATOR_PUBLIC_ADD',
-                ],
+                authorities: ['F_LOCALE_DELETE'],
             },
         ],
     },

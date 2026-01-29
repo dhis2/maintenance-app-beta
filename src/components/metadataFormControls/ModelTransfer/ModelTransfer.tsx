@@ -102,10 +102,10 @@ export const ModelTransfer = <
 
     return (
         <BaseModelTransfer
-            enableOrderChange
             height={'350px'}
-            optionsWidth="500px"
-            selectedWidth="500px"
+            optionsWidth={'500px'}
+            selectedWidth={'500px'}
+            enableOrderChange
             filterable
             filterablePicked
             onEndReached={queryResult.fetchNextPage}
@@ -153,7 +153,7 @@ export const TransferHeader = ({ children }: { children: React.ReactNode }) => {
     return <>{children}</>
 }
 
-const DefaultTransferLeftFooter = ({
+export const DefaultTransferLeftFooter = ({
     onRefreshClick,
     newLink,
 }: {

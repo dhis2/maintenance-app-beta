@@ -1,4 +1,3 @@
-import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 
 /*  Note that these schemas describes validations for what we send to the server,

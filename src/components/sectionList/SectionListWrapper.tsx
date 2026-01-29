@@ -2,8 +2,8 @@ import { FetchError } from '@dhis2/app-runtime'
 import { SharingDialog } from '@dhis2/ui'
 import React, { useCallback, useState } from 'react'
 import { BaseListModel, canEditModel, useSchemaFromHandle } from '../../lib'
-import { Pager, ModelCollection } from '../../types/models'
-import { DetailsPanel, DefaultDetailsPanelContent } from './detailsPanel'
+import { ModelCollection, Pager } from '../../types/models'
+import { DefaultDetailsPanelContent, DetailsPanel } from './detailsPanel'
 import { FilterWrapper } from './filters/FilterWrapper'
 import { DefaultListActions } from './listActions'
 import { DefaultListActionProps } from './listActions/DefaultListActions'
@@ -28,7 +28,24 @@ type SectionListWrapperProps = {
     refetch: () => void
     ActionsComponent?: React.ComponentType<DefaultListActionProps>
 }
-
+export const DefaultSectionListMessage = ({
+    error,
+    data,
+}: {
+    error?: FetchError
+    data?: ModelCollection
+}) => {
+    if (error) {
+        return <SectionListError />
+    }
+    if (!data) {
+        return <SectionListLoader />
+    }
+    if (data.length < 1) {
+        return <SectionListEmpty />
+    }
+    return null
+}
 export const SectionListWrapper = ({
     data,
     error,
@@ -50,20 +67,6 @@ export const SectionListWrapper = ({
     const onSharingDialogClose = () => {
         setSharingDialogId(undefined)
         refetch()
-    }
-
-    const SectionListMessage = () => {
-        if (error) {
-            console.log(error.details || error)
-            return <SectionListError />
-        }
-        if (!data) {
-            return <SectionListLoader />
-        }
-        if (data.length < 1) {
-            return <SectionListEmpty />
-        }
-        return null
     }
 
     const handleSelectAll = useCallback(
@@ -133,6 +136,7 @@ export const SectionListWrapper = ({
     )
 
     const isAllSelected = data ? checkAllSelected(data) : false
+
     return (
         <div>
             <SectionListTitle />
@@ -147,7 +151,7 @@ export const SectionListWrapper = ({
                     onSelectAll={handleSelectAll}
                     allSelected={isAllSelected}
                 >
-                    <SectionListMessage />
+                    <DefaultSectionListMessage data={data} error={error} />
                     {data?.map((model) => (
                         <SectionListRow
                             key={model.id}

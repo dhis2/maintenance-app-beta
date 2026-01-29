@@ -7,6 +7,7 @@ interface DrawerProps {
     isOpen: boolean
     children: React.ReactNode
     onClose: () => void
+    level?: 'primary' | 'secondary'
 }
 
 const DRAWER_PORTAL_ID = 'drawer-portal'
@@ -15,6 +16,7 @@ export const Drawer: React.FC<DrawerProps> = ({
     isOpen,
     children,
     onClose,
+    level = 'primary',
 }) => {
     return (
         <div
@@ -22,7 +24,11 @@ export const Drawer: React.FC<DrawerProps> = ({
             onClick={onClose}
         >
             <div
-                className={cx(css.drawer, { [css.open]: isOpen })}
+                className={cx(css.drawer, {
+                    [css.open]: isOpen,
+                    [css.drawerPrimary]: level === 'primary',
+                    [css.drawerSecondary]: level === 'secondary',
+                })}
                 onClick={(e) => e.stopPropagation()}
             >
                 {isOpen && (

@@ -23,16 +23,19 @@ export const ComponentWithProvider = ({
     dataForCustomProvider,
     children,
 }: AppTestWrapperProps) => {
+    const providerProps = {
+        config: {
+            baseUrl: 'http://dhis2-imaginary-test-server',
+            apiVersion: 42,
+        },
+        plugin: false,
+        parentAlertsAdd: () => undefined,
+        showAlertsInPlugin: true,
+        // userInfo is required in CI but not in local types - using type assertion
+        userInfo: undefined,
+    } as any
     return (
-        <Provider
-            config={{
-                baseUrl: 'http://dhis2-imaginary-test-server',
-                apiVersion: 42,
-            }}
-            plugin={false}
-            parentAlertsAdd={() => undefined}
-            showAlertsInPlugin={true}
-        >
+        <Provider {...providerProps}>
             <CustomDataProvider
                 data={dataForCustomProvider as any}
                 options={{ failOnMiss: true }}

@@ -1,3 +1,4 @@
+import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
@@ -115,12 +116,18 @@ export const EditDataSetSectionForm = ({
     onSubmitted,
 }: {
     section: DisplayableModel
-    onCancel?: () => void
-    onSubmitted?: (values: SubmittedSectionFormValues) => void
+    onCancel: () => void
+    onSubmitted: (values: SubmittedSectionFormValues) => void
 }) => {
     const handlePatch = usePatchModel(
         section.id,
         dataSetSectionSchemaSection.namePlural
+    )
+    const { show: showSuccess } = useAlert(
+        i18n.t('Data set section form saved'),
+        {
+            success: true,
+        }
     )
 
     const onFormSubmit: OnDataSetFormSubmit = async (values, form) => {
@@ -133,6 +140,8 @@ export const EditDataSetSectionForm = ({
         if (response.error) {
             return createFormError(response.error)
         }
+        showSuccess({ success: true })
+
         const updatedName = jsonPatchOperations.find(
             (op) => op.path === '/name' && op.op === 'replace'
         )?.value as string | undefined
@@ -178,16 +187,24 @@ export const NewDataSetSectionForm = ({
     onCancel,
     onSubmitted,
 }: {
-    onCancel?: () => void
-    onSubmitted?: (values: SubmittedSectionFormValues) => void
+    onCancel: () => void
+    onSubmitted: (values: SubmittedSectionFormValues) => void
 }) => {
     const handleCreate = useCreateModel(dataSetSectionSchemaSection.namePlural)
+    const { show: showSuccess } = useAlert(
+        i18n.t('Data set section form saved'),
+        {
+            success: true,
+        }
+    )
 
     const onFormSubmit: OnDataSetFormSubmit = async (values) => {
         const res = await handleCreate(values)
         if (res.error) {
             return createFormError(res.error)
         }
+        showSuccess({ success: true })
+
         const newId = (res.data as { response: { uid: string } }).response.uid
 
         onSubmitted?.({
@@ -208,15 +225,18 @@ export const NewDataSetSectionForm = ({
 }
 
 export const EditOrNewDataSetSectionForm = ({
-    dataSetSection,
+    section,
     onCancel,
     onSubmitted: onSubmit,
 }: {
-    dataSetSection: DisplayableModel | null
-    onCancel?: () => void
-    onSubmitted?: (values: SubmittedSectionFormValues) => void
+    section: DisplayableModel | null | undefined
+    onCancel: () => void
+    onSubmitted: (values: SubmittedSectionFormValues) => void
 }) => {
-    if (dataSetSection === null) {
+    if (section === undefined) {
+        return
+    }
+    if (section === null) {
         return (
             <NewDataSetSectionForm onSubmitted={onSubmit} onCancel={onCancel} />
         )
@@ -224,7 +244,7 @@ export const EditOrNewDataSetSectionForm = ({
 
     return (
         <EditDataSetSectionForm
-            section={dataSetSection}
+            section={section}
             onCancel={onCancel}
             onSubmitted={onSubmit}
         />

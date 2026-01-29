@@ -1,11 +1,13 @@
 import { faker } from '@faker-js/faker'
-import { render } from '@testing-library/react'
+import { render, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/validationRuleGroups.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
 import { SECTIONS_MAP } from '../../lib'
 import {
     randomLongString,
+    testCustomAttribute,
     testValidationRule,
     testValidationRuleGroupsForm,
 } from '../../testUtils/builders'
@@ -52,11 +54,13 @@ describe('Validation Rule Groups form tests', () => {
                     testValidationRule(),
                     testValidationRule(),
                 ]
+                const attributes = [testCustomAttribute({ mandatory: false })]
 
                 const screen = render(
                     <TestComponentWithRouter
                         path={`/${section.namePlural}`}
                         customData={{
+                            attributes: () => ({ attributes }),
                             validationRules: () => ({ validationRules }),
                             validationRuleGroups: (type: any, params: any) => {
                                 if (type === 'create') {
@@ -153,10 +157,12 @@ describe('Validation Rule Groups form tests', () => {
                     testValidationRule(),
                     testValidationRule(),
                 ]
+                const attributes = [testCustomAttribute({ mandatory: false })]
                 const screen = render(
                     <TestComponentWithRouter
                         path={`/${section.namePlural}`}
                         customData={{
+                            attributes: () => ({ attributes }),
                             validationRules: () => ({
                                 validationRules,
                                 pager: {},
@@ -191,12 +197,12 @@ describe('Validation Rule Groups form tests', () => {
                         <New />
                     </TestComponentWithRouter>
                 )
-                return { screen, validationRules }
+                return { screen, validationRules, attributes }
             }
         )
 
         it('renders all needed fields', async () => {
-            const { screen, validationRules } = await renderForm()
+            const { screen, validationRules, attributes } = await renderForm()
             uiAssertions.expectNameFieldExist('', screen)
             uiAssertions.expectCodeFieldExist('', screen)
             uiAssertions.expectTextAreaFieldToExist('description', '', screen)
@@ -208,12 +214,18 @@ describe('Validation Rule Groups form tests', () => {
                 },
                 screen
             )
+            attributes.forEach((attribute: { id: string }) => {
+                expect(
+                    screen.getByTestId(`attribute-${attribute.id}`)
+                ).toBeVisible()
+            })
         })
 
         it('submits correctly filled data', async () => {
-            const { screen, validationRules } = await renderForm()
+            const { screen, validationRules, attributes } = await renderForm()
             const aName = faker.person.firstName()
             const aCode = faker.string.alpha(5)
+            const anAttribute = faker.internet.userName()
 
             await uiActions.enterName(aName, screen)
             await uiActions.enterCode(aCode, screen)
@@ -222,6 +234,10 @@ describe('Validation Rule Groups form tests', () => {
                 validationRules[1].displayName,
                 screen
             )
+            const attributeInput = within(
+                screen.getByTestId(`attribute-${attributes[0].id}`)
+            ).getByRole('textbox') as HTMLInputElement
+            await userEvent.type(attributeInput, anAttribute)
 
             await uiActions.submitForm(screen)
 
@@ -234,6 +250,14 @@ describe('Validation Rule Groups form tests', () => {
                             expect.objectContaining({
                                 id: validationRules[1].id,
                             }),
+                        ],
+                        attributeValues: [
+                            {
+                                attribute: expect.objectContaining({
+                                    id: attributes[0].id,
+                                }),
+                                value: anAttribute,
+                            },
                         ],
                     }),
                 })
@@ -259,6 +283,7 @@ describe('Validation Rule Groups form tests', () => {
                     testValidationRule(),
                     testValidationRule(),
                 ]
+                const attributes = [testCustomAttribute({ mandatory: false })]
                 const validationRuleGroups = testValidationRuleGroupsForm()
                 validationRuleGroups.validationRules = [validationRules[0]]
                 const id = validationRuleGroups.id
@@ -268,6 +293,7 @@ describe('Validation Rule Groups form tests', () => {
                         path={`/${section.namePlural}/:id`}
                         initialEntries={[`/${section.namePlural}/${id}`]}
                         customData={{
+                            attributes: () => ({ attributes }),
                             validationRules: () => ({
                                 validationRules,
                                 pager: {},

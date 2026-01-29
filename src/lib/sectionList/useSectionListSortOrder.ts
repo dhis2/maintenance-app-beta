@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { useQueryParam, StringParam } from 'use-query-params'
+import { StringParam, useQueryParam } from 'use-query-params'
 import { z } from 'zod'
 import { getSchemaPropertyForPath } from '../models/path'
 import { useSchemaFromHandle } from '../schemas'

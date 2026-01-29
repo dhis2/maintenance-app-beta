@@ -66,6 +66,7 @@ export function DataSetElementsModelTransferField() {
                     input.onChange(selected)
                     input.onBlur()
                 }}
+                enableOrderChange={false}
                 transform={(dataElements) => {
                     return dataElements.map((de) => ({
                         dataElement: {
@@ -125,7 +126,6 @@ export function DataSetElementsModelTransferField() {
                         />
                     )
                 }}
-                enableOrderChange={false}
                 rightFooter={
                     <div className={css.modelTransferFooter}>
                         <Button

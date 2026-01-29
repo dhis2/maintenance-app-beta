@@ -16,6 +16,7 @@ import {
     useBoundResourceQueryFn,
     useOnSubmitEdit,
     SECTIONS_MAP,
+    getSectionPath,
 } from '../../lib'
 import {
     DataSetNotificationTemplate,
@@ -41,6 +42,7 @@ const fieldFilters = [
     'recipientUserGroup[id,displayName]',
     'deliveryChannels',
     'dataSets[id,name,displayName]',
+    'notifyUsersInHierarchyOnly',
 ] as const
 
 type DataSetNotificationResult = PickWithFieldFilters<
@@ -51,6 +53,7 @@ type DataSetNotificationResult = PickWithFieldFilters<
 export const Component = () => {
     const { id: templateId } = useParams<{ id: string }>()
     const queryFn = useBoundResourceQueryFn()
+    const section = SECTIONS_MAP.dataSetNotificationTemplate
 
     const {
         data: template,
@@ -59,7 +62,8 @@ export const Component = () => {
     } = useQuery({
         queryKey: [
             {
-                resource: `dataSetNotificationTemplates/${templateId}`,
+                resource: 'dataSetNotificationTemplates',
+                id: templateId,
                 params: {
                     fields: fieldFilters.join(','),
                 },
@@ -71,7 +75,7 @@ export const Component = () => {
 
     const onSubmit = useOnSubmitEdit({
         modelId: templateId as string,
-        section: SECTIONS_MAP.dataSetNotificationTemplate,
+        section,
     })
 
     if (isError) {
@@ -103,7 +107,9 @@ export const Component = () => {
                             <DataSetNotificationsFormFields />
                             <SectionedFormErrorNotice />
                         </form>
-                        <DefaultFormFooter />
+                        <DefaultFormFooter
+                            cancelTo={`/${getSectionPath(section)}`}
+                        />
                     </SectionedFormLayout>
                 </SectionedFormProvider>
             )}
