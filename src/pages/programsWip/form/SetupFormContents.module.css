@@ -1,0 +1,6 @@
+.versionFieldRow {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp8);
+}
