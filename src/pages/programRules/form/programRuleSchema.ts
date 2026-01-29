@@ -1,14 +1,15 @@
 import { z } from 'zod'
-import { modelFormSchemas } from '../../../lib'
+import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 
-const { modelReference, withDefaultListColumns } = modelFormSchemas
+const { modelReference, withDefaultListColumns, identifiable } =
+    modelFormSchemas
 
 const programRuleBaseSchema = z.object({
-    name: z.string(),
+    name: z.string().trim().min(1),
     description: z.string().optional(),
     priority: z.number().optional(),
     condition: z.string().optional(),
-    program: modelReference.extend({ displayName: z.string() }).optional(),
+    program: modelReference.extend({ displayName: z.string() }),
     programStage: modelReference
         .extend({ displayName: z.string().optional() })
         .optional(),
@@ -17,3 +18,8 @@ const programRuleBaseSchema = z.object({
 export const programRuleListSchema = programRuleBaseSchema.merge(
     withDefaultListColumns
 )
+
+export const programRuleFormSchema = programRuleBaseSchema.merge(identifiable)
+
+export const initialValues = getDefaults(programRuleFormSchema)
+export const validate = createFormValidate(programRuleFormSchema)
