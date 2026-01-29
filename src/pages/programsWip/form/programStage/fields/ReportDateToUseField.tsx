@@ -6,7 +6,7 @@ import { Field as FieldRFF, useFormState } from 'react-final-form'
 export function ReportDateToUseField() {
     const { values } = useFormState({ subscription: { values: true } })
     const openAfterEnrollment = values?.openAfterEnrollment ?? false
-// temp
+
     return (
         <FieldRFF
             name="reportDateToUse"
