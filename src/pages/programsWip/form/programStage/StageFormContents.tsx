@@ -37,6 +37,7 @@ import {
 import styles from '../EnrollmentFormFormContents.module.css'
 import { ValidationStrategyField } from './fields'
 import { EditOrNewStageSectionForm } from './programStageSection/ProgramStageSectionForm'
+import { StageCreationAndSchedulingFormContents } from './StageCreationAndSchedulingFormContents'
 import { StageDataFormContents } from './StageDataFormContents'
 import { stageSchemaSection } from './StageForm'
 import { StageFormDescriptor } from './stageFormDescriptor'
@@ -321,26 +322,16 @@ export const StageFormContents = ({
                     />
                 </StandardFormField>
             </SectionedFormSection>
-            <SectionedFormSection
+            <StageCreationAndSchedulingFormContents
                 name={descriptor.getSection('stageCreationAndScheduling').name}
-            >
-                <StandardFormSectionTitle>
-                    {i18n.t('Event Repetition')}
-                </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Define the frequency of events within this stage.'
-                    )}
-                </StandardFormSectionDescription>
-                <div style={{ minHeight: 600 }} />
-            </SectionedFormSection>
-            <SectionedFormSection
+                sectionLabel={
+                    descriptor.getSection('stageCreationAndScheduling').label
+                }
+            />
+            <StageDataFormContents
                 name={descriptor.getSection('stageData').name}
-            >
-                <StageDataFormContents
-                    name={descriptor.getSection('stageData').name}
-                />
-            </SectionedFormSection>
+                sectionLabel={descriptor.getSection('stageData').label}
+            />
             <SectionedFormSection
                 name={descriptor.getSection('stageForm').name}
             >
