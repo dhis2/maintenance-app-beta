@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-28T15:13:11.059Z\n"
-"PO-Revision-Date: 2026-01-28T15:13:11.059Z\n"
+"POT-Creation-Date: 2026-01-30T09:00:24.093Z\n"
+"PO-Revision-Date: 2026-01-30T09:00:24.093Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -4659,6 +4659,24 @@ msgstr "Choose how this program is disaggregated."
 msgid "Access and Sharing"
 msgstr "Access and Sharing"
 
+msgid "Event repetition"
+msgstr "Event repetition"
+
+msgid "Define the frequency of events within this stage."
+msgstr "Define the frequency of events within this stage."
+
+msgid "Event scheduling"
+msgstr "Event scheduling"
+
+msgid "Configure how and when events in this stage are scheduled."
+msgstr "Configure how and when events in this stage are scheduled."
+
+msgid "Completion options"
+msgstr "Completion options"
+
+msgid "Decide what should happen after a user completes this event."
+msgstr "Decide what should happen after a user completes this event."
+
 msgid "Configure data collection for events in this program stage."
 msgstr "Configure data collection for events in this program stage."
 
@@ -4701,6 +4719,9 @@ msgstr "Saving a stage does not save other changes to the program"
 msgid "Stage form saved"
 msgstr "Stage form saved"
 
+msgid "A stage with this name already exists. Please choose another name."
+msgstr "A stage with this name already exists. Please choose another name."
+
 msgid "Configure the basic information for this program stage."
 msgstr "Configure the basic information for this program stage."
 
@@ -4710,29 +4731,29 @@ msgstr "Configuration options"
 msgid "Set up more advanced options for this program stage."
 msgstr "Set up more advanced options for this program stage."
 
+msgid "Allow user assignment of events"
+msgstr "Allow user assignment of events"
+
+msgid "Pre-generate event UID"
+msgstr "Pre-generate event UID"
+
 msgid "Custom terminology"
 msgstr "Custom terminology"
 
 msgid "Customise the wording of labels for this stage."
 msgstr "Customise the wording of labels for this stage."
 
-msgid "Event repetition"
-msgstr "Event repetition"
+msgid "Custom label for report date"
+msgstr "Custom label for report date"
 
-msgid "Define the frequency of events within this stage."
-msgstr "Define the frequency of events within this stage."
+msgid "Custom label for due date"
+msgstr "Custom label for due date"
 
-msgid "Event scheduling"
-msgstr "Event scheduling"
+msgid "Custom label for program stage"
+msgstr "Custom label for program stage"
 
-msgid "Configure how and when events in this stage are scheduled."
-msgstr "Configure how and when events in this stage are scheduled."
-
-msgid "Completion options"
-msgstr "Completion options"
-
-msgid "Decide what should happen after a user completes this event."
-msgstr "Decide what should happen after a user completes this event."
+msgid "Custom label for event"
+msgstr "Custom label for event"
 
 msgid "Program stage form"
 msgstr "Program stage form"
@@ -4756,18 +4777,6 @@ msgstr "On event completion, show a prompt to create a new event"
 msgid "Auto-generate an event in this stage"
 msgstr "Auto-generate an event in this stage"
 
-msgid "Custom label for due date"
-msgstr "Custom label for due date"
-
-msgid "Allow user assignment of events"
-msgstr "Allow user assignment of events"
-
-msgid "Custom label for event"
-msgstr "Custom label for event"
-
-msgid "Custom label for report date"
-msgstr "Custom label for report date"
-
 msgid "Generate events based on enrollment date"
 msgstr "Generate events based on enrollment date"
 
@@ -4786,12 +4795,6 @@ msgstr "Default next scheduled date"
 msgid "Open data entry form after enrollment"
 msgstr "Open data entry form after enrollment"
 
-msgid "Pre-generate event UID"
-msgstr "Pre-generate event UID"
-
-msgid "Custom label for program stage"
-msgstr "Custom label for program stage"
-
 msgid "On event completion, ask user to complete enrollment"
 msgstr "On event completion, ask user to complete enrollment"
 
@@ -4800,9 +4803,6 @@ msgstr "Allow multiple events in this stage (repeatable stage)"
 
 msgid "Report date to use"
 msgstr "Report date to use"
-
-msgid "A stage with this name already exists. Please choose another name."
-msgstr "A stage with this name already exists. Please choose another name."
 
 msgid "Standard interval days"
 msgstr "Standard interval days"
