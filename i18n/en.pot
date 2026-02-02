@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-28T12:39:48.057Z\n"
-"PO-Revision-Date: 2026-01-28T12:39:48.057Z\n"
+"POT-Creation-Date: 2026-01-29T10:23:05.041Z\n"
+"PO-Revision-Date: 2026-01-29T10:23:05.041Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1076,6 +1076,15 @@ msgstr "None"
 msgid "No value"
 msgstr "No value"
 
+msgid "Event"
+msgstr "Event"
+
+msgid "Enrollment"
+msgstr "Enrollment"
+
+msgid "Tracked entity"
+msgstr "Tracked entity"
+
 msgid "Public can edit"
 msgstr "Public can edit"
 
@@ -1547,12 +1556,6 @@ msgstr "Section"
 msgid "Section Multi-org"
 msgstr "Section Multi-org"
 
-msgid "Event"
-msgstr "Event"
-
-msgid "Enrollment"
-msgstr "Enrollment"
-
 msgid "BiMonthly"
 msgstr "BiMonthly"
 
@@ -1945,6 +1948,12 @@ msgstr "Program name"
 
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
+
+msgid "Initiating entity type"
+msgstr "Initiating entity type"
+
+msgid "Receiving entity type"
+msgstr "Receiving entity type"
 
 msgid "Unique"
 msgstr "Unique"
@@ -4824,9 +4833,6 @@ msgstr "Saving a section does not save other changes to the program"
 
 msgid "Enrollment section form saved"
 msgstr "Enrollment section form saved"
-
-msgid "Tracked entity"
-msgstr "Tracked entity"
 
 msgid "Relationship entity constraint"
 msgstr "Relationship entity constraint"
