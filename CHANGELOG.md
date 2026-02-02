@@ -1,3 +1,10 @@
+# [0.122.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.121.0...v0.122.0) (2026-02-02)
+
+
+### Features
+
+* [DHIS2-20539] Program stage creation and scheduling ([#732](https://github.com/dhis2/maintenance-app-beta/issues/732)) ([8aea8eb](https://github.com/dhis2/maintenance-app-beta/commit/8aea8ebcc33ecee02dd2c6e26ce1fe5a799e62d8))
+
 # [0.121.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.120.1...v0.121.0) (2026-02-02)
 
 
