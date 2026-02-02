@@ -749,6 +749,7 @@ export const modelListViewsConfig = {
                 { label: i18n.t('Option set'), path: 'optionSet.displayName' },
             ],
             available: [
+                { label: i18n.t('Sort order'), path: 'sortOrder' },
                 {
                     label: i18n.t('Category attribute'),
                     path: 'categoryAttribute',
