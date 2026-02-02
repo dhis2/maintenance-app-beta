@@ -1,8 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
-import { InputFieldFF } from '@dhis2/ui'
+import { InputFieldFF, NoticeBox } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF, useField, useFormState } from 'react-final-form'
 import type { FieldMetaState } from 'react-final-form'
+import { useParams } from 'react-router-dom'
 import {
     ExpressionBuilderEntry,
     SectionedFormSection,
@@ -19,6 +20,7 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
+import { ProgramRuleActionsFormContents } from './actions/ProgramRuleActionsFormContents'
 import { ProgramRuleFormDescriptor } from './formDescriptor'
 
 export const ProgramRuleFormFields = () => {
@@ -27,12 +29,14 @@ export const ProgramRuleFormFields = () => {
         useSectionedFormContext<typeof ProgramRuleFormDescriptor>()
     useSyncSelectedSectionWithScroll()
     const { values } = useFormState({ subscription: { values: true } })
+    const modelId = useParams().id
 
     const { input, meta } = useField('priority', {
         parse: (value?: string) =>
-            value === undefined || value === '' ? 0 : parseFloat(value),
+            value === undefined || value === '' ? undefined : parseFloat(value),
         type: 'number',
-        format: (value) => value?.toString(),
+        format: (value) =>
+            value === undefined || value === null ? '' : value.toString(),
     })
 
     const { input: programInput } = useField('program')
@@ -79,13 +83,43 @@ export const ProgramRuleFormFields = () => {
                         query={{
                             resource: 'programs',
                             params: {
-                                fields: ['id', 'displayName'],
+                                fields: ['id', 'displayName', 'programType'],
                                 paging: false,
                             },
                         }}
                         disabled={isEdit}
                     />
                 </StandardFormField>
+
+                {programInput?.value?.id &&
+                    programInput?.value?.programType !==
+                        'WITHOUT_REGISTRATION' && (
+                        <StandardFormField>
+                            <ModelSingleSelectFormField
+                                inputWidth="400px"
+                                dataTest="program-stage-field"
+                                name="programStage"
+                                label={i18n.t('Program stages to trigger rule')}
+                                query={{
+                                    resource: 'programStages',
+                                    params: {
+                                        fields: ['id', 'displayName'],
+                                        filter: [
+                                            `program.id:eq:${programInput.value.id}`,
+                                        ],
+                                        paging: false,
+                                    },
+                                }}
+                                showNoValueOption={{
+                                    value: '',
+                                    label: i18n.t('All program stages'),
+                                }}
+                                helpText={i18n.t(
+                                    'Select a specific program stage or leave as "All program stages" to trigger on all stages.'
+                                )}
+                            />
+                        </StandardFormField>
+                    )}
 
                 <StandardFormField>
                     <InputFieldFF
@@ -129,6 +163,23 @@ export const ProgramRuleFormFields = () => {
                         />
                     </PaddedContainer>
                 </StandardFormField>
+            </SectionedFormSection>
+            <SectionedFormSection name={descriptor.getSection('actions').name}>
+                <StandardFormSectionTitle>
+                    {i18n.t('Actions')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t('Configure actions for this program rule.')}
+                </StandardFormSectionDescription>
+                {!modelId ? (
+                    <NoticeBox>
+                        {i18n.t(
+                            'Program rule must be saved before actions can be added'
+                        )}
+                    </NoticeBox>
+                ) : (
+                    <ProgramRuleActionsFormContents />
+                )}
             </SectionedFormSection>
         </SectionedFormSections>
     )

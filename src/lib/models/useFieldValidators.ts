@@ -33,6 +33,9 @@ export function useValidator({
 
     const validators = useMemo(() => {
         const validatorsList: Validator[] = []
+        if (propertyDetails == null) {
+            return validatorsList
+        }
         if (propertyDetails.propertyType !== 'INTEGER') {
             if (propertyDetails.max !== undefined) {
                 validatorsList.push(checkMaxLengthFromProperty(propertyDetails))

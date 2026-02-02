@@ -23,6 +23,10 @@ export const ProgramRuleFormDescriptor = {
                     label: i18n.t('Program'),
                 },
                 {
+                    name: 'programStage',
+                    label: i18n.t('Program stages to trigger rule'),
+                },
+                {
                     name: 'priority',
                     label: i18n.t('Priority'),
                 },
@@ -37,6 +41,11 @@ export const ProgramRuleFormDescriptor = {
                     label: i18n.t('Condition'),
                 },
             ],
+        },
+        {
+            name: 'actions',
+            label: i18n.t('Actions'),
+            fields: [],
         },
     ],
 } as const satisfies SectionedFormDescriptor<ProgramRuleFormValues>
