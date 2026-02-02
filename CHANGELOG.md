@@ -1,3 +1,11 @@
+## [0.120.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.120.0...v0.120.1) (2026-02-02)
+
+
+### Bug Fixes
+
+* dataElements typo ([#754](https://github.com/dhis2/maintenance-app-beta/issues/754)) ([958f28c](https://github.com/dhis2/maintenance-app-beta/commit/958f28c1571ac6db81da0f4af71de06e821b203f))
+* impose sort order for attributes [DHIS2-13398] ([#737](https://github.com/dhis2/maintenance-app-beta/issues/737)) ([ad52174](https://github.com/dhis2/maintenance-app-beta/commit/ad52174a44f573cad9cd27cd0d2ce8b5d5bc66c4))
+
 # [0.120.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.119.0...v0.120.0) (2026-01-29)
 
 
