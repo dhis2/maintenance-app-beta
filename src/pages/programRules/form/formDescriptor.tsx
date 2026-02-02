@@ -28,5 +28,15 @@ export const ProgramRuleFormDescriptor = {
                 },
             ],
         },
+        {
+            name: 'expression',
+            label: i18n.t('Expression'),
+            fields: [
+                {
+                    name: 'condition',
+                    label: i18n.t('Condition'),
+                },
+            ],
+        },
     ],
 } as const satisfies SectionedFormDescriptor<ProgramRuleFormValues>

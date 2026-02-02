@@ -4,12 +4,14 @@ import React from 'react'
 import { Field as FieldRFF, useField, useFormState } from 'react-final-form'
 import type { FieldMetaState } from 'react-final-form'
 import {
+    ExpressionBuilderEntry,
     SectionedFormSection,
     SectionedFormSections,
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
+import { PaddedContainer } from '../../../components/ExpressionBuilder/PaddedContainer'
 import { DescriptionField, NameField } from '../../../components/form/fields'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import {
@@ -33,6 +35,7 @@ export const ProgramRuleFormFields = () => {
         format: (value) => value?.toString(),
     })
 
+    const { input: programInput } = useField('program')
     const isEdit = Boolean(values.id)
 
     return (
@@ -99,6 +102,32 @@ export const ProgramRuleFormFields = () => {
                             'Can be 0 or negative. Leave empty if not needed.'
                         )}
                     />
+                </StandardFormField>
+            </SectionedFormSection>
+            <SectionedFormSection
+                name={descriptor.getSection('expression').name}
+            >
+                <StandardFormSectionTitle>
+                    {i18n.t('Expression')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t('Configure the program rule condition expression.')}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <PaddedContainer>
+                        <ExpressionBuilderEntry
+                            fieldName="condition"
+                            title={i18n.t('Edit condition expression')}
+                            editButtonText={i18n.t('Edit condition expression')}
+                            setUpButtonText={i18n.t(
+                                'Set up condition expression'
+                            )}
+                            validationResource="programRules/condition/description"
+                            clearable={true}
+                            programId={programInput?.value?.id}
+                            type="default"
+                        />
+                    </PaddedContainer>
                 </StandardFormField>
             </SectionedFormSection>
         </SectionedFormSections>
