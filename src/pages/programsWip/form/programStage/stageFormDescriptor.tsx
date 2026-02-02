@@ -61,7 +61,62 @@ export const StageFormDescriptor = {
             label: i18n.t('Stage: Creation and Scheduling', {
                 nsSeparator: '~:~',
             }),
-            fields: [],
+            fields: [
+                {
+                    name: 'repeatable',
+                    label: i18n.t(
+                        'Allow multiple events in this stage (repeatable stage)'
+                    ),
+                },
+                {
+                    name: 'standardInterval',
+                    label: i18n.t('Standard interval days'),
+                },
+                {
+                    name: 'generatedByEnrollmentDate',
+                    label: i18n.t('Generate events based on enrollment date'),
+                },
+                {
+                    name: 'autoGenerateEvent',
+                    label: i18n.t('Auto-generate an event in this stage'),
+                },
+                {
+                    name: 'openAfterEnrollment',
+                    label: i18n.t('Open data entry form after enrollment'),
+                },
+                {
+                    name: 'reportDateToUse',
+                    label: i18n.t('Report date to use'),
+                },
+                {
+                    name: 'minDaysFromStart',
+                    label: i18n.t('Scheduled days from start'),
+                },
+                {
+                    name: 'hideDueDate',
+                    label: i18n.t('Show scheduled date'),
+                },
+                {
+                    name: 'periodType',
+                    label: i18n.t('Period type'),
+                },
+                {
+                    name: 'nextScheduleDate',
+                    label: i18n.t('Default next scheduled date'),
+                },
+                {
+                    name: 'allowGenerateNextVisit',
+                    label: i18n.t(
+                        'On event completion, show a prompt to create a new event'
+                    ),
+                },
+                {
+                    name: 'remindCompleted',
+                    label: i18n.t(
+                        'On event completion, ask user to complete enrollment'
+                    ),
+                },
+            ],
         },
         {
             name: 'stageData',

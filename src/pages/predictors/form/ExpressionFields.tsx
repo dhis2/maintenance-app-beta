@@ -31,15 +31,12 @@ export const ExpressionFields = ({
     clearable?: boolean
     required?: boolean
 }) => {
+    const title = objectName
+        ? objectName.charAt(0).toUpperCase() + objectName.slice(1)
+        : undefined
     return (
         <div className={css.expressionContainer}>
-            <PaddedContainer>
-                <div className={css.subtitle}>
-                    {objectName
-                        ? objectName.charAt(0).toUpperCase() +
-                          objectName.slice(1)
-                        : ''}
-                </div>
+            <PaddedContainer title={title}>
                 <StandardFormField>
                     <ExpressionBuilderEntry
                         fieldName={`${fieldName}.expression`}
