@@ -1,3 +1,10 @@
+# [0.121.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.120.1...v0.121.0) (2026-02-02)
+
+
+### Features
+
+* disable when configuring non supported TEAs as searchable ([1ad16d2](https://github.com/dhis2/maintenance-app-beta/commit/1ad16d217dbdcd63b4528fa953200e8c5848f29a))
+
 ## [0.120.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.120.0...v0.120.1) (2026-02-02)
 
 
