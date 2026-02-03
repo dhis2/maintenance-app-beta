@@ -1,3 +1,32 @@
+# [0.122.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.121.0...v0.122.0) (2026-02-02)
+
+
+### Features
+
+* [DHIS2-20539] Program stage creation and scheduling ([#732](https://github.com/dhis2/maintenance-app-beta/issues/732)) ([8aea8eb](https://github.com/dhis2/maintenance-app-beta/commit/8aea8ebcc33ecee02dd2c6e26ce1fe5a799e62d8))
+
+# [0.121.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.120.1...v0.121.0) (2026-02-02)
+
+
+### Features
+
+* disable when configuring non supported TEAs as searchable ([1ad16d2](https://github.com/dhis2/maintenance-app-beta/commit/1ad16d217dbdcd63b4528fa953200e8c5848f29a))
+
+## [0.120.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.120.0...v0.120.1) (2026-02-02)
+
+
+### Bug Fixes
+
+* dataElements typo ([#754](https://github.com/dhis2/maintenance-app-beta/issues/754)) ([958f28c](https://github.com/dhis2/maintenance-app-beta/commit/958f28c1571ac6db81da0f4af71de06e821b203f))
+* impose sort order for attributes [DHIS2-13398] ([#737](https://github.com/dhis2/maintenance-app-beta/issues/737)) ([ad52174](https://github.com/dhis2/maintenance-app-beta/commit/ad52174a44f573cad9cd27cd0d2ce8b5d5bc66c4))
+
+# [0.120.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.119.0...v0.120.0) (2026-01-29)
+
+
+### Features
+
+* show initiating and receiving entity type in relationship type list ([ec317fc](https://github.com/dhis2/maintenance-app-beta/commit/ec317fc7bfba074781dba0fd1d94e74db4685790))
+
 # [0.119.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.118.0...v0.119.0) (2026-01-28)
 
 
