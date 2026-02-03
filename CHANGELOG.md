@@ -1,3 +1,10 @@
+## [0.122.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.122.0...v0.122.1) (2026-02-03)
+
+
+### Bug Fixes
+
+* no quotes in css ([#756](https://github.com/dhis2/maintenance-app-beta/issues/756)) ([8e77f83](https://github.com/dhis2/maintenance-app-beta/commit/8e77f8397fefd29a583d60fa5008c9ff3969e824))
+
 # [0.122.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.121.0...v0.122.0) (2026-02-02)
 
 
