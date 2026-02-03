@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-30T09:00:24.093Z\n"
-"PO-Revision-Date: 2026-01-30T09:00:24.093Z\n"
+"POT-Creation-Date: 2026-02-03T14:47:59.077Z\n"
+"PO-Revision-Date: 2026-02-03T14:47:59.077Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1982,6 +1982,9 @@ msgstr "Display front page list"
 msgid "Mandatory"
 msgstr "Mandatory"
 
+msgid "Sort order"
+msgstr "Sort order"
+
 msgid "Category attribute"
 msgstr "Category attribute"
 
@@ -2122,9 +2125,6 @@ msgstr "Basic information"
 
 msgid "Data and options"
 msgstr "Data and options"
-
-msgid "Sort order"
-msgstr "Sort order"
 
 msgid "Category option combo"
 msgstr "Category option combo"
@@ -4647,9 +4647,6 @@ msgstr "Public (All users)"
 msgid "External"
 msgstr "External"
 
-msgid "Should not be lower than previous version"
-msgstr "Should not be lower than previous version"
-
 msgid "Program Details"
 msgstr "Program Details"
 
@@ -4658,6 +4655,9 @@ msgstr "Set up the basic information for this program."
 
 msgid "Last updated:  {{date}}"
 msgstr "Last updated:  {{date}}"
+
+msgid "Increase version"
+msgstr "Increase version"
 
 msgid "Related program"
 msgstr "Related program"
