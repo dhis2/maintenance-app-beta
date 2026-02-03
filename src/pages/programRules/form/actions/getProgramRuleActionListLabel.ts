@@ -133,8 +133,11 @@ export function getProgramRuleActionListLabel(
                 })
                 .replace(' ~-~ ', ' ')
         case 'ASSIGN': {
+            // Include all possible assign targets: dataElement, trackedEntityAttribute, or program rule variable (content)
             const assignTarget = [
                 dataElement?.displayName ?? dataElement?.id,
+                trackedEntityAttribute?.displayName ??
+                    trackedEntityAttribute?.id,
                 content,
             ]
                 .filter(Boolean)

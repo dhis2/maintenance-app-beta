@@ -129,12 +129,6 @@ const ProgramRuleActionListNewOrEdit = () => {
             </DrawerPortal>
 
             <div className={css.listWrapper}>
-                {actions.length === 0 && (
-                    <NoticeBox className={css.formTypeInfo}>
-                        {i18n.t('No program rule actions have been added yet')}
-                    </NoticeBox>
-                )}
-
                 <div className={css.sectionItems}>
                     {actions.map((action, index) => {
                         if (action.deleted) {
