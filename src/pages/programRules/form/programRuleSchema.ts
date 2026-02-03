@@ -1,3 +1,7 @@
+/**
+ * Zod schema and validation for program rule form (including nested programRuleActions).
+ * programType on program so form values match fieldFilters and we can branch on tracker vs event.
+ */
 import { z } from 'zod'
 import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 

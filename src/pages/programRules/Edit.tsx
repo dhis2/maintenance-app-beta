@@ -1,3 +1,8 @@
+/**
+ * Program rule edit page.
+ * Renders a sectioned form (Basic information, Expression, Actions) and on submit
+ * deletes any soft-deleted program rule actions before saving the rule.
+ */
 import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
@@ -26,10 +31,15 @@ import { ProgramRuleFormDescriptor } from './form/formDescriptor'
 import { ProgramRuleFormFields } from './form/ProgramRuleFormFields'
 import { validate } from './form/programRuleSchema'
 
+/** Extends form values so submit handler can read programRuleActions from form state. */
 type ProgramRuleFormValuesWithActions = ProgramRuleFormValues & {
     programRuleActions?: ProgramRuleActionListItem[]
 }
 
+/**
+ * Custom submit handler: deletes actions marked as deleted (soft-delete), then
+ * submits the program rule with the remaining actions.
+ */
 const useOnSubmitProgramRuleEdit = (modelId: string) => {
     const submitEdit = useOnSubmitEdit({
         section: SECTIONS_MAP.programRule,
@@ -44,6 +54,8 @@ const useOnSubmitProgramRuleEdit = (modelId: string) => {
             const actions: ProgramRuleActionListItem[] =
                 formValues.programRuleActions ?? []
 
+            // Delete from API any persisted actions that were soft-deleted in the UI.
+            // Exclude new-* ids so we only call delete for actions that exist on the server.
             const actionsToDelete = actions.filter(
                 (a) => a.deleted && a.id && !a.id.startsWith('new-')
             )
@@ -65,6 +77,7 @@ const useOnSubmitProgramRuleEdit = (modelId: string) => {
                 .filter((r) => r.status === 'rejected')
 
             if (failures.length > 0) {
+                // Invalidate so UI doesn't show stale data after partial delete failures
                 await queryClient.invalidateQueries({
                     queryKey: [{ resource: 'programRules' }],
                 })
@@ -79,6 +92,7 @@ const useOnSubmitProgramRuleEdit = (modelId: string) => {
                 })
             }
 
+            // Strip deleted actions from payload before saving the program rule
             const trimmedValues = {
                 ...values,
                 programRuleActions: actions.filter((a) => !a.deleted),
@@ -123,6 +137,7 @@ export const Component = () => {
             validate={validate}
             subscription={{}}
             mutators={{ ...arrayMutators }}
+            /* arrayMutators needed for useFieldArray('programRuleActions') in ProgramRuleActionsFormContents */
         >
             {({ handleSubmit }) => {
                 return (

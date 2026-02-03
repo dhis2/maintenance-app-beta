@@ -10,9 +10,8 @@ import {
     InputFieldFF,
     SingleSelectFieldFF,
 } from '@dhis2/ui'
-import { useQuery } from '@tanstack/react-query'
-import React, { useMemo } from 'react'
-import { Field, useField, useForm, useFormState } from 'react-final-form'
+import React from 'react'
+import { Field, useFormState } from 'react-final-form'
 import {
     ExpressionBuilderEntry,
     FormBase,
@@ -24,157 +23,29 @@ import {
 } from '../../../../components'
 import { PaddedContainer } from '../../../../components/ExpressionBuilder/PaddedContainer'
 import { ModelSingleSelectFormField } from '../../../../components/metadataFormControls/ModelSingleSelect'
-import { useBoundResourceQueryFn } from '../../../../lib'
 import { ProgramRuleAction } from '../../../../types/generated'
 import { PriorityField } from '../../fields/PriorityField'
+import {
+    createInitialValuesNew,
+    DISPLAY_WIDGET_LOCATION_OPTIONS,
+    normalizeLocation,
+} from './constants'
+import {
+    DataElementSelect,
+    DataElementWithOptionSetSelect,
+    NotificationTemplateSelect,
+    OptionGroupSelect,
+    OptionSelect,
+    ProgramRuleVariableSelect,
+    ProgramStageSectionSelect,
+    TrackedEntityAttributeSelect,
+    TrackedEntityAttributeWithOptionSetSelect,
+} from './fields'
+import { optionSetIdFromFormValues } from './fieldTypes'
 import drawerStyles from './ProgramRuleActionForm.module.css'
 import { PROGRAM_RULE_ACTION_TYPE_OPTIONS } from './programRuleActionTypeConstants'
 import type { ProgramRuleActionListItem } from './types'
-
-const DISPLAY_WIDGET_LOCATION_OPTIONS = [
-    { label: i18n.t('Feedback'), value: 'FEEDBACK' },
-    { label: i18n.t('Indicators'), value: 'INDICATORS' },
-]
-
-type DataElementWithOptionSet = {
-    id: string
-    displayName?: string
-    optionSet?: { id: string }
-}
-type TrackedEntityAttributeWithOptionSet = {
-    id: string
-    displayName?: string
-    optionSet?: { id: string }
-}
-
-type ProgramRuleActionFormValues = Partial<ProgramRuleActionListItem> & {
-    programRule?: { id: string }
-    dataElement?:
-        | DataElementWithOptionSet
-        | { id: string; displayName?: string }
-    trackedEntityAttribute?:
-        | TrackedEntityAttributeWithOptionSet
-        | { id: string; displayName?: string }
-}
-
-// New actions get a client-only id so we can key list items; Edit.tsx skips delete for ids starting with 'new-'
-const initialValuesNew = (
-    programRuleId: string
-): ProgramRuleActionFormValues => ({
-    id: `new-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
-    programRuleActionType: ProgramRuleAction.programRuleActionType.SHOWWARNING,
-    priority: undefined,
-    content: '',
-    data: '',
-    location: '',
-    programRule: { id: programRuleId },
-})
-
-/** Per-action-type validation (e.g. HIDEFIELD requires dataElement or trackedEntityAttribute) */
-function validateProgramRuleAction(
-    values: ProgramRuleActionFormValues
-): Record<string, string> | undefined {
-    const errors: Record<string, string> = {}
-    const actionType = values.programRuleActionType
-    const hasDataElement = !!values.dataElement?.id
-    const hasTrackedEntityAttribute = !!values.trackedEntityAttribute?.id
-    const hasContent = !!values.content?.trim()
-    const hasData = !!values.data?.trim()
-    const hasOption = !!values.option?.id
-    const hasOptionGroup = !!values.optionGroup?.id
-
-    if (actionType === ProgramRuleAction.programRuleActionType.HIDEFIELD) {
-        if (!hasDataElement && !hasTrackedEntityAttribute) {
-            errors.dataElement = i18n.t(
-                'Select at least one: data element or tracked entity attribute'
-            )
-            errors.trackedEntityAttribute = i18n.t(
-                'Select at least one: data element or tracked entity attribute'
-            )
-        }
-    }
-    if (
-        actionType === ProgramRuleAction.programRuleActionType.SETMANDATORYFIELD
-    ) {
-        if (!hasDataElement && !hasTrackedEntityAttribute) {
-            errors.dataElement = i18n.t(
-                'Data element or tracked entity attribute must be selected'
-            )
-            errors.trackedEntityAttribute = i18n.t(
-                'Data element or tracked entity attribute must be selected'
-            )
-        }
-    }
-    if (actionType === ProgramRuleAction.programRuleActionType.ASSIGN) {
-        if (!hasDataElement && !hasTrackedEntityAttribute && !hasContent) {
-            errors.dataElement = i18n.t(
-                'Select one of: data element, tracked entity attribute, or program rule variable'
-            )
-            errors.trackedEntityAttribute = errors.dataElement
-            errors.content = errors.dataElement
-        }
-        if (!hasData) {
-            errors.data = i18n.t('Expression to assign is required')
-        }
-    }
-    if (actionType === ProgramRuleAction.programRuleActionType.HIDEOPTION) {
-        if (!hasDataElement && !hasTrackedEntityAttribute) {
-            errors.dataElement = i18n.t(
-                'Select a data element or tracked entity attribute with option set'
-            )
-            errors.trackedEntityAttribute = errors.dataElement
-        }
-        if ((hasDataElement || hasTrackedEntityAttribute) && !hasOption) {
-            errors.option = i18n.t('Option to hide is required')
-        }
-    }
-    if (
-        actionType ===
-            ProgramRuleAction.programRuleActionType.SHOWOPTIONGROUP ||
-        actionType === ProgramRuleAction.programRuleActionType.HIDEOPTIONGROUP
-    ) {
-        if (!hasDataElement && !hasTrackedEntityAttribute) {
-            errors.dataElement = i18n.t(
-                'Select a data element or tracked entity attribute with option set'
-            )
-            errors.trackedEntityAttribute = errors.dataElement
-        }
-        if ((hasDataElement || hasTrackedEntityAttribute) && !hasOptionGroup) {
-            errors.optionGroup = i18n.t(
-                actionType ===
-                    ProgramRuleAction.programRuleActionType.SHOWOPTIONGROUP
-                    ? 'Option group to show is required'
-                    : 'Option group to hide is required'
-            )
-        }
-    }
-    return Object.keys(errors).length ? errors : undefined
-}
-
-/** Resolve option set ID from data element or tracked entity attribute for option/optionGroup selects */
-function optionSetIdFromOptionAction(
-    values: ProgramRuleActionFormValues
-): string | undefined {
-    const de = values.dataElement as DataElementWithOptionSet | undefined
-    const tea = values.trackedEntityAttribute as
-        | TrackedEntityAttributeWithOptionSet
-        | undefined
-    return de?.optionSet?.id ?? tea?.optionSet?.id
-}
-
-const DISPLAY_WIDGET_LOCATION_VALUES: readonly string[] = [
-    'FEEDBACK',
-    'INDICATORS',
-]
-
-// Normalize DISPLAYTEXT/DISPLAYKEYVALUEPAIR location to FEEDBACK or INDICATORS for API consistency
-function normalizeLocation(location: string | undefined): string {
-    if (!location) {
-        return ''
-    }
-    const upper = location.toUpperCase()
-    return DISPLAY_WIDGET_LOCATION_VALUES.includes(upper) ? upper : location
-}
+import { validateProgramRuleAction } from './validation'
 
 export const ProgramRuleActionForm = ({
     programRuleId,
@@ -189,23 +60,20 @@ export const ProgramRuleActionForm = ({
     onCancel: () => void
     onSubmitted: (values: ProgramRuleActionListItem) => void
 }) => {
-    const initialValues: ProgramRuleActionFormValues = action
-        ? ({
+    const initialValues = action
+        ? {
               ...action,
               location: normalizeLocation(action.location),
               programRule: { id: programRuleId },
-          } as ProgramRuleActionFormValues)
-        : initialValuesNew(programRuleId)
+          }
+        : createInitialValuesNew(programRuleId)
 
     return (
         <FormBase
             onSubmit={(values) => {
                 // Strip programRule object so payload matches API (API expects programRule as ref, not nested)
-                const submitted = {
-                    ...values,
-                    programRule: undefined,
-                } as ProgramRuleActionListItem
-                onSubmitted(submitted)
+                const { programRule, ...rest } = values
+                onSubmitted(rest as ProgramRuleActionListItem)
             }}
             initialValues={initialValues}
             validate={validateProgramRuleAction}
@@ -218,12 +86,6 @@ export const ProgramRuleActionForm = ({
                     programId={programId}
                     action={action}
                     onCancel={onCancel}
-                    programRuleActionTypeOptions={
-                        PROGRAM_RULE_ACTION_TYPE_OPTIONS
-                    }
-                    displayWidgetLocationOptions={
-                        DISPLAY_WIDGET_LOCATION_OPTIONS
-                    }
                 />
             )}
         </FormBase>
@@ -235,15 +97,11 @@ function ProgramRuleActionFormContents({
     programId,
     action,
     onCancel,
-    programRuleActionTypeOptions,
-    displayWidgetLocationOptions,
 }: {
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
     programId?: string
     action: ProgramRuleActionListItem | null
     onCancel: () => void
-    programRuleActionTypeOptions: Array<{ label: string; value: string }>
-    displayWidgetLocationOptions: Array<{ label: string; value: string }>
 }) {
     const { values } = useFormState({ subscription: { values: true } })
     const actionType = values.programRuleActionType as string | undefined
@@ -269,14 +127,10 @@ function ProgramRuleActionFormContents({
                                 name="programRuleActionType"
                                 label={i18n.t('Action')}
                                 component={SingleSelectFieldFF}
-                                options={programRuleActionTypeOptions}
+                                options={PROGRAM_RULE_ACTION_TYPE_OPTIONS}
                                 dataTest="program-rule-action-type"
                                 required
                             />
-                        </StandardFormField>
-
-                        <StandardFormField>
-                            <PriorityField />
                         </StandardFormField>
 
                         {/* DISPLAYTEXT */}
@@ -289,7 +143,9 @@ function ProgramRuleActionFormContents({
                                         name="location"
                                         label={i18n.t('Display widget')}
                                         component={SingleSelectFieldFF}
-                                        options={displayWidgetLocationOptions}
+                                        options={
+                                            DISPLAY_WIDGET_LOCATION_OPTIONS
+                                        }
                                         dataTest="program-rule-action-location"
                                         required
                                     />
@@ -339,7 +195,9 @@ function ProgramRuleActionFormContents({
                                         name="location"
                                         label={i18n.t('Display widget')}
                                         component={SingleSelectFieldFF}
-                                        options={displayWidgetLocationOptions}
+                                        options={
+                                            DISPLAY_WIDGET_LOCATION_OPTIONS
+                                        }
                                         dataTest="program-rule-action-location"
                                         required
                                     />
@@ -454,7 +312,7 @@ function ProgramRuleActionFormContents({
                                 </StandardFormField>
                             )}
 
-                        {/* SHOWWARNING, SHOWERROR, WARNINGONCOMPLETE, ERRORONCOMPLETE - same pattern */}
+                        {/* SHOWWARNING, SHOWERROR, WARNINGONCOMPLETE, ERRORONCOMPLETE */}
                         {(actionType ===
                             ProgramRuleAction.programRuleActionType
                                 .SHOWWARNING ||
@@ -737,7 +595,7 @@ function ProgramRuleActionFormContents({
                                     </StandardFormField>
                                     <StandardFormField>
                                         <OptionSelect
-                                            optionSetId={optionSetIdFromOptionAction(
+                                            optionSetId={optionSetIdFromFormValues(
                                                 values
                                             )}
                                             label={i18n.t('Option to hide')}
@@ -774,7 +632,7 @@ function ProgramRuleActionFormContents({
                                     </StandardFormField>
                                     <StandardFormField>
                                         <OptionGroupSelect
-                                            optionSetId={optionSetIdFromOptionAction(
+                                            optionSetId={optionSetIdFromFormValues(
                                                 values
                                             )}
                                             label={
@@ -794,6 +652,11 @@ function ProgramRuleActionFormContents({
                                     </StandardFormField>
                                 </>
                             )}
+
+                        {/* PRIORITY - Placed last as requested */}
+                        <StandardFormField>
+                            <PriorityField />
+                        </StandardFormField>
                     </SectionedFormSection>
                 </SectionedFormLayout>
             </div>
@@ -806,756 +669,5 @@ function ProgramRuleActionFormContents({
                 </ButtonStrip>
             </div>
         </form>
-    )
-}
-
-const NO_VALUE_OPTION = { value: '', label: i18n.t('(No Value)') }
-
-/** Data element select; disabled when TEA is selected and clears TEA on change (AC: at most one of DE or TEA) */
-function DataElementSelect({
-    programId,
-    name,
-    label,
-}: {
-    programId: string
-    name: string
-    label: string
-}) {
-    const form = useForm()
-    const { values } = useFormState({ subscription: { values: true } })
-    const queryFn = useBoundResourceQueryFn()
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'programs',
-                id: programId,
-                params: {
-                    fields: [
-                        'programStages[programStageDataElements[dataElement[id,displayName]]]',
-                    ],
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            programStages?: Array<{
-                programStageDataElements?: Array<{
-                    dataElement: { id: string; displayName?: string }
-                }>
-            }>
-        }>,
-    })
-    const elements = useMemo(() => {
-        const list =
-            data?.programStages?.flatMap(
-                (s) =>
-                    s.programStageDataElements?.map(
-                        (psde) => psde.dataElement
-                    ) ?? []
-            ) ?? []
-        const seen = new Set<string>()
-        return list.filter((de) => {
-            if (seen.has(de.id)) {
-                return false
-            }
-            seen.add(de.id)
-            return true
-        })
-    }, [data])
-    const currentValue = (values as ProgramRuleActionFormValues).dataElement
-    const selectedId = currentValue?.id
-    const selectedInList =
-        selectedId && elements.some((e) => e.id === selectedId)
-    const selectOptions = useMemo(
-        () => [
-            NO_VALUE_OPTION,
-            // Include current value in options when not in list (e.g. not yet loaded or removed from program) so SingleSelect does not throw
-            ...(selectedId && !selectedInList
-                ? [
-                      {
-                          value: selectedId,
-                          label:
-                              currentValue?.displayName ?? i18n.t('Loading...'),
-                      },
-                  ]
-                : []),
-            ...elements.map((de) => ({
-                value: de.id,
-                label: de.displayName ?? de.id,
-            })),
-        ],
-        [elements, selectedId, selectedInList, currentValue?.displayName]
-    )
-    const disabled = !!(values as ProgramRuleActionFormValues)
-        .trackedEntityAttribute?.id
-    const { input, meta } = useField(name, {
-        format: (value: { id: string; displayName?: string } | undefined) =>
-            value?.id ?? '',
-        parse: (id: string) =>
-            id ? elements.find((e) => e.id === id) : undefined,
-    })
-    return (
-        <SingleSelectFieldFF
-            input={
-                {
-                    ...input,
-                    onChange: (value: unknown) => {
-                        if (value) {
-                            form.change('trackedEntityAttribute', undefined)
-                        }
-                        input.onChange(value)
-                    },
-                } as typeof input
-            }
-            meta={
-                meta as React.ComponentProps<typeof SingleSelectFieldFF>['meta']
-            }
-            label={label}
-            options={selectOptions}
-            dataTest={`program-rule-action-${name}`}
-            disabled={disabled}
-            filterable
-        />
-    )
-}
-
-/** TEA select; disabled when data element is selected and clears data element on change (AC: at most one of DE or TEA) */
-function TrackedEntityAttributeSelect({
-    programId,
-    name,
-    label,
-}: {
-    programId: string
-    name: string
-    label: string
-}) {
-    const form = useForm()
-    const { values } = useFormState({ subscription: { values: true } })
-    const queryFn = useBoundResourceQueryFn()
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'programs',
-                id: programId,
-                params: {
-                    fields: [
-                        'programTrackedEntityAttributes[trackedEntityAttribute[id,displayName]]',
-                    ],
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            programTrackedEntityAttributes?: Array<{
-                trackedEntityAttribute: { id: string; displayName?: string }
-            }>
-        }>,
-    })
-    const attributes = useMemo(
-        () =>
-            data?.programTrackedEntityAttributes?.map(
-                (pta) => pta.trackedEntityAttribute
-            ) ?? [],
-        [data]
-    )
-    const currentValue = (values as ProgramRuleActionFormValues)
-        .trackedEntityAttribute
-    const selectedId = currentValue?.id
-    const selectedInList =
-        selectedId && attributes.some((a) => a.id === selectedId)
-    const selectOptions = useMemo(
-        () => [
-            NO_VALUE_OPTION,
-            // Include current value in options when not in list so SingleSelect does not throw
-            ...(selectedId && !selectedInList
-                ? [
-                      {
-                          value: selectedId,
-                          label:
-                              currentValue?.displayName ?? i18n.t('Loading...'),
-                      },
-                  ]
-                : []),
-            ...attributes.map((a) => ({
-                value: a.id,
-                label: a.displayName ?? a.id,
-            })),
-        ],
-        [attributes, selectedId, selectedInList, currentValue?.displayName]
-    )
-    const disabled = !!(values as ProgramRuleActionFormValues).dataElement?.id
-    const { input, meta } = useField(name, {
-        format: (value: { id: string; displayName?: string } | undefined) =>
-            value?.id ?? '',
-        parse: (id: string) =>
-            id ? attributes.find((a) => a.id === id) : undefined,
-    })
-    return (
-        <SingleSelectFieldFF
-            input={
-                {
-                    ...input,
-                    onChange: (value: unknown) => {
-                        if (value) {
-                            form.change('dataElement', undefined)
-                        }
-                        input.onChange(value)
-                    },
-                } as typeof input
-            }
-            meta={
-                meta as React.ComponentProps<typeof SingleSelectFieldFF>['meta']
-            }
-            label={label}
-            options={selectOptions}
-            dataTest={`program-rule-action-${name}`}
-            disabled={disabled}
-            filterable
-        />
-    )
-}
-
-function DataElementWithOptionSetSelect({
-    programId,
-    name,
-    label,
-}: {
-    programId: string
-    name: string
-    label: string
-}) {
-    const form = useForm()
-    const { values } = useFormState({ subscription: { values: true } })
-    const queryFn = useBoundResourceQueryFn()
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'programs',
-                id: programId,
-                params: {
-                    fields: [
-                        'programStages[programStageDataElements[dataElement[id,displayName,optionSet[id]]]]',
-                    ],
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            programStages?: Array<{
-                programStageDataElements?: Array<{
-                    dataElement: {
-                        id: string
-                        displayName?: string
-                        optionSet?: { id: string }
-                    }
-                }>
-            }>
-        }>,
-    })
-    const elements = useMemo(() => {
-        const list =
-            data?.programStages?.flatMap(
-                (s) =>
-                    s.programStageDataElements?.map(
-                        (psde) => psde.dataElement
-                    ) ?? []
-            ) ?? []
-        const withOptionSet = list.filter((de) => de.optionSet?.id)
-        const seen = new Set<string>()
-        return withOptionSet.filter((de) => {
-            if (seen.has(de.id)) {
-                return false
-            }
-            seen.add(de.id)
-            return true
-        })
-    }, [data])
-    const currentValue = (values as ProgramRuleActionFormValues).dataElement
-    const selectedId = currentValue?.id
-    const selectedInList =
-        selectedId && elements.some((e) => e.id === selectedId)
-    const selectOptions = useMemo(
-        () => [
-            NO_VALUE_OPTION,
-            ...(selectedId && !selectedInList
-                ? [
-                      {
-                          value: selectedId,
-                          label:
-                              currentValue?.displayName ?? i18n.t('Loading...'),
-                      },
-                  ]
-                : []),
-            ...elements.map((de) => ({
-                value: de.id,
-                label: de.displayName ?? de.id,
-            })),
-        ],
-        [elements, selectedId, selectedInList, currentValue?.displayName]
-    )
-    const disabled = !!(values as ProgramRuleActionFormValues)
-        .trackedEntityAttribute?.id
-    const { input, meta } = useField(name, {
-        format: (value: DataElementWithOptionSet | undefined) =>
-            value?.id ?? '',
-        parse: (id: string) =>
-            id ? elements.find((e) => e.id === id) : undefined,
-    })
-    return (
-        <SingleSelectFieldFF
-            input={
-                {
-                    ...input,
-                    onChange: (value: unknown) => {
-                        if (value) {
-                            form.change('trackedEntityAttribute', undefined)
-                            form.change('option', undefined)
-                            form.change('optionGroup', undefined)
-                        }
-                        input.onChange(value)
-                    },
-                } as typeof input
-            }
-            meta={
-                meta as React.ComponentProps<typeof SingleSelectFieldFF>['meta']
-            }
-            label={label}
-            options={selectOptions}
-            dataTest={`program-rule-action-${name}`}
-            disabled={disabled}
-            filterable
-        />
-    )
-}
-
-function TrackedEntityAttributeWithOptionSetSelect({
-    programId,
-    name,
-    label,
-}: {
-    programId: string
-    name: string
-    label: string
-}) {
-    const form = useForm()
-    const { values } = useFormState({ subscription: { values: true } })
-    const queryFn = useBoundResourceQueryFn()
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'programs',
-                id: programId,
-                params: {
-                    fields: [
-                        'programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,optionSet[id]]]',
-                    ],
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            programTrackedEntityAttributes?: Array<{
-                trackedEntityAttribute: {
-                    id: string
-                    displayName?: string
-                    optionSet?: { id: string }
-                }
-            }>
-        }>,
-    })
-    const attributes = useMemo(() => {
-        const list =
-            data?.programTrackedEntityAttributes?.map(
-                (pta) => pta.trackedEntityAttribute
-            ) ?? []
-        return list.filter((a) => a.optionSet?.id)
-    }, [data])
-    const currentValue = (values as ProgramRuleActionFormValues)
-        .trackedEntityAttribute
-    const selectedId = currentValue?.id
-    const selectedInList =
-        selectedId && attributes.some((a) => a.id === selectedId)
-    const selectOptions = useMemo(
-        () => [
-            NO_VALUE_OPTION,
-            ...(selectedId && !selectedInList
-                ? [
-                      {
-                          value: selectedId,
-                          label:
-                              currentValue?.displayName ?? i18n.t('Loading...'),
-                      },
-                  ]
-                : []),
-            ...attributes.map((a) => ({
-                value: a.id,
-                label: a.displayName ?? a.id,
-            })),
-        ],
-        [attributes, selectedId, selectedInList, currentValue?.displayName]
-    )
-    const disabled = !!(values as ProgramRuleActionFormValues).dataElement?.id
-    const { input, meta } = useField(name, {
-        format: (value: TrackedEntityAttributeWithOptionSet | undefined) =>
-            value?.id ?? '',
-        parse: (id: string) =>
-            id ? attributes.find((a) => a.id === id) : undefined,
-    })
-    return (
-        <SingleSelectFieldFF
-            input={
-                {
-                    ...input,
-                    onChange: (value: unknown) => {
-                        if (value) {
-                            form.change('dataElement', undefined)
-                            form.change('option', undefined)
-                            form.change('optionGroup', undefined)
-                        }
-                        input.onChange(value)
-                    },
-                } as typeof input
-            }
-            meta={
-                meta as React.ComponentProps<typeof SingleSelectFieldFF>['meta']
-            }
-            label={label}
-            options={selectOptions}
-            dataTest={`program-rule-action-${name}`}
-            disabled={disabled}
-            filterable
-        />
-    )
-}
-
-function OptionSelect({
-    optionSetId,
-    label,
-    required,
-}: {
-    optionSetId: string | undefined
-    label: string
-    required?: boolean
-}) {
-    const queryFn = useBoundResourceQueryFn()
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'options',
-                params: {
-                    fields: ['id', 'displayName'],
-                    filter: optionSetId
-                        ? [`optionSet.id:eq:${optionSetId}`]
-                        : undefined,
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            options?: Array<{ id: string; displayName?: string }>
-        }>,
-        enabled: !!optionSetId,
-    })
-    const options = useMemo(() => data?.options ?? [], [data])
-    const currentValue = (
-        useFormState({ subscription: { values: true } })
-            .values as ProgramRuleActionFormValues
-    ).option
-    const selectedId = currentValue?.id
-    const selectedInList =
-        selectedId && options.some((o) => o.id === selectedId)
-    const selectOptions = useMemo(
-        () => [
-            ...(selectedId && !selectedInList
-                ? [
-                      {
-                          value: selectedId,
-                          label:
-                              currentValue?.displayName ?? i18n.t('Loading...'),
-                      },
-                  ]
-                : []),
-            ...options.map((o) => ({
-                value: o.id,
-                label: o.displayName ?? o.id,
-            })),
-        ],
-        [options, selectedId, selectedInList, currentValue?.displayName]
-    )
-    const { input, meta } = useField('option', {
-        format: (value: { id: string; displayName?: string } | undefined) =>
-            value?.id ?? '',
-        parse: (id: string) =>
-            id ? options.find((o) => o.id === id) : undefined,
-    })
-    return (
-        <SingleSelectFieldFF
-            input={
-                input as React.ComponentProps<
-                    typeof SingleSelectFieldFF
-                >['input']
-            }
-            meta={
-                meta as React.ComponentProps<typeof SingleSelectFieldFF>['meta']
-            }
-            label={label}
-            options={selectOptions}
-            disabled={!optionSetId}
-            dataTest="program-rule-action-option"
-            required={required}
-            filterable
-        />
-    )
-}
-
-function OptionGroupSelect({
-    optionSetId,
-    label,
-    required,
-}: {
-    optionSetId: string | undefined
-    label: string
-    required?: boolean
-}) {
-    const queryFn = useBoundResourceQueryFn()
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'optionGroups',
-                params: {
-                    fields: ['id', 'displayName'],
-                    filter: optionSetId
-                        ? [`optionSet.id:eq:${optionSetId}`, 'name:neq:default']
-                        : undefined,
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            optionGroups?: Array<{ id: string; displayName?: string }>
-        }>,
-        enabled: !!optionSetId,
-    })
-    const optionGroups = useMemo(() => data?.optionGroups ?? [], [data])
-    const currentValue = (
-        useFormState({ subscription: { values: true } })
-            .values as ProgramRuleActionFormValues
-    ).optionGroup
-    const selectedId = currentValue?.id
-    const selectedInList =
-        selectedId && optionGroups.some((og) => og.id === selectedId)
-    const selectOptions = useMemo(
-        () => [
-            ...(selectedId && !selectedInList
-                ? [
-                      {
-                          value: selectedId,
-                          label:
-                              currentValue?.displayName ?? i18n.t('Loading...'),
-                      },
-                  ]
-                : []),
-            ...optionGroups.map((og) => ({
-                value: og.id,
-                label: og.displayName ?? og.id,
-            })),
-        ],
-        [optionGroups, selectedId, selectedInList, currentValue?.displayName]
-    )
-    const { input, meta } = useField('optionGroup', {
-        format: (value: { id: string; displayName?: string } | undefined) =>
-            value?.id ?? '',
-        parse: (id: string) =>
-            id ? optionGroups.find((og) => og.id === id) : undefined,
-    })
-    return (
-        <SingleSelectFieldFF
-            input={
-                input as React.ComponentProps<
-                    typeof SingleSelectFieldFF
-                >['input']
-            }
-            meta={
-                meta as React.ComponentProps<typeof SingleSelectFieldFF>['meta']
-            }
-            label={label}
-            options={selectOptions}
-            disabled={!optionSetId}
-            dataTest="program-rule-action-option-group"
-            required={required}
-            filterable
-        />
-    )
-}
-
-function ProgramStageSectionSelect({
-    programId,
-    label,
-}: {
-    programId: string
-    label: string
-}) {
-    const queryFn = useBoundResourceQueryFn()
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'programs',
-                id: programId,
-                params: {
-                    fields: [
-                        'programStages[programStageSections[id,displayName]]',
-                    ],
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            programStages?: Array<{
-                programStageSections?: Array<{
-                    id: string
-                    displayName?: string
-                }>
-            }>
-        }>,
-    })
-    const sections = useMemo(() => {
-        const list =
-            data?.programStages?.flatMap((s) => s.programStageSections ?? []) ??
-            []
-        const seen = new Set<string>()
-        return list.filter((s) => {
-            if (seen.has(s.id)) {
-                return false
-            }
-            seen.add(s.id)
-            return true
-        })
-    }, [data])
-    const selectOptions = useMemo(
-        () =>
-            sections.map((s) => ({
-                value: s.id,
-                label: s.displayName ?? s.id,
-            })),
-        [sections]
-    )
-    return (
-        <Field
-            name="programStageSection"
-            label={label}
-            component={SingleSelectFieldFF as any}
-            options={selectOptions}
-            required
-            dataTest="program-rule-action-program-stage-section"
-            filterable
-        />
-    )
-}
-
-function ProgramRuleVariableSelect({ programId }: { programId: string }) {
-    const queryFn = useBoundResourceQueryFn()
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'programRuleVariables',
-                params: {
-                    fields: ['id', 'displayName'],
-                    filter: `program.id:eq:${programId}`,
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            programRuleVariables?: Array<{ id: string; displayName?: string }>
-        }>,
-    })
-    const variables = useMemo(() => data?.programRuleVariables ?? [], [data])
-    const selectOptions = useMemo(
-        () => [
-            NO_VALUE_OPTION,
-            ...variables.map((v) => ({
-                value: v.id,
-                label: v.displayName ?? v.id,
-            })),
-        ],
-        [variables]
-    )
-    return (
-        <Field
-            name="content"
-            label={i18n.t('Program rule variable to assign to')}
-            component={SingleSelectFieldFF as any}
-            options={selectOptions}
-            dataTest="program-rule-action-program-rule-variable"
-            format={(value: string | undefined) => value ?? ''}
-            parse={(id: string) => id || undefined}
-            filterable
-        />
-    )
-}
-
-function NotificationTemplateSelect({
-    programId,
-    required,
-}: {
-    programId: string
-    required?: boolean
-}) {
-    const queryFn = useBoundResourceQueryFn()
-    const { data: programData } = useQuery({
-        queryKey: [
-            {
-                resource: 'programs',
-                id: programId,
-                params: {
-                    fields: [
-                        'notificationTemplates[id,displayName]',
-                        'programStages[notificationTemplates[id,displayName]]',
-                    ],
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            notificationTemplates?: Array<{ id: string; displayName?: string }>
-            programStages?: Array<{
-                notificationTemplates?: Array<{
-                    id: string
-                    displayName?: string
-                }>
-            }>
-        }>,
-    })
-    const options = useMemo(() => {
-        const fromProgram = programData?.notificationTemplates ?? []
-        const fromStages =
-            programData?.programStages?.flatMap(
-                (s) => s.notificationTemplates ?? []
-            ) ?? []
-        const all = [...fromProgram, ...fromStages]
-        const seen = new Set<string>()
-        return all.filter((t) => {
-            if (seen.has(t.id)) {
-                return false
-            }
-            seen.add(t.id)
-            return true
-        })
-    }, [programData])
-    const selectOptions = useMemo(
-        () =>
-            options.map((t) => ({ value: t.id, label: t.displayName ?? t.id })),
-        [options]
-    )
-    return (
-        <Field
-            name="templateUid"
-            label={i18n.t('Message template')}
-            component={SingleSelectFieldFF as any}
-            options={selectOptions}
-            required={required}
-            dataTest="program-rule-action-notification-template"
-            filterable
-        />
     )
 }

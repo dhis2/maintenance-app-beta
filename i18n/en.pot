@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-02T14:25:02.177Z\n"
-"PO-Revision-Date: 2026-02-02T14:25:02.177Z\n"
+"POT-Creation-Date: 2026-02-03T09:43:53.374Z\n"
+"PO-Revision-Date: 2026-02-03T09:43:53.374Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -4391,14 +4391,14 @@ msgstr "Program Rule Variable"
 msgid "There was an error deleting program rule actions"
 msgstr "There was an error deleting program rule actions"
 
-msgid "Set up the basic information for this program rule."
-msgstr "Set up the basic information for this program rule."
+msgid "Edit condition expression"
+msgstr "Edit condition expression"
 
-msgid "Only used for managing metadata, not shown with rule output"
-msgstr "Only used for managing metadata, not shown with rule output"
+msgid "Set up condition expression"
+msgstr "Set up condition expression"
 
-msgid "Explain the purpose of this program rule. Not shown with rule output."
-msgstr "Explain the purpose of this program rule. Not shown with rule output."
+msgid "Can be 0 or negative. Leave empty if not needed."
+msgstr "Can be 0 or negative. Leave empty if not needed."
 
 msgid "Program stages to trigger rule"
 msgstr "Program stages to trigger rule"
@@ -4413,74 +4413,17 @@ msgstr ""
 "Select a specific program stage or leave as \"All program stages\" to "
 "trigger on all stages."
 
-msgid "Can be 0 or negative. Leave empty if not needed."
-msgstr "Can be 0 or negative. Leave empty if not needed."
+msgid "Set up the basic information for this program rule."
+msgstr "Set up the basic information for this program rule."
+
+msgid "Only used for managing metadata, not shown with rule output"
+msgstr "Only used for managing metadata, not shown with rule output"
+
+msgid "Explain the purpose of this program rule. Not shown with rule output."
+msgstr "Explain the purpose of this program rule. Not shown with rule output."
 
 msgid "Configure the program rule condition expression."
 msgstr "Configure the program rule condition expression."
-
-msgid "Edit condition expression"
-msgstr "Edit condition expression"
-
-msgid "Set up condition expression"
-msgstr "Set up condition expression"
-
-msgid "Configure actions for this program rule."
-msgstr "Configure actions for this program rule."
-
-msgid "Program rule must be saved before actions can be added"
-msgstr "Program rule must be saved before actions can be added"
-
-msgid "Assign"
-msgstr "Assign"
-
-msgid "Create event"
-msgstr "Create event"
-
-msgid "Display key-value pair"
-msgstr "Display key-value pair"
-
-msgid "Display text"
-msgstr "Display text"
-
-msgid "Error on complete"
-msgstr "Error on complete"
-
-msgid "Hide field"
-msgstr "Hide field"
-
-msgid "Hide option"
-msgstr "Hide option"
-
-msgid "Hide option group"
-msgstr "Hide option group"
-
-msgid "Hide program stage"
-msgstr "Hide program stage"
-
-msgid "Hide section"
-msgstr "Hide section"
-
-msgid "Schedule message"
-msgstr "Schedule message"
-
-msgid "Send message"
-msgstr "Send message"
-
-msgid "Set mandatory field"
-msgstr "Set mandatory field"
-
-msgid "Show error"
-msgstr "Show error"
-
-msgid "Show option group"
-msgstr "Show option group"
-
-msgid "Show warning"
-msgstr "Show warning"
-
-msgid "Warning on complete"
-msgstr "Warning on complete"
 
 msgid "Feedback"
 msgstr "Feedback"
@@ -4581,6 +4524,12 @@ msgstr "Add action"
 msgid "Program rule variable to assign to"
 msgstr "Program rule variable to assign to"
 
+msgid "Configure actions for this program rule."
+msgstr "Configure actions for this program rule."
+
+msgid "Program rule must be saved before actions can be added"
+msgstr "Program rule must be saved before actions can be added"
+
 msgid "No program rule actions have been added yet"
 msgstr "No program rule actions have been added yet"
 
@@ -4593,56 +4542,56 @@ msgstr "Restore action"
 msgid "field"
 msgstr "field"
 
-msgid "Show warning: {{content}} on {{target}}"
-msgstr "Show warning: {{content}} on {{target}}"
+msgid "Assign"
+msgstr "Assign"
 
-msgid "Show error: {{content}} on {{target}}"
-msgstr "Show error: {{content}} on {{target}}"
+msgid "Create event"
+msgstr "Create event"
 
-msgid "Warning on complete: {{content}} on {{target}}"
-msgstr "Warning on complete: {{content}} on {{target}}"
+msgid "Display key-value pair"
+msgstr "Display key-value pair"
 
-msgid "Error on complete: {{content}} on {{target}}"
-msgstr "Error on complete: {{content}} on {{target}}"
+msgid "Display text"
+msgstr "Display text"
 
-msgid "Display text: {{content}} on {{location}}"
-msgstr "Display text: {{content}} on {{location}}"
+msgid "Error on complete"
+msgstr "Error on complete"
 
-msgid "Display key-value pair: {{content}} on {{location}}"
-msgstr "Display key-value pair: {{content}} on {{location}}"
+msgid "Hide field"
+msgstr "Hide field"
 
-msgid "Hide field: {{target}}"
-msgstr "Hide field: {{target}}"
+msgid "Hide option"
+msgstr "Hide option"
 
-msgid "Set mandatory field: {{target}}"
-msgstr "Set mandatory field: {{target}}"
+msgid "Hide option group"
+msgstr "Hide option group"
 
-msgid "Hide section: {{section}}"
-msgstr "Hide section: {{section}}"
+msgid "Hide program stage"
+msgstr "Hide program stage"
 
-msgid "Hide program stage: {{stage}}"
-msgstr "Hide program stage: {{stage}}"
+msgid "Hide section"
+msgstr "Hide section"
 
-msgid "Assign: {{data}} to field {{target}}"
-msgstr "Assign: {{data}} to field {{target}}"
+msgid "Schedule message"
+msgstr "Schedule message"
 
-msgid "Create event in program stage: {{stage}}"
-msgstr "Create event in program stage: {{stage}}"
+msgid "Send message"
+msgstr "Send message"
 
-msgid "Schedule message: {{template}} at date {{data}}"
-msgstr "Schedule message: {{template}} at date {{data}}"
+msgid "Set mandatory field"
+msgstr "Set mandatory field"
 
-msgid "Send message: {{template}}"
-msgstr "Send message: {{template}}"
+msgid "Show error"
+msgstr "Show error"
 
-msgid "Hide option: {{option}} on {{target}}"
-msgstr "Hide option: {{option}} on {{target}}"
+msgid "Show option group"
+msgstr "Show option group"
 
-msgid "Show option group: {{group}} on {{target}}"
-msgstr "Show option group: {{group}} on {{target}}"
+msgid "Show warning"
+msgstr "Show warning"
 
-msgid "Hide option group: {{group}} on {{target}}"
-msgstr "Hide option group: {{group}} on {{target}}"
+msgid "Warning on complete"
+msgstr "Warning on complete"
 
 msgid "Program Rule"
 msgstr "Program Rule"

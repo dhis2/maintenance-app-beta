@@ -1,3 +1,8 @@
+/**
+ * Program rule create page. Same sectioned form as Edit (Basic information, Expression, Actions).
+ * No arrayMutators here because actions are only available after first save; ProgramRuleFormFields
+ * shows "Program rule must be saved before actions can be added" in the Actions section until then.
+ */
 import React from 'react'
 import {
     DefaultFormFooter,

@@ -1,3 +1,4 @@
+/* Styles for program rule actions list: scrollable list, deleted-action placeholder, add-action area */
 .sectionItems {
     max-height: 600px;
     overflow-y: auto;

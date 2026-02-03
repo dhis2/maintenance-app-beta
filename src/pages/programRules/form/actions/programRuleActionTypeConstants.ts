@@ -1,3 +1,7 @@
+/**
+ * Program rule action type labels and dropdown options (alphabetically by label).
+ * Extracted so labels/order are shared and form file stays focused on layout/validation.
+ */
 import i18n from '@dhis2/d2-i18n'
 import { ProgramRuleAction } from '../../../../types/generated'
 

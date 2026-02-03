@@ -33,6 +33,7 @@ export function useValidator({
 
     const validators = useMemo(() => {
         const validatorsList: Validator[] = []
+        // Some forms (e.g. program rule) use fields not defined in schema properties; avoid crashing
         if (propertyDetails == null) {
             return validatorsList
         }

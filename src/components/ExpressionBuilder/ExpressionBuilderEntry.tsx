@@ -39,8 +39,10 @@ export const ExpressionBuilderEntry = ({
 }: ExpressionBuilderEntryProps) => {
     const [showExpressionBuilder, setShowExpressionBuilder] = useState(false)
 
-    const [initialExpressionValidation] =
-        useExpressionValidator(validationResource)
+    const [initialExpressionValidation] = useExpressionValidator(
+        validationResource,
+        programId
+    )
     const [expressionDescription, setExpressionDescription] = useState<
         string | undefined
     >(undefined)

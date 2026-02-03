@@ -1,0 +1,40 @@
+import i18n from '@dhis2/d2-i18n'
+import React from 'react'
+import { useField } from 'react-final-form'
+import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
+
+/** Program stage select; only show when program is tracker (not WITHOUT_REGISTRATION). */
+export function ProgramStageField() {
+    const { input: programInput } = useField('program')
+
+    if (
+        !programInput?.value?.id ||
+        programInput?.value?.programType === 'WITHOUT_REGISTRATION'
+    ) {
+        return null
+    }
+
+    return (
+        <ModelSingleSelectFormField
+            inputWidth="400px"
+            dataTest="program-stage-field"
+            name="programStage"
+            label={i18n.t('Program stages to trigger rule')}
+            query={{
+                resource: 'programStages',
+                params: {
+                    fields: ['id', 'displayName'],
+                    filter: [`program.id:eq:${programInput.value.id}`],
+                    paging: false,
+                },
+            }}
+            showNoValueOption={{
+                value: '',
+                label: i18n.t('All program stages'),
+            }}
+            helpText={i18n.t(
+                'Select a specific program stage or leave as "All program stages" to trigger on all stages.'
+            )}
+        />
+    )
+}

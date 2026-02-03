@@ -1,3 +1,8 @@
+/**
+ * Actions section: list of program rule actions with add/edit/delete. Opens action form in a drawer.
+ * Delete is soft-delete (restore until save); persisted actions are deleted on program rule save.
+ * Structure matches ProgramStagesFormContents: SectionedFormSection + title/description + list.
+ */
 import i18n from '@dhis2/d2-i18n'
 import { Button, NoticeBox } from '@dhis2/ui'
 import { IconAdd16 } from '@dhis2/ui-icons'
@@ -5,7 +10,12 @@ import React, { useState } from 'react'
 import { useFormState } from 'react-final-form'
 import { useFieldArray } from 'react-final-form-arrays'
 import { useParams } from 'react-router-dom'
-import { DrawerPortal } from '../../../../components'
+import {
+    DrawerPortal,
+    SectionedFormSection,
+    StandardFormSectionDescription,
+    StandardFormSectionTitle,
+} from '../../../../components'
 import { ListInFormItem } from '../../../../components/formCreators/SectionFormList'
 import { SchemaName } from '../../../../types'
 import { getProgramRuleActionListLabel } from './getProgramRuleActionListLabel'
@@ -21,12 +31,29 @@ type DrawerState = {
     index: number | null
 }
 
-export const ProgramRuleActionsFormContents = () => {
+export const ProgramRuleActionsFormContents = React.memo(
+    function ProgramRuleActionsFormContents({ name }: { name: string }) {
+        return (
+            <SectionedFormSection name={name}>
+                <StandardFormSectionTitle>
+                    {i18n.t('Actions')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t('Configure actions for this program rule.')}
+                </StandardFormSectionDescription>
+                <ProgramRuleActionListNewOrEdit />
+            </SectionedFormSection>
+        )
+    }
+)
+
+const ProgramRuleActionListNewOrEdit = () => {
     const modelId = useParams().id
     const { values: formValues } = useFormState({
         subscription: { values: true },
     })
     const programId = (formValues as { program?: { id?: string } })?.program?.id
+    // useFieldArray requires arrayMutators on parent FormBase (see Edit.tsx)
     const actionsFieldArray =
         useFieldArray<ProgramRuleActionListItem>('programRuleActions').fields
     const [drawerState, setDrawerState] = useState<DrawerState>({
@@ -35,6 +62,7 @@ export const ProgramRuleActionsFormContents = () => {
         index: null,
     })
 
+    /** Soft-delete: mark as deleted; actual API delete happens on program rule save */
     const handleDelete = (index: number) => {
         const current = actionsFieldArray.value[index]
         if (current) {
@@ -49,6 +77,7 @@ export const ProgramRuleActionsFormContents = () => {
         }
     }
 
+    // Merge submitted action into form array (edit = update at index, add = push)
     const handleSubmitted = (values: ProgramRuleActionListItem) => {
         if (drawerState.index !== null) {
             actionsFieldArray.update(drawerState.index, values)
@@ -70,9 +99,10 @@ export const ProgramRuleActionsFormContents = () => {
         setDrawerState({ open: false, action: null, index: null })
     }
 
+    // New rule has no id yet; API requires programRule id to create actions (AC)
     if (!modelId) {
         return (
-            <NoticeBox>
+            <NoticeBox className={css.formTypeInfo}>
                 {i18n.t(
                     'Program rule must be saved before actions can be added'
                 )}
@@ -85,13 +115,17 @@ export const ProgramRuleActionsFormContents = () => {
     return (
         <>
             <DrawerPortal isOpen={drawerState.open} onClose={closeDrawer}>
-                <ProgramRuleActionForm
-                    programRuleId={modelId}
-                    programId={programId}
-                    action={drawerState.action}
-                    onCancel={closeDrawer}
-                    onSubmitted={handleSubmitted}
-                />
+                {drawerState.open && (
+                    <div>
+                        <ProgramRuleActionForm
+                            programRuleId={modelId}
+                            programId={programId}
+                            action={drawerState.action}
+                            onCancel={closeDrawer}
+                            onSubmitted={handleSubmitted}
+                        />
+                    </div>
+                )}
             </DrawerPortal>
 
             <div className={css.listWrapper}>
@@ -124,6 +158,7 @@ export const ProgramRuleActionsFormContents = () => {
                             )
                         }
 
+                        // ListInFormItem expects ListItem (id, displayName, access); we build displayName from action type + content/fields
                         const displayItem = {
                             ...action,
                             displayName: getProgramRuleActionListLabel(action),

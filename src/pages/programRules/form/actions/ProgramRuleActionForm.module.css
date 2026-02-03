@@ -1,0 +1,49 @@
+/* Matches StageForm.module.css / OptionList.module.css drawer pattern: full height, scrollable body, footer at bottom */
+.drawerForm {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-height: 0;
+    justify-content: space-between;
+}
+
+.drawerFormBody {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: var(--spacers-dp24);
+}
+
+/* SectionedFormLayout renders grid with sidebar + main; in drawer we want single column, no sidebar */
+.drawerFormBody > div {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'main';
+    height: 100%;
+}
+
+.drawerFormBody > div > div:first-child {
+    display: none;
+}
+
+/* Main column: constrain width for readability (matches listWrapper 720px elsewhere) */
+.drawerFormBody > div > div:last-child {
+    max-width: 720px;
+}
+
+/* Helper text below expression builder: consistent spacing with design system */
+.helperText {
+    display: block;
+    margin-block-start: var(--spacers-dp8);
+    margin-block-end: var(--spacers-dp16);
+    font-size: 14px;
+    line-height: 19px;
+    color: var(--colors-grey700);
+}
+
+/* Footer bar: distinct from drawer white so buttons are not in a “white box” */
+.drawerFormFooter {
+    flex-shrink: 0;
+    padding: var(--spacers-dp16) var(--spacers-dp24);
+    border-top: 1px solid var(--colors-grey300);
+    background: var(--colors-grey100);
+}

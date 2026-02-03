@@ -1,3 +1,4 @@
+/** Section definitions for program rule form; used by sidebar nav and scroll-sync (Basic information, Expression, Actions). */
 import i18n from '@dhis2/d2-i18n'
 import { SectionedFormDescriptor } from '../../../lib'
 import { ProgramRuleFormValues } from './fieldFilters'

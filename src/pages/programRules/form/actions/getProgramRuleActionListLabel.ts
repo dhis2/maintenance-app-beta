@@ -1,3 +1,8 @@
+/**
+ * Builds the human-readable label for a program rule action in the list.
+ * Needed because ListInFormItem expects displayName but actions only have type + content/refs;
+ * format matches old app (AC) e.g. "Show warning: <content> on <dataElement, trackedEntityAttribute>".
+ */
 import i18n from '@dhis2/d2-i18n'
 
 type Ref = { id: string; displayName?: string } | undefined
