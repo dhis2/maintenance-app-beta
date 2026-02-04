@@ -144,9 +144,7 @@ function validateCreateEvent(
     errors: Record<string, string>,
     ctx: ValidationContext
 ): void {
-    if (!ctx.hasProgramStage) {
-        errors.programStage = i18n.t('Program stage is required')
-    }
+    validateHideProgramStage(errors, ctx)
 }
 
 function validateTemplateRequired(

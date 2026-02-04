@@ -85,10 +85,10 @@ const ProgramRuleActionListNewOrEdit = () => {
             id: values.id || crypto.randomUUID(),
         }
 
-        if (drawerState.index !== null) {
-            actionsFieldArray.update(drawerState.index, actionWithId)
-        } else {
+        if (drawerState.index === null) {
             actionsFieldArray.push(actionWithId)
+        } else {
+            actionsFieldArray.update(drawerState.index, actionWithId)
         }
         setDrawerState({ open: false, action: null, index: null })
     }

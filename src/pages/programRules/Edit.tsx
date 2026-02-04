@@ -58,6 +58,26 @@ function getDeletionFailureMessages(
     )
 }
 
+/** Map a single action to API payload: strip frontend-only fields and empty values. */
+function cleanActionForSubmit(
+    action: ProgramRuleActionListItem,
+    originalActions: ProgramRuleActionListItem[]
+): Record<string, unknown> {
+    const isExisting =
+        action.id &&
+        originalActions.some(
+            (orig: ProgramRuleActionListItem) => orig.id === action.id
+        )
+    if (isExisting) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { deleted, ...cleanAction } = action
+        return removeEmptyFields(cleanAction) as Record<string, unknown>
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { id, deleted, ...cleanAction } = action
+    return removeEmptyFields(cleanAction) as Record<string, unknown>
+}
+
 /**
  * Custom submit handler: deletes actions marked as deleted (soft-delete), then
  * submits the program rule with the remaining actions.
@@ -117,27 +137,9 @@ const useOnSubmitProgramRuleEdit = (modelId: string) => {
                 ...values,
                 programRuleActions: actions
                     .filter((a) => !a.deleted)
-                    .map((action) => {
-                        // Check if this action existed in original data
-                        const isExisting =
-                            action.id &&
-                            originalActions.some(
-                                (orig: ProgramRuleActionListItem) =>
-                                    orig.id === action.id
-                            )
-
-                        if (isExisting) {
-                            // Existing action - remove frontend-only fields
-                            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                            const { deleted, ...cleanAction } = action
-                            return removeEmptyFields(cleanAction)
-                        }
-
-                        // New action - remove id and deleted fields so backend generates id
-                        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                        const { id, deleted, ...cleanAction } = action
-                        return removeEmptyFields(cleanAction)
-                    }),
+                    .map((action) =>
+                        cleanActionForSubmit(action, originalActions)
+                    ),
             }
 
             return submitEdit(
