@@ -18,11 +18,11 @@ export function DataElementSelect({
     programId,
     name,
     label,
-}: {
+}: Readonly<{
     programId: string
     name: string
     label: string
-}) {
+}>) {
     const form = useForm()
     const { values } = useFormState({ subscription: { values: true } })
     const queryFn = useBoundResourceQueryFn()
@@ -136,11 +136,11 @@ export function DataElementWithOptionSetSelect({
     programId,
     name,
     label,
-}: {
+}: Readonly<{
     programId: string
     name: string
     label: string
-}) {
+}>) {
     const form = useForm()
     const { values } = useFormState({ subscription: { values: true } })
     const queryFn = useBoundResourceQueryFn()

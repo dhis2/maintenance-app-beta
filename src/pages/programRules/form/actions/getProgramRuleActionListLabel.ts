@@ -22,8 +22,12 @@ type ProgramRuleActionForLabel = {
     templateUid?: string
 }
 
+function isRef(x: Ref | Ref[] | undefined): x is Ref {
+    return x !== undefined && !Array.isArray(x)
+}
+
 function joinRefs(...refs: (Ref | Ref[])[]): string {
-    const flat = refs.flat().filter(Boolean) as Ref[]
+    const flat = refs.flat().filter(isRef)
     return flat
         .map((r) => r?.displayName ?? r?.id ?? '')
         .filter(Boolean)
@@ -45,11 +49,6 @@ export function getProgramRuleActionListLabel(
     const optionGroup = action.optionGroup
     const templateUid = action.templateUid ?? ''
     const dataAndField = joinRefs(dataElement, trackedEntityAttribute)
-    const dataElementOnly = (
-        dataElement?.displayName ??
-        dataElement?.id ??
-        ''
-    ).trim()
     const locationOrField = location || dataAndField || i18n.t('field')
 
     switch (type) {

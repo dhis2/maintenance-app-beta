@@ -106,21 +106,12 @@ const ProgramRuleActionListNewOrEdit = () => {
     }
 
     // New rule has no id yet; API requires programRule id to create actions (AC)
-    if (!modelId) {
+    if (modelId) {
+        const actions = actionsFieldArray.value ?? []
+
         return (
-            <NoticeBox className={css.formTypeInfo}>
-                {i18n.t(
-                    'Program rule must be saved before actions can be added'
-                )}
-            </NoticeBox>
-        )
-    }
-
-    const actions = actionsFieldArray.value ?? []
-
-    return (
-        <>
-            <DrawerPortal isOpen={drawerState.open} onClose={closeDrawer}>
+            <>
+                <DrawerPortal isOpen={drawerState.open} onClose={closeDrawer}>
                 {drawerState.open && (
                     <div>
                         <ProgramRuleActionForm
@@ -192,5 +183,14 @@ const ProgramRuleActionListNewOrEdit = () => {
                 </div>
             </div>
         </>
+    )
+    }
+
+    return (
+        <NoticeBox className={css.formTypeInfo}>
+            {i18n.t(
+                'Program rule must be saved before actions can be added'
+            )}
+        </NoticeBox>
     )
 }

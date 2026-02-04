@@ -12,9 +12,7 @@ import { NO_VALUE_OPTION } from '../ProgramRuleActionForm'
  */
 export function ProgramRuleVariableSelect({
     programId,
-}: {
-    programId: string
-}) {
+}: Readonly<{ programId: string }>) {
     const queryFn = useBoundResourceQueryFn()
 
     const { data } = useQuery({

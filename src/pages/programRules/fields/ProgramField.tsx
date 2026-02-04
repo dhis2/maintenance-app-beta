@@ -15,9 +15,9 @@ const PROGRAM_QUERY = {
     },
 }
 
-type ProgramFieldProps = {
+type ProgramFieldProps = Readonly<{
     disabled?: boolean
-}
+}>
 
 export function ProgramField({ disabled = false }: ProgramFieldProps) {
     const programNewHref = useHref('/program/new')

@@ -14,11 +14,11 @@ export function OptionSelect({
     optionSetId,
     label,
     required,
-}: {
+}: Readonly<{
     optionSetId: string | undefined
     label: string
     required?: boolean
-}) {
+}>) {
     const queryFn = useBoundResourceQueryFn()
 
     const { data } = useQuery({
@@ -103,11 +103,11 @@ export function OptionGroupSelect({
     optionSetId,
     label,
     required,
-}: {
+}: Readonly<{
     optionSetId: string | undefined
     label: string
     required?: boolean
-}) {
+}>) {
     const queryFn = useBoundResourceQueryFn()
 
     const { data } = useQuery({

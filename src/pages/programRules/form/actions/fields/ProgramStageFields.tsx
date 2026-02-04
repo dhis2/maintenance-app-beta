@@ -1,4 +1,3 @@
-import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
@@ -12,10 +11,10 @@ import { useBoundResourceQueryFn } from '../../../../../lib'
 export function ProgramStageSectionSelect({
     programId,
     label,
-}: {
+}: Readonly<{
     programId: string
     label: string
-}) {
+}>) {
     const queryFn = useBoundResourceQueryFn()
 
     const { data } = useQuery({

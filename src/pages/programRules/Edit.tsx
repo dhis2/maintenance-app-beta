@@ -36,6 +36,28 @@ type ProgramRuleFormValuesWithActions = ProgramRuleFormValues & {
     programRuleActions?: ProgramRuleActionListItem[]
 }
 
+/** Remove undefined/null/empty fields (backend doesn't like null refs). */
+function removeEmptyFields(
+    obj: Record<string, unknown>
+): Record<string, unknown> {
+    const cleaned: Record<string, unknown> = {}
+    for (const key of Object.keys(obj)) {
+        const value = obj[key]
+        if (value !== undefined && value !== null && value !== '') {
+            cleaned[key] = value
+        }
+    }
+    return cleaned
+}
+
+function getDeletionFailureMessages(
+    failures: Array<{ status: string } & { reason?: { message?: string } }>
+): string[] {
+    return failures.map(
+        (f) => (f as PromiseRejectedResult).reason?.message ?? ''
+    )
+}
+
 /**
  * Custom submit handler: deletes actions marked as deleted (soft-delete), then
  * submits the program rule with the remaining actions.
@@ -75,39 +97,21 @@ const useOnSubmitProgramRuleEdit = (modelId: string) => {
                 .filter((r) => r.status === 'rejected')
 
             if (failures.length > 0) {
-                // Invalidate so UI doesn't show stale data after partial delete failures
                 await queryClient.invalidateQueries({
                     queryKey: [{ resource: 'programRules' }],
                 })
+                const errorMessages = getDeletionFailureMessages(failures)
                 return createFormError({
                     message: i18n.t(
                         'There was an error deleting program rule actions'
                     ),
-                    errors: failures.map(
-                        (f) =>
-                            (f as PromiseRejectedResult).reason?.message ?? ''
-                    ),
+                    errors: errorMessages,
                 })
             }
 
             // Strip deleted actions and clean data for API
             const originalActions =
                 form.getState().initialValues.programRuleActions ?? []
-
-            // Helper to remove undefined/null/empty fields (backend doesn't like null refs)
-            const removeEmptyFields = (
-                obj: Record<string, unknown>
-            ): Record<string, unknown> => {
-                const cleaned: Record<string, unknown> = {}
-                Object.keys(obj).forEach((key) => {
-                    const value = obj[key]
-                    // Skip undefined, null, and empty strings
-                    if (value !== undefined && value !== null && value !== '') {
-                        cleaned[key] = value
-                    }
-                })
-                return cleaned
-            }
 
             const trimmedValues = {
                 ...values,

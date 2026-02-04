@@ -3,7 +3,6 @@
  * HIDEFIELD, ASSIGN, etc.). Used for add and edit; submitted values are merged
  * into the parent form's programRuleActions array.
  */
-import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
     Button,
@@ -12,7 +11,7 @@ import {
     SingleSelectFieldFF,
 } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { Field, useField, useForm, useFormState } from 'react-final-form'
 import {
     ExpressionBuilderEntry,
@@ -31,6 +30,7 @@ import { PriorityField } from '../../fields/PriorityField'
 import drawerStyles from './ProgramRuleActionForm.module.css'
 import { PROGRAM_RULE_ACTION_TYPE_OPTIONS } from './programRuleActionTypeConstants'
 import type { ProgramRuleActionListItem } from './types'
+import { validateProgramRuleAction } from './validation'
 
 const DISPLAY_WIDGET_LOCATION_OPTIONS = [
     { label: i18n.t('Feedback'), value: 'FEEDBACK' },
@@ -72,160 +72,6 @@ const initialValuesNew = (
     programRule: { id: programRuleId },
 })
 
-/**
- * Per-action-type validation. Blocks submit when required fields are missing
- * so actions cannot be added/saved without required data.
- */
-function validateProgramRuleAction(
-    values: ProgramRuleActionFormValues
-): Record<string, string> | undefined {
-    const errors: Record<string, string> = {}
-    const actionType = values.programRuleActionType
-    const hasDataElement = !!values.dataElement?.id
-    const hasTrackedEntityAttribute = !!values.trackedEntityAttribute?.id
-    const hasContent = !!values.content?.trim()
-    const hasData = !!values.data?.trim()
-    const hasOption = !!values.option?.id
-    const hasOptionGroup = !!values.optionGroup?.id
-    const hasLocation = !!values.location?.trim()
-    const hasProgramStage = !!values.programStage?.id
-    const hasProgramStageSection = !!values.programStageSection?.id
-    const hasTemplateUid = !!values.templateUid?.trim()
-
-    // Action type is always required
-    if (!actionType?.trim()) {
-        errors.programRuleActionType = i18n.t('Action is required')
-    }
-
-    if (actionType === ProgramRuleAction.programRuleActionType.DISPLAYTEXT) {
-        if (!hasLocation) {
-            errors.location = i18n.t('Display widget is required')
-        }
-        if (!hasContent) {
-            errors.content = i18n.t('Static text is required')
-        }
-    }
-    if (
-        actionType ===
-        ProgramRuleAction.programRuleActionType.DISPLAYKEYVALUEPAIR
-    ) {
-        if (!hasLocation) {
-            errors.location = i18n.t('Display widget is required')
-        }
-        if (!hasContent) {
-            errors.content = i18n.t('Key label is required')
-        }
-    }
-    if (actionType === ProgramRuleAction.programRuleActionType.HIDEFIELD) {
-        if (!hasDataElement && !hasTrackedEntityAttribute) {
-            errors.dataElement = i18n.t(
-                'Select at least one: data element or tracked entity attribute'
-            )
-            errors.trackedEntityAttribute = i18n.t(
-                'Select at least one: data element or tracked entity attribute'
-            )
-        }
-    }
-    if (actionType === ProgramRuleAction.programRuleActionType.HIDESECTION) {
-        if (!hasProgramStageSection) {
-            errors.programStageSection = i18n.t(
-                'Program stage section to hide is required'
-            )
-        }
-    }
-    if (
-        actionType === ProgramRuleAction.programRuleActionType.HIDEPROGRAMSTAGE
-    ) {
-        if (!hasProgramStage) {
-            errors.programStage = i18n.t('Program stage is required')
-        }
-    }
-    if (
-        actionType === ProgramRuleAction.programRuleActionType.SETMANDATORYFIELD
-    ) {
-        if (!hasDataElement && !hasTrackedEntityAttribute) {
-            errors.dataElement = i18n.t(
-                'Data element or tracked entity attribute must be selected'
-            )
-            errors.trackedEntityAttribute = i18n.t(
-                'Data element or tracked entity attribute must be selected'
-            )
-        }
-    }
-    if (actionType === ProgramRuleAction.programRuleActionType.ASSIGN) {
-        if (!hasDataElement && !hasTrackedEntityAttribute && !hasContent) {
-            errors.dataElement = i18n.t(
-                'Select one of: data element, tracked entity attribute, or program rule variable'
-            )
-            errors.trackedEntityAttribute = errors.dataElement
-            errors.content = errors.dataElement
-        }
-        if (!hasData) {
-            errors.data = i18n.t('Expression to assign is required')
-        }
-    }
-    if (
-        actionType === ProgramRuleAction.programRuleActionType.SHOWWARNING ||
-        actionType === ProgramRuleAction.programRuleActionType.SHOWERROR ||
-        actionType ===
-            ProgramRuleAction.programRuleActionType.WARNINGONCOMPLETE ||
-        actionType === ProgramRuleAction.programRuleActionType.ERRORONCOMPLETE
-    ) {
-        if (!hasContent) {
-            errors.content = i18n.t('Static text is required')
-        }
-    }
-    if (actionType === ProgramRuleAction.programRuleActionType.CREATEEVENT) {
-        if (!hasProgramStage) {
-            errors.programStage = i18n.t('Program stage is required')
-        }
-    }
-    if (actionType === ProgramRuleAction.programRuleActionType.SENDMESSAGE) {
-        if (!hasTemplateUid) {
-            errors.templateUid = i18n.t('Message template is required')
-        }
-    }
-    if (
-        actionType === ProgramRuleAction.programRuleActionType.SCHEDULEMESSAGE
-    ) {
-        if (!hasTemplateUid) {
-            errors.templateUid = i18n.t('Message template is required')
-        }
-    }
-    if (actionType === ProgramRuleAction.programRuleActionType.HIDEOPTION) {
-        if (!hasDataElement && !hasTrackedEntityAttribute) {
-            errors.dataElement = i18n.t(
-                'Select a data element or tracked entity attribute with option set'
-            )
-            errors.trackedEntityAttribute = errors.dataElement
-        }
-        if ((hasDataElement || hasTrackedEntityAttribute) && !hasOption) {
-            errors.option = i18n.t('Option to hide is required')
-        }
-    }
-    if (
-        actionType ===
-            ProgramRuleAction.programRuleActionType.SHOWOPTIONGROUP ||
-        actionType === ProgramRuleAction.programRuleActionType.HIDEOPTIONGROUP
-    ) {
-        if (!hasDataElement && !hasTrackedEntityAttribute) {
-            errors.dataElement = i18n.t(
-                'Select a data element or tracked entity attribute with option set'
-            )
-            errors.trackedEntityAttribute = errors.dataElement
-        }
-        if ((hasDataElement || hasTrackedEntityAttribute) && !hasOptionGroup) {
-            errors.optionGroup = i18n.t(
-                actionType ===
-                    ProgramRuleAction.programRuleActionType.SHOWOPTIONGROUP
-                    ? 'Option group to show is required'
-                    : 'Option group to hide is required'
-            )
-        }
-    }
-    return Object.keys(errors).length ? errors : undefined
-}
-
 /** Resolve option set ID from data element or tracked entity attribute for option/optionGroup selects */
 function optionSetIdFromOptionAction(
     values: ProgramRuleActionFormValues
@@ -237,10 +83,10 @@ function optionSetIdFromOptionAction(
     return de?.optionSet?.id ?? tea?.optionSet?.id
 }
 
-const DISPLAY_WIDGET_LOCATION_VALUES: readonly string[] = [
+const DISPLAY_WIDGET_LOCATION_VALUES = new Set<string>([
     'FEEDBACK',
     'INDICATORS',
-]
+])
 
 // Normalize DISPLAYTEXT/DISPLAYKEYVALUEPAIR location to FEEDBACK or INDICATORS for API consistency
 function normalizeLocation(location: string | undefined): string {
@@ -248,7 +94,7 @@ function normalizeLocation(location: string | undefined): string {
         return ''
     }
     const upper = location.toUpperCase()
-    return DISPLAY_WIDGET_LOCATION_VALUES.includes(upper) ? upper : location
+    return DISPLAY_WIDGET_LOCATION_VALUES.has(upper) ? upper : location
 }
 
 export const ProgramRuleActionForm = ({
@@ -257,13 +103,13 @@ export const ProgramRuleActionForm = ({
     action,
     onCancel,
     onSubmitted,
-}: {
+}: Readonly<{
     programRuleId: string
     programId?: string
     action: ProgramRuleActionListItem | null
     onCancel: () => void
     onSubmitted: (values: ProgramRuleActionListItem) => void
-}) => {
+}>) => {
     const initialValues: ProgramRuleActionFormValues = action
         ? ({
               ...action,
@@ -312,14 +158,14 @@ function ProgramRuleActionFormContents({
     onCancel,
     programRuleActionTypeOptions,
     displayWidgetLocationOptions,
-}: {
+}: Readonly<{
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
     programId?: string
     action: ProgramRuleActionListItem | null
     onCancel: () => void
     programRuleActionTypeOptions: Array<{ label: string; value: string }>
     displayWidgetLocationOptions: Array<{ label: string; value: string }>
-}) {
+}>) {
     const { values } = useFormState({ subscription: { values: true } })
     const actionType = values.programRuleActionType as string | undefined
 
@@ -907,13 +753,13 @@ function DataElementSelect({
     label,
     helpText,
     mutualExclusion = true,
-}: {
+}: Readonly<{
     programId: string
     name: string
     label: string
     helpText?: string
     mutualExclusion?: boolean
-}) {
+}>) {
     const form = useForm()
     const { values } = useFormState({ subscription: { values: true } })
     const queryFn = useBoundResourceQueryFn()
@@ -1022,13 +868,13 @@ function TrackedEntityAttributeSelect({
     label,
     helpText,
     mutualExclusion = true,
-}: {
+}: Readonly<{
     programId: string
     name: string
     label: string
     helpText?: string
     mutualExclusion?: boolean
-}) {
+}>) {
     const form = useForm()
     const { values } = useFormState({ subscription: { values: true } })
     const queryFn = useBoundResourceQueryFn()
@@ -1123,11 +969,11 @@ function DataElementWithOptionSetSelect({
     programId,
     name,
     label,
-}: {
+}: Readonly<{
     programId: string
     name: string
     label: string
-}) {
+}>) {
     const form = useForm()
     const { values } = useFormState({ subscription: { values: true } })
     const queryFn = useBoundResourceQueryFn()
@@ -1236,11 +1082,11 @@ function TrackedEntityAttributeWithOptionSetSelect({
     programId,
     name,
     label,
-}: {
+}: Readonly<{
     programId: string
     name: string
     label: string
-}) {
+}>) {
     const form = useForm()
     const { values } = useFormState({ subscription: { values: true } })
     const queryFn = useBoundResourceQueryFn()
@@ -1336,11 +1182,11 @@ function OptionSelect({
     optionSetId,
     label,
     required,
-}: {
+}: Readonly<{
     optionSetId: string | undefined
     label: string
     required?: boolean
-}) {
+}>) {
     const queryFn = useBoundResourceQueryFn()
     const { data } = useQuery({
         queryKey: [
@@ -1416,11 +1262,11 @@ function OptionGroupSelect({
     optionSetId,
     label,
     required,
-}: {
+}: Readonly<{
     optionSetId: string | undefined
     label: string
     required?: boolean
-}) {
+}>) {
     const queryFn = useBoundResourceQueryFn()
     const { data } = useQuery({
         queryKey: [
@@ -1495,10 +1341,10 @@ function OptionGroupSelect({
 function ProgramStageSectionSelect({
     programId,
     label,
-}: {
+}: Readonly<{
     programId: string
     label: string
-}) {
+}>) {
     const queryFn = useBoundResourceQueryFn()
     const { data } = useQuery({
         queryKey: [
@@ -1556,7 +1402,9 @@ function ProgramStageSectionSelect({
     )
 }
 
-function ProgramRuleVariableSelect({ programId }: { programId: string }) {
+function ProgramRuleVariableSelect({
+    programId,
+}: Readonly<{ programId: string }>) {
     const queryFn = useBoundResourceQueryFn()
     const { data } = useQuery({
         queryKey: [
@@ -1601,10 +1449,10 @@ function ProgramRuleVariableSelect({ programId }: { programId: string }) {
 function NotificationTemplateSelect({
     programId,
     required,
-}: {
+}: Readonly<{
     programId: string
     required?: boolean
-}) {
+}>) {
     const queryFn = useBoundResourceQueryFn()
     const { data: programData } = useQuery({
         queryKey: [

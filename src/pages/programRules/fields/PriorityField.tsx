@@ -8,7 +8,9 @@ import type { FieldMetaState } from 'react-final-form'
 export function PriorityField() {
     const { input, meta } = useField('priority', {
         parse: (value?: string) =>
-            value === undefined || value === '' ? undefined : parseFloat(value),
+            value === undefined || value === ''
+                ? undefined
+                : Number.parseFloat(value),
         type: 'number',
         format: (value) =>
             value === undefined || value === null ? '' : value.toString(),
