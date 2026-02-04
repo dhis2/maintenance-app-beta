@@ -8,8 +8,7 @@ import {
     ModalActions,
     ModalContent,
     ModalTitle,
-    Tab,
-    TabBar,
+    SegmentedControl,
 } from '@dhis2/ui'
 import cx from 'classnames'
 import React, { useEffect, useMemo, useState } from 'react'
@@ -75,39 +74,20 @@ export function IconPickerModal({
 
     return (
         <Modal large onClose={onCancel}>
-            <ModalTitle>Select icon</ModalTitle>
+            <ModalTitle>{i18n.t('Choose an icon')}</ModalTitle>
 
             <ModalContent>
                 <div className={classes.tabBar}>
-                    <TabBar>
-                        <Tab
-                            onClick={() => setActiveTab('all')}
-                            selected={activeTab === 'all'}
-                        >
-                            {i18n.t('All')}
-                        </Tab>
-
-                        <Tab
-                            onClick={() => setActiveTab('positive')}
-                            selected={activeTab === 'positive'}
-                        >
-                            {i18n.t('Positive')}
-                        </Tab>
-
-                        <Tab
-                            onClick={() => setActiveTab('negative')}
-                            selected={activeTab === 'negative'}
-                        >
-                            {i18n.t('Negative')}
-                        </Tab>
-
-                        <Tab
-                            onClick={() => setActiveTab('outline')}
-                            selected={activeTab === 'outline'}
-                        >
-                            {i18n.t('Outline')}
-                        </Tab>
-                    </TabBar>
+                    <SegmentedControl
+                        selected={activeTab}
+                        onChange={({ value }) => setActiveTab(value as TabName)}
+                        options={[
+                            { label: i18n.t('All'), value: 'all' },
+                            { label: i18n.t('Positive'), value: 'positive' },
+                            { label: i18n.t('Negative'), value: 'negative' },
+                            { label: i18n.t('Outline'), value: 'outline' },
+                        ]}
+                    />
 
                     <div className={classes.search}>
                         <Input
@@ -129,7 +109,9 @@ export function IconPickerModal({
                     <div className={classes.iconMessage}>
                         {icons.isLoading && <LoadingSpinner />}
                         {icons.isSuccess && displayIcons.length === 0 ? (
-                            <span>{i18n.t('No icons match the search.')}</span>
+                            <div className={classes.emptyIconSearchMessage}>
+                                {i18n.t('No icons found')}
+                            </div>
                         ) : null}
                     </div>
                     {displayIcons.map(({ key, href }: Icon) => (
@@ -171,10 +153,15 @@ export function IconPickerModal({
                         disabled={!icon}
                         onClick={() => onChange({ icon })}
                     >
-                        {i18n.t('Select')}
+                        {i18n.t('Choose icon')}
                     </Button>
 
-                    <Button onClick={() => onChange({ icon: '' })}>
+                    <Button
+                        secondary
+                        destructive
+                        disabled={!icon}
+                        onClick={() => onChange({ icon: '' })}
+                    >
                         {i18n.t('Remove icon')}
                     </Button>
 

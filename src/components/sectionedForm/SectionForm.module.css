@@ -1,7 +1,7 @@
 .sections {
     display: flex;
     flex-direction: column;
-    gap: var(--spacers-dp24);
+    gap: var(--spacers-dp48);
 }
 
 .sections[hidden] {
@@ -10,7 +10,12 @@
 
 .sections section {
     background-color: var(--colors-white);
-    padding: 16px;
+    border: 1px solid var(--colors-grey300);
+    padding: var(--spacers-dp24);
+}
+
+.sections section h2:not(:first-child) {
+    margin-block-start: 40px;
 }
 
 .footerWrapper {
