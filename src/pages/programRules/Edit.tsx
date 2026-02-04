@@ -71,11 +71,11 @@ function cleanActionForSubmit(
     if (isExisting) {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { deleted, ...cleanAction } = action
-        return removeEmptyFields(cleanAction) as Record<string, unknown>
+        return removeEmptyFields(cleanAction)
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { id, deleted, ...cleanAction } = action
-    return removeEmptyFields(cleanAction) as Record<string, unknown>
+    return removeEmptyFields(cleanAction)
 }
 
 /**
