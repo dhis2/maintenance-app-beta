@@ -1,22 +1,18 @@
 import i18n from '@dhis2/d2-i18n'
-import { SectionedFormDescriptor } from '../../../lib'
-import { DataSetNotificationFormValues } from './dataSetNotificationTemplateSchema'
+import { SectionedFormDescriptor } from '../../../../lib'
+import { ProgramNotificationFormValues } from './programNotificationTemplateSchema'
 
 /**
  * Section data
  */
-export const formDescriptor = {
-    name: 'editDataSetNotificationForm',
-    label: i18n.t('Edit Data Set Notification'),
+export const programNotificationFormDescriptor = {
+    name: 'editProgramNotificationForm',
+    label: i18n.t('Edit Program Notification'),
     sections: [
         {
             name: 'basicInformation',
             label: i18n.t('Basic information'),
-            fields: [
-                { name: 'name', label: i18n.t('Name') },
-                { name: 'code', label: i18n.t('Code') },
-                { name: 'dataSets', label: i18n.t('Data sets') },
-            ],
+            fields: [{ name: 'name', label: i18n.t('Name') }],
         },
         {
             name: 'messageContent',
@@ -63,4 +59,4 @@ export const formDescriptor = {
             ],
         },
     ],
-} satisfies SectionedFormDescriptor<DataSetNotificationFormValues>
+} satisfies SectionedFormDescriptor<ProgramNotificationFormValues>

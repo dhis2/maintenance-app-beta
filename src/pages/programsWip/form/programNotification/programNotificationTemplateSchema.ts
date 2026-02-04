@@ -1,18 +1,21 @@
 import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
-import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
-import { DataSetNotificationTemplate } from '../../../types/generated'
+import {
+    createFormValidate,
+    getDefaults,
+    modelFormSchemas,
+} from '../../../../lib'
+import { ProgramNotificationTemplate } from '../../../../types/generated'
 
 const { identifiable, withDefaultListColumns, referenceCollection } =
     modelFormSchemas
 
-const dataSetNotificationTemplateBaseSchema = z.object({
-    code: z.string().optional(),
-    dataSetNotificationTrigger: z
-        .nativeEnum(DataSetNotificationTemplate.dataSetNotificationTrigger)
+const programNotificationTemplateBaseSchema = z.object({
+    programNotificationTrigger: z
+        .nativeEnum(ProgramNotificationTemplate.notificationTrigger)
         .optional(),
     notificationRecipient: z
-        .nativeEnum(DataSetNotificationTemplate.notificationRecipient)
+        .nativeEnum(ProgramNotificationTemplate.notificationRecipient)
         .optional(),
     deliveryChannels: z.array(z.enum(['SMS', 'EMAIL', 'HTTP'])).default([]),
     messageTemplate: z.string(),
@@ -33,46 +36,43 @@ const dataSetNotificationTemplateBaseSchema = z.object({
         })
         .optional()
         .default({}),
-    dataSets: referenceCollection.default([]),
-    sendStrategy: z
-        .nativeEnum(DataSetNotificationTemplate.sendStrategy)
-        .optional(),
+    programs: referenceCollection.default([]),
     notifyUsersInHierarchyOnly: z.boolean().optional(),
 })
 
-export const dataSetNotificationTemplateFormSchema =
-    dataSetNotificationTemplateBaseSchema.merge(identifiable).extend({
-        dataSetNotificationTrigger: z
-            .nativeEnum(DataSetNotificationTemplate.dataSetNotificationTrigger)
+export const programNotificationTemplateFormSchema =
+    programNotificationTemplateBaseSchema.merge(identifiable).extend({
+        programNotificationTrigger: z
+            .nativeEnum(ProgramNotificationTemplate.notificationTrigger)
             .default(
-                DataSetNotificationTemplate.dataSetNotificationTrigger
-                    .SCHEDULED_DAYS
+                ProgramNotificationTemplate.notificationTrigger
+                    .SCHEDULED_DAYS_DUE_DATE
             ),
         notificationRecipient: z
-            .nativeEnum(DataSetNotificationTemplate.notificationRecipient)
+            .nativeEnum(ProgramNotificationTemplate.notificationRecipient)
             .default(
-                DataSetNotificationTemplate.notificationRecipient.USER_GROUP
+                ProgramNotificationTemplate.notificationRecipient.USER_GROUP
             ),
     })
 
-export const dataSetNotificationTemplateListSchema =
-    dataSetNotificationTemplateBaseSchema.merge(withDefaultListColumns)
+export const programNotificationTemplateListSchema =
+    programNotificationTemplateBaseSchema.merge(withDefaultListColumns)
 
-export const initialValues = getDefaults(dataSetNotificationTemplateFormSchema)
+export const initialValues = getDefaults(programNotificationTemplateFormSchema)
 
-export type DataSetNotificationFormValues = z.infer<
-    typeof dataSetNotificationTemplateFormSchema
+export type ProgramNotificationFormValues = z.infer<
+    typeof programNotificationTemplateFormSchema
 >
 
 export const validate = createFormValidate(
-    dataSetNotificationTemplateBaseSchema
+    programNotificationTemplateBaseSchema
 )
 
 /**
  * Converts form values back to API payload
  */
 export const transformFormValues = <
-    TValues extends Partial<DataSetNotificationFormValues>
+    TValues extends Partial<ProgramNotificationFormValues>
 >(
     values: TValues
 ) => {
@@ -80,14 +80,14 @@ export const transformFormValues = <
         recipientUserGroup,
         relativeScheduledDays,
         notifyUsersInHierarchyOnly,
-        dataSets = [],
+        programs = [],
         ...rest
     } = values
 
     return {
         ...rest,
         relativeScheduledDays:
-            rest.dataSetNotificationTrigger === 'SCHEDULED_DAYS' &&
+            rest.programNotificationTrigger === 'SCHEDULED_DAYS_DUE_DATE' &&
             relativeScheduledDays
                 ? Number(relativeScheduledDays)
                 : undefined,
@@ -100,6 +100,6 @@ export const transformFormValues = <
             rest.notificationRecipient === 'USER_GROUP' && recipientUserGroup
                 ? Boolean(notifyUsersInHierarchyOnly)
                 : undefined,
-        dataSets: dataSets.map(({ id }) => ({ id })),
+        programs: programs.map(({ id }) => ({ id })),
     }
 }
