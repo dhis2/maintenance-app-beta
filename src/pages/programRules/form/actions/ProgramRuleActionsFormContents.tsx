@@ -79,10 +79,16 @@ const ProgramRuleActionListNewOrEdit = () => {
 
     // Merge submitted action into form array (edit = update at index, add = push)
     const handleSubmitted = (values: ProgramRuleActionListItem) => {
+        // Ensure new actions have a temporary id for React list keys
+        const actionWithId = {
+            ...values,
+            id: values.id || crypto.randomUUID(),
+        }
+
         if (drawerState.index !== null) {
-            actionsFieldArray.update(drawerState.index, values)
+            actionsFieldArray.update(drawerState.index, actionWithId)
         } else {
-            actionsFieldArray.push(values)
+            actionsFieldArray.push(actionWithId)
         }
         setDrawerState({ open: false, action: null, index: null })
     }
@@ -131,11 +137,14 @@ const ProgramRuleActionListNewOrEdit = () => {
             <div className={css.listWrapper}>
                 <div className={css.sectionItems}>
                     {actions.map((action, index) => {
+                        // Use id or fallback to index for React key
+                        const key = action.id || `action-${index}`
+
                         if (action.deleted) {
                             return (
                                 <div
                                     className={css.actionCardDeleted}
-                                    key={action.id}
+                                    key={key}
                                 >
                                     <div className={css.deletedActionText}>
                                         {i18n.t(
@@ -155,12 +164,13 @@ const ProgramRuleActionListNewOrEdit = () => {
                         // ListInFormItem expects ListItem (id, displayName, access); we build displayName from action type + content/fields
                         const displayItem = {
                             ...action,
+                            id: action.id || key, // Ensure id exists for ListInFormItem
                             displayName: getProgramRuleActionListLabel(action),
                         }
 
                         return (
                             <ListInFormItem
-                                key={action.id}
+                                key={key}
                                 item={displayItem}
                                 schemaName={SchemaName.programRuleAction}
                                 onClick={() => openEdit(action, index)}

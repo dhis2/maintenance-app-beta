@@ -20,7 +20,7 @@ export function ConditionField({ programId }: ConditionFieldProps) {
                 validationResource="programRules/condition/description"
                 clearable={true}
                 programId={programId}
-                type="default"
+                type="programRule"
             />
         </PaddedContainer>
     )

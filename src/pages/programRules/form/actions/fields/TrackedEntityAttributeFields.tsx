@@ -4,11 +4,11 @@ import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
 import { useField, useForm, useFormState } from 'react-final-form'
 import { useBoundResourceQueryFn } from '../../../../../lib'
-import { NO_VALUE_OPTION } from '../constants'
 import {
     ProgramRuleActionFormValues,
     TrackedEntityAttributeWithOptionSet,
 } from '../fieldTypes'
+import { NO_VALUE_OPTION } from '../ProgramRuleActionForm'
 
 /**
  * Tracked entity attribute select; disabled when data element is selected and clears data element on change.

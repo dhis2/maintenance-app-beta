@@ -4,11 +4,11 @@ import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
 import { useField, useForm, useFormState } from 'react-final-form'
 import { useBoundResourceQueryFn } from '../../../../../lib'
-import { NO_VALUE_OPTION } from '../constants'
 import {
     DataElementWithOptionSet,
     ProgramRuleActionFormValues,
 } from '../fieldTypes'
+import { NO_VALUE_OPTION } from '../ProgramRuleActionForm'
 
 /**
  * Data element select; disabled when TEA is selected and clears TEA on change.

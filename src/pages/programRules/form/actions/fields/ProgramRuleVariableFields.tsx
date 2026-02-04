@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
 import { Field } from 'react-final-form'
 import { useBoundResourceQueryFn } from '../../../../../lib'
-import { NO_VALUE_OPTION } from '../constants'
+import { NO_VALUE_OPTION } from '../ProgramRuleActionForm'
 
 /**
  * Program rule variable select for ASSIGN action.

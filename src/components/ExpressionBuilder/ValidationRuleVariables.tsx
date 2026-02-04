@@ -501,6 +501,43 @@ const ProgramAttributes = ({
     )
 }
 
+const ProgramRuleVariablesList = ({
+    insertElement,
+    programId,
+}: {
+    insertElement: InsertElementType
+    programId?: string
+}) => {
+    const insertElementFormatted = useCallback(
+        (s: string) => {
+            insertElement(`#{${s}}`)
+        },
+        [insertElement]
+    )
+
+    if (!programId) {
+        return <ProgramNotSelectedNoticeBox />
+    }
+
+    const programRuleVariablesQuery = {
+        resource: 'programRuleVariables',
+        params: {
+            filters: [`program.id:eq:${programId}`],
+            fields: ['id', 'displayName'],
+            order: ['displayName'],
+            paging: false,
+        },
+    }
+
+    return (
+        <ExpressionList
+            query={programRuleVariablesQuery}
+            insertElement={insertElementFormatted}
+            postQuerySearch={true}
+        />
+    )
+}
+
 const OPERATOR_ELEMENTS = [
     { id: '+', displayName: i18n.t('+ (add)') },
     { id: '-', displayName: i18n.t('- (subtract)') },
@@ -670,6 +707,141 @@ const VARIABLE_ELEMENTS = [
     },
 ]
 
+const PROGRAM_RULE_VARIABLE_ELEMENTS = [
+    { id: 'V{current_date}', displayName: i18n.t('Current date') },
+    { id: 'V{event_date}', displayName: i18n.t('Event date') },
+    { id: 'V{due_date}', displayName: i18n.t('Due date') },
+    { id: 'V{event_count}', displayName: i18n.t('Event count') },
+    { id: 'V{enrollment_date}', displayName: i18n.t('Enrollment date') },
+    { id: 'V{incident_date}', displayName: i18n.t('Incident date') },
+    { id: 'V{enrollment_id}', displayName: i18n.t('Enrollment id') },
+    { id: 'V{environment}', displayName: i18n.t('Environment') },
+    { id: 'V{event_id}', displayName: i18n.t('Event id') },
+    { id: 'V{orgunit_code}', displayName: i18n.t('Org unit code') },
+    { id: 'V{program_stage_name}', displayName: i18n.t('Program stage name') },
+    { id: 'V{program_stage_id}', displayName: i18n.t('Program stage id') },
+]
+
+const PROGRAM_RULE_FUNCTION_ELEMENTS = [
+    { id: 'd2:ceil( <number> )', displayName: 'd2:ceil( <number> )' },
+    { id: 'd2:floor( <number> )', displayName: 'd2:floor( <number> )' },
+    { id: 'd2:round( <number> )', displayName: 'd2:round( <number> )' },
+    {
+        id: 'd2:modulus( <number> , <number> )',
+        displayName: 'd2:modulus( <number> , <number> )',
+    },
+    { id: 'd2:zing( <number> )', displayName: 'd2:zing( <number> )' },
+    { id: 'd2:oizp( <number> )', displayName: 'd2:oizp( <number> )' },
+    {
+        id: 'd2:concatenate( <object>, <object>, ...)',
+        displayName: 'd2:concatenate( <object>, <object>, ...)',
+    },
+    {
+        id: 'd2:daysBetween( <date>, <date> )',
+        displayName: 'd2:daysBetween( <date>, <date> )',
+    },
+    {
+        id: 'd2:weeksBetween( <date>, <date> )',
+        displayName: 'd2:weeksBetween( <date>, <date> )',
+    },
+    {
+        id: 'd2:monthsBetween( <date>, <date> )',
+        displayName: 'd2:monthsBetween( <date>, <date> )',
+    },
+    {
+        id: 'd2:yearsBetween( <date>, <date> )',
+        displayName: 'd2:yearsBetween( <date>, <date> )',
+    },
+    {
+        id: 'd2:addDays( <date>, <number> )',
+        displayName: 'd2:addDays( <date>, <number> )',
+    },
+    {
+        id: 'd2:count( <sourcefield> )',
+        displayName: 'd2:count( <sourcefield> )',
+    },
+    {
+        id: 'd2:countIfValue( <sourcefield>, <text> )',
+        displayName: 'd2:countIfValue( <sourcefield>, <text> )',
+    },
+    {
+        id: 'd2:countIfZeroPos( <sourcefield> )',
+        displayName: 'd2:countIfZeroPos( <sourcefield> )',
+    },
+    {
+        id: 'd2:hasValue( <sourcefield> )',
+        displayName: 'd2:hasValue( <sourcefield> )',
+    },
+    {
+        id: 'd2:zpvc( <object>, <object>, ...)',
+        displayName: 'd2:zpvc( <object>, <object>, ...)',
+    },
+    {
+        id: 'd2:validatePattern( <text>, <regex> )',
+        displayName: 'd2:validatePattern( <text>, <regex> )',
+    },
+    {
+        id: 'd2:left( <text>, <number> )',
+        displayName: 'd2:left( <text>, <number> )',
+    },
+    {
+        id: 'd2:right( <text>, <number> )',
+        displayName: 'd2:right( <text>, <number> )',
+    },
+    {
+        id: 'd2:substring( <text>, <number>, <number> )',
+        displayName: 'd2:substring( <text>, <number>, <number> )',
+    },
+    {
+        id: 'd2:split( <text>, <text>, <number> )',
+        displayName: 'd2:split( <text>, <text>, <number> )',
+    },
+    { id: 'd2:length( <text> )', displayName: 'd2:length( <text> )' },
+    {
+        id: 'd2:inOrgUnitGroup( <orgunit_group_code> )',
+        displayName: 'd2:inOrgUnitGroup( <orgunit_group_code> )',
+    },
+    {
+        id: 'd2:hasUserRole( <user_role> )',
+        displayName: 'd2:hasUserRole( <user_role> )',
+    },
+    {
+        id: 'd2:zScoreWFA( <ageInMonth>, <weight>, <gender> )',
+        displayName: 'd2:zScoreWFA( <ageInMonth>, <weight>, <gender> )',
+    },
+    {
+        id: 'd2:zScoreHFA( <ageInMonth>, <height>, <gender> )',
+        displayName: 'd2:zScoreHFA( <ageInMonth>, <height>, <gender> )',
+    },
+    {
+        id: 'd2:zScoreWFH( <height>, <weight>, <gender> )',
+        displayName: 'd2:zScoreWFH( <height>, <weight>, <gender> )',
+    },
+    {
+        id: 'd2:extractDataMatrixValue( <key>, <value>)',
+        displayName: 'd2:extractDataMatrixValue( <key>, <value>)',
+    },
+]
+
+const PROGRAM_RULE_OPERATOR_ELEMENTS = [
+    { id: '+', displayName: i18n.t('+ (add)') },
+    { id: '-', displayName: i18n.t('- (subtract)') },
+    { id: '*', displayName: i18n.t('* (multiply)') },
+    { id: '/', displayName: i18n.t('/ (divide)') },
+    { id: '%', displayName: i18n.t('% (percent)') },
+    { id: '(', displayName: i18n.t('(') },
+    { id: ')', displayName: i18n.t(')') },
+    { id: '>', displayName: i18n.t('> (greater than)') },
+    { id: '>=', displayName: i18n.t('>= (greater than or equal to)') },
+    { id: '<', displayName: i18n.t('< (less than)') },
+    { id: '<=', displayName: i18n.t('<= (less than or equal to)') },
+    { id: '==', displayName: i18n.t('== (equals)') },
+    { id: '!=', displayName: i18n.t('!= (does not equal)') },
+    { id: '!', displayName: i18n.t('! (not)') },
+    { id: '&&', displayName: i18n.t('&& (and)') },
+    { id: '||', displayName: i18n.t('|| (or)') },
+]
+
 const programIndicatorElementTypes: ElementType[] = [
     {
         type: 'operator',
@@ -700,9 +872,43 @@ const programIndicatorElementTypes: ElementType[] = [
     },
 ]
 
+const programRuleElementTypes: ElementType[] = [
+    {
+        type: 'operator',
+        name: i18n.t('Operators'),
+        elements: PROGRAM_RULE_OPERATOR_ELEMENTS,
+        component: DefaultList,
+    },
+    {
+        type: 'variables',
+        name: i18n.t('Variables'),
+        elements: PROGRAM_RULE_VARIABLE_ELEMENTS,
+        component: DefaultList,
+    },
+    {
+        type: 'programRuleVariables',
+        name: i18n.t('Program rule variables'),
+        component: ProgramRuleVariablesList,
+    },
+    {
+        type: 'programStage',
+        name: i18n.t('Program stage data'),
+        component: ProgramStageList,
+    },
+    {
+        type: 'functions',
+        name: i18n.t('Functions'),
+        elements: PROGRAM_RULE_FUNCTION_ELEMENTS,
+        component: DefaultList,
+    },
+]
+
 export const getElementTypes = (type: ExpressionBuilderType): ElementType[] => {
     if (type === 'programIndicator') {
         return programIndicatorElementTypes
+    }
+    if (type === 'programRule') {
+        return programRuleElementTypes
     }
     if (type === 'indicator') {
         return indicatorElementTypes

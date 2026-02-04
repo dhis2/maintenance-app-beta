@@ -55,15 +55,13 @@ const useOnSubmitProgramRuleEdit = (modelId: string) => {
                 formValues.programRuleActions ?? []
 
             // Delete from API any persisted actions that were soft-deleted in the UI.
-            // Exclude new-* ids so we only call delete for actions that exist on the server.
-            const actionsToDelete = actions.filter(
-                (a) => a.deleted && a.id && !a.id.startsWith('new-')
-            )
+            // Only delete actions that have an id (exist on server)
+            const actionsToDelete = actions.filter((a) => a.deleted && a.id)
             const deletionResults = await Promise.allSettled(
                 actionsToDelete.map((a) =>
                     dataEngine.mutate({
                         resource: 'programRuleActions',
-                        id: a.id,
+                        id: a.id!, // Non-null assertion OK because filter above ensures id exists
                         type: 'delete',
                     })
                 )
@@ -92,10 +90,50 @@ const useOnSubmitProgramRuleEdit = (modelId: string) => {
                 })
             }
 
-            // Strip deleted actions from payload before saving the program rule
+            // Strip deleted actions and clean data for API
+            const originalActions =
+                form.getState().initialValues.programRuleActions ?? []
+
+            // Helper to remove undefined/null/empty fields (backend doesn't like null refs)
+            const removeEmptyFields = (
+                obj: Record<string, unknown>
+            ): Record<string, unknown> => {
+                const cleaned: Record<string, unknown> = {}
+                Object.keys(obj).forEach((key) => {
+                    const value = obj[key]
+                    // Skip undefined, null, and empty strings
+                    if (value !== undefined && value !== null && value !== '') {
+                        cleaned[key] = value
+                    }
+                })
+                return cleaned
+            }
+
             const trimmedValues = {
                 ...values,
-                programRuleActions: actions.filter((a) => !a.deleted),
+                programRuleActions: actions
+                    .filter((a) => !a.deleted)
+                    .map((action) => {
+                        // Check if this action existed in original data
+                        const isExisting =
+                            action.id &&
+                            originalActions.some(
+                                (orig: ProgramRuleActionListItem) =>
+                                    orig.id === action.id
+                            )
+
+                        if (isExisting) {
+                            // Existing action - remove frontend-only fields
+                            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                            const { deleted, ...cleanAction } = action
+                            return removeEmptyFields(cleanAction)
+                        }
+
+                        // New action - remove id and deleted fields so backend generates id
+                        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                        const { id, deleted, ...cleanAction } = action
+                        return removeEmptyFields(cleanAction)
+                    }),
             }
 
             return submitEdit(

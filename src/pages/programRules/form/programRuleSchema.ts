@@ -28,7 +28,7 @@ const programRuleBaseSchema = z.object({
     programRuleActions: z
         .array(
             z.object({
-                id: z.string(),
+                id: z.string().optional(), // Optional - backend generates for new actions
                 programRuleActionType: z.string().optional(),
                 content: z.string().optional(),
                 data: z.string().optional(),
@@ -40,6 +40,7 @@ const programRuleBaseSchema = z.object({
                 option: programRuleActionReference.optional(),
                 optionGroup: programRuleActionReference.optional(),
                 templateUid: z.string().optional(),
+                priority: z.number().optional(),
                 access: z.any().optional(),
                 deleted: z.boolean().optional(),
             })
