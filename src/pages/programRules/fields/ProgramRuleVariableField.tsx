@@ -2,17 +2,12 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
-import { Field } from 'react-final-form'
-import { useBoundResourceQueryFn } from '../../../../../lib'
-import { NO_VALUE_OPTION } from '../ProgramRuleActionForm'
+import { useField } from 'react-final-form'
+import { useBoundResourceQueryFn } from '../../../lib'
 
-/**
- * Program rule variable select for ASSIGN action.
- * Allows assigning to a program rule variable instead of a data element or tracked entity attribute.
- */
-export function ProgramRuleVariableSelect({
-    programId,
-}: Readonly<{ programId: string }>) {
+const NO_VALUE_OPTION = { value: '', label: i18n.t('(No Value)') }
+
+export function ProgramRuleVariableField({ programId }: { programId: string }) {
     const queryFn = useBoundResourceQueryFn()
 
     const { data } = useQuery({
@@ -44,15 +39,17 @@ export function ProgramRuleVariableSelect({
         [variables]
     )
 
+    const { input, meta } = useField('content', {
+        format: (value: string | undefined) => value ?? '',
+        parse: (id: string) => id || undefined,
+    })
+
     return (
-        <Field
-            name="content"
+        <SingleSelectFieldFF
+            input={input as any}
+            meta={meta as any}
             label={i18n.t('Program rule variable to assign to')}
-            component={SingleSelectFieldFF as any}
             options={selectOptions}
-            dataTest="program-rule-action-program-rule-variable"
-            format={(value: string | undefined) => value ?? ''}
-            parse={(id: string) => id || undefined}
             filterable
         />
     )

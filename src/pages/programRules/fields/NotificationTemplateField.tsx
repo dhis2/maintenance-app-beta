@@ -2,20 +2,16 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
-import { Field } from 'react-final-form'
-import { useBoundResourceQueryFn } from '../../../../../lib'
+import { useField } from 'react-final-form'
+import { useBoundResourceQueryFn } from '../../../lib'
 
-/**
- * Notification template select for SENDMESSAGE and SCHEDULEMESSAGE actions.
- * Fetches templates from both the program and its stages.
- */
-export function NotificationTemplateSelect({
+export function NotificationTemplateField({
     programId,
     required,
-}: Readonly<{
+}: {
     programId: string
     required?: boolean
-}>) {
+}) {
     const queryFn = useBoundResourceQueryFn()
 
     const { data: programData } = useQuery({
@@ -43,7 +39,7 @@ export function NotificationTemplateSelect({
         }>,
     })
 
-    const options = useMemo(() => {
+    const templates = useMemo(() => {
         const fromProgram = programData?.notificationTemplates ?? []
         const fromStages =
             programData?.programStages?.flatMap(
@@ -62,18 +58,25 @@ export function NotificationTemplateSelect({
 
     const selectOptions = useMemo(
         () =>
-            options.map((t) => ({ value: t.id, label: t.displayName ?? t.id })),
-        [options]
+            templates.map((t) => ({
+                value: t.id,
+                label: t.displayName ?? t.id,
+            })),
+        [templates]
     )
 
+    const { input, meta } = useField('templateUid', {
+        format: (value: string | undefined) => value ?? '',
+        parse: (value: string) => value || undefined,
+    })
+
     return (
-        <Field
-            name="templateUid"
+        <SingleSelectFieldFF
+            input={input as any}
+            meta={meta as any}
             label={i18n.t('Message template')}
-            component={SingleSelectFieldFF as any}
             options={selectOptions}
             required={required}
-            dataTest="program-rule-action-notification-template"
             filterable
         />
     )

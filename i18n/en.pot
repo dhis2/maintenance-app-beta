@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-04T09:31:31.214Z\n"
-"PO-Revision-Date: 2026-02-04T09:31:31.214Z\n"
+"POT-Creation-Date: 2026-02-04T12:41:55.470Z\n"
+"PO-Revision-Date: 2026-02-04T12:41:55.470Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -360,6 +360,27 @@ msgstr "Value count"
 msgid "Zero or positive value count"
 msgstr "Zero or positive value count"
 
+msgid "Event count"
+msgstr "Event count"
+
+msgid "Enrollment date"
+msgstr "Enrollment date"
+
+msgid "Incident date"
+msgstr "Incident date"
+
+msgid "Enrollment id"
+msgstr "Enrollment id"
+
+msgid "Environment"
+msgstr "Environment"
+
+msgid "Event id"
+msgstr "Event id"
+
+msgid "Org unit code"
+msgstr "Org unit code"
+
 msgid "Variables"
 msgstr "Variables"
 
@@ -368,6 +389,12 @@ msgstr "Program stage data"
 
 msgid "Attributes"
 msgstr "Attributes"
+
+msgid "Program rule variables"
+msgstr "Program rule variables"
+
+msgid "Functions"
+msgstr "Functions"
 
 msgid "Could not validate expression"
 msgstr "Could not validate expression"
@@ -1238,9 +1265,6 @@ msgstr "Program rules"
 msgid "Program rule variable"
 msgstr "Program rule variable"
 
-msgid "Program rule variables"
-msgstr "Program rule variables"
-
 msgid "Program stage"
 msgstr "Program stage"
 
@@ -1982,6 +2006,9 @@ msgstr "Display front page list"
 msgid "Mandatory"
 msgstr "Mandatory"
 
+msgid "Sort order"
+msgstr "Sort order"
+
 msgid "Category attribute"
 msgstr "Category attribute"
 
@@ -2122,9 +2149,6 @@ msgstr "Basic information"
 
 msgid "Data and options"
 msgstr "Data and options"
-
-msgid "Sort order"
-msgstr "Sort order"
 
 msgid "Category option combo"
 msgstr "Category option combo"
@@ -4239,12 +4263,6 @@ msgstr "Search available program indicators"
 msgid "Search selected program indicators"
 msgstr "Search selected program indicators"
 
-msgid "Incident date"
-msgstr "Incident date"
-
-msgid "Enrollment date"
-msgstr "Enrollment date"
-
 msgid "Before start of reporting period"
 msgstr "Before start of reporting period"
 
@@ -4397,8 +4415,17 @@ msgstr "Edit condition expression"
 msgid "Set up condition expression"
 msgstr "Set up condition expression"
 
+msgid "Feedback"
+msgstr "Feedback"
+
+msgid "Display widget"
+msgstr "Display widget"
+
 msgid "Can be 0 or negative. Leave empty if not needed."
 msgstr "Can be 0 or negative. Leave empty if not needed."
+
+msgid "Program rule variable to assign to"
+msgstr "Program rule variable to assign to"
 
 msgid "Program stages to trigger rule"
 msgstr "Program stages to trigger rule"
@@ -4413,6 +4440,9 @@ msgstr ""
 "Select a specific program stage or leave as \"All program stages\" to "
 "trigger on all stages."
 
+msgid "Program stage section to hide"
+msgstr "Program stage section to hide"
+
 msgid "Set up the basic information for this program rule."
 msgstr "Set up the basic information for this program rule."
 
@@ -4425,143 +4455,8 @@ msgstr "Explain the purpose of this program rule. Not shown with rule output."
 msgid "Configure the program rule condition expression."
 msgstr "Configure the program rule condition expression."
 
-msgid "Feedback"
-msgstr "Feedback"
-
-msgid "Action is required"
-msgstr "Action is required"
-
-msgid "Display widget is required"
-msgstr "Display widget is required"
-
-msgid "Static text is required"
-msgstr "Static text is required"
-
-msgid "Key label is required"
-msgstr "Key label is required"
-
-msgid "Program stage section to hide is required"
-msgstr "Program stage section to hide is required"
-
-msgid "Program stage is required"
-msgstr "Program stage is required"
-
-msgid "Data element or tracked entity attribute must be selected"
-msgstr "Data element or tracked entity attribute must be selected"
-
-msgid "Expression to assign is required"
-msgstr "Expression to assign is required"
-
-msgid "Message template is required"
-msgstr "Message template is required"
-
-msgid "Select a data element or tracked entity attribute with option set"
-msgstr "Select a data element or tracked entity attribute with option set"
-
-msgid "Option to hide is required"
-msgstr "Option to hide is required"
-
-msgid "Edit program rule action"
-msgstr "Edit program rule action"
-
-msgid "Add program rule action"
-msgstr "Add program rule action"
-
-msgid "Configure the program rule action type and content."
-msgstr "Configure the program rule action type and content."
-
-msgid "Action"
-msgstr "Action"
-
-msgid "Display widget"
-msgstr "Display widget"
-
-msgid "Static text"
-msgstr "Static text"
-
-msgid "Expression to evaluate and display after static text."
-msgstr "Expression to evaluate and display after static text."
-
-msgid "Key label"
-msgstr "Key label"
-
-msgid "Expression to evaluate and display as value."
-msgstr "Expression to evaluate and display as value."
-
-msgid "Data element to hide"
-msgstr "Data element to hide"
-
-msgid "Tracked entity attribute to hide"
-msgstr "Tracked entity attribute to hide"
-
-msgid "Custom message for blanked field"
-msgstr "Custom message for blanked field"
-
-msgid "Program stage section to hide"
-msgstr "Program stage section to hide"
-
-msgid "Data element to display warning next to"
-msgstr "Data element to display warning next to"
-
-msgid "Data element to display error next to"
-msgstr "Data element to display error next to"
-
-msgid "Tracked entity attribute to display warning next to"
-msgstr "Tracked entity attribute to display warning next to"
-
-msgid "Tracked entity attribute to display error next to"
-msgstr "Tracked entity attribute to display error next to"
-
-msgid "Data element to assign to"
-msgstr "Data element to assign to"
-
-msgid "Tracked entity attribute to assign to"
-msgstr "Tracked entity attribute to assign to"
-
-msgid "Expression to evaluate and assign."
-msgstr "Expression to evaluate and assign."
-
-msgid "Edit date expression"
-msgstr "Edit date expression"
-
-msgid "Date to send message."
-msgstr "Date to send message."
-
-msgid "Option to hide"
-msgstr "Option to hide"
-
-msgid "Option group to show"
-msgstr "Option group to show"
-
-msgid "Option group to hide"
-msgstr "Option group to hide"
-
-msgid "Save action"
-msgstr "Save action"
-
-msgid "Add action"
-msgstr "Add action"
-
-msgid "Program rule variable to assign to"
-msgstr "Program rule variable to assign to"
-
-msgid "Configure actions for this program rule."
-msgstr "Configure actions for this program rule."
-
-msgid "Program rule must be saved before actions can be added"
-msgstr "Program rule must be saved before actions can be added"
-
-msgid "Action will be removed on save"
-msgstr "Action will be removed on save"
-
-msgid "Restore action"
-msgstr "Restore action"
-
-msgid "field"
-msgstr "field"
-
-msgid "Assign"
-msgstr "Assign"
+msgid "Assign value"
+msgstr "Assign value"
 
 msgid "Create event"
 msgstr "Create event"
@@ -4610,6 +4505,90 @@ msgstr "Show warning"
 
 msgid "Warning on complete"
 msgstr "Warning on complete"
+
+msgid "Edit action"
+msgstr "Edit action"
+
+msgid "Add action"
+msgstr "Add action"
+
+msgid "Configure the program rule action."
+msgstr "Configure the program rule action."
+
+msgid "Action type"
+msgstr "Action type"
+
+msgid "Save action"
+msgstr "Save action"
+
+msgid "Static text"
+msgstr "Static text"
+
+msgid "Expression to evaluate and display after static text."
+msgstr "Expression to evaluate and display after static text."
+
+msgid "Key label"
+msgstr "Key label"
+
+msgid "Expression to evaluate and display as value."
+msgstr "Expression to evaluate and display as value."
+
+msgid "Data element to hide"
+msgstr "Data element to hide"
+
+msgid "Tracked entity attribute to hide"
+msgstr "Tracked entity attribute to hide"
+
+msgid "Custom message for blanked field"
+msgstr "Custom message for blanked field"
+
+msgid "Data element to display warning next to"
+msgstr "Data element to display warning next to"
+
+msgid "Data element to display error next to"
+msgstr "Data element to display error next to"
+
+msgid "Tracked entity attribute to display warning next to"
+msgstr "Tracked entity attribute to display warning next to"
+
+msgid "Tracked entity attribute to display error next to"
+msgstr "Tracked entity attribute to display error next to"
+
+msgid "Data element to assign to"
+msgstr "Data element to assign to"
+
+msgid "Tracked entity attribute to assign to"
+msgstr "Tracked entity attribute to assign to"
+
+msgid "Expression to evaluate and assign."
+msgstr "Expression to evaluate and assign."
+
+msgid "Date to send message."
+msgstr "Date to send message."
+
+msgid "Option to hide"
+msgstr "Option to hide"
+
+msgid "Option group to show"
+msgstr "Option group to show"
+
+msgid "Option group to hide"
+msgstr "Option group to hide"
+
+msgid "Configure actions for this program rule."
+msgstr "Configure actions for this program rule."
+
+msgid "Action will be removed on save"
+msgstr "Action will be removed on save"
+
+msgid "Restore action"
+msgstr "Restore action"
+
+msgid "Program rule must be saved before actions can be added"
+msgstr "Program rule must be saved before actions can be added"
+
+msgid "field"
+msgstr "field"
 
 msgid "Program Rule"
 msgstr "Program Rule"
@@ -4873,9 +4852,6 @@ msgstr "Public (All users)"
 msgid "External"
 msgstr "External"
 
-msgid "Should not be lower than previous version"
-msgstr "Should not be lower than previous version"
-
 msgid "Program Details"
 msgstr "Program Details"
 
@@ -4884,6 +4860,9 @@ msgstr "Set up the basic information for this program."
 
 msgid "Last updated:  {{date}}"
 msgstr "Last updated:  {{date}}"
+
+msgid "Increase version"
+msgstr "Increase version"
 
 msgid "Related program"
 msgstr "Related program"

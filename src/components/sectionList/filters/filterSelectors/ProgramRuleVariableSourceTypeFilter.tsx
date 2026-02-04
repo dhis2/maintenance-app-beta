@@ -70,14 +70,10 @@ export const ProgramRuleVariableSourceTypeFilter = () => {
         }
     }, [filter])
 
-    // Only pass selected if value exists in options; otherwise @dhis2/ui SingleSelect throws
-    const selectedInOptions =
-        value && SOURCE_TYPES.some((o) => o.value === value) ? value : undefined
-
     return (
         <SingleSelect
             className={css.identifiableSelectionFilter}
-            selected={selectedInOptions}
+            selected={value}
             placeholder={i18n.t('Select source type')}
             onChange={handleChange}
             dense

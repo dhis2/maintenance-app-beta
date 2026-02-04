@@ -1,0 +1,93 @@
+import i18n from '@dhis2/d2-i18n'
+import { SingleSelectFieldFF } from '@dhis2/ui'
+import { useQuery } from '@tanstack/react-query'
+import React, { useMemo } from 'react'
+import { useField, useFormState } from 'react-final-form'
+import { useBoundResourceQueryFn } from '../../../lib'
+
+const NO_VALUE_OPTION = { value: '', label: i18n.t('(No Value)') }
+
+export function TrackedEntityAttributeField({
+    programId,
+    label,
+    required,
+}: Readonly<{
+    programId: string
+    label: string
+    required?: boolean
+}>) {
+    const { values } = useFormState({ subscription: { values: true } })
+    const queryFn = useBoundResourceQueryFn()
+
+    const { data } = useQuery({
+        queryKey: [
+            {
+                resource: 'programs',
+                id: programId,
+                params: {
+                    fields: [
+                        'programTrackedEntityAttributes[trackedEntityAttribute[id,displayName]]',
+                    ],
+                    paging: false,
+                },
+            },
+        ] as const,
+        queryFn: queryFn<{
+            programTrackedEntityAttributes?: Array<{
+                trackedEntityAttribute: { id: string; displayName?: string }
+            }>
+        }>,
+    })
+
+    const attributes = useMemo(
+        () =>
+            data?.programTrackedEntityAttributes?.map(
+                (pta) => pta.trackedEntityAttribute
+            ) ?? [],
+        [data]
+    )
+
+    const currentValue = (values as any).trackedEntityAttribute
+    const selectedId = currentValue?.id
+    const selectedInList =
+        selectedId && attributes.some((a) => a.id === selectedId)
+
+    const selectOptions = useMemo(
+        () => [
+            NO_VALUE_OPTION,
+            // Include current value in options when not in list so SingleSelect does not throw
+            ...(selectedId && !selectedInList
+                ? [
+                      {
+                          value: selectedId,
+                          label:
+                              currentValue?.displayName ?? i18n.t('Loading...'),
+                      },
+                  ]
+                : []),
+            ...attributes.map((a) => ({
+                value: a.id,
+                label: a.displayName ?? a.id,
+            })),
+        ],
+        [attributes, selectedId, selectedInList, currentValue?.displayName]
+    )
+
+    const { input, meta } = useField('trackedEntityAttribute', {
+        format: (value: { id: string; displayName?: string } | undefined) =>
+            value?.id ?? '',
+        parse: (id: string) =>
+            id ? attributes.find((a) => a.id === id) : undefined,
+    })
+
+    return (
+        <SingleSelectFieldFF
+            input={input as any}
+            meta={meta as any}
+            label={label}
+            options={selectOptions}
+            required={required}
+            filterable
+        />
+    )
+}

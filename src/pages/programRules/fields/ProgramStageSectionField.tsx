@@ -1,20 +1,18 @@
+import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
-import { Field } from 'react-final-form'
-import { useBoundResourceQueryFn } from '../../../../../lib'
+import { useField, useFormState } from 'react-final-form'
+import { useBoundResourceQueryFn } from '../../../lib'
 
-/**
- * Program stage section select for HIDESECTION action.
- * Fetches all program stage sections from all stages within the program.
- */
-export function ProgramStageSectionSelect({
+export function ProgramStageSectionField({
     programId,
-    label,
-}: Readonly<{
+    required,
+}: {
     programId: string
-    label: string
-}>) {
+    required?: boolean
+}) {
+    const { values } = useFormState({ subscription: { values: true } })
     const queryFn = useBoundResourceQueryFn()
 
     const { data } = useQuery({
@@ -54,23 +52,44 @@ export function ProgramStageSectionSelect({
         })
     }, [data])
 
+    const currentValue = (values as any).programStageSection
+    const selectedId = currentValue?.id
+    const selectedInList =
+        selectedId && sections.some((s) => s.id === selectedId)
+
     const selectOptions = useMemo(
-        () =>
-            sections.map((s) => ({
+        () => [
+            ...(selectedId && !selectedInList
+                ? [
+                      {
+                          value: selectedId,
+                          label:
+                              currentValue?.displayName ?? i18n.t('Loading...'),
+                      },
+                  ]
+                : []),
+            ...sections.map((s) => ({
                 value: s.id,
                 label: s.displayName ?? s.id,
             })),
-        [sections]
+        ],
+        [sections, selectedId, selectedInList, currentValue?.displayName]
     )
 
+    const { input, meta } = useField('programStageSection', {
+        format: (value: { id: string; displayName?: string } | undefined) =>
+            value?.id ?? '',
+        parse: (id: string) =>
+            id ? sections.find((s) => s.id === id) : undefined,
+    })
+
     return (
-        <Field
-            name="programStageSection"
-            label={label}
-            component={SingleSelectFieldFF as any}
+        <SingleSelectFieldFF
+            input={input as any}
+            meta={meta as any}
+            label={i18n.t('Program stage section to hide')}
             options={selectOptions}
-            required
-            dataTest="program-rule-action-program-stage-section"
+            required={required}
             filterable
         />
     )

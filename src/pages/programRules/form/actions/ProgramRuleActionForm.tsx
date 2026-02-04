@@ -1,8 +1,3 @@
-/**
- * Program rule action form (drawer). Fields vary by action type (SHOWWARNING,
- * HIDEFIELD, ASSIGN, etc.). Used for add and edit; submitted values are merged
- * into the parent form's programRuleActions array.
- */
 import i18n from '@dhis2/d2-i18n'
 import {
     Button,
@@ -10,57 +5,110 @@ import {
     InputFieldFF,
     SingleSelectFieldFF,
 } from '@dhis2/ui'
-import { useQuery } from '@tanstack/react-query'
-import React, { useMemo } from 'react'
-import { Field, useField, useForm, useFormState } from 'react-final-form'
+import React from 'react'
+import { Field, useFormState } from 'react-final-form'
 import {
-    ExpressionBuilderEntry,
     FormBase,
-    SectionedFormLayout,
-    SectionedFormSection,
+    FormFooterWrapper,
     StandardFormField,
+    StandardFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../components'
-import { PaddedContainer } from '../../../../components/ExpressionBuilder/PaddedContainer'
-import { ModelSingleSelectFormField } from '../../../../components/metadataFormControls/ModelSingleSelect'
-import { useBoundResourceQueryFn } from '../../../../lib'
 import { ProgramRuleAction } from '../../../../types/generated'
-import { PriorityField } from '../../fields/PriorityField'
-import drawerStyles from './ProgramRuleActionForm.module.css'
-import { PROGRAM_RULE_ACTION_TYPE_OPTIONS } from './programRuleActionTypeConstants'
+import {
+    DataElementField,
+    DataElementWithOptionSetField,
+    ExpressionField,
+    LocationField,
+    NotificationTemplateField,
+    OptionField,
+    OptionGroupField,
+    PriorityField,
+    ProgramRuleVariableField,
+    ProgramStageSectionField,
+    ProgramStageSelectField,
+    TrackedEntityAttributeField,
+    TrackedEntityAttributeWithOptionSetField,
+} from '../../fields'
+import styles from './ProgramRuleActionForm.module.css'
 import type { ProgramRuleActionListItem } from './types'
-import { validateProgramRuleAction } from './validation'
 
-const DISPLAY_WIDGET_LOCATION_OPTIONS = [
-    { label: i18n.t('Feedback'), value: 'FEEDBACK' },
-    { label: i18n.t('Indicators'), value: 'INDICATORS' },
-]
-
-export const NO_VALUE_OPTION = { value: '', label: i18n.t('(No Value)') }
-
-type DataElementWithOptionSet = {
-    id: string
-    displayName?: string
-    optionSet?: { id: string }
-}
-type TrackedEntityAttributeWithOptionSet = {
-    id: string
-    displayName?: string
-    optionSet?: { id: string }
-}
+const ACTION_TYPE_OPTIONS = [
+    {
+        label: i18n.t('Assign value'),
+        value: ProgramRuleAction.programRuleActionType.ASSIGN,
+    },
+    {
+        label: i18n.t('Create event'),
+        value: ProgramRuleAction.programRuleActionType.CREATEEVENT,
+    },
+    {
+        label: i18n.t('Display key-value pair'),
+        value: ProgramRuleAction.programRuleActionType.DISPLAYKEYVALUEPAIR,
+    },
+    {
+        label: i18n.t('Display text'),
+        value: ProgramRuleAction.programRuleActionType.DISPLAYTEXT,
+    },
+    {
+        label: i18n.t('Error on complete'),
+        value: ProgramRuleAction.programRuleActionType.ERRORONCOMPLETE,
+    },
+    {
+        label: i18n.t('Hide field'),
+        value: ProgramRuleAction.programRuleActionType.HIDEFIELD,
+    },
+    {
+        label: i18n.t('Hide option'),
+        value: ProgramRuleAction.programRuleActionType.HIDEOPTION,
+    },
+    {
+        label: i18n.t('Hide option group'),
+        value: ProgramRuleAction.programRuleActionType.HIDEOPTIONGROUP,
+    },
+    {
+        label: i18n.t('Hide program stage'),
+        value: ProgramRuleAction.programRuleActionType.HIDEPROGRAMSTAGE,
+    },
+    {
+        label: i18n.t('Hide section'),
+        value: ProgramRuleAction.programRuleActionType.HIDESECTION,
+    },
+    {
+        label: i18n.t('Schedule message'),
+        value: ProgramRuleAction.programRuleActionType.SCHEDULEMESSAGE,
+    },
+    {
+        label: i18n.t('Send message'),
+        value: ProgramRuleAction.programRuleActionType.SENDMESSAGE,
+    },
+    {
+        label: i18n.t('Set mandatory field'),
+        value: ProgramRuleAction.programRuleActionType.SETMANDATORYFIELD,
+    },
+    {
+        label: i18n.t('Show error'),
+        value: ProgramRuleAction.programRuleActionType.SHOWERROR,
+    },
+    {
+        label: i18n.t('Show option group'),
+        value: ProgramRuleAction.programRuleActionType.SHOWOPTIONGROUP,
+    },
+    {
+        label: i18n.t('Show warning'),
+        value: ProgramRuleAction.programRuleActionType.SHOWWARNING,
+    },
+    {
+        label: i18n.t('Warning on complete'),
+        value: ProgramRuleAction.programRuleActionType.WARNINGONCOMPLETE,
+    },
+].sort((a, b) => a.label.localeCompare(b.label))
 
 type ProgramRuleActionFormValues = Partial<ProgramRuleActionListItem> & {
     programRule?: { id: string }
-    dataElement?:
-        | DataElementWithOptionSet
-        | { id: string; displayName?: string }
-    trackedEntityAttribute?:
-        | TrackedEntityAttributeWithOptionSet
-        | { id: string; displayName?: string }
 }
 
-// New actions - id is optional and will be generated by backend
 const initialValuesNew = (
     programRuleId: string
 ): ProgramRuleActionFormValues => ({
@@ -68,34 +116,8 @@ const initialValuesNew = (
     priority: undefined,
     content: '',
     data: '',
-    location: '',
     programRule: { id: programRuleId },
 })
-
-/** Resolve option set ID from data element or tracked entity attribute for option/optionGroup selects */
-function optionSetIdFromOptionAction(
-    values: ProgramRuleActionFormValues
-): string | undefined {
-    const de = values.dataElement as DataElementWithOptionSet | undefined
-    const tea = values.trackedEntityAttribute as
-        | TrackedEntityAttributeWithOptionSet
-        | undefined
-    return de?.optionSet?.id ?? tea?.optionSet?.id
-}
-
-const DISPLAY_WIDGET_LOCATION_VALUES = new Set<string>([
-    'FEEDBACK',
-    'INDICATORS',
-])
-
-// Normalize DISPLAYTEXT/DISPLAYKEYVALUEPAIR location to FEEDBACK or INDICATORS for API consistency
-function normalizeLocation(location: string | undefined): string {
-    if (!location) {
-        return ''
-    }
-    const upper = location.toUpperCase()
-    return DISPLAY_WIDGET_LOCATION_VALUES.has(upper) ? upper : location
-}
 
 export const ProgramRuleActionForm = ({
     programRuleId,
@@ -111,17 +133,12 @@ export const ProgramRuleActionForm = ({
     onSubmitted: (values: ProgramRuleActionListItem) => void
 }>) => {
     const initialValues: ProgramRuleActionFormValues = action
-        ? ({
-              ...action,
-              location: normalizeLocation(action.location),
-              programRule: { id: programRuleId },
-          } as ProgramRuleActionFormValues)
+        ? { ...action, programRule: { id: programRuleId } }
         : initialValuesNew(programRuleId)
 
     return (
         <FormBase
             onSubmit={(values) => {
-                // Strip programRule object so payload matches API (API expects programRule as ref, not nested)
                 const submitted = {
                     ...values,
                     programRule: undefined,
@@ -129,1385 +146,360 @@ export const ProgramRuleActionForm = ({
                 onSubmitted(submitted)
             }}
             initialValues={initialValues}
-            validate={validateProgramRuleAction}
             subscription={{}}
             includeAttributes={false}
         >
             {({ handleSubmit }) => (
-                <ProgramRuleActionFormContents
-                    handleSubmit={handleSubmit}
-                    programId={programId}
-                    action={action}
-                    onCancel={onCancel}
-                    programRuleActionTypeOptions={
-                        PROGRAM_RULE_ACTION_TYPE_OPTIONS
-                    }
-                    displayWidgetLocationOptions={
-                        DISPLAY_WIDGET_LOCATION_OPTIONS
-                    }
-                />
+                <form onSubmit={handleSubmit}>
+                    <div className={styles.sectionsWrapper}>
+                        <div>
+                            <StandardFormSection>
+                                <StandardFormSectionTitle>
+                                    {action
+                                        ? i18n.t('Edit action')
+                                        : i18n.t('Add action')}
+                                </StandardFormSectionTitle>
+                                <StandardFormSectionDescription>
+                                    {i18n.t(
+                                        'Configure the program rule action.'
+                                    )}
+                                </StandardFormSectionDescription>
+
+                                <StandardFormField>
+                                    <Field
+                                        name="programRuleActionType"
+                                        label={i18n.t('Action type')}
+                                        component={SingleSelectFieldFF}
+                                        options={ACTION_TYPE_OPTIONS}
+                                        required
+                                        filterable
+                                    />
+                                </StandardFormField>
+
+                                <StandardFormField>
+                                    <PriorityField />
+                                </StandardFormField>
+
+                                <ActionTypeFields programId={programId} />
+                            </StandardFormSection>
+                        </div>
+
+                        <FormFooterWrapper>
+                            <ButtonStrip>
+                                <Button primary type="submit">
+                                    {action
+                                        ? i18n.t('Save action')
+                                        : i18n.t('Add action')}
+                                </Button>
+                                <Button secondary onClick={onCancel}>
+                                    {i18n.t('Cancel')}
+                                </Button>
+                            </ButtonStrip>
+                        </FormFooterWrapper>
+                    </div>
+                </form>
             )}
         </FormBase>
     )
 }
 
-function ProgramRuleActionFormContents({
-    handleSubmit,
-    programId,
-    action,
-    onCancel,
-    programRuleActionTypeOptions,
-    displayWidgetLocationOptions,
-}: Readonly<{
-    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
-    programId?: string
-    action: ProgramRuleActionListItem | null
-    onCancel: () => void
-    programRuleActionTypeOptions: Array<{ label: string; value: string }>
-    displayWidgetLocationOptions: Array<{ label: string; value: string }>
-}>) {
+function ActionTypeFields({ programId }: { programId?: string }) {
     const { values } = useFormState({ subscription: { values: true } })
-    const actionType = values.programRuleActionType as string | undefined
+    const actionType = (values as ProgramRuleActionFormValues)
+        .programRuleActionType
 
-    return (
-        <form onSubmit={handleSubmit} className={drawerStyles.drawerForm}>
-            <div className={drawerStyles.drawerFormBody}>
-                <SectionedFormLayout>
-                    <SectionedFormSection name="action">
-                        <StandardFormSectionTitle>
-                            {action
-                                ? i18n.t('Edit program rule action')
-                                : i18n.t('Add program rule action')}
-                        </StandardFormSectionTitle>
-                        <StandardFormSectionDescription>
-                            {i18n.t(
-                                'Configure the program rule action type and content.'
-                            )}
-                        </StandardFormSectionDescription>
-
-                        <StandardFormField>
-                            <Field
-                                name="programRuleActionType"
-                                label={i18n.t('Action')}
-                                component={SingleSelectFieldFF}
-                                options={programRuleActionTypeOptions}
-                                dataTest="program-rule-action-type"
-                                required
-                                filterable
-                            />
-                        </StandardFormField>
-
-                        <StandardFormField>
-                            <PriorityField />
-                        </StandardFormField>
-
-                        {/* DISPLAYTEXT */}
-                        {actionType ===
-                            ProgramRuleAction.programRuleActionType
-                                .DISPLAYTEXT && (
-                            <>
-                                <StandardFormField>
-                                    <Field
-                                        name="location"
-                                        label={i18n.t('Display widget')}
-                                        component={SingleSelectFieldFF}
-                                        options={displayWidgetLocationOptions}
-                                        dataTest="program-rule-action-location"
-                                        required
-                                        filterable
-                                    />
-                                </StandardFormField>
-                                <StandardFormField>
-                                    <Field
-                                        name="content"
-                                        label={i18n.t('Static text')}
-                                        component={InputFieldFF}
-                                        dataTest="program-rule-action-content"
-                                        required
-                                    />
-                                </StandardFormField>
-                                <StandardFormField>
-                                    <PaddedContainer>
-                                        <ExpressionBuilderEntry
-                                            fieldName="data"
-                                            title={i18n.t('Edit expression')}
-                                            editButtonText={i18n.t(
-                                                'Edit expression'
-                                            )}
-                                            setUpButtonText={i18n.t(
-                                                'Set up expression'
-                                            )}
-                                            validationResource="programRules/condition/description"
-                                            clearable
-                                            programId={programId}
-                                            type="programRule"
-                                        />
-                                    </PaddedContainer>
-                                    <span className={drawerStyles.helperText}>
-                                        {i18n.t(
-                                            'Expression to evaluate and display after static text.'
-                                        )}
-                                    </span>
-                                </StandardFormField>
-                            </>
-                        )}
-
-                        {/* DISPLAYKEYVALUEPAIR */}
-                        {actionType ===
-                            ProgramRuleAction.programRuleActionType
-                                .DISPLAYKEYVALUEPAIR && (
-                            <>
-                                <StandardFormField>
-                                    <Field
-                                        name="location"
-                                        label={i18n.t('Display widget')}
-                                        component={SingleSelectFieldFF}
-                                        options={displayWidgetLocationOptions}
-                                        dataTest="program-rule-action-location"
-                                        required
-                                        filterable
-                                    />
-                                </StandardFormField>
-                                <StandardFormField>
-                                    <Field
-                                        name="content"
-                                        label={i18n.t('Key label')}
-                                        component={InputFieldFF}
-                                        dataTest="program-rule-action-content"
-                                        required
-                                    />
-                                </StandardFormField>
-                                <StandardFormField>
-                                    <PaddedContainer>
-                                        <ExpressionBuilderEntry
-                                            fieldName="data"
-                                            title={i18n.t('Edit expression')}
-                                            editButtonText={i18n.t(
-                                                'Edit expression'
-                                            )}
-                                            setUpButtonText={i18n.t(
-                                                'Set up expression'
-                                            )}
-                                            validationResource="programRules/condition/description"
-                                            clearable
-                                            programId={programId}
-                                            type="programRule"
-                                        />
-                                    </PaddedContainer>
-                                    <span className={drawerStyles.helperText}>
-                                        {i18n.t(
-                                            'Expression to evaluate and display as value.'
-                                        )}
-                                    </span>
-                                </StandardFormField>
-                            </>
-                        )}
-
-                        {/* HIDEFIELD */}
-                        {actionType ===
-                            ProgramRuleAction.programRuleActionType.HIDEFIELD &&
-                            programId && (
-                                <>
-                                    <StandardFormField>
-                                        <DataElementSelect
-                                            programId={programId}
-                                            name="dataElement"
-                                            label={i18n.t(
-                                                'Data element to hide'
-                                            )}
-                                        />
-                                    </StandardFormField>
-                                    <StandardFormField>
-                                        <TrackedEntityAttributeSelect
-                                            programId={programId}
-                                            name="trackedEntityAttribute"
-                                            label={i18n.t(
-                                                'Tracked entity attribute to hide'
-                                            )}
-                                        />
-                                    </StandardFormField>
-                                    <StandardFormField>
-                                        <Field
-                                            name="content"
-                                            label={i18n.t(
-                                                'Custom message for blanked field'
-                                            )}
-                                            component={InputFieldFF}
-                                            dataTest="program-rule-action-content"
-                                        />
-                                    </StandardFormField>
-                                </>
-                            )}
-
-                        {/* HIDESECTION */}
-                        {actionType ===
-                            ProgramRuleAction.programRuleActionType
-                                .HIDESECTION &&
-                            programId && (
-                                <StandardFormField>
-                                    <ProgramStageSectionSelect
-                                        programId={programId}
-                                        label={i18n.t(
-                                            'Program stage section to hide'
-                                        )}
-                                    />
-                                </StandardFormField>
-                            )}
-
-                        {/* HIDEPROGRAMSTAGE */}
-                        {actionType ===
-                            ProgramRuleAction.programRuleActionType
-                                .HIDEPROGRAMSTAGE &&
-                            programId && (
-                                <StandardFormField>
-                                    <ModelSingleSelectFormField
-                                        name="programStage"
-                                        label={i18n.t('Program stage')}
-                                        required
-                                        query={{
-                                            resource: 'programStages',
-                                            params: {
-                                                fields: ['id', 'displayName'],
-                                                filter: `program.id:eq:${programId}`,
-                                                paging: false,
-                                            },
-                                        }}
-                                        inputWidth="400px"
-                                        dataTest="program-rule-action-program-stage"
-                                    />
-                                </StandardFormField>
-                            )}
-
-                        {/* SHOWWARNING, SHOWERROR, WARNINGONCOMPLETE, ERRORONCOMPLETE - same pattern */}
-                        {(actionType ===
-                            ProgramRuleAction.programRuleActionType
-                                .SHOWWARNING ||
-                            actionType ===
-                                ProgramRuleAction.programRuleActionType
-                                    .SHOWERROR ||
-                            actionType ===
-                                ProgramRuleAction.programRuleActionType
-                                    .WARNINGONCOMPLETE ||
-                            actionType ===
-                                ProgramRuleAction.programRuleActionType
-                                    .ERRORONCOMPLETE) &&
-                            programId && (
-                                <>
-                                    <StandardFormField>
-                                        <DataElementSelect
-                                            programId={programId}
-                                            name="dataElement"
-                                            mutualExclusion={false}
-                                            label={
-                                                actionType ===
-                                                    ProgramRuleAction
-                                                        .programRuleActionType
-                                                        .SHOWWARNING ||
-                                                actionType ===
-                                                    ProgramRuleAction
-                                                        .programRuleActionType
-                                                        .WARNINGONCOMPLETE
-                                                    ? i18n.t(
-                                                          'Data element to display warning next to'
-                                                      )
-                                                    : i18n.t(
-                                                          'Data element to display error next to'
-                                                      )
-                                            }
-                                        />
-                                    </StandardFormField>
-                                    <StandardFormField>
-                                        <TrackedEntityAttributeSelect
-                                            programId={programId}
-                                            name="trackedEntityAttribute"
-                                            mutualExclusion={false}
-                                            label={
-                                                actionType ===
-                                                    ProgramRuleAction
-                                                        .programRuleActionType
-                                                        .SHOWWARNING ||
-                                                actionType ===
-                                                    ProgramRuleAction
-                                                        .programRuleActionType
-                                                        .WARNINGONCOMPLETE
-                                                    ? i18n.t(
-                                                          'Tracked entity attribute to display warning next to'
-                                                      )
-                                                    : i18n.t(
-                                                          'Tracked entity attribute to display error next to'
-                                                      )
-                                            }
-                                        />
-                                    </StandardFormField>
-                                    <StandardFormField>
-                                        <Field
-                                            name="content"
-                                            label={i18n.t('Static text')}
-                                            component={InputFieldFF}
-                                            dataTest="program-rule-action-content"
-                                            required
-                                        />
-                                    </StandardFormField>
-                                    <StandardFormField>
-                                        <PaddedContainer>
-                                            <ExpressionBuilderEntry
-                                                fieldName="data"
-                                                title={i18n.t(
-                                                    'Edit expression'
-                                                )}
-                                                editButtonText={i18n.t(
-                                                    'Edit expression'
-                                                )}
-                                                setUpButtonText={i18n.t(
-                                                    'Set up expression'
-                                                )}
-                                                validationResource="programRules/condition/description"
-                                                clearable
-                                                programId={programId}
-                                                type="programRule"
-                                            />
-                                        </PaddedContainer>
-                                        <span
-                                            className={drawerStyles.helperText}
-                                        >
-                                            {i18n.t(
-                                                'Expression to evaluate and display after static text.'
-                                            )}
-                                        </span>
-                                    </StandardFormField>
-                                </>
-                            )}
-
-                        {/* SETMANDATORYFIELD */}
-                        {actionType ===
-                            ProgramRuleAction.programRuleActionType
-                                .SETMANDATORYFIELD &&
-                            programId && (
-                                <>
-                                    <StandardFormField>
-                                        <DataElementSelect
-                                            programId={programId}
-                                            name="dataElement"
-                                            label={i18n.t(
-                                                'Data element to display error next to'
-                                            )}
-                                        />
-                                    </StandardFormField>
-                                    <StandardFormField>
-                                        <TrackedEntityAttributeSelect
-                                            programId={programId}
-                                            name="trackedEntityAttribute"
-                                            label={i18n.t(
-                                                'Tracked entity attribute to display error next to'
-                                            )}
-                                        />
-                                    </StandardFormField>
-                                </>
-                            )}
-
-                        {/* ASSIGN */}
-                        {actionType ===
-                            ProgramRuleAction.programRuleActionType.ASSIGN &&
-                            programId && (
-                                <>
-                                    <StandardFormField>
-                                        <DataElementSelect
-                                            programId={programId}
-                                            name="dataElement"
-                                            label={i18n.t(
-                                                'Data element to assign to'
-                                            )}
-                                        />
-                                    </StandardFormField>
-                                    <StandardFormField>
-                                        <TrackedEntityAttributeSelect
-                                            programId={programId}
-                                            name="trackedEntityAttribute"
-                                            label={i18n.t(
-                                                'Tracked entity attribute to assign to'
-                                            )}
-                                        />
-                                    </StandardFormField>
-                                    <StandardFormField>
-                                        <ProgramRuleVariableSelect
-                                            programId={programId}
-                                        />
-                                    </StandardFormField>
-                                    <StandardFormField>
-                                        <PaddedContainer>
-                                            <ExpressionBuilderEntry
-                                                fieldName="data"
-                                                title={i18n.t(
-                                                    'Edit expression'
-                                                )}
-                                                editButtonText={i18n.t(
-                                                    'Edit expression'
-                                                )}
-                                                setUpButtonText={i18n.t(
-                                                    'Set up expression'
-                                                )}
-                                                validationResource="programRules/condition/description"
-                                                programId={programId}
-                                                type="programRule"
-                                            />
-                                        </PaddedContainer>
-                                        <span
-                                            className={drawerStyles.helperText}
-                                        >
-                                            {i18n.t(
-                                                'Expression to evaluate and assign.'
-                                            )}
-                                        </span>
-                                    </StandardFormField>
-                                </>
-                            )}
-
-                        {/* CREATEEVENT */}
-                        {actionType ===
-                            ProgramRuleAction.programRuleActionType
-                                .CREATEEVENT &&
-                            programId && (
-                                <StandardFormField>
-                                    <ModelSingleSelectFormField
-                                        name="programStage"
-                                        label={i18n.t('Program stage')}
-                                        required
-                                        query={{
-                                            resource: 'programStages',
-                                            params: {
-                                                fields: ['id', 'displayName'],
-                                                filter: `program.id:eq:${programId}`,
-                                                paging: false,
-                                            },
-                                        }}
-                                        inputWidth="400px"
-                                        dataTest="program-rule-action-program-stage"
-                                    />
-                                </StandardFormField>
-                            )}
-
-                        {/* SENDMESSAGE */}
-                        {actionType ===
-                            ProgramRuleAction.programRuleActionType
-                                .SENDMESSAGE &&
-                            programId && (
-                                <StandardFormField>
-                                    <NotificationTemplateSelect
-                                        programId={programId}
-                                        required
-                                    />
-                                </StandardFormField>
-                            )}
-
-                        {/* SCHEDULEMESSAGE */}
-                        {actionType ===
-                            ProgramRuleAction.programRuleActionType
-                                .SCHEDULEMESSAGE &&
-                            programId && (
-                                <>
-                                    <StandardFormField>
-                                        <NotificationTemplateSelect
-                                            programId={programId}
-                                            required
-                                        />
-                                    </StandardFormField>
-                                    <StandardFormField>
-                                        <PaddedContainer>
-                                            <ExpressionBuilderEntry
-                                                fieldName="data"
-                                                title={i18n.t(
-                                                    'Edit date expression'
-                                                )}
-                                                editButtonText={i18n.t(
-                                                    'Edit expression'
-                                                )}
-                                                setUpButtonText={i18n.t(
-                                                    'Set up expression'
-                                                )}
-                                                validationResource="programRules/condition/description"
-                                                clearable
-                                                programId={programId}
-                                                type="programRule"
-                                            />
-                                        </PaddedContainer>
-                                        <span
-                                            className={drawerStyles.helperText}
-                                        >
-                                            {i18n.t('Date to send message.')}
-                                        </span>
-                                    </StandardFormField>
-                                </>
-                            )}
-
-                        {/* HIDEOPTION */}
-                        {actionType ===
-                            ProgramRuleAction.programRuleActionType
-                                .HIDEOPTION &&
-                            programId && (
-                                <>
-                                    <StandardFormField>
-                                        <DataElementWithOptionSetSelect
-                                            programId={programId}
-                                            name="dataElement"
-                                            label={i18n.t('Data element')}
-                                        />
-                                    </StandardFormField>
-                                    <StandardFormField>
-                                        <TrackedEntityAttributeWithOptionSetSelect
-                                            programId={programId}
-                                            name="trackedEntityAttribute"
-                                            label={i18n.t(
-                                                'Tracked entity attribute'
-                                            )}
-                                        />
-                                    </StandardFormField>
-                                    <StandardFormField>
-                                        <OptionSelect
-                                            optionSetId={optionSetIdFromOptionAction(
-                                                values
-                                            )}
-                                            label={i18n.t('Option to hide')}
-                                            required
-                                        />
-                                    </StandardFormField>
-                                </>
-                            )}
-
-                        {/* SHOWOPTIONGROUP, HIDEOPTIONGROUP */}
-                        {(actionType ===
-                            ProgramRuleAction.programRuleActionType
-                                .SHOWOPTIONGROUP ||
-                            actionType ===
-                                ProgramRuleAction.programRuleActionType
-                                    .HIDEOPTIONGROUP) &&
-                            programId && (
-                                <>
-                                    <StandardFormField>
-                                        <DataElementWithOptionSetSelect
-                                            programId={programId}
-                                            name="dataElement"
-                                            label={i18n.t('Data element')}
-                                        />
-                                    </StandardFormField>
-                                    <StandardFormField>
-                                        <TrackedEntityAttributeWithOptionSetSelect
-                                            programId={programId}
-                                            name="trackedEntityAttribute"
-                                            label={i18n.t(
-                                                'Tracked entity attribute'
-                                            )}
-                                        />
-                                    </StandardFormField>
-                                    <StandardFormField>
-                                        <OptionGroupSelect
-                                            optionSetId={optionSetIdFromOptionAction(
-                                                values
-                                            )}
-                                            label={
-                                                actionType ===
-                                                ProgramRuleAction
-                                                    .programRuleActionType
-                                                    .SHOWOPTIONGROUP
-                                                    ? i18n.t(
-                                                          'Option group to show'
-                                                      )
-                                                    : i18n.t(
-                                                          'Option group to hide'
-                                                      )
-                                            }
-                                            required
-                                        />
-                                    </StandardFormField>
-                                </>
-                            )}
-                    </SectionedFormSection>
-                </SectionedFormLayout>
-            </div>
-            <div className={drawerStyles.drawerFormFooter}>
-                <ButtonStrip>
-                    <Button onClick={onCancel}>{i18n.t('Cancel')}</Button>
-                    <Button primary type="submit">
-                        {action ? i18n.t('Save action') : i18n.t('Add action')}
-                    </Button>
-                </ButtonStrip>
-            </div>
-        </form>
-    )
-}
-
-/** Normalize selected value from SingleSelect (may be string or { selected: string }) so parse() receives the id. */
-function getSelectedId(value: unknown): string {
-    if (typeof value === 'string') {
-        return value
+    if (!programId) {
+        return null
     }
-    if (value && typeof value === 'object' && 'selected' in value) {
-        return (value as { selected: string }).selected ?? ''
+
+    const AT = ProgramRuleAction.programRuleActionType
+
+    // DISPLAYTEXT
+    if (actionType === AT.DISPLAYTEXT) {
+        return (
+            <>
+                <StandardFormField>
+                    <LocationField required />
+                </StandardFormField>
+                <StandardFormField>
+                    <Field
+                        name="content"
+                        label={i18n.t('Static text')}
+                        component={InputFieldFF}
+                        required
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <ExpressionField
+                        programId={programId}
+                        label={i18n.t(
+                            'Expression to evaluate and display after static text.'
+                        )}
+                    />
+                </StandardFormField>
+            </>
+        )
     }
-    return ''
-}
 
-/** Data element select; when mutualExclusion is true, disabled when TEA is selected and clears TEA on change. */
-function DataElementSelect({
-    programId,
-    name,
-    label,
-    helpText,
-    mutualExclusion = true,
-}: Readonly<{
-    programId: string
-    name: string
-    label: string
-    helpText?: string
-    mutualExclusion?: boolean
-}>) {
-    const form = useForm()
-    const { values } = useFormState({ subscription: { values: true } })
-    const queryFn = useBoundResourceQueryFn()
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'programs',
-                id: programId,
-                params: {
-                    fields: [
-                        'programStages[programStageDataElements[dataElement[id,displayName]]]',
-                    ],
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            programStages?: Array<{
-                programStageDataElements?: Array<{
-                    dataElement: { id: string; displayName?: string }
-                }>
-            }>
-        }>,
-    })
-    const elements = useMemo(() => {
-        const list =
-            data?.programStages?.flatMap(
-                (s) =>
-                    s.programStageDataElements?.map(
-                        (psde) => psde.dataElement
-                    ) ?? []
-            ) ?? []
-        const seen = new Set<string>()
-        return list.filter((de) => {
-            if (seen.has(de.id)) {
-                return false
-            }
-            seen.add(de.id)
-            return true
-        })
-    }, [data])
-    const currentValue = (values as ProgramRuleActionFormValues).dataElement
-    const selectedId = currentValue?.id
-    const selectedInList =
-        selectedId && elements.some((e) => e.id === selectedId)
-    const selectOptions = useMemo(
-        () => [
-            NO_VALUE_OPTION,
-            // Include current value in options when not in list (e.g. not yet loaded or removed from program) so SingleSelect does not throw
-            ...(selectedId && !selectedInList
-                ? [
-                      {
-                          value: selectedId,
-                          label:
-                              currentValue?.displayName ?? i18n.t('Loading...'),
-                      },
-                  ]
-                : []),
-            ...elements.map((de) => ({
-                value: de.id,
-                label: de.displayName ?? de.id,
-            })),
-        ],
-        [elements, selectedId, selectedInList, currentValue?.displayName]
-    )
-    const disabled =
-        mutualExclusion &&
-        !!(values as ProgramRuleActionFormValues).trackedEntityAttribute?.id
-    const { input, meta } = useField(name, {
-        format: (value: { id: string; displayName?: string } | undefined) =>
-            value?.id ?? '',
-        parse: (id: string) =>
-            id ? elements.find((e) => e.id === id) : undefined,
-    })
-    return (
-        <SingleSelectFieldFF
-            input={
-                {
-                    ...input,
-                    onChange: (value: unknown) => {
-                        const id = getSelectedId(value)
-                        if (mutualExclusion && id) {
-                            form.change('trackedEntityAttribute', undefined)
-                        }
-                        input.onChange(id)
-                    },
-                } as typeof input
-            }
-            meta={
-                meta as React.ComponentProps<typeof SingleSelectFieldFF>['meta']
-            }
-            label={label}
-            helpText={helpText}
-            options={selectOptions}
-            dataTest={`program-rule-action-${name}`}
-            disabled={disabled}
-            filterable
-        />
-    )
-}
+    // DISPLAYKEYVALUEPAIR
+    if (actionType === AT.DISPLAYKEYVALUEPAIR) {
+        return (
+            <>
+                <StandardFormField>
+                    <LocationField required />
+                </StandardFormField>
+                <StandardFormField>
+                    <Field
+                        name="content"
+                        label={i18n.t('Key label')}
+                        component={InputFieldFF}
+                        required
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <ExpressionField
+                        programId={programId}
+                        label={i18n.t(
+                            'Expression to evaluate and display as value.'
+                        )}
+                    />
+                </StandardFormField>
+            </>
+        )
+    }
 
-/** TEA select; when mutualExclusion is true, disabled when DE is selected and clears DE on change. */
-function TrackedEntityAttributeSelect({
-    programId,
-    name,
-    label,
-    helpText,
-    mutualExclusion = true,
-}: Readonly<{
-    programId: string
-    name: string
-    label: string
-    helpText?: string
-    mutualExclusion?: boolean
-}>) {
-    const form = useForm()
-    const { values } = useFormState({ subscription: { values: true } })
-    const queryFn = useBoundResourceQueryFn()
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'programs',
-                id: programId,
-                params: {
-                    fields: [
-                        'programTrackedEntityAttributes[trackedEntityAttribute[id,displayName]]',
-                    ],
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            programTrackedEntityAttributes?: Array<{
-                trackedEntityAttribute: { id: string; displayName?: string }
-            }>
-        }>,
-    })
-    const attributes = useMemo(
-        () =>
-            data?.programTrackedEntityAttributes?.map(
-                (pta) => pta.trackedEntityAttribute
-            ) ?? [],
-        [data]
-    )
-    const currentValue = (values as ProgramRuleActionFormValues)
-        .trackedEntityAttribute
-    const selectedId = currentValue?.id
-    const selectedInList =
-        selectedId && attributes.some((a) => a.id === selectedId)
-    const selectOptions = useMemo(
-        () => [
-            NO_VALUE_OPTION,
-            // Include current value in options when not in list so SingleSelect does not throw
-            ...(selectedId && !selectedInList
-                ? [
-                      {
-                          value: selectedId,
-                          label:
-                              currentValue?.displayName ?? i18n.t('Loading...'),
-                      },
-                  ]
-                : []),
-            ...attributes.map((a) => ({
-                value: a.id,
-                label: a.displayName ?? a.id,
-            })),
-        ],
-        [attributes, selectedId, selectedInList, currentValue?.displayName]
-    )
-    const disabled =
-        mutualExclusion &&
-        !!(values as ProgramRuleActionFormValues).dataElement?.id
-    const { input, meta } = useField(name, {
-        format: (value: { id: string; displayName?: string } | undefined) =>
-            value?.id ?? '',
-        parse: (id: string) =>
-            id ? attributes.find((a) => a.id === id) : undefined,
-    })
-    return (
-        <SingleSelectFieldFF
-            input={
-                {
-                    ...input,
-                    onChange: (value: unknown) => {
-                        const id = getSelectedId(value)
-                        if (mutualExclusion && id) {
-                            form.change('dataElement', undefined)
-                        }
-                        input.onChange(id)
-                    },
-                } as typeof input
-            }
-            meta={
-                meta as React.ComponentProps<typeof SingleSelectFieldFF>['meta']
-            }
-            label={label}
-            helpText={helpText}
-            options={selectOptions}
-            dataTest={`program-rule-action-${name}`}
-            disabled={disabled}
-            filterable
-        />
-    )
-}
+    // HIDEFIELD
+    if (actionType === AT.HIDEFIELD) {
+        return (
+            <>
+                <StandardFormField>
+                    <DataElementField
+                        programId={programId}
+                        label={i18n.t('Data element to hide')}
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <TrackedEntityAttributeField
+                        programId={programId}
+                        label={i18n.t('Tracked entity attribute to hide')}
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <Field
+                        name="content"
+                        label={i18n.t('Custom message for blanked field')}
+                        component={InputFieldFF}
+                    />
+                </StandardFormField>
+            </>
+        )
+    }
 
-function DataElementWithOptionSetSelect({
-    programId,
-    name,
-    label,
-}: Readonly<{
-    programId: string
-    name: string
-    label: string
-}>) {
-    const form = useForm()
-    const { values } = useFormState({ subscription: { values: true } })
-    const queryFn = useBoundResourceQueryFn()
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'programs',
-                id: programId,
-                params: {
-                    fields: [
-                        'programStages[programStageDataElements[dataElement[id,displayName,optionSet[id]]]]',
-                    ],
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            programStages?: Array<{
-                programStageDataElements?: Array<{
-                    dataElement: {
-                        id: string
-                        displayName?: string
-                        optionSet?: { id: string }
-                    }
-                }>
-            }>
-        }>,
-    })
-    const elements = useMemo(() => {
-        const list =
-            data?.programStages?.flatMap(
-                (s) =>
-                    s.programStageDataElements?.map(
-                        (psde) => psde.dataElement
-                    ) ?? []
-            ) ?? []
-        const withOptionSet = list.filter((de) => de.optionSet?.id)
-        const seen = new Set<string>()
-        return withOptionSet.filter((de) => {
-            if (seen.has(de.id)) {
-                return false
-            }
-            seen.add(de.id)
-            return true
-        })
-    }, [data])
-    const currentValue = (values as ProgramRuleActionFormValues).dataElement
-    const selectedId = currentValue?.id
-    const selectedInList =
-        selectedId && elements.some((e) => e.id === selectedId)
-    const selectOptions = useMemo(
-        () => [
-            NO_VALUE_OPTION,
-            ...(selectedId && !selectedInList
-                ? [
-                      {
-                          value: selectedId,
-                          label:
-                              currentValue?.displayName ?? i18n.t('Loading...'),
-                      },
-                  ]
-                : []),
-            ...elements.map((de) => ({
-                value: de.id,
-                label: de.displayName ?? de.id,
-            })),
-        ],
-        [elements, selectedId, selectedInList, currentValue?.displayName]
-    )
-    const disabled = !!(values as ProgramRuleActionFormValues)
-        .trackedEntityAttribute?.id
-    const { input, meta } = useField(name, {
-        format: (value: DataElementWithOptionSet | undefined) =>
-            value?.id ?? '',
-        parse: (id: string) =>
-            id ? elements.find((e) => e.id === id) : undefined,
-    })
-    return (
-        <SingleSelectFieldFF
-            input={
-                {
-                    ...input,
-                    onChange: (value: unknown) => {
-                        if (value) {
-                            form.change('trackedEntityAttribute', undefined)
-                            form.change('option', undefined)
-                            form.change('optionGroup', undefined)
-                        }
-                        input.onChange(value)
-                    },
-                } as typeof input
-            }
-            meta={
-                meta as React.ComponentProps<typeof SingleSelectFieldFF>['meta']
-            }
-            label={label}
-            options={selectOptions}
-            dataTest={`program-rule-action-${name}`}
-            disabled={disabled}
-            filterable
-        />
-    )
-}
+    // HIDESECTION
+    if (actionType === AT.HIDESECTION) {
+        return (
+            <StandardFormField>
+                <ProgramStageSectionField programId={programId} required />
+            </StandardFormField>
+        )
+    }
 
-function TrackedEntityAttributeWithOptionSetSelect({
-    programId,
-    name,
-    label,
-}: Readonly<{
-    programId: string
-    name: string
-    label: string
-}>) {
-    const form = useForm()
-    const { values } = useFormState({ subscription: { values: true } })
-    const queryFn = useBoundResourceQueryFn()
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'programs',
-                id: programId,
-                params: {
-                    fields: [
-                        'programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,optionSet[id]]]',
-                    ],
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            programTrackedEntityAttributes?: Array<{
-                trackedEntityAttribute: {
-                    id: string
-                    displayName?: string
-                    optionSet?: { id: string }
-                }
-            }>
-        }>,
-    })
-    const attributes = useMemo(() => {
-        const list =
-            data?.programTrackedEntityAttributes?.map(
-                (pta) => pta.trackedEntityAttribute
-            ) ?? []
-        return list.filter((a) => a.optionSet?.id)
-    }, [data])
-    const currentValue = (values as ProgramRuleActionFormValues)
-        .trackedEntityAttribute
-    const selectedId = currentValue?.id
-    const selectedInList =
-        selectedId && attributes.some((a) => a.id === selectedId)
-    const selectOptions = useMemo(
-        () => [
-            NO_VALUE_OPTION,
-            ...(selectedId && !selectedInList
-                ? [
-                      {
-                          value: selectedId,
-                          label:
-                              currentValue?.displayName ?? i18n.t('Loading...'),
-                      },
-                  ]
-                : []),
-            ...attributes.map((a) => ({
-                value: a.id,
-                label: a.displayName ?? a.id,
-            })),
-        ],
-        [attributes, selectedId, selectedInList, currentValue?.displayName]
-    )
-    const disabled = !!(values as ProgramRuleActionFormValues).dataElement?.id
-    const { input, meta } = useField(name, {
-        format: (value: TrackedEntityAttributeWithOptionSet | undefined) =>
-            value?.id ?? '',
-        parse: (id: string) =>
-            id ? attributes.find((a) => a.id === id) : undefined,
-    })
-    return (
-        <SingleSelectFieldFF
-            input={
-                {
-                    ...input,
-                    onChange: (value: unknown) => {
-                        if (value) {
-                            form.change('dataElement', undefined)
-                            form.change('option', undefined)
-                            form.change('optionGroup', undefined)
-                        }
-                        input.onChange(value)
-                    },
-                } as typeof input
-            }
-            meta={
-                meta as React.ComponentProps<typeof SingleSelectFieldFF>['meta']
-            }
-            label={label}
-            options={selectOptions}
-            dataTest={`program-rule-action-${name}`}
-            disabled={disabled}
-            filterable
-        />
-    )
-}
+    // HIDEPROGRAMSTAGE
+    if (actionType === AT.HIDEPROGRAMSTAGE) {
+        return (
+            <StandardFormField>
+                <ProgramStageSelectField programId={programId} required />
+            </StandardFormField>
+        )
+    }
 
-function OptionSelect({
-    optionSetId,
-    label,
-    required,
-}: Readonly<{
-    optionSetId: string | undefined
-    label: string
-    required?: boolean
-}>) {
-    const queryFn = useBoundResourceQueryFn()
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'options',
-                params: {
-                    fields: ['id', 'displayName'],
-                    filter: optionSetId
-                        ? [`optionSet.id:eq:${optionSetId}`]
-                        : undefined,
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            options?: Array<{ id: string; displayName?: string }>
-        }>,
-        enabled: !!optionSetId,
-    })
-    const options = useMemo(() => data?.options ?? [], [data])
-    const currentValue = (
-        useFormState({ subscription: { values: true } })
-            .values as ProgramRuleActionFormValues
-    ).option
-    const selectedId = currentValue?.id
-    const selectedInList =
-        selectedId && options.some((o) => o.id === selectedId)
-    const selectOptions = useMemo(
-        () => [
-            ...(selectedId && !selectedInList
-                ? [
-                      {
-                          value: selectedId,
-                          label:
-                              currentValue?.displayName ?? i18n.t('Loading...'),
-                      },
-                  ]
-                : []),
-            ...options.map((o) => ({
-                value: o.id,
-                label: o.displayName ?? o.id,
-            })),
-        ],
-        [options, selectedId, selectedInList, currentValue?.displayName]
-    )
-    const { input, meta } = useField('option', {
-        format: (value: { id: string; displayName?: string } | undefined) =>
-            value?.id ?? '',
-        parse: (id: string) =>
-            id ? options.find((o) => o.id === id) : undefined,
-    })
-    return (
-        <SingleSelectFieldFF
-            input={
-                input as React.ComponentProps<
-                    typeof SingleSelectFieldFF
-                >['input']
-            }
-            meta={
-                meta as React.ComponentProps<typeof SingleSelectFieldFF>['meta']
-            }
-            label={label}
-            options={selectOptions}
-            disabled={!optionSetId}
-            dataTest="program-rule-action-option"
-            required={required}
-            filterable
-        />
-    )
-}
+    // SHOWWARNING, SHOWERROR, WARNINGONCOMPLETE, ERRORONCOMPLETE
+    if (
+        actionType === AT.SHOWWARNING ||
+        actionType === AT.SHOWERROR ||
+        actionType === AT.WARNINGONCOMPLETE ||
+        actionType === AT.ERRORONCOMPLETE
+    ) {
+        const isWarning =
+            actionType === AT.SHOWWARNING || actionType === AT.WARNINGONCOMPLETE
+        const deLabel = isWarning
+            ? i18n.t('Data element to display warning next to')
+            : i18n.t('Data element to display error next to')
+        const teaLabel = isWarning
+            ? i18n.t('Tracked entity attribute to display warning next to')
+            : i18n.t('Tracked entity attribute to display error next to')
 
-function OptionGroupSelect({
-    optionSetId,
-    label,
-    required,
-}: Readonly<{
-    optionSetId: string | undefined
-    label: string
-    required?: boolean
-}>) {
-    const queryFn = useBoundResourceQueryFn()
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'optionGroups',
-                params: {
-                    fields: ['id', 'displayName'],
-                    filter: optionSetId
-                        ? [`optionSet.id:eq:${optionSetId}`, 'name:neq:default']
-                        : undefined,
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            optionGroups?: Array<{ id: string; displayName?: string }>
-        }>,
-        enabled: !!optionSetId,
-    })
-    const optionGroups = useMemo(() => data?.optionGroups ?? [], [data])
-    const currentValue = (
-        useFormState({ subscription: { values: true } })
-            .values as ProgramRuleActionFormValues
-    ).optionGroup
-    const selectedId = currentValue?.id
-    const selectedInList =
-        selectedId && optionGroups.some((og) => og.id === selectedId)
-    const selectOptions = useMemo(
-        () => [
-            ...(selectedId && !selectedInList
-                ? [
-                      {
-                          value: selectedId,
-                          label:
-                              currentValue?.displayName ?? i18n.t('Loading...'),
-                      },
-                  ]
-                : []),
-            ...optionGroups.map((og) => ({
-                value: og.id,
-                label: og.displayName ?? og.id,
-            })),
-        ],
-        [optionGroups, selectedId, selectedInList, currentValue?.displayName]
-    )
-    const { input, meta } = useField('optionGroup', {
-        format: (value: { id: string; displayName?: string } | undefined) =>
-            value?.id ?? '',
-        parse: (id: string) =>
-            id ? optionGroups.find((og) => og.id === id) : undefined,
-    })
-    return (
-        <SingleSelectFieldFF
-            input={
-                input as React.ComponentProps<
-                    typeof SingleSelectFieldFF
-                >['input']
-            }
-            meta={
-                meta as React.ComponentProps<typeof SingleSelectFieldFF>['meta']
-            }
-            label={label}
-            options={selectOptions}
-            disabled={!optionSetId}
-            dataTest="program-rule-action-option-group"
-            required={required}
-            filterable
-        />
-    )
-}
+        return (
+            <>
+                <StandardFormField>
+                    <DataElementField programId={programId} label={deLabel} />
+                </StandardFormField>
+                <StandardFormField>
+                    <TrackedEntityAttributeField
+                        programId={programId}
+                        label={teaLabel}
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <Field
+                        name="content"
+                        label={i18n.t('Static text')}
+                        component={InputFieldFF}
+                        required
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <ExpressionField
+                        programId={programId}
+                        label={i18n.t(
+                            'Expression to evaluate and display after static text.'
+                        )}
+                    />
+                </StandardFormField>
+            </>
+        )
+    }
 
-function ProgramStageSectionSelect({
-    programId,
-    label,
-}: Readonly<{
-    programId: string
-    label: string
-}>) {
-    const queryFn = useBoundResourceQueryFn()
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'programs',
-                id: programId,
-                params: {
-                    fields: [
-                        'programStages[programStageSections[id,displayName]]',
-                    ],
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            programStages?: Array<{
-                programStageSections?: Array<{
-                    id: string
-                    displayName?: string
-                }>
-            }>
-        }>,
-    })
-    const sections = useMemo(() => {
-        const list =
-            data?.programStages?.flatMap((s) => s.programStageSections ?? []) ??
-            []
-        const seen = new Set<string>()
-        return list.filter((s) => {
-            if (seen.has(s.id)) {
-                return false
-            }
-            seen.add(s.id)
-            return true
-        })
-    }, [data])
-    const selectOptions = useMemo(
-        () =>
-            sections.map((s) => ({
-                value: s.id,
-                label: s.displayName ?? s.id,
-            })),
-        [sections]
-    )
-    return (
-        <Field
-            name="programStageSection"
-            label={label}
-            component={SingleSelectFieldFF as any}
-            options={selectOptions}
-            required
-            dataTest="program-rule-action-program-stage-section"
-            filterable
-        />
-    )
-}
+    // SETMANDATORYFIELD
+    if (actionType === AT.SETMANDATORYFIELD) {
+        return (
+            <>
+                <StandardFormField>
+                    <DataElementField
+                        programId={programId}
+                        label={i18n.t('Data element to display error next to')}
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <TrackedEntityAttributeField
+                        programId={programId}
+                        label={i18n.t(
+                            'Tracked entity attribute to display error next to'
+                        )}
+                    />
+                </StandardFormField>
+            </>
+        )
+    }
 
-function ProgramRuleVariableSelect({
-    programId,
-}: Readonly<{ programId: string }>) {
-    const queryFn = useBoundResourceQueryFn()
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'programRuleVariables',
-                params: {
-                    fields: ['id', 'displayName'],
-                    filter: `program.id:eq:${programId}`,
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            programRuleVariables?: Array<{ id: string; displayName?: string }>
-        }>,
-    })
-    const variables = useMemo(() => data?.programRuleVariables ?? [], [data])
-    const selectOptions = useMemo(
-        () => [
-            NO_VALUE_OPTION,
-            ...variables.map((v) => ({
-                value: v.id,
-                label: v.displayName ?? v.id,
-            })),
-        ],
-        [variables]
-    )
-    return (
-        <Field
-            name="content"
-            label={i18n.t('Program rule variable to assign to')}
-            component={SingleSelectFieldFF as any}
-            options={selectOptions}
-            dataTest="program-rule-action-program-rule-variable"
-            format={(value: string | undefined) => value ?? ''}
-            parse={(id: string) => id || undefined}
-            filterable
-        />
-    )
-}
+    // ASSIGN
+    if (actionType === AT.ASSIGN) {
+        return (
+            <>
+                <StandardFormField>
+                    <DataElementField
+                        programId={programId}
+                        label={i18n.t('Data element to assign to')}
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <TrackedEntityAttributeField
+                        programId={programId}
+                        label={i18n.t('Tracked entity attribute to assign to')}
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <ProgramRuleVariableField programId={programId} />
+                </StandardFormField>
+                <StandardFormField>
+                    <ExpressionField
+                        programId={programId}
+                        label={i18n.t('Expression to evaluate and assign.')}
+                        clearable={false}
+                    />
+                </StandardFormField>
+            </>
+        )
+    }
 
-function NotificationTemplateSelect({
-    programId,
-    required,
-}: Readonly<{
-    programId: string
-    required?: boolean
-}>) {
-    const queryFn = useBoundResourceQueryFn()
-    const { data: programData } = useQuery({
-        queryKey: [
-            {
-                resource: 'programs',
-                id: programId,
-                params: {
-                    fields: [
-                        'notificationTemplates[id,displayName]',
-                        'programStages[notificationTemplates[id,displayName]]',
-                    ],
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            notificationTemplates?: Array<{ id: string; displayName?: string }>
-            programStages?: Array<{
-                notificationTemplates?: Array<{
-                    id: string
-                    displayName?: string
-                }>
-            }>
-        }>,
-    })
-    const options = useMemo(() => {
-        const fromProgram = programData?.notificationTemplates ?? []
-        const fromStages =
-            programData?.programStages?.flatMap(
-                (s) => s.notificationTemplates ?? []
-            ) ?? []
-        const all = [...fromProgram, ...fromStages]
-        const seen = new Set<string>()
-        return all.filter((t) => {
-            if (seen.has(t.id)) {
-                return false
-            }
-            seen.add(t.id)
-            return true
-        })
-    }, [programData])
-    const selectOptions = useMemo(
-        () =>
-            options.map((t) => ({ value: t.id, label: t.displayName ?? t.id })),
-        [options]
-    )
-    return (
-        <Field
-            name="templateUid"
-            label={i18n.t('Message template')}
-            component={SingleSelectFieldFF as any}
-            options={selectOptions}
-            required={required}
-            dataTest="program-rule-action-notification-template"
-            filterable
-        />
-    )
+    // CREATEEVENT
+    if (actionType === AT.CREATEEVENT) {
+        return (
+            <StandardFormField>
+                <ProgramStageSelectField programId={programId} required />
+            </StandardFormField>
+        )
+    }
+
+    // SENDMESSAGE
+    if (actionType === AT.SENDMESSAGE) {
+        return (
+            <StandardFormField>
+                <NotificationTemplateField programId={programId} required />
+            </StandardFormField>
+        )
+    }
+
+    // SCHEDULEMESSAGE
+    if (actionType === AT.SCHEDULEMESSAGE) {
+        return (
+            <>
+                <StandardFormField>
+                    <NotificationTemplateField programId={programId} required />
+                </StandardFormField>
+                <StandardFormField>
+                    <ExpressionField
+                        programId={programId}
+                        label={i18n.t('Date to send message.')}
+                    />
+                </StandardFormField>
+            </>
+        )
+    }
+
+    // HIDEOPTION
+    if (actionType === AT.HIDEOPTION) {
+        return (
+            <>
+                <StandardFormField>
+                    <DataElementWithOptionSetField
+                        programId={programId}
+                        label={i18n.t('Data element')}
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <TrackedEntityAttributeWithOptionSetField
+                        programId={programId}
+                        label={i18n.t('Tracked entity attribute')}
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <OptionField label={i18n.t('Option to hide')} required />
+                </StandardFormField>
+            </>
+        )
+    }
+
+    // SHOWOPTIONGROUP, HIDEOPTIONGROUP
+    if (
+        actionType === AT.SHOWOPTIONGROUP ||
+        actionType === AT.HIDEOPTIONGROUP
+    ) {
+        const ogLabel =
+            actionType === AT.SHOWOPTIONGROUP
+                ? i18n.t('Option group to show')
+                : i18n.t('Option group to hide')
+
+        return (
+            <>
+                <StandardFormField>
+                    <DataElementWithOptionSetField
+                        programId={programId}
+                        label={i18n.t('Data element')}
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <TrackedEntityAttributeWithOptionSetField
+                        programId={programId}
+                        label={i18n.t('Tracked entity attribute')}
+                    />
+                </StandardFormField>
+                <StandardFormField>
+                    <OptionGroupField label={ogLabel} required />
+                </StandardFormField>
+            </>
+        )
+    }
+
+    return null
 }

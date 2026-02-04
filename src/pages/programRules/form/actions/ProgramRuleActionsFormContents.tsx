@@ -20,7 +20,6 @@ import { ListInFormItem } from '../../../../components/formCreators/SectionFormL
 import { SchemaName } from '../../../../types'
 import { getProgramRuleActionListLabel } from './getProgramRuleActionListLabel'
 import { ProgramRuleActionForm } from './ProgramRuleActionForm'
-import css from './ProgramRuleActionsFormContents.module.css'
 import type { ProgramRuleActionListItem } from './types'
 
 export type { ProgramRuleActionListItem } from './types'
@@ -113,20 +112,18 @@ const ProgramRuleActionListNewOrEdit = () => {
             <>
                 <DrawerPortal isOpen={drawerState.open} onClose={closeDrawer}>
                     {drawerState.open && (
-                        <div>
-                            <ProgramRuleActionForm
-                                programRuleId={modelId}
-                                programId={programId}
-                                action={drawerState.action}
-                                onCancel={closeDrawer}
-                                onSubmitted={handleSubmitted}
-                            />
-                        </div>
+                        <ProgramRuleActionForm
+                            programRuleId={modelId}
+                            programId={programId}
+                            action={drawerState.action}
+                            onCancel={closeDrawer}
+                            onSubmitted={handleSubmitted}
+                        />
                     )}
                 </DrawerPortal>
 
-                <div className={css.listWrapper}>
-                    <div className={css.sectionItems}>
+                <div>
+                    <div>
                         {actions.map((action, index) => {
                             // Use id or fallback to index for React key
                             const key = action.id || `action-${index}`
@@ -134,10 +131,14 @@ const ProgramRuleActionListNewOrEdit = () => {
                             if (action.deleted) {
                                 return (
                                     <div
-                                        className={css.actionCardDeleted}
                                         key={key}
+                                        style={{
+                                            padding: '8px',
+                                            backgroundColor: '#f5f5f5',
+                                            marginBottom: '8px',
+                                        }}
                                     >
-                                        <div className={css.deletedActionText}>
+                                        <div>
                                             {i18n.t(
                                                 'Action will be removed on save'
                                             )}
@@ -188,7 +189,7 @@ const ProgramRuleActionListNewOrEdit = () => {
     }
 
     return (
-        <NoticeBox className={css.formTypeInfo}>
+        <NoticeBox>
             {i18n.t('Program rule must be saved before actions can be added')}
         </NoticeBox>
     )
