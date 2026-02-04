@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-04T12:41:55.470Z\n"
-"PO-Revision-Date: 2026-02-04T12:41:55.470Z\n"
+"POT-Creation-Date: 2026-02-04T12:56:05.973Z\n"
+"PO-Revision-Date: 2026-02-04T12:56:05.973Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -4455,6 +4455,60 @@ msgstr "Explain the purpose of this program rule. Not shown with rule output."
 msgid "Configure the program rule condition expression."
 msgstr "Configure the program rule condition expression."
 
+msgid "Static text"
+msgstr "Static text"
+
+msgid "Expression to evaluate and display after static text."
+msgstr "Expression to evaluate and display after static text."
+
+msgid "Key label"
+msgstr "Key label"
+
+msgid "Expression to evaluate and display as value."
+msgstr "Expression to evaluate and display as value."
+
+msgid "Data element to hide"
+msgstr "Data element to hide"
+
+msgid "Tracked entity attribute to hide"
+msgstr "Tracked entity attribute to hide"
+
+msgid "Custom message for blanked field"
+msgstr "Custom message for blanked field"
+
+msgid "Data element to display warning next to"
+msgstr "Data element to display warning next to"
+
+msgid "Data element to display error next to"
+msgstr "Data element to display error next to"
+
+msgid "Tracked entity attribute to display warning next to"
+msgstr "Tracked entity attribute to display warning next to"
+
+msgid "Tracked entity attribute to display error next to"
+msgstr "Tracked entity attribute to display error next to"
+
+msgid "Data element to assign to"
+msgstr "Data element to assign to"
+
+msgid "Tracked entity attribute to assign to"
+msgstr "Tracked entity attribute to assign to"
+
+msgid "Expression to evaluate and assign."
+msgstr "Expression to evaluate and assign."
+
+msgid "Date to send message."
+msgstr "Date to send message."
+
+msgid "Option to hide"
+msgstr "Option to hide"
+
+msgid "Option group to show"
+msgstr "Option group to show"
+
+msgid "Option group to hide"
+msgstr "Option group to hide"
+
 msgid "Assign value"
 msgstr "Assign value"
 
@@ -4520,60 +4574,6 @@ msgstr "Action type"
 
 msgid "Save action"
 msgstr "Save action"
-
-msgid "Static text"
-msgstr "Static text"
-
-msgid "Expression to evaluate and display after static text."
-msgstr "Expression to evaluate and display after static text."
-
-msgid "Key label"
-msgstr "Key label"
-
-msgid "Expression to evaluate and display as value."
-msgstr "Expression to evaluate and display as value."
-
-msgid "Data element to hide"
-msgstr "Data element to hide"
-
-msgid "Tracked entity attribute to hide"
-msgstr "Tracked entity attribute to hide"
-
-msgid "Custom message for blanked field"
-msgstr "Custom message for blanked field"
-
-msgid "Data element to display warning next to"
-msgstr "Data element to display warning next to"
-
-msgid "Data element to display error next to"
-msgstr "Data element to display error next to"
-
-msgid "Tracked entity attribute to display warning next to"
-msgstr "Tracked entity attribute to display warning next to"
-
-msgid "Tracked entity attribute to display error next to"
-msgstr "Tracked entity attribute to display error next to"
-
-msgid "Data element to assign to"
-msgstr "Data element to assign to"
-
-msgid "Tracked entity attribute to assign to"
-msgstr "Tracked entity attribute to assign to"
-
-msgid "Expression to evaluate and assign."
-msgstr "Expression to evaluate and assign."
-
-msgid "Date to send message."
-msgstr "Date to send message."
-
-msgid "Option to hide"
-msgstr "Option to hide"
-
-msgid "Option group to show"
-msgstr "Option group to show"
-
-msgid "Option group to hide"
-msgstr "Option group to hide"
 
 msgid "Configure actions for this program rule."
 msgstr "Configure actions for this program rule."
@@ -5506,3 +5506,11 @@ msgstr "Right side sliding window"
 
 msgid "Skip form validation"
 msgstr "Skip form validation"
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Maintenance (Preview)"
+
+msgctxt "Application description"
+msgid "__MANIFEST_APP_DESCRIPTION"
+msgstr ""

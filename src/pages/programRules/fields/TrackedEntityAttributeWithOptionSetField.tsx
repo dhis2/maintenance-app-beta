@@ -10,10 +10,10 @@ const NO_VALUE_OPTION = { value: '', label: i18n.t('(No Value)') }
 export function TrackedEntityAttributeWithOptionSetField({
     programId,
     label,
-}: {
+}: Readonly<{
     programId: string
     label: string
-}) {
+}>) {
     const form = useForm()
     const { values } = useFormState({ subscription: { values: true } })
     const queryFn = useBoundResourceQueryFn()

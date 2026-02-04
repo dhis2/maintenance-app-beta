@@ -9,12 +9,12 @@ export function ExpressionField({
     label,
     programId,
     clearable = true,
-}: {
+}: Readonly<{
     fieldName?: string
     label: string
     programId?: string
     clearable?: boolean
-}) {
+}>) {
     return (
         <>
             <PaddedContainer>

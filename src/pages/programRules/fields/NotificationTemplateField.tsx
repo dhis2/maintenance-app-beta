@@ -8,10 +8,10 @@ import { useBoundResourceQueryFn } from '../../../lib'
 export function NotificationTemplateField({
     programId,
     required,
-}: {
+}: Readonly<{
     programId: string
     required?: boolean
-}) {
+}>) {
     const queryFn = useBoundResourceQueryFn()
 
     const { data: programData } = useQuery({

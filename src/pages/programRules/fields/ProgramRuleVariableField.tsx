@@ -7,7 +7,9 @@ import { useBoundResourceQueryFn } from '../../../lib'
 
 const NO_VALUE_OPTION = { value: '', label: i18n.t('(No Value)') }
 
-export function ProgramRuleVariableField({ programId }: { programId: string }) {
+export function ProgramRuleVariableField({
+    programId,
+}: Readonly<{ programId: string }>) {
     const queryFn = useBoundResourceQueryFn()
 
     const { data } = useQuery({

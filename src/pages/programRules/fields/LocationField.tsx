@@ -8,7 +8,7 @@ const LOCATION_OPTIONS = [
     { label: i18n.t('Indicators'), value: 'INDICATORS' },
 ]
 
-export function LocationField({ required }: { required?: boolean }) {
+export function LocationField({ required }: Readonly<{ required?: boolean }>) {
     return (
         <Field
             name="location"

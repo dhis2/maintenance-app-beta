@@ -14,10 +14,10 @@ function getOptionSetId(values: any): string | undefined {
 export function OptionGroupField({
     label,
     required,
-}: {
+}: Readonly<{
     label: string
     required?: boolean
-}) {
+}>) {
     const queryFn = useBoundResourceQueryFn()
     const { values } = useFormState({ subscription: { values: true } })
     const optionSetId = getOptionSetId(values)

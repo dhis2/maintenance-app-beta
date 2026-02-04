@@ -8,10 +8,10 @@ import { useBoundResourceQueryFn } from '../../../lib'
 export function ProgramStageSectionField({
     programId,
     required,
-}: {
+}: Readonly<{
     programId: string
     required?: boolean
-}) {
+}>) {
     const { values } = useFormState({ subscription: { values: true } })
     const queryFn = useBoundResourceQueryFn()
 
