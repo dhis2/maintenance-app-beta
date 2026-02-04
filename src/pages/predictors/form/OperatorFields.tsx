@@ -19,7 +19,7 @@ type OutputResponse = {
 }
 
 export const OperatorFields = () => {
-    const newDataElement = useHref('/dataElement/new')
+    const newDataElement = useHref('/dataElements/new')
     const refreshDataElements = useRefreshModelSingleSelect({
         resource: 'dataElements',
     })

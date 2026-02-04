@@ -4894,6 +4894,24 @@ msgstr "Choose how this program is disaggregated."
 msgid "Access and Sharing"
 msgstr "Access and Sharing"
 
+msgid "Event repetition"
+msgstr "Event repetition"
+
+msgid "Define the frequency of events within this stage."
+msgstr "Define the frequency of events within this stage."
+
+msgid "Event scheduling"
+msgstr "Event scheduling"
+
+msgid "Configure how and when events in this stage are scheduled."
+msgstr "Configure how and when events in this stage are scheduled."
+
+msgid "Completion options"
+msgstr "Completion options"
+
+msgid "Decide what should happen after a user completes this event."
+msgstr "Decide what should happen after a user completes this event."
+
 msgid "Configure data collection for events in this program stage."
 msgstr "Configure data collection for events in this program stage."
 
@@ -4972,12 +4990,6 @@ msgstr "Custom label for program stage"
 msgid "Custom label for event"
 msgstr "Custom label for event"
 
-msgid "Event Repetition"
-msgstr "Event Repetition"
-
-msgid "Define the frequency of events within this stage."
-msgstr "Define the frequency of events within this stage."
-
 msgid "Program stage form"
 msgstr "Program stage form"
 
@@ -4993,6 +5005,45 @@ msgstr ""
 
 msgid "Edit or rearrange the data elements"
 msgstr "Edit or rearrange the data elements"
+
+msgid "On event completion, show a prompt to create a new event"
+msgstr "On event completion, show a prompt to create a new event"
+
+msgid "Auto-generate an event in this stage"
+msgstr "Auto-generate an event in this stage"
+
+msgid "Generate events based on enrollment date"
+msgstr "Generate events based on enrollment date"
+
+msgid "Show scheduled date"
+msgstr "Show scheduled date"
+
+msgid "Scheduled days from start (required)"
+msgstr "Scheduled days from start (required)"
+
+msgid "Days to add to the enrollment or incident date. 0 means same day. "
+msgstr "Days to add to the enrollment or incident date. 0 means same day. "
+
+msgid "Default next scheduled date"
+msgstr "Default next scheduled date"
+
+msgid "Open data entry form after enrollment"
+msgstr "Open data entry form after enrollment"
+
+msgid "On event completion, ask user to complete enrollment"
+msgstr "On event completion, ask user to complete enrollment"
+
+msgid "Allow multiple events in this stage (repeatable stage)"
+msgstr "Allow multiple events in this stage (repeatable stage)"
+
+msgid "Report date to use"
+msgstr "Report date to use"
+
+msgid "Standard interval days"
+msgstr "Standard interval days"
+
+msgid "Enter the number of days between repeated events."
+msgstr "Enter the number of days between repeated events."
 
 msgid "Validation strategy"
 msgstr "Validation strategy"
@@ -5038,6 +5089,9 @@ msgstr "Stage: Terminology"
 
 msgid "Stage: Creation and Scheduling"
 msgstr "Stage: Creation and Scheduling"
+
+msgid "Scheduled days from start"
+msgstr "Scheduled days from start"
 
 msgid "Stage: Data"
 msgstr "Stage: Data"

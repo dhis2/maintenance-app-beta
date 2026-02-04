@@ -24,6 +24,7 @@ type TrackedEntityTypeAttribute = {
         id: string
         displayName: string
         unique: boolean
+        valueType: string
     }
 }
 
@@ -121,7 +122,12 @@ export function AttributesConfigurationField() {
                                             )
                                         }
                                         disabled={
-                                            attr.trackedEntityAttribute.unique
+                                            attr.trackedEntityAttribute
+                                                .unique ||
+                                            ['IMAGE', 'FILE_RESOURCE'].includes(
+                                                attr.trackedEntityAttribute
+                                                    .valueType
+                                            )
                                         }
                                     />
                                 </TooltipWrapper>
