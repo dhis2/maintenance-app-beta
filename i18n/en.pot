@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-03T09:43:53.374Z\n"
-"PO-Revision-Date: 2026-02-03T09:43:53.374Z\n"
+"POT-Creation-Date: 2026-02-04T09:31:31.214Z\n"
+"PO-Revision-Date: 2026-02-04T09:31:31.214Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -4428,11 +4428,32 @@ msgstr "Configure the program rule condition expression."
 msgid "Feedback"
 msgstr "Feedback"
 
+msgid "Action is required"
+msgstr "Action is required"
+
+msgid "Display widget is required"
+msgstr "Display widget is required"
+
+msgid "Static text is required"
+msgstr "Static text is required"
+
+msgid "Key label is required"
+msgstr "Key label is required"
+
+msgid "Program stage section to hide is required"
+msgstr "Program stage section to hide is required"
+
+msgid "Program stage is required"
+msgstr "Program stage is required"
+
 msgid "Data element or tracked entity attribute must be selected"
 msgstr "Data element or tracked entity attribute must be selected"
 
 msgid "Expression to assign is required"
 msgstr "Expression to assign is required"
+
+msgid "Message template is required"
+msgstr "Message template is required"
 
 msgid "Select a data element or tracked entity attribute with option set"
 msgstr "Select a data element or tracked entity attribute with option set"
@@ -4529,9 +4550,6 @@ msgstr "Configure actions for this program rule."
 
 msgid "Program rule must be saved before actions can be added"
 msgstr "Program rule must be saved before actions can be added"
-
-msgid "No program rule actions have been added yet"
-msgstr "No program rule actions have been added yet"
 
 msgid "Action will be removed on save"
 msgstr "Action will be removed on save"

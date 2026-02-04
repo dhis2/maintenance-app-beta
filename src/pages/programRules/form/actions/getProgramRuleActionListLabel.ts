@@ -73,7 +73,7 @@ export function getProgramRuleActionListLabel(
             return i18n
                 .t('Warning on complete: {{content}} on {{target}}', {
                     content,
-                    target: dataElementOnly || '-',
+                    target: dataAndField || '-',
                     nsSeparator: '~-~',
                 })
                 .replace(' ~-~ ', ' ')
@@ -81,7 +81,7 @@ export function getProgramRuleActionListLabel(
             return i18n
                 .t('Error on complete: {{content}} on {{target}}', {
                     content,
-                    target: dataElementOnly || '-',
+                    target: dataAndField || '-',
                     nsSeparator: '~-~',
                 })
                 .replace(' ~-~ ', ' ')

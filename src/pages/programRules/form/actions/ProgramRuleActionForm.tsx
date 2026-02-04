@@ -549,6 +549,7 @@ function ProgramRuleActionFormContents({
                                         <DataElementSelect
                                             programId={programId}
                                             name="dataElement"
+                                            mutualExclusion={false}
                                             label={
                                                 actionType ===
                                                     ProgramRuleAction
@@ -571,6 +572,7 @@ function ProgramRuleActionFormContents({
                                         <TrackedEntityAttributeSelect
                                             programId={programId}
                                             name="trackedEntityAttribute"
+                                            mutualExclusion={false}
                                             label={
                                                 actionType ===
                                                     ProgramRuleAction
@@ -887,15 +889,30 @@ function ProgramRuleActionFormContents({
 
 const NO_VALUE_OPTION = { value: '', label: i18n.t('(No Value)') }
 
-/** Data element select; disabled when TEA is selected and clears TEA on change (AC: at most one of DE or TEA) */
+/** Normalize selected value from SingleSelect (may be string or { selected: string }) so parse() receives the id. */
+function getSelectedId(value: unknown): string {
+    if (typeof value === 'string') {
+        return value
+    }
+    if (value && typeof value === 'object' && 'selected' in value) {
+        return (value as { selected: string }).selected ?? ''
+    }
+    return ''
+}
+
+/** Data element select; when mutualExclusion is true, disabled when TEA is selected and clears TEA on change. */
 function DataElementSelect({
     programId,
     name,
     label,
+    helpText,
+    mutualExclusion = true,
 }: {
     programId: string
     name: string
     label: string
+    helpText?: string
+    mutualExclusion?: boolean
 }) {
     const form = useForm()
     const { values } = useFormState({ subscription: { values: true } })
@@ -962,8 +979,9 @@ function DataElementSelect({
         ],
         [elements, selectedId, selectedInList, currentValue?.displayName]
     )
-    const disabled = !!(values as ProgramRuleActionFormValues)
-        .trackedEntityAttribute?.id
+    const disabled =
+        mutualExclusion &&
+        !!(values as ProgramRuleActionFormValues).trackedEntityAttribute?.id
     const { input, meta } = useField(name, {
         format: (value: { id: string; displayName?: string } | undefined) =>
             value?.id ?? '',
@@ -976,10 +994,11 @@ function DataElementSelect({
                 {
                     ...input,
                     onChange: (value: unknown) => {
-                        if (value) {
+                        const id = getSelectedId(value)
+                        if (mutualExclusion && id) {
                             form.change('trackedEntityAttribute', undefined)
                         }
-                        input.onChange(value)
+                        input.onChange(id)
                     },
                 } as typeof input
             }
@@ -987,6 +1006,7 @@ function DataElementSelect({
                 meta as React.ComponentProps<typeof SingleSelectFieldFF>['meta']
             }
             label={label}
+            helpText={helpText}
             options={selectOptions}
             dataTest={`program-rule-action-${name}`}
             disabled={disabled}
@@ -995,15 +1015,19 @@ function DataElementSelect({
     )
 }
 
-/** TEA select; disabled when data element is selected and clears data element on change (AC: at most one of DE or TEA) */
+/** TEA select; when mutualExclusion is true, disabled when DE is selected and clears DE on change. */
 function TrackedEntityAttributeSelect({
     programId,
     name,
     label,
+    helpText,
+    mutualExclusion = true,
 }: {
     programId: string
     name: string
     label: string
+    helpText?: string
+    mutualExclusion?: boolean
 }) {
     const form = useForm()
     const { values } = useFormState({ subscription: { values: true } })
@@ -1059,7 +1083,9 @@ function TrackedEntityAttributeSelect({
         ],
         [attributes, selectedId, selectedInList, currentValue?.displayName]
     )
-    const disabled = !!(values as ProgramRuleActionFormValues).dataElement?.id
+    const disabled =
+        mutualExclusion &&
+        !!(values as ProgramRuleActionFormValues).dataElement?.id
     const { input, meta } = useField(name, {
         format: (value: { id: string; displayName?: string } | undefined) =>
             value?.id ?? '',
@@ -1072,10 +1098,11 @@ function TrackedEntityAttributeSelect({
                 {
                     ...input,
                     onChange: (value: unknown) => {
-                        if (value) {
+                        const id = getSelectedId(value)
+                        if (mutualExclusion && id) {
                             form.change('dataElement', undefined)
                         }
-                        input.onChange(value)
+                        input.onChange(id)
                     },
                 } as typeof input
             }
@@ -1083,6 +1110,7 @@ function TrackedEntityAttributeSelect({
                 meta as React.ComponentProps<typeof SingleSelectFieldFF>['meta']
             }
             label={label}
+            helpText={helpText}
             options={selectOptions}
             dataTest={`program-rule-action-${name}`}
             disabled={disabled}
