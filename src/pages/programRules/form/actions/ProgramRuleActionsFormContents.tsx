@@ -112,85 +112,84 @@ const ProgramRuleActionListNewOrEdit = () => {
         return (
             <>
                 <DrawerPortal isOpen={drawerState.open} onClose={closeDrawer}>
-                {drawerState.open && (
-                    <div>
-                        <ProgramRuleActionForm
-                            programRuleId={modelId}
-                            programId={programId}
-                            action={drawerState.action}
-                            onCancel={closeDrawer}
-                            onSubmitted={handleSubmitted}
-                        />
-                    </div>
-                )}
-            </DrawerPortal>
-
-            <div className={css.listWrapper}>
-                <div className={css.sectionItems}>
-                    {actions.map((action, index) => {
-                        // Use id or fallback to index for React key
-                        const key = action.id || `action-${index}`
-
-                        if (action.deleted) {
-                            return (
-                                <div
-                                    className={css.actionCardDeleted}
-                                    key={key}
-                                >
-                                    <div className={css.deletedActionText}>
-                                        {i18n.t(
-                                            'Action will be removed on save'
-                                        )}
-                                    </div>
-                                    <Button
-                                        small
-                                        onClick={() => handleRestore(index)}
-                                    >
-                                        {i18n.t('Restore action')}
-                                    </Button>
-                                </div>
-                            )
-                        }
-
-                        // ListInFormItem expects ListItem (id, displayName, access); we build displayName from action type + content/fields
-                        const displayItem = {
-                            ...action,
-                            id: action.id || key, // Ensure id exists for ListInFormItem
-                            displayName: getProgramRuleActionListLabel(action),
-                        }
-
-                        return (
-                            <ListInFormItem
-                                key={key}
-                                item={displayItem}
-                                schemaName={SchemaName.programRuleAction}
-                                onClick={() => openEdit(action, index)}
-                                onDelete={() => handleDelete(index)}
+                    {drawerState.open && (
+                        <div>
+                            <ProgramRuleActionForm
+                                programRuleId={modelId}
+                                programId={programId}
+                                action={drawerState.action}
+                                onCancel={closeDrawer}
+                                onSubmitted={handleSubmitted}
                             />
-                        )
-                    })}
-                </div>
+                        </div>
+                    )}
+                </DrawerPortal>
 
-                <div>
-                    <Button
-                        secondary
-                        small
-                        icon={<IconAdd16 />}
-                        onClick={openAdd}
-                    >
-                        {i18n.t('Add action')}
-                    </Button>
+                <div className={css.listWrapper}>
+                    <div className={css.sectionItems}>
+                        {actions.map((action, index) => {
+                            // Use id or fallback to index for React key
+                            const key = action.id || `action-${index}`
+
+                            if (action.deleted) {
+                                return (
+                                    <div
+                                        className={css.actionCardDeleted}
+                                        key={key}
+                                    >
+                                        <div className={css.deletedActionText}>
+                                            {i18n.t(
+                                                'Action will be removed on save'
+                                            )}
+                                        </div>
+                                        <Button
+                                            small
+                                            onClick={() => handleRestore(index)}
+                                        >
+                                            {i18n.t('Restore action')}
+                                        </Button>
+                                    </div>
+                                )
+                            }
+
+                            // ListInFormItem expects ListItem (id, displayName, access); we build displayName from action type + content/fields
+                            const displayItem = {
+                                ...action,
+                                id: action.id || key, // Ensure id exists for ListInFormItem
+                                displayName:
+                                    getProgramRuleActionListLabel(action),
+                            }
+
+                            return (
+                                <ListInFormItem
+                                    key={key}
+                                    item={displayItem}
+                                    schemaName={SchemaName.programRuleAction}
+                                    onClick={() => openEdit(action, index)}
+                                    onDelete={() => handleDelete(index)}
+                                />
+                            )
+                        })}
+                    </div>
+
+                    <div>
+                        <Button
+                            secondary
+                            small
+                            icon={<IconAdd16 />}
+                            onClick={openAdd}
+                        >
+                            {i18n.t('Add action')}
+                        </Button>
+                    </div>
                 </div>
-            </div>
-        </>
-    )
+            </>
+        )
     }
 
     return (
         <NoticeBox className={css.formTypeInfo}>
-            {i18n.t(
-                'Program rule must be saved before actions can be added'
-            )}
+            {i18n.t('Program rule must be saved before actions can be added')}
         </NoticeBox>
     )
 }

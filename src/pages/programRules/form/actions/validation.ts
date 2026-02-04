@@ -224,7 +224,10 @@ const ACTION_VALIDATORS: ValidatorEntry[] = [
     ],
     [ProgramRuleAction.programRuleActionType.ASSIGN, validateAssign],
     [ProgramRuleAction.programRuleActionType.CREATEEVENT, validateCreateEvent],
-    [ProgramRuleAction.programRuleActionType.SENDMESSAGE, validateTemplateRequired],
+    [
+        ProgramRuleAction.programRuleActionType.SENDMESSAGE,
+        validateTemplateRequired,
+    ],
     [
         ProgramRuleAction.programRuleActionType.SCHEDULEMESSAGE,
         validateTemplateRequired,
