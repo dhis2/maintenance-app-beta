@@ -204,7 +204,11 @@ describe('Indicators form tests', () => {
             const editModal = await screen.findByTestId(
                 `expression-builder-modal`
             )
-            await uiActions.enterExpressionInModal(editModal, anExpression)
+            await uiActions.enterExpressionInModal(
+                editModal,
+                anExpression,
+                screen
+            )
 
             const error = within(editModal).getByTestId(
                 `expression-builder-modal-input-validation`
@@ -232,7 +236,11 @@ describe('Indicators form tests', () => {
             const editModal = await screen.findByTestId(
                 `expression-builder-modal`
             )
-            await uiActions.enterExpressionInModal(editModal, anExpression)
+            await uiActions.enterExpressionInModal(
+                editModal,
+                anExpression,
+                screen
+            )
 
             expect(
                 within(editModal).getByTestId('apply-expression-button')
@@ -259,7 +267,11 @@ describe('Indicators form tests', () => {
             const editModal = await screen.findByTestId(
                 `expression-builder-modal`
             )
-            await uiActions.enterExpressionInModal(editModal, anExpression)
+            await uiActions.enterExpressionInModal(
+                editModal,
+                anExpression,
+                screen
+            )
 
             const error = within(editModal).getByTestId(
                 `expression-builder-modal-input-validation`
@@ -287,7 +299,11 @@ describe('Indicators form tests', () => {
             const editModal = await screen.findByTestId(
                 `expression-builder-modal`
             )
-            await uiActions.enterExpressionInModal(editModal, anExpression)
+            await uiActions.enterExpressionInModal(
+                editModal,
+                anExpression,
+                screen
+            )
 
             expect(
                 within(editModal).getByTestId('apply-expression-button')

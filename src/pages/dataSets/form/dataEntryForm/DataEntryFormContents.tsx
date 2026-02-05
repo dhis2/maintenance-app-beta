@@ -1,13 +1,21 @@
+import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
-import React, { useEffect, useMemo, useState } from 'react'
-import { createSearchParams, Link, useSearchParams } from 'react-router-dom'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import {
+    createSearchParams,
+    Link,
+    useParams,
+    useSearchParams,
+} from 'react-router-dom'
 import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
     SectionedFormSection,
 } from '../../../../components'
+import { CustomFormDataPayload } from '../../../../components/customForm/CustomFormEdit'
 import { CustomFormEditEntry } from '../../../../components/customForm/CustomFormEditEntry'
+import { useDataSetCustomFormElements } from '../../../../components/customForm/useGetCustomFormElements'
 import { SectionFormSectionsList } from '../../../../components/formCreators/SectionFormList'
 import {
     FormType,
@@ -32,6 +40,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
     const [selectedFormType, setSelectedFormType] = useState<FormType>(
         FormType.DEFAULT
     )
+    const modelId = useParams().id
     const [searchParams] = useSearchParams()
     const toDataSearchParam = useMemo(
         () =>
@@ -49,6 +58,37 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
             setSelectedFormType(FormType.SECTION)
         }
     }, [dataEntryForm, sections])
+    const dataEngine = useDataEngine()
+
+    const { loading, elementTypes, refetch } = useDataSetCustomFormElements()
+    const updateDataSetCustomForm = useCallback(
+        async (
+            data: CustomFormDataPayload,
+            onSuccess: (data: CustomFormDataPayload) => void,
+            onError: (e: Error) => void
+        ) => {
+            try {
+                const response = await dataEngine.mutate(
+                    {
+                        resource: `dataSets/${modelId}/form`,
+                        type: 'create',
+                        data: data,
+                    },
+                    {
+                        onComplete: () => {
+                            // the response from this post is empty, so we use the data we passed if it was successful
+                            onSuccess(data)
+                        },
+                        onError,
+                    }
+                )
+                return { data: response }
+            } catch (error) {
+                console.error(error)
+            }
+        },
+        [dataEngine, modelId]
+    )
 
     return (
         <SectionedFormSection name={name}>
@@ -66,6 +106,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                 hasDataToDisplay={dataSetElements.length > 0}
                 onFormTypeChange={setSelectedFormType}
                 selectedFormType={selectedFormType}
+                modelId={modelId}
             >
                 {selectedFormType === FormType.DEFAULT && (
                     <div className={classes.basicFormDetails}>
@@ -95,10 +136,18 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                         sectionsFieldName={'sections'}
                         SectionFormComponent={EditOrNewDataSetSectionForm}
                         schemaName={SchemaName.section}
+                        level={'primary'}
                     />
                 )}
                 {selectedFormType === FormType.CUSTOM && (
-                    <CustomFormEditEntry />
+                    <CustomFormEditEntry
+                        level={'primary'}
+                        loading={loading}
+                        elementTypes={elementTypes}
+                        refetch={refetch}
+                        updateCustomForm={updateDataSetCustomForm}
+                        customFormTarget="data set"
+                    />
                 )}
                 {displayOptions !== undefined && (
                     <div className={classes.displayOptions}>

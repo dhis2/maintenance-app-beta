@@ -19,10 +19,9 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
-import DenominatorFields from './DenominatorFields'
 import { IndicatorFormDescriptor } from './formDescriptor'
 import { IndicatorTypeField } from './IndicatorTypeField'
-import NumeratorFields from './NumeratorFields'
+import { NumeratorDenominatorFields } from './NumeratorDenominatorFields'
 
 const section = SECTIONS_MAP.indicator
 
@@ -89,10 +88,18 @@ export const IndicatorFormFields = () => {
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
-                    <NumeratorFields />
+                    <NumeratorDenominatorFields
+                        fieldName="numerator"
+                        objectName={i18n.t('Numerator')}
+                        validationResource={'indicators/expression/description'}
+                    />
                 </StandardFormField>
                 <StandardFormField>
-                    <DenominatorFields />
+                    <NumeratorDenominatorFields
+                        fieldName="denominator"
+                        objectName={i18n.t('Denominator')}
+                        validationResource={'indicators/expression/description'}
+                    />
                 </StandardFormField>
 
                 <StandardFormField>

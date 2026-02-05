@@ -1,3 +1,4 @@
+import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip } from '@dhis2/ui'
 import { IconInfo16 } from '@dhis2/ui-icons'
@@ -8,6 +9,7 @@ import {
     FormBase,
     FormBaseProps,
     FormFooterWrapper,
+    SectionedFormErrorNotice,
 } from '../../../../../components'
 import { DefaultFormErrorNotice } from '../../../../../components/form/DefaultFormErrorNotice'
 import { LoadingSpinner } from '../../../../../components/loading/LoadingSpinner'
@@ -35,6 +37,8 @@ export const fieldFilters = [
     'name',
     'description',
     'renderType[MOBILE[type],DESKTOP[type]]',
+    'dataElements[id,displayName]',
+    'programStage[id]',
 ] as const
 
 export const stageSectionSchemaSection = {
@@ -92,7 +96,10 @@ export const StageSectionForm = ({
                 return (
                     <div>
                         <div className={styles.sectionsWrapper}>
-                            <ProgramStageSectionFormContents />
+                            <div>
+                                <ProgramStageSectionFormContents />
+                                <SectionedFormErrorNotice />
+                            </div>
                             <FormFooterWrapper>
                                 <ButtonStrip>
                                     <Button
@@ -151,6 +158,9 @@ export const EditStageSectionForm = ({
         section.id,
         stageSectionSchemaSection.namePlural
     )
+    const { show: showSuccess } = useAlert(i18n.t('Stage section form saved'), {
+        success: true,
+    })
 
     const onFormSubmit: OnFormSubmit = async (values, form) => {
         const jsonPatchOperations = createJsonPatchOperations({
@@ -162,6 +172,8 @@ export const EditStageSectionForm = ({
         if (response.error) {
             return createFormError(response.error)
         }
+        showSuccess({ success: true })
+
         const updatedName = jsonPatchOperations.find(
             (op) => op.path === '/name' && op.op === 'replace'
         )?.value as string | undefined
@@ -216,12 +228,16 @@ export const NewStageSectionForm = ({
     sortOrder: number
 }) => {
     const handleCreate = useCreateModel(stageSectionSchemaSection.namePlural)
+    const { show: showSuccess } = useAlert(i18n.t('Stage section form saved'), {
+        success: true,
+    })
 
     const onFormSubmit: OnFormSubmit = async (values) => {
         const res = await handleCreate(values)
         if (res.error) {
             return createFormError(res.error)
         }
+        showSuccess({ success: true })
         const newId = (res.data as { response: { uid: string } }).response.uid
 
         onSubmitted?.({
@@ -243,7 +259,7 @@ export const NewStageSectionForm = ({
     )
 }
 
-export const EditOrNowStageSectionForm = ({
+export const EditOrNewStageSectionForm = ({
     section,
     stageId,
     onCancel,
