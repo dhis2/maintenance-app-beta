@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip, SingleSelectFieldFF } from '@dhis2/ui'
-import React from 'react'
-import { Field, useFormState } from 'react-final-form'
+import { Button, SingleSelectFieldFF } from '@dhis2/ui'
+import React, { useEffect, useRef } from 'react'
+import { Field, useForm, useFormState } from 'react-final-form'
 import {
     FormBase,
     FormFooterWrapper,
@@ -10,96 +10,19 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../components'
+import { useClearFormFields } from '../../../../lib/form/useClearFormFields'
 import { ProgramRuleAction } from '../../../../types/generated'
 import { PriorityField } from '../../fields'
 import { ActionTypeFieldsContent } from './ActionTypeFieldsContent'
+import { ACTION_FIELDS_TO_CLEAR, ACTION_TYPE_OPTIONS } from './constants'
 import styles from './ProgramRuleActionForm.module.css'
-import type { ProgramRuleActionListItem } from './types'
+import type {
+    ProgramRuleActionListItem,
+    ProgramRuleActionFormValues,
+} from './types'
+import { validateProgramRuleAction } from './validation'
 
-const ACTION_TYPE_OPTIONS = [
-    {
-        label: i18n.t('Assign value'),
-        value: ProgramRuleAction.programRuleActionType.ASSIGN,
-    },
-    {
-        label: i18n.t('Create event'),
-        value: ProgramRuleAction.programRuleActionType.CREATEEVENT,
-    },
-    {
-        label: i18n.t('Display key-value pair'),
-        value: ProgramRuleAction.programRuleActionType.DISPLAYKEYVALUEPAIR,
-    },
-    {
-        label: i18n.t('Display text'),
-        value: ProgramRuleAction.programRuleActionType.DISPLAYTEXT,
-    },
-    {
-        label: i18n.t('Error on complete'),
-        value: ProgramRuleAction.programRuleActionType.ERRORONCOMPLETE,
-    },
-    {
-        label: i18n.t('Hide field'),
-        value: ProgramRuleAction.programRuleActionType.HIDEFIELD,
-    },
-    {
-        label: i18n.t('Hide option'),
-        value: ProgramRuleAction.programRuleActionType.HIDEOPTION,
-    },
-    {
-        label: i18n.t('Hide option group'),
-        value: ProgramRuleAction.programRuleActionType.HIDEOPTIONGROUP,
-    },
-    {
-        label: i18n.t('Hide program stage'),
-        value: ProgramRuleAction.programRuleActionType.HIDEPROGRAMSTAGE,
-    },
-    {
-        label: i18n.t('Hide section'),
-        value: ProgramRuleAction.programRuleActionType.HIDESECTION,
-    },
-    {
-        label: i18n.t('Schedule message'),
-        value: ProgramRuleAction.programRuleActionType.SCHEDULEMESSAGE,
-    },
-    {
-        label: i18n.t('Send message'),
-        value: ProgramRuleAction.programRuleActionType.SENDMESSAGE,
-    },
-    {
-        label: i18n.t('Set mandatory field'),
-        value: ProgramRuleAction.programRuleActionType.SETMANDATORYFIELD,
-    },
-    {
-        label: i18n.t('Show error'),
-        value: ProgramRuleAction.programRuleActionType.SHOWERROR,
-    },
-    {
-        label: i18n.t('Show option group'),
-        value: ProgramRuleAction.programRuleActionType.SHOWOPTIONGROUP,
-    },
-    {
-        label: i18n.t('Show warning'),
-        value: ProgramRuleAction.programRuleActionType.SHOWWARNING,
-    },
-    {
-        label: i18n.t('Warning on complete'),
-        value: ProgramRuleAction.programRuleActionType.WARNINGONCOMPLETE,
-    },
-].sort((a, b) => a.label.localeCompare(b.label))
-
-type ProgramRuleActionFormValues = Partial<ProgramRuleActionListItem> & {
-    programRule?: { id: string }
-}
-
-const initialValuesNew = (
-    programRuleId: string
-): ProgramRuleActionFormValues => ({
-    programRuleActionType: ProgramRuleAction.programRuleActionType.SHOWWARNING,
-    priority: undefined,
-    content: '',
-    data: '',
-    programRule: { id: programRuleId },
-})
+const { programRuleActionType } = ProgramRuleAction
 
 export const ProgramRuleActionForm = ({
     programRuleId,
@@ -116,88 +39,112 @@ export const ProgramRuleActionForm = ({
 }>) => {
     const initialValues: ProgramRuleActionFormValues = action
         ? { ...action, programRule: { id: programRuleId } }
-        : initialValuesNew(programRuleId)
+        : {
+              programRuleActionType: programRuleActionType.SHOWWARNING,
+              programRule: { id: programRuleId },
+          }
+
+    const handleSubmit = (values: ProgramRuleActionFormValues) => {
+        const submitted = {
+            ...values,
+            programRule: undefined,
+        } as ProgramRuleActionListItem
+        onSubmitted(submitted)
+    }
 
     return (
         <FormBase
-            onSubmit={(values) => {
-                const submitted = {
-                    ...values,
-                    programRule: undefined,
-                } as ProgramRuleActionListItem
-                onSubmitted(submitted)
-            }}
+            onSubmit={handleSubmit}
             initialValues={initialValues}
+            validate={validateProgramRuleAction}
             subscription={{}}
             includeAttributes={false}
         >
-            {({ handleSubmit }) => (
-                <form onSubmit={handleSubmit}>
-                    <div className={styles.sectionsWrapper}>
-                        <div>
-                            <StandardFormSection>
-                                <StandardFormSectionTitle>
-                                    {action
-                                        ? i18n.t('Edit action')
-                                        : i18n.t('Add action')}
-                                </StandardFormSectionTitle>
-                                <StandardFormSectionDescription>
-                                    {i18n.t(
-                                        'Configure the program rule action.'
-                                    )}
-                                </StandardFormSectionDescription>
-
-                                <StandardFormField>
-                                    <Field
-                                        name="programRuleActionType"
-                                        label={i18n.t('Action type')}
-                                        component={SingleSelectFieldFF}
-                                        options={ACTION_TYPE_OPTIONS}
-                                        required
-                                        filterable
-                                    />
-                                </StandardFormField>
-
-                                <StandardFormField>
-                                    <PriorityField />
-                                </StandardFormField>
-
-                                <ActionTypeFields programId={programId} />
-                            </StandardFormSection>
-                        </div>
-
-                        <FormFooterWrapper>
-                            <ButtonStrip>
-                                <Button primary type="submit">
-                                    {action
-                                        ? i18n.t('Save action')
-                                        : i18n.t('Add action')}
-                                </Button>
-                                <Button secondary onClick={onCancel}>
-                                    {i18n.t('Cancel')}
-                                </Button>
-                            </ButtonStrip>
-                        </FormFooterWrapper>
-                    </div>
-                </form>
-            )}
+            <ProgramRuleActionFormBody
+                action={action}
+                onCancel={onCancel}
+                programId={programId}
+            />
         </FormBase>
     )
 }
 
-function ActionTypeFields({ programId }: Readonly<{ programId?: string }>) {
+function ProgramRuleActionFormBody({
+    action,
+    onCancel,
+    programId,
+}: Readonly<{
+    action: ProgramRuleActionListItem | null
+    onCancel: () => void
+    programId?: string
+}>) {
+    const form = useForm()
+    const clearActionFields = useClearFormFields(
+        form,
+        ...ACTION_FIELDS_TO_CLEAR
+    )
     const { values } = useFormState({ subscription: { values: true } })
     const actionType = (values as ProgramRuleActionFormValues)
         .programRuleActionType
+    const previousActionTypeRef = useRef<string | undefined>(undefined)
 
-    if (!programId) {
-        return null
-    }
+    useEffect(() => {
+        if (
+            previousActionTypeRef.current !== undefined &&
+            previousActionTypeRef.current !== actionType
+        ) {
+            clearActionFields()
+        }
+        previousActionTypeRef.current = actionType
+    }, [actionType, clearActionFields])
+
+    const isEdit = !!action
 
     return (
-        <ActionTypeFieldsContent
-            programId={programId}
-            actionType={actionType}
-        />
+        <div className={styles.sectionsWrapper}>
+            <StandardFormSection>
+                <StandardFormSectionTitle>
+                    {isEdit ? i18n.t('Edit action') : i18n.t('Add action')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t('Configure the program rule action.')}
+                </StandardFormSectionDescription>
+
+                <StandardFormField>
+                    <Field name="programRuleActionType">
+                        {({ input, meta }) => (
+                            <SingleSelectFieldFF
+                                input={input}
+                                meta={meta}
+                                label={i18n.t('Action type')}
+                                options={ACTION_TYPE_OPTIONS}
+                                required
+                                filterable
+                            />
+                        )}
+                    </Field>
+                </StandardFormField>
+
+                <StandardFormField>
+                    <PriorityField />
+                </StandardFormField>
+
+                {programId && (
+                    <ActionTypeFieldsContent
+                        programId={programId}
+                        actionType={actionType}
+                    />
+                )}
+            </StandardFormSection>
+
+            <FormFooterWrapper>
+                <Button primary type="submit">
+                    {isEdit ? i18n.t('Save action') : i18n.t('Add action')}
+                </Button>
+                <Button secondary onClick={onCancel}>
+                    {i18n.t('Cancel')}
+                </Button>
+            </FormFooterWrapper>
+        </div>
     )
 }

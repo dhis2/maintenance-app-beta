@@ -128,6 +128,11 @@ function messageActionFields(programId: string, isWarning: boolean): ReactNode {
                     label={i18n.t('Static text')}
                     component={InputFieldFF}
                     required
+                    validate={(value: string | undefined) =>
+                        !value?.trim()
+                            ? i18n.t('Static text is required')
+                            : undefined
+                    }
                 />
             </StandardFormField>
             <StandardFormField>

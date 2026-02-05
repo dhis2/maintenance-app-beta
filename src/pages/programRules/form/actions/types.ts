@@ -5,6 +5,10 @@
  */
 import type { Access } from '../../../../types/models'
 
+export type ProgramRuleActionFormValues = Partial<ProgramRuleActionListItem> & {
+    programRule?: { id: string }
+}
+
 export type ProgramRuleActionListItem = {
     id?: string
     programRuleActionType?: string
