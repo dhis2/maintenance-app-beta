@@ -4,7 +4,7 @@ import { DefaultNewFormContents } from '../../components/form/DefaultFormContent
 import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { validate } from './form'
 import { CategoryOptionFormFields } from './form/CategoryOptionFormFields'
-import { initialValues } from './form/categoryOptionSchema'
+import { initialValues, transformFormValues } from './form/categoryOptionSchema'
 
 const section = SECTIONS_MAP.categoryOption
 
@@ -14,6 +14,7 @@ export const Component = () => {
             onSubmit={useOnSubmitNew({ section })}
             initialValues={initialValues}
             validate={validate}
+            valueFormatter={transformFormValues}
         >
             <DefaultNewFormContents section={section}>
                 <CategoryOptionFormFields />

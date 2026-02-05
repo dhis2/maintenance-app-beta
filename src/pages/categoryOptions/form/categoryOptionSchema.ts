@@ -47,3 +47,18 @@ export const categoryOptionListSchema = withDefaultListColumns.extend({
 export const initialValues = getDefaults(categoryOptionFormSchema)
 
 export const validate = createFormValidate(categoryOptionFormSchema)
+
+type CategoryOptionFormValues = z.infer<typeof categoryOptionFormSchema>
+
+export const transformFormValues = <
+    TValues extends Partial<CategoryOptionFormValues>
+>(
+    values: TValues
+) => {
+    return {
+        ...values,
+        sharing: {
+            public: 'rwrw----',
+        },
+    }
+}
