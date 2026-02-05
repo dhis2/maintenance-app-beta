@@ -45,6 +45,7 @@ export function ValueTypeField({
         values.valueType === 'MULTI_TEXT' ||
         (values.optionSet?.id && values.optionSet?.valueType === 'MULTI_TEXT')
 
+    const isOptionSetForm = schemaSection.name === 'optionSet'
     const options =
         schema.properties.valueType.constants
             ?.map((constant: string) => ({
@@ -52,7 +53,11 @@ export function ValueTypeField({
                 label: getConstantTranslation(constant),
             }))
             .filter(({ value }: { value: string }) => {
-                return optionSetHasMultiTextValueType || value !== 'MULTI_TEXT'
+                return (
+                    isOptionSetForm ||
+                    optionSetHasMultiTextValueType ||
+                    value !== 'MULTI_TEXT'
+                )
             }) || []
 
     const combinedHelpText = disabled
