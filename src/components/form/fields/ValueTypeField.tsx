@@ -46,12 +46,6 @@ export function ValueTypeField({
         (values.optionSet?.id && values.optionSet?.valueType === 'MULTI_TEXT')
 
     const isOptionSetForm = schemaSection.name === 'optionSet'
-    console.log({
-        schema,
-        optionSetHasMultiTextValueType,
-        isOptionSetForm,
-        values,
-    })
     const options =
         schema.properties.valueType.constants
             ?.map((constant: string) => ({
