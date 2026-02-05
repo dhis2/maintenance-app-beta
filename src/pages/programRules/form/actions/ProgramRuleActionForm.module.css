@@ -5,7 +5,7 @@
     justify-content: space-between;
 }
 
-.sectionsWrapper > div:first-child {
+.sectionsWrapper > :first-child {
     overflow-y: auto;
     padding: var(--spacers-dp24);
 }

@@ -57,6 +57,7 @@ export const ProgramRuleActionForm = ({
             onSubmit={handleSubmit}
             initialValues={initialValues}
             validate={validateProgramRuleAction}
+            validateOnChange={true}
             subscription={{}}
             includeAttributes={false}
         >

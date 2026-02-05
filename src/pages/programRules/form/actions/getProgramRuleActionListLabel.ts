@@ -1,7 +1,8 @@
 /**
  * Builds the human-readable label for a program rule action in the list.
- * Needed because ListInFormItem expects displayName but actions only have type + content/refs;
- * format matches old app (AC) e.g. "Show warning: <content> on <dataElement, trackedEntityAttribute>".
+ * Needed because ListInFormItem expects displayName but actions only have type + content/refs.
+ * Format e.g. "Warning on complete: <content> on <dataElement, trackedEntityAttribute>".
+ * Target (the "on ..." part) includes both data element and tracked entity attribute when set.
  */
 import i18n from '@dhis2/d2-i18n'
 
@@ -48,6 +49,7 @@ export function getProgramRuleActionListLabel(
     const option = action.option
     const optionGroup = action.optionGroup
     const templateUid = action.templateUid ?? ''
+    /** Data element and tracked entity attribute (both shown for e.g. WARNINGONCOMPLETE, ERRORONCOMPLETE). */
     const dataAndField = joinRefs(dataElement, trackedEntityAttribute)
     const locationOrField = location || dataAndField || i18n.t('field')
 

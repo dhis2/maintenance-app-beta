@@ -707,20 +707,25 @@ const VARIABLE_ELEMENTS = [
     },
 ]
 
-const PROGRAM_RULE_VARIABLE_ELEMENTS = [
-    { id: 'V{current_date}', displayName: i18n.t('Current date') },
-    { id: 'V{event_date}', displayName: i18n.t('Event date') },
-    { id: 'V{due_date}', displayName: i18n.t('Due date') },
-    { id: 'V{event_count}', displayName: i18n.t('Event count') },
-    { id: 'V{enrollment_date}', displayName: i18n.t('Enrollment date') },
-    { id: 'V{incident_date}', displayName: i18n.t('Incident date') },
-    { id: 'V{enrollment_id}', displayName: i18n.t('Enrollment id') },
-    { id: 'V{environment}', displayName: i18n.t('Environment') },
-    { id: 'V{event_id}', displayName: i18n.t('Event id') },
-    { id: 'V{orgunit_code}', displayName: i18n.t('Org unit code') },
-    { id: 'V{program_stage_name}', displayName: i18n.t('Program stage name') },
-    { id: 'V{program_stage_id}', displayName: i18n.t('Program stage id') },
+/** Built-in program rule variables (id only; displayed as-is, no translation). */
+const PROGRAM_RULE_VARIABLE_IDS = [
+    'V{current_date}',
+    'V{event_date}',
+    'V{due_date}',
+    'V{event_count}',
+    'V{enrollment_date}',
+    'V{incident_date}',
+    'V{enrollment_id}',
+    'V{environment}',
+    'V{event_id}',
+    'V{orgunit_code}',
+    'V{program_stage_name}',
+    'V{program_stage_id}',
 ]
+
+const PROGRAM_RULE_VARIABLE_ELEMENTS: Element[] = PROGRAM_RULE_VARIABLE_IDS.map(
+    (id) => ({ id, displayName: id })
+)
 
 const PROGRAM_RULE_FUNCTION_ELEMENTS = [
     { id: 'd2:ceil( <number> )', displayName: 'd2:ceil( <number> )' },
@@ -823,23 +828,22 @@ const PROGRAM_RULE_FUNCTION_ELEMENTS = [
     },
 ]
 
+/** Program rule expression builder operators only. */
 const PROGRAM_RULE_OPERATOR_ELEMENTS = [
-    { id: '+', displayName: i18n.t('+ (add)') },
-    { id: '-', displayName: i18n.t('- (subtract)') },
-    { id: '*', displayName: i18n.t('* (multiply)') },
-    { id: '/', displayName: i18n.t('/ (divide)') },
-    { id: '%', displayName: i18n.t('% (percent)') },
-    { id: '(', displayName: i18n.t('(') },
-    { id: ')', displayName: i18n.t(')') },
-    { id: '>', displayName: i18n.t('> (greater than)') },
-    { id: '>=', displayName: i18n.t('>= (greater than or equal to)') },
-    { id: '<', displayName: i18n.t('< (less than)') },
-    { id: '<=', displayName: i18n.t('<= (less than or equal to)') },
-    { id: '==', displayName: i18n.t('== (equals)') },
-    { id: '!=', displayName: i18n.t('!= (does not equal)') },
-    { id: '!', displayName: i18n.t('! (not)') },
-    { id: '&&', displayName: i18n.t('&& (and)') },
-    { id: '||', displayName: i18n.t('|| (or)') },
+    { id: '+', displayName: '+' },
+    { id: '-', displayName: '-' },
+    { id: '*', displayName: '*' },
+    { id: '/', displayName: '/' },
+    { id: '%', displayName: '%' },
+    { id: '>', displayName: '>' },
+    { id: '>=', displayName: '>=' },
+    { id: '<', displayName: '<' },
+    { id: '<=', displayName: '<=' },
+    { id: '==', displayName: '==' },
+    { id: '!=', displayName: '!=' },
+    { id: 'NOT', displayName: 'NOT' },
+    { id: 'AND', displayName: 'AND' },
+    { id: 'OR', displayName: 'OR' },
 ]
 
 const programIndicatorElementTypes: ElementType[] = [
@@ -889,11 +893,6 @@ const programRuleElementTypes: ElementType[] = [
         type: 'programRuleVariables',
         name: i18n.t('Program rule variables'),
         component: ProgramRuleVariablesList,
-    },
-    {
-        type: 'programStage',
-        name: i18n.t('Program stage data'),
-        component: ProgramStageList,
     },
     {
         type: 'functions',

@@ -72,4 +72,16 @@ export const VALIDATION_MESSAGES = {
         'Select a data element or tracked entity attribute with option set'
     ),
     HIDEOPTION_OPTION: i18n.t('Option to hide is required'),
+    SETMANDATORYFIELD: i18n.t(
+        'Select at least one: data element or tracked entity attribute'
+    ),
+    ASSIGN_TARGET: i18n.t(
+        'Select at least one: data element, tracked entity attribute, or program rule variable'
+    ),
+    ASSIGN_EXPRESSION: i18n.t('Expression to evaluate and assign is required'),
+    OPTIONGROUP_DE_TEA: i18n.t(
+        'Select a data element or tracked entity attribute with option set'
+    ),
+    OPTIONGROUP_GROUP: i18n.t('Option group is required'),
+    DISPLAY_WIDGET: i18n.t('Display widget is required'),
 } as const

@@ -38,6 +38,11 @@ function displayTextFields(programId: string): ReactNode {
                     label={i18n.t('Static text')}
                     component={InputFieldFF}
                     required
+                    validate={(value: string | undefined) =>
+                        !value?.trim()
+                            ? i18n.t('Static text is required')
+                            : undefined
+                    }
                 />
             </StandardFormField>
             <StandardFormField>
@@ -64,6 +69,11 @@ function displayKeyValuePairFields(programId: string): ReactNode {
                     label={i18n.t('Key label')}
                     component={InputFieldFF}
                     required
+                    validate={(value: string | undefined) =>
+                        !value?.trim()
+                            ? i18n.t('Key label is required')
+                            : undefined
+                    }
                 />
             </StandardFormField>
             <StandardFormField>
@@ -268,7 +278,11 @@ const ACTION_FIELDS_MAP: Partial<Record<string, ActionFieldsRenderer>> = {
     ),
     [AT.HIDEPROGRAMSTAGE]: (programId) => (
         <StandardFormField>
-            <ProgramStageSelectField programId={programId} required />
+            <ProgramStageSelectField
+                programId={programId}
+                label={i18n.t('Program stage')}
+                required
+            />
         </StandardFormField>
     ),
     [AT.SHOWWARNING]: (programId) => messageActionFields(programId, true),

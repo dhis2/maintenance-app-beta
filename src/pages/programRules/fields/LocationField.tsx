@@ -13,10 +13,26 @@ export function LocationField({ required }: Readonly<{ required?: boolean }>) {
         <Field
             name="location"
             label={i18n.t('Display widget')}
-            component={SingleSelectFieldFF}
-            options={LOCATION_OPTIONS}
             required={required}
             filterable
-        />
+        >
+            {({ input, meta, ...rest }) => (
+                <SingleSelectFieldFF
+                    input={{
+                        ...input,
+                        onChange: (value: unknown) => {
+                            input.onChange(value)
+                            input.onBlur()
+                        },
+                    }}
+                    meta={meta}
+                    label={i18n.t('Display widget')}
+                    options={LOCATION_OPTIONS}
+                    required={required}
+                    filterable
+                    {...rest}
+                />
+            )}
+        </Field>
     )
 }

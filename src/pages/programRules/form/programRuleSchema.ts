@@ -1,7 +1,3 @@
-/**
- * Zod schema and validation for program rule form (including nested programRuleActions).
- * programType on program so form values match fieldFilters and we can branch on tracker vs event.
- */
 import { z } from 'zod'
 import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
 
@@ -28,7 +24,7 @@ const programRuleBaseSchema = z.object({
     programRuleActions: z
         .array(
             z.object({
-                id: z.string().optional(), // Optional - backend generates for new actions
+                id: z.string(),
                 programRuleActionType: z.string().optional(),
                 content: z.string().optional(),
                 data: z.string().optional(),
