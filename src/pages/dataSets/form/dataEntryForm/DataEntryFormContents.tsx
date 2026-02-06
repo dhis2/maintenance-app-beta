@@ -35,7 +35,6 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
 }) {
     const { apiVersion } = useConfig()
     const hasDisplayOptions = apiVersion >= 42
-    const displayOptions = useDataSetField('displayOptions').input.value
     const sections = useDataSetField('sections').input.value
     const dataEntryForm = useDataSetField('dataEntryForm').input.value
     const dataSetElements = useDataSetField('dataSetElements').input.value
