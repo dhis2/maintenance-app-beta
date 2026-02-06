@@ -62,6 +62,13 @@ const DrawerContents = React.forwardRef<
             focusTrapOptions={{
                 delayInitialFocus: true,
                 allowOutsideClick: true,
+                clickOutsideDeactivates: (event) => {
+                    const target = event.target as HTMLElement
+                    const isInModal = target.closest('[role="dialog"]')
+                    return !isInModal
+                },
+                returnFocusOnDeactivate: false,
+                fallbackFocus: () => document.body,
             }}
         >
             <div ref={ref}>

@@ -16,3 +16,23 @@
     gap: var(--spacers-dp4);
     color: var(--colors-grey600);
 }
+
+.expressionLabel {
+    color: var(--colors-grey600);
+    font-size: 14px;
+    display: block;
+    margin-top: 12px;
+}
+
+.deletedActionBox {
+    padding: 12px 16px;
+    background-color: #ffeeee;
+    border: 1px solid #ffcccc;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+.deletedActionText {
+    color: #cc0000;
+    margin-bottom: 8px;
+}
