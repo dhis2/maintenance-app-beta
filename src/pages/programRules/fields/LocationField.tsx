@@ -15,24 +15,40 @@ export function LocationField({ required }: Readonly<{ required?: boolean }>) {
             label={i18n.t('Display widget')}
             required={required}
             filterable
+            validate={
+                required
+                    ? (value: string | undefined) =>
+                          !value ? i18n.t('This field is required') : undefined
+                    : undefined
+            }
         >
-            {({ input, meta, ...rest }) => (
-                <SingleSelectFieldFF
-                    input={{
-                        ...input,
-                        onChange: (value: unknown) => {
-                            input.onChange(value)
-                            input.onBlur()
-                        },
-                    }}
-                    meta={meta}
-                    label={i18n.t('Display widget')}
-                    options={LOCATION_OPTIONS}
-                    required={required}
-                    filterable
-                    {...rest}
-                />
-            )}
+            {({ input, meta, ...rest }) => {
+                const showErrorAsTouched =
+                    meta.touched || (!!meta.submitFailed && !!meta.error)
+
+                return (
+                    <SingleSelectFieldFF
+                        input={{
+                            ...input,
+                            onChange: (value: unknown) => {
+                                input.onChange(value)
+                                input.onBlur()
+                            },
+                        }}
+                        meta={
+                            {
+                                ...meta,
+                                touched: showErrorAsTouched,
+                            } as any
+                        }
+                        label={i18n.t('Display widget')}
+                        options={LOCATION_OPTIONS}
+                        required={required}
+                        filterable
+                        {...rest}
+                    />
+                )
+            }}
         </Field>
     )
 }

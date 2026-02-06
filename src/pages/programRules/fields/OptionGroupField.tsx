@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
-import { useField, useFormState } from 'react-final-form'
+import { Field, useFormState } from 'react-final-form'
 import { useBoundResourceQueryFn } from '../../../lib'
 
 function getOptionSetId(values: any): string | undefined {
@@ -66,21 +66,52 @@ export function OptionGroupField({
         [optionGroups, selectedId, selectedInList, currentValue?.displayName]
     )
 
-    const { input, meta } = useField('optionGroup', {
-        format: (value: any) => value?.id ?? '',
-        parse: (id: string) =>
-            id ? optionGroups.find((og) => og.id === id) : undefined,
-    })
+    type OptionGroupValue = { id: string; displayName?: string } | undefined
 
     return (
-        <SingleSelectFieldFF
-            input={input as any}
-            meta={meta as any}
-            label={label}
-            options={selectOptions}
-            disabled={!optionSetId}
-            required={required}
-            filterable
-        />
+        <Field<OptionGroupValue, HTMLElement, string>
+            name="optionGroup"
+            format={(value: OptionGroupValue) => value?.id ?? ''}
+            parse={(id: string) =>
+                id ? optionGroups.find((og) => og.id === id) : undefined
+            }
+            validate={
+                required
+                    ? (value: OptionGroupValue) =>
+                          !value?.id
+                              ? i18n.t('This field is required')
+                              : undefined
+                    : undefined
+            }
+        >
+            {({ input, meta, ...rest }) => {
+                const showErrorAsTouched =
+                    meta.touched || (!!meta.submitFailed && !!meta.error)
+
+                return (
+                    <SingleSelectFieldFF
+                        input={{
+                            ...input,
+                            onChange: (value: unknown) => {
+                                input.onChange(value)
+                                input.onBlur()
+                            },
+                        }}
+                        meta={
+                            {
+                                ...meta,
+                                touched: showErrorAsTouched,
+                            } as any
+                        }
+                        label={label}
+                        options={selectOptions}
+                        disabled={!optionSetId}
+                        required={required}
+                        filterable
+                        {...rest}
+                    />
+                )
+            }}
+        </Field>
     )
 }

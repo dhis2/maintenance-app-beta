@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
-import { useField, useFormState } from 'react-final-form'
+import { Field, useFormState } from 'react-final-form'
 import { useBoundResourceQueryFn } from '../../../lib'
 
 export function ProgramStageSectionField({
@@ -76,21 +76,55 @@ export function ProgramStageSectionField({
         [sections, selectedId, selectedInList, currentValue?.displayName]
     )
 
-    const { input, meta } = useField('programStageSection', {
-        format: (value: { id: string; displayName?: string } | undefined) =>
-            value?.id ?? '',
-        parse: (id: string) =>
-            id ? sections.find((s) => s.id === id) : undefined,
-    })
-
     return (
-        <SingleSelectFieldFF
-            input={input as any}
-            meta={meta as any}
-            label={i18n.t('Program stage section to hide')}
-            options={selectOptions}
-            required={required}
-            filterable
-        />
+        <Field
+            name="programStageSection"
+            format={(value: { id: string; displayName?: string } | undefined) =>
+                value?.id ?? ''
+            }
+            parse={(id: string) =>
+                id ? sections.find((s) => s.id === id) : undefined
+            }
+            validate={
+                required
+                    ? (
+                          value:
+                              | { id: string; displayName?: string }
+                              | undefined
+                      ) =>
+                          !value?.id
+                              ? i18n.t('This field is required')
+                              : undefined
+                    : undefined
+            }
+        >
+            {({ input, meta, ...rest }) => {
+                const showErrorAsTouched =
+                    meta.touched || (!!meta.submitFailed && !!meta.error)
+
+                return (
+                    <SingleSelectFieldFF
+                        input={{
+                            ...input,
+                            onChange: (value: unknown) => {
+                                input.onChange(value)
+                                input.onBlur()
+                            },
+                        }}
+                        meta={
+                            {
+                                ...meta,
+                                touched: showErrorAsTouched,
+                            } as any
+                        }
+                        label={i18n.t('Program stage section to hide')}
+                        options={selectOptions}
+                        required={required}
+                        filterable
+                        {...rest}
+                    />
+                )
+            }}
+        </Field>
     )
 }

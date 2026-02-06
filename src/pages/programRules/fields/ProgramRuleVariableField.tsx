@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
-import { useField } from 'react-final-form'
+import { Field } from 'react-final-form'
 import { useBoundResourceQueryFn } from '../../../lib'
 
 const NO_VALUE_OPTION = { value: '', label: i18n.t('(No Value)') }
@@ -41,18 +41,38 @@ export function ProgramRuleVariableField({
         [variables]
     )
 
-    const { input, meta } = useField('content', {
-        format: (value: string | undefined) => value ?? '',
-        parse: (id: string) => id || undefined,
-    })
-
     return (
-        <SingleSelectFieldFF
-            input={input as any}
-            meta={meta as any}
-            label={i18n.t('Program rule variable to assign to')}
-            options={selectOptions}
-            filterable
-        />
+        <Field
+            name="content"
+            format={(value: string | undefined) => value ?? ''}
+            parse={(id: string) => id || undefined}
+        >
+            {({ input, meta, ...rest }) => {
+                const showErrorAsTouched =
+                    meta.touched || (!!meta.submitFailed && !!meta.error)
+
+                return (
+                    <SingleSelectFieldFF
+                        input={{
+                            ...input,
+                            onChange: (value: unknown) => {
+                                input.onChange(value)
+                                input.onBlur()
+                            },
+                        }}
+                        meta={
+                            {
+                                ...meta,
+                                touched: showErrorAsTouched,
+                            } as any
+                        }
+                        label={i18n.t('Program rule variable to assign to')}
+                        options={selectOptions}
+                        filterable
+                        {...rest}
+                    />
+                )
+            }}
+        </Field>
     )
 }

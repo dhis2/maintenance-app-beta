@@ -84,4 +84,7 @@ export const VALIDATION_MESSAGES = {
     ),
     OPTIONGROUP_GROUP: i18n.t('Option group is required'),
     DISPLAY_WIDGET: i18n.t('Display widget is required'),
+    HIDESECTION_SECTION: i18n.t('Program stage section to hide is required'),
+    MESSAGE_TEMPLATE: i18n.t('Message template is required'),
+    HIDEPROGRAMSTAGE_STAGE: i18n.t('Program stage is required'),
 } as const

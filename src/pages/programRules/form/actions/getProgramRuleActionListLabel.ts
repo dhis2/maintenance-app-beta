@@ -60,6 +60,7 @@ export function getProgramRuleActionListLabel(
                     content,
                     target: dataAndField || '-',
                     nsSeparator: '~-~',
+                    interpolation: { escapeValue: false },
                 })
                 .replace(' ~-~ ', ' ')
         case 'SHOWERROR':
@@ -68,6 +69,7 @@ export function getProgramRuleActionListLabel(
                     content,
                     target: dataAndField || '-',
                     nsSeparator: '~-~',
+                    interpolation: { escapeValue: false },
                 })
                 .replace(' ~-~ ', ' ')
         case 'WARNINGONCOMPLETE':
@@ -76,6 +78,7 @@ export function getProgramRuleActionListLabel(
                     content,
                     target: dataAndField || '-',
                     nsSeparator: '~-~',
+                    interpolation: { escapeValue: false },
                 })
                 .replace(' ~-~ ', ' ')
         case 'ERRORONCOMPLETE':
@@ -84,6 +87,7 @@ export function getProgramRuleActionListLabel(
                     content,
                     target: dataAndField || '-',
                     nsSeparator: '~-~',
+                    interpolation: { escapeValue: false },
                 })
                 .replace(' ~-~ ', ' ')
         case 'DISPLAYTEXT':
@@ -92,6 +96,7 @@ export function getProgramRuleActionListLabel(
                     content,
                     location: locationOrField,
                     nsSeparator: '~-~',
+                    interpolation: { escapeValue: false },
                 })
                 .replace(' ~-~ ', ' ')
         case 'DISPLAYKEYVALUEPAIR':
@@ -100,6 +105,7 @@ export function getProgramRuleActionListLabel(
                     content,
                     location: locationOrField,
                     nsSeparator: '~-~',
+                    interpolation: { escapeValue: false },
                 })
                 .replace(' ~-~ ', ' ')
         case 'HIDEFIELD':
@@ -107,6 +113,7 @@ export function getProgramRuleActionListLabel(
                 .t('Hide field: {{target}}', {
                     target: dataAndField || '-',
                     nsSeparator: '~-~',
+                    interpolation: { escapeValue: false },
                 })
                 .replace(' ~-~ ', ' ')
         case 'SETMANDATORYFIELD':
@@ -114,6 +121,7 @@ export function getProgramRuleActionListLabel(
                 .t('Set mandatory field: {{target}}', {
                     target: dataAndField || '-',
                     nsSeparator: '~-~',
+                    interpolation: { escapeValue: false },
                 })
                 .replace(' ~-~ ', ' ')
         case 'HIDESECTION':
@@ -124,6 +132,7 @@ export function getProgramRuleActionListLabel(
                         programStageSection?.id ??
                         '-',
                     nsSeparator: '~-~',
+                    interpolation: { escapeValue: false },
                 })
                 .replace(' ~-~ ', ' ')
         case 'HIDEPROGRAMSTAGE':
@@ -131,6 +140,7 @@ export function getProgramRuleActionListLabel(
                 .t('Hide program stage: {{stage}}', {
                     stage: programStage?.displayName ?? programStage?.id ?? '-',
                     nsSeparator: '~-~',
+                    interpolation: { escapeValue: false },
                 })
                 .replace(' ~-~ ', ' ')
         case 'ASSIGN': {
@@ -148,6 +158,7 @@ export function getProgramRuleActionListLabel(
                     data: data || '-',
                     target: assignTarget || '-',
                     nsSeparator: '~-~',
+                    interpolation: { escapeValue: false },
                 })
                 .replace(' ~-~ ', ' ')
         }
@@ -156,6 +167,7 @@ export function getProgramRuleActionListLabel(
                 .t('Create event in program stage: {{stage}}', {
                     stage: programStage?.displayName ?? programStage?.id ?? '-',
                     nsSeparator: '~-~',
+                    interpolation: { escapeValue: false },
                 })
                 .replace(' ~-~ ', ' ')
         case 'SCHEDULEMESSAGE':
@@ -164,6 +176,7 @@ export function getProgramRuleActionListLabel(
                     template: templateUid || '-',
                     data: data || '',
                     nsSeparator: '~-~',
+                    interpolation: { escapeValue: false },
                 })
                 .replace(' ~-~ ', ' ')
         case 'SENDMESSAGE':
@@ -171,6 +184,7 @@ export function getProgramRuleActionListLabel(
                 .t('Send message: {{template}}', {
                     template: templateUid || '-',
                     nsSeparator: '~-~',
+                    interpolation: { escapeValue: false },
                 })
                 .replace(' ~-~ ', ' ')
         case 'HIDEOPTION':
@@ -179,6 +193,7 @@ export function getProgramRuleActionListLabel(
                     option: option?.displayName ?? option?.id ?? '-',
                     target: dataAndField || '-',
                     nsSeparator: '~-~',
+                    interpolation: { escapeValue: false },
                 })
                 .replace(' ~-~ ', ' ')
         case 'SHOWOPTIONGROUP':
@@ -187,6 +202,7 @@ export function getProgramRuleActionListLabel(
                     group: optionGroup?.displayName ?? optionGroup?.id ?? '-',
                     target: dataAndField || '-',
                     nsSeparator: '~-~',
+                    interpolation: { escapeValue: false },
                 })
                 .replace(' ~-~ ', ' ')
         case 'HIDEOPTIONGROUP':
@@ -195,6 +211,7 @@ export function getProgramRuleActionListLabel(
                     group: optionGroup?.displayName ?? optionGroup?.id ?? '-',
                     target: dataAndField || '-',
                     nsSeparator: '~-~',
+                    interpolation: { escapeValue: false },
                 })
                 .replace(' ~-~ ', ' ')
         default:

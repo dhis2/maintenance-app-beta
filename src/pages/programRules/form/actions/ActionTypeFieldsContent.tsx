@@ -89,18 +89,42 @@ function displayKeyValuePairFields(programId: string): ReactNode {
 }
 
 function hideFieldFields(programId: string): ReactNode {
+    const validateDataElement = (value: any, allValues: any) => {
+        const hasDE = !!value?.id
+        const hasTEA = !!allValues.trackedEntityAttribute?.id
+        return !hasDE && !hasTEA
+            ? i18n.t(
+                  'Select at least one: data element or tracked entity attribute'
+              )
+            : undefined
+    }
+
+    const validateTrackedEntityAttribute = (value: any, allValues: any) => {
+        const hasDE = !!allValues.dataElement?.id
+        const hasTEA = !!value?.id
+        return !hasDE && !hasTEA
+            ? i18n.t(
+                  'Select at least one: data element or tracked entity attribute'
+              )
+            : undefined
+    }
+
     return (
         <>
             <StandardFormField>
                 <DataElementField
                     programId={programId}
                     label={i18n.t('Data element to hide')}
+                    validateField={validateDataElement}
+                    disableIfOtherFieldSet="trackedEntityAttribute"
                 />
             </StandardFormField>
             <StandardFormField>
                 <TrackedEntityAttributeField
                     programId={programId}
                     label={i18n.t('Tracked entity attribute to hide')}
+                    validateField={validateTrackedEntityAttribute}
+                    disableIfOtherFieldSet="dataElement"
                 />
             </StandardFormField>
             <StandardFormField>
@@ -163,15 +187,13 @@ function setMandatoryFieldFields(programId: string): ReactNode {
             <StandardFormField>
                 <DataElementField
                     programId={programId}
-                    label={i18n.t('Data element to display error next to')}
+                    label={i18n.t('Data element')}
                 />
             </StandardFormField>
             <StandardFormField>
                 <TrackedEntityAttributeField
                     programId={programId}
-                    label={i18n.t(
-                        'Tracked entity attribute to display error next to'
-                    )}
+                    label={i18n.t('Tracked entity attribute')}
                 />
             </StandardFormField>
         </>

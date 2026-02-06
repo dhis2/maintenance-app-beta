@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
-import { useField, useFormState } from 'react-final-form'
+import { Field, useFormState } from 'react-final-form'
 import { useBoundResourceQueryFn } from '../../../lib'
 
 const NO_VALUE_OPTION = { value: '', label: i18n.t('(No Value)') }
@@ -11,10 +11,14 @@ export function DataElementField({
     programId,
     label,
     required,
+    validateField,
+    disableIfOtherFieldSet,
 }: Readonly<{
     programId: string
     label: string
     required?: boolean
+    validateField?: (value: any, allValues: any) => string | undefined
+    disableIfOtherFieldSet?: string
 }>) {
     const { values } = useFormState({ subscription: { values: true } })
     const queryFn = useBoundResourceQueryFn()
@@ -85,21 +89,62 @@ export function DataElementField({
         [elements, selectedId, selectedInList, currentValue?.displayName]
     )
 
-    const { input, meta } = useField('dataElement', {
-        format: (value: { id: string; displayName?: string } | undefined) =>
-            value?.id ?? '',
-        parse: (id: string) =>
-            id ? elements.find((e) => e.id === id) : undefined,
-    })
+    const disabled = disableIfOtherFieldSet
+        ? !!(values as any)[disableIfOtherFieldSet]?.id
+        : false
 
     return (
-        <SingleSelectFieldFF
-            input={input as any}
-            meta={meta as any}
-            label={label}
-            options={selectOptions}
-            required={required}
-            filterable
-        />
+        <Field
+            name="dataElement"
+            format={(value: { id: string; displayName?: string } | undefined) =>
+                value?.id ?? ''
+            }
+            parse={(id: string) =>
+                id ? elements.find((e) => e.id === id) : undefined
+            }
+            validate={
+                validateField
+                    ? validateField
+                    : required
+                    ? (
+                          value:
+                              | { id: string; displayName?: string }
+                              | undefined
+                      ) =>
+                          !value?.id
+                              ? i18n.t('This field is required')
+                              : undefined
+                    : undefined
+            }
+        >
+            {({ input, meta, ...rest }) => {
+                const showErrorAsTouched =
+                    meta.touched || (!!meta.submitFailed && !!meta.error)
+
+                return (
+                    <SingleSelectFieldFF
+                        input={{
+                            ...input,
+                            onChange: (value: unknown) => {
+                                input.onChange(value)
+                                input.onBlur()
+                            },
+                        }}
+                        meta={
+                            {
+                                ...meta,
+                                touched: showErrorAsTouched,
+                            } as any
+                        }
+                        label={label}
+                        options={selectOptions}
+                        required={required}
+                        disabled={disabled}
+                        filterable
+                        {...rest}
+                    />
+                )
+            }}
+        </Field>
     )
 }

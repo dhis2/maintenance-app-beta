@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
-import { useField, useForm, useFormState } from 'react-final-form'
+import { Field, useForm, useFormState } from 'react-final-form'
 import { useBoundResourceQueryFn } from '../../../lib'
 
 const NO_VALUE_OPTION = { value: '', label: i18n.t('(No Value)') }
@@ -77,32 +77,48 @@ export function TrackedEntityAttributeWithOptionSetField({
 
     const disabled = !!(values as any).dataElement?.id
 
-    const { input, meta } = useField('trackedEntityAttribute', {
-        format: (value: any) => value?.id ?? '',
-        parse: (id: string) =>
-            id ? attributes.find((a) => a.id === id) : undefined,
-    })
-
     return (
-        <SingleSelectFieldFF
-            input={
-                {
-                    ...input,
-                    onChange: (value: unknown) => {
-                        if (value) {
-                            form.change('dataElement', undefined)
-                            form.change('option', undefined)
-                            form.change('optionGroup', undefined)
-                        }
-                        input.onChange(value)
-                    },
-                } as typeof input
+        <Field
+            name="trackedEntityAttribute"
+            format={(value: any) => value?.id ?? ''}
+            parse={(id: string) =>
+                id ? attributes.find((a) => a.id === id) : undefined
             }
-            meta={meta as any}
-            label={label}
-            options={selectOptions}
-            disabled={disabled}
-            filterable
-        />
+        >
+            {({ input, meta, ...rest }) => {
+                const showErrorAsTouched =
+                    meta.touched || (!!meta.submitFailed && !!meta.error)
+
+                return (
+                    <SingleSelectFieldFF
+                        input={
+                            {
+                                ...input,
+                                onChange: (value: unknown) => {
+                                    if (value) {
+                                        form.change('dataElement', undefined)
+                                        form.change('option', undefined)
+                                        form.change('optionGroup', undefined)
+                                    }
+                                    input.onChange(value)
+                                    input.onBlur()
+                                },
+                            } as typeof input
+                        }
+                        meta={
+                            {
+                                ...meta,
+                                touched: showErrorAsTouched,
+                            } as any
+                        }
+                        label={label}
+                        options={selectOptions}
+                        disabled={disabled}
+                        filterable
+                        {...rest}
+                    />
+                )
+            }}
+        </Field>
     )
 }

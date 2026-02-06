@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
-import { useField } from 'react-final-form'
+import { Field } from 'react-final-form'
 import { useBoundResourceQueryFn } from '../../../lib'
 
 export function NotificationTemplateField({
@@ -65,19 +65,45 @@ export function NotificationTemplateField({
         [templates]
     )
 
-    const { input, meta } = useField('templateUid', {
-        format: (value: string | undefined) => value ?? '',
-        parse: (value: string) => value || undefined,
-    })
-
     return (
-        <SingleSelectFieldFF
-            input={input as any}
-            meta={meta as any}
-            label={i18n.t('Message template')}
-            options={selectOptions}
-            required={required}
-            filterable
-        />
+        <Field
+            name="templateUid"
+            format={(value: string | undefined) => value ?? ''}
+            parse={(value: string) => value || undefined}
+            validate={
+                required
+                    ? (value: string | undefined) =>
+                          !value ? i18n.t('This field is required') : undefined
+                    : undefined
+            }
+        >
+            {({ input, meta, ...rest }) => {
+                const showErrorAsTouched =
+                    meta.touched || (!!meta.submitFailed && !!meta.error)
+
+                return (
+                    <SingleSelectFieldFF
+                        input={{
+                            ...input,
+                            onChange: (value: unknown) => {
+                                input.onChange(value)
+                                input.onBlur()
+                            },
+                        }}
+                        meta={
+                            {
+                                ...meta,
+                                touched: showErrorAsTouched,
+                            } as any
+                        }
+                        label={i18n.t('Message template')}
+                        options={selectOptions}
+                        required={required}
+                        filterable
+                        {...rest}
+                    />
+                )
+            }}
+        </Field>
     )
 }

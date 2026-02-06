@@ -40,7 +40,6 @@ export const ProgramRuleActionForm = ({
     const initialValues: ProgramRuleActionFormValues = action
         ? { ...action, programRule: { id: programRuleId } }
         : {
-              programRuleActionType: programRuleActionType.SHOWWARNING,
               programRule: { id: programRuleId },
           }
 
@@ -58,7 +57,6 @@ export const ProgramRuleActionForm = ({
             initialValues={initialValues}
             validate={validateProgramRuleAction}
             validateOnChange={true}
-            subscription={{}}
             includeAttributes={false}
         >
             <ProgramRuleActionFormBody
