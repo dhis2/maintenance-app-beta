@@ -95,15 +95,11 @@ export function ProgramStageSelectField({
                                 input.onBlur()
                             },
                         }}
-                        meta={
-                            {
-                                ...meta,
-                                touched: showErrorAsTouched,
-                                initial: (
-                                    meta.initial as { id?: string } | undefined
-                                )?.id,
-                            } as any
-                        }
+                        meta={{
+                            ...meta,
+                            touched: showErrorAsTouched,
+                            initial: meta.initial?.id,
+                        }}
                         label={label || i18n.t('Program stage')}
                         options={selectOptions}
                         required={required}

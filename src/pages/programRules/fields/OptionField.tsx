@@ -97,15 +97,11 @@ export function OptionField({
                                 input.onBlur()
                             },
                         }}
-                        meta={
-                            {
-                                ...meta,
-                                touched: showErrorAsTouched,
-                                initial: (
-                                    meta.initial as { id?: string } | undefined
-                                )?.id,
-                            } as any
-                        }
+                        meta={{
+                            ...meta,
+                            touched: showErrorAsTouched,
+                            initial: meta.initial?.id,
+                        }}
                         label={label}
                         options={selectOptions}
                         disabled={!optionSetId}

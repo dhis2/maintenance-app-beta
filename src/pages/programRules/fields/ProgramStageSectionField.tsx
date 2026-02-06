@@ -111,15 +111,11 @@ export function ProgramStageSectionField({
                                 input.onBlur()
                             },
                         }}
-                        meta={
-                            {
-                                ...meta,
-                                touched: showErrorAsTouched,
-                                initial: (
-                                    meta.initial as { id?: string } | undefined
-                                )?.id,
-                            } as any
-                        }
+                        meta={{
+                            ...meta,
+                            touched: showErrorAsTouched,
+                            initial: meta.initial?.id,
+                        }}
                         label={i18n.t('Program stage section to hide')}
                         options={selectOptions}
                         required={required}

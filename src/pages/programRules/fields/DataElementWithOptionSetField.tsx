@@ -104,23 +104,21 @@ export function DataElementWithOptionSetField({
 
                 return (
                     <SingleSelectFieldFF
-                        input={
-                            {
-                                ...input,
-                                onChange: (value: unknown) => {
-                                    if (value) {
-                                        form.change(
-                                            'trackedEntityAttribute',
-                                            undefined
-                                        )
-                                        form.change('option', undefined)
-                                        form.change('optionGroup', undefined)
-                                    }
-                                    input.onChange(value)
-                                    input.onBlur()
-                                },
-                            } as typeof input
-                        }
+                        input={{
+                            ...input,
+                            onChange: (value: unknown) => {
+                                if (value) {
+                                    form.change(
+                                        'trackedEntityAttribute',
+                                        undefined
+                                    )
+                                    form.change('option', undefined)
+                                    form.change('optionGroup', undefined)
+                                }
+                                input.onChange(value)
+                                input.onBlur()
+                            },
+                        }}
                         meta={{
                             ...meta,
                             touched: showErrorAsTouched,
