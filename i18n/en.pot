@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-04T12:56:05.973Z\n"
-"PO-Revision-Date: 2026-02-04T12:56:05.973Z\n"
+"POT-Creation-Date: 2026-02-06T14:52:39.482Z\n"
+"PO-Revision-Date: 2026-02-06T14:52:39.482Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -359,27 +359,6 @@ msgstr "Value count"
 
 msgid "Zero or positive value count"
 msgstr "Zero or positive value count"
-
-msgid "Event count"
-msgstr "Event count"
-
-msgid "Enrollment date"
-msgstr "Enrollment date"
-
-msgid "Incident date"
-msgstr "Incident date"
-
-msgid "Enrollment id"
-msgstr "Enrollment id"
-
-msgid "Environment"
-msgstr "Environment"
-
-msgid "Event id"
-msgstr "Event id"
-
-msgid "Org unit code"
-msgstr "Org unit code"
 
 msgid "Variables"
 msgstr "Variables"
@@ -4263,6 +4242,12 @@ msgstr "Search available program indicators"
 msgid "Search selected program indicators"
 msgstr "Search selected program indicators"
 
+msgid "Incident date"
+msgstr "Incident date"
+
+msgid "Enrollment date"
+msgstr "Enrollment date"
+
 msgid "Before start of reporting period"
 msgstr "Before start of reporting period"
 
@@ -4415,6 +4400,9 @@ msgstr "Edit condition expression"
 msgid "Set up condition expression"
 msgstr "Set up condition expression"
 
+msgid "This field is required"
+msgstr "This field is required"
+
 msgid "Feedback"
 msgstr "Feedback"
 
@@ -4452,17 +4440,23 @@ msgstr "Only used for managing metadata, not shown with rule output"
 msgid "Explain the purpose of this program rule. Not shown with rule output."
 msgstr "Explain the purpose of this program rule. Not shown with rule output."
 
-msgid "Configure the program rule condition expression."
-msgstr "Configure the program rule condition expression."
+msgid "Set up the expression that checks when this program rule runs."
+msgstr "Set up the expression that checks when this program rule runs."
 
 msgid "Static text"
 msgstr "Static text"
+
+msgid "Static text is required"
+msgstr "Static text is required"
 
 msgid "Expression to evaluate and display after static text."
 msgstr "Expression to evaluate and display after static text."
 
 msgid "Key label"
 msgstr "Key label"
+
+msgid "Key label is required"
+msgstr "Key label is required"
 
 msgid "Expression to evaluate and display as value."
 msgstr "Expression to evaluate and display as value."
@@ -4508,6 +4502,33 @@ msgstr "Option group to show"
 
 msgid "Option group to hide"
 msgstr "Option group to hide"
+
+msgid "Edit action"
+msgstr "Edit action"
+
+msgid "Add action"
+msgstr "Add action"
+
+msgid "Configure the program rule action."
+msgstr "Configure the program rule action."
+
+msgid "Action type"
+msgstr "Action type"
+
+msgid "Save action"
+msgstr "Save action"
+
+msgid "Set up the actions that happen when the program rule runs."
+msgstr "Set up the actions that happen when the program rule runs."
+
+msgid "Action will be deleted when the program rule is saved."
+msgstr "Action will be deleted when the program rule is saved."
+
+msgid "Undo delete"
+msgstr "Undo delete"
+
+msgid "Program rule must be saved before actions can be added"
+msgstr "Program rule must be saved before actions can be added"
 
 msgid "Assign value"
 msgstr "Assign value"
@@ -4560,38 +4581,38 @@ msgstr "Show warning"
 msgid "Warning on complete"
 msgstr "Warning on complete"
 
-msgid "Edit action"
-msgstr "Edit action"
+msgid "Select a data element or tracked entity attribute with option set"
+msgstr "Select a data element or tracked entity attribute with option set"
 
-msgid "Add action"
-msgstr "Add action"
+msgid "Option to hide is required"
+msgstr "Option to hide is required"
 
-msgid "Configure the program rule action."
-msgstr "Configure the program rule action."
+msgid "Expression to evaluate and assign is required"
+msgstr "Expression to evaluate and assign is required"
 
-msgid "Action type"
-msgstr "Action type"
+msgid "Option group is required"
+msgstr "Option group is required"
 
-msgid "Save action"
-msgstr "Save action"
+msgid "Display widget is required"
+msgstr "Display widget is required"
 
-msgid "Configure actions for this program rule."
-msgstr "Configure actions for this program rule."
+msgid "Program stage section to hide is required"
+msgstr "Program stage section to hide is required"
 
-msgid "Action will be removed on save"
-msgstr "Action will be removed on save"
+msgid "Message template is required"
+msgstr "Message template is required"
 
-msgid "Restore action"
-msgstr "Restore action"
-
-msgid "Program rule must be saved before actions can be added"
-msgstr "Program rule must be saved before actions can be added"
+msgid "Program stage is required"
+msgstr "Program stage is required"
 
 msgid "field"
 msgstr "field"
 
 msgid "Program Rule"
 msgstr "Program Rule"
+
+msgid "Name (required)"
+msgstr "Name (required)"
 
 msgid "There was an error deleting stages: {{stagesNames}}"
 msgstr "There was an error deleting stages: {{stagesNames}}"
@@ -5506,11 +5527,3 @@ msgstr "Right side sliding window"
 
 msgid "Skip form validation"
 msgstr "Skip form validation"
-
-msgctxt "Application title"
-msgid "__MANIFEST_APP_TITLE"
-msgstr "Maintenance (Preview)"
-
-msgctxt "Application description"
-msgid "__MANIFEST_APP_DESCRIPTION"
-msgstr ""

@@ -22,6 +22,8 @@ import {
     TrackedEntityAttributeField,
     TrackedEntityAttributeWithOptionSetField,
 } from '../../fields'
+import styles from './ProgramRuleActionForm.module.css'
+
 const AT = ProgramRuleAction.programRuleActionType
 
 type ActionFieldsRenderer = (programId: string) => ReactNode

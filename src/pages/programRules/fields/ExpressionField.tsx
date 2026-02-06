@@ -3,6 +3,7 @@ import React from 'react'
 import { ExpressionBuilderEntry } from '../../../components'
 import { PaddedContainer } from '../../../components/ExpressionBuilder/PaddedContainer'
 import { SECTIONS_MAP } from '../../../lib'
+import styles from '../form/actions/ProgramRuleActionForm.module.css'
 
 export function ExpressionField({
     fieldName = 'data',
@@ -31,9 +32,7 @@ export function ExpressionField({
                     validateProperty={fieldName}
                 />
             </PaddedContainer>
-            <span style={{ color: 'var(--colors-grey600)', fontSize: '14px' }}>
-                {label}
-            </span>
+            <span className={styles.expressionLabel}>{label}</span>
         </>
     )
 }

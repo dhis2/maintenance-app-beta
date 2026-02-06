@@ -20,6 +20,7 @@ import { ListInFormItem } from '../../../../components/formCreators/SectionFormL
 import { SchemaName } from '../../../../types'
 import { getProgramRuleActionListLabel } from './getProgramRuleActionListLabel'
 import { ProgramRuleActionForm } from './ProgramRuleActionForm'
+import styles from './ProgramRuleActionForm.module.css'
 import type { ProgramRuleActionListItem } from './types'
 
 export type { ProgramRuleActionListItem } from './types'
@@ -38,7 +39,9 @@ export const ProgramRuleActionsFormContents = React.memo(
                     {i18n.t('Actions')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t('Configure actions for this program rule.')}
+                    {i18n.t(
+                        'Set up the actions that happen when the program rule runs.'
+                    )}
                 </StandardFormSectionDescription>
                 <ProgramRuleActionListNewOrEdit />
             </SectionedFormSection>
@@ -132,22 +135,20 @@ const ProgramRuleActionListNewOrEdit = () => {
                                 return (
                                     <div
                                         key={key}
-                                        style={{
-                                            padding: '8px',
-                                            backgroundColor: '#f5f5f5',
-                                            marginBottom: '8px',
-                                        }}
+                                        className={styles.deletedActionBox}
                                     >
-                                        <div>
+                                        <div
+                                            className={styles.deletedActionText}
+                                        >
                                             {i18n.t(
-                                                'Action will be removed on save'
+                                                'Action will be deleted when the program rule is saved.'
                                             )}
                                         </div>
                                         <Button
                                             small
                                             onClick={() => handleRestore(index)}
                                         >
-                                            {i18n.t('Restore action')}
+                                            {i18n.t('Undo delete')}
                                         </Button>
                                     </div>
                                 )
@@ -173,7 +174,7 @@ const ProgramRuleActionListNewOrEdit = () => {
                         })}
                     </div>
 
-                    <div>
+                    <div style={{ marginTop: 16 }}>
                         <Button
                             secondary
                             small

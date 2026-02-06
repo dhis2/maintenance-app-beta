@@ -12,7 +12,7 @@ export const ProgramRuleFormDescriptor = {
             fields: [
                 {
                     name: 'name',
-                    label: i18n.t('Name'),
+                    label: i18n.t('Name (required)'),
                 },
                 {
                     name: 'description',

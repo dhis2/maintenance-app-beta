@@ -86,7 +86,9 @@ export const ProgramRuleFormFields = () => {
                     {i18n.t('Expression')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t('Configure the program rule condition expression.')}
+                    {i18n.t(
+                        'Set up the expression that checks when this program rule runs.'
+                    )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <ConditionField programId={programInput?.value?.id} />
