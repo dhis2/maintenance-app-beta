@@ -1,9 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, IconAdd16, NoticeBox } from '@dhis2/ui'
-import React from 'react'
+import React, { useState } from 'react'
 import { useFieldArray } from 'react-final-form-arrays'
 import { useParams } from 'react-router-dom'
 import {
+    DrawerFooter,
     DrawerPortal,
     SectionedFormSection,
     StandardFormSectionDescription,
@@ -14,9 +15,10 @@ import { SchemaName } from '../../../types'
 import { Access, DisplayableModel } from '../../../types/models'
 import {
     EditOrNewStageForm,
+    StageFormActions,
     SubmittedStageFormValues,
 } from './programStage/StageForm'
-import css from './ProgramStagesForm.module.css'
+import css from './programStage/StageForm.module.css'
 
 export type ProgramStageListItem = {
     id: string
@@ -50,6 +52,9 @@ const ProgramStageListNewOrEdit = () => {
     const [stageFormOpen, setStageFormOpen] = React.useState<
         DisplayableModel | null | undefined
     >()
+    const [formActions, setFormActions] = useState<StageFormActions | null>(
+        null
+    )
     const isStageFormOpen = !!stageFormOpen || stageFormOpen === null
 
     const handleDeletedStage = (index: number) => {
@@ -94,7 +99,33 @@ const ProgramStageListNewOrEdit = () => {
 
     const onCloseStageForm = () => {
         setStageFormOpen(undefined)
+        setFormActions(null)
     }
+
+    const stageFormFooter = formActions && (
+        <DrawerFooter
+            actions={[
+                {
+                    label: i18n.t('Save stage and close'),
+                    onClick: formActions.saveAndClose,
+                    primary: true,
+                },
+                {
+                    label: i18n.t('Save stage'),
+                    onClick: formActions.save,
+                    secondary: true,
+                },
+                {
+                    label: i18n.t('Cancel'),
+                    onClick: onCloseStageForm,
+                    secondary: true,
+                },
+            ]}
+            infoMessage={i18n.t(
+                'Saving a stage does not save other changes to the program'
+            )}
+        />
+    )
 
     // program stages cannot be added until program is saved
     if (!modelId) {
@@ -107,15 +138,22 @@ const ProgramStageListNewOrEdit = () => {
 
     return (
         <>
-            <DrawerPortal isOpen={isStageFormOpen} onClose={onCloseStageForm}>
+            <DrawerPortal
+                isOpen={isStageFormOpen}
+                onClose={onCloseStageForm}
+                header={
+                    stageFormOpen === null
+                        ? i18n.t('New stage')
+                        : i18n.t('Edit stage')
+                }
+                footer={stageFormFooter}
+            >
                 {stageFormOpen !== undefined && (
-                    <div>
-                        <EditOrNewStageForm
-                            stage={stageFormOpen}
-                            onCancel={onCloseStageForm}
-                            onSubmitted={handleSubmittedStage}
-                        />
-                    </div>
+                    <EditOrNewStageForm
+                        stage={stageFormOpen}
+                        onSubmitted={handleSubmittedStage}
+                        onActionsReady={setFormActions}
+                    />
                 )}
             </DrawerPortal>
 

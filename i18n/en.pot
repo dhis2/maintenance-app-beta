@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-03T14:47:59.077Z\n"
-"PO-Revision-Date: 2026-02-03T14:47:59.077Z\n"
+"POT-Creation-Date: 2026-02-06T15:47:39.316Z\n"
+"PO-Revision-Date: 2026-02-06T15:47:39.317Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -660,6 +660,18 @@ msgstr "value type"
 
 msgid "undefined"
 msgstr "undefined"
+
+msgid "Save section"
+msgstr "Save section"
+
+msgid "Saving a section does not save other changes to the data set"
+msgstr "Saving a section does not save other changes to the data set"
+
+msgid "New section"
+msgstr "New section"
+
+msgid "Edit section"
+msgstr "Edit section"
 
 msgid "Sections"
 msgstr "Sections"
@@ -3013,12 +3025,6 @@ msgstr "HTML links and basic styling can be included"
 msgid "Content to display after a section"
 msgstr "Content to display after a section"
 
-msgid "Save section"
-msgstr "Save section"
-
-msgid "Saving a section does not save other changes to the data set"
-msgstr "Saving a section does not save other changes to the data set"
-
 msgid "Disabled"
 msgstr "Disabled"
 
@@ -3436,20 +3442,26 @@ msgstr "Option Set"
 msgid "Set up the information for this option."
 msgstr "Set up the information for this option."
 
-msgid "Save option"
-msgstr "Save option"
-
-msgid "Saving an option does not save other changes to the option set"
-msgstr "Saving an option does not save other changes to the option set"
-
 msgid "Option created"
 msgstr "Option created"
 
 msgid "Option updated"
 msgstr "Option updated"
 
+msgid "Save option"
+msgstr "Save option"
+
+msgid "Saving an option does not save other changes to the option set"
+msgstr "Saving an option does not save other changes to the option set"
+
 msgid "Option set must be saved before options can be added"
 msgstr "Option set must be saved before options can be added"
+
+msgid "New option"
+msgstr "New option"
+
+msgid "Edit option"
+msgstr "Edit option"
 
 msgid "Define options for this option set"
 msgstr "Define options for this option set"
@@ -4578,8 +4590,23 @@ msgstr "Program Stages"
 msgid "Set up stages in this program."
 msgstr "Set up stages in this program."
 
+msgid "Save stage and close"
+msgstr "Save stage and close"
+
+msgid "Save stage"
+msgstr "Save stage"
+
+msgid "Saving a stage does not save other changes to the program"
+msgstr "Saving a stage does not save other changes to the program"
+
 msgid "Program must be saved before stages can be added"
 msgstr "Program must be saved before stages can be added"
+
+msgid "New stage"
+msgstr "New stage"
+
+msgid "Edit stage"
+msgstr "Edit stage"
 
 msgid "No program stages have been added yet"
 msgstr "No program stages have been added yet"
@@ -4715,15 +4742,6 @@ msgstr "Stage"
 
 msgid "Stages"
 msgstr "Stages"
-
-msgid "Save stage and close"
-msgstr "Save stage and close"
-
-msgid "Save stage"
-msgstr "Save stage"
-
-msgid "Saving a stage does not save other changes to the program"
-msgstr "Saving a stage does not save other changes to the program"
 
 msgid "Stage form saved"
 msgstr "Stage form saved"
@@ -5301,3 +5319,11 @@ msgstr "Right side sliding window"
 
 msgid "Skip form validation"
 msgstr "Skip form validation"
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Maintenance (Preview)"
+
+msgctxt "Application description"
+msgid "__MANIFEST_APP_DESCRIPTION"
+msgstr ""

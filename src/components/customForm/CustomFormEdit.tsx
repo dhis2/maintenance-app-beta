@@ -1,11 +1,9 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip, NoticeBox } from '@dhis2/ui'
-import { IconInfo16 } from '@dhis2/ui-icons'
-import React, { useEffect, useRef, useState } from 'react'
+import { Button, NoticeBox } from '@dhis2/ui'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useField } from 'react-final-form'
 import {
-    FormFooterWrapper,
     SectionedFormErrorNotice,
     SectionedFormSection,
     SectionedFormSections,
@@ -19,8 +17,12 @@ import {
     ElementTypes,
 } from './CustomFormElementsSelector'
 
+export type CustomFormActions = {
+    save: () => void
+    saving: boolean
+}
+
 export type CustomFormProps = {
-    closeCustomFormEdit?: () => void
     loading: boolean
     refetch: () => void
     elementTypes: ElementTypes
@@ -31,6 +33,7 @@ export type CustomFormProps = {
         existingFormId: string | undefined
     ) => Promise<unknown>
     customFormTarget: string
+    onActionsReady?: (actions: CustomFormActions) => void
 }
 
 const SubsectionSpacer = ({ children }: { children: React.ReactNode }) => (
@@ -85,12 +88,12 @@ export type CustomFormDataPayload = {
 }
 
 export const CustomFormEdit = ({
-    closeCustomFormEdit,
     loading,
     refetch,
     elementTypes,
     updateCustomForm,
     customFormTarget,
+    onActionsReady,
 }: CustomFormProps) => {
     const textAreaRef = useRef<HTMLTextAreaElement>(null)
     const [previewMode, setPreviewMode] = useState<boolean>(false)
@@ -139,174 +142,136 @@ export const CustomFormEdit = ({
         success: true,
     })
 
-    const onSuccess = (data: CustomFormDataPayload) => {
-        showSuccess({ success: true })
-        // update form state
-        formInput.onChange({
-            ...formInput.value,
-            ...data,
-        })
+    const onActionsReadyRef = React.useRef(onActionsReady)
+    onActionsReadyRef.current = onActionsReady
 
-        // close module
-        if (closeCustomFormEdit) {
-            closeCustomFormEdit()
+    const handleSave = useCallback(() => {
+        const formId = formInput?.value?.id ?? generateDhis2Id()
+        const htmlCode = textAreaRef.current?.value ?? ''
+        setCustomFormSaving(true)
+        setCustomFormError('')
+
+        const onSuccess = (data: CustomFormDataPayload) => {
+            showSuccess({ success: true })
+            formInput.onChange({
+                ...formInput.value,
+                ...data,
+            })
+            setCustomFormSaving(false)
         }
-    }
 
-    const onError = (e: Error) => {
-        setCustomFormSaving(false)
-        setCustomFormError(e.message)
-    }
+        const onError = (e: Error) => {
+            setCustomFormSaving(false)
+            setCustomFormError(e.message)
+        }
+
+        const data = formInput?.value?.id
+            ? {
+                  htmlCode,
+                  id: formId,
+              }
+            : {
+                  htmlCode,
+                  id: formId,
+                  name: nameInput?.value,
+              }
+        updateCustomForm(data, onSuccess, onError, formInput?.value?.id)
+    }, [formInput, nameInput, updateCustomForm, showSuccess])
+
+    useEffect(() => {
+        onActionsReadyRef.current?.({
+            save: handleSave,
+            saving: customFormSaving,
+        })
+    }, [handleSave, customFormSaving])
 
     return (
-        <div className={styles.sectionsWrapper}>
-            <div>
-                <SectionedFormSections>
-                    <SectionedFormSection name="customFormEdit">
-                        <StandardFormSectionTitle>
-                            {previewMode
-                                ? i18n.t('Custom form (preview)')
-                                : i18n.t('Custom form')}
-                        </StandardFormSectionTitle>
-                        <StandardFormSectionDescription>
-                            {i18n.t(
-                                `Define a custom form for this {{customFormTarget}} by editing HTML below.`,
-                                { customFormTarget }
+        <>
+            <SectionedFormSections>
+                <SectionedFormSection name="customFormEdit">
+                    <StandardFormSectionTitle>
+                        {previewMode
+                            ? i18n.t('Custom form (preview)')
+                            : i18n.t('Custom form')}
+                    </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        {i18n.t(
+                            `Define a custom form for this {{customFormTarget}} by editing HTML below.`,
+                            { customFormTarget }
+                        )}
+                    </StandardFormSectionDescription>
+                    <div
+                        className={
+                            customFormError?.length > 0
+                                ? styles.customFormEditContainerWithError
+                                : styles.customFormEditContainer
+                        }
+                    >
+                        <div className={styles.customFormInputContainer}>
+                            <Button
+                                className={styles.formSectionSpacing}
+                                small
+                                onClick={() => {
+                                    setPreviewMode((prev) => !prev)
+                                }}
+                            >
+                                {previewMode
+                                    ? i18n.t('Edit')
+                                    : i18n.t('Preview')}
+                            </Button>
+                            {previewMode && (
+                                <SubsectionSpacer>
+                                    {textAreaRef?.current?.value?.length ===
+                                    0 ? (
+                                        <NoticeBox warning>
+                                            {i18n.t('Nothing to preview')}
+                                        </NoticeBox>
+                                    ) : (
+                                        <iframe
+                                            srcDoc={textAreaRef.current?.value}
+                                            className={styles.iframeStyling}
+                                            title={i18n.t(
+                                                'Preview of custom form'
+                                            )}
+                                            sandbox="allow-same-origin"
+                                        ></iframe>
+                                    )}
+                                </SubsectionSpacer>
                             )}
-                        </StandardFormSectionDescription>
-                        <div
-                            className={
-                                customFormError?.length > 0
-                                    ? styles.customFormEditContainerWithError
-                                    : styles.customFormEditContainer
-                            }
-                        >
-                            <div className={styles.customFormInputContainer}>
-                                <Button
-                                    className={styles.formSectionSpacing}
-                                    small
-                                    onClick={() => {
-                                        setPreviewMode((prev) => !prev)
-                                    }}
-                                >
-                                    {previewMode
-                                        ? i18n.t('Edit')
-                                        : i18n.t('Preview')}
-                                </Button>
-                                {previewMode && (
-                                    <SubsectionSpacer>
-                                        {textAreaRef?.current?.value?.length ===
-                                        0 ? (
-                                            <NoticeBox warning>
-                                                {i18n.t('Nothing to preview')}
-                                            </NoticeBox>
-                                        ) : (
-                                            <iframe
-                                                srcDoc={
-                                                    textAreaRef.current?.value
-                                                }
-                                                className={styles.iframeStyling}
-                                                title={i18n.t(
-                                                    'Preview of custom form'
-                                                )}
-                                                sandbox="allow-same-origin"
-                                            ></iframe>
-                                        )}
-                                    </SubsectionSpacer>
-                                )}
 
-                                <textarea
-                                    className={
-                                        previewMode
-                                            ? styles.textAreaHidden
-                                            : styles.textAreaStyling
-                                    }
-                                    ref={textAreaRef}
-                                ></textarea>
-                            </div>
-                            <div className={styles.customFormElementsContainer}>
-                                <LoadingCustomFormElementsSelector
-                                    insertElement={insertElement}
-                                    previewMode={previewMode}
-                                    loading={loading}
-                                    elementTypes={elementTypes}
-                                />
-                            </div>
+                            <textarea
+                                className={
+                                    previewMode
+                                        ? styles.textAreaHidden
+                                        : styles.textAreaStyling
+                                }
+                                ref={textAreaRef}
+                            ></textarea>
                         </div>
-                    </SectionedFormSection>
-                </SectionedFormSections>
-                <SectionedFormErrorNotice />
-                {customFormError?.length > 0 && (
-                    <div className={styles.errorNoticeWrapper}>
-                        <NoticeBox
-                            error
-                            title={i18n.t(
-                                'Something went wrong when submitting the form'
-                            )}
-                        >
-                            {customFormError}
-                        </NoticeBox>
+                        <div className={styles.customFormElementsContainer}>
+                            <LoadingCustomFormElementsSelector
+                                insertElement={insertElement}
+                                previewMode={previewMode}
+                                loading={loading}
+                                elementTypes={elementTypes}
+                            />
+                        </div>
                     </div>
-                )}
-            </div>
-            <div>
-                <FormFooterWrapper>
-                    <ButtonStrip>
-                        <Button
-                            primary
-                            small
-                            type="button"
-                            dataTest="form-submit-button"
-                            disabled={customFormSaving}
-                            onClick={() => {
-                                const formId =
-                                    formInput?.value?.id ?? generateDhis2Id()
-                                const htmlCode =
-                                    textAreaRef.current?.value ?? ''
-                                setCustomFormSaving(true)
-                                setCustomFormError('')
-
-                                const data = formInput?.value?.id
-                                    ? {
-                                          htmlCode,
-                                          id: formId,
-                                      }
-                                    : {
-                                          htmlCode,
-                                          id: formId,
-                                          name: nameInput?.value,
-                                      }
-                                updateCustomForm(
-                                    data,
-                                    onSuccess,
-                                    onError,
-                                    formInput?.value?.id
-                                )
-                            }}
-                        >
-                            {i18n.t('Save custom form')}
-                        </Button>
-                        <Button
-                            secondary
-                            small
-                            onClick={closeCustomFormEdit}
-                            dataTest="form-cancel-link"
-                            disabled={customFormSaving}
-                        >
-                            {i18n.t('Cancel')}
-                        </Button>
-                    </ButtonStrip>
-                    <div className={styles.actionsInfo}>
-                        <IconInfo16 />
-                        <p>
-                            {i18n.t(
-                                `Saving a custom form does not save other changes to the {{customFormTarget}}`,
-                                { customFormTarget }
-                            )}
-                        </p>
-                    </div>
-                </FormFooterWrapper>
-            </div>
-        </div>
+                </SectionedFormSection>
+            </SectionedFormSections>
+            <SectionedFormErrorNotice />
+            {customFormError?.length > 0 && (
+                <div className={styles.errorNoticeWrapper}>
+                    <NoticeBox
+                        error
+                        title={i18n.t(
+                            'Something went wrong when submitting the form'
+                        )}
+                    >
+                        {customFormError}
+                    </NoticeBox>
+                </div>
+            )}
+        </>
     )
 }

@@ -4,11 +4,11 @@
 
 .drawerOverlay {
     position: fixed;
-    top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
     display: flex;
     justify-content: flex-end;
     opacity: 0;
@@ -24,15 +24,17 @@
 
 .drawer {
     height: 100%;
+    max-height: 100%;
     background-color: var(--colors-white);
     transform: translateX(100%);
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .drawerPrimary {
-    width: 90%;
+    width: 95vw;
 }
 
 .drawerSecondary {
@@ -41,4 +43,60 @@
 
 .drawer.open {
     transform: translateX(0);
+}
+
+.drawerContents {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.drawerHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacers-dp4) var(--spacers-dp8) var(--spacers-dp4)
+        var(--spacers-dp12);
+    background-color: var(--colors-grey300);
+    border-bottom: 1px solid var(--colors-grey400);
+    flex-shrink: 0;
+}
+
+.drawerHeaderContent {
+    flex: 1;
+}
+
+.drawerCloseButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: var(--spacers-dp4);
+    cursor: pointer;
+    border-radius: var(--spacers-dp4);
+    color: var(--colors-grey700);
+}
+
+.drawerCloseButton:hover {
+    background-color: var(--colors-grey400);
+}
+
+.drawerCloseButton:focus {
+    outline: 2px solid var(--colors-blue600);
+    outline-offset: -2px;
+}
+
+.drawerBody {
+    flex: 1 1 0;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+.drawerFooter {
+    flex-shrink: 0;
+    padding: var(--spacers-dp8);
+    border-top: 1px solid var(--colors-grey300);
+    background-color: var(--colors-white);
 }

@@ -5,13 +5,18 @@ import React, { useState } from 'react'
 import { useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
+    DrawerFooter,
     SectionedFormSection,
     StandardFormSectionTitle,
     StandardFormSectionDescription,
     DrawerPortal,
 } from '../../../../components'
 import { useSchemaSectionHandleOrThrow } from '../../../../lib'
-import { EditOrNewOptionForm, SubmittedOptionFormValues } from './OptionEdit'
+import {
+    EditOrNewOptionForm,
+    OptionFormActions,
+    SubmittedOptionFormValues,
+} from './OptionEdit'
 import { OptionsListTable, DrawerState, OptionDetail } from './OptionsListTable'
 
 const OptionListNewOrEdit = () => {
@@ -26,6 +31,10 @@ const OptionListNewOrEdit = () => {
         open: false,
         id: undefined,
     })
+    const [formActions, setFormActions] = useState<OptionFormActions | null>(
+        null
+    )
+
     const onSubmitted = (values: SubmittedOptionFormValues) => {
         const newOptions = [...optionsInput.value]
 
@@ -41,7 +50,35 @@ const OptionListNewOrEdit = () => {
         show({ isNew: index === -1 })
         setOptionsDrawerState({ open: false, id: undefined })
     }
-    // options cannot be added until option set is saved
+
+    const onCloseOptionForm = () => {
+        setOptionsDrawerState({ open: false, id: undefined })
+        setFormActions(null)
+    }
+
+    const optionFormFooter = formActions && (
+        <DrawerFooter
+            actions={[
+                {
+                    label: i18n.t('Save option'),
+                    onClick: formActions.save,
+                    primary: true,
+                    disabled: formActions.submitting,
+                    loading: formActions.submitting,
+                },
+                {
+                    label: i18n.t('Cancel'),
+                    onClick: onCloseOptionForm,
+                    secondary: true,
+                    disabled: formActions.submitting,
+                },
+            ]}
+            infoMessage={i18n.t(
+                'Saving an option does not save other changes to the option set'
+            )}
+        />
+    )
+
     if (!modelId) {
         return (
             <NoticeBox>
@@ -53,19 +90,18 @@ const OptionListNewOrEdit = () => {
         <>
             <DrawerPortal
                 isOpen={optionsDrawerState.open}
-                onClose={() => {
-                    setOptionsDrawerState({ open: false, id: undefined })
-                }}
+                onClose={onCloseOptionForm}
+                header={
+                    optionsDrawerState.id === undefined
+                        ? i18n.t('New option')
+                        : i18n.t('Edit option')
+                }
+                footer={optionFormFooter}
             >
                 <EditOrNewOptionForm
                     onSubmitted={onSubmitted}
                     option={optionsDrawerState?.id}
-                    onCancel={() => {
-                        setOptionsDrawerState({
-                            open: false,
-                            id: undefined,
-                        })
-                    }}
+                    onActionsReady={setFormActions}
                 />
             </DrawerPortal>
             <OptionsListTable setOptionsDrawerState={setOptionsDrawerState} />
