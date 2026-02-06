@@ -104,8 +104,10 @@ export const ExpressionBuilder = ({
     const { input: expressionInput } = useField(fieldName)
     const expressionRef = useRef<HTMLTextAreaElement>(null)
 
-    const [validate, validating, validatedValue] =
-        useExpressionValidator(validationResource)
+    const [validate, validating, validatedValue] = useExpressionValidator(
+        validationResource,
+        programId
+    )
     const [validationResponse, setValidationResponse] =
         useState<ValidationResult | null>(null)
     const [isEmpty, setIsEmpty] = useState<boolean>(false)

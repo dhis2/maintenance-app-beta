@@ -34,6 +34,7 @@ const complexKeys = [
     'trackedEntityTypeAttributes',
     'programTrackedEntityAttributes',
     'programStageDataElements',
+    'programRuleActions',
 ] as const
 export const sanitizeDirtyValueKeys = (dirtyKeys: string[]) => {
     const complexChanges = complexKeys.filter((complexKey) =>

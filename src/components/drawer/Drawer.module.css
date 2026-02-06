@@ -14,7 +14,7 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
-    z-index: 2;
+    z-index: 100;
 }
 
 .drawerOverlay.open {
@@ -29,6 +29,8 @@
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
+    position: relative;
+    z-index: 101;
 }
 
 .drawerPrimary {
