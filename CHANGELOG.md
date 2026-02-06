@@ -1,3 +1,10 @@
+## [0.122.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.122.1...v0.122.2) (2026-02-04)
+
+
+### Bug Fixes
+
+* data element aggregation level in ou hierarchy ([6cbcce1](https://github.com/dhis2/maintenance-app-beta/commit/6cbcce15287599394618e7f95882d9cb262738b2))
+
 ## [0.122.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.122.0...v0.122.1) (2026-02-03)
 
 
