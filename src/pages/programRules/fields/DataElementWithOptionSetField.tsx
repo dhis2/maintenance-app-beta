@@ -121,12 +121,10 @@ export function DataElementWithOptionSetField({
                                 },
                             } as typeof input
                         }
-                        meta={
-                            {
-                                ...meta,
-                                touched: showErrorAsTouched,
-                            } as any
-                        }
+                        meta={{
+                            ...meta,
+                            touched: showErrorAsTouched,
+                        }}
                         label={label}
                         options={selectOptions}
                         disabled={disabled}

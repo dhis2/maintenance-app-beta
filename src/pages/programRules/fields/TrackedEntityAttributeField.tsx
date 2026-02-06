@@ -78,8 +78,14 @@ export function TrackedEntityAttributeField({
     )
 
     const disabled = disableIfOtherFieldSet
-        ? !!(values as any)[disableIfOtherFieldSet]?.id
+        ? !!(values as Record<string, { id?: string } | undefined>)[
+              disableIfOtherFieldSet
+          ]?.id
         : false
+
+    const requiredValidator = (
+        value: { id: string; displayName?: string } | undefined
+    ) => (value?.id ? undefined : i18n.t('This field is required'))
 
     return (
         <Field
@@ -91,18 +97,7 @@ export function TrackedEntityAttributeField({
                 id ? attributes.find((a) => a.id === id) : undefined
             }
             validate={
-                validateField
-                    ? validateField
-                    : required
-                    ? (
-                          value:
-                              | { id: string; displayName?: string }
-                              | undefined
-                      ) =>
-                          !value?.id
-                              ? i18n.t('This field is required')
-                              : undefined
-                    : undefined
+                validateField ?? (required ? requiredValidator : undefined)
             }
         >
             {({ input, meta, ...rest }) => {
@@ -122,7 +117,9 @@ export function TrackedEntityAttributeField({
                             {
                                 ...meta,
                                 touched: showErrorAsTouched,
-                            } as any
+                            } as React.ComponentProps<
+                                typeof SingleSelectFieldFF
+                            >['meta']
                         }
                         label={label}
                         options={selectOptions}

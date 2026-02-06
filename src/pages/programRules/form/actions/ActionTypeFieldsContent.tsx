@@ -22,7 +22,6 @@ import {
     TrackedEntityAttributeField,
     TrackedEntityAttributeWithOptionSetField,
 } from '../../fields'
-import styles from './ProgramRuleActionForm.module.css'
 
 const AT = ProgramRuleAction.programRuleActionType
 
@@ -41,9 +40,9 @@ function displayTextFields(programId: string): ReactNode {
                     component={InputFieldFF}
                     required
                     validate={(value: string | undefined) =>
-                        !value?.trim()
-                            ? i18n.t('Static text is required')
-                            : undefined
+                        value?.trim()
+                            ? undefined
+                            : i18n.t('Static text is required')
                     }
                 />
             </StandardFormField>
@@ -72,9 +71,9 @@ function displayKeyValuePairFields(programId: string): ReactNode {
                     component={InputFieldFF}
                     required
                     validate={(value: string | undefined) =>
-                        !value?.trim()
-                            ? i18n.t('Key label is required')
-                            : undefined
+                        value?.trim()
+                            ? undefined
+                            : i18n.t('Key label is required')
                     }
                 />
             </StandardFormField>
@@ -165,9 +164,9 @@ function messageActionFields(programId: string, isWarning: boolean): ReactNode {
                     component={InputFieldFF}
                     required
                     validate={(value: string | undefined) =>
-                        !value?.trim()
-                            ? i18n.t('Static text is required')
-                            : undefined
+                        value?.trim()
+                            ? undefined
+                            : i18n.t('Static text is required')
                     }
                 />
             </StandardFormField>

@@ -92,9 +92,9 @@ export function ProgramStageSectionField({
                               | { id: string; displayName?: string }
                               | undefined
                       ) =>
-                          !value?.id
-                              ? i18n.t('This field is required')
-                              : undefined
+                          value?.id
+                              ? undefined
+                              : i18n.t('This field is required')
                     : undefined
             }
         >
@@ -115,6 +115,9 @@ export function ProgramStageSectionField({
                             {
                                 ...meta,
                                 touched: showErrorAsTouched,
+                                initial: (
+                                    meta.initial as { id?: string } | undefined
+                                )?.id,
                             } as any
                         }
                         label={i18n.t('Program stage section to hide')}

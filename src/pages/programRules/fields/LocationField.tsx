@@ -18,7 +18,7 @@ export function LocationField({ required }: Readonly<{ required?: boolean }>) {
             validate={
                 required
                     ? (value: string | undefined) =>
-                          !value ? i18n.t('This field is required') : undefined
+                          value ? undefined : i18n.t('This field is required')
                     : undefined
             }
         >
@@ -35,12 +35,10 @@ export function LocationField({ required }: Readonly<{ required?: boolean }>) {
                                 input.onBlur()
                             },
                         }}
-                        meta={
-                            {
-                                ...meta,
-                                touched: showErrorAsTouched,
-                            } as any
-                        }
+                        meta={{
+                            ...meta,
+                            touched: showErrorAsTouched,
+                        }}
                         label={i18n.t('Display widget')}
                         options={LOCATION_OPTIONS}
                         required={required}

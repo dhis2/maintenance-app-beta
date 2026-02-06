@@ -73,7 +73,7 @@ export function NotificationTemplateField({
             validate={
                 required
                     ? (value: string | undefined) =>
-                          !value ? i18n.t('This field is required') : undefined
+                          value ? undefined : i18n.t('This field is required')
                     : undefined
             }
         >
@@ -90,12 +90,10 @@ export function NotificationTemplateField({
                                 input.onBlur()
                             },
                         }}
-                        meta={
-                            {
-                                ...meta,
-                                touched: showErrorAsTouched,
-                            } as any
-                        }
+                        meta={{
+                            ...meta,
+                            touched: showErrorAsTouched,
+                        }}
                         label={i18n.t('Message template')}
                         options={selectOptions}
                         required={required}

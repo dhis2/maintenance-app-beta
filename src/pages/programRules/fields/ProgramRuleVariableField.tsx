@@ -60,12 +60,10 @@ export function ProgramRuleVariableField({
                                 input.onBlur()
                             },
                         }}
-                        meta={
-                            {
-                                ...meta,
-                                touched: showErrorAsTouched,
-                            } as any
-                        }
+                        meta={{
+                            ...meta,
+                            touched: showErrorAsTouched,
+                        }}
                         label={i18n.t('Program rule variable to assign to')}
                         options={selectOptions}
                         filterable

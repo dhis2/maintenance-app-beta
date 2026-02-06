@@ -76,9 +76,9 @@ export function ProgramStageSelectField({
                               | { id: string; displayName?: string }
                               | undefined
                       ) =>
-                          !value?.id
-                              ? i18n.t('This field is required')
-                              : undefined
+                          value?.id
+                              ? undefined
+                              : i18n.t('This field is required')
                     : undefined
             }
         >
@@ -99,6 +99,9 @@ export function ProgramStageSelectField({
                             {
                                 ...meta,
                                 touched: showErrorAsTouched,
+                                initial: (
+                                    meta.initial as { id?: string } | undefined
+                                )?.id,
                             } as any
                         }
                         label={label || i18n.t('Program stage')}

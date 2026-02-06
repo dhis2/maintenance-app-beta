@@ -78,9 +78,9 @@ export function OptionField({
             validate={
                 required
                     ? (value: OptionValue) =>
-                          !value?.id
-                              ? i18n.t('This field is required')
-                              : undefined
+                          value?.id
+                              ? undefined
+                              : i18n.t('This field is required')
                     : undefined
             }
         >
@@ -101,6 +101,9 @@ export function OptionField({
                             {
                                 ...meta,
                                 touched: showErrorAsTouched,
+                                initial: (
+                                    meta.initial as { id?: string } | undefined
+                                )?.id,
                             } as any
                         }
                         label={label}

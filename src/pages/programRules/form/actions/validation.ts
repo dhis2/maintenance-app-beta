@@ -4,106 +4,170 @@ import type { ProgramRuleActionFormValues } from './types'
 
 const { programRuleActionType } = ProgramRuleAction
 
+type ValidationErrors = Partial<
+    Record<keyof ProgramRuleActionFormValues, string>
+>
+
+function getFieldFlags(values: ProgramRuleActionFormValues) {
+    return {
+        hasDataElement: !!values.dataElement?.id,
+        hasTrackedEntityAttribute: !!values.trackedEntityAttribute?.id,
+        hasOption: !!values.option?.id,
+        hasOptionGroup: !!values.optionGroup?.id,
+        hasProgramStageSection: !!values.programStageSection?.id,
+        hasProgramStage: !!values.programStage?.id,
+        hasTemplateUid: !!(
+            values.templateUid && String(values.templateUid).trim()
+        ),
+        hasContent: !!(values.content && String(values.content).trim()),
+        hasData: !!(values.data && String(values.data).trim()),
+        hasLocation: !!(values.location && String(values.location).trim()),
+    }
+}
+
+function validateDisplayLocation(
+    flags: ReturnType<typeof getFieldFlags>
+): ValidationErrors {
+    if (flags.hasLocation) {
+        return {}
+    }
+    return { location: VALIDATION_MESSAGES.DISPLAY_WIDGET }
+}
+
+function validateHideField(
+    flags: ReturnType<typeof getFieldFlags>
+): ValidationErrors {
+    if (flags.hasDataElement || flags.hasTrackedEntityAttribute) {
+        return {}
+    }
+    return {
+        dataElement: VALIDATION_MESSAGES.HIDEFIELD,
+        trackedEntityAttribute: VALIDATION_MESSAGES.HIDEFIELD,
+    }
+}
+
+function validateHideSection(
+    flags: ReturnType<typeof getFieldFlags>
+): ValidationErrors {
+    if (flags.hasProgramStageSection) {
+        return {}
+    }
+    return { programStageSection: VALIDATION_MESSAGES.HIDESECTION_SECTION }
+}
+
+function validateHideOption(
+    flags: ReturnType<typeof getFieldFlags>
+): ValidationErrors {
+    const errors: ValidationErrors = {}
+    if (!flags.hasDataElement && !flags.hasTrackedEntityAttribute) {
+        errors.dataElement = VALIDATION_MESSAGES.HIDEOPTION_DE_TEA
+        errors.trackedEntityAttribute = VALIDATION_MESSAGES.HIDEOPTION_DE_TEA
+    }
+    if (
+        (flags.hasDataElement || flags.hasTrackedEntityAttribute) &&
+        !flags.hasOption
+    ) {
+        errors.option = VALIDATION_MESSAGES.HIDEOPTION_OPTION
+    }
+    return errors
+}
+
+function validateSetMandatoryField(
+    flags: ReturnType<typeof getFieldFlags>
+): ValidationErrors {
+    if (flags.hasDataElement || flags.hasTrackedEntityAttribute) {
+        return {}
+    }
+    return {
+        dataElement: VALIDATION_MESSAGES.SETMANDATORYFIELD,
+        trackedEntityAttribute: VALIDATION_MESSAGES.SETMANDATORYFIELD,
+    }
+}
+
+function validateAssign(
+    flags: ReturnType<typeof getFieldFlags>
+): ValidationErrors {
+    const errors: ValidationErrors = {}
+    const hasTarget =
+        flags.hasDataElement ||
+        flags.hasTrackedEntityAttribute ||
+        flags.hasContent
+    if (!hasTarget) {
+        errors.dataElement = VALIDATION_MESSAGES.ASSIGN_TARGET
+        errors.trackedEntityAttribute = VALIDATION_MESSAGES.ASSIGN_TARGET
+        errors.content = VALIDATION_MESSAGES.ASSIGN_TARGET
+    }
+    if (!flags.hasData) {
+        errors.data = VALIDATION_MESSAGES.ASSIGN_EXPRESSION
+    }
+    return errors
+}
+
+function validateOptionGroup(
+    flags: ReturnType<typeof getFieldFlags>
+): ValidationErrors {
+    const errors: ValidationErrors = {}
+    if (!flags.hasDataElement && !flags.hasTrackedEntityAttribute) {
+        errors.dataElement = VALIDATION_MESSAGES.OPTIONGROUP_DE_TEA
+        errors.trackedEntityAttribute = VALIDATION_MESSAGES.OPTIONGROUP_DE_TEA
+    }
+    if (
+        (flags.hasDataElement || flags.hasTrackedEntityAttribute) &&
+        !flags.hasOptionGroup
+    ) {
+        errors.optionGroup = VALIDATION_MESSAGES.OPTIONGROUP_GROUP
+    }
+    return errors
+}
+
+function validateMessageTemplate(
+    flags: ReturnType<typeof getFieldFlags>
+): ValidationErrors {
+    if (flags.hasTemplateUid) {
+        return {}
+    }
+    return { templateUid: VALIDATION_MESSAGES.MESSAGE_TEMPLATE }
+}
+
+function validateHideProgramStage(
+    flags: ReturnType<typeof getFieldFlags>
+): ValidationErrors {
+    if (flags.hasProgramStage) {
+        return {}
+    }
+    return { programStage: VALIDATION_MESSAGES.HIDEPROGRAMSTAGE_STAGE }
+}
+
 export function validateProgramRuleAction(
     values: ProgramRuleActionFormValues
-): Partial<Record<keyof ProgramRuleActionFormValues, string>> {
-    const errors: Partial<Record<keyof ProgramRuleActionFormValues, string>> =
-        {}
+): ValidationErrors {
     const actionType = values.programRuleActionType
-    const hasDataElement = !!values.dataElement?.id
-    const hasTrackedEntityAttribute = !!values.trackedEntityAttribute?.id
-    const hasOption = !!values.option?.id
-    const hasOptionGroup = !!values.optionGroup?.id
-    const hasProgramStageSection = !!values.programStageSection?.id
-    const hasProgramStage = !!values.programStage?.id
-    const hasTemplateUid = !!(
-        values.templateUid && String(values.templateUid).trim()
-    )
-    const hasContent = !!(values.content && String(values.content).trim())
-    const hasData = !!(values.data && String(values.data).trim())
-    const hasLocation = !!(values.location && String(values.location).trim())
+    const flags = getFieldFlags(values)
+    const errors: ValidationErrors = {}
 
-    if (
-        actionType === programRuleActionType.DISPLAYTEXT ||
-        actionType === programRuleActionType.DISPLAYKEYVALUEPAIR
-    ) {
-        if (!hasLocation) {
-            errors.location = VALIDATION_MESSAGES.DISPLAY_WIDGET
-        }
+    const validators: Partial<
+        Record<
+            string,
+            (f: ReturnType<typeof getFieldFlags>) => ValidationErrors
+        >
+    > = {
+        [programRuleActionType.DISPLAYTEXT]: validateDisplayLocation,
+        [programRuleActionType.DISPLAYKEYVALUEPAIR]: validateDisplayLocation,
+        [programRuleActionType.HIDEFIELD]: validateHideField,
+        [programRuleActionType.HIDESECTION]: validateHideSection,
+        [programRuleActionType.HIDEOPTION]: validateHideOption,
+        [programRuleActionType.SETMANDATORYFIELD]: validateSetMandatoryField,
+        [programRuleActionType.ASSIGN]: validateAssign,
+        [programRuleActionType.HIDEPROGRAMSTAGE]: validateHideProgramStage,
+        [programRuleActionType.SENDMESSAGE]: validateMessageTemplate,
+        [programRuleActionType.SCHEDULEMESSAGE]: validateMessageTemplate,
+        [programRuleActionType.HIDEOPTIONGROUP]: validateOptionGroup,
+        [programRuleActionType.SHOWOPTIONGROUP]: validateOptionGroup,
     }
 
-    if (actionType === programRuleActionType.HIDEFIELD) {
-        if (!hasDataElement && !hasTrackedEntityAttribute) {
-            errors.dataElement = VALIDATION_MESSAGES.HIDEFIELD
-            errors.trackedEntityAttribute = VALIDATION_MESSAGES.HIDEFIELD
-        }
-    }
-
-    if (actionType === programRuleActionType.HIDESECTION) {
-        if (!hasProgramStageSection) {
-            errors.programStageSection = VALIDATION_MESSAGES.HIDESECTION_SECTION
-        }
-    }
-
-    if (actionType === programRuleActionType.HIDEOPTION) {
-        if (!hasDataElement && !hasTrackedEntityAttribute) {
-            errors.dataElement = VALIDATION_MESSAGES.HIDEOPTION_DE_TEA
-            errors.trackedEntityAttribute =
-                VALIDATION_MESSAGES.HIDEOPTION_DE_TEA
-        }
-        if ((hasDataElement || hasTrackedEntityAttribute) && !hasOption) {
-            errors.option = VALIDATION_MESSAGES.HIDEOPTION_OPTION
-        }
-    }
-
-    if (actionType === programRuleActionType.SETMANDATORYFIELD) {
-        if (!hasDataElement && !hasTrackedEntityAttribute) {
-            errors.dataElement = VALIDATION_MESSAGES.SETMANDATORYFIELD
-            errors.trackedEntityAttribute =
-                VALIDATION_MESSAGES.SETMANDATORYFIELD
-        }
-    }
-
-    if (actionType === programRuleActionType.ASSIGN) {
-        const hasAssignTarget =
-            hasDataElement || hasTrackedEntityAttribute || hasContent
-        if (!hasAssignTarget) {
-            errors.dataElement = VALIDATION_MESSAGES.ASSIGN_TARGET
-            errors.trackedEntityAttribute = VALIDATION_MESSAGES.ASSIGN_TARGET
-            errors.content = VALIDATION_MESSAGES.ASSIGN_TARGET
-        }
-        if (!hasData) {
-            errors.data = VALIDATION_MESSAGES.ASSIGN_EXPRESSION
-        }
-    }
-
-    if (
-        actionType === programRuleActionType.HIDEOPTIONGROUP ||
-        actionType === programRuleActionType.SHOWOPTIONGROUP
-    ) {
-        if (!hasDataElement && !hasTrackedEntityAttribute) {
-            errors.dataElement = VALIDATION_MESSAGES.OPTIONGROUP_DE_TEA
-            errors.trackedEntityAttribute =
-                VALIDATION_MESSAGES.OPTIONGROUP_DE_TEA
-        }
-        if ((hasDataElement || hasTrackedEntityAttribute) && !hasOptionGroup) {
-            errors.optionGroup = VALIDATION_MESSAGES.OPTIONGROUP_GROUP
-        }
-    }
-
-    if (
-        actionType === programRuleActionType.SENDMESSAGE ||
-        actionType === programRuleActionType.SCHEDULEMESSAGE
-    ) {
-        if (!hasTemplateUid) {
-            errors.templateUid = VALIDATION_MESSAGES.MESSAGE_TEMPLATE
-        }
-    }
-
-    if (actionType === programRuleActionType.HIDEPROGRAMSTAGE) {
-        if (!hasProgramStage) {
-            errors.programStage = VALIDATION_MESSAGES.HIDEPROGRAMSTAGE_STAGE
-        }
+    const validate = validators[actionType ?? '']
+    if (validate) {
+        Object.assign(errors, validate(flags))
     }
 
     return errors

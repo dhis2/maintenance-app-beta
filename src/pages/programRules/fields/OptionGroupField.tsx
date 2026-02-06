@@ -78,9 +78,9 @@ export function OptionGroupField({
             validate={
                 required
                     ? (value: OptionGroupValue) =>
-                          !value?.id
-                              ? i18n.t('This field is required')
-                              : undefined
+                          value?.id
+                              ? undefined
+                              : i18n.t('This field is required')
                     : undefined
             }
         >
@@ -101,6 +101,9 @@ export function OptionGroupField({
                             {
                                 ...meta,
                                 touched: showErrorAsTouched,
+                                initial: (
+                                    meta.initial as { id?: string } | undefined
+                                )?.id,
                             } as any
                         }
                         label={label}
