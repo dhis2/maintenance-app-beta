@@ -187,13 +187,15 @@ function setMandatoryFieldFields(programId: string): ReactNode {
             <StandardFormField>
                 <DataElementField
                     programId={programId}
-                    label={i18n.t('Data element')}
+                    label={i18n.t('Data element to display error next to')}
                 />
             </StandardFormField>
             <StandardFormField>
                 <TrackedEntityAttributeField
                     programId={programId}
-                    label={i18n.t('Tracked entity attribute')}
+                    label={i18n.t(
+                        'Tracked entity attribute to display error next to'
+                    )}
                 />
             </StandardFormField>
         </>
