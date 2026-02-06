@@ -16,10 +16,12 @@ import { JsonPatchOperation } from '../../../types'
 // })
 
 export type SharingJsonPatchOperation = Omit<JsonPatchOperation, 'value'> & {
-    value?: {
-        access: string
-        id: string
-    }
+    value?:
+        | {
+              access: string
+              id: string
+          }
+        | string
 }
 
 export const useBulkSharingMutation = ({
