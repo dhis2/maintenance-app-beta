@@ -10,8 +10,11 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../components'
+import {
+    FEATURES,
+    useFeatureAvailable,
+} from '../../../../lib/featuresApiSupport'
 import { useClearFormFields } from '../../../../lib/form/useClearFormFields'
-import { ProgramRuleAction } from '../../../../types/generated'
 import { PriorityField } from '../../fields'
 import { ActionTypeFieldsContent } from './ActionTypeFieldsContent'
 import { ACTION_FIELDS_TO_CLEAR, ACTION_TYPE_OPTIONS } from './constants'
@@ -21,8 +24,6 @@ import type {
     ProgramRuleActionFormValues,
 } from './types'
 import { validateProgramRuleAction } from './validation'
-
-const { programRuleActionType } = ProgramRuleAction
 
 export const ProgramRuleActionForm = ({
     programRuleId,
@@ -98,6 +99,9 @@ function ProgramRuleActionFormBody({
     }, [actionType, clearActionFields])
 
     const isEdit = !!action
+    const priorityFieldAvailable = useFeatureAvailable(
+        FEATURES.programRuleActionPriority
+    )
 
     return (
         <div className={styles.sectionsWrapper}>
@@ -124,9 +128,11 @@ function ProgramRuleActionFormBody({
                     </Field>
                 </StandardFormField>
 
-                <StandardFormField>
-                    <PriorityField />
-                </StandardFormField>
+                {priorityFieldAvailable && (
+                    <StandardFormField>
+                        <PriorityField />
+                    </StandardFormField>
+                )}
 
                 {programId && (
                     <ActionTypeFieldsContent
