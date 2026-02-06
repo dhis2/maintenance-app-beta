@@ -19,9 +19,9 @@
 
 .expressionLabel {
     color: var(--colors-grey600);
-    font-size: 14px;
+    font-size: 12px;
     display: block;
-    margin-top: 12px;
+    margin-top: 4px;
 }
 
 .deletedActionBox {

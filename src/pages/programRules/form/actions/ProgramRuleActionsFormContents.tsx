@@ -79,18 +79,11 @@ const ProgramRuleActionListNewOrEdit = () => {
         }
     }
 
-    // Merge submitted action into form array (edit = update at index, add = push)
     const handleSubmitted = (values: ProgramRuleActionListItem) => {
-        // Ensure new actions have a temporary id for React list keys
-        const actionWithId = {
-            ...values,
-            id: values.id || crypto.randomUUID(),
-        }
-
         if (drawerState.index === null) {
-            actionsFieldArray.push(actionWithId)
+            actionsFieldArray.push(values)
         } else {
-            actionsFieldArray.update(drawerState.index, actionWithId)
+            actionsFieldArray.update(drawerState.index, values)
         }
         setDrawerState({ open: false, action: null, index: null })
     }
@@ -128,8 +121,7 @@ const ProgramRuleActionListNewOrEdit = () => {
                 <div>
                     <div>
                         {actions.map((action, index) => {
-                            // Use id or fallback to index for React key
-                            const key = action.id || `action-${index}`
+                            const key = action.id || `new-action-${index}`
 
                             if (action.deleted) {
                                 return (
@@ -154,10 +146,9 @@ const ProgramRuleActionListNewOrEdit = () => {
                                 )
                             }
 
-                            // ListInFormItem expects ListItem (id, displayName, access); we build displayName from action type + content/fields
                             const displayItem = {
                                 ...action,
-                                id: action.id || key, // Ensure id exists for ListInFormItem
+                                id: action.id || key,
                                 displayName:
                                     getProgramRuleActionListLabel(action),
                             }
