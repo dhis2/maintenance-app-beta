@@ -1,12 +1,17 @@
 .sectionsWrapper {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    justify-content: space-between;
+    min-height: 100%;
 }
 
 .sectionsWrapper > div:first-child {
-    overflow-y: auto;
+    flex: 1;
+}
+
+.stageFormFooter {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp16);
 }
 
 .actionsInfo {
@@ -14,6 +19,10 @@
     align-items: center;
     gap: var(--spacers-dp4);
     color: var(--colors-grey600);
+}
+
+.actionsInfo p {
+    margin: 0;
 }
 
 .displayModeOptions {

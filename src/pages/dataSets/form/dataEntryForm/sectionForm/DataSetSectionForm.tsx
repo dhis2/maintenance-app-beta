@@ -2,7 +2,8 @@ import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
+import { useForm } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import { FormBase, FormBaseProps } from '../../../../../components'
 import { LoadingSpinner } from '../../../../../components/loading/LoadingSpinner'
@@ -56,15 +57,39 @@ export type SectionFormValues = PickWithFieldFilters<
 type PartialSectionFormValues = Partial<SectionFormValues>
 type SubmittedSectionFormValues = PartialSectionFormValues & DisplayableModel
 
+export type SectionFormActions = {
+    save: () => void
+}
+
 export type DataSetSectionFormProps = {
     dataSetSection?: PartialSectionFormValues
-    onCancel?: () => void
+    onActionsReady?: (actions: SectionFormActions) => void
 } & Pick<FormBaseProps<PartialSectionFormValues>, 'onSubmit'>
+
+const DataSetSectionFormInner = ({
+    onActionsReadyRef,
+}: {
+    onActionsReadyRef: React.RefObject<
+        ((actions: SectionFormActions) => void) | undefined
+    >
+}) => {
+    const form = useForm()
+
+    useEffect(() => {
+        onActionsReadyRef.current?.({
+            save: () => {
+                form.submit()
+            },
+        })
+    }, [form, onActionsReadyRef])
+
+    return <DataSetSectionFormContents />
+}
 
 export const DataSetSectionForm = ({
     dataSetSection,
     onSubmit,
-    onCancel,
+    onActionsReady,
 }: DataSetSectionFormProps) => {
     const dataSetId = useParams().id as string
     const initialValues: PartialSectionFormValues | undefined = useMemo(() => {
@@ -96,6 +121,9 @@ export const DataSetSectionForm = ({
         },
         [dataSetId]
     )
+    const onActionsReadyRef = React.useRef(onActionsReady)
+    onActionsReadyRef.current = onActionsReady
+
     return (
         <FormBase
             initialValues={{ ...initialValues, dataSet: { id: dataSetId } }}
@@ -104,7 +132,7 @@ export const DataSetSectionForm = ({
             includeAttributes={false}
             mutators={{ ...arrayMutators }}
         >
-            <DataSetSectionFormContents onCancel={onCancel} />
+            <DataSetSectionFormInner onActionsReadyRef={onActionsReadyRef} />
         </FormBase>
     )
 }
@@ -112,12 +140,12 @@ export const DataSetSectionForm = ({
 type OnDataSetFormSubmit = FormBaseProps<PartialSectionFormValues>['onSubmit']
 export const EditDataSetSectionForm = ({
     section,
-    onCancel,
     onSubmitted,
+    onActionsReady,
 }: {
     section: DisplayableModel
-    onCancel: () => void
     onSubmitted: (values: SubmittedSectionFormValues) => void
+    onActionsReady?: (actions: SectionFormActions) => void
 }) => {
     const handlePatch = usePatchModel(
         section.id,
@@ -178,17 +206,17 @@ export const EditDataSetSectionForm = ({
         <DataSetSectionForm
             dataSetSection={sectionValues.data}
             onSubmit={onFormSubmit}
-            onCancel={onCancel}
+            onActionsReady={onActionsReady}
         />
     )
 }
 
 export const NewDataSetSectionForm = ({
-    onCancel,
     onSubmitted,
+    onActionsReady,
 }: {
-    onCancel: () => void
     onSubmitted: (values: SubmittedSectionFormValues) => void
+    onActionsReady?: (actions: SectionFormActions) => void
 }) => {
     const handleCreate = useCreateModel(dataSetSectionSchemaSection.namePlural)
     const { show: showSuccess } = useAlert(
@@ -219,34 +247,37 @@ export const NewDataSetSectionForm = ({
         <DataSetSectionForm
             dataSetSection={undefined}
             onSubmit={onFormSubmit}
-            onCancel={onCancel}
+            onActionsReady={onActionsReady}
         />
     )
 }
 
 export const EditOrNewDataSetSectionForm = ({
     section,
-    onCancel,
     onSubmitted: onSubmit,
+    onActionsReady,
 }: {
     section: DisplayableModel | null | undefined
-    onCancel: () => void
     onSubmitted: (values: SubmittedSectionFormValues) => void
+    onActionsReady?: (actions: SectionFormActions) => void
 }) => {
     if (section === undefined) {
         return
     }
     if (section === null) {
         return (
-            <NewDataSetSectionForm onSubmitted={onSubmit} onCancel={onCancel} />
+            <NewDataSetSectionForm
+                onSubmitted={onSubmit}
+                onActionsReady={onActionsReady}
+            />
         )
     }
 
     return (
         <EditDataSetSectionForm
             section={section}
-            onCancel={onCancel}
             onSubmitted={onSubmit}
+            onActionsReady={onActionsReady}
         />
     )
 }

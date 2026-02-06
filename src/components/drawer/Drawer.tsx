@@ -2,26 +2,45 @@ import cx from 'classnames'
 import { FocusTrap } from 'focus-trap-react'
 import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { DRAWER_PORTAL_ID, type DrawerLevel } from '../../lib/constants'
+import { useDrawerOverlayStyles, useEscapeKeyHandler } from '../../lib/drawer'
 import css from './Drawer.module.css'
-interface DrawerProps {
+import { DrawerHeader } from './DrawerHeader'
+
+export interface DrawerProps {
     isOpen: boolean
     children: React.ReactNode
     onClose: () => void
-    level?: 'primary' | 'secondary'
+    level?: DrawerLevel
+    header?: React.ReactNode
+    footer?: React.ReactNode
 }
-
-const DRAWER_PORTAL_ID = 'drawer-portal'
-
 export const Drawer: React.FC<DrawerProps> = ({
     isOpen,
     children,
     onClose,
     level = 'primary',
+    header,
+    footer,
 }) => {
+    const overlayStyle = useDrawerOverlayStyles()
+
+    const handleOverlayClick = () => {
+        onClose()
+    }
+
+    const handleDrawerClick = (e: React.MouseEvent) => {
+        e.stopPropagation()
+    }
+
     return (
         <div
             className={cx(css.drawerOverlay, { [css.open]: isOpen })}
-            onClick={onClose}
+            onClick={handleOverlayClick}
+            style={overlayStyle}
+            role="dialog"
+            aria-modal="true"
+            aria-hidden={!isOpen}
         >
             <div
                 className={cx(css.drawer, {
@@ -29,10 +48,14 @@ export const Drawer: React.FC<DrawerProps> = ({
                     [css.drawerPrimary]: level === 'primary',
                     [css.drawerSecondary]: level === 'secondary',
                 })}
-                onClick={(e) => e.stopPropagation()}
+                onClick={handleDrawerClick}
             >
                 {isOpen && (
-                    <DrawerContents onClose={onClose}>
+                    <DrawerContents
+                        onClose={onClose}
+                        header={header}
+                        footer={footer}
+                    >
                         {children}
                     </DrawerContents>
                 )}
@@ -41,56 +64,54 @@ export const Drawer: React.FC<DrawerProps> = ({
     )
 }
 
-const DrawerContents = React.forwardRef<
-    HTMLDivElement,
-    { children: React.ReactNode; onClose: () => void }
->(function DrawerContents({ children, onClose }, ref) {
-    useEffect(() => {
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === 'Escape') {
-                onClose()
-            }
-        }
+interface DrawerContentsProps {
+    children: React.ReactNode
+    onClose: () => void
+    header?: React.ReactNode
+    footer?: React.ReactNode
+}
 
-        document.addEventListener('keydown', handleKeyDown)
-        return () => {
-            document.removeEventListener('keydown', handleKeyDown)
-        }
-    }, [onClose])
-    return (
-        <FocusTrap
-            focusTrapOptions={{
-                delayInitialFocus: true,
-                allowOutsideClick: true,
-            }}
-        >
-            <div ref={ref}>
-                {/* Span with tabIndex to trap focus in case contents in drawer is loading,
-            which would make the focustrap throw */}
-                <span tabIndex={0}></span>
-                {children}
-            </div>
-        </FocusTrap>
-    )
-})
+const DrawerContents = React.forwardRef<HTMLDivElement, DrawerContentsProps>(
+    function DrawerContents({ children, onClose, header, footer }, ref) {
+        useEscapeKeyHandler(onClose, true)
 
-export const DrawerRoot = () => {
+        return (
+            <FocusTrap
+                focusTrapOptions={{
+                    delayInitialFocus: true,
+                    allowOutsideClick: true,
+                }}
+            >
+                <div ref={ref} className={css.drawerContents}>
+                    <span tabIndex={0} aria-hidden="true" />
+                    {header && (
+                        <DrawerHeader onClose={onClose}>{header}</DrawerHeader>
+                    )}
+                    <div className={css.drawerBody}>{children}</div>
+                    {footer && <div className={css.drawerFooter}>{footer}</div>}
+                </div>
+            </FocusTrap>
+        )
+    }
+)
+
+export const DrawerRoot: React.FC = () => {
     return <div id={DRAWER_PORTAL_ID} className={css.drawerRoot} />
 }
 
-export const DrawerPortal = ({ ...drawerProps }: DrawerProps) => {
+export const DrawerPortal: React.FC<DrawerProps> = (drawerProps) => {
     const [mountNode, setMountNode] = useState<HTMLElement | null>(() =>
         document.getElementById(DRAWER_PORTAL_ID)
     )
 
     useEffect(() => {
-        // Find the portal root element after the initial render
         const portalRoot = document.getElementById(DRAWER_PORTAL_ID)
         if (portalRoot) {
             setMountNode(portalRoot)
         } else {
             console.error(
-                `Drawer portal root with ID #${DRAWER_PORTAL_ID} not found.`
+                `Drawer portal root with ID #${DRAWER_PORTAL_ID} not found. ` +
+                    'Make sure <DrawerRoot /> is rendered in your app root.'
             )
         }
     }, [])

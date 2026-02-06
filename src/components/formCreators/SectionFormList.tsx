@@ -3,6 +3,7 @@ import { Button, ButtonStrip, IconAdd16 } from '@dhis2/ui'
 import React, { useState } from 'react'
 import { useFieldArray } from 'react-final-form-arrays'
 import {
+    DrawerFooter,
     StandardFormSectionTitle,
     MoreDropdownButton,
     MoreDropdownItem,
@@ -14,6 +15,10 @@ import { BaseListModel, SchemaName } from '../../lib'
 import { Access, DisplayableModel } from '../../types/models'
 import css from './SectionFormList.module.css'
 import { SectionsOrderingModal } from './SectionsOrderingModal'
+
+export type SectionFormActions = {
+    save: () => void
+}
 
 export type Section = {
     id: string
@@ -31,6 +36,7 @@ type SectionFormComponent<
         onSubmitted: (values: TValues) => void
         onCancel: () => void
         section: DisplayableModel | null | undefined
+        onActionsReady?: (actions: SectionFormActions) => void
     } & TExtraProps
 >
 
@@ -51,6 +57,9 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
         DisplayableModel | null | undefined
     >(undefined)
     const [orderSectionsFormOpen, setOrderSectionsFormOpen] = useState(false)
+    const [formActions, setFormActions] = useState<SectionFormActions | null>(
+        null
+    )
     // use null as open, but new model
     const isSectionFormOpen = !!sectionFormOpen || sectionFormOpen === null
     const sectionFieldArray = useFieldArray<Section>(sectionsFieldName).fields
@@ -85,19 +94,51 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
         setSectionFormOpen(undefined)
     }
 
+    const onCloseSectionForm = () => {
+        setSectionFormOpen(undefined)
+        setFormActions(null)
+    }
+
+    const sectionFormFooter = formActions && (
+        <DrawerFooter
+            actions={[
+                {
+                    label: i18n.t('Save section'),
+                    onClick: formActions.save,
+                    primary: true,
+                },
+                {
+                    label: i18n.t('Cancel'),
+                    onClick: onCloseSectionForm,
+                    secondary: true,
+                },
+            ]}
+            infoMessage={i18n.t(
+                'Saving a section does not save other changes to the data set'
+            )}
+        />
+    )
+
     return (
         <div className={css.sectionsList}>
             <DrawerPortal
                 isOpen={isSectionFormOpen}
                 level={level}
-                onClose={() => setSectionFormOpen(undefined)}
+                onClose={onCloseSectionForm}
+                header={
+                    sectionFormOpen === null
+                        ? i18n.t('New section')
+                        : i18n.t('Edit section')
+                }
+                footer={sectionFormFooter}
             >
                 {sectionFormOpen !== undefined && (
                     <SectionFormComponent
                         {...(otherProps ?? ({} as TExtraProps))}
                         section={sectionFormOpen as DisplayableModel | null}
-                        onCancel={() => setSectionFormOpen(undefined)}
+                        onCancel={onCloseSectionForm}
                         onSubmitted={handleSubmittedSection}
+                        onActionsReady={setFormActions}
                     />
                 )}
             </DrawerPortal>
