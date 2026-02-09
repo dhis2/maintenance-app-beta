@@ -10,7 +10,7 @@ export type ProgramRuleActionFormValues = Partial<ProgramRuleActionListItem> & {
 }
 
 export type ProgramRuleActionListItem = {
-    id?: string
+    id: string
     programRuleActionType?: string
     priority?: number
     content?: string

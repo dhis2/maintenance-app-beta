@@ -34,6 +34,26 @@ function validateDisplayLocation(
     return { location: VALIDATION_MESSAGES.DISPLAY_WIDGET }
 }
 
+function validateDisplayText(
+    flags: ReturnType<typeof getFieldFlags>
+): ValidationErrors {
+    const errors = validateDisplayLocation(flags)
+    if (!flags.hasContent) {
+        errors.content = VALIDATION_MESSAGES.STATIC_TEXT_REQUIRED
+    }
+    return errors
+}
+
+function validateDisplayKeyValuePair(
+    flags: ReturnType<typeof getFieldFlags>
+): ValidationErrors {
+    const errors = validateDisplayLocation(flags)
+    if (!flags.hasContent) {
+        errors.content = VALIDATION_MESSAGES.KEY_LABEL_REQUIRED
+    }
+    return errors
+}
+
 function validateHideField(
     flags: ReturnType<typeof getFieldFlags>
 ): ValidationErrors {
@@ -138,6 +158,15 @@ function validateHideProgramStage(
     return { programStage: VALIDATION_MESSAGES.HIDEPROGRAMSTAGE_STAGE }
 }
 
+function validateMessageAction(
+    flags: ReturnType<typeof getFieldFlags>
+): ValidationErrors {
+    if (flags.hasContent) {
+        return {}
+    }
+    return { content: VALIDATION_MESSAGES.STATIC_TEXT_REQUIRED }
+}
+
 export function validateProgramRuleAction(
     values: ProgramRuleActionFormValues
 ): ValidationErrors {
@@ -151,8 +180,9 @@ export function validateProgramRuleAction(
             (f: ReturnType<typeof getFieldFlags>) => ValidationErrors
         >
     > = {
-        [programRuleActionType.DISPLAYTEXT]: validateDisplayLocation,
-        [programRuleActionType.DISPLAYKEYVALUEPAIR]: validateDisplayLocation,
+        [programRuleActionType.DISPLAYTEXT]: validateDisplayText,
+        [programRuleActionType.DISPLAYKEYVALUEPAIR]:
+            validateDisplayKeyValuePair,
         [programRuleActionType.HIDEFIELD]: validateHideField,
         [programRuleActionType.HIDESECTION]: validateHideSection,
         [programRuleActionType.HIDEOPTION]: validateHideOption,
@@ -163,6 +193,10 @@ export function validateProgramRuleAction(
         [programRuleActionType.SCHEDULEMESSAGE]: validateMessageTemplate,
         [programRuleActionType.HIDEOPTIONGROUP]: validateOptionGroup,
         [programRuleActionType.SHOWOPTIONGROUP]: validateOptionGroup,
+        [programRuleActionType.SHOWWARNING]: validateMessageAction,
+        [programRuleActionType.SHOWERROR]: validateMessageAction,
+        [programRuleActionType.WARNINGONCOMPLETE]: validateMessageAction,
+        [programRuleActionType.ERRORONCOMPLETE]: validateMessageAction,
     }
 
     const validate = validators[actionType ?? '']

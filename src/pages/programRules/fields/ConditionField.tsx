@@ -7,7 +7,6 @@ type ConditionFieldProps = Readonly<{
     programId?: string
 }>
 
-/** Condition expression builder; clearable so user can save with empty condition. */
 export function ConditionField({ programId }: ConditionFieldProps) {
     return (
         <PaddedContainer>

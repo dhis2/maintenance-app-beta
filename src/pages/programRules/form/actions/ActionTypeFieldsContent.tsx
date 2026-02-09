@@ -1,7 +1,3 @@
-/**
- * Renders the form fields for each program rule action type.
- * Split out to keep cognitive complexity low in the main form.
- */
 import i18n from '@dhis2/d2-i18n'
 import { InputFieldFF } from '@dhis2/ui'
 import React, { ReactNode } from 'react'
@@ -23,7 +19,7 @@ import {
     TrackedEntityAttributeWithOptionSetField,
 } from '../../fields'
 
-const AT = ProgramRuleAction.programRuleActionType
+const ACTION_TYPE = ProgramRuleAction.programRuleActionType
 
 type ActionFieldsRenderer = (programId: string) => ReactNode
 
@@ -39,11 +35,6 @@ function displayTextFields(programId: string): ReactNode {
                     label={i18n.t('Static text')}
                     component={InputFieldFF}
                     required
-                    validate={(value: string | undefined) =>
-                        value?.trim()
-                            ? undefined
-                            : i18n.t('Static text is required')
-                    }
                 />
             </StandardFormField>
             <StandardFormField>
@@ -70,11 +61,6 @@ function displayKeyValuePairFields(programId: string): ReactNode {
                     label={i18n.t('Key label')}
                     component={InputFieldFF}
                     required
-                    validate={(value: string | undefined) =>
-                        value?.trim()
-                            ? undefined
-                            : i18n.t('Key label is required')
-                    }
                 />
             </StandardFormField>
             <StandardFormField>
@@ -163,11 +149,6 @@ function messageActionFields(programId: string, isWarning: boolean): ReactNode {
                     label={i18n.t('Static text')}
                     component={InputFieldFF}
                     required
-                    validate={(value: string | undefined) =>
-                        value?.trim()
-                            ? undefined
-                            : i18n.t('Static text is required')
-                    }
                 />
             </StandardFormField>
             <StandardFormField>
@@ -293,15 +274,15 @@ function optionGroupFields(programId: string, label: string): ReactNode {
 }
 
 const ACTION_FIELDS_MAP: Partial<Record<string, ActionFieldsRenderer>> = {
-    [AT.DISPLAYTEXT]: displayTextFields,
-    [AT.DISPLAYKEYVALUEPAIR]: displayKeyValuePairFields,
-    [AT.HIDEFIELD]: hideFieldFields,
-    [AT.HIDESECTION]: (programId) => (
+    [ACTION_TYPE.DISPLAYTEXT]: displayTextFields,
+    [ACTION_TYPE.DISPLAYKEYVALUEPAIR]: displayKeyValuePairFields,
+    [ACTION_TYPE.HIDEFIELD]: hideFieldFields,
+    [ACTION_TYPE.HIDESECTION]: (programId) => (
         <StandardFormField>
             <ProgramStageSectionField programId={programId} required />
         </StandardFormField>
     ),
-    [AT.HIDEPROGRAMSTAGE]: (programId) => (
+    [ACTION_TYPE.HIDEPROGRAMSTAGE]: (programId) => (
         <StandardFormField>
             <ProgramStageSelectField
                 programId={programId}
@@ -310,27 +291,31 @@ const ACTION_FIELDS_MAP: Partial<Record<string, ActionFieldsRenderer>> = {
             />
         </StandardFormField>
     ),
-    [AT.SHOWWARNING]: (programId) => messageActionFields(programId, true),
-    [AT.SHOWERROR]: (programId) => messageActionFields(programId, false),
-    [AT.WARNINGONCOMPLETE]: (programId) => messageActionFields(programId, true),
-    [AT.ERRORONCOMPLETE]: (programId) => messageActionFields(programId, false),
-    [AT.SETMANDATORYFIELD]: setMandatoryFieldFields,
-    [AT.ASSIGN]: assignFields,
-    [AT.CREATEEVENT]: (programId) => (
+    [ACTION_TYPE.SHOWWARNING]: (programId) =>
+        messageActionFields(programId, true),
+    [ACTION_TYPE.SHOWERROR]: (programId) =>
+        messageActionFields(programId, false),
+    [ACTION_TYPE.WARNINGONCOMPLETE]: (programId) =>
+        messageActionFields(programId, true),
+    [ACTION_TYPE.ERRORONCOMPLETE]: (programId) =>
+        messageActionFields(programId, false),
+    [ACTION_TYPE.SETMANDATORYFIELD]: setMandatoryFieldFields,
+    [ACTION_TYPE.ASSIGN]: assignFields,
+    [ACTION_TYPE.CREATEEVENT]: (programId) => (
         <StandardFormField>
             <ProgramStageSelectField programId={programId} required />
         </StandardFormField>
     ),
-    [AT.SENDMESSAGE]: (programId) => (
+    [ACTION_TYPE.SENDMESSAGE]: (programId) => (
         <StandardFormField>
             <NotificationTemplateField programId={programId} required />
         </StandardFormField>
     ),
-    [AT.SCHEDULEMESSAGE]: scheduleMessageFields,
-    [AT.HIDEOPTION]: hideOptionFields,
-    [AT.SHOWOPTIONGROUP]: (programId) =>
+    [ACTION_TYPE.SCHEDULEMESSAGE]: scheduleMessageFields,
+    [ACTION_TYPE.HIDEOPTION]: hideOptionFields,
+    [ACTION_TYPE.SHOWOPTIONGROUP]: (programId) =>
         optionGroupFields(programId, i18n.t('Option group to show')),
-    [AT.HIDEOPTIONGROUP]: (programId) =>
+    [ACTION_TYPE.HIDEOPTIONGROUP]: (programId) =>
         optionGroupFields(programId, i18n.t('Option group to hide')),
 }
 

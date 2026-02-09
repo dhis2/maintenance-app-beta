@@ -1,8 +1,3 @@
-/**
- * Program rule create page. Same sectioned form as Edit (Basic information, Expression, Actions).
- * arrayMutators required because ProgramRuleActionsFormContents uses useFieldArray('programRuleActions');
- * the Actions section shows "Program rule must be saved before actions can be added" until first save.
- */
 import arrayMutators from 'final-form-arrays'
 import React from 'react'
 import {

@@ -25,7 +25,7 @@ import {
     useOnSubmitEdit,
 } from '../../lib'
 import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
-import type { ProgramRuleActionListItem } from './form/actions/ProgramRuleActionsFormContents'
+import type { ProgramRuleActionListItem } from './form/actions/types'
 import { fieldFilters, ProgramRuleFormValues } from './form/fieldFilters'
 import { ProgramRuleFormDescriptor } from './form/formDescriptor'
 import { ProgramRuleFormFields } from './form/ProgramRuleFormFields'

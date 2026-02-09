@@ -1,7 +1,3 @@
-/**
- * Program rule sectioned form: Basic information, Expression, Actions.
- * Program stages field is shown only for tracker programs (not WITHOUT_REGISTRATION).
- */
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import { useField, useFormState } from 'react-final-form'

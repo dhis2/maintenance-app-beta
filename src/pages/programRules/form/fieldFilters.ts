@@ -1,7 +1,3 @@
-/**
- * API field selection for program rule (edit) and programRuleActions nested fields.
- * programType on program so we can show "Program stages to trigger rule" only for tracker programs.
- */
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     DEFAULT_FIELD_FILTERS,
@@ -24,4 +20,4 @@ export const fieldFilters = [
 export type ProgramRuleFormValues = PickWithFieldFilters<
     ProgramRule,
     typeof fieldFilters
-> & { id: string }
+>

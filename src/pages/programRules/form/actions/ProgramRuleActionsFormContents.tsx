@@ -1,8 +1,3 @@
-/**
- * Actions section: list of program rule actions with add/edit/delete. Opens action form in a drawer.
- * Delete is soft-delete (restore until save); persisted actions are deleted on program rule save.
- * Structure matches ProgramStagesFormContents: SectionedFormSection + title/description + list.
- */
 import i18n from '@dhis2/d2-i18n'
 import { Button, NoticeBox } from '@dhis2/ui'
 import { IconAdd16 } from '@dhis2/ui-icons'
@@ -22,8 +17,6 @@ import { getProgramRuleActionListLabel } from './getProgramRuleActionListLabel'
 import { ProgramRuleActionForm } from './ProgramRuleActionForm'
 import styles from './ProgramRuleActionForm.module.css'
 import type { ProgramRuleActionListItem } from './types'
-
-export type { ProgramRuleActionListItem } from './types'
 
 type DrawerState = {
     open: boolean
@@ -55,7 +48,6 @@ const ProgramRuleActionListNewOrEdit = () => {
         subscription: { values: true },
     })
     const programId = (formValues as { program?: { id?: string } })?.program?.id
-    // useFieldArray requires arrayMutators on parent FormBase (see Edit.tsx)
     const actionsFieldArray =
         useFieldArray<ProgramRuleActionListItem>('programRuleActions').fields
     const [drawerState, setDrawerState] = useState<DrawerState>({
@@ -64,7 +56,6 @@ const ProgramRuleActionListNewOrEdit = () => {
         index: null,
     })
 
-    /** Soft-delete: mark as deleted; actual API delete happens on program rule save */
     const handleDelete = (index: number) => {
         const current = actionsFieldArray.value[index]
         if (current) {
@@ -100,9 +91,9 @@ const ProgramRuleActionListNewOrEdit = () => {
         setDrawerState({ open: false, action: null, index: null })
     }
 
-    // New rule has no id yet; API requires programRule id to create actions (AC)
     if (modelId) {
-        const actions = actionsFieldArray.value ?? []
+        const actions: ProgramRuleActionListItem[] =
+            actionsFieldArray.value ?? []
 
         return (
             <>
@@ -121,12 +112,10 @@ const ProgramRuleActionListNewOrEdit = () => {
                 <div>
                     <div>
                         {actions.map((action, index) => {
-                            const key = action.id || `new-action-${index}`
-
                             if (action.deleted) {
                                 return (
                                     <div
-                                        key={key}
+                                        key={action.id}
                                         className={styles.deletedActionBox}
                                     >
                                         <div
@@ -147,15 +136,14 @@ const ProgramRuleActionListNewOrEdit = () => {
                             }
 
                             const displayItem = {
-                                ...action,
-                                id: action.id || key,
+                                id: action.id,
                                 displayName:
                                     getProgramRuleActionListLabel(action),
                             }
 
                             return (
                                 <ListInFormItem
-                                    key={key}
+                                    key={action.id}
                                     item={displayItem}
                                     schemaName={SchemaName.programRuleAction}
                                     onClick={() => openEdit(action, index)}
@@ -165,7 +153,7 @@ const ProgramRuleActionListNewOrEdit = () => {
                         })}
                     </div>
 
-                    <div style={{ marginTop: 16 }}>
+                    <div className={styles.addActionButton}>
                         <Button
                             secondary
                             small

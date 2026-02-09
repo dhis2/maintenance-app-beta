@@ -35,7 +35,6 @@ type OwnProps<TValues, TFormattedValues = TValues> = {
     includeAttributes?: boolean
     valueFormatter?: (values: NoInfer<TValues>) => TFormattedValues
     onSubmit: EnhancedOnSubmit<TFormattedValues>
-    validateOnChange?: boolean
 }
 
 export type FormBaseProps<TValues, TFormattedValues = TValues> = Omit<
@@ -51,7 +50,6 @@ export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
     valueFormatter = defaultValueFormatter,
     includeAttributes = true,
     modelName,
-    validateOnChange,
     ...reactFinalFormProps
 }: FormBaseProps<TInitialValues>) {
     const customAttributes = useCustomAttributesQuery({
@@ -105,7 +103,6 @@ export function FormBase<TInitialValues extends MaybeModelWithAttributes>({
         <FormBaseProvider value={contextValue}>
             <ReactFinalForm<TInitialValues>
                 validateOnBlur={true}
-                validateOnChange={validateOnChange}
                 initialValues={initialValuesWithAttributes}
                 onSubmit={ffSubmit}
                 validate={(values) =>

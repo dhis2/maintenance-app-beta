@@ -87,4 +87,6 @@ export const VALIDATION_MESSAGES = {
     HIDESECTION_SECTION: i18n.t('Program stage section to hide is required'),
     MESSAGE_TEMPLATE: i18n.t('Message template is required'),
     HIDEPROGRAMSTAGE_STAGE: i18n.t('Program stage is required'),
+    STATIC_TEXT_REQUIRED: i18n.t('Static text is required'),
+    KEY_LABEL_REQUIRED: i18n.t('Key label is required'),
 } as const

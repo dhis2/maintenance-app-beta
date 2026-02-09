@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-06T14:52:39.482Z\n"
-"PO-Revision-Date: 2026-02-06T14:52:39.482Z\n"
+"POT-Creation-Date: 2026-02-09T09:47:07.101Z\n"
+"PO-Revision-Date: 2026-02-09T09:47:07.101Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -4604,9 +4604,6 @@ msgstr "Message template is required"
 
 msgid "Program stage is required"
 msgstr "Program stage is required"
-
-msgid "field"
-msgstr "field"
 
 msgid "Program Rule"
 msgstr "Program Rule"
