@@ -1,3 +1,25 @@
+# [0.123.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.122.2...v0.123.0) (2026-02-09)
+
+
+### Bug Fixes
+
+* **IconPicker:** replace tabs with segmented control, adjust styles ([a51f8a5](https://github.com/dhis2/maintenance-app-beta/commit/a51f8a5958a6359d56deee00c192bd38f4cf110b))
+* **ListViewFilter:** conditionally show clear filters button when filters are applied ([408e065](https://github.com/dhis2/maintenance-app-beta/commit/408e0652ad9725b0e626c92001539bbfb02fa4bc))
+* **searchableSelect:** adjust field styling of searcable single and multi selects ([b711ba1](https://github.com/dhis2/maintenance-app-beta/commit/b711ba1bed3dcc2bd1bc6092e14751229c5da505))
+* **sectionForm:** adjust padding and spacing ([0d8cd34](https://github.com/dhis2/maintenance-app-beta/commit/0d8cd341af4f560960a880dd8b60d6b7d76d8970))
+* **sectionFormSidebar:** adjust sidebar item styling ([681d840](https://github.com/dhis2/maintenance-app-beta/commit/681d84010fac0a5ccc9ff6977ed2876b2a2a6eeb))
+* **sectionList:** adjust action button icons ([05c08ad](https://github.com/dhis2/maintenance-app-beta/commit/05c08adc4eb0442639b118311b2aa1984fe681a9))
+* **sectionList:** adjust row and checkbox spacing ([627145d](https://github.com/dhis2/maintenance-app-beta/commit/627145daba872c402e35af035c6c29086cb3dc73))
+* **SectionList:** adjust manage list view transfer headers ([1f42468](https://github.com/dhis2/maintenance-app-beta/commit/1f42468f734b29e04da57964a4833eebdfafe976))
+* **sectionListToolbar:** adjust batch toolbar styles ([b06dff1](https://github.com/dhis2/maintenance-app-beta/commit/b06dff1851691b1db39941725f7c9628d211a8ba))
+* **sectionListToolbar:** avoid LinkButton offset alignment issue ([31ecec8](https://github.com/dhis2/maintenance-app-beta/commit/31ecec8b53245adada5966bcf903407e998a33b5))
+* **standardFormActions:** use UI Button loading states ([dd18fde](https://github.com/dhis2/maintenance-app-beta/commit/dd18fde50e608296492f9ea73b3fdf8e2b14d50a))
+
+
+### Features
+
+* **colorPicker:** add ability to remove color, use compact picker ([a740f18](https://github.com/dhis2/maintenance-app-beta/commit/a740f18d72e832d57806b0d2df1086a5f40a6c65))
+
 ## [0.122.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.122.1...v0.122.2) (2026-02-04)
 
 
