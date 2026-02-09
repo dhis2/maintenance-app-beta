@@ -7,37 +7,34 @@ import {
 } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { Field as FieldRFF, useField, useForm } from 'react-final-form'
-import { StandardFormField } from '../../../components'
-import { getConstantTranslation } from '../../../lib'
+import { StandardFormField } from '../../../../components'
+import { getConstantTranslation } from '../../../../lib'
 
 export const triggerOptions = [
+    { label: getConstantTranslation('ENROLLMENT'), value: 'ENROLLMENT' },
+    { label: getConstantTranslation('COMPLETION'), value: 'COMPLETION' },
+    { label: getConstantTranslation('PROGRAM_RULE'), value: 'PROGRAM_RULE' },
+    // {  label: getConstantTranslation("SCHEDULED_DAYS_DUE_DATE") , value:"SCHEDULED_DAYS_DUE_DATE"} ,
     {
-        label: getConstantTranslation('DATA_SET_COMPLETION'),
-        value: 'DATA_SET_COMPLETION',
+        label: getConstantTranslation('SCHEDULED_DAYS_INCIDENT_DATE'),
+        value: 'SCHEDULED_DAYS_INCIDENT_DATE',
     },
     {
-        label: getConstantTranslation('SCHEDULED_DAYS'),
-        value: 'SCHEDULED_DAYS',
-    },
-]
-
-export const notificationTypeOptions = [
-    {
-        label: getConstantTranslation('COLLECTIVE_SUMMARY'),
-        value: 'COLLECTIVE_SUMMARY',
-    },
-    {
-        label: getConstantTranslation('SINGLE_NOTIFICATION'),
-        value: 'SINGLE_NOTIFICATION',
+        label: getConstantTranslation('SCHEDULED_DAYS_ENROLLMENT_DATE'),
+        value: 'SCHEDULED_DAYS_ENROLLMENT_DATE',
     },
 ]
 
 export const NotificationTimingSection = () => {
     const { input: triggerInput, meta: triggerMeta } = useField(
-        'dataSetNotificationTrigger'
+        'notificationTrigger'
     )
     const form = useForm()
-    const isScheduledDays = triggerInput.value === 'SCHEDULED_DAYS'
+    const isScheduledDays = [
+        'SCHEDULED_DAYS_DUE_DATE',
+        'SCHEDULED_DAYS_INCIDENT_DATE',
+        'SCHEDULED_DAYS_ENROLLMENT_DATE',
+    ].includes(triggerInput.value)
 
     // Subscribe to relativeScheduledDays to determine sign
     const { input: relativeScheduledDaysInput } = useField<
@@ -51,7 +48,6 @@ export const NotificationTimingSection = () => {
     useEffect(() => {
         setBeforeAfter(relativeDaysValue < 0 ? 'BEFORE' : 'AFTER')
     }, [relativeDaysValue])
-
     useEffect(() => {
         if (!isScheduledDays) {
             setBeforeAfter('AFTER')
@@ -69,13 +65,14 @@ export const NotificationTimingSection = () => {
         <div>
             <StandardFormField>
                 <SingleSelectFieldFF
-                    name="dataSetNotificationTrigger"
-                    dataTest="formfields-dataSetNotificationTrigger"
-                    label={i18n.t('When to send notification')}
+                    name="notificationTrigger"
+                    dataTest="formfields-notificationTrigger"
+                    label={i18n.t('When to send notification (required)')}
                     inputWidth="500px"
                     options={triggerOptions}
                     input={triggerInput}
                     meta={triggerMeta}
+                    required
                 />
             </StandardFormField>
 
@@ -89,7 +86,7 @@ export const NotificationTimingSection = () => {
                             selected={beforeAfter}
                             dataTest="formfields-beforeOrAfter"
                             onChange={({ selected }: { selected: string }) => {
-                                setBeforeAfter(selected as 'BEFORE' | 'AFTER')
+                                setBeforeAfter(selected)
                                 handleBeforeAfterChange(
                                     selected as 'BEFORE' | 'AFTER'
                                 )
@@ -137,22 +134,6 @@ export const NotificationTimingSection = () => {
                                     beforeAfter === 'BEFORE' ? -parsed : parsed
                                 return String(signed)
                             }}
-                        />
-                    </StandardFormField>
-
-                    <StandardFormField>
-                        <FieldRFF<string | undefined>
-                            inputWidth="500px"
-                            dataTest="formfields-notification-type"
-                            initialValue="SINGLE_NOTIFICATION"
-                            name="sendStrategy"
-                            render={(props) => (
-                                <SingleSelectFieldFF
-                                    {...props}
-                                    label={i18n.t('Send notification as')}
-                                    options={notificationTypeOptions}
-                                />
-                            )}
                         />
                     </StandardFormField>
                 </div>

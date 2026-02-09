@@ -37,7 +37,20 @@ import { programNotificationFormDescriptor } from './programNotificationFormDesc
 import { ProgramNotificationsFormFields } from './ProgramNotificationsFormFields'
 import { initialValues } from './programNotificationTemplateSchema'
 
-export const fieldFilters = [...DEFAULT_FIELD_FILTERS, 'name'] as const
+export const fieldFilters = [
+    ...DEFAULT_FIELD_FILTERS,
+    'name',
+    'code',
+    'subjectTemplate',
+    'messageTemplate',
+    'notificationRecipient',
+    'notificationTrigger',
+    'relativeScheduledDays',
+    'deliveryChannels',
+    'recipientUserGroup[id,displayName]',
+    'notifyUsersInHierarchyOnly',
+    'recipientProgramAttribute[id,displayName]',
+] as const
 
 export const notificationSchemaSection = {
     name: SchemaName.programNotificationTemplate,
@@ -81,13 +94,10 @@ export const NotificationForm = ({
     const programId = useParams().id as string
     const initialNotificationValues: PartialNotificationFormValues | undefined =
         useMemo(() => {
-            return (
-                notification ??
-                ({
-                    ...initialValues,
-                    program: { id: programId },
-                } as PartialNotificationFormValues)
-            )
+            return {
+                ...(notification ?? initialValues),
+                program: { id: programId },
+            } as PartialNotificationFormValues
         }, [notification, programId])
 
     const closeOnSubmitRef = React.useRef(false)

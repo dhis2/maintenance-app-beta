@@ -7,16 +7,16 @@ import {
 } from '../../../../lib'
 import { ProgramNotificationTemplate } from '../../../../types/generated'
 
-const { identifiable, withDefaultListColumns, referenceCollection } =
-    modelFormSchemas
+const { identifiable } = modelFormSchemas
 
 const programNotificationTemplateBaseSchema = z.object({
-    programNotificationTrigger: z
-        .nativeEnum(ProgramNotificationTemplate.notificationTrigger)
-        .optional(),
-    notificationRecipient: z
-        .nativeEnum(ProgramNotificationTemplate.notificationRecipient)
-        .optional(),
+    code: z.string().optional(),
+    notificationTrigger: z.nativeEnum(
+        ProgramNotificationTemplate.notificationTrigger
+    ),
+    notificationRecipient: z.nativeEnum(
+        ProgramNotificationTemplate.notificationRecipient
+    ),
     deliveryChannels: z.array(z.enum(['SMS', 'EMAIL', 'HTTP'])).default([]),
     messageTemplate: z.string(),
     subjectTemplate: z
@@ -34,29 +34,30 @@ const programNotificationTemplateBaseSchema = z.object({
             id: z.string().optional(),
             displayName: z.string().optional(),
         })
-        .optional()
-        .default({}),
-    programs: referenceCollection.default([]),
+        .optional(),
+    recipientProgramAttribute: z
+        .object({
+            id: z.string().optional(),
+            displayName: z.string().optional(),
+        })
+        .optional(),
     notifyUsersInHierarchyOnly: z.boolean().optional(),
 })
 
 export const programNotificationTemplateFormSchema =
     programNotificationTemplateBaseSchema.merge(identifiable).extend({
-        programNotificationTrigger: z
+        notificationTrigger: z
             .nativeEnum(ProgramNotificationTemplate.notificationTrigger)
             .default(
-                ProgramNotificationTemplate.notificationTrigger
-                    .SCHEDULED_DAYS_DUE_DATE
+                ProgramNotificationTemplate.notificationTrigger.COMPLETION
             ),
         notificationRecipient: z
             .nativeEnum(ProgramNotificationTemplate.notificationRecipient)
             .default(
-                ProgramNotificationTemplate.notificationRecipient.USER_GROUP
+                ProgramNotificationTemplate.notificationRecipient
+                    .USERS_AT_ORGANISATION_UNIT
             ),
     })
-
-export const programNotificationTemplateListSchema =
-    programNotificationTemplateBaseSchema.merge(withDefaultListColumns)
 
 export const initialValues = getDefaults(programNotificationTemplateFormSchema)
 
@@ -67,39 +68,3 @@ export type ProgramNotificationFormValues = z.infer<
 export const validate = createFormValidate(
     programNotificationTemplateBaseSchema
 )
-
-/**
- * Converts form values back to API payload
- */
-export const transformFormValues = <
-    TValues extends Partial<ProgramNotificationFormValues>
->(
-    values: TValues
-) => {
-    const {
-        recipientUserGroup,
-        relativeScheduledDays,
-        notifyUsersInHierarchyOnly,
-        programs = [],
-        ...rest
-    } = values
-
-    return {
-        ...rest,
-        relativeScheduledDays:
-            rest.programNotificationTrigger === 'SCHEDULED_DAYS_DUE_DATE' &&
-            relativeScheduledDays
-                ? Number(relativeScheduledDays)
-                : undefined,
-        recipientUserGroup:
-            rest.notificationRecipient === 'USER_GROUP' &&
-            recipientUserGroup?.id
-                ? { id: recipientUserGroup.id }
-                : undefined,
-        notifyUsersInHierarchyOnly:
-            rest.notificationRecipient === 'USER_GROUP' && recipientUserGroup
-                ? Boolean(notifyUsersInHierarchyOnly)
-                : undefined,
-        programs: programs.map(({ id }) => ({ id })),
-    }
-}

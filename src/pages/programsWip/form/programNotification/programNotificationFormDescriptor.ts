@@ -12,7 +12,10 @@ export const programNotificationFormDescriptor = {
         {
             name: 'basicInformation',
             label: i18n.t('Basic information'),
-            fields: [{ name: 'name', label: i18n.t('Name') }],
+            fields: [
+                { name: 'name', label: i18n.t('Name') },
+                { name: 'code', label: i18n.t('Code') },
+            ],
         },
         {
             name: 'messageContent',
@@ -27,16 +30,12 @@ export const programNotificationFormDescriptor = {
             label: i18n.t('Notification timing'),
             fields: [
                 {
-                    name: 'dataSetNotificationTrigger',
+                    name: 'notificationTrigger',
                     label: i18n.t('Trigger'),
                 },
                 {
                     name: 'relativeScheduledDays',
                     label: i18n.t('Scheduled days'),
-                },
-                {
-                    name: 'sendStrategy',
-                    label: i18n.t('Send strategy'),
                 },
             ],
         },
@@ -44,6 +43,10 @@ export const programNotificationFormDescriptor = {
             name: 'recipient',
             label: i18n.t('Recipient'),
             fields: [
+                {
+                    name: 'deliveryChannels',
+                    label: i18n.t('Delivery channels'),
+                },
                 {
                     name: 'notificationRecipient',
                     label: i18n.t('Notification recipient'),
@@ -53,8 +56,16 @@ export const programNotificationFormDescriptor = {
                     label: i18n.t('Recipient user group'),
                 },
                 {
-                    name: 'deliveryChannels',
-                    label: i18n.t('Delivery channels'),
+                    name: 'recipientUserGroup',
+                    label: i18n.t('Recipient user group'),
+                },
+                {
+                    name: 'notifyUsersInHierarchyOnly',
+                    label: i18n.t('Notify users in hierarchy only'),
+                },
+                {
+                    name: 'recipientProgramAttribute',
+                    label: i18n.t('Recipient program attribute'),
                 },
             ],
         },

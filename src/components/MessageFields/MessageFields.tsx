@@ -5,17 +5,29 @@ import { Field as FieldRFF, useField, FieldInputProps } from 'react-final-form'
 import { StandardFormField } from '../standardForm'
 import styles from './MessageFields.module.css'
 
+type MessageVariablesType = 'VARIABLE' | 'ATTRIBUTE' | 'DATA_ELEMENT'
+export type MessageVariables = Record<
+    string,
+    { label: string; type: MessageVariablesType }
+>
 const insertElement = ({
     id,
+    type,
     elementRef,
     input,
 }: {
     id: string
+    type: MessageVariablesType
     elementRef: RefObject<HTMLInputElement | HTMLTextAreaElement>
     input: FieldInputProps<string>
 }) => {
     if (elementRef.current) {
-        const elementText = `V{${id}}`
+        const elementText =
+            type === 'VARIABLE'
+                ? `V{${id}}`
+                : type === 'ATTRIBUTE'
+                ? `A{${id}}`
+                : `#{${id}}`
 
         const cursorStartIndex = elementRef.current?.selectionStart ?? 0
         const startText = elementRef.current?.value.slice(0, cursorStartIndex)
@@ -36,7 +48,7 @@ export const MessageFields = ({
     messageVariables,
     messageTemplateRequired = false,
 }: {
-    messageVariables: Record<string, string>
+    messageVariables: MessageVariables
     messageTemplateRequired?: boolean
 }) => {
     const { input: subjectTemplateInput } = useField('subjectTemplate')
@@ -188,6 +200,7 @@ export const MessageFields = ({
                             onClick={() => {
                                 insertElement({
                                     id: v,
+                                    type: messageVariables[v].type,
                                     elementRef: subjectTemplateSelected
                                         ? subjectRef
                                         : messageRef,
@@ -197,7 +210,7 @@ export const MessageFields = ({
                                 })
                             }}
                         >
-                            {messageVariables[v]}
+                            {messageVariables[v].label}
                         </Button>
                     </div>
                 ))}

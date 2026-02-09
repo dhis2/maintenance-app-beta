@@ -141,9 +141,22 @@ const DATA_SET_NOTIFICATION_TRIGGER = {
     DATA_SET_COMPLETION: i18n.t('Data set completion'),
 }
 
+const PROGRAM_NOTIFICATION_TRIGGER = {
+    COMPLETION: i18n.t('Program completion'),
+    ENROLLMENT: i18n.t('Program enrollment'),
+    SCHEDULED_DAYS_DUE_DATE: i18n.t('Days scheduled (due date)'),
+    SCHEDULED_DAYS_INCIDENT_DATE: i18n.t('Days scheduled (incident date)'),
+    SCHEDULED_DAYS_ENROLLMENT_DATE: i18n.t('Days scheduled (enrollment date)'),
+    PROGRAM_RULE: i18n.t('Program rule'),
+}
+
 const NOTIFICATION_RECIPIENT = {
     ORGANISATION_UNIT_CONTACT: i18n.t('Organisation unit contact'),
     USER_GROUP: i18n.t('User group'),
+    TRACKED_ENTITY_INSTANCE: i18n.t('Tracked entity instance'),
+    USERS_AT_ORGANISATION_UNIT: i18n.t('Users at Organisation Unit'),
+    PROGRAM_ATTRIBUTE: i18n.t('Program attribute'),
+    WEB_HOOK: i18n.t('Web hook'),
 }
 
 const RENDERING_TYPE = {
@@ -219,6 +232,7 @@ const allConstantTranslations: Record<string, string> = {
     ...RENDERING_TYPE,
     ...SEND_STRATEGY,
     ...DATA_SET_NOTIFICATION_TRIGGER,
+    ...PROGRAM_NOTIFICATION_TRIGGER,
     ...NOTIFICATION_RECIPIENT,
     ...REPORTING_RATE,
     ...PREDICTOR_ORG_UNIT_SOURCE,
