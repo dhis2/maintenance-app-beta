@@ -1,7 +1,10 @@
 import { writeFileSync, mkdirSync } from 'fs'
 import { ZodSchema } from 'zod'
 import zodToJsonSchema from 'zod-to-json-schema'
-import { categoryListSchema } from '../pages/categories/form'
+import {
+    categoryFormSchema,
+    categoryListSchema,
+} from '../pages/categories/form'
 
 const generateContract = ({
     method,
@@ -38,12 +41,12 @@ const generateContract = ({
 }
 
 describe('contracts', () => {
-    it('should generate all contracts', () => {
+    it('should generate get category contracts', () => {
         generateContract({
             method: 'GET',
             path: '/categories/{id}',
             name: 'category',
-            expectedSchema: categoryListSchema,
+            expectedSchema: categoryFormSchema,
         })
     })
 })
