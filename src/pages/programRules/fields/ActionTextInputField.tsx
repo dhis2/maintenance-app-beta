@@ -2,7 +2,6 @@ import { Box, InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field } from 'react-final-form'
 
-/** Text input for action content; fixed width 400px to match other action fields. */
 export function ActionTextInputField({
     name,
     label,
