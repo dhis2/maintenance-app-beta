@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import { Box } from '@dhis2/ui'
 import React from 'react'
 import { ExpressionBuilderEntry } from '../../../components'
 import { PaddedContainer } from '../../../components/ExpressionBuilder/PaddedContainer'
@@ -17,7 +18,7 @@ export function ExpressionField({
     clearable?: boolean
 }>) {
     return (
-        <>
+        <Box width="800px" minWidth="100px">
             <PaddedContainer>
                 <ExpressionBuilderEntry
                     fieldName={fieldName}
@@ -33,6 +34,6 @@ export function ExpressionField({
                 />
             </PaddedContainer>
             <span className={styles.expressionLabel}>{label}</span>
-        </>
+        </Box>
     )
 }

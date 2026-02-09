@@ -100,7 +100,6 @@ const ProgramRuleActionListNewOrEdit = () => {
                 <DrawerPortal isOpen={drawerState.open} onClose={closeDrawer}>
                     {drawerState.open && (
                         <ProgramRuleActionForm
-                            programRuleId={modelId}
                             programId={programId}
                             action={drawerState.action}
                             onCancel={closeDrawer}

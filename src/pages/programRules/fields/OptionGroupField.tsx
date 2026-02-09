@@ -1,15 +1,29 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectFieldFF } from '@dhis2/ui'
+import { Box, Field as UIField } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
 import { Field, useFormState } from 'react-final-form'
+import { BaseModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/BaseModelSingleSelect'
 import { useBoundResourceQueryFn } from '../../../lib'
 
-function getOptionSetId(values: any): string | undefined {
+type OptionGroupModel = { id: string; displayName?: string }
+
+function getOptionSetId(
+    values: Record<string, { optionSet?: { id: string } } | undefined>
+): string | undefined {
     const de = values.dataElement
     const tea = values.trackedEntityAttribute
     return de?.optionSet?.id ?? tea?.optionSet?.id
 }
+
+const OPTION_GROUPS_QUERY = (optionSetId: string) => ({
+    resource: 'optionGroups' as const,
+    params: {
+        fields: ['id', 'displayName'],
+        filter: [`optionSet.id:eq:${optionSetId}`, 'name:neq:default'],
+        paging: false,
+    },
+})
 
 export function OptionGroupField({
     label,
@@ -18,91 +32,65 @@ export function OptionGroupField({
     label: string
     required?: boolean
 }>) {
-    const queryFn = useBoundResourceQueryFn()
     const { values } = useFormState({ subscription: { values: true } })
-    const optionSetId = getOptionSetId(values)
-
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'optionGroups',
-                params: {
-                    fields: ['id', 'displayName'],
-                    filter: optionSetId
-                        ? [`optionSet.id:eq:${optionSetId}`, 'name:neq:default']
-                        : undefined,
-                    paging: false,
-                },
-            },
-        ] as const,
-        queryFn: queryFn<{
-            optionGroups?: Array<{ id: string; displayName?: string }>
-        }>,
-        enabled: !!optionSetId,
-    })
-
-    const optionGroups = useMemo(() => data?.optionGroups ?? [], [data])
-    const currentValue = (values as any).optionGroup
-    const selectedId = currentValue?.id
-    const selectedInList =
-        selectedId && optionGroups.some((og) => og.id === selectedId)
-
-    const selectOptions = useMemo(
-        () => [
-            ...(selectedId && !selectedInList
-                ? [
-                      {
-                          value: selectedId,
-                          label:
-                              currentValue?.displayName ?? i18n.t('Loading...'),
-                      },
-                  ]
-                : []),
-            ...optionGroups.map((og) => ({
-                value: og.id,
-                label: og.displayName ?? og.id,
-            })),
-        ],
-        [optionGroups, selectedId, selectedInList, currentValue?.displayName]
+    const queryFn = useBoundResourceQueryFn()
+    const optionSetId = getOptionSetId(
+        values as Record<string, { optionSet?: { id: string } } | undefined>
     )
 
-    type OptionGroupValue = { id: string; displayName?: string } | undefined
+    const query = useMemo(
+        () =>
+            optionSetId
+                ? OPTION_GROUPS_QUERY(optionSetId)
+                : { resource: 'optionGroups' as const, params: {} },
+        [optionSetId]
+    )
+    const queryResult = useQuery({
+        queryKey: [query],
+        queryFn: queryFn<{ optionGroups?: OptionGroupModel[] }>,
+        enabled: !!optionSetId,
+    })
+    const { data } = queryResult
+
+    const available = useMemo(() => data?.optionGroups ?? [], [data])
+    const disabled = !optionSetId
 
     return (
-        <Field<OptionGroupValue, HTMLElement, string>
+        <Field
             name="optionGroup"
-            format={(value: OptionGroupValue) => value?.id ?? ''}
-            parse={(id: string) =>
-                id ? optionGroups.find((og) => og.id === id) : undefined
-            }
+            format={(value: OptionGroupModel | undefined) => value ?? undefined}
+            parse={(value: OptionGroupModel | undefined) => value}
         >
-            {({ input, meta, ...rest }) => {
-                const showErrorAsTouched =
-                    meta.touched || (!!meta.submitFailed && !!meta.error)
-
-                return (
-                    <SingleSelectFieldFF
-                        input={{
-                            ...input,
-                            onChange: (value: unknown) => {
+            {({ input, meta }) => (
+                <UIField
+                    label={label}
+                    required={required}
+                    error={meta.invalid}
+                    validationText={
+                        (meta.touched && meta.error?.toString()) || ''
+                    }
+                >
+                    <Box width="400px" minWidth="100px">
+                        <BaseModelSingleSelect<OptionGroupModel>
+                            selected={input.value}
+                            available={available}
+                            onChange={(value) => {
                                 input.onChange(value)
                                 input.onBlur()
-                            },
-                        }}
-                        meta={{
-                            ...meta,
-                            touched: showErrorAsTouched,
-                            initial: meta.initial?.id,
-                        }}
-                        label={label}
-                        options={selectOptions}
-                        disabled={!optionSetId}
-                        required={required}
-                        filterable
-                        {...rest}
-                    />
-                )
-            }}
+                            }}
+                            showNoValueOption={{
+                                value: '',
+                                label: i18n.t('(No Value)'),
+                            }}
+                            disabled={disabled}
+                            invalid={meta.touched && !!meta.error}
+                            onRetryClick={queryResult.refetch}
+                            showEndLoader={false}
+                            loading={queryResult.isLoading}
+                        />
+                    </Box>
+                </UIField>
+            )}
         </Field>
     )
 }

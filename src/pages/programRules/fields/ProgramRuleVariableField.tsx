@@ -1,74 +1,80 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectFieldFF } from '@dhis2/ui'
+import { Box, Field as UIField } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
 import { Field } from 'react-final-form'
+import { BaseModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/BaseModelSingleSelect'
 import { useBoundResourceQueryFn } from '../../../lib'
 
-const NO_VALUE_OPTION = { value: '', label: i18n.t('(No Value)') }
+type ProgramRuleVariableModel = { id: string; displayName?: string }
+
+const PROGRAM_RULE_VARIABLES_QUERY = (programId: string) => ({
+    resource: 'programRuleVariables' as const,
+    params: {
+        fields: ['id', 'displayName'],
+        filter: `program.id:eq:${programId}`,
+        paging: false,
+    },
+})
 
 export function ProgramRuleVariableField({
     programId,
 }: Readonly<{ programId: string }>) {
     const queryFn = useBoundResourceQueryFn()
 
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'programRuleVariables',
-                params: {
-                    fields: ['id', 'displayName'],
-                    filter: `program.id:eq:${programId}`,
-                    paging: false,
-                },
-            },
-        ] as const,
+    const query = useMemo(
+        () => PROGRAM_RULE_VARIABLES_QUERY(programId),
+        [programId]
+    )
+    const queryResult = useQuery({
+        queryKey: [query],
         queryFn: queryFn<{
-            programRuleVariables?: Array<{ id: string; displayName?: string }>
+            programRuleVariables?: ProgramRuleVariableModel[]
         }>,
     })
+    const { data } = queryResult
 
-    const variables = useMemo(() => data?.programRuleVariables ?? [], [data])
-
-    const selectOptions = useMemo(
-        () => [
-            NO_VALUE_OPTION,
-            ...variables.map((v) => ({
-                value: v.id,
-                label: v.displayName ?? v.id,
-            })),
-        ],
-        [variables]
-    )
+    const available = useMemo(() => data?.programRuleVariables ?? [], [data])
 
     return (
-        <Field
-            name="content"
-            format={(value: string | undefined) => value ?? ''}
-            parse={(id: string) => id || undefined}
-        >
-            {({ input, meta, ...rest }) => {
-                const showErrorAsTouched =
-                    meta.touched || (!!meta.submitFailed && !!meta.error)
+        <Field name="content">
+            {({ input, meta }) => {
+                const id = (input.value as string) ?? ''
+                const selected = id
+                    ? available.find((v) => v.id === id) ??
+                      ({
+                          id,
+                          displayName: undefined,
+                      } as ProgramRuleVariableModel)
+                    : undefined
 
                 return (
-                    <SingleSelectFieldFF
-                        input={{
-                            ...input,
-                            onChange: (value: unknown) => {
-                                input.onChange(value)
-                                input.onBlur()
-                            },
-                        }}
-                        meta={{
-                            ...meta,
-                            touched: showErrorAsTouched,
-                        }}
+                    <UIField
                         label={i18n.t('Program rule variable to assign to')}
-                        options={selectOptions}
-                        filterable
-                        {...rest}
-                    />
+                        error={meta.invalid}
+                        validationText={
+                            (meta.touched && meta.error?.toString()) || ''
+                        }
+                    >
+                        <Box width="400px" minWidth="100px">
+                            <BaseModelSingleSelect<ProgramRuleVariableModel>
+                                selected={selected}
+                                available={available}
+                                onChange={(value) => {
+                                    input.onChange(value?.id ?? '')
+                                    input.onBlur()
+                                }}
+                                showNoValueOption={{
+                                    value: '',
+                                    label: i18n.t('(No Value)'),
+                                }}
+                                invalid={meta.touched && !!meta.error}
+                                onRetryClick={queryResult.refetch}
+                                showEndLoader={false}
+                                loading={queryResult.isLoading}
+                            />
+                        </Box>
+                    </UIField>
                 )
             }}
         </Field>

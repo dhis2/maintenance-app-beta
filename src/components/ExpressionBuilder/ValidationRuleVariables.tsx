@@ -707,7 +707,6 @@ const VARIABLE_ELEMENTS = [
     },
 ]
 
-/** Built-in program rule variables (id only; displayed as-is, no translation). */
 const PROGRAM_RULE_VARIABLE_IDS = [
     'V{current_date}',
     'V{event_date}',
@@ -828,7 +827,6 @@ const PROGRAM_RULE_FUNCTION_ELEMENTS = [
     },
 ]
 
-/** Program rule expression builder operators only. */
 const PROGRAM_RULE_OPERATOR_ELEMENTS = [
     { id: '+', displayName: '+' },
     { id: '-', displayName: '-' },

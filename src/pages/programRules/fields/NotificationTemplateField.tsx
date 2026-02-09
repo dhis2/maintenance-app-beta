@@ -1,9 +1,24 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectFieldFF } from '@dhis2/ui'
+import { Box, Field as UIField } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
 import { Field } from 'react-final-form'
+import { BaseModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/BaseModelSingleSelect'
 import { useBoundResourceQueryFn } from '../../../lib'
+
+type TemplateModel = { id: string; displayName?: string }
+
+const PROGRAM_TEMPLATES_QUERY = (programId: string) => ({
+    resource: 'programs' as const,
+    id: programId,
+    params: {
+        fields: [
+            'notificationTemplates[id,displayName]',
+            'programStages[notificationTemplates[id,displayName]]',
+        ],
+        paging: false,
+    },
+})
 
 export function NotificationTemplateField({
     programId,
@@ -14,38 +29,25 @@ export function NotificationTemplateField({
 }>) {
     const queryFn = useBoundResourceQueryFn()
 
-    const { data: programData } = useQuery({
-        queryKey: [
-            {
-                resource: 'programs',
-                id: programId,
-                params: {
-                    fields: [
-                        'notificationTemplates[id,displayName]',
-                        'programStages[notificationTemplates[id,displayName]]',
-                    ],
-                    paging: false,
-                },
-            },
-        ] as const,
+    const query = useMemo(() => PROGRAM_TEMPLATES_QUERY(programId), [programId])
+    const queryResult = useQuery({
+        queryKey: [query],
         queryFn: queryFn<{
-            notificationTemplates?: Array<{ id: string; displayName?: string }>
+            notificationTemplates?: TemplateModel[]
             programStages?: Array<{
-                notificationTemplates?: Array<{
-                    id: string
-                    displayName?: string
-                }>
+                notificationTemplates?: TemplateModel[]
             }>
         }>,
     })
+    const { data } = queryResult
 
-    const templates = useMemo(() => {
-        const fromProgram = programData?.notificationTemplates ?? []
+    const available = useMemo(() => {
+        const fromProgram = data?.notificationTemplates ?? []
         const fromStages =
-            programData?.programStages?.flatMap(
+            data?.programStages?.flatMap(
                 (s) => s.notificationTemplates ?? []
             ) ?? []
-        const all = [...fromProgram, ...fromStages]
+        const all: TemplateModel[] = [...fromProgram, ...fromStages]
         const seen = new Set<string>()
         return all.filter((t) => {
             if (seen.has(t.id)) {
@@ -54,16 +56,7 @@ export function NotificationTemplateField({
             seen.add(t.id)
             return true
         })
-    }, [programData])
-
-    const selectOptions = useMemo(
-        () =>
-            templates.map((t) => ({
-                value: t.id,
-                label: t.displayName ?? t.id,
-            })),
-        [templates]
-    )
+    }, [data])
 
     return (
         <Field
@@ -71,29 +64,32 @@ export function NotificationTemplateField({
             format={(value: string | undefined) => value ?? ''}
             parse={(value: string) => value || undefined}
         >
-            {({ input, meta, ...rest }) => {
-                const showErrorAsTouched =
-                    meta.touched || (!!meta.submitFailed && !!meta.error)
-
+            {({ input, meta }) => {
+                const selected = available.find((t) => t.id === input.value)
                 return (
-                    <SingleSelectFieldFF
-                        input={{
-                            ...input,
-                            onChange: (value: unknown) => {
-                                input.onChange(value)
-                                input.onBlur()
-                            },
-                        }}
-                        meta={{
-                            ...meta,
-                            touched: showErrorAsTouched,
-                        }}
+                    <UIField
                         label={i18n.t('Message template')}
-                        options={selectOptions}
                         required={required}
-                        filterable
-                        {...rest}
-                    />
+                        error={meta.invalid}
+                        validationText={
+                            (meta.touched && meta.error?.toString()) || ''
+                        }
+                    >
+                        <Box width="400px" minWidth="100px">
+                            <BaseModelSingleSelect<TemplateModel>
+                                selected={selected}
+                                available={available}
+                                onChange={(value) => {
+                                    input.onChange(value?.id ?? '')
+                                    input.onBlur()
+                                }}
+                                invalid={meta.touched && !!meta.error}
+                                onRetryClick={queryResult.refetch}
+                                showEndLoader={false}
+                                loading={queryResult.isLoading}
+                            />
+                        </Box>
+                    </UIField>
                 )
             }}
         </Field>

@@ -31,12 +31,12 @@ import { ProgramRuleFormDescriptor } from './form/formDescriptor'
 import { ProgramRuleFormFields } from './form/ProgramRuleFormFields'
 import { validate } from './form/programRuleSchema'
 
-/** Extends form values so submit handler can read programRuleActions from form state. */
+/** Form values type including programRuleActions array (used by submit handler). */
 type ProgramRuleFormValuesWithActions = ProgramRuleFormValues & {
     programRuleActions?: ProgramRuleActionListItem[]
 }
 
-/** Remove undefined/null/empty fields (backend doesn't like null refs). */
+/** Returns a copy of obj with undefined, null and empty string values removed (backend rejects them). */
 function removeEmptyFields(
     obj: Record<string, unknown>
 ): Record<string, unknown> {
@@ -50,31 +50,15 @@ function removeEmptyFields(
     return cleaned
 }
 
-function getDeletionFailureMessages(
-    failures: Array<{ status: string } & { reason?: { message?: string } }>
-): string[] {
-    return failures.map(
-        (f) => (f as PromiseRejectedResult).reason?.message ?? ''
-    )
-}
-
-/** Map a single action to API payload: strip frontend-only fields and empty values. */
+/** Strips frontend-only fields (deleted, and id for new actions) and empty values for API payload. */
 function cleanActionForSubmit(
     action: ProgramRuleActionListItem,
     originalActions: ProgramRuleActionListItem[]
 ): Record<string, unknown> {
     const isExisting =
-        action.id &&
-        originalActions.some(
-            (orig: ProgramRuleActionListItem) => orig.id === action.id
-        )
-    if (isExisting) {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { deleted, ...cleanAction } = action
-        return removeEmptyFields(cleanAction)
-    }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { id, deleted, ...cleanAction } = action
+        action.id && originalActions.some((orig) => orig.id === action.id)
+    const { deleted, ...rest } = action
+    const cleanAction = isExisting ? rest : (({ id: _id, ...r }) => r)(rest)
     return removeEmptyFields(cleanAction)
 }
 
@@ -92,54 +76,51 @@ const useOnSubmitProgramRuleEdit = (modelId: string) => {
 
     return useMemo<EnhancedOnSubmit<ProgramRuleFormValuesWithActions>>(
         () => async (values, form, options) => {
-            const formValues = form.getState().values
+            // Current actions from form (including soft-deleted)
             const actions: ProgramRuleActionListItem[] =
-                formValues.programRuleActions ?? []
-
-            // Delete from API any persisted actions that were soft-deleted in the UI.
-            // Only delete actions that have an id (exist on server)
-            const actionsToDelete = actions.filter((a) => a.deleted && a.id)
+                values.programRuleActions ?? []
+            // Only delete actions that exist on server (have id)
+            const actionsToDelete = actions.filter(
+                (a: ProgramRuleActionListItem) => a.deleted && a.id
+            )
+            // Delete soft-deleted actions from API
             const deletionResults = await Promise.allSettled(
-                actionsToDelete.map((a) =>
+                actionsToDelete.map((a: ProgramRuleActionListItem) =>
                     dataEngine.mutate({
                         resource: 'programRuleActions',
-                        id: a.id!, // Non-null assertion OK because filter above ensures id exists
+                        id: a.id!,
                         type: 'delete',
                     })
                 )
             )
 
-            const failures = deletionResults
-                .map((result, i) => ({
-                    ...result,
-                    actionId: actionsToDelete[i]?.id,
-                }))
-                .filter((r) => r.status === 'rejected')
-
-            if (failures.length > 0) {
+            const rejected = deletionResults.filter(
+                (r) => r.status === 'rejected'
+            )
+            if (rejected.length > 0) {
                 await queryClient.invalidateQueries({
                     queryKey: [{ resource: 'programRules' }],
                 })
-                const errorMessages = getDeletionFailureMessages(failures)
                 return createFormError({
                     message: i18n.t(
                         'There was an error deleting program rule actions'
                     ),
-                    errors: errorMessages,
+                    errors: rejected.map(
+                        (r) =>
+                            (r as PromiseRejectedResult).reason?.message ?? ''
+                    ),
                 })
             }
 
-            // Strip deleted actions and clean data for API
-            const originalActions =
+            // Original actions (from initial load) to distinguish new vs existing
+            const originalActions: ProgramRuleActionListItem[] =
                 form.getState().initialValues.programRuleActions ?? []
-
+            // Drop deleted, clean each action for API
             const trimmedValues = {
                 ...values,
                 programRuleActions: actions
-                    .filter((a) => !a.deleted)
-                    .map((action) =>
-                        cleanActionForSubmit(action, originalActions)
-                    ),
+                    .filter((a: ProgramRuleActionListItem) => !a.deleted)
+                    .map((a) => cleanActionForSubmit(a, originalActions)),
             }
 
             return submitEdit(
@@ -157,19 +138,16 @@ export const Component = () => {
     const section = SECTIONS_MAP.programRule
     const queryFn = useBoundResourceQueryFn()
 
+    // Query to load program rule by id with form fields
     const query = {
         resource: 'programRules',
         id: modelId,
-        params: {
-            fields: fieldFilters.concat(),
-        },
+        params: { fields: fieldFilters.concat() },
     }
-
     const programRuleQuery = useQuery({
         queryKey: [query],
         queryFn: queryFn<ProgramRuleFormValues>,
     })
-
     const initialValues = programRuleQuery.data
 
     return (
@@ -181,26 +159,23 @@ export const Component = () => {
             validate={validate}
             subscription={{}}
             mutators={{ ...arrayMutators }}
-            /* arrayMutators needed for useFieldArray('programRuleActions') in ProgramRuleActionsFormContents */
         >
-            {({ handleSubmit }) => {
-                return (
-                    <SectionedFormProvider
-                        formDescriptor={ProgramRuleFormDescriptor}
+            {({ handleSubmit }) => (
+                <SectionedFormProvider
+                    formDescriptor={ProgramRuleFormDescriptor}
+                >
+                    <SectionedFormLayout
+                        sidebar={<DefaultSectionedFormSidebar />}
                     >
-                        <SectionedFormLayout
-                            sidebar={<DefaultSectionedFormSidebar />}
-                        >
-                            <DrawerRoot />
-                            <form onSubmit={handleSubmit}>
-                                <ProgramRuleFormFields />
-                                <DefaultFormFooter cancelTo="/programRules" />
-                            </form>
-                            <SectionedFormErrorNotice />
-                        </SectionedFormLayout>
-                    </SectionedFormProvider>
-                )
-            }}
+                        <DrawerRoot />
+                        <form onSubmit={handleSubmit}>
+                            <ProgramRuleFormFields />
+                            <DefaultFormFooter cancelTo="/programRules" />
+                        </form>
+                        <SectionedFormErrorNotice />
+                    </SectionedFormLayout>
+                </SectionedFormProvider>
+            )}
         </FormBase>
     )
 }

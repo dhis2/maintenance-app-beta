@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, SingleSelectFieldFF } from '@dhis2/ui'
+import { Box, Button, SingleSelectFieldFF } from '@dhis2/ui'
 import React, { useEffect, useRef } from 'react'
 import { Field, useForm, useFormState } from 'react-final-form'
 import {
@@ -16,6 +16,7 @@ import {
 } from '../../../../lib/featuresApiSupport'
 import { useClearFormFields } from '../../../../lib/form/useClearFormFields'
 import { PriorityField } from '../../fields'
+import { initialValues } from '../programRuleSchema'
 import { ActionTypeFieldsContent } from './ActionTypeFieldsContent'
 import { ACTION_FIELDS_TO_CLEAR, ACTION_TYPE_OPTIONS } from './constants'
 import styles from './ProgramRuleActionForm.module.css'
@@ -26,24 +27,16 @@ import type {
 import { validateProgramRuleAction } from './validation'
 
 export const ProgramRuleActionForm = ({
-    programRuleId,
     programId,
     action,
     onCancel,
     onSubmitted,
 }: Readonly<{
-    programRuleId: string
     programId?: string
     action: ProgramRuleActionListItem | null
     onCancel: () => void
     onSubmitted: (values: ProgramRuleActionListItem) => void
 }>) => {
-    const initialValues: ProgramRuleActionFormValues = action
-        ? { ...action, programRule: { id: programRuleId } }
-        : {
-              programRule: { id: programRuleId },
-          }
-
     const handleSubmit = (values: ProgramRuleActionFormValues) => {
         const submitted = {
             ...values,
@@ -115,14 +108,16 @@ function ProgramRuleActionFormBody({
                 <StandardFormField>
                     <Field name="programRuleActionType">
                         {({ input, meta }) => (
-                            <SingleSelectFieldFF
-                                input={input}
-                                meta={meta}
-                                label={i18n.t('Action type')}
-                                options={ACTION_TYPE_OPTIONS}
-                                required
-                                filterable
-                            />
+                            <Box width="400px" minWidth="100px">
+                                <SingleSelectFieldFF
+                                    input={input}
+                                    meta={meta}
+                                    label={i18n.t('Action type')}
+                                    options={ACTION_TYPE_OPTIONS}
+                                    required
+                                    filterable
+                                />
+                            </Box>
                         )}
                     </Field>
                 </StandardFormField>

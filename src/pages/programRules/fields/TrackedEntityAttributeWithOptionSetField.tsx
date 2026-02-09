@@ -1,11 +1,27 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectFieldFF } from '@dhis2/ui'
+import { Box, Field as UIField } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
 import { Field, useForm, useFormState } from 'react-final-form'
+import { BaseModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/BaseModelSingleSelect'
 import { useBoundResourceQueryFn } from '../../../lib'
 
-const NO_VALUE_OPTION = { value: '', label: i18n.t('(No Value)') }
+type TEAWithOptionSet = {
+    id: string
+    displayName?: string
+    optionSet?: { id: string }
+}
+
+const PROGRAM_TEAS_OPTION_SET_QUERY = (programId: string) => ({
+    resource: 'programs' as const,
+    id: programId,
+    params: {
+        fields: [
+            'programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,optionSet[id]]]',
+        ],
+        paging: false,
+    },
+})
 
 export function TrackedEntityAttributeWithOptionSetField({
     programId,
@@ -18,31 +34,21 @@ export function TrackedEntityAttributeWithOptionSetField({
     const { values } = useFormState({ subscription: { values: true } })
     const queryFn = useBoundResourceQueryFn()
 
-    const { data } = useQuery({
-        queryKey: [
-            {
-                resource: 'programs',
-                id: programId,
-                params: {
-                    fields: [
-                        'programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,optionSet[id]]]',
-                    ],
-                    paging: false,
-                },
-            },
-        ] as const,
+    const query = useMemo(
+        () => PROGRAM_TEAS_OPTION_SET_QUERY(programId),
+        [programId]
+    )
+    const queryResult = useQuery({
+        queryKey: [query],
         queryFn: queryFn<{
             programTrackedEntityAttributes?: Array<{
-                trackedEntityAttribute: {
-                    id: string
-                    displayName?: string
-                    optionSet?: { id: string }
-                }
+                trackedEntityAttribute: TEAWithOptionSet
             }>
         }>,
     })
+    const { data } = queryResult
 
-    const attributes = useMemo(() => {
+    const available = useMemo(() => {
         const list =
             data?.programTrackedEntityAttributes?.map(
                 (pta) => pta.trackedEntityAttribute
@@ -50,50 +56,32 @@ export function TrackedEntityAttributeWithOptionSetField({
         return list.filter((a) => a.optionSet?.id)
     }, [data])
 
-    const currentValue = (values as any).trackedEntityAttribute
-    const selectedId = currentValue?.id
-    const selectedInList =
-        selectedId && attributes.some((a) => a.id === selectedId)
-
-    const selectOptions = useMemo(
-        () => [
-            NO_VALUE_OPTION,
-            ...(selectedId && !selectedInList
-                ? [
-                      {
-                          value: selectedId,
-                          label:
-                              currentValue?.displayName ?? i18n.t('Loading...'),
-                      },
-                  ]
-                : []),
-            ...attributes.map((a) => ({
-                value: a.id,
-                label: a.displayName ?? a.id,
-            })),
-        ],
-        [attributes, selectedId, selectedInList, currentValue?.displayName]
-    )
-
-    const disabled = !!(values as any).dataElement?.id
+    const formValues = values as {
+        trackedEntityAttribute?: { id: string; displayName?: string }
+        dataElement?: { id: string }
+    }
+    const disabled = !!formValues.dataElement?.id
 
     return (
         <Field
             name="trackedEntityAttribute"
-            format={(value: any) => value?.id ?? ''}
-            parse={(id: string) =>
-                id ? attributes.find((a) => a.id === id) : undefined
-            }
+            format={(value: TEAWithOptionSet | undefined) => value ?? undefined}
+            parse={(value: TEAWithOptionSet | undefined) => value}
         >
-            {({ input, meta, ...rest }) => {
-                const showErrorAsTouched =
-                    meta.touched || (!!meta.submitFailed && !!meta.error)
-
-                return (
-                    <SingleSelectFieldFF
-                        input={{
-                            ...input,
-                            onChange: (value: unknown) => {
+            {({ input, meta }) => (
+                <UIField
+                    label={label}
+                    disabled={disabled}
+                    error={meta.invalid}
+                    validationText={
+                        (meta.touched && meta.error?.toString()) || ''
+                    }
+                >
+                    <Box width="400px" minWidth="100px">
+                        <BaseModelSingleSelect
+                            selected={input.value}
+                            available={available}
+                            onChange={(value) => {
                                 if (value) {
                                     form.change('dataElement', undefined)
                                     form.change('option', undefined)
@@ -101,20 +89,20 @@ export function TrackedEntityAttributeWithOptionSetField({
                                 }
                                 input.onChange(value)
                                 input.onBlur()
-                            },
-                        }}
-                        meta={{
-                            ...meta,
-                            touched: showErrorAsTouched,
-                        }}
-                        label={label}
-                        options={selectOptions}
-                        disabled={disabled}
-                        filterable
-                        {...rest}
-                    />
-                )
-            }}
+                            }}
+                            showNoValueOption={{
+                                value: '',
+                                label: i18n.t('(No Value)'),
+                            }}
+                            disabled={disabled}
+                            invalid={meta.touched && !!meta.error}
+                            onRetryClick={queryResult.refetch}
+                            showEndLoader={false}
+                            loading={queryResult.isLoading}
+                        />
+                    </Box>
+                </UIField>
+            )}
         </Field>
     )
 }

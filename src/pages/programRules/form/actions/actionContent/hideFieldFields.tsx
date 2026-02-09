@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { InputFieldFF } from '@dhis2/ui'
+import { Box, InputFieldFF } from '@dhis2/ui'
 import React, { ReactNode } from 'react'
 import { Field } from 'react-final-form'
 import { StandardFormField } from '../../../../../components'
@@ -26,8 +26,19 @@ export function hideFieldFields(programId: string): ReactNode {
                 <Field
                     name="content"
                     label={i18n.t('Custom message for blanked field')}
-                    component={InputFieldFF}
-                />
+                >
+                    {({ input, meta }) => (
+                        <Box width="400px" minWidth="100px">
+                            <InputFieldFF
+                                input={input}
+                                meta={meta}
+                                label={i18n.t(
+                                    'Custom message for blanked field'
+                                )}
+                            />
+                        </Box>
+                    )}
+                </Field>
             </StandardFormField>
         </>
     )

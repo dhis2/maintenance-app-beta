@@ -1,44 +1,56 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectFieldFF } from '@dhis2/ui'
-import React from 'react'
+import { Box, Field as UIField } from '@dhis2/ui'
+import React, { useMemo } from 'react'
 import { Field } from 'react-final-form'
+import { BaseModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/BaseModelSingleSelect'
 
-const LOCATION_OPTIONS = [
-    { label: i18n.t('Feedback'), value: 'FEEDBACK' },
-    { label: i18n.t('Indicators'), value: 'INDICATORS' },
+type LocationModel = { id: string; displayName: string }
+
+const LOCATION_OPTIONS: LocationModel[] = [
+    { id: 'FEEDBACK', displayName: i18n.t('Feedback') },
+    { id: 'INDICATORS', displayName: i18n.t('Indicators') },
 ]
 
 export function LocationField({ required }: Readonly<{ required?: boolean }>) {
+    const available = useMemo(() => LOCATION_OPTIONS, [])
+
     return (
         <Field
             name="location"
-            label={i18n.t('Display widget')}
-            required={required}
-            filterable
+            format={(value: string | undefined) => value ?? ''}
+            parse={(value: string) => value || undefined}
         >
-            {({ input, meta, ...rest }) => {
-                const showErrorAsTouched =
-                    meta.touched || (!!meta.submitFailed && !!meta.error)
+            {({ input, meta }) => {
+                const id = (input.value as string) ?? ''
+                const selected =
+                    id && available.find((o) => o.id === id)
+                        ? available.find((o) => o.id === id)
+                        : undefined
 
                 return (
-                    <SingleSelectFieldFF
-                        input={{
-                            ...input,
-                            onChange: (value: unknown) => {
-                                input.onChange(value)
-                                input.onBlur()
-                            },
-                        }}
-                        meta={{
-                            ...meta,
-                            touched: showErrorAsTouched,
-                        }}
+                    <UIField
                         label={i18n.t('Display widget')}
-                        options={LOCATION_OPTIONS}
                         required={required}
-                        filterable
-                        {...rest}
-                    />
+                        error={meta.invalid}
+                        validationText={
+                            (meta.touched && meta.error?.toString()) || ''
+                        }
+                    >
+                        <Box width="400px" minWidth="100px">
+                            <BaseModelSingleSelect<LocationModel>
+                                selected={selected}
+                                available={available}
+                                onChange={(value) => {
+                                    input.onChange(value?.id ?? '')
+                                    input.onBlur()
+                                }}
+                                invalid={meta.touched && !!meta.error}
+                                loading={false}
+                                showEndLoader={false}
+                                onRetryClick={() => {}}
+                            />
+                        </Box>
+                    </UIField>
                 )
             }}
         </Field>
