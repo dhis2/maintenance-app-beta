@@ -21,6 +21,7 @@ import {
 import {
     NameField,
     CodeField,
+    DescriptionField,
     ColorAndIconField,
 } from '../../../../components/form/fields'
 import { LoadingSpinner } from '../../../../components/loading/LoadingSpinner'
@@ -78,6 +79,13 @@ export const OptionFormContents = ({
                             />
                         </StandardFormField>
                         <StandardFormField>
+                            <DescriptionField
+                                helpText={i18n.t(
+                                    'Explain the purpose of this option.'
+                                )}
+                            />
+                        </StandardFormField>
+                        <StandardFormField>
                             <ColorAndIconField />
                         </StandardFormField>
                     </SectionedFormSection>
@@ -128,6 +136,7 @@ export const fieldFilters = [
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
     'code',
+    'description',
     'style[color,icon]',
     'id',
 ] as const
