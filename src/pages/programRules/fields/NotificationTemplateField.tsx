@@ -70,12 +70,6 @@ export function NotificationTemplateField({
             name="templateUid"
             format={(value: string | undefined) => value ?? ''}
             parse={(value: string) => value || undefined}
-            validate={
-                required
-                    ? (value: string | undefined) =>
-                          value ? undefined : i18n.t('This field is required')
-                    : undefined
-            }
         >
             {({ input, meta, ...rest }) => {
                 const showErrorAsTouched =

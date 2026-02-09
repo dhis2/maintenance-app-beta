@@ -85,18 +85,6 @@ export function ProgramStageSectionField({
             parse={(id: string) =>
                 id ? sections.find((s) => s.id === id) : undefined
             }
-            validate={
-                required
-                    ? (
-                          value:
-                              | { id: string; displayName?: string }
-                              | undefined
-                      ) =>
-                          value?.id
-                              ? undefined
-                              : i18n.t('This field is required')
-                    : undefined
-            }
         >
             {({ input, meta, ...rest }) => {
                 const showErrorAsTouched =

@@ -15,12 +15,6 @@ export function LocationField({ required }: Readonly<{ required?: boolean }>) {
             label={i18n.t('Display widget')}
             required={required}
             filterable
-            validate={
-                required
-                    ? (value: string | undefined) =>
-                          value ? undefined : i18n.t('This field is required')
-                    : undefined
-            }
         >
             {({ input, meta, ...rest }) => {
                 const showErrorAsTouched =

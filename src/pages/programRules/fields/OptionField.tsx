@@ -75,14 +75,6 @@ export function OptionField({
             parse={(id: string) =>
                 id ? options.find((o) => o.id === id) : undefined
             }
-            validate={
-                required
-                    ? (value: OptionValue) =>
-                          value?.id
-                              ? undefined
-                              : i18n.t('This field is required')
-                    : undefined
-            }
         >
             {({ input, meta, ...rest }) => {
                 const showErrorAsTouched =

@@ -65,28 +65,29 @@ export const ACTION_TYPE_OPTIONS = [
 ].sort((a, b) => a.label.localeCompare(b.label))
 
 export const VALIDATION_MESSAGES = {
+    ASSIGN_EXPRESSION: i18n.t('Expression to evaluate and assign is required'),
+    ASSIGN_TARGET: i18n.t(
+        'Select at least one: data element, tracked entity attribute, or program rule variable'
+    ),
+    DISPLAY_WIDGET: i18n.t('Display widget is required'),
+    FIELD_REQUIRED: i18n.t('This field is required'),
     HIDEFIELD: i18n.t(
         'Select at least one: data element or tracked entity attribute'
     ),
+    HIDEPROGRAMSTAGE_STAGE: i18n.t('Program stage is required'),
+    HIDESECTION_SECTION: i18n.t('Program stage section to hide is required'),
     HIDEOPTION_DE_TEA: i18n.t(
         'Select a data element or tracked entity attribute with option set'
     ),
     HIDEOPTION_OPTION: i18n.t('Option to hide is required'),
-    SETMANDATORYFIELD: i18n.t(
-        'Select at least one: data element or tracked entity attribute'
-    ),
-    ASSIGN_TARGET: i18n.t(
-        'Select at least one: data element, tracked entity attribute, or program rule variable'
-    ),
-    ASSIGN_EXPRESSION: i18n.t('Expression to evaluate and assign is required'),
+    KEY_LABEL_REQUIRED: i18n.t('Key label is required'),
+    MESSAGE_TEMPLATE: i18n.t('Message template is required'),
     OPTIONGROUP_DE_TEA: i18n.t(
         'Select a data element or tracked entity attribute with option set'
     ),
     OPTIONGROUP_GROUP: i18n.t('Option group is required'),
-    DISPLAY_WIDGET: i18n.t('Display widget is required'),
-    HIDESECTION_SECTION: i18n.t('Program stage section to hide is required'),
-    MESSAGE_TEMPLATE: i18n.t('Message template is required'),
-    HIDEPROGRAMSTAGE_STAGE: i18n.t('Program stage is required'),
+    SETMANDATORYFIELD: i18n.t(
+        'Select at least one: data element or tracked entity attribute'
+    ),
     STATIC_TEXT_REQUIRED: i18n.t('Static text is required'),
-    KEY_LABEL_REQUIRED: i18n.t('Key label is required'),
 } as const

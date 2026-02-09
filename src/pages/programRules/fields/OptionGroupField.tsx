@@ -75,14 +75,6 @@ export function OptionGroupField({
             parse={(id: string) =>
                 id ? optionGroups.find((og) => og.id === id) : undefined
             }
-            validate={
-                required
-                    ? (value: OptionGroupValue) =>
-                          value?.id
-                              ? undefined
-                              : i18n.t('This field is required')
-                    : undefined
-            }
         >
             {({ input, meta, ...rest }) => {
                 const showErrorAsTouched =

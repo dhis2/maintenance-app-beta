@@ -69,18 +69,6 @@ export function ProgramStageSelectField({
             parse={(id: string) =>
                 id ? programStages.find((ps) => ps.id === id) : undefined
             }
-            validate={
-                required
-                    ? (
-                          value:
-                              | { id: string; displayName?: string }
-                              | undefined
-                      ) =>
-                          value?.id
-                              ? undefined
-                              : i18n.t('This field is required')
-                    : undefined
-            }
         >
             {({ input, meta, ...rest }) => {
                 const showErrorAsTouched =

@@ -11,13 +11,11 @@ export function DataElementField({
     programId,
     label,
     required,
-    validateField,
     disableIfOtherFieldSet,
 }: Readonly<{
     programId: string
     label: string
     required?: boolean
-    validateField?: (value: any, allValues: any) => string | undefined
     disableIfOtherFieldSet?: string
 }>) {
     const { values } = useFormState({ subscription: { values: true } })
@@ -95,10 +93,6 @@ export function DataElementField({
           ]?.id
         : false
 
-    const requiredValidator = (
-        value: { id: string; displayName?: string } | undefined
-    ) => (value?.id ? undefined : i18n.t('This field is required'))
-
     return (
         <Field
             name="dataElement"
@@ -107,9 +101,6 @@ export function DataElementField({
             }
             parse={(id: string) =>
                 id ? elements.find((e) => e.id === id) : undefined
-            }
-            validate={
-                validateField ?? (required ? requiredValidator : undefined)
             }
         >
             {({ input, meta, ...rest }) => {
