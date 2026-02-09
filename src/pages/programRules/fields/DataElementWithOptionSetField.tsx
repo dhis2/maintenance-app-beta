@@ -59,14 +59,7 @@ export function DataElementWithOptionSetField({
                     ) ?? []
             ) ?? []
         const withOptionSet = list.filter((de) => de.optionSet?.id)
-        const seen = new Set<string>()
-        return withOptionSet.filter((de) => {
-            if (seen.has(de.id)) {
-                return false
-            }
-            seen.add(de.id)
-            return true
-        })
+        return [...new Map(withOptionSet.map((de) => [de.id, de])).values()]
     }, [data])
 
     const formValues = values as { trackedEntityAttribute?: { id: string } }

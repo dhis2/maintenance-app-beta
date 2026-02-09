@@ -14,3 +14,4 @@ export { TrackedEntityAttributeWithOptionSetField } from './TrackedEntityAttribu
 export { OptionField } from './OptionField'
 export { OptionGroupField } from './OptionGroupField'
 export { ProgramRuleVariableField } from './ProgramRuleVariableField'
+export { ActionTextInputField } from './ActionTextInputField'

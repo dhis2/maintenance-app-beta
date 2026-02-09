@@ -21,11 +21,7 @@ export function LocationField({ required }: Readonly<{ required?: boolean }>) {
             parse={(value: string) => value || undefined}
         >
             {({ input, meta }) => {
-                const id = (input.value as string) ?? ''
-                const selected =
-                    id && available.find((o) => o.id === id)
-                        ? available.find((o) => o.id === id)
-                        : undefined
+                const selected = available.find((o) => o.id === input.value)
 
                 return (
                     <UIField

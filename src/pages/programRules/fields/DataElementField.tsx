@@ -57,19 +57,11 @@ export function DataElementField({
                         (psde) => psde.dataElement
                     ) ?? []
             ) ?? []
-        const seen = new Set<string>()
-        return list.filter((de) => {
-            if (seen.has(de.id)) {
-                return false
-            }
-            seen.add(de.id)
-            return true
-        })
+        return [...new Map(list.map((de) => [de.id, de])).values()]
     }, [data])
 
-    const formValues = values as Record<string, { id?: string } | undefined>
     const disabled = disableIfOtherFieldSet
-        ? !!formValues[disableIfOtherFieldSet]?.id
+        ? !!values[disableIfOtherFieldSet]?.id
         : false
 
     return (

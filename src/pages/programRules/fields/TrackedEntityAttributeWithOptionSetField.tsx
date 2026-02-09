@@ -53,14 +53,11 @@ export function TrackedEntityAttributeWithOptionSetField({
             data?.programTrackedEntityAttributes?.map(
                 (pta) => pta.trackedEntityAttribute
             ) ?? []
-        return list.filter((a) => a.optionSet?.id)
+        const withOptionSet = list.filter((a) => a.optionSet?.id)
+        return [...new Map(withOptionSet.map((a) => [a.id, a])).values()]
     }, [data])
 
-    const formValues = values as {
-        trackedEntityAttribute?: { id: string; displayName?: string }
-        dataElement?: { id: string }
-    }
-    const disabled = !!formValues.dataElement?.id
+    const disabled = !!values.dataElement?.id
 
     return (
         <Field

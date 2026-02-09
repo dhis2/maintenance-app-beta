@@ -24,7 +24,6 @@ export function ProgramStageSectionField({
     programId: string
     required?: boolean
 }>) {
-    const { values } = useFormState({ subscription: { values: true } })
     const queryFn = useBoundResourceQueryFn()
 
     const query = useMemo(
@@ -45,14 +44,7 @@ export function ProgramStageSectionField({
         const list =
             data?.programStages?.flatMap((s) => s.programStageSections ?? []) ??
             []
-        const seen = new Set<string>()
-        return list.filter((s) => {
-            if (seen.has(s.id)) {
-                return false
-            }
-            seen.add(s.id)
-            return true
-        })
+        return [...new Map(list.map((s) => [s.id, s])).values()]
     }, [data])
 
     return (

@@ -138,7 +138,6 @@ export const Component = () => {
     const section = SECTIONS_MAP.programRule
     const queryFn = useBoundResourceQueryFn()
 
-    // Query to load program rule by id with form fields
     const query = {
         resource: 'programRules',
         id: modelId,

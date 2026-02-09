@@ -1,9 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
-import { Box, InputFieldFF } from '@dhis2/ui'
 import React, { ReactNode } from 'react'
-import { Field } from 'react-final-form'
 import { StandardFormField } from '../../../../../components'
-import { DataElementField, TrackedEntityAttributeField } from '../../../fields'
+import {
+    ActionTextInputField,
+    DataElementField,
+    TrackedEntityAttributeField,
+} from '../../../fields'
 
 export function hideFieldFields(programId: string): ReactNode {
     return (
@@ -23,22 +25,10 @@ export function hideFieldFields(programId: string): ReactNode {
                 />
             </StandardFormField>
             <StandardFormField>
-                <Field
+                <ActionTextInputField
                     name="content"
                     label={i18n.t('Custom message for blanked field')}
-                >
-                    {({ input, meta }) => (
-                        <Box width="400px" minWidth="100px">
-                            <InputFieldFF
-                                input={input}
-                                meta={meta}
-                                label={i18n.t(
-                                    'Custom message for blanked field'
-                                )}
-                            />
-                        </Box>
-                    )}
-                </Field>
+                />
             </StandardFormField>
         </>
     )

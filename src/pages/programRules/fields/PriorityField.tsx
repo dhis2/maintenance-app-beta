@@ -7,13 +7,9 @@ import type { FieldMetaState } from 'react-final-form'
 /** Priority input; allow empty (parse to undefined so schema accepts optional). */
 export function PriorityField() {
     const { input, meta } = useField('priority', {
-        parse: (value?: string) =>
-            value === undefined || value === ''
-                ? undefined
-                : Number.parseFloat(value),
+        parse: (v?: string) => (v == null || v === '' ? undefined : Number(v)),
         type: 'number',
-        format: (value) =>
-            value === undefined || value === null ? '' : value.toString(),
+        format: (v) => (v == null ? '' : String(v)),
     })
 
     return (

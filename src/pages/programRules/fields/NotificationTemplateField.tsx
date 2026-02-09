@@ -48,14 +48,7 @@ export function NotificationTemplateField({
                 (s) => s.notificationTemplates ?? []
             ) ?? []
         const all: TemplateModel[] = [...fromProgram, ...fromStages]
-        const seen = new Set<string>()
-        return all.filter((t) => {
-            if (seen.has(t.id)) {
-                return false
-            }
-            seen.add(t.id)
-            return true
-        })
+        return [...new Map(all.map((t) => [t.id, t])).values()]
     }, [data])
 
     return (

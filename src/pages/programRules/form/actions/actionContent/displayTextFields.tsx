@@ -1,9 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
-import { Box, InputFieldFF } from '@dhis2/ui'
 import React, { ReactNode } from 'react'
-import { Field } from 'react-final-form'
 import { StandardFormField } from '../../../../../components'
-import { ExpressionField, LocationField } from '../../../fields'
+import {
+    ActionTextInputField,
+    ExpressionField,
+    LocationField,
+} from '../../../fields'
 
 export function displayTextFields(programId: string): ReactNode {
     return (
@@ -12,18 +14,11 @@ export function displayTextFields(programId: string): ReactNode {
                 <LocationField required />
             </StandardFormField>
             <StandardFormField>
-                <Field name="content" label={i18n.t('Static text')} required>
-                    {({ input, meta }) => (
-                        <Box width="400px" minWidth="100px">
-                            <InputFieldFF
-                                input={input}
-                                meta={meta}
-                                label={i18n.t('Static text')}
-                                required
-                            />
-                        </Box>
-                    )}
-                </Field>
+                <ActionTextInputField
+                    name="content"
+                    label={i18n.t('Static text')}
+                    required
+                />
             </StandardFormField>
             <StandardFormField>
                 <ExpressionField
