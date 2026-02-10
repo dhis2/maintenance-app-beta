@@ -111,10 +111,11 @@ const ProgramRuleActionListNewOrEdit = () => {
                 <div>
                     <div>
                         {actions.map((action, index) => {
+                            const actionKey = action.id ?? `new-${index}`
                             if (action.deleted) {
                                 return (
                                     <div
-                                        key={action.id}
+                                        key={actionKey}
                                         className={styles.deletedActionBox}
                                     >
                                         <div
@@ -135,14 +136,14 @@ const ProgramRuleActionListNewOrEdit = () => {
                             }
 
                             const displayItem = {
-                                id: action.id,
+                                id: actionKey,
                                 displayName:
                                     getProgramRuleActionListLabel(action),
                             }
 
                             return (
                                 <ListInFormItem
-                                    key={action.id}
+                                    key={actionKey}
                                     item={displayItem}
                                     schemaName={SchemaName.programRuleAction}
                                     onClick={() => openEdit(action, index)}

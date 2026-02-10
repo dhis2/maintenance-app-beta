@@ -10,6 +10,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../components'
+import { generateDhis2Id } from '../../../../lib'
 import {
     FEATURES,
     useFeatureAvailable,
@@ -37,19 +38,20 @@ export const ProgramRuleActionForm = ({
     onSubmitted: (values: ProgramRuleActionListItem) => void
 }>) => {
     const handleSubmit = (values: ProgramRuleActionFormValues) => {
-        const submitted = {
+        const submitted: ProgramRuleActionListItem = {
             ...values,
-            programRule: undefined,
-        } as ProgramRuleActionListItem
+            id: values.id ?? generateDhis2Id(),
+        }
         onSubmitted(submitted)
     }
 
-    const formInitialValues = action || {}
+    const initialValues = action ?? {}
 
     return (
         <FormBase
+            key={action?.id ?? 'new'}
             onSubmit={handleSubmit}
-            initialValues={formInitialValues}
+            initialValues={initialValues}
             validate={validateProgramRuleAction}
             validateOnBlur={false}
             includeAttributes={false}
