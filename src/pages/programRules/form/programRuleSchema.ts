@@ -14,8 +14,9 @@ const programRuleBaseSchema = z.object({
     description: z.string().optional(),
     priority: z.number().optional(),
     condition: z.string().optional(),
-    program: modelReference.extend({
-        displayName: z.string(),
+    program: z.object({
+        id: z.string(),
+        displayName: z.string().optional(),
         programType: z.string().optional(),
     }),
     programStage: modelReference

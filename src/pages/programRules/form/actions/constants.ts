@@ -67,12 +67,12 @@ export const ACTION_TYPE_OPTIONS = [
 export const VALIDATION_MESSAGES = {
     ASSIGN_EXPRESSION: i18n.t('Expression to evaluate and assign is required'),
     ASSIGN_TARGET: i18n.t(
-        'Select at least one: data element, tracked entity attribute, or program rule variable'
+        'At least one of the data element, tracked entity attribute, or program rule variable must be provided'
     ),
     DISPLAY_WIDGET: i18n.t('Display widget is required'),
     FIELD_REQUIRED: i18n.t('This field is required'),
     HIDEFIELD: i18n.t(
-        'Select at least one: data element or tracked entity attribute'
+        'At least one of the data element or tracked entity attribute must be provided'
     ),
     HIDEPROGRAMSTAGE_STAGE: i18n.t('Program stage is required'),
     HIDESECTION_SECTION: i18n.t('Program stage section to hide is required'),

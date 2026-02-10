@@ -30,11 +30,10 @@ function cleanActionForApi(
     action: ProgramRuleActionListItem,
     existingIds: Set<string>
 ): Record<string, unknown> {
-    const { deleted, id, ...rest } = action
-    void deleted
-    const obj = existingIds.has(id) ? { ...rest, id } : rest
+    const { id, ...rest } = action
+    const payload = existingIds.has(id) ? { ...rest, id } : rest
     return Object.fromEntries(
-        Object.entries(obj).filter(
+        Object.entries(payload).filter(
             ([, v]) => v !== undefined && v !== null && v !== ''
         )
     )

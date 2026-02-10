@@ -2,32 +2,35 @@ import i18n from '@dhis2/d2-i18n'
 import React, { ReactNode } from 'react'
 import { StandardFormField } from '../../../../../components'
 import {
-    ActionTextInputField,
     DataElementField,
+    ExpressionField,
+    ProgramRuleVariableField,
     TrackedEntityAttributeField,
 } from '../../../fields'
 
-export function hideFieldFields(programId: string): ReactNode {
+export function assign(programId: string): ReactNode {
     return (
         <>
             <StandardFormField>
                 <DataElementField
                     programId={programId}
-                    label={i18n.t('Data element to hide')}
-                    disableIfOtherFieldSet="trackedEntityAttribute"
+                    label={i18n.t('Data element to assign to')}
                 />
             </StandardFormField>
             <StandardFormField>
                 <TrackedEntityAttributeField
                     programId={programId}
-                    label={i18n.t('Tracked entity attribute to hide')}
-                    disableIfOtherFieldSet="dataElement"
+                    label={i18n.t('Tracked entity attribute to assign to')}
                 />
             </StandardFormField>
             <StandardFormField>
-                <ActionTextInputField
-                    name="content"
-                    label={i18n.t('Custom message for blanked field')}
+                <ProgramRuleVariableField programId={programId} />
+            </StandardFormField>
+            <StandardFormField>
+                <ExpressionField
+                    programId={programId}
+                    label={i18n.t('Expression to evaluate and assign.')}
+                    clearable={false}
                 />
             </StandardFormField>
         </>
