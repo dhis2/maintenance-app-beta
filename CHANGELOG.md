@@ -1,3 +1,15 @@
+# [0.124.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.123.0...v0.124.0) (2026-02-10)
+
+
+### Bug Fixes
+
+* add description for option [DHIS2-14581] ([#765](https://github.com/dhis2/maintenance-app-beta/issues/765)) ([5f28f5f](https://github.com/dhis2/maintenance-app-beta/commit/5f28f5f9c6e6f0e477179e0d1ba2ae9658965e83))
+
+
+### Features
+
+* add public sharing ([#760](https://github.com/dhis2/maintenance-app-beta/issues/760)) ([f8eeb2e](https://github.com/dhis2/maintenance-app-beta/commit/f8eeb2e48afe572c8916deee96287729636ecdba))
+
 # [0.123.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.122.2...v0.123.0) (2026-02-09)
 
 
