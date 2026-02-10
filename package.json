@@ -1,6 +1,6 @@
 {
     "name": "maintenance-app",
-    "version": "0.122.2",
+    "version": "0.124.0",
     "description": "",
     "license": "BSD-3-Clause",
     "private": true,
@@ -20,7 +20,7 @@
     },
     "devDependencies": {
         "@anatine/zod-mock": "^3.14.0",
-        "@dhis2/cli-app-scripts": "^12.0.0",
+        "@dhis2/cli-app-scripts": "^12.10.4",
         "@dhis2/cli-style": "^10.7.5",
         "@dhis2/cypress-commands": "^10.0.3",
         "@dhis2/cypress-plugins": "^10.0.3",

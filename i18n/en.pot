@@ -60,6 +60,12 @@ msgstr "Overview"
 msgid "Search menu items"
 msgstr "Search menu items"
 
+msgid "Remove color"
+msgstr "Remove color"
+
+msgid "Choose an icon"
+msgstr "Choose an icon"
+
 msgid "All"
 msgstr "All"
 
@@ -75,11 +81,11 @@ msgstr "Outline"
 msgid "Search icons"
 msgstr "Search icons"
 
-msgid "No icons match the search."
-msgstr "No icons match the search."
+msgid "No icons found"
+msgstr "No icons found"
 
-msgid "Select"
-msgstr "Select"
+msgid "Choose icon"
+msgstr "Choose icon"
 
 msgid "Remove icon"
 msgstr "Remove icon"
@@ -3438,6 +3444,9 @@ msgstr "Option Set"
 
 msgid "Set up the information for this option."
 msgstr "Set up the information for this option."
+
+msgid "Explain the purpose of this option."
+msgstr "Explain the purpose of this option."
 
 msgid "Save option"
 msgstr "Save option"
