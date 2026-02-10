@@ -24,9 +24,7 @@ export const categoryFormSchema = identifiable
         shortName: z.string().trim(),
         description: z.string().trim().optional(),
         dataDimension: z.boolean().default(true),
-        categoryOptions: referenceCollection
-            .min(1, 'At least one category option is required')
-            .default([]),
+        categoryOptions: referenceCollection.default([]),
     })
 
 export const categoryListSchema = categoryBaseSchema
@@ -37,4 +35,9 @@ export const categoryListSchema = categoryBaseSchema
 
 export const initialValues = getDefaults(categoryFormSchema)
 
-export const validate = createFormValidate(categoryFormSchema)
+const validatingCategoryFormSchema = categoryFormSchema.extend({
+    categoryOptions: referenceCollection
+        .min(1, 'At least one category option is required')
+        .default([]),
+})
+export const validate = createFormValidate(validatingCategoryFormSchema)
