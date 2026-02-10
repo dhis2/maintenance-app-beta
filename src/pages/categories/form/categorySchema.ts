@@ -12,9 +12,7 @@ const {
 } = modelFormSchemas
 
 const categoryBaseSchema = z.object({
-    dataDimensionType: z
-        .nativeEnum(Category.dataDimensionType)
-        .default(Category.dataDimensionType.DISAGGREGATION),
+    dataDimensionType: z.nativeEnum(Category.dataDimensionType),
 })
 
 export const categoryFormSchema = identifiable
@@ -23,8 +21,8 @@ export const categoryFormSchema = identifiable
     .extend({
         shortName: z.string().trim(),
         description: z.string().trim().optional(),
-        dataDimension: z.boolean().default(true),
-        categoryOptions: referenceCollection.default([]),
+        dataDimension: z.boolean(),
+        categoryOptions: referenceCollection,
     })
 
 export const categoryListSchema = categoryBaseSchema
@@ -33,11 +31,15 @@ export const categoryListSchema = categoryBaseSchema
         displayShortName: z.string(),
     })
 
-export const initialValues = getDefaults(categoryFormSchema)
+export const initialValues = getDefaults(categoryFormSchema, {
+    dataDimensionType: Category.dataDimensionType.DISAGGREGATION,
+    dataDimension: true,
+})
 
 const validatingCategoryFormSchema = categoryFormSchema.extend({
     categoryOptions: referenceCollection
         .min(1, 'At least one category option is required')
         .default([]),
+    id: z.string().optional(),
 })
 export const validate = createFormValidate(validatingCategoryFormSchema)

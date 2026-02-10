@@ -1,10 +1,17 @@
 import { writeFileSync, mkdirSync } from 'fs'
-import { ZodSchema } from 'zod'
-import zodToJsonSchema from 'zod-to-json-schema'
 import {
-    categoryFormSchema,
-    categoryListSchema,
-} from '../pages/categories/form'
+    z,
+    ZodArray,
+    ZodDefault,
+    ZodEffects,
+    ZodNullable,
+    ZodObject,
+    ZodOptional,
+    ZodSchema,
+    ZodTypeAny,
+} from 'zod'
+import zodToJsonSchema from 'zod-to-json-schema'
+import { categoryFormSchema } from '../pages/categories/form'
 
 const generateContract = ({
     method,
