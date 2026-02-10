@@ -18,12 +18,10 @@ function getFieldFlags(values: ProgramRuleActionFormValues) {
         hasOptionGroup: !!values.optionGroup?.id,
         hasProgramStageSection: !!values.programStageSection?.id,
         hasProgramStage: !!values.programStage?.id,
-        hasTemplateUid: !!(
-            values.templateUid && String(values.templateUid).trim()
-        ),
-        hasContent: !!(values.content && String(values.content).trim()),
-        hasData: !!(values.data && String(values.data).trim()),
-        hasLocation: !!(values.location && String(values.location).trim()),
+        hasTemplateUid: !!values.templateUid,
+        hasContent: !!values.content,
+        hasData: !!values.data,
+        hasLocation: !!values.location,
     }
 }
 
@@ -192,30 +190,36 @@ export function validateProgramRuleAction(
     const flags = getFieldFlags(values)
     const errors: ValidationErrors = {}
 
-    const validators: Partial<
-        Record<string, (f: FieldFlags) => ValidationErrors>
-    > = {
-        [programRuleActionType.DISPLAYTEXT]: validateDisplayText,
-        [programRuleActionType.DISPLAYKEYVALUEPAIR]:
-            validateDisplayKeyValuePair,
-        [programRuleActionType.HIDEFIELD]: validateHideField,
-        [programRuleActionType.HIDESECTION]: validateHideSection,
-        [programRuleActionType.HIDEPROGRAMSTAGE]: validateHideProgramStage,
-        [programRuleActionType.ASSIGN]: validateAssign,
-        [programRuleActionType.SHOWWARNING]: validateShowWarning,
-        [programRuleActionType.WARNINGONCOMPLETE]: validateWarningOnComplete,
-        [programRuleActionType.SHOWERROR]: validateShowError,
-        [programRuleActionType.ERRORONCOMPLETE]: validateErrorOnComplete,
-        [programRuleActionType.CREATEEVENT]: validateCreateEvent,
-        [programRuleActionType.SETMANDATORYFIELD]: validateSetMandatoryField,
-        [programRuleActionType.SENDMESSAGE]: validateSendMessage,
-        [programRuleActionType.SCHEDULEMESSAGE]: validateScheduleMessage,
-        [programRuleActionType.HIDEOPTION]: validateHideOption,
-        [programRuleActionType.SHOWOPTIONGROUP]: validateShowOptionGroup,
-        [programRuleActionType.HIDEOPTIONGROUP]: validateHideOptionGroup,
+    if (!actionType) {
+        errors.programRuleActionType = VALIDATION_MESSAGES.FIELD_REQUIRED
+        return errors
     }
 
-    const validate = actionType ? validators[actionType] : undefined
+    const validators: Record<string, (flags: FieldFlags) => ValidationErrors> =
+        {
+            [programRuleActionType.DISPLAYTEXT]: validateDisplayText,
+            [programRuleActionType.DISPLAYKEYVALUEPAIR]:
+                validateDisplayKeyValuePair,
+            [programRuleActionType.HIDEFIELD]: validateHideField,
+            [programRuleActionType.HIDESECTION]: validateHideSection,
+            [programRuleActionType.HIDEPROGRAMSTAGE]: validateHideProgramStage,
+            [programRuleActionType.ASSIGN]: validateAssign,
+            [programRuleActionType.SHOWWARNING]: validateShowWarning,
+            [programRuleActionType.WARNINGONCOMPLETE]:
+                validateWarningOnComplete,
+            [programRuleActionType.SHOWERROR]: validateShowError,
+            [programRuleActionType.ERRORONCOMPLETE]: validateErrorOnComplete,
+            [programRuleActionType.CREATEEVENT]: validateCreateEvent,
+            [programRuleActionType.SETMANDATORYFIELD]:
+                validateSetMandatoryField,
+            [programRuleActionType.SENDMESSAGE]: validateSendMessage,
+            [programRuleActionType.SCHEDULEMESSAGE]: validateScheduleMessage,
+            [programRuleActionType.HIDEOPTION]: validateHideOption,
+            [programRuleActionType.SHOWOPTIONGROUP]: validateShowOptionGroup,
+            [programRuleActionType.HIDEOPTIONGROUP]: validateHideOptionGroup,
+        }
+
+    const validate = validators[actionType]
     if (validate) {
         Object.assign(errors, validate(flags))
     }

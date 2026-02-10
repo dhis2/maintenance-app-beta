@@ -3,7 +3,6 @@ import React from 'react'
 import { useField } from 'react-final-form'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 
-/** Program stage select; only show when program is tracker (not WITHOUT_REGISTRATION). */
 export function ProgramStageField() {
     const { input: programInput } = useField('program')
 

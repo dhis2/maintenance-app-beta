@@ -186,6 +186,6 @@ export function getProgramRuleActionListLabel(
                 })
                 .replace(' ~-~ ', ' ')
         default:
-            return 'Unknown action type'
+            return i18n.t('Unknown action type')
     }
 }

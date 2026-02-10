@@ -1,8 +1,3 @@
-/**
- * Shape of a program rule action as stored in the form and API.
- * id is optional - backend generates it for new actions.
- * access?: Access so the item is compatible with ListItem (ListInFormItem uses it for Translate).
- */
 import type { Access } from '../../../../types/models'
 
 export type ProgramRuleActionFormValues = Partial<ProgramRuleActionListItem>

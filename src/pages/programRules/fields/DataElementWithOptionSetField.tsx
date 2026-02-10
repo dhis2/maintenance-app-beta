@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
 import { Field, useForm, useFormState } from 'react-final-form'
 import { BaseModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/BaseModelSingleSelect'
-import { useBoundResourceQueryFn } from '../../../lib'
+import { useBoundResourceQueryFn, useClearFormFields } from '../../../lib'
 
 type DataElementWithOptionSet = {
     id: string
@@ -31,6 +31,12 @@ export function DataElementWithOptionSetField({
     label: string
 }>) {
     const form = useForm()
+    const clearDependentFields = useClearFormFields(
+        form,
+        'trackedEntityAttribute',
+        'option',
+        'optionGroup'
+    )
     const { values } = useFormState({ subscription: { values: true } })
     const queryFn = useBoundResourceQueryFn()
 
@@ -88,12 +94,7 @@ export function DataElementWithOptionSetField({
                             available={available}
                             onChange={(value) => {
                                 if (value) {
-                                    form.change(
-                                        'trackedEntityAttribute',
-                                        undefined
-                                    )
-                                    form.change('option', undefined)
-                                    form.change('optionGroup', undefined)
+                                    clearDependentFields()
                                 }
                                 input.onChange(value)
                                 input.onBlur()

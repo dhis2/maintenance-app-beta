@@ -16,7 +16,6 @@ import {
 } from '../../../../lib/featuresApiSupport'
 import { useClearFormFields } from '../../../../lib/form/useClearFormFields'
 import { PriorityField } from '../../fields'
-import { initialValues } from '../programRuleSchema'
 import { ActionTypeFieldsContent } from './ActionTypeFieldsContent'
 import { ACTION_FIELDS_TO_CLEAR, ACTION_TYPE_OPTIONS } from './constants'
 import styles from './ProgramRuleActionForm.module.css'
@@ -45,11 +44,14 @@ export const ProgramRuleActionForm = ({
         onSubmitted(submitted)
     }
 
+    const formInitialValues = action || {}
+
     return (
         <FormBase
             onSubmit={handleSubmit}
-            initialValues={initialValues}
+            initialValues={formInitialValues}
             validate={validateProgramRuleAction}
+            validateOnBlur={false}
             includeAttributes={false}
         >
             <ProgramRuleActionFormBody

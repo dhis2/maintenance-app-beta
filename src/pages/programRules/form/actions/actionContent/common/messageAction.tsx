@@ -12,21 +12,24 @@ export function messageActionFields(
     programId: string,
     isWarning: boolean
 ): ReactNode {
-    const deLabel = isWarning
+    const dataElementLabel = isWarning
         ? i18n.t('Data element to display warning next to')
         : i18n.t('Data element to display error next to')
-    const teaLabel = isWarning
+    const trackedEntityAttributeLabel = isWarning
         ? i18n.t('Tracked entity attribute to display warning next to')
         : i18n.t('Tracked entity attribute to display error next to')
     return (
         <>
             <StandardFormField>
-                <DataElementField programId={programId} label={deLabel} />
+                <DataElementField
+                    programId={programId}
+                    label={dataElementLabel}
+                />
             </StandardFormField>
             <StandardFormField>
                 <TrackedEntityAttributeField
                     programId={programId}
-                    label={teaLabel}
+                    label={trackedEntityAttributeLabel}
                 />
             </StandardFormField>
             <StandardFormField>

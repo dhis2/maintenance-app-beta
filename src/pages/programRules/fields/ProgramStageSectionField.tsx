@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { Box, Field as UIField } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
-import { Field, useFormState } from 'react-final-form'
+import { Field } from 'react-final-form'
 import { BaseModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/BaseModelSingleSelect'
 import { useBoundResourceQueryFn } from '../../../lib'
 

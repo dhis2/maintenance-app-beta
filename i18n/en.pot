@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-09T09:47:07.101Z\n"
-"PO-Revision-Date: 2026-02-09T09:47:07.101Z\n"
+"POT-Creation-Date: 2026-02-10T18:03:36.977Z\n"
+"PO-Revision-Date: 2026-02-10T18:03:36.977Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -4391,17 +4391,11 @@ msgstr ""
 msgid "Program Rule Variable"
 msgstr "Program Rule Variable"
 
-msgid "There was an error deleting program rule actions"
-msgstr "There was an error deleting program rule actions"
-
 msgid "Edit condition expression"
 msgstr "Edit condition expression"
 
 msgid "Set up condition expression"
 msgstr "Set up condition expression"
-
-msgid "This field is required"
-msgstr "This field is required"
 
 msgid "Feedback"
 msgstr "Feedback"
@@ -4443,66 +4437,6 @@ msgstr "Explain the purpose of this program rule. Not shown with rule output."
 msgid "Set up the expression that checks when this program rule runs."
 msgstr "Set up the expression that checks when this program rule runs."
 
-msgid "Static text"
-msgstr "Static text"
-
-msgid "Static text is required"
-msgstr "Static text is required"
-
-msgid "Expression to evaluate and display after static text."
-msgstr "Expression to evaluate and display after static text."
-
-msgid "Key label"
-msgstr "Key label"
-
-msgid "Key label is required"
-msgstr "Key label is required"
-
-msgid "Expression to evaluate and display as value."
-msgstr "Expression to evaluate and display as value."
-
-msgid "Data element to hide"
-msgstr "Data element to hide"
-
-msgid "Tracked entity attribute to hide"
-msgstr "Tracked entity attribute to hide"
-
-msgid "Custom message for blanked field"
-msgstr "Custom message for blanked field"
-
-msgid "Data element to display warning next to"
-msgstr "Data element to display warning next to"
-
-msgid "Data element to display error next to"
-msgstr "Data element to display error next to"
-
-msgid "Tracked entity attribute to display warning next to"
-msgstr "Tracked entity attribute to display warning next to"
-
-msgid "Tracked entity attribute to display error next to"
-msgstr "Tracked entity attribute to display error next to"
-
-msgid "Data element to assign to"
-msgstr "Data element to assign to"
-
-msgid "Tracked entity attribute to assign to"
-msgstr "Tracked entity attribute to assign to"
-
-msgid "Expression to evaluate and assign."
-msgstr "Expression to evaluate and assign."
-
-msgid "Date to send message."
-msgstr "Date to send message."
-
-msgid "Option to hide"
-msgstr "Option to hide"
-
-msgid "Option group to show"
-msgstr "Option group to show"
-
-msgid "Option group to hide"
-msgstr "Option group to hide"
-
 msgid "Edit action"
 msgstr "Edit action"
 
@@ -4529,6 +4463,60 @@ msgstr "Undo delete"
 
 msgid "Program rule must be saved before actions can be added"
 msgstr "Program rule must be saved before actions can be added"
+
+msgid "Data element to assign to"
+msgstr "Data element to assign to"
+
+msgid "Tracked entity attribute to assign to"
+msgstr "Tracked entity attribute to assign to"
+
+msgid "Expression to evaluate and assign."
+msgstr "Expression to evaluate and assign."
+
+msgid "Data element to display warning next to"
+msgstr "Data element to display warning next to"
+
+msgid "Data element to display error next to"
+msgstr "Data element to display error next to"
+
+msgid "Tracked entity attribute to display warning next to"
+msgstr "Tracked entity attribute to display warning next to"
+
+msgid "Tracked entity attribute to display error next to"
+msgstr "Tracked entity attribute to display error next to"
+
+msgid "Static text"
+msgstr "Static text"
+
+msgid "Expression to evaluate and display after static text."
+msgstr "Expression to evaluate and display after static text."
+
+msgid "Key label"
+msgstr "Key label"
+
+msgid "Expression to evaluate and display as value."
+msgstr "Expression to evaluate and display as value."
+
+msgid "Data element to hide"
+msgstr "Data element to hide"
+
+msgid "Tracked entity attribute to hide"
+msgstr "Tracked entity attribute to hide"
+
+msgid "Custom message for blanked field"
+msgstr "Custom message for blanked field"
+
+msgid "Option to hide"
+msgstr "Option to hide"
+
+msgid "Option group to hide"
+msgstr "Option group to hide"
+
+msgid "Date to send message."
+msgstr "Date to send message."
+
+msgid "Option group to show"
+msgstr "Option group to show"
 
 msgid "Assign value"
 msgstr "Assign value"
@@ -4581,29 +4569,55 @@ msgstr "Show warning"
 msgid "Warning on complete"
 msgstr "Warning on complete"
 
+msgid "Expression to evaluate and assign is required"
+msgstr "Expression to evaluate and assign is required"
+
+msgid ""
+"At least one of the data element, tracked entity attribute, or program rule "
+"variable must be provided"
+msgstr ""
+"At least one of the data element, tracked entity attribute, or program rule "
+"variable must be provided"
+
+msgid "Display widget is required"
+msgstr "Display widget is required"
+
+msgid "This field is required"
+msgstr "This field is required"
+
+msgid ""
+"At least one of the data element or tracked entity attribute must be "
+"provided"
+msgstr ""
+"At least one of the data element or tracked entity attribute must be "
+"provided"
+
+msgid "Program stage is required"
+msgstr "Program stage is required"
+
+msgid "Program stage section to hide is required"
+msgstr "Program stage section to hide is required"
+
 msgid "Select a data element or tracked entity attribute with option set"
 msgstr "Select a data element or tracked entity attribute with option set"
 
 msgid "Option to hide is required"
 msgstr "Option to hide is required"
 
-msgid "Expression to evaluate and assign is required"
-msgstr "Expression to evaluate and assign is required"
-
-msgid "Option group is required"
-msgstr "Option group is required"
-
-msgid "Display widget is required"
-msgstr "Display widget is required"
-
-msgid "Program stage section to hide is required"
-msgstr "Program stage section to hide is required"
+msgid "Key label is required"
+msgstr "Key label is required"
 
 msgid "Message template is required"
 msgstr "Message template is required"
 
-msgid "Program stage is required"
-msgstr "Program stage is required"
+msgid "Option group is required"
+msgstr "Option group is required"
+
+msgid "Static text is required"
+msgstr "Static text is required"
+
+msgid "Unknown action type"
+msgstr "Unknown action type"
 
 msgid "Program Rule"
 msgstr "Program Rule"
