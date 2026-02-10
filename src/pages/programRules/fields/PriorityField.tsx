@@ -9,7 +9,9 @@ export function PriorityField() {
         type: 'number',
         format: (value) => value?.toString(),
         parse: (value?: string) =>
-            value === undefined || value === '' ? undefined : parseFloat(value),
+            value === undefined || value === ''
+                ? undefined
+                : Number.parseFloat(value),
     })
 
     return (
