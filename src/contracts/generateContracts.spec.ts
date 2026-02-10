@@ -1,6 +1,6 @@
-import { mkdirSync, writeFileSync } from 'fs'
+import { mkdirSync, writeFileSync } from 'node:fs'
 import { ZodSchema } from 'zod'
-import zodToJsonSchema from 'zod-to-json-schema'
+import { zodToJsonSchema } from 'zod-to-json-schema'
 import { categoryFormSchema } from '../pages/categories/form'
 
 const generateContract = ({
@@ -13,7 +13,7 @@ const generateContract = ({
     method: string
     path: string
     name: string
-    expectedSchema: ZodSchema<any>
+    expectedSchema: ZodSchema<unknown>
     usage?: string
 }) => {
     const contractPath = `contracts/${name}/contract.json`
