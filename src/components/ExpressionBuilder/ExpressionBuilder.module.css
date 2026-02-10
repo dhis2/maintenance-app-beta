@@ -295,6 +295,13 @@ textarea::placeholder {
     margin: var(--spacers-dp8);
 }
 
+.paddedContainerTitle {
+    margin: 0 0 var(--spacers-dp12);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--colors-grey800);
+}
+
 .paddedContainerContainer {
     min-width: fit-content;
     max-width: 70%;
@@ -305,5 +312,5 @@ textarea::placeholder {
 }
 
 .validExpressionDescription {
-    white-space: 'pre-line';
+    white-space: pre-line;
 }

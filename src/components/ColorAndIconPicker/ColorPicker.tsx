@@ -1,7 +1,14 @@
-import { IconChevronDown16, IconChevronUp16, Layer, Popper } from '@dhis2/ui'
+import i18n from '@dhis2/d2-i18n'
+import {
+    IconChevronDown16,
+    IconChevronUp16,
+    Layer,
+    Popper,
+    Button,
+} from '@dhis2/ui'
 import cx from 'classnames'
 import React, { useRef, useState } from 'react'
-import { SwatchesPicker } from 'react-color'
+import { CompactPicker } from 'react-color'
 import { AVAILABLE_COLORS } from './availableColors'
 import classes from './ColorPicker.module.css'
 
@@ -37,11 +44,11 @@ export function ColorPicker({
             </button>
 
             {showPicker && (
-                <Layer onBackdropClick={() => setShowPicker(false)} translucent>
+                <Layer onBackdropClick={() => setShowPicker(false)}>
                     <Popper placement="bottom-start" reference={ref}>
                         <div className={classes.colors} data-test="colors">
-                            <SwatchesPicker
-                                presetColors={AVAILABLE_COLORS}
+                            <CompactPicker
+                                colors={AVAILABLE_COLORS}
                                 color={color}
                                 onChangeComplete={({
                                     hex,
@@ -53,6 +60,21 @@ export function ColorPicker({
                                     setShowPicker(false)
                                 }}
                             />
+                            {color && (
+                                <Button
+                                    type="button"
+                                    onClick={() => {
+                                        onColorPick({ color: '' })
+                                        setShowPicker(false)
+                                    }}
+                                    secondary
+                                    destructive
+                                    small
+                                    dataTest="color-clear-button"
+                                >
+                                    {i18n.t('Remove color')}
+                                </Button>
+                            )}
                         </div>
                     </Popper>
                 </Layer>

@@ -7,23 +7,24 @@ import { IdentifiableFilter } from './filterSelectors/IdentifiableFilter'
 import css from './FilterWrapper.module.css'
 
 export const FilterWrapper = () => {
-    const [, setFilters] = useSectionListFilters()
-
-    const handleClear = () => {
-        setFilters(undefined)
-    }
+    const [filters, setFilters] = useSectionListFilters()
+    const hasActiveFilters = Object.values(filters).some(
+        (value) => value != null && (!Array.isArray(value) || value.length > 0)
+    )
 
     return (
         <div className={css.filterWrapper} data-test="filters-wrapper">
             <IdentifiableFilter />
             <DynamicFilters />
-            <Button
-                small
-                onClick={handleClear}
-                dataTest="clear-all-filters-button"
-            >
-                {i18n.t('Clear all filters')}
-            </Button>
+            {hasActiveFilters && (
+                <Button
+                    small
+                    onClick={() => setFilters(undefined)}
+                    dataTest="clear-all-filters-button"
+                >
+                    {i18n.t('Clear all filters')}
+                </Button>
+            )}
         </div>
     )
 }

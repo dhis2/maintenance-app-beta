@@ -41,12 +41,13 @@ export const SectionListRow = React.memo(function SectionListRow<
             dataTest={`section-list-row`}
             selected={selected}
         >
-            <DataTableCell width="48px">
+            <DataTableCell className={css.listRowCheckbox} width="32px">
                 <TooltipWrapper
                     condition={!editAccess}
                     content={TOOLTIPS.noEditAccess}
                 >
                     <Checkbox
+                        dense
                         disabled={!editAccess}
                         dataTest="section-list-row-checkbox"
                         checked={selected}
