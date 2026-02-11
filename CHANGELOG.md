@@ -1,3 +1,10 @@
+# [0.125.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.124.1...v0.125.0) (2026-02-11)
+
+
+### Features
+
+* predictor groups [DHIS2-20780] DHIS2-20779] ([#741](https://github.com/dhis2/maintenance-app-beta/issues/741)) ([8c4cd12](https://github.com/dhis2/maintenance-app-beta/commit/8c4cd12e5d569fcc578ac0e5ba919180720d012b))
+
 ## [0.124.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.124.0...v0.124.1) (2026-02-11)
 
 
