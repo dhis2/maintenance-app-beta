@@ -18,7 +18,11 @@ const programNotificationTemplateBaseSchema = z.object({
         ProgramNotificationTemplate.notificationRecipient
     ),
     deliveryChannels: z.array(z.enum(['SMS', 'EMAIL', 'HTTP'])).default([]),
-    messageTemplate: z.string(),
+    messageTemplate: z.string().max(10000, {
+        message: i18n.t('Please enter a maximum of {{upperBound}} characters', {
+            upperBound: '100',
+        }),
+    }),
     subjectTemplate: z
         .string()
         .max(100, {
@@ -42,6 +46,7 @@ const programNotificationTemplateBaseSchema = z.object({
         })
         .optional(),
     notifyUsersInHierarchyOnly: z.boolean().optional(),
+    notifyParentOrganisationUnitOnly: z.boolean().optional(),
 })
 
 export const programNotificationTemplateFormSchema =

@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import {
-    SingleSelectFieldFF,
     InputFieldFF,
     SingleSelectField,
+    SingleSelectFieldFF,
     SingleSelectOption,
 } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
@@ -37,9 +37,9 @@ export const NotificationTimingSection = () => {
     ].includes(triggerInput.value)
 
     // Subscribe to relativeScheduledDays to determine sign
-    const { input: relativeScheduledDaysInput } = useField<
-        number | string | undefined
-    >('relativeScheduledDays')
+    const { input: relativeScheduledDaysInput } = useField(
+        'relativeScheduledDays'
+    )
 
     const relativeDaysValue = Number(relativeScheduledDaysInput.value) || 0
     const [beforeAfter, setBeforeAfter] = useState(
@@ -104,7 +104,7 @@ export const NotificationTimingSection = () => {
                         </SingleSelectField>
                     </StandardFormField>
                     <StandardFormField>
-                        <FieldRFF<string | undefined>
+                        <FieldRFF
                             label={i18n.t(
                                 'Number of days {{beforeOrAfter}} scheduled date to send notification',
                                 {
@@ -119,20 +119,25 @@ export const NotificationTimingSection = () => {
                             name="relativeScheduledDays"
                             type="number"
                             inputWidth="80px"
-                            format={(value) => {
-                                const parsed = Math.abs(
-                                    parseInt(value ?? '', 10)
-                                )
-                                return isNaN(parsed) ? '' : String(parsed)
+                            // format={(value) => value?.toString() ?? ''}
+                            format={(value: unknown) => {
+                                const parsed =
+                                    typeof value === 'number'
+                                        ? Math.abs(value)
+                                        : value
+                                return parsed?.toString() ?? ''
                             }}
-                            parse={(value) => {
-                                const parsed = parseInt(value ?? '', 10)
-                                if (isNaN(parsed)) {
+                            parse={(value: unknown) => {
+                                const parsed =
+                                    typeof value === 'string'
+                                        ? parseInt(value ?? '', 10)
+                                        : undefined
+                                if (!parsed || isNaN(parsed)) {
                                     return undefined
                                 }
-                                const signed =
-                                    beforeAfter === 'BEFORE' ? -parsed : parsed
-                                return String(signed)
+                                return beforeAfter === 'BEFORE'
+                                    ? -parsed
+                                    : parsed
                             }}
                         />
                     </StandardFormField>

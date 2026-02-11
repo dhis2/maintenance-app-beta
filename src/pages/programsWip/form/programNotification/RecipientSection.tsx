@@ -69,8 +69,19 @@ export const RecipientSection = () => {
         recipientInput.value === 'TRACKED_ENTITY_INSTANCE'
 
     useEffect(() => {
-        form.change('deliveryChannels', initialValues?.deliveryChannels || [])
-    }, [recipientInput.value, form, initialValues])
+        if (!shouldIncludeDeliveryChannel) {
+            form.change('deliveryChannels', undefined)
+        }
+        if (recipientInput.value !== 'USER_GROUP') {
+            form.change('notifyUsersInHierarchyOnly', undefined)
+        }
+        if (recipientInput.value !== 'USER_GROUP') {
+            form.change('recipientUserGroup', undefined)
+        }
+        if (recipientInput.value !== 'PROGRAM_ATTRIBUTE') {
+            form.change('recipientProgramAttribute', undefined)
+        }
+    }, [recipientInput.value, form, shouldIncludeDeliveryChannel])
 
     return (
         <div>
@@ -156,6 +167,17 @@ export const RecipientSection = () => {
                             label={i18n.t('Notify users in hierarchy only')}
                             type="checkbox"
                             dataTest="formfields-notifyUsersInHierarchyOnly"
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <FieldRFF
+                            component={CheckboxFieldFF}
+                            name="notifyParentOrganisationUnitOnly"
+                            label={i18n.t(
+                                'Notify parent organisation unit only'
+                            )}
+                            type="checkbox"
+                            dataTest="formfields-notifyParentOrganisationUnitOnly"
                         />
                     </StandardFormField>
                 </>

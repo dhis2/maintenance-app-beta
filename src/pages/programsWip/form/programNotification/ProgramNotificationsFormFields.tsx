@@ -105,7 +105,10 @@ export const ProgramNotificationsFormFields = ({
                             'Set up the basic information for the programNotification template.'
                         )}
                     </StandardFormSectionDescription>
-                    <BasicInformationSection section={section} />
+                    <BasicInformationSection
+                        section={section}
+                        programTemplateId={values.id}
+                    />
                 </SectionedFormSection>
 
                 <SectionedFormSection

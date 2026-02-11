@@ -4,6 +4,7 @@ import { Button, ButtonStrip } from '@dhis2/ui'
 import { IconInfo16 } from '@dhis2/ui-icons'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
+import { omit } from 'lodash'
 import isEqual from 'lodash/isEqual'
 import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
@@ -18,6 +19,7 @@ import { DrawerSectionedFormSidebar } from '../../../../components/drawer/Drawer
 import { LoadingSpinner } from '../../../../components/loading/LoadingSpinner'
 import {
     createFormError,
+    createFormValidate,
     createJsonPatchOperations,
     DEFAULT_FIELD_FILTERS,
     SchemaName,
@@ -35,7 +37,7 @@ import {
 import styles from './NotificationForm.module.css'
 import { programNotificationFormDescriptor } from './programNotificationFormDescriptor'
 import { ProgramNotificationsFormFields } from './ProgramNotificationsFormFields'
-import { initialValues } from './programNotificationTemplateSchema'
+import { initialValues, validate } from './programNotificationTemplateSchema'
 
 export const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -49,6 +51,7 @@ export const fieldFilters = [
     'deliveryChannels',
     'recipientUserGroup[id,displayName]',
     'notifyUsersInHierarchyOnly',
+    'notifyParentOrganisationUnitOnly',
     'recipientProgramAttribute[id,displayName]',
 ] as const
 
@@ -117,6 +120,7 @@ export const NotificationForm = ({
             }
             includeAttributes={false}
             mutators={{ ...arrayMutators }}
+            validate={validate}
         >
             {({ handleSubmit, form }) => {
                 return (

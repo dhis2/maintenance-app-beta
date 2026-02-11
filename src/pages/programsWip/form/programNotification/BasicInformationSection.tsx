@@ -4,17 +4,18 @@ import { SchemaSection } from '../../../../lib'
 
 type BasicInformationSectionProps = {
     section: SchemaSection
+    programTemplateId?: string
 }
 
 export const BasicInformationSection: React.FC<
     BasicInformationSectionProps
-> = ({ section }) => (
+> = ({ section, programTemplateId }) => (
     <>
         <StandardFormField>
-            <NameField schemaSection={section} />
+            <NameField schemaSection={section} modelId={programTemplateId} />
         </StandardFormField>
         <StandardFormField>
-            <CodeField schemaSection={section} />
+            <CodeField schemaSection={section} modelId={programTemplateId} />
         </StandardFormField>
     </>
 )

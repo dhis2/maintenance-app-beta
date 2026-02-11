@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-09T09:25:59.154Z\n"
-"PO-Revision-Date: 2026-02-09T09:25:59.154Z\n"
+"POT-Creation-Date: 2026-02-11T09:18:24.281Z\n"
+"PO-Revision-Date: 2026-02-11T09:18:24.281Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -4731,8 +4731,20 @@ msgstr "Set up the basic information for the programNotification template."
 msgid "Recipient type (required)"
 msgstr "Recipient type (required)"
 
+msgid "Program attribute Recipient"
+msgstr "Program attribute Recipient"
+
+msgid "No program attributes of type email or phone number found."
+msgstr "No program attributes of type email or phone number found."
+
+msgid "Web hook message URL (required)"
+msgstr "Web hook message URL (required)"
+
 msgid "Edit Program Notification"
 msgstr "Edit Program Notification"
+
+msgid "Recipient program attribute"
+msgstr "Recipient program attribute"
 
 msgid "Event repetition"
 msgstr "Event repetition"

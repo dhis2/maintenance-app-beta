@@ -64,6 +64,10 @@ export const programNotificationFormDescriptor = {
                     label: i18n.t('Notify users in hierarchy only'),
                 },
                 {
+                    name: 'notifyParentOrganisationUnitOnly',
+                    label: i18n.t('Notify parent organisation unit only'),
+                },
+                {
                     name: 'recipientProgramAttribute',
                     label: i18n.t('Recipient program attribute'),
                 },
