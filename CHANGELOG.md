@@ -1,3 +1,10 @@
+## [0.124.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.124.0...v0.124.1) (2026-02-11)
+
+
+### Bug Fixes
+
+* set data rw on categoryOptions [DHIS2-20254] ([#759](https://github.com/dhis2/maintenance-app-beta/issues/759)) ([5608c7c](https://github.com/dhis2/maintenance-app-beta/commit/5608c7c69014b5b091d994caf2741a64364f7a17))
+
 # [0.124.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.123.0...v0.124.0) (2026-02-10)
 
 
