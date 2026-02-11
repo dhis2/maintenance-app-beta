@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-09T09:28:29.917Z\n"
-"PO-Revision-Date: 2026-02-09T09:28:29.917Z\n"
+"POT-Creation-Date: 2026-02-11T09:18:24.281Z\n"
+"PO-Revision-Date: 2026-02-11T09:18:24.281Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -60,12 +60,6 @@ msgstr "Overview"
 msgid "Search menu items"
 msgstr "Search menu items"
 
-msgid "Remove color"
-msgstr "Remove color"
-
-msgid "Choose an icon"
-msgstr "Choose an icon"
-
 msgid "All"
 msgstr "All"
 
@@ -81,11 +75,11 @@ msgstr "Outline"
 msgid "Search icons"
 msgstr "Search icons"
 
-msgid "No icons found"
-msgstr "No icons found"
+msgid "No icons match the search."
+msgstr "No icons match the search."
 
-msgid "Choose icon"
-msgstr "Choose icon"
+msgid "Select"
+msgstr "Select"
 
 msgid "Remove icon"
 msgstr "Remove icon"
@@ -1667,11 +1661,38 @@ msgstr "Scheduled days"
 msgid "Data set completion"
 msgstr "Data set completion"
 
+msgid "Program completion"
+msgstr "Program completion"
+
+msgid "Program enrollment"
+msgstr "Program enrollment"
+
+msgid "Days scheduled (due date)"
+msgstr "Days scheduled (due date)"
+
+msgid "Days scheduled (incident date)"
+msgstr "Days scheduled (incident date)"
+
+msgid "Days scheduled (enrollment date)"
+msgstr "Days scheduled (enrollment date)"
+
 msgid "Organisation unit contact"
 msgstr "Organisation unit contact"
 
 msgid "User group"
 msgstr "User group"
+
+msgid "Tracked entity instance"
+msgstr "Tracked entity instance"
+
+msgid "Users at Organisation Unit"
+msgstr "Users at Organisation Unit"
+
+msgid "Program attribute"
+msgstr "Program attribute"
+
+msgid "Web hook"
+msgstr "Web hook"
 
 msgid "Dropdown"
 msgstr "Dropdown"
@@ -2056,9 +2077,6 @@ msgstr "Organisation unit group attribute"
 
 msgid "Organisation unit group set attribute"
 msgstr "Organisation unit group set attribute"
-
-msgid "Program attribute"
-msgstr "Program attribute"
 
 msgid "Program indicator attribute"
 msgstr "Program indicator attribute"
@@ -2623,8 +2641,8 @@ msgstr "Choose what triggers the notification and when it should be sent."
 msgid "Recipient"
 msgstr "Recipient"
 
-msgid "Choose who recieves the notification."
-msgstr "Choose who recieves the notification."
+msgid "Choose who receives the notification."
+msgstr "Choose who receives the notification."
 
 msgid "SMS"
 msgstr "SMS"
@@ -3442,9 +3460,6 @@ msgstr "Option Set"
 msgid "Set up the information for this option."
 msgstr "Set up the information for this option."
 
-msgid "Explain the purpose of this option."
-msgstr "Explain the purpose of this option."
-
 msgid "Save option"
 msgstr "Save option"
 
@@ -4024,45 +4039,6 @@ msgstr "End date"
 msgid "Run now"
 msgstr "Run now"
 
-msgid "Choose the predictors to include in this predictor group."
-msgstr "Choose the predictors to include in this predictor group."
-
-msgid "Available predictors"
-msgstr "Available predictors"
-
-msgid "Selected predictors"
-msgstr "Selected predictors"
-
-msgid "Filter available predictors"
-msgstr "Filter available predictors"
-
-msgid "Filter selected predictors"
-msgstr "Filter selected predictors"
-
-msgid "Predictor run started successfully"
-msgstr "Predictor run started successfully"
-
-msgid "Run predictor"
-msgstr "Run predictor"
-
-msgid "Start date"
-msgstr "Start date"
-
-msgid "End date"
-msgstr "End date"
-
-msgid "Run now"
-msgstr "Run now"
-
-msgid "Edit {{objectName}} expression"
-msgstr "Edit {{objectName}} expression"
-
-msgid "Set up {{objectName}} expression"
-msgstr "Set up {{objectName}} expression"
-
-msgid "Summarize what this {{objectName}} measures."
-msgstr "Summarize what this {{objectName}} measures."
-
 msgid "Output data element (required)"
 msgstr "Output data element (required)"
 
@@ -4620,6 +4596,15 @@ msgstr ""
 msgid "Display enrolled TEs in the front page list"
 msgstr "Display enrolled TEs in the front page list"
 
+msgid "Set up notifications for this program."
+msgstr "Set up notifications for this program."
+
+msgid "No notifications been added yet"
+msgstr "No notifications been added yet"
+
+msgid "Add a notification"
+msgstr "Add a notification"
+
 msgid "Program Stages"
 msgstr "Program Stages"
 
@@ -4715,6 +4700,51 @@ msgstr "Choose how this program is disaggregated."
 
 msgid "Access and Sharing"
 msgstr "Access and Sharing"
+
+msgid "Notification"
+msgstr "Notification"
+
+msgid "Save notification and close"
+msgstr "Save notification and close"
+
+msgid "Save notification"
+msgstr "Save notification"
+
+msgid "Saving a notification does not save other changes to the program"
+msgstr "Saving a notification does not save other changes to the program"
+
+msgid "Notification form saved"
+msgstr "Notification form saved"
+
+msgid "When to send notification (required)"
+msgstr "When to send notification (required)"
+
+msgid "Days since due date"
+msgstr "Days since due date"
+
+msgid "Days until due date"
+msgstr "Days until due date"
+
+msgid "Set up the basic information for the programNotification template."
+msgstr "Set up the basic information for the programNotification template."
+
+msgid "Recipient type (required)"
+msgstr "Recipient type (required)"
+
+msgid "Program attribute Recipient"
+msgstr "Program attribute Recipient"
+
+msgid "No program attributes of type email or phone number found."
+msgstr "No program attributes of type email or phone number found."
+
+msgid "Web hook message URL (required)"
+msgstr "Web hook message URL (required)"
+
+msgid "Edit Program Notification"
+msgstr "Edit Program Notification"
+
+msgid "Recipient program attribute"
+msgstr "Recipient program attribute"
 
 msgid "Event repetition"
 msgstr "Event repetition"
@@ -5262,6 +5292,9 @@ msgstr "Filter selected validation rules"
 
 msgid "Configure the templates for the notification message content."
 msgstr "Configure the templates for the notification message content."
+
+msgid "Choose who recieves the notification."
+msgstr "Choose who recieves the notification."
 
 msgid "Choose notification"
 msgstr "Choose notification"
