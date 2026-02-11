@@ -1,3 +1,11 @@
+## [0.125.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.125.0...v0.125.1) (2026-02-11)
+
+
+### Bug Fixes
+
+* clear toggled display options [DHIS2-20506] ([#762](https://github.com/dhis2/maintenance-app-beta/issues/762)) ([c6827a5](https://github.com/dhis2/maintenance-app-beta/commit/c6827a5db5784ff224de7de09b350e84ce5bf187))
+* feature toggle display options [DHIS2-20853] ([#761](https://github.com/dhis2/maintenance-app-beta/issues/761)) ([cc6725c](https://github.com/dhis2/maintenance-app-beta/commit/cc6725c4d29b60f8619431a8e3a3f8790a6ded3d))
+
 # [0.125.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.124.1...v0.125.0) (2026-02-11)
 
 
