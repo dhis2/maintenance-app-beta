@@ -4024,6 +4024,45 @@ msgstr "End date"
 msgid "Run now"
 msgstr "Run now"
 
+msgid "Choose the predictors to include in this predictor group."
+msgstr "Choose the predictors to include in this predictor group."
+
+msgid "Available predictors"
+msgstr "Available predictors"
+
+msgid "Selected predictors"
+msgstr "Selected predictors"
+
+msgid "Filter available predictors"
+msgstr "Filter available predictors"
+
+msgid "Filter selected predictors"
+msgstr "Filter selected predictors"
+
+msgid "Predictor run started successfully"
+msgstr "Predictor run started successfully"
+
+msgid "Run predictor"
+msgstr "Run predictor"
+
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
+
+msgid "Run now"
+msgstr "Run now"
+
+msgid "Edit {{objectName}} expression"
+msgstr "Edit {{objectName}} expression"
+
+msgid "Set up {{objectName}} expression"
+msgstr "Set up {{objectName}} expression"
+
+msgid "Summarize what this {{objectName}} measures."
+msgstr "Summarize what this {{objectName}} measures."
+
 msgid "Output data element (required)"
 msgstr "Output data element (required)"
 
