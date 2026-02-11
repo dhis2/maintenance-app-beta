@@ -4,7 +4,6 @@ import { Button, ButtonStrip } from '@dhis2/ui'
 import { IconInfo16 } from '@dhis2/ui-icons'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
-import { omit } from 'lodash'
 import isEqual from 'lodash/isEqual'
 import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
@@ -19,7 +18,6 @@ import { DrawerSectionedFormSidebar } from '../../../../components/drawer/Drawer
 import { LoadingSpinner } from '../../../../components/loading/LoadingSpinner'
 import {
     createFormError,
-    createFormValidate,
     createJsonPatchOperations,
     DEFAULT_FIELD_FILTERS,
     SchemaName,

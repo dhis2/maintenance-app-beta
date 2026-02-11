@@ -130,9 +130,9 @@ export const NotificationTimingSection = () => {
                             parse={(value: unknown) => {
                                 const parsed =
                                     typeof value === 'string'
-                                        ? parseInt(value ?? '', 10)
+                                        ? Number.parseInt(value ?? '', 10)
                                         : undefined
-                                if (!parsed || isNaN(parsed)) {
+                                if (!parsed || Number.isNaN(parsed)) {
                                     return undefined
                                 }
                                 return beforeAfter === 'BEFORE'
