@@ -523,7 +523,7 @@ const ProgramRuleVariablesList = ({
         resource: 'programRuleVariables',
         params: {
             filters: [`program.id:eq:${programId}`],
-            fields: ['id', 'displayName'],
+            fields: ['name', 'displayName'],
             order: ['displayName'],
             paging: false,
         },
@@ -533,6 +533,12 @@ const ProgramRuleVariablesList = ({
         <ExpressionList
             query={programRuleVariablesQuery}
             insertElement={insertElementFormatted}
+            transform={(variables) =>
+                variables.map((v: any) => ({
+                    id: v.name,
+                    displayName: v.displayName,
+                }))
+            }
             postQuerySearch={true}
         />
     )

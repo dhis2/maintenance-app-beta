@@ -6,12 +6,16 @@ import { Field } from 'react-final-form'
 import { BaseModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/BaseModelSingleSelect'
 import { useBoundResourceQueryFn } from '../../../lib'
 
-type ProgramRuleVariableModel = { id: string; displayName?: string }
+type ProgramRuleVariableModel = {
+    id: string
+    name: string
+    displayName?: string
+}
 
 const PROGRAM_RULE_VARIABLES_QUERY = (programId: string) => ({
     resource: 'programRuleVariables' as const,
     params: {
-        fields: ['id', 'displayName'],
+        fields: ['id', 'name', 'displayName'],
         filter: `program.id:eq:${programId}`,
         paging: false,
     },
@@ -39,11 +43,12 @@ export function ProgramRuleVariableField({
     return (
         <Field name="content">
             {({ input, meta }) => {
-                const id = (input.value as string) ?? ''
-                const selected = id
-                    ? available.find((v) => v.id === id) ??
+                const name = (input.value as string) ?? ''
+                const selected = name
+                    ? available.find((v) => v.name === name) ??
                       ({
-                          id,
+                          id: '',
+                          name,
                           displayName: undefined,
                       } as ProgramRuleVariableModel)
                     : undefined
@@ -61,7 +66,7 @@ export function ProgramRuleVariableField({
                                 selected={selected}
                                 available={available}
                                 onChange={(value) => {
-                                    input.onChange(value?.id ?? '')
+                                    input.onChange(value?.name ?? '')
                                     input.onBlur()
                                 }}
                                 showNoValueOption={{
