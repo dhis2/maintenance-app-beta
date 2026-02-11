@@ -1,3 +1,73 @@
+## [0.125.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.125.0...v0.125.1) (2026-02-11)
+
+
+### Bug Fixes
+
+* clear toggled display options [DHIS2-20506] ([#762](https://github.com/dhis2/maintenance-app-beta/issues/762)) ([c6827a5](https://github.com/dhis2/maintenance-app-beta/commit/c6827a5db5784ff224de7de09b350e84ce5bf187))
+* feature toggle display options [DHIS2-20853] ([#761](https://github.com/dhis2/maintenance-app-beta/issues/761)) ([cc6725c](https://github.com/dhis2/maintenance-app-beta/commit/cc6725c4d29b60f8619431a8e3a3f8790a6ded3d))
+
+# [0.125.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.124.1...v0.125.0) (2026-02-11)
+
+
+### Features
+
+* predictor groups [DHIS2-20780] DHIS2-20779] ([#741](https://github.com/dhis2/maintenance-app-beta/issues/741)) ([8c4cd12](https://github.com/dhis2/maintenance-app-beta/commit/8c4cd12e5d569fcc578ac0e5ba919180720d012b))
+
+## [0.124.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.124.0...v0.124.1) (2026-02-11)
+
+
+### Bug Fixes
+
+* set data rw on categoryOptions [DHIS2-20254] ([#759](https://github.com/dhis2/maintenance-app-beta/issues/759)) ([5608c7c](https://github.com/dhis2/maintenance-app-beta/commit/5608c7c69014b5b091d994caf2741a64364f7a17))
+
+# [0.124.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.123.0...v0.124.0) (2026-02-10)
+
+
+### Bug Fixes
+
+* add description for option [DHIS2-14581] ([#765](https://github.com/dhis2/maintenance-app-beta/issues/765)) ([5f28f5f](https://github.com/dhis2/maintenance-app-beta/commit/5f28f5f9c6e6f0e477179e0d1ba2ae9658965e83))
+
+
+### Features
+
+* add public sharing ([#760](https://github.com/dhis2/maintenance-app-beta/issues/760)) ([f8eeb2e](https://github.com/dhis2/maintenance-app-beta/commit/f8eeb2e48afe572c8916deee96287729636ecdba))
+
+# [0.123.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.122.2...v0.123.0) (2026-02-09)
+
+
+### Bug Fixes
+
+* **IconPicker:** replace tabs with segmented control, adjust styles ([a51f8a5](https://github.com/dhis2/maintenance-app-beta/commit/a51f8a5958a6359d56deee00c192bd38f4cf110b))
+* **ListViewFilter:** conditionally show clear filters button when filters are applied ([408e065](https://github.com/dhis2/maintenance-app-beta/commit/408e0652ad9725b0e626c92001539bbfb02fa4bc))
+* **searchableSelect:** adjust field styling of searcable single and multi selects ([b711ba1](https://github.com/dhis2/maintenance-app-beta/commit/b711ba1bed3dcc2bd1bc6092e14751229c5da505))
+* **sectionForm:** adjust padding and spacing ([0d8cd34](https://github.com/dhis2/maintenance-app-beta/commit/0d8cd341af4f560960a880dd8b60d6b7d76d8970))
+* **sectionFormSidebar:** adjust sidebar item styling ([681d840](https://github.com/dhis2/maintenance-app-beta/commit/681d84010fac0a5ccc9ff6977ed2876b2a2a6eeb))
+* **sectionList:** adjust action button icons ([05c08ad](https://github.com/dhis2/maintenance-app-beta/commit/05c08adc4eb0442639b118311b2aa1984fe681a9))
+* **sectionList:** adjust row and checkbox spacing ([627145d](https://github.com/dhis2/maintenance-app-beta/commit/627145daba872c402e35af035c6c29086cb3dc73))
+* **SectionList:** adjust manage list view transfer headers ([1f42468](https://github.com/dhis2/maintenance-app-beta/commit/1f42468f734b29e04da57964a4833eebdfafe976))
+* **sectionListToolbar:** adjust batch toolbar styles ([b06dff1](https://github.com/dhis2/maintenance-app-beta/commit/b06dff1851691b1db39941725f7c9628d211a8ba))
+* **sectionListToolbar:** avoid LinkButton offset alignment issue ([31ecec8](https://github.com/dhis2/maintenance-app-beta/commit/31ecec8b53245adada5966bcf903407e998a33b5))
+* **standardFormActions:** use UI Button loading states ([dd18fde](https://github.com/dhis2/maintenance-app-beta/commit/dd18fde50e608296492f9ea73b3fdf8e2b14d50a))
+
+
+### Features
+
+* **colorPicker:** add ability to remove color, use compact picker ([a740f18](https://github.com/dhis2/maintenance-app-beta/commit/a740f18d72e832d57806b0d2df1086a5f40a6c65))
+
+## [0.122.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.122.1...v0.122.2) (2026-02-04)
+
+
+### Bug Fixes
+
+* data element aggregation level in ou hierarchy ([6cbcce1](https://github.com/dhis2/maintenance-app-beta/commit/6cbcce15287599394618e7f95882d9cb262738b2))
+
+## [0.122.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.122.0...v0.122.1) (2026-02-03)
+
+
+### Bug Fixes
+
+* no quotes in css ([#756](https://github.com/dhis2/maintenance-app-beta/issues/756)) ([8e77f83](https://github.com/dhis2/maintenance-app-beta/commit/8e77f8397fefd29a583d60fa5008c9ff3969e824))
+
 # [0.122.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.121.0...v0.122.0) (2026-02-02)
 
 

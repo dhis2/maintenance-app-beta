@@ -3,14 +3,11 @@ import {
     Button,
     FlyoutMenu,
     IconEdit16,
-    IconEdit24,
     IconMore16,
-    IconMore24,
     IconShare16,
     IconTranslate16,
     MenuItem,
     Popover,
-    colors,
 } from '@dhis2/ui'
 import React, { useRef, useState } from 'react'
 import { useHref, useLinkClickHandler } from 'react-router-dom'
@@ -45,7 +42,19 @@ export const ActionEdit = ({
             state={preservedSearchState}
             dataTest="row-edit-action-button"
         >
-            <IconEdit24 color={colors.grey600} />
+            {/* TODO: replace with IconEdit16 when LinkButton has been updated */}
+            <svg
+                width="22"
+                height="24"
+                viewBox="0 0 22 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M13.6129 6.62389L13.7071 6.70708L16.2929 9.29286C16.6534 9.65335 16.6811 10.2206 16.3761 10.6129L16.2929 10.7071L9 18H5V14L12.2929 6.70708C12.6534 6.34659 13.2206 6.31886 13.6129 6.62389ZM13 7.41418L6.207 14.2062L8.792 16.7912L15.5858 9.99997L13 7.41418Z"
+                    fill="#6C7787"
+                />
+            </svg>
         </LinkButton>
     )
 }
@@ -93,7 +102,21 @@ export const ActionMore = ({
                 secondary
                 onClick={() => setOpen(!open)}
                 dataTest="row-actions-menu-button"
-                icon={<IconMore24 color={colors.grey600} />}
+                icon={
+                    // TODO: replace with IconMore16 when Button has been updated
+                    <svg
+                        width="22"
+                        height="24"
+                        viewBox="0 0 22 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M6 11C6.55228 11 7 11.4477 7 12C7 12.5523 6.55228 13 6 13C5.44772 13 5 12.5523 5 12C5 11.4477 5.44772 11 6 11ZM11 11C11.5523 11 12 11.4477 12 12C12 12.5523 11.5523 13 11 13C10.4477 13 10 12.5523 10 12C10 11.4477 10.4477 11 11 11ZM16 11C16.5523 11 17 11.4477 17 12C17 12.5523 16.5523 13 16 13C15.4477 13 15 12.5523 15 12C15 11.4477 15.4477 11 16 11Z"
+                            fill="#6C7787"
+                        />
+                    </svg>
+                }
             />
             {open && (
                 <Popover

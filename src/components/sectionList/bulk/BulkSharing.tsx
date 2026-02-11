@@ -38,14 +38,20 @@ const actionToJsonPatchOperation = (
     action: SharingAction
 ): SharingJsonPatchOperation => {
     const { op, sharingEntity, access } = action
-    const value = {
-        access: access,
-        id: sharingEntity.id,
-    }
+    const value =
+        sharingEntity.id === 'public'
+            ? access
+            : {
+                  access: access,
+                  id: sharingEntity.id,
+              }
 
     return {
         op,
-        path: `/sharing/${sharingEntity.entity}/${sharingEntity.id}`,
+        path:
+            sharingEntity.id === 'public'
+                ? `/sharing/public`
+                : `/sharing/${sharingEntity.entity}/${sharingEntity.id}`,
         ...(op === 'remove' ? undefined : { value }),
     }
 }
@@ -118,7 +124,9 @@ export const BulkSharing = ({
                     a.sharingEntity.id === action.sharingEntity.id ? action : a
                 )
             }
-            return [action, ...prev]
+            return action.sharingEntity.id === 'public'
+                ? [...prev, action]
+                : [action, ...prev]
         })
     }
 
@@ -127,6 +135,11 @@ export const BulkSharing = ({
             <SharingSelection
                 dataShareable={dataShareable}
                 onAddSharingAction={handleAddSharingAction}
+            />
+            <SharingSelection
+                dataShareable={dataShareable}
+                onAddSharingAction={handleAddSharingAction}
+                publicSharing={true}
             />
             <SharingSummary
                 numberOfSelectedModels={selectedModels.size}
@@ -158,11 +171,13 @@ export const BulkSharing = ({
 type SharingSelectionProps = {
     dataShareable: boolean
     onAddSharingAction: (action: SharingAction) => void
+    publicSharing?: boolean
 }
 
 const SharingSelection = ({
     dataShareable,
     onAddSharingAction,
+    publicSharing = false,
 }: SharingSelectionProps) => {
     const [selectedSharingEntity, setSelectedSharingEntity] = useState<
         SharingSearchResult | undefined
@@ -187,17 +202,40 @@ const SharingSelection = ({
         onAddSharingAction(action)
     }
 
+    const handleAddPublicSharingAction = () => {
+        const action = {
+            op: 'replace',
+            access: accessString,
+            sharingEntity: {
+                displayName: 'public',
+                id: 'public',
+                entity: 'public',
+            },
+        } as const
+        onAddSharingAction(action)
+    }
+
     return (
         <div>
             <SharingSubTitle>
-                {i18n.t('Update sharing for users and groups')}
+                {publicSharing
+                    ? i18n.t('Update public sharing')
+                    : i18n.t('Update sharing for users and groups')}
             </SharingSubTitle>
             <div className={css.selectionWrapper}>
                 <Field
-                    label={i18n.t('User or group')}
+                    label={
+                        publicSharing
+                            ? i18n.t('Public sharing')
+                            : i18n.t('User or group')
+                    }
                     className={css.sharingEntitySelect}
                 >
-                    <SharingSearchSelect onChange={handleSelectSharingEntity} />
+                    {!publicSharing && (
+                        <SharingSearchSelect
+                            onChange={handleSelectSharingEntity}
+                        />
+                    )}
                 </Field>
                 <Field
                     className={css.accessField}
@@ -221,8 +259,12 @@ const SharingSelection = ({
                 )}
                 <Button
                     className={css.addActionButton}
-                    onClick={handleAddSharingAction}
-                    disabled={!selectedSharingEntity}
+                    onClick={
+                        publicSharing
+                            ? handleAddPublicSharingAction
+                            : handleAddSharingAction
+                    }
+                    disabled={!publicSharing && !selectedSharingEntity}
                     dataTest="add-to-sharing-actions-button"
                 >
                     {i18n.t('Add to actions')}

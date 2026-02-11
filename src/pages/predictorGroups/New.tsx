@@ -2,11 +2,10 @@ import React from 'react'
 import { FormBase } from '../../components'
 import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
 import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
-import { validate } from './form'
-import { CategoryOptionFormFields } from './form/CategoryOptionFormFields'
-import { initialValues, transformFormValues } from './form/categoryOptionSchema'
+import { PredictorGroupFormFields } from './form/PredictorGroupFormFields'
+import { initialValues, validate } from './form/predictorGroupSchema'
 
-const section = SECTIONS_MAP.categoryOption
+const section = SECTIONS_MAP.predictorGroup
 
 export const Component = () => {
     return (
@@ -14,10 +13,10 @@ export const Component = () => {
             onSubmit={useOnSubmitNew({ section })}
             initialValues={initialValues}
             validate={validate}
-            valueFormatter={transformFormValues}
+            includeAttributes={false}
         >
             <DefaultNewFormContents section={section}>
-                <CategoryOptionFormFields />
+                <PredictorGroupFormFields />
             </DefaultNewFormContents>
         </FormBase>
     )
