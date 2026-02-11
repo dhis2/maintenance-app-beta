@@ -1,3 +1,32 @@
+# [0.126.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.125.1...v0.126.0) (2026-02-11)
+
+
+### Features
+
+* program notifications form ([#766](https://github.com/dhis2/maintenance-app-beta/issues/766)) ([8006849](https://github.com/dhis2/maintenance-app-beta/commit/8006849fc34393d8f92d4565f29b71edc12ab03a))
+
+## [0.125.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.125.0...v0.125.1) (2026-02-11)
+
+
+### Bug Fixes
+
+* clear toggled display options [DHIS2-20506] ([#762](https://github.com/dhis2/maintenance-app-beta/issues/762)) ([c6827a5](https://github.com/dhis2/maintenance-app-beta/commit/c6827a5db5784ff224de7de09b350e84ce5bf187))
+* feature toggle display options [DHIS2-20853] ([#761](https://github.com/dhis2/maintenance-app-beta/issues/761)) ([cc6725c](https://github.com/dhis2/maintenance-app-beta/commit/cc6725c4d29b60f8619431a8e3a3f8790a6ded3d))
+
+# [0.125.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.124.1...v0.125.0) (2026-02-11)
+
+
+### Features
+
+* predictor groups [DHIS2-20780] DHIS2-20779] ([#741](https://github.com/dhis2/maintenance-app-beta/issues/741)) ([8c4cd12](https://github.com/dhis2/maintenance-app-beta/commit/8c4cd12e5d569fcc578ac0e5ba919180720d012b))
+
+## [0.124.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.124.0...v0.124.1) (2026-02-11)
+
+
+### Bug Fixes
+
+* set data rw on categoryOptions [DHIS2-20254] ([#759](https://github.com/dhis2/maintenance-app-beta/issues/759)) ([5608c7c](https://github.com/dhis2/maintenance-app-beta/commit/5608c7c69014b5b091d994caf2741a64364f7a17))
+
 # [0.124.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.123.0...v0.124.0) (2026-02-10)
 
 

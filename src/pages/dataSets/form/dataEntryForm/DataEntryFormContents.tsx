@@ -1,4 +1,4 @@
-import { useDataEngine } from '@dhis2/app-runtime'
+import { useDataEngine, useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
@@ -33,7 +33,8 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
 }: {
     name: string
 }) {
-    const displayOptions = useDataSetField('displayOptions').input.value
+    const { apiVersion } = useConfig()
+    const hasDisplayOptions = apiVersion >= 42
     const sections = useDataSetField('sections').input.value
     const dataEntryForm = useDataSetField('dataEntryForm').input.value
     const dataSetElements = useDataSetField('dataSetElements').input.value
@@ -149,7 +150,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                         customFormTarget="data set"
                     />
                 )}
-                {displayOptions !== undefined && (
+                {hasDisplayOptions && (
                     <div className={classes.displayOptions}>
                         <StandardFormSectionTitle>
                             {i18n.t('Display options')}
