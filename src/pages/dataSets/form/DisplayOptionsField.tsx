@@ -71,6 +71,8 @@ export function DisplayOptionsField({
 
     const onTitlesCheckboxChange = () => {
         setIsTitlesChecked(!isTitlesChecked)
+        titleField.input.onChange(undefined)
+        subtitleField.input.onChange(undefined)
     }
 
     return (
