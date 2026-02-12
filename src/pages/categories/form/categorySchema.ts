@@ -24,6 +24,7 @@ export const categoryFormSchema = identifiable
         description: z.string().trim().optional(),
         dataDimension: z.boolean(),
         categoryOptions: referenceCollection,
+        id: z.string(),
     })
 
 export const categoryListSchema = categoryBaseSchema
