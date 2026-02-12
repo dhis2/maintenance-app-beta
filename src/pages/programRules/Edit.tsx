@@ -56,9 +56,6 @@ export const Component = () => {
                                 return value !== undefined && value !== null
                             })
                         )
-                        if (!existingIds.has(action.id)) {
-                            delete cleaned.id
-                        }
                         return cleaned
                     }) || []
 
