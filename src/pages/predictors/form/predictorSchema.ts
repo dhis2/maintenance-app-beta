@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { getDefaults, modelFormSchemas } from '../../../lib'
+import { getDefaultsOld, modelFormSchemas } from '../../../lib'
 import { createFormValidate } from '../../../lib/form/validate'
 import { Predictor, Expression } from '../../../types/generated/models'
 
@@ -61,5 +61,5 @@ export const predictorFormSchema = predictorBaseSchema
         organisationUnitLevel: referenceCollection.default([]),
     })
 
-export const initialValues = getDefaults(predictorFormSchema)
+export const initialValues = getDefaultsOld(predictorFormSchema)
 export const validate = createFormValidate(predictorFormSchema)

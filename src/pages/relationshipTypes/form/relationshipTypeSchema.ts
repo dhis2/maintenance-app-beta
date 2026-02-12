@@ -1,6 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
-import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaultsOld,
+    modelFormSchemas,
+} from '../../../lib'
 import {
     PickWithFieldFilters,
     RelationshipType,
@@ -39,7 +43,7 @@ export type RelationshipTypeFormValues = PickWithFieldFilters<
     typeof fieldFilters
 >
 
-export const initialValues = getDefaults(relationshipTypeFormSchema)
+export const initialValues = getDefaultsOld(relationshipTypeFormSchema)
 
 export const validateRelationshipType = createFormValidate(
     relationshipTypeFormSchema

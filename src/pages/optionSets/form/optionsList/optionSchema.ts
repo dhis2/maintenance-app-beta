@@ -1,7 +1,6 @@
 import { z } from 'zod'
-import { getDefaults, modelFormSchemas } from '../../../../lib'
-const { identifiable, withAttributeValues, style, withDefaultListColumns } =
-    modelFormSchemas
+import { getDefaultsOld, modelFormSchemas } from '../../../../lib'
+const { identifiable, withAttributeValues, style } = modelFormSchemas
 
 export const optionBaseSchema = z.object({
     shortName: z.string().optional(),
@@ -12,4 +11,4 @@ export const optionSchema = identifiable
     .merge(withAttributeValues)
     .merge(style)
 
-export const initialOptionValues = getDefaults(optionSchema)
+export const initialOptionValues = getDefaultsOld(optionSchema)

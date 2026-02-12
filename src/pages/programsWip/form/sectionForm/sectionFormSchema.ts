@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { getDefaults, modelFormSchemas } from '../../../../lib'
+import { getDefaultsOld, modelFormSchemas } from '../../../../lib'
 
 const { identifiable, referenceCollection } = modelFormSchemas
 
@@ -13,4 +13,4 @@ export const sectionFormSchema = identifiable.extend({
     trackedEntityAttributes: referenceCollection,
 })
 
-export const initialSectionValues = getDefaults(sectionFormSchema)
+export const initialSectionValues = getDefaultsOld(sectionFormSchema)
