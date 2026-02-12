@@ -15,7 +15,7 @@ export type ProgramRuleActionListItem = {
     programStageSection?: { id: string; displayName?: string }
     option?: { id: string; displayName?: string }
     optionGroup?: { id: string; displayName?: string }
-    templateUid?: string
+    notificationTemplate?: { id: string; displayName?: string }
     access?: Access
     deleted?: boolean
 }

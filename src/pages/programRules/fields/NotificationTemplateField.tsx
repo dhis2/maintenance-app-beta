@@ -53,12 +53,13 @@ export function NotificationTemplateField({
 
     return (
         <Field
-            name="templateUid"
-            format={(value: string | undefined) => value ?? ''}
-            parse={(value: string) => value || undefined}
+            name="notificationTemplate"
+            format={(value: TemplateModel | undefined) =>
+                value ? available.find((t) => t.id === value.id) : undefined
+            }
+            parse={(value: TemplateModel | undefined) => value || undefined}
         >
             {({ input, meta }) => {
-                const selected = available.find((t) => t.id === input.value)
                 return (
                     <UIField
                         label={i18n.t('Message template')}
@@ -70,10 +71,10 @@ export function NotificationTemplateField({
                     >
                         <Box width="400px" minWidth="100px">
                             <BaseModelSingleSelect<TemplateModel>
-                                selected={selected}
+                                selected={input.value}
                                 available={available}
                                 onChange={(value) => {
-                                    input.onChange(value?.id ?? '')
+                                    input.onChange(value ?? undefined)
                                     input.onBlur()
                                 }}
                                 invalid={meta.touched && !!meta.error}

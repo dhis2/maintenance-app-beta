@@ -15,7 +15,7 @@ export function getProgramRuleActionListLabel(
         programStageSection,
         option,
         optionGroup,
-        templateUid,
+        notificationTemplate,
     } = action
 
     const targetDeAndTea = [
@@ -24,6 +24,7 @@ export function getProgramRuleActionListLabel(
     ]
         .filter(Boolean)
         .join(', ')
+    const targetDeOnly = dataElement?.displayName || '-'
     const targetLocation = location
     const targetAssign = [
         dataElement?.displayName,
@@ -51,14 +52,14 @@ export function getProgramRuleActionListLabel(
         case 'WARNINGONCOMPLETE':
             return i18n.t('Warning on complete: {{content}} on {{target}}', {
                 content,
-                target: targetDeAndTea || '-',
+                target: targetDeOnly,
                 nsSeparator: false,
                 interpolation: { escapeValue: false },
             })
         case 'ERRORONCOMPLETE':
             return i18n.t('Error on complete: {{content}} on {{target}}', {
                 content,
-                target: targetDeAndTea || '-',
+                target: targetDeOnly,
                 nsSeparator: false,
                 interpolation: { escapeValue: false },
             })
@@ -122,14 +123,20 @@ export function getProgramRuleActionListLabel(
             })
         case 'SCHEDULEMESSAGE':
             return i18n.t('Schedule message: {{template}} at date {{data}}', {
-                template: templateUid || '-',
+                template:
+                    notificationTemplate?.displayName ??
+                    notificationTemplate?.id ??
+                    '-',
                 data: data || '',
                 nsSeparator: false,
                 interpolation: { escapeValue: false },
             })
         case 'SENDMESSAGE':
             return i18n.t('Send message: {{template}}', {
-                template: templateUid || '-',
+                template:
+                    notificationTemplate?.displayName ??
+                    notificationTemplate?.id ??
+                    '-',
                 nsSeparator: false,
                 interpolation: { escapeValue: false },
             })

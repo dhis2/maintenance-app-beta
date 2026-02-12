@@ -18,7 +18,7 @@ function getFieldFlags(values: ProgramRuleActionFormValues) {
         hasOptionGroup: !!values.optionGroup?.id,
         hasProgramStageSection: !!values.programStageSection?.id,
         hasProgramStage: !!values.programStage?.id,
-        hasTemplateUid: !!values.templateUid,
+        hasNotificationTemplate: !!values.notificationTemplate?.id,
         hasContent: !!values.content,
         hasData: !!values.data,
         hasLocation: !!values.location,
@@ -47,10 +47,10 @@ function requireProgramStage(flags: FieldFlags): ValidationErrors {
 }
 
 function requireMessageTemplate(flags: FieldFlags): ValidationErrors {
-    if (flags.hasTemplateUid) {
+    if (flags.hasNotificationTemplate) {
         return {}
     }
-    return { templateUid: VALIDATION_MESSAGES.MESSAGE_TEMPLATE }
+    return { notificationTemplate: VALIDATION_MESSAGES.MESSAGE_TEMPLATE }
 }
 
 function validateDisplayText(flags: FieldFlags): ValidationErrors {
@@ -142,7 +142,11 @@ function validateSendMessage(flags: FieldFlags): ValidationErrors {
 }
 
 function validateScheduleMessage(flags: FieldFlags): ValidationErrors {
-    return requireMessageTemplate(flags)
+    const errors = requireMessageTemplate(flags)
+    if (!flags.hasData) {
+        errors.data = VALIDATION_MESSAGES.FIELD_REQUIRED
+    }
+    return errors
 }
 
 function validateHideOption(flags: FieldFlags): ValidationErrors {

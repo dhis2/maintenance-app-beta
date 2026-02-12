@@ -11,7 +11,7 @@ export const ACTION_FIELDS_TO_CLEAR = [
     'priority',
     'programStage',
     'programStageSection',
-    'templateUid',
+    'notificationTemplate',
     'trackedEntityAttribute',
 ] as const
 
