@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaultsOld,
+    modelFormSchemas,
+} from '../../../lib'
 
 const { withDefaultListColumns, identifiable } = modelFormSchemas
 
@@ -25,5 +29,5 @@ export const validationRuleGroupsFormSchema = validationRuleGroupsBaseSchema
             .default([]),
     })
 
-export const initialValues = getDefaults(validationRuleGroupsFormSchema)
+export const initialValues = getDefaultsOld(validationRuleGroupsFormSchema)
 export const validate = createFormValidate(validationRuleGroupsFormSchema)

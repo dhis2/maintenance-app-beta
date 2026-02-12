@@ -1,14 +1,14 @@
 import { z } from 'zod'
-import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
+import {
+    getDefaultsOld,
+    createFormValidate,
+    modelFormSchemas,
+} from '../../../lib'
 
 /*  Note that this describes what we send to the server,
     and not what is stored in the form. */
-const {
-    identifiable,
-    withDefaultListColumns,
-    referenceCollection,
-    withAttributeValues,
-} = modelFormSchemas
+const { identifiable, withDefaultListColumns, withAttributeValues } =
+    modelFormSchemas
 
 const organisationUnitGroupSetBaseSchema = z.object({
     code: z.string().trim().optional(),
@@ -32,6 +32,6 @@ export const organisationUnitGroupSetListSchema = withDefaultListColumns
         displayShortName: z.string(),
     })
 
-export const initialValues = getDefaults(organisationUnitGroupSetFormSchema)
+export const initialValues = getDefaultsOld(organisationUnitGroupSetFormSchema)
 
 export const validate = createFormValidate(organisationUnitGroupSetFormSchema)

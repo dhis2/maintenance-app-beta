@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
+import {
+    getDefaultsOld,
+    createFormValidate,
+    modelFormSchemas,
+} from '../../../lib'
 import { Attribute } from '../../../types/generated'
 
 const { identifiable, withDefaultListColumns } = modelFormSchemas
@@ -66,6 +70,6 @@ export const attributeListSchema = attributeBaseSchema.merge(
     withDefaultListColumns
 )
 
-export const initialValues = getDefaults(attributeFormSchema)
+export const initialValues = getDefaultsOld(attributeFormSchema)
 
 export const validate = createFormValidate(attributeFormSchema)

@@ -1,6 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
-import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaultsOld,
+    modelFormSchemas,
+} from '../../../lib'
 
 const {
     withAttributeValues,
@@ -116,7 +120,7 @@ export const organisationUnitListSchema = withDefaultListColumns
         childCount: z.number(),
     })
 
-export const initialValues = getDefaults(organisationUnitFormSchema)
+export const initialValues = getDefaultsOld(organisationUnitFormSchema)
 
 export type OrganisationUnitFormValues = typeof initialValues
 

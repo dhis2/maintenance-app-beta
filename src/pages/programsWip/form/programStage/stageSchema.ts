@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { getDefaults, modelFormSchemas } from '../../../../lib'
+import { getDefaultsOld, modelFormSchemas } from '../../../../lib'
 
 const {
     identifiable,
@@ -26,4 +26,4 @@ export const stageSchema = identifiable.merge(withAttributeValues).extend({
     programStageDataElements: referenceCollection.default([]),
 })
 
-export const initialStageValue = getDefaults(stageSchema)
+export const initialStageValue = getDefaultsOld(stageSchema)

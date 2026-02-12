@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
-import { getDefaults, modelFormSchemas } from '../../../lib'
+import { getDefaultsOld, modelFormSchemas } from '../../../lib'
 import { createFormValidate } from '../../../lib/form/validate'
 
 const {
@@ -44,6 +44,6 @@ export const categoryOptionListSchema = withDefaultListColumns.extend({
     displayShortName: z.string(),
 })
 
-export const initialValues = getDefaults(categoryOptionFormSchema)
+export const initialValues = getDefaultsOld(categoryOptionFormSchema)
 
 export const validate = createFormValidate(categoryOptionFormSchema)

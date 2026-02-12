@@ -1,5 +1,6 @@
 import { z } from 'zod'
-import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
+import { createFormValidate, modelFormSchemas } from '../../../lib'
+import { getDefaults } from '../../../lib/zod/getDefaults'
 import { Category } from '../../../types/generated'
 
 /*  Note that this describes what we send to the server,
@@ -37,9 +38,10 @@ export const initialValues = getDefaults(categoryFormSchema, {
 })
 
 const validatingCategoryFormSchema = categoryFormSchema.extend({
-    categoryOptions: referenceCollection
-        .min(1, 'At least one category option is required')
-        .default([]),
+    categoryOptions: referenceCollection.min(
+        1,
+        'At least one category option is required'
+    ),
     id: z.string().optional(),
 })
 export const validate = createFormValidate(validatingCategoryFormSchema)

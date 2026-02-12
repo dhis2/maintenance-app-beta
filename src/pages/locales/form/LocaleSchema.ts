@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { getDefaults, createFormValidate } from '../../../lib'
+import { getDefaultsOld, createFormValidate } from '../../../lib'
 
 const localeBaseSchema = z.object({
     language: z.string(),
@@ -16,6 +16,6 @@ export const localeListSchema = localeBaseSchema.extend({
     name: z.string(),
 })
 
-export const initialValues = getDefaults(localeFormSchema)
+export const initialValues = getDefaultsOld(localeFormSchema)
 
 export const validate = createFormValidate(localeFormSchema)

@@ -1,6 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
-import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaultsOld,
+    modelFormSchemas,
+} from '../../../lib'
 import { DataSetNotificationTemplate } from '../../../types/generated'
 
 const { identifiable, withDefaultListColumns, referenceCollection } =
@@ -59,7 +63,9 @@ export const dataSetNotificationTemplateFormSchema =
 export const dataSetNotificationTemplateListSchema =
     dataSetNotificationTemplateBaseSchema.merge(withDefaultListColumns)
 
-export const initialValues = getDefaults(dataSetNotificationTemplateFormSchema)
+export const initialValues = getDefaultsOld(
+    dataSetNotificationTemplateFormSchema
+)
 
 export type DataSetNotificationFormValues = z.infer<
     typeof dataSetNotificationTemplateFormSchema

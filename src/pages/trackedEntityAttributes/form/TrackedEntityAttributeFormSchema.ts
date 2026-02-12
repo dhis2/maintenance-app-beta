@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaultsOld,
+    modelFormSchemas,
+} from '../../../lib'
 import {
     PickWithFieldFilters,
     TrackedEntityAttribute,
@@ -58,7 +62,7 @@ export const trackedEntityAttributeFormSchema = trackedEntityAttributeBaseSchema
     })
     .merge(withAttributeValues)
 
-export const initialValues = getDefaults(trackedEntityAttributeFormSchema)
+export const initialValues = getDefaultsOld(trackedEntityAttributeFormSchema)
 
 export type TrackedEntityAttributeFormValues = PickWithFieldFilters<
     TrackedEntityAttribute,

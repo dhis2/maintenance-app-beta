@@ -11,7 +11,7 @@ const referenceCollection = z.array(modelReference)
 
 /* Note that ID is optional here because we don't have ID when creating/POSTING models */
 const identifiable = z.object({
-    id: z.string(),
+    id: z.string().optional(),
     name: z.string().trim(),
     displayName: z.string().optional(),
 })

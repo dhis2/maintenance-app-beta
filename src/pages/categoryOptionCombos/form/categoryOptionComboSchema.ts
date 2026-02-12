@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { getDefaults, modelFormSchemas } from '../../../lib'
+import { getDefaultsOld, modelFormSchemas } from '../../../lib'
 import { createFormValidate } from '../../../lib/form/validate'
 
 const { withAttributeValues, withDefaultListColumns } = modelFormSchemas
@@ -19,6 +19,6 @@ export const categoryOptionComboListSchema = categoryOptionComboBaeSchema.merge(
     withDefaultListColumns
 )
 
-export const initialValues = getDefaults(categoryOptionComboFormSchema)
+export const initialValues = getDefaultsOld(categoryOptionComboFormSchema)
 
 export const validate = createFormValidate(categoryOptionComboFormSchema)
