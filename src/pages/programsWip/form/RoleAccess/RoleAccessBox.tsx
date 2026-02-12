@@ -106,7 +106,7 @@ export const RoleAccessBox = ({
                             onClick={onApplyProgramAccessRules}
                             disabled={!isDifferentFromProgram}
                         >
-                            {i18n.t('Revert to program access')}
+                            {i18n.t('Apply program access rules')}
                         </Button>
                     )}
                     <Button small onClick={onEditAccess}>

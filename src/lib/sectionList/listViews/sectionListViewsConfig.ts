@@ -749,6 +749,7 @@ export const modelListViewsConfig = {
                 { label: i18n.t('Option set'), path: 'optionSet.displayName' },
             ],
             available: [
+                { label: i18n.t('Sort order'), path: 'sortOrder' },
                 {
                     label: i18n.t('Category attribute'),
                     path: 'categoryAttribute',
@@ -987,5 +988,16 @@ export const modelListViewsConfig = {
             available: [],
             overrideDefaultAvailable: true,
         },
+    },
+    predictorGroup: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: ['description'],
+        },
+        filters: {},
     },
 } satisfies SectionListViewConfig<SectionName>

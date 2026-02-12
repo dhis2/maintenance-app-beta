@@ -35,7 +35,7 @@ const fieldFilters = [
     'description',
     'code',
     'valueType',
-    'options[id,name,code,access]',
+    'options[id,name,code,description,access]',
 ] as const
 
 const section = SECTIONS_MAP.optionSet

@@ -1,15 +1,19 @@
 import { z } from 'zod'
-import { modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaultsOld,
+    modelFormSchemas,
+} from '../../../lib'
 import { ProgramRuleVariable } from '../../../types/generated'
 
-const { modelReference, withDefaultListColumns } = modelFormSchemas
+const { modelReference, withDefaultListColumns, identifiable } =
+    modelFormSchemas
 
 const programRuleVariableBaseSchema = z.object({
-    name: z.string(),
-    program: modelReference.extend({ displayName: z.string() }).optional(),
-    programRuleVariableSourceType: z
-        .nativeEnum(ProgramRuleVariable.programRuleVariableSourceType)
-        .optional(),
+    program: modelReference,
+    programRuleVariableSourceType: z.nativeEnum(
+        ProgramRuleVariable.programRuleVariableSourceType
+    ),
     valueType: z.nativeEnum(ProgramRuleVariable.valueType).optional(),
     dataElement: modelReference
         .extend({ displayName: z.string().optional() })
@@ -23,8 +27,15 @@ const programRuleVariableBaseSchema = z.object({
     useCodeForOptionSet: z.boolean().optional(),
 })
 
+export const programRuleVariableFormSchema =
+    programRuleVariableBaseSchema.merge(identifiable)
+
 export const programRuleVariableListSchema = programRuleVariableBaseSchema
     .merge(withDefaultListColumns)
     .extend({
         displayName: z.string(),
     })
+
+export const initialValues = getDefaultsOld(programRuleVariableFormSchema)
+
+export const validate = createFormValidate(programRuleVariableFormSchema)

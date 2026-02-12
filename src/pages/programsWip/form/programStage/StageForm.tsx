@@ -60,6 +60,18 @@ export const fieldFilters = [
     'programStageSections[id,displayName]',
     'programStageDataElements[id,dataElement[id,displayName,valueType],compulsory,displayInReports,allowFutureDate,skipAnalytics,skipSynchronization,renderType,sortOrder]',
     'dataEntryForm[id,displayName,htmlCode]',
+    'repeatable',
+    'standardInterval',
+    'generatedByEnrollmentDate',
+    'autoGenerateEvent',
+    'openAfterEnrollment',
+    'reportDateToUse',
+    'minDaysFromStart',
+    'hideDueDate',
+    'periodType',
+    'nextScheduleDate[id,displayName,valueType]',
+    'allowGenerateNextVisit',
+    'remindCompleted',
 ] as const
 
 export const stageSchemaSection = {

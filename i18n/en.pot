@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-10T14:31:35.601Z\n"
-"PO-Revision-Date: 2026-02-10T14:31:35.601Z\n"
+"POT-Creation-Date: 2026-02-11T09:18:24.281Z\n"
+"PO-Revision-Date: 2026-02-11T09:18:24.281Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -405,12 +405,6 @@ msgstr "Are you sure you want to change this?"
 msgid "Yes, change"
 msgstr "Yes, change"
 
-msgid "data set"
-msgstr "data set"
-
-msgid "program enrollment"
-msgstr "program enrollment"
-
 msgid "Custom form saved"
 msgstr "Custom form saved"
 
@@ -641,8 +635,8 @@ msgstr ""
 "Disabled as the value type must match the value type of the selected option "
 "set."
 
-msgid "Value type"
-msgstr "Value type"
+msgid "Value type (required)"
+msgstr "Value type (required)"
 
 msgid "Change value type"
 msgstr "Change value type"
@@ -1081,6 +1075,15 @@ msgstr "None"
 
 msgid "No value"
 msgstr "No value"
+
+msgid "Event"
+msgstr "Event"
+
+msgid "Enrollment"
+msgstr "Enrollment"
+
+msgid "Tracked entity"
+msgstr "Tracked entity"
 
 msgid "Public can edit"
 msgstr "Public can edit"
@@ -1553,12 +1556,6 @@ msgstr "Section"
 msgid "Section Multi-org"
 msgstr "Section Multi-org"
 
-msgid "Event"
-msgstr "Event"
-
-msgid "Enrollment"
-msgstr "Enrollment"
-
 msgid "BiMonthly"
 msgstr "BiMonthly"
 
@@ -1664,11 +1661,38 @@ msgstr "Scheduled days"
 msgid "Data set completion"
 msgstr "Data set completion"
 
+msgid "Program completion"
+msgstr "Program completion"
+
+msgid "Program enrollment"
+msgstr "Program enrollment"
+
+msgid "Days scheduled (due date)"
+msgstr "Days scheduled (due date)"
+
+msgid "Days scheduled (incident date)"
+msgstr "Days scheduled (incident date)"
+
+msgid "Days scheduled (enrollment date)"
+msgstr "Days scheduled (enrollment date)"
+
 msgid "Organisation unit contact"
 msgstr "Organisation unit contact"
 
 msgid "User group"
 msgstr "User group"
+
+msgid "Tracked entity instance"
+msgstr "Tracked entity instance"
+
+msgid "Users at Organisation Unit"
+msgstr "Users at Organisation Unit"
+
+msgid "Program attribute"
+msgstr "Program attribute"
+
+msgid "Web hook"
+msgstr "Web hook"
 
 msgid "Dropdown"
 msgstr "Dropdown"
@@ -1763,27 +1787,6 @@ msgstr "Data element from previous event"
 msgid "Calculated value"
 msgstr "Calculated value"
 
-msgid "On complete"
-msgstr "On complete"
-
-msgid "On update and insert"
-msgstr "On update and insert"
-
-msgid "Data element in newest event in program stage"
-msgstr "Data element in newest event in program stage"
-
-msgid "Data element in newest event in program"
-msgstr "Data element in newest event in program"
-
-msgid "Data element from current event"
-msgstr "Data element from current event"
-
-msgid "Data element from previous event"
-msgstr "Data element from previous event"
-
-msgid "Calculated value"
-msgstr "Calculated value"
-
 msgid "Category option combination for aggregate data export"
 msgstr "Category option combination for aggregate data export"
 
@@ -1844,6 +1847,12 @@ msgstr "Ignore data approval"
 msgid "Source type"
 msgstr "Source type"
 
+msgid "Priority"
+msgstr "Priority"
+
+msgid "Condition"
+msgstr "Condition"
+
 msgid "Referral"
 msgstr "Referral"
 
@@ -1858,6 +1867,9 @@ msgstr "Use code for option set"
 
 msgid "Owner"
 msgstr "Owner"
+
+msgid "Value type"
+msgstr "Value type"
 
 msgid "Zero is significant"
 msgstr "Zero is significant"
@@ -1964,6 +1976,12 @@ msgstr "Program name"
 msgid "Decimals in data output"
 msgstr "Decimals in data output"
 
+msgid "Initiating entity type"
+msgstr "Initiating entity type"
+
+msgid "Receiving entity type"
+msgstr "Receiving entity type"
+
 msgid "Unique"
 msgstr "Unique"
 
@@ -1990,6 +2008,9 @@ msgstr "Display front page list"
 
 msgid "Mandatory"
 msgstr "Mandatory"
+
+msgid "Sort order"
+msgstr "Sort order"
 
 msgid "Category attribute"
 msgstr "Category attribute"
@@ -2056,9 +2077,6 @@ msgstr "Organisation unit group attribute"
 
 msgid "Organisation unit group set attribute"
 msgstr "Organisation unit group set attribute"
-
-msgid "Program attribute"
-msgstr "Program attribute"
 
 msgid "Program indicator attribute"
 msgstr "Program indicator attribute"
@@ -2131,9 +2149,6 @@ msgstr "Basic information"
 
 msgid "Data and options"
 msgstr "Data and options"
-
-msgid "Sort order"
-msgstr "Sort order"
 
 msgid "Category option combo"
 msgstr "Category option combo"
@@ -2626,8 +2641,8 @@ msgstr "Choose what triggers the notification and when it should be sent."
 msgid "Recipient"
 msgstr "Recipient"
 
-msgid "Choose who recieves the notification."
-msgstr "Choose who recieves the notification."
+msgid "Choose who receives the notification."
+msgstr "Choose who receives the notification."
 
 msgid "SMS"
 msgstr "SMS"
@@ -2957,6 +2972,9 @@ msgstr "<No filter>"
 
 msgid "Manage enabled/disabled fields"
 msgstr "Manage enabled/disabled fields"
+
+msgid "Data set section form saved"
+msgstr "Data set section form saved"
 
 msgid "Section setup"
 msgstr "Section setup"
@@ -4009,11 +4027,17 @@ msgstr "Manage"
 msgid "Predictor run started successfully"
 msgstr "Predictor run started successfully"
 
-msgid "Set up {{objectName}} expression"
-msgstr "Set up {{objectName}} expression"
+msgid "Run predictor"
+msgstr "Run predictor"
 
-msgid "Summarize what this {{objectName}} measures."
-msgstr "Summarize what this {{objectName}} measures."
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
+
+msgid "Run now"
+msgstr "Run now"
 
 msgid "Output data element (required)"
 msgstr "Output data element (required)"
@@ -4357,6 +4381,40 @@ msgstr "Set up the program indicator legends."
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
 
+msgid "Name can only contain letters, numbers, space, dash, dot and underscore"
+msgstr "Name can only contain letters, numbers, space, dash, dot and underscore"
+
+msgid "Please enter a maximum of {{max}} characters"
+msgstr "Please enter a maximum of {{max}} characters"
+
+msgid "A variable with this name already exists in this program."
+msgstr "A variable with this name already exists in this program."
+
+msgid "Source type (required)"
+msgstr "Source type (required)"
+
+msgid "Set up the basic information for this program rule variable."
+msgstr "Set up the basic information for this program rule variable."
+
+msgid "Configure how this variable works."
+msgstr "Configure how this variable works."
+
+msgid "Program cannot be changed after creation"
+msgstr "Program cannot be changed after creation"
+
+msgid ""
+"Show option set code instead of display name (when selection is linked to "
+"an option set)."
+msgstr ""
+"Show option set code instead of display name (when selection is linked to "
+"an option set)."
+
+msgid "Program Rule Variable"
+msgstr "Program Rule Variable"
+
+msgid "There was an error deleting stages: {{stagesNames}}"
+msgstr "There was an error deleting stages: {{stagesNames}}"
+
 msgid "Organisation unit access"
 msgstr "Organisation unit access"
 
@@ -4538,6 +4596,15 @@ msgstr ""
 msgid "Display enrolled TEs in the front page list"
 msgstr "Display enrolled TEs in the front page list"
 
+msgid "Set up notifications for this program."
+msgstr "Set up notifications for this program."
+
+msgid "No notifications been added yet"
+msgstr "No notifications been added yet"
+
+msgid "Add a notification"
+msgstr "Add a notification"
+
 msgid "Program Stages"
 msgstr "Program Stages"
 
@@ -4598,8 +4665,8 @@ msgstr "Differs from program access"
 msgid "Apply to all stages"
 msgstr "Apply to all stages"
 
-msgid "Revert to program access"
-msgstr "Revert to program access"
+msgid "Apply program access rules"
+msgstr "Apply program access rules"
 
 msgid "Edit data access"
 msgstr "Edit data access"
@@ -4613,9 +4680,6 @@ msgstr "Public (All users)"
 msgid "External"
 msgstr "External"
 
-msgid "Should not be lower than previous version"
-msgstr "Should not be lower than previous version"
-
 msgid "Program Details"
 msgstr "Program Details"
 
@@ -4624,6 +4688,9 @@ msgstr "Set up the basic information for this program."
 
 msgid "Last updated:  {{date}}"
 msgstr "Last updated:  {{date}}"
+
+msgid "Increase version"
+msgstr "Increase version"
 
 msgid "Related program"
 msgstr "Related program"
@@ -4634,17 +4701,74 @@ msgstr "Choose how this program is disaggregated."
 msgid "Access and Sharing"
 msgstr "Access and Sharing"
 
-msgid "Program stage data"
-msgstr "Program stage data"
+msgid "Notification"
+msgstr "Notification"
+
+msgid "Save notification and close"
+msgstr "Save notification and close"
+
+msgid "Save notification"
+msgstr "Save notification"
+
+msgid "Saving a notification does not save other changes to the program"
+msgstr "Saving a notification does not save other changes to the program"
+
+msgid "Notification form saved"
+msgstr "Notification form saved"
+
+msgid "When to send notification (required)"
+msgstr "When to send notification (required)"
+
+msgid "Days since due date"
+msgstr "Days since due date"
+
+msgid "Days until due date"
+msgstr "Days until due date"
+
+msgid "Set up the basic information for the programNotification template."
+msgstr "Set up the basic information for the programNotification template."
+
+msgid "Recipient type (required)"
+msgstr "Recipient type (required)"
+
+msgid "Program attribute Recipient"
+msgstr "Program attribute Recipient"
+
+msgid "No program attributes of type email or phone number found."
+msgstr "No program attributes of type email or phone number found."
+
+msgid "Web hook message URL (required)"
+msgstr "Web hook message URL (required)"
+
+msgid "Edit Program Notification"
+msgstr "Edit Program Notification"
+
+msgid "Recipient program attribute"
+msgstr "Recipient program attribute"
+
+msgid "Event repetition"
+msgstr "Event repetition"
+
+msgid "Define the frequency of events within this stage."
+msgstr "Define the frequency of events within this stage."
+
+msgid "Event scheduling"
+msgstr "Event scheduling"
+
+msgid "Configure how and when events in this stage are scheduled."
+msgstr "Configure how and when events in this stage are scheduled."
+
+msgid "Completion options"
+msgstr "Completion options"
+
+msgid "Decide what should happen after a user completes this event."
+msgstr "Decide what should happen after a user completes this event."
 
 msgid "Configure data collection for events in this program stage."
 msgstr "Configure data collection for events in this program stage."
 
-msgid "Chosen data elements"
-msgstr "Chosen data elements"
-
-msgid "Filter chosen data elements"
-msgstr "Filter chosen data elements"
+msgid "Filter selected data elements"
+msgstr "Filter selected data elements"
 
 msgid "Configure data items"
 msgstr "Configure data items"
@@ -4670,11 +4794,17 @@ msgstr "Stage"
 msgid "Stages"
 msgstr "Stages"
 
-msgid "Save "
-msgstr "Save "
+msgid "Save stage and close"
+msgstr "Save stage and close"
+
+msgid "Save stage"
+msgstr "Save stage"
 
 msgid "Saving a stage does not save other changes to the program"
 msgstr "Saving a stage does not save other changes to the program"
+
+msgid "Stage form saved"
+msgstr "Stage form saved"
 
 msgid "A stage with this name already exists. Please choose another name."
 msgstr "A stage with this name already exists. Please choose another name."
@@ -4712,17 +4842,60 @@ msgstr "Custom label for program stage"
 msgid "Custom label for event"
 msgstr "Custom label for event"
 
-msgid "Event Repetition"
-msgstr "Event Repetition"
-
-msgid "Define the frequency of events within this stage."
-msgstr "Define the frequency of events within this stage."
-
 msgid "Program stage form"
 msgstr "Program stage form"
 
 msgid "Configure the form for data collection for events in this program stage."
 msgstr "Configure the form for data collection for events in this program stage."
+
+msgid ""
+"This form displays an auto-generated list of the data elements defined for "
+"this program stage."
+msgstr ""
+"This form displays an auto-generated list of the data elements defined for "
+"this program stage."
+
+msgid "Edit or rearrange the data elements"
+msgstr "Edit or rearrange the data elements"
+
+msgid "On event completion, show a prompt to create a new event"
+msgstr "On event completion, show a prompt to create a new event"
+
+msgid "Auto-generate an event in this stage"
+msgstr "Auto-generate an event in this stage"
+
+msgid "Generate events based on enrollment date"
+msgstr "Generate events based on enrollment date"
+
+msgid "Show scheduled date"
+msgstr "Show scheduled date"
+
+msgid "Scheduled days from start (required)"
+msgstr "Scheduled days from start (required)"
+
+msgid "Days to add to the enrollment or incident date. 0 means same day. "
+msgstr "Days to add to the enrollment or incident date. 0 means same day. "
+
+msgid "Default next scheduled date"
+msgstr "Default next scheduled date"
+
+msgid "Open data entry form after enrollment"
+msgstr "Open data entry form after enrollment"
+
+msgid "On event completion, ask user to complete enrollment"
+msgstr "On event completion, ask user to complete enrollment"
+
+msgid "Allow multiple events in this stage (repeatable stage)"
+msgstr "Allow multiple events in this stage (repeatable stage)"
+
+msgid "Report date to use"
+msgstr "Report date to use"
+
+msgid "Standard interval days"
+msgstr "Standard interval days"
+
+msgid "Enter the number of days between repeated events."
+msgstr "Enter the number of days between repeated events."
 
 msgid "Validation strategy"
 msgstr "Validation strategy"
@@ -4733,8 +4906,11 @@ msgstr "Stage section"
 msgid "Stage sections"
 msgstr "Stage sections"
 
-msgid "Saving a section does not save other changes to the program stage"
-msgstr "Saving a section does not save other changes to the program stage"
+msgid "Saving a section does not save other changes to the stage or program"
+msgstr "Saving a section does not save other changes to the stage or program"
+
+msgid "Stage section form saved"
+msgstr "Stage section form saved"
 
 msgid "Listing"
 msgstr "Listing"
@@ -4766,6 +4942,9 @@ msgstr "Stage: Terminology"
 msgid "Stage: Creation and Scheduling"
 msgstr "Stage: Creation and Scheduling"
 
+msgid "Scheduled days from start"
+msgstr "Scheduled days from start"
+
 msgid "Stage: Data"
 msgstr "Stage: Data"
 
@@ -4784,8 +4963,8 @@ msgstr "Search selected attributes"
 msgid "Saving a section does not save other changes to the program"
 msgstr "Saving a section does not save other changes to the program"
 
-msgid "Tracked entity"
-msgstr "Tracked entity"
+msgid "Enrollment section form saved"
+msgstr "Enrollment section form saved"
 
 msgid "Relationship entity constraint"
 msgstr "Relationship entity constraint"
@@ -5113,6 +5292,9 @@ msgstr "Filter selected validation rules"
 
 msgid "Configure the templates for the notification message content."
 msgstr "Configure the templates for the notification message content."
+
+msgid "Choose who recieves the notification."
+msgstr "Choose who recieves the notification."
 
 msgid "Choose notification"
 msgstr "Choose notification"

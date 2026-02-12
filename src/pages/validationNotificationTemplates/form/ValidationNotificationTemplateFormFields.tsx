@@ -13,6 +13,7 @@ import {
     ModelTransferField,
     ModelMultiSelectField,
     MessageFields,
+    MessageVariables,
 } from '../../../components'
 import {
     useSchemaSectionHandleOrThrow,
@@ -33,18 +34,27 @@ const notificationTypeOptions = [
 ]
 
 export const VALIDATION_RULE_VARIABLES = {
-    rule_name: i18n.t('Rule name'),
-    rule_description: i18n.t('Rule description'),
-    operator: i18n.t('Operator'),
-    importance: i18n.t('Importance'),
-    left_side_description: i18n.t('Left side description'),
-    right_side_description: i18n.t('Right side description'),
-    left_side_value: i18n.t('Left side value'),
-    right_side_value: i18n.t('Right side value'),
-    org_unit_name: i18n.t('Organisation unit name'),
-    period: i18n.t('Period'),
-    current_date: i18n.t('Current date'),
-} as Record<string, string>
+    rule_name: { label: i18n.t('Rule name'), type: 'VARIABLE' },
+    rule_description: { label: i18n.t('Rule description'), type: 'VARIABLE' },
+    operator: { label: i18n.t('Operator'), type: 'VARIABLE' },
+    importance: { label: i18n.t('Importance'), type: 'VARIABLE' },
+    left_side_description: {
+        label: i18n.t('Left side description'),
+        type: 'VARIABLE',
+    },
+    right_side_description: {
+        label: i18n.t('Right side description'),
+        type: 'VARIABLE',
+    },
+    left_side_value: { label: i18n.t('Left side value'), type: 'VARIABLE' },
+    right_side_value: { label: i18n.t('Right side value'), type: 'VARIABLE' },
+    org_unit_name: {
+        label: i18n.t('Organisation unit name'),
+        type: 'VARIABLE',
+    },
+    period: { label: i18n.t('Period'), type: 'VARIABLE' },
+    current_date: { label: i18n.t('Current date'), type: 'VARIABLE' },
+} as MessageVariables
 
 const UserGroupSelect = () => {
     const USER_GROUPS_QUERY = {
@@ -70,11 +80,7 @@ const UserGroupSelect = () => {
     )
 }
 
-export const ValidationNotificationTemplateFormFields = ({
-    initialValues,
-}: {
-    initialValues?: Record<string, any>
-}) => {
+export const ValidationNotificationTemplateFormFields = () => {
     const schemaSection = useSchemaSectionHandleOrThrow()
     useSyncSelectedSectionWithScroll()
 

@@ -12,7 +12,6 @@ const { identifiable, withDefaultListColumns, referenceCollection } =
 
 const dataSetNotificationTemplateBaseSchema = z.object({
     code: z.string().optional(),
-    description: z.string().optional(),
     dataSetNotificationTrigger: z
         .nativeEnum(DataSetNotificationTemplate.dataSetNotificationTrigger)
         .optional(),

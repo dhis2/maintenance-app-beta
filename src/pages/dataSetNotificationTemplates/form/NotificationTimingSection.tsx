@@ -5,7 +5,7 @@ import {
     SingleSelectField,
     SingleSelectOption,
 } from '@dhis2/ui'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Field as FieldRFF, useField, useForm } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 import { getConstantTranslation } from '../../../lib'
@@ -45,7 +45,19 @@ export const NotificationTimingSection = () => {
     >('relativeScheduledDays')
 
     const relativeDaysValue = Number(relativeScheduledDaysInput.value) || 0
-    const beforeAfter = relativeDaysValue < 0 ? 'BEFORE' : 'AFTER'
+    const [beforeAfter, setBeforeAfter] = useState(
+        relativeDaysValue < 0 ? 'BEFORE' : 'AFTER'
+    )
+    useEffect(() => {
+        setBeforeAfter(relativeDaysValue < 0 ? 'BEFORE' : 'AFTER')
+    }, [relativeDaysValue])
+
+    useEffect(() => {
+        if (!isScheduledDays) {
+            setBeforeAfter('AFTER')
+            form.change('relativeScheduledDays', undefined)
+        }
+    }, [isScheduledDays, form])
 
     const handleBeforeAfterChange = (newValue: 'BEFORE' | 'AFTER') => {
         const absValue = Math.abs(Number(relativeScheduledDaysInput.value) || 0)
@@ -76,11 +88,12 @@ export const NotificationTimingSection = () => {
                             )}
                             selected={beforeAfter}
                             dataTest="formfields-beforeOrAfter"
-                            onChange={({ selected }: { selected: string }) =>
+                            onChange={({ selected }: { selected: string }) => {
+                                setBeforeAfter(selected as 'BEFORE' | 'AFTER')
                                 handleBeforeAfterChange(
                                     selected as 'BEFORE' | 'AFTER'
                                 )
-                            }
+                            }}
                             inputWidth="120px"
                         >
                             <SingleSelectOption
