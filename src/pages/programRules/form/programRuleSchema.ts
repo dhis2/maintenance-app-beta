@@ -39,7 +39,7 @@ const programRuleBaseSchema = z.object({
                 optionGroup: programRuleActionReference.optional(),
                 notificationTemplate: programRuleActionReference.optional(),
                 priority: z.number().optional(),
-                access: AccessSchema.optional(),
+                access: AccessSchema.partial().optional(),
                 deleted: z.boolean().optional(),
             })
         )
