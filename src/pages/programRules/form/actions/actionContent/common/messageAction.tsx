@@ -35,7 +35,7 @@ export function messageActionFields(
             <StandardFormField>
                 <ActionTextInputField
                     name="content"
-                    label={i18n.t('Static text')}
+                    label={i18n.t('Static text (required)')}
                     required
                 />
             </StandardFormField>

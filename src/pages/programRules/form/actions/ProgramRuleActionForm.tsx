@@ -45,6 +45,7 @@ const actionFieldFilters = [
     'location',
     'dataElement[id,displayName]',
     'trackedEntityAttribute[id,displayName]',
+    'programRuleVariable[id,displayName]',
     'programStage[id,displayName]',
     'programStageSection[id,displayName]',
     'option[id,displayName]',
@@ -54,11 +55,13 @@ const actionFieldFilters = [
 
 export const ProgramRuleActionForm = ({
     programId,
+    programType,
     action,
     onCancel,
     onSubmit,
 }: Readonly<{
     programId?: string
+    programType?: string
     action: ProgramRuleActionListItem | null
     onCancel: () => void
     onSubmit: FormBaseProps<ProgramRuleActionFormValues>['onSubmit']
@@ -78,6 +81,7 @@ export const ProgramRuleActionForm = ({
                 action={action}
                 onCancel={onCancel}
                 programId={programId}
+                programType={programType}
             />
         </FormBase>
     )
@@ -86,11 +90,13 @@ export const ProgramRuleActionForm = ({
 export const EditProgramRuleActionForm = ({
     action,
     programId,
+    programType,
     onCancel,
     onSubmitted,
 }: {
     action: ProgramRuleActionListItem
     programId?: string
+    programType?: string
     onCancel: () => void
     onSubmitted: (values: ProgramRuleActionListItem) => void
 }) => {
@@ -144,6 +150,7 @@ export const EditProgramRuleActionForm = ({
     return (
         <ProgramRuleActionForm
             programId={programId}
+            programType={programType}
             action={(actionValues.data ?? action) as ProgramRuleActionListItem}
             onCancel={onCancel}
             onSubmit={onFormSubmit}
@@ -153,11 +160,13 @@ export const EditProgramRuleActionForm = ({
 
 export const NewProgramRuleActionForm = ({
     programId,
+    programType,
     programRuleId,
     onCancel,
     onSubmitted,
 }: {
     programId?: string
+    programType?: string
     programRuleId: string
     onCancel: () => void
     onSubmitted: (values: ProgramRuleActionListItem) => void
@@ -185,6 +194,7 @@ export const NewProgramRuleActionForm = ({
     return (
         <ProgramRuleActionForm
             programId={programId}
+            programType={programType}
             action={null}
             onCancel={onCancel}
             onSubmit={onFormSubmit}
@@ -195,12 +205,14 @@ export const NewProgramRuleActionForm = ({
 export const EditOrNewProgramRuleActionForm = ({
     action,
     programId,
+    programType,
     programRuleId,
     onCancel,
     onSubmitted,
 }: {
     action: ProgramRuleActionListItem | null | undefined
     programId?: string
+    programType?: string
     programRuleId: string
     onCancel: () => void
     onSubmitted: (values: ProgramRuleActionListItem) => void
@@ -213,6 +225,7 @@ export const EditOrNewProgramRuleActionForm = ({
         return (
             <NewProgramRuleActionForm
                 programId={programId}
+                programType={programType}
                 programRuleId={programRuleId}
                 onCancel={onCancel}
                 onSubmitted={onSubmitted}
@@ -224,6 +237,7 @@ export const EditOrNewProgramRuleActionForm = ({
         <EditProgramRuleActionForm
             action={action}
             programId={programId}
+            programType={programType}
             onCancel={onCancel}
             onSubmitted={onSubmitted}
         />
@@ -234,10 +248,12 @@ function ProgramRuleActionFormBody({
     action,
     onCancel,
     programId,
+    programType,
 }: Readonly<{
     action: ProgramRuleActionListItem | null
     onCancel: () => void
     programId?: string
+    programType?: string
 }>) {
     const form = useForm()
     const clearActionFields = useClearFormFields(
@@ -248,6 +264,17 @@ function ProgramRuleActionFormBody({
     const actionType = (values as ProgramRuleActionFormValues)
         .programRuleActionType
     const previousActionTypeRef = useRef<string | undefined>(undefined)
+
+    const isEventProgram = programType === 'WITHOUT_REGISTRATION'
+
+    const filteredActionTypeOptions = React.useMemo(() => {
+        if (!isEventProgram) {
+            return ACTION_TYPE_OPTIONS
+        }
+        return ACTION_TYPE_OPTIONS.filter(
+            (option) => option.value !== 'SCHEDULEEVENT'
+        )
+    }, [isEventProgram])
 
     useEffect(() => {
         if (
@@ -281,8 +308,8 @@ function ProgramRuleActionFormBody({
                                 <SingleSelectFieldFF
                                     input={input}
                                     meta={meta}
-                                    label={i18n.t('Action type')}
-                                    options={ACTION_TYPE_OPTIONS}
+                                    label={i18n.t('Action type (required)')}
+                                    options={filteredActionTypeOptions}
                                     required
                                     filterable
                                 />

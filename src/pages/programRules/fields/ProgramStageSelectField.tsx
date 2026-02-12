@@ -62,10 +62,12 @@ export function ProgramStageSelectField({
                                 input.onChange(value)
                                 input.onBlur()
                             }}
-                            showNoValueOption={{
-                                value: '',
-                                label: i18n.t('(No Value)'),
-                            }}
+                            {...(!required && {
+                                showNoValueOption: {
+                                    value: '',
+                                    label: i18n.t('(No Value)'),
+                                },
+                            })}
                             invalid={meta.touched && !!meta.error}
                             onRetryClick={queryResult.refetch}
                             showEndLoader={false}

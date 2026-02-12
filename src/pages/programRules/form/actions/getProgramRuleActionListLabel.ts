@@ -11,6 +11,7 @@ export function getProgramRuleActionListLabel(
         location,
         dataElement,
         trackedEntityAttribute,
+        programRuleVariable,
         programStage,
         programStageSection,
         option,
@@ -24,11 +25,11 @@ export function getProgramRuleActionListLabel(
     ]
         .filter(Boolean)
         .join(', ')
-    const targetDeOnly = dataElement?.displayName || '-'
     const targetLocation = location
     const targetAssign = [
         dataElement?.displayName,
         trackedEntityAttribute?.displayName,
+        programRuleVariable?.displayName,
         content,
     ]
         .filter(Boolean)
@@ -52,14 +53,14 @@ export function getProgramRuleActionListLabel(
         case 'WARNINGONCOMPLETE':
             return i18n.t('Warning on complete: {{content}} on {{target}}', {
                 content,
-                target: targetDeOnly,
+                target: targetDeAndTea || '-',
                 nsSeparator: false,
                 interpolation: { escapeValue: false },
             })
         case 'ERRORONCOMPLETE':
             return i18n.t('Error on complete: {{content}} on {{target}}', {
                 content,
-                target: targetDeOnly,
+                target: targetDeAndTea || '-',
                 nsSeparator: false,
                 interpolation: { escapeValue: false },
             })
@@ -116,12 +117,15 @@ export function getProgramRuleActionListLabel(
             })
         }
         case 'SCHEDULEEVENT':
-            return i18n.t('Schedule event in program stage: {{stage}} on date {{data}}', {
-                stage: programStage?.displayName ?? programStage?.id ?? '-',
-                data: data || '',
-                nsSeparator: false,
-                interpolation: { escapeValue: false },
-            })
+            return i18n.t(
+                'Schedule event in program stage: {{stage}} using date from {{data}}',
+                {
+                    stage: programStage?.displayName ?? programStage?.id ?? '-',
+                    data: data || '-',
+                    nsSeparator: false,
+                    interpolation: { escapeValue: false },
+                }
+            )
         case 'SCHEDULEMESSAGE':
             return i18n.t('Schedule message: {{template}} at date {{data}}', {
                 template:

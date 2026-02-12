@@ -7,16 +7,12 @@ export function scheduleEvent(programId: string): ReactNode {
     return (
         <>
             <StandardFormField>
-                <ProgramStageSelectField
-                    programId={programId}
-                    label={i18n.t('Program stage (non-repeatable)')}
-                    required
-                />
+                <ProgramStageSelectField programId={programId} required />
             </StandardFormField>
             <StandardFormField>
                 <ExpressionField
                     programId={programId}
-                    label={i18n.t('Date to schedule event (due date)')}
+                    label={i18n.t('Program rule variable for scheduled date')}
                 />
             </StandardFormField>
         </>

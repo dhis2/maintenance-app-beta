@@ -41,7 +41,11 @@ const ProgramRuleActionListNewOrEdit = () => {
     const { values: formValues } = useFormState({
         subscription: { values: true },
     })
-    const programId = (formValues as { program?: { id?: string } })?.program?.id
+    const program = (
+        formValues as { program?: { id?: string; programType?: string } }
+    )?.program
+    const programId = program?.id
+    const programType = program?.programType
     const actionsFieldArray =
         useFieldArray<ProgramRuleActionListItem>('programRuleActions').fields
 
@@ -97,6 +101,7 @@ const ProgramRuleActionListNewOrEdit = () => {
                     {actionFormOpen !== undefined && (
                         <EditOrNewProgramRuleActionForm
                             programId={programId}
+                            programType={programType}
                             programRuleId={modelId}
                             action={actionFormOpen}
                             onCancel={onCloseActionForm}

@@ -11,6 +11,7 @@ export type ProgramRuleActionListItem = {
     location?: string
     dataElement?: { id: string; displayName?: string }
     trackedEntityAttribute?: { id: string; displayName?: string }
+    programRuleVariable?: { id: string; displayName?: string }
     programStage?: { id: string; displayName?: string }
     programStageSection?: { id: string; displayName?: string }
     option?: { id: string; displayName?: string }
