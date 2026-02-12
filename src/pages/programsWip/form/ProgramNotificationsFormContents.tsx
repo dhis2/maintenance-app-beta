@@ -101,14 +101,14 @@ const NotificationListNewOrEdit = () => {
             </DrawerPortal>
 
             <div className={css.listWrapper}>
-                {programNotificationsFieldArray.value.length === 0 && (
+                {(programNotificationsFieldArray.value ?? []).length === 0 && (
                     <NoticeBox className={css.formTypeInfo}>
                         {i18n.t('No notifications been added yet')}
                     </NoticeBox>
                 )}
 
                 <div className={css.sectionItems}>
-                    {programNotificationsFieldArray.value.map(
+                    {(programNotificationsFieldArray.value ?? []).map(
                         (notification) => {
                             return (
                                 <ListInFormItem

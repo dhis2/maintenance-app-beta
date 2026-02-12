@@ -25,7 +25,7 @@ import {
 } from '../../lib'
 import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
 import { PickWithFieldFilters, Program } from '../../types/generated'
-import { validate } from './form'
+import { initialValues as programFormInitialValues, validate } from './form'
 import { ProgramFormDescriptor } from './form/formDescriptor'
 import { ProgramFormContents } from './form/ProgramFormContents'
 import { ProgramStageListItem } from './form/ProgramStagesFormContents'
@@ -67,6 +67,12 @@ const fieldFilters = [
     'organisationUnits[id,displayName,path]',
     'sharing',
     'notificationTemplates[id,name,displayName, access]',
+    'expiryDays',
+    'expiryPeriodType',
+    'completeEventsExpiryDays',
+    'openDaysAfterCoEndDate',
+    'minAttributesRequiredToSearch',
+    'maxTeiCountToReturn',
 ] as const
 
 export type ProgramsFromFilters = PickWithFieldFilters<
@@ -193,10 +199,30 @@ export const Component = () => {
         ] as const,
     })
 
+    const formInitialValues = useMemo(() => {
+        const fromApi =
+            program?.data != null && typeof program.data === 'object'
+                ? program.data
+                : {}
+        const defaults =
+            programFormInitialValues != null &&
+            typeof programFormInitialValues === 'object'
+                ? programFormInitialValues
+                : {}
+        const merged = { ...defaults }
+        for (const key of Object.keys(fromApi) as (keyof typeof fromApi)[]) {
+            const value = fromApi[key]
+            if (value !== undefined) {
+                ;(merged as Record<string, unknown>)[key as string] = value
+            }
+        }
+        return merged
+    }, [program.data])
+
     return (
         <FormBase
             onSubmit={useOnSubmitProgramEdit(modelId)}
-            initialValues={program.data}
+            initialValues={formInitialValues}
             subscription={{}}
             mutators={{ ...arrayMutators }}
             validate={validate}

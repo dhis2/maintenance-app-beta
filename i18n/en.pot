@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-11T09:18:24.281Z\n"
-"PO-Revision-Date: 2026-02-11T09:18:24.281Z\n"
+"POT-Creation-Date: 2026-02-12T18:10:28.573Z\n"
+"PO-Revision-Date: 2026-02-12T18:10:28.574Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -60,6 +60,12 @@ msgstr "Overview"
 msgid "Search menu items"
 msgstr "Search menu items"
 
+msgid "Remove color"
+msgstr "Remove color"
+
+msgid "Choose an icon"
+msgstr "Choose an icon"
+
 msgid "All"
 msgstr "All"
 
@@ -75,11 +81,11 @@ msgstr "Outline"
 msgid "Search icons"
 msgstr "Search icons"
 
-msgid "No icons match the search."
-msgstr "No icons match the search."
+msgid "No icons found"
+msgstr "No icons found"
 
-msgid "Select"
-msgstr "Select"
+msgid "Choose icon"
+msgstr "Choose icon"
 
 msgid "Remove icon"
 msgstr "Remove icon"
@@ -842,8 +848,14 @@ msgstr "An unknown error occurred"
 msgid "Failed to update sharing"
 msgstr "Failed to update sharing"
 
+msgid "Update public sharing"
+msgstr "Update public sharing"
+
 msgid "Update sharing for users and groups"
 msgstr "Update sharing for users and groups"
+
+msgid "Public sharing"
+msgstr "Public sharing"
 
 msgid "User or group"
 msgstr "User or group"
@@ -3460,6 +3472,9 @@ msgstr "Option Set"
 msgid "Set up the information for this option."
 msgstr "Set up the information for this option."
 
+msgid "Explain the purpose of this option."
+msgstr "Explain the purpose of this option."
+
 msgid "Save option"
 msgstr "Save option"
 
@@ -4023,6 +4038,24 @@ msgstr "Sends a notification when a validation rule failed."
 
 msgid "Manage"
 msgstr "Manage"
+
+msgid "Set up the basic information for this predictor group."
+msgstr "Set up the basic information for this predictor group."
+
+msgid "Choose the predictors to include in this predictor group."
+msgstr "Choose the predictors to include in this predictor group."
+
+msgid "Available predictors"
+msgstr "Available predictors"
+
+msgid "Selected predictors"
+msgstr "Selected predictors"
+
+msgid "Filter available predictors"
+msgstr "Filter available predictors"
+
+msgid "Filter selected predictors"
+msgstr "Filter selected predictors"
 
 msgid "Predictor run started successfully"
 msgstr "Predictor run started successfully"
@@ -4697,6 +4730,27 @@ msgstr "Related program"
 
 msgid "Choose how this program is disaggregated."
 msgstr "Choose how this program is disaggregated."
+
+msgid "Maximum number of search results to display"
+msgstr "Maximum number of search results to display"
+
+msgid "Entering 0 shows all search results"
+msgstr "Entering 0 shows all search results"
+
+msgid "Close data entry a number of days after the end of a period"
+msgstr "Close data entry a number of days after the end of a period"
+
+msgid "Number of days"
+msgstr "Number of days"
+
+msgid "Expiry period type"
+msgstr "Expiry period type"
+
+msgid "Lock completed events after a number of days"
+msgstr "Lock completed events after a number of days"
+
+msgid "Close data entry a number of days after \"Implementing partner\" end date"
+msgstr "Close data entry a number of days after \"Implementing partner\" end date"
 
 msgid "Access and Sharing"
 msgstr "Access and Sharing"
@@ -5382,3 +5436,11 @@ msgstr "Right side sliding window"
 
 msgid "Skip form validation"
 msgstr "Skip form validation"
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Maintenance (Preview)"
+
+msgctxt "Application description"
+msgid "__MANIFEST_APP_DESCRIPTION"
+msgstr ""
