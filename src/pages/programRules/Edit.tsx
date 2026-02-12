@@ -53,11 +53,7 @@ export const Component = () => {
                                 if (key === 'deleted') {
                                     return false
                                 }
-                                return (
-                                    value !== undefined &&
-                                    value !== null &&
-                                    value !== ''
-                                )
+                                return value !== undefined && value !== null
                             })
                         )
                         if (!existingIds.has(action.id)) {

@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import { AccessSchema } from '../../../lib/form/modelFormSchemas'
 
 const { modelReference, withDefaultListColumns, identifiable } =
     modelFormSchemas
@@ -38,7 +39,7 @@ const programRuleBaseSchema = z.object({
                 optionGroup: programRuleActionReference.optional(),
                 templateUid: z.string().optional(),
                 priority: z.number().optional(),
-                access: z.any().optional(),
+                access: AccessSchema.optional(),
                 deleted: z.boolean().optional(),
             })
         )
