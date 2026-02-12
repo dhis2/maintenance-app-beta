@@ -115,9 +115,10 @@ export function getProgramRuleActionListLabel(
                 interpolation: { escapeValue: false },
             })
         }
-        case 'CREATEEVENT':
-            return i18n.t('Create event in program stage: {{stage}}', {
+        case 'SCHEDULEEVENT':
+            return i18n.t('Schedule event in program stage: {{stage}} on date {{data}}', {
                 stage: programStage?.displayName ?? programStage?.id ?? '-',
+                data: data || '',
                 nsSeparator: false,
                 interpolation: { escapeValue: false },
             })

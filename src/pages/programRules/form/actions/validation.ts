@@ -123,10 +123,6 @@ function validateErrorOnComplete(flags: FieldFlags): ValidationErrors {
     return requireStaticText(flags)
 }
 
-function validateCreateEvent(flags: FieldFlags): ValidationErrors {
-    return requireProgramStage(flags)
-}
-
 function validateSetMandatoryField(flags: FieldFlags): ValidationErrors {
     if (flags.hasDataElement || flags.hasTrackedEntityAttribute) {
         return {}
@@ -143,6 +139,14 @@ function validateSendMessage(flags: FieldFlags): ValidationErrors {
 
 function validateScheduleMessage(flags: FieldFlags): ValidationErrors {
     const errors = requireMessageTemplate(flags)
+    if (!flags.hasData) {
+        errors.data = VALIDATION_MESSAGES.FIELD_REQUIRED
+    }
+    return errors
+}
+
+function validateScheduleEvent(flags: FieldFlags): ValidationErrors {
+    const errors = requireProgramStage(flags)
     if (!flags.hasData) {
         errors.data = VALIDATION_MESSAGES.FIELD_REQUIRED
     }
@@ -213,10 +217,10 @@ export function validateProgramRuleAction(
                 validateWarningOnComplete,
             [programRuleActionType.SHOWERROR]: validateShowError,
             [programRuleActionType.ERRORONCOMPLETE]: validateErrorOnComplete,
-            [programRuleActionType.CREATEEVENT]: validateCreateEvent,
             [programRuleActionType.SETMANDATORYFIELD]:
                 validateSetMandatoryField,
             [programRuleActionType.SENDMESSAGE]: validateSendMessage,
+            [programRuleActionType.SCHEDULEEVENT]: validateScheduleEvent,
             [programRuleActionType.SCHEDULEMESSAGE]: validateScheduleMessage,
             [programRuleActionType.HIDEOPTION]: validateHideOption,
             [programRuleActionType.SHOWOPTIONGROUP]: validateShowOptionGroup,

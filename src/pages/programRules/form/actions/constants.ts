@@ -19,7 +19,6 @@ const { programRuleActionType } = ProgramRuleAction
 
 export const ACTION_TYPE_OPTIONS = [
     { label: i18n.t('Assign value'), value: programRuleActionType.ASSIGN },
-    { label: i18n.t('Create event'), value: programRuleActionType.CREATEEVENT },
     {
         label: i18n.t('Display key-value pair'),
         value: programRuleActionType.DISPLAYKEYVALUEPAIR,
@@ -40,6 +39,10 @@ export const ACTION_TYPE_OPTIONS = [
         value: programRuleActionType.HIDEPROGRAMSTAGE,
     },
     { label: i18n.t('Hide section'), value: programRuleActionType.HIDESECTION },
+    {
+        label: i18n.t('Schedule event'),
+        value: programRuleActionType.SCHEDULEEVENT,
+    },
     {
         label: i18n.t('Schedule message'),
         value: programRuleActionType.SCHEDULEMESSAGE,
