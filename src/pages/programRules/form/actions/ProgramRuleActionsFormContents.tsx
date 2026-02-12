@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, NoticeBox } from '@dhis2/ui'
 import { IconAdd16 } from '@dhis2/ui-icons'
-import React, { useState } from 'react'
+import React from 'react'
 import { useFormState } from 'react-final-form'
 import { useFieldArray } from 'react-final-form-arrays'
 import { useParams } from 'react-router-dom'
@@ -14,15 +14,9 @@ import {
 import { ListInFormItem } from '../../../../components/formCreators/SectionFormList'
 import { SchemaName } from '../../../../types'
 import { getProgramRuleActionListLabel } from './getProgramRuleActionListLabel'
-import { ProgramRuleActionForm } from './ProgramRuleActionForm'
+import { EditOrNewProgramRuleActionForm } from './ProgramRuleActionForm'
 import styles from './ProgramRuleActionForm.module.css'
 import type { ProgramRuleActionListItem } from './types'
-
-type DrawerState = {
-    open: boolean
-    action: ProgramRuleActionListItem | null
-    index: number | null
-}
 
 export const ProgramRuleActionsFormContents = React.memo(
     function ProgramRuleActionsFormContents({ name }: { name: string }) {
@@ -50,11 +44,31 @@ const ProgramRuleActionListNewOrEdit = () => {
     const programId = (formValues as { program?: { id?: string } })?.program?.id
     const actionsFieldArray =
         useFieldArray<ProgramRuleActionListItem>('programRuleActions').fields
-    const [drawerState, setDrawerState] = useState<DrawerState>({
-        open: false,
-        action: null,
-        index: null,
-    })
+
+    const [actionFormOpen, setActionFormOpen] = React.useState<
+        ProgramRuleActionListItem | null | undefined
+    >()
+    const isActionFormOpen = !!actionFormOpen || actionFormOpen === null
+
+    const handleSubmitted = (values: ProgramRuleActionListItem) => {
+        const isEdit = actionFormOpen && actionFormOpen.id
+
+        if (isEdit) {
+            const index = actionsFieldArray.value.findIndex(
+                (a) => a.id === actionFormOpen.id
+            )
+            if (index !== -1) {
+                actionsFieldArray.update(index, values)
+            }
+        } else {
+            actionsFieldArray.push(values)
+        }
+        setActionFormOpen(undefined)
+    }
+
+    const onCloseActionForm = () => {
+        setActionFormOpen(undefined)
+    }
 
     const handleDelete = (index: number) => {
         const current = actionsFieldArray.value[index]
@@ -70,39 +84,22 @@ const ProgramRuleActionListNewOrEdit = () => {
         }
     }
 
-    const handleSubmitted = (values: ProgramRuleActionListItem) => {
-        if (drawerState.index === null) {
-            actionsFieldArray.push(values)
-        } else {
-            actionsFieldArray.update(drawerState.index, values)
-        }
-        setDrawerState({ open: false, action: null, index: null })
-    }
-
-    const openEdit = (action: ProgramRuleActionListItem, index: number) => {
-        setDrawerState({ open: true, action, index })
-    }
-
-    const openAdd = () => {
-        setDrawerState({ open: true, action: null, index: null })
-    }
-
-    const closeDrawer = () => {
-        setDrawerState({ open: false, action: null, index: null })
-    }
-
     if (modelId) {
         const actions: ProgramRuleActionListItem[] =
             actionsFieldArray.value ?? []
 
         return (
             <>
-                <DrawerPortal isOpen={drawerState.open} onClose={closeDrawer}>
-                    {drawerState.open && (
-                        <ProgramRuleActionForm
+                <DrawerPortal
+                    isOpen={isActionFormOpen}
+                    onClose={onCloseActionForm}
+                >
+                    {actionFormOpen !== undefined && (
+                        <EditOrNewProgramRuleActionForm
                             programId={programId}
-                            action={drawerState.action}
-                            onCancel={closeDrawer}
+                            programRuleId={modelId}
+                            action={actionFormOpen}
+                            onCancel={onCloseActionForm}
                             onSubmitted={handleSubmitted}
                         />
                     )}
@@ -146,7 +143,7 @@ const ProgramRuleActionListNewOrEdit = () => {
                                     key={actionKey}
                                     item={displayItem}
                                     schemaName={SchemaName.programRuleAction}
-                                    onClick={() => openEdit(action, index)}
+                                    onClick={() => setActionFormOpen(action)}
                                     onDelete={() => handleDelete(index)}
                                 />
                             )
@@ -158,7 +155,7 @@ const ProgramRuleActionListNewOrEdit = () => {
                             secondary
                             small
                             icon={<IconAdd16 />}
-                            onClick={openAdd}
+                            onClick={() => setActionFormOpen(null)}
                         >
                             {i18n.t('Add action')}
                         </Button>

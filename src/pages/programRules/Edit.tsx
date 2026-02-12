@@ -1,3 +1,4 @@
+import { useDataEngine } from '@dhis2/app-runtime'
 import { useQuery } from '@tanstack/react-query'
 import type { FormApi } from 'final-form'
 import arrayMutators from 'final-form-arrays'
@@ -12,10 +13,13 @@ import {
     SectionedFormLayout,
 } from '../../components'
 import {
+    createJsonPatchOperations,
+    createFormError,
     SectionedFormProvider,
     SECTIONS_MAP,
     useBoundResourceQueryFn,
-    useOnSubmitEdit,
+    usePatchModel,
+    useOnEditCompletedSuccessfully,
 } from '../../lib'
 import type { ProgramRuleActionListItem } from './form/actions/types'
 import { fieldFilters, ProgramRuleFormValues } from './form/fieldFilters'
@@ -27,45 +31,66 @@ export const Component = () => {
     const modelId = useParams().id as string
     const section = SECTIONS_MAP.programRule
     const queryFn = useBoundResourceQueryFn()
-    const submitEdit = useOnSubmitEdit({ section, modelId })
+    const patchModel = usePatchModel(modelId, section.namePlural)
+    const onEditCompleted = useOnEditCompletedSuccessfully(section)
+    const dataEngine = useDataEngine()
 
     const onSubmit = useCallback(
-        (
+        async (
             values: ProgramRuleFormValues,
             form: FormApi<ProgramRuleFormValues>,
-            options?: any
+            options?: { submitAction?: string }
         ) => {
             const actions = values.programRuleActions as
                 | ProgramRuleActionListItem[]
                 | undefined
-            const initialActions = form.getState().initialValues
-                .programRuleActions as ProgramRuleActionListItem[] | undefined
-            const existingIds = new Set(
-                initialActions?.map((a) => a.id).filter(Boolean) || []
+
+            const deletedActions =
+                actions?.filter((a) => a.deleted && a.id) || []
+            for (const action of deletedActions) {
+                try {
+                    await dataEngine.mutate({
+                        resource: 'programRuleActions',
+                        id: action.id,
+                        type: 'delete',
+                    })
+                } catch (error) {
+                    return createFormError(error)
+                }
+            }
+
+            const dirtyFields = Object.fromEntries(
+                Object.entries(form.getState().dirtyFields).filter(
+                    ([key]) => !key.startsWith('programRuleActions')
+                )
             )
 
-            const cleanedActions =
-                actions
-                    ?.filter((action) => !action.deleted)
-                    .map((action) => {
-                        const cleaned = Object.fromEntries(
-                            Object.entries(action).filter(([key, value]) => {
-                                if (key === 'deleted') {
-                                    return false
-                                }
-                                return value !== undefined && value !== null
-                            })
-                        )
-                        return cleaned
-                    }) || []
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { programRuleActions, ...valuesWithoutActions } = values
 
-            const filteredValues = {
-                ...values,
-                programRuleActions: cleanedActions,
+            const jsonPatchOperations = createJsonPatchOperations({
+                values: valuesWithoutActions,
+                dirtyFields,
+                originalValue: form.getState().initialValues,
+            })
+
+            if (jsonPatchOperations.length > 0) {
+                const response = await patchModel(jsonPatchOperations)
+                if (response.error) {
+                    return createFormError(response.error)
+                }
             }
-            return submitEdit(filteredValues, form as any, options)
+
+            const hasChanges =
+                jsonPatchOperations.length > 0 || deletedActions.length > 0
+            onEditCompleted({
+                withChanges: hasChanges,
+                submitAction:
+                    (options?.submitAction as 'save' | 'saveAndExit') ??
+                    'saveAndExit',
+            })
         },
-        [submitEdit]
+        [patchModel, onEditCompleted, dataEngine]
     )
 
     const query = {
