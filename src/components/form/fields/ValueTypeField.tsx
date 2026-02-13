@@ -10,9 +10,40 @@ import {
 } from '../../../lib'
 import { ConfirmationModalWrapper } from '../../confirmationModal'
 
-const valueTypeHelpText = i18n.t(
-    'Select the kind of data this attribute collects. If you have chosen an Option set, this will be set automatically.'
-)
+function getValueTypeHelpText(schemaSectionName: string): string {
+    const optionSetSuffix = i18n.t(
+        'If you have chosen an Option set, this will be set automatically.'
+    )
+    switch (schemaSectionName) {
+        case 'dataElement':
+            return i18n.t(
+                'Select the kind of data this data element collects. {{optionSetSuffix}}',
+                { optionSetSuffix }
+            )
+        case 'attribute':
+            return i18n.t(
+                'Select the kind of data this attribute collects. {{optionSetSuffix}}',
+                { optionSetSuffix }
+            )
+        case 'trackedEntityAttribute':
+            return i18n.t(
+                'Select the kind of data this tracked entity attribute collects. {{optionSetSuffix}}',
+                { optionSetSuffix }
+            )
+        case 'optionSet':
+            return i18n.t('Select the kind of data this option set collects.')
+        case 'programRuleVariable':
+            return i18n.t(
+                'Select the kind of data this variable stores. {{optionSetSuffix}}',
+                { optionSetSuffix }
+            )
+        default:
+            return i18n.t('Select the kind of data. {{optionSetSuffix}}', {
+                optionSetSuffix,
+            })
+    }
+}
+
 const valueTypeDisabledHelpText = i18n.t(
     'Disabled as the value type must match the value type of the selected option set.'
 )
@@ -46,6 +77,13 @@ export function ValueTypeField({
         (values.optionSet?.id && values.optionSet?.valueType === 'MULTI_TEXT')
 
     const isOptionSetForm = schemaSection.name === 'optionSet'
+    const isProgramRuleVariableForm =
+        schemaSection.name === 'programRuleVariable'
+    const showMultiTextOption =
+        isOptionSetForm ||
+        isProgramRuleVariableForm ||
+        optionSetHasMultiTextValueType
+
     const options =
         schema.properties.valueType.constants
             ?.map((constant: string) => ({
@@ -53,13 +91,10 @@ export function ValueTypeField({
                 label: getConstantTranslation(constant),
             }))
             .filter(({ value }: { value: string }) => {
-                return (
-                    isOptionSetForm ||
-                    optionSetHasMultiTextValueType ||
-                    value !== 'MULTI_TEXT'
-                )
+                return showMultiTextOption || value !== 'MULTI_TEXT'
             }) || []
 
+    const valueTypeHelpText = getValueTypeHelpText(schemaSection.name)
     const combinedHelpText = disabled
         ? disabledText ?? valueTypeDisabledHelpText
         : valueTypeHelpText
