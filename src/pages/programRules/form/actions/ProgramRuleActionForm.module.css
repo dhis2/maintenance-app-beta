@@ -1,0 +1,42 @@
+.sectionsWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-between;
+}
+
+.sectionsWrapper > :first-child {
+    overflow-y: auto;
+    padding: var(--spacers-dp24);
+}
+
+.actionsInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp4);
+    color: var(--colors-grey600);
+}
+
+.expressionLabel {
+    color: var(--colors-grey600);
+    font-size: 12px;
+    display: block;
+    margin-top: 4px;
+}
+
+.deletedActionBox {
+    padding: 12px 16px;
+    background-color: #ffeeee;
+    border: 1px solid #ffcccc;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+.deletedActionText {
+    color: #cc0000;
+    margin-bottom: 8px;
+}
+
+.addActionButton {
+    margin-top: 16px;
+}
