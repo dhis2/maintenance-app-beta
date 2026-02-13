@@ -55,11 +55,11 @@ const ProgramRuleActionListNewOrEdit = () => {
     const isActionFormOpen = !!actionFormOpen || actionFormOpen === null
 
     const handleSubmitted = (values: ProgramRuleActionListItem) => {
-        const isEdit = actionFormOpen && actionFormOpen.id
+        const isEdit = actionFormOpen?.id
 
         if (isEdit) {
             const index = actionsFieldArray.value.findIndex(
-                (a) => a.id === actionFormOpen.id
+                (a) => a.id === actionFormOpen?.id
             )
             if (index !== -1) {
                 actionsFieldArray.update(index, values)

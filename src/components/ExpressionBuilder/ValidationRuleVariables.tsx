@@ -702,7 +702,9 @@ const VARIABLE_ELEMENTS = [
     { id: 'V{creation_date}', displayName: i18n.t('Creation date') },
     { id: 'V{current_date}', displayName: i18n.t('Current date') },
     { id: 'V{due_date}', displayName: i18n.t('Due date') },
+    { id: 'V{enrollment_status}', displayName: i18n.t('Enrollment status') },
     { id: 'V{event_date}', displayName: i18n.t('Event date') },
+    { id: 'V{event_status}', displayName: i18n.t('Event status') },
     { id: 'V{program_stage_id}', displayName: i18n.t('Program stage id') },
     { id: 'V{program_stage_name}', displayName: i18n.t('Program stage name') },
     { id: 'V{sync_date}', displayName: i18n.t('Sync date') },
@@ -714,15 +716,17 @@ const VARIABLE_ELEMENTS = [
 ]
 
 const PROGRAM_RULE_VARIABLE_IDS = [
+    'V{completed_date}',
     'V{current_date}',
     'V{event_date}',
     'V{due_date}',
-    'V{event_count}',
     'V{enrollment_date}',
+    'V{enrollment_status}',
     'V{incident_date}',
     'V{enrollment_id}',
     'V{environment}',
     'V{event_id}',
+    'V{event_status}',
     'V{orgunit_code}',
     'V{program_stage_name}',
     'V{program_stage_id}',
@@ -830,6 +834,30 @@ const PROGRAM_RULE_FUNCTION_ELEMENTS = [
     {
         id: 'd2:extractDataMatrixValue( <key>, <value>)',
         displayName: 'd2:extractDataMatrixValue( <key>, <value>)',
+    },
+    {
+        id: 'd2:contains( <text>, <text>, ...)',
+        displayName: 'd2:contains( <text>, <text>, ...)',
+    },
+    {
+        id: 'd2:containsItems( <text>, <text>, ...)',
+        displayName: 'd2:containsItems( <text>, <text>, ...)',
+    },
+    {
+        id: 'd2:inUserGroup( <user_group_id> )',
+        displayName: 'd2:inUserGroup( <user_group_id> )',
+    },
+    {
+        id: 'd2:lastEventDate()',
+        displayName: 'd2:lastEventDate()',
+    },
+    {
+        id: 'd2:maxValue( <dataElement> )',
+        displayName: 'd2:maxValue( <dataElement> )',
+    },
+    {
+        id: 'd2:minValue( <dataElement> )',
+        displayName: 'd2:minValue( <dataElement> )',
     },
 ]
 
