@@ -1,13 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip } from '@dhis2/ui'
-import { IconInfo16 } from '@dhis2/ui-icons'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
-import React, { useCallback, useMemo } from 'react'
-import { useFormState } from 'react-final-form'
+import React, { useCallback, useEffect, useMemo } from 'react'
+import { useForm, useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
-    FormFooterWrapper,
     SectionedFormErrorNotice,
     SectionedFormSection,
     SectionedFormSections,
@@ -39,20 +36,40 @@ import { Option } from '../../../../types/generated'
 import { PickWithFieldFilters } from '../../../../types/models'
 import styles from './OptionList.module.css'
 import { initialOptionValues } from './optionSchema'
-import { DrawerState } from './OptionsListTable'
 
-export const OptionFormContents = ({
-    onCancel,
+export type OptionFormActions = {
+    save: () => void
+    submitting: boolean
+}
+
+const OptionFormContentsInner = ({
+    onActionsReadyRef,
 }: {
-    onCancel: (s: DrawerState) => void
+    onActionsReadyRef: React.RefObject<
+        ((actions: OptionFormActions) => void) | undefined
+    >
 }) => {
-    const { submitting, values } = useFormState({
-        subscription: { submitting: true, values: true },
+    const form = useForm()
+    const { submitting } = useFormState({
+        subscription: { submitting: true },
     })
 
-    const handleCancel = () => {
-        onCancel({ open: false, id: undefined })
-    }
+    useEffect(() => {
+        onActionsReadyRef.current?.({
+            save: () => {
+                form.submit()
+            },
+            submitting: submitting ?? false,
+        })
+    }, [form, submitting, onActionsReadyRef])
+
+    return <OptionFormContents />
+}
+
+const OptionFormContents = () => {
+    const { values } = useFormState({
+        subscription: { values: true },
+    })
 
     return (
         <div className={styles.sectionsWrapper}>
@@ -93,40 +110,6 @@ export const OptionFormContents = ({
                         schemaSection={optionSchemaSection}
                     />
                 </SectionedFormSections>
-                <SectionedFormErrorNotice />
-            </div>
-            <div>
-                <FormFooterWrapper>
-                    <ButtonStrip>
-                        <Button
-                            primary
-                            small
-                            type="submit"
-                            dataTest="form-submit-button"
-                            disabled={submitting}
-                            loading={submitting}
-                        >
-                            {i18n.t('Save option')}
-                        </Button>
-                        <Button
-                            secondary
-                            small
-                            onClick={handleCancel}
-                            dataTest="form-cancel-link"
-                            disabled={submitting}
-                        >
-                            {i18n.t('Cancel')}
-                        </Button>
-                    </ButtonStrip>
-                    <div className={styles.actionsInfo}>
-                        <IconInfo16 />
-                        <p>
-                            {i18n.t(
-                                'Saving an option does not save other changes to the option set'
-                            )}
-                        </p>
-                    </div>
-                </FormFooterWrapper>
             </div>
         </div>
     )
@@ -161,10 +144,14 @@ export type SubmittedOptionFormValues = Partial<OptionFormValues>
 type OptionFormProps = {
     option?: SubmittedOptionFormValues
     onSubmit: FormBaseProps<SubmittedOptionFormValues>['onSubmit']
-    onCancel: (s: DrawerState) => void
+    onActionsReady?: (actions: OptionFormActions) => void
 }
 
-export const OptionForm = ({ option, onSubmit, onCancel }: OptionFormProps) => {
+export const OptionForm = ({
+    option,
+    onSubmit,
+    onActionsReady,
+}: OptionFormProps) => {
     const optionSetId = useParams().id as string
 
     const initialValues: SubmittedOptionFormValues | undefined = useMemo(
@@ -181,6 +168,10 @@ export const OptionForm = ({ option, onSubmit, onCancel }: OptionFormProps) => {
         },
         [optionSetId]
     )
+
+    const onActionsReadyRef = React.useRef(onActionsReady)
+    onActionsReadyRef.current = onActionsReady
+
     return (
         <FormBase
             modelName={optionSchemaSection.name}
@@ -190,7 +181,8 @@ export const OptionForm = ({ option, onSubmit, onCancel }: OptionFormProps) => {
             includeAttributes={true}
             mutators={{ ...arrayMutators }}
         >
-            <OptionFormContents onCancel={onCancel} />
+            <OptionFormContentsInner onActionsReadyRef={onActionsReadyRef} />
+            <SectionedFormErrorNotice />
         </FormBase>
     )
 }
@@ -198,12 +190,12 @@ export const OptionForm = ({ option, onSubmit, onCancel }: OptionFormProps) => {
 type OnOptionFormSubmit = FormBaseProps<SubmittedOptionFormValues>['onSubmit']
 export const EditOptionForm = ({
     option,
-    onCancel,
     onSubmitted,
+    onActionsReady,
 }: {
     option: string | undefined
-    onCancel: () => void
     onSubmitted: (values: SubmittedOptionFormValues) => void
+    onActionsReady?: (actions: OptionFormActions) => void
 }) => {
     const handlePatch = usePatchModel(
         option ?? '',
@@ -251,17 +243,17 @@ export const EditOptionForm = ({
         <OptionForm
             option={optionValues.data}
             onSubmit={onFormSubmit}
-            onCancel={onCancel}
+            onActionsReady={onActionsReady}
         />
     )
 }
 
 export const NewOptionForm = ({
-    onCancel,
     onSubmitted,
+    onActionsReady,
 }: {
-    onCancel: () => void
     onSubmitted: (values: SubmittedOptionFormValues) => void
+    onActionsReady?: (actions: OptionFormActions) => void
 }) => {
     const handleCreate = useCreateModel(optionSchemaSection.namePlural)
 
@@ -283,33 +275,34 @@ export const NewOptionForm = ({
         <OptionForm
             option={undefined}
             onSubmit={onFormSubmit}
-            onCancel={onCancel}
+            onActionsReady={onActionsReady}
         />
     )
 }
 
 export const EditOrNewOptionForm = ({
     option,
-    onCancel,
     onSubmitted: onSubmit,
+    onActionsReady,
 }: {
     option: string | undefined
-    onCancel: (s: DrawerState) => void
     onSubmitted: (values: SubmittedOptionFormValues) => void
+    onActionsReady?: (actions: OptionFormActions) => void
 }) => {
-    const handleCancel = () => {
-        onCancel({ open: false, id: undefined })
-    }
-
     if (option === undefined) {
-        return <NewOptionForm onSubmitted={onSubmit} onCancel={handleCancel} />
+        return (
+            <NewOptionForm
+                onSubmitted={onSubmit}
+                onActionsReady={onActionsReady}
+            />
+        )
     }
 
     return (
         <EditOptionForm
             option={option}
-            onCancel={handleCancel}
             onSubmitted={onSubmit}
+            onActionsReady={onActionsReady}
         />
     )
 }

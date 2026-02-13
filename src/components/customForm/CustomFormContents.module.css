@@ -1,11 +1,11 @@
-.sectionsWrapper {
+.customFormFooter {
     display: flex;
-    flex-direction: column;
-    height: 100vh;
+    align-items: center;
+    gap: var(--spacers-dp16);
 }
 
-.sectionsWrapper > div:first-child {
-    overflow-y: auto;
+.actionsInfo p {
+    margin: 0;
 }
 
 .errorNoticeWrapper {

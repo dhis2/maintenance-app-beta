@@ -1,10 +1,14 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip } from '@dhis2/ui'
-import React from 'react'
+import React, { useState } from 'react'
 import { useField } from 'react-final-form'
-import { StandardFormSectionTitle, DrawerPortal } from '..'
+import { DrawerFooter, StandardFormSectionTitle, DrawerPortal } from '..'
 import css from './CustomFormContents.module.css'
-import { CustomFormDataPayload, CustomFormEdit } from './CustomFormEdit'
+import {
+    CustomFormActions,
+    CustomFormDataPayload,
+    CustomFormEdit,
+} from './CustomFormEdit'
 import { ElementTypes } from './CustomFormElementsSelector'
 
 export const CustomFormEditEntry = ({
@@ -27,31 +31,64 @@ export const CustomFormEditEntry = ({
     ) => Promise<unknown>
     customFormTarget: string
 }) => {
-    const [customFormEditOpen, setCustomFormEditOpen] =
-        React.useState<boolean>(false)
+    const [customFormEditOpen, setCustomFormEditOpen] = useState<boolean>(false)
+    const [formActions, setFormActions] = useState<CustomFormActions | null>(
+        null
+    )
 
     const { input: formInput } = useField('dataEntryForm')
-    const addMode = !formInput?.value?.id // if there is no formId, you need to add a form
+    const addMode = !formInput?.value?.id
     const formDeleted = formInput?.value?.deleted
     const setCustomFormDeletedState = (deleted: boolean) => {
         formInput.onChange({ ...formInput?.value, deleted })
     }
 
+    const onCloseCustomFormEdit = () => {
+        setCustomFormEditOpen(false)
+        setFormActions(null)
+    }
+
+    const customFormFooter = formActions && (
+        <DrawerFooter
+            actions={[
+                {
+                    label: i18n.t('Save custom form'),
+                    onClick: formActions.save,
+                    primary: true,
+                    disabled: formActions.saving,
+                    loading: formActions.saving,
+                },
+                {
+                    label: i18n.t('Cancel'),
+                    onClick: onCloseCustomFormEdit,
+                    secondary: true,
+                    disabled: formActions.saving,
+                },
+            ]}
+            infoMessage={i18n.t(
+                `Saving a custom form does not save other changes to the {{customFormTarget}}`,
+                { customFormTarget }
+            )}
+        />
+    )
+
     return (
         <div className={css.customFormEntry}>
             <DrawerPortal
                 isOpen={customFormEditOpen}
-                onClose={() => setCustomFormEditOpen(false)}
+                onClose={onCloseCustomFormEdit}
                 level={level}
+                header={i18n.t('Custom form')}
+                footer={customFormFooter}
             >
                 {customFormEditOpen && (
                     <CustomFormEdit
-                        closeCustomFormEdit={() => setCustomFormEditOpen(false)}
                         loading={loading}
                         refetch={refetch}
                         elementTypes={elementTypes}
                         updateCustomForm={updateCustomForm}
                         customFormTarget={customFormTarget}
+                        onActionsReady={setFormActions}
                     />
                 )}
             </DrawerPortal>
