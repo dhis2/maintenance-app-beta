@@ -118,7 +118,7 @@ export function getProgramRuleActionListLabel(
         }
         case 'SCHEDULEEVENT':
             return i18n.t(
-                'Schedule event in program stage: {{stage}} using date from {{data}}',
+                'Schedule event in program stage: {{stage}} on date {{data}}',
                 {
                     stage: programStage?.displayName ?? programStage?.id ?? '-',
                     data: data || '-',
