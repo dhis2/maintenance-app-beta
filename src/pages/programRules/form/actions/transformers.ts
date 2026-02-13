@@ -10,6 +10,7 @@ export const ACTION_TYPES_WITH_TEMPLATES = [
 
 type ActionWithTemplateUid = ProgramRuleActionFormValues & {
     templateUid?: string
+    notificationTemplate?: { id?: string; displayName?: string }
 }
 
 export function transformActionFromApi(
@@ -19,12 +20,15 @@ export function transformActionFromApi(
         return action
     }
 
-    const { templateUid, ...rest } = action
+    const { templateUid, notificationTemplate: apiTemplate, ...rest } = action
 
     return {
         ...rest,
         notificationTemplate: {
             id: templateUid,
+            ...(apiTemplate?.displayName && {
+                displayName: apiTemplate.displayName,
+            }),
         },
     }
 }

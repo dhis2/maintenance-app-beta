@@ -45,6 +45,7 @@ const actionFieldFilters = [
     'data',
     'location',
     'templateUid',
+    'notificationTemplate[id,displayName]',
     'dataElement[id,displayName]',
     'trackedEntityAttribute[id,displayName]',
     'programRuleVariable[id,displayName]',
