@@ -14,6 +14,7 @@ import { EnrollmentFormFormContents } from './EnrollmentFormFormContents'
 import { EnrollmentSettingsFormContents } from './EnrollmentSettingsFormContents'
 import { ProgramFormDescriptor } from './formDescriptor'
 import { ProgramCustomizationFormContents } from './ProgramCustomizationFormContents'
+import { ProgramNotificationsFormContents } from './ProgramNotificationsFormContents'
 import { ProgramStagesFormContents } from './ProgramStagesFormContents'
 import { SetupFormContents } from './SetupFormContents'
 
@@ -39,6 +40,9 @@ export const ProgramFormContents = () => {
             />
             <ProgramStagesFormContents
                 name={descriptor.getSection('programStages').name}
+            />
+            <ProgramNotificationsFormContents
+                name={descriptor.getSection('programNotifications').name}
             />
             <AccessAndSharingFormContents
                 name={descriptor.getSection('accessAndSharing').name}

@@ -49,9 +49,11 @@ type PredictorListActionsProps = {
 }
 
 const RunNowModal = ({
+    schemaPlural,
     predictorId,
     onClose,
 }: {
+    schemaPlural: string
     predictorId: string
     onClose: () => void
 }) => {
@@ -75,7 +77,7 @@ const RunNowModal = ({
         setIsLoading(true)
         try {
             const response = await engine.mutate({
-                resource: `predictors/${predictorId}/run`,
+                resource: `${schemaPlural}/${predictorId}/run`,
                 type: 'create',
                 data: {},
                 params: {
@@ -299,6 +301,7 @@ export const PredictorListActions = ({
                 <RunNowModal
                     predictorId={model.id}
                     onClose={() => setShowRunNowModal(false)}
+                    schemaPlural={schema.plural}
                 />
             )}
         </>

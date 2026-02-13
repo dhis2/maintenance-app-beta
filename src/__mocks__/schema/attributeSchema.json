@@ -328,7 +328,6 @@
                 "INTEGER_POSITIVE",
                 "INTEGER_NEGATIVE",
                 "INTEGER_ZERO_OR_POSITIVE",
-                "TRACKER_ASSOCIATE",
                 "USERNAME",
                 "COORDINATE",
                 "ORGANISATION_UNIT",
@@ -938,6 +937,39 @@
             "sortable": true,
             "propertyTransformer": false
         },
+        "unique": {
+            "klass": "java.lang.Boolean",
+            "propertyType": "BOOLEAN",
+            "name": "unique",
+            "fieldName": "unique",
+            "persisted": true,
+            "namespace": "http://dhis2.org/schema/dxf/2.0",
+            "attribute": false,
+            "simple": true,
+            "collection": false,
+            "ordered": false,
+            "owner": true,
+            "identifiableObject": false,
+            "nameableObject": false,
+            "embeddedObject": false,
+            "analyticalObject": false,
+            "readable": true,
+            "writable": true,
+            "unique": false,
+            "required": true,
+            "length": 255,
+            "manyToMany": false,
+            "oneToOne": false,
+            "manyToOne": false,
+            "oneToMany": false,
+            "translatable": false,
+            "gistPreferences": {
+                "included": "AUTO",
+                "transformation": "AUTO"
+            },
+            "sortable": true,
+            "propertyTransformer": false
+        },
         "sortOrder": {
             "klass": "java.lang.Integer",
             "propertyType": "INTEGER",
@@ -961,39 +993,6 @@
             "length": 2147483647,
             "max": 2147483647,
             "min": -2147483648,
-            "manyToMany": false,
-            "oneToOne": false,
-            "manyToOne": false,
-            "oneToMany": false,
-            "translatable": false,
-            "gistPreferences": {
-                "included": "AUTO",
-                "transformation": "AUTO"
-            },
-            "sortable": true,
-            "propertyTransformer": false
-        },
-        "unique": {
-            "klass": "java.lang.Boolean",
-            "propertyType": "BOOLEAN",
-            "name": "unique",
-            "fieldName": "unique",
-            "persisted": true,
-            "namespace": "http://dhis2.org/schema/dxf/2.0",
-            "attribute": false,
-            "simple": true,
-            "collection": false,
-            "ordered": false,
-            "owner": true,
-            "identifiableObject": false,
-            "nameableObject": false,
-            "embeddedObject": false,
-            "analyticalObject": false,
-            "readable": true,
-            "writable": true,
-            "unique": false,
-            "required": true,
-            "length": 255,
             "manyToMany": false,
             "oneToOne": false,
             "manyToOne": false,
@@ -1148,11 +1147,11 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        "sectionAttribute": {
+        "dataElementGroupAttribute": {
             "klass": "java.lang.Boolean",
             "propertyType": "BOOLEAN",
-            "name": "sectionAttribute",
-            "fieldName": "sectionAttribute",
+            "name": "dataElementGroupAttribute",
+            "fieldName": "dataElementGroupAttribute",
             "persisted": true,
             "namespace": "http://dhis2.org/schema/dxf/2.0",
             "attribute": false,
@@ -1180,11 +1179,11 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        "dataElementGroupAttribute": {
+        "sectionAttribute": {
             "klass": "java.lang.Boolean",
             "propertyType": "BOOLEAN",
-            "name": "dataElementGroupAttribute",
-            "fieldName": "dataElementGroupAttribute",
+            "name": "sectionAttribute",
+            "fieldName": "sectionAttribute",
             "persisted": true,
             "namespace": "http://dhis2.org/schema/dxf/2.0",
             "attribute": false,
@@ -1845,11 +1844,11 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        "validationRuleAttribute": {
+        "programIndicatorAttribute": {
             "klass": "java.lang.Boolean",
             "propertyType": "BOOLEAN",
-            "name": "validationRuleAttribute",
-            "fieldName": "validationRuleAttribute",
+            "name": "programIndicatorAttribute",
+            "fieldName": "programIndicatorAttribute",
             "persisted": true,
             "namespace": "http://dhis2.org/schema/dxf/2.0",
             "attribute": false,
@@ -1877,11 +1876,11 @@
             "sortable": true,
             "propertyTransformer": false
         },
-        "programIndicatorAttribute": {
+        "validationRuleAttribute": {
             "klass": "java.lang.Boolean",
             "propertyType": "BOOLEAN",
-            "name": "programIndicatorAttribute",
-            "fieldName": "programIndicatorAttribute",
+            "name": "validationRuleAttribute",
+            "fieldName": "validationRuleAttribute",
             "persisted": true,
             "namespace": "http://dhis2.org/schema/dxf/2.0",
             "attribute": false,

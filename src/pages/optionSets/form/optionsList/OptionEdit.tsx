@@ -18,6 +18,7 @@ import {
 import {
     NameField,
     CodeField,
+    DescriptionField,
     ColorAndIconField,
 } from '../../../../components/form/fields'
 import { LoadingSpinner } from '../../../../components/loading/LoadingSpinner'
@@ -33,6 +34,7 @@ import {
 } from '../../../../lib'
 import { Option } from '../../../../types/generated'
 import { PickWithFieldFilters } from '../../../../types/models'
+import styles from './OptionList.module.css'
 import { initialOptionValues } from './optionSchema'
 
 export type OptionFormActions = {
@@ -70,33 +72,46 @@ const OptionFormContents = () => {
     })
 
     return (
-        <SectionedFormSections>
-            <SectionedFormSection name="optionEdit">
-                <StandardFormSectionTitle>
-                    {i18n.t('Option')}
-                </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t('Set up the information for this option.')}
-                </StandardFormSectionDescription>
-                <StandardFormField>
-                    <NameField
+        <div className={styles.sectionsWrapper}>
+            <div>
+                <SectionedFormSections>
+                    <SectionedFormSection name="optionEdit">
+                        <StandardFormSectionTitle>
+                            {i18n.t('Option')}
+                        </StandardFormSectionTitle>
+                        <StandardFormSectionDescription>
+                            {i18n.t('Set up the information for this option.')}
+                        </StandardFormSectionDescription>
+                        <StandardFormField>
+                            <NameField
+                                schemaSection={optionSchemaSection}
+                                modelId={values.id}
+                            />
+                        </StandardFormField>
+                        <StandardFormField>
+                            <CodeField
+                                schemaSection={optionSchemaSection}
+                                modelId={values.id}
+                                required={true}
+                            />
+                        </StandardFormField>
+                        <StandardFormField>
+                            <DescriptionField
+                                helpText={i18n.t(
+                                    'Explain the purpose of this option.'
+                                )}
+                            />
+                        </StandardFormField>
+                        <StandardFormField>
+                            <ColorAndIconField />
+                        </StandardFormField>
+                    </SectionedFormSection>
+                    <CustomAttributesSection
                         schemaSection={optionSchemaSection}
-                        modelId={values.id}
                     />
-                </StandardFormField>
-                <StandardFormField>
-                    <CodeField
-                        schemaSection={optionSchemaSection}
-                        modelId={values.id}
-                        required={true}
-                    />
-                </StandardFormField>
-                <StandardFormField>
-                    <ColorAndIconField />
-                </StandardFormField>
-            </SectionedFormSection>
-            <CustomAttributesSection schemaSection={optionSchemaSection} />
-        </SectionedFormSections>
+                </SectionedFormSections>
+            </div>
+        </div>
     )
 }
 
@@ -104,6 +119,7 @@ export const fieldFilters = [
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
     'code',
+    'description',
     'style[color,icon]',
     'id',
 ] as const
