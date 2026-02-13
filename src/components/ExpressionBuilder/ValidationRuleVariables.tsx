@@ -873,9 +873,9 @@ const PROGRAM_RULE_OPERATOR_ELEMENTS = [
     { id: '<=', displayName: '<=' },
     { id: '==', displayName: '==' },
     { id: '!=', displayName: '!=' },
-    { id: 'NOT', displayName: 'NOT' },
-    { id: 'AND', displayName: 'AND' },
-    { id: 'OR', displayName: 'OR' },
+    { id: '!', displayName: 'NOT' },
+    { id: '&&', displayName: 'AND' },
+    { id: '||', displayName: 'OR' },
 ]
 
 const programIndicatorElementTypes: ElementType[] = [
