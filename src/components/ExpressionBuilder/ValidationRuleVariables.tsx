@@ -720,6 +720,7 @@ const PROGRAM_RULE_VARIABLE_IDS = [
     'V{current_date}',
     'V{event_date}',
     'V{due_date}',
+    'V{event_count}',
     'V{enrollment_date}',
     'V{enrollment_status}',
     'V{incident_date}',

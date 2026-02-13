@@ -2,7 +2,7 @@ import { useDataEngine } from '@dhis2/app-runtime'
 import { useQuery } from '@tanstack/react-query'
 import type { FormApi } from 'final-form'
 import arrayMutators from 'final-form-arrays'
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
@@ -21,11 +21,33 @@ import {
     usePatchModel,
     useOnEditCompletedSuccessfully,
 } from '../../lib'
-import type { ProgramRuleActionListItem } from './form/actions/types'
+import {
+    transformActionsFromApi,
+    type ProgramRuleActionListItem,
+} from './form/actions'
 import { fieldFilters, ProgramRuleFormValues } from './form/fieldFilters'
 import { ProgramRuleFormDescriptor } from './form/formDescriptor'
 import { ProgramRuleFormFields } from './form/ProgramRuleFormFields'
 import { validate } from './form/programRuleSchema'
+
+function transformProgramRuleFromApi(
+    values?: ProgramRuleFormValues
+): ProgramRuleFormValues | undefined {
+    if (!values?.programRuleActions) {
+        return values
+    }
+
+    const transformedActions = transformActionsFromApi(
+        values.programRuleActions as Array<
+            ProgramRuleActionListItem & { templateUid?: string }
+        >
+    )
+
+    return {
+        ...values,
+        programRuleActions: transformedActions,
+    } as ProgramRuleFormValues
+}
 
 export const Component = () => {
     const modelId = useParams().id as string
@@ -98,10 +120,15 @@ export const Component = () => {
         id: modelId,
         params: { fields: [...fieldFilters] },
     }
-    const { data: initialValues } = useQuery({
+    const { data: rawInitialValues } = useQuery({
         queryKey: [query],
         queryFn: queryFn<ProgramRuleFormValues>,
     })
+
+    const initialValues = useMemo(
+        () => transformProgramRuleFromApi(rawInitialValues),
+        [rawInitialValues]
+    )
 
     return (
         <FormBase

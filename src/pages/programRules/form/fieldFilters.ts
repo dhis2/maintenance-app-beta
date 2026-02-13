@@ -14,7 +14,7 @@ export const fieldFilters = [
     'condition',
     'program[id,displayName,programType]',
     'programStage[id,displayName]',
-    'programRuleActions[id,programRuleActionType,priority,content,data,location,dataElement[id,displayName],trackedEntityAttribute[id,displayName],programStage[id,displayName],programStageSection[id,displayName],option[id,displayName],optionGroup[id,displayName],notificationTemplate[id,displayName],access]',
+    'programRuleActions[id,programRuleActionType,priority,content,data,location,templateUid,dataElement[id,displayName],trackedEntityAttribute[id,displayName],programStage[id,displayName],programStageSection[id,displayName],option[id,displayName],optionGroup[id,displayName],access]',
 ] as const
 
 export type ProgramRuleFormValues = PickWithFieldFilters<

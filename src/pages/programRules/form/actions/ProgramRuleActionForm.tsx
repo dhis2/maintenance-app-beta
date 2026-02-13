@@ -30,6 +30,7 @@ import { PriorityField } from '../../fields'
 import { ActionTypeFieldsContent } from './ActionTypeFieldsContent'
 import { ACTION_FIELDS_TO_CLEAR, ACTION_TYPE_OPTIONS } from './constants'
 import styles from './ProgramRuleActionForm.module.css'
+import { transformActionForApi, transformActionFromApi } from './transformers'
 import type {
     ProgramRuleActionListItem,
     ProgramRuleActionFormValues,
@@ -43,6 +44,7 @@ const actionFieldFilters = [
     'content',
     'data',
     'location',
+    'templateUid',
     'dataElement[id,displayName]',
     'trackedEntityAttribute[id,displayName]',
     'programRuleVariable[id,displayName]',
@@ -50,7 +52,6 @@ const actionFieldFilters = [
     'programStageSection[id,displayName]',
     'option[id,displayName]',
     'optionGroup[id,displayName]',
-    'notificationTemplate[id,displayName]',
 ] as const
 
 export const ProgramRuleActionForm = ({
@@ -66,7 +67,9 @@ export const ProgramRuleActionForm = ({
     onCancel: () => void
     onSubmit: FormBaseProps<ProgramRuleActionFormValues>['onSubmit']
 }>) => {
-    const initialValues = (action ?? {}) as ProgramRuleActionFormValues
+    const initialValues = action
+        ? transformActionFromApi(action as ProgramRuleActionFormValues)
+        : ({} as ProgramRuleActionFormValues)
 
     return (
         <FormBase
@@ -122,10 +125,15 @@ export const EditProgramRuleActionForm = ({
 
     const onFormSubmit: FormBaseProps<ProgramRuleActionFormValues>['onSubmit'] =
         async (values, form) => {
+            const transformedValues = transformActionForApi(values)
+            const transformedInitialValues = transformActionForApi(
+                form.getState().initialValues
+            )
+
             const jsonPatchOperations = createJsonPatchOperations({
-                values,
+                values: transformedValues,
                 dirtyFields: form.getState().dirtyFields,
-                originalValue: form.getState().initialValues,
+                originalValue: transformedInitialValues,
             })
 
             if (jsonPatchOperations.length > 0) {
@@ -147,11 +155,15 @@ export const EditProgramRuleActionForm = ({
         return <LoadingSpinner />
     }
 
+    const actionData = actionValues.data
+        ? transformActionFromApi(actionValues.data)
+        : action
+
     return (
         <ProgramRuleActionForm
             programId={programId}
             programType={programType}
-            action={(actionValues.data ?? action) as ProgramRuleActionListItem}
+            action={actionData as ProgramRuleActionListItem}
             onCancel={onCancel}
             onSubmit={onFormSubmit}
         />
@@ -175,8 +187,9 @@ export const NewProgramRuleActionForm = ({
 
     const onFormSubmit: FormBaseProps<ProgramRuleActionFormValues>['onSubmit'] =
         async (values) => {
+            const transformedValues = transformActionForApi(values)
             const res = await handleCreate({
-                ...values,
+                ...transformedValues,
                 programRule: { id: programRuleId },
             })
             if (res.error) {

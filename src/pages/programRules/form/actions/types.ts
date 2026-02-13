@@ -9,6 +9,7 @@ export type ProgramRuleActionListItem = {
     content?: string
     data?: string
     location?: string
+    templateUid?: string
     dataElement?: { id: string; displayName?: string }
     trackedEntityAttribute?: { id: string; displayName?: string }
     programRuleVariable?: { id: string; displayName?: string }
