@@ -1,48 +1,45 @@
 import i18n from '@dhis2/d2-i18n'
 import {
-    SingleSelectFieldFF,
     InputFieldFF,
     SingleSelectField,
+    SingleSelectFieldFF,
     SingleSelectOption,
 } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { Field as FieldRFF, useField, useForm } from 'react-final-form'
-import { StandardFormField } from '../../../components'
-import { getConstantTranslation } from '../../../lib'
+import { StandardFormField } from '../../../../components'
+import { getConstantTranslation } from '../../../../lib'
 
 export const triggerOptions = [
+    { label: getConstantTranslation('ENROLLMENT'), value: 'ENROLLMENT' },
+    { label: getConstantTranslation('COMPLETION'), value: 'COMPLETION' },
+    { label: getConstantTranslation('PROGRAM_RULE'), value: 'PROGRAM_RULE' },
+    // {  label: getConstantTranslation("SCHEDULED_DAYS_DUE_DATE") , value:"SCHEDULED_DAYS_DUE_DATE"} ,
     {
-        label: getConstantTranslation('DATA_SET_COMPLETION'),
-        value: 'DATA_SET_COMPLETION',
+        label: getConstantTranslation('SCHEDULED_DAYS_INCIDENT_DATE'),
+        value: 'SCHEDULED_DAYS_INCIDENT_DATE',
     },
     {
-        label: getConstantTranslation('SCHEDULED_DAYS'),
-        value: 'SCHEDULED_DAYS',
-    },
-]
-
-export const notificationTypeOptions = [
-    {
-        label: getConstantTranslation('COLLECTIVE_SUMMARY'),
-        value: 'COLLECTIVE_SUMMARY',
-    },
-    {
-        label: getConstantTranslation('SINGLE_NOTIFICATION'),
-        value: 'SINGLE_NOTIFICATION',
+        label: getConstantTranslation('SCHEDULED_DAYS_ENROLLMENT_DATE'),
+        value: 'SCHEDULED_DAYS_ENROLLMENT_DATE',
     },
 ]
 
 export const NotificationTimingSection = () => {
     const { input: triggerInput, meta: triggerMeta } = useField(
-        'dataSetNotificationTrigger'
+        'notificationTrigger'
     )
     const form = useForm()
-    const isScheduledDays = triggerInput.value === 'SCHEDULED_DAYS'
+    const isScheduledDays = [
+        'SCHEDULED_DAYS_DUE_DATE',
+        'SCHEDULED_DAYS_INCIDENT_DATE',
+        'SCHEDULED_DAYS_ENROLLMENT_DATE',
+    ].includes(triggerInput.value)
 
     // Subscribe to relativeScheduledDays to determine sign
-    const { input: relativeScheduledDaysInput } = useField<
-        number | string | undefined
-    >('relativeScheduledDays')
+    const { input: relativeScheduledDaysInput } = useField(
+        'relativeScheduledDays'
+    )
 
     const relativeDaysValue = Number(relativeScheduledDaysInput.value) || 0
     const [beforeAfter, setBeforeAfter] = useState(
@@ -51,7 +48,6 @@ export const NotificationTimingSection = () => {
     useEffect(() => {
         setBeforeAfter(relativeDaysValue < 0 ? 'BEFORE' : 'AFTER')
     }, [relativeDaysValue])
-
     useEffect(() => {
         if (!isScheduledDays) {
             setBeforeAfter('AFTER')
@@ -69,13 +65,14 @@ export const NotificationTimingSection = () => {
         <div>
             <StandardFormField>
                 <SingleSelectFieldFF
-                    name="dataSetNotificationTrigger"
-                    dataTest="formfields-dataSetNotificationTrigger"
-                    label={i18n.t('When to send notification')}
+                    name="notificationTrigger"
+                    dataTest="formfields-notificationTrigger"
+                    label={i18n.t('When to send notification (required)')}
                     inputWidth="500px"
                     options={triggerOptions}
                     input={triggerInput}
                     meta={triggerMeta}
+                    required
                 />
             </StandardFormField>
 
@@ -89,7 +86,7 @@ export const NotificationTimingSection = () => {
                             selected={beforeAfter}
                             dataTest="formfields-beforeOrAfter"
                             onChange={({ selected }: { selected: string }) => {
-                                setBeforeAfter(selected as 'BEFORE' | 'AFTER')
+                                setBeforeAfter(selected)
                                 handleBeforeAfterChange(
                                     selected as 'BEFORE' | 'AFTER'
                                 )
@@ -107,7 +104,7 @@ export const NotificationTimingSection = () => {
                         </SingleSelectField>
                     </StandardFormField>
                     <StandardFormField>
-                        <FieldRFF<string | undefined>
+                        <FieldRFF
                             label={i18n.t(
                                 'Number of days {{beforeOrAfter}} scheduled date to send notification',
                                 {
@@ -122,37 +119,26 @@ export const NotificationTimingSection = () => {
                             name="relativeScheduledDays"
                             type="number"
                             inputWidth="80px"
-                            format={(value) => {
-                                const parsed = Math.abs(
-                                    parseInt(value ?? '', 10)
-                                )
-                                return isNaN(parsed) ? '' : String(parsed)
+                            // format={(value) => value?.toString() ?? ''}
+                            format={(value: unknown) => {
+                                const parsed =
+                                    typeof value === 'number'
+                                        ? Math.abs(value)
+                                        : value
+                                return parsed?.toString() ?? ''
                             }}
-                            parse={(value) => {
-                                const parsed = parseInt(value ?? '', 10)
-                                if (isNaN(parsed)) {
+                            parse={(value: unknown) => {
+                                const parsed =
+                                    typeof value === 'string'
+                                        ? Number.parseInt(value ?? '', 10)
+                                        : undefined
+                                if (!parsed || Number.isNaN(parsed)) {
                                     return undefined
                                 }
-                                const signed =
-                                    beforeAfter === 'BEFORE' ? -parsed : parsed
-                                return String(signed)
+                                return beforeAfter === 'BEFORE'
+                                    ? -parsed
+                                    : parsed
                             }}
-                        />
-                    </StandardFormField>
-
-                    <StandardFormField>
-                        <FieldRFF<string | undefined>
-                            inputWidth="500px"
-                            dataTest="formfields-notification-type"
-                            initialValue="SINGLE_NOTIFICATION"
-                            name="sendStrategy"
-                            render={(props) => (
-                                <SingleSelectFieldFF
-                                    {...props}
-                                    label={i18n.t('Send notification as')}
-                                    options={notificationTypeOptions}
-                                />
-                            )}
                         />
                     </StandardFormField>
                 </div>

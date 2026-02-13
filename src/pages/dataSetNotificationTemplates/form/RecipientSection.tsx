@@ -23,8 +23,7 @@ export const RecipientSection = () => {
         }
     )
 
-    const isUserGroup =
-        recipientInput.value === 'USER_GROUP' || !recipientInput.value
+    const isUserGroup = recipientInput.value === 'USER_GROUP'
 
     const isOrgUnitContact =
         recipientInput.value === 'ORGANISATION_UNIT_CONTACT'

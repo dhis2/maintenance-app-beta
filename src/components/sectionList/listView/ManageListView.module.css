@@ -1,7 +1,9 @@
 .transferHeader {
     margin: var(--spacers-dp8) 0px;
-    color: var(--colors-grey700);
-    font-weight: 400;
+    color: var(--colors-grey800);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
 }
 
 .transferContainer {
