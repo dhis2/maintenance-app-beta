@@ -1,3 +1,10 @@
+## [0.126.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.126.0...v0.126.1) (2026-02-16)
+
+
+### Bug Fixes
+
+* show MULTI_TEXT value type when creating new option sets  ([#758](https://github.com/dhis2/maintenance-app-beta/issues/758)) ([e51606f](https://github.com/dhis2/maintenance-app-beta/commit/e51606f76b6af5cd9fb90baf25ada69bac61eb7e))
+
 # [0.126.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.125.1...v0.126.0) (2026-02-11)
 
 
