@@ -108,6 +108,7 @@ export function DataElementWithOptionSetField({
                             onRetryClick={queryResult.refetch}
                             showEndLoader={false}
                             loading={queryResult.isLoading}
+                            searchable={false}
                         />
                     </Box>
                 </UIField>

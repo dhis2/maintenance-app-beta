@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import { ExpressionBuilderEntry } from '../../../components'
 import { PaddedContainer } from '../../../components/ExpressionBuilder/PaddedContainer'
+import { SCHEMA_SECTIONS } from '../../../lib'
 
 type ConditionFieldProps = Readonly<{
     programId?: string
@@ -19,6 +20,7 @@ export function ConditionField({ programId }: ConditionFieldProps) {
                 clearable={true}
                 programId={programId}
                 type="programRule"
+                validateSchemaSection={SCHEMA_SECTIONS.programRule}
             />
         </PaddedContainer>
     )

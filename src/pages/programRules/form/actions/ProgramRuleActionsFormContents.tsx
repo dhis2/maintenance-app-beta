@@ -141,6 +141,7 @@ const ProgramRuleActionListNewOrEdit = () => {
                                 id: actionKey,
                                 displayName:
                                     getProgramRuleActionListLabel(action),
+                                access: action.access,
                             }
 
                             return (

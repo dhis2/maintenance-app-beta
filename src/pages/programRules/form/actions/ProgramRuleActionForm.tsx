@@ -8,6 +8,7 @@ import {
     FormBase,
     FormBaseProps,
     FormFooterWrapper,
+    SectionedFormErrorNotice,
     StandardFormField,
     StandardFormSection,
     StandardFormSectionDescription,
@@ -345,6 +346,8 @@ function ProgramRuleActionFormBody({
                     />
                 )}
             </StandardFormSection>
+
+            <SectionedFormErrorNotice />
 
             <FormFooterWrapper>
                 <Button primary type="submit">

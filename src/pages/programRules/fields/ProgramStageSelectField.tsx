@@ -72,6 +72,7 @@ export function ProgramStageSelectField({
                             onRetryClick={queryResult.refetch}
                             showEndLoader={false}
                             loading={queryResult.isLoading}
+                            searchable={false}
                         />
                     </Box>
                 </UIField>

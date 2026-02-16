@@ -81,6 +81,14 @@ export const Component = () => {
                 }
             }
 
+            const nonDeletedActions = actions?.filter((a) => !a.deleted) || []
+            const originalActions = (form.getState().initialValues
+                .programRuleActions || []) as ProgramRuleActionListItem[]
+
+            const actionsChanged =
+                deletedActions.length > 0 &&
+                nonDeletedActions.length !== originalActions.length
+
             const dirtyFields = Object.fromEntries(
                 Object.entries(form.getState().dirtyFields).filter(
                     ([key]) => !key.startsWith('programRuleActions')
@@ -90,9 +98,20 @@ export const Component = () => {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { programRuleActions, ...valuesWithoutActions } = values
 
+            const valuesToPatch = actionsChanged
+                ? {
+                      ...valuesWithoutActions,
+                      programRuleActions: nonDeletedActions.map((a) => ({
+                          id: a.id,
+                      })),
+                  }
+                : valuesWithoutActions
+
             const jsonPatchOperations = createJsonPatchOperations({
-                values: valuesWithoutActions,
-                dirtyFields,
+                values: valuesToPatch,
+                dirtyFields: actionsChanged
+                    ? { ...dirtyFields, programRuleActions: true }
+                    : dirtyFields,
                 originalValue: form.getState().initialValues,
             })
 

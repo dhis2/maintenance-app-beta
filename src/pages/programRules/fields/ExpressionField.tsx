@@ -3,8 +3,13 @@ import { Box } from '@dhis2/ui'
 import React from 'react'
 import { ExpressionBuilderEntry } from '../../../components'
 import { PaddedContainer } from '../../../components/ExpressionBuilder/PaddedContainer'
-import { SECTIONS_MAP } from '../../../lib'
+import { SchemaName, SchemaSection } from '../../../lib'
 import styles from '../form/actions/ProgramRuleActionForm.module.css'
+
+const programRuleActionSchemaSection = {
+    name: 'programRuleAction' as SchemaName,
+    namePlural: 'programRuleActions',
+} as SchemaSection
 
 export function ExpressionField({
     fieldName = 'data',
@@ -29,7 +34,7 @@ export function ExpressionField({
                     clearable={clearable}
                     programId={programId}
                     type="programRule"
-                    validateSchemaSection={SECTIONS_MAP.programRule}
+                    validateSchemaSection={programRuleActionSchemaSection}
                     validateProperty={fieldName}
                 />
             </PaddedContainer>

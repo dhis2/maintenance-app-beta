@@ -8,7 +8,6 @@ export const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
-    'code',
     'description',
     'priority',
     'condition',

@@ -534,7 +534,12 @@ const ProgramRuleVariablesList = ({
             query={programRuleVariablesQuery}
             insertElement={insertElementFormatted}
             transform={(variables) =>
-                variables.map((v: any) => ({
+                (
+                    variables as unknown as {
+                        name: string
+                        displayName: string
+                    }[]
+                ).map((v) => ({
                     id: v.name,
                     displayName: v.displayName,
                 }))
@@ -718,19 +723,19 @@ const VARIABLE_ELEMENTS = [
 const PROGRAM_RULE_VARIABLE_IDS = [
     'V{completed_date}',
     'V{current_date}',
-    'V{event_date}',
     'V{due_date}',
-    'V{event_count}',
     'V{enrollment_date}',
-    'V{enrollment_status}',
-    'V{incident_date}',
     'V{enrollment_id}',
+    'V{enrollment_status}',
     'V{environment}',
+    'V{event_count}',
+    'V{event_date}',
     'V{event_id}',
     'V{event_status}',
+    'V{incident_date}',
     'V{orgunit_code}',
-    'V{program_stage_name}',
     'V{program_stage_id}',
+    'V{program_stage_name}',
 ]
 
 const PROGRAM_RULE_VARIABLE_ELEMENTS: Element[] = PROGRAM_RULE_VARIABLE_IDS.map(

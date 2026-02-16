@@ -44,6 +44,7 @@ export function LocationField({ required }: Readonly<{ required?: boolean }>) {
                                 loading={false}
                                 showEndLoader={false}
                                 onRetryClick={() => {}}
+                                searchable={false}
                             />
                         </Box>
                     </UIField>
