@@ -95,6 +95,9 @@ const NotificationListNewOrEdit = () => {
                             notification={notificationFormOpen}
                             onCancel={onCloseNotificationForm}
                             onSubmitted={handleSubmittedNotification}
+                            notificationList={programNotificationsFieldArray.value.map(
+                                (n) => ({ id: n.id })
+                            )}
                         />
                     </div>
                 )}
