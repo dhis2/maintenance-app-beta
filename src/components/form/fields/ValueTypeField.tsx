@@ -10,38 +10,25 @@ import {
 } from '../../../lib'
 import { ConfirmationModalWrapper } from '../../confirmationModal'
 
-function getValueTypeHelpText(schemaSectionName: string): string {
-    const optionSetSuffix = i18n.t(
-        'If you have chosen an Option set, this will be set automatically.'
+function getValueTypeHelpText(schemaSection: {
+    name: string
+    title: string
+}): string {
+    const objectType =
+        schemaSection.name === 'programRuleVariable'
+            ? i18n.t('variable')
+            : schemaSection.title
+    const optionSetSuffix =
+        schemaSection.name === 'optionSet'
+            ? ''
+            : ' ' +
+              i18n.t(
+                  'If you have chosen an Option set, this will be set automatically.'
+              )
+    return i18n.t(
+        'Select the kind of data this {{objectType}} collects.{{optionSetSuffix}}',
+        { objectType, optionSetSuffix }
     )
-    switch (schemaSectionName) {
-        case 'dataElement':
-            return i18n.t(
-                'Select the kind of data this data element collects. {{optionSetSuffix}}',
-                { optionSetSuffix }
-            )
-        case 'attribute':
-            return i18n.t(
-                'Select the kind of data this attribute collects. {{optionSetSuffix}}',
-                { optionSetSuffix }
-            )
-        case 'trackedEntityAttribute':
-            return i18n.t(
-                'Select the kind of data this tracked entity attribute collects. {{optionSetSuffix}}',
-                { optionSetSuffix }
-            )
-        case 'optionSet':
-            return i18n.t('Select the kind of data this option set collects.')
-        case 'programRuleVariable':
-            return i18n.t(
-                'Select the kind of data this variable stores. {{optionSetSuffix}}',
-                { optionSetSuffix }
-            )
-        default:
-            return i18n.t('Select the kind of data. {{optionSetSuffix}}', {
-                optionSetSuffix,
-            })
-    }
 }
 
 const valueTypeDisabledHelpText = i18n.t(
@@ -94,7 +81,7 @@ export function ValueTypeField({
                 return showMultiTextOption || value !== 'MULTI_TEXT'
             }) || []
 
-    const valueTypeHelpText = getValueTypeHelpText(schemaSection.name)
+    const valueTypeHelpText = getValueTypeHelpText(schemaSection)
     const combinedHelpText = disabled
         ? disabledText ?? valueTypeDisabledHelpText
         : valueTypeHelpText
