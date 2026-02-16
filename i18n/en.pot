@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-11T09:18:24.281Z\n"
-"PO-Revision-Date: 2026-02-11T09:18:24.281Z\n"
+"POT-Creation-Date: 2026-02-16T09:11:33.914Z\n"
+"PO-Revision-Date: 2026-02-16T09:11:33.915Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -60,6 +60,12 @@ msgstr "Overview"
 msgid "Search menu items"
 msgstr "Search menu items"
 
+msgid "Remove color"
+msgstr "Remove color"
+
+msgid "Choose an icon"
+msgstr "Choose an icon"
+
 msgid "All"
 msgstr "All"
 
@@ -75,11 +81,11 @@ msgstr "Outline"
 msgid "Search icons"
 msgstr "Search icons"
 
-msgid "No icons match the search."
-msgstr "No icons match the search."
+msgid "No icons found"
+msgstr "No icons found"
 
-msgid "Select"
-msgstr "Select"
+msgid "Choose icon"
+msgstr "Choose icon"
 
 msgid "Remove icon"
 msgstr "Remove icon"
@@ -621,12 +627,14 @@ msgstr ""
 msgid "Short name"
 msgstr "Short name"
 
-msgid ""
-"Select the kind of data this attribute collects. If you have chosen an "
-"Option set, this will be set automatically."
-msgstr ""
-"Select the kind of data this attribute collects. If you have chosen an "
-"Option set, this will be set automatically."
+msgid "variable"
+msgstr "variable"
+
+msgid "If you have chosen an Option set, this will be set automatically."
+msgstr "If you have chosen an Option set, this will be set automatically."
+
+msgid "Select the kind of data this {{objectType}} collects.{{optionSetSuffix}}"
+msgstr "Select the kind of data this {{objectType}} collects.{{optionSetSuffix}}"
 
 msgid ""
 "Disabled as the value type must match the value type of the selected option "
@@ -842,8 +850,14 @@ msgstr "An unknown error occurred"
 msgid "Failed to update sharing"
 msgstr "Failed to update sharing"
 
+msgid "Update public sharing"
+msgstr "Update public sharing"
+
 msgid "Update sharing for users and groups"
 msgstr "Update sharing for users and groups"
+
+msgid "Public sharing"
+msgstr "Public sharing"
 
 msgid "User or group"
 msgstr "User or group"
@@ -3460,6 +3474,9 @@ msgstr "Option Set"
 msgid "Set up the information for this option."
 msgstr "Set up the information for this option."
 
+msgid "Explain the purpose of this option."
+msgstr "Explain the purpose of this option."
+
 msgid "Save option"
 msgstr "Save option"
 
@@ -4023,6 +4040,24 @@ msgstr "Sends a notification when a validation rule failed."
 
 msgid "Manage"
 msgstr "Manage"
+
+msgid "Set up the basic information for this predictor group."
+msgstr "Set up the basic information for this predictor group."
+
+msgid "Choose the predictors to include in this predictor group."
+msgstr "Choose the predictors to include in this predictor group."
+
+msgid "Available predictors"
+msgstr "Available predictors"
+
+msgid "Selected predictors"
+msgstr "Selected predictors"
+
+msgid "Filter available predictors"
+msgstr "Filter available predictors"
+
+msgid "Filter selected predictors"
+msgstr "Filter selected predictors"
 
 msgid "Predictor run started successfully"
 msgstr "Predictor run started successfully"
