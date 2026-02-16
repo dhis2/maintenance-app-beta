@@ -32,6 +32,9 @@ jobs:
             - name: Run contracts script
               run: yarn contracts
 
+            - name: Format
+              run: yarn format
+
             - name: Check for contract changes
               id: diff
               run: |

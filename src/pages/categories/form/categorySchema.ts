@@ -24,7 +24,6 @@ export const categoryFormSchema = identifiable
         description: z.string().trim().optional(),
         dataDimension: z.boolean(),
         categoryOptions: referenceCollection,
-        id: z.string(),
     })
 
 export const categoryListSchema = categoryBaseSchema
@@ -43,6 +42,5 @@ const validatingCategoryFormSchema = categoryFormSchema.extend({
         1,
         'At least one category option is required'
     ),
-    id: z.string().optional(),
 })
 export const validate = createFormValidate(validatingCategoryFormSchema)

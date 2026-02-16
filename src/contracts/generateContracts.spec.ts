@@ -1,9 +1,9 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
-import { ZodSchema } from 'zod'
+import { z, ZodObject, ZodRawShape } from 'zod'
 import { zodToJsonSchema } from 'zod-to-json-schema'
 import { categoryFormSchema } from '../pages/categories/form'
 
-const generateContract = ({
+const generateContract = <T extends ZodRawShape>({
     method,
     path,
     name,
@@ -13,7 +13,7 @@ const generateContract = ({
     method: string
     path: string
     name: string
-    expectedSchema: ZodSchema<unknown>
+    expectedSchema: ZodObject<T>
     usage?: string
 }) => {
     const contractPath = `contracts/${name}/contract.json`
@@ -25,7 +25,7 @@ const generateContract = ({
         responseStatus: 200,
         jsonSchema: `contracts/maintenance-app/${name}/json-schema.json`,
     }
-    const schema = zodToJsonSchema(expectedSchema, {
+    const schema = zodToJsonSchema(expectedSchema.extend({ id: z.string() }), {
         name,
         // @ts-expect-error/rejected-must-be-true
         rejectedAdditionalProperties: true,
