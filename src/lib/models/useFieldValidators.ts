@@ -22,7 +22,7 @@ export function useValidator({
     modelId?: string
 }) {
     const schema = useSchema(schemaSection.name)
-    const propertyDetails = schema?.properties?.[property]
+    const propertyDetails = schema.properties[property]
     const params = useParams()
     const resolvedModelId = modelId ?? params.id
     const checkIsValueTaken = useIsFieldValueUnique({
