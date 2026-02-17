@@ -10,9 +10,27 @@ import {
 } from '../../../lib'
 import { ConfirmationModalWrapper } from '../../confirmationModal'
 
-const valueTypeHelpText = i18n.t(
-    'Select the kind of data this attribute collects. If you have chosen an Option set, this will be set automatically.'
-)
+function getValueTypeHelpText(schemaSection: {
+    name: string
+    title: string
+}): string {
+    const objectType =
+        schemaSection.name === 'programRuleVariable'
+            ? i18n.t('variable')
+            : schemaSection.title
+    const optionSetSuffix =
+        schemaSection.name === 'optionSet'
+            ? ''
+            : ' ' +
+              i18n.t(
+                  'If you have chosen an Option set, this will be set automatically.'
+              )
+    return i18n.t(
+        'Select the kind of data this {{objectType}} collects.{{optionSetSuffix}}',
+        { objectType, optionSetSuffix }
+    )
+}
+
 const valueTypeDisabledHelpText = i18n.t(
     'Disabled as the value type must match the value type of the selected option set.'
 )
@@ -45,6 +63,14 @@ export function ValueTypeField({
         values.valueType === 'MULTI_TEXT' ||
         (values.optionSet?.id && values.optionSet?.valueType === 'MULTI_TEXT')
 
+    const isOptionSetForm = schemaSection.name === 'optionSet'
+    const isProgramRuleVariableForm =
+        schemaSection.name === 'programRuleVariable'
+    const showMultiTextOption =
+        isOptionSetForm ||
+        isProgramRuleVariableForm ||
+        optionSetHasMultiTextValueType
+
     const options =
         schema.properties.valueType.constants
             ?.map((constant: string) => ({
@@ -52,9 +78,10 @@ export function ValueTypeField({
                 label: getConstantTranslation(constant),
             }))
             .filter(({ value }: { value: string }) => {
-                return optionSetHasMultiTextValueType || value !== 'MULTI_TEXT'
+                return showMultiTextOption || value !== 'MULTI_TEXT'
             }) || []
 
+    const valueTypeHelpText = getValueTypeHelpText(schemaSection)
     const combinedHelpText = disabled
         ? disabledText ?? valueTypeDisabledHelpText
         : valueTypeHelpText

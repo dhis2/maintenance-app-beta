@@ -639,12 +639,14 @@ msgstr ""
 msgid "Short name"
 msgstr "Short name"
 
-msgid ""
-"Select the kind of data this attribute collects. If you have chosen an "
-"Option set, this will be set automatically."
-msgstr ""
-"Select the kind of data this attribute collects. If you have chosen an "
-"Option set, this will be set automatically."
+msgid "variable"
+msgstr "variable"
+
+msgid "If you have chosen an Option set, this will be set automatically."
+msgstr "If you have chosen an Option set, this will be set automatically."
+
+msgid "Select the kind of data this {{objectType}} collects.{{optionSetSuffix}}"
+msgstr "Select the kind of data this {{objectType}} collects.{{optionSetSuffix}}"
 
 msgid ""
 "Disabled as the value type must match the value type of the selected option "
