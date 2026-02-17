@@ -142,9 +142,6 @@ export const CustomFormEdit = ({
         success: true,
     })
 
-    const onActionsReadyRef = React.useRef(onActionsReady)
-    onActionsReadyRef.current = onActionsReady
-
     const handleSave = useCallback(() => {
         const formId = formInput?.value?.id ?? generateDhis2Id()
         const htmlCode = textAreaRef.current?.value ?? ''
@@ -179,11 +176,11 @@ export const CustomFormEdit = ({
     }, [formInput, nameInput, updateCustomForm, showSuccess])
 
     useEffect(() => {
-        onActionsReadyRef.current?.({
+        onActionsReady?.({
             save: handleSave,
             saving: customFormSaving,
         })
-    }, [handleSave, customFormSaving])
+    }, [handleSave, customFormSaving, onActionsReady])
 
     return (
         <>

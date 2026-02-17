@@ -5,7 +5,8 @@ import { IconInfo16 } from '@dhis2/ui-icons'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import isEqual from 'lodash/isEqual'
-import React, { useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
+import { useForm } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
     FormBase,
@@ -81,16 +82,48 @@ type OnSubmitWithClose = (
     closeOnSubmit?: boolean
 ) => ReturnType<BaseOnSubmit>
 
+export type NotificationFormActions = {
+    save: () => void
+    saveAndClose: () => void
+}
+
 export type NotificationFormProps = {
     notification?: PartialNotificationFormValues
     onCancel?: () => void
     onSubmit: OnSubmitWithClose
+    onActionsReady?: (actions: NotificationFormActions) => void
+}
+
+const NotificationFormActionsHandler = ({
+    onActionsReady,
+    setCloseOnSubmit,
+}: {
+    onActionsReady?: (actions: NotificationFormActions) => void
+    setCloseOnSubmit: (value: boolean) => void
+}) => {
+    const form = useForm()
+
+    useEffect(() => {
+        onActionsReady?.({
+            saveAndClose: () => {
+                setCloseOnSubmit(true)
+                form.submit()
+            },
+            save: () => {
+                setCloseOnSubmit(false)
+                form.submit()
+            },
+        })
+    }, [onActionsReady, setCloseOnSubmit, form])
+
+    return null
 }
 
 export const NotificationForm = ({
     notification,
     onSubmit,
     onCancel,
+    onActionsReady,
 }: NotificationFormProps) => {
     const programId = useParams().id as string
     const initialNotificationValues: PartialNotificationFormValues | undefined =
@@ -102,9 +135,9 @@ export const NotificationForm = ({
         }, [notification, programId])
 
     const closeOnSubmitRef = React.useRef(false)
-    const setCloseOnSubmit = (value: boolean) => {
+    const setCloseOnSubmit = useCallback((value: boolean) => {
         closeOnSubmitRef.current = value
-    }
+    }, [])
     const [selectedSection, setSelectedSection] = React.useState<
         string | undefined
     >()
@@ -121,10 +154,16 @@ export const NotificationForm = ({
             validate={validate}
         >
             {({ handleSubmit, form }) => {
+                const showInlineFooter = !onActionsReady
+
                 return (
                     <SectionedFormProvider
                         formDescriptor={programNotificationFormDescriptor}
                     >
+                        <NotificationFormActionsHandler
+                            onActionsReady={onActionsReady}
+                            setCloseOnSubmit={setCloseOnSubmit}
+                        />
                         <SectionedFormLayout
                             sidebar={
                                 <DrawerSectionedFormSidebar
@@ -142,49 +181,53 @@ export const NotificationForm = ({
                                         />
                                         <SectionedFormErrorNotice />
                                     </div>
-                                    <FormFooterWrapper>
-                                        <ButtonStrip>
-                                            <Button
-                                                primary
-                                                small
-                                                type="button"
-                                                onClick={() => {
-                                                    setCloseOnSubmit(true)
-                                                    form.submit()
-                                                }}
-                                            >
-                                                {i18n.t(
-                                                    'Save notification and close'
-                                                )}
-                                            </Button>
-                                            <Button
-                                                secondary
-                                                small
-                                                type="button"
-                                                onClick={() => {
-                                                    setCloseOnSubmit(false)
-                                                    form.submit()
-                                                }}
-                                            >
-                                                {i18n.t('Save notification')}
-                                            </Button>
-                                            <Button
-                                                secondary
-                                                small
-                                                onClick={onCancel}
-                                            >
-                                                {i18n.t('Cancel')}
-                                            </Button>
-                                        </ButtonStrip>
-                                        <div className={styles.actionsInfo}>
-                                            <IconInfo16 />
-                                            <p>
-                                                {i18n.t(
-                                                    'Saving a notification does not save other changes to the program'
-                                                )}
-                                            </p>
-                                        </div>
-                                    </FormFooterWrapper>
+                                    {showInlineFooter && (
+                                        <FormFooterWrapper>
+                                            <ButtonStrip>
+                                                <Button
+                                                    primary
+                                                    small
+                                                    type="button"
+                                                    onClick={() => {
+                                                        setCloseOnSubmit(true)
+                                                        form.submit()
+                                                    }}
+                                                >
+                                                    {i18n.t(
+                                                        'Save notification and close'
+                                                    )}
+                                                </Button>
+                                                <Button
+                                                    secondary
+                                                    small
+                                                    type="button"
+                                                    onClick={() => {
+                                                        setCloseOnSubmit(false)
+                                                        form.submit()
+                                                    }}
+                                                >
+                                                    {i18n.t(
+                                                        'Save notification'
+                                                    )}
+                                                </Button>
+                                                <Button
+                                                    secondary
+                                                    small
+                                                    onClick={onCancel}
+                                                >
+                                                    {i18n.t('Cancel')}
+                                                </Button>
+                                            </ButtonStrip>
+                                            <div className={styles.actionsInfo}>
+                                                <IconInfo16 />
+                                                <p>
+                                                    {i18n.t(
+                                                        'Saving a notification does not save other changes to the program'
+                                                    )}
+                                                </p>
+                                            </div>
+                                        </FormFooterWrapper>
+                                    )}
                                 </div>
                             </form>
                             <SectionedFormErrorNotice />
@@ -200,6 +243,7 @@ export const EditNotificationForm = ({
     notification,
     onCancel,
     onSubmitted,
+    onActionsReady,
 }: {
     notification: DisplayableModel
     onCancel: () => void
@@ -207,6 +251,7 @@ export const EditNotificationForm = ({
         values: SubmittedNotificationFormValues,
         closeOnSubmit: boolean
     ) => void
+    onActionsReady?: (actions: NotificationFormActions) => void
 }) => {
     const handlePatch = usePatchModel(
         notification.id,
@@ -275,6 +320,7 @@ export const EditNotificationForm = ({
             notification={notificationValues.data}
             onSubmit={onFormSubmit}
             onCancel={onCancel}
+            onActionsReady={onActionsReady}
         />
     )
 }
@@ -282,12 +328,14 @@ export const EditNotificationForm = ({
 export const NewNotificationForm = ({
     onCancel,
     onSubmitted,
+    onActionsReady,
 }: {
     onCancel: () => void
     onSubmitted: (
         values: SubmittedNotificationFormValues,
         closeOnSubmit: boolean
     ) => void
+    onActionsReady?: (actions: NotificationFormActions) => void
 }) => {
     const handleCreate = useCreateModel(notificationSchemaSection.namePlural)
     const onFormSubmit: OnSubmitWithClose = async (
@@ -317,6 +365,7 @@ export const NewNotificationForm = ({
             notification={undefined}
             onSubmit={onFormSubmit}
             onCancel={onCancel}
+            onActionsReady={onActionsReady}
         />
     )
 }
@@ -325,6 +374,7 @@ export const EditOrNewNotificationForm = ({
     notification,
     onCancel,
     onSubmitted,
+    onActionsReady,
 }: {
     notification: DisplayableModel | null | undefined
     onCancel: () => void
@@ -332,6 +382,7 @@ export const EditOrNewNotificationForm = ({
         values: SubmittedNotificationFormValues,
         closeOnSubmit: boolean
     ) => void
+    onActionsReady?: (actions: NotificationFormActions) => void
 }) => {
     if (notification === undefined) {
         return null
@@ -342,6 +393,7 @@ export const EditOrNewNotificationForm = ({
             <NewNotificationForm
                 onSubmitted={onSubmitted}
                 onCancel={onCancel}
+                onActionsReady={onActionsReady}
             />
         )
     }
@@ -351,6 +403,7 @@ export const EditOrNewNotificationForm = ({
             notification={notification}
             onCancel={onCancel}
             onSubmitted={onSubmitted}
+            onActionsReady={onActionsReady}
         />
     )
 }

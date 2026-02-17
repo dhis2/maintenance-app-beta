@@ -1,8 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, IconAdd16, NoticeBox } from '@dhis2/ui'
-import React from 'react'
+import React, { useState } from 'react'
 import { useFieldArray } from 'react-final-form-arrays'
 import {
+    DrawerFooter,
     DrawerPortal,
     SectionedFormSection,
     StandardFormSectionDescription,
@@ -13,6 +14,7 @@ import { SchemaName } from '../../../types'
 import { Access, DisplayableModel } from '../../../types/models'
 import {
     EditOrNewNotificationForm,
+    NotificationFormActions,
     SubmittedNotificationFormValues,
 } from './programNotification/NotificationForm'
 import css from './ProgramStagesForm.module.css'
@@ -49,6 +51,8 @@ const NotificationListNewOrEdit = () => {
     const [notificationFormOpen, setNotificationFormOpen] = React.useState<
         DisplayableModel | null | undefined
     >()
+    const [formActions, setFormActions] =
+        useState<NotificationFormActions | null>(null)
     const isNotificationFormOpen =
         !!notificationFormOpen || notificationFormOpen === null
 
@@ -81,22 +85,53 @@ const NotificationListNewOrEdit = () => {
 
     const onCloseNotificationForm = () => {
         setNotificationFormOpen(undefined)
+        setFormActions(null)
     }
+
+    const notificationFormFooter = formActions && (
+        <DrawerFooter
+            actions={[
+                {
+                    label: i18n.t('Save notification and close'),
+                    onClick: formActions.saveAndClose,
+                    primary: true,
+                },
+                {
+                    label: i18n.t('Save notification'),
+                    onClick: formActions.save,
+                    secondary: true,
+                },
+                {
+                    label: i18n.t('Cancel'),
+                    onClick: onCloseNotificationForm,
+                    secondary: true,
+                },
+            ]}
+            infoMessage={i18n.t(
+                'Saving a notification does not save other changes to the program'
+            )}
+        />
+    )
 
     return (
         <>
             <DrawerPortal
                 isOpen={isNotificationFormOpen}
                 onClose={onCloseNotificationForm}
+                header={
+                    notificationFormOpen === null
+                        ? i18n.t('New notification')
+                        : i18n.t('Edit notification')
+                }
+                footer={notificationFormFooter}
             >
                 {notificationFormOpen !== undefined && (
-                    <div>
-                        <EditOrNewNotificationForm
-                            notification={notificationFormOpen}
-                            onCancel={onCloseNotificationForm}
-                            onSubmitted={handleSubmittedNotification}
-                        />
-                    </div>
+                    <EditOrNewNotificationForm
+                        notification={notificationFormOpen}
+                        onCancel={onCloseNotificationForm}
+                        onSubmitted={handleSubmittedNotification}
+                        onActionsReady={setFormActions}
+                    />
                 )}
             </DrawerPortal>
 

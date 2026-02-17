@@ -67,21 +67,19 @@ export type DataSetSectionFormProps = {
 } & Pick<FormBaseProps<PartialSectionFormValues>, 'onSubmit'>
 
 const DataSetSectionFormInner = ({
-    onActionsReadyRef,
+    onActionsReady,
 }: {
-    onActionsReadyRef: React.RefObject<
-        ((actions: SectionFormActions) => void) | undefined
-    >
+    onActionsReady?: (actions: SectionFormActions) => void
 }) => {
     const form = useForm()
 
     useEffect(() => {
-        onActionsReadyRef.current?.({
+        onActionsReady?.({
             save: () => {
                 form.submit()
             },
         })
-    }, [form, onActionsReadyRef])
+    }, [form, onActionsReady])
 
     return <DataSetSectionFormContents />
 }
@@ -121,9 +119,6 @@ export const DataSetSectionForm = ({
         },
         [dataSetId]
     )
-    const onActionsReadyRef = React.useRef(onActionsReady)
-    onActionsReadyRef.current = onActionsReady
-
     return (
         <FormBase
             initialValues={{ ...initialValues, dataSet: { id: dataSetId } }}
@@ -132,7 +127,7 @@ export const DataSetSectionForm = ({
             includeAttributes={false}
             mutators={{ ...arrayMutators }}
         >
-            <DataSetSectionFormInner onActionsReadyRef={onActionsReadyRef} />
+            <DataSetSectionFormInner onActionsReady={onActionsReady} />
         </FormBase>
     )
 }

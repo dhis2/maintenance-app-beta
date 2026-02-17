@@ -203,7 +203,7 @@ const ProgramStageListNewOrEdit = () => {
                     })}
                 </div>
 
-                <div>
+                <div className={css.actions}>
                     <Button
                         secondary
                         small

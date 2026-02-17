@@ -43,11 +43,9 @@ export type OptionFormActions = {
 }
 
 const OptionFormContentsInner = ({
-    onActionsReadyRef,
+    onActionsReady,
 }: {
-    onActionsReadyRef: React.RefObject<
-        ((actions: OptionFormActions) => void) | undefined
-    >
+    onActionsReady?: (actions: OptionFormActions) => void
 }) => {
     const form = useForm()
     const { submitting } = useFormState({
@@ -55,13 +53,13 @@ const OptionFormContentsInner = ({
     })
 
     useEffect(() => {
-        onActionsReadyRef.current?.({
+        onActionsReady?.({
             save: () => {
                 form.submit()
             },
             submitting: submitting ?? false,
         })
-    }, [form, submitting, onActionsReadyRef])
+    }, [form, submitting, onActionsReady])
 
     return <OptionFormContents />
 }
@@ -169,9 +167,6 @@ export const OptionForm = ({
         [optionSetId]
     )
 
-    const onActionsReadyRef = React.useRef(onActionsReady)
-    onActionsReadyRef.current = onActionsReady
-
     return (
         <FormBase
             modelName={optionSchemaSection.name}
@@ -181,7 +176,7 @@ export const OptionForm = ({
             includeAttributes={true}
             mutators={{ ...arrayMutators }}
         >
-            <OptionFormContentsInner onActionsReadyRef={onActionsReadyRef} />
+            <OptionFormContentsInner onActionsReady={onActionsReady} />
             <SectionedFormErrorNotice />
         </FormBase>
     )
