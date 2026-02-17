@@ -1,4 +1,4 @@
-import { useAlert } from '@dhis2/app-runtime'
+import { useAlert, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip } from '@dhis2/ui'
 import { IconInfo16 } from '@dhis2/ui-icons'
@@ -24,6 +24,7 @@ import {
     SchemaName,
     SchemaSection,
     SectionedFormProvider,
+    SECTIONS_MAP,
     useBoundResourceQueryFn,
     useCreateModel,
     usePatchModel,
@@ -81,6 +82,8 @@ type OnSubmitWithClose = (
     options?: Parameters<BaseOnSubmit>[2],
     closeOnSubmit?: boolean
 ) => ReturnType<BaseOnSubmit>
+
+const EMPTY_NOTIFICATION_LIST: { id: string }[] = []
 
 export type NotificationFormActions = {
     save: () => void
@@ -329,6 +332,7 @@ export const NewNotificationForm = ({
     onCancel,
     onSubmitted,
     onActionsReady,
+    notificationList = EMPTY_NOTIFICATION_LIST,
 }: {
     onCancel: () => void
     onSubmitted: (
@@ -336,8 +340,11 @@ export const NewNotificationForm = ({
         closeOnSubmit: boolean
     ) => void
     onActionsReady?: (actions: NotificationFormActions) => void
+    notificationList?: { id: string }[]
 }) => {
     const handleCreate = useCreateModel(notificationSchemaSection.namePlural)
+    const engine = useDataEngine()
+
     const onFormSubmit: OnSubmitWithClose = async (
         values,
         b,
@@ -349,6 +356,27 @@ export const NewNotificationForm = ({
             return createFormError(res.error)
         }
         const newId = (res.data as { response: { uid: string } }).response.uid
+
+        if (values.program?.id) {
+            const patchOperations = {
+                type: 'json-patch',
+                resource: SECTIONS_MAP.program.namePlural,
+                id: values.program.id,
+                data: [
+                    {
+                        op: 'replace',
+                        path: '/notificationTemplates',
+                        value: [...notificationList, { id: newId }],
+                    },
+                ],
+            } as const
+            try {
+                await engine.mutate(patchOperations)
+            } catch (error) {
+                return createFormError(error)
+            }
+        }
+
         onSubmitted?.(
             {
                 ...values,
@@ -375,6 +403,7 @@ export const EditOrNewNotificationForm = ({
     onCancel,
     onSubmitted,
     onActionsReady,
+    notificationList = EMPTY_NOTIFICATION_LIST,
 }: {
     notification: DisplayableModel | null | undefined
     onCancel: () => void
@@ -383,6 +412,7 @@ export const EditOrNewNotificationForm = ({
         closeOnSubmit: boolean
     ) => void
     onActionsReady?: (actions: NotificationFormActions) => void
+    notificationList?: { id: string }[]
 }) => {
     if (notification === undefined) {
         return null
@@ -394,6 +424,7 @@ export const EditOrNewNotificationForm = ({
                 onSubmitted={onSubmitted}
                 onCancel={onCancel}
                 onActionsReady={onActionsReady}
+                notificationList={notificationList}
             />
         )
     }

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-17T09:06:54.329Z\n"
-"PO-Revision-Date: 2026-02-17T09:06:54.329Z\n"
+"POT-Creation-Date: 2026-02-17T11:00:13.245Z\n"
+"PO-Revision-Date: 2026-02-17T11:00:13.245Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -627,12 +627,14 @@ msgstr ""
 msgid "Short name"
 msgstr "Short name"
 
-msgid ""
-"Select the kind of data this attribute collects. If you have chosen an "
-"Option set, this will be set automatically."
-msgstr ""
-"Select the kind of data this attribute collects. If you have chosen an "
-"Option set, this will be set automatically."
+msgid "variable"
+msgstr "variable"
+
+msgid "If you have chosen an Option set, this will be set automatically."
+msgstr "If you have chosen an Option set, this will be set automatically."
+
+msgid "Select the kind of data this {{objectType}} collects.{{optionSetSuffix}}"
+msgstr "Select the kind of data this {{objectType}} collects.{{optionSetSuffix}}"
 
 msgid ""
 "Disabled as the value type must match the value type of the selected option "
@@ -4644,6 +4646,21 @@ msgstr "Display enrolled TEs in the front page list"
 msgid "Set up notifications for this program."
 msgstr "Set up notifications for this program."
 
+msgid "Save notification and close"
+msgstr "Save notification and close"
+
+msgid "Save notification"
+msgstr "Save notification"
+
+msgid "Saving a notification does not save other changes to the program"
+msgstr "Saving a notification does not save other changes to the program"
+
+msgid "New notification"
+msgstr "New notification"
+
+msgid "Edit notification"
+msgstr "Edit notification"
+
 msgid "No notifications been added yet"
 msgstr "No notifications been added yet"
 
@@ -4763,15 +4780,6 @@ msgstr "Access and Sharing"
 
 msgid "Notification"
 msgstr "Notification"
-
-msgid "Save notification and close"
-msgstr "Save notification and close"
-
-msgid "Save notification"
-msgstr "Save notification"
-
-msgid "Saving a notification does not save other changes to the program"
-msgstr "Saving a notification does not save other changes to the program"
 
 msgid "Notification form saved"
 msgstr "Notification form saved"
