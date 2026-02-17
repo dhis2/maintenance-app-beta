@@ -86,7 +86,7 @@ export const Component = () => {
                 .programRuleActions || []) as ProgramRuleActionListItem[]
 
             const actionsChanged =
-                deletedActions.length > 0 &&
+                deletedActions.length > 0 ||
                 nonDeletedActions.length !== originalActions.length
 
             const dirtyFields = Object.fromEntries(

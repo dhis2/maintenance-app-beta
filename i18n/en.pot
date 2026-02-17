@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-11T09:18:24.281Z\n"
-"PO-Revision-Date: 2026-02-11T09:18:24.281Z\n"
+"POT-Creation-Date: 2026-02-17T17:08:26.552Z\n"
+"PO-Revision-Date: 2026-02-17T17:08:26.552Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -60,6 +60,12 @@ msgstr "Overview"
 msgid "Search menu items"
 msgstr "Search menu items"
 
+msgid "Remove color"
+msgstr "Remove color"
+
+msgid "Choose an icon"
+msgstr "Choose an icon"
+
 msgid "All"
 msgstr "All"
 
@@ -75,11 +81,11 @@ msgstr "Outline"
 msgid "Search icons"
 msgstr "Search icons"
 
-msgid "No icons match the search."
-msgstr "No icons match the search."
+msgid "No icons found"
+msgstr "No icons found"
 
-msgid "Select"
-msgstr "Select"
+msgid "Choose icon"
+msgstr "Choose icon"
 
 msgid "Remove icon"
 msgstr "Remove icon"
@@ -342,8 +348,14 @@ msgstr "Current date"
 msgid "Due date"
 msgstr "Due date"
 
+msgid "Enrollment status"
+msgstr "Enrollment status"
+
 msgid "Event date"
 msgstr "Event date"
+
+msgid "Event status"
+msgstr "Event status"
 
 msgid "Program stage id"
 msgstr "Program stage id"
@@ -848,8 +860,14 @@ msgstr "An unknown error occurred"
 msgid "Failed to update sharing"
 msgstr "Failed to update sharing"
 
+msgid "Update public sharing"
+msgstr "Update public sharing"
+
 msgid "Update sharing for users and groups"
 msgstr "Update sharing for users and groups"
+
+msgid "Public sharing"
+msgstr "Public sharing"
 
 msgid "User or group"
 msgstr "User or group"
@@ -3463,6 +3481,9 @@ msgstr "Option Set"
 msgid "Set up the information for this option."
 msgstr "Set up the information for this option."
 
+msgid "Explain the purpose of this option."
+msgstr "Explain the purpose of this option."
+
 msgid "Save option"
 msgstr "Save option"
 
@@ -4027,6 +4048,24 @@ msgstr "Sends a notification when a validation rule failed."
 msgid "Manage"
 msgstr "Manage"
 
+msgid "Set up the basic information for this predictor group."
+msgstr "Set up the basic information for this predictor group."
+
+msgid "Choose the predictors to include in this predictor group."
+msgstr "Choose the predictors to include in this predictor group."
+
+msgid "Available predictors"
+msgstr "Available predictors"
+
+msgid "Selected predictors"
+msgstr "Selected predictors"
+
+msgid "Filter available predictors"
+msgstr "Filter available predictors"
+
+msgid "Filter selected predictors"
+msgstr "Filter selected predictors"
+
 msgid "Predictor run started successfully"
 msgstr "Predictor run started successfully"
 
@@ -4424,8 +4463,8 @@ msgstr "Set up condition expression"
 msgid "Feedback"
 msgstr "Feedback"
 
-msgid "Display widget"
-msgstr "Display widget"
+msgid "Display widget (required)"
+msgstr "Display widget (required)"
 
 msgid "Can be 0 or negative. Leave empty if not needed."
 msgstr "Can be 0 or negative. Leave empty if not needed."
@@ -4461,6 +4500,9 @@ msgstr "Explain the purpose of this program rule. Not shown with rule output."
 msgid "Set up the expression that checks when this program rule runs."
 msgstr "Set up the expression that checks when this program rule runs."
 
+msgid "Program rule action saved"
+msgstr "Program rule action saved"
+
 msgid "Edit action"
 msgstr "Edit action"
 
@@ -4470,8 +4512,8 @@ msgstr "Add action"
 msgid "Configure the program rule action."
 msgstr "Configure the program rule action."
 
-msgid "Action type"
-msgstr "Action type"
+msgid "Action type (required)"
+msgstr "Action type (required)"
 
 msgid "Save action"
 msgstr "Save action"
@@ -4494,8 +4536,8 @@ msgstr "Data element to assign to"
 msgid "Tracked entity attribute to assign to"
 msgstr "Tracked entity attribute to assign to"
 
-msgid "Expression to evaluate and assign."
-msgstr "Expression to evaluate and assign."
+msgid "Expression to evaluate and assign"
+msgstr "Expression to evaluate and assign"
 
 msgid "Data element to display warning next to"
 msgstr "Data element to display warning next to"
@@ -4509,8 +4551,8 @@ msgstr "Tracked entity attribute to display warning next to"
 msgid "Tracked entity attribute to display error next to"
 msgstr "Tracked entity attribute to display error next to"
 
-msgid "Static text"
-msgstr "Static text"
+msgid "Static text (required)"
+msgstr "Static text (required)"
 
 msgid "Expression to evaluate and display after static text."
 msgstr "Expression to evaluate and display after static text."
@@ -4520,6 +4562,9 @@ msgstr "Key label"
 
 msgid "Expression to evaluate and display as value."
 msgstr "Expression to evaluate and display as value."
+
+msgid "Static text"
+msgstr "Static text"
 
 msgid "Data element to hide"
 msgstr "Data element to hide"
@@ -4536,6 +4581,9 @@ msgstr "Option to hide"
 msgid "Option group to hide"
 msgstr "Option group to hide"
 
+msgid "Program rule variable for scheduled date"
+msgstr "Program rule variable for scheduled date"
+
 msgid "Date to send message."
 msgstr "Date to send message."
 
@@ -4544,9 +4592,6 @@ msgstr "Option group to show"
 
 msgid "Assign value"
 msgstr "Assign value"
-
-msgid "Create event"
-msgstr "Create event"
 
 msgid "Display key-value pair"
 msgstr "Display key-value pair"
@@ -4571,6 +4616,9 @@ msgstr "Hide program stage"
 
 msgid "Hide section"
 msgstr "Hide section"
+
+msgid "Schedule event"
+msgstr "Schedule event"
 
 msgid "Schedule message"
 msgstr "Schedule message"
@@ -4639,6 +4687,57 @@ msgstr "Option group is required"
 
 msgid "Static text is required"
 msgstr "Static text is required"
+
+msgid "Show warning: {{content}} on {{target}}"
+msgstr "Show warning: {{content}} on {{target}}"
+
+msgid "Show error: {{content}} on {{target}}"
+msgstr "Show error: {{content}} on {{target}}"
+
+msgid "Warning on complete: {{content}} on {{target}}"
+msgstr "Warning on complete: {{content}} on {{target}}"
+
+msgid "Error on complete: {{content}} on {{target}}"
+msgstr "Error on complete: {{content}} on {{target}}"
+
+msgid "Display text: {{content}} on {{location}}"
+msgstr "Display text: {{content}} on {{location}}"
+
+msgid "Display key-value pair: {{content}} on {{location}}"
+msgstr "Display key-value pair: {{content}} on {{location}}"
+
+msgid "Hide field: {{target}}"
+msgstr "Hide field: {{target}}"
+
+msgid "Set mandatory field: {{target}}"
+msgstr "Set mandatory field: {{target}}"
+
+msgid "Hide section: {{section}}"
+msgstr "Hide section: {{section}}"
+
+msgid "Hide program stage: {{stage}}"
+msgstr "Hide program stage: {{stage}}"
+
+msgid "Assign: {{data}} to field {{target}}"
+msgstr "Assign: {{data}} to field {{target}}"
+
+msgid "Schedule event in program stage: {{stage}} at date {{data}}"
+msgstr "Schedule event in program stage: {{stage}} at date {{data}}"
+
+msgid "Schedule message: {{template}} at date {{data}}"
+msgstr "Schedule message: {{template}} at date {{data}}"
+
+msgid "Send message: {{template}}"
+msgstr "Send message: {{template}}"
+
+msgid "Hide option: {{option}} on {{target}}"
+msgstr "Hide option: {{option}} on {{target}}"
+
+msgid "Show option group: {{group}} on {{target}}"
+msgstr "Show option group: {{group}} on {{target}}"
+
+msgid "Hide option group: {{group}} on {{target}}"
+msgstr "Hide option group: {{group}} on {{target}}"
 
 msgid "Unknown action type"
 msgstr "Unknown action type"
