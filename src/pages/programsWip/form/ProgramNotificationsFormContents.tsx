@@ -99,6 +99,13 @@ const StageNotificationListNewOrEdit = ({
     )
 }
 
+function replaceAtIndex<T>(array: T[], index: number, value: T): T[] {
+    if (index < 0 || index >= array.length) {
+        return array
+    }
+    return [...array.slice(0, index), value, ...array.slice(index + 1)]
+}
+
 const NotificationListNewOrEdit = () => {
     const { values } = useFormState({ subscription: { values: true } })
 
@@ -119,13 +126,6 @@ const NotificationListNewOrEdit = () => {
 
     const onCloseNotificationForm = () => {
         setNotificationFormOpen(undefined)
-    }
-
-    function replaceAtIndex<T>(array: T[], index: number, value: T): T[] {
-        if (index < 0 || index >= array.length) {
-            return array
-        }
-        return [...array.slice(0, index), value, ...array.slice(index + 1)]
     }
 
     const handleSubmittedNotification = (
