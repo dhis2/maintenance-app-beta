@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, IconAdd16, NoticeBox } from '@dhis2/ui'
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import { useFormState } from 'react-final-form'
 import { useFieldArray } from 'react-final-form-arrays'
 import { useParams } from 'react-router-dom'
@@ -190,8 +190,6 @@ const StageNotificationListNewOrEdit = ({
 }) => {
     const stagesFieldArray =
         useFieldArray<ProgramStageListItem>('programStages').fields
-    // const [stageNotificationsFieldArray, setStageNotificationsFieldArray] =
-    //     useState<ProgramStageListItem[]>(stage.notificationTemplates || [])
     const isNotificationFormOpen =
         !!notificationFormOpen || notificationFormOpen === null
     const notificationsArray =
@@ -219,7 +217,7 @@ const StageNotificationListNewOrEdit = ({
             if (index !== -1) {
                 const updatedStageNotifications = [
                     ...notificationsArray.slice(0, index),
-                    values,
+                    { ...values, name: values?.name ?? values.displayName },
                     ...notificationsArray.slice(index + 1),
                 ]
                 stagesFieldArray.update(stageIndex, {
@@ -228,7 +226,10 @@ const StageNotificationListNewOrEdit = ({
                 })
             }
         } else {
-            const updatedStageNotifications = [...notificationsArray, values]
+            const updatedStageNotifications = [
+                ...notificationsArray,
+                { ...values, name: values?.name ?? values.displayName },
+            ]
             stagesFieldArray.update(stageIndex, {
                 ...stage,
                 notificationTemplates: updatedStageNotifications,
@@ -237,17 +238,11 @@ const StageNotificationListNewOrEdit = ({
     }
 
     const handleDeletedProgramStageNotification = (index: number) => {
-        // const updatedStageNotifications = [
-        //     ...stageNotificationsFieldArray.slice(0, index),
-        //     { ...stageNotificationsFieldArray[index], deleted: true },
-        //     ...stageNotificationsFieldArray.slice(index + 1),
-        // ]
         const updatedStageNotifications = [
             ...notificationsArray.slice(0, index),
             { ...notificationsArray[index], deleted: true },
             ...notificationsArray.slice(index + 1),
         ]
-        // setStageNotificationsFieldArray(updatedStageNotifications)
         stagesFieldArray.update(stageIndex, {
             ...stage,
             notificationTemplates: updatedStageNotifications,
@@ -260,7 +255,6 @@ const StageNotificationListNewOrEdit = ({
             { ...notificationsArray[index], deleted: false },
             ...notificationsArray.slice(index + 1),
         ]
-        // setStageNotificationsFieldArray(updatedStageNotifications)
         stagesFieldArray.update(stageIndex, {
             ...stage,
             notificationTemplates: updatedStageNotifications,
@@ -324,7 +318,6 @@ const StageNotificationListNewOrEdit = ({
 const NotificationListNewOrEdit = () => {
     const modelId = useParams().id as string
     const { values } = useFormState({ subscription: { values: true } })
-    console.log('values', values)
     // TODO: might want to show the to be deleted notification with a warning instead
     const stages: ProgramStageListItem[] =
         values.programStages?.filter(
