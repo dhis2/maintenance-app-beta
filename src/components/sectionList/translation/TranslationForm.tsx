@@ -66,7 +66,9 @@ export const TranslationForm = ({
         ({ isSuccess }) => (isSuccess ? { success: true } : { critical: true })
     )
 
+    console.log('schema', schema)
     const translatableFields = getTranslateableFieldsForSchema(schema)
+    console.log('translatableFields', translatableFields)
 
     const { data: baseReferenceValues } = useBaseReferenceValues({
         modelNamePlural: schema.plural,

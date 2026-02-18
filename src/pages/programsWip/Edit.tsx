@@ -22,12 +22,16 @@ import {
     SECTIONS_MAP,
     useBoundResourceQueryFn,
     useOnSubmitEdit,
+    createJsonPatchOperations,
+    usePatchModel,
+    parseErrorResponse,
 } from '../../lib'
 import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
 import { PickWithFieldFilters, Program } from '../../types/generated'
 import { validate } from './form'
 import { ProgramFormDescriptor } from './form/formDescriptor'
 import { ProgramFormContents } from './form/ProgramFormContents'
+import { stageSchemaSection } from './form/programStage/StageForm'
 import { ProgramStageListItem } from './form/ProgramStagesFormContents'
 
 const fieldFilters = [
@@ -94,6 +98,103 @@ export const programValueFormatter = <TValues extends Partial<ProgramValues>>(
     return omit(values, 'programSections')
 }
 
+const createPatchQuery = (id: string, resource: string) => {
+    return {
+        resource: resource,
+        id: id,
+        type: 'json-patch',
+        data: ({ operations }: Record<string, string>) => operations,
+    } as const
+}
+
+const handlePatch = async ({
+    id,
+    resource,
+    dataEngine,
+    operations,
+}: {
+    id: string
+    resource: string
+    dataEngine: any
+    operations: any
+}) => {
+    const query = createPatchQuery(id, resource)
+
+    return await dataEngine.mutate(query, {
+        variables: { operations },
+    })
+}
+
+const handleStageNotificationDeletions = async ({
+    stages,
+    dataEngine,
+    form,
+}: {
+    stages: ProgramStageListItem[]
+    dataEngine: any
+    form: any
+}): Promise<string[]> => {
+    // loop over any stages that have notifications marked as deleted
+    const stagesWithNotificationDeletes = stages.filter((s) =>
+        s.notificationTemplates?.some((nt) => nt.deleted)
+    )
+    if (stagesWithNotificationDeletes.length === 0) {
+        return []
+    }
+    const stageToUpdate = stagesWithNotificationDeletes[0]
+
+    const stagesUpdateResults = await Promise.allSettled(
+        stagesWithNotificationDeletes.map((s) => {
+            const notificationTemplates =
+                stageToUpdate?.notificationTemplates ?? []
+            const jsonPatchOperations = createJsonPatchOperations({
+                values: {
+                    notificationTemplates: notificationTemplates.filter(
+                        (nt) => !nt.deleted
+                    ),
+                },
+                dirtyFields: { notificationTemplates: true },
+                originalValue: notificationTemplates,
+            })
+            return handlePatch({
+                id: stageToUpdate.id,
+                resource: stageSchemaSection.namePlural,
+                dataEngine: dataEngine,
+                operations: jsonPatchOperations,
+            })
+        })
+    )
+
+    const stagesUpdateDetails = stagesUpdateResults.map((update, i) => ({
+        ...update,
+        stageName: stagesWithNotificationDeletes[i].displayName,
+        stageId: stagesWithNotificationDeletes[i].id,
+    }))
+
+    // manually update the form for any stages that succeeded to be reflected in the UI
+    const stagesForUI = stages.map((stage) => {
+        if (
+            stagesUpdateDetails.find((s) => s.stageId === stage.id)?.status ===
+            'fulfilled'
+        ) {
+            return {
+                ...stage,
+                notificationTemplates: stage.notificationTemplates?.filter(
+                    (nt) => !nt.deleted
+                ),
+            }
+        }
+        return stage
+    })
+    form.change('programStages', stagesForUI)
+
+    const stagesUpdateFailures = stagesUpdateDetails.filter(
+        (update) => update.status === 'rejected'
+    )
+
+    return stagesUpdateFailures.map((failure) => failure.stageName)
+}
+
 export const useOnSubmitProgramEdit = (modelId: string) => {
     const submitEdit: EnhancedOnSubmit<ProgramValues> = useOnSubmitEdit({
         section,
@@ -115,8 +216,32 @@ export const useOnSubmitProgramEdit = (modelId: string) => {
             const sections: Array<Section> = formValues.programSections
             const dataEntryForm: DataEntryForm = formValues.dataEntryForm
             const stages: ProgramStageListItem[] = formValues.programStages
+            const notificationTemplates: any[] =
+                formValues.notificationTemplates
 
             const stagesToDelete = stages.filter((stage) => stage.deleted)
+            const stagesToKeep = stages.filter((stage) => !stage.deleted)
+            const stageUpdateFailures = await handleStageNotificationDeletions({
+                stages: stagesToKeep,
+                dataEngine: dataEngine,
+                form,
+            })
+
+            if (stageUpdateFailures.length > 0) {
+                await queryClient.invalidateQueries({
+                    queryKey: [{ resource: 'programStages' }],
+                })
+                return createFormError({
+                    message: i18n.t(
+                        'There was an error updating notification templates for some stages: {{stagesNames}}',
+                        {
+                            stagesNames: stageUpdateFailures.join(', '),
+                            nsSeparator: '~-~',
+                        }
+                    ),
+                })
+            }
+
             const stagesDeletionResults = await Promise.allSettled(
                 stagesToDelete.map((s) =>
                     dataEngine.mutate({
@@ -159,6 +284,7 @@ export const useOnSubmitProgramEdit = (modelId: string) => {
             if (error) {
                 return error
             }
+
             const trimmedValues = {
                 ...values,
                 programSections: sections.filter((section) => !section.deleted),
@@ -168,6 +294,9 @@ export const useOnSubmitProgramEdit = (modelId: string) => {
                     customFormDeleteResult?.[0]?.status !== 'rejected'
                         ? null
                         : values.dataEntryForm,
+                notificationTemplates: notificationTemplates.filter(
+                    (nTemplate) => !nTemplate.deleted
+                ),
             } as ProgramValues
 
             return submitEdit(trimmedValues, form, options)
