@@ -25,6 +25,7 @@ export type ProgramStageListItem = {
     deleted?: boolean
     access?: Access
     program?: { id: string }
+    notificationTemplates?: { id: string; name: string; displayName: string }[]
 }
 
 export const ProgramStagesFormContents = React.memo(
