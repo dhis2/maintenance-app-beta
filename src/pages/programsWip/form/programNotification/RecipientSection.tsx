@@ -4,7 +4,7 @@ import {
     SingleSelectFieldFF,
     TextAreaFieldFF,
 } from '@dhis2/ui'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import {
     useField,
     Field as FieldRFF,
@@ -16,7 +16,7 @@ import { ModelSingleSelectFormField } from '../../../../components/metadataFormC
 import { getConstantTranslation } from '../../../../lib'
 import { DeliveryChannelsField } from '../../../dataSetNotificationTemplates/form/DeliveryChannelsField'
 
-export const recipientOptions = [
+const programRecipientOptions = [
     {
         label: getConstantTranslation('TRACKED_ENTITY_INSTANCE'),
         value: 'TRACKED_ENTITY_INSTANCE',
@@ -37,6 +37,11 @@ export const recipientOptions = [
     { label: getConstantTranslation('WEB_HOOK'), value: 'WEB_HOOK' },
 ]
 
+const programStageRecipientOptions = [
+    ...programRecipientOptions,
+    { label: getConstantTranslation('DATA_ELEMENT'), value: 'DATA_ELEMENT' },
+]
+
 type ProgramTrackedEntityAttribute = {
     id: string
     trackedEntityAttribute: {
@@ -52,15 +57,27 @@ type ProgramWithTEAs = {
     programTrackedEntityAttributes?: ProgramTrackedEntityAttribute[]
 }
 
-export const RecipientSection = () => {
+type ProgramStageWithDEs = {
+    // id: string
+    // displayName: string
+    programStageDataElements?: {
+        dataElement: { id: string; valueType: string; displayName: string }
+    }[]
+}
+
+export const RecipientSection = ({
+    isStageNotification,
+}: {
+    isStageNotification: boolean
+}) => {
     const { input: recipientInput, meta: recipientMeta } = useField(
         'notificationRecipient',
         {
             subscription: { value: true },
         }
     )
-    const { initialValues } = useFormState({
-        subscription: { initialValues: true },
+    const { initialValues, values } = useFormState({
+        subscription: { initialValues: true, values: true },
     })
     const form = useForm()
 
@@ -83,6 +100,22 @@ export const RecipientSection = () => {
         }
     }, [recipientInput.value, form, shouldIncludeDeliveryChannel])
 
+    useEffect(() => {
+        if (!isStageNotification && recipientInput.value === 'DATA_ELEMENT') {
+            form.change('notificationRecipient', undefined)
+        }
+    }, [isStageNotification, recipientInput, form])
+
+    const recipientOptions = useMemo(() => {
+        console.log(
+            "*****isStageNotification || recipientInput.value === 'DATA_ELEMENT'",
+            isStageNotification || recipientInput.value === 'DATA_ELEMENT'
+        )
+        return isStageNotification || recipientInput.value === 'DATA_ELEMENT'
+            ? programStageRecipientOptions
+            : programRecipientOptions
+    }, [isStageNotification, recipientInput.value])
+
     return (
         <div>
             <StandardFormField>
@@ -104,7 +137,7 @@ export const RecipientSection = () => {
                         <ModelSingleSelectFormField
                             name="recipientProgramAttribute"
                             dataTest="formfields-recipientProgramAttribute"
-                            label={i18n.t('Program attribute Recipient')}
+                            label={i18n.t('Program attribute recipient')}
                             query={{
                                 resource: 'programs',
                                 params: {
@@ -141,6 +174,52 @@ export const RecipientSection = () => {
                     </div>
                 </StandardFormField>
             )}
+
+            {recipientInput.value === 'DATA_ELEMENT' &&
+                values?.programStage?.id && (
+                    <StandardFormField>
+                        <div style={{ width: '400px' }}>
+                            <ModelSingleSelectFormField
+                                name="recipientDataElement"
+                                dataTest="formfields-recipientDataElement"
+                                label={i18n.t('Data element recipient')}
+                                query={{
+                                    resource: 'programStages',
+                                    params: {
+                                        fields: [
+                                            'programStageDataElements[valueType,dataElement[id,displayName,valueType]',
+                                        ],
+                                        filter: [
+                                            `id:eq:${values?.programStage.id}`,
+                                        ],
+                                    },
+                                }}
+                                clearable={true}
+                                transform={(programStageDEs) => {
+                                    const stage = programStageDEs[0] as
+                                        | ProgramStageWithDEs
+                                        | undefined
+
+                                    return (
+                                        stage?.programStageDataElements
+                                            ?.filter((x) =>
+                                                [
+                                                    'PHONE_NUMBER',
+                                                    'EMAIL',
+                                                ].includes(
+                                                    x.dataElement.valueType
+                                                )
+                                            )
+                                            .map((x) => x.dataElement) || []
+                                    )
+                                }}
+                                noMatchWithoutFilterText={i18n.t(
+                                    'No data elements of type email or phone number found.'
+                                )}
+                            />
+                        </div>
+                    </StandardFormField>
+                )}
             {recipientInput.value === 'USER_GROUP' && (
                 <>
                     <StandardFormField>
