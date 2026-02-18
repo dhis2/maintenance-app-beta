@@ -3,7 +3,7 @@ import { FocusTrap } from 'focus-trap-react'
 import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { DRAWER_PORTAL_ID, type DrawerLevel } from '../../lib/constants'
-import { useDrawerOverlayStyles, useEscapeKeyHandler } from '../../lib/drawer'
+import { useSystemSettingsStore } from '../../lib/systemSettings'
 import css from './Drawer.module.css'
 import { DrawerHeader } from './DrawerHeader'
 
@@ -23,7 +23,10 @@ export const Drawer: React.FC<DrawerProps> = ({
     header,
     footer,
 }) => {
-    const overlayStyle = useDrawerOverlayStyles()
+    const globalShellEnabled =
+        useSystemSettingsStore(
+            (state) => state.systemSettings?.globalShellEnabled
+        ) ?? false
 
     const handleOverlayClick = () => {
         onClose()
@@ -35,9 +38,11 @@ export const Drawer: React.FC<DrawerProps> = ({
 
     return (
         <div
-            className={cx(css.drawerOverlay, { [css.open]: isOpen })}
+            className={cx(css.drawerOverlay, {
+                [css.open]: isOpen,
+                [css.legacyShell]: !globalShellEnabled,
+            })}
             onClick={handleOverlayClick}
-            style={overlayStyle}
             role="dialog"
             aria-modal="true"
             aria-hidden={!isOpen}
@@ -73,7 +78,15 @@ interface DrawerContentsProps {
 
 const DrawerContents = React.forwardRef<HTMLDivElement, DrawerContentsProps>(
     function DrawerContents({ children, onClose, header, footer }, ref) {
-        useEscapeKeyHandler(onClose, true)
+        useEffect(() => {
+            const onKeyDown = (e: KeyboardEvent) => {
+                if (e.key === 'Escape') {
+                    onClose()
+                }
+            }
+            document.addEventListener('keydown', onKeyDown)
+            return () => document.removeEventListener('keydown', onKeyDown)
+        }, [onClose])
 
         return (
             <FocusTrap
