@@ -1,7 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, IconAdd16, NoticeBox } from '@dhis2/ui'
 import React, { Dispatch, SetStateAction } from 'react'
-import { useFormState } from 'react-final-form'
 import { useFieldArray } from 'react-final-form-arrays'
 import { useParams } from 'react-router-dom'
 import {
@@ -163,6 +162,11 @@ const StageNotificationListNewOrEdit = ({
         })
     }
 
+    // TODO: might want to show the to be deleted notification with a warning instead
+    if (stagesFieldArray.value[stageIndex]?.deleted) {
+        return
+    }
+
     return (
         <>
             {notificationsArray.map((notification, index) => {
@@ -197,13 +201,6 @@ const StageNotificationListNewOrEdit = ({
 
 const NotificationListNewOrEdit = () => {
     const modelId = useParams().id as string
-    const { values } = useFormState({ subscription: { values: true } })
-
-    // TODO: might want to show the to be deleted notification with a warning instead
-    const stages: ProgramStageListItem[] =
-        values.programStages?.filter(
-            (stage: ProgramStageListItem) => !stage.deleted
-        ) || []
 
     const stagesFieldArray =
         useFieldArray<ProgramStageListItem>('programStages').fields
@@ -248,17 +245,22 @@ const NotificationListNewOrEdit = () => {
         }
 
         if (!isEditNotification) {
-            const stageIndex = stages.findIndex((s) => s.id === stageId)
+            const stageIndex = stagesFieldArray.value.findIndex(
+                (s) => s.id === stageId
+            )
             if (stageIndex === -1) {
                 return
             }
             const updatedStage = {
-                ...stages[stageIndex],
+                ...stagesFieldArray.value[stageIndex],
                 notificationTemplates: [
-                    ...(stages[stageIndex]?.notificationTemplates || []),
+                    ...(stagesFieldArray.value[stageIndex]
+                        ?.notificationTemplates || []),
                     {
                         ...notificationValues,
-                        name: notificationValues?.name ?? values.displayName,
+                        name:
+                            notificationValues?.name ??
+                            notificationValues.displayName,
                     },
                 ],
             }
@@ -268,12 +270,14 @@ const NotificationListNewOrEdit = () => {
         }
 
         if (stageId) {
-            const stageIndex = stages.findIndex((s) => s.id === stageId)
+            const stageIndex = stagesFieldArray.value.findIndex(
+                (s) => s.id === stageId
+            )
             if (stageIndex === -1) {
                 return
             }
 
-            const stage = stages[stageIndex]
+            const stage = stagesFieldArray.value[stageIndex]
             const stageNotifications = stage.notificationTemplates || []
 
             const notificatiomIndex = (
@@ -340,7 +344,7 @@ const NotificationListNewOrEdit = () => {
                                 (n) => ({ id: n.id })
                             )}
                             stagesNotificationList={Object.fromEntries(
-                                stages.map((stage) => [
+                                stagesFieldArray.value.map((stage) => [
                                     stage.id,
                                     stage.notificationTemplates?.map((n) => ({
                                         id: n.id,
@@ -354,15 +358,18 @@ const NotificationListNewOrEdit = () => {
             </DrawerPortal>
             <div className={css.listWrapper}>
                 <div className={css.sectionItems}>
-                    {stages.every(
-                        (s) => s?.notificationTemplates?.length === 0
+                    {stagesFieldArray.value.every(
+                        (s) =>
+                            !s?.notificationTemplates ||
+                            s?.notificationTemplates?.length === 0 ||
+                            s.deleted
                     ) &&
-                        values?.notificationTemplates?.length === 0 && (
+                        programNotificationsFieldArray.value.length === 0 && (
                             <NoticeBox className={css.formTypeInfo}>
                                 {i18n.t('No notifications have been added yet')}
                             </NoticeBox>
                         )}
-                    {stages.map((stage, index) => (
+                    {stagesFieldArray.value.map((stage, index) => (
                         <StageNotificationListNewOrEdit
                             key={stage.id}
                             setNotificationFormOpen={(notification) =>
