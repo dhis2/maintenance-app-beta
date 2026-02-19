@@ -1,8 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, IconAdd16, NoticeBox } from '@dhis2/ui'
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import { useFormState } from 'react-final-form'
 import { useFieldArray } from 'react-final-form-arrays'
+import { useParams } from 'react-router-dom'
 import {
     DrawerPortal,
     SectionedFormSection,
@@ -42,6 +43,31 @@ export const ProgramNotificationsFormContents = React.memo(
             </SectionedFormSection>
         )
     }
+)
+
+const DeletedItem = ({
+    id,
+    displayName,
+    index,
+    handleCancelDelete,
+}: {
+    id: string
+    displayName: string
+    index: number
+    handleCancelDelete: (index: number) => void
+}) => (
+    <div className={css.stageCardDeleted} key={id}>
+        <div className={css.deletedStageText}>
+            {i18n.t(
+                'Notification {{- notificationName}} will be removed on save',
+                { notificationName: displayName }
+            )}
+        </div>
+
+        <Button small onClick={() => handleCancelDelete(index)}>
+            {i18n.t('Restore notification')}
+        </Button>
+    </div>
 )
 
 const ProgramNotificationListNewOrEdit = ({
@@ -85,6 +111,20 @@ const ProgramNotificationListNewOrEdit = ({
         }
     }
 
+    const handleDeletedProgramNotification = (index: number) => {
+        programNotificationsFieldArray.update(index, {
+            ...programNotificationsFieldArray.value[index],
+            deleted: true,
+        })
+    }
+
+    const handleCancelDeletedProgramNotification = (index: number) => {
+        programNotificationsFieldArray.update(index, {
+            ...programNotificationsFieldArray.value[index],
+            deleted: false,
+        })
+    }
+
     const onCloseNotificationForm = () => {
         setNotificationFormOpen(undefined)
     }
@@ -109,14 +149,27 @@ const ProgramNotificationListNewOrEdit = ({
                 )}
             </DrawerPortal>
 
-            {programNotificationsFieldArray.value.map((notification) => {
+            {programNotificationsFieldArray.value.map((notification, index) => {
+                if (notification.deleted) {
+                    return (
+                        <DeletedItem
+                            key={notification.id}
+                            id={notification.id}
+                            displayName={notification.displayName}
+                            index={index}
+                            handleCancelDelete={
+                                handleCancelDeletedProgramNotification
+                            }
+                        />
+                    )
+                }
                 return (
                     <ListInFormItem
                         key={notification.id}
                         item={notification}
                         schemaName={SchemaName.programNotificationTemplate}
                         onClick={() => setNotificationFormOpen(notification)}
-                        onDelete={() => {}}
+                        onDelete={() => handleDeletedProgramNotification(index)}
                     />
                 )
             })}
@@ -126,19 +179,21 @@ const ProgramNotificationListNewOrEdit = ({
 
 const StageNotificationListNewOrEdit = ({
     stage,
+    stageIndex,
     setNotificationFormOpen,
     notificationFormOpen,
 }: {
     stage: ProgramStageListItem
+    stageIndex: number
     setNotificationFormOpen: Dispatch<SetStateAction<NotificationFormOpen>>
     notificationFormOpen: NotificationFormOpen
 }) => {
-    const [stageNotificationsFieldArray, setStageNotificationsFieldArray] =
-        useState<SubmittedNotificationFormValues[]>(
-            stage.notificationTemplates || []
-        )
+    const stagesFieldArray =
+        useFieldArray<ProgramStageListItem>('programStages').fields
     const isNotificationFormOpen =
         !!notificationFormOpen || notificationFormOpen === null
+    const notificationsArray =
+        stagesFieldArray?.value?.[stageIndex]?.notificationTemplates || []
 
     const handleSubmittedNotification = (
         values: SubmittedNotificationFormValues,
@@ -156,22 +211,54 @@ const StageNotificationListNewOrEdit = ({
             })
         }
         if (isEditNotification) {
-            const index = stageNotificationsFieldArray.findIndex(
+            const index = notificationsArray.findIndex(
                 (s) => s.id === notificationFormOpen.id
             )
             if (index !== -1) {
-                setStageNotificationsFieldArray([
-                    ...stageNotificationsFieldArray.slice(0, index),
-                    values,
-                    ...stageNotificationsFieldArray.slice(index + 1),
-                ])
+                const updatedStageNotifications = [
+                    ...notificationsArray.slice(0, index),
+                    { ...values, name: values?.name ?? values.displayName },
+                    ...notificationsArray.slice(index + 1),
+                ]
+                stagesFieldArray.update(stageIndex, {
+                    ...stage,
+                    notificationTemplates: updatedStageNotifications,
+                })
             }
         } else {
-            setStageNotificationsFieldArray([
-                ...stageNotificationsFieldArray,
-                values,
-            ])
+            const updatedStageNotifications = [
+                ...notificationsArray,
+                { ...values, name: values?.name ?? values.displayName },
+            ]
+            stagesFieldArray.update(stageIndex, {
+                ...stage,
+                notificationTemplates: updatedStageNotifications,
+            })
         }
+    }
+
+    const handleDeletedProgramStageNotification = (index: number) => {
+        const updatedStageNotifications = [
+            ...notificationsArray.slice(0, index),
+            { ...notificationsArray[index], deleted: true },
+            ...notificationsArray.slice(index + 1),
+        ]
+        stagesFieldArray.update(stageIndex, {
+            ...stage,
+            notificationTemplates: updatedStageNotifications,
+        })
+    }
+
+    const handleCancelDeletedProgramStageNotification = (index: number) => {
+        const updatedStageNotifications = [
+            ...notificationsArray.slice(0, index),
+            { ...notificationsArray[index], deleted: false },
+            ...notificationsArray.slice(index + 1),
+        ]
+        stagesFieldArray.update(stageIndex, {
+            ...stage,
+            notificationTemplates: updatedStageNotifications,
+        })
     }
 
     const onCloseNotificationForm = () => {
@@ -190,22 +277,37 @@ const StageNotificationListNewOrEdit = ({
                             notification={notificationFormOpen}
                             onCancel={onCloseNotificationForm}
                             onSubmitted={handleSubmittedNotification}
-                            notificationList={stageNotificationsFieldArray.map(
-                                (n) => ({ id: n.id })
-                            )}
+                            notificationList={notificationsArray.map((n) => ({
+                                id: n.id,
+                            }))}
                         />
                     </div>
                 )}
             </DrawerPortal>
 
-            {stageNotificationsFieldArray.map((notification) => {
+            {notificationsArray.map((notification, index) => {
+                if (notification.deleted) {
+                    return (
+                        <DeletedItem
+                            key={notification.id}
+                            index={index}
+                            id={notification.id}
+                            displayName={notification.displayName}
+                            handleCancelDelete={
+                                handleCancelDeletedProgramStageNotification
+                            }
+                        />
+                    )
+                }
                 return (
                     <ListInFormItem
                         key={notification.id}
                         item={notification}
                         schemaName={SchemaName.programNotificationTemplate}
                         onClick={() => setNotificationFormOpen(notification)}
-                        onDelete={() => {}}
+                        onDelete={() => {
+                            handleDeletedProgramStageNotification(index)
+                        }}
                     />
                 )
             })}
@@ -214,6 +316,7 @@ const StageNotificationListNewOrEdit = ({
 }
 
 const NotificationListNewOrEdit = () => {
+    const modelId = useParams().id as string
     const { values } = useFormState({ subscription: { values: true } })
     // TODO: might want to show the to be deleted notification with a warning instead
     const stages: ProgramStageListItem[] =
@@ -224,6 +327,16 @@ const NotificationListNewOrEdit = () => {
     const [notificationFormOpen, setNotificationFormOpen] =
         React.useState<NotificationFormOpen>()
 
+    if (!modelId) {
+        return (
+            <NoticeBox className={css.formTypeInfo}>
+                {i18n.t(
+                    'Program must be saved before notifications can be added'
+                )}
+            </NoticeBox>
+        )
+    }
+
     return (
         <>
             <div className={css.listWrapper}>
@@ -231,21 +344,22 @@ const NotificationListNewOrEdit = () => {
                     {stages.every(
                         (s) => s?.notificationTemplates?.length === 0
                     ) &&
-                        values.notificationTemplates.length === 0 && (
+                        values?.notificationTemplates?.length === 0 && (
                             <NoticeBox className={css.formTypeInfo}>
-                                {i18n.t('No notifications been added yet')}
+                                {i18n.t('No notifications have been added yet')}
                             </NoticeBox>
                         )}
                     <ProgramNotificationListNewOrEdit
                         setNotificationFormOpen={setNotificationFormOpen}
                         notificationFormOpen={notificationFormOpen}
                     />
-                    {stages.map((stage) => (
+                    {stages.map((stage, index) => (
                         <StageNotificationListNewOrEdit
                             stage={stage}
                             key={stage.id}
                             setNotificationFormOpen={setNotificationFormOpen}
                             notificationFormOpen={notificationFormOpen}
+                            stageIndex={index}
                         />
                     ))}
                 </div>
