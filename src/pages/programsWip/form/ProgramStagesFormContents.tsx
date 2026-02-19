@@ -22,7 +22,9 @@ export type StageNotificationTemplate = {
     id: string
     name: string
     displayName: string
+    deleted?: boolean
 }
+
 export type ProgramStageListItem = {
     id: string
     displayName: string
