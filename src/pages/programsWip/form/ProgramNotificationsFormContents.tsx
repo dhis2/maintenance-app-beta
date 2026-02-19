@@ -4,6 +4,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react'
 import { useFormState } from 'react-final-form'
 import { useFieldArray } from 'react-final-form-arrays'
 import {
+    DrawerHeader,
     DrawerPortal,
     SectionedFormSection,
     StandardFormSectionDescription,
@@ -94,18 +95,23 @@ const ProgramNotificationListNewOrEdit = ({
             <DrawerPortal
                 isOpen={isNotificationFormOpen}
                 onClose={onCloseNotificationForm}
+                header={
+                    <DrawerHeader onClose={onCloseNotificationForm}>
+                        {notificationFormOpen === null
+                            ? i18n.t('New notification')
+                            : i18n.t('Edit notification')}
+                    </DrawerHeader>
+                }
             >
                 {notificationFormOpen !== undefined && (
-                    <div>
-                        <EditOrNewNotificationForm
-                            notification={notificationFormOpen}
-                            onCancel={onCloseNotificationForm}
-                            onSubmitted={handleSubmittedNotification}
-                            notificationList={programNotificationsFieldArray.value.map(
-                                (n) => ({ id: n.id })
-                            )}
-                        />
-                    </div>
+                    <EditOrNewNotificationForm
+                        notification={notificationFormOpen}
+                        onCancel={onCloseNotificationForm}
+                        onSubmitted={handleSubmittedNotification}
+                        notificationList={programNotificationsFieldArray.value.map(
+                            (n) => ({ id: n.id })
+                        )}
+                    />
                 )}
             </DrawerPortal>
 
@@ -183,18 +189,23 @@ const StageNotificationListNewOrEdit = ({
             <DrawerPortal
                 isOpen={isNotificationFormOpen}
                 onClose={onCloseNotificationForm}
+                header={
+                    <DrawerHeader onClose={onCloseNotificationForm}>
+                        {notificationFormOpen === null
+                            ? i18n.t('New notification')
+                            : i18n.t('Edit notification')}
+                    </DrawerHeader>
+                }
             >
                 {notificationFormOpen !== undefined && (
-                    <div>
-                        <EditOrNewNotificationForm
-                            notification={notificationFormOpen}
-                            onCancel={onCloseNotificationForm}
-                            onSubmitted={handleSubmittedNotification}
-                            notificationList={stageNotificationsFieldArray.map(
-                                (n) => ({ id: n.id })
-                            )}
-                        />
-                    </div>
+                    <EditOrNewNotificationForm
+                        notification={notificationFormOpen}
+                        onCancel={onCloseNotificationForm}
+                        onSubmitted={handleSubmittedNotification}
+                        notificationList={stageNotificationsFieldArray.map(
+                            (n) => ({ id: n.id })
+                        )}
+                    />
                 )}
             </DrawerPortal>
 

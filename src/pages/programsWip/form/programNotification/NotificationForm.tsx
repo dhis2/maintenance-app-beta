@@ -6,8 +6,11 @@ import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import isEqual from 'lodash/isEqual'
 import React, { useMemo } from 'react'
+import { useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
+    DrawerBodyLayout,
+    DrawerFormFooter,
     FormBase,
     FormBaseProps,
     FormFooterWrapper,
@@ -73,6 +76,48 @@ type PartialNotificationFormValues = Partial<NotificationFormValues>
 export type SubmittedNotificationFormValues = PartialNotificationFormValues &
     DisplayableModel
 
+const NotificationFormDrawerFooter = ({
+    form,
+    setCloseOnSubmit,
+    onCancel,
+    formContent,
+}: {
+    form: { submit: () => void }
+    setCloseOnSubmit: (value: boolean) => void
+    onCancel: () => void
+    formContent: React.ReactNode
+}) => {
+    const { submitting } = useFormState({
+        subscription: { submitting: true },
+    })
+    return (
+        <DrawerBodyLayout
+            footer={
+                <DrawerFormFooter
+                    submitLabel={i18n.t('Save notification and close')}
+                    saveLabel={i18n.t('Save notification')}
+                    cancelLabel={i18n.t('Cancel')}
+                    submitting={submitting ?? false}
+                    onSubmitClick={() => {
+                        setCloseOnSubmit(true)
+                        form.submit()
+                    }}
+                    onSaveClick={() => {
+                        setCloseOnSubmit(false)
+                        form.submit()
+                    }}
+                    onCancelClick={onCancel}
+                    infoMessage={i18n.t(
+                        'Saving a notification does not save other changes to the program'
+                    )}
+                />
+            }
+        >
+            {formContent}
+        </DrawerBodyLayout>
+    )
+}
+
 type BaseOnSubmit = FormBaseProps<PartialNotificationFormValues>['onSubmit']
 
 type OnSubmitWithClose = (
@@ -122,6 +167,41 @@ export const NotificationForm = ({
             validate={validate}
         >
             {({ handleSubmit, form }) => {
+                const formContent = (
+                    <SectionedFormProvider
+                        formDescriptor={programNotificationFormDescriptor}
+                    >
+                        <SectionedFormLayout
+                            sidebar={
+                                <DrawerSectionedFormSidebar
+                                    selectedSection={selectedSection}
+                                />
+                            }
+                        >
+                            <form onSubmit={handleSubmit}>
+                                <div>
+                                    <ProgramNotificationsFormFields
+                                        setSelectedSection={setSelectedSection}
+                                    />
+                                    <SectionedFormErrorNotice />
+                                </div>
+                            </form>
+                            <SectionedFormErrorNotice />
+                        </SectionedFormLayout>
+                    </SectionedFormProvider>
+                )
+
+                if (onCancel) {
+                    return (
+                        <NotificationFormDrawerFooter
+                            form={form}
+                            setCloseOnSubmit={setCloseOnSubmit}
+                            onCancel={onCancel}
+                            formContent={formContent}
+                        />
+                    )
+                }
+
                 return (
                     <SectionedFormProvider
                         formDescriptor={programNotificationFormDescriptor}

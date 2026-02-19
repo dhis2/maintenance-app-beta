@@ -6,6 +6,8 @@ import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import React, { useMemo } from 'react'
 import {
+    DrawerBodyLayout,
+    DrawerFormFooter,
     FormBase,
     FormBaseProps,
     FormFooterWrapper,
@@ -93,6 +95,37 @@ export const StageSectionForm = ({
             mutators={{ ...arrayMutators }}
         >
             {({ submitting, form }) => {
+                const formContent = (
+                    <>
+                        <ProgramStageSectionFormContents />
+                        <SectionedFormErrorNotice />
+                        <div className={styles.errorNoticeWrapper}>
+                            <DefaultFormErrorNotice />
+                        </div>
+                    </>
+                )
+
+                if (onCancel) {
+                    return (
+                        <DrawerBodyLayout
+                            footer={
+                                <DrawerFormFooter
+                                    submitLabel={i18n.t('Save section')}
+                                    cancelLabel={i18n.t('Cancel')}
+                                    submitting={submitting ?? false}
+                                    onSubmitClick={() => form.submit()}
+                                    onCancelClick={onCancel}
+                                    infoMessage={i18n.t(
+                                        'Saving a section does not save other changes to the stage or program'
+                                    )}
+                                />
+                            }
+                        >
+                            {formContent}
+                        </DrawerBodyLayout>
+                    )
+                }
+
                 return (
                     <div>
                         <div className={styles.sectionsWrapper}>

@@ -4,6 +4,7 @@ import React from 'react'
 import { useFieldArray } from 'react-final-form-arrays'
 import { useParams } from 'react-router-dom'
 import {
+    DrawerHeader,
     DrawerPortal,
     SectionedFormSection,
     StandardFormSectionDescription,
@@ -108,15 +109,23 @@ const ProgramStageListNewOrEdit = () => {
 
     return (
         <>
-            <DrawerPortal isOpen={isStageFormOpen} onClose={onCloseStageForm}>
+            <DrawerPortal
+                isOpen={isStageFormOpen}
+                onClose={onCloseStageForm}
+                header={
+                    <DrawerHeader onClose={onCloseStageForm}>
+                        {stageFormOpen === null
+                            ? i18n.t('New stage')
+                            : i18n.t('Edit stage')}
+                    </DrawerHeader>
+                }
+            >
                 {stageFormOpen !== undefined && (
-                    <div>
-                        <EditOrNewStageForm
-                            stage={stageFormOpen}
-                            onCancel={onCloseStageForm}
-                            onSubmitted={handleSubmittedStage}
-                        />
-                    </div>
+                    <EditOrNewStageForm
+                        stage={stageFormOpen}
+                        onCancel={onCloseStageForm}
+                        onSubmitted={handleSubmittedStage}
+                    />
                 )}
             </DrawerPortal>
 

@@ -4,9 +4,13 @@ import { IconInfo16 } from '@dhis2/ui-icons'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import React, { useCallback, useMemo } from 'react'
-import { useFormState } from 'react-final-form'
+import { useForm, useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
+    DrawerBodyLayout,
+    DrawerFormFooter,
+    FormBase,
+    FormBaseProps,
     FormFooterWrapper,
     SectionedFormErrorNotice,
     SectionedFormSection,
@@ -14,8 +18,6 @@ import {
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-    FormBase,
-    FormBaseProps,
     CustomAttributesSection,
 } from '../../../../components'
 import {
@@ -44,57 +46,81 @@ import { DrawerState } from './OptionsListTable'
 export const OptionFormContents = ({
     onCancel,
 }: {
-    onCancel: (s: DrawerState) => void
+    onCancel?: (s: DrawerState) => void
 }) => {
+    const form = useForm()
     const { submitting, values } = useFormState({
         subscription: { submitting: true, values: true },
     })
 
     const handleCancel = () => {
-        onCancel({ open: false, id: undefined })
+        onCancel?.({ open: false, id: undefined })
+    }
+
+    const formFieldsContent = (
+        <>
+            <SectionedFormSections>
+                <SectionedFormSection name="optionEdit">
+                    <StandardFormSectionTitle>
+                        {i18n.t('Option')}
+                    </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        {i18n.t('Set up the information for this option.')}
+                    </StandardFormSectionDescription>
+                    <StandardFormField>
+                        <NameField
+                            schemaSection={optionSchemaSection}
+                            modelId={values.id}
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <CodeField
+                            schemaSection={optionSchemaSection}
+                            modelId={values.id}
+                            required={true}
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <DescriptionField
+                            helpText={i18n.t(
+                                'Explain the purpose of this option.'
+                            )}
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <ColorAndIconField />
+                    </StandardFormField>
+                </SectionedFormSection>
+                <CustomAttributesSection schemaSection={optionSchemaSection} />
+            </SectionedFormSections>
+            <SectionedFormErrorNotice />
+        </>
+    )
+
+    if (onCancel) {
+        return (
+            <DrawerBodyLayout
+                footer={
+                    <DrawerFormFooter
+                        submitLabel={i18n.t('Save option')}
+                        cancelLabel={i18n.t('Cancel')}
+                        submitting={submitting ?? false}
+                        onSubmitClick={() => form.submit()}
+                        onCancelClick={handleCancel}
+                        infoMessage={i18n.t(
+                            'Saving an option does not save other changes to the option set'
+                        )}
+                    />
+                }
+            >
+                {formFieldsContent}
+            </DrawerBodyLayout>
+        )
     }
 
     return (
         <div className={styles.sectionsWrapper}>
-            <div>
-                <SectionedFormSections>
-                    <SectionedFormSection name="optionEdit">
-                        <StandardFormSectionTitle>
-                            {i18n.t('Option')}
-                        </StandardFormSectionTitle>
-                        <StandardFormSectionDescription>
-                            {i18n.t('Set up the information for this option.')}
-                        </StandardFormSectionDescription>
-                        <StandardFormField>
-                            <NameField
-                                schemaSection={optionSchemaSection}
-                                modelId={values.id}
-                            />
-                        </StandardFormField>
-                        <StandardFormField>
-                            <CodeField
-                                schemaSection={optionSchemaSection}
-                                modelId={values.id}
-                                required={true}
-                            />
-                        </StandardFormField>
-                        <StandardFormField>
-                            <DescriptionField
-                                helpText={i18n.t(
-                                    'Explain the purpose of this option.'
-                                )}
-                            />
-                        </StandardFormField>
-                        <StandardFormField>
-                            <ColorAndIconField />
-                        </StandardFormField>
-                    </SectionedFormSection>
-                    <CustomAttributesSection
-                        schemaSection={optionSchemaSection}
-                    />
-                </SectionedFormSections>
-                <SectionedFormErrorNotice />
-            </div>
+            <div>{formFieldsContent}</div>
             <div>
                 <FormFooterWrapper>
                     <ButtonStrip>

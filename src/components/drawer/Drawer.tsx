@@ -2,12 +2,15 @@ import cx from 'classnames'
 import { FocusTrap } from 'focus-trap-react'
 import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useSystemSettingsStore } from '../../lib/systemSettings'
 import css from './Drawer.module.css'
-interface DrawerProps {
+
+export interface DrawerProps {
     isOpen: boolean
     children: React.ReactNode
     onClose: () => void
     level?: 'primary' | 'secondary'
+    header?: React.ReactNode
 }
 
 const DRAWER_PORTAL_ID = 'drawer-portal'
@@ -17,10 +20,19 @@ export const Drawer: React.FC<DrawerProps> = ({
     children,
     onClose,
     level = 'primary',
+    header,
 }) => {
+    const globalShellEnabled =
+        useSystemSettingsStore(
+            (state) => state.systemSettings?.globalShellEnabled
+        ) ?? false
+
     return (
         <div
-            className={cx(css.drawerOverlay, { [css.open]: isOpen })}
+            className={cx(css.drawerOverlay, {
+                [css.open]: isOpen,
+                [css.legacyShell]: !globalShellEnabled,
+            })}
             onClick={onClose}
         >
             <div
@@ -32,7 +44,7 @@ export const Drawer: React.FC<DrawerProps> = ({
                 onClick={(e) => e.stopPropagation()}
             >
                 {isOpen && (
-                    <DrawerContents onClose={onClose}>
+                    <DrawerContents onClose={onClose} header={header}>
                         {children}
                     </DrawerContents>
                 )}
@@ -41,21 +53,19 @@ export const Drawer: React.FC<DrawerProps> = ({
     )
 }
 
-const DrawerContents = React.forwardRef<
-    HTMLDivElement,
-    { children: React.ReactNode; onClose: () => void }
->(function DrawerContents({ children, onClose }, ref) {
+const DrawerContents = ({
+    children,
+    onClose,
+    header,
+}: {
+    children: React.ReactNode
+    onClose: () => void
+    header?: React.ReactNode
+}) => {
     useEffect(() => {
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === 'Escape') {
-                onClose()
-            }
-        }
-
-        document.addEventListener('keydown', handleKeyDown)
-        return () => {
-            document.removeEventListener('keydown', handleKeyDown)
-        }
+        const onKeyDown = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+        document.addEventListener('keydown', onKeyDown)
+        return () => document.removeEventListener('keydown', onKeyDown)
     }, [onClose])
     return (
         <FocusTrap
@@ -64,27 +74,31 @@ const DrawerContents = React.forwardRef<
                 allowOutsideClick: true,
             }}
         >
-            <div ref={ref}>
-                {/* Span with tabIndex to trap focus in case contents in drawer is loading,
-            which would make the focustrap throw */}
-                <span tabIndex={0}></span>
-                {children}
+            <div className={css.drawerContent}>
+                {header}
+                <div className={css.drawerBody}>
+                    <span
+                        className={css.drawerFocusAnchor}
+                        tabIndex={0}
+                        aria-hidden
+                    />
+                    {children}
+                </div>
             </div>
         </FocusTrap>
     )
-})
-
-export const DrawerRoot = () => {
-    return <div id={DRAWER_PORTAL_ID} className={css.drawerRoot} />
 }
 
-export const DrawerPortal = ({ ...drawerProps }: DrawerProps) => {
+export const DrawerRoot = () => (
+    <div id={DRAWER_PORTAL_ID} className={css.drawerRoot} />
+)
+
+export const DrawerPortal = (props: DrawerProps) => {
     const [mountNode, setMountNode] = useState<HTMLElement | null>(() =>
         document.getElementById(DRAWER_PORTAL_ID)
     )
 
     useEffect(() => {
-        // Find the portal root element after the initial render
         const portalRoot = document.getElementById(DRAWER_PORTAL_ID)
         if (portalRoot) {
             setMountNode(portalRoot)
@@ -99,5 +113,5 @@ export const DrawerPortal = ({ ...drawerProps }: DrawerProps) => {
         return null
     }
 
-    return createPortal(<Drawer {...drawerProps} />, mountNode)
+    return createPortal(<Drawer {...props} />, mountNode)
 }
