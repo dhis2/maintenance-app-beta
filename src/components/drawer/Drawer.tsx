@@ -15,7 +15,7 @@ export interface DrawerProps {
 
 const DRAWER_PORTAL_ID = 'drawer-portal'
 
-export const Drawer: React.FC<DrawerProps> = ({
+export const DrawerPanel: React.FC<DrawerProps> = ({
     isOpen,
     children,
     onClose,
@@ -77,10 +77,10 @@ const DrawerContents = ({
             <div className={css.drawerContent}>
                 {header}
                 <div className={css.drawerBody}>
-                    <span
+                    <button
+                        type="button"
                         className={css.drawerFocusAnchor}
-                        tabIndex={0}
-                        aria-hidden
+                        aria-label="Start of drawer content"
                     />
                     {children}
                 </div>
@@ -88,6 +88,16 @@ const DrawerContents = ({
         </FocusTrap>
     )
 }
+
+export const Drawer: React.FC<{
+    children: React.ReactNode
+    footer: React.ReactNode
+}> = ({ children, footer }) => (
+    <div className={css.drawerBodyLayout}>
+        <div className={css.drawerBodyScrollable}>{children}</div>
+        {footer}
+    </div>
+)
 
 export const DrawerRoot = () => (
     <div id={DRAWER_PORTAL_ID} className={css.drawerRoot} />
@@ -113,5 +123,5 @@ export const DrawerPortal = (props: DrawerProps) => {
         return null
     }
 
-    return createPortal(<Drawer {...props} />, mountNode)
+    return createPortal(<DrawerPanel {...props} />, mountNode)
 }

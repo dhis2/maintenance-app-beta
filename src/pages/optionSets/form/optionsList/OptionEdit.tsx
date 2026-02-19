@@ -7,7 +7,7 @@ import React, { useCallback, useMemo } from 'react'
 import { useForm, useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
-    DrawerBodyLayout,
+    Drawer,
     DrawerFormFooter,
     FormBase,
     FormBaseProps,
@@ -99,7 +99,7 @@ export const OptionFormContents = ({
 
     if (onCancel) {
         return (
-            <DrawerBodyLayout
+            <Drawer
                 footer={
                     <DrawerFormFooter
                         submitLabel={i18n.t('Save option')}
@@ -114,7 +114,7 @@ export const OptionFormContents = ({
                 }
             >
                 {formFieldsContent}
-            </DrawerBodyLayout>
+            </Drawer>
         )
     }
 

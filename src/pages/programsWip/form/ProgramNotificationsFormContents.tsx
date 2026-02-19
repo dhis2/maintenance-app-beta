@@ -75,9 +75,9 @@ const ProgramNotificationListNewOrEdit = ({
             })
         }
         if (isEditNotification) {
-            const index = programNotificationsFieldArray.value.findIndex(
-                (s) => s.id === notificationFormOpen.id
-            )
+            const index = (
+                programNotificationsFieldArray.value ?? []
+            ).findIndex((s) => s.id === notificationFormOpen.id)
             if (index !== -1) {
                 programNotificationsFieldArray.update(index, values)
             }
@@ -108,15 +108,15 @@ const ProgramNotificationListNewOrEdit = ({
                         notification={notificationFormOpen}
                         onCancel={onCloseNotificationForm}
                         onSubmitted={handleSubmittedNotification}
-                        notificationList={programNotificationsFieldArray.value.map(
-                            (n) => ({ id: n.id })
-                        )}
+                        notificationList={(
+                            programNotificationsFieldArray.value ?? []
+                        ).map((n) => ({ id: n.id }))}
                     />
                 )}
             </DrawerPortal>
 
-            {programNotificationsFieldArray.value.map((notification) => {
-                return (
+            {(programNotificationsFieldArray.value ?? []).map(
+                (notification) => (
                     <ListInFormItem
                         key={notification.id}
                         item={notification}
@@ -125,7 +125,7 @@ const ProgramNotificationListNewOrEdit = ({
                         onDelete={() => {}}
                     />
                 )
-            })}
+            )}
         </>
     )
 }
@@ -228,7 +228,7 @@ const NotificationListNewOrEdit = () => {
     const { values } = useFormState({ subscription: { values: true } })
     // TODO: might want to show the to be deleted notification with a warning instead
     const stages: ProgramStageListItem[] =
-        values.programStages?.filter(
+        values?.programStages?.filter(
             (stage: ProgramStageListItem) => !stage.deleted
         ) || []
 
@@ -242,7 +242,7 @@ const NotificationListNewOrEdit = () => {
                     {stages.every(
                         (s) => s?.notificationTemplates?.length === 0
                     ) &&
-                        values.notificationTemplates.length === 0 && (
+                        (values?.notificationTemplates?.length ?? 0) === 0 && (
                             <NoticeBox className={css.formTypeInfo}>
                                 {i18n.t('No notifications been added yet')}
                             </NoticeBox>

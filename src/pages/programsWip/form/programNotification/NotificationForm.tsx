@@ -9,7 +9,7 @@ import React, { useMemo } from 'react'
 import { useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
-    DrawerBodyLayout,
+    Drawer,
     DrawerFormFooter,
     FormBase,
     FormBaseProps,
@@ -91,7 +91,7 @@ const NotificationFormDrawerFooter = ({
         subscription: { submitting: true },
     })
     return (
-        <DrawerBodyLayout
+        <Drawer
             footer={
                 <DrawerFormFooter
                     submitLabel={i18n.t('Save notification and close')}
@@ -114,7 +114,7 @@ const NotificationFormDrawerFooter = ({
             }
         >
             {formContent}
-        </DrawerBodyLayout>
+        </Drawer>
     )
 }
 

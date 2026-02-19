@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import React, { useMemo } from 'react'
 import {
-    DrawerBodyLayout,
+    Drawer,
     DrawerFormFooter,
     FormBase,
     FormBaseProps,
@@ -107,7 +107,7 @@ export const StageSectionForm = ({
 
                 if (onCancel) {
                     return (
-                        <DrawerBodyLayout
+                        <Drawer
                             footer={
                                 <DrawerFormFooter
                                     submitLabel={i18n.t('Save section')}
@@ -122,7 +122,7 @@ export const StageSectionForm = ({
                             }
                         >
                             {formContent}
-                        </DrawerBodyLayout>
+                        </Drawer>
                     )
                 }
 

@@ -5,7 +5,7 @@ import { IconInfo16 } from '@dhis2/ui-icons'
 import React, { useEffect, useRef, useState } from 'react'
 import { useField } from 'react-final-form'
 import {
-    DrawerBodyLayout,
+    Drawer,
     DrawerFormFooter,
     FormFooterWrapper,
     SectionedFormErrorNotice,
@@ -267,7 +267,7 @@ export const CustomFormEdit = ({
 
     if (closeCustomFormEdit) {
         return (
-            <DrawerBodyLayout
+            <Drawer
                 footer={
                     <DrawerFormFooter
                         submitLabel={i18n.t('Save custom form')}
@@ -283,7 +283,7 @@ export const CustomFormEdit = ({
                 }
             >
                 {formContent}
-            </DrawerBodyLayout>
+            </Drawer>
         )
     }
 

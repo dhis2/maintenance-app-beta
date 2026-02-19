@@ -11,7 +11,7 @@ import {
 } from 'react-final-form'
 import {
     DescriptionField,
-    DrawerBodyLayout,
+    Drawer,
     DrawerFormFooter,
     FormFooterWrapper,
     NameField,
@@ -222,7 +222,7 @@ export const EnrollmentSectionFormContents = ({
 
     if (onCancel) {
         return (
-            <DrawerBodyLayout
+            <Drawer
                 footer={
                     <DrawerFormFooter
                         submitLabel={i18n.t('Save section')}
@@ -237,7 +237,7 @@ export const EnrollmentSectionFormContents = ({
                 }
             >
                 {formContent}
-            </DrawerBodyLayout>
+            </Drawer>
         )
     }
 

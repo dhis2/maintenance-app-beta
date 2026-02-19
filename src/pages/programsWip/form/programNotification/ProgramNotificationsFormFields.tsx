@@ -78,7 +78,7 @@ export const ProgramNotificationsFormFields = ({
     const programVariables: MessageVariables = useMemo(() => {
         if (data) {
             const trackedEntityAttributesVariables = Object.fromEntries(
-                data.programTrackedEntityAttributes.map((att) => [
+                (data.programTrackedEntityAttributes ?? []).map((att) => [
                     att.trackedEntityAttribute.id,
                     { label: att.displayName, type: 'ATTRIBUTE' },
                 ])

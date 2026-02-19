@@ -9,7 +9,7 @@ import React, { useMemo } from 'react'
 import { useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
-    DrawerBodyLayout,
+    Drawer,
     DrawerFormFooter,
     FormBase,
     FormBaseProps,
@@ -120,7 +120,7 @@ const StageFormDrawerFooter = ({
         subscription: { submitting: true },
     })
     return (
-        <DrawerBodyLayout
+        <Drawer
             footer={
                 <DrawerFormFooter
                     submitLabel={i18n.t('Save stage and close')}
@@ -143,7 +143,7 @@ const StageFormDrawerFooter = ({
             }
         >
             {formContent}
-        </DrawerBodyLayout>
+        </Drawer>
     )
 }
 

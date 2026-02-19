@@ -22,7 +22,7 @@ import {
 import {
     CodeField,
     DescriptionField,
-    DrawerBodyLayout,
+    Drawer,
     DrawerFormFooter,
     FormFooterWrapper,
     NameField,
@@ -378,7 +378,7 @@ export const DataSetSectionFormContents = ({
 
     if (onCancel) {
         return (
-            <DrawerBodyLayout
+            <Drawer
                 footer={
                     <DrawerFormFooter
                         submitLabel={i18n.t('Save section')}
@@ -393,7 +393,7 @@ export const DataSetSectionFormContents = ({
                 }
             >
                 {formContent}
-            </DrawerBodyLayout>
+            </Drawer>
         )
     }
 

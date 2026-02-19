@@ -3,6 +3,7 @@ import React from 'react'
 import {
     DefaultFormFooter,
     DefaultSectionedFormSidebar,
+    DrawerRoot,
     FormBase,
     SectionedFormErrorNotice,
     SectionedFormLayout,
@@ -35,6 +36,7 @@ export const Component = () => {
                                 <ProgramFormContents />
                                 <DefaultFormFooter />
                             </form>
+                            <DrawerRoot />
                             <SectionedFormErrorNotice />
                         </SectionedFormLayout>
                     </SectionedFormProvider>
