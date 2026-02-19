@@ -2,7 +2,8 @@ import i18n from '@dhis2/d2-i18n'
 import { ProgramRuleActionListItem } from './types'
 
 export function getProgramRuleActionListLabel(
-    action: ProgramRuleActionListItem
+    action: ProgramRuleActionListItem,
+    templateNameById?: Record<string, string>
 ): string {
     const {
         programRuleActionType,
@@ -18,6 +19,13 @@ export function getProgramRuleActionListLabel(
         optionGroup,
         notificationTemplate,
     } = action
+
+    const templateLabel =
+        notificationTemplate?.displayName ??
+        (notificationTemplate?.id &&
+            templateNameById?.[notificationTemplate.id]) ??
+        notificationTemplate?.id ??
+        '-'
 
     const targetDeAndTea = [
         dataElement?.displayName,
@@ -128,20 +136,14 @@ export function getProgramRuleActionListLabel(
             )
         case 'SCHEDULEMESSAGE':
             return i18n.t('Schedule message: {{template}} at date {{data}}', {
-                template:
-                    notificationTemplate?.displayName ??
-                    notificationTemplate?.id ??
-                    '-',
+                template: templateLabel,
                 data: data || '',
                 nsSeparator: false,
                 interpolation: { escapeValue: false },
             })
         case 'SENDMESSAGE':
             return i18n.t('Send message: {{template}}', {
-                template:
-                    notificationTemplate?.displayName ??
-                    notificationTemplate?.id ??
-                    '-',
+                template: templateLabel,
                 nsSeparator: false,
                 interpolation: { escapeValue: false },
             })

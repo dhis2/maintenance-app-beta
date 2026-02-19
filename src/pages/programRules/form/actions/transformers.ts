@@ -1,7 +1,13 @@
+import type { ProgramRuleFormValues } from '../fieldFilters'
 import type {
     ProgramRuleActionFormValues,
     ProgramRuleActionListItem,
 } from './types'
+
+export type FormValuesWithProgramTemplates = Omit<
+    ProgramRuleFormValues,
+    'program'
+> & { program?: ProgramWithTemplates }
 
 export const ACTION_TYPES_WITH_TEMPLATES = [
     'SENDMESSAGE',
@@ -56,4 +62,31 @@ export function transformActionsFromApi(
     return actions.map((action) =>
         transformActionFromApi(action)
     ) as ProgramRuleActionListItem[]
+}
+
+export type ProgramWithTemplates = {
+    id?: string
+    programType?: string
+    notificationTemplates?: Array<{ id: string; displayName?: string }>
+    programStages?: Array<{
+        notificationTemplates?: Array<{ id: string; displayName?: string }>
+    }>
+}
+
+export function buildTemplateNameById(
+    program: ProgramWithTemplates | undefined | null
+): Record<string, string> {
+    if (!program) {
+        return {}
+    }
+    const fromProgram = program.notificationTemplates ?? []
+    const fromStages =
+        program.programStages?.flatMap((s) => s.notificationTemplates ?? []) ??
+        []
+    const all = [...fromProgram, ...fromStages]
+    return Object.fromEntries(
+        all
+            .filter((t) => t.id && t.displayName)
+            .map((t) => [t.id, t.displayName!])
+    )
 }

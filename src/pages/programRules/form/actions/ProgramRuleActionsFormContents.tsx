@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, NoticeBox } from '@dhis2/ui'
 import { IconAdd16 } from '@dhis2/ui-icons'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useFormState } from 'react-final-form'
 import { useFieldArray } from 'react-final-form-arrays'
 import { useParams } from 'react-router-dom'
@@ -16,6 +16,10 @@ import { SchemaName } from '../../../../types'
 import { getProgramRuleActionListLabel } from './getProgramRuleActionListLabel'
 import { EditOrNewProgramRuleActionForm } from './ProgramRuleActionForm'
 import styles from './ProgramRuleActionForm.module.css'
+import {
+    buildTemplateNameById,
+    type FormValuesWithProgramTemplates,
+} from './transformers'
 import type { ProgramRuleActionListItem } from './types'
 
 export const ProgramRuleActionsFormContents = React.memo(
@@ -38,16 +42,19 @@ export const ProgramRuleActionsFormContents = React.memo(
 
 const ProgramRuleActionListNewOrEdit = () => {
     const modelId = useParams().id
-    const { values: formValues } = useFormState({
-        subscription: { values: true },
-    })
-    const program = (
-        formValues as { program?: { id?: string; programType?: string } }
-    )?.program
+    const { values: formValues } = useFormState<FormValuesWithProgramTemplates>(
+        { subscription: { values: true } }
+    )
+    const program = formValues.program
     const programId = program?.id
     const programType = program?.programType
     const actionsFieldArray =
         useFieldArray<ProgramRuleActionListItem>('programRuleActions').fields
+
+    const templateNameById = useMemo(
+        () => buildTemplateNameById(program),
+        [program]
+    )
 
     const [actionFormOpen, setActionFormOpen] = React.useState<
         ProgramRuleActionListItem | null | undefined
@@ -139,8 +146,10 @@ const ProgramRuleActionListNewOrEdit = () => {
 
                             const displayItem = {
                                 id: actionKey,
-                                displayName:
-                                    getProgramRuleActionListLabel(action),
+                                displayName: getProgramRuleActionListLabel(
+                                    action,
+                                    templateNameById
+                                ),
                                 access: action.access,
                             }
 
