@@ -106,7 +106,7 @@ const handleStageNotificationDeletions = async ({
     // stage notification templates marked for deletion
     const notificationTemplatesToDelete = stages
         .map((s) => s.notificationTemplates?.filter((nt) => nt.deleted))
-        .flat()
+        .flatMap((nt) => nt)
 
     if (notificationTemplatesToDelete.length === 0) {
         return []
