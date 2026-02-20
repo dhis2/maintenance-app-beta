@@ -72,8 +72,8 @@ export function toProgramRuleActionApiPayload(
     const transformed = normalizeActionForApi(
         action as ProgramRuleActionFormValues
     )
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- strip form-only field
     const { deleted, ...apiAction } = transformed
-    void deleted
     return { ...apiAction, programRule: { id: programRuleId } }
 }
 
@@ -86,14 +86,9 @@ export function buildProgramRuleActionsForApi(
     const merged = allActions.map((a) =>
         a.id === editedActionId ? { ...editedValues, id: editedActionId } : a
     )
-    const nonDeleted = merged.filter(
-        (a) => !(a as ProgramRuleActionListItem).deleted
-    )
+    const nonDeleted = merged.filter((a) => !a.deleted)
     return nonDeleted.map((a) =>
-        toProgramRuleActionApiPayload(
-            a as ProgramRuleActionFormValues,
-            programRuleId
-        )
+        toProgramRuleActionApiPayload(a, programRuleId)
     )
 }
 
