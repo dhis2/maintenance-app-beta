@@ -4462,6 +4462,13 @@ msgstr ""
 msgid "Program Rule Variable"
 msgstr "Program Rule Variable"
 
+msgid ""
+"There was an error updating notification templates for some stages: "
+"{{stagesNames}}"
+msgstr ""
+"There was an error updating notification templates for some stages: "
+"{{stagesNames}}"
+
 msgid "There was an error deleting stages: {{stagesNames}}"
 msgstr "There was an error deleting stages: {{stagesNames}}"
 
@@ -4655,8 +4662,20 @@ msgstr "New notification"
 msgid "Edit notification"
 msgstr "Edit notification"
 
+msgid "Notification {{- notificationName}} will be removed on save"
+msgstr "Notification {{- notificationName}} will be removed on save"
+
+msgid "Restore notification"
+msgstr "Restore notification"
+
+msgid "Program must be saved before notifications can be added"
+msgstr "Program must be saved before notifications can be added"
+
 msgid "No notifications been added yet"
 msgstr "No notifications been added yet"
+
+msgid "No notifications have been added yet"
+msgstr "No notifications have been added yet"
 
 msgid "Add a notification"
 msgstr "Add a notification"
