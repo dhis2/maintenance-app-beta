@@ -17,6 +17,8 @@ interface TranslatableFieldsProps {
     selectedLocale?: { locale: string } | undefined
 }
 
+const longTextFields = ['description', 'subjectTemplate', 'messageTemplate']
+
 const TranslatableFields: React.FC<TranslatableFieldsProps> = ({
     translatableFields,
     baseReferenceValues,
@@ -27,7 +29,7 @@ const TranslatableFields: React.FC<TranslatableFieldsProps> = ({
             <div className={style.formSection}>
                 {translatableFields.map((field) => (
                     <React.Fragment key={field}>
-                        {field === 'description' ? (
+                        {longTextFields.includes(field) ? (
                             <TextAreaField
                                 className={style.rowStart}
                                 label={getTranslatedProperty(field)}
@@ -56,7 +58,7 @@ const TranslatableFields: React.FC<TranslatableFieldsProps> = ({
                                 selectedLocale.locale
                             }.${camelCaseToConstantCase(fieldName)}`}
                             component={
-                                fieldName === 'description'
+                                longTextFields.includes(fieldName)
                                     ? TextAreaFieldFF
                                     : InputFieldFF
                             }
