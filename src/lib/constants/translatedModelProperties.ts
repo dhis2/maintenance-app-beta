@@ -81,6 +81,10 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     ),
     subjectTemplate: i18n.t('Subject template'),
     messageTemplate: i18n.t('Message template'),
+    programStageLabel: i18n.t('Program stage label'),
+    dueDateLabel: i18n.t('Due date label'),
+    executionDateLabel: i18n.t('Execution date label'),
+    eventLabel: i18n.t('Event label'),
 }
 
 const camelCaseToSentenceCase = (camelCase: string) =>
