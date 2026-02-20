@@ -79,6 +79,8 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     minAttributesRequiredToSearch: i18n.t(
         'Minimum number of attributes required to search'
     ),
+    subjectTemplate: i18n.t('Subject template'),
+    messageTemplate: i18n.t('Message template'),
 }
 
 const camelCaseToSentenceCase = (camelCase: string) =>

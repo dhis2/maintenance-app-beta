@@ -40,9 +40,13 @@ const availableTranslateableFields = [
  * This also controls the order of the rendered fields */
 
 export const getTranslateableFieldsForSchema = (schema: Schema) => {
-    return availableTranslateableFields.filter(
-        (field) => schema.properties[field]?.translatable
-    )
+    // return availableTranslateableFields.filter(
+    //     (field) => schema.properties[field]?.translatable
+    // )
+    return Object.keys(schema.properties)
+        .filter((field) => schema.properties[field]?.translatable)
+        .map((field) => schema.properties[field]?.fieldName)
+        .filter((f) => f !== undefined)
 }
 
 export const TranslationForm = ({
