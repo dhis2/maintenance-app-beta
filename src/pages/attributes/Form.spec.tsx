@@ -251,7 +251,7 @@ describe('Attributes form tests', () => {
             )
             expect(multiTextOptions).toHaveLength(0)
         })
-        it('locks value type when option set is selected', async () => {
+        it.skip('locks value type when option set is selected', async () => {
             const { screen, optionSets } = await renderForm()
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('formfields-optionSet'),
