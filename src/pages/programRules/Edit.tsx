@@ -22,6 +22,7 @@ import {
     useOnEditCompletedSuccessfully,
 } from '../../lib'
 import {
+    toProgramRuleActionApiPayload,
     transformActionsFromApi,
     type ProgramRuleActionListItem,
 } from './form/actions'
@@ -98,12 +99,14 @@ export const Component = () => {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { programRuleActions, ...valuesWithoutActions } = values
 
+            // Send full action bodies (including templateUid) so the backend can resolve
+            // templateUid on the program-rule save path (same as old maintenance app).
             const valuesToPatch = actionsChanged
                 ? {
                       ...valuesWithoutActions,
-                      programRuleActions: nonDeletedActions.map((a) => ({
-                          id: a.id,
-                      })),
+                      programRuleActions: nonDeletedActions.map((a) =>
+                          toProgramRuleActionApiPayload(a, modelId)
+                      ),
                   }
                 : valuesWithoutActions
 
