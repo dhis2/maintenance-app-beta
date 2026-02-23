@@ -157,6 +157,7 @@ const NOTIFICATION_RECIPIENT = {
     USERS_AT_ORGANISATION_UNIT: i18n.t('Users at Organisation Unit'),
     PROGRAM_ATTRIBUTE: i18n.t('Program attribute'),
     WEB_HOOK: i18n.t('Web hook'),
+    DATA_ELEMENT: i18n.t('Data element'),
 }
 
 const RENDERING_TYPE = {
