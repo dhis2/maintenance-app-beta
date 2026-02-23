@@ -4,13 +4,14 @@ import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useSystemSettingsStore } from '../../lib/systemSettings'
 import css from './Drawer.module.css'
+import { DrawerHeader } from './DrawerHeader'
 
 export interface DrawerProps {
     isOpen: boolean
     children: React.ReactNode
     onClose: () => void
     level?: 'primary' | 'secondary'
-    header?: React.ReactNode
+    header?: React.ReactNode | string
 }
 
 const DRAWER_PORTAL_ID = 'drawer-portal'
@@ -31,7 +32,9 @@ export const DrawerPanel: React.FC<DrawerProps> = ({
         <div
             className={cx(css.drawerOverlay, {
                 [css.open]: isOpen,
-                [css.legacyShell]: !globalShellEnabled,
+                [css.legacyShell]:
+                    !globalShellEnabled &&
+                    process.env.NODE_ENV !== 'development',
             })}
             onClick={onClose}
         >
@@ -60,13 +63,19 @@ const DrawerContents = ({
 }: {
     children: React.ReactNode
     onClose: () => void
-    header?: React.ReactNode
+    header?: React.ReactNode | string
 }) => {
     useEffect(() => {
         const onKeyDown = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
         document.addEventListener('keydown', onKeyDown)
         return () => document.removeEventListener('keydown', onKeyDown)
     }, [onClose])
+    const headerNode =
+        typeof header === 'string' ? (
+            <DrawerHeader onClose={onClose}>{header}</DrawerHeader>
+        ) : (
+            header
+        )
     return (
         <FocusTrap
             focusTrapOptions={{
@@ -75,8 +84,9 @@ const DrawerContents = ({
             }}
         >
             <div className={css.drawerContent}>
-                {header}
+                {headerNode}
                 <div className={css.drawerBody}>
+                    {/* Focus anchor for FocusTrap; button avoids SonarQube tabIndex-on-non-interactive rule */}
                     <button
                         type="button"
                         className={css.drawerFocusAnchor}
@@ -89,7 +99,7 @@ const DrawerContents = ({
     )
 }
 
-export const Drawer: React.FC<{
+export const DrawerLayout: React.FC<{
     children: React.ReactNode
     footer: React.ReactNode
 }> = ({ children, footer }) => (

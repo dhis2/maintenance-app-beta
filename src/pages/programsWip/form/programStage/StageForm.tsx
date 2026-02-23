@@ -1,7 +1,5 @@
 import { useAlert, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip } from '@dhis2/ui'
-import { IconInfo16 } from '@dhis2/ui-icons'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import isEqual from 'lodash/isEqual'
@@ -9,11 +7,10 @@ import React, { useMemo } from 'react'
 import { useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
-    Drawer,
     DrawerFormFooter,
+    DrawerLayout,
     FormBase,
     FormBaseProps,
-    FormFooterWrapper,
     SectionedFormErrorNotice,
     SectionedFormLayout,
 } from '../../../../components'
@@ -41,7 +38,6 @@ import {
     PickWithFieldFilters,
     ProgramStage,
 } from '../../../../types/models'
-import styles from './StageForm.module.css'
 import { StageFormContents } from './StageFormContents'
 import { StageFormDescriptor } from './stageFormDescriptor'
 import { initialStageValue } from './stageSchema'
@@ -120,7 +116,7 @@ const StageFormDrawerFooter = ({
         subscription: { submitting: true },
     })
     return (
-        <Drawer
+        <DrawerLayout
             footer={
                 <DrawerFormFooter
                     submitLabel={i18n.t('Save stage and close')}
@@ -143,7 +139,7 @@ const StageFormDrawerFooter = ({
             }
         >
             {formContent}
-        </Drawer>
+        </DrawerLayout>
     )
 }
 
@@ -222,83 +218,16 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
                     </SectionedFormProvider>
                 )
 
-                if (onCancel) {
-                    return (
-                        <StageFormDrawerFooter
-                            form={form}
-                            setCloseOnSubmit={setCloseOnSubmit}
-                            onCancel={onCancel}
-                            formContent={formContent}
-                        />
-                    )
+                if (!onCancel) {
+                    return null
                 }
-
                 return (
-                    <SectionedFormProvider formDescriptor={StageFormDescriptor}>
-                        <SectionedFormLayout
-                            sidebar={
-                                <DrawerSectionedFormSidebar
-                                    selectedSection={selectedSection}
-                                />
-                            }
-                        >
-                            <form onSubmit={handleSubmit}>
-                                <div className={styles.sectionsWrapper}>
-                                    <div>
-                                        <StageFormContents
-                                            isSubsection
-                                            setSelectedSection={
-                                                setSelectedSection
-                                            }
-                                        />
-                                        <SectionedFormErrorNotice />
-                                    </div>
-                                    <FormFooterWrapper>
-                                        <ButtonStrip>
-                                            <Button
-                                                primary
-                                                small
-                                                type="button"
-                                                onClick={() => {
-                                                    setCloseOnSubmit(true)
-                                                    form.submit()
-                                                }}
-                                            >
-                                                {i18n.t('Save stage and close')}
-                                            </Button>
-                                            <Button
-                                                secondary
-                                                small
-                                                type="button"
-                                                onClick={() => {
-                                                    setCloseOnSubmit(false)
-                                                    form.submit()
-                                                }}
-                                            >
-                                                {i18n.t('Save stage')}
-                                            </Button>
-                                            <Button
-                                                secondary
-                                                small
-                                                onClick={onCancel}
-                                            >
-                                                {i18n.t('Cancel')}
-                                            </Button>
-                                        </ButtonStrip>
-                                        <div className={styles.actionsInfo}>
-                                            <IconInfo16 />
-                                            <p>
-                                                {i18n.t(
-                                                    'Saving a stage does not save other changes to the program'
-                                                )}
-                                            </p>
-                                        </div>
-                                    </FormFooterWrapper>
-                                </div>
-                            </form>
-                            <SectionedFormErrorNotice />
-                        </SectionedFormLayout>
-                    </SectionedFormProvider>
+                    <StageFormDrawerFooter
+                        form={form}
+                        setCloseOnSubmit={setCloseOnSubmit}
+                        onCancel={onCancel}
+                        formContent={formContent}
+                    />
                 )
             }}
         </FormBase>

@@ -137,7 +137,6 @@
     flex: 1;
     min-height: 0;
     overflow: auto;
-    padding: var(--spacers-dp16) var(--spacers-dp24);
 }
 
 .drawerFooter {

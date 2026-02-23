@@ -5,7 +5,7 @@ import React from 'react'
 import css from './Drawer.module.css'
 
 export type DrawerFormFooterProps = {
-    submitLabel: string
+    submitLabel?: string
     saveLabel?: string
     cancelLabel?: string
     submitting: boolean
@@ -16,7 +16,7 @@ export type DrawerFormFooterProps = {
 }
 
 export const DrawerFormFooter: React.FC<DrawerFormFooterProps> = ({
-    submitLabel,
+    submitLabel = i18n.t('Submit'),
     saveLabel = i18n.t('Save'),
     cancelLabel = i18n.t('Cancel'),
     submitting,

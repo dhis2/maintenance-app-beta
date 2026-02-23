@@ -1,17 +1,14 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip } from '@dhis2/ui'
-import { IconInfo16 } from '@dhis2/ui-icons'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import React, { useCallback, useMemo } from 'react'
 import { useForm, useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
-    Drawer,
     DrawerFormFooter,
+    DrawerLayout,
     FormBase,
     FormBaseProps,
-    FormFooterWrapper,
     SectionedFormErrorNotice,
     SectionedFormSection,
     SectionedFormSections,
@@ -39,7 +36,6 @@ import {
 } from '../../../../lib'
 import { Option } from '../../../../types/generated'
 import { PickWithFieldFilters } from '../../../../types/models'
-import styles from './OptionList.module.css'
 import { initialOptionValues } from './optionSchema'
 import { DrawerState } from './OptionsListTable'
 
@@ -97,64 +93,26 @@ export const OptionFormContents = ({
         </>
     )
 
-    if (onCancel) {
-        return (
-            <Drawer
-                footer={
-                    <DrawerFormFooter
-                        submitLabel={i18n.t('Save option')}
-                        cancelLabel={i18n.t('Cancel')}
-                        submitting={submitting ?? false}
-                        onSubmitClick={() => form.submit()}
-                        onCancelClick={handleCancel}
-                        infoMessage={i18n.t(
-                            'Saving an option does not save other changes to the option set'
-                        )}
-                    />
-                }
-            >
-                {formFieldsContent}
-            </Drawer>
-        )
+    if (!onCancel) {
+        return null
     }
-
     return (
-        <div className={styles.sectionsWrapper}>
-            <div>{formFieldsContent}</div>
-            <div>
-                <FormFooterWrapper>
-                    <ButtonStrip>
-                        <Button
-                            primary
-                            small
-                            type="submit"
-                            dataTest="form-submit-button"
-                            disabled={submitting}
-                            loading={submitting}
-                        >
-                            {i18n.t('Save option')}
-                        </Button>
-                        <Button
-                            secondary
-                            small
-                            onClick={handleCancel}
-                            dataTest="form-cancel-link"
-                            disabled={submitting}
-                        >
-                            {i18n.t('Cancel')}
-                        </Button>
-                    </ButtonStrip>
-                    <div className={styles.actionsInfo}>
-                        <IconInfo16 />
-                        <p>
-                            {i18n.t(
-                                'Saving an option does not save other changes to the option set'
-                            )}
-                        </p>
-                    </div>
-                </FormFooterWrapper>
-            </div>
-        </div>
+        <DrawerLayout
+            footer={
+                <DrawerFormFooter
+                    submitLabel={i18n.t('Save option')}
+                    cancelLabel={i18n.t('Cancel')}
+                    submitting={submitting ?? false}
+                    onSubmitClick={() => form.submit()}
+                    onCancelClick={handleCancel}
+                    infoMessage={i18n.t(
+                        'Saving an option does not save other changes to the option set'
+                    )}
+                />
+            }
+        >
+            {formFieldsContent}
+        </DrawerLayout>
     )
 }
 

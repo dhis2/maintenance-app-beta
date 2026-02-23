@@ -1,6 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip, Field, SingleSelectFieldFF } from '@dhis2/ui'
-import { IconInfo16 } from '@dhis2/ui-icons'
+import { Field, SingleSelectFieldFF } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
 import {
@@ -11,9 +10,8 @@ import {
 } from 'react-final-form'
 import {
     DescriptionField,
-    Drawer,
     DrawerFormFooter,
-    FormFooterWrapper,
+    DrawerLayout,
     NameField,
     SectionedFormErrorNotice,
     SectionedFormSection,
@@ -26,7 +24,6 @@ import {
 import { BaseModelTransfer } from '../../../../components/metadataFormControls/ModelTransfer/BaseModelTransfer'
 import { useBoundResourceQueryFn } from '../../../../lib'
 import { DisplayableModel } from '../../../../types/models'
-import styles from './EnrollmentSectionFormContents.module.css'
 import {
     enrollmentSectionSchemaSection,
     SectionFormValues,
@@ -220,64 +217,25 @@ export const EnrollmentSectionFormContents = ({
         </div>
     )
 
-    if (onCancel) {
-        return (
-            <Drawer
-                footer={
-                    <DrawerFormFooter
-                        submitLabel={i18n.t('Save section')}
-                        cancelLabel={i18n.t('Cancel')}
-                        submitting={submitting ?? false}
-                        onSubmitClick={() => form.submit()}
-                        onCancelClick={onCancel}
-                        infoMessage={i18n.t(
-                            'Saving a section does not save other changes to the program'
-                        )}
-                    />
-                }
-            >
-                {formContent}
-            </Drawer>
-        )
+    if (!onCancel) {
+        return null
     }
-
     return (
-        <div className={styles.sectionsWrapper}>
+        <DrawerLayout
+            footer={
+                <DrawerFormFooter
+                    submitLabel={i18n.t('Save section')}
+                    cancelLabel={i18n.t('Cancel')}
+                    submitting={submitting ?? false}
+                    onSubmitClick={() => form.submit()}
+                    onCancelClick={onCancel}
+                    infoMessage={i18n.t(
+                        'Saving a section does not save other changes to the program'
+                    )}
+                />
+            }
+        >
             {formContent}
-            <div>
-                <FormFooterWrapper>
-                    <ButtonStrip>
-                        <Button
-                            primary
-                            small
-                            disabled={submitting}
-                            type="button"
-                            onClick={() => form.submit()}
-                            loading={submitting}
-                            dataTest="form-submit-button"
-                        >
-                            {i18n.t('Save section')}
-                        </Button>
-                        <Button
-                            secondary
-                            small
-                            disabled={submitting}
-                            onClick={onCancel}
-                            dataTest="form-cancel-link"
-                        >
-                            {i18n.t('Cancel')}
-                        </Button>
-                    </ButtonStrip>
-                    <div className={styles.actionsInfo}>
-                        <IconInfo16 />
-                        <p>
-                            {i18n.t(
-                                'Saving a section does not save other changes to the program'
-                            )}
-                        </p>
-                    </div>
-                </FormFooterWrapper>
-            </div>
-        </div>
+        </DrawerLayout>
     )
 }

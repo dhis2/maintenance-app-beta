@@ -1,16 +1,13 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip } from '@dhis2/ui'
-import { IconInfo16 } from '@dhis2/ui-icons'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import React, { useMemo } from 'react'
 import {
-    Drawer,
     DrawerFormFooter,
+    DrawerLayout,
     FormBase,
     FormBaseProps,
-    FormFooterWrapper,
     SectionedFormErrorNotice,
 } from '../../../../../components'
 import { DefaultFormErrorNotice } from '../../../../../components/form/DefaultFormErrorNotice'
@@ -105,71 +102,26 @@ export const StageSectionForm = ({
                     </>
                 )
 
-                if (onCancel) {
-                    return (
-                        <Drawer
-                            footer={
-                                <DrawerFormFooter
-                                    submitLabel={i18n.t('Save section')}
-                                    cancelLabel={i18n.t('Cancel')}
-                                    submitting={submitting ?? false}
-                                    onSubmitClick={() => form.submit()}
-                                    onCancelClick={onCancel}
-                                    infoMessage={i18n.t(
-                                        'Saving a section does not save other changes to the stage or program'
-                                    )}
-                                />
-                            }
-                        >
-                            {formContent}
-                        </Drawer>
-                    )
+                if (!onCancel) {
+                    return null
                 }
-
                 return (
-                    <div>
-                        <div className={styles.sectionsWrapper}>
-                            <div>
-                                <ProgramStageSectionFormContents />
-                                <SectionedFormErrorNotice />
-                            </div>
-                            <FormFooterWrapper>
-                                <ButtonStrip>
-                                    <Button
-                                        primary
-                                        small
-                                        disabled={submitting}
-                                        type="button"
-                                        onClick={() => form.submit()}
-                                        loading={submitting}
-                                        dataTest="form-submit-button"
-                                    >
-                                        {i18n.t('Save section')}
-                                    </Button>
-                                    <Button
-                                        secondary
-                                        small
-                                        disabled={submitting}
-                                        onClick={onCancel}
-                                        dataTest="form-cancel-link"
-                                    >
-                                        {i18n.t('Cancel')}
-                                    </Button>
-                                </ButtonStrip>
-                                <div className={styles.actionsInfo}>
-                                    <IconInfo16 />
-                                    <p>
-                                        {i18n.t(
-                                            'Saving a section does not save other changes to the stage or program'
-                                        )}
-                                    </p>
-                                </div>
-                            </FormFooterWrapper>
-                        </div>
-                        <div className={styles.errorNoticeWrapper}>
-                            <DefaultFormErrorNotice />
-                        </div>
-                    </div>
+                    <DrawerLayout
+                        footer={
+                            <DrawerFormFooter
+                                submitLabel={i18n.t('Save section')}
+                                cancelLabel={i18n.t('Cancel')}
+                                submitting={submitting ?? false}
+                                onSubmitClick={() => form.submit()}
+                                onCancelClick={onCancel}
+                                infoMessage={i18n.t(
+                                    'Saving a section does not save other changes to the stage or program'
+                                )}
+                            />
+                        }
+                    >
+                        {formContent}
+                    </DrawerLayout>
                 )
             }}
         </FormBase>

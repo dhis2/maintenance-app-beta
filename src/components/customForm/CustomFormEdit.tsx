@@ -1,13 +1,11 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip, NoticeBox } from '@dhis2/ui'
-import { IconInfo16 } from '@dhis2/ui-icons'
+import { Button, NoticeBox } from '@dhis2/ui'
 import React, { useEffect, useRef, useState } from 'react'
 import { useField } from 'react-final-form'
 import {
-    Drawer,
     DrawerFormFooter,
-    FormFooterWrapper,
+    DrawerLayout,
     SectionedFormErrorNotice,
     SectionedFormSection,
     SectionedFormSections,
@@ -265,67 +263,26 @@ export const CustomFormEdit = ({
         </div>
     )
 
-    if (closeCustomFormEdit) {
-        return (
-            <Drawer
-                footer={
-                    <DrawerFormFooter
-                        submitLabel={i18n.t('Save custom form')}
-                        cancelLabel={i18n.t('Cancel')}
-                        submitting={customFormSaving}
-                        onSubmitClick={handleSave}
-                        onCancelClick={closeCustomFormEdit}
-                        infoMessage={i18n.t(
-                            `Saving a custom form does not save other changes to the {{customFormTarget}}`,
-                            { customFormTarget }
-                        )}
-                    />
-                }
-            >
-                {formContent}
-            </Drawer>
-        )
+    if (!closeCustomFormEdit) {
+        return null
     }
-
     return (
-        <div className={styles.sectionsWrapper}>
+        <DrawerLayout
+            footer={
+                <DrawerFormFooter
+                    submitLabel={i18n.t('Save custom form')}
+                    cancelLabel={i18n.t('Cancel')}
+                    submitting={customFormSaving}
+                    onSubmitClick={handleSave}
+                    onCancelClick={closeCustomFormEdit}
+                    infoMessage={i18n.t(
+                        `Saving a custom form does not save other changes to the {{customFormTarget}}`,
+                        { customFormTarget }
+                    )}
+                />
+            }
+        >
             {formContent}
-            <div>
-                <FormFooterWrapper>
-                    <ButtonStrip>
-                        <Button
-                            primary
-                            small
-                            type="button"
-                            dataTest="form-submit-button"
-                            disabled={customFormSaving}
-                            onClick={handleSave}
-                        >
-                            {i18n.t('Save custom form')}
-                        </Button>
-                        {closeCustomFormEdit && (
-                            <Button
-                                secondary
-                                small
-                                onClick={closeCustomFormEdit}
-                                dataTest="form-cancel-link"
-                                disabled={customFormSaving}
-                            >
-                                {i18n.t('Cancel')}
-                            </Button>
-                        )}
-                    </ButtonStrip>
-                    <div className={styles.actionsInfo}>
-                        <IconInfo16 />
-                        <p>
-                            {i18n.t(
-                                `Saving a custom form does not save other changes to the {{customFormTarget}}`,
-                                { customFormTarget }
-                            )}
-                        </p>
-                    </div>
-                </FormFooterWrapper>
-            </div>
-        </div>
+        </DrawerLayout>
     )
 }
