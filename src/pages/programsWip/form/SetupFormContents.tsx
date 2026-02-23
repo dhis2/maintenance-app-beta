@@ -176,11 +176,18 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                         'Minimum number of attributes required to search'
                     )}
                     dataTest="formfields-minattributesrequiredtosearch"
-                    format={(value: unknown) =>
-                        value === undefined || value === null
-                            ? ''
-                            : String(value)
-                    }
+                    format={(value: unknown) => {
+                        if (value === undefined || value === null) {
+                            return ''
+                        }
+                        if (
+                            typeof value === 'number' ||
+                            typeof value === 'string'
+                        ) {
+                            return String(value)
+                        }
+                        return ''
+                    }}
                     parse={(value: unknown) => {
                         if (value === undefined || value === '') {
                             return 0
@@ -201,11 +208,18 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                     )}
                     helpText={i18n.t('Entering 0 shows all search results')}
                     dataTest="formfields-maxteicounttoreturn"
-                    format={(value: unknown) =>
-                        value === undefined || value === null
-                            ? ''
-                            : String(value)
-                    }
+                    format={(value: unknown) => {
+                        if (value === undefined || value === null) {
+                            return ''
+                        }
+                        if (
+                            typeof value === 'number' ||
+                            typeof value === 'string'
+                        ) {
+                            return String(value)
+                        }
+                        return ''
+                    }}
                     parse={(value: unknown) => {
                         if (value === undefined || value === '') {
                             return 0
