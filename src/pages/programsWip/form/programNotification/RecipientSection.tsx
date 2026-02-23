@@ -58,8 +58,6 @@ type ProgramWithTEAs = {
 }
 
 type ProgramStageWithDEs = {
-    // id: string
-    // displayName: string
     programStageDataElements?: {
         dataElement: { id: string; valueType: string; displayName: string }
     }[]
@@ -107,10 +105,6 @@ export const RecipientSection = ({
     }, [isStageNotification, recipientInput, form])
 
     const recipientOptions = useMemo(() => {
-        console.log(
-            "*****isStageNotification || recipientInput.value === 'DATA_ELEMENT'",
-            isStageNotification || recipientInput.value === 'DATA_ELEMENT'
-        )
         return isStageNotification || recipientInput.value === 'DATA_ELEMENT'
             ? programStageRecipientOptions
             : programRecipientOptions

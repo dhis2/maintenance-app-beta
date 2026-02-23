@@ -6,6 +6,7 @@ import {
     SingleSelectFieldFF,
     SingleSelectOption,
 } from '@dhis2/ui'
+import { uniqBy } from 'lodash'
 import React, { useEffect, useState } from 'react'
 import { Field as FieldRFF, useField, useForm } from 'react-final-form'
 import { StandardFormField } from '../../../../components'
@@ -68,10 +69,11 @@ export const NotificationTimingSection = ({
         }
     }, [isScheduledDays, form])
     useEffect(() => {
+        triggerInput.onChange('COMPLETION')
         if (!isStageNotification) {
             form.change('sendRepeatable', undefined)
         }
-    }, [isStageNotification, form])
+    }, [isStageNotification, form, triggerInput])
 
     const handleBeforeAfterChange = (newValue: 'BEFORE' | 'AFTER') => {
         const absValue = Math.abs(Number(relativeScheduledDaysInput.value) || 0)
@@ -80,8 +82,26 @@ export const NotificationTimingSection = ({
     }
 
     const triggerOptions = isStageNotification
-        ? programStageTriggerOptions
-        : programTriggerOptions
+        ? uniqBy(
+              [
+                  ...programStageTriggerOptions,
+                  {
+                      label: getConstantTranslation(triggerInput.value),
+                      value: triggerInput.value,
+                  },
+              ],
+              'value'
+          )
+        : uniqBy(
+              [
+                  ...programTriggerOptions,
+                  {
+                      label: getConstantTranslation(triggerInput.value),
+                      value: triggerInput.value,
+                  },
+              ],
+              'value'
+          )
 
     return (
         <div>

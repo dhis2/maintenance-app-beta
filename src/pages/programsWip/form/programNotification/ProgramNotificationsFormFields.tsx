@@ -161,7 +161,7 @@ export const ProgramNotificationsFormFields = ({
                     </StandardFormSectionTitle>
                     <StandardFormSectionDescription>
                         {i18n.t(
-                            'Set up the basic information for the programNotification template.'
+                            'Set up the basic information for the notification template.'
                         )}
                     </StandardFormSectionDescription>
                     <BasicInformationSection

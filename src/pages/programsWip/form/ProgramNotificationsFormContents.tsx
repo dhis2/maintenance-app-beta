@@ -220,24 +220,12 @@ const NotificationListNewOrEdit = () => {
         setNotificationFormOpen(undefined)
     }
 
-    const handleSubmittedNotification = (
+    const updateNotificationArrays = (
         notificationValues: SubmittedNotificationFormValues,
-        closeOnSubmit: boolean = true
+        isEditNotification: boolean,
+        openNotificationId: string | undefined
     ) => {
-        const openNotification = notificationFormOpen
-        const isEditNotification = Boolean(openNotification?.id)
-
-        if (closeOnSubmit) {
-            setNotificationFormOpen(undefined)
-        } else if (!isEditNotification) {
-            setNotificationFormOpen({
-                id: notificationValues.id,
-                displayName: notificationValues.displayName,
-            })
-        }
-
         const stageId = notificationValues?.programStage?.id
-        const openNotificationId = openNotification?.id
 
         if (!isEditNotification && stageId === undefined) {
             programNotificationsFieldArray.push(notificationValues)
@@ -280,23 +268,23 @@ const NotificationListNewOrEdit = () => {
             const stage = stagesFieldArray.value[stageIndex]
             const stageNotifications = stage.notificationTemplates || []
 
-            const notificatiomIndex = (
+            const notificationIndex = (
                 stage.notificationTemplates ?? []
             ).findIndex((s) => s.id === openNotificationId)
-            if (notificatiomIndex === -1) {
+            if (notificationIndex === -1) {
                 return
             }
 
             const updatedStageNotifications = [
-                ...stageNotifications.slice(0, notificatiomIndex),
+                ...stageNotifications.slice(0, notificationIndex),
                 {
-                    ...stageNotifications[notificatiomIndex],
+                    ...stageNotifications[notificationIndex],
                     ...notificationValues,
                     name:
                         notificationValues?.name ??
                         notificationValues.displayName,
                 },
-                ...stageNotifications.slice(notificatiomIndex + 1),
+                ...stageNotifications.slice(notificationIndex + 1),
             ]
 
             stagesFieldArray.update(stageIndex, {
@@ -314,6 +302,28 @@ const NotificationListNewOrEdit = () => {
             programNotificationsFieldArray.update(index, {
                 ...programNotificationsFieldArray.value[index],
                 ...notificationValues,
+            })
+        }
+    }
+
+    const handleSubmittedNotification = (
+        notificationValues: SubmittedNotificationFormValues,
+        closeOnSubmit: boolean = true
+    ) => {
+        const openNotification = notificationFormOpen
+        const isEditNotification = Boolean(openNotification?.id)
+        updateNotificationArrays(
+            notificationValues,
+            isEditNotification,
+            openNotification?.id
+        )
+
+        if (closeOnSubmit) {
+            setNotificationFormOpen(undefined)
+        } else if (!isEditNotification) {
+            setNotificationFormOpen({
+                id: notificationValues.id,
+                displayName: notificationValues.displayName,
             })
         }
     }
