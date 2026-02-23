@@ -267,30 +267,10 @@ export const Component = () => {
         ] as const,
     })
 
-    const formInitialValues = useMemo(() => {
-        const fromApi =
-            program?.data != null && typeof program.data === 'object'
-                ? program.data
-                : {}
-        const defaults =
-            programFormInitialValues != null &&
-            typeof programFormInitialValues === 'object'
-                ? programFormInitialValues
-                : {}
-        const merged = { ...defaults }
-        for (const key of Object.keys(fromApi) as (keyof typeof fromApi)[]) {
-            const value = fromApi[key]
-            if (value !== undefined) {
-                ;(merged as Record<string, unknown>)[key as string] = value
-            }
-        }
-        return merged
-    }, [program.data])
-
     return (
         <FormBase
             onSubmit={useOnSubmitProgramEdit(modelId)}
-            initialValues={formInitialValues}
+            initialValues={program?.data ?? programFormInitialValues}
             subscription={{}}
             mutators={{ ...arrayMutators }}
             validate={validate}

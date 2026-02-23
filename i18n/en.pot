@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-18T10:59:22.921Z\n"
-"PO-Revision-Date: 2026-02-18T10:59:22.921Z\n"
+"POT-Creation-Date: 2026-02-23T11:21:32.520Z\n"
+"PO-Revision-Date: 2026-02-23T11:21:32.521Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -4647,11 +4647,11 @@ msgstr "Notification {{- notificationName}} will be removed on save"
 msgid "Restore notification"
 msgstr "Restore notification"
 
-msgid "Program must be saved before notifications can be added"
-msgstr "Program must be saved before notifications can be added"
-
 msgid "No notifications have been added yet"
 msgstr "No notifications have been added yet"
+
+msgid "Program must be saved before notifications can be added"
+msgstr "Program must be saved before notifications can be added"
 
 msgid "Add a notification"
 msgstr "Add a notification"
@@ -5454,11 +5454,3 @@ msgstr "Right side sliding window"
 
 msgid "Skip form validation"
 msgstr "Skip form validation"
-
-msgctxt "Application title"
-msgid "__MANIFEST_APP_TITLE"
-msgstr "Maintenance (Preview)"
-
-msgctxt "Application description"
-msgid "__MANIFEST_APP_DESCRIPTION"
-msgstr ""
