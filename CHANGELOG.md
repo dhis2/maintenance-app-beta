@@ -1,3 +1,18 @@
+# [0.127.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.126.1...v0.127.0) (2026-02-19)
+
+
+### Features
+
+* program notifications for stages scaffolding ([#770](https://github.com/dhis2/maintenance-app-beta/issues/770)) ([711554f](https://github.com/dhis2/maintenance-app-beta/commit/711554f04226721dddf73f097edae8d70d258178))
+* program notifications list [DHIS2-20782] ([#772](https://github.com/dhis2/maintenance-app-beta/issues/772)) ([5a0a05e](https://github.com/dhis2/maintenance-app-beta/commit/5a0a05e243332d1987428b98dd36937db614b283))
+
+## [0.126.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.126.0...v0.126.1) (2026-02-16)
+
+
+### Bug Fixes
+
+* show MULTI_TEXT value type when creating new option sets  ([#758](https://github.com/dhis2/maintenance-app-beta/issues/758)) ([e51606f](https://github.com/dhis2/maintenance-app-beta/commit/e51606f76b6af5cd9fb90baf25ada69bac61eb7e))
+
 # [0.126.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.125.1...v0.126.0) (2026-02-11)
 
 

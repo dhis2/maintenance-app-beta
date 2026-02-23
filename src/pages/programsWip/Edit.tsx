@@ -24,10 +24,12 @@ import {
     useOnSubmitEdit,
 } from '../../lib'
 import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
+import { DataEngine } from '../../types'
 import { PickWithFieldFilters, Program } from '../../types/generated'
 import { initialValues as programFormInitialValues, validate } from './form'
 import { ProgramFormDescriptor } from './form/formDescriptor'
 import { ProgramFormContents } from './form/ProgramFormContents'
+import { ProgramNotificationListItem } from './form/ProgramNotificationsFormContents'
 import { ProgramStageListItem } from './form/ProgramStagesFormContents'
 
 const fieldFilters = [
@@ -100,6 +102,42 @@ export const programValueFormatter = <TValues extends Partial<ProgramValues>>(
     return omit(values, 'programSections')
 }
 
+const handleStageNotificationDeletions = async ({
+    stages,
+    dataEngine,
+}: {
+    stages: ProgramStageListItem[]
+    dataEngine: DataEngine
+}): Promise<string[]> => {
+    // stage notification templates marked for deletion
+    const notificationTemplatesToDelete = stages
+        .map((s) => s.notificationTemplates?.filter((nt) => nt.deleted))
+        .flat()
+
+    if (notificationTemplatesToDelete.length === 0) {
+        return []
+    }
+
+    const notificationTemplateDeletionResults = await Promise.allSettled(
+        notificationTemplatesToDelete.map((s) =>
+            dataEngine.mutate({
+                resource: 'programNotificationTemplates',
+                id: s?.id as string,
+                type: 'delete',
+            })
+        )
+    )
+
+    const notificationDeletedFailures = notificationTemplateDeletionResults
+        .filter((d) => d.status === 'rejected')
+        .map(
+            (failure, i) =>
+                notificationTemplatesToDelete?.[i]?.displayName ?? ''
+        )
+
+    return notificationDeletedFailures
+}
+
 export const useOnSubmitProgramEdit = (modelId: string) => {
     const submitEdit: EnhancedOnSubmit<ProgramValues> = useOnSubmitEdit({
         section,
@@ -121,8 +159,35 @@ export const useOnSubmitProgramEdit = (modelId: string) => {
             const sections: Array<Section> = formValues.programSections
             const dataEntryForm: DataEntryForm = formValues.dataEntryForm
             const stages: ProgramStageListItem[] = formValues.programStages
+            const notificationTemplates: ProgramNotificationListItem[] =
+                formValues.notificationTemplates
 
             const stagesToDelete = stages.filter((stage) => stage.deleted)
+
+            const stageNotificationTemplateDeleteFailures =
+                await handleStageNotificationDeletions({
+                    stages,
+                    dataEngine,
+                })
+
+            if (stageNotificationTemplateDeleteFailures.length > 0) {
+                await queryClient.invalidateQueries({
+                    queryKey: [{ resource: 'programNotificationTemplates' }],
+                })
+                return createFormError({
+                    message: i18n.t(
+                        'There was an error updating notification templates for some stages: {{stagesNames}}',
+                        {
+                            stagesNames:
+                                stageNotificationTemplateDeleteFailures.join(
+                                    ', '
+                                ),
+                            nsSeparator: '~-~',
+                        }
+                    ),
+                })
+            }
+
             const stagesDeletionResults = await Promise.allSettled(
                 stagesToDelete.map((s) =>
                     dataEngine.mutate({
@@ -174,6 +239,9 @@ export const useOnSubmitProgramEdit = (modelId: string) => {
                     customFormDeleteResult?.[0]?.status !== 'rejected'
                         ? null
                         : values.dataEntryForm,
+                notificationTemplates: notificationTemplates.filter(
+                    (nTemplate) => !nTemplate.deleted
+                ),
             } as ProgramValues
 
             return submitEdit(trimmedValues, form, options)

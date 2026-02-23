@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-12T18:10:28.573Z\n"
-"PO-Revision-Date: 2026-02-12T18:10:28.574Z\n"
+"POT-Creation-Date: 2026-02-18T10:59:22.921Z\n"
+"PO-Revision-Date: 2026-02-18T10:59:22.921Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -627,12 +627,14 @@ msgstr ""
 msgid "Short name"
 msgstr "Short name"
 
-msgid ""
-"Select the kind of data this attribute collects. If you have chosen an "
-"Option set, this will be set automatically."
-msgstr ""
-"Select the kind of data this attribute collects. If you have chosen an "
-"Option set, this will be set automatically."
+msgid "variable"
+msgstr "variable"
+
+msgid "If you have chosen an Option set, this will be set automatically."
+msgstr "If you have chosen an Option set, this will be set automatically."
+
+msgid "Select the kind of data this {{objectType}} collects.{{optionSetSuffix}}"
+msgstr "Select the kind of data this {{objectType}} collects.{{optionSetSuffix}}"
 
 msgid ""
 "Disabled as the value type must match the value type of the selected option "
@@ -4445,6 +4447,13 @@ msgstr ""
 msgid "Program Rule Variable"
 msgstr "Program Rule Variable"
 
+msgid ""
+"There was an error updating notification templates for some stages: "
+"{{stagesNames}}"
+msgstr ""
+"There was an error updating notification templates for some stages: "
+"{{stagesNames}}"
+
 msgid "There was an error deleting stages: {{stagesNames}}"
 msgstr "There was an error deleting stages: {{stagesNames}}"
 
@@ -4632,8 +4641,17 @@ msgstr "Display enrolled TEs in the front page list"
 msgid "Set up notifications for this program."
 msgstr "Set up notifications for this program."
 
-msgid "No notifications been added yet"
-msgstr "No notifications been added yet"
+msgid "Notification {{- notificationName}} will be removed on save"
+msgstr "Notification {{- notificationName}} will be removed on save"
+
+msgid "Restore notification"
+msgstr "Restore notification"
+
+msgid "Program must be saved before notifications can be added"
+msgstr "Program must be saved before notifications can be added"
+
+msgid "No notifications have been added yet"
+msgstr "No notifications have been added yet"
 
 msgid "Add a notification"
 msgstr "Add a notification"
