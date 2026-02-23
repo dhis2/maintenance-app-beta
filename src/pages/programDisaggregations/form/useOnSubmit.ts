@@ -192,7 +192,6 @@ export const useOnSubmit = (
 
             if (
                 responseData &&
-                responseData &&
                 typeof responseData === 'object' &&
                 'httpStatusCode' in responseData &&
                 'response' in responseData &&
