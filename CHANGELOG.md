@@ -1,3 +1,10 @@
+# [0.128.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.127.0...v0.128.0) (2026-02-23)
+
+
+### Features
+
+* implement program stage notifications form ([#771](https://github.com/dhis2/maintenance-app-beta/issues/771)) ([95770e3](https://github.com/dhis2/maintenance-app-beta/commit/95770e39ac4637fea00f29a5a79d8ae31e9246b3))
+
 # [0.127.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.126.1...v0.127.0) (2026-02-19)
 
 
