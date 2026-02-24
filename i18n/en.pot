@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-18T10:59:22.921Z\n"
-"PO-Revision-Date: 2026-02-18T10:59:22.921Z\n"
+"POT-Creation-Date: 2026-02-23T22:42:06.852Z\n"
+"PO-Revision-Date: 2026-02-23T22:42:06.852Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -4767,8 +4767,14 @@ msgstr "Saving a notification does not save other changes to the program"
 msgid "Notification form saved"
 msgstr "Notification form saved"
 
+msgid "Program stage completion"
+msgstr "Program stage completion"
+
 msgid "When to send notification (required)"
 msgstr "When to send notification (required)"
+
+msgid "Allow notification to be sent multiple times"
+msgstr "Allow notification to be sent multiple times"
 
 msgid "Days since due date"
 msgstr "Days since due date"
@@ -4776,17 +4782,20 @@ msgstr "Days since due date"
 msgid "Days until due date"
 msgstr "Days until due date"
 
-msgid "Set up the basic information for the programNotification template."
-msgstr "Set up the basic information for the programNotification template."
-
 msgid "Recipient type (required)"
 msgstr "Recipient type (required)"
 
-msgid "Program attribute Recipient"
-msgstr "Program attribute Recipient"
+msgid "Program attribute recipient"
+msgstr "Program attribute recipient"
 
 msgid "No program attributes of type email or phone number found."
 msgstr "No program attributes of type email or phone number found."
+
+msgid "Data element recipient"
+msgstr "Data element recipient"
+
+msgid "No data elements of type email or phone number found."
+msgstr "No data elements of type email or phone number found."
 
 msgid "Web hook message URL (required)"
 msgstr "Web hook message URL (required)"
@@ -4796,6 +4805,9 @@ msgstr "Edit Program Notification"
 
 msgid "Recipient program attribute"
 msgstr "Recipient program attribute"
+
+msgid "Recipient data element"
+msgstr "Recipient data element"
 
 msgid "Event repetition"
 msgstr "Event repetition"
