@@ -68,12 +68,14 @@ export const NotificationTimingSection = ({
             form.change('relativeScheduledDays', undefined)
         }
     }, [isScheduledDays, form])
+    /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         triggerInput.onChange('COMPLETION')
         if (!isStageNotification) {
             form.change('sendRepeatable', undefined)
         }
-    }, [isStageNotification, form, triggerInput])
+    }, [isStageNotification])
+    /* eslint-enable react-hooks/exhaustive-deps */
 
     const handleBeforeAfterChange = (newValue: 'BEFORE' | 'AFTER') => {
         const absValue = Math.abs(Number(relativeScheduledDaysInput.value) || 0)

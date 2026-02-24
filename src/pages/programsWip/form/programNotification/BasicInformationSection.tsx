@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Radio } from '@dhis2/ui'
 import React, { useState } from 'react'
-import { Field as FieldRFF, useFormState } from 'react-final-form'
+import { useField, useFormState } from 'react-final-form'
 import { CodeField, NameField, StandardFormField } from '../../../../components'
 import { ModelSingleSelectField } from '../../../../components/metadataFormControls/ModelSingleSelect'
 import { SchemaSection } from '../../../../lib'
@@ -18,6 +18,7 @@ export const BasicInformationSection: React.FC<
     const [isStageNotification, setIsStageNotification] = useState(
         values.programStage?.id
     )
+    const { input, meta } = useField('programStage')
 
     return (
         <>
@@ -41,6 +42,10 @@ export const BasicInformationSection: React.FC<
                     checked={!isStageNotification}
                     onChange={({ checked }) => {
                         setIsStageNotification(!checked)
+                        if (checked) {
+                            input.onChange(undefined)
+                            input.onBlur()
+                        }
                     }}
                     label={i18n.t(
                         'Program: Send when there is activity in the program or enrollment',
@@ -62,30 +67,25 @@ export const BasicInformationSection: React.FC<
                 />
             </StandardFormField>
             {isStageNotification && (
-                <FieldRFF
-                    name="programStage"
-                    render={({ input, meta }) => (
-                        <StandardFormField>
-                            <ModelSingleSelectField
-                                input={input}
-                                meta={meta}
-                                inputWidth="400px"
-                                dataTest="programStage-field"
-                                label={i18n.t('Program stage')}
-                                disabled={values.id}
-                                query={{
-                                    resource: 'programStages',
-                                    params: {
-                                        fields: ['id', 'displayName'],
-                                        filter: `program.id:eq:${values.program.id}`,
-                                        paging: false,
-                                        order: 'displayName',
-                                    },
-                                }}
-                            />
-                        </StandardFormField>
-                    )}
-                />
+                <StandardFormField>
+                    <ModelSingleSelectField
+                        input={input}
+                        meta={meta}
+                        inputWidth="400px"
+                        dataTest="programStage-field"
+                        label={i18n.t('Program stage')}
+                        disabled={values.id}
+                        query={{
+                            resource: 'programStages',
+                            params: {
+                                fields: ['id', 'displayName'],
+                                filter: `program.id:eq:${values.program.id}`,
+                                paging: false,
+                                order: 'displayName',
+                            },
+                        }}
+                    />
+                </StandardFormField>
             )}
         </>
     )
