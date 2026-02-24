@@ -9,7 +9,7 @@ const { identifiable, withDefaultListColumns, withAttributeValues } =
 export const optionSetBaseSchema = z.object({
     name: z.string().trim(),
     displayName: z.string().trim().optional(),
-    valueType: z.string(),
+    valueType: z.string().default('TEXT'),
     code: z.string().trim().optional(),
     options: z.object({ id: z.string() }).array().optional(),
 })
