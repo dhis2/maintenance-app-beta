@@ -57,6 +57,10 @@ export function ValueTypeField({
             input.onChange(values.optionSet.valueType)
             input.onBlur()
         }
+        if (!values.optionSet?.valueType && input.value === 'MULTI_TEXT') {
+            input.onChange(undefined)
+            input.onBlur()
+        }
     }, [values.optionSet, input])
 
     const optionSetHasMultiTextValueType =

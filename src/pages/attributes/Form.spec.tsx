@@ -158,9 +158,15 @@ describe('Attributes form tests', () => {
             { section, mockSchema },
             (
                 routeOptions,
-                { matchingExistingElementFilter = undefined } = {}
+                {
+                    matchingExistingElementFilter = undefined,
+                    overrideOptionSets = undefined,
+                } = {}
             ) => {
-                const optionSets = [testOptionSet(), testOptionSet()]
+                const optionSets = overrideOptionSets ?? [
+                    testOptionSet(),
+                    testOptionSet(),
+                ]
                 const screen = render(
                     <TestComponentWithRouter
                         path={`/${section.namePlural}`}
@@ -251,8 +257,27 @@ describe('Attributes form tests', () => {
             )
             expect(multiTextOptions).toHaveLength(0)
         })
-        it.skip('locks value type when option set is selected', async () => {
-            const { screen, optionSets } = await renderForm()
+        it('locks value type when option set is selected (non multi-select)', async () => {
+            const noMultiTextOptions = VALUE_TYPES_OPTIONS.map(
+                (o) => o.value
+            ).filter((o) => o !== 'MULTI_TEXT')
+            const overrideOptionSets = [
+                testOptionSet(),
+                {
+                    ...testOptionSet(),
+                    valueType:
+                        noMultiTextOptions[
+                            Math.floor(
+                                Math.random() * noMultiTextOptions.length
+                            )
+                        ],
+                },
+                testOptionSet(),
+            ]
+            const { screen, optionSets } = await renderForm({
+                overrideOptionSets,
+            })
+
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('formfields-optionSet'),
                 { options: optionSets },
@@ -299,6 +324,63 @@ describe('Attributes form tests', () => {
                     selected: getConstantTranslation(
                         optionSets?.[1]?.valueType
                     ),
+                    disabled: false,
+                },
+                screen
+            )
+            expect(
+                screen.queryByText(
+                    'Disabled as the value type must match the value type of the selected option set'
+                )
+            ).toBeNull()
+        })
+        it('removes multi-text value type if option set is cleared', async () => {
+            const { screen, optionSets } = await renderForm({
+                overrideOptionSets: [
+                    testOptionSet(),
+                    { ...testOptionSet(), valueType: 'MULTI_TEXT' },
+                ],
+            })
+
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('formfields-optionSet'),
+                { options: optionSets },
+                screen
+            )
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('formfields-optionSet'),
+                1,
+                screen
+            )
+
+            // relevant value type is selected and value type is disabled
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('formfields-valueType'),
+                {
+                    options: VALUE_TYPES_OPTIONS,
+                    selected: getConstantTranslation('MULTI_TEXT'),
+                    disabled: true,
+                },
+                screen
+            )
+
+            expect(
+                screen.getByText(
+                    'Disabled as the value type must match the value type of the selected option set.'
+                )
+            ).toBeInTheDocument()
+
+            // clear selected option
+            await uiActions.clearSingleSelect('formfields-optionSet', screen)
+
+            // value type is cleared and is not disabled
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('formfields-valueType'),
+                {
+                    options: VALUE_TYPES_OPTIONS.filter(
+                        (o) => o.value !== 'MULTI_TEXT'
+                    ),
+                    selected: undefined,
                     disabled: false,
                 },
                 screen

@@ -1057,11 +1057,11 @@ describe('Data elements form tests', () => {
             await uiActions.submitForm(screen)
             expect(updateMock).not.toHaveBeenCalled()
         })
-        it('should have multi text as a value type if data set has that value type', async () => {
+        it('should have multi text as a value type if data element has option set with that value type', async () => {
             const { screen } = await renderForm({
                 dataElementOverwrites: {
                     valueType: 'MULTI_TEXT',
-                    optionSet: null,
+                    optionSet: { ...testOptionSet(), valueType: 'MULTI_TEXT' },
                 },
             })
 
