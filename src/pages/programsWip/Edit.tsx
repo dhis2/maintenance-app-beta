@@ -5,6 +5,7 @@ import arrayMutators from 'final-form-arrays'
 import { omit } from 'lodash'
 import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
+import { LegacyAppRedirect } from '../../app/routes/LegacyAppRedirect'
 import {
     DefaultFormFooter,
     DefaultSectionedFormSidebar,
@@ -34,6 +35,7 @@ import { ProgramStageListItem } from './form/ProgramStagesFormContents'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
+    'programType',
     'name',
     'shortName',
     'code',
@@ -261,10 +263,14 @@ export const Component = () => {
             },
         ] as const,
     })
+    const onSubmit = useOnSubmitProgramEdit(modelId)
+    if (program?.data?.programType === 'WITHOUT_REGISTRATION') {
+        return <LegacyAppRedirect section={SECTIONS_MAP.program} />
+    }
 
     return (
         <FormBase
-            onSubmit={useOnSubmitProgramEdit(modelId)}
+            onSubmit={onSubmit}
             initialValues={program.data}
             subscription={{}}
             mutators={{ ...arrayMutators }}
