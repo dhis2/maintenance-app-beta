@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-23T11:21:32.520Z\n"
-"PO-Revision-Date: 2026-02-23T11:21:32.521Z\n"
+"POT-Creation-Date: 2026-02-25T07:31:58.879Z\n"
+"PO-Revision-Date: 2026-02-25T07:31:58.880Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -4755,17 +4755,17 @@ msgstr "Maximum number of search results to display"
 msgid "Entering 0 shows all search results"
 msgstr "Entering 0 shows all search results"
 
-msgid "Close data entry a number of days after the end of a period"
-msgstr "Close data entry a number of days after the end of a period"
+msgid "Lock completed events after a number of days"
+msgstr "Lock completed events after a number of days"
 
 msgid "Number of days"
 msgstr "Number of days"
 
+msgid "Close data entry a number of days after the end of a period"
+msgstr "Close data entry a number of days after the end of a period"
+
 msgid "Expiry period type"
 msgstr "Expiry period type"
-
-msgid "Lock completed events after a number of days"
-msgstr "Lock completed events after a number of days"
 
 msgid "Close data entry a number of days after \"Implementing partner\" end date"
 msgstr "Close data entry a number of days after \"Implementing partner\" end date"

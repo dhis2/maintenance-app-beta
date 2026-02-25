@@ -97,36 +97,30 @@ const ProgramNotificationListNewOrEdit = ({
 
     return (
         <>
-            {(programNotificationsFieldArray.value ?? []).map(
-                (notification, index) => {
-                    if (notification.deleted) {
-                        return (
-                            <DeletedItem
-                                key={notification.id}
-                                id={notification.id}
-                                displayName={notification.displayName}
-                                index={index}
-                                handleCancelDelete={
-                                    handleCancelDeletedProgramNotification
-                                }
-                            />
-                        )
-                    }
+            {programNotificationsFieldArray.value.map((notification, index) => {
+                if (notification.deleted) {
                     return (
-                        <ListInFormItem
+                        <DeletedItem
                             key={notification.id}
-                            item={notification}
-                            schemaName={SchemaName.programNotificationTemplate}
-                            onClick={() =>
-                                setNotificationFormOpen(notification)
-                            }
-                            onDelete={() =>
-                                handleDeletedProgramNotification(index)
+                            id={notification.id}
+                            displayName={notification.displayName}
+                            index={index}
+                            handleCancelDelete={
+                                handleCancelDeletedProgramNotification
                             }
                         />
                     )
                 }
-            )}
+                return (
+                    <ListInFormItem
+                        key={notification.id}
+                        item={notification}
+                        schemaName={SchemaName.programNotificationTemplate}
+                        onClick={() => setNotificationFormOpen(notification)}
+                        onDelete={() => handleDeletedProgramNotification(index)}
+                    />
+                )
+            })}
         </>
     )
 }

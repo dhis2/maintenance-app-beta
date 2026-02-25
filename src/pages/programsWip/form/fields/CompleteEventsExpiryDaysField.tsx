@@ -30,7 +30,7 @@ export function CompleteEventsExpiryDaysField() {
         }
     }, [input.value])
 
-    const num = Number(input.value) || 0
+    const num = Number(input.value)
 
     const onToggle = (next: boolean) => {
         setChecked(next)
