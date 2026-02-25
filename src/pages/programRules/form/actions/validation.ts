@@ -18,7 +18,7 @@ function getFieldFlags(values: ProgramRuleActionFormValues) {
         hasOptionGroup: !!values.optionGroup?.id,
         hasProgramStageSection: !!values.programStageSection?.id,
         hasProgramStage: !!values.programStage?.id,
-        hasNotificationTemplate: !!values.notificationTemplate?.id,
+        hasNotificationTemplate: !!values.templateUid,
         hasContent: !!values.content,
         hasData: !!values.data,
         hasLocation: !!values.location,

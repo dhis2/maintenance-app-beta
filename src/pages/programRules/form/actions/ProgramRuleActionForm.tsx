@@ -1,4 +1,4 @@
-import { useAlert } from '@dhis2/app-runtime'
+import { useAlert, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Box, Button, SingleSelectFieldFF } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
@@ -17,6 +17,10 @@ import {
 import { LoadingSpinner } from '../../../../components/loading/LoadingSpinner'
 import {
     createFormError,
+    createJsonPatchOperations,
+    SchemaName,
+    SchemaSection,
+    SECTIONS_MAP,
     useBoundResourceQueryFn,
     useCreateModel,
     usePatchModel,
@@ -30,11 +34,7 @@ import { PriorityField } from '../../fields'
 import { ActionTypeFieldsContent } from './ActionTypeFieldsContent'
 import { ACTION_FIELDS_TO_CLEAR, ACTION_TYPE_OPTIONS } from './constants'
 import styles from './ProgramRuleActionForm.module.css'
-import {
-    buildProgramRuleActionsForApi,
-    toProgramRuleActionApiPayload,
-    transformActionFromApi,
-} from './transformers'
+import { toProgramRuleActionApiPayload } from './transformers'
 import type {
     ProgramRuleActionListItem,
     ProgramRuleActionFormValues,
@@ -59,6 +59,14 @@ const actionFieldFilters = [
     'optionGroup[id,displayName]',
 ] as const
 
+export const actionsSchemaSection = {
+    name: SchemaName.programRuleAction,
+    namePlural: 'programRuleActions',
+    title: i18n.t('Action'),
+    titlePlural: i18n.t('Actions'),
+    parentSectionKey: 'programsAndTracker',
+} satisfies SchemaSection
+
 export const ProgramRuleActionForm = ({
     programId,
     programType,
@@ -72,9 +80,7 @@ export const ProgramRuleActionForm = ({
     onCancel: () => void
     onSubmit: FormBaseProps<ProgramRuleActionFormValues>['onSubmit']
 }>) => {
-    const initialValues = action
-        ? transformActionFromApi(action as ProgramRuleActionFormValues)
-        : ({} as ProgramRuleActionFormValues)
+    const initialValues = action ?? ({} as ProgramRuleActionFormValues)
 
     return (
         <FormBase
@@ -99,21 +105,21 @@ export const EditProgramRuleActionForm = ({
     action,
     programId,
     programType,
-    programRuleId,
-    allActions,
     onCancel,
     onSubmitted,
 }: {
     action: ProgramRuleActionListItem
     programId?: string
     programType?: string
-    programRuleId: string
-    allActions: ProgramRuleActionListItem[]
     onCancel: () => void
     onSubmitted: (values: ProgramRuleActionListItem) => void
 }) => {
-    const patchProgramRule = usePatchModel(programRuleId, 'programRules')
     const queryFn = useBoundResourceQueryFn()
+    const handlePatch = usePatchModel(
+        action.id,
+        actionsSchemaSection.namePlural
+    )
+
     const { show: showSuccess } = useAlert(
         i18n.t('Program rule action saved'),
         { success: true }
@@ -133,20 +139,13 @@ export const EditProgramRuleActionForm = ({
     })
 
     const onFormSubmit: FormBaseProps<ProgramRuleActionFormValues>['onSubmit'] =
-        async (values) => {
-            const programRuleActionsPayload = buildProgramRuleActionsForApi(
-                allActions,
-                action.id,
-                values,
-                programRuleId
-            )
-            const response = await patchProgramRule([
-                {
-                    op: 'replace',
-                    path: '/programRuleActions',
-                    value: programRuleActionsPayload,
-                },
-            ])
+        async (values, form) => {
+            const jsonPatchOperations = createJsonPatchOperations({
+                values: values,
+                dirtyFields: form.getState().dirtyFields,
+                originalValue: form.getState().initialValues,
+            })
+            const response = await handlePatch(jsonPatchOperations)
             if (response.error) {
                 return createFormError(response.error)
             }
@@ -163,9 +162,7 @@ export const EditProgramRuleActionForm = ({
         return <LoadingSpinner />
     }
 
-    const actionData = actionValues.data
-        ? transformActionFromApi(actionValues.data)
-        : action
+    const actionData = actionValues.data ?? action
 
     return (
         <ProgramRuleActionForm
@@ -226,7 +223,6 @@ export const EditOrNewProgramRuleActionForm = ({
     programId,
     programType,
     programRuleId,
-    allActions,
     onCancel,
     onSubmitted,
 }: {
@@ -234,7 +230,6 @@ export const EditOrNewProgramRuleActionForm = ({
     programId?: string
     programType?: string
     programRuleId: string
-    allActions: ProgramRuleActionListItem[]
     onCancel: () => void
     onSubmitted: (values: ProgramRuleActionListItem) => void
 }) => {
@@ -259,8 +254,6 @@ export const EditOrNewProgramRuleActionForm = ({
             action={action}
             programId={programId}
             programType={programType}
-            programRuleId={programRuleId}
-            allActions={allActions}
             onCancel={onCancel}
             onSubmitted={onSubmitted}
         />

@@ -23,32 +23,12 @@ import {
 } from '../../lib'
 import {
     toProgramRuleActionApiPayload,
-    transformActionsFromApi,
     type ProgramRuleActionListItem,
 } from './form/actions'
 import { fieldFilters, ProgramRuleFormValues } from './form/fieldFilters'
 import { ProgramRuleFormDescriptor } from './form/formDescriptor'
 import { ProgramRuleFormFields } from './form/ProgramRuleFormFields'
 import { validate } from './form/programRuleSchema'
-
-function transformProgramRuleFromApi(
-    values?: ProgramRuleFormValues
-): ProgramRuleFormValues | undefined {
-    if (!values?.programRuleActions) {
-        return values
-    }
-
-    const transformedActions = transformActionsFromApi(
-        values.programRuleActions as Array<
-            ProgramRuleActionListItem & { templateUid?: string }
-        >
-    )
-
-    return {
-        ...values,
-        programRuleActions: transformedActions,
-    } as ProgramRuleFormValues
-}
 
 export const Component = () => {
     const modelId = useParams().id as string
@@ -134,7 +114,7 @@ export const Component = () => {
                     'saveAndExit',
             })
         },
-        [patchModel, onEditCompleted, dataEngine]
+        [patchModel, onEditCompleted, dataEngine, modelId]
     )
 
     const query = {
@@ -147,15 +127,10 @@ export const Component = () => {
         queryFn: queryFn<ProgramRuleFormValues>,
     })
 
-    const initialValues = useMemo(
-        () => transformProgramRuleFromApi(rawInitialValues),
-        [rawInitialValues]
-    )
-
     return (
         <FormBase
             onSubmit={onSubmit}
-            initialValues={initialValues}
+            initialValues={rawInitialValues}
             modelName={section.name}
             includeAttributes={false}
             validate={validate}

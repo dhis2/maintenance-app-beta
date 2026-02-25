@@ -37,7 +37,7 @@ const programRuleBaseSchema = z.object({
                 programStageSection: programRuleActionReference.optional(),
                 option: programRuleActionReference.optional(),
                 optionGroup: programRuleActionReference.optional(),
-                notificationTemplate: programRuleActionReference.optional(),
+                templateUid: programRuleActionReference.optional(),
                 priority: z.number().optional(),
                 access: AccessSchema.partial().optional(),
                 deleted: z.boolean().optional(),

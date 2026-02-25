@@ -110,7 +110,6 @@ const ProgramRuleActionListNewOrEdit = () => {
                             programId={programId}
                             programType={programType}
                             programRuleId={modelId}
-                            allActions={actionsFieldArray.value ?? []}
                             action={actionFormOpen}
                             onCancel={onCloseActionForm}
                             onSubmitted={handleSubmitted}
