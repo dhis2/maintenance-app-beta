@@ -197,6 +197,7 @@ const StageNotificationListNewOrEdit = ({
                                     stageDisplayName:
                                         stagesFieldArray?.value?.[stageIndex]
                                             .displayName,
+                                    nsSeparator: '~:~',
                                 }
                             ),
                         }}
