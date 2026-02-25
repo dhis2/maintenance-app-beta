@@ -1,3 +1,10 @@
+# [0.130.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.129.0...v0.130.0) (2026-02-25)
+
+
+### Features
+
+* better distinction between program and program stages notification  ([edfd5d9](https://github.com/dhis2/maintenance-app-beta/commit/edfd5d9caa2782f36283ed3b57e7ff9d0778e786))
+
 # [0.129.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.128.0...v0.129.0) (2026-02-25)
 
 
