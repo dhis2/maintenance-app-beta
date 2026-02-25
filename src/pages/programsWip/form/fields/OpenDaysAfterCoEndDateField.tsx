@@ -25,7 +25,9 @@ export function OpenDaysAfterCoEndDateField() {
     const [checked, setChecked] = useState(() => isEnabled(input.value))
 
     useEffect(() => {
-        setChecked(isEnabled(input.value))
+        if (isEnabled(input.value)) {
+            setChecked(true)
+        }
     }, [input.value])
 
     const num = Number(input.value) || 0

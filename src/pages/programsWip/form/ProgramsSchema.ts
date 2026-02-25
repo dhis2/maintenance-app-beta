@@ -53,6 +53,7 @@ const programBaseSchema = z.object({
     displayIncidentDate: z.boolean().optional(),
     selectIncidentDatesInFuture: z.boolean().optional(),
     useFirstStageDuringRegistration: z.boolean().optional(),
+    ignoreOverdueEvents: z.boolean().optional(),
     programTrackedEntityAttributes: z
         .array(
             z.object({

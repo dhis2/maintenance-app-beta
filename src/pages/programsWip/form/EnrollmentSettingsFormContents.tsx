@@ -142,6 +142,17 @@ export const EnrollmentSettingsFormContents = React.memo(
                         )}
                     />
                 </StandardFormField>
+
+                <StandardFormField>
+                    <Field
+                        name="ignoreOverdueEvents"
+                        type="checkbox"
+                        component={CheckboxFieldFF}
+                        label={i18n.t(
+                            'Do not create overdue events when automatically creating program stage events'
+                        )}
+                    />
+                </StandardFormField>
             </SectionedFormSection>
         )
     }

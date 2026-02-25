@@ -18,6 +18,13 @@ import {
 } from './programStage/StageForm'
 import css from './ProgramStagesForm.module.css'
 
+export type StageNotificationTemplate = {
+    id: string
+    name: string
+    displayName: string
+    deleted?: boolean
+}
+
 export type ProgramStageListItem = {
     id: string
     displayName: string
@@ -25,12 +32,7 @@ export type ProgramStageListItem = {
     deleted?: boolean
     access?: Access
     program?: { id: string }
-    notificationTemplates?: {
-        id: string
-        name: string
-        displayName: string
-        deleted?: boolean
-    }[]
+    notificationTemplates?: StageNotificationTemplate[]
 }
 
 export const ProgramStagesFormContents = React.memo(
