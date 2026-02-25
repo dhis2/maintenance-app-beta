@@ -111,7 +111,9 @@ const handleStageNotificationDeletions = async ({
 }): Promise<string[]> => {
     // stage notification templates marked for deletion
     const notificationTemplatesToDelete = stages
-        .map((s) => s.notificationTemplates?.filter((nt) => nt.deleted))
+        .map((stage) =>
+            stage.notificationTemplates?.filter((template) => template.deleted)
+        )
         .flat()
 
     if (notificationTemplatesToDelete.length === 0) {
@@ -119,20 +121,20 @@ const handleStageNotificationDeletions = async ({
     }
 
     const notificationTemplateDeletionResults = await Promise.allSettled(
-        notificationTemplatesToDelete.map((s) =>
+        notificationTemplatesToDelete.map((template) =>
             dataEngine.mutate({
                 resource: 'programNotificationTemplates',
-                id: s?.id as string,
+                id: template?.id as string,
                 type: 'delete',
             })
         )
     )
 
     const notificationDeletedFailures = notificationTemplateDeletionResults
-        .filter((d) => d.status === 'rejected')
+        .filter((result) => result.status === 'rejected')
         .map(
-            (failure, i) =>
-                notificationTemplatesToDelete?.[i]?.displayName ?? ''
+            (_failure, index) =>
+                notificationTemplatesToDelete?.[index]?.displayName ?? ''
         )
 
     return notificationDeletedFailures
@@ -189,19 +191,19 @@ export const useOnSubmitProgramEdit = (modelId: string) => {
             }
 
             const stagesDeletionResults = await Promise.allSettled(
-                stagesToDelete.map((s) =>
+                stagesToDelete.map((stage) =>
                     dataEngine.mutate({
                         resource: 'programStages',
-                        id: s.id,
+                        id: stage.id,
                         type: 'delete',
                     })
                 )
             )
 
             const stagesDeletionFailures = stagesDeletionResults
-                .map((deletion, i) => ({
+                .map((deletion, index) => ({
                     ...deletion,
-                    stageName: stagesToDelete[i].displayName,
+                    stageName: stagesToDelete[index].displayName,
                 }))
                 .filter((deletion) => deletion.status === 'rejected')
 
@@ -214,7 +216,7 @@ export const useOnSubmitProgramEdit = (modelId: string) => {
                         'There was an error deleting stages: {{stagesNames}}',
                         {
                             stagesNames: stagesDeletionFailures
-                                .map((f) => f.stageName)
+                                .map((failure) => failure.stageName)
                                 .join(', '),
                             nsSeparator: '~-~',
                         }
@@ -270,7 +272,7 @@ export const Component = () => {
     return (
         <FormBase
             onSubmit={useOnSubmitProgramEdit(modelId)}
-            initialValues={program?.data ?? programFormInitialValues}
+            initialValues={programFormInitialValues}
             subscription={{}}
             mutators={{ ...arrayMutators }}
             validate={validate}
