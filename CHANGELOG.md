@@ -1,3 +1,10 @@
+# [0.129.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.128.0...v0.129.0) (2026-02-25)
+
+
+### Features
+
+* add missing field and hide edit of event programs ([#778](https://github.com/dhis2/maintenance-app-beta/issues/778)) ([7a9ad5b](https://github.com/dhis2/maintenance-app-beta/commit/7a9ad5b8153f2fff78ba3ac10dc952eb713fb19a))
+
 # [0.128.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.127.0...v0.128.0) (2026-02-23)
 
 
