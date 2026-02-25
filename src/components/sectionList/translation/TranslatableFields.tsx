@@ -17,7 +17,11 @@ interface TranslatableFieldsProps {
     selectedLocale?: { locale: string } | undefined
 }
 
-const longTextFields = ['description', 'subjectTemplate', 'messageTemplate']
+export const longTextFields = [
+    'description',
+    'subjectTemplate',
+    'messageTemplate',
+]
 
 const TranslatableFields: React.FC<TranslatableFieldsProps> = ({
     translatableFields,
