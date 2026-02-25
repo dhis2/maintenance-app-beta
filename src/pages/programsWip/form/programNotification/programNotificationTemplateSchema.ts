@@ -39,7 +39,14 @@ const programNotificationTemplateBaseSchema = z.object({
             displayName: z.string().optional(),
         })
         .optional(),
+    sendRepeatable: z.boolean().optional(),
     recipientProgramAttribute: z
+        .object({
+            id: z.string().optional(),
+            displayName: z.string().optional(),
+        })
+        .optional(),
+    recipientDataElement: z
         .object({
             id: z.string().optional(),
             displayName: z.string().optional(),

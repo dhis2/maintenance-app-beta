@@ -37,6 +37,12 @@ export const programNotificationFormDescriptor = {
                     name: 'relativeScheduledDays',
                     label: i18n.t('Scheduled days'),
                 },
+                {
+                    name: 'sendRepeatable',
+                    label: i18n.t(
+                        'Allow notification to be sent multiple times'
+                    ),
+                },
             ],
         },
         {
@@ -56,10 +62,6 @@ export const programNotificationFormDescriptor = {
                     label: i18n.t('Recipient user group'),
                 },
                 {
-                    name: 'recipientUserGroup',
-                    label: i18n.t('Recipient user group'),
-                },
-                {
                     name: 'notifyUsersInHierarchyOnly',
                     label: i18n.t('Notify users in hierarchy only'),
                 },
@@ -70,6 +72,10 @@ export const programNotificationFormDescriptor = {
                 {
                     name: 'recipientProgramAttribute',
                     label: i18n.t('Recipient program attribute'),
+                },
+                {
+                    name: 'recipientDataElement',
+                    label: i18n.t('Recipient data element'),
                 },
             ],
         },

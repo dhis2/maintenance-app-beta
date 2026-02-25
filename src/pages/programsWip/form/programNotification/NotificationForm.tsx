@@ -33,6 +33,7 @@ import {
     PickWithFieldFilters,
     ProgramNotificationTemplate,
 } from '../../../../types/models'
+import { DisplayableModelAndStageId } from '../ProgramNotificationsFormContents'
 import styles from './NotificationForm.module.css'
 import { programNotificationFormDescriptor } from './programNotificationFormDescriptor'
 import { ProgramNotificationsFormFields } from './ProgramNotificationsFormFields'
@@ -52,6 +53,8 @@ export const fieldFilters = [
     'notifyUsersInHierarchyOnly',
     'notifyParentOrganisationUnitOnly',
     'recipientProgramAttribute[id,displayName]',
+    'recipientDataElement[id,displayName]',
+    'sendRepeatable',
 ] as const
 
 export const notificationSchemaSection = {
@@ -67,6 +70,7 @@ export type NotificationFormValues = PickWithFieldFilters<
     typeof fieldFilters
 > & {
     program: { id: string }
+    programStage?: { id: string }
 }
 
 type PartialNotificationFormValues = Partial<NotificationFormValues>
@@ -202,7 +206,7 @@ export const EditNotificationForm = ({
     onCancel,
     onSubmitted,
 }: {
-    notification: DisplayableModel
+    notification: DisplayableModelAndStageId
     onCancel: () => void
     onSubmitted: (
         values: SubmittedNotificationFormValues,
@@ -273,7 +277,13 @@ export const EditNotificationForm = ({
 
     return (
         <NotificationForm
-            notification={notificationValues.data}
+            notification={{
+                ...notificationValues.data,
+                programStage:
+                    notification.stageId !== undefined
+                        ? { id: notification.stageId }
+                        : undefined,
+            }}
             onSubmit={onFormSubmit}
             onCancel={onCancel}
         />
@@ -283,14 +293,16 @@ export const EditNotificationForm = ({
 export const NewNotificationForm = ({
     onCancel,
     onSubmitted,
-    notificationList,
+    programNotificationList,
+    stagesNotificationList,
 }: {
     onCancel: () => void
     onSubmitted: (
         values: SubmittedNotificationFormValues,
         closeOnSubmit: boolean
     ) => void
-    notificationList: { id: string }[]
+    programNotificationList: { id: string }[]
+    stagesNotificationList: Record<string, { id: string }[]>
 }) => {
     const handleCreate = useCreateModel(notificationSchemaSection.namePlural)
     const engine = useDataEngine()
@@ -310,13 +322,24 @@ export const NewNotificationForm = ({
         if (values.program?.id) {
             const patchOperations = {
                 type: 'json-patch',
-                resource: SECTIONS_MAP.program.namePlural,
-                id: values.program.id,
+                resource: values.programStage
+                    ? SECTIONS_MAP.programStage.namePlural
+                    : SECTIONS_MAP.program.namePlural,
+                id: values.programStage
+                    ? values.programStage.id
+                    : values.program.id,
                 data: [
                     {
                         op: 'replace',
                         path: '/notificationTemplates',
-                        value: [...notificationList, { id: newId }],
+                        value: values.programStage
+                            ? [
+                                  ...stagesNotificationList[
+                                      values.programStage.id
+                                  ],
+                                  { id: newId },
+                              ]
+                            : [...programNotificationList, { id: newId }],
                     },
                 ],
             } as const
@@ -351,15 +374,17 @@ export const EditOrNewNotificationForm = ({
     notification,
     onCancel,
     onSubmitted,
-    notificationList,
+    programNotificationList,
+    stagesNotificationList,
 }: {
-    notification: DisplayableModel | null | undefined
+    notification: DisplayableModelAndStageId | null | undefined
     onCancel: () => void
     onSubmitted: (
         values: SubmittedNotificationFormValues,
         closeOnSubmit: boolean
     ) => void
-    notificationList: { id: string }[]
+    programNotificationList: { id: string }[]
+    stagesNotificationList: Record<string, { id: string }[]>
 }) => {
     if (notification === undefined) {
         return null
@@ -370,7 +395,8 @@ export const EditOrNewNotificationForm = ({
             <NewNotificationForm
                 onSubmitted={onSubmitted}
                 onCancel={onCancel}
-                notificationList={notificationList}
+                programNotificationList={programNotificationList}
+                stagesNotificationList={stagesNotificationList}
             />
         )
     }
