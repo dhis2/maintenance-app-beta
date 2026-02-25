@@ -1,7 +1,11 @@
 import { z } from 'zod'
-import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
+import {
+    getDefaultsOld,
+    createFormValidate,
+    modelFormSchemas,
+} from '../../../lib'
 
-/*  Note that this describes what we send to the server, 
+/*  Note that this describes what we send to the server,
     and not what is stored in the form. */
 const {
     identifiable,
@@ -30,6 +34,6 @@ export const indicatorGroupListSchema = indicatorGroupBaseSchema
         displayShortName: z.string(),
     })
 
-export const initialValues = getDefaults(indicatorGroupFormSchema)
+export const initialValues = getDefaultsOld(indicatorGroupFormSchema)
 
 export const validate = createFormValidate(indicatorGroupFormSchema)
