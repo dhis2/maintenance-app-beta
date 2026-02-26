@@ -104,60 +104,71 @@ export const OrganisationUnitTreeWithToolbar = ({
         onChange(newSelected)
     }
 
-    const handleLevelSelect: OrgUnitLevelGroupSelectProps['onLevelSelect'] =
-        async (level) => {
-            const orgUnits = await queryClient.fetchQuery({
-                queryFn: boundQueryFn<{
-                    organisationUnits: OrganisationUnitValue[]
-                }>,
-                queryKey: [
-                    {
-                        resource: 'organisationUnits',
-                        params: {
-                            fields: ['id', 'path', 'displayName'],
-                            filter: [`level:eq:${level.level}`],
-                            paging: false,
-                        },
+    const handleLevelSelectChange = async (
+        level: Parameters<OrgUnitLevelGroupSelectProps['onLevelSelect']>[0],
+        mode: 'select' | 'deselect'
+    ) => {
+        const orgUnits = await queryClient.fetchQuery({
+            queryFn: boundQueryFn<{
+                organisationUnits: OrganisationUnitValue[]
+            }>,
+            queryKey: [
+                {
+                    resource: 'organisationUnits',
+                    params: {
+                        fields: ['id', 'path', 'displayName'],
+                        filter: [`level:eq:${level.level}`],
+                        paging: false,
                     },
-                ],
-            })
-            const allNewSelected = selected?.concat(orgUnits.organisationUnits)
-            if (allNewSelected) {
-                onChange(uniqueBy(allNewSelected, (o) => o.path))
-            }
-        }
+                },
+            ],
+        })
+        applyOrgUnitSelectionChange(orgUnits.organisationUnits, mode)
+    }
 
-    const handleGroupSelect: OrgUnitLevelGroupSelectProps['onGroupSelect'] =
-        async (group) => {
-            const orgUnits = await queryClient.fetchQuery({
-                queryFn: boundQueryFn<{
-                    organisationUnits: OrganisationUnitValue[]
-                }>,
-                queryKey: [
-                    {
-                        resource: 'organisationUnits',
-                        params: {
-                            fields: ['id', 'path', 'displayName'],
-                            filter: [
-                                `organisationUnitGroups.id:eq:${group.id}`,
-                            ],
-                            paging: false,
-                        },
+    const handleGroupSelectChange = async (
+        group: Parameters<OrgUnitLevelGroupSelectProps['onGroupSelect']>[0],
+        mode: 'select' | 'deselect'
+    ) => {
+        const orgUnits = await queryClient.fetchQuery({
+            queryFn: boundQueryFn<{
+                organisationUnits: OrganisationUnitValue[]
+            }>,
+            queryKey: [
+                {
+                    resource: 'organisationUnits',
+                    params: {
+                        fields: ['id', 'path', 'displayName'],
+                        filter: [`organisationUnitGroups.id:eq:${group.id}`],
+                        paging: false,
                     },
-                ],
-            })
-            const allNewSelected = selected?.concat(orgUnits.organisationUnits)
-            if (allNewSelected) {
-                onChange(uniqueBy(allNewSelected, (o) => o.path))
-            }
+                },
+            ],
+        })
+        applyOrgUnitSelectionChange(orgUnits.organisationUnits, mode)
+    }
+
+    const applyOrgUnitSelectionChange = (
+        orgUnits: OrganisationUnitValue[],
+        mode: 'select' | 'deselect'
+    ) => {
+        const current = selected ?? []
+        if (mode === 'select') {
+            onChange(uniqueBy(current.concat(orgUnits), (o) => o.path))
+        } else {
+            const pathsToRemove = new Set(orgUnits.map((ou) => ou.path))
+            onChange(current.filter((ou) => !pathsToRemove.has(ou.path)))
         }
+    }
 
     return (
         <div className={css.wrapper}>
             <OrganisationUnitTreeToolbar
                 onSearchChange={setSearch}
-                onGroupSelect={handleGroupSelect}
-                onLevelSelect={handleLevelSelect}
+                onLevelSelect={(l) => handleLevelSelectChange(l, 'select')}
+                onGroupSelect={(g) => handleGroupSelectChange(g, 'select')}
+                onLevelDeselect={(l) => handleLevelSelectChange(l, 'deselect')}
+                onGroupDeselect={(g) => handleGroupSelectChange(g, 'deselect')}
                 onDeselectAll={() => onChange([])}
                 minRootLevel={minRootLevel}
             />
@@ -192,6 +203,8 @@ type OrganisationUnitTreeToolbarProps = {
     onSearchChange: (search: string) => void
     onGroupSelect: OrgUnitLevelGroupSelectProps['onGroupSelect']
     onLevelSelect: OrgUnitLevelGroupSelectProps['onLevelSelect']
+    onGroupDeselect: OrgUnitLevelGroupSelectProps['onGroupDeselect']
+    onLevelDeselect: OrgUnitLevelGroupSelectProps['onLevelDeselect']
     onDeselectAll: OrgUnitLevelGroupSelectProps['onDeselectAll']
     minRootLevel?: number
 }
@@ -200,6 +213,8 @@ const OrganisationUnitTreeToolbar = ({
     onDeselectAll,
     onGroupSelect,
     onLevelSelect,
+    onGroupDeselect,
+    onLevelDeselect,
     minRootLevel,
 }: OrganisationUnitTreeToolbarProps) => {
     const { liveValue: search, setValue: setSearchValue } = useDebouncedState({
@@ -222,6 +237,8 @@ const OrganisationUnitTreeToolbar = ({
             <OrgUnitLevelGroupSelect
                 onGroupSelect={onGroupSelect}
                 onLevelSelect={onLevelSelect}
+                onGroupDeselect={onGroupDeselect}
+                onLevelDeselect={onLevelDeselect}
                 onDeselectAll={onDeselectAll}
                 minlevel={minRootLevel}
             />

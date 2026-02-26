@@ -52,6 +52,23 @@ export const ModelValueRenderer = ({
         return <TextValue value={(value as string).toString()} />
     }
 
+    if (
+        path === 'fromConstraint.relationshipEntity' ||
+        path === 'toConstraint.relationshipEntity'
+    ) {
+        let label = (value as string).toString()
+
+        if (value === 'PROGRAM_STAGE_INSTANCE') {
+            label = i18n.t('Event')
+        } else if (value === 'PROGRAM_INSTANCE') {
+            label = i18n.t('Enrollment')
+        } else if (value === 'TRACKED_ENTITY_INSTANCE') {
+            label = i18n.t('Tracked entity')
+        }
+
+        return <TextValue value={label} />
+    }
+
     if (propertyType === 'CONSTANT') {
         return <ConstantValue value={value as string} />
     }

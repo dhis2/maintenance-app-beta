@@ -1,6 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
-import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaultsOld,
+    modelFormSchemas,
+} from '../../../lib'
 import { Indicator, PickWithFieldFilters } from '../../../types/generated'
 import { fieldFilters } from '../../programIndicators/form/fieldFilters'
 
@@ -38,7 +42,7 @@ export const indicatorListSchema = indicatorBaseSchema
         displayShortName: z.string(),
     })
 
-export const initialValues = getDefaults(indicatorFormSchema)
+export const initialValues = getDefaultsOld(indicatorFormSchema)
 export const validate = createFormValidate(indicatorFormSchema)
 export type IndicatorFormValues = PickWithFieldFilters<
     Indicator,

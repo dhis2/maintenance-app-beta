@@ -114,7 +114,10 @@ const ProgramNotificationListNewOrEdit = ({
                 return (
                     <ListInFormItem
                         key={notification.id}
-                        item={notification}
+                        item={{
+                            ...notification,
+                            description: i18n.t('Notification type: Program'),
+                        }}
                         schemaName={SchemaName.programNotificationTemplate}
                         onClick={() => setNotificationFormOpen(notification)}
                         onDelete={() => handleDeletedProgramNotification(index)}
@@ -186,7 +189,18 @@ const StageNotificationListNewOrEdit = ({
                 return (
                     <ListInFormItem
                         key={notification.id}
-                        item={notification}
+                        item={{
+                            ...notification,
+                            description: i18n.t(
+                                'Notification type: Stage | Stage: {{stageDisplayName}}',
+                                {
+                                    stageDisplayName:
+                                        stagesFieldArray?.value?.[stageIndex]
+                                            .displayName,
+                                    nsSeparator: '~:~',
+                                }
+                            ),
+                        }}
                         schemaName={SchemaName.programNotificationTemplate}
                         onClick={() => setNotificationFormOpen(notification)}
                         onDelete={() => {

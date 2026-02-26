@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { object, z } from 'zod'
 import {
-    getDefaults,
+    getDefaultsOld,
     createFormValidate,
     modelFormSchemas,
     DEFAULT_CATEGORY_COMBO,
@@ -114,6 +114,6 @@ export const programFormSchema = identifiable.merge(programBaseSchema).extend({
 
 export const programListSchema = programBaseSchema.merge(withDefaultListColumns)
 
-export const initialValues = getDefaults(programFormSchema)
+export const initialValues = getDefaultsOld(programFormSchema)
 
 export const validate = createFormValidate(programFormSchema)

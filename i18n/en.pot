@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-25T07:31:58.879Z\n"
-"PO-Revision-Date: 2026-02-25T07:31:58.880Z\n"
+"POT-Creation-Date: 2026-02-25T08:49:49.064Z\n"
+"PO-Revision-Date: 2026-02-25T08:49:49.064Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1900,6 +1900,24 @@ msgstr "Maximum number of tracked entity instances to return in search"
 msgid "Minimum number of attributes required to search"
 msgstr "Minimum number of attributes required to search"
 
+msgid "Subject template"
+msgstr "Subject template"
+
+msgid "Message template"
+msgstr "Message template"
+
+msgid "Program stage label"
+msgstr "Program stage label"
+
+msgid "Due date label"
+msgstr "Due date label"
+
+msgid "Execution date label"
+msgstr "Execution date label"
+
+msgid "Event label"
+msgstr "Event label"
+
 msgid "Unknown error"
 msgstr "Unknown error"
 
@@ -1951,9 +1969,6 @@ msgstr "Please provide a date."
 msgid "Period type"
 msgstr "Period type"
 
-msgid "Message template"
-msgstr "Message template"
-
 msgid "Favourite"
 msgstr "Favourite"
 
@@ -1974,9 +1989,6 @@ msgstr "Relative scheduled days"
 
 msgid "Send notification as"
 msgstr "Send notification as"
-
-msgid "Subject template"
-msgstr "Subject template"
 
 msgid "Offline levels"
 msgstr "Offline levels"

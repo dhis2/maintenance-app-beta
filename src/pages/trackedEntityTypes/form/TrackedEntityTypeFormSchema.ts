@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaultsOld,
+    modelFormSchemas,
+} from '../../../lib'
 
 const {
     identifiable,
@@ -65,7 +69,7 @@ export const trackedEntityTypeListSchema = trackedEntityTypeBaseSchema
         displayShortName: z.string(),
     })
 
-export const initialTrackedEntityTypeValues = getDefaults(
+export const initialTrackedEntityTypeValues = getDefaultsOld(
     trackedEntityTypeFormSchema
 )
 export const validateTrackedEntityType = createFormValidate(

@@ -1,5 +1,6 @@
 import { z } from 'zod'
-import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
+import { createFormValidate, modelFormSchemas } from '../../../lib'
+import { getDefaults } from '../../../lib/zod/getDefaults'
 import { Category } from '../../../types/generated'
 
 /*  Note that this describes what we send to the server,
@@ -12,9 +13,7 @@ const {
 } = modelFormSchemas
 
 const categoryBaseSchema = z.object({
-    dataDimensionType: z
-        .nativeEnum(Category.dataDimensionType)
-        .default(Category.dataDimensionType.DISAGGREGATION),
+    dataDimensionType: z.nativeEnum(Category.dataDimensionType),
 })
 
 export const categoryFormSchema = identifiable
@@ -23,10 +22,8 @@ export const categoryFormSchema = identifiable
     .extend({
         shortName: z.string().trim(),
         description: z.string().trim().optional(),
-        dataDimension: z.boolean().default(true),
-        categoryOptions: referenceCollection
-            .min(1, 'At least one category option is required')
-            .default([]),
+        dataDimension: z.boolean(),
+        categoryOptions: referenceCollection,
     })
 
 export const categoryListSchema = categoryBaseSchema
@@ -35,6 +32,15 @@ export const categoryListSchema = categoryBaseSchema
         displayShortName: z.string(),
     })
 
-export const initialValues = getDefaults(categoryFormSchema)
+export const initialValues = getDefaults(categoryFormSchema, {
+    dataDimensionType: Category.dataDimensionType.DISAGGREGATION,
+    dataDimension: true,
+})
 
-export const validate = createFormValidate(categoryFormSchema)
+const validatingCategoryFormSchema = categoryFormSchema.extend({
+    categoryOptions: referenceCollection.min(
+        1,
+        'At least one category option is required'
+    ),
+})
+export const validate = createFormValidate(validatingCategoryFormSchema)

@@ -3,25 +3,27 @@ import { z } from 'zod'
 /*  Note that these schemas describes validations for what we send to the server,
     and not what is stored in the form. Unknown keys are stripped by default. */
 
-const modelReference = z.object({ id: z.string() })
+const modelReference = z.object({
+    id: z.string(),
+    displayName: z.string().optional(),
+})
 const referenceCollection = z.array(modelReference)
 
 /* Note that ID is optional here because we don't have ID when creating/POSTING models */
 const identifiable = z.object({
     id: z.string().optional(),
     name: z.string().trim(),
+    displayName: z.string().optional(),
 })
 
-const attributeValues = z
-    .array(
-        z.object({
-            value: z.string(),
-            attribute: z.object({
-                id: z.string(),
-            }),
-        })
-    )
-    .default([])
+const attributeValues = z.array(
+    z.object({
+        value: z.string(),
+        attribute: z.object({
+            id: z.string(),
+        }),
+    })
+)
 
 const withAttributeValues = z.object({
     attributeValues: attributeValues,
@@ -57,14 +59,22 @@ export const AccessSchema = z.object({
         .optional(),
 })
 
+const dateTimeString = z
+    .string()
+    .regex(
+        /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}$/,
+        'Invalid date-time format, expected YYYY-MM-DDTHH:mm:ss.sss'
+    )
+
 const withDefaultListColumns = z.object({
     id: z.string(),
     displayName: z.string(),
-    created: z.coerce.date(),
+    created: dateTimeString,
     createdBy: UserSchema,
     href: z.string().url(),
-    lastUpdated: z.coerce.date(),
+    lastUpdated: dateTimeString,
     lastUpdatedBy: UserSchema.optional(),
+    // todo: change this to accept all possible
     sharing: z.object({ public: z.literal('rw------') }),
     access: AccessSchema,
 })
