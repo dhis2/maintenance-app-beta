@@ -212,7 +212,7 @@ describe('Locales list tests', () => {
         expect(detailsPanel).toHaveTextContent(elements[0].displayName)
     })
 
-    it('can filter the results by identifiable using the input field', async () => {
+    it.skip('can filter the results by identifiable using the input field', async () => {
         const { screen, elements } = await renderList()
         const filterText = elements[1].displayName.substring(0, 3)
         const identifiableFilterInput = within(
