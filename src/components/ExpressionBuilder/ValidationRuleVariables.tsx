@@ -646,7 +646,7 @@ const predictorElementTypes = [
     ...baseElementTypes,
 ]
 
-const VARIABLE_ELEMENTS = [
+const PI_VARIABLE_ELEMENTS = [
     {
         id: 'V{analytics_period_end}',
         displayName: i18n.t('Analytics period end'),
@@ -668,7 +668,18 @@ const VARIABLE_ELEMENTS = [
         id: 'V{zero_pos_value_count}',
         displayName: i18n.t('Zero or positive value count'),
     },
-]
+].sort((a, b) => a.displayName?.localeCompare(b.displayName))
+
+const PI_VARIABLE_ELEMENTS_COUNT = [
+    ...PI_VARIABLE_ELEMENTS,
+    { id: 'V{enrollment_count}', displayName: i18n.t('Enrollment count') },
+    { id: 'V{event_count}', displayName: i18n.t('Event count') },
+    { id: 'V{org_unit_count}', displayName: i18n.t('Organisation unit count') },
+    {
+        id: 'V{tei_count}',
+        displayName: i18n.t('Tracked entity instance count'),
+    },
+].sort((a, b) => a.displayName?.localeCompare(b.displayName))
 
 const programIndicatorElementTypes: ElementType[] = [
     {
@@ -680,7 +691,7 @@ const programIndicatorElementTypes: ElementType[] = [
     {
         type: 'variables',
         name: i18n.t('Variables'),
-        elements: VARIABLE_ELEMENTS,
+        elements: PI_VARIABLE_ELEMENTS,
         component: DefaultList,
     },
     {
@@ -700,9 +711,24 @@ const programIndicatorElementTypes: ElementType[] = [
     },
 ]
 
-export const getElementTypes = (type: ExpressionBuilderType): ElementType[] => {
+const programIndicatorElementTypesCount: ElementType[] = [
+    ...programIndicatorElementTypes,
+]
+programIndicatorElementTypesCount[1] = {
+    type: 'variables',
+    name: i18n.t('Variables'),
+    elements: PI_VARIABLE_ELEMENTS_COUNT,
+    component: DefaultList,
+}
+
+export const getElementTypes = (
+    type: ExpressionBuilderType,
+    { aggregationType }: { aggregationType: string | undefined }
+): ElementType[] => {
     if (type === 'programIndicator') {
-        return programIndicatorElementTypes
+        return aggregationType === 'COUNT'
+            ? programIndicatorElementTypesCount
+            : programIndicatorElementTypes
     }
     if (type === 'indicator') {
         return indicatorElementTypes

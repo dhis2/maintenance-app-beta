@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-25T08:49:49.064Z\n"
-"PO-Revision-Date: 2026-02-25T08:49:49.064Z\n"
+"POT-Creation-Date: 2026-02-26T13:45:05.969Z\n"
+"PO-Revision-Date: 2026-02-26T13:45:05.969Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -573,17 +573,23 @@ msgstr "{{fieldLabel}} (required)"
 msgid "Name"
 msgstr "Name"
 
-msgid "Level"
-msgstr "Level"
+msgid "Select by level"
+msgstr "Select by level"
 
-msgid "Group"
-msgstr "Group"
+msgid "Select by group"
+msgstr "Select by group"
+
+msgid "Deselect by level"
+msgstr "Deselect by level"
+
+msgid "Deselect by group"
+msgstr "Deselect by group"
 
 msgid "Deselect all"
 msgstr "Deselect all"
 
-msgid "Select units by group or level..."
-msgstr "Select units by group or level..."
+msgid "Select/deselect by group or level"
+msgstr "Select/deselect by group or level"
 
 msgid "Search"
 msgstr "Search"
@@ -1918,6 +1924,30 @@ msgstr "Execution date label"
 msgid "Event label"
 msgstr "Event label"
 
+msgid "Tracked entity attribute label"
+msgstr "Tracked entity attribute label"
+
+msgid "Enrollment date label"
+msgstr "Enrollment date label"
+
+msgid "Incident date label"
+msgstr "Incident date label"
+
+msgid "Note label"
+msgstr "Note label"
+
+msgid "Enrollment label"
+msgstr "Enrollment label"
+
+msgid "Follow up label"
+msgstr "Follow up label"
+
+msgid "Organisation unit label"
+msgstr "Organisation unit label"
+
+msgid "Relationship label"
+msgstr "Relationship label"
+
 msgid "Unknown error"
 msgstr "Unknown error"
 
@@ -1989,6 +2019,9 @@ msgstr "Relative scheduled days"
 
 msgid "Send notification as"
 msgstr "Send notification as"
+
+msgid "Level"
+msgstr "Level"
 
 msgid "Offline levels"
 msgstr "Offline levels"
@@ -4367,11 +4400,11 @@ msgstr "Enrollment organisation unit default"
 msgid "Enrollment organisation unit"
 msgstr "Enrollment organisation unit"
 
-msgid "Owner at start organisation unit"
-msgstr "Owner at start organisation unit"
+msgid "Owning organisation unit - start of reporting period"
+msgstr "Owning organisation unit - start of reporting period"
 
-msgid "Owner at end organisation unit"
-msgstr "Owner at end organisation unit"
+msgid "Owning organisation unit - end of reporting period"
+msgstr "Owning organisation unit - end of reporting period"
 
 msgid "Registration organisation unit"
 msgstr "Registration organisation unit"
@@ -4579,6 +4612,13 @@ msgstr "Allow incident dates in the future"
 msgid "Collect data for the first stage during enrollment"
 msgstr "Collect data for the first stage during enrollment"
 
+msgid ""
+"Do not create overdue events when automatically creating program stage "
+"events"
+msgstr ""
+"Do not create overdue events when automatically creating program stage "
+"events"
+
 msgid "Program Customization"
 msgstr "Program Customization"
 
@@ -4659,11 +4699,14 @@ msgstr "Notification {{- notificationName}} will be removed on save"
 msgid "Restore notification"
 msgstr "Restore notification"
 
-msgid "No notifications have been added yet"
-msgstr "No notifications have been added yet"
+msgid "Notification type: Stage | Stage: {{stageDisplayName}}"
+msgstr "Notification type: Stage | Stage: {{stageDisplayName}}"
 
 msgid "Program must be saved before notifications can be added"
 msgstr "Program must be saved before notifications can be added"
+
+msgid "No notifications have been added yet"
+msgstr "No notifications have been added yet"
 
 msgid "Add a notification"
 msgstr "Add a notification"
@@ -4743,6 +4786,9 @@ msgstr "Public (All users)"
 msgid "External"
 msgstr "External"
 
+msgid "Group"
+msgstr "Group"
+
 msgid "Program Details"
 msgstr "Program Details"
 
@@ -4784,6 +4830,15 @@ msgstr "Close data entry a number of days after \"Implementing partner\" end dat
 
 msgid "Access and Sharing"
 msgstr "Access and Sharing"
+
+msgid "Notification type"
+msgstr "Notification type"
+
+msgid "Program: Send when there is activity in the program or enrollment"
+msgstr "Program: Send when there is activity in the program or enrollment"
+
+msgid "Stage: Send when there is activity in a specific stage"
+msgstr "Stage: Send when there is activity in a specific stage"
 
 msgid "Notification"
 msgstr "Notification"
