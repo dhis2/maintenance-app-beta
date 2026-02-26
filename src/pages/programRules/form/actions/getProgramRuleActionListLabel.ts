@@ -17,15 +17,10 @@ export function getProgramRuleActionListLabel(
         programStageSection,
         option,
         optionGroup,
-        notificationTemplate,
+        templateUid,
     } = action
 
-    const templateLabel =
-        notificationTemplate?.displayName ??
-        (notificationTemplate?.id &&
-            templateNameById?.[notificationTemplate.id]) ??
-        notificationTemplate?.id ??
-        '-'
+    const templateLabel = templateUid ? templateNameById?.[templateUid] : '-'
 
     const targetDeAndTea = [
         dataElement?.displayName,

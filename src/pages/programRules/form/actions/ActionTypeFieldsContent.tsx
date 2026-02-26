@@ -45,11 +45,13 @@ const ACTION_FIELDS_MAP: Partial<Record<string, ActionFieldsRenderer>> = {
 
 export function ActionTypeFieldsContent({
     programId,
+    isEdit,
     actionType,
 }: Readonly<{
     programId: string
+    isEdit: boolean
     actionType: string | undefined
 }>) {
     const render = actionType ? ACTION_FIELDS_MAP[actionType] : undefined
-    return render ? <>{render(programId)}</> : null
+    return render ? <>{render(programId, isEdit)}</> : null
 }

@@ -16,11 +16,13 @@ export function ExpressionField({
     label,
     programId,
     clearable = true,
+    disabled = false,
 }: Readonly<{
     fieldName?: string
     label: string
     programId?: string
     clearable?: boolean
+    disabled?: boolean
 }>) {
     return (
         <Box width="800px" minWidth="100px">
@@ -36,6 +38,7 @@ export function ExpressionField({
                     type="programRule"
                     validateSchemaSection={programRuleActionSchemaSection}
                     validateProperty={fieldName}
+                    disabled={disabled}
                 />
             </PaddedContainer>
             <span className={styles.expressionLabel}>{label}</span>

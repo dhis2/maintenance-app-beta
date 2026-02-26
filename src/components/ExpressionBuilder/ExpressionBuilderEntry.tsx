@@ -23,6 +23,7 @@ type ExpressionBuilderEntryProps = Readonly<{
     clearable?: boolean
     programId?: string
     type?: ExpressionBuilderType
+    disabled?: boolean
 }>
 
 export const ExpressionBuilderEntry = ({
@@ -36,6 +37,7 @@ export const ExpressionBuilderEntry = ({
     clearable = false,
     programId,
     type = 'default',
+    disabled = false,
 }: ExpressionBuilderEntryProps) => {
     const [showExpressionBuilder, setShowExpressionBuilder] = useState(false)
 
@@ -111,12 +113,13 @@ export const ExpressionBuilderEntry = ({
                             setShowExpressionBuilder(true)
                         }}
                         dataTest={`edit-${fieldName}-expression-button`}
+                        disabled={disabled}
                     >
                         {isEdit || descriptionToShow
                             ? editButtonText
                             : setUpButtonText}
                     </Button>
-                    {clearable && descriptionToShow && (
+                    {clearable && descriptionToShow && !disabled && (
                         <Button small secondary onClick={clearExpression}>
                             {i18n.t('Clear expression')}
                         </Button>

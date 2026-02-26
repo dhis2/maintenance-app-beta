@@ -55,7 +55,6 @@ const ProgramRuleActionListNewOrEdit = () => {
         () => buildTemplateNameById(program),
         [program]
     )
-
     const [actionFormOpen, setActionFormOpen] = React.useState<
         ProgramRuleActionListItem | null | undefined
     >()

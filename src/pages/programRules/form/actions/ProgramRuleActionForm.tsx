@@ -1,4 +1,4 @@
-import { useAlert, useDataEngine } from '@dhis2/app-runtime'
+import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Box, Button, SingleSelectFieldFF } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
@@ -20,7 +20,6 @@ import {
     createJsonPatchOperations,
     SchemaName,
     SchemaSection,
-    SECTIONS_MAP,
     useBoundResourceQueryFn,
     useCreateModel,
     usePatchModel,
@@ -49,7 +48,6 @@ const actionFieldFilters = [
     'data',
     'location',
     'templateUid',
-    'notificationTemplate[id,displayName]',
     'dataElement[id,displayName]',
     'trackedEntityAttribute[id,displayName]',
     'programRuleVariable[id,displayName]',
@@ -343,6 +341,7 @@ function ProgramRuleActionFormBody({
                 {programId && (
                     <ActionTypeFieldsContent
                         programId={programId}
+                        isEdit={isEdit}
                         actionType={actionType}
                     />
                 )}

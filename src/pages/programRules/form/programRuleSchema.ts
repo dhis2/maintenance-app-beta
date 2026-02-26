@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaultsOld,
+    modelFormSchemas,
+} from '../../../lib'
 import { AccessSchema } from '../../../lib/form/modelFormSchemas'
 
 const { modelReference, withDefaultListColumns, identifiable } =
@@ -52,5 +56,5 @@ export const programRuleListSchema = programRuleBaseSchema.merge(
 
 export const programRuleFormSchema = programRuleBaseSchema.merge(identifiable)
 
-export const initialValues = getDefaults(programRuleFormSchema)
+export const initialValues = getDefaultsOld(programRuleFormSchema)
 export const validate = createFormValidate(programRuleFormSchema)

@@ -50,7 +50,7 @@ function requireMessageTemplate(flags: FieldFlags): ValidationErrors {
     if (flags.hasNotificationTemplate) {
         return {}
     }
-    return { notificationTemplate: VALIDATION_MESSAGES.MESSAGE_TEMPLATE }
+    return { templateUid: VALIDATION_MESSAGES.MESSAGE_TEMPLATE }
 }
 
 function validateDisplayText(flags: FieldFlags): ValidationErrors {

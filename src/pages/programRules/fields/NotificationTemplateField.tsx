@@ -15,9 +15,11 @@ type NotificationQueryData = {
 
 export function NotificationTemplateField({
     programId,
+    disabled,
     required,
 }: Readonly<{
     programId: string
+    disabled?: boolean
     required?: boolean
 }>) {
     const { input, meta } = useField('templateUid', {
@@ -29,6 +31,7 @@ export function NotificationTemplateField({
         <ModelSingleSelectField
             label={i18n.t('Message template')}
             required={required}
+            disabled={disabled}
             query={{
                 resource: 'programs',
                 params: {
