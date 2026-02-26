@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 import {
     createFormValidate,
-    getDefaults,
+    getDefaultsOld,
     modelFormSchemas,
 } from '../../../../lib'
 import { ProgramNotificationTemplate } from '../../../../types/generated'
@@ -71,7 +71,9 @@ export const programNotificationTemplateFormSchema =
             ),
     })
 
-export const initialValues = getDefaults(programNotificationTemplateFormSchema)
+export const initialValues = getDefaultsOld(
+    programNotificationTemplateFormSchema
+)
 
 export type ProgramNotificationFormValues = z.infer<
     typeof programNotificationTemplateFormSchema

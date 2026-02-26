@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { modelFormSchemas, getDefaults } from '../../../lib'
+import { modelFormSchemas, getDefaultsOld } from '../../../lib'
 
 const { identifiable, withDefaultListColumns, withAttributeValues } =
     modelFormSchemas
@@ -26,4 +26,4 @@ export const legendSetListSchema = identifiable
     .merge(withAttributeValues)
     .merge(withDefaultListColumns)
 
-export const initialValues = getDefaults(legendSetBaseSchema)
+export const initialValues = getDefaultsOld(legendSetBaseSchema)

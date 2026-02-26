@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaultsOld,
+    modelFormSchemas,
+} from '../../../lib'
 import { OptionSet, PickWithFieldFilters } from '../../../types/generated'
 import { fieldFilters } from '../../constants/form/fieldFilters'
 
@@ -20,7 +24,7 @@ export const optionSetListSchema = identifiable
     .merge(withDefaultListColumns)
 
 export const optionSetSchema = identifiable.merge(optionSetBaseSchema)
-export const initialValues = getDefaults(optionSetSchema)
+export const initialValues = getDefaultsOld(optionSetSchema)
 
 export type OptionSetFormValues = PickWithFieldFilters<
     OptionSet,

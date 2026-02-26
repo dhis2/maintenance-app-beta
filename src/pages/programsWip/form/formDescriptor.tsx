@@ -102,6 +102,12 @@ export const ProgramFormDescriptor = {
                         'Collect data for the first stage during enrollment'
                     ),
                 },
+                {
+                    name: 'ignoreOverdueEvents',
+                    label: i18n.t(
+                        'Do not create overdue events when automatically creating program stage events'
+                    ),
+                },
             ],
         },
         {
