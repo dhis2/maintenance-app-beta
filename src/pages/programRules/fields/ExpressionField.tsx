@@ -3,6 +3,7 @@ import { Box } from '@dhis2/ui'
 import React from 'react'
 import { ExpressionBuilderEntry } from '../../../components'
 import { PaddedContainer } from '../../../components/ExpressionBuilder/PaddedContainer'
+import { TooltipWrapper } from '../../../components/tooltip'
 import { SchemaName, SchemaSection } from '../../../lib'
 import styles from '../form/actions/ProgramRuleActionForm.module.css'
 
@@ -25,23 +26,28 @@ export function ExpressionField({
     disabled?: boolean
 }>) {
     return (
-        <Box width="800px" minWidth="100px">
-            <PaddedContainer>
-                <ExpressionBuilderEntry
-                    fieldName={fieldName}
-                    title={i18n.t('Edit expression')}
-                    editButtonText={i18n.t('Edit expression')}
-                    setUpButtonText={i18n.t('Set up expression')}
-                    validationResource="programRules/condition/description"
-                    clearable={clearable}
-                    programId={programId}
-                    type="programRule"
-                    validateSchemaSection={programRuleActionSchemaSection}
-                    validateProperty={fieldName}
-                    disabled={disabled}
-                />
-            </PaddedContainer>
-            <span className={styles.expressionLabel}>{label}</span>
-        </Box>
+        <TooltipWrapper
+            condition={!!disabled}
+            content={i18n.t('Expression can not be edited after saving')}
+        >
+            <Box width="800px" minWidth="100px">
+                <PaddedContainer>
+                    <ExpressionBuilderEntry
+                        fieldName={fieldName}
+                        title={i18n.t('Edit expression')}
+                        editButtonText={i18n.t('Edit expression')}
+                        setUpButtonText={i18n.t('Set up expression')}
+                        validationResource="programRules/condition/description"
+                        clearable={clearable}
+                        programId={programId}
+                        type="programRule"
+                        validateSchemaSection={programRuleActionSchemaSection}
+                        validateProperty={fieldName}
+                        disabled={disabled}
+                    />
+                </PaddedContainer>
+                <span className={styles.expressionLabel}>{label}</span>
+            </Box>
+        </TooltipWrapper>
     )
 }

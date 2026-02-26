@@ -10,6 +10,12 @@
     padding: var(--spacers-dp24);
 }
 
+.nonEditableNoticeBox {
+    margin-top: var(--spacers-dp24);
+    margin-bottom: var(--spacers-dp24);
+    max-width: 640px;
+}
+
 .actionsInfo {
     display: flex;
     align-items: center;

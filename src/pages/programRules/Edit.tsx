@@ -2,7 +2,7 @@ import { useDataEngine } from '@dhis2/app-runtime'
 import { useQuery } from '@tanstack/react-query'
 import type { FormApi } from 'final-form'
 import arrayMutators from 'final-form-arrays'
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import {
     DefaultFormFooter,

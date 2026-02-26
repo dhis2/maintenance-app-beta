@@ -1,6 +1,6 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Box, Button, SingleSelectFieldFF } from '@dhis2/ui'
+import { Box, Button, NoticeBox, SingleSelectFieldFF } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useEffect, useRef } from 'react'
 import { Field, useForm, useFormState } from 'react-final-form'
@@ -29,6 +29,7 @@ import {
     useFeatureAvailable,
 } from '../../../../lib/featuresApiSupport'
 import { useClearFormFields } from '../../../../lib/form/useClearFormFields'
+import { ProgramRuleAction } from '../../../../types/generated'
 import { PriorityField } from '../../fields'
 import { ActionTypeFieldsContent } from './ActionTypeFieldsContent'
 import { ACTION_FIELDS_TO_CLEAR, ACTION_TYPE_OPTIONS } from './constants'
@@ -314,6 +315,18 @@ function ProgramRuleActionFormBody({
                 <StandardFormSectionDescription>
                     {i18n.t('Configure the program rule action.')}
                 </StandardFormSectionDescription>
+                {(actionType ===
+                    ProgramRuleAction.programRuleActionType.SCHEDULEMESSAGE ||
+                    actionType ===
+                        ProgramRuleAction.programRuleActionType.SENDMESSAGE) &&
+                    !isEdit && (
+                        <NoticeBox
+                            title={i18n.t(
+                                'This program rule action will not be editable after saving.'
+                            )}
+                            className={styles.nonEditableNoticeBox}
+                        />
+                    )}
 
                 <StandardFormField>
                     <Field name="programRuleActionType">
