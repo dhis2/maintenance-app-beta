@@ -4659,11 +4659,11 @@ msgstr "Notification {{- notificationName}} will be removed on save"
 msgid "Restore notification"
 msgstr "Restore notification"
 
-msgid "Program must be saved before notifications can be added"
-msgstr "Program must be saved before notifications can be added"
-
 msgid "No notifications have been added yet"
 msgstr "No notifications have been added yet"
+
+msgid "Program must be saved before notifications can be added"
+msgstr "Program must be saved before notifications can be added"
 
 msgid "Add a notification"
 msgstr "Add a notification"
@@ -4760,6 +4760,27 @@ msgstr "Related program"
 
 msgid "Choose how this program is disaggregated."
 msgstr "Choose how this program is disaggregated."
+
+msgid "Maximum number of search results to display"
+msgstr "Maximum number of search results to display"
+
+msgid "Entering 0 shows all search results"
+msgstr "Entering 0 shows all search results"
+
+msgid "Lock completed events after a number of days"
+msgstr "Lock completed events after a number of days"
+
+msgid "Number of days"
+msgstr "Number of days"
+
+msgid "Close data entry a number of days after the end of a period"
+msgstr "Close data entry a number of days after the end of a period"
+
+msgid "Expiry period type"
+msgstr "Expiry period type"
+
+msgid "Close data entry a number of days after \"Implementing partner\" end date"
+msgstr "Close data entry a number of days after \"Implementing partner\" end date"
 
 msgid "Access and Sharing"
 msgstr "Access and Sharing"

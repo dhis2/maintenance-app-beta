@@ -96,7 +96,14 @@ const programBaseSchema = z.object({
     displayFrontPageList: z.boolean().optional(),
     programStages: z.array(modelReference).default([]),
     organisationUnits: z.array(modelReference).default([]),
+    notificationTemplates: z.array(modelReference).default([]),
     sharing: sharingSettingsSchema.optional(),
+    expiryDays: z.coerce.number().int().min(0).default(0),
+    expiryPeriodType: z.string().optional().default('Weekly'),
+    completeEventsExpiryDays: z.coerce.number().int().min(0).default(0),
+    openDaysAfterCoEndDate: z.coerce.number().min(0).default(0),
+    minAttributesRequiredToSearch: z.coerce.number().int().min(0).default(1),
+    maxTeiCountToReturn: z.coerce.number().int().min(0).default(0),
 })
 
 export const programFormSchema = identifiable.merge(programBaseSchema).extend({

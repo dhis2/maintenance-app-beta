@@ -27,7 +27,7 @@ const generateContract = <T extends ZodRawShape>({
     }
     const schema = zodToJsonSchema(expectedSchema.extend({ id: z.string() }), {
         name,
-        // @ts-expect-error/rejected-must-be-true
+        // @ts-expect-error - zod-to-json-schema types omit true for rejectedAdditionalProperties
         rejectedAdditionalProperties: true,
         $refStrategy: 'none',
     })
