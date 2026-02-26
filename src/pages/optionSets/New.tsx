@@ -27,7 +27,7 @@ export const Component = () => {
                     >
                         <form onSubmit={handleSubmit}>
                             <OptionSetFormContents />
-                            <DefaultFormFooter />
+                            <DefaultFormFooter cancelTo="/optionSets" />
                         </form>
                         <SectionedFormErrorNotice />
                     </SectionedFormLayout>
