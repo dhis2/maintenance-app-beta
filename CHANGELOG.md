@@ -1,3 +1,15 @@
+# [0.131.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.130.1...v0.131.0) (2026-02-26)
+
+
+### Bug Fixes
+
+* value type logic [DHIS2-20962] ([#777](https://github.com/dhis2/maintenance-app-beta/issues/777)) ([475648e](https://github.com/dhis2/maintenance-app-beta/commit/475648e4415334fd42e3eadd062a4179043deeb7))
+
+
+### Features
+
+* add missing translations props [DHIS2-20971] ([db783cf](https://github.com/dhis2/maintenance-app-beta/commit/db783cf07499773bfd2cdeab01adb496590de7af))
+
 ## [0.130.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.130.0...v0.130.1) (2026-02-26)
 
 
