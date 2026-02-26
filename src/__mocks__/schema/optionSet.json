@@ -453,7 +453,7 @@
                 "INTEGER",
                 "INTEGER_POSITIVE",
                 "INTEGER_NEGATIVE",
-                "INTEGER_ZERO_OR_POSITIVE",
+                "TRACKER_ASSOCIATE",
                 "USERNAME",
                 "COORDINATE",
                 "ORGANISATION_UNIT",

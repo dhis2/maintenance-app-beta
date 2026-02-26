@@ -1,7 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { render } from '@testing-library/react'
 import React from 'react'
-import attributeSchemaMock from '../../__mocks__/schema/attributeSchema.json'
 import schemaMock from '../../__mocks__/schema/optionSet.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
 import { SECTIONS_MAP, getConstantTranslation } from '../../lib'
@@ -187,12 +186,11 @@ describe('Option sets form tests', () => {
                 screen.getByTestId('formfields-valueType'),
                 {
                     selected: 'Text',
-                    options:
-                        attributeSchemaMock.properties.valueType.constants.map(
-                            (o) => ({
-                                displayName: getConstantTranslation(o),
-                            })
-                        ),
+                    options: schemaMock.properties.valueType.constants.map(
+                        (o) => ({
+                            displayName: getConstantTranslation(o),
+                        })
+                    ),
                 },
                 screen
             )
@@ -201,21 +199,18 @@ describe('Option sets form tests', () => {
             const { screen } = await renderForm()
             await uiActions.pickOptionFromSelect(
                 screen.getByTestId('formfields-valueType'),
-                attributeSchemaMock.properties.valueType.constants.indexOf(
-                    'MULTI_TEXT'
-                ),
+                schemaMock.properties.valueType.constants.indexOf('MULTI_TEXT'),
                 screen
             )
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('formfields-valueType'),
                 {
                     selected: getConstantTranslation('MULTI_TEXT'),
-                    options:
-                        attributeSchemaMock.properties.valueType.constants.map(
-                            (o) => ({
-                                displayName: getConstantTranslation(o),
-                            })
-                        ),
+                    options: schemaMock.properties.valueType.constants.map(
+                        (o) => ({
+                            displayName: getConstantTranslation(o),
+                        })
+                    ),
                 },
                 screen
             )
@@ -349,12 +344,11 @@ describe('Option sets form tests', () => {
                 screen.getByTestId('formfields-valueType'),
                 {
                     selected: getConstantTranslation(optionSet.valueType),
-                    options:
-                        attributeSchemaMock.properties.valueType.constants.map(
-                            (o) => ({
-                                displayName: getConstantTranslation(o),
-                            })
-                        ),
+                    options: schemaMock.properties.valueType.constants.map(
+                        (o) => ({
+                            displayName: getConstantTranslation(o),
+                        })
+                    ),
                     disabled: true,
                 },
                 screen
