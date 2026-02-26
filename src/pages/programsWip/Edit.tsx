@@ -125,7 +125,7 @@ const handleStageNotificationDeletions = async ({
         notificationTemplatesToDelete.map((template) =>
             dataEngine.mutate({
                 resource: 'programNotificationTemplates',
-                id: template?.id as string,
+                id: template.id,
                 type: 'delete',
             })
         )
@@ -273,7 +273,7 @@ export const Component = () => {
     return (
         <FormBase
             onSubmit={useOnSubmitProgramEdit(modelId)}
-            initialValues={programFormInitialValues}
+            initialValues={program?.data ?? programFormInitialValues}
             subscription={{}}
             mutators={{ ...arrayMutators }}
             validate={validate}
