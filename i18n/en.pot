@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-26T13:45:05.969Z\n"
-"PO-Revision-Date: 2026-02-26T13:45:05.969Z\n"
+"POT-Creation-Date: 2026-02-26T14:29:29.428Z\n"
+"PO-Revision-Date: 2026-02-26T14:29:29.428Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -365,6 +365,18 @@ msgstr "Value count"
 
 msgid "Zero or positive value count"
 msgstr "Zero or positive value count"
+
+msgid "Enrollment count"
+msgstr "Enrollment count"
+
+msgid "Event count"
+msgstr "Event count"
+
+msgid "Organisation unit count"
+msgstr "Organisation unit count"
+
+msgid "Tracked entity instance count"
+msgstr "Tracked entity instance count"
 
 msgid "Variables"
 msgstr "Variables"
@@ -1576,26 +1588,35 @@ msgstr "Section"
 msgid "Section Multi-org"
 msgstr "Section Multi-org"
 
-msgid "BiMonthly"
-msgstr "BiMonthly"
+msgid "Bi-monthly"
+msgstr "Bi-monthly"
 
-msgid "BiWeekly"
-msgstr "BiWeekly"
+msgid "Bi-weekly"
+msgstr "Bi-weekly"
 
 msgid "Daily"
 msgstr "Daily"
 
-msgid "FinancialApril"
-msgstr "FinancialApril"
+msgid "Financial Year February"
+msgstr "Financial Year February"
 
-msgid "FinancialJuly"
-msgstr "FinancialJuly"
+msgid "Financial Year April"
+msgstr "Financial Year April"
 
-msgid "FinancialNov"
-msgstr "FinancialNov"
+msgid "Financial Year July"
+msgstr "Financial Year July"
 
-msgid "FinancialOct"
-msgstr "FinancialOct"
+msgid "Financial Year August"
+msgstr "Financial Year August"
+
+msgid "Financial Year September"
+msgstr "Financial Year September"
+
+msgid "Financial Year November"
+msgstr "Financial Year November"
+
+msgid "Financial Year Octobter"
+msgstr "Financial Year Octobter"
 
 msgid "Monthly"
 msgstr "Monthly"
@@ -1603,35 +1624,38 @@ msgstr "Monthly"
 msgid "Quarterly"
 msgstr "Quarterly"
 
-msgid "QuarterlyNov"
-msgstr "QuarterlyNov"
+msgid "Quarterly November"
+msgstr "Quarterly November"
 
-msgid "SixMonthlyApril"
-msgstr "SixMonthlyApril"
+msgid "Six-Monthly April"
+msgstr "Six-Monthly April"
 
-msgid "SixMonthlyNov"
-msgstr "SixMonthlyNov"
+msgid "Six-Monthly November"
+msgstr "Six-Monthly November"
 
-msgid "SixMonthly"
-msgstr "SixMonthly"
+msgid "Six-Monthly"
+msgstr "Six-Monthly"
 
-msgid "TwoYearly"
-msgstr "TwoYearly"
+msgid "Two-Yearly"
+msgstr "Two-Yearly"
 
 msgid "Weekly"
 msgstr "Weekly"
 
-msgid "WeeklySaturday"
-msgstr "WeeklySaturday"
+msgid "Weekly Friday"
+msgstr "Weekly Friday"
 
-msgid "WeeklySunday"
-msgstr "WeeklySunday"
+msgid "Weekly Saturday"
+msgstr "Weekly Saturday"
 
-msgid "WeeklyThursday"
-msgstr "WeeklyThursday"
+msgid "Weekly Sunday"
+msgstr "Weekly Sunday"
 
-msgid "WeeklyWednesday"
-msgstr "WeeklyWednesday"
+msgid "Weekly Thursday"
+msgstr "Weekly Thursday"
+
+msgid "Weekly Wednesday"
+msgstr "Weekly Wednesday"
 
 msgid "Yearly"
 msgstr "Yearly"
