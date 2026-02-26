@@ -28,11 +28,11 @@ export const staticOptions = {
     },
     ownerAtStart: {
         value: 'OWNER_AT_START',
-        label: i18n.t('Owner at start organisation unit'),
+        label: i18n.t('Owning organisation unit - start of reporting period'),
     },
     ownerAtEnd: {
         value: 'OWNER_AT_END',
-        label: i18n.t('Owner at end organisation unit'),
+        label: i18n.t('Owning organisation unit - end of reporting period'),
     },
     registration: {
         value: 'REGISTRATION',
