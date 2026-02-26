@@ -5,6 +5,8 @@ import { useLoadApp } from '../lib'
 
 export const LoadApp = ({ children }: PropsWithChildren) => {
     const queryResponse = useLoadApp()
+    // Temporary debug log to confirm active UI locale
+    console.log('i18n.language', i18n.language)
     return (
         <Loader queryResponse={queryResponse} label={i18n.t('schemas')}>
             {children}
