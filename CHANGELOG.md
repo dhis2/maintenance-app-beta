@@ -1,3 +1,10 @@
+# [0.132.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.131.0...v0.132.0) (2026-02-26)
+
+
+### Features
+
+* add details fields ([#769](https://github.com/dhis2/maintenance-app-beta/issues/769)) ([31aa2e4](https://github.com/dhis2/maintenance-app-beta/commit/31aa2e4bdcccbc7ed4d4f300659c040366c9e2b7))
+
 # [0.131.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.130.1...v0.131.0) (2026-02-26)
 
 
