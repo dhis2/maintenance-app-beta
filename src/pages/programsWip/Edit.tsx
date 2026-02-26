@@ -5,7 +5,6 @@ import arrayMutators from 'final-form-arrays'
 import { omit } from 'lodash'
 import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
-import { LegacyAppRedirect } from '../../app/routes/LegacyAppRedirect'
 import {
     DefaultFormFooter,
     DefaultSectionedFormSidebar,
@@ -35,7 +34,6 @@ import { ProgramStageListItem } from './form/ProgramStagesFormContents'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
-    'programType',
     'name',
     'shortName',
     'code',
@@ -53,7 +51,6 @@ const fieldFilters = [
     'displayIncidentDate',
     'selectIncidentDatesInFuture',
     'useFirstStageDuringRegistration',
-    'ignoreOverdueEvents',
     'dataEntryForm[id,displayName,htmlCode]',
     'programSections[id,displayName,description,access,sortOrder]',
     'programTrackedEntityAttributes[id,displayName,valueType,renderType,allowFutureDate,mandatory,searchable,displayInList,trackedEntityAttribute[id,displayName,unique]]',
@@ -113,11 +110,12 @@ const handleStageNotificationDeletions = async ({
     dataEngine: DataEngine
 }): Promise<string[]> => {
     // stage notification templates marked for deletion
-    const notificationTemplatesToDelete = stages
-        .map((stage) =>
-            stage.notificationTemplates?.filter((template) => template.deleted)
-        )
-        .flat()
+    const notificationTemplatesToDelete = stages.flatMap(
+        (stage) =>
+            stage.notificationTemplates?.filter(
+                (template) => template.deleted
+            ) ?? []
+    )
 
     if (notificationTemplatesToDelete.length === 0) {
         return []
@@ -271,15 +269,11 @@ export const Component = () => {
             },
         ] as const,
     })
-    const onSubmit = useOnSubmitProgramEdit(modelId)
-    if (program?.data?.programType === 'WITHOUT_REGISTRATION') {
-        return <LegacyAppRedirect section={SECTIONS_MAP.program} />
-    }
 
     return (
         <FormBase
-            onSubmit={onSubmit}
-            initialValues={program?.data ?? programFormInitialValues}
+            onSubmit={useOnSubmitProgramEdit(modelId)}
+            initialValues={programFormInitialValues}
             subscription={{}}
             mutators={{ ...arrayMutators }}
             validate={validate}
