@@ -1,3 +1,11 @@
+## [0.130.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.130.0...v0.130.1) (2026-02-26)
+
+
+### Bug Fixes
+
+* allow org unit group and level deselection in data set forms ([51f2734](https://github.com/dhis2/maintenance-app-beta/commit/51f273438c2acb147d17ae6739c1987048174b9a))
+* preserve spaces in list elements ([#774](https://github.com/dhis2/maintenance-app-beta/issues/774)) ([20eb148](https://github.com/dhis2/maintenance-app-beta/commit/20eb148a86cea901f51d996adc9606aa8d95d8ab))
+
 # [0.130.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.129.0...v0.130.0) (2026-02-25)
 
 
