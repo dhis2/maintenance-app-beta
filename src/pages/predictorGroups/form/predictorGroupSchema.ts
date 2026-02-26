@@ -1,7 +1,11 @@
 import { z } from 'zod'
-import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
+import {
+    getDefaultsOld,
+    createFormValidate,
+    modelFormSchemas,
+} from '../../../lib'
 
-/*  Note that this describes what we send to the server, 
+/*  Note that this describes what we send to the server,
     and not what is stored in the form. */
 const { identifiable, referenceCollection, withDefaultListColumns } =
     modelFormSchemas
@@ -21,6 +25,6 @@ export const predictorGroupListSchema = predictorGroupBaseSchema.merge(
     withDefaultListColumns
 )
 
-export const initialValues = getDefaults(predictorGroupFormSchema)
+export const initialValues = getDefaultsOld(predictorGroupFormSchema)
 
 export const validate = createFormValidate(predictorGroupFormSchema)

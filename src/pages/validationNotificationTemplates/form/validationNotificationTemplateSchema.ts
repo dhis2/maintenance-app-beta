@@ -1,9 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
-import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
+import {
+    getDefaultsOld,
+    createFormValidate,
+    modelFormSchemas,
+} from '../../../lib'
 import { ValidationNotificationTemplate } from '../../../types/generated'
 
-/*  Note that this describes what we send to the server, 
+/*  Note that this describes what we send to the server,
     and not what is stored in the form. */
 const {
     identifiable,
@@ -53,7 +57,7 @@ export const validationNotificationTemplateListSchema =
             displayShortName: z.string(),
         })
 
-export const initialValues = getDefaults(
+export const initialValues = getDefaultsOld(
     validationNotificationTemplateFormSchema
 )
 

@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
-import React from 'react'
-import { Field as FieldRFF, useFormState } from 'react-final-form'
+import { Radio } from '@dhis2/ui'
+import React, { useState } from 'react'
+import { useField, useFormState } from 'react-final-form'
 import { CodeField, NameField, StandardFormField } from '../../../../components'
 import { ModelSingleSelectField } from '../../../../components/metadataFormControls/ModelSingleSelect'
 import { SchemaSection } from '../../../../lib'
@@ -14,6 +15,10 @@ export const BasicInformationSection: React.FC<
     BasicInformationSectionProps
 > = ({ section, programTemplateId }) => {
     const { values } = useFormState({ subscription: { values: true } })
+    const [isStageNotification, setIsStageNotification] = useState(
+        values.programStage?.id
+    )
+    const { input, meta } = useField('programStage')
 
     return (
         <>
@@ -29,31 +34,59 @@ export const BasicInformationSection: React.FC<
                     modelId={programTemplateId}
                 />
             </StandardFormField>
+
             <StandardFormField>
-                <FieldRFF
-                    name="programStage"
-                    render={({ input, meta }) => (
-                        <ModelSingleSelectField
-                            clearable
-                            input={input}
-                            meta={meta}
-                            inputWidth="400px"
-                            dataTest="programStage-field"
-                            label={i18n.t('Program stage')}
-                            disabled={values.id}
-                            query={{
-                                resource: 'programStages',
-                                params: {
-                                    fields: ['id', 'displayName'],
-                                    filter: `program.id:eq:${values.program.id}`,
-                                    paging: false,
-                                    order: 'displayName',
-                                },
-                            }}
-                        />
+                <p>{i18n.t('Notification type')}</p>
+                <Radio
+                    disabled={values.id}
+                    checked={!isStageNotification}
+                    onChange={({ checked }) => {
+                        setIsStageNotification(!checked)
+                        if (checked) {
+                            input.onChange(undefined)
+                            input.onBlur()
+                        }
+                    }}
+                    label={i18n.t(
+                        'Program: Send when there is activity in the program or enrollment',
+                        { nsSeparator: '~:~' }
+                    )}
+                />
+                <Radio
+                    disabled={values.id}
+                    checked={isStageNotification}
+                    onChange={({ checked }) => {
+                        setIsStageNotification(checked)
+                    }}
+                    label={i18n.t(
+                        'Stage: Send when there is activity in a specific stage',
+                        {
+                            nsSeparator: '~:~',
+                        }
                     )}
                 />
             </StandardFormField>
+            {isStageNotification && (
+                <StandardFormField>
+                    <ModelSingleSelectField
+                        input={input}
+                        meta={meta}
+                        inputWidth="400px"
+                        dataTest="programStage-field"
+                        label={i18n.t('Program stage')}
+                        disabled={values.id}
+                        query={{
+                            resource: 'programStages',
+                            params: {
+                                fields: ['id', 'displayName'],
+                                filter: `program.id:eq:${values.program.id}`,
+                                paging: false,
+                                order: 'displayName',
+                            },
+                        }}
+                    />
+                </StandardFormField>
+            )}
         </>
     )
 }

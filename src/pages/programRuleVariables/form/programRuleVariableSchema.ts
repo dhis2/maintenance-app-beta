@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaultsOld,
+    modelFormSchemas,
+} from '../../../lib'
 import { ProgramRuleVariable } from '../../../types/generated'
 
 const { modelReference, withDefaultListColumns, identifiable } =
@@ -32,6 +36,6 @@ export const programRuleVariableListSchema = programRuleVariableBaseSchema
         displayName: z.string(),
     })
 
-export const initialValues = getDefaults(programRuleVariableFormSchema)
+export const initialValues = getDefaultsOld(programRuleVariableFormSchema)
 
 export const validate = createFormValidate(programRuleVariableFormSchema)
