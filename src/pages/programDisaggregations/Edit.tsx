@@ -6,13 +6,16 @@ import React, { useMemo } from 'react'
 import { Form as ReactFinalForm } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
-    DefaultFormFooter,
     DefaultSectionedFormSidebar,
+    FormFooterWrapper,
     SectionedFormLayout,
+    StandardFormActions,
 } from '../../components'
 import {
     DEFAULT_FIELD_FILTERS,
+    getSectionPath,
     SectionedFormProvider,
+    SECTIONS_MAP,
     useBoundResourceQueryFn,
 } from '../../lib'
 import {
@@ -56,6 +59,8 @@ export type ProgramIndicatorWithMapping = {
     name: string
     id: string
 }
+
+const section = SECTIONS_MAP.programDisaggregation
 
 export const Component = () => {
     const id = useParams().id!
@@ -126,15 +131,21 @@ export const Component = () => {
             return []
         }, [initialValues.programIndicatorMappings])
 
+    const closeOnSubmitRef = React.useRef(false)
+    const setCloseOnSubmit = (value: boolean) => {
+        closeOnSubmitRef.current = value
+    }
+    const listPath = `/${getSectionPath(section)}`
+
     return (
         <ReactFinalForm
             initialValues={initialValues}
-            onSubmit={useOnSubmit(id, initialValues)}
+            onSubmit={useOnSubmit(id, initialValues, closeOnSubmitRef)}
             mutators={{ ...arrayMutators }}
             destroyOnUnregister={false}
             subscription={{}}
         >
-            {({ handleSubmit }) => {
+            {({ handleSubmit, form, submitting }) => {
                 return (
                     <SectionedFormProvider
                         formDescriptor={{
@@ -202,7 +213,24 @@ export const Component = () => {
                                             programQuery?.data?.displayName
                                         }
                                     />
-                                    <DefaultFormFooter />
+                                    <FormFooterWrapper>
+                                        <StandardFormActions
+                                            cancelLabel={i18n.t('Cancel')}
+                                            submitLabel={i18n.t(
+                                                'Save and close'
+                                            )}
+                                            submitting={submitting}
+                                            onSaveClick={() => {
+                                                setCloseOnSubmit(false)
+                                                form.submit()
+                                            }}
+                                            onSubmitClick={() => {
+                                                setCloseOnSubmit(true)
+                                                form.submit()
+                                            }}
+                                            cancelTo={listPath}
+                                        />
+                                    </FormFooterWrapper>
                                 </form>
                             </SectionedFormLayout>
                         )}

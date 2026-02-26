@@ -2,7 +2,7 @@ import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { omitBy } from 'lodash'
 import isEqual from 'lodash/isEqual'
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { SECTIONS_MAP, useNavigateWithSearchState } from '../../../lib'
 import { ProgramDisaggregationFormValues } from './programDisaggregationSchema'
 import {
@@ -85,7 +85,8 @@ const cleanFormState = ({
 // type ProgramDisaggregationFormValues = Zod.infer<typeof schema>
 export const useOnSubmit = (
     programId: string,
-    initialValues: ProgramDisaggregationFormValues
+    initialValues: ProgramDisaggregationFormValues,
+    closeOnSubmitRef: React.MutableRefObject<boolean>
 ) => {
     const saveAlert = useAlert(
         ({ message }) => message,
@@ -185,8 +186,29 @@ export const useOnSubmit = (
                     ),
                     error: true,
                 })
-            } else {
-                navigate(`/${SECTIONS_MAP.programDisaggregation.namePlural}`)
+            }
+
+            const responseData = response.data
+
+            if (
+                responseData &&
+                typeof responseData === 'object' &&
+                'httpStatusCode' in responseData &&
+                'response' in responseData &&
+                (responseData?.httpStatusCode === 200 ||
+                    responseData?.httpStatusCode === 201)
+            ) {
+                // Only navigate when Save & Close was clicked
+                if (closeOnSubmitRef.current) {
+                    navigate(
+                        `/${SECTIONS_MAP.programDisaggregation.namePlural}`
+                    )
+                }
+
+                saveAlert.show({
+                    message: i18n.t('Saved successfully'),
+                    success: true,
+                })
             }
         },
         [
@@ -195,6 +217,7 @@ export const useOnSubmit = (
             patchPrograms,
             initialValues,
             patchProgramIndicators,
+            closeOnSubmitRef,
         ]
     )
 }

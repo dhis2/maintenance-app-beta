@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-18T10:59:22.921Z\n"
-"PO-Revision-Date: 2026-02-18T10:59:22.921Z\n"
+"POT-Creation-Date: 2026-02-19T20:40:53.832Z\n"
+"PO-Revision-Date: 2026-02-19T20:40:53.832Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -5433,3 +5433,11 @@ msgstr "Right side sliding window"
 
 msgid "Skip form validation"
 msgstr "Skip form validation"
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Maintenance (Preview)"
+
+msgctxt "Application description"
+msgid "__MANIFEST_APP_DESCRIPTION"
+msgstr ""
