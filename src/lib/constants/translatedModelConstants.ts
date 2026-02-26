@@ -10,7 +10,9 @@ export const AGGREGATION_TYPE = {
     LAST_AVERAGE_ORG_UNIT: i18n.t('Last value (average in org unit)'),
     LAST_LAST_ORG_UNIT: i18n.t('Last value (last in org unit hierarchy)'),
     LAST_IN_PERIOD: i18n.t('Last value in period (sum in org unit hierarchy)'),
-    LAST_IN_PERIOD_AVERAGE_ORG_UNIT: i18n.t('Lastinperiodaverageorgunit'),
+    LAST_IN_PERIOD_AVERAGE_ORG_UNIT: i18n.t(
+        'Last value in period (average in org unit hierarchy)'
+    ),
     FIRST: i18n.t('First value (sum in org unit hierarchy)'),
     FIRST_AVERAGE_ORG_UNIT: i18n.t(
         'First value (average in org unit hierarchy)'
