@@ -186,29 +186,18 @@ export const useOnSubmit = (
                     ),
                     error: true,
                 })
+                return
             }
 
-            const responseData = response.data
+            // SUCCESS
+            saveAlert.show({
+                message: i18n.t('Saved successfully'),
+                success: true,
+            })
 
-            if (
-                responseData &&
-                typeof responseData === 'object' &&
-                'httpStatusCode' in responseData &&
-                'response' in responseData &&
-                (responseData?.httpStatusCode === 200 ||
-                    responseData?.httpStatusCode === 201)
-            ) {
-                // Only navigate when Save & Close was clicked
-                if (closeOnSubmitRef.current) {
-                    navigate(
-                        `/${SECTIONS_MAP.programDisaggregation.namePlural}`
-                    )
-                }
-
-                saveAlert.show({
-                    message: i18n.t('Saved successfully'),
-                    success: true,
-                })
+            // Only navigate when Save & Close was clicked
+            if (closeOnSubmitRef.current) {
+                navigate(`/${SECTIONS_MAP.programDisaggregation.namePlural}`)
             }
         },
         [
