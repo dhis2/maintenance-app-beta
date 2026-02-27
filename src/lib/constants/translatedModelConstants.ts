@@ -10,7 +10,9 @@ export const AGGREGATION_TYPE = {
     LAST_AVERAGE_ORG_UNIT: i18n.t('Last value (average in org unit)'),
     LAST_LAST_ORG_UNIT: i18n.t('Last value (last in org unit hierarchy)'),
     LAST_IN_PERIOD: i18n.t('Last value in period (sum in org unit hierarchy)'),
-    LAST_IN_PERIOD_AVERAGE_ORG_UNIT: i18n.t('Lastinperiodaverageorgunit'),
+    LAST_IN_PERIOD_AVERAGE_ORG_UNIT: i18n.t(
+        'Last value in period (average in org unit hierarchy)'
+    ),
     FIRST: i18n.t('First value (sum in org unit hierarchy)'),
     FIRST_AVERAGE_ORG_UNIT: i18n.t(
         'First value (average in org unit hierarchy)'
@@ -92,25 +94,29 @@ export const ANALYTICS_TYPE = {
 }
 
 const PERIOD_TYPE = {
-    BiMonthly: i18n.t('BiMonthly'),
-    BiWeekly: i18n.t('BiWeekly'),
+    BiMonthly: i18n.t('Bi-monthly'),
+    BiWeekly: i18n.t('Bi-weekly'),
     Daily: i18n.t('Daily'),
-    FinancialApril: i18n.t('FinancialApril'),
-    FinancialJuly: i18n.t('FinancialJuly'),
-    FinancialNov: i18n.t('FinancialNov'),
-    FinancialOct: i18n.t('FinancialOct'),
+    FinancialFeb: i18n.t('Financial Year February'),
+    FinancialApril: i18n.t('Financial Year April'),
+    FinancialJuly: i18n.t('Financial Year July'),
+    FinancialAug: i18n.t('Financial Year August'),
+    FinancialSep: i18n.t('Financial Year September'),
+    FinancialNov: i18n.t('Financial Year November'),
+    FinancialOct: i18n.t('Financial Year Octobter'),
     Monthly: i18n.t('Monthly'),
     Quarterly: i18n.t('Quarterly'),
-    QuarterlyNov: i18n.t('QuarterlyNov'),
-    SixMonthlyApril: i18n.t('SixMonthlyApril'),
-    SixMonthlyNov: i18n.t('SixMonthlyNov'),
-    SixMonthly: i18n.t('SixMonthly'),
-    TwoYearly: i18n.t('TwoYearly'),
+    QuarterlyNov: i18n.t('Quarterly November'),
+    SixMonthlyApril: i18n.t('Six-Monthly April'),
+    SixMonthlyNov: i18n.t('Six-Monthly November'),
+    SixMonthly: i18n.t('Six-Monthly'),
+    TwoYearly: i18n.t('Two-Yearly'),
     Weekly: i18n.t('Weekly'),
-    WeeklySaturday: i18n.t('WeeklySaturday'),
-    WeeklySunday: i18n.t('WeeklySunday'),
-    WeeklyThursday: i18n.t('WeeklyThursday'),
-    WeeklyWednesday: i18n.t('WeeklyWednesday'),
+    WeeklyFriday: i18n.t('Weekly Friday'),
+    WeeklySaturday: i18n.t('Weekly Saturday'),
+    WeeklySunday: i18n.t('Weekly Sunday'),
+    WeeklyThursday: i18n.t('Weekly Thursday'),
+    WeeklyWednesday: i18n.t('Weekly Wednesday'),
     Yearly: i18n.t('Yearly'),
 }
 

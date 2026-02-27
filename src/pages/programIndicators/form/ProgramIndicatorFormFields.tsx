@@ -31,6 +31,11 @@ import { OrgUnitField } from './OrgUnitField'
 
 const section = SECTIONS_MAP.programIndicator
 
+export const PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS: Record<string, string> = {
+    EVENT: i18n.t('Event'),
+    ENROLLMENT: i18n.t('Enrollment'),
+}
+
 export const ProgramIndicatorsFormFields = () => {
     const { input: decimalsInput, meta: decimalsMeta } = useField('decimals', {
         format: (v) => v?.toString(),
@@ -125,7 +130,9 @@ export const ProgramIndicatorsFormFields = () => {
                             schema.properties.analyticsType.constants?.map(
                                 (option) => ({
                                     value: option,
-                                    label: getConstantTranslation(option),
+                                    label: PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS[
+                                        option
+                                    ],
                                 })
                             ) ?? []
                         }

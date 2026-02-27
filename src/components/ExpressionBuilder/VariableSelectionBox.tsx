@@ -1,5 +1,6 @@
 import { IconChevronDown16, IconChevronRight16 } from '@dhis2/ui'
 import React, { useCallback, useState, RefObject } from 'react'
+import { useField } from 'react-final-form'
 import styles from './ExpressionBuilder.module.css'
 import { ExpressionBuilderType } from './types'
 import { ElementType, getElementTypes } from './ValidationRuleVariables'
@@ -41,7 +42,15 @@ export const VariableSelectionBox = ({
     programId?: string
     type: ExpressionBuilderType
 }) => {
-    const elementTypes = getElementTypes(type)
+    const { input: aggregationTypeInput } = useField<string>(
+        'aggregationType',
+        { subscription: { value: true } }
+    )
+    console.log('aggType', aggregationTypeInput?.value)
+
+    const elementTypes = getElementTypes(type, {
+        aggregationType: aggregationTypeInput?.value,
+    })
     const [selectedElementType, setSelectedElementType] = useState<
         string | undefined
     >()

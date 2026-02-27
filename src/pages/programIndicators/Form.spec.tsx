@@ -20,6 +20,7 @@ import { uiAssertions } from '../../testUtils/uiAssertions'
 import { Program, ProgramTrackedEntityAttribute } from '../../types/generated'
 import { Component as Edit } from './Edit'
 import { staticOptions } from './form/OrgUnitField'
+import { PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS } from './form/ProgramIndicatorFormFields'
 import { Component as New } from './New'
 import resetAllMocks = jest.resetAllMocks
 
@@ -734,7 +735,9 @@ describe('Program indicator form tests', () => {
                 {
                     options: mockSchema.properties.analyticsType.constants.map(
                         (o) => ({
-                            displayName: getConstantTranslation(o),
+                            displayName:
+                                PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS[o] ??
+                                getConstantTranslation(o),
                         })
                     ),
                 },
@@ -999,7 +1002,7 @@ describe('Program indicator form tests', () => {
                         expression: anExpression,
                         filter: aFilter,
                         analyticsPeriodBoundaries: [],
-                        orgUnitField: undefined,
+                        orgUnitField: staticOptions.eventDefault.value,
                     }),
                 })
             )
@@ -1097,7 +1100,7 @@ describe('Program indicator form tests', () => {
                                 offsetPeriods: 5,
                             },
                         ],
-                        orgUnitField: undefined,
+                        orgUnitField: staticOptions.eventDefault.value,
                     }),
                 })
             )
@@ -1201,7 +1204,7 @@ describe('Program indicator form tests', () => {
                         expression: undefined,
                         filter: undefined,
                         analyticsPeriodBoundaries: [],
-                        orgUnitField: undefined,
+                        orgUnitField: staticOptions.eventDefault.value,
                     }),
                 })
             )
@@ -1291,7 +1294,7 @@ describe('Program indicator form tests', () => {
                         expression: undefined,
                         filter: undefined,
                         analyticsPeriodBoundaries: [],
-                        orgUnitField: undefined,
+                        orgUnitField: staticOptions.eventDefault.value,
                     }),
                 })
             )
@@ -1387,7 +1390,7 @@ describe('Program indicator form tests', () => {
                         expression: undefined,
                         filter: undefined,
                         analyticsPeriodBoundaries: [],
-                        orgUnitField: undefined,
+                        orgUnitField: staticOptions.eventDefault.value,
                     }),
                 })
             )
@@ -1403,12 +1406,13 @@ describe('Program indicator form tests', () => {
                     programIndicatorOverwrites = {},
                     matchingExistingElementFilter = undefined,
                     id = randomDhis2Id(),
+                    overridePrograms,
                 } = {}
             ) => {
                 const programWithoutRegistration = testProgram({
                     programType: 'WITHOUT_REGISTRATION' as Program.programType,
                 })
-                const programs = [
+                const programs = overridePrograms ?? [
                     programWithoutRegistration,
                     testProgram(),
                     testProgram(),
@@ -1416,6 +1420,7 @@ describe('Program indicator form tests', () => {
                 const attributes = [testCustomAttribute()]
                 const legendSets = [testLegendSet(), testLegendSet()]
                 const periodTypes = ['Daily', 'Monthly', 'Yearly']
+
                 const programIndicator = testProgramIndicator({
                     id,
                     program: programWithoutRegistration,
@@ -1537,6 +1542,7 @@ describe('Program indicator form tests', () => {
         })
         it('contain all the configuration field', async () => {
             const { screen, programs, programIndicator } = await renderForm()
+
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('programs-field'),
                 {
@@ -1565,12 +1571,15 @@ describe('Program indicator form tests', () => {
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('analytics-type-field'),
                 {
-                    selected: getConstantTranslation(
-                        programIndicator.analyticsType
-                    ),
+                    selected:
+                        PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS[
+                            programIndicator.analyticsType
+                        ],
                     options: mockSchema.properties.analyticsType.constants.map(
                         (o) => ({
-                            displayName: getConstantTranslation(o),
+                            displayName:
+                                PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS[o] ??
+                                getConstantTranslation(o),
                         })
                     ),
                 },
@@ -1603,6 +1612,132 @@ describe('Program indicator form tests', () => {
                 {
                     selected: programIndicator.decimals,
                     options: expectedDecimalsOptions,
+                },
+                screen
+            )
+        })
+        it('shows the selected org-unit-field value (tracker program)', async () => {
+            const programTrackedEntityAttributes = [
+                {
+                    trackedEntityAttribute: {
+                        valueType: 'ORGANISATION_UNIT',
+                        displayName: 'entity attribute org unit',
+                        id: randomDhis2Id(),
+                    },
+                },
+                {
+                    trackedEntityAttribute: {
+                        valueType: 'TEXT',
+                        displayName: 'other entity attribute',
+                        id: randomDhis2Id(),
+                    },
+                },
+            ] as unknown as ProgramTrackedEntityAttribute[]
+            const programWithRegistration = testProgram({
+                programType: 'WITH_REGISTRATION' as Program.programType,
+                programTrackedEntityAttributes,
+            })
+            const orgUnitOptions = [
+                { displayName: staticOptions.eventDefault.label },
+                programTrackedEntityAttributes[0].trackedEntityAttribute,
+                { displayName: staticOptions.registration.label },
+                { displayName: staticOptions.enrollment.label },
+                { displayName: staticOptions.ownerAtStart.label },
+                { displayName: staticOptions.ownerAtEnd.label },
+            ]
+            const orgUnitOption = staticOptions.ownerAtStart
+            const overridePrograms = [
+                programWithRegistration,
+                testProgram(),
+                testProgram(),
+                testProgram(),
+            ]
+            const { screen, programs, programIndicator } = await renderForm({
+                programIndicatorOverwrites: {
+                    orgUnitField: orgUnitOption.value,
+                    program: programWithRegistration,
+                    analyticsType: 'EVENT',
+                },
+                overridePrograms,
+            })
+
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('programs-field'),
+                {
+                    selected: programIndicator.program.displayName,
+                    options: programs,
+                },
+                screen
+            )
+
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('org-unit-field'),
+                {
+                    selected: orgUnitOption.label,
+                    options: orgUnitOptions,
+                },
+                screen
+            )
+        })
+        it('shows default org unit field if none is selected (tracker program)', async () => {
+            const programTrackedEntityAttributes = [
+                {
+                    trackedEntityAttribute: {
+                        valueType: 'ORGANISATION_UNIT',
+                        displayName: 'entity attribute org unit',
+                        id: randomDhis2Id(),
+                    },
+                },
+                {
+                    trackedEntityAttribute: {
+                        valueType: 'TEXT',
+                        displayName: 'other entity attribute',
+                        id: randomDhis2Id(),
+                    },
+                },
+            ] as unknown as ProgramTrackedEntityAttribute[]
+            const programWithRegistration = testProgram({
+                programType: 'WITH_REGISTRATION' as Program.programType,
+                programTrackedEntityAttributes,
+            })
+            const orgUnitOptions = [
+                { displayName: staticOptions.eventDefault.label },
+                programTrackedEntityAttributes[0].trackedEntityAttribute,
+                { displayName: staticOptions.registration.label },
+                { displayName: staticOptions.enrollment.label },
+                { displayName: staticOptions.ownerAtStart.label },
+                { displayName: staticOptions.ownerAtEnd.label },
+            ]
+            const orgUnitOption = staticOptions.eventDefault
+            const overridePrograms = [
+                programWithRegistration,
+                testProgram(),
+                testProgram(),
+                testProgram(),
+            ]
+            const { screen, programs, programIndicator } = await renderForm({
+                programIndicatorOverwrites: {
+                    orgUnitField: undefined,
+                    program: programWithRegistration,
+                    analyticsType: 'EVENT',
+                },
+                overridePrograms,
+            })
+
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('programs-field'),
+                {
+                    selected: programIndicator.program.displayName,
+                    options: programs,
+                },
+                screen
+            )
+
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('org-unit-field'),
+                {
+                    selected: orgUnitOption.label,
+                    options: orgUnitOptions,
                 },
                 screen
             )

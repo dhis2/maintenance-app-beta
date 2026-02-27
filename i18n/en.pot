@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-25T08:49:49.064Z\n"
-"PO-Revision-Date: 2026-02-25T08:49:49.064Z\n"
+"POT-Creation-Date: 2026-02-26T14:29:29.428Z\n"
+"PO-Revision-Date: 2026-02-26T14:29:29.428Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -366,6 +366,18 @@ msgstr "Value count"
 msgid "Zero or positive value count"
 msgstr "Zero or positive value count"
 
+msgid "Enrollment count"
+msgstr "Enrollment count"
+
+msgid "Event count"
+msgstr "Event count"
+
+msgid "Organisation unit count"
+msgstr "Organisation unit count"
+
+msgid "Tracked entity instance count"
+msgstr "Tracked entity instance count"
+
 msgid "Variables"
 msgstr "Variables"
 
@@ -573,17 +585,23 @@ msgstr "{{fieldLabel}} (required)"
 msgid "Name"
 msgstr "Name"
 
-msgid "Level"
-msgstr "Level"
+msgid "Select by level"
+msgstr "Select by level"
 
-msgid "Group"
-msgstr "Group"
+msgid "Select by group"
+msgstr "Select by group"
+
+msgid "Deselect by level"
+msgstr "Deselect by level"
+
+msgid "Deselect by group"
+msgstr "Deselect by group"
 
 msgid "Deselect all"
 msgstr "Deselect all"
 
-msgid "Select units by group or level..."
-msgstr "Select units by group or level..."
+msgid "Select/deselect by group or level"
+msgstr "Select/deselect by group or level"
 
 msgid "Search"
 msgstr "Search"
@@ -1570,26 +1588,35 @@ msgstr "Section"
 msgid "Section Multi-org"
 msgstr "Section Multi-org"
 
-msgid "BiMonthly"
-msgstr "BiMonthly"
+msgid "Bi-monthly"
+msgstr "Bi-monthly"
 
-msgid "BiWeekly"
-msgstr "BiWeekly"
+msgid "Bi-weekly"
+msgstr "Bi-weekly"
 
 msgid "Daily"
 msgstr "Daily"
 
-msgid "FinancialApril"
-msgstr "FinancialApril"
+msgid "Financial Year February"
+msgstr "Financial Year February"
 
-msgid "FinancialJuly"
-msgstr "FinancialJuly"
+msgid "Financial Year April"
+msgstr "Financial Year April"
 
-msgid "FinancialNov"
-msgstr "FinancialNov"
+msgid "Financial Year July"
+msgstr "Financial Year July"
 
-msgid "FinancialOct"
-msgstr "FinancialOct"
+msgid "Financial Year August"
+msgstr "Financial Year August"
+
+msgid "Financial Year September"
+msgstr "Financial Year September"
+
+msgid "Financial Year November"
+msgstr "Financial Year November"
+
+msgid "Financial Year Octobter"
+msgstr "Financial Year Octobter"
 
 msgid "Monthly"
 msgstr "Monthly"
@@ -1597,35 +1624,38 @@ msgstr "Monthly"
 msgid "Quarterly"
 msgstr "Quarterly"
 
-msgid "QuarterlyNov"
-msgstr "QuarterlyNov"
+msgid "Quarterly November"
+msgstr "Quarterly November"
 
-msgid "SixMonthlyApril"
-msgstr "SixMonthlyApril"
+msgid "Six-Monthly April"
+msgstr "Six-Monthly April"
 
-msgid "SixMonthlyNov"
-msgstr "SixMonthlyNov"
+msgid "Six-Monthly November"
+msgstr "Six-Monthly November"
 
-msgid "SixMonthly"
-msgstr "SixMonthly"
+msgid "Six-Monthly"
+msgstr "Six-Monthly"
 
-msgid "TwoYearly"
-msgstr "TwoYearly"
+msgid "Two-Yearly"
+msgstr "Two-Yearly"
 
 msgid "Weekly"
 msgstr "Weekly"
 
-msgid "WeeklySaturday"
-msgstr "WeeklySaturday"
+msgid "Weekly Friday"
+msgstr "Weekly Friday"
 
-msgid "WeeklySunday"
-msgstr "WeeklySunday"
+msgid "Weekly Saturday"
+msgstr "Weekly Saturday"
 
-msgid "WeeklyThursday"
-msgstr "WeeklyThursday"
+msgid "Weekly Sunday"
+msgstr "Weekly Sunday"
 
-msgid "WeeklyWednesday"
-msgstr "WeeklyWednesday"
+msgid "Weekly Thursday"
+msgstr "Weekly Thursday"
+
+msgid "Weekly Wednesday"
+msgstr "Weekly Wednesday"
 
 msgid "Yearly"
 msgstr "Yearly"
@@ -1918,6 +1948,30 @@ msgstr "Execution date label"
 msgid "Event label"
 msgstr "Event label"
 
+msgid "Tracked entity attribute label"
+msgstr "Tracked entity attribute label"
+
+msgid "Enrollment date label"
+msgstr "Enrollment date label"
+
+msgid "Incident date label"
+msgstr "Incident date label"
+
+msgid "Note label"
+msgstr "Note label"
+
+msgid "Enrollment label"
+msgstr "Enrollment label"
+
+msgid "Follow up label"
+msgstr "Follow up label"
+
+msgid "Organisation unit label"
+msgstr "Organisation unit label"
+
+msgid "Relationship label"
+msgstr "Relationship label"
+
 msgid "Unknown error"
 msgstr "Unknown error"
 
@@ -1989,6 +2043,9 @@ msgstr "Relative scheduled days"
 
 msgid "Send notification as"
 msgstr "Send notification as"
+
+msgid "Level"
+msgstr "Level"
 
 msgid "Offline levels"
 msgstr "Offline levels"
@@ -4367,11 +4424,11 @@ msgstr "Enrollment organisation unit default"
 msgid "Enrollment organisation unit"
 msgstr "Enrollment organisation unit"
 
-msgid "Owner at start organisation unit"
-msgstr "Owner at start organisation unit"
+msgid "Owning organisation unit - start of reporting period"
+msgstr "Owning organisation unit - start of reporting period"
 
-msgid "Owner at end organisation unit"
-msgstr "Owner at end organisation unit"
+msgid "Owning organisation unit - end of reporting period"
+msgstr "Owning organisation unit - end of reporting period"
 
 msgid "Registration organisation unit"
 msgstr "Registration organisation unit"
@@ -4579,6 +4636,13 @@ msgstr "Allow incident dates in the future"
 msgid "Collect data for the first stage during enrollment"
 msgstr "Collect data for the first stage during enrollment"
 
+msgid ""
+"Do not create overdue events when automatically creating program stage "
+"events"
+msgstr ""
+"Do not create overdue events when automatically creating program stage "
+"events"
+
 msgid "Program Customization"
 msgstr "Program Customization"
 
@@ -4659,11 +4723,14 @@ msgstr "Notification {{- notificationName}} will be removed on save"
 msgid "Restore notification"
 msgstr "Restore notification"
 
-msgid "No notifications have been added yet"
-msgstr "No notifications have been added yet"
+msgid "Notification type: Stage | Stage: {{stageDisplayName}}"
+msgstr "Notification type: Stage | Stage: {{stageDisplayName}}"
 
 msgid "Program must be saved before notifications can be added"
 msgstr "Program must be saved before notifications can be added"
+
+msgid "No notifications have been added yet"
+msgstr "No notifications have been added yet"
 
 msgid "Add a notification"
 msgstr "Add a notification"
@@ -4743,6 +4810,9 @@ msgstr "Public (All users)"
 msgid "External"
 msgstr "External"
 
+msgid "Group"
+msgstr "Group"
+
 msgid "Program Details"
 msgstr "Program Details"
 
@@ -4784,6 +4854,15 @@ msgstr "Close data entry a number of days after \"Implementing partner\" end dat
 
 msgid "Access and Sharing"
 msgstr "Access and Sharing"
+
+msgid "Notification type"
+msgstr "Notification type"
+
+msgid "Program: Send when there is activity in the program or enrollment"
+msgstr "Program: Send when there is activity in the program or enrollment"
+
+msgid "Stage: Send when there is activity in a specific stage"
+msgstr "Stage: Send when there is activity in a specific stage"
 
 msgid "Notification"
 msgstr "Notification"
