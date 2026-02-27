@@ -20,6 +20,7 @@ import { uiAssertions } from '../../testUtils/uiAssertions'
 import { Program, ProgramTrackedEntityAttribute } from '../../types/generated'
 import { Component as Edit } from './Edit'
 import { staticOptions } from './form/OrgUnitField'
+import { PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS } from './form/ProgramIndicatorFormFields'
 import { Component as New } from './New'
 import resetAllMocks = jest.resetAllMocks
 
@@ -734,7 +735,9 @@ describe('Program indicator form tests', () => {
                 {
                     options: mockSchema.properties.analyticsType.constants.map(
                         (o) => ({
-                            displayName: getConstantTranslation(o),
+                            displayName:
+                                PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS[o] ??
+                                getConstantTranslation(o),
                         })
                     ),
                 },
@@ -1570,7 +1573,9 @@ describe('Program indicator form tests', () => {
                     ),
                     options: mockSchema.properties.analyticsType.constants.map(
                         (o) => ({
-                            displayName: getConstantTranslation(o),
+                            displayName:
+                                PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS[o] ??
+                                getConstantTranslation(o),
                         })
                     ),
                 },
