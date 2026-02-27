@@ -7,7 +7,7 @@ export const FEATURES = Object.freeze({
 const MINOR_VERSION_SUPPORT = Object.freeze({
     [FEATURES.searchPerformance]: 43,
     [FEATURES.validationStrategy]: 42,
-    [FEATURES.programRuleActionPriority]: 43,
+    [FEATURES.programRuleActionPriority]: 43, // temp
 } as Record<string, number>)
 
 export const hasAPISupportForFeature = (
