@@ -180,19 +180,31 @@ export const OrgUnitField = () => {
         })
     }, [data, programType, analyticsType, programAttributesForProgram])
 
+    const {
+        value: orgUnitFieldInputValue,
+        onChange: orgUnitFieldInputOnChange,
+    } = orgUnitFieldInput
+
     useEffect(() => {
         const prev = previousOptionsRef.current
 
         const optionsChanged =
             prev.length !== options.length ||
             prev.some((opt, i) => opt.value !== options[i]?.value)
+        const isValueInOptions = options
+            .map((o) => o.value)
+            .includes(orgUnitFieldInputValue)
 
-        if (prev.length > 0 && optionsChanged) {
-            orgUnitFieldInput.onChange(undefined)
+        if (optionsChanged && options.length > 0) {
+            orgUnitFieldInputOnChange(
+                isValueInOptions
+                    ? orgUnitFieldInputValue
+                    : staticOptions.eventDefault.value
+            )
         }
 
         previousOptionsRef.current = options
-    }, [options])
+    }, [options, orgUnitFieldInputValue, orgUnitFieldInputOnChange])
 
     const showField = useMemo(() => {
         if (!programType) {
@@ -206,6 +218,12 @@ export const OrgUnitField = () => {
         }
         return false
     }, [programType, analyticsType])
+    console.log(
+        'orgUnitFieldInput.value, staticOptions.eventDefault.value',
+        orgUnitFieldInput.value,
+        !staticOptions.eventDefault.value,
+        orgUnitFieldInput.value
+    )
 
     return showField ? (
         <Field
@@ -222,6 +240,7 @@ export const OrgUnitField = () => {
             <Box width="400px" minWidth="100px">
                 <SearchableSingleSelect
                     dataTest="org-unit-field"
+                    // selected={orgUnitFieldInput.value === '' ? staticOptions.eventDefault.value : orgUnitFieldInput.value}
                     selected={orgUnitFieldInput.value}
                     options={options}
                     onChange={({ selected }) =>
