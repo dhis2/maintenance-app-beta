@@ -348,8 +348,14 @@ msgstr "Current date"
 msgid "Due date"
 msgstr "Due date"
 
+msgid "Enrollment status"
+msgstr "Enrollment status"
+
 msgid "Event date"
 msgstr "Event date"
+
+msgid "Event status"
+msgstr "Event status"
 
 msgid "Program stage id"
 msgstr "Program stage id"
@@ -374,6 +380,12 @@ msgstr "Program stage data"
 
 msgid "Attributes"
 msgstr "Attributes"
+
+msgid "Program rule variables"
+msgstr "Program rule variables"
+
+msgid "Functions"
+msgstr "Functions"
 
 msgid "Could not validate expression"
 msgstr "Could not validate expression"
@@ -1260,9 +1272,6 @@ msgstr "Program rules"
 
 msgid "Program rule variable"
 msgstr "Program rule variable"
-
-msgid "Program rule variables"
-msgstr "Program rule variables"
 
 msgid "Program stage"
 msgstr "Program stage"
@@ -4474,6 +4483,299 @@ msgstr ""
 msgid "Program Rule Variable"
 msgstr "Program Rule Variable"
 
+msgid "Edit condition expression"
+msgstr "Edit condition expression"
+
+msgid "Set up condition expression"
+msgstr "Set up condition expression"
+
+msgid "Feedback"
+msgstr "Feedback"
+
+msgid "Display widget (required)"
+msgstr "Display widget (required)"
+
+msgid "Can be 0 or negative. Leave empty if not needed."
+msgstr "Can be 0 or negative. Leave empty if not needed."
+
+msgid "Program rule variable to assign to"
+msgstr "Program rule variable to assign to"
+
+msgid "Program stages to trigger rule"
+msgstr "Program stages to trigger rule"
+
+msgid "All program stages"
+msgstr "All program stages"
+
+msgid ""
+"Select a specific program stage or leave as \"All program stages\" to "
+"trigger on all stages."
+msgstr ""
+"Select a specific program stage or leave as \"All program stages\" to "
+"trigger on all stages."
+
+msgid "Program stage section to hide"
+msgstr "Program stage section to hide"
+
+msgid "Set up the basic information for this program rule."
+msgstr "Set up the basic information for this program rule."
+
+msgid "Only used for managing metadata, not shown with rule output"
+msgstr "Only used for managing metadata, not shown with rule output"
+
+msgid "Explain the purpose of this program rule. Not shown with rule output."
+msgstr "Explain the purpose of this program rule. Not shown with rule output."
+
+msgid "Set up the expression that checks when this program rule runs."
+msgstr "Set up the expression that checks when this program rule runs."
+
+msgid "Program rule action saved"
+msgstr "Program rule action saved"
+
+msgid "Edit action"
+msgstr "Edit action"
+
+msgid "Add action"
+msgstr "Add action"
+
+msgid "Configure the program rule action."
+msgstr "Configure the program rule action."
+
+msgid "Action type (required)"
+msgstr "Action type (required)"
+
+msgid "Save action"
+msgstr "Save action"
+
+msgid "Set up the actions that happen when the program rule runs."
+msgstr "Set up the actions that happen when the program rule runs."
+
+msgid "Action will be deleted when the program rule is saved."
+msgstr "Action will be deleted when the program rule is saved."
+
+msgid "Undo delete"
+msgstr "Undo delete"
+
+msgid "Program rule must be saved before actions can be added"
+msgstr "Program rule must be saved before actions can be added"
+
+msgid "Data element to assign to"
+msgstr "Data element to assign to"
+
+msgid "Tracked entity attribute to assign to"
+msgstr "Tracked entity attribute to assign to"
+
+msgid "Expression to evaluate and assign"
+msgstr "Expression to evaluate and assign"
+
+msgid "Data element to display warning next to"
+msgstr "Data element to display warning next to"
+
+msgid "Data element to display error next to"
+msgstr "Data element to display error next to"
+
+msgid "Tracked entity attribute to display warning next to"
+msgstr "Tracked entity attribute to display warning next to"
+
+msgid "Tracked entity attribute to display error next to"
+msgstr "Tracked entity attribute to display error next to"
+
+msgid "Static text (required)"
+msgstr "Static text (required)"
+
+msgid "Expression to evaluate and display after static text."
+msgstr "Expression to evaluate and display after static text."
+
+msgid "Key label"
+msgstr "Key label"
+
+msgid "Expression to evaluate and display as value."
+msgstr "Expression to evaluate and display as value."
+
+msgid "Static text"
+msgstr "Static text"
+
+msgid "Data element to hide"
+msgstr "Data element to hide"
+
+msgid "Tracked entity attribute to hide"
+msgstr "Tracked entity attribute to hide"
+
+msgid "Custom message for blanked field"
+msgstr "Custom message for blanked field"
+
+msgid "Option to hide"
+msgstr "Option to hide"
+
+msgid "Option group to hide"
+msgstr "Option group to hide"
+
+msgid "Program rule variable for scheduled date"
+msgstr "Program rule variable for scheduled date"
+
+msgid "Date to send message."
+msgstr "Date to send message."
+
+msgid "Option group to show"
+msgstr "Option group to show"
+
+msgid "Assign value"
+msgstr "Assign value"
+
+msgid "Display key-value pair"
+msgstr "Display key-value pair"
+
+msgid "Display text"
+msgstr "Display text"
+
+msgid "Error on complete"
+msgstr "Error on complete"
+
+msgid "Hide field"
+msgstr "Hide field"
+
+msgid "Hide option"
+msgstr "Hide option"
+
+msgid "Hide option group"
+msgstr "Hide option group"
+
+msgid "Hide program stage"
+msgstr "Hide program stage"
+
+msgid "Hide section"
+msgstr "Hide section"
+
+msgid "Schedule event"
+msgstr "Schedule event"
+
+msgid "Schedule message"
+msgstr "Schedule message"
+
+msgid "Send message"
+msgstr "Send message"
+
+msgid "Set mandatory field"
+msgstr "Set mandatory field"
+
+msgid "Show error"
+msgstr "Show error"
+
+msgid "Show option group"
+msgstr "Show option group"
+
+msgid "Show warning"
+msgstr "Show warning"
+
+msgid "Warning on complete"
+msgstr "Warning on complete"
+
+msgid "Expression to evaluate and assign is required"
+msgstr "Expression to evaluate and assign is required"
+
+msgid ""
+"At least one of the data element, tracked entity attribute, or program rule "
+"variable must be provided"
+msgstr ""
+"At least one of the data element, tracked entity attribute, or program rule "
+"variable must be provided"
+
+msgid "Display widget is required"
+msgstr "Display widget is required"
+
+msgid "This field is required"
+msgstr "This field is required"
+
+msgid ""
+"At least one of the data element or tracked entity attribute must be "
+"provided"
+msgstr ""
+"At least one of the data element or tracked entity attribute must be "
+"provided"
+
+msgid "Program stage is required"
+msgstr "Program stage is required"
+
+msgid "Program stage section to hide is required"
+msgstr "Program stage section to hide is required"
+
+msgid "Select a data element or tracked entity attribute with option set"
+msgstr "Select a data element or tracked entity attribute with option set"
+
+msgid "Option to hide is required"
+msgstr "Option to hide is required"
+
+msgid "Key label is required"
+msgstr "Key label is required"
+
+msgid "Message template is required"
+msgstr "Message template is required"
+
+msgid "Option group is required"
+msgstr "Option group is required"
+
+msgid "Static text is required"
+msgstr "Static text is required"
+
+msgid "Show warning: {{content}} on {{target}}"
+msgstr "Show warning: {{content}} on {{target}}"
+
+msgid "Show error: {{content}} on {{target}}"
+msgstr "Show error: {{content}} on {{target}}"
+
+msgid "Warning on complete: {{content}} on {{target}}"
+msgstr "Warning on complete: {{content}} on {{target}}"
+
+msgid "Error on complete: {{content}} on {{target}}"
+msgstr "Error on complete: {{content}} on {{target}}"
+
+msgid "Display text: {{content}} on {{location}}"
+msgstr "Display text: {{content}} on {{location}}"
+
+msgid "Display key-value pair: {{content}} on {{location}}"
+msgstr "Display key-value pair: {{content}} on {{location}}"
+
+msgid "Hide field: {{target}}"
+msgstr "Hide field: {{target}}"
+
+msgid "Set mandatory field: {{target}}"
+msgstr "Set mandatory field: {{target}}"
+
+msgid "Hide section: {{section}}"
+msgstr "Hide section: {{section}}"
+
+msgid "Hide program stage: {{stage}}"
+msgstr "Hide program stage: {{stage}}"
+
+msgid "Assign: {{data}} to field {{target}}"
+msgstr "Assign: {{data}} to field {{target}}"
+
+msgid "Schedule event in program stage: {{stage}} at date {{data}}"
+msgstr "Schedule event in program stage: {{stage}} at date {{data}}"
+
+msgid "Schedule message: {{template}} at date {{data}}"
+msgstr "Schedule message: {{template}} at date {{data}}"
+
+msgid "Send message: {{template}}"
+msgstr "Send message: {{template}}"
+
+msgid "Hide option: {{option}} on {{target}}"
+msgstr "Hide option: {{option}} on {{target}}"
+
+msgid "Show option group: {{group}} on {{target}}"
+msgstr "Show option group: {{group}} on {{target}}"
+
+msgid "Hide option group: {{group}} on {{target}}"
+msgstr "Hide option group: {{group}} on {{target}}"
+
+msgid "Unknown action type"
+msgstr "Unknown action type"
+
+msgid "Program Rule"
+msgstr "Program Rule"
+
+msgid "Name (required)"
+msgstr "Name (required)"
 msgid ""
 "There was an error updating notification templates for some stages: "
 "{{stagesNames}}"

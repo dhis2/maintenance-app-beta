@@ -81,6 +81,17 @@ const DrawerContents = ({
             focusTrapOptions={{
                 delayInitialFocus: true,
                 allowOutsideClick: true,
+                clickOutsideDeactivates: (event) => {
+                    const target = event.target
+                    if (!(target instanceof Element)) {
+                        // If the event target is not an Element, treat it as an outside click
+                        return true
+                    }
+                    const isInModal = target.closest('[role="dialog"]')
+                    return !isInModal
+                },
+                returnFocusOnDeactivate: false,
+                fallbackFocus: () => document.body,
             }}
         >
             <div className={css.drawerContent}>
