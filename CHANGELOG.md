@@ -1,3 +1,10 @@
+# [0.134.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.133.1...v0.134.0) (2026-03-02)
+
+
+### Features
+
+* move programsWip to programs ([#782](https://github.com/dhis2/maintenance-app-beta/issues/782)) ([f3d7e80](https://github.com/dhis2/maintenance-app-beta/commit/f3d7e805dd2f29b2dc2bab6f9900683042a574fd))
+
 ## [0.133.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.133.0...v0.133.1) (2026-03-02)
 
 
