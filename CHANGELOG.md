@@ -1,3 +1,10 @@
+## [0.133.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.133.0...v0.133.1) (2026-03-02)
+
+
+### Bug Fixes
+
+* reapply non editing of event programs ([f6f6fed](https://github.com/dhis2/maintenance-app-beta/commit/f6f6fed47c8100c09ba3df0efc2570fe6a213682))
+
 # [0.133.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.132.0...v0.133.0) (2026-03-02)
 
 
