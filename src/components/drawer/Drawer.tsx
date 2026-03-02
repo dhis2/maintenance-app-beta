@@ -85,15 +85,7 @@ const DrawerContents = ({
         >
             <div className={css.drawerContent}>
                 {headerNode}
-                <div className={css.drawerBody}>
-                    <span
-                        tabIndex={0}
-                        role="region"
-                        aria-label="Start of drawer content"
-                        className={css.drawerFocusAnchor}
-                    />
-                    {children}
-                </div>
+                <div className={css.drawerBody}>{children}</div>
             </div>
         </FocusTrap>
     )
