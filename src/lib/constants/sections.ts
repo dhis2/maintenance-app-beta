@@ -178,7 +178,7 @@ export const SCHEMA_SECTIONS = {
     // @ts-expect-error temporary route for testing
     programWIP: {
         name: SchemaName.program,
-        routeName: 'programsWip',
+        routeName: 'programs',
         namePlural: 'programs',
         title: i18n.t('Program'),
         titlePlural: i18n.t('Programs'),
