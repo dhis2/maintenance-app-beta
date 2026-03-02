@@ -169,6 +169,7 @@ const ProgramRuleActionListNewOrEdit = () => {
                                     schemaName={SchemaName.programRuleAction}
                                     onClick={() => setActionFormOpen(action)}
                                     onDelete={() => handleDelete(index)}
+                                    translatable={false}
                                 />
                             )
                         })}
