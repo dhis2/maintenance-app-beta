@@ -7,7 +7,7 @@ import {
     useBoundResourceQueryFn,
     DEFAULT_CATEGORY_OPTION_COMBO,
 } from '../../lib'
-import { ProgramStateSectionDataElements } from '../../pages/programsWip/form/programStage/programStageSection/ProgramStageSectionFormContents'
+import { ProgramStateSectionDataElements } from '../../pages/programs/form/programStage/programStageSection/ProgramStageSectionFormContents'
 import { ElementTypes } from './CustomFormElementsSelector'
 
 type FlagItemResponse = { name: string; key: string; path: string }
