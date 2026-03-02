@@ -1,6 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip, Field, SingleSelectFieldFF } from '@dhis2/ui'
-import { IconInfo16 } from '@dhis2/ui-icons'
+import { Field, SingleSelectFieldFF } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
 import {
@@ -11,7 +10,8 @@ import {
 } from 'react-final-form'
 import {
     DescriptionField,
-    FormFooterWrapper,
+    DrawerFormFooter,
+    DrawerLayout,
     NameField,
     SectionedFormErrorNotice,
     SectionedFormSection,
@@ -24,7 +24,6 @@ import {
 import { BaseModelTransfer } from '../../../../components/metadataFormControls/ModelTransfer/BaseModelTransfer'
 import { useBoundResourceQueryFn } from '../../../../lib'
 import { DisplayableModel } from '../../../../types/models'
-import styles from './EnrollmentSectionFormContents.module.css'
 import {
     enrollmentSectionSchemaSection,
     SectionFormValues,
@@ -103,154 +102,140 @@ export const EnrollmentSectionFormContents = ({
             .filter((tea) => !otherSectionsAttributes.includes(tea.id))
     }, [data, values.id])
 
-    return (
-        <div className={styles.sectionsWrapper}>
-            <div>
-                <SectionedFormSections>
-                    <SectionedFormSection name="setup">
-                        <StandardFormSectionTitle>
-                            {i18n.t('Section setup')}
-                        </StandardFormSectionTitle>
-                        <StandardFormSectionDescription>
-                            {i18n.t(
-                                'Setup the basic information for this section.'
+    const formContent = (
+        <div>
+            <SectionedFormSections>
+                <SectionedFormSection name="setup">
+                    <StandardFormSectionTitle>
+                        {i18n.t('Section setup')}
+                    </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        {i18n.t(
+                            'Setup the basic information for this section.'
+                        )}
+                    </StandardFormSectionDescription>
+                    <StandardFormField>
+                        <NameField
+                            schemaSection={enrollmentSectionSchemaSection}
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <DescriptionField
+                            helpText={i18n.t(
+                                'Explain the purpose of this section.'
                             )}
-                        </StandardFormSectionDescription>
-                        <StandardFormField>
-                            <NameField
-                                schemaSection={enrollmentSectionSchemaSection}
-                            />
-                        </StandardFormField>
-                        <StandardFormField>
-                            <DescriptionField
-                                helpText={i18n.t(
-                                    'Explain the purpose of this section.'
-                                )}
-                            />
-                        </StandardFormField>
-                        <StandardFormField>
-                            <FieldRFF<string | undefined>
-                                inputWidth="500px"
-                                name="renderType.DESKTOP.type"
-                                render={(props) => (
-                                    <SingleSelectFieldFF
-                                        {...props}
-                                        label={i18n.t('Desktop display')}
-                                        options={displayOptions}
-                                    />
-                                )}
-                                required
-                            />
-                        </StandardFormField>
-                        <StandardFormField>
-                            <FieldRFF<string | undefined>
-                                inputWidth="500px"
-                                name="renderType.MOBILE.type"
-                                render={(props) => (
-                                    <SingleSelectFieldFF
-                                        {...props}
-                                        label={i18n.t('Mobile display')}
-                                        options={displayOptions}
-                                    />
-                                )}
-                                required
-                            />
-                        </StandardFormField>
-                    </SectionedFormSection>
-                    <SectionedFormSection name="sectionAttributes">
-                        <StandardFormSectionTitle>
-                            {i18n.t('Section attributes')}
-                        </StandardFormSectionTitle>
-                        <StandardFormSectionDescription>
-                            {i18n.t(
-                                'Choose what data is collected for this section.'
-                            )}
-                        </StandardFormSectionDescription>
-                        <StandardFormField>
-                            <Field
-                                error={attributesMeta.invalid}
-                                validationText={
-                                    (attributesMeta.touched &&
-                                        attributesMeta.error?.toString()) ||
-                                    ''
-                                }
-                                name="attributes"
-                            >
-                                <BaseModelTransfer
-                                    loading={isLoading}
-                                    selected={attributesInput.value}
-                                    onChange={({ selected }) => {
-                                        attributesInput.onChange(selected)
-                                        attributesInput.onBlur()
-                                    }}
-                                    leftHeader={
-                                        <TransferHeader>
-                                            {i18n.t('Available attributes')}
-                                        </TransferHeader>
-                                    }
-                                    rightHeader={
-                                        <TransferHeader>
-                                            {i18n.t('Selected attributes')}
-                                        </TransferHeader>
-                                    }
-                                    filterPlaceholder={i18n.t(
-                                        'Search available attributes'
-                                    )}
-                                    filterPlaceholderPicked={i18n.t(
-                                        'Search selected attributes'
-                                    )}
-                                    enableOrderChange
-                                    height={'350px'}
-                                    optionsWidth="500px"
-                                    selectedWidth="500px"
-                                    filterable
-                                    filterablePicked
-                                    available={[
-                                        ...availableAttributes,
-                                        ...attributesInput.value,
-                                    ]}
-                                    maxSelections={Infinity}
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <FieldRFF<string | undefined>
+                            inputWidth="500px"
+                            name="renderType.DESKTOP.type"
+                            render={(props) => (
+                                <SingleSelectFieldFF
+                                    {...props}
+                                    label={i18n.t('Desktop display')}
+                                    options={displayOptions}
                                 />
-                            </Field>
-                        </StandardFormField>
-                    </SectionedFormSection>
-                </SectionedFormSections>
-                <SectionedFormErrorNotice />
-            </div>
-            <div>
-                <FormFooterWrapper>
-                    <ButtonStrip>
-                        <Button
-                            primary
-                            small
-                            disabled={submitting}
-                            type="button"
-                            onClick={() => form.submit()}
-                            loading={submitting}
-                            dataTest="form-submit-button"
-                        >
-                            {i18n.t('Save section')}
-                        </Button>
-                        <Button
-                            secondary
-                            small
-                            disabled={submitting}
-                            onClick={onCancel}
-                            dataTest="form-cancel-link"
-                        >
-                            {i18n.t('Cancel')}
-                        </Button>
-                    </ButtonStrip>
-                    <div className={styles.actionsInfo}>
-                        <IconInfo16 />
-                        <p>
-                            {i18n.t(
-                                'Saving a section does not save other changes to the program'
                             )}
-                        </p>
-                    </div>
-                </FormFooterWrapper>
-            </div>
+                            required
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <FieldRFF<string | undefined>
+                            inputWidth="500px"
+                            name="renderType.MOBILE.type"
+                            render={(props) => (
+                                <SingleSelectFieldFF
+                                    {...props}
+                                    label={i18n.t('Mobile display')}
+                                    options={displayOptions}
+                                />
+                            )}
+                            required
+                        />
+                    </StandardFormField>
+                </SectionedFormSection>
+                <SectionedFormSection name="sectionAttributes">
+                    <StandardFormSectionTitle>
+                        {i18n.t('Section attributes')}
+                    </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        {i18n.t(
+                            'Choose what data is collected for this section.'
+                        )}
+                    </StandardFormSectionDescription>
+                    <StandardFormField>
+                        <Field
+                            error={attributesMeta.invalid}
+                            validationText={
+                                (attributesMeta.touched &&
+                                    attributesMeta.error?.toString()) ||
+                                ''
+                            }
+                            name="attributes"
+                        >
+                            <BaseModelTransfer
+                                loading={isLoading}
+                                selected={attributesInput.value}
+                                onChange={({ selected }) => {
+                                    attributesInput.onChange(selected)
+                                    attributesInput.onBlur()
+                                }}
+                                leftHeader={
+                                    <TransferHeader>
+                                        {i18n.t('Available attributes')}
+                                    </TransferHeader>
+                                }
+                                rightHeader={
+                                    <TransferHeader>
+                                        {i18n.t('Selected attributes')}
+                                    </TransferHeader>
+                                }
+                                filterPlaceholder={i18n.t(
+                                    'Search available attributes'
+                                )}
+                                filterPlaceholderPicked={i18n.t(
+                                    'Search selected attributes'
+                                )}
+                                enableOrderChange
+                                height={'350px'}
+                                optionsWidth="500px"
+                                selectedWidth="500px"
+                                filterable
+                                filterablePicked
+                                available={[
+                                    ...availableAttributes,
+                                    ...attributesInput.value,
+                                ]}
+                                maxSelections={Infinity}
+                            />
+                        </Field>
+                    </StandardFormField>
+                </SectionedFormSection>
+            </SectionedFormSections>
+            <SectionedFormErrorNotice />
         </div>
+    )
+
+    if (!onCancel) {
+        return null
+    }
+    return (
+        <DrawerLayout
+            footer={
+                <DrawerFormFooter
+                    submitLabel={i18n.t('Save section')}
+                    cancelLabel={i18n.t('Cancel')}
+                    submitting={submitting ?? false}
+                    onSubmitClick={() => form.submit()}
+                    onCancelClick={onCancel}
+                    infoMessage={i18n.t(
+                        'Saving a section does not save other changes to the program'
+                    )}
+                />
+            }
+        >
+            {formContent}
+        </DrawerLayout>
     )
 }

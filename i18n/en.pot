@@ -444,6 +444,12 @@ msgstr "Save custom form"
 msgid "Saving a custom form does not save other changes to the {{customFormTarget}}"
 msgstr "Saving a custom form does not save other changes to the {{customFormTarget}}"
 
+msgid "New custom form"
+msgstr "New custom form"
+
+msgid "Edit custom form"
+msgstr "Edit custom form"
+
 msgid "A custom form must be added for it to be used for data entry (web)."
 msgstr "A custom form must be added for it to be used for data entry (web)."
 
@@ -461,9 +467,6 @@ msgstr "Delete custom form"
 
 msgid "Create custom form"
 msgstr "Create custom form"
-
-msgid "Edit custom form"
-msgstr "Edit custom form"
 
 msgid "Select elements"
 msgstr "Select elements"
@@ -668,6 +671,12 @@ msgstr "value type"
 
 msgid "undefined"
 msgstr "undefined"
+
+msgid "New section"
+msgstr "New section"
+
+msgid "Edit section"
+msgstr "Edit section"
 
 msgid "Sections"
 msgstr "Sections"
@@ -3504,6 +3513,12 @@ msgstr "Option updated"
 msgid "Option set must be saved before options can be added"
 msgstr "Option set must be saved before options can be added"
 
+msgid "New option"
+msgstr "New option"
+
+msgid "Edit option"
+msgstr "Edit option"
+
 msgid "Define options for this option set"
 msgstr "Define options for this option set"
 
@@ -4653,6 +4668,12 @@ msgstr "Display enrolled TEs in the front page list"
 msgid "Set up notifications for this program."
 msgstr "Set up notifications for this program."
 
+msgid "New notification"
+msgstr "New notification"
+
+msgid "Edit notification"
+msgstr "Edit notification"
+
 msgid "Notification {{- notificationName}} will be removed on save"
 msgstr "Notification {{- notificationName}} will be removed on save"
 
@@ -4676,6 +4697,12 @@ msgstr "Set up stages in this program."
 
 msgid "Program must be saved before stages can be added"
 msgstr "Program must be saved before stages can be added"
+
+msgid "New stage"
+msgstr "New stage"
+
+msgid "Edit stage"
+msgstr "Edit stage"
 
 msgid "No program stages have been added yet"
 msgstr "No program stages have been added yet"
