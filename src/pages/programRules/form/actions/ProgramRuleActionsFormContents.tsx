@@ -97,6 +97,16 @@ const ProgramRuleActionListNewOrEdit = () => {
     if (modelId) {
         const actions: ProgramRuleActionListItem[] =
             actionsFieldArray.value ?? []
+        const sortedActionsBy = actions.sort((a, b) => {
+            return (
+                (a.programRuleActionType ?? '').localeCompare(
+                    b.programRuleActionType ?? ''
+                ) &&
+                getProgramRuleActionListLabel(a).localeCompare(
+                    getProgramRuleActionListLabel(b)
+                )
+            )
+        })
 
         return (
             <>
@@ -118,7 +128,7 @@ const ProgramRuleActionListNewOrEdit = () => {
 
                 <div>
                     <div>
-                        {actions.map((action, index) => {
+                        {sortedActionsBy.map((action, index) => {
                             const actionKey = action.id ?? `new-${index}`
                             if (action.deleted) {
                                 return (
