@@ -48,16 +48,10 @@ export function ValueTypeField({
     const disabled = !!values.optionSet?.id || externallyDisabled
     const schemaSection = useSchemaSectionHandleOrThrow()
     const schema = useSchema(schemaSection.name)
+
     const isEdit = !!useParams().id
 
     const { input } = useField('valueType')
-
-    useEffect(() => {
-        if (values.optionSet?.valueType) {
-            input.onChange(values.optionSet.valueType)
-            input.onBlur()
-        }
-    }, [values.optionSet, input])
 
     const optionSetHasMultiTextValueType =
         values.valueType === 'MULTI_TEXT' ||
@@ -66,10 +60,30 @@ export function ValueTypeField({
     const isOptionSetForm = schemaSection.name === 'optionSet'
     const isProgramRuleVariableForm =
         schemaSection.name === 'programRuleVariable'
+    const formTypeAllowsMultiTextOptionSelection =
+        isOptionSetForm || isProgramRuleVariableForm
     const showMultiTextOption =
-        isOptionSetForm ||
-        isProgramRuleVariableForm ||
-        optionSetHasMultiTextValueType
+        formTypeAllowsMultiTextOptionSelection || optionSetHasMultiTextValueType
+
+    const optionSetValueType = values.optionSet?.valueType
+
+    useEffect(() => {
+        // set value type to match selected option set's value type (if value type does not already match)
+        if (optionSetValueType && optionSetValueType !== input.value) {
+            input.onChange(optionSetValueType)
+            input.onBlur()
+        }
+        // set VALUE_TYPE back to TEXT default if MULTI_TEXT option set is unselected
+        // except if form generally allows MULTI_TEXT value type without option set selection
+        if (
+            !formTypeAllowsMultiTextOptionSelection &&
+            !optionSetValueType &&
+            input.value === 'MULTI_TEXT'
+        ) {
+            input.onChange('TEXT')
+            input.onBlur()
+        }
+    }, [optionSetValueType, input, formTypeAllowsMultiTextOptionSelection])
 
     const options =
         schema.properties.valueType.constants

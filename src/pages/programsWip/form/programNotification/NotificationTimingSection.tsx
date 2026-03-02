@@ -1,20 +1,21 @@
 import i18n from '@dhis2/d2-i18n'
 import {
+    CheckboxFieldFF,
     InputFieldFF,
     SingleSelectField,
     SingleSelectFieldFF,
     SingleSelectOption,
 } from '@dhis2/ui'
+import { uniqBy } from 'lodash'
 import React, { useEffect, useState } from 'react'
 import { Field as FieldRFF, useField, useForm } from 'react-final-form'
 import { StandardFormField } from '../../../../components'
 import { getConstantTranslation } from '../../../../lib'
 
-export const triggerOptions = [
+export const programTriggerOptions = [
     { label: getConstantTranslation('ENROLLMENT'), value: 'ENROLLMENT' },
     { label: getConstantTranslation('COMPLETION'), value: 'COMPLETION' },
     { label: getConstantTranslation('PROGRAM_RULE'), value: 'PROGRAM_RULE' },
-    // {  label: getConstantTranslation("SCHEDULED_DAYS_DUE_DATE") , value:"SCHEDULED_DAYS_DUE_DATE"} ,
     {
         label: getConstantTranslation('SCHEDULED_DAYS_INCIDENT_DATE'),
         value: 'SCHEDULED_DAYS_INCIDENT_DATE',
@@ -25,7 +26,20 @@ export const triggerOptions = [
     },
 ]
 
-export const NotificationTimingSection = () => {
+export const programStageTriggerOptions = [
+    { label: i18n.t('Program stage completion'), value: 'COMPLETION' },
+    {
+        label: getConstantTranslation('SCHEDULED_DAYS_DUE_DATE'),
+        value: 'SCHEDULED_DAYS_DUE_DATE',
+    },
+    { label: getConstantTranslation('PROGRAM_RULE'), value: 'PROGRAM_RULE' },
+]
+
+export const NotificationTimingSection = ({
+    isStageNotification,
+}: {
+    isStageNotification: boolean
+}) => {
     const { input: triggerInput, meta: triggerMeta } = useField(
         'notificationTrigger'
     )
@@ -55,11 +69,42 @@ export const NotificationTimingSection = () => {
         }
     }, [isScheduledDays, form])
 
+    const triggerInputChange = triggerInput.onChange
+    const formChange = form.change
+    useEffect(() => {
+        triggerInputChange('COMPLETION')
+        if (!isStageNotification) {
+            formChange('sendRepeatable', undefined)
+        }
+    }, [isStageNotification, formChange, triggerInputChange])
+
     const handleBeforeAfterChange = (newValue: 'BEFORE' | 'AFTER') => {
         const absValue = Math.abs(Number(relativeScheduledDaysInput.value) || 0)
         const signed = newValue === 'BEFORE' ? -absValue : absValue
         form.change('relativeScheduledDays', signed)
     }
+
+    const triggerOptions = isStageNotification
+        ? uniqBy(
+              [
+                  ...programStageTriggerOptions,
+                  {
+                      label: getConstantTranslation(triggerInput.value),
+                      value: triggerInput.value,
+                  },
+              ],
+              'value'
+          )
+        : uniqBy(
+              [
+                  ...programTriggerOptions,
+                  {
+                      label: getConstantTranslation(triggerInput.value),
+                      value: triggerInput.value,
+                  },
+              ],
+              'value'
+          )
 
     return (
         <div>
@@ -142,6 +187,20 @@ export const NotificationTimingSection = () => {
                         />
                     </StandardFormField>
                 </div>
+            )}
+
+            {isStageNotification && (
+                <StandardFormField>
+                    <FieldRFF
+                        component={CheckboxFieldFF}
+                        name="sendRepeatable"
+                        label={i18n.t(
+                            'Allow notification to be sent multiple times'
+                        )}
+                        type="checkbox"
+                        dataTest="formfields-sendRepeatable"
+                    />
+                </StandardFormField>
             )}
         </div>
     )

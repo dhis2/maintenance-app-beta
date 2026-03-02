@@ -1,8 +1,8 @@
 import { useTimeZoneConversion } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, Field, IconAdd16, Input } from '@dhis2/ui'
+import { Button, Field, IconAdd16, Input, InputFieldFF } from '@dhis2/ui'
 import React from 'react'
-import { useField, useFormState } from 'react-final-form'
+import { Field as FieldRFF, useField, useFormState } from 'react-final-form'
 import { useHref } from 'react-router'
 import {
     CodeField,
@@ -27,6 +27,11 @@ import {
 } from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
 import classes from '../../dataElements/fields/CategoryComboField.module.css'
+import {
+    CompleteEventsExpiryDaysField,
+    ExpiryDaysWithPeriodTypeField,
+    OpenDaysAfterCoEndDateField,
+} from './fields'
 import setupClasses from './SetupFormContents.module.css'
 
 const CATEGORY_COMBOS_QUERY = {
@@ -149,6 +154,79 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                         />
                     </div>
                 </EditableFieldWrapper>
+            </StandardFormField>
+
+            <StandardFormField>
+                <ExpiryDaysWithPeriodTypeField />
+            </StandardFormField>
+            <StandardFormField>
+                <CompleteEventsExpiryDaysField />
+            </StandardFormField>
+            <StandardFormField>
+                <OpenDaysAfterCoEndDateField />
+            </StandardFormField>
+            <StandardFormField>
+                <FieldRFF
+                    name="minAttributesRequiredToSearch"
+                    component={InputFieldFF}
+                    type="number"
+                    min="0"
+                    inputWidth="200px"
+                    label={i18n.t(
+                        'Minimum number of attributes required to search'
+                    )}
+                    dataTest="formfields-minattributesrequiredtosearch"
+                    format={(value: unknown) => {
+                        if (value === undefined || value === null) {
+                            return ''
+                        }
+                        if (
+                            typeof value === 'number' ||
+                            typeof value === 'string'
+                        ) {
+                            return String(value)
+                        }
+                        return ''
+                    }}
+                    parse={(value: unknown) => {
+                        if (value === undefined || value === '') {
+                            return 0
+                        }
+                        return Number.parseInt(value as string, 10)
+                    }}
+                />
+            </StandardFormField>
+            <StandardFormField>
+                <FieldRFF
+                    name="maxTeiCountToReturn"
+                    component={InputFieldFF}
+                    type="number"
+                    min="0"
+                    inputWidth="200px"
+                    label={i18n.t(
+                        'Maximum number of search results to display'
+                    )}
+                    helpText={i18n.t('Entering 0 shows all search results')}
+                    dataTest="formfields-maxteicounttoreturn"
+                    format={(value: unknown) => {
+                        if (value === undefined || value === null) {
+                            return ''
+                        }
+                        if (
+                            typeof value === 'number' ||
+                            typeof value === 'string'
+                        ) {
+                            return String(value)
+                        }
+                        return ''
+                    }}
+                    parse={(value: unknown) => {
+                        if (value === undefined || value === '') {
+                            return 0
+                        }
+                        return Number.parseInt(value as string, 10)
+                    }}
+                />
             </StandardFormField>
         </SectionedFormSection>
     )

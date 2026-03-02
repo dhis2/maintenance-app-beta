@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaultsOld,
+    modelFormSchemas,
+} from '../../../lib'
 import { OptionGroup, PickWithFieldFilters } from '../../../types/generated'
 import { fieldFilters } from './fieldFilters'
 
@@ -30,7 +34,7 @@ export const OptionGroupListSchema = optionGroupBaseSchema
         displayShortName: z.string(),
     })
 
-export const initialValues = getDefaults(optionGroupFormSchema)
+export const initialValues = getDefaultsOld(optionGroupFormSchema)
 export const validate = createFormValidate(optionGroupFormSchema)
 
 export type OptionGroupFormValues = PickWithFieldFilters<

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-18T12:13:37.785Z\n"
-"PO-Revision-Date: 2026-02-18T12:13:37.786Z\n"
+"POT-Creation-Date: 2026-02-25T08:49:49.064Z\n"
+"PO-Revision-Date: 2026-02-25T08:49:49.064Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1909,6 +1909,24 @@ msgstr "Maximum number of tracked entity instances to return in search"
 msgid "Minimum number of attributes required to search"
 msgstr "Minimum number of attributes required to search"
 
+msgid "Subject template"
+msgstr "Subject template"
+
+msgid "Message template"
+msgstr "Message template"
+
+msgid "Program stage label"
+msgstr "Program stage label"
+
+msgid "Due date label"
+msgstr "Due date label"
+
+msgid "Execution date label"
+msgstr "Execution date label"
+
+msgid "Event label"
+msgstr "Event label"
+
 msgid "Unknown error"
 msgstr "Unknown error"
 
@@ -1960,9 +1978,6 @@ msgstr "Please provide a date."
 msgid "Period type"
 msgstr "Period type"
 
-msgid "Message template"
-msgstr "Message template"
-
 msgid "Favourite"
 msgstr "Favourite"
 
@@ -1983,9 +1998,6 @@ msgstr "Relative scheduled days"
 
 msgid "Send notification as"
 msgstr "Send notification as"
-
-msgid "Subject template"
-msgstr "Subject template"
 
 msgid "Offline levels"
 msgstr "Offline levels"
@@ -4668,14 +4680,11 @@ msgstr "Notification {{- notificationName}} will be removed on save"
 msgid "Restore notification"
 msgstr "Restore notification"
 
-msgid "Program must be saved before notifications can be added"
-msgstr "Program must be saved before notifications can be added"
-
-msgid "No notifications been added yet"
-msgstr "No notifications been added yet"
-
 msgid "No notifications have been added yet"
 msgstr "No notifications have been added yet"
+
+msgid "Program must be saved before notifications can be added"
+msgstr "Program must be saved before notifications can be added"
 
 msgid "Add a notification"
 msgstr "Add a notification"
@@ -4779,6 +4788,27 @@ msgstr "Related program"
 msgid "Choose how this program is disaggregated."
 msgstr "Choose how this program is disaggregated."
 
+msgid "Maximum number of search results to display"
+msgstr "Maximum number of search results to display"
+
+msgid "Entering 0 shows all search results"
+msgstr "Entering 0 shows all search results"
+
+msgid "Lock completed events after a number of days"
+msgstr "Lock completed events after a number of days"
+
+msgid "Number of days"
+msgstr "Number of days"
+
+msgid "Close data entry a number of days after the end of a period"
+msgstr "Close data entry a number of days after the end of a period"
+
+msgid "Expiry period type"
+msgstr "Expiry period type"
+
+msgid "Close data entry a number of days after \"Implementing partner\" end date"
+msgstr "Close data entry a number of days after \"Implementing partner\" end date"
+
 msgid "Access and Sharing"
 msgstr "Access and Sharing"
 
@@ -4797,8 +4827,14 @@ msgstr "Saving a notification does not save other changes to the program"
 msgid "Notification form saved"
 msgstr "Notification form saved"
 
+msgid "Program stage completion"
+msgstr "Program stage completion"
+
 msgid "When to send notification (required)"
 msgstr "When to send notification (required)"
+
+msgid "Allow notification to be sent multiple times"
+msgstr "Allow notification to be sent multiple times"
 
 msgid "Days since due date"
 msgstr "Days since due date"
@@ -4806,17 +4842,20 @@ msgstr "Days since due date"
 msgid "Days until due date"
 msgstr "Days until due date"
 
-msgid "Set up the basic information for the programNotification template."
-msgstr "Set up the basic information for the programNotification template."
-
 msgid "Recipient type (required)"
 msgstr "Recipient type (required)"
 
-msgid "Program attribute Recipient"
-msgstr "Program attribute Recipient"
+msgid "Program attribute recipient"
+msgstr "Program attribute recipient"
 
 msgid "No program attributes of type email or phone number found."
 msgstr "No program attributes of type email or phone number found."
+
+msgid "Data element recipient"
+msgstr "Data element recipient"
+
+msgid "No data elements of type email or phone number found."
+msgstr "No data elements of type email or phone number found."
 
 msgid "Web hook message URL (required)"
 msgstr "Web hook message URL (required)"
@@ -4826,6 +4865,9 @@ msgstr "Edit Program Notification"
 
 msgid "Recipient program attribute"
 msgstr "Recipient program attribute"
+
+msgid "Recipient data element"
+msgstr "Recipient data element"
 
 msgid "Event repetition"
 msgstr "Event repetition"

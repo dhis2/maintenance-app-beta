@@ -21,6 +21,36 @@ export const ProgramFormDescriptor = {
                     name: 'categoryCombo',
                     label: i18n.t('Category combination'),
                 },
+                {
+                    name: 'expiryDays',
+                    label: i18n.t(
+                        'Close data entry a number of days after the end of a period'
+                    ),
+                },
+                {
+                    name: 'completeEventsExpiryDays',
+                    label: i18n.t(
+                        'Lock completed events after a number of days'
+                    ),
+                },
+                {
+                    name: 'openDaysAfterCoEndDate',
+                    label: i18n.t(
+                        'Close data entry a number of days after "Implementing partner" end date'
+                    ),
+                },
+                {
+                    name: 'minAttributesRequiredToSearch',
+                    label: i18n.t(
+                        'Minimum number of attributes required to search'
+                    ),
+                },
+                {
+                    name: 'maxTeiCountToReturn',
+                    label: i18n.t(
+                        'Maximum number of search results to display'
+                    ),
+                },
             ],
         },
         {
@@ -100,6 +130,12 @@ export const ProgramFormDescriptor = {
                     name: 'useFirstStageDuringRegistration',
                     label: i18n.t(
                         'Collect data for the first stage during enrollment'
+                    ),
+                },
+                {
+                    name: 'ignoreOverdueEvents',
+                    label: i18n.t(
+                        'Do not create overdue events when automatically creating program stage events'
                     ),
                 },
             ],

@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 import {
     createFormValidate,
-    getDefaults,
+    getDefaultsOld,
     modelFormSchemas,
 } from '../../../../lib'
 import { ProgramNotificationTemplate } from '../../../../types/generated'
@@ -39,7 +39,14 @@ const programNotificationTemplateBaseSchema = z.object({
             displayName: z.string().optional(),
         })
         .optional(),
+    sendRepeatable: z.boolean().optional(),
     recipientProgramAttribute: z
+        .object({
+            id: z.string().optional(),
+            displayName: z.string().optional(),
+        })
+        .optional(),
+    recipientDataElement: z
         .object({
             id: z.string().optional(),
             displayName: z.string().optional(),
@@ -64,7 +71,9 @@ export const programNotificationTemplateFormSchema =
             ),
     })
 
-export const initialValues = getDefaults(programNotificationTemplateFormSchema)
+export const initialValues = getDefaultsOld(
+    programNotificationTemplateFormSchema
+)
 
 export type ProgramNotificationFormValues = z.infer<
     typeof programNotificationTemplateFormSchema

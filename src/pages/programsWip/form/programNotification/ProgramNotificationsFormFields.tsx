@@ -37,10 +37,24 @@ export const PROGRAM_CONSTANTS = {
     current_date: { label: i18n.t('Current date'), type: 'VARIABLE' },
 } as MessageVariables
 
+export const PROGRAM_STAGE_CONSTANTS = {
+    ...PROGRAM_CONSTANTS,
+    program_stage_name: {
+        label: i18n.t('Program stage name'),
+        type: 'VARIABLE',
+    },
+} as MessageVariables
+
 type ProgramAttributesType = {
     programTrackedEntityAttributes: {
         trackedEntityAttribute: DisplayableModel
         displayName: string
+    }[]
+    programStages: {
+        id: string
+        programStageDataElements: {
+            dataElement: { displayName: string; id: string }
+        }[]
     }[]
 }
 
@@ -58,6 +72,8 @@ export const ProgramNotificationsFormFields = ({
         subscription: { values: true },
     })
 
+    const isStageNotification = values.programStage?.id !== undefined
+
     const queryFn = useBoundResourceQueryFn()
 
     const { data } = useQuery({
@@ -69,13 +85,14 @@ export const ProgramNotificationsFormFields = ({
                 params: {
                     fields: [
                         'programTrackedEntityAttributes[displayName,trackedEntityAttribute[id,displayName]]',
+                        'programStages[id,displayName,programStageDataElements[dataElement[id,displayName]]]',
                     ].concat(),
                 },
             },
         ] as const,
     })
 
-    const programVariables: MessageVariables = useMemo(() => {
+    const programMessageVariables: MessageVariables = useMemo(() => {
         if (data) {
             const trackedEntityAttributesVariables = Object.fromEntries(
                 (data.programTrackedEntityAttributes ?? []).map((att) => [
@@ -91,6 +108,48 @@ export const ProgramNotificationsFormFields = ({
         return PROGRAM_CONSTANTS
     }, [data])
 
+    const programStageMessageVariables: MessageVariables = useMemo(() => {
+        if (data) {
+            const trackedEntityAttributesVariables = Object.fromEntries(
+                data.programTrackedEntityAttributes.map((att) => [
+                    att.trackedEntityAttribute.id,
+                    { label: att.displayName, type: 'ATTRIBUTE' },
+                ])
+            ) as MessageVariables
+            const selectedStageData = data.programStages.find(
+                (stage) => stage.id === values.programStage?.id
+            )
+
+            const stageDataElements = selectedStageData
+                ? (Object.fromEntries(
+                      selectedStageData.programStageDataElements.map((de) => [
+                          de.dataElement.id,
+                          {
+                              label: de.dataElement.displayName,
+                              type: 'DATA_ELEMENT',
+                          },
+                      ])
+                  ) as MessageVariables)
+                : {}
+            return {
+                ...PROGRAM_STAGE_CONSTANTS,
+                ...trackedEntityAttributesVariables,
+                ...stageDataElements,
+            }
+        }
+        return PROGRAM_CONSTANTS
+    }, [data, values.programStage?.id])
+
+    const messageVariable = useMemo(() => {
+        return isStageNotification
+            ? programStageMessageVariables
+            : programMessageVariables
+    }, [
+        isStageNotification,
+        programMessageVariables,
+        programStageMessageVariables,
+    ])
+
     return (
         <div>
             <SectionedFormSections>
@@ -102,7 +161,7 @@ export const ProgramNotificationsFormFields = ({
                     </StandardFormSectionTitle>
                     <StandardFormSectionDescription>
                         {i18n.t(
-                            'Set up the basic information for the programNotification template.'
+                            'Set up the basic information for the notification template.'
                         )}
                     </StandardFormSectionDescription>
                     <BasicInformationSection
@@ -123,7 +182,7 @@ export const ProgramNotificationsFormFields = ({
                         )}
                     </StandardFormSectionDescription>
                     <MessageFields
-                        messageVariables={programVariables}
+                        messageVariables={messageVariable}
                         messageTemplateRequired={true}
                     />
                 </SectionedFormSection>
@@ -139,7 +198,9 @@ export const ProgramNotificationsFormFields = ({
                             'Choose what triggers the notification and when it should be sent.'
                         )}
                     </StandardFormSectionDescription>
-                    <NotificationTimingSection />
+                    <NotificationTimingSection
+                        isStageNotification={isStageNotification}
+                    />
                 </SectionedFormSection>
 
                 <SectionedFormSection
@@ -151,7 +212,9 @@ export const ProgramNotificationsFormFields = ({
                     <StandardFormSectionDescription>
                         {i18n.t('Choose who receives the notification.')}
                     </StandardFormSectionDescription>
-                    <RecipientSection />
+                    <RecipientSection
+                        isStageNotification={isStageNotification}
+                    />
                 </SectionedFormSection>
             </SectionedFormSections>
         </div>
