@@ -33,8 +33,8 @@ export const DrawerPanel: React.FC<DrawerProps> = ({
             className={cx(css.drawerOverlay, {
                 [css.open]: isOpen,
                 [css.legacyShell]:
-                    !globalShellEnabled &&
-                    process.env.NODE_ENV !== 'development',
+                    !globalShellEnabled ||
+                    process.env.NODE_ENV === 'development',
             })}
             onClick={onClose}
         >
@@ -86,11 +86,11 @@ const DrawerContents = ({
             <div className={css.drawerContent}>
                 {headerNode}
                 <div className={css.drawerBody}>
-                    {/* Focus anchor for FocusTrap; button avoids SonarQube tabIndex-on-non-interactive rule */}
-                    <button
-                        type="button"
-                        className={css.drawerFocusAnchor}
+                    <span
+                        tabIndex={0}
+                        role="region"
                         aria-label="Start of drawer content"
+                        className={css.drawerFocusAnchor}
                     />
                     {children}
                 </div>
