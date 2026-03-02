@@ -37,7 +37,7 @@ export function ExpressionField({
                         title={i18n.t('Edit expression')}
                         editButtonText={i18n.t('Edit expression')}
                         setUpButtonText={i18n.t('Set up expression')}
-                        validationResource="programRules/condition/description"
+                        validationResource="programRuleActions/data/expression/description"
                         clearable={clearable}
                         programId={programId}
                         type="programRule"

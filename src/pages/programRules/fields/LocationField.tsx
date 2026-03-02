@@ -7,8 +7,8 @@ import { BaseModelSingleSelect } from '../../../components/metadataFormControls/
 type LocationModel = { id: string; displayName: string }
 
 const LOCATION_OPTIONS: LocationModel[] = [
-    { id: 'FEEDBACK', displayName: i18n.t('Feedback') },
-    { id: 'INDICATORS', displayName: i18n.t('Indicators') },
+    { id: 'FEEDBACK', displayName: i18n.t('Feedback widget') },
+    { id: 'INDICATORS', displayName: i18n.t('Program indicator widget') },
 ]
 
 export function LocationField({ required }: Readonly<{ required?: boolean }>) {

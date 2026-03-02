@@ -71,7 +71,7 @@ export function ProgramRuleVariableField({
                                 }}
                                 showNoValueOption={{
                                     value: '',
-                                    label: i18n.t('(No Value)'),
+                                    label: i18n.t('<No value>'),
                                 }}
                                 invalid={meta.touched && !!meta.error}
                                 onRetryClick={queryResult.refetch}

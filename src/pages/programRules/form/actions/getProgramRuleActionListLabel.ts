@@ -1,6 +1,15 @@
 import i18n from '@dhis2/d2-i18n'
 import { ProgramRuleActionListItem } from './types'
 
+const LOCATION_LABELS: Record<string, string> = {
+    FEEDBACK: i18n.t('Feedback widget'),
+    INDICATORS: i18n.t('Program indicator widget'),
+}
+
+function getLocationLabel(location?: string): string {
+    return (location && LOCATION_LABELS[location]) ?? location ?? '-'
+}
+
 export function getProgramRuleActionListLabel(
     action: ProgramRuleActionListItem,
     templateNameById?: Record<string, string>
@@ -70,7 +79,7 @@ export function getProgramRuleActionListLabel(
         case 'DISPLAYTEXT':
             return i18n.t('Display text: {{content}} on {{location}}', {
                 content,
-                location: targetLocation,
+                location: getLocationLabel(targetLocation),
                 nsSeparator: false,
                 interpolation: { escapeValue: false },
             })
@@ -79,7 +88,7 @@ export function getProgramRuleActionListLabel(
                 'Display key-value pair: {{content}} on {{location}}',
                 {
                     content,
-                    location: targetLocation,
+                    location: getLocationLabel(targetLocation),
                     nsSeparator: false,
                     interpolation: { escapeValue: false },
                 }

@@ -18,7 +18,7 @@ export function ProgramStageField() {
             inputWidth="400px"
             dataTest="program-stage-field"
             name="programStage"
-            label={i18n.t('Program stages to trigger rule')}
+            label={i18n.t('Program stage to trigger rule')}
             query={{
                 resource: 'programStages',
                 params: {
@@ -29,10 +29,10 @@ export function ProgramStageField() {
             }}
             showNoValueOption={{
                 value: '',
-                label: i18n.t('All program stages'),
+                label: i18n.t('<No value>'),
             }}
             helpText={i18n.t(
-                'Select a specific program stage or leave as "All program stages" to trigger on all stages.'
+                'Select a specific program stage that the rule should only trigger on.'
             )}
         />
     )

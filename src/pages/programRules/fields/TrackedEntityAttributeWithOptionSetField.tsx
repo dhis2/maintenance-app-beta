@@ -93,7 +93,7 @@ export function TrackedEntityAttributeWithOptionSetField({
                             }}
                             showNoValueOption={{
                                 value: '',
-                                label: i18n.t('(No Value)'),
+                                label: i18n.t('<No value>'),
                             }}
                             disabled={disabled}
                             invalid={meta.touched && !!meta.error}
