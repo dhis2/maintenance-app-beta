@@ -175,15 +175,6 @@ export const SCHEMA_SECTIONS = {
         titlePlural: i18n.t('Programs'),
         parentSectionKey: 'programsAndTracker',
     },
-    // @ts-expect-error temporary route for testing
-    programWIP: {
-        name: SchemaName.program,
-        routeName: 'programsWip',
-        namePlural: 'programs',
-        title: i18n.t('Program'),
-        titlePlural: i18n.t('Programs'),
-        parentSectionKey: 'programsAndTracker',
-    },
     programIndicator: {
         name: SchemaName.programIndicator,
         namePlural: 'programIndicators',

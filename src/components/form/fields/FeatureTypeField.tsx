@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { useField } from 'react-final-form'
-import { featureTypeOptions } from '../../../pages/programsWip/form/constants'
+import { featureTypeOptions } from '../../../pages/programs/form/constants'
 
 export function FeatureTypeField({
     helpText,

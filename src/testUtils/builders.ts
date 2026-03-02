@@ -60,7 +60,7 @@ import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
 import { programRuleListSchema } from '../pages/programRules/form/programRuleSchema'
 import { programRuleVariableListSchema } from '../pages/programRuleVariables/form/programRuleVariableSchema'
-import { programListSchema, stageListSchema } from '../pages/programsWip/form'
+import { programListSchema, stageListSchema } from '../pages/programs/form'
 import { relationshipTypeListSchema } from '../pages/relationshipTypes/form/RelationshipTypeFormSchema'
 import { trackedEntityAttributeListSchema } from '../pages/trackedEntityAttributes/form/TrackedEntityAttributeFormSchema'
 import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form'
