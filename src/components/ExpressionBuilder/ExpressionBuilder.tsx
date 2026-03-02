@@ -104,8 +104,10 @@ export const ExpressionBuilder = ({
     const { input: expressionInput } = useField(fieldName)
     const expressionRef = useRef<HTMLTextAreaElement>(null)
 
-    const [validate, validating, validatedValue] =
-        useExpressionValidator(validationResource)
+    const [validate, validating, validatedValue] = useExpressionValidator(
+        validationResource,
+        programId
+    )
     const [validationResponse, setValidationResponse] =
         useState<ValidationResult | null>(null)
     const [isEmpty, setIsEmpty] = useState<boolean>(false)
@@ -155,7 +157,10 @@ export const ExpressionBuilder = ({
 
     return (
         <Modal onClose={onClose} fluid dataTest="expression-builder-modal">
-            <div className={styles.expressionBuilderModalDimensions}>
+            <div
+                className={styles.expressionBuilderModalDimensions}
+                id="expression-builder-modal"
+            >
                 <ModalTitle>{title}</ModalTitle>
 
                 <ModalContent>
@@ -196,7 +201,7 @@ export const ExpressionBuilder = ({
                                     <IconInfo16 />
                                     <div id="messageTemplate-help">
                                         {i18n.t(
-                                            'Add operators, variables, functions, and constants from the right sidebar'
+                                            'Add operators, variables, program rule variables and functions from the right sidebar'
                                         )}
                                     </div>
                                 </div>

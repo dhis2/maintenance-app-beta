@@ -81,6 +81,9 @@ const DrawerContents = ({
             focusTrapOptions={{
                 delayInitialFocus: true,
                 allowOutsideClick: true,
+                clickOutsideDeactivates: () => {
+                    return !!document.getElementById('expression-builder-modal')
+                },
             }}
         >
             <div className={css.drawerContent}>

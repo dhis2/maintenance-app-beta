@@ -204,11 +204,13 @@ export const ListInFormItem = ({
     schemaName,
     onClick,
     onDelete,
+    translatable = true,
 }: {
     item: ListItem
     schemaName: SchemaName
     onClick?: () => void
     onDelete?: () => void
+    translatable?: boolean
 }) => {
     const [translationDialogModel, setTranslationDialogModel] = useState<
         BaseListModel | undefined
@@ -248,7 +250,7 @@ export const ListInFormItem = ({
                             label={i18n.t('Edit')}
                             onClick={onClick}
                         />
-                        {item.access !== undefined && (
+                        {item.access !== undefined && translatable && (
                             <MoreDropdownItem
                                 label={i18n.t('Translate')}
                                 onClick={openTranslationDialog}
