@@ -1,3 +1,10 @@
+# [0.133.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.132.0...v0.133.0) (2026-03-02)
+
+
+### Features
+
+* **drawer:** header/footer, globalShell conditional height, cleanup ([#773](https://github.com/dhis2/maintenance-app-beta/issues/773)) ([7528300](https://github.com/dhis2/maintenance-app-beta/commit/7528300336966dc5dd0d446212a39d6a747a3b3f))
+
 # [0.132.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.131.0...v0.132.0) (2026-02-26)
 
 
