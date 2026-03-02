@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip } from '@dhis2/ui'
 import React from 'react'
 import { useField } from 'react-final-form'
-import { StandardFormSectionTitle, DrawerPortal } from '..'
+import { DrawerHeader, StandardFormSectionTitle, DrawerPortal } from '..'
 import css from './CustomFormContents.module.css'
 import { CustomFormDataPayload, CustomFormEdit } from './CustomFormEdit'
 import { ElementTypes } from './CustomFormElementsSelector'
@@ -43,6 +43,13 @@ export const CustomFormEditEntry = ({
                 isOpen={customFormEditOpen}
                 onClose={() => setCustomFormEditOpen(false)}
                 level={level}
+                header={
+                    <DrawerHeader onClose={() => setCustomFormEditOpen(false)}>
+                        {addMode
+                            ? i18n.t('New custom form')
+                            : i18n.t('Edit custom form')}
+                    </DrawerHeader>
+                }
             >
                 {customFormEditOpen && (
                     <CustomFormEdit

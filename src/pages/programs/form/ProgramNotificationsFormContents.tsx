@@ -4,6 +4,7 @@ import React, { Dispatch, SetStateAction } from 'react'
 import { useFieldArray } from 'react-final-form-arrays'
 import { useParams } from 'react-router-dom'
 import {
+    DrawerHeader,
     DrawerPortal,
     SectionedFormSection,
     StandardFormSectionDescription,
@@ -82,48 +83,58 @@ const ProgramNotificationListNewOrEdit = ({
         ).fields
 
     const handleDeletedProgramNotification = (index: number) => {
+        const list = programNotificationsFieldArray.value ?? []
         programNotificationsFieldArray.update(index, {
-            ...programNotificationsFieldArray.value[index],
+            ...list[index],
             deleted: true,
         })
     }
 
     const handleCancelDeletedProgramNotification = (index: number) => {
+        const list = programNotificationsFieldArray.value ?? []
         programNotificationsFieldArray.update(index, {
-            ...programNotificationsFieldArray.value[index],
+            ...list[index],
             deleted: false,
         })
     }
 
     return (
         <>
-            {programNotificationsFieldArray.value.map((notification, index) => {
-                if (notification.deleted) {
+            {(programNotificationsFieldArray.value ?? []).map(
+                (notification, index) => {
+                    if (notification.deleted) {
+                        return (
+                            <DeletedItem
+                                key={notification.id}
+                                id={notification.id}
+                                displayName={notification.displayName}
+                                index={index}
+                                handleCancelDelete={
+                                    handleCancelDeletedProgramNotification
+                                }
+                            />
+                        )
+                    }
                     return (
-                        <DeletedItem
+                        <ListInFormItem
                             key={notification.id}
-                            id={notification.id}
-                            displayName={notification.displayName}
-                            index={index}
-                            handleCancelDelete={
-                                handleCancelDeletedProgramNotification
+                            item={{
+                                ...notification,
+                                description: i18n.t(
+                                    'Notification type: Program'
+                                ),
+                            }}
+                            schemaName={SchemaName.programNotificationTemplate}
+                            onClick={() =>
+                                setNotificationFormOpen(notification)
+                            }
+                            onDelete={() =>
+                                handleDeletedProgramNotification(index)
                             }
                         />
                     )
                 }
-                return (
-                    <ListInFormItem
-                        key={notification.id}
-                        item={{
-                            ...notification,
-                            description: i18n.t('Notification type: Program'),
-                        }}
-                        schemaName={SchemaName.programNotificationTemplate}
-                        onClick={() => setNotificationFormOpen(notification)}
-                        onDelete={() => handleDeletedProgramNotification(index)}
-                    />
-                )
-            })}
+            )}
         </>
     )
 }
@@ -357,6 +368,13 @@ const NotificationListNewOrEdit = () => {
             <DrawerPortal
                 isOpen={isNotificationFormOpen}
                 onClose={onCloseNotificationForm}
+                header={
+                    <DrawerHeader onClose={onCloseNotificationForm}>
+                        {notificationFormOpen === null
+                            ? i18n.t('New notification')
+                            : i18n.t('Edit notification')}
+                    </DrawerHeader>
+                }
             >
                 {notificationFormOpen !== undefined && (
                     <div>

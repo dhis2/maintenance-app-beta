@@ -3,6 +3,7 @@ import { render, waitFor, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import { getSchemaProperty } from '../components/sectionList/modelValue/ModelValue'
+import { longTextFields } from '../components/sectionList/translation/TranslatableFields'
 import { getTranslateableFieldsForSchema } from '../components/sectionList/translation/TranslationForm'
 import {
     defaultModelViewConfig,
@@ -640,10 +641,9 @@ export const generateDefaultListRowActionsTests = ({
                 )
 
                 for (const field of fields) {
-                    const inputContainerId =
-                        field === 'description'
-                            ? 'dhis2-uicore-textarea'
-                            : 'dhis2-uicore-input'
+                    const inputContainerId = longTextFields.includes(field)
+                        ? 'dhis2-uicore-textarea'
+                        : 'dhis2-uicore-input'
                     const inputContainer = within(
                         screen.getByTestId(`field-${field}-translation-content`)
                     ).getByTestId(inputContainerId)

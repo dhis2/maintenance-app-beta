@@ -62,7 +62,7 @@ export const SectionListRow = React.memo(function SectionListRow<
                     key={selectedColumn.path}
                     onClick={() => onClick?.(modelData)}
                 >
-                    {renderColumnValue(selectedColumn, modelData)}
+                    <pre>{renderColumnValue(selectedColumn, modelData)}</pre>
                 </DataTableCell>
             ))}
             <DataTableCell>{renderActions(modelData)}</DataTableCell>
