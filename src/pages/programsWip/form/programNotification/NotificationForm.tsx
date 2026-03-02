@@ -34,7 +34,6 @@ import {
     ProgramNotificationTemplate,
 } from '../../../../types/models'
 import { DisplayableModelAndStageId } from '../ProgramNotificationsFormContents'
-import styles from './NotificationForm.module.css'
 import { programNotificationFormDescriptor } from './programNotificationFormDescriptor'
 import { ProgramNotificationsFormFields } from './ProgramNotificationsFormFields'
 import { initialValues, validate } from './programNotificationTemplateSchema'
