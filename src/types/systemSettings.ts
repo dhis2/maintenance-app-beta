@@ -99,6 +99,7 @@ export type SystemSettings = {
     keyRequireAddToView: boolean
     keyAnalyticsCacheTtlMode: string
     startModuleEnableLightweight: boolean
+    globalShellEnabled?: boolean
 }
 
 export type SystemSettingsKey = keyof SystemSettings

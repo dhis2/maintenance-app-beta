@@ -1,21 +1,20 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip } from '@dhis2/ui'
-import { IconInfo16 } from '@dhis2/ui-icons'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import React, { useCallback, useMemo } from 'react'
-import { useFormState } from 'react-final-form'
+import { useForm, useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
-    FormFooterWrapper,
+    DrawerFormFooter,
+    DrawerLayout,
+    FormBase,
+    FormBaseProps,
     SectionedFormErrorNotice,
     SectionedFormSection,
     SectionedFormSections,
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-    FormBase,
-    FormBaseProps,
     CustomAttributesSection,
 } from '../../../../components'
 import {
@@ -37,98 +36,83 @@ import {
 } from '../../../../lib'
 import { Option } from '../../../../types/generated'
 import { PickWithFieldFilters } from '../../../../types/models'
-import styles from './OptionList.module.css'
 import { initialOptionValues } from './optionSchema'
 import { DrawerState } from './OptionsListTable'
 
 export const OptionFormContents = ({
     onCancel,
 }: {
-    onCancel: (s: DrawerState) => void
+    onCancel?: (s: DrawerState) => void
 }) => {
+    const form = useForm()
     const { submitting, values } = useFormState({
         subscription: { submitting: true, values: true },
     })
 
     const handleCancel = () => {
-        onCancel({ open: false, id: undefined })
+        onCancel?.({ open: false, id: undefined })
     }
 
-    return (
-        <div className={styles.sectionsWrapper}>
-            <div>
-                <SectionedFormSections>
-                    <SectionedFormSection name="optionEdit">
-                        <StandardFormSectionTitle>
-                            {i18n.t('Option')}
-                        </StandardFormSectionTitle>
-                        <StandardFormSectionDescription>
-                            {i18n.t('Set up the information for this option.')}
-                        </StandardFormSectionDescription>
-                        <StandardFormField>
-                            <NameField
-                                schemaSection={optionSchemaSection}
-                                modelId={values.id}
-                            />
-                        </StandardFormField>
-                        <StandardFormField>
-                            <CodeField
-                                schemaSection={optionSchemaSection}
-                                modelId={values.id}
-                                required={true}
-                            />
-                        </StandardFormField>
-                        <StandardFormField>
-                            <DescriptionField
-                                helpText={i18n.t(
-                                    'Explain the purpose of this option.'
-                                )}
-                            />
-                        </StandardFormField>
-                        <StandardFormField>
-                            <ColorAndIconField />
-                        </StandardFormField>
-                    </SectionedFormSection>
-                    <CustomAttributesSection
-                        schemaSection={optionSchemaSection}
-                    />
-                </SectionedFormSections>
-                <SectionedFormErrorNotice />
-            </div>
-            <div>
-                <FormFooterWrapper>
-                    <ButtonStrip>
-                        <Button
-                            primary
-                            small
-                            type="submit"
-                            dataTest="form-submit-button"
-                            disabled={submitting}
-                            loading={submitting}
-                        >
-                            {i18n.t('Save option')}
-                        </Button>
-                        <Button
-                            secondary
-                            small
-                            onClick={handleCancel}
-                            dataTest="form-cancel-link"
-                            disabled={submitting}
-                        >
-                            {i18n.t('Cancel')}
-                        </Button>
-                    </ButtonStrip>
-                    <div className={styles.actionsInfo}>
-                        <IconInfo16 />
-                        <p>
-                            {i18n.t(
-                                'Saving an option does not save other changes to the option set'
+    const formFieldsContent = (
+        <>
+            <SectionedFormSections>
+                <SectionedFormSection name="optionEdit">
+                    <StandardFormSectionTitle>
+                        {i18n.t('Option')}
+                    </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        {i18n.t('Set up the information for this option.')}
+                    </StandardFormSectionDescription>
+                    <StandardFormField>
+                        <NameField
+                            schemaSection={optionSchemaSection}
+                            modelId={values.id}
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <CodeField
+                            schemaSection={optionSchemaSection}
+                            modelId={values.id}
+                            required={true}
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <DescriptionField
+                            helpText={i18n.t(
+                                'Explain the purpose of this option.'
                             )}
-                        </p>
-                    </div>
-                </FormFooterWrapper>
-            </div>
-        </div>
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <ColorAndIconField />
+                    </StandardFormField>
+                </SectionedFormSection>
+                <CustomAttributesSection schemaSection={optionSchemaSection} />
+            </SectionedFormSections>
+            <SectionedFormErrorNotice />
+        </>
+    )
+
+    if (!onCancel) {
+        return null
+    }
+    return (
+        <DrawerLayout
+            footer={
+                <DrawerFormFooter
+                    submitLabel={i18n.t('Save option')}
+                    cancelLabel={i18n.t('Cancel')}
+                    submitting={submitting ?? false}
+                    onSubmitClick={() => form.submit()}
+                    onCancelClick={handleCancel}
+                    infoMessage={i18n.t(
+                        'Saving an option does not save other changes to the option set'
+                    )}
+                />
+            }
+        >
+            {formFieldsContent}
+        </DrawerLayout>
     )
 }
 
