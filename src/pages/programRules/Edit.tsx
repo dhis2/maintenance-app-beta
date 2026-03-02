@@ -21,10 +21,7 @@ import {
     usePatchModel,
     useOnEditCompletedSuccessfully,
 } from '../../lib'
-import {
-    toProgramRuleActionApiPayload,
-    type ProgramRuleActionListItem,
-} from './form/actions'
+import { type ProgramRuleActionListItem } from './form/actions'
 import { fieldFilters, ProgramRuleFormValues } from './form/fieldFilters'
 import { ProgramRuleFormDescriptor } from './form/formDescriptor'
 import { ProgramRuleFormFields } from './form/ProgramRuleFormFields'
@@ -50,6 +47,7 @@ export const Component = () => {
 
             const deletedActions =
                 actions?.filter((a) => a.deleted && a.id) || []
+
             for (const action of deletedActions) {
                 try {
                     await dataEngine.mutate({
@@ -79,14 +77,12 @@ export const Component = () => {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { programRuleActions, ...valuesWithoutActions } = values
 
-            // Send full action bodies (including templateUid) so the backend can resolve
-            // templateUid on the program-rule save path (same as old maintenance app).
             const valuesToPatch = actionsChanged
                 ? {
                       ...valuesWithoutActions,
-                      programRuleActions: nonDeletedActions.map((a) =>
-                          toProgramRuleActionApiPayload(a, modelId)
-                      ),
+                      programRuleActions: nonDeletedActions.map((a) => ({
+                          id: a.id,
+                      })),
                   }
                 : valuesWithoutActions
 
@@ -114,7 +110,7 @@ export const Component = () => {
                     'saveAndExit',
             })
         },
-        [patchModel, onEditCompleted, dataEngine, modelId]
+        [patchModel, onEditCompleted, dataEngine]
     )
 
     const query = {
