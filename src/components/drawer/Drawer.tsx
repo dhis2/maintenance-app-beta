@@ -87,6 +87,7 @@ const DrawerContents = ({
             }}
         >
             <div className={css.drawerContent}>
+                <span tabIndex={0}></span>
                 {headerNode}
                 <div className={css.drawerBody}>{children}</div>
             </div>
