@@ -57,11 +57,15 @@ const DrawerContents = React.forwardRef<
             document.removeEventListener('keydown', handleKeyDown)
         }
     }, [onClose])
+
     return (
         <FocusTrap
             focusTrapOptions={{
                 delayInitialFocus: true,
                 allowOutsideClick: true,
+                clickOutsideDeactivates: () => {
+                    return !!document.getElementById('expression-builder-modal')
+                },
             }}
         >
             <div ref={ref}>

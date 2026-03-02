@@ -157,7 +157,10 @@ export const ExpressionBuilder = ({
 
     return (
         <Modal onClose={onClose} fluid dataTest="expression-builder-modal">
-            <div className={styles.expressionBuilderModalDimensions}>
+            <div
+                className={styles.expressionBuilderModalDimensions}
+                id="expression-builder-modal"
+            >
                 <ModalTitle>{title}</ModalTitle>
 
                 <ModalContent>
