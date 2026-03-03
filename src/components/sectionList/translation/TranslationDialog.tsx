@@ -30,6 +30,10 @@ export const TranslationDialog = ({
     const [selectedLocaleString, setSelectedLocaleString] =
         useLastSelectedLocale()
 
+    const isSelectedAvailable = dbLocalesQuery?.data
+        ?.map((l) => l.locale)
+        .includes(selectedLocaleString)
+
     const selectedLocale = useMemo(() => {
         if (!selectedLocaleString || !dbLocales) {
             return undefined
@@ -62,7 +66,9 @@ export const TranslationDialog = ({
                         <SingleSelectField
                             filterable={true}
                             className={style.SingleSelectField}
-                            selected={selectedLocaleString}
+                            selected={
+                                isSelectedAvailable ? selectedLocaleString : ''
+                            }
                             onChange={({ selected }) =>
                                 setSelectedLocaleString(selected)
                             }

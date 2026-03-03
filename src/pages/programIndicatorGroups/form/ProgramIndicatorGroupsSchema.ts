@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
+import {
+    getDefaultsOld,
+    createFormValidate,
+    modelFormSchemas,
+} from '../../../lib'
 import { UserSchema } from '../../../lib/form/modelFormSchemas'
 
 const { identifiable, withDefaultListColumns, referenceCollection } =
@@ -23,6 +27,6 @@ export const programIndicatorGroupListSchema = programIndicatorGroupBaseSchema
         name: z.string(),
     })
 
-export const initialValues = getDefaults(programIndicatorGroupFormSchema)
+export const initialValues = getDefaultsOld(programIndicatorGroupFormSchema)
 
 export const validate = createFormValidate(programIndicatorGroupFormSchema)

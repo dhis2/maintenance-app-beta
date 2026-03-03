@@ -2,7 +2,7 @@ import { z } from 'zod'
 import {
     createFormValidate,
     DEFAULT_CATEGORY_COMBO,
-    getDefaults,
+    getDefaultsOld,
     modelFormSchemas,
 } from '../../../lib'
 import { DataElement } from '../../../types/generated'
@@ -58,7 +58,7 @@ export const dataElementFormSchema = dataElementBaseSchema
     .merge(identifiable)
     .merge(withAttributeValues)
 
-export const initialValues = getDefaults(dataElementFormSchema)
+export const initialValues = getDefaultsOld(dataElementFormSchema)
 
 export type DataElementFormValues = typeof initialValues
 

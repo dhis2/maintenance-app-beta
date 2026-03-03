@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { getDefaults, modelFormSchemas } from '../../../../../lib'
+import { getDefaultsOld, modelFormSchemas } from '../../../../../lib'
 
 const { identifiable } = modelFormSchemas
 
@@ -34,4 +34,4 @@ export const sectionFormSchema = identifiable.extend({
         ),
 })
 
-export const initialSectionValues = getDefaults(sectionFormSchema)
+export const initialSectionValues = getDefaultsOld(sectionFormSchema)

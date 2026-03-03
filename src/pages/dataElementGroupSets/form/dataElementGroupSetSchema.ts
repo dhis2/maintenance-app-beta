@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { modelFormSchemas, getDefaults, createFormValidate } from '../../../lib'
+import {
+    modelFormSchemas,
+    getDefaultsOld,
+    createFormValidate,
+} from '../../../lib'
 
 const { identifiable, withAttributeValues } = modelFormSchemas
 export const dataElementGroupSetSchema = identifiable
@@ -15,6 +19,6 @@ export const dataElementGroupSetSchema = identifiable
         dataElementGroups: z.array(z.object({ id: z.string() })).default([]),
     })
 
-export const initialValues = getDefaults(dataElementGroupSetSchema)
+export const initialValues = getDefaultsOld(dataElementGroupSetSchema)
 
 export const validate = createFormValidate(dataElementGroupSetSchema)

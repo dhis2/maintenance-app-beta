@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaultsOld,
+    modelFormSchemas,
+} from '../../../lib'
 import { Expression, ValidationRule } from '../../../types/generated'
 
 const { withDefaultListColumns, identifiable, withAttributeValues } =
@@ -48,5 +52,5 @@ export const validationRuleFormSchema = validationRuleBaseSchema
     .merge(identifiable)
     .merge(withAttributeValues)
 
-export const initialValues = getDefaults(validationRuleFormSchema)
+export const initialValues = getDefaultsOld(validationRuleFormSchema)
 export const validate = createFormValidate(validationRuleFormSchema)

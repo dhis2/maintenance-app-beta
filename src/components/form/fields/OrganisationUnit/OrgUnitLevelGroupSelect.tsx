@@ -25,12 +25,16 @@ import css from './OrgUnitLevelGroupSelect.module.css'
 export type OrgUnitLevelGroupSelectProps = {
     onLevelSelect: (level: PartialOrganisationUnitLevel) => void
     onGroupSelect: (group: PartialOrganisationUnitGroup) => void
+    onLevelDeselect: (level: PartialOrganisationUnitLevel) => void
+    onGroupDeselect: (group: PartialOrganisationUnitGroup) => void
     onDeselectAll?: () => void
     minlevel?: number
 }
 export const OrgUnitLevelGroupSelect = ({
     onLevelSelect,
     onGroupSelect,
+    onLevelDeselect,
+    onGroupDeselect,
     onDeselectAll,
     minlevel,
 }: OrgUnitLevelGroupSelectProps) => {
@@ -50,15 +54,25 @@ export const OrgUnitLevelGroupSelect = ({
             open={open}
             onClick={() => setOpen(!open)}
             component={
-                <FlyoutMenu>
-                    <MenuItem label={i18n.t('Level')}>
+                <FlyoutMenu dense>
+                    <MenuItem label={i18n.t('Select by level')}>
                         <LevelSelect
                             onSelect={withClose(onLevelSelect)}
                             minLevel={minlevel}
                         />
                     </MenuItem>
-                    <MenuItem label={i18n.t('Group')}>
+                    <MenuItem label={i18n.t('Select by group')}>
                         <GroupSelect onSelect={withClose(onGroupSelect)} />
+                    </MenuItem>
+                    <MenuDivider />
+                    <MenuItem label={i18n.t('Deselect by level')}>
+                        <LevelSelect
+                            onSelect={withClose(onLevelDeselect)}
+                            minLevel={minlevel}
+                        />
+                    </MenuItem>
+                    <MenuItem label={i18n.t('Deselect by group')}>
+                        <GroupSelect onSelect={withClose(onGroupDeselect)} />
                     </MenuItem>
                     <MenuDivider />
                     {onDeselectAll && (
@@ -70,7 +84,7 @@ export const OrgUnitLevelGroupSelect = ({
                 </FlyoutMenu>
             }
         >
-            {i18n.t('Select units by group or level...')}
+            {i18n.t('Select/deselect by group or level')}
         </DropdownButton>
     )
 }

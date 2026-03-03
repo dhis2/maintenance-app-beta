@@ -14,7 +14,10 @@ export type ValidationResult = {
     error?: string
     expressionDescription?: string
 }
-export const useExpressionValidator = (resource: string) => {
+export const useExpressionValidator = (
+    resource: string,
+    programId?: string
+) => {
     const engine = useDataEngine()
     const [validating, setValidating] = useState(false)
     const [validatedValue, setValidatedValue] = useState<string | null>(null)
@@ -35,6 +38,7 @@ export const useExpressionValidator = (resource: string) => {
                         resource,
                         type: 'create',
                         data: expression as unknown as Record<string, unknown>,
+                        params: programId ? { programId } : undefined,
                     }) as unknown as Promise<ValidateExpressionResponse>)
 
                     if (result.status === 'ERROR') {
@@ -58,7 +62,7 @@ export const useExpressionValidator = (resource: string) => {
                     setValidating(false)
                 }
             }),
-        [resource, engine]
+        [resource, engine, programId]
     )
 
     const validate = useCallback(

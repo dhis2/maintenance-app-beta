@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { getDefaults, modelFormSchemas, createFormValidate } from '../../../lib'
+import {
+    getDefaultsOld,
+    modelFormSchemas,
+    createFormValidate,
+} from '../../../lib'
 
 const { identifiable, withAttributeValues, withDefaultListColumns } =
     modelFormSchemas
@@ -22,6 +26,6 @@ export const dataElementGroupFormSchema = dataElementGroupBaseSchema
     .merge(identifiable)
     .merge(withAttributeValues)
 
-export const initialValues = getDefaults(dataElementGroupFormSchema)
+export const initialValues = getDefaultsOld(dataElementGroupFormSchema)
 
 export const validate = createFormValidate(dataElementGroupFormSchema)
