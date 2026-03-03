@@ -184,7 +184,10 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                             typeof value === 'number' ||
                             typeof value === 'string'
                         ) {
-                            return String(value)
+                            const str = String(value)
+                            return str === 'NaN' || Number.isNaN(Number(value))
+                                ? ''
+                                : str
                         }
                         return ''
                     }}
@@ -192,7 +195,8 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                         if (value === undefined || value === '') {
                             return 0
                         }
-                        return Number.parseInt(value as string, 10)
+                        const n = Number.parseInt(value as string, 10)
+                        return Number.isNaN(n) ? 0 : n
                     }}
                 />
             </StandardFormField>
@@ -216,7 +220,10 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                             typeof value === 'number' ||
                             typeof value === 'string'
                         ) {
-                            return String(value)
+                            const str = String(value)
+                            return str === 'NaN' || Number.isNaN(Number(value))
+                                ? ''
+                                : str
                         }
                         return ''
                     }}
@@ -224,7 +231,8 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                         if (value === undefined || value === '') {
                             return 0
                         }
-                        return Number.parseInt(value as string, 10)
+                        const n = Number.parseInt(value as string, 10)
+                        return Number.isNaN(n) ? 0 : n
                     }}
                 />
             </StandardFormField>
