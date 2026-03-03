@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 import {
     DEFAULT_CATEGORY_COMBO,
-    getDefaults,
+    getDefaultsOld,
     modelFormSchemas,
 } from '../../../lib'
 import { createFormValidate } from '../../../lib/form/validate'
@@ -118,6 +118,6 @@ export const dataSetListSchema = withDefaultListColumns
         displayShortName: z.string(),
     })
 
-export const initialValues = getDefaults(dataSetFormSchema)
+export const initialValues = getDefaultsOld(dataSetFormSchema)
 
 export const validate = createFormValidate(dataSetFormSchema)

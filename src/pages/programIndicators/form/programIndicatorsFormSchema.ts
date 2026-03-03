@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { getDefaults, modelFormSchemas } from '../../../lib'
+import { getDefaultsOld, modelFormSchemas } from '../../../lib'
 import { UserSchema } from '../../../lib/form/modelFormSchemas'
 import { createFormValidate } from '../../../lib/form/validate'
 import { ProgramIndicator } from '../../../types/generated'
@@ -65,7 +65,7 @@ export const programIndicatorFormSchema = programIndicatorsBaseSchema
             .default([]),
     })
 
-export const initialValues = getDefaults(programIndicatorFormSchema)
+export const initialValues = getDefaultsOld(programIndicatorFormSchema)
 
 export type ProgramIndicatorFormValues = typeof initialValues
 

@@ -28,6 +28,12 @@ type TrackedEntityTypeAttribute = {
     }
 }
 
+type UpdateAttributeFn = (
+    index: number,
+    field: 'mandatory' | 'searchable' | 'displayInList',
+    value: boolean
+) => void
+
 export function AttributesConfigurationField() {
     const { input } = useField<TrackedEntityTypeAttribute[]>(
         'trackedEntityTypeAttributes'
@@ -45,11 +51,7 @@ export function AttributesConfigurationField() {
         )
     }
 
-    const updateAttribute = (
-        index: number,
-        field: 'mandatory' | 'searchable' | 'displayInList',
-        value: boolean
-    ) => {
+    const updateAttribute: UpdateAttributeFn = (index, field, value) => {
         const updatedAttributes = [...attributes]
         updatedAttributes[index] = {
             ...updatedAttributes[index],
@@ -101,36 +103,18 @@ export function AttributesConfigurationField() {
                                 />
                             </TableCell>
                             <TableCell>
-                                <TooltipWrapper
-                                    condition={
+                                <SearchableCheckbox
+                                    index={index}
+                                    unique={attr.trackedEntityAttribute.unique}
+                                    valueType={
+                                        attr.trackedEntityAttribute.valueType
+                                    }
+                                    isChecked={
+                                        attr.searchable ||
                                         attr.trackedEntityAttribute.unique
                                     }
-                                    content={i18n.t(
-                                        'Unique attributes are always searchable'
-                                    )}
-                                >
-                                    <Checkbox
-                                        checked={
-                                            attr.searchable ||
-                                            attr.trackedEntityAttribute.unique
-                                        }
-                                        onChange={({ checked }) =>
-                                            updateAttribute(
-                                                index,
-                                                'searchable',
-                                                checked
-                                            )
-                                        }
-                                        disabled={
-                                            attr.trackedEntityAttribute
-                                                .unique ||
-                                            ['IMAGE', 'FILE_RESOURCE'].includes(
-                                                attr.trackedEntityAttribute
-                                                    .valueType
-                                            )
-                                        }
-                                    />
-                                </TooltipWrapper>
+                                    handleCheck={updateAttribute}
+                                />
                             </TableCell>
                             <TableCell>
                                 <Checkbox
@@ -149,5 +133,49 @@ export function AttributesConfigurationField() {
                 </TableBody>
             </Table>
         </>
+    )
+}
+
+const SearchableCheckbox = ({
+    index,
+    unique,
+    valueType,
+    isChecked,
+    handleCheck,
+}: {
+    index: number
+    unique: boolean
+    valueType: string
+    isChecked: boolean
+    handleCheck: UpdateAttributeFn
+}) => {
+    const isFileType = ['IMAGE', 'FILE_RESOURCE'].includes(valueType)
+
+    // Tooltip logic
+    let tooltipContent = ''
+    let showTooltip = false
+
+    if (unique) {
+        tooltipContent = i18n.t('Unique attributes are always searchable')
+        showTooltip = true
+    } else if (isFileType) {
+        tooltipContent = i18n.t(
+            'Image and File type attributes are not searchable'
+        )
+        showTooltip = true
+    }
+
+    const isDisabled = unique || isFileType
+
+    return (
+        <TooltipWrapper condition={showTooltip} content={tooltipContent}>
+            <Checkbox
+                checked={isChecked}
+                onChange={({ checked }) => {
+                    handleCheck(index, 'searchable', checked)
+                }}
+                disabled={isDisabled}
+            />
+        </TooltipWrapper>
     )
 }

@@ -8,7 +8,7 @@ import {
     StyledMergeForm,
     Title,
 } from '../../components/merge'
-import { getDefaults, useLocationWithState } from '../../lib'
+import { getDefaultsOld, useLocationWithState } from '../../lib'
 import { createFormError } from '../../lib/form/createFormError'
 import { IndicatorTypeMergeFormFields } from './merge/IndicatorTypeMergeFormFields'
 import {
@@ -27,7 +27,7 @@ export const Component = () => {
     )
     const initialValues = useMemo(
         () => ({
-            ...getDefaults(mergeFormSchema),
+            ...getDefaultsOld(mergeFormSchema),
             target: undefined,
             sources: [],
         }),

@@ -3,11 +3,12 @@ import { Button, ButtonStrip, IconAdd16 } from '@dhis2/ui'
 import React, { useState } from 'react'
 import { useFieldArray } from 'react-final-form-arrays'
 import {
+    DrawerHeader,
+    DrawerPortal,
     StandardFormSectionTitle,
     MoreDropdownButton,
     MoreDropdownItem,
     MoreDropdownDivider,
-    DrawerPortal,
 } from '../../components'
 import { TranslationDialog } from '../../components/sectionList/translation'
 import { BaseListModel, SchemaName } from '../../lib'
@@ -91,6 +92,13 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
                 isOpen={isSectionFormOpen}
                 level={level}
                 onClose={() => setSectionFormOpen(undefined)}
+                header={
+                    <DrawerHeader onClose={() => setSectionFormOpen(undefined)}>
+                        {sectionFormOpen === null
+                            ? i18n.t('New section')
+                            : i18n.t('Edit section')}
+                    </DrawerHeader>
+                }
             >
                 {sectionFormOpen !== undefined && (
                     <SectionFormComponent
@@ -196,11 +204,13 @@ export const ListInFormItem = ({
     schemaName,
     onClick,
     onDelete,
+    translatable = true,
 }: {
     item: ListItem
     schemaName: SchemaName
     onClick?: () => void
     onDelete?: () => void
+    translatable?: boolean
 }) => {
     const [translationDialogModel, setTranslationDialogModel] = useState<
         BaseListModel | undefined
@@ -240,7 +250,7 @@ export const ListInFormItem = ({
                             label={i18n.t('Edit')}
                             onClick={onClick}
                         />
-                        {item.access !== undefined && (
+                        {item.access !== undefined && translatable && (
                             <MoreDropdownItem
                                 label={i18n.t('Translate')}
                                 onClick={openTranslationDialog}

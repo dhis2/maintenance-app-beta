@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
+import {
+    getDefaultsOld,
+    createFormValidate,
+    modelFormSchemas,
+} from '../../../lib'
 import { CategoryOptionGroupSet } from '../../../types/generated'
 
 const {
@@ -34,6 +38,6 @@ export const categoryOptionGroupSetListSchema = categoryOptionGroupSetBaseSchema
         displayShortName: z.string(),
     })
 
-export const initialValues = getDefaults(categoryOptionGroupSetFormSchema)
+export const initialValues = getDefaultsOld(categoryOptionGroupSetFormSchema)
 
 export const validate = createFormValidate(categoryOptionGroupSetFormSchema)

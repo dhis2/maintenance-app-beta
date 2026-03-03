@@ -501,6 +501,54 @@ const ProgramAttributes = ({
     )
 }
 
+const ProgramRuleVariablesList = ({
+    insertElement,
+    programId,
+}: {
+    insertElement: InsertElementType
+    programId?: string
+}) => {
+    const insertElementFormatted = useCallback(
+        (s: string) => {
+            insertElement(`#{${s}}`)
+        },
+        [insertElement]
+    )
+
+    if (!programId) {
+        return <ProgramNotSelectedNoticeBox />
+    }
+
+    const programRuleVariablesQuery = {
+        resource: 'programRuleVariables',
+        params: {
+            filters: [`program.id:eq:${programId}`],
+            fields: ['name', 'displayName'],
+            order: ['displayName'],
+            paging: false,
+        },
+    }
+
+    return (
+        <ExpressionList
+            query={programRuleVariablesQuery}
+            insertElement={insertElementFormatted}
+            transform={(variables) =>
+                (
+                    variables as unknown as {
+                        name: string
+                        displayName: string
+                    }[]
+                ).map((v) => ({
+                    id: v.name,
+                    displayName: v.displayName,
+                }))
+            }
+            postQuerySearch={true}
+        />
+    )
+}
+
 const OPERATOR_ELEMENTS = [
     { id: '+', displayName: i18n.t('+ (add)') },
     { id: '-', displayName: i18n.t('- (subtract)') },
@@ -659,7 +707,9 @@ const VARIABLE_ELEMENTS = [
     { id: 'V{creation_date}', displayName: i18n.t('Creation date') },
     { id: 'V{current_date}', displayName: i18n.t('Current date') },
     { id: 'V{due_date}', displayName: i18n.t('Due date') },
+    { id: 'V{enrollment_status}', displayName: i18n.t('Enrollment status') },
     { id: 'V{event_date}', displayName: i18n.t('Event date') },
+    { id: 'V{event_status}', displayName: i18n.t('Event status') },
     { id: 'V{program_stage_id}', displayName: i18n.t('Program stage id') },
     { id: 'V{program_stage_name}', displayName: i18n.t('Program stage name') },
     { id: 'V{sync_date}', displayName: i18n.t('Sync date') },
@@ -668,6 +718,170 @@ const VARIABLE_ELEMENTS = [
         id: 'V{zero_pos_value_count}',
         displayName: i18n.t('Zero or positive value count'),
     },
+]
+
+const PROGRAM_RULE_VARIABLE_IDS = [
+    'V{completed_date}',
+    'V{current_date}',
+    'V{due_date}',
+    'V{enrollment_date}',
+    'V{enrollment_id}',
+    'V{enrollment_status}',
+    'V{environment}',
+    'V{event_count}',
+    'V{event_date}',
+    'V{event_id}',
+    'V{event_status}',
+    'V{incident_date}',
+    'V{orgunit_code}',
+    'V{program_stage_id}',
+    'V{program_stage_name}',
+]
+
+const PROGRAM_RULE_VARIABLE_ELEMENTS: Element[] = PROGRAM_RULE_VARIABLE_IDS.map(
+    (id) => ({ id, displayName: id })
+)
+
+const PROGRAM_RULE_FUNCTION_ELEMENTS = [
+    { id: 'd2:ceil( <number> )', displayName: 'd2:ceil( <number> )' },
+    { id: 'd2:floor( <number> )', displayName: 'd2:floor( <number> )' },
+    { id: 'd2:round( <number> )', displayName: 'd2:round( <number> )' },
+    {
+        id: 'd2:modulus( <number> , <number> )',
+        displayName: 'd2:modulus( <number> , <number> )',
+    },
+    { id: 'd2:zing( <number> )', displayName: 'd2:zing( <number> )' },
+    { id: 'd2:oizp( <number> )', displayName: 'd2:oizp( <number> )' },
+    {
+        id: 'd2:concatenate( <object>, <object>, ...)',
+        displayName: 'd2:concatenate( <object>, <object>, ...)',
+    },
+    {
+        id: 'd2:daysBetween( <date>, <date> )',
+        displayName: 'd2:daysBetween( <date>, <date> )',
+    },
+    {
+        id: 'd2:weeksBetween( <date>, <date> )',
+        displayName: 'd2:weeksBetween( <date>, <date> )',
+    },
+    {
+        id: 'd2:monthsBetween( <date>, <date> )',
+        displayName: 'd2:monthsBetween( <date>, <date> )',
+    },
+    {
+        id: 'd2:yearsBetween( <date>, <date> )',
+        displayName: 'd2:yearsBetween( <date>, <date> )',
+    },
+    {
+        id: 'd2:addDays( <date>, <number> )',
+        displayName: 'd2:addDays( <date>, <number> )',
+    },
+    {
+        id: 'd2:count( <sourcefield> )',
+        displayName: 'd2:count( <sourcefield> )',
+    },
+    {
+        id: 'd2:countIfValue( <sourcefield>, <text> )',
+        displayName: 'd2:countIfValue( <sourcefield>, <text> )',
+    },
+    {
+        id: 'd2:countIfZeroPos( <sourcefield> )',
+        displayName: 'd2:countIfZeroPos( <sourcefield> )',
+    },
+    {
+        id: 'd2:hasValue( <sourcefield> )',
+        displayName: 'd2:hasValue( <sourcefield> )',
+    },
+    {
+        id: 'd2:zpvc( <object>, <object>, ...)',
+        displayName: 'd2:zpvc( <object>, <object>, ...)',
+    },
+    {
+        id: 'd2:validatePattern( <text>, <regex> )',
+        displayName: 'd2:validatePattern( <text>, <regex> )',
+    },
+    {
+        id: 'd2:left( <text>, <number> )',
+        displayName: 'd2:left( <text>, <number> )',
+    },
+    {
+        id: 'd2:right( <text>, <number> )',
+        displayName: 'd2:right( <text>, <number> )',
+    },
+    {
+        id: 'd2:substring( <text>, <number>, <number> )',
+        displayName: 'd2:substring( <text>, <number>, <number> )',
+    },
+    {
+        id: 'd2:split( <text>, <text>, <number> )',
+        displayName: 'd2:split( <text>, <text>, <number> )',
+    },
+    { id: 'd2:length( <text> )', displayName: 'd2:length( <text> )' },
+    {
+        id: 'd2:inOrgUnitGroup( <orgunit_group_code> )',
+        displayName: 'd2:inOrgUnitGroup( <orgunit_group_code> )',
+    },
+    {
+        id: 'd2:hasUserRole( <user_role> )',
+        displayName: 'd2:hasUserRole( <user_role> )',
+    },
+    {
+        id: 'd2:zScoreWFA( <ageInMonth>, <weight>, <gender> )',
+        displayName: 'd2:zScoreWFA( <ageInMonth>, <weight>, <gender> )',
+    },
+    {
+        id: 'd2:zScoreHFA( <ageInMonth>, <height>, <gender> )',
+        displayName: 'd2:zScoreHFA( <ageInMonth>, <height>, <gender> )',
+    },
+    {
+        id: 'd2:zScoreWFH( <height>, <weight>, <gender> )',
+        displayName: 'd2:zScoreWFH( <height>, <weight>, <gender> )',
+    },
+    {
+        id: 'd2:extractDataMatrixValue( <key>, <value>)',
+        displayName: 'd2:extractDataMatrixValue( <key>, <value>)',
+    },
+    {
+        id: 'd2:contains( <text>, <text>, ...)',
+        displayName: 'd2:contains( <text>, <text>, ...)',
+    },
+    {
+        id: 'd2:containsItems( <text>, <text>, ...)',
+        displayName: 'd2:containsItems( <text>, <text>, ...)',
+    },
+    {
+        id: 'd2:inUserGroup( <user_group_id> )',
+        displayName: 'd2:inUserGroup( <user_group_id> )',
+    },
+    {
+        id: 'd2:lastEventDate()',
+        displayName: 'd2:lastEventDate()',
+    },
+    {
+        id: 'd2:maxValue( <dataElement> )',
+        displayName: 'd2:maxValue( <dataElement> )',
+    },
+    {
+        id: 'd2:minValue( <dataElement> )',
+        displayName: 'd2:minValue( <dataElement> )',
+    },
+]
+
+const PROGRAM_RULE_OPERATOR_ELEMENTS = [
+    { id: '+', displayName: '+' },
+    { id: '-', displayName: '-' },
+    { id: '*', displayName: '*' },
+    { id: '/', displayName: '/' },
+    { id: '%', displayName: '%' },
+    { id: '>', displayName: '>' },
+    { id: '>=', displayName: '>=' },
+    { id: '<', displayName: '<' },
+    { id: '<=', displayName: '<=' },
+    { id: '==', displayName: '==' },
+    { id: '!=', displayName: '!=' },
+    { id: '!', displayName: 'NOT' },
+    { id: '&&', displayName: 'AND' },
+    { id: '||', displayName: 'OR' },
 ]
 
 const programIndicatorElementTypes: ElementType[] = [
@@ -700,9 +914,38 @@ const programIndicatorElementTypes: ElementType[] = [
     },
 ]
 
+const programRuleElementTypes: ElementType[] = [
+    {
+        type: 'operator',
+        name: i18n.t('Operators'),
+        elements: PROGRAM_RULE_OPERATOR_ELEMENTS,
+        component: DefaultList,
+    },
+    {
+        type: 'variables',
+        name: i18n.t('Variables'),
+        elements: PROGRAM_RULE_VARIABLE_ELEMENTS,
+        component: DefaultList,
+    },
+    {
+        type: 'programRuleVariables',
+        name: i18n.t('Program rule variables'),
+        component: ProgramRuleVariablesList,
+    },
+    {
+        type: 'functions',
+        name: i18n.t('Functions'),
+        elements: PROGRAM_RULE_FUNCTION_ELEMENTS,
+        component: DefaultList,
+    },
+]
+
 export const getElementTypes = (type: ExpressionBuilderType): ElementType[] => {
     if (type === 'programIndicator') {
         return programIndicatorElementTypes
+    }
+    if (type === 'programRule') {
+        return programRuleElementTypes
     }
     if (type === 'indicator') {
         return indicatorElementTypes

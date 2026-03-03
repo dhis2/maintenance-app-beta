@@ -1,0 +1,126 @@
+name: Generate Contracts and Sync to contracts repo
+
+on:
+    pull_request:
+        types: [opened, synchronize, reopened]
+    workflow_dispatch:
+        inputs:
+            job:
+                description: 'Which job to run (default: all)'
+                required: false
+                default: 'all'
+
+jobs:
+    generate-and-sync:
+        if: github.event_name == 'pull_request' || github.event.inputs.job == 'all'
+        runs-on: ubuntu-latest
+        outputs:
+            pr_branch_name: ${{ steps.create_pr.outputs.branch_name }}
+        steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 20
+                  cache: yarn
+
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Run contracts script
+              run: yarn contracts
+
+            - name: Format
+              run: yarn format
+
+            - name: Check for contract changes
+              id: diff
+              run: |
+                  if git diff --quiet HEAD -- contracts; then
+                    echo "changed=false" >> $GITHUB_OUTPUT
+                  else
+                    echo "changed=true" >> $GITHUB_OUTPUT
+                  fi
+
+            - name: Clone contracts repo and push branch
+              if: steps.diff.outputs.changed == 'true'
+              run: |
+                  git config --global user.name "github-actions[bot]"
+                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+                  git clone https://x-access-token:${{ secrets.CONTRACTS_PAT }}@github.com/dhis2/dhis2-api-contracts.git
+                  cd dhis2-api-contracts
+
+                  BRANCH_NAME="auto/contracts-update-${{ github.event.pull_request.number }}"
+                  if git ls-remote --exit-code --heads origin "$BRANCH_NAME" > /dev/null; then
+                    echo "Branch $BRANCH_NAME exists, checking it out"
+                    git checkout "$BRANCH_NAME"
+                  else
+                    echo "Branch $BRANCH_NAME does not exist, creating it"
+                    git checkout -b "$BRANCH_NAME"
+                  fi
+
+                  mkdir -p ./contracts/maintenance-app
+                  cp -r ../contracts/* ./contracts/maintenance-app/
+
+                  git add .
+                  if git diff --cached --quiet; then
+                    echo "No changes to commit after copy."
+                    exit 0
+                  fi
+
+                  git commit -m "Auto-update contracts from Maintenance app PR #${{ github.event.pull_request.number }}"
+                  git push origin $BRANCH_NAME
+
+            - name: Create Pull Request in contract repo
+              id: create_pr
+              if: steps.diff.outputs.changed == 'true'
+              run: |
+                  cd dhis2-api-contracts
+                  BRANCH_NAME="auto/contracts-update-${{ github.event.pull_request.number }}"
+                  gh auth login --with-token <<< "${{ secrets.CONTRACTS_PAT }}"
+
+                  # Check if a PR already exists
+                  if gh pr list --head "$BRANCH_NAME" --base main --json number --jq '.[0].number' | grep -q .; then
+                    echo "PR already exists for branch $BRANCH_NAME, skipping creation."
+                  else
+                    gh pr create \
+                      --base main \
+                      --head "$BRANCH_NAME" \
+                      --title "Auto PR: Contracts from maintenance app PR #${{ github.event.pull_request.number }}" \
+                      --body "This PR was automatically created from a pull request in maintenance app." \
+                      --reviewer dhis2/platform-backend
+                  fi
+
+                  # Output the branch name safely for downstream jobs
+                  echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+
+    check-dependent-pr:
+        needs: generate-and-sync
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.job == 'check-only'
+        runs-on: ubuntu-latest
+        steps:
+            - name: Install GitHub CLI
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y gh jq
+
+            - name: Authenticate GitHub CLI
+              run: echo "${{ secrets.CONTRACTS_PAT }}" | gh auth login --with-token
+
+            - name: Verify dependent PR merged
+              run: |
+                  # Get the branch name from the previous job output
+                  BRANCH_NAME="${{ needs.generate-and-sync.outputs.pr_branch_name }}"
+                  DEP_PR=$(echo "$BRANCH_NAME" | grep -oE '[0-9]+$')
+                  DEP_REPO="org/maintenance-app"
+
+                  echo "Checking dependency: $DEP_REPO PR #$DEP_PR"
+                  STATUS=$(gh pr view $DEP_PR --repo $DEP_REPO --json state --jq .state)
+                  echo "Dependent PR status: $STATUS"
+
+                  if [ "$STATUS" != "MERGED" ]; then
+                    echo "::error::Dependent PR $DEP_REPO#$DEP_PR is not merged yet."
+                    exit 1
