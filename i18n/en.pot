@@ -5807,3 +5807,11 @@ msgstr "Right side sliding window"
 
 msgid "Skip form validation"
 msgstr "Skip form validation"
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Maintenance (Preview)"
+
+msgctxt "Application description"
+msgid "__MANIFEST_APP_DESCRIPTION"
+msgstr ""
