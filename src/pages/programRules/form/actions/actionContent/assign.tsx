@@ -31,6 +31,7 @@ export function assign(programId: string): ReactNode {
                     programId={programId}
                     label={i18n.t('Expression to evaluate and assign')}
                     clearable={false}
+                    required
                 />
             </StandardFormField>
         </>

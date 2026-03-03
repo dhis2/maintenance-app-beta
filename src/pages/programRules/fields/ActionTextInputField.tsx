@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { Box, InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field } from 'react-final-form'
@@ -18,7 +19,14 @@ export function ActionTextInputField({
                     <InputFieldFF
                         input={input}
                         meta={meta}
-                        label={label}
+                        label={
+                            required
+                                ? i18n.t('{{label}} (required)', {
+                                      label,
+                                      nsSeparator: '~:~',
+                                  })
+                                : label
+                        }
                         required={required}
                     />
                 </Box>

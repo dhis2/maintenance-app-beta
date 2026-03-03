@@ -21,6 +21,7 @@ export function scheduleMessage(
                     programId={programId}
                     disabled={isEdit}
                     label={i18n.t('Date to send message.')}
+                    required
                 />
             </StandardFormField>
         </>

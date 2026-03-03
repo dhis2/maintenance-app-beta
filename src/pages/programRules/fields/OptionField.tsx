@@ -63,7 +63,14 @@ export function OptionField({
         >
             {({ input, meta }) => (
                 <UIField
-                    label={label}
+                    label={
+                        required
+                            ? i18n.t('{{label}} (required)', {
+                                  label,
+                                  nsSeparator: '~:~',
+                              })
+                            : label
+                    }
                     required={required}
                     error={meta.invalid}
                     validationText={

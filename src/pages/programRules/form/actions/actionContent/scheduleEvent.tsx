@@ -13,6 +13,7 @@ export function scheduleEvent(programId: string): ReactNode {
                 <ExpressionField
                     programId={programId}
                     label={i18n.t('Program rule variable for scheduled date')}
+                    required
                 />
             </StandardFormField>
         </>

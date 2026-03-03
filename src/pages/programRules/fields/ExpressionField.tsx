@@ -18,12 +18,14 @@ export function ExpressionField({
     programId,
     clearable = true,
     disabled = false,
+    required = false,
 }: Readonly<{
     fieldName?: string
     label: string
     programId?: string
     clearable?: boolean
     disabled?: boolean
+    required?: boolean
 }>) {
     return (
         <TooltipWrapper
@@ -31,7 +33,13 @@ export function ExpressionField({
             content={i18n.t('Expression can not be edited after saving')}
         >
             <Box width="800px" minWidth="100px">
-                <PaddedContainer>
+                <PaddedContainer
+                    title={
+                        required
+                            ? i18n.t('Expression (required) *')
+                            : i18n.t('Expression')
+                    }
+                >
                     <ExpressionBuilderEntry
                         fieldName={fieldName}
                         title={i18n.t('Edit expression')}
