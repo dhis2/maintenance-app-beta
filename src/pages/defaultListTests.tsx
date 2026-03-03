@@ -861,7 +861,7 @@ export const generateDefaultListMultiActionsTests = ({
             await userEvent.click(
                 within(tableRows[1]).getByTestId('section-list-row-checkbox')
             )
-            const toolbar = screen.getByTestId('multi-actions-toolbar')
+            const toolbar = await screen.findByTestId('multi-actions-toolbar')
             expect(toolbar).toBeVisible()
 
             const downloadModal = await uiActions.openModal(

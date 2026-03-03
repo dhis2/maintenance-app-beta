@@ -65,7 +65,14 @@ export function TrackedEntityAttributeField({
         >
             {({ input, meta }) => (
                 <UIField
-                    label={label}
+                    label={
+                        required
+                            ? i18n.t('{{label}} (required)', {
+                                  label,
+                                  nsSeparator: '~:~',
+                              })
+                            : label
+                    }
                     required={required}
                     disabled={disabled}
                     error={meta.invalid}

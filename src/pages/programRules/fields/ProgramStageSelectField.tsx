@@ -19,7 +19,7 @@ const PROGRAM_STAGES_QUERY = (programId: string) => ({
 
 export function ProgramStageSelectField({
     programId,
-    label,
+    label = i18n.t('Program stage'),
     required,
 }: Readonly<{
     programId: string
@@ -47,7 +47,14 @@ export function ProgramStageSelectField({
         >
             {({ input, meta }) => (
                 <UIField
-                    label={label ?? i18n.t('Program stage')}
+                    label={
+                        required
+                            ? i18n.t('{{label}} (required)', {
+                                  label,
+                                  nsSeparator: '~:~',
+                              })
+                            : label
+                    }
                     required={required}
                     error={meta.invalid}
                     validationText={

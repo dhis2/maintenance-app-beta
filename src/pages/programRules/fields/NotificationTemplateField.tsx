@@ -34,7 +34,11 @@ export function NotificationTemplateField({
             content={i18n.t('Message template can not be edited after saving')}
         >
             <ModelSingleSelectField
-                label={i18n.t('Message template')}
+                label={
+                    required
+                        ? i18n.t('Message template (required)')
+                        : i18n.t('Message template')
+                }
                 required={required}
                 disabled={disabled}
                 query={{

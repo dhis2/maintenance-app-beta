@@ -55,7 +55,11 @@ export function ProgramStageSectionField({
         >
             {({ input, meta }) => (
                 <UIField
-                    label={i18n.t('Program stage section to hide')}
+                    label={
+                        required
+                            ? i18n.t('Program stage section to hide (required)')
+                            : i18n.t('Program stage section to hide')
+                    }
                     required={required}
                     error={meta.invalid}
                     validationText={
