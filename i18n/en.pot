@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-25T08:49:49.064Z\n"
-"PO-Revision-Date: 2026-02-25T08:49:49.064Z\n"
+"POT-Creation-Date: 2026-03-03T08:28:06.874Z\n"
+"PO-Revision-Date: 2026-03-03T08:28:06.874Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -114,8 +114,12 @@ msgstr "Invalid expression"
 msgid "Valid expression"
 msgstr "Valid expression"
 
-msgid "Add operators, variables, functions, and constants from the right sidebar"
-msgstr "Add operators, variables, functions, and constants from the right sidebar"
+msgid ""
+"Add operators, variables, program rule variables and functions from the "
+"right sidebar"
+msgstr ""
+"Add operators, variables, program rule variables and functions from the "
+"right sidebar"
 
 msgid "Apply"
 msgstr "Apply"
@@ -507,6 +511,12 @@ msgstr "Totals"
 msgid "Flags"
 msgstr "Flags"
 
+msgid "Submit"
+msgstr "Submit"
+
+msgid "Save"
+msgstr "Save"
+
 msgid "Required"
 msgstr "Required"
 
@@ -588,17 +598,23 @@ msgstr "{{fieldLabel}} (required)"
 msgid "Name"
 msgstr "Name"
 
-msgid "Level"
-msgstr "Level"
+msgid "Select by level"
+msgstr "Select by level"
 
-msgid "Group"
-msgstr "Group"
+msgid "Select by group"
+msgstr "Select by group"
+
+msgid "Deselect by level"
+msgstr "Deselect by level"
+
+msgid "Deselect by group"
+msgstr "Deselect by group"
 
 msgid "Deselect all"
 msgstr "Deselect all"
 
-msgid "Select units by group or level..."
-msgstr "Select units by group or level..."
+msgid "Select/deselect by group or level"
+msgstr "Select/deselect by group or level"
 
 msgid "Search"
 msgstr "Search"
@@ -1170,9 +1186,6 @@ msgstr "Edit and view"
 
 msgid "Search for a user or group"
 msgstr "Search for a user or group"
-
-msgid "Save"
-msgstr "Save"
 
 msgid "Categories"
 msgstr "Categories"
@@ -1936,6 +1949,30 @@ msgstr "Execution date label"
 msgid "Event label"
 msgstr "Event label"
 
+msgid "Tracked entity attribute label"
+msgstr "Tracked entity attribute label"
+
+msgid "Enrollment date label"
+msgstr "Enrollment date label"
+
+msgid "Incident date label"
+msgstr "Incident date label"
+
+msgid "Note label"
+msgstr "Note label"
+
+msgid "Enrollment label"
+msgstr "Enrollment label"
+
+msgid "Follow up label"
+msgstr "Follow up label"
+
+msgid "Organisation unit label"
+msgstr "Organisation unit label"
+
+msgid "Relationship label"
+msgstr "Relationship label"
+
 msgid "Unknown error"
 msgstr "Unknown error"
 
@@ -2007,6 +2044,9 @@ msgstr "Relative scheduled days"
 
 msgid "Send notification as"
 msgstr "Send notification as"
+
+msgid "Level"
+msgstr "Level"
 
 msgid "Offline levels"
 msgstr "Offline levels"
@@ -4489,11 +4529,26 @@ msgstr "Edit condition expression"
 msgid "Set up condition expression"
 msgstr "Set up condition expression"
 
-msgid "Feedback"
-msgstr "Feedback"
+msgid "Expression can not be edited after saving"
+msgstr "Expression can not be edited after saving"
+
+msgid "Expression (required) *"
+msgstr "Expression (required) *"
+
+msgid "Feedback widget"
+msgstr "Feedback widget"
+
+msgid "Program indicator widget"
+msgstr "Program indicator widget"
 
 msgid "Display widget (required)"
 msgstr "Display widget (required)"
+
+msgid "Message template can not be edited after saving"
+msgstr "Message template can not be edited after saving"
+
+msgid "Message template (required)"
+msgstr "Message template (required)"
 
 msgid "Can be 0 or negative. Leave empty if not needed."
 msgstr "Can be 0 or negative. Leave empty if not needed."
@@ -4501,18 +4556,14 @@ msgstr "Can be 0 or negative. Leave empty if not needed."
 msgid "Program rule variable to assign to"
 msgstr "Program rule variable to assign to"
 
-msgid "Program stages to trigger rule"
-msgstr "Program stages to trigger rule"
+msgid "Program stage to trigger rule"
+msgstr "Program stage to trigger rule"
 
-msgid "All program stages"
-msgstr "All program stages"
+msgid "Select a specific program stage that the rule should only trigger on."
+msgstr "Select a specific program stage that the rule should only trigger on."
 
-msgid ""
-"Select a specific program stage or leave as \"All program stages\" to "
-"trigger on all stages."
-msgstr ""
-"Select a specific program stage or leave as \"All program stages\" to "
-"trigger on all stages."
+msgid "Program stage section to hide (required)"
+msgstr "Program stage section to hide (required)"
 
 msgid "Program stage section to hide"
 msgstr "Program stage section to hide"
@@ -4529,6 +4580,9 @@ msgstr "Explain the purpose of this program rule. Not shown with rule output."
 msgid "Set up the expression that checks when this program rule runs."
 msgstr "Set up the expression that checks when this program rule runs."
 
+msgid "Action"
+msgstr "Action"
+
 msgid "Program rule action saved"
 msgstr "Program rule action saved"
 
@@ -4540,6 +4594,9 @@ msgstr "Add action"
 
 msgid "Configure the program rule action."
 msgstr "Configure the program rule action."
+
+msgid "This program rule action will not be editable after saving."
+msgstr "This program rule action will not be editable after saving."
 
 msgid "Action type (required)"
 msgstr "Action type (required)"
@@ -4580,8 +4637,8 @@ msgstr "Tracked entity attribute to display warning next to"
 msgid "Tracked entity attribute to display error next to"
 msgstr "Tracked entity attribute to display error next to"
 
-msgid "Static text (required)"
-msgstr "Static text (required)"
+msgid "Static text"
+msgstr "Static text"
 
 msgid "Expression to evaluate and display after static text."
 msgstr "Expression to evaluate and display after static text."
@@ -4591,9 +4648,6 @@ msgstr "Key label"
 
 msgid "Expression to evaluate and display as value."
 msgstr "Expression to evaluate and display as value."
-
-msgid "Static text"
-msgstr "Static text"
 
 msgid "Data element to hide"
 msgstr "Data element to hide"
@@ -4776,6 +4830,10 @@ msgstr "Program Rule"
 
 msgid "Name (required)"
 msgstr "Name (required)"
+
+msgid "Program stages to trigger rule"
+msgstr "Program stages to trigger rule"
+
 msgid ""
 "There was an error updating notification templates for some stages: "
 "{{stagesNames}}"
@@ -4896,6 +4954,13 @@ msgstr "Allow incident dates in the future"
 msgid "Collect data for the first stage during enrollment"
 msgstr "Collect data for the first stage during enrollment"
 
+msgid ""
+"Do not create overdue events when automatically creating program stage "
+"events"
+msgstr ""
+"Do not create overdue events when automatically creating program stage "
+"events"
+
 msgid "Program Customization"
 msgstr "Program Customization"
 
@@ -4970,23 +5035,26 @@ msgstr "Display enrolled TEs in the front page list"
 msgid "Set up notifications for this program."
 msgstr "Set up notifications for this program."
 
-msgid "New notification"
-msgstr "New notification"
-
-msgid "Edit notification"
-msgstr "Edit notification"
-
 msgid "Notification {{- notificationName}} will be removed on save"
 msgstr "Notification {{- notificationName}} will be removed on save"
 
 msgid "Restore notification"
 msgstr "Restore notification"
 
-msgid "No notifications have been added yet"
-msgstr "No notifications have been added yet"
+msgid "Notification type: Stage | Stage: {{stageDisplayName}}"
+msgstr "Notification type: Stage | Stage: {{stageDisplayName}}"
 
 msgid "Program must be saved before notifications can be added"
 msgstr "Program must be saved before notifications can be added"
+
+msgid "New notification"
+msgstr "New notification"
+
+msgid "Edit notification"
+msgstr "Edit notification"
+
+msgid "No notifications have been added yet"
+msgstr "No notifications have been added yet"
 
 msgid "Add a notification"
 msgstr "Add a notification"
@@ -5072,6 +5140,9 @@ msgstr "Public (All users)"
 msgid "External"
 msgstr "External"
 
+msgid "Group"
+msgstr "Group"
+
 msgid "Program Details"
 msgstr "Program Details"
 
@@ -5113,6 +5184,15 @@ msgstr "Close data entry a number of days after \"Implementing partner\" end dat
 
 msgid "Access and Sharing"
 msgstr "Access and Sharing"
+
+msgid "Notification type"
+msgstr "Notification type"
+
+msgid "Program: Send when there is activity in the program or enrollment"
+msgstr "Program: Send when there is activity in the program or enrollment"
+
+msgid "Stage: Send when there is activity in a specific stage"
+msgstr "Stage: Send when there is activity in a specific stage"
 
 msgid "Notification"
 msgstr "Notification"

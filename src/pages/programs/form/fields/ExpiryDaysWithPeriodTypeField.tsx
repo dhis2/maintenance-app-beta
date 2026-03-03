@@ -21,12 +21,17 @@ function isEnabled(value: unknown): boolean {
 export function ExpiryDaysWithPeriodTypeField() {
     const form = useForm()
     const { input, meta } = useField('expiryDays', {
-        parse: (rawValue?: string) =>
-            rawValue === undefined || rawValue === ''
-                ? undefined
-                : Number(rawValue),
+        parse: (rawValue?: string) => {
+            if (rawValue === undefined || rawValue === '') {
+                return undefined
+            }
+            const n = Number(rawValue)
+            return Number.isNaN(n) ? undefined : n
+        },
         format: (numericValue: number | undefined) =>
-            numericValue?.toString() ?? '',
+            numericValue === undefined || Number.isNaN(numericValue)
+                ? ''
+                : String(numericValue),
     })
     const [checked, setChecked] = useState(() => isEnabled(input.value))
 
