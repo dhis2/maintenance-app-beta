@@ -1,3 +1,16 @@
+# [0.135.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.134.0...v0.135.0) (2026-03-03)
+
+
+### Bug Fixes
+
+* add span with tab index back into drawer ([#784](https://github.com/dhis2/maintenance-app-beta/issues/784)) ([097b982](https://github.com/dhis2/maintenance-app-beta/commit/097b9822dd9dd887face0133e8b1214c75d4dde0))
+* make required labels clear ([#785](https://github.com/dhis2/maintenance-app-beta/issues/785)) ([bcdadc6](https://github.com/dhis2/maintenance-app-beta/commit/bcdadc6812d4ebdac6460ce380d5f535ef6f4019))
+
+
+### Features
+
+* [DHIS2-20784] Program rule form ([#752](https://github.com/dhis2/maintenance-app-beta/issues/752)) ([7a9c577](https://github.com/dhis2/maintenance-app-beta/commit/7a9c5770a5063c4f0ec131d56ec525503324dffe))
+
 # [0.134.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.133.1...v0.134.0) (2026-03-02)
 
 
