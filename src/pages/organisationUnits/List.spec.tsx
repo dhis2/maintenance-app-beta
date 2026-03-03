@@ -236,10 +236,14 @@ describe('Organisation unit list', () => {
         )
         expect(tableRowsRefreshed.length).toBe(5)
 
-        expect(tableRows[1]).toHaveTextContent(rootOrg1.displayName!)
-        expect(tableRows[2]).toHaveTextContent(root1Level2Child1.displayName!)
-        expect(tableRows[3]).toHaveTextContent(root1Level2Child2.displayName!)
-        expect(tableRows[4]).toHaveTextContent(rootOrg2.displayName!)
+        expect(tableRowsRefreshed[1]).toHaveTextContent(rootOrg1.displayName!)
+        expect(tableRowsRefreshed[2]).toHaveTextContent(
+            root1Level2Child1.displayName!
+        )
+        expect(tableRowsRefreshed[3]).toHaveTextContent(
+            root1Level2Child2.displayName!
+        )
+        expect(tableRowsRefreshed[4]).toHaveTextContent(rootOrg2.displayName!)
     })
 
     it('should expand a node tree', async () => {
